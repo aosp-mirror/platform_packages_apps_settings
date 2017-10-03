@@ -22,6 +22,10 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 
+/**
+ * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceControllerV2}
+ */
+@Deprecated
 public class WebViewAppPreferenceController extends DefaultAppPreferenceController {
 
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
