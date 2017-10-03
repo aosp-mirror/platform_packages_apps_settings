@@ -114,7 +114,8 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Config(shadows = {
             ShadowPictureColorModePreferenceController.class,
             ShadowAdbPreferenceController.class,
-            ShadowBluetoothInbandRingingPreferenceController.class
+            ShadowBluetoothInbandRingingPreferenceController.class,
+            ShadowClearAdbKeysPreferenceController.class
     })
     public void searchIndex_pageEnabled_shouldNotAddKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
@@ -207,6 +208,17 @@ public class DevelopmentSettingsDashboardFragmentTest {
         verify(controller).onAdbDialogDismissed();
     }
 
+    @Test
+    public void onAdbClearKeysDialogConfirmed_shouldCallControllerDialogConfirmed() {
+        final ClearAdbKeysPreferenceController controller = mock(
+                ClearAdbKeysPreferenceController.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                ClearAdbKeysPreferenceController.class);
+        mDashboard.onAdbClearKeysDialogConfirmed();
+
+        verify(controller).onClearAdbKeysConfirmed();
+    }
+
     @Implements(EnableDevelopmentSettingWarningDialog.class)
     public static class ShadowEnableDevelopmentSettingWarningDialog {
 
@@ -241,6 +253,15 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Implements(BluetoothInbandRingingPreferenceController.class)
     public static class ShadowBluetoothInbandRingingPreferenceController {
+
+        @Implementation
+        public boolean isAvailable() {
+            return true;
+        }
+    }
+
+    @Implements(ClearAdbKeysPreferenceController.class)
+    public static class ShadowClearAdbKeysPreferenceController {
 
         @Implementation
         public boolean isAvailable() {
