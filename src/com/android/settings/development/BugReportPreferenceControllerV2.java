@@ -18,35 +18,22 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
-
-/**
- * deprecated in favor of {@link BugReportPreferenceControllerV2}
- */
-@Deprecated
-public class BugReportPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class BugReportPreferenceControllerV2 extends DeveloperOptionsPreferenceController {
 
     private static final String KEY_BUGREPORT = "bugreport";
 
-    private UserManager mUserManager;
-    private Preference mPreference;
+    private final UserManager mUserManager;
 
-    public BugReportPreferenceController(Context context) {
+    public BugReportPreferenceControllerV2(Context context) {
         super(context);
+
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = screen.findPreference(KEY_BUGREPORT);
-        }
+    public boolean isAvailable() {
+        return !mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
     }
 
     @Override
@@ -55,14 +42,12 @@ public class BugReportPreferenceController extends AbstractPreferenceController 
     }
 
     @Override
-    public boolean isAvailable() {
-        return !mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
+    protected void onDeveloperOptionsSwitchEnabled() {
+        // intentional no-op
     }
 
-    public void enablePreference(boolean enabled) {
-        if (isAvailable()) {
-            mPreference.setEnabled(enabled);
-        }
+    @Override
+    protected void onDeveloperOptionsSwitchDisabled() {
+        // intentional no-op
     }
-
 }
