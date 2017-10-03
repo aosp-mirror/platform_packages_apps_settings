@@ -244,7 +244,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         // running services
-        // convert to file encryption
+        controllers.add(new FileEncryptionPreferenceController(context));
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         // webview implementation
         controllers.add(new CoolColorTemperaturePreferenceController(context));
