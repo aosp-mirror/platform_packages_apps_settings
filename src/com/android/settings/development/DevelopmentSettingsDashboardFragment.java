@@ -246,7 +246,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // running services
         // convert to file encryption
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
-        // webview implementation
+        controllers.add(new WebViewAppPreferenceControllerV2(context));
         controllers.add(new CoolColorTemperaturePreferenceController(context));
         controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         // system ui demo mode

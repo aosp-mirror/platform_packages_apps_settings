@@ -34,7 +34,7 @@ import com.android.settings.wrapper.UserPackageWrapperImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-class WebViewUpdateServiceWrapper {
+public class WebViewUpdateServiceWrapper {
     private static final String TAG = "WVUSWrapper";
 
     public WebViewUpdateServiceWrapper() {}
