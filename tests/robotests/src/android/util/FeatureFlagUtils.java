@@ -19,6 +19,9 @@ package android.util;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class is only needed to get around Robolectric issue.
  */
@@ -42,5 +45,20 @@ public class FeatureFlagUtils {
         // Step 2: check if feature flag has any default value. Flag name: sys.fflag.<feature>
         value = SystemProperties.get(FFLAG_PREFIX + feature);
         return Boolean.parseBoolean(value);
+    }
+
+    /**
+     * Override feature flag to new state.
+     */
+    public static void setEnabled(String feature, boolean enabled) {
+        SystemProperties.set(FFLAG_OVERRIDE_PREFIX + feature, enabled ? "true" : "false");
+    }
+
+
+    public static Map<String, String> getAllFeatureFlags() {
+        final Map<String, String> features = new HashMap<>();
+        features.put(FFLAG_PREFIX + "abc", "false");
+        features.put(FFLAG_OVERRIDE_PREFIX + "abc", "true");
+        return features;
     }
 }
