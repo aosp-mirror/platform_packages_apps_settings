@@ -245,7 +245,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // take bug report
+        controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         // hdcp checking
