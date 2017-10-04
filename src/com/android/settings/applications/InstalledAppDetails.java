@@ -982,11 +982,9 @@ public class InstalledAppDetails extends AppInfoBase
             } else {
                 mMetricsFeatureProvider.action(
                         getActivity(),
-                        mAppEntry.info.enabled
-                                ? MetricsEvent.ACTION_SETTINGS_DISABLE_APP
-                                : MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
+                        MetricsEvent.ACTION_SETTINGS_ENABLE_APP);
                 new DisableChanger(this, mAppEntry.info,
-                        PackageManager.COMPONENT_ENABLED_STATE_DEFAULT)
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
                         .execute((Object) null);
             }
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {

@@ -17,13 +17,16 @@
 package android.service.settings.suggestions;
 
 import android.app.PendingIntent;
+import android.graphics.drawable.Icon;
 import android.os.Parcel;
 import android.text.TextUtils;
+import android.widget.RemoteViews;
 
 public class Suggestion {
     private final String mId;
     private final CharSequence mTitle;
     private final CharSequence mSummary;
+    private final Icon mIcon;
     private final PendingIntent mPendingIntent;
 
     /**
@@ -48,6 +51,13 @@ public class Suggestion {
     }
 
     /**
+     * Optional icon for this suggestion.
+     */
+    public Icon getIcon() {
+        return mIcon;
+    }
+
+    /**
      * The Intent to launch when the suggestion is activated.
      */
     public PendingIntent getPendingIntent() {
@@ -57,15 +67,9 @@ public class Suggestion {
     private Suggestion(Builder builder) {
         mTitle = builder.mTitle;
         mSummary = builder.mSummary;
+        mIcon = builder.mIcon;
         mPendingIntent = builder.mPendingIntent;
         mId = builder.mId;
-    }
-
-    private Suggestion(Parcel in) {
-        mId = in.readString();
-        mTitle = in.readCharSequence();
-        mSummary = in.readCharSequence();
-        mPendingIntent = in.readParcelable(PendingIntent.class.getClassLoader());
     }
 
     /**
@@ -75,6 +79,7 @@ public class Suggestion {
         private final String mId;
         private CharSequence mTitle;
         private CharSequence mSummary;
+        private Icon mIcon;
         private PendingIntent mPendingIntent;
 
         public Builder(String id) {
@@ -98,6 +103,14 @@ public class Suggestion {
          */
         public Builder setSummary(CharSequence summary) {
             mSummary = summary;
+            return this;
+        }
+
+        /**
+         * Sets icon for the suggestion.
+         */
+        public Builder setIcon(Icon icon) {
+            mIcon = icon;
             return this;
         }
 

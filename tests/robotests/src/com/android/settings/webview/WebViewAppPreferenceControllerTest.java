@@ -30,6 +30,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+/**
+ * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceControllerV2}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WebViewAppPreferenceControllerTest {

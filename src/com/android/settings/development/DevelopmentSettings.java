@@ -167,6 +167,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String TETHERING_HARDWARE_OFFLOAD = "tethering_hardware_offload";
     private static final String KEY_COLOR_MODE = "picture_color_mode";
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
+    private static final String ENABLE_FREEFORM_SUPPORT_KEY = "enable_freeform_support";
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY =
@@ -311,6 +312,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ColorModePreference mColorModePreference;
 
     private SwitchPreference mForceResizable;
+
+    private SwitchPreference mEnableFreeformSupport;
 
     private SwitchPreference mColorTemperaturePreference;
 
@@ -495,6 +498,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
         mForceResizable = findAndInitSwitchPref(FORCE_RESIZABLE_KEY);
+        mEnableFreeformSupport = findAndInitSwitchPref(ENABLE_FREEFORM_SUPPORT_KEY);
+        removePreferenceForProduction(mEnableFreeformSupport);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -612,7 +617,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void removePreference(Preference preference) {
-        getPreferenceScreen().removePreference(preference);
+        if (preference == null) {
+            return;
+        }
+
+        final PreferenceGroup parent = preference.getParent();
+
+        if (parent != null) {
+            parent.removePreference(preference);
+        }
+
         mAllPrefs.remove(preference);
         mResetSwitchPrefs.remove(preference);
     }
@@ -823,6 +837,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateSimulateColorSpace();
         updateUSBAudioOptions();
         updateForceResizableOptions();
+        updateEnableFreeformWindowsSupportOptions();
         Preference webViewAppPref = findPreference(mWebViewAppPrefController.getPreferenceKey());
         mWebViewAppPrefController.updateState(webViewAppPref);
         updateOemUnlockOptions();
@@ -1419,6 +1434,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         Settings.Global.putInt(getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES,
                 mForceResizable.isChecked() ? 1 : 0);
+    }
+
+    private void updateEnableFreeformWindowsSupportOptions() {
+        updateSwitchPreference(mEnableFreeformSupport, Settings.Global.getInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT, 0) != 0);
+    }
+
+    private void writeEnableFreeformWindowsSupportOptions() {
+        Settings.Global.putInt(getContentResolver(),
+                Settings.Global.DEVELOPMENT_ENABLE_FREEFORM_WINDOWS_SUPPORT,
+                mEnableFreeformSupport.isChecked() ? 1 : 0);
     }
 
     private void updateForceRtlOptions() {
@@ -2329,6 +2355,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeUSBAudioOptions();
         } else if (preference == mForceResizable) {
             writeForceResizableOptions();
+        } else if (preference == mEnableFreeformSupport){
+            writeEnableFreeformWindowsSupportOptions();
         } else if (preference == mBluetoothShowDevicesWithoutNames) {
             writeBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         } else if (preference == mBluetoothDisableAbsVolume) {

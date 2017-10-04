@@ -50,7 +50,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
-        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost {
+        implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
+        AdbClearKeysDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -171,6 +172,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onAdbClearKeysDialogConfirmed() {
+        final ClearAdbKeysPreferenceController controller = getDevelopmentOptionsController(
+                ClearAdbKeysPreferenceController.class);
+        controller.onClearAdbKeysConfirmed();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -238,7 +246,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // take bug report
-        // desktop backup password
+        controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         // hdcp checking
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
@@ -246,13 +254,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // running services
         // convert to file encryption
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
-        // webview implementation
+        controllers.add(new WebViewAppPreferenceControllerV2(context));
         controllers.add(new CoolColorTemperaturePreferenceController(context));
         controllers.add(new DisableAutomaticUpdatesPreferenceController(context));
         // system ui demo mode
         // quick settings developer tiles
         controllers.add(new AdbPreferenceController(context, fragment));
-        // revoke usb debugging authorizations
+        controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new LocalTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceControllerV2(context));
         // select mock location app
@@ -308,10 +316,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // background process limit
         // background check
         controllers.add(new AppsNotRespondingPreferenceController(context));
-        // show notification channel warnings
+        controllers.add(new NotificationChannelWarningsPreferenceController(context));
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
-        // force activities to be resizable
+        controllers.add(new ResizableActivityPreferenceController(context));
         // reset shortcutmanager rate-limiting
         return controllers;
     }

@@ -117,12 +117,12 @@ public class FingerprintAuthenticateSidecar extends InstrumentedPreferenceFragme
     public void setListener(Listener listener) {
         if (mListener == null && listener != null) {
             if (mAuthenticationResult != null) {
-                mListener.onAuthenticationSucceeded(mAuthenticationResult);
+                listener.onAuthenticationSucceeded(mAuthenticationResult);
                 mAuthenticationResult = null;
             }
             if (mAuthenticationError != null &&
                     mAuthenticationError.error != FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
-                mListener.onAuthenticationError(mAuthenticationError.error,
+                listener.onAuthenticationError(mAuthenticationError.error,
                         mAuthenticationError.errorString);
                 mAuthenticationError = null;
             }
