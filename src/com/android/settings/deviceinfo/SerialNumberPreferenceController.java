@@ -18,47 +18,19 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.deviceinfo.AbstractSerialNumberPreferenceController;
 
-public class SerialNumberPreferenceController extends AbstractPreferenceController implements
+/**
+ * Preference controller for displaying device serial number. Wraps {@link Build#getSerial()}.
+ */
+public class SerialNumberPreferenceController extends
+        AbstractSerialNumberPreferenceController implements
         PreferenceControllerMixin {
-
-    private static final String KEY_SERIAL_NUMBER = "serial_number";
-
-    private final String mSerialNumber;
-
     public SerialNumberPreferenceController(Context context) {
-        this(context, Build.getSerial());
-    }
-
-    @VisibleForTesting
-    SerialNumberPreferenceController(Context context, String serialNumber) {
         super(context);
-        mSerialNumber = serialNumber;
     }
 
-    @Override
-    public boolean isAvailable() {
-        return !TextUtils.isEmpty(mSerialNumber);
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference pref = screen.findPreference(KEY_SERIAL_NUMBER);
-        if (pref != null) {
-            pref.setSummary(mSerialNumber);
-        }
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_SERIAL_NUMBER;
-    }
+    // This space intentionally left blank
 }
