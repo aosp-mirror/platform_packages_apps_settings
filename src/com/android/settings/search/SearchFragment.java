@@ -54,8 +54,6 @@ import com.android.settings.widget.ActionBarShadowController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This fragment manages the lifecycle of indexing and searching.
@@ -68,7 +66,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * the query if the user has entered text.
  */
 public class SearchFragment extends InstrumentedFragment implements SearchView.OnQueryTextListener,
-        LoaderManager.LoaderCallbacks<Set<? extends SearchResult>>, IndexingCallback {
+        LoaderManager.LoaderCallbacks<List<? extends SearchResult>>, IndexingCallback {
     private static final String TAG = "SearchFragment";
 
     // State values
@@ -78,22 +76,13 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
     static final class SearchLoaderId {
         // Search Query IDs
-        public static final int DATABASE = 1;
-        public static final int INSTALLED_APPS = 2;
-        public static final int ACCESSIBILITY_SERVICES = 3;
-        public static final int INPUT_DEVICES = 4;
+        public static final int SEARCH_RESULT = 1;
 
         // Saved Query IDs
-        public static final int SAVE_QUERY_TASK = 5;
-        public static final int REMOVE_QUERY_TASK = 6;
-        public static final int SAVED_QUERIES = 7;
+        public static final int SAVE_QUERY_TASK = 2;
+        public static final int REMOVE_QUERY_TASK = 3;
+        public static final int SAVED_QUERIES = 4;
     }
-
-
-    private static final int NUM_QUERY_LOADERS = 4;
-
-    @VisibleForTesting
-    AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);
 
     @VisibleForTesting
     String mQuery;
@@ -147,7 +136,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         setHasOptionsMenu(true);
 
         final LoaderManager loaderManager = getLoaderManager();
-        mSearchAdapter = new SearchResultsAdapter(this, mSearchFeatureProvider);
+        mSearchAdapter = new SearchResultsAdapter(this /* fragment */);
         mSavedQueryController = new SavedQueryController(
                 getContext(), loaderManager, mSearchAdapter);
         mSearchFeatureProvider.initFeedbackButton();
@@ -277,15 +266,11 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
 
         if (isEmptyQuery) {
             final LoaderManager loaderManager = getLoaderManager();
-            loaderManager.destroyLoader(SearchLoaderId.DATABASE);
-            loaderManager.destroyLoader(SearchLoaderId.INSTALLED_APPS);
-            loaderManager.destroyLoader(SearchLoaderId.ACCESSIBILITY_SERVICES);
-            loaderManager.destroyLoader(SearchLoaderId.INPUT_DEVICES);
+            loaderManager.destroyLoader(SearchLoaderId.SEARCH_RESULT);
             mShowingSavedQuery = true;
             mSavedQueryController.loadSavedQueries();
             mSearchFeatureProvider.hideFeedbackButton();
         } else {
-            mSearchAdapter.initializeSearch(mQuery);
             restartLoaders();
         }
 
@@ -301,35 +286,25 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     }
 
     @Override
-    public Loader<Set<? extends SearchResult>> onCreateLoader(int id, Bundle args) {
+    public Loader<List<? extends SearchResult>> onCreateLoader(int id, Bundle args) {
         final Activity activity = getActivity();
 
-        switch (id) {
-            case SearchLoaderId.DATABASE:
-                return mSearchFeatureProvider.getDatabaseSearchLoader(activity, mQuery);
-            case SearchLoaderId.INSTALLED_APPS:
-                return mSearchFeatureProvider.getInstalledAppSearchLoader(activity, mQuery);
-            case SearchLoaderId.ACCESSIBILITY_SERVICES:
-                return mSearchFeatureProvider.getAccessibilityServiceResultLoader(activity, mQuery);
-            case SearchLoaderId.INPUT_DEVICES:
-                return mSearchFeatureProvider.getInputDeviceResultLoader(activity, mQuery);
+        switch(id) {
+            case SearchLoaderId.SEARCH_RESULT:
+                return mSearchFeatureProvider.getSearchResultLoader(activity, mQuery);
             default:
                 return null;
         }
     }
 
     @Override
-    public void onLoadFinished(Loader<Set<? extends SearchResult>> loader,
-            Set<? extends SearchResult> data) {
-        mSearchAdapter.addSearchResults(data, loader.getClass().getName());
-        if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
-            return;
-        }
-        mSearchAdapter.notifyResultsLoaded();
+    public void onLoadFinished(Loader<List<? extends SearchResult>> loader,
+            List<? extends SearchResult> data) {
+        mSearchAdapter.postSearchResults(data);
     }
 
     @Override
-    public void onLoaderReset(Loader<Set<? extends SearchResult>> loader) {
+    public void onLoaderReset(Loader<List<? extends SearchResult>> loader) {
     }
 
     /**
@@ -344,13 +319,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mSavedQueryController.loadSavedQueries();
         } else {
             final LoaderManager loaderManager = getLoaderManager();
-            loaderManager.initLoader(SearchLoaderId.DATABASE, null /* args */, this /* callback */);
-            loaderManager.initLoader(
-                    SearchLoaderId.INSTALLED_APPS, null /* args */, this /* callback */);
-            loaderManager.initLoader(
-                    SearchLoaderId.ACCESSIBILITY_SERVICES, null /* args */, this /* callback */);
-            loaderManager.initLoader(
-                    SearchLoaderId.INPUT_DEVICES, null /* args */, this /* callback */);
+            loaderManager.initLoader(SearchLoaderId.SEARCH_RESULT, null /* args */,
+                    this /* callback */);
         }
 
         requery();
@@ -388,15 +358,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     private void restartLoaders() {
         mShowingSavedQuery = false;
         final LoaderManager loaderManager = getLoaderManager();
-        mUnfinishedLoadersCount.set(NUM_QUERY_LOADERS);
         loaderManager.restartLoader(
-                SearchLoaderId.DATABASE, null /* args */, this /* callback */);
-        loaderManager.restartLoader(
-                SearchLoaderId.INSTALLED_APPS, null /* args */, this /* callback */);
-        loaderManager.restartLoader(
-                SearchLoaderId.ACCESSIBILITY_SERVICES, null /* args */, this /* callback */);
-        loaderManager.restartLoader(
-                SearchLoaderId.INPUT_DEVICES, null /* args */, this /* callback */);
+                SearchLoaderId.SEARCH_RESULT, null /* args */, this /* callback */);
     }
 
     public String getQuery() {
@@ -453,9 +416,7 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         taggedData.add(Pair.create(
                 MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK,
                 resultViewHolder.getAdapterPosition()));
-        taggedData.add(Pair.create(
-                MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_ASYNC_RANKING_STATE,
-                mSearchAdapter.getAsyncRankingState()));
+        // TODO (b/67744820) Move metrics to SettingsIntelligence (including ranking state).
         taggedData.add(Pair.create(
                 MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH,
                 TextUtils.isEmpty(mQuery) ? 0 : mQuery.length()));

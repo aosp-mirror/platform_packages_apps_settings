@@ -17,9 +17,11 @@
 package com.android.settings.search;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+
 import static com.android.settings.search.InputDeviceResultLoader.PHYSICAL_KEYBOARD_FRAGMENT;
 import static com.android.settings.search.InputDeviceResultLoader.VIRTUAL_KEYBOARD_FRAGMENT;
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -58,7 +60,7 @@ import java.util.List;
         shadows = {
                 ShadowInputDevice.class
         })
-public class InputDeviceResultLoaderTest {
+public class InputDeviceResultFutureTaskTest {
 
     private static final String QUERY = "test_query";
     private static final List<String> PHYSICAL_KEYBOARD_BREADCRUMB;
@@ -84,7 +86,7 @@ public class InputDeviceResultLoaderTest {
     @Mock
     private PackageManager mPackageManager;
 
-    private InputDeviceResultLoader mLoader;
+    private InputDeviceResultLoader.InputDeviceResultCallable mCallable;
 
     @Before
     public void setUp() {
@@ -99,7 +101,8 @@ public class InputDeviceResultLoaderTest {
         when(mContext.getString(anyInt()))
                 .thenAnswer(invocation -> RuntimeEnvironment.application.getString(
                         (Integer) invocation.getArguments()[0]));
-        mLoader = new InputDeviceResultLoader(mContext, QUERY, mSiteMapManager);
+        mCallable = new InputDeviceResultLoader.InputDeviceResultCallable(mContext, QUERY,
+                mSiteMapManager);
     }
 
     @After
@@ -108,18 +111,19 @@ public class InputDeviceResultLoaderTest {
     }
 
     @Test
-    public void query_noKeyboard_shouldNotReturnAnything() {
-        assertThat(mLoader.loadInBackground()).isEmpty();
+    public void query_noKeyboard_shouldNotReturnAnything() throws Exception {
+
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_hasPhysicalKeyboard_match() {
+    public void query_hasPhysicalKeyboard_match() throws Exception {
         addPhysicalKeyboard(QUERY);
         when(mSiteMapManager.buildBreadCrumb(mContext, PHYSICAL_KEYBOARD_FRAGMENT,
                 RuntimeEnvironment.application.getString(R.string.physical_keyboard_title)))
                 .thenReturn(PHYSICAL_KEYBOARD_BREADCRUMB);
 
-        final List<SearchResult> results = new ArrayList<>(mLoader.loadInBackground());
+        final List<? extends SearchResult> results = mCallable.call();
 
         assertThat(results).hasSize(1);
         assertThat(results.get(0).title).isEqualTo(QUERY);
@@ -128,13 +132,13 @@ public class InputDeviceResultLoaderTest {
     }
 
     @Test
-    public void query_hasVirtualKeyboard_match() {
+    public void query_hasVirtualKeyboard_match() throws Exception {
         addVirtualKeyboard(QUERY);
         when(mSiteMapManager.buildBreadCrumb(mContext, VIRTUAL_KEYBOARD_FRAGMENT,
                 RuntimeEnvironment.application.getString(R.string.add_virtual_keyboard)))
                 .thenReturn(VIRTUAL_KEYBOARD_BREADCRUMB);
 
-        final List<SearchResult> results = new ArrayList<>(mLoader.loadInBackground());
+        final List<? extends SearchResult> results = mCallable.call();
         assertThat(results).hasSize(1);
         assertThat(results.get(0).title).isEqualTo(QUERY);
         assertThat(results.get(0).breadcrumbs)
@@ -142,11 +146,11 @@ public class InputDeviceResultLoaderTest {
     }
 
     @Test
-    public void query_hasPhysicalVirtualKeyboard_doNotMatch() {
+    public void query_hasPhysicalVirtualKeyboard_doNotMatch() throws Exception {
         addPhysicalKeyboard("abc");
         addVirtualKeyboard("def");
 
-        assertThat(mLoader.loadInBackground()).isEmpty();
+        assertThat(mCallable.call()).isEmpty();
         verifyZeroInteractions(mSiteMapManager);
     }
 

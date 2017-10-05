@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -46,7 +47,7 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class AccessibilityServiceResultLoaderTest {
+public class AccessibilityServiceResultFutureTaskTest {
 
     private static final String QUERY = "test_query";
 
@@ -59,7 +60,7 @@ public class AccessibilityServiceResultLoaderTest {
     @Mock
     private SiteMapManager mSiteMapManager;
 
-    private AccessibilityServiceResultLoader mLoader;
+    private AccessibilityServiceResultLoader.AccessibilityServiceResultCallable mCallable;
 
     @Before
     public void setUp() {
@@ -68,19 +69,20 @@ public class AccessibilityServiceResultLoaderTest {
                 .thenReturn(mAccessibilityManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
-        mLoader = new AccessibilityServiceResultLoader(mContext, QUERY, mSiteMapManager);
+        mCallable = new AccessibilityServiceResultLoader.AccessibilityServiceResultCallable(
+                mContext, QUERY, mSiteMapManager);
     }
 
     @Test
-    public void query_noService_shouldNotReturnAnything() {
-        assertThat(mLoader.loadInBackground()).isEmpty();
+    public void query_noService_shouldNotReturnAnything() throws Exception {
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_hasServiceMatchingTitle_shouldReturnResult() {
+    public void query_hasServiceMatchingTitle_shouldReturnResult() throws Exception {
         addFakeAccessibilityService();
 
-        List<? extends SearchResult> results = new ArrayList<>(mLoader.loadInBackground());
+        List<? extends SearchResult> results = mCallable.call();
         assertThat(results).hasSize(1);
 
         SearchResult result = results.get(0);
@@ -88,13 +90,14 @@ public class AccessibilityServiceResultLoaderTest {
     }
 
     @Test
-    public void query_serviceDoesNotMatchTitle_shouldReturnResult() {
+    public void query_serviceDoesNotMatchTitle_shouldReturnResult() throws Exception {
         addFakeAccessibilityService();
 
-        mLoader = new AccessibilityServiceResultLoader(mContext,
+        mCallable = new AccessibilityServiceResultLoader.AccessibilityServiceResultCallable(
+                mContext,
                 QUERY + "no_match", mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground()).isEmpty();
+        assertThat(mCallable.call()).isEmpty();
     }
 
     private void addFakeAccessibilityService() {

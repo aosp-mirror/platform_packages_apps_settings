@@ -29,124 +29,39 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
 /**
  * Search loader for installed apps.
  */
-public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchResult>> {
+public class InstalledAppResultLoader extends FutureTask<List<? extends SearchResult>> {
+
+    private static final String TAG = "InstalledAppFutureTask";
 
     private static final int NAME_NO_MATCH = -1;
     private static final Intent LAUNCHER_PROBE = new Intent(Intent.ACTION_MAIN)
             .addCategory(Intent.CATEGORY_LAUNCHER);
 
-    private List<String> mBreadcrumb;
-    private SiteMapManager mSiteMapManager;
-    @VisibleForTesting
-    final String mQuery;
-    private final UserManager mUserManager;
-    private final PackageManagerWrapper mPackageManager;
-    private final List<ResolveInfo> mHomeActivities = new ArrayList<>();
-
-    public InstalledAppResultLoader(Context context, PackageManagerWrapper pmWrapper,
-            String query, SiteMapManager mapManager) {
-        super(context);
-        mSiteMapManager = mapManager;
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mPackageManager = pmWrapper;
-        mQuery = query;
-    }
-
-    @Override
-    public Set<? extends SearchResult> loadInBackground() {
-        final Set<AppSearchResult> results = new HashSet<>();
-        final PackageManager pm = mPackageManager.getPackageManager();
-
-        mHomeActivities.clear();
-        mPackageManager.getHomeActivities(mHomeActivities);
-
-        for (UserInfo user : getUsersToCount()) {
-            final List<ApplicationInfo> apps =
-                    mPackageManager.getInstalledApplicationsAsUser(
-                            PackageManager.MATCH_DISABLED_COMPONENTS
-                                    | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
-                                    | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
-                            user.id);
-            for (ApplicationInfo info : apps) {
-                if (!shouldIncludeAsCandidate(info, user)) {
-                    continue;
-                }
-                final CharSequence label = info.loadLabel(pm);
-                final int wordDiff = getWordDifference(label.toString(), mQuery);
-                if (wordDiff == NAME_NO_MATCH) {
-                    continue;
-                }
-                final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        .setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        .setData(Uri.fromParts("package", info.packageName, null))
-                        .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
-                                MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
-
-                final AppSearchResult.Builder builder = new AppSearchResult.Builder();
-                builder.setAppInfo(info)
-                        .setStableId(Objects.hash(info.packageName, user.id))
-                        .setTitle(info.loadLabel(pm))
-                        .setRank(getRank(wordDiff))
-                        .addBreadcrumbs(getBreadCrumb())
-                        .setPayload(new ResultPayload(intent));
-                results.add(builder.build());
-            }
-        }
-        return results;
-    }
-
-    /**
-     * Returns true if the candidate should be included in candidate list
-     * <p/>
-     * This method matches logic in {@code ApplicationState#FILTER_DOWNLOADED_AND_LAUNCHER}.
-     */
-    private boolean shouldIncludeAsCandidate(ApplicationInfo info, UserInfo user) {
-        // Not system app
-        if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
-                || (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-            return true;
-        }
-        // Shows up in launcher
-        final Intent launchIntent = new Intent(LAUNCHER_PROBE)
-                .setPackage(info.packageName);
-        final List<ResolveInfo> intents = mPackageManager.queryIntentActivitiesAsUser(
-                launchIntent,
-                PackageManager.MATCH_DISABLED_COMPONENTS
-                        | PackageManager.MATCH_DIRECT_BOOT_AWARE
-                        | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
-                user.id);
-        if (intents != null && intents.size() != 0) {
-            return true;
-        }
-        // Is launcher app itself
-        return isPackageInList(mHomeActivities, info.packageName);
-    }
-
-    @Override
-    protected void onDiscardResult(Set<? extends SearchResult> result) {
-
-    }
-
-    private List<UserInfo> getUsersToCount() {
-        return mUserManager.getProfiles(UserHandle.myUserId());
+    public InstalledAppResultLoader(Context context, PackageManagerWrapper wrapper,
+            String query, SiteMapManager manager) {
+        super(new InstalledAppResultCallable(context, wrapper, query, manager));
     }
 
     /**
@@ -213,35 +128,133 @@ public class InstalledAppResultLoader extends AsyncLoader<Set<? extends SearchRe
         return NAME_NO_MATCH;
     }
 
-    private boolean isPackageInList(List<ResolveInfo> resolveInfos, String pkg) {
-        for (ResolveInfo info : resolveInfos) {
-            if (TextUtils.equals(info.activityInfo.packageName, pkg)) {
+    static class InstalledAppResultCallable implements
+            Callable<List<? extends SearchResult>> {
+
+        private final Context mContext;
+        private List<String> mBreadcrumb;
+        private SiteMapManager mSiteMapManager;
+        @VisibleForTesting
+        final String mQuery;
+        private final UserManager mUserManager;
+        private final PackageManagerWrapper mPackageManager;
+        private final List<ResolveInfo> mHomeActivities = new ArrayList<>();
+
+        public InstalledAppResultCallable(Context context, PackageManagerWrapper pmWrapper,
+                String query, SiteMapManager mapManager) {
+            mContext = context;
+            mSiteMapManager = mapManager;
+            mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            mPackageManager = pmWrapper;
+            mQuery = query;
+        }
+
+        @Override
+        public List<? extends SearchResult> call() throws Exception {
+            long startTime = System.currentTimeMillis();
+            final List<AppSearchResult> results = new ArrayList<>();
+            final PackageManager pm = mPackageManager.getPackageManager();
+
+            mHomeActivities.clear();
+            mPackageManager.getHomeActivities(mHomeActivities);
+
+            for (UserInfo user : getUsersToCount()) {
+                final List<ApplicationInfo> apps =
+                        mPackageManager.getInstalledApplicationsAsUser(
+                                PackageManager.MATCH_DISABLED_COMPONENTS
+                                        | PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+                                        | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
+                                user.id);
+                for (ApplicationInfo info : apps) {
+                    if (!shouldIncludeAsCandidate(info, user)) {
+                        continue;
+                    }
+                    final CharSequence label = info.loadLabel(pm);
+                    final int wordDiff = getWordDifference(label.toString(), mQuery);
+                    if (wordDiff == NAME_NO_MATCH) {
+                        continue;
+                    }
+                    final Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            .setData(Uri.fromParts("package", info.packageName, null))
+                            .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
+                                    MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
+
+                    final AppSearchResult.Builder builder = new AppSearchResult.Builder();
+                    builder.setAppInfo(info)
+                            .setStableId(Objects.hash(info.packageName, user.id))
+                            .setTitle(info.loadLabel(pm))
+                            .setRank(getRank(wordDiff))
+                            .addBreadcrumbs(getBreadCrumb())
+                            .setPayload(new ResultPayload(intent));
+                    results.add(builder.build());
+                }
+            }
+            Collections.sort(results);
+            Log.i(TAG, "App search loading took:" + (System.currentTimeMillis() - startTime));
+            return results;
+        }
+
+        /**
+         * Returns true if the candidate should be included in candidate list
+         * <p/>
+         * This method matches logic in {@code ApplicationState#FILTER_DOWNLOADED_AND_LAUNCHER}.
+         */
+        private boolean shouldIncludeAsCandidate(ApplicationInfo info, UserInfo user) {
+            // Not system app
+            if ((info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0
+                    || (info.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
                 return true;
             }
+            // Shows up in launcher
+            final Intent launchIntent = new Intent(LAUNCHER_PROBE)
+                    .setPackage(info.packageName);
+            final List<ResolveInfo> intents = mPackageManager.queryIntentActivitiesAsUser(
+                    launchIntent,
+                    PackageManager.MATCH_DISABLED_COMPONENTS
+                            | PackageManager.MATCH_DIRECT_BOOT_AWARE
+                            | PackageManager.MATCH_DIRECT_BOOT_UNAWARE,
+                    user.id);
+            if (intents != null && intents.size() != 0) {
+                return true;
+            }
+            // Is launcher app itself
+            return isPackageInList(mHomeActivities, info.packageName);
         }
-        return false;
-    }
 
-    private List<String> getBreadCrumb() {
-        if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
-            final Context context = getContext();
-            mBreadcrumb = mSiteMapManager.buildBreadCrumb(
-                    context, ManageApplications.class.getName(),
-                    context.getString(R.string.applications_settings));
+        private List<UserInfo> getUsersToCount() {
+            return mUserManager.getProfiles(UserHandle.myUserId());
         }
-        return mBreadcrumb;
-    }
 
-    /**
-     * A temporary ranking scheme for installed apps.
-     *
-     * @param wordDiff difference between query length and app name length.
-     * @return the ranking.
-     */
-    private int getRank(int wordDiff) {
-        if (wordDiff < 6) {
-            return 2;
+        private boolean isPackageInList(List<ResolveInfo> resolveInfos, String pkg) {
+            for (ResolveInfo info : resolveInfos) {
+                if (TextUtils.equals(info.activityInfo.packageName, pkg)) {
+                    return true;
+                }
+            }
+            return false;
         }
-        return 3;
+
+        private List<String> getBreadCrumb() {
+            if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
+                mBreadcrumb = mSiteMapManager.buildBreadCrumb(
+                        mContext, ManageApplications.class.getName(),
+                        mContext.getString(R.string.applications_settings));
+            }
+            return mBreadcrumb;
+        }
+
+        /**
+         * A temporary ranking scheme for installed apps.
+         *
+         * @param wordDiff difference between query length and app name length.
+         * @return the ranking.
+         */
+        private int getRank(int wordDiff) {
+            if (wordDiff < 6) {
+                return 2;
+            }
+            return 3;
+        }
     }
 }

@@ -30,105 +30,112 @@ import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
 import android.util.IconDrawableFactory;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.utils.AsyncLoader;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.FutureTask;
 
-public class AccessibilityServiceResultLoader extends AsyncLoader<Set<? extends SearchResult>> {
+public class AccessibilityServiceResultLoader extends
+        FutureTask<List<? extends SearchResult>> {
 
-    private static final int NAME_NO_MATCH = -1;
-
-    private final Context mContext;
-
-    private List<String> mBreadcrumb;
-    private SiteMapManager mSiteMapManager;
-    @VisibleForTesting
-    final String mQuery;
-    private final AccessibilityManager mAccessibilityManager;
-    private final PackageManager mPackageManager;
-    private final int mUserId;
-
+    private static final String TAG = "A11yResultFutureTask";
 
     public AccessibilityServiceResultLoader(Context context, String query,
-            SiteMapManager mapManager) {
-        super(context);
-        mContext = context;
-        mUserId = UserHandle.myUserId();
-        mSiteMapManager = mapManager;
-        mPackageManager = context.getPackageManager();
-        mAccessibilityManager =
-                (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        mQuery = query;
+            SiteMapManager manager) {
+        super(new AccessibilityServiceResultCallable(context, query, manager));
     }
 
-    @Override
-    public Set<? extends SearchResult> loadInBackground() {
-        final Set<SearchResult> results = new HashSet<>();
-        final Context context = getContext();
-        final List<AccessibilityServiceInfo> services = mAccessibilityManager
-                .getInstalledAccessibilityServiceList();
-        final IconDrawableFactory iconFactory = IconDrawableFactory.newInstance(mContext);
-        final String screenTitle = context.getString(R.string.accessibility_settings);
-        for (AccessibilityServiceInfo service : services) {
-            if (service == null) {
-                continue;
-            }
-            final ResolveInfo resolveInfo = service.getResolveInfo();
-            if (service.getResolveInfo() == null) {
-                continue;
-            }
-            final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-            final CharSequence title = resolveInfo.loadLabel(mPackageManager);
-            final int wordDiff = getWordDifference(title.toString(), mQuery);
-            if (wordDiff == NAME_NO_MATCH) {
-                continue;
-            }
-            final Drawable icon;
-            if (resolveInfo.getIconResource() == 0) {
-                icon = ContextCompat.getDrawable(context, R.mipmap.ic_accessibility_generic);
-            } else {
-                icon = iconFactory.getBadgedIcon(
-                        resolveInfo.serviceInfo,
-                        resolveInfo.serviceInfo.applicationInfo,
-                        mUserId);
-            }
-            final String componentName = new ComponentName(serviceInfo.packageName,
-                    serviceInfo.name).flattenToString();
-            final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
-                    AccessibilitySettings.class.getName(), componentName, screenTitle);
+    static class AccessibilityServiceResultCallable implements
+            Callable<List<? extends SearchResult>> {
 
-            results.add(new SearchResult.Builder()
-                    .setTitle(title)
-                    .addBreadcrumbs(getBreadCrumb())
-                    .setPayload(new ResultPayload(intent))
-                    .setRank(wordDiff)
-                    .setIcon(icon)
-                    .setStableId(Objects.hash(screenTitle, componentName))
-                    .build());
+        private static final int NAME_NO_MATCH = -1;
+
+        private final Context mContext;
+        private List<String> mBreadcrumb;
+        private SiteMapManager mSiteMapManager;
+        @VisibleForTesting
+        final String mQuery;
+        private final AccessibilityManager mAccessibilityManager;
+        private final PackageManager mPackageManager;
+        private final int mUserId;
+
+        public AccessibilityServiceResultCallable(Context context, String query,
+                SiteMapManager mapManager) {
+            mUserId = UserHandle.myUserId();
+            mContext = context;
+            mSiteMapManager = mapManager;
+            mPackageManager = context.getPackageManager();
+            mAccessibilityManager =
+                    (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+            mQuery = query;
         }
-        return results;
-    }
 
-    private List<String> getBreadCrumb() {
-        if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
-            final Context context = getContext();
-            mBreadcrumb = mSiteMapManager.buildBreadCrumb(
-                    context, AccessibilitySettings.class.getName(),
-                    context.getString(R.string.accessibility_settings));
+        @Override
+        public List<? extends SearchResult> call() throws Exception {
+            long startTime = System.currentTimeMillis();
+            final List<SearchResult> results = new ArrayList<>();
+            final List<AccessibilityServiceInfo> services = mAccessibilityManager
+                    .getInstalledAccessibilityServiceList();
+            final IconDrawableFactory iconFactory = IconDrawableFactory.newInstance(mContext);
+            final String screenTitle = mContext.getString(R.string.accessibility_settings);
+            for (AccessibilityServiceInfo service : services) {
+                if (service == null) {
+                    continue;
+                }
+                final ResolveInfo resolveInfo = service.getResolveInfo();
+                if (service.getResolveInfo() == null) {
+                    continue;
+                }
+                final ServiceInfo serviceInfo = resolveInfo.serviceInfo;
+                final CharSequence title = resolveInfo.loadLabel(mPackageManager);
+                final int wordDiff = getWordDifference(title.toString(), mQuery);
+                if (wordDiff == NAME_NO_MATCH) {
+                    continue;
+                }
+                final Drawable icon;
+                if (resolveInfo.getIconResource() == 0) {
+                    icon = ContextCompat.getDrawable(mContext, R.mipmap.ic_accessibility_generic);
+                } else {
+                    icon = iconFactory.getBadgedIcon(
+                            resolveInfo.serviceInfo,
+                            resolveInfo.serviceInfo.applicationInfo,
+                            mUserId);
+                }
+                final String componentName = new ComponentName(serviceInfo.packageName,
+                        serviceInfo.name).flattenToString();
+                final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
+                        AccessibilitySettings.class.getName(), componentName, screenTitle);
+
+                results.add(new SearchResult.Builder()
+                        .setTitle(title)
+                        .addBreadcrumbs(getBreadCrumb())
+                        .setPayload(new ResultPayload(intent))
+                        .setRank(wordDiff)
+                        .setIcon(icon)
+                        .setStableId(Objects.hash(screenTitle, componentName))
+                        .build());
+            }
+            Collections.sort(results);
+            Log.i(TAG, "A11y search loading took:" + (System.currentTimeMillis() - startTime));
+            return results;
         }
-        return mBreadcrumb;
-    }
 
-    @Override
-    protected void onDiscardResult(Set<? extends SearchResult> result) {
-
+        private List<String> getBreadCrumb() {
+            if (mBreadcrumb == null || mBreadcrumb.isEmpty()) {
+                mBreadcrumb = mSiteMapManager.buildBreadCrumb(
+                        mContext, AccessibilitySettings.class.getName(),
+                        mContext.getString(R.string.accessibility_settings));
+            }
+            return mBreadcrumb;
+        }
     }
 }
