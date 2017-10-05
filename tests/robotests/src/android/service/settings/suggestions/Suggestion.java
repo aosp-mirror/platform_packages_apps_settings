@@ -18,15 +18,17 @@ package android.service.settings.suggestions;
 
 import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
-import android.os.Parcel;
 import android.text.TextUtils;
-import android.widget.RemoteViews;
 
 public class Suggestion {
+
+    public static final int FLAG_HAS_BUTTON = 1 << 0;
+
     private final String mId;
     private final CharSequence mTitle;
     private final CharSequence mSummary;
     private final Icon mIcon;
+    private final int mFlags;
     private final PendingIntent mPendingIntent;
 
     /**
@@ -57,6 +59,10 @@ public class Suggestion {
         return mIcon;
     }
 
+    public int getFlags() {
+        return mFlags;
+    }
+
     /**
      * The Intent to launch when the suggestion is activated.
      */
@@ -70,13 +76,16 @@ public class Suggestion {
         mIcon = builder.mIcon;
         mPendingIntent = builder.mPendingIntent;
         mId = builder.mId;
+        mFlags = builder.mFlags;
     }
 
     /**
      * Builder class for {@link Suggestion}.
      */
     public static class Builder {
+
         private final String mId;
+        private int mFlags;
         private CharSequence mTitle;
         private CharSequence mSummary;
         private Icon mIcon;
@@ -111,6 +120,11 @@ public class Suggestion {
          */
         public Builder setIcon(Icon icon) {
             mIcon = icon;
+            return this;
+        }
+
+        public Builder setFlags(int flags) {
+            mFlags = flags;
             return this;
         }
 

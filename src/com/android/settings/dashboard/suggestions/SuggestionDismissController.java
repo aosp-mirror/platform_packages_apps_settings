@@ -89,7 +89,7 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
     public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         final int layoutId = viewHolder.getItemViewType();
         if (layoutId == R.layout.suggestion_tile
-                || layoutId == R.layout.suggestion_tile_remote_container) {
+                || layoutId == R.layout.suggestion_tile_with_button) {
             // Only return swipe direction for suggestion tiles. All other types are not swipeable.
             return super.getSwipeDirs(recyclerView, viewHolder);
         }

@@ -44,7 +44,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
-    @Deprecated // in favor of mNewSuggestions
+    @Deprecated // in favor of mSuggestionsV2
     private final List<Tile> mSuggestions;
     private final List<Suggestion> mSuggestionsV2;
     private final IconCache mCache;
@@ -88,23 +88,15 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                     mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
             mSuggestionsShownLogged.add(id);
         }
-        // TODO: Add remote view field in Suggestion, and enable this.
-        //        if (suggestion.remoteViews != null) {
-        //            final ViewGroup itemView = (ViewGroup) holder.itemView;
-        //            itemView.removeAllViews();
-        //            itemView.addView(suggestion.remoteViews.apply(itemView.getContext(),
-        //                  itemView));
-        //        } else
-        {
-            holder.icon.setImageDrawable(mCache.getIcon(suggestion.getIcon()));
-            holder.title.setText(suggestion.getTitle());
-            final CharSequence summary = suggestion.getSummary();
-            if (!TextUtils.isEmpty(summary)) {
-                holder.summary.setText(summary);
-                holder.summary.setVisibility(View.VISIBLE);
-            } else {
-                holder.summary.setVisibility(View.GONE);
-            }
+
+        holder.icon.setImageDrawable(mCache.getIcon(suggestion.getIcon()));
+        holder.title.setText(suggestion.getTitle());
+        final CharSequence summary = suggestion.getSummary();
+        if (!TextUtils.isEmpty(summary)) {
+            holder.summary.setText(summary);
+            holder.summary.setVisibility(View.VISIBLE);
+        } else {
+            holder.summary.setVisibility(View.GONE);
         }
         final View divider = holder.itemView.findViewById(R.id.divider);
         if (divider != null) {
@@ -116,8 +108,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         final View primaryAction = holder.itemView.findViewById(android.R.id.primary);
         if (primaryAction != null) {
             clickHandler = primaryAction;
-            // set the item view to disabled to remove any touch effects
-            holder.itemView.setEnabled(false);
         }
         clickHandler.setOnClickListener(v -> {
             mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_SUGGESTION, id);
@@ -198,13 +188,12 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                     ? R.layout.suggestion_tile_remote_container
                     : R.layout.suggestion_tile;
         } else {
-
-            return R.layout.suggestion_tile;
-            // TODO: Add remote view field in Suggestion, and enable this.
-            //            Suggestion suggestion = getSuggestionsV2(position);
-            //            return suggestion.remoteViews != null
-            //                    ? R.layout.suggestion_tile_remote_container
-            //                    : R.layout.suggestion_tile;
+            final Suggestion suggestion = getSuggestionsV2(position);
+            if ((suggestion.getFlags() & Suggestion.FLAG_HAS_BUTTON) != 0) {
+                return R.layout.suggestion_tile_with_button;
+            } else {
+                return R.layout.suggestion_tile;
+            }
         }
     }
 

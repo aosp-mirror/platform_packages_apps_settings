@@ -33,26 +33,27 @@
             android:layout_width="@dimen/dashboard_tile_image_size"
             android:layout_height="@dimen/dashboard_tile_image_size"
             android:layout_marginStart="14dp"
-            android:layout_marginEnd="24dp"/>
+            android:layout_marginEnd="24dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView android:id="@android:id/title"
+            <TextView
+                android:id="@android:id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textAppearance="@style/TextAppearance.TileTitle"
                 android:ellipsize="marquee"
-                android:fadingEdge="horizontal"/>
+                android:fadingEdge="horizontal" />
 
-            <TextView android:id="@android:id/summary"
+            <TextView
+                android:id="@android:id/summary"
+                android:textAppearance="@style/TextAppearance.SuggestionSummary"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.Small"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
