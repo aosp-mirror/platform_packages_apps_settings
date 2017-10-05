@@ -248,7 +248,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
-        // hdcp checking
+        controllers.add(new HdcpCheckingPreferenceController(context));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         // running services
