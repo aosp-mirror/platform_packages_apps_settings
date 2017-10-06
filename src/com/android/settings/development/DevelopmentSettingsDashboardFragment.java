@@ -42,6 +42,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.development.SystemPropPoker;
 
@@ -182,11 +183,11 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
-            if (controller instanceof DeveloperOptionsPreferenceController) {
+            if (controller instanceof OnActivityResultListener) {
                 // We do not break early because it is possible for multiple controllers to
                 // handle the same result code.
                 handledResult |=
-                        ((DeveloperOptionsPreferenceController) controller).onActivityResult(
+                        ((OnActivityResultListener) controller).onActivityResult(
                                 requestCode, resultCode, data);
             }
         }

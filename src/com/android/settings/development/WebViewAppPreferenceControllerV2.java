@@ -27,10 +27,13 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class WebViewAppPreferenceControllerV2 extends DeveloperOptionsPreferenceController {
+public class WebViewAppPreferenceControllerV2 extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String TAG = "WebViewAppPrefCtrl";
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";

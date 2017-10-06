@@ -27,8 +27,11 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
 public class AdbPreferenceController extends DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     public static final String ADB_STATE_CHANGED =
             "com.android.settings.development.AdbPreferenceController.ADB_STATE_CHANGED";

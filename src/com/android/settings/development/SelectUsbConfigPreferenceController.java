@@ -29,14 +29,17 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class SelectUsbConfigPreferenceController extends
         DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnCreate, OnDestroy {
+        Preference.OnPreferenceChangeListener, LifecycleObserver, OnCreate, OnDestroy,
+        PreferenceControllerMixin {
 
     private static final String USB_CONFIGURATION_KEY = "select_usb_configuration";
 

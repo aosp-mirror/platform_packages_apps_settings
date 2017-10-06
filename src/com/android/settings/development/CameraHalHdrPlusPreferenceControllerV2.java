@@ -26,10 +26,12 @@ import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class CameraHalHdrPlusPreferenceControllerV2 extends
         DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String KEY_CAMERA_HAL_HDRPLUS_SWITCH = "camera_hal_hdrplus_switch";
     @VisibleForTesting

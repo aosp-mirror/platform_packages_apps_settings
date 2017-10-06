@@ -28,7 +28,11 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreferenceController {
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+public class ClearAdbKeysPreferenceController extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String TAG = "ClearAdbPrefCtrl";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
