@@ -39,6 +39,7 @@ import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
@@ -66,7 +67,7 @@ public class SuggestionAdapterTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
-
+    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private SuggestionAdapter mSuggestionAdapter;
     private DashboardAdapter.DashboardItemHolder mSuggestionHolder;
@@ -79,7 +80,7 @@ public class SuggestionAdapterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
 
         final Tile suggestion1 = new Tile();
         final Tile suggestion2 = new Tile();
@@ -169,6 +170,24 @@ public class SuggestionAdapterTest {
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
         verify(view).setOnClickListener(any(View.OnClickListener.class));
+    }
+
+    @Test
+    public void onBindViewHolder_shouldLog() {
+        final View view = spy(LayoutInflater.from(mContext).inflate(
+                R.layout.suggestion_tile, new LinearLayout(mContext), true));
+        mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
+        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestionV1*/,
+                mOneSuggestionV2, new ArrayList<>());
+
+        // Bind twice
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+
+        // Log once
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                mContext, MetricsProto.MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                mOneSuggestionV2.get(0).getId());
     }
 
     @Test

@@ -31,7 +31,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +46,9 @@ import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderDat
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
-import com.android.settings.dashboard.suggestions.SuggestionController;
 import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
-import com.android.settings.dashboard.suggestions.SuggestionLogHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -164,24 +161,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setCategory(category)
                 .build();
         notifyDashboardDataChanged(prevData);
-        List<Tile> shownSuggestions = null;
-        final int mode = mDashboardData.getSuggestionConditionMode();
-        if (mode == DashboardData.HEADER_MODE_DEFAULT) {
-            shownSuggestions = suggestions.subList(0,
-                    Math.min(suggestions.size(), DashboardData.DEFAULT_SUGGESTION_COUNT));
-        } else if (mode != DashboardData.HEADER_MODE_COLLAPSED) {
-            shownSuggestions = suggestions;
-        }
-        if (shownSuggestions != null) {
-            for (Tile suggestion : shownSuggestions) {
-                final String identifier = mSuggestionFeatureProvider.getSuggestionIdentifier(
-                        mContext, suggestion);
-                mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, identifier,
-                        getSuggestionTaggedData());
-                mSuggestionsShownLogged.add(identifier);
-            }
-        }
     }
 
     public void setSuggestionsV2(List<Suggestion> data) {
@@ -191,7 +170,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 .setSuggestionsV2(data)
                 .build();
         notifyDashboardDataChanged(prevData);
-        // TODO: Replicate the metrics logging from setCategoriesAndSuggestions()
     }
 
     public void setCategory(DashboardCategory category) {
@@ -331,22 +309,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mRecyclerView = recyclerView;
     }
 
-    public void onPause() {
-        if (mDashboardData.getSuggestions() == null) {
-            return;
-        }
-        for (Tile suggestion : mDashboardData.getSuggestions()) {
-            String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
-                    mContext, suggestion);
-            if (mSuggestionsShownLogged.contains(suggestionId)) {
-                mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, suggestionId,
-                        getSuggestionTaggedData());
-            }
-        }
-        mSuggestionsShownLogged.clear();
-    }
-
     public Object getItem(long itemId) {
         return mDashboardData.getItemEntityById(itemId);
     }
@@ -372,23 +334,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         } else {
             mFirstFrameDrawn = true;
             notifyDataSetChanged();
-        }
-    }
-
-    private void logSuggestions() {
-        final List<Tile> suggestions = mDashboardData.getSuggestions();
-        if (suggestions == null) {
-            return;
-        }
-        for (Tile suggestion : suggestions) {
-            final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
-                    mContext, suggestion);
-            if (!mSuggestionsShownLogged.contains(suggestionId)) {
-                mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId,
-                        getSuggestionTaggedData());
-                mSuggestionsShownLogged.add(suggestionId);
-            }
         }
     }
 
@@ -460,9 +405,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.itemView.setPadding(0, padding, 0, padding);
 
         holder.itemView.setOnClickListener(v -> {
-            if (moreSuggestions) {
-                logSuggestions();
-            } else if (hasConditions) {
+            if (hasConditions) {
                 mMetricsFeatureProvider.action(mContext,
                         MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, true);
             }
@@ -585,11 +528,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             parent.addView(icon);
         }
         parent.setVisibility(View.VISIBLE);
-    }
-
-    private Pair<Integer, Object>[] getSuggestionTaggedData() {
-        return SuggestionLogHelper.getSuggestionTaggedData(
-                mSuggestionFeatureProvider.isSmartSuggestionEnabled(mContext));
     }
 
     public static class IconCache {

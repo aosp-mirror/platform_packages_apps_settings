@@ -170,8 +170,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         if (parser == null || suggestion == null || context == null) {
             return;
         }
-        final Pair<Integer, Object>[] taggedData =
-                SuggestionLogHelper.getSuggestionTaggedData(isSmartSuggestionEnabled(context));
+        final Pair<Integer, Object>[] taggedData = getLoggingTaggedData(context);
 
         mMetricsFeatureProvider.action(
                 context, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
@@ -211,6 +210,14 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             packageName = suggestion.intent.getComponent().getClassName();
         }
         return packageName;
+    }
+
+    @Override
+    public Pair<Integer, Object>[] getLoggingTaggedData(Context context) {
+        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
+        return new Pair[]{Pair.create(
+                MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
+                isSmartSuggestionEnabled ? 1 : 0)};
     }
 
     @VisibleForTesting
