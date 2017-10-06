@@ -280,7 +280,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WifiRoamScansPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
-        // select usb configuration
+        controllers.add(new SelectUsbConfigPreferenceController(context, lifecycle));
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
