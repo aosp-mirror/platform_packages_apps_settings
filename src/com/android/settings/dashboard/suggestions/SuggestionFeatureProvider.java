@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
+import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
@@ -93,6 +94,14 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Returns an identifier for the suggestion
+     *
+     * @deprecated in favor or {@link Suggestion#getId()}
      */
+    @Deprecated
     String getSuggestionIdentifier(Context context, Tile suggestion);
+
+    /**
+     * Returns common tagged data for suggestion logging.
+     */
+    Pair<Integer, Object>[] getLoggingTaggedData(Context context);
 }

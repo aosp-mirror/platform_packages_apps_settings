@@ -152,9 +152,6 @@ public class DashboardSummary extends InstrumentedFragment
                 mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
             }
         }
-        if (!getActivity().isChangingConfigurations()) {
-            mAdapter.onPause();
-        }
     }
 
     @Override
