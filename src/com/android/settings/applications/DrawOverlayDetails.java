@@ -29,12 +29,13 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
+import android.view.Window;
+import android.view.WindowManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
-import com.android.settings.core.TouchOverlayManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -60,8 +61,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     private Intent mSettingsIntent;
     private OverlayState mOverlayState;
 
-    private TouchOverlayManager mTouchOverlayManager;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +68,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         Context context = getActivity();
         mOverlayBridge = new AppStateOverlayBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        mTouchOverlayManager = new TouchOverlayManager(context);
 
         // find preferences
         addPreferencesFromResource(R.xml.app_ops_permissions_details);
@@ -92,17 +90,17 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-
-        mTouchOverlayManager.setOverlayAllowed(false);
+    public void onResume() {
+        super.onResume();
+        getActivity().getWindow().addFlags(
+                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-
-        mTouchOverlayManager.setOverlayAllowed(true);
+    public void onPause() {
+        getActivity().getWindow().clearFlags(
+                WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS);
+        super.onPause();
     }
 
     @Override
@@ -151,16 +149,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
                 : MetricsEvent.APP_SPECIAL_PERMISSION_APPDRAW_DENY;
         FeatureFactory.getFactory(getContext())
                 .getMetricsFeatureProvider().action(getContext(), logCategory, packageName);
-    }
-
-    private boolean canDrawOverlay(String pkgName) {
-        int result = mAppOpsManager.noteOpNoThrow(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                mPackageInfo.applicationInfo.uid, pkgName);
-        if (result == AppOpsManager.MODE_ALLOWED) {
-            return true;
-        }
-
-        return false;
     }
 
     @Override

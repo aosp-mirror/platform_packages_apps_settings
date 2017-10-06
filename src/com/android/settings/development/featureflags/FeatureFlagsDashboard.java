@@ -23,6 +23,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FeatureFlagsDashboard extends DashboardFragment {
@@ -51,6 +52,8 @@ public class FeatureFlagsDashboard extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new FeatureFlagsPreferenceController(context, getLifecycle()));
+        return controllers;
     }
 }

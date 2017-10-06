@@ -245,14 +245,14 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        // take bug report
+        controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
-        // hdcp checking
+        controllers.add(new HdcpCheckingPreferenceController(context));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         // running services
-        // convert to file encryption
+        controllers.add(new FileEncryptionPreferenceController(context));
         controllers.add(new PictureColorModePreferenceController(context, lifecycle));
         controllers.add(new WebViewAppPreferenceControllerV2(context));
         controllers.add(new CoolColorTemperaturePreferenceController(context));
@@ -263,7 +263,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ClearAdbKeysPreferenceController(context, fragment));
         controllers.add(new LocalTerminalPreferenceController(context));
         controllers.add(new BugReportInPowerPreferenceControllerV2(context));
-        // select mock location app
+        controllers.add(new MockLocationAppPreferenceController(context, fragment));
         controllers.add(new DebugViewAttributesPreferenceController(context));
         controllers.add(new SelectDebugAppPreferenceController(context, fragment));
         controllers.add(new WaitForDebuggerPreferenceController(context));
@@ -320,7 +320,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
-        // reset shortcutmanager rate-limiting
+        controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         return controllers;
     }
 

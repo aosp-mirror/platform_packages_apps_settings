@@ -144,6 +144,21 @@ public class SuggestionAdapterTest {
     }
 
     @Test
+    public void getItemType_hasButton_shouldReturnSuggestionWithButton() {
+        final List<Suggestion> suggestions = new ArrayList<>();
+        suggestions.add(new Suggestion.Builder("id")
+                .setFlags(Suggestion.FLAG_HAS_BUTTON)
+                .setTitle("123")
+                .setSummary("456")
+                .build());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
+                suggestions, new ArrayList<>());
+
+        assertThat(mSuggestionAdapter.getItemViewType(0))
+                .isEqualTo(R.layout.suggestion_tile_with_button);
+    }
+
+    @Test
     public void onBindViewHolder_shouldSetListener() {
         final View view = spy(LayoutInflater.from(mContext).inflate(
                 R.layout.suggestion_tile, new LinearLayout(mContext), true));

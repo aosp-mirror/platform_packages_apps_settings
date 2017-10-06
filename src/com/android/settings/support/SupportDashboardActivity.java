@@ -47,8 +47,8 @@ public class SupportDashboardActivity extends Activity implements Indexable {
             supportFeatureProvider.startSupportV2(this);
         } else {
             startActivity(new Intent(this, LegacySupportActivity.class));
-            finish();
         }
+        finish();
     }
 
     /**

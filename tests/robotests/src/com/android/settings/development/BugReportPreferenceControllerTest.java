@@ -39,6 +39,10 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * deprecated in favor of {@link BugReportPreferenceControllerV2}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BugReportPreferenceControllerTest {

@@ -16,20 +16,20 @@
 
 package com.android.settings.testutils.shadow;
 
-import android.support.v14.preference.PreferenceFragment;
+import com.android.settings.applications.AppInfoBase;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(PreferenceFragment.class)
-public class ShadowPreferenceFragment {
+@Implements(AppInfoBase.class)
+public class ShadowAppInfoBase {
 
     @Implementation
-    public void onStart() {
+    public void onResume() {
         // No-op.
     }
 
     @Implementation
-    public void onStop() {
+    public void onPause() {
         // No-op.
     }
 }

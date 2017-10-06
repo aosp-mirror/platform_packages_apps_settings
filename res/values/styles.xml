@@ -318,7 +318,10 @@
     <style name="TextAppearance.SuggestionTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextAppearance.SuggestionSummary" parent="TextAppearance.Small">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="TextAppearance.FingerprintErrorText"
