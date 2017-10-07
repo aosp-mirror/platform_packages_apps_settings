@@ -30,6 +30,7 @@ import android.os.BatteryStats;
 import android.os.Build;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.ArraySet;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -52,6 +53,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -69,6 +71,7 @@ public class WakeupAlarmAnomalyDetectorTest {
             1 * DateUtils.HOUR_IN_MILLIS + 10 * DateUtils.MINUTE_IN_MILLIS;
     private static final int ANOMALY_WAKEUP_COUNT = 500;
     private static final int NORMAL_WAKEUP_COUNT = 61;
+    private static final int BLACKLISTED_WAKEUP_COUNT = 37;
     private static final int ANOMALY_WAKEUP_FREQUENCY = 428; // count per hour
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
@@ -87,11 +90,11 @@ public class WakeupAlarmAnomalyDetectorTest {
     @Mock
     private BatteryUtils mBatteryUtils;
     @Mock
-    private ApplicationInfo mApplicationInfo;
-    @Mock
     private BatteryStats.Uid.Pkg mPkg;
     @Mock
     private BatteryStats.Counter mCounter;
+    @Mock
+    private BatteryStats.Counter mCounter2;
     @Mock
     private AnomalyDetectionPolicy mPolicy;
     @Mock
@@ -111,6 +114,9 @@ public class WakeupAlarmAnomalyDetectorTest {
 
         mContext = spy(RuntimeEnvironment.application);
         ReflectionHelpers.setField(mPolicy, "wakeupAlarmThreshold", 60);
+        final Set<String> blacklistedTags = new ArraySet<>();
+        blacklistedTags.add("blacklistedTag");
+        ReflectionHelpers.setField(mPolicy, "wakeupBlacklistedTags", blacklistedTags);
 
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
         doReturn(RUNNING_TIME_MS).when(mBatteryUtils).calculateRunningTimeBasedOnStatsType(any(),
@@ -206,5 +212,21 @@ public class WakeupAlarmAnomalyDetectorTest {
 
         assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid)).isEqualTo(
                 2 * NORMAL_WAKEUP_COUNT);
+    }
+
+    @Test
+    public void testGetWakeupAlarmCountFromUid_filterOutBlacklistedTags() {
+        final ArrayMap<String, BatteryStats.Uid.Pkg> packageStats = new ArrayMap<>();
+        final ArrayMap<String, BatteryStats.Counter> alarms = new ArrayMap<>();
+        doReturn(alarms).when(mPkg).getWakeupAlarmStats();
+        doReturn(NORMAL_WAKEUP_COUNT).when(mCounter).getCountLocked(anyInt());
+        doReturn(BLACKLISTED_WAKEUP_COUNT).when(mCounter2).getCountLocked(anyInt());
+        doReturn(packageStats).when(mAnomalyUid).getPackageStats();
+        packageStats.put("", mPkg);
+        alarms.put("allowedTag", mCounter);
+        alarms.put("blacklistedTag", mCounter2);
+
+        assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid)).isEqualTo(
+                NORMAL_WAKEUP_COUNT);
     }
 }
