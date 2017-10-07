@@ -264,7 +264,7 @@ public class BillingCycleSettings extends DataUsageBase implements
                 formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
             };
             final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                    getContext(), android.R.layout.simple_spinner_item, unitNames);
+                    getContext(), R.layout.data_usage_spinner_item, unitNames);
             type.setAdapter(adapter);
 
             if (bytes > 1.5f * GB_IN_BYTES) {

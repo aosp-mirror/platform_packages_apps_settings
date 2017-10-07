@@ -22,6 +22,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -312,5 +313,20 @@ public class SuggestionFeatureProviderImplTest {
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
         assertThat(mProvider.isSuggestionComplete(mContext, componentName)).isFalse();
+    }
+
+    @Test
+    public void testGetSmartSuggestionEnabledTaggedData_disabled() {
+        assertThat(mProvider.getLoggingTaggedData(mContext)).asList().containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
+    }
+
+    @Test
+    public void testGetSmartSuggestionEnabledTaggedData_enabled() {
+        final SuggestionFeatureProvider provider = spy(mProvider);
+        when(provider.isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
+
+        assertThat(provider.getLoggingTaggedData(mContext)).asList().containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 1));
     }
 }

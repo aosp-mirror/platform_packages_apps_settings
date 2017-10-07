@@ -21,7 +21,6 @@ import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,7 +130,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         if (!mSuggestionsShownLogged.contains(suggestionId)) {
             mMetricsFeatureProvider.action(
                     mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId,
-                    getSuggestionTaggedData());
+                    mSuggestionFeatureProvider.getLoggingTaggedData(mContext));
             mSuggestionsShownLogged.add(suggestionId);
         }
         if (suggestion.remoteViews != null) {
@@ -165,7 +164,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         clickHandler.setOnClickListener(v -> {
             mMetricsFeatureProvider.action(mContext,
                     MetricsEvent.ACTION_SETTINGS_SUGGESTION, suggestionId,
-                    getSuggestionTaggedData());
+                    mSuggestionFeatureProvider.getLoggingTaggedData(mContext));
             ((SettingsActivity) mContext).startSuggestion(suggestion.intent);
         });
     }
@@ -235,11 +234,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     public void removeSuggestion(Tile suggestion) {
         mSuggestions.remove(suggestion);
         notifyDataSetChanged();
-    }
-
-    private Pair<Integer, Object>[] getSuggestionTaggedData() {
-        return SuggestionLogHelper.getSuggestionTaggedData(
-                mSuggestionFeatureProvider.isSmartSuggestionEnabled(mContext));
     }
 
     public void removeSuggestion(Suggestion suggestion) {
