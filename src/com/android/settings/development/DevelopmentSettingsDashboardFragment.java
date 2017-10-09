@@ -222,7 +222,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     private void registerReceivers() {
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(mEnableAdbReceiver, new IntentFilter(
-                        AdbPreferenceController.ADB_STATE_CHANGED));
+                        AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
     }
 
     private void unregisterReceivers() {

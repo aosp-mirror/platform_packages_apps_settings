@@ -18,70 +18,44 @@ package com.android.settings.development;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.UserManager;
-import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v4.content.LocalBroadcastManager;
+import android.support.annotation.Nullable;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 
-public class AdbPreferenceController extends DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
-
-    public static final String ADB_STATE_CHANGED =
-            "com.android.settings.development.AdbPreferenceController.ADB_STATE_CHANGED";
-    public static final int ADB_SETTING_ON = 1;
-    public static final int ADB_SETTING_OFF = 0;
-
-    private static final String KEY_ENABLE_ADB = "enable_adb";
+public class AdbPreferenceController extends AbstractEnableAdbPreferenceController implements
+        PreferenceControllerMixin {
 
     private final DevelopmentSettingsDashboardFragment mFragment;
-    private SwitchPreference mPreference;
 
     public AdbPreferenceController(Context context, DevelopmentSettingsDashboardFragment fragment) {
         super(context);
         mFragment = fragment;
     }
 
-    @Override
-    public boolean isAvailable() {
-        return mContext.getSystemService(UserManager.class).isAdminUser();
+    public void onAdbDialogConfirmed() {
+        writeAdbSetting(true);
+    }
+
+    public void onAdbDialogDismissed() {
+        updateState(mPreference);
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_ENABLE_ADB;
+    public void showConfirmationDialog(@Nullable Preference preference) {
+        EnableAdbWarningDialog.show(mFragment);
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+    public void dismissConfirmationDialog() {
+        // intentional no-op
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean isAdbEnabled = (Boolean) newValue;
-        if (isAdbEnabled) {
-            EnableAdbWarningDialog.show(mFragment);
-        } else {
-            writeAdbSetting(isAdbEnabled);
-            notifyStateChanged();
-        }
-        return true;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final int adbMode = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ADB_ENABLED, 0 /* default */);
-        mPreference.setChecked(adbMode != ADB_SETTING_OFF);
+    public boolean isConfirmationDialogShowing() {
+        // intentional no-op
+        return false;
     }
 
     @Override
@@ -92,28 +66,7 @@ public class AdbPreferenceController extends DeveloperOptionsPreferenceControlle
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         writeAdbSetting(false);
-        notifyStateChanged();
         mPreference.setEnabled(false);
         mPreference.setChecked(false);
-    }
-
-    public void onAdbDialogConfirmed() {
-        writeAdbSetting(true);
-        notifyStateChanged();
-    }
-
-    public void onAdbDialogDismissed() {
-        updateState(mPreference);
-    }
-
-    private void writeAdbSetting(boolean enabled) {
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.ADB_ENABLED, enabled ? ADB_SETTING_ON : ADB_SETTING_OFF);
-    }
-
-    @VisibleForTesting
-    void notifyStateChanged() {
-        LocalBroadcastManager.getInstance(mContext)
-                .sendBroadcast(new Intent(ADB_STATE_CHANGED));
     }
 }
