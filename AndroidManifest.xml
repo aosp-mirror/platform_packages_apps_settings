@@ -3181,7 +3181,7 @@
 
         <!-- Quick Settings tiles for Developer Options -->
         <service
-            android:name=".qstile.DevelopmentTiles$ShowLayout"
+            android:name=".development.qstile.DevelopmentTiles$ShowLayout"
             android:label="@string/debug_layout"
             android:icon="@drawable/tile_icon_show_layout"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -3191,7 +3191,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qstile.DevelopmentTiles$GPUProfiling"
+            android:name=".development.qstile.DevelopmentTiles$GPUProfiling"
             android:label="@string/track_frame_time"
             android:icon="@drawable/tile_icon_graphics"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -3201,7 +3201,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qstile.DevelopmentTiles$ForceRTL"
+            android:name=".development.qstile.DevelopmentTiles$ForceRTL"
             android:label="@string/force_rtl_layout_all_locales"
             android:icon="@drawable/tile_icon_force_rtl"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -3211,7 +3211,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".qstile.DevelopmentTiles$AnimationSpeed"
+            android:name=".development.qstile.DevelopmentTiles$AnimationSpeed"
             android:label="@string/window_animation_scale_title"
             android:icon="@drawable/tile_icon_animation_speed"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
@@ -3220,11 +3220,6 @@
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
-        <activity
-            android:name=".qstile.DevelopmentTileConfigActivity"
-            android:excludeFromRecents="true"
-            android:launchMode="singleInstance"
-            android:label="@string/quick_settings_developer_tiles" />
 
         <activity android:name=".HelpTrampoline"
             android:exported="true"
