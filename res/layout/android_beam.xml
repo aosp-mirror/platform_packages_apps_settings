@@ -31,14 +31,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView android:id="@+id/android_beam_explained"
+            <TextView
+                android:id="@+id/android_beam_explained"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
                 android:gravity="top"
+                android:paddingStart="@dimen/preference_no_icon_padding_start"
                 android:text="@string/android_beam_explained"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-            />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
             <ImageView android:id="@+id/android_beam_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
