@@ -52,7 +52,7 @@ import java.util.List;
 
 public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFragment
         implements SwitchBar.OnSwitchChangeListener, OemUnlockDialogHost, AdbDialogHost,
-        AdbClearKeysDialogHost {
+        AdbClearKeysDialogHost, LogPersistDialogHost {
 
     private static final String TAG = "DevSettingsDashboard";
 
@@ -180,6 +180,20 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onDisableLogPersistDialogConfirmed() {
+        final LogPersistPreferenceControllerV2 controller = getDevelopmentOptionsController(
+                LogPersistPreferenceControllerV2.class);
+        controller.onDisableLogPersistDialogConfirmed();
+    }
+
+    @Override
+    public void onDisableLogPersistDialogRejected() {
+        final LogPersistPreferenceControllerV2 controller = getDevelopmentOptionsController(
+                LogPersistPreferenceControllerV2.class);
+        controller.onDisableLogPersistDialogRejected();
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         boolean handledResult = false;
         for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -270,7 +284,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WaitForDebuggerPreferenceController(context));
         controllers.add(new VerifyAppsOverUsbPreferenceControllerV2(context));
         controllers.add(new LogdSizePreferenceControllerV2(context));
-        // store logger data persistently on device
+        controllers.add(new LogPersistPreferenceControllerV2(context, fragment, lifecycle));
         controllers.add(new ConnectivityMonitorPreferenceControllerV2(context));
         controllers.add(new CameraLaserSensorPreferenceControllerV2(context));
         controllers.add(new CameraHalHdrPlusPreferenceControllerV2(context));

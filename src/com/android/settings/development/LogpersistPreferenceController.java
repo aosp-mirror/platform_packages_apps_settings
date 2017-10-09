@@ -27,6 +27,10 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.AbstractLogpersistPreferenceController;
 
+/**
+ * depreacted in favor of {@link LogdSizePreferenceControllerV2}
+ */
+@Deprecated
 public class LogpersistPreferenceController extends AbstractLogpersistPreferenceController
         implements PreferenceControllerMixin {
 
