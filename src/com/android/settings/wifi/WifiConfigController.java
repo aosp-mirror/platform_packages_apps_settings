@@ -411,15 +411,23 @@ public class WifiConfigController implements TextWatcher,
         submit.setEnabled(isSubmittable());
     }
 
+    boolean isValidPsk(String password) {
+        if (password.length() == 64 && password.matches("[0-9A-Fa-f]{64}")) {
+            return true;
+        } else if (password.length() >= 8 && password.length() <= 63) {
+            return true;
+        }
+        return false;
+    }
+
     boolean isSubmittable() {
         boolean enabled = false;
         boolean passwordInvalid = false;
-
         if (mPasswordView != null
                 && ((mAccessPointSecurity == AccessPoint.SECURITY_WEP
                         && mPasswordView.length() == 0)
                     || (mAccessPointSecurity == AccessPoint.SECURITY_PSK
-                           && (mPasswordView.length() < 8 || mPasswordView.length() > 63)))) {
+                           && !isValidPsk(mPasswordView.getText().toString())))) {
             passwordInvalid = true;
         }
         if ((mSsidView != null && mSsidView.length() == 0)
