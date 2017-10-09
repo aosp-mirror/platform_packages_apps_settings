@@ -20,4 +20,15 @@ package android.bluetooth;
  * A placeholder class to prevent ClassNotFound exceptions caused by lack of visibility.
  */
 public class BluetoothCodecConfig {
+
+    public static final int SAMPLE_RATE_NONE = 0;
+    public static final int SAMPLE_RATE_48000 = 0x1 << 1;
+    public static final int SOURCE_CODEC_TYPE_INVALID = 1000 * 1000;
+    public static final int CODEC_PRIORITY_DEFAULT = 0;
+    public static final int BITS_PER_SAMPLE_NONE = 0;
+    public static final int CHANNEL_MODE_NONE = 0;
+
+    public int getSampleRate() {
+        return 0;
+    }
 }
