@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -56,8 +55,6 @@ public class WebViewAppPreferenceControllerV2Test {
     private Preference mPreference;
     @Mock
     private DefaultAppInfo mAppInfo;
-    @Mock
-    private Drawable mDrawable;
 
     private Context mContext;
     private WebViewAppPreferenceControllerV2 mController;
@@ -80,24 +77,20 @@ public class WebViewAppPreferenceControllerV2Test {
     public void updateState_hasAppLabel_shouldSetAppLabelAndIcon() {
         final String appLabel = "SomeRandomAppLabel!!!";
         when(mAppInfo.loadLabel()).thenReturn(appLabel);
-        when(mAppInfo.loadIcon()).thenReturn(mDrawable);
 
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary(appLabel);
-        verify(mPreference).setIcon(mDrawable);
     }
 
     @Test
     public void updateState_noAppLabel_shouldSetAppDefaultLabelAndNullIcon() {
         final String appLabel = null;
         when(mAppInfo.loadLabel()).thenReturn(appLabel);
-        when(mAppInfo.loadIcon()).thenReturn(mDrawable);
 
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary(R.string.app_list_preference_none);
-        verify(mPreference).setIcon(null);
     }
 
     @Test
