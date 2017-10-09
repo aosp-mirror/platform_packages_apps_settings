@@ -27,17 +27,19 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 
 public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController implements
         Preference.OnPreferenceChangeListener, LifecycleObserver,
-        OnResume, OnPause {
+        OnResume, OnPause, PreferenceControllerMixin {
 
     private static final String TAG = "StayAwakeCtrl";
     private static final String PREFERENCE_KEY = "keep_screen_on";

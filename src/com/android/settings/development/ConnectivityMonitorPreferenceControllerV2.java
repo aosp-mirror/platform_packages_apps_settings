@@ -26,9 +26,12 @@ import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class ConnectivityMonitorPreferenceControllerV2 extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener {
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin {
 
     private static final String KEY_CONNECTIVITY_MONITOR_SWITCH = "connectivity_monitor_switch";
     @VisibleForTesting

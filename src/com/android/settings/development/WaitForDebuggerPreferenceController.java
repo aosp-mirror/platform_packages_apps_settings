@@ -32,8 +32,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
 public class WaitForDebuggerPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener {
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
 

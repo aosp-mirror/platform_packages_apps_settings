@@ -23,8 +23,12 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
 public class BluetoothDeviceNoNamePreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener {
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin {
 
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY =
             "bluetooth_show_devices_without_names";

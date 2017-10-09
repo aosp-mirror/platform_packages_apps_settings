@@ -23,10 +23,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
 
 public class ShowLayoutBoundsPreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String DEBUG_LAYOUT_KEY = "debug_layout";
 

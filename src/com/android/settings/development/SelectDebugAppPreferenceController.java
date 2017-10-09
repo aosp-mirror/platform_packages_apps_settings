@@ -30,9 +30,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferenceController {
+public class SelectDebugAppPreferenceController extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin,
+        OnActivityResultListener {
 
     private static final String DEBUG_APP_KEY = "debug_app";
 

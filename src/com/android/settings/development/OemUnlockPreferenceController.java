@@ -32,11 +32,13 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String PREFERENCE_KEY = "oem_unlock_enable";
 

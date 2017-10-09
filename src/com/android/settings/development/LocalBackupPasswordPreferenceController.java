@@ -26,8 +26,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class LocalBackupPasswordPreferenceController extends DeveloperOptionsPreferenceController {
+public class LocalBackupPasswordPreferenceController extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String LOCAL_BACKUP_PASSWORD = "local_backup_password";
 
