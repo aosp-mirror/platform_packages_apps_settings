@@ -85,6 +85,12 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         }
 
         mId = intent.getStringExtra(ConditionProviderService.EXTRA_RULE_ID);
+        if (mId == null) {
+            Log.w(TAG, "rule id is null");
+            toastAndFinish();
+            return;
+        }
+
         if (DEBUG) Log.d(TAG, "mId=" + mId);
         if (refreshRuleOrFinish()) {
             return;
