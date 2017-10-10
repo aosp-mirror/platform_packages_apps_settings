@@ -23,6 +23,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.List;
+
 public class PhoneLanguagePreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
@@ -45,6 +47,13 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         final String localeNames = FeatureFactory.getFactory(mContext)
                 .getLocaleFeatureProvider().getLocaleNames();
         preference.setSummary(localeNames);
+    }
+
+    @Override
+    public void updateNonIndexableKeys(List<String> keys) {
+        // No index needed, because this pref has the same name as the parent page. Indexing it will
+        // make search page look like there are duplicate result, creating confusion.
+        keys.add(getPreferenceKey());
     }
 
     @Override
