@@ -38,6 +38,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
@@ -72,6 +73,7 @@ public class ConfirmLockPassword extends SettingsActivity {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_confirm_your_password_header);
         setTitle(msg);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     public static class ConfirmLockPasswordFragment extends Fragment implements OnClickListener,
