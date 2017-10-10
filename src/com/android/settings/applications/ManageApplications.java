@@ -651,7 +651,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        HelpUtils.prepareHelpMenuItem(getActivity(), menu, getHelpResource(), getClass().getName());
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        HelpUtils.prepareHelpMenuItem(activity, menu, getHelpResource(), getClass().getName());
         mOptionsMenu = menu;
         inflater.inflate(R.menu.manage_apps, menu);
         updateOptionsMenu();
