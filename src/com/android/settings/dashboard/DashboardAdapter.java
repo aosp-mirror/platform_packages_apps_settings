@@ -48,7 +48,6 @@ import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
-import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -78,7 +77,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final SuggestionControllerMixin mSuggestionControllerMixin;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
-    private final SuggestionFeatureProvider mSuggestionFeatureProvider;
     private final ArrayList<String> mSuggestionsShownLogged;
     private boolean mFirstFrameDrawn;
     private RecyclerView mRecyclerView;
@@ -114,7 +112,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mSuggestionControllerMixin = suggestionControllerMixin;
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
-        mSuggestionFeatureProvider = factory.getSuggestionFeatureProvider(context);
         mCache = new IconCache(context);
         mSuggestionParser = suggestionParser;
         mCallback = callback;
@@ -341,11 +338,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     void onBindSuggestionConditionHeader(final SuggestionAndConditionHeaderHolder holder,
             SuggestionConditionHeaderData data) {
         final int curMode = mDashboardData.getSuggestionConditionMode();
-        final int nextMode = data.hiddenSuggestionCount > 0 && data.conditionCount > 0
+        final int nextMode = data.hiddenSuggestionCount > 0
+                && data.conditionCount > 0
                 && curMode != DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
                 ? DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
                 : DashboardData.HEADER_MODE_FULLY_EXPANDED;
-        final boolean moreSuggestions = data.hiddenSuggestionCount > 0;
+
         final boolean hasConditions = data.conditionCount > 0;
         if (data.conditionCount > 0) {
             holder.icon.setImageIcon(data.conditionIcons.get(0));
