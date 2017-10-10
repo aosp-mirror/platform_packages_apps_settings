@@ -21,6 +21,10 @@ import android.content.Context;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.AbstractLogdSizePreferenceController;
 
+/**
+ * deprecated in favor of {@link LogdSizePreferenceControllerV2}
+ */
+@Deprecated
 public class LogdSizePreferenceController extends AbstractLogdSizePreferenceController
         implements PreferenceControllerMixin {
 
