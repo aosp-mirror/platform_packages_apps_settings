@@ -34,6 +34,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
+import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
 import org.junit.After;
@@ -243,7 +244,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         }
     }
 
-    @Implements(AdbPreferenceController.class)
+    @Implements(AbstractEnableAdbPreferenceController.class)
     public static class ShadowAdbPreferenceController {
         @Implementation
         public boolean isAvailable() {

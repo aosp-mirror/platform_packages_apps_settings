@@ -26,8 +26,11 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
 public class HardwareOverlaysPreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String DISABLE_OVERLAYS_KEY = "disable_overlays";
 

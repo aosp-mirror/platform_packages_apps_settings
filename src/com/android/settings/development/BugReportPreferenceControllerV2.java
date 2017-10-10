@@ -19,7 +19,11 @@ package com.android.settings.development;
 import android.content.Context;
 import android.os.UserManager;
 
-public class BugReportPreferenceControllerV2 extends DeveloperOptionsPreferenceController {
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
+public class BugReportPreferenceControllerV2 extends DeveloperOptionsPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_BUGREPORT = "bugreport";
 

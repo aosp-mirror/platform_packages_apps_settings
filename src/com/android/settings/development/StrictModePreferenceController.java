@@ -25,11 +25,13 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
 import android.view.IWindowManager;
 
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+
 public class StrictModePreferenceController extends DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String STRICT_MODE_KEY = "strict_mode";
     private static final String WINDOW_MANAGER_KEY = "window";

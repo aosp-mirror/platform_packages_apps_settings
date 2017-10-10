@@ -26,9 +26,11 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
@@ -38,7 +40,7 @@ import java.util.List;
  */
 public class VerifyAppsOverUsbPreferenceControllerV2 extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        AdbOnChangeListener {
+        AdbOnChangeListener, PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
 

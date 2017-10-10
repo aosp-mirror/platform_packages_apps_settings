@@ -31,11 +31,15 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
-public class MockLocationAppPreferenceController extends DeveloperOptionsPreferenceController {
+public class MockLocationAppPreferenceController extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin,
+        OnActivityResultListener {
 
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final int[] MOCK_LOCATION_APP_OPS = new int[]{AppOpsManager.OP_MOCK_LOCATION};

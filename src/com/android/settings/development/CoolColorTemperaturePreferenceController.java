@@ -25,11 +25,13 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
 
 public class CoolColorTemperaturePreferenceController extends
         DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener {
+        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 

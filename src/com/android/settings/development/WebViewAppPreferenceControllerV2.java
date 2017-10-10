@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -27,10 +26,13 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
+import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class WebViewAppPreferenceControllerV2 extends DeveloperOptionsPreferenceController {
+public class WebViewAppPreferenceControllerV2 extends
+        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String TAG = "WebViewAppPrefCtrl";
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
@@ -64,11 +66,9 @@ public class WebViewAppPreferenceControllerV2 extends DeveloperOptionsPreference
         final CharSequence defaultAppLabel = getDefaultAppLabel();
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             mPreference.setSummary(defaultAppLabel);
-            mPreference.setIcon(getDefaultAppIcon());
         } else {
             Log.d(TAG, "No default app");
             mPreference.setSummary(R.string.app_list_preference_none);
-            mPreference.setIcon(null);
         }
     }
 
@@ -87,11 +87,6 @@ public class WebViewAppPreferenceControllerV2 extends DeveloperOptionsPreference
         final PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
         return new DefaultAppInfo(mPackageManager,
                 currentPackage == null ? null : currentPackage.applicationInfo);
-    }
-
-    private Drawable getDefaultAppIcon() {
-        final DefaultAppInfo app = getDefaultAppInfo();
-        return app.loadIcon();
     }
 
     private CharSequence getDefaultAppLabel() {
