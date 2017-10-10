@@ -285,7 +285,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
-        // bluetooth avrcp version
+        controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         // bluetooth audio codec
         // bluetooth audio sample rate
         // bluetooth audio bits per sample
