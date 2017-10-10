@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.android.settings.qstile;
+package com.android.settings.development.qstile;
 
 import android.os.RemoteException;
 import android.os.SystemProperties;
