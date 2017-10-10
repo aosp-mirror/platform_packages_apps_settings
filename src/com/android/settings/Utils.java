@@ -50,6 +50,9 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.icu.text.MeasureFormat;
 import android.icu.text.RelativeDateTimeFormatter;
@@ -1365,5 +1368,51 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static void setEditTextCursorPosition(EditText editText) {
         editText.setSelection(editText.getText().length());
+    }
+
+    /**
+     * Sets the preference icon with a drawable that is scaled down to to avoid crashing Settings if
+     * it's too big.
+     */
+    public static void setSafeIcon(Preference pref, Drawable icon) {
+        Drawable safeIcon = icon;
+        if (icon != null) {
+            safeIcon = getSafeDrawable(icon, 500, 500);
+        }
+        pref.setIcon(safeIcon);
+    }
+
+    /**
+     * Gets a drawable with a limited size to avoid crashing Settings if it's too big.
+     *
+     * @param original original drawable, typically an app icon.
+     * @param maxWidth maximum width, in pixels.
+     * @param maxHeight maximum height, in pixels.
+     */
+    public static Drawable getSafeDrawable(Drawable original, int maxWidth, int maxHeight) {
+        final int actualWidth = original.getMinimumWidth();
+        final int actualHeight = original.getMinimumHeight();
+
+        if (actualWidth <= maxWidth && actualHeight <= maxHeight) {
+            return original;
+        }
+
+        float scaleWidth = ((float) maxWidth) / actualWidth;
+        float scaleHeight = ((float) maxHeight) / actualHeight;
+        float scale = Math.min(scaleWidth, scaleHeight);
+        final int width = (int) (actualWidth * scale);
+        final int height = (int) (actualHeight * scale);
+
+        final Bitmap bitmap;
+        if (original instanceof BitmapDrawable) {
+            bitmap = Bitmap.createScaledBitmap(((BitmapDrawable) original).getBitmap(), width,
+                    height, false);
+        } else {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(bitmap);
+            original.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            original.draw(canvas);
+        }
+        return new BitmapDrawable(null, bitmap);
     }
 }
