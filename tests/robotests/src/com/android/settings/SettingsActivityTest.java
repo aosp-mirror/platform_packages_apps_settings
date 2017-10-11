@@ -27,6 +27,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

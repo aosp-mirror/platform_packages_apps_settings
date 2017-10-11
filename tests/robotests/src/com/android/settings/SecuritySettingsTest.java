@@ -30,6 +30,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settingslib.drawer.DashboardCategory;

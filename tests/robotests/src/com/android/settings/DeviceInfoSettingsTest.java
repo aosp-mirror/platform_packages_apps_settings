@@ -28,6 +28,7 @@ import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.DeviceInfoUtils;

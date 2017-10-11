@@ -18,8 +18,7 @@ package com.android.settings;
 
 import android.content.Intent;
 
-import com.android.settings.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import org.junit.Test;

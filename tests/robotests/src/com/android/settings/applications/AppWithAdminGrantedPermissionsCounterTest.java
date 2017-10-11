@@ -26,7 +26,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 

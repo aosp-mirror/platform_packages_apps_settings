@@ -25,7 +25,7 @@ import android.app.Activity;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.drawer.CategoryKey;
 

@@ -23,7 +23,7 @@ import android.os.Looper;
 import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;

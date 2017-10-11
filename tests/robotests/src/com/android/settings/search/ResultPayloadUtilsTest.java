@@ -18,8 +18,8 @@
 package com.android.settings.search;
 
 import android.content.Intent;
-import android.os.BadParcelableException;
-import com.android.settings.SettingsRobolectricTestRunner;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.IntentPayload;
 import com.android.settings.search2.ResultPayloadUtils;
@@ -27,8 +27,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-
-import java.io.StreamCorruptedException;
 
 import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.Assert.fail;

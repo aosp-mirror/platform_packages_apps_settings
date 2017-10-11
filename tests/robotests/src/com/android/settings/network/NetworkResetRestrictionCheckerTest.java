@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

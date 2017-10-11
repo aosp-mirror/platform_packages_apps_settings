@@ -21,7 +21,7 @@ import android.content.Intent;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

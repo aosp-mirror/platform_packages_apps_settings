@@ -19,9 +19,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;

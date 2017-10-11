@@ -26,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
 import com.android.settings.ChooseLockPattern.ChooseLockPatternFragment;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;

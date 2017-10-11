@@ -19,7 +19,7 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;

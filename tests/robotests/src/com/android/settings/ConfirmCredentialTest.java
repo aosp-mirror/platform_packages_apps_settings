@@ -21,9 +21,9 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.R;
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Test;

@@ -24,7 +24,7 @@ import android.view.LayoutInflater;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.InlineSwitchViewHolder;

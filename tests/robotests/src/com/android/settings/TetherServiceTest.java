@@ -23,6 +23,9 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.WifiManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;

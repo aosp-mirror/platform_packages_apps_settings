@@ -19,7 +19,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.MasterSwitchController;

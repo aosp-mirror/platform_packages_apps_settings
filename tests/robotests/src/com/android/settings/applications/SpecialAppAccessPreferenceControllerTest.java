@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.datausage.DataSaverBackend;
 import org.junit.Before;

@@ -27,7 +27,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.UserHandle;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;

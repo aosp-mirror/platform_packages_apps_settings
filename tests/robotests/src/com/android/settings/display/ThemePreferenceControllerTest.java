@@ -21,8 +21,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.support.v7.preference.ListPreference;
-import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.display.ThemePreferenceController.OverlayManager;
 
