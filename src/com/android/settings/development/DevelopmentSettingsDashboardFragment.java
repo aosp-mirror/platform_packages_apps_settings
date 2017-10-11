@@ -398,7 +398,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // debug non-rectangular clip operations
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
-        // simulate color space
+        controllers.add(new SimulateColorSpacePreferenceController(context));
         // set gpu renderer
         controllers.add(new UsbAudioRoutingPreferenceController(context));
         controllers.add(new StrictModePreferenceController(context));
