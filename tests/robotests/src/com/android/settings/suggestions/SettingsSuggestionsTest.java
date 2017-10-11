@@ -22,7 +22,7 @@ import static com.google.common.truth.Truth.assertThat;
 import android.annotation.StringRes;
 import android.content.Context;
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import java.util.ArrayList;
 import java.util.List;

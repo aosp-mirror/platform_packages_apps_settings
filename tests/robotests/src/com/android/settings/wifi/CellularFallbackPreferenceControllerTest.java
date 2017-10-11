@@ -19,7 +19,7 @@ package com.android.settings.wifi;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

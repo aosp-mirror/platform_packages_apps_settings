@@ -30,7 +30,7 @@ import android.os.storage.VolumeInfo;
 import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import com.android.settingslib.applications.StorageStatsSource;

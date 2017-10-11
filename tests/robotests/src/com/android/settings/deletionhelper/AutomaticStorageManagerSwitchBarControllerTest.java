@@ -33,7 +33,7 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;

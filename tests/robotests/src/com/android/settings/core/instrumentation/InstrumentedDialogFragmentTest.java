@@ -16,7 +16,7 @@
 package com.android.settings.core.instrumentation;
 
 import android.os.Bundle;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;

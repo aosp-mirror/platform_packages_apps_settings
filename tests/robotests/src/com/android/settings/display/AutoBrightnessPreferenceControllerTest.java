@@ -18,9 +18,8 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.provider.Settings;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.search2.InlineSwitchPayload;
 import com.android.settings.search2.ResultPayload;
 import org.junit.Before;

@@ -22,7 +22,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.TelephonyManager;
 
 import com.android.ims.ImsManager;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

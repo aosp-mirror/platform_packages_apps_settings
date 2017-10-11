@@ -17,10 +17,9 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 

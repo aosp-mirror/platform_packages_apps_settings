@@ -2,6 +2,7 @@ package com.android.settings;
 
 import android.content.Context;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

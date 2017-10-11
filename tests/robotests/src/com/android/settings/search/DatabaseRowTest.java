@@ -18,7 +18,7 @@
 package com.android.settings.search;
 
 import android.content.Intent;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search2.DatabaseIndexingManager.DatabaseRow;
 import com.android.settings.search2.DatabaseIndexingManager.DatabaseRow.Builder;

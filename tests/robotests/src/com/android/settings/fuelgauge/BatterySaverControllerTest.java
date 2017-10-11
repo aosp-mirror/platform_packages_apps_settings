@@ -17,7 +17,7 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.os.PowerManager;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.widget.MasterSwitchPreference;

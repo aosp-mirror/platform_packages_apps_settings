@@ -24,7 +24,7 @@ import android.os.storage.VolumeInfo;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;

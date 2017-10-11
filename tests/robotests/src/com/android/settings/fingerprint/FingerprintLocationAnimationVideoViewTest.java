@@ -22,7 +22,7 @@ import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.view.TextureView.SurfaceTextureListener;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;

@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import static com.google.common.truth.Truth.assertThat;
 

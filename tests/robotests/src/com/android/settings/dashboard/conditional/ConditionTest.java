@@ -20,7 +20,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import org.junit.Before;

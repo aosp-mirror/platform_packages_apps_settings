@@ -30,7 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 
 import android.util.ArraySet;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
 import org.junit.Before;

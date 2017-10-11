@@ -16,14 +16,13 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.PowerManager;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.BatteryInfo;
 import com.android.settingslib.graph.UsageView;
@@ -35,7 +34,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.Matchers.anyInt;

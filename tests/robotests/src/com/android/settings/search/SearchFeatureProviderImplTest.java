@@ -20,7 +20,7 @@ package com.android.settings.search;
 import android.app.Activity;
 import android.view.Menu;
 
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.search2.SearchFeatureProviderImpl;

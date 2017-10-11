@@ -54,7 +54,7 @@ import android.provider.UserDictionary;
 import android.view.inputmethod.InputMethodInfo;
 
 import com.android.internal.content.PackageMonitor;
-import com.android.settings.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
