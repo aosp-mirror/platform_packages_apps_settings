@@ -387,7 +387,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new RtlLayoutPreferenceController(context));
         controllers.add(new WindowAnimationScalePreferenceController(context));
-        // transition animation scale
+        controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         // simulate secondary displays
         // smallest width
