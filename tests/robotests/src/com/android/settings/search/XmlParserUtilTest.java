@@ -17,14 +17,16 @@
 
 package com.android.settings.search;
 
-import android.content.res.XmlResourceParser;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
+import android.content.res.XmlResourceParser;
 import android.util.AttributeSet;
 import android.util.Xml;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.R;
+import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -32,8 +34,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.xmlpull.v1.XmlPullParser;
-
-import static com.google.common.truth.Truth.assertThat;
 
 /**
  * These tests use a series of preferences that have specific attributes which are sometimes
@@ -94,26 +94,21 @@ public class XmlParserUtilTest {
     }
 
     @Test
-    public void testDataSummaryOnValid_ReturnsPreferenceSummaryOn() {
-        XmlResourceParser parser = getChildByType(R.xml.application_settings, "CheckBoxPreference");
+    @Config(qualifiers = "mcc999")
+    public void testDataSummaryOnOffValid_ReturnsPreferenceSummaryOnOff() {
+        XmlResourceParser parser = getChildByType(R.xml.display_settings, "CheckBoxPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String summary = XmlParserUtils.getDataSummaryOn(mContext, attrs);
-        String expSummary = mContext.getString(R.string.advanced_settings_summary);
-        assertThat(summary).isEqualTo(expSummary);
+
+        assertThat(XmlParserUtils.getDataSummaryOn(mContext, attrs))
+                .isEqualTo("summary_on");
+        assertThat(XmlParserUtils.getDataSummaryOff(mContext, attrs))
+                .isEqualTo("summary_off");
     }
 
     @Test
-    public void testDataSummaryOffValid_ReturnsPreferenceSummaryOff() {
-        XmlResourceParser parser = getChildByType(R.xml.application_settings, "CheckBoxPreference");
-        final AttributeSet attrs = Xml.asAttributeSet(parser);
-        String summary = XmlParserUtils.getDataSummaryOff(mContext, attrs);
-        String expSummary = mContext.getString(R.string.advanced_settings_summary);
-        assertThat(summary).isEqualTo(expSummary);
-    }
-
-    @Test
+    @Config(qualifiers = "mcc999")
     public void testDataEntriesValid_ReturnsPreferenceEntries() {
-        XmlResourceParser parser = getChildByType(R.xml.application_settings, "ListPreference");
+        XmlResourceParser parser = getChildByType(R.xml.display_settings, "ListPreference");
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String entries = XmlParserUtils.getDataEntries(mContext, attrs);
         String[] expEntries = mContext.getResources()
@@ -124,7 +119,6 @@ public class XmlParserUtilTest {
     }
 
     // Null checks
-
     @Test
     public void testDataKeyInvalid_ReturnsNull() {
         XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
@@ -185,7 +179,7 @@ public class XmlParserUtilTest {
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && type != XmlPullParser.START_TAG) {
             }
-            while(parser.getName() != xmlType) {
+            while (parser.getName() != xmlType) {
                 parser.next();
             }
         } catch (Exception e) {

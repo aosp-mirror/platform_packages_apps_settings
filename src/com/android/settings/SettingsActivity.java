@@ -53,6 +53,7 @@ import android.widget.Toolbar;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -594,11 +595,10 @@ public class SettingsActivity extends SettingsDrawerActivity
         String intentClass = intent.getComponent().getClassName();
         if (intentClass.equals(getClass().getName())) return null;
 
-        if ("com.android.settings.ManageApplications".equals(intentClass)
-                || "com.android.settings.RunningServices".equals(intentClass)
+        if ("com.android.settings.RunningServices".equals(intentClass)
                 || "com.android.settings.applications.StorageUse".equals(intentClass)) {
             // Old names of manage apps.
-            intentClass = com.android.settings.applications.ManageApplications.class.getName();
+            intentClass = ManageApplications.class.getName();
         }
 
         return intentClass;

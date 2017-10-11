@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.manageapplications;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.manageapplications;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
 
 import android.content.pm.ApplicationInfo;
 import android.support.test.filters.SmallTest;
@@ -23,15 +26,13 @@ import android.support.test.runner.AndroidJUnit4;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
-
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
-import java.lang.reflect.Field;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
+import java.lang.reflect.Field;
 
 @SmallTest
 @RunWith(AndroidJUnit4.class)
@@ -101,10 +102,10 @@ public class ManageApplicationsUnitTest {
         field.set(AppUtils.class, (InstantAppDataProvider) (i -> true));
 
         AppFilter filter =
-            ManageApplications.getCompositeFilter(
-                ManageApplications.LIST_TYPE_STORAGE,
-                ManageApplications.STORAGE_TYPE_MUSIC,
-                "uuid");
+                ManageApplications.getCompositeFilter(
+                        ManageApplications.LIST_TYPE_STORAGE,
+                        ManageApplications.STORAGE_TYPE_MUSIC,
+                        "uuid");
         AppFilter composedFilter = new CompoundFilter(ApplicationsState.FILTER_INSTANT, filter);
 
         final ApplicationInfo info = new ApplicationInfo();

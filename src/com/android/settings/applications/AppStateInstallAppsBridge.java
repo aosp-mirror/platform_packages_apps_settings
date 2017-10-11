@@ -135,7 +135,7 @@ public class AppStateInstallAppsBridge extends AppStateBaseBridge {
         }
     }
 
-    static final AppFilter FILTER_APP_SOURCES = new AppFilter() {
+    public static final AppFilter FILTER_APP_SOURCES = new AppFilter() {
 
         @Override
         public void init() {

@@ -45,7 +45,7 @@ import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DrawOverlayDetails;
 import com.android.settings.applications.ExternalSourcesDetails;
 import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.PictureInPictureDetails;

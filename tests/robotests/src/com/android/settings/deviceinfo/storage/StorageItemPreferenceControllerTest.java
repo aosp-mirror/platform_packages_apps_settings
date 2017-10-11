@@ -16,8 +16,8 @@
 package com.android.settings.deviceinfo.storage;
 
 
-import static com.android.settings.applications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.applications.ManageApplications.EXTRA_WORK_ONLY;
+import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
+import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
@@ -45,7 +45,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
