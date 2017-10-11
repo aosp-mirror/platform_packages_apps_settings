@@ -254,7 +254,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     private String mCurrentPkgName;
     private int mCurrentUid;
-    private boolean mFinishAfterDialog;
 
     private Menu mOptionsMenu;
 
@@ -590,11 +589,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
             } else if (mListType == LIST_TYPE_HIGH_POWER || mListType == LIST_TYPE_OVERLAY
                     || mListType == LIST_TYPE_WRITE_SETTINGS) {
-                if (mFinishAfterDialog) {
-                    getActivity().onBackPressed();
-                } else {
-                    mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
-                }
+                mApplications.mExtraInfoBridge.forceUpdate(mCurrentPkgName, mCurrentUid);
             } else {
                 mApplicationsState.requestSize(mCurrentPkgName, UserHandle.getUserId(mCurrentUid));
             }
@@ -614,8 +609,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
                 break;
             case LIST_TYPE_HIGH_POWER:
-                HighPowerDetail.show(this, mCurrentPkgName, INSTALLED_APP_DETAILS,
-                        mFinishAfterDialog);
+                HighPowerDetail.show(this, mCurrentPkgName, INSTALLED_APP_DETAILS);
                 break;
             case LIST_TYPE_OVERLAY:
                 startAppInfoFragment(DrawOverlayDetails.class, R.string.overlay_settings);
@@ -862,7 +856,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private CharSequence getFilterString(int filter) {
             return mManageApplications.getString(FILTER_LABELS[filter]);
         }
-
     }
 
     /*
@@ -877,9 +870,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     static class ApplicationsAdapter extends BaseAdapter implements Filterable,
             ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
             AbsListView.RecyclerListener, SectionIndexer {
-
-        // how long to wait for app list to populate without showing the loading container
-        private static final long DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS = 100L;
 
         private static final SectionInfo[] EMPTY_SECTIONS = new SectionInfo[0];
 
@@ -1089,7 +1079,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 }
             });
         }
-
 
         static private boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
             if (info1 == null || info2 == null) {
