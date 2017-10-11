@@ -28,11 +28,13 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
+
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.NetworkPolicyEditor;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,10 +45,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageSummaryTest {
-    @Mock private ConnectivityManager mManager;
+    @Mock
+    private ConnectivityManager mManager;
     private Context mContext;
 
     /**
@@ -77,6 +82,21 @@ public class DataUsageSummaryTest {
         dataUsageSummary.updateNetworkRestrictionSummary(preference);
 
         verify(preference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.network_restrictions_summary, 0, 0));
+                R.plurals.network_restrictions_summary, 0, 0));
+    }
+
+    @Test
+    @Config(shadows = {
+            SettingsShadowResources.class,
+            SettingsShadowResources.SettingsShadowTheme.class
+    })
+    public void formatUsage_shouldLookLikeFormatFileSize() {
+        SettingsShadowResources.overrideResource(com.android.internal.R.string.fileSizeSuffix,
+                "%1$s %2$s");
+        final long usage = 2147483648L; // 2GB
+        final String formattedUsage =
+                DataUsageSummary.formatUsage(mContext, "^1", usage).toString();
+        final String formattedAsFileSize = Formatter.formatFileSize(mContext, usage);
+        assertThat(formattedUsage).isEqualTo(formattedAsFileSize);
     }
 }
