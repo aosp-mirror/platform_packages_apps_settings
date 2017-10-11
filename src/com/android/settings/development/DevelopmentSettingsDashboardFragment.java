@@ -17,6 +17,10 @@
 package com.android.settings.development;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothA2dp;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothCodecStatus;
+import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -56,10 +60,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     private static final String TAG = "DevSettingsDashboard";
 
+    private final Object mBluetoothA2dpLock = new Object();
+
     private boolean mIsAvailable = true;
     private SwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mSwitchBarController;
     private List<AbstractPreferenceController> mPreferenceControllers = new ArrayList<>();
+    private BluetoothA2dp mBluetoothA2dp;
 
     private final BroadcastReceiver mEnableAdbReceiver = new BroadcastReceiver() {
         @Override
@@ -71,6 +78,56 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             }
         }
     };
+
+    private final BroadcastReceiver mBluetoothA2dpReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "mBluetoothA2dpReceiver.onReceive intent=" + intent);
+            String action = intent.getAction();
+
+            if (BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED.equals(action)) {
+                BluetoothCodecStatus codecStatus = intent.getParcelableExtra(
+                        BluetoothCodecStatus.EXTRA_CODEC_STATUS);
+                Log.d(TAG, "Received BluetoothCodecStatus=" + codecStatus);
+                for (AbstractPreferenceController controller : mPreferenceControllers) {
+                    if (controller instanceof BluetoothServiceConnectionListener) {
+                        ((BluetoothServiceConnectionListener) controller).onBluetoothCodecUpdated();
+                    }
+                }
+            }
+        }
+    };
+
+
+    private final BluetoothProfile.ServiceListener mBluetoothA2dpServiceListener =
+            new BluetoothProfile.ServiceListener() {
+                @Override
+                public void onServiceConnected(int profile,
+                        BluetoothProfile proxy) {
+                    synchronized (mBluetoothA2dpLock) {
+                        mBluetoothA2dp = (BluetoothA2dp) proxy;
+                    }
+                    for (AbstractPreferenceController controller : mPreferenceControllers) {
+                        if (controller instanceof BluetoothServiceConnectionListener) {
+                            ((BluetoothServiceConnectionListener) controller)
+                                    .onBluetoothServiceConnected(mBluetoothA2dp);
+                        }
+                    }
+                }
+
+                @Override
+                public void onServiceDisconnected(int profile) {
+                    synchronized (mBluetoothA2dpLock) {
+                        mBluetoothA2dp = null;
+                    }
+                    for (AbstractPreferenceController controller : mPreferenceControllers) {
+                        if (controller instanceof BluetoothServiceConnectionListener) {
+                            ((BluetoothServiceConnectionListener) controller)
+                                    .onBluetoothServiceDisconnected();
+                        }
+                    }
+                }
+            };
 
     public DevelopmentSettingsDashboardFragment() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -103,6 +160,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         registerReceivers();
+
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.getProfileProxy(getActivity(), mBluetoothA2dpServiceListener,
+                    BluetoothProfile.A2DP);
+        }
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -110,6 +173,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     public void onDestroyView() {
         super.onDestroyView();
         unregisterReceivers();
+
+        final BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter != null) {
+            adapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);
+            mBluetoothA2dp = null;
+        }
     }
 
     @Override
@@ -229,7 +298,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */);
+                this /* devOptionsDashboardFragment */, mBluetoothA2dpLock);
         return mPreferenceControllers;
     }
 
@@ -237,10 +306,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(mEnableAdbReceiver, new IntentFilter(
                         AdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
+
+        final IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothA2dp.ACTION_CODEC_CONFIG_CHANGED);
+        getActivity().registerReceiver(mBluetoothA2dpReceiver, filter);
     }
 
     private void unregisterReceivers() {
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mEnableAdbReceiver);
+        getActivity().unregisterReceiver(mBluetoothA2dpReceiver);
     }
 
     void onEnableDevelopmentOptionsConfirmed() {
@@ -258,7 +332,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment) {
+            Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
+            Object bluetoothA2dpLock) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
@@ -301,7 +376,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         // bluetooth audio codec
-        // bluetooth audio sample rate
+        controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
+                bluetoothA2dpLock));
         // bluetooth audio bits per sample
         // bluetooth audio channel mode
         // bluetooth audio ldac codec: playback quality
@@ -368,7 +444,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* activity */,
-                            null /* lifecycle */, null /* devOptionsDashboardFragment */);
+                            null /* lifecycle */, null /* devOptionsDashboardFragment */,
+                            null /* bluetoothA2dpLock */);
                 }
             };
 }
