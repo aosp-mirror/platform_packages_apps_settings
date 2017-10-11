@@ -485,7 +485,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             preference.setKey(componentName.flattenToString());
 
             preference.setTitle(title);
-            preference.setIcon(icon);
+            Utils.setSafeIcon(preference, icon);
             final boolean serviceEnabled = accessibilityEnabled
                     && enabledServices.contains(componentName);
             final String serviceState = serviceEnabled ?

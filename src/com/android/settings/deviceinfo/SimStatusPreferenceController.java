@@ -14,21 +14,32 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.os.UserManager;
 
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.AbstractLogdSizePreferenceController;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-/**
- * deprecated in favor of {@link LogdSizePreferenceControllerV2}
- */
-@Deprecated
-public class LogdSizePreferenceController extends AbstractLogdSizePreferenceController
+public class SimStatusPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
-    public LogdSizePreferenceController(Context context) {
+    private static final String KEY_SIM_STATUS = "sim_status";
+
+    public SimStatusPreferenceController(Context context) {
         super(context);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).isAdminUser()
+                && !Utils.isWifiOnly(mContext);
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY_SIM_STATUS;
     }
 }

@@ -177,7 +177,6 @@ public class LanguageAndInputSettings extends DashboardFragment {
                     // Duplicates in summary and details pages.
                     keys.add(KEY_TEXT_TO_SPEECH);
                     keys.add(KEY_PHYSICAL_KEYBOARD);
-
                     return keys;
                 }
             };

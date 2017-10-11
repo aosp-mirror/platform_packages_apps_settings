@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.development;
+package com.android.settings.deviceinfo;
 
 import android.content.Context;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.AbstractLogdSizePreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.deviceinfo.AbstractIpAddressPreferenceController;
 
 /**
- * deprecated in favor of {@link LogdSizePreferenceControllerV2}
+ * Concrete subclass of IP address preference controller
  */
-@Deprecated
-public class LogdSizePreferenceController extends AbstractLogdSizePreferenceController
-        implements PreferenceControllerMixin {
-
-    public LogdSizePreferenceController(Context context) {
-        super(context);
+public class IpAddressPreferenceController extends AbstractIpAddressPreferenceController implements
+        PreferenceControllerMixin {
+    public IpAddressPreferenceController(Context context, Lifecycle lifecycle) {
+        super(context, lifecycle);
     }
+
+    // This space intentionally left blank
 }

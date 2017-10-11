@@ -68,6 +68,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
+import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
@@ -1121,7 +1122,8 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 // Add saved Wi-Fi access points
                 final List<AccessPoint> accessPoints =
-                        WifiTracker.getCurrentAccessPoints(context, true, false);
+                        WifiSavedConfigUtils.getAllConfigs(context,
+                                context.getSystemService(WifiManager.class));
                 for (AccessPoint accessPoint : accessPoints) {
                     data = new SearchIndexableRaw(context);
                     data.title = accessPoint.getSsidStr();

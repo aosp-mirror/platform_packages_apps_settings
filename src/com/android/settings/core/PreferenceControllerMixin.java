@@ -15,6 +15,9 @@
  */
 package com.android.settings.core;
 
+import android.text.TextUtils;
+import android.util.Log;
+
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -26,6 +29,8 @@ import java.util.List;
  */
 public interface PreferenceControllerMixin {
 
+    String TAG = "PrefControllerMixin";
+
     /**
      * Updates non-indexable keys for search provider.
      *
@@ -34,7 +39,13 @@ public interface PreferenceControllerMixin {
     default void updateNonIndexableKeys(List<String> keys) {
         if (this instanceof AbstractPreferenceController) {
             if (!((AbstractPreferenceController) this).isAvailable()) {
-                keys.add(((AbstractPreferenceController) this).getPreferenceKey());
+                final String key = ((AbstractPreferenceController) this).getPreferenceKey();
+                if (TextUtils.isEmpty(key)) {
+                    Log.w(TAG,
+                            "Skipping updateNonIndexableKeys due to empty key " + this.toString());
+                    return;
+                }
+                keys.add(key);
             }
         }
     }

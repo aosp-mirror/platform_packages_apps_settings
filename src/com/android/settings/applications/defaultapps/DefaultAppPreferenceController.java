@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -54,7 +55,7 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
         CharSequence defaultAppLabel = getDefaultAppLabel();
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
-            preference.setIcon(getDefaultAppIcon());
+            Utils.setSafeIcon(preference, getDefaultAppIcon());
         } else {
             Log.d(TAG, "No default app");
             preference.setSummary(R.string.app_list_preference_none);
