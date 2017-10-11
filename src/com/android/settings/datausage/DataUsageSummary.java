@@ -14,22 +14,15 @@
 
 package com.android.settings.datausage;
 
-import static android.net.ConnectivityManager.TYPE_ETHERNET;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.INetworkStatsSession;
 import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
-import android.net.TrafficStats;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
@@ -46,6 +39,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
@@ -55,6 +49,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -244,13 +239,14 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         updateState();
     }
 
-    private static CharSequence formatTitle(Context context, String template, long usageLevel) {
+    @VisibleForTesting
+    static CharSequence formatUsage(Context context, String template, long usageLevel) {
         final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
         final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
         final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
 
         final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_SHORTER);
+                usageLevel, Formatter.FLAG_CALCULATE_ROUNDED);
         final SpannableString enlargedValue = new SpannableString(usedResult.value);
         enlargedValue.setSpan(new RelativeSizeSpan(LARGER_SIZE), 0, enlargedValue.length(), FLAGS);
 
@@ -263,7 +259,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         final SpannableString fullTemplate = new SpannableString(template);
         fullTemplate.setSpan(new RelativeSizeSpan(SMALLER_SIZE), 0, fullTemplate.length(), FLAGS);
         return TextUtils.expandTemplate(fullTemplate,
-                BidiFormatter.getInstance().unicodeWrap(formattedUsage));
+                BidiFormatter.getInstance().unicodeWrap(formattedUsage.toString()));
     }
 
     private void updateState() {
@@ -275,10 +271,9 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
         if (mSummaryPreference != null) {
             mSummaryPreference.setTitle(
-                    formatTitle(context, getString(mDataUsageTemplate), info.usageLevel));
-            long limit = mDataInfoController.getSummaryLimit(info);
+                    formatUsage(context, getString(mDataUsageTemplate), info.usageLevel));
+            final long limit = mDataInfoController.getSummaryLimit(info);
             mSummaryPreference.setSummary(info.period);
-
             if (limit <= 0) {
                 mSummaryPreference.setChartEnabled(false);
             } else {
