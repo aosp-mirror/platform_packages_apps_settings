@@ -16,95 +16,26 @@
 
 package com.android.settings.deviceinfo;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * Fragment for showing device hardware info, such as MAC addresses and serial numbers
  */
-public class Status extends SettingsPreferenceFragment implements Indexable {
+public class Status extends DashboardFragment {
 
-    private static final String KEY_BATTERY_STATUS = "battery_status";
-    private static final String KEY_BATTERY_LEVEL = "battery_level";
-    private static final String KEY_SIM_STATUS = "sim_status";
-    private static final String KEY_IMEI_INFO = "imei_info";
-
-    private SerialNumberPreferenceController mSerialNumberPreferenceController;
-    private UptimePreferenceController mUptimePreferenceController;
-    private Preference mBatteryStatus;
-    private Preference mBatteryLevel;
-    private BluetoothAddressPreferenceController mBluetoothAddressPreferenceController;
-    private IpAddressPreferenceController mIpAddressPreferenceController;
-    private WifiMacAddressPreferenceController mWifiMacAddressPreferenceController;
-    private ImsStatusPreferenceController mImsStatusPreferenceController;
-
-    private BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
-                mBatteryLevel.setSummary(Utils.getBatteryPercentage(intent));
-                mBatteryStatus.setSummary(Utils.getBatteryStatus(getResources(), intent));
-            }
-        }
-    };
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
-        final Context context = getContext();
-        final Lifecycle lifecycle = getLifecycle();
-        mSerialNumberPreferenceController = new SerialNumberPreferenceController(context);
-        mUptimePreferenceController = new UptimePreferenceController(context, lifecycle);
-        mBluetoothAddressPreferenceController =
-                new BluetoothAddressPreferenceController(context, lifecycle);
-        mIpAddressPreferenceController = new IpAddressPreferenceController(context, lifecycle);
-        mWifiMacAddressPreferenceController =
-                new WifiMacAddressPreferenceController(context, lifecycle);
-        mImsStatusPreferenceController = new ImsStatusPreferenceController(context, lifecycle);
-
-        addPreferencesFromResource(R.xml.device_info_status);
-        mBatteryLevel = findPreference(KEY_BATTERY_LEVEL);
-        mBatteryStatus = findPreference(KEY_BATTERY_STATUS);
-
-        final PreferenceScreen screen = getPreferenceScreen();
-
-        mSerialNumberPreferenceController.displayPreference(screen);
-        mUptimePreferenceController.displayPreference(screen);
-        mBluetoothAddressPreferenceController.displayPreference(screen);
-        mIpAddressPreferenceController.displayPreference(screen);
-        mWifiMacAddressPreferenceController.displayPreference(screen);
-        mImsStatusPreferenceController.displayPreference(screen);
-
-        // Remove SimStatus and Imei for Secondary user as it access Phone b/19165700
-        // Also remove on Wi-Fi only devices.
-        //TODO: the bug above will surface in split system user mode.
-        if (!UserManager.get(getContext()).isAdminUser()
-                || Utils.isWifiOnly(getContext())) {
-            removePreferenceFromScreen(KEY_SIM_STATUS);
-            removePreferenceFromScreen(KEY_IMEI_INFO);
-        }
-    }
+    private static final String TAG = "DeviceStatus";
 
     @Override
     public int getMetricsCategory() {
@@ -112,28 +43,33 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getContext().registerReceiver(mBatteryInfoReceiver,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        getContext().unregisterReceiver(mBatteryInfoReceiver);
+    protected int getPreferenceScreenResId() {
+        return R.xml.device_info_status;
     }
 
-    /**
-     * Removes the specified preference, if it exists.
-     * @param key the key for the Preference item
-     */
-    private void removePreferenceFromScreen(String key) {
-        Preference pref = findPreference(key);
-        if (pref != null) {
-            getPreferenceScreen().removePreference(pref);
-        }
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new SerialNumberPreferenceController(context));
+        controllers.add(new UptimePreferenceController(context, lifecycle));
+        controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
+        controllers.add(new IpAddressPreferenceController(context, lifecycle));
+        controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
+        controllers.add(new ImsStatusPreferenceController(context, lifecycle));
+        controllers.add(new SimStatusPreferenceController(context));
+        controllers.add(new ImeiInfoPreferenceController(context));
+        controllers.add(new BatteryInfoPreferenceController(context, lifecycle));
+        return controllers;
     }
 
     /**
@@ -148,6 +84,12 @@ public class Status extends SettingsPreferenceFragment implements Indexable {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.device_info_status;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };
 }
