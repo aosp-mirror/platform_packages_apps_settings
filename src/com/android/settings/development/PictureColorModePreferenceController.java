@@ -91,7 +91,7 @@ public class PictureColorModePreferenceController extends
 
     @VisibleForTesting
     boolean isWideColorGamut() {
-        return mContext.getDisplay().isWideColorGamut();
+        return mContext.getResources().getConfiguration().isScreenWideColorGamut();
     }
 
     @VisibleForTesting
