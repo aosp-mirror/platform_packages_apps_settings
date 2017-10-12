@@ -298,7 +298,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */, mBluetoothA2dpLock);
+                this /* devOptionsDashboardFragment */, mBluetoothA2dpLock,
+                new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
     }
 
@@ -333,7 +334,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
-            Object bluetoothA2dpLock) {
+            Object bluetoothA2dpLock, BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
@@ -375,10 +376,10 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
-        final BluetoothA2dpConfigStore store = new BluetoothA2dpConfigStore();
-        // bluetooth audio codec
+        //controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
+        //        bluetoothA2dpLock, bluetoothA2dpConfigStore));
         controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
-                bluetoothA2dpLock, store));
+                bluetoothA2dpLock, bluetoothA2dpConfigStore));
         // bluetooth audio bits per sample
         // bluetooth audio channel mode
         // bluetooth audio ldac codec: playback quality
@@ -446,7 +447,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         context) {
                     return buildPreferenceControllers(context, null /* activity */,
                             null /* lifecycle */, null /* devOptionsDashboardFragment */,
-                            null /* bluetoothA2dpLock */);
+                            null /* bluetoothA2dpLock */, null /* bluetoothA2dpConfigStore */);
                 }
             };
 }

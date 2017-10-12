@@ -16,53 +16,26 @@
 
 package com.android.settings.development;
 
-import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 public class BluetoothAudioSampleRatePreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin, BluetoothServiceConnectionListener, LifecycleObserver,
-        OnDestroy {
+        AbstractBluetoothA2dpPreferenceController {
 
+    private static final int DEFAULT_INDEX = 0;
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY =
             "bluetooth_select_a2dp_sample_rate";
 
-    @VisibleForTesting
-    static final int STREAMING_LABEL_ID = R.string.bluetooth_select_a2dp_codec_streaming_label;
-
-    private final String[] mListValues;
-    private final String[] mListSummaries;
-    private final Object mBluetoothA2dpLock;
-    private final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
     private ListPreference mPreference;
-    private BluetoothA2dp mBluetoothA2dp;
 
     public BluetoothAudioSampleRatePreferenceController(Context context, Lifecycle lifecycle,
             Object bluetoothA2dpLock, BluetoothA2dpConfigStore store) {
-        super(context);
-
-        mBluetoothA2dpLock = bluetoothA2dpLock;
-        mBluetoothA2dpConfigStore = store;
-        mListValues = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_values);
-        mListSummaries = context.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_summaries);
-
-        if (lifecycle != null) {
-            lifecycle.addObserver(this);
-        }
+        super(context, lifecycle, bluetoothA2dpLock, store);
     }
 
     @Override
@@ -78,80 +51,52 @@ public class BluetoothAudioSampleRatePreferenceController extends
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (mBluetoothA2dp == null) {
-            return false;
+    protected String[] getListValues() {
+        return mContext.getResources().getStringArray(
+                R.array.bluetooth_a2dp_codec_sample_rate_values);
+    }
+
+    @Override
+    protected String[] getListSummaries() {
+        return mContext.getResources().getStringArray(
+                R.array.bluetooth_a2dp_codec_sample_rate_summaries);
+    }
+
+    @Override
+    protected int getDefaultIndex() {
+        return DEFAULT_INDEX;
+    }
+
+    @Override
+    protected void writeConfigurationValues(Object newValue) {
+        final int index = mPreference.findIndexOfValue(newValue.toString());
+        int sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE; // default
+        switch (index) {
+            case 0:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE;
+                break;
+            case 1:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_44100;
+                break;
+            case 2:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_48000;
+                break;
+            case 3:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_88200;
+                break;
+            case 4:
+                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
+                break;
+            default:
+                break;
         }
-
-        final int sampleRate = mapPreferenceValueToSampleRate(newValue.toString());
-        mBluetoothA2dpConfigStore.setSampleRate(sampleRate);
-
-        // get values from shared store
-        BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
-
-        synchronized (mBluetoothA2dpLock) {
-            if (mBluetoothA2dp != null) {
-                setCodecConfigPreference(codecConfig);
-            }
-        }
-        updateState(mPreference);
-        return true;
+        mBluetoothA2dpConfigStore.setSampleRate(sampleRateValue);
     }
 
     @Override
-    public void updateState(Preference preference) {
-        if (getCodecConfig() == null || mPreference == null) {
-            return;
-        }
-
-        BluetoothCodecConfig codecConfig;
-        synchronized (mBluetoothA2dpLock) {
-            codecConfig = getCodecConfig();
-        }
-        final int sampleRate = codecConfig.getSampleRate();
-        final int index = mapSampleRateToIndex(sampleRate);
-
-        mPreference.setValue(mListValues[index]);
-        mPreference.setSummary(
-                mContext.getResources().getString(STREAMING_LABEL_ID, mListSummaries[index]));
-
-        // write value to shared store
-        mBluetoothA2dpConfigStore.setSampleRate(sampleRate);
-    }
-
-    @Override
-    public void onBluetoothServiceConnected(BluetoothA2dp bluetoothA2dp) {
-        mBluetoothA2dp = bluetoothA2dp;
-        updateState(mPreference);
-    }
-
-    @Override
-    public void onBluetoothCodecUpdated() {
-        updateState(mPreference);
-    }
-
-    @Override
-    public void onBluetoothServiceDisconnected() {
-        mBluetoothA2dp = null;
-    }
-
-    @Override
-    public void onDestroy() {
-        mBluetoothA2dp = null;
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
-    }
-
-    private int mapSampleRateToIndex(int sampleRate) {
-        int index = 0;
+    protected int getCurrentA2dpSettingIndex(BluetoothCodecConfig config) {
+        final int sampleRate = config.getSampleRate();
+        int index = DEFAULT_INDEX;
         switch (sampleRate) {
             case BluetoothCodecConfig.SAMPLE_RATE_44100:
                 index = 1;
@@ -172,45 +117,5 @@ public class BluetoothAudioSampleRatePreferenceController extends
                 break;
         }
         return index;
-    }
-
-    private int mapPreferenceValueToSampleRate(String value) {
-        final int index = mPreference.findIndexOfValue(value);
-        int sampleRateValue = 0;
-        switch (index) {
-            case 0:
-                // Reset to default
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE;
-                break;
-            case 1:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_44100;
-                break;
-            case 2:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_48000;
-                break;
-            case 3:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_88200;
-                break;
-            case 4:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
-                break;
-            default:
-                break;
-        }
-        return sampleRateValue;
-    }
-
-    @VisibleForTesting
-    void setCodecConfigPreference(BluetoothCodecConfig config) {
-        mBluetoothA2dp.setCodecConfigPreference(config);
-    }
-
-    @VisibleForTesting
-    BluetoothCodecConfig getCodecConfig() {
-        if (mBluetoothA2dp == null || mBluetoothA2dp.getCodecStatus() == null) {
-            return null;
-        }
-
-        return mBluetoothA2dp.getCodecStatus().getCodecConfig();
     }
 }
