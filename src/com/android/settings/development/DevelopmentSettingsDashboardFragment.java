@@ -389,7 +389,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new WindowAnimationScalePreferenceController(context));
         // transition animation scale
         controllers.add(new AnimatorDurationScalePreferenceController(context));
-        // simulate secondary displays
+        controllers.add(new SecondaryDisplayPreferenceController(context));
         // smallest width
         controllers.add(new ForceGpuRenderingPreferenceController(context));
         controllers.add(new GpuViewUpdatesPreferenceController(context));
