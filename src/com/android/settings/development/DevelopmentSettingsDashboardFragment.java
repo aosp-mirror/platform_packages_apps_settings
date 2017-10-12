@@ -411,6 +411,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
+        controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         return controllers;
     }
