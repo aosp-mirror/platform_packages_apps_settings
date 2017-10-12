@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 
 import com.android.settings.R;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settingslib.wrapper.PackageManagerWrapper;

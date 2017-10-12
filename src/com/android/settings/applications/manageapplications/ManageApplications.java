@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.manageapplications;
 
 import android.annotation.IdRes;
 import android.annotation.Nullable;
@@ -60,7 +60,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
@@ -72,8 +71,25 @@ import com.android.settings.Settings.UsageAccessSettingsActivity;
 import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
+import com.android.settings.applications.AppStateBaseBridge;
+import com.android.settings.applications.AppStateInstallAppsBridge;
+import com.android.settings.applications.AppStateNotificationBridge;
+import com.android.settings.applications.AppStateOverlayBridge;
+import com.android.settings.applications.AppStatePowerBridge;
+import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
+import com.android.settings.applications.AppStateWriteSettingsBridge;
+import com.android.settings.applications.AppStorageSettings;
+import com.android.settings.applications.DefaultAppSettings;
+import com.android.settings.applications.DrawOverlayDetails;
+import com.android.settings.applications.ExternalSourcesDetails;
+import com.android.settings.applications.InstalledAppCounter;
+import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.NotificationApps;
+import com.android.settings.applications.UsageAccessDetails;
+import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
@@ -299,9 +315,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (className == null) {
             className = intent.getComponent().getClassName();
         }
-        if (className.equals(AllApplicationsActivity.class.getName())) {
-            mShowSystem = true;
-        } else if (className.equals(NotificationAppListActivity.class.getName())
+        if (className.equals(NotificationAppListActivity.class.getName())
                 || this instanceof NotificationApps) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
@@ -353,7 +367,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         mResetAppsHelper = new ResetAppsHelper(getActivity());
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

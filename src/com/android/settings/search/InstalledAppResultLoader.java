@@ -33,7 +33,7 @@ import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.ManageApplications;
+import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.wrapper.PackageManagerWrapper;

@@ -11,16 +11,17 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.manageapplications;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.InsetDrawable;
 import android.os.UserHandle;
+import android.provider.DocumentsContract;
 import android.support.annotation.WorkerThread;
 import android.text.format.Formatter;
 import android.util.Log;
@@ -31,20 +32,22 @@ import com.android.settingslib.applications.StorageStatsSource;
 
 import java.io.IOException;
 
-/** PhotosViewHolderController controls an Audio/Music file view in the ManageApplications view. */
-public class PhotosViewHolderController implements FileViewHolderController {
-    private static final String TAG = "PhotosViewHolderController";
+/**
+ * MusicViewHolderController controls an Audio/Music file view in the ManageApplications view.
+ */
+public class MusicViewHolderController implements FileViewHolderController {
+    private static final String TAG = "MusicViewHolderCtrl";
 
-    private static final String IMAGE_MIME_TYPE = "image/*";
+    private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
     private static final int INSET_SIZE = 24; // dp
 
     private Context mContext;
     private StorageStatsSource mSource;
     private String mVolumeUuid;
-    private long mFilesSize;
+    private long mMusicSize;
     private UserHandle mUser;
 
-    public PhotosViewHolderController(
+    public MusicViewHolderController(
             Context context, StorageStatsSource source, String volumeUuid, UserHandle user) {
         mContext = context;
         mSource = source;
@@ -56,11 +59,9 @@ public class PhotosViewHolderController implements FileViewHolderController {
     @WorkerThread
     public void queryStats() {
         try {
-            StorageStatsSource.ExternalStorageStats stats =
-                    mSource.getExternalStorageStats(mVolumeUuid, mUser);
-            mFilesSize = stats.imageBytes + stats.videoBytes;
+            mMusicSize = mSource.getExternalStorageStats(mVolumeUuid, mUser).audioBytes;
         } catch (IOException e) {
-            mFilesSize = 0;
+            mMusicSize = 0;
             Log.w(TAG, e);
         }
     }
@@ -73,18 +74,19 @@ public class PhotosViewHolderController implements FileViewHolderController {
     @Override
     public void setupView(AppViewHolder holder) {
         holder.appIcon.setImageDrawable(
-                new InsetDrawable(mContext.getDrawable(R.drawable.ic_photo_library), INSET_SIZE));
-        holder.appName.setText(mContext.getText(R.string.storage_detail_images));
-        holder.summary.setText(Formatter.formatFileSize(mContext, mFilesSize));
+                new InsetDrawable(mContext.getDrawable(R.drawable.ic_headset_24dp), INSET_SIZE));
+        holder.appName.setText(mContext.getText(R.string.audio_files_title));
+        holder.summary.setText(Formatter.formatFileSize(mContext, mMusicSize));
     }
 
     @Override
     public void onClick(Fragment fragment) {
-        Intent intent = new Intent();
-        intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        intent.setType(IMAGE_MIME_TYPE);
-        intent.putExtra(Intent.EXTRA_FROM_STORAGE, true);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(
+                DocumentsContract.buildRootUri(AUTHORITY_MEDIA, "audio_root"),
+                DocumentsContract.Root.MIME_TYPE_ITEM);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.putExtra(Intent.EXTRA_USER_ID, mUser);
         Utils.launchIntent(fragment, intent);
     }
 }
