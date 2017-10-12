@@ -18,8 +18,6 @@ package com.android.settings.development;
 
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -31,23 +29,14 @@ public class BluetoothAudioSampleRatePreferenceController extends
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY =
             "bluetooth_select_a2dp_sample_rate";
 
-    private ListPreference mPreference;
-
     public BluetoothAudioSampleRatePreferenceController(Context context, Lifecycle lifecycle,
-            Object bluetoothA2dpLock, BluetoothA2dpConfigStore store) {
-        super(context, lifecycle, bluetoothA2dpLock, store);
+            BluetoothA2dpConfigStore store) {
+        super(context, lifecycle, store);
     }
 
     @Override
     public String getPreferenceKey() {
         return BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override

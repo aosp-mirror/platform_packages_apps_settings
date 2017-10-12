@@ -74,7 +74,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycle = new Lifecycle();
         mController = spy(new AbstractBluetoothA2dpPreferenceControllerImpl(mContext, mLifecycle,
-                new Object(), mBluetoothA2dpConfigStore));
+                mBluetoothA2dpConfigStore));
         doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig();
         doNothing().when(mController).setCodecConfigPreference(any());
         when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mBluetoothCodecConfig);
@@ -138,8 +138,8 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
             AbstractBluetoothA2dpPreferenceController {
 
         public AbstractBluetoothA2dpPreferenceControllerImpl(Context context,
-                Lifecycle lifecycle, Object bluetoothA2dpLock, BluetoothA2dpConfigStore store) {
-            super(context, lifecycle, bluetoothA2dpLock, store);
+                Lifecycle lifecycle, BluetoothA2dpConfigStore store) {
+            super(context, lifecycle, store);
         }
 
         @Override
