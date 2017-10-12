@@ -35,12 +35,14 @@ public interface FileViewHolderController {
 
     /**
      * Initializes the view within an AppViewHolder.
+     *
      * @param holder The holder to use to initialize.
      */
-    void setupView(AppViewHolder holder);
+    void setupView(ApplicationViewHolder holder);
 
     /**
      * Handles the behavior when the view is clicked.
+     *
      * @param fragment Fragment where the click originated.
      */
     void onClick(Fragment fragment);

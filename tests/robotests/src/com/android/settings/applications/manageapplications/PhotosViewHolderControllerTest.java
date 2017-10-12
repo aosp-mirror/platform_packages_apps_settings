@@ -27,11 +27,12 @@ import android.content.Intent;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,14 +49,14 @@ import org.robolectric.annotation.Config;
 public class PhotosViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
-
-    @Mock private StorageVolumeProvider mSvp;
     @Mock private StorageStatsSource mSource;
 
     private Context mContext;
     private PhotosViewHolderController mController;
     private VolumeInfo mVolume;
-    private AppViewHolder mHolder;
+    private View mView;
+    private ApplicationViewHolder mHolder;
+
 
     @Before
     public void setUp() throws Exception {
@@ -66,15 +67,16 @@ public class PhotosViewHolderControllerTest {
                 new PhotosViewHolderController(
                         mContext, mSource, mVolume.fsUuid, new UserHandle(0));
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        mHolder = AppViewHolder.createOrRecycle(inflater, null);
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        mView = ApplicationViewHolder.newView(inflater, new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(mView);
     }
 
     @Test
     public void storageShouldBeZeroBytesIfQueriedBeforeStorageQueryFinishes() {
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00 B");
+        assertThat(mHolder.mSummary.getText().toString()).isEqualTo("0.00 B");
     }
 
     @Test
@@ -85,7 +87,7 @@ public class PhotosViewHolderControllerTest {
         mController.queryStats();
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("11.00 B");
+        assertThat(mHolder.mSummary.getText().toString()).isEqualTo("11.00 B");
     }
 
     @Test

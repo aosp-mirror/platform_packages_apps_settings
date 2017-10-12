@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications.manageapplications;
+package com.android.settings.development;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,26 +54,6 @@ public class AppViewHolder {
             // Get the ViewHolder back to get fast access to the TextView
             // and the ImageView.
             return (AppViewHolder)convertView.getTag();
-        }
-    }
-
-    void updateSizeText(CharSequence invalidSizeStr, int whichSize) {
-        if (ManageApplications.DEBUG) Log.i(ManageApplications.TAG, "updateSizeText of "
-                + entry.label + " " + entry + ": " + entry.sizeStr);
-        if (entry.sizeStr != null) {
-            switch (whichSize) {
-                case ManageApplications.SIZE_INTERNAL:
-                    summary.setText(entry.internalSizeStr);
-                    break;
-                case ManageApplications.SIZE_EXTERNAL:
-                    summary.setText(entry.externalSizeStr);
-                    break;
-                default:
-                    summary.setText(entry.sizeStr);
-                    break;
-            }
-        } else if (entry.size == ApplicationsState.SIZE_INVALID) {
-            summary.setText(invalidSizeStr);
         }
     }
 }
