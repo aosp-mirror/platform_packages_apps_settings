@@ -28,14 +28,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
-import com.android.settings.utils.ManagedServiceSettings;
-import com.android.settings.utils.ZenServiceListing;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -45,25 +41,27 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.utils.ManagedServiceSettings;
+import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.TwoTargetPreference;
 
-import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
 
-    public static final String KEY_VISUAL_SETTINGS = "visual_interruptions_settings";
-
-    private static final String KEY_PRIORITY_SETTINGS = "priority_settings";
-    private static final String KEY_AUTOMATIC_RULES = "automatic_rules";
+    public static final String KEY_VISUAL_SETTINGS = "zen_mode_visual_interruptions_settings";
+    private static final String KEY_BEHAVIOR_SETTINGS = "zen_mode_behavior_settings";
+    private static final String KEY_AUTOMATIC_RULES = "zen_mode_automatic_rules";
 
     static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
 
     private PreferenceCategory mAutomaticRules;
-    private Preference mPrioritySettings;
+    private Preference mBehaviorSettings;
     private Preference mVisualSettings;
     private Policy mPolicy;
     private SummaryBuilder mSummaryBuilder;
@@ -78,7 +76,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         final PreferenceScreen root = getPreferenceScreen();
 
         mAutomaticRules = (PreferenceCategory) root.findPreference(KEY_AUTOMATIC_RULES);
-        mPrioritySettings = root.findPreference(KEY_PRIORITY_SETTINGS);
+        mBehaviorSettings = root.findPreference(KEY_BEHAVIOR_SETTINGS);
         mVisualSettings = root.findPreference(KEY_VISUAL_SETTINGS);
         mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
         mSummaryBuilder = new SummaryBuilder(getContext());
@@ -113,13 +111,13 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     private void updateControls() {
-        updatePrioritySettingsSummary();
+        updateBehaviorSettingsSummary();
         updateVisualSettingsSummary();
         updateAutomaticRules();
     }
 
-    private void updatePrioritySettingsSummary() {
-        mPrioritySettings.setSummary(mSummaryBuilder.getPrioritySettingSummary(mPolicy));
+    private void updateBehaviorSettingsSummary() {
+        mBehaviorSettings.setSummary(mSummaryBuilder.getBehaviorSettingSummary(mPolicy, mZenMode));
     }
 
     private void updateVisualSettingsSummary() {
@@ -352,29 +350,44 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             mContext = context;
         }
 
-        String getPrioritySettingSummary(Policy policy) {
-            String s = mContext.getString(R.string.zen_mode_alarms);
-            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_EVENTS),
-                    R.string.zen_mode_events);
-            s = prepend(s, isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REMINDERS),
-                R.string.zen_mode_reminders);
-            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MESSAGES)) {
-                if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
-                    s = append(s, true, R.string.zen_mode_all_messages);
+        private static final int[] ALL_PRIORITY_CATEGORIES = {
+                Policy.PRIORITY_CATEGORY_ALARMS,
+                Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER,
+                Policy.PRIORITY_CATEGORY_REMINDERS,
+                Policy.PRIORITY_CATEGORY_EVENTS,
+                Policy.PRIORITY_CATEGORY_MESSAGES,
+                Policy.PRIORITY_CATEGORY_CALLS,
+                Policy.PRIORITY_CATEGORY_REPEAT_CALLERS,
+        };
+
+        String getBehaviorSettingSummary(Policy policy, int zenMode) {
+            List<String> enabledCategories;
+
+            if (zenMode == Settings.Global.ZEN_MODE_NO_INTERRUPTIONS) {
+                return mContext.getString(R.string.zen_mode_behavior_total_silence);
+            } else if (zenMode == Settings.Global.ZEN_MODE_ALARMS) {
+                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
+            } else {
+                enabledCategories = getEnabledCategories(policy);
+            }
+
+            int numCategories = enabledCategories.size();
+            if (numCategories == 0) {
+                return mContext.getString(R.string.zen_mode_behavior_no_sound);
+            }
+
+            String s = enabledCategories.get(0).toLowerCase();
+            for (int i = 1; i < numCategories; i++) {
+                if (i == numCategories - 1) {
+                    s = mContext.getString(R.string.join_many_items_last,
+                            s, enabledCategories.get(i).toLowerCase());
                 } else {
-                    s = append(s, true, R.string.zen_mode_selected_messages);
+                    s = mContext.getString(R.string.join_many_items_middle,
+                            s, enabledCategories.get(i).toLowerCase());
                 }
             }
-            if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_CALLS)) {
-                if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
-                    s = append(s, true, R.string.zen_mode_all_callers);
-                } else {
-                    s = append(s, true, R.string.zen_mode_selected_callers);
-                }
-            } else if (isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_REPEAT_CALLERS)) {
-                s = append(s, true, R.string.zen_mode_repeat_callers);
-            }
-            return s;
+
+            return mContext.getString(R.string.zen_mode_behavior_no_sound_except, s);
         }
 
         String getVisualSettingSummary(Policy policy) {
@@ -413,22 +426,45 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             return count;
         }
 
-        @VisibleForTesting
-        String append(String s, boolean condition, int resId) {
-            if (condition) {
-                return mContext.getString(
-                    R.string.join_many_items_middle, s, mContext.getString(resId));
+        private List<String> getEnabledCategories(Policy policy) {
+            List<String> enabledCategories = new ArrayList<>();
+            for (int category : ALL_PRIORITY_CATEGORIES) {
+                if (isCategoryEnabled(policy, category)) {
+                    if (category == Policy.PRIORITY_CATEGORY_ALARMS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_alarms));
+                    } else if (category == Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER) {
+                        enabledCategories.add(mContext.getString(
+                                R.string.zen_mode_media_system_other));
+                    } else if (category == Policy.PRIORITY_CATEGORY_REMINDERS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_reminders));
+                    } else if (category == Policy.PRIORITY_CATEGORY_EVENTS) {
+                        enabledCategories.add(mContext.getString(R.string.zen_mode_events));
+                    } else if (category == Policy.PRIORITY_CATEGORY_MESSAGES) {
+                        if (policy.priorityMessageSenders == Policy.PRIORITY_SENDERS_ANY) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_all_messages));
+                        } else {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_selected_messages));
+                        }
+                    } else if (category == Policy.PRIORITY_CATEGORY_CALLS) {
+                        if (policy.priorityCallSenders == Policy.PRIORITY_SENDERS_ANY) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_all_callers));
+                        } else {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_selected_callers));
+                        }
+                    } else if (category == Policy.PRIORITY_CATEGORY_REPEAT_CALLERS) {
+                        if (!enabledCategories.contains(mContext.getString(
+                                R.string.zen_mode_all_callers))) {
+                            enabledCategories.add(mContext.getString(
+                                    R.string.zen_mode_repeat_callers));
+                        }
+                    }
+                }
             }
-            return s;
-        }
-
-        @VisibleForTesting
-        String prepend(String s, boolean condition, int resId) {
-            if (condition) {
-                return mContext.getString(
-                        R.string.join_many_items_middle, mContext.getString(resId), s);
-            }
-            return s;
+            return enabledCategories;
         }
 
         private boolean isCategoryEnabled(Policy policy, int categoryType) {

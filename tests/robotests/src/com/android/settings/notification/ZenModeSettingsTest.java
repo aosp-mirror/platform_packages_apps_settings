@@ -16,22 +16,23 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static junit.framework.Assert.assertTrue;
+
 import android.app.NotificationManager;
 import android.content.Context;
+import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static junit.framework.Assert.assertTrue;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -47,54 +48,28 @@ public class ZenModeSettingsTest {
     }
 
     @Test
-    public void testAppend_conditionFalse_shouldNotAppend() {
-        String original = "test";
-
-        final String result = mBuilder.append(original, false, R.string.zen_mode_alarms);
-
-        assertThat(result).isEqualTo(original);
-    }
-
-    @Test
-    public void testAppend_conditionTrue_shouldAppend() {
-        String original = "test";
-        String alarm = mContext.getString(R.string.zen_mode_alarms);
-
-        final String result = mBuilder.append(original, true, R.string.zen_mode_alarms);
-
-        assertThat(result).contains(alarm);
-        assertThat(result).contains(original);
-        assertTrue(result.indexOf(original) < result.indexOf(alarm));
-    }
-
-    @Test
-    public void testPrepend() {
-        String original = mContext.getString(R.string.zen_mode_alarms);
-        String reminders = mContext.getString(R.string.zen_mode_reminders);
-
-        final String result = mBuilder.prepend(original, true, R.string.zen_mode_reminders);
-        assertThat(result).contains(original);
-        assertThat(result).contains(reminders);
-        assertTrue(result.indexOf(reminders) < result.indexOf(original));
-    }
-
-    @Test
-    public void testGetPrioritySettingSummary_sameOrderAsTargetPage() {
+    public void testGetBehaviorSettingSummary_sameOrderAsTargetPage() {
         NotificationManager.Policy policy = new NotificationManager.Policy(
                 NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER,
                 0, 0);
-        final String result = mBuilder.getPrioritySettingSummary(policy);
+        final String result = mBuilder.getBehaviorSettingSummary(policy,
+                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
-        String alarms = mContext.getString(R.string.zen_mode_alarms);
-        String reminders = mContext.getString(R.string.zen_mode_reminders);
-        String events = mContext.getString(R.string.zen_mode_events);
+        String alarms = mContext.getString(R.string.zen_mode_alarms).toLowerCase();
+        String reminders = mContext.getString(R.string.zen_mode_reminders).toLowerCase();
+        String events = mContext.getString(R.string.zen_mode_events).toLowerCase();
+        String media = mContext.getString(R.string.zen_mode_media_system_other).toLowerCase();
 
         assertThat(result).contains(alarms);
         assertThat(result).contains(reminders);
         assertThat(result).contains(events);
-        assertTrue(result.indexOf(reminders) < result.indexOf(events) &&
-                result.indexOf(events) < result.indexOf(alarms));
+        assertThat(result).contains(media);
+        assertTrue(result.indexOf(alarms) < result.indexOf(media)
+                && result.indexOf(media) < result.indexOf(reminders)
+                && result.indexOf(reminders) < result.indexOf(events));
     }
 
 }

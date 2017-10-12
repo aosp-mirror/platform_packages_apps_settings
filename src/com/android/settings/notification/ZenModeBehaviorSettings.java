@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.DropDownPreference;
@@ -29,14 +30,15 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.search.Indexable;
 
-public class ZenModePrioritySettings extends ZenModeSettingsBase {
-    private static final String KEY_REMINDERS = "reminders";
-    private static final String KEY_EVENTS = "events";
-    private static final String KEY_MESSAGES = "messages";
-    private static final String KEY_CALLS = "calls";
-    private static final String KEY_REPEAT_CALLERS = "repeat_callers";
+public class ZenModeBehaviorSettings extends ZenModeSettingsBase {
+    private static final String KEY_ALARMS = "zen_mode_alarms";
+    private static final String KEY_MEDIA = "zen_mode_media";
+    private static final String KEY_REMINDERS = "zen_mode_reminders";
+    private static final String KEY_EVENTS = "zen_mode_events";
+    private static final String KEY_MESSAGES = "zen_mode_messages";
+    private static final String KEY_CALLS = "zen_mode_calls";
+    private static final String KEY_REPEAT_CALLERS = "zen_mode_repeat_callers";
 
     private static final int SOURCE_NONE = -1;
 
@@ -46,13 +48,15 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase {
     private DropDownPreference mMessages;
     private DropDownPreference mCalls;
     private SwitchPreference mRepeatCallers;
+    private SwitchPreference mAlarms;
+    private SwitchPreference mMediaSystemOther;
 
     private Policy mPolicy;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.zen_mode_priority_settings);
+        addPreferencesFromResource(R.xml.zen_mode_behavior_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
         mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
@@ -141,9 +145,40 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase {
                         val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowRepeatCallers=" + val);
                 int priorityCategories = getNewPriorityCategories(val,
-                        NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS);
+                        Policy.PRIORITY_CATEGORY_REPEAT_CALLERS);
                 savePolicy(priorityCategories, mPolicy.priorityCallSenders,
                         mPolicy.priorityMessageSenders, mPolicy.suppressedVisualEffects);
+                return true;
+            }
+        });
+
+        mAlarms = (SwitchPreference) root.findPreference(KEY_ALARMS);
+        mAlarms.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_ALARMS, val);
+                if (DEBUG) Log.d(TAG, "onPrefChange allowAlarms=" + val);
+                savePolicy(getNewPriorityCategories(val, Policy.PRIORITY_CATEGORY_ALARMS),
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        mPolicy.suppressedVisualEffects);
+                return true;
+            }
+        });
+
+        mMediaSystemOther = (SwitchPreference) root.findPreference(KEY_MEDIA);
+        mMediaSystemOther.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean val = (Boolean) newValue;
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_MEDIA, val);
+                if (DEBUG) Log.d(TAG, "onPrefChange allowMediaSystemOther=" + val);
+                savePolicy(getNewPriorityCategories(val,
+                        Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER),
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        mPolicy.suppressedVisualEffects);
                 return true;
             }
         });
@@ -153,7 +188,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase {
 
     @Override
     protected void onZenModeChanged() {
-        // don't care
+        updateControls();
     }
 
     @Override
@@ -162,8 +197,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase {
         updateControls();
     }
 
-    private void updateControls() {
-        mDisableListeners = true;
+    private void updateControlsPolicy() {
         if (mCalls != null) {
             mCalls.setValue(Integer.toString(
                     isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_CALLS)
@@ -172,13 +206,60 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase {
         mMessages.setValue(Integer.toString(
                 isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_MESSAGES)
                         ? mPolicy.priorityMessageSenders : SOURCE_NONE));
+        mAlarms.setChecked(isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_ALARMS));
+        mMediaSystemOther.setChecked(isPriorityCategoryEnabled(
+                Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER));
         mReminders.setChecked(isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_REMINDERS));
         mEvents.setChecked(isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_EVENTS));
         mRepeatCallers.setChecked(
                 isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS));
         mRepeatCallers.setVisible(!isPriorityCategoryEnabled(Policy.PRIORITY_CATEGORY_CALLS)
                 || mPolicy.priorityCallSenders != Policy.PRIORITY_SENDERS_ANY);
+
+    }
+
+    private void updateControls() {
+        mDisableListeners = true;
+        switch(mZenMode) {
+            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
+                toggleBasicNoInterruptions();
+                mAlarms.setChecked(false);
+                mMediaSystemOther.setChecked(false);
+                setTogglesEnabled(false);
+                break;
+            case Settings.Global.ZEN_MODE_ALARMS:
+                toggleBasicNoInterruptions();
+                mAlarms.setChecked(true);
+                mMediaSystemOther.setChecked(true);
+                setTogglesEnabled(false);
+                break;
+            default:
+                updateControlsPolicy();
+                setTogglesEnabled(true);
+        }
         mDisableListeners = false;
+    }
+
+    private void toggleBasicNoInterruptions() {
+        if (mCalls != null) {
+            mCalls.setValue(Integer.toString(SOURCE_NONE));
+        }
+        mMessages.setValue(Integer.toString(SOURCE_NONE));
+        mReminders.setChecked(false);
+        mEvents.setChecked(false);
+        mRepeatCallers.setChecked(false);
+    }
+
+    private void setTogglesEnabled(boolean enable) {
+        if (mCalls != null) {
+            mCalls.setEnabled(enable);
+        }
+        mMessages.setEnabled(enable);
+        mReminders.setEnabled(enable);
+        mEvents.setEnabled(enable);
+        mRepeatCallers.setEnabled(enable);
+        mAlarms.setEnabled(enable);
+        mMediaSystemOther.setEnabled(enable);
     }
 
     @Override

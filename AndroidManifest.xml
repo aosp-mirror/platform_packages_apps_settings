@@ -754,17 +754,17 @@
                        android:value="true" />
         </activity>
 
-        <activity android:name="Settings$ZenModePrioritySettingsActivity"
-                android:label="@string/zen_mode_priority_settings_title"
+        <activity android:name="Settings$ZenModeBehaviorSettingsActivity"
+                android:label="@string/zen_mode_behavior_settings_title"
                 android:icon="@drawable/ic_settings_notifications"
                 android:exported="true"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
-                <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
+                <action android:name="android.settings.ZEN_MODE_BEHAVIOR_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModePrioritySettings" />
+                android:value="com.android.settings.notification.ZenModeBehaviorSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
