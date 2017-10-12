@@ -42,7 +42,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,6 +62,8 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
     private ListPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
 
     /**
      * 0: Use System Selection (Default)
@@ -83,11 +84,10 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycle = new Lifecycle();
         mController = spy(new BluetoothAudioSampleRatePreferenceController(mContext, mLifecycle,
-                new Object()));
+                new Object(), mBluetoothA2dpConfigStore));
         doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig();
         doNothing().when(mController).setCodecConfigPreference(any());
-        doReturn(mBluetoothCodecConfig).when(mController).createCodecConfig(anyInt(), anyInt(),
-                anyInt(), anyInt(), anyInt(), anyLong(), anyLong(), anyLong(), anyLong());
+        when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mBluetoothCodecConfig);
         mListValues = mContext.getResources().getStringArray(
                 R.array.bluetooth_a2dp_codec_sample_rate_values);
         mListSummaries = mContext.getResources().getStringArray(
@@ -115,8 +115,7 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
         verify(mPreference).setValue(mListValues[2]);
         verify(mPreference).setSummary(
                 mContext.getResources().getString(STREAMING_LABEL_ID, mListSummaries[2]));
-        assertThat(BluetoothA2dpSharedStore.getSampleRate()).isEqualTo(
-                BluetoothCodecConfig.SAMPLE_RATE_48000);
+        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000);
     }
 
     @Test

@@ -45,14 +45,16 @@ public class BluetoothAudioSampleRatePreferenceController extends
     private final String[] mListValues;
     private final String[] mListSummaries;
     private final Object mBluetoothA2dpLock;
+    private final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
     private ListPreference mPreference;
     private BluetoothA2dp mBluetoothA2dp;
 
     public BluetoothAudioSampleRatePreferenceController(Context context, Lifecycle lifecycle,
-            Object bluetoothA2dpLock) {
+            Object bluetoothA2dpLock, BluetoothA2dpConfigStore store) {
         super(context);
 
         mBluetoothA2dpLock = bluetoothA2dpLock;
+        mBluetoothA2dpConfigStore = store;
         mListValues = context.getResources().getStringArray(
                 R.array.bluetooth_a2dp_codec_sample_rate_values);
         mListSummaries = context.getResources().getStringArray(
@@ -62,7 +64,6 @@ public class BluetoothAudioSampleRatePreferenceController extends
             lifecycle.addObserver(this);
         }
     }
-
 
     @Override
     public String getPreferenceKey() {
@@ -83,24 +84,10 @@ public class BluetoothAudioSampleRatePreferenceController extends
         }
 
         final int sampleRate = mapPreferenceValueToSampleRate(newValue.toString());
-        BluetoothA2dpSharedStore.setSampleRate(sampleRate);
-
-        final int codecTypeValue = BluetoothA2dpSharedStore.getCodecType();
-        final int codecPriorityValue = BluetoothA2dpSharedStore.getCodecPriority();
-        final int sampleRateValue = BluetoothA2dpSharedStore.getSampleRate();
-        final int bitsPerSampleValue = BluetoothA2dpSharedStore.getBitsPerSample();
-        final int channelModeValue = BluetoothA2dpSharedStore.getChannelMode();
-        final long codecSpecific1Value = BluetoothA2dpSharedStore.getCodecSpecific1Value();
-        final long codecSpecific2Value = BluetoothA2dpSharedStore.getCodecSpecific2Value();
-        final long codecSpecific3Value = BluetoothA2dpSharedStore.getCodecSpecific3Value();
-        final long codecSpecific4Value = BluetoothA2dpSharedStore.getCodecSpecific4Value();
+        mBluetoothA2dpConfigStore.setSampleRate(sampleRate);
 
         // get values from shared store
-        BluetoothCodecConfig codecConfig = createCodecConfig(codecTypeValue, codecPriorityValue,
-                sampleRateValue, bitsPerSampleValue,
-                channelModeValue, codecSpecific1Value,
-                codecSpecific2Value, codecSpecific3Value,
-                codecSpecific4Value);
+        BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
@@ -129,7 +116,7 @@ public class BluetoothAudioSampleRatePreferenceController extends
                 mContext.getResources().getString(STREAMING_LABEL_ID, mListSummaries[index]));
 
         // write value to shared store
-        BluetoothA2dpSharedStore.setSampleRate(sampleRate);
+        mBluetoothA2dpConfigStore.setSampleRate(sampleRate);
     }
 
     @Override
@@ -226,18 +213,4 @@ public class BluetoothAudioSampleRatePreferenceController extends
 
         return mBluetoothA2dp.getCodecStatus().getCodecConfig();
     }
-
-    @VisibleForTesting
-    BluetoothCodecConfig createCodecConfig(int codecTypeValue, int codecPriorityValue,
-            int sampleRateValue, int bitsPerSampleValue,
-            int channelModeValue, long codecSpecific1Value,
-            long codecSpecific2Value, long codecSpecific3Value,
-            long codecSpecific4Value) {
-        return new BluetoothCodecConfig(codecTypeValue, codecPriorityValue,
-                sampleRateValue, bitsPerSampleValue,
-                channelModeValue, codecSpecific1Value,
-                codecSpecific2Value, codecSpecific3Value,
-                codecSpecific4Value);
-    }
-
 }
