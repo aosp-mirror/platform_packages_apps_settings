@@ -37,6 +37,7 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.PowerManager;
 import android.os.Process;
@@ -703,6 +704,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void updateAccessPointsDelayed() {
         // Safeguard from some delayed event handling
         if (getActivity() != null && !mIsRestricted && mWifiManager.isWifiEnabled()) {
+            Handler handler = getView().getHandler();
+            if (handler != null && handler.hasCallbacks(mUpdateAccessPointsRunnable)) {
+                return;
+            }
             setProgressBarVisible(true);
             getView().postDelayed(mUpdateAccessPointsRunnable, 300 /* delay milliseconds */);
         }
