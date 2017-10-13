@@ -381,7 +381,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 bluetoothA2dpConfigStore));
         controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
-        // bluetooth audio bits per sample
+        controllers.add(new BluetoothAudioBitsPerSamplePreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
         // bluetooth audio channel mode
         // bluetooth audio ldac codec: playback quality
         controllers.add(new ShowTapsPreferenceController(context));

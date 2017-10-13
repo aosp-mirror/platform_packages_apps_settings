@@ -29,12 +29,17 @@ public class BluetoothCodecConfig {
     public static final int CODEC_PRIORITY_HIGHEST = 1000 * 1000;
     public static final int BITS_PER_SAMPLE_NONE = 0;
     public static final int CHANNEL_MODE_NONE = 0;
+    public static final int BITS_PER_SAMPLE_24 =  0x1 << 1;
 
     public int getSampleRate() {
         return 0;
     }
 
     public int getCodecType() {
+        return 0;
+    }
+
+    public int getBitsPerSample() {
         return 0;
     }
 }
