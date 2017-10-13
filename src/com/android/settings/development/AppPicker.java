@@ -32,7 +32,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.settings.R;
-import com.android.settings.applications.AppViewHolder;
+import com.android.settings.applications.manageapplications.AppViewHolder;
 
 import java.text.Collator;
 import java.util.ArrayList;

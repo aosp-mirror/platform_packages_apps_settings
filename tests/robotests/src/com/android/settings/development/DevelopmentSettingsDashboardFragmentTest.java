@@ -17,6 +17,7 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -218,6 +219,28 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mDashboard.onAdbClearKeysDialogConfirmed();
 
         verify(controller).onClearAdbKeysConfirmed();
+    }
+
+    @Test
+    public void onDisableLogPersistDialogConfirmed_shouldCallControllerDialogConfirmed() {
+        final LogPersistPreferenceControllerV2 controller = mock(
+                LogPersistPreferenceControllerV2.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                LogPersistPreferenceControllerV2.class);
+        mDashboard.onDisableLogPersistDialogConfirmed();
+
+        verify(controller).onDisableLogPersistDialogConfirmed();
+    }
+
+    @Test
+    public void onDisableLogPersistDialogRejected_shouldCallControllerDialogRejected() {
+        final LogPersistPreferenceControllerV2 controller = mock(
+                LogPersistPreferenceControllerV2.class);
+        doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
+                LogPersistPreferenceControllerV2.class);
+        mDashboard.onDisableLogPersistDialogRejected();
+
+        verify(controller).onDisableLogPersistDialogRejected();
     }
 
     @Implements(EnableDevelopmentSettingWarningDialog.class)

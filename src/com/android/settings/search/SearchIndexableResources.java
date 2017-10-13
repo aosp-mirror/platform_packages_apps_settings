@@ -74,7 +74,7 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ChannelImportanceSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
-import com.android.settings.notification.ZenModePrioritySettings;
+import com.android.settings.notification.ZenModeBehaviorSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
@@ -152,8 +152,8 @@ public final class SearchIndexableResources {
                 "android.settings.SOUND_SETTINGS");
         addIndex(ZenModeSettings.class,
                 R.xml.zen_mode_settings, R.drawable.ic_settings_notifications);
-        addIndex(ZenModePrioritySettings.class,
-                R.xml.zen_mode_priority_settings, R.drawable.ic_settings_notifications);
+        addIndex(ZenModeBehaviorSettings.class,
+                R.xml.zen_mode_behavior_settings, R.drawable.ic_settings_notifications);
         addIndex(StorageSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_storage);
         addIndex(PowerUsageSummary.class,
                 R.xml.power_usage_summary, R.drawable.ic_settings_battery);

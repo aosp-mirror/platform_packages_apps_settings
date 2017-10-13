@@ -905,7 +905,7 @@
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desactivando zona…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> está activa"</string>
     <string name="wifi_tether_failed_subtext" msgid="1484941858530919002">"Error en la zona Wi-Fi portátil"</string>
-    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar la zona Wi-Fi"</string>
+    <string name="wifi_tether_configure_ap_text" msgid="7974681394041609308">"Configurar hotspot Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Configuración de zona Wi-Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Hotspot WPA2 PSK de AndroidAP"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"Android Hotspot"</string>
@@ -1159,7 +1159,6 @@
     <string name="status_wifi_mac_address" msgid="2202206684020765378">"Dirección MAC de Wi-Fi"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"Dirección de Bluetooth"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"Número de serie"</string>
-    <string name="status_unavailable" msgid="7862009036663793314">"No disponible"</string>
     <string name="status_up_time" msgid="7294859476816760399">"Tiempo de actividad"</string>
     <string name="status_awake_time" msgid="2393949909051183652">"Hora de actividad"</string>
     <string name="internal_memory" msgid="9129595691484260784">"Almacenamiento interno"</string>
@@ -1562,7 +1561,7 @@
     <string name="screen_compatibility_label" msgid="663250687205465394">"Compatibilidad de la pantalla"</string>
     <string name="permissions_label" msgid="2605296874922726203">"Permisos"</string>
     <string name="cache_header_label" msgid="1877197634162461830">"Memoria caché"</string>
-    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Eliminar memoria caché"</string>
+    <string name="clear_cache_btn_text" msgid="5756314834291116325">"Borrar caché"</string>
     <string name="cache_size_label" msgid="7505481393108282913">"Memoria caché"</string>
     <plurals name="uri_permissions_text" formatted="false" msgid="3983110543017963732">
       <item quantity="other">%d elementos</item>
@@ -1587,7 +1586,7 @@
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Has elegido lanzar esta aplicación de manera predeterminada para algunas acciones."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Decidiste permitir que esta aplicación pueda crear widgets y acceder a sus datos."</string>
     <string name="auto_launch_disable_text" msgid="7800385822185540166">"No hay configuraciones predeterminadas establecidas."</string>
-    <string name="clear_activities" msgid="7408923511535174430">"Eliminar configuraciones predeterminadas"</string>
+    <string name="clear_activities" msgid="7408923511535174430">"Borrar valores predeterminados"</string>
     <string name="screen_compatibility_text" msgid="1616155457673106022">"Es posible que esta aplicación no se haya diseñado para tu pantalla. Aquí puedes controlar cómo se ajusta a la pantalla."</string>
     <string name="ask_compatibility" msgid="7225195569089607846">"Preguntar cuando se lanza"</string>
     <string name="enable_compatibility" msgid="5806819252068617811">"Aplicación en escala"</string>
@@ -1691,9 +1690,9 @@
     <skip />
     <string name="running_process_item_user_label" msgid="3129887865552025943">"Usuario: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="running_process_item_removed_user_label" msgid="8250168004291472959">"Usuario eliminado"</string>
-    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
-    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
-    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicio"</string>
+    <string name="running_processes_item_description_s_s" msgid="5790575965282023145">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proceso y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicio"</string>
+    <string name="running_processes_item_description_s_p" msgid="8019860457123222953">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> proceso y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
+    <string name="running_processes_item_description_p_s" msgid="744424668287252915">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicio"</string>
     <string name="running_processes_item_description_p_p" msgid="1607384595790852782">"<xliff:g id="NUMPROCESS">%1$d</xliff:g> procesos y <xliff:g id="NUMSERVICES">%2$d</xliff:g> servicios"</string>
     <string name="running_processes_header_title" msgid="6588371727640789560">"Memoria del dispositivo"</string>
     <string name="running_processes_header_footer" msgid="723908176275428442">"RAM usada por las aplicaciones"</string>
@@ -2349,8 +2348,6 @@
     <skip />
     <string name="cant_sync_dialog_title" msgid="2777238588398046285">"No se puede sincronizar manualmente"</string>
     <string name="cant_sync_dialog_message" msgid="1938380442159016449">"La sincronización de este elemento actualmente está desactivada. Para cambiar tu configuración, activa momentáneamente los datos en segundo plano y la sincronización automática."</string>
-    <string name="wimax_settings" msgid="2655139497028469039">"4G"</string>
-    <string name="status_wimax_mac_address" msgid="8390791848661413416">"Dirección MAC de 4G"</string>
     <string name="enter_password" msgid="8035706727471334122">"Para iniciar el dispositivo Android, ingresa la contraseña."</string>
     <string name="enter_pin" msgid="5305333588093263790">"Para iniciar el dispositivo Android, ingresa el PIN."</string>
     <string name="enter_pattern" msgid="4187435713036808566">"Para iniciar el dispositivo Android, dibuja el patrón."</string>
@@ -3053,8 +3050,7 @@
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Cuando la pantalla está apagada"</string>
     <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Cuando la pantalla está encendida o apagada"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Configuración de notificaciones"</string>
-    <!-- no translation found for suggestion_button_text (3275010948381252006) -->
-    <skip />
+    <string name="suggestion_button_text" msgid="3275010948381252006">"Aceptar"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Envía comentarios del dispositivo"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Ingresa el PIN de administrador"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Activado"</string>
@@ -3728,7 +3724,4 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Descubre tu nueva tablet"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Descubre tu nuevo dispositivo"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"La función no está disponible en este dispositivo"</string>
-    <string name="ims_reg_title" msgid="7609782759207241443">"Estado de registro de IMS"</string>
-    <string name="ims_reg_status_registered" msgid="933003316932739188">"Registrado"</string>
-    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Sin registrar"</string>
 </resources>

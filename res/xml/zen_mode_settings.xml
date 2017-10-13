@@ -19,20 +19,19 @@
     android:key="zen_mode_settings"
     android:title="@string/zen_mode_settings_title" >
 
-    <!-- Priority only allows -->
     <Preference
-            android:key="priority_settings"
-            android:title="@string/zen_mode_priority_settings_title"
-            android:fragment="com.android.settings.notification.ZenModePrioritySettings" />
+            android:key="zen_mode_behavior_settings"
+            android:title="@string/zen_mode_behavior_settings_title"
+            android:fragment="com.android.settings.notification.ZenModeBehaviorSettings" />
 
     <!-- Visual interruptions -->
     <Preference
-            android:key="visual_interruptions_settings"
+            android:key="zen_mode_visual_interruptions_settings"
             android:title="@string/zen_mode_visual_interruptions_settings_title"
             android:fragment="com.android.settings.notification.ZenModeVisualInterruptionSettings" />
 
     <!-- Automatic rules -->
     <PreferenceCategory
-        android:key="automatic_rules"
+        android:key="zen_mode_automatic_rules"
         android:title="@string/zen_mode_automation_settings_title" />
 </PreferenceScreen>

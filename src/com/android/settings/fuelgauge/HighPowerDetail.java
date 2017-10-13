@@ -18,7 +18,6 @@ package com.android.settings.fuelgauge;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -165,12 +164,10 @@ public class HighPowerDetail extends InstrumentedDialogFragment implements OnCli
                 : R.string.high_power_off);
     }
 
-    public static void show(Fragment caller, String packageName, int requestCode,
-            boolean defaultToOn) {
+    public static void show(Fragment caller, String packageName, int requestCode) {
         HighPowerDetail fragment = new HighPowerDetail();
         Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, packageName);
-        args.putBoolean(ARG_DEFAULT_ON, defaultToOn);
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, requestCode);
         fragment.show(caller.getFragmentManager(), HighPowerDetail.class.getSimpleName());

@@ -15,6 +15,9 @@
  */
 package com.android.settings.applications;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -30,9 +33,6 @@ import com.android.settings.Settings;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-
-import static android.app.Activity.RESULT_CANCELED;
-import static android.app.Activity.RESULT_OK;
 
 public class ExternalSourcesDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
@@ -76,7 +76,7 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
         return false;
     }
 
-    static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
+    public static CharSequence getPreferenceSummary(Context context, AppEntry entry) {
         final UserManager um = UserManager.get(context);
         final int userRestrictionSource = um.getUserRestrictionSource(
                 UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,

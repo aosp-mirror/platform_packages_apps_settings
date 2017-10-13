@@ -21,7 +21,7 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.applications.ResetAppPrefPreferenceController;
+import com.android.settings.applications.manageapplications.ResetAppPrefPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.NetworkResetPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
