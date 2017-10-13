@@ -871,12 +871,12 @@ public class WifiSettings extends RestrictedSettingsFragment
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
         final LongPressAccessPointPreference pref = getOrCreatePreference(connectedAp);
 
-        // Save the state of the current access point in the bundle so that we can restore it
-        // in the Wifi Network Details Fragment
-        pref.getAccessPoint().saveWifiState(pref.getExtras());
-
         // Launch details page on click.
         pref.setOnPreferenceClickListener(preference -> {
+            // Save the state of the current access point in the bundle so that we can restore it
+            // in the Wifi Network Details Fragment
+            pref.getAccessPoint().saveWifiState(pref.getExtras());
+
             SettingsActivity activity = (SettingsActivity) WifiSettings.this.getActivity();
             activity.startPreferencePanel(this,
                     WifiNetworkDetailsFragment.class.getName(), pref.getExtras(),
