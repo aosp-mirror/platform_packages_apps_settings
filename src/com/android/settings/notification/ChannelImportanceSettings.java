@@ -37,6 +37,7 @@ import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
     @Override
     public void onResume() {
         super.onResume();
-        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null || mChannel == null) {
-            Log.w(TAG, "Missing package or uid or packageinfo or channel");
+        if (mAppRow == null || mChannel == null) {
+            Log.w(TAG, "Missing package or channel");
             finish();
             return;
         }
@@ -69,10 +70,19 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
     }
 
     @Override
-    void setupBadge() {}
+    protected String getLogTag() {
+        return TAG;
+    }
 
     @Override
-    void updateDependents(boolean banned) {}
+    protected int getPreferenceScreenResId() {
+        return R.xml.notification_importance;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return null;
+    }
 
     @Override
     public void onPause() {
@@ -81,11 +91,6 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
 
     private PreferenceScreen createPreferenceHierarchy() {
         PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
-        addPreferencesFromResource(R.xml.notification_importance);
-        root = getPreferenceScreen();
 
         for (int i = 0; i < root.getPreferenceCount(); i++) {
             Preference pref = root.getPreference(i);
@@ -148,8 +153,9 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
         // but the sound you had selected was "Silence",
         // then set sound for this channel to your default sound,
         // because you probably intended to cause this channel to actually start making sound.
-        if (oldImportance < IMPORTANCE_DEFAULT && !hasValidSound(mChannel) &&
-                mChannel.getImportance() >= IMPORTANCE_DEFAULT) {
+        if (oldImportance < IMPORTANCE_DEFAULT
+                && !SoundPreferenceController.hasValidSound(mChannel)
+                && mChannel.getImportance() >= IMPORTANCE_DEFAULT) {
             mChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
                     mChannel.getAudioAttributes());
             mChannel.lockFields(USER_LOCKED_SOUND);
