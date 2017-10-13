@@ -16,7 +16,23 @@
 
 package com.android.settings.applications.manageapplications;
 
-import android.annotation.IdRes;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_BLOCKED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_DISABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_ENABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_INSTANT;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_PERSONAL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_POWER_WHITELIST;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_POWER_WHITELIST_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_WORK;
+
 import android.annotation.Nullable;
 import android.annotation.StringRes;
 import android.app.Activity;
@@ -152,88 +168,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int SIZE_INTERNAL = 1;
     public static final int SIZE_EXTERNAL = 2;
 
-    // Filter options used for displayed list of applications
-    // Filters will appear sorted based on their value defined here.
-    public static final int FILTER_APPS_POWER_WHITELIST = 0;
-    public static final int FILTER_APPS_POWER_WHITELIST_ALL = 1;
-    public static final int FILTER_APPS_ALL = 2;
-    public static final int FILTER_APPS_ENABLED = 3;
-    public static final int FILTER_APPS_INSTANT = 4;
-    public static final int FILTER_APPS_DISABLED = 5;
-    public static final int FILTER_APPS_BLOCKED = 6;
-    public static final int FILTER_APPS_PERSONAL = 7;
-    public static final int FILTER_APPS_WORK = 8;
-    public static final int FILTER_APPS_USAGE_ACCESS = 9;
-    public static final int FILTER_APPS_WITH_OVERLAY = 10;
-    public static final int FILTER_APPS_WRITE_SETTINGS = 11;
-    public static final int FILTER_APPS_INSTALL_SOURCES = 12;
-    public static final int FILTER_APPS_COUNT = 13;  // This should always be the last entry
-
-    // Mapping to string labels for the FILTER_APPS_* constants above.
-    @IdRes
-    public static final int[] FILTER_LABELS = new int[FILTER_APPS_COUNT];
-
-    // Mapping to filters for the FILTER_APPS_* constants above.
-    public static final AppFilter[] FILTERS = new AppFilter[FILTER_APPS_COUNT];
-
-    static {
-        // High power whitelist, on
-        FILTER_LABELS[FILTER_APPS_POWER_WHITELIST] = R.string.high_power_filter_on;
-        FILTERS[FILTER_APPS_POWER_WHITELIST] = new CompoundFilter(
-                AppStatePowerBridge.FILTER_POWER_WHITELISTED,
-                ApplicationsState.FILTER_ALL_ENABLED);
-
-        // Without disabled until used
-        FILTER_LABELS[FILTER_APPS_POWER_WHITELIST_ALL] = R.string.filter_all_apps;
-        FILTERS[FILTER_APPS_POWER_WHITELIST_ALL] = new CompoundFilter(
-                ApplicationsState.FILTER_WITHOUT_DISABLED_UNTIL_USED,
-                ApplicationsState.FILTER_ALL_ENABLED);
-
-        // All apps
-        FILTER_LABELS[FILTER_APPS_ALL] = R.string.filter_all_apps;
-        FILTERS[FILTER_APPS_ALL] = ApplicationsState.FILTER_EVERYTHING;
-
-        // Enabled
-        FILTER_LABELS[FILTER_APPS_ENABLED] = R.string.filter_enabled_apps;
-        FILTERS[FILTER_APPS_ENABLED] = ApplicationsState.FILTER_ALL_ENABLED;
-
-        // Disabled
-        FILTER_LABELS[FILTER_APPS_DISABLED] = R.string.filter_apps_disabled;
-        FILTERS[FILTER_APPS_DISABLED] = ApplicationsState.FILTER_DISABLED;
-
-        // Instant
-        FILTER_LABELS[FILTER_APPS_INSTANT] = R.string.filter_instant_apps;
-        FILTERS[FILTER_APPS_INSTANT] = ApplicationsState.FILTER_INSTANT;
-
-        // Blocked Notifications
-        FILTER_LABELS[FILTER_APPS_BLOCKED] = R.string.filter_notif_blocked_apps;
-        FILTERS[FILTER_APPS_BLOCKED] = AppStateNotificationBridge.FILTER_APP_NOTIFICATION_BLOCKED;
-
-        // Personal
-        FILTER_LABELS[FILTER_APPS_PERSONAL] = R.string.filter_personal_apps;
-        FILTERS[FILTER_APPS_PERSONAL] = ApplicationsState.FILTER_PERSONAL;
-
-        // Work
-        FILTER_LABELS[FILTER_APPS_WORK] = R.string.filter_work_apps;
-        FILTERS[FILTER_APPS_WORK] = ApplicationsState.FILTER_WORK;
-
-        // Usage access screen, never displayed.
-        FILTER_LABELS[FILTER_APPS_USAGE_ACCESS] = R.string.filter_all_apps;
-        FILTERS[FILTER_APPS_USAGE_ACCESS] = AppStateUsageBridge.FILTER_APP_USAGE;
-
-        // Apps that can draw overlays
-        FILTER_LABELS[FILTER_APPS_WITH_OVERLAY] = R.string.filter_overlay_apps;
-        FILTERS[FILTER_APPS_WITH_OVERLAY] = AppStateOverlayBridge.FILTER_SYSTEM_ALERT_WINDOW;
-
-        // Apps that can write system settings
-        FILTER_LABELS[FILTER_APPS_WRITE_SETTINGS] = R.string.filter_write_settings_apps;
-        FILTERS[FILTER_APPS_WRITE_SETTINGS] = AppStateWriteSettingsBridge.FILTER_WRITE_SETTINGS;
-
-        // Apps that are trusted sources of apks
-        FILTER_LABELS[FILTER_APPS_INSTALL_SOURCES] = R.string.filter_install_sources_apps;
-        FILTERS[FILTER_APPS_INSTALL_SOURCES] = AppStateInstallAppsBridge.FILTER_APP_SOURCES;
-    }
-
     // Storage types. Used to determine what the extra item in the list of preferences is.
     public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
     public static final int STORAGE_TYPE_MUSIC = 1;
@@ -251,7 +185,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ApplicationsState mApplicationsState;
 
     public int mListType;
-    public int mFilter;
+    public AppFilterItem mFilter;
 
     public ApplicationsAdapter mApplications;
 
@@ -285,14 +219,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
 
-
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
             LIST_TYPE_MAIN,
             LIST_TYPE_STORAGE));
 
     private View mRootView;
-
     private View mSpinnerHeader;
     private Spinner mFilterSpinner;
     private FilterSpinnerAdapter mFilterAdapter;
@@ -354,7 +286,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         } else {
             mListType = LIST_TYPE_MAIN;
         }
-        mFilter = getDefaultFilter();
+        final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
+        mFilter = appFilterRegistry.get(appFilterRegistry.getDefaultFilterType(mListType));
         mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
         mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
 
@@ -380,7 +313,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (mListContainer != null) {
             // Create adapter and list view here
             View emptyView = mListContainer.findViewById(com.android.internal.R.id.empty);
-            ListView lv = (ListView) mListContainer.findViewById(android.R.id.list);
+            ListView lv = mListContainer.findViewById(android.R.id.list);
             if (emptyView != null) {
                 lv.setEmptyView(emptyView);
             }
@@ -436,17 +369,18 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
     @VisibleForTesting
     void createHeader() {
-        Activity activity = getActivity();
-        FrameLayout pinnedHeader = (FrameLayout) mRootView.findViewById(R.id.pinned_header);
+        final Activity activity = getActivity();
+        final FrameLayout pinnedHeader = mRootView.findViewById(R.id.pinned_header);
         mSpinnerHeader = activity.getLayoutInflater()
                 .inflate(R.layout.apps_filter_spinner, pinnedHeader, false);
-        mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
+        mFilterSpinner = mSpinnerHeader.findViewById(R.id.filter_spinner);
         mFilterAdapter = new FilterSpinnerAdapter(this);
         mFilterSpinner.setAdapter(mFilterAdapter);
         mFilterSpinner.setOnItemSelectedListener(this);
         pinnedHeader.addView(mSpinnerHeader, 0);
 
-        mFilterAdapter.enableFilter(getDefaultFilter());
+        final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
+        mFilterAdapter.enableFilter(appFilterRegistry.getDefaultFilterType(mListType));
         if (mListType == LIST_TYPE_MAIN) {
             if (UserManager.get(getActivity()).getUserProfiles().size() > 1) {
                 mFilterAdapter.enableFilter(FILTER_APPS_PERSONAL);
@@ -462,7 +396,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
         if (mIsWorkOnly) {
-            compositeFilter = new CompoundFilter(compositeFilter, FILTERS[FILTER_APPS_WORK]);
+            final AppFilter workFilter = appFilterRegistry.get(FILTER_APPS_WORK).getFilter();
+            compositeFilter = new CompoundFilter(compositeFilter, workFilter);
         }
         if (compositeFilter != null) {
             mApplications.setCompositeFilter(compositeFilter);
@@ -490,23 +425,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         return null;
-    }
-
-    private int getDefaultFilter() {
-        switch (mListType) {
-            case LIST_TYPE_USAGE_ACCESS:
-                return FILTER_APPS_USAGE_ACCESS;
-            case LIST_TYPE_HIGH_POWER:
-                return FILTER_APPS_POWER_WHITELIST;
-            case LIST_TYPE_OVERLAY:
-                return FILTER_APPS_WITH_OVERLAY;
-            case LIST_TYPE_WRITE_SETTINGS:
-                return FILTER_APPS_WRITE_SETTINGS;
-            case LIST_TYPE_MANAGE_SOURCES:
-                return FILTER_APPS_INSTALL_SOURCES;
-            default:
-                return FILTER_APPS_ALL;
-        }
     }
 
     private boolean isFastScrollEnabled() {
@@ -723,7 +641,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case R.id.show_system:
             case R.id.hide_system:
                 mShowSystem = !mShowSystem;
-                mApplications.rebuild(false);
+                mApplications.rebuild();
                 break;
             case R.id.reset_app_preferences:
                 mResetAppsHelper.buildResetDialog();
@@ -800,22 +718,24 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     static class FilterSpinnerAdapter extends ArrayAdapter<CharSequence> {
 
         private final ManageApplications mManageApplications;
+        private final Context mContext;
 
         // Use ArrayAdapter for view logic, but have our own list for managing
         // the options available.
-        private final ArrayList<Integer> mFilterOptions = new ArrayList<>();
+        private final ArrayList<AppFilterItem> mFilterOptions = new ArrayList<>();
 
         public FilterSpinnerAdapter(ManageApplications manageApplications) {
-            super(manageApplications.mFilterSpinner.getContext(), R.layout.filter_spinner_item);
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            super(manageApplications.getContext(), R.layout.filter_spinner_item);
+            mContext = manageApplications.getContext();
             mManageApplications = manageApplications;
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         }
 
-        public int getFilter(int position) {
+        public AppFilterItem getFilter(int position) {
             return mFilterOptions.get(position);
         }
 
-        public void setFilterEnabled(int filter, boolean enabled) {
+        public void setFilterEnabled(@AppFilterRegistry.FilterType int filter, boolean enabled) {
             if (enabled) {
                 enableFilter(filter);
             } else {
@@ -823,9 +743,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         }
 
-        public void enableFilter(int filter) {
-            if (mFilterOptions.contains(filter)) return;
-            if (DEBUG) Log.d(TAG, "Enabling filter " + filter);
+        public void enableFilter(@AppFilterRegistry.FilterType int filterType) {
+            final AppFilterItem filter = AppFilterRegistry.getInstance().get(filterType);
+            if (mFilterOptions.contains(filter)) {
+                return;
+            }
+            if (DEBUG) {
+                Log.d(TAG, "Enabling filter " + filter);
+            }
             mFilterOptions.add(filter);
             Collections.sort(mFilterOptions);
             mManageApplications.mSpinnerHeader.setVisibility(
@@ -838,11 +763,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         }
 
-        public void disableFilter(int filter) {
-            if (!mFilterOptions.remove((Integer) filter)) {
+        public void disableFilter(@AppFilterRegistry.FilterType int filterType) {
+            final AppFilterItem filter = AppFilterRegistry.getInstance().get(filterType);
+            if (!mFilterOptions.remove(filter)) {
                 return;
             }
-            if (DEBUG) Log.d(TAG, "Disabling filter " + filter);
+            if (DEBUG) {
+                Log.d(TAG, "Disabling filter " + filter);
+            }
             Collections.sort(mFilterOptions);
             mManageApplications.mSpinnerHeader.setVisibility(
                     mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
@@ -863,11 +791,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public CharSequence getItem(int position) {
-            return getFilterString(mFilterOptions.get(position));
-        }
-
-        private CharSequence getFilterString(int filter) {
-            return mManageApplications.getString(FILTER_LABELS[filter]);
+            return mContext.getText(mFilterOptions.get(position).getTitle());
         }
     }
 
@@ -890,13 +814,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private final ApplicationsState.Session mSession;
         private final ManageApplications mManageApplications;
         private final Context mContext;
-        private final ArrayList<View> mActive = new ArrayList<View>();
+        private final ArrayList<View> mActive = new ArrayList<>();
         private final AppStateBaseBridge mExtraInfoBridge;
         private final Handler mBgHandler;
         private final Handler mFgHandler;
         private final LoadingViewController mLoadingViewController;
 
-        private int mFilterMode;
+        private AppFilterItem mAppFilter;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
         private boolean mResumed;
@@ -941,7 +865,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
-                int filterMode) {
+                AppFilterItem appFilter) {
             mState = state;
             mFgHandler = new Handler();
             mBgHandler = new Handler(mState.getBackgroundLooper());
@@ -952,7 +876,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     mManageApplications.mListContainer
             );
             mContext = manageApplications.getActivity();
-            mFilterMode = filterMode;
+            mAppFilter = appFilter;
             if (mManageApplications.mListType == LIST_TYPE_NOTIFICATION) {
                 mExtraInfoBridge = new AppStateNotificationBridge(mContext, mState, this,
                         manageApplications.mNotifBackend);
@@ -973,12 +897,12 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         public void setCompositeFilter(AppFilter compositeFilter) {
             mCompositeFilter = compositeFilter;
-            rebuild(true);
+            rebuild();
         }
 
-        public void setFilter(int filter) {
-            mFilterMode = filter;
-            rebuild(true);
+        public void setFilter(AppFilterItem appFilter) {
+            mAppFilter = appFilter;
+            rebuild();
         }
 
         public void setExtraViewController(FileViewHolderController extraViewController) {
@@ -1000,7 +924,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 if (mExtraInfoBridge != null) {
                     mExtraInfoBridge.resume();
                 }
-                rebuild(false);
+                rebuild();
             } else {
                 rebuild(sort);
             }
@@ -1033,10 +957,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return;
             }
             mLastSortMode = sort;
-            rebuild(true);
+            rebuild();
         }
 
-        public void rebuild(boolean eraseold) {
+        public void rebuild() {
             if (!mHasReceivedLoadEntries
                     || (mExtraInfoBridge != null && !mHasReceivedBridgeCallback)) {
                 // Don't rebuild the list until all the app entries are loaded.
@@ -1050,7 +974,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             } else {
                 mWhichSize = SIZE_INTERNAL;
             }
-            filterObj = FILTERS[mFilterMode];
+            filterObj = mAppFilter.getFilter();
             if (mCompositeFilter != null) {
                 filterObj = new CompoundFilter(filterObj, mCompositeFilter);
             }
@@ -1126,8 +1050,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public void onRebuildComplete(ArrayList<AppEntry> entries) {
-            if (mFilterMode == FILTER_APPS_POWER_WHITELIST ||
-                    mFilterMode == FILTER_APPS_POWER_WHITELIST_ALL) {
+            final int filterType = mAppFilter.getFilterType();
+            if (filterType == FILTER_APPS_POWER_WHITELIST ||
+                    filterType == FILTER_APPS_POWER_WHITELIST_ALL) {
                 entries = removeDuplicateIgnoringUser(entries);
             }
             mBaseEntries = entries;
@@ -1169,7 +1094,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     if (locales.size() == 0) {
                         locales = new LocaleList(Locale.ENGLISH);
                     }
-                    AlphabeticIndex<Locale> index = new AlphabeticIndex<>(locales.get(0));
+                    AlphabeticIndex<Locale> index = new AlphabeticIndex(locales.get(0));
                     int localeCount = locales.size();
                     for (int i = 1; i < localeCount; i++) {
                         index.addLabels(locales.get(i));
@@ -1233,7 +1158,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         @Override
         public void onExtraInfoUpdated() {
             mHasReceivedBridgeCallback = true;
-            rebuild(false);
+            rebuild();
         }
 
         @Override
@@ -1243,7 +1168,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public void onPackageListChanged() {
-            rebuild(false);
+            rebuild();
         }
 
         @Override
@@ -1256,7 +1181,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         public void onLoadEntriesCompleted() {
             mHasReceivedLoadEntries = true;
             // We may have been skipping rebuilds until this came in, trigger one now.
-            rebuild(false);
+            rebuild();
         }
 
         @Override
@@ -1280,7 +1205,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                         // user viewed, and are sorting by size...  they may
                         // have cleared data, so we immediately want to resort
                         // the list with the new size to reflect it to the user.
-                        rebuild(false);
+                        rebuild();
                     }
                     return;
                 }
@@ -1290,14 +1215,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         @Override
         public void onLauncherInfoChanged() {
             if (!mManageApplications.mShowSystem) {
-                rebuild(false);
+                rebuild();
             }
         }
 
         @Override
         public void onAllSizesComputed() {
             if (mLastSortMode == R.id.sort_order_size) {
-                rebuild(false);
+                rebuild();
             }
         }
 

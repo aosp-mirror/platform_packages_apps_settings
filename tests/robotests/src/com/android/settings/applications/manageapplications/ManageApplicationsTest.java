@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.manageapplications;
 
+import static com.android.settings.applications.manageapplications.AppFilterRegistry
+        .FILTER_APPS_ALL;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -116,7 +118,8 @@ public class ManageApplicationsTest {
         ManageApplications fragment = mock(ManageApplications.class);
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
         final ManageApplications.ApplicationsAdapter adapter =
-                new ManageApplications.ApplicationsAdapter(mState, fragment, 0);
+                new ManageApplications.ApplicationsAdapter(mState, fragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL));
 
         adapter.updateDisableView(view, info);
 
@@ -169,7 +172,8 @@ public class ManageApplicationsTest {
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
@@ -195,7 +199,8 @@ public class ManageApplicationsTest {
 
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
@@ -223,12 +228,14 @@ public class ManageApplicationsTest {
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
         final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment, 0));
+            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
         ReflectionHelpers.setField(adapter, "mFgHandler", handler);
-        ReflectionHelpers.setField(adapter, "mFilterMode", -1);
+        ReflectionHelpers.setField(adapter, "mAppFilter",
+                AppFilterRegistry.getInstance().get(FILTER_APPS_ALL));
 
         // app loading not yet completed
         ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", false);
