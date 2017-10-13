@@ -397,7 +397,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new GpuViewUpdatesPreferenceController(context));
         controllers.add(new HardwareLayersUpdatesPreferenceController(context));
         controllers.add(new DebugGpuOverdrawPreferenceController(context));
-        // debug non-rectangular clip operations
+        controllers.add(new DebugNonRectClipOperationsPreferenceController(context));
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
         controllers.add(new SimulateColorSpacePreferenceController(context));
