@@ -30,6 +30,7 @@ public class BluetoothCodecConfig {
     public static final int BITS_PER_SAMPLE_NONE = 0;
     public static final int CHANNEL_MODE_NONE = 0;
     public static final int BITS_PER_SAMPLE_24 =  0x1 << 1;
+    public static final int CHANNEL_MODE_STEREO = 0x1 << 1;
 
     public int getSampleRate() {
         return 0;
@@ -40,6 +41,10 @@ public class BluetoothCodecConfig {
     }
 
     public int getBitsPerSample() {
+        return 0;
+    }
+
+    public int getChannelMode() {
         return 0;
     }
 }
