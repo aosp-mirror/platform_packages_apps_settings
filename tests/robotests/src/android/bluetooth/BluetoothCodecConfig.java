@@ -47,4 +47,8 @@ public class BluetoothCodecConfig {
     public int getChannelMode() {
         return 0;
     }
+
+    public long getCodecSpecific1() {
+        return 0;
+    }
 }
