@@ -93,6 +93,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private StorageSummaryPreference mInternalSummary;
     private static long sTotalInternalStorage;
 
+    private boolean mHasLaunchedPrivateVolumeSettings = false;
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
@@ -110,7 +112,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         final Context context = getActivity();
 
         mStorageManager = context.getSystemService(StorageManager.class);
-        mStorageManager.registerListener(mStorageListener);
 
         if (sTotalInternalStorage <= 0) {
             sTotalInternalStorage = mStorageManager.getPrimaryStorageSize();
@@ -231,14 +232,17 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         if (mInternalCategory.getPreferenceCount() == 2
                 && mExternalCategory.getPreferenceCount() == 0) {
             // Only showing primary internal storage, so just shortcut
-            final Bundle args = new Bundle();
-            args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-            Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    StorageDashboardFragment.class.getName(), args, null,
-                    R.string.storage_settings, null, false, getMetricsCategory());
-            intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
-            getActivity().startActivity(intent);
-            finish();
+            if (!mHasLaunchedPrivateVolumeSettings) {
+                mHasLaunchedPrivateVolumeSettings = true;
+                final Bundle args = new Bundle();
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+                Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
+                        StorageDashboardFragment.class.getName(), args, null,
+                        R.string.storage_settings, null, false, getMetricsCategory());
+                intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
+                getActivity().startActivity(intent);
+                finish();
+            }
         }
     }
 
