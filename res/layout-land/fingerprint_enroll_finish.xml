@@ -75,13 +75,13 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
 
-                <LinearLayout
+                <com.android.setupwizardlib.view.ButtonBarLayout
+                    style="@style/SuwGlifButtonBar.Stackable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal">
+                    android:clipToPadding="false">
 
                     <Button
                         style="@style/SetupWizardButton.Negative"
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/security_settings_fingerprint_enroll_done" />
 
-                </LinearLayout>
+                </com.android.setupwizardlib.view.ButtonBarLayout>
 
             </LinearLayout>
 

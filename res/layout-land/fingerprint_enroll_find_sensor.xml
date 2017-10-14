@@ -40,51 +40,60 @@
             android:clipToPadding="false"
             android:orientation="vertical">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:clipChildren="false"
-                android:clipToPadding="false">
+                android:clipToPadding="false"
+                android:fillViewport="true">
 
-                <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="?attr/suwGlifHeaderGravity"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:src="@drawable/ic_fingerprint_header" />
-
-                <TextView
-                    android:id="@+id/suw_layout_title"
-                    style="@style/SuwGlifHeaderTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp" />
+                    android:orientation="vertical"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
-                <TextView
-                    style="@style/SuwDescription.Glif"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
+                    <ImageView
+                        android:id="@+id/suw_layout_icon"
+                        style="@style/SuwGlifIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="?attr/suwGlifHeaderGravity"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"
+                        android:src="@drawable/ic_fingerprint_header" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    <TextView
+                        android:id="@+id/suw_layout_title"
+                        style="@style/SuwGlifHeaderTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp" />
 
-                <Button
-                    style="@style/SetupWizardButton.Negative"
-                    android:id="@+id/skip_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/skip_label" />
+                    <TextView
+                        style="@style/SuwDescription.Glif"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
 
-            </LinearLayout>
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <Button
+                        style="@style/SetupWizardButton.Negative"
+                        android:id="@+id/skip_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/skip_label" />
+
+                </LinearLayout>
+
+            </ScrollView>
 
         </LinearLayout>
 
