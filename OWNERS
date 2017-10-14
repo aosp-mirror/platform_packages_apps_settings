@@ -13,3 +13,6 @@ zhfan@google.com
 
 # Emergency approvers in case the above are not available
 miket@google.com
+
+# Exempt resource files (because they are in a flat directory and too hard to manage via OWNERS)
+per-file *.xml=*
