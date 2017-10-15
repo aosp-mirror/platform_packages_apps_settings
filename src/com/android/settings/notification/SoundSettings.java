@@ -57,7 +57,7 @@ public class SoundSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(6);
+        mProgressiveDisclosureMixin.setTileLimit(1);
     }
 
     @Override
