@@ -72,7 +72,8 @@ public abstract class AppStateBaseBridge implements ApplicationsState.Callbacks 
 
     @Override
     public void onLoadEntriesCompleted() {
-        mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
+        // I think this should be removed, or the MSG_LOAD_ALL will be sent twice, one at AppStateBaseBridge.resume() and the other is here.
+        //mHandler.sendEmptyMessage(BackgroundHandler.MSG_LOAD_ALL);
     }
 
     @Override
