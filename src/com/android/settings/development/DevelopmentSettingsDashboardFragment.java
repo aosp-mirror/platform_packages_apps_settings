@@ -401,7 +401,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
         controllers.add(new SimulateColorSpacePreferenceController(context));
-        // set gpu renderer
+        controllers.add(new SetGpuRendererPreferenceController(context));
         controllers.add(new UsbAudioRoutingPreferenceController(context));
         controllers.add(new StrictModePreferenceController(context));
         // profile gpu rendering
