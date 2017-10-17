@@ -95,7 +95,7 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1, Phone1");
+        verify(summaryLoader).setSummary(summaryProvider, "Browser1, Phone1, Sms1");
 
         // 2 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
@@ -108,13 +108,13 @@ public class DefaultAppSettingsTest {
         when(defaultBrowser.getDefaultAppLabel()).thenReturn(null);
         when(defaultPhone.getDefaultAppLabel()).thenReturn("Phone1");
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Phone1");
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
 
         when(defaultSms.getDefaultAppLabel()).thenReturn("Sms1");
         when(defaultBrowser.getDefaultAppLabel()).thenReturn("Browser1");
         when(defaultPhone.getDefaultAppLabel()).thenReturn(null);
         summaryProvider.setListening(true);
-        verify(summaryLoader).setSummary(summaryProvider, "Sms1, Browser1");
+        verify(summaryLoader).setSummary(summaryProvider, "Phone1, Sms1");
 
         // 1 available
         when(defaultSms.getDefaultAppLabel()).thenReturn(null);
