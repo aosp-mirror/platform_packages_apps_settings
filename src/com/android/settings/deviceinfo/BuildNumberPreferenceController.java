@@ -35,7 +35,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.RestrictedLockUtils;
@@ -221,9 +220,5 @@ public class BuildNumberPreferenceController extends AbstractPreferenceControlle
         mDevHitToast = Toast.makeText(mContext, R.string.show_dev_on,
                 Toast.LENGTH_LONG);
         mDevHitToast.show();
-        // This is good time to index the Developer Options
-        FeatureFactory.getFactory(mContext).getSearchFeatureProvider().getIndexingManager(mContext)
-                .updateFromClassNameResource(DevelopmentSettings.class.getName(),
-                        true /* includeInSearchResults */);
     }
 }

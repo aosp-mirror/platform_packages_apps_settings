@@ -53,7 +53,7 @@ public abstract class DeviceListPreferenceFragment extends
 
     private static final String KEY_BT_SCAN = "bt_scan";
 
-    // Copied from DevelopmentSettings.java
+    // Copied from BluetoothDeviceNoNamePreferenceController.java
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
 

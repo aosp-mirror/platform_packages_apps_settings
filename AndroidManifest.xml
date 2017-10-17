@@ -1896,11 +1896,13 @@
                 android:icon="@drawable/ic_settings_development"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
+            <!-- Enable if we need to revert to the old development settings
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            -->
             <intent-filter android:priority="50">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -1919,14 +1921,11 @@
                   android:icon="@drawable/ic_settings_development"
                   android:taskAffinity="com.android.settings"
                   android:parentActivityName="Settings">
-
-            <!-- Enable when deleting DevelopmentSettingsActivity
             <intent-filter android:priority="1">
                 <action android:name="android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            -->
             <intent-filter android:priority="50">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -1994,9 +1993,9 @@
         <activity-alias android:name="DevelopmentSettings"
                   android:exported="true"
                   android:label="@string/development_settings_title"
-                  android:targetActivity="Settings$DevelopmentSettingsActivity">
+                  android:targetActivity="Settings$DevelopmentSettingsDashboardActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.development.DevelopmentSettings" />
+                android:value="com.android.settings.development.DevelopmentSettingsDashboardFragment" />
         </activity-alias>
 
         <activity android:name=".development.AppPicker"
@@ -2011,7 +2010,7 @@
         <activity-alias android:name="UsbSettings"
                   android:exported="true"
                   android:label="@string/storage_title_usb"
-                  android:targetActivity="Settings$DevelopmentSettingsActivity">
+                  android:targetActivity="Settings$DevelopmentSettingsDashboardActivity">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.deviceinfo.UsbSettings" />
         </activity-alias>

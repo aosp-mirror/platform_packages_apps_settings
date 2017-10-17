@@ -73,12 +73,12 @@ public class Settings extends SettingsActivity {
      * @deprecated in favor of {@link DevelopmentSettingsDashboardActivity}.
      */
     @Deprecated
-    public static class DevelopmentSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class DevelopmentSettingsDashboardActivity extends SettingsActivity {
+    public static class DevelopmentSettingsActivity extends SettingsActivity {
         public static final boolean isEnabled() {
-            return FeatureFlagUtils.isEnabled("dev_option_v2");
+            return FeatureFlagUtils.isEnabled("dev_option_v1");
         }
     }
+    public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilityInversionSettingsActivity extends SettingsActivity { /* empty */ }
