@@ -277,9 +277,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
             root.removeAll();
         }
         if (ProgressiveDisclosureMixin.isV2Enabled()) {
-            addPreferencesFromResource(R.xml.security_settings);
-        } else {
             addPreferencesFromResource(R.xml.security_settings_advanced_button);
+        } else {
+            addPreferencesFromResource(R.xml.security_settings);
         }
         root = getPreferenceScreen();
 
