@@ -154,6 +154,13 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         mSwitchBarController = new DevelopmentSwitchBarController(
                 this /* DevelopmentSettings */, mSwitchBar, mIsAvailable, getLifecycle());
         mSwitchBar.show();
+
+        // Restore UI state based on whether developer options is enabled
+        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
+            enableDeveloperOptions();
+        } else {
+            disableDeveloperOptions();
+        }
     }
 
     @Override
@@ -197,17 +204,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             if (isChecked) {
                 EnableDevelopmentSettingWarningDialog.show(this /* host */);
             } else {
-                DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
-                final SystemPropPoker poker = SystemPropPoker.getInstance();
-                poker.blockPokes();
-                for (AbstractPreferenceController controller : mPreferenceControllers) {
-                    if (controller instanceof DeveloperOptionsPreferenceController) {
-                        ((DeveloperOptionsPreferenceController) controller)
-                                .onDeveloperOptionsDisabled();
-                    }
-                }
-                poker.unblockPokes();
-                poker.poke();
+                disableDeveloperOptions();
             }
         }
     }
@@ -318,13 +315,31 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         getActivity().unregisterReceiver(mBluetoothA2dpReceiver);
     }
 
-    void onEnableDevelopmentOptionsConfirmed() {
+    private void enableDeveloperOptions() {
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller instanceof DeveloperOptionsPreferenceController) {
                 ((DeveloperOptionsPreferenceController) controller).onDeveloperOptionsEnabled();
             }
         }
+    }
+
+    private void disableDeveloperOptions() {
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
+        final SystemPropPoker poker = SystemPropPoker.getInstance();
+        poker.blockPokes();
+        for (AbstractPreferenceController controller : mPreferenceControllers) {
+            if (controller instanceof DeveloperOptionsPreferenceController) {
+                ((DeveloperOptionsPreferenceController) controller)
+                        .onDeveloperOptionsDisabled();
+            }
+        }
+        poker.unblockPokes();
+        poker.poke();
+    }
+
+    void onEnableDevelopmentOptionsConfirmed() {
+        enableDeveloperOptions();
     }
 
     void onEnableDevelopmentOptionsRejected() {
@@ -401,18 +416,19 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ForceMSAAPreferenceController(context));
         controllers.add(new HardwareOverlaysPreferenceController(context));
         controllers.add(new SimulateColorSpacePreferenceController(context));
-        // set gpu renderer
+        controllers.add(new SetGpuRendererPreferenceController(context));
         controllers.add(new UsbAudioRoutingPreferenceController(context));
         controllers.add(new StrictModePreferenceController(context));
-        // profile gpu rendering
+        controllers.add(new ProfileGpuRenderingPreferenceController(context));
         controllers.add(new KeepActivitiesPreferenceController(context));
-        // background process limit
+        controllers.add(new BackgroundProcessLimitPreferenceController(context));
         // background check
         controllers.add(new AppsNotRespondingPreferenceController(context));
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
         // inactive apps
         controllers.add(new AllowAppsOnExternalPreferenceController(context));
         controllers.add(new ResizableActivityPreferenceController(context));
+        controllers.add(new FreeformWindowsPreferenceController(context));
         controllers.add(new ShortcutManagerThrottlingPreferenceController(context));
         return controllers;
     }

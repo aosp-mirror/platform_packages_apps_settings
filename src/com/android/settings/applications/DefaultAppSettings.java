@@ -133,10 +133,10 @@ public class DefaultAppSettings extends DashboardFragment {
                 return;
             }
             CharSequence summary = concatSummaryText(
-                    mDefaultSmsPreferenceController.getDefaultAppLabel(),
-                    mDefaultBrowserPreferenceController.getDefaultAppLabel());
-            summary = concatSummaryText(summary,
+                    mDefaultBrowserPreferenceController.getDefaultAppLabel(),
                     mDefaultPhonePreferenceController.getDefaultAppLabel());
+            summary = concatSummaryText(summary,
+                    mDefaultSmsPreferenceController.getDefaultAppLabel());
             if (!TextUtils.isEmpty(summary)) {
                 mSummaryLoader.setSummary(this, summary);
             }
