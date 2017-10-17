@@ -105,6 +105,7 @@ public class ChooseLockPassword extends SettingsActivity {
             mIntent = new Intent(context, ChooseLockPassword.class);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
             mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
         }
 
         public IntentBuilder setPasswordQuality(int quality) {
@@ -130,7 +131,6 @@ public class ChooseLockPassword extends SettingsActivity {
         }
 
         public IntentBuilder setPassword(String password) {
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, password);
             return this;
         }
