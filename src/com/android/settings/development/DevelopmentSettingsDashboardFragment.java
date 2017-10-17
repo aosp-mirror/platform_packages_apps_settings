@@ -60,7 +60,8 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     private static final String TAG = "DevSettingsDashboard";
 
-    private final Object mBluetoothA2dpLock = new Object();
+    private final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore =
+            new BluetoothA2dpConfigStore();
 
     private boolean mIsAvailable = true;
     private SwitchBar mSwitchBar;
@@ -104,7 +105,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 @Override
                 public void onServiceConnected(int profile,
                         BluetoothProfile proxy) {
-                    synchronized (mBluetoothA2dpLock) {
+                    synchronized (mBluetoothA2dpConfigStore) {
                         mBluetoothA2dp = (BluetoothA2dp) proxy;
                     }
                     for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -117,7 +118,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
                 @Override
                 public void onServiceDisconnected(int profile) {
-                    synchronized (mBluetoothA2dpLock) {
+                    synchronized (mBluetoothA2dpConfigStore) {
                         mBluetoothA2dp = null;
                     }
                     for (AbstractPreferenceController controller : mPreferenceControllers) {
@@ -295,7 +296,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
-                this /* devOptionsDashboardFragment */, mBluetoothA2dpLock,
+                this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
         return mPreferenceControllers;
     }
@@ -349,7 +350,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
-            Object bluetoothA2dpLock, BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
+            BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
@@ -391,13 +392,16 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
-        //controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
-        //        bluetoothA2dpLock, bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
         controllers.add(new BluetoothAudioSampleRatePreferenceController(context, lifecycle,
-                bluetoothA2dpLock, bluetoothA2dpConfigStore));
-        // bluetooth audio bits per sample
-        // bluetooth audio channel mode
-        // bluetooth audio ldac codec: playback quality
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothAudioBitsPerSamplePreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothAudioChannelModePreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
+        controllers.add(new BluetoothAudioQualityPreferenceController(context, lifecycle,
+                bluetoothA2dpConfigStore));
         controllers.add(new ShowTapsPreferenceController(context));
         controllers.add(new PointerLocationPreferenceController(context));
         controllers.add(new ShowSurfaceUpdatesPreferenceController(context));
@@ -463,7 +467,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         context) {
                     return buildPreferenceControllers(context, null /* activity */,
                             null /* lifecycle */, null /* devOptionsDashboardFragment */,
-                            null /* bluetoothA2dpLock */, null /* bluetoothA2dpConfigStore */);
+                            null /* bluetoothA2dpConfigStore */);
                 }
             };
 }
