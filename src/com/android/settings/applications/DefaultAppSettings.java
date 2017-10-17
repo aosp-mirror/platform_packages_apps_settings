@@ -26,11 +26,12 @@ import com.android.settings.applications.assist.DefaultAssistPreferenceControlle
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPaymentSettingsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
+import com.android.settings.widget.WorkOnlyCategoryPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
-import com.android.settings.applications.defaultapps.DefaultPaymentSettingsPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -45,6 +46,7 @@ public class DefaultAppSettings extends DashboardFragment {
 
     static final String TAG = "DefaultAppSettings";
 
+    private static final String KEY_DEFAULT_WORK_CATEGORY = "work_app_defaults";
     private static final String KEY_ASSIST_VOICE_INPUT = "assist_and_voice_input";
 
     @Override
@@ -69,12 +71,16 @@ public class DefaultAppSettings extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> workControllers = new ArrayList<>();
+        workControllers.add(new DefaultWorkPhonePreferenceController(context));
+        workControllers.add(new DefaultWorkBrowserPreferenceController(context));
+        controllers.addAll(workControllers);
+        controllers.add(new WorkOnlyCategoryPreferenceController(
+                context, KEY_DEFAULT_WORK_CATEGORY, workControllers));
         controllers.add(new DefaultAssistPreferenceController(context, KEY_ASSIST_VOICE_INPUT,
                 false /* showSetting */));
         controllers.add(new DefaultBrowserPreferenceController(context));
-        controllers.add(new DefaultWorkBrowserPreferenceController(context));
         controllers.add(new DefaultPhonePreferenceController(context));
-        controllers.add(new DefaultWorkPhonePreferenceController(context));
         controllers.add(new DefaultSmsPreferenceController(context));
         controllers.add(new DefaultEmergencyPreferenceController(context));
         controllers.add(new DefaultHomePreferenceController(context));
@@ -97,10 +103,8 @@ public class DefaultAppSettings extends DashboardFragment {
                     List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(KEY_ASSIST_VOICE_INPUT);
                     // TODO (b/38230148) Remove these keys when we can differentiate work results
-                    keys.add((new DefaultWorkPhonePreferenceController(context))
-                            .getPreferenceKey());
-                    keys.add((new DefaultWorkBrowserPreferenceController(context))
-                            .getPreferenceKey());
+                    keys.add(DefaultWorkPhonePreferenceController.KEY);
+                    keys.add(DefaultWorkBrowserPreferenceController.KEY);
                     return keys;
                 }
 

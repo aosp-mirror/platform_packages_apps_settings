@@ -23,6 +23,7 @@ import com.android.settings.Utils;
 
 public class DefaultWorkBrowserPreferenceController extends DefaultBrowserPreferenceController {
 
+    public static final String KEY = "work_default_browser";
     private final UserHandle mUserHandle;
 
     public DefaultWorkBrowserPreferenceController(Context context) {
@@ -35,7 +36,7 @@ public class DefaultWorkBrowserPreferenceController extends DefaultBrowserPrefer
 
     @Override
     public String getPreferenceKey() {
-        return "work_default_browser";
+        return KEY;
     }
 
     @Override
