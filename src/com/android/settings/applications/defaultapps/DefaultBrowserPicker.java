@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.defaultapps;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
@@ -47,7 +48,7 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
     @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
-
+        final Context context = getContext();
         // Resolve that intent and check that the handleAllWebDataURI boolean is set
         final List<ResolveInfo> list = mPm.queryIntentActivitiesAsUser(
                 DefaultBrowserPreferenceController.BROWSE_PROBE, PackageManager.MATCH_ALL, mUserId);
@@ -59,7 +60,7 @@ public class DefaultBrowserPicker extends DefaultAppPickerFragment {
                 continue;
             }
             try {
-                candidates.add(new DefaultAppInfo(mPm,
+                candidates.add(new DefaultAppInfo(context, mPm,
                         mPm.getApplicationInfoAsUser(info.activityInfo.packageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

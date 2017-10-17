@@ -79,7 +79,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
                 continue;
             }
             packages.add(packageName);
-            candidates.add(new DefaultAppInfo(mPm, mUserId, info.component));
+            candidates.add(new DefaultAppInfo(getContext(), mPm, mUserId, info.component));
         }
         return candidates;
     }
@@ -88,7 +88,7 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     protected String getDefaultKey() {
         final ComponentName cn = getCurrentAssist();
         if (cn != null) {
-            return new DefaultAppInfo(mPm, mUserId, cn).getKey();
+            return new DefaultAppInfo(getContext(), mPm, mUserId, cn).getKey();
         }
         return null;
     }

@@ -57,17 +57,18 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
     @Override
     protected List<VoiceInputDefaultAppInfo> getCandidates() {
         final List<VoiceInputDefaultAppInfo> candidates = new ArrayList<>();
+        final Context context = getContext();
         boolean hasEnabled = true;
         for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
             final boolean enabled = TextUtils.equals(info.key, mAssistRestrict);
             hasEnabled |= enabled;
-            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
         }
 
         final boolean assistIsService = !hasEnabled;
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
             final boolean enabled = !assistIsService;
-            candidates.add(new VoiceInputDefaultAppInfo(mPm, mUserId, info, enabled));
+            candidates.add(new VoiceInputDefaultAppInfo(context, mPm, mUserId, info, enabled));
         }
         return candidates;
     }
@@ -132,9 +133,9 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
 
         public VoiceInputHelper.BaseInfo mInfo;
 
-        public VoiceInputDefaultAppInfo(PackageManagerWrapper pm, int userId,
+        public VoiceInputDefaultAppInfo(Context context, PackageManagerWrapper pm, int userId,
                 VoiceInputHelper.BaseInfo info, boolean enabled) {
-            super(pm, userId, info.componentName, null /* summary */, enabled);
+            super(context, pm, userId, info.componentName, null /* summary */, enabled);
             mInfo = info;
         }
 

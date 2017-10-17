@@ -187,10 +187,11 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> resolveInfos = mPm.getPackageManager()
                 .queryIntentServices(AUTOFILL_PROBE, PackageManager.GET_META_DATA);
+        final Context context = getContext();
         for (ResolveInfo info : resolveInfos) {
             final String permission = info.serviceInfo.permission;
             if (Manifest.permission.BIND_AUTOFILL_SERVICE.equals(permission)) {
-                candidates.add(new DefaultAppInfo(mPm, mUserId, new ComponentName(
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId, new ComponentName(
                         info.serviceInfo.packageName, info.serviceInfo.name)));
             }
         }

@@ -67,7 +67,7 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         try {
             final String packageName = mPackageManager.getDefaultBrowserPackageNameAsUser(mUserId);
             Log.d(TAG, "Get default browser package: " + packageName);
-            return new DefaultAppInfo(mPackageManager,
+            return new DefaultAppInfo(mContext, mPackageManager,
                     mPackageManager.getPackageManager().getApplicationInfo(packageName, 0));
         } catch (PackageManager.NameNotFoundException e) {
             return null;

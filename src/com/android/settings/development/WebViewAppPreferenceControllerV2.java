@@ -85,7 +85,7 @@ public class WebViewAppPreferenceControllerV2 extends
     @VisibleForTesting
     DefaultAppInfo getDefaultAppInfo() {
         final PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        return new DefaultAppInfo(mPackageManager,
+        return new DefaultAppInfo(mContext, mPackageManager,
                 currentPackage == null ? null : currentPackage.applicationInfo);
     }
 

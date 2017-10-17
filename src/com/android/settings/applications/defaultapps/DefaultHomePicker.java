@@ -53,6 +53,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
         final boolean mustSupportManagedProfile = hasManagedProfile();
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> homeActivities = new ArrayList<>();
+        final Context context = getContext();
         mPm.getHomeActivities(homeActivities);
 
         for (ResolveInfo resolveInfo : homeActivities) {
@@ -71,7 +72,7 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
                 summary = null;
             }
             final DefaultAppInfo candidate =
-                    new DefaultAppInfo(mPm, mUserId, activityName, summary, enabled);
+                    new DefaultAppInfo(context, mPm, mUserId, activityName, summary, enabled);
             candidates.add(candidate);
         }
         return candidates;

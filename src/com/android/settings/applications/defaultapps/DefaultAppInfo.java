@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.app.AppGlobals;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageItemInfo;
@@ -25,6 +26,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -39,18 +41,20 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
     public final PackageItemInfo packageItemInfo;
     public final String summary;
     protected final PackageManagerWrapper mPm;
+    private final Context mContext;
 
-    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn) {
-        this(pm, uid, cn, null /* summary */);
+    public DefaultAppInfo(Context context, PackageManagerWrapper pm, int uid, ComponentName cn) {
+        this(context, pm, uid, cn, null /* summary */, true /* enabled */);
     }
 
-    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn, String summary) {
-        this(pm, uid, cn, summary, true /* enabled */);
+    public DefaultAppInfo(Context context, PackageManagerWrapper pm, PackageItemInfo info) {
+        this(context, pm, info, null /* summary */, true /* enabled */);
     }
 
-    public DefaultAppInfo(PackageManagerWrapper pm, int uid, ComponentName cn, String summary,
-            boolean enabled) {
+    public DefaultAppInfo(Context context, PackageManagerWrapper pm, int uid, ComponentName cn,
+            String summary, boolean enabled) {
         super(enabled);
+        mContext = context;
         mPm = pm;
         packageItemInfo = null;
         userId = uid;
@@ -58,18 +62,15 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
         this.summary = summary;
     }
 
-    public DefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo info, String summary,
-            boolean enabled) {
+    public DefaultAppInfo(Context context, PackageManagerWrapper pm, PackageItemInfo info,
+            String summary, boolean enabled) {
         super(enabled);
+        mContext = context;
         mPm = pm;
         userId = UserHandle.myUserId();
         packageItemInfo = info;
         componentName = null;
         this.summary = summary;
-    }
-
-    public DefaultAppInfo(PackageManagerWrapper pm, PackageItemInfo info) {
-        this(pm, info, null /* summary */, true /* enabled */);
     }
 
     @Override
@@ -97,22 +98,29 @@ public class DefaultAppInfo extends RadioButtonPickerFragment.CandidateInfo {
 
     @Override
     public Drawable loadIcon() {
+        final IconDrawableFactory factory = IconDrawableFactory.newInstance(mContext);
         if (componentName != null) {
             try {
                 final ComponentInfo componentInfo = getComponentInfo();
+                final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
+                        componentName.getPackageName(), 0, userId);
                 if (componentInfo != null) {
-                    return componentInfo.loadIcon(mPm.getPackageManager());
+                    return factory.getBadgedIcon(componentInfo, appInfo, userId);
                 } else {
-                    final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
-                            componentName.getPackageName(), 0, userId);
-                    return appInfo.loadIcon(mPm.getPackageManager());
+                    return factory.getBadgedIcon(appInfo);
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 return null;
             }
         }
         if (packageItemInfo != null) {
-            return packageItemInfo.loadIcon(mPm.getPackageManager());
+            try {
+                final ApplicationInfo appInfo = mPm.getApplicationInfoAsUser(
+                        packageItemInfo.packageName, 0, userId);
+                return factory.getBadgedIcon(packageItemInfo, appInfo, userId);
+            } catch (PackageManager.NameNotFoundException e) {
+                return null;
+            }
         } else {
             return null;
         }
