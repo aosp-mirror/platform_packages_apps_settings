@@ -123,6 +123,7 @@ public class StayAwakePreferenceControllerTest {
     public void observerOnChangeCalledWithSameUri_preferenceShouldBeUpdated() {
         Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
+        mController.onResume();
         mController.mSettingsObserver.onChange(false,
                 Settings.Global.getUriFor(Settings.Global.STAY_ON_WHILE_PLUGGED_IN));
 
@@ -133,6 +134,7 @@ public class StayAwakePreferenceControllerTest {
     public void observerOnChangeCalledWithDifferentUri_preferenceShouldNotBeUpdated() {
         Settings.System.putInt(mContentResolver, Settings.Global.STAY_ON_WHILE_PLUGGED_IN,
                 StayAwakePreferenceController.SETTING_VALUE_ON);
+        mController.onResume();
         mController.mSettingsObserver.onChange(false, null);
 
         verify(mPreference, never()).setChecked(true);
