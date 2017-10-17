@@ -106,7 +106,11 @@ public class ProgressiveDisclosureMixin implements Preference.OnPreferenceClickL
     }
 
     public boolean isEnabled() {
-        return !FeatureFlagUtils.isEnabled(FEATURE_FLAG_NEW_ADVANCE_BUTTON);
+        return !isV2Enabled();
+    }
+
+    public static boolean isV2Enabled() {
+        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_NEW_ADVANCE_BUTTON);
     }
 
     /**
