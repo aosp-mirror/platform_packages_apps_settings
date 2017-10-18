@@ -28,11 +28,12 @@ import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
 import android.provider.DocumentsContract;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,14 +52,13 @@ public class MusicViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
     @Mock
-    private StorageVolumeProvider mSvp;
-    @Mock
     private StorageStatsSource mSource;
 
     private Context mContext;
     private MusicViewHolderController mController;
     private VolumeInfo mVolume;
-    private AppViewHolder mHolder;
+    private View mView;
+    private ApplicationViewHolder mHolder;
 
     @Before
     public void setUp() throws Exception {
@@ -69,25 +69,26 @@ public class MusicViewHolderControllerTest {
                 new UserHandle(0));
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        mHolder = AppViewHolder.createOrRecycle(inflater, null);
+        mView = ApplicationViewHolder.newView(inflater, new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(mView);
     }
 
     @Test
     public void storageShouldBeZeroBytesIfQueriedBeforeStorageQueryFinishes() {
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("0.00 B");
+        assertThat(mHolder.mSummary.getText().toString()).isEqualTo("0.00 B");
     }
 
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
-        when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class))).thenReturn(
-                new StorageStatsSource.ExternalStorageStats(1, 1, 0, 0, 0));
+        when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class)))
+                .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 1, 0, 0, 0));
 
         mController.queryStats();
         mController.setupView(mHolder);
 
-        assertThat(mHolder.summary.getText().toString()).isEqualTo("1.00 B");
+        assertThat(mHolder.mSummary.getText().toString()).isEqualTo("1.00 B");
     }
 
     @Test

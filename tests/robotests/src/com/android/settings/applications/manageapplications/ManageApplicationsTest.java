@@ -31,19 +31,16 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.Handler;
+import android.os.Bundle;
 import android.os.Looper;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -103,30 +100,6 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void launchFragment() {
-        SettingsRobolectricTestRunner.startSettingsFragment(
-                mFragment, Settings.ManageApplicationsActivity.class);
-    }
-
-    @Test
-    public void updateDisableView_appDisabledUntilUsed_shouldSetDisabled() {
-        final TextView view = mock(TextView.class);
-        final ApplicationInfo info = new ApplicationInfo();
-        info.flags = ApplicationInfo.FLAG_INSTALLED;
-        info.enabled = true;
-        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
-        ManageApplications fragment = mock(ManageApplications.class);
-        when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final ManageApplications.ApplicationsAdapter adapter =
-                new ManageApplications.ApplicationsAdapter(mState, fragment,
-                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL));
-
-        adapter.updateDisableView(view, info);
-
-        verify(view).setText(R.string.disabled);
-    }
-
-    @Test
     public void updateMenu_mainListType_showAppReset() {
         setUpOptionMenus();
         ReflectionHelpers.setField(mFragment, "mListType", ManageApplications.LIST_TYPE_MAIN);
@@ -170,14 +143,12 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
-                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
+                spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
-        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
 
         // app loading completed
         ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", true);
@@ -196,15 +167,12 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", mock(View.class));
         ReflectionHelpers.setField(fragment, "mListContainer", mock(View.class));
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-
-        final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
-                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
+                spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
-        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
 
         // app loading not yet completed
         ReflectionHelpers.setField(adapter, "mHasReceivedLoadEntries", false);
@@ -218,6 +186,10 @@ public class ManageApplicationsTest {
     public void onRebuildComplete_shouldHideLoadingView() {
         final Context context = RuntimeEnvironment.application;
         final ManageApplications fragment = mock(ManageApplications.class);
+        final RecyclerView recyclerView = mock(RecyclerView.class);
+        final View emptyView = mock(View.class);
+        ReflectionHelpers.setField(fragment, "mRecyclerView", recyclerView);
+        ReflectionHelpers.setField(fragment, "mEmptyView", emptyView);
         final View loadingContainer = mock(View.class);
         when(loadingContainer.getContext()).thenReturn(context);
         final View listContainer = mock(View.class);
@@ -226,14 +198,12 @@ public class ManageApplicationsTest {
         ReflectionHelpers.setField(fragment, "mLoadingContainer", loadingContainer);
         ReflectionHelpers.setField(fragment, "mListContainer", listContainer);
         when(fragment.getActivity()).thenReturn(mock(Activity.class));
-        final Handler handler = mock(Handler.class);
         final ManageApplications.ApplicationsAdapter adapter =
-            spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
-                    AppFilterRegistry.getInstance().get(FILTER_APPS_ALL)));
+                spy(new ManageApplications.ApplicationsAdapter(mState, fragment,
+                        AppFilterRegistry.getInstance().get(FILTER_APPS_ALL), new Bundle()));
         final LoadingViewController loadingViewController =
                 mock(LoadingViewController.class);
         ReflectionHelpers.setField(adapter, "mLoadingViewController", loadingViewController);
-        ReflectionHelpers.setField(adapter, "mFgHandler", handler);
         ReflectionHelpers.setField(adapter, "mAppFilter",
                 AppFilterRegistry.getInstance().get(FILTER_APPS_ALL));
 

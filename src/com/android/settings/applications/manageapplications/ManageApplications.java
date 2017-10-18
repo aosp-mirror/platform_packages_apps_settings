@@ -40,16 +40,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
-import android.content.pm.PackageManager;
-import android.icu.text.AlphabeticIndex;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.LocaleList;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.preference.PreferenceFrameLayout;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -59,19 +57,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.SectionIndexer;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -86,7 +76,6 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
 import com.android.settings.Settings.WriteSettingsActivity;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
@@ -122,13 +111,13 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
 import com.android.settingslib.applications.ApplicationsState.VolumeFilter;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -138,7 +127,7 @@ import java.util.Set;
  * intent.
  */
 public class ManageApplications extends InstrumentedPreferenceFragment
-        implements OnItemClickListener, OnItemSelectedListener {
+        implements View.OnClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";
     static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -185,22 +174,16 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ApplicationsState mApplicationsState;
 
     public int mListType;
-    public AppFilterItem mFilter;
-
-    public ApplicationsAdapter mApplications;
+    private AppFilterItem mFilter;
+    private ApplicationsAdapter mApplications;
 
     private View mLoadingContainer;
 
     private View mListContainer;
-
-    // ListView used to display list
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
 
     // Size resource used for packages whose size computation failed for some reason
     CharSequence mInvalidSizeStr;
-
-    // layout inflater object used to inflate views
-    private LayoutInflater mInflater;
 
     private String mCurrentPkgName;
     private int mCurrentUid;
@@ -234,6 +217,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private int mStorageType;
     private boolean mIsWorkOnly;
     private int mWorkUserId;
+    private View mEmptyView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -304,25 +288,14 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        // initialize the inflater
-        mInflater = inflater;
-
         mRootView = inflater.inflate(R.layout.manage_applications_apps, null);
         mLoadingContainer = mRootView.findViewById(R.id.loading_container);
         mListContainer = mRootView.findViewById(R.id.list_container);
         if (mListContainer != null) {
             // Create adapter and list view here
-            View emptyView = mListContainer.findViewById(com.android.internal.R.id.empty);
-            ListView lv = mListContainer.findViewById(android.R.id.list);
-            if (emptyView != null) {
-                lv.setEmptyView(emptyView);
-            }
-            lv.setOnItemClickListener(this);
-            lv.setSaveEnabled(true);
-            lv.setItemsCanFocus(true);
-            lv.setTextFilterEnabled(true);
-            mListView = lv;
-            mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter);
+            mEmptyView = mListContainer.findViewById(android.R.id.empty);
+            mApplications = new ApplicationsAdapter(mApplicationsState, this, mFilter,
+                    savedInstanceState);
             if (savedInstanceState != null) {
                 mApplications.mHasReceivedLoadEntries =
                         savedInstanceState.getBoolean(EXTRA_HAS_ENTRIES, false);
@@ -347,11 +320,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                                 mVolumeUuid,
                                 UserHandle.of(userId)));
             }
-            mListView.setAdapter(mApplications);
-            mListView.setRecyclerListener(mApplications);
-            mListView.setFastScrollEnabled(isFastScrollEnabled());
-
-            Utils.prepareCustomPreferencesList(container, mRootView, mListView, false);
+            mRecyclerView = mListContainer.findViewById(R.id.apps_list);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(
+                    getContext(), RecyclerView.VERTICAL, false /* reverseLayout */));
+            mRecyclerView.setAdapter(mApplications);
         }
 
         // We have to do this now because PreferenceFrameLayout looks at it
@@ -492,6 +464,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         outState.putBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         outState.putBoolean(EXTRA_HAS_ENTRIES, mApplications.mHasReceivedLoadEntries);
         outState.putBoolean(EXTRA_HAS_BRIDGE, mApplications.mHasReceivedBridgeCallback);
+        if (mApplications != null) {
+            mApplications.onSaveInstanceState(outState);
+        }
     }
 
     @Override
@@ -633,7 +608,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case R.id.sort_order_alpha:
             case R.id.sort_order_size:
                 mSortOrder = menuId;
-                mListView.setFastScrollEnabled(isFastScrollEnabled());
                 if (mApplications != null) {
                     mApplications.rebuild(mSortOrder);
                 }
@@ -667,10 +641,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onClick(View view) {
         if (mApplications == null) {
             return;
         }
+        final int position = mRecyclerView.getChildAdapterPosition(view);
 
         if (mApplications.getApplicationCount() > position) {
             ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
@@ -757,7 +732,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     mFilterOptions.size() > 1 ? View.VISIBLE : View.GONE);
             notifyDataSetChanged();
             if (mFilterOptions.size() == 1) {
-                if (DEBUG) Log.d(TAG, "Auto selecting filter " + filter);
+                if (DEBUG) {
+                    Log.d(TAG, "Auto selecting filter " + filter);
+                }
                 mManageApplications.mFilterSpinner.setSelection(0);
                 mManageApplications.onItemSelected(null, null, 0, 0);
             }
@@ -777,7 +754,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             notifyDataSetChanged();
             if (mManageApplications.mFilter == filter) {
                 if (mFilterOptions.size() > 0) {
-                    if (DEBUG) Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0));
+                    if (DEBUG) {
+                        Log.d(TAG, "Auto selecting filter " + mFilterOptions.get(0));
+                    }
                     mManageApplications.mFilterSpinner.setSelection(0);
                     mManageApplications.onItemSelected(null, null, 0, 0);
                 }
@@ -795,38 +774,25 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
     }
 
-    /*
-     * Custom adapter implementation for the ListView
-     * This adapter maintains a map for each displayed application and its properties
-     * An index value on each AppInfo object indicates the correct position or index
-     * in the list. If the list gets updated dynamically when the user is viewing the list of
-     * applications, we need to return the correct index of position. This is done by mapping
-     * the getId methods via the package name into the internal maps and indices.
-     * The order of applications in the list is mirrored in mAppLocalList
-     */
-    static class ApplicationsAdapter extends BaseAdapter implements Filterable,
-            ApplicationsState.Callbacks, AppStateBaseBridge.Callback,
-            AbsListView.RecyclerListener, SectionIndexer {
+    static class ApplicationsAdapter extends RecyclerView.Adapter<ApplicationViewHolder>
+            implements ApplicationsState.Callbacks, AppStateBaseBridge.Callback {
 
-        private static final SectionInfo[] EMPTY_SECTIONS = new SectionInfo[0];
+        private static final String STATE_LAST_SCROLL_INDEX = "state_last_scroll_index";
+        private static final int VIEW_TYPE_APP = 0;
+        private static final int VIEW_TYPE_EXTRA_VIEW = 1;
 
         private final ApplicationsState mState;
         private final ApplicationsState.Session mSession;
         private final ManageApplications mManageApplications;
         private final Context mContext;
-        private final ArrayList<View> mActive = new ArrayList<>();
         private final AppStateBaseBridge mExtraInfoBridge;
-        private final Handler mBgHandler;
-        private final Handler mFgHandler;
         private final LoadingViewController mLoadingViewController;
 
         private AppFilterItem mAppFilter;
-        private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
         private ArrayList<ApplicationsState.AppEntry> mEntries;
         private boolean mResumed;
         private int mLastSortMode = -1;
         private int mWhichSize = SIZE_TOTAL;
-        CharSequence mCurFilterPrefix;
         private AppFilter mCompositeFilter;
         private boolean mHasReceivedLoadEntries;
         private boolean mHasReceivedBridgeCallback;
@@ -836,39 +802,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         // fragment is paused. We need this special handling because app entries are added gradually
         // when we rebuild the list after the user made some changes, like uninstalling an app.
         private int mLastIndex = -1;
-        private int mLastTop;
-
-        private AlphabeticIndex.ImmutableIndex<Locale> mIndex;
-        private SectionInfo[] mSections = EMPTY_SECTIONS;
-        private int[] mPositionToSectionIndex;
-
-        private Filter mFilter = new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                ArrayList<ApplicationsState.AppEntry> entries
-                        = applyPrefixFilter(constraint, mBaseEntries);
-                FilterResults fr = new FilterResults();
-                fr.values = entries;
-                fr.count = entries.size();
-                return fr;
-            }
-
-            @Override
-            @SuppressWarnings("unchecked")
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mCurFilterPrefix = constraint;
-                mEntries = (ArrayList<ApplicationsState.AppEntry>) results.values;
-                rebuildSections();
-                notifyDataSetChanged();
-            }
-        };
-
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
-                AppFilterItem appFilter) {
+                AppFilterItem appFilter, Bundle savedInstanceState) {
+            setHasStableIds(true);
             mState = state;
-            mFgHandler = new Handler();
-            mBgHandler = new Handler(mState.getBackgroundLooper());
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
             mLoadingViewController = new LoadingViewController(
@@ -893,6 +831,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             } else {
                 mExtraInfoBridge = null;
             }
+            if (savedInstanceState != null) {
+                mLastIndex = savedInstanceState.getInt(STATE_LAST_SCROLL_INDEX);
+            }
         }
 
         public void setCompositeFilter(AppFilter compositeFilter) {
@@ -907,9 +848,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         public void setExtraViewController(FileViewHolderController extraViewController) {
             mExtraViewController = extraViewController;
-            mBgHandler.post(() -> {
+            // Start to query extra view's stats on background, and once done post result to main
+            // thread.
+            ThreadUtils.postOnBackgroundThread(() -> {
                 mExtraViewController.queryStats();
-                mFgHandler.post(() -> {
+                ThreadUtils.postOnMainThread(() -> {
                     onExtraViewCompleted();
                 });
             });
@@ -938,11 +881,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     mExtraInfoBridge.pause();
                 }
             }
+        }
+
+        public void onSaveInstanceState(Bundle outState) {
             // Record the current scroll position before pausing.
-            mLastIndex = mManageApplications.mListView.getFirstVisiblePosition();
-            View v = mManageApplications.mListView.getChildAt(0);
-            mLastTop =
-                    (v == null) ? 0 : (v.getTop() - mManageApplications.mListView.getPaddingTop());
+            final LinearLayoutManager layoutManager =
+                    (LinearLayoutManager) mManageApplications.mRecyclerView.getLayoutManager();
+            outState.putInt(STATE_LAST_SCROLL_INDEX, layoutManager.findFirstVisibleItemPosition());
         }
 
         public void release() {
@@ -958,6 +903,21 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
             mLastSortMode = sort;
             rebuild();
+        }
+
+        @Override
+        public ApplicationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            final View view = ApplicationViewHolder.newView(
+                    LayoutInflater.from(parent.getContext()), parent);
+            return new ApplicationViewHolder(view);
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            boolean isLastItem = (getItemCount() - 1) == position;
+            return hasExtraView() && isLastItem
+                    ? VIEW_TYPE_EXTRA_VIEW
+                    : VIEW_TYPE_APP;
         }
 
         public void rebuild() {
@@ -1008,11 +968,11 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
             filterObj = new CompoundFilter(filterObj, ApplicationsState.FILTER_NOT_HIDE);
             AppFilter finalFilterObj = filterObj;
-            mBgHandler.post(() -> {
+            ThreadUtils.postOnBackgroundThread(() -> {
                 final ArrayList<AppEntry> entries = mSession.rebuild(finalFilterObj,
                         comparatorObj, false);
                 if (entries != null) {
-                    mFgHandler.post(() -> onRebuildComplete(entries));
+                    ThreadUtils.postOnMainThread(() -> onRebuildComplete(entries));
                 }
             });
         }
@@ -1031,8 +991,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 ArrayList<ApplicationsState.AppEntry> entries) {
             int size = entries.size();
             // returnList will not have more entries than entries
-            ArrayList<ApplicationsState.AppEntry> returnEntries = new
-                    ArrayList<ApplicationsState.AppEntry>(size);
+            ArrayList<ApplicationsState.AppEntry> returnEntries = new ArrayList<>(size);
 
             // assume appinfo of same package but different users are grouped together
             PackageItemInfo lastInfo = null;
@@ -1055,21 +1014,19 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     filterType == FILTER_APPS_POWER_WHITELIST_ALL) {
                 entries = removeDuplicateIgnoringUser(entries);
             }
-            mBaseEntries = entries;
-            if (mBaseEntries != null) {
-                mEntries = applyPrefixFilter(mCurFilterPrefix, mBaseEntries);
-                rebuildSections();
-            } else {
-                mEntries = null;
-                mSections = EMPTY_SECTIONS;
-                mPositionToSectionIndex = null;
-            }
-
+            mEntries = entries;
             notifyDataSetChanged();
+            if (getItemCount() == 0) {
+                mManageApplications.mRecyclerView.setVisibility(View.GONE);
+                mManageApplications.mEmptyView.setVisibility(View.VISIBLE);
+            } else {
+                mManageApplications.mEmptyView.setVisibility(View.GONE);
+                mManageApplications.mRecyclerView.setVisibility(View.VISIBLE);
+            }
             // Restore the last scroll position if the number of entries added so far is bigger than
             // it.
-            if (mLastIndex != -1 && getCount() > mLastIndex) {
-                mManageApplications.mListView.setSelectionFromTop(mLastIndex, mLastTop);
+            if (mLastIndex != -1 && getItemCount() > mLastIndex) {
+                mManageApplications.mRecyclerView.getLayoutManager().scrollToPosition(mLastIndex);
                 mLastIndex = -1;
             }
 
@@ -1086,45 +1043,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mManageApplications.setHasInstant(mState.haveInstantApps());
         }
 
-        private void rebuildSections() {
-            if (mEntries != null && mManageApplications.mListView.isFastScrollEnabled()) {
-                // Rebuild sections
-                if (mIndex == null) {
-                    LocaleList locales = mContext.getResources().getConfiguration().getLocales();
-                    if (locales.size() == 0) {
-                        locales = new LocaleList(Locale.ENGLISH);
-                    }
-                    AlphabeticIndex<Locale> index = new AlphabeticIndex(locales.get(0));
-                    int localeCount = locales.size();
-                    for (int i = 1; i < localeCount; i++) {
-                        index.addLabels(locales.get(i));
-                    }
-                    // Ensure we always have some base English locale buckets
-                    index.addLabels(Locale.ENGLISH);
-                    mIndex = index.buildImmutableIndex();
-                }
-
-                ArrayList<SectionInfo> sections = new ArrayList<>();
-                int lastSecId = -1;
-                int totalEntries = mEntries.size();
-                mPositionToSectionIndex = new int[totalEntries];
-
-                for (int pos = 0; pos < totalEntries; pos++) {
-                    String label = mEntries.get(pos).label;
-                    int secId = mIndex.getBucketIndex(TextUtils.isEmpty(label) ? "" : label);
-                    if (secId != lastSecId) {
-                        lastSecId = secId;
-                        sections.add(new SectionInfo(mIndex.getBucket(secId).getLabel(), pos));
-                    }
-                    mPositionToSectionIndex[pos] = sections.size() - 1;
-                }
-                mSections = sections.toArray(EMPTY_SECTIONS);
-            } else {
-                mSections = EMPTY_SECTIONS;
-                mPositionToSectionIndex = null;
-            }
-        }
-
         @VisibleForTesting
         void updateLoading() {
             final boolean appLoaded = mHasReceivedLoadEntries && mSession.getAllApps().size() != 0;
@@ -1132,26 +1050,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mLoadingViewController.showContent(false /* animate */);
             } else {
                 mLoadingViewController.showLoadingViewDelayed();
-            }
-        }
-
-        ArrayList<ApplicationsState.AppEntry> applyPrefixFilter(CharSequence prefix,
-                ArrayList<ApplicationsState.AppEntry> origEntries) {
-            if (prefix == null || prefix.length() == 0) {
-                return origEntries;
-            } else {
-                String prefixStr = ApplicationsState.normalize(prefix.toString());
-                final String spacePrefixStr = " " + prefixStr;
-                ArrayList<ApplicationsState.AppEntry> newEntries
-                        = new ArrayList<ApplicationsState.AppEntry>();
-                for (int i = 0; i < origEntries.size(); i++) {
-                    ApplicationsState.AppEntry entry = origEntries.get(i);
-                    String nlabel = entry.getNormalizedLabel();
-                    if (nlabel.startsWith(prefixStr) || nlabel.indexOf(spacePrefixStr) != -1) {
-                        newEntries.add(entry);
-                    }
-                }
-                return newEntries;
             }
         }
 
@@ -1186,29 +1084,27 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public void onPackageSizeChanged(String packageName) {
-            for (int i = 0; i < mActive.size(); i++) {
-                AppViewHolder holder = (AppViewHolder) mActive.get(i).getTag();
-                if (holder == null || holder.entry == null) {
+            if (mEntries == null) {
+                return;
+            }
+            final int size = mEntries.size();
+            for (int i = 0; i < size; i++) {
+                final AppEntry entry = mEntries.get(i);
+                final ApplicationInfo info = entry.info;
+                if (info == null && !TextUtils.equals(packageName, info.packageName)) {
                     continue;
                 }
-                ApplicationInfo info = holder.entry.info;
-                if (info == null) {
-                    continue;
-                }
-                if (holder.entry.info.packageName.equals(packageName)) {
-                    synchronized (holder.entry) {
-                        updateSummary(holder);
-                    }
-                    if (holder.entry.info.packageName.equals(mManageApplications.mCurrentPkgName)
-                            && mLastSortMode == R.id.sort_order_size) {
-                        // We got the size information for the last app the
-                        // user viewed, and are sorting by size...  they may
-                        // have cleared data, so we immediately want to resort
-                        // the list with the new size to reflect it to the user.
-                        rebuild();
-                    }
+                if (TextUtils.equals(mManageApplications.mCurrentPkgName, info.packageName)) {
+                    // We got the size information for the last app the
+                    // user viewed, and are sorting by size...  they may
+                    // have cleared data, so we immediately want to resort
+                    // the list with the new size to reflect it to the user.
+                    rebuild();
                     return;
+                } else {
+                    notifyItemChanged(i);
                 }
+
             }
         }
 
@@ -1227,46 +1123,30 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         public void onExtraViewCompleted() {
-            int size = mActive.size();
-            // If we have no elements, don't do anything.
-            if (size < 1) {
+            if (!hasExtraView()) {
                 return;
             }
-            AppViewHolder holder = (AppViewHolder) mActive.get(size - 1).getTag();
-
-            // HACK: The extra view has no AppEntry -- and should be the only element without one.
-            // Thus, if the last active element has no AppEntry, it is the extra view.
-            if (holder == null || holder.entry != null) {
-                return;
-            }
-
-            mExtraViewController.setupView(holder);
+            // Update last item - this is assumed to be the extra view.
+            notifyItemChanged(getItemCount() - 1);
         }
 
-        public int getCount() {
+        @Override
+        public int getItemCount() {
             if (mEntries == null) {
                 return 0;
             }
-            int extraViewAddition =
-                    (mExtraViewController != null && mExtraViewController.shouldShow()) ? 1 : 0;
-            return mEntries.size() + extraViewAddition;
+            return mEntries.size() + (hasExtraView() ? 1 : 0);
         }
 
         public int getApplicationCount() {
             return mEntries != null ? mEntries.size() : 0;
         }
 
-        public Object getItem(int position) {
-            if (position == mEntries.size()) {
-                return mExtraViewController;
-            }
+        public AppEntry getAppEntry(int position) {
             return mEntries.get(position);
         }
 
-        public ApplicationsState.AppEntry getAppEntry(int position) {
-            return mEntries.get(position);
-        }
-
+        @Override
         public long getItemId(int position) {
             if (position == mEntries.size()) {
                 return -1;
@@ -1274,142 +1154,76 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             return mEntries.get(position).id;
         }
 
-        @Override
-        public boolean areAllItemsEnabled() {
-            return false;
-        }
-
-        @Override
         public boolean isEnabled(int position) {
-            if (position == mEntries.size() && mExtraViewController != null &&
-                    mExtraViewController.shouldShow()) {
-                return true;
-            }
-
-            if (mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
+            if (getItemViewType(position) == VIEW_TYPE_EXTRA_VIEW
+                    || mManageApplications.mListType != LIST_TYPE_HIGH_POWER) {
                 return true;
             }
             ApplicationsState.AppEntry entry = mEntries.get(position);
             return !PowerWhitelistBackend.getInstance().isSysWhitelisted(entry.info.packageName);
         }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
-            // A ViewHolder keeps references to children views to avoid unnecessary calls
-            // to findViewById() on each row.
-            AppViewHolder holder = AppViewHolder.createOrRecycle(mManageApplications.mInflater,
-                    convertView);
-            convertView = holder.rootView;
-
-            // Handle the extra view if it is the last entry.
+        @Override
+        public void onBindViewHolder(ApplicationViewHolder holder, int position) {
             if (mEntries != null && mExtraViewController != null && position == mEntries.size()) {
+                // set up view for extra view controller
                 mExtraViewController.setupView(holder);
-                convertView.setEnabled(true);
             } else {
                 // Bind the data efficiently with the holder
                 ApplicationsState.AppEntry entry = mEntries.get(position);
                 synchronized (entry) {
-                    holder.entry = entry;
-                    if (entry.label != null) {
-                        holder.appName.setText(entry.label);
-                    }
+                    holder.setTitle(entry.label);
                     mState.ensureIcon(entry);
-                    if (entry.icon != null) {
-                        holder.appIcon.setImageDrawable(entry.icon);
-                    }
-                    updateSummary(holder);
-                    updateDisableView(holder.disabled, entry.info);
+                    holder.setIcon(entry.icon);
+                    updateSummary(holder, entry);
+                    holder.updateDisableView(entry.info);
                 }
-                convertView.setEnabled(isEnabled(position));
+                holder.setEnabled(isEnabled(position));
             }
-
-            mActive.remove(convertView);
-            mActive.add(convertView);
-            return convertView;
+            holder.itemView.setOnClickListener(mManageApplications);
         }
 
-        @VisibleForTesting
-        void updateDisableView(TextView view, ApplicationInfo info) {
-            if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
-                view.setVisibility(View.VISIBLE);
-                view.setText(R.string.not_installed);
-            } else if (!info.enabled || info.enabledSetting
-                    == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED) {
-                view.setVisibility(View.VISIBLE);
-                view.setText(R.string.disabled);
-            } else {
-                view.setVisibility(View.GONE);
-            }
-        }
-
-        private void updateSummary(AppViewHolder holder) {
+        private void updateSummary(ApplicationViewHolder holder, AppEntry entry) {
             switch (mManageApplications.mListType) {
                 case LIST_TYPE_NOTIFICATION:
-                    if (holder.entry.extraInfo != null) {
-                        holder.summary.setText(InstalledAppDetails.getNotificationSummary(
-                                (AppRow) holder.entry.extraInfo, mContext));
+                    if (entry.extraInfo != null) {
+                        holder.setSummary(InstalledAppDetails.getNotificationSummary(
+                                (AppRow) entry.extraInfo, mContext));
                     } else {
-                        holder.summary.setText(null);
+                        holder.setSummary(null);
                     }
                     break;
-
                 case LIST_TYPE_USAGE_ACCESS:
-                    if (holder.entry.extraInfo != null) {
-                        holder.summary.setText((new UsageState((PermissionState) holder.entry
-                                .extraInfo)).isPermissible()
-                                ? R.string.app_permission_summary_allowed
-                                : R.string.app_permission_summary_not_allowed);
+                    if (entry.extraInfo != null) {
+                        holder.setSummary(
+                                (new UsageState((PermissionState) entry.extraInfo)).isPermissible()
+                                        ? R.string.app_permission_summary_allowed
+                                        : R.string.app_permission_summary_not_allowed);
                     } else {
-                        holder.summary.setText(null);
+                        holder.setSummary(null);
                     }
                     break;
-
                 case LIST_TYPE_HIGH_POWER:
-                    holder.summary.setText(HighPowerDetail.getSummary(mContext, holder.entry));
+                    holder.setSummary(HighPowerDetail.getSummary(mContext, entry));
                     break;
-
                 case LIST_TYPE_OVERLAY:
-                    holder.summary.setText(DrawOverlayDetails.getSummary(mContext, holder.entry));
+                    holder.setSummary(DrawOverlayDetails.getSummary(mContext, entry));
                     break;
-
                 case LIST_TYPE_WRITE_SETTINGS:
-                    holder.summary.setText(WriteSettingsDetails.getSummary(mContext,
-                            holder.entry));
+                    holder.setSummary(WriteSettingsDetails.getSummary(mContext, entry));
                     break;
-
                 case LIST_TYPE_MANAGE_SOURCES:
-                    holder.summary.setText(ExternalSourcesDetails.getPreferenceSummary(mContext,
-                            holder.entry));
+                    holder.setSummary(ExternalSourcesDetails.getPreferenceSummary(mContext, entry));
                     break;
-
                 default:
-                    holder.updateSizeText(mManageApplications.mInvalidSizeStr, mWhichSize);
+                    holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);
                     break;
             }
         }
 
-        @Override
-        public Filter getFilter() {
-            return mFilter;
-        }
-
-        @Override
-        public void onMovedToScrapHeap(View view) {
-            mActive.remove(view);
-        }
-
-        @Override
-        public Object[] getSections() {
-            return mSections;
-        }
-
-        @Override
-        public int getPositionForSection(int sectionIndex) {
-            return mSections[sectionIndex].position;
-        }
-
-        @Override
-        public int getSectionForPosition(int position) {
-            return mPositionToSectionIndex[position];
+        private boolean hasExtraView() {
+            return mExtraViewController != null
+                    && mExtraViewController.shouldShow();
         }
     }
 
@@ -1436,21 +1250,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     }
                 }.execute();
             }
-        }
-    }
-
-    private static class SectionInfo {
-        final String label;
-        final int position;
-
-        public SectionInfo(String label, int position) {
-            this.label = label;
-            this.position = position;
-        }
-
-        @Override
-        public String toString() {
-            return label;
         }
     }
 
