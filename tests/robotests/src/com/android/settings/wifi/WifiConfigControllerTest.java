@@ -55,8 +55,9 @@ public class WifiConfigControllerTest {
     private AccessPoint mAccessPoint;
 
     public WifiConfigController mController;
-
-    // An invalid PSK pass phrase. It is 64 characters long, must not be greater than 63
+    private static final String HEX_PSK = "01234567012345670123456701234567012345670123456701234567"
+            + "01abcdef";
+    // An invalid ASCII PSK pass phrase. It is 64 characters long, must not be greater than 63
     private static final String LONG_PSK =
             "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl";
     // An invalid PSK pass phrase. It is 7 characters long, must be at least 8
@@ -136,6 +137,14 @@ public class WifiConfigControllerTest {
     public void isSubmittable_goodPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
         password.setText(GOOD_PSK);
+        assertThat(mController.isSubmittable()).isTrue();
+
+    }
+
+    @Test
+    public void isSubmittable_hexPsk_shouldReturnTrue() {
+        final TextView password = mView.findViewById(R.id.password);
+        password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
 
     }

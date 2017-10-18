@@ -99,8 +99,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         final View primaryAction = holder.itemView.findViewById(android.R.id.primary);
         if (primaryAction != null) {
             clickHandler = primaryAction;
-            // set the item view to disabled to remove any touch effects
-            holder.itemView.setEnabled(false);
         }
 
         clickHandler.setOnClickListener(v -> {
