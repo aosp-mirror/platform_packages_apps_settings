@@ -44,14 +44,4 @@ public class BugReportPreferenceControllerV2 extends DeveloperOptionsPreferenceC
     public String getPreferenceKey() {
         return KEY_BUGREPORT;
     }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // intentional no-op
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        // intentional no-op
-    }
 }

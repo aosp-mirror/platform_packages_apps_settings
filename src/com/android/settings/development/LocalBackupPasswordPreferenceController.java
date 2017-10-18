@@ -55,16 +55,6 @@ public class LocalBackupPasswordPreferenceController extends
         updatePasswordSummary(preference);
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // intentional no-op
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        // intentional no-op
-    }
-
     private void updatePasswordSummary(Preference preference) {
         preference.setEnabled(isAdminUser() && mBackupManager != null);
         if (mBackupManager == null) {
