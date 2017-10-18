@@ -85,11 +85,11 @@ public class DashboardFragmentRegistry {
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);
         PARENT_TO_CATEGORY_KEY_MAP.put(LanguageAndInputSettings.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
-        if (Settings.DevelopmentSettingsDashboardActivity.isEnabled()) {
-            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettingsDashboardFragment.class.getName(),
+        if (Settings.DevelopmentSettingsActivity.isEnabled()) {
+            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettings.class.getName(),
                     CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
         } else {
-            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettings.class.getName(),
+            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettingsDashboardFragment.class.getName(),
                     CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
         }
         PARENT_TO_CATEGORY_KEY_MAP.put(ConfigureNotificationSettings.class.getName(),

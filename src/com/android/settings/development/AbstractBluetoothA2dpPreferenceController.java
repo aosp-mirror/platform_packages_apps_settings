@@ -40,17 +40,15 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
     static final int STREAMING_LABEL_ID = R.string.bluetooth_select_a2dp_codec_streaming_label;
 
     protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
-    protected final Object mBluetoothA2dpLock;
     protected BluetoothA2dp mBluetoothA2dp;
+    protected ListPreference mPreference;
     private final String[] mListValues;
     private final String[] mListSummaries;
-    private ListPreference mPreference;
 
     public AbstractBluetoothA2dpPreferenceController(Context context, Lifecycle lifecycle,
-            Object bluetoothA2dpLock, BluetoothA2dpConfigStore store) {
+            BluetoothA2dpConfigStore store) {
         super(context);
 
-        mBluetoothA2dpLock = bluetoothA2dpLock;
         mBluetoothA2dpConfigStore = store;
         mListValues = getListValues();
         mListSummaries = getListSummaries();
@@ -80,7 +78,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         writeConfigurationValues(newValue);
 
         final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
-        synchronized (mBluetoothA2dpLock) {
+        synchronized (mBluetoothA2dpConfigStore) {
             if (mBluetoothA2dp != null) {
                 setCodecConfigPreference(codecConfig);
             }
@@ -106,7 +104,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         }
 
         BluetoothCodecConfig codecConfig;
-        synchronized (mBluetoothA2dpLock) {
+        synchronized (mBluetoothA2dpConfigStore) {
             codecConfig = getCodecConfig();
         }
 
@@ -168,7 +166,7 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
     protected abstract String[] getListSummaries();
 
     /**
-     * Updates the new value to the {@link BluetoothA2dpConfigStore}.
+     * Updates the new value to the {@link BluetoothA2dpConfigStore} and the {@link BluetoothA2dp}.
      *
      * @param newValue the new setting value
      */
@@ -197,18 +195,4 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
 
         return mBluetoothA2dp.getCodecStatus().getCodecConfig();
     }
-
-    @VisibleForTesting
-    BluetoothCodecConfig createCodecConfig(int codecTypeValue, int codecPriorityValue,
-            int sampleRateValue, int bitsPerSampleValue,
-            int channelModeValue, long codecSpecific1Value,
-            long codecSpecific2Value, long codecSpecific3Value,
-            long codecSpecific4Value) {
-        return new BluetoothCodecConfig(codecTypeValue, codecPriorityValue,
-                sampleRateValue, bitsPerSampleValue,
-                channelModeValue, codecSpecific1Value,
-                codecSpecific2Value, codecSpecific3Value,
-                codecSpecific4Value);
-    }
-
 }

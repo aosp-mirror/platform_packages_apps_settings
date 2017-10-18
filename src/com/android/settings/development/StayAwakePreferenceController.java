@@ -56,7 +56,6 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
 
     public StayAwakePreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
-        mSettingsObserver = new SettingsObserver();
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -99,16 +98,21 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
 
     @Override
     public void onResume() {
-        if (mPreference != null) {
-            mSettingsObserver.register(true /* register */);
+        if (mPreference == null) {
+            return;
         }
+        if (mSettingsObserver == null) {
+            mSettingsObserver = new SettingsObserver();
+        }
+        mSettingsObserver.register(true /* register */);
     }
 
     @Override
     public void onPause() {
-        if (mPreference != null) {
-            mSettingsObserver.register(false /* unregister */);
+        if (mPreference == null || mSettingsObserver == null) {
+            return;
         }
+        mSettingsObserver.register(false /* unregister */);
     }
 
     @Override

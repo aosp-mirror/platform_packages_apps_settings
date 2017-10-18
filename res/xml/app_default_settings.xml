@@ -74,8 +74,8 @@
         android:title="@string/domain_urls_title"
         android:fragment="com.android.settings.applications.ManageDomainUrls" />
 
-    <com.android.settings.WorkOnlyCategory
-        android:key="work_defaults"
+    <com.android.settings.widget.WorkOnlyCategory
+        android:key="work_app_defaults"
         android:title="@string/default_for_work">
 
         <Preference
@@ -93,6 +93,6 @@
             <extra android:name="for_work" android:value="true" />
         </Preference>
 
-    </com.android.settings.WorkOnlyCategory>
+    </com.android.settings.widget.WorkOnlyCategory>
 
 </PreferenceScreen>

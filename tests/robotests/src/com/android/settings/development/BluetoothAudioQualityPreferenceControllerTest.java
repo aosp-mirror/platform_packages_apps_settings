@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BluetoothAudioSampleRatePreferenceControllerTest {
+public class BluetoothAudioQualityPreferenceControllerTest {
 
     @Mock
     private BluetoothCodecConfig mBluetoothCodecConfig;
@@ -53,41 +53,44 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
     private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
 
     /**
-     * 0: Use System Selection (Default)
-     * 1: 44.1 kHz
-     * 2: 48.0 kHz
-     * 3: 88.2 kHz
-     * 4: 96.0 kHz
+     * 0: Optimized for Audio Quality (990kbps/909kbps)
+     * 1: Balanced Audio And Connection Quality (660kbps/606kbps)
+     * 2: Stereo
      */
     private String[] mListValues;
-    private Lifecycle mLifecycle;
     private Context mContext;
-    private BluetoothAudioSampleRatePreferenceController mController;
+    private BluetoothAudioQualityPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
-        mController = spy(new BluetoothAudioSampleRatePreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore));
+        mController = spy(new BluetoothAudioQualityPreferenceController(mContext,
+                new Lifecycle(), mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
     }
 
     @Test
-    public void writeConfigurationValues_option2_shouldWriteOption2ToSharedStore() {
-        when(mPreference.findIndexOfValue(mListValues[2])).thenReturn(2);
-        mController.writeConfigurationValues(mListValues[2]);
+    public void writeConfigurationValues_option3_shouldWrite1003ToSharedStore() {
+        when(mPreference.findIndexOfValue(mListValues[3])).thenReturn(3);
+        mController.writeConfigurationValues(mListValues[3]);
 
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000);
+        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1003);
+    }
+
+    @Test
+    public void writeConfigurationValues_default_shouldSetDefault() {
+        when(mPreference.findIndexOfValue(mListValues[0])).thenReturn(0);
+        mController.writeConfigurationValues(mListValues[0]);
+
+        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1000);
     }
 
     @Test
     public void getCurrentA2dpSettingIndex_option2_shouldReturnSecondIndex() {
-        when(mBluetoothCodecConfig.getSampleRate()).thenReturn(
-                BluetoothCodecConfig.SAMPLE_RATE_48000);
+        when(mBluetoothCodecConfig.getCodecSpecific1()).thenReturn(Long.valueOf(2));
 
         final int index = mController.getCurrentA2dpSettingIndex(mBluetoothCodecConfig);
 
@@ -96,10 +99,10 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
 
     @Test
     public void getCurrentA2dpSettingIndex_unknownOption_shouldReturnDefault() {
-        when(mBluetoothCodecConfig.getSampleRate()).thenReturn(1381391835);
+        when(mBluetoothCodecConfig.getCodecType()).thenReturn(1381391835);
 
         final int index = mController.getCurrentA2dpSettingIndex(mBluetoothCodecConfig);
 
-        assertThat(index).isEqualTo(0);
+        assertThat(index).isEqualTo(3);
     }
 }

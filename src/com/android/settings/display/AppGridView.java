@@ -16,8 +16,6 @@
 
 package com.android.settings.display;
 
-import com.android.settings.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -22,33 +22,33 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class BluetoothAudioSampleRatePreferenceController extends
+public class BluetoothAudioBitsPerSamplePreferenceController extends
         AbstractBluetoothA2dpPreferenceController {
 
     private static final int DEFAULT_INDEX = 0;
-    private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY =
-            "bluetooth_select_a2dp_sample_rate";
+    private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY =
+            "bluetooth_select_a2dp_bits_per_sample";
 
-    public BluetoothAudioSampleRatePreferenceController(Context context, Lifecycle lifecycle,
+    public BluetoothAudioBitsPerSamplePreferenceController(Context context, Lifecycle lifecycle,
             BluetoothA2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
     @Override
     public String getPreferenceKey() {
-        return BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY;
+        return BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY;
     }
 
     @Override
     protected String[] getListValues() {
         return mContext.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_values);
+                R.array.bluetooth_a2dp_codec_bits_per_sample_values);
     }
 
     @Override
     protected String[] getListSummaries() {
         return mContext.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_summaries);
+                R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
     }
 
     @Override
@@ -59,49 +59,41 @@ public class BluetoothAudioSampleRatePreferenceController extends
     @Override
     protected void writeConfigurationValues(Object newValue) {
         final int index = mPreference.findIndexOfValue(newValue.toString());
-        int sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE; // default
+        int bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_NONE; // default
         switch (index) {
             case 0:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE;
+                // Reset to default
                 break;
             case 1:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_44100;
+                bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_16;
                 break;
             case 2:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_48000;
+                bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_24;
                 break;
             case 3:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_88200;
-                break;
-            case 4:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
+                bitsPerSampleValue = BluetoothCodecConfig.BITS_PER_SAMPLE_32;
                 break;
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setSampleRate(sampleRateValue);
+        mBluetoothA2dpConfigStore.setBitsPerSample(bitsPerSampleValue);
     }
 
     @Override
     protected int getCurrentA2dpSettingIndex(BluetoothCodecConfig config) {
-        final int sampleRate = config.getSampleRate();
+        final int bitsPerSample = config.getBitsPerSample();
         int index = DEFAULT_INDEX;
-        switch (sampleRate) {
-            case BluetoothCodecConfig.SAMPLE_RATE_44100:
+        switch (bitsPerSample) {
+            case BluetoothCodecConfig.BITS_PER_SAMPLE_16:
                 index = 1;
                 break;
-            case BluetoothCodecConfig.SAMPLE_RATE_48000:
+            case BluetoothCodecConfig.BITS_PER_SAMPLE_24:
                 index = 2;
                 break;
-            case BluetoothCodecConfig.SAMPLE_RATE_88200:
+            case BluetoothCodecConfig.BITS_PER_SAMPLE_32:
                 index = 3;
                 break;
-            case BluetoothCodecConfig.SAMPLE_RATE_96000:
-                index = 4;
-                break;
-            case BluetoothCodecConfig.SAMPLE_RATE_176400:
-            case BluetoothCodecConfig.SAMPLE_RATE_192000:
-            case BluetoothCodecConfig.SAMPLE_RATE_NONE:
+            case BluetoothCodecConfig.BITS_PER_SAMPLE_NONE:
             default:
                 break;
         }

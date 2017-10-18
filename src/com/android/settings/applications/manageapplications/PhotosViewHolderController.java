@@ -71,11 +71,11 @@ public class PhotosViewHolderController implements FileViewHolderController {
     }
 
     @Override
-    public void setupView(AppViewHolder holder) {
-        holder.appIcon.setImageDrawable(
+    public void setupView(ApplicationViewHolder holder) {
+        holder.setIcon(
                 new InsetDrawable(mContext.getDrawable(R.drawable.ic_photo_library), INSET_SIZE));
-        holder.appName.setText(mContext.getText(R.string.storage_detail_images));
-        holder.summary.setText(Formatter.formatFileSize(mContext, mFilesSize));
+        holder.setTitle(mContext.getText(R.string.storage_detail_images));
+        holder.setSummary(Formatter.formatFileSize(mContext, mFilesSize));
     }
 
     @Override

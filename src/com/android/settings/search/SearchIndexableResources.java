@@ -21,6 +21,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.text.TextUtils;
+
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
@@ -45,7 +46,7 @@ import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
-import com.android.settings.development.DevelopmentSettings;
+import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
@@ -90,6 +91,7 @@ import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
+
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -189,7 +191,8 @@ public final class SearchIndexableResources {
         addIndex(DateTimeSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_date_time);
         addIndex(AccessibilitySettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_accessibility);
         addIndex(PrintSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_print);
-        addIndex(DevelopmentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_development);
+        addIndex(DevelopmentSettingsDashboardFragment.class, NO_DATA_RES_ID,
+                R.drawable.ic_settings_development);
         addIndex(DeviceInfoSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(Status.class, NO_DATA_RES_ID, 0 /* icon */);
         addIndex(LegalSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);

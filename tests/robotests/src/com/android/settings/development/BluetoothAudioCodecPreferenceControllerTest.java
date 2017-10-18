@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BluetoothAudioSampleRatePreferenceControllerTest {
+public class BluetoothAudioCodecPreferenceControllerTest {
 
     @Mock
     private BluetoothCodecConfig mBluetoothCodecConfig;
@@ -54,22 +54,23 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
 
     /**
      * 0: Use System Selection (Default)
-     * 1: 44.1 kHz
-     * 2: 48.0 kHz
-     * 3: 88.2 kHz
-     * 4: 96.0 kHz
+     * 1: SBC
+     * 2: AAC
+     * 3: Qualcomm aptX audio
+     * 4: Qualcomm aptX HD audio
+     * 5: LDAC
+     * 6: Enable Optional Codecs
+     * 7: Disable Optional Codecs
      */
     private String[] mListValues;
-    private Lifecycle mLifecycle;
     private Context mContext;
-    private BluetoothAudioSampleRatePreferenceController mController;
+    private BluetoothAudioCodecPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
-        mController = spy(new BluetoothAudioSampleRatePreferenceController(mContext, mLifecycle,
+        mController = spy(new BluetoothAudioCodecPreferenceController(mContext, new Lifecycle(),
                 mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -81,13 +82,24 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
         when(mPreference.findIndexOfValue(mListValues[2])).thenReturn(2);
         mController.writeConfigurationValues(mListValues[2]);
 
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000);
+        verify(mBluetoothA2dpConfigStore).setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC);
+        verify(mBluetoothA2dpConfigStore).setCodecPriority(
+                BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+    }
+
+    @Test
+    public void writeConfigurationValues_default_shouldSetDefaultPriority() {
+        when(mPreference.findIndexOfValue(mListValues[0])).thenReturn(0);
+        mController.writeConfigurationValues(mListValues[0]);
+
+        verify(mBluetoothA2dpConfigStore).setCodecPriority(
+                BluetoothCodecConfig.CODEC_PRIORITY_DEFAULT);
     }
 
     @Test
     public void getCurrentA2dpSettingIndex_option2_shouldReturnSecondIndex() {
-        when(mBluetoothCodecConfig.getSampleRate()).thenReturn(
-                BluetoothCodecConfig.SAMPLE_RATE_48000);
+        when(mBluetoothCodecConfig.getCodecType()).thenReturn(
+                BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC);
 
         final int index = mController.getCurrentA2dpSettingIndex(mBluetoothCodecConfig);
 
@@ -96,7 +108,7 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
 
     @Test
     public void getCurrentA2dpSettingIndex_unknownOption_shouldReturnDefault() {
-        when(mBluetoothCodecConfig.getSampleRate()).thenReturn(1381391835);
+        when(mBluetoothCodecConfig.getCodecType()).thenReturn(1381391835);
 
         final int index = mController.getCurrentA2dpSettingIndex(mBluetoothCodecConfig);
 

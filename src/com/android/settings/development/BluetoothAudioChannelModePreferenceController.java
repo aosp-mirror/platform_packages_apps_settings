@@ -22,33 +22,33 @@ import android.content.Context;
 import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class BluetoothAudioSampleRatePreferenceController extends
+public class BluetoothAudioChannelModePreferenceController extends
         AbstractBluetoothA2dpPreferenceController {
 
     private static final int DEFAULT_INDEX = 0;
-    private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY =
-            "bluetooth_select_a2dp_sample_rate";
+    private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY =
+            "bluetooth_select_a2dp_channel_mode";
 
-    public BluetoothAudioSampleRatePreferenceController(Context context, Lifecycle lifecycle,
+    public BluetoothAudioChannelModePreferenceController(Context context, Lifecycle lifecycle,
             BluetoothA2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
     @Override
     public String getPreferenceKey() {
-        return BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY;
+        return BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY;
     }
 
     @Override
     protected String[] getListValues() {
         return mContext.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_values);
+                R.array.bluetooth_a2dp_codec_channel_mode_values);
     }
 
     @Override
     protected String[] getListSummaries() {
         return mContext.getResources().getStringArray(
-                R.array.bluetooth_a2dp_codec_sample_rate_summaries);
+                R.array.bluetooth_a2dp_codec_channel_mode_summaries);
     }
 
     @Override
@@ -59,49 +59,35 @@ public class BluetoothAudioSampleRatePreferenceController extends
     @Override
     protected void writeConfigurationValues(Object newValue) {
         final int index = mPreference.findIndexOfValue(newValue.toString());
-        int sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE; // default
+        int channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_NONE; // default
         switch (index) {
             case 0:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_NONE;
+                // Reset to default
                 break;
             case 1:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_44100;
+                channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_MONO;
                 break;
             case 2:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_48000;
-                break;
-            case 3:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_88200;
-                break;
-            case 4:
-                sampleRateValue = BluetoothCodecConfig.SAMPLE_RATE_96000;
+                channelModeValue = BluetoothCodecConfig.CHANNEL_MODE_STEREO;
                 break;
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setSampleRate(sampleRateValue);
+        mBluetoothA2dpConfigStore.setChannelMode(channelModeValue);
     }
 
     @Override
     protected int getCurrentA2dpSettingIndex(BluetoothCodecConfig config) {
-        final int sampleRate = config.getSampleRate();
+        final int channelMode = config.getChannelMode();
         int index = DEFAULT_INDEX;
-        switch (sampleRate) {
-            case BluetoothCodecConfig.SAMPLE_RATE_44100:
+        switch (channelMode) {
+            case BluetoothCodecConfig.CHANNEL_MODE_MONO:
                 index = 1;
                 break;
-            case BluetoothCodecConfig.SAMPLE_RATE_48000:
+            case BluetoothCodecConfig.CHANNEL_MODE_STEREO:
                 index = 2;
                 break;
-            case BluetoothCodecConfig.SAMPLE_RATE_88200:
-                index = 3;
-                break;
-            case BluetoothCodecConfig.SAMPLE_RATE_96000:
-                index = 4;
-                break;
-            case BluetoothCodecConfig.SAMPLE_RATE_176400:
-            case BluetoothCodecConfig.SAMPLE_RATE_192000:
-            case BluetoothCodecConfig.SAMPLE_RATE_NONE:
+            case BluetoothCodecConfig.CHANNEL_MODE_NONE:
             default:
                 break;
         }

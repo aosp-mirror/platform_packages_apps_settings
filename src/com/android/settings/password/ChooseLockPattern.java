@@ -95,6 +95,7 @@ public class ChooseLockPattern extends SettingsActivity {
             mIntent = new Intent(context, ChooseLockPattern.class);
             mIntent.putExtra(EncryptionInterstitial.EXTRA_REQUIRE_PASSWORD, false);
             mIntent.putExtra(ChooseLockGeneric.CONFIRM_CREDENTIALS, false);
+            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
         }
 
         public IntentBuilder setUserId(int userId) {
@@ -109,7 +110,6 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         public IntentBuilder setPattern(String pattern) {
-            mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
             mIntent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_PASSWORD, pattern);
             return this;
         }

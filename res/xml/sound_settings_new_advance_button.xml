@@ -154,7 +154,7 @@
               android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
     </com.android.settingslib.RestrictedPreference>
 
-    <com.android.settings.WorkOnlyCategory
+    <com.android.settings.widget.WorkOnlyCategory
         android:key="sound_work_settings_section"
         android:title="@string/sound_work_settings"
         android:order="100">
@@ -191,5 +191,5 @@
                     android:ringtoneType="alarm"
                     android:dependency="work_use_personal_sounds" />
 
-    </com.android.settings.WorkOnlyCategory>
+    </com.android.settings.widget.WorkOnlyCategory>
 </PreferenceScreen>
