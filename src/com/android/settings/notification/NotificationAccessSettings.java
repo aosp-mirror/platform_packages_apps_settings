@@ -16,7 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -37,11 +36,6 @@ import com.android.settings.utils.ManagedServiceSettings;
 public class NotificationAccessSettings extends ManagedServiceSettings {
     private static final String TAG = NotificationAccessSettings.class.getSimpleName();
     private static final Config CONFIG = getNotificationListenerConfig();
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-    }
 
     private static Config getNotificationListenerConfig() {
         final Config c = new Config();
@@ -98,6 +92,11 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     @Override
     protected void enable(ComponentName service) {
         mNm.setNotificationListenerAccessGranted(service, true);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.notification_access_settings;
     }
 
     @VisibleForTesting

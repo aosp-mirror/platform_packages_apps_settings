@@ -34,6 +34,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.datetime.ZoneGetter;
@@ -164,6 +165,9 @@ public class ZonePicker extends ListFragment implements Instrumentable {
         // Sets the adapter
         setSorting(true);
         setHasOptionsMenu(true);
+        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
+            activity.setTitle(R.string.date_time_set_timezone);
+        }
     }
 
     @Override

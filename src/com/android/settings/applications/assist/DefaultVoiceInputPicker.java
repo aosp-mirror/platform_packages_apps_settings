@@ -24,6 +24,7 @@ import android.text.TextUtils;
 
 import com.android.internal.app.AssistUtils;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -52,6 +53,11 @@ public class DefaultVoiceInputPicker extends DefaultAppPickerFragment {
         if (isCurrentAssistVoiceService(assist, getCurrentService(mHelper))) {
             mAssistRestrict = assist.flattenToShortString();
         }
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_voice_settings;
     }
 
     @Override

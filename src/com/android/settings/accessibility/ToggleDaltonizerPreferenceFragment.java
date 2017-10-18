@@ -50,7 +50,9 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.accessibility_daltonizer_settings);
+        if (!usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.accessibility_daltonizer_settings);
+        }
 
         mType = (ListPreference) findPreference("type");
 
@@ -59,6 +61,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
                     R.string.accessibility_display_daltonizer_preference_subtitle);
         }
         initPreferences();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_daltonizer_settings;
     }
 
     @Override
@@ -80,7 +87,9 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getString(R.string.accessibility_display_daltonizer_preference_title));
+        if (!usePreferenceScreenTitle()) {
+            setTitle(getString(R.string.accessibility_display_daltonizer_preference_title));
+        }
     }
 
     @Override

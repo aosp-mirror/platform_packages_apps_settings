@@ -18,9 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,7 +28,6 @@ import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
@@ -103,6 +100,11 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
             setCancelListener(target.mCancelListener);
             super.onCreate(savedInstanceState);
         }
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_autofill_settings;
     }
 
     @Override

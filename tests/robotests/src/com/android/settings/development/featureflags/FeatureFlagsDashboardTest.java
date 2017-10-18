@@ -51,8 +51,8 @@ public class FeatureFlagsDashboardTest {
     }
 
     @Test
-    public void shouldUsePlaceholderPreferenceLayout() {
+    public void shouldUseFeatureFlagPreferenceLayout() {
         assertThat(mDashboard.getPreferenceScreenResId())
-                .isEqualTo(R.xml.placeholder_prefs);
+                .isEqualTo(R.xml.feature_flags_settings);
     }
 }

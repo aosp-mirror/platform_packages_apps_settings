@@ -29,7 +29,6 @@ import java.util.List;
 public class DevelopmentTileConfigFragment extends DashboardFragment {
     private static final String TAG = "DevelopmentTileConfig";
 
-
     @Override
     protected String getLogTag() {
         return TAG;
@@ -37,7 +36,7 @@ public class DevelopmentTileConfigFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.placeholder_prefs;
+        return R.xml.development_tile_settings;
     }
 
     @Override

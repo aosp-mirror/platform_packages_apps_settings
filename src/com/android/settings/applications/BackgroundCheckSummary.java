@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.annotation.StringRes;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
@@ -57,4 +58,11 @@ public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
 
         return rootView;
     }
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.background_check_pref;
+    }
+
 }

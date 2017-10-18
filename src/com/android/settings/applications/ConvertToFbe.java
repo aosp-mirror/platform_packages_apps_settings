@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -28,6 +29,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 /* Class to prompt for conversion of userdata to file based encryption
@@ -42,6 +44,14 @@ public class ConvertToFbe extends InstrumentedFragment {
         return new ChooseLockSettingsHelper(getActivity(), this)
             .launchConfirmationActivity(request,
                                         res.getText(R.string.convert_to_file_encryption));
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.convert_to_file_encryption);
+        }
     }
 
     @Override

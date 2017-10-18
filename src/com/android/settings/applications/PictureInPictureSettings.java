@@ -147,7 +147,9 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
         mUserManager = new UserManagerWrapper(mContext.getSystemService(UserManager.class));
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
+        if (!usePreferenceScreenTitle()) {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
+        }
     }
 
     @Override
@@ -196,6 +198,11 @@ public class PictureInPictureSettings extends EmptyTextSettings {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setEmptyText(R.string.picture_in_picture_empty_text);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.picture_in_picture_settings;
     }
 
     @Override

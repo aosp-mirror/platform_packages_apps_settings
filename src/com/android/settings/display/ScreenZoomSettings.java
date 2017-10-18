@@ -17,6 +17,7 @@
 package com.android.settings.display;
 
 import android.annotation.Nullable;
+import android.annotation.StringRes;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -96,6 +97,12 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
     @Override
     public int getHelpResource() {
         return R.string.help_url_display_size;
+    }
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.screen_zoom_title;
     }
 
     @Override
