@@ -647,6 +647,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
         final int position = mRecyclerView.getChildAdapterPosition(view);
 
+        if (position == RecyclerView.NO_POSITION) {
+            Log.w(TAG, "Cannot find position for child, skipping onClick handling");
+            return;
+        }
         if (mApplications.getApplicationCount() > position) {
             ApplicationsState.AppEntry entry = mApplications.getAppEntry(position);
             mCurrentPkgName = entry.info.packageName;
