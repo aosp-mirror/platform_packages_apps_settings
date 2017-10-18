@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -25,6 +26,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import java.util.List;
@@ -124,8 +126,19 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             final ResolveInfo info = list.get(0);
             final ComponentInfo cn = info.getComponentInfo();
             final String packageName = cn == null ? null : cn.packageName;
+            if (TextUtils.isEmpty(packageName)) {
+                return null;
+            }
+            final ApplicationInfo appInfo;
+            try {
+                appInfo = mPackageManager.getPackageManager().getApplicationInfo(packageName, 0);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.w(TAG, "Error getting app info for " + packageName);
+                return null;
+            }
             Log.d(TAG, "Getting icon for the only browser app: " + packageName);
-            return info.loadIcon(mPackageManager.getPackageManager());
+            final IconDrawableFactory iconFactory = IconDrawableFactory.newInstance(mContext);
+            return iconFactory.getBadgedIcon(cn, appInfo, mUserId);
         }
         return null;
     }
