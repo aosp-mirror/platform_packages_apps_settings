@@ -58,16 +58,6 @@ public class ShortcutManagerThrottlingPreferenceController extends
         return true;
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // intentional no-op
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        // intentional no-op
-    }
-
     private void resetShortcutManagerThrottling() {
         if (mShortcutService == null) {
             return;
