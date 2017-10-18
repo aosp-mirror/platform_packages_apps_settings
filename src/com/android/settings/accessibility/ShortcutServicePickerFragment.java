@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Binder;
 import android.os.Bundle;
@@ -54,7 +55,8 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
 
     @Override
     protected List<? extends DefaultAppInfo> getCandidates() {
-        final AccessibilityManager accessibilityManager = getContext()
+        final Context context = getContext();
+        final AccessibilityManager accessibilityManager = context
                 .getSystemService(AccessibilityManager.class);
         final List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
@@ -63,7 +65,7 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
         List<DefaultAppInfo> candidates = new ArrayList<>(numInstalledServices);
         for (int i = 0; i < numInstalledServices; i++) {
             AccessibilityServiceInfo installedServiceInfo = installedServices.get(i);
-            candidates.add(new DefaultAppInfo(mPm,
+            candidates.add(new DefaultAppInfo(context, mPm,
                     UserHandle.myUserId(),
                     installedServiceInfo.getComponentName(),
                     (String) installedServiceInfo.loadSummary(mPm.getPackageManager()),

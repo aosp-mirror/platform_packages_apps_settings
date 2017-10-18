@@ -17,6 +17,7 @@
 package com.android.settings.applications.defaultapps;
 
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -44,12 +45,13 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
         final List<ResolveInfo> infos = mPm.getPackageManager().queryIntentActivities(
                 DefaultEmergencyPreferenceController.QUERY_INTENT, 0);
         PackageInfo bestMatch = null;
+        final Context context = getContext();
         for (ResolveInfo info : infos) {
             try {
                 final PackageInfo packageInfo =
                         mPm.getPackageManager().getPackageInfo(info.activityInfo.packageName, 0);
                 final ApplicationInfo appInfo = packageInfo.applicationInfo;
-                candidates.add(new DefaultAppInfo(mPm, appInfo));
+                candidates.add(new DefaultAppInfo(context, mPm, appInfo));
                 // Get earliest installed system app.
                 if (isSystemApp(appInfo) && (bestMatch == null ||
                         bestMatch.firstInstallTime > packageInfo.firstInstallTime)) {

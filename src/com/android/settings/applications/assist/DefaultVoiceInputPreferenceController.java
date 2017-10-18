@@ -104,15 +104,15 @@ public class DefaultVoiceInputPreferenceController extends DefaultAppPreferenceC
         }
         for (VoiceInputHelper.InteractionInfo info : mHelper.mAvailableInteractionInfos) {
             if (TextUtils.equals(defaultKey, info.key)) {
-                return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mPackageManager,
-                        mUserId, info, true /* enabled */);
+                return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mContext,
+                        mPackageManager, mUserId, info, true /* enabled */);
             }
         }
 
         for (VoiceInputHelper.RecognizerInfo info : mHelper.mAvailableRecognizerInfos) {
             if (TextUtils.equals(defaultKey, info.key)) {
-                return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mPackageManager,
-                        mUserId, info, true /* enabled */);
+                return new DefaultVoiceInputPicker.VoiceInputDefaultAppInfo(mContext,
+                        mPackageManager, mUserId, info, true /* enabled */);
             }
         }
         return null;

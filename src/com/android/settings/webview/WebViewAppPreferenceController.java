@@ -46,7 +46,7 @@ public class WebViewAppPreferenceController extends DefaultAppPreferenceControll
     @Override
     public DefaultAppInfo getDefaultAppInfo() {
         PackageInfo currentPackage = mWebViewUpdateServiceWrapper.getCurrentWebViewPackage();
-        return new DefaultAppInfo(mPackageManager,
+        return new DefaultAppInfo(mContext, mPackageManager,
                 currentPackage == null ? null : currentPackage.applicationInfo);
     }
 
