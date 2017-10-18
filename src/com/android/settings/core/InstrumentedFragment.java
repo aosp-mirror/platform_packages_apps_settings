@@ -49,4 +49,8 @@ public abstract class InstrumentedFragment extends ObservableFragment implements
         mVisibilityLoggerMixin.setSourceMetricsCategory(getActivity());
         super.onResume();
     }
+
+    protected final VisibilityLoggerMixin getVisibilityLogger() {
+        return mVisibilityLoggerMixin;
+    }
 }

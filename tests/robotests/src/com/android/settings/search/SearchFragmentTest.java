@@ -43,6 +43,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -207,8 +208,6 @@ public class SearchFragmentTest {
         verify(mFeatureFactory.metricsFeatureProvider, never()).action(
                 any(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY));
-        verify(mFeatureFactory.metricsFeatureProvider).histogram(
-                any(Context.class), eq(SearchFragment.RESULT_CLICK_COUNT), eq(0));
         verify(mFeatureFactory.searchFeatureProvider)
                 .getDatabaseSearchLoader(any(Context.class), anyString());
         verify(mFeatureFactory.searchFeatureProvider)
@@ -231,6 +230,10 @@ public class SearchFragmentTest {
                 any(Context.class),
                 anyInt(),
                 eq(MetricsProto.MetricsEvent.SETTINGS_SEARCH_NO_RESULT));
+        verify(mFeatureFactory.metricsFeatureProvider).action(
+                any(VisibilityLoggerMixin.class),
+                eq(MetricsProto.MetricsEvent.ACTION_SEARCH_RESULTS),
+                eq(1));
     }
 
     @Test
