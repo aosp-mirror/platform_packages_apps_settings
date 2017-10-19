@@ -17,7 +17,87 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="device_info_pref_screen"
-    android:title="@string/about_settings">
+    android:title="@string/about_settings"
+    settings:initialExpandedChildrenCount="6">
+
+    <!-- Phone number -->
+    <Preference
+        android:key="phone_number"
+        android:title="@string/status_number"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- SIM status -->
+    <Preference
+        android:key="sim_status"
+        android:title="@string/sim_status_title"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- Model & hardware -->
+    <Preference
+        android:key="model_and_hardware"
+        android:title="@string/hardware_info"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- IMEI -->
+    <Preference
+        android:key="imei_info"
+        android:title="@string/status_imei"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- Android version -->
+    <Preference
+        android:key="firmware_version"
+        android:title="@string/firmware_version"
+        android:summary="@string/summary_placeholder"/>
+
+    <!--IP address -->
+    <Preference
+        android:key="ip_address"
+        android:title="@string/wifi_ip_address"
+        android:summary="@string/summary_placeholder"
+        settings:allowDividerAbove="true"/>
+
+    <!-- Wi-Fi MAC address -->
+    <Preference
+        android:key="mac_address"
+        android:title="@string/status_wifi_mac_address"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- Bluetooth address -->
+    <Preference
+        android:key="bluetooth_address"
+        android:title="@string/status_bt_address"
+        android:summary="@string/summary_placeholder"/>
+
+
+    <!-- Legal information -->
+    <Preference
+        android:key="legal_container"
+        android:title="@string/legal_information"
+        android:fragment="com.android.settings.LegalSettings"
+        settings:allowDividerAbove="true"/>
+
+    <!-- Regulatory labels -->
+    <Preference
+        android:key="regulatory_info"
+        android:title="@string/regulatory_labels">
+        <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
+    </Preference>
+
+    <!-- Safety & regulatory manual -->
+    <Preference
+        android:key="safety_info"
+        android:title="@string/safety_and_regulatory_info">
+        <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
+    </Preference>
+
+    <!-- Build number -->
+    <Preference
+        android:key="build_number"
+        android:title="@string/build_number"
+        android:summary="@string/summary_placeholder"
+        settings:allowDividerAbove="true"/>
 
 </PreferenceScreen>
