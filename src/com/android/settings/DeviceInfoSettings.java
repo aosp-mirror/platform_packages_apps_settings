@@ -120,6 +120,32 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
         if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
+
+            // Device name
+
+            // Phone number
+
+            // SIM status
+
+            // Model & hardware
+
+            // IMEI
+
+            // Android version
+
+            // IP address
+
+            // Wifi MAC address
+
+            // Bluetooth Address
+
+            controllers.add(new RegulatoryInfoPreferenceController(context));
+
+            controllers.add(new SafetyInfoPreferenceController(context));
+
+            controllers.add(
+                    new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
+
             return controllers;
         }
 
