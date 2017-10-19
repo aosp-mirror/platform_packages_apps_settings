@@ -2738,6 +2738,7 @@
       <item quantity="other">மறைந்துள்ள %d உருப்படிகளைக் காட்டு</item>
       <item quantity="one">மறைந்துள்ள %d உருப்படியைக் காட்டு</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"சுருக்கும்"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"நெட்வொர்க் &amp; இன்டர்நெட்"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"மொபைல்"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"டேட்டா பயன்பாடு"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> தானியங்கு விதிகள் இயக்கப்பட்டன</item>
       <item quantity="one">1 தானியங்கு விதி இயக்கப்பட்டது</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"\'தொந்தரவு செய்யாதே\' விருப்பத்தேர்வுகள்"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"அனுமதிக்கப்படுபவை:"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"தொந்தரவு செய்யாதே"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"செயல்பாடு"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"இந்த ஒலிகள்/அதிர்வுகளை அனுமதி"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"ஒலியெழுப்ப வேண்டாம்"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"ஒலியெழுப்ப வேண்டாம் (அமைதி)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> தவிர்த்து ஒலியெழுப்ப வேண்டாம்"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"தானியங்கு விதிகள்"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"டிஎன்டி விதிகளை அமை"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"ஒலி &amp; அதிர்வுகளை வரம்பிடு"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"நட்சத்திரமிட்ட தொடர்புகளிலிருந்து மட்டுமே"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ஏதுமில்லை"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"அலாரங்கள்"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"அலாரங்கள் எப்போதும் முதன்மையானவை, ஒலியை எழுப்பும்"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"நினைவூட்டல்கள்"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"நிகழ்வுகள்"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"எல்லா அழைப்பாளர்களும்"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"தேர்ந்தெடுக்கப்பட்ட அழைப்பாளர்கள்"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"மீண்டும் மீண்டும் அழைப்பவர்கள்"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"<xliff:g id="MINUTES">%d</xliff:g> நிமிடங்களுக்குள் இரண்டாவது முறையாக அதே எண்ணிலிருந்து அழைப்பு வந்தால், அனுமதி"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"<xliff:g id="MINUTES">%d</xliff:g> நிமிடத்திற்குள் இரண்டாவது முறையாக அதே எண்ணிலிருந்து அழைப்பு வந்தால், அனுமதி"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"தானாகவே இயக்கு"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ஒருபோதும் வேண்டாம்"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"ஒவ்வொரு இரவும்"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"முறைமை அமைப்புகளை மாற்றலாம்"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"சாதன அமைப்புகளை மாற்று"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"பயன்பாடானது முறைமை அமைப்புகளை மாற்றுவதற்கான அனுமதி"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"சிஸ்டம் அமைப்புகளை மாற்றுவதற்கு அனுமதி"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"இது முறைமை அமைப்புகளை மாற்ற, பயன்பாட்டை அனுமதிக்கும்."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"அனுமதிக்கப்பட்டது"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"அனுமதிக்கப்படவில்லை"</string>

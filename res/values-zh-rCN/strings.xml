@@ -2638,7 +2638,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"但其他付款应用开启时除外"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"通过触碰付款终端进行付款时使用以下应用："</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"通过支付终端付款"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面触碰任何带有非接触标志的终端即可。"</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面靠近任何带有非接触标志的终端即可。"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"知道了"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
@@ -2738,6 +2738,7 @@
       <item quantity="other">显示 %d 项隐藏内容</item>
       <item quantity="one">显示 %d 项隐藏内容</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"收起"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"网络和互联网"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"移动网络"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"流量使用"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="other">已启用 <xliff:g id="ON_COUNT">%d</xliff:g> 个自动规则</item>
       <item quantity="one">已启用 1 个自动规则</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"“勿扰”偏好设置"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"仅允许指定的优先事项打扰"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"勿扰模式"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"行为"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"允许以下类型的提示音和振动："</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"不发出提示音"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"不发出提示音（完全阻止）"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"不发出提示音（<xliff:g id="CATEGORIES">%1$s</xliff:g>除外）"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自动规则"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"设置“勿扰”规则"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"在特定时段限制声音和振动"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"无"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"闹钟"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"闹钟始终优先，并发出提示音"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活动"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有来电者"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"所选的来电者"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"重复来电者"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"如果同一个人在 <xliff:g id="MINUTES">%d</xliff:g> 分钟内第二次来电，则允许显示通知"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"如果同一个人在 <xliff:g id="MINUTES">%d</xliff:g> 分钟内第二次来电"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自动开启"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"可修改系统设置"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"修改系统设置"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"允许应用修改系统设置权限"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"允许修改系统设置"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"此权限允许应用修改系统设置。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"允许"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"不允许"</string>
