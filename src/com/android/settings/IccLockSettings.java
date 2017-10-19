@@ -30,10 +30,12 @@ import android.support.v7.preference.Preference;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
@@ -333,6 +335,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
         setDialogValues();
 
         mPinDialog.showPinDialog();
+
+        final EditText editText = mPinDialog.getEditText();
+        if (!TextUtils.isEmpty(mPin) && editText != null) {
+            editText.setSelection(mPin.length());
+        }
     }
 
     private void setDialogValues() {
