@@ -36,6 +36,7 @@ import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -212,8 +213,13 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     }
 
     public static boolean isAvailable(Context context) {
-        return context.getSystemService(Context.DISPLAY_SERVICE) != null
-                && context.getSystemService(Context.WIFI_P2P_SERVICE) != null;
+        try {
+            return context.getSystemService(Context.DISPLAY_SERVICE) != null
+                    && context.getSystemService(Context.WIFI_P2P_SERVICE) != null;
+        } catch (Exception e) {
+            // Service is not registered, so this is definitely not available.
+            return false;
+        }
     }
 
     private void scheduleUpdate(int changes) {
