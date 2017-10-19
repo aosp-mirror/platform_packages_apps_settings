@@ -21,6 +21,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.SearchIndexableResource;
+import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.DashboardFragment;
@@ -51,6 +52,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     private static final String LOG_TAG = "DeviceInfoSettings";
 
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
+    private static final String DEVICE_INFO_V2_FEATURE_FLAG = "device_info_v2";
 
     @Override
     public int getMetricsCategory() {
@@ -79,7 +81,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.device_info_settings;
+        return FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)
+                ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
     }
 
     @Override
@@ -115,6 +118,11 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
+        if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)) {
+            final List<AbstractPreferenceController> controllers = new ArrayList<>();
+            return controllers;
+        }
+
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(
                 new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
@@ -147,7 +155,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context, null /*activity */,
                             null /* fragment */, null /* lifecycle */);
                 }
