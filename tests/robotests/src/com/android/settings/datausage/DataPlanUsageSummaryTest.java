@@ -33,18 +33,13 @@ import android.net.wifi.WifiManager;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowConnectivityManager;
-import com.android.settings.testutils.shadow.ShadowDataUsageUtils;
 import com.android.settingslib.NetworkPolicyEditor;
 import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
@@ -127,53 +122,6 @@ public class DataPlanUsageSummaryTest {
 
         mNetworkPolicy.metered = false;
         assertThat(mDataUsageSummary.isMetered(mWifiConfiguration)).isFalse();
-    }
-
-    @Test
-    @Config(shadows = ShadowDataUsageUtils.class)
-    public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = RuntimeEnvironment.application;
-        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
-        final List<String> niks = DataPlanUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-        final List<String> keys = new ArrayList<>();
-
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage_wifi));
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.data_usage));
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.data_plan_usage_cell_data_preference_screen));
-
-        assertThat(keys).containsAllIn(niks);
-    }
-
-    @Test
-    @Config(shadows = ShadowDataUsageUtils.class)
-    public void testNonIndexableKeys_hasMobileData_hasWifi_allNonIndexableKeysAdded() {
-        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = false;
-        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = false;
-        List<String> keys = DataPlanUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-
-        // Mobile data keys
-        assertThat(keys).contains(DataPlanUsageSummary.KEY_MOBILE_USAGE_TITLE);
-        assertThat(keys).contains(DataPlanUsageSummary.KEY_MOBILE_DATA_USAGE_TOGGLE);
-
-        // Wifi keys
-        assertThat(keys).contains(DataPlanUsageSummary.KEY_WIFI_DATA_USAGE);
-        assertThat(keys).contains(DataPlanUsageSummary.KEY_NETWORK_RESTRICTIONS);
-        assertThat(keys).contains(DataPlanUsageSummary.KEY_WIFI_USAGE_TITLE);
-    }
-
-    @Test
-    @Config(shadows = ShadowDataUsageUtils.class)
-    public void testNonIndexableKeys_noMobile_noWifi_limitedNonIndexableKeys() {
-        ShadowDataUsageUtils.IS_WIFI_SUPPORTED = true;
-        ShadowDataUsageUtils.IS_MOBILE_DATA_SUPPORTED = true;
-        List<String> keys = DataPlanUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
-
-        assertThat(keys).containsExactly(DataPlanUsageSummary.KEY_WIFI_USAGE_TITLE);
     }
 
     private void initTest() {
