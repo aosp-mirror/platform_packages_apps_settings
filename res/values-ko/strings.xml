@@ -2738,6 +2738,7 @@
       <item quantity="other">%d개의 숨겨진 항목 표시</item>
       <item quantity="one">%d개의 숨겨진 항목 표시</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"접기"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"네트워크 및 인터넷"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"모바일"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"데이터 사용"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="other">자동 규칙 <xliff:g id="ON_COUNT">%d</xliff:g>개 사용 설정됨</item>
       <item quantity="one">자동 규칙 1개 사용 설정됨</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"알림 일시중지 환경설정"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"중요 알림만 허용"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"알림 일시중지"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"동작"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"다음의 소리 및 진동 허용"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"음소거"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"음소거(모두 차단)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g>을(를) 제외한 모든 소리 음소거"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"자동 규칙"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"알림 일시중지 규칙 설정"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"특정 시간에 소리 및 진동 제한"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"별표 표시한 연락처만"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"없음"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"알람"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"알림이 항상 중요 알림으로 설정되며 소리로 알림"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"알림"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"이벤트"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"모든 발신자"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"선택한 발신자"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"반복 발신자"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"<xliff:g id="MINUTES">%d</xliff:g>분 이내에 같은 사람이 다시 전화를 걸면 알림을 허용합니다."</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"<xliff:g id="MINUTES">%d</xliff:g>분 이내에 같은 사람이 다시 전화를 거는 경우"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"자동 사용 설정"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"사용 안함"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"매일 밤"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"시스템 설정 수정 가능"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"시스템 설정 수정"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"앱의 시스템 설정 수정 권한"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"시스템 설정 수정 허용"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"이 권한은 앱이 시스템 설정을 수정하도록 허용합니다."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"예"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"아니요"</string>

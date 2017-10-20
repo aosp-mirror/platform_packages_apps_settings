@@ -1072,7 +1072,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Indstillinger"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Løft enheden for at vække den"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Inaktiv skærm"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Aktiv låseskærm"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Altid aktiveret/øget batteriforbrug"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nye underretninger"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Hvornår skal den vises"</string>
@@ -2738,6 +2738,7 @@
       <item quantity="one">Vis %d skjult element</item>
       <item quantity="other">Vis %d skjulte elementer</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Skjul"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Netværk og internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobilnetværk"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"dataforbrug"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> automatisk regel er slået til</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> automatiske regler er slået til</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"Præferencer for Forstyr ikke"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"Kun prioritet tillader"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"Forstyr ikke"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"Adfærd"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Tillad lyde og vibrationer fra"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Ingen lyd"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"Ingen lyd (total stilhed)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Ingen lyd undtagen fra <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Automatiske regler"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Angiv regler for Forstyr ikke"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Begræns lyde og vibrationer på bestemte tidspunkter"</string>
@@ -2912,7 +2919,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerede apps har anmodet om adgang til underretninger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Tillad adgang til underretninger for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller udløse handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Hvis du slår adgang til underretninger fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuller"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Kun fra stjernemarkerede kontaktpersoner"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ingen"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmer"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Alarmer prioriteres altid og afgiver lyde"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Påmindelser"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Begivenheder"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Alle opkaldere"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Udvalgte opkald"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Gentagne opkald"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"Tillad, hvis den samme person ringer to gange inden for <xliff:g id="MINUTES">%d</xliff:g> minutter"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Hvis den samme person ringer for anden gang inden for <xliff:g id="MINUTES">%d</xliff:g> minutter"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Aktivér automatisk"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Aldrig"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Hver nat"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"Apps, som kan ændre systemindstillinger"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"Rediger systemindstillinger"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"Apptilladelse til at ændre systemindstillinger"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"Tillad ændring af systemindstillinger"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"Denne tilladelse giver en app lov til at ændre systemindstillinger."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"Ja"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"Nej"</string>

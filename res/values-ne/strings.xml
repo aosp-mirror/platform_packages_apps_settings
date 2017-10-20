@@ -1454,7 +1454,7 @@
     <string name="safety_and_regulatory_info" msgid="5103161279848427185">"सुरक्षा र नियामक सम्बन्धी मार्गदर्शन"</string>
     <string name="copyright_title" msgid="865906688917260647">"प्रतिलिपि अधिकार"</string>
     <string name="license_title" msgid="1990487604356037871">"इजाजतपत्र"</string>
-    <string name="terms_title" msgid="7697580845616764642">"सेवा सर्तहरू"</string>
+    <string name="terms_title" msgid="7697580845616764642">"सेवाका सर्तहरू"</string>
     <string name="webview_license_title" msgid="2813507464175738967">"प्रणाली वेबभ्यु लाइसेन्स"</string>
     <string name="wallpaper_attributions" msgid="3645880512943433928">"वालपेपरहरु"</string>
     <string name="wallpaper_attributions_values" msgid="2996183537914690469">"स्याटलाइट कल्पना प्रदायकहरू:\n©२०१४ CNES / Astrium, DigitalGlobe, Bluesky"</string>
@@ -2738,6 +2738,7 @@
       <item quantity="other">लुकाइएका %d वस्तुहरू देखाउनुहोस्</item>
       <item quantity="one">लुकाइएको %d वस्तु देखाउनुहोस्</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"संक्षिप्त गर्नुहोस्"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"नेटवर्क र इन्टरनेट"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"मोबाइल"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"डेटाको प्रयोग"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> स्वचालित नियम सक्रिय गरिए</item>
       <item quantity="one">१ स्वचालित नियम सक्रिय गरियो</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"बाधा नपुर्‍याउनुहोस् मोडका प्राथमिकताहरू"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"प्राथमिकताले मात्र अनुमति  दिन्छ"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"बाधा नपुऱ्याउनुहोस्"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"व्यवहार"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"निम्नबाट आउने आवाज र कम्पनहरूलाई अनुमति दिनु"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"कुनै पनि आवाज ननिकाल्ने"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"आवाज ननिकाल्ने (पूर्ण शान्त)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"निम्नबाहेक कुनै आवाज ननिकाल्ने <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"स्वचालित नियमहरू"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"बाधा नपुर्‍याउनुहोस् मोडका नियमहरू सेट गर्नुहोस्"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"निश्चित समयहरूमा आवाज र कम्पनमाथि रोक लगाउनुहोस्"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"ताराङ्कित सम्पर्कहरूबाट मात्र"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"कुनै पनि होइन"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्महरू"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"अलार्महरू सधैँ प्राथमिक हुन्छन् र तिनीहरूले ध्वनि बजाउँछन्"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमान्डरहरू"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"घटनाहरू"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"सबै कल गर्ने व्यक्तिहरू"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"कलरहरू चयन गर्नुहोस्"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"कलरहरू दोरोर्‍याउनुहोस्"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"यदि एउटै व्यक्तिले <xliff:g id="MINUTES">%d</xliff:g> मिनेट अवधिभित्र दोस्रो पटक कल गर्छ भने यसलाई अनुमति दिनुहोस्।"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"एउटै व्यक्तिले <xliff:g id="MINUTES">%d</xliff:g> मिनेटको अवधिमा दोस्रो पटक कल गरेको खण्डमा"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूपमा चालू"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कहिले पनि होइन"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"हरेक रात"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"प्रणाली सेटिङहरू परिमार्जन गर्न सक्ने"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"प्रणाली सेटिङहरू परिमार्जन गर्नुहोस्"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"अनुप्रयोगद्वारा प्रणाली सेटिङहरू अनुमति परिवर्तन"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"प्रणालीका सेटिङहरू परिमार्जन गर्न दिनुहोस्"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"यस अनुमतिले अनुप्रयोगलाई प्रणाली सेटिङहरू परिमार्जन गर्न दिन्छ।"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"हो"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"होइन"</string>

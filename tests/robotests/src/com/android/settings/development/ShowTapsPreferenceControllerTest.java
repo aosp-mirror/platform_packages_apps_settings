@@ -90,17 +90,17 @@ public class ShowTapsPreferenceControllerTest {
     public void onPreferenceChange_preferenceChecked_shouldEnableShowTaps() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
+        final int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, -1 /* default */);
 
         assertThat(showTapsMode).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_ON);
     }
 
     @Test
-    public void onPreferenceChange__preferenceUnchecked_shouldDisableCameraLaserSensor() {
+    public void onPreferenceChange__preferenceUnchecked_shouldDisableShowTaps() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
+        final int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, -1 /* default */);
 
         assertThat(showTapsMode).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_OFF);
@@ -117,7 +117,7 @@ public class ShowTapsPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeEnabled() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
+        final int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, -1 /* default */);
 
         assertThat(showTapsMode).isEqualTo(ShowTapsPreferenceController.SETTING_VALUE_OFF);

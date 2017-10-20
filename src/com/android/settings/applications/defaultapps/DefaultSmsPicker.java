@@ -41,13 +41,14 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
 
     @Override
     protected List<DefaultAppInfo> getCandidates() {
+        final Context context = getContext();
         final Collection<SmsApplication.SmsApplicationData> smsApplications =
-                SmsApplication.getApplicationCollection(getContext());
+                SmsApplication.getApplicationCollection(context);
         final List<DefaultAppInfo> candidates = new ArrayList<>(smsApplications.size());
 
         for (SmsApplication.SmsApplicationData smsApplicationData : smsApplications) {
             try {
-                candidates.add(new DefaultAppInfo(mPm,
+                candidates.add(new DefaultAppInfo(context, mPm,
                         mPm.getApplicationInfoAsUser(smsApplicationData.mPackageName, 0, mUserId)));
             } catch (PackageManager.NameNotFoundException e) {
                 // Skip unknown packages.

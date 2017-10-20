@@ -75,7 +75,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     private static final String STATE_QUERY = "state_query";
     private static final String STATE_SHOWING_SAVED_QUERY = "state_showing_saved_query";
     private static final String STATE_NEVER_ENTERED_QUERY = "state_never_entered_query";
-    private static final String STATE_RESULT_CLICK_COUNT = "state_result_click_count";
 
     static final class SearchLoaderId {
         // Search Query IDs
@@ -96,17 +95,12 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
     @VisibleForTesting
     AtomicInteger mUnfinishedLoadersCount = new AtomicInteger(NUM_QUERY_LOADERS);
 
-    // Logging
-    @VisibleForTesting
-    static final String RESULT_CLICK_COUNT = "settings_search_result_click_count";
-
     @VisibleForTesting
     String mQuery;
 
     private boolean mNeverEnteredQuery = true;
     @VisibleForTesting
     boolean mShowingSavedQuery;
-    private int mResultClickCount;
     private MetricsFeatureProvider mMetricsFeatureProvider;
     @VisibleForTesting
     SavedQueryController mSavedQueryController;
@@ -161,7 +155,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         if (savedInstanceState != null) {
             mQuery = savedInstanceState.getString(STATE_QUERY);
             mNeverEnteredQuery = savedInstanceState.getBoolean(STATE_NEVER_ENTERED_QUERY);
-            mResultClickCount = savedInstanceState.getInt(STATE_RESULT_CLICK_COUNT);
             mShowingSavedQuery = savedInstanceState.getBoolean(STATE_SHOWING_SAVED_QUERY);
         } else {
             mShowingSavedQuery = true;
@@ -244,7 +237,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         super.onStop();
         final Activity activity = getActivity();
         if (activity != null && activity.isFinishing()) {
-            mMetricsFeatureProvider.histogram(activity, RESULT_CLICK_COUNT, mResultClickCount);
             if (mNeverEnteredQuery) {
                 mMetricsFeatureProvider.action(activity,
                         MetricsEvent.ACTION_LEAVE_SEARCH_RESULT_WITHOUT_QUERY);
@@ -258,7 +250,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         outState.putString(STATE_QUERY, mQuery);
         outState.putBoolean(STATE_NEVER_ENTERED_QUERY, mNeverEnteredQuery);
         outState.putBoolean(STATE_SHOWING_SAVED_QUERY, mShowingSavedQuery);
-        outState.putInt(STATE_RESULT_CLICK_COUNT, mResultClickCount);
     }
 
     @Override
@@ -276,7 +267,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mNoResultsView.setVisibility(View.GONE);
         }
 
-        mResultClickCount = 0;
         mNeverEnteredQuery = false;
         mQuery = query;
 
@@ -335,7 +325,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         if (mUnfinishedLoadersCount.decrementAndGet() != 0) {
             return;
         }
-
         mSearchAdapter.notifyResultsLoaded();
     }
 
@@ -372,7 +361,6 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
         logSearchResultClicked(resultViewHolder, result, logTaggedData);
         mSearchFeatureProvider.searchResultClicked(getContext(), mQuery, result);
         mSavedQueryController.saveQuery(mQuery);
-        mResultClickCount++;
     }
 
     public void onSearchResultsDisplayed(int resultCount) {
@@ -384,6 +372,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mNoResultsView.setVisibility(View.GONE);
             mResultsRecyclerView.scrollToPosition(0);
         }
+        mMetricsFeatureProvider.action(
+                getVisibilityLogger(), MetricsEvent.ACTION_SEARCH_RESULTS, 1);
         mSearchFeatureProvider.showFeedbackButton(this, getView());
     }
 

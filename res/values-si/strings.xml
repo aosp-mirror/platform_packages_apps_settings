@@ -2738,6 +2738,7 @@
       <item quantity="one">සඟවන ලද අයිතම %dක් පෙන්වන්න</item>
       <item quantity="other">සඟවන ලද අයිතම %dක් පෙන්වන්න</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"හකුළන්න"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"ජාලය සහ අන්තර්ජාලය"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"ජංගම"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"දත්ත භාවිතය"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="one">ස්වයංක්‍රිය රීති <xliff:g id="ON_COUNT">%d</xliff:g>ක් සක්‍රියයි</item>
       <item quantity="other">ස්වයංක්‍රිය රීති <xliff:g id="ON_COUNT">%d</xliff:g>ක් සක්‍රියයි</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"මනාපවලට බාධා ‍නොකරන්න"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"ප්‍රමුඛතා පමණි ඉඩ දෙයි"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"බාධා නොකරන්න"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"හැසිරීම"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"ශබ්ද සහ කම්පනවලට ඉඩ දෙන්න"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"ශබ්ද නැත"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"ශබ්ද නැත (සම්පූර්ණ නිහඬතාව)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> හැර ශබ්ද නැත"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"ස්වයංක්‍රීය රීති"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"බාධා නොකරන්න රීති සැකසීම"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"ශබ්ද සහ කම්පන ඇතැම් වේලා වල සීමා කරන්න"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"තරු ලකුණු කළ සම්බන්ධතා වෙතින් පමණි"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"කිසිවක් නැත"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"ඇඟවීම්"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"සීනු සැමවිටම ප්‍රමුඛ වන අතර ශබ්ද ඇති කරයි"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"සිහිකැඳවීම්"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"සිදුවීම්"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"සියලු අමතන්නන්"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"තෝරාගත් අමතන්නන්"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"නැවත අමතන්නන්"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"එකම පුද්ගලයා විනාඩි <xliff:g id="MINUTES">%d</xliff:g> කාල සීමාවක් තුළ දෙවන වතාවටත් අමතයි නම්, එයට අවසර දෙන්න"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"එකම පුද්ගලයා විනාඩි <xliff:g id="MINUTES">%d</xliff:g>ක කාල සීමාවක් තුළ දෙවන වතාවටත් අමතයි නම්"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"ස්වයන්ක්‍රියව සක්‍රිය කරන්න"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"කවදාවත් නෑ"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"සෑම රාත්‍රියකම"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"පද්ධති සැකසීම් විකරණය කළ හැකිය"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"පද්ධති සැකසීම් විකරණය කරන්න"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"යෙදුම් පද්ධති සැකසීම් විකරණය කිරීමේ අවසරය"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"පද්ධති සැකසීම් වෙනස් කිරීමට ඉඩ දෙන්න"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"මෙම අවසරය යෙදුමකට පද්ධති සැකසීම් විකරණය කිරීමට ඉඩ දෙයි."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"ඔව්"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"නැත"</string>

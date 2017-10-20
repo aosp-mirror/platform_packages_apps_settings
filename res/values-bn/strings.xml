@@ -2636,9 +2636,9 @@
     <string name="nfc_payment_use_default" msgid="3234730182120288495">"ডিফল্ট ব্যবহার করুন"</string>
     <string name="nfc_payment_favor_default" msgid="5743781166099608372">"সবসময়"</string>
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"অন্য কোনো অর্থপ্রদান অ্যাপ্লিকেশান খুলে থাকার সময় ব্যতিত"</string>
-    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ট্যাপ করে অর্থপ্রদান করুন টার্মিন্যালে, এর মাধ্যমে অর্থ প্রদান করুন:"</string>
-    <string name="nfc_how_it_works_title" msgid="1984068457698797207">"টার্মিনালে অর্থপ্রদানের পদ্ধতি"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"একটি অর্থপ্রদানের অ্যাপ্লিকেশান সেট আপ করুন৷ তারপরে যোগাযোগহীন চিহ্ন সহ কোনো টার্মিনালের উপর শুধু আপনার ফোনের পিছনের দিকটি ধরুন৷"</string>
+    <string name="nfc_payment_pay_with" msgid="7524904024378144072">"ট্যাপ করে অর্থপ্রদান করুন টার্মিন্যালে, এর মাধ্যমে পেমেন্ট করুন:"</string>
+    <string name="nfc_how_it_works_title" msgid="1984068457698797207">"টার্মিনালে পেমেন্টের পদ্ধতি"</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"একটি পেমেন্টের অ্যাপ্লিকেশান সেট আপ করুন৷ তারপরে যোগাযোগহীন চিহ্ন সহ কোনো টার্মিনালের উপর শুধু আপনার ফোনের পিছনের দিকটি ধরুন৷"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"বুঝেছি"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"আরো..."</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"আপনার পছন্দ হিসেবে সেট করুন?"</string>
@@ -2738,6 +2738,7 @@
       <item quantity="one">%dটি লুকানো আইটেম দেখান</item>
       <item quantity="other">%dটি লুকানো আইটেম দেখান</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"সঙ্কুচিত করুন"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"নেটওয়ার্ক ও ইন্টারনেট"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"মোবাইল"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ডেটার ব্যবহার"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g>টি স্বয়ংক্রিয় নিয়ম চালু করা হয়েছে</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>টি স্বয়ংক্রিয় নিয়ম চালু করা হয়েছে</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"\'বিরক্ত করবেন না\' বিকল্পগুলি"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"অগ্রাধিকার অনুমতিগুলি"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"বিরক্ত করবেন না"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"আচরণ"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"এগুলির সাউন্ড ও ভাইব্রেশন হবে"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"কোনও সাউন্ড নয়"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"কোনও সাউন্ড নয় (সম্পূর্ণ নীরব)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> ছাড়া কোনও সাউন্ড নয়"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"স্বয়ংক্রিয় নিয়মগুলি"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"\'বিরক্ত করবেন না\' সেট আপ করুন"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"নির্দিষ্ট সময়ের ক্ষেত্রে শব্দ এবং কম্পন সীমিত করুন"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"শুধুমাত্র তারকাচিহ্নিত পরিচিতিদের থেকে"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"কোনো কিছুই নয়"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"অ্যালার্মগুলি"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"অ্যালার্ম সর্বদা অগ্রাধিকার পায় এবং সেগুলি থেকে আওয়াজ হয়"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"অনুস্মারকগুলি"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ইভেন্টগুলি"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"সমস্ত কলার"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"নির্বাচিত কলারগুলি"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"কলারগুলির পুনরাবৃত্তি করুন"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"যদি একই ব্যক্তি <xliff:g id="MINUTES">%d</xliff:g> মিনিটের মধ্যে দ্বিতীয়বার কল করেন, তবে এটি অনুমোদন করুন"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"একই ব্যক্তি দ্বিতীয়বার কল করলে <xliff:g id="MINUTES">%d</xliff:g>"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"স্বয়ংক্রিয়ভাবে চালু"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"কখনও নয়"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"প্রতিদিন রাতে"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"সিস্টেম সেটিংস সংশোধন করতে পারে"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"সিস্টেম সেটিংস সংশোধন করুন"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"অ্যাপ্লিকেশানটি সিস্টেম সেটিংসের অনুমতি সংশোধন করে"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"সিস্টেম সেটিংস পরিবর্তনের অনুমতি দিন"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"এই অনুমতিটি কোনো অ্যাপ্লিকেশানকে সিস্টেম সেটিংস সংশোধন করার অনুমতি দেয়৷"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"হ্যাঁ"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"না"</string>

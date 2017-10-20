@@ -2738,6 +2738,7 @@
       <item quantity="one">छिपे हुए %d आइटम दिखाएं</item>
       <item quantity="other">छिपे हुए %d आइटम दिखाएं</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"छोटा करें"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"नेटवर्क और इंटरनेट"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"मोबाइल"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"डेटा खर्च"</string>
@@ -2840,8 +2841,14 @@
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> ऑटोमैटिक नियम चालू किए गए</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> ऑटोमैटिक नियम चालू किए गए</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"परेशान न करें की प्राथमिकताएं"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"प्राथमिकता इनकी अनुमति देती है"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"परेशान न करें"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"व्यवहार"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"आवाज़ और वाइब्रेशन की अनुमति दें"</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"कोई आवाज़ नहीं"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"कोई आवाज़ नहीं (एकदम मौन)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> के अलावा कोई आवाज़ नहीं"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"अॉटोमैटिक नियम"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"परेशान न करें के नियम सेट करें"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"निश्चित समय पर ध्वनियों और कंपनों को सीमित करें"</string>
@@ -3017,13 +3024,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"सिर्फ़ तारांकित संपर्कों से"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"कोई नहीं"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"अलार्म हमेशा प्राथमिकता वाले होते हैं और आवाज़ करते हैं"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमाइंडर"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"इवेंट"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"सभी कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"चुनिंदा कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"बार-बार कॉल करने वाले (कॉलर)"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"अगर वही व्‍यक्‍ति <xliff:g id="MINUTES">%d</xliff:g> मिनट के अंदर दूसरी बार कॉल करता है, तो उसे अनुमति दें"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"अगर कोई व्यक्ति <xliff:g id="MINUTES">%d</xliff:g> मिनट के अंदर दोबारा कॉल करे"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूप से चालू"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कभी नहीं"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"हर रात"</string>
@@ -3304,8 +3312,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"सिस्टम सेटिंग को बदल सकते हैं"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"सिस्‍टम सेटिंग बदलें"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"ऐप को सिस्‍टम सेटिंग बदलने की अनुमति"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"सेटिंग में बदलाव करने की अनुमति दें"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"यह अनुमति किसी ऐप को सिस्टम सेटिंग बदलने देती है."</string>
     <string name="write_settings_on" msgid="8230580416068832239">"हां"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"नहीं"</string>

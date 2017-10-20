@@ -66,7 +66,8 @@ public class TimeChangeListenerMixinTest {
     public void onResume_shouldRegisterIntentFilter() {
         mMixin.onResume();
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_TICK));
-        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED));
+        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED)
+                .addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND));
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIMEZONE_CHANGED));
 
         verify(mCallback, times(3)).updateTimeAndDateDisplay(mContext);
@@ -77,7 +78,8 @@ public class TimeChangeListenerMixinTest {
         mMixin.onResume();
         mMixin.onPause();
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_TICK));
-        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED));
+        mContext.sendBroadcast(new Intent(Intent.ACTION_TIME_CHANGED)
+                .addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND));
         mContext.sendBroadcast(new Intent(Intent.ACTION_TIMEZONE_CHANGED));
 
         verify(mCallback, never()).updateTimeAndDateDisplay(mContext);

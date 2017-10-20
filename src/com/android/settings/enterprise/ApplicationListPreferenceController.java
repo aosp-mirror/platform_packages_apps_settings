@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -63,13 +64,14 @@ public class ApplicationListPreferenceController extends AbstractPreferenceContr
         if (screen == null) {
             return;
         }
+        final IconDrawableFactory iconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         final Context prefContext = mParent.getPreferenceManager().getContext();
         for (int position = 0; position < result.size(); position++) {
             final UserAppInfo item = result.get(position);
             final Preference preference = new Preference(prefContext);
             preference.setLayoutResource(R.layout.preference_app);
             preference.setTitle(item.appInfo.loadLabel(mPm));
-            preference.setIcon(item.appInfo.loadIcon(mPm));
+            preference.setIcon(iconDrawableFactory.getBadgedIcon(item.appInfo));
             preference.setOrder(position);
             preference.setSelectable(false);
             screen.addPreference(preference);

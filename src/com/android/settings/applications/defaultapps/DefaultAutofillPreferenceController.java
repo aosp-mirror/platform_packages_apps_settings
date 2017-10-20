@@ -62,7 +62,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         final String flattenComponent = Settings.Secure.getString(mContext.getContentResolver(),
                 DefaultAutofillPicker.SETTING);
         if (!TextUtils.isEmpty(flattenComponent)) {
-            DefaultAppInfo appInfo = new DefaultAppInfo(mPackageManager,
+            DefaultAppInfo appInfo = new DefaultAppInfo(mContext, mPackageManager,
                     mUserId, ComponentName.unflattenFromString(flattenComponent));
             return appInfo;
         }

@@ -2742,6 +2742,7 @@
       <item quantity="other">顯示 %d 個隱藏項目</item>
       <item quantity="one">顯示 %d 個隱藏項目</item>
     </plurals>
+    <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"收合"</string>
     <string name="network_dashboard_title" msgid="4771589228992391573">"網路和網際網路"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"行動網路"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"數據用量"</string>
@@ -2844,8 +2845,14 @@
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> 個自動規則已開啟</item>
       <item quantity="one">1 個自動規則已開啟</item>
     </plurals>
-    <string name="zen_mode_settings_title" msgid="842308776768942600">"「零打擾」偏好設定"</string>
-    <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"僅允許優先通知"</string>
+    <string name="zen_mode_settings_title" msgid="1066226840983908121">"零打擾"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"行為"</string>
+    <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"只允許下列類型的音效與震動："</string>
+    <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"不發出音效"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"不發出音效 (完全靜音)"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"除了<xliff:g id="CATEGORIES">%1$s</xliff:g>以外一律不發出音效"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <skip />
     <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"自動規則"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"設定「零打擾」規則"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"在特定時間禁用音效和震動"</string>
@@ -3021,13 +3028,14 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"來自已加星號的聯絡人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"無"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"鬧鐘"</string>
-    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"鬧鐘一律可優先發出音效"</string>
+    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活動"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有來電者"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"所選來電者"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"重複來電者"</string>
-    <string name="zen_mode_repeat_callers_summary" msgid="7192713032364140137">"如果同一個人在 <xliff:g id="MINUTES">%d</xliff:g> 分鐘的時間內第二次來電，即顯示通知"</string>
+    <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"如果同一個人在 <xliff:g id="MINUTES">%d</xliff:g> 分鐘的時間內第二次來電"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動開啟"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永遠不要"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>
@@ -3308,8 +3316,7 @@
     <string name="write_settings_title" msgid="4232152481902542284">"可以修改系統設定"</string>
     <string name="write_system_settings" msgid="3482913590601096763">"修改系統設定"</string>
     <string name="write_settings_preference" msgid="3407383041273067448">"應用程式修改系統設定權限"</string>
-    <!-- no translation found for permit_write_settings (658555006453212691) -->
-    <skip />
+    <string name="permit_write_settings" msgid="658555006453212691">"允許修改系統設定"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"這項權限允許應用程式修改系統設定。"</string>
     <string name="write_settings_on" msgid="8230580416068832239">"可"</string>
     <string name="write_settings_off" msgid="5156104383386336233">"否"</string>

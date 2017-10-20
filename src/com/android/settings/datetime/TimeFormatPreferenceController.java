@@ -103,6 +103,7 @@ public class TimeFormatPreferenceController extends AbstractPreferenceController
 
     static void timeUpdated(Context context, Boolean is24Hour) {
         Intent timeChanged = new Intent(Intent.ACTION_TIME_CHANGED);
+        timeChanged.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
         int timeFormatPreference;
         if (is24Hour == null) {
             timeFormatPreference = Intent.EXTRA_TIME_PREF_VALUE_USE_LOCALE_DEFAULT;

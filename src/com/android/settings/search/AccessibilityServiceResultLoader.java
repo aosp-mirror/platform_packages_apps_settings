@@ -26,8 +26,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
+import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
+import android.util.IconDrawableFactory;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.R;
@@ -44,17 +46,22 @@ public class AccessibilityServiceResultLoader extends AsyncLoader<Set<? extends 
 
     private static final int NAME_NO_MATCH = -1;
 
+    private final Context mContext;
+
     private List<String> mBreadcrumb;
     private SiteMapManager mSiteMapManager;
     @VisibleForTesting
     final String mQuery;
     private final AccessibilityManager mAccessibilityManager;
     private final PackageManager mPackageManager;
+    private final int mUserId;
 
 
     public AccessibilityServiceResultLoader(Context context, String query,
             SiteMapManager mapManager) {
         super(context);
+        mContext = context;
+        mUserId = UserHandle.myUserId();
         mSiteMapManager = mapManager;
         mPackageManager = context.getPackageManager();
         mAccessibilityManager =
@@ -68,6 +75,7 @@ public class AccessibilityServiceResultLoader extends AsyncLoader<Set<? extends 
         final Context context = getContext();
         final List<AccessibilityServiceInfo> services = mAccessibilityManager
                 .getInstalledAccessibilityServiceList();
+        final IconDrawableFactory iconFactory = IconDrawableFactory.newInstance(mContext);
         final String screenTitle = context.getString(R.string.accessibility_settings);
         for (AccessibilityServiceInfo service : services) {
             if (service == null) {
@@ -87,7 +95,10 @@ public class AccessibilityServiceResultLoader extends AsyncLoader<Set<? extends 
             if (resolveInfo.getIconResource() == 0) {
                 icon = ContextCompat.getDrawable(context, R.mipmap.ic_accessibility_generic);
             } else {
-                icon = resolveInfo.loadIcon(mPackageManager);
+                icon = iconFactory.getBadgedIcon(
+                        resolveInfo.serviceInfo,
+                        resolveInfo.serviceInfo.applicationInfo,
+                        mUserId);
             }
             final String componentName = new ComponentName(serviceInfo.packageName,
                     serviceInfo.name).flattenToString();

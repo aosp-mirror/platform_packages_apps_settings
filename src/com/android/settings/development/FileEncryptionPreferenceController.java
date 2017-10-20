@@ -86,16 +86,6 @@ public class FileEncryptionPreferenceController extends
                 mContext.getResources().getString(R.string.convert_to_file_encryption_done));
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // intentional no-op
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        // intentional no-op
-    }
-
     private IStorageManager getStorageManager() {
         try {
             return IStorageManager.Stub.asInterface(
