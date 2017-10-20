@@ -217,6 +217,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY = "bluetooth_select_a2dp_channel_mode";
     private static final String BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY = "bluetooth_select_a2dp_ldac_playback_quality";
 
+    private static final String DNS_TLS_KEY = "dns_tls";
+
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -292,6 +294,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mBluetoothSelectA2dpBitsPerSample;
     private ListPreference mBluetoothSelectA2dpChannelMode;
     private ListPreference mBluetoothSelectA2dpLdacPlaybackQuality;
+
+    private SwitchPreference mDnsTls;
 
     private SwitchPreference mOtaDisableAutomaticUpdate;
     private SwitchPreference mWifiAllowScansWithTraffic;
@@ -506,6 +510,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
         mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
         initBluetoothConfigurationValues();
+
+        mDnsTls = findAndInitSwitchPref(DNS_TLS_KEY);
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -823,6 +829,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateBluetoothDisableAbsVolumeOptions();
         updateBluetoothEnableInbandRingingOptions();
         updateBluetoothA2dpConfigurationValues();
+        updateSwitchPreference(mDnsTls, Settings.Global.getInt(cr,
+                Settings.Global.DNS_TLS_DISABLED, 0) == 0);
     }
 
     private void resetDangerousOptions() {
@@ -2526,6 +2534,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mBluetoothEnableInbandRinging) {
             writeBluetoothEnableInbandRingingOptions();
+        } else if (preference == mDnsTls) {
+            Settings.Global.putInt(getActivity().getContentResolver(),
+                    Settings.Global.DNS_TLS_DISABLED,
+                    mDnsTls.isChecked() ? 0 : 1);
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {
