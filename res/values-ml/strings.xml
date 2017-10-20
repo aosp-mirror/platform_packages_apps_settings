@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"നിരസിക്കുക"</string>
     <string name="dlg_close" msgid="7471087791340790015">"അടയ്‌ക്കുക"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"സ്വിച്ച്"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"അജ്ഞാതം"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">ഒരു ഡവലപ്പറാകുന്നതിൽ നിന്നും നിങ്ങൾ <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> ചുവട് മാത്രം അകലെയാണ്.</item>
       <item quantity="one">ഒരു ഡവലപ്പറാകുന്നതിൽ നിന്നും നിങ്ങൾ <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> ചുവട് മാത്രം അകലെയാണ്.</item>
@@ -107,26 +108,17 @@
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"ഉപകരണങ്ങൾക്കായി സ്‌കാൻ ചെയ്യുക"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"ഈ ഉപകരണത്തിന്റെ പേരുമാറ്റുക"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"പേര് മാറ്റുക"</string>
-    <!-- no translation found for bluetooth_disconnect_title (7830252930348734303) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (8208712728668714199) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (6611038575213485336) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (3995834526315103965) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_dialog_ok (3308586619539119106) -->
-    <skip />
+    <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"ഉപകരണം വിച്‌ഛേദിക്കണോ?"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണത്തിൽ നിന്ന് നിങ്ങളുടെ ഫോൺ വിച്ഛേദിക്കും."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="6611038575213485336">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണത്തിൽ നിന്ന് നിങ്ങളുടെ ടാബ്‌ലെറ്റ് വിച്ഛേദിക്കും."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണത്തിൽ നിന്ന് നിങ്ങളുടെ ഉപകരണം വിച്ഛേദിക്കും."</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"വിച്ഛേദിക്കുക"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"ബ്ലൂടൂത്ത് ക്രമീകരണങ്ങൾ മാറ്റാൻ നിങ്ങൾക്ക് അനുമതിയില്ല."</string>
-    <!-- no translation found for bluetooth_pairing_pref_title (7429413067477968637) -->
-    <skip />
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"പുതിയ ഉപകരണവുമായി ജോടിയാക്കുക"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth ക്രമീകരണം തുറന്നിരിക്കുമ്പോൾ വിളിപ്പാടരികെയുള്ള ഉപകരണങ്ങൾക്ക് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ദൃശ്യമാകുന്നു."</string>
-    <!-- no translation found for bluetooth_footer_mac_message (1109366350000220283) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (6807634484499166486) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (8413944740341742061) -->
-    <skip />
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"ഫോണിന്റെ Bluetooth വിലാസം: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"ടാബ്‌ലെറ്റിന്റെ Bluetooth വിലാസം: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"ഉപകരണത്തിന്റെ Bluetooth വിലാസം: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്ഛേദിക്കണോ?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"പ്രക്ഷേപണം ചെയ്യുന്നു"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"പ്രൊഫൈൽ പ്രവർത്തനരഹിതമാക്കണോ?"</string>
@@ -138,8 +130,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"ബ്ലൂടൂത്ത് ജോടിയാക്കൽ അഭ്യർത്ഥന"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"ജോടിയാക്കൽ അഭ്യർത്ഥന"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്ന ഉപകരണവുമായി ജോടിയാക്കാൻ ടാപ്പുചെയ്യുക."</string>
-    <!-- no translation found for bluetooth_show_received_files (3144149432555230410) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="3144149432555230410">"സ്വീകരിച്ച ഫയലുകള്‍"</string>
     <string name="device_picker" msgid="4978696506172252813">"ബ്ലൂടൂത്തുപകരണം തിരഞ്ഞെടുക്കൂ"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"Bluetooth ഓണാക്കാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"Bluetooth ഓഫാക്കാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> താൽപ്പര്യപ്പെടുന്നു"</string>
@@ -175,11 +166,9 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s, നിങ്ങളുടെ സന്ദേശങ്ങൾ ആക്‌സസ്സുചെയ്യാൻ താൽപ്പര്യപ്പെടുന്നു. %2$s എന്നതിലേക്ക് ആക്‌സസ്സ് നൽകണോ?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM ആക്‌സസ്സ് അഭ്യർത്ഥന"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> ഉപകരണം SIM കാർഡ് ആക്‌സസ്സ് ചെയ്യാൻ താൽപ്പര്യപ്പെടുന്നു. SIM കാർഡിലേക്ക് ആക്‌സസ്സ് അനുവദിക്കുന്നത് കണക്ഷന്റെ സമയപരിധിയ്‌ക്കായി ഉപകരണത്തിൽ ഡാറ്റ കണക്റ്റിവിറ്റിയെ പ്രവർത്തനരഹിതമാക്കുന്നതിനിടയാക്കും. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g> ഉപകരണത്തിന് ആക്‌സസ്സ് നൽകുക"</string>
-    <!-- no translation found for bluetooth_device_name_summary (4757990010751789977) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"<xliff:g id="DEVICE_NAME">^1</xliff:g> എന്ന പേരിൽ മറ്റ് ഉപകരണങ്ങൾക്ക് ദൃശ്യമാക്കുക"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"നിങ്ങളുടെ ഉപകരണങ്ങൾ"</string>
-    <!-- no translation found for bluetooth_pairing_page_title (7712127387361962608) -->
-    <skip />
+    <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"പുതിയ ഉപകരണവുമായി ജോടിയാക്കുക"</string>
     <string name="date_and_time" msgid="9062980487860757694">"തീയതിയും സമയവും"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"സമയ മേഖല തിരഞ്ഞെടുക്കുക"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -317,7 +306,7 @@
     <string name="date_and_time_settings_title" msgid="3350640463596716780">"തീയതിയും സമയവും"</string>
     <string name="date_and_time_settings_title_setup_wizard" msgid="2391530758339384324">"തീയതിയും സമയവും സജ്ജീകരിക്കുക"</string>
     <string name="date_and_time_settings_summary" msgid="7095318986757583584">"തീയതി, സമയം, സമയ മേഖല, ഫോർമാറ്റുകൾ എന്നിവ സജ്ജീകരിക്കുക"</string>
-    <string name="date_time_auto" msgid="7076906458515908345">"തീയതിയും സമയവും സ്വയമേ നൽകൂ"</string>
+    <string name="date_time_auto" msgid="7076906458515908345">"സ്വമേധയാ തീയതിയും സമയവും നൽകൂ"</string>
     <string name="date_time_auto_summaryOn" msgid="4609619490075140381">"നെറ്റ്‌വർക്ക് നൽകുന്ന സമയം ഉപയോഗിക്കുക"</string>
     <string name="date_time_auto_summaryOff" msgid="8698762649061882791">"നെറ്റ്‌വർക്ക് നൽകുന്ന സമയം ഉപയോഗിക്കുക"</string>
     <string name="zone_auto" msgid="334783869352026648">"സ്വയമേയുള്ള സമയക്രമീകരണം"</string>
@@ -335,7 +324,7 @@
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"സമയ മേഖലയനുസരിച്ച് അടുക്കുക"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"തീയതി"</string>
     <string name="time_picker_title" msgid="483460752287255019">"സമയം"</string>
-    <string name="lock_after_timeout" msgid="4590337686681194648">"സ്വയമേവ ലോക്കുചെയ്യുക"</string>
+    <string name="lock_after_timeout" msgid="4590337686681194648">"സ്വമേധയാ ലോക്കുചെയ്യുക"</string>
     <string name="lock_after_timeout_summary" msgid="6128431871360905631">"സുഷു‌പ്തിയ്ക്ക് <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> കഴിഞ്ഞ്"</string>
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> എന്നതിനാൽ അൺലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ ഒഴികെ, സുഷുപ്‌തിയിലായ ശേഷം ഉടനടി"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"സുഷുപ്‌തിയിലായതിനുശേഷം <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> അൺലോക്കുചെയ്‌തിരിക്കുമ്പോൾ ഒഴികെ"</string>
@@ -352,8 +341,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"അക്കൗണ്ടുകൾ"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"ലൊക്കേഷൻ"</string>
     <string name="account_settings_title" msgid="626177544686329806">"അക്കൗണ്ടുകൾ"</string>
-    <!-- no translation found for security_settings_title (4918904614964215087) -->
-    <skip />
+    <string name="security_settings_title" msgid="4918904614964215087">"സുരക്ഷയും ലൊക്കേഷനും"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"എൻക്രിപ്‌ഷനും ക്രെഡന്‍ഷ്യലുകളും"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"ഫോൺ എൻക്രിപ്‌റ്റ് ചെയ്‌തു"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"ഉപകരണം എൻക്രിപ്റ്റ് ചെയ്തു"</string>
@@ -378,55 +366,39 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"വിരലടയാളം വഴി അൺലോക്കുചെയ്യുക"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"നിങ്ങളുടെ വിരലടയാളം ഉപയോഗിക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"ഫോൺ അൺലോക്കുചെയ്യാനോ വാങ്ങലുകൾക്ക് അംഗീകാരം നൽകാനോ ആപ്സിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ വിരലടയാള സെൻസർ തൊട്ടാൽ മാത്രം മതി. ആരുടെയൊക്കെ വിരലടയാളങ്ങൾ ചേർക്കുന്നു എന്ന കാര്യത്തിൽ നിങ്ങൾ ജാഗ്രത പുലർത്തുക. ചേർത്തിട്ടുള്ള ഒരു വിരലടയാളത്തിന് പോലും ഈ സംഗതികളൊക്കെ ചെയ്യാനാകും.\n\nശ്രദ്ധിക്കുക: നിങ്ങളുടെ വിരലടയാളത്തിന്റെ സുരക്ഷ, ശക്തമായ പാറ്റേണിനേക്കാളോ PIN-നേക്കാളോ കുറവായിരിക്കാം."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (1550756694054944874) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (6817326798834882531) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതിനോ വാങ്ങലിന് അംഗീകാരം നൽകാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക.\n\nശ്രദ്ധിക്കുക: ഈ ഉപകരണം അൺലോക്കുചെയ്യുന്നതിന് നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കാൻ കഴിയില്ല. കൂടുതൽ വിവരങ്ങൾക്ക്, നിങ്ങളുടെ സ്ഥാപനത്തിന്റെ അഡ്‌മിനെ ബന്ധപ്പെടുക."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതിനോ വാങ്ങലിന് അംഗീകാരം നൽകാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക.\n\nശ്രദ്ധിക്കുക: നിങ്ങളുടെഫിംഗർപ്രിന്റിന്റെ സുരക്ഷ, ശക്തമായ പാറ്റേണിനേക്കാളോ പിന്നിനേക്കാളോ കുറവായിരിക്കാം."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"റദ്ദാക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"തുടരൂ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"ഒഴിവാക്കുക"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_continue_setup (1961957425135180242) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (1581834104051243425) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (4629503416877189572) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (2423428240245737909) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (5219287483885558525) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (1466238255429527112) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (3008526710555416125) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"അടുത്തത്"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ടാബ്‌ലെറ്റ് നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഉപകരണം നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ഉപകരണം ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഫോൺ നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ പുനഃക്രമീകരിക്കുകയോ ചെയ്താൽ, ഫോൺ ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ടാബ്‌ലെറ്റ് നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ ചെയ്താൽ, ടാബ്‌ലെറ്റ് ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഉപകരണം നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ ചെയ്താൽ, ഉപകരണം ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ ഓണാക്കില്ല. ഈ ഫോൺ നഷ്ടപ്പെടുകയോ മോഷ്ടിക്കപ്പെടുകയോ ചെയ്താൽ, ഫോൺ ഉപയോഗിക്കുന്നതിൽ നിന്ന് മറ്റുള്ളവരെ തടയാൻ നിങ്ങൾക്കാവില്ല."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"ഏതുവിധേയനയും ഒഴിവാക്കുക"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"തിരിച്ചുപോവുക"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_title (3051496861358227199) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_message (8793966374365960368) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"സെൻസർ സ്പർശിക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"ഫോണിന്റെ പിൻവശത്താണ് അതുള്ളത്. ചൂണ്ടുവിരൽ ഉപയോഗിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"ഉപകരണത്തിലെ ചിത്രീകരണവും ഫിംഗർപ്രിന്റ് സെൻസർ ലൊക്കേഷനും"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"പേര്"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ശരി"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"ഇല്ലാതാക്കുക"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_start_title (2068961812439460133) -->
-    <skip />
-    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"സെൻസറിൽ വിരൽ വച്ച് ഒരു വൈബ്രേഷൻ അനുഭവപ്പെട്ട ശേഷം വിരൽ മാറ്റുക."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (2819679722403209778) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (6158989350522518586) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_title (7567276170287972230) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (4796715961273420536) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"സെൻസർ സ്പർശിക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"സെൻസറിൽ വിരൽ വച്ച് വൈബ്രേഷൻ അനുഭവപ്പെട്ട ശേഷം വിരൽ മാറ്റുക."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"ഉയർത്തുക, വീണ്ടും സ്പർശിക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"നിങ്ങളുടെ ഫിംഗർപ്രിന്റിന്റെ വ്യത്യസ്ത ഭാഗങ്ങൾ ചേർക്കുന്നതിന് നിങ്ങളുടെ വിരൽ ഉയർത്തിക്കൊണ്ടിരിക്കുക"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"ഫിംഗർപ്രിന്റ് ചേർത്തു"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"നിങ്ങൾ ഈ ഐക്കൺ കാണുമ്പോൾ, തിരിച്ചറിയലിനോ ഒരു വാങ്ങലിന് അംഗീകാരം നൽകാനോ നിങ്ങളുടെ ഫിംഗർപ്രിന്റ് ഉപയോഗിക്കുക."</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"ഇത് പിന്നീട് ചെയ്യുക"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"വിരലടയാളം സജ്ജമാക്കൽ ഒഴിവാക്കണോ?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"നിങ്ങളുടെ ഫോൺ അൺലോക്കുചെയ്യുന്നതിനുള്ള ഒരു മാർഗ്ഗമായി നിങ്ങൾ വിരലടലാളം ഉപയോഗിക്കുന്നതിന് തീരുമാനിച്ചിരിക്കുന്നു. നിങ്ങളിത് ഇപ്പോൾ ഒഴിവാക്കുന്നുവെങ്കിൽ, പിന്നീട് സജ്ജമാക്കേണ്ടി വരും. സജ്ജീകരിക്കലിന് ഒരൽപ്പസമയമേ എടുക്കുകയുള്ളൂ."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"സ്‌ക്രീൻ ലോക്ക് സജ്ജമാക്കുക"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"പൂർത്തിയായി"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"ക്ഷമിക്കണം, അത് സെൻസർ അല്ല"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_touch_dialog_message (2989019978041986175) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"നിങ്ങളുടെ ഫോണിന്റെ പിൻവശത്തെ സെൻസർ സ്പർശിക്കുക. ചൂണ്ടുവിരൽ ഉപയോഗിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"എൻറോൾമെന്റ് പൂർത്തിയായിട്ടില്ല"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"വിരലടയാള എൻറോൾമെന്റിന്റെ സമയ പരിധി എത്തി. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"വിരലടയാള എൻറോൾമെന്റ് പ്രവർത്തിച്ചില്ല. വീണ്ടും ശ്രമിക്കുകയോ മറ്റൊരു വിരൽ ഉപയോഗിക്കുകയോ ചെയ്യുക."</string>
@@ -528,7 +500,7 @@
     <string name="unlock_disable_frp_warning_content_pattern_fingerprint" msgid="8212242533942400457">"നിങ്ങളുടെ പാറ്റേൺ കൂടാതെ ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ പ്രവർത്തിക്കില്ല.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>സംരക്ഷിച്ചിട്ടുള്ള നിങ്ങളുടെ വിരലടയാളങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും, നിങ്ങൾക്ക് ഫോൺ അൺലോക്ക് ചെയ്യുന്നതിനോ വാങ്ങലുകൾക്ക് അംഗീകാരം നൽകുന്നതിനോ ആപ്സിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ കഴിയില്ല.\""</string>
-    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"നിങ്ങളുടെ PIN കൂടാതെ ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ പ്രവർത്തിക്കില്ല."</string>
+    <string name="unlock_disable_frp_warning_content_pin" msgid="586996206210265131">"നിങ്ങളുടെ PIN ഇല്ലാതെ ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ പ്രവർത്തിക്കില്ല."</string>
     <string name="unlock_disable_frp_warning_content_pin_fingerprint" msgid="875669051899437197">"നിങ്ങളുടെ PIN കൂടാതെ ഉപകരണ പരിരക്ഷാ ഫീച്ചറുകൾ പ്രവർത്തിക്കില്ല.<xliff:g id="EMPTY_LINE">
 
 </xliff:g>സംരക്ഷിച്ചിട്ടുള്ള നിങ്ങളുടെ വിരലടയാളങ്ങളും ഈ ഉപകരണത്തിൽ നിന്ന് നീക്കംചെയ്യപ്പെടും, നിങ്ങൾക്ക് ഫോൺ അൺലോക്ക് ചെയ്യുന്നതിനോ വാങ്ങലുകൾക്ക് അംഗീകാരം നൽകുന്നതിനോ ആപ്സിലേക്ക് സൈൻ ഇൻ ചെയ്യാനോ കഴിയില്ല.\""</string>
@@ -562,16 +534,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"അൺലോക്ക് പാസ്‌വേഡ് മാറ്റുക"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"വീണ്ടും ശ്രമിക്കുക. <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> / <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> ശ്രമം."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"നിങ്ങളുടെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="4999108263936246210">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാറ്റേണാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
-    <string name="lock_last_pin_attempt_before_wipe_device" msgid="2191214314973933300">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പിന്നാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
-    <string name="lock_last_password_attempt_before_wipe_device" msgid="6526655065466746563">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാസ്‌വേഡാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായ പാറ്റേൺ നൽകിയാൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായ പിൻ നൽകിയാൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായ പാസ്‌വേഡ് നൽകിയാൽ, ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാറ്റേണാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പിന്നാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാസ്‌വേഡാണ് നൽകുന്നതെങ്കിൽ, ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാറ്റേണാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പിന്നാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"അടുത്ത തവണയും നിങ്ങൾ തെറ്റായൊരു പാസ്‌വേഡാണ് നൽകുന്നതെങ്കിൽ, നിങ്ങളുടെ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="1951676829299522277">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും."</string>
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപകരണത്തിലെ ഡാറ്റ ഇല്ലാതാക്കപ്പെടും."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഉപയോക്താവ് ഇല്ലാതാക്കപ്പെടും."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"ഒരുപാട് തെറ്റായ ശ്രമങ്ങൾ. ഈ ഔദ്യോഗിക പ്രൊഫൈലും അതിന്റെ ഡാറ്റയും ഇല്ലാതാക്കപ്പെടും."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"നിരസിക്കുക"</string>
@@ -623,12 +595,12 @@
       <item quantity="other"><xliff:g id="COUNT_1">%d</xliff:g> ആപ്‌സ് സജീവമാണ്</item>
       <item quantity="one"><xliff:g id="COUNT_0">%d</xliff:g> ആപ്പ് സജീവമാണ്</item>
     </plurals>
-    <string name="manage_trust_agents" msgid="4629279457536987768">"പരിചിത ഏജന്റുകൾ"</string>
+    <string name="manage_trust_agents" msgid="4629279457536987768">"വിശ്വസ്ത ഏജൻ്റുകൾ"</string>
     <string name="disabled_because_no_backup_security" msgid="6877660253409580377">"ഉപയോഗിക്കാൻ, ആദ്യം സ്‌ക്രീൻ ലോക്ക് സജ്ജീകരിക്കുക"</string>
     <string name="manage_trust_agents_summary" msgid="1475819820389620546">"ഒന്നുമില്ല"</string>
     <plurals name="manage_trust_agents_summary_on" formatted="false" msgid="3935182396726101824">
-      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> സജീവ പരിചിത ഏജന്റുമാർ</item>
-      <item quantity="one">1 സജീവ പരിചിത ഏജന്റ്</item>
+      <item quantity="other"><xliff:g id="COUNT">%d</xliff:g> സജീവ വിശ്വസ്ത ഏജൻ്റ്</item>
+      <item quantity="one">1 സജീവ വിശ്വസ്ത ഏജൻ്റ്</item>
     </plurals>
     <string name="bluetooth_quick_toggle_title" msgid="1037056952714061893">"ബ്ലൂടൂത്ത്"</string>
     <string name="bluetooth_quick_toggle_summary" msgid="5293641680139873341">"ബ്ലൂടൂത്ത് ഓണാക്കുക"</string>
@@ -675,22 +647,14 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"വിപുലമായ ബ്ലൂടൂത്ത്"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"ബ്ലൂടൂത്ത് ഓണായിരിക്കുമ്പോൾ, സമീപമുള്ള മറ്റു ബ്ലൂടൂത്ത് ഉപകരണങ്ങളുമായി നിങ്ങളുടെ ഉപകരണത്തിന് ആശയവിനിമയം നടത്താനാകും."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"ലൊക്കേഷൻ കൃത്യത മെച്ചപ്പെടുത്താൻ, ആപ്സ്, സേവനങ്ങൾ എന്നിവയ്ക്ക് തുടർന്നും Bluetooth ഉപകരണങ്ങളെ തിരിച്ചറിയാൻ കഴിയും. നിങ്ങൾക്കിത് <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>സ്‌കാനിംഗ് ക്രമീകരണത്തിൽ<xliff:g id="LINK_END_1">LINK_END</xliff:g> മാറ്റാനാകും."</string>
-    <!-- no translation found for bluetooth_connect_failed (4500234659813241053) -->
-    <skip />
-    <!-- no translation found for device_details_title (6576953269221085300) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_mac_address (2513724313558236181) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_title (38467834196432400) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (9087609557757135712) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (7785695793007576501) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (251257782642157557) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_forget_confirm_button (3829370108973879006) -->
-    <skip />
+    <string name="bluetooth_connect_failed" msgid="4500234659813241053">"കണക്റ്റുചെയ്യാനായില്ല. വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="device_details_title" msgid="6576953269221085300">"ഉപകരണ വിശദാംശങ്ങൾ"</string>
+    <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"ഉപകരണത്തിന്റെ Bluetooth വിലാസം: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"ഉപകരണം മറക്കണോ?"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"നിങ്ങളുടെ ഫോൺ ഇനിയങ്ങോട്ട് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണവുമായി ജോടിയാക്കുകയില്ല"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് ഇനിയങ്ങോട്ട് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണവുമായി ജോടിയാക്കുകയില്ല"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"നിങ്ങളുടെ ഉപകരണം ഇനിയങ്ങോട്ട് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ഉപകരണവുമായി ജോടിയാക്കുകയില്ല"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"ഉപകരണം മറക്കുക"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"ഇതിൽ കണക്റ്റുചെയ്യുക..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"മീഡിയ ഓഡിയോയിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"ഹാൻഡ്സ്ഫ്രീ ഓഡിയോയിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
@@ -734,7 +698,7 @@
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC ഓണാക്കുക"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"ഈ ഉപകരണത്തിനും മറ്റേതെങ്കിലും ചുറ്റുവട്ട ഉപകരണങ്ങൾക്കും അല്ലെങ്കിൽ പേയ്മെന്റ് ടെർമിനലുകളും ആക്സസ്സ് റീഡറുകളും ഇന്ററാക്ടീവ് പരസ്യങ്ങളും അല്ലെങ്കിൽ ടാഗുകളും പോലുള്ള ലക്ഷ്യങ്ങൾക്കും ഇടയിൽ NFC, വിവരങ്ങൾ കൈമാറുന്നു."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android ബീം"</string>
-    <string name="android_beam_on_summary" msgid="3618057099355636830">"NFC വഴി അപ്ലിക്കേഷൻ ഉള്ളടക്കം പ്രക്ഷേപണം ചെയ്യാൻ തയ്യാറാണ്"</string>
+    <string name="android_beam_on_summary" msgid="3618057099355636830">"ആപ്പിന്‍റെ ഉള്ളടക്കം NFC കൈമാറ്റത്തിന് തയ്യാർ"</string>
     <string name="android_beam_off_summary" msgid="4663095428454779138">"ഓഫ്"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"NFC ഓഫ് ചെ‌യ്തതിനാൽ ലഭ്യമല്ല"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android ബീം"</string>
@@ -756,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"വൈ-ഫൈ സ്വയം ഓണാക്കുക"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"നിങ്ങളുടെ വീട്ടിലെ നെറ്റ്‌വർക്ക് പോലെയുള്ള, സംരക്ഷിച്ചതും ഉയർന്ന ഗുണമേന്മയുള്ളതുമായ നെറ്റ്‍വർക്കുകൾക്ക് അരികിലായിരിക്കുമ്പോൾ വൈഫൈ തിരികെ സ്വയമേവ ഓണാകും"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"വൈഫൈ സ്‌കാനിംഗ് ഓഫുചെ‌യ്‌തിരിക്കുന്നതിനാൽ ‌ലഭ്യമല്ല"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"ഉപയോഗിക്കാനായി, ഒരു നെറ്റ്‌വർക്ക് റേറ്റിംഗ് ദാതാവിനെ തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"മോശം കണക്ഷനുകൾ ഒഴിവാക്കുക"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"മികച്ച ഇന്റർനെറ്റ് കണക്ഷൻ ഉണ്ടാകുന്നതുവരെ വൈഫൈ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കരുത്"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"മികച്ച ഇന്റർനെറ്റ് കണക്ഷനുള്ള നെറ്റ്‌വർക്കുകൾ മാത്രം ഉപയോഗിക്കുക"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"ഓപ്പൺ നെറ്റ്‌വർക്കുകളിലേക്ക് കണക്റ്റുചെയ്യുക"</string>
-    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"ഉയർന്ന ഗുണമേന്മയുള്ള പബ്ലിക് നെറ്റ്‌വർക്കുകളിലേക്ക് സ്വയമേവ കണക്റ്റുചെയ്യുക"</string>
+    <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"ഉയർന്ന ഗുണമേന്മയുള്ള പബ്ലിക് നെറ്റ്‌വർക്കുകളിലേക്ക് സ്വമേധയാ കണക്റ്റുചെയ്യുക"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"ഉപയോഗിക്കാനായി, ഒരു നെറ്റ്‌വർക്ക് റേറ്റിംഗ് ദാതാവിനെ തിരഞ്ഞെടുക്കുക"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"ഉപയോഗിക്കാനായി, അനുയോജ്യമായ ഒരു നെറ്റ്‌വർക്ക് റേറ്റിംഗ് ദാതാവിനെ തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"സർട്ടിഫിക്കറ്റുകൾ ഇൻസ്റ്റാളുചെയ്യുക"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"ലൊക്കേഷൻ കൃത്യത മെച്ചപ്പെടുത്താൻ, ആപ്സ്, സേവനങ്ങൾ എന്നിവയ്ക്ക് തുടർന്നും വൈഫൈ നെറ്റ്‌വർക്കുകൾക്കായി സ്കാൻ ചെയ്യാൻ കഴിയും. നിങ്ങൾക്കിത് <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>സ്‌കാനിംഗ് ക്രമീകരണത്തിൽ<xliff:g id="LINK_END_1">LINK_END</xliff:g> മാറ്റാനാകും."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"ലൊക്കേഷൻ കൃത്യത മെച്ചപ്പെടുത്താൻ, <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>സ്‌കാനിംഗ് ക്രമീകരണത്തിൽ<xliff:g id="LINK_END_1">LINK_END</xliff:g> വൈഫൈ സ്കാനിംഗ് ഓണാക്കുക."</string>
@@ -812,6 +779,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"വയർലെസ് റൂട്ടർ സുരക്ഷാ ക്രമീകരണം (TKIP) പിന്തുണയ്‌ക്കുന്നില്ല"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"പ്രാമാണീകരണം പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കുക."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"മറ്റൊരു WPS സെഷൻ കണ്ടെത്തി. അൽപ്പസമയത്തിനകം വീണ്ടും ശ്രമിക്കുക."</string>
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"വൈഫൈ വിച്ഛേദിച്ചു. WPS സജ്ജീകരണം റദ്ദാക്കി."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"നെറ്റ്‌വർക്ക് പേര്"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID നൽകുക"</string>
     <string name="wifi_security" msgid="6603611185592956936">"സുരക്ഷ"</string>
@@ -843,6 +811,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"നൽകരുത്"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"മൂല്യനിർണ്ണയം ചെയ്യരുത്"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"സർട്ടിഫിക്കറ്റൊന്നും വ്യക്തമാക്കിയിട്ടില്ല. നിങ്ങളുടെ കണക്ഷൻ സ്വകാര്യമായിരിക്കുകയില്ല."</string>
+    <string name="wifi_ssid_too_long" msgid="3474753269579895244">"നെറ്റ്‌വർക്കിന്റെ പേര് ദൈർഘ്യമേറിയതാണ്."</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"ഒരു ഡൊമെയ്ൻ വ്യക്തമാക്കിയിരിക്കണം."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS ലഭ്യമാണ്"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS ലഭ്യമാണ്)"</string>
@@ -910,28 +879,17 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"ഈ ഗ്രൂപ്പിനെ മറക്കണോ?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട്"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ട്"</string>
-    <!-- no translation found for wifi_hotspot_off_subtext (5466126533609394170) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (5752490509369962007) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (6461075246164300670) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_on_local_only_subtext (2068110388011294735) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_title (1341735529132128887) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (3378299995508671967) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connected (3888672084861445362) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_password_title (1955592302902091281) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_ap_band_title (1165801173359290681) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_regular (1203489406068036455) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_local_only (857988412470694109) -->
-    <skip />
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"മറ്റ് ഉപകരണങ്ങളുമായി ഇന്റർനെറ്റോ ഉള്ളടക്കമോ പങ്കിടുന്നില്ല"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"ആപ്പ് ഉള്ളടക്കം പങ്കിടുന്നു. ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നതിന്, ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുക, തുടർന്ന് ഓണാക്കുക"</string>
+    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"വൈഫൈയുടെ പേര്"</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ഓണാക്കുന്നു..."</string>
+    <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ഹോട്ട്‌സ്പോട്ടിലേക്ക് മറ്റ് ഉപകരണങ്ങൾക്ക് കണക്റ്റുചെയ്യാൻ കഴിയും"</string>
+    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"വൈഫൈ പാസ്‌വേഡ്"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP ബാൻഡ്"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"നിങ്ങളുടെ മറ്റ് ഉപകരണങ്ങൾക്കായി ഒരു വൈഫൈ നെറ്റ്‌വർക്ക് സൃഷ്ടിക്കുന്നതിന് ഹോട്ട്‌സ്പോട്ട് ഉപയോഗിക്കുക. ഹോട്ട്‌സ്പോട്ട് ഇന്റർനെറ്റ് നൽകുന്നത് നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ ഉപയോഗിച്ചുകൊണ്ടാണ്. അധിക മൊബൈൽ ഡാറ്റ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടുന്നതിന് ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"ഹോട്ട്‌സ്പോട്ട് ഓണാക്കുന്നു…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുന്നു…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> സജീവമാണ്"</string>
@@ -1036,15 +994,16 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"ഫലങ്ങൾ ഇല്ല"</string>
     <string name="display_settings" msgid="7965901687241669598">"ഡിസ്പ്ലേ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"സ്‌ക്രീൻ സ്വയമേ തിരിക്കുക"</string>
-    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ സ്വയമേവ ഓറിയന്റേഷൻ മാറുക"</string>
-    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"ഫോൺ തിരിക്കുമ്പോൾ സ്വയമേവ ഓറിയന്റേഷൻ മാറുക"</string>
-    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ സ്വയമേവ ഓറിയന്റേഷൻ മാറുക"</string>
-    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"ഫോൺ തിരിക്കുമ്പോൾ സ്വയമേവ ഓറിയന്റേഷൻ മാറുക"</string>
+    <string name="color_mode_title" msgid="3159275920408338215">"കടും നിറങ്ങൾ"</string>
+    <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
+    <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"ഫോൺ തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
+    <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
+    <string name="accelerometer_summary_off" product="default" msgid="5485489363715740761">"ഫോൺ തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
     <string name="brightness" msgid="8480105032417444275">"തെളിച്ചനില"</string>
     <string name="brightness_title" msgid="5746272622112982836">"തെളിച്ചം"</string>
     <string name="brightness_summary" msgid="838917350127550703">"സ്‌ക്രീനിന്റെ തെളിച്ചം ക്രമീകരിക്കുക"</string>
     <string name="auto_brightness_title" msgid="6341042882350279391">"അനുയോജ്യമായ തെളിച്ചം"</string>
-    <string name="auto_brightness_summary" msgid="1799041158760605375">"ലഭ്യമായ പ്രകാശത്തിനായി തെളിച്ചനില അനുരൂപമാക്കുക"</string>
+    <string name="auto_brightness_summary" msgid="1799041158760605375">"പ്രകാശ ലഭ്യതയനുസരിച്ച് തെളിച്ചം ക്രമീകരിക്കുക"</string>
     <string name="auto_brightness_summary_off" msgid="2802336459335410626">"ഓഫ്"</string>
     <string name="auto_brightness_summary_very_low" msgid="6483976609035853764">"തിരഞ്ഞെടുത്ത തെളിച്ചം വളരെ കുറവാണ്"</string>
     <string name="auto_brightness_summary_low" msgid="5609877905833960427">"തിരഞ്ഞെടുത്ത തെളിച്ചം കുറവാണ്"</string>
@@ -1063,34 +1022,23 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"ലഭ്യമായ പ്രകാശത്തിന് അനുസരിച്ച് തെളിച്ചം ഒപ്‌റ്റിമൈസ് ചെയ്യുക. ഈ ഫീച്ചർ ഓണായിരിക്കുമ്പോഴും താൽക്കാലികമായി തെളിച്ചം ക്രമീകരിക്കാം."</string>
     <string name="night_display_title" msgid="2626451512200357686">"നൈറ്റ് ലൈറ്റ്"</string>
     <string name="night_display_text" msgid="1837277457033025056">"നിങ്ങളുടെ സ്ക്രീനിന് \'നൈറ്റ് ലൈറ്റ്\' ആംബർ നിറം നൽകുന്നു. മങ്ങിയ വെളിച്ചത്തിൽ സ്ക്രീനിൽ നോക്കുന്നത് ഈ ഡിസ്പ്ലേ സുഗമമാക്കുന്നു, എളുപ്പത്തിൽ ഉറങ്ങുന്നതിന് ഇത് നിങ്ങളെ സഹായിച്ചേക്കാം."</string>
-    <!-- no translation found for night_display_auto_mode_title (6574111412154833409) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (2483761922928753400) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (2379394568898721765) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (589042813708244059) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"സമയക്രമം"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"ഒന്നുമില്ല"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"ഇഷ്ടാനുസൃത സമയത്ത് ഓണാക്കുന്നു"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"സൂര്യോദയം മുതൽ അസ്തമയം വരെ ഓണാക്കുന്നു"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"ആരംഭിക്കുന്ന സമയം"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"അവസാനിക്കുന്ന സമയം"</string>
-    <!-- no translation found for night_display_status_title (1784041143360286267) -->
-    <skip />
+    <string name="night_display_status_title" msgid="1784041143360286267">"നില"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"തീക്ഷ്ണത"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"ഓഫ്/ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_off_auto_mode_never (3583590137322963513) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (6365668239253173208) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (3596291693781757392) -->
-    <skip />
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"ഒരിക്കലും സ്വയമേവ ഓണാക്കില്ല"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"<xliff:g id="ID_1">%1$s</xliff:g>-ന് സ്വയമേവ ഓണാക്കും"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"സൂര്യാസ്തമയ സമയത്ത് സ്വയമേവ ഓണാക്കും"</string>
     <string name="night_display_summary_on" msgid="1355713529996456744">"ഓൺ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_on_auto_mode_never (9117830821363119835) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (5510753572245577263) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (852270120144683507) -->
-    <skip />
-    <string name="screen_timeout" msgid="4351334843529712571">"സ്ലീപ്പിലാക്കുക"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"ഒരിക്കലും സ്വയമേവ ഓഫാക്കില്ല"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"<xliff:g id="ID_1">%1$s</xliff:g>-ന് സ്വയമേവ ഓഫാക്കും"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"സൂര്യോദയ സമയത്ത് സ്വയമേവ ഓഫാക്കും"</string>
+    <string name="screen_timeout" msgid="4351334843529712571">"സുഷുപ്തിയിലാക്കുക"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"സ്ക്രീൻ ഓഫാക്കുന്നു"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"നിഷ്ക്രിയത്വത്തിന് <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> കഴിഞ്ഞ്"</string>
     <string name="wallpaper_settings_title" msgid="5449180116365824625">"വാൾപേപ്പർ"</string>
@@ -1113,19 +1061,14 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"ക്രമീകരണം"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"യാന്ത്രിക തെളിച്ചം"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"സജീവമാക്കാൻ ലിഫ്റ്റുചെയ്യുക"</string>
-    <!-- no translation found for ambient_display_screen_title (4252755516328775766) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_always_on (7974004969481877214) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_notifications (1449570742600868654) -->
-    <skip />
-    <!-- no translation found for ambient_display_category_triggers (4359289754456268573) -->
-    <skip />
-    <!-- no translation found for doze_title (2375510714460456687) -->
-    <skip />
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"അറിയിപ്പിനു സ്ക്രീൻ ഓണാക്കുക"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"എപ്പോഴും ഓണാണ് / ഉയർന്ന ബാറ്ററി ഉപയോഗം"</string>
+    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"പുതിയ അറിയിപ്പുകൾ"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"കാണിക്കേണ്ട സമയം"</string>
+    <string name="doze_title" msgid="2375510714460456687">"പുതിയ അറിയിപ്പുകൾ"</string>
     <string name="doze_summary" msgid="3846219936142814032">"നിങ്ങൾക്ക് അറിയിപ്പുകൾ ലഭിക്കുന്ന സമയത്ത് സ്ക്രീൻ സജീവമാക്കുക"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"എല്ലായ്‌പ്പോഴും ഓണാണ്"</string>
-    <string name="doze_always_on_summary" msgid="1254238982577776475">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ എന്നിവയും മറ്റ് വിവരങ്ങളും കാണിക്കുക"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ എന്നിവയും മറ്റ് വിവരങ്ങളും കാണിക്കുക. ഉയർന്ന ബാറ്ററി ഉപയോഗം."</string>
     <string name="title_font_size" msgid="4405544325522105222">"ഫോണ്ട് വലുപ്പം"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"ടെക്സ്റ്റ് ചെറുതോ വലുതോ ആക്കുക"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"സിം കാർഡ് ലോക്ക് ക്രമീകരണങ്ങൾ"</string>
@@ -1218,7 +1161,7 @@
     <string name="memory_calculating_size" msgid="2188358544203768588">"കണക്കാക്കുന്നു..."</string>
     <string name="memory_apps_usage" msgid="5128673488173839077">"ആപ്സുകളും ആപ്സ് ഡാറ്റയും"</string>
     <string name="memory_media_usage" msgid="3738830697707880405">"മീഡിയ"</string>
-    <string name="memory_downloads_usage" msgid="3755173051677533027">"ഡൗണ്‍ലോഡ്"</string>
+    <string name="memory_downloads_usage" msgid="3755173051677533027">"ഡൗണ്‍ലോഡുകൾ"</string>
     <string name="memory_dcim_usage" msgid="558887013613822577">"ചിത്രങ്ങളും വീഡിയോകളും"</string>
     <string name="memory_music_usage" msgid="1363785144783011606">"ഓഡിയോ (സംഗീതം, റിംഗ്ടോണുകൾ, പോഡ്കാസ്‌റ്റുകൾ തുടങ്ങിയവ)"</string>
     <string name="memory_media_misc_usage" msgid="6094866738586451683">"മറ്റ് ഫയലുകൾ"</string>
@@ -1304,7 +1247,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"മറ്റുള്ളവ"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"സിസ്‌റ്റം"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> അടുത്തറിയുക"</string>
-    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"മറ്റുള്ളവയിൽ, ആപ്‌സ് വഴി സംരക്ഷിച്ച പങ്കിട്ട ഫയലുകളും ഇന്റർനെറ്റിൽ നിന്നോ Bluetooth-ൽ നിന്നോ ഡൗൺലോഡ് ചെയ്തിട്ടുള്ള ഫയലുകളും Android ഫയലുകളും മറ്റുള്ളവയും ഉൾപ്പെടുന്നു. \n\nഈ <xliff:g id="NAME">^1</xliff:g> എന്നതിന്റെ മുഴുവൻ ഉള്ളടക്കങ്ങളും കാണുന്നതിന്, അടുത്തറിയുക ടാപ്പുചെയ്യുക."</string>
+    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"ആപ്‌സ് സംരക്ഷിച്ചിട്ടുള്ള പങ്കിട്ട ഫയലുകളും ഇന്റർനെറ്റിൽ നിന്നോ Bluetooth-ൽ നിന്നോ ഡൗൺലോഡ് ചെയ്തിട്ടുള്ള ഫയലുകളും Android ഫയലുകളും ഉൾപ്പെടെയുള്ളവ മറ്റുള്ളവയിൽ ഉൾപ്പെടുന്നു. \n\n ഈ <xliff:g id="NAME">^1</xliff:g> എന്നതിന്റെ മുഴുവൻ ഉള്ളടക്കങ്ങളും കാണുന്നതിന്, ടാപ്പ് ചെയ്യുക."</string>
     <string name="storage_detail_dialog_system" msgid="862835644848361569">"സിസ്‌റ്റത്തിൽ Android പതിപ്പ് <xliff:g id="VERSION">%s</xliff:g> റൺ ചെയ്യാൻ ഉപയോഗിച്ച ഫയലുകളും ഉൾപ്പെടുന്നു"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> എന്ന ഉപയോക്താവിന്, സ്റ്റോറേജിന്റെ <xliff:g id="SIZE">^2</xliff:g> ഉപയോഗിക്കുന്ന, സംരക്ഷിച്ചിട്ടുള്ള ഫോട്ടോകളോ സംഗീതമോ ആപ്‌സോ മറ്റ് ഡാറ്റയോ ഉണ്ടായേക്കാം. \n\nകൂടുതൽ വിശദാംശങ്ങൾ കാണുന്നതിന്, <xliff:g id="USER_1">^1</xliff:g> എന്ന ഉപയോക്താവിലേക്ക് മാറുക."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> സജ്ജമാക്കുക"</string>
@@ -1401,6 +1344,8 @@
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"നിങ്ങൾ നിലവിൽ ഇനിപ്പറയുന്ന അക്കൗണ്ടുകളിൽ സൈൻ ചെ‌യ്തിരിക്കുന്നു:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"ഈ ഉപകരണത്തിൽ മറ്റ് ഉപയോക്താക്കളുണ്ട്.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"സംഗീതം"</li>\n<li>"ഫോട്ടോകൾ"</li>\n<li>"മറ്റ് ഉപയോക്തൃ ഡാറ്റ"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM-ലെ കാരിയറുകൾ"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"നിങ്ങളുടെ മൊബൈൽ സർവീസ് പ്ലാൻ ഇത് റദ്ദാക്കുകയില്ല."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"സംഗീതം, ചിത്രങ്ങൾ, മറ്റ് ഉപയോക്തൃ ഡാറ്റ എന്നിവ മായ്ക്കുന്നതിന്, "<b>"USB സ്റ്റോറേജ് "</b>" മായ്ക്കേണ്ടതുണ്ട്."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"സംഗീതം, ചിത്രങ്ങൾ, മറ്റ് ഉപയോക്തൃ ഡാറ്റ എന്നിവ മായ്ക്കുന്നതിന്, "<b>"SD കാർഡ്"</b>" മായ്ക്കേണ്ടതുണ്ട്."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB സ്റ്റോറേജ്  മായ്ക്കുക"</string>
@@ -1420,7 +1365,7 @@
     <string name="master_clear_progress_title" msgid="5194793778701994634">"മായ്‌ക്കുന്നു"</string>
     <string name="master_clear_progress_text" msgid="6559096229480527510">"കാത്തിരിക്കുക..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"കോൾ ക്രമീകരണങ്ങൾ"</string>
-    <string name="call_settings_summary" msgid="7291195704801002886">"വോയ്‌സ് മെയിൽ, കോൾ ഫോർവേഡിംഗ്, കോൾ വെയ്‌റ്റിംഗ്, കോളർ ഐഡി എന്നിവ സജ്ജീകരിക്കുക"</string>
+    <string name="call_settings_summary" msgid="7291195704801002886">"വോയ്‌സ് മെയിൽ, കോൾ കൈമാറ്റം, കോൾ വെയ്‌റ്റിംഗ്, വിളിച്ച നമ്പർ എന്നിവ സജ്ജീകരിക്കുക"</string>
     <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB ടെതറിംഗ്"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"പോർട്ടബിൾ ഹോട്ട്സ്‌പോട്ട്"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"ബ്ലൂടൂത്ത് ടെതറിംഗ്"</string>
@@ -1432,20 +1377,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"ഡാറ്റ സേവർ ഓണായിരിക്കുന്ന സമയത്ത് പോർട്ടബിൾ ഹോട്ട്സ്പോട്ടുകൾ ടെതർ ചെയ്യാനോ ഉപയോഗിക്കാനോ കഴിയില്ല"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB ടെതറിംഗ്"</string>
-    <!-- no translation found for usb_tethering_subtext (5991482890033484794) -->
-    <skip />
-    <!-- no translation found for usb_tethering_subtext (5988796139573211318) -->
-    <skip />
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"USB വഴിയായി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"USB വഴിയായി ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"ബ്ലൂടൂത്ത് ടെതറിംഗ്"</string>
-    <!-- no translation found for bluetooth_tethering_subtext (4558227863463153412) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_subtext (1055197887836203595) -->
-    <skip />
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Bluetooth വഴിയായി ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Bluetooth വഴിയായി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Bluetooth വഴി, ഈ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> ഉപകരണത്തിന്റെ ഇന്റർനെറ്റ് കണ‌ക്ഷൻ പങ്കിടുന്നു"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g>-ൽ കൂടുതൽ ഉപകരണങ്ങളിൽ ടെതർ ചെയ്യാനായില്ല."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ടെതർ ചെയ്‌തത് മാറ്റും."</string>
-    <!-- no translation found for tethering_footer_info (1308462275952345985) -->
-    <skip />
+    <string name="tethering_footer_info" msgid="1308462275952345985">"നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകുന്നതിന് ഹോട്ട്‌സ്പോട്ടും ‌ടെതറിംഗും ഉപയോഗിക്കുക. ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടുന്നതിന് ആപ്പുകൾക്കും ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"സഹായം"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"മൊബൈൽ നെറ്റ്‌വർക്ക്"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"മൊബൈൽ പ്ലാൻ"</string>
@@ -1475,7 +1415,7 @@
     <string name="location_category_location_services" msgid="7437150886946685979">"ലൊക്കേഷൻ സേവനങ്ങൾ"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"ഉയർന്ന ബാറ്ററി ഉപയോഗം"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"കുറഞ്ഞ ബാറ്ററി ഉപയോഗം"</string>
-    <string name="location_mode_screen_title" msgid="4528716772270246542">"ലൊക്കേഷൻ മോഡ്"</string>
+    <string name="location_mode_screen_title" msgid="4528716772270246542">"സ്ഥാന നിർണ്ണയ രീതി"</string>
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"GPS, വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ എന്നിവയിലൊന്ന് ലൊക്കേഷൻ നിർണ്ണയിക്കുന്നതിന് ഉപയോഗിക്കുക"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്കുകൾ എന്നിവയിലൊന്ന് ലൊക്കേഷൻ നിർണ്ണയിക്കുന്നതിന് ഉപയോഗിക്കുക"</string>
     <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"ലൊക്കേഷൻ നിർണ്ണയിക്കാൻ GPS-ഉം ഉപകരണ സെൻസറുകളും ഉപയോഗിക്കുക"</string>
@@ -1523,8 +1463,11 @@
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"നിങ്ങൾക്ക് ഒരു ഡാറ്റ കണ‌ക്ഷൻ ഇല്ല. ഈ വിവരം ഇപ്പോൾ കാണുന്നതിന്, ഇന്റ‌ർനെറ്റിൽ കണ‌ക്റ്റുചെ‌യ്‌തിരിക്കുന്ന ഏതൊരു കമ്പ്യൂട്ടറിൽ നിന്നും %s എന്നതിലേക്ക് പോകുക."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"ലോഡുചെയ്യുന്നു..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"പാസ്‌വേഡ് തിരഞ്ഞെടുക്കൂ"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"വിരലടയാളം ഉപയോഗിക്കാൻ, പാസ്‌വേഡ് സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"പാറ്റേൺ തിരഞ്ഞെടുക്കൂ"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"വിരലടയാളം ഉപയോഗിക്കാൻ, പാറ്റേൺ സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"പിൻ തിരഞ്ഞെടുക്കൂ"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"വിരലടയാളം ഉപയോഗിക്കാൻ, പിൻ സജ്ജമാക്കുക"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"നിങ്ങളുടെ പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"നിങ്ങളുടെ പാറ്റേൺ സ്ഥിരീകരിക്കുക"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"നിങ്ങളുടെ പിൻ സ്ഥിരീകരിക്കുക"</string>
@@ -1593,12 +1536,9 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ"</string>
     <string name="install_applications" msgid="4872012136210802181">"അജ്ഞാത ഉറവിടങ്ങൾ"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"എല്ലാ അപ്ലിക്കേഷൻ ഉറവിടങ്ങളും അനുവദിക്കുക"</string>
-    <!-- no translation found for recent_app_category_title (6673071268966003928) -->
-    <skip />
-    <!-- no translation found for see_all_apps_title (1459400183763114135) -->
-    <skip />
-    <!-- no translation found for recent_app_summary (3366446669844932300) -->
-    <skip />
+    <string name="recent_app_category_title" msgid="6673071268966003928">"ഈയടുത്ത് തുറന്ന ആപ്പുകൾ"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"എല്ലാ <xliff:g id="COUNT">%1$d</xliff:g> ആപ്പുകളും കാണൂ"</string>
+    <string name="recent_app_summary" msgid="3366446669844932300">"<xliff:g id="TIME">^1</xliff:g> മുമ്പ്"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ടാബ്‌ലെറ്റിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"തിരിച്ചറിയാനാകാത്ത ആപ്‌സിനാൽ നിങ്ങളുടെ ഫോണും വ്യക്തിഗത ഡാറ്റയും ആക്രമിക്കപ്പെടാനുള്ള സാധ്യത വളരെ കൂടുതലാണ്. ഈ ഉറവിടത്തിൽ നിന്ന് ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിലൂടെ, ഈ ആപ്‌സ് ഉപയോഗിക്കുന്നതിനാൽ നിങ്ങളുടെ ഫോണിന് സംഭവിച്ചേക്കാവുന്ന എല്ലാ നാശനഷ്‌ടങ്ങൾക്കും അല്ലെങ്കിൽ ഡാറ്റാ നഷ്‌ടങ്ങൾക്കും നിങ്ങൾക്കാണ് ഉത്തരവാദിത്തമെന്ന് നിങ്ങൾ അംഗീകരിക്കുന്നു."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"വിപുലമായ ക്രമീകരണം"</string>
@@ -1658,7 +1598,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"പ്രവര്‍ത്തിക്കുന്നു"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB സ്റ്റോറേജ്"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD കാർഡിൽ"</string>
-    <string name="disabled" msgid="9206776641295849915">"പ്രവർത്തനരഹിതമാക്കി"</string>
     <string name="not_installed" msgid="2797554494953450291">"ഈ ഉപയോക്താവിനായി ഇൻസ്‌റ്റാളുചെയ്‌തിട്ടില്ല"</string>
     <string name="installed" msgid="3070865169422600098">"ഇന്‍‌സ്റ്റാളുചെയ്‌തു"</string>
     <string name="no_applications" msgid="7336588977497084921">"ആപ്സൊന്നുമില്ല."</string>
@@ -1768,8 +1707,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"സി‌സ്റ്റം സേവനം നിർത്തണോ?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"നിങ്ങൾ ഈ സേവനം നിർത്തുകയാണെങ്കിൽ, നിങ്ങളുടെ ടാബ്‌ലെറ്റ് ഓഫാക്കി വീണ്ടും ഓണാക്കുന്നതുവരെ അതിലെ ചില സവിശേഷതകൾ ശരിയായി പ്രവർത്തിക്കുന്നത് അവസാനിപ്പിക്കാനിടയുണ്ട്."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"നിങ്ങൾ ഈ സേവനം നിർത്തുകയാണെങ്കിൽ, നിങ്ങളുടെ ഫോൺ ഓഫാക്കി വീണ്ടും ഓണാക്കുന്നതുവരെ അതിലെ ചില സവിശേഷതകൾ ശരിയായി പ്രവർത്തിക്കുന്നത് അവസാനിപ്പിക്കാനിടയുണ്ട്."</string>
-    <!-- no translation found for language_input_gesture_title (8749227808244881255) -->
-    <skip />
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"ഭാഷയും ഇൻപുട്ടും ജെസ്‌റ്ററുകളും"</string>
     <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
@@ -1787,7 +1725,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"ഫിസിക്കൽ കീബോർഡ് ക്രമീകരണങ്ങൾ"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"\".\" ചേർക്കുന്നതിന് സ്‌പേസ് കീ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="show_password" msgid="4837897357002495384">"പാസ്‌വേ‌ഡുകൾ കാണിക്കുക"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"ടൈപ്പുചെയ്യുന്നതിനൊപ്പം അൽപ്പസമയം പ്രതീകം പ്രദർശിപ്പിക്കുക"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"ടൈപ്പ് ചെയ്യുന്ന അക്ഷരങ്ങൾ പ്രദർശിപ്പിക്കുക"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"പാസ്‌വേഡുകൾ, ക്രെഡിറ്റ് കാർഡ് നമ്പറുകൾ എന്നിവ പോലുള്ള വ്യക്തിഗതമായ ഡാറ്റയുൾപ്പെടെ നിങ്ങൾ ടൈപ്പുചെയ്യുന്ന എല്ലാ വാചകവും ഈ അക്ഷരത്തെറ്റ് പരിശോധനയ്‌ക്ക് ശേഖരിക്കാനായേക്കും. ഇത് <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> അപ്ലിക്കേഷനിൽ നിന്നും വരുന്നു. ഈ അക്ഷരത്തെറ്റ് പരിശോധന ഉപയോഗിക്കണോ?"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"ക്രമീകരണം"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"ഭാഷ"</string>
@@ -1871,6 +1809,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"സ്‌ക്രീൻ റീഡറുകൾ, ‌ഡിസ്‌പ്ലേ, ഇന്റരാക്ഷൻ നിയന്ത്രണങ്ങൾ"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"വീക്ഷണ ക്രമീകരണം"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"ആവശ്യങ്ങൾക്ക് അനുസരിച്ച് നിങ്ങൾക്ക് ഈ ഉപകരണം ഇഷ്ടാനുസൃതമാക്കാം. ഈ ഉപയോഗസഹായി ഫീച്ചറുകൾ പിന്നീട് ക്രമീകരണത്തിൽ മാറ്റാവുന്നതാണ്."</string>
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"ഫോണ്ട് വലുപ്പം വർദ്ധിപ്പിക്കുക"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"സ്‌ക്രീൻ റീഡറുകൾ"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"ഓഡിയോയും സ്‌ക്രീനിലെ ടെക്‌സ്‌റ്റും"</string>
     <string name="display_category_title" msgid="685461049938269166">"ഡി‌സ്‌പ്ലേ"</string>
@@ -2057,46 +1996,29 @@
     <string name="details_subtitle" msgid="32593908269911734">"വിശദാംശം ഉപയോഗിക്കൂ"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"പവർ ഉപയോഗം ക്രമീകരിക്കുക"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"ഉൾപ്പെടുത്തിയ പാക്കേജുകൾ"</string>
-    <!-- no translation found for battery_abnormal_details_title (5469019021857291216) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakelock_summary (4326186999058828831) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakeup_alarm_summary (644657277875785240) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_location_summary (6552797246798806002) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_apps_summary (792553273248686972) -->
-    <skip />
-    <!-- no translation found for dialog_stop_title (6395127715596746479) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9149534230295983971) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (5702924180465982412) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9201053069493107713) -->
-    <skip />
-    <!-- no translation found for dialog_stop_ok (2319777211264004900) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_title (1525936543485084879) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (5539009263025812279) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (4001747292234087612) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (585341224642457664) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_ok (412876934682899659) -->
-    <skip />
-    <!-- no translation found for dialog_location_title (5888917530725874727) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7684240588903005427) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7439311770795993356) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (6285773079775018012) -->
-    <skip />
-    <!-- no translation found for dialog_location_ok (4572391197601313986) -->
-    <skip />
+    <string name="battery_abnormal_details_title" msgid="5469019021857291216">"ആപ്പുകൾ ബാറ്ററി ഉപയോഗിച്ചുതീർക്കുന്നു"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"ഉപകരണം സജീവമാക്കി നിലനിർത്തുന്നു"</string>
+    <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"പശ്ചാത്തലത്തിൽ ഉപകരണം സജീവമാക്കുന്നു"</string>
+    <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"ലൊക്കേഷൻ കൂടെക്കൂടെ അഭ്യർത്ഥിക്കുന്നു"</string>
+    <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> ആപ്പുകൾ അസ്വാഭാവികമായി പ്രവർത്തിക്കുന്നു"</string>
+    <string name="dialog_stop_title" msgid="6395127715596746479">"ആപ്പ് നിർത്തണോ?"</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"നിങ്ങളുടെ ഫോണിനെ <xliff:g id="APP">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, ഈ ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"നിങ്ങളുടെ ടാബ്‌ലെറ്റിനെ <xliff:g id="APP">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ടാബ്‌ലെറ്റിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, ഈ ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"നിങ്ങളുടെ ഉപകരണത്തെ <xliff:g id="APP">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഉപകരണത്തിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, ഈ ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"നിങ്ങളുടെ ഫോണിനെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"നിങ്ങളുടെ ടാബ്‌ലെറ്റിനെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ടാബ്‌ലെറ്റിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"നിങ്ങളുടെ ഉപകരണത്തെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
+    <string name="dialog_stop_ok" msgid="2319777211264004900">"ആപ്പ് അവസാനിപ്പിക്കുക"</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"പശ്ചാത്തലത്തിലെ ഉപയോഗം ഓഫാക്കി, ആപ്പ് ‌നിർത്തണോ?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"നിങ്ങളുടെ ഫോണിനെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തി, അത് പശ്ചാത്തലത്തിൽ റൺ ചെയ്യുന്നത് തടയാം."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"നിങ്ങളുടെ ടാബ്‌ലെറ്റിനെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ടാബ്‌ലെറ്റിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല. \n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തി, അത് പശ്ചാത്തലത്തിൽ റൺ ചെയ്യുന്നത് തടയാം."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"നിങ്ങളുടെ ഉപകരണത്തെ <xliff:g id="APP_0">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഉപകരണത്തിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, <xliff:g id="APP_1">%1$s</xliff:g> ആപ്പിന്റെ പ്രവർത്തനം നിർത്തി, അത് പശ്ചാത്തലത്തിൽ റൺ ചെയ്യുന്നത് തടയാം."</string>
+    <string name="dialog_background_check_ok" msgid="412876934682899659">"ഓഫുചെയ്യുക"</string>
+    <string name="dialog_location_title" msgid="5888917530725874727">"ലൊക്കേഷൻ ഓഫാക്കണോ?"</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"നിങ്ങൾ <xliff:g id="APP">%1$s</xliff:g> ആപ്പ് ഉപയോഗിക്കാത്ത സമയത്തും അത് ലൊക്കേഷൻ അഭ്യർത്ഥിച്ചുകൊണ്ടിരിക്കുന്നതിനാൽ, ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കുന്നതിന്, ഈ ആപ്പിനായി ലൊക്കേഷൻ ഓഫാക്കാം."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"നിങ്ങൾ <xliff:g id="APP">%1$s</xliff:g> ആപ്പ് ഉപയോഗിക്കാത്ത സമയത്തും അത് നിങ്ങളുടെ ലൊക്കേഷൻ അഭ്യർത്ഥിച്ചുകൊണ്ടിരിക്കുന്നതിനാൽ, ടാബ്‌ലെറ്റിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കുന്നതിന്, ഈ ആപ്പിനായി ലൊക്കേഷൻ ഓഫാക്കാം."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"നിങ്ങൾ <xliff:g id="APP">%1$s</xliff:g> ആപ്പ് ഉപയോഗിക്കാത്ത സമയത്തും അത് നിങ്ങളുടെ ലൊക്കേഷൻ അഭ്യർത്ഥിച്ചുകൊണ്ടിരിക്കുന്നതിനാൽ, ഉപകരണത്തിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കുന്നതിന്, ഈ ആപ്പിനായി ലൊക്കേഷൻ ഓഫാക്കാം."</string>
+    <string name="dialog_location_ok" msgid="4572391197601313986">"ഓഫുചെയ്യുക"</string>
     <string name="power_screen" msgid="3023346080675904613">"സ്‌ക്രീൻ"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"ടോർച്ച്"</string>
     <string name="power_camera" msgid="4976286950934622605">"ക്യാമറ"</string>
@@ -2111,8 +2033,7 @@
     <string name="power_apps" msgid="2043554781293951327">"ആപ്സ്"</string>
     <string name="power_service" msgid="1599661212370831780">"സേവനങ്ങള്‍"</string>
     <string name="power_system" msgid="8290455327965307383">"സിസ്റ്റം"</string>
-    <!-- no translation found for power_user (3706143225319881667) -->
-    <skip />
+    <string name="power_user" msgid="3706143225319881667">"മറ്റ് ഉപയോക്താക്കൾ"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"മൊത്തം CPU ഉപയോഗം"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU ഫോർഗ്രൗണ്ട്"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"സജീവമായി തുടരുക"</string>
@@ -2148,7 +2069,7 @@
     <string name="battery_desc_flashlight" msgid="2908579430841025494">"ഫ്ലാഷ്ലൈറ്റിൽ ഉപയോഗിക്കുന്ന ബാറ്ററി"</string>
     <string name="battery_desc_camera" msgid="7375389919760613499">"ക്യാമറ ഉപയോഗിക്കുന്ന ബാറ്ററി"</string>
     <string name="battery_desc_display" msgid="5432795282958076557">"ഡിസ്‌പ്ലേയുടെയും ബാക്ക്‌ലൈറ്റിന്റെയും ബാറ്ററി ഉപഭോഗം"</string>
-    <string name="battery_sugg_display" msgid="3370202402045141760">"സ്‌ക്രീൻ തെളിച്ചം കൂടാതെ/അല്ലെങ്കിൽ സ്‌ക്രീൻ കാലഹരണപ്പെടൽ കുറയ്ക്കുക"</string>
+    <string name="battery_sugg_display" msgid="3370202402045141760">"സ്‌ക്രീൻ തെളിച്ചം കൂടാതെ/അല്ലെങ്കിൽ സ്‌ക്രീൻ സമയപരിധി കുറയ്ക്കുക"</string>
     <string name="battery_desc_wifi" msgid="2375567464707394131">"Wi‑Fi-യുടെ ബാറ്ററി ഉപഭോഗം"</string>
     <string name="battery_sugg_wifi" msgid="7776093125855397043">"വൈഫൈ ഉപയോഗിക്കാതിരിക്കുമ്പോഴോ ലഭ്യമല്ലെങ്കിലോ അത് ഓഫാക്കുക"</string>
     <string name="battery_desc_bluetooth" msgid="8069070756186680367">"ബ്ലൂടൂത്തിന്റെ ബാറ്ററി ഉപഭോഗം"</string>
@@ -2164,14 +2085,13 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"കണക്കാക്കിയ പവർ ഉപയോഗം"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g> സമയം ഉപയോഗിച്ചു"</string>
-    <!-- no translation found for battery_active_for (2964359540508103032) -->
-    <skip />
+    <string name="battery_active_for" msgid="2964359540508103032">"<xliff:g id="TIME">^1</xliff:g> നേരത്തേയ്ക്ക് സജീവം"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"സ്‌ക്രീൻ ഉപയോഗം <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> ആപ്പ് <xliff:g id="PERCENT">%1$s</xliff:g> ഉപയോഗിച്ചു"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"മൊത്തം ബാറ്ററിയുടെ <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"ഫുൾ ചാർജിനുശേഷമുള്ള ഉപയോഗ വിശദാംശങ്ങൾ"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"ഒടുവിൽ ഫുൾ ചാർജ്ജുചെയ്‌തത്"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"ശേഷിക്കുന്ന ബാറ്ററി സമയം ഏകദേശ കണക്കാണ്, ഉപയോഗത്തിനനുസരിച്ച് അത് മാറാം"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"ബാറ്ററി ഉപഭോഗ ഡാറ്റ ഏകദേശ കണക്കാണ്, ഉപയോഗത്തിനനുസരിച്ച് അത് മാറാം"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"സജീവ ഉപയോഗത്തിൽ ആയിരിക്കുമ്പോൾ"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"പശ്ചാത്തലത്തിൽ ആയിരിക്കുമ്പോൾ"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"ബാറ്ററി ഉപയോഗം"</string>
@@ -2188,7 +2108,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"മീഡിയ സെർവർ"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"ആപ്പ് ഓപ്റ്റിമൈസേഷന്‍"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"ബാറ്ററി സേവർ"</string>
+    <string name="battery_saver" msgid="1426682272004907982">"ബാറ്ററി ലാഭിക്കൽ"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"ഒരിക്കലും"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> ബാറ്ററിയിൽ"</string>
@@ -2494,7 +2414,7 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"മൊബൈൽ നെറ്റ്‌വർക്കുകൾ ലഭ്യമാകുമ്പോൾ മാത്രം പാശ്ചാത്തല ഡാറ്റയെ ആശ്രയിക്കുന്ന ഒരു അപ്ലിക്കേഷൻ പ്രവർത്തനം നിർത്തുന്നതിന് ഈ സവിശേഷത ഇടയാക്കും.\n\nഅപ്ലിക്കേഷനിൽ ലഭ്യമായ ക്രമീകരണങ്ങളിൽ കൂടുതൽ ഉചിതമായ ഡാറ്റാ ഉപയോഗ നിയന്ത്രണങ്ങൾ നിങ്ങൾക്ക് കണ്ടെത്താനാകും."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"മൊബൈൽ ഡാറ്റക്ക് പരിധി സജ്ജീകരിക്കുമ്പോൾ മാത്രമേ പശ്ചാത്തല ഡാറ്റ പരിമിതപ്പെടുത്താൻ കഴിയൂ."</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"ഡാറ്റ സ്വയംസമന്വയിപ്പിക്കൽ ഓണാക്കണോ?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"വെബിൽ നിങ്ങളുടെ അക്കൗണ്ടുകളിൽ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം നിങ്ങളുടെ ടാബ്‌ലെറ്റിലേക്ക് സ്വയമേവ പകർത്തും.\n\nടാബ്‌ലെറ്റിൽ നിങ്ങൾ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം ചില അക്കൗണ്ടുകൾ സ്വയമേവ വെബിലേക്കും പകർത്താനിടയുണ്ട്. ഒരു Google അക്കൗണ്ട് ഇത്തരത്തിൽ പ്രവർത്തിക്കുന്നു."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"വെബിൽ നിങ്ങളുടെ അക്കൗണ്ടുകളിൽ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം നിങ്ങളുടെ ടാബ്‌ലെറ്റിലേക്ക് സ്വമേധയാ പകർത്തും.\n\nടാബ്‌ലെറ്റിൽ നിങ്ങൾ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം ചില അക്കൗണ്ടുകൾ സ്വമേധയാ വെബിലേക്കും പകർത്താനിടയുണ്ട്. ഒരു Google അക്കൗണ്ട് ഇത്തരത്തിൽ പ്രവർത്തിക്കുന്നു."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"വെബിൽ നിങ്ങളുടെ അക്കൗണ്ടുകളിൽ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം നിങ്ങളുടെ ഫോണിലേക്ക് സ്വയമേവ പകർത്തും.\n\nഫോണിൽ നിങ്ങൾ വരുത്തുന്ന മാറ്റങ്ങളെല്ലാം ചില അക്കൗണ്ടുകൾ സ്വയമേവ വെബിലേക്കും പകർത്താനിടയുണ്ട്. ഒരു Google അക്കൗണ്ട് ഇത്തരത്തിൽ പ്രവർത്തിക്കുന്നു."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"ഡാറ്റ സ്വയം സമന്വയിപ്പിക്കൽ ഓഫാക്കണോ?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"ഇത് ഡാറ്റയും ബാറ്ററി ഉപയോഗവും സംരക്ഷിക്കുമെങ്കിലും ഏറ്റവും പുതിയ വിവരങ്ങൾ ശേഖരിക്കാൻ നിങ്ങൾക്ക് ഓരോ അക്കൗണ്ടും സ്വമേധയാ സമന്വയിപ്പിക്കേണ്ടതായി വരും. അപ്‌ഡേറ്റുകൾ സംഭവിക്കുമ്പോൾ നിങ്ങൾക്ക് അറിയിപ്പുകൾ ലഭിക്കുകയുമില്ല."</string>
@@ -2725,7 +2645,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"പിൻ മാറ്റുക"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"അറിയിപ്പുകൾ ദൃശ്യമാക്കുക"</string>
     <string name="help_label" msgid="6886837949306318591">"സഹായവും ഫീഡ്‌ബാക്കും"</string>
-    <string name="support_summary" msgid="8276116616493882830">"സഹായ ‌ലേഖനങ്ങൾ, ഫോണിലൂടെയും ചാറ്റിലൂടെയുമുള്ള പിന്തുണ"</string>
+    <string name="support_summary" msgid="2705726826263742491">"സഹായ ലേഖനങ്ങൾ, ഫോൺ, ചാറ്റ് എന്നിവ ആരംഭിക്കുക"</string>
     <string name="user_account_title" msgid="1127193807312271167">"ഉള്ളടക്കത്തിനുള്ള അക്കൗണ്ട്"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"ഫോട്ടോ ഐഡി"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"അതീവ ഗുരുതരമായ ഭീഷണികൾ"</string>
@@ -2818,7 +2738,7 @@
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"മൊബൈല്‍"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ഡാറ്റ ഉപയോഗം"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ഹോട്ട്‌സ്‌പോട്ട്"</string>
-    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"കണക്‌റ്റുചെയ്ത ഉപകരണം"</string>
+    <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"കണക്‌റ്റ് ചെയ്ത ഉപകരണങ്ങൾ"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, കാസ്റ്റ്, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, കാസ്‌റ്റ്"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"ആപ്‌സും അറിയിപ്പുകളും"</string>
@@ -2828,7 +2748,7 @@
     <string name="system_dashboard_summary" msgid="5797743225249766685">"ഭാഷകൾ, സമയം, ബാക്കപ്പ്, അപ്‌ഡേറ്റുകൾ"</string>
     <string name="search_results_title" msgid="1796252422574886932">"ക്രമീകരണം"</string>
     <string name="search_menu" msgid="6283419262313758339">"തിരയൽ ക്രമീകരണം"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"തിരയൽ ക്രമീകരണങ്ങൾ"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"ക്രമീകരണത്തിൽ തിരയുക"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"വൈഫൈ, വൈ-ഫൈ, നെറ്റ്‌വർക്ക് കണക്ഷൻ"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"ടെക്‌സ്‌റ്റ് സന്ദേശം, ടെക്സ്റ്റുചെയ്യൽ, സന്ദേശങ്ങൾ, സന്ദേശമയയ്‌ക്കൽ"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"സെല്ലുലാർ, മൊബൈൽ, സെൽ കാരിയർ, വയർലെസ്, ഡാറ്റ, 4g,3g, 2g, lte"</string>
@@ -2857,7 +2777,7 @@
     <string name="keywords_location_mode" msgid="8584992704568356084">"കൃത്യത"</string>
     <string name="keywords_accounts" msgid="1957925565953357627">"അക്കൗണ്ട്"</string>
     <string name="keywords_users" msgid="3434190133131387942">"നിയന്ത്രണം, നിയന്ത്രിക്കുക, നിയന്ത്രിച്ചു"</string>
-    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"ടെക്‌സ്‌റ്റ് തിരുത്തൽ, തിരുത്തുക, ശബ്‌ദം, വൈബ്രേറ്റുചെയ്യുക, സ്വയമേവയുള്ള, ഭാഷ, ജെസ്‌റ്റർ, നിർദ്ദേശിക്കുക, നിർദ്ദേശം, തീം, നിന്ദ്യം, പദം, ടൈപ്പുചെയ്യുക, ഇമോജി, അന്തർദ്ദേശീയം"</string>
+    <string name="keywords_keyboard_and_ime" msgid="9143339015329957107">"ടെക്‌സ്‌റ്റ് ചെയ്യൽ തിരുത്തൽ, തിരുത്തുക, ശബ്‌ദം, വൈബ്രേറ്റ് ചെയ്യുക, സ്വമേധയാ, ഭാഷ, വിരൽചലനം, നിർദ്ദേശിക്കുക, നിർദ്ദേശം, തീം, നിന്ദ്യം, പദം, ടൈപ്പുചെയ്യുക, ഇമോജി, അന്തർദ്ദേശീയം"</string>
     <string name="keywords_reset_apps" msgid="5293291209613191845">"പുനഃക്രമീകരിക്കുക, മുൻഗണനകൾ, ഡിഫോൾട്ട്"</string>
     <string name="keywords_emergency_app" msgid="3143078441279044780">"അടിയന്തരം, ഐസ്, ആപ്പ്, ഡിഫോൾട്ട്"</string>
     <string name="keywords_default_phone_app" msgid="4213090563141778486">"ഫോൺ, ഡയലർ, ഡിഫോൾട്ട്"</string>
@@ -2870,15 +2790,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"അൺലോക്കുചെയ്യാൻ സ്ലൈഡുചെയ്യുക, പാസ്‌വേഡ്, പാറ്റേൺ, പിൻ"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ഔദ്യോഗിക വെല്ലുവിളി, ഔദ്യോഗികം, പ്രൊഫൈൽ"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"ഔദ്യോഗിക പ്രൊഫൈൽ, മാനേജുചെയ്യപ്പെടുന്ന പ്രൊഫൈൽ, ഏകീകരിക്കുക, ഏകീകരിക്കൽ, ഔദ്യോഗികം, പ്രൊഫൈൽ"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"ജെസ്‌റ്റർ"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"ജെസ്‌റ്ററുകൾ"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"പണമടയ്ക്കുക. ടാപ്പുചെയ്യുക, പേയ്‌മെന്റുകൾ"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ബാക്കപ്പ് ചെയ്യൂ"</string>
-    <!-- no translation found for keywords_squeeze_to_launch_gesture (4459283333825902485) -->
-    <skip />
-    <!-- no translation found for keywords_wake_squeeze_gesture (6923058534235267845) -->
-    <skip />
-    <!-- no translation found for keywords_alarm_silence_gesture (8507935972184597252) -->
-    <skip />
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"വിരൽചലനം"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"വൈഫൈ NFC ടാഗ് സജ്ജമാക്കുക"</string>
     <string name="write_tag" msgid="8571858602896222537">"റൈറ്റുചെയ്യുക"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"റൈറ്റുചെയ്യാൻ ഒരു ടാഗ് ടാപ്പുചെയ്യുക..."</string>
@@ -2918,8 +2833,8 @@
     <string name="boot_sounds_title" msgid="567029107382343709">"ശബ്ദങ്ങൾ ഓണാക്കുക"</string>
     <string name="zen_mode_settings_summary_off" msgid="1857165567766351925">"സ്വയമേവയുള്ള നിയമങ്ങളൊന്നും ഓണാക്കിയിട്ടില്ല"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1216562765753405784">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> സ്വയമേവയുള്ള നയങ്ങൾ ഓണാക്കി</item>
-      <item quantity="one">1 സ്വയമേവയുള്ള നയം ഓണാക്കി</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> സ്വമേധയായുള്ള നയങ്ങൾ ഓണാക്കി</item>
+      <item quantity="one">1 സ്വമേധയായുള്ള നയം ഓണാക്കി</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="842308776768942600">"\'ശല്യപ്പെടുത്തരുത്\' മുൻഗണന"</string>
     <string name="zen_mode_priority_settings_title" msgid="2623117023031824309">"മുൻഗണനയുള്ളവ മാത്രം"</string>
@@ -2961,7 +2876,8 @@
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"പ്രൊഫൈൽ അറിയിപ്പുകൾ കാണിക്കുകയേ അരുത്"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"നിങ്ങളുടെ ഉപകരണം ലോക്കുചെയ്തിരിക്കുമ്പോൾ, പ്രൊഫൈൽ അറിയിപ്പുകൾ എങ്ങനെ കാണിക്കാനാണ് നിങ്ങൾ ആഗ്രഹിക്കുന്നത്?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"പ്രൊഫൈൽ അറിയിപ്പുകൾ"</string>
-    <string name="app_notifications_title" msgid="139788604658984593">"അറിയിപ്പുകൾ"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"അറിയിപ്പുകൾ"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"ആപ്പ് അറിയിപ്പുകൾ"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"അറിയിപ്പ് വിഭാഗം"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"പ്രാധാന്യം"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"ആപ്പ് തീരുമാനിക്കട്ടെ"</string>
@@ -2976,8 +2892,12 @@
     <string name="notification_importance_high_title" msgid="3058778300264746473">"അടിയന്തിരാവശ്യം"</string>
     <string name="allow_sound" msgid="1820188704793497324">"ശ‌ബ്‌ദം അനുവദിക്കുക"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"ഈ അറിയിപ്പുകൾ ശബ്ദമുണ്ടാക്കുകയോ വൈബ്രേറ്റുചെയ്യുകയോ നിലവിലെ സ്ക്രീനിലെ കാഴ്ചയിൽ കാണിക്കുകയോ അരുത്."</string>
+    <string name="notification_channel_summary_min" msgid="5401718014765921892">"താഴ്ന്ന പ്രാധാന്യം"</string>
+    <string name="notification_channel_summary_low" msgid="322317684244981244">"ഇടത്തരം പ്രാധാന്യം"</string>
+    <string name="notification_channel_summary_default" msgid="1111749130423589931">"ഉയർന്ന പ്രാധാന്യം"</string>
+    <string name="notification_channel_summary_high" msgid="2085017556511003283">"അടിയന്തര പ്രാധാന്യം"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"അറിയിപ്പ് സഹായി"</string>
-    <string name="manage_notification_access_title" msgid="7510080164564944891">"അറിയിപ്പ് ക്രമീകരണം"</string>
+    <string name="manage_notification_access_title" msgid="7510080164564944891">"അറിയിപ്പ് ആക്സസ്സ്"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"ഔദ്യോഗിക പ്രൊഫൈൽ അറിയിപ്പുകളിലേക്കുള്ള ആക്‌സസ്സ് ബ്ലോക്കുചെയ്‌തു"</string>
     <string name="manage_notification_access_summary_zero" msgid="2409912785614953348">"അപ്ലിക്കേഷനുകൾക്ക് അറിയിപ്പുകൾ വായിക്കാനായില്ല"</string>
     <plurals name="manage_notification_access_summary_nonzero" formatted="false" msgid="7930130030691218387">
@@ -3006,7 +2926,7 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\'ശല്യപ്പെടുത്തരുത്\' ആക്‌സസ്സ്"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"ഇൻസ്റ്റാളുചെയ്‌തവയൊന്നും \'ശല്യപ്പെടുത്തരുത്\' മോഡിൽ പ്രവേശിക്കാൻ അഭ്യർത്ഥിച്ചിട്ടില്ല"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"അപ്ലിക്കേഷനുകൾ ലോഡുചെയ്യുന്നു..."</string>
-    <string name="app_notifications_off_desc" msgid="4882445501376722969">"ഈ ഉപകരണത്തിൽ ഈ ആപ്പിന്റെ അറിയിപ്പുകൾ ദൃശ്യമാകുന്നത് Android ബ്ലോക്കുചെയ്യുന്നു"</string>
+    <string name="app_notifications_off_desc" msgid="4882445501376722969">"ഈ ആപ്പിന്‍റെ അറിയിപ്പുകൾ ഉപകരണത്തില്‍ ദൃശ്യമാകുന്നത് Android തടസ്സപ്പെടുത്തുന്നു"</string>
     <string name="channel_notifications_off_desc" msgid="5899225298718840635">"ഈ ഉപകരണത്തിൽ ഈ വിഭാഗത്തിൽ പെട്ട അറിയിപ്പുകൾ ദൃശ്യമാകുന്നത് Android ബ്ലോക്കുചെയ്യുന്നു"</string>
     <string name="notification_channels" msgid="5346841743182627500">"വിഭാഗങ്ങള്‍"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"മറ്റുള്ളവ"</string>
@@ -3086,6 +3006,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"നക്ഷത്രമിട്ട കോൺടാക്‌റ്റിൽ നിന്നുമാത്രം"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ആരിൽ നിന്നും വേണ്ട"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"അലാറങ്ങൾ"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"അലാറങ്ങൾക്ക് എപ്പോഴും മുൻഗണന നൽകി ശബ്‌ദം കേൾപ്പിക്കുന്നു"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"റിമൈൻഡറുകൾ"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ഇവന്റുകൾ"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"കോൾ ചെയ്യുന്ന എല്ലാവരും"</string>
@@ -3225,8 +3146,8 @@
     <string name="fingerprint_not_recognized" msgid="1739529686957438119">"തിരിച്ചറിഞ്ഞില്ല"</string>
     <string name="default_apps_title" msgid="1660450272764331490">"ഡിഫോൾട്ട്"</string>
     <string name="default_for_work" msgid="9152194239366247932">"ഔദ്യോഗികാവശ്യങ്ങൾക്ക് ഡിഫോൾട്ട്"</string>
-    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"അസിസ്റ്റ്, വോയ്സ് ഇൻപുട്ട്"</string>
-    <string name="default_assist_title" msgid="8868488975409247921">"അസിസ്റ്റ് ആപ്പ്"</string>
+    <string name="assist_and_voice_input_title" msgid="1733165754793221197">"അസിസ്റ്റ്, ശബ്ദ ഇൻപുട്ട്"</string>
+    <string name="default_assist_title" msgid="8868488975409247921">"സഹായ ആപ്പ്"</string>
     <string name="assistant_security_warning_title" msgid="8673079231955467177">"<xliff:g id="ASSISTANT_APP_NAME">%s</xliff:g>-നെ നിങ്ങളുടെ സഹായി ആക്കണോ?"</string>
     <string name="assistant_security_warning" msgid="8498726261327239136">"നിങ്ങളുടെ സ്ക്രീനിൽ ദൃശ്യമാകുന്നതോ ആപ്സിനുള്ളിൽ ആക്സസ് ചെയ്യാവുന്നതോ ആയ വിവരങ്ങൾ ഉൾപ്പെടെ, നിങ്ങളുടെ സിസ്റ്റത്തിൽ ഉപയോഗത്തിലുള്ള ആപ്സിനെ കുറിച്ചുള്ള വിവരങ്ങൾ വായിക്കാൻ അസിസ്റ്റന്റിന് കഴിയും."</string>
     <string name="assistant_security_warning_agree" msgid="7710290206928033908">"അംഗീകരിക്കുക"</string>
@@ -3263,7 +3184,10 @@
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> ആപ്പുകൾ അസ്വാഭാവികമായി പ്രവർത്തിക്കുന്നു</item>
       <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> അസ്വാഭാവികമായി പ്രവർത്തിക്കുന്നു</item>
     </plurals>
-    <!-- no translation found for power_high_usage_title (3826660033363082922) -->
+    <plurals name="power_high_usage_title" formatted="false" msgid="3826660033363082922">
+      <item quantity="other">ആപ്പുകൾ ബാറ്ററി ഉപയോഗിച്ചുതീർക്കുന്നു</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g>, ബാറ്ററി ഉപയോഗിച്ചുതീർക്കുന്നു</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"ഓപ്റ്റിമൈസ് ചെയ്തിട്ടില്ല"</string>
     <string name="high_power_on" msgid="6216293998227583810">"ഓപ്റ്റിമൈസ് ചെയ്തിട്ടില്ല"</string>
     <string name="high_power_off" msgid="3393904131961263278">"ബാറ്ററി ഉപയോഗം ഓപ്റ്റിമൈസ് ചെയ്യുന്നു"</string>
@@ -3308,7 +3232,7 @@
     <string name="assist_access_screenshot_title" msgid="4034721336291215819">"സ്ക്രീൻഷോട്ട് ഉപയോഗിക്കുക"</string>
     <string name="assist_access_screenshot_summary" msgid="6761636689013259901">"സ്ക്രീനിന്റെ ഒരു ചിത്രം ആക്സസ് ചെയ്യാൻ അസിസ്റ്റ് ആപ്പിനെ അനുവദിക്കുക"</string>
     <string name="assist_flash_title" msgid="506661221230034891">"സ്ക്രീൻ മിന്നിക്കുക"</string>
-    <string name="assist_flash_summary" msgid="9160668468824099262">"അസിസ്റ്റ് ആപ്പ്, സ്ക്രീനിൽ നിന്നോ സ്ക്രീൻഷോട്ടിൽ നിന്നോ ടെക്സ്റ്റ് ആക്സസ്സുചെയ്യുമ്പോൾ സ്ക്രീനിന്റെ അരികുകൾ മിന്നിക്കുക"</string>
+    <string name="assist_flash_summary" msgid="9160668468824099262">"സ്ക്രീനിൽ നിന്നോ സ്ക്രീൻഷോട്ടിൽ നിന്നോ സഹായ ആപ്പ് ടെക്സ്റ്റ് ആക്സസ്സ് ചെയ്യുമ്പോൾ സ്ക്രീനിന്‍റെ അരികുകൾ മിന്നിക്കുക"</string>
     <string name="assist_footer" msgid="1982791172085896864">"നിങ്ങൾ കാണുന്ന സ്ക്രീനിൽ നിന്നുള്ള വിവരങ്ങളെ അടിസ്ഥാനമാക്കി നിങ്ങളെ സഹായിക്കാൻ അസിസ്റ്റ് ആപ്സിന് കഴിയും. നിങ്ങൾക്ക് സമ്പൂർണ്ണമായ സഹായം നൽകാൻ ലോഞ്ചറിനെയും വോയ്‌സ് ഇൻപുട്ട് സേവനങ്ങളെയും ചില ആപ്സ് പിന്തുണയ്‌ക്കുന്നു."</string>
     <string name="average_memory_use" msgid="829566450150198512">"ശരാശരി മെമ്മറി ഉപയോഗം"</string>
     <string name="maximum_memory_use" msgid="7493720799710132496">"പരമാവധി മെമ്മറി ഉപയോഗം"</string>
@@ -3358,7 +3282,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"അനുമതിയുള്ള ആപ്സ്"</string>
     <string name="app_permission_summary_allowed" msgid="1505409933012886711">"അനുവദനീയം"</string>
     <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"അനുവദിച്ചിട്ടില്ല"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"അറിഞ്ഞുകൂടാത്ത ആപ്‌സ് ഇൻസ്റ്റാളുചെയ്യുക"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"തിരിച്ചറിയാനാകാത്ത ഉറവിടങ്ങളിൽ നിന്നുള്ള ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്യുക"</string>
     <string name="write_settings" msgid="4797457275727195681">"സിസ്റ്റം ക്രമീകരണങ്ങൾ പരിഷ്‌ക്കരിക്കുക"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കാൻ എഴുതുക"</string>
@@ -3370,6 +3293,8 @@
     <string name="write_settings_preference" msgid="3407383041273067448">"സിസ്റ്റം ക്രമീകരണ അനുമതിയെ ആപ്പ് പരിഷ്കരിക്കുന്നു"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കുന്നത് അനുവദിക്കുക"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"സിസ്റ്റം ക്രമീകരണം പരിഷ്കരിക്കുന്നതിന് ഒരു ആപ്പിനെ ഈ അനുമതി അനുവദിക്കുന്നു."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"അതെ"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"ഇല്ല"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"ഈ ഉറവിടത്തിൽ നിന്ന് അനുവദിക്കുക"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"ക്യാമറയ്ക്കായി രണ്ടുതവണ തിരിക്കുക"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"നിങ്ങളുടെ കൈത്തണ്ട രണ്ടുപ്രാവശ്യം തിരിച്ചുകൊണ്ട് ക്യാമറാ ആപ്പ് തുറക്കുക"</string>
@@ -3402,7 +3327,7 @@
     <string name="apps_summary" msgid="193158055537070092">"<xliff:g id="COUNT">%1$d</xliff:g> ആപ്സ് ഇൻസ്റ്റാൾ ചെയ്തു"</string>
     <string name="apps_summary_example" msgid="2118896966712746139">"24 ആപ്‌സ് ഇൻസ്റ്റാൾ ചെയ്‌തു"</string>
     <string name="storage_summary" msgid="3801281635351732202">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> ഉപയോഗിച്ചു - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ലഭ്യമാണ്"</string>
-    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"ഇന്റേണൽ സ്‌റ്റോറേജ്: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ഉപയോഗിച്ചു - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ശേഷിക്കുന്നു"</string>
+    <string name="storage_summary_with_sdcard" msgid="3290457009629490121">"ഉള്ളിലെ മെമ്മറി: <xliff:g id="PERCENTAGE">%1$s</xliff:g> ഉപയോഗിച്ചു - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ശേഷിക്കുന്നു"</string>
     <string name="display_summary" msgid="6737806235882127328">"<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> നിഷ്ക്രിയമാണെങ്കിൽ സ്ലീപ്പിലാക്കുക"</string>
     <string name="display_dashboard_summary" msgid="4145888780290131488">"വാൾപേപ്പർ, ‌സ്ലീപ്പ്, ഫോണ്ട് ‌വലുപ്പം"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"10 മിനിറ്റ് നിഷ്ക്രിയമാണെങ്കിൽ സ്ലീപ്പിലാക്കുക"</string>
@@ -3434,7 +3359,7 @@
     <string name="condition_airplane_title" msgid="287356299107070503">"വിമാന മോഡ് ഓണാണ്"</string>
     <string name="condition_airplane_summary" msgid="5561586417832393666">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്ക് എന്നിവ ഓഫാക്കിയിരിക്കുന്നു. നിങ്ങൾക്ക് കോൾ ചെയ്യാനോ ഇന്റർനെറ്റിലേക്ക് കണക്റ്റുചെയ്യാനോ കഴിയില്ല."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാണ് (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
-    <string name="condition_battery_title" msgid="3272131008388575349">"ബാറ്ററി സേവർ ഓണാണ്"</string>
+    <string name="condition_battery_title" msgid="3272131008388575349">"ബാറ്ററി ലാഭിക്കൽ ഓണാണ്"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"പ്രകടനനിലവാരം കുറഞ്ഞിരിക്കുന്നു. ലൊക്കേഷൻ സേവനങ്ങളും പശ്ചാത്തല ഡാറ്റയും ഓഫാക്കി."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"മൊബൈൽ ഡാറ്റ ഓഫാണ്"</string>
     <string name="condition_cellular_summary" msgid="1818046558419658463">"വൈഫൈ വഴി മാത്രം ഇന്റർനെറ്റ് ലഭ്യമാണ്"</string>
@@ -3446,6 +3371,15 @@
     <string name="condition_night_display_summary" msgid="5443722724310650381">"സ്ക്രീനിന് ആംബർ ശോഭയാണുള്ളത്. എളുപ്പത്തിൽ ഉറങ്ങുന്നതിന് ഇത് നിങ്ങളെ സഹായിച്ചേക്കാം."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"നിര്‍ദ്ദേശങ്ങള്‍"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <string name="suggestions_more_title" msgid="8223690393059519879">"+<xliff:g id="ID_1">%1$d</xliff:g> കൂടുതൽ"</string>
+    <plurals name="suggestions_collapsed_title" formatted="false" msgid="1857433444865249823">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> നിർദ്ദേശങ്ങൾ</item>
+      <item quantity="one">1 നിർദ്ദേശം</item>
+    </plurals>
+    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="7680263825371165461">
+      <item quantity="other">+<xliff:g id="COUNT">%1$d</xliff:g> നിർദ്ദേശങ്ങൾ</item>
+      <item quantity="one"> +1 നിർദ്ദേശം</item>
+    </plurals>
     <string name="suggestion_remove" msgid="904627293892092439">"നീക്കംചെയ്യുക"</string>
     <string name="color_temperature" msgid="2070126836910615605">"തണുത്ത വർണ്ണ താപനില"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"കൂടുതൽ തണുത്ത ഡിസ്പ്ലേ വർണ്ണങ്ങൾ ഉപയോഗിക്കുക"</string>
@@ -3470,7 +3404,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> നിയന്ത്രണങ്ങൾ</item>
       <item quantity="one">ഒരു നിയന്ത്രണം</item>
     </plurals>
-    <string name="operator_warning" msgid="1862988028996859195">"ഉപകരണം കണക്കാക്കുന്നതിൽ നിന്നും വ്യത്യസ്തമായിട്ടായിരിക്കാം സേവനദായകൻ കണക്കാക്കുന്നത്"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"ഉപകരണം കണക്കാക്കുന്നതിൽ നിന്നും വ്യത്യസ്തമായിട്ടായിരിക്കാം സേവനദാതാക്കള്‍ കണക്കാക്കുന്നത്"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ഉപയോഗിച്ചു"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"ഡാറ്റ മുന്നറിയിപ്പ് സജ്ജമാക്കുക"</string>
     <string name="data_warning" msgid="209133958008062117">"ഡാറ്റാ മുന്നറിയിപ്പ്"</string>
@@ -3500,7 +3434,7 @@
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"മറ്റൊരു വിരൽ ഉപയോഗിച്ച് അൺലോക്കുചെയ്യുക"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"ഓൺ / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="8309471955051162327">"ഓഫ്/ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"ഒരിക്കലും സ്വയമേവ ഓണാക്കരുത്"</string>
+    <string name="battery_saver_desc_turn_on_auto_never" msgid="6715896635178578813">"ഒരിക്കലും സ്വമേധയാ ഓണാകരുത്"</string>
     <string name="battery_saver_desc_turn_on_auto_pct" msgid="7472323223085636533">"ബാറ്ററി നില %1$s ആകുമ്പോൾ സ്വയമേവ ഓണാക്കുക"</string>
     <string name="not_battery_optimizing" msgid="5362861851864837617">"ബാറ്ററി ഒപ്റ്റിമൈസേഷൻ ഉപയോഗിക്കുന്നില്ല"</string>
     <string name="lockscreen_remote_input" msgid="969871538778211843">"ഉപകരണം ലോക്കുചെയ്തിരിക്കുകയാണെങ്കിൽ അറിയിപ്പുകൾക്ക് മറുപടികളോ മറ്റ് ടെക്സ്റ്റുകളോ ടൈപ്പുചെയ്യുന്നത് തടയുക"</string>
@@ -3525,7 +3459,7 @@
     <string name="notification_log_details_actions" msgid="242523930165118066">"പ്രവർത്തനങ്ങൾ"</string>
     <string name="notification_log_details_title" msgid="7177091647508863295">"പേര്"</string>
     <string name="notification_log_details_remoteinput" msgid="8328591329858827409">"റിമോട്ട് ഇൻപുട്ട്"</string>
-    <string name="notification_log_details_content_view" msgid="6638731378278561786">"ഇഷ്ടാനുസൃത കാഴ്ച"</string>
+    <string name="notification_log_details_content_view" msgid="6638731378278561786">"ഇഷ്ടാനുസൃത കാഴ്‌ച"</string>
     <string name="notification_log_details_extras" msgid="4188418723779942047">"എക്‌സ്‌ട്രാകൾ"</string>
     <string name="notification_log_details_icon" msgid="8939114059726188218">"ഐക്കൺ"</string>
     <string name="notification_log_details_parcel" msgid="243148037601903212">"പാഴ്‌സൽ വലുപ്പം"</string>
@@ -3548,7 +3482,7 @@
     <string name="notification_suggestion_title" msgid="4506524937307816475">"ലോക്ക് സ്ക്രീൻ അറിയിപ്പുകൾ നിയന്ത്രിക്കുക"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"അറിയിപ്പ് ഉള്ളടക്കം കാണിക്കുക അല്ലെങ്കിൽ മറയ്ക്കുക"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"എല്ലാം"</string>
-    <string name="page_tab_title_support" msgid="6330657582897417458">"പിന്തുണ"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"സഹായവും ‌നുറുങ്ങുകളും"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"ഏറ്റവും ചെറിയ വീതി"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"ഇൻസ്റ്റാൾ ചെയ്തിട്ടുള്ള ആപ്സൊന്നും പ്രീമിയം SMS ആക്‌സസ് അഭ്യർത്ഥിച്ചിട്ടില്ല"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"പ്രീമിയം SMS-ന് നിങ്ങൾ പണം നൽകേണ്ടി വന്നേക്കാം, കാരിയറുടെ ബില്ലിലേക്ക് ഈ തുക ചേർക്കുന്നതാണ്. നിങ്ങളൊരു ആപ്പിന് അനുമതി പ്രവർത്തനക്ഷമമാക്കുന്നുവെങ്കിൽ, ആ ആപ്പ് ഉപയോഗിച്ച് പ്രീമിയം SMS അയയ്ക്കാനാകും."</string>
@@ -3613,58 +3547,38 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"സ്വയമേവ"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"മാനുവൽ"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"ഇപ്പോൾ ഇടം സൃഷ്ടിക്കുക"</string>
-    <string name="gesture_preference_title" msgid="4033736910560673690">"ജെസ്‌റ്റർ കുറുക്കുവഴികൾ"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"ജെസ്‌റ്ററുകൾ"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"നിങ്ങളുടെ ഫോൺ നിയന്ത്രിക്കുന്നതിനുള്ള ദ്രുത ജെസ്റ്ററുകൾ"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"നിങ്ങളുടെ ടാബ്‌ലെറ്റ് നിയന്ത്രിക്കുന്നതിനുള്ള അതിവേഗ ജെസ്റ്ററുകൾ"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"നിങ്ങളുടെ ഉപകരണം നിയന്ത്രിക്കുന്നതിനുള്ള അതിവേഗ ജെസ്റ്ററുകൾ"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"ക്യാമറയിലേക്ക് മാറുക"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"ക്യാമറ വേഗത്തിൽ തുറക്കുന്നതിന്, പവർ ബട്ടൺ രണ്ടുതവണ ടാപ്പുചെയ്യുക. ഏത് സ്ക്രീനിലും പ്രവർത്തിക്കും."</string>
-    <!-- no translation found for double_tap_power_for_camera_suggestion_title (6500405261202883589) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_suggestion_summary (7010153544554016996) -->
-    <skip />
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"അതിവേഗം ക്യാമറ തുറക്കുക"</string>
+    <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"ക്യാമറ തുറക്കുന്നതിന് പവർ ബട്ടണിൽ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"ക്യാമറ ഫ്ലിപ്പുചെയ്യുക"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for double_twist_for_camera_suggestion_title (4689410222517954869) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (447403641027147153) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (1724660290703318739) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (5980398380988039489) -->
-    <skip />
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"അതിവേഗം സെൽഫികൾ എടുക്കുക"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"സെൽഫി മോഡിന് ഫോൺ രണ്ടുതവണ തിരിക്കുക"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"സെൽഫി മോഡിന് ടാബ്‌ലെറ്റ് രണ്ടുതവണ തിരിക്കുക"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"സെൽഫി മോഡിന് ഉപകരണം രണ്ടുതവണ തിരിക്കുക"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"ഫോൺ പരിശോധിക്കുന്നതിന്, രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"ടാബ്‌ലെറ്റ് പരിശോധിക്കുന്നതിന്, രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"ഉപകരണം പരിശോധിക്കുന്നതിന്, രണ്ടുതവണ ടാപ്പുചെയ്യുക"</string>
-    <!-- no translation found for ambient_display_summary (525662960806416373) -->
-    <skip />
-    <!-- no translation found for ambient_display_suggestion_summary (5987443721392571847) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="525662960806416373">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ, മറ്റ് വിവരങ്ങൾ എന്നിവ നോക്കുന്നതിന്, സ്ക്രീനിൽ രണ്ടുതവണ ടാപ്പുചെയ്യുക."</string>
+    <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"സ്ക്രീൻ ഓഫായിരിക്കുമ്പോൾ അറിയിപ്പുകൾ പരിശോധിക്കുക"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"പരിശോധിക്കാൻ ഫോണുയർത്തുക"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"പരിശോധിക്കുന്നതിന് ടാബ്‌ലെറ്റ് എടുത്തുയർത്തുക"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"പരിശോധിക്കുന്നതിന് ഉപകരണം എടുത്തുയർത്തുക"</string>
-    <!-- no translation found for ambient_display_pickup_summary (4567020486787561873) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (5435283849947236648) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (8256669101643381568) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_suggestion_summary (7014700589991761035) -->
-    <skip />
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ, മറ്റ് വിവരങ്ങൾ എന്നിവ നോക്കുന്നതിന്, ഫോൺ കയ്യിലെടുക്കുക."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ, മറ്റ് വിവരങ്ങൾ എന്നിവ നോക്കുന്നതിന്, ടാബ്‌ലെറ്റ് കയ്യിലെടുക്കുക."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ, മറ്റ് വിവരങ്ങൾ എന്നിവ നോക്കുന്നതിന്, ഫോൺ കയ്യിലെടുക്കുക."</string>
+    <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"സ്ക്രീൻ ഓഫായിരിക്കുമ്പോൾ അറിയിപ്പുകൾ പരിശോധിക്കുക"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"അറിയിപ്പുകൾക്ക് വിരലടയാളം സ്വൈപ്പുചെയ്യുക"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ ഫോണിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ടാബ്‌ലെറ്റിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ഉപകരണത്തിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_title (1677291167470357802) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_summary (127592803294414082) -->
-    <skip />
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"ക്യാമറ തുറക്കാൻ ഫോൺ ഉയർത്തുക"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"ക്യാമറ സ്വയമേവ തുറക്കാൻ, ഫോൺ ഫോട്ടോ എടുക്കുന്ന രീതിയിൽ (ലാൻഡ്‌സ്‌കേപ്പ് അല്ലെങ്കിൽ പോർട്രെയ്‌റ്റ്) ഉയർത്തിപ്പിടിക്കുക. നിങ്ങളുടെ ഫോൺ സുഷുപ്‌തിയിലായിരിക്കുമ്പോഴോ ലോക്കുചെയ്‌തിരിക്കുമ്പോഴോ ഇത് പ്രവർത്തിക്കുന്നു."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"ഫോൺ സുഷുപ്‌തിയിലായിരിക്കുമ്പോഴോ ലോക്കുചെയ്തിരിക്കുമ്പോഴോ ഫോട്ടോകൾ എടുക്കുക"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"ജെസ്‌റ്റർ സഹായം"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"സെന്‍‌സിറ്റിവിറ്റി"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"അറിയിപ്പുകൾ വേഗത്തിൽ കാണുക"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"ഓൺ"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ഓഫ്"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ബൂട്ട്‌ലോഡർ ഇതിനകം അൺലോക്കുചെയ്തിട്ടുണ്ട്"</string>
@@ -3685,6 +3599,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"ഔദ്യോഗിക ഡാറ്റ സ്വയം സമന്വയിപ്പിക്കുക"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"ആപ്പുകളെ സ്വയം പുതുക്കിയെടുക്കാൻ അനുവദിക്കുക"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"അക്കൗണ്ട് സമന്വയം"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"<xliff:g id="ID_1">%1$d</xliff:g> / <xliff:g id="ID_2">%2$d</xliff:g> ഇനങ്ങൾക്ക് സമന്വയം ഓണാക്കിയിരിക്കുന്നു"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"എല്ലാ ഇനങ്ങൾക്കും സമന്വയം ഓണാക്കിയിരിക്കുന്നു"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"എല്ലാ ഇനങ്ങൾക്കും സമന്വയം ഓഫാക്കിയിരിക്കുന്നു"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"മാനേജുചെയ്യപ്പെടുന്ന ഉപകരണത്തിന്റെ വിവരങ്ങൾ"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"മാറ്റങ്ങളും ക്രമീകരണവും മാനേജുചെയ്യുന്നത് നിങ്ങളുടെ സ്ഥാപനമാണ്"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"മാറ്റങ്ങളും ക്രമീകരണവും മാനേജുചെയ്യുന്നത് <xliff:g id="ORGANIZATION_NAME">%s</xliff:g> ആണ്"</string>
@@ -3768,7 +3685,7 @@
     <string name="app_info_storage_title" msgid="5554719444625611987">"ഉപയോഗിച്ച ഇടം"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(<xliff:g id="USER">%s</xliff:g> എന്നയാൾക്ക് ‌അൺഇൻസ്റ്റാൾചെയ്തു)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(<xliff:g id="USER">%s</xliff:g> എന്നയാൾക്ക് കാണാനാവില്ല)"</string>
-    <string name="autofill_app" msgid="7338387238377914374">"സ്വയമേവ പൂരിപ്പിക്കൽ സേവനം"</string>
+    <string name="autofill_app" msgid="7338387238377914374">"സ്വയം പൂരിപ്പിക്കൽ സേവനം"</string>
     <string name="autofill_keywords" msgid="7485591824120812710">"സ്വയമേവ, പൂരിപ്പിക്കൽ, സ്വയമേവ പൂരിപ്പിക്കൽ"</string>
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ഈ ആപ്പിനെ നിങ്ങൾ വിശ്വസിക്കുന്നുണ്ടെന്ന് ഉറപ്പുവരുത്തുക&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; സ്വയമേവ പൂരിപ്പിക്കേണ്ടത് എന്താണെന്ന് നിർണ്ണയിക്കുന്നതിന് നിങ്ങളുടെ സ്‌ക്രീനിൽ ഉള്ളത് ഉപയോഗിക്കുന്നു."</string>
     <string name="device_theme" msgid="4571803018917608588">"ഉപകരണത്തിന്റെ തീം"</string>
@@ -3781,8 +3698,9 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"സിനിമ, ടിവി ആപ്പുകൾ"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"കാരിയര്‍ പ്രൊവിഷനിംഗ് വിവരം"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"കാരിയർ പ്രൊവിഷനിംഗ് തുടങ്ങുക"</string>
-    <!-- no translation found for new_device_suggestion_title (8346563796032837800) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (7172709269203435870) -->
-    <skip />
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"പുതിയതും ആവേശമുണർത്തുന്നതുമായ കാര്യങ്ങൾ എന്തൊക്കെയാണ്?"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"പ്രധാന 5 ഫീച്ചറുകൾ പരിശോധിക്കുക"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"IMS രജിസ്‌ട്രേഷൻ നില"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"രജിസ്റ്റർ ചെയ്‌തു"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"രജിസ്‌റ്റർ ചെയ്‌തിട്ടില്ല"</string>
 </resources>
