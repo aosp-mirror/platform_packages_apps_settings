@@ -122,6 +122,19 @@ public class SuggestionController {
         }
     }
 
+    public void launchSuggestion(Suggestion suggestion) {
+        if (!isReady()) {
+            Log.w(TAG, "SuggestionController not ready, cannot launch " + suggestion.getId());
+            return;
+        }
+
+        try {
+            mRemoteService.launchSuggestion(suggestion);
+        } catch (RemoteException e) {
+            Log.w(TAG, "Error when calling launchSuggestion()", e);
+        }
+    }
+
     /**
      * Whether or not the manager is ready
      */
