@@ -16,6 +16,10 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CARRIER_CONFIG_SERVICE;
+import static android.content.Context.TELEPHONY_SERVICE;
+
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -58,9 +62,6 @@ import com.android.settingslib.DeviceInfoUtils;
 
 import java.util.List;
 
-import static android.content.Context.CARRIER_CONFIG_SERVICE;
-import static android.content.Context.TELEPHONY_SERVICE;
-
 
 /**
  * Display the following information
@@ -69,7 +70,7 @@ import static android.content.Context.TELEPHONY_SERVICE;
  * # Roaming
  * # Device Id (IMEI in GSM and MEID in CDMA)
  * # Network type
- * # Operator info (area info cell broadcast for Brazil)
+ * # Operator info (area update info cell broadcast)
  * # Signal Strength
  *
  */
@@ -87,18 +88,14 @@ public class SimStatus extends SettingsPreferenceFragment {
     private static final String KEY_IMEI = "imei";
     private static final String KEY_IMEI_SV = "imei_sv";
     private static final String KEY_ICCID = "iccid";
-    private static final String COUNTRY_ABBREVIATION_BRAZIL = "br";
 
-    static final String CB_AREA_INFO_RECEIVED_ACTION =
-            "android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
+    static private final String CB_AREA_INFO_RECEIVED_ACTION =
+            "com.android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
 
-    static final String GET_LATEST_CB_AREA_INFO_ACTION =
-            "android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
+    static private final String GET_LATEST_CB_AREA_INFO_ACTION =
+            "com.android.cellbroadcastreceiver.GET_LATEST_CB_AREA_INFO";
 
-    // Require the sender to have this permission to prevent third-party spoofing.
-    static final String CB_AREA_INFO_SENDER_PERMISSION =
-            "android.permission.RECEIVE_EMERGENCY_BROADCAST";
-
+    static private final String CELL_BROADCAST_RECEIVER_APP = "com.android.cellbroadcastreceiver";
 
     private TelephonyManager mTelephonyManager;
     private CarrierConfigManager mCarrierConfigManager;
@@ -118,7 +115,9 @@ public class SimStatus extends SettingsPreferenceFragment {
     private List<SubscriptionInfo> mSelectableSubInfos;
 
     private PhoneStateListener mPhoneStateListener;
-    private BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
+
+    // Once the cell broadcast configuration is moved into telephony framework,
+    private final BroadcastReceiver mAreaInfoReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
@@ -128,8 +127,7 @@ public class SimStatus extends SettingsPreferenceFragment {
                     return;
                 }
                 CellBroadcastMessage cbMessage = (CellBroadcastMessage) extras.get("message");
-                if (cbMessage != null && cbMessage.getServiceCategory() == 50
-                        && mSir.getSubscriptionId() == cbMessage.getSubId()) {
+                if (cbMessage != null && mSir.getSubscriptionId() == cbMessage.getSubId()) {
                     String latestAreaInfo = cbMessage.getMessageBody();
                     updateAreaInfo(latestAreaInfo);
                 }
@@ -216,11 +214,12 @@ public class SimStatus extends SettingsPreferenceFragment {
             if (mShowLatestAreaInfo) {
                 getContext().registerReceiver(mAreaInfoReceiver,
                         new IntentFilter(CB_AREA_INFO_RECEIVED_ACTION),
-                        CB_AREA_INFO_SENDER_PERMISSION, null);
+                        Manifest.permission.RECEIVE_EMERGENCY_BROADCAST, null);
                 // Ask CellBroadcastReceiver to broadcast the latest area info received
                 Intent getLatestIntent = new Intent(GET_LATEST_CB_AREA_INFO_ACTION);
+                getLatestIntent.setPackage(CELL_BROADCAST_RECEIVER_APP);
                 getContext().sendBroadcastAsUser(getLatestIntent, UserHandle.ALL,
-                        CB_AREA_INFO_SENDER_PERMISSION);
+                        Manifest.permission.RECEIVE_EMERGENCY_BROADCAST);
             }
         }
     }
@@ -381,11 +380,8 @@ public class SimStatus extends SettingsPreferenceFragment {
 
     private void updatePreference() {
         if (mPhone.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA) {
-            // only show area info when SIM country is Brazil
-            if (COUNTRY_ABBREVIATION_BRAZIL.equals(mTelephonyManager.getSimCountryIso(
-                            mSir.getSubscriptionId()))) {
-                mShowLatestAreaInfo = true;
-            }
+            mShowLatestAreaInfo = Resources.getSystem().getBoolean(
+                    com.android.internal.R.bool.config_showAreaUpdateInfoSettings);
         }
         PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(
                 mSir.getSubscriptionId());
