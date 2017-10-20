@@ -16,34 +16,33 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.verify;
+import static org.robolectric.shadow.api.Shadow.extract;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowConnectivityManager.class)
 public class AutoTimeZonePreferenceControllerTest {
 
-    @Mock
-    private Context mMockContext;
-    @Mock
-    private ConnectivityManager mCm;
     @Mock
     private UpdateTimeAndDateCallback mCallback;
 
@@ -55,17 +54,17 @@ public class AutoTimeZonePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication.getInstance().setSystemService(Context.CONNECTIVITY_SERVICE, mCm);
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
-        when(mMockContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(mCm);
-        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
     }
 
     @Test
     public void isFromSUW_notAvailable() {
         mController = new AutoTimeZonePreferenceController(
-                mMockContext, null /* callback */, true /* isFromSUW */);
+                mContext, null /* callback */, true /* isFromSUW */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -73,17 +72,19 @@ public class AutoTimeZonePreferenceControllerTest {
     @Test
     public void notFromSUW_isAvailable() {
         mController = new AutoTimeZonePreferenceController(
-                mMockContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* isFromSUW */);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isWifiOnly_notAvailable() {
-        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
         mController = new AutoTimeZonePreferenceController(
-                mMockContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* isFromSUW */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -91,17 +92,19 @@ public class AutoTimeZonePreferenceControllerTest {
     @Test
     public void isFromSUW_notEnable() {
         mController = new AutoTimeZonePreferenceController(
-            mMockContext, null /* callback */, true /* isFromSUW */);
+                mContext, null /* callback */, true /* isFromSUW */);
 
         assertThat(mController.isEnabled()).isFalse();
     }
 
     @Test
     public void isWifiOnly_notEnable() {
-        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
         mController = new AutoTimeZonePreferenceController(
-            mMockContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* isFromSUW */);
 
         assertThat(mController.isEnabled()).isFalse();
     }

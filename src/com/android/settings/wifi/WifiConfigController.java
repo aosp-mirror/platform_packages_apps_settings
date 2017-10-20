@@ -60,7 +60,7 @@ import android.widget.TextView;
 
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settingslib.Utils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;

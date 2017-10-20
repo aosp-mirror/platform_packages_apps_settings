@@ -17,6 +17,7 @@
 package com.android.settings.testutils.shadow;
 
 import android.net.ConnectivityManager;
+import android.util.SparseBooleanArray;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
@@ -24,14 +25,14 @@ import org.robolectric.annotation.Implements;
 @Implements(ConnectivityManager.class)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
-    private static boolean mIsNetworkSupported;
+    private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();
+
+    public void setNetworkSupported(int networkType, boolean supported) {
+        mSupportedNetworkTypes.put(networkType, supported);
+    }
 
     @Implementation
     public boolean isNetworkSupported(int networkType) {
-        return mIsNetworkSupported;
-    }
-
-    public static void setIsNetworkSupported(boolean isNetworkSupported) {
-        mIsNetworkSupported = isNetworkSupported;
+        return mSupportedNetworkTypes.get(networkType);
     }
 }

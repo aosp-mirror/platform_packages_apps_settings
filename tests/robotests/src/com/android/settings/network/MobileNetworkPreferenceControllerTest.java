@@ -15,51 +15,48 @@
  */
 package com.android.settings.network;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.robolectric.shadow.api.Shadow.extract;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsWrapper;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
     sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowRestrictedLockUtilsWrapper.class
+    shadows = {ShadowRestrictedLockUtilsWrapper.class, ShadowConnectivityManager.class,
+            ShadowUserManager.class}
 )
 public class MobileNetworkPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private UserManager mUserManager;
-    @Mock
-    private ConnectivityManager mConnectivityManager;
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
@@ -71,21 +68,19 @@ public class MobileNetworkPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mLifecycle = new Lifecycle();
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn(mConnectivityManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
     }
 
     @Test
     public void secondaryUser_prefIsNotAvailable() {
-        when(mUserManager.isAdminUser()).thenReturn(false);
-        when(mUserManager.hasUserRestriction(anyString(), any(UserHandle.class)))
-                .thenReturn(false);
-        when(mConnectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE))
-                .thenReturn(true);
+        ShadowUserManager userManager = extract(mContext.getSystemService(UserManager.class));
+        userManager.setIsAdminUser(false);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
 
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
@@ -93,11 +88,11 @@ public class MobileNetworkPreferenceControllerTest {
 
     @Test
     public void wifiOnly_prefIsNotAvailable() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mUserManager.hasUserRestriction(anyString(), any(UserHandle.class)))
-                .thenReturn(false);
-        when(mConnectivityManager.isNetworkSupported(ConnectivityManager.TYPE_MOBILE))
-                .thenReturn(false);
+        ShadowUserManager userManager = extract(mContext.getSystemService(UserManager.class));
+        userManager.setIsAdminUser(true);
+        ShadowConnectivityManager connectivityManager =
+                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
         mController = new MobileNetworkPreferenceController(mContext);
         assertThat(mController.isAvailable()).isFalse();
@@ -142,5 +137,4 @@ public class MobileNetworkPreferenceControllerTest {
         // Carrier name should be set.
         verify(mPreference).setSummary(testCarrierName);
     }
-
 }

@@ -17,25 +17,17 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.os.UserManager;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
-public class SimStatusPreferenceController extends AbstractPreferenceController
+public class SimStatusPreferenceController extends AbstractSimStatusImeiInfoPreferenceController
         implements PreferenceControllerMixin {
 
     private static final String KEY_SIM_STATUS = "sim_status";
 
     public SimStatusPreferenceController(Context context) {
         super(context);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).isAdminUser()
-                && !Utils.isWifiOnly(mContext);
     }
 
     @Override

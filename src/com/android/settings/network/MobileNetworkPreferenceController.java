@@ -15,6 +15,9 @@
  */
 package com.android.settings.network;
 
+import static android.os.UserHandle.myUserId;
+import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
+
 import android.content.Context;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
@@ -24,16 +27,13 @@ import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.wrapper.RestrictedLockUtilsWrapper;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-
-import static android.os.UserHandle.myUserId;
-import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
