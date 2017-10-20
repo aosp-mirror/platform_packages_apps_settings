@@ -23,6 +23,7 @@
     <string name="deny" msgid="6947806159746484865">"Татгалзах"</string>
     <string name="dlg_close" msgid="7471087791340790015">"Хаах"</string>
     <string name="dlg_switch" msgid="6243971420240639064">"Шилжих"</string>
+    <string name="device_info_default" msgid="7847265875578739287">"Тодорхойгүй"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="7201398282729229649">
       <item quantity="other">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> алхам дутуу байна.</item>
       <item quantity="one">Танд одоо хөгжүүлэгч болоход <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> алхам дутуу байна.</item>
@@ -107,26 +108,17 @@
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Төхөөрөмжүүдийг скан хийх"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"Энэ төхөөрөмжийг дахин нэрлэх"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Нэр солих"</string>
-    <!-- no translation found for bluetooth_disconnect_title (7830252930348734303) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (8208712728668714199) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (6611038575213485336) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_all_profiles (3995834526315103965) -->
-    <skip />
-    <!-- no translation found for bluetooth_disconnect_dialog_ok (3308586619539119106) -->
-    <skip />
+    <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"Төхөөрөмжийг салгах уу?"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"Таны утас <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="6611038575213485336">"Таны таблет <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"Таны төхөөрөмж <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална."</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"Салгах"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Танд Bluetooth тохиргоог өөрчлөх зөвшөөрөл байхгүй байна."</string>
-    <!-- no translation found for bluetooth_pairing_pref_title (7429413067477968637) -->
-    <skip />
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"Шинэ төхөөрөмж холбох"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> нь Bluetooth асаалттай үед ойрхон байгаа бусад төхөөрөмжүүдэд харагдана."</string>
-    <!-- no translation found for bluetooth_footer_mac_message (1109366350000220283) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (6807634484499166486) -->
-    <skip />
-    <!-- no translation found for bluetooth_footer_mac_message (8413944740341742061) -->
-    <skip />
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"Утасны Bluetooth хаяг: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"Таблетын Bluetooth хаяг: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Төхөөрөмжийн Bluetooth хаяг: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-г салгах уу?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Цацалт"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Профайлыг идэвхгүйжүүлэх үү?"</string>
@@ -138,8 +130,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Bluetooth хослуулах хүсэлт"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Хослуулах хүсэлт"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-тай хослохын тулд дарна уу."</string>
-    <!-- no translation found for bluetooth_show_received_files (3144149432555230410) -->
-    <skip />
+    <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Ирсэн файл"</string>
     <string name="device_picker" msgid="4978696506172252813">"Bluetooth төхөөрөмж сонгох"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth-г асаах хүсэлтэй байна"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> Bluetooth-г унтраах хүсэлтэй байна"</string>
@@ -175,11 +166,9 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s таны зурвасуудад хандалт хийх хүсэлтэй байна. %2$s-д хандалт хийхийг зөвшөөрөх үү?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"СИМ хандалтын хүсэлт"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> нь таны СИМ картанд хандах хүсэлтэй байна. СИМ картанд хандалтыг нээж өгснөөр холболтын хугацааны туршид төхөөрөмжийн дата холболтыг идэвхгүй болгоно. <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>-д хандалтыг нээх"</string>
-    <!-- no translation found for bluetooth_device_name_summary (4757990010751789977) -->
-    <skip />
+    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Бусад төхөөрөмжид <xliff:g id="DEVICE_NAME">^1</xliff:g>-р харагдана"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Таны төхөөрөмж"</string>
-    <!-- no translation found for bluetooth_pairing_page_title (7712127387361962608) -->
-    <skip />
+    <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Шинэ төхөөрөмж холбох"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Огноо &amp; цаг"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Цагийн бүсийг сонгоно уу"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -377,55 +366,39 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Хурууны хээгээр түгжээ тайлах"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Хурууныхаа хээг ашиглах"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Утасныхаа түгжээг тайлах, худалдан авалт хийх болон апп-д нэвтрэхдээ хурууны хээний мэдрэгчид хүрэхэд хангалттай. Та хурууных нь хээг нэмэх хүнээ болгоомжтой сонгоно уу. Таны нэмсэн ганц л хурууны хээгээр дээрх үйлдлийг хийх боломжтой.\n\nСанамж: Таны хурууны хээ нь хэцүү зурган түгжээ, эсвэл ПИН-с хамгаалалт муутай байдаг."</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_unlock_disabled (1550756694054944874) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_message_setup (6817326798834882531) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Утасныхаа түгжээг тайлах, худалдан авалт зөвшөөрөхийн тулд хурууны хээгээ ашиглана уу.\n\nСанамж: Та хурууны хээгээр энэ төхөөрөмжийн түгжээг тайлах боломжгүй. Дэлгэрэнгүй мэдээлэл авахын тулд байгууллагынхаа админтай холбогдоно уу."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Утасныхаа түгжээг тайлах, худалдан авалт зөвшөөрөхөд хурууны хээгээ ашиглана уу.\n\nСанамж: Таны хурууны хээ нь хүчтэй зурган түгжээ эсвэл PIN-с хамгаалалт муутай байж болзошгүй."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Цуцлах"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Үргэлжлүүлэх"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Алгасах"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_introduction_continue_setup (1961957425135180242) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (1581834104051243425) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (4629503416877189572) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text_frp (2423428240245737909) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (5219287483885558525) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (1466238255429527112) -->
-    <skip />
-    <!-- no translation found for lock_screen_intro_skip_dialog_text (3008526710555416125) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Дараагийн"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та таблетаа гээсэн,  хулгайд алдсан эсвэл сэргээсэн тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та төхөөрөмжөө гээсэн, хулгайд алдсан эсвэл сэргээсэн тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та утсаа гээсэн, хулгайд алдсан эсвэл сэргээсэн тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та таблетаа гээсэн эсвэл хулгайд алдсан тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та төхөөрөмжөө гээсэн эсвэл хулгайд алдсан тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Төхөөрөмжийн хамгаалалтын онцлогийг асаахгүй. Та утсаа гээсэн эсвэл хулгайд алдсан тохиолдолд үүнийг хэн нэгэн этгээд ашиглахаас сэргийлэх боломжгүй."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Хэдийд ч алгасах"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Буцах"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_title (3051496861358227199) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_find_sensor_message (8793966374365960368) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Мэдрэгчид хүрнэ үү"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Мэдрэгч таны утасны ард байдаг. Долоовор хуруугаа ашиглана уу."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Төхөөрөмж болон хурууны хээний мэдрэгчийн байршлын зураг"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Нэр"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ТИЙМ"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Устгах"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_start_title (2068961812439460133) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Мэдрэгчид хүрнэ үү"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Мэдрэгч дээр хуруугаа тавиад, чичиргээ мэдрэгдэхэд аваарай"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_title (2819679722403209778) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_repeat_message (6158989350522518586) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_title (7567276170287972230) -->
-    <skip />
-    <!-- no translation found for security_settings_fingerprint_enroll_finish_message (4796715961273420536) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Хөндийрүүлээд, дахин хүрнэ үү"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Хурууныхаа хээг бүрэн гаргахын тулд хуруугаа хөндийрүүлсэн хэвээр байлгана уу"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Хурууны хээ нэмсэн"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Та энэ дүрс тэмдгийг харсан үедээ өөрийгөө мөн болохыг баталгаажуулах, худалдан авалтыг зөвшөөрөхийн тулд хурууны хээгээ ашиглана уу."</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Дараа хийх"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Хурууны хээн тохиргоог алгасах уу?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Та утасны түгжээг тайлах нэг хувилбараар хурууны хээн тохиргоог сонголоо. Хэрэв та одоо алгасвал энэ тохиргоог дараа хийх шаардлагатай болно. Тохиргоо хийхэд хэдхэн хором шаардлагатай."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Дэлгэцийн түгжээ тохируулах"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Гүйцэтгэв"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Уучлаарай, энэ мэдрэгч биш байна"</string>
-    <!-- no translation found for security_settings_fingerprint_enroll_touch_dialog_message (2989019978041986175) -->
-    <skip />
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"Утасныхаа ар талын мэдрэгчид хүрнэ үү. Долоовор хуруугаа ашиглана уу."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Бүртгэлийг гүйцэт хийж чадсангүй"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Хурууны хээ оруулах хугацаа өнгөрсөн байна. Дахин оруулна уу."</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Хурууны хээг оруулж чадсангүй. Дахин оролдох, эсвэл өөр хуруу ашиглана уу."</string>
@@ -561,16 +534,16 @@
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Тайлах нууц үгийг өөрчлөх"</string>
     <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Дахин оролдоно уу. <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>-с <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> оролдлого үлдсэн байна."</string>
     <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Таны өгөгдлийг устгах болно"</string>
-    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="4999108263936246210">"Та дараагийн оролдлогоор буруу загвар оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
-    <string name="lock_last_pin_attempt_before_wipe_device" msgid="2191214314973933300">"Та дараагийн оролдлогоор буруу ПИН оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
-    <string name="lock_last_password_attempt_before_wipe_device" msgid="6526655065466746563">"Та дараагийн оролдлогоор буруу нууц үг оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Та дараагийн оролдлогоор буруу загвар оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"Та дараагийн оролдлогоор буруу ПИН оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"Та дараагийн оролдлогоор буруу нууц үг оруулбал энэ төхөөрөмжийн өгөгдлийг устгах болно"</string>
     <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Та дараагийн оролдлогоор буруу загвар оруулбал энэ хэрэглэгчийг устгах болно"</string>
     <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Та дараагийн оролдлогоор буруу ПИН оруулбал энэ хэрэглэгчийг устгах болно"</string>
     <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Та дараагийн оролдлогоор буруу нууц үг оруулбал энэ хэрэглэгчийг устгах болно"</string>
     <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Та дараагийн оролдлогоор буруу загвар оруулбал таны ажлын профайлыг үүний өгөгдлийн хамтаар устгах болно"</string>
     <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Та дараагийн оролдлогоор буруу ПИН оруулбал таны ажлын профайлыг үүний өгөгдлийн хамтаар устгах болно"</string>
     <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Та дараагийн оролдлогоор буруу нууц үг оруулбал таны ажлын профайлыг үүний өгөгдлийн хамтаар устгах болно"</string>
-    <string name="lock_failed_attempts_now_wiping_device" msgid="1951676829299522277">"Түгжээг хэт олон удаа буруу оруулсан тул энэ төхөөрөмжийн өгөгдлийг устгах болно."</string>
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Түгжээг хэт олон удаа буруу оруулсан тул энэ төхөөрөмжийн өгөгдлийг устгах болно."</string>
     <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Түгжээг хэт олон удаа буруу оруулсан тул энэ хэрэглэгчийг устгах болно."</string>
     <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Түгжээг хэт олон удаа буруу оруулсан тул энэ ажлын профайлыг үүний өгөгдлийн хамтаар устгах болно."</string>
     <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Хаах"</string>
@@ -672,24 +645,16 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"Сонголтууд..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"Дэлгэрэнгүй"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth дэлгэрэнгүй"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetoothийг идэвхжүүлсэн үед таны төхөөрөмж ойролцоо байгаа Bluetooth төхөөрөмжүүдтэй холбогдох боломжтой болно."</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth-г идэвхжүүлсэн үед таны төхөөрөмж ойролцоо байгаа Bluetooth төхөөрөмжүүдтэй холбогдох боломжтой болно."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"Байршлын нарийвчлалыг сайжруулахын тулд системийн апп болон үйлчилгээ нь Bluetooth төхөөрөмжийг илрүүлэх боломжтой. Ta үүнийг <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>Хайлт хийх тохиргоо<xliff:g id="LINK_END_1">LINK_END</xliff:g> дотроос өөрчилж болно."</string>
-    <!-- no translation found for bluetooth_connect_failed (4500234659813241053) -->
-    <skip />
-    <!-- no translation found for device_details_title (6576953269221085300) -->
-    <skip />
-    <!-- no translation found for bluetooth_device_mac_address (2513724313558236181) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_title (38467834196432400) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (9087609557757135712) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (7785695793007576501) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_body (251257782642157557) -->
-    <skip />
-    <!-- no translation found for bluetooth_unpair_dialog_forget_confirm_button (3829370108973879006) -->
-    <skip />
+    <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Холбогдож чадсангүй. Дахин оролдоно уу."</string>
+    <string name="device_details_title" msgid="6576953269221085300">"Төхөөрөмжийн дэлгэрэнгүй мэдээлэл"</string>
+    <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"Төхөөрөмжийн Bluetooth хаяг: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"Төхөөрөмжийг мартах уу?"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"Tаны утас <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"Таны таблет <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"Таны төхөөрөмж <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-с сална"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Төхөөрөмжийг мартах"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Холбох…"</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> медиа аудиогоос салгагдах болно."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> нь гар чөлөөтэй аудиогоос салгагдах болно."</string>
@@ -737,7 +702,7 @@
     <string name="android_beam_off_summary" msgid="4663095428454779138">"Идэвхгүй"</string>
     <string name="android_beam_disabled_summary" msgid="1737782116894793393">"NFC-г унтраасан учир ашиглах боломжгүй"</string>
     <string name="android_beam_label" msgid="6257036050366775040">"Android Beam"</string>
-    <string name="android_beam_explained" msgid="1810540319385192758">"Энэ онцлогийг асаасан үед та аппын агуулгыг өөр NFC-тай ажилладаг төхөөрөмж рүү төхөөрөмжийг ойрхон барьснаар дамжуулах боломжтой. Жишээ нь та хөтчийн хуудас, YouTube видео, харилцагчид болон бусад зүйлсийг дамжуулах боломжтой.\n\nТөхөөрөмжийг хамтад нь барьж (гол төлөв ар араар нь) дэлгэцээ товшино уу. Апп дамжуулах зүйлийг сонгох болно."</string>
+    <string name="android_beam_explained" msgid="1810540319385192758">"Энэ онцлогийг асаасан үед та аппын агуулгыг өөр NFC-тай ажилладаг төхөөрөмж рүү төхөөрөмжийг ойрхон барьснаар дамжуулах боломжтой. Жишээ нь та веб хуудас, YouTube видео, харилцагчид болон бусад зүйлсийг дамжуулах боломжтой.\n\nТөхөөрөмжийг хамтад нь барьж (гол төлөв ар араар нь) дэлгэцээ товшино уу. Апп дамжуулах зүйлийг сонгох болно."</string>
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Wi‑Fi-г асаах"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
@@ -755,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Wi‑Fi-г автоматаар асаах"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi таны гэрийн сүлжээ зэрэг ойролцоох хадгалсан өндөр чанарын сүлжээнд буцаж асах болно."</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Wi‑Fi-н сканыг унтраасан тул боломжгүй байна"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Ашиглахын тулд сүлжээний үнэлгээ үзүүлэгчийг сонгоно уу"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Муу холболтуудаас зайлсхийх"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Wi-Fi сүлжээний Интернэт холболт сайн биш бол бүү ашиглаарай"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Зөвхөн сайн интернэт холболттой сүлжээг ашиглах"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Нээлттэй сүлжээнд холбогдох"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Өндөр чанартай нийтийн сүлжээнд автоматаар холбогдох"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Ашиглахын тулд сүлжээний үнэлгээ үзүүлэгчийг сонгоно уу"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Ашиглахын тулд тохирох сүлжээний үнэлгээ үзүүлэгчийг сонгоно уу"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Сертификат суулгах"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Байршлын нарийвчлалыг сайжруулахын тулд системийн апп болон үйлчилгээ нь Wi-Fi төхөөрөмжийг илрүүлэх боломжтой. Ta үүнийг <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>хайлтын тохиргоо<xliff:g id="LINK_END_1">LINK_END</xliff:g> дотроос өөрчилж болно."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Байршлын нарийвчлалыг сайжруулахын тулд Wi-Fi-н сканийг <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>скан хийх тохиргоо<xliff:g id="LINK_END_1">LINK_END</xliff:g> хэсэгт асаана уу."</string>
@@ -811,6 +779,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"Утасгүй чиглүүлэгчийн аюулгүй байдлын тохиргоо (TKIP) дэмжигдээгүй байна"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"Гэрчлэл амжилтгүй. Дахиж оролдоно уу."</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"Өөр WPS горим илэрлээ. Хэдэн минутын дараа дахин оролдоно уу."</string>
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"Wi‑Fi салсан тул WPS тохиргоог цуцаллаа."</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"Сүлжээний нэр"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSID оруулна уу"</string>
     <string name="wifi_security" msgid="6603611185592956936">"Аюулгүй байдал"</string>
@@ -842,6 +811,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"\"Бүү олго\""</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Хүчин төгөлдөр бүү болго"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Ямар ч сертификат заагаагүй байна. Таны холболт хувийн биш байх болно."</string>
+    <string name="wifi_ssid_too_long" msgid="3474753269579895244">"Сүлжээний нэр хэтэрхий урт байна."</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Домэйн зааж өгөх шаардлагатай."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS боломжтой"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS боломжтой)"</string>
@@ -909,28 +879,17 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Энэ бүлгэмийг устгах уу?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Зөөврийн Wi‑Fi сүлжээний цэг"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi хотспот"</string>
-    <!-- no translation found for wifi_hotspot_off_subtext (5466126533609394170) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (5752490509369962007) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_tethering_on_subtext (6461075246164300670) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_on_local_only_subtext (2068110388011294735) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_title (1341735529132128887) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connecting (3378299995508671967) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_name_summary_connected (3888672084861445362) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_password_title (1955592302902091281) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_ap_band_title (1165801173359290681) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_regular (1203489406068036455) -->
-    <skip />
-    <!-- no translation found for wifi_hotspot_footer_info_local_only (857988412470694109) -->
-    <skip />
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Интернэт эсвэл агуулгыг бусад төхөөрөмжтэй хуваалцаагүй"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Энэ таблетын интернэт холболтыг сүлжээний цэгээр хуваалцаж байна"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Энэ утасны интернэт холболтыг сүлжээний цэгээр хуваалцаж байна"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Апп агуулга хуваалцаж байна. Интернэт холболтыг хуваалцахын тулд сүлжээний цэгийг унтрааж дахин асаана уу"</string>
+    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi-н нэр"</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>-г асааж байна..."</string>
+    <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Бусад төхөөрөмж <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>-д холбогдох боломжтой"</string>
+    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi нууц үг"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Band"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Бусад төхөөрөмждөө Wi‑Fi холболт үүсгэхийн тулд сүлжээний цэгийг ашиглана уу. Сүлжээний цэг нь таны мобайл датаны холболтоор интернэтэд холбогдоно. Мобайл датаны нэмэлт төлбөр гарна."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Апп ойролцоох төхөөрөмжтэй агуулга хуваалцахын тулд сүлжээний цэг үүсгэх боломжтой."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Сүлжээний цэгийг асааж байна…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Сүлжээний цэгийг унтрааж байна…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> идэвхтэй байна"</string>
@@ -1035,6 +994,7 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"Илэрц алга"</string>
     <string name="display_settings" msgid="7965901687241669598">"Дэлгэц"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Дэлгэцийг автоматаар эргүүлэх"</string>
+    <string name="color_mode_title" msgid="3159275920408338215">"Тод өнгө"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Таблетыг эргүүлбэл харагдацыг автоматаар эргүүлэх"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Утсыг эргүүлбэл харагдацыг автоматаар эргүүлэх"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Таблетыг эргүүлбэл харагдацыг автоматаар эргүүлэх"</string>
@@ -1062,33 +1022,22 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Боломжит гэрэлд тохируулан гэрэлтүүлгийг зохицуулна. Энэ онцлог асаалттай үед та гэрэлтүүлгийг түр хугацаанд тохируулах боломжтой."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Шөнийн гэрэл"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Шөнийн гэрэл нь таны дэлгэцийг улбар шар туяатай болгодог. Дэлгэцээ бүдэг гэрэлтэй үед харах, уншихад илүү хялбар болохоос гадна энэ нь танд хурдан унтахад тусална."</string>
-    <!-- no translation found for night_display_auto_mode_title (6574111412154833409) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_never (2483761922928753400) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_custom (2379394568898721765) -->
-    <skip />
-    <!-- no translation found for night_display_auto_mode_twilight (589042813708244059) -->
-    <skip />
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"Хуваарь"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Аль нь ч биш"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Тохируулсан хугацаанд асна"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Нар мандахаас жаргах хүртэл асна"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Эхлэх цаг"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Дуусах цаг"</string>
-    <!-- no translation found for night_display_status_title (1784041143360286267) -->
-    <skip />
+    <string name="night_display_status_title" msgid="1784041143360286267">"Төлөв"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"Нэвчилт"</string>
     <string name="night_display_summary_off" msgid="1792750041697946539">"Унтраасан / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_off_auto_mode_never (3583590137322963513) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_custom (6365668239253173208) -->
-    <skip />
-    <!-- no translation found for night_display_summary_off_auto_mode_twilight (3596291693781757392) -->
-    <skip />
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Огт автоматаар асахгүй"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"<xliff:g id="ID_1">%1$s</xliff:g>-д автоматаар асна"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Нар жаргахад автоматаар асна"</string>
     <string name="night_display_summary_on" msgid="1355713529996456744">"Асаалттай / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <!-- no translation found for night_display_summary_on_auto_mode_never (9117830821363119835) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_custom (5510753572245577263) -->
-    <skip />
-    <!-- no translation found for night_display_summary_on_auto_mode_twilight (852270120144683507) -->
-    <skip />
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Огт автоматаар унтрахгүй"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"<xliff:g id="ID_1">%1$s</xliff:g>-д автоматаар унтарна"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Нар мандахад автоматаар унтарна"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Идэвхгүй"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Дэлгэц унтарна"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"Идвэхгүй <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> болсны дараа"</string>
@@ -1112,19 +1061,14 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Тохиргоо"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автомат гэрэлтүүлэг"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Сэрээхийн тулд өргөх"</string>
-    <!-- no translation found for ambient_display_screen_title (4252755516328775766) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_always_on (7974004969481877214) -->
-    <skip />
-    <!-- no translation found for ambient_display_screen_summary_notifications (1449570742600868654) -->
-    <skip />
-    <!-- no translation found for ambient_display_category_triggers (4359289754456268573) -->
-    <skip />
-    <!-- no translation found for doze_title (2375510714460456687) -->
-    <skip />
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Идэвхгүй дэлгэц"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Байнга асаалттай / Батерейны сайжруулсан ашиглалт"</string>
+    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Шинэ мэдэгдэл"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Хэзээ харуулах вэ"</string>
+    <string name="doze_title" msgid="2375510714460456687">"Шинэ мэдэгдэл"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Дэлгэцийг мэдэгдэл авсан үедээ сэрээх"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Байнга асаалттай"</string>
-    <string name="doze_always_on_summary" msgid="1254238982577776475">"Цаг, мэдэгдлийн дүрс тэмдэг, бусад мэдээллийг харуулах"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Цаг, мэдэгдлийн дүрс тэмдэг болон бусад мэдээлэл харуулна уу. Батерейны сайжруулсан ашиглалт."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Фонтын хэмжээ"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Текстийг том эсвэл жижиг болгох"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM картын түгжээний тохиргоо"</string>
@@ -1396,10 +1340,12 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Дотоод сангийн бүх өгөгдлийг шинэчлэх болно"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Энэ таны таблетын "<b>"дотоод сангаас"</b>"таны \n\n"<li>"Google акаунт"</li>\n<li>"Системийн болон апп өгөгдөл болон тохиргоо"</li>\n<li>"Татаж авсан апп-уудыг"</li>" оруулан бүх өгөгдлийг устгах болно"</string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Энэ таны утасны "<b>"дотоод сангаас"</b>"таны \n\n"<li>"Google акаунт"</li>\n<li>"Системийн болон апп өгөгдөл болон тохиргоо"</li>\n<li>"Татаж авсан апп-уудыг"</li>" оруулан бүх өгөгдлийг устгах болно"</string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Энэ таны утасны "<b>"дотоод сангаас"</b>" таны \n\n"<li>"Google бүртгэл"</li>\n<li>"Системийн болон апп өгөгдөл болон тохиргоо"</li>\n<li>"Татаж авсан аппуудыг"</li>" оруулан бүх өгөгдлийг устгах болно"</string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Та одоогоор дараах акаунтуудаар нэвтэрсэн байна:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Энэ төхөөрөмж дээр өөр хэрэглэгчид байна.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Хөгжим"</li>\n<li>"Зураг"</li>\n<li>"Бусад хэрэглэгчийн өгөгдөл"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM-н оператор компани"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Энэ нь таны мобайл үйлчилгээний төлөвлөгөөг цуцлахгүй."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"Хөгжим, зураг болон бусад хэрэглэгчийн өгөгдлийг цэвэрлэхийн тулд "<b>"USB санг"</b>" арилгах шаардлагатай."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"Хөгжим, зураг болон бусад хэрэглэгчийн өгөгдлийг цэвэрлэхийн тулд "<b>"SD картыг"</b>" арилгах шаардлагатай."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USB санг арилгах"</string>
@@ -1431,20 +1377,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Өгөгдөл хамгаалагчийг асаалттай үед зөөврийн сүлжээний цэгийг ашиглах болон модем болгох боломжгүй"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB модем болгох"</string>
-    <!-- no translation found for usb_tethering_subtext (5991482890033484794) -->
-    <skip />
-    <!-- no translation found for usb_tethering_subtext (5988796139573211318) -->
-    <skip />
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Утасны Интернэт холболтыг USB-р хуваалцах"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Tаблетын Интернэт холболтыг USB-р хуваалцах"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetooth модем болгох"</string>
-    <!-- no translation found for bluetooth_tethering_subtext (4558227863463153412) -->
-    <skip />
-    <!-- no translation found for bluetooth_tethering_subtext (1055197887836203595) -->
-    <skip />
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Таблетын интернэт холболтыг Bluetooth-р хуваалцах"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Утасны интернэт холболтыг Bluetooth-р хуваалцах"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Энэ <xliff:g id="DEVICE_NAME">%1$d</xliff:g>-н интернэт холболтыг Bluetooth-р хуваалцаж байна"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g>-с олон төхөөрөмжид модем болгох боломжгүй."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> модем болгохыг болиулах болно."</string>
-    <!-- no translation found for tethering_footer_info (1308462275952345985) -->
-    <skip />
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Мобайл дата холболтоороо бусад төхөөрөмжид интернэт холболт түгээхийн тулд сүлжээний цэг, модем болгохыг ашиглана уу. Апп ойролцоох төхөөрөмжид агуулга хуваалцахын тулд сүлжээний цэг үүсгэх боломжтой."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Тусламж"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Мобайл сүлжээ"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Мобайл төлбөрийн багц"</string>
@@ -1522,8 +1463,11 @@
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Танд дата холболт байхгүй байна. Энэ мэдээллийг одоо харахын тулд Интернэтэд холбогдсон дурын компьютерээс %s руу очно уу."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Ачаалж байна..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Нууц үгээ сонгоно уу"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Хурууны хээ ашиглахын тулд нууц үг тохируулах"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Өөрийн хээг сонгоно уу"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Хурууны хээ ашиглахын тулд загвар тохируулах"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Өөрийн PIN-г сонгоно уу"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Хурууны хээ ашиглахын тулд ПИН тохируулах"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Нууц үгээ баталгаажуулна уу"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Хээгээ баталгаажуулна уу"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Өөрийн PIN-г баталгаажуулна уу"</string>
@@ -1553,7 +1497,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Тайлах PIN өөрчлөх"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Тайлах хээг зурна уу"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Цэсийг дарж туслам аваарай."</string>
-    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Дуусгаад хуруугаа аваарай"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Дуусаад хуруугаа аваарай"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Хамгийн багадаа <xliff:g id="NUMBER">%d</xliff:g> цэгийг холбоно уу. Дахиж оролдоорой."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Хээ бичигдсэн"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"Баталгаажуулахын тулд хээг дахиад зурна уу"</string>
@@ -1592,12 +1536,9 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Апп тохиргоо"</string>
     <string name="install_applications" msgid="4872012136210802181">"Тодорхойгүй эх үүсвэр"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Бүх апп эх үүсвэрийг зөвшөөрөх"</string>
-    <!-- no translation found for recent_app_category_title (6673071268966003928) -->
-    <skip />
-    <!-- no translation found for see_all_apps_title (1459400183763114135) -->
-    <skip />
-    <!-- no translation found for recent_app_summary (3366446669844932300) -->
-    <skip />
+    <string name="recent_app_category_title" msgid="6673071268966003928">"Саяхан нээсэн апп"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"Бүх <xliff:g id="COUNT">%1$d</xliff:g> аппыг харах"</string>
+    <string name="recent_app_summary" msgid="3366446669844932300">"<xliff:g id="TIME">^1</xliff:g>-н өмнө"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Таны таблет болон хувийн өгөгдөл тодорхойгүй апп суулгасан тохиолдолд гэмтэж болзошгүй. Энэ эх сурвалжаас апп суулгаснаар та тухайн аппыг ашигласнаас үүдэн таны таблетад гэмтэл гарах, эсвэл өгөгдөл устах зэрэг гарсан эрсдлийг хариуцна гэдгээ зөвшөөрч байна."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Таны утас болон хувийн өгөгдөл тодорхойгүй апп суулгасан тохиолдолд гэмтэж болзошгүй. Энэ эх сурвалжаас апп суулгаснаар та тухайн аппыг ашигласнаас үүдэн таны утсанд гэмтэл гарах, эсвэл өгөгдөл устах зэрэг гарсан эрсдлийг хариуцна гэдгээ зөвшөөрч байна."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Дэлгэрэнгүй тохиргоо"</string>
@@ -1646,7 +1587,7 @@
     <string name="default_emergency_app" msgid="1951760659640369980">"Яаралтай тусламжийн апп"</string>
     <string name="reset_app_preferences" msgid="1321050641018356925">"Апп тохируулгыг дахин шинэчлэх"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Апп тохируулгыг дахин шинэчлэх үү?"</string>
-    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Энэ нь дараах бүх тохиргоог шинэчлэх болно:\n\n "<li>"Идэвхгүй апп-ууд"</li>\n" "<li>"Идэвхгүй апп мэдэгдлүүд"</li>\n" "<li>"Үйлдлүүдийн үндсэн аппликешнүүд"</li>\n" "<li>"Аппуудын далд дата хязгаарлалтууд"</li>\n" "<li>"Ямар нэг зөвшөөрлын хязгаарлалтууд"</li>\n\n" Та ямаг нэг апп датаг алдахгүй."</string>
+    <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Энэ нь дараах бүх тохиргоог шинэчлэх болно:\n\n "<li>"Идэвхгүй аппууд"</li>\n" "<li>"Идэвхгүй апп мэдэгдлүүд"</li>\n" "<li>"Үйлдлүүдийн үндсэн аппликейшнүүд"</li>\n" "<li>"Аппуудын далд дата хязгаарлалтууд"</li>\n" "<li>"Ямар нэг зөвшөөрлийн хязгаарлалтууд"</li>\n\n" Та ямар нэг апп дата алдахгүй."</string>
     <string name="reset_app_preferences_button" msgid="2559089511841281242">"Апп-г дахин шинэчлэх"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Эзэлсэн зайг удирдах"</string>
     <string name="filter" msgid="2018011724373033887">"Шүүлтүүр"</string>
@@ -1657,7 +1598,6 @@
     <string name="filter_apps_running" msgid="7767071454371350486">"Ажиллаж байна"</string>
     <string name="filter_apps_onsdcard" product="nosdcard" msgid="4843063154701023349">"USB сан"</string>
     <string name="filter_apps_onsdcard" product="default" msgid="1477351142334784771">"SD карт дээр"</string>
-    <string name="disabled" msgid="9206776641295849915">"Идэвхгүйжүүлсэн"</string>
     <string name="not_installed" msgid="2797554494953450291">"Энэ хэрэглэгчид зориулан суулгаагүй байна"</string>
     <string name="installed" msgid="3070865169422600098">"Суулгасан"</string>
     <string name="no_applications" msgid="7336588977497084921">"Апп байхгүй."</string>
@@ -1767,8 +1707,7 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Системийн үйлчилгээг зогсоох уу?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Хэрэв та энэ үйлчилгээг зогсоовол таблетаа унтраагаад асаахаас нааш таны таблетын зарим функцууд зөв ажиллахаа больж магадгүй."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Хэрэв та энэ үйлчилгээг зогсоовол утсаа унтраагаад асаахаас нааш таны утасны зарим функцууд зөв ажиллахаа больж магадгүй."</string>
-    <!-- no translation found for language_input_gesture_title (8749227808244881255) -->
-    <skip />
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"Хэл, оролт, зангаа"</string>
     <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
@@ -1870,6 +1809,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Дэлгэц уншигч, дэлгэц, харилцан үйлдлийн хяналт"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Харааны тохиргоо"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Та энэ төхөөрөмжийг өөрийнхөө шаардлагад нийцүүлэн тохируулах боломжтой. Эдгээр сонголтуудыг дараа нь Тохиргоо хэсэгт өөрчлөх боломжтой."</string>
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Фонтын хэмжээг ихэсгэх"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Дэлгэц уншигч"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Аудио &amp; дэлгэцийн текст"</string>
     <string name="display_category_title" msgid="685461049938269166">"Дэлгэц"</string>
@@ -2056,46 +1996,29 @@
     <string name="details_subtitle" msgid="32593908269911734">"Ашиглалтын мэдээлэл"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Цэнэг ашиглалтыг тохируулах"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Агуулагдсан багцууд"</string>
-    <!-- no translation found for battery_abnormal_details_title (5469019021857291216) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakelock_summary (4326186999058828831) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_wakeup_alarm_summary (644657277875785240) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_location_summary (6552797246798806002) -->
-    <skip />
-    <!-- no translation found for battery_abnormal_apps_summary (792553273248686972) -->
-    <skip />
-    <!-- no translation found for dialog_stop_title (6395127715596746479) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9149534230295983971) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (5702924180465982412) -->
-    <skip />
-    <!-- no translation found for dialog_stop_message (9201053069493107713) -->
-    <skip />
-    <!-- no translation found for dialog_stop_ok (2319777211264004900) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_title (1525936543485084879) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (5539009263025812279) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (4001747292234087612) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_message (585341224642457664) -->
-    <skip />
-    <!-- no translation found for dialog_background_check_ok (412876934682899659) -->
-    <skip />
-    <!-- no translation found for dialog_location_title (5888917530725874727) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7684240588903005427) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (7439311770795993356) -->
-    <skip />
-    <!-- no translation found for dialog_location_message (6285773079775018012) -->
-    <skip />
-    <!-- no translation found for dialog_location_ok (4572391197601313986) -->
-    <skip />
+    <string name="battery_abnormal_details_title" msgid="5469019021857291216">"Батерей дуусгаж буй апп"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"Төхөөрөмжийг идэвхтэй байлгаж байна"</string>
+    <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Төхөөрөмжийг цаана сэрээж байна"</string>
+    <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Байршлыг тогтмол хүсэж байна"</string>
+    <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> апп буруу ажиллаж байна"</string>
+    <string name="dialog_stop_title" msgid="6395127715596746479">"Аппыг зогсоох уу?"</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g> таны утсыг асаалттай байлгаж байгаа тул таны утас батерейг хэвийн түвшинд байлгах боломжгүй байна. \n\nЭнэ асуудлыг шийдвэрлэхийн тулд та аппыг зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"<xliff:g id="APP">%1$s</xliff:g> таны таблетыг асаалттай байлгаж байгаа тул таны таблет батерейг хэвийн түвшинд байлгах боломжгүй байна. \n\nЭнэ асуудлыг шийдвэрлэхийн тулд та аппыг зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"<xliff:g id="APP">%1$s</xliff:g> таны төхөөрөмжийг асаалттай байлгаж байгаа тул таны төхөөрөмж батерейг хэвийн түвшинд байлгах боломжгүй байна. \n\nЭнэ асуудлыг шийдвэрлэхийн тулд та аппыг зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"<xliff:g id="APP_0">%1$s</xliff:g> таны утсг тогтмол асааж байгаа тул таны утас батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд та <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"<xliff:g id="APP_0">%1$s</xliff:g> таны таблетыг тогтмол асааж байгаа тул таны таблет батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд та <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"<xliff:g id="APP_0">%1$s</xliff:g> таны төхөөрөмжийг тогтмол асааж байгаа тул таны төхөөрөмж батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд та <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоох боломжтой.\n\nАсуудал үргэлжилсээр байвал та батерейны хэрэглээг сайжруулахын тулд энэ аппыг устгаж болно."</string>
+    <string name="dialog_stop_ok" msgid="2319777211264004900">"Аппыг зогсоох"</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"Цаана ашиглалтыг унтрааж, аппыг зогсоох уу?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"<xliff:g id="APP_0">%1$s</xliff:g> таны утсыг тогтмол сэрээж байгаа тул таны утас батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nТа энэ асуудлыг шийдвэрлэснээр <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоож цаана ажиллахаас сэргийлнэ."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"<xliff:g id="APP_0">%1$s</xliff:g> таны таблетыг тогтмол сэрээж байгаа тул таны таблет батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nТа энэ асуудлыг шийдвэрлэснээр <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоож цаана ажиллахаас сэргийлнэ."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"<xliff:g id="APP_0">%1$s</xliff:g> таны төхөөрөмжийг тогтмол сэрээж байгаа тул таны төхөөрөмж батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nТа энэ асуудлыг шийдвэрлэснээр <xliff:g id="APP_1">%1$s</xliff:g>-г зогсоож үүнийг цаана ажиллахаас сэргийлнэ."</string>
+    <string name="dialog_background_check_ok" msgid="412876934682899659">"Унтраах"</string>
+    <string name="dialog_location_title" msgid="5888917530725874727">"Байршлыг унтраах уу?"</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"<xliff:g id="APP">%1$s</xliff:g> таныг энэ аппыг ашиглаагүй үед таны байршлын мэдээллийг тогтмол шаардаж байгаа тул таны утас батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд энэ аппын байршлыг унтраах боломжтой."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"<xliff:g id="APP">%1$s</xliff:g> таныг энэ аппыг ашиглаагүй үед таны байршлын мэдээллийг тогтмол шаардаж байгаа тул таны таблет батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд энэ аппын байршлыг унтраах боломжтой."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"<xliff:g id="APP">%1$s</xliff:g> таныг энэ аппыг ашиглаагүй үед таны байршлын мэдээллийг тогтмол шаардаж байгаа тул таны төхөөрөмж батерейг хэвийн түвшинд байлгах боломжгүй байна.\n\nЭнэ асуудлыг шийдвэрлэхийн тулд энэ аппын байршлыг унтраах боломжтой."</string>
+    <string name="dialog_location_ok" msgid="4572391197601313986">"Унтраах"</string>
     <string name="power_screen" msgid="3023346080675904613">"Дэлгэц"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Гар чийдэн"</string>
     <string name="power_camera" msgid="4976286950934622605">"Камер"</string>
@@ -2110,8 +2033,7 @@
     <string name="power_apps" msgid="2043554781293951327">"Апп"</string>
     <string name="power_service" msgid="1599661212370831780">"Үйлчилгээ"</string>
     <string name="power_system" msgid="8290455327965307383">"Систем"</string>
-    <!-- no translation found for power_user (3706143225319881667) -->
-    <skip />
+    <string name="power_user" msgid="3706143225319881667">"Бусад хэрэглэгч"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU нийт"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU ил"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Сэрүүн байлгах"</string>
@@ -2163,14 +2085,13 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Хэтрүүлэн тооцсон цахилгаан ашиглалт"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"<xliff:g id="TIME">^1</xliff:g>-д ашигласан"</string>
-    <!-- no translation found for battery_active_for (2964359540508103032) -->
-    <skip />
+    <string name="battery_active_for" msgid="2964359540508103032">"<xliff:g id="TIME">^1</xliff:g>-н хугацаанд идэвхтэй"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"Дэлгэц ашиглалт <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g> <xliff:g id="PERCENT">%1$s</xliff:g>-г ашигласан"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"Бүх батерейны <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Сүүлд бүрэн цэнэглэснээс хойших ашиглалтын мэдээлэл"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Сүүлийн бүрэн цэнэглэлт"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"Батерейны хугацааг зөвхөн таамагласан бөгөөд ашиглалтаас шалтгаалан өөрчлөгдөж болно"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"Батерейн ашиглалтын хэмжээг барагцаалах бөгөөд ашиглалтаас хамааран өөрчлөгдөж болно"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"Идэвхтэй ашиглалтын үед"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"Цаана байх үед"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Батерей ашиглалт"</string>
@@ -2496,7 +2417,7 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Таны вэб дээр өөрийн бүртгэлд оруулсан бүх өөрчлөлт таны таблет руу автоматаар хуулагдах болно.\n\nЗарим бүртгэл нь таны таблет дээр оруулсан аливаа өөрчлөлтийг мөн автоматаар вэб рүү хуулж болно. Google бүртгэл ийм маягаар ажилладаг."</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Таны вэб дээрээс бүртгэлдаа оруулсан бүх өөрчлөлт автоматаар таны утсанд хуулагдах болно.\n\nЗарим бүртгэл нь таны утсан дээрээс оруулсан өөрчлөлтийг вэб рүү автоматаар хуулж болно. Google бүртгэл ингэж ажилладаг."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Автоматаар синк хийх өгөгдлийг унтраах уу?"</string>
-    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Энэ нь дата болон зайны цэнэг ашиглалтыг хэмнэх боловч та сүүлийн үеийн мэдээллийг цуглуулахын тулд бүртгэл бүрийг гарааг синк хийх шаардлагатай болно. Мөн шинэчлэлт хийгдсэн үед танд мэдэгдэл ирэхгүй."</string>
+    <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"Энэ нь дата болон зайны цэнэг ашиглалтыг хэмнэх боловч та сүүлийн үеийн мэдээллийг цуглуулахын тулд бүртгэл бүрийг гараар синк хийх шаардлагатай болно. Мөн шинэчлэлт хийгдсэн үед танд мэдэгдэл ирэхгүй."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Ашиглалтын циклийг шинэчлэх огноо"</string>
     <string name="data_usage_cycle_editor_subtitle" msgid="5512903797979928416">"Сар бүрийн өдөр::"</string>
     <string name="data_usage_cycle_editor_positive" msgid="8821760330497941117">"Тохируулах"</string>
@@ -2724,7 +2645,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"PIN өөрчлөх"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Мэдэгдлүүдийг харуулах"</string>
     <string name="help_label" msgid="6886837949306318591">"Тусламж &amp; санал хүсэлт"</string>
-    <string name="support_summary" msgid="8276116616493882830">"Тусламжийн нийтлэл, утас, чатны дэмжлэг"</string>
+    <string name="support_summary" msgid="2705726826263742491">"Тусламжийн нийтлэл, утас &amp; чат, эхлүүлэх"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Контентын бүртгэл"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Зургийн ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Ноцтой аюул занал"</string>
@@ -2826,8 +2747,8 @@
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Өгөгдмөл апп"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Хэл, цаг, нөөцлөх, шинэчлэлт"</string>
     <string name="search_results_title" msgid="1796252422574886932">"Тохиргоо"</string>
-    <string name="search_menu" msgid="6283419262313758339">"Хайлтын тохиргоо"</string>
-    <string name="query_hint_text" msgid="3350700807437473939">"Хайлтын тохиргоо"</string>
+    <string name="search_menu" msgid="6283419262313758339">"Тохиргоог хайх"</string>
+    <string name="query_hint_text" msgid="3350700807437473939">"Тохиргоог хайх"</string>
     <string name="keywords_wifi" msgid="1395786161993828719">"wifi, wi-fi, сүлжээний холболт"</string>
     <string name="keywords_more_default_sms_app" msgid="2265154063220360784">"текст зурвас, текст бичих, зурвас, зурвас бичих"</string>
     <string name="keywords_more_mobile_networks" msgid="8995946622054642367">"үүрэн холбоо, үүрэн холбооны оператор, утасгүй интернэт, дата, 4g, 3g, 2g, lte"</string>
@@ -2869,15 +2790,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"түгжээг тайлахын тулд гулсуулах, нууц үг,  загвар, PIN"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"ажлын сорилт, ажил, профайл"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"ажлын профайл, удирдсан профайл, нэгтгэх, нэгдэл, ажил, профайл"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"зангаа"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"зангаа"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"төлөх, товших, төлбөр"</string>
     <string name="keywords_backup" msgid="470070289135403022">"нөөцлөлт, нөөцлөх"</string>
-    <!-- no translation found for keywords_squeeze_to_launch_gesture (4459283333825902485) -->
-    <skip />
-    <!-- no translation found for keywords_wake_squeeze_gesture (6923058534235267845) -->
-    <skip />
-    <!-- no translation found for keywords_alarm_silence_gesture (8507935972184597252) -->
-    <skip />
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"зангаа"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC Tагь тохируулах"</string>
     <string name="write_tag" msgid="8571858602896222537">"Бичих"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Бичихийн тулд тагь дээр дарах ..."</string>
@@ -2952,7 +2868,7 @@
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Түгжигдсэн дэлгэц дээр"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Бүх мэдэгдлийн агуулгыг харуулах"</string>
     <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Нууц сэдэвтэй мэдэгдлийн агуулгыг нуух"</string>
-    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Мэдэгдлийг харуулахгүй"</string>
+    <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Огт мэдэгдэл харуулахгүй"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Таны төхөөрөмж түгжээтэй үед мэдэгдлийг хэрхэн харуулах вэ?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Мэдэгдэл"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Ажлын мэдэгдлийн бүх агуулгыг харуулах"</string>
@@ -2960,7 +2876,8 @@
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Профайлын мэдэгдлийг огт үзүүлэхгүй"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Таны төхөөрөмж түгжээтэй үед та профайлын мэдэгдлээ хэрхэн харахыг хүсэж байна вэ?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Профайлын мэдэгдэл"</string>
-    <string name="app_notifications_title" msgid="139788604658984593">"Мэдэгдэл"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"Мэдэгдэл"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Aпп мэдэгдлүүд"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Мэдэгдлийн ангилал"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Ач холбогдол"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Апп-р шийдүүлнэ үү"</string>
@@ -2975,6 +2892,10 @@
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Яаралтай"</string>
     <string name="allow_sound" msgid="1820188704793497324">"Дууг зөвшөөрөх"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Эдгээр мэдэгдлүүдийг одоогийн дэлгэцэд харахдаа дуугүй, чичиргээгүй болон яаралтай гаргаж ирэхгүй болгож тохируулна уу."</string>
+    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Бага ач холбогдолтой"</string>
+    <string name="notification_channel_summary_low" msgid="322317684244981244">"Дунд зэргийн ач холбогдолтой"</string>
+    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Өндөр ач холбогдолтой"</string>
+    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Нэн яаралтай ач холбогдолтой"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Мэдэгдлийн туслагч"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Мэдэгдлийн хандалт"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Ажлын профайлын мэдэгдэлд хандахыг блоклосон байна"</string>
@@ -2994,12 +2915,12 @@
     <string name="display_vr_pref_title" msgid="8104485269504335481">"Төхөөрөмж VR горимын үед"</string>
     <string name="display_vr_pref_low_persistence" msgid="5707494209944718537">"Бүдгэрлийг бууруулах (санал болгож буй)"</string>
     <string name="display_vr_pref_off" msgid="2190091757123260989">"Анивчилтыг бууруулах"</string>
-    <string name="picture_in_picture_title" msgid="5824849294270017113">"Зураг доторх зураг"</string>
-    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Зураг доторх Зургийг дэмждэг суулгасан апп алга"</string>
+    <string name="picture_in_picture_title" msgid="5824849294270017113">"Дэлгэцэн доторх дэлгэц"</string>
+    <string name="picture_in_picture_empty_text" msgid="685224245260197779">"Дэлгэцэн доторх дэлгэцийг дэмждэг суулгасан апп алга"</string>
     <string name="picture_in_picture_keywords" msgid="8361318686701764690">"pip зураг дотор"</string>
-    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Зураг доторх зураг"</string>
-    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Зураг доторх зургийг зөвшөөрөх"</string>
-    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Апп нээлттэй эсвэл таныг энэ апп-с гарсны дараа (жишээ нь видео үргэлжлүүлэн үзэхийн тулд) зураг доторх зургийн цонх үүсгэхийг энэ аппад зөвшөөрнө үү. Энэ цонх нь таны ашиглаж буй бусад аппын дээр харагдана."</string>
+    <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Дэлгэцэн доторх дэлгэц"</string>
+    <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Дэлгэцэн доторх дэлгэцийг зөвшөөрөх"</string>
+    <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Апп нээлттэй эсвэл таныг энэ апп-с гарсны дараа (жишээ нь видео үргэлжлүүлэн үзэхийн тулд) дэлгэцэн доторх дэлгэцийн цонх үүсгэхийг энэ аппад зөвшөөрнө үү. Энэ цонх нь таны ашиглаж буй бусад апп дээр харагдана."</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"\"Бүү саад бол\" хандалт"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Суулгасан апп-аас \"Бүү саад бол\" хандалтыг хүссэн апп байхгүй байна."</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Апп-уудыг ачаалж байна..."</string>
@@ -3070,7 +2991,7 @@
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"Байхгүй"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"Өдөр бүр"</string>
     <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"Сэрүүлэг дуусах цагийг хүчингүй болгоно"</string>
-    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Цагийн төгсгөлд эсвэл дараагийн сэрүүлгийн аль эхнийхд нь зогсох"</string>
+    <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"Цагийн төгсгөлд эсвэл дараагийн сэрүүлгийн аль эхнийхэд нь зогсох"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">", "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g> - <xliff:g id="END">%2$s</xliff:g>"</string>
     <string name="summary_range_verbal_combination" msgid="8467306662961568656">"<xliff:g id="START">%1$s</xliff:g> <xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3083,6 +3004,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Зөвхөн одтой харилцагчаас"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Байхгүй"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Сэрүүлэг"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Сэрүүлгийг тогтмол чухалчилж дуугаргана"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Сануулагч"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Үйл явдал"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Бүх дуудлага"</string>
@@ -3260,7 +3182,10 @@
       <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> апп хэвийн бус ажиллаж байна</item>
       <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> хэвийн бус ажиллаж байна</item>
     </plurals>
-    <!-- no translation found for power_high_usage_title (3826660033363082922) -->
+    <plurals name="power_high_usage_title" formatted="false" msgid="3826660033363082922">
+      <item quantity="other">Апп батерейг дуусгаж байна</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> батерейг дуусгаж байна</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Оновчлоогүй"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Оновчлоогүй"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Тэжээлийн хэрэглээг оновчилж байна"</string>
@@ -3269,7 +3194,7 @@
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Аппыг цаана тогтмол ажиллуулахыг зөвшөөрөх үү?"</string>
     <string name="high_power_prompt_body" msgid="1031422980602565049">"<xliff:g id="APP_NAME">%1$s</xliff:g>-г цаана ажиллуулахаар зөвшөөрсөн тохиолдолд батерейны түвшинг багасгах болно. \n\nТа үүнийг дараа нь Тохиргоо, Апп, мэдэгдэл хэсэгт өөрчлөх боломжтой."</string>
     <string name="battery_summary" msgid="8044042095190688654">"Сүүлд бүрэн цэнэглэснээс хойш <xliff:g id="PERCENTAGE">%1$s</xliff:g>-г ашигласан"</string>
-    <string name="battery_power_management" msgid="5571519699679107523">"Хүчний менежмент"</string>
+    <string name="battery_power_management" msgid="5571519699679107523">"Цэнэгний менежмент"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Сүүлийн бүрэн цэнэглэлтээс хойш тэжээл огт ашиглаагүй"</string>
     <string name="app_notification_preferences" msgid="1599319335092722613">"Апп-ийн тохиргоо"</string>
     <string name="system_ui_settings" msgid="579824306467081123">"SystemUI Tuner харуулах"</string>
@@ -3355,7 +3280,6 @@
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Зөвшөөрөлтэй Апп"</string>
     <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Зөвшөөрсөн"</string>
     <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"Зөвшөөрөөгүй"</string>
-    <string name="install_other_apps" msgid="6986686991775883017">"Тодорхойгүй апп суулгах"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"тодорхойгүй эх сурвалжаас апп суулгах"</string>
     <string name="write_settings" msgid="4797457275727195681">"Системийн тохиргоо өөрчлөх"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"системийн тохиргоо өөрчлөхийг бичих"</string>
@@ -3367,6 +3291,8 @@
     <string name="write_settings_preference" msgid="3407383041273067448">"Апп-ын системийн тохиргоо өөрчлөх зөвшөөрөл"</string>
     <string name="permit_write_settings" msgid="6393779336656870080">"Системийн тохиргоо өөрчлөхийг зөвшөөрөх"</string>
     <string name="write_settings_description" msgid="6868293938839954623">"Энэ нь апп-д системийн тохиргоог өөрчлөхийг зөвшөөрдөг."</string>
+    <string name="write_settings_on" msgid="8230580416068832239">"Тийм"</string>
+    <string name="write_settings_off" msgid="5156104383386336233">"Үгүй"</string>
     <string name="external_source_switch_title" msgid="3621381992793251070">"Энэ эх сурвалжаас зөвшөөрөх"</string>
     <string name="camera_gesture_title" msgid="1075838577642393011">"Камер нээхийн тулд бугуйгаа 2 удаа эргүүлэх"</string>
     <string name="camera_gesture_desc" msgid="1831390075255870960">"Бугуйгаа 2 удаа эргүүлэн камерын аппыг нээгээрэй"</string>
@@ -3443,6 +3369,15 @@
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Дэлгэц улбар шар туяатай байна. Энэ нь таныг унтахад тусална."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Санал зөвлөмж"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <string name="suggestions_more_title" msgid="8223690393059519879">"Бусад +<xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <plurals name="suggestions_collapsed_title" formatted="false" msgid="1857433444865249823">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> зөвлөмж</item>
+      <item quantity="one">1 зөвлөмж</item>
+    </plurals>
+    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="7680263825371165461">
+      <item quantity="other">+<xliff:g id="COUNT">%1$d</xliff:g> зөвлөмж</item>
+      <item quantity="one">+1 зөвлөмж</item>
+    </plurals>
     <string name="suggestion_remove" msgid="904627293892092439">"Арилгах"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Хүйтэн өнгөний температур"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Илүү хүйтэн дэлгэцийн өнгө ашиглах"</string>
@@ -3467,7 +3402,7 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> хязгаарлалт</item>
       <item quantity="one">1 хязгаарлалт</item>
     </plurals>
-    <string name="operator_warning" msgid="1862988028996859195">"Оператор компанийн дата тооцоололт нь төхөөрөмжийн тооцоололтоос өөр байна"</string>
+    <string name="operator_warning" msgid="1862988028996859195">"Оператор компанийн дата тооцоололт нь төхөөрөмжийн тооцоололтоос өөр байж болно"</string>
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ашигласан"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Өгөгдлийн сануулгыг тохируулах"</string>
     <string name="data_warning" msgid="209133958008062117">"Дата хэрэглээний сануулга"</string>
@@ -3477,10 +3412,10 @@
     <string name="configure" msgid="1029654422228677273">"Тохируулах"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"Бусад апп-г хэрэглээнд оруулсан"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
-      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> апп нь өгөгдөл хамгаалагч асаалттай үед хязгаарлагдаагүй өгөгдлийг ашиглах боломжтой</item>
-      <item quantity="one">1 апп нь өгөгдөл хамгаалагчийг асаалттай үед хязгаарлагдаагүй өгөгдлийг ашиглах боломжтой</item>
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> апп нь дата хэмнэгчийг асаалттай үед хязгааргүй дата ашиглах боломжтой</item>
+      <item quantity="one">1 апп нь дата хэмнэгчийг асаалттай үед хязгааргүй дата ашиглах боломжтой</item>
     </plurals>
-    <string name="data_saver_title" msgid="398458827917495765">"Өгөгдөл хамгаалагч"</string>
+    <string name="data_saver_title" msgid="398458827917495765">"Дата хэмнэгч"</string>
     <string name="unrestricted_data_saver" msgid="952796077540228711">"Хязгаарлалтгүй дата"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Арын дата унтарсан байна"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Идэвхтэй"</string>
@@ -3545,11 +3480,11 @@
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Дэлгэцийн түгжээний мэдэгдлийг хянах"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Харуулах эсвэл нуух мэдэгдлийн агуулга"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Бүгд"</string>
-    <string name="page_tab_title_support" msgid="6330657582897417458">"Дэмжлэг"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"Дэмжлэг &amp; зөвлөгөө"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Хамгийн бага өргөн"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Суулгасан апп гуравдагч талын SMS хандалтыг шаардаагүй байна"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"Гуравдагч талын SMS нь таны оператор компанийн төлбөр дээр нэмэгдэж болно. Хэрэв та энэ апп-д зөвшөөрлийг идэвхжүүлбэл энэ апп-р гуравдагч тал SMS илгээх боломжтой болно."</string>
-    <string name="premium_sms_access" msgid="4660047004791638305">"Гуравдагч талын SMS хандалт"</string>
+    <string name="premium_sms_access" msgid="4660047004791638305">"Премиум SMS хандалт"</string>
     <string name="bluetooth_disabled" msgid="2456198532288640046">"Бусад төхөөрөмжид боломжгүй"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g>-д холбогдсон"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Олон төхөөрөмжтэй холбогдсон"</string>
@@ -3610,58 +3545,38 @@
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Автомат"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Гар ажиллагаатай"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Одоо багтаамжаа нэмэгдүүлнэ үү"</string>
-    <string name="gesture_preference_title" msgid="4033736910560673690">"Зангааны товчлол"</string>
+    <string name="gesture_preference_title" msgid="5280023307132819052">"Зангаа"</string>
     <string name="gesture_preference_summary" product="default" msgid="8627850388011956901">"Утсаа хянах шуурхай дохио"</string>
     <string name="gesture_preference_summary" product="tablet" msgid="4717535378272065510">"Таблетаа хянах шуурхай зангаа"</string>
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Төхөөрөмжөө хянах шуурхай зангаа"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Камер руу очих"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"Камерыг хурдан нээхийн тулд асаах товчлуурыг хоёр удаа дарна уу. Дурын дэлгэцэд ажиллана."</string>
-    <!-- no translation found for double_tap_power_for_camera_suggestion_title (6500405261202883589) -->
-    <skip />
-    <!-- no translation found for double_tap_power_for_camera_suggestion_summary (7010153544554016996) -->
-    <skip />
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Камерыг хурдан нээх"</string>
+    <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Камерыг нээхийн тулд асаах товчийг хоёр удаа дарна уу"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Камер солих"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
-    <!-- no translation found for double_twist_for_camera_suggestion_title (4689410222517954869) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (447403641027147153) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (1724660290703318739) -->
-    <skip />
-    <!-- no translation found for double_twist_for_camera_suggestion_summary (5980398380988039489) -->
-    <skip />
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"Селфиг илүү хурдан авах"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"Селфи горимд очихын тулд утсыг хоёр удаа эргүүлнэ үү"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"Селфи горимд очихын тулд таблетыг хоёр удаа эргүүлнэ үү"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"Селфи горимд очихын тулд төхөөрөмжийг хоёр удаа эргүүлнэ үү"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Утсаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Таблетаа шалгахын тулд хоёр товшино уу"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Төхөөрөмжийг шалгахын тулд хоёр товшино уу"</string>
-    <!-- no translation found for ambient_display_summary (525662960806416373) -->
-    <skip />
-    <!-- no translation found for ambient_display_suggestion_summary (5987443721392571847) -->
-    <skip />
+    <string name="ambient_display_summary" msgid="525662960806416373">"Цаг, мэдэгдлийн дүрс тэмдэг болон бусад мэдээллийг шалгахын тулд дэлгэцээ хоёр удаа товшино уу."</string>
+    <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Дэлгэц унтраалттай үед мэдэгдэл шалгах"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Утсаа шалгахын тулд өргөнө үү"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Таблетаа шалгахын тулд өргөнө үү"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Төхөөрөмжийг шалгахын тулд өргөнө үү"</string>
-    <!-- no translation found for ambient_display_pickup_summary (4567020486787561873) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (5435283849947236648) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_summary (8256669101643381568) -->
-    <skip />
-    <!-- no translation found for ambient_display_pickup_suggestion_summary (7014700589991761035) -->
-    <skip />
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Цаг, мэдэгдлийн дүрс тэмдэг болон бусад мэдээллийг шалгахын тулд утсаа авна уу."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"Цаг, мэдэгдлийн дүрс тэмдэг болон бусад мэдээллийг шалгахын тулд таблетаа авна уу."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Цаг, мэдэгдлийн дүрс тэмдэг болон бусад мэдээллийг шалгахын тулд төхөөрөмжөө aвна уу."</string>
+    <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Дэлгэц унтраалттай үед мэдэгдэл шалгах"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Мэдэгдэл харах бол хурууны хээгээ шударна уу"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Мэдэгдлээ шалгахын тулд утасныхаа арын хурууны хээ мэдрэгчийг доош шударна уу."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Мэдэгдлээ шалгахын тулд таблетынхаа арын хурууны хээ мэдрэгчийг доош шударна уу."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Мэдэгдлээ шалгахын тулд төхөөрөмжийнхөө арын хурууны хээ мэдрэгчийг доош шударна уу."</string>
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_title (1677291167470357802) -->
-    <skip />
-    <!-- no translation found for fingerprint_swipe_for_notifications_suggestion_summary (127592803294414082) -->
-    <skip />
-    <string name="camera_lift_trigger_title" msgid="2758206307949942951">"Камерыг нээхийн тулд утсаа өргөнө үү"</string>
-    <string name="camera_lift_trigger_summary" msgid="8580625412416846375">"Камерыг автоматаар нээхийн тулд утсаа зураг авах байршилд (хөндлөн эсвэл босоо) өргөнө үү. Таны утас түр амарсан эсвэл түгжээтэй үед ажиллана."</string>
-    <string name="camera_lift_trigger_suggestion_summary" msgid="7209899898244722404">"Утас идэвхгүй эсвэл түгжигдсэн үед зураг авна уу"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Дэмжлэгийн зангаа"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Мэдрэг"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Мэдэгдлийг хурдан харах"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Хурууны хээ мэдрэгчээр доош шударна уу"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Идэвхтэй"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Идэвхгүй"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Үйлдлийн систем ачааллагчийн түгжээг аль хэдийн тайлсан"</string>
@@ -3682,6 +3597,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Ажлын өгөгдлийг автоматаар синк хийх"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Өгөгдлийг автоматаар дахин боловсруулахыг апп-д зөвшөөрөх"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Бүртгэл синк хийх"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"<xliff:g id="ID_2">%2$d</xliff:g>-с <xliff:g id="ID_1">%1$d</xliff:g> зүйлд синк асаалттай"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Бүх зүйлд синк асаалттай"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Бүх зүйлд синкийг унтраасан"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Удирдсан төхөөрөмжийн мэдээлэл"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Таны байгууллагын удирдсан тохиргооны өөрчлөлт"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>-н удирдсан тохиргооны өөрчлөлт"</string>
@@ -3778,8 +3696,9 @@
     <string name="storage_movies_tv" msgid="5498394447562086890">"Кино, ТВ апп"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Оператор компанийн хангалтын мэдээлэл"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Оператор компанийн хангалтыг асаах"</string>
-    <!-- no translation found for new_device_suggestion_title (8346563796032837800) -->
-    <skip />
-    <!-- no translation found for new_device_suggestion_summary (7172709269203435870) -->
-    <skip />
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"Шинэ соргог зүйл юу байна?"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Шилдэг 5 онцлогийг харна уу"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"IMS бүртгэлийн байдал"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Бүртгэсэн"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Бүртгээгүй"</string>
 </resources>
