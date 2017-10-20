@@ -257,6 +257,11 @@
             android:entries="@array/bluetooth_a2dp_codec_ldac_playback_quality_titles"
             android:entryValues="@array/bluetooth_a2dp_codec_ldac_playback_quality_values" />
 
+        <SwitchPreference
+            android:key="dns_tls"
+            android:title="@string/dns_tls"
+            android:summary="@string/dns_tls_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_input_category"
