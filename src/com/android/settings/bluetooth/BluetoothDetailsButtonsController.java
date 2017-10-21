@@ -33,7 +33,7 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private boolean mIsConnected;
 
-    private boolean mButton1Initialized;
+    private boolean mConnectButtonInitialized;
     private ActionButtonPreference mActionButtons;
 
     public BluetoothDetailsButtonsController(Context context, PreferenceFragment fragment,
@@ -51,34 +51,34 @@ public class BluetoothDetailsButtonsController extends BluetoothDetailsControlle
     @Override
     protected void init(PreferenceScreen screen) {
         mActionButtons = ((ActionButtonPreference) screen.findPreference(getPreferenceKey()))
-                .setButton2Text(R.string.forget)
-                .setButton2OnClickListener((view) -> onForgetButtonPressed())
-                .setButton2Positive(false)
-                .setButton2Enabled(true);
+                .setButton1Text(R.string.forget)
+                .setButton1OnClickListener((view) -> onForgetButtonPressed())
+                .setButton1Positive(false)
+                .setButton1Enabled(true);
     }
 
     @Override
     protected void refresh() {
-        mActionButtons.setButton1Enabled(!mCachedDevice.isBusy());
+        mActionButtons.setButton2Enabled(!mCachedDevice.isBusy());
 
         boolean previouslyConnected = mIsConnected;
         mIsConnected = mCachedDevice.isConnected();
         if (mIsConnected) {
-            if (!mButton1Initialized || !previouslyConnected) {
+            if (!mConnectButtonInitialized || !previouslyConnected) {
                 mActionButtons
-                        .setButton1Text(R.string.bluetooth_device_context_disconnect)
-                        .setButton1OnClickListener(view -> mCachedDevice.disconnect())
-                        .setButton1Positive(false);
-                mButton1Initialized = true;
+                        .setButton2Text(R.string.bluetooth_device_context_disconnect)
+                        .setButton2OnClickListener(view -> mCachedDevice.disconnect())
+                        .setButton2Positive(false);
+                mConnectButtonInitialized = true;
             }
         } else {
-            if (!mButton1Initialized || previouslyConnected) {
+            if (!mConnectButtonInitialized || previouslyConnected) {
                 mActionButtons
-                        .setButton1Text(R.string.bluetooth_device_context_connect)
-                        .setButton1OnClickListener(
+                        .setButton2Text(R.string.bluetooth_device_context_connect)
+                        .setButton2OnClickListener(
                                 view -> mCachedDevice.connect(true /* connectAllProfiles */))
-                        .setButton1Positive(true);
-                mButton1Initialized = true;
+                        .setButton2Positive(true);
+                mConnectButtonInitialized = true;
             }
         }
     }

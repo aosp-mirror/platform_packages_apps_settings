@@ -19,6 +19,7 @@ package com.android.settings.search.indexing;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableData;
 import android.provider.SearchIndexableResource;
@@ -307,9 +308,11 @@ public class IndexDataConverter {
                 resourceIndexData.add(headerBuilder.build(mContext));
             }
         } catch (XmlPullParserException e) {
-            throw new RuntimeException("Error parsing PreferenceScreen", e);
+            Log.w(LOG_TAG, "XML Error parsing PreferenceScreen: ", e);
         } catch (IOException e) {
-            throw new RuntimeException("Error parsing PreferenceScreen", e);
+            Log.w(LOG_TAG, "IO Error parsing PreferenceScreen: " , e);
+        } catch (Resources.NotFoundException e ) {
+            Log.w(LOG_TAG, "Resoucre not found error parsing PreferenceScreen: ", e);
         } finally {
             if (parser != null) parser.close();
         }

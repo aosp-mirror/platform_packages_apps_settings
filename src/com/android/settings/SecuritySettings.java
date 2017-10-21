@@ -834,6 +834,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
     private static class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
 
+        // TODO (b/68001777) Refactor indexing to include all XML and block other settings.
+
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {

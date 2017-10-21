@@ -1592,7 +1592,14 @@
         <activity android:name=".fingerprint.FingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollEnrolling" android:exported="false"/>
         <activity android:name=".fingerprint.FingerprintEnrollFinish" android:exported="false"/>
-        <activity android:name=".fingerprint.FingerprintEnrollIntroduction" android:exported="false" />
+        <activity android:name=".fingerprint.FingerprintEnrollIntroduction"
+            android:exported="true"
+            android:theme="@style/GlifTheme.Light">
+            <intent-filter>
+                <action android:name="android.settings.FINGERPRINT_ENROLL" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".fingerprint.SetupFingerprintEnrollFindSensor" android:exported="false"/>
         <activity android:name=".fingerprint.SetupFingerprintEnrollEnrolling" android:exported="false"/>

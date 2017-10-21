@@ -334,6 +334,17 @@ public class IndexDataConverterTest {
         assertThat(nonTitlePref.enabled).isTrue();
     }
 
+    @Test
+    public void testResourceWithoutXml_shouldNotCrash() {
+        final SearchIndexableResource resource = getFakeResource(0);
+        final PreIndexData preIndexData = new PreIndexData();
+        preIndexData.dataToUpdate.add(resource);
+
+        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
+
+        assertThat(indexData).isEmpty();
+    }
+
     private void assertDisplaySetting(IndexData row, String title, String summaryOn,
             String summaryOff, String key) {
         assertThat(row.normalizedTitle).isEqualTo(title);

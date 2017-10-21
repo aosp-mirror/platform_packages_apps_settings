@@ -16,8 +16,15 @@
 
 package com.android.settings.core;
 
+import android.annotation.Nullable;
+import android.annotation.StringRes;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.XmlRes;
+import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
+import android.util.Log;
 
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -32,6 +39,9 @@ import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 public abstract class InstrumentedPreferenceFragment extends ObservablePreferenceFragment
         implements Instrumentable {
 
+    private static final String TAG = "InstrumentedPrefFrag";
+    private static final String FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE =
+            "settings_use_preference_screen_title";
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
     // metrics placeholder value. Only use this for development.
@@ -44,6 +54,17 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory());
         getLifecycle().addObserver(mVisibilityLoggerMixin);
         getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (usePreferenceScreenTitle()) {
+            final int title = getTitle();
+            if (title != -1) {
+                getActivity().setTitle(title);
+            }
+        }
     }
 
     @Override
@@ -62,6 +83,16 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
     }
 
+    @Override
+    public void addPreferencesFromResource(@XmlRes int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+        updateActivityTitleWithScreenTitle(getPreferenceScreen());
+    }
+
+    public static boolean usePreferenceScreenTitle() {
+        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE);
+    }
+
     protected final Context getPrefContext() {
         return getPreferenceManager().getContext();
     }
@@ -69,4 +100,27 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     protected final VisibilityLoggerMixin getVisibilityLogger() {
         return mVisibilityLoggerMixin;
     }
+
+    /**
+     * Return the resource id of the title to be used for the fragment. This is for preference
+     * fragments that do not have an explicit preference screen xml, and hence the title need to be
+     * specified separately. Do not use this method if the title is already specified in the
+     * preference screen.
+     */
+    @StringRes
+    protected int getTitle() {
+        return -1;
+    }
+
+    private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
+        if (usePreferenceScreenTitle() && screen != null) {
+            final CharSequence title = screen.getTitle();
+            if (!TextUtils.isEmpty(title)) {
+                getActivity().setTitle(title);
+            } else {
+                Log.w(TAG, "Screen title missing for fragment " + this.getClass().getName());
+            }
+        }
+    }
+
 }
