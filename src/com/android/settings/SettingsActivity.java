@@ -55,6 +55,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
@@ -209,8 +210,12 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
-                null, 0);
+        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
+            startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, null, null, 0);
+        } else {
+            startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
+                    null, 0);
+        }
         return true;
     }
 
@@ -629,7 +634,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (titleRes < 0) {
             if (titleText != null) {
                 title = titleText.toString();
-            } else {
+            } else if (!InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
                 // There not much we can do in that case
                 title = "";
             }
