@@ -348,7 +348,7 @@ public class InstalledAppDetails extends AppInfoBase
             enabled = false;
             mActionButtons.setButton1Visible(false);
         }
-        mActionButtons.setButton1Text(R.string.uninstall_text);
+        mActionButtons.setButton1Text(R.string.uninstall_text).setButton1Positive(false);
         return enabled;
     }
 
