@@ -17,12 +17,11 @@
 package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
-import static com.android.settings.search.SearchIndexableResources.NO_DATA_RES_ID;
+import static com.android.settings.search.SearchIndexableResources.NO_RES_ID;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
-import android.annotation.DrawableRes;
 import android.annotation.XmlRes;
 import android.database.Cursor;
 import android.provider.SearchIndexableResource;
@@ -48,8 +47,6 @@ public class SearchIndexableResourcesTest {
 
     @XmlRes
     private static final int XML_RES_ID = R.xml.physical_keyboard_settings;
-    @DrawableRes
-    private static final int ICON_RES_ID = R.drawable.ic_settings_language;
 
     Map<String, SearchIndexableResource> sResMapCopy;
 
@@ -72,14 +69,14 @@ public class SearchIndexableResourcesTest {
         assertThat(SearchIndexableResources.getResourceByName("java.lang.String")).isNull();
         final int beforeCount = SearchIndexableResources.values().size();
 
-        SearchIndexableResources.addIndex(java.lang.String.class, XML_RES_ID, ICON_RES_ID);
+        SearchIndexableResources.addIndex(java.lang.String.class, XML_RES_ID);
         final SearchIndexableResource index = SearchIndexableResources
                 .getResourceByName("java.lang.String");
 
         assertThat(index).isNotNull();
         assertThat(index.className).isEqualTo("java.lang.String");
         assertThat(index.xmlResId).isEqualTo(XML_RES_ID);
-        assertThat(index.iconResId).isEqualTo(ICON_RES_ID);
+        assertThat(index.iconResId).isEqualTo(NO_RES_ID);
         final int afterCount = SearchIndexableResources.values().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
     }
@@ -91,14 +88,14 @@ public class SearchIndexableResourcesTest {
 
         assertThat(index).isNotNull();
         assertThat(index.className).isEqualTo(WifiSettings.class.getName());
-        assertThat(index.xmlResId).isEqualTo(NO_DATA_RES_ID);
-        assertThat(index.iconResId).isEqualTo(R.drawable.ic_settings_wireless);
+        assertThat(index.xmlResId).isEqualTo(NO_RES_ID);
+        assertThat(index.iconResId).isEqualTo(NO_RES_ID);
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         SearchIndexableResources.sResMap.clear();
-        SearchIndexableResources.addIndex(FakeIndexProvider.class, 0, 0);
+        SearchIndexableResources.addIndex(FakeIndexProvider.class, 0);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
