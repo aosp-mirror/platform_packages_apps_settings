@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,14 +49,15 @@ public class DatePreferenceControllerTest {
     @Mock
     private AutoTimePreferenceController mAutoTimePreferenceController;
 
-    private Preference mPreference;
+    private RestrictedPreference mPreference;
     private DatePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.ALARM_SERVICE)).thenReturn(mAlarmManager);
-        mPreference = new Preference(ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new RestrictedPreference(ShadowApplication.getInstance().
+                getApplicationContext());
         mController = new DatePreferenceController(mContext, mHost, mAutoTimePreferenceController);
     }
 
@@ -72,6 +74,9 @@ public class DatePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeEnabled_shouldDisablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         when(mAutoTimePreferenceController.isEnabled()).thenReturn(true);
         mController.updateState(mPreference);
 
@@ -80,6 +85,9 @@ public class DatePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeDisabled_shouldEnablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         when(mAutoTimePreferenceController.isEnabled()).thenReturn(false);
         mController.updateState(mPreference);
 

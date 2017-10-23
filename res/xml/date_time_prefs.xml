@@ -29,32 +29,37 @@
             android:summaryOn="@string/date_time_auto_summaryOn"
             android:summaryOff="@string/date_time_auto_summaryOff"
             settings:useAdditionalSummary="true"
-            settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+            settings:restrictedSwitchSummary="@string/enabled_by_admin"
+            settings:userRestriction="no_config_date_time" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="date"
             android:title="@string/date_time_set_date"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            settings:userRestriction="no_config_date_time" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:key="time"
             android:title="@string/date_time_set_time"
-            android:summary="@string/summary_placeholder" />
+            android:summary="@string/summary_placeholder"
+            settings:userRestriction="no_config_date_time" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:key="time_zone_preference_category">
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_zone"
             android:title="@string/zone_auto"
             android:summaryOn="@string/zone_auto_summaryOn"
-            android:summaryOff="@string/zone_auto_summaryOff" />
+            android:summaryOff="@string/zone_auto_summaryOff"
+            settings:userRestriction="no_config_date_time" />
 
-        <Preference
+        <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.datetime.ZonePicker"
             android:key="timezone"
             android:title="@string/date_time_set_timezone"
-            android:summary="GMT-8:00" />
+            android:summary="GMT-8:00"
+            settings:userRestriction="no_config_date_time" />
     </PreferenceCategory>
 
     <PreferenceCategory
