@@ -27,6 +27,7 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -40,6 +41,8 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -47,6 +50,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.location.RecentLocationApps;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -77,7 +81,7 @@ import java.util.List;
  * implementation.
  */
 public class LocationSettings extends LocationSettingsBase
-        implements SwitchBar.OnSwitchChangeListener {
+        implements SwitchBar.OnSwitchChangeListener, Indexable {
 
     private static final String TAG = "LocationSettings";
 
@@ -455,4 +459,18 @@ public class LocationSettings extends LocationSettingsBase
             return new SummaryProvider(activity, summaryLoader);
         }
     };
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.location_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }
