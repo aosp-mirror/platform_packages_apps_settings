@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -250,7 +251,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     boolean shouldHideCategory(PowerUsageData powerUsageData) {
         return powerUsageData.usageType == UsageType.UNACCOUNTED
                 || powerUsageData.usageType == UsageType.OVERCOUNTED
-                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1)
+                || (powerUsageData.usageType == UsageType.USER && isSingleNormalUser())
                 || (powerUsageData.usageType == UsageType.CELL
                 && !DataUsageUtils.hasMobileData(getContext()));
     }
@@ -371,6 +372,18 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     @VisibleForTesting
     void setBatteryUtils(BatteryUtils batteryUtils) {
         mBatteryUtils = batteryUtils;
+    }
+
+    @VisibleForTesting
+    boolean isSingleNormalUser() {
+        int count = 0;
+        for (UserInfo userInfo : mUserManager.getUsers()) {
+            if (userInfo.isEnabled() && !userInfo.isManagedProfile()) {
+                count++;
+            }
+        }
+
+        return count == 1;
     }
 
     /**
