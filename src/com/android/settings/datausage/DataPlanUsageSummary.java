@@ -27,7 +27,6 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -44,14 +43,12 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
+public class DataPlanUsageSummary extends DataUsageBase {
 
     public static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
 
@@ -353,50 +350,5 @@ public class DataPlanUsageSummary extends DataUsageBase implements Indexable {
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = SummaryProvider::new;
-
-    /**
-     * For search
-     */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    List<SearchIndexableResource> resources = new ArrayList<>();
-                    SearchIndexableResource resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage;
-                    resources.add(resource);
-
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_plan_usage_cell_data_preference_screen;
-                    resources.add(resource);
-
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_wifi;
-                    resources.add(resource);
-
-                    return resources;
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> keys = super.getNonIndexableKeys(context);
-
-                    if (!DataUsageUtils.hasMobileData(context)) {
-                        keys.add(KEY_MOBILE_USAGE_TITLE);
-                        keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
-                    }
-
-                    if (!DataUsageUtils.hasWifiRadio(context)) {
-                        keys.add(KEY_WIFI_DATA_USAGE);
-                        keys.add(KEY_NETWORK_RESTRICTIONS);
-                    }
-
-                    keys.add(KEY_WIFI_USAGE_TITLE);
-
-                    return keys;
-                }
-            };
 }
 
