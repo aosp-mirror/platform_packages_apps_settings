@@ -95,7 +95,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 PickupGestureSettings.class.getName(), mPickUpPrefKey,
                 mContext.getString(R.string.display_settings));
 

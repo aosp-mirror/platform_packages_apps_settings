@@ -16,6 +16,8 @@
  */
 package com.android.settings.search;
 
+import android.annotation.NonNull;
+import android.content.ComponentName;
 import android.content.Context;
 import android.view.View;
 
@@ -31,6 +33,15 @@ public interface SearchFeatureProvider {
      * @return true to use the new version of search
      */
     boolean isEnabled(Context context);
+
+    /**
+     * Ensures the caller has necessary privilege to launch search result page.
+     *
+     * @throws IllegalArgumentException when caller is null
+     * @throws SecurityException        when caller is not allowed to launch search result page
+     */
+    void verifyLaunchSearchResultPageCaller(Context context, @NonNull ComponentName caller)
+            throws SecurityException, IllegalArgumentException;
 
     /**
      * Returns a new loader to search in index database.

@@ -89,7 +89,7 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DoubleTapScreenSettings.class.getName(), mDoubleTapScreenPrefKey,
                 mContext.getString(R.string.display_settings));
 

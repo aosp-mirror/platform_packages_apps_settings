@@ -89,7 +89,7 @@ public class DoubleTapPowerPreferenceController extends GesturePreferenceControl
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DoubleTapPowerSettings.class.getName(), mDoubleTapPowerKey,
                 mContext.getString(R.string.display_settings));
 

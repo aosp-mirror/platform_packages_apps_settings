@@ -127,7 +127,7 @@ public class LocationPreferenceController extends AbstractPreferenceController
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 LocationSettings.class.getName(), KEY_LOCATION,
                 mContext.getString(R.string.location_settings_title));
 

@@ -273,7 +273,7 @@ public class IndexData {
                     || TextUtils.equals(mIntentTargetPackage,
                     SearchIndexableResources.SUBSETTING_TARGET_PACKAGE)) {
                 // Action is null, we will launch it as a sub-setting
-                intent = DatabaseIndexingUtils.buildSubsettingIntent(context, mClassName, mKey,
+                intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context, mClassName, mKey,
                         mScreenTitle);
             } else {
                 intent = new Intent(mIntentAction);

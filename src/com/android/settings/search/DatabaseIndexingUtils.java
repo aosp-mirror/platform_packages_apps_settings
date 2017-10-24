@@ -46,21 +46,28 @@ public class DatabaseIndexingUtils {
             "SEARCH_INDEX_DATA_PROVIDER";
 
     /**
-     * Builds intent into a subsetting.
+     * Builds intent that launches the search destination as a sub-setting.
      */
-    public static Intent buildSubsettingIntent(Context context, String className, String key,
+    public static Intent buildSearchResultPageIntent(Context context, String className, String key,
             String screenTitle) {
+        return buildSearchResultPageIntent(context, className, key, screenTitle,
+                MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
+    }
+
+    public static Intent  buildSearchResultPageIntent(Context context, String className, String key,
+            String screenTitle, int sourceMetricsCategory) {
         final Bundle args = new Bundle();
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
-        return Utils.onBuildStartFragmentIntent(context,
-                className, args, null, 0, screenTitle, false,
-                MetricsProto.MetricsEvent.DASHBOARD_SEARCH_RESULTS);
+        final Intent searchDestination = Utils.onBuildStartFragmentIntent(context,
+                className, args, null, 0, screenTitle, false, sourceMetricsCategory);
+        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
+        searchDestination.setClass(context, SearchResultTrampoline.class);
+        return searchDestination;
     }
 
     /**
      * @param className which wil provide the map between from {@link Uri}s to
-     * {@link PreferenceControllerMixin}
-     * @param context
+     *                  {@link PreferenceControllerMixin}
      * @return A map between {@link Uri}s and {@link PreferenceControllerMixin}s to get the payload
      * types for Settings.
      */
@@ -85,7 +92,7 @@ public class DatabaseIndexingUtils {
         List<AbstractPreferenceController> controllers =
                 provider.getPreferenceControllers(context);
 
-        if (controllers == null ) {
+        if (controllers == null) {
             return null;
         }
 
@@ -106,7 +113,7 @@ public class DatabaseIndexingUtils {
     /**
      * @param uriMap Map between the {@link PreferenceControllerMixin} keys
      *               and the controllers themselves.
-     * @param key The look-up key
+     * @param key    The look-up key
      * @return The Payload from the {@link PreferenceControllerMixin} specified by the key,
      * if it exists. Otherwise null.
      */

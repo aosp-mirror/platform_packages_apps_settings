@@ -133,7 +133,7 @@ public class BadgingNotificationPreferenceController extends AbstractPreferenceC
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 ConfigureNotificationSettings.class.getName(), KEY_NOTIFICATION_BADGING,
                 mContext.getString(R.string.configure_notification_settings));
 

@@ -13,6 +13,9 @@
  */
 package com.android.settings.display;
 
+import static android.provider.Settings.Secure.DOZE_ENABLED;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -29,9 +32,6 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import static android.provider.Settings.Secure.DOZE_ENABLED;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_AMBIENT_DISPLAY;
 
 public class AmbientDisplayNotificationsPreferenceController extends
         AbstractPreferenceController implements PreferenceControllerMixin,
@@ -86,7 +86,7 @@ public class AmbientDisplayNotificationsPreferenceController extends
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 AmbientDisplaySettings.class.getName(), KEY_AMBIENT_DISPLAY_NOTIFICATIONS,
                 mContext.getString(R.string.ambient_display_screen_title));
 
