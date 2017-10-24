@@ -16,6 +16,8 @@
 
 package com.android.settings.location;
 
+import android.content.Context;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -24,11 +26,16 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A page that configures the background scanning settings for Wi-Fi and Bluetooth.
  */
-public class ScanningSettings extends SettingsPreferenceFragment {
+public class ScanningSettings extends SettingsPreferenceFragment implements Indexable {
     private static final String KEY_WIFI_SCAN_ALWAYS_AVAILABLE = "wifi_always_scanning";
     private static final String KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE = "bluetooth_always_scanning";
 
@@ -56,13 +63,13 @@ public class ScanningSettings extends SettingsPreferenceFragment {
 
     private void initPreferences() {
         final SwitchPreference wifiScanAlwaysAvailable =
-            (SwitchPreference) findPreference(KEY_WIFI_SCAN_ALWAYS_AVAILABLE);
+                (SwitchPreference) findPreference(KEY_WIFI_SCAN_ALWAYS_AVAILABLE);
         wifiScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
-                    Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+                Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
         final SwitchPreference bleScanAlwaysAvailable =
-            (SwitchPreference) findPreference(KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE);
+                (SwitchPreference) findPreference(KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE);
         bleScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
-                    Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+                Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
     }
 
     @Override
@@ -81,4 +88,18 @@ public class ScanningSettings extends SettingsPreferenceFragment {
         }
         return true;
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.location_scanning;
+                    return Arrays.asList(sir);
+                }
+            };
 }

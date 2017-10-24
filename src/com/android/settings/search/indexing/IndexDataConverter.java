@@ -30,7 +30,6 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.core.PreferenceControllerMixin;
-
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.ResultPayload;
@@ -44,7 +43,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -310,8 +308,8 @@ public class IndexDataConverter {
         } catch (XmlPullParserException e) {
             Log.w(LOG_TAG, "XML Error parsing PreferenceScreen: ", e);
         } catch (IOException e) {
-            Log.w(LOG_TAG, "IO Error parsing PreferenceScreen: " , e);
-        } catch (Resources.NotFoundException e ) {
+            Log.w(LOG_TAG, "IO Error parsing PreferenceScreen: ", e);
+        } catch (Resources.NotFoundException e) {
             Log.w(LOG_TAG, "Resoucre not found error parsing PreferenceScreen: ", e);
         } finally {
             if (parser != null) parser.close();

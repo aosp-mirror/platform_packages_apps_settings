@@ -25,6 +25,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
@@ -38,10 +39,16 @@ import com.android.settings.Utils;
 import com.android.settings.dashboard.conditional.BatterySaverCondition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.notification.SettingPref;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class BatterySaverSettings extends SettingsPreferenceFragment
-        implements SwitchBar.OnSwitchChangeListener, BatterySaverReceiver.BatterySaverListener {
+        implements SwitchBar.OnSwitchChangeListener, BatterySaverReceiver.BatterySaverListener,
+        Indexable {
     private static final String TAG = "BatterySaverSettings";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
     private static final String KEY_TURN_ON_AUTOMATICALLY = "turn_on_automatically";
@@ -89,7 +96,7 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             protected String getCaption(Resources res, int value) {
                 if (value > 0 && value < 100) {
                     return res.getString(R.string.battery_saver_turn_on_automatically_pct,
-                                         Utils.formatPercentage(value));
+                            Utils.formatPercentage(value));
                 }
                 return res.getString(R.string.battery_saver_turn_on_automatically_never);
             }
@@ -219,4 +226,18 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
             }
         }
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.battery_saver_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }
