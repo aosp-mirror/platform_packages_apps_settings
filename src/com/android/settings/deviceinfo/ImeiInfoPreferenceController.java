@@ -17,25 +17,17 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
-import android.os.UserManager;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
-public class ImeiInfoPreferenceController extends AbstractPreferenceController
+public class ImeiInfoPreferenceController extends AbstractSimStatusImeiInfoPreferenceController
         implements PreferenceControllerMixin {
 
     private static final String KEY_IMEI_INFO = "imei_info";
 
     public ImeiInfoPreferenceController(Context context) {
         super(context);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return ((UserManager) mContext.getSystemService(Context.USER_SERVICE)).isAdminUser()
-                && !Utils.isWifiOnly(mContext);
     }
 
     @Override

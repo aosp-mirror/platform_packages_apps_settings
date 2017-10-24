@@ -564,6 +564,21 @@ public final class InstalledAppDetailsTest {
                 mAppDetail.mBatteryCallbacks);
     }
 
+    @Test
+    public void initUninstallButtonForUserApp_shouldSetNegativeButton() {
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_INSTALLED;
+        info.enabled = true;
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        packageInfo.applicationInfo = info;
+        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+
+        mAppDetail.initUninstallButtonForUserApp();
+
+        verify(mAppDetail.mActionButtons).setButton1Positive(false);
+    }
+
     @Implements(Utils.class)
     public static class ShadowUtils {
         @Implementation

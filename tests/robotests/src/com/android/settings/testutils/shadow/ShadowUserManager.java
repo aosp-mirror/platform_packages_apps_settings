@@ -37,6 +37,16 @@ import java.util.List;
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
+    private boolean mAdminUser;
+
+    public void setIsAdminUser(boolean isAdminUser) {
+        mAdminUser = isAdminUser;
+    }
+
+    @Implementation
+    public boolean isAdminUser() {
+        return mAdminUser;
+    }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
         mUserInfos.put(userHandle, userInfo);
