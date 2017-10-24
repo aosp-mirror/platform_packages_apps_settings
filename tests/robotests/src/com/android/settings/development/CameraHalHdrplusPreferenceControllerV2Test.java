@@ -42,7 +42,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {SettingsShadowSystemProperties.class})
-public class CameraHalHdrPlusPreferenceControllerV2Test {
+public class CameraHalHdrplusPreferenceControllerV2Test {
 
     @Mock
     private PreferenceScreen mScreen;
@@ -50,7 +50,7 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     private SwitchPreference mPreference;
 
     private Context mContext;
-    private CameraHalHdrPlusPreferenceControllerV2 mController;
+    private CameraHalHdrplusPreferenceControllerV2 mController;
 
     static final String USERDEBUG_BUILD = "userdebug";
 
@@ -58,7 +58,7 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new CameraHalHdrPlusPreferenceControllerV2(mContext);
+        mController = new CameraHalHdrplusPreferenceControllerV2(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
         mController.displayPreference(mScreen);
@@ -73,18 +73,18 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     @Config(qualifiers = "mcc999")
     public void isAvailable_withConfigNoShowAndUserDebugBuild_shouldReturnFalse() {
         SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
+                CameraHalHdrplusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void updateState_cameraHalHdrPlusEnabled_shouldCheckedPreference() {
+    public void updateState_cameraHalHdrplusEnabled_shouldCheckedPreference() {
         SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
-                CameraHalHdrPlusPreferenceControllerV2.ENABLED);
+                CameraHalHdrplusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
+                CameraHalHdrplusPreferenceControllerV2.ENABLED);
         SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
+                CameraHalHdrplusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 
@@ -92,12 +92,12 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     }
 
     @Test
-    public void updateState_cameraHalHdrPlusEnabled_shouldUncheckedPreference() {
+    public void updateState_cameraHalHdrplusEnabled_shouldUncheckedPreference() {
         SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
-                CameraHalHdrPlusPreferenceControllerV2.DISABLED);
+                CameraHalHdrplusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
+                CameraHalHdrplusPreferenceControllerV2.DISABLED);
         SettingsShadowSystemProperties.set(
-                CameraHalHdrPlusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
+                CameraHalHdrplusPreferenceControllerV2.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 
@@ -108,20 +108,20 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
     public void onPreferenceChange_preferenceChecked_shouldEnableCameraHalHdrplus() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        assertThat(CameraHalHdrPlusPreferenceControllerV2.ENABLED).isEqualTo(
+        assertThat(CameraHalHdrplusPreferenceControllerV2.ENABLED).isEqualTo(
                 SystemProperties.get(
-                        CameraHalHdrPlusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
-                        CameraHalHdrPlusPreferenceControllerV2.DISABLED));
+                        CameraHalHdrplusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
+                        CameraHalHdrplusPreferenceControllerV2.DISABLED));
     }
 
     @Test
     public void handlePreferenceTreeClick_preferenceUnchecked_shouldDisableCameraHalHdrplus() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        assertThat(CameraHalHdrPlusPreferenceControllerV2.DISABLED).isEqualTo(
+        assertThat(CameraHalHdrplusPreferenceControllerV2.DISABLED).isEqualTo(
                 SystemProperties.get(
-                        CameraHalHdrPlusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
-                        CameraHalHdrPlusPreferenceControllerV2.DISABLED));
+                        CameraHalHdrplusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
+                        CameraHalHdrplusPreferenceControllerV2.DISABLED));
     }
 
     @Test
@@ -137,9 +137,9 @@ public class CameraHalHdrPlusPreferenceControllerV2Test {
 
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
-        assertThat(CameraHalHdrPlusPreferenceControllerV2.DISABLED).isEqualTo(
+        assertThat(CameraHalHdrplusPreferenceControllerV2.DISABLED).isEqualTo(
                 SystemProperties.get(
-                        CameraHalHdrPlusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
-                        CameraHalHdrPlusPreferenceControllerV2.DISABLED));
+                        CameraHalHdrplusPreferenceControllerV2.PROPERTY_CAMERA_HAL_HDRPLUS,
+                        CameraHalHdrplusPreferenceControllerV2.DISABLED));
     }
 }
