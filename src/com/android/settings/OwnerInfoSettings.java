@@ -67,6 +67,7 @@ public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnC
         mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
         if (!TextUtils.isEmpty(info)) {
             mOwnerInfo.setText(info);
+            mOwnerInfo.setSelection(info.length());
         }
     }
 
