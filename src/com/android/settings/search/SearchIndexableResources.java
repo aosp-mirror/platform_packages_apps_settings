@@ -41,7 +41,6 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
@@ -134,7 +133,6 @@ public final class SearchIndexableResources {
         addIndex(SavedAccessPointsWifiSettings.class, NO_RES_ID);
         addIndex(BluetoothSettings.class, NO_RES_ID);
         addIndex(SimSettings.class, NO_RES_ID);
-        addIndex(DataPlanUsageSummary.class, NO_RES_ID);
         addIndex(DataUsageSummary.class, NO_RES_ID);
         addIndex(DataUsageMeteredSettings.class, NO_RES_ID);
         addIndex(ScreenZoomSettings.class, NO_RES_ID);
