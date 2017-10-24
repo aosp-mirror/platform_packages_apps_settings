@@ -41,7 +41,6 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
@@ -135,7 +134,6 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_wireless);
         addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
-        addIndex(DataPlanUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
