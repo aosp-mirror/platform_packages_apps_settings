@@ -30,6 +30,7 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"您现在处于开发者模式！"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"您已处于开发者模式，无需进行此操作。"</string>
+    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"请先启用开发者选项。"</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"无线和网络"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"无线和网络"</string>
     <string name="header_category_device" msgid="4544026001618307754">"设备"</string>
@@ -41,6 +42,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"已配置 VoLTE"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"已配置视频通话"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"已配置 WLAN 通话"</string>
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"已配置 EAB/Presence"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"移动无线装置电源"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"查看 SIM 卡通讯录"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"查看固定拨号号码"</string>
@@ -106,10 +108,17 @@
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"扫描设备"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"重命名此设备"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"重命名"</string>
-    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"要断开连接吗？"</string>
-    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"此操作将会断开您与以下设备的连接：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"要断开与该设备的连接吗？"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"您的手机将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接。"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="6611038575213485336">"您的平板电脑将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接。"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"您的设备将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接。"</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"断开连接"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"您无权更改蓝牙设置。"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"与新设备配对"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"在 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 上开启蓝牙设置后，附近的设备将可以检测到该设备。"</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"手机的蓝牙地址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"平板电脑的蓝牙地址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"设备的蓝牙地址：<xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"要断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的连接吗？"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"广播"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"要停用配置文件吗？"</string>
@@ -121,7 +130,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"蓝牙配对请求"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"配对请求"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"点按即可与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”配对。"</string>
-    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"显示收到的文件"</string>
+    <string name="bluetooth_show_received_files" msgid="3144149432555230410">"收到的文件"</string>
     <string name="device_picker" msgid="4978696506172252813">"选择蓝牙设备"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g>请求开启蓝牙"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g>请求关闭蓝牙"</string>
@@ -157,6 +166,9 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"“%1$s”想要查看您的消息。要向“%2$s”授予权限吗？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIM 访问权限请求"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>想要访问您的 SIM 卡。如果授权该设备访问 SIM 卡，您设备的数据连接功能在蓝牙连接期间将停用。将访问权限授予<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"向其他设备显示为“<xliff:g id="DEVICE_NAME">^1</xliff:g>”"</string>
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"您的设备"</string>
+    <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"与新设备配对"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和时间"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"选择时区"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -329,11 +341,11 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"帐号"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"位置信息"</string>
     <string name="account_settings_title" msgid="626177544686329806">"帐号"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"安全性和位置信息"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"安全性和位置信息"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"加密与凭据"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"手机已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"设备已加密"</string>
-    <string name="lockscreen_settings_title" msgid="3922976395527087455">"锁定屏幕偏好设置"</string>
+    <string name="lockscreen_settings_title" msgid="3922976395527087455">"锁屏时的偏好设置"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"设置我的位置、屏幕解锁、SIM卡锁定和凭据存储锁定"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"设置我的位置、屏幕解锁和凭据存储锁定"</string>
     <string name="security_passwords_title" msgid="2881269890053568809">"隐私设置"</string>
@@ -354,40 +366,39 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"使用指纹解锁"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"使用指纹"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"只需触摸指纹传感器即可对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n注意：您无法使用指纹来解锁此设备。要了解详情，请与贵单位的管理员联系。"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"只需触摸指纹传感器即可解锁您的手机、对购买交易进行授权或登录应用。请务必谨慎添加指纹，因为添加的任何指纹都能够用来执行上述操作。\n\n请注意：指纹识别的安全性可能不及安全系数高的图案或 PIN 码。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"使用指纹解锁手机或批准购买交易。\n\n请注意：您无法使用指纹来解锁此设备。要了解详情，请与贵单位的管理员联系。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"使用指纹解锁手机或批准购买交易。\n\n请注意：指纹的安全性可能不及安全系数高的图案或 PIN 码。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"取消"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"继续"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"跳过"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"添加指纹"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此平板电脑。"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"系统将不会启用设备保护功能。如果您的设备丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此设备。"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"系统将不会启用设备保护功能。如果您的手机丢失、被盗，或者其中的数据遭到清空，您将无法防止他人使用此手机。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"系统将不会启用设备保护功能。如果您的平板电脑丢失或被盗，您将无法防止他人使用此平板电脑。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"系统将不会启用设备保护功能。如果您的设备丢失或被盗，您将无法防止他人使用此设备。"</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"系统将不会启用设备保护功能。如果您的手机丢失或被盗，您将无法防止他人使用此手机。"</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"下一屏幕"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"系统将不会启用设备保护功能。如果您的平板电脑丢失、被盗或被重置，您将无法防止他人使用此平板电脑。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"系统将不会启用设备保护功能。如果您的设备丢失、被盗或被重置，您将无法防止他人使用此设备。"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"系统将不会启用设备保护功能。如果您的手机丢失、被盗或被重置，您将无法防止他人使用此手机。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"系统将不会启用设备保护功能。如果您的平板电脑丢失或被盗，您将无法防止他人使用此平板电脑。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"系统将不会启用设备保护功能。如果您的设备丢失或被盗，您将无法防止他人使用此设备。"</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"系统将不会启用设备保护功能。如果您的手机丢失或被盗，您将无法防止他人使用此手机。"</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"仍然跳过"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"返回"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"寻找传感器"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"您可以在手机背面找到指纹传感器。"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"触摸传感器"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"指纹传感器位于您手机的背面。请用食指触摸传感器。"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"关于设备和指纹传感器位置的图示说明"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"名称"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"确定"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"删除"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"我们开始吧"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"触摸传感器"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"将您的手指放在指纹传感器上，感觉到振动后移开手指"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"继续触摸"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"略微移动手指，以便传感器更完整地记录下您的指纹"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"指纹已添加！"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"只要您看见此图标，就可以使用指纹进行身份验证或对购买交易进行授权。"</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"只需触摸指纹传感器即可唤醒并解锁设备。"</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"当您看到此图标时，您还可以对购买交易进行授权或登录应用。"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"移开手指，然后再次触摸传感器"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"不时地移开手指，以便传感器更完整地记录下您的指纹"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"指纹已添加"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"当您看见此图标时，请使用您的指纹进行身份验证或批准购买交易。"</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"以后再说"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"要跳过指纹设置？"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"您已选择使用指纹作为解锁手机的方式之一。如果您现在跳过这项设置，则以后还需要再进行设置。设置过程只需大约一分钟的时间。"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"设置屏幕锁定"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"完成"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"糟糕，这不是传感器"</string>
-    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"使用您设备上的指纹传感器。"</string>
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"请用您的食指触摸位于手机背面的传感器。"</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"未完成注册"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"指纹注册操作超时，请重试。"</string>
     <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"无法注册指纹。请重试或使用其他手指。"</string>
@@ -449,6 +460,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"启用设备保护功能可防止他人在未经您允许的情况下使用此设备。请选择您要使用的屏幕锁定方式。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"启用设备保护功能可防止他人在未经您允许的情况下使用此手机。请选择您要使用的屏幕锁定方式。"</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"选择您的备用屏幕锁定方式"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"屏幕锁定选项"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"屏幕锁定选项"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"屏幕锁定"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠后立即启动"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g> / 休眠 <xliff:g id="TIMEOUT_STRING">%2$s</xliff:g>后启动"</string>
@@ -519,13 +532,21 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"更改解锁图案"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"更改解锁PIN码"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"更改解锁密码"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"请重试。您目前已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多可尝试 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"最后一次尝试"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"如果您这次绘制的工作解锁图案仍然有误，您的工作资料和相关数据都将从此设备中移除。"</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"如果您这次输入的工作 PIN 码仍然有误，您的工作资料和相关数据都将从此设备中移除。"</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"如果您这次输入的工作密码仍然有误，您的工作资料和相关数据都将从此设备中移除。"</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"错误次数过多。您的工作资料和相关数据将会从此设备中移除。"</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"关闭"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"请重试。您目前已尝试 <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> 次，最多可尝试 <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g> 次。"</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"您的数据将遭到删除"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"如果您下次绘制的解锁图案仍然有误，系统将删除此设备上的数据"</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"如果您下次输入的 PIN 码仍然有误，系统将删除此设备上的数据"</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"如果您下次输入的密码仍然有误，系统将删除此设备上的数据"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"如果您下次绘制的解锁图案仍然有误，系统将删除此用户"</string>
+    <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"如果您下次输入的 PIN 码仍然有误，系统将删除此用户"</string>
+    <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"如果您下次输入的密码仍然有误，系统将删除此用户"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"如果您下次绘制的解锁图案仍然有误，系统将删除您的工作资料和相关数据"</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"如果您下次输入的 PIN 码仍然有误，系统将删除您的工作资料和相关数据"</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"如果您下次输入的密码仍然有误，系统将删除您的工作资料和相关数据"</string>
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"错误次数过多。系统将删除此设备上的数据。"</string>
+    <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"错误次数过多。系统将删除此用户。"</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"错误次数过多。系统将删除此工作资料和相关数据。"</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"关闭"</string>
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"必须至少包含 <xliff:g id="COUNT">%d</xliff:g> 个字符"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"PIN 码必须至少为 <xliff:g id="COUNT">%d</xliff:g> 位数"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"继续"</string>
@@ -626,6 +647,14 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"高级蓝牙设置"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"开启蓝牙后，您的设备可以与附近的其他蓝牙设备通信。"</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"为了提高位置信息的精确度，系统应用和服务仍然会检测蓝牙设备。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
+    <string name="bluetooth_connect_failed" msgid="4500234659813241053">"无法连接，请重试。"</string>
+    <string name="device_details_title" msgid="6576953269221085300">"设备详细信息"</string>
+    <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"设备的蓝牙地址：<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"要与该设备取消配对吗？"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"您的手机将与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>取消配对"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"您的平板电脑将与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>取消配对"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"您的设备将与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>取消配对"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"与设备取消配对"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"连接到..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>将与媒体音频断开连接。"</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>将与免提音频断开连接。"</string>
@@ -691,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"自动开启 WLAN"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"位于已保存的高品质网络（例如您的家庭网络）附近时自动重新开启 WLAN"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"无法使用，因为 WLAN 搜索功能已关闭"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"要使用该功能，请选择一个网络评分服务提供方"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"避开状况不佳的网络"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"仅在WLAN互联网连接状况良好时使用WLAN网络"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"仅使用互联网连接情况良好的网络"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"连接到开放网络"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"自动连接到高品质的公共网络"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"要使用该功能，请选择一个网络评分服务提供方"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"要使用该功能，请选择一个兼容的网络评分服务提供方"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"安装证书"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"为了提高位置信息的精确度，系统应用和服务仍然会扫描 WLAN 网络。您可以在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中更改此设置。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"要提高位置信息的精确度，请在<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>扫描设置<xliff:g id="LINK_END_1">LINK_END</xliff:g>中开启 WLAN 扫描功能。"</string>
@@ -715,10 +747,10 @@
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"WLAN 会自动重新开启"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="2782566279864356713">"WLAN 不会自动重新开启"</string>
     <string name="wifi_access_points" msgid="7053990007031968609">"WLAN网络"</string>
-    <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS按钮"</string>
+    <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS 按钮"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"更多选项"</string>
-    <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN码输入"</string>
-    <string name="wifi_menu_p2p" msgid="7619851399250896797">"WLAN直连"</string>
+    <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS PIN 码输入"</string>
+    <string name="wifi_menu_p2p" msgid="7619851399250896797">"WLAN 直连"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"扫描"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"高级"</string>
     <string name="wifi_menu_configure" msgid="6150926852602171938">"配置"</string>
@@ -779,6 +811,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"不提供"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"不验证"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"未指定任何证书。您的网络连接将不是私密连接。"</string>
+    <string name="wifi_ssid_too_long" msgid="3474753269579895244">"网络名称太长。"</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"必须指定网域。"</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"可使用 WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （可使用 WPS）"</string>
@@ -810,8 +843,7 @@
       <item quantity="one">1 个网络</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"高级WLAN"</string>
-    <string name="wifi_configure_titlebar" msgid="7977475161589303074">"配置 WLAN"</string>
-    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC地址"</string>
+    <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC 地址"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP 地址"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"子网掩码"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
@@ -829,7 +861,7 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"网关"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"网络前缀长度"</string>
-    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"WLAN直连"</string>
+    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"WLAN 直连"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"设备信息"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"记住该连接"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"搜索设备"</string>
@@ -846,10 +878,18 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"要取消连接<xliff:g id="PEER_NAME">%1$s</xliff:g>的邀请吗？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"取消保存此群组？"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"便携式WLAN热点"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WLAN热点"</string>
-    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"使用移动网络连接提供 WLAN 网络"</string>
-    <string name="wifi_hotspot_off_subtext" product="tablet" msgid="2745508221200463254">"不通过热点共享该平板电脑的互联网连接"</string>
-    <string name="wifi_hotspot_off_subtext" product="default" msgid="7746761268472599794">"不通过热点共享该手机的互联网连接"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"WLAN 热点"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"目前没有与其他设备共享互联网连接或内容"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"正在通过热点共享此平板电脑的互联网连接"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"正在通过热点共享此手机的互联网连接"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"应用正在共享内容。要共享互联网连接，请先关闭热点，然后重新打开"</string>
+    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"WLAN 名称"</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"正在打开<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>…"</string>
+    <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"其他设备可以连接到<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>"</string>
+    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"WLAN 密码"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 频段"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"使用热点创建 WLAN 网络供其他设备使用。热点会使用您的移动数据连接提供互联网连接。这可能会产生额外的移动数据流量费用。"</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"应用可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"正在关闭热点..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> 已连接"</string>
@@ -896,6 +936,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"开启“WLAN 通话”功能后，您的手机可根据您的偏好设置，通过 WLAN 网络或您的运营商网络通话（具体取决于哪个网络信号较强）。开启此功能之前，请先向您的运营商咨询收费情况及其他详情。"</string>
+    <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"更新紧急地址"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"当您使用 WLAN 拨打 911 时，紧急服务会将此地址视为您所在位置的地址"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"显示"</string>
@@ -953,6 +994,7 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"没有结果"</string>
     <string name="display_settings" msgid="7965901687241669598">"显示"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"自动旋转屏幕"</string>
+    <string name="color_mode_title" msgid="3159275920408338215">"鲜明的色彩"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"旋转平板电脑时自动改变浏览模式"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"旋转手机时自动改变显示方向"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"旋转平板电脑时自动切换浏览模式"</string>
@@ -980,23 +1022,22 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"根据环境光线情况优化亮度。开启此功能后，您仍然可以暂时调整亮度。"</string>
     <string name="night_display_title" msgid="2626451512200357686">"夜间模式"</string>
     <string name="night_display_text" msgid="1837277457033025056">"夜间模式会将您的屏幕色调调为琥珀色，可让您在光线昏暗的环境下更舒适地查看屏幕或阅读文字，并有助您入睡。"</string>
-    <string name="night_display_category_schedule" msgid="2044072617637348966">"排定时间"</string>
-    <string name="night_display_category_status" msgid="1952928783124400330">"状态"</string>
-    <string name="night_display_auto_mode_title" msgid="8046314360381608455">"自动开启"</string>
-    <string name="night_display_auto_mode_never" msgid="6723636142053240947">"永不"</string>
-    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"自定义时间安排"</string>
-    <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"日落到日出"</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"排定时间"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"无"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"在设定的时间开启"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"在日落到日出期间开启"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"开始时间"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"结束时间"</string>
+    <string name="night_display_status_title" msgid="1784041143360286267">"状态"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"浓度"</string>
-    <string name="night_display_summary_off" msgid="7009821232380000786">"关闭。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"一律不自动开启。"</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动开启。"</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"将在日落时自动开启。"</string>
-    <string name="night_display_summary_on" msgid="6626224414971753417">"开启。<xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"一律不自动关闭。"</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动关闭。"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"将在日出时自动关闭。"</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"关闭 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"一律不自动开启"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动开启"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"将在日落时自动开启"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"开启 / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"一律不自动关闭"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"将在<xliff:g id="ID_1">%1$s</xliff:g>自动关闭"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"将在日出时自动关闭"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"休眠"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"屏幕关闭"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"无操作<xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g>后"</string>
@@ -1020,8 +1061,14 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"设置"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"自动调整亮度"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"拿起设备时唤醒"</string>
-    <string name="doze_title" msgid="2259176504273878294">"主动显示"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"主动显示"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"一律开启/耗电量更高"</string>
+    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"新通知"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"何时显示"</string>
+    <string name="doze_title" msgid="2375510714460456687">"新通知"</string>
     <string name="doze_summary" msgid="3846219936142814032">"收到通知时唤醒屏幕"</string>
+    <string name="doze_always_on_title" msgid="1046222370442629646">"始终开启"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"显示时间、通知图标及其他信息。耗电量更高。"</string>
     <string name="title_font_size" msgid="4405544325522105222">"字体大小"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"放大或缩小文字"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"SIM卡锁定设置"</string>
@@ -1099,7 +1146,7 @@
     <string name="status_signal_strength" msgid="3732655254188304547">"信号强度"</string>
     <string name="status_roaming" msgid="2638800467430913403">"漫游"</string>
     <string name="status_operator" msgid="2274875196954742087">"网络"</string>
-    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLANMAC 地址"</string>
+    <string name="status_wifi_mac_address" msgid="2202206684020765378">"WLAN MAC 地址"</string>
     <string name="status_bt_address" msgid="4195174192087439720">"蓝牙地址"</string>
     <string name="status_serial_number" msgid="2257111183374628137">"序列号"</string>
     <string name="status_unavailable" msgid="7862009036663793314">"无法获取"</string>
@@ -1273,6 +1320,7 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"APN 不能为空。"</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"MCC 字段必须为 3 位数。"</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"MNC 字段必须为 2 位数或 3 位数。"</string>
+    <string name="error_adding_apn_type" msgid="4181334016628549645">"运营商不允许添加“%s”类型的 APN。"</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"正在恢复默认 APN 设置。"</string>
     <string name="menu_restore" msgid="8260067415075573273">"重置为默认设置"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"已重置默认APN设置。"</string>
@@ -1292,16 +1340,21 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"内部存储空间和所有数据都将被重置"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"此操作会清除您平板电脑"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储设备"</b>"中的所有数据，包括：\n\n"<li>"您的Google帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"下载的应用"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"此操作会清除您手机"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"您的 Google 帐号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"已下载的应用"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"目前，您已登录以下帐号：\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"此设备上目前还有其他用户。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音乐"</li>\n<li>"照片"</li>\n<li>"其他的用户数据"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM 卡中的运营商"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"这样并不会取消您的移动服务套餐。"</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"要清除音乐、照片和其他用户数据，请清空该 "<b>"USB存储设备"</b>"。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"要清除音乐、图片和其他用户数据，您需要清空该 "<b>"SD卡"</b>"。"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"格式化USB存储设备"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"格式化SD卡"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"清除该内部USB存储设备中的全部数据，例如音乐或照片"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"清除SD卡中的全部数据，例如音乐或照片"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"清空 eSIM 卡"</string>
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"清空手机上的所有 eSIM 卡。此操作并不会取消您的移动服务套餐。"</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"清空平板电脑上的所有 eSIM 卡。此操作并不会取消您的移动服务套餐。"</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"恢复平板电脑出厂设置"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"恢复手机出厂设置"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"要清空您的所有个人信息和下载的应用吗？此操作无法撤消！"</string>
@@ -1324,26 +1377,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"当流量节省程序开启时，无法使用网络共享功能或便携式热点"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB网络共享"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"已连接USB，选中即可共享网络"</string>
-    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"已共享网络"</string>
-    <string name="usb_tethering_storage_active_subtext" msgid="8427089411146908205">"使用USB存储设备时无法共享网络"</string>
-    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB未连接"</string>
-    <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"连接USB后即可开启"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"USB网络共享出错"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"通过 USB 共享手机的互联网连接"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"通过 USB 共享平板电脑的互联网连接"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"蓝牙网络共享"</string>
-    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"通过蓝牙共享该平板电脑的互联网连接"</string>
-    <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"通过蓝牙共享该手机的互联网连接"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"通过蓝牙与 1 台设备共享该平板电脑的互联网连接"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="5970460338828861091">"通过蓝牙与 1 台设备共享该手机的互联网连接"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="3253150865825199632">"通过蓝牙与 <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> 台设备共享该平板电脑的互联网连接"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8268867745495039177">"通过蓝牙与 <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> 台设备共享该手机的互联网连接"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"通过蓝牙共享平板电脑的互联网连接"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"通过蓝牙共享手机的互联网连接"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"通过蓝牙共享该<xliff:g id="DEVICE_NAME">%1$d</xliff:g>的互联网连接"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="1889565070769307732">"不通过蓝牙共享该平板电脑的互联网连接"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="1838503633450298902">"不通过蓝牙共享该手机的互联网连接"</string>
-    <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"未共享网络"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"无法与 <xliff:g id="MAXCONNECTION">%1$d</xliff:g> 台以上的设备共享网络。"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"即将断开与<xliff:g id="DEVICE_NAME">%1$s</xliff:g>的网络共享。"</string>
-    <string name="tethering_footer_info" msgid="7287131664937054043">"使用热点和网络共享功能，通过您的移动数据连接向其他设备提供互联网连接。"</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"使用热点和网络共享功能，通过您的移动数据连接向其他设备提供互联网连接。应用还可以通过创建热点，与附近的设备共享内容。"</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"帮助"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"移动网络"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"手机套餐"</string>
@@ -1376,7 +1418,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"位置信息模式"</string>
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"使用 GPS、WLAN、蓝牙或移动网络确定位置"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"使用 WLAN、蓝牙或移动网络确定位置"</string>
-    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"使用 GPS 确定位置"</string>
+    <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"使用 GPS 和设备传感器确定位置"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"扫描"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"WLAN 扫描"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"允许系统应用和服务随时检测 WLAN 网络，以便提高位置信息的精确度。"</string>
@@ -1421,8 +1463,11 @@
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"您没有数据连接。要立即查看此信息，请使用联网的计算机访问%s。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"正在加载..."</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"选择您的密码"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"要使用指纹，请设置密码"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"选择您的图案"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"要使用指纹，请设置解锁图案"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"选择PIN码"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"要使用指纹，请设置 PIN 码"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"确认您的密码"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"确认您的图案"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"确认 PIN 码"</string>
@@ -1491,12 +1536,15 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"应用设置"</string>
     <string name="install_applications" msgid="4872012136210802181">"未知来源"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"允许所有应用来源"</string>
+    <string name="recent_app_category_title" msgid="6673071268966003928">"最近打开的应用"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"查看全部 <xliff:g id="COUNT">%1$d</xliff:g> 个应用"</string>
+    <string name="recent_app_summary" msgid="3366446669844932300">"<xliff:g id="TIME">^1</xliff:g>前"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"您的平板电脑和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的平板电脑损坏或数据丢失承担责任。"</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"您的手机和个人数据更容易受到未知应用的攻击。安装来自该来源的应用即表示，您同意对因使用这些应用可能导致的手机损坏或数据丢失承担责任。"</string>
     <string name="advanced_settings" msgid="1777249286757067969">"高级设置"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"启用更多设置选项"</string>
     <string name="application_info_label" msgid="5736524913065714880">"应用信息"</string>
-    <string name="storage_label" msgid="8700867073480107253">"存储空间"</string>
+    <string name="storage_label" msgid="8700867073480107253">"存储"</string>
     <string name="auto_launch_label" msgid="2669236885531442195">"默认打开"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"默认操作"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"屏幕兼容性"</string>
@@ -1659,6 +1707,10 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"要停止系统服务吗？"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"如果停止此服务，您平板电脑上的某些功能也将随之停止工作，并在您将平板电脑关机然后再重新打开后才能使用。"</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"如果停止此服务，您手机上的某些功能也将随之停止工作，并在您将手机关机然后再重新打开后才能使用。"</string>
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"语言、输入法和手势"</string>
+    <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
+    <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
+    <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
     <string name="language_settings" msgid="8758655933029560944">"语言和输入法"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"语言和输入法"</string>
     <string name="input_assistance" msgid="7577795275222555487">"输入帮助"</string>
@@ -1673,7 +1725,7 @@
     <string name="hardkeyboard_category" msgid="5957168411305769899">"物理键盘设置"</string>
     <string name="auto_punctuate_summary" msgid="4372126865670574837">"按空格键两次可插入句号"</string>
     <string name="show_password" msgid="4837897357002495384">"显示密码"</string>
-    <string name="show_password_summary" msgid="3365397574784829969">"输入字符时短暂显示这些字符"</string>
+    <string name="show_password_summary" msgid="3365397574784829969">"输入时短暂显示这些字符"</string>
     <string name="spellchecker_security_warning" msgid="9060897418527708922">"此拼写检查工具可能会收集您键入的所有文字，包括密码和信用卡号等个人数据。它源自应用“<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>”。要使用此拼写检查工具吗？"</string>
     <string name="spellchecker_quick_settings" msgid="246728645150092058">"设置"</string>
     <string name="spellchecker_language" msgid="6041050114690541437">"语言"</string>
@@ -1757,6 +1809,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"屏幕阅读器、显示、互动控件"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"阅读辅助设置"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"您可以根据自己的需求对此设备进行自定义。以后，您可以在“设置”中更改这些辅助功能设置。"</string>
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"放大字体"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"屏幕阅读器"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音频和屏幕上的文字"</string>
     <string name="display_category_title" msgid="685461049938269166">"显示"</string>
@@ -1873,6 +1926,10 @@
       <item quantity="other">已开启 <xliff:g id="COUNT">%1$d</xliff:g> 项打印服务</item>
       <item quantity="one">已开启 1 项打印服务</item>
     </plurals>
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 项打印任务</item>
+      <item quantity="one">1 项打印任务</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"打印服务"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"未安装任何服务"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"找不到打印机"</string>
@@ -1939,6 +1996,29 @@
     <string name="details_subtitle" msgid="32593908269911734">"详细使用情况"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"省电提示"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"包含的软件包"</string>
+    <string name="battery_abnormal_details_title" msgid="5469019021857291216">"多个应用正大量耗电"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"使设备保持唤醒状态"</string>
+    <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"在后台唤醒设备"</string>
+    <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"请求获取位置信息的频率过高"</string>
+    <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 个应用出现异常"</string>
+    <string name="dialog_stop_title" msgid="6395127715596746479">"要停止该应用吗？"</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"由于<xliff:g id="APP">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"由于<xliff:g id="APP">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"由于<xliff:g id="APP">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
+    <string name="dialog_stop_ok" msgid="2319777211264004900">"停止应用"</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"要关闭后台使用功能并停止应用吗？"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"由于<xliff:g id="APP_0">%1$s</xliff:g>一直让设备保持唤醒状态，因此您的设备无法正常管理电池。\n\n要尝试解决此问题，您可以停止<xliff:g id="APP_1">%1$s</xliff:g>，并阻止该应用在后台运行。"</string>
+    <string name="dialog_background_check_ok" msgid="412876934682899659">"关闭"</string>
+    <string name="dialog_location_title" msgid="5888917530725874727">"要禁止获取位置信息吗？"</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的手机无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的平板电脑无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"由于<xliff:g id="APP">%1$s</xliff:g>在您并未使用它时仍一直请求获取您的位置信息，因此您的设备无法正常管理电池。\n\n要解决此问题，请关闭此应用的位置信息服务。"</string>
+    <string name="dialog_location_ok" msgid="4572391197601313986">"关闭"</string>
     <string name="power_screen" msgid="3023346080675904613">"屏幕"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"手电筒"</string>
     <string name="power_camera" msgid="4976286950934622605">"相机"</string>
@@ -1953,7 +2033,7 @@
     <string name="power_apps" msgid="2043554781293951327">"应用"</string>
     <string name="power_service" msgid="1599661212370831780">"服务"</string>
     <string name="power_system" msgid="8290455327965307383">"系统"</string>
-    <string name="power_user" msgid="1889728099253018005">"用户"</string>
+    <string name="power_user" msgid="3706143225319881667">"其他用户"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"CPU总使用时间"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"CPU（前台）"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"保持唤醒状态"</string>
@@ -2005,12 +2085,13 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"多算了的用电量"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g>毫安时"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"使用时间：<xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_active_for" msgid="2964359540508103032">"使用时间：<xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"屏幕使用时间：<xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="APP">%2$s</xliff:g>用电量占 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"整体用电量的 <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"自上次充满电后的用电明细"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"上次充满电"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"电池的剩余使用时间为大致数据，且可能会因使用情形而变化"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"电池消耗量为大致值，可能会因使用情形而变化"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"在前台运行时"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"在后台运行时"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"电池用量"</string>
@@ -2333,8 +2414,8 @@
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"只能连接到移动网络时，此功能可能会导致需要使用后台流量的应用无法正常运行。\n\n您可以在相关应用的设置中为其设定更合适的数据流量控制选项。"</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"您必须先设置移动数据流量上限，才能限制后台数据流量。"</string>
     <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"要打开自动同步数据功能吗？"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的平板电脑。\n\n有些帐号还可以将您在平板电脑上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"您在网络上对自己的帐号进行的所有更改都会自动同步到您的手机。\n\n有些帐号还可以将您在手机上进行的所有更改自动同步到网络上。Google 帐号就支持此类双向同步。"</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"要关闭自动同步数据功能吗？"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"这样可以节省数据流量和电池电量，但您需要手动同步每个帐号才能获得最新信息，并且在有更新时不会收到通知。"</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"流量重置日期"</string>
@@ -2553,7 +2634,7 @@
     <string name="nfc_payment_favor_open" msgid="1923314062109977944">"但其他付款应用开启时除外"</string>
     <string name="nfc_payment_pay_with" msgid="7524904024378144072">"通过触碰付款终端进行付款时使用以下应用："</string>
     <string name="nfc_how_it_works_title" msgid="1984068457698797207">"通过支付终端付款"</string>
-    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面触碰任何带有非接触标志的终端即可。"</string>
+    <string name="nfc_how_it_works_content" msgid="4749007806393224934">"设置付款应用，然后只需将手机背面靠近任何带有非接触标志的终端即可。"</string>
     <string name="nfc_how_it_works_got_it" msgid="259653300203217402">"知道了"</string>
     <string name="nfc_more_title" msgid="815910943655133280">"更多…"</string>
     <string name="nfc_payment_set_default_label" msgid="7315817259485674542">"要设为您的偏好设置吗？"</string>
@@ -2564,7 +2645,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"更改PIN码"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"显示通知"</string>
     <string name="help_label" msgid="6886837949306318591">"帮助和反馈"</string>
-    <string name="support_summary" msgid="8276116616493882830">"帮助文章、电话与聊天支持"</string>
+    <string name="support_summary" msgid="2705726826263742491">"帮助文章、电话与聊天支持、使用入门"</string>
     <string name="user_account_title" msgid="1127193807312271167">"内容帐号"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"照片 ID"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"极端威胁"</string>
@@ -2654,9 +2735,12 @@
       <item quantity="one">显示 %d 项隐藏内容</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"网络和互联网"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"WLAN、移动、流量消耗、热点"</string>
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"移动网络"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"流量使用"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"热点"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"已关联的设备"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"蓝牙、投射、NFC"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"蓝牙、投射"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"应用和通知"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"权限、默认应用"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"用户和帐号"</string>
@@ -2706,9 +2790,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"滑动解锁, 密码, 图案, PIN 码"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"工作验证, 工作, 资料"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"工作资料, 托管资料, 汇整, 统一, 工作, 资料"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"手势"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"手势"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支付、点按、付款"</string>
     <string name="keywords_backup" msgid="470070289135403022">"备份内容, 备份"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"手势"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"设置WLAN NFC标签"</string>
     <string name="write_tag" msgid="8571858602896222537">"写入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"点按标签即可写入…"</string>
@@ -2791,7 +2876,8 @@
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"一律不显示工作通知"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"在设备锁定时，您希望个人资料通知如何显示？"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"个人资料通知"</string>
-    <string name="app_notifications_title" msgid="139788604658984593">"通知"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"通知"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"应用通知"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"通知类别"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要程度"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"让应用决定"</string>
@@ -2806,6 +2892,10 @@
     <string name="notification_importance_high_title" msgid="3058778300264746473">"紧急"</string>
     <string name="allow_sound" msgid="1820188704793497324">"允许发出提示音"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"不发出提示音，不振动，也不在当前屏幕上短暂显示这些通知。"</string>
+    <string name="notification_channel_summary_min" msgid="5401718014765921892">"重要性：低"</string>
+    <string name="notification_channel_summary_low" msgid="322317684244981244">"重要性：中等"</string>
+    <string name="notification_channel_summary_default" msgid="1111749130423589931">"重要性：高"</string>
+    <string name="notification_channel_summary_high" msgid="2085017556511003283">"重要性：紧急"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"通知助手"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"通知使用权"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"已禁止访问工作资料通知"</string>
@@ -2833,8 +2923,6 @@
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"画中画"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"允许进入画中画模式"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"允许此应用在您打开或离开应用（如继续观看视频）时创建画中画窗口。该窗口会显示在您当前使用的其他应用的上层。"</string>
-    <string name="picture_in_picture_on" msgid="6103704909710176555">"是"</string>
-    <string name="picture_in_picture_off" msgid="5654388666434625247">"否"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"“勿扰”权限"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"没有任何已安装应用申请“勿扰”权限"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"正在加载应用…"</string>
@@ -2918,6 +3006,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"无"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"闹钟"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"闹钟始终优先，并发出提示音"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活动"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有来电者"</string>
@@ -2965,11 +3054,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"此工作资料由以下应用管理："</string>
     <string name="managing_admin" msgid="8843802210377459055">"由<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>管理"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"（实验性）"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"设备旋转"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"旋转屏幕内容方向"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"保持纵向"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"保持横向"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"保持当前方向"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"安全启动"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"继续"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"为了进一步保护此设备的安全，您可以将设备设为需要输入 PIN 码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入 PIN 码才能启动吗？"</string>
@@ -2977,7 +3061,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"为了进一步保护此设备的安全，您可以将设备设为需要输入密码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入密码才能启动吗？"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"为了进一步保护此设备的安全，除了使用指纹解锁设备之外，您还可以将设备设为需要输入 PIN 码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入 PIN 码才能启动吗？"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"为了进一步保护此设备的安全，除了使用指纹解锁设备之外，您还可以将设备设为需要绘制解锁图案才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要绘制解锁图案才能启动吗？"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"为了进一步保护此设备的安全，除了使用指纹解锁设备之外，您还可以将设备设为需要输入密码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入密码才能启动吗？"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"为了进一步保护此设备的安全，除了使用指纹解锁设备之外，您还可以将设备设为需要输入密码才能启动。在设备启动之前，无法接听电话、接收消息或通知（包括闹钟）。\n\n这样一来，即使设备丢失或被盗，其中的数据仍安全无虞。要将设备设为需要输入密码才能启动吗？"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"是"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"否"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"要求输入 PIN 码吗？"</string>
@@ -3095,6 +3179,15 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"电池用量提醒"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"显示完整的设备用电量"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"显示应用使用情况"</string>
+    <string name="power_high_usage_title" msgid="6027369425057347826">"耗电量高"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other"><xliff:g id="NUMBER">%2$d</xliff:g> 个应用的行为异常</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g>的行为异常</item>
+    </plurals>
+    <plurals name="power_high_usage_title" formatted="false" msgid="3826660033363082922">
+      <item quantity="other">多个应用正在消耗大量电池电量</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g>正在消耗大量电池电量</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"未优化"</string>
     <string name="high_power_on" msgid="6216293998227583810">"未优化"</string>
     <string name="high_power_off" msgid="3393904131961263278">"优化电池使用"</string>
@@ -3187,8 +3280,8 @@
     <string name="overlay_settings" msgid="6930854109449524280">"显示在其他应用的上层"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> 个（共 <xliff:g id="COUNT_1">%2$d</xliff:g> 个）应用可以显示在其他应用的上层"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"具有该权限的应用"</string>
-    <string name="system_alert_window_on" msgid="2939489395109048888">"允许"</string>
-    <string name="system_alert_window_off" msgid="6189115687233061992">"不允许"</string>
+    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"允许"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"不允许"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"安装应用 未知来源"</string>
     <string name="write_settings" msgid="4797457275727195681">"修改系统设置"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"写入 修改 系统 设置"</string>
@@ -3225,7 +3318,7 @@
     <string name="screen_zoom_conversation_timestamp_3" msgid="3785674344762707688">"周二下午 6:02"</string>
     <string name="screen_zoom_conversation_timestamp_4" msgid="2511469395448561259">"周二下午 6:03"</string>
     <string name="disconnected" msgid="4836600637485526329">"未连接"</string>
-    <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g> 流量"</string>
+    <string name="data_usage_summary_format" msgid="7507047900192160585">"已使用 <xliff:g id="AMOUNT">%1$s</xliff:g>"</string>
     <plurals name="notification_summary" formatted="false" msgid="3941492005316143599">
       <item quantity="other">已屏蔽 <xliff:g id="COUNT">%d</xliff:g> 个应用的通知</item>
       <item quantity="one">已屏蔽 1 个应用的通知</item>
@@ -3278,6 +3371,15 @@
     <string name="condition_night_display_summary" msgid="5443722724310650381">"屏幕已变成琥珀色，这可能有助于您安然入睡。"</string>
     <string name="suggestions_title" msgid="7280792342273268377">"建议"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+<xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <string name="suggestions_more_title" msgid="8223690393059519879">"另外 <xliff:g id="ID_1">%1$d</xliff:g> 条"</string>
+    <plurals name="suggestions_collapsed_title" formatted="false" msgid="1857433444865249823">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 条建议</item>
+      <item quantity="one">1 条建议</item>
+    </plurals>
+    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="7680263825371165461">
+      <item quantity="other">另外 <xliff:g id="COUNT">%1$d</xliff:g> 条建议</item>
+      <item quantity="one">另外 1 条建议</item>
+    </plurals>
     <string name="suggestion_remove" msgid="904627293892092439">"移除"</string>
     <string name="color_temperature" msgid="2070126836910615605">"冷色温"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"使用较冷的显示颜色"</string>
@@ -3290,14 +3392,13 @@
     <string name="ethernet_data_usage" msgid="5108764537574354616">"以太网流量消耗"</string>
     <string name="wifi" msgid="1081550856200013637">"WLAN"</string>
     <string name="ethernet" msgid="6600095783781389720">"以太网"</string>
-    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g> 移动数据"</string>
+    <string name="cell_data_template" msgid="405684854174361041">"<xliff:g id="AMOUNT">^1</xliff:g>（移动数据流量）"</string>
     <string name="wifi_data_template" msgid="6265570748799357386">"<xliff:g id="AMOUNT">^1</xliff:g> WLAN 流量"</string>
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> 以太网流量"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"流量警告：<xliff:g id="ID_1">%1$s</xliff:g>/流量上限：<xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"结算周期"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"每月结算周期从当月 <xliff:g id="ID_1">%1$s</xliff:g>日开始"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"每月 <xliff:g id="ID_1">%1$s</xliff:g>日开始"</string>
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"每月 <xliff:g id="ID_1">%1$s</xliff:g> 日"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"网络流量限制"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> 项限制</item>
@@ -3305,7 +3406,7 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"运营商的流量计算方式可能与您设备的计算方式不同"</string>
     <string name="data_used_template" msgid="3245919669966296505">"已使用 <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"设置数据用量警告"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"设置数据流量消耗警告"</string>
     <string name="data_warning" msgid="209133958008062117">"流量警告"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"设置流量上限"</string>
     <string name="data_limit" msgid="1885406964934590552">"流量上限"</string>
@@ -3317,7 +3418,7 @@
       <item quantity="one">已允许 1 个应用在流量节省程序开启时无限量使用数据流量。</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"流量节省程序"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"不受流量限制"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"不受流量限制"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"后台数据已关闭"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"开启"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"关闭"</string>
@@ -3381,8 +3482,7 @@
     <string name="notification_suggestion_title" msgid="4506524937307816475">"控制屏幕锁定时的通知"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"显示或隐藏通知内容"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"全部"</string>
-    <string name="page_tab_title_support" msgid="6330657582897417458">"支持"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"支持和提示"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"最小宽度"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"没有任何已安装的应用申请付费短信权限"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"“付费短信”可能会产生费用，而且相关费用将计入您的运营商帐单。如果您为某个应用启用该权限，那么您将能够使用该应用发送付费短信。"</string>
@@ -3453,32 +3553,39 @@
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"通过简单手势控制设备"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"快速打开相机"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"要快速打开相机，请按两次电源按钮（适用于任何屏幕）。"</string>
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"快速打开相机"</string>
+    <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"按电源按钮两次即可打开相机"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"切换相机模式"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"自拍更便捷"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"扭转手机两次即可开启自拍模式"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"扭转平板电脑两次即可开启自拍模式"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"扭转设备两次即可开启自拍模式"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"点按两次即可查看手机"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"点按两次即可查看平板电脑"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"点按两次即可查看设备"</string>
-    <string name="ambient_display_summary" msgid="2521630136233865893">"要快速查看通知，请在屏幕上点按两次。"</string>
+    <string name="ambient_display_summary" msgid="525662960806416373">"点按两次屏幕即可查看时间、通知图标和其他信息。"</string>
+    <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"屏幕关闭时查看通知"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"拿起手机即显示"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"拿起平板电脑即可查看"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"拿起设备即可查看"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"要快速查看通知，请拿起您的手机。"</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"要快速查看通知，请拿起您的平板电脑。"</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"要快速查看通知，请拿起您的设备。"</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"拿起您的手机即可查看时间、通知图标和其他信息。"</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"拿起您的平板电脑即可查看时间、通知图标和其他信息。"</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"要查看时间、通知图标和其他信息，请拿起您的设备。"</string>
+    <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"屏幕关闭时查看通知"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"滑动指纹即可查看通知"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"要查看通知，请在手机背面的指纹传感器上向下滑动手指。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"要查看通知，请在平板电脑背面的指纹传感器上向下滑动手指。"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"要查看通知，请在设备背面的指纹传感器上向下滑动手指。"</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"辅助手势"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"敏感度"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"快速查看通知"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"在指纹传感器上向下滑动手指"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"开启"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"关闭"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"引导加载程序已解锁"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"请先连接到互联网"</string>
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"请连接到互联网或与您的运营商联系"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"在与运营商绑定的设备上无法使用"</string>
-    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"已释放共 <xliff:g id="SIZE">%1$s</xliff:g>\n\n上次运行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
+    <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"总共释放空间：<xliff:g id="SIZE">%1$s</xliff:g>\n\n上次执行日期：<xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"免安装应用"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"在应用中打开链接（即使未安装相关应用也无妨）"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"免安装应用"</string>
@@ -3492,6 +3599,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"自动同步工作数据"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"让应用自动刷新数据"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"帐号同步"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"已开启 <xliff:g id="ID_1">%1$d</xliff:g> 项（共 <xliff:g id="ID_2">%2$d</xliff:g> 项）的同步功能"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"已开启所有项的同步功能"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"已关闭所有项的同步功能"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"受管理设备的信息"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"由贵单位管理的更改和设置"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"由“<xliff:g id="ORGANIZATION_NAME">%s</xliff:g>”管理的更改和设置"</string>
@@ -3572,6 +3682,7 @@
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"要移除这个免安装应用吗？"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"游戏"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"音频文件"</string>
+    <string name="app_info_storage_title" msgid="5554719444625611987">"已用空间"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"（已为用户<xliff:g id="USER">%s</xliff:g>卸载）"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"（已为用户<xliff:g id="USER">%s</xliff:g>停用）"</string>
     <string name="autofill_app" msgid="7338387238377914374">"自动填充服务"</string>
@@ -3585,5 +3696,11 @@
     <string name="install_type_instant" msgid="3174425974536078647">"免安装应用"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"要关闭存储空间管理器吗？"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"影视应用"</string>
-    <string name="app_info_storage_title" msgid="5554719444625611987">"已用空间"</string>
+    <string name="carrier_provisioning" msgid="4398683675591893169">"运营商配置信息"</string>
+    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"触发运营商配置"</string>
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"新增了哪些精彩功能？"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"查看前 5 大热门功能"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"IMS 注册状态"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"已注册"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"未注册"</string>
 </resources>

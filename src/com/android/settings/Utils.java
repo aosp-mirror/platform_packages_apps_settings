@@ -943,6 +943,8 @@ public final class Utils extends com.android.settingslib.Utils {
         return result;
     }
 
+    // TODO: move this out of Utils to a mixin or a controller or a helper class.
+    @Deprecated
     public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
             boolean animate) {
         setViewShown(loading, !done, animate);
@@ -1036,7 +1038,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        return enforceSameOwner(context, userId);
+        if (userId == LockPatternUtils.USER_FRP) {
+            return enforceSystemUser(context, userId);
+        } else {
+            return enforceSameOwner(context, userId);
+        }
+    }
+
+    /**
+     * Returns the given user id if the current user is the system user.
+     *
+     * @throws SecurityException if the current user is not the system user.
+     */
+    public static int enforceSystemUser(Context context, int userId) {
+        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+            return userId;
+        }
+        throw new SecurityException("Given user id " + userId + " must only be used from "
+                + "USER_SYSTEM, but current user is " + UserHandle.myUserId());
     }
 
     /**
@@ -1233,6 +1252,11 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
+    public static boolean hasFingerprintHardware(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
     /**
      * Launches an intent which may optionally have a user id defined.
      * @param fragment Fragment to use to launch the activity.
@@ -1252,19 +1276,19 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static boolean isCarrierDemoUser(Context context) {
-        final String carrierDemoModeSetting =
-                context.getString(com.android.internal.R.string.config_carrierDemoModeSetting);
-        return UserManager.isDeviceInDemoMode(context)
-                && getUserManager(context).isDemoUser()
-                && !TextUtils.isEmpty(carrierDemoModeSetting)
-                && (Settings.Secure.getInt(context.getContentResolver(),
-                        carrierDemoModeSetting, 0) == 1);
+    public static boolean isDemoUser(Context context) {
+        return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
+    }
+
+    public static ComponentName getDeviceOwnerComponent(Context context) {
+        final DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        return dpm.getDeviceOwnerComponentOnAnyUser();
     }
 
     /**
      * Returns if a given user is a profile of another user.
-     * @param user The user whose profiles will be checked.
+     * @param user The user whose profiles wibe checked.
      * @param profile The (potential) profile.
      * @return if the profile is actually a profile
      */
@@ -1310,8 +1334,6 @@ public final class Utils extends com.android.settingslib.Utils {
                     !allowed, token);
         }
     }
-
-
 
     private static boolean isVolumeValid(VolumeInfo volume) {
         return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)

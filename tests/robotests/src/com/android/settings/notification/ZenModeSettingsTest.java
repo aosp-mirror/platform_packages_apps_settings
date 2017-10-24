@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.NotificationManager;
 import android.content.Context;
 
 import com.android.settings.R;
@@ -29,8 +30,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
+
+import static junit.framework.Assert.assertTrue;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -62,6 +63,38 @@ public class ZenModeSettingsTest {
         final String result = mBuilder.append(original, true, R.string.zen_mode_alarms);
 
         assertThat(result).contains(alarm);
+        assertThat(result).contains(original);
+        assertTrue(result.indexOf(original) < result.indexOf(alarm));
+    }
+
+    @Test
+    public void testPrepend() {
+        String original = mContext.getString(R.string.zen_mode_alarms);
+        String reminders = mContext.getString(R.string.zen_mode_reminders);
+
+        final String result = mBuilder.prepend(original, true, R.string.zen_mode_reminders);
+        assertThat(result).contains(original);
+        assertThat(result).contains(reminders);
+        assertTrue(result.indexOf(reminders) < result.indexOf(original));
+    }
+
+    @Test
+    public void testGetPrioritySettingSummary_sameOrderAsTargetPage() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(
+                NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
+                0, 0);
+        final String result = mBuilder.getPrioritySettingSummary(policy);
+
+        String alarms = mContext.getString(R.string.zen_mode_alarms);
+        String reminders = mContext.getString(R.string.zen_mode_reminders);
+        String events = mContext.getString(R.string.zen_mode_events);
+
+        assertThat(result).contains(alarms);
+        assertThat(result).contains(reminders);
+        assertThat(result).contains(events);
+        assertTrue(result.indexOf(reminders) < result.indexOf(events) &&
+                result.indexOf(events) < result.indexOf(alarms));
     }
 
 }

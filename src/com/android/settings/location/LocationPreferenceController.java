@@ -15,26 +15,70 @@
  */
 package com.android.settings.location;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.LocationManager;
 import android.provider.Settings.Secure;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineListPayload;
+import com.android.settings.search.ResultPayload;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class LocationPreferenceController extends PreferenceController {
+public class LocationPreferenceController extends PreferenceController implements
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_LOCATION = "location";
+    private Context mContext;
     private Preference mPreference;
 
-    public LocationPreferenceController(Context context) {
+    @VisibleForTesting
+    BroadcastReceiver mLocationProvidersChangedReceiver;
+
+    public LocationPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
+        mContext = context;
+        mLocationProvidersChangedReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(LocationManager.PROVIDERS_CHANGED_ACTION)) {
+                    updateSummary();
+                }
+            }
+        };
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY_LOCATION);
+    }
+
+    @Override
+    public void onResume() {
+        if (mLocationProvidersChangedReceiver != null) {
+            mContext.registerReceiver(mLocationProvidersChangedReceiver, new IntentFilter(
+                    LocationManager.PROVIDERS_CHANGED_ACTION));
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mLocationProvidersChangedReceiver != null) {
+            mContext.unregisterReceiver(mLocationProvidersChangedReceiver);
+        }
     }
 
     @Override
@@ -58,10 +102,10 @@ public class LocationPreferenceController extends PreferenceController {
 
     public static String getLocationSummary(Context context) {
         int mode = Secure.getInt(context.getContentResolver(),
-            Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
+                Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
         if (mode != Secure.LOCATION_MODE_OFF) {
             return context.getString(R.string.location_on_summary,
-                context.getString(getLocationString(mode)));
+                    context.getString(getLocationString(mode)));
         }
         return context.getString(R.string.location_off_summary);
     }
@@ -80,4 +124,14 @@ public class LocationPreferenceController extends PreferenceController {
         return 0;
     }
 
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                LocationSettings.class.getName(), KEY_LOCATION,
+                mContext.getString(R.string.location_settings_title));
+
+        return new InlineListPayload(Secure.LOCATION_MODE,
+                ResultPayload.SettingsSource.SECURE, intent, isAvailable(),
+                Secure.LOCATION_MODE_HIGH_ACCURACY + 1, Secure.LOCATION_MODE_OFF);
+    }
 }

@@ -16,6 +16,16 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -37,16 +47,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -94,9 +94,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void isAvailable_managedProfileAndNotSingleVolume_shouldReturnTrue() {
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isTrue();
@@ -104,9 +104,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void isAvailable_noManagedProfile_shouldReturnFalse() {
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.USER_NULL);
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -114,9 +114,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void isAvailable_singleVolume_shouldReturnFalse() {
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -128,7 +128,7 @@ public class WorkSoundPreferenceControllerTest {
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.USER_NULL);
 
         // When the fragment first displays, the category should not appear.
@@ -137,7 +137,7 @@ public class WorkSoundPreferenceControllerTest {
 
         // However, when a managed profile is added later, the category should appear.
         mController.onResume();
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
         mController.onManagedProfileAdded(UserHandle.myUserId());
 
@@ -150,9 +150,9 @@ public class WorkSoundPreferenceControllerTest {
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
 
         // Which is in resumed state:
         mController.displayPreference(mScreen);
@@ -161,7 +161,7 @@ public class WorkSoundPreferenceControllerTest {
         verify(mWorkCategory, times(2)).setVisible(true);
 
         // When a managed profile is removed, the category should be hidden.
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.USER_NULL);
         mController.onManagedProfileRemoved(UserHandle.myUserId());
 
@@ -171,9 +171,9 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void displayPreference_isAvailable_shouldShowPreferenceCategory() {
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
@@ -184,7 +184,7 @@ public class WorkSoundPreferenceControllerTest {
 
     @Test
     public void displayPreference_notAvailable_shouldHidePreferenceCategory() {
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.USER_NULL);
         when(mAudioHelper.isSingleVolume()).thenReturn(true);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
@@ -200,7 +200,7 @@ public class WorkSoundPreferenceControllerTest {
 
         mController.onPreferenceChange(preference, "hello");
 
-        verify(preference).setSummary(anyString());
+        verify(preference).setSummary(nullable(String.class));
     }
 
     @Test
@@ -208,9 +208,9 @@ public class WorkSoundPreferenceControllerTest {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
         mController = new WorkSoundPreferenceController(mContext, mFragment, null, mAudioHelper);
 
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
@@ -234,9 +234,9 @@ public class WorkSoundPreferenceControllerTest {
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(UserHandle.myUserId());
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(false);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(false);
 
         // When resumed:
         mController.displayPreference(mScreen);
@@ -256,9 +256,9 @@ public class WorkSoundPreferenceControllerTest {
     @Test
     public void onResume_shouldSetUserIdToPreference() {
         final int managedProfileUserId = 10;
-        when(mAudioHelper.getManagedProfileId(any(UserManager.class)))
+        when(mAudioHelper.getManagedProfileId(nullable(UserManager.class)))
                 .thenReturn(managedProfileUserId);
-        when(mAudioHelper.isUserUnlocked(any(UserManager.class), anyInt())).thenReturn(true);
+        when(mAudioHelper.isUserUnlocked(nullable(UserManager.class), anyInt())).thenReturn(true);
         when(mAudioHelper.isSingleVolume()).thenReturn(false);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mAudioHelper.createPackageContextAsUser(anyInt())).thenReturn(mContext);

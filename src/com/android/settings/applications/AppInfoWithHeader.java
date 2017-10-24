@@ -16,16 +16,16 @@
 
 package com.android.settings.applications;
 
-import static com.android.settings.applications.AppHeaderController.ActionType;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
+
+import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
 
@@ -41,9 +41,9 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         mCreated = true;
         if (mPackageInfo == null) return;
         final Activity activity = getActivity();
-        final Preference pref = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity)
-                .newAppHeaderController(this, null /* appHeader */)
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
                 .setIcon(IconDrawableFactory.newInstance(activity)
                         .getBadgedIcon(mPackageInfo.applicationInfo))
                 .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))

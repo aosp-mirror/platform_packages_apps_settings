@@ -45,12 +45,12 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;

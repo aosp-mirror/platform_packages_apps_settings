@@ -52,6 +52,11 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_accessibility_shortcut;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

@@ -22,9 +22,9 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.core.DynamicAvailabilityPreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class EnterpriseSetDefaultAppsPreferenceController
         extends DynamicAvailabilityPreferenceController {

@@ -16,6 +16,7 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.content.ComponentName;
 import android.content.Context;
 
 import com.android.settings.Utils;
@@ -28,7 +29,8 @@ import org.robolectric.annotation.Implements;
 public class ShadowUtils {
 
     private static IFingerprintManager sFingerprintManager = null;
-    private static boolean sIsCarrierDemoUser;
+    private static boolean sIsDemoUser;
+    private static ComponentName sDeviceOwnerComponentName;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -46,7 +48,7 @@ public class ShadowUtils {
 
     public static void reset() {
         sFingerprintManager = null;
-        sIsCarrierDemoUser = false;
+        sIsDemoUser = false;
     }
 
     @Implementation
@@ -54,12 +56,21 @@ public class ShadowUtils {
         return true;
     }
 
-    public static void setIsCarrierDemoUser(boolean isCarrierDemoUser) {
-        sIsCarrierDemoUser = isCarrierDemoUser;
+    public static void setIsDemoUser(boolean isDemoUser) {
+        sIsDemoUser = isDemoUser;
     }
 
     @Implementation
-    public static boolean isCarrierDemoUser(Context context) {
-        return sIsCarrierDemoUser;
+    public static boolean isDemoUser(Context context) {
+        return sIsDemoUser;
+    }
+
+    public static void setDeviceOwnerComponent(ComponentName componentName) {
+        sDeviceOwnerComponentName = componentName;
+    }
+
+    @Implementation
+    public static ComponentName getDeviceOwnerComponent(Context context) {
+        return sDeviceOwnerComponentName;
     }
 }

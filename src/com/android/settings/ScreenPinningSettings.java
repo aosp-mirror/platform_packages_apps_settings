@@ -33,6 +33,7 @@ import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -71,6 +72,11 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         mSwitchBar.addOnSwitchChangeListener(this);
         mSwitchBar.show();
         mSwitchBar.setChecked(isLockToAppEnabled(getActivity()));
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_screen_pinning;
     }
 
     @Override

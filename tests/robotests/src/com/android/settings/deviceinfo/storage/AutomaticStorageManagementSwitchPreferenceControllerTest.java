@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo.storage;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -168,5 +167,24 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
         mController.onSwitchToggled(true);
 
         verify(transaction, never()).add(any(), eq(ActivationWarningFragment.TAG));
+    }
+
+    @Config(shadows = {SettingsShadowSystemProperties.class})
+    @Test
+    public void togglingOnShouldTriggerWarningFragmentIfEnabledByDefaultAndDisabledByPolicy() {
+        FragmentTransaction transaction = mock(FragmentTransaction.class);
+        when(mFragmentManager.beginTransaction()).thenReturn(transaction);
+        SettingsShadowSystemProperties.set(
+                AutomaticStorageManagementSwitchPreferenceController
+                        .STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY,
+                "true");
+        Settings.Secure.putInt(
+                mContext.getContentResolver(),
+                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY,
+                1);
+
+        mController.onSwitchToggled(true);
+
+        verify(transaction).add(any(), eq(ActivationWarningFragment.TAG));
     }
 }

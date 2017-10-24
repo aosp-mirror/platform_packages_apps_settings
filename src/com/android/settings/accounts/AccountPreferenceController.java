@@ -47,14 +47,14 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search2.SearchFeatureProviderImpl;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 import java.util.Collections;

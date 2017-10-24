@@ -27,77 +27,62 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/suw_layout_icon"
+                style="@style/LockPatternIconStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="?attr/suwGlifHeaderGravity"
+                android:src="@drawable/ic_lock" />
+
+            <TextView
+                android:id="@+id/headerText"
+                style="@style/SuwGlifHeaderTitle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content" />
 
-                <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_lock" />
+            <TextView
+                style="@style/SuwDescription.Glif"
+                android:id="@+id/detailsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?attr/suwMarginSides"
+                android:layout_marginEnd="?attr/suwMarginSides" />
 
-                <TextView
-                    android:id="@+id/headerText"
-                    style="@style/SuwGlifHeaderTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    style="@style/SuwDescription.Glif"
-                    android:id="@+id/detailsText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="?attr/suwMarginSides"
-                    android:layout_marginEnd="?attr/suwMarginSides" />
-
-            </LinearLayout>
-
-        </ScrollView>
+        </LinearLayout>
 
         <com.android.internal.widget.LockPatternView
             android:id="@+id/lockPattern"
-            android:layout_width="312dp"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:layout_gravity="center_horizontal"/>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="4"
+            android:layout_gravity="center_horizontal"/>
 
-            <TextView
-                style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
-                android:accessibilityLiveRegion="polite"
-                android:id="@+id/errorText"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:gravity="center_vertical"/>
+        <TextView
+            style="@style/TextAppearance.ConfirmDeviceCredentialsErrorText"
+            android:accessibilityLiveRegion="polite"
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:gravity="center_vertical"/>
 
-            <ImageView
-                android:id="@+id/fingerprintIcon"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="24dp"
-                android:contentDescription="@string/confirm_fingerprint_icon_content_description"
-                android:visibility="gone"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/fingerprintIcon"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/confirm_fingerprint_icon_content_description"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/cancelButton"

@@ -55,7 +55,7 @@ public class AccessibilityServiceWarning {
         final View.OnTouchListener filterTouchListener = (View v, MotionEvent event) -> {
             // Filter obscured touches by consuming them.
             if (((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_OBSCURED) != 0)
-                || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
+                    || ((event.getFlags() & MotionEvent.FLAG_WINDOW_IS_PARTIALLY_OBSCURED) != 0)) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     Toast.makeText(v.getContext(), R.string.touch_filtered_warning,
                             Toast.LENGTH_SHORT).show();

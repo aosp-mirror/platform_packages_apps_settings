@@ -10,7 +10,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.datausage.DataUsageSummary;
-import com.android.settings.search2.DatabaseIndexingUtils;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import org.junit.Test;

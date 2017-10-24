@@ -54,7 +54,6 @@ import android.widget.SimpleAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.ChooseLockGeneric;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
@@ -62,19 +61,18 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Screen that manages the list of users on the device.
@@ -727,6 +725,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final boolean voiceCapable = Utils.isVoiceCapable(context);
         final ArrayList<Integer> missingIcons = new ArrayList<>();
         final ArrayList<UserPreference> userPreferences = new ArrayList<>();
+        int guestId = UserPreference.USERID_GUEST_DEFAULTS;
         userPreferences.add(mMePreference);
 
         for (UserInfo user : users) {
@@ -740,6 +739,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 pref = mMePreference;
             } else if (user.isGuest()) {
                 // Skip over Guest. We add generic Guest settings after this loop
+                guestId = user.id;
                 continue;
             } else {
                 // With Telephony:
@@ -816,9 +816,23 @@ public class UserSettings extends SettingsPreferenceFragment
             userPreferences.add(pref);
             pref.setDisabledByAdmin(
                     mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
-            if (!pref.isDisabledByAdmin()) {
-                pref.setSelectable(false);
-            }
+            int finalGuestId = guestId;
+            pref.setOnPreferenceClickListener(preference -> {
+                int id = finalGuestId;
+                if (id == UserPreference.USERID_GUEST_DEFAULTS) {
+                    UserInfo guest = mUserManager.createGuest(
+                            getContext(), preference.getTitle().toString());
+                    if (guest != null) {
+                        id = guest.id;
+                    }
+                }
+                try {
+                    ActivityManager.getService().switchUser(id);
+                } catch (RemoteException e) {
+                    e.rethrowFromSystemServer();
+                }
+                return true;
+            });
         }
 
         // Sort list of users by serialNum

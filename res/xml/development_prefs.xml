@@ -16,6 +16,7 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:key="development_prefs_screen"
         android:title="@string/development_settings_title">
     <com.android.settings.BugreportPreference
             android:key="bugreport"
@@ -70,7 +71,7 @@
         android:fragment="com.android.settings.applications.ConvertToFbe" />
 
     <com.android.settings.development.ColorModePreference
-        android:key="color_mode"
+        android:key="picture_color_mode"
         android:title="@string/picture_color_mode"
         android:summary="@string/picture_color_mode_desc" />
 
@@ -187,10 +188,15 @@
             android:title="@string/wifi_allow_scan_with_traffic"
             android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
 
-       <SwitchPreference
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
+
+        <SwitchPreference
+            android:key="tethering_hardware_offload"
+            android:title="@string/tethering_hardware_offload"
+            android:summary="@string/tethering_hardware_offload_summary"/>
 
         <ListPreference
             android:key="select_usb_configuration"
@@ -416,12 +422,12 @@
             android:entries="@array/app_process_limit_entries"
             android:entryValues="@array/app_process_limit_values" />
 
-        <!-- hiding for now.
+
         <Preference
                 android:key="background_check"
                 android:fragment="com.android.settings.applications.BackgroundCheckSummary"
                 android:title="@string/background_check_pref" />
-        -->
+
 
         <SwitchPreference
             android:key="show_all_anrs"

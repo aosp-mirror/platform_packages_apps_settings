@@ -16,9 +16,6 @@
 
 package com.android.settings.core.codeinspection;
 
-import com.google.common.truth.Truth;
-
-import org.junit.Assert;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.io.BufferedReader;
@@ -26,6 +23,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Modifier;
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * Inspector takes a list of class objects and perform static code analysis in its {@link #run()}
@@ -49,6 +48,17 @@ public abstract class CodeInspector {
      */
     public abstract void run();
 
+    protected void assertNoObsoleteInGrandfatherList(String listName, List<String> list) {
+        final StringBuilder obsoleteGrandfatherItems = new StringBuilder(
+                listName + " contains item that should not be grandfathered.\n");
+        for (String c : list) {
+            obsoleteGrandfatherItems.append(c).append("\n");
+        }
+        assertWithMessage(obsoleteGrandfatherItems.toString())
+                .that(list)
+                .isEmpty();
+    }
+
     protected boolean isConcreteSettingsClass(Class clazz) {
         // Abstract classes
         if (Modifier.isAbstract(clazz.getModifiers())) {
@@ -56,7 +66,7 @@ public abstract class CodeInspector {
         }
         final String packageName = clazz.getPackage().getName();
         // Classes that are not in Settings
-        if (!packageName.contains(PACKAGE_NAME + ".")) {
+        if (!packageName.contains(PACKAGE_NAME + ".") && !packageName.endsWith(PACKAGE_NAME)) {
             return false;
         }
         final String className = clazz.getName();

@@ -14,20 +14,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<LinearLayout
+
+<ImageView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/icon_container"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:minWidth="56dp"
-    android:gravity="center_horizontal|top"
-    android:orientation="horizontal"
-    android:paddingEnd="12dp"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
-    <com.android.internal.widget.PreferenceImageView
-        android:id="@android:id/icon"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:scaleType="fitCenter"/>
-</LinearLayout>
+    android:id="@android:id/icon"
+    android:layout_width="@dimen/dashboard_tile_image_size"
+    android:layout_height="match_parent"
+    android:scaleType="centerInside"
+    android:layout_marginStart="@dimen/dashboard_tile_image_margin"
+    android:layout_marginEnd="@dimen/dashboard_tile_image_margin" />

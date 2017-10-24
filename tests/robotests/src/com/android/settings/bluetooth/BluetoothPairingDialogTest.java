@@ -15,17 +15,31 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,16 +50,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.FragmentTestUtil;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.fail;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows=ShadowEventLogWriter.class)
 public class BluetoothPairingDialogTest {
 
     private static final String FILLER = "text that goes in a view";
@@ -130,12 +137,24 @@ public class BluetoothPairingDialogTest {
         when(controller.getDeviceVariantMessageHintId())
                 .thenReturn(BluetoothPairingController.INVALID_DIALOG_TYPE);
 
+        Context context = spy(ShadowApplication.getInstance().getApplicationContext());
+        InputMethodManager imm = mock(InputMethodManager.class);
+        doReturn(imm).when(context).getSystemService(Context.INPUT_METHOD_SERVICE);
+
         // build the fragment
-        BluetoothPairingDialogFragment frag = makeFragment();
+        BluetoothPairingDialogFragment frag = spy(new BluetoothPairingDialogFragment());
+        when(frag.getContext()).thenReturn(context);
+        setupFragment(frag);
+        AlertDialog alertDialog = frag.getmDialog();
 
         // check that the pin/passkey input field is visible to the user
-        View view = frag.getmDialog().findViewById(R.id.text);
+        View view = alertDialog.findViewById(R.id.text);
         assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
+
+        // check that showSoftInput was called to make input method appear when the dialog was shown
+        assertThat(view.isFocused()).isTrue();
+        assertThat(imm.isActive());
+        verify(imm).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
     @Test
@@ -393,8 +412,7 @@ public class BluetoothPairingDialogTest {
         verify(dialogActivity, times(1)).dismiss();
     }
 
-    private BluetoothPairingDialogFragment makeFragment() {
-        BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
+    private void setupFragment(BluetoothPairingDialogFragment frag) {
         assertThat(frag.isPairingControllerSet()).isFalse();
         frag.setPairingController(controller);
         assertThat(frag.isPairingDialogActivitySet()).isFalse();
@@ -403,6 +421,11 @@ public class BluetoothPairingDialogTest {
         assertThat(frag.getmDialog()).isNotNull();
         assertThat(frag.isPairingControllerSet()).isTrue();
         assertThat(frag.isPairingDialogActivitySet()).isTrue();
+    }
+
+    private BluetoothPairingDialogFragment makeFragment() {
+        BluetoothPairingDialogFragment frag = new BluetoothPairingDialogFragment();
+        setupFragment(frag);
         return frag;
     }
 }

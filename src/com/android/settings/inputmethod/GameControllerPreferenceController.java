@@ -26,9 +26,9 @@ import android.text.TextUtils;
 import android.view.InputDevice;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class GameControllerPreferenceController extends PreferenceController
         implements InputManager.InputDeviceListener, LifecycleObserver, OnResume, OnPause {

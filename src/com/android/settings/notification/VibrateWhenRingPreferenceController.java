@@ -28,9 +28,9 @@ import android.support.v7.preference.TwoStatePreference;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.provider.Settings.System.VIBRATE_WHEN_RINGING;
 

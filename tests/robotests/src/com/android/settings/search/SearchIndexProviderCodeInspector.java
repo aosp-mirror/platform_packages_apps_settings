@@ -22,7 +22,6 @@ import android.util.Log;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.core.codeinspection.CodeInspector;
 import com.android.settings.dashboard.DashboardFragmentSearchIndexProviderInspector;
-import com.android.settings.search2.DatabaseIndexingManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             // If it's a SettingsPreferenceFragment, it must also be Indexable.
             final boolean implementsIndexable = Indexable.class.isAssignableFrom(clazz);
             if (!implementsIndexable) {
-                if (!notImplementingIndexableGrandfatherList.contains(className)) {
+                if (!notImplementingIndexableGrandfatherList.remove(className)) {
                     notImplementingIndexable.add(className);
                 }
                 continue;
@@ -99,7 +98,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             final boolean hasSearchIndexProvider = hasSearchIndexProvider(clazz);
             // If it implements Indexable, it must also implement the index provider field.
             if (!hasSearchIndexProvider) {
-                if (!notImplementingIndexProviderGrandfatherList.contains(className)) {
+                if (!notImplementingIndexProviderGrandfatherList.remove(className)) {
                     notImplementingIndexProvider.add(className);
                 }
                 continue;
@@ -109,14 +108,14 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             final boolean isSharingPrefControllers = DashboardFragmentSearchIndexProviderInspector
                     .isSharingPreferenceControllers(clazz);
             if (!isSharingPrefControllers) {
-                if (!notSharingPrefControllersGrandfatherList.contains(className)) {
+                if (!notSharingPrefControllersGrandfatherList.remove(className)) {
                     notSharingPreferenceControllers.add(className);
                 }
                 continue;
             }
             // Must be in SearchProviderRegistry
             if (SearchIndexableResources.getResourceByName(className) == null) {
-                if (!notInSearchIndexableRegistryGrandfatherList.contains(className)) {
+                if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }
                 continue;
@@ -145,6 +144,15 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
         assertWithMessage(notInProviderRegistryError)
                 .that(notInSearchProviderRegistry)
                 .isEmpty();
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_indexable",
+                notImplementingIndexableGrandfatherList);
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_index_provider",
+                notImplementingIndexProviderGrandfatherList);
+        assertNoObsoleteInGrandfatherList("grandfather_not_in_search_index_provider_registry",
+                notInSearchIndexableRegistryGrandfatherList);
+        assertNoObsoleteInGrandfatherList(
+                "grandfather_not_sharing_pref_controllers_with_search_provider",
+                notSharingPrefControllersGrandfatherList);
     }
 
     private boolean hasSearchIndexProvider(Class clazz) {

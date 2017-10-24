@@ -94,13 +94,19 @@ public class PackageManagerWrapperImpl implements PackageManagerWrapper {
     }
 
     @Override
+    public VolumeInfo getPrimaryStorageCurrentVolume() {
+        return mPm.getPrimaryStorageCurrentVolume();
+    }
+
+    @Override
     public void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
             int userId) {
         mPm.deletePackageAsUser(packageName, observer, flags, userId);
     }
 
     @Override
-    public VolumeInfo getPrimaryStorageCurrentVolume() {
-        return mPm.getPrimaryStorageCurrentVolume();
+    public int getPackageUidAsUser(String pkg, int userId)
+            throws PackageManager.NameNotFoundException {
+        return mPm.getPackageUidAsUser(pkg, userId);
     }
 }

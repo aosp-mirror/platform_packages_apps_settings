@@ -16,9 +16,11 @@
 
 package com.android.settings.fingerprint;
 
+import android.app.Activity;
 import android.app.KeyguardManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,14 +28,39 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.password.SetupChooseLockGeneric;
+import com.android.settings.password.SetupSkipDialog;
 
 public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntroduction {
+    private static final String KEY_LOCK_SCREEN_PRESENT = "wasLockScreenPresent";
+    private boolean mAlreadyHadLockScreenSetup = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            mAlreadyHadLockScreenSetup = isKeyguardSecure();
+        } else {
+            mAlreadyHadLockScreenSetup = savedInstanceState.getBoolean(
+                    KEY_LOCK_SCREEN_PRESENT, false);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(KEY_LOCK_SCREEN_PRESENT, mAlreadyHadLockScreenSetup);
+    }
 
     @Override
     protected Intent getChooseLockIntent() {
-        Intent intent = new Intent(this, SetupChooseLockGeneric.class);
+        Intent intent = new Intent(this, SetupChooseLockGeneric.class)
+                .putExtra(
+                        LockPatternUtils.PASSWORD_TYPE_KEY,
+                        DevicePolicyManager.PASSWORD_QUALITY_NUMERIC);
+        intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, true);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
     }
@@ -43,12 +70,6 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
         final Intent intent = new Intent(this, SetupFingerprintEnrollFindSensor.class);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -70,31 +91,53 @@ public class SetupFingerprintEnrollIntroduction extends FingerprintEnrollIntrodu
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST) {
-            if (data == null) {
-                data = new Intent();
-            }
-            LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
-            data.putExtra(SetupChooseLockGeneric.
-                    SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY,
-                    lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+        // if lock was already present, do not return intent data since it must have been
+        // reported in previous attempts
+        if (requestCode == FINGERPRINT_FIND_SENSOR_REQUEST && isKeyguardSecure()
+                && !mAlreadyHadLockScreenSetup) {
+            data = getMetricIntent(data);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private Intent getMetricIntent(Intent data) {
+        if (data == null) {
+            data = new Intent();
+        }
+        LockPatternUtils lockPatternUtils = new LockPatternUtils(this);
+        data.putExtra(SetupChooseLockGeneric.
+                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY,
+                lockPatternUtils.getKeyguardStoredPasswordQuality(UserHandle.myUserId()));
+        return data;
+    }
+
     @Override
     protected void onCancelButtonClick() {
-        KeyguardManager keyguardManager = getSystemService(KeyguardManager.class);
-        if (keyguardManager.isKeyguardSecure()) {
+        if (isKeyguardSecure()) {
             // If the keyguard is already set up securely (maybe the user added a backup screen
             // lock and skipped fingerprint), return RESULT_SKIP directly.
-            setResult(RESULT_SKIP);
+            setResult(RESULT_SKIP, mAlreadyHadLockScreenSetup ? null : getMetricIntent(null));
             finish();
         } else {
-            SetupSkipDialog dialog = SetupSkipDialog.newInstance(
-                    getIntent().getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
-            dialog.show(getFragmentManager());
+            setResult(SetupSkipDialog.RESULT_SKIP);
+            finish();
         }
+    }
+
+    /**
+     * Propagate lock screen metrics if the user goes back from the fingerprint setup screen
+     * after having added lock screen to his device.
+     */
+    @Override
+    public void onBackPressed() {
+        if (!mAlreadyHadLockScreenSetup && isKeyguardSecure()) {
+            setResult(Activity.RESULT_CANCELED, getMetricIntent(null));
+        }
+        super.onBackPressed();
+    }
+
+    private boolean isKeyguardSecure() {
+        return getSystemService(KeyguardManager.class).isKeyguardSecure();
     }
 
     @Override

@@ -16,7 +16,6 @@
 package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
-
 import static com.android.settings.Utils.setOverlayAllowed;
 
 import android.accessibilityservice.AccessibilityServiceInfo;

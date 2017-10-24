@@ -18,11 +18,15 @@ package com.android.settings.development;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import com.android.settings.R;
 
 public class DevelopmentSettingsDisabledActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Toast.makeText(this, R.string.dev_settings_disabled_warning, Toast.LENGTH_SHORT).show();
         finish();
     }
 }

@@ -20,8 +20,6 @@ import android.app.AppOpsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -206,33 +204,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
     public static CharSequence getSummary(Context context, OverlayState overlayState) {
         return context.getString(overlayState.isPermissible() ?
-            R.string.system_alert_window_on : R.string.system_alert_window_off);
-    }
-
-    public static CharSequence getSummary(Context context, String pkg) {
-        // first check if pkg is a system pkg
-        PackageManager packageManager = context.getPackageManager();
-        int uid = -1;
-        try {
-            ApplicationInfo appInfo = packageManager.getApplicationInfo(pkg, 0);
-            uid = appInfo.uid;
-            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                return context.getString(R.string.system_alert_window_on);
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            // pkg doesn't even exist?
-            Log.w(LOG_TAG, "Package " + pkg + " not found", e);
-            return context.getString(R.string.system_alert_window_off);
-        }
-
-        AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context
-                .APP_OPS_SERVICE);
-        if (uid == -1) {
-            return context.getString(R.string.system_alert_window_off);
-        }
-
-        int mode = appOpsManager.noteOpNoThrow(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg);
-        return context.getString((mode == AppOpsManager.MODE_ALLOWED) ?
-                R.string.system_alert_window_on : R.string.system_alert_window_off);
+            R.string.app_permission_summary_allowed : R.string.app_permission_summary_not_allowed);
     }
 }

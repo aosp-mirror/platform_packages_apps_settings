@@ -226,7 +226,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> result = new ArrayList<String>();
+                final List<String> result = super.getNonIndexableKeys(context);
                 if (!SHOW_MOBILE_CATEGORY || !hasReadyMobileRadio(context)) {
                     result.add("mobile");
                 }

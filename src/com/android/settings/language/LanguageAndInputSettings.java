@@ -16,7 +16,9 @@
 
 package com.android.settings.language;
 
+import android.app.Activity;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -35,9 +37,9 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAutofillPreferenceController;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
@@ -48,7 +50,9 @@ import com.android.settings.inputmethod.GameControllerPreferenceController;
 import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,6 +86,20 @@ public class LanguageAndInputSettings extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mProgressiveDisclosureMixin.setTileLimit(2);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Hack to update action bar title. It's necessary to refresh title because this page user
+        // can change locale from here and fragment won't relaunch. Once language changes, title
+        // must display in the new language.
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        activity.setTitle(R.string.language_input_gesture_title);
     }
 
     @Override
@@ -118,7 +136,8 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         controllers.add(gameControllerPreferenceController);
         // Gestures
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
+                false /* assistOnly */));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
                 KEY_SWIPE_DOWN));
         controllers.add(new DoubleTwistPreferenceController(context, lifecycle, KEY_DOUBLE_TWIST));
@@ -141,32 +160,54 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
         private final Context mContext;
         private final SummaryLoader mSummaryLoader;
+        private final AssistGestureFeatureProvider mFeatureProvider;
 
         public SummaryProvider(Context context, SummaryLoader summaryLoader) {
             mContext = context;
             mSummaryLoader = summaryLoader;
+            mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
         }
 
         @Override
         public void setListening(boolean listening) {
+            final ContentResolver contentResolver = mContext.getContentResolver();
             if (listening) {
-                final String flattenComponent = Settings.Secure.getString(
-                        mContext.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
-                if (!TextUtils.isEmpty(flattenComponent)) {
-                    final PackageManager packageManage = mContext.getPackageManager();
-                    final String pkg = ComponentName.unflattenFromString(flattenComponent)
+                if (mFeatureProvider.isSensorAvailable(mContext)) {
+                    final boolean assistGestureEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_ENABLED, 1) != 0;
+                    final boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
+                            contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED,
+                            1) != 0;
+                    String summary;
+                    if (mFeatureProvider.isSupported(mContext) && assistGestureEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_with_assist);
+                    } else if (assistGestureSilenceEnabled) {
+                        summary = mContext.getString(
+                                R.string.language_input_gesture_summary_on_non_assist);
+                    } else {
+                        summary = mContext.getString(R.string.language_input_gesture_summary_off);
+                    }
+                    mSummaryLoader.setSummary(this, summary);
+                } else {
+                    final String flattenComponent = Settings.Secure.getString(
+                            contentResolver, Settings.Secure.DEFAULT_INPUT_METHOD);
+                    if (!TextUtils.isEmpty(flattenComponent)) {
+                        final PackageManager packageManage = mContext.getPackageManager();
+                        final String pkg = ComponentName.unflattenFromString(flattenComponent)
                             .getPackageName();
-                    final InputMethodManager imm = (InputMethodManager) mContext.getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    final List<InputMethodInfo> imis = imm.getInputMethodList();
-                    for (InputMethodInfo imi : imis) {
-                        if (TextUtils.equals(imi.getPackageName(), pkg)) {
-                            mSummaryLoader.setSummary(this, imi.loadLabel(packageManage));
-                            return;
+                        final InputMethodManager imm = (InputMethodManager)
+                            mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        final List<InputMethodInfo> imis = imm.getInputMethodList();
+                        for (InputMethodInfo imi : imis) {
+                            if (TextUtils.equals(imi.getPackageName(), pkg)) {
+                                mSummaryLoader.setSummary(this, imi.loadLabel(packageManage));
+                                return;
+                            }
                         }
                     }
+                    mSummaryLoader.setSummary(this, "");
                 }
-                mSummaryLoader.setSummary(this, "");
             }
         }
     }

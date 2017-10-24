@@ -31,9 +31,11 @@
         android:key="night_display"
         android:title="@string/night_display_title"
         android:fragment="com.android.settings.display.NightDisplaySettings"
+        android:widgetLayout="@null"
         settings:widgetLayout="@null"
         settings:keywords="@string/keywords_display_night_display" />
 
+    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <SwitchPreference
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
@@ -50,6 +52,7 @@
             android:targetClass="@string/config_wallpaper_picker_class" />
     </com.android.settingslib.RestrictedPreference>
 
+    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
     <com.android.settings.TimeoutListPreference
         android:key="screen_timeout"
         android:title="@string/screen_timeout"
@@ -57,10 +60,13 @@
         android:entries="@array/screen_timeout_entries"
         android:entryValues="@array/screen_timeout_values" />
 
-    <DropDownPreference
+    <SwitchPreference
         android:key="auto_rotate"
-        android:summary="@string/summary_placeholder"
-        android:title="@string/display_auto_rotate_title" />
+        android:title="@string/accelerometer_title" />
+
+    <SwitchPreference
+        android:key="color_mode"
+        android:title="@string/color_mode_title" />
 
     <Preference
         android:key="font_size"
@@ -76,7 +82,13 @@
     <Preference
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
-        android:fragment="com.android.settings.DreamSettings" />
+        android:fragment="com.android.settings.dream.DreamSettings" />
+
+    <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
+    <Preference
+        android:key="ambient_display"
+        android:title="@string/ambient_display_screen_title"
+        android:fragment="com.android.settings.display.AmbientDisplaySettings" />
 
     <!-- Hide night mode for now
     <ListPreference
@@ -95,21 +107,6 @@
     <SwitchPreference
         android:key="lift_to_wake"
         android:title="@string/lift_to_wake_title" />
-
-    <Preference
-        android:key="gesture_double_tap_screen_display_summary"
-        android:title="@string/ambient_display_title"
-        android:fragment="com.android.settings.gestures.DoubleTapScreenSettings" />
-
-    <Preference
-        android:key="gesture_pick_up_display_summary"
-        android:title="@string/ambient_display_pickup_title"
-        android:fragment="com.android.settings.gestures.PickupGestureSettings" />
-
-    <SwitchPreference
-        android:key="doze"
-        android:title="@string/doze_title"
-        android:summary="@string/doze_summary" />
 
     <SwitchPreference
         android:key="tap_to_wake"

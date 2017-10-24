@@ -40,9 +40,10 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -118,7 +119,7 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void findPreference_prefInCollapsedList_shouldFindIt() {
-        when(mScreen.findPreference(anyString())).thenReturn(null);
+        when(mScreen.findPreference(nullable(String.class))).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
 
         Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
@@ -139,7 +140,7 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void findPreference_prefNotInCollapsedListOrScreen_shouldNotFindIt() {
-        when(mScreen.findPreference(anyString())).thenReturn(null);
+        when(mScreen.findPreference(nullable(String.class))).thenReturn(null);
         Preference pref = mMixin.findPreference(mScreen, mPreference.getKey());
 
         assertThat(pref).isNull();
@@ -147,7 +148,7 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void findPreference_prefRemovedFromCollapsedList_shouldNotFindIt() {
-        when(mScreen.findPreference(anyString())).thenReturn(null);
+        when(mScreen.findPreference(nullable(String.class))).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
         mMixin.removePreference(mPreferenceFragment.getPreferenceScreen(), mPreference.getKey());
 
@@ -158,7 +159,7 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void findPreference_nestedPrefInCollapsedList_shouldFindIt() {
-        when(mScreen.findPreference(anyString())).thenReturn(null);
+        when(mScreen.findPreference(nullable(String.class))).thenReturn(null);
         final PreferenceScreen prefGroup = spy(new PreferenceScreen(mAppContext, null));
         when(prefGroup.getPreferenceManager()).thenReturn(mock(PreferenceManager.class));
         final Preference preference = mock(Preference.class);
@@ -183,7 +184,7 @@ public class ProgressiveDisclosureTest {
 
     @Test
     public void removeLastPreference_shouldRemoveExpandButtonToo() {
-        when(mScreen.findPreference(anyString())).thenReturn(null);
+        when(mScreen.findPreference(nullable(String.class))).thenReturn(null);
         mMixin.addToCollapsedList(mPreference);
         // Collapsed
         assertThat(mMixin.isCollapsed()).isTrue();
@@ -204,7 +205,7 @@ public class ProgressiveDisclosureTest {
 
         mMixin.collapse(screen);
         assertThat(mMixin.isCollapsed()).isFalse();
-        verify(mExpandButton, never()).setSummary(anyString());
+        verify(mExpandButton, never()).setSummary(nullable(String.class));
         verify(screen, never()).addPreference(any(Preference.class));
         verify(screen, never()).removePreference(any(Preference.class));
     }
@@ -219,7 +220,7 @@ public class ProgressiveDisclosureTest {
         mMixin.collapse(screen);
 
         assertThat(mMixin.isCollapsed()).isTrue();
-        verify(mExpandButton, atLeastOnce()).setSummary(anyString());
+        verify(mExpandButton, atLeastOnce()).setSummary(nullable(String.class));
         verify(screen).addPreference(any(ExpandPreference.class));
         verify(screen, times(3)).removePreference(any(Preference.class));
     }
@@ -264,7 +265,7 @@ public class ProgressiveDisclosureTest {
         lastPref.setOrder(100);
         // Add something to collapsed list so we are in collapsed state.
         mMixin.addToCollapsedList(new Preference(mAppContext));
-        verify(mExpandButton).setSummary(anyString());
+        verify(mExpandButton).setSummary(nullable(String.class));
         assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
 
         // 3 prefs on screen, 2 are real and the last one is more button.
@@ -286,7 +287,7 @@ public class ProgressiveDisclosureTest {
         lastPref.setOrder(100);
         // Add something to collapsed list so we are in collapsed state.
         mMixin.addToCollapsedList(new Preference(mAppContext));
-        verify(mExpandButton).setSummary(anyString());
+        verify(mExpandButton).setSummary(nullable(String.class));
         assertThat(mMixin.getCollapsedPrefs().size()).isEqualTo(1);
 
         // 3 prefs on screen, 2 are real and the last one is more button.
@@ -299,7 +300,7 @@ public class ProgressiveDisclosureTest {
 
         verify(mScreen, never()).removePreference(any(Preference.class));
         verify(mScreen, never()).addPreference(any(Preference.class));
-        verify(mExpandButton, times(2)).setSummary(anyString());
+        verify(mExpandButton, times(2)).setSummary(nullable(String.class));
         assertThat(mMixin.getCollapsedPrefs().get(0)).isSameAs(toBeAdded);
     }
 

@@ -16,12 +16,15 @@
 
 package com.android.settings.display;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.ResultPayload;
+import com.android.settings.search.InlinePayload;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -78,13 +81,25 @@ public class AutoBrightnessPreferenceControllerTest {
     }
 
     @Test
-    public void testPreferenceController_CorrectPayload() {
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
-        mController = new AutoBrightnessPreferenceController(context, PREFERENCE_KEY);
-        InlineSwitchPayload payload = (InlineSwitchPayload) mController.getResultPayload();
-        assertThat(payload.settingsUri).isEqualTo("screen_brightness_mode");
-        assertThat(payload.settingSource).isEqualTo(ResultPayload.SettingsSource.SYSTEM);
-        assertThat(payload.valueMap.get(1)).isEqualTo(true);
-        assertThat(payload.valueMap.get(0)).isEqualTo(false);
+    public void testSetValue_updatesCorrectly() {
+        int newValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.System.putInt(resolver, SCREEN_BRIGHTNESS_MODE, 0);
+
+        ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
+        int updatedValue = Settings.System.getInt(resolver, SCREEN_BRIGHTNESS_MODE, -1);
+
+        assertThat(updatedValue).isEqualTo(newValue);
+    }
+
+    @Test
+    public void testGetValue_correctValueReturned() {
+        int currentValue = 1;
+        ContentResolver resolver = mContext.getContentResolver();
+        Settings.System.putInt(resolver, SCREEN_BRIGHTNESS_MODE, currentValue);
+
+        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
+
+        assertThat(newValue).isEqualTo(currentValue);
     }
 }

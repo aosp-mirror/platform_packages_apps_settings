@@ -17,15 +17,13 @@
 package com.android.settings.fingerprint;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.UserHandle;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
 
@@ -41,20 +39,10 @@ public class SetupFingerprintEnrollFinish extends FingerprintEnrollFinish {
     }
 
     @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
-    }
-
-    @Override
     protected void initViews() {
         super.initViews();
-
-        final TextView message = (TextView) findViewById(R.id.message);
-        message.setText(R.string.setup_fingerprint_enroll_finish_message);
-
-        final TextView secondaryMessage = (TextView) findViewById(R.id.message_secondary);
-        secondaryMessage.setVisibility(View.VISIBLE);
+        Button nextButton = findViewById(R.id.next_button);
+        nextButton.setText(R.string.next_label);
     }
 
     @Override

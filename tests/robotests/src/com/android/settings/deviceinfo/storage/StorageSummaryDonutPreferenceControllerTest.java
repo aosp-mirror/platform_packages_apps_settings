@@ -39,8 +39,10 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +56,11 @@ import static com.android.settings.TestUtils.KILOBYTE;
 import static com.android.settings.TestUtils.GIGABYTE;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+        SettingsShadowResources.class,
+        SettingsShadowResources.SettingsShadowTheme.class
+})
 public class StorageSummaryDonutPreferenceControllerTest {
     private Context mContext;
     private StorageSummaryDonutPreferenceController mController;
@@ -65,6 +71,8 @@ public class StorageSummaryDonutPreferenceControllerTest {
 
     @Before
     public void setUp() throws Exception {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.string.config_headlineFontFamily, "");
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         FakeFeatureFactory.setupForTest(mContext);
         mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
@@ -77,6 +85,11 @@ public class StorageSummaryDonutPreferenceControllerTest {
                 inflater.inflate(
                         mPreference.getLayoutResource(), new LinearLayout(mContext), false);
         mHolder = PreferenceViewHolder.createInstanceForTests(view);
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test

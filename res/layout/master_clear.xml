@@ -45,6 +45,13 @@
                 android:visibility="gone"
                 android:textSize="18sp"
                 android:text="@string/master_clear_desc_also_erases_external" />
+            <TextView android:id="@+id/also_erases_esim"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:text="@string/master_clear_desc_also_erases_esim" />
             <TextView android:id="@+id/accounts_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,6 +72,12 @@
                 android:visibility="gone"
                 android:textSize="18sp"
                 android:text="@string/master_clear_other_users_present" />
+            <TextView android:id="@+id/no_cancel_mobile_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textSize="18sp"
+                android:text="@string/master_clear_desc_no_cancel_mobile_plan" />
             <TextView android:id="@+id/erase_external_option_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

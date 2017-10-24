@@ -34,12 +34,13 @@ import android.widget.Spinner;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device's network settings to a clean "just out of the box"

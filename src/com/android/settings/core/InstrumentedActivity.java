@@ -18,7 +18,7 @@ package com.android.settings.core;
 
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.core.lifecycle.ObservableActivity;
+import com.android.settingslib.core.lifecycle.ObservableActivity;
 
 /**
  * Instrumented activity that logs visibility state.

@@ -15,13 +15,22 @@
  */
 package com.android.settings.fuelgauge;
 
+import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.BatteryStats;
+import android.os.Bundle;
+import android.os.Build;
 import android.os.Process;
+import android.os.SystemClock;
+import android.os.UserManager;
 import android.text.format.DateUtils;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.R;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -53,7 +62,9 @@ import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.spy;
 
@@ -67,15 +78,18 @@ public class BatteryUtilsTest {
     private static final long TIME_STATE_TOP_SLEEPING = 2500 * UNIT;
     private static final long TIME_STATE_FOREGROUND = 3000 * UNIT;
     private static final long TIME_STATE_BACKGROUND = 6000 * UNIT;
-    private static final long TIME_FOREGROUND_ACTIVITY_ZERO = 0;
-    private static final long TIME_FOREGROUND_ACTIVITY = 100 * DateUtils.MINUTE_IN_MILLIS;
+    private static final long TIME_FOREGROUND_ZERO = 0;
+    private static final long TIME_FOREGROUND = 100 * DateUtils.MINUTE_IN_MILLIS;
     private static final long TIME_SINCE_LAST_FULL_CHARGE_MS = 120 * 60 * 1000;
+    private static final long TIME_SINCE_LAST_FULL_CHARGE_US =
+            TIME_SINCE_LAST_FULL_CHARGE_MS * 1000;
 
     private static final int UID = 123;
     private static final long TIME_EXPECTED_FOREGROUND = 1500;
     private static final long TIME_EXPECTED_BACKGROUND = 6000;
     private static final long TIME_EXPECTED_ALL = 7500;
     private static final double BATTERY_SCREEN_USAGE = 300;
+    private static final double BATTERY_IDLE_USAGE = 600;
     private static final double BATTERY_SYSTEM_USAGE = 600;
     private static final double BATTERY_OVERACCOUNTED_USAGE = 500;
     private static final double BATTERY_UNACCOUNTED_USAGE = 700;
@@ -87,9 +101,13 @@ public class BatteryUtilsTest {
     private static final int DISCHARGE_AMOUNT = 80;
     private static final double PERCENT_SYSTEM_USAGE = 60;
     private static final double PRECISION = 0.001;
+    private static final int SDK_VERSION = Build.VERSION_CODES.L;
+    private static final String PACKAGE_NAME = "com.android.app";
 
     @Mock
     private BatteryStats.Uid mUid;
+    @Mock
+    private BatteryStats.Timer mTimer;
     @Mock
     private BatterySipper mNormalBatterySipper;
     @Mock
@@ -106,6 +124,18 @@ public class BatteryUtilsTest {
     private BatterySipper mSystemBatterySipper;
     @Mock
     private BatterySipper mCellBatterySipper;
+    @Mock
+    private BatterySipper mIdleBatterySipper;
+    @Mock
+    private Bundle mBundle;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private AppOpsManager mAppOpsManager;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -132,6 +162,8 @@ public class BatteryUtilsTest {
                 anyLong(), anyInt());
         doReturn(TIME_STATE_BACKGROUND).when(mUid).getProcessStateTime(eq(PROCESS_STATE_BACKGROUND),
                 anyLong(), anyInt());
+        when(mBatteryStatsHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
+                TIME_SINCE_LAST_FULL_CHARGE_US);
 
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
@@ -155,14 +187,21 @@ public class BatteryUtilsTest {
         mUnaccountedBatterySipper.drainType = BatterySipper.DrainType.UNACCOUNTED;
         mUnaccountedBatterySipper.totalPowerMah = BATTERY_UNACCOUNTED_USAGE;
 
-        mBatteryUtils = BatteryUtils.getInstance(RuntimeEnvironment.application);
-        mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
+        mIdleBatterySipper.drainType = BatterySipper.DrainType.IDLE;
+        mIdleBatterySipper.totalPowerMah = BATTERY_IDLE_USAGE;
 
-        mBatteryUtils = spy(new BatteryUtils(RuntimeEnvironment.application));
+        final Context shadowContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(shadowContext).getPackageManager();
+        doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
+        mBatteryUtils = spy(new BatteryUtils(shadowContext));
+        mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
     }
 
     @Test
     public void testGetProcessTimeMs_typeForeground_timeCorrect() {
+        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils).getForegroundActivityTotalTimeUs(
+                eq(mUid), anyLong());
+
         final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.FOREGROUND, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
 
@@ -179,6 +218,9 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_typeAll_timeCorrect() {
+        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils).getForegroundActivityTotalTimeUs(
+                eq(mUid), anyLong());
+
         final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
 
@@ -203,6 +245,7 @@ public class BatteryUtilsTest {
         sippers.add(mUnaccountedBatterySipper);
         sippers.add(mWifiBatterySipper);
         sippers.add(mBluetoothBatterySipper);
+        sippers.add(mIdleBatterySipper);
         when(mProvider.isTypeSystem(mSystemBatterySipper))
                 .thenReturn(true);
         doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
@@ -288,24 +331,35 @@ public class BatteryUtilsTest {
 
     @Test
     public void testSmearScreenBatterySipper() {
-        final BatterySipper sipperNull = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY_ZERO,
+        final BatterySipper sipperNull = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO,
                 BATTERY_APP_USAGE, 0 /* uid */, true /* isUidNull */);
-        final BatterySipper sipperBg = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY_ZERO,
+        final BatterySipper sipperBg = createTestSmearBatterySipper(TIME_FOREGROUND_ZERO,
                 BATTERY_APP_USAGE, 1 /* uid */, false /* isUidNull */);
-        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND_ACTIVITY,
+        final BatterySipper sipperFg = createTestSmearBatterySipper(TIME_FOREGROUND,
                 BATTERY_APP_USAGE, 2 /* uid */, false /* isUidNull */);
+        final BatterySipper sipperFg2 = createTestSmearBatterySipper(TIME_FOREGROUND,
+                BATTERY_APP_USAGE, 3 /* uid */, false /* isUidNull */);
 
         final List<BatterySipper> sippers = new ArrayList<>();
         sippers.add(sipperNull);
         sippers.add(sipperBg);
         sippers.add(sipperFg);
+        sippers.add(sipperFg2);
 
         mBatteryUtils.smearScreenBatterySipper(sippers, mScreenBatterySipper);
 
         assertThat(sipperNull.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
         assertThat(sipperBg.totalPowerMah).isWithin(PRECISION).of(BATTERY_APP_USAGE);
         assertThat(sipperFg.totalPowerMah).isWithin(PRECISION).of(
-                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE);
+                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
+        assertThat(sipperFg2.totalPowerMah).isWithin(PRECISION).of(
+                BATTERY_APP_USAGE + BATTERY_SCREEN_USAGE / 2);
+    }
+
+    @Test
+    public void testCalculateRunningTimeBasedOnStatsType() {
+        assertThat(mBatteryUtils.calculateRunningTimeBasedOnStatsType(mBatteryStatsHelper,
+                BatteryStats.STATS_SINCE_CHARGED)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
     @Test
@@ -331,20 +385,88 @@ public class BatteryUtilsTest {
                 mBatteryStatsHelper, currentTimeMs)).isEqualTo(TIME_SINCE_LAST_FULL_CHARGE_MS);
     }
 
-    private BatterySipper createTestSmearBatterySipper(long activityTime, double totalPowerMah,
-            int uidCode, boolean isUidNull) {
+    @Test
+    public void testGetSummaryResIdFromAnomalyType() {
+        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKE_LOCK))
+                .isEqualTo(R.string.battery_abnormal_wakelock_summary);
+        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.WAKEUP_ALARM))
+                .isEqualTo(R.string.battery_abnormal_wakeup_alarm_summary);
+        assertThat(mBatteryUtils.getSummaryResIdFromAnomalyType(Anomaly.AnomalyType.BLUETOOTH_SCAN))
+                .isEqualTo(R.string.battery_abnormal_location_summary);
+    }
+
+    @Test
+    public void testGetForegroundActivityTotalTimeMs_returnMilliseconds() {
+        final long rawRealtimeUs = SystemClock.elapsedRealtime() * 1000;
+        doReturn(mTimer).when(mUid).getForegroundActivityTimer();
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_US).when(mTimer)
+                .getTotalTimeLocked(rawRealtimeUs, BatteryStats.STATS_SINCE_CHARGED);
+
+        assertThat(mBatteryUtils.getForegroundActivityTotalTimeUs(mUid, rawRealtimeUs)).isEqualTo(
+                TIME_SINCE_LAST_FULL_CHARGE_US);
+    }
+
+    @Test
+    public void testGetTargetSdkVersion_packageExist_returnSdk() throws
+            PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
+                PackageManager.GET_META_DATA);
+        mApplicationInfo.targetSdkVersion = SDK_VERSION;
+
+        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(SDK_VERSION);
+    }
+
+    @Test
+    public void testGetTargetSdkVersion_packageNotExist_returnSdkNull() throws
+            PackageManager.NameNotFoundException {
+        doThrow(new PackageManager.NameNotFoundException()).when(
+                mPackageManager).getApplicationInfo(PACKAGE_NAME, PackageManager.GET_META_DATA);
+
+        assertThat(mBatteryUtils.getTargetSdkVersion(PACKAGE_NAME)).isEqualTo(
+                BatteryUtils.SDK_NULL);
+    }
+
+    @Test
+    public void testBackgroundRestrictionOn_restrictionOn_returnTrue() {
+        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void testBackgroundRestrictionOn_restrictionOff_returnFalse() {
+        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(
+                AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
+
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
+                PACKAGE_NAME)).isFalse();
+    }
+
+    private BatterySipper createTestSmearBatterySipper(long topTime,
+            double totalPowerMah, int uidCode, boolean isUidNull) {
         final BatterySipper sipper = mock(BatterySipper.class);
         sipper.drainType = BatterySipper.DrainType.APP;
         sipper.totalPowerMah = totalPowerMah;
         doReturn(uidCode).when(sipper).getUid();
         if (!isUidNull) {
             final BatteryStats.Uid uid = mock(BatteryStats.Uid.class, RETURNS_DEEP_STUBS);
-            doReturn(activityTime).when(mBatteryUtils).getForegroundActivityTotalTimeMs(eq(uid),
-                    anyLong());
+            doReturn(topTime).when(mBatteryUtils).getProcessTimeMs(
+                    eq(BatteryUtils.StatusType.FOREGROUND), eq(uid), anyInt());
             doReturn(uidCode).when(uid).getUid();
             sipper.uidObj = uid;
         }
 
         return sipper;
+    }
+
+    @Test
+    public void testInitBatteryStatsHelper_init() {
+        mBatteryUtils.initBatteryStatsHelper(mBatteryStatsHelper, mBundle, mUserManager);
+
+        verify(mBatteryStatsHelper).create(mBundle);
+        verify(mBatteryStatsHelper).refreshStats(BatteryStats.STATS_SINCE_CHARGED,
+                mUserManager.getUserProfiles());
     }
 }

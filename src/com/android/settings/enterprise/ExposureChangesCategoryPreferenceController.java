@@ -20,7 +20,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.core.PreferenceAvailabilityObserver;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.HashSet;
 import java.util.List;

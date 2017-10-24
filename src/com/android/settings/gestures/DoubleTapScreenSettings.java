@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 
@@ -24,9 +25,11 @@ import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,6 +39,18 @@ public class DoubleTapScreenSettings extends DashboardFragment {
 
     private static final String TAG = "DoubleTapScreen";
     private static final String KEY_DOUBLE_TAP_SCREEN = "gesture_double_tap_screen";
+
+    public static final String PREF_KEY_SUGGESTION_COMPLETE =
+            "pref_double_tap_screen_suggestion_complete";
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        SuggestionFeatureProvider suggestionFeatureProvider = FeatureFactory.getFactory(context)
+                .getSuggestionFeatureProvider(context);
+        SharedPreferences prefs = suggestionFeatureProvider.getSharedPrefs(context);
+        prefs.edit().putBoolean(PREF_KEY_SUGGESTION_COMPLETE, true).apply();
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -50,6 +65,11 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.double_tap_screen_settings;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_double_tap_screen;
     }
 
     @Override

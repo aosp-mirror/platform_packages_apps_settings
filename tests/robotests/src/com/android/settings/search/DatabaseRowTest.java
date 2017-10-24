@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -10,24 +10,26 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License static for the specific language governing permissions and
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  *
  */
 
 package com.android.settings.search;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.Context;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.DatabaseIndexingManager.DatabaseRow;
-import com.android.settings.search2.DatabaseIndexingManager.DatabaseRow.Builder;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.ResultPayloadUtils;
+import com.android.settings.search.DatabaseIndexingManager.DatabaseRow;
+import com.android.settings.search.DatabaseIndexingManager.DatabaseRow.Builder;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -35,7 +37,7 @@ import static com.google.common.truth.Truth.assertThat;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DatabaseRowTest {
-    private Builder builder;
+    private Builder mBuilder;
 
     private static final String LOCALE = "locale";
     private static final String UPDATED_TITLE = "updated title";
@@ -46,7 +48,7 @@ public class DatabaseRowTest {
     private static final String NORMALIZED_SUMMARY_OFF = "normalized summary off";
     private static final String ENTRIES = "entries";
     private static final String CLASS_NAME = "class name";
-    private static final String SCREEN_TITLE = "sceen title";
+    private static final String SCREEN_TITLE = "screen title";
     private static final int ICON_RES_ID = 0xff;
     private static final int RANK = 1;
     private static final String SPACE_DELIMITED_KEYWORDS = "keywords";
@@ -56,28 +58,23 @@ public class DatabaseRowTest {
     private static final boolean ENABLED = true;
     private static final String KEY = "key";
     private static final int USER_ID = 1;
-    private static IntentPayload intentPayload;
 
-    private final String EXTRA_KEY = "key";
-    private final String EXTRA_VALUE = "value";
+    private Context mContext;
 
     @Before
     public void setUp() {
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA_KEY, EXTRA_VALUE);
-        intentPayload = new IntentPayload(intent);
-
-        builder = new DatabaseRow.Builder();
+        mContext = RuntimeEnvironment.application;
+        mBuilder = createBuilder();
     }
 
     @Test
-    public void testFullRowBuild_NonNull() {
+    public void testFullRowBuild_nonNull() {
         DatabaseRow row = generateRow();
         assertThat(row).isNotNull();
     }
 
     @Test
-    public void testPrimativesBuild_NoDataLoss() {
+    public void testPrimitivesBuild_noDataLoss() {
         DatabaseRow row = generateRow();
 
         assertThat(row.locale).isEqualTo(LOCALE);
@@ -100,30 +97,61 @@ public class DatabaseRowTest {
         assertThat(row.userId).isEqualTo(USER_ID);
         assertThat(row.key).isEqualTo(KEY);
         assertThat(row.payloadType).isEqualTo(ResultPayload.PayloadType.INTENT);
+        assertThat(row.payload).isNotNull();
     }
 
     @Test
-    public void testPayload_PayloadTypeAdded() {
-        DatabaseRow row = generateRow();
-        byte[] marshalledPayload = row.payload;
-        IntentPayload payload = ResultPayloadUtils.unmarshall(marshalledPayload,
-                IntentPayload.CREATOR);
-
-        Intent intent = payload.intent;
-        assertThat(intent.getExtra(EXTRA_KEY)).isEqualTo(EXTRA_VALUE);
+    public void testGenericIntent_addedToPayload() {
+        final DatabaseRow row = generateRow();
+        final ResultPayload payload = ResultPayloadUtils.unmarshall(row.payload,
+                ResultPayload.CREATOR);
+        final ComponentName name = payload.getIntent().getComponent();
+        assertThat(name.getClassName()).isEqualTo(INTENT_TARGET_CLASS);
+        assertThat(name.getPackageName()).isEqualTo(INTENT_TARGET_PACKAGE);
     }
 
     @Test
-    public void TestNullPayload_NoCrash() {
-        Builder builder = new Builder();
-        builder.setPayload(null);
-        DatabaseRow row = builder.build();
+    public void testRowWithInlinePayload_genericPayloadNotAdded() {
+        final String URI = "test uri";
+        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
+                1 /* onValue */, null /* intent */, true /* isDeviceSupported */, 1 /* default */);
+        mBuilder.setPayload(payload);
+        final DatabaseRow row = generateRow();
+        final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
+                .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
 
-        assertThat(row.payload).isNull();
+        assertThat(row.payloadType).isEqualTo(ResultPayload.PayloadType.INLINE_SWITCH);
+        assertThat(unmarshalledPayload.mSettingKey).isEqualTo(URI);
     }
+
+    @Test
+    public void testRowWithInlinePayload_intentAddedToInlinePayload() {
+        final String URI = "test uri";
+        final ComponentName component = new ComponentName(INTENT_TARGET_PACKAGE,
+                INTENT_TARGET_CLASS);
+        final Intent intent = new Intent();
+        intent.setComponent(component);
+
+        final InlineSwitchPayload payload = new InlineSwitchPayload(URI, 0 /* mSettingSource */,
+                1 /* onValue */, intent, true /* isDeviceSupported */, 1 /* default */);
+        mBuilder.setPayload(payload);
+        final DatabaseRow row = generateRow();
+        final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
+                .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
+        final ComponentName name = unmarshalledPayload.getIntent().getComponent();
+
+        assertThat(name.getClassName()).isEqualTo(INTENT_TARGET_CLASS);
+        assertThat(name.getPackageName()).isEqualTo(INTENT_TARGET_PACKAGE);
+    }
+
 
     private DatabaseRow generateRow() {
-        builder.setLocale(LOCALE)
+        return mBuilder.build(mContext);
+    }
+
+    private DatabaseRow.Builder createBuilder() {
+        mBuilder = new DatabaseRow.Builder();
+        mBuilder.setLocale(LOCALE)
                 .setUpdatedTitle(UPDATED_TITLE)
                 .setNormalizedTitle(NORMALIZED_TITLE)
                 .setUpdatedSummaryOn(UPDATED_SUMMARY_ON)
@@ -141,10 +169,7 @@ public class DatabaseRowTest {
                 .setIntentTargetClass(INTENT_TARGET_CLASS)
                 .setEnabled(ENABLED)
                 .setKey(KEY)
-                .setUserId(USER_ID)
-                .setPayload(intentPayload);
-
-        return(builder.build());
+                .setUserId(USER_ID);
+        return mBuilder;
     }
 }
-;

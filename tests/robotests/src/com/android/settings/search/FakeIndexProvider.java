@@ -19,12 +19,12 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
+
 import com.android.settings.core.PreferenceController;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FakeIndexProvider  implements Indexable {
+public class FakeIndexProvider implements Indexable {
 
     public static final String KEY = "TestKey";
 
@@ -38,7 +38,7 @@ public class FakeIndexProvider  implements Indexable {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    ArrayList<String> result = new ArrayList<>();
+                    List<String> result = super.getNonIndexableKeys(context);
                     result.add(KEY);
                     return result;
                 }

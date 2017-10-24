@@ -58,6 +58,11 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_user_and_account_dashboard;
+    }
+
+    @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyInfoPreferenceController(context));

@@ -19,17 +19,11 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Pair;
 import android.view.LayoutInflater;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.InlineSwitchPayload;
-import com.android.settings.search2.InlineSwitchViewHolder;
-import com.android.settings.search2.SearchFragment;
-import com.android.settings.search2.SearchResult;
 import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
@@ -46,8 +40,6 @@ import java.util.ArrayList;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -94,7 +86,7 @@ public class InlineSwitchViewHolderTest {
 
     @Test
     public void testBindViewElements_AllUpdated() {
-        when(mPayload.getSwitchValue(any(Context.class))).thenReturn(true);
+        when(mPayload.getValue(any(Context.class))).thenReturn(1);
         SearchResult result = getSearchResult();
         mHolder.onBind(mFragment, result);
         // Precondition: switch is on.
@@ -102,10 +94,6 @@ public class InlineSwitchViewHolderTest {
 
         mHolder.switchView.performClick();
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(
-                any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_INLINE_RESULT),
-                any(Pair.class), any(Pair.class), any(Pair.class));
         assertThat(mHolder.titleView.getText()).isEqualTo(TITLE);
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.iconView.getDrawable()).isEqualTo(mIcon);
@@ -114,13 +102,17 @@ public class InlineSwitchViewHolderTest {
 
     private SearchResult getSearchResult() {
         SearchResult.Builder builder = new SearchResult.Builder();
-        builder.addTitle(TITLE)
-                .addSummary(SUMMARY)
-                .addRank(1)
-                .addPayload(new InlineSwitchPayload("", 0, null))
+
+        builder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(1)
+                .setPayload(new InlineSwitchPayload("" /* uri */, 0 /* mSettingSource */,
+                        1 /* onValue */, null /* intent */, true /* isDeviceSupported */,
+                        1 /* default */))
                 .addBreadcrumbs(new ArrayList<>())
-                .addIcon(mIcon)
-                .addPayload(mPayload);
+                .setIcon(mIcon)
+                .setPayload(mPayload)
+                .setStableId(TITLE.hashCode());
 
         return builder.build();
     }

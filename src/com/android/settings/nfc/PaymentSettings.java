@@ -33,14 +33,13 @@ import android.view.ViewGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.PaymentBackend.PaymentAppInfo;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,11 +162,13 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
+                final List<String> nonVisibleKeys = super.getNonIndexableKeys(context);
                 final PackageManager pm = context.getPackageManager();
-                if (pm.hasSystemFeature(PackageManager.FEATURE_NFC)) return null;
-                final List<String> nonVisibleKeys = new ArrayList<String>();
+                if (pm.hasSystemFeature(PackageManager.FEATURE_NFC)) {
+                    return nonVisibleKeys;
+                }
                 nonVisibleKeys.add(PAYMENT_KEY);
                 return nonVisibleKeys;
             }
-    };
+        };
 }

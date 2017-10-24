@@ -20,8 +20,8 @@ import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class AlarmVolumePreferenceController extends
     VolumeSeekBarPreferenceController {

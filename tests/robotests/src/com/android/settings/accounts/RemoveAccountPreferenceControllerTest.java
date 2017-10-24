@@ -15,6 +15,16 @@
  */
 package com.android.settings.accounts;
 
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AccountManagerCallback;
@@ -26,8 +36,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
-import android.support.v7.preference.PreferenceScreen;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.R;
@@ -44,16 +54,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -131,7 +131,7 @@ public class RemoveAccountPreferenceControllerTest {
                     mFragment, account, userHandle);
         dialog.onCreate(new Bundle());
         dialog.onClick(null, 0);
-        verify(mAccountManager).removeAccountAsUser(eq(account), any(Activity.class),
-            any(AccountManagerCallback.class), any(Handler.class), eq(userHandle));
+        verify(mAccountManager).removeAccountAsUser(eq(account), nullable(Activity.class),
+            nullable(AccountManagerCallback.class), nullable(Handler.class), eq(userHandle));
     }
 }

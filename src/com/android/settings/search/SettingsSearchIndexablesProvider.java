@@ -23,8 +23,6 @@ import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesProvider;
 import android.util.Log;
 
-import com.android.settings.search2.DatabaseIndexingUtils;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -60,8 +58,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             ref[COLUMN_INDEX_XML_RES_RESID] = val.xmlResId;
             ref[COLUMN_INDEX_XML_RES_CLASS_NAME] = val.className;
             ref[COLUMN_INDEX_XML_RES_ICON_RESID] = val.iconResId;
-            ref[COLUMN_INDEX_XML_RES_INTENT_ACTION] = null; // intent action
-            ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE] = null; // intent target package
+            ref[COLUMN_INDEX_XML_RES_INTENT_ACTION] = val.intentAction;
+            ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE] = val.intentTargetPackage;
             ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS] = null; // intent target class
             cursor.addRow(ref);
         }

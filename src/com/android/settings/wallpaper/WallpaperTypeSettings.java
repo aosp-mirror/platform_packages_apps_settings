@@ -90,8 +90,13 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
                 final List<ResolveInfo> rList = pm.queryIntentActivities(intent,
                         PackageManager.MATCH_DEFAULT_ONLY);
 
-                // Add indexable data for each of the matching activities
+                // Add indexable data for package that is in config_wallpaper_picker_package
+                final String wallpaperPickerPackage =
+                        context.getString(R.string.config_wallpaper_picker_package);
                 for (ResolveInfo info : rList) {
+                    if (!wallpaperPickerPackage.equals(info.activityInfo.packageName)) {
+                        continue;
+                    }
                     CharSequence label = info.loadLabel(pm);
                     if (label == null) label = info.activityInfo.packageName;
 

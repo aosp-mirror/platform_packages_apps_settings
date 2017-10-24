@@ -22,9 +22,10 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class AssistGestureSettings extends DashboardFragment {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.VIEW_UNKNOWN;
+        return MetricsProto.MetricsEvent.SETTINGS_ASSIST_GESTURE;
     }
 
     @Override
@@ -59,8 +60,11 @@ public class AssistGestureSettings extends DashboardFragment {
     private static List<PreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
-        controllers.add(new AssistGestureSensitivityPreferenceController(context, lifecycle));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
+                false /* assistOnly */));
+        controllers.addAll(FeatureFactory.getFactory(context).getAssistGestureFeatureProvider()
+                .getControllers(context, lifecycle));
+
         return controllers;
     }
 

@@ -30,6 +30,7 @@
     </plurals>
     <string name="show_dev_on" msgid="1110711554982716293">"Вече сте програмист!"</string>
     <string name="show_dev_already" msgid="2151632240145446227">"Не е необходимо – вече сте програмист."</string>
+    <string name="dev_settings_disabled_warning" msgid="4909448907673974370">"Моля, първо активирайте опциите за програмисти."</string>
     <string name="header_category_wireless_networks" msgid="5110914332313954940">"Кабелни и безжични мрежи"</string>
     <string name="header_category_connections" msgid="6471513040815680662">"Връзки"</string>
     <string name="header_category_device" msgid="4544026001618307754">"Устройство"</string>
@@ -41,6 +42,7 @@
     <string name="volte_provisioned_switch_string" msgid="7979882929810283786">"Обезпечено за VoLTE"</string>
     <string name="vt_provisioned_switch_string" msgid="7876998291744854759">"Видеообажданията са обезпечени"</string>
     <string name="wfc_provisioned_switch_string" msgid="3985406545172898078">"Обажданията през Wi-Fi са обезпечени"</string>
+    <string name="eab_provisioned_switch_string" msgid="3482272907448592975">"Обезпечено за EAB/присъствие"</string>
     <string name="radio_info_radio_power" msgid="7187666084867419643">"Мощност на мобилното радио"</string>
     <string name="radioInfo_menu_viewADN" msgid="7069468158519465139">"Преглед на указателя на SIM картата"</string>
     <string name="radioInfo_menu_viewFDN" msgid="7934301566925610318">"Преглед на фиксирани номера за набиране"</string>
@@ -99,17 +101,24 @@
     <string name="bluetooth_lock_voice_dialing" msgid="3139322992062086225">"Заключване на гласовото набиране"</string>
     <string name="bluetooth_lock_voice_dialing_summary" msgid="4741338867496787042">"Предотвратява употребата на набирането за Bluetooth при заключен екран"</string>
     <string name="bluetooth_devices" msgid="1886018064039454227">"Bluetooth устройства"</string>
-    <string name="bluetooth_device_name" msgid="8415828355207423800">"Име на устройство"</string>
+    <string name="bluetooth_device_name" msgid="8415828355207423800">"Име на устройството"</string>
     <string name="bluetooth_device_details" msgid="4594773497930028085">"Настройки на устройството"</string>
     <string name="bluetooth_profile_details" msgid="6823621790324933337">"Настройки на потребителския профил"</string>
     <string name="bluetooth_name_not_set" msgid="2653752006416027426">"Няма зададено име, използва се името на профила"</string>
     <string name="bluetooth_scan_for_devices" msgid="9214184305566815727">"Сканиране за устройства"</string>
     <string name="bluetooth_rename_device" msgid="4352483834491958740">"Преименуване на устройството"</string>
     <string name="bluetooth_rename_button" msgid="1648028693822994566">"Преименуване"</string>
-    <string name="bluetooth_disconnect_title" msgid="6026705382020027966">"Да се изключи ли?"</string>
-    <string name="bluetooth_disconnect_all_profiles" msgid="9148530542956217908">"Това ще прекрати връзката ви със:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;"</string>
+    <string name="bluetooth_disconnect_title" msgid="7830252930348734303">"Прекр. на връзката с у-вото?"</string>
+    <string name="bluetooth_disconnect_all_profiles" product="default" msgid="8208712728668714199">"Връзката между телефона ви и „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ще бъде прекратена."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="tablet" msgid="6611038575213485336">"Връзката между таблета ви и „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ще бъде прекратена."</string>
+    <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"Връзката между устройството ви и „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“ ще бъде прекратена."</string>
+    <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"Прекрат."</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Нямате разрешение да променяте настройките за Bluetooth."</string>
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"Сдвояване на ново устройство"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"При отворени настройки за Bluetooth устройствата в района ще виждат „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“."</string>
+    <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"Bluetooth адрес на телефона: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"Bluetooth адрес на таблета: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_footer_mac_message" product="device" msgid="8413944740341742061">"Bluetooth адрес на устройството: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_is_disconnect_question" msgid="5334933802445256306">"Да се прекрати ли връзката с/ъс <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_broadcasting" msgid="16583128958125247">"Излъчване"</string>
     <string name="bluetooth_disable_profile_title" msgid="5916643979709342557">"Да се деактивира ли потребит. профил?"</string>
@@ -121,7 +130,7 @@
     <string name="bluetooth_notif_ticker" msgid="4726721390078512173">"Заявка за сдвояване чрез Bluetooth"</string>
     <string name="bluetooth_notif_title" msgid="2485175521845371514">"Заявка за сдвояване"</string>
     <string name="bluetooth_notif_message" msgid="5057417127600942904">"Докоснете за сдвояване с/ъс „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“."</string>
-    <string name="bluetooth_show_received_files" msgid="5164787486105868895">"Показване на получени файлове"</string>
+    <string name="bluetooth_show_received_files" msgid="3144149432555230410">"Получени файлове"</string>
     <string name="device_picker" msgid="4978696506172252813">"Изберете устройство"</string>
     <string name="bluetooth_ask_enablement" msgid="3387222809404177525">"<xliff:g id="APP_NAME">%1$s</xliff:g> иска да включи Bluetooth"</string>
     <string name="bluetooth_ask_disablement" msgid="5890386255790160573">"<xliff:g id="APP_NAME">%1$s</xliff:g> иска да изключи Bluetooth"</string>
@@ -157,6 +166,9 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$s иска достъп до съобщенията ви. Ще предоставите ли достъп до %2$s?"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"Заявка за достъп до SIM картата"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g> иска да получи достъп до SIM картата ви. Предоставянето му ще деактивира мобилните данни на устройството ви за продължителността на връзката. Разрешаване на достъпа до <xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>"</string>
+    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"Видимо като „<xliff:g id="DEVICE_NAME">^1</xliff:g>“ за другите устройства"</string>
+    <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Вашите устройства"</string>
+    <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Сдвояване на ново устройство"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Дата и час"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Избор на часова зона"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -317,7 +329,7 @@
     <string name="lock_immediately_summary_with_exception" msgid="9119632173886172690">"Веднага след спящ режим, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lock_after_timeout_summary_with_exception" msgid="5579064842797188409">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> след спящ режим, освен когато екранът се поддържа отключен от <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g>"</string>
     <string name="show_owner_info_on_lockscreen_label" msgid="5074906168357568434">"С информацията за собственика на заключения екран"</string>
-    <string name="owner_info_settings_title" msgid="5530285568897386122">"Закл. екран: Съобщ."</string>
+    <string name="owner_info_settings_title" msgid="5530285568897386122">"Съобщ. на заключен екран"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Приспособления: Акт."</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Деактивирано от администратора"</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Няма"</string>
@@ -329,7 +341,7 @@
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Профили"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Местоположение"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Профили"</string>
-    <string name="security_settings_title" msgid="6134528367364159294">"Сигурност и местоположение"</string>
+    <string name="security_settings_title" msgid="4918904614964215087">"Сигурност и местоположение"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Шифроване и идентификационни данни"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Телефонът е шифрован"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Устройството е шифровано"</string>
@@ -354,43 +366,42 @@
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Отключване с отпечатък"</string>
     <string name="security_settings_fingerprint_enroll_introduction_title_unlock_disabled" msgid="7066417934622827305">"Използване на отпечатъка ви"</string>
     <string name="security_settings_fingerprint_enroll_introduction_message" msgid="3508870672887336095">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупки или да влизате в приложения. Внимавайте чии отпечатъци добавяте – с всеки един от тях ще могат да се извършват изброените действия.\n\nЗабележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="4193477159493347679">"Трябва само да докоснете сензора за отпечатъци, за да оторизирате покупка или да влезете в приложение. Внимавайте чии отпечатъци добавяте – с всеки един от тях ще могат да се извършват изброените действия.\n\nЗабележка: Не можете да отключвате това устройство с отпечатъка си. За повече информация се свържете с администратора на организацията си."</string>
-    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="3635924459027832861">"Трябва само да докоснете сензора за отпечатъци, за да отключите телефона си, да оторизирате покупки или да влизате в приложения. Внимавайте чии отпечатъци добавяте – с всеки един от тях ще могат да се извършват изброените действия.\n\nЗабележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_unlock_disabled" msgid="1550756694054944874">"Използвайте отпечатъка си, за да отключвате телефона си или да одобрявате покупки.\n\nЗабележка: Не можете да отключвате това устройство с отпечатъка си. За повече информация се свържете с администратора на организацията си."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_message_setup" msgid="6817326798834882531">"Използвайте отпечатъка си, за да отключвате телефона си или да одобрявате покупки.\n\nЗабележка: Отпечатъкът ви може да е по-малко сигурен в сравнение с надеждна фигура или ПИН код."</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel" msgid="3199351118385606526">"Отказ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"Напред"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"Пропускане"</string>
-    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="8386444182056861429">"Добавяне на отпечатък"</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="7234486440384881699">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този таблет от други хора, ако бъде изгубен, откраднат или данните му бъдат изтрити."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="3519190003101280912">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването му от други хора, ако бъде изгубено, откраднато или данните му бъдат изтрити."</string>
-    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="417315011140961">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този телефон от други хора, ако бъде изгубен, откраднат или данните му бъдат изтрити."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="8783499872534165700">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този таблет от други хора, ако бъде изгубен или откраднат."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="3120512940873907578">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването му от други хора, ако бъде изгубено или откраднато."</string>
-    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3589945558504439395">"Функциите за защита на устройството няма да бъдат активирани. Няма да можете да предотвратите използването на този телефон от други хора, ако бъде изгубен или откраднат."</string>
+    <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"Напред"</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"Функциите за защита на таблета няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубен, откраднат или нулиран."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"Функциите за защита на устройството няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубено, откраднато или нулирано."</string>
+    <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"Функциите за защита на телефона няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубен, откраднат или нулиран."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="tablet" msgid="5219287483885558525">"Функциите за защита на таблета няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубен или откраднат."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="device" msgid="1466238255429527112">"Функциите за защита на устройството няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубено или откраднато."</string>
+    <string name="lock_screen_intro_skip_dialog_text" product="default" msgid="3008526710555416125">"Функциите за защита на телефона няма да бъдат включени. Няма да можете да предотвратите използването му от други хора, ако бъде загубен или откраднат."</string>
     <string name="skip_anyway_button_label" msgid="2323522873558834513">"Пропускане въпреки това"</string>
     <string name="go_back_button_label" msgid="4745265266186209467">"Назад"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="5877265753699187149">"Намиране на сензора"</string>
-    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="1959655161889313661">"Намерете сензора за отпечатък на гърба на телефона си."</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="3051496861358227199">"Докоснете сензора"</string>
+    <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="8793966374365960368">"Намира се на гърба на телефона ви. Използвайте показалеца си."</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_content_description" msgid="2058830032070449160">"Илюстрация с устройството и местоположението на сензора за отпечатък"</string>
     <string name="security_settings_fingerprint_enroll_dialog_name_label" msgid="7086763077909041106">"Име"</string>
     <string name="security_settings_fingerprint_enroll_dialog_ok" msgid="4150384963879569750">"ОK"</string>
     <string name="security_settings_fingerprint_enroll_dialog_delete" msgid="4114615413240707936">"Изтриване"</string>
-    <string name="security_settings_fingerprint_enroll_start_title" msgid="951888937749663602">"Да започваме"</string>
+    <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Докоснете сензора"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Поставете пръста си върху сензора и го вдигнете, след като усетите вибриране"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="8556556992897619044">"Продължавайте"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="4232813847507193627">"Движете пръста си леко, за да добавите всички различни части от отпечатъка си"</string>
-    <string name="security_settings_fingerprint_enroll_finish_title" msgid="4798692662828257300">"Отпечатъкът е добавен!"</string>
-    <string name="security_settings_fingerprint_enroll_finish_message" msgid="835496875787664316">"Когато видите тази икона, можете да използвате отпечатъка си за идентификация или за оторизиране на покупка."</string>
-    <string name="setup_fingerprint_enroll_finish_message" msgid="7234264291957984004">"Трябва само да докоснете сензора за отпечатъци, за да „събудите“ и отключите устройството си."</string>
-    <string name="setup_fingerprint_enroll_finish_message_secondary" msgid="7104778933406207968">"Когато видите тази икона, можете също да оторизирате покупки или да влизате в приложения."</string>
+    <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Вдигнете пръст и докоснете отново"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Продължавайте да вдигате пръста си, за да добавите различните части от отпечатъка си"</string>
+    <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Отпечатъкът е добавен"</string>
+    <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Когато видите тази икона, използвайте отпечатъка си за идентификация или за одобряване на покупки."</string>
+    <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"По-късно"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_title" msgid="6808422329107426923">"Пропуск. на настройването на отпечатък?"</string>
     <string name="setup_fingerprint_enroll_enrolling_skip_message" msgid="274849306857859783">"Избрахте да използвате отпечатъка си като един от начините за отключване на телефона си. Ако пропуснете сега, ще трябва да настроите по-късно. Настройването отнема около минута."</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="1195743489835505376">"Заключване на екрана: Настройване"</string>
     <string name="security_settings_fingerprint_enroll_done" msgid="4014607378328187567">"Готово"</string>
     <string name="security_settings_fingerprint_enroll_touch_dialog_title" msgid="1863561601428695160">"Ами сега! Това не е сензорът"</string>
-    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="5053971232594165142">"Ползвайте сензора за отпечатък на устр. си."</string>
+    <string name="security_settings_fingerprint_enroll_touch_dialog_message" msgid="2989019978041986175">"С показалеца си докоснете сензора на гърба на телефона."</string>
     <string name="security_settings_fingerprint_enroll_error_dialog_title" msgid="3618021988442639280">"Регистрирането не бе завършено"</string>
     <string name="security_settings_fingerprint_enroll_error_timeout_dialog_message" msgid="2942551158278899627">"Времевото ограничение за регистриране на отпечатък бе достигнато. Опитайте отново."</string>
-    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Регистрирането на отпечатък не проработи. Опитайте отново или използвайте друг пръст."</string>
+    <string name="security_settings_fingerprint_enroll_error_generic_dialog_message" msgid="3624760637222239293">"Регистрирането на отпечатък не бе успешно. Опитайте отново или използвайте друг пръст."</string>
     <string name="fingerprint_enroll_button_add" msgid="6317978977419045463">"Добавяне на друг"</string>
     <string name="fingerprint_enroll_button_next" msgid="6247009337616342759">"Напред"</string>
     <string name="security_settings_fingerprint_enroll_disclaimer" msgid="2624905914239271751">"Освен за отключване на телефона си можете да използвате отпечатъка си и за упълномощаване на покупки и достъп до приложения. "<annotation id="url">"Научете повече"</annotation></string>
@@ -449,6 +460,8 @@
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Предотвратете използването на това устройство от други хора без разрешението ви, като активирате функциите за защитата му. Изберете опцията за заключване на екрана, която искате да използвате."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Предотвратете използването на този телефон от други хора без разрешението ви, като активирате функциите за защита на устройството. Изберете опцията за заключване на екрана, която искате да използвате."</string>
     <string name="lock_settings_picker_fingerprint_message" msgid="4755230324778371292">"Изберете резервния си начин на заключване на екрана"</string>
+    <string name="setup_lock_settings_options_button_label" msgid="8511153243629402929">"Опции за заключване на екрана"</string>
+    <string name="setup_lock_settings_options_dialog_title" msgid="5058207955455973917">"Опции за заключване на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_title" msgid="2084576942666016993">"Заключване на екрана"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_immediately" msgid="5967714169972542586">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/непосредствено след преминаване в спящ режим"</string>
     <string name="unlock_set_unlock_launch_picker_summary_lock_after_timeout" msgid="4696710373399258413">"<xliff:g id="UNLOCK_METHOD">%1$s</xliff:g>/<xliff:g id="TIMEOUT_STRING">%2$s</xliff:g> след преминаване в спящ режим"</string>
@@ -519,13 +532,21 @@
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"Промяна на фигурата за отключване"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"Промяна на PIN кода за отключване"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"Промяна на паролата за отключване"</string>
-    <string name="lock_profile_wipe_attempts" msgid="1216193652369039672">"Опитайте отново. Опит <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> от <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
-    <string name="lock_profile_wipe_warning_title" msgid="2961600792367265036">"Последен опит"</string>
-    <string name="lock_profile_wipe_warning_content_pattern" msgid="8978031996247660921">"Ако въведете неправилна фигура при този опит, служебният ви потребителски профил и свързаните с него данни ще бъдат премахнати от това устройство."</string>
-    <string name="lock_profile_wipe_warning_content_pin" msgid="7697973618542377880">"Ако въведете неправилен ПИН код при този опит, служебният ви потребителски профил и свързаните с него данни ще бъдат премахнати от това устройство."</string>
-    <string name="lock_profile_wipe_warning_content_password" msgid="450695588340509349">"Ако въведете неправилна парола при този опит, служебният ви потребителски профил и свързаните с него данни ще бъдат премахнати от това устройство."</string>
-    <string name="lock_profile_wipe_content" msgid="2150455386921347628">"Твърде много неправилни опити. Служебният ви потребителски профил и свързаните с него данни ще бъдат премахнати от това устройство."</string>
-    <string name="lock_profile_wipe_dismiss" msgid="5118293266264141442">"Отхвърляне"</string>
+    <string name="lock_failed_attempts_before_wipe" msgid="2219711062197089783">"Опитайте отново. Опит <xliff:g id="CURRENT_ATTEMPTS">%1$d</xliff:g> от <xliff:g id="TOTAL_ATTEMPTS">%2$d</xliff:g>."</string>
+    <string name="lock_last_attempt_before_wipe_warning_title" msgid="4277765862798876826">"Данните ви ще бъдат изтрити"</string>
+    <string name="lock_last_pattern_attempt_before_wipe_device" msgid="1688030823464420974">"Ако въведете неправилна фигура при следващия опит, данните от това устройство ще бъдат изтрити."</string>
+    <string name="lock_last_pin_attempt_before_wipe_device" msgid="5350785938296254352">"Ако въведете неправилен ПИН код при следващия опит, данните от това устройство ще бъдат изтрити."</string>
+    <string name="lock_last_password_attempt_before_wipe_device" msgid="6208035114731421034">"Ако въведете неправилна парола при следващия опит, данните от това устройство ще бъдат изтрити."</string>
+    <string name="lock_last_pattern_attempt_before_wipe_user" msgid="7851504071368235547">"Ако въведете неправилна фигура при следващия опит, този потребител ще бъде изтрит."</string>
+    <string name="lock_last_pin_attempt_before_wipe_user" msgid="4049024921333961715">"Ако въведете неправилен ПИН код при следващия опит, този потребител ще бъде изтрит."</string>
+    <string name="lock_last_password_attempt_before_wipe_user" msgid="4660886542496781672">"Ако въведете неправилна парола при следващия опит, този потребител ще бъде изтрит."</string>
+    <string name="lock_last_pattern_attempt_before_wipe_profile" msgid="2437716252059050291">"Ако въведете неправилна фигура при следващия опит, служебният ви потребителски профил и данните в него ще бъдат изтрити."</string>
+    <string name="lock_last_pin_attempt_before_wipe_profile" msgid="5799931839127476913">"Ако въведете неправилен ПИН код при следващия опит, служебният ви потребителски профил и данните в него ще бъдат изтрити."</string>
+    <string name="lock_last_password_attempt_before_wipe_profile" msgid="6786586046975042158">"Ако въведете неправилна парола при следващия опит, служебният ви потребителски профил и данните в него ще бъдат изтрити."</string>
+    <string name="lock_failed_attempts_now_wiping_device" msgid="5047439819181833824">"Твърде много неправилни опити. Данните от това устройство ще бъдат изтрити."</string>
+    <string name="lock_failed_attempts_now_wiping_user" msgid="6188180643494518001">"Твърде много неправилни опити. Този потребител ще бъде изтрит."</string>
+    <string name="lock_failed_attempts_now_wiping_profile" msgid="1745475043685915442">"Твърде много неправилни опити. Този служебен потребителски профил и данните в него ще бъдат изтрити."</string>
+    <string name="lock_failed_attempts_now_wiping_dialog_dismiss" msgid="8246716090548717312">"Отхвърляне"</string>
     <string name="lockpassword_password_too_short" msgid="2726090378672764986">"Трябва да съдържа поне <xliff:g id="COUNT">%d</xliff:g> знака"</string>
     <string name="lockpassword_pin_too_short" msgid="3638188874397727648">"ПИН кодът трябва да съдържа поне <xliff:g id="COUNT">%d</xliff:g> цифри"</string>
     <string name="lockpassword_continue_label" msgid="4602203784934526940">"Напред"</string>
@@ -626,6 +647,14 @@
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Разширени настр. за Bluetooth"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"При включен Bluetooth устройството ви може да се свързва с други устройства с Bluetooth в района."</string>
     <string name="ble_scan_notify_text" msgid="1295915006005700650">"С цел подобряване на точността на местоположението системните приложения и услуги пак ще могат да откриват устройства с Bluetooth. Можете да промените това от <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>настройките за сканиране<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <string name="bluetooth_connect_failed" msgid="4500234659813241053">"Не можа да се установи връзка. Опитайте отново."</string>
+    <string name="device_details_title" msgid="6576953269221085300">"Подробности за устройството"</string>
+    <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"Bluetooth адрес на устройството: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="38467834196432400">"Да се забрави ли устройството?"</string>
+    <string name="bluetooth_unpair_dialog_body" product="default" msgid="9087609557757135712">"Телефонът ви вече няма да бъде сдвоен с/ъс „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="bluetooth_unpair_dialog_body" product="tablet" msgid="7785695793007576501">"Таблетът ви вече няма да бъде сдвоен с/ъс „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="bluetooth_unpair_dialog_body" product="device" msgid="251257782642157557">"Устройството ви вече няма да бъде сдвоено с/ъс „<xliff:g id="DEVICE_NAME">%1$s</xliff:g>“"</string>
+    <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="3829370108973879006">"Забравяне на устройството"</string>
     <string name="bluetooth_connect_specific_profiles_title" msgid="6952214406025825164">"Свързване с/ъс..."</string>
     <string name="bluetooth_disconnect_a2dp_profile" msgid="3524648279150937177">"Връзката между <xliff:g id="DEVICE_NAME">%1$s</xliff:g> и мултимедийното аудио ще бъде прекъсната."</string>
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"Връзката между <xliff:g id="DEVICE_NAME">%1$s</xliff:g> и аудиото от „свободни ръце“ ще бъде прекъсната."</string>
@@ -691,11 +720,14 @@
     <string name="wifi_wakeup" msgid="8815640989361538036">"Автоматично включване на Wi‑Fi"</string>
     <string name="wifi_wakeup_summary" msgid="2530814331062997163">"Wi‑Fi ще се включва при наличие на висококачествени запазени мрежи, като например тази в дома ви"</string>
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Не е налице, защото сканирането за Wi‑Fi е изключено"</string>
+    <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"За да използвате, изберете доставчик на услуги за оценка на мрежите"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Да се избягват лоши връзки"</string>
     <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Да не се използва Wi‑Fi мрежа, освен ако няма добра връзка с интернет"</string>
     <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"Да се ползват само мрежи с добра връзка с интернет"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Свързване с отворените мрежи"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Автоматично свързване с висококачествени обществени мрежи"</string>
+    <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"За да използвате, изберете доставчик на услуги за оценка на мрежите"</string>
+    <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"За да използвате, изберете съвместим доставчик на услуги за оценка на мрежите"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Инсталиране на сертификати"</string>
     <string name="wifi_scan_notify_text" msgid="5593805423071186757">"С цел подобряване на точността на местоположението системните приложения и услуги пак ще могат да сканират за Wi‑Fi мрежи. Можете да промените това от <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>настройките за сканиране<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"С цел подобряване на точността на местоположението включете сканирането за Wi-Fi от <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>съответните настройки<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
@@ -779,6 +811,7 @@
     <string name="wifi_do_not_provide_eap_user_cert" msgid="5160499244977160665">"Без предоставяне"</string>
     <string name="wifi_do_not_validate_eap_server" msgid="4266754430576348471">"Без удостоверяване"</string>
     <string name="wifi_do_not_validate_eap_server_warning" msgid="1787190245542586660">"Не е посочен сертификат. Връзката ви няма да бъде частна."</string>
+    <string name="wifi_ssid_too_long" msgid="3474753269579895244">"Името на мрежата е твърде дълго."</string>
     <string name="wifi_no_domain_warning" msgid="5223011964091727376">"Трябва да посочите домейн."</string>
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"Налице е WPS"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (Налице е WPS)"</string>
@@ -810,7 +843,6 @@
       <item quantity="one">1 мрежа</item>
     </plurals>
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi‑Fi: разширени настр."</string>
-    <string name="wifi_configure_titlebar" msgid="7977475161589303074">"Конфигуриране на Wi-Fi"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC адрес"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP адрес"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Подмрежова маска"</string>
@@ -847,9 +879,17 @@
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Да се забрави ли тази група?"</string>
     <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"Преносима точка за достъп до Wi‑Fi"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Точка за достъп до Wi‑Fi"</string>
-    <string name="wifi_hotspot_checkbox_text_summary" msgid="5347703013899354452">"Използване на мобилната връзка като Wi‑Fi мрежа"</string>
-    <string name="wifi_hotspot_off_subtext" product="tablet" msgid="2745508221200463254">"Връзката с интернет на този таблет не се споделя през точка за достъп"</string>
-    <string name="wifi_hotspot_off_subtext" product="default" msgid="7746761268472599794">"Връзката с интернет на този телефон не се споделя през точка за достъп"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Не споделяте с други устройства нито връзката с интернет, нито съдържание"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Връзката с интернет на този таблет се споделя през точка за достъп"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Връзката с интернет на този телефон се споделя през точка за достъп"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"Приложението споделя съдържание. За да споделите връзката с интернет, изключете точката за достъп и я включете отново"</string>
+    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Име на точката за Wi‑Fi"</string>
+    <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"„<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>“ се включва..."</string>
+    <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"Други устройства могат да се свързват към „<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>“"</string>
+    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Парола за точката за Wi-Fi"</string>
+    <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Честота на точката за достъп"</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Използвайте точка за достъп, за да създадете Wi‑Fi мрежа за другите си устройства. Точката осигурява достъп до интернет посредством мобилната ви връзка за данни. Може да бъдете таксувани допълнително за пренос на мобилни данни."</string>
+    <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Приложенията могат да създават точки за достъп, за да споделят съдържание с устройства в близост."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Точката за достъп се включва…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Точката за достъп се изключва…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"Мрежата „<xliff:g id="NETWORK_SSID">%1$s</xliff:g>“ е активна"</string>
@@ -896,6 +936,7 @@
     <item msgid="6200207341126893791">"1"</item>
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Когато функцията за обаждания през Wi-Fi е включена, телефонът ви може да маршрутизира обажданията през Wi-Fi мрежи или мрежата на оператора ви в зависимост от предпочитанието ви и от това, кой сигнал е по-силен. Преди да включите тази функция, потърсете от оператора си информация относно таксите и други подробности."</string>
+    <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"Актуализиране на адреса за спешни случаи"</string>
     <string name="emergency_address_summary" msgid="306028701568728126">"Адресът, който спешните служби ще използват като ваше местоположение, ако се обадите на 112 посредством Wi-Fi"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Дисплей"</string>
@@ -953,6 +994,7 @@
     <string name="search_settings_no_results" msgid="8799027492641230999">"Няма резултати"</string>
     <string name="display_settings" msgid="7965901687241669598">"Дисплей"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Авт. завъртане на екрана"</string>
+    <string name="color_mode_title" msgid="3159275920408338215">"Ярки цветове"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Автоматично превключване на ориентацията при завъртане на таблета"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Автоматично превключване на ориентацията при завъртане на телефона"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Автоматично превключване на ориентацията при завъртане на таблета"</string>
@@ -980,23 +1022,22 @@
     <string name="auto_brightness_disclaimer" msgid="871436423746343406">"Нивото на яркостта се оптимизира спрямо околната светлина. Пак можете да го коригирате временно."</string>
     <string name="night_display_title" msgid="2626451512200357686">"Нощно осветление"</string>
     <string name="night_display_text" msgid="1837277457033025056">"Функцията „Нощно осветление“ придава кехлибареножълт нюанс на екрана. Това подобрява видимостта му и четенето на него при слаба светлина и може да ви помогне да заспите по-лесно."</string>
-    <string name="night_display_category_schedule" msgid="2044072617637348966">"Насрочване"</string>
-    <string name="night_display_category_status" msgid="1952928783124400330">"Състояние"</string>
-    <string name="night_display_auto_mode_title" msgid="8046314360381608455">"Автоматично включване"</string>
-    <string name="night_display_auto_mode_never" msgid="6723636142053240947">"Никога"</string>
-    <string name="night_display_auto_mode_custom" msgid="6012300346981608242">"Персонализиран график"</string>
-    <string name="night_display_auto_mode_twilight" msgid="2123345097508167094">"От залез до изгрев"</string>
+    <string name="night_display_auto_mode_title" msgid="6574111412154833409">"График"</string>
+    <string name="night_display_auto_mode_never" msgid="2483761922928753400">"Няма"</string>
+    <string name="night_display_auto_mode_custom" msgid="2379394568898721765">"Включва се в избран час"</string>
+    <string name="night_display_auto_mode_twilight" msgid="589042813708244059">"Включва се от залез до изгрев"</string>
     <string name="night_display_start_time_title" msgid="8918016772613689584">"Начален час"</string>
     <string name="night_display_end_time_title" msgid="8286061578083519350">"Краен час"</string>
+    <string name="night_display_status_title" msgid="1784041143360286267">"Състояние"</string>
     <string name="night_display_temperature_title" msgid="1435292789272017136">"Наситеност"</string>
-    <string name="night_display_summary_off" msgid="7009821232380000786">"Изключено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_off_auto_mode_never" msgid="2305501561697289620">"Няма да се включи автоматично."</string>
-    <string name="night_display_summary_off_auto_mode_custom" msgid="1548073080728058384">"Ще се включи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>."</string>
-    <string name="night_display_summary_off_auto_mode_twilight" msgid="2737328390752018845">"Ще се включи автоматично при залез."</string>
-    <string name="night_display_summary_on" msgid="6626224414971753417">"Включено. <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_never" msgid="5217396859715040056">"Няма да се изключи автоматично."</string>
-    <string name="night_display_summary_on_auto_mode_custom" msgid="887702685252504739">"Ще се изключи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="night_display_summary_on_auto_mode_twilight" msgid="8574989770628425398">"Ще се изключи автоматично при изгрев."</string>
+    <string name="night_display_summary_off" msgid="1792750041697946539">"Изключено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_never" msgid="3583590137322963513">"Няма да се включи автоматично"</string>
+    <string name="night_display_summary_off_auto_mode_custom" msgid="6365668239253173208">"Ще се включи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_off_auto_mode_twilight" msgid="3596291693781757392">"Ще се включи автоматично при залез"</string>
+    <string name="night_display_summary_on" msgid="1355713529996456744">"Включено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_never" msgid="9117830821363119835">"Няма да се изключи автоматично"</string>
+    <string name="night_display_summary_on_auto_mode_custom" msgid="5510753572245577263">"Ще се изключи автоматично в <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="night_display_summary_on_auto_mode_twilight" msgid="852270120144683507">"Ще се изключи автоматично при изгрев"</string>
     <string name="screen_timeout" msgid="4351334843529712571">"Спящ режим"</string>
     <string name="screen_timeout_title" msgid="5130038655092628247">"Екранът се изключва"</string>
     <string name="screen_timeout_summary" msgid="327761329263064327">"След <xliff:g id="TIMEOUT_DESCRIPTION">%1$s</xliff:g> неактивност"</string>
@@ -1020,8 +1061,14 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Настройки"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Автоматична яркост"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Събуждане при повдигане"</string>
-    <string name="doze_title" msgid="2259176504273878294">"Дисплей, открояващ важни неща"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Дисплей, открояващ важни неща"</string>
+    <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Винаги вкл./по-интензивно използване на батерията"</string>
+    <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Нови известия"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Кога да се показва"</string>
+    <string name="doze_title" msgid="2375510714460456687">"Нови известия"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Включване на екрана при получаване на известия"</string>
+    <string name="doze_always_on_title" msgid="1046222370442629646">"Винаги включено"</string>
+    <string name="doze_always_on_summary" msgid="6978257596231155345">"Показване на часа, иконите за известия и друга информация. По-интензивно използване на батерията."</string>
     <string name="title_font_size" msgid="4405544325522105222">"Размер на шрифта"</string>
     <string name="short_summary_font_size" msgid="6819778801232989076">"Уголемяване или намаляване на текст"</string>
     <string name="sim_lock_settings" msgid="3392331196873564292">"Заключване на SIM картата"</string>
@@ -1273,6 +1320,7 @@
     <string name="error_apn_empty" msgid="4932211013600863642">"Името на точката за достъп (APN) трябва да се попълни."</string>
     <string name="error_mcc_not3" msgid="4560171714156251661">"Полето за мобилен код на държавата трябва да е 3 цифри."</string>
     <string name="error_mnc_not23" msgid="8418177072458379439">"Полето за код на мобилна мрежа (MNC) трябва да е с 2 или 3 цифри"</string>
+    <string name="error_adding_apn_type" msgid="4181334016628549645">"Операторът не позволява добавянето на имена на точки за достъп (APN) от типа „%s“."</string>
     <string name="restore_default_apn" msgid="8178010218751639581">"Стандартните настройки за името на точката за достъп (APN) се възстановяват."</string>
     <string name="menu_restore" msgid="8260067415075573273">"Възстановяване на стандартни"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"Възстановяването на стандартните настройките за името на точката за достъп (APN) завърши."</string>
@@ -1292,16 +1340,21 @@
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"Вътрешното хранилище ще се нулира и всички данни ще бъдат изчистени"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на таблета ви, включително:\n\n"<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на телефона ви, включително:\n\n"<li>"профила ви в Google;"</li>\n<li>"данни и настройки от системата и приложенията;"</li>\n<li>"изтеглени приложения."</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Това ще изтрие всички данни от "<b>"вътрешното хранилище"</b>" на телефона ви, включително:\n\n"<li>"профила ви в Google"</li>\n<li>"данни и настройки от системата и приложенията"</li>\n<li>"изтеглени приложения"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Понастоящем сте влезли в следните профили:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"На това устройство има други потребители.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Музика"</li>\n<li>"Снимки"</li>\n<li>"Други потребителски данни"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"Операторите за електронната SIM карта"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"Планът ви за мобилна услуга няма да бъде анулиран."</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"За да изчистите музиката, снимките и другите потребителски данни, трябва да се изтрие "<b>"USB хранилището"</b>"."</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"За да изчистите музиката, снимките и другите потребителски данни, трябва да се изтрие "<b>"SD картата"</b>"."</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"Изтриване на USB хранилището"</string>
     <string name="erase_external_storage" product="default" msgid="1397239046334307625">"Изтриване на SD картата"</string>
     <string name="erase_external_storage_description" product="nosdcard" msgid="4728558173931599429">"Изтриване на всички данни във вътрешното USB хранилище, като музика или снимки"</string>
     <string name="erase_external_storage_description" product="default" msgid="1737638779582964966">"Да се изтриват всички данни в SD картата, като музика или снимки"</string>
+    <string name="erase_esim_storage" msgid="1886761972867390123">"Изтриване на ел. SIM карти"</string>
+    <string name="erase_esim_storage_description" product="default" msgid="708691303677321598">"Изтрийте всички електронни SIM карти на телефона. Това действие няма да анулира плана ви за мобилна услуга."</string>
+    <string name="erase_esim_storage_description" product="tablet" msgid="1780953956941209107">"Изтрийте всички електронни SIM карти на таблета. Това действие няма да анулира плана ви за мобилна услуга."</string>
     <string name="master_clear_button_text" product="tablet" msgid="3130786116528304116">"Възстановяване на таблета"</string>
     <string name="master_clear_button_text" product="default" msgid="7550632653343157971">"Нулиране на телефона"</string>
     <string name="master_clear_final_desc" msgid="7318683914280403086">"Да се изтрият ли цялата ви лична информация и всички изтеглени приложения? Не можете да отмените това действие!"</string>
@@ -1324,26 +1377,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"При включена Икономия на данни не можете да активирате функцията за тетъринг, нито да използвате преносими точки за достъп"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Тетъринг през USB"</string>
-    <string name="usb_tethering_available_subtext" msgid="156779271296152605">"Връзка през USB, проверете за тетъринг"</string>
-    <string name="usb_tethering_active_subtext" msgid="8916210851136467042">"Извършен тетъринг"</string>
-    <string name="usb_tethering_storage_active_subtext" msgid="8427089411146908205">"Не може да се извърши тетъринг, когато USB хранилището се използва"</string>
-    <string name="usb_tethering_unavailable_subtext" msgid="1044622421184007254">"USB не е свързано"</string>
-    <string name="usb_tethering_turnon_subtext" msgid="4748616058219273033">"Установете връзка, за да включите"</string>
-    <string name="usb_tethering_errored_subtext" msgid="1377574819427841992">"Грешка в тетъринг през USB"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Споделете връзката с интернет на телефона през USB"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Споделете връзката с интернет на таблета през USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Тетъринг през Bluetooth"</string>
-    <string name="bluetooth_tethering_available_subtext" product="tablet" msgid="2092766774943506688">"Връзката с интернет се споделя през Bluetooth"</string>
-    <string name="bluetooth_tethering_available_subtext" product="default" msgid="313873759999970236">"Връзката с интернет се споделя през Bluetooth"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="tablet" msgid="6388191062495199481">"Връзката с интернет се споделя през Bluetooth с 1 устройство"</string>
-    <string name="bluetooth_tethering_device_connected_subtext" product="default" msgid="5970460338828861091">"Връзката с интернет се споделя през Bluetooth с 1 устройство"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="tablet" msgid="3253150865825199632">"Връзката с интернет се споделя през Bluetooth с/ъс <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> устройства"</string>
-    <string name="bluetooth_tethering_devices_connected_subtext" product="default" msgid="8268867745495039177">"Връзката с интернет се споделя през Bluetooth с/ъс <xliff:g id="CONNECTEDDEVICECOUNT">%1$d</xliff:g> устройства"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Споделете връзката с интернет на таблета през Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Споделете връзката с интернет на телефона през Bluetooth"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Връзката с интернет на <xliff:g id="DEVICE_NAME">%1$d</xliff:g> се споделя през Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext" product="tablet" msgid="1889565070769307732">"Връзката с интернет не се споделя през Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext" product="default" msgid="1838503633450298902">"Връзката с интернет не се споделя през Bluetooth"</string>
-    <string name="bluetooth_tethering_errored_subtext" msgid="4926566308991142264">"Няма връзка с тетъринг"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Не може да се извърши тетъринг с над <xliff:g id="MAXCONNECTION">%1$d</xliff:g> устройства."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Тетърингът на <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ще бъде прекъснат."</string>
-    <string name="tethering_footer_info" msgid="7287131664937054043">"Използвайте точка за достъп и тетъринг, за да предоставите достъп до интернет на други устройства чрез мобилната си връзка за данни."</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Използвайте точка за достъп и тетъринг, за да предоставите достъп до интернет на други устройства чрез мобилната си връзка за данни. Приложенията могат също да създават точки за достъп, за да споделят съдържание с устройства в близост."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Помощ"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Мобилна мрежа"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Мобилен план"</string>
@@ -1376,7 +1418,7 @@
     <string name="location_mode_screen_title" msgid="4528716772270246542">"Режим"</string>
     <string name="location_mode_high_accuracy_description" msgid="3453010562265338113">"Определяне на местоположението посредством GPS, Wi‑Fi, Bluetooth или мобилни мрежи"</string>
     <string name="location_mode_battery_saving_description" msgid="2365298246603348985">"Определяне на местоположението посредством Wi‑Fi, Bluetooth или мобилни мрежи"</string>
-    <string name="location_mode_sensors_only_description" msgid="788127681455735699">"Използване на GPS за определяне на местоположението"</string>
+    <string name="location_mode_sensors_only_description" msgid="7247994752324805202">"Определяне на местоположението посредством GPS и сензорите на устройството"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Сканиране"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Сканиране за Wi‑Fi"</string>
     <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Подобряване на местоположението чрез разрешаване на системните приложения и услуги да откриват Wi‑Fi мрежи по всяко време."</string>
@@ -1421,8 +1463,11 @@
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Нямате връзка за данни. За да видите тази информация сега, отворете %s от всеки компютър, свързан с интернет."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Зарежда се…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"Изберете паролата си"</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Задайте парола, за да ползвате отпечатък"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"Изберете фигурата си"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Задайте фигура, за да ползвате отпечатък"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"Изберете своя ПИН"</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Задайте ПИН, за да ползвате отпечатък"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"Потвърдете паролата си"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Потвърдете фигурата си"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"Потвърдете ПИН кода си"</string>
@@ -1452,7 +1497,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="266707138486731661">"Промяна на PIN кода за отключване"</string>
     <string name="lockpattern_recording_intro_header" msgid="308287052221942814">"Начертайте фигура за отключване"</string>
     <string name="lockpattern_recording_intro_footer" msgid="1118579101409152113">"Натиснете „Меню“ за помощ"</string>
-    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Вдигнете пръст, когато сте готови"</string>
+    <string name="lockpattern_recording_inprogress" msgid="6667844062721656773">"Вдигнете пръст, когато е готово"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="1348234155120957561">"Свържете поне <xliff:g id="NUMBER">%d</xliff:g> точки. Опитайте отново."</string>
     <string name="lockpattern_pattern_entered_header" msgid="4316818983675591604">"Фигурата е записана"</string>
     <string name="lockpattern_need_to_confirm" msgid="8054853451639221265">"За потвърждение начертайте фигурата отново"</string>
@@ -1491,6 +1536,9 @@
     <string name="applications_settings_header" msgid="1014813055054356646">"Настройки за приложения"</string>
     <string name="install_applications" msgid="4872012136210802181">"Неизвестни източници"</string>
     <string name="install_applications_title" msgid="4987712352256508946">"Всички източници: Разрешаване"</string>
+    <string name="recent_app_category_title" msgid="6673071268966003928">"Наскоро отворени приложения"</string>
+    <string name="see_all_apps_title" msgid="1317153498074308438">"Преглед на всички приложения (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
+    <string name="recent_app_summary" msgid="3366446669844932300">"Преди <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Таблетът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Телефонът и личните ви данни са по-уязвими към атаки от неизвестни приложения. С инсталирането на приложения от този източник приемате, че вие носите отговорност в случай на повреда на устройството ви или при загуба на данни вследствие използването на такива приложения."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Разширени настройки"</string>
@@ -1659,6 +1707,10 @@
     <string name="runningservicedetails_stop_dlg_title" msgid="4253292537154337233">"Да се спре ли системната услуга?"</string>
     <string name="runningservicedetails_stop_dlg_text" product="tablet" msgid="3371302398335665793">"Ако спрете тази услуга, е възможно някои функции на таблета ви да спрат да работят правилно, докато не го изключите и включите отново."</string>
     <string name="runningservicedetails_stop_dlg_text" product="default" msgid="3920243762189484756">"Ако спрете тази услуга, е възможно някои функции на телефона ви да спрат да работят правилно, докато не го изключите и включите отново."</string>
+    <string name="language_input_gesture_title" msgid="8749227808244881255">"Езици, въвеждане и жестове"</string>
+    <string name="language_input_gesture_summary_on_with_assist" msgid="7219895055450633449"></string>
+    <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
+    <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
     <string name="language_settings" msgid="8758655933029560944">"Езици и въвеждане"</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Езици и въвеждане"</string>
     <string name="input_assistance" msgid="7577795275222555487">"Съдействие при въвеждане"</string>
@@ -1757,6 +1809,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"Екранни четци, дисплей, контроли за взаимодействие"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"Настройки при зрителни проблеми"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"Можете да персонализирате устройството така, че да отговаря на нуждите ви. Тези функции за достъпност могат да бъдат променени по-късно от „Настройки“."</string>
+    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"Увеличаване на размера на шрифта"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"Екранни четци"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"Аудио и екранен текст"</string>
     <string name="display_category_title" msgid="685461049938269166">"Дисплей"</string>
@@ -1873,6 +1926,10 @@
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> услуги за отпечатване са включени</item>
       <item quantity="one">1 услуга за отпечатване е включена</item>
     </plurals>
+    <plurals name="print_jobs_summary" formatted="false" msgid="5810106725778525400">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> задания за отпечатване</item>
+      <item quantity="one">1 задание за отпечатване</item>
+    </plurals>
     <string name="print_settings_title" msgid="3685449667822217816">"Услуги за отпечатване"</string>
     <string name="print_no_services_installed" msgid="8443039625463872294">"Няма инсталирани услуги"</string>
     <string name="print_no_printers_found" msgid="989018646884973683">"Няма намерени принтери"</string>
@@ -1939,6 +1996,29 @@
     <string name="details_subtitle" msgid="32593908269911734">"Подробности"</string>
     <string name="controls_subtitle" msgid="390468421138288702">"Настройване на захранването"</string>
     <string name="packages_subtitle" msgid="4736416171658062768">"Включени пакети"</string>
+    <string name="battery_abnormal_details_title" msgid="5469019021857291216">"Приложения, които изтощават батерията"</string>
+    <string name="battery_abnormal_wakelock_summary" msgid="4326186999058828831">"Устройството се поддържа в активно състояние"</string>
+    <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Устройството се активира на заден план"</string>
+    <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Чести заявки за местоположение"</string>
+    <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> приложения не функционират правилно"</string>
+    <string name="dialog_stop_title" msgid="6395127715596746479">"Да се спре ли приложението?"</string>
+    <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Телефонът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Таблетът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_message" product="device" msgid="6195430620406365292">"Устройството ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете приложението.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="default" msgid="1638726742782558262">"Телефонът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете <xliff:g id="APP_1">%1$s</xliff:g>.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="tablet" msgid="8771690983566539742">"Таблетът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете <xliff:g id="APP_1">%1$s</xliff:g>.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_message_wakeup_alarm" product="device" msgid="2854944538238649520">"Устройството ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите проблема, можете да спрете <xliff:g id="APP_1">%1$s</xliff:g>.\n\nАко това не помогне, може да се наложи да деинсталирате приложението, за да подобрите ефективността на батерията."</string>
+    <string name="dialog_stop_ok" msgid="2319777211264004900">"Спиране на приложението"</string>
+    <string name="dialog_background_check_title" msgid="6936542136153283692">"Да се спре ли приложението и използването му на заден план?"</string>
+    <string name="dialog_background_check_message" product="default" msgid="4045827746349279563">"Телефонът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите този проблем, можете да спрете приложението <xliff:g id="APP_1">%1$s</xliff:g> и да му попречите да се изпълнява на заден план."</string>
+    <string name="dialog_background_check_message" product="tablet" msgid="8348214419901788270">"Таблетът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите този проблем, можете да спрете приложението <xliff:g id="APP_1">%1$s</xliff:g> и да му попречите да се изпълнява на заден план."</string>
+    <string name="dialog_background_check_message" product="device" msgid="5847977433118915863">"Устройството ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP_0">%1$s</xliff:g> постоянно го активира.\n\nЗа да опитате да решите този проблем, можете да спрете приложението <xliff:g id="APP_1">%1$s</xliff:g> и да му попречите да се изпълнява на заден план."</string>
+    <string name="dialog_background_check_ok" msgid="412876934682899659">"Изключване"</string>
+    <string name="dialog_location_title" msgid="5888917530725874727">"Да се изключи ли местоположението?"</string>
+    <string name="dialog_location_message" product="default" msgid="7774807745601479888">"Телефонът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
+    <string name="dialog_location_message" product="tablet" msgid="118745801732181618">"Таблетът ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
+    <string name="dialog_location_message" product="device" msgid="6783678153382298295">"Устройството ви не е в състояние да управлява батерията нормално, защото <xliff:g id="APP">%1$s</xliff:g> постоянно изисква достъп до местоположението ви, когато не използвате приложението.\n\nЗа да решите проблема, можете да изключите местоположението за това приложение."</string>
+    <string name="dialog_location_ok" msgid="4572391197601313986">"Изключване"</string>
     <string name="power_screen" msgid="3023346080675904613">"Екран"</string>
     <string name="power_flashlight" msgid="7794409781003567614">"Светкавица"</string>
     <string name="power_camera" msgid="4976286950934622605">"Камера"</string>
@@ -1953,7 +2033,7 @@
     <string name="power_apps" msgid="2043554781293951327">"Приложения"</string>
     <string name="power_service" msgid="1599661212370831780">"Услуги"</string>
     <string name="power_system" msgid="8290455327965307383">"Система"</string>
-    <string name="power_user" msgid="1889728099253018005">"Потребител"</string>
+    <string name="power_user" msgid="3706143225319881667">"Други потребители"</string>
     <string name="usage_type_cpu" msgid="715162150698338714">"Процесор, общо"</string>
     <string name="usage_type_cpu_foreground" msgid="6500579611933211831">"Процесор, на преден план"</string>
     <string name="usage_type_wake_lock" msgid="5125438890233677880">"Оставяне в будно състояние"</string>
@@ -2005,12 +2085,13 @@
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Отчетено в повече захранване"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> мАч"</string>
     <string name="battery_used_for" msgid="2690821851327075443">"Използвано за <xliff:g id="TIME">^1</xliff:g>"</string>
+    <string name="battery_active_for" msgid="2964359540508103032">"Активност в продължение на <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"Използване на екрана: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"Използван капацитет от <xliff:g id="APP">%2$s</xliff:g>: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_overall_usage" msgid="2093409063297375436">"<xliff:g id="PERCENT">%1$s</xliff:g> от общия капацитет на батерията"</string>
     <string name="battery_detail_since_full_charge" msgid="7515347842046955855">"Разбивка след последното пълно зареждане"</string>
     <string name="battery_last_full_charge" msgid="7151251641099019361">"Последно пълно зареждане"</string>
-    <string name="battery_footer_summary" msgid="4701358808575132647">"Данните за оставащия живот на батерията са приблизителни и могат да се променят въз основа на използването"</string>
+    <string name="battery_footer_summary" msgid="67169726550144016">"Данните за батерията са приблизителни и могат да се променят въз основа на използването"</string>
     <string name="battery_detail_foreground" msgid="3350401514602032183">"При активна употреба"</string>
     <string name="battery_detail_background" msgid="1929644393553768999">"При работа на заден план"</string>
     <string name="battery_detail_power_usage" msgid="6485766868610469101">"Използване на батерията"</string>
@@ -2498,7 +2579,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Можете да споделите това устройство с други хора, като създадете допълнителни потребители. Всеки от тях има собствено работно пространство, което може да персонализира с приложения, тапет и др. Потребителите могат също да коригират настройки на устройството, които засягат всички – например Wi‑Fi.\n\nКогато добавите нов потребител, той трябва да настрои работното си пространство.\n\nВсеки потребител може да актуализира приложенията за всички останали потребители."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Когато добавите нов потребител, той трябва да настрои работното си пространство.\n\nВсеки потребител може да актуализира приложенията за всички останали потребители."</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"Настройване на потребителя?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Уверете се, че човекът е налице да вземе устройството и да настрои работното си пространство"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Уверете се, че човекът има възможност да вземе устройството и да настрои работното си пространство."</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Ще настроите ли потребителския профил сега?"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Настройване сега"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сега"</string>
@@ -2564,7 +2645,7 @@
     <string name="restriction_menu_change_pin" msgid="740081584044302775">"Промяна на ПИН кода"</string>
     <string name="app_notifications_switch_label" msgid="9124072219553687583">"Известия: Показване"</string>
     <string name="help_label" msgid="6886837949306318591">"Помощ и отзиви"</string>
-    <string name="support_summary" msgid="8276116616493882830">"Помощни статии, поддръжка по телефон и чрез чат"</string>
+    <string name="support_summary" msgid="2705726826263742491">"Помощни статии, телефон и чат, първи стъпки"</string>
     <string name="user_account_title" msgid="1127193807312271167">"Профил за съдържание"</string>
     <string name="user_picture_title" msgid="7297782792000291692">"Идент. № на снимката"</string>
     <string name="extreme_threats_title" msgid="6549541803542968699">"Извънредни заплахи"</string>
@@ -2654,9 +2735,12 @@
       <item quantity="one">Показване на %d скрит елемент</item>
     </plurals>
     <string name="network_dashboard_title" msgid="4771589228992391573">"Мрежа и интернет"</string>
-    <string name="network_dashboard_summary" msgid="3274556191585905652">"Wi-Fi, мобилна мрежа, пренос на данни, точка за достъп"</string>
+    <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"мобилна мрежа"</string>
+    <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"пренос на данни"</string>
+    <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"точка за достъп"</string>
     <string name="connected_devices_dashboard_title" msgid="2355264951438890709">"Свързани устройства"</string>
     <string name="connected_devices_dashboard_summary" msgid="2390582103384791904">"Bluetooth, предаване, КБП"</string>
+    <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, предаване"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Приложения и известия"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Разрешения, приложения по подразбиране"</string>
     <string name="account_dashboard_title" msgid="4936890821712178853">"Потребители и профили"</string>
@@ -2706,9 +2790,10 @@
     <string name="keywords_lockscreen" msgid="5746561909668570047">"отключване чрез плъзгане, парола, фигура, ПИН код"</string>
     <string name="keywords_profile_challenge" msgid="789611397846512845">"служебно предизвикателство, работа, потребителски профил"</string>
     <string name="keywords_unification" msgid="1922900767659821025">"служебен потребителски профил, управляван потребителски профил, обединение, обединяване, работа, потребителски профил"</string>
-    <string name="keywords_gesture" msgid="5696040361482126337">"жест"</string>
+    <string name="keywords_gesture" msgid="3526905012224714078">"жестове"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"плащане, докосване, плащания"</string>
     <string name="keywords_backup" msgid="470070289135403022">"резервно копие, създаване на резервно копие"</string>
+    <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"жест"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Маркер за КБП за Wi-Fi: Настр."</string>
     <string name="write_tag" msgid="8571858602896222537">"Записване"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"За записване докоснете маркер..."</string>
@@ -2791,7 +2876,8 @@
     <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Без показване на служебните известия"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Как искате да се показват известията от потребителския профил, когато устройството ви е заключено?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Известия от потр. профил"</string>
-    <string name="app_notifications_title" msgid="139788604658984593">"Известия"</string>
+    <string name="notifications_title" msgid="8086372779371204971">"Известия"</string>
+    <string name="app_notifications_title" msgid="5810577805218003760">"Известия за прилож."</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Категория с известия"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Важност"</string>
     <string name="notification_importance_unspecified" msgid="2196023702875112081">"Нека приложението да реши"</string>
@@ -2806,6 +2892,10 @@
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Неотложна важност"</string>
     <string name="allow_sound" msgid="1820188704793497324">"Разрешаване на звуковия сигнал"</string>
     <string name="show_silently_summary" msgid="7616604629123146565">"Без издаване на звук, вибриране или показване на тези известия на текущия екран."</string>
+    <string name="notification_channel_summary_min" msgid="5401718014765921892">"Малка важност"</string>
+    <string name="notification_channel_summary_low" msgid="322317684244981244">"Средна важност"</string>
+    <string name="notification_channel_summary_default" msgid="1111749130423589931">"Голяма важност"</string>
+    <string name="notification_channel_summary_high" msgid="2085017556511003283">"Неотложна важност"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Помощник за известия"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Достъп до известията"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Достъпът до известията в служебния потребителски профил е блокиран"</string>
@@ -2833,8 +2923,6 @@
     <string name="picture_in_picture_app_detail_title" msgid="4080800421316791732">"Картина в картината"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="1131910667023738296">"Разрешаване на режима „Картина в картината“"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="7942592478427522244">"Разрешете на това приложение да създава прозорец в режима „Картина в картината“, докато е отворено или след излизане от него (например, за да продължите да гледате видеоклип). Съответният прозорец ще се показва върху другите приложения, които използвате."</string>
-    <string name="picture_in_picture_on" msgid="6103704909710176555">"Да"</string>
-    <string name="picture_in_picture_off" msgid="5654388666434625247">"Не"</string>
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Достъп до „Не безпокойте“"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Никое инсталирано приложение не е заявило достъп до „Не безпокойте“"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Приложенията се зареждат..."</string>
@@ -2918,6 +3006,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Само от контакти със звезда"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Никакви"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Будилници"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"Будилниците са винаги с приоритет и издават звук"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Напомняния"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Събития"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Всички обаждащи се"</string>
@@ -2955,7 +3044,7 @@
     <string name="device_feedback" msgid="3238056036766293294">"Отзиви за устройството"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Въведете администраторския ПИН код"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Включено"</string>
-    <string name="switch_off_text" msgid="1139356348100829659">"Изключване"</string>
+    <string name="switch_off_text" msgid="1139356348100829659">"Изключено"</string>
     <string name="screen_pinning_title" msgid="2292573232264116542">"Фикс. на екрани"</string>
     <string name="screen_pinning_description" msgid="3360904523688769289">"Когато настройката е включена, можете да фиксирате текущия екран да се показва, докато не го освободите.\n\nЗа да използвате тази функция:\n\n1. Уверете се, че е включена.\n\n2. Отворете екрана, който искате да фиксирате.\n\n3. Докоснете „Общ преглед“.\n\n4. Прекарайте пръст нагоре и докоснете иконата за фиксиране."</string>
     <string name="screen_pinning_unlock_pattern" msgid="8282268570060313339">"Запитване за фигура за отключване преди освобождаване"</string>
@@ -2965,11 +3054,6 @@
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2232461523882170874">"Този служебен потребителски профил се управлява от:"</string>
     <string name="managing_admin" msgid="8843802210377459055">"Управлява се от <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="experimental_preference" msgid="7083015446690681376">"(Експериментално)"</string>
-    <string name="display_auto_rotate_title" msgid="7119684966039069439">"Завъртане на устройството"</string>
-    <string name="display_auto_rotate_rotate" msgid="4544299861233497728">"Завъртане на съдържанието на екрана"</string>
-    <string name="display_auto_rotate_stay_in_portrait" msgid="292745182318093651">"Оставане във вертикален изглед"</string>
-    <string name="display_auto_rotate_stay_in_landscape" msgid="3804752830204062162">"Оставане в хоризонтален изглед"</string>
-    <string name="display_auto_rotate_stay_in_current" msgid="317932372686498096">"Оставане в текущата ориентация"</string>
     <string name="encryption_interstitial_header" msgid="468015813904595613">"Надеждно стартиране"</string>
     <string name="encryption_continue_button" msgid="1121880322636992402">"Напред"</string>
     <string name="encryption_interstitial_message_pin" msgid="2317181134653424679">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете ПИН кодът ви да се изисква при стартиране. Преди въвеждането му няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
@@ -2977,7 +3061,7 @@
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"В допълнение към отключването посредством отпечатък можете да осигурите допълнителен защитен слой за това устройство, като зададете ПИН кодът ви да се изисква при стартиране. Преди въвеждането му няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
     <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"В допълнение към отключването посредством отпечатък можете да осигурите допълнителен защитен слой за това устройство, като зададете фигурата ви да се изисква при стартиране. Преди въвеждането й няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
-    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="1088818752838720964">"В допълнение към отключването посредством отпечатък можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
+    <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"В допълнение към отключването посредством отпечатък можете да осигурите допълнителен защитен слой за това устройство, като зададете паролата ви да се изисква при стартиране. Преди въвеждането й няма да се получават обаждания, съобщения или известия. Будилниците също няма да работят.\n\nФункцията помага за защита на данните на загубени или откраднати устройства. Искате ли да я включите?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Да се изисква ли ПИН код?"</string>
@@ -3095,6 +3179,15 @@
     <string name="additional_battery_info" msgid="4754099329165411970">"Сигнали за употребата"</string>
     <string name="show_all_apps" msgid="1512506948197818534">"Инф. за използване на у-вото"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"Употреба на прилож.: Показване"</string>
+    <string name="power_high_usage_title" msgid="6027369425057347826">"Висок разход"</string>
+    <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
+      <item quantity="other">Поведението на <xliff:g id="NUMBER">%2$d</xliff:g> приложения е необичайно</item>
+      <item quantity="one">Поведението на <xliff:g id="APP">%1$s</xliff:g> е необичайно</item>
+    </plurals>
+    <plurals name="power_high_usage_title" formatted="false" msgid="3826660033363082922">
+      <item quantity="other">Приложения, които изтощават батерията</item>
+      <item quantity="one"><xliff:g id="APP">%1$s</xliff:g> изтощава батерията</item>
+    </plurals>
     <string name="high_power_filter_on" msgid="3222265297576680099">"Без оптимизиране"</string>
     <string name="high_power_on" msgid="6216293998227583810">"Без оптимизиране"</string>
     <string name="high_power_off" msgid="3393904131961263278">"Разходът на батерията се оптимизира"</string>
@@ -3187,8 +3280,8 @@
     <string name="overlay_settings" msgid="6930854109449524280">"Показв. върху други приложения"</string>
     <string name="system_alert_window_summary" msgid="602892301318324492">"<xliff:g id="COUNT_0">%1$d</xliff:g> от <xliff:g id="COUNT_1">%2$d</xliff:g> приложения имат разрешение да се показват върху други"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"Приложения с разрешение"</string>
-    <string name="system_alert_window_on" msgid="2939489395109048888">"Да"</string>
-    <string name="system_alert_window_off" msgid="6189115687233061992">"Не"</string>
+    <string name="app_permission_summary_allowed" msgid="1505409933012886711">"Разрешено"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"Не е разрешено"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"инсталиране приложения неизвестни източници"</string>
     <string name="write_settings" msgid="4797457275727195681">"Промяна на сист. настройки"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"запис промяна системни настройки"</string>
@@ -3278,6 +3371,15 @@
     <string name="condition_night_display_summary" msgid="5443722724310650381">"Екранът е с кехлибареножълт нюанс. Това може да ви помогне да заспите."</string>
     <string name="suggestions_title" msgid="7280792342273268377">"Предложения"</string>
     <string name="suggestions_summary" msgid="2509040178581728056">"+ <xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <string name="suggestions_more_title" msgid="8223690393059519879">"+ още <xliff:g id="ID_1">%1$d</xliff:g>"</string>
+    <plurals name="suggestions_collapsed_title" formatted="false" msgid="1857433444865249823">
+      <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> предложения</item>
+      <item quantity="one">1 предложение</item>
+    </plurals>
+    <plurals name="suggestions_collapsed_summary" formatted="false" msgid="7680263825371165461">
+      <item quantity="other">+ <xliff:g id="COUNT">%1$d</xliff:g> предложения</item>
+      <item quantity="one">+ 1 предложение</item>
+    </plurals>
     <string name="suggestion_remove" msgid="904627293892092439">"Премахване"</string>
     <string name="color_temperature" msgid="2070126836910615605">"Студена цветова гама"</string>
     <string name="color_temperature_desc" msgid="4793729830226404052">"Използване на по-студени цветове за дисплея"</string>
@@ -3296,8 +3398,7 @@
     <string name="cell_warning_only" msgid="763147658209027140">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Предупреждение за данните: <xliff:g id="ID_1">%1$s</xliff:g>/ограничение за данните: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="5169909190811133499">"Цикъл на таксуване"</string>
-    <string name="billing_cycle_summary" msgid="9009106526129293752">"Месечният платежен цикъл започва на <xliff:g id="ID_1">%1$s</xliff:g> число всеки месец"</string>
-    <string name="billing_cycle_fragment_summary" msgid="1940518156600077066">"Ежемесечно от <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Всеки месец на <xliff:g id="ID_1">%1$s</xliff:g>. число"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Мрежови ограничения"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
       <item quantity="other"><xliff:g id="COUNT">%1$d</xliff:g> ограничения</item>
@@ -3305,7 +3406,7 @@
     </plurals>
     <string name="operator_warning" msgid="1862988028996859195">"Отчетените от оператора данни може да се различават от показаните на устройството"</string>
     <string name="data_used_template" msgid="3245919669966296505">"Използвали сте <xliff:g id="ID_1">%1$s</xliff:g>"</string>
-    <string name="set_data_warning" msgid="6115364758236594593">"Предупр. за данните: Задаване"</string>
+    <string name="set_data_warning" msgid="6115364758236594593">"Предупр. за данните: задаване"</string>
     <string name="data_warning" msgid="209133958008062117">"Предупреждение за данните"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Задаване на лимит за данните"</string>
     <string name="data_limit" msgid="1885406964934590552">"Ограничение за данните"</string>
@@ -3317,7 +3418,7 @@
       <item quantity="one">1 приложение може да използва неограничено количество данни при включена Икономия на данни</item>
     </plurals>
     <string name="data_saver_title" msgid="398458827917495765">"Икономия на данни"</string>
-    <string name="unrestricted_data_saver" msgid="7019858887510062789">"Неограничен достъп до данни"</string>
+    <string name="unrestricted_data_saver" msgid="952796077540228711">"Неограничен достъп до данни"</string>
     <string name="restrict_background_blacklisted" msgid="3995443391711013068">"Данните на заден план са изключени"</string>
     <string name="data_saver_on" msgid="6774217590237934709">"Включено"</string>
     <string name="data_saver_off" msgid="6892309031162738794">"Изключено"</string>
@@ -3381,8 +3482,7 @@
     <string name="notification_suggestion_title" msgid="4506524937307816475">"Известия на заключения екран: Управление"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"Показване или скриване на съдържанието на известията"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"Всички"</string>
-    <string name="page_tab_title_support" msgid="6330657582897417458">"Поддръжка"</string>
-    <string name="developer_density_summary" msgid="1998244213021456519">"<xliff:g id="ID_1">%d</xliff:g> dp"</string>
+    <string name="page_tab_title_support" msgid="8483187649355540109">"Поддръжка и съвети"</string>
     <string name="developer_smallest_width" msgid="7516950434587313360">"Най-малката ширина"</string>
     <string name="premium_sms_none" msgid="8268105565738040566">"Няма инсталирани приложения, които са заявили достъп до SMS съобщения, за които се таксува получателят"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"SMS съобщенията, за които се таксува получателят, може да ви въвлекат в разходи и ще увеличат сметката към оператора ви. Ако дадете разрешението на дадено приложение, ще можете да изпращате такива съобщения чрез него."</string>
@@ -3453,25 +3553,32 @@
     <string name="gesture_preference_summary" product="device" msgid="4205941452664950852">"Бързи жестове за контролиране на устройството ви"</string>
     <string name="double_tap_power_for_camera_title" msgid="64716226816032800">"Бързо отваряне на камерата"</string>
     <string name="double_tap_power_for_camera_summary" msgid="242037150983277829">"За да отворите бързо камерата, натиснете два пъти бутона за захранване – това работи от всеки екран."</string>
+    <string name="double_tap_power_for_camera_suggestion_title" msgid="6500405261202883589">"Бързо отваряне на камерата"</string>
+    <string name="double_tap_power_for_camera_suggestion_summary" msgid="7010153544554016996">"Натиснете бутона за захранване 2 пъти за достъп до камерата"</string>
     <string name="double_twist_for_camera_mode_title" msgid="4877834147983530479">"Превключване на камерата със завъртане"</string>
     <string name="double_twist_for_camera_mode_summary" msgid="122977081337563340"></string>
+    <string name="double_twist_for_camera_suggestion_title" msgid="4689410222517954869">"По-бързо правене на селфи"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="default" msgid="447403641027147153">"Завъртете телефона два пъти за режим за селфи"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="tablet" msgid="1724660290703318739">"Завъртете таблета два пъти за режим за селфи"</string>
+    <string name="double_twist_for_camera_suggestion_summary" product="device" msgid="5980398380988039489">"Завъртете устройството два пъти за режим за селфи"</string>
     <string name="ambient_display_title" product="default" msgid="5144814600610448504">"Двукратно докосване за проверка на телефона"</string>
     <string name="ambient_display_title" product="tablet" msgid="8688795028609563837">"Двукратно докосване за проверка на таблета"</string>
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Двукратно докосване за проверка на устройството"</string>
-    <string name="ambient_display_summary" msgid="2521630136233865893">"За да проверите бързо известията си, докоснете двукратно екрана."</string>
+    <string name="ambient_display_summary" msgid="525662960806416373">"За да проверите часа, иконите за известия и друга информация, докоснете екрана два пъти."</string>
+    <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Проверявайте известията при изключен екран"</string>
     <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Повдигане на телефона за проверка"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Повдигане за проверка на таблета"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Повдигане за проверка на устройството"</string>
-    <string name="ambient_display_pickup_summary" product="default" msgid="8696432220086951466">"За да проверите бързо известията си, повдигнете телефона си."</string>
-    <string name="ambient_display_pickup_summary" product="tablet" msgid="2442551819015699120">"За да проверите бързо известията си, повдигнете таблета си."</string>
-    <string name="ambient_display_pickup_summary" product="device" msgid="2369325441608811599">"За да проверите бързо известията си, повдигнете устройството си."</string>
+    <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"За да проверите часа, иконите за известия и друга информация, вземете телефона си в ръка."</string>
+    <string name="ambient_display_pickup_summary" product="tablet" msgid="5435283849947236648">"За да проверите часа, иконите за известия и друга информация, вземете таблета си в ръка."</string>
+    <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"За да проверите часа, иконите за известия и друга информация, вземете устройството си в ръка."</string>
+    <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Проверявайте известията при изключен екран"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Преглед на известията с плъзване на пръст през сензора за отпечатъци"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на телефона си."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на таблета си."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"За да проверите известията си, плъзнете пръст надолу през сензора за отпечатъци на гърба на устройството си."</string>
-    <string name="assist_gesture_title" msgid="7746563137898655539">"Помощен жест"</string>
-    <string name="assist_gesture_summary" msgid="7575773425455374300"></string>
-    <string name="assist_gesture_sensitivity_title" msgid="8424299091547331080">"Чувствителност"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_title" msgid="1677291167470357802">"Бърз преглед на известията"</string>
+    <string name="fingerprint_swipe_for_notifications_suggestion_summary" msgid="127592803294414082">"Прекарайте пръст надолу през сензора за отпечатъци"</string>
     <string name="gesture_setting_on" msgid="3455094265233870280">"Вкл."</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Изкл."</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Програмата за зареждане на опер. с-ма вече е отключена"</string>
@@ -3492,6 +3599,9 @@
     <string name="auto_sync_work_account_title" msgid="4489172450037434152">"Автоматично синхронизиране на данните от служебния профил"</string>
     <string name="auto_sync_account_summary" msgid="692499211629185107">"Позволете на приложенията да опресняват автоматично данните"</string>
     <string name="account_sync_title" msgid="7214747784136106491">"Синхронизиране на профила"</string>
+    <string name="account_sync_summary_some_on" msgid="3375930757891381175">"Синхронизирането е включено за <xliff:g id="ID_1">%1$d</xliff:g> от <xliff:g id="ID_2">%2$d</xliff:g> елемента"</string>
+    <string name="account_sync_summary_all_on" msgid="570431636622254156">"Синхронизирането е включено за всички елементи"</string>
+    <string name="account_sync_summary_all_off" msgid="8782409931761182734">"Синхронизирането е изключено за всички елементи"</string>
     <string name="enterprise_privacy_settings" msgid="1177106810374146496">"Информация за управляваното устройство"</string>
     <string name="enterprise_privacy_settings_summary_generic" msgid="5853292305730761128">"Промени и настройки, управлявани от организацията ви"</string>
     <string name="enterprise_privacy_settings_summary_with_name" msgid="4266234968317996188">"Промени и настройки, управлявани от <xliff:g id="ORGANIZATION_NAME">%s</xliff:g>"</string>
@@ -3572,6 +3682,7 @@
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"Искате ли да премахнете това мигновено приложение?"</string>
     <string name="game_storage_settings" msgid="3410689937046696557">"Игри"</string>
     <string name="audio_files_title" msgid="4777048870657911307">"Аудиофайлове"</string>
+    <string name="app_info_storage_title" msgid="5554719444625611987">"Използвано място"</string>
     <string name="webview_uninstalled_for_user" msgid="1819903169194420983">"(деинстал. за потребителя <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="webview_disabled_for_user" msgid="1216426047631256825">"(деактивирано за потребителя <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7338387238377914374">"Услуга за автоматично попълване"</string>
@@ -3585,5 +3696,11 @@
     <string name="install_type_instant" msgid="3174425974536078647">"Мигновено приложение"</string>
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Да се изключи ли мениджърът на хранилището?"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"Приложения за филми и телевизионни предавания"</string>
-    <string name="app_info_storage_title" msgid="5554719444625611987">"Използвано място"</string>
+    <string name="carrier_provisioning" msgid="4398683675591893169">"Carrier Provisioning Info"</string>
+    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Задействане на обезпечаването от оператора"</string>
+    <string name="new_device_suggestion_title" msgid="698847081680980774">"Нови и вълнуващи неща"</string>
+    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"Вижте водещите 5 функции"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"Състояние на регистрацията за незабавни съобщения"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"Регистрирано"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"Не е регистрирано"</string>
 </resources>

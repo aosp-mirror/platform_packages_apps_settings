@@ -25,8 +25,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.android.settings.ChooseLockGeneric;
-import com.android.settings.SetupChooseLockGeneric;
 import com.android.settings.Utils;
 
 /**

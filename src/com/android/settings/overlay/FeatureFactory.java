@@ -22,6 +22,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -30,7 +31,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.search2.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
 /**
@@ -96,6 +97,8 @@ public abstract class FeatureFactory {
     public abstract SecurityFeatureProvider getSecurityFeatureProvider();
 
     public abstract UserFeatureProvider getUserFeatureProvider(Context context);
+
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {

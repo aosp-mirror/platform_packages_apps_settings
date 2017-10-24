@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceController;
@@ -42,11 +43,15 @@ import static org.mockito.Mockito.when;
 public class AssistGestureSettingsTest {
     @Mock
     private Context mContext;
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private AssistGestureFeatureProvider mFeatureProvider;
     private AssistGestureSettings mSettings;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureProvider = mFakeFeatureFactory.getAssistGestureFeatureProvider();
         mSettings = new AssistGestureSettings();
     }
 

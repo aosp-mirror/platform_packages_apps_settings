@@ -16,12 +16,16 @@
 
 package com.android.settings.bluetooth;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -36,7 +40,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -52,17 +59,26 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     private MasterSwitchPreference mPreference;
     @Mock
     private RestrictionUtils mRestrictionUtils;
+    @Mock
+    private Fragment mFragment;
+    @Mock
+    private SettingsActivity mActivity;
 
     private Context mContext;
     private BluetoothMasterSwitchPreferenceController mController;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application.getApplicationContext();
+        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
         mController = new BluetoothMasterSwitchPreferenceController(
-                mContext, mBluetoothManager, mRestrictionUtils);
+                mContext, mBluetoothManager, mRestrictionUtils, mFragment, mActivity);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
 
     @Test
@@ -82,7 +98,7 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
         mController.onPause();
 
         verify(mBluetoothManager.getEventManager()).unregisterCallback(
-            any(BluetoothCallback.class));
+                any(BluetoothCallback.class));
     }
 
     @Test
@@ -111,5 +127,4 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
 
         verify(mPreference).setSummary("test summary");
     }
-
 }

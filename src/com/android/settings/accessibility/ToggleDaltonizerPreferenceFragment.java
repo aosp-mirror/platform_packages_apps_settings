@@ -42,6 +42,11 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_color_correction;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -49,6 +54,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         mType = (ListPreference) findPreference("type");
 
+        if (!AccessibilitySettings.isColorTransformAccelerated(getActivity())) {
+            mFooterPreferenceMixin.createFooterPreference().setTitle(
+                    R.string.accessibility_display_daltonizer_preference_subtitle);
+        }
         initPreferences();
     }
 

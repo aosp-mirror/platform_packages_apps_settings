@@ -17,11 +17,15 @@ package com.android.settings.connecteddevice;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcManager;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.R;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -35,12 +39,17 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
+import static android.content.Context.NFC_SERVICE;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedDeviceDashboardFragmentTest {
+
     @Mock
     Context mContext;
 
@@ -64,7 +73,8 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext, true /* enabled */);
+                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext,
+                        true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
@@ -73,7 +83,8 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_NoNfc_KeyAdded() {
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                mContext);
 
         assertThat(keys).isNotNull();
         assertThat(keys).contains(NfcPreferenceController.KEY_TOGGLE_NFC);
@@ -83,7 +94,8 @@ public class ConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_NFC_KeyNotAdded() {
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
+        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
+                mContext);
 
         assertThat(keys).isNotNull();
         assertThat(keys).doesNotContain(NfcPreferenceController.KEY_TOGGLE_NFC);
@@ -101,5 +113,44 @@ public class ConnectedDeviceDashboardFragmentTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void testSummaryProvider_hasNfc_shouldReturnNfcSummary() {
+        final NfcManager nfcManager = mock(NfcManager.class);
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+        when(mContext.getSystemService(NFC_SERVICE)).thenReturn(nfcManager);
+        when(nfcManager.getDefaultAdapter()).thenReturn(mock(NfcAdapter.class));
+
+        SummaryLoader.SummaryProvider provider =
+                new ConnectedDeviceDashboardFragment.SummaryProvider(mContext, summaryLoader);
+
+        provider.setListening(false);
+
+        verifyZeroInteractions(summaryLoader);
+
+        provider.setListening(true);
+
+        verify(mContext).getString(R.string.connected_devices_dashboard_summary);
+    }
+
+    @Test
+    public void testSummaryProvider_noNfc_shouldReturnNoNfcSummary() {
+        final SummaryLoader summaryLoader = mock(SummaryLoader.class);
+
+        when(mContext.getApplicationContext()).thenReturn(mContext);
+
+        SummaryLoader.SummaryProvider provider =
+                new ConnectedDeviceDashboardFragment.SummaryProvider(mContext, summaryLoader);
+
+        provider.setListening(false);
+
+        verifyZeroInteractions(summaryLoader);
+
+        provider.setListening(true);
+
+        verify(mContext).getString(R.string.connected_devices_dashboard_no_nfc_summary);
     }
 }

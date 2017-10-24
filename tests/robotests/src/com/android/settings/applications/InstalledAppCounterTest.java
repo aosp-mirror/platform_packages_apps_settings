@@ -16,6 +16,19 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -40,18 +53,8 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Set;
-
-import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link InstalledAppCounter}.
@@ -111,11 +114,12 @@ public final class InstalledAppCounterTest {
 
     private void expectQueryIntentActivities(int userId, String packageName, boolean launchable) {
         when(mPackageManager.queryIntentActivitiesAsUser(
-                argThat(new IsLaunchIntentFor(packageName)),
+                argThat(isLaunchIntentFor(packageName)),
                 eq(PackageManager.GET_DISABLED_COMPONENTS | PackageManager.MATCH_DIRECT_BOOT_AWARE
                         | PackageManager.MATCH_DIRECT_BOOT_UNAWARE),
-                eq(userId))).thenReturn(launchable ? Arrays.asList(new ResolveInfo())
-                : new ArrayList<ResolveInfo>());
+                eq(userId))).thenReturn(launchable
+                        ? Collections.singletonList(new ResolveInfo())
+                        : new ArrayList<>());
     }
 
     private void testCountInstalledAppsAcrossAllUsers(boolean async) {
@@ -134,7 +138,7 @@ public final class InstalledAppCounterTest {
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(),
                 eq(MANAGED_PROFILE_ID));
-        verify(mPackageManager, atLeast(0)).queryIntentActivitiesAsUser(anyObject(), anyInt(),
+        verify(mPackageManager, atLeast(0)).queryIntentActivitiesAsUser(any(Intent.class), anyInt(),
                 anyInt());
         verifyNoMoreInteractions(mPackageManager);
 
@@ -249,16 +253,8 @@ public final class InstalledAppCounterTest {
         }
     }
 
-    private static class IsLaunchIntentFor extends ArgumentMatcher<Intent> {
-        private final String mPackageName;
-
-        IsLaunchIntentFor(String packageName) {
-            mPackageName = packageName;
-        }
-
-        @Override
-        public boolean matches(Object i) {
-            final Intent intent = (Intent) i;
+    private ArgumentMatcher<Intent> isLaunchIntentFor(String packageName) {
+        return intent -> {
             if (intent == null) {
                 return false;
             }
@@ -270,10 +266,10 @@ public final class InstalledAppCounterTest {
                     !categories.contains(Intent.CATEGORY_LAUNCHER)) {
                 return false;
             }
-            if (!mPackageName.equals(intent.getPackage())) {
+            if (!packageName.equals(intent.getPackage())) {
                 return false;
             }
             return true;
-        }
+        };
     }
 }

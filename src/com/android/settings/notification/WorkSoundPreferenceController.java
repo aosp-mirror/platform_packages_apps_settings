@@ -45,10 +45,10 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.core.lifecycle.Lifecycle;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 public class WorkSoundPreferenceController extends PreferenceController implements
         OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {

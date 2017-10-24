@@ -51,9 +51,11 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
             }
             final String className = clazz.getName();
             // If it's a fragment, it must also be instrumentable.
+            final boolean whitelisted =
+                    grandfather_notImplementingInstrumentable.remove(className);
             if (Fragment.class.isAssignableFrom(clazz)
                     && !Instrumentable.class.isAssignableFrom(clazz)
-                    && !grandfather_notImplementingInstrumentable.contains(className)) {
+                    && !whitelisted) {
                 broken.add(className);
             }
         }
@@ -65,5 +67,7 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
         assertWithMessage(sb.toString())
                 .that(broken.isEmpty())
                 .isTrue();
+        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_instrumentable",
+                grandfather_notImplementingInstrumentable);
     }
 }

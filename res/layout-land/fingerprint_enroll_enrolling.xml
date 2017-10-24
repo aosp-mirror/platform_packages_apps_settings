@@ -23,89 +23,111 @@
     android:layout="@layout/suw_glif_blank_template"
     style="?attr/fingerprint_layout_theme">
 
-    <LinearLayout
-        style="@style/SuwContentFrame"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:clipToPadding="false"
-        android:clipChildren="false"
-        android:paddingBottom="0dp">
-
-        <!-- Both texts are kept as separate text views so it doesn't jump around in portrait.
-             See layouts/fingerprint_enroll_enrolling_base.xml. -->
+        android:fillViewport="true">
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            style="@style/SuwContentFrame"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="?attr/suwMarginSides"
-            android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
-            android:clipChildren="false"
+            android:orientation="horizontal"
             android:clipToPadding="false"
-            android:orientation="vertical">
+            android:clipChildren="false"
+            android:paddingBottom="0dp">
 
-            <ImageView
-                android:id="@+id/suw_layout_icon"
-                style="@style/SuwGlifIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
-                android:src="@drawable/ic_fingerprint_header" />
+            <!-- Both texts are kept as separate text views so it doesn't jump around in portrait.
+                 See layouts/fingerprint_enroll_enrolling_base.xml. -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_marginStart="?attr/suwMarginSides"
+                android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/suw_layout_title"
-                style="@style/SuwGlifHeaderTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/suw_layout_icon"
+                    style="@style/SuwGlifIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="?attr/suwGlifHeaderGravity"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/ic_fingerprint_header" />
 
                 <TextView
-                    style="@style/SuwDescription.Glif"
-                    android:id="@+id/start_message"
+                    android:id="@+id/suw_layout_title"
+                    style="@style/SuwGlifHeaderTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_start_message"/>
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/SuwDescription.Glif"
+                        android:id="@+id/start_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/security_settings_fingerprint_enroll_start_message"/>
+
+                    <TextView
+                        style="@style/SuwDescription.Glif"
+                        android:id="@+id/repeat_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/security_settings_fingerprint_enroll_repeat_message"
+                        android:visibility="invisible"/>
+
+                </FrameLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/skip_button"
+                    style="@style/SuwGlifButton.Secondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/security_settings_fingerprint_enroll_enrolling_skip" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <include layout="@layout/fingerprint_enroll_enrolling_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"/>
 
                 <TextView
-                    style="@style/SuwDescription.Glif"
-                    android:id="@+id/repeat_message"
-                    android:layout_width="match_parent"
+                    style="@style/TextAppearance.FingerprintErrorText"
+                    android:id="@+id/error_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/security_settings_fingerprint_enroll_repeat_message"
+                    android:layout_marginBottom="16dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:accessibilityLiveRegion="polite"
+                    android:gravity="center_horizontal"
+                    android:paddingEnd="5dp"
+                    android:paddingStart="5dp"
                     android:visibility="invisible"/>
 
-            </FrameLayout>
+            </LinearLayout>
 
         </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/fingerprint_enroll_enrolling_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"/>
-
-            <TextView
-                style="@style/TextAppearance.FingerprintErrorText"
-                android:id="@+id/error_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_gravity="center_horizontal|bottom"
-                android:accessibilityLiveRegion="polite"
-                android:visibility="invisible"/>
-
-        </FrameLayout>
-
-    </LinearLayout>
-
+    </ScrollView>
 </com.android.setupwizardlib.GlifLayout>

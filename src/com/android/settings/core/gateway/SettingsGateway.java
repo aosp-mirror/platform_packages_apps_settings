@@ -18,14 +18,11 @@ package com.android.settings.core.gateway;
 
 import com.android.settings.ApnEditor;
 import com.android.settings.ApnSettings;
-import com.android.settings.ChooseLockPassword;
-import com.android.settings.ChooseLockPattern;
 import com.android.settings.CryptKeeperSettings;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceAdminSettings;
 import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
-import com.android.settings.DreamSettings;
 import com.android.settings.IccLockSettings;
 import com.android.settings.MasterClear;
 import com.android.settings.PrivacySettings;
@@ -60,6 +57,7 @@ import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
 import com.android.settings.applications.assist.ManageAssist;
+import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.dashboard.SupportFragment;
@@ -75,6 +73,7 @@ import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
+import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -108,10 +107,13 @@ import com.android.settings.notification.ZenModePrioritySettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.notification.ZenModeVisualInterruptionSettings;
+import com.android.settings.password.ChooseLockPassword;
+import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
+import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
@@ -244,6 +246,7 @@ public class SettingsGateway {
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
+            BluetoothDeviceDetailsFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
@@ -260,7 +263,7 @@ public class SettingsGateway {
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
-            Settings.SupportDashboardActivity.class.getName(),
+            SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),

@@ -19,7 +19,11 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Process;
+import android.util.SparseIntArray;
+
 import com.android.internal.os.BatterySipper;
 import com.android.internal.util.ArrayUtils;
 
@@ -83,5 +87,50 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public boolean isPowerAccountingToggleEnabled() {
         return true;
+    }
+
+    @Override
+    public long getEnhancedBatteryPrediction(Context context) {
+        return -1;
+    }
+
+    @Override
+    public SparseIntArray getEnhancedBatteryPredictionCurve(Context context, long zeroTime) {
+        return null;
+    }
+
+    @Override
+    public boolean isEnhancedBatteryPredictionEnabled(Context context) {
+        return false;
+    }
+
+    @Override
+    public Uri getEnhancedBatteryPredictionUri() {
+        return null;
+    }
+
+    @Override
+    public long getTimeRemainingEstimate(Cursor cursor) {
+        return 0;
+    }
+
+    @Override
+    public String getEnhancedEstimateDebugString(String timeRemaining) {
+        return null;
+    }
+
+    @Override
+    public boolean isEstimateDebugEnabled() {
+        return false;
+    }
+
+    @Override
+    public String getOldEstimateDebugString(String timeRemaining) {
+        return null;
+    }
+
+    @Override
+    public String getAdvancedUsageScreenInfoString() {
+        return null;
     }
 }

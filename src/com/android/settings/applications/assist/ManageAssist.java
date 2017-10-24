@@ -22,11 +22,11 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.gestures.AssistGesturePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +72,8 @@ public class ManageAssist extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultAssistPreferenceController(context));
-        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST));
+        controllers.add(new AssistGesturePreferenceController(context, lifecycle, KEY_ASSIST,
+                true /* assistOnly */));
         controllers.add(new AssistContextPreferenceController(context, lifecycle));
         controllers.add(new AssistScreenshotPreferenceController(context, lifecycle));
         controllers.add(new AssistFlashScreenPreferenceController(context, lifecycle));
@@ -102,6 +103,5 @@ public class ManageAssist extends DashboardFragment {
                     keys.add(KEY_ASSIST);
                     return keys;
                 }
-
             };
 }

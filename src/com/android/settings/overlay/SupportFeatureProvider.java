@@ -24,8 +24,8 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-
 import android.os.Bundle;
+
 import com.android.settings.support.SupportPhone;
 
 import java.lang.annotation.Retention;
@@ -123,10 +123,24 @@ public interface SupportFeatureProvider {
      * Starts support activity of specified type
      *
      * @param activity Calling activity
-     * @param account A account that selected by user
-     * @param type The type of support account needs.
+     * @param account  A account that selected by user
+     * @param type     The type of support account needs.
      */
     void startSupport(Activity activity, Account account, @SupportType int type);
+
+    /**
+     * Starts support v2, invokes the support home page. Will no-op if support v2 is not enabled.
+     *
+     * @param activity Calling activity.
+     */
+    void startSupportV2(Activity activity);
+
+    /**
+     * Checks if support v2 is enabled for this device.
+     *
+     * @return a boolean indicating if support v2 is enabled.
+     */
+    boolean isSupportV2Enabled();
 
     /**
      * Returns an {@link Intent} that opens help and allow user get help on sign in.
@@ -153,4 +167,9 @@ public interface SupportFeatureProvider {
      * launches the fragment that displays the system information being sent to support agents.
      */
     void launchSystemInfoFragment(Bundle args, FragmentManager manager);
+
+    /**
+     * Returns a url with information to introduce user to new device.
+     */
+    String getNewDeviceIntroUrl(Context context);
 }

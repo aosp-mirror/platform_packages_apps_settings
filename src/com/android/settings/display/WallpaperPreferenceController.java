@@ -13,27 +13,54 @@
  */
 package com.android.settings.display;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
+import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
 import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
 
+import java.util.List;
+
 public class WallpaperPreferenceController extends PreferenceController {
 
-    private static final String KEY_WALLPAPER = "wallpaper";
+    private static final String TAG = "WallpaperPrefController";
+
+    public static final String KEY_WALLPAPER = "wallpaper";
+
+    private final String mWallpaperPackage;
+    private final String mWallpaperClass;
 
     public WallpaperPreferenceController(Context context) {
         super(context);
+        mWallpaperPackage = mContext.getString(R.string.config_wallpaper_picker_package);
+        mWallpaperClass = mContext.getString(R.string.config_wallpaper_picker_class);
     }
 
     @Override
     public boolean isAvailable() {
-        return true;
+        if (TextUtils.isEmpty(mWallpaperPackage) || TextUtils.isEmpty(mWallpaperClass)) {
+            Log.e(TAG, "No Wallpaper picker specified!");
+            return false;
+        }
+        final ComponentName componentName =
+                new ComponentName(mWallpaperPackage, mWallpaperClass);
+        final PackageManager pm = mContext.getPackageManager();
+        final Intent intent = new Intent();
+        intent.setComponent(componentName);
+        final List<ResolveInfo> resolveInfos =
+                pm.queryIntentActivities(intent, 0 /* flags */);
+        return resolveInfos != null && resolveInfos.size() != 0;
     }
 
     @Override

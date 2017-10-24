@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -363,5 +364,17 @@ public class DashboardFeatureProviderImplTest {
     @Test
     public void testGetExtraIntentAction_shouldReturnNull() {
         assertThat(mImpl.getExtraIntentAction()).isNull();
+    }
+
+    @Test
+    public void testShouldTintIcon_shouldReturnValueFromResource() {
+        final Resources res = mActivity.getApplicationContext().getResources();
+        when(res.getBoolean(R.bool.config_tintSettingIcon))
+                .thenReturn(false);
+        assertThat(mImpl.shouldTintIcon()).isFalse();
+
+        when(res.getBoolean(R.bool.config_tintSettingIcon))
+                .thenReturn(true);
+        assertThat(mImpl.shouldTintIcon()).isTrue();
     }
 }

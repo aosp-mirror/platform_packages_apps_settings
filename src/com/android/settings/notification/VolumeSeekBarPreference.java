@@ -21,6 +21,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.preference.SeekBarVolumizer;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -31,7 +32,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import java.util.Objects;
 
@@ -51,30 +52,38 @@ public class VolumeSeekBarPreference extends SeekBarPreference {
     private int mIconResId;
     private int mMuteIconResId;
     private boolean mStopped;
+    @VisibleForTesting
+    AudioManager mAudioManager;
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setLayoutResource(R.layout.preference_volume_slider);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutResource(R.layout.preference_volume_slider);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public VolumeSeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.preference_volume_slider);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public VolumeSeekBarPreference(Context context) {
         super(context);
         setLayoutResource(R.layout.preference_volume_slider);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     public void setStream(int stream) {
         mStream = stream;
+        setMax(mAudioManager.getStreamMaxVolume(mStream));
+        setProgress(mAudioManager.getStreamVolume(mStream));
     }
 
     public void setCallback(Callback callback) {

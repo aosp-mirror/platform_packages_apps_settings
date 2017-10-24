@@ -164,8 +164,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     /**
      * Adds preferences for all print services to the {@value PRINT_SERVICES_CATEGORY} cathegory.
      */
-    private final class PrintServicesController implements
-           LoaderCallbacks<List<PrintServiceInfo>> {
+    private final class PrintServicesController implements LoaderCallbacks<List<PrintServiceInfo>> {
         @Override
         public Loader<List<PrintServiceInfo>> onCreateLoader(int id, Bundle args) {
             PrintManager printManager =
@@ -290,7 +289,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         }
     }
 
-     private final class PrintJobsController implements LoaderCallbacks<List<PrintJobInfo>> {
+    private final class PrintJobsController implements LoaderCallbacks<List<PrintJobInfo>> {
 
         @Override
         public Loader<List<PrintJobInfo>> onCreateLoader(int id, Bundle args) {
@@ -326,7 +325,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
                     switch (printJob.getState()) {
                         case PrintJobInfo.STATE_QUEUED:
-                        case PrintJobInfo.STATE_STARTED: {
+                        case PrintJobInfo.STATE_STARTED:
                             if (!printJob.isCancelling()) {
                                 preference.setTitle(getString(
                                         R.string.print_printing_state_title_template,
@@ -336,15 +335,13 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                                         R.string.print_cancelling_state_title_template,
                                         printJob.getLabel()));
                             }
-                        } break;
-
-                        case PrintJobInfo.STATE_FAILED: {
+                            break;
+                        case PrintJobInfo.STATE_FAILED:
                             preference.setTitle(getString(
                                     R.string.print_failed_state_title_template,
                                     printJob.getLabel()));
-                        } break;
-
-                        case PrintJobInfo.STATE_BLOCKED: {
+                            break;
+                        case PrintJobInfo.STATE_BLOCKED:
                             if (!printJob.isCancelling()) {
                                 preference.setTitle(getString(
                                         R.string.print_blocked_state_title_template,
@@ -354,7 +351,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                                         R.string.print_cancelling_state_title_template,
                                         printJob.getLabel()));
                             }
-                        } break;
+                            break;
                     }
 
                     preference.setSummary(getString(R.string.print_job_summary,
@@ -364,14 +361,13 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
                     switch (printJob.getState()) {
                         case PrintJobInfo.STATE_QUEUED:
-                        case PrintJobInfo.STATE_STARTED: {
+                        case PrintJobInfo.STATE_STARTED:
                             preference.setIcon(R.drawable.ic_print);
-                        } break;
-
+                            break;
                         case PrintJobInfo.STATE_FAILED:
-                        case PrintJobInfo.STATE_BLOCKED: {
+                        case PrintJobInfo.STATE_BLOCKED:
                             preference.setIcon(R.drawable.ic_print_error);
-                        } break;
+                            break;
                     }
 
                     Bundle extras = preference.getExtras();
@@ -475,7 +471,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                 PrintJobInfo printJob = printJobs.get(i).getInfo();
                 if (shouldShowToUser(printJob)) {
                     if (printJobInfos == null) {
-                        printJobInfos = new ArrayList<PrintJobInfo>();
+                        printJobInfos = new ArrayList<>();
                     }
                     printJobInfos.add(printJob);
                 }
@@ -505,8 +501,9 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     /**
      * Provider for the print settings summary
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    static class PrintSummaryProvider implements SummaryLoader.SummaryProvider {
+    @VisibleForTesting
+    static class PrintSummaryProvider
+            implements SummaryLoader.SummaryProvider, PrintJobStateChangeListener {
         private final Context mContext;
         private final PrintManagerWrapper mPrintManager;
         private final SummaryLoader mSummaryLoader;
@@ -528,17 +525,41 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
         public void setListening(boolean isListening) {
             if (mPrintManager != null) {
                 if (isListening) {
-                    List<PrintServiceInfo> services =
-                            mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
-                    if (services == null || services.isEmpty()) {
-                        mSummaryLoader.setSummary(this,
-                                mContext.getString(R.string.print_settings_summary_no_service));
-                    } else {
-                        final int count = services.size();
-                        mSummaryLoader.setSummary(this,
-                                mContext.getResources().getQuantityString(
-                                        R.plurals.print_settings_summary, count, count));
+                    mPrintManager.addPrintJobStateChanegListner(this);
+                    onPrintJobStateChanged(null);
+                } else {
+                    mPrintManager.removePrintJobStateChangeListener(this);
+                }
+            }
+        }
+
+        @Override
+        public void onPrintJobStateChanged(PrintJobId printJobId) {
+            final List<PrintJob> printJobs = mPrintManager.getPrintJobs();
+
+            int numActivePrintJobs = 0;
+            if (printJobs != null) {
+                for (PrintJob job : printJobs) {
+                    if (shouldShowToUser(job.getInfo())) {
+                        numActivePrintJobs++;
                     }
+                }
+            }
+
+            if (numActivePrintJobs > 0) {
+                mSummaryLoader.setSummary(this, mContext.getResources().getQuantityString(
+                        R.plurals.print_jobs_summary, numActivePrintJobs, numActivePrintJobs));
+            } else {
+                List<PrintServiceInfo> services =
+                        mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
+                if (services == null || services.isEmpty()) {
+                    mSummaryLoader.setSummary(this,
+                            mContext.getString(R.string.print_settings_summary_no_service));
+                } else {
+                    final int count = services.size();
+                    mSummaryLoader.setSummary(this,
+                            mContext.getResources().getQuantityString(
+                                    R.plurals.print_settings_summary, count, count));
                 }
             }
         }
@@ -554,6 +575,18 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
             public List<PrintServiceInfo> getPrintServices(int selectionFlags) {
                 return mPrintManager.getPrintServices(selectionFlags);
+            }
+
+            public void addPrintJobStateChanegListner(PrintJobStateChangeListener listener) {
+                mPrintManager.addPrintJobStateChangeListener(listener);
+            }
+
+            public void removePrintJobStateChangeListener(PrintJobStateChangeListener listener) {
+                mPrintManager.removePrintJobStateChangeListener(listener);
+            }
+
+            public List<PrintJob> getPrintJobs() {
+                return mPrintManager.getPrintJobs();
             }
         }
     }

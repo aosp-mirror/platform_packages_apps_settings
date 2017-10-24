@@ -18,7 +18,7 @@ package com.android.settings.core;
 import android.content.Context;
 
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search2.ResultPayload;
+import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;

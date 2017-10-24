@@ -22,9 +22,8 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -45,13 +44,12 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     public static final String KEY_ACCOUNT_TYPE = "account_type";
     public static final String KEY_ACCOUNT_LABEL = "account_label";
     public static final String KEY_ACCOUNT_TITLE_RES = "account_title_res";
-    public static final String KEY_ACCOUNT_HEADER = "account_header";
     public static final String KEY_USER_HANDLE = "user_handle";
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     Account mAccount;
     private String mAccountLabel;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     String mAccountType;
     private AccountSyncPreferenceController mAccountSynController;
     private RemoveAccountPreferenceController mRemoveAccountController;
@@ -99,6 +97,11 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_account_detail;
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.account_type_settings;
     }
@@ -110,6 +113,8 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         controllers.add(mAccountSynController);
         mRemoveAccountController = new RemoveAccountPreferenceController(context, this);
         controllers.add(mRemoveAccountController);
+        controllers.add(new AccountHeaderPreferenceController(
+                context, getLifecycle(), getActivity(), this /* host */, getArguments()));
         return controllers;
     }
 
@@ -127,8 +132,6 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
 
     @VisibleForTesting
     void updateUi() {
-        final Preference headerPreference = findPreference(KEY_ACCOUNT_HEADER);
-        headerPreference.setTitle(mAccount.name);
         final Context context = getContext();
         UserHandle userHandle = null;
         Bundle args = getArguments();
@@ -136,14 +139,12 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
             userHandle = args.getParcelable(KEY_USER_HANDLE);
         }
         final AuthenticatorHelper helper = new AuthenticatorHelper(context, userHandle, null);
-        headerPreference.setIcon(helper.getDrawableForType(context, mAccountType));
         final AccountTypePreferenceLoader accountTypePreferenceLoader =
-            new AccountTypePreferenceLoader(this, helper, userHandle);
-        PreferenceScreen prefs =
-            accountTypePreferenceLoader.addPreferencesForType(mAccountType, getPreferenceScreen());
+                new AccountTypePreferenceLoader(this, helper, userHandle);
+        PreferenceScreen prefs = accountTypePreferenceLoader.addPreferencesForType(
+                mAccountType, getPreferenceScreen());
         if (prefs != null) {
             accountTypePreferenceLoader.updatePreferenceIntents(prefs, mAccountType, mAccount);
         }
     }
-
 }

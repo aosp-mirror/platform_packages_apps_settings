@@ -32,7 +32,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;

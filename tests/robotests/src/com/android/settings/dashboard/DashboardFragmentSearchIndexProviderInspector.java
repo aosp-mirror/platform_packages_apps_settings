@@ -21,7 +21,7 @@ import android.content.Context;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settings.search.Indexable;
-import com.android.settings.search2.DatabaseIndexingUtils;
+import com.android.settings.search.DatabaseIndexingUtils;
 
 import org.robolectric.RuntimeEnvironment;
 

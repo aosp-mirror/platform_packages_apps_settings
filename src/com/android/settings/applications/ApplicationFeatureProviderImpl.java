@@ -24,7 +24,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.RemoteException;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArraySet;
 import android.view.View;
@@ -51,11 +50,6 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
-    }
-
-    @Override
-    public AppHeaderController newAppHeaderController(Fragment fragment, View appHeader) {
-        return new AppHeaderController(mContext, fragment, appHeader);
     }
 
     @Override

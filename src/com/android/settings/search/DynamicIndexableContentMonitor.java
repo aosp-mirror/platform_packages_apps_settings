@@ -54,7 +54,6 @@ import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintSettingsFragment;
-import com.android.settings.search2.DatabaseIndexingManager;
 
 import java.util.ArrayList;
 import java.util.List;

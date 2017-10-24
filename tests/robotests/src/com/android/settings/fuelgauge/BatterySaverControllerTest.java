@@ -17,10 +17,12 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.os.PowerManager;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -75,6 +77,20 @@ public class BatterySaverControllerTest {
     @Test
     public void testUpdateState_SaverModeOff_PreferenceUnChecked() {
         testUpdateStateInner(false);
+    }
+
+    @Test
+    public void testOnBatteryChanged_pluggedIn_setDisable() {
+        mBatterySaverController.onBatteryChanged(true /* pluggedIn */);
+
+        verify(mBatterySaverPref).setSwitchEnabled(false);
+    }
+
+    @Test
+    public void testOnBatteryChanged_notPluggedIn_setEnable() {
+        mBatterySaverController.onBatteryChanged(false /* pluggedIn */);
+
+        verify(mBatterySaverPref).setSwitchEnabled(true);
     }
 
     private void testOnPreferenceChangeInner(final boolean saverOn) {

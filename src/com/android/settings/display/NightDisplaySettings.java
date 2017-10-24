@@ -28,7 +28,7 @@ import android.widget.TimePicker;
 import com.android.internal.app.NightDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;
@@ -71,6 +71,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         mTemperaturePreference.setMax(convertTemperature(mController.getMinimumColorTemperature()));
         mTemperaturePreference.setContinuousUpdates(true);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_night_display;
     }
 
     @Override

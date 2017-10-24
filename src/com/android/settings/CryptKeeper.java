@@ -888,7 +888,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mPasswordEntry.setEnabled(false);
             setBackFunctionality(false);
 
-            if (password.length() >= LockPatternUtils.MIN_LOCK_PATTERN_SIZE) {
+            if (password.length() >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE) {
                 new DecryptTask().execute(password);
             } else {
                 // Allow user to make as many of these as they want.

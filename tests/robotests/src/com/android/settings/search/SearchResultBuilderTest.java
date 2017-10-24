@@ -18,15 +18,13 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.ResultPayload;
-import com.android.settings.search2.SearchResult;
-import com.android.settings.search2.SearchResult.Builder;
+import com.android.settings.search.SearchResult.Builder;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,9 +40,10 @@ import static com.google.common.truth.Truth.assertThat;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchResultBuilderTest {
 
+    private static final String TITLE = "title";
+    private static final String SUMMARY = "summary";
+
     private Builder mBuilder;
-    private String mTitle;
-    private String mSummary;
     private ArrayList<String> mBreadcrumbs;
     private int mRank;
     private ResultPayload mResultPayload;
@@ -53,11 +52,9 @@ public class SearchResultBuilderTest {
     @Before
     public void setUp() {
         mBuilder = new Builder();
-        mTitle = "title";
-        mSummary = "summary";
         mBreadcrumbs = new ArrayList<>();
         mRank = 3;
-        mResultPayload = new IntentPayload(null);
+        mResultPayload = new ResultPayload(new Intent());
 
         final Context context = ShadowApplication.getInstance().getApplicationContext();
         mIcon = context.getDrawable(R.drawable.ic_search_history);
@@ -65,77 +62,82 @@ public class SearchResultBuilderTest {
 
     @Test
     public void testAllInfo_BuildSearchResult() {
-        mBuilder.addTitle(mTitle)
-                .addSummary(mSummary)
-                .addRank(mRank)
+        mBuilder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(mRank)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon)
-                .addPayload(mResultPayload);
+                .setIcon(mIcon)
+                .setPayload(mResultPayload)
+                .setStableId(1);
         SearchResult result = mBuilder.build();
 
         assertThat(result).isNotNull();
-        assertThat(result.title).isEqualTo(mTitle);
-        assertThat(result.summary).isEqualTo(mSummary);
+        assertThat(result.title).isEqualTo(TITLE);
+        assertThat(result.summary).isEqualTo(SUMMARY);
         assertThat(result.rank).isEqualTo(mRank);
         assertThat(result.breadcrumbs).isEqualTo(mBreadcrumbs);
         assertThat(result.icon).isEqualTo(mIcon);
         assertThat(result.payload).isEqualTo(mResultPayload);
     }
 
-    @Test
-    public void testNoTitle_BuildSearchResultException() {
-        mBuilder.addSummary(mSummary)
-                .addRank(mRank)
+    @Test(expected = IllegalStateException.class)
+    public void testNoStableId_BuildSearchResultException() {
+        mBuilder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(mRank)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon)
-                .addPayload(mResultPayload);
+                .setIcon(mIcon)
+                .setPayload(mResultPayload);
 
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
+        mBuilder.build();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testNoTitle_BuildSearchResultException() {
+        mBuilder.setSummary(SUMMARY)
+                .setRank(mRank)
+                .addBreadcrumbs(mBreadcrumbs)
+                .setIcon(mIcon)
+                .setPayload(mResultPayload)
+                .setStableId(1);
+
+        mBuilder.build();
     }
 
     @Test
     public void testNoRank_BuildSearchResult_pass() {
-        mBuilder.addTitle(mTitle)
-                .addSummary(mSummary)
+        mBuilder.setTitle(TITLE)
+                .setSummary(SUMMARY)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon)
-                .addPayload(mResultPayload);
+                .setIcon(mIcon)
+                .setPayload(mResultPayload)
+                .setStableId(1);
 
         assertThat(mBuilder.build()).isNotNull();
     }
 
     @Test
     public void testNoIcon_BuildSearchResult_pass() {
-        mBuilder.addTitle(mTitle)
-                .addSummary(mSummary)
-                .addRank(mRank)
+        mBuilder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(mRank)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addPayload(mResultPayload);
+                .setPayload(mResultPayload)
+                .setStableId(1);
 
         assertThat(mBuilder.build()).isNotNull();
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testNoPayload_BuildSearchResultException() {
-        mBuilder.addTitle(mTitle)
-                .addSummary(mSummary)
-                .addRank(mRank)
+        mBuilder.setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setRank(mRank)
                 .addBreadcrumbs(mBreadcrumbs)
-                .addIcon(mIcon);
+                .setIcon(mIcon)
+                .setStableId(1);
 
-        SearchResult result = null;
-        try {
-            result = mBuilder.build();
-        } catch (IllegalArgumentException e) {
-            // passes.
-        }
-        assertThat(result).isNull();
+        mBuilder.build();
     }
 }
 

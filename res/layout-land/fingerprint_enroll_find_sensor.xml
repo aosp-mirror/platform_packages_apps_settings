@@ -44,7 +44,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipChildren="false"
-                android:clipToPadding="false">
+                android:clipToPadding="false"
+                android:fillViewport="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -58,6 +59,7 @@
                         style="@style/SuwGlifIcon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="?attr/suwGlifHeaderGravity"
                         android:layout_marginStart="0dp"
                         android:layout_marginEnd="0dp"
                         android:src="@drawable/ic_fingerprint_header" />
@@ -76,13 +78,18 @@
                         android:layout_height="wrap_content"
                         android:text="@string/security_settings_fingerprint_enroll_find_sensor_message"/>
 
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
                     <Button
-                        style="@style/SetupWizardButton.Positive"
-                        android:id="@+id/next_button"
+                        style="@style/SetupWizardButton.Negative"
+                        android:id="@+id/skip_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/fingerprint_enroll_button_next" />
+                        android:text="@string/skip_label" />
 
                 </LinearLayout>
 

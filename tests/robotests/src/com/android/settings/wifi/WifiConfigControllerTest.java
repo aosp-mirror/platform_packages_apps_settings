@@ -44,10 +44,14 @@ import static org.mockito.Mockito.when;
         shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
-    @Mock private WifiConfigUiBase mConfigUiBase;
-    @Mock private Context mContext;
-    @Mock private View mView;
-    @Mock private AccessPoint mAccessPoint;
+    @Mock
+    private WifiConfigUiBase mConfigUiBase;
+    @Mock
+    private Context mContext;
+    @Mock
+    private View mView;
+    @Mock
+    private AccessPoint mAccessPoint;
 
     public WifiConfigController mController;
 
@@ -73,6 +77,38 @@ public class WifiConfigControllerTest {
         mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
                 WifiConfigUiBase.MODE_CONNECT);
     }
+
+    @Test
+    public void ssidExceeds32Bytes_shouldShowSsidTooLongWarning() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        ssid.setText("☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎");
+        mController.showWarningMessagesIfAppropriate();
+
+        assertThat(mView.findViewById(R.id.ssid_too_long_warning).getVisibility())
+                .isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void ssidShorterThan32Bytes_shouldNotShowSsidTooLongWarning() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        ssid.setText("123456789012345678901234567890");
+        mController.showWarningMessagesIfAppropriate();
+
+        assertThat(mView.findViewById(R.id.ssid_too_long_warning).getVisibility())
+                .isEqualTo(View.GONE);
+
+        ssid.setText("123");
+        mController.showWarningMessagesIfAppropriate();
+
+        assertThat(mView.findViewById(R.id.ssid_too_long_warning).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
     @Test
     public void isSubmittable_noSSID_shouldReturnFalse() {
         final TextView ssid = mView.findViewById(R.id.ssid);
@@ -87,13 +123,14 @@ public class WifiConfigControllerTest {
         assertThat(mController.isSubmittable()).isFalse();
 
     }
+
     @Test
     public void isSubmittable_shortPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
         password.setText(SHORT_PSK);
         assertThat(mController.isSubmittable()).isFalse();
-
     }
+
     @Test
     public void isSubmittable_goodPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
@@ -101,6 +138,7 @@ public class WifiConfigControllerTest {
         assertThat(mController.isSubmittable()).isTrue();
 
     }
+
     @Test
     public void isSubmittable_savedConfigZeroLengthPassword_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);

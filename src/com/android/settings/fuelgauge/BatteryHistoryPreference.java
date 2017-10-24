@@ -17,26 +17,28 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.TextView;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.BatteryInfo;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 /**
  * Custom preference for displaying power consumption as a bar and an icon on the left for the
  * subsystem/app type.
  */
 public class BatteryHistoryPreference extends Preference {
+    private static final String TAG = "BatteryHistoryPreference";
 
+    private CharSequence mSummary;
+    private TextView mSummaryView;
+
+    @VisibleForTesting
+    boolean hideSummary;
     @VisibleForTesting
     BatteryInfo mBatteryInfo;
 
@@ -47,22 +49,47 @@ public class BatteryHistoryPreference extends Preference {
     }
 
     public void setStats(BatteryStatsHelper batteryStats) {
-        final long elapsedRealtimeUs = SystemClock.elapsedRealtime() * 1000;
-        mBatteryInfo = BatteryInfo.getBatteryInfo(getContext(), batteryStats.getBatteryBroadcast(),
-                batteryStats.getStats(), elapsedRealtimeUs);
-        notifyChanged();
+        BatteryInfo.getBatteryInfo(getContext(), info -> {
+            mBatteryInfo = info;
+            notifyChanged();
+        }, batteryStats.getStats(), false);
+    }
+
+    public void setBottomSummary(CharSequence text) {
+        mSummary = text;
+        if (mSummaryView != null) {
+            mSummaryView.setVisibility(View.VISIBLE);
+            mSummaryView.setText(mSummary);
+        }
+        hideSummary = false;
+    }
+
+    public void hideBottomSummary() {
+        if (mSummaryView != null) {
+            mSummaryView.setVisibility(View.GONE);
+        }
+        hideSummary = true;
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
+        final long startTime = System.currentTimeMillis();
         if (mBatteryInfo == null) {
             return;
         }
 
         ((TextView) view.findViewById(R.id.charge)).setText(mBatteryInfo.batteryPercentString);
+        mSummaryView = (TextView) view.findViewById(R.id.bottom_summary);
+        if (mSummary != null) {
+            mSummaryView.setText(mSummary);
+        }
+        if (hideSummary) {
+            mSummaryView.setVisibility(View.GONE);
+        }
         UsageView usageView = (UsageView) view.findViewById(R.id.battery_usage);
         usageView.findViewById(R.id.label_group).setAlpha(.7f);
         mBatteryInfo.bindHistory(usageView);
+        BatteryUtils.logRuntime(TAG, "onBindViewHolder", startTime);
     }
 }

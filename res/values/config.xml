@@ -99,4 +99,17 @@
         -->
     </string-array>
 
+    <!-- Whether or not we should tint the icon color on setting pages. -->
+    <bool name="config_tintSettingIcon">true</bool>
+
+    <!-- Whether or not App & Notification screen should display recently used apps -->
+    <bool name="config_display_recent_apps">true</bool>
+
+    <!-- Package name for the storage manager to use from Settings search. -->
+    <string name="config_deletion_helper_package" translatable="false">com.android.storagemanager</string>
+    <!-- Class name for the storage manager's deletion helper class. -->
+    <string name="config_deletion_helper_class" translatable="false">com.android.storagemanager.deletionhelper.DeletionHelperActivity</string>
+
+    <!-- Whether or not new device intro suggestion is supported for this device -->
+    <bool name="config_new_device_intro_suggestion_supported">false</bool>
 </resources>

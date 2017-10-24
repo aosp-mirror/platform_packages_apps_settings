@@ -37,14 +37,14 @@
 
         <!-- The max value for seek bars here should be kept in sync
              with the max value specified in TextToSpeechSettings class. -->
-        <com.android.settings.SeekBarPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="tts_default_rate"
             android:title="@string/tts_default_rate_title"
             android:summary="@string/tts_default_rate_summary"
             android:defaultValue="50"
             android:max="600"/>
 
-        <com.android.settings.SeekBarPreference
+        <com.android.settings.widget.SeekBarPreference
             android:key="tts_default_pitch"
             android:title="@string/tts_default_pitch_title"
             android:summary="@string/tts_default_pitch_summary"

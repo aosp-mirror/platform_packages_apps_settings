@@ -14,7 +14,6 @@
 
 package com.android.settings.applications;
 
-import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;

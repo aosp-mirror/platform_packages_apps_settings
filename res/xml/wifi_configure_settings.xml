@@ -17,7 +17,7 @@
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-        android:title="@string/wifi_configure_titlebar">
+        android:title="@string/wifi_configure_settings_preference_title">
 
     <SwitchPreference
             android:key="enable_wifi_wakeup"
@@ -42,12 +42,6 @@
         android:title="@string/wifi_cellular_data_fallback_title"
         android:summary="@string/wifi_cellular_data_fallback_summary"/>
 
-    <ListPreference
-            android:key="sleep_policy"
-            android:title="@string/wifi_setting_sleep_policy_title"
-            android:entries="@array/wifi_sleep_policy_entries"
-            android:entryValues="@array/wifi_sleep_policy_values" />
-
     <Preference
             android:key="install_credentials"
             android:title="@string/wifi_install_credentials">
@@ -71,10 +65,8 @@
 
     <Preference
             android:key="wifi_direct"
-            android:title="@string/wifi_menu_p2p">
-        <intent android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.Settings$WifiP2pSettingsActivity"/>
-    </Preference>
+            android:title="@string/wifi_menu_p2p"
+            android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings"/>
 
     <Preference
             android:key="wps_push_button"

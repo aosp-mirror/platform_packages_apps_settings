@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -29,9 +30,12 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DoubleTwistPreferenceController extends GesturePreferenceController {
+
+    private final int ON = 1;
+    private final int OFF = 0;
 
     private static final String PREF_KEY_VIDEO = "gesture_double_twist_video";
     private final String mDoubleTwistPrefKey;
@@ -43,10 +47,30 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
+    public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
+        return !isGestureAvailable(context)
+                || prefs.getBoolean(DoubleTwistGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+    }
+
+    public static boolean isGestureAvailable(Context context) {
+        final Resources resources = context.getResources();
+        final String name = resources.getString(R.string.gesture_double_twist_sensor_name);
+        final String vendor = resources.getString(R.string.gesture_double_twist_sensor_vendor);
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
+            final SensorManager sensorManager =
+                    (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
+                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean isAvailable() {
-        return hasSensor(R.string.gesture_double_twist_sensor_name,
-                R.string.gesture_double_twist_sensor_vendor);
+        return isGestureAvailable(mContext);
     }
 
     @Override
@@ -61,42 +85,31 @@ public class DoubleTwistPreferenceController extends GesturePreferenceController
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final int enabled = (boolean) newValue ? 1 : 0;
-        Settings.Secure.putInt(mContext.getContentResolver(),
+        final int enabled = (boolean) newValue ? ON : OFF;
+        setDoubleTwistPreference(mContext, mUserManager, enabled);
+        return true;
+    }
+
+    public static void setDoubleTwistPreference(Context context, UserManager userManager,
+            int enabled) {
+        Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled);
-        final int managedProfileUserId = getManagedProfileUserId();
+        final int managedProfileUserId = getManagedProfileId(userManager);
         if (managedProfileUserId != UserHandle.USER_NULL) {
-            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+            Settings.Secure.putIntForUser(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, enabled, managedProfileUserId);
         }
-        return true;
     }
 
     @Override
     protected boolean isSwitchPrefEnabled() {
         final int doubleTwistEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
+                Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, ON);
         return doubleTwistEnabled != 0;
     }
 
     @VisibleForTesting
-    int getManagedProfileUserId() {
-        return Utils.getManagedProfileId(mUserManager, UserHandle.myUserId());
-    }
-
-    private boolean hasSensor(int nameResId, int vendorResId) {
-        final Resources resources = mContext.getResources();
-        final String name = resources.getString(nameResId);
-        final String vendor = resources.getString(vendorResId);
-        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(vendor)) {
-            final SensorManager sensorManager =
-                    (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-            for (Sensor s : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-                if (name.equals(s.getName()) && vendor.equals(s.getVendor())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    public static int getManagedProfileId(UserManager userManager) {
+        return Utils.getManagedProfileId(userManager, UserHandle.myUserId());
     }
 }

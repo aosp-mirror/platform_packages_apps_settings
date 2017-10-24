@@ -44,9 +44,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -131,6 +133,36 @@ public class BluetoothSummaryUpdaterTest {
 
         verify(mListener).onSummaryChanged(
                 mContext.getString(R.string.disconnected));
+    }
+
+    @Test
+    public void onBluetoothStateChanged_ConnectedDisabledEnabled_shouldSendDisconnectedSummary() {
+        final boolean[] connected = {false};
+        final List<CachedBluetoothDevice> devices = new ArrayList<>();
+        devices.add(mock(CachedBluetoothDevice.class));
+        doAnswer(invocation -> connected[0]).when(devices.get(0)).isConnected();
+        when(mBluetoothManager.getCachedDeviceManager().getCachedDevicesCopy())
+                .thenReturn(devices);
+        when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_DISCONNECTED);
+        prepareConnectedDevice(false);
+
+        mSummaryUpdater.register(true);
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.disconnected));
+
+        connected[0] = true;
+        when(mBtAdapter.getConnectionState()).thenReturn(BluetoothAdapter.STATE_CONNECTED);
+        mSummaryUpdater.onConnectionStateChanged(null /* device */,
+                BluetoothAdapter.STATE_CONNECTED);
+        verify(mListener).onSummaryChanged(
+                mContext.getString(R.string.bluetooth_connected_summary, DEVICE_NAME));
+
+        mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_OFF);
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.bluetooth_disabled));
+
+        connected[0] = false;
+        mSummaryUpdater.onBluetoothStateChanged(BluetoothAdapter.STATE_TURNING_ON);
+        verify(mListener, times(2)).onSummaryChanged(mContext.getString(R.string.disconnected));
+        verify(mListener, times(4)).onSummaryChanged(anyString());
     }
 
     @Test

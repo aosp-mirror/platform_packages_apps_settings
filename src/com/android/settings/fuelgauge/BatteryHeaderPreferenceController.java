@@ -17,54 +17,70 @@
 
 package com.android.settings.fuelgauge;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceController;
-import com.android.settingslib.BatteryInfo;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.Utils;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 
 /**
  * Controller that update the battery header view
  */
-public class BatteryHeaderPreferenceController extends PreferenceController {
+public class BatteryHeaderPreferenceController extends PreferenceController
+        implements LifecycleObserver, OnStart {
     @VisibleForTesting
     static final String KEY_BATTERY_HEADER = "battery_header";
+
     @VisibleForTesting
     BatteryMeterView mBatteryMeterView;
     @VisibleForTesting
-    TextView mTimeText;
+    TextView mBatteryPercentText;
     @VisibleForTesting
-    TextView mSummary;
+    TextView mSummary1;
+    @VisibleForTesting
+    TextView mSummary2;
+
+    private final Activity mActivity;
+    private final PreferenceFragment mHost;
+    private final Lifecycle mLifecycle;
 
     private LayoutPreference mBatteryLayoutPref;
 
-    public BatteryHeaderPreferenceController(Context context) {
+    public BatteryHeaderPreferenceController(Context context, Activity activity,
+            PreferenceFragment host, Lifecycle lifecycle) {
         super(context);
+        mActivity = activity;
+        mHost = host;
+        mLifecycle = lifecycle;
+        if (mLifecycle != null) {
+            mLifecycle.addObserver(this);
+        }
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-
         mBatteryLayoutPref = (LayoutPreference) screen.findPreference(KEY_BATTERY_HEADER);
         mBatteryMeterView = (BatteryMeterView) mBatteryLayoutPref
                 .findViewById(R.id.battery_header_icon);
-        mTimeText = (TextView) mBatteryLayoutPref.findViewById(R.id.battery_percent);
-        mSummary = (TextView) mBatteryLayoutPref.findViewById(R.id.summary1);
+        mBatteryPercentText = mBatteryLayoutPref.findViewById(R.id.battery_percent);
+        mSummary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
+        mSummary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
 
-        Intent batteryBroadcast = mContext.registerReceiver(null,
-                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
-
-        mBatteryMeterView.setBatteryLevel(batteryLevel);
-        mTimeText.setText(Utils.formatPercentage(batteryLevel));
+        quickUpdateHeaderPreference();
     }
 
     @Override
@@ -77,15 +93,43 @@ public class BatteryHeaderPreferenceController extends PreferenceController {
         return KEY_BATTERY_HEADER;
     }
 
+    @Override
+    public void onStart() {
+        EntityHeaderController.newInstance(mActivity, mHost,
+                mBatteryLayoutPref.findViewById(R.id.battery_entity_header))
+                .setRecyclerView(mHost.getListView(), mLifecycle)
+                .styleActionBar(mActivity);
+    }
+
     public void updateHeaderPreference(BatteryInfo info) {
-        mTimeText.setText(Utils.formatPercentage(info.batteryLevel));
+        mBatteryPercentText.setText(Utils.formatPercentage(info.batteryLevel));
         if (info.remainingLabel == null) {
-            mSummary.setText(info.statusLabel);
+            mSummary1.setText(info.statusLabel);
         } else {
-            mSummary.setText(info.remainingLabel);
+            mSummary1.setText(info.remainingLabel);
         }
+        // Clear this just to be sure we don't get UI jank on re-entering this view from another
+        // activity.
+        mSummary2.setText("");
 
         mBatteryMeterView.setBatteryLevel(info.batteryLevel);
         mBatteryMeterView.setCharging(!info.discharging);
+    }
+
+    public void quickUpdateHeaderPreference() {
+        Intent batteryBroadcast = mContext.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final int batteryLevel = Utils.getBatteryLevel(batteryBroadcast);
+        final boolean discharging =
+                batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) == 0;
+
+        // Set battery level and charging status
+        mBatteryMeterView.setBatteryLevel(batteryLevel);
+        mBatteryMeterView.setCharging(!discharging);
+        mBatteryPercentText.setText(Utils.formatPercentage(batteryLevel));
+
+        // clear all the summaries
+        mSummary1.setText("");
+        mSummary2.setText("");
     }
 }

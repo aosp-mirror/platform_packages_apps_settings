@@ -43,6 +43,13 @@ public class ShadowSecureSettings {
     }
 
     @Implementation
+    public static boolean putStringForUser(ContentResolver resolver, String name, String value,
+            int userHandle) {
+        mValueMap.put(name, value);
+        return true;
+    }
+
+    @Implementation
     public static String getString(ContentResolver resolver, String name) {
         return (String) mValueMap.get(name);
     }
@@ -66,6 +73,29 @@ public class ShadowSecureSettings {
     @Implementation
     public static int getInt(ContentResolver resolver, String name, int defaultValue) {
         Integer value = (Integer) mValueMap.get(name);
+        return value == null ? defaultValue : value;
+    }
+
+    @Implementation
+    public static boolean putFloat(ContentResolver resolver, String name, float value) {
+        mValueMap.put(name, value);
+        return true;
+    }
+
+    @Implementation
+    public static boolean putFloatForUser(ContentResolver cr, String name, float value,
+            float userHandle) {
+        return putFloat(cr, name, value);
+    }
+
+    @Implementation
+    public static float getFloatForUser(ContentResolver cr, String name, float def, int userHandle) {
+        return getFloat(cr, name, def);
+    }
+
+    @Implementation
+    public static float getFloat(ContentResolver resolver, String name, float defaultValue) {
+        Float value = (Float) mValueMap.get(name);
         return value == null ? defaultValue : value;
     }
 

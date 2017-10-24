@@ -34,6 +34,7 @@
     <com.android.settingslib.RestrictedPreference
         android:key="mobile_network_settings"
         android:title="@string/network_settings_title"
+        android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_network_cell"
         android:dependency="toggle_airplane"
         android:order="-15"

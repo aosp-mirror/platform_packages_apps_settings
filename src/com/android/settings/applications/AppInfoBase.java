@@ -35,6 +35,7 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -293,7 +294,8 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         @Override
         public void onReceive(Context context, Intent intent) {
             String packageName = intent.getData().getSchemeSpecificPart();
-            if (!mFinishing && mAppEntry.info.packageName.equals(packageName)) {
+            if (!mFinishing && (mAppEntry == null || mAppEntry.info == null
+                    || TextUtils.equals(mAppEntry.info.packageName, packageName))) {
                 onPackageRemoved();
             }
         }

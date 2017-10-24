@@ -16,17 +16,21 @@
 
 package com.android.settings.notification;
 
+import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.NotificationApps;
+import com.android.settings.applications.NotificationApps.SummaryProvider;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,6 +84,15 @@ public class ConfigureNotificationSettings extends DashboardFragment {
         controllers.add(lockScreenNotificationController);
         return controllers;
     }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+        = new SummaryLoader.SummaryProviderFactory() {
+            @Override
+            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                    SummaryLoader summaryLoader) {
+                return new NotificationApps.SummaryProvider(activity, summaryLoader);
+            }
+    };
 
     /**
      * For Search.

@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -25,12 +26,15 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
-import android.util.Log;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.InlineSwitchPayload;
+import com.android.settings.search.ResultPayload;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.provider.Settings.Secure.NOTIFICATION_BADGING;
 
@@ -39,7 +43,8 @@ public class BadgingNotificationPreferenceController extends PreferenceControlle
 
     private static final String TAG = "BadgeNotifPrefContr";
     private static final String KEY_NOTIFICATION_BADGING = "notification_badging";
-    private static final int DEFAULT_VALUE = 1;
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     private SettingObserver mSettingObserver;
 
@@ -84,7 +89,7 @@ public class BadgingNotificationPreferenceController extends PreferenceControlle
     @Override
     public void updateState(Preference preference) {
         final boolean checked = Settings.Secure.getInt(mContext.getContentResolver(),
-                NOTIFICATION_BADGING, DEFAULT_VALUE) == 1;
+                NOTIFICATION_BADGING, ON) == ON;
         ((TwoStatePreference) preference).setChecked(checked);
     }
 
@@ -92,7 +97,7 @@ public class BadgingNotificationPreferenceController extends PreferenceControlle
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean val = (Boolean) newValue;
         return Settings.Secure.putInt(mContext.getContentResolver(),
-                NOTIFICATION_BADGING, val ? 1 : 0);
+                NOTIFICATION_BADGING, val ? ON : OFF);
     }
 
     class SettingObserver extends ContentObserver {
@@ -122,5 +127,16 @@ public class BadgingNotificationPreferenceController extends PreferenceControlle
                 updateState(mPreference);
             }
         }
+    }
+
+    @Override
+    public ResultPayload getResultPayload() {
+        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+                ConfigureNotificationSettings.class.getName(), KEY_NOTIFICATION_BADGING,
+                mContext.getString(R.string.configure_notification_settings));
+
+        return new InlineSwitchPayload(Settings.Secure.NOTIFICATION_BADGING,
+                ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
+                ON /* defaultValue */);
     }
 }

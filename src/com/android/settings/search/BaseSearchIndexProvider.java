@@ -16,24 +16,24 @@
 
 package com.android.settings.search;
 
+import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.CallSuper;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.search2.XmlParserUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,7 +42,6 @@ import java.util.List;
 public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
 
     private static final String TAG = "BaseSearchIndex";
-    private static final List<String> EMPTY_LIST = new ArrayList<>();
 
     public BaseSearchIndexProvider() {
     }
@@ -93,22 +92,29 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         final List<SearchIndexableResource> resources = getXmlResourcesToIndex(
                 context, true /* not used*/);
         if (resources == null || resources.isEmpty()) {
-            return EMPTY_LIST;
+            return new ArrayList<>();
         }
         final List<String> nonIndexableKeys = new ArrayList<>();
         for (SearchIndexableResource res : resources) {
-            final XmlResourceParser parser = context.getResources().getXml(res.xmlResId);
-            final AttributeSet attrs = Xml.asAttributeSet(parser);
-            try {
-                while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                    final String key = XmlParserUtils.getDataKey(context, attrs);
-                    if (!TextUtils.isEmpty(key)) {
-                        nonIndexableKeys.add(key);
-                    }
+            nonIndexableKeys.addAll(getNonIndexableKeysFromXml(context, res.xmlResId));
+        }
+        return nonIndexableKeys;
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public List<String> getNonIndexableKeysFromXml(Context context, @XmlRes int xmlResId) {
+        final List<String> nonIndexableKeys = new ArrayList<>();
+        final XmlResourceParser parser = context.getResources().getXml(xmlResId);
+        final AttributeSet attrs = Xml.asAttributeSet(parser);
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                final String key = XmlParserUtils.getDataKey(context, attrs);
+                if (!TextUtils.isEmpty(key)) {
+                    nonIndexableKeys.add(key);
                 }
-            } catch (IOException | XmlPullParserException e) {
-                Log.w(TAG, "Error parsing non-indexable from xml " + res.xmlResId);
             }
+        } catch (IOException | XmlPullParserException e) {
+            Log.w(TAG, "Error parsing non-indexable from xml " + xmlResId);
         }
         return nonIndexableKeys;
     }

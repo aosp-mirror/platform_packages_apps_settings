@@ -149,6 +149,6 @@ public class EmergencyInfoPreferenceControllerTest {
         mController.handlePreferenceTreeClick(preference);
 
         assertThat(application.getNextStartedActivity().getAction())
-                .isEqualTo("android.settings.EDIT_EMERGENGY_INFO");
+                .isEqualTo("android.settings.EDIT_EMERGENCY_INFO");
     }
 }

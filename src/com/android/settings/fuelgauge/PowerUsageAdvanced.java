@@ -15,7 +15,10 @@ package com.android.settings.fuelgauge;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,9 +72,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
             UsageType.UNACCOUNTED,
             UsageType.OVERCOUNTED};
 
+    @VisibleForTesting BatteryHistoryPreference mHistPref;
+    @VisibleForTesting PreferenceGroup mUsageListGroup;
     private BatteryUtils mBatteryUtils;
-    private BatteryHistoryPreference mHistPref;
-    private PreferenceGroup mUsageListGroup;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
     private PackageManager mPackageManager;
     private UserManager mUserManager;
@@ -164,13 +167,27 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected void refreshUi() {
+        final long startTime = System.currentTimeMillis();
         final Context context = getContext();
         if (context == null) {
             return;
         }
         updatePreference(mHistPref);
         refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
+
+        Intent batteryIntent =
+                context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
+
+        if (mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(context) && !plugged) {
+            mHistPref.setBottomSummary(
+                    mPowerUsageFeatureProvider.getAdvancedUsageScreenInfoString());
+        } else {
+            mHistPref.hideBottomSummary();
+        }
+
         BatteryEntry.startRequestQueue();
+        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
     }
 
     @VisibleForTesting
@@ -311,7 +328,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
         return usageType == UsageType.CELL
                 || usageType == UsageType.BLUETOOTH
-                || usageType == UsageType.WIFI;
+                || usageType == UsageType.WIFI
+                || usageType == UsageType.APP;
     }
 
     @VisibleForTesting

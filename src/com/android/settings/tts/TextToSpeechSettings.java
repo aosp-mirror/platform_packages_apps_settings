@@ -36,7 +36,7 @@ import java.util.Collections;
 import com.android.settings.applications.LayoutPreference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;

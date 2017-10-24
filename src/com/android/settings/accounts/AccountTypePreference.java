@@ -79,7 +79,6 @@ public class AccountTypePreference extends Preference implements OnPreferenceCli
         mFragment = fragment;
         mFragmentArguments = fragmentArguments;
         mMetricsCategory = metricsCategory;
-        setWidgetLayoutResource(R.layout.account_type_preference);
 
         setKey(buildKey(account));
         setTitle(mTitle);

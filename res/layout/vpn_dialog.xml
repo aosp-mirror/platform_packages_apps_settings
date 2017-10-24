@@ -37,7 +37,8 @@
             <TextView style="@style/vpn_label"
                     android:text="@string/vpn_type"
                     android:labelFor="@+id/type"/>
-            <Spinner style="@style/vpn_value" android:id="@+id/type"
+            <Spinner style="@style/vpn_value"
+                     android:id="@+id/type"
                     android:prompt="@string/vpn_type"
                     android:entries="@array/vpn_types"/>
 

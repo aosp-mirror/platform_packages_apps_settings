@@ -18,11 +18,11 @@
 package com.android.settings.nfc;
 
 import android.content.Context;
-
 import android.content.pm.PackageManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +33,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -67,6 +66,6 @@ public class PaymentSettingsTest {
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
 
         List<String> niks = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-        assertThat(niks).isNull();
+        assertThat(niks).isEmpty();
     }
 }

@@ -38,40 +38,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+            android:minLines="3"
             android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
-        <TextView
-            android:id="@+id/message_secondary"
-            style="@style/SuwDescription.Glif"
+        <com.android.setupwizardlib.view.FillContentLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_glif_margin_top"
-            android:text="@string/setup_fingerprint_enroll_finish_message_secondary"
-            android:textColor="?android:attr/textColorSecondary"
-            android:visibility="gone" />
+            android:layout_weight="1"
+            android:maxWidth="@dimen/fingerprint_finish_max_size"
+            android:maxHeight="@dimen/fingerprint_finish_max_size">
 
-        <View
-            android:layout_height="24dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/fingerprint_in_app_indicator"
+                style="@style/SuwContentIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@android:string/fingerprint_icon_content_description"
+                android:src="@drawable/fp_app_indicator" />
 
-        <ImageView
-            android:id="@+id/fingerprint_in_app_indicator"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="5"
-            android:minHeight="@dimen/fingerprint_in_app_indicator_min_size"
-            android:minWidth="@dimen/fingerprint_in_app_indicator_min_size"
-            android:maxHeight="@dimen/fingerprint_in_app_indicator_max_size"
-            android:maxWidth="@dimen/fingerprint_in_app_indicator_max_size"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@android:string/fingerprint_icon_content_description"
-            android:src="@drawable/fp_app_indicator" />
-
-        <View
-            android:layout_height="24dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
+        </com.android.setupwizardlib.view.FillContentLayout>
 
     </LinearLayout>
 

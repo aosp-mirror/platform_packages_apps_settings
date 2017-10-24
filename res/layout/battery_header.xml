@@ -17,7 +17,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/app_snippet"
+    android:id="@+id/battery_entity_header"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -28,24 +28,32 @@
     style="@style/EntityHeader">
 
     <LinearLayout
-        android:layout_width="216dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginEnd="12dp"
+        android:layout_weight="1"
+        android:layout_marginStart="56dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/battery_percent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:fontFamily="@*android:string/config_headlineFontFamily"
             android:textAppearance="@android:style/TextAppearance.Material.Display1"/>
 
         <TextView
             android:id="@+id/summary1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
+            android:minLines="2"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"/>
+
+        <TextView
+            android:id="@+id/summary2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
     </LinearLayout>
@@ -54,7 +62,6 @@
         android:id="@+id/battery_header_icon"
         android:layout_width="@dimen/battery_meter_width"
         android:layout_height="@dimen/battery_meter_height"
-        android:layout_gravity="end"
-        android:layout_marginEnd="24dp"/>
+        android:layout_marginEnd="16dp"/>
 
 </LinearLayout>

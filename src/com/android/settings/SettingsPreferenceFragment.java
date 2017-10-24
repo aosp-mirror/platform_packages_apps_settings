@@ -49,8 +49,10 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.widget.FooterPreferenceMixin;
+import com.android.settingslib.CustomDialogPreference;
+import com.android.settingslib.CustomEditTextPreference;
 import com.android.settingslib.HelpUtils;
+import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.UUID;
 
@@ -321,12 +323,15 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
     }
 
-    private void updateEmptyView() {
+    @VisibleForTesting
+    void updateEmptyView() {
         if (mEmptyView == null) return;
         if (getPreferenceScreen() != null) {
+            final View listContainer = getActivity().findViewById(android.R.id.list_container);
             boolean show = (getPreferenceScreen().getPreferenceCount()
                     - (mHeader != null ? 1 : 0)
-                    - (mFooterPreferenceMixin.hasFooter() ? 1 : 0)) <= 0;
+                    - (mFooterPreferenceMixin.hasFooter() ? 1 : 0)) <= 0
+                    || (listContainer != null && listContainer.getVisibility() != View.VISIBLE);
             mEmptyView.setVisibility(show ? View.VISIBLE : View.GONE);
         } else {
             mEmptyView.setVisibility(View.VISIBLE);

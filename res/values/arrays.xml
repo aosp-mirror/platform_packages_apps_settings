@@ -326,38 +326,6 @@
         <item>Excellent</item>
     </string-array>
 
-    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. -->
-    <string-array name="wifi_sleep_policy_entries">
-        <!-- Always keep Wi-Fi on when screen turns off. -->
-        <item>Always</item>
-        <!-- Keep Wi-Fi on when screen turns off and plugged in.  When on battery, go to sleep when screen turns off. -->
-        <item>Only when plugged in</item>
-        <!-- Do not keep Wi-Fi on when screen turns off.  [CHAR LIMIT=40] -->
-        <item>Never</item>
-    </string-array>
-
-    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. Used when
-         the device is Wi-Fi-only. [CHAR LIMIT=30] -->
-    <string-array name="wifi_sleep_policy_entries_wifi_only">
-        <!-- Always keep Wi-Fi on when screen turns off. -->
-        <item>Always</item>
-        <!-- Keep Wi-Fi on when screen turns off and plugged in.  When on battery, go to sleep when screen turns off. -->
-        <item>Only when plugged in</item>
-        <!-- Do not keep Wi-Fi on when screen turns off, for Wi-Fi-only devices, no other data connection -->
-        <item>Never</item>
-    </string-array>
-
-    <!-- Match with wifi_sleep_policy_entries and the values of the settings in Settings class. --> <skip />
-    <!-- Do not translate. -->
-    <string-array name="wifi_sleep_policy_values">
-        <!-- Do not translate. -->
-        <item>2</item>
-        <!-- Do not translate. -->
-        <item>1</item>
-        <!-- Do not translate. -->
-        <item>0</item>
-    </string-array>
-
     <!-- Data Usage settings. Range of data usage. -->
     <string-array name="data_usage_data_range">
         <!-- Last 30 days [CHAR LIMIT=25]-->
@@ -1054,6 +1022,20 @@
         <item>30</item>
         <item>60</item>
         <item>90</item>
+    </string-array>
+
+    <string-array name="when_to_start_screensaver_entries" translatable="false">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_dock</item>
+        <item>@string/screensaver_settings_summary_either_long</item>
+        <item>@string/screensaver_settings_summary_never</item>
+    </string-array>
+
+    <string-array name="when_to_start_screensaver_values" translatable="false">
+        <item>while_charging_only</item>
+        <item>while_docked_only</item>
+        <item>either_charging_or_docked</item>
+        <item>never</item>
     </string-array>
 
 </resources>

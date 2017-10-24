@@ -33,8 +33,8 @@ import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.Utils;
-import com.android.settings.core.lifecycle.Lifecycle;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Objects;
 

@@ -473,6 +473,9 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                         StorageUseActivity.class.getName());
                 args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
                 args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
+                args.putInt(
+                        ManageApplications.EXTRA_STORAGE_TYPE,
+                        ManageApplications.STORAGE_TYPE_LEGACY);
                 intent = Utils.onBuildStartFragmentIntent(getActivity(),
                         ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
                         false, getMetricsCategory());

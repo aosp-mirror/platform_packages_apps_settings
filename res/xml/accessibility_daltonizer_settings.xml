@@ -17,12 +17,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/accessibility_display_daltonizer_preference_title" >
 
-    <Preference
-        android:summary="@string/accessibility_display_daltonizer_preference_subtitle"
-        android:layout="@layout/text_description_preference"
-        android:persistent="false"
-        android:selectable="false" />
-
     <ListPreference
         android:entries="@array/daltonizer_type_entries"
         android:entryValues="@array/daltonizer_type_values"

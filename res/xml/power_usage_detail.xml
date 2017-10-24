@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2017 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="header_view"
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false"
+        android:order="-10000"/>
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="action_buttons"
+        android:layout="@layout/app_action_buttons"
+        android:selectable="false"
+        android:order="-9999"/>
+
+    <Preference
+        android:key="high_usage"
+        android:icon="@drawable/ic_battery_alert_24dp"
+        android:title="@string/power_high_usage_title"/>
+
+    <PreferenceCategory
+        android:title="@string/battery_detail_info_title">
+
+        <Preference
+            android:key="app_usage_foreground"
+            android:title="@string/battery_detail_foreground"
+            android:selectable="false"/>
+
+        <Preference
+            android:key="app_usage_background"
+            android:title="@string/battery_detail_background"
+            android:selectable="false"/>
+
+        <Preference
+            android:key="app_power_usage"
+            android:title="@string/battery_detail_power_usage"
+            android:selectable="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/battery_detail_manage_title">
+
+        <SwitchPreference
+            android:key="background_activity"
+            android:title="@string/background_activity_title"
+            android:selectable="true"/>
+
+        <Preference
+            android:key="battery_optimization"
+            android:title="@string/high_power_apps"
+            android:summary="@string/high_power_off"
+            android:selectable="true"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

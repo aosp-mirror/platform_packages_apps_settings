@@ -15,6 +15,17 @@
  */
 package com.android.settings.core.instrumentation;
 
+import static com.android.settings.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN;
+
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,16 +41,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.android.settings.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -62,7 +63,7 @@ public class VisibilityLoggerMixinTest {
         mMixin.onResume();
 
         verify(mMetricsFeature, times(1))
-                .visible(any(Context.class), eq(MetricsProto.MetricsEvent.VIEW_UNKNOWN),
+                .visible(nullable(Context.class), eq(MetricsProto.MetricsEvent.VIEW_UNKNOWN),
                         eq(TestInstrumentable.TEST_METRIC));
     }
 
@@ -77,7 +78,7 @@ public class VisibilityLoggerMixinTest {
         mMixin.onResume();
 
         verify(mMetricsFeature, times(1))
-                .visible(any(Context.class), eq(MetricsProto.MetricsEvent.SETTINGS_GESTURES),
+                .visible(nullable(Context.class), eq(MetricsProto.MetricsEvent.SETTINGS_GESTURES),
                         eq(TestInstrumentable.TEST_METRIC));
     }
 
@@ -86,7 +87,7 @@ public class VisibilityLoggerMixinTest {
         mMixin.onPause();
 
         verify(mMetricsFeature, times(1))
-                .hidden(any(Context.class), eq(TestInstrumentable.TEST_METRIC));
+                .hidden(nullable(Context.class), eq(TestInstrumentable.TEST_METRIC));
     }
 
     @Test
@@ -96,7 +97,7 @@ public class VisibilityLoggerMixinTest {
         mMixin.onPause();
 
         verify(mMetricsFeature, never())
-                .hidden(any(Context.class), anyInt());
+                .hidden(nullable(Context.class), anyInt());
     }
 
     @Test
@@ -107,7 +108,7 @@ public class VisibilityLoggerMixinTest {
         mMixin.onPause();
 
         verify(mMetricsFeature, never())
-                .hidden(any(Context.class), anyInt());
+                .hidden(nullable(Context.class), anyInt());
     }
 
     private final class TestInstrumentable implements Instrumentable {

@@ -16,15 +16,39 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.app.admin.DevicePolicyManager;
+
 import com.android.internal.widget.LockPatternUtils;
+
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @Implements(LockPatternUtils.class)
 public class ShadowLockPatternUtils {
 
+    private int mPasswordQuality = 1;
     @Implementation
     public boolean isSecure(int id) {
         return true;
+    }
+
+    @Implementation
+    public int getActivePasswordQuality(int userId) {
+        return DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
+    }
+
+    @Implementation
+    public int getKeyguardStoredPasswordQuality(int userHandle) {
+        return mPasswordQuality;
+    }
+
+    // Non-Android accessor.
+    public int getPasswordQuality() {
+        return mPasswordQuality;
+    }
+
+    // Non-Android accessor.
+    public void setPasswordQuality(int passwordQuality) {
+        mPasswordQuality = passwordQuality;
     }
 }

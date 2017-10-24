@@ -16,6 +16,11 @@
 
 package com.android.settings.datetime;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,11 +37,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -64,8 +64,8 @@ public class ZonePickerTest {
 
         // Should render
         verify(mZonePicker).onCreateView(
-                any(LayoutInflater.class),
-                any(ViewGroup.class),
-                any(Bundle.class));
+                nullable(LayoutInflater.class),
+                nullable(ViewGroup.class),
+                nullable(Bundle.class));
     }
 }

@@ -20,6 +20,31 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:title="@string/app_and_notification_dashboard_title">
 
+    <PreferenceCategory
+        android:key="recent_apps_category"
+        android:title="@string/recent_app_category_title"
+        android:order="-200">
+        <!-- Placeholder for a list of recent apps -->
+
+        <!-- See all apps button -->
+        <Preference
+            android:title="@string/applications_settings"
+            android:key="all_app_info"
+            android:order="20">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$ManageApplicationsActivity">
+                <extra android:name="show_drawer_menu" android:value="true" />
+            </intent>
+        </Preference>
+    </PreferenceCategory>
+
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="all_app_info_divider"
+        android:order="-190"/>
+
     <Preference
         android:key="manage_perms"
         android:title="@string/app_permissions"

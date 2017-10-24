@@ -19,23 +19,31 @@ package com.android.settings.accounts;
 import static android.content.Intent.EXTRA_USER;
 
 import android.accounts.Account;
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SyncAdapterType;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 
-public class AccountSyncPreferenceController extends PreferenceController {
+public class AccountSyncPreferenceController extends PreferenceController
+        implements AuthenticatorHelper.OnAccountsUpdateListener {
 
     private static final String TAG = "AccountSyncController";
     private static final String KEY_ACCOUNT_SYNC = "account_sync";
 
     private Account mAccount;
     private UserHandle mUserHandle;
+    private AuthenticatorHelper mAuthenticatorHelper;
+    private Preference mPreference;
 
     public AccountSyncPreferenceController(Context context) {
         super(context);
@@ -65,8 +73,61 @@ public class AccountSyncPreferenceController extends PreferenceController {
         return KEY_ACCOUNT_SYNC;
     }
 
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        updateSummary(preference);
+    }
+
+    @Override
+    public void onAccountsUpdate(UserHandle userHandle) {
+        updateSummary(mPreference);
+    }
+
     public void init(Account account, UserHandle userHandle) {
         mAccount = account;
         mUserHandle = userHandle;
+        mAuthenticatorHelper = new AuthenticatorHelper(mContext, mUserHandle, this);
+    }
+
+    @VisibleForTesting
+    void updateSummary(Preference preference) {
+        final int userId = mUserHandle.getIdentifier();
+        final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
+        int total = 0;
+        int enabled = 0;
+        if (syncAdapters != null) {
+            for (int i = 0, n = syncAdapters.length; i < n; i++) {
+                final SyncAdapterType sa = syncAdapters[i];
+                if (!sa.accountType.equals(mAccount.type) || !sa.isUserVisible()) {
+                    continue;
+                }
+                final int syncState =
+                        ContentResolver.getIsSyncableAsUser(mAccount, sa.authority, userId);
+                if (syncState > 0) {
+                    total++;
+                    final boolean syncEnabled = ContentResolver.getSyncAutomaticallyAsUser(
+                            mAccount, sa.authority, userId);
+                    final boolean oneTimeSyncMode =
+                            !ContentResolver.getMasterSyncAutomaticallyAsUser(userId);
+                    if (oneTimeSyncMode || syncEnabled) {
+                        enabled++;
+                    }
+                }
+            }
+        }
+        if (enabled == 0) {
+            preference.setSummary(R.string.account_sync_summary_all_off);
+        } else if (enabled == total) {
+            preference.setSummary(R.string.account_sync_summary_all_on);
+        } else {
+            preference.setSummary(
+                    mContext.getString(R.string.account_sync_summary_some_on, enabled, total));
+        }
     }
 }

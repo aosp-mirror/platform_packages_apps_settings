@@ -36,7 +36,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 

@@ -146,7 +146,8 @@ public class ApnEditor extends SettingsPreferenceFragment
             Telephony.Carriers.ROAMING_PROTOCOL, // 20
             Telephony.Carriers.MVNO_TYPE,   // 21
             Telephony.Carriers.MVNO_MATCH_DATA,  // 22
-            Telephony.Carriers.EDITED   // 23
+            Telephony.Carriers.EDITED,   // 23
+            Telephony.Carriers.USER_EDITABLE    //24
     };
 
     private static final int ID_INDEX = 0;
@@ -172,6 +173,7 @@ public class ApnEditor extends SettingsPreferenceFragment
     private static final int MVNO_TYPE_INDEX = 21;
     private static final int MVNO_MATCH_DATA_INDEX = 22;
     private static final int EDITED_INDEX = 23;
+    private static final int USER_EDITABLE_INDEX = 24;
 
 
     @Override
@@ -282,7 +284,8 @@ public class ApnEditor extends SettingsPreferenceFragment
         Log.d(TAG, "onCreate: EDITED " + mCursor.getInt(EDITED_INDEX));
         // if it's not a USER_EDITED apn, check if it's read-only
         if (mCursor.getInt(EDITED_INDEX) != Telephony.Carriers.USER_EDITED &&
-                apnTypesMatch(mReadOnlyApnTypes, mCursor.getString(TYPE_INDEX))) {
+                (mCursor.getInt(USER_EDITABLE_INDEX) == 0 ||
+                apnTypesMatch(mReadOnlyApnTypes, mCursor.getString(TYPE_INDEX)))) {
             Log.d(TAG, "onCreate: apnTypesMatch; read-only APN");
             mReadOnlyApn = true;
             disableAllFields();

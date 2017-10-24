@@ -18,8 +18,8 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-
 import android.text.TextUtils;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
@@ -57,6 +57,15 @@ public class AdvancedAppSettings extends DashboardFragment {
 
     @Override
     protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsEvent.APPLICATIONS_ADVANCED;
+    }
+
+    private static List<PreferenceController> buildPreferenceControllers(Context context) {
         final List<PreferenceController> controllers = new ArrayList<>();
         controllers.add(new DefaultBrowserPreferenceController(context));
         controllers.add(new DefaultWorkBrowserPreferenceController(context));
@@ -66,11 +75,6 @@ public class AdvancedAppSettings extends DashboardFragment {
         controllers.add(new DefaultEmergencyPreferenceController(context));
         controllers.add(new DefaultHomePreferenceController(context));
         return controllers;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_ADVANCED;
     }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -93,6 +97,11 @@ public class AdvancedAppSettings extends DashboardFragment {
                     keys.add((new DefaultWorkBrowserPreferenceController(context))
                             .getPreferenceKey());
                     return keys;
+                }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 
@@ -118,10 +127,10 @@ public class AdvancedAppSettings extends DashboardFragment {
                 return;
             }
             CharSequence summary = concatSummaryText(
-                mDefaultSmsPreferenceController.getDefaultAppLabel(),
-                mDefaultBrowserPreferenceController.getDefaultAppLabel());
+                    mDefaultSmsPreferenceController.getDefaultAppLabel(),
+                    mDefaultBrowserPreferenceController.getDefaultAppLabel());
             summary = concatSummaryText(summary,
-                mDefaultPhonePreferenceController.getDefaultAppLabel());
+                    mDefaultPhonePreferenceController.getDefaultAppLabel());
             if (!TextUtils.isEmpty(summary)) {
                 mSummaryLoader.setSummary(this, summary);
             }
@@ -139,11 +148,11 @@ public class AdvancedAppSettings extends DashboardFragment {
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-        new SummaryLoader.SummaryProviderFactory() {
-            @Override
-            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                    SummaryLoader summaryLoader) {
-                return new AdvancedAppSettings.SummaryProvider(activity, summaryLoader);
-            }
-        };
+            new SummaryLoader.SummaryProviderFactory() {
+                @Override
+                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                        SummaryLoader summaryLoader) {
+                    return new AdvancedAppSettings.SummaryProvider(activity, summaryLoader);
+                }
+            };
 }

@@ -17,7 +17,6 @@ package com.android.settings.applications;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
@@ -29,23 +28,24 @@ import com.android.settings.notification.NotificationBackend;
  */
 public class NotificationApps extends ManageApplications {
 
-    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+    public static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
         private final Context mContext;
         private final SummaryLoader mLoader;
         private final NotificationBackend mNotificationBackend;
+        private final PackageManagerWrapper mPackageManager;
 
-        private SummaryProvider(Context context, SummaryLoader loader) {
+        public SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
             mNotificationBackend = new NotificationBackend();
+            mPackageManager = new PackageManagerWrapperImpl(mContext.getPackageManager());
         }
 
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                new AppCounter(mContext,
-                        new PackageManagerWrapperImpl(mContext.getPackageManager())) {
+                new AppCounter(mContext, mPackageManager) {
                     @Override
                     protected void onCountComplete(int num) {
                         updateSummary(num);

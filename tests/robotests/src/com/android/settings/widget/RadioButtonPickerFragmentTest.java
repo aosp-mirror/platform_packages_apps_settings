@@ -16,12 +16,6 @@
 
 package com.android.settings.widget;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
@@ -30,7 +24,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
-import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +37,12 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -61,6 +61,7 @@ public class RadioButtonPickerFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest(mActivity);
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
@@ -72,7 +73,6 @@ public class RadioButtonPickerFragmentTest {
     public void onAttach_userIsInitialized() {
         mFragment.onAttach((Context) mActivity);
 
-        verify(mActivity).getPackageManager();
         verify(mActivity).getSystemService(Context.USER_SERVICE);
     }
 
@@ -99,7 +99,7 @@ public class RadioButtonPickerFragmentTest {
         assertThat(mFragment.setDefaultKeyCalled).isTrue();
     }
 
-    public static class TestFragment extends DefaultAppPickerFragment {
+    public static class TestFragment extends RadioButtonPickerFragment {
 
         boolean setDefaultKeyCalled;
 

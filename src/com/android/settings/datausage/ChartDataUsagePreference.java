@@ -15,7 +15,6 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.net.NetworkPolicy;
 import android.net.NetworkStatsHistory;
 import android.net.TrafficStats;
@@ -29,7 +28,7 @@ import android.util.AttributeSet;
 import android.util.SparseIntArray;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 public class ChartDataUsagePreference extends Preference {
 
@@ -63,7 +62,7 @@ public class ChartDataUsagePreference extends Preference {
 
         int top = getTop();
         chart.clearPaths();
-        chart.configureGraph(toInt(mEnd - mStart), top, false, false);
+        chart.configureGraph(toInt(mEnd - mStart), top);
         calcPoints(chart);
         chart.setBottomLabels(new CharSequence[] {
                 Utils.formatDateRange(getContext(), mStart, mStart),

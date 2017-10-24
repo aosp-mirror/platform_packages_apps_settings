@@ -98,6 +98,7 @@ public class NfcEnabler implements Preference.OnPreferenceChangeListener {
         // Turn NFC on/off
 
         final boolean desiredState = (Boolean) value;
+        mSwitch.setChecked(desiredState);
         mSwitch.setEnabled(false);
 
         if (desiredState) {

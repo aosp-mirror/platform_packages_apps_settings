@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.os.BatteryStats;
 import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +30,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
-import com.android.settingslib.BatteryInfo;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
 
 public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     public static final String EXTRA_STATS = "stats";
@@ -92,24 +90,25 @@ public class BatteryHistoryDetail extends SettingsPreferenceFragment {
     }
 
     private void updateEverything() {
-        BatteryInfo info = BatteryInfo.getBatteryInfo(getContext(), mBatteryBroadcast, mStats,
-                SystemClock.elapsedRealtime() * 1000);
-        final View view = getView();
-        info.bindHistory((UsageView) view.findViewById(R.id.battery_usage), mChargingParser,
-                mScreenOn, mGpsParser, mFlashlightParser, mCameraParser, mWifiParser, mCpuParser,
-                mPhoneParser);
-        ((TextView) view.findViewById(R.id.charge)).setText(info.batteryPercentString);
-        ((TextView) view.findViewById(R.id.estimation)).setText(info.remainingLabel);
+        BatteryInfo.getBatteryInfo(getContext(), info -> {
+            final View view = getView();
+            info.bindHistory((UsageView) view.findViewById(R.id.battery_usage), mChargingParser,
+                    mScreenOn, mGpsParser, mFlashlightParser, mCameraParser, mWifiParser,
+                    mCpuParser, mPhoneParser);
+            ((TextView) view.findViewById(R.id.charge)).setText(info.batteryPercentString);
+            ((TextView) view.findViewById(R.id.estimation)).setText(info.remainingLabel);
 
-        bindData(mChargingParser, R.string.battery_stats_charging_label, R.id.charging_group);
-        bindData(mScreenOn, R.string.battery_stats_screen_on_label, R.id.screen_on_group);
-        bindData(mGpsParser, R.string.battery_stats_gps_on_label, R.id.gps_group);
-        bindData(mFlashlightParser, R.string.battery_stats_flashlight_on_label,
-                R.id.flashlight_group);
-        bindData(mCameraParser, R.string.battery_stats_camera_on_label, R.id.camera_group);
-        bindData(mWifiParser, R.string.battery_stats_wifi_running_label, R.id.wifi_group);
-        bindData(mCpuParser, R.string.battery_stats_wake_lock_label, R.id.cpu_group);
-        bindData(mPhoneParser, R.string.battery_stats_phone_signal_label, R.id.cell_network_group);
+            bindData(mChargingParser, R.string.battery_stats_charging_label, R.id.charging_group);
+            bindData(mScreenOn, R.string.battery_stats_screen_on_label, R.id.screen_on_group);
+            bindData(mGpsParser, R.string.battery_stats_gps_on_label, R.id.gps_group);
+            bindData(mFlashlightParser, R.string.battery_stats_flashlight_on_label,
+                    R.id.flashlight_group);
+            bindData(mCameraParser, R.string.battery_stats_camera_on_label, R.id.camera_group);
+            bindData(mWifiParser, R.string.battery_stats_wifi_running_label, R.id.wifi_group);
+            bindData(mCpuParser, R.string.battery_stats_wake_lock_label, R.id.cpu_group);
+            bindData(mPhoneParser, R.string.battery_stats_phone_signal_label,
+                    R.id.cell_network_group);
+        }, mStats, false /* shortString */);
     }
 
     private void bindData(BatteryActiveProvider provider, int label, int groupId) {

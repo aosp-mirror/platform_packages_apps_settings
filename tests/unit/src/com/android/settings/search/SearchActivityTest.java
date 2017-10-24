@@ -25,7 +25,6 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings;
-import com.android.settings.search2.SearchActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

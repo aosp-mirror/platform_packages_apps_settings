@@ -22,6 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.print.PrintJob;
+import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
 
@@ -34,9 +36,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -60,6 +64,19 @@ public class PrintSettingsFragmentTest {
         when(mActivity.getResources()).thenReturn(mRes);
         mSummaryProvider = new PrintSettingsFragment.PrintSummaryProvider(mActivity, mSummaryLoader,
                 mPrintManager);
+    }
+
+    @Test
+    public void testSummary_hasActiveJob_shouldSetSummaryToNumberOfJobs() {
+        final List<PrintJob> printJobs = new ArrayList<>();
+        final PrintJob job = mock(PrintJob.class, Mockito.RETURNS_DEEP_STUBS);
+        printJobs.add(job);
+        when(job.getInfo().getState()).thenReturn(PrintJobInfo.STATE_STARTED);
+        when(mPrintManager.getPrintJobs()).thenReturn(printJobs);
+
+        mSummaryProvider.setListening(true);
+
+        verify(mRes).getQuantityString(R.plurals.print_jobs_summary, 1, 1);
     }
 
     @Test

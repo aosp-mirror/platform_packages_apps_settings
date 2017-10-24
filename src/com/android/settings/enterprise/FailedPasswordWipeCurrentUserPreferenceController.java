@@ -15,7 +15,7 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class FailedPasswordWipeCurrentUserPreferenceController
         extends FailedPasswordWipePreferenceControllerBase {

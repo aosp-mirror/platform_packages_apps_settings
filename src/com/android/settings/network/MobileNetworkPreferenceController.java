@@ -26,24 +26,23 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.os.UserHandle.myUserId;
 import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
 public class MobileNetworkPreferenceController extends PreferenceController implements
         LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
-    private final UserManager mUserManager;
     private final boolean mIsSecondaryUser;
     private final TelephonyManager mTelephonyManager;
+    private final UserManager mUserManager;
     private Preference mPreference;
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     PhoneStateListener mPhoneStateListener;
 
     public MobileNetworkPreferenceController(Context context) {
@@ -55,9 +54,16 @@ public class MobileNetworkPreferenceController extends PreferenceController impl
 
     @Override
     public boolean isAvailable() {
-        return !mIsSecondaryUser
-                && !Utils.isWifiOnly(mContext)
-                && !hasBaseUserRestriction(mContext, DISALLOW_CONFIG_MOBILE_NETWORKS, myUserId());
+        return !isUserRestricted() && !Utils.isWifiOnly(mContext);
+    }
+
+    public boolean isUserRestricted() {
+        final RestrictedLockUtilsWrapper wrapper = new RestrictedLockUtilsWrapper();
+        return mIsSecondaryUser ||
+                wrapper.hasBaseUserRestriction(
+                        mContext,
+                        DISALLOW_CONFIG_MOBILE_NETWORKS,
+                        myUserId());
     }
 
     @Override

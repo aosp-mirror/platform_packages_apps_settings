@@ -98,6 +98,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
     }
 
     @Override
+    public boolean shouldTintIcon() {
+        return mContext.getResources().getBoolean(R.bool.config_tintSettingIcon);
+    }
+
+    @Override
     public String getDashboardKeyForTile(Tile tile) {
         if (tile == null || tile.intent == null) {
             return null;

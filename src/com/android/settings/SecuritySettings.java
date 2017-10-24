@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -65,6 +66,9 @@ import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.location.LocationPreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -104,6 +108,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
     private static final String KEY_ENCRYPTION_AND_CREDENTIALS = "encryption_and_credential";
     private static final String KEY_LOCATION_SCANNING  = "location_scanning";
+    private static final String KEY_LOCATION = "location";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -178,6 +183,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mLocationcontroller = new LocationPreferenceController(context, getLifecycle());
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -207,7 +218,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             mTrustAgentClickIntent = savedInstanceState.getParcelable(TRUST_AGENT_CLICK_INTENT);
         }
 
-        mLocationcontroller = new LocationPreferenceController(activity);
         mManageDeviceAdminPreferenceController
                 = new ManageDeviceAdminPreferenceController(activity);
         mEnterprisePrivacyPreferenceController
@@ -632,7 +642,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     return false;
                 }
             }
-            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+            startFragment(this, ChooseLockGenericFragment.class.getName(),
                     R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
         } else if (KEY_UNLOCK_SET_OR_CHANGE_PROFILE.equals(key)) {
             if (Utils.startQuietModeDialogIfNecessary(this.getActivity(), mUm,
@@ -641,7 +651,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             }
             Bundle extras = new Bundle();
             extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-            startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+            startFragment(this, ChooseLockGenericFragment.class.getName(),
                     R.string.lock_settings_picker_title_profile,
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
         } else if (KEY_TRUST_AGENT.equals(key)) {
@@ -741,7 +751,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private void unifyUncompliantLocks() {
         mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
                 mCurrentProfilePassword);
-        startFragment(this, "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+        startFragment(this, ChooseLockGenericFragment.class.getName(),
                 R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
     }
 
@@ -749,7 +759,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
         startFragment(this,
-                "com.android.settings.ChooseLockGeneric$ChooseLockGenericFragment",
+                ChooseLockGenericFragment.class.getName(),
                 R.string.lock_settings_picker_title_profile,
                 SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
     }
@@ -957,7 +967,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
             // Duplicate in special app access
             keys.add(KEY_MANAGE_DEVICE_ADMIN);
             // Duplicates between parent-child
-            keys.add((new LocationPreferenceController(context)).getPreferenceKey());
+            keys.add(KEY_LOCATION);
             keys.add(KEY_ENCRYPTION_AND_CREDENTIALS);
             keys.add(KEY_SCREEN_PINNING);
             keys.add(KEY_LOCATION_SCANNING);

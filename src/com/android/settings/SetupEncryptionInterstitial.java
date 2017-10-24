@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -52,12 +51,6 @@ public class SetupEncryptionInterstitial extends EncryptionInterstitial {
     @Override
     protected boolean isValidFragment(String fragmentName) {
         return SetupEncryptionInterstitialFragment.class.getName().equals(fragmentName);
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

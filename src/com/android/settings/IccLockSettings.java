@@ -290,6 +290,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     @Override
+    protected int getHelpResource() {
+        return R.string.help_url_icc_lock;
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle out) {
         // Need to store this state for slider open/close
         // There is one case where the dialog is popped up by the preference

@@ -18,7 +18,7 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -32,8 +32,8 @@ import android.view.LayoutInflater;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -82,7 +82,7 @@ public class MusicViewHolderControllerTest {
 
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
-        when(mSource.getExternalStorageStats(any(String.class), any(UserHandle.class))).thenReturn(
+        when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class))).thenReturn(
                 new StorageStatsSource.ExternalStorageStats(1, 1, 0, 0, 0));
 
         mController.queryStats();

@@ -40,7 +40,6 @@ import android.util.TypedValue;
 import android.view.View;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.BatteryInfo;
 import libcore.icu.LocaleData;
 
 import java.util.ArrayList;
@@ -507,81 +506,82 @@ public class BatteryHistoryChart extends View {
 
         mMaxPercentLabelString = Utils.formatPercentage(100);
         mMinPercentLabelString = Utils.formatPercentage(0);
-        mInfo = BatteryInfo.getBatteryInfo(getContext(), mBatteryBroadcast, mStats,
-                elapsedRealtimeUs);
-        mDrainString = "";
-        mChargeDurationString = "";
-        setContentDescription(mInfo.chargeLabelString);
+        BatteryInfo.getBatteryInfo(getContext(), info -> {
+            mInfo = info;
+            mDrainString = "";
+            mChargeDurationString = "";
+            setContentDescription(mInfo.chargeLabel);
 
-        int pos = 0;
-        int lastInteresting = 0;
-        byte lastLevel = -1;
-        mBatLow = 0;
-        mBatHigh = 100;
-        mStartWallTime = 0;
-        mEndDataWallTime = 0;
-        mEndWallTime = 0;
-        mHistStart = 0;
-        mHistEnd = 0;
-        long lastWallTime = 0;
-        long lastRealtime = 0;
-        int aggrStates = 0;
-        int aggrStates2 = 0;
-        boolean first = true;
-        if (stats.startIteratingHistoryLocked()) {
-            final HistoryItem rec = new HistoryItem();
-            while (stats.getNextHistoryLocked(rec)) {
-                pos++;
-                if (first) {
-                    first = false;
-                    mHistStart = rec.time;
-                }
-                if (rec.cmd == HistoryItem.CMD_CURRENT_TIME
-                        || rec.cmd == HistoryItem.CMD_RESET) {
-                    // If there is a ridiculously large jump in time, then we won't be
-                    // able to create a good chart with that data, so just ignore the
-                    // times we got before and pretend like our data extends back from
-                    // the time we have now.
-                    // Also, if we are getting a time change and we are less than 5 minutes
-                    // since the start of the history real time, then also use this new
-                    // time to compute the base time, since whatever time we had before is
-                    // pretty much just noise.
-                    if (rec.currentTime > (lastWallTime+(180*24*60*60*1000L))
-                            || rec.time < (mHistStart+(5*60*1000L))) {
-                        mStartWallTime = 0;
+            int pos = 0;
+            int lastInteresting = 0;
+            byte lastLevel = -1;
+            mBatLow = 0;
+            mBatHigh = 100;
+            mStartWallTime = 0;
+            mEndDataWallTime = 0;
+            mEndWallTime = 0;
+            mHistStart = 0;
+            mHistEnd = 0;
+            long lastWallTime = 0;
+            long lastRealtime = 0;
+            int aggrStates = 0;
+            int aggrStates2 = 0;
+            boolean first = true;
+            if (stats.startIteratingHistoryLocked()) {
+                final HistoryItem rec = new HistoryItem();
+                while (stats.getNextHistoryLocked(rec)) {
+                    pos++;
+                    if (first) {
+                        first = false;
+                        mHistStart = rec.time;
                     }
-                    lastWallTime = rec.currentTime;
-                    lastRealtime = rec.time;
-                    if (mStartWallTime == 0) {
-                        mStartWallTime = lastWallTime - (lastRealtime-mHistStart);
+                    if (rec.cmd == HistoryItem.CMD_CURRENT_TIME
+                            || rec.cmd == HistoryItem.CMD_RESET) {
+                        // If there is a ridiculously large jump in time, then we won't be
+                        // able to create a good chart with that data, so just ignore the
+                        // times we got before and pretend like our data extends back from
+                        // the time we have now.
+                        // Also, if we are getting a time change and we are less than 5 minutes
+                        // since the start of the history real time, then also use this new
+                        // time to compute the base time, since whatever time we had before is
+                        // pretty much just noise.
+                        if (rec.currentTime > (lastWallTime+(180*24*60*60*1000L))
+                                || rec.time < (mHistStart+(5*60*1000L))) {
+                            mStartWallTime = 0;
+                        }
+                        lastWallTime = rec.currentTime;
+                        lastRealtime = rec.time;
+                        if (mStartWallTime == 0) {
+                            mStartWallTime = lastWallTime - (lastRealtime-mHistStart);
+                        }
                     }
-                }
-                if (rec.isDeltaData()) {
-                    if (rec.batteryLevel != lastLevel || pos == 1) {
-                        lastLevel = rec.batteryLevel;
+                    if (rec.isDeltaData()) {
+                        if (rec.batteryLevel != lastLevel || pos == 1) {
+                            lastLevel = rec.batteryLevel;
+                        }
+                        lastInteresting = pos;
+                        mHistDataEnd = rec.time;
+                        aggrStates |= rec.states;
+                        aggrStates2 |= rec.states2;
                     }
-                    lastInteresting = pos;
-                    mHistDataEnd = rec.time;
-                    aggrStates |= rec.states;
-                    aggrStates2 |= rec.states2;
                 }
             }
-        }
-        mHistEnd = mHistDataEnd + (mInfo.remainingTimeUs/1000);
-        mEndDataWallTime = lastWallTime + mHistDataEnd - lastRealtime;
-        mEndWallTime = mEndDataWallTime + (mInfo.remainingTimeUs/1000);
-        mNumHist = lastInteresting;
-        mHaveGps = (aggrStates&HistoryItem.STATE_GPS_ON_FLAG) != 0;
-        mHaveFlashlight = (aggrStates2&HistoryItem.STATE2_FLASHLIGHT_FLAG) != 0;
-        mHaveCamera = (aggrStates2&HistoryItem.STATE2_CAMERA_FLAG) != 0;
-        mHaveWifi = (aggrStates2&HistoryItem.STATE2_WIFI_RUNNING_FLAG) != 0
-                || (aggrStates&(HistoryItem.STATE_WIFI_FULL_LOCK_FLAG
-                        |HistoryItem.STATE_WIFI_MULTICAST_ON_FLAG
-                        |HistoryItem.STATE_WIFI_SCAN_FLAG)) != 0;
-        if (!com.android.settings.Utils.isWifiOnly(getContext())) {
-            mHavePhoneSignal = true;
-        }
-        if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
+            mHistEnd = mHistDataEnd + (mInfo.remainingTimeUs/1000);
+            mEndDataWallTime = lastWallTime + mHistDataEnd - lastRealtime;
+            mEndWallTime = mEndDataWallTime + (mInfo.remainingTimeUs/1000);
+            mNumHist = lastInteresting;
+            mHaveGps = (aggrStates&HistoryItem.STATE_GPS_ON_FLAG) != 0;
+            mHaveFlashlight = (aggrStates2&HistoryItem.STATE2_FLASHLIGHT_FLAG) != 0;
+            mHaveCamera = (aggrStates2&HistoryItem.STATE2_CAMERA_FLAG) != 0;
+            mHaveWifi = (aggrStates2&HistoryItem.STATE2_WIFI_RUNNING_FLAG) != 0
+                    || (aggrStates&(HistoryItem.STATE_WIFI_FULL_LOCK_FLAG
+                    |HistoryItem.STATE_WIFI_MULTICAST_ON_FLAG
+                    |HistoryItem.STATE_WIFI_SCAN_FLAG)) != 0;
+            if (!com.android.settings.Utils.isWifiOnly(getContext())) {
+                mHavePhoneSignal = true;
+            }
+            if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;
+        }, mStats, false /* shortString */);
     }
 
     @Override
@@ -589,7 +589,8 @@ public class BatteryHistoryChart extends View {
         mMaxPercentLabelStringWidth = (int)mTextPaint.measureText(mMaxPercentLabelString);
         mMinPercentLabelStringWidth = (int)mTextPaint.measureText(mMinPercentLabelString);
         mDrainStringWidth = (int)mHeaderTextPaint.measureText(mDrainString);
-        mChargeLabelStringWidth = (int)mHeaderTextPaint.measureText(mInfo.chargeLabelString);
+        mChargeLabelStringWidth = (int) mHeaderTextPaint.measureText(
+                mInfo.chargeLabel.toString());
         mChargeDurationStringWidth = (int)mHeaderTextPaint.measureText(mChargeDurationString);
         mTextAscent = (int)mTextPaint.ascent();
         mTextDescent = (int)mTextPaint.descent();
@@ -1211,8 +1212,9 @@ public class BatteryHistoryChart extends View {
 
         int headerTop = -mHeaderTextAscent + (mHeaderTextDescent-mHeaderTextAscent)/3;
         mHeaderTextPaint.setTextAlign(textAlignLeft);
-        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mInfo.chargeLabelString);
-        canvas.drawText(mInfo.chargeLabelString, textStartX, headerTop, mHeaderTextPaint);
+        if (DEBUG) Log.d(TAG, "Drawing charge label string: " + mInfo.chargeLabel);
+        canvas.drawText(mInfo.chargeLabel.toString(), textStartX, headerTop,
+                mHeaderTextPaint);
         int stringHalfWidth = mChargeDurationStringWidth / 2;
         if (layoutRtl) stringHalfWidth = -stringHalfWidth;
         int headerCenter = ((width-mChargeDurationStringWidth-mDrainStringWidth)/2)

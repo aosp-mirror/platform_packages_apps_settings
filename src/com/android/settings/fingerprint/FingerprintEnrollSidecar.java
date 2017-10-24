@@ -26,9 +26,10 @@ import android.os.Handler;
 import android.os.UserHandle;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
+
 import com.android.settings.password.IFingerprintManager;
 
 import java.util.ArrayList;

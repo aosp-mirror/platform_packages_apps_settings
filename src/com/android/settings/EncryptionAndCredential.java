@@ -20,7 +20,6 @@ import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -34,7 +33,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 
@@ -106,7 +104,6 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
             }
         }
 
-
         // Credential storage
         mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
 
@@ -168,7 +165,7 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
 
     @Override
     protected int getHelpResource() {
-        return R.string.help_url_security;
+        return R.string.help_url_encryption;
     }
 
     /**
@@ -182,26 +179,20 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
-            final List<SearchIndexableResource> index = new ArrayList<SearchIndexableResource>();
+            final List<SearchIndexableResource> index = new ArrayList<>();
 
-            final DevicePolicyManager dpm = (DevicePolicyManager)
-                    context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            final UserManager um = UserManager.get(context);
-
-            if (um.isAdminUser()) {
-                switch (dpm.getStorageEncryptionStatus()) {
-                    case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
-                        // The device is currently encrypted.
-                        index.add(getSearchResource(context, R.xml.security_settings_encrypted));
-                        break;
-                    case DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE:
-                        // This device supports encryption but isn't encrypted.
-                        index.add(getSearchResource(context, R.xml.security_settings_unencrypted));
-                        break;
-                }
-            }
+            // Add everything. We will suppress some of them in getNonIndexableKeys()
+            index.add(getSearchResource(context, R.xml.encryption_and_credential));
+            index.add(getSearchResource(context, R.xml.security_settings_encrypted));
+            index.add(getSearchResource(context, R.xml.security_settings_unencrypted));
 
             return index;
+        }
+
+        @Override
+        protected boolean isPageSearchEnabled(Context context) {
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+            return um.isAdminUser();
         }
 
         private SearchIndexableResource getSearchResource(Context context, int xmlResId) {
@@ -211,54 +202,34 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
         }
 
         @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-            final Resources res = context.getResources();
-
-            final String screenTitle = res.getString(
-                R.string.encryption_and_credential_settings_title);
-
-            SearchIndexableRaw data = new SearchIndexableRaw(context);
-            data.title = screenTitle;
-            data.screenTitle = screenTitle;
-            result.add(data);
-
-            final UserManager um = UserManager.get(context);
-            if (!um.isAdminUser()) {
-                int resId = um.isLinkedUser() ?
-                        R.string.profile_info_settings_title : R.string.user_info_settings_title;
-
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(resId);
-                data.screenTitle = screenTitle;
-                result.add(data);
-            }
-
-            // Credential storage
-            if (!um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
-                KeyStore keyStore = KeyStore.getInstance();
-
-                final int storageSummaryRes = keyStore.isHardwareBacked() ?
-                        R.string.credential_storage_type_hardware :
-                        R.string.credential_storage_type_software;
-
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(storageSummaryRes);
-                data.screenTitle = screenTitle;
-                result.add(data);
-            }
-
-            return result;
-        }
-
-        @Override
         public List<String> getNonIndexableKeys(Context context) {
-            final List<String> keys = new ArrayList<String>();
-
-            final UserManager um = UserManager.get(context);
+            final List<String> keys = super.getNonIndexableKeys(context);
+            if (!isPageSearchEnabled(context)) {
+                return keys;
+            }
+            final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
             if (um.hasUserRestriction(UserManager.DISALLOW_CONFIG_CREDENTIALS)) {
                 keys.add(KEY_CREDENTIALS_MANAGER);
+                keys.add(KEY_RESET_CREDENTIALS);
+                keys.add(KEY_CREDENTIALS_INSTALL);
+                keys.add(KEY_CREDENTIAL_STORAGE_TYPE);
+                keys.add(KEY_USER_CREDENTIALS);
+            }
+
+            final DevicePolicyManager dpm = (DevicePolicyManager)
+                    context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+            switch (dpm.getStorageEncryptionStatus()) {
+                case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
+                    // The device is currently encrypted. Disable security_settings_unencrypted
+                    keys.addAll(getNonIndexableKeysFromXml(
+                            context, R.xml.security_settings_unencrypted));
+                    break;
+                default:
+                    // This device supports encryption but isn't encrypted.
+                    keys.addAll(getNonIndexableKeysFromXml(
+                            context, R.xml.security_settings_encrypted));
+                    break;
             }
 
             return keys;

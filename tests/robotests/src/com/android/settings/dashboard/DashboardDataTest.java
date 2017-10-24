@@ -88,17 +88,19 @@ public class DashboardDataTest {
         mDashboardCategory.tiles.add(mTestCategoryTile);
         categories.add(mDashboardCategory);
 
-        // Build DashboardData 
+        // Build DashboardData
         mDashboardDataWithOneConditions = new DashboardData.Builder()
                 .setConditions(oneItemConditions)
                 .setCategories(categories)
                 .setSuggestions(suggestions)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
                 .build();
 
         mDashboardDataWithTwoConditions = new DashboardData.Builder()
                 .setConditions(twoItemsConditions)
                 .setCategories(categories)
                 .setSuggestions(suggestions)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_FULLY_EXPANDED)
                 .build();
 
         mDashboardDataWithNoItems = new DashboardData.Builder()
@@ -110,23 +112,28 @@ public class DashboardDataTest {
 
     @Test
     public void testBuildItemsData_containsAllData() {
-        final DashboardData.SuggestionHeaderData data =
-                new DashboardData.SuggestionHeaderData(false, 1, 0);
-        final Object[] expectedObjects = {mTestCondition, null, data, mTestSuggestion,
-                mDashboardCategory, mTestCategoryTile};
+        final Object[] expectedObjects = {
+            mDashboardDataWithOneConditions.getSuggestions(),
+            mDashboardDataWithOneConditions.getConditions(),
+            null, mDashboardCategory, mTestCategoryTile};
         final int expectedSize = expectedObjects.length;
 
         assertThat(mDashboardDataWithOneConditions.getItemList().size())
                 .isEqualTo(expectedSize);
         for (int i = 0; i < expectedSize; i++) {
-            if (mDashboardDataWithOneConditions.getItemEntityByPosition(i)
-                    instanceof DashboardData.SuggestionHeaderData) {
-                // SuggestionHeaderData is created inside when build, we can only use isEqualTo
-                assertThat(mDashboardDataWithOneConditions.getItemEntityByPosition(i))
-                        .isEqualTo(expectedObjects[i]);
+            final Object item = mDashboardDataWithOneConditions.getItemEntityByPosition(i);
+            if (item instanceof List) {
+                assertThat(item).isEqualTo(expectedObjects[i]);
+            } else if (item instanceof DashboardData.SuggestionConditionHeaderData) {
+                DashboardData.SuggestionConditionHeaderData i1 =
+                    (DashboardData.SuggestionConditionHeaderData)item;
+                DashboardData.SuggestionConditionHeaderData i2 =
+                    (DashboardData.SuggestionConditionHeaderData)expectedObjects[i];
+                assertThat(i1.title).isEqualTo(i2.title);
+                assertThat(i1.conditionCount).isEqualTo(i2.conditionCount);
+                assertThat(i1.hiddenSuggestionCount).isEqualTo(i2.hiddenSuggestionCount);
             } else {
-                assertThat(mDashboardDataWithOneConditions.getItemEntityByPosition(i))
-                        .isSameAs(expectedObjects[i]);
+                assertThat(item).isSameAs(expectedObjects[i]);
             }
         }
     }
@@ -134,7 +141,7 @@ public class DashboardDataTest {
     @Test
     public void testGetPositionByEntity_selfInstance_returnPositionFound() {
         final int position = mDashboardDataWithOneConditions
-                .getPositionByEntity(mTestCondition);
+                .getPositionByEntity(mDashboardDataWithOneConditions.getConditions());
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
@@ -171,16 +178,18 @@ public class DashboardDataTest {
     @Test
     public void testDiffUtil_DataEqual_noResultData() {
         List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        testDiffUtil(mDashboardDataWithOneConditions, 
+        testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithOneConditions, testResultData);
     }
 
     @Test
-    public void testDiffUtil_InsertOneCondition_ResultDataOneInserted() {
+    public void testDiffUtil_InsertOneCondition_ResultDataOneChanged() {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        // Item in position 2 is the condition container containing the list of conditions, which
+        // gets 1 more item
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_INSERT, 1, 1));
+            ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
 
         testDiffUtil(mDashboardDataWithOneConditions,
                 mDashboardDataWithTwoConditions, testResultData);
@@ -191,34 +200,9 @@ public class DashboardDataTest {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 6));
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 5));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
-    }
-
-    @Test
-    public void testPayload_ItemConditionCard_returnNotNull() {
-        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
-                .ItemsDataDiffCallback(
-                mDashboardDataWithOneConditions.getItemList(),
-                mDashboardDataWithOneConditions.getItemList());
-
-        // Item in position 0 is condition card, which payload should not be null
-        assertThat(callback.getChangePayload(0, 0)).isNotEqualTo(null);
-    }
-
-    @Test
-    public void testPayload_ItemNotConditionCard_returnNull() {
-        final DashboardData.ItemsDataDiffCallback callback = new DashboardData
-                .ItemsDataDiffCallback(
-                mDashboardDataWithOneConditions.getItemList(),
-                mDashboardDataWithOneConditions.getItemList());
-
-        // Only item in position 0 is condition card, so others' payload should be null
-        for (int i = 1; i < mDashboardDataWithOneConditions.getItemList().size(); i++) {
-            assertThat(callback.getChangePayload(i, i)).isEqualTo(null);
-        }
-
     }
 
     /**
@@ -355,6 +339,11 @@ public class DashboardDataTest {
                 }
 
                 return arg2 - resultData.arg2;
+            }
+
+            @Override
+            public String toString() {
+                return "op:" + operation + ",arg1:" + arg1 + ",arg2:" + arg2;
             }
         }
     }

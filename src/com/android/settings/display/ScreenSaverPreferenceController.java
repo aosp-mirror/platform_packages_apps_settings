@@ -16,8 +16,8 @@ package com.android.settings.display;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.DreamSettings;
 import com.android.settings.core.PreferenceController;
+import com.android.settings.dream.DreamSettings;
 
 public class ScreenSaverPreferenceController extends PreferenceController {
 

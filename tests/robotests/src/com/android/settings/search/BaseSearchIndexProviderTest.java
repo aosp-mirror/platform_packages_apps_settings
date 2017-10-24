@@ -60,7 +60,7 @@ public class BaseSearchIndexProviderTest {
 
     @Test
     public void getNonIndexableKeys_noPreferenceController_shouldReturnEmptyList() {
-        assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEqualTo(Collections.EMPTY_LIST);
+        assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEmpty();
     }
 
     @Test

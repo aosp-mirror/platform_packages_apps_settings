@@ -15,13 +15,21 @@
 -->
 
 <optional-steps>
+    <step category="com.android.settings.suggested.category.DEFERRED_SETUP"
+          exclusive="true" />
+    <step category="com.android.settings.suggested.category.FIRST_IMPRESSION"
+          exclusiveExpireDays="14"
+          exclusive="true"
+          multiple="true" />
     <step category="com.android.settings.suggested.category.LOCK_SCREEN" />
+    <step category="com.android.settings.suggested.category.TRUST_AGENT" />
     <step category="com.android.settings.suggested.category.EMAIL" />
     <step category="com.android.settings.suggested.category.PARTNER_ACCOUNT"
-        multiple="true" />
+          multiple="true" />
+    <step category="com.android.settings.suggested.category.GESTURE" />
     <step category="com.android.settings.suggested.category.HOTWORD" />
     <step category="com.android.settings.suggested.category.DEFAULT"
-        multiple="true" />
+          multiple="true" />
     <step category="com.android.settings.suggested.category.SETTINGS_ONLY"
-        multiple="true" />
+          multiple="true" />
 </optional-steps>

@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 import android.content.Intent;
-import android.content.res.Resources;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SetupWizardUtils;
@@ -29,12 +28,6 @@ public class SetupFingerprintEnrollEnrolling extends FingerprintEnrollEnrolling 
         final Intent intent = new Intent(this, SetupFingerprintEnrollFinish.class);
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

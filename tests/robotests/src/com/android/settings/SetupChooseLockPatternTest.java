@@ -25,7 +25,9 @@ import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
 
-import com.android.settings.ChooseLockPattern.ChooseLockPatternFragment;
+import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
+import com.android.settings.password.ChooseLockPattern.IntentBuilder;
+import com.android.settings.password.SetupChooseLockPattern;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
@@ -64,11 +66,11 @@ public class SetupChooseLockPatternTest {
 
         mActivity =  Robolectric.buildActivity(
                 SetupChooseLockPattern.class,
-                SetupChooseLockPattern.createIntent(
+                SetupChooseLockPattern.modifyIntentForSetup(
                         application,
-                        false, /* requirePassword */
-                        false, /* confirmCredentials */
-                        UserHandle.myUserId()))
+                        new IntentBuilder(application)
+                                .setUserId(UserHandle.myUserId())
+                                .build()))
                 .setup().get();
     }
 

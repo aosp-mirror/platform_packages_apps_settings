@@ -31,11 +31,9 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -65,6 +63,11 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
         mMagnificationGesturesPreference = findPreference(
                 MAGNIFICATION_GESTURES_PREFERENCE_SCREEN_KEY);
         mMagnificationNavbarPreference = findPreference(MAGNIFICATION_NAVBAR_PREFERENCE_SCREEN_KEY);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_magnification;
     }
 
     @Override

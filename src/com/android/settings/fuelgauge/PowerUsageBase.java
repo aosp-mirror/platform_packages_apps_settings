@@ -37,6 +37,7 @@ public abstract class PowerUsageBase extends DashboardFragment
     // +1 to allow ordering for PowerUsageSummary.
     @VisibleForTesting
     static final int MENU_STATS_REFRESH = Menu.FIRST + 1;
+    private static final String TAG = "PowerUsageBase";
 
     protected BatteryStatsHelper mStatsHelper;
     protected UserManager mUm;
@@ -82,19 +83,6 @@ public abstract class PowerUsageBase extends DashboardFragment
         mBatteryBroadcastReceiver.unRegister();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (getActivity().isChangingConfigurations()) {
-            mStatsHelper.storeState();
-        }
-    }
-
     protected void restartBatteryStatsLoader() {
         getLoaderManager().restartLoader(0, Bundle.EMPTY, this);
     }
@@ -102,13 +90,15 @@ public abstract class PowerUsageBase extends DashboardFragment
     protected abstract void refreshUi();
 
     protected void updatePreference(BatteryHistoryPreference historyPref) {
+        final long startTime = System.currentTimeMillis();
         historyPref.setStats(mStatsHelper);
+        BatteryUtils.logRuntime(TAG, "updatePreference", startTime);
     }
 
     @Override
     public Loader<BatteryStatsHelper> onCreateLoader(int id,
             Bundle args) {
-        return new BatteryStatsHelperLoader(getContext(), args);
+        return new BatteryStatsHelperLoader(getContext());
     }
 
     @Override

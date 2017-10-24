@@ -27,12 +27,12 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
 import com.android.settings.network.AirplaneModePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
@@ -66,10 +66,8 @@ public class NfcPreferenceController extends PreferenceController
         mBeamPreference = (RestrictedPreference) screen.findPreference(
                 KEY_ANDROID_BEAM_SETTINGS);
         mNfcEnabler = new NfcEnabler(mContext, mNfcPreference, mBeamPreference);
-        String toggleable = Settings.Global.getString(mContext.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
         // Manually set dependencies for NFC when not toggleable.
-        if (toggleable == null || !toggleable.contains(Settings.Global.RADIO_NFC)) {
+        if (!isToggleableInAirplaneMode(mContext)) {
             mAirplaneModeObserver = new AirplaneModeObserver();
             updateNfcPreference();
         }
@@ -131,6 +129,12 @@ public class NfcPreferenceController extends PreferenceController
         }
         mNfcPreference.setEnabled(toggleable);
         mBeamPreference.setEnabled(toggleable);
+    }
+
+    public static boolean isToggleableInAirplaneMode(Context context) {
+        String toggleable = Settings.Global.getString(context.getContentResolver(),
+                Settings.Global.AIRPLANE_MODE_TOGGLEABLE_RADIOS);
+        return toggleable != null && toggleable.contains(Settings.Global.RADIO_NFC);
     }
 
     private final class AirplaneModeObserver extends ContentObserver {

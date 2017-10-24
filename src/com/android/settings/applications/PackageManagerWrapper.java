@@ -102,12 +102,15 @@ public interface PackageManagerWrapper {
             ComponentName[] componentNames, ComponentName component);
 
     /**
+     * Calls {@code PackageManager.getPrimaryStorageCurrentVolume}
+     */
+    VolumeInfo getPrimaryStorageCurrentVolume();
+
+    /**
      * Calls {@code PackageManager.deletePackageAsUser}
      */
     void deletePackageAsUser(String packageName, IPackageDeleteObserver observer, int flags,
             int userId);
-    /**
-     * Calls {@code PackageManager.getPrimaryStorageCurrentVolume}
-     */
-    VolumeInfo getPrimaryStorageCurrentVolume();
+
+    int getPackageUidAsUser(String pkg, int userId) throws PackageManager.NameNotFoundException;
 }

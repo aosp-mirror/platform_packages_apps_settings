@@ -32,31 +32,34 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionsChecks;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.SuggestionParser;
+import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionList;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
-        implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
-        FocusRecyclerView.FocusListener {
+        implements CategoryListener, ConditionListener,
+        FocusListener, SuggestionDismissController.Callback {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
-    private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
 
@@ -72,7 +75,6 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
-    private SuggestionDismissController mSuggestionDismissHandler;
 
     @Override
     public int getMetricsCategory() {
@@ -94,7 +96,7 @@ public class DashboardSummary extends InstrumentedFragment
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
         mSuggestionParser = new SuggestionParser(activity,
-                activity.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
@@ -191,14 +193,14 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
-        Log.d(TAG, "adapter created");
-        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions());
+        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
+            mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
-        mSuggestionDismissHandler = new SuggestionDismissController(
-                getContext(), mDashboard, mSuggestionParser, mAdapter);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
-        ConditionAdapterUtils.addDismiss(mDashboard);
+        ActionBarShadowController.attachToRecyclerView(
+                getActivity().findViewById(R.id.search_bar_container), getLifecycle(), mDashboard);
+
         if (DEBUG_TIMING) {
             Log.d(TAG, "onViewCreated took "
                     + (System.currentTimeMillis() - startTime) + " ms");
@@ -236,13 +238,25 @@ public class DashboardSummary extends InstrumentedFragment
         }
     }
 
+    @Override
+    public Tile getSuggestionForPosition(int position) {
+        return mAdapter.getSuggestion(position);
+    }
+
+    @Override
+    public void onSuggestionDismissed(Tile suggestion) {
+        mAdapter.onSuggestionDismissed(suggestion);
+    }
+
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
         @Override
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
             boolean isSmartSuggestionEnabled =
                     mSuggestionFeatureProvider.isSmartSuggestionEnabled(context);
-            List<Tile> suggestions = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            final SuggestionList sl = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            final List<Tile> suggestions = sl.getSuggestions();
+
             if (isSmartSuggestionEnabled) {
                 List<String> suggestionIds = new ArrayList<>(suggestions.size());
                 for (Tile suggestion : suggestions) {
@@ -255,10 +269,11 @@ public class DashboardSummary extends InstrumentedFragment
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
-                    mSuggestionFeatureProvider.dismissSuggestion(
-                            context, mSuggestionParser, suggestion);
                     suggestions.remove(i--);
                 }
+            }
+            if (sl.isExclusiveSuggestionCategory()) {
+                mSuggestionFeatureProvider.filterExclusiveSuggestions(suggestions);
             }
             return suggestions;
         }

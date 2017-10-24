@@ -20,10 +20,9 @@ package com.android.settings.search;
 import android.app.Activity;
 import android.view.Menu;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search2.SearchFeatureProviderImpl;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,11 +33,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
-
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -57,22 +52,28 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    public void testPassNull_NoError() {
-        mProvider.setUpSearchMenu(null, null);
-    }
-
-    @Test
-    public void testSetUpMenu_HasItemAdded() {
-        mProvider.setUpSearchMenu(menu, mActivity);
-
-        verify(menu).add(anyInt(), anyInt(), anyInt(), anyString());
-    }
-
-    @Test
     public void getSiteMapManager_shouldCacheInstance() {
         final SiteMapManager manager1 = mProvider.getSiteMapManager();
         final SiteMapManager manager2 = mProvider.getSiteMapManager();
 
         assertThat(manager1).isSameAs(manager2);
     }
+
+    @Test
+    public void getDatabaseSearchLoader_shouldCleanupQuery() {
+        final String query = "  space ";
+        final DatabaseResultLoader loader = mProvider.getDatabaseSearchLoader(mActivity, query);
+
+        assertThat(loader.mQueryText).isEqualTo(query.trim());
+    }
+
+    @Test
+    public void getInstalledAppSearchLoader_shouldCleanupQuery() {
+        final String query = "  space ";
+        final InstalledAppResultLoader loader =
+                mProvider.getInstalledAppSearchLoader(mActivity, query);
+
+        assertThat(loader.mQuery).isEqualTo(query.trim());
+    }
+
 }

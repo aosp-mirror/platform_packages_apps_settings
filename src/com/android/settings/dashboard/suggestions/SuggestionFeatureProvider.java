@@ -16,10 +16,13 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.List;
 
@@ -31,11 +34,13 @@ public interface SuggestionFeatureProvider {
      */
     boolean isSmartSuggestionEnabled(Context context);
 
-    /** Return true if className is the name of a class of one of your newly added suggestion. */
-    boolean isPresent(String className);
-
     /** Return true if the suggestion has already been completed and does not need to be shown */
-    boolean isSuggestionCompleted(Context context);
+    boolean isSuggestionCompleted(Context context, @NonNull ComponentName suggestion);
+
+    /**
+     * Returns the {@link SharedPreferences} that holds metadata for suggestions.
+     */
+    SharedPreferences getSharedPrefs(Context context);
 
     /**
      * Ranks the list of suggestions in place.
@@ -44,6 +49,11 @@ public interface SuggestionFeatureProvider {
      * @param suggestionIds List of suggestion ids corresponding to the suggestion tiles.
      */
     void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
+
+    /**
+     * Only keep top few suggestions from exclusive suggestions.
+     */
+    void filterExclusiveSuggestions(List<Tile> suggestions);
 
     /**
      * Dismisses a suggestion.

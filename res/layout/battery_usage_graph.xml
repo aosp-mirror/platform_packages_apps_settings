@@ -28,11 +28,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@*android:string/config_headlineFontFamily"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="36sp"
         android:textColor="?android:attr/colorAccent" />
 
-    <com.android.settingslib.graph.UsageView
+    <com.android.settings.graph.UsageView
         android:id="@+id/battery_usage"
         android:layout_width="match_parent"
         android:layout_height="141dp"
@@ -41,5 +42,12 @@
         android:colorAccent="?android:attr/colorAccent"
         android:gravity="end"
         settings:textColor="?android:attr/textColorSecondary" />
+
+    <TextView
+        android:id="@+id/bottom_summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

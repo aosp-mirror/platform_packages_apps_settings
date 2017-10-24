@@ -35,7 +35,6 @@ import android.util.ArraySet;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -76,6 +75,11 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.TRUST_AGENT;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_trust_agent;
     }
 
     @Override

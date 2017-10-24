@@ -16,13 +16,18 @@
 
 package com.android.settings.testutils;
 
+import android.content.Context;
+
 import com.android.settings.search.IndexDatabaseHelper;
 
 import java.lang.reflect.Field;
 
 public class DatabaseTestUtils {
 
-    public static void clearDb() {
+    public static void clearDb(Context context) {
+        IndexDatabaseHelper helper = IndexDatabaseHelper.getInstance(context);
+        helper.close();
+
         Field instance;
         Class clazz = IndexDatabaseHelper.class;
         try {

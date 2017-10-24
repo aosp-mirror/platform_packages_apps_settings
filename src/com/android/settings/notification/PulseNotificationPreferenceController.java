@@ -28,9 +28,9 @@ import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceController;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static android.provider.Settings.System.NOTIFICATION_LIGHT_PULSE;
 

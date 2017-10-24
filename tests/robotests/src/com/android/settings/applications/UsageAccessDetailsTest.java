@@ -16,6 +16,10 @@
 
 package com.android.settings.applications;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.os.RemoteException;
 
@@ -32,10 +36,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -59,11 +59,11 @@ public class UsageAccessDetailsTest {
     @Test
     public void logSpecialPermissionChange() {
         mFragment.logSpecialPermissionChange(true, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_ALLOW), eq("app"));
 
         mFragment.logSpecialPermissionChange(false, "app");
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+        verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_USAGE_VIEW_DENY), eq("app"));
     }
 

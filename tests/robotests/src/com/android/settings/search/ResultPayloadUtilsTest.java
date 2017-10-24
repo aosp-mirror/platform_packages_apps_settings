@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,9 @@
 package com.android.settings.search;
 
 import android.content.Intent;
-
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.search2.IntentPayload;
-import com.android.settings.search2.ResultPayloadUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +32,7 @@ import static junit.framework.Assert.fail;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ResultPayloadUtilsTest {
-    private IntentPayload payload;
+    private ResultPayload payload;
 
     private final String EXTRA_KEY = "key";
     private final String EXTRA_VALUE = "value";
@@ -43,14 +41,14 @@ public class ResultPayloadUtilsTest {
     public void setUp() {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_KEY, EXTRA_VALUE);
-        payload = new IntentPayload(intent);
+        payload = new ResultPayload(intent);
     }
 
     @Test
     public void testUnmarshallBadData_ExceptionThrown() {
         byte[] badData = "I'm going to fail :)".getBytes();
         try {
-            ResultPayloadUtils.unmarshall(badData, IntentPayload.CREATOR);
+            ResultPayloadUtils.unmarshall(badData, ResultPayload.CREATOR);
             fail("unmarshall should throw exception");
         } catch ( RuntimeException e) {
             assertThat(e).isNotNull();
@@ -58,7 +56,7 @@ public class ResultPayloadUtilsTest {
     }
 
     @Test
-    public void testMarshallIntentPayload_NonEmptyArray() {
+    public void testMarshallResultPayload_NonEmptyArray() {
         byte[] marshalledPayload = ResultPayloadUtils.marshall(payload);
         assertThat(marshalledPayload).isNotNull();
         assertThat(marshalledPayload).isNotEmpty();
@@ -67,11 +65,11 @@ public class ResultPayloadUtilsTest {
     @Test
     public void testUnmarshall_PreservedData() {
         byte[] marshalledPayload = ResultPayloadUtils.marshall(payload);
-        IntentPayload newPayload = ResultPayloadUtils.unmarshall(marshalledPayload,
-                IntentPayload.CREATOR);
+        ResultPayload newPayload = ResultPayloadUtils.unmarshall(marshalledPayload,
+                ResultPayload.CREATOR);
 
-        String originalIntentExtra = payload.intent.getStringExtra(EXTRA_KEY);
-        String copiedIntentExtra = newPayload.intent.getStringExtra(EXTRA_KEY);
+        String originalIntentExtra = payload.getIntent().getStringExtra(EXTRA_KEY);
+        String copiedIntentExtra = newPayload.getIntent().getStringExtra(EXTRA_KEY);
         assertThat(originalIntentExtra).isEqualTo(copiedIntentExtra);
     }
 

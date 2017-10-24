@@ -18,9 +18,11 @@ package com.android.settings;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -104,11 +106,26 @@ public class ResetNetworkConfirm extends OptionsMenuFragment {
             }
 
             ImsManager.factoryReset(context);
+            restoreDefaultApn(context);
 
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
         }
     };
+
+    /**
+     * Restore APN settings to default.
+     */
+    private void restoreDefaultApn(Context context) {
+        Uri uri = Uri.parse(ApnSettings.RESTORE_CARRIERS_URI);
+
+        if (SubscriptionManager.isUsableSubIdValue(mSubId)) {
+            uri = Uri.withAppendedPath(uri, "subId/" + String.valueOf(mSubId));
+        }
+
+        ContentResolver resolver = context.getContentResolver();
+        resolver.delete(uri, null, null);
+    }
 
     /**
      * Configure the UI for the final confirmation interaction

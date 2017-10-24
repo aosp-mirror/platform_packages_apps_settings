@@ -22,6 +22,7 @@ import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,8 +39,7 @@ public class DonutView extends View {
     // From manual testing, this is the longest we can go without visual errors.
     private static final int LINE_CHARACTER_LIMIT = 10;
     private float mStrokeWidth;
-    private float mDeviceDensity;
-    private int mPercent;
+    private double mPercent;
     private Paint mBackgroundCircle;
     private Paint mFilledArc;
     private TextPaint mTextPaint;
@@ -53,8 +53,7 @@ public class DonutView extends View {
 
     public DonutView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mDeviceDensity = getResources().getDisplayMetrics().density;
-        mStrokeWidth = 6f * mDeviceDensity;
+        mStrokeWidth = context.getResources().getDimension(R.dimen.storage_donut_thickness);
         final ColorFilter mAccentColorFilter =
                 new PorterDuffColorFilter(
                         Utils.getColorAttr(context, android.R.attr.colorAccent),
@@ -90,6 +89,9 @@ public class DonutView extends View {
         mBigNumberPaint.setTextSize(
                 resources.getDimension(R.dimen.storage_donut_view_percent_text_size));
         mBigNumberPaint.setTextAlign(Paint.Align.CENTER);
+        mBigNumberPaint.setTypeface(Typeface.create(
+                context.getString(com.android.internal.R.string.config_headlineFontFamily),
+                Typeface.NORMAL));
     }
 
     @Override
@@ -116,7 +118,7 @@ public class DonutView extends View {
                 getWidth() - mStrokeWidth,
                 getHeight() - mStrokeWidth,
                 TOP,
-                (360 * mPercent / 100),
+                (360 *  (float) mPercent),
                 false,
                 mFilledArc);
     }
@@ -138,7 +140,7 @@ public class DonutView extends View {
     /**
      * Set a percentage full to have the donut graph.
      */
-    public void setPercentage(int percent) {
+    public void setPercentage(double percent) {
         mPercent = percent;
         mPercentString = Utils.formatPercentage(mPercent);
         mFullString = getContext().getString(R.string.storage_percent_full);

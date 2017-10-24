@@ -22,20 +22,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:icon="@drawable/ic_lock"
+    android:layout="@layout/suw_glif_blank_template"
     settings:suwFooter="@layout/choose_lock_pattern_common_footer"
     settings:suwHeaderText="@string/lockpassword_choose_your_pattern_header">
 
     <com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient
         android:id="@+id/topLayout"
-        style="@style/SuwContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical">
 
+        <LinearLayout
+            style="@style/SuwGlifHeaderContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/suw_layout_icon"
+                style="@style/LockPatternIconStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_lock" />
+
+            <TextView
+                android:id="@+id/suw_layout_title"
+                style="@style/SuwGlifHeaderTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
         <!-- takes up all space above button bar at bottom -->
         <LinearLayout
+            style="@style/SuwContentFrame"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
@@ -47,7 +69,6 @@
             <TextView android:id="@+id/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:minLines="2"
                 android:gravity="center"
                 android:textSize="18sp" />
@@ -55,7 +76,7 @@
             <com.android.internal.widget.LockPatternView android:id="@+id/lockPattern"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="4" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 

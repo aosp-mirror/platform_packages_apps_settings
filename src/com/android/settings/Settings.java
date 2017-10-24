@@ -22,6 +22,7 @@ import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
 import com.android.settings.fingerprint.FingerprintSettings;
+import com.android.settings.password.ChooseLockGeneric;
 
 /**
  * Top-level Settings activity
@@ -31,6 +32,7 @@ public class Settings extends SettingsActivity {
     /*
     * Settings subclasses for launching independently.
     */
+    public static class AssistGestureSettingsActivity extends SettingsActivity { /* empty */}
     public static class BluetoothSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SimSettingsActivity extends SettingsActivity { /* empty */ }
     public static class TetherSettingsActivity extends SettingsActivity { /* empty */ }
@@ -139,12 +141,17 @@ public class Settings extends SettingsActivity {
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
 
     public static class WifiCallingSuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeAutomationSuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class FingerprintSuggestionActivity extends FingerprintSettings { /* empty */ }
     public static class FingerprintEnrollSuggestionActivity extends FingerprintEnrollIntroduction {
         /* empty */
     }
     public static class ScreenLockSuggestionActivity extends ChooseLockGeneric { /* empty */ }
+    public static class DoubleTapPowerSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class DoubleTwistSuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplaySuggestionActivity extends SettingsActivity { /* empty */ }
+    public static class AmbientDisplayPickupSuggestionActivity extends SettingsActivity {
+        /* empty */ }
+    public static class SwipeToNotificationSuggestionActivity extends SettingsActivity {
+        /* empty */ }
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
@@ -168,6 +175,7 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class WebViewAppPickerActivity extends SettingsActivity { /* empty */ }
+    public static class LegacySupportActivity extends SettingsActivity{ /* empty */ }
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
@@ -176,6 +184,5 @@ public class Settings extends SettingsActivity {
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class UserAndAccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
-    public static class SupportDashboardActivity extends SettingsActivity {}
 
 }

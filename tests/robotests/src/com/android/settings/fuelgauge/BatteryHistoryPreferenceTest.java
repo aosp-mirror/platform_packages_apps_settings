@@ -15,6 +15,13 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
@@ -24,8 +31,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settingslib.BatteryInfo;
-import com.android.settingslib.graph.UsageView;
+import com.android.settings.graph.UsageView;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,19 +42,15 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.AdditionalMatchers.not;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {
+                SettingsShadowResources.class,
+                SettingsShadowResources.SettingsShadowTheme.class
+        })
 public class BatteryHistoryPreferenceTest {
+    public static final String TEST_STRING = "test";
     @Mock
     private PreferenceViewHolder mViewHolder;
     @Mock
@@ -82,7 +85,29 @@ public class BatteryHistoryPreferenceTest {
         mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
 
         verify(mViewHolder).findViewById(R.id.battery_usage);
-        verify(mTextView).setText(anyString());
+        verify(mTextView).setText(nullable(String.class));
         verify(mBatteryInfo).bindHistory(mUsageView);
+    }
+
+    @Test
+    public void testSetBottomSummary_updatesBottomSummaryTextIfSet() {
+        mBatteryHistoryPreference.setBottomSummary(TEST_STRING);
+        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
+
+        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
+        assertThat(view.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(view.getText()).isEqualTo(TEST_STRING);
+        assertThat(mBatteryHistoryPreference.hideSummary).isFalse();
+    }
+
+    @Test
+    public void testSetBottomSummary_leavesBottomSummaryTextBlankIfNotSet() {
+        mBatteryHistoryPreference.hideBottomSummary();
+        mBatteryHistoryPreference.onBindViewHolder(mViewHolder);
+
+        TextView view = (TextView) mViewHolder.findViewById(R.id.bottom_summary);
+        assertThat(view.getVisibility()).isEqualTo(View.GONE);
+        assertThat(view.getText()).isEqualTo("");
+        assertThat(mBatteryHistoryPreference.hideSummary).isTrue();
     }
 }

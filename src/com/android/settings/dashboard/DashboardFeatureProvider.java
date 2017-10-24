@@ -56,6 +56,11 @@ public interface DashboardFeatureProvider {
     List<DashboardCategory> getAllCategories();
 
     /**
+     * Whether or not we should tint icons in setting pages.
+     */
+    boolean shouldTintIcon();
+
+    /**
      * Returns an unique string key for the tile.
      */
     String getDashboardKeyForTile(Tile tile);

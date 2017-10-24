@@ -15,5 +15,13 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <Preference
+        android:key="p2p_this_device"
+        android:selectable="false" />
+    <PreferenceCategory
+        android:key="p2p_peer_devices"
+        android:title="@string/wifi_p2p_peer_devices" />
+    <PreferenceCategory
+        android:key="p2p_persistent_group"
+        android:title="@string/wifi_p2p_remembered_groups" />
 </PreferenceScreen>

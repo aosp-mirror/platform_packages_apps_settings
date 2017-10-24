@@ -23,16 +23,29 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 
+import com.google.common.truth.Platform;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .ACTION_SETTINGS_PREFERENCE_CHANGE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .FIELD_SETTINGS_PREFERENCE_CHANGE_NAME;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -46,6 +59,7 @@ public class SharedPreferenceLoggerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
+    private ArgumentMatcher<Pair<Integer, Object>> mNamePairMatcher;
     private FakeFeatureFactory mFactory;
     private MetricsFeatureProvider mMetricsFeature;
     private SharedPreferencesLogger mSharedPrefLogger;
@@ -58,6 +72,7 @@ public class SharedPreferenceLoggerTest {
         mMetricsFeature = mFactory.metricsFeatureProvider;
 
         mSharedPrefLogger = new SharedPreferencesLogger(mContext, TEST_TAG);
+        mNamePairMatcher = pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_NAME, String.class);
     }
 
     @Test
@@ -72,7 +87,8 @@ public class SharedPreferenceLoggerTest {
         editor.putInt(TEST_KEY, 2);
 
         verify(mMetricsFeature, times(6)).action(any(Context.class), anyInt(),
-                any(Pair.class), any(Pair.class));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
     }
 
     @Test
@@ -84,8 +100,13 @@ public class SharedPreferenceLoggerTest {
         editor.putBoolean(TEST_KEY, false);
         editor.putBoolean(TEST_KEY, false);
 
-        verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
-                any(Pair.class), any(Pair.class));
+
+        verify(mMetricsFeature).action(any(Context.class), anyInt(),
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, true)));
+        verify(mMetricsFeature, times(3)).action(any(Context.class), anyInt(),
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, false)));
     }
 
     @Test
@@ -98,7 +119,8 @@ public class SharedPreferenceLoggerTest {
         editor.putLong(TEST_KEY, 2);
 
         verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
-                any(Pair.class), any(Pair.class));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_LONG_VALUE, Long.class)));
     }
 
     @Test
@@ -111,7 +133,26 @@ public class SharedPreferenceLoggerTest {
         editor.putFloat(TEST_KEY, 2);
 
         verify(mMetricsFeature, times(4)).action(any(Context.class), anyInt(),
-                any(Pair.class), any(Pair.class));
+                argThat(mNamePairMatcher),
+                argThat(pairMatches(FIELD_SETTINGS_PREFERENCE_CHANGE_FLOAT_VALUE, Float.class)));
     }
 
+    @Test
+    public void logPackage_shouldUseLogPackageApi() {
+        mSharedPrefLogger.logPackageName("key", "com.android.settings");
+        verify(mMetricsFeature).action(any(Context.class),
+                eq(ACTION_SETTINGS_PREFERENCE_CHANGE),
+                eq("com.android.settings"),
+                any(Pair.class));
+    }
+
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, Class clazz) {
+        return pair -> pair.first == tag && Platform.isInstanceOfType(pair.second, clazz);
+    }
+
+    private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag, boolean bool) {
+        return pair -> pair.first == tag
+                && Platform.isInstanceOfType(pair.second, Long.class)
+                && pair.second.equals((bool ? 1L : 0L));
+    }
 }

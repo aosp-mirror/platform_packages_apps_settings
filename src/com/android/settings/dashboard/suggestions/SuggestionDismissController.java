@@ -22,8 +22,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.SuggestionParser;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback {
 
@@ -65,7 +65,9 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
 
     @Override
     public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder.getItemViewType() == R.layout.suggestion_tile) {
+        final int layoutId = viewHolder.getItemViewType();
+        if (layoutId == R.layout.suggestion_tile
+                || layoutId == R.layout.suggestion_tile_remote_container) {
             // Only return swipe direction for suggestion tiles. All other types are not swipeable.
             return super.getSwipeDirs(recyclerView, viewHolder);
         }

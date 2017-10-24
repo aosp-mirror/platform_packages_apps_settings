@@ -37,6 +37,8 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmLockPattern;
 
 public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
     private static final String TAG = "CryptKeeper";

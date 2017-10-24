@@ -26,7 +26,8 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsWrapper;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -87,6 +88,7 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
+    @Config(shadows = ShadowRestrictedLockUtilsWrapper.class)
     public void wifiOnly_prefIsNotAvailable() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(anyString(), any(UserHandle.class)))

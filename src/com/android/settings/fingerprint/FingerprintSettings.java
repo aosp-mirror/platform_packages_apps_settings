@@ -46,8 +46,8 @@ import android.text.Annotation;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
-import android.text.style.URLSpan;
 import android.text.TextUtils;
+import android.text.style.URLSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -56,21 +56,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockGeneric;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.widget.FooterPreference;
+import com.android.settings.password.ChooseLockGeneric;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.widget.FooterPreference;
 
-import java.util.List;
 import java.util.HashMap;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import java.util.List;
 
 /**
  * Settings screen for fingerprints
@@ -262,14 +261,18 @@ public class FingerprintSettings extends SubSettings {
                         mHandler.postDelayed(mFingerprintLockoutReset,
                                 LOCKOUT_DURATION);
                     }
-                    // Fall through to show message
-                default:
-                    // Activity can be null on a screen rotation.
-                    final Activity activity = getActivity();
-                    if (activity != null) {
-                        Toast.makeText(activity, msg , Toast.LENGTH_SHORT);
-                    }
-                break;
+                    break;
+                case FingerprintManager.FINGERPRINT_ERROR_LOCKOUT_PERMANENT:
+                    mInFingerprintLockout = true;
+                    break;
+            }
+
+            if (mInFingerprintLockout) {
+                // Activity can be null on a screen rotation.
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    Toast.makeText(activity, msg , Toast.LENGTH_SHORT).show();
+                }
             }
             retryFingerprint(); // start again
         }

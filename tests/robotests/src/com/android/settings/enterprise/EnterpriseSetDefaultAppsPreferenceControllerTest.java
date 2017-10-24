@@ -16,6 +16,14 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -44,14 +52,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.anyObject;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 /**
  * Tests for {@link EnterpriseSetDefaultAppsPreferenceController}.
  */
@@ -92,7 +93,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
             final List<UserAppInfo> apps = new ArrayList<>(number);
             apps.add(new UserAppInfo(new UserInfo(i, "user." + i, UserInfo.FLAG_ADMIN), appInfo));
             when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(eq(i),
-                    argThat(new MatchesIntents(intents)))).thenReturn(apps);
+                    argThat(matchesIntents(intents)))).thenReturn(apps);
         }
     }
 
@@ -127,7 +128,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(anyInt(),
-                anyObject())).thenReturn(new ArrayList<UserAppInfo>());
+                any(Intent[].class))).thenReturn(new ArrayList<>());
         assertThat(mController.isAvailable()).isFalse();
         verify(mObserver).onPreferenceAvailabilityUpdated(KEY_DEFAULT_APPS, false);
 
@@ -148,28 +149,20 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
         assertThat(mController.getPreferenceKey()).isEqualTo(KEY_DEFAULT_APPS);
     }
 
-    private static class MatchesIntents extends ArgumentMatcher<Intent[]> {
-        private final Intent[] mExpectedIntents;
-
-        MatchesIntents(Intent[] intents) {
-            mExpectedIntents = intents;
-        }
-
-        @Override
-        public boolean matches(Object object) {
-            final Intent[] actualIntents = (Intent[]) object;
+    private ArgumentMatcher<Intent[]> matchesIntents(Intent[] intents) {
+        return (Intent[] actualIntents) -> {
             if (actualIntents == null) {
                 return false;
             }
-            if (actualIntents.length != mExpectedIntents.length) {
+            if (actualIntents.length != intents.length) {
                 return false;
             }
-            for (int i = 0; i < mExpectedIntents.length; i++) {
-                if (!mExpectedIntents[i].filterEquals(actualIntents[i])) {
+            for (int i = 0; i < intents.length; i++) {
+                if (!intents[i].filterEquals(actualIntents[i])) {
                     return false;
                 }
             }
             return true;
-        }
+        };
     }
 }

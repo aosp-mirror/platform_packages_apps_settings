@@ -25,8 +25,6 @@ import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.android.settings.R;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,7 +55,7 @@ public class AppNotificationSettingsTest {
 
         mInstrumentation.startActivitySync(intent);
 
-        onView(allOf(withId(R.id.left_button),
+        onView(allOf(withId(android.R.id.button1),
                 withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
                 .check(doesNotExist());
     }

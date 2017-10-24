@@ -23,7 +23,7 @@ import android.content.Context;
 import android.provider.Settings.System;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class DialPadTonePreferenceController extends SettingPrefController {
 

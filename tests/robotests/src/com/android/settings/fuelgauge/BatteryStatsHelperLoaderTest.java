@@ -15,52 +15,54 @@
  */
 package com.android.settings.fuelgauge;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 import android.content.Context;
-import android.os.BatteryStats;
-import android.os.Bundle;
-import android.os.UserManager;
+import android.net.ConnectivityManager;
 
-import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryStatsHelperLoaderTest {
     @Mock
-    private BatteryStatsHelper mBatteryStatsHelper;
+    private BatteryUtils mBatteryUtils;
     @Mock
-    private Bundle mBundle;
-    @Mock
+    private ConnectivityManager mConnectivityManager;
+
     private Context mContext;
-    @Mock
-    private UserManager mUserManager;
-    private BatteryStatsHelperLoader mLoader;
+    private BatteryStatsHelperLoader mBatteryStatsHelperLoader;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mConnectivityManager).when(mContext).getSystemService(
+                Context.CONNECTIVITY_SERVICE);
 
-        mLoader = new BatteryStatsHelperLoader(mContext, mBundle);
-        mLoader.mUserManager = mUserManager;
+        mBatteryStatsHelperLoader = spy(new BatteryStatsHelperLoader(mContext));
+        mBatteryStatsHelperLoader.mBatteryUtils = mBatteryUtils;
     }
 
     @Test
-    public void testInitBatteryStatsHelper_init() {
-        mLoader.initBatteryStatsHelper(mBatteryStatsHelper);
+    public void testLoadInBackground_loadWithoutBundle() {
+        doReturn(mContext).when(mBatteryStatsHelperLoader).getContext();
+        mBatteryStatsHelperLoader.loadInBackground();
 
-        verify(mBatteryStatsHelper).create(mBundle);
-        verify(mBatteryStatsHelper).refreshStats(BatteryStats.STATS_SINCE_CHARGED,
-                mUserManager.getUserProfiles());
+        verify(mBatteryUtils).initBatteryStatsHelper(any(), eq(null), any());
     }
+
 }

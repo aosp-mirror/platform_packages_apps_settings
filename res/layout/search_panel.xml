@@ -13,73 +13,95 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/search_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/search_panel_list_background">
+    android:orientation="vertical">
 
-    <LinearLayout android:id="@+id/layout_recent_searches"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_gravity="center"
-                  android:orientation="vertical"
-                  android:layout_alignParentTop="true">
+    <FrameLayout
+        android:id="@+id/search_bar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/suggestion_condition_background">
+        <android.support.v7.widget.CardView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/search_bar_margin"
+            app:cardCornerRadius="2dp"
+            app:cardBackgroundColor="?android:attr/colorBackground"
+            app:cardElevation="2dp">
+            <Toolbar
+                android:id="@+id/search_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/search_bar_height"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentInsetStart="0dp"
+                android:contentInsetStartWithNavigation="0dp"
+                android:theme="?android:attr/actionBarTheme">
+                <SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:iconifiedByDefault="false"
+                    android:imeOptions="actionSearch|flagNoExtractUi"
+                    android:searchIcon="@null"/>
+            </Toolbar>
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_results"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <!-- Padding is included in the background -->
-        <android.support.v7.widget.RecyclerView android:id="@+id/list_recent_searches"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:paddingStart="@dimen/dashboard_padding_start"
-                  android:paddingEnd="@dimen/dashboard_padding_end"
-                  android:paddingTop="@dimen/dashboard_padding_top"
-                  android:paddingBottom="@dimen/dashboard_padding_bottom"
-                  android:scrollbarStyle="outsideOverlay"
-                  android:headerDividersEnabled="false"
-                  android:elevation="@dimen/search_panel_elevation"/>
-    </LinearLayout>
-
-    <LinearLayout android:id="@+id/layout_results"
-                  android:layout_width="match_parent"
-                  android:layout_height="fill_parent"
-                  android:layout_above="@id/feedback_popup"
-                  android:orientation="vertical">
-
-        <!-- Padding is included in the background -->
-        <android.support.v7.widget.RecyclerView android:id="@+id/list_results"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingStart="@dimen/dashboard_padding_start"
-                  android:paddingEnd="@dimen/dashboard_padding_end"
-                  android:paddingTop="@dimen/dashboard_padding_top"
-                  android:paddingBottom="@dimen/dashboard_padding_bottom"
-                  android:scrollbarStyle="outsideOverlay"
-                  android:scrollbars="vertical"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dashboard_padding_start"
+            android:paddingEnd="@dimen/dashboard_padding_end"
+            android:paddingTop="@dimen/dashboard_padding_top"
+            android:paddingBottom="@dimen/dashboard_padding_bottom"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"/>
 
         <LinearLayout
             android:id="@+id/no_results_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="80dp"
+            android:paddingTop="96dp"
             android:orientation="vertical"
             android:visibility="gone">
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"/>
+
             <ImageView
-            android:layout_height="160dp"
-            android:layout_width="160dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/empty_search_results"/>
+                android:layout_height="160dp"
+                android:layout_width="160dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/empty_search_results"/>
 
             <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:paddingTop="24dp"
-            android:textSize="18sp"
-            android:text="@string/search_settings_no_results"
-            android:gravity="center"/>
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingTop="24dp"
+                android:textSize="18sp"
+                android:text="@string/search_settings_no_results"
+                android:gravity="center"/>
+
         </LinearLayout>
-    </LinearLayout>
+
+    </FrameLayout>
 
     <include layout="@layout/search_feedback"/>
-</RelativeLayout>
+
+</LinearLayout>

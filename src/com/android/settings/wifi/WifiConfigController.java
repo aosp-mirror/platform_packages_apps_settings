@@ -75,7 +75,7 @@ import java.util.Iterator;
  */
 public class WifiConfigController implements TextWatcher,
         AdapterView.OnItemSelectedListener, OnCheckedChangeListener,
-        TextView.OnEditorActionListener, View.OnKeyListener{
+        TextView.OnEditorActionListener, View.OnKeyListener {
     private static final String TAG = "WifiConfigController";
 
     private static final String SYSTEM_CA_STORE_PATH = "/system/etc/security/cacerts";
@@ -109,6 +109,8 @@ public class WifiConfigController implements TextWatcher,
     public static final int WIFI_PEAP_PHASE2_SIM        = 3;
     public static final int WIFI_PEAP_PHASE2_AKA        = 4;
     public static final int WIFI_PEAP_PHASE2_AKA_PRIME  = 5;
+
+    private static final int SSID_ASCII_MAX_LENGTH = 32;
 
     /* Phase2 methods supported by PEAP are limited */
     private final ArrayAdapter<String> mPhase2PeapAdapter;
@@ -457,7 +459,14 @@ public class WifiConfigController implements TextWatcher,
     void showWarningMessagesIfAppropriate() {
         mView.findViewById(R.id.no_ca_cert_warning).setVisibility(View.GONE);
         mView.findViewById(R.id.no_domain_warning).setVisibility(View.GONE);
+        mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.GONE);
 
+        if (mSsidView != null) {
+            final String ssid = mSsidView.getText().toString();
+            if (ssid.length() > SSID_ASCII_MAX_LENGTH) {
+                mView.findViewById(R.id.ssid_too_long_warning).setVisibility(View.VISIBLE);
+            }
+        }
         if (mEapCaCertSpinner != null
                 && mView.findViewById(R.id.l_ca_cert).getVisibility() != View.GONE) {
             String caCertSelection = (String) mEapCaCertSpinner.getSelectedItem();

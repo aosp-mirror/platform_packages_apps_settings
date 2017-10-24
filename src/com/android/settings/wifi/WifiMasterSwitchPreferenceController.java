@@ -20,14 +20,14 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.lifecycle.LifecycleObserver;
-import com.android.settings.core.lifecycle.events.OnPause;
-import com.android.settings.core.lifecycle.events.OnResume;
-import com.android.settings.core.lifecycle.events.OnStart;
-import com.android.settings.core.lifecycle.events.OnStop;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.MasterSwitchController;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class WifiMasterSwitchPreferenceController extends PreferenceController
         implements SummaryUpdater.OnSummaryChangeListener,

@@ -14,20 +14,54 @@
 
 package com.android.settings.applications;
 
-import android.os.Bundle;
+import android.content.Context;
+import android.provider.SearchIndexableResource;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
-public class SpecialAccessSettings extends SettingsPreferenceFragment {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SpecialAccessSettings extends DashboardFragment {
+
+    private static final String TAG = "SpecialAccessSettings";
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        addPreferencesFromResource(R.xml.special_access);
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.special_access;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.SPECIAL_ACCESS;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.special_access;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

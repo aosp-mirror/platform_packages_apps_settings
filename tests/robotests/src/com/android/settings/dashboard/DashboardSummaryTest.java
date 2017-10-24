@@ -24,6 +24,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Matchers.anyList;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -108,5 +108,11 @@ public class DashboardSummaryTest {
         mSummary.onCategoriesChanged();
         mSummary.onCategoriesChanged();
         verify(mSummary).rebuildUI();
+    }
+
+    @Test
+    public void onSuggestionDismissed_shouldNotRebuildUI() {
+        mSummary.onSuggestionDismissed(mock(Tile.class));
+        verify(mSummary, never()).rebuildUI();
     }
 }

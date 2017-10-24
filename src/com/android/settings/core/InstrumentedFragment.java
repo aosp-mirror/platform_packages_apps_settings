@@ -21,9 +21,9 @@ import android.content.Context;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.core.lifecycle.ObservableFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 
 public abstract class InstrumentedFragment extends ObservableFragment implements Instrumentable {
 

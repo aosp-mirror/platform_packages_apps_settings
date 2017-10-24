@@ -17,13 +17,12 @@
 package com.android.settings.fingerprint;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.UserHandle;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
 
@@ -41,12 +40,6 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
         }
         SetupWizardUtils.copySetupExtras(getIntent(), intent);
         return intent;
-    }
-
-    @Override
-    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
-        resid = SetupWizardUtils.getTheme(getIntent());
-        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

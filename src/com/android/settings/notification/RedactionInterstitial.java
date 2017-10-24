@@ -23,6 +23,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -41,6 +42,7 @@ import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -51,6 +53,12 @@ public class RedactionInterstitial extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, RedactionInterstitialFragment.class.getName());
         return modIntent;
+    }
+
+    @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override

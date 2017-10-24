@@ -7,6 +7,7 @@ import static org.robolectric.Shadows.shadowOf;
 import static org.robolectric.internal.Shadow.directlyOn;
 
 import android.annotation.DimenRes;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.content.res.Resources.Theme;
@@ -88,6 +89,15 @@ public class SettingsShadowResources extends ShadowResources {
     }
 
     @Implementation
+    public ColorStateList getColorStateList(@ColorRes int id, @Nullable Theme theme)
+            throws NotFoundException {
+        if (id == com.android.internal.R.color.text_color_primary) {
+            return ColorStateList.valueOf(Color.WHITE);
+        }
+        return directlyOn(realResources, Resources.class).getColorStateList(id, theme);
+    }
+
+    @Implementation
     public Drawable loadDrawable(TypedValue value, int id, Theme theme)
             throws NotFoundException {
         // The drawable item in switchbar_background.xml refers to a very recent color attribute
@@ -135,6 +145,16 @@ public class SettingsShadowResources extends ShadowResources {
         }
         return Shadow.directlyOn(
                 realResources, Resources.class, "getInteger", ClassParameter.from(int.class, id));
+    }
+
+    @Implementation
+    public boolean getBoolean(int id) {
+        final Object override = sResourceOverrides.get(id);
+        if (override instanceof Boolean) {
+            return (boolean) override;
+        }
+        return Shadow.directlyOn(realResources, Resources.class, "getBoolean",
+                ClassParameter.from(int.class, id));
     }
 
     @Implements(Theme.class)

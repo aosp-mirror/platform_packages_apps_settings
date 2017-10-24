@@ -20,8 +20,6 @@ import android.app.AppOpsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -37,8 +35,6 @@ import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettingsState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-
-import java.util.List;
 
 public class WriteSettingsDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
@@ -182,47 +178,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     public static CharSequence getSummary(Context context, WriteSettingsState writeSettingsState) {
-        return context.getString(writeSettingsState.isPermissible() ? R.string.write_settings_on :
-                R.string.write_settings_off);
-    }
-
-    public static CharSequence getSummary(Context context, String pkg) {
-        // first check if pkg is a system pkg
-        boolean isSystem = false;
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            ApplicationInfo appInfo = packageManager.getApplicationInfo(pkg, 0);
-            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                isSystem = true;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            // pkg doesn't even exist?
-            Log.w(LOG_TAG, "Package " + pkg + " not found", e);
-            return context.getString(R.string.write_settings_off);
-        }
-
-        AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context
-                .APP_OPS_SERVICE);
-        List<AppOpsManager.PackageOps> packageOps = appOpsManager.getPackagesForOps(
-                APP_OPS_OP_CODE);
-        if (packageOps == null) {
-            return context.getString(R.string.write_settings_off);
-        }
-
-        int uid = isSystem ? 0 : -1;
-        for (AppOpsManager.PackageOps packageOp : packageOps) {
-            if (pkg.equals(packageOp.getPackageName())) {
-                uid = packageOp.getUid();
-                break;
-            }
-        }
-
-        if (uid == -1) {
-            return context.getString(R.string.write_settings_off);
-        }
-
-        int mode = appOpsManager.noteOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS, uid, pkg);
-        return context.getString((mode == AppOpsManager.MODE_ALLOWED) ?
-                R.string.write_settings_on : R.string.write_settings_off);
+        return context.getString(writeSettingsState.isPermissible()
+                ? R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed);
     }
 }

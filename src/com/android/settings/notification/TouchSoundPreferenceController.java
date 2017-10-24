@@ -24,7 +24,7 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.provider.Settings.System;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class TouchSoundPreferenceController extends SettingPrefController {
 
