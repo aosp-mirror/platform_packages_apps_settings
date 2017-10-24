@@ -21,8 +21,8 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class AutoTimeZonePreferenceController extends AbstractPreferenceController

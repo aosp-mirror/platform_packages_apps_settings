@@ -17,26 +17,25 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.DeviceInfoUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -48,16 +47,12 @@ import java.util.List;
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
     sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowUtils.class
+    shadows = {ShadowUtils.class, ShadowConnectivityManager.class}
 )
 public class DeviceInfoSettingsTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private SummaryLoader mSummaryLoader;
 
@@ -66,7 +61,6 @@ public class DeviceInfoSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mSettings = spy(new DeviceInfoSettings());
         doReturn(mScreen).when(mSettings).getPreferenceScreen();
     }

@@ -38,8 +38,10 @@ import android.util.Log;
 import android.util.TimeUtils;
 import android.util.TypedValue;
 import android.view.View;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
+
 import libcore.icu.LocaleData;
 
 import java.util.ArrayList;
@@ -577,7 +579,7 @@ public class BatteryHistoryChart extends View {
                     || (aggrStates&(HistoryItem.STATE_WIFI_FULL_LOCK_FLAG
                     |HistoryItem.STATE_WIFI_MULTICAST_ON_FLAG
                     |HistoryItem.STATE_WIFI_SCAN_FLAG)) != 0;
-            if (!com.android.settings.Utils.isWifiOnly(getContext())) {
+            if (!com.android.settingslib.Utils.isWifiOnly(getContext())) {
                 mHavePhoneSignal = true;
             }
             if (mHistEnd <= mHistStart) mHistEnd = mHistStart+1;

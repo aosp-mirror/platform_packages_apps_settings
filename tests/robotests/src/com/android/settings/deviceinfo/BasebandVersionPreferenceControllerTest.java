@@ -15,35 +15,33 @@
  */
 package com.android.settings.deviceinfo;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.verify;
+import static org.robolectric.shadow.api.Shadow.extract;
+
 import android.net.ConnectivityManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
+import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowConnectivityManager.class)
 public class BasebandVersionPreferenceControllerTest {
 
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    @Mock
-    private ConnectivityManager mCm;
     @Mock
     private Preference mPreference;
 
@@ -52,19 +50,22 @@ public class BasebandVersionPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new BasebandVersionPreferenceController(mContext);
-        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(mCm);
+        mController = new BasebandVersionPreferenceController(RuntimeEnvironment.application);
     }
 
     @Test
     public void isAvailable_wifiOnly_shouldReturnFalse() {
-        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(false);
+        ShadowConnectivityManager connectivityManager =
+                extract(RuntimeEnvironment.application.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_hasMobile_shouldReturnTrue() {
-        when(mCm.isNetworkSupported(ConnectivityManager.TYPE_MOBILE)).thenReturn(true);
+        ShadowConnectivityManager connectivityManager =
+                extract(RuntimeEnvironment.application.getSystemService(ConnectivityManager.class));
+        connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
         assertThat(mController.isAvailable()).isTrue();
     }
 
