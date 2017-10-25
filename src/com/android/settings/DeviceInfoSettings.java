@@ -49,10 +49,11 @@ import java.util.List;
 
 public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
+    public static final String DEVICE_INFO_V2_FEATURE_FLAG = "device_info_v2";
+
     private static final String LOG_TAG = "DeviceInfoSettings";
 
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
-    private static final String DEVICE_INFO_V2_FEATURE_FLAG = "device_info_v2";
 
     @Override
     public int getMetricsCategory() {
@@ -127,7 +128,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             // SIM status
 
-            // Model & hardware
+            controllers.add(new DeviceModelPreferenceController(context, fragment));
 
             // IMEI
 
