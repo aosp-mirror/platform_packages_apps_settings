@@ -38,6 +38,11 @@ public class WhenToDreamPicker extends RadioButtonPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.when_to_dream_settings;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DREAM;
     }

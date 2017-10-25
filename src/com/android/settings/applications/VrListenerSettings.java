@@ -58,6 +58,11 @@ public class VrListenerSettings extends ManagedServiceSettings {
         return super.setEnabled(service, title, enable);
     }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.vr_listeners_settings;
+    }
+
     @VisibleForTesting
     void logSpecialPermissionChange(boolean enable, String packageName) {
         int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW

@@ -59,7 +59,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        if (usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.unrestricted_data_access_settings);
+        } else {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        }
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
@@ -267,7 +271,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
             if (mState.isDataSaverBlacklisted) {
                 // app is blacklisted, launch App Data Usage screen
                 InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
-                        getContext().getString(R.string.app_data_usage),
+                        R.string.app_data_usage,
                         UnrestrictedDataAccess.this,
                         mEntry);
             } else {

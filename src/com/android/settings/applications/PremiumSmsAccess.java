@@ -81,6 +81,11 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.premium_sms_settings;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.PREMIUM_SMS_ACCESS;
     }
@@ -119,8 +124,14 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
         if (apps == null) return;
         setEmptyText(R.string.premium_sms_none);
         setLoading(false, true);
-        final PreferenceScreen screen = getPreferenceManager().createPreferenceScreen(
-                getPrefContext());
+        final PreferenceScreen screen;
+        if (usePreferenceScreenTitle()) {
+            screen = getPreferenceScreen();
+            screen.removeAll();
+        } else {
+            screen = getPreferenceManager().createPreferenceScreen(getPrefContext());
+        }
+
         screen.setOrderingAsAdded(true);
 
         for (int i = 0; i < apps.size(); i++) {
@@ -137,7 +148,9 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
             screen.addPreference(summary);
         }
 
-        setPreferenceScreen(screen);
+        if (!usePreferenceScreenTitle()) {
+            setPreferenceScreen(screen);
+        }
     }
 
     private void update() {

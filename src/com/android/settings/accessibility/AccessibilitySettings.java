@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -118,6 +119,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
     static final String EXTRA_TITLE = "title";
+    static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
     static final String EXTRA_COMPONENT_NAME = "component_name";
@@ -464,23 +466,23 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
 
         for (int i = 0, count = installedServices.size(); i < count; ++i) {
-            AccessibilityServiceInfo info = installedServices.get(i);
+            final AccessibilityServiceInfo info = installedServices.get(i);
+            final ResolveInfo resolveInfo = info.getResolveInfo();
 
             RestrictedPreference preference =
                     new RestrictedPreference(downloadedServicesCategory.getContext());
-            String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
+            final String title = resolveInfo.loadLabel(getPackageManager()).toString();
 
             Drawable icon;
-            if (info.getResolveInfo().getIconResource() == 0) {
+            if (resolveInfo.getIconResource() == 0) {
                 icon = ContextCompat.getDrawable(getContext(), R.mipmap.ic_accessibility_generic);
             } else {
-                icon = info.getResolveInfo().loadIcon(getPackageManager());
+                icon = resolveInfo.loadIcon(getPackageManager());
             }
 
-            ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+            ServiceInfo serviceInfo = resolveInfo.serviceInfo;
             String packageName = serviceInfo.packageName;
             ComponentName componentName = new ComponentName(packageName, serviceInfo.name);
-            String componentNameKey = componentName.flattenToString();
 
             preference.setKey(componentName.flattenToString());
 
@@ -520,6 +522,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
             extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
             extras.putString(EXTRA_TITLE, title);
+            if (usePreferenceScreenTitle()) {
+                extras.putParcelable(EXTRA_RESOLVE_INFO, resolveInfo);
+            }
 
             String description = info.loadDescription(getPackageManager());
             if (TextUtils.isEmpty(description)) {

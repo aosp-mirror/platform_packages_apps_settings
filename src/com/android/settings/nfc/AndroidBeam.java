@@ -16,6 +16,7 @@
 
 package com.android.settings.nfc;
 
+import android.annotation.StringRes;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -129,5 +130,11 @@ public class AndroidBeam extends InstrumentedPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.NFC_BEAM;
+    }
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.android_beam_settings_title;
     }
 }

@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ import java.util.List;
  * Fragment for choosing default browser.
  */
 public class DefaultBrowserPicker extends DefaultAppPickerFragment {
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_browser_settings;
+    }
 
     @Override
     public int getMetricsCategory() {

@@ -63,7 +63,11 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        if (usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.manage_domain_url_settings);
+        } else {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(getContext()));
+        }
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
         mSession = mApplicationsState.newSession(this, getLifecycle());

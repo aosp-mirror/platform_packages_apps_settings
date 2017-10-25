@@ -42,7 +42,7 @@ public class FeatureFlagsDashboard extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.placeholder_prefs;
+        return R.xml.feature_flags_settings;
     }
 
     @Override

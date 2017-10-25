@@ -44,6 +44,11 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_home_settings;
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.DEFAULT_HOME_PICKER;
     }

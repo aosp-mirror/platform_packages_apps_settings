@@ -930,11 +930,11 @@ public class InstalledAppDetails extends AppInfoBase
         }
     }
 
-    private void startAppInfoFragment(Class<?> fragment, CharSequence title) {
+    private void startAppInfoFragment(Class<?> fragment, int title) {
         startAppInfoFragment(fragment, title, this, mAppEntry);
     }
 
-    public static void startAppInfoFragment(Class<?> fragment, CharSequence title,
+    public static void startAppInfoFragment(Class<?> fragment, int title,
             SettingsPreferenceFragment caller, AppEntry appEntry) {
         // start new fragment to display extended information
         Bundle args = new Bundle();
@@ -942,7 +942,7 @@ public class InstalledAppDetails extends AppInfoBase
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
 
         SettingsActivity sa = (SettingsActivity) caller.getActivity();
-        sa.startPreferencePanel(caller, fragment.getName(), args, -1, title, caller,
+        sa.startPreferencePanel(caller, fragment.getName(), args, title, null, caller,
                 SUB_INFO_FRAGMENT);
     }
 
@@ -1018,19 +1018,18 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public boolean onPreferenceClick(Preference preference) {
         if (preference == mStoragePreference) {
-            startAppInfoFragment(AppStorageSettings.class, mStoragePreference.getTitle());
+            startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
         } else if (preference == mNotificationPreference) {
-            startAppInfoFragment(AppNotificationSettings.class,
-                    getString(R.string.app_notifications_title));
+            startAppInfoFragment(AppNotificationSettings.class, R.string.app_notifications_title);
         } else if (preference == mPermissionsPreference) {
             startManagePermissionsActivity();
         } else if (preference == mLaunchPreference) {
-            startAppInfoFragment(AppLaunchSettings.class, mLaunchPreference.getTitle());
+            startAppInfoFragment(AppLaunchSettings.class, R.string.launch_by_default);
         } else if (preference == mMemoryPreference) {
             ProcessStatsBase.launchMemoryDetail((SettingsActivity) getActivity(),
                     mStatsManager.getMemInfo(), mStats, false);
         } else if (preference == mDataPreference) {
-            startAppInfoFragment(AppDataUsage.class, getString(R.string.app_data_usage));
+            startAppInfoFragment(AppDataUsage.class, R.string.app_data_usage);
         } else if (preference == mBatteryPreference) {
             if (isBatteryStatsAvailable()) {
                 BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
@@ -1109,8 +1108,7 @@ public class InstalledAppDetails extends AppInfoBase
                 pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        startAppInfoFragment(DrawOverlayDetails.class,
-                                getString(R.string.draw_overlay));
+                        startAppInfoFragment(DrawOverlayDetails.class, R.string.draw_overlay);
                         return true;
                     }
                 });
@@ -1123,8 +1121,7 @@ public class InstalledAppDetails extends AppInfoBase
                 pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
-                        startAppInfoFragment(WriteSettingsDetails.class,
-                                getString(R.string.write_settings));
+                        startAppInfoFragment(WriteSettingsDetails.class, R.string.write_settings);
                         return true;
                     }
                 });
@@ -1154,7 +1151,7 @@ public class InstalledAppDetails extends AppInfoBase
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         startAppInfoFragment(ExternalSourcesDetails.class,
-                                getString(R.string.install_other_apps));
+                                R.string.install_other_apps);
                         return true;
                     }
                 });

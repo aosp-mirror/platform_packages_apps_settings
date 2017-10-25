@@ -223,10 +223,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mApplicationsState = ApplicationsState.getInstance(getActivity().getApplication());
+        final Activity activity = getActivity();
+        mApplicationsState = ApplicationsState.getInstance(activity.getApplication());
 
-        Intent intent = getActivity().getIntent();
+        Intent intent = activity.getIntent();
         Bundle args = getArguments();
+        int screenTitle = intent.getIntExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.notifications_label);
         String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
@@ -235,6 +238,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 || this instanceof NotificationApps) {
             mListType = LIST_TYPE_NOTIFICATION;
             mNotifBackend = new NotificationBackend();
+            screenTitle = R.string.app_notifications_title;
         } else if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
@@ -247,16 +251,21 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mSortOrder = R.id.sort_order_size;
         } else if (className.equals(UsageAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_USAGE_ACCESS;
+            screenTitle = R.string.usage_access;
         } else if (className.equals(HighPowerApplicationsActivity.class.getName())) {
             mListType = LIST_TYPE_HIGH_POWER;
             // Default to showing system.
             mShowSystem = true;
+            screenTitle = R.string.high_power_apps;
         } else if (className.equals(OverlaySettingsActivity.class.getName())) {
             mListType = LIST_TYPE_OVERLAY;
+            screenTitle = R.string.system_alert_window_settings;
         } else if (className.equals(WriteSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_WRITE_SETTINGS;
+            screenTitle = R.string.write_settings;
         } else if (className.equals(ManageExternalSourcesActivity.class.getName())) {
             mListType = LIST_TYPE_MANAGE_SOURCES;
+            screenTitle = R.string.install_other_apps;
         } else if (className.equals(GamesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_GAMES;
             mSortOrder = R.id.sort_order_size;
@@ -280,9 +289,13 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mShowSystem = savedInstanceState.getBoolean(EXTRA_SHOW_SYSTEM, mShowSystem);
         }
 
-        mInvalidSizeStr = getActivity().getText(R.string.invalid_size_value);
+        mInvalidSizeStr = activity.getText(R.string.invalid_size_value);
 
-        mResetAppsHelper = new ResetAppsHelper(getActivity());
+        mResetAppsHelper = new ResetAppsHelper(activity);
+
+        if (usePreferenceScreenTitle() && screenTitle > 0) {
+            activity.setTitle(screenTitle);
+        }
     }
 
     @Override

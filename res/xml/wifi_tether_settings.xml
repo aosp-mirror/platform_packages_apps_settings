@@ -15,7 +15,9 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/wifi_hotspot_checkbox_text">
 
     <com.android.settings.widget.ValidatedEditTextPreference
         android:key="wifi_tether_network_name"

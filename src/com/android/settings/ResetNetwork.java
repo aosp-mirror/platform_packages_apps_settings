@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -62,6 +63,12 @@ public class ResetNetwork extends OptionsMenuFragment {
     private View mContentView;
     private Spinner mSubscriptionSpinner;
     private Button mInitiateButton;
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.reset_network_title;
+    }
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}

@@ -40,6 +40,11 @@ public class DefaultEmergencyPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_emergency_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> infos = mPm.getPackageManager().queryIntentActivities(
