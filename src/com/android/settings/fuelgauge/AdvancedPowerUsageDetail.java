@@ -45,6 +45,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -360,6 +361,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
+        final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(getContext());
+        anomalyUtils.logAnomalies(mMetricsFeatureProvider, data,
+                MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL);
         mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
     }
 
