@@ -18,18 +18,15 @@ package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.android.settings.search.SearchIndexableResources.NO_RES_ID;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
-import android.annotation.XmlRes;
 import android.database.Cursor;
 import android.provider.SearchIndexableResource;
-
 import android.text.TextUtils;
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
 import org.junit.After;
@@ -44,9 +41,6 @@ import java.util.Map;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
-
-    @XmlRes
-    private static final int XML_RES_ID = R.xml.physical_keyboard_settings;
 
     Map<String, SearchIndexableResource> sResMapCopy;
 
@@ -69,13 +63,13 @@ public class SearchIndexableResourcesTest {
         assertThat(SearchIndexableResources.getResourceByName("java.lang.String")).isNull();
         final int beforeCount = SearchIndexableResources.values().size();
 
-        SearchIndexableResources.addIndex(java.lang.String.class, XML_RES_ID);
+        SearchIndexableResources.addIndex(java.lang.String.class);
         final SearchIndexableResource index = SearchIndexableResources
                 .getResourceByName("java.lang.String");
 
         assertThat(index).isNotNull();
         assertThat(index.className).isEqualTo("java.lang.String");
-        assertThat(index.xmlResId).isEqualTo(XML_RES_ID);
+        assertThat(index.xmlResId).isEqualTo(NO_RES_ID);
         assertThat(index.iconResId).isEqualTo(NO_RES_ID);
         final int afterCount = SearchIndexableResources.values().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
@@ -95,13 +89,13 @@ public class SearchIndexableResourcesTest {
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         SearchIndexableResources.sResMap.clear();
-        SearchIndexableResources.addIndex(FakeIndexProvider.class, 0);
+        SearchIndexableResources.addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
         Cursor cursor = provider.queryNonIndexableKeys(null);
         boolean hasTestKey = false;
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             String key = cursor.getString(COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE);
             if (TextUtils.equals(key, FakeIndexProvider.KEY)) {
                 hasTestKey = true;

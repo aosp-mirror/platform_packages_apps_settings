@@ -18,7 +18,9 @@ package com.android.settings.notification;
 
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
+import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -26,8 +28,13 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 
-public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
+import java.util.Arrays;
+import java.util.List;
+
+public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase implements Indexable {
 
     private static final String KEY_SCREEN_OFF = "screenOff";
     private static final String KEY_SCREEN_ON = "screenOn";
@@ -122,4 +129,18 @@ public class ZenModeVisualInterruptionSettings extends ZenModeSettingsBase {
                 suppressedVisualEffects);
         NotificationManager.from(mContext).setNotificationPolicy(mPolicy);
     }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.zen_mode_visual_interruptions_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

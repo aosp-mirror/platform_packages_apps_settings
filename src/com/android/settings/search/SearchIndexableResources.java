@@ -26,7 +26,6 @@ import com.android.settings.DeviceInfoSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.EncryptionAndCredential;
 import com.android.settings.LegalSettings;
-import com.android.settings.R;
 import com.android.settings.ScreenPinningSettings;
 import com.android.settings.SecuritySettings;
 import com.android.settings.accessibility.AccessibilitySettings;
@@ -41,7 +40,6 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
@@ -109,15 +107,15 @@ public final class SearchIndexableResources {
     static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
 
     @VisibleForTesting
-    static void addIndex(Class<?> indexClass, @XmlRes int xmlResId) {
-        addIndex(indexClass, xmlResId, null /* targetAction */);
+    static void addIndex(Class<?> indexClass) {
+        addIndex(indexClass, null /* targetAction */);
     }
 
     @VisibleForTesting
-    static void addIndex(Class<?> indexClass, @XmlRes int xmlResId, String targetAction) {
+    static void addIndex(Class<?> indexClass, String targetAction) {
         String className = indexClass.getName();
-        SearchIndexableResource resource = new SearchIndexableResource(0, xmlResId, className,
-                NO_RES_ID);
+        SearchIndexableResource resource = new SearchIndexableResource(
+                0 /* rank */, NO_RES_ID, className, NO_RES_ID);
 
         if (!TextUtils.isEmpty(targetAction)) {
             resource.intentAction = targetAction;
@@ -128,75 +126,73 @@ public final class SearchIndexableResources {
     }
 
     static {
-        addIndex(WifiSettings.class, NO_RES_ID);
-        addIndex(NetworkDashboardFragment.class, NO_RES_ID);
-        addIndex(ConfigureWifiSettings.class, NO_RES_ID);
-        addIndex(SavedAccessPointsWifiSettings.class, NO_RES_ID);
-        addIndex(BluetoothSettings.class, NO_RES_ID);
-        addIndex(SimSettings.class, NO_RES_ID);
-        addIndex(DataPlanUsageSummary.class, NO_RES_ID);
-        addIndex(DataUsageSummary.class, NO_RES_ID);
-        addIndex(DataUsageMeteredSettings.class, NO_RES_ID);
-        addIndex(ScreenZoomSettings.class, NO_RES_ID);
-        addIndex(DisplaySettings.class, NO_RES_ID, "android.settings.DISPLAY_SETTINGS");
-        addIndex(AmbientDisplaySettings.class, NO_RES_ID);
-        addIndex(WallpaperTypeSettings.class, NO_RES_ID);
-        addIndex(AppAndNotificationDashboardFragment.class, NO_RES_ID);
-        addIndex(SoundSettings.class, NO_RES_ID, "android.settings.SOUND_SETTINGS");
-        addIndex(ZenModeSettings.class, R.xml.zen_mode_settings);
-        addIndex(StorageSettings.class, NO_RES_ID);
-        addIndex(PowerUsageAdvanced.class, NO_RES_ID);
-        addIndex(DefaultAppSettings.class, NO_RES_ID);
-        addIndex(ManageAssist.class, NO_RES_ID);
-        addIndex(SpecialAccessSettings.class, NO_RES_ID);
-        addIndex(UserSettings.class, NO_RES_ID);
-        addIndex(AssistGestureSettings.class, NO_RES_ID);
-        addIndex(PickupGestureSettings.class, NO_RES_ID);
-        addIndex(DoubleTapScreenSettings.class, NO_RES_ID);
-        addIndex(DoubleTapPowerSettings.class, NO_RES_ID);
-        addIndex(DoubleTwistGestureSettings.class, NO_RES_ID);
-        addIndex(SwipeToNotificationSettings.class, NO_RES_ID);
-        addIndex(GestureSettings.class, NO_RES_ID);
-        addIndex(LanguageAndInputSettings.class, NO_RES_ID);
-        addIndex(LocationSettings.class, R.xml.location_settings);
-        addIndex(ScanningSettings.class, R.xml.location_scanning);
-        addIndex(SecuritySettings.class, NO_RES_ID);
-        addIndex(EncryptionAndCredential.class, NO_RES_ID);
-        addIndex(ScreenPinningSettings.class, NO_RES_ID);
-        addIndex(UserAndAccountDashboardFragment.class, NO_RES_ID);
-        addIndex(VirtualKeyboardFragment.class, NO_RES_ID);
-        addIndex(AvailableVirtualKeyboardFragment.class, NO_RES_ID);
-        addIndex(PhysicalKeyboardFragment.class, NO_RES_ID);
-        addIndex(BackupSettingsActivity.class, NO_RES_ID);
-        addIndex(BackupSettingsFragment.class, NO_RES_ID);
-        addIndex(DateTimeSettings.class, NO_RES_ID);
-        addIndex(AccessibilitySettings.class, NO_RES_ID);
-        addIndex(PrintSettingsFragment.class, NO_RES_ID);
-        addIndex(DevelopmentSettingsDashboardFragment.class, NO_RES_ID);
-        addIndex(DeviceInfoSettings.class, NO_RES_ID);
-        addIndex(Status.class, NO_RES_ID);
-        addIndex(LegalSettings.class, NO_RES_ID);
-        addIndex(SystemDashboardFragment.class, NO_RES_ID);
-        addIndex(ResetDashboardFragment.class, NO_RES_ID);
-        addIndex(StorageDashboardFragment.class, NO_RES_ID);
-        addIndex(ConnectedDeviceDashboardFragment.class, NO_RES_ID);
-        addIndex(EnterprisePrivacySettings.class, NO_RES_ID);
-        addIndex(PaymentSettings.class, NO_RES_ID);
-        addIndex(TextToSpeechSettings.class, NO_RES_ID);
-        addIndex(TtsEnginePreferenceFragment.class, NO_RES_ID);
-        addIndex(MagnificationPreferenceFragment.class, NO_RES_ID);
-        addIndex(AccessibilityShortcutPreferenceFragment.class, NO_RES_ID);
-        addIndex(ChannelImportanceSettings.class, NO_RES_ID);
-        addIndex(DreamSettings.class, NO_RES_ID);
-        addIndex(SupportDashboardActivity.class, NO_RES_ID);
-        addIndex(AutomaticStorageManagerSettings.class, NO_RES_ID);
-        addIndex(ConfigureNotificationSettings.class, R.xml.configure_notification_settings);
-        addIndex(ZenModeBehaviorSettings.class, R.xml.zen_mode_behavior_settings);
-        addIndex(PowerUsageSummary.class, R.xml.power_usage_summary);
-        addIndex(BatterySaverSettings.class, R.xml.battery_saver_settings);
-        addIndex(LockscreenDashboardFragment.class, R.xml.security_lockscreen_settings);
-        addIndex(ZenModeVisualInterruptionSettings.class,
-                R.xml.zen_mode_visual_interruptions_settings);
+        addIndex(WifiSettings.class);
+        addIndex(NetworkDashboardFragment.class);
+        addIndex(ConfigureWifiSettings.class);
+        addIndex(SavedAccessPointsWifiSettings.class);
+        addIndex(BluetoothSettings.class);
+        addIndex(SimSettings.class);
+        addIndex(DataUsageSummary.class);
+        addIndex(DataUsageMeteredSettings.class);
+        addIndex(ScreenZoomSettings.class);
+        addIndex(DisplaySettings.class, "android.settings.DISPLAY_SETTINGS");
+        addIndex(AmbientDisplaySettings.class);
+        addIndex(WallpaperTypeSettings.class);
+        addIndex(AppAndNotificationDashboardFragment.class);
+        addIndex(SoundSettings.class, "android.settings.SOUND_SETTINGS");
+        addIndex(ZenModeSettings.class);
+        addIndex(StorageSettings.class);
+        addIndex(PowerUsageAdvanced.class);
+        addIndex(DefaultAppSettings.class);
+        addIndex(ManageAssist.class);
+        addIndex(SpecialAccessSettings.class);
+        addIndex(UserSettings.class);
+        addIndex(AssistGestureSettings.class);
+        addIndex(PickupGestureSettings.class);
+        addIndex(DoubleTapScreenSettings.class);
+        addIndex(DoubleTapPowerSettings.class);
+        addIndex(DoubleTwistGestureSettings.class);
+        addIndex(SwipeToNotificationSettings.class);
+        addIndex(GestureSettings.class);
+        addIndex(LanguageAndInputSettings.class);
+        addIndex(LocationSettings.class);
+        addIndex(ScanningSettings.class);
+        addIndex(SecuritySettings.class);
+        addIndex(EncryptionAndCredential.class);
+        addIndex(ScreenPinningSettings.class);
+        addIndex(UserAndAccountDashboardFragment.class);
+        addIndex(VirtualKeyboardFragment.class);
+        addIndex(AvailableVirtualKeyboardFragment.class);
+        addIndex(PhysicalKeyboardFragment.class);
+        addIndex(BackupSettingsActivity.class);
+        addIndex(BackupSettingsFragment.class);
+        addIndex(DateTimeSettings.class);
+        addIndex(AccessibilitySettings.class);
+        addIndex(PrintSettingsFragment.class);
+        addIndex(DevelopmentSettingsDashboardFragment.class);
+        addIndex(DeviceInfoSettings.class);
+        addIndex(Status.class);
+        addIndex(LegalSettings.class);
+        addIndex(SystemDashboardFragment.class);
+        addIndex(ResetDashboardFragment.class);
+        addIndex(StorageDashboardFragment.class);
+        addIndex(ConnectedDeviceDashboardFragment.class);
+        addIndex(EnterprisePrivacySettings.class);
+        addIndex(PaymentSettings.class);
+        addIndex(TextToSpeechSettings.class);
+        addIndex(TtsEnginePreferenceFragment.class);
+        addIndex(MagnificationPreferenceFragment.class);
+        addIndex(AccessibilityShortcutPreferenceFragment.class);
+        addIndex(ChannelImportanceSettings.class);
+        addIndex(DreamSettings.class);
+        addIndex(SupportDashboardActivity.class);
+        addIndex(AutomaticStorageManagerSettings.class);
+        addIndex(ConfigureNotificationSettings.class);
+        addIndex(PowerUsageSummary.class);
+        addIndex(BatterySaverSettings.class);
+        addIndex(LockscreenDashboardFragment.class);
+        addIndex(ZenModeBehaviorSettings.class);
+        addIndex(ZenModeVisualInterruptionSettings.class);
     }
 
     private SearchIndexableResources() {

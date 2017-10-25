@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
@@ -41,6 +42,8 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.TwoTargetPreference;
@@ -52,7 +55,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ZenModeSettings extends ZenModeSettingsBase {
+public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
 
     public static final String KEY_VISUAL_SETTINGS = "zen_mode_visual_interruptions_settings";
     private static final String KEY_BEHAVIOR_SETTINGS = "zen_mode_behavior_settings";
@@ -497,6 +500,19 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                                     ? 2
                                     : 3;
                     return type + rule.getName().toString();
+                }
+            };
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.zen_mode_settings;
+                    return Arrays.asList(sir);
                 }
             };
 }

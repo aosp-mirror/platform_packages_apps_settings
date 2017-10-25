@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.fuelgauge;
+
+package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -23,12 +24,10 @@ import android.provider.SearchIndexableResource;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.SwitchBar;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -36,39 +35,24 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BatterySaverSettingsTest {
+public class ScanningSettingsTest {
+
     private Context mContext;
-    private BatterySaverSettings mBatterySaverSettings;
+    private ScanningSettings mSettings;
+
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         mContext = RuntimeEnvironment.application;
-        mBatterySaverSettings = new BatterySaverSettings();
-        mBatterySaverSettings.mSwitchBar = new SwitchBar(mContext);
-    }
-
-    @Test
-    public void testOnBatteryChanged_pluggedIn_setDisable() {
-        mBatterySaverSettings.onBatteryChanged(true /* pluggedIn */);
-
-        assertThat(mBatterySaverSettings.mSwitchBar.isEnabled()).isFalse();
-    }
-
-    @Test
-    public void testOnBatteryChanged_notPluggedIn_setEnable() {
-        mBatterySaverSettings.onBatteryChanged(false /* pluggedIn */);
-
-        assertThat(mBatterySaverSettings.mSwitchBar.isEnabled()).isTrue();
+        mSettings = new ScanningSettings();
     }
 
     @Test
     public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = mBatterySaverSettings.SEARCH_INDEX_DATA_PROVIDER
+        final List<SearchIndexableResource> sir = mSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(sir).hasSize(1);
-        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.battery_saver_settings);
+        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.location_scanning);
     }
 }

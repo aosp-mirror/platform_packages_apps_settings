@@ -29,7 +29,7 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class CameraHalHdrPlusPreferenceControllerV2 extends
+public class CameraHalHdrplusPreferenceControllerV2 extends
         DeveloperOptionsPreferenceController implements
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
@@ -45,7 +45,7 @@ public class CameraHalHdrPlusPreferenceControllerV2 extends
 
     private SwitchPreference mPreference;
 
-    public CameraHalHdrPlusPreferenceControllerV2(Context context) {
+    public CameraHalHdrplusPreferenceControllerV2(Context context) {
         super(context);
     }
 
