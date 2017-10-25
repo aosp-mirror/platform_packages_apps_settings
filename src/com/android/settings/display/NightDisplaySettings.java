@@ -120,6 +120,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         onCustomStartTimeChanged(mController.getCustomStartTime());
         onCustomEndTimeChanged(mController.getCustomEndTime());
         onColorTemperatureChanged(mController.getColorTemperature());
+        onDisplayColorModeChanged(mController.getColorMode());
     }
 
     @Override
