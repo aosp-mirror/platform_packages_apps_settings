@@ -86,7 +86,6 @@ import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
-import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
@@ -129,7 +128,6 @@ public final class SearchIndexableResources {
         addIndex(WifiSettings.class);
         addIndex(NetworkDashboardFragment.class);
         addIndex(ConfigureWifiSettings.class);
-        addIndex(SavedAccessPointsWifiSettings.class);
         addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
