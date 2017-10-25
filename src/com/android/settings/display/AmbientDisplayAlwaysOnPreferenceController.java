@@ -94,7 +94,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 AmbientDisplaySettings.class.getName(), KEY_ALWAYS_ON,
                 mContext.getString(R.string.ambient_display_screen_title));
 

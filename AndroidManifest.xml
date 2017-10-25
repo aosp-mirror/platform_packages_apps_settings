@@ -219,6 +219,12 @@
                   android:theme="@style/Theme.Settings.NoActionBar">
         </activity>
 
+        <activity android:name=".search.SearchResultTrampoline"
+                  android:theme="@android:style/Theme.NoDisplay"
+                  android:excludeFromRecents="true"
+                  android:exported="true">
+        </activity>
+
         <!-- Top-level settings -->
 
         <activity android:name="Settings$WifiSettingsActivity"

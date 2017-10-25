@@ -162,7 +162,7 @@ public class AssistGestureSettingsPreferenceController extends GesturePreference
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 AssistGestureSettings.class.getName(), mAssistGesturePrefKey,
                 mContext.getString(R.string.display_settings));
 

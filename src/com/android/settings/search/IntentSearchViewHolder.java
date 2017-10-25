@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.View;
 
@@ -34,6 +35,8 @@ import java.util.List;
 public class IntentSearchViewHolder extends SearchViewHolder {
 
     private static final String TAG = "IntentSearchViewHolder";
+    @VisibleForTesting
+    static final int REQUEST_CODE_NO_OP = 0;
 
     public IntentSearchViewHolder(View view) {
         super(view);
@@ -60,7 +63,7 @@ public class IntentSearchViewHolder extends SearchViewHolder {
                 final PackageManager pm = fragment.getActivity().getPackageManager();
                 final List<ResolveInfo> info = pm.queryIntentActivities(intent, 0 /* flags */);
                 if (info != null && !info.isEmpty()) {
-                    fragment.startActivity(intent);
+                    fragment.startActivityForResult(intent, REQUEST_CODE_NO_OP);
                 } else {
                     Log.e(TAG, "Cannot launch search result, title: "
                             + result.title + ", " + intent);

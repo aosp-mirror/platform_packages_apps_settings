@@ -107,7 +107,7 @@ public class InputDeviceResultLoader extends AsyncLoader<Set<? extends SearchRes
                     : context.getString(R.string.keyboard_layout_default_label);
             final String key = deviceName;
 
-            final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(context,
+            final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
                     PHYSICAL_KEYBOARD_FRAGMENT, key, screenTitle);
             results.add(new SearchResult.Builder()
                     .setTitle(deviceName)
@@ -140,7 +140,7 @@ public class InputDeviceResultLoader extends AsyncLoader<Set<? extends SearchRes
             final ServiceInfo serviceInfo = info.getServiceInfo();
             final String key = new ComponentName(serviceInfo.packageName, serviceInfo.name)
                     .flattenToString();
-            final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(context,
+            final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
                     VIRTUAL_KEYBOARD_FRAGMENT, key, screenTitle);
             results.add(new SearchResult.Builder()
                     .setTitle(title)
