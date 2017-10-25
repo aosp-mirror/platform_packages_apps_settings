@@ -16,7 +16,7 @@
 
 package com.android.settings.applications;
 
-import android.annotation.StringRes;
+import android.annotation.Nullable;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
@@ -35,6 +35,14 @@ public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.BACKGROUND_CHECK_SUMMARY;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.background_check_pref);
+        }
     }
 
     @Override
@@ -57,12 +65,6 @@ public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
         ft.commitAllowingStateLoss();
 
         return rootView;
-    }
-
-    @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.background_check_pref;
     }
 
 }

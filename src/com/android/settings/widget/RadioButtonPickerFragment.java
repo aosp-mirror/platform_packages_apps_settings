@@ -67,10 +67,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        final int resId = getPreferenceScreenResId();
-        if (usePreferenceScreenTitle() && resId > 0) {
-            addPreferencesFromResource(resId);
-        } else {
+        if (!usePreferenceScreenTitle()) {
             addPreferencesFromResource(R.xml.placeholder_prefs);
         }
         updateCandidates();
@@ -113,13 +110,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             updateCheckedState(selectedKey);
         }
         onSelectionPerformed(success);
-    }
-
-    /**
-     * Get the res id for static preference xml for this fragment.
-     */
-    protected int getPreferenceScreenResId() {
-        return -1;
     }
 
     /**

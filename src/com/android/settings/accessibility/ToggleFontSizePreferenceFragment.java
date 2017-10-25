@@ -17,7 +17,6 @@
 package com.android.settings.accessibility;
 
 import android.annotation.Nullable;
-import android.annotation.StringRes;
 import android.content.ContentResolver;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -53,12 +52,9 @@ public class ToggleFontSizePreferenceFragment extends PreviewSeekBarPreferenceFr
         for (int i = 0; i < strEntryValues.length; ++i) {
             mValues[i] = Float.parseFloat(strEntryValues[i]);
         }
-    }
-
-    @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.title_font_size;
+        if (usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.title_font_size);
+        }
     }
 
     @Override

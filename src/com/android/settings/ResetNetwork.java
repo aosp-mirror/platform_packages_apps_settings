@@ -16,7 +16,7 @@
 
 package com.android.settings;
 
-import android.annotation.StringRes;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,6 +35,7 @@ import android.widget.Spinner;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -52,7 +53,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class ResetNetwork extends OptionsMenuFragment {
+public class ResetNetwork extends InstrumentedPreferenceFragment {
     private static final String TAG = "ResetNetwork";
 
     // Arbitrary to avoid conficts
@@ -65,9 +66,11 @@ public class ResetNetwork extends OptionsMenuFragment {
     private Button mInitiateButton;
 
     @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.reset_network_title;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.reset_network_title);
+        }
     }
 
     /**

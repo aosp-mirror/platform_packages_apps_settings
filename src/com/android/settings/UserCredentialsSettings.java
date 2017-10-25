@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.annotation.LayoutRes;
 import android.annotation.Nullable;
-import android.annotation.StringRes;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -86,9 +85,11 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.user_credentials;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.user_credentials);
+        }
     }
 
     protected void announceRemoval(String alias) {
