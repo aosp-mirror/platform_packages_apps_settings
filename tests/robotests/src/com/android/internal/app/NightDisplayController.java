@@ -21,7 +21,22 @@ package com.android.internal.app;
  */
 public class NightDisplayController {
 
-    public interface Callback {
+    public static final int AUTO_MODE_CUSTOM = 1;
+    public static final int COLOR_MODE_NATURAL = 0;
 
+    public static final int AUTO_MODE_TWILIGHT = 2;
+    public static final int COLOR_MODE_BOOSTED = 1;
+    public static final int COLOR_MODE_SATURATED = 2;
+    private int mColorMode;
+
+    public void setColorMode(int colorMode) {
+        mColorMode = colorMode;
+    }
+
+    public int getColorMode() {
+        return mColorMode;
+    }
+
+    public interface Callback {
     }
 }
