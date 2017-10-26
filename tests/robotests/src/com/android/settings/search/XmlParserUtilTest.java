@@ -120,6 +120,7 @@ public class XmlParserUtilTest {
 
     // Null checks
     @Test
+    @Config(qualifiers = "mcc999")
     public void testDataKeyInvalid_ReturnsNull() {
         XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);

@@ -14,11 +14,14 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="data_usage_screen"
     android:title="@string/data_usage_summary_title">
 
     <PreferenceCategory
+        android:key="data_usage_category"
         android:title="@string/usage">
 
         <com.android.settings.SummaryPreference

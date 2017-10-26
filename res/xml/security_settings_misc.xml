@@ -15,10 +15,12 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:key="security_settings_misc_screen"
         android:title="@string/security_settings_title">
 
-    <PreferenceCategory android:title="@string/security_passwords_title"
-            android:persistent="false">
+    <PreferenceCategory
+        android:key="security_settings_misc_category"
+        android:title="@string/security_passwords_title">
 
         <Preference
             android:key="location"
@@ -33,7 +35,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="security_settings_device_admin_category">
 
         <Preference android:key="manage_device_admin"
                 android:title="@string/manage_device_admin"

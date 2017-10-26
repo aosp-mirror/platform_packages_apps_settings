@@ -20,7 +20,6 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -31,7 +30,6 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +38,6 @@ import java.util.List;
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "UserAndAccountDashboard";
-    private static final String METADATA_IA_ACCOUNT = "com.android.settings.ia.account";
 
     @Override
     public int getMetricsCategory() {

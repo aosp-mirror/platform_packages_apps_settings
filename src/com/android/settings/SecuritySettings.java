@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -381,14 +380,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Advanced Security features
         initTrustAgentPreference(root, numberOfTrustAgent);
-
-        // The above preferences come and go based on security state, so we need to update
-        // the index. This call is expected to be fairly cheap, but we may want to do something
-        // smarter in the future.
-        final Activity activity = getActivity();
-        FeatureFactory.getFactory(activity).getSearchFeatureProvider().getIndexingManager(activity)
-                .updateFromClassNameResource(SecuritySettings.class.getName(),
-                        true /* includeInSearchResults */);
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);

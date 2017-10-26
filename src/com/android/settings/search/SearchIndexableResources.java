@@ -19,7 +19,6 @@ package com.android.settings.search;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
-import android.text.TextUtils;
 
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -92,13 +91,6 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public final class SearchIndexableResources {
-
-    /**
-     * Identifies subsettings which have an {@link SearchIndexableResource#intentAction} but
-     * whose intents should still be treated as subsettings inside of Settings.
-     */
-    public static final String SUBSETTING_TARGET_PACKAGE = "subsetting_target_package";
-
     @XmlRes
     public static final int NO_RES_ID = 0;
 
@@ -107,19 +99,9 @@ public final class SearchIndexableResources {
 
     @VisibleForTesting
     static void addIndex(Class<?> indexClass) {
-        addIndex(indexClass, null /* targetAction */);
-    }
-
-    @VisibleForTesting
-    static void addIndex(Class<?> indexClass, String targetAction) {
         String className = indexClass.getName();
         SearchIndexableResource resource = new SearchIndexableResource(
                 0 /* rank */, NO_RES_ID, className, NO_RES_ID);
-
-        if (!TextUtils.isEmpty(targetAction)) {
-            resource.intentAction = targetAction;
-            resource.intentTargetPackage = SUBSETTING_TARGET_PACKAGE;
-        }
 
         sResMap.put(className, resource);
     }
@@ -133,11 +115,11 @@ public final class SearchIndexableResources {
         addIndex(DataUsageSummary.class);
         addIndex(DataUsageMeteredSettings.class);
         addIndex(ScreenZoomSettings.class);
-        addIndex(DisplaySettings.class, "android.settings.DISPLAY_SETTINGS");
+        addIndex(DisplaySettings.class);
         addIndex(AmbientDisplaySettings.class);
         addIndex(WallpaperTypeSettings.class);
         addIndex(AppAndNotificationDashboardFragment.class);
-        addIndex(SoundSettings.class, "android.settings.SOUND_SETTINGS");
+        addIndex(SoundSettings.class);
         addIndex(ZenModeSettings.class);
         addIndex(StorageSettings.class);
         addIndex(PowerUsageAdvanced.class);
