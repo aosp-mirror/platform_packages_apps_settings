@@ -21,6 +21,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
+import android.annotation.StringRes;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -90,6 +91,12 @@ public class MasterClear extends OptionsMenuFragment {
             mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
         }
     };
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.master_clear_title;
+    }
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}

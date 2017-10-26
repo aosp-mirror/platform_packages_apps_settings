@@ -20,6 +20,7 @@ import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
 
 import android.animation.LayoutTransition;
+import android.annotation.StringRes;
 import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -89,6 +90,12 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private static final String SAVED_CONFIRMING_CREDENTIAL_USER = "ConfirmingCredentialUser";
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
     private static final int REQUEST_CONFIRM_CREDENTIALS = 1;
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.trusted_credentials;
+    }
 
     @Override
     public int getMetricsCategory() {

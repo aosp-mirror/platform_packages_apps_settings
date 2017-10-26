@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -49,9 +50,14 @@ public abstract class ToggleFeaturePreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
-                getActivity());
-        setPreferenceScreen(preferenceScreen);
+        final int resId = getPreferenceScreenResId();
+        if (usePreferenceScreenTitle() && resId > 0) {
+            addPreferencesFromResource(resId);
+        } else {
+            PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
+                    getActivity());
+            setPreferenceScreen(preferenceScreen);
+        }
     }
 
     @Override
@@ -98,6 +104,13 @@ public abstract class ToggleFeaturePreferenceFragment
         // Implement this to reset a checked listener.
     }
 
+    /**
+     * Get the res id for static preference xml for this fragment.
+     */
+    protected int getPreferenceScreenResId() {
+        return -1;
+    }
+
     private void installActionBarToggleSwitch() {
         mSwitchBar.show();
         onInstallSwitchBarToggleSwitch();
@@ -124,7 +137,11 @@ public abstract class ToggleFeaturePreferenceFragment
         }
 
         // Title.
-        if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {
+        if (usePreferenceScreenTitle()
+                && arguments.containsKey(AccessibilitySettings.EXTRA_RESOLVE_INFO)) {
+            ResolveInfo info = arguments.getParcelable(AccessibilitySettings.EXTRA_RESOLVE_INFO);
+            getActivity().setTitle(info.loadLabel(getPackageManager()).toString());
+        } else if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {
             setTitle(arguments.getString(AccessibilitySettings.EXTRA_TITLE));
         }
 

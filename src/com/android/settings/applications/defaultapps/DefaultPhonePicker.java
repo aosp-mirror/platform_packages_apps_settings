@@ -23,6 +23,7 @@ import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,11 @@ public class DefaultPhonePicker extends DefaultAppPickerFragment {
         super.onAttach(context);
         mDefaultKeyUpdater = new DefaultKeyUpdater(
                 (TelecomManager) context.getSystemService(Context.TELECOM_SERVICE));
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_phone_settings;
     }
 
     @Override

@@ -102,7 +102,7 @@ public class AccessibilityServiceResultLoader extends AsyncLoader<Set<? extends 
             }
             final String componentName = new ComponentName(serviceInfo.packageName,
                     serviceInfo.name).flattenToString();
-            final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(context,
+            final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context,
                     AccessibilitySettings.class.getName(), componentName, screenTitle);
 
             results.add(new SearchResult.Builder()

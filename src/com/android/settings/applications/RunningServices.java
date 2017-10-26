@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications;
 
+import android.annotation.StringRes;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -106,6 +107,12 @@ public class RunningServices extends SettingsPreferenceFragment {
         boolean showingBackground = mRunningProcessesView.mAdapter.getShowBackground();
         mOptionsMenu.findItem(SHOW_RUNNING_SERVICES).setVisible(showingBackground);
         mOptionsMenu.findItem(SHOW_BACKGROUND_PROCESSES).setVisible(!showingBackground);
+    }
+
+    @Override
+    @StringRes
+    protected int getTitle() {
+        return R.string.runningservices_settings_title;
     }
 
     @Override

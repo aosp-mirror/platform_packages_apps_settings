@@ -17,9 +17,6 @@
 package com.android.settings.widget;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -70,7 +67,12 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.placeholder_prefs);
+        final int resId = getPreferenceScreenResId();
+        if (usePreferenceScreenTitle() && resId > 0) {
+            addPreferencesFromResource(resId);
+        } else {
+            addPreferencesFromResource(R.xml.placeholder_prefs);
+        }
         updateCandidates();
     }
 
@@ -111,6 +113,13 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             updateCheckedState(selectedKey);
         }
         onSelectionPerformed(success);
+    }
+
+    /**
+     * Get the res id for static preference xml for this fragment.
+     */
+    protected int getPreferenceScreenResId() {
+        return -1;
     }
 
     /**

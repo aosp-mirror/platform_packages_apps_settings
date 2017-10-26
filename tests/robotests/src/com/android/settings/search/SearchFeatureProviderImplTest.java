@@ -17,8 +17,10 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Activity;
-import android.view.Menu;
+import android.content.ComponentName;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
@@ -27,22 +29,15 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchFeatureProviderImplTest {
     private SearchFeatureProviderImpl mProvider;
     private Activity mActivity;
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Menu menu;
 
     @Before
     public void setUp() {
@@ -76,4 +71,20 @@ public class SearchFeatureProviderImplTest {
         assertThat(loader.mQuery).isEqualTo(query.trim());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void verifyLaunchSearchResultPageCaller_nullCaller_shouldCrash() {
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, null /* caller */);
+    }
+
+    @Test(expected = SecurityException.class)
+    public void everifyLaunchSearchResultPageCaller_badCaller_shouldCrash() {
+        final ComponentName cn = new ComponentName("pkg", "class");
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+    }
+
+    @Test
+    public void verifyLaunchSearchResultPageCaller_goodCaller_shouldNotCrash() {
+        final ComponentName cn = new ComponentName(mActivity.getPackageName(), "class");
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+    }
 }

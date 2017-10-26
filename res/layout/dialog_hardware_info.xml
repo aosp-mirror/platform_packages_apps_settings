@@ -40,6 +40,20 @@
             android:textAppearance="@android:style/TextAppearance.Material.Body2" />
 
         <TextView
+            android:id="@+id/serial_number_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1"
+            android:textColor="?android:attr/textColorSecondary"
+            android:text="@string/status_serial_number" />
+        <TextView
+            android:id="@+id/serial_number_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp"
+            android:textAppearance="@android:style/TextAppearance.Material.Body2" />
+
+        <TextView
             android:id="@+id/hardware_rev_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

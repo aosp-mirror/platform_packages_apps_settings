@@ -16,25 +16,26 @@
 
 package com.android.settings.deviceinfo;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.app.Activity;
 import android.os.SystemProperties;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -53,6 +54,7 @@ public class HardwareInfoDialogFragmentTest {
         SystemProperties.set("ro.boot.hardware.revision", TEST_HARDWARE_REV);
 
         final HardwareInfoDialogFragment fragment = spy(HardwareInfoDialogFragment.newInstance());
+        doReturn("").when(fragment).getSerialNumber();
         fragment.show(mActivity.getFragmentManager(), HardwareInfoDialogFragment.TAG);
 
         verify(fragment).setText(

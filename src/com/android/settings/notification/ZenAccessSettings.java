@@ -21,9 +21,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.NotificationManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
@@ -38,7 +36,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -48,7 +45,6 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -80,13 +76,20 @@ public class ZenAccessSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
-        setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
+        if (!usePreferenceScreenTitle()) {
+            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
+        }
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setEmptyText(R.string.zen_access_empty_text);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_access_settings;
     }
 
     @Override

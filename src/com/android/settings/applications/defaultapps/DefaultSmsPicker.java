@@ -40,6 +40,11 @@ public class DefaultSmsPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_sms_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final Context context = getContext();
         final Collection<SmsApplication.SmsApplicationData> smsApplications =

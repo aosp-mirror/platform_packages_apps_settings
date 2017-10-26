@@ -24,7 +24,10 @@ import com.android.settingslib.deviceinfo.AbstractSerialNumberPreferenceControll
 
 /**
  * Preference controller for displaying device serial number. Wraps {@link Build#getSerial()}.
+ *
+ * deprecated because this preference is no longer used in About Phone V2
  */
+@Deprecated
 public class SerialNumberPreferenceController extends
         AbstractSerialNumberPreferenceController implements
         PreferenceControllerMixin {

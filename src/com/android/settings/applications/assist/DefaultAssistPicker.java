@@ -65,6 +65,11 @@ public class DefaultAssistPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.default_assist_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         mAvailableAssistants.clear();
         addAssistServices();

@@ -73,7 +73,7 @@ public class AutoBrightnessPreferenceController extends AbstractPreferenceContro
 
     @Override
     public ResultPayload getResultPayload() {
-        final Intent intent = DatabaseIndexingUtils.buildSubsettingIntent(mContext,
+        final Intent intent = DatabaseIndexingUtils.buildSearchResultPageIntent(mContext,
                 DisplaySettings.class.getName(), mAutoBrightnessKey,
                 mContext.getString(R.string.display_settings));
 

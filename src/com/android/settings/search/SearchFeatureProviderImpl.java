@@ -17,6 +17,7 @@
 
 package com.android.settings.search;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
@@ -40,6 +41,18 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     @Override
     public boolean isEnabled(Context context) {
         return true;
+    }
+
+    @Override
+    public void verifyLaunchSearchResultPageCaller(Context context, ComponentName caller) {
+        if (caller == null) {
+            throw new IllegalArgumentException("ExternalSettingsTrampoline intents "
+                    + "must be called with startActivityForResult");
+        }
+        final String packageName = caller.getPackageName();
+        if (!TextUtils.equals(packageName, context.getPackageName())) {
+            throw new SecurityException("Only Settings app can launch search result page");
+        }
     }
 
     @Override

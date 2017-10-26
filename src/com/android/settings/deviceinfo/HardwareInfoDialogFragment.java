@@ -18,15 +18,18 @@ package com.android.settings.deviceinfo;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.DeviceInfoSettings;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
@@ -54,6 +57,15 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
         // Model
         setText(content, R.id.model_label, R.id.model_value,
                 DeviceModelPreferenceController.getDeviceModel());
+
+        // Serial number
+        if (FeatureFlagUtils.isEnabled(DeviceInfoSettings.DEVICE_INFO_V2_FEATURE_FLAG)) {
+            setText(content, R.id.serial_number_label, R.id.serial_number_value, getSerialNumber());
+        } else {
+            content.findViewById(R.id.serial_number_label).setVisibility(View.GONE);
+            content.findViewById(R.id.serial_number_value).setVisibility(View.GONE);
+        }
+
         // Hardware rev
         setText(content, R.id.hardware_rev_label, R.id.hardware_rev_value,
                 SystemProperties.get("ro.boot.hardware.revision"));
@@ -76,5 +88,10 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
             labelView.setVisibility(View.GONE);
             valueView.setVisibility(View.GONE);
         }
+    }
+
+    @VisibleForTesting
+    String getSerialNumber() {
+        return Build.getSerial();
     }
 }

@@ -34,6 +34,7 @@ import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -51,6 +52,11 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_GLOBAL_GESTURE;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_shortcut_service_settings;
     }
 
     @Override

@@ -24,7 +24,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
@@ -60,7 +59,9 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.accessibility_shortcut_settings);
+        if (!usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.accessibility_shortcut_settings);
+        }
         mServicePreference = findPreference(SHORTCUT_SERVICE_KEY);
         mOnLockScreenSwitchPreference = (SwitchPreference) findPreference(ON_LOCK_SCREEN_KEY);
         mOnLockScreenSwitchPreference.setOnPreferenceChangeListener((Preference p, Object o) -> {
@@ -77,6 +78,11 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onResume() {
         super.onResume();
         updatePreferences();
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_shortcut_settings;
     }
 
     @Override

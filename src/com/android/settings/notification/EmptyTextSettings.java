@@ -32,6 +32,17 @@ public abstract class EmptyTextSettings extends SettingsPreferenceFragment {
     private TextView mEmpty;
 
     @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        if (usePreferenceScreenTitle()) {
+            final int resId = getPreferenceScreenResId();
+            if (resId > 0) {
+                addPreferencesFromResource(resId);
+            }
+        }
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mEmpty = new TextView(getContext());
@@ -47,4 +58,9 @@ public abstract class EmptyTextSettings extends SettingsPreferenceFragment {
     protected void setEmptyText(int text) {
         mEmpty.setText(text);
     }
+
+    /**
+     * Get the res id for static preference xml for this fragment.
+     */
+    protected abstract int getPreferenceScreenResId();
 }

@@ -221,7 +221,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
         verify(mFragment).onSearchResultClicked(eq(mHolder), any(SearchResult.class));
-        verify(mFragment).startActivity(result.payload.getIntent());
+        verify(mFragment).startActivityForResult(result.payload.getIntent(),
+                IntentSearchViewHolder.REQUEST_CODE_NO_OP);
     }
 
     @Test
@@ -237,7 +238,8 @@ public class IntentSearchViewHolderTest {
         assertThat(mHolder.summaryView.getText()).isEqualTo(SUMMARY);
         assertThat(mHolder.summaryView.getVisibility()).isEqualTo(View.VISIBLE);
         verify(mFragment).onSearchResultClicked(eq(mHolder), any(SearchResult.class));
-        verify(mFragment, never()).startActivity(any(Intent.class));
+        verify(mFragment, never()).startActivityForResult(result.payload.getIntent(),
+                IntentSearchViewHolder.REQUEST_CODE_NO_OP);
     }
 
     private SearchResult getSearchResult(String title, String summary, Drawable icon) {

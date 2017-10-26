@@ -110,10 +110,17 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_autoclick_settings;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addPreferencesFromResource(R.xml.accessibility_autoclick_settings);
+        if (!usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.accessibility_autoclick_settings);
+        }
 
         int delay = Settings.Secure.getInt(
                 getContentResolver(), Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
@@ -153,7 +160,9 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setTitle(getString(R.string.accessibility_autoclick_preference_title));
+        if (!usePreferenceScreenTitle()) {
+            setTitle(getString(R.string.accessibility_autoclick_preference_title));
+        }
     }
 
     @Override

@@ -58,6 +58,11 @@ public class WebViewAppPicker extends DefaultAppPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.webview_app_settings;
+    }
+
+    @Override
     protected List<DefaultAppInfo> getCandidates() {
         final List<DefaultAppInfo> packageInfoList = new ArrayList<DefaultAppInfo>();
         final Context context = getContext();
