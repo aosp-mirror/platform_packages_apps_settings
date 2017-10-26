@@ -18,7 +18,7 @@
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/security_settings_title">
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="unification"
         android:title="@string/lock_settings_profile_unification_title"
         android:summary="@string/lock_settings_profile_unification_summary"
