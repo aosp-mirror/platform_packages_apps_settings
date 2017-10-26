@@ -52,7 +52,6 @@ import com.android.settings.applications.PictureInPictureDetails;
 import com.android.settings.applications.PictureInPictureSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
-import com.android.settings.applications.RunningServices;
 import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
@@ -140,7 +139,6 @@ public class SettingsGateway {
      * security exception if the fragment it needs to display is not in this list.
      */
     public static final String[] ENTRY_FRAGMENTS = {
-            RunningServices.class.getName(),
             WifiSettings.class.getName(),
             ConfigureWifiSettings.class.getName(),
             SavedAccessPointsWifiSettings.class.getName(),
