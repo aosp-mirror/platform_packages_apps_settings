@@ -77,8 +77,6 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         final View result = super.onCreateView(inflater, container, savedInstState);
         final View myLayout = inflater.inflate(R.layout.locale_order_list, (ViewGroup) result);
 
-        getActivity().setTitle(R.string.pref_title_lang_selection);
-
         configureDragAndDrop(myLayout);
         return result;
     }

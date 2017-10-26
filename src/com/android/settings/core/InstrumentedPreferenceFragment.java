@@ -16,10 +16,9 @@
 
 package com.android.settings.core;
 
-import android.annotation.Nullable;
-import android.annotation.StringRes;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -40,7 +39,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         implements Instrumentable {
 
     private static final String TAG = "InstrumentedPrefFrag";
-    private static final String FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE =
+    @VisibleForTesting
+    static final String FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE =
             "settings_use_preference_screen_title";
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
@@ -57,17 +57,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (usePreferenceScreenTitle()) {
-            final int title = getTitle();
-            if (title != -1) {
-                getActivity().setTitle(title);
-            }
-        }
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
@@ -81,6 +70,12 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        if (usePreferenceScreenTitle()) {
+            final int resId = getPreferenceScreenResId();
+            if (resId > 0) {
+                addPreferencesFromResource(resId);
+            }
+        }
     }
 
     @Override
@@ -102,13 +97,9 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     /**
-     * Return the resource id of the title to be used for the fragment. This is for preference
-     * fragments that do not have an explicit preference screen xml, and hence the title need to be
-     * specified separately. Do not use this method if the title is already specified in the
-     * preference screen.
+     * Get the res id for static preference xml for this fragment.
      */
-    @StringRes
-    protected int getTitle() {
+    protected int getPreferenceScreenResId() {
         return -1;
     }
 

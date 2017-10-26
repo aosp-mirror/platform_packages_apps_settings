@@ -141,6 +141,10 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_NAVBAR_ENABLED);
         extras.putString(AccessibilitySettings.EXTRA_TITLE, getString(
                 R.string.accessibility_screen_magnification_navbar_title));
+        if (usePreferenceScreenTitle()) {
+            extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
+                    R.string.accessibility_screen_magnification_navbar_title);
+        }
         extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
                 getActivity().getResources().getText(
                         R.string.accessibility_screen_magnification_navbar_summary));
@@ -190,6 +194,10 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
                 Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED);
         extras.putString(AccessibilitySettings.EXTRA_TITLE, context.getString(
                 R.string.accessibility_screen_magnification_gestures_title));
+        if (usePreferenceScreenTitle()) {
+            extras.putInt(AccessibilitySettings.EXTRA_TITLE_RES,
+                    R.string.accessibility_screen_magnification_gestures_title);
+        }
         extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY, context.getResources().getText(
                 R.string.accessibility_screen_magnification_summary));
         extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,

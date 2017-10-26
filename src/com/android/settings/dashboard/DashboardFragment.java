@@ -115,7 +115,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
         refreshAllPreferences(getLogTag());
     }
 
@@ -210,11 +209,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
      * Get the tag string for logging.
      */
     protected abstract String getLogTag();
-
-    /**
-     * Get the res id for static preference xml for this fragment.
-     */
-    protected abstract int getPreferenceScreenResId();
 
     /**
      * Get a list of {@link AbstractPreferenceController} for this fragment.

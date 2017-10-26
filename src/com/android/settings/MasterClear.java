@@ -21,7 +21,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
-import android.annotation.StringRes;
+import android.annotation.Nullable;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -39,7 +39,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,6 +53,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -70,7 +70,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class MasterClear extends OptionsMenuFragment {
+public class MasterClear extends InstrumentedPreferenceFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
@@ -93,9 +93,11 @@ public class MasterClear extends OptionsMenuFragment {
     };
 
     @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.master_clear_title;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (usePreferenceScreenTitle()) {
+            getActivity().setTitle(R.string.master_clear_title);
+        }
     }
 
     /**

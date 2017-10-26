@@ -119,6 +119,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
     static final String EXTRA_CHECKED = "checked";
     static final String EXTRA_TITLE = "title";
+    static final String EXTRA_TITLE_RES = "title_res";
     static final String EXTRA_RESOLVE_INFO = "resolve_info";
     static final String EXTRA_SUMMARY = "summary";
     static final String EXTRA_SETTINGS_TITLE = "settings_title";
