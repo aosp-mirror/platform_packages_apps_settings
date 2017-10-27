@@ -231,6 +231,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             Preference pref = appPreferences.remove(pkgName);
             if (pref == null) {
                 pref = new Preference(prefContext);
+                pref.setLayoutResource(R.layout.preference_app);
                 rebindPref = false;
             }
             pref.setKey(pkgName);

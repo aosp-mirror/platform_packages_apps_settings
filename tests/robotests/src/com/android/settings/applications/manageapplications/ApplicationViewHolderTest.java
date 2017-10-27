@@ -22,7 +22,6 @@ import static org.mockito.Mockito.mock;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -48,9 +47,8 @@ public class ApplicationViewHolderTest {
     @Before
     public void seUp() {
         mContext = RuntimeEnvironment.application;
-        mView = ApplicationViewHolder.newView(LayoutInflater.from(mContext),
-                new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
     }
 
     @Test
@@ -71,6 +69,10 @@ public class ApplicationViewHolderTest {
 
         mHolder.setSummary(R.string.disabled);
         assertThat(mHolder.mSummary.getText()).isEqualTo(mContext.getText(R.string.disabled));
+        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.VISIBLE);
+
+        mHolder.setSummary(null);
+        assertThat(mHolder.mSummaryContainer.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test

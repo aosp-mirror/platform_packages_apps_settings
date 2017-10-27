@@ -19,7 +19,6 @@ package com.android.settings.applications.manageapplications;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.InsetDrawable;
 import android.os.UserHandle;
 import android.provider.DocumentsContract;
 import android.support.annotation.WorkerThread;
@@ -39,7 +38,6 @@ public class MusicViewHolderController implements FileViewHolderController {
     private static final String TAG = "MusicViewHolderCtrl";
 
     private static final String AUTHORITY_MEDIA = "com.android.providers.media.documents";
-    private static final int INSET_SIZE = 24; // dp
 
     private Context mContext;
     private StorageStatsSource mSource;
@@ -73,8 +71,7 @@ public class MusicViewHolderController implements FileViewHolderController {
 
     @Override
     public void setupView(ApplicationViewHolder holder) {
-        holder.setIcon(
-                new InsetDrawable(mContext.getDrawable(R.drawable.ic_headset_24dp), INSET_SIZE));
+        holder.setIcon(R.drawable.ic_headset_24dp);
         holder.setTitle(mContext.getText(R.string.audio_files_title));
         holder.setSummary(Formatter.formatFileSize(mContext, mMusicSize));
     }

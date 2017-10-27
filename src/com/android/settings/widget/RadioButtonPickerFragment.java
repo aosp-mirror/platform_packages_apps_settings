@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.XmlRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -133,8 +134,13 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
+
+        final int customLayoutResId = getRadioButtomPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
             final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
+            if (customLayoutResId > 0) {
+                nonePref.setLayoutResource(customLayoutResId);
+            }
             nonePref.setIcon(R.drawable.ic_remove_circle);
             nonePref.setTitle(R.string.app_list_preference_none);
             nonePref.setChecked(TextUtils.isEmpty(defaultKey));
@@ -144,6 +150,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         if (candidateList != null) {
             for (CandidateInfo info : candidateList) {
                 RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
+                if (customLayoutResId > 0) {
+                    pref.setLayoutResource(customLayoutResId);
+                }
                 bindPreference(pref, info.getKey(), info, defaultKey);
                 bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
                 screen.addPreference(pref);
@@ -204,6 +213,14 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
 
     protected String getSystemDefaultKey() {
         return null;
+    }
+
+    /**
+     * Provides a custom layout for each candidate row.
+     */
+    @XmlRes
+    protected int getRadioButtomPreferenceCustomLayoutResId() {
+        return 0;
     }
 
     public static abstract class CandidateInfo {

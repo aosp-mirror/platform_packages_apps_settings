@@ -38,7 +38,7 @@ public class AppDataUsagePreference extends Preference {
         super(context);
         mItem = item;
         mPercent = percent;
-        setLayoutResource(R.layout.data_usage_item);
+        setLayoutResource(R.layout.preference_app);
         setWidgetLayoutResource(R.layout.widget_progress_bar);
 
         if (item.restricted && item.total <= 0) {
