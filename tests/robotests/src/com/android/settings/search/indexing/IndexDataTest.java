@@ -17,23 +17,23 @@
 
 package com.android.settings.search.indexing;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+
+import com.android.settings.TestConfig;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -141,6 +141,14 @@ public class IndexDataTest {
         assertThat(name.getPackageName()).isEqualTo(INTENT_TARGET_PACKAGE);
     }
 
+    @Test
+    public void testNormalizeJapaneseString() {
+        final String japaneseString = "\u3042\u3077\u308a";
+        final String normalizedJapaneseString = "\u30a2\u30d5\u309a\u30ea";
+
+        String result = IndexData.normalizeJapaneseString(japaneseString);
+        assertThat(result).isEqualTo(normalizedJapaneseString);
+    }
 
     private IndexData generateRow() {
         return mBuilder.build(mContext);
