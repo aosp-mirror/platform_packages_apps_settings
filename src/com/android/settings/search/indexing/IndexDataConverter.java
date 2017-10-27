@@ -59,11 +59,8 @@ public class IndexDataConverter {
 
     private final Context mContext;
 
-    private String mLocale;
-
-    public IndexDataConverter(Context context, String locale) {
+    public IndexDataConverter(Context context) {
         mContext = context;
-        mLocale = locale;
     }
 
     /**
@@ -73,7 +70,6 @@ public class IndexDataConverter {
      *                     {@link SearchIndexableRaw} and non-indexable keys.
      */
     public List<IndexData> convertPreIndexDataToIndexData(PreIndexData preIndexData) {
-
         final long current = System.currentTimeMillis();
         final List<SearchIndexableData> indexableData = preIndexData.dataToUpdate;
         final Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
@@ -125,18 +121,12 @@ public class IndexDataConverter {
      */
     @Nullable
     private IndexData.Builder convertRaw(SearchIndexableRaw raw, Set<String> nonIndexableKeys) {
-        // Should be the same locale as the one we are processing
-        if (!raw.locale.toString().equalsIgnoreCase(mLocale)) {
-            return null;
-        }
-
         // A row is enabled if it does not show up as an nonIndexableKey
         boolean enabled = !(nonIndexableKeys != null && nonIndexableKeys.contains(raw.key));
 
         IndexData.Builder builder = new IndexData.Builder();
         builder.setTitle(raw.title)
                 .setSummaryOn(raw.summaryOn)
-                .setLocale(mLocale)
                 .setEntries(raw.entries)
                 .setKeywords(raw.keywords)
                 .setClassName(raw.className)
@@ -219,7 +209,6 @@ public class IndexDataConverter {
             headerBuilder.setTitle(headerTitle)
                     .setSummaryOn(headerSummary)
                     .setKeywords(headerKeywords)
-                    .setLocale(mLocale)
                     .setClassName(fragmentName)
                     .setScreenTitle(screenTitle)
                     .setIntentAction(intentAction)
@@ -253,7 +242,6 @@ public class IndexDataConverter {
 
                 builder = new IndexData.Builder();
                 builder.setTitle(title)
-                        .setLocale(mLocale)
                         .setKeywords(keywords)
                         .setClassName(fragmentName)
                         .setScreenTitle(screenTitle)
@@ -352,11 +340,6 @@ public class IndexDataConverter {
 
         if (resList != null) {
             for (SearchIndexableResource item : resList) {
-                // Should be the same locale as the one we are processing
-                if (!item.locale.toString().equalsIgnoreCase(mLocale)) {
-                    continue;
-                }
-
                 item.className = TextUtils.isEmpty(item.className)
                         ? className
                         : item.className;

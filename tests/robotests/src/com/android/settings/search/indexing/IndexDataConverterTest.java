@@ -56,10 +56,7 @@ public class IndexDataConverterTest {
     private static final String normalizedTitle = "titletitle";
     private static final String summaryOn = "summary\u2011on";
     private static final String updatedSummaryOn = "summary-on";
-    private static final String normalizedSummaryOn = "summaryon";
     private static final String summaryOff = "summary\u2011off";
-    private static final String updatedSummaryOff = "summary-off";
-    private static final String normalizedSummaryOff = "summaryoff";
     private static final String entries = "entries";
     private static final String keywords = "keywords, keywordss, keywordsss";
     private static final String spaceDelimittedKeywords = "keywords keywordss keywordsss";
@@ -100,7 +97,7 @@ public class IndexDataConverterTest {
     @Before
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
-        mConverter = spy(new IndexDataConverter(mContext, localeStr));
+        mConverter = spy(new IndexDataConverter(mContext));
     }
 
     @After
@@ -160,13 +157,13 @@ public class IndexDataConverterTest {
      * TODO (b/66916397) investigate why locale is attached to IndexData
      */
     @Test
-    public void testInsertRawColumn_mismatchedLocale_noRowInserted() {
+    public void testInsertRawColumn_mismatchedLocale_rowInserted() {
         final SearchIndexableRaw raw = getFakeRaw("ca-fr");
         PreIndexData preIndexData = new PreIndexData();
         preIndexData.dataToUpdate.add(raw);
         List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
-        assertThat(indexData).isEmpty();
+        assertThat(indexData).hasSize(1);
     }
 
     // Tests for the flow: IndexOneResource -> IndexFromResource ->
