@@ -72,12 +72,8 @@
 
     <Preference
         android:key="special_access"
+        android:fragment="com.android.settings.applications.SpecialAccessSettings"
         android:title="@string/special_access"
-        android:order="20" >
-        <intent
-            android:action="android.intent.action.MAIN"
-            android:targetPackage="com.android.settings"
-            android:targetClass="com.android.settings.Settings$SpecialAccessSettingsActivity" />
-    </Preference>
+        android:order="20" />
 
 </PreferenceScreen>

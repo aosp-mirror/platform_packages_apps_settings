@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -51,7 +52,9 @@ public class ManagedAccessSettingsLowRamTest {
     @Test
     public void testManagedAccessOptionsVisibility() throws Exception {
         mInstrumentation.startActivitySync(new Intent(mTargetContext,
-                com.android.settings.Settings.SpecialAccessSettingsActivity.class));
+                com.android.settings.Settings.AppAndNotificationDashboardActivity.class));
+        onView(withText(mTargetContext.getString(R.string.expand_button_title))).perform(click());
+        onView(withText(mTargetContext.getString(R.string.special_access))).perform(click());
 
         String[] managedServiceLabels = new String[] {"Do Not Disturb access",
                 "VR helper services", "Notification access", "Picture-in-picture"};

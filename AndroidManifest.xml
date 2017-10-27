@@ -2539,16 +2539,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="Settings$SpecialAccessSettingsActivity"
-                  android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.SpecialAccessSettings" />
-        </activity>
-
         <activity android:name="Settings$NotificationAccessSettingsActivity"
                   android:label="@string/manage_notification_access_title"
                   android:taskAffinity="">

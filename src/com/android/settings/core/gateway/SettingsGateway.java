@@ -52,7 +52,6 @@ import com.android.settings.applications.PictureInPictureDetails;
 import com.android.settings.applications.PictureInPictureSettings;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
-import com.android.settings.applications.SpecialAccessSettings;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
@@ -194,7 +193,6 @@ public class SettingsGateway {
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
-            SpecialAccessSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             ZenAccessSettings.class.getName(),
             ZenModeAutomationSettings.class.getName(),
