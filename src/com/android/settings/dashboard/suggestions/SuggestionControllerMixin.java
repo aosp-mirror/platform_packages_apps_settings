@@ -115,4 +115,8 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
     public void dismissSuggestion(Suggestion suggestion) {
         mSuggestionController.dismissSuggestions(suggestion);
     }
+
+    public void launchSuggestion(Suggestion suggestion) {
+        mSuggestionController.launchSuggestion(suggestion);
+    }
 }

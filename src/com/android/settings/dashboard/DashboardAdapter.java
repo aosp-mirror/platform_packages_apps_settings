@@ -430,16 +430,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (position == SUGGESTION_CONDITION_HEADER_POSITION) {
             if (suggestions != null && suggestions.size() > 0) {
                 conditionOnly = false;
-                mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
-                        mDashboardData.getItemEntityByPosition(position),
+                mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                        (List<Tile>) mDashboardData.getItemEntityByPosition(position),
                         null, mSuggestionsShownLogged);
                 mSuggestionDismissHandler = new SuggestionDismissController(mContext,
                         holder.data, mSuggestionControllerMixin, mSuggestionParser, mCallback);
                 holder.data.setAdapter(mSuggestionAdapter);
             } else if (suggestionsV2 != null && suggestionsV2.size() > 0) {
                 conditionOnly = false;
-                mSuggestionAdapter = new SuggestionAdapter(mContext, null,
-                        (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
+                mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                        null, (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
                         mSuggestionsShownLogged);
                 mSuggestionDismissHandler = new SuggestionDismissController(mContext,
                         holder.data, mSuggestionControllerMixin, null /* parser */, mCallback);

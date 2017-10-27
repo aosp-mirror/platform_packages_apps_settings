@@ -67,6 +67,8 @@ public class SuggestionAdapterTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
+    @Mock
+    private SuggestionControllerMixin mSuggestionControllerMixin;
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private SuggestionAdapter mSuggestionAdapter;
@@ -108,38 +110,38 @@ public class SuggestionAdapterTest {
 
     @Test
     public void getItemCount_shouldReturnListSize() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
-                null /* suggestionV2 */, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                mOneSuggestion, null /* suggestionV2 */, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(1);
 
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mTwoSuggestions,
-                null /* suggestionV2 */, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                mTwoSuggestions, null /* suggestionV2 */, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemCount_v2_shouldReturnListSize() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
-                mOneSuggestionV2, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                null /* suggestions */, mOneSuggestionV2, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(1);
 
-        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
-                mTwoSuggestionsV2, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                null /* suggestions */, mTwoSuggestionsV2, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemViewType_shouldReturnSuggestionTile() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
-                null /* suggestionV2 */, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                mOneSuggestion, null /* suggestionV2 */, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemViewType(0))
                 .isEqualTo(R.layout.suggestion_tile);
     }
 
     @Test
     public void getItemViewType_v2_shouldReturnSuggestionTile() {
-        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
-                mOneSuggestionV2, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                null /* suggestions */, mOneSuggestionV2, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemViewType(0))
                 .isEqualTo(R.layout.suggestion_tile);
     }
@@ -152,8 +154,8 @@ public class SuggestionAdapterTest {
                 .setTitle("123")
                 .setSummary("456")
                 .build());
-        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestions */,
-                suggestions, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                null /* suggestions */, suggestions, new ArrayList<>());
 
         assertThat(mSuggestionAdapter.getItemViewType(0))
                 .isEqualTo(R.layout.suggestion_tile_with_button);
@@ -164,8 +166,8 @@ public class SuggestionAdapterTest {
         final View view = spy(LayoutInflater.from(mContext).inflate(
                 R.layout.suggestion_tile, new LinearLayout(mContext), true));
         mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
-        mSuggestionAdapter = new SuggestionAdapter(mContext, mOneSuggestion,
-                null /* suggestionV2 */, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                mOneSuggestion, null /* suggestionV2 */, new ArrayList<>());
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
@@ -177,8 +179,8 @@ public class SuggestionAdapterTest {
         final View view = spy(LayoutInflater.from(mContext).inflate(
                 R.layout.suggestion_tile, new LinearLayout(mContext), true));
         mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
-        mSuggestionAdapter = new SuggestionAdapter(mContext, null /* suggestionV1*/,
-                mOneSuggestionV2, new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
+                null /* suggestionV1*/, mOneSuggestionV2, new ArrayList<>());
 
         // Bind twice
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -236,13 +238,14 @@ public class SuggestionAdapterTest {
     @Test
     public void onBindViewHolder_v2_itemViewShouldHandleClick()
             throws PendingIntent.CanceledException {
-        final List<Suggestion> packages = makeSuggestionsV2("pkg1");
-        setupSuggestions(mActivity, null /* suggestionV1 */, packages);
+        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        setupSuggestions(mActivity, null /* suggestionV1 */, suggestions);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.performClick();
 
-        verify(packages.get(0).getPendingIntent()).send();
+        verify(mSuggestionControllerMixin).launchSuggestion(suggestions.get(0));
+        verify(suggestions.get(0).getPendingIntent()).send();
     }
 
     @Test
@@ -285,8 +288,8 @@ public class SuggestionAdapterTest {
 
     private void setupSuggestions(Context context, List<Tile> suggestions,
             List<Suggestion> suggestionsV2) {
-        mSuggestionAdapter = new SuggestionAdapter(context, suggestions, suggestionsV2,
-                new ArrayList<>());
+        mSuggestionAdapter = new SuggestionAdapter(context, mSuggestionControllerMixin,
+                suggestions, suggestionsV2, new ArrayList<>());
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
                 mSuggestionAdapter.getItemViewType(0));

@@ -48,11 +48,13 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
     private final List<Suggestion> mSuggestionsV2;
     private final IconCache mCache;
     private final List<String> mSuggestionsShownLogged;
+    private final SuggestionControllerMixin mSuggestionControllerMixin;
 
-    public SuggestionAdapter(Context context, List<Tile> suggestions,
-            List<Suggestion> suggestionsV2,
+    public SuggestionAdapter(Context context, SuggestionControllerMixin suggestionControllerMixin,
+            List<Tile> suggestions, List<Suggestion> suggestionsV2,
             List<String> suggestionsShownLogged) {
         mContext = context;
+        mSuggestionControllerMixin = suggestionControllerMixin;
         mSuggestions = suggestions;
         mSuggestionsV2 = suggestionsV2;
         mSuggestionsShownLogged = suggestionsShownLogged;
@@ -112,6 +114,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
             mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_SETTINGS_SUGGESTION, id);
             try {
                 suggestion.getPendingIntent().send();
+                mSuggestionControllerMixin.launchSuggestion(suggestion);
             } catch (PendingIntent.CanceledException e) {
                 Log.w(TAG, "Failed to start suggestion " + suggestion.getTitle());
             }
