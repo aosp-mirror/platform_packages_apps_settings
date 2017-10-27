@@ -361,7 +361,7 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Додај отисак прста"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"закључавање екрана"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="one">Подешен је <xliff:g id="COUNT_1">%1$d</xliff:g> отисак прстију </item>
+      <item quantity="one">Подешен је <xliff:g id="COUNT_1">%1$d</xliff:g> отисак прста </item>
       <item quantity="few">Подешена су <xliff:g id="COUNT_1">%1$d</xliff:g> отиска прстију</item>
       <item quantity="other">Подешено је <xliff:g id="COUNT_1">%1$d</xliff:g> отисака прстију</item>
     </plurals>
@@ -1968,7 +1968,7 @@
     <string name="print_service_disabled" msgid="7739452396114245222">"Услуга је онемогућена"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Задаци за штампање"</string>
     <string name="print_print_job" msgid="7563741676053287211">"Задатак за штампање"</string>
-    <string name="print_restart" msgid="8373999687329384202">"Поново покрени"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Рестартуј"</string>
     <string name="print_cancel" msgid="3621199386568672235">"Откажи"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Штампа се <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
@@ -2012,8 +2012,8 @@
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Време буђења уређаја"</string>
-    <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi на време"</string>
-    <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi на време"</string>
+    <string name="wifi_on_time" msgid="3208518458663637035">"Време од укључивања Wi-Fi мреже"</string>
+    <string name="bluetooth_on_time" msgid="3056108148042308690">"Време од укључивања Wi-Fi мреже"</string>
     <string name="advanced_battery_title" msgid="2068039111517508622">"Напредна потрошња батерије"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Детаљи историје"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Потрошња батерије"</string>
@@ -2437,9 +2437,9 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Желите ли да ограничите позадинске податке?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Ова функција може да заустави апликацију која зависи од позадинских података када су доступне само мобилне мреже.\n\nАдекватније контроле за коришћење података можете да пронађете у подешавањима доступним у оквиру апликације."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ограничавање позадинских података је могуће само када будете подесили ограничење за мобилне податке."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључити аутом. синх. података?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете у налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Укључујете ауто. синхронизацију?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Све промене које унесете на налоге на вебу ће аутоматски бити копиране на таблет.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на таблету. Тако функционише Google налог."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Све промене које унесете на налоге на вебу ће аутоматски бити копиране на телефон.\n\nНеки налози могу и аутоматски да копирају на веб све промене које унесете на телефону. Тако функционише Google налог."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Искључујете ауто-синх. података?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"То ће се смањити потрошњу података и батерије, али биће потребно да ручно синхронизујете сваки налог да бисте прикупили недавне информације. Нећете примати ни обавештења када дође до ажурирања."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Датум враћања циклуса потрошње на почетне вредности"</string>
@@ -2606,10 +2606,10 @@
     <string name="user_add_user_title" msgid="2108112641783146007">"Додајете новог корисника?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Овај уређај са можете да делите другим људима ако направите још корисника. Сваки корисник има сопствени простор, који може да прилагођава помоћу апликација, позадине и тако даље. Корисници могу да прилагођавају и подешавања уређаја која утичу на свакога, попут Wi‑Fi-ја.\n\nКада додате новог корисника, та особа треба да подеси сопствени простор.\n\nСваки корисник може да ажурира апликације за све остале кориснике."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Када додате новог корисника, та особа треба да подеси сопствени простор.\n\nСваки корисник може да ажурира апликације за све остале кориснике."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Подешавате корисника одмах?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Проверите да ли је особа доступна да узме уређај и подеси свој простор"</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Подешавате корисника?"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Та особа треба да узме уређај и подеси свој простор"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Желите ли да одмах подесите профил?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Подеси одмах"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Подеси"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Не сада"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="7153048188252553320">"Само власник таблета може да управља корисницима."</string>
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Само власник телефона може да управља корисницима."</string>
@@ -3095,7 +3095,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Можете додатно да заштитите овај уређај тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме. \n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати шаблон при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Можете додатно да заштитите уређај тако што ћете га подесити да тражи лозинку пре покретања. Док се уређај не покрене, не може да прима позиве, поруке или обавештења, укључујући аларме. \n\nТо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи PIN пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Желите захтев за PIN при покретању уређаја?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати шаблон при покретању уређаја?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи шаблон пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Желите ли захтев шаблона при покретању уређаја?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Поред тога што можете да откључавате уређај отиском прста, можете додатно да га заштитите тако што ћете га подесити да тражи лозинке пре покретања. Док се уређај не покрене, не може да прима позиве, поруке нити обавештења, укључујући аларме.\n\nTо омогућава заштиту података на изгубљеним или украденим уређајима. Захтевати лозинку при покретању уређаја?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Да"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Не"</string>

@@ -361,7 +361,7 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Dodaj otisak prsta"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"zaključavanje ekrana"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="one">Podešen je <xliff:g id="COUNT_1">%1$d</xliff:g> otisak prstiju </item>
+      <item quantity="one">Podešen je <xliff:g id="COUNT_1">%1$d</xliff:g> otisak prsta </item>
       <item quantity="few">Podešena su <xliff:g id="COUNT_1">%1$d</xliff:g> otiska prstiju</item>
       <item quantity="other">Podešeno je <xliff:g id="COUNT_1">%1$d</xliff:g> otisaka prstiju</item>
     </plurals>
@@ -1968,7 +1968,7 @@
     <string name="print_service_disabled" msgid="7739452396114245222">"Usluga je onemogućena"</string>
     <string name="print_print_jobs" msgid="3582094777756968793">"Zadaci za štampanje"</string>
     <string name="print_print_job" msgid="7563741676053287211">"Zadatak za štampanje"</string>
-    <string name="print_restart" msgid="8373999687329384202">"Ponovo pokreni"</string>
+    <string name="print_restart" msgid="8373999687329384202">"Restartuj"</string>
     <string name="print_cancel" msgid="3621199386568672235">"Otkaži"</string>
     <string name="print_job_summary" msgid="8472427347192930694">"<xliff:g id="PRINTER">%1$s</xliff:g>\n<xliff:g id="TIME">%2$s</xliff:g>"</string>
     <string name="print_printing_state_title_template" msgid="5736107667714582025">"Štampa se <xliff:g id="PRINT_JOB_NAME">%1$s</xliff:g>"</string>
@@ -2012,8 +2012,8 @@
     <!-- no translation found for battery_stats_last_duration (1535831453827905957) -->
     <skip />
     <string name="awake" msgid="387122265874485088">"Vreme buđenja uređaja"</string>
-    <string name="wifi_on_time" msgid="3208518458663637035">"Wi-Fi na vreme"</string>
-    <string name="bluetooth_on_time" msgid="3056108148042308690">"Wi-Fi na vreme"</string>
+    <string name="wifi_on_time" msgid="3208518458663637035">"Vreme od uključivanja Wi-Fi mreže"</string>
+    <string name="bluetooth_on_time" msgid="3056108148042308690">"Vreme od uključivanja Wi-Fi mreže"</string>
     <string name="advanced_battery_title" msgid="2068039111517508622">"Napredna potrošnja baterije"</string>
     <string name="history_details_title" msgid="3608240585315506067">"Detalji istorije"</string>
     <string name="battery_details_title" msgid="6101394441569858580">"Potrošnja baterije"</string>
@@ -2437,9 +2437,9 @@
     <string name="data_usage_app_restrict_dialog_title" msgid="1613108390242737923">"Želite li da ograničite pozadinske podatke?"</string>
     <string name="data_usage_app_restrict_dialog" msgid="1466689968707308512">"Ova funkcija može da zaustavi aplikaciju koja zavisi od pozadinskih podataka kada su dostupne samo mobilne mreže.\n\nAdekvatnije kontrole za korišćenje podataka možete da pronađete u podešavanjima dostupnim u okviru aplikacije."</string>
     <string name="data_usage_restrict_denied_dialog" msgid="55012417305745608">"Ograničavanje pozadinskih podataka je moguće samo kada budete podesili ograničenje za mobilne podatke."</string>
-    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Uključiti autom. sinh. podataka?"</string>
-    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Sve promene koje unesete u naloge na vebu će automatski biti kopirane na tablet.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na tabletu. Tako funkcioniše Google nalog."</string>
-    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Sve promene koje unesete u naloge na vebu će automatski biti kopirane na telefon.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na telefonu. Tako funkcioniše Google nalog."</string>
+    <string name="data_usage_auto_sync_on_dialog_title" msgid="2438617846762244389">"Uključujete auto. sinhronizaciju?"</string>
+    <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="8581983093524041669">"Sve promene koje unesete na naloge na vebu će automatski biti kopirane na tablet.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na tabletu. Tako funkcioniše Google nalog."</string>
+    <string name="data_usage_auto_sync_on_dialog" product="default" msgid="8651376294887142858">"Sve promene koje unesete na naloge na vebu će automatski biti kopirane na telefon.\n\nNeki nalozi mogu i automatski da kopiraju na veb sve promene koje unesete na telefonu. Tako funkcioniše Google nalog."</string>
     <string name="data_usage_auto_sync_off_dialog_title" msgid="9013139130490125793">"Isključujete auto-sinh. podataka?"</string>
     <string name="data_usage_auto_sync_off_dialog" msgid="4025938250775413864">"To će se smanjiti potrošnju podataka i baterije, ali biće potrebno da ručno sinhronizujete svaki nalog da biste prikupili nedavne informacije. Nećete primati ni obaveštenja kada dođe do ažuriranja."</string>
     <string name="data_usage_cycle_editor_title" msgid="1373797281540188533">"Datum vraćanja ciklusa potrošnje na početne vrednosti"</string>
@@ -2606,10 +2606,10 @@
     <string name="user_add_user_title" msgid="2108112641783146007">"Dodajete novog korisnika?"</string>
     <string name="user_add_user_message_long" msgid="8562152293752222985">"Ovaj uređaj sa možete da delite drugim ljudima ako napravite još korisnika. Svaki korisnik ima sopstveni prostor, koji može da prilagođava pomoću aplikacija, pozadine i tako dalje. Korisnici mogu da prilagođavaju i podešavanja uređaja koja utiču na svakoga, poput Wi‑Fi-ja.\n\nKada dodate novog korisnika, ta osoba treba da podesi sopstveni prostor.\n\nSvaki korisnik može da ažurira aplikacije za sve ostale korisnike."</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"Kada dodate novog korisnika, ta osoba treba da podesi sopstveni prostor.\n\nSvaki korisnik može da ažurira aplikacije za sve ostale korisnike."</string>
-    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Podešavate korisnika odmah?"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Proverite da li je osoba dostupna da uzme uređaj i podesi svoj prostor"</string>
+    <string name="user_setup_dialog_title" msgid="1765794166801864563">"Podešavate korisnika?"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"Ta osoba treba da uzme uređaj i podesi svoj prostor"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"Želite li da odmah podesite profil?"</string>
-    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Podesi odmah"</string>
+    <string name="user_setup_button_setup_now" msgid="3391388430158437629">"Podesi"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"Ne sada"</string>
     <string name="user_cannot_manage_message" product="tablet" msgid="7153048188252553320">"Samo vlasnik tableta može da upravlja korisnicima."</string>
     <string name="user_cannot_manage_message" product="default" msgid="959315813089950649">"Samo vlasnik telefona može da upravlja korisnicima."</string>
@@ -3095,7 +3095,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"Možete dodatno da zaštitite ovaj uređaj tako što ćete ga podesiti da traži šablon pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati šablon pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"Možete dodatno da zaštitite uređaj tako što ćete ga podesiti da traži lozinku pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke ili obaveštenja, uključujući alarme. \n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati lozinku pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži PIN pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Želite zahtev za PIN pri pokretanju uređaja?"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži šablon pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati šablon pri pokretanju uređaja?"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži šablon pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Želite li zahtev šablona pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Pored toga što možete da otključavate uređaj otiskom prsta, možete dodatno da ga zaštitite tako što ćete ga podesiti da traži lozinke pre pokretanja. Dok se uređaj ne pokrene, ne može da prima pozive, poruke niti obaveštenja, uključujući alarme.\n\nTo omogućava zaštitu podataka na izgubljenim ili ukradenim uređajima. Zahtevati lozinku pri pokretanju uređaja?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Da"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ne"</string>

@@ -359,8 +359,8 @@
     <string name="fingerprint_add_title" msgid="1926752654454033904">"Ujjlenyomat hozzáadása"</string>
     <string name="fingerprint_enable_keyguard_toggle_title" msgid="5078060939636911795">"képernyőzár"</string>
     <plurals name="security_settings_fingerprint_preference_summary" formatted="false" msgid="624961700033979880">
-      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ujjlenyomat beállítása</item>
-      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ujjlenyomat beállítása</item>
+      <item quantity="other"><xliff:g id="COUNT_1">%1$d</xliff:g> ujjlenyomat beállítva</item>
+      <item quantity="one"><xliff:g id="COUNT_0">%1$d</xliff:g> ujjlenyomat beállítva</item>
     </plurals>
     <string name="security_settings_fingerprint_preference_summary_none" msgid="1507739327565151923"></string>
     <string name="security_settings_fingerprint_enroll_introduction_title" msgid="3201556857492526098">"Feloldás ujjlenyomattal"</string>
@@ -389,7 +389,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"Érintse meg az érzékelőt"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"Helyezze az ujját az érzékelőre, és emelje fel a rezgést követően"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"Emelje fel, majd érintse újra"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Tartsa ujját felemelve az ujjlenyomat részleteinek hozzáadásához"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"Emelgesse az ujját az ujjlenyomat részleteinek hozzáadásához"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"Ujjlenyomat hozzáadva"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"Ha ezt az ikont látja, akkor ujjlenyomata használatával azonosítsa magát vagy engedélyezze a vásárlást."</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"Később"</string>
@@ -1066,7 +1066,7 @@
     <string name="ambient_display_screen_title" msgid="4252755516328775766">"Környezeti kijelző"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Mindig be/Megnövekedett akkumulátorhasználat"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Új értesítések"</string>
-    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Mikor jelenjen meg"</string>
+    <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Mikor jelenjen meg?"</string>
     <string name="doze_title" msgid="2375510714460456687">"Új értesítések"</string>
     <string name="doze_summary" msgid="3846219936142814032">"Képernyő felébresztése értesítés érkezésekor"</string>
     <string name="doze_always_on_title" msgid="1046222370442629646">"Mindig bekapcsolva"</string>
@@ -1130,7 +1130,7 @@
     <string name="device_status_summary" product="tablet" msgid="3292717754497039686">"Az eszköz akkumulátorának és a hálózatnak az állapota, valamint egyéb információk"</string>
     <string name="device_status_summary" product="default" msgid="2599162787451519618">"Telefonszám, jel stb."</string>
     <string name="storage_settings" msgid="4211799979832404953">"Tárhely"</string>
-    <string name="storage_usb_settings" msgid="7293054033137078060">"Tárolás"</string>
+    <string name="storage_usb_settings" msgid="7293054033137078060">"Tárhely"</string>
     <string name="storage_settings_title" msgid="8746016738388094064">"Tárolóhely beállításai"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB-tár leválasztása, és az elérhető tárhely megtekintése"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD-kártya leválasztása, a rendelkezésre álló tárhely megtekintése"</string>
@@ -1341,8 +1341,8 @@
       <item quantity="one">1 fiók lesz visszaállítva</item>
     </plurals>
     <string name="master_clear_summary" msgid="6902443944660426951">"A belső tárhely és minden adat visszaállításra kerül"</string>
-    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ez minden adatot töröl a táblagép "<b>"belső tárolójáról"</b>", többek között: \n \n"<li>"Google Fiókját"</li>\n<li>"A rendszer- és alkalmazásadatokat és beállításokat"</li>" \n "<li>"A letöltött alkalmazásokat"</li></string>
-    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ez minden adatot töröl a telefon "<b>"belső tárolójáról"</b>", többek között: \n \n"<li>"Google-fiókját;"</li>\n<li>"a rendszer- és alkalmazásadatokat és beállításokat;"</li>" \n"<li>"a letöltött alkalmazásokat."</li></string>
+    <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"Ez minden adatot töröl a táblagép "<b>"belső tárhelyéről"</b>", többek között: \n \n"<li>"Google-fiókját"</li>\n<li>"A rendszer- és alkalmazásadatokat és beállításokat"</li>" \n "<li>"A letöltött alkalmazásokat"</li></string>
+    <string name="master_clear_desc" product="default" msgid="4800386183314202571">"Ez minden adatot töröl a telefon "<b>"belső tárhelyéről"</b>", többek között: \n \n"<li>"Google-fiókja"</li>\n<li>"a rendszer- és alkalmazásadatok és beállítások"</li>" \n"<li>"a letöltött alkalmazások"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"Jelenleg a következő fiókokba van bejelentkezve:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"Más felhasználók is vannak ezen az eszközön.\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"Zene"</li>\n<li>"Fotók"</li>\n<li>"Más felhasználói adatok"</li></string>
@@ -1387,7 +1387,7 @@
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"<xliff:g id="DEVICE_NAME">%1$d</xliff:g> internetkapcsolatának megosztása Bluetooth-on"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Nem köthető több mint <xliff:g id="MAXCONNECTION">%1$d</xliff:g> eszközhöz."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> megosztása meg lesz szüntetve."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"Hotspot és internetmegosztás használata annak érdekében, hogy internetet biztosítson más eszközöknek mobiladat-kapcsolat segítségével. Az alkalmazások is létrehozhatnak hotspotokat tartalom megosztására a közeli eszközökkel."</string>
+    <string name="tethering_footer_info" msgid="1308462275952345985">"Hotspot és internetmegosztást használhat annak érdekében, hogy internetet biztosítson más eszközöknek mobiladat-kapcsolat segítségével. Az alkalmazások is létrehozhatnak hotspotokat tartalom megosztására a közeli eszközökkel."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Súgó"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Mobilhálózat"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Mobil-előfizetés"</string>
@@ -1590,7 +1590,7 @@
     <string name="reset_app_preferences" msgid="1321050641018356925">"Alapbeállítások"</string>
     <string name="reset_app_preferences_title" msgid="6093179367325336662">"Visszaállítja a beállításokat?"</string>
     <string name="reset_app_preferences_desc" msgid="4822447731869201512">"Ez visszaállítja a következőkre vonatkozó összes beállítást:\n\n "<li>"Letiltott alkalmazások"</li>\n" "<li>"Letiltott alkalmazásértesítések"</li>\n" "<li>"Alapértelmezett alkalmazások adott műveletekhez"</li>\n" "<li>"Alkalmazások háttéradat-korlátozása"</li>\n" "<li>"Minden engedélykorlátozás"</li>\n\n" Az alkalmazásadatok nem vesznek el."</string>
-    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Alapbeállítások"</string>
+    <string name="reset_app_preferences_button" msgid="2559089511841281242">"Visszaállítás"</string>
     <string name="manage_space_text" msgid="8852711522447794676">"Tárhely kezelése"</string>
     <string name="filter" msgid="2018011724373033887">"Szűrő"</string>
     <string name="filter_dlg_title" msgid="8693024463731076091">"Válasszon szűrési lehetőségeket"</string>
@@ -3570,7 +3570,7 @@
     <string name="ambient_display_title" product="device" msgid="3423781975742145894">"Koppintson duplán az eszköz képernyőjének megtekintéséhez"</string>
     <string name="ambient_display_summary" msgid="525662960806416373">"Az idő, az értesítési ikonok és egyéb információk megjelenítéséhez koppintson kétszer a képernyőre."</string>
     <string name="ambient_display_suggestion_summary" msgid="5987443721392571847">"Ellenőrizze az értesítéseket, ha a képernyő ki van kapcsolva"</string>
-    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Ellenőrzés a telefon felemelésével"</string>
+    <string name="ambient_display_pickup_title" product="default" msgid="818688002837687268">"Ellenőrzés felemeléssel"</string>
     <string name="ambient_display_pickup_title" product="tablet" msgid="4455864282995698097">"Ellenőrzés a táblagép felemelésével"</string>
     <string name="ambient_display_pickup_title" product="device" msgid="5380534405773531175">"Ellenőrzés az eszköz felemelésével"</string>
     <string name="ambient_display_pickup_summary" product="default" msgid="4567020486787561873">"Az idő, az értesítési ikonok és egyéb információk megjelenítéséhez vegye a kezébe telefonját."</string>

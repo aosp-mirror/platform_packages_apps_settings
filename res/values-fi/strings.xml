@@ -694,7 +694,7 @@
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> haluaa poistaa Wi-Fin käytöstä."</string>
     <string name="nfc_quick_toggle_title" msgid="6769159366307299004">"NFC"</string>
     <string name="nfc_quick_toggle_summary" product="tablet" msgid="8302974395787498915">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
-    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
+    <string name="nfc_quick_toggle_summary" product="default" msgid="5237208142892767592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
     <string name="nfc_disclaimer_title" msgid="4364003873202264039">"NFC käyttöön"</string>
     <string name="nfc_disclaimer_content" msgid="5566907911915158075">"NFC vaihtaa tietoja tämän ja muiden lähellä olevien laitteiden tai kohteiden, esimerkiksi maksupäätteiden, syötteenlukijoiden tai interaktiivisten mainosten/tagien, kanssa."</string>
     <string name="android_beam_settings_title" msgid="7832812974600338649">"Android Beam"</string>
@@ -750,7 +750,7 @@
     <string name="wifi_menu_wps_pbc" msgid="2668564692207863017">"WPS-painike"</string>
     <string name="wifi_menu_more_options" msgid="2448097861752719396">"Lisää asetuksia"</string>
     <string name="wifi_menu_wps_pin" msgid="6426448256268695933">"WPS-PIN"</string>
-    <string name="wifi_menu_p2p" msgid="7619851399250896797">"Suora Wi-Fi-yhteys"</string>
+    <string name="wifi_menu_p2p" msgid="7619851399250896797">"Wi-Fi Direct"</string>
     <string name="wifi_menu_scan" msgid="1470911530412095868">"Etsi"</string>
     <string name="wifi_menu_advanced" msgid="7522252991919573664">"Lisäasetukset"</string>
     <string name="wifi_menu_configure" msgid="6150926852602171938">"Määritä"</string>
@@ -860,7 +860,7 @@
     <string name="wifi_dns2" msgid="1368601006824882659">"DNS 2"</string>
     <string name="wifi_gateway" msgid="163914742461092086">"Yhdyskäytävä"</string>
     <string name="wifi_network_prefix_length" msgid="3028785234245085998">"Verkon etuliitteen pituus"</string>
-    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"Suora Wi-Fi-yhteys"</string>
+    <string name="wifi_p2p_settings_title" msgid="5444461191435291082">"Wi-Fi Direct"</string>
     <string name="wifi_p2p_device_info" msgid="3191876744469364173">"Laitteen tiedot"</string>
     <string name="wifi_p2p_persist_network" msgid="1646424791818168590">"Muista tämä yhteys"</string>
     <string name="wifi_p2p_menu_search" msgid="3436429984738771974">"Etsi laitteita"</string>
@@ -1379,11 +1379,11 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Kun Data Saver on käytössä, puhelinta ei voi käyttää modeemina eikä kannettavien hotspotien käyttäminen onnistu."</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Internetin jakaminen USB:n kautta"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Jaa puhelimen internetyhteys USB:llä"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Jaa puhelimen internetyhteys USB:llä."</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Jaa tabletin internetyhteys USB:llä"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Jaettu Bluetooth-yhteys"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Jaa tabletin internetyhteys Bluetoothilla"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Jaa puhelimen internetyhteys Bluetoothilla"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Jaa puhelimen internetyhteys Bluetoothilla."</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Laitteen <xliff:g id="DEVICE_NAME">%1$d</xliff:g> internetyhteys jaetaan Bluetoothilla"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Voidaan yhdistää korkeintaan <xliff:g id="MAXCONNECTION">%1$d</xliff:g> laitteeseen."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Jaettu internetyhteys katkaistaan laitteesta <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
@@ -2683,7 +2683,7 @@
     <string name="restriction_nfc_enable_title" msgid="5888100955212267941">"NFC"</string>
     <string name="restriction_nfc_enable_summary_config" msgid="3232480757215851738">"Salli tiedonsiirto, kun <xliff:g id="DEVICE_NAME">%1$s</xliff:g> koskettaa toista NFC-laitetta"</string>
     <string name="restriction_nfc_enable_summary" product="tablet" msgid="3891097373396149915">"Salli tiedonsiirto, kun tabletti koskettaa toista laitetta"</string>
-    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta"</string>
+    <string name="restriction_nfc_enable_summary" product="default" msgid="825331120501418592">"Salli tiedonsiirto, kun puhelin koskettaa toista laitetta."</string>
     <string name="restriction_location_enable_title" msgid="5020268888245775164">"Sijainti"</string>
     <string name="restriction_location_enable_summary" msgid="3489765572281788755">"Anna sovellusten käyttää sijaintitietojasi"</string>
     <string name="wizard_back" msgid="5567007959434765743">"Edellinen"</string>
@@ -2821,7 +2821,7 @@
     <string name="vibrate_when_ringing_title" msgid="3806079144545849032">"Värinä myös puheluille"</string>
     <string name="other_sound_settings" msgid="3151004537006844718">"Muut äänet"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"Näppäimistön näppäinäänet"</string>
-    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Ruudun lukitusäänet"</string>
+    <string name="screen_locking_sounds_title" msgid="1340569241625989837">"Näytön lukitusäänet"</string>
     <string name="charging_sounds_title" msgid="1132272552057504251">"Latausäänet"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"Telakointiäänet"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"Kosketusäänet"</string>
@@ -2965,7 +2965,7 @@
     <string name="zen_mode_rule_delete_button" msgid="903658142711011617">"Poista"</string>
     <string name="zen_mode_rule_rename_button" msgid="4642843370946599164">"Nimeä uudelleen"</string>
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Säännön nimi"</string>
-    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Nimeä sääntö."</string>
+    <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Nimeä sääntö"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Säännön nimi on jo käytössä."</string>
     <string name="zen_mode_add_rule" msgid="7459154136384467057">"Lisää"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Poista sääntö"</string>
@@ -3033,9 +3033,9 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ota vain herätykset käyttöön kello <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> asti."</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Salli keskeytykset aina."</string>
-    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Estä, kun näyttö on päällä."</string>
+    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Estä, kun näyttö on päällä"</string>
     <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Estä Älä häiritse ‑tilan hiljentämiä ilmoituksia kurkistamasta tai näkymästä näytöllä."</string>
-    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Estä, kun näyttö on pois päältä."</string>
+    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Estä, kun näyttö on pois päältä"</string>
     <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Estä Älä häiritse ‑tilan hiljentämiä ilmoituksia käynnistämästä näyttöä tai vilkuttamasta ilmoitusvaloa."</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Estä Älä häiritse ‑tilan hiljentämiä ilmoituksia käynnistämästä näyttöä."</string>
     <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Pois käytöstä"</string>
