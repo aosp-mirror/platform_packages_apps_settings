@@ -44,13 +44,14 @@
             android:title="@string/display_category_title">
 
         <Preference
-                android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-                android:key="font_size_preference_screen"
-                android:title="@string/title_font_size"/>
+            android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+            android:key="font_size_preference_screen"
+            android:title="@string/title_font_size" />
 
         <com.android.settings.display.ScreenZoomPreference
-                android:key="screen_zoom"
-                android:title="@string/screen_zoom_title"/>
+            android:key="accessibility_settings_screen_zoom"
+            android:fragment="com.android.settings.display.ScreenZoomSettings"
+            android:title="@string/screen_zoom_title" />
 
         <Preference
             android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"

@@ -78,8 +78,9 @@
         settings:keywords="@string/keywords_display_font_size" />
 
     <com.android.settings.display.ScreenZoomPreference
-        android:key="screen_zoom"
+        android:key="display_settings_screen_zoom"
         android:title="@string/screen_zoom_title"
+        android:fragment="com.android.settings.display.ScreenZoomSettings"
         settings:keywords="@string/screen_zoom_keywords" />
 
     <Preference

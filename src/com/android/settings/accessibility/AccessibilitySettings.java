@@ -46,7 +46,6 @@ import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
 import com.android.internal.view.RotationPolicy.RotationPolicyListener;
-import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -81,8 +80,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_DOWNLOADED_SERVICES = "user_installed_services_category";
 
     private static final String[] CATEGORIES = new String[] {
-        CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
-        CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
+            CATEGORY_SCREEN_READER, CATEGORY_AUDIO_AND_CAPTIONS, CATEGORY_DISPLAY,
+            CATEGORY_INTERACTION_CONTROL, CATEGORY_EXPERIMENTAL, CATEGORY_DOWNLOADED_SERVICES
     };
 
     // Preferences
@@ -219,7 +218,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
      * on non-accelerated platforms due to the performance implications.
      *
      * @param context The current context
-     * @return
      */
     public static boolean isColorTransformAccelerated(Context context) {
         return context.getResources()
@@ -734,27 +732,29 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
 
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-               boolean enabled) {
-            List<SearchIndexableResource> indexables = new ArrayList<>();
-            SearchIndexableResource indexable = new SearchIndexableResource(context);
-            indexable.xmlResId = R.xml.accessibility_settings;
-            indexables.add(indexable);
-            return indexables;
-        }
+                public static final String KEY_DISPLAY_SIZE = "accessibility_settings_screen_zoom";
 
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            List<String> keys = super.getNonIndexableKeys(context);
-            // Duplicates in Display
-            keys.add(FONT_SIZE_PREFERENCE_SCREEN);
-            keys.add(DisplaySettings.KEY_DISPLAY_SIZE);
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    List<SearchIndexableResource> indexables = new ArrayList<>();
+                    SearchIndexableResource indexable = new SearchIndexableResource(context);
+                    indexable.xmlResId = R.xml.accessibility_settings;
+                    indexables.add(indexable);
+                    return indexables;
+                }
 
-            // Duplicates in Language & Input
-            keys.add(TTS_SETTINGS_PREFERENCE);
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    // Duplicates in Display
+                    keys.add(FONT_SIZE_PREFERENCE_SCREEN);
+                    keys.add(KEY_DISPLAY_SIZE);
 
-            return keys;
-        }
-    };
+                    // Duplicates in Language & Input
+                    keys.add(TTS_SETTINGS_PREFERENCE);
+
+                    return keys;
+                }
+            };
 }

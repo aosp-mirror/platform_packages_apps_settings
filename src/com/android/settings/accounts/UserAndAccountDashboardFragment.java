@@ -38,6 +38,7 @@ import java.util.List;
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "UserAndAccountDashboard";
+    private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
 
     @Override
     public int getMetricsCategory() {
@@ -64,7 +65,8 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyInfoPreferenceController(context));
         AddUserWhenLockedPreferenceController addUserWhenLockedPrefController =
-                new AddUserWhenLockedPreferenceController(context);
+                new AddUserWhenLockedPreferenceController(
+                        context, KEY_ADD_USER_WHEN_LOCKED);
         controllers.add(addUserWhenLockedPrefController);
         getLifecycle().addObserver(addUserWhenLockedPrefController);
         controllers.add(new AutoSyncDataPreferenceController(context, this));
@@ -94,7 +96,7 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
                 UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
                         UserHandle.myUserId());
                 mSummaryLoader.setSummary(this,
-                    mContext.getString(R.string.users_and_accounts_summary, info.name));
+                        mContext.getString(R.string.users_and_accounts_summary, info.name));
             }
         }
     }

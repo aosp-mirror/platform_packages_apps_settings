@@ -31,14 +31,13 @@ public class AddUserWhenLockedPreferenceController extends AbstractPreferenceCon
         implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
         LifecycleObserver, OnPause, OnResume {
 
-    private static final String KEY_ADD_USER_WHEN_LOCKED = "add_users_when_locked";
-
-    private RestrictedSwitchPreference mAddUserWhenLocked;
-    private UserCapabilities mUserCaps;
+    private final String mPrefKey;
+    private final UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList;
 
-    public AddUserWhenLockedPreferenceController(Context context) {
+    public AddUserWhenLockedPreferenceController(Context context, String key) {
         super(context);
+        mPrefKey = key;
         mUserCaps = UserCapabilities.create(context);
     }
 
@@ -80,6 +79,6 @@ public class AddUserWhenLockedPreferenceController extends AbstractPreferenceCon
 
     @Override
     public String getPreferenceKey() {
-        return KEY_ADD_USER_WHEN_LOCKED;
+        return mPrefKey;
     }
 }
