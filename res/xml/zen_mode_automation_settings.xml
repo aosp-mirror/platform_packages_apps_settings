@@ -19,5 +19,15 @@
                   android:key="zen_mode_automation_settings_page"
                   android:title="@string/zen_mode_automation_settings_page_title" >
 
-    <!-- Rules added at runtime -->
+
+    <PreferenceCategory
+        android:key="zen_mode_automatic_rules">
+        <!-- Rules added at runtime -->
+    </PreferenceCategory>
+
+    <Preference
+        android:key="zen_mode_add_automatic_rule"
+        android:icon="@drawable/ic_menu_add"
+        android:title="@string/zen_mode_add_rule"/>
+
 </PreferenceScreen>

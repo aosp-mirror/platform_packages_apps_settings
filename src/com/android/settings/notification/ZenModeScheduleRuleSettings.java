@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -40,10 +39,12 @@ import android.widget.TimePicker;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     private static final String KEY_DAYS = "days";
@@ -71,6 +72,16 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_mode_schedule_rule_settings;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return null;
+    }
+
+    @Override
     protected String getZenModeDependency() {
         return mDays.getKey();
     }
@@ -82,7 +93,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
     @Override
     protected void onCreateInternal() {
-        addPreferencesFromResource(R.xml.zen_mode_schedule_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
         mDays = root.findPreference(KEY_DAYS);
@@ -306,5 +316,4 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
             boolean onSetTime(int hour, int minute);
         }
     }
-
 }

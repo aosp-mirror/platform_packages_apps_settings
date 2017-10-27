@@ -69,6 +69,8 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
+import com.android.settings.notification.ZenModeEventRuleSettings;
+import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.EncryptionAndCredential;
@@ -168,6 +170,8 @@ public final class SearchIndexableResources {
         addIndex(LockscreenDashboardFragment.class);
         addIndex(ZenModeBehaviorSettings.class);
         addIndex(ZenModeAutomationSettings.class);
+        addIndex(ZenModeEventRuleSettings.class);
+        addIndex(ZenModeScheduleRuleSettings.class);
     }
 
     private SearchIndexableResources() {

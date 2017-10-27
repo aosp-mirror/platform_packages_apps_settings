@@ -33,6 +33,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -81,6 +82,16 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         mCreate = false;
     }
 
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_mode_event_rule_settings;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return null;
+    }
+
     private void reloadCalendar() {
         mCalendars = getCalendars(mContext);
         ArrayList<CharSequence> entries = new ArrayList<>();
@@ -107,7 +118,6 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     protected void onCreateInternal() {
         mCreate = true;
-        addPreferencesFromResource(R.xml.zen_mode_event_rule_settings);
         final PreferenceScreen root = getPreferenceScreen();
 
         mCalendar = (DropDownPreference) root.findPreference(KEY_CALENDAR);
@@ -243,5 +253,4 @@ public class ZenModeEventRuleSettings extends ZenModeRuleSettingsBase {
         public String name;
         public int userId;
     }
-
 }
