@@ -37,6 +37,8 @@ import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SimStatusDualSimPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceControllerV2;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -125,7 +127,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             // Phone number
 
-            // SIM status
+            controllers.add(new SimStatusPreferenceControllerV2(context, fragment));
+
+            controllers.add(new SimStatusDualSimPreferenceController(context, fragment));
 
             controllers.add(new DeviceModelPreferenceController(context, fragment));
 
