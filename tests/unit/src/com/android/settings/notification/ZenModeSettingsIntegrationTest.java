@@ -1,4 +1,4 @@
-package com.android.settings.notification;
+package com.android.settings;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -36,16 +36,47 @@ public class ZenModeSettingsIntegrationTest {
     }
 
     @Test
-    public void testAutomaticRulesAppear() {
+    public void testZenModeSettingsPreferences() {
         launchZenSettings();
-        onView(withText("Automatic rules")).check(matches(isDisplayed()));
+        onView(withText("Behavior")).check(matches(isDisplayed()));
+        onView(withText("Turn on automatically")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testZenModeBehaviorPreferences() {
+        launchZenBehaviorSettings();
+        onView(withText("Alarms")).check(matches(isDisplayed()));
+        onView(withText("Media and system feedback")).check(matches(isDisplayed()));
+        onView(withText("Reminders")).check(matches(isDisplayed()));
+        onView(withText("Events")).check(matches(isDisplayed()));
+        onView(withText("Messages")).check(matches(isDisplayed()));
+        onView(withText("Calls")).check(matches(isDisplayed()));
+        onView(withText("Repeat callers")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testZenModeAutomationPreferences() {
+        launchZenAutomationSettings();
         onView(withText("Weekend")).check(matches(isDisplayed()));
-        onView(withText("Add more")).check(matches(isDisplayed())).perform(click());
-        onView(withText("Choose rule type")).check(matches(isDisplayed()));
+        onView(withText("Add rule")).check(matches(isDisplayed()));
     }
 
     private void launchZenSettings() {
         Intent settingsIntent = new Intent(Settings.ACTION_ZEN_MODE_SETTINGS)
+                .setPackage(mContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(settingsIntent);
+    }
+
+    private void launchZenAutomationSettings() {
+        Intent settingsIntent = new Intent(Settings.ACTION_ZEN_MODE_AUTOMATION_SETTINGS)
+                .setPackage(mContext.getPackageName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(settingsIntent);
+    }
+
+    private void launchZenBehaviorSettings() {
+        Intent settingsIntent = new Intent(Settings.ACTION_ZEN_MODE_PRIORITY_SETTINGS)
                 .setPackage(mContext.getPackageName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(settingsIntent);

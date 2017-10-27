@@ -17,21 +17,16 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:key="zen_mode_settings"
-    android:title="@string/zen_mode_settings_title" >
+    android:title="@string/zen_mode_settings_title">
 
     <Preference
             android:key="zen_mode_behavior_settings"
             android:title="@string/zen_mode_behavior_settings_title"
             android:fragment="com.android.settings.notification.ZenModeBehaviorSettings" />
 
-    <!-- Visual interruptions -->
-    <Preference
-            android:key="zen_mode_visual_interruptions_settings"
-            android:title="@string/zen_mode_visual_interruptions_settings_title"
-            android:fragment="com.android.settings.notification.ZenModeVisualInterruptionSettings" />
-
     <!-- Automatic rules -->
-    <PreferenceCategory
-        android:key="zen_mode_automatic_rules"
-        android:title="@string/zen_mode_automation_settings_title" />
+    <Preference
+        android:key="zen_mode_automation_settings"
+        android:title="@string/zen_mode_automation_settings_title"
+        android:fragment="com.android.settings.notification.ZenModeAutomationSettings" />
 </PreferenceScreen>
