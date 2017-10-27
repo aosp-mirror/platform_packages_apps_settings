@@ -26,7 +26,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
-import com.android.settings.search.SearchIndexableResources;
 
 import java.text.Normalizer;
 import java.util.Locale;
@@ -294,9 +293,7 @@ public class IndexData {
 
             boolean isEmptyIntentAction = TextUtils.isEmpty(mIntentAction);
             // No intent action is set, or the intent action is for a subsetting.
-            if (isEmptyIntentAction
-                    || TextUtils.equals(mIntentTargetPackage,
-                    SearchIndexableResources.SUBSETTING_TARGET_PACKAGE)) {
+            if (isEmptyIntentAction) {
                 // Action is null, we will launch it as a sub-setting
                 intent = DatabaseIndexingUtils.buildSearchResultPageIntent(context, mClassName,
                         mKey, mScreenTitle);

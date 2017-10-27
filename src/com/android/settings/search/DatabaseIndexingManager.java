@@ -18,20 +18,18 @@
 package com.android.settings.search;
 
 import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ID;
-import static com.android.settings.search.DatabaseResultLoader
-        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
-        .DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ICON;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_ACTION;
@@ -53,14 +51,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesContract;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
-
 import com.android.settings.search.indexing.IndexData;
 import com.android.settings.search.indexing.IndexDataConverter;
 import com.android.settings.search.indexing.PreIndexData;
@@ -363,36 +359,6 @@ public class DatabaseIndexingManager {
             }
         }
         disabledResults.close();
-    }
-
-    /**
-     * TODO (b/64951285): Deprecate this method
-     *
-     * Update the Index for a specific class name resources
-     *
-     * @param className              the class name (typically a fragment name).
-     * @param includeInSearchResults true means that you want the bit "enabled" set so that the
-     *                               data will be seen included into the search results
-     */
-    public void updateFromClassNameResource(String className, boolean includeInSearchResults) {
-        if (className == null) {
-            throw new IllegalArgumentException("class name cannot be null!");
-        }
-        final SearchIndexableResource res = SearchIndexableResources.getResourceByName(className);
-        if (res == null) {
-            Log.e(LOG_TAG, "Cannot find SearchIndexableResources for class name: " + className);
-            return;
-        }
-        res.context = mContext;
-        res.enabled = includeInSearchResults;
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-//                addIndexableData(res);
-//                updateDatabase(false, Locale.getDefault().toString());
-//                res.enabled = false;
-            }
-        });
     }
 
     private SQLiteDatabase getWritableDatabase() {

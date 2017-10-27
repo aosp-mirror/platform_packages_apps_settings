@@ -14,21 +14,21 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="print_settings_screen"
+    android:title="@string/print_settings_title"
+    settings:keywords="@string/keywords_printing">
+
+    <PreferenceCategory
+        android:key="print_jobs_category"
+        android:title="@string/print_print_jobs"
+        android:order="0" />
+
+    <PreferenceCategory
+        android:key="print_services_category"
         android:title="@string/print_settings_title"
-        settings:keywords="@string/keywords_printing">
-
-    <PreferenceCategory
-            android:key="print_jobs_category"
-            android:title="@string/print_print_jobs"
-            android:order="0">
-    </PreferenceCategory>
-
-    <PreferenceCategory
-            android:key="print_services_category"
-            android:title="@string/print_settings_title"
-            android:order="1">
-    </PreferenceCategory>
+        android:order="1" />
 
 </PreferenceScreen>

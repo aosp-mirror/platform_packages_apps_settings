@@ -16,11 +16,13 @@
   -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/ambient_display_screen_title">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="ambient_display_preference_screen"
+    android:title="@string/ambient_display_screen_title">
 
     <PreferenceCategory
-            android:title="@string/ambient_display_category_triggers">
+        android:key="ambient_display_category_when_to_show"
+        android:title="@string/ambient_display_category_triggers">
 
         <SwitchPreference
             android:key="ambient_display_always_on"
@@ -39,7 +41,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="ambient_display_category_notification">
 
         <SwitchPreference
             android:key="ambient_display_notification"

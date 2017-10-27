@@ -54,7 +54,6 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
@@ -346,8 +345,6 @@ public class AccountPreferenceController extends AbstractPreferenceController
                 DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
         }
         mProfiles.put(userInfo.id, profileData);
-        new SearchFeatureProviderImpl().getIndexingManager(mContext).updateFromClassNameResource(
-                UserAndAccountDashboardFragment.class.getName(), true /* includeInSearchResults */);
     }
 
     private DimmableIconPreference newAddAccountPreference(Context context) {

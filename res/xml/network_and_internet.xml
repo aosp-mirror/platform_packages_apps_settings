@@ -17,6 +17,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="network_and_internet_screen"
     android:title="@string/network_dashboard_title">
 
     <com.android.settings.widget.MasterSwitchPreference
@@ -28,7 +29,7 @@
         android:order="-30">
         <intent
             android:action="android.settings.WIFI_SETTINGS"
-            android:targetClass="Settings$WifiSettingsActivity"/>
+            android:targetClass="Settings$WifiSettingsActivity" />
     </com.android.settings.widget.MasterSwitchPreference>
 
     <com.android.settingslib.RestrictedPreference
@@ -44,7 +45,7 @@
         <intent
             android:action="android.intent.action.MAIN"
             android:targetPackage="com.android.phone"
-            android:targetClass="com.android.phone.MobileNetworkSettings"/>
+            android:targetClass="com.android.phone.MobileNetworkSettings" />
     </com.android.settingslib.RestrictedPreference>
 
     <com.android.settingslib.RestrictedPreference
@@ -55,7 +56,7 @@
         android:order="-5"
         android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_tethering"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.vpn2.VpnSettings"
@@ -65,25 +66,25 @@
         android:order="0"
         android:summary="@string/summary_placeholder"
         settings:userRestriction="no_config_vpn"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="manage_mobile_plan"
         android:title="@string/manage_mobile_plan_title"
         android:persistent="false"
         settings:userRestriction="no_config_mobile_networks"
-        settings:useAdminDisabledSummary="true"/>
+        settings:useAdminDisabledSummary="true" />
 
     <SwitchPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
-        android:order="5"/>
+        android:order="5" />
 
     <Preference
         android:fragment="com.android.settings.ProxySelector"
         android:key="proxy_settings"
-        android:title="@string/proxy_settings_title"/>
+        android:title="@string/proxy_settings_title" />
 
 </PreferenceScreen>
