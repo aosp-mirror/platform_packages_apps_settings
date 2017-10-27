@@ -54,7 +54,9 @@ public class SettingsShadowResources extends ShadowResources {
     private static SparseArray<Object> sResourceOverrides = new SparseArray<>();
 
     public static void overrideResource(int id, Object value) {
-        sResourceOverrides.put(id, value);
+        synchronized (sResourceOverrides) {
+            sResourceOverrides.put(id, value);
+        }
     }
 
     public static void overrideResource(String name, Object value) {
@@ -67,7 +69,9 @@ public class SettingsShadowResources extends ShadowResources {
     }
 
     public static void reset() {
-        sResourceOverrides.clear();
+        synchronized (sResourceOverrides) {
+            sResourceOverrides.clear();
+        }
     }
 
     @Implementation
@@ -129,7 +133,10 @@ public class SettingsShadowResources extends ShadowResources {
 
     @Implementation
     public String getString(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof String) {
             return (String) override;
         }
@@ -139,7 +146,10 @@ public class SettingsShadowResources extends ShadowResources {
 
     @Implementation
     public int getInteger(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof Integer) {
             return (Integer) override;
         }
@@ -149,7 +159,10 @@ public class SettingsShadowResources extends ShadowResources {
 
     @Implementation
     public boolean getBoolean(int id) {
-        final Object override = sResourceOverrides.get(id);
+        final Object override;
+        synchronized (sResourceOverrides) {
+            override = sResourceOverrides.get(id);
+        }
         if (override instanceof Boolean) {
             return (boolean) override;
         }
@@ -163,59 +176,70 @@ public class SettingsShadowResources extends ShadowResources {
         @RealObject
         Theme realTheme;
 
+        private ShadowAssetManager mAssetManager = shadowOf(
+                RuntimeEnvironment.application.getAssets());
+
         @Implementation
         public TypedArray obtainStyledAttributes(
                 AttributeSet set, int[] attrs, int defStyleAttr, int defStyleRes) {
             // Replace all private string references with a placeholder.
             if (set != null) {
-                for (int i = 0; i < set.getAttributeCount(); ++i) {
-                    String attributeValue = set.getAttributeValue(i);
-                    Node node = ReflectionHelpers.callInstanceMethod(
-                            XmlResourceParserImpl.class, set, "getAttributeAt",
-                            ReflectionHelpers.ClassParameter.from(int.class, i));
-                    if (attributeValue.contains("attr/fingerprint_layout_theme")) {
-                        // Workaround for https://github.com/robolectric/robolectric/issues/2641
-                        node.setNodeValue("@style/FingerprintLayoutTheme");
-                    } else if (attributeValue.startsWith("@*android:string")) {
-                        node.setNodeValue("PLACEHOLDER");
+                synchronized (set) {
+                    for (int i = 0; i < set.getAttributeCount(); ++i) {
+                        final String attributeValue = set.getAttributeValue(i);
+                        final Node node = ReflectionHelpers.callInstanceMethod(
+                                XmlResourceParserImpl.class, set, "getAttributeAt",
+                                ReflectionHelpers.ClassParameter.from(int.class, i));
+                        if (attributeValue.contains("attr/fingerprint_layout_theme")) {
+                            // Workaround for https://github.com/robolectric/robolectric/issues/2641
+                            node.setNodeValue("@style/FingerprintLayoutTheme");
+                        } else if (attributeValue.startsWith("@*android:string")) {
+                            node.setNodeValue("PLACEHOLDER");
+                        }
                     }
                 }
             }
 
             // Track down all styles and remove all inheritance from private styles.
-            ShadowAssetManager assetManager = shadowOf(RuntimeEnvironment.application.getAssets());
-            Map<Long, Object /* NativeTheme */> appliedStylesList =
-                    ReflectionHelpers.getField(assetManager, "nativeThemes");
-            for (Long idx : appliedStylesList.keySet()) {
-                ThemeStyleSet appliedStyles = ReflectionHelpers.getField(
-                        appliedStylesList.get(idx), "themeStyleSet");
-                // The Object's below are actually ShadowAssetManager.OverlayedStyle. We can't use
-                // it here because it's private.
-                List<Object /* OverlayedStyle */> overlayedStyles =
-                        ReflectionHelpers.getField(appliedStyles, "styles");
-                for (Object appliedStyle : overlayedStyles) {
-                    StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle, "style");
-                    List<StyleData> styleDatas =
-                            ReflectionHelpers.getField(styleResolver, "styles");
-                    for (StyleData styleData : styleDatas) {
-                        if (styleData.getParent() != null &&
-                                styleData.getParent().startsWith("@*android:style")) {
-                            ReflectionHelpers.setField(StyleData.class, styleData, "parent", null);
+            final Map<Long, Object /* NativeTheme */> appliedStylesList =
+                    ReflectionHelpers.getField(mAssetManager, "nativeThemes");
+            synchronized (appliedStylesList) {
+                for (Long idx : appliedStylesList.keySet()) {
+                    final ThemeStyleSet appliedStyles = ReflectionHelpers.getField(
+                            appliedStylesList.get(idx), "themeStyleSet");
+                    // The Object's below are actually ShadowAssetManager.OverlayedStyle.
+                    // We can't use
+
+                    // it here because it's private.
+                    final List<Object /* OverlayedStyle */> overlayedStyles =
+                            ReflectionHelpers.getField(appliedStyles, "styles");
+                    for (Object appliedStyle : overlayedStyles) {
+                        final StyleResolver styleResolver = ReflectionHelpers.getField(appliedStyle,
+                                "style");
+                        final List<StyleData> styleDatas =
+                                ReflectionHelpers.getField(styleResolver, "styles");
+                        for (StyleData styleData : styleDatas) {
+                            if (styleData.getParent() != null &&
+                                    styleData.getParent().startsWith("@*android:style")) {
+                                ReflectionHelpers.setField(StyleData.class, styleData, "parent",
+                                        null);
+                            }
                         }
                     }
-                }
 
+                }
             }
             return super.obtainStyledAttributes(set, attrs, defStyleAttr, defStyleRes);
         }
 
         @Implementation
-        public boolean resolveAttribute(int resid, TypedValue outValue, boolean resolveRefs) {
+        public synchronized boolean resolveAttribute(int resid, TypedValue outValue,
+                boolean resolveRefs) {
             // The real Resources instance in Robolectric tests somehow fails to find the
             // preferenceTheme attribute in the layout. Let's do it ourselves.
             if (getResources().getResourceName(resid)
                     .equals("com.android.settings:attr/preferenceTheme")) {
-                int preferenceThemeResId =
+                final int preferenceThemeResId =
                         getResources().getIdentifier(
                                 "PreferenceTheme", "style", "com.android.settings");
                 outValue.type = TYPE_REFERENCE;
