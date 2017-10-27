@@ -19,7 +19,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="language_and_input_settings_screen"
-    android:title="@string/language_settings" >
+    android:title="@string/language_settings"
+    settings:initialExpandedChildrenCount="3" >
 
     <Preference
         android:key="phone_language"

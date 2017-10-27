@@ -17,7 +17,6 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
 import com.android.settingslib.drawer.DashboardCategory;
@@ -78,12 +77,6 @@ public interface DashboardFeatureProvider {
      */
     void bindPreferenceToTile(Activity activity, int sourceMetricsCategory, Preference pref,
             Tile tile, String key, int baseOrder);
-
-    /**
-     * Returns a {@link ProgressiveDisclosureMixin} for specified fragment.
-     */
-    ProgressiveDisclosureMixin getProgressiveDisclosureMixin(Context context,
-            DashboardFragment fragment, Bundle args);
 
     /**
      * Returns additional intent filter action for dashboard tiles

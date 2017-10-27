@@ -16,8 +16,10 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="system_dashboard_screen"
-    android:title="@string/header_category_system">
+    android:title="@string/header_category_system"
+    settings:initialExpandedChildrenCount="4">
 
     <Preference
         android:key="gesture_settings"

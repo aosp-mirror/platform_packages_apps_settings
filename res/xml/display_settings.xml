@@ -19,7 +19,8 @@
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="display_settings_screen"
     android:title="@string/display_settings"
-    settings:keywords="@string/keywords_display">
+    settings:keywords="@string/keywords_display"
+    settings:initialExpandedChildrenCount="4">
 
     <Preference
         android:key="brightness"
