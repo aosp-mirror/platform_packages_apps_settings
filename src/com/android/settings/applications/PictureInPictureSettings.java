@@ -38,6 +38,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.widget.AppPreference;
 import com.android.settings.wrapper.ActivityInfoWrapper;
 import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -176,7 +177,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
             final String packageName = appInfo.packageName;
             final CharSequence label = appInfo.loadLabel(pm);
 
-            final Preference pref = new Preference(prefContext);
+            final Preference pref = new AppPreference(prefContext);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appInfo, userId));
             pref.setTitle(pm.getUserBadgedLabel(label, user));
             pref.setSummary(PictureInPictureDetails.getPreferenceSummary(prefContext,

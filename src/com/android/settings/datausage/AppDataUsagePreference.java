@@ -15,19 +15,18 @@
 package com.android.settings.datausage;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.android.settings.R;
+import com.android.settings.widget.AppPreference;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
-public class AppDataUsagePreference extends Preference {
+public class AppDataUsagePreference extends AppPreference {
 
     private final AppItem mItem;
     private final int mPercent;
@@ -38,8 +37,6 @@ public class AppDataUsagePreference extends Preference {
         super(context);
         mItem = item;
         mPercent = percent;
-        setLayoutResource(R.layout.preference_app);
-        setWidgetLayoutResource(R.layout.widget_progress_bar);
 
         if (item.restricted && item.total <= 0) {
             setSummary(com.android.settings.R.string.data_usage_app_restricted);
@@ -60,7 +57,6 @@ public class AppDataUsagePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
-
         final ProgressBar progress = (ProgressBar) holder.findViewById(
                 android.R.id.progress);
 

@@ -16,6 +16,16 @@
 
 package com.android.settings.enterprise;
 
+import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
@@ -23,10 +33,10 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,16 +52,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -120,7 +120,7 @@ public class ApplicationListPreferenceControllerTest {
             implements ApplicationListPreferenceController.ApplicationListBuilder {
         @Override
         public void buildApplicationList(Context context,
-                                         ApplicationFeatureProvider.ListOfAppsCallback callback) {
+                ApplicationFeatureProvider.ListOfAppsCallback callback) {
             final List<UserAppInfo> apps = new ArrayList<>();
             final UserInfo user = new UserInfo(MAIN_USER_ID, "main", UserInfo.FLAG_ADMIN);
             apps.add(new UserAppInfo(user, buildInfo(MAIN_USER_APP_UID, APP_1, 0, 0)));

@@ -43,9 +43,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -205,7 +205,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     static class ViewHolder {
         ImageView icon;
         TextView name;
-        CheckBox checkbox;
+        Switch checkbox;
         TextView description;
     }
 
@@ -291,10 +291,10 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
         private View newDeviceAdminView(ViewGroup parent) {
             View v = mInflater.inflate(R.layout.device_admin_item, parent, false);
             ViewHolder h = new ViewHolder();
-            h.icon = (ImageView) v.findViewById(R.id.icon);
-            h.name = (TextView) v.findViewById(R.id.name);
-            h.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
-            h.description = (TextView) v.findViewById(R.id.description);
+            h.icon = v.findViewById(R.id.icon);
+            h.name = v.findViewById(R.id.name);
+            h.checkbox =  v.findViewById(R.id.checkbox);
+            h.description = v.findViewById(R.id.description);
             v.setTag(h);
             return v;
         }

@@ -21,8 +21,8 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.VisibleForTesting;
-import android.support.annotation.XmlRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -135,7 +135,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
 
-        final int customLayoutResId = getRadioButtomPreferenceCustomLayoutResId();
+        final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
             final RadioButtonPreference nonePref = new RadioButtonPreference(getPrefContext());
             if (customLayoutResId > 0) {
@@ -218,8 +218,8 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     /**
      * Provides a custom layout for each candidate row.
      */
-    @XmlRes
-    protected int getRadioButtomPreferenceCustomLayoutResId() {
+    @LayoutRes
+    protected int getRadioButtonPreferenceCustomLayoutResId() {
         return 0;
     }
 

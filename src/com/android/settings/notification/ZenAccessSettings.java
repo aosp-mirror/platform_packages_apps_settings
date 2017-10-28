@@ -51,6 +51,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.AppSwitchPreference;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -138,7 +139,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
         for (ApplicationInfo app : apps) {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
-            final SwitchPreference pref = new SwitchPreference(getPrefContext());
+            final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);

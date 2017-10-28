@@ -38,13 +38,14 @@
             android:id="@android:id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            settings:maxWidth="24dp"
-            settings:maxHeight="24dp" />
+            settings:maxWidth="@dimen/secondary_app_icon_size"
+            settings:maxHeight="@dimen/secondary_app_icon_size" />
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:paddingTop="16dp"
         android:paddingBottom="16dp">
@@ -60,15 +61,14 @@
         <LinearLayout
             android:id="@+id/summary_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
             <TextView android:id="@android:id/summary"
                       android:layout_width="0dp"
                       android:layout_height="wrap_content"
                       android:layout_weight="1"
                       android:textAppearance="@style/TextAppearance.Small"
-                      android:textColor="?android:attr/textColorSecondary"
-                      android:maxLines="1"
-                      android:ellipsize="end" />
+                      android:textColor="?android:attr/textColorSecondary" />
 
             <TextView android:id="@+id/appendix"
                       android:layout_width="wrap_content"
@@ -78,9 +78,22 @@
                       android:maxLines="1"
                       android:ellipsize="end" />
         </LinearLayout>
-        <FrameLayout
-            android:id="@android:id/widget_frame"
+        <ProgressBar
+            android:id="@android:id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:max="100"
+            android:visibility="gone" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="end|center_vertical"
+        android:paddingStart="16dp"
+        android:orientation="vertical" />
+
 </LinearLayout>

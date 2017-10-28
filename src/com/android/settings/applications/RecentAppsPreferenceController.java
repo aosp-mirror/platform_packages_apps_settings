@@ -40,6 +40,7 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.AppPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -230,8 +231,7 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
             boolean rebindPref = true;
             Preference pref = appPreferences.remove(pkgName);
             if (pref == null) {
-                pref = new Preference(prefContext);
-                pref.setLayoutResource(R.layout.preference_app);
+                pref = new AppPreference(prefContext);
                 rebindPref = false;
             }
             pref.setKey(pkgName);

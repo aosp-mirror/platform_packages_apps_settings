@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.widget;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ProgressBar;
 
-public class AppProgressPreference extends Preference {
+import com.android.settings.R;
+
+public class AppPreference extends Preference {
 
     private int mProgress;
+    private boolean mProgressVisible;
 
-    public AppProgressPreference(Context context, AttributeSet attrs) {
+    public AppPreference(Context context) {
+        super(context);
+        setLayoutResource(R.layout.preference_app);
+    }
+
+    public AppPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayoutResource(R.layout.preference_app);
-        setWidgetLayoutResource(R.layout.widget_progress_bar);
     }
 
     public void setProgress(int amount) {
         mProgress = amount;
+        mProgressVisible = true;
         notifyChanged();
     }
 
@@ -40,7 +50,14 @@ public class AppProgressPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
 
+        view.findViewById(R.id.summary_container)
+                .setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
         final ProgressBar progress = (ProgressBar) view.findViewById(android.R.id.progress);
-        progress.setProgress(mProgress);
+        if (mProgressVisible) {
+            progress.setProgress(mProgress);
+            progress.setVisibility(View.VISIBLE);
+        } else {
+            progress.setVisibility(View.GONE);
+        }
     }
 }
