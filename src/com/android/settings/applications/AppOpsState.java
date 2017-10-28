@@ -50,8 +50,6 @@ public class AppOpsState {
     final CharSequence[] mOpSummaries;
     final CharSequence[] mOpLabels;
 
-    List<AppOpEntry> mApps;
-
     public AppOpsState(Context context) {
         mContext = context;
         mAppOps = (AppOpsManager)context.getSystemService(Context.APP_OPS_SERVICE);
