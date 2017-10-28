@@ -21,7 +21,6 @@ import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Loader;
-import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Bundle;
@@ -531,17 +530,10 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     private void refreshAppListGroup() {
-        final Context context = getContext();
         final PowerProfile powerProfile = mStatsHelper.getPowerProfile();
         final BatteryStats stats = mStatsHelper.getStats();
         final double averagePower = powerProfile.getAveragePower(PowerProfile.POWER_SCREEN_FULL);
         boolean addedSome = false;
-
-        TypedArray array = context.obtainStyledAttributes(
-                new int[]{android.R.attr.colorControlNormal});
-        final int colorControl = array.getColor(0, 0);
-        array.recycle();
-
         final int dischargeAmount = USE_FAKE_DATA ? 5000
                 : stats != null ? stats.getDischargeAmount(mStatsType) : 0;
 
@@ -583,9 +575,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
                             contentDescription, entry);
                     pref.setKey(key);
                 }
-
-                final double percentOfMax = (sipper.totalPowerMah * 100)
-                        / mStatsHelper.getMaxPower();
                 sipper.percent = percentOfTotal;
                 pref.setTitle(entry.getLabel());
                 pref.setOrder(i + 1);
@@ -596,11 +585,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
                             BatteryUtils.StatusType.FOREGROUND, sipper.uidObj, mStatsType);
                 }
                 setUsageSummary(pref, sipper);
-                if ((sipper.drainType != DrainType.APP
-                        || sipper.uidObj.getUid() == Process.ROOT_UID)
-                        && sipper.drainType != DrainType.USER) {
-                    pref.setTint(colorControl);
-                }
                 addedSome = true;
                 mAppListGroup.addPreference(pref);
                 if (mAppListGroup.getPreferenceCount() - getCachedCount()

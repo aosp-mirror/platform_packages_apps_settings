@@ -19,15 +19,14 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TintablePreference;
 import com.android.settings.Utils;
 
 /**
@@ -37,7 +36,7 @@ import com.android.settings.Utils;
  * The battery usage info could be usage percentage or usage time. The preference
  * won't show any icon if it is null.
  */
-public class PowerGaugePreference extends TintablePreference {
+public class PowerGaugePreference extends Preference {
     private final int mIconSize;
 
     private BatteryEntry mInfo;
