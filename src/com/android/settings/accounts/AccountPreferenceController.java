@@ -46,7 +46,6 @@ import android.util.SparseArray;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.AccessiblePreferenceCategory;
-import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -101,7 +100,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         /**
          * The preference that displays the add account button.
          */
-        public DimmableIconPreference addAccountPreference;
+        public RestrictedPreference addAccountPreference;
         /**
          * The preference that displays the button to remove the managed profile
          */
@@ -323,7 +322,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
             preferenceGroup.setSummary(workGroupSummary);
             preferenceGroup.setContentDescription(
                 mContext.getString(R.string.accessibility_category_work, workGroupSummary));
-            profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference(context);
+            profileData.removeWorkProfilePreference = newRemoveWorkProfilePreference();
             mHelper.enforceRestrictionOnPreference(profileData.removeWorkProfilePreference,
                 DISALLOW_REMOVE_MANAGED_PROFILE, UserHandle.myUserId());
             profileData.managedProfilePreference = newManagedProfileSettings();
@@ -340,16 +339,16 @@ public class AccountPreferenceController extends AbstractPreferenceController
         if (userInfo.isEnabled()) {
             profileData.authenticatorHelper = new AuthenticatorHelper(context,
                     userInfo.getUserHandle(), this);
-            profileData.addAccountPreference = newAddAccountPreference(context);
+            profileData.addAccountPreference = newAddAccountPreference();
             mHelper.enforceRestrictionOnPreference(profileData.addAccountPreference,
                 DISALLOW_MODIFY_ACCOUNTS, userInfo.id);
         }
         mProfiles.put(userInfo.id, profileData);
     }
 
-    private DimmableIconPreference newAddAccountPreference(Context context) {
-        DimmableIconPreference preference =
-            new DimmableIconPreference(mParent.getPreferenceManager().getContext());
+    private RestrictedPreference newAddAccountPreference() {
+        RestrictedPreference preference =
+            new RestrictedPreference(mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.add_account_label);
         preference.setIcon(R.drawable.ic_menu_add);
         preference.setOnPreferenceClickListener(this);
@@ -357,7 +356,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         return preference;
     }
 
-    private RestrictedPreference newRemoveWorkProfilePreference(Context context) {
+    private RestrictedPreference newRemoveWorkProfilePreference() {
         RestrictedPreference preference = new RestrictedPreference(
             mParent.getPreferenceManager().getContext());
         preference.setTitle(R.string.remove_managed_profile_label);

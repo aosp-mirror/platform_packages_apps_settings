@@ -54,7 +54,6 @@ import android.widget.SimpleAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.DimmableIconPreference;
 import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -67,6 +66,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private PreferenceGroup mUserListCategory;
     private UserPreference mMePreference;
-    private DimmableIconPreference mAddUser;
+    private RestrictedPreference mAddUser;
     private int mRemovingUserId = -1;
     private int mAddedUserId = 0;
     private boolean mAddingUser;
@@ -212,7 +212,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (mUserCaps.mIsAdmin) {
             mMePreference.setSummary(R.string.user_admin);
         }
-        mAddUser = (DimmableIconPreference) findPreference(KEY_ADD_USER);
+        mAddUser = (RestrictedPreference) findPreference(KEY_ADD_USER);
         mAddUser.useAdminDisabledSummary(false);
         // Determine if add user/profile button should be visible
         if (mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(getActivity())) {
