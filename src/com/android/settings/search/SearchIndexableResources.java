@@ -19,7 +19,6 @@ package com.android.settings.search;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
-import android.text.TextUtils;
 
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -72,9 +71,9 @@ import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.ChannelImportanceSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
+import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
 import com.android.settings.notification.ZenModeSettings;
-import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.sim.SimSettings;
@@ -86,20 +85,12 @@ import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wallpaper.WallpaperTypeSettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
-import com.android.settings.wifi.SavedAccessPointsWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 public final class SearchIndexableResources {
-
-    /**
-     * Identifies subsettings which have an {@link SearchIndexableResource#intentAction} but
-     * whose intents should still be treated as subsettings inside of Settings.
-     */
-    public static final String SUBSETTING_TARGET_PACKAGE = "subsetting_target_package";
-
     @XmlRes
     public static final int NO_RES_ID = 0;
 
@@ -108,19 +99,9 @@ public final class SearchIndexableResources {
 
     @VisibleForTesting
     static void addIndex(Class<?> indexClass) {
-        addIndex(indexClass, null /* targetAction */);
-    }
-
-    @VisibleForTesting
-    static void addIndex(Class<?> indexClass, String targetAction) {
         String className = indexClass.getName();
         SearchIndexableResource resource = new SearchIndexableResource(
                 0 /* rank */, NO_RES_ID, className, NO_RES_ID);
-
-        if (!TextUtils.isEmpty(targetAction)) {
-            resource.intentAction = targetAction;
-            resource.intentTargetPackage = SUBSETTING_TARGET_PACKAGE;
-        }
 
         sResMap.put(className, resource);
     }
@@ -129,17 +110,16 @@ public final class SearchIndexableResources {
         addIndex(WifiSettings.class);
         addIndex(NetworkDashboardFragment.class);
         addIndex(ConfigureWifiSettings.class);
-        addIndex(SavedAccessPointsWifiSettings.class);
         addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
         addIndex(DataUsageMeteredSettings.class);
         addIndex(ScreenZoomSettings.class);
-        addIndex(DisplaySettings.class, "android.settings.DISPLAY_SETTINGS");
+        addIndex(DisplaySettings.class);
         addIndex(AmbientDisplaySettings.class);
         addIndex(WallpaperTypeSettings.class);
         addIndex(AppAndNotificationDashboardFragment.class);
-        addIndex(SoundSettings.class, "android.settings.SOUND_SETTINGS");
+        addIndex(SoundSettings.class);
         addIndex(ZenModeSettings.class);
         addIndex(StorageSettings.class);
         addIndex(PowerUsageAdvanced.class);
@@ -192,7 +172,7 @@ public final class SearchIndexableResources {
         addIndex(BatterySaverSettings.class);
         addIndex(LockscreenDashboardFragment.class);
         addIndex(ZenModeBehaviorSettings.class);
-        addIndex(ZenModeVisualInterruptionSettings.class);
+        addIndex(ZenModeAutomationSettings.class);
     }
 
     private SearchIndexableResources() {

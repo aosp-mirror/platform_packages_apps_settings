@@ -352,6 +352,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
             Activity activity, Lifecycle lifecycle, DevelopmentSettingsDashboardFragment fragment,
             BluetoothA2dpConfigStore bluetoothA2dpConfigStore) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new MemoryUsagePreferenceController(context));
         controllers.add(new BugReportPreferenceControllerV2(context));
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));

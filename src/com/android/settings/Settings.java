@@ -125,7 +125,6 @@ public class Settings extends SettingsActivity {
     public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeExternalRuleSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeVisualInterruptionSettingsActivity extends SettingsActivity { /* empty */}
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }

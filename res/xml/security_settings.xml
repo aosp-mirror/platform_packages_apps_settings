@@ -14,7 +14,11 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/security_settings_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:key="security_dashboard_page"
+    android:title="@string/security_settings_title"
+    settings:initialExpandedChildrenCount="9">
 
 </PreferenceScreen>

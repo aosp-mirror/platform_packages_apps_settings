@@ -20,7 +20,6 @@ import android.content.Context;
 
 import android.os.UserManager;
 
-import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.XmlTestUtils;
@@ -51,8 +50,6 @@ public class AppAndNotificationDashboardFragmentTest {
         final List<String> niks = AppAndNotificationDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
         AppAndNotificationDashboardFragment fragment = new AppAndNotificationDashboardFragment();
-        ReflectionHelpers.setField(fragment, "mProgressiveDisclosureMixin",
-                mock(ProgressiveDisclosureMixin.class));
         final int xmlId = fragment.getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);

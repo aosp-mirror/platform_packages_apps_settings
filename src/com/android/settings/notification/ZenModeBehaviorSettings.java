@@ -46,6 +46,11 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
     private static final String KEY_MESSAGES = "zen_mode_messages";
     private static final String KEY_CALLS = "zen_mode_calls";
     private static final String KEY_REPEAT_CALLERS = "zen_mode_repeat_callers";
+    private static final String KEY_SCREEN_OFF = "zen_mode_screen_off";
+    private static final String KEY_SCREEN_ON = "zen_mode_screen_on";
+
+    private SwitchPreference mScreenOff;
+    private SwitchPreference mScreenOn;
 
     private static final int SOURCE_NONE = -1;
 
@@ -190,6 +195,43 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
             }
         });
 
+        mScreenOff = (SwitchPreference) root.findPreference(KEY_SCREEN_OFF);
+        if (!getResources()
+                .getBoolean(com.android.internal.R.bool.config_intrusiveNotificationLed)) {
+            mScreenOff.setSummary(R.string.zen_mode_screen_off_summary_no_led);
+        }
+
+        mScreenOff.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean bypass = (Boolean) newValue;
+                mMetricsFeatureProvider.action(mContext,
+                        MetricsEvent.ACTION_ZEN_ALLOW_WHEN_SCREEN_OFF, !bypass);
+                if (DEBUG) Log.d(TAG, "onPrefChange suppressWhenScreenOff=" + !bypass);
+                savePolicy(mPolicy.priorityCategories,
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        getNewSuppressedEffects(!bypass, Policy.SUPPRESSED_EFFECT_SCREEN_OFF));
+                return true;
+            }
+        });
+
+        mScreenOn = (SwitchPreference) root.findPreference(KEY_SCREEN_ON);
+        mScreenOn.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if (mDisableListeners) return true;
+                final boolean bypass = (Boolean) newValue;
+                mMetricsFeatureProvider.action(mContext,
+                        MetricsEvent.ACTION_ZEN_ALLOW_WHEN_SCREEN_ON, bypass);
+                if (DEBUG) Log.d(TAG, "onPrefChange allowWhenScreenOn=" + !bypass);
+                savePolicy(mPolicy.priorityCategories,
+                        mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
+                        getNewSuppressedEffects(!bypass, Policy.SUPPRESSED_EFFECT_SCREEN_ON));
+                return true;
+            }
+        });
+
         updateControls();
     }
 
@@ -244,6 +286,10 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 updateControlsPolicy();
                 setTogglesEnabled(true);
         }
+
+        mScreenOff.setChecked(isEffectAllowed(Policy.SUPPRESSED_EFFECT_SCREEN_OFF));
+        mScreenOn.setChecked(isEffectAllowed(Policy.SUPPRESSED_EFFECT_SCREEN_ON));
+
         mDisableListeners = false;
     }
 
@@ -324,4 +370,17 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 }
             };
 
+    private int getNewSuppressedEffects(boolean suppress, int effectType) {
+        int effects = mPolicy.suppressedVisualEffects;
+        if (suppress) {
+            effects |= effectType;
+        } else {
+            effects &= ~effectType;
+        }
+        return effects;
+    }
+
+    private boolean isEffectAllowed(int effect) {
+        return (mPolicy.suppressedVisualEffects & effect) == 0;
+    }
 }

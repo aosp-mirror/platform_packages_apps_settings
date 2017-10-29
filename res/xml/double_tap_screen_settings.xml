@@ -15,19 +15,21 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/ambient_display_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="gesture_double_tap_screen_screen"
+    android:title="@string/ambient_display_title">
 
     <com.android.settings.widget.VideoPreference
         android:key="gesture_double_tap_screen_video"
         app:animation="@raw/gesture_ambient_tap"
-        app:preview="@drawable/gesture_ambient_tap"/>
+        app:preview="@drawable/gesture_ambient_tap" />
 
     <SwitchPreference
         android:key="gesture_double_tap_screen"
         android:title="@string/ambient_display_title"
         android:summary="@string/ambient_display_summary"
-        app:keywords="@string/keywords_gesture"/>
+        app:keywords="@string/keywords_gesture" />
 
 </PreferenceScreen>

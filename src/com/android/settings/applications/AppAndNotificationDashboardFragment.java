@@ -48,20 +48,13 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(4);
-    }
-
-    @Override
     protected int getHelpResource() {
         return R.string.help_url_apps_and_notifications;
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return mProgressiveDisclosureMixin.isEnabled()
-                ? R.xml.app_and_notification : R.xml.app_and_notification_new_advance_button;
+        return R.xml.app_and_notification;
     }
 
     @Override

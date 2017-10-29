@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -59,7 +58,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
-import com.android.settings.dashboard.ProgressiveDisclosureMixin;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
@@ -276,11 +274,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         if (root != null) {
             root.removeAll();
         }
-        if (ProgressiveDisclosureMixin.isV2Enabled()) {
-            addPreferencesFromResource(R.xml.security_settings_advanced_button);
-        } else {
-            addPreferencesFromResource(R.xml.security_settings);
-        }
+        addPreferencesFromResource(R.xml.security_settings);
         root = getPreferenceScreen();
 
         // Add category for security status
@@ -381,14 +375,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         // Advanced Security features
         initTrustAgentPreference(root, numberOfTrustAgent);
-
-        // The above preferences come and go based on security state, so we need to update
-        // the index. This call is expected to be fairly cheap, but we may want to do something
-        // smarter in the future.
-        final Activity activity = getActivity();
-        FeatureFactory.getFactory(activity).getSearchFeatureProvider().getIndexingManager(activity)
-                .updateFromClassNameResource(SecuritySettings.class.getName(),
-                        true /* includeInSearchResults */);
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);

@@ -18,6 +18,14 @@
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:key="development_prefs_screen"
         android:title="@string/development_settings_title">
+
+    <Preference
+        android:key="memory"
+        android:icon="@drawable/ic_settings_memory"
+        android:title="@string/memory_settings_title"
+        android:summary="@string/summary_empty"
+        android:fragment="com.android.settings.applications.ProcessStatsSummary" />
+
     <com.android.settings.BugreportPreference
             android:key="bugreport"
             android:title="@*android:string/bugreport_title"

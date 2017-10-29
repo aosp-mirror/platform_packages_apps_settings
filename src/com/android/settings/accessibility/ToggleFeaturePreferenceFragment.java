@@ -21,16 +21,8 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
-import android.widget.TextView;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
@@ -102,13 +94,6 @@ public abstract class ToggleFeaturePreferenceFragment
 
     protected void onRemoveSwitchBarToggleSwitch() {
         // Implement this to reset a checked listener.
-    }
-
-    /**
-     * Get the res id for static preference xml for this fragment.
-     */
-    protected int getPreferenceScreenResId() {
-        return -1;
     }
 
     private void installActionBarToggleSwitch() {

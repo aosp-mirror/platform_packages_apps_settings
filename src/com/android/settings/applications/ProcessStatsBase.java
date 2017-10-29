@@ -44,7 +44,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
     // smaller than the actual time selected instead of bumping up to 3 hours
     // beyond it.
     private static final long DURATION_QUANTUM = ProcessStats.COMMIT_PERIOD;
-    protected static long[] sDurations = new long[] {
+    public  static long[] sDurations = new long[] {
         3 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 6 * 60 *60 * 1000 - DURATION_QUANTUM / 2,
         12 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 24 * 60 * 60 * 1000 - DURATION_QUANTUM / 2
     };

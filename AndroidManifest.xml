@@ -735,6 +735,32 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.ZenModeSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$ZenModeBehaviorSettingsActivity"
+                android:label="@string/zen_mode_behavior_settings_title"
+                android:icon="@drawable/ic_settings_notifications"
+                android:exported="true"
+                android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ZEN_MODE_PRIORITY_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.notification.ZenModeBehaviorSettings" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$ZenModeAutomationSettingsActivity"
+                  android:label="@string/zen_mode_automation_settings_title"
+                  android:icon="@drawable/ic_settings_notifications"
+                  android:exported="true"
+                  android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ZEN_MODE_AUTOMATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -744,35 +770,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModeSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
-        </activity>
-
-        <activity android:name="Settings$ZenModeVisualInterruptionSettingsActivity"
-                  android:label="@string/zen_mode_visual_interruptions_settings_title"
-                  android:icon="@drawable/ic_settings_notifications"
-                  android:exported="true"
-                  android:taskAffinity="">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ZenModeVisualInterruptionSettings" />
+                       android:value="com.android.settings.notification.ZenModeAutomationSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
-        </activity>
-
-        <activity android:name="Settings$ZenModeBehaviorSettingsActivity"
-                android:label="@string/zen_mode_behavior_settings_title"
-                android:icon="@drawable/ic_settings_notifications"
-                android:exported="true"
-                android:taskAffinity="">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.ZEN_MODE_BEHAVIOR_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.notification.ZenModeBehaviorSettings" />
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-                android:value="true" />
         </activity>
 
         <activity android:name="Settings$WallpaperSettingsActivity"
@@ -1031,10 +1031,6 @@
             <intent-filter android:priority="3">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.development" />
-            <meta-data android:name="com.android.settings.summary"
-                android:resource="@string/summary_empty" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ProcessStatsSummary" />
         </activity>

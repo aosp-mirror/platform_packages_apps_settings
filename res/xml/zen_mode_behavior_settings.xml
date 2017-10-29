@@ -15,9 +15,12 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
     android:key="zen_mode_behavior_settings_page"
-    android:title="@string/zen_mode_behavior_settings_title" >
+    android:title="@string/zen_mode_behavior_settings_title"
+    settings:initialExpandedChildrenCount="7">
 
    <PreferenceCategory
        android:title="@string/zen_mode_behavior_allow_title"
@@ -61,5 +64,19 @@
            android:title="@string/zen_mode_repeat_callers"/>
 
    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/zen_mode_visual_signals_settings_subtitle"
+        android:key="zen_mode_visual_signals_preferences">
+
+        <SwitchPreference android:key="zen_mode_screen_on"
+                          android:title="@string/zen_mode_screen_on"
+                          android:summary="@string/zen_mode_screen_on_summary" />
+
+        <SwitchPreference android:key="zen_mode_screen_off"
+                          android:title="@string/zen_mode_screen_off"
+                          android:summary="@string/zen_mode_screen_off_summary" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

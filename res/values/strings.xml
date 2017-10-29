@@ -6689,12 +6689,12 @@
     <string name="boot_sounds_title">Power on sounds</string>
 
     <!-- Sound: Summary for the Do not Disturb option when there is no automatic rules turned on. [CHAR LIMIT=NONE]-->
-    <string name="zen_mode_settings_summary_off">No automatic rules turned on</string>
+    <string name="zen_mode_settings_summary_off">Never</string>
 
     <!-- Sound: Summary for the Do not Disturb option when at least one automatic rules turned on. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_settings_summary_on">
-        <item quantity="one">1 automatic rule turned on</item>
-        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> automatic rules turned on</item>
+        <item quantity="one">1 rule</item>
+        <item quantity="other"><xliff:g id="on_count" example="10">%d</xliff:g> rules</item>
     </plurals>
 
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
@@ -6718,8 +6718,11 @@
     <!-- Do not disturb: Specifies sounds that can bypass DND in user and/or API-invoked Alarms Only mode.  [CHAR LIMIT=100] -->
     <string name="zen_mode_behavior_alarms_only">No sound except alarms, media and system feedback (Alarms only)</string>
 
-    <!--  Do not disturb: Title for the zen mode automation listing. [CHAR LIMIT=30] -->
-    <string name="zen_mode_automation_settings_title">Automatic rules</string>
+    <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
+    <string name="zen_mode_automation_settings_title">Turn on automatically</string>
+
+    <!--  Do not disturb: Title for the zen mode automatic rules page in settings. [CHAR LIMIT=30] -->
+    <string name="zen_mode_automation_settings_page_title">Automatic rules</string>
 
     <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=50] -->
     <string name="zen_mode_automation_suggestion_title">Set Do Not Disturb rules</string>
@@ -6741,6 +6744,12 @@
 
     <!--  Do not disturb: Title for the Visual interruptions option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_interruptions_settings_title">Block visual disturbances</string>
+
+    <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
+    <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
+
+    <!--  Do not disturb: Button to add new automatic rule to DND. [CHAR LIMIT=30] -->
+    <string name="zen_mode_add">Add</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -7129,7 +7138,13 @@
     <string name="zen_mode_rule_name_warning">Rule name already in use</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Add rule menu option name -->
-    <string name="zen_mode_add_rule">Add more</string>
+    <string name="zen_mode_add_rule">Add rule</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add event-based rule, set rule name title -->
+    <string name="zen_mode_add_event_rule">Add event rule</string>
+
+    <!-- [CHAR LIMIT=40] Zen mode settings: Add time-based rule, set rule name title -->
+    <string name="zen_mode_add_time_rule">Add time rule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Delete rule menu option name -->
     <string name="zen_mode_delete_rule">Delete rule</string>
@@ -7153,13 +7168,13 @@
     <string name="zen_mode_configure_rule">Configure rule</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Schedule rule type name -->
-    <string name="zen_schedule_rule_type_name">Time rule</string>
+    <string name="zen_schedule_rule_type_name">Time</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Schedule rule toast hint when enabled -->
     <string name="zen_schedule_rule_enabled_toast">Automatic rule set to turn on Do Not Disturb during specified times</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Event rule type name -->
-    <string name="zen_event_rule_type_name">Event rule</string>
+    <string name="zen_event_rule_type_name">Event</string>
 
     <!-- [CHAR LIMIT=NONE] Zen mode settings: Event rule toast hint when enabled -->
     <string name="zen_event_rule_enabled_toast">Automatic rule set to turn on Do Not Disturb during specified events</string>
@@ -7314,28 +7329,16 @@
     <!-- [CHAR LIMIT=NONE] Zen mode summary spoken when changing mode by voice: Turn on all notifications. -->
     <string name="zen_mode_summary_always">Change to always interrupt</string>
 
-    <!-- [CHAR LIMIT=40] Zen mode settings: visual interruptions: screen is on: title -->
-    <string name="zen_mode_screen_on">Block when screen is on</string>
-
-    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions: screen is on: summary -->
-    <string name="zen_mode_screen_on_summary">Prevent notifications silenced by Do Not Disturb from peeking or popping on screen</string>
-
-    <!-- [CHAR LIMIT=40] Zen mode settings: visual interruptions: screen is off: title -->
-    <string name="zen_mode_screen_off">Block when screen is off</string>
-
+    <!-- [CHAR LIMIT=40] Zen mode settings: visual signals: screen is on: title -->
+    <string name="zen_mode_screen_on">When the screen is on</string>
+    <!-- [CHAR LIMIT=130] Zen mode settings:  visual signals: screen is on: summary -->
+    <string name="zen_mode_screen_on_summary">Let notifications silenced by Do Not Disturb pop on screen</string>
+    <!-- [CHAR LIMIT=40] Zen mode settings: visual signals: screen is off: title -->
+    <string name="zen_mode_screen_off">When the screen is off</string>
     <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions: screen is off: summary -->
-    <string name="zen_mode_screen_off_summary">Prevent notifications silenced by Do Not Disturb from turning on the screen or pulsing the notification light</string>
+    <string name="zen_mode_screen_off_summary">Let notifications silenced by Do Not Disturb turn on the screen and blink the light</string>
     <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions: screen is off: summary -->
-    <string name="zen_mode_screen_off_summary_no_led">Prevent notifications silenced by Do Not Disturb from turning on the screen</string>
-
-    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
-    <string name="zen_mode_all_visual_interruptions">Off</string>
-    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
-    <string name="zen_mode_screen_on_visual_interruptions">When screen is on</string>
-    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
-    <string name="zen_mode_screen_off_visual_interruptions">When screen is off</string>
-    <!-- [CHAR LIMIT=130] Zen mode settings:  visual interruptions summary -->
-    <string name="zen_mode_no_visual_interruptions">When screen is on or off</string>
+    <string name="zen_mode_screen_off_summary_no_led">Let notifications silenced by Do Not Disturb turn on the screen</string>
 
     <!-- [CHAR LIMIT=NONE] Content description for per-app notification
          settings button -->
@@ -8785,6 +8788,8 @@
 
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
+    <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
+    <string name="fingerprint_gesture_screen_title">Swipe fingerprint</string>
 
     <!-- Summary text for fingerprint swipe for notifications (phone) [CHAR LIMIT=160]-->
     <string name="fingerprint_swipe_for_notifications_summary" product="default">To check your notifications, swipe down on the fingerprint sensor on the back of your phone.</string>

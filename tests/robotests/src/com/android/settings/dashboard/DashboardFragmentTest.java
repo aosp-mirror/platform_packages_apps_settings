@@ -67,8 +67,6 @@ public class DashboardFragmentTest {
     private DashboardCategory mDashboardCategory;
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
-    @Mock
-    private ProgressiveDisclosureMixin mDisclosureMixin;
     private TestFragment mTestFragment;
 
     @Before
@@ -79,9 +77,6 @@ public class DashboardFragmentTest {
         mDashboardCategory.tiles = new ArrayList<>();
         mDashboardCategory.tiles.add(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
-        when(mFakeFeatureFactory.dashboardFeatureProvider.getProgressiveDisclosureMixin(
-                nullable(Context.class), eq(mTestFragment), nullable(Bundle.class)))
-                .thenReturn(mDisclosureMixin);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
@@ -110,8 +105,7 @@ public class DashboardFragmentTest {
                 .thenReturn("test_key");
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
-        verify(mDisclosureMixin).addPreference(nullable(PreferenceScreen.class),
-                nullable(Preference.class));
+        verify(mTestFragment.mScreen).addPreference(nullable(Preference.class));
     }
 
     @Test

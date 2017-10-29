@@ -20,7 +20,6 @@ import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
 import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
 
 import android.animation.LayoutTransition;
-import android.annotation.StringRes;
 import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -66,6 +65,7 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -75,7 +75,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.IntConsumer;
 
-public class TrustedCredentialsSettings extends OptionsMenuFragment
+public class TrustedCredentialsSettings extends InstrumentedPreferenceFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
     public static final String ARG_SHOW_NEW_FOR_USER = "ARG_SHOW_NEW_FOR_USER";
@@ -90,12 +90,6 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private static final String SAVED_CONFIRMING_CREDENTIAL_USER = "ConfirmingCredentialUser";
     private static final String USER_ACTION = "com.android.settings.TRUSTED_CREDENTIALS_USER";
     private static final int REQUEST_CONFIRM_CREDENTIALS = 1;
-
-    @Override
-    @StringRes
-    protected int getTitle() {
-        return R.string.trusted_credentials;
-    }
 
     @Override
     public int getMetricsCategory() {
@@ -183,10 +177,11 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mUserManager = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        mKeyguardManager = (KeyguardManager) getActivity()
+        final Activity activity = getActivity();
+        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
+        mKeyguardManager = (KeyguardManager) activity
                 .getSystemService(Context.KEYGUARD_SERVICE);
-        mTrustAllCaUserId = getActivity().getIntent().getIntExtra(ARG_SHOW_NEW_FOR_USER,
+        mTrustAllCaUserId = activity.getIntent().getIntExtra(ARG_SHOW_NEW_FOR_USER,
                 UserHandle.USER_NULL);
         mConfirmedCredentialUsers = new ArraySet<>(2);
         mConfirmingCredentialUser = UserHandle.USER_NULL;
@@ -206,7 +201,11 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_AVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE);
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
-        getActivity().registerReceiver(mWorkProfileChangedReceiver, filter);
+        activity.registerReceiver(mWorkProfileChangedReceiver, filter);
+
+        if (usePreferenceScreenTitle()) {
+            activity.setTitle(R.string.trusted_credentials);
+        }
     }
 
     @Override

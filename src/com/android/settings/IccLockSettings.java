@@ -80,6 +80,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private static final String DIALOG_PIN = "dialogPin";
     private static final String DIALOG_ERROR = "dialogError";
     private static final String ENABLE_TO_STATE = "enableState";
+    private static final String CURRENT_TAB = "currentTab";
 
     // Save and restore inputted PIN code when configuration changed
     // (ex. portrait<-->landscape) during change PIN code
@@ -235,6 +236,10 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
+
+            if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
+                mTabHost.setCurrentTabByTag(savedInstanceState.getString(CURRENT_TAB));
+            }
             return view;
         } else {
             mPhone = PhoneFactory.getDefaultPhone();
@@ -325,6 +330,10 @@ public class IccLockSettings extends SettingsPreferenceFragment
             }
         } else {
             super.onSaveInstanceState(out);
+        }
+
+        if (mTabHost != null) {
+            out.putString(CURRENT_TAB, mTabHost.getCurrentTabTag());
         }
     }
 

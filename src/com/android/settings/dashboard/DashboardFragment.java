@@ -58,7 +58,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
 
-    protected ProgressiveDisclosureMixin mProgressiveDisclosureMixin;
     protected DashboardFeatureProvider mDashboardFeatureProvider;
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
@@ -69,9 +68,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         super.onAttach(context);
         mDashboardFeatureProvider =
                 FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
-        mProgressiveDisclosureMixin = mDashboardFeatureProvider
-                .getProgressiveDisclosureMixin(context, this, getArguments());
-        getLifecycle().addObserver(mProgressiveDisclosureMixin);
 
         List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers == null) {
@@ -115,7 +111,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        super.onCreatePreferences(savedInstanceState, rootKey);
         refreshAllPreferences(getLogTag());
     }
 
@@ -141,8 +136,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void notifySummaryChanged(Tile tile) {
         final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
-        final Preference pref = mProgressiveDisclosureMixin.findPreference(
-                getPreferenceScreen(), key);
+        final Preference pref = getPreferenceScreen().findPreference(key);
         if (pref == null) {
             Log.d(getLogTag(),
                     String.format("Can't find pref by key %s, skipping update summary %s/%s",
@@ -212,11 +206,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract String getLogTag();
 
     /**
-     * Get the res id for static preference xml for this fragment.
-     */
-    protected abstract int getPreferenceScreenResId();
-
-    /**
      * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
     protected abstract List<AbstractPreferenceController> getPreferenceControllers(Context context);
@@ -273,7 +262,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             final String key = controller.getPreferenceKey();
 
-            final Preference preference = mProgressiveDisclosureMixin.findPreference(screen, key);
+            final Preference preference = screen.findPreference(key);
             if (preference == null) {
                 Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
                         key, controller.getClass().getSimpleName()));
@@ -296,7 +285,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
         // Add resource based tiles.
         displayResourceTiles();
-        mProgressiveDisclosureMixin.collapse(getPreferenceScreen());
 
         refreshDashboardTiles(TAG);
     }
@@ -348,8 +336,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             }
             if (mDashboardTilePrefKeys.contains(key)) {
                 // Have the key already, will rebind.
-                final Preference preference = mProgressiveDisclosureMixin.findPreference(
-                        screen, key);
+                final Preference preference = screen.findPreference(key);
                 mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
                         preference, tile, key, mPlaceholderPreferenceController.getOrder());
             } else {
@@ -357,7 +344,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
                 final Preference pref = new Preference(getPrefContext());
                 mDashboardFeatureProvider.bindPreferenceToTile(getActivity(), getMetricsCategory(),
                         pref, tile, key, mPlaceholderPreferenceController.getOrder());
-                mProgressiveDisclosureMixin.addPreference(screen, pref);
+                screen.addPreference(pref);
                 mDashboardTilePrefKeys.add(key);
             }
             remove.remove(key);
@@ -365,7 +352,10 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         // Finally remove tiles that are gone.
         for (String key : remove) {
             mDashboardTilePrefKeys.remove(key);
-            mProgressiveDisclosureMixin.removePreference(screen, key);
+            final Preference preference = screen.findPreference(key);
+            if (preference != null) {
+                screen.removePreference(preference);
+            }
         }
         mSummaryLoader.setListening(true);
     }

@@ -15,9 +15,11 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/double_tap_power_for_camera_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="gesture_double_tap_power_screen"
+    android:title="@string/double_tap_power_for_camera_title">
 
     <com.android.settings.widget.VideoPreference
         android:key="gesture_double_tap_power_video"

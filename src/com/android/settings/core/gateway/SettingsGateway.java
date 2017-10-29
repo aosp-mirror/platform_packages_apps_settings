@@ -108,10 +108,10 @@ import com.android.settings.notification.NotificationStation;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
+import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
-import com.android.settings.notification.ZenModeVisualInterruptionSettings;
 import com.android.settings.password.ChooseLockPassword;
 import com.android.settings.password.ChooseLockPattern;
 import com.android.settings.print.PrintJobSettingsFragment;
@@ -197,6 +197,7 @@ public class SettingsGateway {
             SpecialAccessSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
             ZenAccessSettings.class.getName(),
+            ZenModeAutomationSettings.class.getName(),
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
@@ -219,7 +220,6 @@ public class SettingsGateway {
             ZenModeBehaviorSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
-            ZenModeVisualInterruptionSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             AdvancedPowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),
