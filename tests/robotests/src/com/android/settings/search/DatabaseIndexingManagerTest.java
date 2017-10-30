@@ -86,15 +86,12 @@ public class DatabaseIndexingManagerTest {
     private final String updatedSummaryOn = "summary-on";
     private final String normalizedSummaryOn = "summaryon";
     private final String summaryOff = "summary\u2011off";
-    private final String updatedSummaryOff = "summary-off";
-    private final String normalizedSummaryOff = "summaryoff";
     private final String entries = "entries";
     private final String keywords = "keywords, keywordss, keywordsss";
     private final String spaceDelimittedKeywords = "keywords keywordss keywordsss";
     private final String screenTitle = "screen title";
     private final String className = "class name";
     private final int iconResId = 0xff;
-    private final int noIcon = 0;
     private final String action = "action";
     private final String targetPackage = "target package";
     private final String targetClass = "target class";
@@ -210,8 +207,7 @@ public class DatabaseIndexingManagerTest {
 
         mManager.performIndexing();
 
-        verify(mManager).updateDatabase(data, true /* isFullIndex */,
-                Locale.getDefault().toString());
+        verify(mManager).updateDatabase(data, true /* isFullIndex */);
     }
 
     @Test
@@ -243,8 +239,7 @@ public class DatabaseIndexingManagerTest {
 
         mManager.performIndexing();
 
-        verify(mManager).updateDatabase(data, true /* isFullIndex */,
-                Locale.getDefault().toString());
+        verify(mManager).updateDatabase(data, true /* isFullIndex */);
     }
 
     @Test
@@ -278,7 +273,7 @@ public class DatabaseIndexingManagerTest {
     @Test
     public void testLocaleUpdated_afterIndexing_localeNotAdded() {
         PreIndexData emptydata = new PreIndexData();
-        mManager.updateDatabase(emptydata, true /* isFullIndex */, localeStr);
+        mManager.updateDatabase(emptydata, true /* isFullIndex */);
 
         assertThat(IndexDatabaseHelper.isLocaleAlreadyIndexed(mContext, localeStr)).isFalse();
     }
@@ -295,7 +290,7 @@ public class DatabaseIndexingManagerTest {
         // Test that addDataToDatabase is called when dataToUpdate is non-empty
         PreIndexData indexData = new PreIndexData();
         indexData.dataToUpdate.add(getFakeRaw());
-        mManager.updateDatabase(indexData, true /* isFullIndex */, localeStr);
+        mManager.updateDatabase(indexData, true /* isFullIndex */);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index", null);
         cursor.moveToPosition(0);
@@ -383,7 +378,7 @@ public class DatabaseIndexingManagerTest {
     public void testEmptyNonIndexableKeys_emptyDataKeyResources_addedToDatabase() {
         insertSpecialCase(TITLE_ONE, true /* enabled */, null /* dataReferenceKey */);
         PreIndexData emptydata = new PreIndexData();
-        mManager.updateDatabase(emptydata, false /* needsReindexing */, localeStr);
+        mManager.updateDatabase(emptydata, false /* needsReindexing */);
 
         Cursor cursor = mDb.rawQuery("SELECT * FROM prefs_index WHERE enabled = 1", null);
         cursor.moveToPosition(0);

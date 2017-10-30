@@ -18,7 +18,8 @@
 package com.android.settings.search;
 
 import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ID;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search.DatabaseResultLoader
+        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
@@ -26,7 +27,8 @@ import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
+        .DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
@@ -132,7 +134,7 @@ public class DatabaseIndexingManager {
         PreIndexData indexData = getIndexDataFromProviders(providers, isFullIndex);
 
         final long updateDatabaseStartTime = System.currentTimeMillis();
-        updateDatabase(indexData, isFullIndex, localeStr);
+        updateDatabase(indexData, isFullIndex);
         if (SettingsSearchIndexablesProvider.DEBUG) {
             final long updateDatabaseTime = System.currentTimeMillis() - updateDatabaseStartTime;
             Log.d(LOG_TAG, "performIndexing updateDatabase took time: " + updateDatabaseTime);
@@ -197,10 +199,9 @@ public class DatabaseIndexingManager {
      * Finally, we record that the locale has been indexed.
      *
      * @param needsReindexing true the database needs to be rebuilt.
-     * @param localeStr       the default locale for the device.
      */
     @VisibleForTesting
-    void updateDatabase(PreIndexData preIndexData, boolean needsReindexing, String localeStr) {
+    void updateDatabase(PreIndexData preIndexData, boolean needsReindexing) {
         final Map<String, Set<String>> nonIndexableKeys = preIndexData.nonIndexableKeys;
 
         final SQLiteDatabase database = getWritableDatabase();
@@ -213,7 +214,7 @@ public class DatabaseIndexingManager {
             database.beginTransaction();
 
             // Convert all Pre-index data to Index data.
-            List<IndexData> indexData = getIndexData(localeStr, preIndexData);
+            List<IndexData> indexData = getIndexData(preIndexData);
             insertIndexData(database, indexData);
 
             // Only check for non-indexable key updates after initial index.
@@ -229,9 +230,9 @@ public class DatabaseIndexingManager {
     }
 
     @VisibleForTesting
-    List<IndexData> getIndexData(String locale, PreIndexData data) {
+    List<IndexData> getIndexData(PreIndexData data) {
         if (mConverter == null) {
-            mConverter = new IndexDataConverter(mContext, locale);
+            mConverter = new IndexDataConverter(mContext);
         }
         return mConverter.convertPreIndexDataToIndexData(data);
     }

@@ -67,7 +67,7 @@ public class IndexData {
             = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 
     private IndexData(Builder builder) {
-        locale = builder.mLocale;
+        locale = Locale.getDefault().toString();
         updatedTitle = normalizeHyphen(builder.mTitle);
         updatedSummaryOn = normalizeHyphen(builder.mSummaryOn);
         if (Locale.JAPAN.toString().equalsIgnoreCase(locale)) {
@@ -158,7 +158,6 @@ public class IndexData {
     }
 
     public static class Builder {
-        private String mLocale;
         private String mTitle;
         private String mSummaryOn;
         private String mEntries;
@@ -176,11 +175,6 @@ public class IndexData {
         @ResultPayload.PayloadType
         private int mPayloadType;
         private ResultPayload mPayload;
-
-        public Builder setLocale(String locale) {
-            mLocale = locale;
-            return this;
-        }
 
         public Builder setTitle(String title) {
             mTitle = title;

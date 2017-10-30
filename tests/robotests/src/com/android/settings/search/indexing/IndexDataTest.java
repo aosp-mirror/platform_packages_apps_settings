@@ -40,7 +40,7 @@ import org.robolectric.annotation.Config;
 public class IndexDataTest {
     private IndexData.Builder mBuilder;
 
-    private static final String LOCALE = "locale";
+    private static final String LOCALE = "en_US";
     private static final String TITLE = "updated-title";
     private static final String NORM_TITLE = "updatedtitle";
     private static final String SUMMARY_ON = "updated-summary-on";
@@ -156,8 +156,7 @@ public class IndexDataTest {
 
     private IndexData.Builder createBuilder() {
         mBuilder = new IndexData.Builder();
-        mBuilder.setLocale(LOCALE)
-                .setTitle(TITLE)
+        mBuilder.setTitle(TITLE)
                 .setSummaryOn(SUMMARY_ON)
                 .setEntries(ENTRIES)
                 .setClassName(CLASS_NAME)
