@@ -28,7 +28,6 @@ import android.view.View;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsUsageMonitor;
-import com.android.settings.DividerPreference;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateBaseBridge.Callback;
 import com.android.settings.applications.AppStateSmsPremBridge.SmsState;
@@ -38,6 +37,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.Callbacks;
 import com.android.settingslib.applications.ApplicationsState.Session;
+import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 
@@ -141,11 +141,9 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
             screen.addPreference(smsPreference);
         }
         if (apps.size() != 0) {
-            DividerPreference summary = new DividerPreference(getPrefContext());
-            summary.setSelectable(false);
-            summary.setSummary(R.string.premium_sms_warning);
-            summary.setDividerAllowedAbove(true);
-            screen.addPreference(summary);
+            FooterPreference footer = new FooterPreference(getPrefContext());
+            footer.setTitle(R.string.premium_sms_warning);
+            screen.addPreference(footer);
         }
 
         if (!usePreferenceScreenTitle()) {
