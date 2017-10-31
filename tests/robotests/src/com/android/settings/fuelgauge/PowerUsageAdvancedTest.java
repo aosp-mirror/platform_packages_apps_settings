@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceCategory;
@@ -93,6 +94,10 @@ public class PowerUsageAdvancedTest {
     private PreferenceGroup mUsageListGroup;
     @Mock
     private ConnectivityManager mConnectivityManager;
+    @Mock
+    private UserInfo mNormalUserInfo;
+    @Mock
+    private UserInfo mManagedUserInfo;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -136,6 +141,11 @@ public class PowerUsageAdvancedTest {
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
         mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
         mNormalBatterySipper.drainType = DrainType.SCREEN;
+
+        doReturn(true).when(mNormalUserInfo).isEnabled();
+        doReturn(false).when(mNormalUserInfo).isManagedProfile();
+        doReturn(true).when(mManagedUserInfo).isEnabled();
+        doReturn(true).when(mManagedUserInfo).isManagedProfile();
     }
 
     @Test
@@ -293,9 +303,12 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
-    public void testShouldHideCategory_typeUserAndOnlyOne_returnTrue() {
+    public void testShouldHideCategory_typeUserAndOnlyOneNormalUser_returnTrue() {
         mPowerUsageData.usageType = UsageType.USER;
-        doReturn(1).when(mUserManager).getUserCount();
+        List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(mNormalUserInfo);
+        userInfos.add(mManagedUserInfo);
+        doReturn(userInfos).when(mUserManager).getUsers();
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
@@ -321,7 +334,10 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testShouldHideCategory_typeUserAndMoreThanOne_returnFalse() {
         mPowerUsageData.usageType = UsageType.USER;
-        doReturn(2).when(mUserManager).getUserCount();
+        List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(mNormalUserInfo);
+        userInfos.add(mNormalUserInfo);
+        doReturn(userInfos).when(mUserManager).getUsers();
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
     }
@@ -423,4 +439,5 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.refreshUi();
         verify(mHistPref, atLeastOnce()).setBottomSummary(any());
     }
+
 }
