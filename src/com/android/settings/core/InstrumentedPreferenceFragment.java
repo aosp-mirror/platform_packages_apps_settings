@@ -85,7 +85,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     public static boolean usePreferenceScreenTitle() {
-        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE);
+        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE) || true;
     }
 
     protected final Context getPrefContext() {

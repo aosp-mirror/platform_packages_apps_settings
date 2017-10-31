@@ -74,17 +74,6 @@ public class InstrumentedPreferenceFragmentTest {
     }
 
     @Test
-    public void onCreatePreferences_preferenceScreenTitleFeatureOff_shouldNotAddPreference() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + mFragment.FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE,
-                "false");
-
-        mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
-
-        verify(mFragment, never()).addPreferencesFromResource(anyInt());
-    }
-
-    @Test
     public void onCreatePreferences_noPreferenceScreenResId_shouldNotAddPreference() {
         SettingsShadowSystemProperties.set(
                 FeatureFlagUtils.FFLAG_PREFIX + mFragment.FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE,
