@@ -18,18 +18,17 @@ package com.android.settings.development;
 
 import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
         .REQUEST_CODE_ENABLE_OEM_UNLOCK;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
@@ -43,6 +42,7 @@ import com.android.settingslib.RestrictedSwitchPreference;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
@@ -81,6 +81,8 @@ public class OemUnlockPreferenceControllerTest {
         mController = new OemUnlockPreferenceController(mContext, mActivity, mFragment);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);
+        when(mFragment.getChildFragmentManager()).thenReturn(
+                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -114,8 +116,8 @@ public class OemUnlockPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOffUnlock() {
         mController.onPreferenceChange(null, false);
-
         verify(mOemLockManager).setOemUnlockAllowedByUser(false);
+        verify(mFragment).getChildFragmentManager();
     }
 
     @Test

@@ -90,6 +90,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
             }
         } else {
             mOemLockManager.setOemUnlockAllowedByUser(false);
+            OemLockInfoDialog.show(mFragment);
         }
         return true;
     }
