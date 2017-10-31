@@ -267,7 +267,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     0,
                     0,
-                    R.string.lockpassword_ok_label),
+                    R.string.lockpassword_confirm_label),
 
             ConfirmWrong(
                     R.string.lockpassword_confirm_passwords_dont_match,

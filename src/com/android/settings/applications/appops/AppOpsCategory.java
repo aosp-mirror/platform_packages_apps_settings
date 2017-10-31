@@ -1,20 +1,20 @@
-/**
+/*
  * Copyright (C) 2013 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy
- * of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations
- * under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.appops;
 
 import android.app.AppOpsManager;
 import android.app.ListFragment;
@@ -39,35 +39,24 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.applications.AppOpsState.AppOpEntry;
+import com.android.settings.applications.appops.AppOpsState.AppOpEntry;
 
 import java.util.List;
 
 public class AppOpsCategory extends ListFragment implements
         LoaderManager.LoaderCallbacks<List<AppOpEntry>> {
 
-    private static final int RESULT_APP_DETAILS = 1;
-
     AppOpsState mState;
-    boolean mUserControlled;
 
     // This is the Adapter being used to display the list's data.
     AppListAdapter mAdapter;
-
-    String mCurrentPkgName;
 
     public AppOpsCategory() {
     }
 
     public AppOpsCategory(AppOpsState.OpsTemplate template) {
-        this(template, false);
-    }
-
-    public AppOpsCategory(AppOpsState.OpsTemplate template, boolean userControlled) {
         Bundle args = new Bundle();
         args.putParcelable("template", template);
-        args.putBoolean("userControlled", userControlled);
         setArguments(args);
     }
 
@@ -125,22 +114,18 @@ public class AppOpsCategory extends ListFragment implements
         final InterestingConfigChanges mLastConfig = new InterestingConfigChanges();
         final AppOpsState mState;
         final AppOpsState.OpsTemplate mTemplate;
-        final boolean mUserControlled;
 
         List<AppOpEntry> mApps;
         PackageIntentReceiver mPackageObserver;
 
-        public AppListLoader(Context context, AppOpsState state, AppOpsState.OpsTemplate template,
-                boolean userControlled) {
+        public AppListLoader(Context context, AppOpsState state, AppOpsState.OpsTemplate template) {
             super(context);
             mState = state;
             mTemplate = template;
-            mUserControlled = userControlled;
         }
 
         @Override public List<AppOpEntry> loadInBackground() {
-            return mState.buildState(mTemplate, 0, null,
-                    mUserControlled ? AppOpsState.LABEL_COMPARATOR : AppOpsState.RECENCY_COMPARATOR);
+            return mState.buildState(mTemplate, 0, null, AppOpsState.LABEL_COMPARATOR);
         }
 
         /**
@@ -259,15 +244,13 @@ public class AppOpsCategory extends ListFragment implements
         private final Resources mResources;
         private final LayoutInflater mInflater;
         private final AppOpsState mState;
-        private final boolean mUserControlled;
 
         List<AppOpEntry> mList;
 
-        public AppListAdapter(Context context, AppOpsState state, boolean userControlled) {
+        public AppListAdapter(Context context, AppOpsState state) {
             mResources = context.getResources();
             mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             mState = state;
-            mUserControlled = userControlled;
         }
 
         public void setData(List<AppOpEntry> data) {
@@ -293,7 +276,8 @@ public class AppOpsCategory extends ListFragment implements
         /**
          * Populate new items in the list.
          */
-        @Override public View getView(int position, View convertView, ViewGroup parent) {
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
             View view;
 
             if (convertView == null) {
@@ -303,21 +287,14 @@ public class AppOpsCategory extends ListFragment implements
             }
 
             AppOpEntry item = getItem(position);
-            ((ImageView)view.findViewById(R.id.app_icon)).setImageDrawable(
+            ((ImageView) view.findViewById(R.id.app_icon)).setImageDrawable(
                     item.getAppEntry().getIcon());
-            ((TextView)view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
-            if (mUserControlled) {
-                ((TextView) view.findViewById(R.id.op_name)).setText(
-                        item.getTimeText(mResources, false));
-                view.findViewById(R.id.op_time).setVisibility(View.GONE);
-                ((Switch) view.findViewById(R.id.op_switch)).setChecked(
-                        item.getPrimaryOpMode() == AppOpsManager.MODE_ALLOWED);
-            } else {
-                ((TextView) view.findViewById(R.id.op_name)).setText(item.getSummaryText(mState));
-                ((TextView) view.findViewById(R.id.op_time)).setText(
-                        item.getTimeText(mResources, false));
-                view.findViewById(R.id.op_switch).setVisibility(View.GONE);
-            }
+            ((TextView) view.findViewById(R.id.app_name)).setText(item.getAppEntry().getLabel());
+            ((TextView) view.findViewById(R.id.op_name)).setText(
+                    item.getTimeText(mResources, false));
+            view.findViewById(R.id.op_time).setVisibility(View.GONE);
+            ((Switch) view.findViewById(R.id.op_switch)).setChecked(
+                    item.getPrimaryOpMode() == AppOpsManager.MODE_ALLOWED);
 
             return view;
         }
@@ -327,7 +304,6 @@ public class AppOpsCategory extends ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mState = new AppOpsState(getActivity());
-        mUserControlled = getArguments().getBoolean("userControlled");
     }
 
     @Override public void onActivityCreated(Bundle savedInstanceState) {
@@ -341,7 +317,7 @@ public class AppOpsCategory extends ListFragment implements
         setHasOptionsMenu(true);
 
         // Create an empty adapter we will use to display the loaded data.
-        mAdapter = new AppListAdapter(getActivity(), mState, mUserControlled);
+        mAdapter = new AppListAdapter(getActivity(), mState);
         setListAdapter(mAdapter);
 
         // Start out with a progress indicator.
@@ -351,36 +327,20 @@ public class AppOpsCategory extends ListFragment implements
         getLoaderManager().initLoader(0, null, this);
     }
 
-    // utility method used to start sub activity
-    private void startApplicationDetailsActivity() {
-        // start new fragment to display extended information
-        Bundle args = new Bundle();
-        args.putString(AppOpsDetails.ARG_PACKAGE_NAME, mCurrentPkgName);
-
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(this, AppOpsDetails.class.getName(), args,
-                R.string.app_ops_settings, null, this, RESULT_APP_DETAILS);
-    }
-
     @Override public void onListItemClick(ListView l, View v, int position, long id) {
         AppOpEntry entry = mAdapter.getItem(position);
         if (entry != null) {
-            if (mUserControlled) {
-                // We treat this as tapping on the check box, toggling the app op state.
-                Switch sw = ((Switch) v.findViewById(R.id.op_switch));
-                boolean checked = !sw.isChecked();
-                sw.setChecked(checked);
-                AppOpsManager.OpEntry op = entry.getOpEntry(0);
-                int mode = checked ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED;
-                mState.getAppOpsManager().setMode(op.getOp(),
-                        entry.getAppEntry().getApplicationInfo().uid,
-                        entry.getAppEntry().getApplicationInfo().packageName,
-                        mode);
-                entry.overridePrimaryOpMode(mode);
-            } else {
-                mCurrentPkgName = entry.getAppEntry().getApplicationInfo().packageName;
-                startApplicationDetailsActivity();
-            }
+            // We treat this as tapping on the check box, toggling the app op state.
+            Switch sw = v.findViewById(R.id.op_switch);
+            boolean checked = !sw.isChecked();
+            sw.setChecked(checked);
+            AppOpsManager.OpEntry op = entry.getOpEntry(0);
+            int mode = checked ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_IGNORED;
+            mState.getAppOpsManager().setMode(op.getOp(),
+                    entry.getAppEntry().getApplicationInfo().uid,
+                    entry.getAppEntry().getApplicationInfo().packageName,
+                    mode);
+            entry.overridePrimaryOpMode(mode);
         }
     }
 
@@ -388,9 +348,9 @@ public class AppOpsCategory extends ListFragment implements
         Bundle fargs = getArguments();
         AppOpsState.OpsTemplate template = null;
         if (fargs != null) {
-            template = (AppOpsState.OpsTemplate)fargs.getParcelable("template");
+            template = fargs.getParcelable("template");
         }
-        return new AppListLoader(getActivity(), mState, template, mUserControlled);
+        return new AppListLoader(getActivity(), mState, template);
     }
 
     @Override public void onLoadFinished(Loader<List<AppOpEntry>> loader, List<AppOpEntry> data) {

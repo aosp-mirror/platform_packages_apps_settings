@@ -49,6 +49,9 @@ public class LockscreenDashboardFragment extends DashboardFragment
     @VisibleForTesting
     static final String KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE =
             "security_setting_lock_screen_notif_work";
+    @VisibleForTesting
+    static final String KEY_ADD_USER_FROM_LOCK_SCREEN =
+            "security_lockscreen_add_users_when_locked";
 
     private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
 
@@ -77,18 +80,18 @@ public class LockscreenDashboardFragment extends DashboardFragment
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         final LockScreenNotificationPreferenceController notificationController =
-            new LockScreenNotificationPreferenceController(context,
-                    KEY_LOCK_SCREEN_NOTIFICATON,
-                    KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER,
-                    KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
+                new LockScreenNotificationPreferenceController(context,
+                        KEY_LOCK_SCREEN_NOTIFICATON,
+                        KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE_HEADER,
+                        KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
         final AddUserWhenLockedPreferenceController addUserWhenLockedController =
-            new AddUserWhenLockedPreferenceController(context);
+                new AddUserWhenLockedPreferenceController(context, KEY_ADD_USER_FROM_LOCK_SCREEN);
         lifecycle.addObserver(addUserWhenLockedController);
         controllers.add(addUserWhenLockedController);
         mOwnerInfoPreferenceController =
-            new OwnerInfoPreferenceController(context, this, lifecycle);
+                new OwnerInfoPreferenceController(context, this, lifecycle);
         controllers.add(mOwnerInfoPreferenceController);
         return controllers;
     }
@@ -101,23 +104,32 @@ public class LockscreenDashboardFragment extends DashboardFragment
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-                final SearchIndexableResource sir = new SearchIndexableResource(context);
-                sir.xmlResId = R.xml.security_lockscreen_settings;
-                return Arrays.asList(sir);
-            }
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.security_lockscreen_settings;
+                    return Arrays.asList(sir);
+                }
 
-            @Override
-            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-                final List<AbstractPreferenceController> controllers = new ArrayList<>();
-                controllers.add(new LockScreenNotificationPreferenceController(context));
-                controllers.add(new AddUserWhenLockedPreferenceController(context));
-                controllers.add(new OwnerInfoPreferenceController(
-                    context, null /* fragment */, null /* lifecycle */));
-                return controllers;
-            }
-        };
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
+                    final List<AbstractPreferenceController> controllers = new ArrayList<>();
+                    controllers.add(new LockScreenNotificationPreferenceController(context));
+                    controllers.add(new AddUserWhenLockedPreferenceController(context,
+                            KEY_ADD_USER_FROM_LOCK_SCREEN));
+                    controllers.add(new OwnerInfoPreferenceController(
+                            context, null /* fragment */, null /* lifecycle */));
+                    return controllers;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> niks = super.getNonIndexableKeys(context);
+                    niks.add(KEY_ADD_USER_FROM_LOCK_SCREEN);
+                    return niks;
+                }
+            };
 }

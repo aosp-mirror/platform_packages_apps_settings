@@ -40,7 +40,7 @@
                 settings:useAdditionalSummary="true"
                 settings:restrictedSwitchSummary="@string/disabled_by_admin_summary_text" />
 
-        <com.android.settings.DimmableIconPreference
+        <com.android.settingslib.RestrictedPreference
                 android:key="forget_vpn"
                 android:title="@string/vpn_forget_long"
                 android:icon="@drawable/ic_menu_delete"

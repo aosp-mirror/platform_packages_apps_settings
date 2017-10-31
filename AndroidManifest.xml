@@ -1192,23 +1192,6 @@
             </intent-filter>
         </activity>
 
-        <!--
-        <activity android:name="Settings$AppOpsSummaryActivity"
-                android:label="@string/app_ops_settings"
-                android:taskAffinity=""
-                android:enabled="false">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.settings.APP_OPS_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.AppOpsSummary" />
-        </activity>
-        -->
-
         <activity android:name="Settings$BackgroundCheckSummaryActivity"
                 android:label="@string/background_check_title"
                 android:taskAffinity=""

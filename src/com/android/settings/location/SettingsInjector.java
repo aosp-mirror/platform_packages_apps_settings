@@ -40,8 +40,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
-import com.android.settings.DimmableIconPreference;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -270,13 +268,7 @@ class SettingsInjector {
         PackageManager pm = mContext.getPackageManager();
         Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
         Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
-        CharSequence badgedAppLabel = pm.getUserBadgedLabel(info.title, info.mUserHandle);
-        if (info.title.contentEquals(badgedAppLabel)) {
-            // If badged label is not different from original then no need for it as
-            // a separate content description.
-            badgedAppLabel = null;
-        }
-        Preference pref = new DimmableIconPreference(prefContext, badgedAppLabel);
+        Preference pref = new Preference(prefContext);
         pref.setTitle(info.title);
         pref.setSummary(null);
         pref.setIcon(icon);
