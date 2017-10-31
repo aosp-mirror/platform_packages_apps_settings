@@ -51,8 +51,8 @@ public class BluetoothDetailsHeaderController extends BluetoothDetailsController
     }
 
     protected void setHeaderProperties() {
-        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription(
-                mContext, mCachedDevice,
+        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+                .getBtClassDrawableWithDescription(mContext, mCachedDevice,
                 mContext.getResources().getFraction(R.fraction.bt_battery_scale_fraction, 1, 1));
         String summaryText = mCachedDevice.getConnectionSummary();
         mHeaderController.setLabel(mCachedDevice.getName());
