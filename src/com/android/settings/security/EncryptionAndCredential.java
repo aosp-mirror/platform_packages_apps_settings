@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
-import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
@@ -30,11 +28,12 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ import java.util.List;
  * Encryption and Credential settings.
  * TODO: Extends this from {@link DashboardFragment} instead
  */
-public class EncryptionAndCredential extends SettingsPreferenceFragment implements Indexable {
+public class EncryptionAndCredential extends DashboardFragment {
 
     private static final String TAG = "EncryptionAndCredential";
 
@@ -69,12 +68,19 @@ public class EncryptionAndCredential extends SettingsPreferenceFragment implemen
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected String getLogTag() {
+        return TAG;
+    }
 
-        final Activity activity = getActivity();
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        return null;
+    }
 
-        mUm = UserManager.get(activity);
+    @Override
+    protected int getPreferenceScreenResId() {
+        return 0;
     }
 
     /**
