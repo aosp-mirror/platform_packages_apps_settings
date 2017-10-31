@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Activity;
 import android.content.ComponentName;
-
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -33,6 +32,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchFeatureProviderImplTest {
@@ -43,7 +46,7 @@ public class SearchFeatureProviderImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
-        mProvider = new SearchFeatureProviderImpl();
+        mProvider = spy(new SearchFeatureProviderImpl());
     }
 
     @Test
@@ -57,18 +60,19 @@ public class SearchFeatureProviderImplTest {
     @Test
     public void getDatabaseSearchLoader_shouldCleanupQuery() {
         final String query = "  space ";
-        final DatabaseResultLoader loader = mProvider.getDatabaseSearchLoader(mActivity, query);
 
-        assertThat(loader.mQueryText).isEqualTo(query.trim());
+        mProvider.getStaticSearchResultTask(mActivity, query);
+
+        verify(mProvider).cleanQuery(eq(query));
     }
 
     @Test
     public void getInstalledAppSearchLoader_shouldCleanupQuery() {
         final String query = "  space ";
-        final InstalledAppResultLoader loader =
-                mProvider.getInstalledAppSearchLoader(mActivity, query);
 
-        assertThat(loader.mQuery).isEqualTo(query.trim());
+        mProvider.getInstalledAppSearchTask(mActivity, query);
+
+        verify(mProvider).cleanQuery(eq(query));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -86,5 +90,13 @@ public class SearchFeatureProviderImplTest {
     public void verifyLaunchSearchResultPageCaller_goodCaller_shouldNotCrash() {
         final ComponentName cn = new ComponentName(mActivity.getPackageName(), "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+    }
+
+    @Test
+    public void cleanQuery_trimsWhitespace() {
+        final String query = "  space ";
+        final String cleanQuery = "space";
+
+        assertThat(mProvider.cleanQuery(query)).isEqualTo(cleanQuery);
     }
 }

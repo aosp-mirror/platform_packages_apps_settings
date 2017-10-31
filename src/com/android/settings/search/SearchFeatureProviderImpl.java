@@ -22,12 +22,15 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -40,6 +43,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     private DatabaseIndexingManager mDatabaseIndexingManager;
     private SiteMapManager mSiteMapManager;
+    private ExecutorService mExecutorService;
 
     @Override
     public boolean isEnabled(Context context) {
@@ -59,26 +63,31 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public DatabaseResultLoader getDatabaseSearchLoader(Context context, String query) {
+    public SearchResultLoader getSearchResultLoader(Context context, String query) {
+        return new SearchResultLoader(context, cleanQuery(query));
+    }
+
+    @Override
+    public DatabaseResultLoader getStaticSearchResultTask(Context context, String query) {
         return new DatabaseResultLoader(context, cleanQuery(query), getSiteMapManager());
     }
 
     @Override
-    public InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query) {
+    public InstalledAppResultLoader getInstalledAppSearchTask(Context context, String query) {
         return new InstalledAppResultLoader(
                 context, new PackageManagerWrapper(context.getPackageManager()),
                 cleanQuery(query), getSiteMapManager());
     }
 
     @Override
-    public AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
+    public AccessibilityServiceResultLoader getAccessibilityServiceResultTask(Context context,
             String query) {
         return new AccessibilityServiceResultLoader(context, cleanQuery(query),
                 getSiteMapManager());
     }
 
     @Override
-    public InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query) {
+    public InputDeviceResultLoader getInputDeviceResultTask(Context context, String query) {
         return new InputDeviceResultLoader(context, cleanQuery(query), getSiteMapManager());
     }
 
@@ -124,12 +133,21 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
                 .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
     }
 
+    @Override
+    public ExecutorService getExecutorService() {
+        if (mExecutorService == null) {
+            mExecutorService = Executors.newCachedThreadPool();
+        }
+        return mExecutorService;
+    }
+
     /**
      * A generic method to make the query suitable for searching the database.
      *
      * @return the cleaned query string
      */
-    private String cleanQuery(String query) {
+    @VisibleForTesting
+    String cleanQuery(String query) {
         if (TextUtils.isEmpty(query)) {
             return null;
         }

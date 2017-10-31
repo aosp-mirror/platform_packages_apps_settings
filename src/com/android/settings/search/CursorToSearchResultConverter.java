@@ -36,16 +36,6 @@ import java.util.Map;
 import java.util.Set;
 
 import static com.android.settings.search.DatabaseResultLoader.BASE_RANKS;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_CLASS_NAME;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ICON;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ID;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_PAYLOAD;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_PAYLOAD_TYPE;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_SCREEN_TITLE;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_SUMMARY_ON;
-import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_TITLE;
 import static com.android.settings.search.SearchResult.TOP_RANK;
 
 /**
@@ -61,6 +51,25 @@ import static com.android.settings.search.SearchResult.TOP_RANK;
 public class CursorToSearchResultConverter {
 
     private static final String TAG = "CursorConverter";
+
+    /**
+     * These indices are used to match the columns of the this loader's SELECT statement.
+     * These are not necessarily the same order nor similar coverage as the schema defined in
+     * IndexDatabaseHelper
+     */
+    public static final int COLUMN_INDEX_ID = 0;
+    public static final int COLUMN_INDEX_TITLE = 1;
+    public static final int COLUMN_INDEX_SUMMARY_ON = 2;
+    public static final int COLUMN_INDEX_SUMMARY_OFF = 3;
+    public static final int COLUMN_INDEX_CLASS_NAME = 4;
+    public static final int COLUMN_INDEX_SCREEN_TITLE = 5;
+    public static final int COLUMN_INDEX_ICON = 6;
+    public static final int COLUMN_INDEX_INTENT_ACTION = 7;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_CLASS = 9;
+    public static final int COLUMN_INDEX_KEY = 10;
+    public static final int COLUMN_INDEX_PAYLOAD_TYPE = 11;
+    public static final int COLUMN_INDEX_PAYLOAD = 12;
 
     private final Context mContext;
 

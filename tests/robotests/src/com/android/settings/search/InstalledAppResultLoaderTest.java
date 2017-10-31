@@ -19,7 +19,9 @@ package com.android.settings.search;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
@@ -53,8 +55,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class InstalledAppResultLoaderTest {
     @Mock
     private SiteMapManager mSiteMapManager;
 
-    private InstalledAppResultLoader mLoader;
+    private InstalledAppResultLoader.InstalledAppResultCallable mCallable;
 
     @Before
     public void setUp() {
@@ -109,49 +109,50 @@ public class InstalledAppResultLoaderTest {
     }
 
     @Test
-    public void query_noMatchingQuery_shouldReturnEmptyResult() {
+    public void query_noMatchingQuery_shouldReturnEmptyResult() throws Exception {
         final String query = "abc";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground()).isEmpty();
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_matchingQuery_shouldReturnNonSystemApps() {
+    public void query_matchingQuery_shouldReturnNonSystemApps() throws Exception {
         final String query = "app";
 
-        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = spy(new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager));
-        when(mLoader.getContext()).thenReturn(mContext);
         when(mSiteMapManager.buildBreadCrumb(eq(mContext), anyString(), anyString()))
                 .thenReturn(Arrays.asList(new String[]{"123"}));
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(3);
+        assertThat(mCallable.call()).hasSize(3);
         verify(mSiteMapManager)
                 .buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
-    public void query_matchingQuery_shouldReturnSystemAppUpdates() {
+    public void query_matchingQuery_shouldReturnSystemAppUpdates() throws Exception {
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_UPDATED_SYSTEM_APP,
                                 0 /* targetSdkVersion */)));
         final String query = "app";
 
-        mLoader = spy(new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = spy(new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager));
-        when(mLoader.getContext()).thenReturn(mContext);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
         verify(mSiteMapManager)
                 .buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
-    public void query_matchingQuery_shouldReturnSystemAppIfLaunchable() {
+    public void query_matchingQuery_shouldReturnSystemAppIfLaunchable() throws Exception {
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
@@ -164,14 +165,15 @@ public class InstalledAppResultLoaderTest {
 
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_matchingQuery_shouldReturnSystemAppIfHomeApp() {
+    public void query_matchingQuery_shouldReturnSystemAppIfHomeApp() throws Exception {
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
@@ -180,28 +182,26 @@ public class InstalledAppResultLoaderTest {
                 any(Intent.class), anyInt(), anyInt()))
                 .thenReturn(null);
 
-        when(mPackageManagerWrapper.getHomeActivities(anyList())).thenAnswer(new Answer<Object>() {
-            @Override
-            public Object answer(InvocationOnMock invocation) throws Throwable {
-                final List<ResolveInfo> list = (List<ResolveInfo>) invocation.getArguments()[0];
-                final ResolveInfo info = new ResolveInfo();
-                info.activityInfo = new ActivityInfo();
-                info.activityInfo.packageName = "app1";
-                list.add(info);
-                return null;
-            }
+        when(mPackageManagerWrapper.getHomeActivities(anyList())).thenAnswer(invocation -> {
+            final List<ResolveInfo> list = (List<ResolveInfo>) invocation.getArguments()[0];
+            final ResolveInfo info = new ResolveInfo();
+            info.activityInfo = new ActivityInfo();
+            info.activityInfo.packageName = "app1";
+            list.add(info);
+            return null;
         });
 
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_matchingQuery_shouldNotReturnSystemAppIfNotLaunchable() {
+    public void query_matchingQuery_shouldNotReturnSystemAppIfNotLaunchable() throws Exception {
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, "app1", FLAG_SYSTEM,
@@ -212,21 +212,23 @@ public class InstalledAppResultLoaderTest {
 
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground()).isEmpty();
+        assertThat(mCallable.call()).isEmpty();
         verify(mSiteMapManager, never())
                 .buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
-    public void query_matchingQuery_multipleResults() {
+    public void query_matchingQuery_multipleResults() throws Exception {
         final String query = "app";
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
-        final Set<? extends SearchResult> results = mLoader.loadInBackground();
+        final List<? extends SearchResult> results = mCallable.call();
 
         Set<CharSequence> expectedTitles = new HashSet<>(Arrays.asList("app4", "app", "appBuffer"));
         Set<CharSequence> actualTitles = new HashSet<>();
@@ -237,161 +239,172 @@ public class InstalledAppResultLoaderTest {
     }
 
     @Test
-    public void query_normalWord_MatchPrefix() {
+    public void query_normalWord_MatchPrefix() throws Exception {
         final String query = "ba";
         final String packageName = "Bananas";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_CapitalCase_DoestMatchSecondWord() {
+    public void query_CapitalCase_DoestMatchSecondWord() throws Exception {
         final String query = "Apples";
         final String packageName = "BananasApples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_TwoWords_MatchesFirstWord() {
+    public void query_TwoWords_MatchesFirstWord() throws Exception {
         final String query = "Banana";
         final String packageName = "Bananas Apples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_TwoWords_MatchesSecondWord() {
+    public void query_TwoWords_MatchesSecondWord() throws Exception {
         final String query = "Apple";
         final String packageName = "Bananas Apples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_ThreeWords_MatchesThirdWord() {
+    public void query_ThreeWords_MatchesThirdWord() throws Exception {
         final String query = "Pear";
         final String packageName = "Bananas Apples Pears";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_DoubleSpacedWords_MatchesSecondWord() {
+    public void query_DoubleSpacedWords_MatchesSecondWord() throws Exception {
         final String query = "Apple";
         final String packageName = "Bananas  Apples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_SpecialChar_MatchesSecondWord() {
+    public void query_SpecialChar_MatchesSecondWord() throws Exception {
         final String query = "Apple";
         final String packageName = "Bananas & Apples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_TabSeparated_MatchesSecondWord() {
+    public void query_TabSeparated_MatchesSecondWord() throws Exception {
         final String query = "Apple";
         final String packageName = "Bananas\tApples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_LeadingNumber_MatchesWord() {
+    public void query_LeadingNumber_MatchesWord() throws Exception {
         final String query = "4";
         final String packageName = "4Bananas";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(1);
+        assertThat(mCallable.call()).hasSize(1);
     }
 
     @Test
-    public void query_FirstWordPrefixOfQuery_NoMatch() {
+    public void query_FirstWordPrefixOfQuery_NoMatch() throws Exception {
         final String query = "Bananass";
         final String packageName = "Bananas Apples";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_QueryLongerThanAppName_NoMatch() {
+    public void query_QueryLongerThanAppName_NoMatch() throws Exception {
         final String query = "BananasApples";
         final String packageName = "Bananas";
         when(mPackageManagerWrapper.getInstalledApplicationsAsUser(anyInt(), anyInt()))
                 .thenReturn(Arrays.asList(
                         ApplicationTestUtils.buildInfo(0 /* uid */, packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        assertThat(mLoader.loadInBackground().size()).isEqualTo(0);
+        assertThat(mCallable.call()).isEmpty();
     }
 
     @Test
-    public void query_appExistsInBothProfiles() {
+    public void query_appExistsInBothProfiles() throws Exception {
         final String query = "carrot";
         final String packageName = "carrot";
         final int user1 = 0;
@@ -414,10 +427,11 @@ public class InstalledAppResultLoaderTest {
                                 packageName, 0 /* flags */,
                                 0 /* targetSdkVersion */)));
 
-        mLoader = new InstalledAppResultLoader(mContext, mPackageManagerWrapper, query,
+        mCallable = new InstalledAppResultLoader.InstalledAppResultCallable(mContext,
+                mPackageManagerWrapper, query,
                 mSiteMapManager);
 
-        Set<AppSearchResult> searchResults = (Set<AppSearchResult>) mLoader.loadInBackground();
+        List<AppSearchResult> searchResults = (List<AppSearchResult>) mCallable.call();
         assertThat(searchResults).hasSize(2);
 
         Set<Integer> uidResults = searchResults.stream().map(result -> result.info.uid).collect(

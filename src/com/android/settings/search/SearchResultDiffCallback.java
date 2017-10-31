@@ -26,10 +26,11 @@ import java.util.List;
  */
 public class SearchResultDiffCallback extends DiffUtil.Callback {
 
-    private List<SearchResult> mOldList;
-    private List<SearchResult> mNewList;
+    private List<? extends SearchResult> mOldList;
+    private List<? extends SearchResult> mNewList;
 
-    public SearchResultDiffCallback(List<SearchResult> oldList, List<SearchResult> newList) {
+    public SearchResultDiffCallback(List<? extends SearchResult> oldList,
+            List<? extends SearchResult> newList) {
         mOldList = oldList;
         mNewList = newList;
     }

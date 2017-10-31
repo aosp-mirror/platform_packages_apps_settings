@@ -21,9 +21,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Pair;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.search.DatabaseResultLoader.StaticSearchResultCallable;
 import com.android.settings.search.indexing.IndexData;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -39,37 +41,54 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class DatabaseResultLoaderTest {
+public class StaticSearchResultFutureTaskTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
     @Mock
     private SiteMapManager mSiteMapManager;
+    @Mock
+    private ExecutorService mService;
     private Context mContext;
 
     SQLiteDatabase mDb;
+
+    FakeFeatureFactory mFeatureFactory;
+
+    private final String[] STATIC_TITLES = {"static one", "static two", "static three"};
+    private final int[] STABLE_IDS =
+            {"id_one".hashCode(), "id_two".hashCode(), "id_three".hashCode()};
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        FakeFeatureFactory.setupForTest(mMockContext);
-        FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
-        when(factory.searchFeatureProvider.getSiteMapManager())
+        mFeatureFactory = FakeFeatureFactory.setupForTest(mMockContext);
+        when(mFeatureFactory.searchFeatureProvider.getExecutorService()).thenReturn(mService);
+        when(mFeatureFactory.searchFeatureProvider.getSiteMapManager())
                 .thenReturn(mSiteMapManager);
         mDb = IndexDatabaseHelper.getInstance(mContext).getWritableDatabase();
         setUpDb();
@@ -81,159 +100,252 @@ public class DatabaseResultLoaderTest {
     }
 
     @Test
-    public void testMatchTitle() {
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "title", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(2);
+    public void testMatchTitle() throws Exception {
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "title",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(2);
         verify(mSiteMapManager, times(2)).buildBreadCrumb(eq(mContext), anyString(), anyString());
     }
 
     @Test
-    public void testMatchSummary() {
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "summary",
+    public void testMatchSummary() throws Exception {
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "summary",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(2);
+
+        assertThat(loader.call()).hasSize(2);
     }
 
     @Test
-    public void testMatchKeywords() {
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "keywords",
+    public void testMatchKeywords() throws Exception {
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "keywords",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(2);
+
+        assertThat(loader.call()).hasSize(2);
     }
 
     @Test
-    public void testMatchEntries() {
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "entries",
+    public void testMatchEntries() throws Exception {
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "entries",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(2);
+
+        assertThat(loader.call()).hasSize(2);
     }
 
     @Test
-    public void testSpecialCaseWord_matchesNonPrefix() {
+    public void testSpecialCaseWord_matchesNonPrefix() throws Exception {
         insertSpecialCase("Data usage");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "usage", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "usage",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseDash_matchesWordNoDash() {
+    public void testSpecialCaseDash_matchesWordNoDash() throws Exception {
         insertSpecialCase("wi-fi calling");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "wifi", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
-    }
 
-    @Test
-    public void testSpecialCaseDash_matchesWordWithDash() {
-        insertSpecialCase("priorités seulment");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "priorités",
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "wifi",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseDash_matchesWordWithoutDash() {
+    public void testSpecialCaseDash_matchesWordWithDash() throws Exception {
         insertSpecialCase("priorités seulment");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "priorites",
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "priorités",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseDash_matchesEntireQueryWithoutDash() {
+    public void testSpecialCaseDash_matchesWordWithoutDash() throws Exception {
+        insertSpecialCase("priorités seulment");
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "priorites",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
+    }
+
+    @Test
+    public void testSpecialCaseDash_matchesEntireQueryWithoutDash() throws Exception {
         insertSpecialCase("wi-fi calling");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "wifi calling",
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "wifi calling",
                 mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCasePrefix_matchesPrefixOfEntry() {
+    public void testSpecialCasePrefix_matchesPrefixOfEntry() throws Exception {
         insertSpecialCase("Photos");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "pho", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "pho",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCasePrefix_DoesNotMatchNonPrefixSubstring() {
+    public void testSpecialCasePrefix_DoesNotMatchNonPrefixSubstring() throws Exception {
         insertSpecialCase("Photos");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "hot", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "hot",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(0);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_matchesPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefix_matchesPrefixOfEntry() throws Exception {
         insertSpecialCase("Apps Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "Apps", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "Apps",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_matchesSecondWordPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefix_matchesSecondWordPrefixOfEntry() throws Exception {
         insertSpecialCase("Apps Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "Not", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "Not",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfFirstEntry() {
+    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfFirstEntry()
+            throws Exception {
         insertSpecialCase("Apps Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "pp", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "pp",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(0);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfSecondEntry() {
+    public void testSpecialCaseMultiWordPrefix_DoesNotMatchMatchesPrefixOfSecondEntry()
+            throws Exception {
         insertSpecialCase("Apps Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "tion", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(0);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "tion",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(0);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfEntry() {
+    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfEntry() throws
+            Exception {
         insertSpecialCase("Apps & Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "App", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "App",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfSecondEntry() {
+    public void testSpecialCaseMultiWordPrefixWithSpecial_matchesPrefixOfSecondEntry()
+            throws Exception {
         insertSpecialCase("Apps & Notifications");
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "No", mSiteMapManager);
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "No",
+                mSiteMapManager);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testResultMatchedByMultipleQueries_duplicatesRemoved() {
+    public void testResultMatchedByMultipleQueries_duplicatesRemoved() throws Exception {
         String key = "durr";
         insertSameValueAllFieldsCase(key);
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, key, null);
 
-        assertThat(loader.loadInBackground().size()).isEqualTo(1);
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, key, null);
+
+        assertThat(loader.call()).hasSize(1);
     }
 
     @Test
-    public void testSpecialCaseTwoWords_multipleResults() {
+    public void testSpecialCaseTwoWords_multipleResults() throws Exception {
         final String caseOne = "Apple pear";
         final String caseTwo = "Banana apple";
         insertSpecialCase(caseOne);
         insertSpecialCase(caseTwo);
-        DatabaseResultLoader loader = new DatabaseResultLoader(mContext, "App", null);
-        Set<? extends SearchResult> results = loader.loadInBackground();
-        Set<CharSequence> expectedTitles = new HashSet<>(Arrays.asList(caseOne, caseTwo));
-        Set<CharSequence> actualTitles = new HashSet<>();
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "App", null);
+
+        List<? extends SearchResult> results = loader.call();
+
+        Set<String> actualTitles = new HashSet<>();
         for (SearchResult result : results) {
-            actualTitles.add(result.title);
+            actualTitles.add(result.title.toString());
         }
-        assertThat(actualTitles).isEqualTo(expectedTitles);
+        assertThat(actualTitles).containsAllOf(caseOne, caseTwo);
+    }
+
+    @Test
+    public void testGetRankingScoreByStableId_sortedDynamically() throws Exception {
+        FutureTask<List<Pair<String, Float>>> task = mock(FutureTask.class);
+        when(task.get(anyLong(), any(TimeUnit.class))).thenReturn(getDummyRankingScores());
+        when(mFeatureFactory.searchFeatureProvider.getRankerTask(any(Context.class),
+                anyString())).thenReturn(task);
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any())).thenReturn(
+                true);
+
+        insertSpecialCase(STATIC_TITLES[0], STABLE_IDS[0]);
+        insertSpecialCase(STATIC_TITLES[1], STABLE_IDS[1]);
+        insertSpecialCase(STATIC_TITLES[2], STABLE_IDS[2]);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "Static",
+                null);
+
+        List<? extends SearchResult> results = loader.call();
+
+        assertThat(results.get(0).title).isEqualTo(STATIC_TITLES[2]);
+        assertThat(results.get(1).title).isEqualTo(STATIC_TITLES[0]);
+        assertThat(results.get(2).title).isEqualTo(STATIC_TITLES[1]);
+    }
+
+    @Test
+    public void testGetRankingScoreByStableId_scoresTimeout_sortedStatically() throws Exception {
+        Callable<List<Pair<String, Float>>> callable = mock(Callable.class);
+        when(callable.call()).thenThrow(new TimeoutException());
+        FutureTask<List<Pair<String, Float>>> task = new FutureTask<>(callable);
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any())).thenReturn(
+                true);
+        when(mFeatureFactory.searchFeatureProvider.getRankerTask(any(Context.class),
+                anyString())).thenReturn(task);
+        insertSpecialCase("title", STABLE_IDS[0]);
+
+        StaticSearchResultCallable loader = new StaticSearchResultCallable(mContext, "title", null);
+
+        List<? extends SearchResult> results = loader.call();
+        assertThat(results.get(0).title).isEqualTo("title");
+        assertThat(results.get(1).title).isEqualTo("alpha_title");
+        assertThat(results.get(2).title).isEqualTo("bravo_title");
     }
 
     private void insertSpecialCase(String specialCase) {
+        insertSpecialCase(specialCase, specialCase.hashCode());
+    }
+
+    private void insertSpecialCase(String specialCase, int docId) {
         String normalized = IndexData.normalizeHyphen(specialCase);
         normalized = IndexData.normalizeString(normalized);
         final ResultPayload payload = new ResultPayload(new Intent());
 
         ContentValues values = new ContentValues();
-        values.put(IndexDatabaseHelper.IndexColumns.DOCID, normalized.hashCode());
+        values.put(IndexDatabaseHelper.IndexColumns.DOCID, docId);
         values.put(IndexDatabaseHelper.IndexColumns.LOCALE, "en-us");
         values.put(IndexDatabaseHelper.IndexColumns.DATA_RANK, 1);
         values.put(IndexDatabaseHelper.IndexColumns.DATA_TITLE, specialCase);
@@ -372,5 +484,34 @@ public class DatabaseResultLoaderTest {
         values.put(IndexDatabaseHelper.IndexColumns.PAYLOAD, ResultPayloadUtils.marshall(payload));
 
         mDb.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX, null, values);
+    }
+
+    private List<? extends SearchResult> getDummyDbResults() {
+        List<SearchResult> results = new ArrayList<>();
+        ResultPayload payload = new ResultPayload(new Intent());
+        SearchResult.Builder builder = new SearchResult.Builder();
+        builder.setPayload(payload)
+                .setTitle(STATIC_TITLES[0])
+                .setStableId(STABLE_IDS[0]);
+        results.add(builder.build());
+
+        builder.setTitle(STATIC_TITLES[1])
+                .setStableId(STABLE_IDS[1]);
+        results.add(builder.build());
+
+        builder.setTitle(STATIC_TITLES[2])
+                .setStableId(STABLE_IDS[2]);
+        results.add(builder.build());
+
+        return results;
+    }
+
+    private List<Pair<String, Float>> getDummyRankingScores() {
+        List<? extends SearchResult> results = getDummyDbResults();
+        List<Pair<String, Float>> scores = new ArrayList<>();
+        scores.add(new Pair<>(Long.toString(results.get(2).stableId), 0.9f)); // static_three
+        scores.add(new Pair<>(Long.toString(results.get(0).stableId), 0.8f)); // static_one
+        scores.add(new Pair<>(Long.toString(results.get(1).stableId), 0.2f)); // static_two
+        return scores;
     }
 }
