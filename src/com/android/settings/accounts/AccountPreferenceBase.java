@@ -23,18 +23,16 @@ import android.content.Context;
 import android.content.SyncStatusObserver;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 abstract class AccountPreferenceBase extends SettingsPreferenceFragment
@@ -45,8 +43,6 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
 
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
-
-    private final Handler mHandler = new Handler();
 
     private UserManager mUm;
     private Object mStatusChangeListenerHandle;
@@ -118,29 +114,8 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         ContentResolver.removeStatusChangeListener(mStatusChangeListenerHandle);
     }
 
-    private SyncStatusObserver mSyncStatusObserver = new SyncStatusObserver() {
-        public void onStatusChanged(int which) {
-            mHandler.post(new Runnable() {
-                public void run() {
-                    onSyncStateUpdated();
-                }
-            });
-        }
-    };
-
-    public ArrayList<String> getAuthoritiesForAccountType(String type) {
-        return mAuthenticatorHelper.getAuthoritiesForAccountType(type);
-    }
-
-    /**
-     * Gets the preferences.xml file associated with a particular account type.
-     * @param accountType the type of account
-     * @return a PreferenceScreen inflated from accountPreferenceId.
-     */
-    public PreferenceScreen addPreferencesForType(final String accountType,
-            PreferenceScreen parent) {
-        return mAccountTypePreferenceLoader.addPreferencesForType(accountType, parent);
-    }
+    private SyncStatusObserver mSyncStatusObserver =
+            which -> ThreadUtils.postOnMainThread(() -> onSyncStateUpdated());
 
     public void updateAuthDescriptions() {
         mAuthenticatorHelper.updateAuthDescriptions(getActivity());

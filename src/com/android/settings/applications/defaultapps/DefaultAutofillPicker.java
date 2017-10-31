@@ -27,7 +27,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.service.autofill.AutofillService;
 import android.service.autofill.AutofillServiceInfo;
@@ -39,6 +38,7 @@ import android.util.Log;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +59,6 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
      * Set when the fragment is implementing ACTION_REQUEST_SET_AUTOFILL_SERVICE.
      */
     private DialogInterface.OnClickListener mCancelListener;
-    private final Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,17 +122,17 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     private final PackageMonitor mSettingsPackageMonitor = new PackageMonitor() {
         @Override
         public void onPackageAdded(String packageName, int uid) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
 
         @Override
         public void onPackageModified(String packageName) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
 
         @Override
         public void onPackageRemoved(String packageName, int uid) {
-            mHandler.post(() -> update());
+            ThreadUtils.postOnMainThread(() -> update());
         }
     };
 
