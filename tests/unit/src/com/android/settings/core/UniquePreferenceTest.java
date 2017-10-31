@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.core;
 
 import static junit.framework.Assert.fail;
 
