@@ -21,6 +21,7 @@ import static junit.framework.Assert.fail;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexableResource;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
@@ -83,6 +84,7 @@ public class UniquePreferenceTest {
      * should have a key.
      */
     @Test
+    @Presubmit
     public void allPreferencesShouldHaveUniqueKey()
             throws IOException, XmlPullParserException, Resources.NotFoundException {
         final Set<String> uniqueKeys = new HashSet<>();

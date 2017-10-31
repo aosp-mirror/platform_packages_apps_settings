@@ -10,13 +10,13 @@ LOCAL_JAVA_LIBRARIES := android.test.runner telephony-common ims-common
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
     espresso-core \
-    legacy-android-test \
-    mockito-target-minus-junit4 \
-    truth-prebuilt \
-    ub-uiautomator \
     espresso-contrib-nodep \
     espresso-intents-nodep \
-
+    legacy-android-test \
+    mockito-target-minus-junit4 \
+    platform-test-annotations \
+    truth-prebuilt \
+    ub-uiautomator
 
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
