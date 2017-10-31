@@ -38,6 +38,7 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
             mDark = true;
         }
         super.onCreate(savedState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         boolean deviceLocked = getSystemService(KeyguardManager.class).isKeyguardLocked();
         if (deviceLocked && getIntent().getBooleanExtra(
                 ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, false)) {
