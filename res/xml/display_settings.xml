@@ -84,6 +84,11 @@
         android:fragment="com.android.settings.display.ScreenZoomSettings"
         settings:keywords="@string/screen_zoom_keywords" />
 
+    <SwitchPreference
+        android:key="show_operator_name"
+        android:title="@string/show_operator_name_title"
+        android:summary="@string/show_operator_name_summary" />
+
     <Preference
         android:key="screensaver"
         android:title="@string/screensaver_settings_title"
