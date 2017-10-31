@@ -14,23 +14,22 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND;
+import static android.net.NetworkPolicyManager.POLICY_NONE;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 import android.content.Context;
 import android.net.INetworkPolicyListener;
 import android.net.NetworkPolicyManager;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.util.SparseIntArray;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
-
-import static android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND;
-import static android.net.NetworkPolicyManager.POLICY_NONE;
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class DataSaverBackend {
 
@@ -39,7 +38,6 @@ public class DataSaverBackend {
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final NetworkPolicyManager mPolicyManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
     private SparseIntArray mUidPolicies = new SparseIntArray();
@@ -195,7 +193,7 @@ public class DataSaverBackend {
 
         @Override
         public void onUidPoliciesChanged(final int uid, final int uidPolicies) {
-            mHandler.post(() -> handleUidPoliciesChanged(uid, uidPolicies));
+            ThreadUtils.postOnMainThread(() -> handleUidPoliciesChanged(uid, uidPolicies));
         }
 
         @Override
@@ -204,7 +202,7 @@ public class DataSaverBackend {
 
         @Override
         public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
-            mHandler.post(() -> handleRestrictBackgroundChanged(isDataSaving));
+            ThreadUtils.postOnMainThread(() -> handleRestrictBackgroundChanged(isDataSaving));
         }
     };
 

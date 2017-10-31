@@ -23,8 +23,6 @@ import android.net.IConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkRequest;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -45,6 +43,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -157,7 +156,7 @@ public class VpnPreferenceController extends AbstractPreferenceController
         } else {
             summary = getNameForVpnConfig(vpn, UserHandle.of(uid));
         }
-        new Handler(Looper.getMainLooper()).post(() -> mPreference.setSummary(summary));
+        ThreadUtils.postOnMainThread(() -> mPreference.setSummary(summary));
     }
 
     private String getNameForVpnConfig(VpnConfig cfg, UserHandle user) {

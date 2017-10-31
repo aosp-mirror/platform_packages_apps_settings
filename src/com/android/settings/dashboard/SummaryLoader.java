@@ -35,6 +35,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -52,7 +53,6 @@ public class SummaryLoader {
     private final String mCategoryKey;
 
     private final Worker mWorker;
-    private final Handler mHandler;
     private final HandlerThread mWorkerThread;
 
     private SummaryConsumer mSummaryConsumer;
@@ -64,7 +64,6 @@ public class SummaryLoader {
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
         mCategoryKey = null;
-        mHandler = new Handler();
         mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
         mWorker = new Worker(mWorkerThread.getLooper());
@@ -82,7 +81,6 @@ public class SummaryLoader {
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
         mCategoryKey = categoryKey;
-        mHandler = new Handler();
         mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
         mWorkerThread.start();
         mWorker = new Worker(mWorkerThread.getLooper());
@@ -112,25 +110,22 @@ public class SummaryLoader {
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
         final ComponentName component = mSummaryProviderMap.get(provider);
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
+        ThreadUtils.postOnMainThread(() -> {
 
-                final Tile tile = getTileFromCategory(
-                        mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
+            final Tile tile = getTileFromCategory(
+                    mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
 
-                if (tile == null) {
-                    if (DEBUG) {
-                        Log.d(TAG, "Can't find tile for " + component);
-                    }
-                    return;
-                }
+            if (tile == null) {
                 if (DEBUG) {
-                    Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+                    Log.d(TAG, "Can't find tile for " + component);
                 }
-
-                updateSummaryIfNeeded(tile, summary);
+                return;
             }
+            if (DEBUG) {
+                Log.d(TAG, "setSummary " + tile.title + " - " + summary);
+            }
+
+            updateSummaryIfNeeded(tile, summary);
         });
     }
 

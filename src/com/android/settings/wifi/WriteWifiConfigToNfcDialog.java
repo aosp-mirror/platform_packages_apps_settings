@@ -63,7 +63,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private View mView;
     private Button mSubmitButton;
     private Button mCancelButton;
-    private Handler mOnTextChangedHandler;
     private TextView mPasswordView;
     private TextView mLabelView;
     private CheckBox mPasswordCheckBox;
@@ -79,7 +78,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        mOnTextChangedHandler = new Handler();
         mSecurity = security;
         mWifiManager = wifiManager;
     }
@@ -90,7 +88,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
-        mOnTextChangedHandler = new Handler();
         mSecurity = savedState.getInt(SECURITY);
         mWifiManager = wifiManager;
     }
@@ -226,12 +223,7 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        mOnTextChangedHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                enableSubmitIfAppropriate();
-            }
-        });
+        enableSubmitIfAppropriate();
     }
 
     private void enableSubmitIfAppropriate() {
