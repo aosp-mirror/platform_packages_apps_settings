@@ -19,6 +19,7 @@ package com.android.settings.core;
 import static junit.framework.Assert.fail;
 
 import android.content.Context;
+import android.platform.test.annotations.Presubmit;
 import android.provider.SearchIndexableResource;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
@@ -49,6 +50,7 @@ public class PreferenceControllerContractTest {
     }
 
     @Test
+    @Presubmit
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
         final Set<String> errorClasses = new ArraySet<>();
 
