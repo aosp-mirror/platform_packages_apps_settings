@@ -15,6 +15,8 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -35,8 +37,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerGaugePreferenceTest {
@@ -53,7 +53,7 @@ public class PowerGaugePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.preference,
+        mRootView = LayoutInflater.from(mContext).inflate(R.layout.preference_app,
                 null);
         mWidgetView = LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary,
                 null);
@@ -61,6 +61,7 @@ public class PowerGaugePreferenceTest {
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(mRootView);
 
         mPowerGaugePreference = new PowerGaugePreference(mContext);
+        assertThat(mPowerGaugePreference.getLayoutResource()).isEqualTo(R.layout.preference_app);
     }
 
     @Test

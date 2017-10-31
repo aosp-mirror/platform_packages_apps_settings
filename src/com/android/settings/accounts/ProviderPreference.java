@@ -16,14 +16,13 @@
 
 package com.android.settings.accounts;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
 
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * ProviderPreference is used to display an image to the left of a provider name.
@@ -35,6 +34,7 @@ public class ProviderPreference extends RestrictedPreference {
     public ProviderPreference(
             Context context, String accountType, Drawable icon, CharSequence providerName) {
         super(context);
+        setUseSmallIcon(true);
         mAccountType = accountType;
         setIcon(icon);
         setPersistent(false);

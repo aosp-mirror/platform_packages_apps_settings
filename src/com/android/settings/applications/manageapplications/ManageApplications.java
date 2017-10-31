@@ -412,20 +412,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         return null;
     }
 
-    private boolean isFastScrollEnabled() {
-        switch (mListType) {
-            case LIST_TYPE_MAIN:
-            case LIST_TYPE_NOTIFICATION:
-            case LIST_TYPE_STORAGE:
-            case LIST_TYPE_GAMES:
-            case LIST_TYPE_MOVIES:
-            case LIST_TYPE_PHOTOGRAPHY:
-                return mSortOrder == R.id.sort_order_alpha;
-            default:
-                return false;
-        }
-    }
-
     @Override
     public int getMetricsCategory() {
         switch (mListType) {
@@ -924,9 +910,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         @Override
         public ApplicationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            final View view = ApplicationViewHolder.newView(
-                    LayoutInflater.from(parent.getContext()), parent);
-            return new ApplicationViewHolder(view);
+            final View view = ApplicationViewHolder.newView(parent);
+            return new ApplicationViewHolder(view,
+                    shouldUseStableItemHeight(mManageApplications.mListType));
         }
 
         @Override
@@ -994,7 +980,21 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             });
         }
 
-        static private boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
+        @VisibleForTesting
+        static boolean shouldUseStableItemHeight(int listType) {
+            switch (listType) {
+                case LIST_TYPE_NOTIFICATION:
+                    // Most entries in notification type has no summary. Don't use stable height
+                    // so height is short for most entries.
+                    return false;
+                default:
+                    // Other types have non-empty summary, so keep the height as we expect summary
+                    // to fill in.
+                    return true;
+            }
+        }
+
+        private static boolean packageNameEquals(PackageItemInfo info1, PackageItemInfo info2) {
             if (info1 == null || info2 == null) {
                 return false;
             }

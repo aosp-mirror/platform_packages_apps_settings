@@ -22,11 +22,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.IconDrawableFactory;
 
-import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -68,8 +68,7 @@ public class ApplicationListPreferenceController extends AbstractPreferenceContr
         final Context prefContext = mParent.getPreferenceManager().getContext();
         for (int position = 0; position < result.size(); position++) {
             final UserAppInfo item = result.get(position);
-            final Preference preference = new Preference(prefContext);
-            preference.setLayoutResource(R.layout.preference_app);
+            final Preference preference = new AppPreference(prefContext);
             preference.setTitle(item.appInfo.loadLabel(mPm));
             preference.setIcon(iconDrawableFactory.getBadgedIcon(item.appInfo));
             preference.setOrder(position);

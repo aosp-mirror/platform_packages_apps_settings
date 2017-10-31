@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -53,6 +54,12 @@ public abstract class DefaultAppPreferenceController extends AbstractPreferenceC
     public void updateState(Preference preference) {
         final DefaultAppInfo app = getDefaultAppInfo();
         CharSequence defaultAppLabel = getDefaultAppLabel();
+        if (preference instanceof TwoTargetPreference) {
+            // For use small icon because we are displaying an app preference.
+            // We only need to do this for TwoTargetPreference because the other prefs are
+            // already using AppPreference so their icon is already normalized.
+            ((TwoTargetPreference) preference).setUseSmallIcon(true);
+        }
         if (!TextUtils.isEmpty(defaultAppLabel)) {
             preference.setSummary(defaultAppLabel);
             Utils.setSafeIcon(preference, getDefaultAppIcon());
