@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,6 +51,7 @@ import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionList;
 import com.android.settingslib.suggestions.SuggestionParser;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,12 +184,6 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dashboard, container, false);
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mLayoutManager == null) return;
@@ -198,9 +194,10 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
-    public void onViewCreated(View view, Bundle bundle) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         long startTime = System.currentTimeMillis();
-        mDashboard = view.findViewById(R.id.dashboard_container);
+        final View root = inflater.inflate(R.layout.dashboard, container, false);
+        mDashboard = root.findViewById(R.id.dashboard_container);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (bundle != null) {
@@ -218,19 +215,19 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.setSummaryConsumer(mAdapter);
         ActionBarShadowController.attachToRecyclerView(
                 getActivity().findViewById(R.id.search_bar_container), getLifecycle(), mDashboard);
-
+        rebuildUI();
         if (DEBUG_TIMING) {
-            Log.d(TAG, "onViewCreated took "
+            Log.d(TAG, "onCreateView took "
                     + (System.currentTimeMillis() - startTime) + " ms");
         }
-        rebuildUI();
+        return root;
     }
 
     @VisibleForTesting
     void rebuildUI() {
         if (!mSuggestionFeatureProvider.isSuggestionEnabled(getContext())) {
             Log.d(TAG, "Suggestion v1 feature is disabled, skipping suggestion v1");
-            updateCategory();
+            ThreadUtils.postOnBackgroundThread(() -> updateCategory());
         } else {
             new SuggestionLoader().execute();
             // Set categories on their own if loading suggestions takes too long.
@@ -340,11 +337,12 @@ public class DashboardSummary extends InstrumentedFragment
         }
     }
 
+    @WorkerThread
     void updateCategory() {
         final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
                 CategoryKey.CATEGORY_HOMEPAGE);
         mSummaryLoader.updateSummaryToCache(category);
-        mAdapter.setCategory(category);
+        ThreadUtils.postOnMainThread(() -> mAdapter.setCategory(category));
     }
 
     /**

@@ -60,23 +60,6 @@ public class SummaryLoader {
     private boolean mWorkerListening;
     private ArraySet<BroadcastReceiver> mReceivers = new ArraySet<>();
 
-    public SummaryLoader(Activity activity, List<DashboardCategory> categories) {
-        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
-                .getDashboardFeatureProvider(activity);
-        mCategoryKey = null;
-        mWorkerThread = new HandlerThread("SummaryLoader", Process.THREAD_PRIORITY_BACKGROUND);
-        mWorkerThread.start();
-        mWorker = new Worker(mWorkerThread.getLooper());
-        mActivity = activity;
-        for (int i = 0; i < categories.size(); i++) {
-            List<Tile> tiles = categories.get(i).tiles;
-            for (int j = 0; j < tiles.size(); j++) {
-                Tile tile = tiles.get(j);
-                mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
-            }
-        }
-    }
-
     public SummaryLoader(Activity activity, String categoryKey) {
         mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
                 .getDashboardFeatureProvider(activity);
@@ -85,17 +68,6 @@ public class SummaryLoader {
         mWorkerThread.start();
         mWorker = new Worker(mWorkerThread.getLooper());
         mActivity = activity;
-
-        final DashboardCategory category =
-                mDashboardFeatureProvider.getTilesForCategory(categoryKey);
-        if (category == null || category.tiles == null) {
-            return;
-        }
-
-        List<Tile> tiles = category.tiles;
-        for (Tile tile : tiles) {
-            mWorker.obtainMessage(Worker.MSG_GET_PROVIDER, tile).sendToTarget();
-        }
     }
 
     public void release() {
@@ -153,15 +125,32 @@ public class SummaryLoader {
      * Only call from the main thread.
      */
     public void setListening(boolean listening) {
-        if (mListening == listening) return;
+        if (mListening == listening) {
+            return;
+        }
         mListening = listening;
         // Unregister listeners immediately.
         for (int i = 0; i < mReceivers.size(); i++) {
             mActivity.unregisterReceiver(mReceivers.valueAt(i));
         }
         mReceivers.clear();
+
         mWorker.removeMessages(Worker.MSG_SET_LISTENING);
-        mWorker.obtainMessage(Worker.MSG_SET_LISTENING, listening ? 1 : 0, 0).sendToTarget();
+        if (!listening) {
+            // Stop listen
+            mWorker.obtainMessage(Worker.MSG_SET_LISTENING, 0 /* listening */).sendToTarget();
+        } else {
+            // Start listen
+            if (mSummaryProviderMap.isEmpty()) {
+                // Category not initialized yet, init before starting to listen
+                if (!mWorker.hasMessages(Worker.MSG_GET_CATEGORY_TILES_AND_SET_LISTENING)) {
+                    mWorker.sendEmptyMessage(Worker.MSG_GET_CATEGORY_TILES_AND_SET_LISTENING);
+                }
+            } else {
+                // Category already initialized, start listening immediately
+                mWorker.obtainMessage(Worker.MSG_SET_LISTENING, 1 /* listening */).sendToTarget();
+            }
+        }
     }
 
     private SummaryProvider getSummaryProvider(Tile tile) {
@@ -236,9 +225,13 @@ public class SummaryLoader {
     }
 
     private synchronized void setListeningW(boolean listening) {
-        if (mWorkerListening == listening) return;
+        if (mWorkerListening == listening) {
+            return;
+        }
         mWorkerListening = listening;
-        if (DEBUG) Log.d(TAG, "Listening " + listening);
+        if (DEBUG) {
+            Log.d(TAG, "Listening " + listening);
+        }
         for (SummaryProvider p : mSummaryProviderMap.keySet()) {
             try {
                 p.setListening(listening);
@@ -271,7 +264,6 @@ public class SummaryLoader {
     }
 
 
-
     public interface SummaryProvider {
         void setListening(boolean listening);
     }
@@ -285,8 +277,9 @@ public class SummaryLoader {
     }
 
     private class Worker extends Handler {
-        private static final int MSG_GET_PROVIDER = 1;
-        private static final int MSG_SET_LISTENING = 2;
+        private static final int MSG_GET_CATEGORY_TILES_AND_SET_LISTENING = 1;
+        private static final int MSG_GET_PROVIDER = 2;
+        private static final int MSG_SET_LISTENING = 3;
 
         public Worker(Looper looper) {
             super(looper);
@@ -295,6 +288,18 @@ public class SummaryLoader {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+                case MSG_GET_CATEGORY_TILES_AND_SET_LISTENING:
+                    final DashboardCategory category =
+                            mDashboardFeatureProvider.getTilesForCategory(mCategoryKey);
+                    if (category == null || category.tiles == null) {
+                        return;
+                    }
+                    final List<Tile> tiles = category.tiles;
+                    for (Tile tile : tiles) {
+                        makeProviderW(tile);
+                    }
+                    setListeningW(true);
+                    break;
                 case MSG_GET_PROVIDER:
                     Tile tile = (Tile) msg.obj;
                     makeProviderW(tile);
