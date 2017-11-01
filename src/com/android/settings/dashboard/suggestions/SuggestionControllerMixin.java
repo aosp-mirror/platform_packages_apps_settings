@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
@@ -44,8 +45,10 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
         void onSuggestionReady(List<Suggestion> data);
 
         /**
-         * Returns {@link LoaderManager} associated with the host.
+         * Returns {@link LoaderManager} associated with the host. If host is not attached to
+         * activity then return null.
          */
+        @Nullable
         LoaderManager getLoaderManager();
     }
 
@@ -82,8 +85,11 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
 
     @Override
     public void onServiceConnected() {
-        mHost.getLoaderManager().restartLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS,
-                null /* args */, this /* callback */);
+        final LoaderManager loaderManager = mHost.getLoaderManager();
+        if (loaderManager != null) {
+            loaderManager.restartLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS,
+                    null /* args */, this /* callback */);
+        }
     }
 
     @Override

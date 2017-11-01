@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
 import android.content.Context;
-import android.database.MatrixCursor;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -87,5 +86,15 @@ public class SuggestionControllerMixinTest {
 
         verify(loaderManager).restartLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS,
                 null /* args */, mMixin /* callback */);
+    }
+
+    @Test
+    public void onServiceConnected_hostNotAttached_shouldDoNothing() {
+        when(mHost.getLoaderManager()).thenReturn(null);
+
+        mMixin = new SuggestionControllerMixin(mContext, mHost, mLifecycle);
+        mMixin.onServiceConnected();
+
+        verify(mHost).getLoaderManager();
     }
 }
