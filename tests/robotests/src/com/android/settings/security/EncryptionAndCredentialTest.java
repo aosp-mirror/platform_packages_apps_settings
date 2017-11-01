@@ -11,14 +11,14 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
 import static android.app.admin.DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE;
 import static android.app.admin.DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE;
-import static com.android.settings.EncryptionAndCredential.SEARCH_INDEX_DATA_PROVIDER;
+import static com.android.settings.security.EncryptionAndCredential.SEARCH_INDEX_DATA_PROVIDER;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +28,8 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.TestConfig;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
