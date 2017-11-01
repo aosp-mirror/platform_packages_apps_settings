@@ -17,6 +17,7 @@
 package com.android.settings.dashboard;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -93,6 +94,14 @@ public class DashboardSummary extends InstrumentedFragment
             mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
                     getLifecycle());
         }
+    }
+
+    @Override
+    public LoaderManager getLoaderManager() {
+        if (!isAdded()) {
+            return null;
+        }
+        return super.getLoaderManager();
     }
 
     @Override
