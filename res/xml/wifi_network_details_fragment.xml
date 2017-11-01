@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="connection_header"
+        android:layout="@layout/settings_entity_header"
+        android:selectable="false"
+        android:order="-10000"/>
+
+    <!-- General Details Category -->
+    <PreferenceCategory
+            android:key="general_details_category" >
+        <!-- Buttons -->
+        <com.android.settings.applications.LayoutPreference
+            android:key="buttons"
+            android:layout="@layout/wifi_network_details_two_buttons_panel"
+            android:selectable="false" />
+
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="signal_strength"
+                android:title="@string/wifi_signal"
+                android:selectable="false"/>
+
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="frequency"
+                android:icon="@drawable/ic_frequency_antenna"
+                android:title="@string/wifi_frequency"
+                android:selectable="false"/>
+
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="security"
+                android:icon="@drawable/ic_security_lock_24dp"
+                android:title="@string/wifi_security"
+                android:selectable="false"/>
+    </PreferenceCategory>
+
+    <!-- Network Details -->
+    <PreferenceCategory
+            android:key="ip_details_category"
+            android:title="@string/wifi_setup_detail">
+        <com.android.settings.wifi.WifiDetailPreference
+            android:key="mac_address"
+            android:title="@string/wifi_advanced_mac_address_title"
+            android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="ip_address"
+                android:title="@string/wifi_ip_address"
+                android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="gateway"
+                android:title="@string/wifi_gateway"
+                android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="subnet_mask"
+                android:title="@string/wifi_details_subnet_mask"
+                android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="dns"
+                android:title="@string/wifi_details_dns"
+                android:selectable="false"/>
+        <com.android.settings.wifi.WifiDetailPreference
+                android:key="link_speed"
+                android:title="@string/wifi_speed"
+                android:selectable="false"/>
+    </PreferenceCategory>
+
+    <!-- IPv6 Details -->
+    <PreferenceCategory
+            android:key="ipv6_category"
+            android:title="@string/wifi_details_ipv6_address_header"
+            android:selectable="false">
+        <Preference
+                android:key="ipv6_addresses"
+                android:selectable="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

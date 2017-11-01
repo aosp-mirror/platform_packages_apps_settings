@@ -149,20 +149,13 @@ public class BluetoothPermissionActivity extends AlertActivity implements
         if(DEBUG) Log.i(TAG, "Back button pressed! ignoring");
         return;
     }
-    private String createRemoteName()
-    {
-        String mRemoteName = mDevice != null ? mDevice.getAliasName() : null;
-
-        if (mRemoteName == null) mRemoteName = getString(R.string.unknown);
-        return mRemoteName;
-    }
 
     // TODO(edjee): createConnectionDialogView, createPhonebookDialogView and createMapDialogView
     // are similar. Refactor them into one method.
     // Also, the string resources bluetooth_remember_choice and bluetooth_pb_remember_choice should
     // be removed.
     private View createConnectionDialogView() {
-        String mRemoteName = createRemoteName();
+        String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_connection_dialog_text,
@@ -171,7 +164,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     }
 
     private View createPhonebookDialogView() {
-        String mRemoteName = createRemoteName();
+        String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_pb_acceptance_dialog_text,
@@ -180,7 +173,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     }
 
     private View createMapDialogView() {
-        String mRemoteName = createRemoteName();
+        String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_map_acceptance_dialog_text,
@@ -189,7 +182,7 @@ public class BluetoothPermissionActivity extends AlertActivity implements
     }
 
     private View createSapDialogView() {
-        String mRemoteName = createRemoteName();
+        String mRemoteName = Utils.createRemoteName(this, mDevice);
         mView = getLayoutInflater().inflate(R.layout.bluetooth_access, null);
         messageView = (TextView)mView.findViewById(R.id.message);
         messageView.setText(getString(R.string.bluetooth_sap_acceptance_dialog_text,

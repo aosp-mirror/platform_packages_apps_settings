@@ -16,8 +16,7 @@
 
 package com.android.settings.vpn2;
 
-import java.util.Arrays;
-
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -31,18 +30,22 @@ import android.os.UserHandle;
 import android.security.Credentials;
 import android.security.KeyStore;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Fragment wrapper around a {@link ConfigDialog}.
  */
-public class ConfigDialogFragment extends DialogFragment implements
-        DialogInterface.OnClickListener {
+public class ConfigDialogFragment extends InstrumentedDialogFragment implements
+        DialogInterface.OnClickListener, DialogInterface.OnShowListener, View.OnClickListener,
+        ConfirmLockdownFragment.ConfirmLockdownListener {
     private static final String TAG_CONFIG_DIALOG = "vpnconfigdialog";
     private static final String TAG = "ConfigDialogFragment";
 
@@ -52,8 +55,15 @@ public class ConfigDialogFragment extends DialogFragment implements
 
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
+    private Context mContext;
 
     private boolean mUnlocking = false;
+
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_LEGACY_VPN_CONFIG;
+    }
 
     public static void show(VpnSettings parent, VpnProfile profile, boolean edit, boolean exists) {
         if (!parent.isAdded()) return;
@@ -70,6 +80,12 @@ public class ConfigDialogFragment extends DialogFragment implements
     }
 
     @Override
+    public void onAttach(final Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -77,7 +93,7 @@ public class ConfigDialogFragment extends DialogFragment implements
         if (!KeyStore.getInstance().isUnlocked()) {
             if (!mUnlocking) {
                 // Let us unlock KeyStore. See you later!
-                Credentials.getInstance().unlock(getActivity());
+                Credentials.getInstance().unlock(mContext);
             } else {
                 // We already tried, but it is still not working!
                 dismiss();
@@ -97,7 +113,31 @@ public class ConfigDialogFragment extends DialogFragment implements
         boolean editing = args.getBoolean(ARG_EDITING);
         boolean exists = args.getBoolean(ARG_EXISTS);
 
-        return new ConfigDialog(getActivity(), this, profile, editing, exists);
+        final Dialog dialog = new ConfigDialog(getActivity(), this, profile, editing, exists);
+        dialog.setOnShowListener(this);
+        return dialog;
+    }
+
+    /**
+     * Override for the default onClick handler which also calls dismiss().
+     *
+     * @see DialogInterface.OnClickListener#onClick(DialogInterface, int)
+     */
+    @Override
+    public void onShow(DialogInterface dialogInterface) {
+        ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View positiveButton) {
+        onClick(getDialog(), AlertDialog.BUTTON_POSITIVE);
+    }
+
+    @Override
+    public void onConfirmLockdown(Bundle options, boolean isAlwaysOn, boolean isLockdown) {
+        VpnProfile profile = (VpnProfile) options.getParcelable(ARG_PROFILE);
+        connect(profile, isAlwaysOn);
+        dismiss();
     }
 
     @Override
@@ -106,26 +146,32 @@ public class ConfigDialogFragment extends DialogFragment implements
         VpnProfile profile = dialog.getProfile();
 
         if (button == DialogInterface.BUTTON_POSITIVE) {
-            // Update KeyStore entry
-            KeyStore.getInstance().put(Credentials.VPN + profile.key, profile.encode(),
-                    KeyStore.UID_SELF, /* flags */ 0);
-
-            // Flush out old version of profile
-            disconnect(profile);
-
-            updateLockdownVpn(dialog.isVpnAlwaysOn(), profile);
-
-            // If we are not editing, connect!
-            if (!dialog.isEditing() && !VpnUtils.isVpnLockdown(profile.key)) {
-                try {
-                    connect(profile);
-                } catch (RemoteException e) {
-                    Log.e(TAG, "Failed to connect", e);
+            // Possibly throw up a dialog to explain lockdown VPN.
+            final boolean shouldLockdown = dialog.isVpnAlwaysOn();
+            final boolean shouldConnect = shouldLockdown || !dialog.isEditing();
+            final boolean wasLockdown = VpnUtils.isAnyLockdownActive(mContext);
+            try {
+                final boolean replace = VpnUtils.isVpnActive(mContext);
+                if (shouldConnect && !isConnected(profile) &&
+                        ConfirmLockdownFragment.shouldShow(replace, wasLockdown, shouldLockdown)) {
+                    final Bundle opts = new Bundle();
+                    opts.putParcelable(ARG_PROFILE, profile);
+                    ConfirmLockdownFragment.show(this, replace, /* alwaysOn */ shouldLockdown,
+                           /* from */  wasLockdown, /* to */ shouldLockdown, opts);
+                } else if (shouldConnect) {
+                    connect(profile, shouldLockdown);
+                } else {
+                    save(profile, false);
                 }
+            } catch (RemoteException e) {
+                Log.w(TAG, "Failed to check active VPN state. Skipping.", e);
             }
         } else if (button == DialogInterface.BUTTON_NEUTRAL) {
             // Disable profile if connected
-            disconnect(profile);
+            if (!disconnect(profile)) {
+                Log.e(TAG, "Failed to disconnect VPN. Leaving profile in keystore.");
+                return;
+            }
 
             // Delete from KeyStore
             KeyStore keyStore = KeyStore.getInstance();
@@ -147,41 +193,71 @@ public class ConfigDialogFragment extends DialogFragment implements
         if (isVpnAlwaysOn) {
             // Show toast if vpn profile is not valid
             if (!profile.isValidLockdownProfile()) {
-                Toast.makeText(getContext(), R.string.vpn_lockdown_config_error,
+                Toast.makeText(mContext, R.string.vpn_lockdown_config_error,
                         Toast.LENGTH_LONG).show();
                 return;
             }
 
-            final ConnectivityManager conn = ConnectivityManager.from(getActivity());
+            final ConnectivityManager conn = ConnectivityManager.from(mContext);
             conn.setAlwaysOnVpnPackageForUser(UserHandle.myUserId(), null,
                     /* lockdownEnabled */ false);
-            VpnUtils.setLockdownVpn(getContext(), profile.key);
+            VpnUtils.setLockdownVpn(mContext, profile.key);
         } else {
             // update only if lockdown vpn has been changed
             if (VpnUtils.isVpnLockdown(profile.key)) {
-                VpnUtils.clearLockdownVpn(getContext());
+                VpnUtils.clearLockdownVpn(mContext);
             }
         }
     }
 
-    private void connect(VpnProfile profile) throws RemoteException {
-        try {
-            mService.startLegacyVpn(profile);
-        } catch (IllegalStateException e) {
-            Toast.makeText(getActivity(), R.string.vpn_no_network, Toast.LENGTH_LONG).show();
+    private void save(VpnProfile profile, boolean lockdown) {
+        KeyStore.getInstance().put(Credentials.VPN + profile.key, profile.encode(),
+                KeyStore.UID_SELF, /* flags */ 0);
+
+        // Flush out old version of profile
+        disconnect(profile);
+
+        // Notify lockdown VPN that the profile has changed.
+        updateLockdownVpn(lockdown, profile);
+    }
+
+    private void connect(VpnProfile profile, boolean lockdown) {
+        save(profile, lockdown);
+
+        // Now try to start the VPN - this is not necessary if the profile is set as lockdown,
+        // because just saving the profile in this mode will start a connection.
+        if (!VpnUtils.isVpnLockdown(profile.key)) {
+            VpnUtils.clearLockdownVpn(mContext);
+            try {
+                mService.startLegacyVpn(profile);
+            } catch (IllegalStateException e) {
+                Toast.makeText(mContext, R.string.vpn_no_network, Toast.LENGTH_LONG).show();
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to connect", e);
+            }
         }
     }
 
-    private void disconnect(VpnProfile profile) {
+    /**
+     * Ensure that the VPN profile pointed at by {@param profile} is disconnected.
+     *
+     * @return {@code true} iff this VPN profile is no longer connected. Note that another profile
+     *         may still be active - this function will then do nothing but still return success.
+     */
+    private boolean disconnect(VpnProfile profile) {
         try {
-            LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
-            if (connected != null && profile.key.equals(connected.key)) {
-                VpnUtils.clearLockdownVpn(getContext());
-                mService.prepareVpn(VpnConfig.LEGACY_VPN, VpnConfig.LEGACY_VPN,
-                        UserHandle.myUserId());
+            if (!isConnected(profile)) {
+                return true;
             }
+            return VpnUtils.disconnectLegacyVpn(getContext());
         } catch (RemoteException e) {
             Log.e(TAG, "Failed to disconnect", e);
+            return false;
         }
+    }
+
+    private boolean isConnected(VpnProfile profile) throws RemoteException {
+        LegacyVpnInfo connected = mService.getLegacyVpnInfo(UserHandle.myUserId());
+        return connected != null && profile.key.equals(connected.key);
     }
 }

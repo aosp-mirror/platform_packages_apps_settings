@@ -22,6 +22,8 @@ import android.support.v7.preference.Preference;
 import android.telephony.SubscriptionManager;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.Utils;
 import com.android.settingslib.net.DataUsageController;
 import com.android.settings.R;
@@ -53,6 +55,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
         return Utils.onBuildStartFragmentIntent(getContext(), DataUsageList.class.getName(), args,
-                getContext().getPackageName(), 0, getTitle(), false);
+                getContext().getPackageName(), 0, getTitle(), false,
+                MetricsProto.MetricsEvent.VIEW_UNKNOWN);
     }
 }

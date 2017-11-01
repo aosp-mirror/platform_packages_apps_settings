@@ -21,18 +21,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
-import android.os.Message;
+import android.os.UserManager;
 import android.provider.Settings;
-import android.util.Log;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
-import com.android.settings.search.Index;
-import com.android.settings.widget.SwitchBar;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -42,29 +40,19 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager;
  * preference. It turns on/off Bluetooth and ensures the summary of the
  * preference reflects the current state.
  */
-public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener {
+public final class BluetoothEnabler implements SwitchWidgetController.OnSwitchChangeListener {
+    private final Switch mSwitch;
+    private final SwitchWidgetController mSwitchWidget;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
-    private Switch mSwitch;
-    private SwitchBar mSwitchBar;
     private boolean mValidListener;
     private final LocalBluetoothAdapter mLocalAdapter;
     private final IntentFilter mIntentFilter;
+    private final RestrictionUtils mRestrictionUtils;
 
     private static final String EVENT_DATA_IS_BT_ON = "is_bluetooth_on";
     private static final int EVENT_UPDATE_INDEX = 0;
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case EVENT_UPDATE_INDEX:
-                    final boolean isBluetoothOn = msg.getData().getBoolean(EVENT_DATA_IS_BT_ON);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            BluetoothSettings.class.getName(), true, isBluetoothOn);
-                    break;
-            }
-        }
-    };
+    private final int mMetricsEvent;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -76,45 +64,59 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         }
     };
 
-    public BluetoothEnabler(Context context, SwitchBar switchBar) {
-        mContext = context;
-        mSwitchBar = switchBar;
-        mSwitch = switchBar.getSwitch();
-        mValidListener = false;
+    public BluetoothEnabler(Context context, SwitchWidgetController switchWidget,
+            MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager,
+            int metricsEvent) {
+        this(context, switchWidget, metricsFeatureProvider, manager, metricsEvent,
+                new RestrictionUtils());
+    }
 
-        LocalBluetoothManager manager = Utils.getLocalBtManager(context);
+    public BluetoothEnabler(Context context, SwitchWidgetController switchWidget,
+            MetricsFeatureProvider metricsFeatureProvider, LocalBluetoothManager manager,
+            int metricsEvent, RestrictionUtils restrictionUtils) {
+        mContext = context;
+        mMetricsFeatureProvider = metricsFeatureProvider;
+        mSwitchWidget = switchWidget;
+        mSwitch = mSwitchWidget.getSwitch();
+        mSwitchWidget.setListener(this);
+        mValidListener = false;
+        mMetricsEvent = metricsEvent;
+
         if (manager == null) {
             // Bluetooth is not supported
             mLocalAdapter = null;
-            mSwitch.setEnabled(false);
+            mSwitchWidget.setEnabled(false);
         } else {
             mLocalAdapter = manager.getBluetoothAdapter();
         }
         mIntentFilter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        mRestrictionUtils = restrictionUtils;
     }
 
-    public void setupSwitchBar() {
-        mSwitchBar.show();
+    public void setupSwitchController() {
+        mSwitchWidget.setupView();
     }
 
-    public void teardownSwitchBar() {
-        mSwitchBar.hide();
+    public void teardownSwitchController() {
+        mSwitchWidget.teardownView();
     }
 
     public void resume(Context context) {
-        if (mLocalAdapter == null) {
-            mSwitch.setEnabled(false);
-            return;
-        }
-
         if (mContext != context) {
             mContext = context;
+        }
+
+        maybeEnforceRestrictions();
+
+        if (mLocalAdapter == null) {
+            mSwitchWidget.setEnabled(false);
+            return;
         }
 
         // Bluetooth state is not sticky, so set it manually
         handleStateChanged(mLocalAdapter.getBluetoothState());
 
-        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchWidget.startListening();
         mContext.registerReceiver(mReceiver, mIntentFilter);
         mValidListener = true;
     }
@@ -123,71 +125,65 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
         if (mLocalAdapter == null) {
             return;
         }
-
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mContext.unregisterReceiver(mReceiver);
-        mValidListener = false;
+        if (mValidListener) {
+            mSwitchWidget.stopListening();
+            mContext.unregisterReceiver(mReceiver);
+            mValidListener = false;
+        }
     }
 
     void handleStateChanged(int state) {
         switch (state) {
             case BluetoothAdapter.STATE_TURNING_ON:
-                mSwitch.setEnabled(false);
+                mSwitchWidget.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_ON:
                 setChecked(true);
-                mSwitch.setEnabled(true);
-                updateSearchIndex(true);
+                mSwitchWidget.setEnabled(true);
                 break;
             case BluetoothAdapter.STATE_TURNING_OFF:
-                mSwitch.setEnabled(false);
+                mSwitchWidget.setEnabled(false);
                 break;
             case BluetoothAdapter.STATE_OFF:
                 setChecked(false);
-                mSwitch.setEnabled(true);
-                updateSearchIndex(false);
+                mSwitchWidget.setEnabled(true);
                 break;
             default:
                 setChecked(false);
-                mSwitch.setEnabled(true);
-                updateSearchIndex(false);
+                mSwitchWidget.setEnabled(true);
         }
     }
 
     private void setChecked(boolean isChecked) {
-        if (isChecked != mSwitch.isChecked()) {
+        if (isChecked != mSwitchWidget.isChecked()) {
             // set listener to null, so onCheckedChanged won't be called
             // if the checked status on Switch isn't changed by user click
             if (mValidListener) {
-                mSwitchBar.removeOnSwitchChangeListener(this);
+                mSwitchWidget.stopListening();
             }
-            mSwitch.setChecked(isChecked);
+            mSwitchWidget.setChecked(isChecked);
             if (mValidListener) {
-                mSwitchBar.addOnSwitchChangeListener(this);
+                mSwitchWidget.startListening();
             }
         }
     }
 
-    private void updateSearchIndex(boolean isBluetoothOn) {
-        mHandler.removeMessages(EVENT_UPDATE_INDEX);
-
-        Message msg = new Message();
-        msg.what = EVENT_UPDATE_INDEX;
-        msg.getData().putBoolean(EVENT_DATA_IS_BT_ON, isBluetoothOn);
-        mHandler.sendMessage(msg);
-    }
-
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public boolean onSwitchToggled(boolean isChecked) {
+        if (maybeEnforceRestrictions()) {
+            return true;
+        }
+
         // Show toast message if Bluetooth is not allowed in airplane mode
         if (isChecked &&
                 !WirelessUtils.isRadioAllowed(mContext, Settings.Global.RADIO_BLUETOOTH)) {
             Toast.makeText(mContext, R.string.wifi_in_airplane_mode, Toast.LENGTH_SHORT).show();
             // Reset switch to off
-            switchView.setChecked(false);
+            mSwitch.setChecked(false);
+            return false;
         }
 
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_BLUETOOTH_TOGGLE, isChecked);
+        mMetricsFeatureProvider.action(mContext, mMetricsEvent, isChecked);
 
         if (mLocalAdapter != null) {
             boolean status = mLocalAdapter.setBluetoothEnabled(isChecked);
@@ -195,12 +191,44 @@ public final class BluetoothEnabler implements SwitchBar.OnSwitchChangeListener 
             // a) The switch should be OFF but it should still be togglable (enabled = True)
             // b) The switch bar should have OFF text.
             if (isChecked && !status) {
-                switchView.setChecked(false);
+                mSwitch.setChecked(false);
                 mSwitch.setEnabled(true);
-                mSwitchBar.setTextViewLabel(false);
-                return;
+                mSwitchWidget.updateTitle(false);
+                return false;
             }
         }
-        mSwitch.setEnabled(false);
+        mSwitchWidget.setEnabled(false);
+        return true;
     }
+
+    /**
+     * Enforces user restrictions disallowing Bluetooth (or its configuration) if there are any.
+     *
+     * @return if there was any user restriction to enforce.
+     */
+    @VisibleForTesting
+    boolean maybeEnforceRestrictions() {
+        EnforcedAdmin admin = getEnforcedAdmin(mRestrictionUtils, mContext);
+        mSwitchWidget.setDisabledByAdmin(admin);
+        if (admin != null) {
+            mSwitchWidget.setChecked(false);
+            if (mSwitch != null) {
+                mSwitch.setEnabled(false);
+                mSwitch.setChecked(false);
+            }
+        }
+        return admin != null;
+    }
+
+    public static EnforcedAdmin getEnforcedAdmin(RestrictionUtils mRestrictionUtils,
+            Context mContext) {
+        EnforcedAdmin admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                mContext, UserManager.DISALLOW_BLUETOOTH);
+        if (admin == null) {
+            admin = mRestrictionUtils.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_BLUETOOTH);
+        }
+        return admin;
+    }
+
 }

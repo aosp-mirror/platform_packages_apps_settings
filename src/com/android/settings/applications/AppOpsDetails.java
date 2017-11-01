@@ -28,6 +28,7 @@ import android.content.pm.PermissionInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,15 +39,16 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.widget.EntityHeaderController;
 
 import java.util.List;
 
-public class AppOpsDetails extends InstrumentedFragment {
+public class AppOpsDetails extends InstrumentedPreferenceFragment {
     static final String TAG = "AppOpsDetails";
 
     public static final String ARG_PACKAGE_NAME = "package";
@@ -64,7 +66,7 @@ public class AppOpsDetails extends InstrumentedFragment {
         final View appSnippet = mRootView.findViewById(R.id.app_snippet);
         CharSequence label = mPm.getApplicationLabel(pkgInfo.applicationInfo);
         Drawable icon = mPm.getApplicationIcon(pkgInfo.applicationInfo);
-        InstalledAppDetails.setupAppSnippet(appSnippet, label, icon,
+        setupAppSnippet(appSnippet, label, icon,
                 pkgInfo != null ? pkgInfo.versionName : null);
     }
 
@@ -80,8 +82,8 @@ public class AppOpsDetails extends InstrumentedFragment {
         }
         try {
             mPackageInfo = mPm.getPackageInfo(packageName,
-                    PackageManager.GET_DISABLED_COMPONENTS |
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                    PackageManager.MATCH_DISABLED_COMPONENTS |
+                    PackageManager.MATCH_ANY_USER);
         } catch (NameNotFoundException e) {
             Log.e(TAG, "Exception when retrieving package:" + packageName, e);
             mPackageInfo = null;
@@ -180,7 +182,7 @@ public class AppOpsDetails extends InstrumentedFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APP_OPS_DETAILS;
     }
 
@@ -189,6 +191,32 @@ public class AppOpsDetails extends InstrumentedFragment {
         super.onResume();
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
+        }
+    }
+
+    /**
+     * @deprecated app info pages should use {@link EntityHeaderController} to show the app header.
+     */
+    void setupAppSnippet(View appSnippet, CharSequence label, Drawable icon,
+            CharSequence versionName) {
+        LayoutInflater.from(appSnippet.getContext()).inflate(R.layout.widget_text_views,
+                appSnippet.findViewById(android.R.id.widget_frame));
+
+        ImageView iconView = appSnippet.findViewById(android.R.id.icon);
+        iconView.setImageDrawable(icon);
+        // Set application name.
+        TextView labelView = appSnippet.findViewById(android.R.id.title);
+        labelView.setText(label);
+        // Version number of application
+        TextView appVersion = appSnippet.findViewById(R.id.widget_text1);
+
+        if (!TextUtils.isEmpty(versionName)) {
+            appVersion.setSelected(true);
+            appVersion.setVisibility(View.VISIBLE);
+            appVersion.setText(appSnippet.getContext().getString(R.string.version_text,
+                    String.valueOf(versionName)));
+        } else {
+            appVersion.setVisibility(View.INVISIBLE);
         }
     }
 }

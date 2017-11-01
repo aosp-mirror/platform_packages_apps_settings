@@ -21,6 +21,7 @@ import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -33,18 +34,24 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import android.view.inputmethod.InputMethodSubtype;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodPreference;
+import com.android.settingslib.inputmethod.InputMethodSettingValuesWrapper;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFragment
-        implements InputMethodPreference.OnSavePreferenceListener {
+        implements InputMethodPreference.OnSavePreferenceListener, Indexable {
 
     private final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
     private InputMethodSettingValuesWrapper mInputMethodSettingValues;
@@ -85,7 +92,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ENABLE_VIRTUAL_KEYBOARDS;
     }
 
@@ -107,7 +114,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
     private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
             @NonNull final InputMethodInfo imi) {
         final ServiceInfo si = imi.getServiceInfo();
-        final ApplicationInfo ai = si.applicationInfo;
+        final ApplicationInfo ai = si != null ? si.applicationInfo : null;
         final String packageName = imi.getPackageName();
         if (si == null || ai == null || packageName == null) {
             return new ColorDrawable(Color.TRANSPARENT);
@@ -143,8 +150,8 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
         final Context context = getPrefContext();
         final PackageManager packageManager = getActivity().getPackageManager();
         final List<InputMethodInfo> imis = mInputMethodSettingValues.getInputMethodList();
-        final int N = (imis == null ? 0 : imis.size());
-        for (int i = 0; i < N; ++i) {
+        final int numImis = (imis == null ? 0 : imis.size());
+        for (int i = 0; i < numImis; ++i) {
             final InputMethodInfo imi = imis.get(i);
             final boolean isAllowedByOrganization = permittedList == null
                     || permittedList.contains(imi.getPackageName());
@@ -154,14 +161,9 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
-        Collections.sort(mInputMethodPreferenceList, new Comparator<InputMethodPreference>() {
-            @Override
-            public int compare(InputMethodPreference lhs, InputMethodPreference rhs) {
-                return lhs.compareTo(rhs, collator);
-            }
-        });
+        mInputMethodPreferenceList.sort((lhs, rhs) -> lhs.compareTo(rhs, collator));
         getPreferenceScreen().removeAll();
-        for (int i = 0; i < N; ++i) {
+        for (int i = 0; i < numImis; ++i) {
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
             pref.setOrder(i);
             getPreferenceScreen().addPreference(pref);
@@ -169,4 +171,49 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
             pref.updatePreferenceViews();
         }
     }
+
+    private static List<InputMethodSubtype> getAllSubtypesOf(final InputMethodInfo imi) {
+        final int subtypeCount = imi.getSubtypeCount();
+        final List<InputMethodSubtype> allSubtypes = new ArrayList<>(subtypeCount);
+        for (int index = 0; index < subtypeCount; index++) {
+            allSubtypes.add(imi.getSubtypeAt(index));
+        }
+        return allSubtypes;
+    }
+
+    static List<SearchIndexableRaw> buildSearchIndexOfInputMethods(final Context context,
+            final List<InputMethodInfo> inputMethods, final String screenTitle) {
+        final List<SearchIndexableRaw> indexes = new ArrayList<>();
+        for (int i = 0; i < inputMethods.size(); i++) {
+            final InputMethodInfo imi = inputMethods.get(i);
+            final ServiceInfo serviceInfo = imi.getServiceInfo();
+            final SearchIndexableRaw index = new SearchIndexableRaw(context);
+            index.key = new ComponentName(serviceInfo.packageName, serviceInfo.name)
+                    .flattenToString();
+            index.title = imi.loadLabel(context.getPackageManager()).toString();
+            index.summaryOn = index.summaryOff = InputMethodAndSubtypeUtil
+                    .getSubtypeLocaleNameListAsSentence(getAllSubtypesOf(imi), context, imi);
+            index.screenTitle = screenTitle;
+            indexes.add(index);
+        }
+        return indexes;
+    }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            final InputMethodManager imm = context.getSystemService(InputMethodManager.class);
+            final List<InputMethodInfo> enabledInputMethods = imm.getEnabledInputMethodList();
+            final List<InputMethodInfo> disabledInputMethods = new ArrayList<>();
+            for (final InputMethodInfo imi : imm.getInputMethodList()) {
+                if (!enabledInputMethods.contains(imi)) {
+                    disabledInputMethods.add(imi);
+                }
+            }
+            final String screenTitle = context.getString(
+                    R.string.available_virtual_keyboard_category);
+            return buildSearchIndexOfInputMethods(context, disabledInputMethods, screenTitle);
+        }
+    };
 }

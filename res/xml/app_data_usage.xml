@@ -15,48 +15,51 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/data_usage_summary_title">
+                  android:title="@string/data_usage_summary_title">
 
     <com.android.settings.datausage.SpinnerPreference
         android:key="cycle" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="8dp" />
+    <PreferenceCategory
+        android:key="app_data_usage_summary_category">
 
-    <Preference
-        android:key="total_usage"
-        android:title="@string/total_size_label"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference" />
+        <Preference
+            android:key="total_usage"
+            android:title="@string/total_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
 
-    <Preference
-        android:key="foreground_usage"
-        android:title="@string/data_usage_label_foreground"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference" />
+        <Preference
+            android:key="foreground_usage"
+            android:title="@string/data_usage_label_foreground"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
 
-    <Preference
-        android:key="background_usage"
-        android:title="@string/data_usage_label_background"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference" />
+        <Preference
+            android:key="background_usage"
+            android:title="@string/data_usage_label_background"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="8dp" />
+    </PreferenceCategory>
 
-    <Preference
-        android:key="app_settings"
-        android:title="@string/data_usage_app_settings" />
+    <PreferenceCategory
+        android:key="app_data_usage_settings_category">
+        <Preference
+            android:key="app_settings"
+            android:title="@string/data_usage_app_settings" />
 
-    <SwitchPreference
-        android:key="restrict_background"
-        android:title="@string/data_usage_app_restrict_background"
-        android:summary="@string/data_usage_app_restrict_background_summary" />
+        <SwitchPreference
+            android:key="restrict_background"
+            android:title="@string/data_usage_app_restrict_background"
+            android:summary="@string/data_usage_app_restrict_background_summary" />
 
-    <SwitchPreference
-        android:key="unrestricted_data_saver"
-        android:title="@string/unrestricted_app_title"
-        android:summary="@string/unrestricted_app_summary" />
+        <SwitchPreference
+            android:key="unrestricted_data_saver"
+            android:title="@string/unrestricted_app_title"
+            android:summary="@string/unrestricted_app_summary" />
+
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="app_list"

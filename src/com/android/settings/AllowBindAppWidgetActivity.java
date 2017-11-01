@@ -42,6 +42,7 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
 
     private CheckBox mAlwaysUse;
     private int mAppWidgetId;
+    private Bundle mBindOptions;
     private UserHandle mProfile;
     private ComponentName mComponentName;
     private String mCallingPackage;
@@ -51,13 +52,12 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
     private boolean mClicked;
 
     public void onClick(DialogInterface dialog, int which) {
+        mClicked = true;
         if (which == AlertDialog.BUTTON_POSITIVE) {
-            // By default, set the result to cancelled
-            setResult(RESULT_CANCELED);
             if (mAppWidgetId != -1 && mComponentName != null && mCallingPackage != null) {
                 try {
                     final boolean bound = mAppWidgetManager.bindAppWidgetIdIfAllowed(mAppWidgetId,
-                            mProfile, mComponentName, null);
+                            mProfile, mComponentName, mBindOptions);
                     if (bound) {
                         Intent result = new Intent();
                         result.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
@@ -79,15 +79,18 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
         finish();
     }
 
+    @Override
     protected void onPause() {
-        if (isDestroyed() && !mClicked) {
-            setResult(RESULT_CANCELED);
+        if (!mClicked) { // RESULT_CANCELED
+            finish();
         }
-        super.onDestroy();
+        super.onPause();
     }
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setResult(RESULT_CANCELED); // By default, set the result to cancelled
         Intent intent = getIntent();
         CharSequence label = "";
         if (intent != null) {
@@ -100,6 +103,8 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 }
                 mComponentName =
                         intent.getParcelableExtra(AppWidgetManager.EXTRA_APPWIDGET_PROVIDER);
+                mBindOptions =
+                        intent.getParcelableExtra(AppWidgetManager.EXTRA_APPWIDGET_OPTIONS);
                 mCallingPackage = getCallingPackage();
                 PackageManager pm = getPackageManager();
                 ApplicationInfo ai = pm.getApplicationInfo(mCallingPackage, 0);
@@ -109,7 +114,6 @@ public class AllowBindAppWidgetActivity extends AlertActivity implements
                 mComponentName = null;
                 mCallingPackage = null;
                 Log.v("BIND_APPWIDGET", "Error getting parameters");
-                setResult(RESULT_CANCELED);
                 finish();
                 return;
             }

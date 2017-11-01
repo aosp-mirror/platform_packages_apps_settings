@@ -32,10 +32,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,7 +45,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class RunningServiceDetails extends InstrumentedFragment
+public class RunningServiceDetails extends InstrumentedPreferenceFragment
         implements RunningState.OnRefreshUiListener {
     static final String TAG = "RunningServicesDetails";
 
@@ -492,19 +493,20 @@ public class RunningServiceDetails extends InstrumentedFragment
             }
         });
     }
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        setHasOptionsMenu(true);
         mUid = getArguments().getInt(KEY_UID, -1);
         mUserId = getArguments().getInt(KEY_USER_ID, 0);
         mProcessName = getArguments().getString(KEY_PROCESS, null);
         mShowBackground = getArguments().getBoolean(KEY_BACKGROUND, false);
-        
-        mAm = (ActivityManager)getActivity().getSystemService(Context.ACTIVITY_SERVICE);
-        mInflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        
+
+        mAm = (ActivityManager) getActivity().getSystemService(Context.ACTIVITY_SERVICE);
+        mInflater = (LayoutInflater) getActivity().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE);
+
         mState = RunningState.getInstance(getActivity());
     }
     
@@ -534,7 +536,7 @@ public class RunningServiceDetails extends InstrumentedFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.RUNNING_SERVICE_DETAILS;
     }
 
@@ -554,15 +556,15 @@ public class RunningServiceDetails extends InstrumentedFragment
         }
         return null;
     }
-    
+
     private void showConfirmStopDialog(ComponentName comp) {
         DialogFragment newFragment = MyAlertDialogFragment.newConfirmStop(
                 DIALOG_CONFIRM_STOP, comp);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "confirmstop");
     }
-    
-    public static class MyAlertDialogFragment extends DialogFragment {
+
+    public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
 
         public static MyAlertDialogFragment newConfirmStop(int id, ComponentName comp) {
             MyAlertDialogFragment frag = new MyAlertDialogFragment();
@@ -604,6 +606,11 @@ public class RunningServiceDetails extends InstrumentedFragment
                 }
             }
             throw new IllegalArgumentException("unknown id " + id);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_RUNNIGN_SERVICE;
         }
     }
 

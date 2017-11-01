@@ -34,6 +34,7 @@ import android.widget.CompoundButton;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 
+import com.android.settings.CreateShortcut;
 import com.android.settings.R;
 
 import java.text.NumberFormat;
@@ -299,6 +300,8 @@ class LocaleDragAndDropAdapter
 
                 LocalePicker.updateLocales(mLocalesToSetNext);
                 mLocalesSetLast = mLocalesToSetNext;
+                new CreateShortcut.ShortcutsUpdateTask(mContext).execute();
+
                 mLocalesToSetNext = null;
 
                 mNumberFormatter = NumberFormat.getNumberInstance(Locale.getDefault());

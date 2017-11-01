@@ -15,119 +15,71 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/security_settings_title">
-
-    <PreferenceCategory android:key="sim_lock"
-            android:title="@string/sim_lock_settings_title"
-            android:persistent="false">
-
-        <Preference android:key="sim_lock_settings"
-                android:title="@string/sim_lock_settings_category"
-                android:persistent="false">
-
-            <intent android:action="android.intent.action.MAIN"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.Settings$IccLockSettingsActivity"/>
-
-        </Preference>
-
-    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/security_passwords_title"
             android:persistent="false">
 
-        <SwitchPreference android:key="show_password"
-                android:title="@string/show_password"/>
+        <Preference
+            android:key="location"
+            android:title="@string/location_settings_title"
+            android:fragment="com.android.settings.location.LocationSettings">
+        </Preference>
+
+        <SwitchPreference
+            android:key="show_password"
+            android:title="@string/show_password"
+            android:summary="@string/show_password_summary"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:key="device_admin_category"
-            android:title="@string/device_admin_title"
-            android:persistent="false">
+    <PreferenceCategory>
 
         <Preference android:key="manage_device_admin"
                 android:title="@string/manage_device_admin"
-                android:summary="@string/manage_device_admin_summary"
                 android:persistent="false"
                 android:fragment="com.android.settings.DeviceAdminSettings"/>
 
-        <com.android.settingslib.RestrictedSwitchPreference android:key="toggle_install_applications"
-                android:title="@string/install_applications"
-                android:summaryOff="@string/install_unknown_applications"
-                android:summaryOn="@string/install_unknown_applications"
-                settings:useAdditionalSummary="true" />
+        <Preference android:key="enterprise_privacy"
+                android:title="@string/enterprise_privacy_settings"
+                android:persistent="false"
+                android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:key="credentials_management"
-            android:title="@string/credentials_title"
-            android:persistent="false">
+    <Preference android:key="sim_lock_settings"
+        android:title="@string/sim_lock_settings_category"
+        android:persistent="false">
 
-        <com.android.settingslib.RestrictedPreference android:key="credential_storage_type"
-                android:title="@string/credential_storage_type"
-                android:persistent="false" />
+        <intent android:action="android.intent.action.MAIN"
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.Settings$IccLockSettingsActivity"/>
 
-        <Preference android:key="trusted_credentials"
-                android:title="@string/trusted_credentials"
-                android:summary="@string/trusted_credentials_summary"
-                android:persistent="false"
-                android:fragment="com.android.settings.TrustedCredentialsSettings"/>
+    </Preference>
 
-        <com.android.settingslib.RestrictedPreference android:key="user_credentials"
-                android:title="@string/user_credentials"
-                android:summary="@string/user_credentials_summary"
-                android:persistent="false"
-                android:fragment="com.android.settings.UserCredentialsSettings"/>
+    <Preference
+        android:key="encryption_and_credential"
+        android:title="@string/encryption_and_credential_settings_title"
+        android:summary="@string/encryption_and_credential_settings_summary"
+        android:fragment="com.android.settings.EncryptionAndCredential"/>
 
-        <com.android.settingslib.RestrictedPreference android:key="credentials_install"
-                android:title="@string/credentials_install"
-                android:summary="@string/credentials_install_summary"
-                android:persistent="false">
+    <Preference android:key="manage_trust_agents"
+        android:title="@string/manage_trust_agents"
+        android:persistent="false"
+        android:fragment="com.android.settings.TrustAgentSettings"/>
 
-            <intent android:action="android.credentials.INSTALL"
-                    android:targetPackage="com.android.certinstaller"
-                    android:targetClass="com.android.certinstaller.CertInstallerMain"/>
+    <Preference
+        android:key="screen_pinning_settings"
+        android:title="@string/screen_pinning_title"
+        android:summary="@string/switch_off_text"
+        android:fragment="com.android.settings.ScreenPinningSettings"/>
 
-        </com.android.settingslib.RestrictedPreference>
-
-        <com.android.settingslib.RestrictedPreference android:key="credentials_reset"
-                android:title="@string/credentials_reset"
-                android:summary="@string/credentials_reset_summary"
-                android:persistent="false">
-
-            <intent android:action="com.android.credentials.RESET"
-                    android:targetPackage="com.android.settings"
-                    android:targetClass="com.android.settings.CredentialStorage"/>
-
-        </com.android.settingslib.RestrictedPreference>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory android:key="advanced_security"
-            android:title="@string/advanced_security_title"
-            android:persistent="false">
-
-        <Preference android:key="manage_trust_agents"
-                android:title="@string/manage_trust_agents"
-                android:summary="@string/manage_trust_agents_summary"
-                android:persistent="false"
-                android:fragment="com.android.settings.TrustAgentSettings"/>
-
-        <PreferenceScreen
-                android:key="screen_pinning_settings"
-                android:title="@string/screen_pinning_title"
-                android:summary="@string/switch_off_text"
-                android:fragment="com.android.settings.ScreenPinningSettings"/>
-
-        <Preference android:key="usage_access"
-                    android:title="@string/usage_access_title"
-                    android:fragment="com.android.settings.applications.ManageApplications">
-            <extra
-                android:name="classname"
-                android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
-        </Preference>
-
-    </PreferenceCategory>
+    <Preference android:key="usage_access"
+        android:title="@string/usage_access_title"
+        android:fragment="com.android.settings.applications.ManageApplications">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
+    </Preference>
 
 </PreferenceScreen>

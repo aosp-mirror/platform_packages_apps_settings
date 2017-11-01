@@ -90,8 +90,7 @@ public class AppDataUsagePreference extends Preference {
             if (cachedDetail != null) {
                 bindView(cachedDetail, target);
             } else {
-                new UidDetailTask(provider, item, target).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR);
+                new UidDetailTask(provider, item, target).execute();
             }
         }
 

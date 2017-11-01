@@ -52,25 +52,25 @@ import java.util.Iterator;
 public class RunningProcessesView extends FrameLayout
         implements AdapterView.OnItemClickListener, RecyclerListener,
         RunningState.OnRefreshUiListener {
-    
+
     final int mMyUserId;
 
     long SECONDARY_SERVER_MEM;
-    
+
     final HashMap<View, ActiveItem> mActiveItems = new HashMap<View, ActiveItem>();
 
     ActivityManager mAm;
-    
+
     RunningState mState;
-    
+
     Fragment mOwner;
-    
+
     Runnable mDataAvail;
 
     StringBuilder mBuilder = new StringBuilder(128);
-    
+
     RunningState.BaseItem mCurSelected;
-    
+
     ListView mListView;
     View mHeader;
     ServiceListAdapter mAdapter;
@@ -102,19 +102,19 @@ public class RunningProcessesView extends FrameLayout
 
         void updateTime(Context context, StringBuilder builder) {
             TextView uptimeView = null;
-            
+
             if (mItem instanceof RunningState.ServiceItem) {
                 // If we are displaying a service, then the service
                 // uptime goes at the top.
                 uptimeView = mHolder.size;
-                
+
             } else {
                 String size = mItem.mSizeStr != null ? mItem.mSizeStr : "";
                 if (!size.equals(mItem.mCurSizeStr)) {
                     mItem.mCurSizeStr = size;
                     mHolder.size.setText(size);
                 }
-                
+
                 if (mItem.mBackground) {
                     // This is a background process; no uptime.
                     if (!mSetBackground) {
@@ -150,7 +150,7 @@ public class RunningProcessesView extends FrameLayout
             }
         }
     }
-    
+
     public static class ViewHolder {
         public View rootView;
         public ImageView icon;
@@ -158,7 +158,7 @@ public class RunningProcessesView extends FrameLayout
         public TextView description;
         public TextView size;
         public TextView uptime;
-        
+
         public ViewHolder(View v) {
             rootView = v;
             icon = (ImageView)v.findViewById(R.id.icon);
@@ -168,7 +168,7 @@ public class RunningProcessesView extends FrameLayout
             uptime = (TextView)v.findViewById(R.id.uptime);
             v.setTag(this);
         }
-        
+
         public ActiveItem bind(RunningState state, RunningState.BaseItem item,
                 StringBuilder builder) {
             synchronized (state.mLock) {
@@ -202,13 +202,7 @@ public class RunningProcessesView extends FrameLayout
             }
         }
     }
-    
-    static class TimeTicker extends TextView {
-        public TimeTicker(Context context, AttributeSet attrs) {
-            super(context, attrs);
-        }
-    }
-    
+
     class ServiceListAdapter extends BaseAdapter {
         final RunningState mState;
         final LayoutInflater mInflater;
@@ -216,7 +210,7 @@ public class RunningProcessesView extends FrameLayout
         ArrayList<RunningState.MergedItem> mOrigItems;
         final ArrayList<RunningState.MergedItem> mItems
                 = new ArrayList<RunningState.MergedItem>();
-        
+
         ServiceListAdapter(RunningState state) {
             mState = state;
             mInflater = (LayoutInflater)getContext().getSystemService(
@@ -254,11 +248,11 @@ public class RunningProcessesView extends FrameLayout
                 }
             }
         }
-        
+
         public boolean hasStableIds() {
             return true;
         }
-        
+
         public int getCount() {
             return mItems.size();
         }
@@ -294,13 +288,13 @@ public class RunningProcessesView extends FrameLayout
             bindView(v, position);
             return v;
         }
-        
+
         public View newView(ViewGroup parent) {
             View v = mInflater.inflate(R.layout.running_processes_item, parent, false);
             new ViewHolder(v);
             return v;
         }
-        
+
         public void bindView(View view, int position) {
             synchronized (mState.mLock) {
                 if (position >= mItems.size()) {
@@ -323,7 +317,7 @@ public class RunningProcessesView extends FrameLayout
             adapter.refreshItems();
             adapter.notifyDataSetChanged();
         }
-        
+
         if (mDataAvail != null) {
             mDataAvail.run();
             mDataAvail = null;
@@ -396,7 +390,7 @@ public class RunningProcessesView extends FrameLayout
             }
         }
     }
-    
+
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         ListView l = (ListView)parent;
         RunningState.MergedItem mi = (RunningState.MergedItem)l.getAdapter().getItem(position);
@@ -417,11 +411,11 @@ public class RunningProcessesView extends FrameLayout
             args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
 
             SettingsActivity sa = (SettingsActivity) mOwner.getActivity();
-            sa.startPreferencePanel(RunningServiceDetails.class.getName(), args,
+            sa.startPreferencePanel(mOwner, RunningServiceDetails.class.getName(), args,
                     R.string.runningservicedetails_settings_title, null, null, 0);
         }
     }
-    
+
     public void onMovedToScrapHeap(View view) {
         mActiveItems.remove(view);
     }
@@ -430,7 +424,7 @@ public class RunningProcessesView extends FrameLayout
         super(context, attrs);
         mMyUserId = UserHandle.myUserId();
     }
-    
+
     public void doCreate() {
         mAm = (ActivityManager)getContext().getSystemService(Context.ACTIVITY_SERVICE);
         mState = RunningState.getInstance(getContext());
@@ -464,7 +458,7 @@ public class RunningProcessesView extends FrameLayout
         mAm.getMemoryInfo(memInfo);
         SECONDARY_SERVER_MEM = memInfo.secondaryServerThreshold;
     }
-    
+
     public void doPause() {
         mState.pause();
         mDataAvail = null;

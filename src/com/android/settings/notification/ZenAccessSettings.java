@@ -44,8 +44,11 @@ import android.util.ArraySet;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,7 +64,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
     private NotificationManager mNoMan;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_ACCESS;
     }
 
@@ -170,6 +173,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
     }
 
     private static void setAccess(final Context context, final String pkg, final boolean access) {
+        logSpecialPermissionChange(access, pkg, context);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -178,6 +182,15 @@ public class ZenAccessSettings extends EmptyTextSettings {
             }
         });
     }
+
+    @VisibleForTesting
+    static void logSpecialPermissionChange(boolean enable, String packageName, Context context) {
+        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_DND_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_DND_DENY;
+        FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                logCategory, packageName);
+    }
+
 
     private static void deleteRules(final Context context, final String pkg) {
         AsyncTask.execute(new Runnable() {
@@ -203,9 +216,14 @@ public class ZenAccessSettings extends EmptyTextSettings {
     /**
      * Warning dialog when allowing zen access warning about the privileges being granted.
      */
-    public static class ScaryWarningDialogFragment extends DialogFragment {
+    public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_PKG = "p";
         static final String KEY_LABEL = "l";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_ZEN_ACCESS_GRANT;
+        }
 
         public ScaryWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
             Bundle args = new Bundle();
@@ -249,9 +267,15 @@ public class ZenAccessSettings extends EmptyTextSettings {
     /**
      * Warning dialog when revoking zen access warning that zen rule instances will be deleted.
      */
-    public static class FriendlyWarningDialogFragment extends DialogFragment {
+    public static class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_PKG = "p";
         static final String KEY_LABEL = "l";
+
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_ZEN_ACCESS_REVOKE;
+        }
 
         public FriendlyWarningDialogFragment setPkgInfo(String pkg, CharSequence label) {
             Bundle args = new Bundle();

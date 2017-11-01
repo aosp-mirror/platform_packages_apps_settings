@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.media.AudioAttributes;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.provider.Settings.System;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
@@ -54,6 +55,8 @@ public class RingtonePreference extends Preference {
     private boolean mShowSilent;
 
     private int mRequestCode;
+    protected int mUserId;
+    protected Context mUserContext;
 
     public RingtonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -67,7 +70,17 @@ public class RingtonePreference extends Preference {
         mShowSilent = a.getBoolean(com.android.internal.R.styleable.RingtonePreference_showSilent,
                 true);
         setIntent(new Intent(RingtoneManager.ACTION_RINGTONE_PICKER));
+        setUserId(UserHandle.myUserId());
         a.recycle();
+    }
+
+    public void setUserId(int userId) {
+        mUserId = userId;
+        mUserContext = Utils.createPackageContextAsUser(getContext(), mUserId);
+    }
+
+    public int getUserId() {
+        return mUserId;
     }
 
     /**

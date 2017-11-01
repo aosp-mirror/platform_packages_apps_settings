@@ -37,13 +37,15 @@ import android.widget.SectionIndexer;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents;
 import com.android.settings.inputmethod.UserDictionarySettingsUtils;
+import com.android.settings.core.instrumentation.Instrumentable;
 
 import java.util.Locale;
 
-public class UserDictionarySettings extends ListFragment {
-    private static final String TAG = "UserDictionarySettings";
+public class UserDictionarySettings extends ListFragment implements Instrumentable {
 
     private static final String[] QUERY_PROJECTION = {
         UserDictionary.Words._ID, UserDictionary.Words.WORD, UserDictionary.Words.SHORTCUT
@@ -67,9 +69,22 @@ public class UserDictionarySettings extends ListFragment {
 
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
 
-    private Cursor mCursor;
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
+            new VisibilityLoggerMixin(getMetricsCategory());
 
+    private Cursor mCursor;
     protected String mLocale;
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.USER_DICTIONARY_SETTINGS;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mVisibilityLoggerMixin.onAttach(context);
+    }
 
     @Override
     public View onCreateView(
@@ -114,6 +129,12 @@ public class UserDictionarySettings extends ListFragment {
         // Show the language as a subtitle of the action bar
         getActivity().getActionBar().setSubtitle(
                 UserDictionarySettingsUtils.getLocaleDisplayName(getActivity(), mLocale));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mVisibilityLoggerMixin.onResume();
     }
 
     private Cursor createCursor(final String locale) {
@@ -174,6 +195,12 @@ public class UserDictionarySettings extends ListFragment {
         return false;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVisibilityLoggerMixin.onPause();
+    }
+
     /**
      * Add or edit a word. If editingWord is null, it's an add; otherwise, it's an edit.
      * @param editingWord the word to edit, or null if it's an add.
@@ -188,7 +215,7 @@ public class UserDictionarySettings extends ListFragment {
         args.putString(UserDictionaryAddWordContents.EXTRA_SHORTCUT, editingShortcut);
         args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
         SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(
+        sa.startPreferencePanel(this,
                 com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
                 args, R.string.user_dict_settings_add_dialog_title, null, null, 0);
     }

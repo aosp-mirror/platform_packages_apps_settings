@@ -39,45 +39,58 @@
             android:layout_weight="1.0"
             android:layout_marginStart="?attr/suwMarginSides"
             android:layout_marginBottom="@dimen/suw_content_frame_padding_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/suw_layout_icon"
+                style="@style/SuwGlifIcon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/ic_lock"/>
 
-                <ImageView
-                    android:id="@+id/suw_layout_icon"
-                    style="@style/SuwGlifIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp"
-                    android:src="@drawable/ic_lock" />
+            <ScrollView
+                android:id="@+id/scroll_layout_title_header"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3.0">
 
-                <TextView
-                    android:id="@+id/suw_layout_title"
-                    style="@style/SuwGlifHeaderTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginEnd="0dp" />
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/suw_layout_title"
+                        style="@style/SuwGlifHeaderTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="0dp"/>
 
-            <!-- header message -->
-            <TextView android:id="@+id/headerText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:gravity="start|bottom"
-                android:textSize="18sp" />
+                    <!-- header message -->
+                    <TextView
+                        android:id="@+id/headerText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="start|bottom"
+                        android:textSize="18sp"/>
+
+                </LinearLayout>
+
+            </ScrollView>
 
             <!-- footer can show a message, or confirm / restart buttons -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="1.0">
+                android:layout_weight="1.0"
+                android:clipChildren="false"
+                android:clipToPadding="false">
 
                 <!-- confirm / restart buttons -->
                 <LinearLayout android:id="@+id/buttonContainer"
@@ -85,6 +98,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:orientation="horizontal">
 
                     <!-- left / top button: skip, or re-try -->

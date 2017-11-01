@@ -31,6 +31,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -137,7 +138,7 @@ public class UsbModeChooserActivity extends Activity {
         TextView titleView = (TextView) v.findViewById(android.R.id.title);
         titleView.setText(getTitle(mode));
         TextView summaryView = (TextView) v.findViewById(android.R.id.summary);
-        summaryView.setText(getSummary(mode));
+        updateSummary(summaryView, mode);
 
         if (disallowedByAdmin) {
             if (mEnforcedAdmin != null) {
@@ -177,23 +178,15 @@ public class UsbModeChooserActivity extends Activity {
         }
     }
 
-    private static int getSummary(int mode) {
-        switch (mode) {
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_charging_only_desc;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_use_power_only_desc;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
-                return R.string.usb_use_file_transfers_desc;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
-                return R.string.usb_use_photo_transfers_desc;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
-                return R.string.usb_use_MIDI_desc;
+    @VisibleForTesting
+    static void updateSummary(TextView summaryView, int mode) {
+        if (mode == (UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE)) {
+            summaryView.setText(R.string.usb_use_power_only_desc);
         }
-        return 0;
     }
 
-    private static int getTitle(int mode) {
+    @VisibleForTesting
+    static int getTitle(int mode) {
         switch (mode) {
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
                 return R.string.usb_use_charging_only;

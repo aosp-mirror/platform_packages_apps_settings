@@ -16,19 +16,19 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.net.INetworkPolicyListener;
-import android.net.INetworkPolicyManager;
 import android.net.NetworkPolicyManager;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.util.Log;
-import android.util.SparseBooleanArray;
+import android.util.SparseIntArray;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.ArrayList;
 
+import static android.net.NetworkPolicyManager.POLICY_ALLOW_METERED_BACKGROUND;
 import static android.net.NetworkPolicyManager.POLICY_NONE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
@@ -37,19 +37,19 @@ public class DataSaverBackend {
     private static final String TAG = "DataSaverBackend";
 
     private final Context mContext;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
-    private final Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final NetworkPolicyManager mPolicyManager;
-    private final INetworkPolicyManager mIPolicyManager;
     private final ArrayList<Listener> mListeners = new ArrayList<>();
-    private SparseBooleanArray mWhitelist;
-    private SparseBooleanArray mBlacklist;
+    private SparseIntArray mUidPolicies = new SparseIntArray();
+    private boolean mWhitelistInitialized;
+    private boolean mBlacklistInitialized;
 
     // TODO: Staticize into only one.
     public DataSaverBackend(Context context) {
         mContext = context;
-        mIPolicyManager = INetworkPolicyManager.Stub.asInterface(
-                        ServiceManager.getService(Context.NETWORK_POLICY_SERVICE));
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
         mPolicyManager = NetworkPolicyManager.from(context);
     }
 
@@ -74,7 +74,8 @@ public class DataSaverBackend {
 
     public void setDataSaverEnabled(boolean enabled) {
         mPolicyManager.setRestrictBackground(enabled);
-        MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
+        mMetricsFeatureProvider.action(
+                mContext, MetricsEvent.ACTION_DATA_SAVER_MODE, enabled ? 1 : 0);
     }
 
     public void refreshWhitelist() {
@@ -82,35 +83,25 @@ public class DataSaverBackend {
     }
 
     public void setIsWhitelisted(int uid, String packageName, boolean whitelisted) {
-        mWhitelist.put(uid, whitelisted);
-        try {
-            if (whitelisted) {
-                mIPolicyManager.addRestrictBackgroundWhitelistedUid(uid);
-            } else {
-                mIPolicyManager.removeRestrictBackgroundWhitelistedUid(uid);
-            }
-        } catch (RemoteException e) {
-            Log.w(TAG, "Can't reach policy manager", e);
-        }
+        final int policy = whitelisted ? POLICY_ALLOW_METERED_BACKGROUND : POLICY_NONE;
+        mPolicyManager.setUidPolicy(uid, policy);
+        mUidPolicies.put(uid, policy);
         if (whitelisted) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_DATA_SAVER_WHITELIST, packageName);
         }
     }
 
     public boolean isWhitelisted(int uid) {
-        if (mWhitelist == null) {
-            loadWhitelist();
-        }
-        return mWhitelist.get(uid);
+        loadWhitelist();
+        return mUidPolicies.get(uid, POLICY_NONE) == POLICY_ALLOW_METERED_BACKGROUND;
     }
 
     public int getWhitelistedCount() {
         int count = 0;
-        if (mWhitelist == null) {
-            loadWhitelist();
-        }
-        for (int i = 0; i < mWhitelist.size(); i++) {
-            if (mWhitelist.valueAt(i)) {
+        loadWhitelist();
+        for (int i = 0; i < mUidPolicies.size(); i++) {
+            if (mUidPolicies.valueAt(i) == POLICY_ALLOW_METERED_BACKGROUND) {
                 count++;
             }
         }
@@ -118,13 +109,12 @@ public class DataSaverBackend {
     }
 
     private void loadWhitelist() {
-        mWhitelist = new SparseBooleanArray();
-        try {
-            for (int uid : mIPolicyManager.getRestrictBackgroundWhitelistedUids()) {
-                mWhitelist.put(uid, true);
-            }
-        } catch (RemoteException e) {
+        if (mWhitelistInitialized) return;
+
+        for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_ALLOW_METERED_BACKGROUND)) {
+            mUidPolicies.put(uid, POLICY_ALLOW_METERED_BACKGROUND);
         }
+        mWhitelistInitialized = true;
     }
 
     public void refreshBlacklist() {
@@ -132,28 +122,26 @@ public class DataSaverBackend {
     }
 
     public void setIsBlacklisted(int uid, String packageName, boolean blacklisted) {
-        mPolicyManager.setUidPolicy(
-                uid, blacklisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE);
+        final int policy = blacklisted ? POLICY_REJECT_METERED_BACKGROUND : POLICY_NONE;
+        mPolicyManager.setUidPolicy(uid, policy);
+        mUidPolicies.put(uid, policy);
         if (blacklisted) {
-            MetricsLogger.action(mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
+            mMetricsFeatureProvider.action(
+                    mContext, MetricsEvent.ACTION_DATA_SAVER_BLACKLIST, packageName);
         }
     }
 
     public boolean isBlacklisted(int uid) {
-        if (mBlacklist == null) {
-            loadBlacklist();
-        }
-        return mBlacklist.get(uid);
+        loadBlacklist();
+        return mUidPolicies.get(uid, POLICY_NONE) == POLICY_REJECT_METERED_BACKGROUND;
     }
 
     private void loadBlacklist() {
-        mBlacklist = new SparseBooleanArray();
-        try {
-            for (int uid : mIPolicyManager.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
-                mBlacklist.put(uid, true);
-            }
-        } catch (RemoteException e) {
+        if (mBlacklistInitialized) return;
+        for (int uid : mPolicyManager.getUidsWithPolicy(POLICY_REJECT_METERED_BACKGROUND)) {
+            mUidPolicies.put(uid, POLICY_REJECT_METERED_BACKGROUND);
         }
+        mBlacklistInitialized = true;
     }
 
     private void handleRestrictBackgroundChanged(boolean isDataSaving) {
@@ -174,37 +162,40 @@ public class DataSaverBackend {
         }
     }
 
+    private void handleUidPoliciesChanged(int uid, int newPolicy) {
+        loadWhitelist();
+        loadBlacklist();
+
+        final int oldPolicy = mUidPolicies.get(uid, POLICY_NONE);
+        if (newPolicy == POLICY_NONE) {
+            mUidPolicies.delete(uid);
+        } else {
+            mUidPolicies.put(uid, newPolicy);
+        }
+
+        final boolean wasWhitelisted = oldPolicy == POLICY_ALLOW_METERED_BACKGROUND;
+        final boolean wasBlacklisted = oldPolicy == POLICY_REJECT_METERED_BACKGROUND;
+        final boolean isWhitelisted = newPolicy == POLICY_ALLOW_METERED_BACKGROUND;
+        final boolean isBlacklisted = newPolicy == POLICY_REJECT_METERED_BACKGROUND;
+
+        if (wasWhitelisted != isWhitelisted) {
+            handleWhitelistChanged(uid, isWhitelisted);
+        }
+
+        if (wasBlacklisted != isBlacklisted) {
+            handleBlacklistChanged(uid, isBlacklisted);
+        }
+
+    }
+
     private final INetworkPolicyListener mPolicyListener = new INetworkPolicyListener.Stub() {
         @Override
-        public void onUidRulesChanged(final int uid, int uidRules) throws RemoteException {
+        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
         }
 
         @Override
-        public void onRestrictBackgroundBlacklistChanged(int uid, boolean blacklisted) {
-            if (mBlacklist == null) {
-                loadBlacklist();
-            }
-            mBlacklist.put(uid, blacklisted);
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    handleBlacklistChanged(uid, blacklisted);
-                }
-            });
-        }
-
-        @Override
-        public void onRestrictBackgroundWhitelistChanged(final int uid, final boolean whitelisted) {
-            if (mWhitelist == null) {
-                loadWhitelist();
-            }
-            mWhitelist.put(uid, whitelisted);
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    handleWhitelistChanged(uid, whitelisted);
-                }
-            });
+        public void onUidPoliciesChanged(final int uid, final int uidPolicies) {
+            mHandler.post(() -> handleUidPoliciesChanged(uid, uidPolicies));
         }
 
         @Override
@@ -213,12 +204,7 @@ public class DataSaverBackend {
 
         @Override
         public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
-            mHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    handleRestrictBackgroundChanged(isDataSaving);
-                }
-            });
+            mHandler.post(() -> handleRestrictBackgroundChanged(isDataSaving));
         }
     };
 

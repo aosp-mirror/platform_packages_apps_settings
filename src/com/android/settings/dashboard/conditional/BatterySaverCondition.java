@@ -17,7 +17,7 @@ package com.android.settings.dashboard.conditional;
 
 import android.graphics.drawable.Icon;
 import android.os.PowerManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatterySaverSettings;
@@ -56,7 +56,7 @@ public class BatterySaverCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         Utils.startWithFragment(mManager.getContext(), BatterySaverSettings.class.getName(), null,
-                null, 0, R.string.battery_saver, null);
+                null, 0, R.string.battery_saver, null, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
     @Override

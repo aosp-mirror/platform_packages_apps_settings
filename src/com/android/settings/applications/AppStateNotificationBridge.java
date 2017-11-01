@@ -16,6 +16,7 @@
 package com.android.settings.applications;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
@@ -78,66 +79,6 @@ public class AppStateNotificationBridge extends AppStateBaseBridge {
                 return row.banned;
             }
             return false;
-        }
-    };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_SILENCED = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
-                return false;
-            }
-            AppRow row = (AppRow) info.extraInfo;
-            return row.appImportance > NotificationListenerService.Ranking.IMPORTANCE_NONE
-                    && row.appImportance < NotificationListenerService.Ranking.IMPORTANCE_DEFAULT;
-        }
-    };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_PRIORITY = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
-                return false;
-            }
-            return ((AppRow) info.extraInfo).appBypassDnd;
-        }
-    };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_HIDE_SENSITIVE = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
-                return false;
-            }
-            return ((AppRow) info.extraInfo).lockScreenSecure
-                    && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_PRIVATE;
-        }
-    };
-
-    public static final AppFilter FILTER_APP_NOTIFICATION_HIDE_ALL = new AppFilter() {
-        @Override
-        public void init() {
-        }
-
-        @Override
-        public boolean filterApp(AppEntry info) {
-            if (info == null || info.extraInfo == null) {
-                return false;
-            }
-            return ((AppRow) info.extraInfo).lockScreenSecure
-                    && ((AppRow) info.extraInfo).appVisOverride == Notification.VISIBILITY_SECRET;
         }
     };
 }

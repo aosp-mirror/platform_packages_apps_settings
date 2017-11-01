@@ -167,6 +167,7 @@ public class AppOpsState {
                     AppOpsManager.OP_AUDIO_ALARM_VOLUME,
                     AppOpsManager.OP_AUDIO_NOTIFICATION_VOLUME,
                     AppOpsManager.OP_AUDIO_BLUETOOTH_VOLUME,
+                    AppOpsManager.OP_AUDIO_ACCESSIBILITY_VOLUME,
                     AppOpsManager.OP_MUTE_MICROPHONE},
             new boolean[] { false,
                     true,
@@ -508,8 +509,8 @@ public class AppOpsState {
             if (appInfo == null) {
                 try {
                     appInfo = mPm.getApplicationInfo(packageName,
-                            PackageManager.GET_DISABLED_COMPONENTS
-                            | PackageManager.GET_UNINSTALLED_PACKAGES);
+                            PackageManager.MATCH_DISABLED_COMPONENTS
+                            | PackageManager.MATCH_ANY_USER);
                 } catch (PackageManager.NameNotFoundException e) {
                     Log.w(TAG, "Unable to find info for package " + packageName);
                     return null;

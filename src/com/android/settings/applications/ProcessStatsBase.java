@@ -103,7 +103,8 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         super.onViewCreated(view, savedInstanceState);
         mSpinnerHeader = (ViewGroup) setPinnedHeaderView(R.layout.apps_filter_spinner);
         mFilterSpinner = (Spinner) mSpinnerHeader.findViewById(R.id.filter_spinner);
-        mFilterAdapter = new ArrayAdapter<String>(getActivity(), R.layout.filter_spinner_item);
+        mFilterAdapter = new ArrayAdapter<String>(mFilterSpinner.getContext(),
+                R.layout.filter_spinner_item);
         mFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         for (int i = 0; i < NUM_DURATIONS; i++) {
             mFilterAdapter.add(getString(sDurationLabels[i]));
@@ -138,7 +139,7 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
                 memInfo.usedWeight * memInfo.weightToRam);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
         args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, !includeAppInfo);
-        activity.startPreferencePanel(ProcessStatsDetail.class.getName(), args,
+        activity.startPreferencePanel(null, ProcessStatsDetail.class.getName(), args,
                 R.string.memory_usage, null, null, 0);
     }
 }

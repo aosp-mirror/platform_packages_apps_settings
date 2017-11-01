@@ -20,8 +20,6 @@ import android.app.AppOpsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -31,13 +29,12 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettingsState;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-
-import java.util.List;
 
 public class WriteSettingsDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
@@ -117,9 +114,17 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     private void setCanWriteSettings(boolean newState) {
+        logSpecialPermissionChange(newState, mPackageName);
         mAppOpsManager.setMode(AppOpsManager.OP_WRITE_SETTINGS,
                 mPackageInfo.applicationInfo.uid, mPackageName, newState
                 ? AppOpsManager.MODE_ALLOWED : AppOpsManager.MODE_ERRORED);
+    }
+
+    void logSpecialPermissionChange(boolean newState, String packageName) {
+        int logCategory = newState ? MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_SETTINGS_CHANGE_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
     }
 
     private boolean canWriteSettings(String pkgName) {
@@ -142,8 +147,9 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         // you can't ask a user for a permission you didn't even declare!
         mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
         mWriteSettingsPrefs.setEnabled(canWrite);
-        getPreferenceScreen().removePreference(mWriteSettingsPrefs);
-
+        if (getPreferenceScreen().findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
+            getPreferenceScreen().removePreference(mWriteSettingsPrefs);
+        }
         return true;
     }
 
@@ -153,7 +159,7 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
     }
 
@@ -172,47 +178,8 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     }
 
     public static CharSequence getSummary(Context context, WriteSettingsState writeSettingsState) {
-        return context.getString(writeSettingsState.isPermissible() ? R.string.write_settings_on :
-                R.string.write_settings_off);
-    }
-
-    public static CharSequence getSummary(Context context, String pkg) {
-        // first check if pkg is a system pkg
-        boolean isSystem = false;
-        PackageManager packageManager = context.getPackageManager();
-        try {
-            ApplicationInfo appInfo = packageManager.getApplicationInfo(pkg, 0);
-            if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
-                isSystem = true;
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            // pkg doesn't even exist?
-            Log.w(LOG_TAG, "Package " + pkg + " not found", e);
-            return context.getString(R.string.write_settings_off);
-        }
-
-        AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context
-                .APP_OPS_SERVICE);
-        List<AppOpsManager.PackageOps> packageOps = appOpsManager.getPackagesForOps(
-                APP_OPS_OP_CODE);
-        if (packageOps == null) {
-            return context.getString(R.string.write_settings_off);
-        }
-
-        int uid = isSystem ? 0 : -1;
-        for (AppOpsManager.PackageOps packageOp : packageOps) {
-            if (pkg.equals(packageOp.getPackageName())) {
-                uid = packageOp.getUid();
-                break;
-            }
-        }
-
-        if (uid == -1) {
-            return context.getString(R.string.write_settings_off);
-        }
-
-        int mode = appOpsManager.noteOpNoThrow(AppOpsManager.OP_WRITE_SETTINGS, uid, pkg);
-        return context.getString((mode == AppOpsManager.MODE_ALLOWED) ?
-                R.string.write_settings_on : R.string.write_settings_off);
+        return context.getString(writeSettingsState.isPermissible()
+                ? R.string.app_permission_summary_allowed
+                : R.string.app_permission_summary_not_allowed);
     }
 }

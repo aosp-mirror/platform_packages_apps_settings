@@ -46,8 +46,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
@@ -56,9 +58,7 @@ import com.android.settingslib.net.UidDetailProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static android.net.ConnectivityManager.TYPE_MOBILE;
 import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
@@ -73,6 +73,10 @@ import static com.android.settings.datausage.DataUsageSummary.TEST_RADIOS_PROP;
  * to inspect based on usage cycle and control through {@link NetworkPolicy}.
  */
 public class DataUsageList extends DataUsageBase {
+
+    public static final String EXTRA_SUB_ID = "sub_id";
+    public static final String EXTRA_NETWORK_TEMPLATE = "network_template";
+
     private static final String TAG = "DataUsage";
     private static final boolean LOGD = false;
 
@@ -82,8 +86,14 @@ public class DataUsageList extends DataUsageBase {
 
     private static final int LOADER_CHART_DATA = 2;
     private static final int LOADER_SUMMARY = 3;
-    public static final String EXTRA_SUB_ID = "sub_id";
-    public static final String EXTRA_NETWORK_TEMPLATE = "network_template";
+
+    private final CellDataPreference.DataStateListener mDataStateListener =
+            new CellDataPreference.DataStateListener() {
+                @Override
+                public void onChange(boolean selfChange) {
+                    updatePolicy();
+                }
+            };
 
     private INetworkStatsSession mStatsSession;
 
@@ -93,15 +103,7 @@ public class DataUsageList extends DataUsageBase {
     private int mSubId;
     private ChartData mChartData;
 
-    /** Flag used to ignore listeners during binding. */
-    private boolean mBinding;
-
     private UidDetailProvider mUidDetailProvider;
-
-    /**
-     * Local cache of data enabled for subId, used to work around delays.
-     */
-    private final Map<String, Boolean> mMobileDataEnabled = new HashMap<String, Boolean>();
     private CycleAdapter mCycleAdapter;
     private Spinner mCycleSpinner;
     private Preference mUsageAmount;
@@ -109,7 +111,7 @@ public class DataUsageList extends DataUsageBase {
     private View mHeader;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_LIST;
     }
 
@@ -146,8 +148,14 @@ public class DataUsageList extends DataUsageBase {
         super.onViewCreated(v, savedInstanceState);
 
         mHeader = setPinnedHeaderView(R.layout.apps_filter_spinner);
-        mCycleSpinner = (Spinner) mHeader.findViewById(R.id.filter_spinner);
-        mCycleAdapter = new CycleAdapter(getContext(), new CycleAdapter.SpinnerInterface() {
+        mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
+            final Bundle args = new Bundle();
+            args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
+            startFragment(DataUsageList.this, BillingCycleSettings.class.getName(),
+                    R.string.billing_cycle, 0, args);
+        });
+        mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
+        mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(), new SpinnerInterface() {
             @Override
             public void setAdapter(CycleAdapter cycleAdapter) {
                 mCycleSpinner.setAdapter(cycleAdapter);
@@ -174,7 +182,7 @@ public class DataUsageList extends DataUsageBase {
     @Override
     public void onResume() {
         super.onResume();
-
+        mDataStateListener.setListener(true, mSubId, getContext());
         updateBody();
 
         // kick off background task to update stats
@@ -201,6 +209,12 @@ public class DataUsageList extends DataUsageBase {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mDataStateListener.setListener(false, mSubId, getContext());
+    }
+
+    @Override
     public void onDestroy() {
         mUidDetailProvider.clearCache();
         mUidDetailProvider = null;
@@ -216,7 +230,6 @@ public class DataUsageList extends DataUsageBase {
      * binds them to visible controls.
      */
     private void updateBody() {
-        mBinding = true;
         if (!isAdded()) return;
 
         final Context context = getActivity();
@@ -230,10 +243,8 @@ public class DataUsageList extends DataUsageBase {
         // detail mode can change visible menus, invalidate
         getActivity().invalidateOptionsMenu();
 
-        mBinding = false;
-
         int seriesColor = context.getColor(R.color.sim_noitification);
-        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID){
+        if (mSubId != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             final SubscriptionInfo sir = services.mSubscriptionManager
                     .getActiveSubscriptionInfo(mSubId);
 
@@ -251,33 +262,22 @@ public class DataUsageList extends DataUsageBase {
      * Update chart sweeps and cycle list to reflect {@link NetworkPolicy} for
      * current {@link #mTemplate}.
      */
-    private void updatePolicy(boolean refreshCycle) {
+    private void updatePolicy() {
         final NetworkPolicy policy = services.mPolicyEditor.getPolicy(mTemplate);
+        final View configureButton = mHeader.findViewById(R.id.filter_settings);
         //SUB SELECT
         if (isNetworkPolicyModifiable(policy, mSubId) && isMobileDataAvailable(mSubId)) {
             mChart.setNetworkPolicy(policy);
-            mHeader.findViewById(R.id.filter_settings).setVisibility(View.VISIBLE);
-            mHeader.findViewById(R.id.filter_settings).setOnClickListener(
-                    new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle args = new Bundle();
-                    args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
-                    startFragment(DataUsageList.this, BillingCycleSettings.class.getName(),
-                            R.string.billing_cycle, 0, args);
-                }
-            });
+            configureButton.setVisibility(View.VISIBLE);
         } else {
             // controls are disabled; don't bind warning/limit sweeps
             mChart.setNetworkPolicy(null);
-            mHeader.findViewById(R.id.filter_settings).setVisibility(View.GONE);
+            configureButton.setVisibility(View.GONE);
         }
 
-        if (refreshCycle) {
-            // generate cycle list based on policy and available history
-            if (mCycleAdapter.updateCycleList(policy, mChartData)) {
-                updateDetailData();
-            }
+        // generate cycle list based on policy and available history
+        if (mCycleAdapter.updateCycleList(policy, mChartData)) {
+            updateDetailData();
         }
     }
 
@@ -412,9 +412,10 @@ public class DataUsageList extends DataUsageBase {
     /**
      * Accumulate data usage of a network stats entry for the item mapped by the collapse key.
      * Creates the item if needed.
-     * @param collapseKey the collapse key used to map the item.
-     * @param knownItems collection of known (already existing) items.
-     * @param entry the network stats entry to extract data usage from.
+     *
+     * @param collapseKey  the collapse key used to map the item.
+     * @param knownItems   collection of known (already existing) items.
+     * @param entry        the network stats entry to extract data usage from.
      * @param itemCategory the item is categorized on the list view by this category. Must be
      */
     private static long accumulate(int collapseKey, final SparseArray<AppItem> knownItems,
@@ -460,7 +461,7 @@ public class DataUsageList extends DataUsageBase {
         if (LOGD) {
             Log.d(TAG, "hasReadyMobileRadio:"
                     + " conn.isNetworkSupported(TYPE_MOBILE)="
-                                            + conn.isNetworkSupported(TYPE_MOBILE)
+                    + conn.isNetworkSupported(TYPE_MOBILE)
                     + " isReady=" + isReady);
         }
         return retVal;
@@ -476,13 +477,16 @@ public class DataUsageList extends DataUsageBase {
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
         final TelephonyManager tele = TelephonyManager.from(context);
-        final int slotId = SubscriptionManager.getSlotId(subId);
+        final int slotId = SubscriptionManager.getSlotIndex(subId);
         final boolean isReady = tele.getSimState(slotId) == SIM_STATE_READY;
 
-        boolean retVal =  conn.isNetworkSupported(TYPE_MOBILE) && isReady;
-        if (LOGD) Log.d(TAG, "hasReadyMobileRadio: subId=" + subId
-                + " conn.isNetworkSupported(TYPE_MOBILE)=" + conn.isNetworkSupported(TYPE_MOBILE)
-                + " isReady=" + isReady);
+        boolean retVal = conn.isNetworkSupported(TYPE_MOBILE) && isReady;
+        if (LOGD) {
+            Log.d(TAG, "hasReadyMobileRadio: subId=" + subId
+                    + " conn.isNetworkSupported(TYPE_MOBILE)="
+                    + conn.isNetworkSupported(TYPE_MOBILE)
+                    + " isReady=" + isReady);
+        }
         return retVal;
     }
 
@@ -523,8 +527,8 @@ public class DataUsageList extends DataUsageBase {
             mChartData = data;
             mChart.setNetworkStats(mChartData.network);
 
-            // calcuate policy cycles based on available data
-            updatePolicy(true);
+            // calculate policy cycles based on available data
+            updatePolicy();
         }
 
         @Override

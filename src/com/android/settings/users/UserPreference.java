@@ -20,7 +20,6 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.View;
@@ -87,6 +86,20 @@ public class UserPreference extends RestrictedPreference {
     }
 
     @Override
+    protected boolean shouldHideSecondTarget() {
+        if (isDisabledByAdmin()) {
+            // Disabled by admin, show no secondary target.
+            return true;
+        }
+        if (canDeleteUser()) {
+            // Need to show delete user target so don't hide.
+            return false;
+        }
+        // Hide if don't have advanced setting listener.
+        return mSettingsClickListener == null;
+    }
+
+    @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         final boolean disabledByAdmin = isDisabledByAdmin();
@@ -96,14 +109,11 @@ public class UserPreference extends RestrictedPreference {
             userDeleteWidget.setVisibility(disabledByAdmin ? View.GONE : View.VISIBLE);
         }
         if (!disabledByAdmin) {
-            UserManager um = (UserManager) getContext().getSystemService(Context.USER_SERVICE);
             View deleteDividerView = view.findViewById(R.id.divider_delete);
             View manageDividerView = view.findViewById(R.id.divider_manage);
             View deleteView = view.findViewById(R.id.trash_user);
             if (deleteView != null) {
-                if (mDeleteClickListener != null
-                        && !RestrictedLockUtils.hasBaseUserRestriction(getContext(),
-                                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId())) {
+                if (canDeleteUser()) {
                     deleteView.setVisibility(View.VISIBLE);
                     deleteDividerView.setVisibility(View.VISIBLE);
                     deleteView.setOnClickListener(mDeleteClickListener);
@@ -127,6 +137,12 @@ public class UserPreference extends RestrictedPreference {
                 }
             }
         }
+    }
+
+    private boolean canDeleteUser() {
+        return mDeleteClickListener != null
+                && !RestrictedLockUtils.hasBaseUserRestriction(getContext(),
+                UserManager.DISALLOW_REMOVE_USER, UserHandle.myUserId());
     }
 
     private int getSerialNumber() {

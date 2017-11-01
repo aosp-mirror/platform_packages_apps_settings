@@ -22,7 +22,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.text.format.Formatter;
 import android.text.format.Formatter.BytesResult;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
@@ -98,8 +98,13 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PROCESS_STATS_SUMMARY;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_uri_process_stats_summary;
     }
 
     @Override
@@ -109,7 +114,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
             args.putBoolean(ARG_TRANSFER_STATS, true);
             args.putInt(ARG_DURATION_INDEX, mDurationIndex);
             mStatsManager.xferStats();
-            startFragment(this, ProcessStatsUi.class.getName(), R.string.app_list_memory_use, 0,
+            startFragment(this, ProcessStatsUi.class.getName(), R.string.memory_usage_apps, 0,
                     args);
             return true;
         }

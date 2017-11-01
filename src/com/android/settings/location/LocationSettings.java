@@ -16,10 +16,10 @@
 
 package com.android.settings.location;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,17 +27,14 @@ import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.Switch;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DimmableIconPreference;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -53,8 +50,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * System location settings (Settings &gt; Location). The screen has three parts:
@@ -98,8 +93,6 @@ public class LocationSettings extends LocationSettingsBase
     /** Key for preference category "Location services" */
     private static final String KEY_LOCATION_SERVICES = "location_services";
 
-    private static final int MENU_SCANNING = Menu.FIRST;
-
     private SwitchBar mSwitchBar;
     private Switch mSwitch;
     private boolean mValidListener = false;
@@ -113,7 +106,7 @@ public class LocationSettings extends LocationSettingsBase
     private UserManager mUm;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.LOCATION;
     }
 
@@ -194,6 +187,7 @@ public class LocationSettings extends LocationSettingsBase
                     @Override
                     public boolean onPreferenceClick(Preference preference) {
                         activity.startPreferencePanel(
+                                LocationSettings.this,
                                 LocationMode.class.getName(), null,
                                 R.string.location_mode_screen_title, null, LocationSettings.this,
                                 0);
@@ -201,10 +195,16 @@ public class LocationSettings extends LocationSettingsBase
                     }
                 });
 
-        mCategoryRecentLocationRequests =
-                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
         RecentLocationApps recentApps = new RecentLocationApps(activity);
         List<RecentLocationApps.Request> recentLocationRequests = recentApps.getAppList();
+
+        final AppLocationPermissionPreferenceController preferenceController =
+                new AppLocationPermissionPreferenceController(activity);
+        preferenceController.displayPreference(root);
+
+        mCategoryRecentLocationRequests =
+                (PreferenceCategory) root.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+
         List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
             DimmableIconPreference pref = new DimmableIconPreference(getPrefContext(),
@@ -304,8 +304,9 @@ public class LocationSettings extends LocationSettingsBase
         injector = new SettingsInjector(context);
         // If location access is locked down by device policy then we only show injected settings
         // for the primary profile.
-        List<Preference> locationServices = injector.getInjectedSettings(lockdownOnLocationAccess ?
-                UserHandle.myUserId() : UserHandle.USER_CURRENT);
+        final Context prefContext = categoryLocationServices.getContext();
+        final List<Preference> locationServices = injector.getInjectedSettings(prefContext,
+                lockdownOnLocationAccess ? UserHandle.myUserId() : UserHandle.USER_CURRENT);
 
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -330,49 +331,13 @@ public class LocationSettings extends LocationSettingsBase
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.add(0, MENU_SCANNING, 0, R.string.location_menu_scanning);
-        // The super class adds "Help & Feedback" menu item.
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-        switch (item.getItemId()) {
-            case MENU_SCANNING:
-                activity.startPreferencePanel(
-                        ScanningSettings.class.getName(), null,
-                        R.string.location_scanning_screen_title, null, LocationSettings.this,
-                        0);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
     public int getHelpResource() {
         return R.string.help_url_location_access;
     }
 
-    private static int getLocationString(int mode) {
-        switch (mode) {
-            case android.provider.Settings.Secure.LOCATION_MODE_OFF:
-                return R.string.location_mode_location_off_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                return R.string.location_mode_sensors_only_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                return R.string.location_mode_battery_saving_title;
-            case android.provider.Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                return R.string.location_mode_high_accuracy_title;
-        }
-        return 0;
-    }
-
     @Override
     public void onModeChanged(int mode, boolean restricted) {
-        int modeDescription = getLocationString(mode);
+        int modeDescription = LocationPreferenceController.getLocationString(mode);
         if (modeDescription != 0) {
             mLocationMode.setSummary(modeDescription);
         }
@@ -461,6 +426,7 @@ public class LocationSettings extends LocationSettingsBase
             Bundle args = new Bundle();
             args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
             ((SettingsActivity) getActivity()).startPreferencePanelAsUser(
+                    LocationSettings.this,
                     InstalledAppDetails.class.getName(), args,
                     R.string.application_info_label, null, mUserHandle);
             return true;
@@ -480,15 +446,8 @@ public class LocationSettings extends LocationSettingsBase
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                        Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
-                if (mode != Settings.Secure.LOCATION_MODE_OFF) {
-                    mSummaryLoader.setSummary(this, mContext.getString(R.string.location_on_summary,
-                            mContext.getString(getLocationString(mode))));
-                } else {
-                    mSummaryLoader.setSummary(this,
-                            mContext.getString(R.string.location_off_summary));
-                }
+                mSummaryLoader.setSummary(
+                    this, LocationPreferenceController.getLocationSummary(mContext));
             }
         }
     }

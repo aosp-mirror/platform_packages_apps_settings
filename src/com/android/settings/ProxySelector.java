@@ -39,10 +39,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
-public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
+public class ProxySelector extends InstrumentedPreferenceFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
 
     EditText    mHostnameField;
@@ -105,6 +106,11 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
                     .create();
         }
         return null;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        return MetricsEvent.DIALOG_PROXY_SELECTOR_ERROR;
     }
 
     private void showDialog(int dialogId) {
@@ -272,7 +278,7 @@ public class ProxySelector extends InstrumentedFragment implements DialogCreatab
         };
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PROXY_SELECTOR;
     }
 }

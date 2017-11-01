@@ -415,6 +415,7 @@ public class TetherServiceTest extends ServiceTestCase<TetherService> {
 
         private void sendResponse(int response, Context context) {
             Intent responseIntent = new Intent(TEST_RESPONSE_ACTION);
+            responseIntent.addFlags(Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND);
             responseIntent.putExtra(TetherService.EXTRA_RESULT, response);
             context.sendBroadcast(
                     responseIntent, android.Manifest.permission.CONNECTIVITY_INTERNAL);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,23 @@
  */
 package com.android.settings.applications;
 
-import android.content.BroadcastReceiver;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.Preference;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import android.text.TextUtils;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.applications.PermissionsSummaryHelper.PermissionsResultCallback;
+import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
+import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
+import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
+import com.android.settings.core.PreferenceController;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -34,77 +39,120 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AdvancedAppSettings extends SettingsPreferenceFragment implements
-        Indexable {
+public class AdvancedAppSettings extends DashboardFragment {
 
     static final String TAG = "AdvancedAppSettings";
 
-    private static final String KEY_APP_PERM = "manage_perms";
-    private static final String KEY_APP_DOMAIN_URLS = "domain_urls";
-    private static final String KEY_HIGH_POWER_APPS = "high_power_apps";
-    private static final String KEY_SYSTEM_ALERT_WINDOW = "system_alert_window";
-    private static final String KEY_WRITE_SETTINGS_APPS = "write_settings_apps";
-
-    private Preference mAppPermsPreference;
-    private Preference mAppDomainURLsPreference;
-    private Preference mHighPowerPreference;
-    private Preference mSystemAlertWindowPreference;
-    private Preference mWriteSettingsPreference;
-
-    private BroadcastReceiver mPermissionReceiver;
+    private static final String KEY_ASSIST_VOICE_INPUT = "assist_and_voice_input";
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.advanced_apps);
-
-        Preference permissions = getPreferenceScreen().findPreference(KEY_APP_PERM);
-        permissions.setIntent(new Intent(Intent.ACTION_MANAGE_PERMISSIONS));
-
-        mAppPermsPreference = findPreference(KEY_APP_PERM);
-        mAppDomainURLsPreference = findPreference(KEY_APP_DOMAIN_URLS);
-        mHighPowerPreference = findPreference(KEY_HIGH_POWER_APPS);
-        mSystemAlertWindowPreference = findPreference(KEY_SYSTEM_ALERT_WINDOW);
-        mWriteSettingsPreference = findPreference(KEY_WRITE_SETTINGS_APPS);
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    protected int getMetricsCategory() {
+    protected int getPreferenceScreenResId() {
+        return R.xml.app_default_settings;
+    }
+
+    @Override
+    protected List<PreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    @Override
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_ADVANCED;
     }
 
-    private final PermissionsResultCallback mPermissionCallback = new PermissionsResultCallback() {
-        @Override
-        public void onAppWithPermissionsCountsResult(int standardGrantedPermissionAppCount,
-                int standardUsedPermissionAppCount) {
-            if (getActivity() == null) {
-                return;
-            }
-            mPermissionReceiver = null;
-            if (standardUsedPermissionAppCount != 0) {
-                mAppPermsPreference.setSummary(getContext().getString(
-                        R.string.app_permissions_summary,
-                        standardGrantedPermissionAppCount,
-                        standardUsedPermissionAppCount));
-            } else {
-                mAppPermsPreference.setSummary(null);
-            }
-        }
-    };
+    private static List<PreferenceController> buildPreferenceControllers(Context context) {
+        final List<PreferenceController> controllers = new ArrayList<>();
+        controllers.add(new DefaultBrowserPreferenceController(context));
+        controllers.add(new DefaultWorkBrowserPreferenceController(context));
+        controllers.add(new DefaultPhonePreferenceController(context));
+        controllers.add(new DefaultWorkPhonePreferenceController(context));
+        controllers.add(new DefaultSmsPreferenceController(context));
+        controllers.add(new DefaultEmergencyPreferenceController(context));
+        controllers.add(new DefaultHomePreferenceController(context));
+        return controllers;
+    }
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.advanced_apps;
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.app_default_settings;
                     return Arrays.asList(sir);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-                    return Utils.getNonIndexable(R.xml.advanced_apps, context);
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_ASSIST_VOICE_INPUT);
+                    // TODO (b/38230148) Remove these keys when we can differentiate work results
+                    keys.add((new DefaultWorkPhonePreferenceController(context))
+                            .getPreferenceKey());
+                    keys.add((new DefaultWorkBrowserPreferenceController(context))
+                            .getPreferenceKey());
+                    return keys;
+                }
+
+                @Override
+                public List<PreferenceController> getPreferenceControllers(Context context) {
+                    return buildPreferenceControllers(context);
+                }
+            };
+
+    static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final Context mContext;
+        private final SummaryLoader mSummaryLoader;
+        private final DefaultSmsPreferenceController mDefaultSmsPreferenceController;
+        private final DefaultBrowserPreferenceController mDefaultBrowserPreferenceController;
+        private final DefaultPhonePreferenceController mDefaultPhonePreferenceController;
+
+        public SummaryProvider(Context context, SummaryLoader summaryLoader) {
+            mContext = context;
+            mSummaryLoader = summaryLoader;
+            mDefaultSmsPreferenceController = new DefaultSmsPreferenceController(mContext);
+            mDefaultBrowserPreferenceController = new DefaultBrowserPreferenceController(mContext);
+            mDefaultPhonePreferenceController = new DefaultPhonePreferenceController(mContext);
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (!listening) {
+                return;
+            }
+            CharSequence summary = concatSummaryText(
+                    mDefaultSmsPreferenceController.getDefaultAppLabel(),
+                    mDefaultBrowserPreferenceController.getDefaultAppLabel());
+            summary = concatSummaryText(summary,
+                    mDefaultPhonePreferenceController.getDefaultAppLabel());
+            if (!TextUtils.isEmpty(summary)) {
+                mSummaryLoader.setSummary(this, summary);
+            }
+        }
+
+        private CharSequence concatSummaryText(CharSequence summary1, CharSequence summary2) {
+            if (TextUtils.isEmpty(summary1)) {
+                return summary2;
+            }
+            if (TextUtils.isEmpty(summary2)) {
+                return summary1;
+            }
+            return mContext.getString(R.string.join_many_items_middle, summary1, summary2);
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
+            new SummaryLoader.SummaryProviderFactory() {
+                @Override
+                public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
+                        SummaryLoader summaryLoader) {
+                    return new AdvancedAppSettings.SummaryProvider(activity, summaryLoader);
                 }
             };
 }

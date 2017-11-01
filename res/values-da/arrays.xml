@@ -140,19 +140,10 @@
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Dårlig"</item>
-    <item msgid="5615082285463430971">"Rimelig"</item>
-    <item msgid="3565079809875324621">"God"</item>
-    <item msgid="5702329417707689835">"Fremragende"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3269131034472904310">"Altid"</item>
-    <item msgid="844721238536786870">"Kun når tilsluttet strøm"</item>
-    <item msgid="1986753720941888596">"Aldrig"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <item msgid="2124319326282651391">"Altid"</item>
-    <item msgid="7433294150916905997">"Kun når tilsluttet strøm"</item>
-    <item msgid="1390404486722375028">"Aldrig"</item>
+    <item msgid="2042505933058940139">"Dårlig"</item>
+    <item msgid="1344546617235886412">"Rimelig"</item>
+    <item msgid="6019931571712517411">"God"</item>
+    <item msgid="8986346415847956850">"Fremragende"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"De seneste 30 dage"</item>
@@ -173,6 +164,14 @@
     <item msgid="2577747762745812488">"Ingen"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"Ingen"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
     <item msgid="1818786254010764570">"Ingen"</item>
@@ -274,8 +273,8 @@
     <item msgid="2603878814882344450">"generel lydstyrke"</item>
     <item msgid="7136963238377062018">"lydstyrke for stemme"</item>
     <item msgid="4270236897655923007">"lydstyrke for ringetone"</item>
-    <item msgid="6325739889222559394">"medielydstyrke"</item>
-    <item msgid="5762123934816216821">"alarmlydstyrke"</item>
+    <item msgid="6325739889222559394">"lydstyrke for medier"</item>
+    <item msgid="5762123934816216821">"lydstyrke for alarmer"</item>
     <item msgid="785049718065337473">"lydstyrke for underretninger"</item>
     <item msgid="6700305533746877052">"lydstyrke for bluetooth"</item>
     <item msgid="2029227495214047094">"lås ikke"</item>
@@ -288,7 +287,7 @@
     <item msgid="485564189219029300">"aktivér VPN"</item>
     <item msgid="7155384795265164395">"skriv til baggrund"</item>
     <item msgid="1835836196806147034">"forslagsstruktur"</item>
-    <item msgid="5989890403088155055">"forslagsskærmbillede"</item>
+    <item msgid="5989890403088155055">"forslagsscreenshot"</item>
     <item msgid="8582699692765917557">"læs telefontilstand"</item>
     <item msgid="1474039653814954902">"tilføj telefonsvarer"</item>
     <item msgid="7222837656938871633">"brug SIP"</item>
@@ -302,6 +301,7 @@
     <item msgid="6628873315024166197">"tænd skærmen"</item>
     <item msgid="3253368931113490863">"hent konti"</item>
     <item msgid="780392378084812901">"kør i baggrunden"</item>
+    <item msgid="2629748510881309577">"lydstyrke for hjælpefunktioner"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Placering"</item>
@@ -340,8 +340,8 @@
     <item msgid="2098976479485046797">"Generel lydstyrke"</item>
     <item msgid="5660213838861789350">"Lydstyrke for stemme"</item>
     <item msgid="7983336752371254444">"Lydstyrke for ringetone"</item>
-    <item msgid="7878027809189330917">"Medielydstyrke"</item>
-    <item msgid="7260546305036218513">"Alarmlydstyrke"</item>
+    <item msgid="7878027809189330917">"Lydstyrke for medier"</item>
+    <item msgid="7260546305036218513">"Lydstyrke for alarmer"</item>
     <item msgid="9103719301075748925">"Lydstyrke for underretninger"</item>
     <item msgid="7025966722295861512">"Lydstyrke for bluetooth"</item>
     <item msgid="4665183401128289653">"Lås ikke"</item>
@@ -354,7 +354,7 @@
     <item msgid="2482631530338029480">"Aktivér VPN"</item>
     <item msgid="1662979573471871926">"Skriv til baggrund"</item>
     <item msgid="5964768335278263478">"Forslagsstruktur"</item>
-    <item msgid="2657138701132782702">"Forslagsskærmbillede"</item>
+    <item msgid="2657138701132782702">"Forslagsscreenshot"</item>
     <item msgid="8571369610363539266">"Læs telefontilstand"</item>
     <item msgid="4542463358215230845">"Tilføj telefonsvarer"</item>
     <item msgid="864565065016166003">"Brug SIP"</item>
@@ -368,6 +368,7 @@
     <item msgid="5832543806893763620">"Tænd skærmen"</item>
     <item msgid="5258373962467495905">"Hent konti"</item>
     <item msgid="334625385979270703">"Kør i baggrunden"</item>
+    <item msgid="9039213578110332702">"Lydstyrke for hjælpefunktioner"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Kort"</item>
@@ -412,7 +413,7 @@
     <item msgid="758587126802411846">"Sort på hvidt"</item>
     <item msgid="1495307195241623402">"Gult på sort"</item>
     <item msgid="6039700130994371612">"Gult på blåt"</item>
-    <item msgid="7169235156349580064">"Brugerdefineret"</item>
+    <item msgid="7169235156349580064">"Tilpasset"</item>
   </string-array>
   <string-array name="vpn_types_long">
     <item msgid="2732002039459078847">"PPTP-VPN"</item>
@@ -473,8 +474,8 @@
     <item msgid="6131821495505931173">"Rød"</item>
   </string-array>
   <string-array name="automatic_storage_management_days">
-    <item msgid="687318592238852312">"Mere end 30 dage gammel"</item>
-    <item msgid="2900554746706302178">"Mere end 60 dage gammel"</item>
-    <item msgid="5692284879054004388">"Mere end 90 dage gammel"</item>
+    <item msgid="687318592238852312">"Mere end 30 dage gamle"</item>
+    <item msgid="2900554746706302178">"Mere end 60 dage gamle"</item>
+    <item msgid="5692284879054004388">"Mere end 90 dage gamle"</item>
   </string-array>
 </resources>

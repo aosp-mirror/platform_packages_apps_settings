@@ -16,12 +16,13 @@
 -->
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
     android:orientation="horizontal"
-    android:paddingTop="1dp"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingStart="@dimen/preference_no_icon_padding_start"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
 
     <TextView

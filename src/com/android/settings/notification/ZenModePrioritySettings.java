@@ -27,8 +27,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 
@@ -64,7 +63,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_REMINDERS, val);
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_REMINDERS,
+                        val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowReminders=" + val);
                 savePolicy(getNewPriorityCategories(val, Policy.PRIORITY_CATEGORY_REMINDERS),
                         mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
@@ -79,7 +79,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_EVENTS, val);
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_EVENTS, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowEvents=" + val);
                 savePolicy(getNewPriorityCategories(val, Policy.PRIORITY_CATEGORY_EVENTS),
                         mPolicy.priorityCallSenders, mPolicy.priorityMessageSenders,
@@ -98,7 +98,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 final boolean allowMessages = val != SOURCE_NONE;
                 final int allowMessagesFrom =
                         val == SOURCE_NONE ? mPolicy.priorityMessageSenders : val;
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_MESSAGES, val);
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_MESSAGES, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowMessages=" + allowMessages
                         + " allowMessagesFrom=" + ZenModeConfig.sourceToString(allowMessagesFrom));
                 savePolicy(
@@ -118,7 +118,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
                 final int val = Integer.parseInt((String) newValue);
                 final boolean allowCalls = val != SOURCE_NONE;
                 final int allowCallsFrom = val == SOURCE_NONE ? mPolicy.priorityCallSenders : val;
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_CALLS, val);
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_CALLS, val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowCalls=" + allowCalls
                         + " allowCallsFrom=" + ZenModeConfig.sourceToString(allowCallsFrom));
                 savePolicy(getNewPriorityCategories(allowCalls, Policy.PRIORITY_CATEGORY_CALLS),
@@ -137,7 +137,8 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 if (mDisableListeners) return true;
                 final boolean val = (Boolean) newValue;
-                MetricsLogger.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_REPEAT_CALLS, val);
+                mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ALLOW_REPEAT_CALLS,
+                        val);
                 if (DEBUG) Log.d(TAG, "onPrefChange allowRepeatCallers=" + val);
                 int priorityCategories = getNewPriorityCategories(val,
                         NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS);
@@ -181,7 +182,7 @@ public class ZenModePrioritySettings extends ZenModeSettingsBase implements Inde
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ZEN_MODE_PRIORITY;
     }
 

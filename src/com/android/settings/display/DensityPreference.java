@@ -16,6 +16,7 @@ package com.android.settings.display;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.BidiFormatter;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -23,9 +24,12 @@ import android.util.Slog;
 import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
-import com.android.settings.CustomEditTextPreference;
+
 import com.android.settings.R;
+import com.android.settingslib.CustomEditTextPreference;
 import com.android.settingslib.display.DisplayDensityUtils;
+
+import java.text.NumberFormat;
 
 public class DensityPreference extends CustomEditTextPreference {
     private static final String TAG = "DensityPreference";
@@ -37,8 +41,9 @@ public class DensityPreference extends CustomEditTextPreference {
     @Override
     public void onAttached() {
         super.onAttached();
-
-        setSummary(getContext().getString(R.string.developer_density_summary, getCurrentSwDp()));
+        final CharSequence dpValue = BidiFormatter.getInstance()
+                .unicodeWrap(NumberFormat.getInstance().format(getCurrentSwDp()));
+        setSummary(getContext().getString(R.string.density_pixel_summary,dpValue));
     }
 
     private int getCurrentSwDp() {

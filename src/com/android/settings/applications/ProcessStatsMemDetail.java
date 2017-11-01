@@ -25,13 +25,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.internal.app.procstats.ProcessStats;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 
 import static com.android.settings.Utils.prepareCustomPreferencesList;
 
-public class ProcessStatsMemDetail extends InstrumentedFragment {
+public class ProcessStatsMemDetail extends InstrumentedPreferenceFragment {
     public static final String EXTRA_MEM_TIMES = "mem_times";
     public static final String EXTRA_MEM_STATE_WEIGHTS = "mem_state_weights";
     public static final String EXTRA_MEM_CACHED_WEIGHT = "mem_cached_weight";
@@ -86,7 +86,7 @@ public class ProcessStatsMemDetail extends InstrumentedFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_PROCESS_STATS_MEM_DETAIL;
     }
 

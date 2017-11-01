@@ -19,7 +19,6 @@ import android.telephony.ServiceState;
 import android.util.SparseIntArray;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryActiveView.BatteryActiveProvider;
-import com.android.settingslib.BatteryInfo;
 
 public class BatteryCellParser implements BatteryInfo.BatteryDataParser, BatteryActiveProvider {
 

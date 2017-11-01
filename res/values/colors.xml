@@ -21,16 +21,7 @@
 
     <color name="material_empty_color_light">#FFCED7DB</color>
 
-    <color name="memory_used">#F00</color>
-    <color name="memory_avail">@color/material_empty_color_light</color>
-    <color name="memory_apps_usage">#00796B</color>
-    <color name="memory_downloads">#3367D6</color>
-    <color name="memory_dcim">#0097A7</color>
-    <color name="memory_music">#689F38</color>
-    <color name="memory_cache">#283593</color>
-    <color name="memory_misc">#7B1FA2</color>
-    <color name="memory_user_light">#479392</color>
-    <color name="memory_user_dark">#316665</color>
+    <color name="bluetooth_dialog_text_color">#8a000000</color>
 
     <color name="crypt_keeper_clock_background">#ff9a9a9a</color>
     <color name="crypt_keeper_clock_foreground">#ff666666</color>
@@ -46,37 +37,28 @@
     <color name="setup_lock_pattern_view_success_color_dark">#ff84ffff</color>
     <color name="setup_lock_pattern_view_success_color_light">@color/suw_color_accent_light</color>
     <color name="setup_lock_pattern_view_error_color_dark">#fff44336</color>
-    <color name="setup_lock_pattern_view_error_color_light">@color/lock_pattern_view_error_color</color>
     <color name="setup_wizard_wifi_color_dark">#89ffffff</color>
     <color name="setup_wizard_wifi_color_light">#89000000</color>
 
     <color name="lock_pattern_background">#00000000</color>
     <color name="lock_pattern_view_regular_color">#ff37474f</color>
-    <color name="lock_pattern_view_error_color">@*android:color/system_error</color>
 
     <color name="lock_pattern_view_regular_color_dark">#ffffff</color>
 
     <color name="unlock_pattern_view_regular_color">@android:color/white</color>
-    <color name="unlock_pattern_view_error_color">@*android:color/system_error</color>
 
     <color name="fingerprint_title_area_bg">?android:attr/colorAccent</color>
     <color name="fingerprint_title_color">#ffffffff</color>
     <color name="fingerprint_message_color">#de000000</color>
-    <color name="fingerprint_progress_ring">?android:attr/colorAccent</color>
-    <color name="fingerprint_progress_ring_bg">#20000000</color>
     <color name="fingerprint_indicator_background_resting">#12000000</color>
 
     <color name="running_processes_system_ram">#ff384248</color>
     <color name="running_processes_free_ram">#ffced7db</color>
 
-    <color name="card_background">#fffafafa</color>
-
     <color name="wifi_divider">#ffe0e0e0</color>
     <color name="sim_noitification">@*android:color/material_deep_teal_500</color>
 
     <color name="confirm_device_credential_transparent_black">#60000000</color>
-    <color name="fab_ripple">#1fffffff</color><!-- 12% white -->
-    <color name="fab_shape">?android:attr/colorAccent</color>
     <color name="voice_interaction_highlight">#33b5e5</color>
 
     <drawable name="fp_enrollment_header_landscape">#009688</drawable>
@@ -88,8 +70,6 @@
 
     <color name="memory_avg_use">#ff384248</color>
 
-    <color name="zen_rule_name_warning">@*android:color/system_error</color>
-
     <!-- Accent color that matches the settings launcher icon -->
     <color name="icon_accent">#ffabffec</color>
 
@@ -99,6 +79,8 @@
     <!-- Accessibility SUW colors -->
     <color name="material_blue_500">#4285F4</color>
     <color name="material_blue_700">#3367D6</color>
+    <color name="material_grey_100">#f5f5f5</color>
+    <color name="material_grey_200">#ffffff</color>
 
     <color name="message_text_incoming">#ffffffff</color>
     <color name="message_text_outgoing">#ff323232</color>
@@ -112,16 +94,26 @@
     <color name="message_icon_background_outgoing">#4285f4</color>
     <color name="message_icon_text_outgoing">#ffffffff</color>
 
-    <color name="seek_bar_preference_preview_text">#fff</color>
-
     <color name="importance_disabled_slider_color">@*android:color/material_grey_300</color>
     <color name="importance_secondary_slider_color">#858383</color>
 
     <color name="usage_graph_dots">#B0BEC5</color>
 
-    <color name="card_background_grey">#eeeeee</color>
-
     <!-- Gestures settings -->
-    <color name="gestures_setting_background_color">#f5f5f5</color>
+    <color name="gestures_setting_background_color">#f4f4f4</color>
 
+    <color name="status_bar_color">#3c3c3c</color>
+
+    <!-- Color for the background of the shortcut icons.-->
+    <color name="shortcut_background">#fff5f5f5</color>
+
+    <!-- Color for preference icons on the Wifi Network Details page -->
+    <color name="wifi_details_icon_color">#8A000000</color>
+
+    <!-- The fallback color for tinting icons. Only used when colorControlNormal is unavailable -->
+    <color name="fallback_tintColor">#89000000</color>
+
+    <!-- Suggestion/condition colors -->
+    <color name="suggestion_condition_background">#f2f2f2</color>
+    <color name="condition_card_background">#f8f8f8</color>
 </resources>

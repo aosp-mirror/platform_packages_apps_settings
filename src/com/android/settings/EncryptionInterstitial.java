@@ -17,6 +17,7 @@
 package com.android.settings;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
@@ -25,8 +26,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.preference.Preference;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +34,11 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.utils.SettingsDividerItemDecoration;
-import com.android.setupwizardlib.GlifPreferenceLayout;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.setupwizardlib.GlifLayout;
 
 import java.util.List;
 
@@ -54,6 +55,12 @@ public class EncryptionInterstitial extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, EncryptionInterstitialFragment.class.getName());
         return modIntent;
+    }
+
+    @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -77,101 +84,67 @@ public class EncryptionInterstitial extends SettingsActivity {
         layout.setFitsSystemWindows(false);
     }
 
-    public static class EncryptionInterstitialFragment extends SettingsPreferenceFragment
-            implements DialogInterface.OnClickListener {
+    public static class EncryptionInterstitialFragment extends InstrumentedFragment
+            implements View.OnClickListener {
 
-        private static final int ACCESSIBILITY_WARNING_DIALOG = 1;
-        private static final String KEY_ENCRYPT_REQUIRE_PASSWORD = "encrypt_require_password";
-        private static final String KEY_ENCRYPT_DONT_REQUIRE_PASSWORD =
-                "encrypt_dont_require_password";
-
-        private Preference mRequirePasswordToDecrypt;
-        private Preference mDontRequirePasswordToDecrypt;
+        private View mRequirePasswordToDecrypt;
+        private View mDontRequirePasswordToDecrypt;
         private boolean mPasswordRequired;
         private Intent mUnlockMethodIntent;
         private int mRequestedPasswordQuality;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.ENCRYPTION;
         }
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+        public View onCreateView(
+                LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.encryption_interstitial, container, false);
+        }
 
-            addPreferencesFromResource(R.xml.security_settings_encryption_interstitial);
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
 
-            // Used for testing purposes
-            findPreference(KEY_ENCRYPT_DONT_REQUIRE_PASSWORD)
-                    .setViewId(R.id.encrypt_dont_require_password);
-
-            mRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_REQUIRE_PASSWORD);
-            mDontRequirePasswordToDecrypt = findPreference(KEY_ENCRYPT_DONT_REQUIRE_PASSWORD);
+            mRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_require_password);
+            mDontRequirePasswordToDecrypt = view.findViewById(R.id.encrypt_dont_require_password);
             boolean forFingerprint = getActivity().getIntent().getBooleanExtra(
                     ChooseLockSettingsHelper.EXTRA_KEY_FOR_FINGERPRINT, false);
             Intent intent = getActivity().getIntent();
             mRequestedPasswordQuality = intent.getIntExtra(EXTRA_PASSWORD_QUALITY, 0);
             mUnlockMethodIntent = intent.getParcelableExtra(EXTRA_UNLOCK_METHOD_INTENT);
             final int msgId;
-            final int enableId;
-            final int disableId;
             switch (mRequestedPasswordQuality) {
                 case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_pattern_for_fingerprint :
                             R.string.encryption_interstitial_message_pattern;
-                    enableId = R.string.encrypt_require_pattern;
-                    disableId = R.string.encrypt_dont_require_pattern;
                     break;
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
                 case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_pin_for_fingerprint :
                             R.string.encryption_interstitial_message_pin;
-                    enableId = R.string.encrypt_require_pin;
-                    disableId = R.string.encrypt_dont_require_pin;
                     break;
                 default:
                     msgId = forFingerprint ?
                             R.string.encryption_interstitial_message_password_for_fingerprint :
                             R.string.encryption_interstitial_message_password;
-                    enableId = R.string.encrypt_require_password;
-                    disableId = R.string.encrypt_dont_require_password;
                     break;
             }
-            TextView message = (TextView) LayoutInflater.from(getActivity()).inflate(
-                    R.layout.encryption_interstitial_header, null, false);
+            TextView message = (TextView) getActivity().findViewById(R.id.encryption_message);
             message.setText(msgId);
-            setHeaderView(message);
 
-            mRequirePasswordToDecrypt.setTitle(enableId);
-
-            mDontRequirePasswordToDecrypt.setTitle(disableId);
+            mRequirePasswordToDecrypt.setOnClickListener(this);
+            mDontRequirePasswordToDecrypt.setOnClickListener(this);
 
             setRequirePasswordState(getActivity().getIntent().getBooleanExtra(
                     EXTRA_REQUIRE_PASSWORD, true));
-        }
 
-        @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            GlifPreferenceLayout layout = (GlifPreferenceLayout) view;
-            layout.setDividerItemDecoration(new SettingsDividerItemDecoration(getContext()));
-
-            layout.setIcon(getContext().getDrawable(R.drawable.ic_lock));
+            GlifLayout layout = (GlifLayout) view;
             layout.setHeaderText(getActivity().getTitle());
-
-            // Use the dividers in SetupWizardRecyclerLayout. Suppress the dividers in
-            // PreferenceFragment.
-            setDivider(null);
-        }
-
-        @Override
-        public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent,
-                Bundle savedInstanceState) {
-            GlifPreferenceLayout layout = (GlifPreferenceLayout) parent;
-            return layout.onCreateRecyclerView(inflater, parent, savedInstanceState);
         }
 
         protected void startLockIntent() {
@@ -194,13 +167,15 @@ public class EncryptionInterstitial extends SettingsActivity {
         }
 
         @Override
-        public boolean onPreferenceTreeClick(Preference preference) {
-            final String key = preference.getKey();
-            if (key.equals(KEY_ENCRYPT_REQUIRE_PASSWORD)) {
+        public void onClick(View view) {
+            if (view == mRequirePasswordToDecrypt) {
                 final boolean accEn = AccessibilityManager.getInstance(getActivity()).isEnabled();
                 if (accEn && !mPasswordRequired) {
                     setRequirePasswordState(false); // clear the UI state
-                    showDialog(ACCESSIBILITY_WARNING_DIALOG);
+                    AccessibilityWarningDialogFragment.newInstance(mRequestedPasswordQuality)
+                            .show(
+                                    getChildFragmentManager(),
+                                    AccessibilityWarningDialogFragment.TAG);
                 } else {
                     setRequirePasswordState(true);
                     startLockIntent();
@@ -209,67 +184,95 @@ public class EncryptionInterstitial extends SettingsActivity {
                 setRequirePasswordState(false);
                 startLockIntent();
             }
-            return true;
-        }
-
-        @Override
-        public Dialog onCreateDialog(int dialogId) {
-            switch(dialogId) {
-                case ACCESSIBILITY_WARNING_DIALOG: {
-                    final int titleId;
-                    final int messageId;
-                    switch (mRequestedPasswordQuality) {
-                        case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                            titleId = R.string.encrypt_talkback_dialog_require_pattern;
-                            messageId = R.string.encrypt_talkback_dialog_message_pattern;
-                            break;
-                        case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                        case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                            titleId = R.string.encrypt_talkback_dialog_require_pin;
-                            messageId = R.string.encrypt_talkback_dialog_message_pin;
-                            break;
-                        default:
-                            titleId = R.string.encrypt_talkback_dialog_require_password;
-                            messageId = R.string.encrypt_talkback_dialog_message_password;
-                            break;
-                    }
-
-
-                    List<AccessibilityServiceInfo> list =
-                            AccessibilityManager.getInstance(getActivity())
-                            .getEnabledAccessibilityServiceList(
-                                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
-                    final CharSequence exampleAccessibility;
-                    if (list.isEmpty()) {
-                        // This should never happen.  But we shouldn't crash
-                        exampleAccessibility = "";
-                    } else {
-                        exampleAccessibility = list.get(0).getResolveInfo()
-                                .loadLabel(getPackageManager());
-                    }
-                    return new AlertDialog.Builder(getActivity())
-                        .setTitle(titleId)
-                        .setMessage(getString(messageId, exampleAccessibility))
-                        .setCancelable(true)
-                        .setPositiveButton(android.R.string.ok, this)
-                        .setNegativeButton(android.R.string.cancel, this)
-                        .create();
-                }
-                default: throw new IllegalArgumentException();
-            }
         }
 
         private void setRequirePasswordState(boolean required) {
             mPasswordRequired = required;
         }
 
+        public void finish() {
+            Activity activity = getActivity();
+            if (activity == null) return;
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                activity.finish();
+            }
+        }
+    }
+
+    public static class AccessibilityWarningDialogFragment extends InstrumentedDialogFragment
+            implements DialogInterface.OnClickListener {
+
+        public static final String TAG = "AccessibilityWarningDialog";
+
+        public static AccessibilityWarningDialogFragment newInstance(int passwordQuality) {
+            AccessibilityWarningDialogFragment fragment = new AccessibilityWarningDialogFragment();
+            Bundle args = new Bundle(1);
+            args.putInt(EXTRA_PASSWORD_QUALITY, passwordQuality);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final int titleId;
+            final int messageId;
+            switch (getArguments().getInt(EXTRA_PASSWORD_QUALITY)) {
+                case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
+                    titleId = R.string.encrypt_talkback_dialog_require_pattern;
+                    messageId = R.string.encrypt_talkback_dialog_message_pattern;
+                    break;
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
+                case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
+                    titleId = R.string.encrypt_talkback_dialog_require_pin;
+                    messageId = R.string.encrypt_talkback_dialog_message_pin;
+                    break;
+                default:
+                    titleId = R.string.encrypt_talkback_dialog_require_password;
+                    messageId = R.string.encrypt_talkback_dialog_message_password;
+                    break;
+            }
+
+
+            final Activity activity = getActivity();
+            List<AccessibilityServiceInfo> list =
+                    AccessibilityManager.getInstance(activity)
+                            .getEnabledAccessibilityServiceList(
+                                    AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+            final CharSequence exampleAccessibility;
+            if (list.isEmpty()) {
+                // This should never happen.  But we shouldn't crash
+                exampleAccessibility = "";
+            } else {
+                exampleAccessibility = list.get(0).getResolveInfo()
+                        .loadLabel(activity.getPackageManager());
+            }
+            return new AlertDialog.Builder(activity)
+                    .setTitle(titleId)
+                    .setMessage(getString(messageId, exampleAccessibility))
+                    .setCancelable(true)
+                    .setPositiveButton(android.R.string.ok, this)
+                    .setNegativeButton(android.R.string.cancel, this)
+                    .create();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_ENCRYPTION_INTERSTITIAL_ACCESSIBILITY;
+        }
+
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                setRequirePasswordState(true);
-                startLockIntent();
-            } else if (which == DialogInterface.BUTTON_NEGATIVE) {
-                setRequirePasswordState(false);
+            EncryptionInterstitialFragment fragment =
+                    (EncryptionInterstitialFragment) getParentFragment();
+            if (fragment != null) {
+                if (which == DialogInterface.BUTTON_POSITIVE) {
+                    fragment.setRequirePasswordState(true);
+                    fragment.startLockIntent();
+                } else if (which == DialogInterface.BUTTON_NEGATIVE) {
+                    fragment.setRequirePasswordState(false);
+                }
             }
         }
     }

@@ -16,61 +16,97 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+import static android.app.NotificationManager.IMPORTANCE_LOW;
+import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppInfoBase;
+import com.android.settings.applications.LayoutPreference;
+import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.widget.FooterPreference;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService.Ranking;
+import android.service.notification.NotificationListenerService;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import static com.android.settings.notification.RestrictedDropDownPreference.RestrictedItem;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 abstract public class NotificationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "NotifiSettingsBase";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
-    private static final String TUNER_SETTING = "show_importance_slider";
 
+    private static final Intent APP_NOTIFICATION_PREFS_CATEGORY_INTENT
+            = new Intent(Intent.ACTION_MAIN)
+            .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES);
+
+    protected static final int ORDER_FIRST = -500;
+    protected static final int ORDER_LAST = 1000;
+
+    protected static final String KEY_APP_LINK = "app_link";
+    protected static final String KEY_HEADER = "header";
+    protected static final String KEY_BLOCK = "block";
+    protected static final String KEY_BADGE = "badge";
     protected static final String KEY_BYPASS_DND = "bypass_dnd";
     protected static final String KEY_VISIBILITY_OVERRIDE = "visibility_override";
-    protected static final String KEY_IMPORTANCE = "importance";
-    protected static final String KEY_BLOCK = "block";
-    protected static final String KEY_SILENT = "silent";
+    protected static final String KEY_BLOCKED_DESC = "block_desc";
+    protected static final String KEY_ALLOW_SOUND = "allow_sound";
 
     protected PackageManager mPm;
     protected UserManager mUm;
-    protected final NotificationBackend mBackend = new NotificationBackend();
+    protected NotificationBackend mBackend = new NotificationBackend();
+    protected LockPatternUtils mLockPatternUtils;
+    protected NotificationManager mNm;
     protected Context mContext;
     protected boolean mCreated;
     protected int mUid;
     protected int mUserId;
     protected String mPkg;
     protected PackageInfo mPkgInfo;
-    protected ImportanceSeekBarPreference mImportance;
+    protected RestrictedSwitchPreference mBadge;
     protected RestrictedSwitchPreference mPriority;
     protected RestrictedDropDownPreference mVisibilityOverride;
-    protected RestrictedSwitchPreference mBlock;
-    protected RestrictedSwitchPreference mSilent;
+    protected RestrictedSwitchPreference mImportanceToggle;
+    protected LayoutPreference mBlockBar;
+    protected SwitchBar mSwitchBar;
+    protected FooterPreference mBlockedDesc;
+    protected Preference mAppLink;
+
     protected EnforcedAdmin mSuspendedAppsAdmin;
-    protected boolean mShowSlider = false;
+    protected boolean mDndVisualEffectsSuppressed;
+
+    protected NotificationChannel mChannel;
+    protected NotificationBackend.AppRow mAppRow;
+    protected boolean mShowLegacyChannelConfig = false;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -98,6 +134,7 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
         mPm = getPackageManager();
         mUm = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        mNm = NotificationManager.from(mContext);
 
         mPkg = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_NAME)
                 ? args.getString(AppInfoBase.ARG_PACKAGE_NAME)
@@ -105,127 +142,196 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mUid = args != null && args.containsKey(AppInfoBase.ARG_PACKAGE_UID)
                 ? args.getInt(AppInfoBase.ARG_PACKAGE_UID)
                 : intent.getIntExtra(Settings.EXTRA_APP_UID, -1);
-        if (mUid == -1 || TextUtils.isEmpty(mPkg)) {
-            Log.w(TAG, "Missing extras: " + Settings.EXTRA_APP_PACKAGE + " was " + mPkg + ", "
-                    + Settings.EXTRA_APP_UID + " was " + mUid);
-            toastAndFinish();
-            return;
-        }
-        mUserId = UserHandle.getUserId(mUid);
 
-        if (DEBUG) Log.d(TAG, "Load details for pkg=" + mPkg + " uid=" + mUid);
+        if (mUid < 0) {
+            try {
+                mUid = mPm.getPackageUid(mPkg, 0);
+            } catch (NameNotFoundException e) {
+            }
+        }
+
         mPkgInfo = findPackageInfo(mPkg, mUid);
-        if (mPkgInfo == null) {
-            Log.w(TAG, "Failed to find package info: " + Settings.EXTRA_APP_PACKAGE + " was " + mPkg
-                    + ", " + Settings.EXTRA_APP_UID + " was " + mUid);
+
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
             toastAndFinish();
             return;
         }
 
-        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
-                mContext, mPkg, mUserId);
-        mShowSlider = Settings.Secure.getInt(getContentResolver(), TUNER_SETTING, 0) == 1;
+        mUserId = UserHandle.getUserId(mUid);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if ((mUid != -1 && getPackageManager().getPackagesForUid(mUid) == null)) {
-            // App isn't around anymore, must have been removed.
+        if (mUid < 0 || TextUtils.isEmpty(mPkg) || mPkgInfo == null) {
+            Log.w(TAG, "Missing package or uid or packageinfo");
             finish();
             return;
         }
+        mAppRow = mBackend.loadAppRow(mContext, mPm, mPkgInfo);
+        Bundle args = getArguments();
+        mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
+                mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
+
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);
-        if (mImportance != null) {
-            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mPriority != null) {
-            mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mBlock != null) {
-            mBlock.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mSilent != null) {
-            mSilent.setDisabledByAdmin(mSuspendedAppsAdmin);
-        }
-        if (mVisibilityOverride != null) {
-            mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
+        NotificationManager.Policy policy = mNm.getNotificationPolicy();
+        mDndVisualEffectsSuppressed = policy == null ? false : policy.suppressedVisualEffects != 0;
+
+        mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
+                mContext, mPkg, mUserId);
+    }
+
+    protected void setVisible(Preference p, boolean visible) {
+        final boolean isVisible = getPreferenceScreen().findPreference(p.getKey()) != null;
+        if (isVisible == visible) return;
+        if (visible) {
+            getPreferenceScreen().addPreference(p);
+        } else {
+            getPreferenceScreen().removePreference(p);
         }
     }
 
-    protected void setupImportancePrefs(boolean notBlockable, boolean notSilenceable,
-                                        int importance, boolean banned) {
-        if (mShowSlider && !notSilenceable) {
-            setVisible(mBlock, false);
-            setVisible(mSilent, false);
-            mImportance.setDisabledByAdmin(mSuspendedAppsAdmin);
-            mImportance.setMinimumProgress(
-                    notBlockable ? Ranking.IMPORTANCE_MIN : Ranking.IMPORTANCE_NONE);
-            mImportance.setMax(Ranking.IMPORTANCE_MAX);
-            mImportance.setProgress(importance);
-            mImportance.setAutoOn(importance == Ranking.IMPORTANCE_UNSPECIFIED);
-            mImportance.setCallback(new ImportanceSeekBarPreference.Callback() {
-                @Override
-                public void onImportanceChanged(int progress, boolean fromUser) {
-                    if (fromUser) {
-                        mBackend.setImportance(mPkg, mUid, progress);
-                    }
-                    updateDependents(progress);
-                }
-            });
-        } else {
-            setVisible(mImportance, false);
-            if (notBlockable) {
-                setVisible(mBlock, false);
-            } else {
-                boolean blocked = importance == Ranking.IMPORTANCE_NONE || banned;
-                mBlock.setChecked(blocked);
-                mBlock.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        final boolean blocked = (Boolean) newValue;
-                        final int importance =
-                                blocked ? Ranking.IMPORTANCE_NONE : Ranking.IMPORTANCE_UNSPECIFIED;
-                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                        updateDependents(importance);
-                        return true;
-                    }
-                });
+    protected void toastAndFinish() {
+        Toast.makeText(mContext, R.string.app_not_found_dlg_text, Toast.LENGTH_SHORT).show();
+        getActivity().finish();
+    }
+
+    private List<ResolveInfo> queryNotificationConfigActivities() {
+        if (DEBUG) Log.d(TAG, "APP_NOTIFICATION_PREFS_CATEGORY_INTENT is "
+                + APP_NOTIFICATION_PREFS_CATEGORY_INTENT);
+        final List<ResolveInfo> resolveInfos = mPm.queryIntentActivities(
+                APP_NOTIFICATION_PREFS_CATEGORY_INTENT,
+                0 //PackageManager.MATCH_DEFAULT_ONLY
+        );
+        return resolveInfos;
+    }
+
+    protected void collectConfigActivities(ArrayMap<String, NotificationBackend.AppRow> rows) {
+        final List<ResolveInfo> resolveInfos = queryNotificationConfigActivities();
+        applyConfigActivities(rows, resolveInfos);
+    }
+
+    private void applyConfigActivities(ArrayMap<String, NotificationBackend.AppRow> rows,
+            List<ResolveInfo> resolveInfos) {
+        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
+                + (resolveInfos.size() == 0 ? " ;_;" : ""));
+        for (ResolveInfo ri : resolveInfos) {
+            final ActivityInfo activityInfo = ri.activityInfo;
+            final ApplicationInfo appInfo = activityInfo.applicationInfo;
+            final NotificationBackend.AppRow row = rows.get(appInfo.packageName);
+            if (row == null) {
+                if (DEBUG) Log.v(TAG, "Ignoring notification preference activity ("
+                        + activityInfo.name + ") for unknown package "
+                        + activityInfo.packageName);
+                continue;
             }
-            if (notSilenceable) {
-                setVisible(mSilent, false);
-            } else {
-                mSilent.setChecked(importance == Ranking.IMPORTANCE_LOW);
-                mSilent.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                    @Override
-                    public boolean onPreferenceChange(Preference preference, Object newValue) {
-                        final boolean silenced = (Boolean) newValue;
-                        final int importance =
-                                silenced ? Ranking.IMPORTANCE_LOW : Ranking.IMPORTANCE_UNSPECIFIED;
-                        mBackend.setImportance(mPkgInfo.packageName, mUid, importance);
-                        updateDependents(importance);
-                        return true;
-                    }
-                });
+            if (row.settingsIntent != null) {
+                if (DEBUG) Log.v(TAG, "Ignoring duplicate notification preference activity ("
+                        + activityInfo.name + ") for package "
+                        + activityInfo.packageName);
+                continue;
             }
-            updateDependents(banned ? Ranking.IMPORTANCE_NONE : importance);
+            row.settingsIntent = new Intent(APP_NOTIFICATION_PREFS_CATEGORY_INTENT)
+                    .setClassName(activityInfo.packageName, activityInfo.name);
+            if (mChannel != null) {
+                row.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
+            }
         }
+    }
+
+    private PackageInfo findPackageInfo(String pkg, int uid) {
+        if (pkg == null || uid < 0) {
+            return null;
+        }
+        final String[] packages = mPm.getPackagesForUid(uid);
+        if (packages != null && pkg != null) {
+            final int N = packages.length;
+            for (int i = 0; i < N; i++) {
+                final String p = packages[i];
+                if (pkg.equals(p)) {
+                    try {
+                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
+                    } catch (NameNotFoundException e) {
+                        Log.w(TAG, "Failed to load package " + pkg, e);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    protected void addAppLinkPref() {
+        if (mAppRow.settingsIntent != null && mAppLink == null) {
+            mAppLink = new Preference(getPrefContext());
+            mAppLink.setKey(KEY_APP_LINK);
+            mAppLink.setOrder(500);
+            mAppLink.setIntent(mAppRow.settingsIntent);
+            mAppLink.setTitle(mContext.getString(R.string.app_settings_link));
+            getPreferenceScreen().addPreference(mAppLink);
+        }
+    }
+
+    protected void populateDefaultChannelPrefs() {
+        if (mPkgInfo != null && mChannel != null) {
+            addPreferencesFromResource(R.xml.legacy_channel_notification_settings);
+            setupPriorityPref(mChannel.canBypassDnd());
+            setupVisOverridePref(mChannel.getLockscreenVisibility());
+            setupImportanceToggle();
+            setupBadge();
+        }
+        mSwitchBar.setChecked(!mAppRow.banned
+                && mChannel.getImportance() != NotificationManager.IMPORTANCE_NONE);
+    }
+
+    abstract void setupBadge();
+
+    abstract void updateDependents(boolean banned);
+
+    // 'allow sound'
+    private void setupImportanceToggle() {
+        mImportanceToggle = (RestrictedSwitchPreference) findPreference(KEY_ALLOW_SOUND);
+        mImportanceToggle.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mImportanceToggle.setEnabled(isChannelConfigurable(mChannel)
+                && !mImportanceToggle.isDisabledByAdmin());
+        mImportanceToggle.setChecked(mChannel.getImportance() >= IMPORTANCE_DEFAULT
+                || mChannel.getImportance() == IMPORTANCE_UNSPECIFIED);
+        mImportanceToggle.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        final int importance =
+                                ((Boolean) newValue ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_LOW);
+                        mChannel.setImportance(importance);
+                        mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+                        mBackend.updateChannel(mPkg, mUid, mChannel);
+                        updateDependents(mChannel.getImportance() == IMPORTANCE_NONE);
+                        return true;
+                    }
+                });
     }
 
     protected void setupPriorityPref(boolean priority) {
+        mPriority = (RestrictedSwitchPreference) findPreference(KEY_BYPASS_DND);
         mPriority.setDisabledByAdmin(mSuspendedAppsAdmin);
+        mPriority.setEnabled(isChannelConfigurable(mChannel) && !mPriority.isDisabledByAdmin());
         mPriority.setChecked(priority);
         mPriority.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 final boolean bypassZenMode = (Boolean) newValue;
-                return mBackend.setBypassZenMode(mPkgInfo.packageName, mUid, bypassZenMode);
+                mChannel.setBypassDnd(bypassZenMode);
+                mChannel.lockFields(NotificationChannel.USER_LOCKED_PRIORITY);
+                mBackend.updateChannel(mPkg, mUid, mChannel);
+                return true;
             }
         });
     }
 
     protected void setupVisOverridePref(int sensitive) {
+        mVisibilityOverride =
+                (RestrictedDropDownPreference) findPreference(KEY_VISIBILITY_OVERRIDE);
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
 
@@ -233,7 +339,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         if (getLockscreenNotificationsEnabled() && getLockscreenAllowPrivateNotifications()) {
             final String summaryShowEntry =
                     getString(R.string.lock_screen_notifications_summary_show);
-            final String summaryShowEntryValue = Integer.toString(Ranking.VISIBILITY_NO_OVERRIDE);
+            final String summaryShowEntryValue =
+                    Integer.toString(NotificationManager.VISIBILITY_NO_OVERRIDE);
             entries.add(summaryShowEntry);
             values.add(summaryShowEntryValue);
             setRestrictedIfNotificationFeaturesDisabled(summaryShowEntry, summaryShowEntryValue,
@@ -252,38 +359,63 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         mVisibilityOverride.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mVisibilityOverride.setEntryValues(values.toArray(new CharSequence[values.size()]));
 
-        if (sensitive == Ranking.VISIBILITY_NO_OVERRIDE) {
+        if (sensitive == NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE) {
             mVisibilityOverride.setValue(Integer.toString(getGlobalVisibility()));
         } else {
             mVisibilityOverride.setValue(Integer.toString(sensitive));
         }
         mVisibilityOverride.setSummary("%s");
 
-        mVisibilityOverride.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                int sensitive = Integer.parseInt((String) newValue);
-                if (sensitive == getGlobalVisibility()) {
-                    sensitive = Ranking.VISIBILITY_NO_OVERRIDE;
-                }
-                mBackend.setVisibilityOverride(mPkgInfo.packageName, mUid, sensitive);
-                return true;
-            }
-        });
+        mVisibilityOverride.setOnPreferenceChangeListener(
+                new Preference.OnPreferenceChangeListener() {
+                    @Override
+                    public boolean onPreferenceChange(Preference preference, Object newValue) {
+                        int sensitive = Integer.parseInt((String) newValue);
+                        if (sensitive == getGlobalVisibility()) {
+                            sensitive = NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
+                        }
+                        mChannel.setLockscreenVisibility(sensitive);
+                        mChannel.lockFields(NotificationChannel.USER_LOCKED_VISIBILITY);
+                        mBackend.updateChannel(mPkg, mUid, mChannel);
+                        return true;
+                    }
+                });
+        mVisibilityOverride.setDisabledByAdmin(mSuspendedAppsAdmin);
+    }
+
+    protected void setupBlockDesc(int summaryResId) {
+        mBlockedDesc = (FooterPreference) getPreferenceScreen().findPreference(
+                KEY_BLOCKED_DESC);
+        mBlockedDesc = new FooterPreference(getPrefContext());
+        mBlockedDesc.setSelectable(false);
+        mBlockedDesc.setTitle(summaryResId);
+        mBlockedDesc.setEnabled(false);
+        mBlockedDesc.setOrder(50);
+        getPreferenceScreen().addPreference(mBlockedDesc);
+    }
+
+    protected boolean checkCanBeVisible(int minImportanceVisible) {
+        int importance = mChannel.getImportance();
+        if (importance == NotificationManager.IMPORTANCE_UNSPECIFIED) {
+            return true;
+        }
+        return importance >= minImportanceVisible;
     }
 
     private void setRestrictedIfNotificationFeaturesDisabled(CharSequence entry,
             CharSequence entryValue, int keyguardNotificationFeatures) {
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
-                mContext, keyguardNotificationFeatures, mUserId);
+        RestrictedLockUtils.EnforcedAdmin admin =
+                RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
+                        mContext, keyguardNotificationFeatures, mUserId);
         if (admin != null) {
-            RestrictedItem item = new RestrictedItem(entry, entryValue, admin);
+            RestrictedDropDownPreference.RestrictedItem item =
+                    new RestrictedDropDownPreference.RestrictedItem(entry, entryValue, admin);
             mVisibilityOverride.addRestrictedItem(item);
         }
     }
 
     private int getGlobalVisibility() {
-        int globalVis = Ranking.VISIBILITY_NO_OVERRIDE;
+        int globalVis = NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
         if (!getLockscreenNotificationsEnabled()) {
             globalVis = Notification.VISIBILITY_SECRET;
         } else if (!getLockscreenAllowPrivateNotifications()) {
@@ -292,48 +424,39 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         return globalVis;
     }
 
-    protected boolean getLockscreenNotificationsEnabled() {
+    private boolean getLockscreenNotificationsEnabled() {
         return Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0) != 0;
     }
 
-    protected boolean getLockscreenAllowPrivateNotifications() {
+    private boolean getLockscreenAllowPrivateNotifications() {
         return Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0) != 0;
     }
 
-    abstract void updateDependents(int progress);
-
-    protected void setVisible(Preference p, boolean visible) {
-        final boolean isVisible = getPreferenceScreen().findPreference(p.getKey()) != null;
-        if (isVisible == visible) return;
-        if (visible) {
-            getPreferenceScreen().addPreference(p);
-        } else {
-            getPreferenceScreen().removePreference(p);
+    protected boolean isLockScreenSecure() {
+        if (mLockPatternUtils == null) {
+            mLockPatternUtils = new LockPatternUtils(getActivity());
         }
+        boolean lockscreenSecure = mLockPatternUtils.isSecure(UserHandle.myUserId());
+        UserInfo parentUser = mUm.getProfileParent(UserHandle.myUserId());
+        if (parentUser != null){
+            lockscreenSecure |= mLockPatternUtils.isSecure(parentUser.id);
+        }
+
+        return lockscreenSecure;
     }
 
-    protected void toastAndFinish() {
-        Toast.makeText(mContext, R.string.app_not_found_dlg_text, Toast.LENGTH_SHORT).show();
-        getActivity().finish();
+    protected boolean isChannelConfigurable(NotificationChannel channel) {
+        return !channel.getId().equals(mAppRow.lockedChannelId);
     }
 
-    private PackageInfo findPackageInfo(String pkg, int uid) {
-        final String[] packages = mPm.getPackagesForUid(uid);
-        if (packages != null && pkg != null) {
-            final int N = packages.length;
-            for (int i = 0; i < N; i++) {
-                final String p = packages[i];
-                if (pkg.equals(p)) {
-                    try {
-                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES);
-                    } catch (NameNotFoundException e) {
-                        Log.w(TAG, "Failed to load package " + pkg, e);
-                    }
-                }
-            }
+    protected boolean isChannelBlockable(boolean systemApp, NotificationChannel channel) {
+        if (!mAppRow.systemApp) {
+            return true;
         }
-        return null;
+
+        return channel.isBlockableSystem()
+                || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
     }
 }

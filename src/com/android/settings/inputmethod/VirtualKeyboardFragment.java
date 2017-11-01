@@ -26,10 +26,16 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
+import com.android.settingslib.inputmethod.InputMethodPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -37,7 +43,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
+public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {
 
     private static final String ADD_VIRTUAL_KEYBOARD_SCREEN = "add_virtual_keyboard_screen";
     private static final Drawable NO_ICON = new ColorDrawable(Color.TRANSPARENT);
@@ -66,7 +72,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.VIRTUAL_KEYBOARDS;
     }
 
@@ -99,12 +105,7 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
             mInputMethodPreferenceList.add(pref);
         }
         final Collator collator = Collator.getInstance();
-        Collections.sort(mInputMethodPreferenceList, new Comparator<InputMethodPreference>() {
-            @Override
-            public int compare(InputMethodPreference lhs, InputMethodPreference rhs) {
-                return lhs.compareTo(rhs, collator);
-            }
-        });
+        mInputMethodPreferenceList.sort((lhs, rhs) -> lhs.compareTo(rhs, collator));
         getPreferenceScreen().removeAll();
         for (int i = 0; i < N; ++i) {
             final InputMethodPreference pref = mInputMethodPreferenceList.get(i);
@@ -117,4 +118,16 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment {
         mAddVirtualKeyboardScreen.setOrder(N);
         getPreferenceScreen().addPreference(mAddVirtualKeyboardScreen);
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            final InputMethodManager imm = context.getSystemService(InputMethodManager.class);
+            final List<InputMethodInfo> enabledInputMethods = imm.getEnabledInputMethodList();
+            final String screenTitle = context.getString(R.string.virtual_keyboard_category);
+            return AvailableVirtualKeyboardFragment
+                    .buildSearchIndexOfInputMethods(context, enabledInputMethods, screenTitle);
+        }
+    };
 }

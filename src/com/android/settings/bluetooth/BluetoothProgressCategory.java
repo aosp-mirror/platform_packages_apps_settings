@@ -27,21 +27,27 @@ import com.android.settings.R;
  */
 public class BluetoothProgressCategory extends ProgressCategory {
     public BluetoothProgressCategory(Context context) {
-        this(context, null);
+        super(context);
+        init();
     }
 
     public BluetoothProgressCategory(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context, attrs);
+        init();
     }
 
     public BluetoothProgressCategory(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        init();
     }
 
     public BluetoothProgressCategory(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        init();
+    }
 
+    private void init() {
         setEmptyTextRes(R.string.bluetooth_no_devices_found);
     }
 }

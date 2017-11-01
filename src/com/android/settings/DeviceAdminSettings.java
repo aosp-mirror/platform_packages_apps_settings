@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
 import android.app.ListFragment;
 import android.app.admin.DeviceAdminInfo;
@@ -31,7 +30,6 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -50,6 +48,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -58,12 +60,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class DeviceAdminSettings extends ListFragment {
+public class DeviceAdminSettings extends ListFragment implements Instrumentable {
     static final String TAG = "DeviceAdminSettings";
 
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
+            new VisibilityLoggerMixin(getMetricsCategory());
     private DevicePolicyManager mDPM;
     private UserManager mUm;
-
 
     private static class DeviceAdminListItem implements Comparable<DeviceAdminListItem> {
         public DeviceAdminInfo info;
@@ -81,6 +84,13 @@ public class DeviceAdminSettings extends ListFragment {
             return this.name.compareTo(other.name);
         }
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mVisibilityLoggerMixin.onAttach(context);
+    }
+
     /**
      * Internal collection of device admin info objects for all profiles associated with the current
      * user.
@@ -102,6 +112,11 @@ public class DeviceAdminSettings extends ListFragment {
             }
         }
     };
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DEVICE_ADMIN_SETTINGS;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -126,9 +141,11 @@ public class DeviceAdminSettings extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
+        final Activity activity = getActivity();
+        mVisibilityLoggerMixin.onResume();
         IntentFilter filter = new IntentFilter();
         filter.addAction(DevicePolicyManager.ACTION_DEVICE_POLICY_MANAGER_STATE_CHANGED);
-        getActivity().registerReceiverAsUser(
+        activity.registerReceiverAsUser(
                 mBroadcastReceiver, UserHandle.ALL, filter, null, null);
 
         final ComponentName deviceOwnerComponent = mDPM.getDeviceOwnerComponentOnAnyUser();
@@ -146,7 +163,9 @@ public class DeviceAdminSettings extends ListFragment {
 
     @Override
     public void onPause() {
-        getActivity().unregisterReceiver(mBroadcastReceiver);
+        final Activity activity = getActivity();
+        activity.unregisterReceiver(mBroadcastReceiver);
+        mVisibilityLoggerMixin.onPause();
         super.onPause();
     }
 
@@ -397,7 +416,8 @@ public class DeviceAdminSettings extends ListFragment {
                     ai = iPackageManager.getReceiverInfo(activeAdmin,
                             PackageManager.GET_META_DATA |
                             PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                            PackageManager.MATCH_ENCRYPTION_AWARE_AND_UNAWARE, profileId);
+                            PackageManager.MATCH_DIRECT_BOOT_UNAWARE |
+                            PackageManager.MATCH_DIRECT_BOOT_AWARE, profileId);
                 } catch (RemoteException e) {
                     Log.w(TAG, "Unable to load component: " + activeAdmin);
                     continue;

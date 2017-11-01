@@ -18,10 +18,13 @@ package com.android.settings.overlay;
 
 import android.accounts.Account;
 import android.annotation.IntDef;
+import android.annotation.NonNull;
 import android.annotation.StringRes;
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.android.settings.support.SupportPhone;
 
@@ -111,18 +114,33 @@ public interface SupportFeatureProvider {
     void setShouldShowDisclaimerDialog(Context context, boolean shouldShow);
 
     /**
-     * Returns an {@link Account} that's eligible for support options.
+     * Returns array of {@link Account} that's eligible for support options.
      */
-    Account getSupportEligibleAccount(Context context);
+    @NonNull
+    Account[] getSupportEligibleAccounts(Context context);
 
     /**
      * Starts support activity of specified type
      *
      * @param activity Calling activity
-     * @param account A account returned by {@link #getSupportEligibleAccount}
-     * @param type The type of support account needs.
+     * @param account  A account that selected by user
+     * @param type     The type of support account needs.
      */
     void startSupport(Activity activity, Account account, @SupportType int type);
+
+    /**
+     * Starts support v2, invokes the support home page. Will no-op if support v2 is not enabled.
+     *
+     * @param activity Calling activity.
+     */
+    void startSupportV2(Activity activity);
+
+    /**
+     * Checks if support v2 is enabled for this device.
+     *
+     * @return a boolean indicating if support v2 is enabled.
+     */
+    boolean isSupportV2Enabled();
 
     /**
      * Returns an {@link Intent} that opens help and allow user get help on sign in.
@@ -140,8 +158,18 @@ public interface SupportFeatureProvider {
     Intent getTipsAndTricksIntent(Context context);
 
     /**
-     * Returns the string for the disclaimer in the Support dialog
+     * Returns the string for the disclaimer in the Support dialog.
      */
     @StringRes
     int getDisclaimerStringResId();
+
+    /**
+     * launches the fragment that displays the system information being sent to support agents.
+     */
+    void launchSystemInfoFragment(Bundle args, FragmentManager manager);
+
+    /**
+     * Returns a url with information to introduce user to new device.
+     */
+    String getNewDeviceIntroUrl(Context context);
 }

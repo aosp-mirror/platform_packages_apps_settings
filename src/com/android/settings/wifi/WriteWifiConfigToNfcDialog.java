@@ -56,7 +56,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private static final String PASSWORD_FORMAT = "102700%s%s";
     private static final int HEX_RADIX = 16;
     private static final char[] hexArray = "0123456789ABCDEF".toCharArray();
-    private static final String NETWORK_ID = "network_id";
     private static final String SECURITY = "security";
 
     private final PowerManager.WakeLock mWakeLock;
@@ -69,33 +68,29 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     private TextView mLabelView;
     private CheckBox mPasswordCheckBox;
     private ProgressBar mProgressBar;
-    private WifiManager mWifiManager;
+    private WifiManagerWrapper mWifiManager;
     private String mWpsNfcConfigurationToken;
     private Context mContext;
-    private int mNetworkId;
     private int mSecurity;
 
-    WriteWifiConfigToNfcDialog(Context context, int networkId, int security,
-            WifiManager wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, int security, WifiManagerWrapper wifiManager) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
         mOnTextChangedHandler = new Handler();
-        mNetworkId = networkId;
         mSecurity = security;
         mWifiManager = wifiManager;
     }
 
-    WriteWifiConfigToNfcDialog(Context context, Bundle savedState, WifiManager wifiManager) {
+    WriteWifiConfigToNfcDialog(Context context, Bundle savedState, WifiManagerWrapper wifiManager) {
         super(context);
 
         mContext = context;
         mWakeLock = ((PowerManager) context.getSystemService(Context.POWER_SERVICE))
                 .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "WriteWifiConfigToNfcDialog:wakeLock");
         mOnTextChangedHandler = new Handler();
-        mNetworkId = savedState.getInt(NETWORK_ID);
         mSecurity = savedState.getInt(SECURITY);
         mWifiManager = wifiManager;
     }
@@ -114,12 +109,12 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
                 mContext.getResources().getString(com.android.internal.R.string.cancel),
                 (OnClickListener) null);
 
-        mPasswordView = (TextView) mView.findViewById(R.id.password);
-        mLabelView = (TextView) mView.findViewById(R.id.password_label);
+        mPasswordView = mView.findViewById(R.id.password);
+        mLabelView = mView.findViewById(R.id.password_label);
         mPasswordView.addTextChangedListener(this);
-        mPasswordCheckBox = (CheckBox) mView.findViewById(R.id.show_password);
+        mPasswordCheckBox = mView.findViewById(R.id.show_password);
         mPasswordCheckBox.setOnCheckedChangeListener(this);
-        mProgressBar = (ProgressBar) mView.findViewById(R.id.progress_bar);
+        mProgressBar = mView.findViewById(R.id.progress_bar);
 
         super.onCreate(savedInstanceState);
 
@@ -135,17 +130,16 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
         mWakeLock.acquire();
 
         String password = mPasswordView.getText().toString();
-        String wpsNfcConfigurationToken
-                = mWifiManager.getWpsNfcConfigurationToken(mNetworkId);
+        String wpsNfcConfigurationToken = mWifiManager.getCurrentNetworkWpsNfcConfigurationToken();
         String passwordHex = byteArrayToHexString(password.getBytes());
 
         String passwordLength = password.length() >= HEX_RADIX
                 ? Integer.toString(password.length(), HEX_RADIX)
                 : "0" + Character.forDigit(password.length(), HEX_RADIX);
 
-        passwordHex = String.format(PASSWORD_FORMAT, passwordLength, passwordHex).toUpperCase();
+        passwordHex = String.format(PASSWORD_FORMAT, passwordLength, passwordHex).toLowerCase();
 
-        if (wpsNfcConfigurationToken.contains(passwordHex)) {
+        if (wpsNfcConfigurationToken != null && wpsNfcConfigurationToken.contains(passwordHex)) {
             mWpsNfcConfigurationToken = wpsNfcConfigurationToken;
 
             Activity activity = getOwnerActivity();
@@ -180,7 +174,6 @@ class WriteWifiConfigToNfcDialog extends AlertDialog
     }
 
     public void saveState(Bundle state) {
-        state.putInt(NETWORK_ID, mNetworkId);
         state.putInt(SECURITY, mSecurity);
     }
 

@@ -16,8 +16,11 @@
 
 package com.android.settings.notification;
 
-import android.app.*;
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.INotificationManager;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentSender;
@@ -26,7 +29,12 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.os.*;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.NotificationListenerService.Ranking;
 import android.service.notification.NotificationListenerService.RankingMap;
@@ -44,24 +52,28 @@ import android.widget.DateTimeView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.CopyablePreference;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 
-import java.lang.StringBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 public class NotificationStation extends SettingsPreferenceFragment {
     private static final String TAG = NotificationStation.class.getSimpleName();
 
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static final boolean DUMP_EXTRAS = true;
     private static final boolean DUMP_PARCEL = true;
     private Handler mHandler;
 
     private static class HistoricalNotificationInfo {
+        public String key;
+        public String channel;
         public String pkg;
         public Drawable pkgicon;
         public CharSequence pkgname;
@@ -133,7 +145,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
                 @Override
                 public int compare(HistoricalNotificationInfo lhs,
                                    HistoricalNotificationInfo rhs) {
-                    return (int)(rhs.timestamp - lhs.timestamp);
+                    return Long.compare(rhs.timestamp, lhs.timestamp);
                 }
             };
 
@@ -167,7 +179,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_STATION;
     }
 
@@ -243,7 +255,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
         sb.append("Intent(pkg=").append(is.getCreatorPackage());
         try {
             final boolean isActivity =
-                    ActivityManagerNative.getDefault().isIntentSenderAnActivity(is.getTarget());
+                    ActivityManager.getService().isIntentSenderAnActivity(is.getTarget());
             if (isActivity) sb.append(" (activity)");
         } catch (RemoteException ex) {}
         sb.append(")");
@@ -260,8 +272,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
             List<HistoricalNotificationInfo> list
                     = new ArrayList<HistoricalNotificationInfo>(active.length + dismissed.length);
-
-            final Ranking rank = new Ranking();
 
             for (StatusBarNotification[] resultset
                     : new StatusBarNotification[][] { active, dismissed }) {
@@ -283,179 +293,12 @@ public class NotificationStation extends SettingsPreferenceFragment {
                     }
                     info.timestamp = sbn.getPostTime();
                     info.priority = n.priority;
+                    info.channel = n.getChannelId();
+                    info.key = sbn.getKey();
 
                     info.active = (resultset == active);
 
-                    final SpannableStringBuilder sb = new SpannableStringBuilder();
-                    final String delim = getString(R.string.notification_log_details_delimiter);
-                    sb.append(bold(getString(R.string.notification_log_details_package)))
-                            .append(delim)
-                            .append(info.pkg)
-                            .append("\n")
-                            .append(bold(getString(R.string.notification_log_details_key)))
-                            .append(delim)
-                            .append(sbn.getKey());
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_icon)))
-                            .append(delim)
-                            .append(n.getSmallIcon().toString());
-                    if (sbn.isGroup()) {
-                        sb.append("\n")
-                                .append(bold(getString(R.string.notification_log_details_group)))
-                                .append(delim)
-                                .append(sbn.getGroupKey());
-                        if (n.isGroupSummary()) {
-                            sb.append(bold(
-                                    getString(R.string.notification_log_details_group_summary)));
-                        }
-                    }
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_sound)))
-                            .append(delim);
-                    if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
-                        sb.append(getString(R.string.notification_log_details_default));
-                    } else if (n.sound != null) {
-                        sb.append(n.sound.toString());
-                    } else {
-                        sb.append(getString(R.string.notification_log_details_none));
-                    }
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_vibrate)))
-                            .append(delim);
-                    if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
-                        sb.append(getString(R.string.notification_log_details_default));
-                    } else if (n.vibrate != null) {
-                        for (int vi=0;vi<n.vibrate.length;vi++) {
-                            if (vi > 0) sb.append(',');
-                            sb.append(String.valueOf(n.vibrate[vi]));
-                        }
-                    } else {
-                        sb.append(getString(R.string.notification_log_details_none));
-                    }
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_visibility)))
-                            .append(delim)
-                            .append(Notification.visibilityToString(n.visibility));
-                    if (n.publicVersion != null) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_public_version)))
-                                .append(delim)
-                                .append(getTitleString(n.publicVersion));
-                    }
-                    sb.append("\n")
-                            .append(bold(getString(R.string.notification_log_details_priority)))
-                            .append(delim)
-                            .append(Notification.priorityToString(n.priority));
-                    if (resultset == active) {
-                        // mRanking only applies to active notifications
-                        if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
-                            sb.append("\n")
-                                    .append(bold(getString(
-                                            R.string.notification_log_details_importance)))
-                                    .append(delim)
-                                    .append(Ranking.importanceToString(rank.getImportance()));
-                            if (rank.getImportanceExplanation() != null) {
-                                sb.append("\n")
-                                        .append(bold(getString(
-                                                R.string.notification_log_details_explanation)))
-                                        .append(delim)
-                                        .append(rank.getImportanceExplanation());
-                            }
-                        } else {
-                            if (mRanking == null) {
-                                sb.append("\n")
-                                        .append(bold(getString(
-                                                R.string.notification_log_details_ranking_null)));
-                            } else {
-                                sb.append("\n")
-                                        .append(bold(getString(
-                                                R.string.notification_log_details_ranking_none)));
-                            }
-                        }
-                    }
-                    if (n.contentIntent != null) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_content_intent)))
-                                .append(delim)
-                                .append(formatPendingIntent(n.contentIntent));
-                    }
-                    if (n.deleteIntent != null) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_delete_intent)))
-                                .append(delim)
-                                .append(formatPendingIntent(n.deleteIntent));
-                    }
-                    if (n.fullScreenIntent != null) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_full_screen_intent)))
-                                .append(delim)
-                                .append(formatPendingIntent(n.fullScreenIntent));
-                    }
-                    if (n.actions != null && n.actions.length > 0) {
-                        sb.append("\n")
-                                .append(bold(getString(R.string.notification_log_details_actions)));
-                        for (int ai=0; ai<n.actions.length; ai++) {
-                            final Notification.Action action = n.actions[ai];
-                            sb.append("\n  ").append(String.valueOf(ai)).append(' ')
-                                    .append(bold(getString(
-                                            R.string.notification_log_details_title)))
-                                    .append(delim)
-                                    .append(action.title);
-                            if (action.actionIntent != null) {
-                                sb.append("\n    ")
-                                        .append(bold(getString(
-                                                R.string.notification_log_details_content_intent)))
-                                        .append(delim)
-                                        .append(formatPendingIntent(action.actionIntent));
-                            }
-                            if (action.getRemoteInputs() != null) {
-                                sb.append("\n    ")
-                                        .append(bold(getString(
-                                                R.string.notification_log_details_remoteinput)))
-                                        .append(delim)
-                                        .append(String.valueOf(action.getRemoteInputs().length));
-                            }
-                        }
-                    }
-                    if (n.contentView != null) {
-                        sb.append("\n")
-                                .append(bold(getString(
-                                        R.string.notification_log_details_content_view)))
-                                .append(delim)
-                                .append(n.contentView.toString());
-                    }
-
-                    if (DUMP_EXTRAS) {
-                        if (n.extras != null && n.extras.size() > 0) {
-                            sb.append("\n")
-                                    .append(bold(getString(
-                                            R.string.notification_log_details_extras)));
-                            for (String extraKey : n.extras.keySet()) {
-                                String val = String.valueOf(n.extras.get(extraKey));
-                                if (val.length() > 100) val = val.substring(0, 100) + "...";
-                                sb.append("\n  ").append(extraKey).append(delim).append(val);
-                            }
-                        }
-                    }
-                    if (DUMP_PARCEL) {
-                        final Parcel p = Parcel.obtain();
-                        n.writeToParcel(p, 0);
-                        sb.append("\n")
-                                .append(bold(getString(R.string.notification_log_details_parcel)))
-                                .append(delim)
-                                .append(String.valueOf(p.dataPosition()))
-                                .append(' ')
-                                .append(bold(getString(R.string.notification_log_details_ashmem)))
-                                .append(delim)
-                                .append(String.valueOf(p.getBlobAshmemSize()))
-                                .append("\n");
-                    }
-
-                    info.extra = sb;
+                    info.extra = generateExtraText(sbn, info);
 
                     logd("   [%d] %s: %s", info.timestamp, info.pkg, info.title);
                     list.add(info);
@@ -467,6 +310,201 @@ public class NotificationStation extends SettingsPreferenceFragment {
             Log.e(TAG, "Cannot load Notifications: ", e);
         }
         return null;
+    }
+
+    private CharSequence generateExtraText(StatusBarNotification sbn,
+                                           HistoricalNotificationInfo info) {
+        final Ranking rank = new Ranking();
+
+        final Notification n = sbn.getNotification();
+        final SpannableStringBuilder sb = new SpannableStringBuilder();
+        final String delim = getString(R.string.notification_log_details_delimiter);
+        sb.append(bold(getString(R.string.notification_log_details_package)))
+                .append(delim)
+                .append(info.pkg)
+                .append("\n")
+                .append(bold(getString(R.string.notification_log_details_key)))
+                .append(delim)
+                .append(sbn.getKey());
+        sb.append("\n")
+                .append(bold(getString(R.string.notification_log_details_icon)))
+                .append(delim)
+                .append(String.valueOf(n.getSmallIcon()));
+        sb.append("\n")
+                .append(bold("channelId"))
+                .append(delim)
+                .append(String.valueOf(n.getChannelId()));
+        sb.append("\n")
+                .append(bold("postTime"))
+                .append(delim)
+                .append(String.valueOf(sbn.getPostTime()));
+        if (n.getTimeoutAfter() != 0) {
+            sb.append("\n")
+                    .append(bold("timeoutAfter"))
+                    .append(delim)
+                    .append(String.valueOf(n.getTimeoutAfter()));
+        }
+        if (sbn.isGroup()) {
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_details_group)))
+                    .append(delim)
+                    .append(String.valueOf(sbn.getGroupKey()));
+            if (n.isGroupSummary()) {
+                sb.append(bold(
+                        getString(R.string.notification_log_details_group_summary)));
+            }
+        }
+        sb.append("\n")
+                .append(bold(getString(R.string.notification_log_details_sound)))
+                .append(delim);
+        if (0 != (n.defaults & Notification.DEFAULT_SOUND)) {
+            sb.append(getString(R.string.notification_log_details_default));
+        } else if (n.sound != null) {
+            sb.append(n.sound.toString());
+        } else {
+            sb.append(getString(R.string.notification_log_details_none));
+        }
+        sb.append("\n")
+                .append(bold(getString(R.string.notification_log_details_vibrate)))
+                .append(delim);
+        if (0 != (n.defaults & Notification.DEFAULT_VIBRATE)) {
+            sb.append(getString(R.string.notification_log_details_default));
+        } else if (n.vibrate != null) {
+            for (int vi=0;vi<n.vibrate.length;vi++) {
+                if (vi > 0) sb.append(',');
+                sb.append(String.valueOf(n.vibrate[vi]));
+            }
+        } else {
+            sb.append(getString(R.string.notification_log_details_none));
+        }
+        sb.append("\n")
+                .append(bold(getString(R.string.notification_log_details_visibility)))
+                .append(delim)
+                .append(Notification.visibilityToString(n.visibility));
+        if (n.publicVersion != null) {
+            sb.append("\n")
+                    .append(bold(getString(
+                            R.string.notification_log_details_public_version)))
+                    .append(delim)
+                    .append(getTitleString(n.publicVersion));
+        }
+        sb.append("\n")
+                .append(bold(getString(R.string.notification_log_details_priority)))
+                .append(delim)
+                .append(Notification.priorityToString(n.priority));
+        if (info.active) {
+            // mRanking only applies to active notifications
+            if (mRanking != null && mRanking.getRanking(sbn.getKey(), rank)) {
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_importance)))
+                        .append(delim)
+                        .append(Ranking.importanceToString(rank.getImportance()));
+                if (rank.getImportanceExplanation() != null) {
+                    sb.append("\n")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_explanation)))
+                            .append(delim)
+                            .append(rank.getImportanceExplanation());
+                }
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_badge)))
+                        .append(delim)
+                        .append(Boolean.toString(rank.canShowBadge()));
+            } else {
+                if (mRanking == null) {
+                    sb.append("\n")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_ranking_null)));
+                } else {
+                    sb.append("\n")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_ranking_none)));
+                }
+            }
+        }
+        if (n.contentIntent != null) {
+            sb.append("\n")
+                    .append(bold(getString(
+                            R.string.notification_log_details_content_intent)))
+                    .append(delim)
+                    .append(formatPendingIntent(n.contentIntent));
+        }
+        if (n.deleteIntent != null) {
+            sb.append("\n")
+                    .append(bold(getString(
+                            R.string.notification_log_details_delete_intent)))
+                    .append(delim)
+                    .append(formatPendingIntent(n.deleteIntent));
+        }
+        if (n.fullScreenIntent != null) {
+            sb.append("\n")
+                    .append(bold(getString(
+                            R.string.notification_log_details_full_screen_intent)))
+                    .append(delim)
+                    .append(formatPendingIntent(n.fullScreenIntent));
+        }
+        if (n.actions != null && n.actions.length > 0) {
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_details_actions)));
+            for (int ai=0; ai<n.actions.length; ai++) {
+                final Notification.Action action = n.actions[ai];
+                sb.append("\n  ").append(String.valueOf(ai)).append(' ')
+                        .append(bold(getString(
+                                R.string.notification_log_details_title)))
+                        .append(delim)
+                        .append(action.title);
+                if (action.actionIntent != null) {
+                    sb.append("\n    ")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_content_intent)))
+                            .append(delim)
+                            .append(formatPendingIntent(action.actionIntent));
+                }
+                if (action.getRemoteInputs() != null) {
+                    sb.append("\n    ")
+                            .append(bold(getString(
+                                    R.string.notification_log_details_remoteinput)))
+                            .append(delim)
+                            .append(String.valueOf(action.getRemoteInputs().length));
+                }
+            }
+        }
+        if (n.contentView != null) {
+            sb.append("\n")
+                    .append(bold(getString(
+                            R.string.notification_log_details_content_view)))
+                    .append(delim)
+                    .append(n.contentView.toString());
+        }
+
+        if (DUMP_EXTRAS) {
+            if (n.extras != null && n.extras.size() > 0) {
+                sb.append("\n")
+                        .append(bold(getString(
+                                R.string.notification_log_details_extras)));
+                for (String extraKey : n.extras.keySet()) {
+                    String val = String.valueOf(n.extras.get(extraKey));
+                    if (val.length() > 100) val = val.substring(0, 100) + "...";
+                    sb.append("\n  ").append(extraKey).append(delim).append(val);
+                }
+            }
+        }
+        if (DUMP_PARCEL) {
+            final Parcel p = Parcel.obtain();
+            n.writeToParcel(p, 0);
+            sb.append("\n")
+                    .append(bold(getString(R.string.notification_log_details_parcel)))
+                    .append(delim)
+                    .append(String.valueOf(p.dataPosition()))
+                    .append(' ')
+                    .append(bold(getString(R.string.notification_log_details_ashmem)))
+                    .append(delim)
+                    .append(String.valueOf(p.getBlobAshmemSize()))
+                    .append("\n");
+        }
+        return sb;
     }
 
     private Resources getResourcesForUserPackage(String pkg, int userId) {
@@ -502,7 +540,7 @@ public class NotificationStation extends SettingsPreferenceFragment {
     private CharSequence loadPackageName(String pkg) {
         try {
             ApplicationInfo info = mPm.getApplicationInfo(pkg,
-                    PackageManager.GET_UNINSTALLED_PACKAGES);
+                    PackageManager.MATCH_ANY_USER);
             if (info != null) return mPm.getApplicationLabel(info);
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Cannot load package name", e);
@@ -528,8 +566,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return null;
     }
 
-    private static class HistoricalNotificationPreference extends CopyablePreference {
+    private static class HistoricalNotificationPreference extends Preference {
         private final HistoricalNotificationInfo mInfo;
+        private static long sLastExpandedTimestamp; // quick hack to keep things from collapsing
 
         public HistoricalNotificationPreference(Context context, HistoricalNotificationInfo info) {
             super(context);
@@ -554,7 +593,8 @@ public class NotificationStation extends SettingsPreferenceFragment {
 
             final TextView extra = (TextView) row.findViewById(R.id.extra);
             extra.setText(mInfo.extra);
-            extra.setVisibility(View.GONE);
+            extra.setVisibility(mInfo.timestamp == sLastExpandedTimestamp
+                    ? View.VISIBLE : View.GONE);
 
             row.itemView.setOnClickListener(
                     new View.OnClickListener() {
@@ -562,18 +602,11 @@ public class NotificationStation extends SettingsPreferenceFragment {
                         public void onClick(View view) {
                             extra.setVisibility(extra.getVisibility() == View.VISIBLE
                                     ? View.GONE : View.VISIBLE);
+                            sLastExpandedTimestamp = mInfo.timestamp;
                         }
                     });
 
             row.itemView.setAlpha(mInfo.active ? 1.0f : 0.5f);
-        }
-
-        @Override
-        public CharSequence getCopyableText() {
-            return new SpannableStringBuilder(mInfo.title)
-                    .append(" [").append(new Date(mInfo.timestamp).toString())
-                    .append("]\n").append(mInfo.pkgname)
-                    .append("\n").append(mInfo.extra);
         }
 
         @Override

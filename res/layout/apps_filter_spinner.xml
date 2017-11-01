@@ -15,39 +15,32 @@
      limitations under the License.
 -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    android:background="@drawable/switchbar_background"
+    android:background="?android:attr/colorAccent"
     android:gravity="center_vertical"
     android:paddingEnd="@dimen/switchbar_subsettings_margin_end"
-    android:theme="?attr/switchBarTheme" >
+    android:orientation="horizontal">
 
     <Spinner
         android:id="@+id/filter_spinner"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="70dp"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_centerVertical="true"
-        android:textAlignment="viewStart" />
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:paddingStart="64dp"
+        android:background="@drawable/app_filter_spinner_background"/>
 
     <ImageView
         android:id="@+id/filter_settings"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:minHeight="0dp"
-        android:minWidth="0dp"
         android:contentDescription="@string/configure"
         android:scaleType="center"
-        android:src="@drawable/ic_settings_24dp"
-        style="?android:attr/borderlessButtonStyle"
+        android:src="@drawable/ic_settings_24dp_inverse"
         android:visibility="gone" />
 
-
-</RelativeLayout>
+</LinearLayout>
 

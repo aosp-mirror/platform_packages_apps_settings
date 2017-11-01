@@ -20,29 +20,29 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.os.Bundle;
-import android.provider.Settings;
-
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
+import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.Display;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Switch;
 import android.widget.VideoView;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.R;
-import com.android.settings.widget.ToggleSwitch;
-import com.android.settings.widget.ToggleSwitch.OnBeforeCheckedChangeListener;
 
-public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePreferenceFragment {
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.widget.SwitchBar;
+
+public class ToggleScreenMagnificationPreferenceFragment extends
+        ToggleFeaturePreferenceFragment implements SwitchBar.OnSwitchChangeListener {
 
     protected class VideoPreference extends Preference {
         private ImageView mVideoBackgroundView;
@@ -77,10 +77,19 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
                 }
             });
 
-            videoView.setVideoURI(Uri.parse(String.format("%s://%s/%s",
-                    ContentResolver.SCHEME_ANDROID_RESOURCE,
-                    getPrefContext().getPackageName(),
-                    R.raw.accessibility_screen_magnification)));
+            // Make sure the VideoView does not request audio focus.
+            videoView.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE);
+
+            // Resolve and set the video content
+            Bundle args = getArguments();
+            if ((args != null) && args.containsKey(
+                    AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID)) {
+                videoView.setVideoURI(Uri.parse(String.format("%s://%s/%s",
+                        ContentResolver.SCHEME_ANDROID_RESOURCE,
+                        getPrefContext().getPackageName(),
+                        args.getInt(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID))));
+            }
+
             // Make sure video controls (e.g. for pausing) are not displayed.
             videoView.setMediaController(null);
 
@@ -98,6 +107,8 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
                     videoView.setLayoutParams(videoLp);
                     videoView.invalidate();
                     videoView.start();
+                    mVideoBackgroundView.getViewTreeObserver()
+                            .removeOnGlobalLayoutListener(mLayoutListener);
                 }
             };
 
@@ -112,6 +123,10 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
     }
 
     protected VideoPreference mVideoPreference;
+    protected Preference mConfigWarningPreference;
+
+    private boolean mLaunchFromSuw = false;
+    private boolean mInitialSetting = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -120,66 +135,98 @@ public class ToggleScreenMagnificationPreferenceFragment extends ToggleFeaturePr
         mVideoPreference = new VideoPreference(getPrefContext());
         mVideoPreference.setSelectable(false);
         mVideoPreference.setPersistent(false);
-        mVideoPreference.setLayoutResource(R.layout.video_preference);
+        mVideoPreference.setLayoutResource(R.layout.magnification_video_preference);
+
+        mConfigWarningPreference = new Preference(getPrefContext());
+        mConfigWarningPreference.setSelectable(false);
+        mConfigWarningPreference.setPersistent(false);
+        mConfigWarningPreference.setVisible(false);
+        mConfigWarningPreference.setIcon(R.drawable.ic_warning_24dp);
 
         final PreferenceScreen preferenceScreen = getPreferenceManager().getPreferenceScreen();
         preferenceScreen.setOrderingAsAdded(false);
         mVideoPreference.setOrder(0);
-        mSummaryPreference.setOrder(1);
+        mConfigWarningPreference.setOrder(2);
         preferenceScreen.addPreference(mVideoPreference);
-    }
-
-    @Override
-    protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
-        // Do nothing.
-    }
-
-    @Override
-    protected void onInstallSwitchBarToggleSwitch() {
-        super.onInstallSwitchBarToggleSwitch();
-        mToggleSwitch.setOnBeforeCheckedChangeListener(new OnBeforeCheckedChangeListener() {
-            @Override
-            public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked) {
-                mSwitchBar.setCheckedInternal(checked);
-                getArguments().putBoolean(AccessibilitySettings.EXTRA_CHECKED, checked);
-                onPreferenceToggled(mPreferenceKey, checked);
-                return false;
-            }
-        });
+        preferenceScreen.addPreference(mConfigWarningPreference);
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        // Temporarily enable Magnification on this screen if it's disabled.
-        if (Settings.Secure.getInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 0) {
-            setMagnificationEnabled(1);
-        }
-
         VideoView videoView = (VideoView) getView().findViewById(R.id.video);
         if (videoView != null) {
             videoView.start();
         }
+
+        updateConfigurationWarningIfNeeded();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        if (!mToggleSwitch.isChecked()) {
-            setMagnificationEnabled(0);
+    public int getMetricsCategory() {
+        // TODO: Distinguish between magnification modes
+        return MetricsEvent.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+    }
+
+    @Override
+    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+        onPreferenceToggled(mPreferenceKey, isChecked);
+    }
+
+    @Override
+    protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        Settings.Secure.putInt(getContentResolver(), preferenceKey, enabled ? 1 : 0);
+        updateConfigurationWarningIfNeeded();
+    }
+
+    @Override
+    protected void onInstallSwitchBarToggleSwitch() {
+        super.onInstallSwitchBarToggleSwitch();
+
+        mSwitchBar.setCheckedInternal(
+                Settings.Secure.getInt(getContentResolver(), mPreferenceKey, 0) == 1);
+        mSwitchBar.addOnSwitchChangeListener(this);
+    }
+
+    @Override
+    protected void onRemoveSwitchBarToggleSwitch() {
+        super.onRemoveSwitchBarToggleSwitch();
+        mSwitchBar.removeOnSwitchChangeListener(this);
+    }
+
+    @Override
+    protected void onProcessArguments(Bundle arguments) {
+        super.onProcessArguments(arguments);
+        if (arguments == null) {
+            return;
+        }
+
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID)) {
+            mVideoPreference.setVisible(true);
+            final int resId = arguments.getInt(
+                    AccessibilitySettings.EXTRA_VIDEO_RAW_RESOURCE_ID);
+        } else {
+            mVideoPreference.setVisible(false);
+        }
+
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW)) {
+            mLaunchFromSuw = arguments.getBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW);
+        }
+
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
+            mInitialSetting = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
         }
     }
 
-    private void setMagnificationEnabled(int enabled) {
-        Settings.Secure.putInt(getContentResolver(),
-                Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, enabled);
-    }
-
-    @Override
-    protected int getMetricsCategory() {
-        return MetricsEvent.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION;
+    private void updateConfigurationWarningIfNeeded() {
+        final CharSequence warningMessage =
+                MagnificationPreferenceFragment.getConfigurationWarningStringForSecureSettingsKey(
+                        mPreferenceKey, getPrefContext());
+        if (warningMessage != null) {
+            mConfigWarningPreference.setSummary(warningMessage);
+        }
+        mConfigWarningPreference.setVisible(warningMessage != null);
     }
 
     private static int getScreenWidth(Context context) {

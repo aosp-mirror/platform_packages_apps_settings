@@ -16,13 +16,14 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:key="development_prefs_screen"
         android:title="@string/development_settings_title">
     <com.android.settings.BugreportPreference
             android:key="bugreport"
             android:title="@*android:string/bugreport_title"
             android:dialogTitle="@*android:string/bugreport_title" />
 
-    <PreferenceScreen
+    <Preference
             android:key="local_backup_password"
             android:title="@string/local_backup_password_title"
             android:summary="@string/local_backup_password_summary_none"
@@ -31,7 +32,7 @@
                 android:action="android.settings.privacy.SET_FULL_BACKUP_PASSWORD"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.SetFullBackupPassword" />
-    </PreferenceScreen>
+    </Preference>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="keep_screen_on"
@@ -57,33 +58,27 @@
         android:summary="@string/oem_unlock_enable_summary"
         settings:useAdditionalSummary="true"/>
 
-    <PreferenceScreen
+    <Preference
         android:key="running_apps"
         android:title="@string/runningservices_settings_title"
         android:summary="@string/runningservices_settings_summary"
         android:fragment="com.android.settings.applications.RunningServices" />
 
-    <PreferenceScreen
+    <Preference
         android:key="convert_to_file_encryption"
         android:title="@string/convert_to_file_encryption"
         android:summary="@string/convert_to_file_encryption_enabled"
         android:fragment="com.android.settings.applications.ConvertToFbe" />
 
-    <com.android.settings.ColorModePreference
-        android:key="color_mode"
+    <com.android.settings.development.ColorModePreference
+        android:key="picture_color_mode"
         android:title="@string/picture_color_mode"
         android:summary="@string/picture_color_mode_desc" />
 
-    <ListPreference
-        android:key="select_webview_provider"
+    <Preference android:key="select_webview_provider"
         android:title="@string/select_webview_provider_title"
         android:dialogTitle="@string/select_webview_provider_dialog_title"
-        android:summary="%s" />
-
-    <SwitchPreference
-        android:key="enable_webview_multiprocess"
-        android:title="@string/enable_webview_multiprocess"
-        android:summary="@string/enable_webview_multiprocess_desc" />
+        android:fragment="com.android.settings.webview.WebViewAppPicker" />
 
     <SwitchPreference
         android:key="color_temperature"
@@ -94,11 +89,19 @@
         android:key="ota_disable_automatic_update"
         android:title="@string/ota_disable_automatic_update" />
 
-    <PreferenceScreen
+    <Preference
         android:key="demo_mode"
         android:title="@string/demo_mode">
         <intent android:action="com.android.settings.action.DEMO_MODE" />
-    </PreferenceScreen>
+    </Preference>
+
+    <Preference
+        android:key="quick_settings_tiles"
+        android:title="@string/quick_settings_developer_tiles">
+        <intent
+            android:targetPackage="com.android.settings"
+            android:targetClass="com.android.settings.qstile.DevelopmentTileConfigActivity" />
+    </Preference>
 
     <PreferenceCategory android:key="debug_debugging_category"
             android:title="@string/debug_debugging_category">
@@ -121,14 +124,14 @@
             android:title="@string/bugreport_in_power"
             android:summary="@string/bugreport_in_power_summary"/>
 
-        <PreferenceScreen android:key="mock_location_app"
+        <Preference android:key="mock_location_app"
             android:title="@string/mock_location_app" />
 
         <SwitchPreference
                 android:key="debug_view_attributes"
                 android:title="@string/debug_view_attributes" />
 
-        <PreferenceScreen android:key="debug_app"
+        <Preference android:key="debug_app"
                 android:title="@string/debug_app" />
 
         <SwitchPreference
@@ -136,7 +139,7 @@
             android:title="@string/wait_for_debugger"
             android:summary="@string/wait_for_debugger_summary"/>
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="verify_apps_over_usb"
             android:title="@string/verify_apps_over_usb_title"
             android:summary="@string/verify_apps_over_usb_summary"/>
@@ -154,6 +157,11 @@
             android:dialogTitle="@string/select_logpersist_dialog_title"
             android:entries="@array/select_logpersist_titles"
             android:entryValues="@array/select_logpersist_values" />
+
+        <SwitchPreference
+            android:key="telephony_monitor_switch"
+            android:title="@string/telephony_monitor_switch"
+            android:summary="@string/telephony_monitor_switch_summary"/>
 
     </PreferenceCategory>
 
@@ -180,10 +188,15 @@
             android:title="@string/wifi_allow_scan_with_traffic"
             android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
 
-       <SwitchPreference
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
+
+        <SwitchPreference
+            android:key="tethering_hardware_offload"
+            android:title="@string/tethering_hardware_offload"
+            android:summary="@string/tethering_hardware_offload_summary"/>
 
         <ListPreference
             android:key="select_usb_configuration"
@@ -196,6 +209,18 @@
             android:key="bluetooth_disable_absolute_volume"
             android:title="@string/bluetooth_disable_absolute_volume"
             android:summary="@string/bluetooth_disable_absolute_volume_summary"/>
+
+        <SwitchPreference
+            android:key="bluetooth_enable_inband_ringing"
+            android:title="@string/bluetooth_enable_inband_ringing"
+            android:summary="@string/bluetooth_enable_inband_ringing_summary"/>
+
+        <ListPreference
+            android:key="bluetooth_select_avrcp_version"
+            android:title="@string/bluetooth_select_avrcp_version_string"
+            android:dialogTitle="@string/bluetooth_select_avrcp_version_dialog_title"
+            android:entries="@array/bluetooth_avrcp_versions"
+            android:entryValues="@array/bluetooth_avrcp_version_values" />
 
         <ListPreference
             android:key="bluetooth_select_a2dp_codec"
@@ -231,6 +256,11 @@
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_ldac_playback_quality_dialog_title"
             android:entries="@array/bluetooth_a2dp_codec_ldac_playback_quality_titles"
             android:entryValues="@array/bluetooth_a2dp_codec_ldac_playback_quality_values" />
+
+        <SwitchPreference
+            android:key="dns_tls"
+            android:title="@string/dns_tls"
+            android:summary="@string/dns_tls_summary" />
 
     </PreferenceCategory>
 
@@ -344,6 +374,12 @@
                 android:summary="%s"
                 android:title="@string/simulate_color_space" />
 
+        <ListPreference
+                android:key="debug_hw_renderer"
+                android:title="@string/debug_hw_renderer"
+                android:entries="@array/debug_hw_renderer_entries"
+                android:entryValues="@array/debug_hw_renderer_values" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="media_category"
@@ -386,20 +422,27 @@
             android:entries="@array/app_process_limit_entries"
             android:entryValues="@array/app_process_limit_values" />
 
-        <!-- hiding for now.
+
         <Preference
                 android:key="background_check"
+                android:fragment="com.android.settings.applications.BackgroundCheckSummary"
                 android:title="@string/background_check_pref" />
-        -->
+
 
         <SwitchPreference
             android:key="show_all_anrs"
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary"/>
 
+        <SwitchPreference
+            android:key="show_notification_channel_warnings"
+            android:title="@string/show_notification_channel_warnings"
+            android:summary="@string/show_notification_channel_warnings_summary"/>
+
         <Preference
                 android:key="inactive_apps"
-                android:title="@string/inactive_apps_title" />
+                android:title="@string/inactive_apps_title"
+                android:fragment="com.android.settings.fuelgauge.InactiveApps"/>
 
         <SwitchPreference
             android:key="force_allow_on_external"
@@ -415,5 +458,9 @@
             android:key="reset_shortcut_manager_throttling"
             android:title="@string/reset_shortcut_manager_throttling" />
      </PreferenceCategory>
+
+    <PreferenceCategory
+      android:key="dashboard_tile_placeholder"
+      android:order="200"/>
 
 </PreferenceScreen>

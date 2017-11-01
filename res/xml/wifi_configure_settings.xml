@@ -14,46 +14,74 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:title="@string/wifi_configure_titlebar">
-
-    <Preference
-        android:key="saved_networks"
-        android:title="@string/wifi_saved_access_points_label"
-        android:fragment="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
-
-    <!-- android:dependency="enable_wifi" -->
-    <SwitchPreference
-        android:key="notify_open_networks"
-        android:title="@string/wifi_notify_open_networks"
-        android:summary="@string/wifi_notify_open_networks_summary" />
-
-    <ListPreference
-        android:key="sleep_policy"
-        android:title="@string/wifi_setting_sleep_policy_title"
-        android:entries="@array/wifi_sleep_policy_entries"
-        android:entryValues="@array/wifi_sleep_policy_values" />
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/wifi_configure_settings_preference_title">
 
     <SwitchPreference
-      android:key="allow_recommendations"
-      android:title="@string/networking_allow_recommendations_title"
-      android:summary="@string/networking_allow_recommendations_summary"/>
+            android:key="enable_wifi_wakeup"
+            android:title="@string/wifi_wakeup"
+            android:icon="@drawable/ic_auto_wifi"
+            android:summary="@string/wifi_wakeup_summary" />
+
+    <SwitchPreference
+        android:key="use_open_wifi_automatically"
+        android:icon="@drawable/ic_open_wifi_autoconnect"
+        android:title="@string/use_open_wifi_automatically_title"
+        android:summary="@string/use_open_wifi_automatically_summary" />
+
+    <SwitchPreference
+            android:key="notify_open_networks"
+            android:title="@string/wifi_notify_open_networks"
+            android:icon="@drawable/ic_open_wifi_notifications"
+            android:summary="@string/wifi_notify_open_networks_summary" />
 
     <SwitchPreference
         android:key="wifi_cellular_data_fallback"
         android:title="@string/wifi_cellular_data_fallback_title"
         android:summary="@string/wifi_cellular_data_fallback_summary"/>
 
-    <com.android.settings.DividerPreference
-        android:key="mac_address"
-        android:title="@string/wifi_advanced_mac_address_title"
-        android:layout="@layout/wifi_advance_layout"
-        settings:allowDividerAbove="true" />
+    <Preference
+            android:key="install_credentials"
+            android:title="@string/wifi_install_credentials">
+        <intent android:action="android.credentials.INSTALL_AS_USER"
+                android:targetPackage="com.android.certinstaller"
+                android:targetClass="com.android.certinstaller.CertInstallerMain">
+            <extra android:name="install_as_uid" android:value="1010"/>
+        </intent>
+    </Preference>
 
     <Preference
-        android:key="current_ip_address"
-        android:title="@string/wifi_advanced_ip_address_title"
-        android:layout="@layout/wifi_advance_layout" />
+            android:key="wifi_calling_settings"
+            android:title="@string/wifi_calling_settings_title"
+            android:fragment="com.android.settings.WifiCallingSettings"
+            settings:keywords="@string/keywords_wifi_calling"/>
+
+    <Preference
+            android:key="network_scorer_picker"
+            android:title="@string/network_scorer_picker_title"
+            android:fragment="com.android.settings.network.NetworkScorerPicker"/>
+
+    <Preference
+            android:key="wifi_direct"
+            android:title="@string/wifi_menu_p2p"
+            android:fragment="com.android.settings.wifi.p2p.WifiP2pSettings"/>
+
+    <Preference
+            android:key="wps_push_button"
+            android:title="@string/wifi_menu_wps_pbc" />
+
+    <Preference
+            android:key="wps_pin_entry"
+            android:title="@string/wifi_menu_wps_pin" />
+
+    <Preference
+            android:key="mac_address"
+            android:title="@string/wifi_advanced_mac_address_title"/>
+
+    <Preference
+            android:key="current_ip_address"
+            android:title="@string/wifi_advanced_ip_address_title"/>
 
 </PreferenceScreen>

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.util.MathUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,8 +37,9 @@ public class StorageSummaryPreference extends Preference {
         setEnabled(false);
     }
 
-    public void setPercent(int percent) {
-        mPercent = percent;
+    public void setPercent(long usedBytes, long totalBytes) {
+        mPercent = MathUtils.constrain((int) ((usedBytes * 100) / totalBytes),
+                (usedBytes > 0) ? 1 : 0, 100);
     }
 
     @Override

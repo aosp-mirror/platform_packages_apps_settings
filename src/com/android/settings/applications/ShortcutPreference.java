@@ -17,6 +17,8 @@ package com.android.settings.applications;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
+
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 
@@ -42,6 +44,6 @@ public class ShortcutPreference extends Preference {
         Bundle bundle = new Bundle();
         bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, mPrefKey);
         Utils.startWithFragment(getContext(), mTarget.getName(), bundle, null, 0,
-                mTitle, null);
+                mTitle, null, MetricsProto.MetricsEvent.VIEW_UNKNOWN);
     }
 }

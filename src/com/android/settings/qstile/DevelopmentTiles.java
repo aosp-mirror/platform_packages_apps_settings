@@ -16,80 +16,119 @@
 
 package com.android.settings.qstile;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.pm.PackageManager;
+import android.os.RemoteException;
 import android.os.SystemProperties;
+import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.View;
-import com.android.settings.DevelopmentSettings;
+import android.view.WindowManagerGlobal;
 
-public class DevelopmentTiles {
-    // List of components that need to be enabled when developer tools are turned on
-    static final Class[] TILE_CLASSES = new Class[] {
-            ShowLayout.class,
-            GPUProfiling.class,
-    };
-    public static void setTilesEnabled(Context context, boolean enable) {
-        final PackageManager pm = context.getPackageManager();
-        for (Class cls : TILE_CLASSES) {
-            pm.setComponentEnabledSetting(new ComponentName(context, cls),
-                    enable ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                           : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
-                    PackageManager.DONT_KILL_APP);
-        }
+import com.android.internal.app.LocalePicker;
+import com.android.settings.development.DevelopmentSettings;
+
+public abstract class DevelopmentTiles extends TileService {
+
+    protected abstract boolean isEnabled();
+
+    protected abstract void setIsEnabled(boolean isEnabled);
+
+    @Override
+    public void onStartListening() {
+        super.onStartListening();
+        refresh();
+    }
+
+    public void refresh() {
+        getQsTile().setState(isEnabled() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        getQsTile().updateTile();
+    }
+
+    @Override
+    public void onClick() {
+        setIsEnabled(getQsTile().getState() == Tile.STATE_INACTIVE);
+        new DevelopmentSettings.SystemPropPoker().execute(); // Settings app magic
+        refresh();
     }
 
     /**
      * Tile to control the "Show layout bounds" developer setting
      */
-    public static class ShowLayout extends TileService {
-        @Override
-        public void onStartListening() {
-            super.onStartListening();
-            refresh();
-        }
+    public static class ShowLayout extends DevelopmentTiles {
 
-        public void refresh() {
-            final boolean enabled = SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY, false);
-            getQsTile().setState(enabled ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            getQsTile().updateTile();
+        @Override
+        protected boolean isEnabled() {
+            return SystemProperties.getBoolean(View.DEBUG_LAYOUT_PROPERTY, false);
         }
 
         @Override
-        public void onClick() {
-            SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY,
-                    getQsTile().getState() == Tile.STATE_INACTIVE ? "true" : "false");
-            new DevelopmentSettings.SystemPropPoker().execute(); // Settings app magic
-            refresh();
+        protected void setIsEnabled(boolean isEnabled) {
+            SystemProperties.set(View.DEBUG_LAYOUT_PROPERTY, isEnabled ? "true" : "false");
         }
     }
 
     /**
      * Tile to control the "GPU profiling" developer setting
      */
-    public static class GPUProfiling extends TileService {
-        @Override
-        public void onStartListening() {
-            super.onStartListening();
-            refresh();
-        }
+    public static class GPUProfiling extends DevelopmentTiles {
 
-        public void refresh() {
+        @Override
+        protected boolean isEnabled() {
             final String value = SystemProperties.get(ThreadedRenderer.PROFILE_PROPERTY);
-            getQsTile().setState(value.equals("visual_bars")
-                    ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-            getQsTile().updateTile();
+            return value.equals("visual_bars");
         }
 
         @Override
-        public void onClick() {
-            SystemProperties.set(ThreadedRenderer.PROFILE_PROPERTY,
-                    getQsTile().getState() == Tile.STATE_INACTIVE ? "visual_bars" : "");
-            new DevelopmentSettings.SystemPropPoker().execute(); // Settings app magic
-            refresh();
+        protected void setIsEnabled(boolean isEnabled) {
+            SystemProperties.set(ThreadedRenderer.PROFILE_PROPERTY, isEnabled ? "visual_bars" : "");
+        }
+    }
+
+    /**
+     * Tile to control the "Force RTL" developer setting
+     */
+    public static class ForceRTL extends DevelopmentTiles {
+
+        @Override
+        protected boolean isEnabled() {
+            return Settings.Global.getInt(
+                    getContentResolver(), Settings.Global.DEVELOPMENT_FORCE_RTL, 0) != 0;
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            Settings.Global.putInt(
+                    getContentResolver(), Settings.Global.DEVELOPMENT_FORCE_RTL, isEnabled ? 1 : 0);
+            SystemProperties.set(Settings.Global.DEVELOPMENT_FORCE_RTL, isEnabled ? "1" : "0");
+            LocalePicker.updateLocales(getResources().getConfiguration().getLocales());
+        }
+    }
+
+    /**
+     * Tile to control the "Animation speed" developer setting
+     */
+    public static class AnimationSpeed extends DevelopmentTiles {
+
+        @Override
+        protected boolean isEnabled() {
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            try {
+                return wm.getAnimationScale(0) != 1;
+            } catch (RemoteException e) { }
+            return false;
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            float scale = isEnabled ? 10 : 1;
+            try {
+                wm.setAnimationScale(0, scale);
+                wm.setAnimationScale(1, scale);
+                wm.setAnimationScale(2, scale);
+            } catch (RemoteException e) { }
         }
     }
 }

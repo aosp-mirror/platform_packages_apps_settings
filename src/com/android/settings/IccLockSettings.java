@@ -30,10 +30,12 @@ import android.support.v7.preference.Preference;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
@@ -41,7 +43,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TabHost.TabSpec;
 import android.widget.TabWidget;
 import android.widget.Toast;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.internal.telephony.TelephonyIntents;
@@ -78,6 +80,7 @@ public class IccLockSettings extends SettingsPreferenceFragment
     private static final String DIALOG_PIN = "dialogPin";
     private static final String DIALOG_ERROR = "dialogError";
     private static final String ENABLE_TO_STATE = "enableState";
+    private static final String CURRENT_TAB = "currentTab";
 
     // Save and restore inputted PIN code when configuration changed
     // (ex. portrait<-->landscape) during change PIN code
@@ -233,6 +236,10 @@ public class IccLockSettings extends SettingsPreferenceFragment
 
             mPhone = (sir == null) ? null
                 : PhoneFactory.getPhone(SubscriptionManager.getPhoneId(sir.getSubscriptionId()));
+
+            if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_TAB)) {
+                mTabHost.setCurrentTabByTag(savedInstanceState.getString(CURRENT_TAB));
+            }
             return view;
         } else {
             mPhone = PhoneFactory.getDefaultPhone();
@@ -247,16 +254,20 @@ public class IccLockSettings extends SettingsPreferenceFragment
     }
 
     private void updatePreferences() {
-        mPinDialog.setEnabled(mPhone != null);
-        mPinToggle.setEnabled(mPhone != null);
+        if (mPinDialog != null) {
+            mPinDialog.setEnabled(mPhone != null);
+        }
+        if (mPinToggle != null) {
+            mPinToggle.setEnabled(mPhone != null);
 
-        if (mPhone != null) {
-            mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
+            if (mPhone != null) {
+                mPinToggle.setChecked(mPhone.getIccCard().getIccLockEnabled());
+            }
         }
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ICC_LOCK;
     }
 
@@ -281,6 +292,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
     public void onPause() {
         super.onPause();
         getContext().unregisterReceiver(mSimStateReceiver);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_icc_lock;
     }
 
     @Override
@@ -315,6 +331,10 @@ public class IccLockSettings extends SettingsPreferenceFragment
         } else {
             super.onSaveInstanceState(out);
         }
+
+        if (mTabHost != null) {
+            out.putString(CURRENT_TAB, mTabHost.getCurrentTabTag());
+        }
     }
 
     private void showPinDialog() {
@@ -324,6 +344,11 @@ public class IccLockSettings extends SettingsPreferenceFragment
         setDialogValues();
 
         mPinDialog.showPinDialog();
+
+        final EditText editText = mPinDialog.getEditText();
+        if (!TextUtils.isEmpty(mPin) && editText != null) {
+            editText.setSelection(mPin.length());
+        }
     }
 
     private void setDialogValues() {

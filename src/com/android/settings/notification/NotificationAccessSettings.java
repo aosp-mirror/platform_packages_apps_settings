@@ -18,32 +18,33 @@ package com.android.settings.notification;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.MetricsLogger;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.ManagedServiceSettings;
-import com.android.settings.utils.ServiceListing;
 
 public class NotificationAccessSettings extends ManagedServiceSettings {
     private static final String TAG = NotificationAccessSettings.class.getSimpleName();
     private static final Config CONFIG = getNotificationListenerConfig();
 
-    private NotificationManager mNm;
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        mNm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     private static Config getNotificationListenerConfig() {
@@ -60,7 +61,7 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NOTIFICATION_ACCESS;
     }
 
@@ -69,22 +70,15 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         return CONFIG;
     }
 
-    public static int getListenersCount(PackageManager pm) {
-        return ServiceListing.getServicesCount(CONFIG, pm);
-    }
-
-    public static int getEnabledListenersCount(Context context) {
-        return ServiceListing.getEnabledServicesCount(CONFIG, context);
-    }
-
     protected boolean setEnabled(ComponentName service, String title, boolean enable) {
+        logSpecialPermissionChange(enable, service.getPackageName());
         if (!enable) {
             if (!mServiceListing.isEnabled(service)) {
                 return true; // already disabled
             }
             // show a friendly dialog
             new FriendlyWarningDialogFragment()
-                    .setServiceInfo(service, title)
+                    .setServiceInfo(service, title, this)
                     .show(getFragmentManager(), "friendlydialog");
             return false;
         } else {
@@ -92,49 +86,66 @@ public class NotificationAccessSettings extends ManagedServiceSettings {
         }
     }
 
-    private static void deleteRules(final Context context, final String pkg) {
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean enable, String packageName) {
+        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_NOTIVIEW_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
+    }
+
+    private static void disable(final Context context, final NotificationAccessSettings parent,
+            final ComponentName cn) {
+        parent.mServiceListing.setEnabled(cn, false);
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 final NotificationManager mgr = context.getSystemService(NotificationManager.class);
-                mgr.removeAutomaticZenRules(pkg);
+
+                if (!mgr.isNotificationPolicyAccessGrantedForPackage(
+                        cn.getPackageName())) {
+                    mgr.removeAutomaticZenRules(cn.getPackageName());
+                }
             }
         });
     }
 
-    public class FriendlyWarningDialogFragment extends DialogFragment {
+    public static class FriendlyWarningDialogFragment extends InstrumentedDialogFragment {
         static final String KEY_COMPONENT = "c";
         static final String KEY_LABEL = "l";
 
-        public FriendlyWarningDialogFragment setServiceInfo(ComponentName cn, String label) {
+        public FriendlyWarningDialogFragment setServiceInfo(ComponentName cn, String label,
+                Fragment target) {
             Bundle args = new Bundle();
             args.putString(KEY_COMPONENT, cn.flattenToString());
             args.putString(KEY_LABEL, label);
             setArguments(args);
+            setTargetFragment(target, 0);
             return this;
         }
 
         @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_DISABLE_NOTIFICATION_ACCESS;
+        }
+
+        @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
             final Bundle args = getArguments();
             final String label = args.getString(KEY_LABEL);
             final ComponentName cn = ComponentName.unflattenFromString(args
                     .getString(KEY_COMPONENT));
+            NotificationAccessSettings parent = (NotificationAccessSettings) getTargetFragment();
 
             final String summary = getResources().getString(
                     R.string.notification_listener_disable_warning_summary, label);
-            return new AlertDialog.Builder(mContext)
+            return new AlertDialog.Builder(getContext())
                     .setMessage(summary)
                     .setCancelable(true)
                     .setPositiveButton(R.string.notification_listener_disable_warning_confirm,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    mServiceListing.setEnabled(cn, false);
-                                    if (!mNm.isNotificationPolicyAccessGrantedForPackage(
-                                            cn.getPackageName())) {
-                                        deleteRules(mContext, cn.getPackageName());
-                                    }
+                                    disable(getContext(), parent, cn);
                                 }
                             })
                     .setNegativeButton(R.string.notification_listener_disable_warning_cancel,

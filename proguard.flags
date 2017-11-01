@@ -1,32 +1,41 @@
-# Keep all Fragments in this package, which are used by reflection.
--keep class com.android.settings.*Fragment
--keep class com.android.settings.*Picker
--keep class com.android.settings.*Settings
--keep class com.android.settings.wifi.*Settings
--keep class com.android.settings.deviceinfo.*
--keep class com.android.settings.bluetooth.*
--keep class com.android.settings.datausage.*
--keep class com.android.settings.applications.*
--keep class com.android.settings.inputmethod.*
--keep class com.android.settings.ResetNetwork
--keep class com.android.settings.ResetNetworkConfirm
--keep class com.android.settings.MasterClear
--keep class com.android.settings.MasterClearConfirm
--keep class com.android.settings.accounts.*
--keep class com.android.settings.fuelgauge.*
--keep class com.android.settings.users.*
--keep class com.android.settings.nfc.*
--keep class com.android.settings.notification.*
--keep class com.android.settings.overlay.FeatureFactoryImpl
--keep class com.android.settings.accessibility.*FragmentForSetupWizard
--keep class com.android.settings.display.*FragmentForSetupWizard
--keep class com.android.settings.display.NightDisplaySettings
+# This is a configuration file for ProGuard.
+# http://proguard.sourceforge.net/index.html#manual/usage.html
 
-# Keep click responders
--keepclassmembers class com.android.settings.inputmethod.UserDictionaryAddWordActivity {
-  *** onClick*(...);
+# Keep all Fragments in this package, which are used by reflection.
+-keep public class com.android.settings.** extends android.app.Fragment
+
+# We want to keep methods in Activity that could be used in the XML attribute onClick.
+-keepclassmembers class * extends android.app.Activity {
+    public void *(android.view.View);
+    public void *(android.view.MenuItem);
 }
 
--keep public class * extends com.android.setupwizardlib.items.ItemHierarchy {
+# Keep setters in Views so that animations can still work.
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
     public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+
+    void set*(***);
+    *** get*();
+}
+
+# Keep classes that may be inflated from XML.
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+# Keep annotated classes or class members.
+-keep @android.support.annotation.Keep class *
+-keepclassmembers class * {
+    @android.support.annotation.Keep *;
+}
+
+# Keep specific fields used via reflection.
+-keepclassmembers class * {
+    public static ** SEARCH_INDEX_DATA_PROVIDER;
+    public static ** SUMMARY_PROVIDER_FACTORY;
 }

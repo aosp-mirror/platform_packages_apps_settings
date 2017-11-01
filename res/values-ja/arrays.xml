@@ -68,7 +68,7 @@
   <string-array name="wifi_status">
     <item msgid="1922181315419294640"></item>
     <item msgid="8934131797783724664">"スキャン中..."</item>
-    <item msgid="8513729475867537913">"接続中..."</item>
+    <item msgid="8513729475867537913">"接続処理中..."</item>
     <item msgid="515055375277271756">"認証中..."</item>
     <item msgid="1943354004029184381">"IPアドレスを取得中..."</item>
     <item msgid="4221763391123233270">"接続済み"</item>
@@ -140,19 +140,10 @@
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"弱"</item>
-    <item msgid="5615082285463430971">"中"</item>
-    <item msgid="3565079809875324621">"強"</item>
-    <item msgid="5702329417707689835">"非常に強い"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3269131034472904310">"常に接続"</item>
-    <item msgid="844721238536786870">"電源接続時にのみ接続"</item>
-    <item msgid="1986753720941888596">"接続しない"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <item msgid="2124319326282651391">"常に使用"</item>
-    <item msgid="7433294150916905997">"電源接続時にのみ接続"</item>
-    <item msgid="1390404486722375028">"使用しない"</item>
+    <item msgid="2042505933058940139">"弱"</item>
+    <item msgid="1344546617235886412">"中"</item>
+    <item msgid="6019931571712517411">"強"</item>
+    <item msgid="8986346415847956850">"非常に強い"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"過去30日間"</item>
@@ -173,6 +164,14 @@
     <item msgid="2577747762745812488">"なし"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"なし"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
     <item msgid="1818786254010764570">"なし"</item>
@@ -295,13 +294,14 @@
     <item msgid="6108267038969274380">"発信の処理"</item>
     <item msgid="4823402479973873358">"指紋"</item>
     <item msgid="5895843015407713543">"ボディー センサー"</item>
-    <item msgid="1436446526955010826">"緊急警報の読み取り"</item>
+    <item msgid="1436446526955010826">"緊急速報メールの読み取り"</item>
     <item msgid="884172201575690484">"仮の現在地情報"</item>
     <item msgid="3591971310048485247">"ストレージの読み取り"</item>
     <item msgid="4041187808621866119">"ストレージへの書き込み"</item>
     <item msgid="6628873315024166197">"画面をオン"</item>
     <item msgid="3253368931113490863">"アカウントの取得"</item>
     <item msgid="780392378084812901">"バックグラウンドで実行"</item>
+    <item msgid="2629748510881309577">"ユーザー補助機能の音量"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"位置情報"</item>
@@ -361,13 +361,14 @@
     <item msgid="1958009349883195116">"発信の処理"</item>
     <item msgid="8526563410140613458">"指紋"</item>
     <item msgid="7864822459293570891">"ボディー センサー"</item>
-    <item msgid="6798698496904810960">"緊急警報の読み取り"</item>
+    <item msgid="6798698496904810960">"緊急速報メールの読み取り"</item>
     <item msgid="5242052845700875820">"仮の現在地情報"</item>
     <item msgid="1246296877820358565">"ストレージの読み取り"</item>
     <item msgid="2404067308793740341">"ストレージへの書き込み"</item>
     <item msgid="5832543806893763620">"画面をオン"</item>
     <item msgid="5258373962467495905">"アカウントの取得"</item>
     <item msgid="334625385979270703">"バックグラウンドで実行"</item>
+    <item msgid="9039213578110332702">"ユーザー補助機能の音量"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"短め"</item>
@@ -425,7 +426,7 @@
   <string-array name="vpn_states">
     <item msgid="8621078286418985762">"切断されました"</item>
     <item msgid="6692305604213080515">"初期化中..."</item>
-    <item msgid="8001704909356800092">"接続中..."</item>
+    <item msgid="8001704909356800092">"接続処理中..."</item>
     <item msgid="4039737283841672166">"接続されました"</item>
     <item msgid="4042143101664725090">"タイムアウト"</item>
     <item msgid="7664124146786465092">"失敗しました"</item>

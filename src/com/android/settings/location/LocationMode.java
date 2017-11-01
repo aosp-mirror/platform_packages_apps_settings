@@ -19,8 +19,9 @@ package com.android.settings.location;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.widget.RadioButtonPreference;
 
 /**
  * A page with 3 radio buttons to choose the location mode.
@@ -43,7 +44,7 @@ public class LocationMode extends LocationSettingsBase
     private RadioButtonPreference mSensorsOnly;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.LOCATION_MODE;
     }
 

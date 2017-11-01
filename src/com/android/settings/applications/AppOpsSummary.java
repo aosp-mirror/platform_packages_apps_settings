@@ -28,11 +28,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 
-public class AppOpsSummary extends InstrumentedFragment {
+public class AppOpsSummary extends InstrumentedPreferenceFragment {
     // layout inflater object used to inflate views
     private LayoutInflater mInflater;
     
@@ -52,7 +52,7 @@ public class AppOpsSummary extends InstrumentedFragment {
     int mCurPos;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APP_OPS_SUMMARY;
     }
 

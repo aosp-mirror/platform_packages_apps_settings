@@ -21,13 +21,16 @@
     android:id="@+id/setup_wizard_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:icon="@drawable/ic_lock"
+    android:icon="@drawable/ic_suggested_notifications"
+    settings:suwFooter="@layout/redaction_interstitial_footer"
     settings:suwHeaderText="@string/lock_screen_notifications_interstitial_title">
 
     <LinearLayout
         style="@style/SuwContentFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical">
 
         <TextView
@@ -49,6 +52,8 @@
                 style="@style/SuwRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:minHeight="?android:attr/listPreferredItemHeight"
                 android:text="@string/lock_screen_notifications_summary_show" />
 
             <com.android.settings.RestrictedRadioButton
@@ -56,6 +61,8 @@
                 style="@style/SuwRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:minHeight="?android:attr/listPreferredItemHeight"
                 android:text="@string/lock_screen_notifications_summary_hide" />
 
             <RadioButton
@@ -63,17 +70,11 @@
                 style="@style/SuwRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="0dp"
+                android:minHeight="?android:attr/listPreferredItemHeight"
                 android:text="@string/lock_screen_notifications_summary_disable" />
 
         </RadioGroup>
-
-        <Button
-            android:id="@+id/redaction_done_button"
-            style="@style/SetupWizardButton.Positive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/app_notifications_dialog_done" />
 
     </LinearLayout>
 

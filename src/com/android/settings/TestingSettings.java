@@ -20,7 +20,7 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class TestingSettings extends SettingsPreferenceFragment {
 
@@ -39,7 +39,7 @@ public class TestingSettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TESTING;
     }
 }

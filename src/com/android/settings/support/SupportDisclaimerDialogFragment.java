@@ -23,29 +23,33 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Annotation;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 
 /**
  * {@link DialogFragment} for support disclaimer.
  */
-public final class SupportDisclaimerDialogFragment extends DialogFragment implements
-        DialogInterface.OnClickListener {
+public final class SupportDisclaimerDialogFragment extends InstrumentedDialogFragment
+        implements DialogInterface.OnClickListener {
 
     public static final String TAG = "SupportDisclaimerDialog";
-    private static final String EXTRA_TYPE = "extra_type";
-    private static final String EXTRA_ACCOUNT = "extra_account";
+    public static final String EXTRA_TYPE = "extra_type";
+    public static final String EXTRA_ACCOUNT = "extra_account";
 
     public static SupportDisclaimerDialogFragment newInstance(Account account,
             @SupportFeatureProvider.SupportType int type) {
@@ -69,8 +73,13 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         final Activity activity = getActivity();
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
+
+        // sets the two links that go to privacy policy and terms of service
         disclaimer.setText(supportFeatureProvider.getDisclaimerStringResId());
-        stripUnderlines((Spannable) disclaimer.getText());
+        Spannable viewText = (Spannable) disclaimer.getText();
+        stripUnderlines(viewText);
+        SystemInformationSpan.linkify(viewText, this);
+        // sets the link that launches a dialog to expose the signals we are sending
         return builder
                 .setView(content)
                 .create();
@@ -79,26 +88,32 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
     @Override
     public void onClick(DialogInterface dialog, int which) {
         if (which == Dialog.BUTTON_NEGATIVE) {
-            MetricsLogger.action(getContext(),
+            mMetricsFeatureProvider.action(getContext(),
                     MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
             return;
         }
         final Activity activity = getActivity();
         final CheckBox doNotShow =
                 (CheckBox) getDialog().findViewById(R.id.support_disclaimer_do_not_show_again);
+        final boolean isChecked = doNotShow.isChecked();
         final SupportFeatureProvider supportFeatureProvider =
                 FeatureFactory.getFactory(activity).getSupportFeatureProvider(activity);
-        supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !doNotShow.isChecked());
+        supportFeatureProvider.setShouldShowDisclaimerDialog(getContext(), !isChecked);
         final Bundle bundle = getArguments();
-        MetricsLogger.action(activity, MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
+        if (isChecked) {
+            mMetricsFeatureProvider.action(activity,
+                    MetricsProto.MetricsEvent.ACTION_SKIP_DISCLAIMER_SELECTED);
+        }
+        mMetricsFeatureProvider.action(activity,
+                MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_OK);
         supportFeatureProvider.startSupport(getActivity(),
-                (Account) bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
+                bundle.getParcelable(EXTRA_ACCOUNT), bundle.getInt(EXTRA_TYPE));
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
-        MetricsLogger.action(getContext(),
+        mMetricsFeatureProvider.action(getContext(),
                 MetricsProto.MetricsEvent.ACTION_SUPPORT_DISCLAIMER_CANCEL);
     }
 
@@ -111,10 +126,17 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         for (URLSpan span : urls) {
             final int start = input.getSpanStart(span);
             final int end = input.getSpanEnd(span);
-            input.removeSpan(span);
-            input.setSpan(new NoUnderlineUrlSpan(span.getURL()), start, end,
-                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (!TextUtils.isEmpty(span.getURL())) {
+                input.removeSpan(span);
+                input.setSpan(new NoUnderlineUrlSpan(span.getURL()), start, end,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
         }
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_SUPPORT_DISCLAIMER;
     }
 
     /**
@@ -130,6 +152,71 @@ public final class SupportDisclaimerDialogFragment extends DialogFragment implem
         public void updateDrawState(TextPaint ds) {
             super.updateDrawState(ds);
             ds.setUnderlineText(false);
+        }
+    }
+
+    /**
+     * A {@link URLSpan} that opens a dialog when clicked
+     */
+    public static class SystemInformationSpan extends URLSpan {
+
+        private static final String ANNOTATION_URL = "url";
+        private final DialogFragment mDialog;
+        private SupportFeatureProvider mSupport;
+
+        public SystemInformationSpan(DialogFragment parent) {
+            // sets the url to empty string so we can prevent the NoUnderlineUrlSpan from stripping
+            // this one
+            super("");
+            mSupport  = FeatureFactory.getFactory(parent.getContext())
+                    .getSupportFeatureProvider(parent.getContext());
+            mDialog = parent;
+        }
+
+        @Override
+        public void onClick(View widget) {
+            Activity activity =  mDialog.getActivity();
+            if (mSupport != null && activity != null) {
+                // launch the system info fragment
+                mSupport.launchSystemInfoFragment(mDialog.getArguments(),
+                        activity.getFragmentManager());
+
+                // dismiss this fragment
+                mDialog.dismiss();
+            }
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            super.updateDrawState(ds);
+            // remove underline
+            ds.setUnderlineText(false);
+        }
+
+        /**
+         * This method takes a string and turns it into a url span that will launch a
+         * SupportSystemInformationDialogFragment
+         * @param msg The text to turn into a link
+         * @param parent The dialog the text is in
+         * @return A CharSequence containing the original text content as a url
+         */
+        public static CharSequence linkify(Spannable msg, DialogFragment parent) {
+            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
+            for (Annotation annotation : spans) {
+                int start = msg.getSpanStart(annotation);
+                int end = msg.getSpanEnd(annotation);
+                if (ANNOTATION_URL.equals(annotation.getValue())) {
+                    SystemInformationSpan link = new SystemInformationSpan(parent);
+                    msg.removeSpan(annotation);
+                    msg.setSpan(link, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+            }
+            return msg;
+        }
+
+        @VisibleForTesting
+        public void setSupportProvider(SupportFeatureProvider prov) {
+            mSupport = prov;
         }
     }
 }

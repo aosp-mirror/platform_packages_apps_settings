@@ -52,7 +52,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -242,7 +242,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USERS_APP_RESTRICTIONS;
     }
 
@@ -371,7 +371,7 @@ public class AppRestrictionsFragment extends SettingsPreferenceFragment implemen
             PackageInfo pi = null;
             try {
                 pi = ipm.getPackageInfo(packageName,
-                        PackageManager.MATCH_UNINSTALLED_PACKAGES
+                        PackageManager.MATCH_ANY_USER
                         | PackageManager.GET_SIGNATURES, userId);
             } catch (RemoteException e) {
                 // Ignore

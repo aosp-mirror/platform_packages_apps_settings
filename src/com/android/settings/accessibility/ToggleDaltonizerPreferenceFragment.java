@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SwitchBar;
 
@@ -37,8 +37,13 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     private ListPreference mType;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_DALTONIZER;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_color_correction;
     }
 
     @Override
@@ -49,6 +54,10 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
 
         mType = (ListPreference) findPreference("type");
 
+        if (!AccessibilitySettings.isColorTransformAccelerated(getActivity())) {
+            mFooterPreferenceMixin.createFooterPreference().setTitle(
+                    R.string.accessibility_display_daltonizer_preference_subtitle);
+        }
         initPreferences();
     }
 

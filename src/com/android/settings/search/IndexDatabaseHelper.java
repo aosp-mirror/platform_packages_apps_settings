@@ -17,57 +17,75 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.Log;
+
+import java.util.List;
 
 public class IndexDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 115;
+    private static final int DATABASE_VERSION = 117;
 
     private static final String INDEX = "index";
 
+    private static final String PREF_KEY_INDEXED_PROVIDERS = "indexed_providers";
+
     public interface Tables {
-        public static final String TABLE_PREFS_INDEX = "prefs_index";
-        public static final String TABLE_META_INDEX = "meta_index";
-        public static final String TABLE_SAVED_QUERIES = "saved_queries";
+        String TABLE_PREFS_INDEX = "prefs_index";
+        String TABLE_SITE_MAP = "site_map";
+        String TABLE_META_INDEX = "meta_index";
+        String TABLE_SAVED_QUERIES = "saved_queries";
     }
 
     public interface IndexColumns {
-        public static final String DOCID = "docid";
-        public static final String LOCALE = "locale";
-        public static final String DATA_RANK = "data_rank";
-        public static final String DATA_TITLE = "data_title";
-        public static final String DATA_TITLE_NORMALIZED = "data_title_normalized";
-        public static final String DATA_SUMMARY_ON = "data_summary_on";
-        public static final String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
-        public static final String DATA_SUMMARY_OFF = "data_summary_off";
-        public static final String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
-        public static final String DATA_ENTRIES = "data_entries";
-        public static final String DATA_KEYWORDS = "data_keywords";
-        public static final String CLASS_NAME = "class_name";
-        public static final String SCREEN_TITLE = "screen_title";
-        public static final String INTENT_ACTION = "intent_action";
-        public static final String INTENT_TARGET_PACKAGE = "intent_target_package";
-        public static final String INTENT_TARGET_CLASS = "intent_target_class";
-        public static final String ICON = "icon";
-        public static final String ENABLED = "enabled";
-        public static final String DATA_KEY_REF = "data_key_reference";
-        public static final String USER_ID = "user_id";
+        String DOCID = "docid";
+        String LOCALE = "locale";
+        String DATA_RANK = "data_rank";
+        String DATA_TITLE = "data_title";
+        String DATA_TITLE_NORMALIZED = "data_title_normalized";
+        String DATA_SUMMARY_ON = "data_summary_on";
+        String DATA_SUMMARY_ON_NORMALIZED = "data_summary_on_normalized";
+        String DATA_SUMMARY_OFF = "data_summary_off";
+        String DATA_SUMMARY_OFF_NORMALIZED = "data_summary_off_normalized";
+        String DATA_ENTRIES = "data_entries";
+        String DATA_KEYWORDS = "data_keywords";
+        String CLASS_NAME = "class_name";
+        String SCREEN_TITLE = "screen_title";
+        String INTENT_ACTION = "intent_action";
+        String INTENT_TARGET_PACKAGE = "intent_target_package";
+        String INTENT_TARGET_CLASS = "intent_target_class";
+        String ICON = "icon";
+        String ENABLED = "enabled";
+        String DATA_KEY_REF = "data_key_reference";
+        String USER_ID = "user_id";
+        String PAYLOAD_TYPE = "payload_type";
+        String PAYLOAD = "payload";
     }
 
     public interface MetaColumns {
-        public static final String BUILD = "build";
+        String BUILD = "build";
     }
 
-    public interface SavedQueriesColums {
-        public static final String QUERY = "query";
-        public static final String TIME_STAMP = "timestamp";
+    public interface SavedQueriesColumns {
+        String QUERY = "query";
+        String TIME_STAMP = "timestamp";
+    }
+
+    public interface SiteMapColumns {
+        String DOCID = "docid";
+        String PARENT_CLASS = "parent_class";
+        String CHILD_CLASS = "child_class";
+        String PARENT_TITLE = "parent_title";
+        String CHILD_TITLE = "child_title";
     }
 
     private static final String CREATE_INDEX_TABLE =
@@ -110,6 +128,10 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
                     IndexColumns.DATA_KEY_REF +
                     ", " +
                     IndexColumns.USER_ID +
+                    ", " +
+                    IndexColumns.PAYLOAD_TYPE +
+                    ", " +
+                    IndexColumns.PAYLOAD +
                     ");";
 
     private static final String CREATE_META_TABLE =
@@ -121,11 +143,22 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_SAVED_QUERIES_TABLE =
             "CREATE TABLE " + Tables.TABLE_SAVED_QUERIES +
                     "(" +
-                    SavedQueriesColums.QUERY + " VARCHAR(64) NOT NULL" +
+                    SavedQueriesColumns.QUERY + " VARCHAR(64) NOT NULL" +
                     ", " +
-                    SavedQueriesColums.TIME_STAMP + " INTEGER" +
+                    SavedQueriesColumns.TIME_STAMP + " INTEGER" +
                     ")";
 
+    private static final String CREATE_SITE_MAP_TABLE =
+            "CREATE VIRTUAL TABLE " + Tables.TABLE_SITE_MAP + " USING fts4" +
+                    "(" +
+                    SiteMapColumns.PARENT_CLASS +
+                    ", " +
+                    SiteMapColumns.CHILD_CLASS +
+                    ", " +
+                    SiteMapColumns.PARENT_TITLE +
+                    ", " +
+                    SiteMapColumns.CHILD_TITLE +
+                    ")";
     private static final String INSERT_BUILD_VERSION =
             "INSERT INTO " + Tables.TABLE_META_INDEX +
                     " VALUES ('" + Build.VERSION.INCREMENTAL + "');";
@@ -158,6 +191,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_INDEX_TABLE);
         db.execSQL(CREATE_META_TABLE);
         db.execSQL(CREATE_SAVED_QUERIES_TABLE);
+        db.execSQL(CREATE_SITE_MAP_TABLE);
         db.execSQL(INSERT_BUILD_VERSION);
         Log.i(TAG, "Bootstrapped database");
     }
@@ -195,7 +229,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         reconstruct(db);
     }
 
-    private void reconstruct(SQLiteDatabase db) {
+    public void reconstruct(SQLiteDatabase db) {
         dropTables(db);
         bootstrapDB(db);
     }
@@ -218,22 +252,77 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
         return version;
     }
 
-    public static void clearLocalesIndexed(Context context) {
-        context.getSharedPreferences(INDEX, 0).edit().clear().commit();
+    /**
+     * Perform a full index on an OTA or when the locale has changed
+     *
+     * @param locale      is the default for the device
+     * @param fingerprint id for the current build.
+     * @return true when the locale or build has changed since last index.
+     */
+    @VisibleForTesting
+    static boolean isFullIndex(Context context, String locale, String fingerprint,
+            String providerVersionedNames) {
+        final boolean isLocaleIndexed = IndexDatabaseHelper.isLocaleAlreadyIndexed(context, locale);
+        final boolean isBuildIndexed = IndexDatabaseHelper.isBuildIndexed(context, fingerprint);
+        final boolean areProvidersIndexed = IndexDatabaseHelper
+                .areProvidersIndexed(context, providerVersionedNames);
+
+        return !(isLocaleIndexed && isBuildIndexed && areProvidersIndexed);
     }
 
-    public static void setLocaleIndexed(Context context, String locale) {
-        context.getSharedPreferences(INDEX, 0).edit().putBoolean(locale, true).commit();
+    @VisibleForTesting
+    static String buildProviderVersionedNames(List<ResolveInfo> providers) {
+        StringBuilder sb = new StringBuilder();
+        for (ResolveInfo info : providers) {
+            sb.append(info.providerInfo.packageName)
+                    .append(':')
+                    .append(info.providerInfo.applicationInfo.versionCode)
+                    .append(',');
+        }
+        return sb.toString();
     }
 
-    public static boolean isLocaleAlreadyIndexed(Context context, String locale) {
-        return context.getSharedPreferences(INDEX, 0).getBoolean(locale, false);
+    static void clearCachedIndexed(Context context) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).edit().clear().commit();
+    }
+
+    static void setLocaleIndexed(Context context, String locale) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean(locale, true)
+                .apply();
+    }
+
+    static void setProvidersIndexed(Context context, String providerVersionedNames) {
+        context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .edit()
+                .putString(PREF_KEY_INDEXED_PROVIDERS, providerVersionedNames)
+                .apply();
+    }
+
+    static boolean isLocaleAlreadyIndexed(Context context, String locale) {
+        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(locale, false);
+    }
+
+    static boolean areProvidersIndexed(Context context, String providerVersionedNames) {
+        final String indexedProviders = context.getSharedPreferences(INDEX, Context.MODE_PRIVATE)
+                .getString(PREF_KEY_INDEXED_PROVIDERS, null);
+        return TextUtils.equals(indexedProviders, providerVersionedNames);
+    }
+
+    static boolean isBuildIndexed(Context context, String buildNo) {
+        return context.getSharedPreferences(INDEX, Context.MODE_PRIVATE).getBoolean(buildNo, false);
+    }
+
+    static void setBuildIndexed(Context context, String buildNo) {
+        context.getSharedPreferences(INDEX, 0).edit().putBoolean(buildNo, true).commit();
     }
 
     private void dropTables(SQLiteDatabase db) {
-        clearLocalesIndexed(mContext);
+        clearCachedIndexed(mContext);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_META_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_PREFS_INDEX);
         db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SAVED_QUERIES);
+        db.execSQL("DROP TABLE IF EXISTS " + Tables.TABLE_SITE_MAP);
     }
 }

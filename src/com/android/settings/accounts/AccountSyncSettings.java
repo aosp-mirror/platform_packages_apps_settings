@@ -18,16 +18,11 @@ package com.android.settings.accounts;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SyncAdapterType;
@@ -52,28 +47,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.collect.Lists;
-
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settingslib.RestrictedLockUtils;
 
-import java.io.IOException;
+import com.google.android.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-
 public class AccountSyncSettings extends AccountPreferenceBase {
 
     public static final String ACCOUNT_KEY = "account";
-    private static final int MENU_SYNC_NOW_ID       = Menu.FIRST;
-    private static final int MENU_SYNC_CANCEL_ID    = Menu.FIRST + 1;
-    private static final int MENU_REMOVE_ACCOUNT_ID = Menu.FIRST + 2;
-    private static final int REALLY_REMOVE_DIALOG = 100;
-    private static final int FAILED_REMOVAL_DIALOG = 101;
+    private static final int MENU_SYNC_NOW_ID = Menu.FIRST;
+    private static final int MENU_SYNC_CANCEL_ID = Menu.FIRST + 1;
     private static final int CANT_DO_ONETIME_SYNC_DIALOG = 102;
 
     private TextView mUserId;
@@ -81,75 +69,34 @@ public class AccountSyncSettings extends AccountPreferenceBase {
     private ImageView mProviderIcon;
     private TextView mErrorInfoView;
     private Account mAccount;
-    private ArrayList<SyncStateSwitchPreference> mSwitches =
-                new ArrayList<SyncStateSwitchPreference>();
     private ArrayList<SyncAdapterType> mInvisibleAdapters = Lists.newArrayList();
 
     @Override
     public Dialog onCreateDialog(final int id) {
         Dialog dialog = null;
-        if (id == REALLY_REMOVE_DIALOG) {
+        if (id == CANT_DO_ONETIME_SYNC_DIALOG) {
             dialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.really_remove_account_title)
-                .setMessage(R.string.really_remove_account_message)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.remove_account_label,
-                        new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Activity activity = getActivity();
-                        AccountManager.get(activity)
-                                .removeAccountAsUser(mAccount, activity,
-                                new AccountManagerCallback<Bundle>() {
-                            @Override
-                            public void run(AccountManagerFuture<Bundle> future) {
-                                // If already out of this screen, don't proceed.
-                                if (!AccountSyncSettings.this.isResumed()) {
-                                    return;
-                                }
-                                boolean failed = true;
-                                try {
-                                    if (future.getResult()
-                                            .getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
-                                        failed = false;
-                                    }
-                                } catch (OperationCanceledException e) {
-                                    // handled below
-                                } catch (IOException e) {
-                                    // handled below
-                                } catch (AuthenticatorException e) {
-                                    // handled below
-                                }
-                                if (failed && getActivity() != null &&
-                                        !getActivity().isFinishing()) {
-                                    showDialog(FAILED_REMOVAL_DIALOG);
-                                } else {
-                                    finish();
-                                }
-                            }
-                        }, null, mUserHandle);
-                    }
-                })
-                .create();
-        } else if (id == FAILED_REMOVAL_DIALOG) {
-            dialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.really_remove_account_title)
-                .setPositiveButton(android.R.string.ok, null)
-                .setMessage(R.string.remove_account_failed)
-                .create();
-        } else if (id == CANT_DO_ONETIME_SYNC_DIALOG) {
-            dialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.cant_sync_dialog_title)
-                .setMessage(R.string.cant_sync_dialog_message)
-                .setPositiveButton(android.R.string.ok, null)
-                .create();
+                    .setTitle(R.string.cant_sync_dialog_title)
+                    .setMessage(R.string.cant_sync_dialog_message)
+                    .setPositiveButton(android.R.string.ok, null)
+                    .create();
         }
         return dialog;
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCOUNTS_ACCOUNT_SYNC;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case CANT_DO_ONETIME_SYNC_DIALOG:
+                return MetricsEvent.DIALOG_ACCOUNT_SYNC_CANNOT_ONETIME_SYNC;
+            default:
+                return 0;
+        }
     }
 
     @Override
@@ -168,7 +115,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.account_sync_screen, container, false);
 
-        final ViewGroup prefs_container = (ViewGroup) view.findViewById(R.id.prefs_container);
+        final ViewGroup prefs_container = view.findViewById(R.id.prefs_container);
         Utils.prepareCustomPreferencesList(container, view, prefs_container, false);
         View prefs = super.onCreateView(inflater, prefs_container, savedInstanceState);
         prefs_container.addView(prefs);
@@ -204,7 +151,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             return;
         }
         if (Log.isLoggable(TAG, Log.VERBOSE)) {
-          Log.v(TAG, "Got account: " + mAccount);
+            Log.v(TAG, "Got account: " + mAccount);
         }
         mUserId.setText(mAccount.name);
         mProviderId.setText(mAccount.type);
@@ -273,26 +220,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 getString(R.string.sync_menu_sync_cancel))
                 .setIcon(com.android.internal.R.drawable.ic_menu_close_clear_cancel);
 
-        MenuItem removeAccount = menu.add(0, MENU_REMOVE_ACCOUNT_ID, 0,
-                getString(R.string.remove_account_label))
-                .setIcon(R.drawable.ic_menu_delete);
-        removeAccount.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
-                MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-        if (RestrictedLockUtils.hasBaseUserRestriction(getPrefContext(),
-                UserManager.DISALLOW_MODIFY_ACCOUNTS, mUserHandle.getIdentifier())) {
-            removeAccount.setEnabled(false);
-        } else {
-            EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                    getPrefContext(), UserManager.DISALLOW_MODIFY_ACCOUNTS,
-                    mUserHandle.getIdentifier());
-            if (admin == null) {
-                admin = RestrictedLockUtils.checkIfAccountManagementDisabled(
-                        getPrefContext(), mAccount.type, mUserHandle.getIdentifier());
-            }
-            RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getPrefContext(),
-                    removeAccount, admin);
-        }
-
         syncNow.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
         syncCancel.setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER |
@@ -319,9 +246,6 @@ public class AccountSyncSettings extends AccountPreferenceBase {
                 return true;
             case MENU_SYNC_CANCEL_ID:
                 cancelSyncForEnabledProviders();
-                return true;
-            case MENU_REMOVE_ACCOUNT_ID:
-                showDialog(REALLY_REMOVE_DIALOG);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -445,7 +369,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         int count = getPreferenceScreen().getPreferenceCount();
         for (int i = 0; i < count; i++) {
             Preference pref = getPreferenceScreen().getPreference(i);
-            if (! (pref instanceof SyncStateSwitchPreference)) {
+            if (!(pref instanceof SyncStateSwitchPreference)) {
                 continue;
             }
             SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
@@ -457,7 +381,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
         // plus whatever the system needs to sync, e.g., invisible sync adapters
         if (mAccount != null) {
             for (SyncAdapterType syncAdapter : mInvisibleAdapters) {
-                  requestOrCancelSync(mAccount, syncAdapter.authority, startSync);
+                requestOrCancelSync(mAccount, syncAdapter.authority, startSync);
             }
         }
     }
@@ -504,7 +428,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
         for (int i = 0, count = getPreferenceScreen().getPreferenceCount(); i < count; i++) {
             Preference pref = getPreferenceScreen().getPreference(i);
-            if (! (pref instanceof SyncStateSwitchPreference)) {
+            if (!(pref instanceof SyncStateSwitchPreference)) {
                 continue;
             }
             SyncStateSwitchPreference syncPref = (SyncStateSwitchPreference) pref;
@@ -522,14 +446,14 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             boolean lastSyncFailed = status != null
                     && status.lastFailureTime != 0
                     && status.getLastFailureMesgAsInt(0)
-                       != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
+                    != ContentResolver.SYNC_ERROR_SYNC_ALREADY_IN_PROGRESS;
             if (!syncEnabled) lastSyncFailed = false;
             if (lastSyncFailed && !activelySyncing && !authorityIsPending) {
                 syncIsFailing = true;
             }
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "Update sync status: " + account + " " + authority +
-                        " active = " + activelySyncing + " pend =" +  authorityIsPending);
+                        " active = " + activelySyncing + " pend =" + authorityIsPending);
             }
 
             final long successEndTime = (status == null) ? 0 : status.lastSuccessTime;
@@ -553,7 +477,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
 
             syncPref.setFailed(lastSyncFailed);
             final boolean oneTimeSyncMode = !ContentResolver.getMasterSyncAutomaticallyAsUser(
-                userId);
+                    userId);
             syncPref.setOneTimeSyncMode(oneTimeSyncMode);
             syncPref.setChecked(oneTimeSyncMode || syncEnabled);
         }
@@ -597,7 +521,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             // Only keep track of sync adapters for this account
             if (!sa.accountType.equals(mAccount.type)) continue;
             if (sa.isUserVisible()) {
-                if (Log.isLoggable(TAG, Log.VERBOSE)) {
+                if (Log.isLoggable(TAG, Log.DEBUG)) {
                     Log.d(TAG, "updateAccountSwitches: added authority " + sa.authority
                             + " to accountType " + sa.accountType);
                 }
@@ -609,7 +533,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             }
         }
 
-        if (Log.isLoggable(TAG, Log.VERBOSE)) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
             Log.d(TAG, "looking for sync adapters that match account " + mAccount);
         }
         cacheRemoveAllPrefs(getPreferenceScreen());
@@ -618,7 +542,7 @@ public class AccountSyncSettings extends AccountPreferenceBase {
             // We could check services here....
             int syncState = ContentResolver.getIsSyncableAsUser(mAccount, syncAdapter.authority,
                     mUserHandle.getIdentifier());
-            if (Log.isLoggable(TAG, Log.VERBOSE)) {
+            if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "  found authority " + syncAdapter.authority + " " + syncState);
             }
             if (syncState > 0) {

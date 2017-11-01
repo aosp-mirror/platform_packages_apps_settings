@@ -24,9 +24,9 @@ import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.widget.SwitchBar;
 
 
@@ -100,8 +100,13 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_TOGGLE_AUTOCLICK;
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_autoclick;
     }
 
     @Override

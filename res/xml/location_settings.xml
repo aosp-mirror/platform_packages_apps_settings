@@ -24,7 +24,7 @@
             android:key="location_mode"
             android:title="@string/location_mode_title"
             settings:keywords="@string/keywords_location_mode"
-            android:summary="@string/location_mode_location_off_title" />
+            android:summary="@string/summary_placeholder" />
 
         <!-- This preference category gets removed if there is no managed profile -->
         <com.android.settingslib.RestrictedSwitchPreference
@@ -34,7 +34,22 @@
             android:enabled="false"
             android:selectable="true" />
 
-        <com.android.settings.DividedCategory
+        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+        <Preference
+            android:key="app_level_permissions"
+            android:title="@string/location_app_level_permissions">
+            <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
+                <extra android:name="android.intent.extra.PERMISSION_NAME"
+                       android:value="android.permission-group.LOCATION" />
+            </intent>
+        </Preference>
+
+        <Preference
+            android:key="location_scanning"
+            android:title="@string/location_scanning_screen_title"
+            android:fragment="com.android.settings.location.ScanningSettings"/>
+
+        <PreferenceCategory
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests" />
 

@@ -73,6 +73,7 @@ public class PaymentBackend {
 
     public void onResume() {
         mSettingsPackageMonitor.register(mContext, mContext.getMainLooper(), false);
+        refresh();
     }
 
     public void refresh() {

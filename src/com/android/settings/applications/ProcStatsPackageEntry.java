@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import android.util.Log;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -115,18 +116,19 @@ public class ProcStatsPackageEntry implements Parcelable {
         try {
             if ("os".equals(mPackage)) {
                 mUiTargetApp = pm.getApplicationInfo("android",
-                        PackageManager.GET_DISABLED_COMPONENTS |
-                        PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS |
+                        PackageManager.MATCH_ANY_USER);
                 mUiLabel = context.getString(R.string.process_stats_os_label);
             } else {
                 mUiTargetApp = pm.getApplicationInfo(mPackage,
-                        PackageManager.GET_DISABLED_COMPONENTS |
-                        PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS |
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS |
+                        PackageManager.MATCH_ANY_USER);
                 mUiLabel = mUiTargetApp.loadLabel(pm).toString();
             }
         } catch (PackageManager.NameNotFoundException e) {
+            Log.d(TAG, "could not find package: " + mPackage);
         }
     }
 

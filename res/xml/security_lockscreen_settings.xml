@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/lockscreen_settings_title">
+
+    <com.android.settings.notification.RestrictedDropDownPreference
+        android:key="security_setting_lock_screen_notif"
+        android:title="@string/lock_screen_notifications_title"
+        android:summary="@string/summary_placeholder" />
+
+    <com.android.settingslib.RestrictedSwitchPreference
+        android:key="add_users_when_locked"
+        android:title="@string/user_add_on_lockscreen_menu" />
+
+    <com.android.settingslib.RestrictedPreference
+        android:key="owner_info_settings"
+        android:title="@string/owner_info_settings_title"
+        android:summary="@string/owner_info_settings_summary" />
+
+    <PreferenceCategory
+        android:key="security_setting_lock_screen_notif_work_header"
+        android:title="@string/profile_section_header">
+
+        <com.android.settings.notification.RestrictedDropDownPreference
+            android:key="security_setting_lock_screen_notif_work"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="@string/summary_placeholder" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

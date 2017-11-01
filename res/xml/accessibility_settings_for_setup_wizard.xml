@@ -26,10 +26,10 @@
 
     <Preference
         android:fragment=
-                "com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragmentForSetupWizard"
+                "com.android.settings.accessibility.MagnificationPreferenceFragment"
         android:key="screen_magnification_preference"
         android:title="@string/accessibility_screen_magnification_title"
-        android:summary="@string/accessibility_screen_magnification_short_summary" />
+        android:summary="@string/accessibility_preference_magnification_summary" />
 
     <Preference
         android:fragment=
@@ -43,6 +43,13 @@
         android:key="force_density_preference"
         android:title="@string/screen_zoom_title"
         android:summary="@string/screen_zoom_short_summary" />
+
+    <Preference
+        android:fragment=
+                "com.android.settings.accessibility.ToggleSelectToSpeakPreferenceFragmentForSetupWizard"
+        android:key="select_to_speak_preference"
+        android:summary="@string/select_to_speak_summary"
+        android:persistent="true" />
 
     <Preference
         android:fragment=

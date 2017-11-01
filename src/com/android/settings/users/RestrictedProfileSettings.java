@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
@@ -131,6 +132,18 @@ public class RestrictedProfileSettings extends AppRestrictionsFragment
         }
 
         return null;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_ID_EDIT_USER_INFO:
+                return MetricsProto.MetricsEvent.DIALOG_USER_EDIT;
+            case DIALOG_CONFIRM_REMOVE:
+                return MetricsProto.MetricsEvent.DIALOG_USER_REMOVE;
+            default:
+                return 0;
+        }
     }
 
     private void removeUser() {

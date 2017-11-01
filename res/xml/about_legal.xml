@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/legal_information">
+                  android:title="@string/legal_information"
+                  android:key="legal_screen">
 
     <!-- Note: The titles given here probably won't be used.  Instead, we programmatically
        fill the title with the label of the activity with the corresponding action.
@@ -23,38 +24,37 @@
        list. -->
 
     <!-- Copyright information -->
-    <PreferenceScreen
+    <Preference
         android:key="copyright"
         android:title="@string/copyright_title">
-        <intent android:action="android.settings.COPYRIGHT" />
-    </PreferenceScreen>
+        <intent android:action="android.settings.COPYRIGHT"/>
+    </Preference>
 
     <!-- License information -->
-    <PreferenceScreen
+    <Preference
         android:key="license"
         android:title="@string/license_title">
-        <intent android:action="android.settings.LICENSE" />
-    </PreferenceScreen>
+        <intent android:action="android.settings.LICENSE"/>
+    </Preference>
 
     <!-- Terms and conditions -->
-    <PreferenceScreen
+    <Preference
         android:key="terms"
         android:title="@string/terms_title">
-        <intent android:action="android.settings.TERMS" />
-    </PreferenceScreen>
+        <intent android:action="android.settings.TERMS"/>
+    </Preference>
 
     <!-- System WebView License information -->
-    <PreferenceScreen
+    <Preference
         android:key="webview_license"
         android:title="@string/webview_license_title">
-        <intent android:action="android.settings.WEBVIEW_LICENSE" />
-    </PreferenceScreen>
+        <intent android:action="android.settings.WEBVIEW_LICENSE"/>
+    </Preference>
 
     <Preference
         android:key="wallpaper_attributions"
         android:title="@string/wallpaper_attributions"
-        android:summary="@string/wallpaper_attributions_values"
-        />
+        android:summary="@string/wallpaper_attributions_values"/>
 
 </PreferenceScreen>
 

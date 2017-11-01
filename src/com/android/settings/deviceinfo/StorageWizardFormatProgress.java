@@ -33,7 +33,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.Objects;
 
@@ -191,7 +193,13 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
         }
     }
 
-    public static class SlowWarningFragment extends DialogFragment {
+    public static class SlowWarningFragment extends InstrumentedDialogFragment {
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_VOLUME_SLOW_WARNING;
+        }
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             final Context context = getActivity();

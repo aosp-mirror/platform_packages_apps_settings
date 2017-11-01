@@ -18,14 +18,12 @@ package com.android.settings.bluetooth;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.EditTextPreference;
+import android.support.annotation.VisibleForTesting;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,7 +35,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -47,9 +48,7 @@ import com.android.settingslib.bluetooth.MapProfile;
 import com.android.settingslib.bluetooth.PanProfile;
 import com.android.settingslib.bluetooth.PbapServerProfile;
 
-import java.util.HashMap;
-
-public final class DeviceProfilesSettings extends DialogFragment implements
+public final class DeviceProfilesSettings extends InstrumentedDialogFragment implements
         CachedBluetoothDevice.Callback, DialogInterface.OnClickListener, OnClickListener {
     private static final String TAG = "DeviceProfilesSettings";
 
@@ -58,6 +57,8 @@ public final class DeviceProfilesSettings extends DialogFragment implements
     private static final String KEY_PROFILE_CONTAINER = "profile_container";
     private static final String KEY_UNPAIR = "unpair";
     private static final String KEY_PBAP_SERVER = "PBAP Server";
+    @VisibleForTesting
+    static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
 
     private CachedBluetoothDevice mCachedDevice;
     private LocalBluetoothManager mManager;
@@ -65,15 +66,16 @@ public final class DeviceProfilesSettings extends DialogFragment implements
 
     private ViewGroup mProfileContainer;
     private TextView mProfileLabel;
-    private EditTextPreference mDeviceNamePref;
-
-    private final HashMap<LocalBluetoothProfile, CheckBoxPreference> mAutoConnectPrefs
-            = new HashMap<LocalBluetoothProfile, CheckBoxPreference>();
 
     private AlertDialog mDisconnectDialog;
     private boolean mProfileGroupIsRemoved;
 
     private View mRootView;
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_BLUETOOTH_PAIRED_DEVICE_PROFILE;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,10 +120,6 @@ public final class DeviceProfilesSettings extends DialogFragment implements
                 break;
             case DialogInterface.BUTTON_NEUTRAL:
                 mCachedDevice.unpair();
-                com.android.settings.bluetooth.Utils.updateSearchIndex(getContext(),
-                        BluetoothSettings.class.getName(), mCachedDevice.getName(),
-                        getString(R.string.bluetooth_settings),
-                        R.drawable.ic_settings_bluetooth, false);
                 break;
         }
     }
@@ -175,6 +173,21 @@ public final class DeviceProfilesSettings extends DialogFragment implements
         for (LocalBluetoothProfile profile : mCachedDevice.getConnectableProfiles()) {
             CheckBox pref = createProfilePreference(profile);
             mProfileContainer.addView(pref);
+
+            if (profile instanceof A2dpProfile) {
+                BluetoothDevice device = mCachedDevice.getDevice();
+                A2dpProfile a2dpProfile = (A2dpProfile) profile;
+                if (a2dpProfile.supportsHighQualityAudio(device)) {
+                    CheckBox highQualityPref = new CheckBox(getActivity());
+                    highQualityPref.setTag(HIGH_QUALITY_AUDIO_PREF_TAG);
+                    highQualityPref.setOnClickListener(v -> {
+                        a2dpProfile.setHighQualityAudioEnabled(device, highQualityPref.isChecked());
+                    });
+                    highQualityPref.setVisibility(View.GONE);
+                    mProfileContainer.addView(highQualityPref);
+                }
+                refreshProfilePreference(pref, profile);
+            }
         }
 
         final int pbapPermission = mCachedDevice.getPhonebookPermissionChoice();
@@ -361,6 +374,22 @@ public final class DeviceProfilesSettings extends DialogFragment implements
 
         } else {
             profilePref.setChecked(profile.isPreferred(device));
+        }
+        if (profile instanceof A2dpProfile) {
+            A2dpProfile a2dpProfile = (A2dpProfile) profile;
+            View v = mProfileContainer.findViewWithTag(HIGH_QUALITY_AUDIO_PREF_TAG);
+            if (v instanceof CheckBox) {
+                CheckBox highQualityPref = (CheckBox) v;
+                highQualityPref.setText(a2dpProfile.getHighQualityAudioOptionLabel(device));
+                highQualityPref.setChecked(a2dpProfile.isHighQualityAudioEnabled(device));
+
+                if (a2dpProfile.isPreferred(device)) {
+                    v.setVisibility(View.VISIBLE);
+                    v.setEnabled(!mCachedDevice.isBusy());
+                } else {
+                    v.setVisibility(View.GONE);
+                }
+            }
         }
     }
 

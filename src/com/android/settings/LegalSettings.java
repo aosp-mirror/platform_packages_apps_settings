@@ -26,7 +26,7 @@ import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.PreferenceGroup;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
@@ -40,6 +40,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_WEBVIEW_LICENSE = "webview_license";
+    private static final String KEY_WALLPAPER_ATTRIBUTIONS = "wallpaper_attributions";
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -59,7 +60,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ABOUT_LEGAL_SETTINGS;
     }
 
@@ -76,7 +77,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
-                final List<String> keys = new ArrayList<String>();
+                final List<String> keys = super.getNonIndexableKeys(context);
                 if (!checkIntentAction(context, "android.settings.TERMS")) {
                     keys.add(KEY_TERMS);
                 }
@@ -89,6 +90,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
                 if (!checkIntentAction(context, "android.settings.WEBVIEW_LICENSE")) {
                     keys.add(KEY_WEBVIEW_LICENSE);
                 }
+                keys.add(KEY_WALLPAPER_ATTRIBUTIONS);
                 return keys;
             }
 

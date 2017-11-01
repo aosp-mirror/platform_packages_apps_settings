@@ -20,11 +20,15 @@ import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.fingerprint.FingerprintEnrollSidecar.Listener;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 /**
  * Activity explaining the fingerprint sensor location for fingerprint enrollment.
@@ -35,6 +39,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     private static final int ENROLLING = 2;
     public static final String EXTRA_KEY_LAUNCHED_CONFIRM = "launched_confirm_lock";
 
+    @Nullable
     private FingerprintFindSensorAnimation mAnimation;
     private boolean mLaunchedConfirmLock;
     private FingerprintEnrollSidecar mSidecar;
@@ -44,6 +49,9 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
+        Button skipButton = findViewById(R.id.skip_button);
+        skipButton.setOnClickListener(this);
+
         setHeaderText(R.string.security_settings_fingerprint_enroll_find_sensor_title);
         if (savedInstanceState != null) {
             mLaunchedConfirmLock = savedInstanceState.getBoolean(EXTRA_KEY_LAUNCHED_CONFIRM);
@@ -55,8 +63,12 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
         } else if (mToken != null) {
             startLookingForFingerprint(); // already confirmed, so start looking for fingerprint
         }
-        mAnimation = (FingerprintFindSensorAnimation) findViewById(
-                R.id.fingerprint_sensor_location_animation);
+        View animationView = findViewById(R.id.fingerprint_sensor_location_animation);
+        if (animationView instanceof FingerprintFindSensorAnimation) {
+            mAnimation = (FingerprintFindSensorAnimation) animationView;
+        } else {
+            mAnimation = null;
+        }
     }
 
     protected int getContentView() {
@@ -66,7 +78,9 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onStart() {
         super.onStart();
-        mAnimation.startAnimation();
+        if (mAnimation != null) {
+            mAnimation.startAnimation();
+        }
     }
 
     private void startLookingForFingerprint() {
@@ -81,9 +95,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             @Override
             public void onEnrollmentProgressChange(int steps, int remaining) {
                 mNextClicked = true;
-                if (!mSidecar.cancelEnrollment()) {
-                    proceedToEnrolling();
-                }
+                proceedToEnrolling(true /* cancelEnrollment */);
             }
 
             @Override
@@ -94,7 +106,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
             public void onEnrollmentError(int errMsgId, CharSequence errString) {
                 if (mNextClicked && errMsgId == FingerprintManager.FINGERPRINT_ERROR_CANCELED) {
                     mNextClicked = false;
-                    proceedToEnrolling();
+                    proceedToEnrolling(false /* cancelEnrollment */);
                 }
             }
         });
@@ -103,13 +115,17 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     @Override
     protected void onStop() {
         super.onStop();
-        mAnimation.pauseAnimation();
+        if (mAnimation != null) {
+            mAnimation.pauseAnimation();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAnimation.stopAnimation();
+        if (mAnimation != null) {
+            mAnimation.stopAnimation();
+        }
     }
 
     @Override
@@ -120,17 +136,31 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     }
 
     @Override
-    protected void onNextButtonClick() {
-        mNextClicked = true;
-        if (mSidecar == null || (mSidecar != null && !mSidecar.cancelEnrollment())) {
-            proceedToEnrolling();
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.skip_button:
+                setResult(RESULT_SKIP);
+                finish();
+                break;
+            default:
+                super.onClick(v);
         }
     }
 
-    private void proceedToEnrolling() {
-        getFragmentManager().beginTransaction().remove(mSidecar).commit();
-        mSidecar = null;
-        startActivityForResult(getEnrollingIntent(), ENROLLING);
+    private void proceedToEnrolling(boolean cancelEnrollment) {
+        if (mSidecar != null) {
+            if (cancelEnrollment) {
+                if (mSidecar.cancelEnrollment()) {
+                    // Enrollment cancel requested. When the cancellation is successful,
+                    // onEnrollmentError will be called with FINGERPRINT_ERROR_CANCELED, calling
+                    // this again.
+                    return;
+                }
+            }
+            getFragmentManager().beginTransaction().remove(mSidecar).commitAllowingStateLoss();
+            mSidecar = null;
+            startActivityForResult(getEnrollingIntent(), ENROLLING);
+        }
     }
 
     @Override
@@ -155,7 +185,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
                 setResult(RESULT_TIMEOUT);
                 finish();
             } else {
-                FingerprintManager fpm = getSystemService(FingerprintManager.class);
+                FingerprintManager fpm = Utils.getFingerprintManagerOrNull(this);
                 int enrolled = fpm.getEnrolledFingerprints().size();
                 int max = getResources().getInteger(
                         com.android.internal.R.integer.config_fingerprintMaxTemplatesPerUser);
@@ -172,7 +202,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     }
 
     private void launchConfirmLock() {
-        long challenge = getSystemService(FingerprintManager.class).preEnroll();
+        long challenge = Utils.getFingerprintManagerOrNull(this).preEnroll();
         ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(this);
         boolean launchedConfirmationActivity = false;
         if (mUserId == UserHandle.USER_NULL) {
@@ -194,7 +224,7 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.FINGERPRINT_FIND_SENSOR;
     }
 }

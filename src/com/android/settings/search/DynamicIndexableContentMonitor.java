@@ -20,6 +20,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
 import android.app.LoaderManager;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
@@ -30,249 +31,136 @@ import android.database.ContentObserver;
 import android.hardware.input.InputManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.print.PrintManager;
 import android.print.PrintServicesLoader;
 import android.printservice.PrintServiceInfo;
+import android.provider.Settings;
 import android.provider.UserDictionary;
+import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
+import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.internal.content.PackageMonitor;
 import com.android.settings.accessibility.AccessibilitySettings;
-import com.android.settings.inputmethod.InputMethodAndLanguageSettings;
+import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.PhysicalKeyboardFragment;
+import com.android.settings.inputmethod.VirtualKeyboardFragment;
+import com.android.settings.language.LanguageAndInputSettings;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintSettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DynamicIndexableContentMonitor extends PackageMonitor implements
-        InputManager.InputDeviceListener,
+public final class DynamicIndexableContentMonitor implements
         LoaderManager.LoaderCallbacks<List<PrintServiceInfo>> {
-    private static final String TAG = "DynamicIndexableContentMonitor";
+    // Shorten the class name because log TAG can be at most 23 chars.
+    private static final String TAG = "DynamicContentMonitor";
 
     private static final long DELAY_PROCESS_PACKAGE_CHANGE = 2000;
+    // A PackageMonitor shared among Settings activities.
+    private static final PackageChangeMonitor PACKAGE_CHANGE_MONITOR = new PackageChangeMonitor();
 
-    private static final int MSG_PACKAGE_AVAILABLE = 1;
-    private static final int MSG_PACKAGE_UNAVAILABLE = 2;
-
-    private final List<String> mAccessibilityServices = new ArrayList<String>();
-    private final List<String> mImeServices = new ArrayList<String>();
-
-    private final Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_PACKAGE_AVAILABLE: {
-                    String packageName = (String) msg.obj;
-                    handlePackageAvailable(packageName);
-                } break;
-
-                case MSG_PACKAGE_UNAVAILABLE: {
-                    String packageName = (String) msg.obj;
-                    handlePackageUnavailable(packageName);
-                } break;
-            }
-        }
-    };
-
-    private final ContentObserver mUserDictionaryContentObserver =
-            new UserDictionaryContentObserver(mHandler);
-
+    // Null if not initialized.
+    @Nullable private DatabaseIndexingManager mIndexManager;
     private Context mContext;
-    private boolean mHasFeatureIme;
-    private boolean mRegistered;
+    private boolean mHasFeaturePrinting;
 
-    private static Intent getAccessibilityServiceIntent(String packageName) {
+    @VisibleForTesting
+    static Intent getAccessibilityServiceIntent(String packageName) {
         final Intent intent = new Intent(AccessibilityService.SERVICE_INTERFACE);
         intent.setPackage(packageName);
         return intent;
     }
 
-    private static Intent getIMEServiceIntent(String packageName) {
-        final Intent intent = new Intent("android.view.InputMethod");
+    @VisibleForTesting
+    static Intent getIMEServiceIntent(String packageName) {
+        final Intent intent = new Intent(InputMethod.SERVICE_INTERFACE);
         intent.setPackage(packageName);
         return intent;
     }
 
+    @VisibleForTesting
+    static void resetForTesting() {
+        InputDevicesMonitor.getInstance().resetForTesting();
+        AccessibilityServicesMonitor.getInstance().resetForTesting();
+        InputMethodServicesMonitor.getInstance().resetForTesting();
+    }
+
+    /**
+     * This instance holds a set of content monitor singleton objects.
+     *
+     * This object is created every time a sub-settings that extends {@code SettingsActivity}
+     * is created.
+     */
+    public DynamicIndexableContentMonitor() {}
+
+    /**
+     * Creates and initializes a set of content monitor singleton objects if not yet exist.
+     * Also starts loading the list of print services.
+     * <code>mIndex</code> has non-null value after successfully initialized.
+     *
+     * @param activity used to get {@link LoaderManager}.
+     * @param loaderId id for loading print services.
+     */
     public void register(Activity activity, int loaderId) {
-        mContext = activity;
+        final boolean isUserUnlocked = activity
+                .getSystemService(UserManager.class)
+                .isUserUnlocked();
+        register(activity, loaderId, FeatureFactory.getFactory(activity)
+                        .getSearchFeatureProvider().getIndexingManager(activity), isUserUnlocked);
+    }
 
-        if (!mContext.getSystemService(UserManager.class).isUserUnlocked()) {
+    /**
+     * For testing to inject {@link DatabaseIndexingManager} object.
+     * Also because currently Robolectric doesn't support API 24, we can not test code that calls
+     * {@link UserManager#isUserUnlocked()}.
+     */
+    @VisibleForTesting
+    void register(Activity activity, int loaderId, DatabaseIndexingManager indexManager,
+                  boolean isUserUnlocked) {
+        if (!isUserUnlocked) {
             Log.w(TAG, "Skipping content monitoring because user is locked");
-            mRegistered = false;
             return;
-        } else {
-            mRegistered = true;
         }
+        final Context context = activity.getApplicationContext();
+        mContext = context;
+        mIndexManager = indexManager;
 
-        boolean hasFeaturePrinting = mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_PRINTING);
-        mHasFeatureIme = mContext.getPackageManager().hasSystemFeature(
-                PackageManager.FEATURE_INPUT_METHODS);
-
-        // Cache accessibility service packages to know when they go away.
-        AccessibilityManager accessibilityManager = (AccessibilityManager)
-                mContext.getSystemService(Context.ACCESSIBILITY_SERVICE);
-        List<AccessibilityServiceInfo> accessibilityServices = accessibilityManager
-                .getInstalledAccessibilityServiceList();
-        final int accessibilityServiceCount = accessibilityServices.size();
-        for (int i = 0; i < accessibilityServiceCount; i++) {
-            AccessibilityServiceInfo accessibilityService = accessibilityServices.get(i);
-            ResolveInfo resolveInfo = accessibilityService.getResolveInfo();
-            if (resolveInfo == null || resolveInfo.serviceInfo == null) {
-                continue;
-            }
-            mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
-        }
-
-        if (hasFeaturePrinting) {
-            activity.getLoaderManager().initLoader(loaderId, null, this);
-        }
-
-        // Cache IME service packages to know when they go away.
-        if (mHasFeatureIme) {
-            InputMethodManager imeManager = (InputMethodManager)
-                    mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            List<InputMethodInfo> inputMethods = imeManager.getInputMethodList();
-            final int inputMethodCount = inputMethods.size();
-            for (int i = 0; i < inputMethodCount; i++) {
-                InputMethodInfo inputMethod = inputMethods.get(i);
-                ServiceInfo serviceInfo = inputMethod.getServiceInfo();
-                if (serviceInfo == null) continue;
-                mImeServices.add(serviceInfo.packageName);
-            }
-
-            // Watch for related content URIs.
-            mContext.getContentResolver().registerContentObserver(
-                    UserDictionary.Words.CONTENT_URI, true, mUserDictionaryContentObserver);
+        PACKAGE_CHANGE_MONITOR.registerMonitor(context);
+        mHasFeaturePrinting = context.getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_PRINTING);
+        if (mHasFeaturePrinting) {
+            activity.getLoaderManager().initLoader(loaderId, null /* args */, this /* callbacks */);
         }
 
         // Watch for input device changes.
-        InputManager inputManager = (InputManager) activity.getSystemService(
-                Context.INPUT_SERVICE);
-        inputManager.registerInputDeviceListener(this, mHandler);
+        InputDevicesMonitor.getInstance().initialize(context, mIndexManager);
 
         // Start tracking packages.
-        register(activity, Looper.getMainLooper(), UserHandle.CURRENT, false);
+        AccessibilityServicesMonitor.getInstance().initialize(context, mIndexManager);
+        InputMethodServicesMonitor.getInstance().initialize(context, mIndexManager);
     }
 
-    @Override
-    public void unregister() {
-        if (!mRegistered) return;
+    /**
+     * Aborts loading the list of print services.
+     * Note that a set of content monitor singletons keep alive while Settings app is running.
+     *
+     * @param activity user to get {@link LoaderManager}.
+     * @param loaderId id for loading print services.
+     */
+    public void unregister(Activity activity, int loaderId) {
+        if (mIndexManager == null) return;
 
-        super.unregister();
-
-        InputManager inputManager = (InputManager) mContext.getSystemService(
-                Context.INPUT_SERVICE);
-        inputManager.unregisterInputDeviceListener(this);
-
-        if (mHasFeatureIme) {
-            mContext.getContentResolver().unregisterContentObserver(
-                    mUserDictionaryContentObserver);
-        }
-
-        mAccessibilityServices.clear();
-        mImeServices.clear();
-    }
-
-    // Covers installed, appeared external storage with the package, upgraded.
-    @Override
-    public void onPackageAppeared(String packageName, int uid) {
-        postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-    }
-
-    // Covers uninstalled, removed external storage with the package.
-    @Override
-    public void onPackageDisappeared(String packageName, int uid) {
-        postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
-    }
-
-    // Covers enabled, disabled.
-    @Override
-    public void onPackageModified(String packageName) {
-        super.onPackageModified(packageName);
-        try {
-            final int state = mContext.getPackageManager().getApplicationEnabledSetting(
-                    packageName);
-            if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-                    || state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
-                postMessage(MSG_PACKAGE_AVAILABLE, packageName);
-            } else {
-                postMessage(MSG_PACKAGE_UNAVAILABLE, packageName);
-            }
-        } catch (IllegalArgumentException e) {
-            Log.e(TAG, "Package does not exist: " + packageName, e);
-        }
-    }
-
-    @Override
-    public void onInputDeviceAdded(int deviceId) {
-        Index.getInstance(mContext).updateFromClassNameResource(
-                InputMethodAndLanguageSettings.class.getName(), false, true);
-    }
-
-    @Override
-    public void onInputDeviceRemoved(int deviceId) {
-        onInputDeviceChanged(deviceId);
-    }
-
-    @Override
-    public void onInputDeviceChanged(int deviceId) {
-        Index.getInstance(mContext).updateFromClassNameResource(
-                InputMethodAndLanguageSettings.class.getName(), true, true);
-    }
-
-    private void postMessage(int what, String packageName) {
-        Message message = mHandler.obtainMessage(what, packageName);
-        mHandler.sendMessageDelayed(message, DELAY_PROCESS_PACKAGE_CHANGE);
-    }
-
-    private void handlePackageAvailable(String packageName) {
-        if (!mAccessibilityServices.contains(packageName)) {
-            final Intent intent = getAccessibilityServiceIntent(packageName);
-            List<?> services = mContext.getPackageManager().queryIntentServices(intent, 0);
-            if (services != null && !services.isEmpty()) {
-                mAccessibilityServices.add(packageName);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        AccessibilitySettings.class.getName(), false, true);
-            }
-        }
-
-        if (mHasFeatureIme) {
-            if (!mImeServices.contains(packageName)) {
-                Intent intent = getIMEServiceIntent(packageName);
-                List<?> services = mContext.getPackageManager().queryIntentServices(intent, 0);
-                if (services != null && !services.isEmpty()) {
-                    mImeServices.add(packageName);
-                    Index.getInstance(mContext).updateFromClassNameResource(
-                            InputMethodAndLanguageSettings.class.getName(), false, true);
-                }
-            }
-        }
-    }
-
-    private void handlePackageUnavailable(String packageName) {
-        final int accessibilityIndex = mAccessibilityServices.indexOf(packageName);
-        if (accessibilityIndex >= 0) {
-            mAccessibilityServices.remove(accessibilityIndex);
-            Index.getInstance(mContext).updateFromClassNameResource(
-                    AccessibilitySettings.class.getName(), true, true);
-        }
-
-        if (mHasFeatureIme) {
-            final int imeIndex = mImeServices.indexOf(packageName);
-            if (imeIndex >= 0) {
-                mImeServices.remove(imeIndex);
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        InputMethodAndLanguageSettings.class.getName(), true, true);
-            }
+        PACKAGE_CHANGE_MONITOR.unregisterMonitor();
+        if (mHasFeaturePrinting) {
+            activity.getLoaderManager().destroyLoader(loaderId);
         }
     }
 
@@ -286,8 +174,8 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
     @Override
     public void onLoadFinished(Loader<List<PrintServiceInfo>> loader,
             List<PrintServiceInfo> services) {
-        Index.getInstance(mContext).updateFromClassNameResource(
-                PrintSettingsFragment.class.getName(), false, true);
+        mIndexManager.updateFromClassNameResource(PrintSettingsFragment.class.getName(),
+                true /* includeInSearchResults */);
     }
 
     @Override
@@ -295,18 +183,307 @@ public final class DynamicIndexableContentMonitor extends PackageMonitor impleme
         // nothing to do
     }
 
-    private final class UserDictionaryContentObserver extends ContentObserver {
+    // A singleton that monitors input devices changes and updates indexes of physical keyboards.
+    private static class InputDevicesMonitor implements InputManager.InputDeviceListener {
 
-        public UserDictionaryContentObserver(Handler handler) {
-            super(handler);
+        // Null if not initialized.
+        @Nullable private DatabaseIndexingManager mIndexManager;
+        private InputManager mInputManager;
+
+        private InputDevicesMonitor() {}
+
+        private static class SingletonHolder {
+            private static final InputDevicesMonitor INSTANCE = new InputDevicesMonitor();
+        }
+
+        static InputDevicesMonitor getInstance() {
+            return SingletonHolder.INSTANCE;
+        }
+
+        @VisibleForTesting
+        synchronized void resetForTesting() {
+            if (mIndexManager != null) {
+                mInputManager.unregisterInputDeviceListener(this /* listener */);
+            }
+            mIndexManager = null;
+        }
+
+        synchronized void initialize(Context context, DatabaseIndexingManager indexManager) {
+            if (mIndexManager != null) return;
+            mIndexManager = indexManager;
+            mInputManager = (InputManager) context.getSystemService(Context.INPUT_SERVICE);
+            buildIndex();
+
+            // Watch for input device changes.
+            mInputManager.registerInputDeviceListener(this /* listener */, null /* handler */);
+        }
+
+        private void buildIndex() {
+            mIndexManager.updateFromClassNameResource(PhysicalKeyboardFragment.class.getName(),
+                    true /* includeInSearchResults */);
+        }
+
+        @Override
+        public void onInputDeviceAdded(int deviceId) {
+            buildIndex();
+        }
+
+        @Override
+        public void onInputDeviceRemoved(int deviceId) {
+            buildIndex();
+        }
+
+        @Override
+        public void onInputDeviceChanged(int deviceId) {
+            buildIndex();
+        }
+    }
+
+    // A singleton that monitors package installing, uninstalling, enabling, and disabling.
+    // Then updates indexes of accessibility services and input methods.
+    private static class PackageChangeMonitor extends PackageMonitor {
+        private static final String TAG = PackageChangeMonitor.class.getSimpleName();
+
+        // Null if not initialized. Guarded by {@link #mLock}.
+        @Nullable private PackageManager mPackageManager;
+        private final Object mLock = new Object();
+
+        public void registerMonitor(Context context) {
+            synchronized (mLock) {
+                if (mPackageManager != null) {
+                    return;
+                }
+                mPackageManager = context.getPackageManager();
+
+                // Start tracking packages. Use background thread for monitoring. Note that no need
+                // to unregister this monitor. This should be alive while Settings app is running.
+                super.register(context, null /* thread */, UserHandle.CURRENT, false);
+            }
+        }
+
+        public void unregisterMonitor() {
+            synchronized (mLock) {
+                if (mPackageManager == null) {
+                    return;
+                }
+                super.unregister();
+                mPackageManager = null;
+            }
+        }
+
+        // Covers installed, appeared external storage with the package, upgraded.
+        @Override
+        public void onPackageAppeared(String packageName, int reason) {
+            postPackageAvailable(packageName);
+        }
+
+        // Covers uninstalled, removed external storage with the package.
+        @Override
+        public void onPackageDisappeared(String packageName, int reason) {
+            postPackageUnavailable(packageName);
+        }
+
+        // Covers enabled, disabled.
+        @Override
+        public void onPackageModified(String packageName) {
+            try {
+                final int state = mPackageManager.getApplicationEnabledSetting(packageName);
+                if (state == PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+                        || state == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                    postPackageAvailable(packageName);
+                } else {
+                    postPackageUnavailable(packageName);
+                }
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "Package does not exist: " + packageName, e);
+            }
+        }
+
+        private void postPackageAvailable(final String packageName) {
+            getRegisteredHandler().postDelayed(() -> {
+                AccessibilityServicesMonitor.getInstance().onPackageAvailable(packageName);
+                InputMethodServicesMonitor.getInstance().onPackageAvailable(packageName);
+            }, DELAY_PROCESS_PACKAGE_CHANGE);
+        }
+
+        private void postPackageUnavailable(final String packageName) {
+            getRegisteredHandler().postDelayed(() -> {
+                AccessibilityServicesMonitor.getInstance().onPackageUnavailable(packageName);
+                InputMethodServicesMonitor.getInstance().onPackageUnavailable(packageName);
+            }, DELAY_PROCESS_PACKAGE_CHANGE);
+        }
+    }
+
+    // A singleton that holds list of available accessibility services and updates search index.
+    private static class AccessibilityServicesMonitor {
+
+        // Null if not initialized.
+        @Nullable private DatabaseIndexingManager mIndexManager;
+        private PackageManager mPackageManager;
+        private final List<String> mAccessibilityServices = new ArrayList<>();
+
+        private AccessibilityServicesMonitor() {}
+
+        private static class SingletonHolder {
+            private static final AccessibilityServicesMonitor INSTANCE =
+                    new AccessibilityServicesMonitor();
+        }
+
+        static AccessibilityServicesMonitor getInstance() {
+            return SingletonHolder.INSTANCE;
+        }
+
+        @VisibleForTesting
+        synchronized void resetForTesting() {
+            mIndexManager = null;
+        }
+
+        synchronized void initialize(Context context, DatabaseIndexingManager index) {
+            if (mIndexManager != null) return;
+            mIndexManager = index;
+            mPackageManager = context.getPackageManager();
+            mAccessibilityServices.clear();
+            buildIndex();
+
+            // Cache accessibility service packages to know when they go away.
+            AccessibilityManager accessibilityManager = (AccessibilityManager) context
+                    .getSystemService(Context.ACCESSIBILITY_SERVICE);
+            for (final AccessibilityServiceInfo accessibilityService
+                    : accessibilityManager.getInstalledAccessibilityServiceList()) {
+                ResolveInfo resolveInfo = accessibilityService.getResolveInfo();
+                if (resolveInfo != null && resolveInfo.serviceInfo != null) {
+                    mAccessibilityServices.add(resolveInfo.serviceInfo.packageName);
+                }
+            }
+        }
+
+        private void buildIndex() {
+            mIndexManager.updateFromClassNameResource(AccessibilitySettings.class.getName(),
+                    true /* includeInSearchResults */);
+        }
+
+        synchronized void onPackageAvailable(String packageName) {
+            if (mIndexManager == null) return;
+            if (mAccessibilityServices.contains(packageName)) return;
+
+            final Intent intent = getAccessibilityServiceIntent(packageName);
+            final List<ResolveInfo> services = mPackageManager
+                    .queryIntentServices(intent, 0 /* flags */);
+            if (services == null || services.isEmpty()) return;
+            mAccessibilityServices.add(packageName);
+            buildIndex();
+        }
+
+        synchronized void onPackageUnavailable(String packageName) {
+            if (mIndexManager == null) return;
+            if (!mAccessibilityServices.remove(packageName)) return;
+            buildIndex();
+        }
+    }
+
+    // A singleton that holds list of available input methods and updates search index.
+    // Also it monitors user dictionary changes and updates search index.
+    private static class InputMethodServicesMonitor extends ContentObserver {
+
+        private static final Uri ENABLED_INPUT_METHODS_CONTENT_URI =
+                Settings.Secure.getUriFor(Settings.Secure.ENABLED_INPUT_METHODS);
+
+        // Null if not initialized.
+        @Nullable private DatabaseIndexingManager mIndexManager;
+        private PackageManager mPackageManager;
+        private ContentResolver mContentResolver;
+        private final List<String> mInputMethodServices = new ArrayList<>();
+
+        private InputMethodServicesMonitor() {
+            // No need for handler because {@link #onChange(boolean,Uri)} is short and quick.
+            super(null /* handler */);
+        }
+
+        private static class SingletonHolder {
+            private static final InputMethodServicesMonitor INSTANCE =
+                    new InputMethodServicesMonitor();
+        }
+
+        static InputMethodServicesMonitor getInstance() {
+            return SingletonHolder.INSTANCE;
+        }
+
+        @VisibleForTesting
+        synchronized void resetForTesting() {
+            if (mIndexManager != null) {
+                mContentResolver.unregisterContentObserver(this /* observer */);
+            }
+            mIndexManager = null;
+        }
+
+        synchronized void initialize(Context context, DatabaseIndexingManager indexManager) {
+            final boolean hasFeatureIme = context.getPackageManager()
+                    .hasSystemFeature(PackageManager.FEATURE_INPUT_METHODS);
+            if (!hasFeatureIme) return;
+
+            if (mIndexManager != null) return;
+            mIndexManager = indexManager;
+            mPackageManager = context.getPackageManager();
+            mContentResolver = context.getContentResolver();
+            mInputMethodServices.clear();
+            // Build index of {@link UserDictionary}.
+            buildIndex(LanguageAndInputSettings.class);
+            // Build index of IMEs.
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
+
+            // Cache IME service packages to know when they go away.
+            final InputMethodManager inputMethodManager = (InputMethodManager) context
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            for (final InputMethodInfo inputMethod : inputMethodManager.getInputMethodList()) {
+                ServiceInfo serviceInfo = inputMethod.getServiceInfo();
+                if (serviceInfo != null) {
+                    mInputMethodServices.add(serviceInfo.packageName);
+                }
+            }
+
+            // TODO: Implements by JobScheduler with TriggerContentUri parameters.
+            // Watch for related content URIs.
+            mContentResolver.registerContentObserver(UserDictionary.Words.CONTENT_URI,
+                    true /* notifyForDescendants */, this /* observer */);
+            // Watch for changing enabled IMEs.
+            mContentResolver.registerContentObserver(ENABLED_INPUT_METHODS_CONTENT_URI,
+                    false /* notifyForDescendants */, this /* observer */);
+        }
+
+        private void buildIndex(Class<?> indexClass) {
+            mIndexManager.updateFromClassNameResource(indexClass.getName(),
+                    true /* includeInSearchResults */);
+        }
+
+        synchronized void onPackageAvailable(String packageName) {
+            if (mIndexManager == null) return;
+            if (mInputMethodServices.contains(packageName)) return;
+
+            final Intent intent = getIMEServiceIntent(packageName);
+            final List<ResolveInfo> services = mPackageManager
+                    .queryIntentServices(intent, 0 /* flags */);
+            if (services == null || services.isEmpty()) return;
+            mInputMethodServices.add(packageName);
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
+        }
+
+        synchronized void onPackageUnavailable(String packageName) {
+            if (mIndexManager == null) return;
+            if (!mInputMethodServices.remove(packageName)) return;
+            buildIndex(VirtualKeyboardFragment.class);
+            buildIndex(AvailableVirtualKeyboardFragment.class);
         }
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-            if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
-                Index.getInstance(mContext).updateFromClassNameResource(
-                        InputMethodAndLanguageSettings.class.getName(), true, true);
+            if (ENABLED_INPUT_METHODS_CONTENT_URI.equals(uri)) {
+                buildIndex(VirtualKeyboardFragment.class);
+                buildIndex(AvailableVirtualKeyboardFragment.class);
+            } else if (UserDictionary.Words.CONTENT_URI.equals(uri)) {
+                buildIndex(LanguageAndInputSettings.class);
             }
-        };
+        }
     }
 }

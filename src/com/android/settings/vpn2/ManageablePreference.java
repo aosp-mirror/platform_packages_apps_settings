@@ -23,7 +23,7 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
-import com.android.settings.GearPreference;
+import com.android.settings.widget.GearPreference;
 import com.android.settings.R;
 
 /**
@@ -87,7 +87,7 @@ public abstract class ManageablePreference extends GearPreference {
         final String[] states = res.getStringArray(R.array.vpn_states);
         String summary = (mState == STATE_NONE ? "" : states[mState]);
         if (mIsAlwaysOn) {
-            final String alwaysOnString = res.getString(R.string.vpn_always_on_active);
+            final String alwaysOnString = res.getString(R.string.vpn_always_on_summary_active);
             summary = TextUtils.isEmpty(summary) ? alwaysOnString : res.getString(
                     R.string.join_two_unrelated_items, summary, alwaysOnString);
         }

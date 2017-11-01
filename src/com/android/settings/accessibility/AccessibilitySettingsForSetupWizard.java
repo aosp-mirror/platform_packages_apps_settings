@@ -18,17 +18,14 @@ package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.view.accessibility.AccessibilityManager;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.DialogCreatable;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -38,22 +35,30 @@ import java.util.List;
  * Activity with the accessibility settings specific to Setup Wizard.
  */
 public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragment
-        implements DialogCreatable, Preference.OnPreferenceChangeListener {
-
-    private static final String TAG = AccessibilitySettingsForSetupWizard.class.getSimpleName();
+        implements Preference.OnPreferenceChangeListener {
 
     // Preferences.
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE =
             "screen_magnification_preference";
     private static final String SCREEN_READER_PREFERENCE = "screen_reader_preference";
+    private static final String SELECT_TO_SPEAK_PREFERENCE = "select_to_speak_preference";
     private static final String FONT_SIZE_PREFERENCE = "font_size_preference";
+
+    // Package names and service names used to identify screen reader and SelectToSpeak services.
+    private static final String SCREEN_READER_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    private static final String SCREEN_READER_SERVICE_NAME =
+            "com.google.android.marvin.talkback.TalkBackService";
+    private static final String SELECT_TO_SPEAK_PACKAGE_NAME = "com.google.android.marvin.talkback";
+    private static final String SELECT_TO_SPEAK_SERVICE_NAME =
+            "com.google.android.accessibility.selecttospeak.SelectToSpeakService";
 
     // Preference controls.
     private Preference mDisplayMagnificationPreference;
     private Preference mScreenReaderPreference;
+    private Preference mSelectToSpeakPreference;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.SUW_ACCESSIBILITY;
     }
 
@@ -64,12 +69,17 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
 
         mDisplayMagnificationPreference = findPreference(DISPLAY_MAGNIFICATION_PREFERENCE);
         mScreenReaderPreference = findPreference(SCREEN_READER_PREFERENCE);
+        mSelectToSpeakPreference = findPreference(SELECT_TO_SPEAK_PREFERENCE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateScreenReaderPreference();
+        updateAccessibilityServicePreference(mScreenReaderPreference,
+                findService(SCREEN_READER_PACKAGE_NAME, SCREEN_READER_SERVICE_NAME));
+        updateAccessibilityServicePreference(mSelectToSpeakPreference,
+                findService(SELECT_TO_SPEAK_PACKAGE_NAME, SELECT_TO_SPEAK_SERVICE_NAME));
+        configureMagnificationPreferenceIfNeeded(mDisplayMagnificationPreference);
     }
 
     @Override
@@ -87,25 +97,21 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
     public boolean onPreferenceTreeClick(Preference preference) {
         if (mDisplayMagnificationPreference == preference) {
             Bundle extras = mDisplayMagnificationPreference.getExtras();
-            extras.putString(AccessibilitySettings.EXTRA_TITLE,
-                    getString(R.string.accessibility_screen_magnification_title));
-            extras.putCharSequence(AccessibilitySettings.EXTRA_SUMMARY,
-                    getText(R.string.accessibility_screen_magnification_summary));
-            extras.putBoolean(AccessibilitySettings.EXTRA_CHECKED,
-                    Settings.Secure.getInt(getContentResolver(),
-                    Settings.Secure.ACCESSIBILITY_DISPLAY_MAGNIFICATION_ENABLED, 0) == 1);
+            extras.putBoolean(AccessibilitySettings.EXTRA_LAUNCHED_FROM_SUW, true);
         }
 
         return super.onPreferenceTreeClick(preference);
     }
 
-    private AccessibilityServiceInfo findFirstServiceWithSpokenFeedback() {
+    private AccessibilityServiceInfo findService(String packageName, String serviceName) {
         final AccessibilityManager manager =
                 getActivity().getSystemService(AccessibilityManager.class);
         final List<AccessibilityServiceInfo> accessibilityServices =
                 manager.getInstalledAccessibilityServiceList();
         for (AccessibilityServiceInfo info : accessibilityServices) {
-            if ((info.feedbackType & AccessibilityServiceInfo.FEEDBACK_SPOKEN) != 0) {
+            ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
+            if (packageName.equals(serviceInfo.packageName)
+                    && serviceName.equals(serviceInfo.name)) {
                 return info;
             }
         }
@@ -113,28 +119,25 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
         return null;
     }
 
-    private void updateScreenReaderPreference() {
-        // Find a screen reader.
-        AccessibilityServiceInfo info = findFirstServiceWithSpokenFeedback();
+    private void updateAccessibilityServicePreference(Preference preference,
+            AccessibilityServiceInfo info) {
         if (info == null) {
-            mScreenReaderPreference.setEnabled(false);
-        } else {
-            mScreenReaderPreference.setEnabled(true);
+            getPreferenceScreen().removePreference(preference);
+            return;
         }
 
         ServiceInfo serviceInfo = info.getResolveInfo().serviceInfo;
         String title = info.getResolveInfo().loadLabel(getPackageManager()).toString();
-        mScreenReaderPreference.setTitle(title);
-
+        preference.setTitle(title);
         ComponentName componentName = new ComponentName(serviceInfo.packageName, serviceInfo.name);
-        mScreenReaderPreference.setKey(componentName.flattenToString());
+        preference.setKey(componentName.flattenToString());
 
         // Update the extras.
-        Bundle extras = mScreenReaderPreference.getExtras();
+        Bundle extras = preference.getExtras();
         extras.putParcelable(AccessibilitySettings.EXTRA_COMPONENT_NAME, componentName);
 
         extras.putString(AccessibilitySettings.EXTRA_PREFERENCE_KEY,
-                mScreenReaderPreference.getKey());
+            preference.getKey());
         extras.putString(AccessibilitySettings.EXTRA_TITLE, title);
 
         String description = info.loadDescription(getPackageManager());
@@ -142,5 +145,19 @@ public class AccessibilitySettingsForSetupWizard extends SettingsPreferenceFragm
             description = getString(R.string.accessibility_service_default_description);
         }
         extras.putString(AccessibilitySettings.EXTRA_SUMMARY, description);
+    }
+
+    private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
+        // Some devices support only a single magnification mode. In these cases, we redirect to
+        // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
+        // single list item.
+        final Context context = preference.getContext();
+        if (!MagnificationPreferenceFragment.isApplicable(context.getResources())) {
+            preference.setFragment(
+                    ToggleScreenMagnificationPreferenceFragmentForSetupWizard.class.getName());
+            final Bundle extras = preference.getExtras();
+            MagnificationPreferenceFragment.populateMagnificationGesturesPreferenceExtras(extras,
+                    context);
+        }
     }
 }

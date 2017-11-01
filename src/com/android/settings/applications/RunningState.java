@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.ActivityThread;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -421,7 +420,7 @@ public class RunningState {
             
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(mProcessName,
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_ANY_USER);
                 if (ai.uid == mUid) {
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
@@ -439,7 +438,7 @@ public class RunningState {
             if (pkgs.length == 1) {
                 try {
                     ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
-                            PackageManager.GET_UNINSTALLED_PACKAGES);
+                            PackageManager.MATCH_ANY_USER);
                     mDisplayLabel = ai.loadLabel(pm);
                     mLabel = mDisplayLabel.toString();
                     mPackageInfo = ai;
@@ -481,7 +480,7 @@ public class RunningState {
             // Finally... whatever, just pick the first package's name.
             try {
                 ApplicationInfo ai = pm.getApplicationInfo(pkgs[0],
-                        PackageManager.GET_UNINSTALLED_PACKAGES);
+                        PackageManager.MATCH_ANY_USER);
                 mDisplayLabel = ai.loadLabel(pm);
                 mLabel = mDisplayLabel.toString();
                 mPackageInfo = ai;
@@ -501,7 +500,7 @@ public class RunningState {
                 si.mRunningService = service;
                 try {
                     si.mServiceInfo = ActivityThread.getPackageManager().getServiceInfo(
-                            service.service, PackageManager.GET_UNINSTALLED_PACKAGES,
+                            service.service, PackageManager.MATCH_ANY_USER,
                             UserHandle.getUserId(service.uid));
 
                     if (si.mServiceInfo == null) {
@@ -1320,7 +1319,7 @@ public class RunningState {
             for (int i=0; i<numProc; i++) {
                 pids[i] = mAllProcessItems.get(i).mPid;
             }
-            long[] pss = ActivityManagerNative.getDefault()
+            long[] pss = ActivityManager.getService()
                     .getProcessPss(pids);
             int bgIndex = 0;
             for (int i=0; i<pids.length; i++) {

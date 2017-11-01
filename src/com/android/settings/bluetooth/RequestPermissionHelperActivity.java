@@ -17,15 +17,22 @@
 package com.android.settings.bluetooth;
 
 import android.app.Activity;
+import android.app.admin.DevicePolicyManager;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.UserManager;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.app.AlertActivity;
 import com.android.internal.app.AlertController;
 import com.android.internal.util.ArrayUtils;
+import com.android.internal.util.CharSequences;
 import com.android.settings.R;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
@@ -45,7 +52,12 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
     public static final String ACTION_INTERNAL_REQUEST_BT_OFF =
             "com.android.settings.bluetooth.ACTION_INTERNAL_REQUEST_BT_OFF";
 
+    public static final String EXTRA_APP_LABEL =
+            "com.android.settings.bluetooth.extra.APP_LABEL";
+
     private LocalBluetoothAdapter mLocalAdapter;
+
+    private CharSequence mAppLabel;
 
     private int mTimeout = -1;
 
@@ -78,18 +90,29 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         switch (mRequest) {
             case RequestPermissionActivity.REQUEST_ENABLE: {
                 if (mTimeout < 0) {
-                    p.mMessage = getString(R.string.bluetooth_ask_enablement);
+                    p.mMessage = mAppLabel != null
+                            ? getString(R.string.bluetooth_ask_enablement, mAppLabel)
+                            : getString(R.string.bluetooth_ask_enablement_no_name);
                 } else if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
-                    p.mMessage = getString(
-                            R.string.bluetooth_ask_enablement_and_lasting_discovery);
+                    p.mMessage = mAppLabel != null
+                            ? getString(
+                                   R.string.bluetooth_ask_enablement_and_lasting_discovery,
+                                   mAppLabel)
+                            : getString(
+                                   R.string.bluetooth_ask_enablement_and_lasting_discovery_no_name);
                 } else {
-                    p.mMessage = getString(
-                            R.string.bluetooth_ask_enablement_and_discovery, mTimeout);
+                    p.mMessage = mAppLabel != null
+                            ? getString(R.string.bluetooth_ask_enablement_and_discovery,
+                                    mAppLabel, mTimeout)
+                            : getString(R.string.bluetooth_ask_enablement_and_discovery_no_name,
+                                    mTimeout);
                 }
             } break;
 
             case RequestPermissionActivity.REQUEST_DISABLE: {
-                p.mMessage = getString(R.string.bluetooth_ask_disablement);
+                p.mMessage = mAppLabel != null
+                        ? getString(R.string.bluetooth_ask_disablement, mAppLabel)
+                        : getString(R.string.bluetooth_ask_disablement_no_name);
             } break;
         }
 
@@ -104,8 +127,19 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
         switch (mRequest) {
             case RequestPermissionActivity.REQUEST_ENABLE:
             case RequestPermissionActivity.REQUEST_ENABLE_DISCOVERABLE: {
-                mLocalAdapter.enable();
-                setResult(Activity.RESULT_OK);
+                UserManager userManager = getSystemService(UserManager.class);
+                if (userManager.hasUserRestriction(UserManager.DISALLOW_BLUETOOTH)) {
+                    // If Bluetooth is disallowed, don't try to enable it, show policy transparency
+                    // message instead.
+                    DevicePolicyManager dpm = getSystemService(DevicePolicyManager.class);
+                    Intent intent = dpm.createAdminSupportIntent(UserManager.DISALLOW_BLUETOOTH);
+                    if (intent != null) {
+                        startActivity(intent);
+                    }
+                } else {
+                    mLocalAdapter.enable();
+                    setResult(Activity.RESULT_OK);
+                }
             } break;
 
             case RequestPermissionActivity.REQUEST_DISABLE: {
@@ -144,6 +178,8 @@ public class RequestPermissionHelperActivity extends AlertActivity implements
             Log.e(TAG, "Error: there's a problem starting Bluetooth");
             return false;
         }
+
+        mAppLabel = getIntent().getCharSequenceExtra(EXTRA_APP_LABEL);
 
         mLocalAdapter = manager.getBluetoothAdapter();
 

@@ -26,8 +26,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
@@ -41,7 +41,7 @@ import java.util.Locale;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends InstrumentedFragment
+public class UserDictionaryAddWordFragment extends InstrumentedPreferenceFragment
         implements AdapterView.OnItemSelectedListener,
         com.android.internal.app.LocalePicker.LocaleSelectionListener {
 
@@ -86,7 +86,7 @@ public class UserDictionaryAddWordFragment extends InstrumentedFragment
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         MenuItem actionItem = menu.add(0, OPTIONS_MENU_DELETE, 0, R.string.delete)
-                .setIcon(android.R.drawable.ic_menu_delete);
+                .setIcon(R.drawable.ic_delete);
         actionItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
                 MenuItem.SHOW_AS_ACTION_WITH_TEXT);
     }
@@ -110,7 +110,7 @@ public class UserDictionaryAddWordFragment extends InstrumentedFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.INPUTMETHOD_USER_DICTIONARY_ADD_WORD;
     }
 

@@ -17,6 +17,7 @@ package com.android.settings.datausage;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -25,15 +26,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
@@ -162,6 +162,9 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         final int N = apps.size();
         for (int i = 0; i < N; i++) {
             AppEntry entry = apps.get(i);
+            if (!shouldAddPreference(entry)) {
+                continue;
+            }
             String key = entry.info.packageName + "|" + entry.info.uid;
             AccessPreference preference = (AccessPreference) getCachedPreference(key);
             if (preference == null) {
@@ -204,7 +207,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
     }
 
@@ -213,12 +216,26 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         if (preference instanceof AccessPreference) {
             AccessPreference accessPreference = (AccessPreference) preference;
             boolean whitelisted = newValue == Boolean.TRUE;
+            logSpecialPermissionChange(whitelisted, accessPreference.mEntry.info.packageName);
             mDataSaverBackend.setIsWhitelisted(accessPreference.mEntry.info.uid,
                     accessPreference.mEntry.info.packageName, whitelisted);
             accessPreference.mState.isDataSaverWhitelisted = whitelisted;
             return true;
         }
         return false;
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean whitelisted, String packageName) {
+        int logCategory = whitelisted ? MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_UNL_DATA_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
+    }
+
+    @VisibleForTesting
+    boolean shouldAddPreference(AppEntry app) {
+        return app != null && UserHandle.isApp(app.info.uid);
     }
 
     private class AccessPreference extends SwitchPreference implements DataSaverBackend.Listener {

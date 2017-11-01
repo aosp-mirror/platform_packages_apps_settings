@@ -46,7 +46,6 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
         // Finish configuring the content view.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        setIsDrawerPresent(false);
     }
 
     @Override
@@ -85,8 +84,8 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public void startPreferencePanel(String fragmentClass, Bundle args, int titleRes,
-            CharSequence titleText, Fragment resultTo, int resultRequestCode) {
+    public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
+            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
         // Set the title.
         if (!TextUtils.isEmpty(titleText)) {
             setTitle(titleText);

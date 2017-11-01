@@ -17,10 +17,12 @@
 
 <com.android.setupwizardlib.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
+    style="?attr/fingerprint_layout_theme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="?attr/fingerprint_layout_theme">
+    app:suwFooter="@layout/fingerprint_enroll_finish_base_footer">
 
     <LinearLayout
         style="@style/SuwContentFrame"
@@ -32,71 +34,29 @@
 
         <TextView
             android:id="@+id/message"
-            style="@style/TextAppearance.FingerprintMessage"
+            style="@style/SuwDescription.Glif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/suw_description_glif_margin_top"
+            android:minLines="3"
             android:text="@string/security_settings_fingerprint_enroll_finish_message"/>
 
-        <TextView
-            android:id="@+id/message_secondary"
-            style="@style/TextAppearance.FingerprintMessage"
+        <com.android.setupwizardlib.view.FillContentLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/suw_description_glif_margin_top"
-            android:text="@string/setup_fingerprint_enroll_finish_message_secondary"
-            android:textColor="?android:attr/textColorSecondary"
-            android:visibility="gone" />
+            android:layout_weight="1"
+            android:maxWidth="@dimen/fingerprint_finish_max_size"
+            android:maxHeight="@dimen/fingerprint_finish_max_size">
 
-        <View
-            android:layout_height="24dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/fingerprint_in_app_indicator"
+                style="@style/SuwContentIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@android:string/fingerprint_icon_content_description"
+                android:src="@drawable/fp_app_indicator" />
 
-        <ImageView
-            android:id="@+id/fingerprint_in_app_indicator"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="5"
-            android:minHeight="@dimen/fingerprint_in_app_indicator_min_size"
-            android:minWidth="@dimen/fingerprint_in_app_indicator_min_size"
-            android:maxHeight="@dimen/fingerprint_in_app_indicator_max_size"
-            android:maxWidth="@dimen/fingerprint_in_app_indicator_max_size"
-            android:layout_gravity="center_horizontal"
-            android:contentDescription="@android:string/fingerprint_icon_content_description"
-            android:src="@drawable/fp_app_indicator" />
-
-        <View
-            android:layout_height="24dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:orientation="horizontal">
-
-            <Button
-                style="@style/SetupWizardButton.Negative"
-                android:id="@+id/add_another_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/fingerprint_enroll_button_add" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <Button
-                style="@style/SetupWizardButton.Positive"
-                android:id="@+id/next_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/security_settings_fingerprint_enroll_done" />
-
-        </LinearLayout>
+        </com.android.setupwizardlib.view.FillContentLayout>
 
     </LinearLayout>
 

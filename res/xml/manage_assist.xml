@@ -16,15 +16,19 @@
   -->
 
 <PreferenceScreen
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
-        android:key="manage_assist">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/assist_and_voice_input_title">
 
-    <com.android.settings.applications.DefaultAssistPreference
-            android:key="default_assist"
-            android:title="@string/default_assist_title"
-            android:summary="@string/default_assist_none"
-            />
+    <com.android.settings.widget.GearPreference
+        android:key="default_assist"
+        android:title="@string/default_assist_title"
+        android:summary="@string/app_list_preference_none"
+        android:fragment="com.android.settings.applications.assist.DefaultAssistPicker"/>
+
+    <Preference
+        android:key="gesture_assist_application"
+        android:title="@string/assist_gesture_title"
+        android:fragment="com.android.settings.gestures.AssistGestureSettings"/>
 
     <SwitchPreference
         android:key="context"
@@ -37,19 +41,13 @@
         android:summary="@string/assist_access_screenshot_summary"/>
 
     <SwitchPreference
-            android:key="flash"
-            android:title="@string/assist_flash_title"
-            android:summary="@string/assist_flash_summary"
-    />
+        android:key="flash"
+        android:title="@string/assist_flash_title"
+        android:summary="@string/assist_flash_summary"/>
 
-    <com.android.settings.voice.VoiceInputListPreference
-            android:key="voice_input_settings"
-            android:title="@string/voice_input_settings_title"
-            />
-
-    <com.android.settings.DividerPreference
-        android:summary="@string/assist_footer"
-        android:selectable="false"
-        settings:allowDividerAbove="true" />
+    <com.android.settings.widget.GearPreference
+        android:key="voice_input_settings"
+        android:title="@string/voice_input_settings_title"
+        android:fragment="com.android.settings.applications.assist.DefaultVoiceInputPicker"/>
 
 </PreferenceScreen>

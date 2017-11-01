@@ -18,32 +18,53 @@ package com.android.settings.dashboard.conditional;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import android.util.Log;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settingslib.WirelessUtils;
 
 public class AirplaneModeCondition extends Condition {
+    public static String TAG = "APM_Condition";
+
+    private final Receiver mReceiver;
+
+    private static final IntentFilter AIRPLANE_MODE_FILTER =
+        new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 
     public AirplaneModeCondition(ConditionManager conditionManager) {
         super(conditionManager);
+        mReceiver = new Receiver();
     }
 
     @Override
     public void refreshState() {
+        Log.d(TAG, "APM condition refreshed");
         setActive(WirelessUtils.isAirplaneModeOn(mManager.getContext()));
     }
 
     @Override
-    protected Class<?> getReceiverClass() {
-        return Receiver.class;
+    protected BroadcastReceiver getReceiver() {
+        return mReceiver;
+    }
+
+    @Override
+    protected IntentFilter getIntentFilter() {
+        return AIRPLANE_MODE_FILTER;
     }
 
     @Override
     public Icon getIcon() {
         return Icon.createWithResource(mManager.getContext(), R.drawable.ic_airplane);
+    }
+
+    @Override
+    protected void setActive(boolean active) {
+        super.setActive(active);
+        Log.d(TAG, "setActive was called with " + active);
     }
 
     @Override
@@ -64,7 +85,7 @@ public class AirplaneModeCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.WirelessSettingsActivity.class));
+                Settings.NetworkDashboardActivity.class));
     }
 
     @Override

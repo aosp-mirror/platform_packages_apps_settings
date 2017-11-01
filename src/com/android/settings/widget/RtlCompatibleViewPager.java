@@ -17,10 +17,12 @@
 package com.android.settings.widget;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.os.Parcel;
 
 import java.util.Locale;
 
@@ -54,6 +56,23 @@ public final class RtlCompatibleViewPager extends ViewPager {
         super.setCurrentItem(getRtlAwareIndex(item));
     }
 
+    @Override
+    public Parcelable onSaveInstanceState() {
+        Parcelable parcelable = super.onSaveInstanceState();
+
+        RtlSavedState rtlSavedState = new RtlSavedState(parcelable);
+        rtlSavedState.position = getCurrentItem();
+        return rtlSavedState;
+    }
+
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        RtlSavedState rtlSavedState = (RtlSavedState) state;
+        super.onRestoreInstanceState(rtlSavedState.getSuperState());
+
+        setCurrentItem(rtlSavedState.position);
+    }
+
     /**
      * Get a "RTL friendly" index. If the locale is LTR, the index is returned as is.
      * Otherwise it's transformed so view pager can render views using the new index for RTL. For
@@ -70,4 +89,44 @@ public final class RtlCompatibleViewPager extends ViewPager {
         }
         return index;
     }
+
+    static class RtlSavedState extends BaseSavedState {
+        int position;
+
+        public RtlSavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        private RtlSavedState(Parcel in, ClassLoader loader) {
+            super(in, loader);
+            position = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(position);
+        }
+
+        public static final Parcelable.ClassLoaderCreator<RtlSavedState> CREATOR
+                = new Parcelable.ClassLoaderCreator<RtlSavedState>() {
+            @Override
+            public RtlSavedState createFromParcel(Parcel source,
+                    ClassLoader loader) {
+                return new RtlSavedState(source, loader);
+            }
+
+            @Override
+            public RtlSavedState createFromParcel(Parcel in) {
+                return new RtlSavedState(in, null);
+            }
+
+            @Override
+            public RtlSavedState[] newArray(int size) {
+                return new RtlSavedState[size];
+            }
+        };
+
+    }
+
 }

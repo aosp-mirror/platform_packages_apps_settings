@@ -16,10 +16,14 @@
 
 package com.android.settings;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,21 +35,29 @@ import android.os.Environment;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
+import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device to a clean "just out of the box"
@@ -63,11 +75,21 @@ public class MasterClear extends OptionsMenuFragment {
     private static final int KEYGUARD_REQUEST = 55;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
+    static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
     private View mContentView;
     private Button mInitiateButton;
     private View mExternalStorageContainer;
-    private CheckBox mExternalStorage;
+    @VisibleForTesting CheckBox mExternalStorage;
+    private ScrollView mScrollView;
+
+    private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
+        @Override
+        public void onGlobalLayout() {
+            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(mOnGlobalLayoutListener);
+            mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
+        }
+    };
 
     /**
      * Keyguard validation is run using the standard {@link ConfirmLockPattern}
@@ -98,10 +120,14 @@ public class MasterClear extends OptionsMenuFragment {
         }
     }
 
-    private void showFinalConfirmation() {
+    @VisibleForTesting
+    void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        ((SettingsActivity) getActivity()).startPreferencePanel(MasterClearConfirm.class.getName(),
+        // TODO: Offer the user a choice to wipe eSIMs when it is technically feasible to do so.
+        args.putBoolean(ERASE_ESIMS_EXTRA, true);
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
     }
 
@@ -109,11 +135,23 @@ public class MasterClear extends OptionsMenuFragment {
      * If the user clicks to begin the reset sequence, we next require a
      * keyguard confirmation if the user has currently enabled one.  If there
      * is no keyguard available, we simply go to the final confirmation prompt.
+     *
+     * If the user is in demo mode, route to the demo mode app for confirmation.
      */
-    private final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
+    @VisibleForTesting
+    protected final Button.OnClickListener mInitiateListener = new Button.OnClickListener() {
 
-        public void onClick(View v) {
-            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+        public void onClick(View view) {
+            final Context context = view.getContext();
+            if (Utils.isDemoUser(context)) {
+                final ComponentName componentName = Utils.getDeviceOwnerComponent(context);
+                if (componentName != null) {
+                    final Intent requestFactoryReset = new Intent()
+                            .setPackage(componentName.getPackageName())
+                            .setAction(Intent.ACTION_FACTORY_RESET);
+                    context.startActivity(requestFactoryReset);
+                }
+            } else if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 showFinalConfirmation();
             }
         }
@@ -136,6 +174,7 @@ public class MasterClear extends OptionsMenuFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -168,12 +207,68 @@ public class MasterClear extends OptionsMenuFragment {
             });
         }
 
+        if (showWipeEuicc()) {
+            final View esimAlsoErased = mContentView.findViewById(R.id.also_erases_esim);
+            esimAlsoErased.setVisibility(View.VISIBLE);
+
+            final View noCancelMobilePlan = mContentView.findViewById(R.id.no_cancel_mobile_plan);
+            noCancelMobilePlan.setVisibility(View.VISIBLE);
+        }
+
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         loadAccountList(um);
         StringBuffer contentDescription = new StringBuffer();
         View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
         getContentDescription(masterClearContainer, contentDescription);
         masterClearContainer.setContentDescription(contentDescription);
+
+        // Set the status of initiateButton based on scrollview
+        mScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX,
+                int oldScrollY) {
+                if (v instanceof ScrollView && hasReachedBottom((ScrollView) v)) {
+                    mInitiateButton.setEnabled(true);
+                }
+            }
+        });
+
+        // Set the initial state of the initiateButton
+        mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+    }
+
+    /**
+     * Whether to show strings indicating that the eUICC will be wiped.
+     *
+     * <p>We show the strings on any device which supports eUICC as long as the eUICC was ever
+     * provisioned (that is, at least one profile was ever downloaded onto it).
+     */
+    @VisibleForTesting
+    boolean showWipeEuicc() {
+        Context context = getContext();
+        if (!isEuiccEnabled(context)) {
+            return false;
+        }
+        ContentResolver cr = context.getContentResolver();
+        return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
+    }
+
+    @VisibleForTesting
+    protected boolean isEuiccEnabled(Context context) {
+        EuiccManager euiccManager = (EuiccManager) context.getSystemService(Context.EUICC_SERVICE);
+        return euiccManager.isEnabled();
+    }
+
+    @VisibleForTesting
+    boolean hasReachedBottom(final ScrollView scrollView) {
+        if (scrollView.getChildCount() < 1) {
+            return true;
+        }
+
+        final View view = scrollView.getChildAt(0);
+        final int diff = view.getBottom() - (scrollView.getHeight() + scrollView.getScrollY());
+
+        return diff <= 0;
     }
 
     private void getContentDescription(View v, StringBuffer description) {
@@ -228,11 +323,13 @@ public class MasterClear extends OptionsMenuFragment {
                     .getAuthenticatorTypesAsUser(profileId);
             final int M = descs.length;
 
-            View titleView = Utils.inflateCategoryHeader(inflater, contents);
-            final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
-            titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
-                    : R.string.category_personal);
-            contents.addView(titleView);
+            if (profilesSize > 1) {
+                View titleView = Utils.inflateCategoryHeader(inflater, contents);
+                final TextView titleText = (TextView) titleView.findViewById(android.R.id.title);
+                titleText.setText(userInfo.isManagedProfile() ? R.string.category_work
+                        : R.string.category_personal);
+                contents.addView(titleView);
+            }
 
             for (int i = 0; i < N; i++) {
                 Account account = accounts[i];
@@ -265,10 +362,9 @@ public class MasterClear extends OptionsMenuFragment {
                     icon = context.getPackageManager().getDefaultActivityIcon();
                 }
 
-                TextView child = (TextView)inflater.inflate(R.layout.master_clear_account,
-                        contents, false);
-                child.setText(account.name);
-                child.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+                View child = inflater.inflate(R.layout.master_clear_account, contents, false);
+                ((ImageView) child.findViewById(android.R.id.icon)).setImageDrawable(icon);
+                ((TextView) child.findViewById(android.R.id.title)).setText(account.name);
                 contents.addView(child);
             }
         }
@@ -286,11 +382,13 @@ public class MasterClear extends OptionsMenuFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                getActivity(), UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
-        final UserManager um = UserManager.get(getActivity());
-        if (!um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
-                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId())) {
+        final Context context = getContext();
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfRestrictionEnforced(context,
+                UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
+        final UserManager um = UserManager.get(context);
+        final boolean disallow = !um.isAdminUser() || RestrictedLockUtils.hasBaseUserRestriction(
+                context, UserManager.DISALLOW_FACTORY_RESET, UserHandle.myUserId());
+        if (disallow && !Utils.isDemoUser(context)) {
             return inflater.inflate(R.layout.master_clear_disallowed_screen, null);
         } else if (admin != null) {
             View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
@@ -306,7 +404,7 @@ public class MasterClear extends OptionsMenuFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.MASTER_CLEAR;
     }
 }
