@@ -19,7 +19,6 @@ package com.android.settings.applications.manageapplications;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.InsetDrawable;
 import android.os.UserHandle;
 import android.support.annotation.WorkerThread;
 import android.text.format.Formatter;
@@ -36,7 +35,6 @@ public class PhotosViewHolderController implements FileViewHolderController {
     private static final String TAG = "PhotosViewHolderCtrl";
 
     private static final String IMAGE_MIME_TYPE = "image/*";
-    private static final int INSET_SIZE = 24; // dp
 
     private Context mContext;
     private StorageStatsSource mSource;
@@ -72,8 +70,7 @@ public class PhotosViewHolderController implements FileViewHolderController {
 
     @Override
     public void setupView(ApplicationViewHolder holder) {
-        holder.setIcon(
-                new InsetDrawable(mContext.getDrawable(R.drawable.ic_photo_library), INSET_SIZE));
+        holder.setIcon(R.drawable.ic_photo_library);
         holder.setTitle(mContext.getText(R.string.storage_detail_images));
         holder.setSummary(Formatter.formatFileSize(mContext, mFilesSize));
     }

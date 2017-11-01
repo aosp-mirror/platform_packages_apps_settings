@@ -61,6 +61,7 @@ import android.widget.TextView;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 
 import java.net.Inet4Address;
@@ -115,8 +116,6 @@ public class WifiConfigController implements TextWatcher,
     private final ArrayAdapter<String> mPhase2PeapAdapter;
     /* Full list of phase2 methods */
     private final ArrayAdapter<String> mPhase2FullAdapter;
-
-    private final Handler mTextViewChangedHandler;
 
     // e.g. AccessPoint.SECURITY_NONE
     private int mAccessPointSecurity;
@@ -175,7 +174,6 @@ public class WifiConfigController implements TextWatcher,
                 accessPoint.getSecurity();
         mMode = mode;
 
-        mTextViewChangedHandler = new Handler();
         mContext = mConfigUi.getContext();
         final Resources res = mContext.getResources();
 
@@ -1258,12 +1256,10 @@ public class WifiConfigController implements TextWatcher,
 
     @Override
     public void afterTextChanged(Editable s) {
-        mTextViewChangedHandler.post(new Runnable() {
-                public void run() {
-                    showWarningMessagesIfAppropriate();
-                    enableSubmitIfAppropriate();
-                }
-            });
+        ThreadUtils.postOnMainThread(() -> {
+            showWarningMessagesIfAppropriate();
+            enableSubmitIfAppropriate();
+        });
     }
 
     @Override

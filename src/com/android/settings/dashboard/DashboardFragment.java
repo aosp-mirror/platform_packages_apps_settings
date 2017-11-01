@@ -183,6 +183,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
     }
 
+    @Override
+    protected abstract int getPreferenceScreenResId();
+
     protected <T extends AbstractPreferenceController> T getPreferenceController(Class<T> clazz) {
         AbstractPreferenceController controller = mPreferenceControllers.get(clazz);
         return (T) controller;

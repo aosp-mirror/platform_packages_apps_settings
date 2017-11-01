@@ -40,6 +40,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.widget.AppPreference;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -268,7 +270,7 @@ class SettingsInjector {
         PackageManager pm = mContext.getPackageManager();
         Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
         Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
-        Preference pref = new Preference(prefContext);
+        Preference pref = new AppPreference(prefContext);
         pref.setTitle(info.title);
         pref.setSummary(null);
         pref.setIcon(icon);

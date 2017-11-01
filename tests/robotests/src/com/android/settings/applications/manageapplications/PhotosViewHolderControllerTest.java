@@ -26,7 +26,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
 import android.os.storage.VolumeInfo;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -67,9 +66,8 @@ public class PhotosViewHolderControllerTest {
                 new PhotosViewHolderController(
                         mContext, mSource, mVolume.fsUuid, new UserHandle(0));
 
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
-        mView = ApplicationViewHolder.newView(inflater, new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView);
+        mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
     }
 
     @Test

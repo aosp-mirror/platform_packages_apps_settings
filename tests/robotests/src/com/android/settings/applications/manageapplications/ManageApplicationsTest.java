@@ -18,6 +18,10 @@ package com.android.settings.applications.manageapplications;
 
 import static com.android.settings.applications.manageapplications.AppFilterRegistry
         .FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.ManageApplications
+        .LIST_TYPE_MAIN;
+import static com.android.settings.applications.manageapplications.ManageApplications
+        .LIST_TYPE_NOTIFICATION;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -102,7 +106,7 @@ public class ManageApplicationsTest {
     @Test
     public void updateMenu_mainListType_showAppReset() {
         setUpOptionMenus();
-        ReflectionHelpers.setField(mFragment, "mListType", ManageApplications.LIST_TYPE_MAIN);
+        ReflectionHelpers.setField(mFragment, "mListType", LIST_TYPE_MAIN);
         ReflectionHelpers.setField(mFragment, "mOptionsMenu", mMenu);
 
         mFragment.updateOptionsMenu();
@@ -180,6 +184,21 @@ public class ManageApplicationsTest {
         adapter.updateLoading();
 
         verify(loadingViewController).showLoadingViewDelayed();
+    }
+
+    @Test
+    public void shouldUseStableItemHeight_mainType_yes() {
+        assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
+                LIST_TYPE_MAIN))
+                .isTrue();
+        assertThat(ManageApplications.ApplicationsAdapter.shouldUseStableItemHeight(
+                LIST_TYPE_NOTIFICATION))
+                .isFalse();
+    }
+
+    @Test
+    public void shouldUseStableItemHeight_notificationType_no() {
+
     }
 
     @Test

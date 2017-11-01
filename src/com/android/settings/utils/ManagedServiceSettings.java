@@ -21,7 +21,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -46,6 +45,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.notification.EmptyTextSettings;
+import com.android.settings.widget.AppSwitchPreference;
 
 import java.util.Collections;
 import java.util.List;
@@ -127,7 +127,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 Log.e(TAG, "can't find package name", e);
             }
             final String summary = service.loadLabel(mPm).toString();
-            final SwitchPreference pref = new SwitchPreference(getPrefContext());
+            final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
             pref.setPersistent(false);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(service, service.applicationInfo,
                     UserHandle.getUserId(service.applicationInfo.uid)));

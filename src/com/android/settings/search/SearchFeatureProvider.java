@@ -19,10 +19,14 @@ package com.android.settings.search;
 import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.content.Context;
+import android.util.Pair;
 import android.view.View;
 
 import com.android.settings.dashboard.SiteMapManager;
-import com.android.settings.search.ranking.SearchResultsRankerCallback;
+
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.FutureTask;
 
 /**
  * FeatureProvider for Settings Search
@@ -44,25 +48,30 @@ public interface SearchFeatureProvider {
             throws SecurityException, IllegalArgumentException;
 
     /**
+     * Returns a new loader to get settings search results.
+     */
+    SearchResultLoader getSearchResultLoader(Context context, String query);
+
+    /**
      * Returns a new loader to search in index database.
      */
-    DatabaseResultLoader getDatabaseSearchLoader(Context context, String query);
+    DatabaseResultLoader getStaticSearchResultTask(Context context, String query);
 
     /**
      * Returns a new loader to search installed apps.
      */
-    InstalledAppResultLoader getInstalledAppSearchLoader(Context context, String query);
+    InstalledAppResultLoader getInstalledAppSearchTask(Context context, String query);
 
     /**
      * Returns a new loader to search accessibility services.
      */
-    AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
+    AccessibilityServiceResultLoader getAccessibilityServiceResultTask(Context context,
             String query);
 
     /**
      * Returns a new loader to search input devices.
      */
-    InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query);
+    InputDeviceResultLoader getInputDeviceResultTask(Context context, String query);
 
     /**
      * Returns a new loader to get all recently saved queries search terms.
@@ -96,6 +105,11 @@ public interface SearchFeatureProvider {
     boolean isIndexingComplete(Context context);
 
     /**
+     * @return a {@link ExecutorService} to be shared between search tasks.
+     */
+    ExecutorService getExecutorService();
+
+    /**
      * Initializes the feedback button in case it was dismissed.
      */
     default void initFeedbackButton() {
@@ -112,23 +126,6 @@ public interface SearchFeatureProvider {
      * {@link #showFeedbackButton(SearchFragment fragment, View view) showFeedbackButton}
      */
     default void hideFeedbackButton() {
-    }
-
-    /**
-     * Query search results based on the input query.
-     *
-     * @param context                     application context
-     * @param query                       input user query
-     * @param searchResultsRankerCallback {@link SearchResultsRankerCallback}
-     */
-    default void querySearchResults(Context context, String query,
-            SearchResultsRankerCallback searchResultsRankerCallback) {
-    }
-
-    /**
-     * Cancel pending search query
-     */
-    default void cancelPendingSearchQuery(Context context) {
     }
 
     /**
@@ -161,4 +158,10 @@ public interface SearchFeatureProvider {
     default void searchRankingWarmup(Context context) {
     }
 
+    /**
+     * Return a FutureTask to get a list of scores for search results.
+     */
+    default FutureTask<List<Pair<String, Float>>> getRankerTask(Context context, String query) {
+        return null;
+    }
 }

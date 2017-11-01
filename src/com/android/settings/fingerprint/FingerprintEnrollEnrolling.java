@@ -32,6 +32,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,6 +76,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
      */
     private static final int ICON_TOUCH_COUNT_SHOW_UNTIL_DIALOG_SHOWN = 3;
 
+    private static final VibrationEffect VIBRATE_EFFECT_ERROR =
+            VibrationEffect.createWaveform(new long[] {0, 5, 55, 60}, -1);
+
     private ProgressBar mProgressBar;
     private ObjectAnimator mProgressAnim;
     private TextView mStartMessage;
@@ -90,6 +95,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     private int mIndicatorBackgroundRestingColor;
     private int mIndicatorBackgroundActivatedColor;
     private boolean mRestoring;
+    private Vibrator mVibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +106,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
         mProgressBar = (ProgressBar) findViewById(R.id.fingerprint_progress_bar);
+        mVibrator = getSystemService(Vibrator.class);
 
         Button skipButton = findViewById(R.id.skip_button);
         skipButton.setOnClickListener(this);
@@ -368,6 +375,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             mErrorText.setAlpha(1f);
             mErrorText.setTranslationY(0f);
         }
+        if (isResumed()) {
+            mVibrator.vibrate(VIBRATE_EFFECT_ERROR);
+        }
     }
 
     private void clearError() {
@@ -378,12 +388,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
                             R.dimen.fingerprint_error_text_disappear_distance))
                     .setDuration(100)
                     .setInterpolator(mFastOutLinearInInterpolator)
-                    .withEndAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            mErrorText.setVisibility(View.INVISIBLE);
-                        }
-                    })
+                    .withEndAction(() -> mErrorText.setVisibility(View.INVISIBLE))
                     .start();
         }
     }

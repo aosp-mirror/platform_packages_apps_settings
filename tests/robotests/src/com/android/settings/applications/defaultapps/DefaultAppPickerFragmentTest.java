@@ -17,6 +17,14 @@
 package com.android.settings.applications.defaultapps;
 
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
@@ -24,9 +32,10 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 
 import org.junit.Before;
@@ -40,13 +49,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -95,6 +97,12 @@ public class DefaultAppPickerFragmentTest {
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_UPDATE_DEFAULT_APP),
                 eq("test_pkg"),
                 any(Pair.class));
+    }
+
+    @Test
+    public void shouldHaveAppPreferenceLayout() {
+        assertThat(mFragment.getRadioButtonPreferenceCustomLayoutResId())
+                .isEqualTo(R.layout.preference_app);
     }
 
     public static class TestFragment extends DefaultAppPickerFragment {

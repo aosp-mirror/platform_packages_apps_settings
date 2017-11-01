@@ -19,15 +19,13 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.widget.AppPreference;
 
 /**
  * Custom preference for displaying battery usage info as a bar and an icon on
@@ -36,8 +34,7 @@ import com.android.settings.Utils;
  * The battery usage info could be usage percentage or usage time. The preference
  * won't show any icon if it is null.
  */
-public class PowerGaugePreference extends Preference {
-    private final int mIconSize;
+public class PowerGaugePreference extends AppPreference {
 
     private BatteryEntry mInfo;
     private CharSequence mContentDescription;
@@ -64,7 +61,6 @@ public class PowerGaugePreference extends Preference {
         setWidgetLayoutResource(R.layout.preference_widget_summary);
         mInfo = info;
         mContentDescription = contentDescription;
-        mIconSize = context.getResources().getDimensionPixelSize(R.dimen.app_icon_size);
         mShowAnomalyIcon = false;
     }
 
@@ -107,8 +103,6 @@ public class PowerGaugePreference extends Preference {
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
         super.onBindViewHolder(view);
-        ImageView icon = (ImageView) view.findViewById(android.R.id.icon);
-        icon.setLayoutParams(new LinearLayout.LayoutParams(mIconSize, mIconSize));
 
         final TextView subtitle = (TextView) view.findViewById(R.id.widget_summary);
         subtitle.setText(mProgress);

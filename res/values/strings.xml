@@ -8658,27 +8658,6 @@
     <!-- Estimated wait time range for real time supports -->
     <string name="support_estimated_wait_time">~<xliff:g id="ESTIMATE" example="2 minutes">%1$s</xliff:g> wait</string>
 
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_computer">Computer</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_headset">Headset</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_phone">Phone</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_imaging">Imaging</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_headphone">Headphone</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_input_peripheral">Input Peripheral</string>
-
-    <!-- Message for telling the user the kind of BT device being displayed in list. -->
-    <string name="bluetooth_talkback_bluetooth">Bluetooth</string>
-
     <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_settings">Manage storage</string>
 
@@ -8801,7 +8780,8 @@
     <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked">Connect to the Internet or contact your carrier</string>
     <!-- setting enable OEM unlock Checkbox's summary to explain this Checkbox is disabled because this setting is unavailable on sim-locked devices. [CHAR_LIMIT=60] -->
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device">Unavailable on carrier-locked devices</string>
-
+    <!-- Information displayed after user locks OEM lock [Char Limit=None]-->
+    <string name="oem_lock_info_message">Please restart the device to enable device protection feature.</string>
     <string name="automatic_storage_manager_freed_bytes"><xliff:g id="size" example="3.25MB">%1$s</xliff:g> total made available\n\nLast ran on <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
     <!-- Title text for enabling web actions. [CHAR_LIMIT=60] -->
@@ -9035,6 +9015,11 @@
     <string name="default_theme">Default</string>
     <!-- Temporary reboot string, will be removed -->
     <string name="change_theme_reboot" translatable="false">Changing the theme requires a restart.</string>
+
+    <!-- Switch label to show operator name in the status bar [CHAR LIMIT=60] -->
+    <string name="show_operator_name_title">Network name</string>
+    <!-- Switch summary to show operator name in the status bar [CHAR LIMIT=NONE] -->
+    <string name="show_operator_name_summary">Display network name in status bar</string>
 
     <!-- Indicates if the automatic storage manager is enabled or not. [CHAR_LIMIT=40] -->
     <string name="storage_manager_indicator">Storage Manager: <xliff:g id="status" example="on">^1</xliff:g></string>

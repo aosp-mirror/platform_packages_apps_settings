@@ -16,6 +16,8 @@
 
 package com.android.settings.accounts;
 
+import static android.content.Intent.EXTRA_USER;
+
 import android.accounts.Account;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -25,12 +27,10 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 
-import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.widget.AppPreference;
 
-import static android.content.Intent.EXTRA_USER;
-
-public class AccountTypePreference extends Preference implements OnPreferenceClickListener {
+public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**
      * Title of the tile that is shown to the user.
      * @attr ref android.R.styleable#PreferenceHeader_title

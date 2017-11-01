@@ -22,6 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,33 +39,39 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
     private final TextView mAppName;
     private final ImageView mAppIcon;
 
+    private final boolean mKeepStableHeight;
+
+    @VisibleForTesting
+    View mSummaryContainer;
     @VisibleForTesting
     final TextView mSummary;
     @VisibleForTesting
     final TextView mDisabled;
 
-    ApplicationViewHolder(View itemView) {
+
+    ApplicationViewHolder(View itemView, boolean keepStableHeight) {
         super(itemView);
         mAppName = itemView.findViewById(android.R.id.title);
         mAppIcon = itemView.findViewById(android.R.id.icon);
-        mSummary = itemView.findViewById(R.id.widget_text1);
-        mDisabled = itemView.findViewById(R.id.widget_text2);
+        mSummaryContainer = itemView.findViewById(R.id.summary_container);
+        mSummary = itemView.findViewById(android.R.id.summary);
+        mDisabled = itemView.findViewById(R.id.appendix);
+        mKeepStableHeight = keepStableHeight;
     }
 
-    static View newView(LayoutInflater inflater, ViewGroup parent) {
-        final View root = LayoutInflater.from(parent.getContext())
+    static View newView(ViewGroup parent) {
+        return LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.preference_app, parent, false);
-        inflater.inflate(R.layout.widget_text_views,
-                root.findViewById(android.R.id.widget_frame));
-        return root;
     }
 
     void setSummary(CharSequence summary) {
         mSummary.setText(summary);
+        updateSummaryContainer();
     }
 
     void setSummary(@StringRes int summary) {
         mSummary.setText(summary);
+        updateSummaryContainer();
     }
 
     void setEnabled(boolean isEnabled) {
@@ -76,6 +83,10 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
             return;
         }
         mAppName.setText(title);
+    }
+
+    void setIcon(int drawableRes) {
+        mAppIcon.setImageResource(drawableRes);
     }
 
     void setIcon(Drawable icon) {
@@ -96,6 +107,17 @@ public class ApplicationViewHolder extends RecyclerView.ViewHolder {
         } else {
             mDisabled.setVisibility(View.GONE);
         }
+        updateSummaryContainer();
+    }
+
+    void updateSummaryContainer() {
+        if (mKeepStableHeight) {
+            mSummaryContainer.setVisibility(View.VISIBLE);
+            return;
+        }
+        final boolean hasContent =
+                !TextUtils.isEmpty(mDisabled.getText()) || !TextUtils.isEmpty(mSummary.getText());
+        mSummaryContainer.setVisibility(hasContent ? View.VISIBLE : View.GONE);
     }
 
     void updateSizeText(AppEntry entry, CharSequence invalidSizeStr, int whichSize) {

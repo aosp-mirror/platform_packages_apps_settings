@@ -133,26 +133,11 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void isSuggestionEnabled_isNotLowMemoryDevice_shouldReturnTrue() {
-        when(mActivityManager.isLowRamDevice()).thenReturn(false);
-
-        assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
-    }
-
-    @Test
     public void isSuggestionV2Enabled_isNotLowMemoryDevice_sysPropOn_shouldReturnTrue() {
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
         SettingsShadowSystemProperties.set(
                 FeatureFlagUtils.FFLAG_PREFIX + mProvider.FEATURE_FLAG_SUGGESTIONS_V2, "true");
         assertThat(mProvider.isSuggestionV2Enabled(mContext)).isTrue();
-    }
-
-    @Test
-    public void isSuggestionV2Enabled_isNotLowMemoryDevice_sysPropOff_shouldReturnTrue() {
-        when(mActivityManager.isLowRamDevice()).thenReturn(false);
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + mProvider.FEATURE_FLAG_SUGGESTIONS_V2, "false");
-        assertThat(mProvider.isSuggestionV2Enabled(mContext)).isFalse();
     }
 
     @Test

@@ -27,8 +27,6 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,6 +38,7 @@ import com.android.settings.R;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
+import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * Fragment for support tab in SettingsGoogle.
@@ -47,7 +46,6 @@ import com.android.settings.overlay.SupportFeatureProvider;
 public final class SupportFragment extends InstrumentedFragment implements View.OnClickListener,
         OnAccountsUpdateListener {
 
-    private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final ConnectivityManager.NetworkCallback mNetworkCallback =
             new ConnectivityManager.NetworkCallback() {
 
@@ -152,12 +150,9 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     }
 
     private void postConnectivityChanged() {
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (mSupportItemAdapter != null) {
-                    mSupportItemAdapter.setHasInternet(hasInternet());
-                }
+        ThreadUtils.postOnMainThread(() -> {
+            if (mSupportItemAdapter != null) {
+                mSupportItemAdapter.setHasInternet(hasInternet());
             }
         });
     }

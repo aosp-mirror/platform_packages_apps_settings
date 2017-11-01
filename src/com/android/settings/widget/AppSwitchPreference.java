@@ -14,26 +14,28 @@
  * limitations under the License.
  */
 
-package com.android.settings.search;
+package com.android.settings.widget;
 
 import android.content.Context;
+import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
+import android.view.View;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.android.settings.R;
 
-public class MockAccessibilityLoader extends AccessibilityServiceResultLoader {
+public class AppSwitchPreference extends SwitchPreference {
 
-    public MockAccessibilityLoader(Context context) {
-        super(context, "test_query", null);
+    public AppSwitchPreference(Context context) {
+        super(context);
+        setLayoutResource(R.layout.preference_app);
     }
 
     @Override
-    public Set<? extends SearchResult> loadInBackground() {
-        return new HashSet<>();
-    }
+    public void onBindViewHolder(PreferenceViewHolder view) {
+        super.onBindViewHolder(view);
 
-    @Override
-    protected void onDiscardResult(Set<? extends SearchResult> result) {
-
+        view.findViewById(R.id.summary_container)
+                .setVisibility(TextUtils.isEmpty(getSummary()) ? View.GONE : View.VISIBLE);
     }
 }

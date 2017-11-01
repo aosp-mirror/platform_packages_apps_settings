@@ -122,8 +122,8 @@ public final class BluetoothDevicePreference extends GearPreference implements
         // Null check is done at the framework
         setSummary(mCachedDevice.getConnectionSummary());
 
-        final Pair<Drawable, String> pair = Utils.getBtClassDrawableWithDescription(getContext(),
-                mCachedDevice);
+        final Pair<Drawable, String> pair = com.android.settingslib.bluetooth.Utils
+                .getBtClassDrawableWithDescription(getContext(), mCachedDevice);
         if (pair.first != null) {
             setIcon(pair.first);
             contentDescription = pair.second;

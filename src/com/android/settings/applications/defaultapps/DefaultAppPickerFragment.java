@@ -84,6 +84,11 @@ public abstract class DefaultAppPickerFragment extends RadioButtonPickerFragment
         }
     }
 
+    @Override
+    protected int getRadioButtonPreferenceCustomLayoutResId() {
+        return R.layout.preference_app;
+    }
+
     protected ConfirmationDialogFragment newConfirmationDialogFragment(String selectedKey,
             CharSequence confirmationMessage) {
         final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();

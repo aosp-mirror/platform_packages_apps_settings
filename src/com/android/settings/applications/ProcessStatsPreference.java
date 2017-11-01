@@ -18,14 +18,13 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.text.TextUtils;
 import android.text.format.Formatter;
 
 import android.util.Log;
-import com.android.settings.AppProgressPreference;
+import com.android.settings.widget.AppPreference;
 
-public class ProcessStatsPreference extends AppProgressPreference {
+public class ProcessStatsPreference extends AppPreference {
     static final String TAG = "ProcessStatsPreference";
 
     private ProcStatsPackageEntry mEntry;

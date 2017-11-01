@@ -26,8 +26,9 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.TwoTargetPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -77,6 +78,16 @@ public class DefaultAppPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setSummary(R.string.app_list_preference_none);
+    }
+
+    @Test
+    public void updateState_twoTargetPref_shouldUseSmallIcon() {
+        final TwoTargetPreference pref = mock(TwoTargetPreference.class);
+        mController = new TestPreferenceController(mContext);
+
+        mController.updateState(pref);
+
+        verify(pref).setUseSmallIcon(true);
     }
 
     private static class TestPreferenceController extends DefaultAppPreferenceController {

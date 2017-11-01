@@ -43,9 +43,9 @@ import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.AppPreference;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.location.RecentLocationApps;
 
@@ -211,21 +211,19 @@ public class LocationSettings extends LocationSettingsBase
 
         List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
-            RestrictedPreference pref = new RestrictedPreference(getPrefContext());
+            final AppPreference pref = new AppPreference(getPrefContext());
             pref.setSummary(request.contentDescription);
             pref.setIcon(request.icon);
             pref.setTitle(request.label);
             pref.setOnPreferenceClickListener(
                     new PackageEntryClickedListener(request.packageName, request.userHandle));
             recentLocationPrefs.add(pref);
-
         }
         if (recentLocationRequests.size() > 0) {
             addPreferencesSorted(recentLocationPrefs, mCategoryRecentLocationRequests);
         } else {
             // If there's no item to display, add a "No recent apps" item.
-            Preference banner = new Preference(getPrefContext());
-            banner.setLayoutResource(R.layout.location_list_no_item);
+            Preference banner = new AppPreference(getPrefContext());
             banner.setTitle(R.string.location_no_recent_apps);
             banner.setSelectable(false);
             mCategoryRecentLocationRequests.addPreference(banner);

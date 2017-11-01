@@ -16,6 +16,8 @@
 
 package com.android.settings.vpn2;
 
+import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
@@ -23,7 +25,6 @@ import android.view.View;
 
 import com.android.internal.net.VpnProfile;
 import com.android.settings.R;
-import static com.android.internal.net.LegacyVpnInfo.STATE_CONNECTED;
 
 /**
  * {@link android.support.v7.preference.Preference} tracks the underlying legacy vpn profile and
@@ -35,6 +36,7 @@ public class LegacyVpnPreference extends ManageablePreference {
     LegacyVpnPreference(Context context) {
         super(context, null /* attrs */);
         setIcon(R.drawable.ic_vpn_key);
+        setUseSmallIcon(true);
     }
 
     public VpnProfile getProfile() {
