@@ -16,8 +16,6 @@
 
 package com.android.settings.nfc;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -29,9 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settingslib.HelpUtils;
-import com.android.settings.InstrumentedFragment;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.ShowAdminSupportDetailsDialog;
@@ -40,7 +38,7 @@ import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-public class AndroidBeam extends InstrumentedFragment
+public class AndroidBeam extends InstrumentedPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener {
     private View mView;
     private NfcAdapter mNfcAdapter;
@@ -129,7 +127,7 @@ public class AndroidBeam extends InstrumentedFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NFC_BEAM;
     }
 }

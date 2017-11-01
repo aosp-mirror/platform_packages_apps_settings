@@ -44,11 +44,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 
 import com.android.internal.inputmethod.InputMethodUtils;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 
 import java.text.Collator;
 import java.util.ArrayList;
@@ -59,7 +63,7 @@ import java.util.List;
 import java.util.Objects;
 
 public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
-        implements InputManager.InputDeviceListener {
+        implements InputManager.InputDeviceListener, Indexable {
 
     private static final String KEYBOARD_ASSISTANCE_CATEGORY = "keyboard_assistance_category";
     private static final String SHOW_VIRTUAL_KEYBOARD_SWITCH = "show_virtual_keyboard_switch";
@@ -132,7 +136,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         unregisterShowVirtualKeyboardSettingsObserver();
     }
 
-    public void onLoadFinishedInternal(
+    private void onLoadFinishedInternal(
             final int loaderId, @NonNull final List<Keyboards> keyboardsList) {
         if (!mLoaderIDs.remove(loaderId)) {
             // Already destroyed loader.  Ignore.
@@ -189,13 +193,13 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PHYSICAL_KEYBOARDS;
     }
 
     @NonNull
-    private static ArrayList<HardKeyboardDeviceInfo> getHardKeyboards() {
-        final ArrayList<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
+    public static List<HardKeyboardDeviceInfo> getHardKeyboards() {
+        final List<HardKeyboardDeviceInfo> keyboards = new ArrayList<>();
         final int[] devicesIds = InputDevice.getDeviceIds();
         for (int deviceId : devicesIds) {
             final InputDevice device = InputDevice.getDevice(deviceId);
@@ -207,7 +211,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     }
 
     private void updateHardKeyboards() {
-        final ArrayList<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
+        final List<HardKeyboardDeviceInfo> newHardKeyboards = getHardKeyboards();
         if (!Objects.equals(newHardKeyboards, mLastHardKeyboards)) {
             clearLoader();
             mLastHardKeyboards.clear();
@@ -225,10 +229,10 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
             @Nullable InputMethodSubtype imSubtype) {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(getActivity(), Settings.KeyboardLayoutPickerActivity.class);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_DEVICE_IDENTIFIER,
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_DEVICE_IDENTIFIER,
                 inputDeviceIdentifier);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_INFO, imi);
-        intent.putExtra(KeyboardLayoutPickerFragment2.EXTRA_INPUT_METHOD_SUBTYPE, imSubtype);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_METHOD_INFO, imi);
+        intent.putExtra(KeyboardLayoutPickerFragment.EXTRA_INPUT_METHOD_SUBTYPE, imSubtype);
         startActivity(intent);
     }
 
@@ -528,4 +532,43 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
     }
 
+    public static List<InputDevice> getPhysicalFullKeyboards() {
+        List<InputDevice> keyboards = null;
+        for (final int deviceId : InputDevice.getDeviceIds()) {
+            final InputDevice device = InputDevice.getDevice(deviceId);
+            if (device != null && !device.isVirtual() && device.isFullKeyboard()) {
+                if (keyboards == null) keyboards = new ArrayList<>();
+                keyboards.add(device);
+            }
+        }
+        return (keyboards == null) ? Collections.emptyList() : keyboards;
+    }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+        @Override
+        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
+            final InputManager inputManager = (InputManager) context.getSystemService(
+                    Context.INPUT_SERVICE);
+            final String screenTitle = context.getString(R.string.physical_keyboard_title);
+            final List<SearchIndexableRaw> indexes = new ArrayList<>();
+            for (final InputDevice device : getPhysicalFullKeyboards()) {
+                final String keyboardLayoutDescriptor = inputManager
+                        .getCurrentKeyboardLayoutForInputDevice(device.getIdentifier());
+                final KeyboardLayout keyboardLayout = (keyboardLayoutDescriptor != null)
+                        ? inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
+                final String summary = (keyboardLayout != null)
+                        ? keyboardLayout.toString()
+                        : context.getString(R.string.keyboard_layout_default_label);
+                final SearchIndexableRaw index = new SearchIndexableRaw(context);
+                index.key = device.getName();
+                index.title = device.getName();
+                index.summaryOn = summary;
+                index.summaryOff = summary;
+                index.screenTitle = screenTitle;
+                indexes.add(index);
+            }
+            return indexes;
+        }
+    };
 }

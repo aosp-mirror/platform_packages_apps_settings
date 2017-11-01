@@ -16,17 +16,22 @@
 
 package com.android.settings;
 
-import android.annotation.NonNull;
+import static android.content.Intent.EXTRA_USER;
+import static android.content.Intent.EXTRA_USER_ID;
+import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
+import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
+
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -45,9 +50,12 @@ import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
+import android.net.Network;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -58,6 +66,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
+import android.os.storage.VolumeInfo;
 import android.preference.PreferenceFrameLayout;
 import android.provider.ContactsContract.CommonDataKinds;
 import android.provider.ContactsContract.Contacts;
@@ -65,7 +74,7 @@ import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Profile;
 import android.provider.ContactsContract.RawContacts;
 import android.provider.Settings;
-import android.service.persistentdata.PersistentDataBlockManager;
+import android.support.annotation.StringRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
@@ -73,6 +82,8 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
@@ -88,10 +99,13 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TabWidget;
+
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.FingerprintManagerWrapper;
+import com.android.settings.password.IFingerprintManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -100,10 +114,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import static android.content.Intent.EXTRA_USER;
-import static android.text.format.DateUtils.FORMAT_ABBREV_MONTH;
-import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 public final class Utils extends com.android.settingslib.Utils {
 
@@ -234,16 +244,20 @@ public final class Utils extends com.android.settingslib.Utils {
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getWifiIpAddresses(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)
+        WifiManager wifiManager = context.getSystemService(WifiManager.class);
+        Network currentNetwork = wifiManager.getCurrentNetwork();
+        if (currentNetwork != null) {
+            ConnectivityManager cm = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        LinkProperties prop = cm.getLinkProperties(ConnectivityManager.TYPE_WIFI);
-        return formatIpAddresses(prop);
+            LinkProperties prop = cm.getLinkProperties(currentNetwork);
+            return formatIpAddresses(prop);
+        }
+        return null;
     }
 
     /**
      * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
      * addresses.
-     * @param context the application context
      * @return the formatted and newline-separated IP addresses, or null if none.
      */
     public static String getDefaultIpAddresses(ConnectivityManager cm) {
@@ -291,13 +305,6 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static String getBatteryPercentage(Intent batteryChangedIntent) {
         return formatPercentage(getBatteryLevel(batteryChangedIntent));
-    }
-
-    public static void forcePrepareCustomPreferencesList(
-            ViewGroup parent, View child, ListView list, boolean ignoreSidePadding) {
-        list.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
-        list.setClipToPadding(false);
-        prepareCustomPreferencesList(parent, child, list, ignoreSidePadding);
     }
 
     /**
@@ -360,10 +367,21 @@ public final class Utils extends com.android.settingslib.Utils {
         } catch (IOException ioe) { }
     }
 
-    public static void assignDefaultPhoto(Context context, int userId) {
+    /**
+     * Assign the default photo to user with {@paramref userId}
+     * @param context used to get the {@link UserManager}
+     * @param userId  used to get the icon bitmap
+     * @return true if assign photo successfully, false if failed
+     */
+    public static boolean assignDefaultPhoto(Context context, int userId) {
+        if (context == null) {
+            return false;
+        }
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
         Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
         um.setUserIcon(userId, bitmap);
+
+        return true;
     }
 
     public static String getMeProfileName(Context context, boolean full) {
@@ -476,12 +494,14 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId resource id for the String to display for the title of this set
      *                   of preferences.
      * @param title String to display for the title of this set of preferences.
+     * @param metricsCategory The current metricsCategory for logging source when fragment starts
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title) {
+            CharSequence title, int metricsCategory) {
         startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                null /* titleResPackageName */, titleResId, title, false /* not a shortcut */);
+                null /* titleResPackageName */, titleResId, title, false /* not a shortcut */,
+                metricsCategory);
     }
 
     /**
@@ -499,19 +519,21 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId resource id for the String to display for the title of this set
      *                   of preferences.
      * @param title String to display for the title of this set of preferences.
+     * @param metricsCategory The current metricsCategory for logging source when fragment starts
      */
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title) {
+            CharSequence title, int metricsCategory) {
         startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, false /* not a shortcut */);
+                titleResPackageName, titleResId, title, false /* not a shortcut */,
+                metricsCategory);
     }
 
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId,
-            CharSequence title, boolean isShortcut) {
+            CharSequence title, boolean isShortcut, int metricsCategory) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                null /* titleResPackageName */, titleResId, title, isShortcut);
+                null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -521,9 +543,9 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, boolean isShortcut) {
+            CharSequence title, boolean isShortcut, int metricsCategory) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
-                titleResId, title, isShortcut);
+                titleResId, title, isShortcut, metricsCategory);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
@@ -532,30 +554,15 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            int titleResId, CharSequence title, boolean isShortcut,
+            int titleResId, CharSequence title, boolean isShortcut, int metricsCategory,
             UserHandle userHandle) {
         // workaround to avoid crash in b/17523189
         if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut);
+            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut,
+                    metricsCategory);
         } else {
             Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    null /* titleResPackageName */, titleResId, title, isShortcut);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivityAsUser(intent, userHandle);
-        }
-    }
-
-    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            String titleResPackageName, int titleResId, CharSequence title, boolean isShortcut,
-            UserHandle userHandle) {
-        // workaround to avoid crash in b/17523189
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResPackageName, titleResId,
-                    title, isShortcut);
-        } else {
-            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    titleResPackageName, titleResId, title, isShortcut);
+                    null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivityAsUser(intent, userHandle);
@@ -575,12 +582,13 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param titleResId Optional title resource id to show for this item.
      * @param title Optional title to show for this item.
      * @param isShortcut  tell if this is a Launcher Shortcut or not
+     * @param sourceMetricsCategory The context (source) from which an action is performed
      * @return Returns an Intent that can be launched to display the given
      * fragment.
      */
     public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
             Bundle args, String titleResPackageName, int titleResId, CharSequence title,
-            boolean isShortcut) {
+            boolean isShortcut, int sourceMetricsCategory) {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(context, SubSettings.class);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
@@ -590,11 +598,13 @@ public final class Utils extends com.android.settingslib.Utils {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
+        intent.putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
         return intent;
     }
 
     /**
-     * Returns the managed profile of the current user or null if none found.
+     * Returns the managed profile of the current user or {@code null} if none is found or a profile
+     * exists but it is disabled.
      */
     public static UserHandle getManagedProfile(UserManager userManager) {
         List<UserHandle> userProfiles = userManager.getUserProfiles();
@@ -613,12 +623,26 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns true if the current profile is a managed one.
-     *
-     * @throws IllegalArgumentException if userManager is null.
+     * Returns the managed profile of the current user or {@code null} if none is found. Unlike
+     * {@link #getManagedProfile} this method returns enabled and disabled managed profiles.
      */
-    public static boolean isManagedProfile(@NonNull UserManager userManager) {
-        return isManagedProfile(userManager, UserHandle.myUserId());
+    public static UserHandle getManagedProfileWithDisabled(UserManager userManager) {
+        // TODO: Call getManagedProfileId from here once Robolectric supports
+        // API level 24 and UserManager.getProfileIdsWithDisabled can be Mocked (to avoid having
+        // yet another implementation that loops over user profiles in this method). In the meantime
+        // we need to use UserManager.getProfiles that is available on API 23 (the one currently
+        // used for Settings Robolectric tests).
+        final int myUserId = UserHandle.myUserId();
+        List<UserInfo> profiles = userManager.getProfiles(myUserId);
+        final int count = profiles.size();
+        for (int i = 0; i < count; i++) {
+            final UserInfo profile = profiles.get(i);
+            if (profile.isManagedProfile()
+                    && profile.getUserHandle().getIdentifier() != myUserId) {
+                return profile.getUserHandle();
+            }
+        }
+        return null;
     }
 
     /**
@@ -637,32 +661,24 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns true if the userId passed in is a managed profile.
-     *
-     * @throws IllegalArgumentException if userManager is null.
-     */
-    public static boolean isManagedProfile(@NonNull UserManager userManager, int userId) {
-        if (userManager == null) {
-            throw new IllegalArgumentException("userManager must not be null");
-        }
-        UserInfo userInfo = userManager.getUserInfo(userId);
-        return (userInfo != null) ? userInfo.isManagedProfile() : false;
-    }
-
-    /**
      * Returns the target user for a Settings activity.
-     *
-     * The target user can be either the current user, the user that launched this activity or
-     * the user contained as an extra in the arguments or intent extras.
-     *
+     * <p>
+     * User would be retrieved in this order:
+     * <ul>
+     * <li> If this activity is launched from other user, return that user id.
+     * <li> If this is launched from the Settings app in same user, return the user contained as an
+     *      extra in the arguments or intent extras.
+     * <li> Otherwise, return UserHandle.myUserId().
+     * </ul>
+     * <p>
      * Note: This is secure in the sense that it only returns a target user different to the current
      * one if the app launching this activity is the Settings app itself, running in the same user
      * or in one that is in the same profile group, or if the user id is provided by the system.
      */
     public static UserHandle getSecureTargetUser(IBinder activityToken,
-           UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
+            UserManager um, @Nullable Bundle arguments, @Nullable Bundle intentExtras) {
         UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-        IActivityManager am = ActivityManagerNative.getDefault();
+        IActivityManager am = ActivityManager.getService();
         try {
             String launchedFromPackage = am.getLaunchedFromPackage(activityToken);
             boolean launchedFromSettingsApp = SETTINGS_PACKAGE_NAME.equals(launchedFromPackage);
@@ -675,16 +691,14 @@ public final class Utils extends com.android.settingslib.Utils {
                     return launchedFromUser;
                 }
             }
-            UserHandle extrasUser = intentExtras != null
-                    ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
+            UserHandle extrasUser = getUserHandleFromBundle(intentExtras);
             if (extrasUser != null && !extrasUser.equals(currentUser)) {
                 // Check it's secure
                 if (launchedFromSettingsApp && isProfileOf(um, extrasUser)) {
                     return extrasUser;
                 }
             }
-            UserHandle argumentsUser = arguments != null
-                    ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
+            UserHandle argumentsUser = getUserHandleFromBundle(arguments);
             if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
                 // Check it's secure
                 if (launchedFromSettingsApp && isProfileOf(um, argumentsUser)) {
@@ -696,7 +710,26 @@ public final class Utils extends com.android.settingslib.Utils {
             Log.v(TAG, "Could not talk to activity manager.", e);
         }
         return currentUser;
-   }
+    }
+
+    /**
+     * Lookup both {@link Intent#EXTRA_USER} and {@link Intent#EXTRA_USER_ID} in the bundle
+     * and return the {@link UserHandle} object. Return {@code null} if nothing is found.
+     */
+    private static @Nullable UserHandle getUserHandleFromBundle(Bundle bundle) {
+        if (bundle == null) {
+            return null;
+        }
+        final UserHandle user = bundle.getParcelable(EXTRA_USER);
+        if (user != null) {
+            return user;
+        }
+        final int userId = bundle.getInt(EXTRA_USER_ID, -1);
+        if (userId != -1) {
+            return UserHandle.of(userId);
+        }
+        return null;
+    }
 
     /**
      * Returns the target user for a Settings activity.
@@ -712,7 +745,7 @@ public final class Utils extends com.android.settingslib.Utils {
    public static UserHandle getInsecureTargetUser(IBinder activityToken, @Nullable Bundle arguments,
            @Nullable Bundle intentExtras) {
        UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-       IActivityManager am = ActivityManagerNative.getDefault();
+       IActivityManager am = ActivityManager.getService();
        try {
            UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
                    am.getLaunchedFromUid(activityToken)));
@@ -746,30 +779,6 @@ public final class Utils extends com.android.settingslib.Utils {
                || um.getUserProfiles().contains(otherUser);
    }
 
-
-    /**
-     * Returns whether or not this device is able to be OEM unlocked.
-     */
-    static boolean isOemUnlockEnabled(Context context) {
-        PersistentDataBlockManager manager =(PersistentDataBlockManager)
-                context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
-        return manager.getOemUnlockEnabled();
-    }
-
-    /**
-     * Allows enabling or disabling OEM unlock on this device. OEM unlocked
-     * devices allow users to flash other OSes to them.
-     */
-    static void setOemUnlockEnabled(Context context, boolean enabled) {
-        try {
-            PersistentDataBlockManager manager = (PersistentDataBlockManager)
-                    context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE);
-            manager.setOemUnlockEnabled(enabled);
-        } catch (SecurityException e) {
-            Log.e(TAG, "Fail to set oem unlock.", e);
-        }
-    }
-
     /**
      * Return whether or not the user should have a SIM Cards option in Settings.
      * TODO: Change back to returning true if count is greater than one after testing.
@@ -790,8 +799,9 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param withSeconds include seconds?
      * @return the formatted elapsed time
      */
-    public static String formatElapsedTime(Context context, double millis, boolean withSeconds) {
-        StringBuilder sb = new StringBuilder();
+    public static CharSequence formatElapsedTime(Context context, double millis,
+            boolean withSeconds) {
+        SpannableStringBuilder sb = new SpannableStringBuilder();
         int seconds = (int) Math.floor(millis / 1000);
         if (!withSeconds) {
             // Round up.
@@ -832,9 +842,15 @@ public final class Utils extends com.android.settingslib.Utils {
                         hours, minutes));
             } else {
                 sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
+
+                // Add ttsSpan if it only have minute value, because it will be read as "meters"
+                TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
+                        .setUnit("minute").build();
+                sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
-        return sb.toString();
+
+        return sb;
     }
 
     /**
@@ -927,6 +943,8 @@ public final class Utils extends com.android.settingslib.Utils {
         return result;
     }
 
+    // TODO: move this out of Utils to a mixin or a controller or a helper class.
+    @Deprecated
     public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
             boolean animate) {
         setViewShown(loading, !done, animate);
@@ -1020,7 +1038,24 @@ public final class Utils extends com.android.settingslib.Utils {
             return getCredentialOwnerUserId(context);
         }
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
-        return enforceSameOwner(context, userId);
+        if (userId == LockPatternUtils.USER_FRP) {
+            return enforceSystemUser(context, userId);
+        } else {
+            return enforceSameOwner(context, userId);
+        }
+    }
+
+    /**
+     * Returns the given user id if the current user is the system user.
+     *
+     * @throws SecurityException if the current user is not the system user.
+     */
+    public static int enforceSystemUser(Context context, int userId) {
+        if (UserHandle.myUserId() == UserHandle.USER_SYSTEM) {
+            return userId;
+        }
+        throw new SecurityException("Given user id " + userId + " must only be used from "
+                + "USER_SYSTEM, but current user is " + UserHandle.myUserId());
     }
 
     /**
@@ -1131,7 +1166,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static boolean unlockWorkProfileIfNecessary(Context context, int userId) {
         try {
-            if (!ActivityManagerNative.getDefault().isUserRunning(userId,
+            if (!ActivityManager.getService().isUserRunning(userId,
                     ActivityManager.FLAG_AND_LOCKED)) {
                 return false;
             }
@@ -1141,6 +1176,18 @@ public final class Utils extends com.android.settingslib.Utils {
         if (!(new LockPatternUtils(context)).isSecure(userId)) {
             return false;
         }
+        return confirmWorkProfileCredentials(context, userId);
+    }
+
+    public static boolean confirmWorkProfileCredentialsIfNecessary(Context context, int userId) {
+        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+        if (!km.isDeviceLocked(userId)) {
+            return false;
+        }
+        return confirmWorkProfileCredentials(context, userId);
+    }
+
+    private static boolean confirmWorkProfileCredentials(Context context, int userId) {
         final KeyguardManager km = (KeyguardManager) context.getSystemService(
                 Context.KEYGUARD_SERVICE);
         final Intent unlockIntent = km.createConfirmDeviceCredentialIntent(null, null, userId);
@@ -1150,7 +1197,6 @@ public final class Utils extends com.android.settingslib.Utils {
         } else {
             return false;
         }
-
     }
 
     public static CharSequence getApplicationLabel(Context context, String packageName) {
@@ -1158,21 +1204,12 @@ public final class Utils extends com.android.settingslib.Utils {
             final ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     packageName,
                     PackageManager.MATCH_DISABLED_COMPONENTS
-                    | PackageManager.MATCH_UNINSTALLED_PACKAGES);
+                    | PackageManager.MATCH_ANY_USER);
             return appInfo.loadLabel(context.getPackageManager());
         } catch (PackageManager.NameNotFoundException e) {
             Log.w(TAG, "Unable to find info for package: " + packageName);
         }
         return null;
-    }
-
-    public static boolean isPackageEnabled(Context context, String packageName) {
-        try {
-            return context.getPackageManager().getApplicationInfo(packageName, 0).enabled;
-        } catch (NameNotFoundException e) {
-            // Thrown by PackageManager.getApplicationInfo if the package does not exist
-        }
-        return false;
     }
 
     public static boolean isPackageDirectBootAware(Context context, String packageName) {
@@ -1184,4 +1221,123 @@ public final class Utils extends com.android.settingslib.Utils {
         }
         return false;
     }
+
+    /**
+     * Returns a context created from the given context for the given user, or null if it fails
+     */
+    public static Context createPackageContextAsUser(Context context, int userId) {
+        try {
+            return context.createPackageContextAsUser(
+                    context.getPackageName(), 0 /* flags */, UserHandle.of(userId));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Failed to create user context", e);
+        }
+        return null;
+    }
+
+    public static FingerprintManager getFingerprintManagerOrNull(Context context) {
+        if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
+            return context.getSystemService(FingerprintManager.class);
+        } else {
+            return null;
+        }
+    }
+
+    public static IFingerprintManager getFingerprintManagerWrapperOrNull(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        if (fingerprintManager != null) {
+            return new FingerprintManagerWrapper(fingerprintManager);
+        } else {
+            return null;
+        }
+    }
+
+    public static boolean hasFingerprintHardware(Context context) {
+        FingerprintManager fingerprintManager = getFingerprintManagerOrNull(context);
+        return fingerprintManager != null && fingerprintManager.isHardwareDetected();
+    }
+
+    /**
+     * Launches an intent which may optionally have a user id defined.
+     * @param fragment Fragment to use to launch the activity.
+     * @param intent Intent to launch.
+     */
+    public static void launchIntent(Fragment fragment, Intent intent) {
+        try {
+            final int userId = intent.getIntExtra(Intent.EXTRA_USER_ID, -1);
+
+            if (userId == -1) {
+                fragment.startActivity(intent);
+            } else {
+                fragment.getActivity().startActivityAsUser(intent, new UserHandle(userId));
+            }
+        } catch (ActivityNotFoundException e) {
+            Log.w(TAG, "No activity found for " + intent);
+        }
+    }
+
+    public static boolean isDemoUser(Context context) {
+        return UserManager.isDeviceInDemoMode(context) && getUserManager(context).isDemoUser();
+    }
+
+    public static ComponentName getDeviceOwnerComponent(Context context) {
+        final DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(
+                Context.DEVICE_POLICY_SERVICE);
+        return dpm.getDeviceOwnerComponentOnAnyUser();
+    }
+
+    /**
+     * Returns if a given user is a profile of another user.
+     * @param user The user whose profiles wibe checked.
+     * @param profile The (potential) profile.
+     * @return if the profile is actually a profile
+     */
+    public static boolean isProfileOf(UserInfo user, UserInfo profile) {
+        return user.id == profile.id ||
+                (user.profileGroupId != UserInfo.NO_PROFILE_GROUP_ID
+                        && user.profileGroupId == profile.profileGroupId);
+    }
+
+    /**
+     * Tries to initalize a volume with the given bundle. If it is a valid, private, and readable
+     * {@link VolumeInfo}, it is returned. If it is not valid, null is returned.
+     */
+    @Nullable
+    public static VolumeInfo maybeInitializeVolume(StorageManager sm, Bundle bundle) {
+        final String volumeId = bundle.getString(VolumeInfo.EXTRA_VOLUME_ID,
+                VolumeInfo.ID_PRIVATE_INTERNAL);
+        VolumeInfo volume = sm.findVolumeById(volumeId);
+        return isVolumeValid(volume) ? volume : null;
+    }
+
+    /**
+     * Return the resource id to represent the install status for an app
+     */
+    @StringRes
+    public static int getInstallationStatus(ApplicationInfo info) {
+        if ((info.flags & ApplicationInfo.FLAG_INSTALLED) == 0) {
+            return R.string.not_installed;
+        }
+        return info.enabled ? R.string.installed : R.string.disabled;
+    }
+
+    /**
+     * Control if other apps can display overlays. By default this is allowed. Be sure to
+     * re-enable overlays, as the effect is system-wide.
+     */
+    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
+        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
+        if (appOpsManager != null) {
+            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
+                    !allowed, token);
+            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
+                    !allowed, token);
+        }
+    }
+
+    private static boolean isVolumeValid(VolumeInfo volume) {
+        return (volume != null) && (volume.getType() == VolumeInfo.TYPE_PRIVATE)
+                && volume.isMountedReadable();
+    }
+
 }

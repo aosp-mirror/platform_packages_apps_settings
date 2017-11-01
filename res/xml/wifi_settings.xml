@@ -14,14 +14,25 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/wifi_settings"
         settings:keywords="@string/keywords_wifi">
 
-    <!-- Needed so PreferenceGroupAdapter allows AccessPointPreference to be
-         recycled. Removed in onResume -->
-    <com.android.settings.wifi.LongPressAccessPointPreference
-        android:key="dummy" />
+    <PreferenceCategory android:key="connected_access_point" />
 
+    <PreferenceCategory android:key="access_points"/>
+
+    <PreferenceCategory android:key="additional_settings">
+        <Preference
+                android:key="configure_settings"
+                android:title="@string/wifi_configure_settings_preference_title"
+                android:fragment="com.android.settings.wifi.ConfigureWifiSettings" />
+
+        <Preference
+                android:key="saved_networks"
+                android:title="@string/wifi_saved_access_points_label"
+                android:fragment="com.android.settings.wifi.SavedAccessPointsWifiSettings" />
+    </PreferenceCategory>
 </PreferenceScreen>

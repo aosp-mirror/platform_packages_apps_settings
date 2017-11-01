@@ -15,11 +15,14 @@
  */
 package com.android.settings.applications;
 
+import android.content.ComponentName;
 import android.provider.Settings;
 import android.service.vr.VrListenerService;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.utils.ManagedServiceSettings;
 
 public class VrListenerSettings extends ManagedServiceSettings {
@@ -45,7 +48,21 @@ public class VrListenerSettings extends ManagedServiceSettings {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.VR_MANAGE_LISTENERS;
+    }
+
+    @Override
+    protected boolean setEnabled(ComponentName service, String title, boolean enable) {
+        logSpecialPermissionChange(enable, service.getPackageName());
+        return super.setEnabled(service, title, enable);
+    }
+
+    @VisibleForTesting
+    void logSpecialPermissionChange(boolean enable, String packageName) {
+        int logCategory = enable ? MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_ALLOW
+                : MetricsEvent.APP_SPECIAL_PERMISSION_VRHELPER_DENY;
+        FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider().action(getContext(),
+                logCategory, packageName);
     }
 }

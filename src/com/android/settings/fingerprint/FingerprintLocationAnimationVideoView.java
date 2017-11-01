@@ -24,6 +24,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.view.Surface;
 import android.view.TextureView;
@@ -73,7 +74,11 @@ public class FingerprintLocationAnimationVideoView extends TextureView
                     mTextureToDestroy.release();
                     mTextureToDestroy = null;
                 }
-                mMediaPlayer = MediaPlayer.create(mContext, videoUri);
+                mMediaPlayer = createMediaPlayer(mContext, videoUri);
+                if (mMediaPlayer == null) {
+                    // MediaPlayer.create() method can return null
+                    return;
+                }
                 mMediaPlayer.setSurface(new Surface(surfaceTexture));
                 mMediaPlayer.setOnPreparedListener(new OnPreparedListener() {
                     @Override
@@ -111,6 +116,11 @@ public class FingerprintLocationAnimationVideoView extends TextureView
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
             }
         });
+    }
+
+    @VisibleForTesting
+    MediaPlayer createMediaPlayer(Context context, Uri videoUri) {
+        return MediaPlayer.create(mContext, videoUri);
     }
 
     protected static Uri resourceEntryToUri (Context context, int id) {

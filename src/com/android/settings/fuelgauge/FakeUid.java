@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.os.BatteryStats;
+import android.os.BatteryStats.Counter;
 import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.ArrayMap;
@@ -40,6 +41,11 @@ public class FakeUid extends Uid {
 
     @Override
     public ArrayMap<String, ? extends Wakelock> getWakelockStats() {
+        return null;
+    }
+
+    @Override
+    public Timer getAggregatedPartialWakelockTimer() {
         return null;
     }
 
@@ -138,6 +144,21 @@ public class FakeUid extends Uid {
 
     @Override
     public int getWifiScanCount(int which) {
+        return 0;
+    }
+
+    @Override
+    public int getWifiScanBackgroundCount(int which)  {
+        return 0;
+    }
+
+    @Override
+    public long getWifiScanActualTime(long elapsedRealtimeUs)  {
+        return 0;
+    }
+
+    @Override
+    public long getWifiScanBackgroundTime(long elapsedRealtimeUs)  {
         return 0;
     }
 
@@ -251,11 +272,6 @@ public class FakeUid extends Uid {
     }
 
     @Override
-    public long getCpuPowerMaUs(int which) {
-        return 0;
-    }
-
-    @Override
     public BatteryStats.ControllerActivityCounter getWifiControllerActivity() {
         return null;
     }
@@ -276,6 +292,31 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public Timer getBluetoothScanBackgroundTimer() {
+        return null;
+    }
+
+    @Override
+    public Timer getBluetoothUnoptimizedScanTimer() {
+        return null;
+    }
+
+    @Override
+    public Timer getBluetoothUnoptimizedScanBackgroundTimer() {
+        return null;
+    }
+
+    @Override
+    public Counter getBluetoothScanResultCounter() {
+        return null;
+    }
+
+    @Override
+    public Counter getBluetoothScanResultBgCounter() {
+        return null;
+    }
+
+    @Override
     public long getWifiRadioApWakeupCount(int which) {
         return 0;
     }
@@ -283,5 +324,15 @@ public class FakeUid extends Uid {
     @Override
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
+    }
+
+    @Override
+    public long[] getCpuFreqTimes(int which) {
+        return null;
+    }
+
+    @Override
+    public long[] getScreenOffCpuFreqTimes(int which) {
+        return null;
     }
 }

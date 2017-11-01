@@ -53,7 +53,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.internal.telephony.dataconnection.ApnSetting;
@@ -149,7 +149,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APN;
     }
 
@@ -173,6 +173,15 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         PersistableBundle b = configManager.getConfig();
         mHideImsApn = b.getBoolean(CarrierConfigManager.KEY_HIDE_IMS_APN_BOOL);
         mAllowAddingApns = b.getBoolean(CarrierConfigManager.KEY_ALLOW_ADDING_APNS_BOOL);
+        if (mAllowAddingApns) {
+            String[] readOnlyApnTypes = b.getStringArray(
+                    CarrierConfigManager.KEY_READ_ONLY_APN_TYPES_STRING_ARRAY);
+            // if no apn type can be edited, do not allow adding APNs
+            if (ApnEditor.hasAllApns(readOnlyApnTypes)) {
+                Log.d(TAG, "not allowing adding APN because all APN types are read only");
+                mAllowAddingApns = false;
+            }
+        }
         mUserManager = UserManager.get(activity);
     }
 
@@ -184,8 +193,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         mUnavailable = isUiRestricted();
         setHasOptionsMenu(!mUnavailable);
         if (mUnavailable) {
-            setPreferenceScreen(new PreferenceScreen(getPrefContext(), null));
-            getPreferenceScreen().removeAll();
+            addPreferencesFromResource(R.xml.placeholder_prefs);
             return;
         }
 
@@ -240,8 +248,9 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     private void fillList() {
         final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        final String mccmnc = mSubscriptionInfo == null ? ""
-            : tm.getSimOperator(mSubscriptionInfo.getSubscriptionId());
+        final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
+                : SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        final String mccmnc = mSubscriptionInfo == null ? "" : tm.getSimOperator(subId);
         Log.d(TAG, "mccmnc = " + mccmnc);
         StringBuilder where = new StringBuilder("numeric=\"" + mccmnc +
                 "\" AND NOT (type='ia' AND (apn=\"\" OR apn IS NULL)) AND user_visible!=0");
@@ -257,8 +266,8 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         if (cursor != null) {
             IccRecords r = null;
             if (mUiccController != null && mSubscriptionInfo != null) {
-                r = mUiccController.getIccRecords(SubscriptionManager.getPhoneId(
-                        mSubscriptionInfo.getSubscriptionId()), UiccController.APP_FAM_3GPP);
+                r = mUiccController.getIccRecords(
+                        SubscriptionManager.getPhoneId(subId), UiccController.APP_FAM_3GPP);
             }
             PreferenceGroup apnList = (PreferenceGroup) findPreference("apn_list");
             apnList.removeAll();
@@ -285,6 +294,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 pref.setSummary(apn);
                 pref.setPersistent(false);
                 pref.setOnPreferenceChangeListener(this);
+                pref.setSubId(subId);
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
@@ -337,7 +347,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             if (mAllowAddingApns) {
                 menu.add(0, MENU_NEW, 0,
                         getResources().getString(R.string.menu_new))
-                        .setIcon(android.R.drawable.ic_menu_add)
+                        .setIcon(R.drawable.ic_menu_add_white)
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             }
             menu.add(0, MENU_RESTORE, 0,
@@ -506,5 +516,13 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             return dialog;
         }
         return null;
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        if (dialogId == DIALOG_RESTORE_DEFAULTAPN) {
+            return MetricsEvent.DIALOG_APN_RESTORE_DEFAULT;
+        }
+        return 0;
     }
 }

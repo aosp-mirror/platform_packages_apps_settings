@@ -15,20 +15,12 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/data_saver_title">
 
     <Preference
         android:key="unrestricted_access"
         android:title="@string/unrestricted_data_saver"
+        android:summary="@string/summary_two_lines_placeholder"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess" />
-
-    <!-- Feature description text -->
-    <com.android.settings.fuelgauge.WallOfTextPreference
-            android:key="description"
-            android:summary="@*android:string/data_saver_description"
-            android:persistent="false"
-            android:selectable="false"
-            settings:allowDividerAbove="true" />
 
 </PreferenceScreen>

@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import android.app.Activity;
 import android.app.backup.IBackupManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -30,18 +29,17 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.dashboard.SummaryLoader;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedPreference;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,26 +50,30 @@ import java.util.Set;
 /**
  * Gesture lock pattern settings.
  */
-public class PrivacySettings extends SettingsPreferenceFragment implements Indexable {
+public class PrivacySettings extends SettingsPreferenceFragment {
 
     // Vendor specific
     private static final String GSETTINGS_PROVIDER = "com.google.settings";
-    private static final String BACKUP_DATA = "backup_data";
-    private static final String AUTO_RESTORE = "auto_restore";
-    private static final String CONFIGURE_ACCOUNT = "configure_account";
-    private static final String DATA_MANAGEMENT = "data_management";
+    @VisibleForTesting
+    static final String BACKUP_DATA = "backup_data";
+    @VisibleForTesting
+    static final String AUTO_RESTORE = "auto_restore";
+    @VisibleForTesting
+    static final String CONFIGURE_ACCOUNT = "configure_account";
+    @VisibleForTesting
+    static final String DATA_MANAGEMENT = "data_management";
     private static final String BACKUP_INACTIVE = "backup_inactive";
     private static final String FACTORY_RESET = "factory_reset";
     private static final String TAG = "PrivacySettings";
     private IBackupManager mBackupManager;
-    private PreferenceScreen mBackup;
+    private Preference mBackup;
     private SwitchPreference mAutoRestore;
-    private PreferenceScreen mConfigure;
-    private PreferenceScreen mManageData;
+    private Preference mConfigure;
+    private Preference mManageData;
     private boolean mEnabled;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.PRIVACY;
     }
 
@@ -90,13 +92,7 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         mBackupManager = IBackupManager.Stub.asInterface(
                 ServiceManager.getService(Context.BACKUP_SERVICE));
 
-        mBackup = (PreferenceScreen) screen.findPreference(BACKUP_DATA);
-
-        mAutoRestore = (SwitchPreference) screen.findPreference(AUTO_RESTORE);
-        mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
-
-        mConfigure = (PreferenceScreen) screen.findPreference(CONFIGURE_ACCOUNT);
-        mManageData = (PreferenceScreen) screen.findPreference(DATA_MANAGEMENT);
+        setPreferenceReferences(screen);
 
         Set<String> keysToRemove = new HashSet<>();
         getNonVisibleKeys(getActivity(), keysToRemove);
@@ -119,6 +115,17 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
         if (mEnabled) {
             updateToggles();
         }
+    }
+
+    @VisibleForTesting
+    void setPreferenceReferences(PreferenceScreen screen) {
+        mBackup = screen.findPreference(BACKUP_DATA);
+
+        mAutoRestore = (SwitchPreference) screen.findPreference(AUTO_RESTORE);
+        mAutoRestore.setOnPreferenceChangeListener(preferenceChangeListener);
+
+        mConfigure = screen.findPreference(CONFIGURE_ACCOUNT);
+        mManageData = screen.findPreference(DATA_MANAGEMENT);
     }
 
     private OnPreferenceChangeListener preferenceChangeListener = new OnPreferenceChangeListener() {
@@ -216,49 +223,6 @@ public class PrivacySettings extends SettingsPreferenceFragment implements Index
     @Override
     protected int getHelpResource() {
         return R.string.help_url_backup_reset;
-    }
-
-    /**
-     * For Search.
-     */
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new PrivacySearchIndexProvider();
-
-    private static class PrivacySearchIndexProvider extends BaseSearchIndexProvider {
-
-        boolean mIsPrimary;
-
-        public PrivacySearchIndexProvider() {
-            super();
-
-            mIsPrimary = UserHandle.myUserId() == UserHandle.USER_SYSTEM;
-        }
-
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-
-            List<SearchIndexableResource> result = new ArrayList<SearchIndexableResource>();
-
-            // For non-primary user, no backup or reset is available
-            // TODO: http://b/22388012
-            if (!mIsPrimary) {
-                return result;
-            }
-
-            SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.privacy_settings;
-            result.add(sir);
-
-            return result;
-        }
-
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            final List<String> nonVisibleKeys = new ArrayList<>();
-            getNonVisibleKeys(context, nonVisibleKeys);
-            return nonVisibleKeys;
-        }
     }
 
     private static void getNonVisibleKeys(Context context, Collection<String> nonVisibleKeys) {

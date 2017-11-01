@@ -140,19 +140,10 @@
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Mbaya"</item>
-    <item msgid="5615082285463430971">"Wastani"</item>
-    <item msgid="3565079809875324621">"Nzuri"</item>
-    <item msgid="5702329417707689835">"Bora zaidi"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3269131034472904310">"Daima"</item>
-    <item msgid="844721238536786870">"Wakati inachaji pekee"</item>
-    <item msgid="1986753720941888596">"Katu"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <item msgid="2124319326282651391">"Daima"</item>
-    <item msgid="7433294150916905997">"Wakati inachaji pekee"</item>
-    <item msgid="1390404486722375028">"kamwe"</item>
+    <item msgid="2042505933058940139">"Dhaifu"</item>
+    <item msgid="1344546617235886412">"Wastani"</item>
+    <item msgid="6019931571712517411">"Thabiti"</item>
+    <item msgid="8986346415847956850">"Bora zaidi"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"Siku 30 zilizopita"</item>
@@ -173,6 +164,14 @@
     <item msgid="2577747762745812488">"Bila"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"Hamna"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
     <item msgid="1818786254010764570">"Hamna"</item>
@@ -233,7 +232,7 @@
   <string-array name="app_ops_categories">
     <item msgid="6358963769537892925">"Eneo"</item>
     <item msgid="255608127647030286">"Binafsi"</item>
-    <item msgid="4588829735729884491">"Utumaji ujumbe"</item>
+    <item msgid="4588829735729884491">"Kutuma ujumbe"</item>
     <item msgid="886742181977884584">"Vyombo vya Habari"</item>
     <item msgid="7924928667052300589">"Kifaa"</item>
   </string-array>
@@ -274,7 +273,7 @@
     <item msgid="2603878814882344450">"sauti kuu"</item>
     <item msgid="7136963238377062018">"kiwango cha sauti"</item>
     <item msgid="4270236897655923007">"sauti ya mlio"</item>
-    <item msgid="6325739889222559394">"sauti ya midia"</item>
+    <item msgid="6325739889222559394">"sauti ya faili"</item>
     <item msgid="5762123934816216821">"sauti ya kengele"</item>
     <item msgid="785049718065337473">"sauti ya arifa"</item>
     <item msgid="6700305533746877052">"sauti ya bluetooth"</item>
@@ -282,7 +281,7 @@
     <item msgid="26109888160231211">"fuatilia eneo"</item>
     <item msgid="5753382310468855812">"fuatilia eneo kuu"</item>
     <item msgid="3356591542543137332">"pata takwimu za matumizi"</item>
-    <item msgid="3073734345226842233">"zima au uwashe sauti ya maikrofoni"</item>
+    <item msgid="3073734345226842233">"zima au uwashe maikrofoni"</item>
     <item msgid="2111767435887685265">"onyesha utangulizi"</item>
     <item msgid="1091168669714823370">"maudhui ya mradi"</item>
     <item msgid="485564189219029300">"anzisha VPN"</item>
@@ -302,6 +301,7 @@
     <item msgid="6628873315024166197">"washa skrini"</item>
     <item msgid="3253368931113490863">"pata akaunti"</item>
     <item msgid="780392378084812901">"tekeleza chini chini"</item>
+    <item msgid="2629748510881309577">"sauti za zana za walio na matatizo ya kuona na kusikia"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Eneo"</item>
@@ -348,7 +348,7 @@
     <item msgid="8584357129746649222">"Eneo"</item>
     <item msgid="7669257279311110599">"Eneo"</item>
     <item msgid="3459320345690097795">"Pata takwimu za matumizi"</item>
-    <item msgid="1312534577834048535">"Zima ama uwashe sauti ya maikrofoni"</item>
+    <item msgid="1312534577834048535">"Zima ama uwashe maikrofoni"</item>
     <item msgid="427580389823724225">"Onyesha utangulizi"</item>
     <item msgid="4992007785575926253">"Maudhui ya mradi"</item>
     <item msgid="2482631530338029480">"Anzisha VPN"</item>
@@ -368,6 +368,7 @@
     <item msgid="5832543806893763620">"Washa skrini"</item>
     <item msgid="5258373962467495905">"Pata akaunti"</item>
     <item msgid="334625385979270703">"Tekeleza chini chini"</item>
+    <item msgid="9039213578110332702">"Sauti ya zana za walio na matatizo ya kuona na kusikia"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Muda mfupi"</item>

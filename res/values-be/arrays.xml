@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*
+**
+** Copyright 2007 The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License");
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+ -->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string-array name="timezone_filters">
+    <item msgid="5296756001147094692">"Амерыка"</item>
+    <item msgid="3005562397632768392">"Еўропа"</item>
+    <item msgid="5696915123093701218">"Афрыка"</item>
+    <item msgid="4439789052790868249">"Азія"</item>
+    <item msgid="956915953069815961">"Аўстралія"</item>
+    <item msgid="5345178126174698955">"Ціхі акіян"</item>
+    <item msgid="8392017019801393511">"Усе"</item>
+  </string-array>
+  <string-array name="screen_timeout_entries">
+    <item msgid="3342301044271143016">"15 секунд"</item>
+    <item msgid="8881760709354815449">"30 секунд"</item>
+    <item msgid="7589406073232279088">"1 хвіліна"</item>
+    <item msgid="7001195990902244174">"2 хвіліны"</item>
+    <item msgid="7489864775127957179">"5 хвілін"</item>
+    <item msgid="2314124409517439288">"10 хвілін"</item>
+    <item msgid="6864027152847611413">"30 хвілін"</item>
+  </string-array>
+  <string-array name="dream_timeout_entries">
+    <item msgid="3149294732238283185">"Ніколі"</item>
+    <item msgid="2194151041885903260">"15 секунд"</item>
+    <item msgid="5892295237131074341">"30 секунд"</item>
+    <item msgid="3538441365970038213">"1 хвіліна"</item>
+    <item msgid="412343871668955639">"2 хвіліны"</item>
+    <item msgid="5076853889688991690">"5 хвілін"</item>
+    <item msgid="1903860996174927898">"10 хвілін"</item>
+    <item msgid="6415509612413178727">"30 хвілін"</item>
+  </string-array>
+  <string-array name="lock_after_timeout_entries">
+    <item msgid="8929270399652145290">"Неадкладна"</item>
+    <item msgid="6736512735606834431">"5 секунд"</item>
+    <item msgid="8044619388267891375">"15 секунд"</item>
+    <item msgid="1822002388249545488">"30 секунд"</item>
+    <item msgid="8538071621211916519">"1 хвіліна"</item>
+    <item msgid="5663439580228932882">"2 хвіліны"</item>
+    <item msgid="49888496216106852">"5 хвілін"</item>
+    <item msgid="9002737361305019353">"10 хвілін"</item>
+    <item msgid="4322676235684793329">"30 хвілін"</item>
+  </string-array>
+  <string-array name="entries_font_size">
+    <item msgid="8166647333858618801">"Малы"</item>
+    <item msgid="6986443533756848935">"Стандартны"</item>
+    <item msgid="38373998008112077">"Вялікі"</item>
+    <item msgid="7635254317531872272">"Найвялікшы"</item>
+  </string-array>
+  <string-array name="wifi_status">
+    <item msgid="1922181315419294640"></item>
+    <item msgid="8934131797783724664">"Сканаванне..."</item>
+    <item msgid="8513729475867537913">"Падлучэнне..."</item>
+    <item msgid="515055375277271756">"Аўтэнтыфікацыя..."</item>
+    <item msgid="1943354004029184381">"Атрыманне IP-адраса..."</item>
+    <item msgid="4221763391123233270">"Падлучана"</item>
+    <item msgid="624838831631122137">"Прыпынена"</item>
+    <item msgid="7979680559596111948">"Адлучэнне..."</item>
+    <item msgid="1634960474403853625">"Адключана"</item>
+    <item msgid="746097431216080650">"Няўдала"</item>
+    <item msgid="6367044185730295334">"Заблакiравана"</item>
+    <item msgid="503942654197908005">"Дрэнная сувязь часова пазбегнута"</item>
+  </string-array>
+  <string-array name="wifi_status_with_ssid">
+    <item msgid="7714855332363650812"></item>
+    <item msgid="8878186979715711006">"Сканаванне..."</item>
+    <item msgid="355508996603873860">"Падключэнне да сеткі <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="554971459996405634">"Аўтэнтыфікацыя ў сетцы <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="7928343808033020343">"Атрыманне IP-адраса ў сетцы <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="8937994881315223448">"Падключаны да сеткi <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</item>
+    <item msgid="1330262655415760617">"Прыпынена"</item>
+    <item msgid="7698638434317271902">"Адключэнне ад сеткі <xliff:g id="NETWORK_NAME">%1$s</xliff:g>..."</item>
+    <item msgid="197508606402264311">"Адключана"</item>
+    <item msgid="8578370891960825148">"Няўдала"</item>
+    <item msgid="5660739516542454527">"Заблакiравана"</item>
+    <item msgid="1805837518286731242">"Дрэнная сувязь часова пазбегнута"</item>
+  </string-array>
+    <!-- no translation found for wifi_security:0 (8491993170197127709) -->
+    <!-- no translation found for wifi_security:1 (6524315248437318854) -->
+    <!-- no translation found for wifi_security:2 (1532568756571457140) -->
+    <!-- no translation found for wifi_security:3 (3620707702811709779) -->
+    <!-- no translation found for wifi_security_no_eap:0 (2084555984818107151) -->
+    <!-- no translation found for wifi_security_no_eap:1 (397579322683471524) -->
+    <!-- no translation found for wifi_security_no_eap:2 (1968820975358150484) -->
+    <!-- no translation found for wifi_ap_security:0 (5251664683198623324) -->
+    <!-- no translation found for wifi_ap_security:1 (7989073072260294673) -->
+  <string-array name="wifi_eap_method">
+    <item msgid="1160193392455075561">"PEAP"</item>
+    <item msgid="7981731051382306293">"TLS"</item>
+    <item msgid="2892994535305020162">"TTLS"</item>
+    <item msgid="435667726254379514">"PWD"</item>
+    <item msgid="8549485714107012129">"SIM"</item>
+    <item msgid="1023893786681286517">"AKA"</item>
+    <item msgid="3030483188676375009">"AKA\'"</item>
+  </string-array>
+  <string-array name="eap_method_without_sim_auth">
+    <item msgid="4047867891913819797">"PEAP"</item>
+    <item msgid="641030570679578504">"TLS"</item>
+    <item msgid="3079489731769553856">"TTLS"</item>
+    <item msgid="35269224158638258">"PWD"</item>
+  </string-array>
+    <!-- no translation found for wifi_ap_band_config_full:0 (1085243288162893079) -->
+    <!-- no translation found for wifi_ap_band_config_full:1 (5531376834915607202) -->
+    <!-- no translation found for wifi_ap_band_config_2G_only:0 (7006771583217001015) -->
+  <string-array name="wifi_p2p_wps_setup">
+    <item msgid="5085064298144493867">"Націсніце кнопку"</item>
+    <item msgid="1624323946324499595">"PIN-код ад пірынгавай прылады"</item>
+    <item msgid="5366790421523328066">"PIN-код для гэтай прылады"</item>
+  </string-array>
+  <string-array name="wifi_p2p_status">
+    <item msgid="1701505390737218306">"Падключана"</item>
+    <item msgid="3189211552661432651">"Запрошаны"</item>
+    <item msgid="3206450250360237549">"Няўдала"</item>
+    <item msgid="7785896708926971207">"Даступны"</item>
+    <item msgid="2330782789550628803">"Выхад за дазволеныя межы"</item>
+  </string-array>
+  <string-array name="bluetooth_visibility_timeout_entries">
+    <item msgid="8151962652413645395">"2 хвіліны"</item>
+    <item msgid="8675215713017289017">"5 хвілін"</item>
+    <item msgid="477015974247590543">"1 гадзіна"</item>
+    <item msgid="5198271470953124739">"Ніколі не ўключаць тайм-аўт"</item>
+  </string-array>
+  <string-array name="wifi_signal">
+    <item msgid="2245412278046491293">"Дрэнная"</item>
+    <item msgid="2042505933058940139">"Дрэнны"</item>
+    <item msgid="1344546617235886412">"Слабы"</item>
+    <item msgid="6019931571712517411">"Добры"</item>
+    <item msgid="8986346415847956850">"Выдатны"</item>
+  </string-array>
+  <string-array name="data_usage_data_range">
+    <item msgid="5013973108901348144">"Апошнія 30 дзён"</item>
+    <item msgid="6600989128423965319">"Заданне цыклу расходу..."</item>
+  </string-array>
+  <string-array name="usage_stats_display_order_types">
+    <item msgid="2100172576767439288">"Час выкарыстання"</item>
+    <item msgid="4796160515314745154">"Апошняе выкарыстанне"</item>
+    <item msgid="2502754479975776899">"Назва прыкладання"</item>
+  </string-array>
+  <string-array name="wifi_eap_entries">
+    <item msgid="8615575908717909498">"PEAP"</item>
+    <item msgid="8667872640594311615">"TLS"</item>
+    <item msgid="7182812872984827322">"TTLS"</item>
+    <item msgid="2318274046749286642">"PWD"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries">
+    <item msgid="2577747762745812488">"Няма"</item>
+    <item msgid="937786527870979616">"MSCHAPV2"</item>
+    <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"Няма"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
+  </string-array>
+  <string-array name="wifi_phase2_entries">
+    <item msgid="1818786254010764570">"Няма"</item>
+    <item msgid="6189918678874123056">"PAP"</item>
+    <item msgid="1524112260493662517">"MSCHAP"</item>
+    <item msgid="5923246669412752932">"MSCHAPV2"</item>
+    <item msgid="8651992560135239389">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_ip_settings">
+    <item msgid="3906714200993111074">"DHCP"</item>
+    <item msgid="628395202971532382">"Статычны"</item>
+  </string-array>
+  <string-array name="wifi_proxy_settings">
+    <item msgid="4473276491748503377">"Няма"</item>
+    <item msgid="8673874894887358090">"Ручныя налады"</item>
+    <item msgid="168893341855953140">"Аўтаканфігурацыя проксі"</item>
+  </string-array>
+  <string-array name="apn_auth_entries">
+    <item msgid="3856896061242872146">"Няма"</item>
+    <item msgid="5756844015743664882">"PAP"</item>
+    <item msgid="535934025797984365">"CHAP"</item>
+    <item msgid="8383098660619805783">"PAP ці CHAP"</item>
+  </string-array>
+  <string-array name="apn_protocol_entries">
+    <item msgid="4852355456199302715">"IPv4"</item>
+    <item msgid="4394161344888484571">"IPv6"</item>
+    <item msgid="8084938354605535381">"IPv4/IPv6"</item>
+  </string-array>
+  <string-array name="bearer_entries">
+    <item msgid="1697455674244601285">"Не вызначана"</item>
+    <item msgid="1317061551798123908">"LTE"</item>
+    <item msgid="5005435684511894770">"HSPAP"</item>
+    <item msgid="7700603056475539235">"HSPA"</item>
+    <item msgid="245973007602397887">"HSUPA"</item>
+    <item msgid="6291566767651194016">"HSDPA"</item>
+    <item msgid="2005841400859926251">"UMTS"</item>
+    <item msgid="3757385691174882861">"EDGE"</item>
+    <item msgid="2979115073474306864">"GPRS"</item>
+    <item msgid="2271750502778879106">"eHRPD"</item>
+    <item msgid="4173379084783381337">"EVDO_B"</item>
+    <item msgid="2033682802005776093">"EVDO_A"</item>
+    <item msgid="5753917125831466719">"EVDO_0"</item>
+    <item msgid="4713807936577071142">"1xRTT"</item>
+    <item msgid="1142355797022021906">"IS95B"</item>
+    <item msgid="7471182818083460781">"IS95A"</item>
+  </string-array>
+  <string-array name="mvno_type_entries">
+    <item msgid="4367119357633573465">"Няма"</item>
+    <item msgid="6062567900587138000">"SPN"</item>
+    <item msgid="2454085083342423481">"IMSI"</item>
+    <item msgid="2681427309183221543">"GID"</item>
+  </string-array>
+  <string-array name="app_install_location_entries">
+    <item msgid="8151497958991952759">"Унутраная памяць прылады"</item>
+    <item msgid="3738430123799803530">"Зменная SD-карта"</item>
+    <item msgid="4498124044785815005">"Няхай вырашыць сістэма"</item>
+  </string-array>
+  <string-array name="app_ops_categories">
+    <item msgid="6358963769537892925">"Месцазнаходжанне"</item>
+    <item msgid="255608127647030286">"Персанальны"</item>
+    <item msgid="4588829735729884491">"Абмен паведамленнямі"</item>
+    <item msgid="886742181977884584">"Медыя"</item>
+    <item msgid="7924928667052300589">"Прылада"</item>
+  </string-array>
+  <string-array name="app_ops_summaries">
+    <item msgid="4979188868761515915">"прыблiзнае месцазнаходжанне"</item>
+    <item msgid="5789673140227507995">"дакладнае месцазнаходжанне"</item>
+    <item msgid="1061584358377390581">"GPS"</item>
+    <item msgid="5387405117297558954">"вібрацыя"</item>
+    <item msgid="3434165993711230924">"чытанне кантактаў"</item>
+    <item msgid="616161687718081936">"змяніць кантакты"</item>
+    <item msgid="7638002295329050091">"чытанне гiсторыi выклікаў"</item>
+    <item msgid="6546959730920410907">"змены ў гiсторыi выклікаў"</item>
+    <item msgid="446877710771379667">"чытанне календара"</item>
+    <item msgid="7674458294386319722">"змяніць каляндар"</item>
+    <item msgid="8281201165558093009">"сканаванне Wi-Fi"</item>
+    <item msgid="8694611243479480497">"апавяшчэнне"</item>
+    <item msgid="7776439107987345446">"сканаванне па сотавым"</item>
+    <item msgid="514615766544675057">"патэлефанаваць па нумары"</item>
+    <item msgid="8181415497109310680">"чытаць SMS"</item>
+    <item msgid="6816551144382117307">"напісаць SMS"</item>
+    <item msgid="4600463921908905030">"атрымліваць SMS"</item>
+    <item msgid="5958926493289432745">"атрымліваць экстранныя SMS"</item>
+    <item msgid="4945269495221089540">"атрымліваць MMS"</item>
+    <item msgid="5570472453573929087">"атрымаць WAP Push"</item>
+    <item msgid="7125408150230860501">"Адправiць SMS"</item>
+    <item msgid="7080337936612188061">"чытанне ICC SMS"</item>
+    <item msgid="587124103118495063">"напiсаць ICC SMS"</item>
+    <item msgid="2320577158869025503">"змяніць налады"</item>
+    <item msgid="1545733463471924009">"намалюйце ўверсе"</item>
+    <item msgid="3609046903962454582">"доступ да паведамленняў"</item>
+    <item msgid="4671646036128214513">"камера"</item>
+    <item msgid="1097324338692486211">"запісваць аўдыё"</item>
+    <item msgid="5031552983987798163">"прайграць аўдыё"</item>
+    <item msgid="8374996688066472414">"счытаць буфер абмену"</item>
+    <item msgid="3045529469061083747">"змяніць буфер абмену"</item>
+    <item msgid="5124443975763747838">"мультымедыйныя кнопкі"</item>
+    <item msgid="4547883971364273343">"аўдыёфокус"</item>
+    <item msgid="2603878814882344450">"асноўны рэгулятар гучнасці"</item>
+    <item msgid="7136963238377062018">"гучнасць голаса"</item>
+    <item msgid="4270236897655923007">"гучнасць выкліка"</item>
+    <item msgid="6325739889222559394">"гучнасць прайгравальніка"</item>
+    <item msgid="5762123934816216821">"гучнасць будзільніка"</item>
+    <item msgid="785049718065337473">"гучнасць апавяшчэнняў"</item>
+    <item msgid="6700305533746877052">"гучнасць Bluetooth"</item>
+    <item msgid="2029227495214047094">"не ўваходзіць у рэжым сна"</item>
+    <item msgid="26109888160231211">"сачыць за вызначэннем месцазнаходжання"</item>
+    <item msgid="5753382310468855812">"сачыць за энергазатратным вызначэннем месцазнаходжання"</item>
+    <item msgid="3356591542543137332">"атрымліваць статыстыку выкарыстання"</item>
+    <item msgid="3073734345226842233">"адключаць/уключаць мікрафон"</item>
+    <item msgid="2111767435887685265">"паказваць усплывальнае паведамленне"</item>
+    <item msgid="1091168669714823370">"праецыраваць мультымедыя"</item>
+    <item msgid="485564189219029300">"актываваць VPN"</item>
+    <item msgid="7155384795265164395">"запісваць шпалеры"</item>
+    <item msgid="1835836196806147034">"дапаможная структура"</item>
+    <item msgid="5989890403088155055">"дапаможны здымак экрана"</item>
+    <item msgid="8582699692765917557">"чытаць стан тэлефона"</item>
+    <item msgid="1474039653814954902">"дадаваць галасавое паведамленне"</item>
+    <item msgid="7222837656938871633">"выкарыстоўваць пратакол SIP"</item>
+    <item msgid="6108267038969274380">"апрацоўваць выходны выклік"</item>
+    <item msgid="4823402479973873358">"адбітак пальца"</item>
+    <item msgid="5895843015407713543">"датчыкі цела"</item>
+    <item msgid="1436446526955010826">"чытаць мабільныя трансляцыі"</item>
+    <item msgid="884172201575690484">"імітаваць месцазнаходжанне"</item>
+    <item msgid="3591971310048485247">"чытаць сховішча"</item>
+    <item msgid="4041187808621866119">"пісаць на сховішча"</item>
+    <item msgid="6628873315024166197">"уключаць экран"</item>
+    <item msgid="3253368931113490863">"атрымліваць уліковыя запісы"</item>
+    <item msgid="780392378084812901">"выконваць у фонавым рэжыме"</item>
+    <item msgid="2629748510881309577">"гучнасць для спецыяльных магчымасцей"</item>
+  </string-array>
+  <string-array name="app_ops_labels">
+    <item msgid="6602854600289714121">"Месцазнаходжанне"</item>
+    <item msgid="8677040780775113033">"Месцазнаходжанне"</item>
+    <item msgid="1660743989948992916">"Месцазнаходжанне"</item>
+    <item msgid="8791172739860195290">"Вібрацыя"</item>
+    <item msgid="383413555642128046">"Чытанне кантактаў"</item>
+    <item msgid="3654594895269697313">"Змяніць кантакты"</item>
+    <item msgid="7928393476362362538">"Чытанне гiсторыi выклікаў"</item>
+    <item msgid="6248591205254641116">"Змяненне запісаў у гiсторыi выклікаў"</item>
+    <item msgid="6093344633066170692">"Чытанне календара"</item>
+    <item msgid="1334886368750347692">"Змена календара"</item>
+    <item msgid="1638204101698708656">"Месцазнаходжанне"</item>
+    <item msgid="2154671955760380322">"Апублiкаваць апавяшчэнне"</item>
+    <item msgid="4282477730595931828">"Месцазнаходжанне"</item>
+    <item msgid="4891423912898525905">"Патэлефанаваць па нумары"</item>
+    <item msgid="2623604824935968113">"Чытаць SMS/MMS"</item>
+    <item msgid="4420177125221176306">"Пісаць SMS/MMS"</item>
+    <item msgid="3986142739951490025">"Прыём SMS/MMS"</item>
+    <item msgid="3984213795861739778">"Прыём SMS/MMS"</item>
+    <item msgid="3656243523752472788">"Прыём SMS/MMS"</item>
+    <item msgid="8105802370238551510">"Прыём SMS/MMS"</item>
+    <item msgid="1407766984645388488">"Адправiць SMS/MMS"</item>
+    <item msgid="3527273606643794973">"Чытаць SMS/MMS"</item>
+    <item msgid="4370895547001583812">"Пісаць SMS/MMS"</item>
+    <item msgid="4218544235221631789">"Змена налад"</item>
+    <item msgid="736541391767350377">"Намалюйце ўверсе"</item>
+    <item msgid="5530815681721654194">"Доступ да паведамленняў"</item>
+    <item msgid="781213371706962767">"Камера"</item>
+    <item msgid="1720492593061838172">"Запісаць аўдыё"</item>
+    <item msgid="3493046322001257041">"Прайграванне аўдыё"</item>
+    <item msgid="136815868796597058">"Счытаць буфер абмену"</item>
+    <item msgid="5238692940326972503">"Змяніць буфер абмену"</item>
+    <item msgid="5753789168376302997">"Мультымедыйныя кнопкі"</item>
+    <item msgid="3265262911688671938">"Аўдыёфокус"</item>
+    <item msgid="2098976479485046797">"Асноўны рэгулятар гучнасці"</item>
+    <item msgid="5660213838861789350">"Гучнасць голаса"</item>
+    <item msgid="7983336752371254444">"Гучнасць выкліка"</item>
+    <item msgid="7878027809189330917">"Гучнасць прайгравальніка"</item>
+    <item msgid="7260546305036218513">"Гучнасць будзільніка"</item>
+    <item msgid="9103719301075748925">"Гучнасць апавяшчэнняў"</item>
+    <item msgid="7025966722295861512">"Гучнасць Bluetooth"</item>
+    <item msgid="4665183401128289653">"Не ўваходзіць у рэжым сна"</item>
+    <item msgid="8584357129746649222">"Месцазнаходжанне"</item>
+    <item msgid="7669257279311110599">"Месцазнаходжанне"</item>
+    <item msgid="3459320345690097795">"Атрымаць статыстыку выкарыстання"</item>
+    <item msgid="1312534577834048535">"Адключаць/уключаць мікрафон"</item>
+    <item msgid="427580389823724225">"Паказваць усплывальнае паведамленне"</item>
+    <item msgid="4992007785575926253">"Праецыраваць мультымедыя"</item>
+    <item msgid="2482631530338029480">"Актываваць VPN"</item>
+    <item msgid="1662979573471871926">"Запісваць шпалеры"</item>
+    <item msgid="5964768335278263478">"Дапаможная структура"</item>
+    <item msgid="2657138701132782702">"Дапаможны здымак экрана"</item>
+    <item msgid="8571369610363539266">"Чытаць стан тэлефона"</item>
+    <item msgid="4542463358215230845">"Дадаваць галасавое паведамленне"</item>
+    <item msgid="864565065016166003">"Выкарыстоўваць пратакол SIP"</item>
+    <item msgid="1958009349883195116">"Апрацоўваць выходны выклік"</item>
+    <item msgid="8526563410140613458">"Адбітак пальца"</item>
+    <item msgid="7864822459293570891">"Датчыкі цела"</item>
+    <item msgid="6798698496904810960">"Чытаць мабільныя трансляцыі"</item>
+    <item msgid="5242052845700875820">"Імітаваць месцазнаходжанне"</item>
+    <item msgid="1246296877820358565">"Чытаць сховішча"</item>
+    <item msgid="2404067308793740341">"Пісаць на сховішча"</item>
+    <item msgid="5832543806893763620">"Уключаць экран"</item>
+    <item msgid="5258373962467495905">"Атрымліваць уліковыя запісы"</item>
+    <item msgid="334625385979270703">"Выконваць у фонавым рэжыме"</item>
+    <item msgid="9039213578110332702">"Гучнасць для спецыяльных магчымасцей"</item>
+  </string-array>
+  <string-array name="long_press_timeout_selector_titles">
+    <item msgid="3511504869290423954">"Кароткая"</item>
+    <item msgid="2560532955514699713">"Сярэдняя"</item>
+    <item msgid="2372711992605524591">"Доўгая"</item>
+  </string-array>
+  <string-array name="captioning_typeface_selector_titles">
+    <item msgid="1319652728542138112">"Стандартная"</item>
+    <item msgid="1016452621833735880">"Без засечак"</item>
+    <item msgid="2496277987934654454">"Без засечак сцягнуты"</item>
+    <item msgid="7247838127505318669">"Без засечак монашырынны"</item>
+    <item msgid="4478414822462359763">"З засечкамі"</item>
+    <item msgid="7502451783483660829">"З засечкамі монашырынны"</item>
+    <item msgid="639503332147461010">"Нефармальны"</item>
+    <item msgid="7967169925231332424">"Курсіўны"</item>
+    <item msgid="561832997193039673">"Капітэль"</item>
+  </string-array>
+  <string-array name="captioning_font_size_selector_titles">
+    <item msgid="4800919809575254054">"Вельмі дробны"</item>
+    <item msgid="6781094565687692782">"Дробны"</item>
+    <item msgid="8222123259497646551">"Звычайны"</item>
+    <item msgid="5813217276778560466">"Вялікі"</item>
+    <item msgid="9044232017390975191">"Вельмі вялікі"</item>
+  </string-array>
+  <string-array name="captioning_edge_type_selector_titles">
+    <item msgid="4733815704128258753">"Стандартны"</item>
+    <item msgid="3217099060748617005">"Недаступна"</item>
+    <item msgid="7467615139904599420">"Контур"</item>
+    <item msgid="5623165557468608975">"Цень"</item>
+    <item msgid="8088451174058214588">"Прыўзняты"</item>
+    <item msgid="3821418743395480313">"Уціснуты"</item>
+  </string-array>
+  <string-array name="captioning_opacity_selector_titles">
+    <item msgid="7622491218136667566">"25%"</item>
+    <item msgid="2367156416247936773">"50%"</item>
+    <item msgid="5395560410107149298">"75%"</item>
+    <item msgid="8342334626783983353">"100%"</item>
+  </string-array>
+  <string-array name="captioning_preset_selector_titles">
+    <item msgid="7009918361545506251">"Ужываць стандартныя налады праграмы"</item>
+    <item msgid="1770533843436933500">"Белы на чорным"</item>
+    <item msgid="758587126802411846">"Чорны на белым"</item>
+    <item msgid="1495307195241623402">"Жоўты на чорным"</item>
+    <item msgid="6039700130994371612">"Жоўты на сінім"</item>
+    <item msgid="7169235156349580064">"Карыстальніцкі"</item>
+  </string-array>
+  <string-array name="vpn_types_long">
+    <item msgid="2732002039459078847">"PPTP VPN"</item>
+    <item msgid="3799752201662127867">"L2TP/IPSec VPN з загадзя размеркаванымі ключамі"</item>
+    <item msgid="4725504331295252103">"L2TP/IPSec VPN з сертыфікатамі"</item>
+    <item msgid="7526551163264034377">"IPSec VPN з папярэдне размеркаванымі ключамі і аўтэнтыфікацыяй Xauth"</item>
+    <item msgid="8064740940687465039">"IPSec VPN з сертыфікатамі і аўтэнтыфікацыяй Xauth"</item>
+    <item msgid="4946199982372391490">"IPSec VPN з сертыфікатамі і гібрыднай аўтэнтыфікацыяй"</item>
+  </string-array>
+  <string-array name="vpn_states">
+    <item msgid="8621078286418985762">"Адключана"</item>
+    <item msgid="6692305604213080515">"Ініцыялізацыя..."</item>
+    <item msgid="8001704909356800092">"Злучэнне..."</item>
+    <item msgid="4039737283841672166">"Злучана"</item>
+    <item msgid="4042143101664725090">"Тайм-аўт"</item>
+    <item msgid="7664124146786465092">"Няўдала"</item>
+  </string-array>
+  <string-array name="security_settings_premium_sms_values">
+    <item msgid="7389829271787670252">"Запытацца"</item>
+    <item msgid="5077768429488260031">"Нiколi не дазваляць"</item>
+    <item msgid="1417929597727989746">"Заўсёды дазваляць"</item>
+  </string-array>
+  <string-array name="ram_states">
+    <item msgid="3944681673818150669">"Звычайны"</item>
+    <item msgid="3256987280393708586">"Умераны"</item>
+    <item msgid="4662917179231875995">"Нізкі"</item>
+    <item msgid="5264929699714647509">"Крытычны"</item>
+    <item msgid="5606155978847838966">"?"</item>
+  </string-array>
+  <string-array name="proc_stats_memory_states">
+    <item msgid="8845855295876909468">"Звычайны"</item>
+    <item msgid="866544120205026771">"Умераны"</item>
+    <item msgid="7851902244436886890">"Нізкі"</item>
+    <item msgid="3022922196817563960">"Крытычны"</item>
+  </string-array>
+  <string-array name="proc_stats_process_states">
+    <item msgid="5069825997142785829">"Пастаянны"</item>
+    <item msgid="5779398140277006695">"Папулярная дзейнасць"</item>
+    <item msgid="1439598363694578255">"Важна (на пярэднім плане)"</item>
+    <item msgid="3396458970745718652">"Важна (у фоне)"</item>
+    <item msgid="5214825238247511992">"Рэзервовая копія"</item>
+    <item msgid="311372689168254967">"Вялікая вага"</item>
+    <item msgid="7438189122367820362">"Сэрвіс (працуе)"</item>
+    <item msgid="918687422516982498">"Сэрвіс (перазапуск)"</item>
+    <item msgid="6807727069641853029">"Прыёмнік"</item>
+    <item msgid="6782857406100845127">"Галоўны"</item>
+    <item msgid="2860945127596974299">"Апошняя дзейнасць"</item>
+    <item msgid="8610560843693675830">"Кэшавана (дзейнасць)"</item>
+    <item msgid="4338089220026248848">"Кэшавана (кліент дзейнасці)"</item>
+    <item msgid="6652164677254579050">"Кэшавана (пуста)"</item>
+  </string-array>
+  <string-array name="color_picker">
+    <item msgid="7631642672260600032">"Сіне-зялёны"</item>
+    <item msgid="8332294763632946560">"Сiнi"</item>
+    <item msgid="2023216417616991392">"Індыга"</item>
+    <item msgid="3170497246594232819">"Фіялетавы"</item>
+    <item msgid="4608643045752965568">"Ружовы"</item>
+    <item msgid="6131821495505931173">"Чырвоны"</item>
+  </string-array>
+  <string-array name="automatic_storage_management_days">
+    <item msgid="687318592238852312">"Старэйшыя за 30 дзён"</item>
+    <item msgid="2900554746706302178">"Старэйшыя за 60 дзён"</item>
+    <item msgid="5692284879054004388">"Старэйшыя за 90 дзён"</item>
+  </string-array>
+</resources>

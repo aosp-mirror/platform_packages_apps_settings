@@ -15,13 +15,14 @@
      limitations under the License.
 -->
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     style="?android:attr/spinnerItemStyle"
-    android:singleLine="true"
+    android:maxLines="1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
+    android:textColor="?android:attr/colorForegroundInverse"
     android:textAppearance="@style/TextAppearance.Switch"
-    android:textColor="@android:color/white"
-    android:textAlignment="inherit"/>
+    android:textAlignment="inherit" />

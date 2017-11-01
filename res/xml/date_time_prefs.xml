@@ -43,8 +43,8 @@
         android:summary="12:00am"
         />
 
-    <PreferenceScreen
-        android:fragment="com.android.settings.ZonePicker"
+    <Preference
+        android:fragment="com.android.settings.datetime.ZonePicker"
         android:key="timezone"
         android:title="@string/date_time_set_timezone"
         android:summary="GMT-8:00"

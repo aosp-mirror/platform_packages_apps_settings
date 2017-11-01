@@ -15,13 +15,13 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-                  android:title="@string/settings_label">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_label">
 
-        <com.android.settings.SingleLineSummaryPreference
-            android:key="owner_info_settings"
-            android:title="@string/owner_info_settings_title"
-            android:summary="@string/owner_info_settings_summary"/>
+    <com.android.settingslib.RestrictedPreference
+        android:key="owner_info_settings"
+        android:title="@string/owner_info_settings_title"
+        android:summary="@string/owner_info_settings_summary" />
 
 </PreferenceScreen>

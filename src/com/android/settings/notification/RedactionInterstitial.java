@@ -16,9 +16,14 @@
 
 package com.android.settings.notification;
 
-import android.app.admin.DevicePolicyManager;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -26,25 +31,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.RestrictedCheckBox;
 import com.android.settings.RestrictedRadioButton;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
-
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class RedactionInterstitial extends SettingsActivity {
 
@@ -53,6 +53,12 @@ public class RedactionInterstitial extends SettingsActivity {
         Intent modIntent = new Intent(super.getIntent());
         modIntent.putExtra(EXTRA_SHOW_FRAGMENT, RedactionInterstitialFragment.class.getName());
         return modIntent;
+    }
+
+    @Override
+    protected void onApplyThemeResource(Resources.Theme theme, int resid, boolean first) {
+        resid = SetupWizardUtils.getTheme(getIntent());
+        super.onApplyThemeResource(theme, resid, first);
     }
 
     @Override
@@ -75,7 +81,7 @@ public class RedactionInterstitial extends SettingsActivity {
     public static Intent createStartIntent(Context ctx, int userId) {
         return new Intent(ctx, RedactionInterstitial.class)
                 .putExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID,
-                        Utils.isManagedProfile(UserManager.get(ctx), userId)
+                        UserManager.get(ctx).isManagedProfile(userId)
                             ? R.string.lock_screen_notifications_interstitial_title_profile
                             : R.string.lock_screen_notifications_interstitial_title)
                 .putExtra(Intent.EXTRA_USER_ID, userId);
@@ -90,7 +96,7 @@ public class RedactionInterstitial extends SettingsActivity {
         private int mUserId;
 
         @Override
-        protected int getMetricsCategory() {
+        public int getMetricsCategory() {
             return MetricsEvent.NOTIFICATION_REDACTION;
         }
 
@@ -111,7 +117,7 @@ public class RedactionInterstitial extends SettingsActivity {
             mRadioGroup.setOnCheckedChangeListener(this);
             mUserId = Utils.getUserIdFromBundle(
                     getContext(), getActivity().getIntent().getExtras());
-            if (Utils.isManagedProfile(UserManager.get(getContext()), mUserId)) {
+            if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
                 ((TextView) view.findViewById(R.id.message))
                     .setText(R.string.lock_screen_notifications_interstitial_message_profile);
                 mShowAllButton.setText(R.string.lock_screen_notifications_summary_show_profile);
@@ -128,9 +134,10 @@ public class RedactionInterstitial extends SettingsActivity {
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.redaction_done_button) {
+                SetupRedactionInterstitial.setEnabled(getContext(), false);
                 final RedactionInterstitial activity = (RedactionInterstitial) getActivity();
                 if (activity != null) {
-                    activity.setResult(RESULT_OK, activity.getResultIntentData());
+                    activity.setResult(RESULT_OK, null);
                     finish();
                 }
             }

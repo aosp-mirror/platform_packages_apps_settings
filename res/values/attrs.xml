@@ -92,6 +92,12 @@
 
     <attr name="apnPreferenceStyle" format="reference" />
 
+    <attr name="footerPreferenceStyle" format="reference" />
+
+    <declare-styleable name="FixedLineSummaryPreference">
+        <attr name="summaryLineCount" format="integer" />
+    </declare-styleable>
+
     <!-- For Search -->
     <declare-styleable name="Preference">
         <attr name="keywords" format="string" />
@@ -139,11 +145,30 @@
     <!-- For GesturePreference -->
     <declare-styleable name="GesturePreference">
         <attr name="animation" format="reference" />
+        <attr name="preview" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="VideoPreference">
+        <attr name="animation" format="reference" />
+        <attr name="preview" format="reference" />
     </declare-styleable>
 
     <!-- For AspectRatioFrameLayout -->
     <declare-styleable name="AspectRatioFrameLayout">
         <attr name="aspectRatio" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="TintablePreference">
+        <attr name="android:tint" format="color|reference" />
+    </declare-styleable>
+
+    <!-- For UsageView -->
+    <declare-styleable name="UsageView">
+        <attr name="android:colorAccent" />
+        <attr name="sideLabels" format="reference" />
+        <attr name="bottomLabels" format="reference" />
+        <attr name="textColor" format="color" />
+        <attr name="android:gravity" />
     </declare-styleable>
 
 </resources>

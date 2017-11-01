@@ -22,7 +22,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Display;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.PreviewSeekBarPreferenceFragment;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -94,7 +94,12 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getHelpResource() {
+        return R.string.help_url_display_size;
+    }
+
+    @Override
+    public int getMetricsCategory() {
         return MetricsEvent.DISPLAY_SCREEN_ZOOM;
     }
 

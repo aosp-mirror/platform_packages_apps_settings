@@ -18,27 +18,25 @@
                   android:title="@string/memory_usage">
 
     <PreferenceCategory
-        android:title="@string/average_memory_use"
-        android:layout="@layout/preference_category_short" />
+        android:title="@string/average_memory_use">
 
-    <com.android.settings.SummaryPreference
-        android:key="status_header"
-        android:selectable="false" />
+        <com.android.settings.SummaryPreference
+            android:key="status_header"
+            android:selectable="false" />
 
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="5dp" />
+        <Preference
+            android:key="frequency"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/running_frequency" />
 
-    <Preference
-        android:key="frequency"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/running_frequency" />
+        <Preference
+            android:key="max_usage"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference"
+            android:title="@string/memory_maximum_usage" />
 
-    <Preference
-        android:key="max_usage"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference"
-        android:title="@string/memory_maximum_usage" />
+    </PreferenceCategory>
 
     <PreferenceCategory
         android:key="processes"

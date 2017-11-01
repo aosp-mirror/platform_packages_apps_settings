@@ -25,7 +25,7 @@ import android.util.AttributeSet;
 
 public class DefaultRingtonePreference extends RingtonePreference {
     private static final String TAG = "DefaultRingtonePreference";
-    
+
     public DefaultRingtonePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -33,7 +33,7 @@ public class DefaultRingtonePreference extends RingtonePreference {
     @Override
     public void onPrepareRingtonePickerIntent(Intent ringtonePickerIntent) {
         super.onPrepareRingtonePickerIntent(ringtonePickerIntent);
-        
+
         /*
          * Since this preference is for choosing the default ringtone, it
          * doesn't make sense to show a 'Default' item.
@@ -43,12 +43,12 @@ public class DefaultRingtonePreference extends RingtonePreference {
 
     @Override
     protected void onSaveRingtone(Uri ringtoneUri) {
-        RingtoneManager.setActualDefaultRingtoneUri(getContext(), getRingtoneType(), ringtoneUri);
+        RingtoneManager.setActualDefaultRingtoneUri(mUserContext, getRingtoneType(), ringtoneUri);
     }
 
     @Override
     protected Uri onRestoreRingtone() {
-        return RingtoneManager.getActualDefaultRingtoneUri(getContext(), getRingtoneType());
+        return RingtoneManager.getActualDefaultRingtoneUri(mUserContext, getRingtoneType());
     }
-    
+
 }

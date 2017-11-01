@@ -231,17 +231,17 @@ class SettingsInjector {
      * @param profileId Identifier of the user/profile to obtain the injected settings for or
      *                  UserHandle.USER_CURRENT for all profiles associated with current user.
      */
-    public List<Preference> getInjectedSettings(final int profileId) {
+    public List<Preference> getInjectedSettings(Context prefContext, final int profileId) {
         final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         final List<UserHandle> profiles = um.getUserProfiles();
-        ArrayList<Preference> prefs = new ArrayList<Preference>();
+        ArrayList<Preference> prefs = new ArrayList<>();
         final int profileCount = profiles.size();
         for (int i = 0; i < profileCount; ++i) {
             final UserHandle userHandle = profiles.get(i);
             if (profileId == UserHandle.USER_CURRENT || profileId == userHandle.getIdentifier()) {
                 Iterable<InjectedSetting> settings = getSettings(userHandle);
                 for (InjectedSetting setting : settings) {
-                    Preference pref = addServiceSetting(prefs, setting);
+                    Preference pref = addServiceSetting(prefContext, prefs, setting);
                     mSettings.add(new Setting(setting, pref));
                 }
             }
@@ -265,7 +265,8 @@ class SettingsInjector {
     /**
      * Adds an injected setting to the root.
      */
-    private Preference addServiceSetting(List<Preference> prefs, InjectedSetting info) {
+    private Preference addServiceSetting(Context prefContext, List<Preference> prefs,
+            InjectedSetting info) {
         PackageManager pm = mContext.getPackageManager();
         Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
         Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
@@ -275,7 +276,7 @@ class SettingsInjector {
             // a separate content description.
             badgedAppLabel = null;
         }
-        Preference pref = new DimmableIconPreference(mContext, badgedAppLabel);
+        Preference pref = new DimmableIconPreference(prefContext, badgedAppLabel);
         pref.setTitle(info.title);
         pref.setSummary(null);
         pref.setIcon(icon);

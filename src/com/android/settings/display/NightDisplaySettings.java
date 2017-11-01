@@ -26,8 +26,9 @@ import android.support.v7.preference.TwoStatePreference;
 import android.widget.TimePicker;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;
@@ -44,6 +45,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
     private static final String KEY_NIGHT_DISPLAY_END_TIME = "night_display_end_time";
     private static final String KEY_NIGHT_DISPLAY_ACTIVATED = "night_display_activated";
+    private static final String KEY_NIGHT_DISPLAY_TEMPERATURE = "night_display_temperature";
 
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
@@ -55,6 +57,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private Preference mStartTimePreference;
     private Preference mEndTimePreference;
     private TwoStatePreference mActivatedPreference;
+    private SeekBarPreference mTemperaturePreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,14 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
         mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        mTemperaturePreference.setMax(convertTemperature(mController.getMinimumColorTemperature()));
+        mTemperaturePreference.setContinuousUpdates(true);
+    }
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_night_display;
     }
 
     @Override
@@ -73,11 +84,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
         // Load the preferences from xml.
         addPreferencesFromResource(R.xml.night_display_settings);
-
+        mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.night_display_text);
         mAutoModePreference = (DropDownPreference) findPreference(KEY_NIGHT_DISPLAY_AUTO_MODE);
         mStartTimePreference = findPreference(KEY_NIGHT_DISPLAY_START_TIME);
         mEndTimePreference = findPreference(KEY_NIGHT_DISPLAY_END_TIME);
         mActivatedPreference = (TwoStatePreference) findPreference(KEY_NIGHT_DISPLAY_ACTIVATED);
+        mTemperaturePreference = (SeekBarPreference) findPreference(KEY_NIGHT_DISPLAY_TEMPERATURE);
 
         mAutoModePreference.setEntries(new CharSequence[] {
                 getString(R.string.night_display_auto_mode_never),
@@ -91,6 +103,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         });
         mAutoModePreference.setOnPreferenceChangeListener(this);
         mActivatedPreference.setOnPreferenceChangeListener(this);
+        mTemperaturePreference.setOnPreferenceChangeListener(this);
     }
 
     @Override
@@ -105,6 +118,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         onAutoModeChanged(mController.getAutoMode());
         onCustomStartTimeChanged(mController.getCustomStartTime());
         onCustomEndTimeChanged(mController.getCustomEndTime());
+        onColorTemperatureChanged(mController.getColorTemperature());
     }
 
     @Override
@@ -156,8 +170,21 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_START_TIME:
+                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_START_TIME;
+            case DIALOG_END_TIME:
+                return MetricsEvent.DIALOG_NIGHT_DISPLAY_SET_END_TIME;
+            default:
+                return 0;
+        }
+    }
+
+    @Override
     public void onActivated(boolean activated) {
         mActivatedPreference.setChecked(activated);
+        mTemperaturePreference.setEnabled(activated);
     }
 
     @Override
@@ -169,6 +196,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         mEndTimePreference.setVisible(showCustomSchedule);
     }
 
+    @Override
+    public void onColorTemperatureChanged(int colorTemperature) {
+        mTemperaturePreference.setProgress(convertTemperature(colorTemperature));
+    }
+
     private String getFormattedTimeString(NightDisplayController.LocalTime localTime) {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(mTimeFormatter.getTimeZone());
@@ -177,6 +209,15 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
         return mTimeFormatter.format(c.getTime());
+    }
+
+    /**
+     * Inverts and range-adjusts a raw value from the SeekBar (i.e. [0, maxTemp-minTemp]), or
+     * converts an inverted and range-adjusted value to the raw SeekBar value, depending on the
+     * adjustment status of the input.
+     */
+    private int convertTemperature(int temperature) {
+        return mController.getMaximumColorTemperature() - temperature;
     }
 
     @Override
@@ -195,12 +236,14 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
             return mController.setAutoMode(Integer.parseInt((String) newValue));
         } else if (preference == mActivatedPreference) {
             return mController.setActivated((Boolean) newValue);
+        } else if (preference == mTemperaturePreference) {
+            return mController.setColorTemperature(convertTemperature((Integer) newValue));
         }
         return false;
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
     }
 }

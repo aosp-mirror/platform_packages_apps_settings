@@ -34,15 +34,30 @@
         android:gravity="center_horizontal"
         android:paddingTop="8dp"
         android:paddingBottom="30dp"
-        android:textAppearance="@style/TextAppearance.Small"
-        android:textColor="?android:attr/textColorSecondary"/>
-    <LinearLayout
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+    <TextView
+        android:id="@+id/account_request_prefix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
+        android:text="@string/support_account_request_prefix"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+    <Spinner
+        android:id="@+id/account_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -59,11 +74,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:textAppearance="@style/TextAppearance.Small"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
@@ -80,8 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:textAppearance="@style/TextAppearance.Small"
-                android:textColor="?android:attr/textColorSecondary"/>
+                android:textAppearance="?android:attr/textAppearanceSmall"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

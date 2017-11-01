@@ -135,24 +135,15 @@
   <string-array name="bluetooth_visibility_timeout_entries">
     <item msgid="8151962652413645395">"2 min."</item>
     <item msgid="8675215713017289017">"5 min."</item>
-    <item msgid="477015974247590543">"1 hod."</item>
+    <item msgid="477015974247590543">"1 h"</item>
     <item msgid="5198271470953124739">"Bez časového limitu"</item>
   </string-array>
   <string-array name="wifi_signal">
     <item msgid="2245412278046491293">"Nízka"</item>
-    <item msgid="5615082285463430971">"Dostatočná"</item>
-    <item msgid="3565079809875324621">"Dobrá"</item>
-    <item msgid="5702329417707689835">"Výborná"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries">
-    <item msgid="3269131034472904310">"Vždy"</item>
-    <item msgid="844721238536786870">"Iba počas napájania"</item>
-    <item msgid="1986753720941888596">"Nikdy"</item>
-  </string-array>
-  <string-array name="wifi_sleep_policy_entries_wifi_only">
-    <item msgid="2124319326282651391">"Vždy"</item>
-    <item msgid="7433294150916905997">"Iba počas napájania"</item>
-    <item msgid="1390404486722375028">"Nikdy"</item>
+    <item msgid="2042505933058940139">"Slabé"</item>
+    <item msgid="1344546617235886412">"Priemerné"</item>
+    <item msgid="6019931571712517411">"Dobré"</item>
+    <item msgid="8986346415847956850">"Vynikajúce"</item>
   </string-array>
   <string-array name="data_usage_data_range">
     <item msgid="5013973108901348144">"Posledných 30 dní"</item>
@@ -173,6 +164,14 @@
     <item msgid="2577747762745812488">"Žiadne"</item>
     <item msgid="937786527870979616">"MSCHAPV2"</item>
     <item msgid="5302613883318643629">"GTC"</item>
+  </string-array>
+  <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+    <item msgid="5760470455461128892">"Žiadne"</item>
+    <item msgid="7480272092408291086">"MSCHAPV2"</item>
+    <item msgid="5881794903338319324">"GTC"</item>
+    <item msgid="5610607665198791980">"SIM"</item>
+    <item msgid="2860798636241124128">"AKA"</item>
+    <item msgid="8926455723452645935">"AKA\'"</item>
   </string-array>
   <string-array name="wifi_phase2_entries">
     <item msgid="1818786254010764570">"Žiadne"</item>
@@ -248,14 +247,14 @@
     <item msgid="6546959730920410907">"úprava denníka hovorov"</item>
     <item msgid="446877710771379667">"čítanie kalendára"</item>
     <item msgid="7674458294386319722">"úprava kalendára"</item>
-    <item msgid="8281201165558093009">"prehľadanie sietí Wi-Fi"</item>
+    <item msgid="8281201165558093009">"prehľadanie sietí Wi‑Fi"</item>
     <item msgid="8694611243479480497">"upozornenie"</item>
     <item msgid="7776439107987345446">"prehľadanie mobilných sietí"</item>
     <item msgid="514615766544675057">"volanie na telefón"</item>
     <item msgid="8181415497109310680">"čítanie správ SMS"</item>
     <item msgid="6816551144382117307">"písanie správ SMS"</item>
     <item msgid="4600463921908905030">"príjem správ SMS"</item>
-    <item msgid="5958926493289432745">"príjem núdzových správ SMS"</item>
+    <item msgid="5958926493289432745">"príjem tiesňových SMS"</item>
     <item msgid="4945269495221089540">"príjem správ MMS"</item>
     <item msgid="5570472453573929087">"príjem správ WAP push"</item>
     <item msgid="7125408150230860501">"odosielanie správ SMS"</item>
@@ -295,13 +294,14 @@
     <item msgid="6108267038969274380">"spracovanie odchádzajúcich hovorov"</item>
     <item msgid="4823402479973873358">"odtlačok prsta"</item>
     <item msgid="5895843015407713543">"telesné senzory"</item>
-    <item msgid="1436446526955010826">"čítanie vysielaní cell broadcast"</item>
+    <item msgid="1436446526955010826">"čítať správy informačných služieb"</item>
     <item msgid="884172201575690484">"napodobnenie miesta"</item>
     <item msgid="3591971310048485247">"čítanie úložiska"</item>
     <item msgid="4041187808621866119">"zápis do úložiska"</item>
     <item msgid="6628873315024166197">"zapnutie obrazovky"</item>
     <item msgid="3253368931113490863">"získanie účtov"</item>
     <item msgid="780392378084812901">"spustenie na pozadí"</item>
+    <item msgid="2629748510881309577">"objem aplikácií dostupnosti"</item>
   </string-array>
   <string-array name="app_ops_labels">
     <item msgid="6602854600289714121">"Poloha"</item>
@@ -361,13 +361,14 @@
     <item msgid="1958009349883195116">"Spracovanie odchádzajúcich hovorov"</item>
     <item msgid="8526563410140613458">"Odtlačok prsta"</item>
     <item msgid="7864822459293570891">"Telesné senzory"</item>
-    <item msgid="6798698496904810960">"Čítanie vysielaní cell broadcast"</item>
+    <item msgid="6798698496904810960">"Čítať správy informačných služieb"</item>
     <item msgid="5242052845700875820">"Napodobnenie miesta"</item>
     <item msgid="1246296877820358565">"Čítanie úložiska"</item>
     <item msgid="2404067308793740341">"Zápis do úložiska"</item>
     <item msgid="5832543806893763620">"Zapnutie obrazovky"</item>
     <item msgid="5258373962467495905">"Získanie účtov"</item>
     <item msgid="334625385979270703">"Spustenie na pozadí"</item>
+    <item msgid="9039213578110332702">"Objem aplikácií dostupnosti"</item>
   </string-array>
   <string-array name="long_press_timeout_selector_titles">
     <item msgid="3511504869290423954">"Krátke"</item>
@@ -453,7 +454,7 @@
     <item msgid="5779398140277006695">"Najčastejšia aktivita"</item>
     <item msgid="1439598363694578255">"Dôležitý (v popredí)"</item>
     <item msgid="3396458970745718652">"Dôležitý (v pozadí)"</item>
-    <item msgid="5214825238247511992">"Záloha"</item>
+    <item msgid="5214825238247511992">"Zálohovanie"</item>
     <item msgid="311372689168254967">"Vysoké vyťaženie"</item>
     <item msgid="7438189122367820362">"Služba (spustená)"</item>
     <item msgid="918687422516982498">"Služba (reštartuje sa)"</item>

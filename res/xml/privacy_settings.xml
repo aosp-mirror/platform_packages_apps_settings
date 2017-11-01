@@ -19,24 +19,24 @@
     android:title="@string/privacy_settings_title">
 
     <!-- Backup settings -->
-    <PreferenceScreen
+    <Preference
         android:key="backup_data"
         android:title="@string/backup_data_title"
         android:persistent="false"
         android:fragment="com.android.settings.backup.ToggleBackupSettingFragment"/>
 
-    <PreferenceScreen
+    <Preference
         android:key="configure_account"
         android:title="@string/backup_configure_account_title"
         android:persistent="false">
         <!-- the Intent declared here is always overwritten by a real one -->
         <intent android:action="dummy" />
-    </PreferenceScreen>
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="data_management"
         android:persistent="false">
-    </PreferenceScreen>
+    </Preference>
 
     <SwitchPreference
         android:key="auto_restore"
@@ -49,14 +49,5 @@
         android:persistent="false"
         android:enabled="false"
         android:selectable="false" />
-
-    <!-- Factory reset -->
-    <com.android.settingslib.RestrictedPreference
-        android:key="factory_reset"
-        android:title="@string/master_clear_title"
-        settings:keywords="@string/keywords_factory_data_reset"
-        settings:userRestriction="no_factory_reset"
-        settings:useAdminDisabledSummary="true"
-        android:fragment="com.android.settings.MasterClear" />
 
 </PreferenceScreen>

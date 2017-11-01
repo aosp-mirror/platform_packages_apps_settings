@@ -18,8 +18,7 @@
     android:title="@string/data_usage_summary_title">
 
     <PreferenceCategory
-        android:key="usage_amount"
-        android:layout="@layout/preference_category_short">
+        android:key="usage_amount">
 
         <com.android.settings.datausage.ChartDataUsagePreference
             android:key="chart_data" />

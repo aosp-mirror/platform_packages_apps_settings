@@ -15,29 +15,28 @@
   ~ limitations under the License
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-                  android:title="@string/settings_label">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings_label">
 
-        <SwitchPreference
-                android:key="visiblepattern"
-                android:title="@string/lockpattern_settings_enable_visible_pattern_title"/>
+    <SwitchPreference
+        android:key="visiblepattern"
+        android:title="@string/lockpattern_settings_enable_visible_pattern_title" />
 
-        <com.android.settings.TimeoutListPreference
-                android:key="lock_after_timeout"
-                android:title="@string/lock_after_timeout"
-                android:summary="@string/lock_after_timeout_summary"
-                android:entries="@array/lock_after_timeout_entries"
-                android:entryValues="@array/lock_after_timeout_values" />
+    <com.android.settings.TimeoutListPreference
+        android:key="lock_after_timeout"
+        android:title="@string/lock_after_timeout"
+        android:summary="@string/lock_after_timeout_summary"
+        android:entries="@array/lock_after_timeout_entries"
+        android:entryValues="@array/lock_after_timeout_values" />
 
-        <SwitchPreference
-                android:key="power_button_instantly_locks"
-                android:title="@string/lockpattern_settings_enable_power_button_instantly_locks"/>
+    <SwitchPreference
+        android:key="power_button_instantly_locks"
+        android:title="@string/lockpattern_settings_enable_power_button_instantly_locks" />
 
-        <com.android.settings.SingleLineSummaryPreference
-                android:key="owner_info_settings"
-                android:title="@string/owner_info_settings_title"
-                android:summary="@string/owner_info_settings_summary"/>
-
+    <com.android.settingslib.RestrictedPreference
+        android:key="owner_info_settings"
+        android:title="@string/owner_info_settings_title"
+        android:summary="@string/owner_info_settings_summary" />
 
 </PreferenceScreen>

@@ -79,6 +79,7 @@
         <item name="android:gravity">center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.CryptKeeper_PasswordEntry" parent="android:TextAppearance.Material">
@@ -91,18 +92,6 @@
 
     <style name="TallTitleBarTheme" parent="android:Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="Preference">
-        <item name="android:layout">@layout/preference_material_settings</item>
-    </style>
-
-    <style name="SyncSwitchPreference" parent="Preference">
-        <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
-    </style>
-
-    <style name="EditTextPreference" parent="@*android:style/Preference.Material.DialogPreference.EditTextPreference">
-        <item name="android:dialogLayout">@layout/preference_dialog_edittext</item>
     </style>
 
     <style name="PreferenceHeaderPanelSinglePane">
@@ -147,24 +136,9 @@
     </style>
 
     <style name="TrustedCredentialsList">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
-    </style>
-
-    <style name="PreferenceFragmentStyle" parent="@*android:style/PreferenceFragment.Material">
-        <item name="android:layout">@layout/preference_list_fragment</item>
-    </style>
-
-    <style name="VertDivider">
-        <item name="android:layout_width">@dimen/vert_divider_width</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:background">@color/divider_color</item>
-        <item name="android:focusable">false</item>
-        <item name="android:clickable">false</item>
-    </style>
-
-    <style name="TextAppearance.SetupWizardDescription" parent="@android:style/TextAppearance.Material.Subhead">
     </style>
 
     <style name="TrimmedHorizontalProgressBar" parent="android:Widget.Material.ProgressBar.Horizontal">
@@ -219,7 +193,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="wifi_item_content">
@@ -286,13 +260,13 @@
         <item name="android:singleLine">true</item>
     </style>
 
-    <style name="SetupWizardButton.Negative" parent="@android:style/Widget.Material.Button.Borderless.Colored">
-        <item name="android:minWidth">0dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:theme">@style/AccentColorHighlightBorderlessButton</item>
+    <style name="SetupWizardButton.Negative" parent="@style/SuwGlifButton.Secondary">
+        <!-- Negative margin to offset for padding of the button itself. We want the label to be
+             aligned with the text above it -->
+        <item name="android:layout_marginStart">-16dp</item>
     </style>
 
-    <style name="SetupWizardButton.Positive" parent="@android:style/Widget.Material.Button.Colored" />
+    <style name="SetupWizardButton.Positive" parent="@style/SuwGlifButton.Primary" />
 
     <style name="AccentColorHighlightBorderlessButton">
         <item name="android:colorControlHighlight">?android:attr/colorAccent</item>
@@ -309,6 +283,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
         <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="vpn_warning">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">8dip</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
     <style name="TextAppearance.PagerTabs" parent="@android:style/TextAppearance.Material.Widget.TabWidget" />
@@ -319,14 +301,6 @@
 
     <!-- Scrollbar style OUTSIDE_OVERLAY -->
     <integer name="preference_scrollbar_style">33554432</integer>
-
-    <style name="ApnPreference">
-        <item name="android:layout">@layout/apn_preference_layout</item>
-    </style>
-
-    <style name="AppListSwitchPreference" parent="@*android:style/Preference.Material.DialogPreference">
-        <item name="android:widgetLayout">@*android:layout/preference_widget_switch</item>
-    </style>
 
     <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
     <style name="TextAppearance.Small" parent="@android:style/TextAppearance.Material.Small" />
@@ -347,25 +321,9 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="TextAppearance.FingerprintMessage"
-        parent="android:TextAppearance.Material.Subhead">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-    </style>
-
-    <style name="Button.FingerprintButton"
-        parent="android:Widget.Material.Button.Borderless">
-        <item name="android:lineSpacingExtra">@dimen/suw_description_line_spacing_extra</item>
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
-    <style name="TextAppearance.FingerprintLink"
-           parent="TextAppearance.FingerprintMessage">
-        <item name="android:textColor">?android:attr/colorAccent</item>
-    </style>
-
     <style name="TextAppearance.FingerprintErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="TextAppearance.SupportTitle"
@@ -389,7 +347,7 @@
 
     <style name="TextAppearance.ConfirmDeviceCredentialsErrorText"
         parent="android:TextAppearance.Material.Body1">
-        <item name="android:textColor">@*android:color/system_error</item>
+        <item name="android:textColor">?android:attr/colorError</item>
     </style>
 
     <style name="TextAppearance.Small.SwitchBar">
@@ -428,17 +386,81 @@
     </style>
 
     <style name="SupportEscalationCard">
-        <item name="android:background">@color/card_background_grey</item>
+        <item name="android:background">?android:attr/colorSecondary</item>
         <item name="android:gravity">center</item>
         <item name="android:minHeight">368dp</item>
-        <item name="android:paddingStart">56dp</item>
-        <item name="android:paddingEnd">56dp</item>
+        <item name="android:paddingStart">@dimen/support_escalation_card_padding_start</item>
+        <item name="android:paddingEnd">@dimen/support_escalation_card_padding_end</item>
     </style>
 
     <style name="FingerprintHeaderStyle" parent="android:style/TextAppearance.Material.Subhead">
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/primary_dark_material_light</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="RingProgressBarStyle" parent="android:style/Widget.Material.ProgressBar.Horizontal">
+        <item name="android:indeterminate">false</item>
+        <item name="android:max">10000</item>
+        <item name="android:mirrorForRtl">false</item>
+        <item name="android:progressDrawable">@drawable/ring_progress</item>
+    </style>
+
+    <style name="EntityHeader">
+        <item name="android:background">?android:attr/colorSecondary</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+
+    <style name="TextAppearance.EntityHeaderTitle"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppActionPrimaryButton" parent="android:Widget.Material.Button.Colored"/>
+
+    <style name="DreamStartButton" parent="android:Widget.Material.Button" />
+
+    <style name="LockPatternStyle">
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/lock_pattern_view_success_color</item>
+        <item name="*android:errorColor">?android:attr/colorError</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark">
+        <item name="*android:regularColor">@color/lock_pattern_view_regular_color_dark</item>
+        <item name="*android:successColor">@color/lock_pattern_view_regular_color_dark</item>
+    </style>
+
+    <style name="LockPatternStyle.Dark.Work">
+        <item name="*android:regularColor">@*android:color/white</item>
+    </style>
+
+    <style name="LockPatternStyle.Unlock">
+        <item name="*android:regularColor">@color/unlock_pattern_view_regular_color</item>
+        <item name="*android:successColor">@color/unlock_pattern_view_success_color</item>
+    </style>
+
+    <style name="LockPatternStyle.Setup">
+        <item name="*android:regularColor">@color/setup_lock_pattern_view_regular_color_light</item>
+        <item name="*android:successColor">@color/setup_lock_pattern_view_success_color_light</item>
+    </style>
+
+    <!-- Overridden in sw400dp -->
+    <style name="LockPatternIconStyle" parent="SuwGlifIcon">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="SuggestionConditionStyle">
+        <item name="android:background">@color/suggestion_condition_background</item>
+    </style>
+
+    <style name="TextAppearance.SearchBar" parent="@android:style/TextAppearance.Material.Widget.Toolbar.Subtitle">
+        <item name="android:textSize">@dimen/search_bar_text_size</item>
     </style>
 
 </resources>

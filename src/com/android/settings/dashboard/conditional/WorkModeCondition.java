@@ -22,7 +22,7 @@ import android.content.pm.UserInfo;
 import android.graphics.drawable.Icon;
 import android.os.UserHandle;
 import android.os.UserManager;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
 
@@ -84,7 +84,7 @@ public class WorkModeCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.AccountSettingsActivity.class));
+                Settings.UserAndAccountDashboardActivity.class));
     }
 
     @Override

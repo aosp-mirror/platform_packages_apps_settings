@@ -14,47 +14,39 @@
 
 package com.android.settings.applications;
 
-import android.app.AppGlobals;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.IPackageManager;
 import android.content.pm.PackageManager;
-import android.content.pm.ParceledListSlice;
 import android.content.pm.UserInfo;
 import android.os.AsyncTask;
-import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import java.util.List;
+
 public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
 
-    protected final PackageManager mPm;
-    protected final IPackageManager mIpm;
+    protected final PackageManagerWrapper mPm;
     protected final UserManager mUm;
 
-    public AppCounter(Context context) {
-        mPm = context.getPackageManager();
-        mIpm = AppGlobals.getPackageManager();
-        mUm = UserManager.get(context);
+    public AppCounter(Context context, PackageManagerWrapper packageManager) {
+        mPm = packageManager;
+        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
     protected Integer doInBackground(Void... params) {
         int count = 0;
         for (UserInfo user : mUm.getProfiles(UserHandle.myUserId())) {
-            try {
-                @SuppressWarnings("unchecked")
-                ParceledListSlice<ApplicationInfo> list =
-                        mIpm.getInstalledApplications(PackageManager.GET_DISABLED_COMPONENTS
-                                | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
-                                | (user.isAdmin() ? PackageManager.GET_UNINSTALLED_PACKAGES : 0),
-                                user.id);
-                for (ApplicationInfo info : list.getList()) {
-                    if (includeInCount(info)) {
-                        count++;
-                    }
+            final List<ApplicationInfo> list =
+                    mPm.getInstalledApplicationsAsUser(PackageManager.GET_DISABLED_COMPONENTS
+                            | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
+                            | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0),
+                            user.id);
+            for (ApplicationInfo info : list) {
+                if (includeInCount(info)) {
+                    count++;
                 }
-            } catch (RemoteException e) {
             }
         }
         return count;
@@ -63,6 +55,10 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
     @Override
     protected void onPostExecute(Integer count) {
         onCountComplete(count);
+    }
+
+    void executeInForeground() {
+        onPostExecute(doInBackground());
     }
 
     protected abstract void onCountComplete(int num);

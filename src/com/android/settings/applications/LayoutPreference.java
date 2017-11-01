@@ -18,6 +18,8 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -31,17 +33,31 @@ import com.android.settings.Utils;
 
 public class LayoutPreference extends Preference {
 
-    private View mRootView;
+    private final View.OnClickListener mClickListener = v -> performClick(v);
+    private boolean mAllowDividerAbove;
+    private boolean mAllowDividerBelow;
+
+    @VisibleForTesting
+    View mRootView;
 
     public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        final TypedArray a = context.obtainStyledAttributes(
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Preference);
+        mAllowDividerAbove = TypedArrayUtils.getBoolean(a, R.styleable.Preference_allowDividerAbove,
+                R.styleable.Preference_allowDividerAbove, false);
+        mAllowDividerBelow = TypedArrayUtils.getBoolean(a, R.styleable.Preference_allowDividerBelow,
+                R.styleable.Preference_allowDividerBelow, false);
+        a.recycle();
+
+        a = context.obtainStyledAttributes(
                 attrs, com.android.internal.R.styleable.Preference, 0, 0);
         int layoutResource = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
                 0);
         if (layoutResource == 0) {
             throw new IllegalArgumentException("LayoutPreference requires a layout to be defined");
         }
+        a.recycle();
+
         // Need to create view now so that findViewById can be called immediately.
         final View view = LayoutInflater.from(getContext())
                 .inflate(layoutResource, null, false);
@@ -59,8 +75,7 @@ public class LayoutPreference extends Preference {
 
     private void setView(View view) {
         setLayoutResource(R.layout.layout_preference_frame);
-        setSelectable(false);
-        final ViewGroup allDetails = (ViewGroup) view.findViewById(R.id.all_details);
+        final ViewGroup allDetails = view.findViewById(R.id.all_details);
         if (allDetails != null) {
             Utils.forceCustomPadding(allDetails, true /* additive padding */);
         }
@@ -69,8 +84,16 @@ public class LayoutPreference extends Preference {
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
-        FrameLayout layout = (FrameLayout) view.itemView;
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        holder.itemView.setOnClickListener(mClickListener);
+
+        final boolean selectable = isSelectable();
+        holder.itemView.setFocusable(selectable);
+        holder.itemView.setClickable(selectable);
+        holder.setDividerAllowedAbove(mAllowDividerAbove);
+        holder.setDividerAllowedBelow(mAllowDividerBelow);
+
+        FrameLayout layout = (FrameLayout) holder.itemView;
         layout.removeAllViews();
         ViewGroup parent = (ViewGroup) mRootView.getParent();
         if (parent != null) {
@@ -79,7 +102,7 @@ public class LayoutPreference extends Preference {
         layout.addView(mRootView);
     }
 
-    public View findViewById(int id) {
+    public <T extends View> T findViewById(int id) {
         return mRootView.findViewById(id);
     }
 

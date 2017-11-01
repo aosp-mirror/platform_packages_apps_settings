@@ -35,7 +35,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.SubtitleView;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -97,7 +97,7 @@ public class CaptionPropertiesFragment extends SettingsPreferenceFragment
     private boolean mShowingCustom;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.ACCESSIBILITY_CAPTION_PROPERTIES;
     }
 

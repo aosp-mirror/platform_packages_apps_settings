@@ -17,7 +17,7 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.ActivityManagerNative;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.Dialog;
@@ -40,6 +40,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.UserHandle;
@@ -58,8 +59,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.R;
 import com.android.settings.users.UserDialogs;
-
+import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -85,6 +91,7 @@ public class DeviceAdminAdd extends Activity {
     public static final String EXTRA_CALLED_FROM_SUPPORT_DIALOG =
             "android.app.extra.CALLED_FROM_SUPPORT_DIALOG";
 
+    private final IBinder mToken = new Binder();
     Handler mHandler;
 
     DevicePolicyManager mDPM;
@@ -113,8 +120,6 @@ public class DeviceAdminAdd extends Activity {
     boolean mWaitingForRemoveMsg;
     boolean mAddingProfileOwner;
     boolean mAdminPoliciesInitialized;
-    int mCurSysAppOpMode;
-    int mCurToastAppOpMode;
 
     boolean mIsCalledFromSupportDialog = false;
 
@@ -342,13 +347,29 @@ public class DeviceAdminAdd extends Activity {
         });
 
         mActionButton = (Button) findViewById(R.id.action_button);
-        mActionButton.setFilterTouchesWhenObscured(true);
-        mActionButton.setOnClickListener(new View.OnClickListener() {
+
+        final View restrictedAction = findViewById(R.id.restricted_action);
+        restrictedAction.setFilterTouchesWhenObscured(true);
+        restrictedAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (!mActionButton.isEnabled()) {
+                    return;
+                }
                 if (mAdding) {
                     addAndFinish();
                 } else if (isManagedProfile(mDeviceAdmin)
                         && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
+                    if (hasBaseCantRemoveProfileRestriction()) {
+                        // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
+                        // point showing a dialog saying it's disabled by an admin.
+                        return;
+                    }
+                    EnforcedAdmin enforcedAdmin = getAdminEnforcingCantRemoveProfile();
+                    if (enforcedAdmin != null) {
+                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(DeviceAdminAdd.this,
+                                enforcedAdmin);
+                        return;
+                    }
                     final int userId = UserHandle.myUserId();
                     UserDialogs.createRemoveDialog(DeviceAdminAdd.this, userId,
                             new DialogInterface.OnClickListener() {
@@ -367,7 +388,7 @@ public class DeviceAdminAdd extends Activity {
                     try {
                         // Don't allow the admin to put a dialog up in front
                         // of us while we interact with the user.
-                        ActivityManagerNative.getDefault().stopAppSwitches();
+                        ActivityManager.getService().stopAppSwitches();
                     } catch (RemoteException e) {
                     }
                     mWaitingForRemoveMsg = true;
@@ -395,6 +416,7 @@ public class DeviceAdminAdd extends Activity {
 
     void addAndFinish() {
         try {
+            logSpecialPermissionChange(true, mDeviceAdmin.getComponent().getPackageName());
             mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
             EventLog.writeEvent(EventLogTags.EXP_DET_DEVICE_ADMIN_ACTIVATED_BY_USER,
                 mDeviceAdmin.getActivityInfo().applicationInfo.uid);
@@ -426,15 +448,16 @@ public class DeviceAdminAdd extends Activity {
         mWaitingForRemoveMsg = false;
         if (msg == null) {
             try {
-                ActivityManagerNative.getDefault().resumeAppSwitches();
+                ActivityManager.getService().resumeAppSwitches();
             } catch (RemoteException e) {
             }
+            logSpecialPermissionChange(false, mDeviceAdmin.getComponent().getPackageName());
             mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
             finish();
         } else {
             try {
                 // Continue preventing anything from coming in front.
-                ActivityManagerNative.getDefault().stopAppSwitches();
+                ActivityManager.getService().stopAppSwitches();
             } catch (RemoteException e) {
             }
             Bundle args = new Bundle();
@@ -444,29 +467,32 @@ public class DeviceAdminAdd extends Activity {
         }
     }
 
+    void logSpecialPermissionChange(boolean allow, String packageName) {
+        int logCategory = allow ? MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_ALLOW :
+                MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_ADMIN_DENY;
+        FeatureFactory.getFactory(this).getMetricsFeatureProvider().action(this, logCategory, packageName);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
+        mActionButton.setEnabled(true);
         updateInterface();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mCurSysAppOpMode = mAppOps.checkOp(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg);
-        mCurToastAppOpMode = mAppOps.checkOp(AppOpsManager.OP_TOAST_WINDOW, uid, pkg);
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, AppOpsManager.MODE_IGNORED);
+        // As long as we are running, don't let anyone overlay stuff on top of the screen.
+        mAppOps.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, true, mToken);
+        mAppOps.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW, true, mToken);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // As long as we are running, don't let this admin overlay stuff on top of the screen.
-        final int uid = mDeviceAdmin.getActivityInfo().applicationInfo.uid;
-        final String pkg = mDeviceAdmin.getActivityInfo().applicationInfo.packageName;
-        mAppOps.setMode(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, uid, pkg, mCurSysAppOpMode);
-        mAppOps.setMode(AppOpsManager.OP_TOAST_WINDOW, uid, pkg, mCurToastAppOpMode);
+        // This just greys out the button. The actual listener is attached to R.id.restricted_action
+        mActionButton.setEnabled(false);
+        mAppOps.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW, false, mToken);
+        mAppOps.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW, false, mToken);
         try {
-            ActivityManagerNative.getDefault().resumeAppSwitches();
+            ActivityManager.getService().resumeAppSwitches();
         } catch (RemoteException e) {
         }
     }
@@ -494,7 +520,7 @@ public class DeviceAdminAdd extends Activity {
                         new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            ActivityManagerNative.getDefault().resumeAppSwitches();
+                            ActivityManager.getService().resumeAppSwitches();
                         } catch (RemoteException e) {
                         }
                         mDPM.removeActiveAdmin(mDeviceAdmin.getComponent());
@@ -511,6 +537,7 @@ public class DeviceAdminAdd extends Activity {
     }
 
     void updateInterface() {
+        findViewById(R.id.restricted_icon).setVisibility(View.GONE);
         mAdminIcon.setImageDrawable(mDeviceAdmin.loadIcon(getPackageManager()));
         mAdminName.setText(mDeviceAdmin.loadLabel(getPackageManager()));
         try {
@@ -540,6 +567,13 @@ public class DeviceAdminAdd extends Activity {
                 // Profile owner in a managed profile, user can remove profile to disable admin.
                 mAdminWarning.setText(R.string.admin_profile_owner_message);
                 mActionButton.setText(R.string.remove_managed_profile_label);
+
+                final EnforcedAdmin admin = getAdminEnforcingCantRemoveProfile();
+                final boolean hasBaseRestriction = hasBaseCantRemoveProfileRestriction();
+                if (admin != null && !hasBaseRestriction) {
+                    findViewById(R.id.restricted_icon).setVisibility(View.VISIBLE);
+                }
+                mActionButton.setEnabled(admin == null && !hasBaseRestriction);
             } else if (isProfileOwner || mDeviceAdmin.getComponent().equals(
                             mDPM.getDeviceOwnerComponentOnCallingUser())) {
                 // Profile owner in a user or device owner, user can't disable admin.
@@ -588,6 +622,22 @@ public class DeviceAdminAdd extends Activity {
             mSupportMessage.setVisibility(View.GONE);
             mAdding = true;
         }
+    }
+
+    private EnforcedAdmin getAdminEnforcingCantRemoveProfile() {
+        // Removing a managed profile is disallowed if DISALLOW_REMOVE_MANAGED_PROFILE
+        // is set in the parent rather than the user itself.
+        return RestrictedLockUtils.checkIfRestrictionEnforced(this,
+                UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
+    }
+
+    private boolean hasBaseCantRemoveProfileRestriction() {
+        return RestrictedLockUtils.hasBaseUserRestriction(this,
+                UserManager.DISALLOW_REMOVE_MANAGED_PROFILE, getParentUserId());
+    }
+
+    private int getParentUserId() {
+        return UserManager.get(this).getProfileParent(UserHandle.myUserId()).id;
     }
 
     private void addDeviceAdminPolicies(boolean showDescription) {

@@ -17,28 +17,23 @@
 package com.android.settings;
 
 import android.app.ActivityManager;
-import android.app.ActivityManagerNative;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckedTextView;
-import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.CustomDialogPreference;
 
 public class BugreportPreference extends CustomDialogPreference {
 
     private static final String TAG = "BugreportPreference";
-    private static final int BUGREPORT_DELAY_SECONDS = 3;
 
     private CheckedTextView mInteractiveTitle;
     private TextView mInteractiveSummary;
@@ -88,32 +83,21 @@ public class BugreportPreference extends CustomDialogPreference {
             final Context context = getContext();
             if (mFullTitle.isChecked()) {
                 Log.v(TAG, "Taking full bugreport right away");
-                MetricsLogger.action(context, MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
+                        MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_FULL);
                 takeBugreport(ActivityManager.BUGREPORT_OPTION_FULL);
             } else {
-                Log.v(TAG, "Taking interactive bugreport in " + BUGREPORT_DELAY_SECONDS + "s");
-                MetricsLogger.action(context,
+                Log.v(TAG, "Taking interactive bugreport right away");
+                FeatureFactory.getFactory(context).getMetricsFeatureProvider().action(context,
                         MetricsEvent.ACTION_BUGREPORT_FROM_SETTINGS_INTERACTIVE);
-                // Add a little delay before executing, to give the user a chance to close
-                // the Settings activity before it takes a screenshot.
-                final String msg = context.getResources()
-                        .getQuantityString(com.android.internal.R.plurals.bugreport_countdown,
-                                BUGREPORT_DELAY_SECONDS, BUGREPORT_DELAY_SECONDS);
-                Log.v(TAG, msg);
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
-                    }
-                }, BUGREPORT_DELAY_SECONDS * DateUtils.SECOND_IN_MILLIS);
+                takeBugreport(ActivityManager.BUGREPORT_OPTION_INTERACTIVE);
             }
         }
     }
 
     private void takeBugreport(int bugreportType) {
         try {
-            ActivityManagerNative.getDefault().requestBugReport(bugreportType);
+            ActivityManager.getService().requestBugReport(bugreportType);
         } catch (RemoteException e) {
             Log.e(TAG, "error taking bugreport (bugreportType=" + bugreportType + ")", e);
         }

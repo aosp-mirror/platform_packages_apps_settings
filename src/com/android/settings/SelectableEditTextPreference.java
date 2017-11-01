@@ -22,6 +22,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.settingslib.CustomEditTextPreference;
+
 public class SelectableEditTextPreference extends CustomEditTextPreference {
 
     private int mSelectionMode;

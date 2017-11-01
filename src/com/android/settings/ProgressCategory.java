@@ -33,16 +33,19 @@ public class ProgressCategory extends ProgressCategoryBase {
     private boolean mNoDeviceFoundAdded;
 
     public ProgressCategory(Context context) {
-        this(context, null);
+        super(context);
+        setLayoutResource(R.layout.preference_progress_category);
     }
 
     public ProgressCategory(Context context, AttributeSet attrs) {
-        super(context, attrs, 0);
+        super(context, attrs);
+        setLayoutResource(R.layout.preference_progress_category);
     }
 
     public ProgressCategory(Context context, AttributeSet attrs,
             int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        setLayoutResource(R.layout.preference_progress_category);
     }
 
     public ProgressCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -71,7 +74,7 @@ public class ProgressCategory extends ProgressCategoryBase {
         } else {
             if (!mNoDeviceFoundAdded) {
                 if (mNoDeviceFoundPreference == null) {
-                    mNoDeviceFoundPreference = new Preference(getPreferenceManager().getContext());
+                    mNoDeviceFoundPreference = new Preference(getContext());
                     mNoDeviceFoundPreference.setLayoutResource(R.layout.preference_empty_list);
                     mNoDeviceFoundPreference.setTitle(mEmptyTextRes);
                     mNoDeviceFoundPreference.setSelectable(false);

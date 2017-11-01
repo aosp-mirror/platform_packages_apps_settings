@@ -19,6 +19,7 @@ package com.android.settings.users;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -52,6 +53,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.drawable.CircleFramedDrawable;
+
+import libcore.io.Streams;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -117,7 +120,11 @@ public class EditUserPhotoController {
                 return true;
             case REQUEST_CODE_TAKE_PHOTO:
             case REQUEST_CODE_CHOOSE_PHOTO:
-                cropPhoto(pictureUri);
+                if (mTakePictureUri.equals(pictureUri)) {
+                    cropPhoto();
+                } else {
+                    copyAndCropPhoto(pictureUri);
+                }
                 return true;
         }
         return false;
@@ -217,10 +224,32 @@ public class EditUserPhotoController {
         mFragment.startActivityForResult(intent, REQUEST_CODE_CHOOSE_PHOTO);
     }
 
-    private void cropPhoto(Uri pictureUri) {
+    private void copyAndCropPhoto(final Uri pictureUri) {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                final ContentResolver cr = mContext.getContentResolver();
+                try (InputStream in = cr.openInputStream(pictureUri);
+                        OutputStream out = cr.openOutputStream(mTakePictureUri)) {
+                    Streams.copy(in, out);
+                } catch (IOException e) {
+                    Log.w(TAG, "Failed to copy photo", e);
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result) {
+                if (!mFragment.isAdded()) return;
+                cropPhoto();
+            }
+        }.execute();
+    }
+
+    private void cropPhoto() {
         // TODO: Use a public intent, when there is one.
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(pictureUri, "image/*");
+        intent.setDataAndType(mTakePictureUri, "image/*");
         appendOutputExtra(intent, mCropPictureUri);
         appendCropExtras(intent);
         if (intent.resolveActivity(mContext.getPackageManager()) != null) {
@@ -231,7 +260,7 @@ public class EditUserPhotoController {
                 StrictMode.enableDeathOnFileUriExposure();
             }
         } else {
-            onPhotoCropped(pictureUri, false);
+            onPhotoCropped(mTakePictureUri, false);
         }
     }
 

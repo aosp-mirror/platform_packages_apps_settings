@@ -17,14 +17,10 @@
 
 package com.android.settings.accounts;
 
-import android.accounts.AuthenticatorDescription;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SyncStatusObserver;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.content.res.Resources.Theme;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,7 +29,6 @@ import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -45,7 +40,8 @@ import java.util.Date;
 abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         implements AuthenticatorHelper.OnAccountsUpdateListener {
 
-    protected static final String TAG = "AccountSettings";
+    protected static final String TAG = "AccountPreferenceBase";
+    protected static final boolean VERBOSE = Log.isLoggable(TAG, Log.VERBOSE);
 
     public static final String AUTHORITIES_FILTER_KEY = "authorities";
     public static final String ACCOUNT_TYPES_FILTER_KEY = "account_types";
@@ -56,6 +52,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
     private Object mStatusChangeListenerHandle;
     protected AuthenticatorHelper mAuthenticatorHelper;
     protected UserHandle mUserHandle;
+    protected AccountTypePreferenceLoader mAccountTypePreferenceLoader;
 
     private java.text.DateFormat mDateFormat;
     private java.text.DateFormat mTimeFormat;
@@ -68,6 +65,8 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
         mUserHandle = Utils.getSecureTargetUser(activity.getActivityToken(), mUm, getArguments(),
                 activity.getIntent().getExtras());
         mAuthenticatorHelper = new AuthenticatorHelper(activity, mUserHandle, this);
+        mAccountTypePreferenceLoader =
+            new AccountTypePreferenceLoader(this, mAuthenticatorHelper, mUserHandle);
     }
 
     /**
@@ -140,34 +139,7 @@ abstract class AccountPreferenceBase extends SettingsPreferenceFragment
      */
     public PreferenceScreen addPreferencesForType(final String accountType,
             PreferenceScreen parent) {
-        PreferenceScreen prefs = null;
-        if (mAuthenticatorHelper.containsAccountType(accountType)) {
-            AuthenticatorDescription desc = null;
-            try {
-                desc = mAuthenticatorHelper.getAccountTypeDescription(accountType);
-                if (desc != null && desc.accountPreferencesId != 0) {
-                    // Load the context of the target package, then apply the
-                    // base Settings theme (no references to local resources)
-                    // and create a context theme wrapper so that we get the
-                    // correct text colors. Control colors will still be wrong,
-                    // but there's not much we can do about it since we can't
-                    // reference local color resources.
-                    final Context targetCtx = getActivity().createPackageContextAsUser(
-                            desc.packageName, 0, mUserHandle);
-                    final Theme baseTheme = getResources().newTheme();
-                    baseTheme.applyStyle(com.android.settings.R.style.Theme_SettingsBase, true);
-                    final Context themedCtx = new ContextThemeWrapper(targetCtx, 0);
-                    themedCtx.getTheme().setTo(baseTheme);
-                    prefs = getPreferenceManager().inflateFromResource(themedCtx,
-                            desc.accountPreferencesId, parent);
-                }
-            } catch (PackageManager.NameNotFoundException e) {
-                Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
-            } catch (Resources.NotFoundException e) {
-                Log.w(TAG, "Couldn't load preferences.xml file from " + desc.packageName);
-            }
-        }
-        return prefs;
+        return mAccountTypePreferenceLoader.addPreferencesForType(accountType, parent);
     }
 
     public void updateAuthDescriptions() {

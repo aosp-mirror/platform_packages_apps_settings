@@ -20,52 +20,50 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Settings;
-import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.dashboard.conditional.Condition;
-import com.android.settings.dashboard.conditional.ConditionAdapterUtils;
 import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
-import com.android.settingslib.HelpUtils;
-import com.android.settingslib.SuggestionParser;
+import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
+import com.android.settings.dashboard.suggestions.SuggestionDismissController;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.dashboard.suggestions.SuggestionsChecks;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.widget.ActionBarShadowController;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
+import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionList;
+import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
-        implements SettingsDrawerActivity.CategoryListener, ConditionManager.ConditionListener,
-        FocusRecyclerView.FocusListener {
+        implements CategoryListener, ConditionListener,
+        FocusListener, SuggestionDismissController.Callback {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
+    private static final int MAX_WAIT_MILLIS = 700;
     private static final String TAG = "DashboardSummary";
 
-    public static final String[] INITIAL_ITEMS = new String[] {
-            Settings.WifiSettingsActivity.class.getName(),
-            Settings.BluetoothSettingsActivity.class.getName(),
-            Settings.DataUsageSummaryActivity.class.getName(),
-            Settings.PowerUsageSummaryActivity.class.getName(),
-            Settings.ManageApplicationsActivity.class.getName(),
-            Settings.StorageSettingsActivity.class.getName(),
-    };
-
-    private static final String SUGGESTIONS = "suggestions";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
-    private static final String EXTRA_SUGGESTION_SHOWN_LOGGED = "suggestions_shown_logged";
-    private static final String EXTRA_SUGGESTION_HIDDEN_LOGGED = "suggestions_hidden_logged";
+
+    private final Handler mHandler = new Handler();
 
     private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
@@ -74,11 +72,12 @@ public class DashboardSummary extends InstrumentedFragment
     private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
     private SuggestionsChecks mSuggestionsChecks;
-    private ArrayList<String> mSuggestionsShownLogged;
-    private ArrayList<String> mSuggestionsHiddenLogged;
+    private DashboardFeatureProvider mDashboardFeatureProvider;
+    private SuggestionFeatureProvider mSuggestionFeatureProvider;
+    private boolean isOnCategoriesChangedCalled;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DASHBOARD_SUMMARY;
     }
 
@@ -86,26 +85,23 @@ public class DashboardSummary extends InstrumentedFragment
     public void onCreate(Bundle savedInstanceState) {
         long startTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
+        final Activity activity = getActivity();
+        mDashboardFeatureProvider = FeatureFactory.getFactory(activity)
+                .getDashboardFeatureProvider(activity);
+        mSuggestionFeatureProvider = FeatureFactory.getFactory(activity)
+                .getSuggestionFeatureProvider(activity);
 
-        List<DashboardCategory> categories =
-                ((SettingsActivity) getActivity()).getDashboardCategories();
-        mSummaryLoader = new SummaryLoader(getActivity(), categories);
-        Context context = getContext();
-        mConditionManager = ConditionManager.get(context, false);
-        mSuggestionParser = new SuggestionParser(context,
-                context.getSharedPreferences(SUGGESTIONS, 0), R.xml.suggestion_ordering);
+        mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
+
+        mConditionManager = ConditionManager.get(activity, false);
+        getLifecycle().addObserver(mConditionManager);
+        mSuggestionParser = new SuggestionParser(activity,
+                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
         mSuggestionsChecks = new SuggestionsChecks(getContext());
-        if (savedInstanceState == null) {
-            mSuggestionsShownLogged = new ArrayList<>();
-            mSuggestionsHiddenLogged = new ArrayList<>();
-        } else {
-            mSuggestionsShownLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED);
-            mSuggestionsHiddenLogged =
-                    savedInstanceState.getStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED);
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
+                    + " ms");
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
-                + " ms");
     }
 
     @Override
@@ -121,13 +117,16 @@ public class DashboardSummary extends InstrumentedFragment
 
         ((SettingsDrawerActivity) getActivity()).addCategoryListener(this);
         mSummaryLoader.setListening(true);
+        final int metricsCategory = getMetricsCategory();
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                MetricsLogger.visible(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.visible(getContext(), metricsCategory,
+                        c.getMetricsConstant());
             }
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime)
-                + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onResume took " + (System.currentTimeMillis() - startTime) + " ms");
+        }
     }
 
     @Override
@@ -138,21 +137,11 @@ public class DashboardSummary extends InstrumentedFragment
         mSummaryLoader.setListening(false);
         for (Condition c : mConditionManager.getConditions()) {
             if (c.shouldShow()) {
-                MetricsLogger.hidden(getContext(), c.getMetricsConstant());
+                mMetricsFeatureProvider.hidden(getContext(), c.getMetricsConstant());
             }
-        }
-        if (mAdapter.getSuggestions() == null) {
-            return;
         }
         if (!getActivity().isChangingConfigurations()) {
-            for (Tile suggestion : mAdapter.getSuggestions()) {
-                String id = DashboardAdapter.getSuggestionIdentifier(getContext(), suggestion);
-                if (!mSuggestionsHiddenLogged.contains(id)) {
-                    mSuggestionsHiddenLogged.add(id);
-                    MetricsLogger.action(getContext(),
-                            MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, id);
-                }
-            }
+            mAdapter.onPause();
         }
     }
 
@@ -160,26 +149,29 @@ public class DashboardSummary extends InstrumentedFragment
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         long startTime = System.currentTimeMillis();
         if (hasWindowFocus) {
+            Log.d(TAG, "Listening for condition changes");
             mConditionManager.addListener(this);
+            Log.d(TAG, "conditions refreshed");
             mConditionManager.refreshAll();
         } else {
+            Log.d(TAG, "Stopped listening for condition changes");
             mConditionManager.remListener(this);
         }
-        if (DEBUG_TIMING) Log.d(TAG, "onWindowFocusChanged took "
-                + (System.currentTimeMillis() - startTime) + " ms");
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onWindowFocusChanged took "
+                    + (System.currentTimeMillis() - startTime) + " ms");
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         return inflater.inflate(R.layout.dashboard, container, false);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putStringArrayList(EXTRA_SUGGESTION_HIDDEN_LOGGED, mSuggestionsHiddenLogged);
-        outState.putStringArrayList(EXTRA_SUGGESTION_SHOWN_LOGGED, mSuggestionsShownLogged);
         if (mLayoutManager == null) return;
         outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
         if (mAdapter != null) {
@@ -190,7 +182,7 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onViewCreated(View view, Bundle bundle) {
         long startTime = System.currentTimeMillis();
-        mDashboard = (FocusRecyclerView) view.findViewById(R.id.dashboard_container);
+        mDashboard = view.findViewById(R.id.dashboard_container);
         mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         if (bundle != null) {
@@ -199,71 +191,117 @@ public class DashboardSummary extends InstrumentedFragment
         }
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
-        mDashboard.setListener(this);
         mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
-        mAdapter = new DashboardAdapter(getContext(), mSuggestionParser, bundle,
-                mConditionManager.getConditions());
+        mDashboard.setListener(this);
+        mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
+            mSuggestionParser, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
-        mSummaryLoader.setAdapter(mAdapter);
-        ConditionAdapterUtils.addDismiss(mDashboard);
-        if (DEBUG_TIMING) Log.d(TAG, "onViewCreated took "
-                + (System.currentTimeMillis() - startTime) + " ms");
+        mDashboard.setItemAnimator(new DashboardItemAnimator());
+        mSummaryLoader.setSummaryConsumer(mAdapter);
+        ActionBarShadowController.attachToRecyclerView(
+                getActivity().findViewById(R.id.search_bar_container), getLifecycle(), mDashboard);
+
+        if (DEBUG_TIMING) {
+            Log.d(TAG, "onViewCreated took "
+                    + (System.currentTimeMillis() - startTime) + " ms");
+        }
         rebuildUI();
     }
 
-    private void rebuildUI() {
-        if (!isAdded()) {
-            Log.w(TAG, "Cannot build the DashboardSummary UI yet as the Fragment is not added");
-            return;
-        }
-
-        // recheck to see if any suggestions have been changed.
+    @VisibleForTesting
+    void rebuildUI() {
         new SuggestionLoader().execute();
+        // Set categories on their own if loading suggestions takes too long.
+        mHandler.postDelayed(() -> {
+            updateCategoryAndSuggestion(null /* tiles */);
+        }, MAX_WAIT_MILLIS);
     }
 
     @Override
     public void onCategoriesChanged() {
-        rebuildUI();
+        // Bypass rebuildUI() on the first call of onCategoriesChanged, since rebuildUI() happens
+        // in onViewCreated as well when app starts. But, on the subsequent calls we need to
+        // rebuildUI() because there might be some changes to suggestions and categories.
+        if (isOnCategoriesChangedCalled) {
+            rebuildUI();
+        }
+        isOnCategoriesChangedCalled = true;
     }
 
     @Override
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
+        final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
         mAdapter.setConditions(mConditionManager.getConditions());
+        if (scrollToTop) {
+            mDashboard.scrollToPosition(0);
+        }
+    }
+
+    @Override
+    public Tile getSuggestionForPosition(int position) {
+        return mAdapter.getSuggestion(position);
+    }
+
+    @Override
+    public void onSuggestionDismissed(Tile suggestion) {
+        mAdapter.onSuggestionDismissed(suggestion);
     }
 
     private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
-
         @Override
         protected List<Tile> doInBackground(Void... params) {
             final Context context = getContext();
-            List<Tile> suggestions = mSuggestionParser.getSuggestions();
+            boolean isSmartSuggestionEnabled =
+                    mSuggestionFeatureProvider.isSmartSuggestionEnabled(context);
+            final SuggestionList sl = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
+            final List<Tile> suggestions = sl.getSuggestions();
+
+            if (isSmartSuggestionEnabled) {
+                List<String> suggestionIds = new ArrayList<>(suggestions.size());
+                for (Tile suggestion : suggestions) {
+                    suggestionIds.add(mSuggestionFeatureProvider.getSuggestionIdentifier(
+                            context, suggestion));
+                }
+                // TODO: create a Suggestion class to maintain the id and other info
+                mSuggestionFeatureProvider.rankSuggestions(suggestions, suggestionIds);
+            }
             for (int i = 0; i < suggestions.size(); i++) {
                 Tile suggestion = suggestions.get(i);
                 if (mSuggestionsChecks.isSuggestionComplete(suggestion)) {
-                    mAdapter.disableSuggestion(suggestion);
                     suggestions.remove(i--);
-                } else if (context != null) {
-                    String id = DashboardAdapter.getSuggestionIdentifier(context, suggestion);
-                    if (!mSuggestionsShownLogged.contains(id)) {
-                        mSuggestionsShownLogged.add(id);
-                        MetricsLogger.action(context,
-                                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
-                    }
                 }
+            }
+            if (sl.isExclusiveSuggestionCategory()) {
+                mSuggestionFeatureProvider.filterExclusiveSuggestions(suggestions);
             }
             return suggestions;
         }
 
         @Override
         protected void onPostExecute(List<Tile> tiles) {
-            final Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            List<DashboardCategory> categories =
-                    ((SettingsActivity) activity).getDashboardCategories();
-            mAdapter.setCategoriesAndSuggestions(categories, tiles);
+            // tell handler that suggestions were loaded quickly enough
+            mHandler.removeCallbacksAndMessages(null);
+            updateCategoryAndSuggestion(tiles);
+        }
+    }
+
+    @VisibleForTesting
+    void updateCategoryAndSuggestion(List<Tile> suggestions) {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+
+        // Temporary hack to wrap homepage category into a list. Soon we will create adapter
+        // API that takes a single category.
+        List<DashboardCategory> categories = new ArrayList<>();
+        categories.add(mDashboardFeatureProvider.getTilesForCategory(
+                CategoryKey.CATEGORY_HOMEPAGE));
+        if (suggestions != null) {
+            mAdapter.setCategoriesAndSuggestions(categories, suggestions);
+        } else {
+            mAdapter.setCategory(categories);
         }
     }
 }

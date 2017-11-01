@@ -26,7 +26,8 @@ import android.os.UserManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.RestrictedLockUtils;
@@ -67,7 +68,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     private Bundle mDefaultGuestRestrictions;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.USER_DETAILS;
     }
 
@@ -190,6 +191,20 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                         });
         }
         throw new IllegalArgumentException("Unsupported dialogId " + dialogId);
+    }
+
+    @Override
+    public int getDialogMetricsCategory(int dialogId) {
+        switch (dialogId) {
+            case DIALOG_CONFIRM_REMOVE:
+                return MetricsProto.MetricsEvent.DIALOG_USER_REMOVE;
+            case DIALOG_CONFIRM_ENABLE_CALLING:
+                return MetricsProto.MetricsEvent.DIALOG_USER_ENABLE_CALLING;
+            case DIALOG_CONFIRM_ENABLE_CALLING_AND_SMS:
+                return MetricsProto.MetricsEvent.DIALOG_USER_ENABLE_CALLING_AND_SMS;
+            default:
+                return 0;
+        }
     }
 
     void removeUser() {

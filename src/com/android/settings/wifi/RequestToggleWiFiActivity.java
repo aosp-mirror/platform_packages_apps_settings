@@ -105,23 +105,29 @@ public class RequestToggleWiFiActivity extends AlertActivity
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        if (which != DialogInterface.BUTTON_POSITIVE) {
-            return;
-        }
-        switch (mState) {
-            case STATE_ENABLE: {
-                mWiFiManager.setWifiEnabled(true);
-                mState = STATE_ENABLING;
-                scheduleToggleTimeout();
-                updateUi();
-            } break;
+        switch (which) {
+            case DialogInterface.BUTTON_POSITIVE: {
+                switch (mState) {
+                    case STATE_ENABLE: {
+                        mWiFiManager.setWifiEnabled(true);
+                        mState = STATE_ENABLING;
+                        scheduleToggleTimeout();
+                        updateUi();
+                    } break;
 
-            case STATE_DISABLE: {
-                mWiFiManager.setWifiEnabled(false);
-                mState = STATE_DISABLING;
-                scheduleToggleTimeout();
-                updateUi();
-            } break;
+                    case STATE_DISABLE: {
+                        mWiFiManager.setWifiEnabled(false);
+                        mState = STATE_DISABLING;
+                        scheduleToggleTimeout();
+                        updateUi();
+                    } break;
+                }
+            }
+            break;
+            case DialogInterface.BUTTON_NEGATIVE: {
+                finish();
+            }
+            break;
         }
     }
 
@@ -219,8 +225,10 @@ public class RequestToggleWiFiActivity extends AlertActivity
 
         switch (mState) {
             case STATE_ENABLE: {
-                mAlertParams.mPositiveButtonText = getString(android.R.string.ok);
+                mAlertParams.mPositiveButtonText = getString(R.string.allow);
                 mAlertParams.mPositiveButtonListener = this;
+                mAlertParams.mNegativeButtonText = getString(R.string.deny);
+                mAlertParams.mNegativeButtonListener = this;
                 mAlertParams.mMessage = getString(R.string.wifi_ask_enable, mAppLabel);
             } break;
 
@@ -228,14 +236,19 @@ public class RequestToggleWiFiActivity extends AlertActivity
                 // Params set button text only if non-null, but we want a null
                 // button text to hide the button, so reset the controller directly.
                 mAlert.setButton(DialogInterface.BUTTON_POSITIVE, null, null, null);
+                mAlert.setButton(DialogInterface.BUTTON_NEGATIVE, null, null, null);
                 mAlertParams.mPositiveButtonText = null;
                 mAlertParams.mPositiveButtonListener = null;
+                mAlertParams.mNegativeButtonText = null;
+                mAlertParams.mNegativeButtonListener = null;
                 mAlertParams.mMessage = getString(R.string.wifi_starting);
             } break;
 
             case STATE_DISABLE: {
-                mAlertParams.mPositiveButtonText = getString(android.R.string.ok);
+                mAlertParams.mPositiveButtonText = getString(R.string.allow);
                 mAlertParams.mPositiveButtonListener = this;
+                mAlertParams.mNegativeButtonText = getString(R.string.deny);
+                mAlertParams.mNegativeButtonListener = this;
                 mAlertParams.mMessage = getString(R.string.wifi_ask_disable, mAppLabel);
             } break;
 
@@ -243,8 +256,11 @@ public class RequestToggleWiFiActivity extends AlertActivity
                 // Params set button text only if non-null, but we want a null
                 // button text to hide the button, so reset the controller directly.
                 mAlert.setButton(DialogInterface.BUTTON_POSITIVE, null, null, null);
+                mAlert.setButton(DialogInterface.BUTTON_NEGATIVE, null, null, null);
                 mAlertParams.mPositiveButtonText = null;
                 mAlertParams.mPositiveButtonListener = null;
+                mAlertParams.mNegativeButtonText = null;
+                mAlertParams.mNegativeButtonListener = null;
                 mAlertParams.mMessage = getString(R.string.wifi_stopping);
             } break;
         }

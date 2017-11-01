@@ -28,7 +28,9 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * This activity requests users permission to allow scanning even when Wi-Fi is turned off
@@ -104,7 +106,7 @@ public class WifiScanModeActivity extends Activity {
         createDialog();
     }
 
-    public static class AlertDialogFragment extends DialogFragment {
+    public static class AlertDialogFragment extends InstrumentedDialogFragment {
         static AlertDialogFragment newInstance(String app) {
             AlertDialogFragment frag = new AlertDialogFragment(app);
             return frag;
@@ -119,6 +121,11 @@ public class WifiScanModeActivity extends Activity {
         public AlertDialogFragment() {
             super();
             mApp = null;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_WIFI_SCAN_MODE;
         }
 
         @Override

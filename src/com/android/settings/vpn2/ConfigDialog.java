@@ -76,6 +76,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     private CheckBox mSaveLogin;
     private CheckBox mShowOptions;
     private CheckBox mAlwaysOnVpn;
+    private TextView mAlwaysOnInvalidReason;
 
     ConfigDialog(Context context, DialogInterface.OnClickListener listener,
             VpnProfile profile, boolean editing, boolean exists) {
@@ -113,6 +114,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mSaveLogin = (CheckBox) mView.findViewById(R.id.save_login);
         mShowOptions = (CheckBox) mView.findViewById(R.id.show_options);
         mAlwaysOnVpn = (CheckBox) mView.findViewById(R.id.always_on_vpn);
+        mAlwaysOnInvalidReason = (TextView) mView.findViewById(R.id.always_on_invalid_reason);
 
         // Second, copy values from the profile.
         mName.setText(mProfile.name);
@@ -136,9 +138,6 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
                 R.string.vpn_no_server_cert, mProfile.ipsecServerCert);
         mSaveLogin.setChecked(mProfile.saveLogin);
         mAlwaysOnVpn.setChecked(mProfile.key.equals(VpnUtils.getLockdownVpn()));
-        mAlwaysOnVpn.setOnCheckedChangeListener(this);
-        // Update SaveLogin checkbox after Always-on checkbox is updated
-        updateSaveLoginStatus();
 
         // Hide lockdown VPN on devices that require IMS authentication
         if (SystemProperties.getBoolean("persist.radio.imsregrequired", false)) {
@@ -156,10 +155,10 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         mIpsecSecret.addTextChangedListener(this);
         mIpsecUserCert.setOnItemSelectedListener(this);
         mShowOptions.setOnClickListener(this);
+        mAlwaysOnVpn.setOnCheckedChangeListener(this);
 
         // Fourth, determine whether to do editing or connecting.
-        boolean valid = validate(true);
-        mEditing = mEditing || !valid;
+        mEditing = mEditing || !validate(true /*editing*/);
 
         if (mEditing) {
             setTitle(R.string.vpn_edit);
@@ -203,9 +202,8 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         // Let AlertDialog create everything.
         super.onCreate(savedState);
 
-        // Disable the action button if necessary.
-        getButton(DialogInterface.BUTTON_POSITIVE)
-                .setEnabled(mEditing ? valid : validate(false));
+        // Update UI controls according to the current configuration.
+        updateUiControls();
 
         // Workaround to resize the dialog for the input method.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE |
@@ -225,7 +223,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
 
     @Override
     public void afterTextChanged(Editable field) {
-        getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
+        updateUiControls();
     }
 
     @Override
@@ -248,7 +246,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         if (parent == mType) {
             changeType(position);
         }
-        getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
+        updateUiControls();
     }
 
     @Override
@@ -258,8 +256,7 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if (compoundButton == mAlwaysOnVpn) {
-            updateSaveLoginStatus();
-            getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
+            updateUiControls();
         }
     }
 
@@ -267,7 +264,40 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
         return mAlwaysOnVpn.isChecked();
     }
 
-    private void updateSaveLoginStatus() {
+    /**
+     * Updates the UI according to the current configuration entered by the user.
+     *
+     * These include:
+     * "Always-on VPN" checkbox
+     * Reason for "Always-on VPN" being disabled, when necessary
+     * "Save account information" checkbox
+     * "Save" and "Connect" buttons
+     */
+    private void updateUiControls() {
+        VpnProfile profile = getProfile();
+
+        // Always-on VPN
+        if (profile.isValidLockdownProfile()) {
+            mAlwaysOnVpn.setEnabled(true);
+            mAlwaysOnInvalidReason.setVisibility(View.GONE);
+        } else {
+            mAlwaysOnVpn.setChecked(false);
+            mAlwaysOnVpn.setEnabled(false);
+            if (!profile.isTypeValidForLockdown()) {
+                mAlwaysOnInvalidReason.setText(R.string.vpn_always_on_invalid_reason_type);
+            } else if (!profile.isServerAddressNumeric()) {
+                mAlwaysOnInvalidReason.setText(R.string.vpn_always_on_invalid_reason_server);
+            } else if (!profile.hasDns()) {
+                mAlwaysOnInvalidReason.setText(R.string.vpn_always_on_invalid_reason_no_dns);
+            } else if (!profile.areDnsAddressesNumeric()) {
+                mAlwaysOnInvalidReason.setText(R.string.vpn_always_on_invalid_reason_dns);
+            } else {
+                mAlwaysOnInvalidReason.setText(R.string.vpn_always_on_invalid_reason_other);
+            }
+            mAlwaysOnInvalidReason.setVisibility(View.VISIBLE);
+        }
+
+        // Save account information
         if (mAlwaysOnVpn.isChecked()) {
             mSaveLogin.setChecked(true);
             mSaveLogin.setEnabled(false);
@@ -275,6 +305,9 @@ class ConfigDialog extends AlertDialog implements TextWatcher,
             mSaveLogin.setChecked(mProfile.saveLogin);
             mSaveLogin.setEnabled(true);
         }
+
+        // Save or Connect button
+        getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(validate(mEditing));
     }
 
     private void showAdvancedOptions() {

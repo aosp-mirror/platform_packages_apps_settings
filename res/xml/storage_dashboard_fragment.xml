@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2016 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/storage_settings"
+    android:orderingFromXml="false">
+    <com.android.settings.deviceinfo.storage.StorageSummaryDonutPreference
+        android:key="pref_summary"
+        android:order="0" />
+    <com.android.settings.widget.MasterSwitchPreference
+        android:fragment="com.android.settings.deletionhelper.AutomaticStorageManagerSettings"
+        android:key="toggle_asm"
+        android:title="@string/automatic_storage_manager_preference_title"
+        android:icon="@drawable/ic_storage"
+        android:order="1"
+        settings:allowDividerAbove="true"
+        settings:allowDividerBelow="true"/>
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_photos_videos"
+        android:title="@string/storage_photos_videos"
+        android:icon="@drawable/ic_photo_library"
+        settings:allowDividerAbove="true"
+        android:order="2" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_music_audio"
+        android:title="@string/storage_music_audio"
+        android:icon="@drawable/ic_media_stream"
+        android:order="3" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_games"
+        android:title="@string/storage_games"
+        android:icon="@drawable/ic_videogame_vd_theme_24"
+        android:order="4" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_movies"
+        android:title="@string/storage_movies_tv"
+        android:icon="@drawable/ic_local_movies"
+        android:order="5" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_other_apps"
+        android:title="@string/storage_other_apps"
+        android:icon="@drawable/ic_storage_apps"
+        android:order="6" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_files"
+        android:title="@string/storage_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:order="7" />
+    <com.android.settings.deviceinfo.StorageItemPreference
+        android:key="pref_system"
+        android:title="@string/storage_detail_system"
+        android:icon="@drawable/ic_system_update_vd_theme_24"
+        android:order="100" />
+    <PreferenceCategory
+        android:key="pref_secondary_users"
+        android:title="@string/storage_other_users"
+        android:order="200" />
+</PreferenceScreen>

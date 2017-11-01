@@ -16,9 +16,10 @@
 
 <PreferenceScreen
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+        android:title="@string/special_access">
 
-    <PreferenceScreen
+    <Preference
         android:key="high_power_apps"
         android:title="@string/high_power_apps"
         android:fragment="com.android.settings.applications.ManageApplications"
@@ -26,19 +27,19 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$HighPowerApplicationsActivity" />
-    </PreferenceScreen>
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="device_administrators"
         android:title="@string/manage_device_admin"
         android:fragment="com.android.settings.DeviceAdminSettings" />
 
-    <PreferenceScreen
+    <Preference
         android:key="zen_access"
         android:title="@string/manage_zen_access_title"
         android:fragment="com.android.settings.notification.ZenAccessSettings" />
 
-    <PreferenceScreen
+    <Preference
         android:key="system_alert_window"
         android:title="@string/system_alert_window_settings"
         android:fragment="com.android.settings.applications.ManageApplications"
@@ -46,9 +47,9 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$OverlaySettingsActivity" />
-    </PreferenceScreen>
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="enabled_vr_listeners"
         android:title="@string/vr_listeners_title"
         android:fragment="com.android.settings.applications.VrListenerSettings"
@@ -56,9 +57,9 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$VrListenersSettingsActivity" />
-    </PreferenceScreen>
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="write_settings_apps"
         android:title="@string/write_settings"
         android:fragment="com.android.settings.applications.ManageApplications"
@@ -66,24 +67,30 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$WriteSettingsActivity" />
-    </PreferenceScreen>
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="notification_access"
         android:title="@string/manage_notification_access_title"
         android:fragment="com.android.settings.notification.NotificationAccessSettings" />
 
-    <PreferenceScreen
+    <Preference
+        android:key="picture_in_picture"
+        android:title="@string/picture_in_picture_title"
+        android:fragment="com.android.settings.applications.PictureInPictureSettings"
+        settings:keywords="@string/picture_in_picture_keywords" />
+
+    <Preference
         android:key="premium_sms"
         android:title="@string/premium_sms_access"
         android:fragment="com.android.settings.applications.PremiumSmsAccess" />
 
-    <PreferenceScreen
+    <Preference
         android:key="data_saver"
         android:title="@string/unrestricted_data_saver"
         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess" />
 
-    <PreferenceScreen
+    <Preference
         android:key="usage_access"
         android:title="@string/usage_access"
         android:fragment="com.android.settings.applications.ManageApplications"
@@ -91,5 +98,16 @@
         <extra
             android:name="classname"
             android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
-    </PreferenceScreen>
+    </Preference>
+
+    <Preference
+        android:key="manage_external_sources"
+        android:title="@string/install_other_apps"
+        android:fragment="com.android.settings.applications.ManageApplications"
+        settings:keywords="@string/keywords_install_other_apps">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ManageExternalSourcesActivity" />
+    </Preference>
+
 </PreferenceScreen>

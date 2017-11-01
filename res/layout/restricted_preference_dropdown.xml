@@ -23,8 +23,9 @@
             class="com.android.settings.notification.RestrictedDropDownPreference$ReselectionSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            android:layout_marginStart="@dimen/preference_no_icon_padding_start"/>
 
-    <include layout="@layout/preference_material" />
+    <include layout="@layout/preference_material_settings" />
 
 </FrameLayout>

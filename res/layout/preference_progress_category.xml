@@ -16,37 +16,47 @@
 
 <!-- Layout used for ProgressCategory in bluetooth settings. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?android:attr/listSeparatorTextViewStyle"
-    android:background="@null"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:layout_height="wrap_content"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" >
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_vertical"
+              android:orientation="horizontal"
+              android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+              android:paddingTop="16dp"
+              android:paddingBottom="16dp"
+              android:paddingEnd="?android:attr/listPreferredItemPaddingEnd">
+
+    <LinearLayout
+        android:id="@+id/icon_container"
+        android:layout_width="56dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal">
+        <com.android.internal.widget.PreferenceImageView
+            android:id="@android:id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="18dp"
+            android:maxHeight="18dp"/>
+    </LinearLayout>
 
     <!-- This text view has the style of the list separator text view without the background and padding. -->
     <TextView
-        android:textAppearance="@android:style/TextAppearance.Material.Body2"
-        android:textColor="?android:attr/colorAccent"
-        android:background="@null"
-        android:id="@+android:id/title"
-        android:paddingStart="0dp"
-        android:paddingTop="6dp"
+        android:id="@android:id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="start|center"
-    />
+        android:textAppearance="@android:style/TextAppearance.Material.Body2"
+        android:textColor="?android:attr/colorAccent"/>
 
     <ProgressBar
         android:id="@+id/scanning_progress"
-        android:text="@string/progress_scanning"
-        android:paddingTop="6dp"
+        style="?android:attr/progressBarStyleSmallTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="16dip"
-        style="?android:attr/progressBarStyleSmallTitle"
-        />
+        android:minWidth="32dp"
+        android:text="@string/progress_scanning"/>
 
 </LinearLayout>

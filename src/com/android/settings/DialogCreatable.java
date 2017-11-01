@@ -25,5 +25,7 @@ import android.app.Dialog;
  */
 public interface DialogCreatable {
 
-    public Dialog onCreateDialog(int dialogId);
+    Dialog onCreateDialog(int dialogId);
+
+    int getDialogMetricsCategory(int dialogId);
 }

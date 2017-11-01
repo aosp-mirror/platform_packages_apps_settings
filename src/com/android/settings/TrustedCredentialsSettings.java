@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import static android.widget.LinearLayout.LayoutParams.MATCH_PARENT;
+import static android.widget.LinearLayout.LayoutParams.WRAP_CONTENT;
+
+import android.animation.LayoutTransition;
 import android.annotation.UiThread;
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -57,9 +61,9 @@ import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.util.ParcelableString;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 
 import java.security.cert.CertificateEncodingException;
@@ -87,7 +91,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private static final int REQUEST_CONFIRM_CREDENTIALS = 1;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TRUSTED_CREDENTIALS;
     }
 
@@ -96,18 +100,12 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 R.string.trusted_credentials_system_tab,
                 R.id.system_tab,
                 R.id.system_progress,
-                R.id.system_personal_container,
-                R.id.system_work_container,
-                R.id.system_expandable_list,
                 R.id.system_content,
-               true),
+                true),
         USER("user",
                 R.string.trusted_credentials_user_tab,
                 R.id.user_tab,
                 R.id.user_progress,
-                R.id.user_personal_container,
-                R.id.user_work_container,
-                R.id.user_expandable_list,
                 R.id.user_content,
                 false);
 
@@ -115,26 +113,19 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         private final int mLabel;
         private final int mView;
         private final int mProgress;
-        private final int mPersonalList;
-        private final int mWorkList;
-        private final int mExpandableList;
         private final int mContentView;
         private final boolean mSwitch;
 
-        private Tab(String tag, int label, int view, int progress, int personalList, int workList,
-                int expandableList, int contentView, boolean withSwitch) {
+        private Tab(String tag, int label, int view, int progress, int contentView, boolean withSwitch) {
             mTag = tag;
             mLabel = label;
             mView = view;
             mProgress = progress;
-            mPersonalList = personalList;
-            mWorkList = workList;
-            mExpandableList = expandableList;
             mContentView = contentView;
             mSwitch = withSwitch;
         }
 
-        private List<ParcelableString> getAliases(IKeyChainService service) throws RemoteException {
+        private List<String> getAliases(IKeyChainService service) throws RemoteException {
             switch (this) {
                 case SYSTEM: {
                     return service.getSystemCaAliases().getList();
@@ -162,6 +153,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     private int mConfirmingCredentialUser;
     private IntConsumer mConfirmingCredentialListener;
     private Set<AdapterData.AliasLoader> mAliasLoaders = new ArraySet<AdapterData.AliasLoader>(2);
+    @GuardedBy("mKeyChainConnectionByProfileId")
     private final SparseArray<KeyChainConnection>
             mKeyChainConnectionByProfileId = new SparseArray<KeyChainConnection>();
 
@@ -266,11 +258,13 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     }
 
     private void closeKeyChainConnections() {
-        final int n = mKeyChainConnectionByProfileId.size();
-        for (int i = 0; i < n; ++i) {
-            mKeyChainConnectionByProfileId.valueAt(i).close();
+        synchronized (mKeyChainConnectionByProfileId) {
+            final int n = mKeyChainConnectionByProfileId.size();
+            for (int i = 0; i < n; ++i) {
+                mKeyChainConnectionByProfileId.valueAt(i).close();
+            }
+            mKeyChainConnectionByProfileId.clear();
         }
-        mKeyChainConnectionByProfileId.clear();
     }
 
     private void addTab(Tab tab) {
@@ -279,31 +273,31 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 .setContent(tab.mView);
         mTabHost.addTab(systemSpec);
 
-        final int profilesSize = mUserManager.getUserProfiles().size();
         final GroupAdapter groupAdapter = new GroupAdapter(tab);
         mGroupAdapters.add(groupAdapter);
+        final int profilesSize = groupAdapter.getGroupCount();
 
-        if (profilesSize == 1) {
-            final ChildAdapter adapter = groupAdapter.getChildAdapter(0);
-            adapter.setContainerViewId(tab.mPersonalList);
-            adapter.prepare();
-        } else if (profilesSize == 2) {
-            final int workIndex = groupAdapter.getUserInfoByGroup(1).isManagedProfile() ? 1 : 0;
-            final int personalIndex = workIndex == 1 ? 0 : 1;
+        // Add a transition for non-visibility events like resizing the pane.
+        final ViewGroup contentView = (ViewGroup) mTabHost.findViewById(tab.mContentView);
+        contentView.getLayoutTransition().enableTransitionType(LayoutTransition.CHANGING);
 
-            final ChildAdapter personalAdapter = groupAdapter.getChildAdapter(personalIndex);
-            personalAdapter.setContainerViewId(tab.mPersonalList);
-            personalAdapter.showHeader(true);
-            personalAdapter.prepare();
+        final LayoutInflater inflater = LayoutInflater.from(getActivity());
+        for (int i = 0; i < groupAdapter.getGroupCount(); i++) {
+            final boolean isWork = groupAdapter.getUserInfoByGroup(i).isManagedProfile();
+            final ChildAdapter adapter = groupAdapter.getChildAdapter(i);
 
-            final ChildAdapter workAdapter = groupAdapter.getChildAdapter(workIndex);
-            workAdapter.setContainerViewId(tab.mWorkList);
-            workAdapter.showHeader(true);
-            workAdapter.showDivider(true);
-            workAdapter.prepare();
-        } else if (profilesSize >= 3) {
-            groupAdapter.setExpandableListView(
-                    (ExpandableListView) mTabHost.findViewById(tab.mExpandableList));
+            final LinearLayout containerView = (LinearLayout) inflater
+                    .inflate(R.layout.trusted_credential_list_container, contentView, false);
+            adapter.setContainerView(containerView);
+
+            adapter.showHeader(profilesSize > 1);
+            adapter.showDivider(isWork);
+            adapter.setExpandIfAvailable(profilesSize <= 2 ? true : !isWork);
+            if (isWork) {
+                contentView.addView(containerView);
+            } else {
+                contentView.addView(containerView, 0);
+            }
         }
     }
 
@@ -327,7 +321,8 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
      * whereas children correspond to certificates.
      */
     private class GroupAdapter extends BaseExpandableListAdapter implements
-            ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener {
+            ExpandableListView.OnGroupClickListener, ExpandableListView.OnChildClickListener,
+            View.OnClickListener {
         private final AdapterData mData;
 
         private GroupAdapter(Tab tab) {
@@ -411,6 +406,16 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             return true;
         }
 
+        /**
+         * Called when the switch on a system certificate is clicked. This will toggle whether it
+         * is trusted as a credential.
+         */
+        @Override
+        public void onClick(View view) {
+            CertHolder holder = (CertHolder) view.getTag();
+            removeOrInstallCert(holder);
+        }
+
         @Override
         public boolean onGroupClick(ExpandableListView expandableListView, View view,
                 int groupPosition, long id) {
@@ -468,16 +473,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
+                holder = new ViewHolder();
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
                 convertView = inflater.inflate(R.layout.trusted_credential, parent, false);
-                holder = new ViewHolder();
+                convertView.setTag(holder);
                 holder.mSubjectPrimaryView = (TextView)
                         convertView.findViewById(R.id.trusted_credential_subject_primary);
                 holder.mSubjectSecondaryView = (TextView)
                         convertView.findViewById(R.id.trusted_credential_subject_secondary);
                 holder.mSwitch = (Switch) convertView.findViewById(
                         R.id.trusted_credential_status);
-                convertView.setTag(holder);
+                holder.mSwitch.setOnClickListener(this);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
@@ -489,6 +495,7 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                         UserManager.DISALLOW_CONFIG_CREDENTIALS,
                         new UserHandle(certHolder.mProfileId)));
                 holder.mSwitch.setVisibility(View.VISIBLE);
+                holder.mSwitch.setTag(certHolder);
             }
             return convertView;
         }
@@ -504,10 +511,12 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             AdapterView.OnItemClickListener {
         private final int[] GROUP_EXPANDED_STATE_SET = {com.android.internal.R.attr.state_expanded};
         private final int[] EMPTY_STATE_SET = {};
-        private final LinearLayout.LayoutParams HIDE_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        private final LinearLayout.LayoutParams HIDE_CONTAINER_LAYOUT_PARAMS =
+                new LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT, 0f);
+        private final LinearLayout.LayoutParams HIDE_LIST_LAYOUT_PARAMS =
+                new LinearLayout.LayoutParams(MATCH_PARENT, 0);
         private final LinearLayout.LayoutParams SHOW_LAYOUT_PARAMS = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f);
+                LinearLayout.LayoutParams.MATCH_PARENT, MATCH_PARENT, 1f);
         private final GroupAdapter mParent;
         private final int mGroupPosition;
         /*
@@ -577,13 +586,13 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             showCertDialog(getItem(pos));
         }
 
-        public void setContainerViewId(int viewId) {
-            mContainerView = (LinearLayout) mTabHost.findViewById(viewId);
-            mContainerView.setVisibility(View.VISIBLE);
+        public void setContainerView(LinearLayout containerView) {
+            mContainerView = containerView;
 
             mListView = (ListView) mContainerView.findViewById(R.id.cert_list);
             mListView.setAdapter(this);
             mListView.setOnItemClickListener(this);
+            mListView.setItemsCanFocus(true);
 
             mHeaderView = (ViewGroup) mContainerView.findViewById(R.id.header_view);
             mHeaderView.setOnClickListener(this);
@@ -607,9 +616,9 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
             dividerView.setVisibility(showDivider ? View.VISIBLE : View.GONE );
         }
 
-        public void prepare() {
-            mIsListExpanded = mParent.checkGroupExpandableAndStartWarningActivity(mGroupPosition,
-                    false /* startActivity */);
+        public void setExpandIfAvailable(boolean expanded) {
+            mIsListExpanded = expanded && mParent.checkGroupExpandableAndStartWarningActivity(
+                    mGroupPosition, false /* startActivity */);
             refreshViews();
         }
 
@@ -620,9 +629,10 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         private void refreshViews() {
             mIndicatorView.setImageState(mIsListExpanded ? GROUP_EXPANDED_STATE_SET
                     : EMPTY_STATE_SET, false);
-            mListView.setVisibility(mIsListExpanded ? View.VISIBLE : View.GONE);
+            mListView.setLayoutParams(mIsListExpanded ? SHOW_LAYOUT_PARAMS
+                    : HIDE_LIST_LAYOUT_PARAMS);
             mContainerView.setLayoutParams(mIsListExpanded ? SHOW_LAYOUT_PARAMS
-                    : HIDE_LAYOUT_PARAMS);
+                    : HIDE_CONTAINER_LAYOUT_PARAMS);
         }
 
         // Get group indicator from styles of ExpandableListView
@@ -678,62 +688,64 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
                 SparseArray<List<CertHolder>> certHoldersByProfile =
                         new SparseArray<List<CertHolder>>();
                 try {
-                    List<UserHandle> profiles = mUserManager.getUserProfiles();
-                    final int n = profiles.size();
-                    // First we get all aliases for all profiles in order to show progress
-                    // correctly. Otherwise this could all be in a single loop.
-                    SparseArray<List<ParcelableString>> aliasesByProfileId = new SparseArray<
-                            List<ParcelableString>>(n);
-                    int max = 0;
-                    int progress = 0;
-                    for (int i = 0; i < n; ++i) {
-                        UserHandle profile = profiles.get(i);
-                        int profileId = profile.getIdentifier();
-                        if (shouldSkipProfile(profile)) {
-                            continue;
+                    synchronized(mKeyChainConnectionByProfileId) {
+                        List<UserHandle> profiles = mUserManager.getUserProfiles();
+                        final int n = profiles.size();
+                        // First we get all aliases for all profiles in order to show progress
+                        // correctly. Otherwise this could all be in a single loop.
+                        SparseArray<List<String>> aliasesByProfileId = new SparseArray<
+                                List<String>>(n);
+                        int max = 0;
+                        int progress = 0;
+                        for (int i = 0; i < n; ++i) {
+                            UserHandle profile = profiles.get(i);
+                            int profileId = profile.getIdentifier();
+                            if (shouldSkipProfile(profile)) {
+                                continue;
+                            }
+                            KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
+                                    profile);
+                            // Saving the connection for later use on the certificate dialog.
+                            mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
+                            IKeyChainService service = keyChainConnection.getService();
+                            List<String> aliases = mTab.getAliases(service);
+                            if (isCancelled()) {
+                                return new SparseArray<List<CertHolder>>();
+                            }
+                            max += aliases.size();
+                            aliasesByProfileId.put(profileId, aliases);
                         }
-                        KeyChainConnection keyChainConnection = KeyChain.bindAsUser(mContext,
-                                profile);
-                        // Saving the connection for later use on the certificate dialog.
-                        mKeyChainConnectionByProfileId.put(profileId, keyChainConnection);
-                        IKeyChainService service = keyChainConnection.getService();
-                        List<ParcelableString> aliases = mTab.getAliases(service);
-                        if (isCancelled()) {
-                            return new SparseArray<List<CertHolder>>();
+                        for (int i = 0; i < n; ++i) {
+                            UserHandle profile = profiles.get(i);
+                            int profileId = profile.getIdentifier();
+                            List<String> aliases = aliasesByProfileId.get(profileId);
+                            if (isCancelled()) {
+                                return new SparseArray<List<CertHolder>>();
+                            }
+                            KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                                    profileId);
+                            if (shouldSkipProfile(profile) || aliases == null
+                                    || keyChainConnection == null) {
+                                certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
+                                continue;
+                            }
+                            IKeyChainService service = keyChainConnection.getService();
+                            List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
+                            final int aliasMax = aliases.size();
+                            for (int j = 0; j < aliasMax; ++j) {
+                                String alias = aliases.get(j);
+                                byte[] encodedCertificate = service.getEncodedCaCertificate(alias,
+                                        true);
+                                X509Certificate cert = KeyChain.toCertificate(encodedCertificate);
+                                certHolders.add(new CertHolder(service, mAdapter,
+                                        mTab, alias, cert, profileId));
+                                publishProgress(++progress, max);
+                            }
+                            Collections.sort(certHolders);
+                            certHoldersByProfile.put(profileId, certHolders);
                         }
-                        max += aliases.size();
-                        aliasesByProfileId.put(profileId, aliases);
+                        return certHoldersByProfile;
                     }
-                    for (int i = 0; i < n; ++i) {
-                        UserHandle profile = profiles.get(i);
-                        int profileId = profile.getIdentifier();
-                        List<ParcelableString> aliases = aliasesByProfileId.get(profileId);
-                        if (isCancelled()) {
-                            return new SparseArray<List<CertHolder>>();
-                        }
-                        KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                                profileId);
-                        if (shouldSkipProfile(profile) || aliases == null
-                                || keyChainConnection == null) {
-                            certHoldersByProfile.put(profileId, new ArrayList<CertHolder>(0));
-                            continue;
-                        }
-                        IKeyChainService service = keyChainConnection.getService();
-                        List<CertHolder> certHolders = new ArrayList<CertHolder>(max);
-                        final int aliasMax = aliases.size();
-                        for (int j = 0; j < aliasMax; ++j) {
-                            String alias = aliases.get(j).string;
-                            byte[] encodedCertificate = service.getEncodedCaCertificate(alias,
-                                    true);
-                            X509Certificate cert = KeyChain.toCertificate(encodedCertificate);
-                            certHolders.add(new CertHolder(service, mAdapter,
-                                    mTab, alias, cert, profileId));
-                            publishProgress(++progress, max);
-                        }
-                        Collections.sort(certHolders);
-                        certHoldersByProfile.put(profileId, certHolders);
-                    }
-                    return certHoldersByProfile;
                 } catch (RemoteException e) {
                     Log.e(TAG, "Remote exception while loading aliases.", e);
                     return new SparseArray<List<CertHolder>>();
@@ -930,16 +942,18 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
     public List<X509Certificate> getX509CertsFromCertHolder(CertHolder certHolder) {
         List<X509Certificate> certificates = null;
         try {
-            KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                    certHolder.mProfileId);
-            IKeyChainService service = keyChainConnection.getService();
-            List<String> chain = service.getCaCertificateChainAliases(certHolder.mAlias, true);
-            final int n = chain.size();
-            certificates = new ArrayList<X509Certificate>(n);
-            for (int i = 0; i < n; ++i) {
-                byte[] encodedCertificate = service.getEncodedCaCertificate(chain.get(i), true);
-                X509Certificate certificate = KeyChain.toCertificate(encodedCertificate);
-                certificates.add(certificate);
+            synchronized (mKeyChainConnectionByProfileId) {
+                KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                        certHolder.mProfileId);
+                IKeyChainService service = keyChainConnection.getService();
+                List<String> chain = service.getCaCertificateChainAliases(certHolder.mAlias, true);
+                final int n = chain.size();
+                certificates = new ArrayList<X509Certificate>(n);
+                for (int i = 0; i < n; ++i) {
+                    byte[] encodedCertificate = service.getEncodedCaCertificate(chain.get(i), true);
+                    X509Certificate certificate = KeyChain.toCertificate(encodedCertificate);
+                    certificates.add(certificate);
+                }
             }
         } catch (RemoteException ex) {
             Log.e(TAG, "RemoteException while retrieving certificate chain for root "
@@ -979,15 +993,17 @@ public class TrustedCredentialsSettings extends OptionsMenuFragment
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
-                        mCertHolder.mProfileId);
-                IKeyChainService service = keyChainConnection.getService();
-                if (mCertHolder.mDeleted) {
-                    byte[] bytes = mCertHolder.mX509Cert.getEncoded();
-                    service.installCaCertificate(bytes);
-                    return true;
-                } else {
-                    return service.deleteCaCertificate(mCertHolder.mAlias);
+                synchronized (mKeyChainConnectionByProfileId) {
+                    KeyChainConnection keyChainConnection = mKeyChainConnectionByProfileId.get(
+                            mCertHolder.mProfileId);
+                    IKeyChainService service = keyChainConnection.getService();
+                    if (mCertHolder.mDeleted) {
+                        byte[] bytes = mCertHolder.mX509Cert.getEncoded();
+                        service.installCaCertificate(bytes);
+                        return true;
+                    } else {
+                        return service.deleteCaCertificate(mCertHolder.mAlias);
+                    }
                 }
             } catch (CertificateEncodingException | SecurityException | IllegalStateException
                     | RemoteException e) {

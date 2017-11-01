@@ -15,7 +15,9 @@
 package com.android.settings.applications;
 
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -31,7 +33,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.ArraySet;
 import android.view.View;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
@@ -55,6 +57,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     private ApplicationsState.Session mSession;
     private PreferenceGroup mDomainAppList;
     private SwitchPreference mWebAction;
+    private Preference mInstantAppAccountPreference;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -122,9 +125,29 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
                 mWebAction.setTitle(R.string.web_action_enable_title);
                 mWebAction.setSummary(R.string.web_action_enable_summary);
                 mWebAction.setChecked(Settings.Secure.getInt(getContentResolver(),
-                        Settings.Secure.WEB_ACTION_ENABLED, 1) != 0);
+                        Settings.Secure.INSTANT_APPS_ENABLED, 1) != 0);
                 mWebAction.setOnPreferenceChangeListener(this);
                 webActionCategory.addPreference(mWebAction);
+
+                // Determine whether we should show the instant apps account chooser setting
+                ComponentName instantAppSettingsComponent = getActivity().getPackageManager()
+                        .getInstantAppResolverSettingsComponent();
+                Intent instantAppSettingsIntent = null;
+                if (instantAppSettingsComponent != null) {
+                    instantAppSettingsIntent =
+                            new Intent().setComponent(instantAppSettingsComponent);
+                }
+                if (instantAppSettingsIntent != null) {
+                    final Intent launchIntent = instantAppSettingsIntent;
+                    // TODO: Make this button actually launch the account chooser.
+                    mInstantAppAccountPreference = new Preference(getPrefContext());
+                    mInstantAppAccountPreference.setTitle(R.string.instant_apps_account);
+                    mInstantAppAccountPreference.setOnPreferenceClickListener(pref -> {
+                        startActivity(launchIntent);
+                        return true;
+                    });
+                    webActionCategory.addPreference(mInstantAppAccountPreference);
+                }
 
                 // list to manage link handling per app
                 mDomainAppList = new PreferenceCategory(getPrefContext());
@@ -138,9 +161,10 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mWebAction) {
-            final int enabled = (boolean) newValue ? 1 : 0;
+            boolean checked = (boolean) newValue;
             Settings.Secure.putInt(
-                    getContentResolver(), Settings.Secure.WEB_ACTION_ENABLED, enabled);
+                    getContentResolver(),
+                    Settings.Secure.INSTANT_APPS_ENABLED, checked ? 1 : 0);
             return true;
         }
         return false;
@@ -196,7 +220,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.MANAGE_DOMAIN_URLS;
     }
 
@@ -206,7 +230,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             ApplicationsState.AppEntry entry = ((DomainAppPreference) preference).mEntry;
             AppInfoBase.startAppInfoFragment(AppLaunchSettings.class, R.string.auto_launch_label,
                     entry.info.packageName, entry.info.uid, this,
-                    INSTALLED_APP_DETAILS);
+                    INSTALLED_APP_DETAILS, getMetricsCategory());
             return true;
         }
         return false;

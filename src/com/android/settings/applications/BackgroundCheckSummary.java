@@ -16,29 +16,23 @@
 
 package com.android.settings.applications;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.preference.PreferenceFrameLayout;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTabStrip;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.R;
 
-public class BackgroundCheckSummary extends InstrumentedFragment {
+public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
     // layout inflater object used to inflate views
     private LayoutInflater mInflater;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.BACKGROUND_CHECK_SUMMARY;
     }
 

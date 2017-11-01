@@ -20,13 +20,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.INetworkStatsSession;
+import android.net.NetworkPolicy;
+import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.net.TrafficStats;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
@@ -41,7 +46,7 @@ import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
@@ -56,6 +61,7 @@ import java.util.List;
 
 import static android.net.ConnectivityManager.TYPE_ETHERNET;
 import static android.net.ConnectivityManager.TYPE_WIFI;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
 
 public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
 
@@ -65,9 +71,22 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     public static final boolean TEST_RADIOS = false;
     public static final String TEST_RADIOS_PROP = "test.radios";
 
+    public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
+
     private static final String KEY_STATUS_HEADER = "status_header";
     private static final String KEY_LIMIT_SUMMARY = "limit_summary";
-    private static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
+
+    // Mobile data keys
+    public static final String KEY_MOBILE_CATEGORY = "mobile_category";
+    public static final String KEY_MOBILE_DATA_USAGE_TOGGLE = "data_usage_enable";
+    public static final String KEY_MOBILE_DATA_USAGE = "cellular_data_usage";
+    public static final String KEY_MOBILE_BILLING_CYCLE = "billing_preference";
+
+    // Wifi keys
+    public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
+    public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
+    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
+
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -75,21 +94,35 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
     private int mDataUsageTemplate;
+    private NetworkRestrictionsPreference mNetworkRestrcitionPreference;
+    private WifiManager mWifiManager;
+    private NetworkPolicyManager mPolicyManager;
+    private NetworkPolicyEditor mPolicyEditor;
+
+    @Override
+    protected int getHelpResource() {
+        return R.string.help_url_data_usage;
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        boolean hasMobileData = hasMobileData(getContext());
-        mDataUsageController = new DataUsageController(getContext());
+        final Context context = getContext();
+        mPolicyManager = NetworkPolicyManager.from(context);
+        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        mPolicyEditor = new NetworkPolicyEditor(mPolicyManager);
+
+        boolean hasMobileData = hasMobileData(context);
+        mDataUsageController = new DataUsageController(context);
         mDataInfoController = new DataUsageInfoController();
         addPreferencesFromResource(R.xml.data_usage);
 
-        int defaultSubId = getDefaultSubscriptionId(getContext());
+        int defaultSubId = getDefaultSubscriptionId(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
-        mDefaultTemplate = getDefaultTemplate(getContext(), defaultSubId);
+        mDefaultTemplate = getDefaultTemplate(context, defaultSubId);
         mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
@@ -110,11 +143,11 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             removePreference(KEY_LIMIT_SUMMARY);
             mSummaryPreference.setSelectable(false);
         }
-        boolean hasWifiRadio = hasWifiRadio(getContext());
+        boolean hasWifiRadio = hasWifiRadio(context);
         if (hasWifiRadio) {
             addWifiSection();
         }
-        if (hasEthernet(getContext())) {
+        if (hasEthernet(context)) {
             addEthernetSection();
         }
         mDataUsageTemplate = hasMobileData ? R.string.cell_data_template
@@ -166,6 +199,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
         category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
+        mNetworkRestrcitionPreference =
+            (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
     }
 
     private void addEthernetSection() {
@@ -200,35 +235,24 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         updateState();
     }
 
-    private static void verySmallSpanExcept(SpannableString s, CharSequence exception) {
-        final float SIZE = 0.8f * 0.8f;
-        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
-        final int exceptionStart = TextUtils.indexOf(s, exception);
-        if (exceptionStart == -1) {
-           s.setSpan(new RelativeSizeSpan(SIZE), 0, s.length(), FLAGS);
-        } else {
-            if (exceptionStart > 0) {
-                s.setSpan(new RelativeSizeSpan(SIZE), 0, exceptionStart, FLAGS);
-            }
-            final int exceptionEnd = exceptionStart + exception.length();
-            if (exceptionEnd < s.length()) {
-                s.setSpan(new RelativeSizeSpan(SIZE), exceptionEnd, s.length(), FLAGS);
-            }
-        }
-    }
-
     private static CharSequence formatTitle(Context context, String template, long usageLevel) {
+        final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
+        final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
+        final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
+
+        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
+                usageLevel, Formatter.FLAG_SHORTER);
+        final SpannableString enlargedValue = new SpannableString(usedResult.value);
+        enlargedValue.setSpan(new RelativeSizeSpan(LARGER_SIZE), 0, enlargedValue.length(), FLAGS);
+
         final SpannableString amountTemplate = new SpannableString(
                 context.getString(com.android.internal.R.string.fileSizeSuffix)
                 .replace("%1$s", "^1").replace("%2$s", "^2"));
-        verySmallSpanExcept(amountTemplate, "^1");
-        final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
-                usageLevel, Formatter.FLAG_SHORTER);
         final CharSequence formattedUsage = TextUtils.expandTemplate(amountTemplate,
-                usedResult.value, usedResult.units);
+                enlargedValue, usedResult.units);
 
-        final SpannableString fullTemplate = new SpannableString(template.replace("%1$s", "^1"));
-        verySmallSpanExcept(fullTemplate, "^1");
+        final SpannableString fullTemplate = new SpannableString(template);
+        fullTemplate.setSpan(new RelativeSizeSpan(SMALLER_SIZE), 0, fullTemplate.length(), FLAGS);
         return TextUtils.expandTemplate(fullTemplate,
                 BidiFormatter.getInstance().unicodeWrap(formattedUsage));
     }
@@ -237,7 +261,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
                 mDefaultTemplate);
         Context context = getContext();
-
         mDataInfoController.updateDataLimit(info,
                 services.mPolicyEditor.getPolicy(mDefaultTemplate));
 
@@ -266,6 +289,8 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             mLimitPreference.setSummary(null);
         }
 
+        updateNetworkRestrictionSummary(mNetworkRestrcitionPreference);
+
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
             ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
@@ -273,7 +298,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_SUMMARY;
     }
 
@@ -369,6 +394,39 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         }
     }
 
+    @VisibleForTesting
+    void updateNetworkRestrictionSummary(NetworkRestrictionsPreference preference) {
+        if (preference == null) {
+            return;
+        }
+        mPolicyEditor.read();
+        int count = 0;
+        for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
+            if (isMetered(config)) {
+                count++;
+            }
+        }
+        preference.setSummary(getResources().getQuantityString(
+            R.plurals.network_restrictions_summary, count, count));
+    }
+
+    @VisibleForTesting
+    boolean isMetered(WifiConfiguration config) {
+        if (config.SSID == null) {
+            return false;
+        }
+        final String networkId = config.isPasspoint() ? config.providerFriendlyName : config.SSID;
+        final NetworkPolicy policy =
+            mPolicyEditor.getPolicyMaybeUnquoted(NetworkTemplate.buildTemplateWifi(networkId));
+        if (policy == null) {
+            return false;
+        }
+        if (policy.limitBytes != LIMIT_DISABLED) {
+            return true;
+        }
+        return policy.metered;
+    }
+
     private static class SummaryProvider
             implements SummaryLoader.SummaryProvider {
 
@@ -418,33 +476,40 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             @Override
             public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                     boolean enabled) {
-                ArrayList<SearchIndexableResource> resources = new ArrayList<>();
+                List<SearchIndexableResource> resources = new ArrayList<>();
                 SearchIndexableResource resource = new SearchIndexableResource(context);
                 resource.xmlResId = R.xml.data_usage;
                 resources.add(resource);
 
-                if (hasMobileData(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_cellular;
-                    resources.add(resource);
-                }
-                if (hasWifiRadio(context)) {
-                    resource = new SearchIndexableResource(context);
-                    resource.xmlResId = R.xml.data_usage_wifi;
-                    resources.add(resource);
-                }
+                resource = new SearchIndexableResource(context);
+                resource.xmlResId = R.xml.data_usage_cellular;
+                resources.add(resource);
+
+                resource = new SearchIndexableResource(context);
+                resource.xmlResId = R.xml.data_usage_wifi;
+                resources.add(resource);
+
                 return resources;
             }
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
-                ArrayList<String> keys = new ArrayList<>();
-                boolean hasMobileData = ConnectivityManager.from(context).isNetworkSupported(
-                        ConnectivityManager.TYPE_MOBILE);
+                List<String> keys = super.getNonIndexableKeys(context);
 
-                if (hasMobileData) {
-                    keys.add(KEY_RESTRICT_BACKGROUND);
+                if (!hasMobileData(context)) {
+                    keys.add(KEY_MOBILE_CATEGORY);
+                    keys.add(KEY_MOBILE_DATA_USAGE_TOGGLE);
+                    keys.add(KEY_MOBILE_DATA_USAGE);
+                    keys.add(KEY_MOBILE_BILLING_CYCLE);
                 }
+
+                if (!hasWifiRadio(context)) {
+                    keys.add(KEY_WIFI_DATA_USAGE);
+                    keys.add(KEY_NETWORK_RESTRICTIONS);
+                }
+
+                // This title is named Wifi, and will confuse users.
+                keys.add(KEY_WIFI_USAGE_TITLE);
 
                 return keys;
             }

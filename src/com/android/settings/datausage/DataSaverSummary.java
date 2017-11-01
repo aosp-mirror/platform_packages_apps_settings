@@ -19,7 +19,7 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.widget.Switch;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -54,6 +54,8 @@ public class DataSaverSummary extends SettingsPreferenceFragment
         super.onCreate(icicle);
 
         addPreferencesFromResource(R.xml.data_saver);
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(com.android.internal.R.string.data_saver_description);
         mUnrestrictedAccess = findPreference(KEY_UNRESTRICTED_ACCESS);
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
@@ -100,7 +102,7 @@ public class DataSaverSummary extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DATA_SAVER_SUMMARY;
     }
 

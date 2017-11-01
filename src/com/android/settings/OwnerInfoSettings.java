@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -29,9 +28,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.security.OwnerInfoPreferenceController.OwnerInfoCallback;
 
-public class OwnerInfoSettings extends DialogFragment implements OnClickListener {
+public class OwnerInfoSettings extends InstrumentedDialogFragment implements OnClickListener {
 
     private static final String TAG_OWNER_INFO = "ownerInfo";
 
@@ -65,6 +67,7 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
         mOwnerInfo = (EditText) mView.findViewById(R.id.owner_info_edit_text);
         if (!TextUtils.isEmpty(info)) {
             mOwnerInfo.setText(info);
+            mOwnerInfo.setSelection(info.length());
         }
     }
 
@@ -75,8 +78,8 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
             mLockPatternUtils.setOwnerInfoEnabled(!TextUtils.isEmpty(info), mUserId);
             mLockPatternUtils.setOwnerInfo(info, mUserId);
 
-            if (getTargetFragment() instanceof SecuritySettings.SecuritySubSettings) {
-                ((SecuritySettings.SecuritySubSettings) getTargetFragment()).updateOwnerInfo();
+            if (getTargetFragment() instanceof OwnerInfoCallback) {
+                ((OwnerInfoCallback) getTargetFragment()).onOwnerInfoUpdated();
             }
         }
     }
@@ -87,5 +90,10 @@ public class OwnerInfoSettings extends DialogFragment implements OnClickListener
         final OwnerInfoSettings dialog = new OwnerInfoSettings();
         dialog.setTargetFragment(parent, 0);
         dialog.show(parent.getFragmentManager(), TAG_OWNER_INFO);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_OWNER_INFO_SETTINGS;
     }
 }

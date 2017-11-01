@@ -18,41 +18,18 @@
         xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/automatic_storage_manager_settings" >
 
-    <PreferenceCategory
-        android:key="automatic"
-        android:title="@string/deletion_helper_automatic_title">
-
-        <SwitchPreference
-            android:key="storage_manager_active"
-            android:title="@string/automatic_storage_manager_preference_title"
-            android:summary="@string/automatic_storage_manager_text"/>
-
-
-        <com.android.settings.fuelgauge.WallOfTextPreference
-            android:key="freed_bytes"
-            android:persistent="false"
-            android:selectable="false"
-            settings:allowDividerAbove="false"
-            settings:allowDividerBelow="true" />
-
         <DropDownPreference
             android:key="days"
             android:summary="%s"
             android:title="@string/automatic_storage_manager_days_title"
             android:entries="@array/automatic_storage_management_days"
             android:entryValues="@array/automatic_storage_management_days_values"
-            settings:allowDividerAbove="true" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="manual"
-        android:title="@string/deletion_helper_manual_title">
+            settings:allowDividerBelow="true" />
 
         <Preference
-            android:key="deletion_helper"
-            android:title="@string/deletion_helper_preference_title"/>
-
-    </PreferenceCategory>
+            android:key="freed_bytes"
+            android:persistent="false"
+            android:selectable="false"
+            settings:allowDividerAbove="true" />
 
 </PreferenceScreen>

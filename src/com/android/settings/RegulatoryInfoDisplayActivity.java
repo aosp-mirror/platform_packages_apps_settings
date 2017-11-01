@@ -20,14 +20,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemProperties;
+import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Locale;
 
 /**
  * {@link Activity} that displays regulatory information for the "Regulatory information"
@@ -41,7 +46,12 @@ import android.widget.TextView;
  */
 public class RegulatoryInfoDisplayActivity extends Activity implements
         DialogInterface.OnDismissListener {
+
     private final String REGULATORY_INFO_RESOURCE = "regulatory_info";
+    private static final String DEFAULT_REGULATORY_INFO_FILEPATH =
+            "/data/misc/elabel/regulatory_info.png";
+    private static final String REGULATORY_INFO_FILEPATH_TEMPLATE =
+            "/data/misc/elabel/regulatory_info_%s.png";
 
     /**
      * Display the regulatory info graphic in a dialog window.
@@ -60,7 +70,18 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
                 .setOnDismissListener(this);
 
         boolean regulatoryInfoDrawableExists = false;
-        int resId = getResourceId();
+
+        final String regulatoryInfoFile = getRegulatoryInfoImageFileName();
+        final Bitmap regulatoryInfoBitmap = BitmapFactory.decodeFile(regulatoryInfoFile);
+
+        if (regulatoryInfoBitmap != null) {
+            regulatoryInfoDrawableExists = true;
+        }
+
+        int resId = 0;
+        if (!regulatoryInfoDrawableExists) {
+            resId = getResourceId();
+        }
         if (resId != 0) {
             try {
                 Drawable d = getDrawable(resId);
@@ -77,8 +98,12 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
 
         if (regulatoryInfoDrawableExists) {
             View view = getLayoutInflater().inflate(R.layout.regulatory_info, null);
-            ImageView image = (ImageView) view.findViewById(R.id.regulatoryInfo);
-            image.setImageResource(resId);
+            ImageView image = view.findViewById(R.id.regulatoryInfo);
+            if (regulatoryInfoBitmap != null) {
+                image.setImageBitmap(regulatoryInfoBitmap);
+            } else {
+                image.setImageResource(resId);
+            }
             builder.setView(view);
             builder.show();
         } else if (regulatoryText.length() > 0) {
@@ -99,7 +124,7 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
                 REGULATORY_INFO_RESOURCE, "drawable", getPackageName());
 
         // When hardware sku property exists, use regulatory_info_<sku> resource if valid.
-        String sku = SystemProperties.get("ro.boot.hardware.sku", "");
+        final String sku = getSku();
         if (!TextUtils.isEmpty(sku)) {
             String regulatory_info_res = REGULATORY_INFO_RESOURCE + "_" + sku.toLowerCase();
             int id = getResources().getIdentifier(
@@ -114,5 +139,21 @@ public class RegulatoryInfoDisplayActivity extends Activity implements
     @Override
     public void onDismiss(DialogInterface dialog) {
         finish();   // close the activity
+    }
+
+    @VisibleForTesting
+    public static String getSku() {
+        return SystemProperties.get("ro.boot.hardware.sku", "");
+    }
+
+    @VisibleForTesting
+    public static String getRegulatoryInfoImageFileName() {
+        final String sku = getSku();
+        if (TextUtils.isEmpty(sku)) {
+            return DEFAULT_REGULATORY_INFO_FILEPATH;
+        } else {
+            return String.format(Locale.US, REGULATORY_INFO_FILEPATH_TEMPLATE,
+                    sku.toLowerCase());
+        }
     }
 }

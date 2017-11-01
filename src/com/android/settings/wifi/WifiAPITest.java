@@ -27,7 +27,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.Editable;
 import android.widget.EditText;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -85,7 +85,7 @@ public class WifiAPITest extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.TESTING;
     }
 

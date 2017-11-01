@@ -35,7 +35,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.os.storage.IMountService;
+import android.os.storage.IStorageManager;
 import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
@@ -57,7 +57,6 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -66,6 +65,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.LockPatternView;
 import com.android.internal.widget.LockPatternView.Cell;
 import com.android.internal.widget.LockPatternView.DisplayMode;
+import com.android.settings.widget.ImeAwareEditText;
 
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
     private boolean mCooldown = false;
 
     PowerManager.WakeLock mWakeLock;
-    private EditText mPasswordEntry;
+    private ImeAwareEditText mPasswordEntry;
     private LockPatternView mLockPatternView;
     /** Number of calls to {@link #notifyUser()} to ignore before notifying. */
     private int mNotificationCountdown = 0;
@@ -182,7 +182,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         @Override
         protected Integer doInBackground(String... params) {
-            final IMountService service = getMountService();
+            final IStorageManager service = getStorageManager();
             try {
                 return service.decryptStorage(params[0]);
             } catch (Exception e) {
@@ -209,7 +209,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 hide(R.id.emergencyCallButton);
             } else if (failedAttempts == MAX_FAILED_ATTEMPTS) {
                 // Factory reset the device.
-                Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
+                intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON, "CryptKeeper.MAX_FAILED_ATTEMPTS");
                 sendBroadcast(intent);
@@ -253,7 +254,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             } else {
                 int passwordType = StorageManager.CRYPT_TYPE_PASSWORD;
                 try {
-                    final IMountService service = getMountService();
+                    final IStorageManager service = getStorageManager();
                     passwordType = service.getPasswordType();
                 } catch (Exception e) {
                     Log.e(TAG, "Error calling mount service " + e);
@@ -276,9 +277,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             // Reenable the password entry
             if (mPasswordEntry != null) {
                 mPasswordEntry.setEnabled(true);
-                final InputMethodManager imm = (InputMethodManager) getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(mPasswordEntry, 0);
+                mPasswordEntry.scheduleShowSoftInput();
                 setBackFunctionality(true);
             }
         }
@@ -289,15 +288,15 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            final IMountService service = getMountService();
+            final IStorageManager service = getStorageManager();
             try {
                 Log.d(TAG, "Validating encryption state.");
                 state = service.getEncryptionState();
-                if (state == IMountService.ENCRYPTION_STATE_NONE) {
+                if (state == StorageManager.ENCRYPTION_STATE_NONE) {
                     Log.w(TAG, "Unexpectedly in CryptKeeper even though there is no encryption.");
                     return true; // Unexpected, but fine, I guess...
                 }
-                return state == IMountService.ENCRYPTION_STATE_OK;
+                return state == StorageManager.ENCRYPTION_STATE_OK;
             } catch (RemoteException e) {
                 Log.w(TAG, "Unable to get encryption state properly");
                 return true;
@@ -310,7 +309,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             if (Boolean.FALSE.equals(result)) {
                 Log.w(TAG, "Incomplete, or corrupted encryption detected. Prompting user to wipe.");
                 mEncryptionGoneBad = true;
-                mCorrupt = state == IMountService.ENCRYPTION_STATE_ERROR_CORRUPT;
+                mCorrupt = state == StorageManager.ENCRYPTION_STATE_ERROR_CORRUPT;
             } else {
                 Log.d(TAG, "Encryption state validated. Proceeding to configure UI");
             }
@@ -483,7 +482,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 @Override
                 public Void doInBackground(Void... v) {
                     try {
-                        final IMountService service = getMountService();
+                        final IStorageManager service = getStorageManager();
                         passwordType = service.getPasswordType();
                         owner_info = service.getField(StorageManager.OWNER_INFO_KEY);
                         pattern_visible = !("0".equals(service.getField(StorageManager.PATTERN_VISIBLE_KEY)));
@@ -611,7 +610,8 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 @Override
             public void onClick(View v) {
                 // Factory reset the device.
-                Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
+                intent.setPackage("android");
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
                 intent.putExtra(Intent.EXTRA_REASON,
                         "CryptKeeper.showFactoryReset() corrupt=" + corrupt);
@@ -742,7 +742,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
 
      private void passwordEntryInit() {
         // Password/pin case
-        mPasswordEntry = (EditText) findViewById(R.id.passwordEntry);
+        mPasswordEntry = (ImeAwareEditText) findViewById(R.id.passwordEntry);
         if (mPasswordEntry != null){
             mPasswordEntry.setOnEditorActionListener(this);
             mPasswordEntry.requestFocus();
@@ -795,16 +795,13 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             }
         }
 
-        // Asynchronously throw up the IME, since there are issues with requesting it to be shown
-        // immediately.
+        // Make sure that the IME is shown when everything becomes ready.
         if (mLockPatternView == null && !mCooldown) {
             getWindow().setSoftInputMode(
                                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-            mHandler.postDelayed(new Runnable() {
-                @Override public void run() {
-                    imm.showSoftInputUnchecked(0, null);
-                }
-            }, 0);
+            if (mPasswordEntry != null) {
+                mPasswordEntry.scheduleShowSoftInput();
+            }
         }
 
         updateEmergencyCallButtonState();
@@ -865,10 +862,10 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
                 || imm.getEnabledInputMethodSubtypeList(null, false).size() > 1;
     }
 
-    private IMountService getMountService() {
+    private IStorageManager getStorageManager() {
         final IBinder service = ServiceManager.getService("mount");
         if (service != null) {
-            return IMountService.Stub.asInterface(service);
+            return IStorageManager.Stub.asInterface(service);
         }
         return null;
     }
@@ -891,7 +888,7 @@ public class CryptKeeper extends Activity implements TextView.OnEditorActionList
             mPasswordEntry.setEnabled(false);
             setBackFunctionality(false);
 
-            if (password.length() >= LockPatternUtils.MIN_LOCK_PATTERN_SIZE) {
+            if (password.length() >= LockPatternUtils.MIN_LOCK_PASSWORD_SIZE) {
                 new DecryptTask().execute(password);
             } else {
                 // Allow user to make as many of these as they want.

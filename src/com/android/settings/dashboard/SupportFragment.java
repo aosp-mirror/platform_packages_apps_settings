@@ -35,9 +35,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.internal.logging.MetricsProto;
-import com.android.settings.InstrumentedFragment;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 
@@ -77,19 +77,20 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     private ConnectivityManager mConnectivityManager;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SUPPORT_FRAGMENT;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mActivity = getActivity();
         mAccountManager = AccountManager.get(mActivity);
         mSupportFeatureProvider =
                 FeatureFactory.getFactory(mActivity).getSupportFeatureProvider(mActivity);
         mSupportItemAdapter = new SupportItemAdapter(mActivity, savedInstanceState,
-                mSupportFeatureProvider, this /* itemClickListener */);
+                mSupportFeatureProvider, mMetricsFeatureProvider, this /* itemClickListener */);
         mConnectivityManager =
                 (ConnectivityManager) mActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
     }
@@ -118,6 +119,7 @@ public final class SupportFragment extends InstrumentedFragment implements View.
                         .build(),
                 mNetworkCallback);
         mSupportItemAdapter.setHasInternet(hasInternet());
+        mSupportItemAdapter.refreshData();
     }
 
     @Override
@@ -138,8 +140,8 @@ public final class SupportFragment extends InstrumentedFragment implements View.
     @Override
     public void onAccountsUpdated(Account[] accounts) {
         // Account changed, update support items.
-        mSupportItemAdapter.setAccount(
-                mSupportFeatureProvider.getSupportEligibleAccount(mActivity));
+        mSupportItemAdapter.setAccounts(
+                mSupportFeatureProvider.getSupportEligibleAccounts(mActivity));
     }
 
     @Override

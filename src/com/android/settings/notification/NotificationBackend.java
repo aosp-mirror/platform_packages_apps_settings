@@ -16,19 +16,21 @@
 package com.android.settings.notification;
 
 import android.app.INotificationManager;
-import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationChannelGroup;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.service.notification.NotificationListenerService;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 
-import com.android.internal.widget.LockPatternUtils;
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.Utils;
 
 public class NotificationBackend {
@@ -47,30 +49,40 @@ public class NotificationBackend {
             Log.e(TAG, "Error loading application label for " + row.pkg, t);
             row.label = row.pkg;
         }
-        row.icon = app.loadIcon(pm);
+        row.icon = IconDrawableFactory.newInstance(context).getBadgedIcon(app);
         row.banned = getNotificationsBanned(row.pkg, row.uid);
-        row.appImportance = getImportance(row.pkg, row.uid);
-        row.appBypassDnd = getBypassZenMode(row.pkg, row.uid);
-        row.appVisOverride = getVisibilityOverride(row.pkg, row.uid);
-        row.lockScreenSecure = new LockPatternUtils(context).isSecure(
-                UserHandle.myUserId());
+        row.showBadge = canShowBadge(row.pkg, row.uid);
+        row.userId = UserHandle.getUserId(row.uid);
         return row;
     }
 
     public AppRow loadAppRow(Context context, PackageManager pm, PackageInfo app) {
         final AppRow row = loadAppRow(context, pm, app.applicationInfo);
-        row.cantBlock = Utils.isSystemPackage(context.getResources(), pm, app);
+        row.systemApp = Utils.isSystemPackage(context.getResources(), pm, app);
         final String[] nonBlockablePkgs = context.getResources().getStringArray(
                     com.android.internal.R.array.config_nonBlockableNotificationPackages);
+        markAppRowWithBlockables(nonBlockablePkgs, row, app.packageName);
+        return row;
+    }
+
+    @VisibleForTesting static void markAppRowWithBlockables(String[] nonBlockablePkgs, AppRow row,
+            String packageName) {
         if (nonBlockablePkgs != null) {
             int N = nonBlockablePkgs.length;
             for (int i = 0; i < N; i++) {
-                if (app.packageName.equals(nonBlockablePkgs[i])) {
-                    row.cantBlock = row.cantSilence = true;
+                String pkg = nonBlockablePkgs[i];
+                if (pkg == null) {
+                    continue;
+                } else if (pkg.contains(":")) {
+                    // Interpret as channel; lock only this channel for this app.
+                    if (packageName.equals(pkg.split(":", 2)[0])) {
+                        row.lockedChannelId = pkg.split(":", 2 )[1];
+                    }
+                } else if (packageName.equals(nonBlockablePkgs[i])) {
+                    row.systemApp = row.lockedImportance = true;
                 }
             }
         }
-        return row;
     }
 
     public boolean getNotificationsBanned(String pkg, int uid) {
@@ -83,19 +95,9 @@ public class NotificationBackend {
         }
     }
 
-    public boolean getBypassZenMode(String pkg, int uid) {
+    public boolean setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) {
         try {
-            return sINM.getPriority(pkg, uid) == Notification.PRIORITY_MAX;
-        } catch (Exception e) {
-            Log.w(TAG, "Error calling NoMan", e);
-            return false;
-        }
-    }
-
-    public boolean setBypassZenMode(String pkg, int uid, boolean bypassZen) {
-        try {
-            sINM.setPriority(pkg, uid,
-                    bypassZen ? Notification.PRIORITY_MAX : Notification.PRIORITY_DEFAULT);
+            sINM.setNotificationsEnabledForPackage(pkg, uid, enabled);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -103,18 +105,18 @@ public class NotificationBackend {
         }
     }
 
-    public int getVisibilityOverride(String pkg, int uid) {
+    public boolean canShowBadge(String pkg, int uid) {
         try {
-            return sINM.getVisibilityOverride(pkg, uid);
+            return sINM.canShowBadge(pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return NotificationListenerService.Ranking.VISIBILITY_NO_OVERRIDE;
+            return false;
         }
     }
 
-    public boolean setVisibilityOverride(String pkg, int uid, int override) {
+    public boolean setShowBadge(String pkg, int uid, boolean showBadge) {
         try {
-            sINM.setVisibilityOverride(pkg, uid, override);
+            sINM.setShowBadge(pkg, uid, showBadge);
             return true;
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
@@ -122,22 +124,63 @@ public class NotificationBackend {
         }
     }
 
-    public boolean setImportance(String pkg, int uid, int importance) {
+    public NotificationChannel getChannel(String pkg, int uid, String channelId) {
+        if (channelId == null) {
+            return null;
+        }
         try {
-            sINM.setImportance(pkg, uid, importance);
-            return true;
+            return sINM.getNotificationChannelForPackage(pkg, uid, channelId, true);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return false;
+            return null;
         }
     }
 
-    public int getImportance(String pkg, int uid) {
+
+    public NotificationChannelGroup getGroup(String groupId, String pkg, int uid) {
+        if (groupId == null) {
+            return null;
+        }
         try {
-            return sINM.getImportance(pkg, uid);
+            return sINM.getNotificationChannelGroupForPackage(groupId, pkg, uid);
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
-            return NotificationListenerService.Ranking.IMPORTANCE_UNSPECIFIED;
+            return null;
+        }
+    }
+
+    public ParceledListSlice<NotificationChannelGroup> getChannelGroups(String pkg, int uid) {
+        try {
+            return sINM.getNotificationChannelGroupsForPackage(pkg, uid, false);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return ParceledListSlice.emptyList();
+        }
+    }
+
+    public void updateChannel(String pkg, int uid, NotificationChannel channel) {
+        try {
+            sINM.updateNotificationChannelForPackage(pkg, uid, channel);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+        }
+    }
+
+    public int getDeletedChannelCount(String pkg, int uid) {
+        try {
+            return sINM.getDeletedChannelCount(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return 0;
+        }
+    }
+
+    public boolean onlyHasDefaultChannel(String pkg, int uid) {
+        try {
+            return sINM.onlyHasDefaultChannel(pkg, uid);
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return false;
         }
     }
 
@@ -153,11 +196,10 @@ public class NotificationBackend {
         public Intent settingsIntent;
         public boolean banned;
         public boolean first;  // first app in section
-        public boolean cantBlock;
-        public boolean cantSilence;
-        public int appImportance;
-        public boolean appBypassDnd;
-        public int appVisOverride;
-        public boolean lockScreenSecure;
+        public boolean systemApp;
+        public boolean lockedImportance;
+        public String lockedChannelId;
+        public boolean showBadge;
+        public int userId;
     }
 }

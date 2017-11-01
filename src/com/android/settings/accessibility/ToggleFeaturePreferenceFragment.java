@@ -42,7 +42,6 @@ public abstract class ToggleFeaturePreferenceFragment
     protected ToggleSwitch mToggleSwitch;
 
     protected String mPreferenceKey;
-    protected Preference mSummaryPreference;
 
     protected CharSequence mSettingsTitle;
     protected Intent mSettingsIntent;
@@ -53,36 +52,6 @@ public abstract class ToggleFeaturePreferenceFragment
         PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                 getActivity());
         setPreferenceScreen(preferenceScreen);
-        mSummaryPreference = new Preference(getPrefContext()) {
-            @Override
-            public void onBindViewHolder(PreferenceViewHolder view) {
-                super.onBindViewHolder(view);
-                view.setDividerAllowedAbove(false);
-                view.setDividerAllowedBelow(false);
-                final TextView summaryView = (TextView) view.findViewById(android.R.id.summary);
-                summaryView.setText(getSummary());
-                sendAccessibilityEvent(summaryView);
-            }
-
-            private void sendAccessibilityEvent(View view) {
-                // Since the view is still not attached we create, populate,
-                // and send the event directly since we do not know when it
-                // will be attached and posting commands is not as clean.
-                AccessibilityManager accessibilityManager =
-                        AccessibilityManager.getInstance(getActivity());
-                if (accessibilityManager.isEnabled()) {
-                    AccessibilityEvent event = AccessibilityEvent.obtain();
-                    event.setEventType(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-                    view.onInitializeAccessibilityEvent(event);
-                    view.dispatchPopulateAccessibilityEvent(event);
-                    accessibilityManager.sendAccessibilityEvent(event);
-                }
-            }
-        };
-        mSummaryPreference.setSelectable(false);
-        mSummaryPreference.setPersistent(false);
-        mSummaryPreference.setLayoutResource(R.layout.text_description_preference);
-        preferenceScreen.addPreference(mSummaryPreference);
     }
 
     @Override
@@ -94,6 +63,16 @@ public abstract class ToggleFeaturePreferenceFragment
         mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
+
+        // Show the "Settings" menu as if it were a preference screen
+        if (mSettingsTitle != null && mSettingsIntent != null) {
+            PreferenceScreen preferenceScreen = getPreferenceScreen();
+            Preference settingsPref = new Preference(preferenceScreen.getContext());
+            settingsPref.setTitle(mSettingsTitle);
+            settingsPref.setIconSpaceReserved(true);
+            settingsPref.setIntent(mSettingsIntent);
+            preferenceScreen.addPreference(settingsPref);
+        }
     }
 
     @Override
@@ -110,16 +89,6 @@ public abstract class ToggleFeaturePreferenceFragment
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        if (mSettingsTitle != null && mSettingsIntent != null) {
-            MenuItem menuItem = menu.add(mSettingsTitle);
-            menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-            menuItem.setIntent(mSettingsIntent);
-        }
-    }
 
     protected void onInstallSwitchBarToggleSwitch() {
         // Implement this to set a checked listener.
@@ -145,11 +114,6 @@ public abstract class ToggleFeaturePreferenceFragment
     }
 
     protected void onProcessArguments(Bundle arguments) {
-        if (arguments == null) {
-            getPreferenceScreen().removePreference(mSummaryPreference);
-            return;
-        }
-
         // Key.
         mPreferenceKey = arguments.getString(AccessibilitySettings.EXTRA_PREFERENCE_KEY);
 
@@ -168,9 +132,7 @@ public abstract class ToggleFeaturePreferenceFragment
         if (arguments.containsKey(AccessibilitySettings.EXTRA_SUMMARY)) {
             final CharSequence summary = arguments.getCharSequence(
                     AccessibilitySettings.EXTRA_SUMMARY);
-            mSummaryPreference.setSummary(summary);
-        } else {
-            getPreferenceScreen().removePreference(mSummaryPreference);
+            mFooterPreferenceMixin.createFooterPreference().setTitle(summary);
         }
     }
 }

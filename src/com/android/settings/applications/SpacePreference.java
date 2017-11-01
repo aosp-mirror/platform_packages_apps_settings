@@ -17,6 +17,7 @@ package com.android.settings.applications;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
@@ -33,7 +34,9 @@ public class SpacePreference extends Preference {
     private int mHeight;
 
     public SpacePreference(Context context, AttributeSet attrs) {
-        this(context, attrs, com.android.internal.R.attr.preferenceStyle);
+        this(context, attrs, TypedArrayUtils.getAttr(context,
+                android.support.v7.preference.R.attr.preferenceStyle,
+                android.R.attr.preferenceStyle));
     }
 
     public SpacePreference(Context context, AttributeSet attrs, int defStyleAttr) {

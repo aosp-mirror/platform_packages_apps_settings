@@ -59,8 +59,7 @@ public class SimDialogActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Bundle extras = getIntent().getExtras();
-        final int dialogType = extras.getInt(DIALOG_TYPE_KEY, INVALID_PICK);
+        final int dialogType = getIntent().getIntExtra(DIALOG_TYPE_KEY, INVALID_PICK);
 
         switch (dialogType) {
             case DATA_PICK:
@@ -69,7 +68,7 @@ public class SimDialogActivity extends Activity {
                 createDialog(this, dialogType).show();
                 break;
             case PREFERRED_PICK:
-                displayPreferredDialog(extras.getInt(PREFERRED_SIM));
+                displayPreferredDialog(getIntent().getIntExtra(PREFERRED_SIM, 0));
                 break;
             default:
                 throw new IllegalArgumentException("Invalid dialog type " + dialogType + " sent.");

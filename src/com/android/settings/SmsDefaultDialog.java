@@ -125,6 +125,10 @@ public final class SmsDefaultDialog extends AlertActivity implements
             p.mOnClickListener = this;
             p.mNegativeButtonText = getString(R.string.cancel);
             p.mNegativeButtonListener = this;
+            if (p.mAdapter.isEmpty()) {
+                // If there is nothing to choose from, don't build the dialog.
+                return false;
+            }
         }
         setupAlert();
 

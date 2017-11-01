@@ -16,10 +16,16 @@
 
 package com.android.settings.applications;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.preference.Preference;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 
-import com.android.settings.AppHeader;
+import com.android.settings.widget.EntityHeaderController;
+import com.android.settingslib.applications.AppUtils;
+
+import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 public abstract class AppInfoWithHeader extends AppInfoBase {
 
@@ -34,8 +40,19 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
         }
         mCreated = true;
         if (mPackageInfo == null) return;
-        AppHeader.createAppHeader(this, mPackageInfo.applicationInfo.loadIcon(mPm),
-                mPackageInfo.applicationInfo.loadLabel(mPm), mPackageName,
-                mPackageInfo.applicationInfo.uid, 0);
+        final Activity activity = getActivity();
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this, null /* header */)
+                .setRecyclerView(getListView(), getLifecycle())
+                .setIcon(IconDrawableFactory.newInstance(activity)
+                        .getBadgedIcon(mPackageInfo.applicationInfo))
+                .setLabel(mPackageInfo.applicationInfo.loadLabel(mPm))
+                .setSummary(mPackageInfo)
+                .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
+                .setPackageName(mPackageName)
+                .setUid(mPackageInfo.applicationInfo.uid)
+                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+                .done(activity, getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 }

@@ -21,13 +21,15 @@ import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.os.PersistableBundle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.service.notification.ZenModeConfig;
+import android.support.annotation.VisibleForTesting;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 public class DndCondition extends Condition {
@@ -35,11 +37,21 @@ public class DndCondition extends Condition {
     private static final String TAG = "DndCondition";
     private static final String KEY_STATE = "state";
 
+    private boolean mRegistered;
+
+    @VisibleForTesting
+    static final IntentFilter DND_FILTER =
+        new IntentFilter(NotificationManager.ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL);
+
     private int mZen;
     private ZenModeConfig mConfig;
+    private final Receiver mReceiver;
 
     public DndCondition(ConditionManager manager) {
         super(manager);
+        mReceiver = new Receiver();
+        mManager.getContext().registerReceiver(mReceiver, DND_FILTER);
+        mRegistered = true;
     }
 
     @Override
@@ -66,11 +78,6 @@ public class DndCondition extends Condition {
     void restoreState(PersistableBundle bundle) {
         super.restoreState(bundle);
         mZen = bundle.getInt(KEY_STATE, Global.ZEN_MODE_OFF);
-    }
-
-    @Override
-    protected Class<?> getReceiverClass() {
-        return Receiver.class;
     }
 
     private CharSequence getZenState() {
@@ -149,7 +156,16 @@ public class DndCondition extends Condition {
     }
 
     @Override
-    protected boolean shouldAlwaysListenToBroadcast() {
-        return true;
+    public void onResume() {
+        if (!mRegistered) {
+           mManager.getContext().registerReceiver(mReceiver, DND_FILTER);
+           mRegistered = true;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        mManager.getContext().unregisterReceiver(mReceiver);
+        mRegistered = false;
     }
 }

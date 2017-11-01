@@ -16,6 +16,7 @@
 
 package com.android.settings.bluetooth;
 
+import android.annotation.NonNull;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -25,7 +26,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -62,6 +66,8 @@ public class RequestPermissionActivity extends Activity implements
 
     private BroadcastReceiver mReceiver;
 
+    private @NonNull CharSequence mAppLabel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,8 +92,10 @@ public class RequestPermissionActivity extends Activity implements
                 case BluetoothAdapter.STATE_ON:
                 case BluetoothAdapter.STATE_TURNING_ON: {
                     Intent intent = new Intent(this, RequestPermissionHelperActivity.class);
+                    intent.putExtra(RequestPermissionHelperActivity.EXTRA_APP_LABEL, mAppLabel);
                     intent.setAction(RequestPermissionHelperActivity
                                 .ACTION_INTERNAL_REQUEST_BT_OFF);
+
                     startActivityForResult(intent, 0);
                 } break;
 
@@ -116,6 +124,7 @@ public class RequestPermissionActivity extends Activity implements
                      */
                     Intent intent = new Intent(this, RequestPermissionHelperActivity.class);
                     intent.setAction(RequestPermissionHelperActivity.ACTION_INTERNAL_REQUEST_BT_ON);
+                    intent.putExtra(RequestPermissionHelperActivity.EXTRA_APP_LABEL, mAppLabel);
                     if (mRequest == REQUEST_ENABLE_DISCOVERABLE) {
                         intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, mTimeout);
                     }
@@ -165,9 +174,15 @@ public class RequestPermissionActivity extends Activity implements
             // Ask the user whether to turn on discovery mode or not
             // For lasting discoverable mode there is a different message
             if (mTimeout == BluetoothDiscoverableEnabler.DISCOVERABLE_TIMEOUT_NEVER) {
-                builder.setMessage(getString(R.string.bluetooth_ask_lasting_discovery));
+                CharSequence message = mAppLabel != null
+                        ? getString(R.string.bluetooth_ask_lasting_discovery, mAppLabel)
+                        : getString(R.string.bluetooth_ask_lasting_discovery_no_name);
+                builder.setMessage(message);
             } else {
-                builder.setMessage(getString(R.string.bluetooth_ask_discovery, mTimeout));
+                CharSequence message = mAppLabel != null
+                        ? getString(R.string.bluetooth_ask_discovery, mAppLabel, mTimeout)
+                        : getString(R.string.bluetooth_ask_discovery_no_name, mTimeout);
+                builder.setMessage(message);
             }
             builder.setPositiveButton(getString(R.string.allow), this);
             builder.setNegativeButton(getString(R.string.deny), this);
@@ -303,6 +318,23 @@ public class RequestPermissionActivity extends Activity implements
             setResult(RESULT_CANCELED);
             return true;
         }
+
+        String packageName = getCallingPackage();
+        if (TextUtils.isEmpty(packageName)) {
+            packageName = getIntent().getStringExtra(Intent.EXTRA_PACKAGE_NAME);
+        }
+        if (!TextUtils.isEmpty(packageName)) {
+            try {
+                ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo(
+                        packageName, 0);
+                mAppLabel = applicationInfo.loadSafeLabel(getPackageManager());
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.e(TAG, "Couldn't find app with package name " + packageName);
+                setResult(RESULT_CANCELED);
+                return true;
+            }
+        }
+
         mLocalAdapter = manager.getBluetoothAdapter();
 
         return false;

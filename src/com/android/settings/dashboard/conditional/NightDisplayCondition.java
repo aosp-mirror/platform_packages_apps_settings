@@ -19,7 +19,7 @@ package com.android.settings.dashboard.conditional;
 import android.graphics.drawable.Icon;
 
 import com.android.internal.app.NightDisplayController;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.display.NightDisplaySettings;
@@ -63,7 +63,7 @@ public final class NightDisplayCondition extends Condition
     @Override
     public void onPrimaryClick() {
         Utils.startWithFragment(mManager.getContext(), NightDisplaySettings.class.getName(), null,
-                null, 0, R.string.night_display_title, null);
+                null, 0, R.string.night_display_title, null, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
     @Override

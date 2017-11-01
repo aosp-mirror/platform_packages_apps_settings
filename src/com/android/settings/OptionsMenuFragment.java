@@ -17,13 +17,15 @@ package com.android.settings;
 
 import android.os.Bundle;
 
+import com.android.settings.core.InstrumentedPreferenceFragment;
+
 /**
  * Base class for a fragment that has the options menu.
  * SettingsPreferenceFragment automatically sets this, but some activities do not use
  * preferences, and we need to call setHasOptionsMenu(true) for the back button on action bar.
  * For preference fragments, use SettingsPreferenceFragment.
  */
-public abstract class OptionsMenuFragment extends InstrumentedFragment {
+public abstract class OptionsMenuFragment extends InstrumentedPreferenceFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {

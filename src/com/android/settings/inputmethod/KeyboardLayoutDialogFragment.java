@@ -40,12 +40,14 @@ import android.widget.CheckedTextView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class KeyboardLayoutDialogFragment extends DialogFragment
+public class KeyboardLayoutDialogFragment extends InstrumentedDialogFragment
         implements InputDeviceListener, LoaderCallbacks<KeyboardLayoutDialogFragment.Keyboards> {
     private static final String KEY_INPUT_DEVICE_IDENTIFIER = "inputDeviceIdentifier";
 
@@ -60,6 +62,12 @@ public class KeyboardLayoutDialogFragment extends DialogFragment
 
     public KeyboardLayoutDialogFragment(InputDeviceIdentifier inputDeviceIdentifier) {
         mInputDeviceIdentifier = inputDeviceIdentifier;
+    }
+
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_KEYBOARD_LAYOUT;
     }
 
     @Override

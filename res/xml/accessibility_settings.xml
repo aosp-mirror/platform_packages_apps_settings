@@ -15,47 +15,61 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
         android:title="@string/accessibility_settings"
         android:persistent="true">
 
+    <Preference
+            android:key="accessibility_shortcut_preference"
+            android:fragment="com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment"
+            android:title="@string/accessibility_global_gesture_preference_title"/>
+
     <PreferenceCategory
-            android:key="services_category"
-            android:title="@string/accessibility_services_title">
+            android:key="user_installed_services_category"
+            android:title="@string/user_installed_services_category_title">
     </PreferenceCategory>
 
     <PreferenceCategory
-            android:key="system_category"
-            android:title="@string/accessibility_system_title">
+            android:key="screen_reader_category"
+            android:title="@string/screen_reader_category_title">
 
-        <PreferenceScreen
-            android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
-            android:key="captioning_preference_screen"
-            android:title="@string/accessibility_captioning_title" />
+        <Preference
+                android:key="tts_settings_preference"
+                android:fragment="com.android.settings.tts.TextToSpeechSettings"
+                android:title="@string/tts_settings_title"/>
+    </PreferenceCategory>
 
-        <PreferenceScreen
-            android:fragment="com.android.settings.accessibility.ToggleScreenMagnificationPreferenceFragment"
-            android:key="screen_magnification_preference_screen"
-            android:title="@string/accessibility_screen_magnification_title"/>
+    <PreferenceCategory
+            android:key="display_category"
+            android:title="@string/display_category_title">
 
-        <PreferenceScreen
-            android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
-            android:key="font_size_preference_screen"
-            android:title="@string/title_font_size"/>
+        <Preference
+                android:fragment="com.android.settings.accessibility.ToggleFontSizePreferenceFragment"
+                android:key="font_size_preference_screen"
+                android:title="@string/title_font_size"/>
 
         <com.android.settings.display.ScreenZoomPreference
-            android:key="screen_zoom"
-            android:title="@string/screen_zoom_title"/>
+                android:key="screen_zoom"
+                android:title="@string/screen_zoom_title"/>
 
-        <PreferenceScreen
-            android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
-            android:key="autoclick_preference_screen"
-            android:title="@string/accessibility_autoclick_preference_title"/>
+        <Preference
+            android:fragment="com.android.settings.accessibility.MagnificationPreferenceFragment"
+            android:key="magnification_preference_screen"
+            android:title="@string/accessibility_screen_magnification_title"
+            android:icon="@mipmap/ic_accessibility_magnification" />
 
         <SwitchPreference
-                android:key="toggle_high_text_contrast_preference"
-                android:title="@string/accessibility_toggle_high_text_contrast_preference_title"
-                android:summary="@string/experimental_preference"/>
+                android:key="toggle_large_pointer_icon"
+                android:title="@string/accessibility_toggle_large_pointer_icon_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="interaction_control_category"
+            android:title="@string/interaction_control_category_title">
+
+        <Preference
+                android:fragment="com.android.settings.accessibility.ToggleAutoclickPreferenceFragment"
+                android:key="autoclick_preference_screen"
+                android:title="@string/accessibility_autoclick_preference_title"/>
 
         <SwitchPreference
                 android:key="toggle_power_button_ends_call_preference"
@@ -67,14 +81,17 @@
                 android:title="@string/accelerometer_title"
                 android:persistent="false"/>
 
-        <SwitchPreference
-                android:key="toggle_speak_password_preference"
-                android:title="@string/accessibility_toggle_speak_password_preference_title"
+        <ListPreference
+                android:key="select_long_press_timeout_preference"
+                android:title="@string/accessibility_long_press_timeout_preference_title"
+                android:entries="@array/long_press_timeout_selector_titles"
+                android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
+    </PreferenceCategory>
 
-        <SwitchPreference
-                android:key="toggle_large_pointer_icon"
-                android:title="@string/accessibility_toggle_large_pointer_icon_title" />
+    <PreferenceCategory
+            android:key="audio_and_captions_category"
+            android:title="@string/audio_and_captions_category_title">
 
         <SwitchPreference
                 android:key="toggle_master_mono"
@@ -82,35 +99,29 @@
                 android:summary="@string/accessibility_toggle_master_mono_summary"
                 android:persistent="false"/>
 
-        <PreferenceScreen
-                android:fragment="com.android.settings.accessibility.ToggleGlobalGesturePreferenceFragment"
-                android:key="enable_global_gesture_preference_screen"
-                android:title="@string/accessibility_global_gesture_preference_title"/>
-
-        <PreferenceScreen android:key="tts_settings_preference"
-                android:fragment="com.android.settings.tts.TextToSpeechSettings"
-                android:title="@string/tts_settings_title"/>
-
-        <ListPreference android:key="select_long_press_timeout_preference"
-                android:title="@string/accessibility_long_press_timeout_preference_title"
-                android:entries="@array/long_press_timeout_selector_titles"
-                android:entryValues="@array/long_press_timeout_selector_values"
-                android:persistent="false"/>
-
+        <Preference
+                android:fragment="com.android.settings.accessibility.CaptionPropertiesFragment"
+                android:key="captioning_preference_screen"
+                android:title="@string/accessibility_captioning_title" />
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="display_category"
-        android:title="@string/accessibility_display_title" >
-        <SwitchPreference
-            android:key="toggle_inversion_preference"
-            android:title="@string/accessibility_display_inversion_preference_title"
-            android:summary="@string/accessibility_display_inversion_preference_subtitle"
-            android:persistent="false" />
-        <PreferenceScreen
-            android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
-            android:key="daltonizer_preference_screen"
-            android:title="@string/accessibility_display_daltonizer_preference_title" />
-    </PreferenceCategory>
+            android:key="experimental_category"
+            android:title="@string/experimental_category_title">
 
+        <SwitchPreference
+                android:key="toggle_high_text_contrast_preference"
+                android:title="@string/accessibility_toggle_high_text_contrast_preference_title" />
+
+        <Preference
+                android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
+                android:key="daltonizer_preference_screen"
+                android:title="@string/accessibility_display_daltonizer_preference_title" />
+
+        <SwitchPreference
+                android:key="toggle_inversion_preference"
+                android:title="@string/accessibility_display_inversion_preference_title"
+                android:summary="@string/accessibility_display_inversion_preference_subtitle"
+                android:persistent="false" />
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -14,67 +14,85 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/device_status_activity_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/device_status_activity_title">
 
-    <com.android.settings.CopyablePreference android:key="battery_status"
+    <Preference
+        android:key="battery_status"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/battery_status_title"
-        android:summary="@string/device_info_not_available"
-        android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="battery_level"
+        android:summary="@string/device_info_not_available" />
+    <Preference
+        android:key="battery_level"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/battery_level_title"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <PreferenceScreen android:key="sim_status"
+    <Preference
+        android:key="sim_status"
         android:title="@string/sim_status_title"
         android:persistent="false">
-        <intent android:targetPackage="com.android.settings"
+        <intent
+            android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.Settings$SimStatusActivity" />
-    </PreferenceScreen>
-    <PreferenceScreen android:key="imei_info"
+    </Preference>
+    <Preference
+        android:key="imei_info"
         android:title="@string/imei_information_title"
         android:persistent="false">
-        <intent android:targetPackage="com.android.settings"
+        <intent
+            android:targetPackage="com.android.settings"
             android:targetClass="com.android.settings.Settings$ImeiInformationActivity" />
-    </PreferenceScreen>
-    <com.android.settings.CopyablePreference android:key="wifi_ip_address"
+    </Preference>
+    <Preference
+        android:key="wifi_ip_address"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/wifi_advanced_ip_address_title"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="wifi_mac_address"
+    <Preference
+        android:key="wifi_mac_address"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="bt_address"
+    <Preference
+        android:key="bt_address"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/status_bt_address"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="serial_number"
+    <Preference
+        android:key="serial_number"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/status_serial_number"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="up_time"
+    <Preference
+        android:key="up_time"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/status_up_time"
         android:summary="@string/device_info_not_available"
         android:persistent="false" />
-    <com.android.settings.CopyablePreference android:key="wimax_mac_address"
+    <Preference
+        android:key="wimax_mac_address"
         android:enabled="false"
         android:shouldDisableView="false"
         android:title="@string/status_wimax_mac_address"
         android:summary="@string/device_info_not_available"
+        android:persistent="false" />
+    <Preference
+        android:key="ims_reg_state"
+        android:enabled="false"
+        android:shouldDisableView="false"
+        android:title="@string/ims_reg_title"
         android:persistent="false" />
 </PreferenceScreen>

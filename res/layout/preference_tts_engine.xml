@@ -18,33 +18,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingStart="@dimen/preference_no_icon_padding_start"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:layout_gravity="center_vertical">
 
     <RadioButton
         android:id="@+id/tts_engine_radiobutton"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <View
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@android:drawable/divider_horizontal_dark" />
-
-    <ImageView
-        android:id="@+id/tts_engine_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-        android:src="@drawable/ic_settings"
-        android:contentDescription="@string/tts_engine_settings_button"
-        android:layout_centerVertical="true"
         android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground" />
+        android:layout_weight="1"
+        android:maxLines="2"
+        android:textAppearance="?android:attr/textAppearanceListItem"
+        android:ellipsize="marquee"/>
 </LinearLayout>

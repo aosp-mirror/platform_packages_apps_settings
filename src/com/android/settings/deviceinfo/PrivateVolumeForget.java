@@ -33,9 +33,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class PrivateVolumeForget extends SettingsPreferenceFragment {
     private static final String TAG_FORGET_CONFIRM = "forget_confirm";
@@ -43,7 +44,7 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
     private VolumeRecord mRecord;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 
@@ -52,7 +53,17 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
             Bundle savedInstanceState) {
         final StorageManager storage = getActivity().getSystemService(StorageManager.class);
         final String fsUuid = getArguments().getString(VolumeRecord.EXTRA_FS_UUID);
+        // Passing null will crash the StorageManager, so let's early exit.
+        if (fsUuid == null) {
+            getActivity().finish();
+            return null;
+        }
         mRecord = storage.findRecordByUuid(fsUuid);
+
+        if (mRecord == null) {
+            getActivity().finish();
+            return null;
+        }
 
         final View view = inflater.inflate(R.layout.storage_internal_forget, container, false);
         final TextView body = (TextView) view.findViewById(R.id.body);
@@ -72,7 +83,13 @@ public class PrivateVolumeForget extends SettingsPreferenceFragment {
         }
     };
 
-    public static class ForgetConfirmFragment extends DialogFragment {
+    public static class ForgetConfirmFragment extends InstrumentedDialogFragment {
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_FORGET;
+        }
+
         public static void show(Fragment parent, String fsUuid) {
             final Bundle args = new Bundle();
             args.putString(VolumeRecord.EXTRA_FS_UUID, fsUuid);

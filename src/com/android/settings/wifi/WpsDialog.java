@@ -125,6 +125,7 @@ public class WpsDialog extends AlertDialog {
 
 
         mFilter = new IntentFilter();
+        mFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mFilter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
         mReceiver = new BroadcastReceiver() {
             @Override
@@ -150,6 +151,9 @@ public class WpsDialog extends AlertDialog {
             DialogState dialogState = mDialogState.valueOf(savedInstanceState.getString(DIALOG_STATE));
             String msg = savedInstanceState.getString(DIALOG_MSG_STRING);
             updateDialog(dialogState, msg);
+            if (dialogState == DialogState.WPS_START) {
+                startWps();
+            }
         }
     }
 
@@ -180,9 +184,7 @@ public class WpsDialog extends AlertDialog {
 
         setView(mView);
         if (savedInstanceState == null) {
-            WpsInfo wpsConfig = new WpsInfo();
-            wpsConfig.setup = mWpsSetup;
-            mWifiManager.startWps(wpsConfig, mWpsListener);
+            startWps();
         }
         super.onCreate(savedInstanceState);
     }
@@ -260,7 +262,18 @@ public class WpsDialog extends AlertDialog {
 
     private void handleEvent(Context context, Intent intent) {
         String action = intent.getAction();
-        if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
+        if (WifiManager.WIFI_STATE_CHANGED_ACTION.equals(action)) {
+            final int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE,
+                    WifiManager.WIFI_STATE_UNKNOWN);
+            if (state == WifiManager.WIFI_STATE_DISABLED) {
+                if (mTimer != null) {
+                    mTimer.cancel();
+                    mTimer = null;
+                }
+                String msg = mContext.getString(R.string.wifi_wps_failed_wifi_disconnected);
+                updateDialog(DialogState.WPS_FAILED, msg);
+            }
+        } else if (WifiManager.NETWORK_STATE_CHANGED_ACTION.equals(action)) {
             NetworkInfo info = (NetworkInfo) intent.getParcelableExtra(
                     WifiManager.EXTRA_NETWORK_INFO);
             final NetworkInfo.DetailedState state = info.getDetailedState();
@@ -276,4 +289,9 @@ public class WpsDialog extends AlertDialog {
         }
     }
 
+    private void startWps() {
+        WpsInfo wpsConfig = new WpsInfo();
+        wpsConfig.setup = mWpsSetup;
+        mWifiManager.startWps(wpsConfig, mWpsListener);
+    }
 }

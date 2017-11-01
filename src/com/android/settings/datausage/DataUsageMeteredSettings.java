@@ -28,7 +28,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.telephony.TelephonyManager;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -61,7 +61,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
     private Preference mWifiDisabled;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.NET_DATA_USAGE_METERED;
     }
 
@@ -96,7 +96,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         if (hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
             for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
                 if (config.SSID != null) {
-                    mWifiCategory.addPreference(buildWifiPref(context, config));
+                    mWifiCategory.addPreference(buildWifiPref(config));
                 }
             }
         } else {
@@ -113,10 +113,11 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         return pref;
     }
 
-    private Preference buildWifiPref(Context context, WifiConfiguration config) {
-        final String networkId = config.SSID;
+    private Preference buildWifiPref(WifiConfiguration config) {
+        final String networkId = config.isPasspoint() ?
+                config.providerFriendlyName : config.SSID;
         final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(networkId);
-        final MeteredPreference pref = new MeteredPreference(context, template);
+        final MeteredPreference pref = new MeteredPreference(getPrefContext(), template);
         pref.setTitle(removeDoubleQuotes(networkId));
         return pref;
     }
@@ -225,7 +226,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
 
             @Override
             public List<String> getNonIndexableKeys(Context context) {
-                final ArrayList<String> result = new ArrayList<String>();
+                final List<String> result = super.getNonIndexableKeys(context);
                 if (!SHOW_MOBILE_CATEGORY || !hasReadyMobileRadio(context)) {
                     result.add("mobile");
                 }

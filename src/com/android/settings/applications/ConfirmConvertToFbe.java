@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -38,8 +38,9 @@ public class ConfirmConvertToFbe extends SettingsPreferenceFragment {
         final Button button = (Button) rootView.findViewById(R.id.button_confirm_convert_fbe);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_MASTER_CLEAR);
+                Intent intent = new Intent(Intent.ACTION_FACTORY_RESET);
                 intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+                intent.setPackage("android");
                 intent.putExtra(Intent.EXTRA_REASON, "convert_fbe");
                 getActivity().sendBroadcast(intent);
             }
@@ -49,7 +50,7 @@ public class ConfirmConvertToFbe extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CONVERT_FBE_CONFIRM;
     }
 }

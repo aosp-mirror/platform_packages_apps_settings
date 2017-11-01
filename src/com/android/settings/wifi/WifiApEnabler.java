@@ -25,10 +25,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
+import android.text.BidiFormatter;
 
 import com.android.settings.R;
 import com.android.settings.datausage.DataSaverBackend;
-import com.android.settingslib.TetherUtil;
 
 import java.util.ArrayList;
 
@@ -110,12 +110,13 @@ public class WifiApEnabler {
         }
     }
 
-    public void updateConfigSummary(WifiConfiguration wifiConfig) {
+    private void updateConfigSummary(WifiConfiguration wifiConfig) {
         String s = mContext.getString(
                 com.android.internal.R.string.wifi_tether_configure_ssid_default);
-        mSwitch.setSummary(String.format(
-                    mContext.getString(R.string.wifi_tether_enabled_subtext),
-                    (wifiConfig == null) ? s : wifiConfig.SSID));
+
+        mSwitch.setSummary(mContext.getString(R.string.wifi_tether_enabled_subtext,
+                BidiFormatter.getInstance().unicodeWrap(
+                        (wifiConfig == null) ? s : wifiConfig.SSID)));
     }
 
     private void updateTetherState(Object[] available, Object[] tethered, Object[] errored) {
@@ -140,6 +141,8 @@ public class WifiApEnabler {
             updateConfigSummary(wifiConfig);
         } else if (wifiErrored) {
             mSwitch.setSummary(R.string.wifi_error);
+        } else {
+            mSwitch.setSummary(R.string.wifi_hotspot_off_subtext);
         }
     }
 

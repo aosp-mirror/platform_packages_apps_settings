@@ -32,14 +32,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Confirm and execute a reset of the device's network settings to a clean "just out of the box"
@@ -98,7 +99,8 @@ public class ResetNetwork extends OptionsMenuFragment {
             SubscriptionInfo subscription = mSubscriptions.get(selectedIndex);
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
-        ((SettingsActivity) getActivity()).startPreferencePanel(ResetNetworkConfirm.class.getName(),
+        ((SettingsActivity) getActivity()).startPreferencePanel(
+                this, ResetNetworkConfirm.class.getName(),
                 args, R.string.reset_network_confirm_title, null, null, 0);
     }
 
@@ -207,7 +209,7 @@ public class ResetNetwork extends OptionsMenuFragment {
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.RESET_NETWORK;
     }
 }

@@ -24,16 +24,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.android.internal.logging.MetricsProto;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.ChooseLockSettingsHelper;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 /* Class to prompt for conversion of userdata to file based encryption
  */
-public class ConvertToFbe extends SettingsPreferenceFragment {
+public class ConvertToFbe extends InstrumentedFragment {
     static final String TAG = "ConvertToFBE";
     static final String CONVERT_FBE_EXTRA = "ConvertFBE";
     private static final int KEYGUARD_REQUEST = 55;
@@ -79,12 +78,12 @@ public class ConvertToFbe extends SettingsPreferenceFragment {
 
     private void convert() {
         SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(ConfirmConvertToFbe.class.getName(), null,
+        sa.startPreferencePanel(this, ConfirmConvertToFbe.class.getName(), null,
                                 R.string.convert_to_file_encryption, null, null, 0);
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.CONVERT_FBE;
     }
 }

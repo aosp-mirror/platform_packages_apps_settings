@@ -23,6 +23,9 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * Connects info of apps that draw overlay to the ApplicationsState. Wraps around the generic
  * AppStateAppOpsBridge class to tailor to the semantics of SYSTEM_ALERT_WINDOW. Also provides app
@@ -62,6 +65,13 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
     }
 
     public static class OverlayState extends AppStateAppOpsBridge.PermissionState {
+        public final boolean controlEnabled;
+
+        private static final List<String> DISABLE_PACKAGE_LIST = new ArrayList<>();
+
+        static {
+            DISABLE_PACKAGE_LIST.add("com.android.systemui");
+        }
 
         public OverlayState(PermissionState permissionState) {
             super(permissionState.packageName, permissionState.userHandle);
@@ -69,6 +79,7 @@ public class AppStateOverlayBridge extends AppStateAppOpsBridge {
             this.appOpMode = permissionState.appOpMode;
             this.permissionDeclared = permissionState.permissionDeclared;
             this.staticPermissionGranted = permissionState.staticPermissionGranted;
+            controlEnabled = !DISABLE_PACKAGE_LIST.contains(permissionState.packageName);
         }
     }
 

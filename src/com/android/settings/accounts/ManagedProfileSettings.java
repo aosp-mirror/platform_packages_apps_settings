@@ -28,9 +28,10 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
-import com.android.internal.logging.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -97,7 +98,8 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
                 }
             }
         }
-        return null;
+        // Return default managed profile for the current user.
+        return Utils.getManagedProfile(mUserManager);
     }
 
     private void loadDataAndPopulateUi() {
@@ -118,7 +120,7 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ACCOUNTS_WORK_PROFILE_SETTINGS;
     }
 

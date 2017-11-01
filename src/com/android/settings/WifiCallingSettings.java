@@ -39,8 +39,7 @@ import android.widget.TextView;
 
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
-import com.android.internal.logging.MetricsLogger;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
 import com.android.settings.widget.SwitchBar;
 
@@ -153,7 +152,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
-        mEmptyView.setText(R.string.wifi_calling_off_explanation);
+        String emptyViewText = activity.getString(R.string.wifi_calling_off_explanation)
+                + activity.getString(R.string.wifi_calling_off_explanation_2);
+        mEmptyView.setText(emptyViewText);
     }
 
     @Override
@@ -201,7 +202,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
     };
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.WIFI_CALLING;
     }
 
@@ -253,15 +254,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
 
         final Context context = getActivity();
 
-        if (ImsManager.isWfcEnabledByPlatform(context)) {
-            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
-
-            mSwitchBar.addOnSwitchChangeListener(this);
-
-            mValidListener = true;
-        }
-
         // NOTE: Buttons will be enabled/disabled in mPhoneStateListener
         boolean wfcEnabled = ImsManager.isWfcEnabledByUser(context)
                 && ImsManager.isNonTtyOrTtyOnVolteEnabled(context);
@@ -271,6 +263,15 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         mButtonWfcMode.setValue(Integer.toString(wfcMode));
         mButtonWfcRoamingMode.setValue(Integer.toString(wfcRoamingMode));
         updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
+
+        if (ImsManager.isWfcEnabledByPlatform(context)) {
+            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            tm.listen(mPhoneStateListener, PhoneStateListener.LISTEN_CALL_STATE);
+
+            mSwitchBar.addOnSwitchChangeListener(this);
+
+            mValidListener = true;
+        }
 
         context.registerReceiver(mIntentReceiver, mIntentFilter);
 
@@ -357,9 +358,9 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
         int wfcRoamingMode = ImsManager.getWfcMode(context, true);
         updateButtonWfcMode(context, wfcEnabled, wfcMode, wfcRoamingMode);
         if (wfcEnabled) {
-            MetricsLogger.action(getActivity(), getMetricsCategory(), wfcMode);
+            mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), wfcMode);
         } else {
-            MetricsLogger.action(getActivity(), getMetricsCategory(), -1);
+            mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), -1);
         }
     }
 
@@ -422,7 +423,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (buttonMode != currentWfcMode) {
                 ImsManager.setWfcMode(context, buttonMode, false);
                 mButtonWfcMode.setSummary(getWfcModeSummary(context, buttonMode));
-                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
+                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
             if (!mEditableWfcRoamingMode) {
                 int currentWfcRoamingMode = ImsManager.getWfcMode(context, true);
@@ -438,13 +439,13 @@ public class WifiCallingSettings extends SettingsPreferenceFragment
             if (buttonMode != currentMode) {
                 ImsManager.setWfcMode(context, buttonMode, true);
                 // mButtonWfcRoamingMode.setSummary is not needed; summary is just selected value.
-                MetricsLogger.action(getActivity(), getMetricsCategory(), buttonMode);
+                mMetricsFeatureProvider.action(getActivity(), getMetricsCategory(), buttonMode);
             }
         }
         return true;
     }
 
-    static int getWfcModeSummary(Context context, int wfcMode) {
+    public static int getWfcModeSummary(Context context, int wfcMode) {
         int resId = com.android.internal.R.string.wifi_calling_off_summary;
         if (ImsManager.isWfcEnabledByUser(context)) {
             switch (wfcMode) {

@@ -15,32 +15,11 @@
   ~ limitations under the License
   -->
 
-<RelativeLayout
+<com.android.settings.widget.RingProgressBar
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fingerprint_progress_bar"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_horizontal">
-
-    <ImageView
-        android:id="@+id/fingerprint_animator"
-        android:layout_width="@dimen/fingerprint_animation_size"
-        android:layout_height="@dimen/fingerprint_animation_size"
-        android:layout_centerInParent="true"
-        android:background="@drawable/fp_illustration_enrollment"
-        android:backgroundTint="@color/fingerprint_indicator_background_resting"
-        android:src="@drawable/enrollment_fingerprint_isolated_animation"/>
-
-    <ProgressBar
-        android:id="@+id/fingerprint_progress_bar"
-        android:layout_width="?attr/fingerprint_progress_bar_size"
-        android:layout_height="?attr/fingerprint_progress_bar_size"
-        android:layout_centerInParent="true"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:max="10000"
-        android:mirrorForRtl="false"
-        android:progress="0"
-        android:indeterminate="false"
-        android:progressDrawable="@drawable/fingerprint_progress_ring"
-        android:rotation="-90"/>
-
-</RelativeLayout>
+    android:background="@drawable/fp_illustration"
+    android:minHeight="@dimen/fingerprint_progress_bar_min_size"
+    android:progress="0" />

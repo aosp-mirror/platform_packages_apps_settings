@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 
 /**
  * Small helper class to manage text/icon around fingerprint authentication UI.
@@ -41,7 +42,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
 
     public FingerprintUiHelper(ImageView icon, TextView errorTextView, Callback callback,
             int userId) {
-        mFingerprintManager = icon.getContext().getSystemService(FingerprintManager.class);
+        mFingerprintManager = Utils.getFingerprintManagerOrNull(icon.getContext());
         mIcon = icon;
         mErrorTextView = errorTextView;
         mCallback = callback;

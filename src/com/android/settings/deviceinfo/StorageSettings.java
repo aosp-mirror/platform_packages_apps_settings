@@ -19,7 +19,6 @@ package com.android.settings.deviceinfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -44,22 +43,25 @@ import android.text.format.Formatter.BytesResult;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.deviceinfo.PrivateStorageInfo;
+import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -74,7 +76,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static final String TAG_DISK_INIT = "disk_init";
 
     static final int COLOR_PUBLIC = Color.parseColor("#ff9e9e9e");
-    static final int COLOR_WARNING = Color.parseColor("#fff4511e");
 
     static final int[] COLOR_PRIVATE = new int[] {
             Color.parseColor("#ff26a69a"),
@@ -92,8 +93,10 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private StorageSummaryPreference mInternalSummary;
     private static long sTotalInternalStorage;
 
+    private boolean mHasLaunchedPrivateVolumeSettings = false;
+
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO_STORAGE;
     }
 
@@ -109,7 +112,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         final Context context = getActivity();
 
         mStorageManager = context.getSystemService(StorageManager.class);
-        mStorageManager.registerListener(mStorageListener);
 
         if (sTotalInternalStorage <= 0) {
             sTotalInternalStorage = mStorageManager.getPrimaryStorageSize();
@@ -149,7 +151,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    private void refresh() {
+    private synchronized void refresh() {
         final Context context = getPrefContext();
 
         getPreferenceScreen().removeAll();
@@ -167,7 +169,8 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         for (VolumeInfo vol : volumes) {
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
-                final long volumeTotalBytes = getTotalSize(vol);
+                final long volumeTotalBytes = PrivateStorageInfo.getTotalSize(vol,
+                        sTotalInternalStorage);
                 final int color = COLOR_PRIVATE[privateCount++ % COLOR_PRIVATE.length];
                 mInternalCategory.addPreference(
                         new StorageVolumePreference(context, vol, color, volumeTotalBytes));
@@ -229,15 +232,17 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         if (mInternalCategory.getPreferenceCount() == 2
                 && mExternalCategory.getPreferenceCount() == 0) {
             // Only showing primary internal storage, so just shortcut
-            final Bundle args = new Bundle();
-            args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-            PrivateVolumeSettings.setVolumeSize(args, sTotalInternalStorage);
-            Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                    PrivateVolumeSettings.class.getName(), args, null, R.string.apps_storage, null,
-                    false);
-            intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
-            getActivity().startActivity(intent);
-            finish();
+            if (!mHasLaunchedPrivateVolumeSettings) {
+                mHasLaunchedPrivateVolumeSettings = true;
+                final Bundle args = new Bundle();
+                args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
+                Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
+                        StorageDashboardFragment.class.getName(), args, null,
+                        R.string.storage_settings, null, false, getMetricsCategory());
+                intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
+                getActivity().startActivity(intent);
+                finish();
+            }
         }
     }
 
@@ -276,9 +281,19 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             if (vol.getType() == VolumeInfo.TYPE_PRIVATE) {
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, vol.getId());
-                PrivateVolumeSettings.setVolumeSize(args, getTotalSize(vol));
-                startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
-                        -1, 0, args);
+
+                if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(vol.getId())) {
+                    startFragment(this, StorageDashboardFragment.class.getCanonicalName(),
+                            R.string.storage_settings, 0, args);
+                } else {
+                    // TODO: Go to the StorageDashboardFragment once it fully handles all of the
+                    //       SD card cases and other private internal storage cases.
+                    PrivateVolumeSettings.setVolumeSize(args, PrivateStorageInfo.getTotalSize(vol,
+                            sTotalInternalStorage));
+                    startFragment(this, PrivateVolumeSettings.class.getCanonicalName(),
+                            -1, 0, args);
+                }
+
                 return true;
 
             } else if (vol.getType() == VolumeInfo.TYPE_PUBLIC) {
@@ -383,7 +398,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    public static class VolumeUnmountedFragment extends DialogFragment {
+    public static class VolumeUnmountedFragment extends InstrumentedDialogFragment {
         public static void show(Fragment parent, String volumeId) {
             final Bundle args = new Bundle();
             args.putString(VolumeInfo.EXTRA_VOLUME_ID, volumeId);
@@ -392,6 +407,11 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
             dialog.setArguments(args);
             dialog.setTargetFragment(parent, 0);
             dialog.show(parent.getFragmentManager(), TAG_VOLUME_UNMOUNTED);
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_UNMOUNT;
         }
 
         @Override
@@ -448,7 +468,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     }
 
-    public static class DiskInitFragment extends DialogFragment {
+    public static class DiskInitFragment extends InstrumentedDialogFragment {
+        @Override
+        public int getMetricsCategory() {
+            return MetricsEvent.DIALOG_VOLUME_INIT;
+        }
+
         public static void show(Fragment parent, int resId, String diskId) {
             final Bundle args = new Bundle();
             args.putInt(Intent.EXTRA_TEXT, resId);
@@ -490,10 +515,13 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
         private final Context mContext;
         private final SummaryLoader mLoader;
+        private final StorageManagerVolumeProvider mStorageManagerVolumeProvider;
 
         private SummaryProvider(Context context, SummaryLoader loader) {
             mContext = context;
             mLoader = loader;
+            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
+            mStorageManagerVolumeProvider = new StorageManagerVolumeProvider(storageManager);
         }
 
         @Override
@@ -505,48 +533,16 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
         private void updateSummary() {
             // TODO: Register listener.
-            final StorageManager storageManager = mContext.getSystemService(StorageManager.class);
-            if (sTotalInternalStorage <= 0) {
-                sTotalInternalStorage = storageManager.getPrimaryStorageSize();
-            }
-            final List<VolumeInfo> volumes = storageManager.getVolumes();
-            long privateFreeBytes = 0;
-            long privateTotalBytes = 0;
-            for (VolumeInfo info : volumes) {
-                final File path = info.getPath();
-                if (info.getType() != VolumeInfo.TYPE_PRIVATE || path == null) {
-                    continue;
-                }
-                privateTotalBytes += getTotalSize(info);
-                privateFreeBytes += path.getFreeSpace();
-            }
-            long privateUsedBytes = privateTotalBytes - privateFreeBytes;
+            final NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+            final PrivateStorageInfo info = PrivateStorageInfo.getPrivateStorageInfo(
+                    mStorageManagerVolumeProvider);
+            double privateUsedBytes = info.totalBytes - info.freeBytes;
             mLoader.setSummary(this, mContext.getString(R.string.storage_summary,
-                    Formatter.formatFileSize(mContext, privateUsedBytes),
-                    Formatter.formatFileSize(mContext, privateTotalBytes)));
+                    percentageFormat.format(privateUsedBytes / info.totalBytes),
+                    Formatter.formatFileSize(mContext, info.freeBytes)));
         }
     }
 
-    private static long getTotalSize(VolumeInfo info) {
-        // Device could have more than one primary storage, which could be located in the
-        // internal flash (UUID_PRIVATE_INTERNAL) or in an external disk.
-        // If it's internal, try to get its total size from StorageManager first
-        // (sTotalInternalStorage), since that size is more precise because it accounts for
-        // the system partition.
-        if (info.getType() == VolumeInfo.TYPE_PRIVATE
-                && Objects.equals(info.getFsUuid(), StorageManager.UUID_PRIVATE_INTERNAL)
-                && sTotalInternalStorage > 0) {
-            return sTotalInternalStorage;
-        } else {
-            final File path = info.getPath();
-            if (path == null) {
-                // Should not happen, caller should have checked.
-                Log.e(TAG, "info's path is null on getTotalSize(): " + info);
-                return 0;
-            }
-            return path.getTotalSpace();
-        }
-    }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = new SummaryLoader.SummaryProviderFactory() {
@@ -557,77 +553,87 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
         }
     };
 
-    /**
-     * Enable indexing of searchable data
-     */
+    /** Enable indexing of searchable data */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-        new BaseSearchIndexProvider() {
-            @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableRaw> getRawDataToIndex(
+                        Context context, boolean enabled) {
+                    final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
 
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.storage_settings);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
+                    SearchIndexableRaw data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.storage_settings);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
 
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.internal_storage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.internal_storage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
 
-                data = new SearchIndexableRaw(context);
-                final StorageManager storage = context.getSystemService(StorageManager.class);
-                final List<VolumeInfo> vols = storage.getVolumes();
-                for (VolumeInfo vol : vols) {
-                    if (isInteresting(vol)) {
-                        data.title = storage.getBestVolumeDescription(vol);
-                        data.screenTitle = context.getString(R.string.storage_settings);
-                        result.add(data);
+                    data = new SearchIndexableRaw(context);
+                    final StorageManager storage = context.getSystemService(StorageManager.class);
+                    final List<VolumeInfo> vols = storage.getVolumes();
+                    for (VolumeInfo vol : vols) {
+                        if (isInteresting(vol)) {
+                            data.title = storage.getBestVolumeDescription(vol);
+                            data.screenTitle = context.getString(R.string.storage_settings);
+                            result.add(data);
+                        }
                     }
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_size);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_available);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_apps_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_dcim_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_music_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_downloads_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_media_cache_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.memory_media_misc_usage);
+                    data.screenTitle = context.getString(R.string.storage_settings);
+                    result.add(data);
+
+                    data = new SearchIndexableRaw(context);
+                    data.title = context.getString(R.string.storage_menu_free);
+                    data.screenTitle = context.getString(R.string.storage_menu_free);
+                    // We need to define all three in order for this to trigger properly.
+                    data.intentAction = StorageManager.ACTION_MANAGE_STORAGE;
+                    data.intentTargetPackage =
+                            context.getString(R.string.config_deletion_helper_package);
+                    data.intentTargetClass =
+                            context.getString(R.string.config_deletion_helper_class);
+                    result.add(data);
+
+                    return result;
                 }
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_size);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_available);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_apps_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_dcim_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_music_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_downloads_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_media_cache_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                data = new SearchIndexableRaw(context);
-                data.title = context.getString(R.string.memory_media_misc_usage);
-                data.screenTitle = context.getString(R.string.storage_settings);
-                result.add(data);
-
-                return result;
-            }
-        };
+            };
 }

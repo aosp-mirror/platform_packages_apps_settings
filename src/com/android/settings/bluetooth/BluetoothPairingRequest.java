@@ -16,110 +16,47 @@
 
 package com.android.settings.bluetooth;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.PowerManager;
-import android.text.TextUtils;
-
-import com.android.settings.R;
+import android.os.UserHandle;
 
 /**
  * BluetoothPairingRequest is a receiver for any Bluetooth pairing request. It
  * checks if the Bluetooth Settings is currently visible and brings up the PIN, the passkey or a
- * confirmation entry dialog. Otherwise it puts a Notification in the status bar, which can
- * be clicked to bring up the Pairing entry dialog.
+ * confirmation entry dialog. Otherwise it starts the BluetoothPairingService which
+ * starts a notification in the status bar that can be clicked to bring up the same dialog.
  */
 public final class BluetoothPairingRequest extends BroadcastReceiver {
 
-    private static final int NOTIFICATION_ID = android.R.drawable.stat_sys_data_bluetooth;
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String action = intent.getAction();
-        if (action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
-            // convert broadcast intent into activity intent (same action string)
-            BluetoothDevice device =
-                    intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
-                    BluetoothDevice.ERROR);
-            Intent pairingIntent = new Intent();
-            pairingIntent.setClass(context, BluetoothPairingDialog.class);
-            pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
-            pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
-            if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
-                    type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
-                    type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {
-                int pairingKey = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY,
-                        BluetoothDevice.ERROR);
-                pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_KEY, pairingKey);
-            }
-            pairingIntent.setAction(BluetoothDevice.ACTION_PAIRING_REQUEST);
-            pairingIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            PowerManager powerManager =
-                    (PowerManager)context.getSystemService(Context.POWER_SERVICE);
-            String deviceAddress = device != null ? device.getAddress() : null;
-            String deviceName = device != null ? device.getName() : null;
-            boolean shouldShowDialog= LocalBluetoothPreferences.shouldShowDialogInForeground(
-                        context, deviceAddress, deviceName);
-            if (powerManager.isInteractive() && shouldShowDialog) {
-                // Since the screen is on and the BT-related activity is in the foreground,
-                // just open the dialog
-                context.startActivity(pairingIntent);
-            } else {
-                // Put up a notification that leads to the dialog
-                Resources res = context.getResources();
-                Notification.Builder builder = new Notification.Builder(context)
-                        .setSmallIcon(android.R.drawable.stat_sys_data_bluetooth)
-                        .setTicker(res.getString(R.string.bluetooth_notif_ticker));
-
-                PendingIntent pending = PendingIntent.getActivity(context, 0,
-                        pairingIntent, PendingIntent.FLAG_ONE_SHOT);
-
-                String name = intent.getStringExtra(BluetoothDevice.EXTRA_NAME);
-                if (TextUtils.isEmpty(name)) {
-                    name = device != null ? device.getAliasName() :
-                            context.getString(android.R.string.unknownName);
-                }
-
-                builder.setContentTitle(res.getString(R.string.bluetooth_notif_title))
-                        .setContentText(res.getString(R.string.bluetooth_notif_message, name))
-                        .setContentIntent(pending)
-                        .setAutoCancel(true)
-                        .setDefaults(Notification.DEFAULT_SOUND)
-                        .setColor(context.getColor(
-                                com.android.internal.R.color.system_notification_accent_color));
-
-                NotificationManager manager = (NotificationManager)
-                        context.getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.notify(NOTIFICATION_ID, builder.getNotification());
-            }
-
-        } else if (action.equals(BluetoothDevice.ACTION_PAIRING_CANCEL)) {
-
-            // Remove the notification
-            NotificationManager manager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-            manager.cancel(NOTIFICATION_ID);
-
-        } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
-            int bondState = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE,
-                    BluetoothDevice.ERROR);
-            int oldState = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE,
-                    BluetoothDevice.ERROR);
-            if((oldState == BluetoothDevice.BOND_BONDING) &&
-                    (bondState == BluetoothDevice.BOND_NONE)) {
-                // Remove the notification
-                NotificationManager manager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.cancel(NOTIFICATION_ID);
-            }
-        }
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    String action = intent.getAction();
+    if (!action.equals(BluetoothDevice.ACTION_PAIRING_REQUEST)) {
+      return;
     }
+    // convert broadcast intent into activity intent (same action string)
+    Intent pairingIntent = BluetoothPairingService.getPairingDialogIntent(context, intent);
+
+    PowerManager powerManager =
+        (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+    BluetoothDevice device =
+        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+    String deviceAddress = device != null ? device.getAddress() : null;
+    String deviceName = device != null ? device.getName() : null;
+    boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
+        context, deviceAddress, deviceName);
+    if (powerManager.isInteractive() && shouldShowDialog) {
+      // Since the screen is on and the BT-related activity is in the foreground,
+      // just open the dialog
+      context.startActivityAsUser(pairingIntent, UserHandle.CURRENT);
+    } else {
+      // Put up a notification that leads to the dialog
+      intent.setClass(context, BluetoothPairingService.class);
+      context.startServiceAsUser(intent, UserHandle.CURRENT);
+    }
+  }
 }

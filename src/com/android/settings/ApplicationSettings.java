@@ -24,7 +24,7 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 
-import com.android.internal.logging.MetricsProto.MetricsEvent;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 public class ApplicationSettings extends SettingsPreferenceFragment {
 
@@ -44,7 +44,7 @@ public class ApplicationSettings extends SettingsPreferenceFragment {
     private ListPreference mInstallLocation;
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATION;
     }
 

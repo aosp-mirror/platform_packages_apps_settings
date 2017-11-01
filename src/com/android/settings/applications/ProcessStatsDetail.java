@@ -16,6 +16,7 @@
 
 package com.android.settings.applications;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningServiceInfo;
 import android.app.AlertDialog;
@@ -31,29 +32,34 @@ import android.content.pm.ServiceInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Process;
+import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.settings.AppHeader;
+
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.CancellablePreference;
 import com.android.settings.CancellablePreference.OnCancelListener;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.SummaryPreference;
 import com.android.settings.applications.ProcStatsEntry.Service;
+import com.android.settings.widget.EntityHeaderController;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+
+import static com.android.settings.widget.EntityHeaderController.ActionType;
 
 public class ProcessStatsDetail extends SettingsPreferenceFragment {
 
@@ -119,13 +125,25 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
             finish();
             return;
         }
-        AppHeader.createAppHeader(this,
-                mApp.mUiTargetApp != null ? mApp.mUiTargetApp.loadIcon(mPm) : new ColorDrawable(0),
-                mApp.mUiLabel, mApp.mPackage, mApp.mUiTargetApp.uid);
+        final Activity activity = getActivity();
+        final Preference pref = EntityHeaderController
+                .newInstance(activity, this, null /* appHeader */)
+                .setRecyclerView(getListView(), getLifecycle())
+                .setIcon(mApp.mUiTargetApp != null
+                        ? IconDrawableFactory.newInstance(activity).getBadgedIcon(mApp.mUiTargetApp)
+                        : new ColorDrawable(0))
+                .setLabel(mApp.mUiLabel)
+                .setPackageName(mApp.mPackage)
+                .setUid(mApp.mUiTargetApp != null
+                        ? mApp.mUiTargetApp.uid
+                        : UserHandle.USER_NULL)
+                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+                .done(activity, getPrefContext());
+        getPreferenceScreen().addPreference(pref);
     }
 
     @Override
-    protected int getMetricsCategory() {
+    public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_PROCESS_STATS_DETAIL;
     }
 

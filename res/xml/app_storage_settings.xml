@@ -15,7 +15,13 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/application_info_label">
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="header_view"
+        android:layout="@layout/app_action_buttons"
+        android:selectable="false" />
 
     <com.android.settings.applications.SpacePreference
         android:key="storage_space"
@@ -30,28 +36,18 @@
 
     <com.android.settings.applications.LayoutPreference
         android:key="change_storage_button"
+        android:selectable="false"
         android:layout="@layout/single_button_panel" />
 
     <PreferenceCategory
         android:key="storage_category"
-        android:layout="@layout/tall_preference_category"
-        android:title="@string/storage_label">
-
-        <Preference
-            android:key="total_size"
-            android:title="@string/total_size_label"
-            android:selectable="false"
-            android:layout="@layout/horizontal_preference" />
+        android:title="@string/app_info_storage_title"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false">
 
         <Preference
             android:key="app_size"
             android:title="@string/application_size_label"
-            android:selectable="false"
-            android:layout="@layout/horizontal_preference" />
-
-        <Preference
-            android:key="external_code_size"
-            android:title="@string/external_code_size_label"
             android:selectable="false"
             android:layout="@layout/horizontal_preference" />
 
@@ -62,36 +58,27 @@
             android:layout="@layout/horizontal_preference" />
 
         <Preference
-            android:key="external_data_size"
-            android:title="@string/external_data_size_label"
+            android:key="cache_size"
+            android:title="@string/cache_size_label"
             android:selectable="false"
             android:layout="@layout/horizontal_preference" />
 
-        <com.android.settings.applications.LayoutPreference
-            android:key="clear_data_button"
-            android:layout="@layout/single_button_panel" />
+        <Preference
+            android:key="total_size"
+            android:title="@string/total_size_label"
+            android:selectable="false"
+            android:layout="@layout/horizontal_preference" />
+
+        <com.android.settings.applications.SpacePreference
+            android:layout_height="8dp" />
+
     </PreferenceCategory>
-
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="8dp" />
-
-    <Preference
-        android:key="cache_size"
-        android:title="@string/cache_size_label"
-        android:selectable="false"
-        android:layout="@layout/horizontal_preference" />
-
-    <com.android.settings.applications.LayoutPreference
-        android:key="clear_cache_button"
-        android:selectable="false"
-        android:layout="@layout/single_button_panel" />
-
-    <com.android.settings.applications.SpacePreference
-        android:layout_height="8dp" />
 
     <PreferenceCategory
         android:key="uri_category"
-        android:layout="@layout/headerless_preference_category" >
+        android:layout="@layout/headerless_preference_category"
+        settings:allowDividerAbove="false"
+        settings:allowDividerBelow="false">
         <com.android.settings.applications.LayoutPreference
             android:key="clear_uri_button"
             android:layout="@layout/single_button_panel"

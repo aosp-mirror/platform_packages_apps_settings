@@ -17,56 +17,66 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.format.Formatter;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.android.settings.R;
+import com.android.settings.utils.FileSizeFormatter;
 
 public class StorageItemPreference extends Preference {
     public int userHandle;
 
-    private ProgressBar progressBar;
+    private static final int UNINITIALIZED = -1;
+
+    private ProgressBar mProgressBar;
     private static final int PROGRESS_MAX = 100;
-    private int progress = -1;
+    private int mProgressPercent = UNINITIALIZED;
 
     public StorageItemPreference(Context context) {
-        super(context);
+        this(context, null);
+    }
+
+    public StorageItemPreference(Context context, AttributeSet attrs) {
+        super(context, attrs);
         setLayoutResource(R.layout.storage_item);
+        setSummary(R.string.memory_calculating_size);
     }
 
     public void setStorageSize(long size, long total) {
-        setSummary(size == 0
-                ? String.valueOf(0)
-                : Formatter.formatFileSize(getContext(), size));
+        setSummary(
+                FileSizeFormatter.formatFileSize(
+                        getContext(),
+                        size,
+                        getGigabyteSuffix(getContext().getResources()),
+                        FileSizeFormatter.GIGABYTE_IN_BYTES));
         if (total == 0) {
-            progress = 0;
+            mProgressPercent = 0;
         } else {
-            progress = (int)(size * PROGRESS_MAX / total);
+            mProgressPercent = (int)(size * PROGRESS_MAX / total);
         }
         updateProgressBar();
     }
 
     protected void updateProgressBar() {
-        if (progressBar == null)
+        if (mProgressBar == null || mProgressPercent == UNINITIALIZED)
             return;
 
-        if (progress == -1) {
-            progressBar.setVisibility(View.GONE);
-            return;
-        }
-
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setMax(PROGRESS_MAX);
-        progressBar.setProgress(progress);
+        mProgressBar.setMax(PROGRESS_MAX);
+        mProgressBar.setProgress(mProgressPercent);
     }
 
     @Override
     public void onBindViewHolder(PreferenceViewHolder view) {
-        progressBar = (ProgressBar) view.findViewById(android.R.id.progress);
+        mProgressBar = (ProgressBar) view.findViewById(android.R.id.progress);
         updateProgressBar();
         super.onBindViewHolder(view);
+    }
+
+    private static int getGigabyteSuffix(Resources res) {
+        return res.getIdentifier("gigabyteShort", "string", "android");
     }
 }

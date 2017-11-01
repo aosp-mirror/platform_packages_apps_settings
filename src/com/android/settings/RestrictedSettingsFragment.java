@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import android.app.Activity;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,10 +26,10 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -46,7 +45,10 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  * If this settings screen should be pin protected whenever
  * {@link RestrictionsManager.hasRestrictionsProvider()} returns true, pass in
  * {@link RESTRICT_IF_OVERRIDABLE} to the constructor instead of a restrictions key.
+ *
+ * @deprecated Use {@link RestrictedDashboardFragment} instead
  */
+@Deprecated
 public abstract class RestrictedSettingsFragment extends SettingsPreferenceFragment {
 
     protected static final String RESTRICT_IF_OVERRIDABLE = "restrict_if_overridable";

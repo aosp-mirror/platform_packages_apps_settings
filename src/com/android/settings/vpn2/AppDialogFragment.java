@@ -18,7 +18,6 @@ package com.android.settings.vpn2;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,13 +30,15 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 /**
  * Fragment wrapper around an {@link AppDialog}.
  */
-public class AppDialogFragment extends DialogFragment implements AppDialog.Listener {
+public class AppDialogFragment extends InstrumentedDialogFragment implements AppDialog.Listener {
     private static final String TAG_APP_DIALOG = "vpnappdialog";
     private static final String TAG = "AppDialogFragment";
 
@@ -53,20 +54,30 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
     private final IConnectivityManager mService = IConnectivityManager.Stub.asInterface(
             ServiceManager.getService(Context.CONNECTIVITY_SERVICE));
 
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.DIALOG_VPN_APP_CONFIG;
+    }
+
     public interface Listener {
-        public void onForget();
-        public void onCancel();
+        void onForget();
+        void onCancel();
     }
 
     public static void show(Fragment parent, PackageInfo packageInfo, String label,
             boolean managing, boolean connected) {
+        if (!managing && !connected) {
+            // We can't display anything useful for this case.
+            return;
+        }
         show(parent, null, packageInfo, label, managing, connected);
     }
 
     public static void show(Fragment parent, Listener listener, PackageInfo packageInfo,
             String label, boolean managing, boolean connected) {
-        if (!parent.isAdded())
+        if (!parent.isAdded()) {
             return;
+        }
 
         Bundle args = new Bundle();
         args.putParcelable(ARG_PACKAGE, packageInfo);
@@ -93,7 +104,7 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
         final String label = args.getString(ARG_LABEL);
         boolean managing = args.getBoolean(ARG_MANAGING);
         boolean connected = args.getBoolean(ARG_CONNECTED);
-        mPackageInfo = (PackageInfo) args.getParcelable(ARG_PACKAGE);
+        mPackageInfo = args.getParcelable(ARG_PACKAGE);
 
         if (managing) {
             return new AppDialog(getActivity(), this, mPackageInfo, label);
@@ -151,7 +162,7 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
         }
         final int userId = getUserId();
         try {
-            if (mPackageInfo.packageName.equals(getConnectedPackage(mService, userId))) {
+            if (mPackageInfo.packageName.equals(VpnUtils.getConnectedPackage(mService, userId))) {
                 mService.setAlwaysOnVpnPackage(userId, null, /* lockdownEnabled */ false);
                 mService.prepareVpn(mPackageInfo.packageName, VpnConfig.LEGACY_VPN, userId);
             }
@@ -168,11 +179,5 @@ public class AppDialogFragment extends DialogFragment implements AppDialog.Liste
 
     private int getUserId() {
         return UserHandle.getUserId(mPackageInfo.applicationInfo.uid);
-    }
-
-    private static String getConnectedPackage(IConnectivityManager service, final int userId)
-            throws RemoteException {
-        final VpnConfig config = service.getVpnConfig(userId);
-        return config != null ? config.user : null;
     }
 }

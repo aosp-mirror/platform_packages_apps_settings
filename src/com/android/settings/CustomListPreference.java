@@ -18,7 +18,6 @@ package com.android.settings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -29,6 +28,9 @@ import android.os.Bundle;
 import android.support.v14.preference.ListPreferenceDialogFragment;
 import android.support.v7.preference.ListPreference;
 import android.util.AttributeSet;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class CustomListPreference extends ListPreference {
 
@@ -196,7 +198,7 @@ public class CustomListPreference extends ListPreference {
         }
     }
 
-    public static class ConfirmDialogFragment extends DialogFragment {
+    public static class ConfirmDialogFragment extends InstrumentedDialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
@@ -212,6 +214,11 @@ public class CustomListPreference extends ListPreference {
                     })
                     .setNegativeButton(android.R.string.cancel, null)
                     .create();
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_CUSTOM_LIST_CONFIRMATION;
         }
     }
 }

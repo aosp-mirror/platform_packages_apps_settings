@@ -320,41 +320,10 @@
     <!-- Wi-Fi settings. The signal strength a Wi-Fi network has. -->
     <string-array name="wifi_signal">
         <item>Poor</item>
+        <item>Poor</item>
         <item>Fair</item>
         <item>Good</item>
         <item>Excellent</item>
-    </string-array>
-
-    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. -->
-    <string-array name="wifi_sleep_policy_entries">
-        <!-- Always keep Wi-Fi on when screen turns off. -->
-        <item>Always</item>
-        <!-- Keep Wi-Fi on when screen turns off and plugged in.  When on battery, go to sleep when screen turns off. -->
-        <item>Only when plugged in</item>
-        <!-- Do not keep Wi-Fi on when screen turns off.  [CHAR LIMIT=40] -->
-        <item>Never</item>
-    </string-array>
-
-    <!-- Wi-Fi settings. Presented as a list dialog to the user to choose the Wi-Fi sleep policy. Used when
-         the device is Wi-Fi-only. [CHAR LIMIT=30] -->
-    <string-array name="wifi_sleep_policy_entries_wifi_only">
-        <!-- Always keep Wi-Fi on when screen turns off. -->
-        <item>Always</item>
-        <!-- Keep Wi-Fi on when screen turns off and plugged in.  When on battery, go to sleep when screen turns off. -->
-        <item>Only when plugged in</item>
-        <!-- Do not keep Wi-Fi on when screen turns off, for Wi-Fi-only devices, no other data connection -->
-        <item>Never</item>
-    </string-array>
-
-    <!-- Match with wifi_sleep_policy_entries and the values of the settings in Settings class. --> <skip />
-    <!-- Do not translate. -->
-    <string-array name="wifi_sleep_policy_values">
-        <!-- Do not translate. -->
-        <item>2</item>
-        <!-- Do not translate. -->
-        <item>1</item>
-        <!-- Do not translate. -->
-        <item>0</item>
     </string-array>
 
     <!-- Data Usage settings. Range of data usage. -->
@@ -385,6 +354,21 @@
         <item>None</item>
         <item>MSCHAPV2</item>
         <item>GTC</item>
+    </string-array>
+
+    <!-- Type of EAP method when EAP SIM, AKA, AKA' are supported -->
+    <string-array name="wifi_peap_phase2_entries_with_sim_auth">
+        <item>None</item>
+        <!-- Do not translate. -->
+        <item>MSCHAPV2</item>
+        <!-- Do not translate. -->
+        <item>GTC</item>
+        <!-- Do not translate. -->
+        <item>SIM</item>
+        <!-- Do not translate. -->
+        <item>AKA</item>
+        <!-- Do not translate. -->
+        <item>AKA\'</item>
     </string-array>
 
     <!-- Phase 2 options for rest of EAP methods -->
@@ -617,6 +601,7 @@
         <item>turn on screen</item>
         <item>get accounts</item>
         <item>run in background</item>
+        <item>accessibility volume</item>
     </string-array>
 
     <!-- User display names for app ops codes -->
@@ -685,6 +670,7 @@
         <item>Turn on screen</item>
         <item>Get accounts</item>
         <item>Run in background</item>
+        <item>Accessibility volume</item>
     </string-array>
 
     <!-- Titles for the list of long press timeout options. -->
@@ -699,7 +685,7 @@
 
     <!-- Values for the list of long press timeout options. -->
     <string-array name="long_press_timeout_selector_values" translatable="false">
-        <item>500</item>
+        <item>400</item>
         <item>1000</item>
         <item>1500</item>
     </string-array>
@@ -967,13 +953,6 @@
         <item>\?</item>
     </string-array>
 
-    <array name="ram_colors">
-        <item>@color/memory_normal</item>
-        <item>@color/memory_moderate</item>
-        <item>@color/memory_low</item>
-        <item>@color/memory_critical</item>
-    </array>
-
     <!-- Display color space adjustment modes for accessibility -->
     <string-array name="daltonizer_type_entries" translatable="false">
         <item>@string/daltonizer_mode_deuteranomaly</item>
@@ -1043,6 +1022,20 @@
         <item>30</item>
         <item>60</item>
         <item>90</item>
+    </string-array>
+
+    <string-array name="when_to_start_screensaver_entries" translatable="false">
+        <item>@string/screensaver_settings_summary_sleep</item>
+        <item>@string/screensaver_settings_summary_dock</item>
+        <item>@string/screensaver_settings_summary_either_long</item>
+        <item>@string/screensaver_settings_summary_never</item>
+    </string-array>
+
+    <string-array name="when_to_start_screensaver_values" translatable="false">
+        <item>while_charging_only</item>
+        <item>while_docked_only</item>
+        <item>either_charging_or_docked</item>
+        <item>never</item>
     </string-array>
 
 </resources>

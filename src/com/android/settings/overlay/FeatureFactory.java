@@ -21,6 +21,18 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.bluetooth.BluetoothFeatureProvider;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.dashboard.DashboardFeatureProvider;
+import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
+import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
+import com.android.settings.gestures.AssistGestureFeatureProvider;
+import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.users.UserFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own
@@ -32,7 +44,7 @@ public abstract class FeatureFactory {
     private static final String LOG_TAG = "FeatureFactory";
     private static final boolean DEBUG = false;
 
-    private static FeatureFactory sFactory;
+    protected static FeatureFactory sFactory;
 
     /**
      * Returns a factory for creating feature controllers. Creates the factory if it does not
@@ -59,7 +71,34 @@ public abstract class FeatureFactory {
         return sFactory;
     }
 
+    public abstract AssistGestureFeatureProvider getAssistGestureFeatureProvider();
+
+    public abstract SuggestionFeatureProvider getSuggestionFeatureProvider(Context context);
+
     public abstract SupportFeatureProvider getSupportFeatureProvider(Context context);
+
+    public abstract MetricsFeatureProvider getMetricsFeatureProvider();
+
+    public abstract PowerUsageFeatureProvider getPowerUsageFeatureProvider(Context context);
+
+    public abstract DashboardFeatureProvider getDashboardFeatureProvider(Context context);
+
+    public abstract ApplicationFeatureProvider getApplicationFeatureProvider(Context context);
+
+    public abstract LocaleFeatureProvider getLocaleFeatureProvider();
+
+    public abstract EnterprisePrivacyFeatureProvider getEnterprisePrivacyFeatureProvider(
+            Context context);
+
+    public abstract SearchFeatureProvider getSearchFeatureProvider();
+
+    public abstract SurveyFeatureProvider getSurveyFeatureProvider(Context context);
+
+    public abstract SecurityFeatureProvider getSecurityFeatureProvider();
+
+    public abstract UserFeatureProvider getUserFeatureProvider(Context context);
+
+    public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
