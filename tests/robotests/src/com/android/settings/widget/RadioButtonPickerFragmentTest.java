@@ -114,6 +114,11 @@ public class RadioButtonPickerFragmentTest {
         }
 
         @Override
+        protected int getPreferenceScreenResId() {
+            return 0;
+        }
+
+        @Override
         protected List<DefaultAppInfo> getCandidates() {
             return new ArrayList<>();
         }

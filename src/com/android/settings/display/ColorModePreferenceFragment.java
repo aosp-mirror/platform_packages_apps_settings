@@ -45,6 +45,11 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.color_mode_settings;
+    }
+
+    @Override
     protected List<? extends CandidateInfo> getCandidates() {
         Context c = getContext();
         return Arrays.asList(
