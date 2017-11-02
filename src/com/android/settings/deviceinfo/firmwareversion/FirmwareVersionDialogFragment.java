@@ -23,6 +23,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -31,6 +32,8 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 public class FirmwareVersionDialogFragment extends InstrumentedDialogFragment {
 
     private static final String TAG = "firmwareVersionDialog";
+
+    private View mRootView;
 
     public static void show(Fragment host) {
         final FragmentManager manager = host.getChildFragmentManager();
@@ -51,9 +54,29 @@ public class FirmwareVersionDialogFragment extends InstrumentedDialogFragment {
                 .setTitle(R.string.firmware_title)
                 .setPositiveButton(android.R.string.ok, null /* listener */);
 
-        final View view = LayoutInflater.from(getActivity()).inflate(
+        mRootView = LayoutInflater.from(getActivity()).inflate(
                 R.layout.dialog_firmware_version, null /* parent */);
 
-        return builder.setView(view).create();
+        initializeControllers();
+
+        return builder.setView(mRootView).create();
+    }
+
+    public void setText(int viewId, CharSequence text) {
+        final TextView view = mRootView.findViewById(viewId);
+        if (view != null) {
+            view.setText(text);
+        }
+    }
+
+    public void registerClickListener(int viewId, View.OnClickListener listener) {
+        final View view = mRootView.findViewById(viewId);
+        if (view != null) {
+            view.setOnClickListener(listener);
+        }
+    }
+
+    private void initializeControllers() {
+        new FirmwareVersionDialogController(this).initialize();
     }
 }
