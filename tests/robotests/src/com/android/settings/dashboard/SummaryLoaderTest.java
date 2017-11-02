@@ -16,6 +16,10 @@
 
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +27,7 @@ import android.content.Intent;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
@@ -34,12 +39,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -65,14 +64,14 @@ public class SummaryLoaderTest {
         mCallbackInvoked = false;
 
         final Activity activity = Robolectric.buildActivity(Activity.class).get();
-        final List<DashboardCategory> categories = new ArrayList<>();
-        mSummaryLoader = new SummaryLoader(activity, categories);
-        mSummaryLoader.setSummaryConsumer(new SummaryLoader.SummaryConsumer() {
-            @Override
-            public void notifySummaryChanged(Tile tile) {
-                mCallbackInvoked = true;
-            }
-        });
+
+        mSummaryLoader = new SummaryLoader(activity, CategoryKey.CATEGORY_HOMEPAGE);
+        mSummaryLoader.setSummaryConsumer(tile -> mCallbackInvoked = true);
+    }
+
+    @Test
+    public void newInstance_shouldNotLoadCategory() {
+        verifyZeroInteractions(mFeatureFactory.dashboardFeatureProvider);
     }
 
     @Test
