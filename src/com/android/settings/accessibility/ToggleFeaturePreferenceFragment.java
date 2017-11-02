@@ -28,8 +28,7 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 
-public abstract class ToggleFeaturePreferenceFragment
-        extends SettingsPreferenceFragment {
+public abstract class ToggleFeaturePreferenceFragment extends SettingsPreferenceFragment {
 
     protected SwitchBar mSwitchBar;
     protected ToggleSwitch mToggleSwitch;
@@ -43,9 +42,7 @@ public abstract class ToggleFeaturePreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int resId = getPreferenceScreenResId();
-        if (usePreferenceScreenTitle() && resId > 0) {
-            addPreferencesFromResource(resId);
-        } else {
+        if (!usePreferenceScreenTitle() || resId <= 0) {
             PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                     getActivity());
             setPreferenceScreen(preferenceScreen);
