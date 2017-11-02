@@ -18,7 +18,7 @@ import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 import android.util.AttributeSet;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.settings.R;
 
 import java.text.DateFormat;
@@ -27,15 +27,15 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class NightDisplayPreference extends SwitchPreference
-        implements NightDisplayController.Callback {
+        implements ColorDisplayController.Callback {
 
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
     private DateFormat mTimeFormatter;
 
     public NightDisplayPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        mController = new NightDisplayController(context);
+        mController = new ColorDisplayController(context);
         mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
         mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
@@ -78,12 +78,12 @@ public class NightDisplayPreference extends SwitchPreference
         final String autoModeSummary;
         switch (autoMode) {
             default:
-            case NightDisplayController.AUTO_MODE_DISABLED:
+            case ColorDisplayController.AUTO_MODE_DISABLED:
                 autoModeSummary = context.getString(isActivated
                         ? R.string.night_display_summary_on_auto_mode_never
                         : R.string.night_display_summary_off_auto_mode_never);
                 break;
-            case NightDisplayController.AUTO_MODE_CUSTOM:
+            case ColorDisplayController.AUTO_MODE_CUSTOM:
                 if (isActivated) {
                     autoModeSummary = context.getString(
                             R.string.night_display_summary_on_auto_mode_custom,
@@ -94,7 +94,7 @@ public class NightDisplayPreference extends SwitchPreference
                             getFormattedTimeString(mController.getCustomStartTime()));
                 }
                 break;
-            case NightDisplayController.AUTO_MODE_TWILIGHT:
+            case ColorDisplayController.AUTO_MODE_TWILIGHT:
                 autoModeSummary = context.getString(isActivated
                         ? R.string.night_display_summary_on_auto_mode_twilight
                         : R.string.night_display_summary_off_auto_mode_twilight);

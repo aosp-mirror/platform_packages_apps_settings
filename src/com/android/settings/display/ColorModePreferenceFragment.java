@@ -17,7 +17,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.R;
@@ -36,12 +36,12 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     @VisibleForTesting
     static final String KEY_COLOR_MODE_SATURATED = "color_mode_saturated";
 
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mController = new NightDisplayController(context);
+        mController = new ColorDisplayController(context);
     }
 
     @Override
@@ -64,10 +64,10 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
 
     @Override
     protected String getDefaultKey() {
-        if (mController.getColorMode() == NightDisplayController.COLOR_MODE_SATURATED) {
+        if (mController.getColorMode() == ColorDisplayController.COLOR_MODE_SATURATED) {
             return KEY_COLOR_MODE_SATURATED;
         }
-        if (mController.getColorMode() == NightDisplayController.COLOR_MODE_BOOSTED) {
+        if (mController.getColorMode() == ColorDisplayController.COLOR_MODE_BOOSTED) {
             return KEY_COLOR_MODE_BOOSTED;
         }
         return KEY_COLOR_MODE_NATURAL;
@@ -77,13 +77,13 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     protected boolean setDefaultKey(String key) {
         switch (key) {
             case KEY_COLOR_MODE_NATURAL:
-                mController.setColorMode(NightDisplayController.COLOR_MODE_NATURAL);
+                mController.setColorMode(ColorDisplayController.COLOR_MODE_NATURAL);
                 break;
             case KEY_COLOR_MODE_BOOSTED:
-                mController.setColorMode(NightDisplayController.COLOR_MODE_BOOSTED);
+                mController.setColorMode(ColorDisplayController.COLOR_MODE_BOOSTED);
                 break;
             case KEY_COLOR_MODE_SATURATED:
-                mController.setColorMode(NightDisplayController.COLOR_MODE_SATURATED);
+                mController.setColorMode(ColorDisplayController.COLOR_MODE_SATURATED);
                 break;
         }
         return true;

@@ -19,7 +19,7 @@ package com.android.internal.app;
  * Fake controller to make robolectric test compile. Should be removed when Robolectric supports
  * API 25.
  */
-public class NightDisplayController {
+public class ColorDisplayController {
 
     public static final int AUTO_MODE_DISABLED = 0;
     public static final int AUTO_MODE_CUSTOM = 1;
