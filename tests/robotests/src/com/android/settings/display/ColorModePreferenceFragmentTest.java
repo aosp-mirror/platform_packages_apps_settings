@@ -16,11 +16,18 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import android.os.Bundle;
 
 import com.android.internal.app.NightDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
@@ -111,20 +118,31 @@ public class ColorModePreferenceFragmentTest {
     @Test
     public void setKey_natural() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
-        Mockito.verify(mController).setColorMode(NightDisplayController.COLOR_MODE_NATURAL);
+        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_NATURAL);
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_boosted() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
-        Mockito.verify(mController).setColorMode(NightDisplayController.COLOR_MODE_BOOSTED);
+        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_BOOSTED);
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_saturated() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
-        Mockito.verify(mController).setColorMode(NightDisplayController.COLOR_MODE_SATURATED);
+        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_SATURATED);
     }
+
+    @Test
+    public void onCreatePreferences_useNewTitle_shouldAddColorModePreferences() {
+        doNothing().when(mFragment).addPreferencesFromResource(anyInt());
+        doNothing().when(mFragment).updateCandidates();
+
+        mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
+
+        verify(mFragment).addPreferencesFromResource(R.xml.color_mode_settings);
+    }
+
 }
