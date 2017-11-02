@@ -30,12 +30,12 @@ import com.android.settings.applications.defaultapps.DefaultPaymentSettingsPrefe
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkBrowserPreferenceController;
-import com.android.settings.widget.WorkOnlyCategoryPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultWorkPhonePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -75,7 +75,7 @@ public class DefaultAppSettings extends DashboardFragment {
         workControllers.add(new DefaultWorkPhonePreferenceController(context));
         workControllers.add(new DefaultWorkBrowserPreferenceController(context));
         controllers.addAll(workControllers);
-        controllers.add(new WorkOnlyCategoryPreferenceController(
+        controllers.add(new PreferenceCategoryController(
                 context, KEY_DEFAULT_WORK_CATEGORY, workControllers));
         controllers.add(new DefaultAssistPreferenceController(context, KEY_ASSIST_VOICE_INPUT,
                 false /* showSetting */));
