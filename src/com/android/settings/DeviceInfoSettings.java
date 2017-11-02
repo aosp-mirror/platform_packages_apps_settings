@@ -32,6 +32,8 @@ import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.imei.ImeiInfoDualSimPreferenceController;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
@@ -120,7 +122,6 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
         if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
             // Device name
 
             // Phone number
@@ -129,7 +130,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             controllers.add(new DeviceModelPreferenceController(context, fragment));
 
-            // IMEI
+            controllers.add(new ImeiInfoPreferenceControllerV2(context, fragment));
+
+            controllers.add(new ImeiInfoDualSimPreferenceController(context, fragment));
 
             // Android version
 

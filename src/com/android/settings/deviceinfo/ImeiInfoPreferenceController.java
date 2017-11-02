@@ -19,8 +19,13 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
+/**
+ * deprecated in favour of {@link ImeiInfoPreferenceControllerV2}
+ */
+@Deprecated
 public class ImeiInfoPreferenceController extends AbstractSimStatusImeiInfoPreferenceController
         implements PreferenceControllerMixin {
 
