@@ -18,26 +18,23 @@ package com.android.settings.location;
 
 import android.content.Context;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Global;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * A page that configures the background scanning settings for Wi-Fi and Bluetooth.
  */
-public class ScanningSettings extends SettingsPreferenceFragment implements Indexable {
-    private static final String KEY_WIFI_SCAN_ALWAYS_AVAILABLE = "wifi_always_scanning";
-    private static final String KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE = "bluetooth_always_scanning";
+public class ScanningSettings extends DashboardFragment {
+    private static final String TAG = "ScanningSettings";
 
     @Override
     public int getMetricsCategory() {
@@ -45,48 +42,25 @@ public class ScanningSettings extends SettingsPreferenceFragment implements Inde
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        createPreferenceHierarchy();
-    }
-
-    private PreferenceScreen createPreferenceHierarchy() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
-        addPreferencesFromResource(R.xml.location_scanning);
-        root = getPreferenceScreen();
-        initPreferences();
-        return root;
-    }
-
-    private void initPreferences() {
-        final SwitchPreference wifiScanAlwaysAvailable =
-                (SwitchPreference) findPreference(KEY_WIFI_SCAN_ALWAYS_AVAILABLE);
-        wifiScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
-                Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1);
-        final SwitchPreference bleScanAlwaysAvailable =
-                (SwitchPreference) findPreference(KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE);
-        bleScanAlwaysAvailable.setChecked(Global.getInt(getContentResolver(),
-                Global.BLE_SCAN_ALWAYS_AVAILABLE, 0) == 1);
+    protected int getPreferenceScreenResId() {
+        return R.xml.location_scanning;
     }
 
     @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        String key = preference.getKey();
-        if (KEY_WIFI_SCAN_ALWAYS_AVAILABLE.equals(key)) {
-            Global.putInt(getContentResolver(),
-                    Global.WIFI_SCAN_ALWAYS_AVAILABLE,
-                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
-        } else if (KEY_BLUETOOTH_SCAN_ALWAYS_AVAILABLE.equals(key)) {
-            Global.putInt(getContentResolver(),
-                    Global.BLE_SCAN_ALWAYS_AVAILABLE,
-                    ((SwitchPreference) preference).isChecked() ? 1 : 0);
-        } else {
-            return super.onPreferenceTreeClick(preference);
-        }
-        return true;
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new WifiScanningPreferenceController(context));
+        controllers.add(new BluetoothScanningPreferenceController(context));
+        return controllers;
     }
 
     /**
@@ -100,6 +74,12 @@ public class ScanningSettings extends SettingsPreferenceFragment implements Inde
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.location_scanning;
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 }
