@@ -83,6 +83,9 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     }
 
     @Override
+    protected abstract int getPreferenceScreenResId();
+
+    @Override
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
         onRadioButtonConfirmed(selectedKey);
