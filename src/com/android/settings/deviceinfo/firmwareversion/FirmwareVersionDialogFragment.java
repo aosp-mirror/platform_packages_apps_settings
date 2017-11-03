@@ -87,5 +87,6 @@ public class FirmwareVersionDialogFragment extends InstrumentedDialogFragment {
         new FirmwareVersionDialogController(this).initialize();
         new SecurityPatchLevelDialogController(this).initialize();
         new BasebandVersionDialogController(this).initialize();
+        new KernelVersionDialogController(this).initialize();
     }
 }
