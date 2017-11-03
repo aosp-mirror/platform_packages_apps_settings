@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -35,6 +35,8 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
+import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -56,11 +58,10 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowLockPatternUtils.class}
-)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+        shadows = {
+                ShadowLockPatternUtils.class
+        })
 public class SecuritySettingsTest {
 
 
@@ -104,7 +105,7 @@ public class SecuritySettingsTest {
     public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoFingerprint() {
         final FingerprintManager fpm = mock(FingerprintManager.class);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-            .thenReturn(false);
+                .thenReturn(false);
 
         mSummaryProvider.setListening(true);
 
@@ -115,7 +116,7 @@ public class SecuritySettingsTest {
     public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoFingerprint() {
         final FingerprintManager fpm = mock(FingerprintManager.class);
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-            .thenReturn(true);
+                .thenReturn(true);
 
         // Cast to Object to workaround a robolectric casting bug
         when((Object) mContext.getSystemService(FingerprintManager.class)).thenReturn(fpm);
@@ -147,7 +148,7 @@ public class SecuritySettingsTest {
 
         securitySettings.initTrustAgentPreference(screen, 2);
         verify(preference).setSummary(context.getResources().getQuantityString(
-            R.plurals.manage_trust_agents_summary_on, 2, 2));
+                R.plurals.manage_trust_agents_summary_on, 2, 2));
     }
 
     @Test
@@ -155,13 +156,13 @@ public class SecuritySettingsTest {
         final Preference preference = mock(Preference.class);
         final PreferenceGroup group = mock(PreferenceGroup.class);
         when(group.findPreference(SecuritySettings.KEY_LOCKSCREEN_PREFERENCES))
-            .thenReturn(preference);
+                .thenReturn(preference);
         final LockScreenNotificationPreferenceController controller =
-            mock(LockScreenNotificationPreferenceController.class);
+                mock(LockScreenNotificationPreferenceController.class);
 
         final SecuritySettings securitySettings = new SecuritySettings();
         ReflectionHelpers.setField(securitySettings,
-            "mLockScreenNotificationPreferenceController", controller);
+                "mLockScreenNotificationPreferenceController", controller);
 
         when(controller.getSummaryResource()).thenReturn(1234);
         securitySettings.setLockscreenPreferencesSummary(group);

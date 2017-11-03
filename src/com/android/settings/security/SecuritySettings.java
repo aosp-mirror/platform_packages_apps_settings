@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
-import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
@@ -51,10 +50,12 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
@@ -70,8 +71,6 @@ import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.security.OwnerInfoPreferenceController;
-import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComponentInfo;
 import com.android.settings.widget.GearPreference;
@@ -220,9 +219,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 = new LockScreenNotificationPreferenceController(activity);
     }
 
-    private static int getResIdForLockUnlockScreen(Context context,
-            LockPatternUtils lockPatternUtils, ManagedLockPasswordProvider managedPasswordProvider,
-            int userId) {
+    private static int getResIdForLockUnlockScreen(LockPatternUtils lockPatternUtils,
+            ManagedLockPasswordProvider managedPasswordProvider, int userId) {
         final boolean isMyUser = userId == MY_USER_ID;
         int resid = 0;
         if (!lockPatternUtils.isSecure(userId)) {
@@ -276,7 +274,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         addPreferencesFromResource(R.xml.security_settings_status);
 
         // Add options for lock/unlock screen
-        final int resid = getResIdForLockUnlockScreen(getActivity(), mLockPatternUtils,
+        final int resid = getResIdForLockUnlockScreen(mLockPatternUtils,
                 mManagedPasswordProvider, MY_USER_ID);
         addPreferencesFromResource(resid);
 
@@ -288,9 +286,8 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 && mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
             addPreferencesFromResource(R.xml.security_settings_profile);
             addPreferencesFromResource(R.xml.security_settings_unification);
-            final int profileResid = getResIdForLockUnlockScreen(
-                    getActivity(), mLockPatternUtils, mManagedPasswordProvider,
-                    mProfileChallengeUserId);
+            final int profileResid = getResIdForLockUnlockScreen(mLockPatternUtils,
+                    mManagedPasswordProvider, mProfileChallengeUserId);
             addPreferencesFromResource(profileResid);
             maybeAddFingerprintPreference(root, mProfileChallengeUserId);
             if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
@@ -532,7 +529,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return false;
     }
 
-    private static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
+    static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
         TrustAgentManager trustAgentManager, LockPatternUtils utils,
         DevicePolicyManager dpm) {
         PackageManager pm = context.getPackageManager();
@@ -568,13 +565,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         return result;
     }
 
-    private static CharSequence getActiveTrustAgentLabel(Context context,
-            TrustAgentManager trustAgentManager, LockPatternUtils utils,
-            DevicePolicyManager dpm) {
-        ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(context,
-                trustAgentManager, utils, dpm);
-        return agents.isEmpty() ? null : agents.get(0).title;
-    }
+
 
     @Override
     public void onGearClick(GearPreference p) {
@@ -837,7 +828,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                             || lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)
                             || !isPasswordManaged(profileUserId, context, dpm))) {
                 // Add options for lock/unlock screen
-                final int resId = getResIdForLockUnlockScreen(context, lockPatternUtils,
+                final int resId = getResIdForLockUnlockScreen(lockPatternUtils,
                         managedPasswordProvider, MY_USER_ID);
                 index.add(getSearchResource(context, resId));
             }
@@ -845,12 +836,12 @@ public class SecuritySettings extends SettingsPreferenceFragment
             if (profileUserId != UserHandle.USER_NULL
                     && lockPatternUtils.isSeparateProfileChallengeAllowed(profileUserId)
                     && !isPasswordManaged(profileUserId, context, dpm)) {
-                index.add(getSearchResource(context, getResIdForLockUnlockScreen(context,
+                index.add(getSearchResource(context, getResIdForLockUnlockScreen(
                         lockPatternUtils, managedPasswordProvider, profileUserId)));
             }
 
             final SearchIndexableResource sir = getSearchResource(context,
-                    SecuritySubSettings.getResIdForLockUnlockSubScreen(context, lockPatternUtils,
+                    SecuritySubSettings.getResIdForLockUnlockSubScreen(lockPatternUtils,
                             managedPasswordProvider));
             sir.className = SecuritySubSettings.class.getName();
             index.add(sir);
@@ -970,216 +961,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
             keys.add(KEY_LOCATION_SCANNING);
 
             return keys;
-        }
-    }
-
-    public static class SecuritySubSettings extends SettingsPreferenceFragment
-            implements OnPreferenceChangeListener, OwnerInfoPreferenceController.OwnerInfoCallback {
-
-        private static final String KEY_VISIBLE_PATTERN = "visiblepattern";
-        private static final String KEY_LOCK_AFTER_TIMEOUT = "lock_after_timeout";
-        private static final String KEY_POWER_INSTANTLY_LOCKS = "power_button_instantly_locks";
-
-        // These switch preferences need special handling since they're not all stored in Settings.
-        private static final String SWITCH_PREFERENCE_KEYS[] = { KEY_LOCK_AFTER_TIMEOUT,
-                KEY_VISIBLE_PATTERN, KEY_POWER_INSTANTLY_LOCKS };
-
-        private TimeoutListPreference mLockAfter;
-        private SwitchPreference mVisiblePattern;
-        private SwitchPreference mPowerButtonInstantlyLocks;
-
-        private TrustAgentManager mTrustAgentManager;
-        private LockPatternUtils mLockPatternUtils;
-        private DevicePolicyManager mDPM;
-        private OwnerInfoPreferenceController mOwnerInfoPreferenceController;
-
-        @Override
-        public int getMetricsCategory() {
-            return MetricsEvent.SECURITY;
-        }
-
-        @Override
-        public void onCreate(Bundle icicle) {
-            super.onCreate(icicle);
-            SecurityFeatureProvider securityFeatureProvider =
-                    FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider();
-            mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
-            mLockPatternUtils = new LockPatternUtils(getContext());
-            mDPM = getContext().getSystemService(DevicePolicyManager.class);
-            mOwnerInfoPreferenceController =
-                new OwnerInfoPreferenceController(getContext(), this, null /* lifecycle */);
-            createPreferenceHierarchy();
-        }
-
-        @Override
-        public void onResume() {
-            super.onResume();
-
-            createPreferenceHierarchy();
-
-            if (mVisiblePattern != null) {
-                mVisiblePattern.setChecked(mLockPatternUtils.isVisiblePatternEnabled(
-                        MY_USER_ID));
-            }
-            if (mPowerButtonInstantlyLocks != null) {
-                mPowerButtonInstantlyLocks.setChecked(
-                        mLockPatternUtils.getPowerButtonInstantlyLocks(MY_USER_ID));
-            }
-
-            mOwnerInfoPreferenceController.updateSummary();
-        }
-
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-
-            createPreferenceHierarchy();
-        }
-
-        private void createPreferenceHierarchy() {
-            PreferenceScreen root = getPreferenceScreen();
-            if (root != null) {
-                root.removeAll();
-            }
-
-            final int resid = getResIdForLockUnlockSubScreen(getActivity(),
-                    new LockPatternUtils(getContext()),
-                    ManagedLockPasswordProvider.get(getContext(), MY_USER_ID));
-            addPreferencesFromResource(resid);
-
-            // lock after preference
-            mLockAfter = (TimeoutListPreference) findPreference(KEY_LOCK_AFTER_TIMEOUT);
-            if (mLockAfter != null) {
-                setupLockAfterPreference();
-                updateLockAfterPreferenceSummary();
-            }
-
-            // visible pattern
-            mVisiblePattern = (SwitchPreference) findPreference(KEY_VISIBLE_PATTERN);
-
-            // lock instantly on power key press
-            mPowerButtonInstantlyLocks = (SwitchPreference) findPreference(
-                    KEY_POWER_INSTANTLY_LOCKS);
-            CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
-                    mTrustAgentManager, mLockPatternUtils, mDPM);
-            if (mPowerButtonInstantlyLocks != null && !TextUtils.isEmpty(trustAgentLabel)) {
-                mPowerButtonInstantlyLocks.setSummary(getString(
-                        R.string.lockpattern_settings_power_button_instantly_locks_summary,
-                        trustAgentLabel));
-            }
-
-            mOwnerInfoPreferenceController.displayPreference(getPreferenceScreen());
-            mOwnerInfoPreferenceController.updateEnableState();
-
-            for (int i = 0; i < SWITCH_PREFERENCE_KEYS.length; i++) {
-                final Preference pref = findPreference(SWITCH_PREFERENCE_KEYS[i]);
-                if (pref != null) pref.setOnPreferenceChangeListener(this);
-            }
-        }
-
-        private void setupLockAfterPreference() {
-            // Compatible with pre-Froyo
-            long currentTimeout = Settings.Secure.getLong(getContentResolver(),
-                    Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
-            mLockAfter.setValue(String.valueOf(currentTimeout));
-            mLockAfter.setOnPreferenceChangeListener(this);
-            if (mDPM != null) {
-                final EnforcedAdmin admin = RestrictedLockUtils.checkIfMaximumTimeToLockIsSet(
-                        getActivity());
-                final long adminTimeout = mDPM
-                        .getMaximumTimeToLockForUserAndProfiles(UserHandle.myUserId());
-                final long displayTimeout = Math.max(0,
-                        Settings.System.getInt(getContentResolver(), SCREEN_OFF_TIMEOUT, 0));
-                // This setting is a slave to display timeout when a device policy is enforced.
-                // As such, maxLockTimeout = adminTimeout - displayTimeout.
-                // If there isn't enough time, shows "immediately" setting.
-                final long maxTimeout = Math.max(0, adminTimeout - displayTimeout);
-                mLockAfter.removeUnusableTimeouts(maxTimeout, admin);
-            }
-        }
-
-        private void updateLockAfterPreferenceSummary() {
-            final String summary;
-            if (mLockAfter.isDisabledByAdmin()) {
-                summary = getString(R.string.disabled_by_policy_title);
-            } else {
-                // Update summary message with current value
-                long currentTimeout = Settings.Secure.getLong(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, 5000);
-                final CharSequence[] entries = mLockAfter.getEntries();
-                final CharSequence[] values = mLockAfter.getEntryValues();
-                int best = 0;
-                for (int i = 0; i < values.length; i++) {
-                    long timeout = Long.valueOf(values[i].toString());
-                    if (currentTimeout >= timeout) {
-                        best = i;
-                    }
-                }
-
-                CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
-                        mTrustAgentManager, mLockPatternUtils, mDPM);
-                if (!TextUtils.isEmpty(trustAgentLabel)) {
-                    if (Long.valueOf(values[best].toString()) == 0) {
-                        summary = getString(R.string.lock_immediately_summary_with_exception,
-                                trustAgentLabel);
-                    } else {
-                        summary = getString(R.string.lock_after_timeout_summary_with_exception,
-                                entries[best], trustAgentLabel);
-                    }
-                } else {
-                    summary = getString(R.string.lock_after_timeout_summary, entries[best]);
-                }
-            }
-            mLockAfter.setSummary(summary);
-        }
-
-        @Override
-        public void onOwnerInfoUpdated() {
-            mOwnerInfoPreferenceController.updateSummary();
-        }
-
-        private static int getResIdForLockUnlockSubScreen(Context context,
-                LockPatternUtils lockPatternUtils,
-                ManagedLockPasswordProvider managedPasswordProvider) {
-            if (lockPatternUtils.isSecure(MY_USER_ID)) {
-                switch (lockPatternUtils.getKeyguardStoredPasswordQuality(MY_USER_ID)) {
-                    case DevicePolicyManager.PASSWORD_QUALITY_SOMETHING:
-                        return R.xml.security_settings_pattern_sub;
-                    case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC:
-                    case DevicePolicyManager.PASSWORD_QUALITY_NUMERIC_COMPLEX:
-                        return R.xml.security_settings_pin_sub;
-                    case DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC:
-                    case DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC:
-                    case DevicePolicyManager.PASSWORD_QUALITY_COMPLEX:
-                        return R.xml.security_settings_password_sub;
-                    case DevicePolicyManager.PASSWORD_QUALITY_MANAGED:
-                        return managedPasswordProvider.getResIdForLockUnlockSubScreen();
-                }
-            } else if (!lockPatternUtils.isLockScreenDisabled(MY_USER_ID)) {
-                return R.xml.security_settings_slide_sub;
-            }
-            return 0;
-        }
-
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object value) {
-            String key = preference.getKey();
-            if (KEY_POWER_INSTANTLY_LOCKS.equals(key)) {
-                mLockPatternUtils.setPowerButtonInstantlyLocks((Boolean) value, MY_USER_ID);
-            } else if (KEY_LOCK_AFTER_TIMEOUT.equals(key)) {
-                int timeout = Integer.parseInt((String) value);
-                try {
-                    Settings.Secure.putInt(getContentResolver(),
-                            Settings.Secure.LOCK_SCREEN_LOCK_AFTER_TIMEOUT, timeout);
-                } catch (NumberFormatException e) {
-                    Log.e("SecuritySettings", "could not persist lockAfter timeout setting", e);
-                }
-                setupLockAfterPreference();
-                updateLockAfterPreferenceSummary();
-            } else if (KEY_VISIBLE_PATTERN.equals(key)) {
-                mLockPatternUtils.setVisiblePatternEnabled((Boolean) value, MY_USER_ID);
-            }
-            return true;
         }
     }
 
