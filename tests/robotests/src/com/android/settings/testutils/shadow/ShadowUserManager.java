@@ -19,28 +19,34 @@ package com.android.settings.testutils.shadow;
 import android.annotation.UserIdInt;
 import android.content.Context;
 import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.SparseArray;
 
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.shadow.api.Shadow;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * This class provides the API 24 implementation of UserManager.get(Context).
- */
 @Implements(UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
     private boolean mAdminUser;
+    private List<String> mRestrictions = new ArrayList<>();
 
     public void setIsAdminUser(boolean isAdminUser) {
         mAdminUser = isAdminUser;
+    }
+
+    @Resetter
+    public void reset() {
+        mRestrictions.clear();
     }
 
     @Implementation
@@ -70,6 +76,15 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     public static UserManager get(Context context) {
         return (UserManager) context.getSystemService(Context.USER_SERVICE);
+    }
+
+    @Implementation
+    public boolean hasBaseUserRestriction(String restrictionKey, UserHandle userHandle) {
+        return mRestrictions.contains(restrictionKey);
+    }
+
+    public void addBaseUserRestriction(String restriction) {
+        mRestrictions.add(restriction);
     }
 
     public static ShadowUserManager getShadow() {

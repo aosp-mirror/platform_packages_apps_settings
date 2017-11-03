@@ -24,8 +24,7 @@ import android.support.v7.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.shadow.ShadowKeyStore;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,55 +35,38 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {
-                ShadowUserManager.class,
-                ShadowLockPatternUtils.class
+                ShadowKeyStore.class
         })
-public class EncryptionStatusPreferenceControllerTest {
+public class CredentialStoragePreferenceControllerTest {
 
     private Context mContext;
-    private EncryptionStatusPreferenceController mController;
+    private CredentialStoragePreferenceController mController;
     private Preference mPreference;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new EncryptionStatusPreferenceController(mContext);
+        mController = new CredentialStoragePreferenceController(mContext);
         mPreference = new Preference(mContext);
     }
 
     @Test
-    public void isAvailable_admin_true() {
-        ShadowUserManager.getShadow().setIsAdminUser(true);
-
-        assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void isAvailable_notAdmin_false() {
-        ShadowUserManager.getShadow().setIsAdminUser(false);
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void updateSummary_encrypted_shouldSayEncrypted() {
-        ShadowLockPatternUtils.setDeviceEncryptionEnabled(true);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getFragment()).isNull();
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.crypt_keeper_encrypted_summary));
-    }
-
-    @Test
-    public void updateSummary_unencrypted_shouldHasEncryptionFragment() {
-        ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
+    public void updateState_hardwareBacked_showHardwareSummary() {
+        ShadowKeyStore.setHardwareBacked(true);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.summary_placeholder));
-        assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
+                .isEqualTo(mContext.getText(R.string.credential_storage_type_hardware));
+    }
+
+    @Test
+    public void updateState_hardwareBacked_showSoftwareSummary() {
+        ShadowKeyStore.setHardwareBacked(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.credential_storage_type_software));
     }
 }
