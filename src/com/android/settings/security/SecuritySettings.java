@@ -23,12 +23,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
@@ -38,7 +35,6 @@ import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.service.trust.TrustAgentService;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -91,8 +87,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String TAG = "SecuritySettings";
 
     private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
-    private static final Intent TRUST_AGENT_INTENT =
-            new Intent(TrustAgentService.SERVICE_INTERFACE);
 
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
@@ -134,9 +128,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private static final String SWITCH_PREFERENCE_KEYS[] = {
             KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
     };
-
-    // Only allow one trust agent on the platform.
-    private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
@@ -466,11 +457,10 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Return the number of trust agents being added
     private int addTrustAgentSettings(PreferenceGroup securityCategory) {
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
-        ArrayList<TrustAgentComponentInfo> agents = getActiveTrustAgents(
-            getActivity(), mTrustAgentManager, mLockPatternUtils, mDPM);
-        for (int i = 0; i < agents.size(); i++) {
-            final TrustAgentComponentInfo agent = agents.get(i);
-            RestrictedPreference trustAgentPreference =
+        final List<TrustAgentComponentInfo> agents = mTrustAgentManager.getActiveTrustAgents(
+                getActivity(), mLockPatternUtils);
+        for (TrustAgentComponentInfo agent : agents) {
+            final RestrictedPreference trustAgentPreference =
                     new RestrictedPreference(securityCategory.getContext());
             trustAgentPreference.setKey(KEY_TRUST_AGENT);
             trustAgentPreference.setTitle(agent.title);
@@ -528,44 +518,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
         }
         return false;
     }
-
-    static ArrayList<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
-        TrustAgentManager trustAgentManager, LockPatternUtils utils,
-        DevicePolicyManager dpm) {
-        PackageManager pm = context.getPackageManager();
-        ArrayList<TrustAgentComponentInfo> result = new ArrayList<>();
-        List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
-                PackageManager.GET_META_DATA);
-        List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(MY_USER_ID);
-
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(context,
-                DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, UserHandle.myUserId());
-
-        if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
-            for (int i = 0; i < resolveInfos.size(); i++) {
-                ResolveInfo resolveInfo = resolveInfos.get(i);
-                if (resolveInfo.serviceInfo == null) continue;
-                if (!trustAgentManager.shouldProvideTrust(resolveInfo, pm)) {
-                    continue;
-                }
-                TrustAgentComponentInfo trustAgentComponentInfo =
-                        trustAgentManager.getSettingsComponent(pm, resolveInfo);
-                if (trustAgentComponentInfo.componentName == null ||
-                        !enabledTrustAgents.contains(
-                                trustAgentManager.getComponentName(resolveInfo)) ||
-                        TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
-                if (admin != null && dpm.getTrustAgentConfiguration(
-                        null, trustAgentManager.getComponentName(resolveInfo)) == null) {
-                    trustAgentComponentInfo.admin = admin;
-                }
-                result.add(trustAgentComponentInfo);
-                if (ONLY_ONE_TRUST_AGENT) break;
-            }
-        }
-        return result;
-    }
-
-
 
     @Override
     public void onGearClick(GearPreference p) {
@@ -915,8 +867,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     FeatureFactory.getFactory(context).getSecurityFeatureProvider()
                         .getTrustAgentManager();
                 final List<TrustAgentComponentInfo> agents =
-                        getActiveTrustAgents(context, trustAgentManager, lockPatternUtils,
-                                context.getSystemService(DevicePolicyManager.class));
+                        trustAgentManager.getActiveTrustAgents(context, lockPatternUtils);
                 for (int i = 0; i < agents.size(); i++) {
                     final TrustAgentComponentInfo agent = agents.get(i);
                     data = new SearchIndexableRaw(context);
