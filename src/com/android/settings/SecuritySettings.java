@@ -55,7 +55,6 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TrustAgentUtils.TrustAgentComponentInfo;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
@@ -73,7 +72,8 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.trustagent.TrustAgentManager;
+import com.android.settings.security.trustagent.TrustAgentManager;
+import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComponentInfo;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -126,11 +126,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     // Security status
     private static final String KEY_SECURITY_STATUS = "security_status";
     private static final String SECURITY_STATUS_KEY_PREFIX = "security_status_";
-
-    // Package verifier Settings
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    static final String KEY_PACKAGE_VERIFIER_STATUS = "security_status_package_verifier";
-    private static final int PACKAGE_VERIFIER_STATE_ENABLED = 1;
 
     // Device management settings
     private static final String KEY_ENTERPRISE_PRIVACY = "enterprise_privacy";
@@ -541,7 +536,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         TrustAgentManager trustAgentManager, LockPatternUtils utils,
         DevicePolicyManager dpm) {
         PackageManager pm = context.getPackageManager();
-        ArrayList<TrustAgentComponentInfo> result = new ArrayList<TrustAgentComponentInfo>();
+        ArrayList<TrustAgentComponentInfo> result = new ArrayList<>();
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
                 PackageManager.GET_META_DATA);
         List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(MY_USER_ID);
@@ -557,13 +552,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     continue;
                 }
                 TrustAgentComponentInfo trustAgentComponentInfo =
-                        TrustAgentUtils.getSettingsComponent(pm, resolveInfo);
+                        trustAgentManager.getSettingsComponent(pm, resolveInfo);
                 if (trustAgentComponentInfo.componentName == null ||
                         !enabledTrustAgents.contains(
-                                TrustAgentUtils.getComponentName(resolveInfo)) ||
+                                trustAgentManager.getComponentName(resolveInfo)) ||
                         TextUtils.isEmpty(trustAgentComponentInfo.title)) continue;
                 if (admin != null && dpm.getTrustAgentConfiguration(
-                        null, TrustAgentUtils.getComponentName(resolveInfo)) == null) {
+                        null, trustAgentManager.getComponentName(resolveInfo)) == null) {
                     trustAgentComponentInfo.admin = admin;
                 }
                 result.add(trustAgentComponentInfo);
