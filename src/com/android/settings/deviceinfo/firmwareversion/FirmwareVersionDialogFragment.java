@@ -69,6 +69,13 @@ public class FirmwareVersionDialogFragment extends InstrumentedDialogFragment {
         }
     }
 
+    public void removeSettingFromScreen(int viewId) {
+        final View view = mRootView.findViewById(viewId);
+        if (view != null) {
+            view.setVisibility(View.GONE);
+        }
+    }
+
     public void registerClickListener(int viewId, View.OnClickListener listener) {
         final View view = mRootView.findViewById(viewId);
         if (view != null) {
@@ -78,5 +85,6 @@ public class FirmwareVersionDialogFragment extends InstrumentedDialogFragment {
 
     private void initializeControllers() {
         new FirmwareVersionDialogController(this).initialize();
+        new SecurityPatchLevelDialogController(this).initialize();
     }
 }

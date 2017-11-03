@@ -23,9 +23,14 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+/**
+ * deprecated in favor of {@link SecurityPatchLevelDialogController}
+ */
+@Deprecated
 public class SecurityPatchPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
 
