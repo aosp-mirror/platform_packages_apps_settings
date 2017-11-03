@@ -16,7 +16,6 @@
 
 package com.android.settings.security;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
@@ -27,15 +26,16 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,12 +55,8 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 
-    private UserManager mUm;
-
     private KeyStore mKeyStore;
     private RestrictedPreference mResetCredentials;
-
-    private boolean mIsAdmin;
 
     @Override
     public int getMetricsCategory() {
@@ -74,13 +70,23 @@ public class EncryptionAndCredential extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        return null;
+        return buildPreferenceControllers(context);
     }
 
     @Override
     protected int getPreferenceScreenResId() {
-        return 0;
+        return R.xml.encryption_and_credential;
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final EncryptionStatusPreferenceController encryptStatusController =
+                new EncryptionStatusPreferenceController(context);
+        controllers.add(encryptStatusController);
+        controllers.add(new PreferenceCategoryController(context,
+                "encryption_and_credentials_status_category",
+                Arrays.asList(encryptStatusController)));
+        return controllers;
     }
 
     /**
@@ -90,26 +96,7 @@ public class EncryptionAndCredential extends DashboardFragment {
      * logic or adding/removing preferences here.
      */
     private PreferenceScreen createPreferenceHierarchy() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
-        addPreferencesFromResource(R.xml.encryption_and_credential);
-        root = getPreferenceScreen();
-
-        // Add options for device encryption
-        mIsAdmin = mUm.isAdminUser();
-
-        if (mIsAdmin) {
-            if (LockPatternUtils.isDeviceEncryptionEnabled()) {
-                // The device is currently encrypted.
-                addPreferencesFromResource(R.xml.security_settings_encrypted);
-            } else {
-                // This device supports encryption but isn't encrypted.
-                addPreferencesFromResource(R.xml.security_settings_unencrypted);
-            }
-        }
-
+        final PreferenceScreen root = getPreferenceScreen();
         // Credential storage
         mKeyStore = KeyStore.getInstance(); // needs to be initialized for onResume()
 
@@ -185,26 +172,20 @@ public class EncryptionAndCredential extends DashboardFragment {
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
-            final List<SearchIndexableResource> index = new ArrayList<>();
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.encryption_and_credential;
+            return Arrays.asList(sir);
+        }
 
-            // Add everything. We will suppress some of them in getNonIndexableKeys()
-            index.add(getSearchResource(context, R.xml.encryption_and_credential));
-            index.add(getSearchResource(context, R.xml.security_settings_encrypted));
-            index.add(getSearchResource(context, R.xml.security_settings_unencrypted));
-
-            return index;
+        @Override
+        public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+            return buildPreferenceControllers(context);
         }
 
         @Override
         protected boolean isPageSearchEnabled(Context context) {
             final UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
             return um.isAdminUser();
-        }
-
-        private SearchIndexableResource getSearchResource(Context context, int xmlResId) {
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = xmlResId;
-            return sir;
         }
 
         @Override
@@ -221,21 +202,6 @@ public class EncryptionAndCredential extends DashboardFragment {
                 keys.add(KEY_CREDENTIALS_INSTALL);
                 keys.add(KEY_CREDENTIAL_STORAGE_TYPE);
                 keys.add(KEY_USER_CREDENTIALS);
-            }
-
-            final DevicePolicyManager dpm = (DevicePolicyManager)
-                    context.getSystemService(Context.DEVICE_POLICY_SERVICE);
-            switch (dpm.getStorageEncryptionStatus()) {
-                case DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE:
-                    // The device is currently encrypted. Disable security_settings_unencrypted
-                    keys.addAll(getNonIndexableKeysFromXml(
-                            context, R.xml.security_settings_unencrypted));
-                    break;
-                default:
-                    // This device supports encryption but isn't encrypted.
-                    keys.addAll(getNonIndexableKeysFromXml(
-                            context, R.xml.security_settings_encrypted));
-                    break;
             }
 
             return keys;

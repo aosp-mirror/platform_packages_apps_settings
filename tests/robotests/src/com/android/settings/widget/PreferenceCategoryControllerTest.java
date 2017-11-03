@@ -37,17 +37,17 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class WorkOnlyCategoryPreferenceControllerTest {
+public class PreferenceCategoryControllerTest {
 
     private Context mContext;
-    private WorkOnlyCategoryPreferenceController mController;
+    private PreferenceCategoryController mController;
     private List<AbstractPreferenceController> mChildren;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mChildren = new ArrayList<>();
-        mController = new WorkOnlyCategoryPreferenceController(mContext, "pref_key", mChildren);
+        mController = new PreferenceCategoryController(mContext, "pref_key", mChildren);
     }
 
     @Test
