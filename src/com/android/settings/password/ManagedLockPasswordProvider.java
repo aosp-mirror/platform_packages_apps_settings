@@ -66,15 +66,6 @@ public class ManagedLockPasswordProvider {
     }
 
     /**
-     * Gets resource id of the subscreen that should be shown after clicking gear icon for lock
-     * screen preference in security settings if the current password quality is set to
-     * {@link android.app.admin.DevicePolicyManager#PASSWORD_QUALITY_MANAGED}.
-     */
-    public int getResIdForLockUnlockSubScreen() {
-        return R.xml.security_settings_password_sub;
-    }
-
-    /**
      * Creates intent that should be launched when user chooses managed password in the lock
      * settings picker.
      * @param requirePasswordToDecrypt Whether a password is needed to decrypt the user.
