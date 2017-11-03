@@ -73,7 +73,9 @@ import java.util.List;
  * # Operator info (area update info cell broadcast)
  * # Signal Strength
  *
+ * deprecated in favor of {@link com.android.settings.deviceinfo.simstatus.SimStatusDialogFragment}
  */
+@Deprecated
 public class SimStatus extends SettingsPreferenceFragment {
     private static final String TAG = "SimStatus";
 
