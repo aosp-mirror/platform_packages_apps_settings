@@ -21,9 +21,14 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+/**
+ * deprecated in favor of {@link BasebandVersionDialogController}
+ */
+@Deprecated
 public class BasebandVersionPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
 
