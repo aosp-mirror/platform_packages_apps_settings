@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,10 +11,12 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License
+ * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security.trustagent;
+
+import static android.service.trust.TrustAgentService.TRUST_AGENT_META_DATA;
 
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
@@ -22,40 +24,67 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.service.trust.TrustAgentService;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
+
+import com.android.settingslib.RestrictedLockUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-// TODO(b/34461256): Refactor TrustAgentUtils into TrustAgentManager.
-public class TrustAgentUtils {
-    static final String TAG = "TrustAgentUtils";
-
-    private static final String TRUST_AGENT_META_DATA = TrustAgentService.TRUST_AGENT_META_DATA;
+/** A manager for trust agent state. */
+public class TrustAgentManager {
 
     public static class TrustAgentComponentInfo {
-        ComponentName componentName;
-        String title;
-        String summary;
-        EnforcedAdmin admin = null;
+        public ComponentName componentName;
+        public String title;
+        public String summary;
+        public RestrictedLockUtils.EnforcedAdmin admin = null;
     }
 
-    public static ComponentName getComponentName(ResolveInfo resolveInfo) {
+    private static final String TAG = "TrustAgentManager";
+
+    @VisibleForTesting
+    static final String PERMISSION_PROVIDE_AGENT =
+            android.Manifest.permission.PROVIDE_TRUST_AGENT;
+
+    /**
+     * Determines if the service associated with a resolved trust agent intent is allowed to provide
+     * trust on this device.
+     *
+     * @param resolveInfo The entry corresponding to the matched trust agent intent.
+     * @param pm          The package manager to be used to check for permissions.
+     * @return {@code true} if the associated service is allowed to provide a trust agent, and
+     * {@code false} if otherwise.
+     */
+    public boolean shouldProvideTrust(ResolveInfo resolveInfo, PackageManager pm) {
+        final String packageName = resolveInfo.serviceInfo.packageName;
+        if (pm.checkPermission(PERMISSION_PROVIDE_AGENT, packageName)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.w(TAG, "Skipping agent because package " + packageName
+                    + " does not have permission " + PERMISSION_PROVIDE_AGENT + ".");
+            return false;
+        }
+        return true;
+    }
+
+    public ComponentName getComponentName(ResolveInfo resolveInfo) {
         if (resolveInfo == null || resolveInfo.serviceInfo == null) return null;
         return new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
     }
 
-    public static TrustAgentComponentInfo getSettingsComponent(
+    public TrustAgentComponentInfo getSettingsComponent(
             PackageManager pm, ResolveInfo resolveInfo) {
         if (resolveInfo == null || resolveInfo.serviceInfo == null
-                || resolveInfo.serviceInfo.metaData == null) return null;
+                || resolveInfo.serviceInfo.metaData == null) {
+            return null;
+        }
         String cn = null;
         TrustAgentComponentInfo trustAgentComponentInfo = new TrustAgentComponentInfo();
         XmlResourceParser parser = null;
@@ -101,7 +130,8 @@ public class TrustAgentUtils {
         if (cn != null && cn.indexOf('/') < 0) {
             cn = resolveInfo.serviceInfo.packageName + "/" + cn;
         }
-        trustAgentComponentInfo.componentName = (cn == null) ? null : ComponentName.unflattenFromString(cn);
+        trustAgentComponentInfo.componentName =
+                (cn == null) ? null : ComponentName.unflattenFromString(cn);
         return trustAgentComponentInfo;
     }
 }
