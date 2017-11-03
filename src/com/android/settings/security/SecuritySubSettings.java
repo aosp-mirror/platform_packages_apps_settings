@@ -19,7 +19,6 @@ package com.android.settings.security;
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import android.app.admin.DevicePolicyManager;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -39,8 +38,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
-
-import java.util.ArrayList;
 
 public class SecuritySubSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener,
@@ -74,9 +71,9 @@ public class SecuritySubSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        SecurityFeatureProvider securityFeatureProvider =
-                FeatureFactory.getFactory(getActivity()).getSecurityFeatureProvider();
-        mTrustAgentManager = securityFeatureProvider.getTrustAgentManager();
+        mTrustAgentManager =
+                FeatureFactory.getFactory(
+                        getActivity()).getSecurityFeatureProvider().getTrustAgentManager();
         mLockPatternUtils = new LockPatternUtils(getContext());
         mDPM = getContext().getSystemService(DevicePolicyManager.class);
         mOwnerInfoPreferenceController =
@@ -131,8 +128,8 @@ public class SecuritySubSettings extends SettingsPreferenceFragment
         // lock instantly on power key press
         mPowerButtonInstantlyLocks = (SwitchPreference) findPreference(
                 KEY_POWER_INSTANTLY_LOCKS);
-        CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
-                mTrustAgentManager, mLockPatternUtils, mDPM);
+        final CharSequence trustAgentLabel = mTrustAgentManager.getActiveTrustAgentLabel(
+                getContext(), mLockPatternUtils);
         if (mPowerButtonInstantlyLocks != null && !TextUtils.isEmpty(trustAgentLabel)) {
             mPowerButtonInstantlyLocks.setSummary(getString(
                     R.string.lockpattern_settings_power_button_instantly_locks_summary,
@@ -188,8 +185,8 @@ public class SecuritySubSettings extends SettingsPreferenceFragment
                 }
             }
 
-            CharSequence trustAgentLabel = getActiveTrustAgentLabel(getContext(),
-                    mTrustAgentManager, mLockPatternUtils, mDPM);
+            final CharSequence trustAgentLabel = mTrustAgentManager
+                    .getActiveTrustAgentLabel(getContext(), mLockPatternUtils);
             if (!TextUtils.isEmpty(trustAgentLabel)) {
                 if (Long.valueOf(values[best].toString()) == 0) {
                     summary = getString(R.string.lock_immediately_summary_with_exception,
@@ -251,13 +248,5 @@ public class SecuritySubSettings extends SettingsPreferenceFragment
             mLockPatternUtils.setVisiblePatternEnabled((Boolean) value, MY_USER_ID);
         }
         return true;
-    }
-
-    private static CharSequence getActiveTrustAgentLabel(Context context,
-            TrustAgentManager trustAgentManager, LockPatternUtils utils,
-            DevicePolicyManager dpm) {
-        ArrayList<TrustAgentManager.TrustAgentComponentInfo> agents =
-                SecuritySettings.getActiveTrustAgents(context, trustAgentManager, utils, dpm);
-        return agents.isEmpty() ? null : agents.get(0).title;
     }
 }

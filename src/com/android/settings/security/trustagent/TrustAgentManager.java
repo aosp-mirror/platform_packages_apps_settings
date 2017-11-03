@@ -18,28 +18,40 @@ package com.android.settings.security.trustagent;
 
 import static android.service.trust.TrustAgentService.TRUST_AGENT_META_DATA;
 
+import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
+import android.os.UserHandle;
+import android.service.trust.TrustAgentService;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.Xml;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.RestrictedLockUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /** A manager for trust agent state. */
 public class TrustAgentManager {
+
+    // Only allow one trust agent on the platform.
+    private static final boolean ONLY_ONE_TRUST_AGENT = true;
 
     public static class TrustAgentComponentInfo {
         public ComponentName componentName;
@@ -49,6 +61,8 @@ public class TrustAgentManager {
     }
 
     private static final String TAG = "TrustAgentManager";
+    private static final Intent TRUST_AGENT_INTENT =
+            new Intent(TrustAgentService.SERVICE_INTERFACE);
 
     @VisibleForTesting
     static final String PERMISSION_PROVIDE_AGENT =
@@ -74,13 +88,66 @@ public class TrustAgentManager {
         return true;
     }
 
+    /**
+     * Return the display label for active trust agent.
+     */
+    public CharSequence getActiveTrustAgentLabel(Context context, LockPatternUtils utils) {
+        final List<TrustAgentComponentInfo> agents = getActiveTrustAgents(context, utils);
+        return agents.isEmpty() ? null : agents.get(0).title;
+    }
+
+    /**
+     * Returns a list of trust agents.
+     *
+     * If {@link #ONLY_ONE_TRUST_AGENT} is set, the list will contain up to 1 agent instead of all
+     * available agents on device.
+     */
+    public List<TrustAgentComponentInfo> getActiveTrustAgents(Context context,
+            LockPatternUtils utils) {
+        final int myUserId = UserHandle.myUserId();
+        final DevicePolicyManager dpm = context.getSystemService(DevicePolicyManager.class);
+        final PackageManager pm = context.getPackageManager();
+        final List<TrustAgentComponentInfo> result = new ArrayList<>();
+
+        final List<ResolveInfo> resolveInfos = pm.queryIntentServices(TRUST_AGENT_INTENT,
+                PackageManager.GET_META_DATA);
+        final List<ComponentName> enabledTrustAgents = utils.getEnabledTrustAgents(myUserId);
+        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils
+                .checkIfKeyguardFeaturesDisabled(
+                        context, DevicePolicyManager.KEYGUARD_DISABLE_TRUST_AGENTS, myUserId);
+
+        if (enabledTrustAgents != null && !enabledTrustAgents.isEmpty()) {
+            for (ResolveInfo resolveInfo : resolveInfos) {
+                if (resolveInfo.serviceInfo == null || !shouldProvideTrust(resolveInfo, pm)) {
+                    continue;
+                }
+                final TrustAgentComponentInfo trustAgentComponentInfo =
+                        getSettingsComponent(pm, resolveInfo);
+                if (trustAgentComponentInfo.componentName == null ||
+                        !enabledTrustAgents.contains(getComponentName(resolveInfo)) ||
+                        TextUtils.isEmpty(trustAgentComponentInfo.title)) {
+                    continue;
+                }
+                if (admin != null && dpm.getTrustAgentConfiguration(
+                        null, getComponentName(resolveInfo)) == null) {
+                    trustAgentComponentInfo.admin = admin;
+                }
+                result.add(trustAgentComponentInfo);
+                if (ONLY_ONE_TRUST_AGENT) {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
     public ComponentName getComponentName(ResolveInfo resolveInfo) {
         if (resolveInfo == null || resolveInfo.serviceInfo == null) return null;
         return new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
     }
 
-    public TrustAgentComponentInfo getSettingsComponent(
-            PackageManager pm, ResolveInfo resolveInfo) {
+    private TrustAgentComponentInfo getSettingsComponent(PackageManager pm,
+            ResolveInfo resolveInfo) {
         if (resolveInfo == null || resolveInfo.serviceInfo == null
                 || resolveInfo.serviceInfo.metaData == null) {
             return null;
