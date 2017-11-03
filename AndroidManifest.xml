@@ -251,6 +251,8 @@
                 android:value="com.android.settings.wifi.WifiSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+            <meta-data android:name="android.metadata.SLICE_URI"
+                       android:value="content://com.android.settings.slices/wifi" />
         </activity>
 
         <!-- Keep compatibility with old shortcuts. -->
@@ -3282,6 +3284,18 @@
                 <data android:scheme="package" />
             </intent-filter>
         </activity>
+
+        <provider android:name=".SettingsSliceProvider"
+                  android:authorities="com.android.settings.slices"
+                  android:exported="true">
+        </provider>
+
+        <receiver
+            android:name=".SliceBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="com.android.settings.slice.action.WIFI_CHANGED"/>
+            </intent-filter>
+        </receiver>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
