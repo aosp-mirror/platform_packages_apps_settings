@@ -98,7 +98,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
         super.onResume();
         removePreference("dummy_preference");
         updateAgents();
-    };
+    }
 
     private void updateAgents() {
         final Context context = getActivity();

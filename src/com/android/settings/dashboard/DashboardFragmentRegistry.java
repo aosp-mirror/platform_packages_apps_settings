@@ -19,7 +19,6 @@ package com.android.settings.dashboard;
 import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
-import com.android.settings.SecuritySettings;
 import com.android.settings.Settings;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
@@ -35,6 +34,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
+import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
