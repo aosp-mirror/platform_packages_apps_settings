@@ -114,11 +114,10 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 continue;
             }
             // Must be in SearchProviderRegistry
-            if (SearchIndexableResources.getResourceByName(className) == null) {
+            if (!SearchIndexableResources.providerValues().contains(clazz)) {
                 if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }
-                continue;
             }
         }
 

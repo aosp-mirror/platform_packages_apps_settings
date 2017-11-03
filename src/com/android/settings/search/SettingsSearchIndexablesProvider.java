@@ -17,6 +17,19 @@
 package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_CLASS_NAME;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ENTRIES;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ICON_RESID;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_ACTION;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_CLASS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEY;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_KEYWORDS;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SCREEN_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_OFF;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_SUMMARY_ON;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_TITLE;
+import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_USER_ID;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_CLASS_NAME;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_ICON_RESID;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_ACTION;
@@ -33,11 +46,12 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.SearchIndexableResource;
 import android.provider.SearchIndexablesProvider;
+import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
@@ -60,8 +74,9 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryXmlResources(String[] projection) {
         MatrixCursor cursor = new MatrixCursor(INDEXABLES_XML_RES_COLUMNS);
-        Collection<SearchIndexableResource> values = SearchIndexableResources.values();
-        for (SearchIndexableResource val : values) {
+        final List<SearchIndexableResource> resources =
+                getSearchIndexableResourcesFromProvider(getContext());
+        for (SearchIndexableResource val : resources) {
             Object[] ref = new Object[INDEXABLES_XML_RES_COLUMNS.length];
             ref[COLUMN_INDEX_XML_RES_RANK] = val.rank;
             ref[COLUMN_INDEX_XML_RES_RESID] = val.xmlResId;
@@ -72,13 +87,33 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             ref[COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS] = null; // intent target class
             cursor.addRow(ref);
         }
+
         return cursor;
     }
 
     @Override
     public Cursor queryRawData(String[] projection) {
-        MatrixCursor result = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
-        return result;
+        MatrixCursor cursor = new MatrixCursor(INDEXABLES_RAW_COLUMNS);
+        final List<SearchIndexableRaw> raws = getSearchIndexableRawFromProvider(getContext());
+        for (SearchIndexableRaw val : raws) {
+            Object[] ref = new Object[INDEXABLES_RAW_COLUMNS.length];
+            ref[COLUMN_INDEX_RAW_TITLE] = val.title;
+            ref[COLUMN_INDEX_RAW_SUMMARY_ON] = val.summaryOn;
+            ref[COLUMN_INDEX_RAW_SUMMARY_OFF] = val.summaryOff;
+            ref[COLUMN_INDEX_RAW_ENTRIES] = val.entries;
+            ref[COLUMN_INDEX_RAW_KEYWORDS] = val.keywords;
+            ref[COLUMN_INDEX_RAW_SCREEN_TITLE] = val.screenTitle;
+            ref[COLUMN_INDEX_RAW_CLASS_NAME] = val.className;
+            ref[COLUMN_INDEX_RAW_ICON_RESID] = val.iconResId;
+            ref[COLUMN_INDEX_RAW_INTENT_ACTION] = val.intentAction;
+            ref[COLUMN_INDEX_RAW_INTENT_TARGET_PACKAGE] = val.intentTargetPackage;
+            ref[COLUMN_INDEX_RAW_INTENT_TARGET_CLASS] = val.intentTargetClass;
+            ref[COLUMN_INDEX_RAW_KEY] = val.key;
+            ref[COLUMN_INDEX_RAW_USER_ID] = val.userId;
+            cursor.addRow(ref);
+        }
+
+        return cursor;
     }
 
     /**
@@ -89,29 +124,24 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     @Override
     public Cursor queryNonIndexableKeys(String[] projection) {
         MatrixCursor cursor = new MatrixCursor(NON_INDEXABLES_KEYS_COLUMNS);
-        final Collection<String> values = new HashSet<>();
-        final Context context = getContext();
+        final List<String> nonIndexableKeys = getNonIndexableKeysFromProvider(getContext());
+        for (String nik : nonIndexableKeys) {
+            final Object[] ref = new Object[NON_INDEXABLES_KEYS_COLUMNS.length];
+            ref[COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE] = nik;
+            cursor.addRow(ref);
+        }
 
-        for (SearchIndexableResource sir : SearchIndexableResources.values()) {
-            if (DEBUG) {
-                Log.d(TAG, "Getting non-indexable from " + sir.className);
-            }
+        return cursor;
+    }
+
+    private List<String> getNonIndexableKeysFromProvider(Context context) {
+        final Collection<Class> values = SearchIndexableResources.providerValues();
+        final List<String> nonIndexableKeys = new ArrayList<>();
+
+        for (Class<?> clazz : values) {
             final long startTime = System.currentTimeMillis();
-            final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(sir.className);
-            if (clazz == null) {
-                Log.d(TAG, "SearchIndexableResource '" + sir.className +
-                        "' should implement the " + Indexable.class.getName() + " interface!");
-                continue;
-            }
-
-            final Indexable.SearchIndexProvider provider =
-                    DatabaseIndexingUtils.getSearchIndexProvider(clazz);
-
-            if (provider == null) {
-                Log.d(TAG, "Unable to get SearchIndexableProvider from " + clazz);
-                continue;
-            }
-
+            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
+                    clazz);
             List<String> providerNonIndexableKeys = provider.getNonIndexableKeys(context);
 
             if (providerNonIndexableKeys == null || providerNonIndexableKeys.isEmpty()) {
@@ -123,22 +153,71 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             }
 
             if (providerNonIndexableKeys.removeAll(INVALID_KEYS)) {
-                Log.v(TAG, clazz.getName() + " tried to add an empty non-indexable key");
+                Log.v(TAG, provider + " tried to add an empty non-indexable key");
             }
+
             if (DEBUG) {
                 final long totalTime = System.currentTimeMillis() - startTime;
                 Log.d(TAG, "Non-indexables " + providerNonIndexableKeys.size() + ", total time "
                         + totalTime);
             }
-            values.addAll(providerNonIndexableKeys);
+
+            nonIndexableKeys.addAll(providerNonIndexableKeys);
         }
 
-        for (String nik : values) {
+        return nonIndexableKeys;
+    }
 
-            final Object[] ref = new Object[NON_INDEXABLES_KEYS_COLUMNS.length];
-            ref[COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE] = nik;
-            cursor.addRow(ref);
+    private List<SearchIndexableResource> getSearchIndexableResourcesFromProvider(Context context) {
+        Collection<Class> values = SearchIndexableResources.providerValues();
+        List<SearchIndexableResource> resourceList = new ArrayList<>();
+
+        for (Class<?> clazz : values) {
+            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
+                    clazz);
+
+            final List<SearchIndexableResource> resList =
+                    provider.getXmlResourcesToIndex(context, true);
+
+            if (resList == null) {
+                continue;
+            }
+
+            for (SearchIndexableResource item : resList) {
+                item.className = TextUtils.isEmpty(item.className)
+                        ? clazz.getName()
+                        : item.className;
+            }
+
+            resourceList.addAll(resList);
         }
-        return cursor;
+
+        return resourceList;
+    }
+
+    private List<SearchIndexableRaw> getSearchIndexableRawFromProvider(Context context) {
+        final Collection<Class> values = SearchIndexableResources.providerValues();
+        final List<SearchIndexableRaw> rawList = new ArrayList<>();
+
+        for (Class<?> clazz : values) {
+            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
+                    clazz);
+            final List<SearchIndexableRaw> providerRaws = provider.getRawDataToIndex(context,
+                    true /* enabled */);
+
+            if (providerRaws == null) {
+                continue;
+            }
+
+            for (SearchIndexableRaw raw : providerRaws) {
+                // The classname and intent information comes from the PreIndexData
+                // This will be more clear when provider conversion is done at PreIndex time.
+                raw.className = clazz.getName();
+
+            }
+            rawList.addAll(providerRaws);
+        }
+
+        return rawList;
     }
 }
