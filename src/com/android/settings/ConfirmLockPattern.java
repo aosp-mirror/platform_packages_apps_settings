@@ -32,6 +32,7 @@ import android.widget.TextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import java.util.List;
 
@@ -69,6 +70,7 @@ public class ConfirmLockPattern extends SettingsActivity {
         super.onCreate(savedInstanceState);
         CharSequence msg = getText(R.string.lockpassword_confirm_your_pattern_header);
         setTitle(msg);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     @Override
