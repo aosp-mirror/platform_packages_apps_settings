@@ -41,6 +41,7 @@ import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusDualSimPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceControllerV2;
+import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceControllerV2;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -138,7 +139,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             controllers.add(new ImeiInfoDualSimPreferenceController(context, fragment));
 
-            // Android version
+            controllers.add(new FirmwareVersionPreferenceControllerV2(context, fragment));
 
             // IP address
 
