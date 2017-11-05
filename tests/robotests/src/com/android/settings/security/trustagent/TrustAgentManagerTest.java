@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.trustagent;
+package com.android.settings.security.trustagent;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
-import android.content.pm.PackageManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,51 +33,48 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class TrustAgentFeatureProviderImplTest {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+public class TrustAgentManagerTest {
 
     private static final String CANNED_PACKAGE_NAME = "com.test.package";
 
     @Mock
     private PackageManager mPackageManager;
 
-    private TrustAgentManagerImpl mImpl;
+    private TrustAgentManager mTrustAgentManager;
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        mImpl = new TrustAgentManagerImpl();
+        mTrustAgentManager = new TrustAgentManager();
     }
 
     @Test
     public void shouldProvideTrust_doesProvideTrustWithPermission() {
         when(mPackageManager.checkPermission(TrustAgentManager.PERMISSION_PROVIDE_AGENT,
-            CANNED_PACKAGE_NAME)).thenReturn(PackageManager.PERMISSION_GRANTED);
+                CANNED_PACKAGE_NAME)).thenReturn(PackageManager.PERMISSION_GRANTED);
 
         ServiceInfo serviceInfo = new ServiceInfo();
         serviceInfo.packageName = CANNED_PACKAGE_NAME;
         ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.serviceInfo = serviceInfo;
 
-        assertTrue(mImpl.shouldProvideTrust(resolveInfo, mPackageManager));
+        assertThat(mTrustAgentManager.shouldProvideTrust(resolveInfo, mPackageManager))
+                .isTrue();
     }
 
     @Test
     public void shouldProvideTrust_doesNotProvideTrustWithoutPermission() {
         when(mPackageManager.checkPermission(TrustAgentManager.PERMISSION_PROVIDE_AGENT,
-            CANNED_PACKAGE_NAME)).thenReturn(PackageManager.PERMISSION_DENIED);
+                CANNED_PACKAGE_NAME)).thenReturn(PackageManager.PERMISSION_DENIED);
 
         ServiceInfo serviceInfo = new ServiceInfo();
         serviceInfo.packageName = CANNED_PACKAGE_NAME;
         ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.serviceInfo = serviceInfo;
 
-        assertFalse(mImpl.shouldProvideTrust(resolveInfo, mPackageManager));
+        assertThat(mTrustAgentManager.shouldProvideTrust(resolveInfo, mPackageManager))
+                .isFalse();
     }
 }

@@ -22,7 +22,9 @@ import android.content.Intent;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiManager.ActionListener;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
 import com.android.settings.SetupWizardUtils;
@@ -40,6 +42,15 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
     private static final String KEY_ACCESS_POINT_STATE = "access_point_state";
     private static final String KEY_WIFI_CONFIGURATION = "wifi_configuration";
 
+    /**
+     * Boolean extra indicating whether this activity should connect to an access point on the
+     * caller's behalf. If this is set to false, the caller should check
+     * {@link #KEY_WIFI_CONFIGURATION} in the result data and save that using
+     * {@link WifiManager#connect(WifiConfiguration, ActionListener)}. Default is true.
+     */
+    @VisibleForTesting
+    static final String KEY_CONNECT_FOR_CALLER = "connect_for_caller";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final Intent intent = getIntent();
@@ -55,7 +66,8 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             accessPoint = new AccessPoint(this, accessPointState);
         }
 
-        WifiDialog dialog = WifiDialog.createModal(this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        WifiDialog dialog = WifiDialog.createModal(
+                this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
         dialog.show();
         dialog.setOnDismissListener(this);
     }
@@ -102,17 +114,19 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
         final AccessPoint accessPoint = dialog.getController().getAccessPoint();
         final WifiManager wifiManager = getSystemService(WifiManager.class);
 
-        if (config == null) {
-            if (accessPoint != null && accessPoint.isSaved()) {
-                wifiManager.connect(accessPoint.getConfig(), null /* listener */);
-            }
-        } else {
-            wifiManager.save(config, null /* listener */);
-            if (accessPoint != null) {
-                // accessPoint is null for "Add network"
-                NetworkInfo networkInfo = accessPoint.getNetworkInfo();
-                if (networkInfo == null || !networkInfo.isConnected()) {
-                    wifiManager.connect(config, null /* listener */);
+        if (getIntent().getBooleanExtra(KEY_CONNECT_FOR_CALLER, true)) {
+            if (config == null) {
+                if (accessPoint != null && accessPoint.isSaved()) {
+                    wifiManager.connect(accessPoint.getConfig(), null /* listener */);
+                }
+            } else {
+                wifiManager.save(config, null /* listener */);
+                if (accessPoint != null) {
+                    // accessPoint is null for "Add network"
+                    NetworkInfo networkInfo = accessPoint.getNetworkInfo();
+                    if (networkInfo == null || !networkInfo.isConnected()) {
+                        wifiManager.connect(config, null /* listener */);
+                    }
                 }
             }
         }

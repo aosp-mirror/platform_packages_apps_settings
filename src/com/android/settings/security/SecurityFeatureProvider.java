@@ -19,7 +19,7 @@ package com.android.settings.security;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.trustagent.TrustAgentManager;
+import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
 
 

@@ -23,13 +23,18 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class WorkOnlyCategoryPreferenceController extends AbstractPreferenceController
+/**
+ * A controller for generic Preference categories. If all controllers for its children reports
+ * not-available, this controller will also report not-available, and subsequently will be hidden by
+ * UI.
+ */
+public class PreferenceCategoryController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
     private final String mKey;
     private final List<AbstractPreferenceController> mChildren;
 
-    public WorkOnlyCategoryPreferenceController(Context context,
+    public PreferenceCategoryController(Context context,
             String key, List<AbstractPreferenceController> childrenControllers) {
         super(context);
         mKey = key;

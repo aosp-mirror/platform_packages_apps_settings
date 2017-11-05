@@ -59,7 +59,9 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setAnimationAllowed(true);
-        addPreferencesFromResource(R.xml.unrestricted_data_access_settings);
+        if (!usePreferenceScreenTitle()) {
+            addPreferencesFromResource(R.xml.unrestricted_data_access_settings);
+        }
         mApplicationsState = ApplicationsState.getInstance(
                 (Application) getContext().getApplicationContext());
         mDataSaverBackend = new DataSaverBackend(getContext());
@@ -206,6 +208,11 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DATA_USAGE_UNRESTRICTED_ACCESS;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.unrestricted_data_access_settings;
     }
 
     @Override

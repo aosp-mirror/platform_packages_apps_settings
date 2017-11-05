@@ -22,7 +22,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -34,7 +33,12 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.internal.telephony.PhoneFactory;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 
+/**
+ * deprecated in favor of {@link ImeiInfoPreferenceControllerV2}
+ */
+@Deprecated
 public class ImeiInformation extends SettingsPreferenceFragment {
 
     private static final String KEY_PRL_VERSION = "prl_version";

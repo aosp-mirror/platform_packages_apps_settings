@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +36,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.CryptKeeperConfirm;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;

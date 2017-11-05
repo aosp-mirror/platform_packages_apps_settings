@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static android.app.admin.DevicePolicyManager.ENCRYPTION_STATUS_ACTIVE;
-import static android.app.admin.DevicePolicyManager.ENCRYPTION_STATUS_INACTIVE;
 import static com.android.settings.security.EncryptionAndCredential.SEARCH_INDEX_DATA_PROVIDER;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
@@ -28,7 +26,6 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -71,16 +68,6 @@ public class EncryptionAndCredentialTest {
         assertThat(fragment.getMetricsCategory()).isEqualTo(MetricsEvent.ENCRYPTION_AND_CREDENTIAL);
     }
 
-    // Search provider tests
-    @Test
-    public void getXmlResourcesToIndex_shouldReturnAllXmls() {
-        final List<SearchIndexableResource> index =
-                SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        mContext, true /* enabled */);
-
-        assertThat(index).hasSize(3);
-    }
-
     @Test
     public void getNonIndexableKeys_pageIsDisabled_shouldReturnAllKeysAsNonIndexable() {
         when(mUserManager.isAdminUser()).thenReturn(false);
@@ -92,34 +79,6 @@ public class EncryptionAndCredentialTest {
             expectedKeys.addAll(((BaseSearchIndexProvider) SEARCH_INDEX_DATA_PROVIDER)
                     .getNonIndexableKeysFromXml(mContext, res.xmlResId));
         }
-        final List<String> keys = SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-
-        assertThat(keys).containsExactlyElementsIn(expectedKeys);
-    }
-
-    @Test
-    public void getNonIndexableKeys_deviceEncrypted_shouldReturnUnencryptedKeys() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mDevicePolicyManager.getStorageEncryptionStatus()).thenReturn(
-                ENCRYPTION_STATUS_ACTIVE);
-
-        final List<String> expectedKeys = new ArrayList<>();
-        expectedKeys.addAll(((BaseSearchIndexProvider) SEARCH_INDEX_DATA_PROVIDER)
-                .getNonIndexableKeysFromXml(mContext, R.xml.security_settings_unencrypted));
-        final List<String> keys = SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
-
-        assertThat(keys).containsExactlyElementsIn(expectedKeys);
-    }
-
-    @Test
-    public void getNonIndexableKeys_deviceNotEncrypted_shouldReturnEncryptedKeys() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mDevicePolicyManager.getStorageEncryptionStatus())
-                .thenReturn(ENCRYPTION_STATUS_INACTIVE);
-
-        final List<String> expectedKeys = new ArrayList<>();
-        expectedKeys.addAll(((BaseSearchIndexProvider) SEARCH_INDEX_DATA_PROVIDER)
-                .getNonIndexableKeysFromXml(mContext, R.xml.security_settings_encrypted));
         final List<String> keys = SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(keys).containsExactlyElementsIn(expectedKeys);

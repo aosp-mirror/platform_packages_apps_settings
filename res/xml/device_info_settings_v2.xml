@@ -28,11 +28,18 @@
         android:title="@string/status_number"
         android:summary="@string/summary_placeholder"/>
 
-    <!-- SIM status -->
+    <!-- SIM status Sim Slot 1 -->
     <Preference
-        android:key="sim_status"
+        android:key="sim_status_sim_1"
         android:title="@string/sim_status_title"
         android:summary="@string/summary_placeholder"/>
+
+    <!-- SIM status Sim Slot 2-->
+    <Preference
+        android:key="sim_status_sim_2"
+        android:title="@string/sim_status_title_sim_slot_2"
+        android:summary="@string/summary_placeholder"/>
+
 
     <!-- Model & hardware -->
     <Preference
@@ -40,10 +47,18 @@
         android:title="@string/hardware_info"
         android:summary="@string/summary_placeholder"/>
 
-    <!-- IMEI -->
+    <!-- IMEI Sim Slot 1 -->
     <Preference
-        android:key="imei_info"
+        android:key="imei_info_sim_slot_1"
         android:title="@string/status_imei"
+        settings:keywords="@string/keywords_imei_info"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- IMEI Sim Slot 2 -->
+    <Preference
+        android:key="imei_info_sim_slot_2"
+        android:title="@string/imei_multi_sim_slot_2"
+        settings:keywords="@string/keywords_imei_info"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Android version -->

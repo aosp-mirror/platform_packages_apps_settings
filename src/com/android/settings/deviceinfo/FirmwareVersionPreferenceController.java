@@ -27,13 +27,17 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceControllerV2;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-
+/**
+ * deprecated in favor of {@link FirmwareVersionPreferenceControllerV2}
+ */
+@Deprecated
 public class FirmwareVersionPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume {
 

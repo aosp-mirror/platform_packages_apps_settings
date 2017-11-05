@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.security.trustagent;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -34,14 +36,13 @@ import android.util.ArraySet;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.trustagent.TrustAgentManager;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class TrustAgentSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -97,7 +98,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
         super.onResume();
         removePreference("dummy_preference");
         updateAgents();
-    };
+    }
 
     private void updateAgents() {
         final Context context = getActivity();
@@ -152,7 +153,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
                 UserHandle.myUserId());
     }
 
-    ArrayMap<ComponentName, AgentInfo> findAvailableTrustAgents() {
+    private ArrayMap<ComponentName, AgentInfo> findAvailableTrustAgents() {
         PackageManager pm = getActivity().getPackageManager();
         Intent trustAgentIntent = new Intent(SERVICE_INTERFACE);
         List<ResolveInfo> resolveInfos = pm.queryIntentServices(trustAgentIntent,
@@ -169,7 +170,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
             if (!mTrustAgentManager.shouldProvideTrust(resolveInfo, pm)) {
                 continue;
             }
-            ComponentName name = TrustAgentUtils.getComponentName(resolveInfo);
+            ComponentName name = mTrustAgentManager.getComponentName(resolveInfo);
             AgentInfo agentInfo = new AgentInfo();
             agentInfo.label = resolveInfo.loadLabel(pm);
             agentInfo.icon = resolveInfo.loadIcon(pm);

@@ -52,6 +52,11 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.nfc_payment_settings;
+    }
+
+    @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
@@ -60,7 +65,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
 
         final PreferenceScreen screen;
         if (usePreferenceScreenTitle()) {
-            addPreferencesFromResource(R.xml.nfc_payment_settings);
             screen = getPreferenceScreen();
         } else {
             PreferenceManager manager = getPreferenceManager();

@@ -2622,6 +2622,8 @@
 
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
     <string name="firmware_version">Android version</string>
+    <!-- About phone screen, dialog title for showing device software information such as android version, security patch level, etc  [CHAR LIMIT=60] -->
+    <string name="firmware_title">Android</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=60] -->
     <string name="security_patch">Android security patch level</string>
     <!-- About phone screen, status item label  [CHAR LIMIT=40] -->
@@ -2661,6 +2663,10 @@
     <string name="storage_settings_summary" product="nosdcard">Unmount USB storage, view available storage</string>
     <!-- [CHAR LIMIT=100] Main settings screen item's summary for the SD card and storage settings -->
     <string name="storage_settings_summary" product="default">Unmount SD card, view available storage</string>
+    <!-- About phone screen, title for IMEI for multi-sim devices -->
+    <string name="imei_multi_sim_slot_1">IMEI (sim slot 1)</string>
+    <!-- About phone screen, title for IMEI for multi-sim devices -->
+    <string name="imei_multi_sim_slot_2">IMEI (sim slot 2)</string>
     <!-- Do not translate. About phone, status item title -->
     <string name="status_imei">IMEI</string>
     <!-- Do not translate. About phone, status item title -->
@@ -2671,12 +2677,20 @@
     <string name="status_number" product="tablet">MDN</string>
     <!-- About phone, status item title.  The phone number of the current device [CHAR LIMIT=30] -->
     <string name="status_number" product="default">Phone number</string>
+    <!-- About tablet, status item title.  The Mobile Directory Number [CHAR LIMIT=30] -->
+    <string name="status_number_sim_status" product="tablet">MDN on SIM</string>
+    <!-- About phone, status item title.  The phone number of the current device [CHAR LIMIT=30] -->
+    <string name="status_number_sim_status" product="default">Phone number on SIM</string>
     <!-- About phone, status item title.  The phone MIN number of the current device.-->
     <string name="status_min_number">MIN</string>
     <!-- About phone, status item title.  The phone MSID number of the current device.-->
     <string name="status_msid_number">MSID</string>
     <!-- About phone, status item title.  The phone PRL Version of the current device.-->
     <string name="status_prl_version">PRL version</string>
+    <!-- About phone screen, title for MEID for multi-sim devices -->
+    <string name="meid_multi_sim_sim_slot_1">MEID (sim slot 1)</string>
+    <!-- About phone screen, title for MEID for multi-sim devices -->
+    <string name="meid_multi_sim_sim_slot_2">MEID (sim slot 2)</string>
     <!-- About phone, status item title.  The phone MEID number of the current LTE/CDMA device. [CHAR LIMIT=30] -->
     <string name="status_meid_number">MEID</string>
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
@@ -6430,6 +6444,10 @@
     <string name="sim_no_inserted_msg">No SIM cards inserted</string>
     <!-- SIM status title  [CHAR LIMIT=40] -->
     <string name="sim_status_title">SIM status</string>
+    <!-- SIM status title  [CHAR LIMIT=40] -->
+    <string name="sim_status_title_sim_slot_1">SIM status (sim slot 1)</string>
+    <!-- SIM status title  [CHAR LIMIT=40] -->
+    <string name="sim_status_title_sim_slot_2">SIM status (sim slot 2)</string>
     <!-- Title for call back. [CHAR LIMIT=60] -->
     <string name="sim_call_back_title">Call back from default SIM</string>
     <!-- Title for outgoing back. [CHAR LIMIT=60] -->
@@ -6555,6 +6573,7 @@
     <string name="keywords_payment_settings">pay, tap, payments</string>
     <string name="keywords_backup">backup, back up</string>
     <string name="keywords_assist_gesture_launch">gesture</string>
+    <string name="keywords_imei_info">imei, meid</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 

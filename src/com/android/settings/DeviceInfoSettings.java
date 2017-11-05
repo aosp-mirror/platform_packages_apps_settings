@@ -32,11 +32,16 @@ import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.imei.ImeiInfoDualSimPreferenceController;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SimStatusDualSimPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceControllerV2;
+import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceControllerV2;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -120,18 +125,21 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
         if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
-
             // Device name
 
             // Phone number
 
-            // SIM status
+            controllers.add(new SimStatusPreferenceControllerV2(context, fragment));
+
+            controllers.add(new SimStatusDualSimPreferenceController(context, fragment));
 
             controllers.add(new DeviceModelPreferenceController(context, fragment));
 
-            // IMEI
+            controllers.add(new ImeiInfoPreferenceControllerV2(context, fragment));
 
-            // Android version
+            controllers.add(new ImeiInfoDualSimPreferenceController(context, fragment));
+
+            controllers.add(new FirmwareVersionPreferenceControllerV2(context, fragment));
 
             // IP address
 

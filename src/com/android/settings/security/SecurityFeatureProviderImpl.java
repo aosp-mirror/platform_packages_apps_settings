@@ -30,8 +30,7 @@ import android.util.ArrayMap;
 import android.util.Pair;
 
 import com.android.settings.R;
-import com.android.settings.trustagent.TrustAgentManager;
-import com.android.settings.trustagent.TrustAgentManagerImpl;
+import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;
@@ -192,7 +191,7 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
     @Override
     public TrustAgentManager getTrustAgentManager() {
         if (mTrustAgentManager == null) {
-            mTrustAgentManager = new TrustAgentManagerImpl();
+            mTrustAgentManager = new TrustAgentManager();
         }
         return mTrustAgentManager;
     }
