@@ -97,4 +97,14 @@ public class SuggestionControllerMixinTest {
 
         verify(mHost).getLoaderManager();
     }
+
+    @Test
+    public void onServiceDisconnected_hostNotAttached_shouldDoNothing() {
+        when(mHost.getLoaderManager()).thenReturn(null);
+
+        mMixin = new SuggestionControllerMixin(mContext, mHost, mLifecycle);
+        mMixin.onServiceDisconnected();
+
+        verify(mHost).getLoaderManager();
+    }
 }
