@@ -27,11 +27,14 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.BasebandVersionPreferenceController;
+import com.android.settings.deviceinfo.BluetoothAddressPreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.IpAddressPreferenceController;
+import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoDualSimPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
@@ -140,11 +143,11 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             // Android version
 
-            // IP address
+            controllers.add(new IpAddressPreferenceController(context, lifecycle));
 
-            // Wifi MAC address
+            controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
 
-            // Bluetooth Address
+            controllers.add(new BluetoothAddressPreferenceController(context, lifecycle));
 
             controllers.add(new RegulatoryInfoPreferenceController(context));
 
