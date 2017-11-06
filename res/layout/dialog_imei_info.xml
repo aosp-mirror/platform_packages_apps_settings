@@ -69,6 +69,7 @@
 
         </LinearLayout>
 
+        <!-- These items are for GSM and LTE enabled CDMA phones -->
         <LinearLayout
             android:id="@+id/gsm_settings"
             android:orientation="vertical"
@@ -99,16 +100,5 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
 
-        <TextView
-            style="@style/device_info_dialog_label"
-            android:id="@+id/icc_id_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/status_icc_id"/>
-        <TextView
-            style="@style/device_info_dialog_value"
-            android:id="@+id/icc_id_value"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
 </ScrollView>

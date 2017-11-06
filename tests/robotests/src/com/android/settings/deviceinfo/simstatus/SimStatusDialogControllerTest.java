@@ -19,6 +19,10 @@ package com.android.settings.deviceinfo.simstatus;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .CELLULAR_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .ICCID_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
+        .ICCID_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .NETWORK_PROVIDER_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .OPERATOR_INFO_LABEL_ID;
@@ -41,6 +45,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.PersistableBundle;
+import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
 import android.telephony.ServiceState;
 import android.telephony.SignalStrength;
@@ -77,6 +83,10 @@ public class SimStatusDialogControllerTest {
     private PhoneStateListener mPhoneStateListener;
     @Mock
     private SignalStrength mSignalStrength;
+    @Mock
+    private CarrierConfigManager mCarrierConfigManager;
+    @Mock
+    private PersistableBundle mPersistableBundle;
 
 
     private SimStatusDialogController mController;
@@ -96,7 +106,9 @@ public class SimStatusDialogControllerTest {
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
+        ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
+        when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
     }
 
     @Test
@@ -199,4 +211,28 @@ public class SimStatusDialogControllerTest {
         verify(mDialog).setText(ROAMING_INFO_VALUE_ID, roamingOffString);
     }
 
+    @Test
+    public void initialize_doNotShowIccid_shouldRemoveIccidSetting() {
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(
+                false);
+
+        mController.initialize();
+
+        verify(mDialog).removeSettingFromScreen(ICCID_INFO_LABEL_ID);
+        verify(mDialog).removeSettingFromScreen(ICCID_INFO_VALUE_ID);
+    }
+
+    @Test
+    public void initialize_showIccid_shouldSetIccidToSetting() {
+        final String iccid = "12351351231241";
+        when(mPersistableBundle.getBoolean(
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(
+                true);
+        doReturn(iccid).when(mController).getSimSerialNumber(anyInt());
+
+        mController.initialize();
+
+        verify(mDialog).setText(ICCID_INFO_VALUE_ID, iccid);
+    }
 }
