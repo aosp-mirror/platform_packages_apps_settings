@@ -97,7 +97,10 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
         if (DEBUG) {
             Log.d(TAG, "SuggestionService disconnected");
         }
-        mHost.getLoaderManager().destroyLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS);
+        final LoaderManager loaderManager = mHost.getLoaderManager();
+        if (loaderManager != null) {
+            loaderManager.destroyLoader(SuggestionLoader.LOADER_ID_SUGGESTIONS);
+        }
     }
 
     @Override
