@@ -29,6 +29,7 @@ import com.android.settings.datetime.ZonePicker;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLibcoreTimeZoneNames;
 import com.android.settings.testutils.shadow.ShadowTimeZoneNames;
+import com.android.settings.testutils.shadow.ShadowZoneGetterData;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,11 +39,12 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 ShadowLibcoreTimeZoneNames.class,
                 ShadowLibcoreTimeZoneNames.ShadowZoneStringsCache.class,
-                ShadowTimeZoneNames.class
+                ShadowTimeZoneNames.class,
+                ShadowZoneGetterData.class,
         }
 )
 public class ZonePickerTest {
