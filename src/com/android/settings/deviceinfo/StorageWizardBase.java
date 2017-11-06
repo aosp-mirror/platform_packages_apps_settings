@@ -16,15 +16,19 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.annotation.LayoutRes;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageEventListener;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -202,13 +206,27 @@ public abstract class StorageWizardBase extends Activity {
     }
 
     protected VolumeInfo findFirstVolume(int type) {
-        final List<VolumeInfo> vols = mStorage.getVolumes();
-        for (VolumeInfo vol : vols) {
-            if (Objects.equals(mDisk.getId(), vol.getDiskId()) && (vol.getType() == type)) {
-                return vol;
+        return findFirstVolume(type, 1);
+    }
+
+    protected VolumeInfo findFirstVolume(int type, int attempts) {
+        while (true) {
+            final List<VolumeInfo> vols = mStorage.getVolumes();
+            for (VolumeInfo vol : vols) {
+                if (Objects.equals(mDisk.getId(), vol.getDiskId()) && (vol.getType() == type)
+                        && (vol.getState() == VolumeInfo.STATE_MOUNTED)) {
+                    return vol;
+                }
+            }
+
+            if (--attempts > 0) {
+                Log.w(TAG, "Missing mounted volume of type " + type + " hosted by disk "
+                        + mDisk.getId() + "; trying again");
+                SystemClock.sleep(250);
+            } else {
+                return null;
             }
         }
-        return null;
     }
 
     private final StorageEventListener mStorageListener = new StorageEventListener() {

@@ -16,15 +16,20 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.os.storage.VolumeInfo.TYPE_PRIVATE;
+
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.IPackageMoveObserver;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.IVoldTaskListener;
+import android.os.PersistableBundle;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -38,8 +43,8 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 import java.util.Objects;
-
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class StorageWizardFormatProgress extends StorageWizardBase {
     private static final String TAG_SLOW_WARNING = "slow_warning";
@@ -99,9 +104,21 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
-                    final VolumeInfo privateVol = activity.findFirstVolume(VolumeInfo.TYPE_PRIVATE);
-                    mPrivateBench = storage.benchmark(privateVol.getId());
-                    mPrivateBench /= 1000000;
+                    final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 5);
+                    final CompletableFuture<PersistableBundle> result = new CompletableFuture<>();
+                    storage.benchmark(privateVol.getId(), new IVoldTaskListener.Stub() {
+                        @Override
+                        public void onStatus(int status, PersistableBundle extras) {
+                            // Map benchmark 0-100% progress onto 40-80%
+                            publishProgress(40 + ((status * 40) / 100));
+                        }
+
+                        @Override
+                        public void onFinished(int status, PersistableBundle extras) {
+                            result.complete(extras);
+                        }
+                    });
+                    mPrivateBench = result.get(60, TimeUnit.SECONDS).getLong("run", Long.MAX_VALUE);
 
                     // If we just adopted the device that had been providing
                     // physical storage, then automatically move storage to the
