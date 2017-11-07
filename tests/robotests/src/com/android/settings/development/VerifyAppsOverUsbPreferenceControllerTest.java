@@ -30,8 +30,8 @@ import android.content.pm.ResolveInfo;
 import android.provider.Settings.Global;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -76,6 +76,7 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
             return this;
         }
     }
+
     private final GlobalSetter mGlobals = new GlobalSetter();
 
     @Before
@@ -175,7 +176,9 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
         when(mScreen.getPreferenceCount()).thenReturn(1);
         when(mScreen.getPreference(anyInt())).thenReturn(mPreference);
+
         mController.displayPreference(mScreen);
-        verify(mScreen).removePreference(mPreference);
+
+        verify(mPreference).setVisible(false);
     }
 }

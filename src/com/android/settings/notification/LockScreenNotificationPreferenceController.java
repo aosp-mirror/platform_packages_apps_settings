@@ -98,8 +98,8 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
             mLockscreenProfile = (RestrictedDropDownPreference) screen.findPreference(
                     mWorkSettingKey);
         } else {
-            removePreference(screen, mWorkSettingKey);
-            removePreference(screen, mWorkSettingCategoryKey);
+            setVisible(screen, mWorkSettingKey, false /* visible */);
+            setVisible(screen, mWorkSettingCategoryKey, false /* visible */);
         }
         mSettingObserver = new SettingObserver();
         initLockScreenNotificationPrefDisplay();

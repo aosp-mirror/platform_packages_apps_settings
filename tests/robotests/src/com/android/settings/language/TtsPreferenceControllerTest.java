@@ -16,14 +16,18 @@
 
 package com.android.settings.language;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,19 +35,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class TtsPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -54,21 +53,28 @@ public class TtsPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private TtsPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mController = new TtsPreferenceController(mContext, mTtsEngines);
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
     public void testIsAvailable_ttsEngineEmpty_shouldReturnFalse() {
-
         // Not available when there is no engine.
         when(mTtsEngines.getEngines()).thenReturn(new ArrayList<>());
 
         assertThat(mController.isAvailable()).isFalse();
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -78,21 +84,9 @@ public class TtsPreferenceControllerTest {
         when(mTtsEngines.getEngines()).thenReturn(infolist);
 
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void displayPreference_notAvailable_shouldRemoveCategory() {
-        final Preference preference = mock(Preference.class);
-        final Preference category = mock(Preference.class);
-        when(mScreen.getPreferenceCount()).thenReturn(2);
-        when(mScreen.getPreference(0)).thenReturn(preference);
-        when(mScreen.getPreference(1)).thenReturn(category);
-        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
-        when(category.getKey()).thenReturn("voice_category");
 
         mController.displayPreference(mScreen);
 
-        // Remove preference.
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 }

@@ -15,17 +15,21 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,12 +38,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -51,10 +51,9 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Fragment mFragment;
-    @Mock
-    private Preference mPreference;
 
     private Context mContext;
+    private Preference mPreference;
     private AutoSyncPersonalDataPreferenceController mController;
 
     @Before
@@ -64,9 +63,9 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = shadowContext.getApplicationContext();
         mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        mPreference = new Preference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -75,7 +74,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -85,7 +84,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -98,11 +97,11 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void displayPref_prefAvaiable_shouldDisplay() {
+    public void displayPref_prefAvailable_shouldDisplay() {
         List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         infos.add(new UserInfo(2, "user 2", 0));
@@ -112,7 +111,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
 }
