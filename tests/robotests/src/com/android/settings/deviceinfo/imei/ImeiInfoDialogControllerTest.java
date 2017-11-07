@@ -18,8 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_CDMA_SETTINGS;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_GSM_SETTINGS;
-import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_ICC_ID_LABEL;
-import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_ICC_ID_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_IMEI_SV_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_IMEI_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MEID_NUMBER_VALUE;
@@ -58,7 +56,6 @@ public class ImeiInfoDialogControllerTest {
     private static final String MEID_NUMBER = "12871234124";
     private static final String IMEI_NUMBER = "2341982751254";
     private static final String MIN_NUMBER = "123417851315";
-    private static final String ICCID_NUMBER = "3845672472";
     private static final String IMEI_SV_NUMBER = "12";
 
     @Mock
@@ -83,7 +80,6 @@ public class ImeiInfoDialogControllerTest {
         doReturn(PRL_VERSION).when(mController).getCdmaPrlVersion();
         doReturn(MEID_NUMBER).when(mController).getMeid();
         when(mTelephonyManager.getCdmaMin(anyInt())).thenReturn(MIN_NUMBER);
-        when(mSubscriptionInfo.getIccId()).thenReturn(ICCID_NUMBER);
         when(mTelephonyManager.getDeviceSoftwareVersion(anyInt())).thenReturn(IMEI_SV_NUMBER);
         when(mTelephonyManager.getImei(anyInt())).thenReturn(IMEI_NUMBER);
     }
@@ -98,7 +94,6 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
         verify(mDialog).setText(ID_MIN_NUMBER_VALUE, MIN_NUMBER);
         verify(mDialog).setText(ID_PRL_VERSION_VALUE, PRL_VERSION);
-        verify(mDialog).setText(ID_ICC_ID_VALUE, ICCID_NUMBER);
         verify(mDialog).setText(eq(ID_IMEI_VALUE), any());
         verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
     }
@@ -114,8 +109,6 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(ID_MIN_NUMBER_VALUE, MIN_NUMBER);
         verify(mDialog).setText(ID_PRL_VERSION_VALUE, PRL_VERSION);
         verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
-        verify(mDialog).removeViewFromScreen(ID_ICC_ID_VALUE);
-        verify(mDialog).removeViewFromScreen(ID_ICC_ID_LABEL);
     }
 
     @Test
@@ -127,7 +120,5 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(eq(ID_IMEI_VALUE), any());
         verify(mDialog).setText(eq(ID_IMEI_SV_VALUE), any());
         verify(mDialog).removeViewFromScreen(ID_CDMA_SETTINGS);
-        verify(mDialog).removeViewFromScreen(ID_ICC_ID_VALUE);
-        verify(mDialog).removeViewFromScreen(ID_ICC_ID_LABEL);
     }
 }
