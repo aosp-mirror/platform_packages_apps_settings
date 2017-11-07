@@ -15,16 +15,27 @@
  */
 package com.android.settings.security;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.support.v7.preference.PreferenceScreen;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.OwnerInfoSettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.users.OwnerInfoSettings;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 
@@ -36,18 +47,6 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -139,7 +138,7 @@ public class OwnerInfoPreferenceControllerTest {
         mController.updateSummary();
 
         verify(mPreference).setSummary(mContext.getString(
-            com.android.settings.R.string.owner_info_settings_summary));
+                com.android.settings.R.string.owner_info_settings_summary));
     }
 
     @Test
@@ -179,7 +178,7 @@ public class OwnerInfoPreferenceControllerTest {
     public void performClick_shouldLaunchOwnerInfoSettings() {
         final ShadowApplication application = ShadowApplication.getInstance();
         final RestrictedPreference preference =
-            new RestrictedPreference(application.getApplicationContext());
+                new RestrictedPreference(application.getApplicationContext());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
         doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
@@ -190,7 +189,7 @@ public class OwnerInfoPreferenceControllerTest {
 
         verify(mFragment).getFragmentManager();
         verify(mFragment.getFragmentManager().beginTransaction())
-            .add(any(OwnerInfoSettings.class), anyString());
+                .add(any(OwnerInfoSettings.class), anyString());
     }
 
 }

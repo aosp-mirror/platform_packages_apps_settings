@@ -22,9 +22,10 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.OwnerInfoSettings;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.users.OwnerInfoSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -45,7 +46,7 @@ public class OwnerInfoPreferenceController extends AbstractPreferenceController
 
     // Container fragment should implement this in order to show the correct summary
     public interface OwnerInfoCallback {
-        public void onOwnerInfoUpdated();
+        void onOwnerInfoUpdated();
     }
 
     public OwnerInfoPreferenceController(Context context, Fragment parent, Lifecycle lifecycle ) {

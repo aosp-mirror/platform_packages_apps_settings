@@ -67,6 +67,7 @@ import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComponentInfo;
 import com.android.settings.widget.GearPreference;
@@ -522,7 +523,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     @Override
     public void onGearClick(GearPreference p) {
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(p.getKey())) {
-            startFragment(this, SecuritySubSettings.class.getName(), 0, 0, null);
+            startFragment(this, ScreenLockSettings.class.getName(), 0, 0, null);
         }
     }
 
@@ -763,7 +764,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(
                 Context context, boolean enabled) {
-            final List<SearchIndexableResource> index = new ArrayList<SearchIndexableResource>();
+            final List<SearchIndexableResource> index = new ArrayList<>();
 
             final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
             final ManagedLockPasswordProvider managedPasswordProvider =
@@ -791,12 +792,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 index.add(getSearchResource(context, getResIdForLockUnlockScreen(
                         lockPatternUtils, managedPasswordProvider, profileUserId)));
             }
-
-            final SearchIndexableResource sir = getSearchResource(context,
-                    SecuritySubSettings.getResIdForLockUnlockSubScreen(lockPatternUtils,
-                            managedPasswordProvider));
-            sir.className = SecuritySubSettings.class.getName();
-            index.add(sir);
 
             // Append the rest of the settings
             index.add(getSearchResource(context, R.xml.security_settings_misc));

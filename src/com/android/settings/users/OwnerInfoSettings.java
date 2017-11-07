@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.users;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -30,6 +30,7 @@ import android.widget.EditText;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.security.OwnerInfoPreferenceController.OwnerInfoCallback;
 
