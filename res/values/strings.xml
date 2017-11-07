@@ -752,6 +752,17 @@
     <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
+    <!-- Label describing when a given time zone changes to DST or standard time -->
+    <string name="zone_change_to_from_dst"><xliff:g id="time_type" example="Pacific Summer Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
+    <!-- Describes the time type "daylight savings time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_dst">Daylight savings time</string>
+    <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_standard">Standard time</string>
+    <!-- The menu item to switch to selecting a time zone by region (default) -->
+    <string name="zone_menu_by_region">Time zone by region</string>
+    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) -->
+    <string name="zone_menu_by_offset">Fixed offset time zones</string>
+
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
     <string name="date_picker_title">Date</string>
