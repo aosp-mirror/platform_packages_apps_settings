@@ -206,7 +206,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mManageDeviceAdminPreferenceController
                 = new ManageDeviceAdminPreferenceController(activity);
         mEnterprisePrivacyPreferenceController
-                = new EnterprisePrivacyPreferenceController(activity, null /* lifecycle */);
+                = new EnterprisePrivacyPreferenceController(activity);
         mLockScreenNotificationPreferenceController
                 = new LockScreenNotificationPreferenceController(activity);
     }
@@ -400,7 +400,9 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mManageDeviceAdminPreferenceController.updateState(
                 root.findPreference(KEY_MANAGE_DEVICE_ADMIN));
         mEnterprisePrivacyPreferenceController.displayPreference(root);
-        mEnterprisePrivacyPreferenceController.onResume();
+        final Preference enterprisePrivacyPreference = root.findPreference(
+                mEnterprisePrivacyPreferenceController.getPreferenceKey());
+        mEnterprisePrivacyPreferenceController.updateState(enterprisePrivacyPreference);
 
         return root;
     }
@@ -893,7 +895,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 keys.add(KEY_MANAGE_TRUST_AGENTS);
             }
 
-            if (!(new EnterprisePrivacyPreferenceController(context, null /* lifecycle */))
+            if (!(new EnterprisePrivacyPreferenceController(context))
                     .isAvailable()) {
                 keys.add(KEY_ENTERPRISE_PRIVACY);
             }

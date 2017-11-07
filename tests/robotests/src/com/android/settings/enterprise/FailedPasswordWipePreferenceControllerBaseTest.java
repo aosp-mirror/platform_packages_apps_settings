@@ -16,8 +16,8 @@
 
 package com.android.settings.enterprise;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
@@ -50,8 +50,7 @@ public final class FailedPasswordWipePreferenceControllerBaseTest extends
     private class FailedPasswordWipePreferenceControllerBaseTestable extends
             FailedPasswordWipePreferenceControllerBase {
         FailedPasswordWipePreferenceControllerBaseTestable() {
-            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext,
-                    null /* lifecycle */);
+            super(FailedPasswordWipePreferenceControllerBaseTest.this.mContext);
         }
 
         @Override

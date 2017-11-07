@@ -16,15 +16,16 @@
 
 package com.android.settings.enterprise;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
-import com.android.settings.R;
+import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,10 +34,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link ImePreferenceController}.
@@ -52,7 +49,6 @@ public final class ImePreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private ImePreferenceController mController;
 
@@ -61,15 +57,9 @@ public final class ImePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new ImePreferenceController(mContext, null /* lifecycle */);
+        mController = new ImePreferenceController(mContext);
         when(mContext.getResources().getString(R.string.enterprise_privacy_input_method_name,
                 DEFAULT_IME_LABEL)).thenReturn(DEFAULT_IME_TEXT);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
     }
 
     @Test
@@ -77,7 +67,7 @@ public final class ImePreferenceControllerTest {
         final Preference preference = new Preference(mContext, null, 0, 0);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
-            .thenReturn(DEFAULT_IME_LABEL);
+                .thenReturn(DEFAULT_IME_LABEL);
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo(DEFAULT_IME_TEXT);
     }
@@ -85,14 +75,12 @@ public final class ImePreferenceControllerTest {
     @Test
     public void testIsAvailable() {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
-            .thenReturn(null);
+                .thenReturn(null);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_INPUT_METHOD, false);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.getImeLabelIfOwnerSet())
-            .thenReturn(DEFAULT_IME_LABEL);
+                .thenReturn(DEFAULT_IME_LABEL);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_INPUT_METHOD, true);
     }
 
     @Test

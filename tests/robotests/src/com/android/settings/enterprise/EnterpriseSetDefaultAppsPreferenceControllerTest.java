@@ -17,7 +17,6 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.argThat;
@@ -29,16 +28,14 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.applications.UserAppInfo;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,8 +48,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.mockito.Mockito.verify;
 /**
  * Tests for {@link EnterpriseSetDefaultAppsPreferenceController}.
  */
@@ -65,9 +60,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private UserManager mUm;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private EnterpriseSetDefaultAppsPreferenceController mController;
 
@@ -76,14 +69,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new EnterpriseSetDefaultAppsPreferenceController(mContext,
-                null /* lifecycle */);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
+        mController = new EnterpriseSetDefaultAppsPreferenceController(mContext);
     }
 
     private void setEnterpriseSetDefaultApps(Intent[] intents, int number) {
@@ -130,12 +116,10 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
         when(mFeatureFactory.applicationFeatureProvider.findPersistentPreferredActivities(anyInt(),
                 any(Intent[].class))).thenReturn(new ArrayList<>());
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_DEFAULT_APPS, false);
 
         setEnterpriseSetDefaultApps(EnterpriseDefaultApps.BROWSER.getIntents(), 1);
         configureUsers(1);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_DEFAULT_APPS, true);
     }
 
     @Test

@@ -17,9 +17,7 @@
 package com.android.settings.enterprise;
 
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.when;
 
@@ -30,10 +28,10 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
@@ -86,7 +84,8 @@ public class ApplicationListFragmentTest {
 
     @Test
     public void getPreferenceControllers() {
-        final List<AbstractPreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
+        final List<AbstractPreferenceController> controllers = mFragment.getPreferenceControllers(
+                mContext);
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(1);
         int position = 0;
@@ -94,7 +93,8 @@ public class ApplicationListFragmentTest {
                 ApplicationListPreferenceController.class);
     }
 
-    @Test public void getCategories() {
+    @Test
+    public void getCategories() {
         assertThat(new ApplicationListFragment.AdminGrantedPermissionCamera().getMetricsCategory())
                 .isEqualTo(MetricsEvent.ENTERPRISE_PRIVACY_PERMISSIONS);
         assertThat(new ApplicationListFragment.AdminGrantedPermissionLocation().

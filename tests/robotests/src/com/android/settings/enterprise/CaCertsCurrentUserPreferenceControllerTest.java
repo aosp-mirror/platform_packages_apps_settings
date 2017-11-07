@@ -73,7 +73,7 @@ public final class CaCertsCurrentUserPreferenceControllerTest extends
 
     @Override
     CaCertsPreferenceControllerBase createController() {
-        return new CaCertsCurrentUserPreferenceController(mContext, null /* lifecycle */);
+        return new CaCertsCurrentUserPreferenceController(mContext);
     }
 
     private void assertUpdateState(boolean isCompMode, String expectedTitle) {

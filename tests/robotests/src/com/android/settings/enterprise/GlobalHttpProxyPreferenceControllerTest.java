@@ -16,13 +16,15 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceAvailabilityObserver;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,10 +33,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link GlobalHttpProxyPreferenceController}.
@@ -48,7 +46,6 @@ public final class GlobalHttpProxyPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-    @Mock private PreferenceAvailabilityObserver mObserver;
 
     private GlobalHttpProxyPreferenceController mController;
 
@@ -57,13 +54,7 @@ public final class GlobalHttpProxyPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
-        mController = new GlobalHttpProxyPreferenceController(mContext, null /* lifecycle */);
-        mController.setAvailabilityObserver(mObserver);
-    }
-
-    @Test
-    public void testGetAvailabilityObserver() {
-        assertThat(mController.getAvailabilityObserver()).isEqualTo(mObserver);
+        mController = new GlobalHttpProxyPreferenceController(mContext);
     }
 
     @Test
@@ -71,12 +62,10 @@ public final class GlobalHttpProxyPreferenceControllerTest {
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
                 .thenReturn(false);
         assertThat(mController.isAvailable()).isFalse();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_GLOBAL_HTTP_PROXY, false);
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isGlobalHttpProxySet())
                 .thenReturn(true);
         assertThat(mController.isAvailable()).isTrue();
-        verify(mObserver).onPreferenceAvailabilityUpdated(KEY_GLOBAL_HTTP_PROXY, true);
     }
 
     @Test

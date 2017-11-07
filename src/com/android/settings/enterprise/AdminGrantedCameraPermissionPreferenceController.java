@@ -17,18 +17,14 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.content.Context;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 public class AdminGrantedCameraPermissionPreferenceController extends
         AdminGrantedPermissionsPreferenceControllerBase {
 
     private static final String KEY_ENTERPRISE_PRIVACY_NUMBER_CAMERA_ACCESS_PACKAGES
             = "enterprise_privacy_number_camera_access_packages";
 
-    public AdminGrantedCameraPermissionPreferenceController(Context context, Lifecycle lifecycle,
-            boolean async) {
-        super(context, lifecycle, async, new String[] {Manifest.permission.CAMERA},
-                Manifest.permission_group.CAMERA);
+    public AdminGrantedCameraPermissionPreferenceController(Context context, boolean async) {
+        super(context, async, new String[] {Manifest.permission.CAMERA});
     }
 
     @Override

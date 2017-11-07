@@ -50,7 +50,7 @@ public class CaCertsPreferenceControllerBaseTest extends CaCertsPreferenceContro
             CaCertsPreferenceControllerBase {
 
         public CaCertsPreferenceControllerBaseTestable(Context context) {
-            super(context, null);
+            super(context);
         }
 
         @Override

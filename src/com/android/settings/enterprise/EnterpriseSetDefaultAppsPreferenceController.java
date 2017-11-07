@@ -21,20 +21,20 @@ import android.support.v7.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.EnterpriseDefaultApps;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.users.UserFeatureProvider;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public class EnterpriseSetDefaultAppsPreferenceController
-        extends DynamicAvailabilityPreferenceController {
+        extends AbstractPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";
     private final ApplicationFeatureProvider mApplicationFeatureProvider;
     private final UserFeatureProvider mUserFeatureProvider;
 
-    public EnterpriseSetDefaultAppsPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public EnterpriseSetDefaultAppsPreferenceController(Context context) {
+        super(context);
         final FeatureFactory factory = FeatureFactory.getFactory(context);
         mApplicationFeatureProvider = factory.getApplicationFeatureProvider(context);
         mUserFeatureProvider = factory.getUserFeatureProvider(context);
@@ -49,9 +49,7 @@ public class EnterpriseSetDefaultAppsPreferenceController
 
     @Override
     public boolean isAvailable() {
-        final boolean available = getNumberOfEnterpriseSetDefaultApps() > 0;
-        notifyOnAvailabilityUpdate(available);
-        return available;
+        return getNumberOfEnterpriseSetDefaultApps() > 0;
     }
 
     @Override

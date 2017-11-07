@@ -45,6 +45,6 @@ public final class CaCertsManagedProfilePreferenceControllerTest extends
 
     @Override
     CaCertsPreferenceControllerBase createController() {
-        return new CaCertsManagedProfilePreferenceController(mContext, null /* lifecycle */);
+        return new CaCertsManagedProfilePreferenceController(mContext);
     }
 }

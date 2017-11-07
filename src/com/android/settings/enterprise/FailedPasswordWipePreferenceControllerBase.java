@@ -15,21 +15,20 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public abstract class FailedPasswordWipePreferenceControllerBase
-        extends DynamicAvailabilityPreferenceController {
+        extends AbstractPreferenceController implements PreferenceControllerMixin {
 
     protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public FailedPasswordWipePreferenceControllerBase(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public FailedPasswordWipePreferenceControllerBase(Context context) {
+        super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -46,8 +45,6 @@ public abstract class FailedPasswordWipePreferenceControllerBase
 
     @Override
     public boolean isAvailable() {
-        final boolean available = getMaximumFailedPasswordsBeforeWipe() > 0;
-        notifyOnAvailabilityUpdate(available);
-        return available;
+        return getMaximumFailedPasswordsBeforeWipe() > 0;
     }
 }
