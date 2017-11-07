@@ -504,6 +504,26 @@ public final class Utils extends com.android.settingslib.Utils {
                 metricsCategory);
     }
 
+
+    /**
+     * Start a new instance of the activity, showing only the given fragment.
+     * When launched in this mode, the given preference fragment will be instantiated and fill the
+     * entire activity.
+     *
+     * @param context The context.
+     * @param fragmentName The name of the fragment to display.
+     * @param titleResId resource id for the String to display for the title of this set
+     *                   of preferences.
+     * @param metricsCategory The current metricsCategory for logging source when fragment starts
+     * @param intentFlags flag that should be added to the intent.
+     */
+    public static void startWithFragment(Context context, String fragmentName, int titleResId,
+            int metricsCategory, int intentFlags) {
+        startWithFragment(context, fragmentName, null, null, 0,
+                null /* titleResPackageName */, titleResId, null, false /* not a shortcut */,
+                metricsCategory, intentFlags);
+    }
+
     /**
      * Start a new instance of the activity, showing only the given fragment.
      * When launched in this mode, the given preference fragment will be instantiated and fill the
@@ -544,8 +564,17 @@ public final class Utils extends com.android.settingslib.Utils {
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
             CharSequence title, boolean isShortcut, int metricsCategory) {
+        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
+                titleResPackageName, titleResId, title, isShortcut, metricsCategory, 0);
+    }
+
+
+    public static void startWithFragment(Context context, String fragmentName, Bundle args,
+            Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
+            CharSequence title, boolean isShortcut, int metricsCategory, int flags) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
                 titleResId, title, isShortcut, metricsCategory);
+        intent.addFlags(flags);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
