@@ -26,46 +26,40 @@
         android:padding="24dp">
 
         <TextView
+            style="@style/device_info_dialog_label"
             android:id="@+id/model_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondary"
             android:text="@string/model_info" />
         <TextView
+            style="@style/device_info_dialog_value"
             android:id="@+id/model_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="24dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Body2" />
+            android:layout_height="wrap_content" />
 
         <TextView
+            style="@style/device_info_dialog_label"
             android:id="@+id/serial_number_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondary"
             android:text="@string/status_serial_number" />
         <TextView
+            style="@style/device_info_dialog_value"
             android:id="@+id/serial_number_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="24dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Body2" />
+            android:layout_height="wrap_content" />
 
         <TextView
+            style="@style/device_info_dialog_label"
             android:id="@+id/hardware_rev_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Body1"
-            android:textColor="?android:attr/textColorSecondary"
             android:text="@string/hardware_revision" />
         <TextView
+            style="@style/device_info_dialog_value"
             android:id="@+id/hardware_rev_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="24dp"
-            android:textAppearance="@android:style/TextAppearance.Material.Body2" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>
