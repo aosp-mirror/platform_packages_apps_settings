@@ -90,8 +90,8 @@ public class UniquePreferenceTest {
         final Set<String> uniqueKeys = new HashSet<>();
         final Set<String> nullKeyClasses = new HashSet<>();
         final Set<String> duplicatedKeys = new HashSet<>();
-        for (SearchIndexableResource sir : SearchIndexableResources.values()) {
-            verifyPreferenceIdInXml(uniqueKeys, duplicatedKeys, nullKeyClasses, sir);
+        for (Class<?> clazz : SearchIndexableResources.providerValues()) {
+            verifyPreferenceIdInXml(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
         }
 
         if (!nullKeyClasses.isEmpty()) {
@@ -115,22 +115,24 @@ public class UniquePreferenceTest {
     }
 
     private void verifyPreferenceIdInXml(Set<String> uniqueKeys, Set<String> duplicatedKeys,
-            Set<String> nullKeyClasses, SearchIndexableResource page)
+            Set<String> nullKeyClasses, Class<?> clazz)
             throws IOException, XmlPullParserException, Resources.NotFoundException {
-        final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(page.className);
-
+        if (clazz == null) {
+            return;
+        }
+        final String className = clazz.getName();
         final Indexable.SearchIndexProvider provider =
                 DatabaseIndexingUtils.getSearchIndexProvider(clazz);
         final List<SearchIndexableResource> resourcesToIndex =
                 provider.getXmlResourcesToIndex(mContext, true);
         if (resourcesToIndex == null) {
-            Log.d(TAG, page.className + "is not providing SearchIndexableResource, skipping");
+            Log.d(TAG, className + "is not providing SearchIndexableResource, skipping");
             return;
         }
 
         for (SearchIndexableResource sir : resourcesToIndex) {
             if (sir.xmlResId <= 0) {
-                Log.d(TAG, page.className + " doesn't have a valid xml to index.");
+                Log.d(TAG, className + " doesn't have a valid xml to index.");
                 continue;
             }
             final XmlResourceParser parser = mContext.getResources().getXml(sir.xmlResId);
@@ -154,14 +156,14 @@ public class UniquePreferenceTest {
                 final String key = XmlParserUtils.getDataKey(mContext, attrs);
                 if (TextUtils.isEmpty(key)) {
                     Log.e(TAG, "Every preference must have an key; found null key"
-                            + " in " + page.className
+                            + " in " + className
                             + " at " + parser.getPositionDescription());
-                    nullKeyClasses.add(page.className);
+                    nullKeyClasses.add(className);
                     continue;
                 }
                 if (uniqueKeys.contains(key) && !WHITELISTED_DUPLICATE_KEYS.contains(key)) {
                     Log.e(TAG, "Every preference key must unique; found " + nodeName
-                            + " in " + page.className
+                            + " in " + className
                             + " at " + parser.getPositionDescription());
                     duplicatedKeys.add(key);
                 }

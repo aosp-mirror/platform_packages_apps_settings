@@ -17,12 +17,13 @@
 package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
-import static com.android.settings.search.SearchIndexableResources.NO_RES_ID;
 import static com.google.common.truth.Truth.assertThat;
+
+import static junit.framework.Assert.fail;
+
 import static org.mockito.Mockito.spy;
 
 import android.database.Cursor;
-import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
 import com.android.settings.TestConfig;
@@ -35,60 +36,48 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
-    Map<String, SearchIndexableResource> sResMapCopy;
+    Set<Class> sProviderClassCopy;
 
     @Before
     public void setUp() {
-        sResMapCopy = new HashMap<>(SearchIndexableResources.sResMap);
+        sProviderClassCopy = new HashSet<>(SearchIndexableResources.sProviders);
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.sResMap.clear();
-        for (String key : sResMapCopy.keySet()) {
-            SearchIndexableResources.sResMap.put(key, sResMapCopy.get(key));
-        }
+        SearchIndexableResources.sProviders.clear();
+        SearchIndexableResources.sProviders.addAll(sProviderClassCopy);
     }
 
     @Test
     public void testAddIndex() {
+        final Class stringClass = java.lang.String.class;
         // Confirms that String.class isn't contained in SearchIndexableResources.
-        assertThat(SearchIndexableResources.getResourceByName("java.lang.String")).isNull();
-        final int beforeCount = SearchIndexableResources.values().size();
+        assertThat(SearchIndexableResources.sProviders).doesNotContain(stringClass);
+        final int beforeCount = SearchIndexableResources.providerValues().size();
 
         SearchIndexableResources.addIndex(java.lang.String.class);
-        final SearchIndexableResource index = SearchIndexableResources
-                .getResourceByName("java.lang.String");
 
-        assertThat(index).isNotNull();
-        assertThat(index.className).isEqualTo("java.lang.String");
-        assertThat(index.xmlResId).isEqualTo(NO_RES_ID);
-        assertThat(index.iconResId).isEqualTo(NO_RES_ID);
-        final int afterCount = SearchIndexableResources.values().size();
+        assertThat(SearchIndexableResources.sProviders).contains(stringClass);
+        final int afterCount = SearchIndexableResources.providerValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
     }
 
     @Test
     public void testIndexHasWifiSettings() {
-        final SearchIndexableResource index = SearchIndexableResources
-                .getResourceByName(WifiSettings.class.getName());
-
-        assertThat(index).isNotNull();
-        assertThat(index.className).isEqualTo(WifiSettings.class.getName());
-        assertThat(index.xmlResId).isEqualTo(NO_RES_ID);
-        assertThat(index.iconResId).isEqualTo(NO_RES_ID);
+        assertThat(sProviderClassCopy).contains(WifiSettings.class);
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
-        SearchIndexableResources.sResMap.clear();
+        SearchIndexableResources.sProviders.clear();
         SearchIndexableResources.addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
@@ -104,5 +93,14 @@ public class SearchIndexableResourcesTest {
         }
 
         assertThat(hasTestKey).isTrue();
+    }
+
+    @Test
+    public void testAllClassNamesHaveProviders() {
+        for (Class clazz: sProviderClassCopy) {
+            if(DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
+                fail(clazz.getName() + "is not an index provider");
+            }
+        }
     }
 }
