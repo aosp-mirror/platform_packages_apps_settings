@@ -29,6 +29,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -89,6 +90,10 @@ public class SelectUsbConfigPreferenceController extends
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Utils.isMonkeyRunning()) {
+            return false;
+        }
+
         writeUsbConfigurationOption(newValue.toString());
         updateUsbConfigurationValues();
         return true;
@@ -138,5 +143,4 @@ public class SelectUsbConfigPreferenceController extends
             setCurrentFunction(newValue, true);
         }
     }
-
 }
