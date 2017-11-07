@@ -54,7 +54,6 @@ import android.widget.SimpleAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.OwnerInfoSettings;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;

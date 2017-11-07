@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2017 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<RadioGroup
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dip">
+
+    <RadioButton
+        android:id="@+id/private_dns_mode_off"
+        android:text="@string/private_dns_mode_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip"
+        />
+
+    <RadioButton
+        android:id="@+id/private_dns_mode_opportunistic"
+        android:text="@string/private_dns_mode_opportunistic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip"
+        />
+
+    <RadioButton
+        android:id="@+id/private_dns_mode_provider"
+        android:text="@string/private_dns_mode_provider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dip"
+        />
+
+    <EditText
+        android:id="@+id/private_dns_mode_provider_hostname"
+        android:hint="@string/private_dns_mode_provider_hostname_hint"
+        style="@android:style/Widget.CompoundButton.RadioButton"
+        android:imeOptions="actionDone"
+        android:inputType="textFilter|textUri"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dip"
+        android:layout_marginEnd="8dip"
+        />
+
+</RadioGroup>

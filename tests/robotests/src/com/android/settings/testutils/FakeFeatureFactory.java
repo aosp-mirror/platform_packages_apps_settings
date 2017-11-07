@@ -15,6 +15,10 @@
  */
 package com.android.settings.testutils;
 
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 
 import com.android.settings.applications.ApplicationFeatureProvider;
@@ -30,14 +34,12 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
-import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.mockito.Answers;
 
 /**
  * Test util to provide fake FeatureFactory. To use this factory, call {@code setupForTest} in
@@ -67,6 +69,7 @@ public class FakeFeatureFactory extends FeatureFactory {
      *
      * @param context The context must be a deep mock.
      */
+    @Deprecated
     public static FakeFeatureFactory setupForTest(Context context) {
         sFactory = null;
         when(context.getString(com.android.settings.R.string.config_featureFactory))
@@ -78,6 +81,14 @@ public class FakeFeatureFactory extends FeatureFactory {
             // Ignore.
         }
         return (FakeFeatureFactory) FakeFeatureFactory.getFactory(context);
+    }
+
+    /**
+     * Call this in {@code @Before} method of the test class to use fake factory.
+     */
+    public static FakeFeatureFactory setupForTest() {
+        final Context context = mock(Context.class, Answers.RETURNS_DEEP_STUBS);
+        return setupForTest(context);
     }
 
     /**

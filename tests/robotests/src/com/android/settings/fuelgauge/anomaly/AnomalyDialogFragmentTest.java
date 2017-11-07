@@ -27,12 +27,15 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.permission.RuntimePermissionPresenter;
 import android.os.Build;
 
 import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.shadow.ShadowRuntimePermissionPresenter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +49,8 @@ import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = ShadowRuntimePermissionPresenter.class)
 public class AnomalyDialogFragmentTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String DISPLAY_NAME = "app";
@@ -56,6 +60,8 @@ public class AnomalyDialogFragmentTest {
     private AnomalyUtils mAnomalyUtils;
     @Mock
     private AnomalyAction mAnomalyAction;
+    @Mock
+    private RuntimePermissionPresenter mRuntimePermissionPresenter;
     private Anomaly mWakeLockAnomaly;
     private Anomaly mWakeupAlarmAnomaly;
     private Anomaly mWakeupAlarmAnomaly2;
@@ -67,7 +73,7 @@ public class AnomalyDialogFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mWakeLockAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.WAKE_LOCK)
                 .setUid(UID)
@@ -93,6 +99,8 @@ public class AnomalyDialogFragmentTest {
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
                 .build();
+        FakeFeatureFactory.setupForTest(mContext);
+        ShadowRuntimePermissionPresenter.setRuntimePermissionPresenter(mRuntimePermissionPresenter);
     }
 
     @Test

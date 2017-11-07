@@ -76,6 +76,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.EncryptionAndCredential;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
+import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
@@ -138,6 +139,7 @@ public final class SearchIndexableResources {
         addIndex(LocationSettings.class);
         addIndex(ScanningSettings.class);
         addIndex(SecuritySettings.class);
+        addIndex(ScreenLockSettings.class);
         addIndex(EncryptionAndCredential.class);
         addIndex(ScreenPinningSettings.class);
         addIndex(UserAndAccountDashboardFragment.class);
