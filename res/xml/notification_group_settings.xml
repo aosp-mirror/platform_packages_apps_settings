@@ -17,11 +17,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
 
-    <!-- Show badge -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="badge"
-        android:title="@string/notification_badge_title"
-        settings:useAdditionalSummary="true"
-        settings:restrictedSwitchSummary="@string/enabled_by_admin" />
+    <com.android.settings.applications.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header" />
 
+    <com.android.settings.applications.LayoutPreference
+        android:key="block"
+        android:layout="@layout/styled_switch_bar" />
+
+    <!-- Channels added here -->
+
+    <Preference
+        android:key="app_link"
+        android:title="@string/app_settings_link"
+        settings:allowDividerAbove="true"/>
+
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="desc" />
+
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="block_desc" />
 </PreferenceScreen>

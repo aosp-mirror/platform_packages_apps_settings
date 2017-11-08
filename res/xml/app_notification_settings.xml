@@ -15,7 +15,15 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings" >
+        xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header" />
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="block"
+        android:layout="@layout/styled_switch_bar" />
 
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference
@@ -24,22 +32,24 @@
         settings:useAdditionalSummary="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
 
-    <!-- Importance toggle -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="allow_sound"
-        android:title="@string/allow_interruption"
-	android:summary="@string/allow_interruption_summary"/>
+    <!-- Channels/Channel groups added here -->
 
-    <!-- Visibility Override -->
-    <com.android.settings.notification.RestrictedDropDownPreference
-        android:key="visibility_override"
-        android:title="@string/app_notification_visibility_override_title" />
+    <Preference
+        android:key="app_link"
+        android:title="@string/app_settings_link"
+        android:order="500"
+        settings:allowDividerAbove="true"/>
 
-    <!-- Bypass DND -->
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="bypass_dnd"
-        android:title="@string/app_notification_override_dnd_title"
-        android:summary="@string/app_notification_override_dnd_summary"
-        settings:useAdditionalSummary="true" />
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="block_desc"
+        android:order="1000" />
+
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="desc"
+        android:order="5000" />
+
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="deleted"
+        android:order="8000" />
 
 </PreferenceScreen>
