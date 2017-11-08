@@ -42,7 +42,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class
         })
@@ -67,6 +67,8 @@ public class WallpaperSuggestionActivityTest {
         final Intent intent = activity.getNextStartedActivity();
 
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
+        assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        assertThat(activity.isFinishing()).isTrue();
     }
 
     @Test
