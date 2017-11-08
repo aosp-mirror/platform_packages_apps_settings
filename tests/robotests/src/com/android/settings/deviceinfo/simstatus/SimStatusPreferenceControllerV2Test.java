@@ -16,13 +16,16 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static com.google.common.truth.Truth.assertThat;
-
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -31,11 +34,13 @@ import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -48,6 +53,8 @@ public class SimStatusPreferenceControllerV2Test {
 
     @Mock
     private Preference mPreference;
+    @Mock
+    private Preference mSecondSimPreference;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -65,25 +72,60 @@ public class SimStatusPreferenceControllerV2Test {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mController = new SimStatusPreferenceControllerV2(mContext, mFragment);
+        mController = spy(new SimStatusPreferenceControllerV2(mContext, mFragment));
+        doReturn(true).when(mController).isAvailable();
+        when(mScreen.getContext()).thenReturn(mContext);
+        doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        final String prefKey = mController.getPreferenceKey();
+        when(mPreference.getKey()).thenReturn(prefKey);
+        when(mPreference.isVisible()).thenReturn(true);
     }
 
     @Test
-    public void getPreferenceTitle_noMultiSim_shouldReturnSingleSimString() {
-        ReflectionHelpers.setField(mController, "mIsMultiSim", false);
+    public void displayPreference_multiSim_shouldAddSecondPreference() {
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
 
-        assertThat(mController.getPreferenceTitle()).isEqualTo(mContext.getResources().getString(
-                R.string.sim_status_title));
+        mController.displayPreference(mScreen);
+
+        verify(mScreen).addPreference(mSecondSimPreference);
     }
 
     @Test
-    public void getPreferenceTitle_multiSim_shouldReturnMultiSimString() {
-        ReflectionHelpers.setField(mController, "mIsMultiSim", true);
+    public void updateState_singleSim_shouldSetSingleSimTitleAndSummary() {
+        when(mTelephonyManager.getPhoneCount()).thenReturn(1);
+        mController.displayPreference(mScreen);
 
-        assertThat(mController.getPreferenceTitle()).isEqualTo(mContext.getResources().getString(
-                R.string.sim_status_title_sim_slot_1));
+        mController.updateState(mPreference);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.sim_status_title));
+        verify(mPreference).setSummary(anyString());
+    }
+
+    @Test
+    public void updateState_multiSim_shouldSetMultiSimTitleAndSummary() {
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        mController.displayPreference(mScreen);
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setTitle(
+                mContext.getString(R.string.sim_status_title_sim_slot, 1 /* sim slot */));
+        verify(mSecondSimPreference).setTitle(
+                mContext.getString(R.string.sim_status_title_sim_slot, 2 /* sim slot */));
+        verify(mPreference).setSummary(anyString());
+        verify(mSecondSimPreference).setSummary(anyString());
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_shouldStartDialogFragment() {
+        when(mFragment.getChildFragmentManager()).thenReturn(
+                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        mController.displayPreference(mScreen);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mFragment).getChildFragmentManager();
     }
 }
