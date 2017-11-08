@@ -47,9 +47,8 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 
-    private static final String TIME_DESCRIPTION = "1 day 20 hours 30 minutes";
     private static final String PACKAGE_NAME = "com.android.app";
-    private Context mContext;
+
     @Mock
     private WifiManager wifiManager;
     @Mock
@@ -60,6 +59,7 @@ public class UtilsTest {
     private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private UserManager mUserManager;
+    private Context mContext;
 
     @Before
     public void setUp() {
@@ -97,12 +97,6 @@ public class UtilsTest {
         when(wifiManager.getCurrentNetwork()).thenReturn(null);
 
         assertThat(Utils.getWifiIpAddresses(mContext)).isNull();
-    }
-
-    @Test
-    public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
-        // Should not crash here
-        assertThat(Utils.assignDefaultPhoto(null, 0)).isFalse();
     }
 
     @Test

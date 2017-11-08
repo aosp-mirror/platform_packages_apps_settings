@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -37,6 +38,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.widget.AppPreference;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
@@ -175,7 +177,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
             String key = entry.info.packageName + "|" + entry.info.uid;
             DomainAppPreference preference = (DomainAppPreference) getCachedPreference(key);
             if (preference == null) {
-                preference = new DomainAppPreference(getPrefContext(), entry);
+                preference = new DomainAppPreference(getPrefContext(), mApplicationsState, entry);
                 preference.setKey(key);
                 preference.setOnPreferenceClickListener(this);
                 group.addPreference(preference);
@@ -225,12 +227,16 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
         return false;
     }
 
-    private class DomainAppPreference extends Preference {
+    @VisibleForTesting
+    static class DomainAppPreference extends AppPreference {
         private final AppEntry mEntry;
         private final PackageManager mPm;
+        private final ApplicationsState mApplicationsState;
 
-        public DomainAppPreference(final Context context, AppEntry entry) {
+        public DomainAppPreference(final Context context, ApplicationsState applicationsState,
+                AppEntry entry) {
             super(context);
+            mApplicationsState = applicationsState;
             mPm = context.getPackageManager();
             mEntry = entry;
             mEntry.ensureLabel(getContext());
