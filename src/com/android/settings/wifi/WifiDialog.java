@@ -119,8 +119,7 @@ public class WifiDialog extends AlertDialog implements WifiConfigUiBase, DialogI
                     mListener.onSubmit(this);
                     break;
                 case BUTTON_FORGET:
-                    if (WifiSettings.isEditabilityLockedDown(
-                            getContext(), mAccessPoint.getConfig())) {
+                    if (WifiUtils.isNetworkLockedDown(getContext(), mAccessPoint.getConfig())) {
                         RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
                                 RestrictedLockUtils.getDeviceOwner(getContext()));
                         return;

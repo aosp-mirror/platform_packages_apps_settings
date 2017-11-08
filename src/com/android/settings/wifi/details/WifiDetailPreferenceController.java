@@ -19,8 +19,6 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
-import static com.android.settings.wifi.WifiSettings.isEditabilityLockedDown;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -62,6 +60,7 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wifi.WifiDialog.WifiDialogListener;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -280,8 +279,8 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
         mButtonsPref = ((ActionButtonPreference) screen.findPreference(KEY_BUTTONS_PREF))
                 .setButton1Text(R.string.forget)
                 .setButton1Positive(false)
-                .setButton2Text(R.string.support_sign_in_button_text)
                 .setButton1OnClickListener(view -> forgetNetwork())
+                .setButton2Text(R.string.support_sign_in_button_text)
                 .setButton2Positive(true)
                 .setButton2OnClickListener(view -> signIntoNetwork());
 
@@ -498,9 +497,14 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
      * Returns whether the network represented by this preference can be forgotten.
      */
     private boolean canForgetNetwork() {
-        // TODO(65396674): create test for the locked down scenario
-        return (mWifiInfo != null && mWifiInfo.isEphemeral())
-                || (mWifiConfig != null && !isEditabilityLockedDown(mContext, mWifiConfig));
+        return (mWifiInfo != null && mWifiInfo.isEphemeral()) || canModifyNetwork();
+    }
+
+    /**
+     * Returns whether the network represented by this preference can be modified.
+     */
+    public boolean canModifyNetwork() {
+        return mWifiConfig != null && !WifiUtils.isNetworkLockedDown(mContext, mWifiConfig);
     }
 
     /**
