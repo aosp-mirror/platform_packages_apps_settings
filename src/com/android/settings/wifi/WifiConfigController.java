@@ -1030,7 +1030,7 @@ public class WifiConfigController implements TextWatcher,
                 setUserCertInvisible();
                 setPasswordInvisible();
                 setIdentityInvisible();
-                if (mAccessPoint.isCarrierAp()) {
+                if (mAccessPoint != null && mAccessPoint.isCarrierAp()) {
                     setEapMethodInvisible();
                 }
                 break;
