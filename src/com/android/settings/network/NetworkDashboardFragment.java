@@ -48,8 +48,11 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         MobilePlanPreferenceHost {
 
     private static final String TAG = "NetworkDashboardFrag";
+    private static final int MENU_NETWORK_RESET = Menu.FIRST;
+    private static final int MENU_PRIVATE_DNS = Menu.FIRST + 1;
 
     private NetworkResetActionMenuController mNetworkResetController;
+    private PrivateDnsMenuController mPrivateDnsMenuController;
 
     @Override
     public int getMetricsCategory() {
@@ -69,7 +72,9 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mNetworkResetController = new NetworkResetActionMenuController(context);
+        mNetworkResetController = new NetworkResetActionMenuController(context, MENU_NETWORK_RESET);
+        mPrivateDnsMenuController = new PrivateDnsMenuController(getFragmentManager(),
+                MENU_PRIVATE_DNS);
     }
 
     @Override
@@ -81,6 +86,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         mNetworkResetController.buildMenuItem(menu);
+        mPrivateDnsMenuController.buildMenuItem(menu);
     }
 
     @Override
