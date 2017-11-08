@@ -16,13 +16,13 @@
 
 package com.android.settings.enterprise;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import static org.mockito.Mockito.when;
+
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link FailedPasswordWipeManagedProfilePreferenceController}.
@@ -32,8 +32,6 @@ import static org.mockito.Mockito.when;
 public final class FailedPasswordWipeManagedProfilePreferenceControllerTest extends
         FailedPasswordWipePreferenceControllerTestBase {
 
-    private int mMaximumFailedPasswordsBeforeWipe = 0;
-
     public FailedPasswordWipeManagedProfilePreferenceControllerTest() {
         super("failed_password_wipe_managed_profile");
     }
@@ -41,8 +39,7 @@ public final class FailedPasswordWipeManagedProfilePreferenceControllerTest exte
     @Override
     public void setUp() {
         super.setUp();
-        mController = new FailedPasswordWipeManagedProfilePreferenceController(mContext,
-                null /* lifecycle */);
+        mController = new FailedPasswordWipeManagedProfilePreferenceController(mContext);
     }
 
     @Override
