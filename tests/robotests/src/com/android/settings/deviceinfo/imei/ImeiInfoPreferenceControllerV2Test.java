@@ -16,13 +16,19 @@
 
 package com.android.settings.deviceinfo.imei;
 
-import static com.google.common.truth.Truth.assertThat;
+import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
+import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -36,6 +42,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -48,6 +55,8 @@ public class ImeiInfoPreferenceControllerV2Test {
 
     @Mock
     private Preference mPreference;
+    @Mock
+    private Preference mSecondSimPreference;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -65,41 +74,97 @@ public class ImeiInfoPreferenceControllerV2Test {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUserManager).when(mContext).getSystemService(UserManager.class);
-        mController = new ImeiInfoPreferenceControllerV2(mContext, mFragment);
+        mController = spy(new ImeiInfoPreferenceControllerV2(mContext, mFragment));
+        doReturn(true).when(mController).isAvailable();
+        when(mScreen.getContext()).thenReturn(mContext);
+        doReturn(mSecondSimPreference).when(mController).createNewPreference(mContext);
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        final String prefKey = mController.getPreferenceKey();
+        when(mPreference.getKey()).thenReturn(prefKey);
+        when(mPreference.isVisible()).thenReturn(true);
     }
 
     @Test
-    public void getTitleForCdmaPhone_noMultiSim_shouldReturnCdmaNoMultiSimString() {
-        ReflectionHelpers.setField(mController, "mIsMultiSim", false);
-
-        assertThat(mController.getTitleForCdmaPhone()).isEqualTo(mContext.getResources().getString(
-                R.string.status_meid_number));
-    }
-
-    @Test
-    public void getTitleForCdmaPhone_multiSim_shouldReturnCdmaMultiSimString() {
+    public void displayPreference_multiSimGsm_shouldAddSecondPreference() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
 
-        assertThat(mController.getTitleForCdmaPhone()).isEqualTo(mContext.getResources().getString(
-                R.string.meid_multi_sim_sim_slot_1));
+        mController.displayPreference(mScreen);
+
+        verify(mScreen).addPreference(mSecondSimPreference);
     }
 
     @Test
-    public void getTitleForGsmPhone_noMultiSim_shouldReturnGsmNoMultiSimString() {
+    public void displayPreference_singleSimCdmaPhone_shouldSetSingleSimCdmaTitleAndMeid() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", false);
+        final String meid = "125132215123";
+        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_CDMA);
+        doReturn(meid).when(mController).getMeid(anyInt());
 
-        assertThat(mController.getTitleForGsmPhone()).isEqualTo(mContext.getResources().getString(
-                R.string.status_imei));
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.status_meid_number));
+        verify(mPreference).setSummary(meid);
     }
 
     @Test
-    public void getTitleForGsmPhone_multiSim_shouldReturnGsmMultiSimString() {
+    public void displayPreference_multiSimCdmaPhone_shouldSetMultiSimCdmaTitleAndMeid() {
         ReflectionHelpers.setField(mController, "mIsMultiSim", true);
+        final String meid = "125132215123";
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_CDMA);
+        doReturn(meid).when(mController).getMeid(anyInt());
 
-        assertThat(mController.getTitleForGsmPhone()).isEqualTo(mContext.getResources().getString(
-                R.string.imei_multi_sim_slot_1));
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.meid_multi_sim, 1 /* sim slot */));
+        verify(mSecondSimPreference).setTitle(
+                mContext.getString(R.string.meid_multi_sim, 2 /* sim slot */));
+        verify(mPreference).setSummary(meid);
+        verify(mSecondSimPreference).setSummary(meid);
+    }
+
+    @Test
+    public void displayPreference_singleSimGsmPhone_shouldSetSingleSimGsmTitleAndImei() {
+        ReflectionHelpers.setField(mController, "mIsMultiSim", false);
+        final String imei = "125132215123";
+        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
+        when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
+
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.status_imei));
+        verify(mPreference).setSummary(imei);
+    }
+
+    @Test
+    public void displayPreference_multiSimGsmPhone_shouldSetMultiSimGsmTitleAndImei() {
+        ReflectionHelpers.setField(mController, "mIsMultiSim", true);
+        final String imei = "125132215123";
+        when(mTelephonyManager.getPhoneCount()).thenReturn(2);
+        when(mTelephonyManager.getPhoneType()).thenReturn(PHONE_TYPE_GSM);
+        when(mTelephonyManager.getImei(anyInt())).thenReturn(imei);
+
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setTitle(mContext.getString(R.string.imei_multi_sim, 1 /* sim slot */));
+        verify(mSecondSimPreference).setTitle(
+                mContext.getString(R.string.imei_multi_sim, 2 /* sim slot */));
+        verify(mPreference).setSummary(imei);
+        verify(mSecondSimPreference).setSummary(imei);
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_shouldStartDialogFragment() {
+        when(mFragment.getChildFragmentManager()).thenReturn(
+                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        when(mPreference.getTitle()).thenReturn("SomeTitle");
+        mController.displayPreference(mScreen);
+
+        mController.handlePreferenceTreeClick(mPreference);
+
+        verify(mFragment).getChildFragmentManager();
     }
 }
