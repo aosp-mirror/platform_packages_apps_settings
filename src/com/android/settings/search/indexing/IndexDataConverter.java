@@ -31,7 +31,6 @@ import android.util.Xml;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.search.DatabaseIndexingUtils;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.XmlParserUtils;
@@ -89,21 +88,8 @@ public class IndexDataConverter {
                 final SearchIndexableResource sir = (SearchIndexableResource) data;
                 final Set<String> resourceNonIndexableKeys =
                         getNonIndexableKeysForResource(nonIndexableKeys, sir.packageName);
-
-                if (sir.xmlResId == 0) {
-                    // Index from provider
-                    final Indexable.SearchIndexProvider provider = getSearchProvider(sir);
-                    if (provider == null) {
-                        continue;
-                    }
-                    indexData.addAll(convertIndexProvider(provider, sir, resourceNonIndexableKeys));
-
-                } else {
-                    final List<IndexData> resourceData = convertResource(sir,
-                            resourceNonIndexableKeys);
-                    indexData.addAll(resourceData);
-                }
-
+                final List<IndexData> resourceData = convertResource(sir, resourceNonIndexableKeys);
+                indexData.addAll(resourceData);
             }
         }
 
@@ -305,84 +291,10 @@ public class IndexDataConverter {
         return resourceIndexData;
     }
 
-    private List<IndexData> convertIndexProvider(Indexable.SearchIndexProvider provider,
-            SearchIndexableResource sir, Set<String> nonIndexableKeys) {
-        final List<IndexData> indexData = new ArrayList<>();
-
-        final String className = sir.className;
-        final String intentAction = sir.intentAction;
-        final String intentTargetPackage = sir.intentTargetPackage;
-
-        // TODO (b/65376542) Move provider conversion to PreIndexTime
-        // TODO (b/37741509) Providers don't use general non-indexable keys
-        nonIndexableKeys.addAll(provider.getNonIndexableKeys(mContext));
-
-        final List<SearchIndexableRaw> rawList = provider.getRawDataToIndex(mContext,
-                true /* enabled */);
-
-        if (rawList != null) {
-            for (SearchIndexableRaw raw : rawList) {
-                // The classname and intent information comes from the PreIndexData
-                // This will be more clear when provider conversion is done at PreIndex time.
-                raw.className = className;
-                raw.intentAction = intentAction;
-                raw.intentTargetPackage = intentTargetPackage;
-
-                IndexData.Builder builder = convertRaw(raw, nonIndexableKeys);
-                if (builder != null) {
-                    indexData.add(builder.build(mContext));
-                }
-            }
-        }
-
-        final List<SearchIndexableResource> resList =
-                provider.getXmlResourcesToIndex(mContext, true);
-
-        if (resList != null) {
-            for (SearchIndexableResource item : resList) {
-                item.className = TextUtils.isEmpty(item.className)
-                        ? className
-                        : item.className;
-                item.intentAction = TextUtils.isEmpty(item.intentAction)
-                        ? intentAction
-                        : item.intentAction;
-                item.intentTargetPackage = TextUtils.isEmpty(item.intentTargetPackage)
-                        ? intentTargetPackage
-                        : item.intentTargetPackage;
-
-                indexData.addAll(convertResource(item, nonIndexableKeys));
-            }
-        }
-
-        return indexData;
-    }
-
     private Set<String> getNonIndexableKeysForResource(Map<String, Set<String>> nonIndexableKeys,
             String packageName) {
         return nonIndexableKeys.containsKey(packageName)
                 ? nonIndexableKeys.get(packageName)
                 : new HashSet<>();
-    }
-
-    /**
-     * @return Return the {@link Indexable.SearchIndexProvider} corresponding to the
-     * class specified by the Class name specified by {@param sir}.
-     */
-    private Indexable.SearchIndexProvider getSearchProvider(SearchIndexableResource sir) {
-        if (TextUtils.isEmpty(sir.className)) {
-            Log.w(LOG_TAG, "Cannot index an empty Search Provider name!");
-            return null;
-        }
-
-        final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(sir.className);
-        if (clazz == null) {
-            Log.d(LOG_TAG, "SearchIndexableResource '" + sir.className +
-                    "' should implement the " + Indexable.class.getName() + " interface!");
-            return null;
-        }
-
-        // Will be non null only for a Local provider implementing a
-        // SEARCH_INDEX_DATA_PROVIDER field
-        return DatabaseIndexingUtils.getSearchIndexProvider(clazz);
     }
 }

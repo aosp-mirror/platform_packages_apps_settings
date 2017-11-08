@@ -266,55 +266,6 @@ public class IndexDataConverterTest {
         assertThat(row.iconResId).isGreaterThan(0);
     }
 
-    // Tests for the flow: IndexOneResource -> IndexFromProvider -> IndexFromResource ->
-    //                     UpdateOneRowWithFilteredData -> UpdateOneRow
-
-    @Test
-    public void testAddProviderWithResource_rowInserted() {
-        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        resource.className = FAKE_CLASS_NAME;
-        final PreIndexData preIndexData = new PreIndexData();
-        preIndexData.dataToUpdate.add(resource);
-
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
-
-        assertThat(indexData.size()).isEqualTo(NUM_FAKE_FRAGMENT_ENTRIES);
-        assertThat(findIndexDataForTitle(indexData, PAGE_TITLE)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, TITLE_ONE)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, TITLE_TWO)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, TITLE_THREE)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, TITLE_FOUR)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, TITLE_FIVE)).isNotNull();
-        assertThat(findIndexDataForTitle(indexData, FakeSettingsFragment.TITLE)).isNotNull();
-    }
-
-    @Test
-    public void testAddProviderWithRaw_rowInserted() {
-        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        resource.className = FAKE_CLASS_NAME;
-        final PreIndexData preIndexData = new PreIndexData();
-        preIndexData.dataToUpdate.add(resource);
-
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
-
-        final IndexData data = findIndexDataForTitle(indexData, FakeSettingsFragment.TITLE);
-        assertFakeFragment(data);
-    }
-
-    @Test
-    public void testAddProvider_disabledRows() {
-        // Note that in FakeSettingsFragment, preferences 1 and 3 are disabled.
-        final SearchIndexableResource resource = getFakeResource(0 /* xml */);
-        resource.className = FAKE_CLASS_NAME;
-
-        final PreIndexData preIndexData = new PreIndexData();
-        preIndexData.dataToUpdate.add(resource);
-
-        List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
-
-        assertThat(getEnabledResultCount(indexData)).isEqualTo(NUM_ENABLED_FAKE_FRAGMENT_ENTRIES);
-    }
-
     @Test
     public void testResource_sameTitleForSettingAndPage_titleNotInserted() {
         final SearchIndexableResource resource = getFakeResource(R.xml.about_legal);

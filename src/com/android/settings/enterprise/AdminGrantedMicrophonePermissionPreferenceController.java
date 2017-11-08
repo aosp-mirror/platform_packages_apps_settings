@@ -17,18 +17,14 @@ package com.android.settings.enterprise;
 import android.Manifest;
 import android.content.Context;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 public class AdminGrantedMicrophonePermissionPreferenceController extends
         AdminGrantedPermissionsPreferenceControllerBase {
 
     private static final String KEY_ENTERPRISE_PRIVACY_NUMBER_MICROPHONE_ACCESS_PACKAGES
             = "enterprise_privacy_number_microphone_access_packages";
 
-    public AdminGrantedMicrophonePermissionPreferenceController(Context context,
-            Lifecycle lifecycle, boolean async) {
-        super(context, lifecycle, async, new String[] {Manifest.permission.RECORD_AUDIO},
-                Manifest.permission_group.MICROPHONE);
+    public AdminGrantedMicrophonePermissionPreferenceController(Context context, boolean async) {
+        super(context, async, new String[] {Manifest.permission.RECORD_AUDIO});
     }
 
     @Override

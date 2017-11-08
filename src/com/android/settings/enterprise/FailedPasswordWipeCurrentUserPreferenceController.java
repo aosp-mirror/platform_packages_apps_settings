@@ -15,16 +15,14 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 public class FailedPasswordWipeCurrentUserPreferenceController
         extends FailedPasswordWipePreferenceControllerBase {
 
     private static final String KEY_FAILED_PASSWORD_WIPE_CURRENT_USER
             = "failed_password_wipe_current_user";
 
-    public FailedPasswordWipeCurrentUserPreferenceController(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public FailedPasswordWipeCurrentUserPreferenceController(Context context) {
+        super(context);
     }
 
     @Override

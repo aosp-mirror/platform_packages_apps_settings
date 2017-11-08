@@ -16,9 +16,7 @@
 
 package com.android.settings.search;
 
-import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
-import android.support.annotation.XmlRes;
 
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DeviceInfoSettings;
@@ -89,22 +87,17 @@ import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class SearchIndexableResources {
-    @XmlRes
-    public static final int NO_RES_ID = 0;
 
     @VisibleForTesting
-    static final HashMap<String, SearchIndexableResource> sResMap = new HashMap<>();
+    static final Set<Class> sProviders = new HashSet<>();
 
     @VisibleForTesting
-    static void addIndex(Class<?> indexClass) {
-        String className = indexClass.getName();
-        SearchIndexableResource resource = new SearchIndexableResource(
-                0 /* rank */, NO_RES_ID, className, NO_RES_ID);
-
-        sResMap.put(className, resource);
+    static void addIndex(Class indexClass) {
+        sProviders.add(indexClass);
     }
 
     static {
@@ -180,15 +173,5 @@ public final class SearchIndexableResources {
     private SearchIndexableResources() {
     }
 
-    public static int size() {
-        return sResMap.size();
-    }
-
-    public static SearchIndexableResource getResourceByName(String className) {
-        return sResMap.get(className);
-    }
-
-    public static Collection<SearchIndexableResource> values() {
-        return sResMap.values();
-    }
+    public static Collection<Class> providerValues() { return sProviders;}
 }

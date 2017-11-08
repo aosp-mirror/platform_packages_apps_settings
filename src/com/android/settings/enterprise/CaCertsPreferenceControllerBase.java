@@ -18,17 +18,17 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 public abstract class CaCertsPreferenceControllerBase
-        extends DynamicAvailabilityPreferenceController {
+        extends AbstractPreferenceController implements PreferenceControllerMixin {
 
     protected final EnterprisePrivacyFeatureProvider mFeatureProvider;
 
-    public CaCertsPreferenceControllerBase(Context context, Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public CaCertsPreferenceControllerBase(Context context) {
+        super(context);
         mFeatureProvider = FeatureFactory.getFactory(context)
                 .getEnterprisePrivacyFeatureProvider(context);
     }
@@ -42,9 +42,7 @@ public abstract class CaCertsPreferenceControllerBase
 
     @Override
     public boolean isAvailable() {
-        final boolean available = getNumberOfCaCerts() > 0;
-        notifyOnAvailabilityUpdate(available);
-        return available;
+        return getNumberOfCaCerts() > 0;
     }
 
     protected abstract int getNumberOfCaCerts();

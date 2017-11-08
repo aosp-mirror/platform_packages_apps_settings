@@ -782,7 +782,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                     continue;
                 }
                 LongPressAccessPointPreference preference =
-                        createLongPressActionPointPreference(accessPoint);
+                        createLongPressAccessPointPreference(accessPoint);
                 preference.setKey(key);
                 preference.setOrder(index);
                 if (mOpenSsid != null && mOpenSsid.equals(accessPoint.getSsidStr())
@@ -817,10 +817,17 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @NonNull
-    private LongPressAccessPointPreference createLongPressActionPointPreference(
+    private LongPressAccessPointPreference createLongPressAccessPointPreference(
             AccessPoint accessPoint) {
         return new LongPressAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
-                false, R.drawable.ic_wifi_signal_0, this);
+                false /* forSavedNetworks */, R.drawable.ic_wifi_signal_0, this);
+    }
+
+    @NonNull
+    private ConnectedAccessPointPreference createConnectedAccessPointPreference(
+            AccessPoint accessPoint) {
+        return new ConnectedAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
+                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */);
     }
 
     /**
@@ -859,7 +866,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         // Else same AP is connected, simply refresh the connected access point preference
         // (first and only access point in this category).
-        ((LongPressAccessPointPreference) mConnectedAccessPointPreferenceCategory.getPreference(0))
+        ((AccessPointPreference) mConnectedAccessPointPreferenceCategory.getPreference(0))
                 .refresh();
         return true;
     }
@@ -869,20 +876,19 @@ public class WifiSettings extends RestrictedSettingsFragment
      * {@link #mConnectedAccessPointPreferenceCategory}.
      */
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
-        final LongPressAccessPointPreference pref = getOrCreatePreference(connectedAp);
+        final ConnectedAccessPointPreference pref = createConnectedAccessPointPreference(
+                connectedAp);
 
         // Launch details page on click.
-        pref.setOnPreferenceClickListener(preference -> {
-            // Save the state of the current access point in the bundle so that we can restore it
-            // in the Wifi Network Details Fragment
+        pref.setOnGearClickListener(l -> {
             pref.getAccessPoint().saveWifiState(pref.getExtras());
 
             SettingsActivity activity = (SettingsActivity) WifiSettings.this.getActivity();
             activity.startPreferencePanel(this,
                     WifiNetworkDetailsFragment.class.getName(), pref.getExtras(),
                     R.string.wifi_details_title, null, null, 0);
-            return true;
         });
+
         pref.refresh();
 
         mConnectedAccessPointPreferenceCategory.addPreference(pref);
@@ -891,15 +897,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             mClickedConnect = false;
             scrollToPreference(mConnectedAccessPointPreferenceCategory);
         }
-    }
-
-    private LongPressAccessPointPreference getOrCreatePreference(AccessPoint ap) {
-        LongPressAccessPointPreference pref = (LongPressAccessPointPreference)
-                getCachedPreference(AccessPointPreference.generatePreferenceKey(ap));
-        if (pref == null) {
-            pref = createLongPressActionPointPreference(ap);
-        }
-        return pref;
     }
 
     /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */
@@ -1093,7 +1090,7 @@ public class WifiSettings extends RestrictedSettingsFragment
                 public void run() {
                     Object tag = accessPoint.getTag();
                     if (tag != null) {
-                        ((LongPressAccessPointPreference) tag).refresh();
+                        ((AccessPointPreference) tag).refresh();
                     }
                 }
             });
@@ -1102,7 +1099,7 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @Override
     public void onLevelChanged(AccessPoint accessPoint) {
-        ((LongPressAccessPointPreference) accessPoint.getTag()).onLevelChanged();
+        ((AccessPointPreference) accessPoint.getTag()).onLevelChanged();
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

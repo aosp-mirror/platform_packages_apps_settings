@@ -21,12 +21,11 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,45 +52,41 @@ public class EnterprisePrivacySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle(), true /* async */);
+        return buildPreferenceControllers(context, true /* async */);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle, boolean async) {
+            boolean async) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
-        final List<DynamicAvailabilityPreferenceController> exposureChangesCategoryControllers =
+        final List<AbstractPreferenceController> exposureChangesCategoryControllers =
                 new ArrayList<>();
         exposureChangesCategoryControllers.add(new EnterpriseInstalledPackagesPreferenceController(
-                context, lifecycle, async));
+                context, async));
         exposureChangesCategoryControllers.add(
-                new AdminGrantedLocationPermissionsPreferenceController(context, lifecycle, async));
+                new AdminGrantedLocationPermissionsPreferenceController(context, async));
         exposureChangesCategoryControllers.add(
-                new AdminGrantedMicrophonePermissionPreferenceController(context, lifecycle,
-                        async));
+                new AdminGrantedMicrophonePermissionPreferenceController(context, async));
         exposureChangesCategoryControllers.add(new AdminGrantedCameraPermissionPreferenceController(
-                context, lifecycle, async));
+                context, async));
         exposureChangesCategoryControllers.add(new EnterpriseSetDefaultAppsPreferenceController(
-                context, lifecycle));
+                context));
         exposureChangesCategoryControllers.add(new AlwaysOnVpnCurrentUserPreferenceController(
-                context, lifecycle));
+                context));
         exposureChangesCategoryControllers.add(new AlwaysOnVpnManagedProfilePreferenceController(
-                context, lifecycle));
-        exposureChangesCategoryControllers.add(new ImePreferenceController(context, lifecycle));
-        exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context,
-                lifecycle));
-        exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(
-                context, lifecycle));
+                context));
+        exposureChangesCategoryControllers.add(new ImePreferenceController(context));
+        exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context));
+        exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(context));
         exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
-                context, lifecycle));
+                context));
         controllers.addAll(exposureChangesCategoryControllers);
-        controllers.add(new ExposureChangesCategoryPreferenceController(context, lifecycle,
-                exposureChangesCategoryControllers, async));
-        controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(context, lifecycle));
-        controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context,
-                lifecycle));
+        controllers.add(new PreferenceCategoryController(context, "exposure_changes_category",
+                exposureChangesCategoryControllers));
+        controllers.add(new FailedPasswordWipeCurrentUserPreferenceController(context));
+        controllers.add(new FailedPasswordWipeManagedProfilePreferenceController(context));
         return controllers;
     }
 
@@ -114,11 +109,12 @@ public class EnterprisePrivacySettings extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = R.xml.enterprise_privacy_settings;
                     return Arrays.asList(sir);
-            }
+                }
 
-            @Override
-            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-                return buildPreferenceControllers(context, null /* lifecycle */, false /* async */);
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context, false /* async */);
                 }
             };
 }

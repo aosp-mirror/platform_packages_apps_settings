@@ -20,16 +20,13 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 
-import com.android.settingslib.core.lifecycle.Lifecycle;
-
 public class CaCertsCurrentUserPreferenceController extends CaCertsPreferenceControllerBase {
 
     @VisibleForTesting
     static final String CA_CERTS_CURRENT_USER = "ca_certs_current_user";
 
-    public CaCertsCurrentUserPreferenceController(Context context,
-            Lifecycle lifecycle) {
-        super(context, lifecycle);
+    public CaCertsCurrentUserPreferenceController(Context context) {
+        super(context);
     }
 
     @Override

@@ -54,8 +54,7 @@ public class PreferenceControllerContractTest {
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
         final Set<String> errorClasses = new ArraySet<>();
 
-        for (SearchIndexableResource page : SearchIndexableResources.values()) {
-            final Class<?> clazz = DatabaseIndexingUtils.getIndexableClass(page.className);
+        for (Class clazz: SearchIndexableResources.providerValues()) {
 
             final Indexable.SearchIndexProvider provider =
                     DatabaseIndexingUtils.getSearchIndexProvider(clazz);
