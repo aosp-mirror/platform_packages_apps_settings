@@ -50,7 +50,6 @@ public class PrivateDnsModeDialogFragmentTest {
     private PrivateDnsModeDialogFragment mFragment;
     private Button mSaveButton;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

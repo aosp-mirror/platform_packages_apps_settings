@@ -25,12 +25,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -41,12 +39,7 @@ import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.Annotation;
-import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -61,6 +54,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
+import com.android.settings.utils.AnnotationSpan;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -102,6 +96,9 @@ public class FingerprintSettings extends SubSettings {
     protected static final int RESULT_TIMEOUT = RESULT_FIRST_USER + 2;
 
     private static final long LOCKOUT_DURATION = 30000; // time we have to wait for fp to reset, ms
+
+    public static final String ANNOTATION_URL = "url";
+    public static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
 
     public static final String KEY_FINGERPRINT_SETTINGS = "fingerprint_settings";
 
@@ -161,6 +158,20 @@ public class FingerprintSettings extends SubSettings {
         private FingerprintAuthenticateSidecar mAuthenticateSidecar;
         private FingerprintRemoveSidecar mRemovalSidecar;
         private HashMap<Integer, String> mFingerprintsRenaming;
+
+        final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
+                ANNOTATION_URL, (view) -> {
+            final Context context = view.getContext();
+            Intent intent = HelpUtils.getHelpIntent(context, getString(getHelpResource()),
+                    context.getClass().getName());
+            if (intent != null) {
+                try {
+                    view.startActivityForResult(intent, 0);
+                } catch (ActivityNotFoundException e) {
+                    Log.w(TAG, "Activity was not found for intent, " + intent.toString());
+                }
+            }
+        });
 
         FingerprintAuthenticateSidecar.Listener mAuthenticateListener =
             new FingerprintAuthenticateSidecar.Listener() {
@@ -346,10 +357,15 @@ public class FingerprintSettings extends SubSettings {
             final FooterPreference pref = mFooterPreferenceMixin.createFooterPreference();
             final EnforcedAdmin admin = RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                     activity, DevicePolicyManager.KEYGUARD_DISABLE_FINGERPRINT, mUserId);
-            pref.setTitle(LearnMoreSpan.linkify(getText(admin != null
-                            ? R.string.security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
+            final AnnotationSpan.LinkInfo adminLinkInfo = new AnnotationSpan.LinkInfo(
+                    ANNOTATION_ADMIN_DETAILS, (view) -> {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(activity, admin);
+            });
+            pref.setTitle(AnnotationSpan.linkify(getText(admin != null
+                            ? R.string
+                            .security_settings_fingerprint_enroll_disclaimer_lockscreen_disabled
                             : R.string.security_settings_fingerprint_enroll_disclaimer),
-                    getString(getHelpResource()), admin));
+                    mUrlLinkInfo, adminLinkInfo));
         }
 
         protected void removeFingerprintPreference(int fingerprintId) {
@@ -903,74 +919,6 @@ public class FingerprintSettings extends SubSettings {
                     }
                 }
             });
-        }
-    }
-
-    private static class LearnMoreSpan extends URLSpan {
-        private static final String TAG = "LearnMoreSpan";
-        private static final Typeface TYPEFACE_MEDIUM =
-                Typeface.create("sans-serif-medium", Typeface.NORMAL);
-
-        private static final String ANNOTATION_URL = "url";
-        private static final String ANNOTATION_ADMIN_DETAILS = "admin_details";
-
-        private EnforcedAdmin mEnforcedAdmin = null;
-
-        private LearnMoreSpan(String url) {
-            super(url);
-        }
-
-        private LearnMoreSpan(EnforcedAdmin admin) {
-            super((String) null);
-            mEnforcedAdmin = admin;
-        }
-
-        @Override
-        public void onClick(View widget) {
-            Context ctx = widget.getContext();
-            if (mEnforcedAdmin != null) {
-                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(ctx, mEnforcedAdmin);
-            } else {
-                Intent intent = HelpUtils.getHelpIntent(ctx, getURL(), ctx.getClass().getName());
-                if (intent == null) {
-                    Log.w(LearnMoreSpan.TAG, "Null help intent.");
-                    return;
-                }
-                try {
-                    widget.startActivityForResult(intent, 0);
-                } catch (ActivityNotFoundException e) {
-                    Log.w(FingerprintSettingsFragment.TAG,
-                            "Actvity was not found for intent, " + intent.toString());
-                }
-            }
-        }
-
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            super.updateDrawState(ds);
-            ds.setUnderlineText(false);
-            ds.setTypeface(TYPEFACE_MEDIUM);
-        }
-
-        public static CharSequence linkify(CharSequence rawText, String uri, EnforcedAdmin admin) {
-            SpannableString msg = new SpannableString(rawText);
-            Annotation[] spans = msg.getSpans(0, msg.length(), Annotation.class);
-            SpannableStringBuilder builder = new SpannableStringBuilder(msg);
-            for (Annotation annotation : spans) {
-                final String key = annotation.getValue();
-                int start = msg.getSpanStart(annotation);
-                int end = msg.getSpanEnd(annotation);
-                LearnMoreSpan link = null;
-                if (ANNOTATION_URL.equals(key)) {
-                    link = new LearnMoreSpan(uri);
-                } else if (ANNOTATION_ADMIN_DETAILS.equals(key)) {
-                    link = new LearnMoreSpan(admin);
-                }
-                if (link != null) {
-                    builder.setSpan(link, start, end, msg.getSpanFlags(link));
-                }
-            }
-            return builder;
         }
     }
 
