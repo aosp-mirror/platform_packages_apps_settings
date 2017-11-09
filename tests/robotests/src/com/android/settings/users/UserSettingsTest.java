@@ -16,27 +16,28 @@
 
 package com.android.settings.users;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.Robolectric;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -70,4 +71,9 @@ public class UserSettingsTest {
             mActivity.getString(R.string.users_summary, name));
     }
 
+    @Test
+    public void testAssignDefaultPhoto_ContextNull_ReturnFalseAndNotCrash() {
+        // Should not crash here
+        assertThat(UserSettings.assignDefaultPhoto(null, 0)).isFalse();
+    }
 }

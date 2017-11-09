@@ -38,13 +38,13 @@ public class ProfileUpdateReceiver extends BroadcastReceiver {
         // Profile changed, lets get the photo and write to user manager
         new Thread() {
             public void run() {
-                Utils.copyMeProfilePhoto(context, null);
+                UserSettings.copyMeProfilePhoto(context, null);
                 copyProfileName(context);
             }
         }.start();
     }
 
-    static void copyProfileName(Context context) {
+    private static void copyProfileName(Context context) {
         SharedPreferences prefs = context.getSharedPreferences("profile", Context.MODE_PRIVATE);
         if (prefs.contains(KEY_PROFILE_NAME_COPIED_ONCE)) {
             return;
@@ -55,7 +55,8 @@ public class ProfileUpdateReceiver extends BroadcastReceiver {
         String profileName = Utils.getMeProfileName(context, false /* partial name */);
         if (profileName != null && profileName.length() > 0) {
             um.setUserName(userId, profileName);
-            // Flag that we've written the profile one time at least. No need to do it in the future.
+            // Flag that we've written the profile one time at least. No need to do it in the
+            // future.
             prefs.edit().putBoolean(KEY_PROFILE_NAME_COPIED_ONCE, true).commit();
         }
     }
