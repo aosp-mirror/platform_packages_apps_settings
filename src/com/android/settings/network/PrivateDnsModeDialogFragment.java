@@ -32,6 +32,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
@@ -68,6 +69,8 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
     @VisibleForTesting
     RadioGroup mRadioGroup;
     @VisibleForTesting
+    Button mSaveButton;
+    @VisibleForTesting
     String mMode;
 
     public static void show(FragmentManager fragmentManager) {
@@ -81,17 +84,23 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Context context = getContext();
 
-        return new AlertDialog.Builder(context)
+        final AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(R.string.select_private_dns_configuration_title)
                 .setView(buildPrivateDnsView(context))
                 .setPositiveButton(R.string.save, this)
                 .setNegativeButton(R.string.dlg_cancel, null)
                 .create();
+
+        dialog.setOnShowListener(dialogInterface -> {
+            mSaveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+            updateDialogInfo();
+        });
+        return dialog;
     }
 
     private View buildPrivateDnsView(final Context context) {
         final ContentResolver contentResolver = context.getContentResolver();
-        final String mode = Settings.Global.getString(contentResolver, MODE_KEY);
+        mMode = Settings.Global.getString(contentResolver, MODE_KEY);
         final View view = LayoutInflater.from(context).inflate(R.layout.private_dns_mode_dialog,
                 null);
 
@@ -101,7 +110,7 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
 
         mRadioGroup = view.findViewById(R.id.private_dns_radio_group);
         mRadioGroup.setOnCheckedChangeListener(this);
-        mRadioGroup.check(PRIVATE_DNS_MAP.getOrDefault(mode, R.id.private_dns_mode_opportunistic));
+        mRadioGroup.check(PRIVATE_DNS_MAP.getOrDefault(mMode, R.id.private_dns_mode_opportunistic));
 
         return view;
     }
@@ -129,17 +138,15 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
         switch (checkedId) {
             case R.id.private_dns_mode_off:
                 mMode = PRIVATE_DNS_MODE_OFF;
-                mEditText.setEnabled(false);
                 break;
             case R.id.private_dns_mode_opportunistic:
                 mMode = PRIVATE_DNS_MODE_OPPORTUNISTIC;
-                mEditText.setEnabled(false);
                 break;
             case R.id.private_dns_mode_provider:
                 mMode = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-                mEditText.setEnabled(true);
                 break;
         }
+        updateDialogInfo();
     }
 
     @Override
@@ -152,8 +159,9 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
 
     @Override
     public void afterTextChanged(Editable s) {
-        // TODO(b/68030013): Disable the "positive button" ("Save") when appearsValid is false.
-        final boolean valid = isWeaklyValidatedHostname(s.toString());
+        if (mSaveButton != null) {
+            mSaveButton.setEnabled(isWeaklyValidatedHostname(mEditText.getText().toString()));
+        }
     }
 
     private boolean isWeaklyValidatedHostname(String hostname) {
@@ -163,6 +171,19 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
         //         the input approximates a DNS hostname.
         final String WEAK_HOSTNAME_REGEX = "^[a-zA-Z0-9_.-]+$";
         return hostname.matches(WEAK_HOSTNAME_REGEX);
+    }
+
+    private void updateDialogInfo() {
+        final boolean modeProvider = PRIVATE_DNS_MODE_PROVIDER_HOSTNAME.equals(mMode);
+        if (mEditText != null) {
+            mEditText.setEnabled(modeProvider);
+        }
+        if (mSaveButton != null) {
+            mSaveButton.setEnabled(
+                    modeProvider
+                            ? isWeaklyValidatedHostname(mEditText.getText().toString())
+                            : true);
+        }
     }
 
 }
