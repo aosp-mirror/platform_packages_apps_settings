@@ -208,15 +208,19 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                 intent,
                 0 //PackageManager.MATCH_DEFAULT_ONLY
         );
-        if (DEBUG) Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
-                + (resolveInfos.size() == 0 ? " ;_;" : ""));
+        if (DEBUG) {
+            Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
+                    + (resolveInfos.size() == 0 ? " ;_;" : ""));
+        }
         for (ResolveInfo ri : resolveInfos) {
             final ActivityInfo activityInfo = ri.activityInfo;
             final ApplicationInfo appInfo = activityInfo.applicationInfo;
             if (mAppRow.settingsIntent != null) {
-                if (DEBUG) Log.v(TAG, "Ignoring duplicate notification preference activity ("
-                        + activityInfo.name + ") for package "
-                        + activityInfo.packageName);
+                if (DEBUG) {
+                    Log.d(TAG, "Ignoring duplicate notification preference activity ("
+                            + activityInfo.name + ") for package "
+                            + activityInfo.packageName);
+                }
                 continue;
             }
             mAppRow.settingsIntent = intent
@@ -280,7 +284,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                     public boolean onPreferenceChange(Preference preference,
                             Object o) {
                         boolean value = (Boolean) o;
-                        int importance = value ?  IMPORTANCE_LOW : IMPORTANCE_NONE;
+                        int importance = value ? IMPORTANCE_LOW : IMPORTANCE_NONE;
                         channel.setImportance(importance);
                         channel.lockFields(
                                 NotificationChannel.USER_LOCKED_IMPORTANCE);
@@ -365,8 +369,10 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         public void onReceive(Context context, Intent intent) {
             String packageName = intent.getData().getSchemeSpecificPart();
             if (mPkgInfo == null || TextUtils.equals(mPkgInfo.packageName, packageName)) {
-                if (DEBUG) Log.d(TAG, "Package (" + packageName + ") removed. Removing"
-                        + "NotificationSettingsBase.");
+                if (DEBUG) {
+                    Log.d(TAG, "Package (" + packageName + ") removed. Removing"
+                            + "NotificationSettingsBase.");
+                }
                 onPackageRemoved();
             }
         }
@@ -378,24 +384,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                     return Boolean.compare(left.isDeleted(), right.isDeleted());
                 }
                 return left.getId().compareTo(right.getId());
-            };
-
-    /**
-     * These screens aren't searchable - they only make sense in the context of an app, so
-     * surfacing a generic version would be impossible.
-     */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                        boolean enabled) {
-                    return new ArrayList<>();
-                }
-
-                @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-                    return getPreferenceControllers(context);
-                }
             };
 
     protected class ImportanceListener {

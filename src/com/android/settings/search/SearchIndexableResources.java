@@ -64,10 +64,6 @@ import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.PaymentSettings;
-import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.ChannelGroupNotificationSettings;
-import com.android.settings.notification.ChannelImportanceSettings;
-import com.android.settings.notification.ChannelNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
@@ -161,7 +157,6 @@ public final class SearchIndexableResources {
         addIndex(TtsEnginePreferenceFragment.class);
         addIndex(MagnificationPreferenceFragment.class);
         addIndex(AccessibilityShortcutPreferenceFragment.class);
-        addIndex(ChannelImportanceSettings.class);
         addIndex(DreamSettings.class);
         addIndex(SupportDashboardActivity.class);
         addIndex(AutomaticStorageManagerSettings.class);
@@ -171,10 +166,6 @@ public final class SearchIndexableResources {
         addIndex(LockscreenDashboardFragment.class);
         addIndex(ZenModeBehaviorSettings.class);
         addIndex(ZenModeAutomationSettings.class);
-        addIndex(AppNotificationSettings.class);
-        addIndex(ChannelNotificationSettings.class);
-        addIndex(ChannelImportanceSettings.class);
-        addIndex(ChannelGroupNotificationSettings.class);
     }
 
     private SearchIndexableResources() {
