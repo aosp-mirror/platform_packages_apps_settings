@@ -18,7 +18,6 @@ package com.android.settings.core;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.VisibleForTesting;
 import android.support.annotation.XmlRes;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -39,9 +38,8 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
         implements Instrumentable {
 
     private static final String TAG = "InstrumentedPrefFrag";
-    @VisibleForTesting
-    static final String FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE =
-            "settings_use_preference_screen_title";
+
+
     protected MetricsFeatureProvider mMetricsFeatureProvider;
 
     // metrics placeholder value. Only use this for development.
@@ -85,7 +83,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     public static boolean usePreferenceScreenTitle() {
-        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE) || true;
+        return FeatureFlagUtils.isEnabled(FeatureFlags.USE_PREFERENCE_SCREEN_TITLE) || true;
     }
 
     protected final Context getPrefContext() {

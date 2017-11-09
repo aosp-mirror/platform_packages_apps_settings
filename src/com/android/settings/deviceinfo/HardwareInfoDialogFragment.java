@@ -29,8 +29,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.DeviceInfoSettings;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
@@ -59,7 +59,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
                 DeviceModelPreferenceController.getDeviceModel());
 
         // Serial number
-        if (FeatureFlagUtils.isEnabled(DeviceInfoSettings.DEVICE_INFO_V2_FEATURE_FLAG)) {
+        if (FeatureFlagUtils.isEnabled(FeatureFlags.DEVICE_INFO_V2)) {
             setText(content, R.id.serial_number_label, R.id.serial_number_value, getSerialNumber());
         } else {
             content.findViewById(R.id.serial_number_label).setVisibility(View.GONE);
@@ -73,7 +73,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
         return builder.setView(content).create();
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     void setText(View content, int labelViewId, int valueViewId, String value) {
         if (content == null) {
             return;

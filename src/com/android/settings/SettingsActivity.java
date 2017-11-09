@@ -62,7 +62,6 @@ import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchActivity;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -76,7 +75,7 @@ import java.util.Set;
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
         PreferenceFragment.OnPreferenceStartFragmentCallback,
-        ButtonBarHandler, FragmentManager.OnBackStackChangedListener, OnClickListener {
+        ButtonBarHandler, FragmentManager.OnBackStackChangedListener {
 
     private static final String LOG_TAG = "Settings";
 
@@ -329,8 +328,9 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (mIsShowingDashboard) {
             findViewById(R.id.search_bar).setVisibility(View.VISIBLE);
             findViewById(R.id.action_bar).setVisibility(View.GONE);
-            Toolbar toolbar = findViewById(R.id.search_action_bar);
-            toolbar.setOnClickListener(this);
+            final Toolbar toolbar = findViewById(R.id.search_action_bar);
+            FeatureFactory.getFactory(this).getSearchFeatureProvider()
+                    .initSearchToolbar(this, toolbar);
             setActionBar(toolbar);
 
             // Please forgive me for what I am about to do.
@@ -958,11 +958,5 @@ public class SettingsActivity extends SettingsDrawerActivity
         drawable.draw(canvas);
 
         return bitmap;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
     }
 }

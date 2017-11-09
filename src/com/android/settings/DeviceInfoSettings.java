@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.core.FeatureFlags.DEVICE_INFO_V2;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -56,8 +58,6 @@ import java.util.List;
 
 public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
-    public static final String DEVICE_INFO_V2_FEATURE_FLAG = "device_info_v2";
-
     private static final String LOG_TAG = "DeviceInfoSettings";
 
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
@@ -89,7 +89,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)
+        return FeatureFlagUtils.isEnabled(DEVICE_INFO_V2)
                 ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
     }
 
@@ -126,7 +126,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
-        if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2_FEATURE_FLAG)) {
+        if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
             // Device name
 
