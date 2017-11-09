@@ -163,15 +163,4 @@ public class ChannelImportanceSettings extends NotificationSettingsBase
         mChannel.lockFields(USER_LOCKED_IMPORTANCE);
         mBackend.updateChannel(mAppRow.pkg, mAppRow.uid, mChannel);
     }
-
-    // This page exists per notification channel; should not be included
-    // in search
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    return null;
-                }
-            };
 }
