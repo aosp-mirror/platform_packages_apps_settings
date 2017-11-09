@@ -36,6 +36,7 @@ import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
+import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
@@ -128,7 +129,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
             // Device name
 
-            // Phone number
+            controllers.add(new PhoneNumberPreferenceController(context));
 
             controllers.add(new SimStatusPreferenceControllerV2(context, fragment));
 
