@@ -51,9 +51,9 @@ public class WallpaperSuggestionActivity extends Activity {
     @VisibleForTesting
     void startFallbackSuggestion() {
         // fall back to default wallpaper picker
-        Utils.startWithFragment(this, WallpaperTypeSettings.class.getName(), null, null, 0,
-                R.string.wallpaper_suggestion_title, null,
-                MetricsProto.MetricsEvent.DASHBOARD_SUMMARY);
+        Utils.startWithFragment(this, WallpaperTypeSettings.class.getName(),
+                R.string.wallpaper_suggestion_title, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
+                Intent.FLAG_ACTIVITY_FORWARD_RESULT);
     }
 
     @VisibleForTesting
