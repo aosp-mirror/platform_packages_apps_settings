@@ -25,7 +25,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
 import android.widget.TimePicker;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.widget.SeekBarPreference;
@@ -40,7 +40,7 @@ import java.util.TimeZone;
  * Settings screen for Night display.
  */
 public class NightDisplaySettings extends SettingsPreferenceFragment
-        implements NightDisplayController.Callback, Preference.OnPreferenceChangeListener {
+        implements ColorDisplayController.Callback, Preference.OnPreferenceChangeListener {
 
     private static final String KEY_NIGHT_DISPLAY_AUTO_MODE = "night_display_auto_mode";
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
@@ -51,7 +51,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     private static final int DIALOG_START_TIME = 0;
     private static final int DIALOG_END_TIME = 1;
 
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
     private DateFormat mTimeFormatter;
 
     private DropDownPreference mAutoModePreference;
@@ -65,7 +65,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
 
         final Context context = getContext();
-        mController = new NightDisplayController(context);
+        mController = new ColorDisplayController(context);
 
         mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
         mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -98,9 +98,9 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
                 getString(R.string.night_display_auto_mode_twilight)
         });
         mAutoModePreference.setEntryValues(new CharSequence[] {
-                String.valueOf(NightDisplayController.AUTO_MODE_DISABLED),
-                String.valueOf(NightDisplayController.AUTO_MODE_CUSTOM),
-                String.valueOf(NightDisplayController.AUTO_MODE_TWILIGHT)
+                String.valueOf(ColorDisplayController.AUTO_MODE_DISABLED),
+                String.valueOf(ColorDisplayController.AUTO_MODE_CUSTOM),
+                String.valueOf(ColorDisplayController.AUTO_MODE_TWILIGHT)
         });
         mAutoModePreference.setOnPreferenceChangeListener(this);
         mActivatedPreference.setOnPreferenceChangeListener(this);
@@ -192,7 +192,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     public void onAutoModeChanged(int autoMode) {
         mAutoModePreference.setValue(String.valueOf(autoMode));
 
-        final boolean showCustomSchedule = autoMode == NightDisplayController.AUTO_MODE_CUSTOM;
+        final boolean showCustomSchedule = autoMode == ColorDisplayController.AUTO_MODE_CUSTOM;
         mStartTimePreference.setVisible(showCustomSchedule);
         mEndTimePreference.setVisible(showCustomSchedule);
     }

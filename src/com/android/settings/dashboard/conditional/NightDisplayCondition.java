@@ -18,20 +18,20 @@ package com.android.settings.dashboard.conditional;
 
 import android.graphics.drawable.Icon;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.display.NightDisplaySettings;
 
 public final class NightDisplayCondition extends Condition
-        implements NightDisplayController.Callback {
+        implements ColorDisplayController.Callback {
 
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
 
     NightDisplayCondition(ConditionManager manager) {
         super(manager);
-        mController = new NightDisplayController(manager.getContext());
+        mController = new ColorDisplayController(manager.getContext());
         mController.setListener(this);
     }
 
