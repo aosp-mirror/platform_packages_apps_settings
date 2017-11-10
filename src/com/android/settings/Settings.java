@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static com.android.settings.core.FeatureFlags.DEV_OPTION_V1;
+
 import android.os.Bundle;
 import android.util.FeatureFlagUtils;
 
@@ -65,7 +67,7 @@ public class Settings extends SettingsActivity {
     @Deprecated
     public static class DevelopmentSettingsActivity extends SettingsActivity {
         public static final boolean isEnabled() {
-            return FeatureFlagUtils.isEnabled("dev_option_v1");
+            return FeatureFlagUtils.isEnabled(DEV_OPTION_V1);
         }
     }
     public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
