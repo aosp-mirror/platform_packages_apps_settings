@@ -73,13 +73,15 @@ public class RecentLocationRequestPreferenceControllerTest {
 
     private Context mContext;
     private RecentLocationRequestPreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new RecentLocationRequestPreferenceController(
-                mContext, mFragment, new Lifecycle(), mRecentLocationApps));
+                mContext, mFragment, mLifecycle, mRecentLocationApps));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mCategory);
         final String key = mController.getPreferenceKey();
         when(mCategory.getKey()).thenReturn(key);

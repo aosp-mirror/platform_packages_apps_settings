@@ -19,11 +19,7 @@ package com.android.settings.development;
 import static com.android.settings.development.AbstractBluetoothA2dpPreferenceController
         .STREAMING_LABEL_ID;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -72,7 +68,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new AbstractBluetoothA2dpPreferenceControllerImpl(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig();

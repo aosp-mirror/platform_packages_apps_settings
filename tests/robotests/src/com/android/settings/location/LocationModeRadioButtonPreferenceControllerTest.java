@@ -48,12 +48,14 @@ public class LocationModeRadioButtonPreferenceControllerTest {
 
     private Context mContext;
     private LocationModeRadioButtonPreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new LocationModeRadioButtonPreferenceControllerTestable(mContext);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mController = new LocationModeRadioButtonPreferenceControllerTestable(mContext, mLifecycle);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
@@ -116,8 +118,9 @@ public class LocationModeRadioButtonPreferenceControllerTest {
     private class LocationModeRadioButtonPreferenceControllerTestable
             extends LocationModeRadioButtonPreferenceController {
 
-        public LocationModeRadioButtonPreferenceControllerTestable(Context context) {
-            super(context, new Lifecycle());
+        public LocationModeRadioButtonPreferenceControllerTestable(Context context,
+                Lifecycle lifecycle) {
+            super(context, lifecycle);
         }
 
         @Override

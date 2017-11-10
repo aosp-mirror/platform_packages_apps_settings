@@ -68,7 +68,7 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new BluetoothAudioSampleRatePreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();

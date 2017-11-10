@@ -91,14 +91,16 @@ public class SimStatusDialogControllerTest {
 
     private SimStatusDialogController mController;
     private Context mContext;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         when(mDialog.getContext()).thenReturn(mContext);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(
-                new SimStatusDialogController(mDialog, new Lifecycle(), 0 /* phone id */));
+                new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
         doReturn(mServiceState).when(mController).getCurrentServiceState();
         doReturn(0).when(mController).getDbm(any());
         doReturn(0).when(mController).getAsuLevel(any());

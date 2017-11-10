@@ -68,13 +68,15 @@ public class LocationForWorkPreferenceControllerTest {
 
     private Context mContext;
     private LocationForWorkPreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = spy(new LocationForWorkPreferenceController(mContext, new Lifecycle()));
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mController = spy(new LocationForWorkPreferenceController(mContext, mLifecycle));
         mockManagedProfile();
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
