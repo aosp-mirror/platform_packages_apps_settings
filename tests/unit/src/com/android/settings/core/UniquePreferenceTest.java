@@ -33,7 +33,7 @@ import android.util.Xml;
 
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableResources;
+import com.android.settings.search.SettingsSearchIndexablesProvider;
 import com.android.settings.search.XmlParserUtils;
 
 import org.junit.Before;
@@ -90,7 +90,7 @@ public class UniquePreferenceTest {
         final Set<String> uniqueKeys = new HashSet<>();
         final Set<String> nullKeyClasses = new HashSet<>();
         final Set<String> duplicatedKeys = new HashSet<>();
-        for (Class<?> clazz : SearchIndexableResources.providerValues()) {
+        for (Class<?> clazz : SettingsSearchIndexablesProvider.INDEXABLES) {
             verifyPreferenceIdInXml(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
         }
 

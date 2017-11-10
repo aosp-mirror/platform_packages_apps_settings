@@ -2,8 +2,6 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.ProviderInfo;
@@ -27,21 +25,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class SettingsSearchIndexablesProviderTest {
 
     private final String BASE_AUTHORITY = "com.android.settings";
 
     private SettingsSearchIndexablesProvider mProvider;
 
-    Set<Class> sProviderClasses;
-    Context mContext;
+    private Set<Class> mProviderClasses;
+    private Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
 
-        mProvider = spy(new SettingsSearchIndexablesProvider());
+        mProvider = new SettingsSearchIndexablesProvider();
         ProviderInfo info = new ProviderInfo();
         info.exported = true;
         info.grantUriPermissions = true;
@@ -49,15 +47,15 @@ public class SettingsSearchIndexablesProviderTest {
         info.readPermission = Manifest.permission.READ_SEARCH_INDEXABLES;
         mProvider.attachInfo(mContext, info);
 
-        sProviderClasses = new HashSet<>(SearchIndexableResources.sProviders);
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.sProviders.add(FakeSettingsFragment.class);
+        mProviderClasses = new HashSet<>(SettingsSearchIndexablesProvider.INDEXABLES);
+        SettingsSearchIndexablesProvider.INDEXABLES.clear();
+        SettingsSearchIndexablesProvider.INDEXABLES.add(FakeSettingsFragment.class);
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.sProviders.addAll(sProviderClasses);
+        SettingsSearchIndexablesProvider.INDEXABLES.clear();
+        SettingsSearchIndexablesProvider.INDEXABLES.addAll(mProviderClasses);
     }
 
     @Test
