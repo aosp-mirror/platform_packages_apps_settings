@@ -18,7 +18,6 @@ package com.android.settings.localepicker;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.LocaleList;
@@ -30,21 +29,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.TextView;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocalePickerWithRegion;
 import com.android.internal.app.LocaleStore;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.RestrictedSettingsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
+
 /**
  * Drag-and-drop editor for the user-ordered locale lists.
  */
-public class LocaleListEditor extends SettingsPreferenceFragment
+public class LocaleListEditor extends RestrictedSettingsFragment
         implements LocalePickerWithRegion.LocaleSelectedListener {
 
     private static final String CFGKEY_REMOVE_MODE = "localeRemoveMode";
@@ -56,6 +58,11 @@ public class LocaleListEditor extends SettingsPreferenceFragment
     private View mAddLanguage;
     private boolean mRemoveMode;
     private boolean mShowingRemoveDialog;
+    private boolean mIsUiRestricted;
+
+    public LocaleListEditor() {
+        super(DISALLOW_CONFIG_LOCALE);
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -68,7 +75,7 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         setHasOptionsMenu(true);
 
         LocaleStore.fillCache(this.getContext());
-        final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList(this.getContext());
+        final List<LocaleStore.LocaleInfo> feedsList = getUserLocaleList();
         mAdapter = new LocaleDragAndDropAdapter(this.getContext(), feedsList);
     }
 
@@ -79,6 +86,25 @@ public class LocaleListEditor extends SettingsPreferenceFragment
 
         configureDragAndDrop(myLayout);
         return result;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        final boolean previouslyRestricted = mIsUiRestricted;
+        mIsUiRestricted = isUiRestricted();
+        final TextView emptyView = getEmptyTextView();
+        if (mIsUiRestricted && !previouslyRestricted) {
+            // Lock it down.
+            emptyView.setText(R.string.language_empty_list_user_restricted);
+            emptyView.setVisibility(View.VISIBLE);
+            updateVisibilityOfRemoveMenu();
+        } else if (!mIsUiRestricted && previouslyRestricted) {
+            // Unlock it.
+            emptyView.setVisibility(View.GONE);
+            updateVisibilityOfRemoveMenu();
+        }
     }
 
     @Override
@@ -217,20 +243,18 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         updateVisibilityOfRemoveMenu();
     }
 
-    private static List<LocaleStore.LocaleInfo> getUserLocaleList(Context context) {
+    private List<LocaleStore.LocaleInfo> getUserLocaleList() {
         final List<LocaleStore.LocaleInfo> result = new ArrayList<>();
-
         final LocaleList localeList = LocalePicker.getLocales();
         for (int i = 0; i < localeList.size(); i++) {
             Locale locale = localeList.get(i);
             result.add(LocaleStore.getLocaleInfo(locale));
         }
-
         return result;
     }
 
     private void configureDragAndDrop(View view) {
-        final RecyclerView list = (RecyclerView) view.findViewById(R.id.dragList);
+        final RecyclerView list = view.findViewById(R.id.dragList);
         final LocaleLinearLayoutManager llm = new LocaleLinearLayoutManager(getContext(), mAdapter);
         llm.setAutoMeasureEnabled(true);
         list.setLayoutManager(llm);
@@ -272,7 +296,8 @@ public class LocaleListEditor extends SettingsPreferenceFragment
         if (menuItemRemove != null) {
             menuItemRemove.setShowAsAction(
                     mRemoveMode ? MenuItem.SHOW_AS_ACTION_ALWAYS : MenuItem.SHOW_AS_ACTION_NEVER);
-            menuItemRemove.setVisible(mAdapter.getItemCount() > 1);
+            final boolean hasMultipleLanguages = mAdapter.getItemCount() > 1;
+            menuItemRemove.setVisible(hasMultipleLanguages && !mIsUiRestricted);
         }
     }
 }
