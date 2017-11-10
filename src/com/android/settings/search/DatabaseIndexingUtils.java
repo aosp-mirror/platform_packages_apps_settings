@@ -60,8 +60,9 @@ public class DatabaseIndexingUtils {
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
         final Intent searchDestination = Utils.onBuildStartFragmentIntent(context,
                 className, args, null, 0, screenTitle, false, sourceMetricsCategory);
-        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
-        searchDestination.setClass(context, SearchResultTrampoline.class);
+        searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
+                .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
+                .setComponent(null);
         return searchDestination;
     }
 
