@@ -336,7 +336,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private ConnectivityMonitorPreferenceController mConnectivityMonitorController;
-    private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
     private CameraLaserSensorPreferenceController mCameraLaserSensorController;
 
     private BroadcastReceiver mEnableAdbReceiver;
@@ -384,7 +383,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mLogpersistController = new LogpersistPreferenceController(getActivity(), getLifecycle());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
-        mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
         mCameraLaserSensorController = new CameraLaserSensorPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
@@ -421,7 +419,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mLogdSizeController.displayPreference(preferenceScreen);
         mLogpersistController.displayPreference(preferenceScreen);
         mWebViewAppPrefController.displayPreference(preferenceScreen);
-        mCameraHalHdrplusController.displayPreference(preferenceScreen);
         mEnableAdbController.displayPreference(preferenceScreen);
 
         mCameraLaserSensorController.displayPreference(getPreferenceScreen());
@@ -646,7 +643,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mLogdSizeController.enablePreference(enabled);
         mLogpersistController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
-        mCameraHalHdrplusController.enablePreference(enabled);
         mCameraLaserSensorController.enablePreference(enabled);
         updateAllOptions();
     }
@@ -793,7 +789,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         mHaveDebugSettings |= mConnectivityMonitorController.updatePreference();
-        mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
         mHaveDebugSettings |= mCameraLaserSensorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
@@ -2257,10 +2252,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
 
         if (mVerifyAppsOverUsbController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
-
-        if (mCameraHalHdrplusController.handlePreferenceTreeClick(preference)) {
             return true;
         }
 
