@@ -15,31 +15,6 @@
  */
 package com.android.settings.accounts;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
-import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-
-import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.shadow.ShadowAccountManager;
-import com.android.settings.testutils.shadow.ShadowContentResolver;
-
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
@@ -49,8 +24,35 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+
+import com.android.settings.R;
+import com.android.settings.TestConfig;
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowAccountManager;
+import com.android.settings.testutils.shadow.ShadowContentResolver;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class EmergencyInfoPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -61,15 +63,19 @@ public class EmergencyInfoPreferenceControllerTest {
     private UserManager mUserManager;
 
     private EmergencyInfoPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mController = new EmergencyInfoPreferenceController(mContext);
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
-    public void updateRawDataToIndex_prefUnavaiable_shouldNotUpdate() {
+    public void updateRawDataToIndex_prefUnavailable_shouldNotUpdate() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         when(mContext.getPackageManager().queryIntentActivities(
                 any(Intent.class), anyInt()))
@@ -81,7 +87,7 @@ public class EmergencyInfoPreferenceControllerTest {
     }
 
     @Test
-    public void updateRawDataToIndex_prefAvaiable_shouldUpdate() {
+    public void updateRawDataToIndex_prefAvailable_shouldUpdate() {
         final List<SearchIndexableRaw> data = new ArrayList<>();
         final List<ResolveInfo> infos = new ArrayList<>();
         infos.add(new ResolveInfo());
@@ -95,23 +101,18 @@ public class EmergencyInfoPreferenceControllerTest {
     }
 
     @Test
-    public void displayPref_prefUnAvaiable_shouldNotDisplay() {
+    public void displayPref_prefUnAvailable_shouldNotDisplay() {
         when(mContext.getPackageManager().queryIntentActivities(
                 any(Intent.class), anyInt()))
                 .thenReturn(null);
-        final Preference preference = mock(Preference.class);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(preference);
-        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void displayPref_prefAvaiable_shouldDisplay() {
-        final List<SearchIndexableRaw> data = new ArrayList<>();
+    public void displayPref_prefAvailable_shouldDisplay() {
         final List<ResolveInfo> infos = new ArrayList<>();
         infos.add(new ResolveInfo());
         when(mContext.getPackageManager().queryIntentActivities(

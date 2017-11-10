@@ -16,6 +16,12 @@
 
 package com.android.settings.notification;
 
+import static android.provider.Settings.System.VIBRATE_WHEN_RINGING;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -23,26 +29,20 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static android.provider.Settings.System.VIBRATE_WHEN_RINGING;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class VibrateWhenRingPreferenceControllerTest {
 
     @Mock
@@ -53,36 +53,34 @@ public class VibrateWhenRingPreferenceControllerTest {
     private TelephonyManager mTelephonyManager;
 
     private VibrateWhenRingPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         mController = new VibrateWhenRingPreferenceController(mContext);
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
     public void display_voiceCapable_shouldDisplay() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mock(Preference.class));
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
     public void display_notVoiceCapable_shouldNotDisplay() {
         when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
-        final Preference preference = mock(Preference.class);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(preference);
-        when(preference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
