@@ -16,6 +16,7 @@
 
 package com.android.settings.location;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,17 +29,14 @@ import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
 
+import static com.android.settingslib.Utils.updateLocationMode;
+
 /**
  * A base class that listens to location settings change and modifies location
  * settings.
  */
 public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
     private static final String TAG = "LocationSettingsBase";
-    /** Broadcast intent action when the location mode is about to change. */
-    private static final String MODE_CHANGING_ACTION =
-            "com.android.settings.location.MODE_CHANGING";
-    private static final String CURRENT_MODE_KEY = "CURRENT_MODE";
-    private static final String NEW_MODE_KEY = "NEW_MODE";
 
     private int mCurrentMode;
     private BroadcastReceiver mReceiver;
@@ -90,15 +88,6 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
         return um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION);
     }
 
-    public static boolean updateLocationMode(Context context, int oldMode, int newMode) {
-        Intent intent = new Intent(MODE_CHANGING_ACTION);
-        intent.putExtra(CURRENT_MODE_KEY, oldMode);
-        intent.putExtra(NEW_MODE_KEY, newMode);
-        context.sendBroadcast(intent, android.Manifest.permission.WRITE_SECURE_SETTINGS);
-        return Settings.Secure.putInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,
-                newMode);
-    }
-
     public void setLocationMode(int mode) {
         Context context = getActivity();
         if (isRestricted(context)) {
@@ -115,7 +104,7 @@ public abstract class LocationSettingsBase extends SettingsPreferenceFragment {
             return;
         }
 
-        updateLocationMode(context, mCurrentMode, mode);
+        updateLocationMode(context, mCurrentMode, mode, ActivityManager.getCurrentUser());
         refreshLocationMode();
     }
 
