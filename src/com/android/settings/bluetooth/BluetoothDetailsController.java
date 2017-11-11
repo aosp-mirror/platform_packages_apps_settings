@@ -72,8 +72,8 @@ public abstract class BluetoothDetailsController extends AbstractPreferenceContr
 
     @Override
     public final void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
         init(screen);
+        super.displayPreference(screen);
     }
 
     /**

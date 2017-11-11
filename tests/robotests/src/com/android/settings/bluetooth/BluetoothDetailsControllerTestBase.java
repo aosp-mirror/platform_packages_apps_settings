@@ -37,7 +37,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 public class BluetoothDetailsControllerTestBase {
-    protected Context mContext = RuntimeEnvironment.application;
+    protected Context mContext;
     protected Lifecycle mLifecycle;
     protected DeviceConfig mDeviceConfig;
     protected BluetoothDevice mDevice;
@@ -58,6 +58,7 @@ public class BluetoothDetailsControllerTestBase {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mPreferenceManager = new PreferenceManager(mContext);
         mScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mDeviceConfig = makeDefaultDeviceConfig();
