@@ -31,9 +31,9 @@ import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
-import com.android.settings.TestConfig;
 
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +45,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
         SettingsShadowSystemProperties.class
 })
 public class InstrumentedPreferenceFragmentTest {
@@ -76,7 +76,7 @@ public class InstrumentedPreferenceFragmentTest {
     @Test
     public void onCreatePreferences_noPreferenceScreenResId_shouldNotAddPreference() {
         SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + mFragment.FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE,
+                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
                 "true");
 
         mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
@@ -87,7 +87,7 @@ public class InstrumentedPreferenceFragmentTest {
     @Test
     public void onCreatePreferences_gotPreferenceScreenResId_shouldAddPreferences() {
         SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + mFragment.FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE,
+                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
                 "true");
         mFragment.setPreferenceScreenResId(R.xml.screen_pinning_settings);
         when(mFragment.getActivity()).thenReturn(mActivity);
@@ -101,7 +101,7 @@ public class InstrumentedPreferenceFragmentTest {
     @Test
     public void onCreatePreferences_gotPrefScreenResIdAndTitle_shouldAddPreferencesAndSetTitle() {
         SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + mFragment.FEATURE_FLAG_USE_PREFERENCE_SCREEN_TITLE,
+                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
                 "true");
         mFragment.setPreferenceScreenResId(R.xml.screen_pinning_settings);
         when(mFragment.getActivity()).thenReturn(mActivity);
@@ -114,13 +114,10 @@ public class InstrumentedPreferenceFragmentTest {
         verify(mActivity).setTitle(title);
     }
 
-    private static class InstrumentedPreferenceFragmentTestable
+    public static class InstrumentedPreferenceFragmentTestable
             extends InstrumentedPreferenceFragment {
 
         private int mScreenId = -1;
-
-        public InstrumentedPreferenceFragmentTestable() {
-        }
 
         @Override
         public int getMetricsCategory() {

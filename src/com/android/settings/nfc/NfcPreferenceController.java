@@ -26,9 +26,9 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
@@ -55,8 +55,8 @@ public class NfcPreferenceController extends AbstractPreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         if (!isAvailable()) {
-            removePreference(screen, KEY_TOGGLE_NFC);
-            removePreference(screen, KEY_ANDROID_BEAM_SETTINGS);
+            setVisible(screen, KEY_TOGGLE_NFC, false /* visible */);
+            setVisible(screen, KEY_ANDROID_BEAM_SETTINGS, false /* visible */);
             mNfcEnabler = null;
             return;
         }

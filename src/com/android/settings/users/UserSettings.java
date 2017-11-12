@@ -30,7 +30,9 @@ import android.content.SharedPreferences;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,7 +40,10 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.provider.ContactsContract;
 import android.provider.Settings.Global;
+import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
@@ -53,6 +58,7 @@ import android.view.View.OnClickListener;
 import android.widget.SimpleAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -68,6 +74,8 @@ import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.drawable.CircleFramedDrawable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -134,7 +142,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private boolean mShouldUpdateUserList = true;
     private final Object mUserLock = new Object();
     private UserManager mUserManager;
-    private SparseArray<Bitmap> mUserIcons = new SparseArray<Bitmap>();
+    private SparseArray<Bitmap> mUserIcons = new SparseArray<>();
+    private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
 
     private EditUserInfoController mEditUserInfoController =
             new EditUserInfoController();
@@ -324,7 +333,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 UserInfo user = mUserManager.getUserInfo(UserHandle.myUserId());
                 if (user.iconPath == null || user.iconPath.equals("")) {
                     // Assign profile photo.
-                    Utils.copyMeProfilePhoto(getActivity(), user);
+                    copyMeProfilePhoto(getActivity(), user);
                 }
                 return user.name;
             }
@@ -397,7 +406,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private UserInfo createRestrictedProfile() {
         UserInfo newUserInfo = mUserManager.createRestrictedProfile(mAddingUserName);
-        if (newUserInfo != null && !Utils.assignDefaultPhoto(getActivity(), newUserInfo.id)) {
+        if (newUserInfo != null && !assignDefaultPhoto(getActivity(), newUserInfo.id)) {
             return null;
         }
         return newUserInfo;
@@ -405,7 +414,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private UserInfo createTrustedUser() {
         UserInfo newUserInfo = mUserManager.createUser(mAddingUserName, 0);
-        if (newUserInfo != null && !Utils.assignDefaultPhoto(getActivity(), newUserInfo.id)) {
+        if (newUserInfo != null && !assignDefaultPhoto(getActivity(), newUserInfo.id)) {
             return null;
         }
         return newUserInfo;
@@ -914,7 +923,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 for (int userId : values[0]) {
                     Bitmap bitmap = mUserManager.getUserIcon(userId);
                     if (bitmap == null) {
-                        bitmap = Utils.getDefaultUserIconAsBitmap(userId);
+                        bitmap = getDefaultUserIconAsBitmap(userId);
                     }
                     mUserIcons.append(userId, bitmap);
                 }
@@ -925,7 +934,7 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private Drawable getEncircledDefaultIcon() {
         if (mDefaultIconDrawable == null) {
-            mDefaultIconDrawable = encircle(Utils.getDefaultUserIconAsBitmap(UserHandle.USER_NULL));
+            mDefaultIconDrawable = encircle(getDefaultUserIconAsBitmap(UserHandle.USER_NULL));
         }
         return mDefaultIconDrawable;
     }
@@ -1023,6 +1032,65 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onLabelChanged(CharSequence label) {
         mMePreference.setTitle(label);
+    }
+
+    /**
+     * Returns a default user icon (as a {@link Bitmap}) for the given user.
+     *
+     * Note that for guest users, you should pass in {@code UserHandle.USER_NULL}.
+     * @param userId the user id or {@code UserHandle.USER_NULL} for a non-user specific icon
+     */
+    private static Bitmap getDefaultUserIconAsBitmap(int userId) {
+        Bitmap bitmap = null;
+        // Try finding the corresponding bitmap in the dark bitmap cache
+        bitmap = sDarkDefaultUserBitmapCache.get(userId);
+        if (bitmap == null) {
+            bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId, false));
+            // Save it to cache
+            sDarkDefaultUserBitmapCache.put(userId, bitmap);
+        }
+        return bitmap;
+    }
+
+    /**
+     * Assign the default photo to user with {@paramref userId}
+     * @param context used to get the {@link UserManager}
+     * @param userId  used to get the icon bitmap
+     * @return true if assign photo successfully, false if failed
+     */
+    @VisibleForTesting
+    static boolean assignDefaultPhoto(Context context, int userId) {
+        if (context == null) {
+            return false;
+        }
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
+        um.setUserIcon(userId, bitmap);
+
+        return true;
+    }
+
+    @WorkerThread
+    static void copyMeProfilePhoto(Context context, UserInfo user) {
+        Uri contactUri = ContactsContract.Profile.CONTENT_URI;
+
+        int userId = user != null ? user.id : UserHandle.myUserId();
+
+        InputStream avatarDataStream = ContactsContract.Contacts.openContactPhotoInputStream(
+                context.getContentResolver(),
+                contactUri, true);
+        // If there's no profile photo, assign a default avatar
+        if (avatarDataStream == null) {
+            assignDefaultPhoto(context, userId);
+            return;
+        }
+
+        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
+        um.setUserIcon(userId, icon);
+        try {
+            avatarDataStream.close();
+        } catch (IOException ioe) { }
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {

@@ -16,6 +16,8 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import static com.android.settings.core.FeatureFlags.SUGGESTIONS_V2;
+
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -62,8 +64,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private static final int EXCLUSIVE_SUGGESTION_MAX_COUNT = 3;
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
-    @VisibleForTesting
-    static final String FEATURE_FLAG_SUGGESTIONS_V2 = "new_settings_suggestion";
 
     private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -92,7 +92,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     private static boolean isV2Enabled() {
-        return FeatureFlagUtils.isEnabled(FEATURE_FLAG_SUGGESTIONS_V2) || true;
+        return FeatureFlagUtils.isEnabled(SUGGESTIONS_V2) || true;
     }
 
     @Override

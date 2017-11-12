@@ -16,6 +16,8 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
 import android.util.ArraySet;
 import android.util.Log;
 
@@ -27,8 +29,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * {@link CodeInspector} to ensure fragments implement search components correctly.
@@ -47,7 +47,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                     + " these are not: \n";
     private static final String NOT_IN_INDEXABLE_PROVIDER_REGISTRY =
             "Class containing " + DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
-                    + " must be added to " + SearchIndexableResources.class.getName()
+                    + " must be added to " + SettingsSearchIndexablesProvider.class.getName()
                     + " but these are not: \n";
 
     private final List<String> notImplementingIndexableGrandfatherList;
@@ -114,7 +114,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 continue;
             }
             // Must be in SearchProviderRegistry
-            if (!SearchIndexableResources.providerValues().contains(clazz)) {
+            if (!SettingsSearchIndexablesProvider.INDEXABLES.contains(clazz)) {
                 if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }

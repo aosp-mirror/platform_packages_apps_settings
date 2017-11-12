@@ -48,7 +48,6 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -62,7 +61,6 @@ import android.icu.util.ULocale;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
@@ -97,7 +95,6 @@ import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
 import android.util.Log;
-import android.util.SparseArray;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,13 +105,10 @@ import android.widget.TabWidget;
 
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
-import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.FingerprintManagerWrapper;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -129,11 +123,6 @@ public final class Utils extends com.android.settingslib.Utils {
      * Set the preference's title to the matching activity's label.
      */
     public static final int UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY = 1;
-
-    /**
-     * The opacity level of a disabled icon.
-     */
-    public static final float DISABLED_ALPHA = 0.4f;
 
     /**
      * Color spectrum to use to indicate badness.  0 is completely transparent (no data),
@@ -151,8 +140,6 @@ public final class Utils extends com.android.settingslib.Utils {
     private static final int SECONDS_PER_DAY = 24 * 60 * 60;
 
     public static final String OS_PKG = "os";
-
-    private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<Bitmap>();
 
     /**
      * Finds a matching activity for a preference's intent. If a matching
@@ -342,46 +329,6 @@ public final class Utils extends com.android.settingslib.Utils {
                 com.android.internal.R.dimen.preference_fragment_padding_bottom);
 
         view.setPaddingRelative(paddingStart, 0, paddingEnd, paddingBottom);
-    }
-
-    /* Used by UserSettings as well. Call this on a non-ui thread. */
-    public static void copyMeProfilePhoto(Context context, UserInfo user) {
-        Uri contactUri = Profile.CONTENT_URI;
-
-        int userId = user != null ? user.id : UserHandle.myUserId();
-
-        InputStream avatarDataStream = Contacts.openContactPhotoInputStream(
-                    context.getContentResolver(),
-                    contactUri, true);
-        // If there's no profile photo, assign a default avatar
-        if (avatarDataStream == null) {
-            assignDefaultPhoto(context, userId);
-            return;
-        }
-
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap icon = BitmapFactory.decodeStream(avatarDataStream);
-        um.setUserIcon(userId, icon);
-        try {
-            avatarDataStream.close();
-        } catch (IOException ioe) { }
-    }
-
-    /**
-     * Assign the default photo to user with {@paramref userId}
-     * @param context used to get the {@link UserManager}
-     * @param userId  used to get the icon bitmap
-     * @return true if assign photo successfully, false if failed
-     */
-    public static boolean assignDefaultPhoto(Context context, int userId) {
-        if (context == null) {
-            return false;
-        }
-        UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
-        um.setUserIcon(userId, bitmap);
-
-        return true;
     }
 
     public static String getMeProfileName(Context context, boolean full) {
@@ -965,23 +912,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
     }
 
-    /**
-     * Returns a default user icon (as a {@link Bitmap}) for the given user.
-     *
-     * Note that for guest users, you should pass in {@code UserHandle.USER_NULL}.
-     * @param userId the user id or {@code UserHandle.USER_NULL} for a non-user specific icon
-     */
-    public static Bitmap getDefaultUserIconAsBitmap(int userId) {
-        Bitmap bitmap = null;
-        // Try finding the corresponding bitmap in the dark bitmap cache
-        bitmap = sDarkDefaultUserBitmapCache.get(userId);
-        if (bitmap == null) {
-            bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId, false));
-            // Save it to cache
-            sDarkDefaultUserBitmapCache.put(userId, bitmap);
-        }
-        return bitmap;
-    }
 
     public static boolean hasPreferredActivities(PackageManager pm, String packageName) {
         // Get list of preferred activities
@@ -998,7 +928,7 @@ public final class Utils extends com.android.settingslib.Utils {
         List<IntentFilter> filters = pm.getAllIntentFilters(packageName);
 
         ArraySet<String> result = new ArraySet<>();
-        if (iviList.size() > 0) {
+        if (iviList != null && iviList.size() > 0) {
             for (IntentFilterVerificationInfo ivi : iviList) {
                 for (String host : ivi.getDomains()) {
                     result.add(host);

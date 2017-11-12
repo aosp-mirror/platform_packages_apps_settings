@@ -15,19 +15,23 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.SwitchPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,14 +40,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -55,9 +53,8 @@ public class AutoSyncDataPreferenceControllerTest {
     private UserManager mUserManager;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private Fragment mFragment;
-    @Mock
-    private Preference mPreference;
 
+    private Preference mPreference;
     private Context mContext;
     private AutoSyncDataPreferenceController mController;
     private AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment mConfirmSyncFragment;
@@ -71,9 +68,9 @@ public class AutoSyncDataPreferenceControllerTest {
         mController = new AutoSyncDataPreferenceController(mContext, mFragment);
         mConfirmSyncFragment = new AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment();
         mConfirmSyncFragment.setTargetFragment(mFragment, 0);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
+        mPreference = new Preference(mContext);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -82,7 +79,7 @@ public class AutoSyncDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -92,7 +89,7 @@ public class AutoSyncDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -105,7 +102,7 @@ public class AutoSyncDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -119,7 +116,7 @@ public class AutoSyncDataPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -135,5 +132,4 @@ public class AutoSyncDataPreferenceControllerTest {
         mConfirmSyncFragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
         assertThat(preference.isChecked()).isFalse();
     }
-
 }

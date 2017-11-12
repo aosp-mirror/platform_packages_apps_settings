@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 import android.os.Bundle;
 
-import com.android.internal.app.NightDisplayController;
+import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
@@ -52,7 +52,7 @@ public class ColorModePreferenceFragmentTest {
     private ColorModePreferenceFragment mFragment;
 
     @Mock
-    private NightDisplayController mController;
+    private ColorDisplayController mController;
 
     @Before
     public void setup() {
@@ -88,7 +88,7 @@ public class ColorModePreferenceFragmentTest {
     @Test
     public void getKey_natural() {
         Mockito.when(mController.getColorMode()).thenReturn(
-            NightDisplayController.COLOR_MODE_NATURAL);
+                ColorDisplayController.COLOR_MODE_NATURAL);
 
         assertThat(mFragment.getDefaultKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
@@ -98,7 +98,7 @@ public class ColorModePreferenceFragmentTest {
     @Test
     public void getKey_boosted() {
         Mockito.when(mController.getColorMode()).thenReturn(
-            NightDisplayController.COLOR_MODE_BOOSTED);
+                ColorDisplayController.COLOR_MODE_BOOSTED);
 
         assertThat(mFragment.getDefaultKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
@@ -108,7 +108,7 @@ public class ColorModePreferenceFragmentTest {
     @Test
     public void getKey_saturated() {
         Mockito.when(mController.getColorMode()).thenReturn(
-            NightDisplayController.COLOR_MODE_SATURATED);
+                ColorDisplayController.COLOR_MODE_SATURATED);
 
         assertThat(mFragment.getDefaultKey())
             .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
@@ -118,21 +118,21 @@ public class ColorModePreferenceFragmentTest {
     @Test
     public void setKey_natural() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
-        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_NATURAL);
+        verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_NATURAL);
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_boosted() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
-        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_BOOSTED);
+        verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_BOOSTED);
     }
 
     @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_saturated() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
-        verify(mController).setColorMode(NightDisplayController.COLOR_MODE_SATURATED);
+        verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_SATURATED);
     }
 
     @Test

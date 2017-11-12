@@ -16,66 +16,62 @@
 
 package com.android.settings.development;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * deprecated in favor of {@link BugReportPreferenceControllerV2}
  */
 @Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class BugReportPreferenceControllerTest {
 
     @Mock
     private Context mContext;
-    @Mock
-    private Preference mPreference;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock
     private UserManager mUserManager;
 
     private BugReportPreferenceController mController;
+    private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mController = new BugReportPreferenceController(mContext);
+        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference.setKey(mController.getPreferenceKey());
+        when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
     }
 
     @Test
     public void displayPreference_hasDebugRestriction_shouldRemovePreference() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
-        when(mScreen.getPreferenceCount()).thenReturn(1);
-        when(mScreen.getPreference(0)).thenReturn(mPreference);
-        when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
@@ -84,7 +80,7 @@ public class BugReportPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        verify(mScreen, never()).removePreference(any(Preference.class));
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -92,9 +88,10 @@ public class BugReportPreferenceControllerTest {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(true);
         mController.displayPreference(mScreen);
 
+        mPreference.setEnabled(false);
         mController.enablePreference(true);
 
-        verify(mPreference, never()).setEnabled(anyBoolean());
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
@@ -102,9 +99,10 @@ public class BugReportPreferenceControllerTest {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         mController.displayPreference(mScreen);
 
+        mPreference.setEnabled(false);
         mController.enablePreference(true);
 
-        verify(mPreference).setEnabled(anyBoolean());
+        assertThat(mPreference.isEnabled()).isTrue();
     }
 
 }

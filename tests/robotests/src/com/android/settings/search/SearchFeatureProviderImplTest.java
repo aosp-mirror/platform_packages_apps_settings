@@ -18,13 +18,24 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Intent;
+import android.util.FeatureFlagUtils;
+import android.widget.Toolbar;
+
 import com.android.settings.TestConfig;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,13 +43,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
+        SettingsShadowSystemProperties.class
+})
 public class SearchFeatureProviderImplTest {
+
     private SearchFeatureProviderImpl mProvider;
     private Activity mActivity;
 
@@ -47,6 +57,11 @@ public class SearchFeatureProviderImplTest {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
         mProvider = spy(new SearchFeatureProviderImpl());
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowSystemProperties.clear();
     }
 
     @Test
@@ -75,13 +90,51 @@ public class SearchFeatureProviderImplTest {
         verify(mProvider).cleanQuery(eq(query));
     }
 
+    @Test
+    public void initSearchToolbar_searchV2_shouldInitWithOnClickListener() {
+        mProvider.initSearchToolbar(mActivity, null);
+        // Should not crash.
+
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.SEARCH_V2,
+                "true");
+        final Toolbar toolbar = new Toolbar(mActivity);
+        mProvider.initSearchToolbar(mActivity, toolbar);
+
+        toolbar.performClick();
+
+        final Intent launchIntent = shadowOf(mActivity).getNextStartedActivity();
+
+        assertThat(launchIntent.getAction())
+                .isEqualTo("com.android.settings.action.SETTINGS_SEARCH");
+    }
+
+    @Test
+    public void initSearchToolbar_searchV1_shouldInitWithOnClickListener() {
+        mProvider.initSearchToolbar(mActivity, null);
+        // Should not crash.
+
+        SettingsShadowSystemProperties.set(
+                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.SEARCH_V2,
+                "false");
+        final Toolbar toolbar = new Toolbar(mActivity);
+        mProvider.initSearchToolbar(mActivity, toolbar);
+
+        toolbar.performClick();
+
+        final Intent launchIntent = shadowOf(mActivity).getNextStartedActivity();
+
+        assertThat(launchIntent.getComponent().getClassName())
+                .isEqualTo(SearchActivity.class.getName());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void verifyLaunchSearchResultPageCaller_nullCaller_shouldCrash() {
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, null /* caller */);
     }
 
     @Test(expected = SecurityException.class)
-    public void everifyLaunchSearchResultPageCaller_badCaller_shouldCrash() {
+    public void verifyLaunchSearchResultPageCaller_badCaller_shouldCrash() {
         final ComponentName cn = new ComponentName("pkg", "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
     }

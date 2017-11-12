@@ -19,9 +19,13 @@ package com.android.settings.search;
 import android.annotation.NonNull;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.util.FeatureFlagUtils;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Toolbar;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SiteMapManager;
 
 import java.util.List;
@@ -163,5 +167,23 @@ public interface SearchFeatureProvider {
      */
     default FutureTask<List<Pair<String, Float>>> getRankerTask(Context context, String query) {
         return null;
+    }
+
+    /**
+     * Initializes the search toolbar.
+     */
+    default void initSearchToolbar(Context context, Toolbar toolbar) {
+        if (context == null || toolbar == null) {
+            return;
+        }
+        toolbar.setOnClickListener(tb -> {
+            final Intent intent;
+            if (FeatureFlagUtils.isEnabled(FeatureFlags.SEARCH_V2)) {
+                intent = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+            } else {
+                intent = new Intent(context, SearchActivity.class);
+            }
+            context.startActivity(intent);
+        });
     }
 }

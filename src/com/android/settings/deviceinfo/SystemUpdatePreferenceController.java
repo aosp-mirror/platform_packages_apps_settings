@@ -15,6 +15,8 @@
  */
 package com.android.settings.deviceinfo;
 
+import static android.content.Context.CARRIER_CONFIG_SERVICE;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -30,8 +32,6 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
-
-import static android.content.Context.CARRIER_CONFIG_SERVICE;
 
 public class SystemUpdatePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
@@ -59,12 +59,11 @@ public class SystemUpdatePreferenceController extends AbstractPreferenceControll
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
         if (isAvailable()) {
             Utils.updatePreferenceToSpecificActivityOrRemove(mContext, screen,
                     KEY_SYSTEM_UPDATE_SETTINGS,
                     Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
-        } else {
-            removePreference(screen, KEY_SYSTEM_UPDATE_SETTINGS);
         }
     }
 

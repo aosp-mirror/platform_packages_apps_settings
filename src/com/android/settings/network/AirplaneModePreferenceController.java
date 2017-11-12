@@ -81,7 +81,7 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
                         mMetricsFeatureProvider);
             }
         } else {
-            removePreference(screen, getPreferenceKey());
+            setVisible(screen, getPreferenceKey(), false /* visible */);
         }
     }
 
@@ -91,7 +91,7 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
     }
 
     public static boolean isAvailable(Context context) {
-        return !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEVISION);
+        return !context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
     }
 
     @Override

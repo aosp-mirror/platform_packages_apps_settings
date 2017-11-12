@@ -24,11 +24,10 @@ import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,19 +36,17 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class LayoutPreferenceTest {
 
     private Context mContext;
     private LayoutPreference mPreference;
-    private View mRootView;
     private PreferenceViewHolder mHolder;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mPreference = new LayoutPreference(mContext, R.layout.two_action_buttons);
-        mRootView = mPreference.mRootView;
         mHolder = PreferenceViewHolder.createInstanceForTests(LayoutInflater.from(mContext)
                 .inflate(R.layout.layout_preference_frame, null, false));
     }
