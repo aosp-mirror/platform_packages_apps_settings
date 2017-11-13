@@ -17,6 +17,20 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -28,10 +42,10 @@ import android.view.View;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
@@ -52,20 +66,6 @@ import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Set;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
         sdk = TestConfig.SDK_VERSION,
@@ -81,6 +81,10 @@ public class SearchFragmentTest {
     private DatabaseResultLoader mDatabaseResultLoader;
     @Mock
     private InstalledAppResultLoader mInstalledAppResultLoader;
+    @Mock
+    private AccessibilityServiceResultLoader mAccessibilityServiceResultLoader;
+    @Mock
+    private InputDeviceResultLoader mInputDeviceResultLoader;
 
     @Mock
     private SavedQueryLoader mSavedQueryLoader;
@@ -113,6 +117,12 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getInputDeviceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mInputDeviceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -170,6 +180,12 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getInputDeviceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mInputDeviceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -225,6 +241,12 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getInputDeviceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mInputDeviceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
         ActivityController<SearchActivity> activityController =
@@ -256,6 +278,12 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(mInstalledAppResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mAccessibilityServiceResultLoader);
+        when(mFeatureFactory.searchFeatureProvider
+                .getInputDeviceResultLoader(any(Context.class), anyString()))
+                .thenReturn(mInputDeviceResultLoader);
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
 
@@ -333,6 +361,12 @@ public class SearchFragmentTest {
         when(mFeatureFactory.searchFeatureProvider
                 .getInstalledAppSearchLoader(any(Context.class), anyString()))
                 .thenReturn(new MockAppLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider
+                .getAccessibilityServiceResultLoader(any(Context.class), anyString()))
+                .thenReturn(new MockAccessibilityLoader(RuntimeEnvironment.application));
+        when(mFeatureFactory.searchFeatureProvider
+                .getInputDeviceResultLoader(any(Context.class), anyString()))
+                .thenReturn(new MockInputDeviceResultLoader(RuntimeEnvironment.application));
         when(mFeatureFactory.searchFeatureProvider.getSavedQueryLoader(any(Context.class)))
                 .thenReturn(mSavedQueryLoader);
         ActivityController<SearchActivity> activityController =
@@ -376,9 +410,9 @@ public class SearchFragmentTest {
 
         fragment.onIndexingFinished();
 
-        verify(loaderManager).initLoader(eq(SearchFragment.LOADER_ID_DATABASE),
+        verify(loaderManager).initLoader(eq(SearchFragment.SearchLoaderId.DATABASE),
                 eq(null), any(LoaderManager.LoaderCallbacks.class));
-        verify(loaderManager).initLoader(eq(SearchFragment.LOADER_ID_INSTALLED_APPS),
+        verify(loaderManager).initLoader(eq(SearchFragment.SearchLoaderId.INSTALLED_APPS),
                 eq(null), any(LoaderManager.LoaderCallbacks.class));
     }
 
@@ -441,12 +475,44 @@ public class SearchFragmentTest {
                 nullable(Context.class),
                 eq(MetricsProto.MetricsEvent.ACTION_CLICK_SETTINGS_SEARCH_RESULT),
                 eq("test_setting"),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_COUNT)),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_RESULT_RANK)),
-                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SERACH_QUERY_LENGTH)));
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_COUNT)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_RESULT_RANK)),
+                argThat(pairMatches(MetricsProto.MetricsEvent
+                                .FIELD_SETTINGS_SEARCH_RESULT_ASYNC_RANKING_STATE)),
+                argThat(pairMatches(MetricsProto.MetricsEvent.FIELD_SETTINGS_SEARCH_QUERY_LENGTH)));
 
         verify(mFeatureFactory.searchFeatureProvider).searchResultClicked(nullable(Context.class),
                 nullable(String.class), eq(searchResult));
+    }
+
+    @Test
+    public void onResume_shouldCallSearchRankingWarmupIfSmartSearchRankingEnabled(){
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any(Context.class)))
+                .thenReturn(true);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        verify(mFeatureFactory.searchFeatureProvider)
+                .searchRankingWarmup(any(Context.class));
+    }
+
+    @Test
+    public void onResume_shouldNotCallSearchRankingWarmupIfSmartSearchRankingDisabled(){
+        when(mFeatureFactory.searchFeatureProvider.isSmartSearchRankingEnabled(any(Context.class)))
+                .thenReturn(false);
+
+        ActivityController<SearchActivity> activityController =
+                Robolectric.buildActivity(SearchActivity.class);
+        activityController.setup();
+        SearchFragment fragment = (SearchFragment) activityController.get().getFragmentManager()
+                .findFragmentById(R.id.main_content);
+
+        verify(mFeatureFactory.searchFeatureProvider, never())
+                .searchRankingWarmup(any(Context.class));
     }
 
     private ArgumentMatcher<Pair<Integer, Object>> pairMatches(int tag) {

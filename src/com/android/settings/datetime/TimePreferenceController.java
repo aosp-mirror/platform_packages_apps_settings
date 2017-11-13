@@ -25,12 +25,13 @@ import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
 
-public class TimePreferenceController extends PreferenceController implements
-        TimePickerDialog.OnTimeSetListener {
+public class TimePreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, TimePickerDialog.OnTimeSetListener {
 
     public interface TimePreferenceHost extends UpdateTimeAndDateCallback {
         void showTimePicker();

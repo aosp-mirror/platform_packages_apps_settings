@@ -15,31 +15,24 @@
  */
 package com.android.settings.system;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.content.Context;
-import android.content.pm.UserInfo;
-import android.os.UserHandle;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.util.List;
-
-public class FactoryResetPreferenceController extends PreferenceController {
+public class FactoryResetPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
     /** Key of the "Factory reset" preference in {@link R.xml.reset_dashboard_fragment}. */
     private static final String KEY_FACTORY_RESET = "factory_reset";
 
     private final UserManager mUm;
-    private final AccountManager mAm;
 
     public FactoryResetPreferenceController(Context context) {
         super(context);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mAm = (AccountManager) context.getSystemService(Context.ACCOUNT_SERVICE);
     }
 
     /** Hide "Factory reset" settings for secondary users, except demo users. */
@@ -51,23 +44,5 @@ public class FactoryResetPreferenceController extends PreferenceController {
     @Override
     public String getPreferenceKey() {
         return KEY_FACTORY_RESET;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final List<UserInfo> profiles = mUm.getProfiles(UserHandle.myUserId());
-        int accountsCount = 0;
-        for (UserInfo userInfo : profiles) {
-            final int profileId = userInfo.id;
-            Account[] accounts = mAm.getAccountsAsUser(profileId);
-            accountsCount += accounts.length;
-        }
-        if (accountsCount == 0) {
-            preference.setSummary(R.string.master_clear_summary);
-        } else {
-            preference.setSummary(mContext.getResources().getQuantityString(
-                    R.plurals.master_clear_with_account_summary,
-                    accountsCount, accountsCount));
-        }
     }
 }

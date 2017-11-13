@@ -16,6 +16,16 @@
 
 package com.android.settings.applications.assist;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.Manifest;
 import android.app.SearchManager;
 import android.content.ComponentName;
@@ -28,32 +38,28 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.internal.app.AssistUtils;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAssistPreferenceControllerTest {
+
+    private static final String TEST_KEY = "test_pref_key";
 
     @Mock
     private Context mContext;
@@ -66,7 +72,8 @@ public class DefaultAssistPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new DefaultAssistPreferenceController(mContext);
+        mController = new DefaultAssistPreferenceController(mContext, TEST_KEY,
+                true /* showSetting */);
     }
 
     @Test
@@ -75,10 +82,16 @@ public class DefaultAssistPreferenceControllerTest {
     }
 
     @Test
+    public void getPrefKey_shouldReturnKey() {
+        assertThat(mController.getPreferenceKey())
+                .isEqualTo(TEST_KEY);
+    }
+
+    @Test
     @Config(shadows = {ShadowSecureSettings.class})
     public void getDefaultAppInfo_hasDefaultAssist_shouldReturnKey() {
         final String flattenKey = "com.android.settings/assist";
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
         DefaultAppInfo appInfo = mController.getDefaultAppInfo();
 
         assertThat(appInfo.getKey()).isEqualTo(flattenKey);
@@ -87,17 +100,17 @@ public class DefaultAssistPreferenceControllerTest {
     @Test
     public void getSettingIntent_noSettingsActivity_shouldNotCrash() {
         final String flattenKey = "com.android.settings/assist";
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        DefaultAssistPreferenceController controller =
-            spy(new DefaultAssistPreferenceController(mContext));
+        DefaultAssistPreferenceController controller = spy(
+                new DefaultAssistPreferenceController(mContext, TEST_KEY, true /* showSetting */));
         final ResolveInfo resolveInfo = new ResolveInfo();
         resolveInfo.activityInfo = new ActivityInfo();
         resolveInfo.activityInfo.name = "assist";
         resolveInfo.activityInfo.applicationInfo = new ApplicationInfo();
         resolveInfo.activityInfo.applicationInfo.packageName = "com.android.settings";
         when(mPackageManager.resolveActivityAsUser(any(Intent.class), anyInt(), anyInt()))
-            .thenReturn(resolveInfo);
+                .thenReturn(resolveInfo);
         when(mContext.getSystemService(Context.SEARCH_SERVICE)).thenReturn(mSearchManager);
         when(mSearchManager.getAssistIntent(anyBoolean())).thenReturn(mock(Intent.class));
         final ServiceInfo serviceInfo = new ServiceInfo();
@@ -107,9 +120,21 @@ public class DefaultAssistPreferenceControllerTest {
         services.add(resolveInfo);
         when(mPackageManager.queryIntentServices(any(Intent.class), anyInt())).thenReturn(services);
         doReturn(null).when(controller).getAssistSettingsActivity(
-            ComponentName.unflattenFromString(flattenKey), resolveInfo, mPackageManager);
+                ComponentName.unflattenFromString(flattenKey), resolveInfo, mPackageManager);
 
         controller.getSettingIntent(null);
         // should not crash
+    }
+
+    @Test
+    public void getSettingIntent_doNotShowSetting_shouldNotTryToGetSettingIntent() {
+        final AssistUtils assistUtils = mock(AssistUtils.class);
+        final DefaultAssistPreferenceController controller = new DefaultAssistPreferenceController(
+                mContext, TEST_KEY, false /* showSetting */);
+        ReflectionHelpers.setField(controller, "mAssistUtils", assistUtils);
+
+        controller.getSettingIntent(null);
+
+        verifyZeroInteractions(assistUtils);
     }
 }

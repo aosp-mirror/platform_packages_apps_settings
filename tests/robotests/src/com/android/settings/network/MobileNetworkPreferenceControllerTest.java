@@ -47,7 +47,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowRestrictedLockUtilsWrapper.class
+)
 public class MobileNetworkPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -88,7 +92,6 @@ public class MobileNetworkPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowRestrictedLockUtilsWrapper.class)
     public void wifiOnly_prefIsNotAvailable() {
         when(mUserManager.isAdminUser()).thenReturn(true);
         when(mUserManager.hasUserRestriction(anyString(), any(UserHandle.class)))

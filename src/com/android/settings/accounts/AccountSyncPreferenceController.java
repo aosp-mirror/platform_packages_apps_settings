@@ -31,11 +31,12 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AccountSyncPreferenceController extends PreferenceController
-        implements AuthenticatorHelper.OnAccountsUpdateListener {
+public class AccountSyncPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener {
 
     private static final String TAG = "AccountSyncController";
     private static final String KEY_ACCOUNT_SYNC = "account_sync";
@@ -97,6 +98,9 @@ public class AccountSyncPreferenceController extends PreferenceController
 
     @VisibleForTesting
     void updateSummary(Preference preference) {
+        if (mAccount == null) {
+            return;
+        }
         final int userId = mUserHandle.getIdentifier();
         final SyncAdapterType[] syncAdapters = ContentResolver.getSyncAdapterTypesAsUser(userId);
         int total = 0;

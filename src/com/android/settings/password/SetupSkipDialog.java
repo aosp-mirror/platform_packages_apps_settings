@@ -61,6 +61,7 @@ public class SetupSkipDialog extends InstrumentedDialogFragment
         return new AlertDialog.Builder(getContext())
                 .setPositiveButton(R.string.skip_anyway_button_label, this)
                 .setNegativeButton(R.string.go_back_button_label, this)
+                .setTitle(R.string.lock_screen_intro_skip_title)
                 .setMessage(args.getBoolean(ARG_FRP_SUPPORTED) ?
                         R.string.lock_screen_intro_skip_dialog_text_frp :
                         R.string.lock_screen_intro_skip_dialog_text);

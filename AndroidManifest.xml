@@ -83,6 +83,8 @@
     <uses-permission android:name="android.permission.MANAGE_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.DELETE_PACKAGES"/>
     <uses-permission android:name="android.permission.MANAGE_APP_OPS_RESTRICTIONS"/>
+    <uses-permission android:name="android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS"/>
+    <uses-permission android:name="android.permission.READ_PRINT_SERVICES" />
     <uses-permission android:name="android.permission.NETWORK_SETTINGS" />
 
     <application android:label="@string/settings_label"
@@ -210,7 +212,7 @@
 
         <activity android:name=".search.SearchActivity"
                   android:label="@string/search_settings"
-                  android:icon="@drawable/ic_search_history"
+                  android:icon="@drawable/ic_search_24dp"
                   android:parentActivityName="Settings"
                   android:theme="@style/Theme.Settings.NoActionBar">
         </activity>
@@ -556,7 +558,7 @@
         </activity>
 
         <activity android:name=".Settings$LanguageAndInputSettingsActivity"
-            android:label="@string/language_input_gesture_title"
+            android:label="@string/language_settings"
             android:icon="@drawable/ic_settings_language"
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings$SystemDashboardActivity">
@@ -668,13 +670,6 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
-
-        <receiver android:name=".inputmethod.InputMethodDialogReceiver"
-                android:enabled="true">
-            <intent-filter>
-                <action android:name="android.settings.SHOW_INPUT_METHOD_PICKER" />
-            </intent-filter>
-        </receiver>
 
         <activity android:name="Settings$UserDictionarySettingsActivity"
                 android:label="@string/user_dict_settings_title"
@@ -803,7 +798,7 @@
 
         <activity android:name=".support.NewDeviceIntroSuggestionActivity"
                   android:label="@string/new_device_suggestion_title"
-                  android:icon="@drawable/ic_new_releases_24dp"
+                  android:icon="@drawable/ic_new_device_suggestion_24dp"
                   android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -923,6 +918,26 @@
                 android:value="com.android.settings.display.NightDisplaySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$NightDisplaySuggestionActivity"
+            android:enabled="@*android:bool/config_nightDisplayAvailable"
+            android:taskAffinity=""
+            android:icon="@drawable/ic_settings_night_display">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.dismiss"
+                android:value="6,10,30" />
+            <meta-data android:name="com.android.settings.title"
+                android:resource="@string/night_display_suggestion_title" />
+            <meta-data android:name="com.android.settings.summary"
+                android:resource="@string/night_display_suggestion_summary" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                android:value="true" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.display.NightDisplaySettings" />
         </activity>
 
         <activity android:name="Settings$DeviceInfoSettingsActivity"
@@ -2336,6 +2351,7 @@
         <!-- Triggered when user-selected home app isn't encryption aware -->
         <activity android:name=".FallbackHome"
                   android:excludeFromRecents="true"
+                  android:label=""
                   android:screenOrientation="nosensor"
                   android:theme="@style/FallbackHome">
             <intent-filter android:priority="-1000">
@@ -2372,6 +2388,24 @@
                 android:value="com.android.settings.CryptKeeperSettings" />
         </activity>
 
+        <activity android:name="Settings$DataPlanUsageSummaryActivity"
+                android:label="@string/data_usage_summary_title"
+                android:icon="@drawable/ic_settings_data_usage"
+                android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                    android:value="com.android.settings.category.ia.wireless" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                    android:value="com.android.settings.datausage.DataPlanUsageSummary" />
+        </activity>
+
         <activity android:name="Settings$DataUsageSummaryActivity"
                 android:label="@string/data_usage_summary_title"
                 android:icon="@drawable/ic_settings_data_usage"
@@ -2388,6 +2422,17 @@
                 android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
+        </activity>
+
+        <activity android:name="Settings$MobileDataUsageListActivity"
+                  android:label="@string/cellular_data_usage"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.MOBILE_DATA_USAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataUsageList" />
         </activity>
 
         <activity android:name="Settings$DreamSettingsActivity"
@@ -2444,11 +2489,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.apps.default" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.nfc.PaymentSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2481,6 +2521,16 @@
                 <action android:name="android.provider.Telephony.ACTION_CHANGE_DEFAULT" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+
+        <activity android:name="Settings$SpecialAccessSettingsActivity"
+                  android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.SpecialAccessSettings" />
         </activity>
 
         <activity android:name="Settings$NotificationAccessSettingsActivity"
@@ -2939,7 +2989,7 @@
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.apps"/>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.AdvancedAppSettings" />
+                       android:value="com.android.settings.applications.DefaultAppSettings" />
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -3136,7 +3186,7 @@
         <activity
             android:name=".Settings$DoubleTapPowerSuggestionActivity"
             android:label="@string/double_tap_power_for_camera_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3154,7 +3204,7 @@
         <activity
             android:name=".Settings$DoubleTwistSuggestionActivity"
             android:label="@string/double_twist_for_camera_mode_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3172,7 +3222,7 @@
         <activity
             android:name=".Settings$AmbientDisplaySuggestionActivity"
             android:label="@string/ambient_display_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3190,7 +3240,7 @@
         <activity
             android:name=".Settings$AmbientDisplayPickupSuggestionActivity"
             android:label="@string/ambient_display_pickup_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />
@@ -3208,7 +3258,7 @@
         <activity
             android:name=".Settings$SwipeToNotificationSuggestionActivity"
             android:label="@string/fingerprint_swipe_for_notifications_title"
-            android:icon="@drawable/ic_suggestion_gesture">
+            android:icon="@drawable/ic_settings_gestures">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.suggested.category.GESTURE" />

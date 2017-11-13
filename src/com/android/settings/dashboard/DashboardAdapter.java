@@ -30,6 +30,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +48,7 @@ import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
+import com.android.settings.dashboard.suggestions.SuggestionLogHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -111,7 +113,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             List<Condition> conditions, SuggestionParser suggestionParser,
             SuggestionDismissController.Callback callback) {
         List<Tile> suggestions = null;
-        List<DashboardCategory> categories = null;
+        DashboardCategory category = null;
         int suggestionConditionMode = DashboardData.HEADER_MODE_DEFAULT;
 
         mContext = context;
@@ -127,9 +129,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
         if (savedInstanceState != null) {
             suggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
-            categories = savedInstanceState.getParcelableArrayList(STATE_CATEGORY_LIST);
+            category = savedInstanceState.getParcelable(STATE_CATEGORY_LIST);
             suggestionConditionMode = savedInstanceState.getInt(
-                STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
+                    STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
             mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
                     STATE_SUGGESTIONS_SHOWN_LOGGED);
         } else {
@@ -139,7 +141,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mDashboardData = new DashboardData.Builder()
                 .setConditions(conditions)
                 .setSuggestions(suggestions)
-                .setCategories(categories)
+                .setCategory(category)
                 .setSuggestionConditionMode(suggestionConditionMode)
                 .build();
     }
@@ -148,37 +150,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mDashboardData.getSuggestions();
     }
 
-    public void setCategoriesAndSuggestions(List<DashboardCategory> categories,
+    public void setCategoriesAndSuggestions(DashboardCategory category,
             List<Tile> suggestions) {
-        if (mDashboardFeatureProvider.shouldTintIcon()) {
-            // TODO: Better place for tinting?
-            final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                    android.R.attr.colorControlNormal});
-            final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
-            a.recycle();
-            for (int i = 0; i < categories.size(); i++) {
-                for (int j = 0; j < categories.get(i).tiles.size(); j++) {
-                    final Tile tile = categories.get(i).tiles.get(j);
-
-                    if (tile.isIconTintable) {
-                        // If this drawable is tintable, tint it to match the color.
-                        tile.icon.setTint(tintColor);
-                    }
-                }
-            }
-
-            for (Tile suggestion : suggestions) {
-                if (suggestion.isIconTintable) {
-                    suggestion.icon.setTint(tintColor);
-                }
-            }
-        }
+        tintIcons(category, suggestions);
 
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
                 .setSuggestions(suggestions.subList(0,
                         Math.min(suggestions.size(), MAX_SUGGESTION_TO_SHOW)))
-                .setCategories(categories)
+                .setCategory(category)
                 .build();
         notifyDashboardDataChanged(prevData);
         List<Tile> shownSuggestions = null;
@@ -194,17 +174,19 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 final String identifier = mSuggestionFeatureProvider.getSuggestionIdentifier(
                         mContext, suggestion);
                 mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, identifier);
+                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, identifier,
+                        getSuggestionTaggedData());
                 mSuggestionsShownLogged.add(identifier);
             }
         }
     }
 
-    public void setCategory(List<DashboardCategory> category) {
+    public void setCategory(DashboardCategory category) {
+        tintIcons(category, null);
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setCategory called");
         mDashboardData = new DashboardData.Builder(prevData)
-                .setCategories(category)
+                .setCategory(category)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -262,10 +244,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     public void onBindViewHolder(DashboardItemHolder holder, int position) {
         final int type = mDashboardData.getItemTypeByPosition(position);
         switch (type) {
-            case R.layout.dashboard_category:
-                onBindCategory(holder,
-                        (DashboardCategory) mDashboardData.getItemEntityByPosition(position));
-                break;
             case R.layout.dashboard_tile:
                 final Tile tile = (Tile) mDashboardData.getItemEntityByPosition(position);
                 onBindTile(holder, tile);
@@ -274,7 +252,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 break;
             case R.layout.suggestion_condition_container:
                 onBindConditionAndSuggestion(
-                    (SuggestionAndConditionContainerHolder) holder, position);
+                        (SuggestionAndConditionContainerHolder) holder, position);
                 break;
             case R.layout.suggestion_condition_header:
                 onBindSuggestionConditionHeader((SuggestionAndConditionHeaderHolder) holder,
@@ -287,7 +265,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                             MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, false);
                     DashboardData prevData = mDashboardData;
                     mDashboardData = new DashboardData.Builder(prevData).setSuggestionConditionMode(
-                        DashboardData.HEADER_MODE_COLLAPSED).build();
+                            DashboardData.HEADER_MODE_COLLAPSED).build();
                     notifyDashboardDataChanged(prevData);
                     mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
                 });
@@ -327,7 +305,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                     mContext, suggestion);
             if (mSuggestionsShownLogged.contains(suggestionId)) {
                 mMetricsFeatureProvider.action(
-                        mContext, MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, suggestionId);
+                        mContext, MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION, suggestionId,
+                        getSuggestionTaggedData());
             }
         }
         mSuggestionsShownLogged.clear();
@@ -354,13 +333,17 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     private void logSuggestions() {
-        for (Tile suggestion : mDashboardData.getSuggestions()) {
+        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        if (suggestions == null) {
+            return;
+        }
+        for (Tile suggestion : suggestions) {
             final String suggestionId = mSuggestionFeatureProvider.getSuggestionIdentifier(
-                mContext, suggestion);
+                    mContext, suggestion);
             if (!mSuggestionsShownLogged.contains(suggestionId)) {
                 mMetricsFeatureProvider.action(
-                    mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                    suggestionId);
+                        mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, suggestionId,
+                        getSuggestionTaggedData());
                 mSuggestionsShownLogged.add(suggestionId);
             }
         }
@@ -371,9 +354,9 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             SuggestionConditionHeaderData data) {
         final int curMode = mDashboardData.getSuggestionConditionMode();
         final int nextMode = data.hiddenSuggestionCount > 0 && data.conditionCount > 0
-            && curMode != DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
-            ? DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
-            : DashboardData.HEADER_MODE_FULLY_EXPANDED;
+                && curMode != DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
+                ? DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
+                : DashboardData.HEADER_MODE_FULLY_EXPANDED;
         final boolean moreSuggestions = data.hiddenSuggestionCount > 0;
         final boolean hasConditions = data.conditionCount > 0;
         if (data.conditionCount > 0) {
@@ -398,22 +381,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             if (curMode == DashboardData.HEADER_MODE_COLLAPSED) {
                 if (data.conditionCount > 0) {
                     holder.summary.setText(mContext.getResources().getQuantityString(
-                        R.plurals.suggestions_collapsed_summary,
-                        data.hiddenSuggestionCount, data.hiddenSuggestionCount));
+                            R.plurals.suggestions_collapsed_summary,
+                            data.hiddenSuggestionCount, data.hiddenSuggestionCount));
                 } else {
                     holder.title.setText(mContext.getResources().getQuantityString(
-                        R.plurals.suggestions_collapsed_title,
-                        data.hiddenSuggestionCount, data.hiddenSuggestionCount));
+                            R.plurals.suggestions_collapsed_title,
+                            data.hiddenSuggestionCount, data.hiddenSuggestionCount));
                     holder.title.setTextColor(Color.BLACK);
                     holder.summary.setText(null);
                 }
             } else if (curMode == DashboardData.HEADER_MODE_DEFAULT) {
                 if (data.conditionCount > 0) {
                     holder.summary.setText(mContext.getString(
-                        R.string.suggestions_summary, data.hiddenSuggestionCount));
+                            R.string.suggestions_summary, data.hiddenSuggestionCount));
                 } else {
                     holder.title.setText(mContext.getString(
-                        R.string.suggestions_more_title, data.hiddenSuggestionCount));
+                            R.string.suggestions_more_title, data.hiddenSuggestionCount));
                     holder.title.setTextColor(Color.BLACK);
                     holder.summary.setText(null);
                 }
@@ -421,7 +404,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         } else if (data.conditionCount > 1) {
             holder.summary.setTextColor(Utils.getColorAccent(mContext));
             holder.summary.setText(
-                mContext.getString(R.string.condition_summary, data.conditionCount));
+                    mContext.getString(R.string.condition_summary, data.conditionCount));
         } else {
             holder.summary.setText(null);
         }
@@ -434,16 +417,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         holder.itemView.setPadding(0, padding, 0, padding);
 
         holder.itemView.setOnClickListener(v -> {
-            if (moreSuggestions ) {
+            if (moreSuggestions) {
                 logSuggestions();
             } else if (hasConditions) {
                 mMetricsFeatureProvider.action(mContext,
-                    MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, true);
+                        MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, true);
             }
             DashboardData prevData = mDashboardData;
             final boolean wasCollapsed = curMode == DashboardData.HEADER_MODE_COLLAPSED;
             mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestionConditionMode(nextMode).build();
+                    .setSuggestionConditionMode(nextMode).build();
             notifyDashboardDataChanged(prevData);
             if (wasCollapsed) {
                 mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
@@ -460,13 +443,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (position == SUGGESTION_CONDITION_HEADER_POSITION
                 && suggestions != null && suggestions.size() > 0) {
             mSuggestionAdapter = new SuggestionAdapter(mContext, (List<Tile>)
-                mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
+                    mDashboardData.getItemEntityByPosition(position), mSuggestionsShownLogged);
             mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                holder.data, mSuggestionParser, mCallback);
+                    holder.data, mSuggestionParser, mCallback);
             holder.data.setAdapter(mSuggestionAdapter);
         } else {
             ConditionAdapter adapter = new ConditionAdapter(mContext,
-                (List<Condition>) mDashboardData.getItemEntityByPosition(position),
+                    (List<Condition>) mDashboardData.getItemEntityByPosition(position),
                     mDashboardData.getSuggestionConditionMode());
             adapter.addDismissHandling(holder.data);
             holder.data.setAdapter(adapter);
@@ -491,22 +474,44 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    private void onBindCategory(DashboardItemHolder holder, DashboardCategory category) {
-        holder.title.setText(category.title);
+    private void tintIcons(DashboardCategory category, List<Tile> suggestions) {
+        if (!mDashboardFeatureProvider.shouldTintIcon()) {
+            return;
+        }
+        // TODO: Better place for tinting?
+        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
+                android.R.attr.colorControlNormal});
+        final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
+        a.recycle();
+        if (category != null) {
+            for (Tile tile : category.tiles) {
+                if (tile.isIconTintable) {
+                    // If this drawable is tintable, tint it to match the color.
+                    tile.icon.setTint(tintColor);
+                }
+            }
+        }
+        if (suggestions != null) {
+            for (Tile suggestion : suggestions) {
+                if (suggestion.isIconTintable) {
+                    suggestion.icon.setTint(tintColor);
+                }
+            }
+        }
     }
 
     void onSaveInstanceState(Bundle outState) {
         final List<Tile> suggestions = mDashboardData.getSuggestions();
-        final List<DashboardCategory> categories = mDashboardData.getCategories();
+        final DashboardCategory category = mDashboardData.getCategory();
         if (suggestions != null) {
             outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<>(suggestions));
         }
-        if (categories != null) {
-            outState.putParcelableArrayList(STATE_CATEGORY_LIST, new ArrayList<>(categories));
+        if (category != null) {
+            outState.putParcelable(STATE_CATEGORY_LIST, category);
         }
         outState.putStringArrayList(STATE_SUGGESTIONS_SHOWN_LOGGED, mSuggestionsShownLogged);
         outState.putInt(STATE_SUGGESTION_CONDITION_MODE,
-            mDashboardData.getSuggestionConditionMode());
+                mDashboardData.getSuggestionConditionMode());
     }
 
     private void updateConditionIcons(List<Icon> icons, ViewGroup parent) {
@@ -518,11 +523,16 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         parent.removeAllViews();
         for (int i = 1, size = icons.size(); i < size; i++) {
             ImageView icon = (ImageView) inflater.inflate(
-                R.layout.condition_header_icon, parent, false);
+                    R.layout.condition_header_icon, parent, false);
             icon.setImageIcon(icons.get(i));
             parent.addView(icon);
         }
         parent.setVisibility(View.VISIBLE);
+    }
+
+    private Pair<Integer, Object>[] getSuggestionTaggedData() {
+        return SuggestionLogHelper.getSuggestionTaggedData(
+                mSuggestionFeatureProvider.isSmartSuggestionEnabled(mContext));
     }
 
     public static class IconCache {

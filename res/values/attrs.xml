@@ -15,10 +15,6 @@
 -->
 
 <resources>
-    <declare-styleable name="IconPreferenceScreen">
-        <attr name="icon" />
-    </declare-styleable>
-
     <declare-styleable name="BatteryHistoryChart">
         <!-- Base text color, typeface, size, and style. -->
         <attr name="android:textAppearance" />
@@ -142,12 +138,6 @@
         <attr name="allowDividerBelow" format="boolean" />
     </declare-styleable>
 
-    <!-- For GesturePreference -->
-    <declare-styleable name="GesturePreference">
-        <attr name="animation" format="reference" />
-        <attr name="preview" format="reference" />
-    </declare-styleable>
-
     <declare-styleable name="VideoPreference">
         <attr name="animation" format="reference" />
         <attr name="preview" format="reference" />
@@ -171,4 +161,12 @@
         <attr name="android:gravity" />
     </declare-styleable>
 
+    <!-- For DonutView -->
+    <declare-styleable name="DonutView">
+        <attr name="meterBackgroundColor" format="color" />
+        <attr name="meterConsumedColor" format="color" />
+        <attr name="applyColorAccent" format="boolean" />
+        <attr name="showPercentString" format="boolean" />
+        <attr name="thickness" format="dimension" />
+    </declare-styleable>
 </resources>

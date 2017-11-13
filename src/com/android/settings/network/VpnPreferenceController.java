@@ -39,8 +39,9 @@ import android.util.SparseArray;
 import com.android.internal.net.LegacyVpnInfo;
 import com.android.internal.net.VpnConfig;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -48,8 +49,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.List;
 
 
-public class VpnPreferenceController extends PreferenceController implements LifecycleObserver,
-        OnResume, OnPause {
+public class VpnPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_VPN_SETTINGS = "vpn_settings";
     private static final NetworkRequest REQUEST = new NetworkRequest.Builder()

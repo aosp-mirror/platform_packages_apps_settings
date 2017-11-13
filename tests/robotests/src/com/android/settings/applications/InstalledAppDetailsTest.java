@@ -45,6 +45,7 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.Utils;
@@ -83,7 +84,11 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = InstalledAppDetailsTest.ShadowUtils.class
+)
 public final class InstalledAppDetailsTest {
 
     private static final String PACKAGE_NAME = "test_package_name";
@@ -99,7 +104,7 @@ public final class InstalledAppDetailsTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private SettingsActivity mActivity;
     @Mock
-    private DevicePolicyManager mDevicePolicyManager;
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private BatterySipper mBatterySipper;
     @Mock
@@ -491,7 +496,6 @@ public final class InstalledAppDetailsTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabled_buttonShouldWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";
@@ -513,7 +517,6 @@ public final class InstalledAppDetailsTest {
     }
 
     @Test
-    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabledAndInKeepEnabledWhitelist_buttonShouldNotWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";

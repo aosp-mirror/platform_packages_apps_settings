@@ -51,6 +51,9 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.fingerprint.FingerprintManager;
+import android.icu.text.MeasureFormat;
+import android.icu.util.Measure;
+import android.icu.util.MeasureUnit;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -104,6 +107,7 @@ import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.password.FingerprintManagerWrapper;
 import com.android.settings.password.IFingerprintManager;
 
@@ -821,33 +825,36 @@ public final class Utils extends com.android.settingslib.Utils {
             minutes = seconds / SECONDS_PER_MINUTE;
             seconds -= minutes * SECONDS_PER_MINUTE;
         }
-        if (withSeconds) {
-            if (days > 0) {
-                sb.append(context.getString(R.string.battery_history_days,
-                        days, hours, minutes, seconds));
-            } else if (hours > 0) {
-                sb.append(context.getString(R.string.battery_history_hours,
-                        hours, minutes, seconds));
-            } else if (minutes > 0) {
-                sb.append(context.getString(R.string.battery_history_minutes, minutes, seconds));
-            } else {
-                sb.append(context.getString(R.string.battery_history_seconds, seconds));
-            }
-        } else {
-            if (days > 0) {
-                sb.append(context.getString(R.string.battery_history_days_no_seconds,
-                        days, hours, minutes));
-            } else if (hours > 0) {
-                sb.append(context.getString(R.string.battery_history_hours_no_seconds,
-                        hours, minutes));
-            } else {
-                sb.append(context.getString(R.string.battery_history_minutes_no_seconds, minutes));
 
-                // Add ttsSpan if it only have minute value, because it will be read as "meters"
-                TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
-                        .setUnit("minute").build();
-                sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
+        final ArrayList<Measure> measureList = new ArrayList(4);
+        if (days > 0) {
+            measureList.add(new Measure(days, MeasureUnit.DAY));
+        }
+        if (hours > 0) {
+            measureList.add(new Measure(hours, MeasureUnit.HOUR));
+        }
+        if (minutes > 0) {
+            measureList.add(new Measure(minutes, MeasureUnit.MINUTE));
+        }
+        if (withSeconds && seconds > 0) {
+            measureList.add(new Measure(seconds, MeasureUnit.SECOND));
+        }
+        if (measureList.size() == 0) {
+            // Everything addable was zero, so nothing was added. We add a zero.
+            measureList.add(new Measure(0, withSeconds ? MeasureUnit.SECOND : MeasureUnit.MINUTE));
+        }
+        final Measure[] measureArray = measureList.toArray(new Measure[measureList.size()]);
+
+        final Locale locale = context.getResources().getConfiguration().locale;
+        final MeasureFormat measureFormat = MeasureFormat.getInstance(
+                locale, MeasureFormat.FormatWidth.NARROW);
+        sb.append(measureFormat.formatMeasures(measureArray));
+
+        if (measureArray.length == 1 && MeasureUnit.MINUTE.equals(measureArray[0].getUnit())) {
+            // Add ttsSpan if it only have minute value, because it will be read as "meters"
+            final TtsSpan ttsSpan = new TtsSpan.MeasureBuilder().setNumber(minutes)
+                    .setUnit("minute").build();
+            sb.setSpan(ttsSpan, 0, sb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
 
         return sb;
@@ -941,43 +948,6 @@ public final class Utils extends com.android.settingslib.Utils {
             }
         }
         return result;
-    }
-
-    // TODO: move this out of Utils to a mixin or a controller or a helper class.
-    @Deprecated
-    public static void handleLoadingContainer(View loading, View doneLoading, boolean done,
-            boolean animate) {
-        setViewShown(loading, !done, animate);
-        setViewShown(doneLoading, done, animate);
-    }
-
-    private static void setViewShown(final View view, boolean shown, boolean animate) {
-        if (animate) {
-            Animation animation = AnimationUtils.loadAnimation(view.getContext(),
-                    shown ? android.R.anim.fade_in : android.R.anim.fade_out);
-            if (shown) {
-                view.setVisibility(View.VISIBLE);
-            } else {
-                animation.setAnimationListener(new AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
-                        view.setVisibility(View.INVISIBLE);
-                    }
-                });
-            }
-            view.startAnimation(animation);
-        } else {
-            view.clearAnimation();
-            view.setVisibility(shown ? View.VISIBLE : View.INVISIBLE);
-        }
     }
 
     /**
@@ -1311,6 +1281,28 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Return {@code true} if the supplied package is device owner or profile owner of at
+     * least one user.
+     * @param userManager used to get profile owner app for each user
+     * @param devicePolicyManager used to check whether it is device owner app
+     * @param packageName package to check about
+     */
+    public static boolean isProfileOrDeviceOwner(UserManager userManager,
+            DevicePolicyManagerWrapper devicePolicyManager, String packageName) {
+        List<UserInfo> userInfos = userManager.getUsers();
+        if (devicePolicyManager.isDeviceOwnerAppOnAnyUser(packageName)) {
+            return true;
+        }
+        for (int i = 0, size = userInfos.size(); i < size; i++) {
+            ComponentName cn = devicePolicyManager.getProfileOwnerAsUser(userInfos.get(i).id);
+            if (cn != null && cn.getPackageName().equals(packageName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Return the resource id to represent the install status for an app
      */
     @StringRes
@@ -1319,20 +1311,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return R.string.not_installed;
         }
         return info.enabled ? R.string.installed : R.string.disabled;
-    }
-
-    /**
-     * Control if other apps can display overlays. By default this is allowed. Be sure to
-     * re-enable overlays, as the effect is system-wide.
-     */
-    public static void setOverlayAllowed(Context context, IBinder token, boolean allowed) {
-        AppOpsManager appOpsManager = context.getSystemService(AppOpsManager.class);
-        if (appOpsManager != null) {
-            appOpsManager.setUserRestriction(AppOpsManager.OP_SYSTEM_ALERT_WINDOW,
-                    !allowed, token);
-            appOpsManager.setUserRestriction(AppOpsManager.OP_TOAST_WINDOW,
-                    !allowed, token);
-        }
     }
 
     private static boolean isVolumeValid(VolumeInfo volume) {

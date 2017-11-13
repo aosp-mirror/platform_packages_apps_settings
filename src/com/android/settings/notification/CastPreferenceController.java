@@ -18,9 +18,11 @@ package com.android.settings.notification;
 
 import android.content.Context;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class CastPreferenceController extends PreferenceController {
+public class CastPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_WIFI_DISPLAY = "wifi_display";
 

@@ -37,4 +37,9 @@ public class UserManagerWrapperImpl implements UserManagerWrapper {
     public List<UserInfo> getUsers() {
         return mUserManager.getUsers();
     }
+
+    @Override
+    public List<UserInfo> getProfiles(int userHandle) {
+        return mUserManager.getProfiles(userHandle);
+    }
 }

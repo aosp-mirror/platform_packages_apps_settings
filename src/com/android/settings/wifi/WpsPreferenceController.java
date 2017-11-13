@@ -29,18 +29,19 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that shows Dialog for WPS progress. Disabled when Wi-Fi is off.
+ * {@link PreferenceControllerMixin} that shows Dialog for WPS progress. Disabled when Wi-Fi is off.
  */
-public class WpsPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnPause, OnResume {
+public class WpsPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnResume {
 
     private static final String KEY_WPS_PUSH = "wps_push_button";
     private static final String KEY_WPS_PIN = "wps_pin_entry";

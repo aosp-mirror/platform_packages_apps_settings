@@ -49,7 +49,7 @@ import com.android.settingslib.RestrictedLockUtils;
  *
  * This fragment is a replacement of {@link RestrictedSettingsFragment} but extends
  * from {@link DashboardFragment}, so we could also use
- * {@link com.android.settings.core.PreferenceController} in this fragment.
+ * {@link com.android.settingslib.core.AbstractPreferenceController} in this fragment.
  */
 public abstract class RestrictedDashboardFragment extends DashboardFragment {
 

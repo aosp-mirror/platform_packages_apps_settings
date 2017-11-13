@@ -27,15 +27,15 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
-import java.util.List;
 
-public abstract class SettingPrefController extends PreferenceController implements
-    LifecycleObserver, OnResume, OnPause {
+public abstract class SettingPrefController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     protected static final int DEFAULT_ON = 1;
 
@@ -55,6 +55,7 @@ public abstract class SettingPrefController extends PreferenceController impleme
     @Override
     public void displayPreference(PreferenceScreen screen) {
         mPreference.init(mParent);
+        super.displayPreference(screen);
         if (isAvailable()) {
             mSettingsObserver = new SettingsObserver();
         }

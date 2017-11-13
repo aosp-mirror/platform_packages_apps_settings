@@ -25,7 +25,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.UserAppInfo;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
@@ -33,8 +34,8 @@ import java.util.List;
  * PreferenceController that builds a dynamic list of applications provided by
  * {@link ApplicationListBuilder} instance.
  */
-public class ApplicationListPreferenceController extends PreferenceController
-        implements ApplicationFeatureProvider.ListOfAppsCallback {
+public class ApplicationListPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, ApplicationFeatureProvider.ListOfAppsCallback {
     private final PackageManager mPm;
     private SettingsPreferenceFragment mParent;
 

@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         implements SearchResultsRankerCallback {
@@ -55,13 +56,14 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
 
     @VisibleForTesting
     static final String APP_RESULTS_LOADER_KEY = InstalledAppResultLoader.class.getName();
+    @VisibleForTesting
+    static final String ACCESSIBILITY_LOADER_KEY = AccessibilityServiceResultLoader.class.getName();
+    @VisibleForTesting
+    static final String INPUT_DEVICE_LOADER_KEY = InputDeviceResultLoader.class.getName();
 
     @VisibleForTesting
     static final int MSG_RANKING_TIMED_OUT = 1;
 
-    // TODO(b/38197948): Tune this timeout based on latency of static and async rankings. Also, we
-    // should add a gservices flag to control this.
-    private static final long RANKING_TIMEOUT_MS = 300;
     private final SearchFragment mFragment;
     private final Context mContext;
     private final List<SearchResult> mSearchResults;
@@ -76,11 +78,16 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
     @IntDef({DISABLED, PENDING_RESULTS, SUCCEEDED, FAILED, TIMED_OUT})
     @Retention(RetentionPolicy.SOURCE)
     private @interface AsyncRankingState {}
-    private static final int DISABLED = 0;
-    private static final int PENDING_RESULTS = 1;
-    private static final int SUCCEEDED = 2;
-    private static final int FAILED = 3;
-    private static final int TIMED_OUT = 4;
+    @VisibleForTesting
+    static final int DISABLED = 0;
+    @VisibleForTesting
+    static final int PENDING_RESULTS = 1;
+    @VisibleForTesting
+    static final int SUCCEEDED = 2;
+    @VisibleForTesting
+    static final int FAILED = 3;
+    @VisibleForTesting
+    static final int TIMED_OUT = 4;
     private @AsyncRankingState int mAsyncRankingState;
 
     public SearchResultsAdapter(SearchFragment fragment,
@@ -235,12 +242,17 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
             mAsyncRankingState = PENDING_RESULTS;
             mSearchFeatureProvider.cancelPendingSearchQuery(mContext);
             final Handler handler = getHandler();
+            final long timeoutMs = mSearchFeatureProvider.smartSearchRankingTimeoutMs(mContext);
             handler.sendMessageDelayed(
-                    handler.obtainMessage(MSG_RANKING_TIMED_OUT), RANKING_TIMEOUT_MS);
+                    handler.obtainMessage(MSG_RANKING_TIMED_OUT), timeoutMs);
             mSearchFeatureProvider.querySearchResults(mContext, query, this);
         } else {
             mAsyncRankingState = DISABLED;
         }
+    }
+
+    @AsyncRankingState int getAsyncRankingState() {
+        return mAsyncRankingState;
     }
 
     /**
@@ -252,13 +264,22 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 getSortedLoadedResults(DB_RESULTS_LOADER_KEY);
         List<? extends SearchResult> installedAppResults =
                 getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> accessibilityResults =
+                getSortedLoadedResults(ACCESSIBILITY_LOADER_KEY);
+        List<? extends SearchResult> inputDeviceResults =
+                getSortedLoadedResults(INPUT_DEVICE_LOADER_KEY);
+
         int dbSize = databaseResults.size();
         int appSize = installedAppResults.size();
-
+        int a11ySize = accessibilityResults.size();
+        int inputDeviceSize = inputDeviceResults.size();
         int dbIndex = 0;
         int appIndex = 0;
+        int a11yIndex = 0;
+        int inputDeviceIndex = 0;
         int rank = SearchResult.TOP_RANK;
 
+        // TODO: We need a helper method to do k-way merge.
         mStaticallyRankedSearchResults.clear();
         while (rank <= SearchResult.BOTTOM_RANK) {
             while ((dbIndex < dbSize) && (databaseResults.get(dbIndex).rank == rank)) {
@@ -266,6 +287,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
             }
             while ((appIndex < appSize) && (installedAppResults.get(appIndex).rank == rank)) {
                 mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+            }
+            while ((a11yIndex < a11ySize) && (accessibilityResults.get(a11yIndex).rank == rank)) {
+                mStaticallyRankedSearchResults.add(accessibilityResults.get(a11yIndex++));
+            }
+            while (inputDeviceIndex < inputDeviceSize
+                    && inputDeviceResults.get(inputDeviceIndex).rank == rank) {
+                mStaticallyRankedSearchResults.add(inputDeviceResults.get(inputDeviceIndex++));
             }
             rank++;
         }
@@ -275,6 +303,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         }
         while (appIndex < appSize) {
             mStaticallyRankedSearchResults.add(installedAppResults.get(appIndex++));
+        }
+        while(a11yIndex < a11ySize) {
+            mStaticallyRankedSearchResults.add(accessibilityResults.get(a11yIndex++));
+        }
+        while (inputDeviceIndex < inputDeviceSize) {
+            mStaticallyRankedSearchResults.add(inputDeviceResults.get(inputDeviceIndex++));
         }
     }
 
@@ -308,35 +342,44 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
                 getUnsortedLoadedResults(DB_RESULTS_LOADER_KEY);
         List<? extends SearchResult> installedAppResults =
                 getSortedLoadedResults(APP_RESULTS_LOADER_KEY);
+        List<? extends SearchResult> accessibilityResults =
+                getSortedLoadedResults(ACCESSIBILITY_LOADER_KEY);
+        List<? extends SearchResult> inputDeviceResults =
+                getSortedLoadedResults(INPUT_DEVICE_LOADER_KEY);
         int dbSize = databaseResults.size();
         int appSize = installedAppResults.size();
+        int a11ySize = accessibilityResults.size();
+        int inputDeviceSize = inputDeviceResults.size();
 
-        final List<SearchResult> asyncRankingResults = new ArrayList<>(dbSize + appSize);
-        List<SearchResult> databaseResultsSortedByScores = new ArrayList<>(databaseResults);
-        Collections.sort(databaseResultsSortedByScores, new Comparator<SearchResult>() {
-            @Override
-            public int compare(SearchResult o1, SearchResult o2) {
-                float score1 = getRankingScoreByStableId(o1.stableId);
-                float score2 = getRankingScoreByStableId(o2.stableId);
-                if (score1 > score2) {
-                    return -1;
-                } else if (score1 == score2) {
-                    return 0;
-                } else {
-                    return 1;
-                }
-            }
-        });
-        asyncRankingResults.addAll(databaseResultsSortedByScores);
-        // App results are not ranked by async ranking and appended at the end of the list.
+        final List<SearchResult> asyncRankingResults = new ArrayList<>(
+                dbSize + appSize + a11ySize + inputDeviceSize);
+        TreeSet<SearchResult> dbResultsSortedByScores = new TreeSet<>(
+                new Comparator<SearchResult>() {
+                    @Override
+                    public int compare(SearchResult o1, SearchResult o2) {
+                        float score1 = getRankingScoreByStableId(o1.stableId);
+                        float score2 = getRankingScoreByStableId(o2.stableId);
+                        if (score1 > score2) {
+                            return -1;
+                        } else if (score1 == score2) {
+                            return 0;
+                        } else {
+                            return 1;
+                        }
+                    }
+                });
+        dbResultsSortedByScores.addAll(databaseResults);
+        asyncRankingResults.addAll(dbResultsSortedByScores);
+        // Other results are not ranked by async ranking and appended at the end of the list.
         asyncRankingResults.addAll(installedAppResults);
+        asyncRankingResults.addAll(accessibilityResults);
+        asyncRankingResults.addAll(inputDeviceResults);
         return asyncRankingResults;
     }
 
     @VisibleForTesting
     Set<? extends SearchResult> getUnsortedLoadedResults(String loaderKey) {
-        return mResultsMap.containsKey(loaderKey) ?
-                mResultsMap.get(loaderKey) : new HashSet<SearchResult>();
+        return mResultsMap.containsKey(loaderKey) ? mResultsMap.get(loaderKey) : new HashSet<>();
     }
 
     @VisibleForTesting
@@ -390,7 +433,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchViewHolder>
         return mHandler;
     }
 
-    private void postSearchResults(List<SearchResult> newSearchResults, boolean detectMoves) {
+    @VisibleForTesting
+    public void postSearchResults(List<SearchResult> newSearchResults, boolean detectMoves) {
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
                 new SearchResultDiffCallback(mSearchResults, newSearchResults), detectMoves);
         mSearchResults.clear();

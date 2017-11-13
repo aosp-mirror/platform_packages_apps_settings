@@ -19,6 +19,8 @@ import static android.net.NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL;
 import static android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED;
 import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 
+import static com.android.settings.wifi.WifiSettings.isEditabilityLockedDown;
+
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,6 +42,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.support.v4.text.BidiFormatter;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
@@ -54,11 +57,12 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.vpn2.ConnectivityManagerWrapper;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wifi.WifiDetailPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -76,8 +80,8 @@ import java.util.stream.Collectors;
  * Controller for logic pertaining to displaying Wifi information for the
  * {@link WifiNetworkDetailsFragment}.
  */
-public class WifiDetailPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnPause, OnResume {
+public class WifiDetailPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnResume {
     private static final String TAG = "WifiDetailsPrefCtrl";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
@@ -244,7 +248,6 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         mButtonsPref = (LayoutPreference) screen.findPreference(KEY_BUTTONS_PREF);
         mSignInButton = mButtonsPref.findViewById(R.id.signin_button);
-        mSignInButton.setText(R.string.support_sign_in_button_text);
         mSignInButton.setOnClickListener(view -> signIntoNetwork());
 
         mSignalStrengthPref =
@@ -264,7 +267,6 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
 
         mSecurityPref.setDetailText(mAccessPoint.getSecurityString(false /* concise */));
         mForgetButton = mButtonsPref.findViewById(R.id.forget_button);
-        mForgetButton.setText(R.string.forget);
         mForgetButton.setOnClickListener(view -> forgetNetwork());
     }
 
@@ -441,7 +443,8 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
         updatePreference(mDnsPref, dnsServers);
 
         if (ipv6Addresses.length() > 0) {
-            mIpv6AddressPref.setSummary(ipv6Addresses.toString());
+            mIpv6AddressPref.setSummary(
+                    BidiFormatter.getInstance().unicodeWrap(ipv6Addresses.toString()));
             mIpv6Category.setVisible(true);
         } else {
             mIpv6Category.setVisible(false);
@@ -462,7 +465,9 @@ public class WifiDetailPreferenceController extends PreferenceController impleme
      * Returns whether the network represented by this preference can be forgotten.
      */
     private boolean canForgetNetwork() {
-        return mWifiInfo != null && mWifiInfo.isEphemeral() || mWifiConfig != null;
+        // TODO(65396674): create test for the locked down scenario
+        return (mWifiInfo != null && mWifiInfo.isEphemeral())
+                || (mWifiConfig != null && !isEditabilityLockedDown(mContext, mWifiConfig));
     }
 
     /**

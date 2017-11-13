@@ -19,6 +19,8 @@ package com.android.settings.search;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
+
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
@@ -53,6 +55,18 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
+    public AccessibilityServiceResultLoader getAccessibilityServiceResultLoader(Context context,
+            String query) {
+        return new AccessibilityServiceResultLoader(context, cleanQuery(query),
+                getSiteMapManager());
+    }
+
+    @Override
+    public InputDeviceResultLoader getInputDeviceResultLoader(Context context, String query) {
+        return new InputDeviceResultLoader(context, cleanQuery(query), getSiteMapManager());
+    }
+
+    @Override
     public SavedQueryLoader getSavedQueryLoader(Context context) {
         return new SavedQueryLoader(context);
     }
@@ -80,6 +94,9 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     @Override
     public void updateIndexAsync(Context context, IndexingCallback callback) {
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "updating index async");
+        }
         getIndexingManager(context).indexDatabase(callback);
     }
 

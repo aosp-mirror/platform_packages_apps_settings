@@ -250,12 +250,13 @@ public final class ChooseLockSettingsHelper {
             CharSequence message, Class<?> activityClass, boolean returnCredentials,
             boolean external, boolean hasChallenge, long challenge,
             int userId, @Nullable CharSequence alternateButton) {
+        final boolean frp = (userId == LockPatternUtils.USER_FRP);
         final Intent intent = new Intent();
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.TITLE_TEXT, title);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.HEADER_TEXT, header);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.DETAILS_TEXT, message);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.ALLOW_FP_AUTHENTICATION, external);
-        intent.putExtra(ConfirmDeviceCredentialBaseFragment.DARK_THEME, external);
+        intent.putExtra(ConfirmDeviceCredentialBaseFragment.DARK_THEME, external && !frp);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_CANCEL_BUTTON, external);
         intent.putExtra(ConfirmDeviceCredentialBaseFragment.SHOW_WHEN_LOCKED, external);
         intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, returnCredentials);

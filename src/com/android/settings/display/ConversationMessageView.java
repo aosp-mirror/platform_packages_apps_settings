@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.android.settings.R;
 
 /**
@@ -76,7 +75,7 @@ public class ConversationMessageView extends FrameLayout {
         mIconTextColor = a.getColor(R.styleable.ConversationMessageView_iconTextColor, 0);
         mIconBackgroundColor = a.getColor(R.styleable.ConversationMessageView_iconBackgroundColor,
                 0);
-
+        a.recycle();
         LayoutInflater.from(context).inflate(R.layout.conversation_message_icon, this);
         LayoutInflater.from(context).inflate(R.layout.conversation_message_content, this);
     }
@@ -252,7 +251,7 @@ public class ConversationMessageView extends FrameLayout {
 
     private static Drawable getTintedDrawable(final Context context, final Drawable drawable,
             final int color) {
-        // For some reason occassionally drawables on JB has a null constant state
+        // For some reason occasionally drawables on JB has a null constant state
         final Drawable.ConstantState constantStateDrawable = drawable.getConstantState();
         final Drawable retDrawable = (constantStateDrawable != null)
                 ? constantStateDrawable.newDrawable(context.getResources()).mutate()

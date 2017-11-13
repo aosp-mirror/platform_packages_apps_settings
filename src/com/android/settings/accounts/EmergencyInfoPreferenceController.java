@@ -23,15 +23,16 @@ import android.content.res.Resources;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class EmergencyInfoPreferenceController extends PreferenceController {
+public class EmergencyInfoPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_EMERGENCY_INFO = "emergency_info";
     private static final String ACTION_EDIT_EMERGENCY_INFO = "android.settings.EDIT_EMERGENCY_INFO";

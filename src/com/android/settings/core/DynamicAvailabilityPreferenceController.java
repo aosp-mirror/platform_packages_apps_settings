@@ -20,12 +20,13 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public abstract class DynamicAvailabilityPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume {
+public abstract class DynamicAvailabilityPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume {
 
     private Preference mPreference;
     private PreferenceScreen mScreen;

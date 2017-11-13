@@ -18,16 +18,24 @@ package com.android.settings.password;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.pressKey;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.isEnabled;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.hamcrest.CoreMatchers.not;
+
+import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.MediumTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.KeyEvent;
 
 import com.android.settings.R;
 
@@ -57,5 +65,31 @@ public class SetupChooseLockPasswordAppTest {
         onView(withId(android.R.id.button1)).check(matches(isDisplayed())).perform(click());
 
         assertThat(activity.isFinishing()).named("Is finishing").isTrue();
+    }
+
+    @Test
+    public void clearNotVisible_when_activityLaunchedInitially() {
+        mActivityTestRule.launchActivity(null);
+        onView(withId(R.id.clear_button)).check(matches(
+                withEffectiveVisibility(ViewMatchers.Visibility.GONE)));
+    }
+
+    @Test
+    public void clearNotEnabled_when_nothingEntered() throws Throwable {
+        mActivityTestRule.launchActivity(null);
+        onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
+                .perform(pressKey(KeyEvent.KEYCODE_ENTER));
+        onView(withId(R.id.clear_button)).check(matches(isDisplayed()))
+                .check(matches(not(isEnabled())));
+    }
+
+    @Test
+    public void clearEnabled_when_somethingEnteredToConfirm() {
+        mActivityTestRule.launchActivity(null);
+        onView(withId(R.id.password_entry)).perform(ViewActions.typeText("1234"))
+                .perform(pressKey(KeyEvent.KEYCODE_ENTER))
+                .perform(ViewActions.typeText("1"));
+        // clear should be present if text field contains content
+        onView(withId(R.id.clear_button)).check(matches(isDisplayed()));
     }
 }

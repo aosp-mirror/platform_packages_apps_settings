@@ -16,9 +16,9 @@
 
 package com.android.settings.dashboard.suggestions;
 
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -27,19 +27,24 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.provider.Settings.Secure;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
+import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
 import com.android.settings.Settings.DoubleTwistSuggestionActivity;
+import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.gestures.DoubleTapPowerSettings;
@@ -49,22 +54,31 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+
+import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowSecureSettings.class, SettingsShadowResources.class}
+)
 public class SuggestionFeatureProviderImplTest {
 
     private static final String DOUBLE_TWIST_SENSOR_NAME = "double_twist_sensor_name";
@@ -77,11 +91,15 @@ public class SuggestionFeatureProviderImplTest {
     @Mock
     private Tile mSuggestion;
     @Mock
+    private ActivityManager mActivityManager;
+    @Mock
     private PackageManager mPackageManager;
     @Mock
     private FingerprintManager mFingerprintManager;
     @Mock
     private SharedPreferences mSharedPreferences;
+    @Captor
+    private ArgumentCaptor<Pair> mTaggedDataCaptor = ArgumentCaptor.forClass(Pair.class);
 
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
@@ -96,6 +114,8 @@ public class SuggestionFeatureProviderImplTest {
         when((Object) mContext.getSystemService(FingerprintManager.class))
                 .thenReturn(mFingerprintManager);
         when(mContext.getApplicationContext()).thenReturn(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.ACTIVITY_SERVICE)).thenReturn(mActivityManager);
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
 
         mSuggestion.intent = new Intent().setClassName("pkg", "cls");
         mSuggestion.category = "category";
@@ -104,7 +124,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);
@@ -115,7 +134,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
@@ -127,7 +145,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTapPower_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
@@ -140,7 +157,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_doubleTwist_trueWhenNotAvailable() {
         SettingsShadowResources.overrideResource(
                 R.string.gesture_double_twist_sensor_name, "nonexistant name");
@@ -153,7 +169,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -167,7 +182,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -182,7 +196,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplayPickup_falseWhenNotVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -196,7 +209,6 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowResources.class)
     public void isSuggestionCompleted_ambientDisplayPickup_trueWhenVisited() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.string.config_dozeComponent, "foo");
@@ -264,6 +276,20 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
+    public void isSuggestionEnabled_isLowMemoryDevice_shouldReturnFalse() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(true);
+
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isFalse();
+    }
+
+    @Test
+    public void isSuggestionEnabled_isNotLowMemoryDevice_shouldReturnTrue() {
+        when(mActivityManager.isLowRamDevice()).thenReturn(false);
+
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
+    }
+
+    @Test
     public void dismissSuggestion_noParserOrSuggestion_noop() {
         mProvider.dismissSuggestion(mContext, null, null);
         mProvider.dismissSuggestion(mContext, mSuggestionParser, null);
@@ -309,14 +335,17 @@ public class SuggestionFeatureProviderImplTest {
 
     @Test
     public void dismissSuggestion_hasMoreDismissCount_shouldNotDisableComponent() {
-        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
+        when(mSuggestionParser.dismissSuggestion(any(Tile.class)))
                 .thenReturn(false);
         mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
 
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext, never()).getPackageManager();
     }
 
@@ -329,7 +358,7 @@ public class SuggestionFeatureProviderImplTest {
 
     @Test
     public void dismissSuggestion_hasNoMoreDismissCount_shouldDisableComponent() {
-        when(mSuggestionParser.dismissSuggestion(any(Tile.class), anyBoolean()))
+        when(mSuggestionParser.dismissSuggestion(any(Tile.class)))
                 .thenReturn(true);
 
         mProvider.dismissSuggestion(mContext, mSuggestionParser, mSuggestion);
@@ -337,8 +366,10 @@ public class SuggestionFeatureProviderImplTest {
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
-
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext.getPackageManager())
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
@@ -364,5 +395,52 @@ public class SuggestionFeatureProviderImplTest {
         mProvider.filterExclusiveSuggestions(suggestions);
 
         assertThat(suggestions).hasSize(3);
+    }
+
+    @Test
+    public void hasUsedNightDisplay_returnsFalse_byDefault() {
+        assertThat(mProvider.hasUsedNightDisplay(mContext)).isFalse();
+    }
+
+    @Test
+    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivatedAndManual() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
+        assertThat(mProvider.hasUsedNightDisplay(mContext)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifNonManualMode() {
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifPreviouslyCleared() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                null);
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isNotCompleted_byDefault() {
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isFalse();
     }
 }

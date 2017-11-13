@@ -24,15 +24,17 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import static android.os.UserManager.DISALLOW_SET_WALLPAPER;
 
 import java.util.List;
 
-public class WallpaperPreferenceController extends PreferenceController {
+public class WallpaperPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String TAG = "WallpaperPrefController";
 

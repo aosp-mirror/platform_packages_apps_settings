@@ -95,7 +95,7 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fingerprint_enroll_enrolling);
-        setHeaderText(R.string.security_settings_fingerprint_enroll_start_title);
+        setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title);
         mStartMessage = (TextView) findViewById(R.id.start_message);
         mRepeatMessage = (TextView) findViewById(R.id.repeat_message);
         mErrorText = (TextView) findViewById(R.id.error_text);
@@ -289,12 +289,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
 
     private void updateDescription() {
         if (mSidecar.getEnrollmentSteps() == -1) {
-            setHeaderText(R.string.security_settings_fingerprint_enroll_start_title);
             mStartMessage.setVisibility(View.VISIBLE);
             mRepeatMessage.setVisibility(View.INVISIBLE);
         } else {
-            setHeaderText(R.string.security_settings_fingerprint_enroll_repeat_title,
-                    true /* force */);
             mStartMessage.setVisibility(View.INVISIBLE);
             mRepeatMessage.setVisibility(View.VISIBLE);
         }
@@ -345,6 +342,9 @@ public class FingerprintEnrollEnrolling extends FingerprintEnrollBase
             animateProgress(progress);
         } else {
             mProgressBar.setProgress(progress);
+            if (progress >= PROGRESS_BAR_MAX) {
+                mDelayedFinishRunnable.run();
+            }
         }
     }
 

@@ -16,12 +16,21 @@
 
 package com.android.settings.fingerprint;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.UserHandle;
+import android.support.annotation.NonNull;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSensor {
@@ -43,7 +52,53 @@ public class SetupFingerprintEnrollFindSensor extends FingerprintEnrollFindSenso
     }
 
     @Override
+    protected void onSkipButtonClick() {
+        new SkipFingerprintDialog().show(getFragmentManager());
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsEvent.FINGERPRINT_FIND_SENSOR_SETUP;
+    }
+
+    public static class SkipFingerprintDialog extends InstrumentedDialogFragment
+            implements DialogInterface.OnClickListener {
+        private static final String TAG_SKIP_DIALOG = "skip_dialog";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_FINGERPRINT_SKIP_SETUP;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return onCreateDialogBuilder().create();
+        }
+
+        @NonNull
+        public AlertDialog.Builder onCreateDialogBuilder() {
+            return new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.setup_fingerprint_enroll_skip_title)
+                    .setPositiveButton(R.string.skip_anyway_button_label, this)
+                    .setNegativeButton(R.string.go_back_button_label, this)
+                    .setMessage(R.string.setup_fingerprint_enroll_skip_after_adding_lock_text);
+        }
+
+        @Override
+        public void onClick(DialogInterface dialog, int button) {
+            switch (button) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    Activity activity = getActivity();
+                    if (activity != null) {
+                        activity.setResult(RESULT_SKIP);
+                        activity.finish();
+                    }
+                    break;
+            }
+        }
+
+        public void show(FragmentManager manager) {
+            show(manager, TAG_SKIP_DIALOG);
+        }
     }
 }

@@ -17,53 +17,6 @@
 
 package com.android.settings.search;
 
-import com.android.settings.R;
-
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.res.XmlResourceParser;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.provider.SearchIndexableData;
-import android.provider.SearchIndexableResource;
-import android.provider.SearchIndexablesContract;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.VisibleForTesting;
-import android.text.TextUtils;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.util.Pair;
-import android.util.Xml;
-
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
-
-import com.android.settings.overlay.FeatureFactory;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_CLASS_NAME;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_RAW_ENTRIES;
@@ -85,17 +38,22 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INT
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_CLASS;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_INTENT_TARGET_PACKAGE;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RESID;
-
-import static com.android.settings.search.DatabaseResultLoader.*;
+import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ID;
+import static com.android.settings.search.DatabaseResultLoader
+        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
+import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_RANK;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_OFF_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
+        .DATA_SUMMARY_OFF_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
+        .DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
@@ -111,6 +69,49 @@ import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.SCREE
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.USER_ID;
 import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
 
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.res.XmlResourceParser;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.provider.SearchIndexableData;
+import android.provider.SearchIndexableResource;
+import android.provider.SearchIndexablesContract;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
+import android.util.ArraySet;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.util.Xml;
+
+import com.android.settings.SettingsActivity;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * Consumes the SearchIndexableProvider content providers.
  * Updates the Resource, Raw Data and non-indexable data for Search.
@@ -118,6 +119,7 @@ import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS
  * TODO this class needs to be refactored by moving most of its methods into controllers
  */
 public class DatabaseIndexingManager {
+
     private static final String LOG_TAG = "DatabaseIndexingManager";
 
     private static final String METRICS_ACTION_SETTINGS_ASYNC_INDEX =
@@ -165,6 +167,7 @@ public class DatabaseIndexingManager {
      * calls will only gather non-indexable keys.
      */
     public void performIndexing() {
+        final long startTime = System.currentTimeMillis();
         final Intent intent = new Intent(SearchIndexablesContract.PROVIDER_INTERFACE);
         final List<ResolveInfo> providers =
                 mContext.getPackageManager().queryIntentContentProviders(intent, 0);
@@ -191,15 +194,31 @@ public class DatabaseIndexingManager {
             if (isFullIndex) {
                 addIndexablesFromRemoteProvider(packageName, authority);
             }
+            final long nonIndexableStartTime = System.currentTimeMillis();
             addNonIndexablesKeysFromRemoteProvider(packageName, authority);
+            if (SettingsSearchIndexablesProvider.DEBUG) {
+                final long nonIndextableTime = System.currentTimeMillis() - nonIndexableStartTime;
+                Log.d(LOG_TAG, "performIndexing update non-indexable for package " + packageName
+                        + " took time: " + nonIndextableTime);
+            }
         }
-
+        final long updateDatabaseStartTime = System.currentTimeMillis();
         updateDatabase(isFullIndex, localeStr);
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            final long updateDatabaseTime = System.currentTimeMillis() - updateDatabaseStartTime;
+            Log.d(LOG_TAG, "performIndexing updateDatabase took time: " + updateDatabaseTime);
+        }
 
         //TODO(63922686): Setting indexed should be a single method, not 3 separate setters.
         IndexDatabaseHelper.setLocaleIndexed(mContext, localeStr);
         IndexDatabaseHelper.setBuildIndexed(mContext, fingerprint);
         IndexDatabaseHelper.setProvidersIndexed(mContext, providerVersionedNames);
+
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            final long indexingTime = System.currentTimeMillis() - startTime;
+            Log.d(LOG_TAG, "performIndexing took time: " + indexingTime
+                    + "ms. Full index? " + isFullIndex);
+        }
     }
 
     /**
@@ -222,7 +241,7 @@ public class DatabaseIndexingManager {
      * Finally, we record that the locale has been indexed.
      *
      * @param needsReindexing true the database needs to be rebuilt.
-     * @param localeStr the default locale for the device.
+     * @param localeStr       the default locale for the device.
      */
     @VisibleForTesting
     void updateDatabase(boolean needsReindexing, String localeStr) {
@@ -265,9 +284,9 @@ public class DatabaseIndexingManager {
     /**
      * Inserts {@link SearchIndexableData} into the database.
      *
-     * @param database where the data will be inserted.
-     * @param localeStr is the locale of the data to be inserted.
-     * @param dataToUpdate is a {@link List} of the data to be inserted.
+     * @param database         where the data will be inserted.
+     * @param localeStr        is the locale of the data to be inserted.
+     * @param dataToUpdate     is a {@link List} of the data to be inserted.
      * @param nonIndexableKeys is a {@link Map} from Package Name to a {@link Set} of keys which
      *                         identify search results which should not be surfaced.
      */
@@ -295,7 +314,7 @@ public class DatabaseIndexingManager {
      * All rows which are enabled but are now flagged with non-indexable keys will become disabled.
      * All rows which are disabled but no longer a non-indexable key will become enabled.
      *
-     * @param database The database to validate.
+     * @param database         The database to validate.
      * @param nonIndexableKeys A map between package name and the set of non-indexable keys for it.
      */
     @VisibleForTesting
@@ -385,7 +404,8 @@ public class DatabaseIndexingManager {
             String authority) {
         final List<String> keys =
                 getNonIndexablesKeysFromRemoteProvider(packageName, authority);
-        addNonIndexableKeys(packageName, new HashSet<>(keys));
+
+        addNonIndexableKeys(packageName, keys);
     }
 
     private List<String> getNonIndexablesKeysFromRemoteProvider(String packageName,
@@ -442,9 +462,11 @@ public class DatabaseIndexingManager {
         }
     }
 
-    public void addNonIndexableKeys(String authority, Set<String> keys) {
+    public void addNonIndexableKeys(String authority, List<String> keys) {
         synchronized (mDataToProcess) {
-            mDataToProcess.nonIndexableKeys.put(authority, keys);
+            if (keys != null && !keys.isEmpty()) {
+                mDataToProcess.nonIndexableKeys.put(authority, new ArraySet<>(keys));
+            }
         }
     }
 
@@ -734,7 +756,7 @@ public class DatabaseIndexingManager {
             final String intentTargetPackage = sir.intentTargetPackage;
             final String intentTargetClass = sir.intentTargetClass;
 
-            Map<String, PreferenceController> controllerUriMap = null;
+            Map<String, PreferenceControllerMixin> controllerUriMap = null;
 
             if (fragmentName != null) {
                 controllerUriMap = DatabaseIndexingUtils
@@ -777,7 +799,7 @@ public class DatabaseIndexingManager {
 
                 title = XmlParserUtils.getDataTitle(context, attrs);
                 key = XmlParserUtils.getDataKey(context, attrs);
-                enabled = ! nonIndexableKeys.contains(key);
+                enabled = !nonIndexableKeys.contains(key);
                 keywords = XmlParserUtils.getDataKeywords(context, attrs);
                 iconResId = XmlParserUtils.getDataIcon(context, attrs);
 

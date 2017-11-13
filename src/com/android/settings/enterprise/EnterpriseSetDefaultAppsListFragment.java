@@ -20,8 +20,8 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +48,8 @@ public class EnterpriseSetDefaultAppsListFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List controllers = new ArrayList<PreferenceController>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final EnterpriseSetDefaultAppsListPreferenceController controller =
                 new EnterpriseSetDefaultAppsListPreferenceController(
                         context, this, context.getPackageManager());

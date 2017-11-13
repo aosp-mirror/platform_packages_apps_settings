@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController;
@@ -41,6 +40,7 @@ import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
 import com.android.settings.deviceinfo.SecurityPatchPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -84,7 +84,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getActivity(), this /* fragment */,
                 getLifecycle());
     }
@@ -114,9 +114,9 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
         }
     };
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(
                 new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
@@ -149,7 +149,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null /*activity */,
                             null /* fragment */, null /* lifecycle */);
                 }

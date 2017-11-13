@@ -16,26 +16,26 @@
 
 package com.android.settings.dream;
 
+import static com.android.settingslib.dream.DreamBackend.EITHER;
+import static com.android.settingslib.dream.DreamBackend.NEVER;
+import static com.android.settingslib.dream.DreamBackend.WHILE_CHARGING;
+import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 import com.android.settingslib.dream.DreamBackend.WhenToDream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.android.settingslib.dream.DreamBackend.EITHER;
-import static com.android.settingslib.dream.DreamBackend.NEVER;
-import static com.android.settingslib.dream.DreamBackend.WHILE_CHARGING;
-import static com.android.settingslib.dream.DreamBackend.WHILE_DOCKED;
 
 public class DreamSettings extends DashboardFragment {
 
@@ -109,7 +109,7 @@ public class DreamSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context);
     }
 
@@ -127,8 +127,8 @@ public class DreamSettings extends DashboardFragment {
         }
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context) {
-        List<PreferenceController> controllers = new ArrayList<>();
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new CurrentDreamPreferenceController(context));
         controllers.add(new WhenToDreamPreferenceController(context));
         controllers.add(new StartNowPreferenceController(context));
@@ -146,7 +146,7 @@ public class DreamSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context);
                 }
             };

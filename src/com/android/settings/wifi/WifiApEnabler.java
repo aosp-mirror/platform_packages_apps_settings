@@ -32,6 +32,10 @@ import com.android.settings.datausage.DataSaverBackend;
 
 import java.util.ArrayList;
 
+/**
+ * @deprecated in favor of WifiTetherPreferenceController and WifiTetherSettings
+ */
+@Deprecated
 public class WifiApEnabler {
     private final Context mContext;
     private final SwitchPreference mSwitch;
@@ -77,7 +81,7 @@ public class WifiApEnabler {
         mContext = context;
         mDataSaverBackend = dataSaverBackend;
         mSwitch = switchPreference;
-        mOriginalSummary = switchPreference.getSummary();
+        mOriginalSummary = context.getText(R.string.wifi_hotspot_off_subtext);
         switchPreference.setPersistent(false);
 
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);

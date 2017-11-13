@@ -17,6 +17,8 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,14 +28,14 @@ import android.graphics.drawable.Drawable;
 
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.search.ResultPayload.Availability;
 import com.android.settings.search.ResultPayload.PayloadType;
-
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,8 +50,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CursorToSearchResultConverterTest {
@@ -60,7 +60,7 @@ public class CursorToSearchResultConverterTest {
     private static final String TARGET_CLASS = "a.b.c.class";
     private static final String KEY = "key";
     private static final Intent INTENT = new Intent("com.android.settings");
-    private static final int ICON = R.drawable.ic_search_history;
+    private static final int ICON = R.drawable.ic_search_24dp;
     private static final int BASE_RANK = 1;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

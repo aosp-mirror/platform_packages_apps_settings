@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.storage.VolumeInfo;
@@ -30,14 +31,17 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.util.Preconditions;
 import com.android.settings.Utils;
 import com.android.settings.applications.UserManagerWrapper;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.deviceinfo.StorageProfileFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 
-/** Defines a {@link PreferenceController} which handles a single profile of the primary user. */
-public class UserProfileController extends PreferenceController
-        implements StorageAsyncLoader.ResultHandler, UserIconLoader.UserIconHandler {
+/** Defines a {@link AbstractPreferenceController} which handles a single profile of the primary
+ *  user. */
+public class UserProfileController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, StorageAsyncLoader.ResultHandler,
+        UserIconLoader.UserIconHandler {
     private static final String PREFERENCE_KEY_BASE = "pref_profile_";
     private StorageItemPreference mStoragePreference;
     private UserManagerWrapper mUserManager;
@@ -123,7 +127,14 @@ public class UserProfileController extends PreferenceController
     public void handleUserIcons(SparseArray<Drawable> fetchedIcons) {
         Drawable userIcon = fetchedIcons.get(mUser.id);
         if (userIcon != null) {
-            mStoragePreference.setIcon(userIcon);
+            mStoragePreference.setIcon(applyTint(mContext, userIcon));
         }
     }
+
+    private static Drawable applyTint(Context context, Drawable icon) {
+        icon = icon.mutate();
+        icon.setTint(Utils.getColorAttr(context, android.R.attr.colorControlNormal));
+        return icon;
+    }
+
 }

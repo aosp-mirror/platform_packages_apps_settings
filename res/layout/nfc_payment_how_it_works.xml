@@ -15,44 +15,52 @@
             android:background="#FFB2DFDB" >
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/nfc_how_it_works_image_text"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="72dp"
-            android:orientation="vertical">
+            android:paddingBottom="48dp"
+            android:fillViewport="true">
 
-          <ImageView
-              android:id="@+id/nfc_how_it_works_image"
-              android:layout_width="match_parent"
-              android:layout_height="188dp"
-              android:gravity="center"
-              android:src="@drawable/nfc_how_it_works" />
+            <LinearLayout
+                android:id="@+id/nfc_how_it_works_image_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="72dp"
+                android:orientation="vertical">
 
-          <TextView
-              android:id="@+id/nfc_how_it_works_title"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="@string/nfc_how_it_works_title"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:textColor="#FF263238"
-              android:textSize="24sp" />
+                <ImageView
+                    android:id="@+id/nfc_how_it_works_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="188dp"
+                    android:gravity="center"
+                    android:src="@drawable/nfc_how_it_works" />
 
-          <TextView
-              android:id="@+id/nfc_how_it_works_content"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:paddingTop="10dp"
-              android:paddingBottom="18dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:text="@string/nfc_how_it_works_content"
-              android:textColor="#FF263238"
-              android:textSize="16sp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/nfc_how_it_works_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nfc_how_it_works_title"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:textColor="#FF263238"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/nfc_how_it_works_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="18dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:text="@string/nfc_how_it_works_content"
+                    android:textColor="#FF263238"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </ScrollView>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"

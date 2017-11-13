@@ -22,6 +22,7 @@ import android.os.BatteryStats.Timer;
 import android.os.BatteryStats.Uid;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+import android.util.SparseIntArray;
 
 /**
  * Fake UID for testing power usage screen.
@@ -56,6 +57,11 @@ public class FakeUid extends Uid {
 
     @Override
     public ArrayMap<String, ? extends Timer> getJobStats() {
+        return null;
+    }
+
+    @Override
+    public ArrayMap<String, SparseIntArray> getJobCompletionStats() {
         return null;
     }
 
@@ -199,6 +205,11 @@ public class FakeUid extends Uid {
 
     @Override
     public Timer getForegroundActivityTimer() {
+        return null;
+    }
+
+    @Override
+    public Timer getForegroundServiceTimer() {
         return null;
     }
 

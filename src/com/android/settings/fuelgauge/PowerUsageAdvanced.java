@@ -40,10 +40,11 @@ import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.datausage.DataUsageUtils;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -123,6 +124,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         mPackageManager = context.getPackageManager();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBatteryUtils = BatteryUtils.getInstance(context);
+
+        // init the summary so other preferences won't have unnecessary move
+        updateHistPrefSummary(context);
     }
 
     @Override
@@ -161,7 +165,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return null;
     }
 
@@ -174,7 +178,13 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         updatePreference(mHistPref);
         refreshPowerUsageDataList(mStatsHelper, mUsageListGroup);
+        updateHistPrefSummary(context);
 
+        BatteryEntry.startRequestQueue();
+        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
+    }
+
+    private void updateHistPrefSummary(Context context) {
         Intent batteryIntent =
                 context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         final boolean plugged = batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) != 0;
@@ -185,9 +195,6 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         } else {
             mHistPref.hideBottomSummary();
         }
-
-        BatteryEntry.startRequestQueue();
-        BatteryUtils.logRuntime(TAG, "refreshUI", startTime);
     }
 
     @VisibleForTesting
@@ -243,7 +250,9 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     boolean shouldHideCategory(PowerUsageData powerUsageData) {
         return powerUsageData.usageType == UsageType.UNACCOUNTED
                 || powerUsageData.usageType == UsageType.OVERCOUNTED
-                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1);
+                || (powerUsageData.usageType == UsageType.USER && mUserManager.getUserCount() == 1)
+                || (powerUsageData.usageType == UsageType.CELL
+                && !DataUsageUtils.hasMobileData(getContext()));
     }
 
     @VisibleForTesting
@@ -329,7 +338,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         return usageType == UsageType.CELL
                 || usageType == UsageType.BLUETOOTH
                 || usageType == UsageType.WIFI
-                || usageType == UsageType.APP;
+                || usageType == UsageType.APP
+                || usageType == UsageType.SYSTEM;
     }
 
     @VisibleForTesting

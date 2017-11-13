@@ -104,4 +104,15 @@ public class ActionBarShadowControllerTest {
         verify(mRecyclerView, times(2)).addOnScrollListener(any());
     }
 
+    @Test
+    public void onScrolled_nullAnchorViewAndActivity_shouldNotCrash() {
+        final Activity activity = null;
+        final ActionBarShadowController controller =
+                ActionBarShadowController.attachToRecyclerView(activity, mLifecycle, mRecyclerView);
+
+        // Scroll
+        controller.mScrollChangeWatcher.onScrolled(mRecyclerView, 10 /* dx */, 10 /* dy */);
+        // no crash
+    }
+
 }

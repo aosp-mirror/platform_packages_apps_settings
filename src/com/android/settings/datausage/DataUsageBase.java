@@ -14,25 +14,31 @@
 
 package com.android.settings.datausage;
 
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.NetworkPolicyEditor;
+import static android.net.ConnectivityManager.TYPE_ETHERNET;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.INetworkStatsService;
+import android.net.INetworkStatsSession;
 import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
+import android.net.NetworkTemplate;
+import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.INetworkManagementService;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.NetworkPolicyEditor;
 
 public abstract class DataUsageBase extends SettingsPreferenceFragment {
-
     private static final String TAG = "DataUsageBase";
+    private static final String ETHERNET = "ethernet";
 
     protected final TemplatePreference.NetworkServices services =
             new TemplatePreference.NetworkServices();
@@ -85,8 +91,38 @@ public abstract class DataUsageBase extends SettingsPreferenceFragment {
         try {
             return services.mNetworkService.isBandwidthControlEnabled();
         } catch (RemoteException e) {
-            Log.w(TAG, "problem talking with INetworkManagementService: " + e);
+            Log.w(TAG, "problem talking with INetworkManagementService: ", e);
             return false;
         }
+    }
+
+    /**
+     * Test if device has an ethernet network connection.
+     */
+    public boolean hasEthernet(Context context) {
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains(ETHERNET);
+        }
+
+        final ConnectivityManager conn = ConnectivityManager.from(context);
+        final boolean hasEthernet = conn.isNetworkSupported(TYPE_ETHERNET);
+
+        final long ethernetBytes;
+        try {
+            INetworkStatsSession statsSession = services.mStatsService.openSession();
+            if (statsSession != null) {
+                ethernetBytes = statsSession.getSummaryForNetwork(
+                        NetworkTemplate.buildTemplateEthernet(), Long.MIN_VALUE, Long.MAX_VALUE)
+                        .getTotalBytes();
+                TrafficStats.closeQuietly(statsSession);
+            } else {
+                ethernetBytes = 0;
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+
+        // only show ethernet when both hardware present and traffic has occurred
+        return hasEthernet && ethernetBytes > 0;
     }
 }
