@@ -16,14 +16,11 @@
 
 package com.android.settings.development;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,10 +33,8 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,9 +44,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowUtils.class})
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SelectUsbConfigPreferenceControllerTest {
 
     @Mock
@@ -92,11 +85,6 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     }
 
-    @After
-    public void teardown() {
-        ShadowUtils.reset();
-    }
-
     @Test
     public void onPreferenceChange_setCharging_shouldEnableCharging() {
         when(mUsbManager.isFunctionEnabled(mValues[0])).thenReturn(true);
@@ -113,18 +101,6 @@ public class SelectUsbConfigPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, mValues[1]);
 
         verify(mController).setCurrentFunction(mValues[1], true /* usb data unlock */);
-    }
-
-    @Test
-    public void onPreferenceChange_monkeyUser_shouldReturnFalse() {
-        when(mUsbManager.isFunctionEnabled(mValues[1])).thenReturn(true);
-        ShadowUtils.setIsUserAMonkey(true);
-        doNothing().when(mController).setCurrentFunction(anyString(), anyBoolean());
-
-        final boolean isHandled = mController.onPreferenceChange(mPreference, mValues[1]);
-
-        assertThat(isHandled).isFalse();
-        verify(mController, never()).setCurrentFunction(any(), anyBoolean());
     }
 
     @Test
