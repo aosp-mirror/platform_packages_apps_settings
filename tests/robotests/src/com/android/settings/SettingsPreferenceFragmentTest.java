@@ -16,9 +16,9 @@
 
 package com.android.settings;
 
+
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
@@ -39,18 +39,18 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsPreferenceFragmentTest {
 
     private static final int ITEM_COUNT = 5;
 
+    @Mock
+    private PreferenceManager mPreferenceManager;
     @Mock
     private Activity mActivity;
     @Mock
@@ -142,21 +142,6 @@ public class SettingsPreferenceFragmentTest {
         assertThat(mEmptyView.getVisibility()).isEqualTo(View.GONE);
     }
 
-    @Test
-    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
-    public void onCreate_hasExtraFragmentKey_shouldExpandPreferences() {
-        doReturn(mContext.getTheme()).when(mActivity).getTheme();
-        doReturn(mContext.getResources()).when(mFragment).getResources();
-        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-        final Bundle bundle = new Bundle();
-        bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "test_key");
-        doReturn(bundle).when(mFragment).getArguments();
-
-        mFragment.onCreate(null /* icicle */);
-
-        verify(mPreferenceScreen).setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-    }
-
     public static class TestFragment extends SettingsPreferenceFragment {
 
         @Override
@@ -164,5 +149,6 @@ public class SettingsPreferenceFragmentTest {
             return 0;
         }
     }
+
 
 }
