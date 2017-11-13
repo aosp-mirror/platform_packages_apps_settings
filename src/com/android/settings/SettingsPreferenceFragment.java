@@ -150,8 +150,8 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
 
         // Prepare help url and enable menu if necessary
-        final Bundle arguments = getArguments();
-        final int helpResource;
+        Bundle arguments = getArguments();
+        int helpResource;
         if (arguments != null && arguments.containsKey(HELP_URI_RESOURCE_KEY)) {
             helpResource = arguments.getInt(HELP_URI_RESOURCE_KEY);
         } else {
@@ -159,14 +159,6 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
         if (helpResource != 0) {
             mHelpUri = getResources().getString(helpResource);
-        }
-
-        // Check if we should keep the preferences expanded.
-        if (arguments != null) {
-            mPreferenceKey = arguments.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
-            if (!TextUtils.isEmpty(mPreferenceKey)) {
-                getPreferenceScreen().setInitialExpandedChildrenCount(Integer.MAX_VALUE);
-            }
         }
     }
 
@@ -232,7 +224,9 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
     public void onResume() {
         super.onResume();
 
-        if (mPreferenceKey != null) {
+        final Bundle args = getArguments();
+        if (args != null) {
+            mPreferenceKey = args.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY);
             highlightPreferenceIfNeeded();
         }
     }
