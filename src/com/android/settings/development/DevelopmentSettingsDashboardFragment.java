@@ -135,6 +135,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+        if (Utils.isMonkeyRunning()) {
+            getActivity().finish();
+            return;
+        }
+    }
+
+    @Override
     public void onActivityCreated(Bundle icicle) {
         super.onActivityCreated(icicle);
         // Apply page-level restrictions
