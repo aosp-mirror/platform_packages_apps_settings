@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -359,15 +360,29 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
                                     printJob.getCreationTime(), printJob.getCreationTime(),
                                     DateFormat.SHORT, DateFormat.SHORT)));
 
+                    TypedArray a = getActivity().obtainStyledAttributes(new int[]{
+                            android.R.attr.colorControlNormal});
+                    int tintColor = a.getColor(0, 0);
+                    a.recycle();
+
                     switch (printJob.getState()) {
                         case PrintJobInfo.STATE_QUEUED:
-                        case PrintJobInfo.STATE_STARTED:
-                            preference.setIcon(R.drawable.ic_print);
+                        case PrintJobInfo.STATE_STARTED: {
+                            Drawable icon = getActivity().getDrawable(
+                                    com.android.internal.R.drawable.ic_print);
+                            icon.setTint(tintColor);
+                            preference.setIcon(icon);
                             break;
+                        }
+
                         case PrintJobInfo.STATE_FAILED:
-                        case PrintJobInfo.STATE_BLOCKED:
-                            preference.setIcon(R.drawable.ic_print_error);
+                        case PrintJobInfo.STATE_BLOCKED: {
+                            Drawable icon = getActivity().getDrawable(
+                                    com.android.internal.R.drawable.ic_print_error);
+                            icon.setTint(tintColor);
+                            preference.setIcon(icon);
                             break;
+                        }
                     }
 
                     Bundle extras = preference.getExtras();

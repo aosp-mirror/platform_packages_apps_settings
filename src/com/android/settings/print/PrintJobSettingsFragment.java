@@ -17,6 +17,8 @@
 package com.android.settings.print;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.print.PrintJob;
 import android.print.PrintJobId;
@@ -31,8 +33,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.view.ViewGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -220,16 +222,28 @@ public class PrintJobSettingsFragment extends SettingsPreferenceFragment {
                         info.getCreationTime(), info.getCreationTime(), DateFormat.SHORT,
                         DateFormat.SHORT)));
 
+        TypedArray a = getActivity().obtainStyledAttributes(new int[]{
+                android.R.attr.colorControlNormal});
+        int tintColor = a.getColor(0, 0);
+        a.recycle();
+
         switch (info.getState()) {
             case PrintJobInfo.STATE_QUEUED:
             case PrintJobInfo.STATE_STARTED: {
-                mPrintJobPreference.setIcon(R.drawable.ic_print);
-            } break;
+                Drawable icon = getActivity().getDrawable(com.android.internal.R.drawable.ic_print);
+                icon.setTint(tintColor);
+                mPrintJobPreference.setIcon(icon);
+                break;
+            }
 
             case PrintJobInfo.STATE_FAILED:
             case PrintJobInfo.STATE_BLOCKED: {
-                mPrintJobPreference.setIcon(R.drawable.ic_print_error);
-            } break;
+                Drawable icon = getActivity().getDrawable(
+                        com.android.internal.R.drawable.ic_print_error);
+                icon.setTint(tintColor);
+                mPrintJobPreference.setIcon(icon);
+                break;
+            }
         }
 
         CharSequence status = info.getStatus(getPackageManager());
