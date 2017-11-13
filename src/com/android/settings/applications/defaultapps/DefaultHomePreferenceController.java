@@ -63,7 +63,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         if (currentDefaultHome != null) {
             return new DefaultAppInfo(mContext, mPackageManager, mUserId, currentDefaultHome);
         }
-        final ActivityInfo onlyAppInfo = getOnlyAppInfo();
+        final ActivityInfo onlyAppInfo = getOnlyAppInfo(homeActivities);
         if (onlyAppInfo != null) {
             return new DefaultAppInfo(mContext, mPackageManager, mUserId,
                     onlyAppInfo.getComponentName());
@@ -71,8 +71,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         return null;
     }
 
-    private ActivityInfo getOnlyAppInfo() {
-        final List<ResolveInfo> homeActivities = new ArrayList<>();
+    private ActivityInfo getOnlyAppInfo(List<ResolveInfo> homeActivities) {
         final List<ActivityInfo> appLabels = new ArrayList<>();
 
         mPackageManager.getHomeActivities(homeActivities);
@@ -86,6 +85,23 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
         return appLabels.size() == 1
                 ? appLabels.get(0)
                 : null;
+    }
+
+    @Override
+    protected Intent getSettingIntent(DefaultAppInfo info) {
+        final String packageName;
+        if (info.componentName != null) {
+            packageName = info.componentName.getPackageName();
+        } else if (info.packageItemInfo != null) {
+            packageName = info.packageItemInfo.packageName;
+        } else {
+            return null;
+        }
+
+        Intent intent = new Intent(Intent.ACTION_APPLICATION_PREFERENCES)
+                .setPackage(packageName)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return mPackageManager.queryIntentActivities(intent, 0).size() == 1 ? intent : null;
     }
 
     public static boolean hasHomePreference(String pkg, Context context) {
