@@ -28,7 +28,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
@@ -76,10 +75,6 @@ public class ClearAdbKeysPreferenceController extends
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (Utils.isMonkeyRunning()) {
-            return false;
-        }
-
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             ClearAdbKeysWarningDialog.show(mFragment);
             return true;
