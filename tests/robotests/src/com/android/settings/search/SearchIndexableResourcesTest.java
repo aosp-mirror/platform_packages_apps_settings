@@ -18,7 +18,9 @@ package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.google.common.truth.Truth.assertThat;
+
 import static junit.framework.Assert.fail;
+
 import static org.mockito.Mockito.spy;
 
 import android.database.Cursor;
@@ -38,45 +40,45 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
-    private Set<Class> mProviderClassCopy;
+    Set<Class> sProviderClassCopy;
 
     @Before
     public void setUp() {
-        mProviderClassCopy = new HashSet<>(SettingsSearchIndexablesProvider.INDEXABLES);
+        sProviderClassCopy = new HashSet<>(SearchIndexableResources.sProviders);
     }
 
     @After
     public void cleanUp() {
-        SettingsSearchIndexablesProvider.INDEXABLES.clear();
-        SettingsSearchIndexablesProvider.INDEXABLES.addAll(mProviderClassCopy);
+        SearchIndexableResources.sProviders.clear();
+        SearchIndexableResources.sProviders.addAll(sProviderClassCopy);
     }
 
     @Test
     public void testAddIndex() {
         final Class stringClass = java.lang.String.class;
         // Confirms that String.class isn't contained in SearchIndexableResources.
-        assertThat(SettingsSearchIndexablesProvider.INDEXABLES).doesNotContain(stringClass);
-        final int beforeCount = SettingsSearchIndexablesProvider.INDEXABLES.size();
+        assertThat(SearchIndexableResources.sProviders).doesNotContain(stringClass);
+        final int beforeCount = SearchIndexableResources.providerValues().size();
 
-        SettingsSearchIndexablesProvider.addIndex(java.lang.String.class);
+        SearchIndexableResources.addIndex(java.lang.String.class);
 
-        assertThat(SettingsSearchIndexablesProvider.INDEXABLES).contains(stringClass);
-        final int afterCount = SettingsSearchIndexablesProvider.INDEXABLES.size();
+        assertThat(SearchIndexableResources.sProviders).contains(stringClass);
+        final int afterCount = SearchIndexableResources.providerValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
     }
 
     @Test
     public void testIndexHasWifiSettings() {
-        assertThat(mProviderClassCopy).contains(WifiSettings.class);
+        assertThat(sProviderClassCopy).contains(WifiSettings.class);
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
-        SettingsSearchIndexablesProvider.INDEXABLES.clear();
-        SettingsSearchIndexablesProvider.addIndex(FakeIndexProvider.class);
+        SearchIndexableResources.sProviders.clear();
+        SearchIndexableResources.addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
@@ -95,8 +97,8 @@ public class SearchIndexableResourcesTest {
 
     @Test
     public void testAllClassNamesHaveProviders() {
-        for (Class clazz : mProviderClassCopy) {
-            if (DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
+        for (Class clazz: sProviderClassCopy) {
+            if(DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
                 fail(clazz.getName() + "is not an index provider");
             }
         }
