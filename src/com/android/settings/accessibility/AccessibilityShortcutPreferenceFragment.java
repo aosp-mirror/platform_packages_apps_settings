@@ -59,9 +59,6 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!usePreferenceScreenTitle()) {
-            addPreferencesFromResource(R.xml.accessibility_shortcut_settings);
-        }
         mServicePreference = findPreference(SHORTCUT_SERVICE_KEY);
         mOnLockScreenSwitchPreference = (SwitchPreference) findPreference(ON_LOCK_SCREEN_KEY);
         mOnLockScreenSwitchPreference.setOnPreferenceChangeListener((Preference p, Object o) -> {

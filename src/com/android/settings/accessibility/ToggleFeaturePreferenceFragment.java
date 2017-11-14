@@ -42,7 +42,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int resId = getPreferenceScreenResId();
-        if (!usePreferenceScreenTitle() || resId <= 0) {
+        if (resId <= 0) {
             PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(
                     getActivity());
             setPreferenceScreen(preferenceScreen);
@@ -119,8 +119,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         }
 
         // Title.
-        if (usePreferenceScreenTitle()
-                && arguments.containsKey(AccessibilitySettings.EXTRA_RESOLVE_INFO)) {
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_RESOLVE_INFO)) {
             ResolveInfo info = arguments.getParcelable(AccessibilitySettings.EXTRA_RESOLVE_INFO);
             getActivity().setTitle(info.loadLabel(getPackageManager()).toString());
         } else if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE)) {

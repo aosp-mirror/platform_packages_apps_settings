@@ -63,13 +63,7 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
         mPaymentBackend = new PaymentBackend(getActivity());
         setHasOptionsMenu(true);
 
-        final PreferenceScreen screen;
-        if (usePreferenceScreenTitle()) {
-            screen = getPreferenceScreen();
-        } else {
-            PreferenceManager manager = getPreferenceManager();
-            screen = manager.createPreferenceScreen(getActivity());
-        }
+        final PreferenceScreen screen = getPreferenceScreen();
 
         List<PaymentBackend.PaymentAppInfo> appInfos = mPaymentBackend.getPaymentAppInfos();
         if (appInfos != null && appInfos.size() > 0) {
@@ -80,9 +74,6 @@ public class PaymentSettings extends SettingsPreferenceFragment implements Index
             NfcForegroundPreference foreground = new NfcForegroundPreference(getPrefContext(),
                     mPaymentBackend);
             screen.addPreference(foreground);
-        }
-        if (!usePreferenceScreenTitle()) {
-            setPreferenceScreen(screen);
         }
     }
 

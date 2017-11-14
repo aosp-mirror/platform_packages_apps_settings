@@ -148,9 +148,6 @@ public class PictureInPictureSettings extends EmptyTextSettings {
         mPackageManager = new PackageManagerWrapper(mContext.getPackageManager());
         mUserManager = new UserManagerWrapper(mContext.getSystemService(UserManager.class));
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
-        if (!usePreferenceScreenTitle()) {
-            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
-        }
     }
 
     @Override

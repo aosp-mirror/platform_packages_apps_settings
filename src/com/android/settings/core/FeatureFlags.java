@@ -24,5 +24,4 @@ public class FeatureFlags {
     public static final String DEV_OPTION_V1 = "dev_option_v1";
     public static final String SEARCH_V2 = "settings_search_v2";
     public static final String SUGGESTIONS_V2 = "new_settings_suggestion";
-    public static final String USE_PREFERENCE_SCREEN_TITLE = "settings_use_preference_screen_title";
 }

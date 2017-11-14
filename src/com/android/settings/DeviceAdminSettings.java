@@ -49,7 +49,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 
@@ -137,9 +136,7 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
         Utils.forceCustomPadding(getListView(), true /* additive padding */);
-        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.manage_device_admin);
-        }
+        getActivity().setTitle(R.string.manage_device_admin);
     }
 
     @Override

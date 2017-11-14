@@ -98,9 +98,7 @@ public class AndroidBeam extends InstrumentedPreferenceFragment
             mSwitchBar.show();
         }
 
-        if (usePreferenceScreenTitle()) {
-            activity.setTitle(R.string.android_beam_settings_title);
-        }
+        activity.setTitle(R.string.android_beam_settings_title);
     }
 
     @Override

@@ -293,7 +293,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
         mResetAppsHelper = new ResetAppsHelper(activity);
 
-        if (usePreferenceScreenTitle() && screenTitle > 0) {
+        if (screenTitle > 0) {
             activity.setTitle(screenTitle);
         }
     }

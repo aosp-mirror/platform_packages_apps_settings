@@ -68,9 +68,6 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        if (!usePreferenceScreenTitle()) {
-            addPreferencesFromResource(R.xml.placeholder_prefs);
-        }
         updateCandidates();
     }
 

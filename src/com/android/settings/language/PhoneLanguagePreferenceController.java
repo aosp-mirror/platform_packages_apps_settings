@@ -68,8 +68,7 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (!InstrumentedPreferenceFragment.usePreferenceScreenTitle()
-                || !KEY_PHONE_LANGUAGE.equals(preference.getKey())) {
+        if (!KEY_PHONE_LANGUAGE.equals(preference.getKey())) {
             return false;
         }
         Utils.startWithFragment(mContext, LocaleListEditor.class.getName(), null, null, 0,

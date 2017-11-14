@@ -87,9 +87,7 @@ public class UserCredentialsSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.user_credentials);
-        }
+        getActivity().setTitle(R.string.user_credentials);
     }
 
     protected void announceRemoval(String alias) {

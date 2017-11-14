@@ -77,9 +77,6 @@ public class ZenAccessSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPkgMan = mContext.getPackageManager();
         mNoMan = mContext.getSystemService(NotificationManager.class);
-        if (!usePreferenceScreenTitle()) {
-            setPreferenceScreen(getPreferenceManager().createPreferenceScreen(mContext));
-        }
     }
 
     @Override

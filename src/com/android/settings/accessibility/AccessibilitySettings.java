@@ -521,9 +521,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             extras.putString(EXTRA_PREFERENCE_KEY, preference.getKey());
             extras.putBoolean(EXTRA_CHECKED, serviceEnabled);
             extras.putString(EXTRA_TITLE, title);
-            if (usePreferenceScreenTitle()) {
-                extras.putParcelable(EXTRA_RESOLVE_INFO, resolveInfo);
-            }
+            extras.putParcelable(EXTRA_RESOLVE_INFO, resolveInfo);
 
             String description = info.loadDescription(getPackageManager());
             if (TextUtils.isEmpty(description)) {

@@ -44,9 +44,7 @@ public class RunningServices extends SettingsPreferenceFragment {
 
         setHasOptionsMenu(true);
 
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.runningservices_settings_title);
-        }
+        getActivity().setTitle(R.string.runningservices_settings_title);
     }
 
     @Override

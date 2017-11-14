@@ -209,12 +209,7 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
-            startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, null, null, 0);
-        } else {
-            startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, pref.getTitle(),
-                    null, 0);
-        }
+        startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, null, null, 0);
         return true;
     }
 
@@ -631,13 +626,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
             int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
         String title = null;
-        if (titleRes < 0) {
-            if (titleText != null) {
-                title = titleText.toString();
-            } else if (!InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
-                // There not much we can do in that case
-                title = "";
-            }
+        if (titleRes < 0 && titleText != null) {
+            title = titleText.toString();
         }
         Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
                 titleRes, title, mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller));
