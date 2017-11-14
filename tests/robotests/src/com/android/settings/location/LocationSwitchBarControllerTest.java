@@ -54,14 +54,16 @@ public class LocationSwitchBarControllerTest {
 
     private Context mContext;
     private LocationSwitchBarController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         ReflectionHelpers.setField(mSwitchBar, "mSwitch", mSwitch);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new LocationSwitchBarController(
-                mContext, mSwitchBar, new Lifecycle()));
+                mContext, mSwitchBar, mLifecycle));
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);
     }
 

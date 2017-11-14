@@ -46,16 +46,18 @@ public class RestrictedEncryptionPreferenceControllerTest {
     private InstallCredentialsPreferenceController mInstallCredentialsPreferenceController;
     private ResetCredentialsPreferenceController mResetCredentialsPreferenceController;
     private UserCredentialsPreferenceController mUserCredentialsPreferenceController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mCredentialStoragePreferenceController =
                 new CredentialStoragePreferenceController(mContext);
         mInstallCredentialsPreferenceController =
                 new InstallCredentialsPreferenceController(mContext);
         mResetCredentialsPreferenceController =
-                new ResetCredentialsPreferenceController(mContext, new Lifecycle());
+                new ResetCredentialsPreferenceController(mContext, mLifecycle);
         mUserCredentialsPreferenceController =
                 new UserCredentialsPreferenceController(mContext);
         mUserManager = ShadowUserManager.getShadow();

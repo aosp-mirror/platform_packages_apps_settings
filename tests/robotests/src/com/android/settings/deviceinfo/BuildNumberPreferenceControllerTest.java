@@ -84,7 +84,7 @@ public class BuildNumberPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest(mContext);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new BuildNumberPreferenceController(
                 mContext, mActivity, mFragment, mLifecycle);

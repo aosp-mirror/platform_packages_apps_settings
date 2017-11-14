@@ -16,6 +16,9 @@
 
 package com.android.settings.development;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_CREATE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_DESTROY;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -74,7 +77,7 @@ public class SelectUsbConfigPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUsbManager).when(mContext).getSystemService(Context.USB_SERVICE);
         mValues = mContext.getResources().getStringArray(R.array.usb_configuration_values);
@@ -148,6 +151,7 @@ public class SelectUsbConfigPreferenceControllerTest {
     @Test
     public void onCreate_shouldRegisterReceiver() {
         mLifecycle.onCreate(null /* bundle */);
+        mLifecycle.handleLifecycleEvent(ON_CREATE);
 
         verify(mContext).registerReceiver(any(), any());
     }
@@ -155,7 +159,8 @@ public class SelectUsbConfigPreferenceControllerTest {
     @Test
     public void onDestroy_shouldUnregisterReceiver() {
         doNothing().when(mContext).unregisterReceiver(any());
-        mLifecycle.onDestroy();
+        mLifecycle.handleLifecycleEvent(ON_CREATE);
+        mLifecycle.handleLifecycleEvent(ON_DESTROY);
 
         verify(mContext).unregisterReceiver(any());
     }

@@ -62,13 +62,15 @@ public class LocationServicePreferenceControllerTest {
 
     private Context mContext;
     private LocationServicePreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new LocationServicePreferenceController(
-                mContext, mFragment, new Lifecycle(), mSettingsInjector));
+                mContext, mFragment, mLifecycle, mSettingsInjector));
         final String key = mController.getPreferenceKey();
         when(mScreen.findPreference(key)).thenReturn(mCategory);
         when(mCategory.getKey()).thenReturn(key);

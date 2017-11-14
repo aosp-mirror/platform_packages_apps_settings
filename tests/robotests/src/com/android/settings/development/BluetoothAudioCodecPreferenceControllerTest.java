@@ -65,12 +65,14 @@ public class BluetoothAudioCodecPreferenceControllerTest {
     private String[] mListValues;
     private Context mContext;
     private BluetoothAudioCodecPreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new BluetoothAudioCodecPreferenceController(mContext, new Lifecycle(),
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mController = spy(new BluetoothAudioCodecPreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

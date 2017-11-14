@@ -22,7 +22,9 @@ import static com.android.settings.applications.manageapplications.ManageApplica
         .LIST_TYPE_MAIN;
 import static com.android.settings.applications.manageapplications.ManageApplications
         .LIST_TYPE_NOTIFICATION;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -52,7 +54,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsSha
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -100,7 +101,6 @@ public class ManageApplicationsTest {
         when(mState.getBackgroundLooper()).thenReturn(mBgLooper);
 
         mFragment = new ManageApplications();
-        ReflectionHelpers.setField(mFragment, "mLifecycle", new Lifecycle());
     }
 
     @Test

@@ -16,11 +16,16 @@
 
 package com.android.settings.deviceinfo;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.android.settings.deviceinfo.BatteryInfoPreferenceController
         .BATTERY_INFO_RECEIVER_INTENT_FILTER;
 import static com.android.settings.deviceinfo.BatteryInfoPreferenceController.KEY_BATTERY_LEVEL;
 import static com.android.settings.deviceinfo.BatteryInfoPreferenceController.KEY_BATTERY_STATUS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -62,7 +67,7 @@ public class BatteryInfoPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = new BatteryInfoPreferenceController(mContext, mLifecycle);
         mBatteryLevel = new Preference(mContext);
         mBatteryStatus = new Preference(mContext);
@@ -80,8 +85,8 @@ public class BatteryInfoPreferenceControllerTest {
     public void runThroughLifecycle_shouldRegisterUnregisterBatteryInfoReceiver() {
         final Context context = mock(Context.class);
         mController = new BatteryInfoPreferenceController(context, mLifecycle);
-        mLifecycle.onStart();
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_START);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
 
         verify(context).registerReceiver(mController.mBatteryInfoReceiver,
                 BATTERY_INFO_RECEIVER_INTENT_FILTER);

@@ -16,6 +16,9 @@
 
 package com.android.settings.development;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -58,7 +61,7 @@ public class PictureColorModePreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = new PictureColorModePreferenceController(mContext, mLifecycle);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);
@@ -123,14 +126,15 @@ public class PictureColorModePreferenceControllerTest {
 
     @Test
     public void onResume_shouldStartListening() {
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
 
         verify(mPreference).startListening();
     }
 
     @Test
     public void onPause_shouldStopListening() {
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
 
         verify(mPreference).stopListening();
     }

@@ -16,7 +16,11 @@
 
 package com.android.settings.wifi.tether;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -84,7 +88,7 @@ public class WifiTetherPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         FakeFeatureFactory.setupForTest(mFeatureFactoryContext);
         mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
@@ -119,8 +123,8 @@ public class WifiTetherPreferenceControllerTest {
         final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
 
         mController.displayPreference(mScreen);
-        mLifecycle.onStart();
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_START);
+        mLifecycle.handleLifecycleEvent(ON_STOP);
 
         assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
         assertThat(ShadowWifiTetherSwitchBarController.onStopCalled).isTrue();
@@ -136,7 +140,7 @@ public class WifiTetherPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(pref);
 
         mController.displayPreference(mScreen);
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
 
         assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
         verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
@@ -151,7 +155,7 @@ public class WifiTetherPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(pref);
 
         mController.displayPreference(mScreen);
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
 
         assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
         verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));

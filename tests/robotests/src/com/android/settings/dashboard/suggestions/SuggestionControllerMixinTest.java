@@ -16,7 +16,11 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -56,7 +60,7 @@ public class SuggestionControllerMixinTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mContext.getApplicationContext()).thenReturn(mContext);
     }
 
@@ -69,10 +73,10 @@ public class SuggestionControllerMixinTest {
     public void goThroughLifecycle_onStartStop_shouldStartStopController() {
         mMixin = new SuggestionControllerMixin(mContext, mHost, mLifecycle);
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         assertThat(ShadowSuggestionController.sStartCalled).isTrue();
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         assertThat(ShadowSuggestionController.sStopCalled).isTrue();
     }
 

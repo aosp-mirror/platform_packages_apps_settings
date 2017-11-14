@@ -16,7 +16,10 @@
 
 package com.android.settings.accounts;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
@@ -71,6 +74,9 @@ public class AccountHeaderPreferenceControllerTest {
 
     private AccountHeaderPreferenceController mController;
 
+    private Lifecycle mLifecycle =
+            new Lifecycle(() -> AccountHeaderPreferenceControllerTest.this.mLifecycle);
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -78,32 +84,32 @@ public class AccountHeaderPreferenceControllerTest {
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
         doReturn(mContext).when(mActivity).getApplicationContext();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
     }
 
     @Test
     public void isAvailable_noArgs_shouldReturnNull() {
         mController = new AccountHeaderPreferenceController(RuntimeEnvironment.application,
-                new Lifecycle(), mActivity, mFragment, null /* args */);
+                mLifecycle, mActivity, mFragment, null /* args */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void onResume_shouldDisplayAccountInEntityHeader() {
-        final Lifecycle lifecycle = new Lifecycle();
         final Account account = new Account("name1@abc.com", "com.abc");
         Bundle args = new Bundle();
         args.putParcelable(AccountDetailDashboardFragment.KEY_ACCOUNT, account);
         args.putParcelable(AccountDetailDashboardFragment.KEY_USER_HANDLE, UserHandle.CURRENT);
         mController = new AccountHeaderPreferenceController(RuntimeEnvironment.application,
-                lifecycle, mActivity, mFragment, args);
+                mLifecycle, mActivity, mFragment, args);
 
         assertThat(mController.isAvailable()).isTrue();
 
         when(mScreen.findPreference(anyString())).thenReturn(mHeaderPreference);
 
         mController.displayPreference(mScreen);
-        lifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
 
         final CharSequence label =
                 ((TextView) mHeaderPreference.findViewById(R.id.entity_header_title)).getText();

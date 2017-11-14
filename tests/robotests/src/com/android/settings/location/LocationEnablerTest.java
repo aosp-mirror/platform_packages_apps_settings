@@ -66,13 +66,15 @@ public class LocationEnablerTest {
 
     private Context mContext;
     private LocationEnabler mEnabler;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mEnabler = spy(new LocationEnabler(mContext, mListener, new Lifecycle()));
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mEnabler = spy(new LocationEnabler(mContext, mListener, mLifecycle));
     }
 
     @Test

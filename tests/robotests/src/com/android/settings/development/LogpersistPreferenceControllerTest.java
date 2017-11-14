@@ -40,7 +40,7 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LogpersistPreferenceControllerTest {
 
-    private Lifecycle mLifecycle = new Lifecycle();
+    private Lifecycle mLifecycle;
 
     @Mock
     private ListPreference mListPreference;
@@ -50,6 +50,7 @@ public class LogpersistPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController
                 = new LogpersistPreferenceController(RuntimeEnvironment.application, mLifecycle);
     }
