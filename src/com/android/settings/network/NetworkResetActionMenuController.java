@@ -27,19 +27,20 @@ import com.android.settings.Utils;
 
 public class NetworkResetActionMenuController {
 
-    private static final int MENU_NETWORK_RESET = Menu.FIRST + 200;
     private final Context mContext;
     private final NetworkResetRestrictionChecker mRestrictionChecker;
+    private final int mMenuId;
 
-    public NetworkResetActionMenuController(Context context) {
+    public NetworkResetActionMenuController(Context context, int menuId) {
         mContext = context;
         mRestrictionChecker = new NetworkResetRestrictionChecker(context);
+        mMenuId = menuId;
     }
 
     public void buildMenuItem(Menu menu) {
         MenuItem item = null;
         if (isAvailable() && menu != null) {
-            item = menu.add(0, MENU_NETWORK_RESET, 0, R.string.reset_network_title);
+            item = menu.add(0, mMenuId, 0, R.string.reset_network_title);
         }
         if (item != null) {
             item.setOnMenuItemClickListener(target -> {

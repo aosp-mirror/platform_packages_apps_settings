@@ -16,6 +16,7 @@
 
 <RadioGroup
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/private_dns_radio_group"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="8dip">
@@ -25,24 +26,21 @@
         android:text="@string/private_dns_mode_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dip"
-        />
+        android:layout_margin="8dip"/>
 
     <RadioButton
         android:id="@+id/private_dns_mode_opportunistic"
         android:text="@string/private_dns_mode_opportunistic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dip"
-        />
+        android:layout_margin="8dip"/>
 
     <RadioButton
         android:id="@+id/private_dns_mode_provider"
         android:text="@string/private_dns_mode_provider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dip"
-        />
+        android:layout_margin="8dip"/>
 
     <EditText
         android:id="@+id/private_dns_mode_provider_hostname"
@@ -52,8 +50,7 @@
         android:inputType="textFilter|textUri"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dip"
-        android:layout_marginEnd="8dip"
-        />
+        android:layout_marginStart="40dip"
+        android:layout_marginEnd="8dip"/>
 
 </RadioGroup>
