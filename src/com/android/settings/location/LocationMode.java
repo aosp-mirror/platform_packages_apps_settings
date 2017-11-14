@@ -16,12 +16,20 @@
 
 package com.android.settings.location;
 
-import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
+import android.content.Context;
+import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A page with 3 radio buttons to choose the location mode.
@@ -34,14 +42,9 @@ import com.android.settings.widget.RadioButtonPreference;
  *
  * Sensors only: use GPS location only.
  */
-public class LocationMode extends LocationSettingsBase
-        implements RadioButtonPreference.OnClickListener {
-    private static final String KEY_HIGH_ACCURACY = "high_accuracy";
-    private RadioButtonPreference mHighAccuracy;
-    private static final String KEY_BATTERY_SAVING = "battery_saving";
-    private RadioButtonPreference mBatterySaving;
-    private static final String KEY_SENSORS_ONLY = "sensors_only";
-    private RadioButtonPreference mSensorsOnly;
+public class LocationMode extends DashboardFragment {
+
+    private static final String TAG = "LocationMode";
 
     @Override
     public int getMetricsCategory() {
@@ -49,95 +52,52 @@ public class LocationMode extends LocationSettingsBase
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        createPreferenceHierarchy();
+    protected int getPreferenceScreenResId() {
+        return R.xml.location_mode;
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    private PreferenceScreen createPreferenceHierarchy() {
-        PreferenceScreen root = getPreferenceScreen();
-        if (root != null) {
-            root.removeAll();
-        }
-        addPreferencesFromResource(R.xml.location_mode);
-        root = getPreferenceScreen();
-
-        mHighAccuracy = (RadioButtonPreference) root.findPreference(KEY_HIGH_ACCURACY);
-        mBatterySaving = (RadioButtonPreference) root.findPreference(KEY_BATTERY_SAVING);
-        mSensorsOnly = (RadioButtonPreference) root.findPreference(KEY_SENSORS_ONLY);
-        mHighAccuracy.setOnClickListener(this);
-        mBatterySaving.setOnClickListener(this);
-        mSensorsOnly.setOnClickListener(this);
-
-        refreshLocationMode();
-        return root;
-    }
-
-    private void updateRadioButtons(RadioButtonPreference activated) {
-        if (activated == null) {
-            mHighAccuracy.setChecked(false);
-            mBatterySaving.setChecked(false);
-            mSensorsOnly.setChecked(false);
-        } else if (activated == mHighAccuracy) {
-            mHighAccuracy.setChecked(true);
-            mBatterySaving.setChecked(false);
-            mSensorsOnly.setChecked(false);
-        } else if (activated == mBatterySaving) {
-            mHighAccuracy.setChecked(false);
-            mBatterySaving.setChecked(true);
-            mSensorsOnly.setChecked(false);
-        } else if (activated == mSensorsOnly) {
-            mHighAccuracy.setChecked(false);
-            mBatterySaving.setChecked(false);
-            mSensorsOnly.setChecked(true);
-        }
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public void onRadioButtonClicked(RadioButtonPreference emiter) {
-        int mode = Settings.Secure.LOCATION_MODE_OFF;
-        if (emiter == mHighAccuracy) {
-            mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
-        } else if (emiter == mBatterySaving) {
-            mode = Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
-        } else if (emiter == mSensorsOnly) {
-            mode = Settings.Secure.LOCATION_MODE_SENSORS_ONLY;
-        }
-        setLocationMode(mode);
-    }
-
-    @Override
-    public void onModeChanged(int mode, boolean restricted) {
-        switch (mode) {
-            case Settings.Secure.LOCATION_MODE_OFF:
-                updateRadioButtons(null);
-                break;
-            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                updateRadioButtons(mSensorsOnly);
-                break;
-            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                updateRadioButtons(mBatterySaving);
-                break;
-            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                updateRadioButtons(mHighAccuracy);
-                break;
-            default:
-                break;
-        }
-
-        boolean enabled = (mode != Settings.Secure.LOCATION_MODE_OFF) && !restricted;
-        mHighAccuracy.setEnabled(enabled);
-        mBatterySaving.setEnabled(enabled);
-        mSensorsOnly.setEnabled(enabled);
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     @Override
     public int getHelpResource() {
         return R.string.help_url_location_access;
     }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            Context context, Lifecycle lifecycle) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new LocationModeHighAccuracyPreferenceController(context, lifecycle));
+        controllers.add(
+                new LocationModeBatterySavingPreferenceController(context, lifecycle));
+        controllers.add(new LocationModeSensorsOnlyPreferenceController(context, lifecycle));
+        return controllers;
+    }
+
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.location_mode;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */);
+                }
+            };
 }

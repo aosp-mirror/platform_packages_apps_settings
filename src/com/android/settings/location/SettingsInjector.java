@@ -30,6 +30,7 @@ import android.graphics.drawable.Drawable;
 import android.location.SettingInjectorService;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.SystemClock;
@@ -253,6 +254,28 @@ class SettingsInjector {
     }
 
     /**
+     * Checks wheteher there is any preference that other apps have injected.
+     *
+     * @param profileId Identifier of the user/profile to obtain the injected settings for or
+     *                  UserHandle.USER_CURRENT for all profiles associated with current user.
+     */
+    public boolean hasInjectedSettings(final int profileId) {
+        final UserManager um = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        final List<UserHandle> profiles = um.getUserProfiles();
+        final int profileCount = profiles.size();
+        for (int i = 0; i < profileCount; ++i) {
+            final UserHandle userHandle = profiles.get(i);
+            if (profileId == UserHandle.USER_CURRENT || profileId == userHandle.getIdentifier()) {
+                Iterable<InjectedSetting> settings = getSettings(userHandle);
+                for (InjectedSetting setting : settings) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Reloads the status messages for all the preference items.
      */
     public void reloadStatusMessages() {
@@ -338,6 +361,9 @@ class SettingsInjector {
 
         private boolean mReloadRequested;
 
+        private StatusLoadingHandler() {
+            super(Looper.getMainLooper());
+        }
         @Override
         public void handleMessage(Message msg) {
             if (Log.isLoggable(TAG, Log.DEBUG)) {

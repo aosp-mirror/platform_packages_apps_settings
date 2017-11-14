@@ -13,45 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
-import android.provider.SearchIndexableResource;
+import static org.mockito.Mockito.mock;
 
-import com.android.settings.R;
+import android.content.Context;
+import android.provider.Settings;
+
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
-public class ScanningSettingsTest {
-
-    private Context mContext;
-    private ScanningSettings mSettings;
-
-    @Before
-    public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mSettings = new ScanningSettings();
-    }
+public class LocationModeHighAccuracyPreferenceControllerTest {
 
     @Test
-    public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = mSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getXmlResourcesToIndex(mContext, true /* enabled */);
+    public void getLocationMode_shouldReturnModeHighAccuracy() {
+        final LocationModeHighAccuracyPreferenceController controller =
+                new LocationModeHighAccuracyPreferenceController(mock(Context.class),
+                        new Lifecycle());
 
-        assertThat(sir).hasSize(1);
-        assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.location_scanning);
+        assertThat(controller.getLocationMode())
+                .isEqualTo(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
     }
+
 }
