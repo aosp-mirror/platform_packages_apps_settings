@@ -40,15 +40,9 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     private static final String TAG = "SearchFeatureProvider";
 
     private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
-
     private DatabaseIndexingManager mDatabaseIndexingManager;
     private SiteMapManager mSiteMapManager;
     private ExecutorService mExecutorService;
-
-    @Override
-    public boolean isEnabled(Context context) {
-        return true;
-    }
 
     @Override
     public void verifyLaunchSearchResultPageCaller(Context context, ComponentName caller) {
@@ -57,9 +51,15 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
                     + "must be called with startActivityForResult");
         }
         final String packageName = caller.getPackageName();
-        if (!TextUtils.equals(packageName, context.getPackageName())) {
-            throw new SecurityException("Only Settings app can launch search result page");
+        final boolean isSettingsPackage = TextUtils.equals(packageName, context.getPackageName())
+                || TextUtils.equals(getSettingsIntelligencePkgName(), packageName);
+        final boolean isWhitelistedPackage =
+                isSignatureWhitelisted(context, caller.getPackageName());
+        if (isSettingsPackage || isWhitelistedPackage) {
+            return;
         }
+        throw new SecurityException("Search result intents must be called with from a "
+                + "whitelisted package.");
     }
 
     @Override
@@ -139,6 +139,14 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
             mExecutorService = Executors.newCachedThreadPool();
         }
         return mExecutorService;
+    }
+
+    protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
+        return false;
+    }
+
+    protected String getSettingsIntelligencePkgName() {
+        return "com.android.settings.intelligence";
     }
 
     /**
