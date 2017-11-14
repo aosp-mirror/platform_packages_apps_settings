@@ -28,6 +28,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -40,6 +41,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class WifiTetherSettings extends RestrictedDashboardFragment
         implements WifiTetherBasePreferenceController.OnTetherConfigUpdateListener {
@@ -156,6 +158,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
         config.SSID = mSSIDPreferenceController.getSSID();
         config.preSharedKey = mPasswordPreferenceController.getPassword();
+        ensureWifiConfigHasPassword(config);
         config.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA2_PSK);
         config.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
         config.apBand = mApBandPreferenceController.getBandIndex();
@@ -174,6 +177,15 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 .updateDisplay();
         getPreferenceController(WifiTetherApBandPreferenceController.class)
                 .updateDisplay();
+    }
+
+    @VisibleForTesting
+    static void ensureWifiConfigHasPassword(WifiConfiguration config) {
+        if (TextUtils.isEmpty(config.preSharedKey)) {
+            String randomUUID = UUID.randomUUID().toString();
+            //first 12 chars from xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+            config.preSharedKey = randomUUID.substring(0, 8) + randomUUID.substring(9, 13);
+        }
     }
 
     @VisibleForTesting
