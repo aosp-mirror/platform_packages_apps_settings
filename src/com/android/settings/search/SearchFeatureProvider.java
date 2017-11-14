@@ -38,11 +38,6 @@ import java.util.concurrent.FutureTask;
 public interface SearchFeatureProvider {
 
     /**
-     * @return true to use the new version of search
-     */
-    boolean isEnabled(Context context);
-
-    /**
      * Ensures the caller has necessary privilege to launch search result page.
      *
      * @throws IllegalArgumentException when caller is null

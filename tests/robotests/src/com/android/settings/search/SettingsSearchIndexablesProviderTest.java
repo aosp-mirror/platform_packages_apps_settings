@@ -2,6 +2,8 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.spy;
+
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.ProviderInfo;
@@ -25,21 +27,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSearchIndexablesProviderTest {
 
     private final String BASE_AUTHORITY = "com.android.settings";
 
     private SettingsSearchIndexablesProvider mProvider;
 
-    private Set<Class> mProviderClasses;
-    private Context mContext;
+    Set<Class> sProviderClasses;
+    Context mContext;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
 
-        mProvider = new SettingsSearchIndexablesProvider();
+        mProvider = spy(new SettingsSearchIndexablesProvider());
         ProviderInfo info = new ProviderInfo();
         info.exported = true;
         info.grantUriPermissions = true;
@@ -47,15 +49,15 @@ public class SettingsSearchIndexablesProviderTest {
         info.readPermission = Manifest.permission.READ_SEARCH_INDEXABLES;
         mProvider.attachInfo(mContext, info);
 
-        mProviderClasses = new HashSet<>(SettingsSearchIndexablesProvider.INDEXABLES);
-        SettingsSearchIndexablesProvider.INDEXABLES.clear();
-        SettingsSearchIndexablesProvider.INDEXABLES.add(FakeSettingsFragment.class);
+        sProviderClasses = new HashSet<>(SearchIndexableResources.sProviders);
+        SearchIndexableResources.sProviders.clear();
+        SearchIndexableResources.sProviders.add(FakeSettingsFragment.class);
     }
 
     @After
     public void cleanUp() {
-        SettingsSearchIndexablesProvider.INDEXABLES.clear();
-        SettingsSearchIndexablesProvider.INDEXABLES.addAll(mProviderClasses);
+        SearchIndexableResources.sProviders.clear();
+        SearchIndexableResources.sProviders.addAll(sProviderClasses);
     }
 
     @Test

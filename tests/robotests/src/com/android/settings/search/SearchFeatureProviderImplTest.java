@@ -140,8 +140,15 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    public void verifyLaunchSearchResultPageCaller_goodCaller_shouldNotCrash() {
+    public void verifyLaunchSearchResultPageCaller_settingsCaller_shouldNotCrash() {
         final ComponentName cn = new ComponentName(mActivity.getPackageName(), "class");
+        mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
+    }
+
+    @Test
+    public void verifyLaunchSearchResultPageCaller_settingsIntelligenceCaller_shouldNotCrash() {
+        final ComponentName cn =
+                new ComponentName(mProvider.getSettingsIntelligencePkgName(), "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
     }
 

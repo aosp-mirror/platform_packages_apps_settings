@@ -16,67 +16,53 @@
 
 package com.android.settings.network;
 
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
+import android.app.FragmentManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class NetworkResetActionMenuControllerTest {
+public class PrivateDnsMenuControllerTest {
+    private static final int MENU_ID = 0;
 
-    private static final int MENU_ID = Menu.FIRST;
-    private Context mContext;
-    private NetworkResetActionMenuController mController;
+    private PrivateDnsMenuController mController;
     @Mock
     private Menu mMenu;
     @Mock
     private MenuItem mMenuItem;
     @Mock
-    private NetworkResetRestrictionChecker mRestrictionChecker;
+    private FragmentManager mFragmentManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new NetworkResetActionMenuController(mContext, MENU_ID);
-        ReflectionHelpers.setField(mController, "mRestrictionChecker", mRestrictionChecker);
+
+        mController = new PrivateDnsMenuController(mFragmentManager, MENU_ID);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
     }
 
     @Test
     public void buildMenuItem_available_shouldAddToMenu() {
-        when(mRestrictionChecker.hasRestriction()).thenReturn(false);
         mController.buildMenuItem(mMenu);
 
-        verify(mMenu).add(anyInt(), anyInt(), anyInt(), anyInt());
+        verify(mMenu).add(0 /* groupId */, MENU_ID, 0 /* order */,
+                R.string.select_private_dns_configuration_title);
         verify(mMenuItem).setOnMenuItemClickListener(any(MenuItem.OnMenuItemClickListener.class));
-    }
-
-    @Test
-    public void buildMenuItem_notAvailable_shouldNotAddToMenu() {
-        when(mRestrictionChecker.hasRestriction()).thenReturn(true);
-
-        mController.buildMenuItem(mMenu);
-
-        verify(mMenu, never()).add(anyInt(), anyInt(), anyInt(), anyInt());
     }
 }
