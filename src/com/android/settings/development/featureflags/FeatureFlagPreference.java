@@ -29,7 +29,7 @@ public class FeatureFlagPreference extends SwitchPreference {
         mKey = key;
         setKey(key);
         setTitle(key);
-        setCheckedInternal(FeatureFlagUtils.isEnabled(mKey));
+        setCheckedInternal(FeatureFlagUtils.isEnabled(context, mKey));
     }
 
     @Override
