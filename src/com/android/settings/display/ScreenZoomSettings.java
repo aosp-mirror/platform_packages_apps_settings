@@ -71,9 +71,7 @@ public class ScreenZoomSettings extends PreviewSeekBarPreferenceFragment impleme
             mDefaultDensity = density.getDefaultDensity();
         }
 
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.screen_zoom_title);
-        }
+        getActivity().setTitle(R.string.screen_zoom_title);
     }
 
     @Override

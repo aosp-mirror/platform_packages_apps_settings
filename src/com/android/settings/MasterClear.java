@@ -95,9 +95,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.master_clear_title);
-        }
+        getActivity().setTitle(R.string.master_clear_title);
     }
 
     /**

@@ -40,9 +40,7 @@ public class BackgroundCheckSummary extends InstrumentedPreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.background_check_pref);
-        }
+        getActivity().setTitle(R.string.background_check_pref);
     }
 
     @Override

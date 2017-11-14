@@ -124,14 +124,8 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
         if (apps == null) return;
         setEmptyText(R.string.premium_sms_none);
         setLoading(false, true);
-        final PreferenceScreen screen;
-        if (usePreferenceScreenTitle()) {
-            screen = getPreferenceScreen();
-            screen.removeAll();
-        } else {
-            screen = getPreferenceManager().createPreferenceScreen(getPrefContext());
-        }
-
+        final PreferenceScreen screen = getPreferenceScreen();
+        screen.removeAll();
         screen.setOrderingAsAdded(true);
 
         for (int i = 0; i < apps.size(); i++) {
@@ -144,10 +138,6 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
             FooterPreference footer = new FooterPreference(getPrefContext());
             footer.setTitle(R.string.premium_sms_warning);
             screen.addPreference(footer);
-        }
-
-        if (!usePreferenceScreenTitle()) {
-            setPreferenceScreen(screen);
         }
     }
 

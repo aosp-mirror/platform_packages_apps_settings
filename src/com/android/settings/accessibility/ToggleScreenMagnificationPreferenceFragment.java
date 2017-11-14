@@ -216,8 +216,7 @@ public class ToggleScreenMagnificationPreferenceFragment extends
             mInitialSetting = arguments.getBoolean(AccessibilitySettings.EXTRA_CHECKED);
         }
 
-        if (usePreferenceScreenTitle()
-                && arguments.containsKey(AccessibilitySettings.EXTRA_TITLE_RES)) {
+        if (arguments.containsKey(AccessibilitySettings.EXTRA_TITLE_RES)) {
             final int titleRes = arguments.getInt(AccessibilitySettings.EXTRA_TITLE_RES);
             if (titleRes > 0) {
                 getActivity().setTitle(titleRes);
