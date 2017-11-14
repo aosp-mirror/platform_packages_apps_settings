@@ -20,6 +20,9 @@ import static com.android.settings.deviceinfo.firmwareversion.KernelVersionDialo
         .KERNEL_VERSION_VALUE_ID;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -30,6 +33,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -39,11 +43,14 @@ public class KernelVersionDialogControllerTest {
     @Mock
     private FirmwareVersionDialogFragment mDialog;
 
+    private Context mContext;
     private KernelVersionDialogController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        when(mDialog.getContext()).thenReturn(mContext);
         mController = new KernelVersionDialogController(mDialog);
     }
 
@@ -52,6 +59,6 @@ public class KernelVersionDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(KERNEL_VERSION_VALUE_ID,
-                DeviceInfoUtils.getFormattedKernelVersion());
+                DeviceInfoUtils.getFormattedKernelVersion(mContext));
     }
 }

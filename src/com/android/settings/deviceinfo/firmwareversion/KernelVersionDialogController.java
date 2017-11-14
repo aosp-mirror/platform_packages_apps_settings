@@ -36,6 +36,7 @@ public class KernelVersionDialogController {
      * Updates kernel version to the dialog.
      */
     public void initialize() {
-        mDialog.setText(KERNEL_VERSION_VALUE_ID, DeviceInfoUtils.getFormattedKernelVersion());
+        mDialog.setText(KERNEL_VERSION_VALUE_ID,
+                DeviceInfoUtils.getFormattedKernelVersion(mDialog.getContext()));
     }
 }
