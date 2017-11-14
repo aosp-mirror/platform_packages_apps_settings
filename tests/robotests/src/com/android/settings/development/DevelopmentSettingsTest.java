@@ -108,7 +108,7 @@ public class DevelopmentSettingsTest {
                         RuntimeEnvironment.application, true);
 
         assertThat(index.size()).isEqualTo(1);
-        assertThat(index.get(0).xmlResId).isEqualTo(R.xml.development_prefs);
+        assertThat(index.get(0).xmlResId).isEqualTo(R.xml.development_settings);
     }
 
     @Test
