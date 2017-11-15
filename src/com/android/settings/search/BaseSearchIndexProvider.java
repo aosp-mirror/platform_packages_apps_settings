@@ -27,6 +27,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -71,6 +72,9 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
                 if (controller instanceof PreferenceControllerMixin) {
                     ((PreferenceControllerMixin) controller)
                             .updateNonIndexableKeys(nonIndexableKeys);
+                } else if (controller instanceof BasePreferenceController) {
+                    ((BasePreferenceController) controller).updateNonIndexableKeys(
+                            nonIndexableKeys);
                 } else {
                     throw new IllegalStateException(controller.getClass().getName()
                             + " must implement " + PreferenceControllerMixin.class.getName());

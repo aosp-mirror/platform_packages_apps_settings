@@ -27,6 +27,7 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -72,10 +73,11 @@ public class DatabaseIndexingUtils {
      * @return A map between {@link Uri}s and {@link PreferenceControllerMixin}s to get the payload
      * types for Settings.
      */
-    public static Map<String, PreferenceControllerMixin> getPreferenceControllerUriMap(
+    public static Map<String, ResultPayload> getPayloadKeyMap(
             String className, Context context) {
+        ArrayMap<String, ResultPayload> map = new ArrayMap<>();
         if (context == null) {
-            return null;
+            return map;
         }
 
         final Class<?> clazz = getIndexableClass(className);
@@ -83,7 +85,7 @@ public class DatabaseIndexingUtils {
         if (clazz == null) {
             Log.d(TAG, "SearchIndexableResource '" + className +
                     "' should implement the " + Indexable.class.getName() + " interface!");
-            return null;
+            return map;
         }
 
         // Will be non null only for a Local provider implementing a
@@ -94,42 +96,26 @@ public class DatabaseIndexingUtils {
                 provider.getPreferenceControllers(context);
 
         if (controllers == null) {
-            return null;
+            return map;
         }
 
-        ArrayMap<String, PreferenceControllerMixin> map = new ArrayMap<>();
-
         for (AbstractPreferenceController controller : controllers) {
+            ResultPayload payload;
             if (controller instanceof PreferenceControllerMixin) {
-                map.put(controller.getPreferenceKey(), (PreferenceControllerMixin) controller);
+                payload = ((PreferenceControllerMixin) controller).getResultPayload();
+
+            } else if (controller instanceof BasePreferenceController) {
+                payload = ((BasePreferenceController) controller).getResultPayload();
             } else {
                 throw new IllegalStateException(controller.getClass().getName()
                         + " must implement " + PreferenceControllerMixin.class.getName());
             }
+            if (payload != null) {
+                map.put(controller.getPreferenceKey(), payload);
+            }
         }
 
         return map;
-    }
-
-    /**
-     * @param uriMap Map between the {@link PreferenceControllerMixin} keys
-     *               and the controllers themselves.
-     * @param key    The look-up key
-     * @return The Payload from the {@link PreferenceControllerMixin} specified by the key,
-     * if it exists. Otherwise null.
-     */
-    public static ResultPayload getPayloadFromUriMap(Map<String, PreferenceControllerMixin> uriMap,
-            String key) {
-        if (uriMap == null) {
-            return null;
-        }
-
-        PreferenceControllerMixin controller = uriMap.get(key);
-        if (controller == null) {
-            return null;
-        }
-
-        return controller.getResultPayload();
     }
 
     public static Class<?> getIndexableClass(String className) {
