@@ -59,13 +59,15 @@ public class LocationModePreferenceControllerTest {
 
     private Context mContext;
     private LocationModePreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new LocationModePreferenceController(mContext, mFragment, new Lifecycle());
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mController = new LocationModePreferenceController(mContext, mFragment, mLifecycle);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }

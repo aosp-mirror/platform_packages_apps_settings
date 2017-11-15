@@ -59,7 +59,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,7 +209,7 @@ public class LanguageAndInputSettingsTest {
         }
 
         @Override
-        protected Lifecycle getLifecycle() {
+        public Lifecycle getLifecycle() {
             if (mLifecycle == null) {
                 return super.getLifecycle();
             }

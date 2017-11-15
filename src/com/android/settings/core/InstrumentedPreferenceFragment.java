@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.support.annotation.XmlRes;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.core.instrumentation.Instrumentable;
@@ -68,11 +67,9 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        if (usePreferenceScreenTitle()) {
-            final int resId = getPreferenceScreenResId();
-            if (resId > 0) {
-                addPreferencesFromResource(resId);
-            }
+        final int resId = getPreferenceScreenResId();
+        if (resId > 0) {
+            addPreferencesFromResource(resId);
         }
     }
 
@@ -80,10 +77,6 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     public void addPreferencesFromResource(@XmlRes int preferencesResId) {
         super.addPreferencesFromResource(preferencesResId);
         updateActivityTitleWithScreenTitle(getPreferenceScreen());
-    }
-
-    public static boolean usePreferenceScreenTitle() {
-        return FeatureFlagUtils.isEnabled(FeatureFlags.USE_PREFERENCE_SCREEN_TITLE) || true;
     }
 
     protected final Context getPrefContext() {
@@ -102,7 +95,7 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     }
 
     private void updateActivityTitleWithScreenTitle(PreferenceScreen screen) {
-        if (usePreferenceScreenTitle() && screen != null) {
+        if (screen != null) {
             final CharSequence title = screen.getTitle();
             if (!TextUtils.isEmpty(title)) {
                 getActivity().setTitle(title);

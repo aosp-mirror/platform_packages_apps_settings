@@ -299,7 +299,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     @Override
     protected int getPreferenceScreenResId() {
         Log.d(TAG, "Creating pref screen");
-        return R.xml.development_prefs;
+        return R.xml.development_settings;
     }
 
     @Override
@@ -460,7 +460,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                         Context context, boolean enabled) {
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.development_prefs;
+                    sir.xmlResId = R.xml.development_settings;
                     return Arrays.asList(sir);
                 }
 

@@ -67,7 +67,7 @@ public class Settings extends SettingsActivity {
     @Deprecated
     public static class DevelopmentSettingsActivity extends SettingsActivity {
         public static final boolean isEnabled() {
-            return FeatureFlagUtils.isEnabled(DEV_OPTION_V1);
+            return FeatureFlagUtils.isEnabled(null /* context */, DEV_OPTION_V1);
         }
     }
     public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }

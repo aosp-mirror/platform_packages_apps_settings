@@ -27,7 +27,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -75,10 +74,6 @@ public class InstrumentedPreferenceFragmentTest {
 
     @Test
     public void onCreatePreferences_noPreferenceScreenResId_shouldNotAddPreference() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
-                "true");
-
         mFragment.onCreatePreferences(Bundle.EMPTY, null /* rootKey */);
 
         verify(mFragment, never()).addPreferencesFromResource(anyInt());
@@ -86,9 +81,6 @@ public class InstrumentedPreferenceFragmentTest {
 
     @Test
     public void onCreatePreferences_gotPreferenceScreenResId_shouldAddPreferences() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
-                "true");
         mFragment.setPreferenceScreenResId(R.xml.screen_pinning_settings);
         when(mFragment.getActivity()).thenReturn(mActivity);
 
@@ -100,9 +92,6 @@ public class InstrumentedPreferenceFragmentTest {
 
     @Test
     public void onCreatePreferences_gotPrefScreenResIdAndTitle_shouldAddPreferencesAndSetTitle() {
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.USE_PREFERENCE_SCREEN_TITLE,
-                "true");
         mFragment.setPreferenceScreenResId(R.xml.screen_pinning_settings);
         when(mFragment.getActivity()).thenReturn(mActivity);
         final CharSequence title = "Test Title";

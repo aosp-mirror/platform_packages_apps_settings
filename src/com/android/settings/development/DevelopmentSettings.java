@@ -394,7 +394,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return;
         }
 
-        addPreferencesFromResource(R.xml.development_prefs);
+        addPreferencesFromResource(R.xml.development_settings);
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
@@ -2587,7 +2587,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                         Context context, boolean enabled) {
 
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.development_prefs;
+                    sir.xmlResId = R.xml.development_settings;
                     return Arrays.asList(sir);
                 }
 

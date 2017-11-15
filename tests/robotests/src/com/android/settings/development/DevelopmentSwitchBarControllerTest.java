@@ -16,7 +16,11 @@
 
 package com.android.settings.development;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 
 import com.android.settings.TestConfig;
@@ -55,7 +59,7 @@ public class DevelopmentSwitchBarControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mSwitchBar = new SwitchBar(RuntimeEnvironment.application);
     }
 
@@ -72,10 +76,10 @@ public class DevelopmentSwitchBarControllerTest {
         final ArrayList<SwitchBar.OnSwitchChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         assertThat(listeners).doesNotContain(mSettings);
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         assertThat(listeners).doesNotContain(mSettings);
     }
 
@@ -87,10 +91,10 @@ public class DevelopmentSwitchBarControllerTest {
         final ArrayList<SwitchBar.OnSwitchChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         assertThat(listeners).doesNotContain(mNewSettings);
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         assertThat(listeners).doesNotContain(mNewSettings);
     }
 
@@ -102,10 +106,10 @@ public class DevelopmentSwitchBarControllerTest {
         final ArrayList<SwitchBar.OnSwitchChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         assertThat(listeners).contains(mSettings);
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         assertThat(listeners).doesNotContain(mSettings);
     }
 
@@ -118,10 +122,10 @@ public class DevelopmentSwitchBarControllerTest {
         final ArrayList<SwitchBar.OnSwitchChangeListener> listeners =
                 ReflectionHelpers.getField(mSwitchBar, "mSwitchChangeListeners");
 
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
         assertThat(listeners).contains(mNewSettings);
 
-        mLifecycle.onStop();
+        mLifecycle.handleLifecycleEvent(ON_STOP);
         assertThat(listeners).doesNotContain(mNewSettings);
     }
 

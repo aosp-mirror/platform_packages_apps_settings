@@ -37,15 +37,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
 
     public DataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        if (InstrumentedPreferenceFragment.usePreferenceScreenTitle()) {
-            final TypedArray a = context.obtainStyledAttributes(
-                    attrs, new int[] { com.android.internal.R.attr.title },
-                    TypedArrayUtils.getAttr(
-                            context, android.support.v7.preference.R.attr.preferenceStyle,
-                            android.R.attr.preferenceStyle), 0);
-            mTitleRes = a.getResourceId(0, 0);
-            a.recycle();
-        }
+        final TypedArray a = context.obtainStyledAttributes(
+                attrs, new int[] { com.android.internal.R.attr.title },
+                TypedArrayUtils.getAttr(
+                        context, android.support.v7.preference.R.attr.preferenceStyle,
+                        android.R.attr.preferenceStyle), 0);
+        mTitleRes = a.getResourceId(0, 0);
+        a.recycle();
     }
 
     @Override

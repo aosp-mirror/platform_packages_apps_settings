@@ -65,9 +65,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
         super.onActivityCreated(savedInstanceState);
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
-        if (usePreferenceScreenTitle()) {
-            activity.setTitle(R.string.screen_pinning_title);
-        }
+        activity.setTitle(R.string.screen_pinning_title);
         mLockPatternUtils = new LockPatternUtils(activity);
 
 

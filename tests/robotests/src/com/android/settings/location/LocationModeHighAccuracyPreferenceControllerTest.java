@@ -26,6 +26,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
@@ -34,11 +35,17 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class LocationModeHighAccuracyPreferenceControllerTest {
 
+    private Lifecycle mLifecycle;
+
+    @Before
+    public void setUp() {
+        mLifecycle = new Lifecycle(() -> mLifecycle);
+    }
+
     @Test
     public void getLocationMode_shouldReturnModeHighAccuracy() {
         final LocationModeHighAccuracyPreferenceController controller =
-                new LocationModeHighAccuracyPreferenceController(mock(Context.class),
-                        new Lifecycle());
+                new LocationModeHighAccuracyPreferenceController(mock(Context.class), mLifecycle);
 
         assertThat(controller.getLocationMode())
                 .isEqualTo(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);

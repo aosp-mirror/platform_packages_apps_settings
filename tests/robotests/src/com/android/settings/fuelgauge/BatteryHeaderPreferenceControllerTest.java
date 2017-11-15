@@ -17,7 +17,10 @@
 
 package com.android.settings.fuelgauge;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -90,7 +93,7 @@ public class BatteryHeaderPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(RuntimeEnvironment.application);
         mBatteryMeterView = new BatteryMeterView(mContext);
         mBatteryPercentText = new TextView(mContext);
@@ -170,7 +173,7 @@ public class BatteryHeaderPreferenceControllerTest {
                 .thenReturn(mEntityHeaderController);
 
         mController.displayPreference(mPreferenceScreen);
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
 
         verify(mEntityHeaderController).styleActionBar(mActivity);
     }

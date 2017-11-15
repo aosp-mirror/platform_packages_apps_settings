@@ -68,9 +68,7 @@ public class ResetNetwork extends InstrumentedPreferenceFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (usePreferenceScreenTitle()) {
-            getActivity().setTitle(R.string.reset_network_title);
-        }
+        getActivity().setTitle(R.string.reset_network_title);
     }
 
     /**

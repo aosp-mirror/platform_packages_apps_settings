@@ -15,7 +15,11 @@
  */
 package com.android.settings.location;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -67,7 +71,7 @@ public class LocationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = new LocationPreferenceController(mContext, mLifecycle);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
@@ -145,13 +149,14 @@ public class LocationPreferenceControllerTest {
 
     @Test
     public void onResume_shouldRegisterObserver() {
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
 
     @Test
     public void onPause_shouldUnregisterObserver() {
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 

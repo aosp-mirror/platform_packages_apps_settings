@@ -16,6 +16,16 @@
 
 package com.android.settings.wifi;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -23,8 +33,8 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -34,12 +44,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -62,7 +66,7 @@ public class WifiInfoPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mContext.getSystemService(WifiManager.class))
                 .thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString()))
@@ -83,10 +87,10 @@ public class WifiInfoPreferenceControllerTest {
 
     @Test
     public void runThroughLifecycle_shouldInstallListenerOnResume() {
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
 
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 

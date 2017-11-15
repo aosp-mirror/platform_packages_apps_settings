@@ -15,6 +15,9 @@
  */
 package com.android.settings.network;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
@@ -69,7 +72,7 @@ public class MobileNetworkPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
     }
@@ -104,11 +107,11 @@ public class MobileNetworkPreferenceControllerTest {
         mLifecycle.addObserver(mController);
         doReturn(true).when(mController).isAvailable();
 
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mTelephonyManager).listen(mController.mPhoneStateListener,
                 PhoneStateListener.LISTEN_SERVICE_STATE);
 
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mTelephonyManager).listen(mController.mPhoneStateListener,
                 PhoneStateListener.LISTEN_NONE);
     }
@@ -125,7 +128,7 @@ public class MobileNetworkPreferenceControllerTest {
 
         // Display pref and go through lifecycle to set up listener.
         mController.displayPreference(mScreen);
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mController).onResume();
         verify(mTelephonyManager).listen(mController.mPhoneStateListener,
                 PhoneStateListener.LISTEN_SERVICE_STATE);

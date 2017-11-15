@@ -16,7 +16,10 @@
 
 package com.android.settings.development.featureflags;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,7 +40,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class FeatureFlagPreferenceControllerTest {
 
     @Mock
@@ -50,7 +53,7 @@ public class FeatureFlagPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = new FeatureFlagsPreferenceController(mContext, mLifecycle);
         when(mScreen.getContext()).thenReturn(mContext);
         mController.displayPreference(mScreen);
@@ -64,7 +67,7 @@ public class FeatureFlagPreferenceControllerTest {
 
     @Test
     public void onStart_shouldRefreshFeatureFlags() {
-        mLifecycle.onStart();
+        mLifecycle.handleLifecycleEvent(ON_START);
 
         verify(mScreen).removeAll();
         verify(mScreen).addPreference(any(FeatureFlagPreference.class));

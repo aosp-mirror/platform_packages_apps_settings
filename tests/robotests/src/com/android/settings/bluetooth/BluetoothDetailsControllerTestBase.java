@@ -67,7 +67,7 @@ public class BluetoothDetailsControllerTestBase {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        mLifecycle = spy(new Lifecycle());
+        mLifecycle = spy(new Lifecycle(() -> mLifecycle));
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
     }

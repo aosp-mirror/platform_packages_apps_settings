@@ -73,7 +73,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         boolean isLowRamDevice = am.isLowRamDevice();
-        return !isLowRamDevice && !isV2Enabled();
+        return !isLowRamDevice && !isV2Enabled(context);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         boolean isLowRamDevice = am.isLowRamDevice();
-        return !isLowRamDevice && isV2Enabled();
+        return !isLowRamDevice && isV2Enabled(context);
     }
 
     @Override
@@ -91,8 +91,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
                 "com.android.settings.intelligence.suggestions.SuggestionService");
     }
 
-    private static boolean isV2Enabled() {
-        return FeatureFlagUtils.isEnabled(SUGGESTIONS_V2) || true;
+    private static boolean isV2Enabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, SUGGESTIONS_V2) || true;
     }
 
     @Override

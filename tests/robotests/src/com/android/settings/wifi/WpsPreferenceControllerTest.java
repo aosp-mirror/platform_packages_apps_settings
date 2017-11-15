@@ -15,7 +15,11 @@
  */
 package com.android.settings.wifi;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
+import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
@@ -31,8 +35,8 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -66,7 +70,7 @@ public class WpsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle();
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         when(mContext.getSystemService(WifiManager.class))
                 .thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString()))
@@ -83,12 +87,13 @@ public class WpsPreferenceControllerTest {
 
     @Test
     public void testOnResume_shouldRegisterListener() {
-        mLifecycle.onResume();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
     }
     @Test
     public void testOnPause_shouldUnregisterListener() {
-        mLifecycle.onPause();
+        mLifecycle.handleLifecycleEvent(ON_RESUME);
+        mLifecycle.handleLifecycleEvent(ON_PAUSE);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
     }
 

@@ -203,9 +203,7 @@ public class TrustedCredentialsSettings extends InstrumentedPreferenceFragment
         filter.addAction(Intent.ACTION_MANAGED_PROFILE_UNLOCKED);
         activity.registerReceiver(mWorkProfileChangedReceiver, filter);
 
-        if (usePreferenceScreenTitle()) {
-            activity.setTitle(R.string.trusted_credentials);
-        }
+        activity.setTitle(R.string.trusted_credentials);
     }
 
     @Override

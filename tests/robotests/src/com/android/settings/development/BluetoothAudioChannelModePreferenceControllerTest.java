@@ -60,13 +60,15 @@ public class BluetoothAudioChannelModePreferenceControllerTest {
     private String[] mListValues;
     private Context mContext;
     private BluetoothAudioChannelModePreferenceController mController;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mLifecycle = new Lifecycle(() -> mLifecycle);
         mController = spy(new BluetoothAudioChannelModePreferenceController(mContext,
-                new Lifecycle(), mBluetoothA2dpConfigStore));
+                mLifecycle, mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
