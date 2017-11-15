@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.support.annotation.XmlRes;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 
 import com.android.settings.core.instrumentation.Instrumentable;

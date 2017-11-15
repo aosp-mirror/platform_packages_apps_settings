@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import android.annotation.NonNull;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -167,18 +168,18 @@ public interface SearchFeatureProvider {
     /**
      * Initializes the search toolbar.
      */
-    default void initSearchToolbar(Context context, Toolbar toolbar) {
-        if (context == null || toolbar == null) {
+    default void initSearchToolbar(Activity activity, Toolbar toolbar) {
+        if (activity == null || toolbar == null) {
             return;
         }
         toolbar.setOnClickListener(tb -> {
             final Intent intent;
-            if (FeatureFlagUtils.isEnabled(FeatureFlags.SEARCH_V2)) {
+            if (FeatureFlagUtils.isEnabled(activity, FeatureFlags.SEARCH_V2)) {
                 intent = new Intent("com.android.settings.action.SETTINGS_SEARCH");
             } else {
-                intent = new Intent(context, SearchActivity.class);
+                intent = new Intent(activity, SearchActivity.class);
             }
-            context.startActivity(intent);
+            activity.startActivityForResult(intent, 0 /* requestCode */);
         });
     }
 }

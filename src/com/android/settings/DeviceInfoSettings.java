@@ -89,7 +89,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return FeatureFlagUtils.isEnabled(DEVICE_INFO_V2)
+        return FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)
                 ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
     }
 
@@ -126,7 +126,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
-        if (FeatureFlagUtils.isEnabled(DEVICE_INFO_V2)) {
+        if (FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
             // Device name
 
