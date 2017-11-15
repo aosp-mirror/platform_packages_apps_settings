@@ -16,19 +16,41 @@
 
 package com.android.settings.deviceinfo.imei;
 
+import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
+
 import android.app.Fragment;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
-public class ImeiInfoPreferenceControllerV2 extends AbstractImeiInfoPreferenceController {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static final int SIM_SLOT = 0;
+/**
+ * Controller that manages preference for single and multi sim devices.
+ */
+public class ImeiInfoPreferenceControllerV2 extends
+        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
 
-    private static final String KEY_IMEI_INFO = "imei_info_sim_slot_1";
+    private static final String KEY_IMEI_INFO = "imei_info";
+
+    private final boolean mIsMultiSim;
+    private final TelephonyManager mTelephonyManager;
+    private final List<Preference> mPreferenceList = new ArrayList<>();
+    private final Fragment mFragment;
 
     public ImeiInfoPreferenceControllerV2(Context context, Fragment fragment) {
-        super(context, fragment);
+        super(context);
+
+        mFragment = fragment;
+        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mIsMultiSim = mTelephonyManager.getPhoneCount() > 1;
     }
 
     @Override
@@ -37,19 +59,69 @@ public class ImeiInfoPreferenceControllerV2 extends AbstractImeiInfoPreferenceCo
     }
 
     @Override
-    protected String getTitleForCdmaPhone() {
-        return mIsMultiSim ? mContext.getResources().getString(R.string.meid_multi_sim_sim_slot_1)
-                : mContext.getResources().getString(R.string.status_meid_number);
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        if (!isAvailable() || preference == null || !preference.isVisible()) {
+            return;
+        }
+
+        mPreferenceList.add(preference);
+        updatePreference(preference, 0 /* sim slot */);
+
+        final int imeiPreferenceOrder = preference.getOrder();
+        // Add additional preferences for each sim in the device
+        for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
+                simSlotNumber++) {
+            final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setOrder(imeiPreferenceOrder + simSlotNumber);
+            multiSimPreference.setKey(KEY_IMEI_INFO + simSlotNumber);
+            screen.addPreference(multiSimPreference);
+            mPreferenceList.add(multiSimPreference);
+            updatePreference(multiSimPreference, simSlotNumber);
+        }
     }
 
     @Override
-    protected String getTitleForGsmPhone() {
-        return mIsMultiSim ? mContext.getResources().getString(R.string.imei_multi_sim_slot_1)
-                : mContext.getResources().getString(R.string.status_imei);
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        final int simSlot = mPreferenceList.indexOf(preference);
+        if (simSlot == -1) {
+            return false;
+        }
+
+        ImeiInfoDialogFragment.show(mFragment, simSlot, preference.getTitle().toString());
+        return true;
     }
 
-    @Override
-    protected int getSimSlot() {
-        return SIM_SLOT;
+    private void updatePreference(Preference preference, int simSlot) {
+        final int phoneType = mTelephonyManager.getPhoneType();
+        if (phoneType == PHONE_TYPE_CDMA) {
+            preference.setTitle(getTitleForCdmaPhone(simSlot));
+            preference.setSummary(getMeid(simSlot));
+        } else {
+            // GSM phone
+            preference.setTitle(getTitleForGsmPhone(simSlot));
+            preference.setSummary(mTelephonyManager.getImei(simSlot));
+        }
+    }
+
+    private CharSequence getTitleForGsmPhone(int simSlot) {
+        return mIsMultiSim ? mContext.getString(R.string.imei_multi_sim, simSlot + 1)
+                : mContext.getString(R.string.status_imei);
+    }
+
+    private CharSequence getTitleForCdmaPhone(int simSlot) {
+        return mIsMultiSim ? mContext.getString(R.string.meid_multi_sim, simSlot + 1)
+                : mContext.getString(R.string.status_meid_number);
+    }
+
+    @VisibleForTesting
+    String getMeid(int simSlot) {
+        return mTelephonyManager.getMeid(simSlot);
+    }
+
+    @VisibleForTesting
+    Preference createNewPreference(Context context) {
+        return new Preference(context);
     }
 }

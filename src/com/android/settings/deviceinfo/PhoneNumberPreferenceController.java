@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo.simstatus;
+package com.android.settings.deviceinfo;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -24,55 +23,53 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
+import com.android.settingslib.DeviceInfoUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimStatusPreferenceControllerV2 extends
-        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
+public class PhoneNumberPreferenceController extends AbstractPreferenceController {
 
-    private static final String KEY_SIM_STATUS = "sim_status";
+    private final static String KEY_PHONE_NUMBER = "phone_number";
 
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
-    private final Fragment mFragment;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
-    public SimStatusPreferenceControllerV2(Context context, Fragment fragment) {
+    public PhoneNumberPreferenceController(Context context) {
         super(context);
-
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         mSubscriptionManager = (SubscriptionManager) context.getSystemService(
                 Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-        mFragment = fragment;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_SIM_STATUS;
+        return KEY_PHONE_NUMBER;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return true;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         final Preference preference = screen.findPreference(getPreferenceKey());
-        if (!isAvailable() || preference == null || !preference.isVisible()) {
-            return;
-        }
-
         mPreferenceList.add(preference);
 
-        final int simStatusOrder = preference.getOrder();
+        final int phonePreferenceOrder = preference.getOrder();
         // Add additional preferences for each sim in the device
         for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
                 simSlotNumber++) {
             final Preference multiSimPreference = createNewPreference(screen.getContext());
-            multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
-            multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
+            multiSimPreference.setOrder(phonePreferenceOrder + simSlotNumber);
+            multiSimPreference.setKey(KEY_PHONE_NUMBER + simSlotNumber);
             screen.addPreference(multiSimPreference);
             mPreferenceList.add(multiSimPreference);
         }
@@ -82,39 +79,46 @@ public class SimStatusPreferenceControllerV2 extends
     public void updateState(Preference preference) {
         for (int simSlotNumber = 0; simSlotNumber < mPreferenceList.size(); simSlotNumber++) {
             final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
-            simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber /* sim slot */));
-            simStatusPreference.setSummary(getCarrierName(simSlotNumber /* sim slot */));
+            simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber));
+            simStatusPreference.setSummary(getPhoneNumber(simSlotNumber));
         }
     }
 
-    @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
-        final int simSlot = mPreferenceList.indexOf(preference);
-        if (simSlot == -1) {
-            return false;
+    private CharSequence getPhoneNumber(int simSlot) {
+        final SubscriptionInfo subscriptionInfo = getSubscriptionInfo(simSlot);
+        if (subscriptionInfo == null) {
+            return mContext.getString(R.string.device_info_default);
         }
 
-        SimStatusDialogFragment.show(mFragment, simSlot, getPreferenceTitle(simSlot));
-        return true;
+        return getFormattedPhoneNumber(subscriptionInfo);
     }
 
-    private String getPreferenceTitle(int simSlot) {
+    private CharSequence getPreferenceTitle(int simSlot) {
         return mTelephonyManager.getPhoneCount() > 1 ? mContext.getString(
-                R.string.sim_status_title_sim_slot, simSlot + 1) : mContext.getString(
-                R.string.sim_status_title);
+                R.string.status_number_sim_slot, simSlot + 1) : mContext.getString(
+                R.string.status_number);
     }
 
-    private CharSequence getCarrierName(int simSlot) {
+    @VisibleForTesting
+    SubscriptionInfo getSubscriptionInfo(int simSlot) {
         final List<SubscriptionInfo> subscriptionInfoList =
                 mSubscriptionManager.getActiveSubscriptionInfoList();
         if (subscriptionInfoList != null) {
             for (SubscriptionInfo info : subscriptionInfoList) {
                 if (info.getSimSlotIndex() == simSlot) {
-                    return info.getCarrierName();
+                    return info;
                 }
             }
         }
-        return mContext.getText(R.string.device_info_not_available);
+        return null;
+    }
+
+    @VisibleForTesting
+    CharSequence getFormattedPhoneNumber(SubscriptionInfo subscriptionInfo) {
+        final String phoneNumber = DeviceInfoUtils.getFormattedPhoneNumber(mContext,
+                subscriptionInfo);
+        return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
+                : phoneNumber;
     }
 
     @VisibleForTesting
