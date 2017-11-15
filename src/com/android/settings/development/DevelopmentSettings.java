@@ -193,8 +193,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY = "bluetooth_select_a2dp_channel_mode";
     private static final String BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY = "bluetooth_select_a2dp_ldac_playback_quality";
 
-    private static final String PRIVATE_DNS_PREF_KEY = "select_private_dns_configuration";
-
     private static final String INACTIVE_APPS_KEY = "inactive_apps";
 
     private static final String IMMEDIATELY_DESTROY_ACTIVITIES_KEY
@@ -489,8 +487,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
         mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
         initBluetoothConfigurationValues();
-
-        updatePrivateDnsSummary();
 
         mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
         mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
@@ -847,7 +843,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateBluetoothDisableAbsVolumeOptions();
         updateBluetoothEnableInbandRingingOptions();
         updateBluetoothA2dpConfigurationValues();
-        updatePrivateDnsSummary();
     }
 
     private void resetDangerousOptions() {
@@ -2010,13 +2005,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mBluetoothA2dp.setCodecConfigPreference(codecConfig);
             }
         }
-    }
-
-    private void updatePrivateDnsSummary() {
-        final String summary = PrivateDnsModeDialogPreference.getSummaryStringForModeFromSettings(
-                getActivity().getContentResolver(), getActivity().getResources());
-        final Preference pref = findPreference(PRIVATE_DNS_PREF_KEY);
-        pref.setSummary(summary);
     }
 
     private void writeImmediatelyDestroyActivitiesOptions() {
