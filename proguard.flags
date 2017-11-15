@@ -39,3 +39,21 @@
     public static ** SEARCH_INDEX_DATA_PROVIDER;
     public static ** SUMMARY_PROVIDER_FACTORY;
 }
+
+# Keep classes, annotations and members used by Lifecycle
+-keepattributes *Annotation*
+
+-keepclassmembers enum android.arch.lifecycle.Lifecycle$Event {
+    <fields>;
+}
+
+-keep class * implements android.arch.lifecycle.LifecycleObserver {
+}
+
+-keep class * implements android.arch.lifecycle.GeneratedAdapter {
+    <init>(...);
+}
+
+-keepclassmembers class ** {
+    @android.arch.lifecycle.OnLifecycleEvent *;
+}
