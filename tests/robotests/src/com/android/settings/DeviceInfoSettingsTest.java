@@ -16,19 +16,32 @@
 
 package com.android.settings;
 
+import static com.android.settings.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
+import static com.android.settings.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
+
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.os.SystemProperties;
 import android.support.v7.preference.PreferenceScreen;
+import android.telephony.TelephonyManager;
+import android.util.FeatureFlagUtils;
+import android.view.View;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.DeviceInfoUtils;
@@ -40,29 +53,43 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
-    shadows = {ShadowUtils.class, ShadowConnectivityManager.class}
+        manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION_O,
+        shadows = {ShadowUtils.class, ShadowConnectivityManager.class}
 )
 public class DeviceInfoSettingsTest {
 
     @Mock
+    private Activity mActivity;
+    @Mock
     private PreferenceScreen mScreen;
     @Mock
     private SummaryLoader mSummaryLoader;
+    @Mock
+    private TelephonyManager mTelephonyManager;
 
+    private Context mContext;
     private DeviceInfoSettings mSettings;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mSettings = spy(new DeviceInfoSettings());
+
+        doReturn(mActivity).when(mSettings).getActivity();
+        doReturn(mContext.getTheme()).when(mActivity).getTheme();
+        doReturn(mContext.getResources()).when(mSettings).getResources();
+        doNothing().when(mSettings).onCreatePreferences(any(), any());
+
         doReturn(mScreen).when(mSettings).getPreferenceScreen();
+        doReturn(mTelephonyManager).when(mSettings).getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     @Test
@@ -90,5 +117,33 @@ public class DeviceInfoSettingsTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
+            SettingsShadowSystemProperties.class})
+    public void onCreate_singleSim_shouldAddSingleSimCount() {
+        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
+                "true");
+        doReturn(1).when(mTelephonyManager).getPhoneCount();
+
+        mSettings.onCreate(null /* icicle */);
+
+        verify(mScreen).setInitialExpandedChildrenCount(
+                SIM_PREFERENCES_COUNT + NON_SIM_PREFERENCES_COUNT);
+    }
+
+    @Test
+    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
+            SettingsShadowSystemProperties.class})
+    public void onCreate_dualeSim_shouldAddDualSimCount() {
+        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
+                "true");
+        doReturn(2).when(mTelephonyManager).getPhoneCount();
+
+        mSettings.onCreate(null /* icicle */);
+
+        verify(mScreen).setInitialExpandedChildrenCount(
+                2 * SIM_PREFERENCES_COUNT + NON_SIM_PREFERENCES_COUNT);
     }
 }
