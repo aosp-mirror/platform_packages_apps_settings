@@ -46,17 +46,16 @@
            android:key="zen_mode_events"
            android:title="@string/zen_mode_events"/>
 
-       <!-- Messages -->
-       <DropDownPreference
+       <Preference
            android:key="zen_mode_messages"
            android:title="@string/zen_mode_messages"
-           android:summary="%s" />
+           android:fragment="com.android.settings.notification.ZenModeMessagesSettings" />
 
        <!-- Calls -->
-       <DropDownPreference
+       <Preference
            android:key="zen_mode_calls"
            android:title="@string/zen_mode_calls"
-           android:summary="%s" />
+           android:fragment="com.android.settings.notification.ZenModeCallsSettings" />
 
        <!-- Repeat callers -->
        <SwitchPreference
