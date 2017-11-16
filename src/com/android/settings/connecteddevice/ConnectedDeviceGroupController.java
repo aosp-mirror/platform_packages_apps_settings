@@ -15,64 +15,95 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
-
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
+import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
 /**
  * Controller to maintain the {@link android.support.v7.preference.PreferenceGroup} for all
  * connected devices. It uses {@link DevicePreferenceCallback} to add/remove {@link Preference}
- *
- * TODO(b/69333961): add real impl
  */
 public class ConnectedDeviceGroupController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         DevicePreferenceCallback {
-    private BluetoothDeviceUpdater mBluetoothController;
 
-    public ConnectedDeviceGroupController(Context context) {
-        super(context);
+    private static final String KEY = "connected_device_list";
+
+    @VisibleForTesting
+    PreferenceGroup mPreferenceGroup;
+    private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+
+    public ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
+        super(fragment.getContext());
+        init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this));
+    }
+
+    @VisibleForTesting
+    ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle,
+            BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+        super(fragment.getContext());
+        init(lifecycle, bluetoothDeviceUpdater);
     }
 
     @Override
     public void onStart() {
-        mBluetoothController.registerCallback();
+        mBluetoothDeviceUpdater.registerCallback();
     }
 
     @Override
     public void onStop() {
-        mBluetoothController.unregisterCallback();
+        mBluetoothDeviceUpdater.unregisterCallback();
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-
+        super.displayPreference(screen);
+        mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+        mPreferenceGroup.setVisible(false);
+        mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+        mBluetoothDeviceUpdater.forceUpdate();
     }
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return true;
     }
 
     @Override
     public String getPreferenceKey() {
-        return null;
+        return KEY;
     }
 
     @Override
     public void onDeviceAdded(Preference preference) {
-
+        if (mPreferenceGroup.getPreferenceCount() == 0) {
+            mPreferenceGroup.setVisible(true);
+        }
+        mPreferenceGroup.addPreference(preference);
     }
 
     @Override
     public void onDeviceRemoved(Preference preference) {
+        mPreferenceGroup.removePreference(preference);
+        if (mPreferenceGroup.getPreferenceCount() == 0) {
+            mPreferenceGroup.setVisible(false);
+        }
+    }
 
+    private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+        mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
     }
 }
