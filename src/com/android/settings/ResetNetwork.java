@@ -43,7 +43,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -61,7 +61,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class ResetNetwork extends InstrumentedPreferenceFragment {
+public class ResetNetwork extends InstrumentedFragment {
     private static final String TAG = "ResetNetwork";
 
     // Arbitrary to avoid conficts

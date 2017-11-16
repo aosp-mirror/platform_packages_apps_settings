@@ -27,7 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
@@ -41,7 +41,7 @@ import java.util.Locale;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends InstrumentedPreferenceFragment
+public class UserDictionaryAddWordFragment extends InstrumentedFragment
         implements AdapterView.OnItemSelectedListener,
         com.android.internal.app.LocalePicker.LocaleSelectionListener {
 
@@ -55,7 +55,6 @@ public class UserDictionaryAddWordFragment extends InstrumentedPreferenceFragmen
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setHasOptionsMenu(true);
-        getActivity().getActionBar().setTitle(R.string.user_dict_settings_title);
         // Keep the instance so that we remember mContents when configuration changes (eg rotation)
         setRetainInstance(true);
     }

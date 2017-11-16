@@ -157,6 +157,7 @@ public class CryptKeeperSettings extends InstrumentedPreferenceFragment {
                 }
             }
         }
+        activity.setTitle(R.string.crypt_keeper_encrypt_title);
     }
 
     /**

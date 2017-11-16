@@ -21,12 +21,12 @@ import android.hardware.fingerprint.FingerprintManager.AuthenticationResult;
 import android.os.CancellationSignal;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 
 /**
  * Sidecar fragment to handle the state around fingerprint authentication
  */
-public class FingerprintAuthenticateSidecar extends InstrumentedPreferenceFragment {
+public class FingerprintAuthenticateSidecar extends InstrumentedFragment {
 
     private static final String TAG = "FingerprintAuthenticateSidecar";
 

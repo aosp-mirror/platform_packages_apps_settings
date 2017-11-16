@@ -64,7 +64,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.notification.RedactionInterstitial;
 import com.android.settings.widget.ImeAwareEditText;
 import com.android.setupwizardlib.GlifLayout;
@@ -168,7 +168,7 @@ public class ChooseLockPassword extends SettingsActivity {
         layout.setFitsSystemWindows(false);
     }
 
-    public static class ChooseLockPasswordFragment extends InstrumentedPreferenceFragment
+    public static class ChooseLockPasswordFragment extends InstrumentedFragment
             implements OnClickListener, OnEditorActionListener, TextWatcher,
             SaveAndFinishWorker.Listener {
         private static final String KEY_FIRST_PIN = "first_pin";
