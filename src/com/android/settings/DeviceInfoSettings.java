@@ -84,7 +84,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)) {
+        if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2) || true) {
             // Increase the number of children when the device contains more than 1 sim.
             final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(
                     Context.TELEPHONY_SERVICE);
@@ -112,7 +112,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)
+        return FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2) || true
                 ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
     }
 
@@ -149,7 +149,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
-        if (FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2)) {
+        if (FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2) || true) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
             // Device name
 
@@ -213,7 +213,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.device_info_settings;
+                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2) || true
+                            ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
                     return Arrays.asList(sir);
                 }
 
