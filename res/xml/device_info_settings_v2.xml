@@ -61,10 +61,17 @@
         settings:keywords="@string/keywords_android_version"
         android:summary="@string/summary_placeholder"/>
 
+    <!-- IMS registration -->
+    <Preference
+        android:key="ims_reg_state"
+        android:order="33"
+        android:title="@string/ims_reg_title"
+        android:summary="@string/summary_placeholder"/>
+
     <!--IP address -->
     <Preference
         android:key="wifi_ip_address"
-        android:order="33"
+        android:order="34"
         android:title="@string/wifi_ip_address"
         android:summary="@string/summary_placeholder"
         settings:allowDividerAbove="true"/>
@@ -72,14 +79,14 @@
     <!-- Wi-Fi MAC address -->
     <Preference
         android:key="wifi_mac_address"
-        android:order="34"
+        android:order="35"
         android:title="@string/status_wifi_mac_address"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Bluetooth address -->
     <Preference
         android:key="bt_address"
-        android:order="35"
+        android:order="36"
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"/>
 
@@ -87,7 +94,7 @@
     <!-- Legal information -->
     <Preference
         android:key="legal_container"
-        android:order="36"
+        android:order="37"
         android:title="@string/legal_information"
         android:fragment="com.android.settings.LegalSettings"
         settings:allowDividerAbove="true"/>
@@ -95,7 +102,7 @@
     <!-- Regulatory labels -->
     <Preference
         android:key="regulatory_info"
-        android:order="37"
+        android:order="38"
         android:title="@string/regulatory_labels">
         <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
     </Preference>
@@ -103,15 +110,36 @@
     <!-- Safety & regulatory manual -->
     <Preference
         android:key="safety_info"
-        android:order="38"
+        android:order="39"
         android:title="@string/safety_and_regulatory_info">
         <intent android:action="android.settings.SHOW_SAFETY_AND_REGULATORY_INFO"/>
     </Preference>
 
+    <!-- Manual -->
+    <Preference
+        android:key="manual"
+        android:order="40"
+        android:title="@string/manual">
+        <intent android:action="android.settings.SHOW_MANUAL"/>
+    </Preference>
+
+    <!-- Feedback on the device -->
+    <Preference
+        android:key="device_feedback"
+        android:order="41"
+        android:title="@string/device_feedback"/>
+
+    <!-- Device FCC equipment id -->
+    <Preference
+        android:key="fcc_equipment_id"
+        android:order="42"
+        android:title="@string/fcc_equipment_id"
+        android:summary="@string/summary_placeholder"/>
+
     <!-- Build number -->
     <Preference
         android:key="build_number"
-        android:order="39"
+        android:order="43"
         android:title="@string/build_number"
         android:summary="@string/summary_placeholder"
         settings:allowDividerAbove="true"/>

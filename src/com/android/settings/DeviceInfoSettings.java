@@ -35,6 +35,7 @@ import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.ImsStatusPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
@@ -139,6 +140,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             controllers.add(new FirmwareVersionPreferenceControllerV2(context, fragment));
 
+            controllers.add(new ImsStatusPreferenceController(context, lifecycle));
+
             controllers.add(new IpAddressPreferenceController(context, lifecycle));
 
             controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
@@ -148,6 +151,12 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             controllers.add(new RegulatoryInfoPreferenceController(context));
 
             controllers.add(new SafetyInfoPreferenceController(context));
+
+            controllers.add(new ManualPreferenceController(context));
+
+            controllers.add(new FeedbackPreferenceController(fragment, context));
+
+            controllers.add(new FccEquipmentIdPreferenceController(context));
 
             controllers.add(
                     new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
