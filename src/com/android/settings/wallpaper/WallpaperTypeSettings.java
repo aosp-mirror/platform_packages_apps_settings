@@ -16,7 +16,6 @@
 
 package com.android.settings.wallpaper;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -113,6 +112,7 @@ public class WallpaperTypeSettings extends SettingsPreferenceFragment implements
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = label.toString();
+                    data.key = "wallpaper_type_settings";
                     data.screenTitle = context.getResources().getString(
                             R.string.wallpaper_settings_fragment_title);
                     data.intentAction = Intent.ACTION_SET_WALLPAPER;

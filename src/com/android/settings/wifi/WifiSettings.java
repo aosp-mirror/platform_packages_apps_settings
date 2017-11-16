@@ -68,7 +68,6 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.AccessPoint.AccessPointListener;
 import com.android.settingslib.wifi.AccessPointPreference;
-import com.android.settingslib.wifi.WifiSavedConfigUtils;
 import com.android.settingslib.wifi.WifiTracker;
 import com.android.settingslib.wifi.WifiTrackerFactory;
 
@@ -1116,18 +1115,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                 data.keywords = res.getString(R.string.keywords_wifi);
                 data.key = DATA_KEY_REFERENCE;
                 result.add(data);
-
-                // Add saved Wi-Fi access points
-                final List<AccessPoint> accessPoints =
-                        WifiSavedConfigUtils.getAllConfigs(context,
-                                context.getSystemService(WifiManager.class));
-                for (AccessPoint accessPoint : accessPoints) {
-                    data = new SearchIndexableRaw(context);
-                    data.title = accessPoint.getSsidStr();
-                    data.screenTitle = res.getString(R.string.wifi_settings);
-                    data.enabled = enabled;
-                    result.add(data);
-                }
 
                 return result;
             }

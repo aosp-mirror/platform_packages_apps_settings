@@ -1136,6 +1136,7 @@ public class UserSettings extends SettingsPreferenceFragment
                     final Resources res = context.getResources();
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = res.getString(R.string.user_settings_title);
+                    data.key = "users_settings";
                     data.screenTitle = res.getString(R.string.user_settings_title);
                     result.add(data);
 
@@ -1145,6 +1146,7 @@ public class UserSettings extends SettingsPreferenceFragment
                                 R.string.user_add_user_or_profile_menu
                                 : R.string.user_add_user_menu);
                         data.screenTitle = res.getString(R.string.user_settings_title);
+                        data.key = "user_settings_add_users";
                         result.add(data);
                     }
                     return result;

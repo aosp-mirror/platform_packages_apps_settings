@@ -823,6 +823,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
             SearchIndexableRaw data = new SearchIndexableRaw(context);
             data.title = screenTitle;
+            data.key = "security_settings_screen";
             data.screenTitle = screenTitle;
             result.add(data);
 
@@ -834,11 +835,13 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 // This catches the title which can be overloaded in an overlay
                 data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.security_settings_fingerprint_preference_title);
+                data.key = "security_fingerprint";
                 data.screenTitle = screenTitle;
                 result.add(data);
                 // Fallback for when the above doesn't contain "fingerprint"
                 data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.fingerprint_manage_category_title);
+                data.key = "security_managed_fingerprint";
                 data.screenTitle = screenTitle;
                 result.add(data);
             }
@@ -853,22 +856,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
                                 profileUserId)) {
                     data = new SearchIndexableRaw(context);
                     data.title = res.getString(R.string.lock_settings_profile_unification_title);
-                    data.screenTitle = screenTitle;
-                    result.add(data);
-                }
-            }
-
-            // Advanced
-            if (lockPatternUtils.isSecure(MY_USER_ID)) {
-                final TrustAgentManager trustAgentManager =
-                    FeatureFactory.getFactory(context).getSecurityFeatureProvider()
-                        .getTrustAgentManager();
-                final List<TrustAgentComponentInfo> agents =
-                        trustAgentManager.getActiveTrustAgents(context, lockPatternUtils);
-                for (int i = 0; i < agents.size(); i++) {
-                    final TrustAgentComponentInfo agent = agents.get(i);
-                    data = new SearchIndexableRaw(context);
-                    data.title = agent.title;
+                    data.key = "security_use_one_lock";
                     data.screenTitle = screenTitle;
                     result.add(data);
                 }
