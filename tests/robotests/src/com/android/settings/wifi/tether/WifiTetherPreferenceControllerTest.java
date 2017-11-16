@@ -63,7 +63,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
                 WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,

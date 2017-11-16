@@ -18,32 +18,107 @@ package com.android.settings.deviceinfo.simstatus;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
+import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceController;
 
-public class SimStatusPreferenceControllerV2 extends AbstractSimStatusPreferenceController {
+import java.util.ArrayList;
+import java.util.List;
 
-    public static final int SIM_SLOT = 0;
+public class SimStatusPreferenceControllerV2 extends
+        AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
 
-    private static final String KEY_SIM_1_STATUS = "sim_status_sim_1";
+    private static final String KEY_SIM_STATUS = "sim_status";
+
+    private final TelephonyManager mTelephonyManager;
+    private final SubscriptionManager mSubscriptionManager;
+    private final Fragment mFragment;
+    private final List<Preference> mPreferenceList = new ArrayList<>();
 
     public SimStatusPreferenceControllerV2(Context context, Fragment fragment) {
-        super(context, fragment);
-    }
+        super(context);
 
-    @Override
-    protected String getPreferenceTitle() {
-        return mIsMultiSim ? mContext.getResources().getString(R.string.sim_status_title_sim_slot_1)
-                : mContext.getResources().getString(R.string.sim_status_title);
-    }
-
-    @Override
-    protected int getSimSlot() {
-        return SIM_SLOT;
+        mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        mSubscriptionManager = (SubscriptionManager) context.getSystemService(
+                Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+        mFragment = fragment;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_SIM_1_STATUS;
+        return KEY_SIM_STATUS;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        final Preference preference = screen.findPreference(getPreferenceKey());
+        if (!isAvailable() || preference == null || !preference.isVisible()) {
+            return;
+        }
+
+        mPreferenceList.add(preference);
+
+        final int simStatusOrder = preference.getOrder();
+        // Add additional preferences for each sim in the device
+        for (int simSlotNumber = 1; simSlotNumber < mTelephonyManager.getPhoneCount();
+                simSlotNumber++) {
+            final Preference multiSimPreference = createNewPreference(screen.getContext());
+            multiSimPreference.setOrder(simStatusOrder + simSlotNumber);
+            multiSimPreference.setKey(KEY_SIM_STATUS + simSlotNumber);
+            screen.addPreference(multiSimPreference);
+            mPreferenceList.add(multiSimPreference);
+        }
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        for (int simSlotNumber = 0; simSlotNumber < mPreferenceList.size(); simSlotNumber++) {
+            final Preference simStatusPreference = mPreferenceList.get(simSlotNumber);
+            simStatusPreference.setTitle(getPreferenceTitle(simSlotNumber /* sim slot */));
+            simStatusPreference.setSummary(getCarrierName(simSlotNumber /* sim slot */));
+        }
+    }
+
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        final int simSlot = mPreferenceList.indexOf(preference);
+        if (simSlot == -1) {
+            return false;
+        }
+
+        SimStatusDialogFragment.show(mFragment, simSlot, getPreferenceTitle(simSlot));
+        return true;
+    }
+
+    private String getPreferenceTitle(int simSlot) {
+        return mTelephonyManager.getPhoneCount() > 1 ? mContext.getString(
+                R.string.sim_status_title_sim_slot, simSlot + 1) : mContext.getString(
+                R.string.sim_status_title);
+    }
+
+    private CharSequence getCarrierName(int simSlot) {
+        final List<SubscriptionInfo> subscriptionInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+        if (subscriptionInfoList != null) {
+            for (SubscriptionInfo info : subscriptionInfoList) {
+                if (info.getSimSlotIndex() == simSlot) {
+                    return info.getCarrierName();
+                }
+            }
+        }
+        return mContext.getText(R.string.device_info_not_available);
+    }
+
+    @VisibleForTesting
+    Preference createNewPreference(Context context) {
+        return new Preference(context);
     }
 }

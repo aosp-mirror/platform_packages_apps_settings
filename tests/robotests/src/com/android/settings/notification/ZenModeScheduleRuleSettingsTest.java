@@ -105,11 +105,6 @@ public class ZenModeScheduleRuleSettingsTest {
         protected Object getSystemService(final String name) {
             return null;
         }
-
-        @Override
-        protected void maybeRefreshRules(boolean success, boolean fireChanged) {
-            //do nothing
-        }
     }
 
 }

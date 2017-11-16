@@ -20,56 +20,28 @@ import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
-
-    private static final String KEY_BEHAVIOR_SETTINGS = "zen_mode_behavior_settings";
-    private static final String KEY_AUTOMATION_SETTINGS = "zen_mode_automation_settings";
-
-    private Preference mBehaviorSettings;
-    private Preference mAutomationSettings;
-    private Policy mPolicy;
-    private SummaryBuilder mSummaryBuilder;
+public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        addPreferencesFromResource(R.xml.zen_mode_settings);
-        final PreferenceScreen root = getPreferenceScreen();
-
-        mBehaviorSettings = root.findPreference(KEY_BEHAVIOR_SETTINGS);
-        mAutomationSettings = root.findPreference(KEY_AUTOMATION_SETTINGS);
-        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
-        mSummaryBuilder = new SummaryBuilder(getContext());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isUiRestricted()) {
-            return;
-        }
-        updateControls();
+    protected int getPreferenceScreenResId() {
+        return R.xml.zen_mode_settings;
     }
 
     @Override
@@ -78,32 +50,23 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
     }
 
     @Override
-    protected void onZenModeChanged() {
-        updateControls();
-    }
-
-    @Override
-    protected void onZenModeConfigChanged() {
-        mPolicy = NotificationManager.from(mContext).getNotificationPolicy();
-        updateControls();
-    }
-
-    private void updateControls() {
-        updateBehaviorSettingsSummary();
-        updateAutomationSettingsSummary();
-    }
-
-    private void updateBehaviorSettingsSummary() {
-        mBehaviorSettings.setSummary(mSummaryBuilder.getBehaviorSettingSummary(mPolicy, mZenMode));
-    }
-
-    private void updateAutomationSettingsSummary() {
-        mAutomationSettings.setSummary(mSummaryBuilder.getAutomaticRulesSummary());
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildPreferenceControllers(context, getLifecycle());
     }
 
     @Override
     protected int getHelpResource() {
         return R.string.help_uri_interruptions;
+    }
+
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeAutomationPreferenceController(context));
+        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle));
+        return controllers;
     }
 
     public static class SummaryBuilder {
@@ -227,42 +190,29 @@ public class ZenModeSettings extends ZenModeSettingsBase implements Indexable {
         }
     }
 
-    private static final Comparator<Entry<String,AutomaticZenRule>> RULE_COMPARATOR =
-            new Comparator<Map.Entry<String,AutomaticZenRule>>() {
-                @Override
-                public int compare(Map.Entry<String,AutomaticZenRule> lhs,
-                        Map.Entry<String,AutomaticZenRule> rhs) {
-                    int byDate = Long.compare(lhs.getValue().getCreationTime(),
-                            rhs.getValue().getCreationTime());
-                    if (byDate != 0) {
-                        return byDate;
-                    } else {
-                        return key(lhs.getValue()).compareTo(key(rhs.getValue()));
-                    }
-                }
-
-                private String key(AutomaticZenRule rule) {
-                    final int type = ZenModeConfig.isValidScheduleConditionId(rule.getConditionId())
-                            ? 1
-                            : ZenModeConfig.isValidEventConditionId(rule.getConditionId())
-                                    ? 2
-                                    : 3;
-                    return type + rule.getName().toString();
-                }
-            };
-
     /**
      * For Search.
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.zen_mode_settings;
-                    return Arrays.asList(sir);
-                }
-            };
+        @Override
+        public List<SearchIndexableResource> getXmlResourcesToIndex(
+                Context context, boolean enabled) {
+            final SearchIndexableResource sir = new SearchIndexableResource(context);
+            sir.xmlResId = R.xml.zen_mode_settings;
+            return Arrays.asList(sir);
+        }
 
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            List<String> keys = super.getNonIndexableKeys(context);
+            keys.add(ZenModeButtonPreferenceController.KEY);
+            return keys;
+        }
+
+        @Override
+        public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+            return buildPreferenceControllers(context, null);
+        }
+    };
 }

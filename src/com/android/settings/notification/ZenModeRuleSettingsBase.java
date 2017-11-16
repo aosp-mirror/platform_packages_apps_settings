@@ -26,6 +26,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
@@ -43,7 +44,12 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         implements SwitchBar.OnSwitchChangeListener {
@@ -52,6 +58,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
 
     private static final String KEY_RULE_NAME = "rule_name";
     private static final String KEY_ZEN_MODE = "zen_mode";
+    private static final String KEY_EVENT_RULE_SETTINGS = "zen_mode_event_rule_settings";
+    private static final String KEY_SCHEDULE_RULE_SETTINGS = "zen_mode_schedule_rule_settings";
 
     protected Context mContext;
     protected boolean mDisableListeners;
@@ -72,8 +80,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
 
     @Override
     public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-
         mContext = getActivity();
 
         final Intent intent = getActivity().getIntent();
@@ -95,6 +101,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         if (refreshRuleOrFinish()) {
             return;
         }
+
+        super.onCreate(icicle);
 
         setHasOptionsMenu(true);
 
@@ -129,7 +137,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                 if (zenMode == mRule.getInterruptionFilter()) return false;
                 if (DEBUG) Log.d(TAG, "onPrefChange zenMode=" + zenMode);
                 mRule.setInterruptionFilter(zenMode);
-                setZenRule(mId, mRule);
+                mBackend.setZenRule(mId, mRule);
                 return true;
             }
         });
@@ -172,7 +180,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         mMetricsFeatureProvider.action(mContext, MetricsEvent.ACTION_ZEN_ENABLE_RULE, enabled);
         if (DEBUG) Log.d(TAG, "onSwitchChanged enabled=" + enabled);
         mRule.setEnabled(enabled);
-        setZenRule(mId, mRule);
+        mBackend.setZenRule(mId, mRule);
         if (enabled) {
             final int toastText = getEnabledToastText();
             if (toastText != 0) {
@@ -188,16 +196,12 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
 
     protected void updateRule(Uri newConditionId) {
         mRule.setConditionId(newConditionId);
-        setZenRule(mId, mRule);
-    }
-
-    @Override
-    protected void onZenModeChanged() {
-        // noop
+        mBackend.setZenRule(mId, mRule);
     }
 
     @Override
     protected void onZenModeConfigChanged() {
+        super.onZenModeConfigChanged();
         if (!refreshRuleOrFinish()) {
             updateControls();
         }
@@ -225,7 +229,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
             @Override
             public void onOk(String ruleName) {
                 mRule.setName(ruleName);
-                setZenRule(mId, mRule);
+                mBackend.setZenRule(mId, mRule);
             }
         }.show();
     }
@@ -250,7 +254,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
                         mMetricsFeatureProvider.action(mContext,
                                 MetricsEvent.ACTION_ZEN_DELETE_RULE_OK);
                         mDeleting = true;
-                        removeZenRule(mId);
+                        mBackend.removeZenRule(mId);
                     }
                 })
                 .show();
@@ -294,4 +298,25 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         mDisableListeners = false;
     }
 
+    /**
+     * For Search.
+     */
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    // not indexable
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(KEY_SCHEDULE_RULE_SETTINGS);
+                    keys.add(KEY_EVENT_RULE_SETTINGS);
+                    return keys;
+                }
+            };
 }

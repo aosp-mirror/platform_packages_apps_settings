@@ -16,6 +16,7 @@
 
 package com.android.settings.sim;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -39,6 +40,9 @@ import java.util.List;
 public class SimSelectNotification extends BroadcastReceiver {
     private static final String TAG = "SimSelectNotification";
     private static final int NOTIFICATION_ID = 1;
+
+    private static final String SIM_SELECT_NOTIFICATION_CHANNEL =
+            "sim_select_notification_channel";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -117,8 +121,14 @@ public class SimSelectNotification extends BroadcastReceiver {
 
     private void createNotification(Context context){
         final Resources resources = context.getResources();
+
+        NotificationChannel notificationChannel = new NotificationChannel(
+                SIM_SELECT_NOTIFICATION_CHANNEL,
+                resources.getString(R.string.sim_selection_channel_title),
+                NotificationManager.IMPORTANCE_LOW);
+
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context)
+                new NotificationCompat.Builder(context, SIM_SELECT_NOTIFICATION_CHANNEL)
                 .setSmallIcon(R.drawable.ic_sim_card_alert_white_48dp)
                 .setColor(context.getColor(R.color.sim_noitification))
                 .setContentTitle(resources.getString(R.string.sim_notification_title))
@@ -130,6 +140,7 @@ public class SimSelectNotification extends BroadcastReceiver {
         builder.setContentIntent(resultPendingIntent);
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(notificationChannel);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 

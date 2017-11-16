@@ -164,7 +164,8 @@ public abstract class ZenRuleSelectionDialog {
             if (DEBUG) Log.d(TAG, "Services reloaded: count=" + services.size());
             Set<ZenRuleInfo> externalRuleTypes = new TreeSet<>(RULE_TYPE_COMPARATOR);
             for (ServiceInfo serviceInfo : services) {
-                final ZenRuleInfo ri = ZenModeAutomationSettings.getRuleInfo(mPm, serviceInfo);
+                final ZenRuleInfo ri = AbstractZenModeAutomaticRulePreferenceController.
+                        getRuleInfo(mPm, serviceInfo);
                 if (ri != null && ri.configurationActivity != null
                         && mNm.isNotificationPolicyAccessGrantedForPackage(ri.packageName)
                         && (ri.ruleInstanceLimit <= 0 || ri.ruleInstanceLimit

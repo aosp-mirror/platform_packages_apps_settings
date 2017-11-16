@@ -27,6 +27,7 @@ import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcessStatsBase;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
+import com.android.settingslib.utils.ThreadUtils;
 
 public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {
@@ -56,14 +57,19 @@ public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceC
 
     @Override
     public void updateState(Preference preference) {
-        mProcStatsData.refreshStats(true);
-        final ProcStatsData.MemInfo memInfo = mProcStatsData.getMemInfo();
-        final String usedResult = Formatter.formatShortFileSize(mContext,
-                (long) memInfo.realUsedRam);
-        final String totalResult = Formatter.formatShortFileSize(mContext,
-                (long) memInfo.realTotalRam);
-        mPreference.setSummary(mContext.getString(R.string.memory_summary,
-                usedResult, totalResult));
+        // This is posted on the background thread to speed up fragment launch time for dev options
+        // mProcStasData.refreshStats(true) takes ~20ms to run.
+        ThreadUtils.postOnBackgroundThread(() -> {
+            mProcStatsData.refreshStats(true);
+            final ProcStatsData.MemInfo memInfo = mProcStatsData.getMemInfo();
+            final String usedResult = Formatter.formatShortFileSize(mContext,
+                    (long) memInfo.realUsedRam);
+            final String totalResult = Formatter.formatShortFileSize(mContext,
+                    (long) memInfo.realTotalRam);
+            ThreadUtils.postOnMainThread(
+                    () -> mPreference.setSummary(mContext.getString(R.string.memory_summary,
+                            usedResult, totalResult)));
+        });
     }
 
     @VisibleForTesting
