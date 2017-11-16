@@ -34,6 +34,7 @@
         android:key="sim_status"
         android:order="10"
         android:title="@string/sim_status_title"
+        settings:keywords="@string/keywords_sim_status"
         android:summary="@string/summary_placeholder"/>
 
     <!-- Model & hardware -->
@@ -41,6 +42,7 @@
         android:key="device_model"
         android:order="21"
         android:title="@string/hardware_info"
+        settings:keywords="@string/keywords_model_and_hardware"
         android:summary="@string/summary_placeholder"/>
 
     <!-- IMEI -->
@@ -56,6 +58,7 @@
         android:key="firmware_version"
         android:order="32"
         android:title="@string/firmware_version"
+        settings:keywords="@string/keywords_android_version"
         android:summary="@string/summary_placeholder"/>
 
     <!--IP address -->
