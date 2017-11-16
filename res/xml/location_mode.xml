@@ -14,20 +14,22 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/location_mode_screen_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="location_mode_settings"
+    android:title="@string/location_mode_screen_title">
 
-        <com.android.settings.widget.RadioButtonPreference
-            android:key="high_accuracy"
-            android:title="@string/location_mode_high_accuracy_title"
-            android:summary="@string/location_mode_high_accuracy_description" />
-        <com.android.settings.widget.RadioButtonPreference
-            android:key="battery_saving"
-            android:title="@string/location_mode_battery_saving_title"
-            android:summary="@string/location_mode_battery_saving_description" />
-        <com.android.settings.widget.RadioButtonPreference
-            android:key="sensors_only"
-            android:title="@string/location_mode_sensors_only_title"
-            android:summary="@string/location_mode_sensors_only_description" />
+    <com.android.settings.widget.RadioButtonPreference
+        android:key="high_accuracy"
+        android:title="@string/location_mode_high_accuracy_title"
+        android:summary="@string/location_mode_high_accuracy_description" />
+    <com.android.settings.widget.RadioButtonPreference
+        android:key="battery_saving"
+        android:title="@string/location_mode_battery_saving_title"
+        android:summary="@string/location_mode_battery_saving_description" />
+    <com.android.settings.widget.RadioButtonPreference
+        android:key="sensors_only"
+        android:title="@string/location_mode_sensors_only_title"
+        android:summary="@string/location_mode_sensors_only_description" />
 
 </PreferenceScreen>

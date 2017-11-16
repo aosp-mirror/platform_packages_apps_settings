@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.security;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -33,13 +33,15 @@ import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SwitchBar;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -210,33 +212,13 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
+
             @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-
-                final Resources res = context.getResources();
-
-                // Add fragment title
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.screen_pinning_title);
-                data.screenTitle = res.getString(R.string.screen_pinning_title);
-                result.add(data);
-
-                if (isLockToAppEnabled(context)) {
-                    // Screen lock option
-                    data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.screen_pinning_unlock_none);
-                    data.screenTitle = res.getString(R.string.screen_pinning_title);
-                    result.add(data);
-                } else {
-                    // Screen pinning description.
-                    data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.screen_pinning_description);
-                    data.screenTitle = res.getString(R.string.screen_pinning_title);
-                    result.add(data);
-                }
-
-                return result;
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.screen_pinning_settings;
+                return Arrays.asList(sir);
             }
         };
 }
