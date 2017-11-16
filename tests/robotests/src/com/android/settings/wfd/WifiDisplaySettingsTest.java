@@ -16,16 +16,23 @@
 
 package com.android.settings.wfd;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.media.MediaRouter;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.ServiceManager;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,12 +40,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -89,7 +90,15 @@ public class WifiDisplaySettingsTest {
     public void isAvailable_noService_shouldReturnFalse() {
         assertThat(WifiDisplaySettings.isAvailable(mActivity))
                 .isFalse();
+    }
 
+    @Test
+    public void isAvailable_throwException_shouldReturnFalse() {
+        when(mActivity.getSystemService(Context.WIFI_P2P_SERVICE))
+                .thenThrow(new IllegalStateException());
+
+        assertThat(WifiDisplaySettings.isAvailable(mActivity))
+                .isFalse();
     }
 
     @Test
