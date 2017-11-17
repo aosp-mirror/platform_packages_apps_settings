@@ -48,6 +48,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle));
         controllers.add(new ZenModeScreenOnPreferenceController(context, lifecycle));
         controllers.add(new ZenModeScreenOffPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle));
         return controllers;
     }
 
