@@ -52,6 +52,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
+import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
@@ -208,6 +209,7 @@ public class SettingsGateway {
             ChooseLockPassword.ChooseLockPasswordFragment.class.getName(),
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             InstalledAppDetails.class.getName(),
+            AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             ChannelNotificationSettings.class.getName(),
