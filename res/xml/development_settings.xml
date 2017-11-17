@@ -177,6 +177,11 @@
             android:title="@string/feature_flags_dashboard_title"
             android:fragment="com.android.settings.development.featureflags.FeatureFlagsDashboard"/>
 
+        <SwitchPreference
+            android:key="enable_gpu_debug_layers"
+            android:title="@string/enable_gpu_debug_layers"
+            android:summary="@string/enable_gpu_debug_layers_summary"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_networking_category"
