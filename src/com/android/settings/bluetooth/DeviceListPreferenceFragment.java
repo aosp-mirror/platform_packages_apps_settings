@@ -98,6 +98,8 @@ public abstract class DeviceListPreferenceFragment extends
             return;
         }
         mLocalAdapter = mLocalManager.getBluetoothAdapter();
+        mShowDevicesWithoutNames = SystemProperties.getBoolean(
+                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
 
         initPreferencesFromPreferenceScreen();
 
@@ -110,8 +112,6 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onStart() {
         super.onStart();
-        mShowDevicesWithoutNames = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         if (mLocalManager == null || isUiRestricted()) return;
 
         mLocalManager.setForegroundActivity(getActivity());
@@ -190,7 +190,8 @@ public abstract class DeviceListPreferenceFragment extends
         BluetoothDevicePreference preference = (BluetoothDevicePreference) getCachedPreference(key);
 
         if (preference == null) {
-            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice, this);
+            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice,
+                    mShowDevicesWithoutNames);
             preference.setKey(key);
             mDeviceListGroup.addPreference(preference);
         } else {
