@@ -47,6 +47,10 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.AbstractPreferenceController;
+
+import java.util.Arrays;
+import java.util.List;
 
 import java.util.Arrays;
 import java.util.List;
@@ -143,6 +147,11 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         });
         mZenMode.setOrder(10);  // sort at the bottom of the category
         mZenMode.setDependency(getZenModeDependency());
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     @Override

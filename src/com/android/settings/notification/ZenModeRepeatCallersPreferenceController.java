@@ -25,9 +25,8 @@ import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeRepeatCallersPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener{
-
+public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_repeat_callers";
     private final ZenModeBackend mBackend;

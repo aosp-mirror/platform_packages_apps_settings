@@ -23,10 +23,11 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
+
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeEventsPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener{
+public class ZenModeEventsPreferenceController extends AbstractZenModePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_events";
         private final ZenModeBackend mBackend;
@@ -68,8 +69,7 @@ public class ZenModeEventsPreferenceController extends
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allowEvents = (Boolean) newValue;
         if (ZenModeSettingsBase.DEBUG) {
-            Log.d(TAG, "onPrefChange allowEvents="
-                    + allowEvents);
+            Log.d(TAG, "onPrefChange allowEvents=" + allowEvents);
         }
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_EVENTS, allowEvents);
         return true;

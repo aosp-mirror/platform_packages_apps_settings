@@ -23,8 +23,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeCallsPreferenceController extends
-        AbstractZenModePreferenceController {
+public class ZenModeCallsPreferenceController extends AbstractZenModePreferenceController {
 
     protected static final String KEY = "zen_mode_calls";
     private final ZenModeBackend mBackend;
