@@ -40,7 +40,7 @@ import com.android.settingslib.TwoTargetPreference;
 import java.util.Map;
 
 public class ZenRulePreference extends TwoTargetPreference {
-    protected final ManagedServiceSettings.Config CONFIG =
+    private static final ManagedServiceSettings.Config CONFIG =
             ZenModeAutomationSettings.getConditionProviderConfig();
     final CharSequence mName;
     final String mId;
