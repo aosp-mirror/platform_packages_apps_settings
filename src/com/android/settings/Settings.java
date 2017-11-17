@@ -16,7 +16,10 @@
 
 package com.android.settings;
 
+import static com.android.settings.core.FeatureFlags.CONNECTED_DEVICE_V2;
+
 import android.os.Bundle;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 
@@ -165,7 +168,12 @@ public class Settings extends SettingsActivity {
 
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
-    public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
+    public static class ConnectedDeviceDashboardActivity extends SettingsActivity {
+        public static final boolean isEnabled() {
+            return FeatureFlagUtils.isEnabled(null /* context */, CONNECTED_DEVICE_V2);
+        }
+    }
+    public static class ConnectedDeviceDashboardActivityOld extends SettingsActivity {}
     public static class AppAndNotificationDashboardActivity extends SettingsActivity {}
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class UserAndAccountDashboardActivity extends SettingsActivity {}
