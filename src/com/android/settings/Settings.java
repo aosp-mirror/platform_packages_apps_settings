@@ -16,10 +16,7 @@
 
 package com.android.settings;
 
-import static com.android.settings.core.FeatureFlags.DEV_OPTION_V1;
-
 import android.os.Bundle;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 
@@ -60,16 +57,6 @@ public class Settings extends SettingsActivity {
     public static class HighPowerApplicationsActivity extends SettingsActivity { /* empty */ }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
-
-    /**
-     * @deprecated in favor of {@link DevelopmentSettingsDashboardActivity}.
-     */
-    @Deprecated
-    public static class DevelopmentSettingsActivity extends SettingsActivity {
-        public static final boolean isEnabled() {
-            return FeatureFlagUtils.isEnabled(null /* context */, DEV_OPTION_V1);
-        }
-    }
     public static class DevelopmentSettingsDashboardActivity extends SettingsActivity { /* empty */ }
     public static class AccessibilitySettingsActivity extends SettingsActivity { /* empty */ }
     public static class CaptioningSettingsActivity extends SettingsActivity { /* empty */ }
