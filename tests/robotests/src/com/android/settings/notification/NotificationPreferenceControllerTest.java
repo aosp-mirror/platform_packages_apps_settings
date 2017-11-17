@@ -273,6 +273,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = false;
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
         when(group.isBlocked()).thenReturn(false);
 
         mController.onResume(appRow, null, group, null);
@@ -284,6 +285,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
         when(group.isBlocked()).thenReturn(false);
 
         mController.onResume(appRow, null, group, null);
@@ -295,6 +297,7 @@ public class NotificationPreferenceControllerTest {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.systemApp = true;
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
+        when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
         when(group.isBlocked()).thenReturn(true);
 
         mController.onResume(appRow, null, group, null);
