@@ -27,8 +27,8 @@ import android.support.v7.preference.PreferenceGroup;
 import android.text.BidiFormatter;
 import android.util.Log;
 
-import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.R;
+import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;

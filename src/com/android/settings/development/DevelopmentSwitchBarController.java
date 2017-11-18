@@ -16,6 +16,8 @@
 
 package com.android.settings.development;
 
+import android.support.annotation.NonNull;
+
 import com.android.settings.Utils;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -28,33 +30,13 @@ public class DevelopmentSwitchBarController implements LifecycleObserver, OnStar
 
     private final SwitchBar mSwitchBar;
     private final boolean mIsAvailable;
-    private final DevelopmentSettings mSettings;
-    private final DevelopmentSettingsDashboardFragment mNewSettings;
+    private final DevelopmentSettingsDashboardFragment mSettings;
 
-    /**
-     * @deprecated in favor of the other constructor.
-     */
-    @Deprecated
-    public DevelopmentSwitchBarController(DevelopmentSettings settings, SwitchBar switchBar,
-            boolean isAvailable, Lifecycle lifecycle) {
-        mSwitchBar = switchBar;
-        mIsAvailable = isAvailable && !Utils.isMonkeyRunning();
-        mSettings = settings;
-        mNewSettings = null;
-
-        if (mIsAvailable) {
-            lifecycle.addObserver(this);
-        } else {
-            mSwitchBar.setEnabled(false);
-        }
-    }
-
-    public DevelopmentSwitchBarController(DevelopmentSettingsDashboardFragment settings,
+    public DevelopmentSwitchBarController(@NonNull DevelopmentSettingsDashboardFragment settings,
             SwitchBar switchBar, boolean isAvailable, Lifecycle lifecycle) {
         mSwitchBar = switchBar;
         mIsAvailable = isAvailable && !Utils.isMonkeyRunning();
-        mSettings = null;
-        mNewSettings = settings;
+        mSettings = settings;
 
         if (mIsAvailable) {
             lifecycle.addObserver(this);
@@ -65,24 +47,14 @@ public class DevelopmentSwitchBarController implements LifecycleObserver, OnStar
 
     @Override
     public void onStart() {
-        if (mSettings != null) {
-            mSwitchBar.addOnSwitchChangeListener(mSettings);
-        }
-        if (mNewSettings != null) {
-            final boolean developmentEnabledState = DevelopmentSettingsEnabler
-                    .isDevelopmentSettingsEnabled(mNewSettings.getContext());
-            mSwitchBar.setChecked(developmentEnabledState);
-            mSwitchBar.addOnSwitchChangeListener(mNewSettings);
-        }
+        final boolean developmentEnabledState = DevelopmentSettingsEnabler
+                .isDevelopmentSettingsEnabled(mSettings.getContext());
+        mSwitchBar.setChecked(developmentEnabledState);
+        mSwitchBar.addOnSwitchChangeListener(mSettings);
     }
 
     @Override
     public void onStop() {
-        if (mSettings != null) {
-            mSwitchBar.removeOnSwitchChangeListener(mSettings);
-        }
-        if (mNewSettings != null) {
-            mSwitchBar.removeOnSwitchChangeListener(mNewSettings);
-        }
+        mSwitchBar.removeOnSwitchChangeListener(mSettings);
     }
 }
