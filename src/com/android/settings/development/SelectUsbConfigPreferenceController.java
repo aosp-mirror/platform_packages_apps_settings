@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
@@ -102,6 +103,14 @@ public class SelectUsbConfigPreferenceController extends
     @Override
     public void onDestroy() {
         mContext.unregisterReceiver(mUsbReceiver);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        final PackageManager packageManager = mContext.getPackageManager();
+
+        return packageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)
+                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY);
     }
 
     @Override
