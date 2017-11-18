@@ -17,21 +17,29 @@
 package com.android.settings.applications;
 
 import android.content.Intent;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 
 public class InstalledAppDetailsTop extends SettingsActivity {
 
     @Override
     public Intent getIntent() {
         Intent modIntent = new Intent(super.getIntent());
-        modIntent.putExtra(EXTRA_SHOW_FRAGMENT, InstalledAppDetails.class.getName());
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.APP_INFO_V2)) {
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, AppInfoDashboardFragment.class.getName());
+        } else {
+            modIntent.putExtra(EXTRA_SHOW_FRAGMENT, InstalledAppDetails.class.getName());
+        }
         return modIntent;
     }
 
     @Override
     protected boolean isValidFragment(String fragmentName) {
-        if (InstalledAppDetails.class.getName().equals(fragmentName)) return true;
-        return false;
+        if (FeatureFlagUtils.isEnabled(this, FeatureFlags.APP_INFO_V2)) {
+            return AppInfoDashboardFragment.class.getName().equals(fragmentName);
+        }
+        return InstalledAppDetails.class.getName().equals(fragmentName);
     }
 }

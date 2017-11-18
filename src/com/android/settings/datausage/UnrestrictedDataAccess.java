@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.util.FeatureFlagUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.AppInfoDashboardFragment;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.AppSwitchPreference;
@@ -271,10 +274,17 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
         protected void onClick() {
             if (mState.isDataSaverBlacklisted) {
                 // app is blacklisted, launch App Data Usage screen
-                InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
-                        R.string.app_data_usage,
-                        UnrestrictedDataAccess.this,
-                        mEntry);
+                if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.APP_INFO_V2)) {
+                    AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
+                            R.string.app_data_usage,
+                            UnrestrictedDataAccess.this,
+                            mEntry);
+                } else {
+                    InstalledAppDetails.startAppInfoFragment(AppDataUsage.class,
+                            R.string.app_data_usage,
+                            UnrestrictedDataAccess.this,
+                            mEntry);
+                }
             } else {
                 // app is not blacklisted, let superclass handle toggle switch
                 super.onClick();

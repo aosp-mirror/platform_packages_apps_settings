@@ -35,11 +35,14 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.InstalledAppDetails;
+import com.android.settings.applications.AppInfoDashboardFragment;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -167,8 +170,15 @@ public class RecentLocationRequestPreferenceControllerTest {
 
         preference.performClick();
 
-        verify(activity).startPreferencePanelAsUser(any(), eq(InstalledAppDetails.class.getName()),
-                any(Bundle.class), anyInt(), any(), any());
+        if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.APP_INFO_V2)) {
+            verify(activity).startPreferencePanelAsUser(any(),
+                    eq(AppInfoDashboardFragment.class.getName()),
+                    any(Bundle.class), anyInt(), any(), any());
+        } else {
+            verify(activity).startPreferencePanelAsUser(any(),
+                    eq(InstalledAppDetails.class.getName()),
+                    any(Bundle.class), anyInt(), any(), any());
+        }
     }
 
     private static ArgumentMatcher<Preference> titleMatches(String expected) {

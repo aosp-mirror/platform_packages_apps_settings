@@ -22,14 +22,19 @@ import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.app.admin.DevicePolicyManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -38,6 +43,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
+import android.hardware.usb.IUsbManager;
 import android.icu.text.ListFormatter;
 import android.net.INetworkStatsService;
 import android.net.INetworkStatsSession;
@@ -47,6 +53,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.BatteryStats;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -67,6 +74,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
@@ -81,6 +89,8 @@ import com.android.settings.applications.defaultapps.DefaultHomePreferenceContro
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
+import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;
@@ -91,8 +101,10 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -114,21 +126,19 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Activity to display application information from Settings. This activity presents
+ * Dashboard fragment to display application information from Settings. This activity presents
  * extended information associated with a package like code, data, total size, permissions
  * used by the application and also the set of default launchable activities.
  * For system applications, an option to clear user data is displayed only if data size is > 0.
  * System applications that do not want clear user data do not have this option.
  * For non-system applications, there is no option to clear data. Instead there is an option to
  * uninstall the application.
- *
- * deprecated in favor of {@link AppInfoDashboardFragment}
  */
-@Deprecated
-public class InstalledAppDetails extends AppInfoBase
-        implements OnPreferenceClickListener, LoaderManager.LoaderCallbacks<AppStorageStats> {
+public class AppInfoDashboardFragment extends SettingsPreferenceFragment
+        implements ApplicationsState.Callbacks, OnPreferenceClickListener,
+        LoaderCallbacks<AppStorageStats> {
 
-    private static final String LOG_TAG = "InstalledAppDetails";
+    private static final String LOG_TAG = "AppInfoDashboardFragment";
 
     // Menu identifiers
     public static final int UNINSTALL_ALL_USERS_MENU = 1;
@@ -145,6 +155,8 @@ public class InstalledAppDetails extends AppInfoBase
     @VisibleForTesting
     static final int LOADER_BATTERY = 4;
 
+    // Dialog identifiers used in showDialog
+    private static final int DLG_BASE = 0;
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
@@ -162,6 +174,32 @@ public class InstalledAppDetails extends AppInfoBase
     private static final String KEY_VERSION = "app_version";
     private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
             "instant_app_launch_supported_domain_urls";
+    // The following copied from AppInfoBase
+    public static final String ARG_PACKAGE_NAME = "package";
+    public static final String ARG_PACKAGE_UID = "uid";
+
+    protected static final String TAG = AppInfoBase.class.getSimpleName();
+    protected static final boolean localLOGV = false;
+
+    private EnforcedAdmin mAppsControlDisallowedAdmin;
+    private boolean mAppsControlDisallowedBySystem;
+
+    private ApplicationFeatureProvider mApplicationFeatureProvider;
+    private ApplicationsState mState;
+    private ApplicationsState.Session mSession;
+    private ApplicationsState.AppEntry mAppEntry;
+    private PackageInfo mPackageInfo;
+    private int mUserId;
+    private String mPackageName;
+
+    private IUsbManager mUsbManager;
+    private DevicePolicyManagerWrapper mDpm;
+    private UserManager mUserManager;
+    private PackageManager mPm;
+
+    private boolean mFinishing;
+    private boolean mListeningToPackageRemove;
+
 
     private final HashSet<String> mHomePackages = new HashSet<>();
 
@@ -359,7 +397,21 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mFinishing = false;
         final Activity activity = getActivity();
+        mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
+                .getApplicationFeatureProvider(activity);
+        mState = ApplicationsState.getInstance(activity.getApplication());
+        mSession = mState.newSession(this, getLifecycle());
+        mDpm = new DevicePolicyManagerWrapper(
+                (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
+        mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
+        mPm = activity.getPackageManager();
+        IBinder b = ServiceManager.getService(Context.USB_SERVICE);
+        mUsbManager = IUsbManager.Stub.asInterface(b);
+
+        retrieveAppEntry();
+        startListeningToPackageRemove();
 
         if (!ensurePackageInfoAvailable(activity)) {
             return;
@@ -391,6 +443,15 @@ public class InstalledAppDetails extends AppInfoBase
     @Override
     public void onResume() {
         super.onResume();
+        mAppsControlDisallowedAdmin = RestrictedLockUtils.checkIfRestrictionEnforced(getActivity(),
+                UserManager.DISALLOW_APPS_CONTROL, mUserId);
+        mAppsControlDisallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
+                UserManager.DISALLOW_APPS_CONTROL, mUserId);
+
+        if (!refreshUi()) {
+            setIntentAndFinish(true, true);
+        }
+
         if (mFinishing) {
             return;
         }
@@ -419,12 +480,6 @@ public class InstalledAppDetails extends AppInfoBase
     public void onPause() {
         getLoaderManager().destroyLoader(LOADER_CHART_DATA);
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        TrafficStats.closeQuietly(mStatsSession);
-        super.onDestroy();
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -622,7 +677,7 @@ public class InstalledAppDetails extends AppInfoBase
     }
 
     @VisibleForTesting
-    boolean shouldShowUninstallForAll(ApplicationsState.AppEntry appEntry) {
+    boolean shouldShowUninstallForAll(AppEntry appEntry) {
         boolean showIt = true;
         if (mUpdatedSysApp) {
             showIt = false;
@@ -673,7 +728,6 @@ public class InstalledAppDetails extends AppInfoBase
         return false;
     }
 
-    @Override
     protected boolean refreshUi() {
         retrieveAppEntry();
         if (mAppEntry == null) {
@@ -806,8 +860,6 @@ public class InstalledAppDetails extends AppInfoBase
         return Formatter.formatFileSize(context, stats.getTotalBytes());
     }
 
-
-    @Override
     protected AlertDialog createDialog(int id, int errorCode) {
         switch (id) {
             case DLG_DISABLE:
@@ -819,7 +871,7 @@ public class InstalledAppDetails extends AppInfoBase
                                 // Disable the app
                                 mMetricsFeatureProvider.action(getContext(),
                                         MetricsEvent.ACTION_SETTINGS_DISABLE_APP);
-                                new DisableChanger(InstalledAppDetails.this, mAppEntry.info,
+                                new DisableChanger(AppInfoDashboardFragment.this, mAppEntry.info,
                                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
                                 .execute((Object)null);
                             }
@@ -880,7 +932,7 @@ public class InstalledAppDetails extends AppInfoBase
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
-        ApplicationsState.AppEntry newEnt = mState.getEntry(pkgName, userId);
+        AppEntry newEnt = mState.getEntry(pkgName, userId);
         if (newEnt != null) {
             mAppEntry = newEnt;
         }
@@ -1139,7 +1191,7 @@ public class InstalledAppDetails extends AppInfoBase
                     public boolean onPreferenceClick(Preference preference) {
                         AppInfoBase.startAppInfoFragment(PictureInPictureDetails.class,
                                 R.string.picture_in_picture_app_detail_title, mPackageName,
-                                mPackageInfo.applicationInfo.uid, InstalledAppDetails.this,
+                                mPackageInfo.applicationInfo.uid, AppInfoDashboardFragment.this,
                                 -1, getMetricsCategory());
                         return true;
                     }
@@ -1299,10 +1351,9 @@ public class InstalledAppDetails extends AppInfoBase
         return "";
     }
 
-    @Override
-    protected void onPackageRemoved() {
+    private void onPackageRemoved() {
         getActivity().finishActivity(SUB_INFO_FRAGMENT);
-        super.onPackageRemoved();
+        getActivity().finishAndRemoveTask();
     }
 
     private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
@@ -1384,13 +1435,13 @@ public class InstalledAppDetails extends AppInfoBase
 
     private static class DisableChanger extends AsyncTask<Object, Object, Object> {
         final PackageManager mPm;
-        final WeakReference<InstalledAppDetails> mActivity;
+        final WeakReference<AppInfoDashboardFragment> mActivity;
         final ApplicationInfo mInfo;
         final int mState;
 
-        DisableChanger(InstalledAppDetails activity, ApplicationInfo info, int state) {
+        DisableChanger(AppInfoDashboardFragment activity, ApplicationInfo info, int state) {
             mPm = activity.mPm;
-            mActivity = new WeakReference<InstalledAppDetails>(activity);
+            mActivity = new WeakReference<AppInfoDashboardFragment>(activity);
             mInfo = info;
             mState = state;
         }
@@ -1462,10 +1513,173 @@ public class InstalledAppDetails extends AppInfoBase
                 } else {
                     summary = ListFormatter.getInstance().format(list);
                 }
-                mPermissionsPreference.setOnPreferenceClickListener(InstalledAppDetails.this);
+                mPermissionsPreference.setOnPreferenceClickListener(AppInfoDashboardFragment.this);
                 mPermissionsPreference.setEnabled(true);
             }
             mPermissionsPreference.setSummary(summary);
         }
     };
+
+    private String retrieveAppEntry() {
+        final Bundle args = getArguments();
+        mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+        if (mPackageName == null) {
+            Intent intent = (args == null) ?
+                    getActivity().getIntent() : (Intent) args.getParcelable("intent");
+            if (intent != null) {
+                mPackageName = intent.getData().getSchemeSpecificPart();
+            }
+        }
+        mUserId = UserHandle.myUserId();
+        mAppEntry = mState.getEntry(mPackageName, mUserId);
+        if (mAppEntry != null) {
+            // Get application info again to refresh changed properties of application
+            try {
+                mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
+                        PackageManager.MATCH_DISABLED_COMPONENTS |
+                                PackageManager.MATCH_ANY_USER |
+                                PackageManager.GET_SIGNATURES |
+                                PackageManager.GET_PERMISSIONS);
+            } catch (NameNotFoundException e) {
+                Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
+            }
+        } else {
+            Log.w(TAG, "Missing AppEntry; maybe reinstalling?");
+            mPackageInfo = null;
+        }
+
+        return mPackageName;
+    }
+
+    private void setIntentAndFinish(boolean finish, boolean appChanged) {
+        if (localLOGV) Log.i(TAG, "appChanged="+appChanged);
+        Intent intent = new Intent();
+        intent.putExtra(ManageApplications.APP_CHG, appChanged);
+        SettingsActivity sa = (SettingsActivity)getActivity();
+        sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
+        mFinishing = true;
+    }
+
+    private void showDialogInner(int id, int moveErrorCode) {
+        DialogFragment newFragment =
+                AppInfoBase.MyAlertDialogFragment.newInstance(id, moveErrorCode);
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(getFragmentManager(), "dialog " + id);
+    }
+
+    @Override
+    public void onRunningStateChanged(boolean running) {
+        // No op.
+    }
+
+    @Override
+    public void onRebuildComplete(ArrayList<AppEntry> apps) {
+        // No op.
+    }
+
+    @Override
+    public void onPackageIconChanged() {
+        // No op.
+    }
+
+    @Override
+    public void onAllSizesComputed() {
+        // No op.
+    }
+
+    @Override
+    public void onLauncherInfoChanged() {
+        // No op.
+    }
+
+    @Override
+    public void onLoadEntriesCompleted() {
+        // No op.
+    }
+
+    @Override
+    public void onPackageListChanged() {
+        if (!refreshUi()) {
+            setIntentAndFinish(true, true);
+        }
+    }
+
+    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
+            String pkg, int uid, Fragment source, int request, int sourceMetricsCategory) {
+        startAppInfoFragment(fragment, titleRes, pkg, uid, source.getActivity(), request,
+                sourceMetricsCategory);
+    }
+
+    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
+            String pkg, int uid, Activity source, int request, int sourceMetricsCategory) {
+        Bundle args = new Bundle();
+        args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
+        args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
+
+        Intent intent = Utils.onBuildStartFragmentIntent(source, fragment.getName(),
+                args, null, titleRes, null, false, sourceMetricsCategory);
+        source.startActivityForResultAsUser(intent, request,
+                new UserHandle(UserHandle.getUserId(uid)));
+    }
+
+    public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
+
+        private static final String ARG_ID = "id";
+
+        @Override
+        public int getMetricsCategory() {
+            return MetricsProto.MetricsEvent.DIALOG_APP_INFO_ACTION;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            int id = getArguments().getInt(ARG_ID);
+            int errorCode = getArguments().getInt("moveError");
+            Dialog dialog = ((AppInfoBase) getTargetFragment()).createDialog(id, errorCode);
+            if (dialog == null) {
+                throw new IllegalArgumentException("unknown id " + id);
+            }
+            return dialog;
+        }
+
+        public static AppInfoBase.MyAlertDialogFragment newInstance(int id, int errorCode) {
+            AppInfoBase.MyAlertDialogFragment
+                    dialogFragment = new AppInfoBase.MyAlertDialogFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_ID, id);
+            args.putInt("moveError", errorCode);
+            dialogFragment.setArguments(args);
+            return dialogFragment;
+        }
+    }
+
+    private void startListeningToPackageRemove() {
+        if (mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = true;
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    private void stopListeningToPackageRemove() {
+        if (!mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = false;
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+    }
+
+    private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String packageName = intent.getData().getSchemeSpecificPart();
+            if (!mFinishing && (mAppEntry == null || mAppEntry.info == null
+                    || TextUtils.equals(mAppEntry.info.packageName, packageName))) {
+                onPackageRemoved();
+            }
+        }
+    };
+
 }
