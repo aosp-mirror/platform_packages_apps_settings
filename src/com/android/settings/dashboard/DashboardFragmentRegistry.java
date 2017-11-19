@@ -19,13 +19,11 @@ package com.android.settings.dashboard;
 import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
-import com.android.settings.Settings;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -85,13 +83,8 @@ public class DashboardFragmentRegistry {
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);
         PARENT_TO_CATEGORY_KEY_MAP.put(LanguageAndInputSettings.class.getName(),
                 CategoryKey.CATEGORY_SYSTEM_LANGUAGE);
-        if (Settings.DevelopmentSettingsActivity.isEnabled()) {
-            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettings.class.getName(),
-                    CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
-        } else {
-            PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettingsDashboardFragment.class.getName(),
-                    CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
-        }
+        PARENT_TO_CATEGORY_KEY_MAP.put(DevelopmentSettingsDashboardFragment.class.getName(),
+                CategoryKey.CATEGORY_SYSTEM_DEVELOPMENT);
         PARENT_TO_CATEGORY_KEY_MAP.put(ConfigureNotificationSettings.class.getName(),
                 CategoryKey.CATEGORY_NOTIFICATIONS);
         PARENT_TO_CATEGORY_KEY_MAP.put(LockscreenDashboardFragment.class.getName(),

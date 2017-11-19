@@ -16,7 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
-import android.app.Activity;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -62,8 +63,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Panel showing both internal storage (both built-in storage and private
@@ -545,13 +544,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-            = new SummaryLoader.SummaryProviderFactory() {
-        @Override
-        public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                                                                   SummaryLoader summaryLoader) {
-            return new SummaryProvider(activity, summaryLoader);
-        }
-    };
+            = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     /** Enable indexing of searchable data */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -559,15 +552,17 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 @Override
                 public List<SearchIndexableRaw> getRawDataToIndex(
                         Context context, boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
+                    final List<SearchIndexableRaw> result = new ArrayList<>();
 
                     SearchIndexableRaw data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.storage_settings);
+                    data.key = "storage_settings";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.internal_storage);
+                    data.key = "storage_settings_internal_storage";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
@@ -577,6 +572,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                     for (VolumeInfo vol : vols) {
                         if (isInteresting(vol)) {
                             data.title = storage.getBestVolumeDescription(vol);
+                            data.key = "storage_settings_volume_" +vol.id;
                             data.screenTitle = context.getString(R.string.storage_settings);
                             result.add(data);
                         }
@@ -584,36 +580,43 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_size);
+                    data.key = "storage_settings_memory_size";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_available);
+                    data.key = "storage_settings_memory_available";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_apps_usage);
+                    data.key = "storage_settings_apps_space";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_dcim_usage);
+                    data.key = "storage_settings_dcim_space";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_music_usage);
+                    data.key = "storage_settings_music_space";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.memory_media_misc_usage);
+                    data.key = "storage_settings_misc_space";
                     data.screenTitle = context.getString(R.string.storage_settings);
                     result.add(data);
 
                     data = new SearchIndexableRaw(context);
                     data.title = context.getString(R.string.storage_menu_free);
+                    data.key = "storage_settings_free_space";
                     data.screenTitle = context.getString(R.string.storage_menu_free);
                     // We need to define all three in order for this to trigger properly.
                     data.intentAction = StorageManager.ACTION_MANAGE_STORAGE;

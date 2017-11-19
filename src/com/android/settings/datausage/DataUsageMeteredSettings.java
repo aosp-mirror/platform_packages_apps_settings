@@ -14,27 +14,26 @@
 
 package com.android.settings.datausage;
 
-import static android.net.wifi.WifiInfo.removeDoubleQuotes;
-
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.content.res.Resources;
 import android.net.NetworkPolicyManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.NetworkPolicyEditor;
-import java.util.ArrayList;
+
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -134,49 +133,11 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
         new BaseSearchIndexProvider() {
             @Override
-            public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-                final List<SearchIndexableRaw> result = new ArrayList<SearchIndexableRaw>();
-                final Resources res = context.getResources();
-
-                // Add fragment title
-                SearchIndexableRaw data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.data_usage_menu_metered);
-                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                result.add(data);
-
-                // Body
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.data_usage_metered_body);
-                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                result.add(data);
-
-                // Wi-Fi networks category
-                data = new SearchIndexableRaw(context);
-                data.title = res.getString(R.string.data_usage_metered_wifi);
-                data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                result.add(data);
-
-                final WifiManager wifiManager =
-                        (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                if (DataUsageUtils.hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
-                    for (WifiConfiguration config : wifiManager.getConfiguredNetworks()) {
-                        if (config.SSID != null) {
-                            final String networkId = config.SSID;
-
-                            data = new SearchIndexableRaw(context);
-                            data.title = removeDoubleQuotes(networkId);
-                            data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                            result.add(data);
-                        }
-                    }
-                } else {
-                    data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.data_usage_metered_wifi_disabled);
-                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                    result.add(data);
-                }
-
-                return result;
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.data_usage_metered_prefs;
+                return Arrays.asList(sir);
             }
 
             @Override

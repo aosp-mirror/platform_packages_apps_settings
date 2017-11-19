@@ -52,6 +52,7 @@ import com.android.settings.applications.ProcessStatsUi;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.WriteSettingsDetails;
+import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
@@ -62,7 +63,6 @@ import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
-import com.android.settings.development.DevelopmentSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.ImeiInformation;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
@@ -176,7 +176,6 @@ public class SettingsGateway {
             PrivateVolumeForget.class.getName(),
             PrivateVolumeSettings.class.getName(),
             PublicVolumeSettings.class.getName(),
-            DevelopmentSettings.class.getName(),
             DevelopmentSettingsDashboardFragment.class.getName(),
             AndroidBeam.class.getName(),
             WifiDisplaySettings.class.getName(),
@@ -208,6 +207,7 @@ public class SettingsGateway {
             ChooseLockPassword.ChooseLockPasswordFragment.class.getName(),
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
             InstalledAppDetails.class.getName(),
+            AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),
             ChannelNotificationSettings.class.getName(),

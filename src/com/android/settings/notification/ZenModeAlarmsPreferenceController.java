@@ -26,7 +26,7 @@ import android.util.Log;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeAlarmsPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener{
+        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_alarms";
     private final ZenModeBackend mBackend;

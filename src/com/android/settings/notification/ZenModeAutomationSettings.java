@@ -34,7 +34,7 @@ import java.util.List;
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     private static final String KEY_ADD_RULE = "zen_mode_add_automatic_rule";
     private static final String KEY_AUTOMATIC_RULES = "zen_mode_automatic_rules";
-    protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
+    protected static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {

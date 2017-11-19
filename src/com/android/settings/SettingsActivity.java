@@ -55,7 +55,6 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.core.instrumentation.SharedPreferencesLogger;
@@ -827,16 +826,10 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
-        final boolean useDevOptionV1 = Settings.DevelopmentSettingsActivity.isEnabled();
-        // Enable old Dev option if v2 is disabled
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.DevelopmentSettingsActivity.class.getName()),
-                showDev && useDevOptionV1, isAdmin)
-                || somethingChanged;
-        // Enable new Dev option if v2 is enable
+
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),
-                showDev && !useDevOptionV1, isAdmin)
+                showDev, isAdmin)
                 || somethingChanged;
 
         // Enable/disable backup settings depending on whether the user is admin.

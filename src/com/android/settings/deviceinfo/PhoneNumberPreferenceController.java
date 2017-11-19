@@ -26,13 +26,15 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhoneNumberPreferenceController extends AbstractPreferenceController {
+public class PhoneNumberPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private final static String KEY_PHONE_NUMBER = "phone_number";
 

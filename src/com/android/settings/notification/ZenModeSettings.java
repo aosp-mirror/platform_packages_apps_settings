@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class ZenModeSettings extends ZenModeSettingsBase {
-
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.zen_mode_settings;
@@ -58,7 +57,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     protected int getHelpResource() {
         return R.string.help_uri_interruptions;
     }
-
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle) {
@@ -195,24 +193,26 @@ public class ZenModeSettings extends ZenModeSettingsBase {
      */
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.zen_mode_settings;
-            return Arrays.asList(sir);
-        }
 
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            List<String> keys = super.getNonIndexableKeys(context);
-            keys.add(ZenModeButtonPreferenceController.KEY);
-            return keys;
-        }
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.zen_mode_settings;
+                    return Arrays.asList(sir);
+                }
 
-        @Override
-        public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-            return buildPreferenceControllers(context, null);
-        }
-    };
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(ZenModeButtonPreferenceController.KEY);
+                    return keys;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null);
+                }
+            };
 }

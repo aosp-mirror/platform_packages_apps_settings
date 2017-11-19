@@ -14,11 +14,13 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/screen_pinning_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="screen_pinning_settings_screen"
+    android:title="@string/screen_pinning_title">
 
-        <SwitchPreference
-                android:key="use_screen_lock"
-                android:title="@string/screen_pinning_unlock_none" />
+    <SwitchPreference
+        android:key="use_screen_lock"
+        android:title="@string/screen_pinning_unlock_none" />
 
 </PreferenceScreen>

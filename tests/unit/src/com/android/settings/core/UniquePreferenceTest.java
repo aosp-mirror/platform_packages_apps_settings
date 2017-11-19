@@ -33,6 +33,7 @@ import android.util.Xml;
 
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SearchIndexableResources;
 import com.android.settings.search.XmlParserUtils;
 
@@ -64,7 +65,7 @@ public class UniquePreferenceTest {
 
             "dashboard_tile_placeholder"    // This is the placeholder pref for injecting dynamic
                                             // tiles.
-            );
+    );
 
     private Context mContext;
 
@@ -91,13 +92,13 @@ public class UniquePreferenceTest {
         final Set<String> nullKeyClasses = new HashSet<>();
         final Set<String> duplicatedKeys = new HashSet<>();
         for (Class<?> clazz : SearchIndexableResources.providerValues()) {
-            verifyPreferenceIdInXml(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
+            verifyPreferenceKeys(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
         }
 
         if (!nullKeyClasses.isEmpty()) {
             final StringBuilder nullKeyErrors = new StringBuilder()
-                    .append("Each preference must have a key, ")
-                    .append("the following classes have pref without keys:\n");
+                    .append("Each preference/SearchIndexableData must have a key, ")
+                    .append("the following classes have null keys:\n");
             for (String c : nullKeyClasses) {
                 nullKeyErrors.append(c).append("\n");
             }
@@ -114,7 +115,7 @@ public class UniquePreferenceTest {
         }
     }
 
-    private void verifyPreferenceIdInXml(Set<String> uniqueKeys, Set<String> duplicatedKeys,
+    private void verifyPreferenceKeys(Set<String> uniqueKeys, Set<String> duplicatedKeys,
             Set<String> nullKeyClasses, Class<?> clazz)
             throws IOException, XmlPullParserException, Resources.NotFoundException {
         if (clazz == null) {
@@ -123,8 +124,16 @@ public class UniquePreferenceTest {
         final String className = clazz.getName();
         final Indexable.SearchIndexProvider provider =
                 DatabaseIndexingUtils.getSearchIndexProvider(clazz);
+        final List<SearchIndexableRaw> rawsToIndex = provider.getRawDataToIndex(mContext, true);
         final List<SearchIndexableResource> resourcesToIndex =
                 provider.getXmlResourcesToIndex(mContext, true);
+        verifyResources(className, resourcesToIndex, uniqueKeys, duplicatedKeys, nullKeyClasses);
+        verifyRaws(className, rawsToIndex, uniqueKeys, duplicatedKeys, nullKeyClasses);
+    }
+
+    private void verifyResources(String className, List<SearchIndexableResource> resourcesToIndex,
+            Set<String> uniqueKeys, Set<String> duplicatedKeys, Set<String> nullKeyClasses)
+            throws IOException, XmlPullParserException, Resources.NotFoundException {
         if (resourcesToIndex == null) {
             Log.d(TAG, className + "is not providing SearchIndexableResource, skipping");
             return;
@@ -170,6 +179,27 @@ public class UniquePreferenceTest {
                 uniqueKeys.add(key);
             } while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
+        }
+    }
+
+    private void verifyRaws(String className, List<SearchIndexableRaw> rawsToIndex,
+            Set<String> uniqueKeys, Set<String> duplicatedKeys, Set<String> nullKeyClasses) {
+        if (rawsToIndex == null) {
+            Log.d(TAG, className + "is not providing SearchIndexableRaw, skipping");
+            return;
+        }
+        for (SearchIndexableRaw raw : rawsToIndex) {
+            if (TextUtils.isEmpty(raw.key)) {
+                Log.e(TAG, "Every SearchIndexableRaw must have an key; found null key"
+                        + " in " + className);
+                nullKeyClasses.add(className);
+                continue;
+            }
+            if (uniqueKeys.contains(raw.key) && !WHITELISTED_DUPLICATE_KEYS.contains(raw.key)) {
+                Log.e(TAG, "Every SearchIndexableRaw key must unique; found " + raw.key
+                        + " in " + className);
+                duplicatedKeys.add(raw.key);
+            }
         }
     }
 }

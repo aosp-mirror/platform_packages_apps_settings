@@ -55,7 +55,6 @@ import com.android.settings.R;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.utils.ProfileSettingsPreferenceFragment;
 
 import java.text.DateFormat;
@@ -616,49 +615,11 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            List<SearchIndexableRaw> indexables = new ArrayList<SearchIndexableRaw>();
-
-            PackageManager packageManager = context.getPackageManager();
-            PrintManager printManager = (PrintManager) context.getSystemService(
-                    Context.PRINT_SERVICE);
-
-            String screenTitle = context.getResources().getString(R.string.print_settings);
-            SearchIndexableRaw data = new SearchIndexableRaw(context);
-            data.title = screenTitle;
-            data.screenTitle = screenTitle;
-            indexables.add(data);
-
-            // Indexing all services, regardless if enabled. Please note that the index will not be
-            // updated until this function is called again
-            List<PrintServiceInfo> services =
-                    printManager.getPrintServices(PrintManager.ALL_SERVICES);
-
-            if (services != null) {
-                final int serviceCount = services.size();
-                for (int i = 0; i < serviceCount; i++) {
-                    PrintServiceInfo service = services.get(i);
-
-                    ComponentName componentName = new ComponentName(
-                            service.getResolveInfo().serviceInfo.packageName,
-                            service.getResolveInfo().serviceInfo.name);
-
-                    data = new SearchIndexableRaw(context);
-                    data.key = componentName.flattenToString();
-                    data.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                    data.screenTitle = screenTitle;
-                    indexables.add(data);
-                }
-            }
-
-            return indexables;
-        }
 
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                 boolean enabled) {
-            List<SearchIndexableResource> indexables = new ArrayList<SearchIndexableResource>();
+            List<SearchIndexableResource> indexables = new ArrayList<>();
             SearchIndexableResource indexable = new SearchIndexableResource(context);
             indexable.xmlResId = R.xml.print_settings;
             indexables.add(indexable);

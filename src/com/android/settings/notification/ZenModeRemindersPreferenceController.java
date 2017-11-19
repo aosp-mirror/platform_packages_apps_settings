@@ -25,8 +25,8 @@ import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeRemindersPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener{
+public class ZenModeRemindersPreferenceController extends AbstractZenModePreferenceController
+        implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_reminders";
     private final ZenModeBackend mBackend;
@@ -67,8 +67,7 @@ public class ZenModeRemindersPreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allowReminders = (Boolean) newValue;
-        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allowReminders="
-                + allowReminders);
+        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allowReminders=" + allowReminders);
         mBackend.saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
                 allowReminders);
         return true;

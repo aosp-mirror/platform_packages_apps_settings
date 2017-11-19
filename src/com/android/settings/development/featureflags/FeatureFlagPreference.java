@@ -35,7 +35,7 @@ public class FeatureFlagPreference extends SwitchPreference {
     @Override
     public void setChecked(boolean isChecked) {
         setCheckedInternal(isChecked);
-        FeatureFlagUtils.setEnabled(mKey, isChecked);
+        FeatureFlagUtils.setEnabled(getContext(), mKey, isChecked);
     }
 
     private void setCheckedInternal(boolean isChecked) {

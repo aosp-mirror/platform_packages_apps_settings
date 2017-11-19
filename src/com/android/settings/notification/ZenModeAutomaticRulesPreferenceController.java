@@ -22,11 +22,10 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-
 import java.util.Map;
 
 public class ZenModeAutomaticRulesPreferenceController extends
-        AbstractZenModeAutomaticRulePreferenceController  {
+        AbstractZenModeAutomaticRulePreferenceController {
 
     private final String KEY_AUTOMATIC_RULES;
     private PreferenceCategory mPreferenceCategory;

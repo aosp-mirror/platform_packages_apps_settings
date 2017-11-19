@@ -22,8 +22,11 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.dashboard.DashboardFragment;
@@ -35,6 +38,7 @@ import com.android.settings.deviceinfo.DeviceModelPreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.ImsStatusPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.KernelVersionPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
@@ -61,6 +65,11 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
 
+    @VisibleForTesting
+    static final int SIM_PREFERENCES_COUNT = 3;
+    @VisibleForTesting
+    static final int NON_SIM_PREFERENCES_COUNT = 2;
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DEVICEINFO;
@@ -69,6 +78,21 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     @Override
     protected int getHelpResource() {
         return R.string.help_uri_about;
+    }
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)) {
+            // Increase the number of children when the device contains more than 1 sim.
+            final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(
+                    Context.TELEPHONY_SERVICE);
+            final int numberOfChildren = Math.max(SIM_PREFERENCES_COUNT,
+                    SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
+                    + NON_SIM_PREFERENCES_COUNT;
+            getPreferenceScreen().setInitialExpandedChildrenCount(numberOfChildren);
+        }
     }
 
     @Override
@@ -139,6 +163,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
             controllers.add(new FirmwareVersionPreferenceControllerV2(context, fragment));
 
+            controllers.add(new ImsStatusPreferenceController(context, lifecycle));
+
             controllers.add(new IpAddressPreferenceController(context, lifecycle));
 
             controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
@@ -148,6 +174,12 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             controllers.add(new RegulatoryInfoPreferenceController(context));
 
             controllers.add(new SafetyInfoPreferenceController(context));
+
+            controllers.add(new ManualPreferenceController(context));
+
+            controllers.add(new FeedbackPreferenceController(fragment, context));
+
+            controllers.add(new FccEquipmentIdPreferenceController(context));
 
             controllers.add(
                     new BuildNumberPreferenceController(context, activity, fragment, lifecycle));

@@ -34,11 +34,13 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+import android.util.FeatureFlagUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.applications.ApplicationsState;
@@ -241,10 +243,17 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
                     System.currentTimeMillis() - stat.getLastTimeUsed(), false));
             pref.setOrder(i);
             pref.setOnPreferenceClickListener(preference -> {
-                AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
-                        R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
-                        1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
-                return true;
+                if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.APP_INFO_V2)) {
+                    AppInfoBase.startAppInfoFragment(AppInfoDashboardFragment.class,
+                            R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
+                            1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
+                    return true;
+                } else {
+                    AppInfoBase.startAppInfoFragment(InstalledAppDetails.class,
+                            R.string.application_info_label, pkgName, appEntry.info.uid, mHost,
+                            1001 /*RequestCode*/, SETTINGS_APP_NOTIF_CATEGORY);
+                    return true;
+                }
             });
             if (!rebindPref) {
                 mCategory.addPreference(pref);

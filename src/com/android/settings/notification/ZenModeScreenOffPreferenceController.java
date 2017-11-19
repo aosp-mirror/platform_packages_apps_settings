@@ -25,7 +25,7 @@ import android.util.Log;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeScreenOffPreferenceController extends
-        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener{
+        AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_screen_off";
     private final ZenModeBackend mBackend;
