@@ -17,11 +17,12 @@
 package com.android.settings.wrapper;
 
 import android.annotation.NonNull;
+import android.annotation.Nullable;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
-import android.support.annotation.Nullable;
 
 import java.util.List;
 
@@ -38,10 +39,16 @@ public class DevicePolicyManagerWrapper {
         mDpm = dpm;
     }
 
+    public static @Nullable DevicePolicyManagerWrapper from(Context context) {
+        DevicePolicyManager dpm =
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        return dpm == null ? null : new DevicePolicyManagerWrapper(dpm);
+    }
+
     /**
      * Calls {@code DevicePolicyManager.getActiveAdminsAsUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getActiveAdminsAsUser
+     * @see DevicePolicyManager#getActiveAdminsAsUser
      */
     public @Nullable List<ComponentName> getActiveAdminsAsUser(int userId) {
         return mDpm.getActiveAdminsAsUser(userId);
@@ -50,7 +57,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getMaximumFailedPasswordsForWipe()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getMaximumFailedPasswordsForWipe
+     * @see DevicePolicyManager#getMaximumFailedPasswordsForWipe
      */
     public int getMaximumFailedPasswordsForWipe(@Nullable ComponentName admin, int userHandle) {
         return mDpm.getMaximumFailedPasswordsForWipe(admin, userHandle);
@@ -59,7 +66,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnCallingUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnCallingUser
+     * @see DevicePolicyManager#getDeviceOwnerComponentOnCallingUser
      */
     public ComponentName getDeviceOwnerComponentOnCallingUser() {
         return mDpm.getDeviceOwnerComponentOnCallingUser();
@@ -68,7 +75,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerComponentOnAnyUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
+     * @see DevicePolicyManager#getDeviceOwnerComponentOnAnyUser
      */
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
         return mDpm.getDeviceOwnerComponentOnAnyUser();
@@ -77,7 +84,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getProfileOwnerAsUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getProfileOwnerAsUser
+     * @see DevicePolicyManager#getProfileOwnerAsUser
      */
     public @Nullable ComponentName getProfileOwnerAsUser(final int userId) {
         return mDpm.getProfileOwnerAsUser(userId);
@@ -86,7 +93,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getDeviceOwnerNameOnAnyUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getDeviceOwnerNameOnAnyUser
+     * @see DevicePolicyManager#getDeviceOwnerNameOnAnyUser
      */
     public CharSequence getDeviceOwnerOrganizationName() {
         return mDpm.getDeviceOwnerOrganizationName();
@@ -95,7 +102,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getPermissionGrantState()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getPermissionGrantState
+     * @see DevicePolicyManager#getPermissionGrantState
      */
     public int getPermissionGrantState(@Nullable ComponentName admin, String packageName,
             String permission) {
@@ -105,7 +112,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.isSecurityLoggingEnabled()}.
      *
-     * @see android.app.admin.DevicePolicyManager#isSecurityLoggingEnabled
+     * @see DevicePolicyManager#isSecurityLoggingEnabled
      */
     public boolean isSecurityLoggingEnabled(@Nullable ComponentName admin) {
         return mDpm.isSecurityLoggingEnabled(admin);
@@ -114,7 +121,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.isNetworkLoggingEnabled()}.
      *
-     * @see android.app.admin.DevicePolicyManager#isNetworkLoggingEnabled
+     * @see DevicePolicyManager#isNetworkLoggingEnabled
      */
     public boolean isNetworkLoggingEnabled(@Nullable ComponentName admin) {
         return mDpm.isNetworkLoggingEnabled(admin);
@@ -123,7 +130,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getLastSecurityLogRetrievalTime()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getLastSecurityLogRetrievalTime
+     * @see DevicePolicyManager#getLastSecurityLogRetrievalTime
      */
     public long getLastSecurityLogRetrievalTime() {
         return mDpm.getLastSecurityLogRetrievalTime();
@@ -132,7 +139,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getLastBugReportRequestTime()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getLastBugReportRequestTime
+     * @see DevicePolicyManager#getLastBugReportRequestTime
      */
     public long getLastBugReportRequestTime() {
         return mDpm.getLastBugReportRequestTime();
@@ -141,7 +148,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getLastNetworkLogRetrievalTime()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getLastNetworkLogRetrievalTime
+     * @see DevicePolicyManager#getLastNetworkLogRetrievalTime
      */
     public long getLastNetworkLogRetrievalTime() {
         return mDpm.getLastNetworkLogRetrievalTime();
@@ -150,7 +157,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.isCurrentInputMethodSetByOwner()}.
      *
-     * @see android.app.admin.DevicePolicyManager#isCurrentInputMethodSetByOwner
+     * @see DevicePolicyManager#isCurrentInputMethodSetByOwner
      */
     public boolean isCurrentInputMethodSetByOwner() {
         return mDpm.isCurrentInputMethodSetByOwner();
@@ -159,7 +166,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.getOwnerInstalledCaCerts()}.
      *
-     * @see android.app.admin.DevicePolicyManager#getOwnerInstalledCaCerts
+     * @see DevicePolicyManager#getOwnerInstalledCaCerts
      */
     public List<String> getOwnerInstalledCaCerts(@NonNull UserHandle user) {
         return mDpm.getOwnerInstalledCaCerts(user);
@@ -168,7 +175,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.isDeviceOwnerAppOnAnyUser()}.
      *
-     * @see android.app.admin.DevicePolicyManager#isDeviceOwnerAppOnAnyUser
+     * @see DevicePolicyManager#isDeviceOwnerAppOnAnyUser
      */
     public boolean isDeviceOwnerAppOnAnyUser(String packageName) {
         return mDpm.isDeviceOwnerAppOnAnyUser(packageName);
@@ -177,7 +184,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.packageHasActiveAdmins()}.
      *
-     * @see android.app.admin.DevicePolicyManager#packageHasActiveAdmins
+     * @see DevicePolicyManager#packageHasActiveAdmins
      */
     public boolean packageHasActiveAdmins(String packageName) {
         return mDpm.packageHasActiveAdmins(packageName);
@@ -186,7 +193,7 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.isUninstallInQueue()}.
      *
-     * @see android.app.admin.DevicePolicyManager#isUninstallInQueue
+     * @see DevicePolicyManager#isUninstallInQueue
      */
     public boolean isUninstallInQueue(String packageName) {
         return mDpm.isUninstallInQueue(packageName);
@@ -195,9 +202,18 @@ public class DevicePolicyManagerWrapper {
     /**
      * Calls {@code DevicePolicyManager.createAdminSupportIntent()}.
      *
-     * @see android.app.admin.DevicePolicyManager#createAdminSupportIntent
+     * @see DevicePolicyManager#createAdminSupportIntent(String)
      */
     public Intent createAdminSupportIntent(@NonNull String restriction) {
         return mDpm.createAdminSupportIntent(restriction);
+    }
+
+    /**
+     * Calls {@code DevicePolicyManager#getDeviceOwnerUserId()}.
+     *
+     * @see DevicePolicyManager#getDeviceOwnerUserId()
+     */
+    public int getDeviceOwnerUserId() {
+        return mDpm.getDeviceOwnerUserId();
     }
 }

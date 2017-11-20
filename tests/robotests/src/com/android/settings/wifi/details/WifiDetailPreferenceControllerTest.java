@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
@@ -51,6 +52,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
@@ -64,7 +66,9 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
+import com.android.settings.testutils.shadow.ShadowPackageManagerWrapper;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.widget.EntityHeaderController;
@@ -94,7 +98,11 @@ import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowEntityHeaderController.class)
+        shadows = {
+                ShadowDevicePolicyManagerWrapper.class,
+                ShadowEntityHeaderController.class,
+                ShadowPackageManagerWrapper.class,
+        })
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
@@ -237,8 +245,6 @@ public class WifiDetailPreferenceControllerTest {
                 .thenReturn(mockHeaderController);
         when(mockHeaderController.setSummary(anyString())).thenReturn(mockHeaderController);
         when(mockIconInjector.getIcon(anyInt())).thenReturn(new ColorDrawable());
-
-        doReturn(null).when(mContext).getSystemService(eq(Context.DEVICE_POLICY_SERVICE));
 
         setupMockedPreferenceScreen();
         mController = newWifiDetailPreferenceController();
@@ -626,6 +632,45 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
 
         verify(mockButtonsPref).setButton1Visible(true);
+    }
+
+    @Test
+    public void canForgetNetwork_lockedDown() {
+        lockDownNetwork();
+
+        displayAndResume();
+
+        verify(mockButtonsPref).setButton1Visible(false);
+    }
+
+    @Test
+    public void canModifyNetwork_saved() {
+        assertThat(mController.canModifyNetwork()).isTrue();
+    }
+
+    @Test
+    public void canModifyNetwork_lockedDown() {
+        lockDownNetwork();
+
+        assertThat(mController.canModifyNetwork()).isFalse();
+    }
+
+    /**
+     * Pretends that current network is locked down by device owner.
+     */
+    private void lockDownNetwork() {
+        final int doUserId = 123;
+        final int doUid = 1234;
+        String doPackage = "some.package";
+
+        mockWifiConfig.creatorUid = doUid;
+        ComponentName doComponent = new ComponentName(doPackage, "some.Class");
+        ShadowPackageManagerWrapper.setPackageUidAsUser(doPackage, doUserId, doUid);
+        ShadowDevicePolicyManagerWrapper.setDeviceOComponentName(doComponent);
+        ShadowDevicePolicyManagerWrapper.setDeviceOwnerUserId(doUserId);
+
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 1);
     }
 
     @Test
