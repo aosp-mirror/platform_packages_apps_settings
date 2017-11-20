@@ -172,7 +172,7 @@ public abstract class NotificationPreferenceController extends AbstractPreferenc
     }
 
     protected boolean isChannelGroupBlockable() {
-        if (mChannelGroup != null && mChannelGroup.getGroup() == null && mAppRow != null) {
+        if (mChannelGroup != null && mChannelGroup.getGroup() != null && mAppRow != null) {
             if (!mAppRow.systemApp) {
                 return true;
             }
