@@ -28,29 +28,27 @@ import com.android.settings.search.Indexable;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ZenModeAutomationSettings extends ZenModeSettingsBase {
-    private static final String KEY_ADD_RULE = "zen_mode_add_automatic_rule";
-    private static final String KEY_AUTOMATIC_RULES = "zen_mode_automatic_rules";
-    protected static final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
+    protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         ZenServiceListing serviceListing = new ZenServiceListing(getContext(), CONFIG);
         serviceListing.reloadApprovedServices();
-        return buildPreferenceControllers(context, this, serviceListing);
+        return buildPreferenceControllers(context, this, serviceListing, getLifecycle());
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Fragment parent, ZenServiceListing serviceListing) {
+            Fragment parent, ZenServiceListing serviceListing, Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModeAddAutomaticRulePreferenceController(context, KEY_ADD_RULE,
-                parent, serviceListing));
-        controllers.add(new ZenModeAutomaticRulesPreferenceController(context,
-                KEY_AUTOMATIC_RULES, parent));
+        controllers.add(new ZenModeAddAutomaticRulePreferenceController(context, parent,
+                serviceListing, lifecycle));
+        controllers.add(new ZenModeAutomaticRulesPreferenceController(context, parent, lifecycle));
 
         return controllers;
     }
@@ -94,15 +92,15 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_ADD_RULE);
-                    keys.add(KEY_AUTOMATIC_RULES);
+                    keys.add(ZenModeAddAutomaticRulePreferenceController.KEY);
+                    keys.add(ZenModeAutomaticRulesPreferenceController.KEY);
                     return keys;
                 }
 
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null, null);
+                    return buildPreferenceControllers(context, null, null, null);
                 }
             };
 }

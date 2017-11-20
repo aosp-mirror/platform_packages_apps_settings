@@ -22,6 +22,7 @@ import android.support.v7.preference.Preference;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -57,15 +58,21 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         if (null == mZenButtonOn) {
             mZenButtonOn = (Button) ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
-            mZenButtonOn.setOnClickListener(v ->
-                    mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS));
+            mZenButtonOn.setOnClickListener(v -> {
+                mMetricsFeatureProvider.action(mContext,
+                        MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, true);
+                mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+            });
         }
 
         if (null == mZenButtonOff) {
             mZenButtonOff = (Button) ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_off_button);
-            mZenButtonOff.setOnClickListener(v ->
-                    mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF));
+            mZenButtonOff.setOnClickListener(v -> {
+                mMetricsFeatureProvider.action(mContext,
+                        MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                mBackend.setZenMode(Settings.Global.ZEN_MODE_OFF);
+            });
         }
 
         updateButtons();

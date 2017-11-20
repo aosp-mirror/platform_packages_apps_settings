@@ -15,8 +15,18 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="zen_mode_schedule_rule_settings" >
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="zen_mode_schedule_rule_settings"
+    android:title="@string/zen_mode_automatic_rule_settings_page_title">
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="pref_app_header"
+        android:layout="@layout/settings_entity_header" />
+
+    <com.android.settings.applications.LayoutPreference
+        android:key="zen_automatic_rule_switch"
+        android:layout="@layout/styled_switch_bar" />
 
     <!-- Rule name -->
     <Preference
@@ -38,12 +48,5 @@
         android:title="@string/zen_mode_schedule_alarm_title"
         android:summary="@string/zen_mode_schedule_alarm_summary"
         android:order="99" />
-
-    <!-- Zen mode -->
-    <DropDownPreference
-            android:key="zen_mode"
-            android:title="@string/zen_mode_settings_title"
-            android:order="100"
-            android:summary="%s" />
 
 </PreferenceScreen>

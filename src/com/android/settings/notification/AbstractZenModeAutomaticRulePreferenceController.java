@@ -29,8 +29,9 @@ import android.service.notification.ConditionProviderService;
 import android.service.notification.ZenModeConfig;
 import android.support.v7.preference.Preference;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -38,19 +39,19 @@ import java.util.Map;
 import java.util.Set;
 
 abstract public class AbstractZenModeAutomaticRulePreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin {
+        AbstractZenModePreferenceController implements PreferenceControllerMixin {
 
-    private static final String TAG = "ZenModeAutomaticRule";
     protected ZenModeBackend mBackend;
     protected Fragment mParent;
     protected Set<Map.Entry<String, AutomaticZenRule>> mRules;
     protected PackageManager mPm;
 
-    public AbstractZenModeAutomaticRulePreferenceController(Context context, Fragment parent) {
-        super(context);
+    public AbstractZenModeAutomaticRulePreferenceController(Context context, String key, Fragment
+            parent, Lifecycle lifecycle) {
+        super(context, key, lifecycle);
         mBackend = ZenModeBackend.getInstance(context);
-        mParent = parent;
         mPm = mContext.getPackageManager();
+        mParent = parent;
     }
 
     @Override
@@ -65,19 +66,9 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
         return ruleMap.entrySet();
     }
 
-    protected void showNameRuleDialog(final ZenRuleInfo ri) {
-        new ZenRuleNameDialog(mContext, null, ri.defaultConditionId) {
-            @Override
-            public void onOk(String ruleName) {
-                AutomaticZenRule rule = new AutomaticZenRule(ruleName, ri.serviceComponent,
-                        ri.defaultConditionId, NotificationManager.INTERRUPTION_FILTER_PRIORITY,
-                        true);
-                String savedRuleId = mBackend.addZenRule(rule);
-                if (savedRuleId != null) {
-                    mParent.startActivity(getRuleIntent(ri.settingsAction, null, savedRuleId));
-                }
-            }
-        }.show();
+    protected void showNameRuleDialog(final ZenRuleInfo ri, Fragment parent) {
+        ZenRuleNameDialog.show(parent, null, ri.defaultConditionId, new
+                RuleNameChangeListener(ri));
     }
 
     protected Map.Entry<String, AutomaticZenRule>[] sortedRules() {
@@ -156,5 +147,27 @@ abstract public class AbstractZenModeAutomaticRulePreferenceController extends
             return ComponentName.unflattenFromString(configurationActivity);
         }
         return null;
+    }
+
+    public class RuleNameChangeListener implements ZenRuleNameDialog.PositiveClickListener {
+        ZenRuleInfo mRuleInfo;
+
+        public RuleNameChangeListener(ZenRuleInfo ruleInfo) {
+            mRuleInfo = ruleInfo;
+        }
+
+        @Override
+        public void onOk(String ruleName, Fragment parent) {
+            mMetricsFeatureProvider.action(mContext,
+                    MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
+            AutomaticZenRule rule = new AutomaticZenRule(ruleName, mRuleInfo.serviceComponent,
+                    mRuleInfo.defaultConditionId,
+                    NotificationManager.INTERRUPTION_FILTER_PRIORITY, true);
+            String savedRuleId = mBackend.addZenRule(rule);
+            if (savedRuleId != null) {
+                parent.startActivity(getRuleIntent(mRuleInfo.settingsAction, null,
+                        savedRuleId));
+            }
+        }
     }
 }

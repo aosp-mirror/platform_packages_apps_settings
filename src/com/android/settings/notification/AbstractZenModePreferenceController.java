@@ -35,6 +35,8 @@ import android.util.Slog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -51,6 +53,7 @@ abstract public class AbstractZenModePreferenceController extends
     private final String KEY;
     final private NotificationManager mNotificationManager;
     protected static ZenModeConfigWrapper mZenModeConfigWrapper;
+    protected MetricsFeatureProvider mMetricsFeatureProvider;
 
     public AbstractZenModePreferenceController(Context context, String key,
             Lifecycle lifecycle) {
@@ -62,6 +65,9 @@ abstract public class AbstractZenModePreferenceController extends
         KEY = key;
         mNotificationManager = (NotificationManager) context.getSystemService(
                 Context.NOTIFICATION_SERVICE);
+
+        final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
+        mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
     }
 
     @Override
