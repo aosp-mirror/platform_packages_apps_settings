@@ -38,6 +38,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -54,7 +55,7 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
         sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
+        shadows = {SettingsShadowSystemProperties.class, ShadowUtils.class})
 public class ClearAdbKeysPreferenceControllerTest {
 
     @Mock
@@ -83,6 +84,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     public void tearDown() {
         ShadowClearAdbKeysWarningDialog.resetDialog();
         SettingsShadowSystemProperties.clear();
+        ShadowUtils.reset();
     }
 
     @Test
@@ -131,6 +133,20 @@ public class ClearAdbKeysPreferenceControllerTest {
         doReturn(true).when(mController).isAdminUser();
         mController.displayPreference(mScreen);
         when(mPreference.getKey()).thenReturn("Some random key!!!");
+        final boolean isHandled = mController.handlePreferenceTreeClick(mPreference);
+
+        assertThat(isHandled).isFalse();
+    }
+
+    @Test
+    public void handlePreferenceTreeClick_monkeyUser_shouldReturnFalse() {
+        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
+        doReturn(true).when(mController).isAdminUser();
+        ShadowUtils.setIsUserAMonkey(true);
+        mController.displayPreference(mScreen);
+        final String preferenceKey = mController.getPreferenceKey();
+        when(mPreference.getKey()).thenReturn(preferenceKey);
+
         final boolean isHandled = mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(isHandled).isFalse();
