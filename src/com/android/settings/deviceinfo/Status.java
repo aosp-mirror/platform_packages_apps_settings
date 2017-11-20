@@ -20,6 +20,7 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.DeviceInfoSettings;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -32,7 +33,10 @@ import java.util.List;
 
 /**
  * Fragment for showing device hardware info, such as MAC addresses and serial numbers
+ * Deprecated in About Phone V2
+ * Information on this page is available in {@link DeviceInfoSettings}
  */
+@Deprecated
 public class Status extends DashboardFragment {
 
     private static final String TAG = "DeviceStatus";

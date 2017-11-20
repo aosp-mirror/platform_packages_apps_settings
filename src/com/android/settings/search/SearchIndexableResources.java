@@ -149,7 +149,6 @@ public final class SearchIndexableResources {
         addIndex(PrintSettingsFragment.class);
         addIndex(DevelopmentSettingsDashboardFragment.class);
         addIndex(DeviceInfoSettings.class);
-        addIndex(Status.class);
         addIndex(LegalSettings.class);
         addIndex(SystemDashboardFragment.class);
         addIndex(ResetDashboardFragment.class);

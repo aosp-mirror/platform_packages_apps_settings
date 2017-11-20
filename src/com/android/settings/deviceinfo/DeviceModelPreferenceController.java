@@ -51,7 +51,7 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
         if (pref != null) {
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.DEVICE_INFO_V2)) {
+            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.DEVICE_INFO_V2) || true) {
                 pref.setSummary(mContext.getResources().getString(R.string.model_summary,
                         getDeviceModel()));
             } else {

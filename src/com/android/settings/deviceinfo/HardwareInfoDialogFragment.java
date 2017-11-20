@@ -59,7 +59,7 @@ public class HardwareInfoDialogFragment extends InstrumentedDialogFragment {
                 DeviceModelPreferenceController.getDeviceModel());
 
         // Serial number
-        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DEVICE_INFO_V2)) {
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DEVICE_INFO_V2) || true) {
             setText(content, R.id.serial_number_label, R.id.serial_number_value, getSerialNumber());
         } else {
             content.findViewById(R.id.serial_number_label).setVisibility(View.GONE);
