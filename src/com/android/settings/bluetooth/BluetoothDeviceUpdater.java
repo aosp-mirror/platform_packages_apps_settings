@@ -149,9 +149,22 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     }
 
     /**
+     * Return {@code true} if {@code cachedBluetoothDevice} matches this
+     * {@link BluetoothDeviceUpdater} and should stay in the list, otherwise return {@code false}
+     */
+    public abstract boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice);
+
+    /**
      * Update whether to show {@cde cachedBluetoothDevice} in the list.
      */
-    abstract public void update(CachedBluetoothDevice cachedBluetoothDevice);
+    protected void update(CachedBluetoothDevice cachedBluetoothDevice) {
+        if (isFilterMatched(cachedBluetoothDevice)) {
+            // Add the preference if it is new one
+            addPreference(cachedBluetoothDevice);
+        } else {
+            removePreference(cachedBluetoothDevice);
+        }
+    }
 
     /**
      * Add the {@link Preference} that represents the {@code cachedDevice}
