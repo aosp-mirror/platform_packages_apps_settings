@@ -37,7 +37,7 @@ import static org.mockito.Mockito.when;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class SettingsDumpServiceTest {
     private static final String PACKAGE_BROWSER = "com.android.test.browser";
     private static final String PACKAGE_NULL = "android";

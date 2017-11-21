@@ -34,7 +34,7 @@ import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParserException;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class LicenseHtmlGeneratorFromXmlTest {
     private static final String VAILD_XML_STRING =
             "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
