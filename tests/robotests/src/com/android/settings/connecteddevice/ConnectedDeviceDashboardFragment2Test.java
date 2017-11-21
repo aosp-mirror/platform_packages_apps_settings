@@ -51,7 +51,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class ConnectedDeviceDashboardFragmentTest {
+public class ConnectedDeviceDashboardFragment2Test {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     Context mContext;
@@ -61,7 +61,7 @@ public class ConnectedDeviceDashboardFragmentTest {
 
     private FakeFeatureFactory mFeatureFactory;
     private SmsMirroringFeatureProvider mFeatureProvider;
-    private ConnectedDeviceDashboardFragment mFragment;
+    private ConnectedDeviceDashboardFragmentOld mFragment;
     private TestSmsMirroringPreferenceController mSmsMirroringPreferenceController;
 
     private static final class TestSmsMirroringPreferenceController
@@ -86,7 +86,7 @@ public class ConnectedDeviceDashboardFragmentTest {
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
 
-        mFragment = new ConnectedDeviceDashboardFragment();
+        mFragment = new ConnectedDeviceDashboardFragmentOld();
         when(mContext.getPackageManager()).thenReturn(mManager);
 
         mSmsMirroringPreferenceController = new TestSmsMirroringPreferenceController(mContext);

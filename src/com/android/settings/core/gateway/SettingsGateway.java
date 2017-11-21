@@ -58,6 +58,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
+import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
 import com.android.settings.dashboard.SupportFragment;
 import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageList;
@@ -248,6 +249,7 @@ public class SettingsGateway {
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragment.class.getName(),
+            ConnectedDeviceDashboardFragmentOld.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
             UserAndAccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
@@ -261,6 +263,7 @@ public class SettingsGateway {
             // Home page
             Settings.NetworkDashboardActivity.class.getName(),
             Settings.ConnectedDeviceDashboardActivity.class.getName(),
+            Settings.ConnectedDeviceDashboardActivityOld.class.getName(),
             Settings.AppAndNotificationDashboardActivity.class.getName(),
             Settings.DisplaySettingsActivity.class.getName(),
             Settings.SoundSettingsActivity.class.getName(),
