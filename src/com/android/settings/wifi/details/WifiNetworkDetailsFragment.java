@@ -27,6 +27,7 @@ import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -34,8 +35,10 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.wifi.WifiConfigUiBase;
 import com.android.settings.wifi.WifiDialog;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
+import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -105,7 +108,12 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case Menu.FIRST:
-                showDialog(WIFI_DIALOG_ID);
+                if (!mWifiDetailPreferenceController.canModifyNetwork()) {
+                    RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getContext(),
+                            RestrictedLockUtils.getDeviceOwner(getContext()));
+                } else {
+                    showDialog(WIFI_DIALOG_ID);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

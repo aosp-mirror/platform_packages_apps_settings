@@ -789,6 +789,21 @@ public class SettingsActivity extends SettingsDrawerActivity
                 Utils.isBandwidthControlEnabled() /* enabled */,
                 isAdmin) || somethingChanged;
 
+        final boolean isConnectedDeviceV2Enabled =
+                Settings.ConnectedDeviceDashboardActivity.isEnabled();
+        // Enable new connected page if v2 enabled
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,
+                        Settings.ConnectedDeviceDashboardActivity.class.getName()),
+                isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
+                isAdmin) || somethingChanged;
+        // Enable old connected page if v2 disabled
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,
+                        Settings.ConnectedDeviceDashboardActivityOld.class.getName()),
+                !isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
+                isAdmin) || somethingChanged;
+
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin)
@@ -806,11 +821,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.NetworkDashboardActivity.class.getName()),
-                !UserManager.isDeviceInDemoMode(this), isAdmin)
-                || somethingChanged;
-
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.ConnectedDeviceDashboardActivity.class.getName()),
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 

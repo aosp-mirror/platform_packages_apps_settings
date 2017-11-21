@@ -52,19 +52,19 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
     private final CachedBluetoothDevice mCachedDevice;
     private final UserManager mUserManager;
+    private final boolean mShowDevicesWithoutNames;
 
     private AlertDialog mDisconnectDialog;
     private String contentDescription = null;
-    private DeviceListPreferenceFragment mDeviceListPreferenceFragment;
     /* Talk-back descriptions for various BT icons */
     Resources mResources;
 
     public BluetoothDevicePreference(Context context, CachedBluetoothDevice cachedDevice,
-            DeviceListPreferenceFragment deviceListPreferenceFragment) {
+            boolean showDeviceWithoutNames) {
         super(context, null);
         mResources = getContext().getResources();
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mDeviceListPreferenceFragment = deviceListPreferenceFragment;
+        mShowDevicesWithoutNames = showDeviceWithoutNames;
 
         if (sDimAlpha == Integer.MIN_VALUE) {
             TypedValue outValue = new TypedValue();
@@ -134,8 +134,7 @@ public final class BluetoothDevicePreference extends GearPreference implements
 
         // Device is only visible in the UI if it has a valid name besides MAC address or when user
         // allows showing devices without user-friendly name in developer settings
-        setVisible(mDeviceListPreferenceFragment.shouldShowDevicesWithoutNames()
-                || mCachedDevice.hasHumanReadableName());
+        setVisible(mShowDevicesWithoutNames || mCachedDevice.hasHumanReadableName());
 
         // This could affect ordering, so notify that
         notifyHierarchyChanged();

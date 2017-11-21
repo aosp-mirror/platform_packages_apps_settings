@@ -43,6 +43,7 @@ import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.DeviceInfoUtils;
 
@@ -61,7 +62,7 @@ import java.util.List;
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
         sdk = TestConfig.SDK_VERSION_O,
-        shadows = {ShadowUtils.class, ShadowConnectivityManager.class}
+        shadows = {ShadowUtils.class, ShadowConnectivityManager.class, ShadowUserManager.class}
 )
 public class DeviceInfoSettingsTest {
 
@@ -94,7 +95,7 @@ public class DeviceInfoSettingsTest {
 
     @Test
     public void getPrefXml_shouldReturnDeviceInfoXml() {
-        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings);
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings_v2);
     }
 
     @Test

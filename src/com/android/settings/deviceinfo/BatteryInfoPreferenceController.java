@@ -26,12 +26,18 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+/**
+ * Deprecated in About Phone V2
+ * Information in this preference is available in {@link PowerUsageSummary}
+ */
+@Deprecated
 public class BatteryInfoPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 

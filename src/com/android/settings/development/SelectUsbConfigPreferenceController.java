@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
@@ -29,6 +30,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -89,6 +91,10 @@ public class SelectUsbConfigPreferenceController extends
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Utils.isMonkeyRunning()) {
+            return false;
+        }
+
         writeUsbConfigurationOption(newValue.toString());
         updateUsbConfigurationValues();
         return true;
@@ -102,6 +108,14 @@ public class SelectUsbConfigPreferenceController extends
     @Override
     public void onDestroy() {
         mContext.unregisterReceiver(mUsbReceiver);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        final PackageManager packageManager = mContext.getPackageManager();
+
+        return packageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)
+                || packageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY);
     }
 
     @Override
@@ -138,5 +152,4 @@ public class SelectUsbConfigPreferenceController extends
             setCurrentFunction(newValue, true);
         }
     }
-
 }
