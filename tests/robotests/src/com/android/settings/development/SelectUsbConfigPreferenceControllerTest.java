@@ -20,6 +20,9 @@ import static android.arch.lifecycle.Lifecycle.Event.ON_CREATE;
 import static android.arch.lifecycle.Lifecycle.Event.ON_DESTROY;
 import static com.google.common.truth.Truth.assertThat;
 
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,6 +34,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
@@ -46,6 +50,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -62,6 +67,8 @@ public class SelectUsbConfigPreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private UsbManager mUsbManager;
+    @Mock
+    private PackageManager mPackageManager;
 
     private Context mContext;
     private Lifecycle mLifecycle;
@@ -86,6 +93,7 @@ public class SelectUsbConfigPreferenceControllerTest {
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUsbManager).when(mContext).getSystemService(Context.USB_SERVICE);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
         mValues = mContext.getResources().getStringArray(R.array.usb_configuration_values);
         mSummaries = mContext.getResources().getStringArray(R.array.usb_configuration_titles);
         mController = spy(new SelectUsbConfigPreferenceController(mContext, mLifecycle));
@@ -106,6 +114,30 @@ public class SelectUsbConfigPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, mValues[0]);
 
         verify(mController).setCurrentFunction(mValues[0], false /* usb data unlock */);
+    }
+
+    @Test
+    public void onUsbAccessoryAndHostDisabled_shouldNotBeAvailable() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)).thenReturn(false);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)).thenReturn(
+                false);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void onUsbHostEnabled_shouldBeAvailable() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)).thenReturn(true);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)).thenReturn(
+                false);
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void onUsbAccessoryEnabled_shouldBeAvailable() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_HOST)).thenReturn(false);
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_USB_ACCESSORY)).thenReturn(
+                true);
+        assertTrue(mController.isAvailable());
     }
 
     @Test
