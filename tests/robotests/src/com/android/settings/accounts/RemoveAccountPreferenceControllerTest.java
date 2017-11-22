@@ -40,6 +40,7 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Button;
 
@@ -60,7 +61,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class RemoveAccountPreferenceControllerTest {
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
@@ -70,8 +71,10 @@ public class RemoveAccountPreferenceControllerTest {
     private AccountManager mAccountManager;
     @Mock
     private DevicePolicyManagerWrapper mDevicePolicyManager;
-    @Mock(answer = RETURNS_DEEP_STUBS)
+    @Mock
     private PreferenceFragment mFragment;
+    @Mock
+    private PreferenceManager mPreferenceManager;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -92,7 +95,8 @@ public class RemoveAccountPreferenceControllerTest {
         mContext = spy(shadowContext.getApplicationContext());
 
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        when(mPreferenceManager.getContext()).thenReturn(mContext);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(
