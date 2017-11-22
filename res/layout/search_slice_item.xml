@@ -14,12 +14,21 @@
      limitations under the License.
 -->
 
-<PreferenceScreen
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:key="connected_devices_screen"
-    android:title="@string/connected_devices_dashboard_title">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:background="?android:attr/selectableItemBackground"
+    android:clipToPadding="false">
 
-    <PreferenceCategory
-        android:key="connected_device_list"
-        android:title="@string/connected_device_connected_title"/>
-</PreferenceScreen>
+    <include layout="@layout/search_icon_view"/>
+
+    <android.app.slice.widget.SliceView
+        android:id="@android:id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
