@@ -21,6 +21,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
 
@@ -41,8 +42,13 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
 
     @Override
     public void updateState(Preference preference) {
+        if (!(preference instanceof RestrictedPreference)) {
+            return;
+        }
         preference.setSummary(getTimeZoneOffsetAndName());
-        preference.setEnabled(!mAutoTimeZonePreferenceController.isEnabled());
+        if( !((RestrictedPreference) preference).isDisabledByAdmin()) {
+            preference.setEnabled(!mAutoTimeZonePreferenceController.isEnabled());
+        }
     }
 
     @Override

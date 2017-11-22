@@ -27,6 +27,7 @@ import android.text.format.DateFormat;
 import android.widget.DatePicker;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.Calendar;
@@ -59,9 +60,14 @@ public class DatePreferenceController extends AbstractPreferenceController
 
     @Override
     public void updateState(Preference preference) {
+        if (!(preference instanceof RestrictedPreference)) {
+            return;
+        }
         final Calendar now = Calendar.getInstance();
         preference.setSummary(DateFormat.getLongDateFormat(mContext).format(now.getTime()));
-        preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+        if (!((RestrictedPreference) preference).isDisabledByAdmin()) {
+            preference.setEnabled(!mAutoTimePreferenceController.isEnabled());
+        }
     }
 
     @Override
