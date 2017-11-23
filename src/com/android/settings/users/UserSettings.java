@@ -923,7 +923,7 @@ public class UserSettings extends SettingsPreferenceFragment
                 for (int userId : values[0]) {
                     Bitmap bitmap = mUserManager.getUserIcon(userId);
                     if (bitmap == null) {
-                        bitmap = getDefaultUserIconAsBitmap(userId);
+                        bitmap = getDefaultUserIconAsBitmap(getContext().getResources(), userId);
                     }
                     mUserIcons.append(userId, bitmap);
                 }
@@ -934,7 +934,8 @@ public class UserSettings extends SettingsPreferenceFragment
 
     private Drawable getEncircledDefaultIcon() {
         if (mDefaultIconDrawable == null) {
-            mDefaultIconDrawable = encircle(getDefaultUserIconAsBitmap(UserHandle.USER_NULL));
+            mDefaultIconDrawable = encircle(
+                    getDefaultUserIconAsBitmap(getContext().getResources(), UserHandle.USER_NULL));
         }
         return mDefaultIconDrawable;
     }
@@ -1038,14 +1039,16 @@ public class UserSettings extends SettingsPreferenceFragment
      * Returns a default user icon (as a {@link Bitmap}) for the given user.
      *
      * Note that for guest users, you should pass in {@code UserHandle.USER_NULL}.
+     * @param resources resources object to fetch the user icon.
      * @param userId the user id or {@code UserHandle.USER_NULL} for a non-user specific icon
      */
-    private static Bitmap getDefaultUserIconAsBitmap(int userId) {
+    private static Bitmap getDefaultUserIconAsBitmap(Resources resources, int userId) {
         Bitmap bitmap = null;
         // Try finding the corresponding bitmap in the dark bitmap cache
         bitmap = sDarkDefaultUserBitmapCache.get(userId);
         if (bitmap == null) {
-            bitmap = UserIcons.convertToBitmap(UserIcons.getDefaultUserIcon(userId, false));
+            bitmap = UserIcons.convertToBitmap(
+                    UserIcons.getDefaultUserIcon(resources, userId, false));
             // Save it to cache
             sDarkDefaultUserBitmapCache.put(userId, bitmap);
         }
@@ -1064,7 +1067,7 @@ public class UserSettings extends SettingsPreferenceFragment
             return false;
         }
         UserManager um = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        Bitmap bitmap = getDefaultUserIconAsBitmap(userId);
+        Bitmap bitmap = getDefaultUserIconAsBitmap(context.getResources(), userId);
         um.setUserIcon(userId, bitmap);
 
         return true;
