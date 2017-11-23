@@ -835,7 +835,8 @@ public class SettingsActivity extends SettingsDrawerActivity
                 || somethingChanged;
 
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
-                && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
+                && !um.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES)
+                && !Utils.isMonkeyRunning();
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DevelopmentSettingsDashboardActivity.class.getName()),

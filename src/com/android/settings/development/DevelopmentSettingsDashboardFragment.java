@@ -298,12 +298,15 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @Override
     protected int getPreferenceScreenResId() {
-        Log.d(TAG, "Creating pref screen");
-        return R.xml.development_settings;
+        return Utils.isMonkeyRunning()? R.xml.placeholder_prefs : R.xml.development_settings;
     }
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        if (Utils.isMonkeyRunning()) {
+            mPreferenceControllers = new ArrayList<>();
+            return null;
+        }
         mPreferenceControllers = buildPreferenceControllers(context, getActivity(), getLifecycle(),
                 this /* devOptionsDashboardFragment */,
                 new BluetoothA2dpConfigStore());
@@ -326,6 +329,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private void enableDeveloperOptions() {
+        if (Utils.isMonkeyRunning()) {
+            return;
+        }
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), true);
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller instanceof DeveloperOptionsPreferenceController) {
@@ -335,6 +341,9 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     private void disableDeveloperOptions() {
+        if (Utils.isMonkeyRunning()) {
+            return;
+        }
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(getContext(), false);
         final SystemPropPoker poker = SystemPropPoker.getInstance();
         poker.blockPokes();
