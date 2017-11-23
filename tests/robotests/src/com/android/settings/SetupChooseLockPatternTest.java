@@ -30,6 +30,7 @@ import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.password.SetupChooseLockPattern;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -44,9 +45,10 @@ import org.robolectric.shadows.ShadowPackageManager.ComponentState;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
+                SettingsShadowResourcesImpl.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
                 ShadowEventLogWriter.class,
                 ShadowUtils.class
@@ -62,7 +64,7 @@ public class SetupChooseLockPatternTest {
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
 
-        mActivity =  Robolectric.buildActivity(
+        mActivity = Robolectric.buildActivity(
                 SetupChooseLockPattern.class,
                 SetupChooseLockPattern.modifyIntentForSetup(
                         application,
