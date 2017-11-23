@@ -55,15 +55,13 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AccountDetailDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
     private static final String METADATA_USER_HANDLE = "user_handle";
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private Activity mActivity;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private AccountManager mAccountManager;
     @Mock
@@ -129,11 +127,11 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldAddAccountNameToIntent() {
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest(mContext);
         final FakeFeatureFactory featureFactory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         final DashboardFeatureProviderImpl dashboardFeatureProvider =
-                new DashboardFeatureProviderImpl(mActivity);
+                new DashboardFeatureProviderImpl(mContext);
         final PackageManager packageManager = mock(PackageManager.class);
         ReflectionHelpers.setField(dashboardFeatureProvider, "mPackageManager", packageManager);
         when(packageManager.resolveActivity(any(Intent.class), anyInt()))
