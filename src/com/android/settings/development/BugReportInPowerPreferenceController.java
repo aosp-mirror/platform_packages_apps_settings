@@ -30,7 +30,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class BugReportInPowerPreferenceControllerV2 extends
+public class BugReportInPowerPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
         PreferenceControllerMixin {
 
@@ -48,7 +48,7 @@ public class BugReportInPowerPreferenceControllerV2 extends
     private final UserManager mUserManager;
     private SwitchPreference mPreference;
 
-    public BugReportInPowerPreferenceControllerV2(Context context) {
+    public BugReportInPowerPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPackageManager = new PackageManagerWrapper(context.getPackageManager());

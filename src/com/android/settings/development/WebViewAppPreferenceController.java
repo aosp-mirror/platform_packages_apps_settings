@@ -31,7 +31,7 @@ import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class WebViewAppPreferenceControllerV2 extends
+public class WebViewAppPreferenceController extends
         DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
 
     private static final String TAG = "WebViewAppPrefCtrl";
@@ -42,7 +42,7 @@ public class WebViewAppPreferenceControllerV2 extends
 
     private Preference mPreference;
 
-    public WebViewAppPreferenceControllerV2(Context context) {
+    public WebViewAppPreferenceController(Context context) {
         super(context);
 
         mPackageManager = new PackageManagerWrapper(context.getPackageManager());

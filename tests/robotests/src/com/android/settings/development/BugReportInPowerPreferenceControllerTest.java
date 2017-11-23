@@ -16,12 +16,11 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development
-        .BugReportInPowerPreferenceControllerV2.COMPONENT_NAME;
-import static com.android.settings.development
-        .BugReportInPowerPreferenceControllerV2.SETTING_VALUE_OFF;
-import static com.android.settings.development
-        .BugReportInPowerPreferenceControllerV2.SETTING_VALUE_ON;
+import static com.android.settings.development.BugReportInPowerPreferenceController.COMPONENT_NAME;
+import static com.android.settings.development.BugReportInPowerPreferenceController
+        .SETTING_VALUE_OFF;
+import static com.android.settings.development.BugReportInPowerPreferenceController
+        .SETTING_VALUE_ON;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,7 +52,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BugReportInPowerPreferenceControllerV2Test {
+public class BugReportInPowerPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
@@ -67,7 +66,7 @@ public class BugReportInPowerPreferenceControllerV2Test {
     private SwitchPreference mPreference;
 
     private ContentResolver mContentResolver;
-    private BugReportInPowerPreferenceControllerV2 mController;
+    private BugReportInPowerPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -75,7 +74,7 @@ public class BugReportInPowerPreferenceControllerV2Test {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mContext.getContentResolver()).thenReturn(mContentResolver);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new BugReportInPowerPreferenceControllerV2(mContext);
+        mController = new BugReportInPowerPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
     }

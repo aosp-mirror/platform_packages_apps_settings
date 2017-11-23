@@ -23,7 +23,7 @@ import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 
 /**
- * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceControllerV2}
+ * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceController}
  */
 @Deprecated
 public class WebViewAppPreferenceController extends DefaultAppPreferenceController {
