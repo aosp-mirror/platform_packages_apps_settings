@@ -101,6 +101,13 @@ public class SettingsShadowResources extends ShadowResources {
         return directlyOn(realResources, Resources.class).getColorStateList(id, theme);
     }
 
+    /**
+     * Deprecated because SDK 24+ uses
+     * {@link SettingsShadowResourcesImpl#loadDrawable(Resources, TypedValue, int, int, Theme)}
+     *
+     * TODO: Delete when all tests have been migrated to sdk 26
+     */
+    @Deprecated
     @Implementation
     public Drawable loadDrawable(TypedValue value, int id, Theme theme)
             throws NotFoundException {

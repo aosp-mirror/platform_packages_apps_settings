@@ -17,10 +17,11 @@
 package com.android.settings.datetime;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
+import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,12 +48,13 @@ public class TimePreferenceControllerTest {
     private AutoTimePreferenceController mAutoTimePreferenceController;
 
     private TimePreferenceController mController;
-    private Preference mPreference;
+    private RestrictedPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new Preference(ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new RestrictedPreference(
+                ShadowApplication.getInstance().getApplicationContext());
         mController = new TimePreferenceController(mContext, mHost, mAutoTimePreferenceController);
     }
 
@@ -62,6 +65,9 @@ public class TimePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeEnabled_shouldDisablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         when(mAutoTimePreferenceController.isEnabled()).thenReturn(true);
         mController.updateState(mPreference);
 
@@ -70,6 +76,9 @@ public class TimePreferenceControllerTest {
 
     @Test
     public void updateState_autoTimeDisabled_shouldEnablePref() {
+        // Make sure not disabled by admin.
+        mPreference.setDisabledByAdmin(null);
+
         when(mAutoTimePreferenceController.isEnabled()).thenReturn(false);
         mController.updateState(mPreference);
 
