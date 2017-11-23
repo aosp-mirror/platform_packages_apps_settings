@@ -154,7 +154,7 @@ public class SiteMapManager {
                 continue;
             }
             // Build parent-child mPairs for all children listed under this key.
-            for (Tile tile : category.tiles) {
+            for (Tile tile : category.getTiles()) {
                 final String childTitle = tile.title.toString();
                 String childClass = null;
                 if (tile.metaData != null) {

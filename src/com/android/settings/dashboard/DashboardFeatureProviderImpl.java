@@ -91,7 +91,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             Log.d(TAG, "NO dashboard tiles for " + TAG);
             return null;
         }
-        final List<Tile> tiles = category.tiles;
+        final List<Tile> tiles = category.getTiles();
         if (tiles == null || tiles.isEmpty()) {
             Log.d(TAG, "tile list is empty, skipping category " + category.title);
             return null;

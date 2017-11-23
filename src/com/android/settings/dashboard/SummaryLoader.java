@@ -216,7 +216,7 @@ public class SummaryLoader {
         if (category == null) {
             return;
         }
-        for (Tile tile : category.tiles) {
+        for (Tile tile : category.getTiles()) {
             final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
             if (mSummaryTextMap.containsKey(key)) {
                 tile.summary = mSummaryTextMap.get(key);
@@ -250,12 +250,13 @@ public class SummaryLoader {
     }
 
     private Tile getTileFromCategory(DashboardCategory category, ComponentName component) {
-        if (category == null || category.tiles == null) {
+        if (category == null || category.getTilesCount() == 0) {
             return null;
         }
-        final int tileCount = category.tiles.size();
+        final List<Tile> tiles = category.getTiles();
+        final int tileCount = tiles.size();
         for (int j = 0; j < tileCount; j++) {
-            final Tile tile = category.tiles.get(j);
+            final Tile tile = tiles.get(j);
             if (component.equals(tile.intent.getComponent())) {
                 return tile;
             }
@@ -291,10 +292,10 @@ public class SummaryLoader {
                 case MSG_GET_CATEGORY_TILES_AND_SET_LISTENING:
                     final DashboardCategory category =
                             mDashboardFeatureProvider.getTilesForCategory(mCategoryKey);
-                    if (category == null || category.tiles == null) {
+                    if (category == null || category.getTilesCount() == 0) {
                         return;
                     }
-                    final List<Tile> tiles = category.tiles;
+                    final List<Tile> tiles = category.getTiles();
                     for (Tile tile : tiles) {
                         makeProviderW(tile);
                     }
