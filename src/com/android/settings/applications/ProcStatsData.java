@@ -372,6 +372,10 @@ public class ProcStatsData {
         double totalScale;
         long memTotalTime;
 
+        public double getWeightToRam() {
+            return weightToRam;
+        }
+
         private MemInfo(Context context, ProcessStats.TotalMemoryUseCollection totalMem,
                 long memTotalTime) {
             this.memTotalTime = memTotalTime;
