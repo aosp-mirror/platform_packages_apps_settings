@@ -17,11 +17,17 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -39,7 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class DefaultAppInfoTest {
 
     @Mock
@@ -50,15 +56,24 @@ public class DefaultAppInfoTest {
     private PackageManager mPackageManager;
     @Mock
     private PackageManagerWrapper mPackageManagerWrapper;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
+    @Mock
+    private Drawable mIcon;
 
     private Context mContext;
     private DefaultAppInfo mInfo;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManagerWrapper.getPackageManager()).thenReturn(mPackageManager);
+        when(mPackageManagerWrapper.getApplicationInfoAsUser(anyString(), anyInt(),
+                anyInt())).thenReturn(mApplicationInfo);
+        when(mPackageManager.loadUnbadgedItemIcon(mPackageItemInfo, mApplicationInfo)).thenReturn(
+                mIcon);
     }
 
     @Test
