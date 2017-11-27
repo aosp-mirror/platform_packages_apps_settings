@@ -16,13 +16,30 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Application;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Configuration;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -31,14 +48,13 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -47,25 +63,9 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class RecentAppsPreferenceControllerTest {
 
     @Mock
@@ -76,14 +76,18 @@ public class RecentAppsPreferenceControllerTest {
     private Preference mSeeAllPref;
     @Mock
     private PreferenceCategory mDivider;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mMockContext;
     @Mock
     private UsageStatsManager mUsageStatsManager;
     @Mock
     private UserManager mUserManager;
     @Mock
     private ApplicationsState mAppState;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private ApplicationsState.AppEntry mAppEntry;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
 
     private Context mContext;
     private RecentAppsPreferenceController mController;
@@ -91,12 +95,11 @@ public class RecentAppsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mMockContext.getSystemService(Context.USAGE_STATS_SERVICE))
-                .thenReturn(mUsageStatsManager);
-        when(mMockContext.getSystemService(Context.USER_SERVICE))
-                .thenReturn(mUserManager);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mUsageStatsManager).when(mContext).getSystemService(Context.USAGE_STATS_SERVICE);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
 
-        mContext = RuntimeEnvironment.application;
         mController = new RecentAppsPreferenceController(mContext, mAppState, null);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
 
@@ -125,7 +128,7 @@ public class RecentAppsPreferenceControllerTest {
     @Test
     public void onDisplayAndUpdateState_shouldRefreshUi() {
         mController = spy(
-                new RecentAppsPreferenceController(mMockContext, (Application) null, null));
+                new RecentAppsPreferenceController(mContext, (Application) null, null));
 
         doNothing().when(mController).refreshUi(mContext);
 
@@ -136,11 +139,8 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
     public void display_shouldNotShowRecents_showAppInfoPreference() {
-        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-                .thenReturn(false);
-
         mController.displayPreference(mScreen);
 
         verify(mCategory, never()).addPreference(any(Preference.class));
@@ -152,8 +152,6 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void display_showRecents() {
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-                .thenReturn(true);
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         final UsageStats stat2 = new UsageStats();
@@ -172,20 +170,17 @@ public class RecentAppsPreferenceControllerTest {
 
         // stat1, stat2 are valid apps. stat3 is invalid.
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
+                .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
+                .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
                 .thenReturn(null);
-        when(mMockContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(new ResolveInfo());
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
+                new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
-        final Configuration configuration = new Configuration();
-        configuration.locale = Locale.US;
-        when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
+        mAppEntry.info = mApplicationInfo;
 
-        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
 
         verify(mCategory).setTitle(R.string.recent_app_category_title);
@@ -200,8 +195,6 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void display_hasRecentButNoneDisplayable_showAppInfo() {
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-                .thenReturn(true);
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         final UsageStats stat2 = new UsageStats();
@@ -218,12 +211,11 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(mock(ApplicationsState.AppEntry.class));
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
                 .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mMockContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(new ResolveInfo());
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
+                new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
 
-        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
 
         verify(mCategory, never()).addPreference(any(Preference.class));
@@ -234,8 +226,6 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void display_showRecents_formatSummary() {
-        when(mMockContext.getResources().getBoolean(R.bool.config_display_recent_apps))
-            .thenReturn(true);
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         stat1.mLastTimeUsed = System.currentTimeMillis();
@@ -243,17 +233,13 @@ public class RecentAppsPreferenceControllerTest {
         stats.add(stat1);
 
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-            .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mMockContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-            .thenReturn(new ResolveInfo());
+                .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
+                new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-            .thenReturn(stats);
+                .thenReturn(stats);
+        mAppEntry.info = mApplicationInfo;
 
-        final Configuration configuration = new Configuration();
-        configuration.locale = Locale.US;
-        when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
-
-        mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
 
         verify(mCategory).addPreference(argThat(summaryMatches("0 min. ago")));
