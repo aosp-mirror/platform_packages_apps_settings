@@ -53,7 +53,7 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows=ShadowEventLogWriter.class)
 public class BluetoothPairingDialogTest {
 

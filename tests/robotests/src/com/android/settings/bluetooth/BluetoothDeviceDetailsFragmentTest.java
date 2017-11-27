@@ -53,7 +53,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class BluetoothDeviceDetailsFragmentTest {
     private BluetoothDeviceDetailsFragment mFragment;
     private Context mContext;
