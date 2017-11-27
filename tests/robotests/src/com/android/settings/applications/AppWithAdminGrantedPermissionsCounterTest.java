@@ -56,7 +56,7 @@ import static org.mockito.Mockito.when;
  * Tests for {@link InstalledAppCounter}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     private final String APP_1 = "app1";
