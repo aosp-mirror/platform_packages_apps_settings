@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 package com.android.settings.development;
 
 import android.content.Context;
@@ -23,69 +22,76 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class CameraLaserSensorPreferenceControllerV2 extends
-        DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class ConnectivityMonitorPreferenceController extends
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin {
 
-    private static final String KEY_CAMERA_LASER_SENSOR_SWITCH = "camera_laser_sensor_switch";
+    private static final String KEY_CONNECTIVITY_MONITOR_SWITCH = "connectivity_monitor_switch";
     @VisibleForTesting
     static final String BUILD_TYPE = "ro.build.type";
     @VisibleForTesting
-    static final String PROPERTY_CAMERA_LASER_SENSOR = "persist.camera.stats.disablehaf";
+    static final String PROPERTY_CONNECTIVITY_MONITOR = "persist.radio.enable_tel_mon";
+
     @VisibleForTesting
-    static final int ENABLED = 0;
+    static final String ENABLED_STATUS = "enabled";
     @VisibleForTesting
-    static final int DISABLED = 2;
+    static final String DISABLED_STATUS = "disabled";
+    @VisibleForTesting
+    static final String USER_ENABLED_STATUS = "user_enabled";
+    @VisibleForTesting
+    static final String USER_DISABLED_STATUS = "user_disabled";
+
     @VisibleForTesting
     static final String USERDEBUG_BUILD = "userdebug";
     @VisibleForTesting
     static final String ENG_BUILD = "eng";
-    @VisibleForTesting
-    static final String USER_BUILD = "user";
 
     private SwitchPreference mPreference;
 
-    public CameraLaserSensorPreferenceControllerV2(Context context) {
+    public ConnectivityMonitorPreferenceController(Context context) {
         super(context);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        final String buildType = SystemProperties.get(BUILD_TYPE);
-        return mContext.getResources().getBoolean(R.bool.config_show_camera_laser_sensor) &&
-                (TextUtils.equals(USERDEBUG_BUILD, buildType) || TextUtils.equals(ENG_BUILD,
-                        buildType));
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_CAMERA_LASER_SENSOR_SWITCH;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
+        mPreference = (SwitchPreference) screen.findPreference(KEY_CONNECTIVITY_MONITOR_SWITCH);
+    }
+
+    @Override
+    public String getPreferenceKey() {
+        return KEY_CONNECTIVITY_MONITOR_SWITCH;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        final String buildType = SystemProperties.get(BUILD_TYPE);
+        return mContext.getResources().getBoolean(R.bool.config_show_connectivity_monitor)
+                && (TextUtils.equals(buildType, USERDEBUG_BUILD)
+                || TextUtils.equals(buildType, ENG_BUILD));
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        String value = Integer.toString(isEnabled ? ENABLED : DISABLED);
-        SystemProperties.set(PROPERTY_CAMERA_LASER_SENSOR, value);
+        SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR,
+                isEnabled ? USER_ENABLED_STATUS : USER_DISABLED_STATUS);
+        Toast.makeText(mContext, R.string.connectivity_monitor_toast,
+                Toast.LENGTH_LONG).show();
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean enabled = isLaserSensorEnabled();
+        final boolean enabled = isConnectivityMonitorEnabled();
         mPreference.setChecked(enabled);
     }
 
@@ -96,15 +102,15 @@ public class CameraLaserSensorPreferenceControllerV2 extends
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        SystemProperties.set(PROPERTY_CAMERA_LASER_SENSOR, Integer.toString(DISABLED));
+        SystemProperties.set(PROPERTY_CONNECTIVITY_MONITOR, USER_DISABLED_STATUS);
         mPreference.setChecked(false);
         mPreference.setEnabled(false);
     }
 
-    private boolean isLaserSensorEnabled() {
-        final String prop = SystemProperties.get(PROPERTY_CAMERA_LASER_SENSOR,
-                Integer.toString(ENABLED));
-        return TextUtils.equals(Integer.toString(ENABLED), prop);
+    private boolean isConnectivityMonitorEnabled() {
+        final String cmStatus = SystemProperties.get(PROPERTY_CONNECTIVITY_MONITOR,
+                DISABLED_STATUS);
+        return TextUtils.equals(ENABLED_STATUS, cmStatus) || TextUtils.equals(USER_ENABLED_STATUS,
+                cmStatus);
     }
-
 }

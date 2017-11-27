@@ -22,14 +22,14 @@ import android.os.UserManager;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class BugReportPreferenceControllerV2 extends DeveloperOptionsPreferenceController implements
+public class BugReportPreferenceController extends DeveloperOptionsPreferenceController implements
         PreferenceControllerMixin {
 
     private static final String KEY_BUGREPORT = "bugreport";
 
     private final UserManager mUserManager;
 
-    public BugReportPreferenceControllerV2(Context context) {
+    public BugReportPreferenceController(Context context) {
         super(context);
 
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);

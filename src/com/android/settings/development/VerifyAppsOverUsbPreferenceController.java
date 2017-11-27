@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Controller to manage the state of "Verify apps over USB" toggle.
  */
-public class VerifyAppsOverUsbPreferenceControllerV2 extends
+public class VerifyAppsOverUsbPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
         AdbOnChangeListener, PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
@@ -70,7 +70,7 @@ public class VerifyAppsOverUsbPreferenceControllerV2 extends
     // This field is accessed using reflection in the test, please keep name in sync.
     private final PackageManagerWrapper mPackageManager;
 
-    public VerifyAppsOverUsbPreferenceControllerV2(Context context) {
+    public VerifyAppsOverUsbPreferenceController(Context context) {
         super(context);
 
         mPackageManager = new PackageManagerWrapper(context.getPackageManager());

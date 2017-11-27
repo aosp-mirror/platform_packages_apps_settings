@@ -17,20 +17,42 @@
 package com.android.settings.development;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.development.AbstractLogdSizePreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.development.AbstractLogpersistPreferenceController;
 
-public class LogdSizePreferenceControllerV2 extends AbstractLogdSizePreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class LogPersistPreferenceController extends
+        AbstractLogpersistPreferenceController implements PreferenceControllerMixin {
 
+    private final DevelopmentSettingsDashboardFragment mFragment;
     private ListPreference mPreference;
 
-    public LogdSizePreferenceControllerV2(Context context) {
-        super(context);
+
+    public LogPersistPreferenceController(Context context,
+            DevelopmentSettingsDashboardFragment fragment, Lifecycle lifecycle) {
+        super(context, lifecycle);
+
+        mFragment = fragment;
+    }
+
+    @Override
+    public void showConfirmationDialog(@Nullable Preference preference) {
+        DisableLogPersistWarningDialog.show(mFragment);
+    }
+
+    @Override
+    public void dismissConfirmationDialog() {
+        // intentional no-op
+    }
+
+    @Override
+    public boolean isConfirmationDialogShowing() {
+        return false;
     }
 
     @Override
@@ -42,7 +64,7 @@ public class LogdSizePreferenceControllerV2 extends AbstractLogdSizePreferenceCo
 
     @Override
     public void updateState(Preference preference) {
-        updateLogdSizeValues();
+        updateLogpersistValues();
     }
 
     @Override
@@ -52,7 +74,16 @@ public class LogdSizePreferenceControllerV2 extends AbstractLogdSizePreferenceCo
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        writeLogdSizeOption(null /* new value */);
+        writeLogpersistOption(null /* new value */, true);
         mPreference.setEnabled(false);
+    }
+
+    public void onDisableLogPersistDialogConfirmed() {
+        setLogpersistOff(true);
+        updateLogpersistValues();
+    }
+
+    public void onDisableLogPersistDialogRejected() {
+        updateLogpersistValues();
     }
 }

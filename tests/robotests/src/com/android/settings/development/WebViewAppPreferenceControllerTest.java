@@ -43,7 +43,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class WebViewAppPreferenceControllerV2Test {
+public class WebViewAppPreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mPreferenceScreen;
@@ -57,13 +57,13 @@ public class WebViewAppPreferenceControllerV2Test {
     private DefaultAppInfo mAppInfo;
 
     private Context mContext;
-    private WebViewAppPreferenceControllerV2 mController;
+    private WebViewAppPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = spy(new WebViewAppPreferenceControllerV2(mContext));
+        mController = spy(new WebViewAppPreferenceController(mContext));
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
         ReflectionHelpers.setField(mController, "mWebViewUpdateServiceWrapper",
                 mWebViewUpdateServiceWrapper);
