@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
-import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Loader;
@@ -28,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
-import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -69,21 +67,22 @@ import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
  * consumed since the last time it was unplugged.
+ *
+ * This is the battery page used in Android O with the app usage list. It is also used for battery
+ * debug.
  */
-public class PowerUsageSummary extends PowerUsageBase implements
+public class PowerUsageSummaryLegacy extends PowerUsageBase implements
         AnomalyDialogListener, OnLongClickListener, OnClickListener {
 
-    static final String TAG = "PowerUsageSummary";
+    static final String TAG = "PowerUsageSummaryLegacy";
 
     private static final boolean DEBUG = false;
     private static final boolean USE_FAKE_DATA = false;
@@ -139,8 +138,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
-    private LoaderManager.LoaderCallbacks<List<Anomaly>> mAnomalyLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<List<Anomaly>>() {
+    private LoaderCallbacks<List<Anomaly>> mAnomalyLoaderCallbacks =
+            new LoaderCallbacks<List<Anomaly>>() {
 
                 @Override
                 public Loader<List<Anomaly>> onCreateLoader(int id, Bundle args) {
@@ -167,8 +166,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
             };
 
     @VisibleForTesting
-    LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<BatteryInfo>() {
+    LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
+            new LoaderCallbacks<BatteryInfo>() {
 
                 @Override
                 public Loader<BatteryInfo> onCreateLoader(int i, Bundle bundle) {
@@ -186,7 +185,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
             };
 
-    LoaderManager.LoaderCallbacks<List<BatteryInfo>> mBatteryInfoDebugLoaderCallbacks =
+    LoaderCallbacks<List<BatteryInfo>> mBatteryInfoDebugLoaderCallbacks =
             new LoaderCallbacks<List<BatteryInfo>>() {
                 @Override
                 public Loader<List<BatteryInfo>> onCreateLoader(int i, Bundle bundle) {
@@ -251,7 +250,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY_V2;
+        return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY;
     }
 
     @Override
@@ -301,7 +300,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.power_usage_summary;
+        return R.xml.power_usage_summary_legacy;
     }
 
     @Override
@@ -609,8 +608,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     boolean shouldHideSipper(BatterySipper sipper) {
         // Don't show over-counted and unaccounted in any condition
-        return sipper.drainType == BatterySipper.DrainType.OVERCOUNTED
-                || sipper.drainType == BatterySipper.DrainType.UNACCOUNTED;
+        return sipper.drainType == DrainType.OVERCOUNTED
+                || sipper.drainType == DrainType.UNACCOUNTED;
     }
 
     @VisibleForTesting
@@ -863,7 +862,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 BatteryInfo.getBatteryInfo(mContext, new BatteryInfo.Callback() {
                     @Override
                     public void onBatteryInfoLoaded(BatteryInfo info) {
-                        mLoader.setSummary(SummaryProvider.this, info.chargeLabel);
+                        mLoader.setSummary(PowerUsageSummaryLegacy.SummaryProvider.this, info.chargeLabel);
                     }
                 }, true /* shortString */);
             });
@@ -878,29 +877,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
             }
         }
     }
-
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.power_usage_summary;
-                    return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    List<String> niks = super.getNonIndexableKeys(context);
-                    niks.add(KEY_HIGH_USAGE);
-                    niks.add(KEY_BATTERY_SAVER_SUMMARY);
-                    // Duplicates in display
-                    niks.add(KEY_AUTO_BRIGHTNESS);
-                    niks.add(KEY_SCREEN_TIMEOUT);
-                    niks.add(KEY_AMBIENT_DISPLAY);
-                    return niks;
-                }
-            };
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = new SummaryLoader.SummaryProviderFactory() {
