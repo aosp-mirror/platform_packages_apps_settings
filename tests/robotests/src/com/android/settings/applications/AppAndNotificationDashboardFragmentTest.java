@@ -16,32 +16,35 @@
 
 package com.android.settings.applications;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.notification.EmergencyBroadcastPreferenceController;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AppAndNotificationDashboardFragmentTest {
 
     @Test
+    @Config(shadows = {ShadowEmergencyBroadcastPreferenceController.class})
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
         UserManager manager = mock(UserManager.class);
@@ -55,5 +58,14 @@ public class AppAndNotificationDashboardFragmentTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Implements(EmergencyBroadcastPreferenceController.class)
+    public static class ShadowEmergencyBroadcastPreferenceController {
+
+        @Implementation
+        public boolean isAvailable() {
+            return true;
+        }
     }
 }

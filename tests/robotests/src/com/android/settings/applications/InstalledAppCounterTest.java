@@ -61,7 +61,7 @@ import java.util.Set;
  * Tests for {@link InstalledAppCounter}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {ShadowUserManager.class})
 public final class InstalledAppCounterTest {
 
