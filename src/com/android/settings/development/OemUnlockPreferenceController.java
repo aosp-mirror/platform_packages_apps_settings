@@ -98,7 +98,7 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        mPreference.setChecked(mOemLockManager.isOemUnlockAllowed());
+        mPreference.setChecked(isOemUnlockedAllowed());
         updateOemUnlockSettingDescription();
         // Showing mEnableOemUnlock preference as device has persistent data block.
         mPreference.setDisabledByAdmin(null);
@@ -183,7 +183,8 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     /**
      * Returns {@code true} if the bootloader has been unlocked. Otherwise, returns {code false}.
      */
-    private boolean isBootloaderUnlocked() {
+    @VisibleForTesting
+    boolean isBootloaderUnlocked() {
         return mOemLockManager.isDeviceOemUnlocked();
     }
 
@@ -214,6 +215,11 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         return mOemLockManager.isOemUnlockAllowedByCarrier()
                 && !mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET,
                 userHandle);
+    }
+
+    @VisibleForTesting
+    boolean isOemUnlockedAllowed() {
+        return mOemLockManager.isOemUnlockAllowed();
     }
 
 }
