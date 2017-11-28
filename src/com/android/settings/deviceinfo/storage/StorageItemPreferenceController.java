@@ -20,7 +20,6 @@ import android.app.Fragment;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.net.TrafficStats;
@@ -314,7 +313,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Intent getPhotosIntent() {
-        Bundle args = new Bundle(2);
+        Bundle args = getWorkAnnotatedBundle(2);
         args.putString(
                 ManageApplications.EXTRA_CLASSNAME, Settings.PhotosStorageActivity.class.getName());
         args.putInt(
@@ -336,8 +335,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             return null;
         }
 
-        Bundle args = new Bundle();
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+        Bundle args = getWorkAnnotatedBundle(4);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -353,8 +351,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
             return null;
         }
 
-        Bundle args = new Bundle();
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+        Bundle args = getWorkAnnotatedBundle(3);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
@@ -365,8 +362,7 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Intent getGamesIntent() {
-        Bundle args = new Bundle(1);
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+        Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.GamesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,
@@ -375,13 +371,19 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
     }
 
     private Intent getMoviesIntent() {
-        Bundle args = new Bundle(1);
-        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+        Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.MoviesStorageActivity.class.getName());
         return Utils.onBuildStartFragmentIntent(mContext,
                 ManageApplications.class.getName(), args, null, R.string.storage_movies_tv,
                 null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+    }
+
+    private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
+        Bundle args = new Bundle(2 + additionalCapacity);
+        args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
+        args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
+        return args;
     }
 
     private Intent getFilesIntent() {

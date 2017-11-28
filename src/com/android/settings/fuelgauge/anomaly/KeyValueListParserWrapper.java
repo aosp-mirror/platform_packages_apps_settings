@@ -44,6 +44,14 @@ public interface KeyValueListParserWrapper {
     void setString(String str) throws IllegalArgumentException;
 
     /**
+     * Get the value for key as a string.
+     * @param key The key to lookup.
+     * @param defaultValue The value to return if the key was not found.
+     * @return the string value associated with the key.
+     */
+    String getString(String key, String defaultValue);
+
+    /**
      * Get the value for key as a boolean.
      * @param key The key to lookup.
      * @param defaultValue The value to return if the key was not found.

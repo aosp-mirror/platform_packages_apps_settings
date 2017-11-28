@@ -41,10 +41,11 @@ import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettings;
+import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.AmbientDisplaySettings;
@@ -133,7 +134,6 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_wireless);
         addIndex(BluetoothSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_bluetooth);
         addIndex(SimSettings.class, NO_DATA_RES_ID, R.drawable.ic_sim_sd);
-        addIndex(DataPlanUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageSummary.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(DataUsageMeteredSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_data_usage);
         addIndex(ScreenZoomSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
@@ -188,6 +188,7 @@ public final class SearchIndexableResources {
         addIndex(PrintSettingsFragment.class, NO_DATA_RES_ID, R.drawable.ic_settings_print);
         addIndex(DevelopmentSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_development);
         addIndex(DeviceInfoSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
+        addIndex(Status.class, NO_DATA_RES_ID, 0 /* icon */);
         addIndex(LegalSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_about);
         addIndex(ZenModeVisualInterruptionSettings.class,
                 R.xml.zen_mode_visual_interruptions_settings,
@@ -211,6 +212,10 @@ public final class SearchIndexableResources {
                 R.drawable.ic_settings_notifications);
         addIndex(DreamSettings.class, NO_DATA_RES_ID, R.drawable.ic_settings_display);
         addIndex(SupportDashboardActivity.class, NO_DATA_RES_ID, R.drawable.ic_help);
+        addIndex(
+                AutomaticStorageManagerSettings.class,
+                NO_DATA_RES_ID,
+                R.drawable.ic_settings_storage);
     }
 
     private SearchIndexableResources() {

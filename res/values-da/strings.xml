@@ -1003,7 +1003,10 @@
     <string name="search_clear_history" msgid="4196658962573162457">"Ryd historik"</string>
     <string name="display_settings" msgid="7965901687241669598">"Skærm"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Roter skærm automatisk"</string>
-    <string name="color_mode_title" msgid="3159275920408338215">"Levende farver"</string>
+    <string name="color_mode_title" msgid="9186249332902370471">"Farver"</string>
+    <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturlig"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Forstærket"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"Mættet"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Skift automatisk retning, når tabletcomputeren drejes"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Skift automatisk retning, når telefonen drejes"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Skift automatisk retning, når tabletcomputeren drejes"</string>
@@ -1070,7 +1073,7 @@
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Indstillinger"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"Automatisk lysstyrke"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"Løft enheden for at vække den"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Inaktiv skærm"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"Aktiv låseskærm"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"Altid aktiveret/øget batteriforbrug"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"Nye underretninger"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"Hvornår skal den vises"</string>
@@ -2776,7 +2779,7 @@
     <string name="keywords_text_to_speech_output" msgid="5150660047085754699">"hastighed, sprog, standard, tale, indtaling, tts, hjælpefunktion, skærmlæser, blind"</string>
     <string name="keywords_date_and_time" msgid="758325881602648204">"ur, militærtid"</string>
     <string name="keywords_network_reset" msgid="6024276007080940820">"nulstil, gendan, fabriksdata"</string>
-    <string name="keywords_factory_data_reset" msgid="5894970373671252165">"slet, slet, gendan, ryd, fjern"</string>
+    <string name="keywords_factory_data_reset" msgid="5894970373671252165">"ryd, slet, gendan, rens, fjern"</string>
     <string name="keywords_printing" msgid="1701778563617114846">"printer"</string>
     <string name="keywords_sounds" msgid="7146245090127541167">"højttalerbip"</string>
     <string name="keywords_sounds_and_notifications_interruptions" msgid="5426093074031208917">"forstyr ikke, afbryd, afbrydelse, pause"</string>
@@ -2888,8 +2891,7 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Appunderretninger"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Underretningskategori"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Vigtighed"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Tillad lyd"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Vis aldrig underretninger"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Ingen lyd eller pop op-visning"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Ingen lyd"</string>
@@ -2916,7 +2918,7 @@
     </plurals>
     <string name="no_notification_listeners" msgid="3487091564454192821">"Ingen installerede apps har anmodet om adgang til underretninger."</string>
     <string name="notification_listener_security_warning_title" msgid="5522924135145843279">"Tillad adgang til underretninger for <xliff:g id="SERVICE">%1$s</xliff:g>?"</string>
-    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller udløse handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
+    <string name="notification_listener_security_warning_summary" msgid="119203147791040151">"<xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g> kan læse alle underretninger, herunder personlige oplysninger såsom navne på kontaktpersoner og teksten i de meddelelser, du modtager. Underretningslytteren kan også afvise underretninger eller aktivere handlingsknapper, de indeholder. \n\nDette gør det også muligt for appen at slå Forstyr ikke til eller fra og ændre relaterede indstillinger."</string>
     <string name="notification_listener_disable_warning_summary" msgid="6738915379642948000">"Hvis du slår adgang til underretninger fra for <xliff:g id="NOTIFICATION_LISTENER_NAME">%1$s</xliff:g>, slås adgangen til Forstyr ikke muligvis også fra."</string>
     <string name="notification_listener_disable_warning_confirm" msgid="8333442186428083057">"Slå fra"</string>
     <string name="notification_listener_disable_warning_cancel" msgid="8586417377104211584">"Annuller"</string>
@@ -3400,6 +3402,7 @@
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Genstart enheden for at anvende ændringen i forbindelse med Overvågning af telefoni"</string>
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Camera HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Genstart enheden for at anvende ændringen i forbindelse med Camera HAL HDR+"</string>
+    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Kameraets lasersensor"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiske systemopdateringer"</string>
     <string name="usage" msgid="2977875522080448986">"Forbrug"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobildataforbrug"</string>
@@ -3714,7 +3717,7 @@
     <string name="automatic_storage_manager_deactivation_warning" msgid="5605210730828410482">"Slå lagerstyring fra?"</string>
     <string name="storage_movies_tv" msgid="5498394447562086890">"Film- og tv-apps"</string>
     <string name="carrier_provisioning" msgid="4398683675591893169">"Oplysninger om mobilselskab"</string>
-    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Udløs mobilselskab"</string>
+    <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"Aktivér mobilselskab"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"Hvad er nyt og spændende?"</string>
     <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"Få en rundvisning på din nye telefon"</string>
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Få en rundvisning på din nye tablet"</string>

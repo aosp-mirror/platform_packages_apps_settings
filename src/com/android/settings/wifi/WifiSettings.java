@@ -38,6 +38,7 @@ import android.net.wifi.WpsInfo;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.HandlerThread;
+import android.os.PowerManager;
 import android.os.Process;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -87,7 +88,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         WifiDialog.WifiDialogListener {
 
     private static final String TAG = "WifiSettings";
-    private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
     private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
@@ -385,8 +385,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         setProgressBarVisible(true);
         mWifiTracker.forceUpdate();
-        if (DEBUG) {
-            Log.d(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
+        if (WifiTracker.sVerboseLogging) {
+            Log.i(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
         }
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         updateAccessPointPreferences();
@@ -774,8 +774,8 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-        if (DEBUG) {
-            Log.d(TAG, "updateAccessPoints called for: " + accessPoints);
+        if (WifiTracker.sVerboseLogging) {
+            Log.i(TAG, "updateAccessPoints called for: " + accessPoints);
         }
 
         boolean hasAvailableAccessPoints = false;
@@ -920,9 +920,8 @@ public class WifiSettings extends RestrictedSettingsFragment
                 getContentResolver(), Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultWakeupAvailable)
                 == 1;
         if (wifiWakeupAvailable) {
-            boolean wifiWakeupEnabled = Settings.Global.getInt(
-                    getContentResolver(), Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1;
-            mConfigureWifiSettingsPreference.setSummary(getString(wifiWakeupEnabled
+            mConfigureWifiSettingsPreference.setSummary(getString(
+                    isWifiWakeupEnabled()
                     ? R.string.wifi_configure_settings_preference_summary_wakeup_on
                     : R.string.wifi_configure_settings_preference_summary_wakeup_off));
         }
@@ -935,6 +934,20 @@ public class WifiSettings extends RestrictedSettingsFragment
         } else {
             mAdditionalSettingsPreferenceCategory.removePreference(mSavedNetworksPreference);
         }
+    }
+
+    private boolean isWifiWakeupEnabled() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        ContentResolver contentResolver = getContentResolver();
+        return Settings.Global.getInt(contentResolver,
+                        Settings.Global.WIFI_WAKEUP_ENABLED, 0) == 1
+                && Settings.Global.getInt(contentResolver,
+                        Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
+                && Settings.Global.getInt(contentResolver,
+                        Settings.Global.AIRPLANE_MODE_ON, 0) == 0
+                && Settings.Global.getInt(contentResolver,
+                        Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1
+                && !powerManager.isPowerSaveMode();
     }
 
     private void setOffMessage() {

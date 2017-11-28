@@ -37,6 +37,7 @@ import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -89,6 +90,8 @@ public class DashboardAdapterTest {
     private ArgumentCaptor<Integer> mActionCategoryCaptor = ArgumentCaptor.forClass(Integer.class);
     @Captor
     private ArgumentCaptor<String> mActionPackageCaptor = ArgumentCaptor.forClass(String.class);
+    @Captor
+    private ArgumentCaptor<Pair> mTaggedDataCaptor = ArgumentCaptor.forClass(Pair.class);
     private FakeFeatureFactory mFactory;
     private DashboardAdapter mDashboardAdapter;
     private DashboardAdapter.SuggestionAndConditionHeaderHolder mSuggestionHolder;
@@ -123,112 +126,143 @@ public class DashboardAdapterTest {
     @Test
     public void testSuggestionsLogs_NotExpanded() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         verify(mFactory.metricsFeatureProvider, times(2)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg2"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly("pkg1", "pkg2");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_NotExpandedAndPaused() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         mDashboardAdapter.onPause();
+
         verify(mFactory.metricsFeatureProvider, times(4)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg1", "pkg2"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION};
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg2", "pkg1", "pkg2");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_Expanded() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
+
         verify(mFactory.metricsFeatureProvider, times(3)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg3"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg2", "pkg3");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedAndPaused() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
+
         verify(mFactory.metricsFeatureProvider, times(6)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg2", "pkg3", "pkg1", "pkg2", "pkg3"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg2", "pkg3", "pkg1", "pkg2", "pkg3");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedAfterPause() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
+
         verify(mFactory.metricsFeatureProvider, times(7)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{
-                "pkg1", "pkg2", "pkg1", "pkg2", "pkg1", "pkg2", "pkg3"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg2", "pkg1", "pkg2", "pkg1", "pkg2", "pkg3");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedAfterPauseAndPausedAgain() {
         setupSuggestions(makeSuggestions("pkg1", "pkg2", "pkg3"));
+
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
+
         verify(mFactory.metricsFeatureProvider, times(10)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{
-                "pkg1", "pkg2", "pkg1", "pkg2", "pkg1", "pkg2", "pkg3", "pkg1", "pkg2", "pkg3"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
@@ -238,63 +272,82 @@ public class DashboardAdapterTest {
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg2", "pkg1", "pkg2", "pkg1", "pkg2", "pkg3", "pkg1", "pkg2", "pkg3");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShown() {
         setupSuggestions(makeSuggestions("pkg1"));
+
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
+
         verify(mFactory.metricsFeatureProvider, times(1)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1"};
-        Integer[] expectedActions = new Integer[]{
-                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly("pkg1");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShownAndPaused() {
         setupSuggestions(makeSuggestions("pkg1"));
+
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
+
         verify(mFactory.metricsFeatureProvider, times(2)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg1"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly("pkg1", "pkg1");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
     public void testSuggestionsLogs_ExpandedWithLessThanDefaultShownAfterPause() {
         setupSuggestions(makeSuggestions("pkg1"));
+
         mDashboardAdapter.onPause();
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
+
         verify(mFactory.metricsFeatureProvider, times(3)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg1", "pkg1"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly("pkg1", "pkg1", "pkg1");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
     }
 
     @Test
@@ -304,18 +357,46 @@ public class DashboardAdapterTest {
         mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
         mSuggestionHolder.itemView.callOnClick();
         mDashboardAdapter.onPause();
+
         verify(mFactory.metricsFeatureProvider, times(4)).action(
                 any(Context.class), mActionCategoryCaptor.capture(),
-                mActionPackageCaptor.capture());
-        String[] expectedPackages = new String[]{"pkg1", "pkg1", "pkg1", "pkg1"};
-        Integer[] expectedActions = new Integer[]{
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION,
                 MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION
-        };
-        assertThat(mActionPackageCaptor.getAllValues().toArray()).isEqualTo(expectedPackages);
-        assertThat(mActionCategoryCaptor.getAllValues().toArray()).isEqualTo(expectedActions);
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly(
+                "pkg1", "pkg1", "pkg1", "pkg1");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
+    }
+
+    @Test
+    public void testSuggestionsLogs_SmartSuggestionEnabled() {
+        when(mFactory.suggestionsFeatureProvider
+                .isSmartSuggestionEnabled(any(Context.class))).thenReturn(true);
+        setupSuggestions(makeSuggestions("pkg1"));
+
+        mDashboardAdapter.onBindSuggestionConditionHeader(mSuggestionHolder, mSuggestionHeaderData);
+        mSuggestionHolder.itemView.callOnClick();
+        mDashboardAdapter.onPause();
+
+        verify(mFactory.metricsFeatureProvider, times(2)).action(
+                any(Context.class), mActionCategoryCaptor.capture(),
+                mActionPackageCaptor.capture(),
+                mTaggedDataCaptor.capture());
+        assertThat(mActionCategoryCaptor.getAllValues()).containsExactly(
+                MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
+                MetricsEvent.ACTION_HIDE_SETTINGS_SUGGESTION);
+        assertThat(mActionPackageCaptor.getAllValues()).containsExactly("pkg1", "pkg1");
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 1),
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 1));
     }
 
     @Test

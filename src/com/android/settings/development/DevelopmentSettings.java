@@ -54,6 +54,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
@@ -364,6 +365,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
     private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
+    private CameraLaserSensorPreferenceController mCameraLaserSensorController;
 
     private BroadcastReceiver mEnableAdbReceiver;
 
@@ -405,6 +407,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
         mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
+        mCameraLaserSensorController = new CameraLaserSensorPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -439,6 +442,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
         mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
         mEnableAdbController.displayPreference(getPreferenceScreen());
+
+        mCameraLaserSensorController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -572,7 +577,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mColorModePreference = (ColorModePreference) findPreference(KEY_COLOR_MODE);
         mColorModePreference.updateCurrentAndSupported();
         if (mColorModePreference.getColorModeCount() < 2 ||
-                getContext().getDisplay().isWideColorGamut()) {
+                getContext().getResources().getConfiguration().isScreenWideColorGamut()) {
             removePreference(KEY_COLOR_MODE);
             mColorModePreference = null;
         }
@@ -659,6 +664,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
         mCameraHalHdrplusController.enablePreference(enabled);
+        mCameraLaserSensorController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -793,6 +799,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
         mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
+        mHaveDebugSettings |= mCameraLaserSensorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
@@ -1054,8 +1061,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return context.getSystemService(Context.OEM_LOCK_SERVICE) != null;
     }
 
+    /**
+     * Returns whether OEM unlock is allowed by the user and carrier.
+     *
+     * This does not take into account any restrictions imposed by the device policy.
+     */
+    private boolean isOemUnlockAllowedByUserAndCarrier() {
+        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
+        return mOemLockManager.isOemUnlockAllowedByCarrier()
+                && !mUm.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle);
+    }
+
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && mOemLockManager.canUserAllowOemUnlock();
+        return !isBootloaderUnlocked() && isOemUnlockAllowedByUserAndCarrier();
     }
 
     private void updateOemUnlockOptions() {
@@ -1068,10 +1086,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (mEnableOemUnlock.isEnabled()) {
                 // Check restriction, disable mEnableOemUnlock and apply policy transparency.
                 mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-            }
-            if (mEnableOemUnlock.isEnabled()) {
-                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
-                mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_OEM_UNLOCK);
             }
         }
     }
@@ -2463,6 +2477,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
 
+        if (mCameraLaserSensorController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
         if (preference == mClearAdbKeys) {
             if (mAdbKeysDialog != null) dismissDialogs();
             mAdbKeysDialog = new AlertDialog.Builder(getActivity())
@@ -2834,7 +2852,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-            } else if (!mOemLockManager.canUserAllowOemUnlock()) {
+            } else if (!isOemUnlockAllowedByUserAndCarrier()) {
                 // If the device isn't SIM-locked but OEM unlock is disallowed by some party, this
                 // means either some other carrier restriction is in place or the device hasn't been
                 // able to confirm which restrictions (SIM-lock or otherwise) apply.

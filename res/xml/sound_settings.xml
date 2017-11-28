@@ -70,23 +70,26 @@
             android:ringtoneType="ringtone"
             settings:allowDividerAbove="true" />
 
-        <!-- Default notification ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="notification_ringtone"
-            android:title="@string/notification_ringtone_title"
-            android:dialogTitle="@string/notification_ringtone_title"
-            android:summary="@string/summary_placeholder"
-            android:ringtoneType="notification" />
-
-        <!-- Default alarm ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="alarm_ringtone"
-            android:title="@string/alarm_ringtone_title"
-            android:dialogTitle="@string/alarm_ringtone_title"
-            android:summary="@string/summary_placeholder"
-            android:persistent="false"
-            android:ringtoneType="alarm" />
     </PreferenceCategory>
+
+    <!-- Default notification ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="notification_ringtone"
+        android:title="@string/notification_ringtone_title"
+        android:dialogTitle="@string/notification_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="notification"
+        android:order="-99"/>
+
+    <!-- Default alarm ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="alarm_ringtone"
+        android:title="@string/alarm_ringtone_title"
+        android:dialogTitle="@string/alarm_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:persistent="false"
+        android:ringtoneType="alarm"
+        android:order="-98"/>
 
     <!-- Other sounds -->
     <PreferenceCategory

@@ -64,9 +64,11 @@
         android:key="auto_rotate"
         android:title="@string/accelerometer_title" />
 
-    <SwitchPreference
+    <Preference
         android:key="color_mode"
-        android:title="@string/color_mode_title" />
+        android:title="@string/color_mode_title"
+        android:fragment="com.android.settings.display.ColorModePreferenceFragment"
+        settings:keywords="@string/keywords_color_mode" />
 
     <Preference
         android:key="font_size"

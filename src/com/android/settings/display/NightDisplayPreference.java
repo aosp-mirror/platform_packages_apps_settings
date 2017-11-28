@@ -22,6 +22,7 @@ import com.android.internal.app.NightDisplayController;
 import com.android.settings.R;
 
 import java.text.DateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -58,11 +59,11 @@ public class NightDisplayPreference extends SwitchPreference
         mController.setListener(null);
     }
 
-    private String getFormattedTimeString(NightDisplayController.LocalTime localTime) {
+    private String getFormattedTimeString(LocalTime localTime) {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(mTimeFormatter.getTimeZone());
-        c.set(Calendar.HOUR_OF_DAY, localTime.hourOfDay);
-        c.set(Calendar.MINUTE, localTime.minute);
+        c.set(Calendar.HOUR_OF_DAY, localTime.getHour());
+        c.set(Calendar.MINUTE, localTime.getMinute());
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
         return mTimeFormatter.format(c.getTime());
@@ -116,12 +117,12 @@ public class NightDisplayPreference extends SwitchPreference
     }
 
     @Override
-    public void onCustomStartTimeChanged(NightDisplayController.LocalTime startTime) {
+    public void onCustomStartTimeChanged(LocalTime startTime) {
         updateSummary();
     }
 
     @Override
-    public void onCustomEndTimeChanged(NightDisplayController.LocalTime endTime) {
+    public void onCustomEndTimeChanged(LocalTime endTime) {
         updateSummary();
     }
 }

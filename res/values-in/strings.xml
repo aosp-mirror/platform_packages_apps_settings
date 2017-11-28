@@ -1003,7 +1003,10 @@
     <string name="search_clear_history" msgid="4196658962573162457">"Hapus histori"</string>
     <string name="display_settings" msgid="7965901687241669598">"Tampilan"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotasi layar otomatis"</string>
-    <string name="color_mode_title" msgid="3159275920408338215">"Warna jernih"</string>
+    <string name="color_mode_title" msgid="9186249332902370471">"Warna"</string>
+    <string name="color_mode_option_natural" msgid="5013837483986772758">"Alami"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Ditingkatkan"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"Disaturasi"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Ubah orientasi secara otomatis ketika memutar tablet"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Berganti orientasi secara otomatis ketika memutar ponsel"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Ubah orientasi secara otomatis ketika memutar tablet"</string>
@@ -1057,14 +1060,14 @@
     <string name="wallpaper_suggestion_summary" msgid="1579144009898110491">"Personalisasi layar Anda"</string>
     <string name="wallpaper_settings_fragment_title" msgid="519078346877860129">"Pilih wallpaper dari"</string>
     <string name="screensaver_settings_title" msgid="1770575686476851778">"Screen saver"</string>
-    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Saat mengisi daya atau dipasang ke dok"</string>
+    <string name="screensaver_settings_summary_either_long" msgid="7302740999250873332">"Saat mengisi baterai atau dipasang ke dok"</string>
     <string name="screensaver_settings_summary_either_short" msgid="6140527286137331478">"Keduanya"</string>
-    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Saat mengisi daya"</string>
+    <string name="screensaver_settings_summary_sleep" msgid="9086186698140423493">"Saat mengisi baterai"</string>
     <string name="screensaver_settings_summary_dock" msgid="2072657401664633283">"Selagi di dok"</string>
     <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"Tidak pernah"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"Mati"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"Untuk mengontrol yang terjadi saat ponsel dipasang ke dok dan/atau sedang tidur, aktifkan screen saver."</string>
-    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Ketika memulai"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"Waktu mulai"</string>
     <string name="screensaver_settings_current" msgid="4663846038247130023">"Screensaver saat ini"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"Mulai sekarang"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"Setelan"</string>
@@ -1661,7 +1664,7 @@
     <string name="move_app_failed_dlg_text" msgid="187885379493011720">"Tidak dapat memindahkan apl. <xliff:g id="REASON">%1$s</xliff:g>"</string>
     <string name="app_install_location_title" msgid="2068975150026852168">"Lokasi pemasangan yang disukai"</string>
     <string name="app_install_location_summary" msgid="5155453752692959098">"Ubah lokasi pemasangan yang diinginkan untuk apl baru."</string>
-    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Nonaktifkan aplikasi bawaan?"</string>
+    <string name="app_disable_dlg_title" msgid="3916469657537695436">"Nonaktifkan aplikasi built-in?"</string>
     <string name="app_disable_dlg_positive" msgid="7375627244201714263">"Menonaktifkan aplikasi"</string>
     <string name="app_disable_dlg_text" msgid="5632072173181990531">"Jika Anda menonaktifkan aplikasi ini, Android dan aplikasi lain mungkin tidak berfungsi lagi sesuai harapan."</string>
     <string name="app_special_disable_dlg_title" msgid="2690148680327142674">"Hapus data dan nonaktifkan aplikasi?"</string>
@@ -2875,21 +2878,20 @@
     <string name="notification_pulse_title" msgid="1905382958860387030">"Cahaya kedip"</string>
     <string name="lock_screen_notifications_title" msgid="6173076173408887213">"Di layar kunci"</string>
     <string name="lock_screen_notifications_summary_show" msgid="6407527697810672847">"Tampilkan semua konten notifikasi"</string>
-    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Menyembunyikan konten notifikasi yang sensitif"</string>
+    <string name="lock_screen_notifications_summary_hide" msgid="7891552853357258782">"Sembunyikan konten notifikasi yang sensitif"</string>
     <string name="lock_screen_notifications_summary_disable" msgid="859628910427886715">"Jangan tampilkan notifikasi sama sekali"</string>
     <string name="lock_screen_notifications_interstitial_message" msgid="6164532459432182244">"Saat perangkat dikunci, Anda ingin notifikasi ditampilkan seperti apa?"</string>
     <string name="lock_screen_notifications_interstitial_title" msgid="1416589393106326972">"Notifikasi"</string>
     <string name="lock_screen_notifications_summary_show_profile" msgid="835870815661120772">"Tampilkan semua konten notifikasi kerja"</string>
     <string name="lock_screen_notifications_summary_hide_profile" msgid="256116258285695645">"Sembunyikan konten notifikasi kerja yang sensitif"</string>
-    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Jangan menampilkan notifikasi kerja sama sekali"</string>
+    <string name="lock_screen_notifications_summary_disable_profile" msgid="4080720698960233358">"Jangan tampilkan notifikasi kerja sama sekali"</string>
     <string name="lock_screen_notifications_interstitial_message_profile" msgid="8307705621027472346">"Saat perangkat dikunci, Anda ingin notifikasi ditampilkan seperti apa?"</string>
     <string name="lock_screen_notifications_interstitial_title_profile" msgid="3169806586032521333">"Notifikasi profil"</string>
     <string name="notifications_title" msgid="8086372779371204971">"Notifikasi"</string>
     <string name="app_notifications_title" msgid="5810577805218003760">"Notifikasi apl"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Kategori notifikasi"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"Tingkat Kepentingan"</string>
-    <!-- no translation found for notification_importance_unspecified (6622173510486113958) -->
-    <skip />
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"Izinkan suara"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Jangan pernah tampilkan notifikasi"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Tidak ada gangguan suara atau visual"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"Tanpa suara"</string>
@@ -3400,6 +3402,7 @@
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Untuk menerapkah perubahan monitor telefoni, reboot perangkat"</string>
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Kamera HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Untuk menerapkan perubahan Kamera HAL HDR+, reboot perangkat"</string>
+    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Sensor Laser Kamera"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Pemutakhiran sistem otomatis"</string>
     <string name="usage" msgid="2977875522080448986">"Penggunaan"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Penggunaan data seluler"</string>

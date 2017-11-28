@@ -18,36 +18,24 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.SystemProperties;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
+
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class ColorModePreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
+        PreferenceControllerMixin {
     private static final String TAG = "ColorModePreference";
-
     private static final String KEY_COLOR_MODE = "color_mode";
 
-    @VisibleForTesting
-    static final float COLOR_SATURATION_DEFAULT = 1.0f;
-    @VisibleForTesting
-    static final float COLOR_SATURATION_VIVID = 1.1f;
+    private static final int SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR = 1024;
 
-    private static final int SURFACE_FLINGER_TRANSACTION_SATURATION = 1022;
-    @VisibleForTesting
-    static final String PERSISTENT_PROPERTY_SATURATION = "persist.sys.sf.color_saturation";
-
-    private final IBinder mSurfaceFlinger;
     private final ConfigurationWrapper mConfigWrapper;
 
     public ColorModePreferenceController(Context context) {
         super(context);
-        mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-        mConfigWrapper = new ConfigurationWrapper(context);
+        mConfigWrapper = new ConfigurationWrapper();
     }
 
     @Override
@@ -56,64 +44,35 @@ public class ColorModePreferenceController extends AbstractPreferenceController 
     }
 
     @Override
-    public void updateState(Preference preference) {
-        TwoStatePreference colorMode = (TwoStatePreference) preference;
-        colorMode.setChecked(getSaturationValue() > 1.0f);
-    }
-
-    @Override
     public boolean isAvailable() {
         return mConfigWrapper.isScreenWideColorGamut();
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        float saturation = (boolean) newValue
-                ? COLOR_SATURATION_VIVID : COLOR_SATURATION_DEFAULT;
-
-        SystemProperties.set(PERSISTENT_PROPERTY_SATURATION, Float.toString(saturation));
-        applySaturation(saturation);
-
-        return true;
-    }
-
-    /**
-     * Propagates the provided saturation to the SurfaceFlinger.
-     */
-    private void applySaturation(float saturation) {
-        if (mSurfaceFlinger != null) {
-            final Parcel data = Parcel.obtain();
-            data.writeInterfaceToken("android.ui.ISurfaceComposer");
-            data.writeFloat(saturation);
-            try {
-                mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_SATURATION, data, null, 0);
-            } catch (RemoteException ex) {
-                Log.e(TAG, "Failed to set saturation", ex);
-            } finally {
-                data.recycle();
-            }
-        }
-    }
-
-    private static float getSaturationValue() {
-        try {
-            return Float.parseFloat(SystemProperties.get(
-                    PERSISTENT_PROPERTY_SATURATION, Float.toString(COLOR_SATURATION_DEFAULT)));
-        } catch (NumberFormatException e) {
-            return COLOR_SATURATION_DEFAULT;
-        }
-    }
-
     @VisibleForTesting
     static class ConfigurationWrapper {
-        private final Context mContext;
+        private final IBinder mSurfaceFlinger;
 
-        ConfigurationWrapper(Context context) {
-            mContext = context;
+        ConfigurationWrapper() {
+            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
         }
 
         boolean isScreenWideColorGamut() {
-            return mContext.getResources().getConfiguration().isScreenWideColorGamut();
+            if (mSurfaceFlinger != null) {
+                final Parcel data = Parcel.obtain();
+                final Parcel reply = Parcel.obtain();
+                data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                try {
+                    mSurfaceFlinger.transact(SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR,
+                            data, reply, 0);
+                    return reply.readBoolean();
+                } catch (RemoteException ex) {
+                    Log.e(TAG, "Failed to query wide color support", ex);
+                } finally {
+                    data.recycle();
+                    reply.recycle();
+                }
+            }
+            return false;
         }
     }
 }

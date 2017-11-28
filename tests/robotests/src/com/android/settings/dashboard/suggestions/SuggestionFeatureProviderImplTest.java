@@ -35,7 +35,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings.Secure;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
@@ -56,10 +58,13 @@ import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
+import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -93,6 +98,8 @@ public class SuggestionFeatureProviderImplTest {
     private FingerprintManager mFingerprintManager;
     @Mock
     private SharedPreferences mSharedPreferences;
+    @Captor
+    private ArgumentCaptor<Pair> mTaggedDataCaptor = ArgumentCaptor.forClass(Pair.class);
 
     private FakeFeatureFactory mFactory;
     private SuggestionFeatureProviderImpl mProvider;
@@ -335,7 +342,10 @@ public class SuggestionFeatureProviderImplTest {
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext, never()).getPackageManager();
     }
 
@@ -356,8 +366,10 @@ public class SuggestionFeatureProviderImplTest {
         verify(mFactory.metricsFeatureProvider).action(
                 eq(mContext),
                 eq(MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION),
-                anyString());
-
+                anyString(),
+                mTaggedDataCaptor.capture());
+        assertThat(mTaggedDataCaptor.getAllValues()).containsExactly(
+                Pair.create(MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED, 0));
         verify(mContext.getPackageManager())
                 .setComponentEnabledSetting(mSuggestion.intent.getComponent(),
                         PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
@@ -391,14 +403,35 @@ public class SuggestionFeatureProviderImplTest {
     }
 
     @Test
-    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivated() {
-        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+    public void hasUsedNightDisplay_returnsTrue_ifPreviouslyActivatedAndManual() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         assertThat(mProvider.hasUsedNightDisplay(mContext)).isTrue();
     }
 
     @Test
     public void nightDisplaySuggestion_isCompleted_ifPreviouslyActivated() {
-        Secure.putLong(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME, 1L);
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                LocalDateTime.now().toString());
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifNonManualMode() {
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
+        final ComponentName componentName =
+                new ComponentName(mContext, NightDisplaySuggestionActivity.class);
+        assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();
+    }
+
+    @Test
+    public void nightDisplaySuggestion_isCompleted_ifPreviouslyCleared() {
+        Secure.putString(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME,
+                null);
+        Secure.putInt(mContext.getContentResolver(), Secure.NIGHT_DISPLAY_AUTO_MODE, 1);
         final ComponentName componentName =
                 new ComponentName(mContext, NightDisplaySuggestionActivity.class);
         assertThat(mProvider.isSuggestionCompleted(mContext, componentName)).isTrue();

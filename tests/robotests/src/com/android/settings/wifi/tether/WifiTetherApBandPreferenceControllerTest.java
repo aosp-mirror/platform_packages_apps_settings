@@ -16,6 +16,12 @@
 
 package com.android.settings.wifi.tether;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
@@ -34,12 +40,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -75,7 +75,8 @@ public class WifiTetherApBandPreferenceControllerTest {
 
     @Test
     public void display_5GhzSupported_shouldDisplayFullList() {
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
+        when(mWifiManager.getCountryCode()).thenReturn("US");
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -83,8 +84,21 @@ public class WifiTetherApBandPreferenceControllerTest {
     }
 
     @Test
+    public void display_noCountryCode_shouldDisable() {
+        when(mWifiManager.getCountryCode()).thenReturn(null);
+        when(mWifiManager.isDualBandSupported()).thenReturn(true);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mListPreference.getEntries()).isNull();
+        assertThat(mListPreference.isEnabled()).isFalse();
+        assertThat(mListPreference.getSummary())
+                .isEqualTo(RuntimeEnvironment.application.getString(R.string.wifi_ap_choose_2G));
+    }
+
+    @Test
     public void display_5GhzNotSupported_shouldDisable() {
-        when(mWifiManager.is5GHzBandSupported()).thenReturn(false);
+        when(mWifiManager.isDualBandSupported()).thenReturn(false);
 
         mController.displayPreference(mScreen);
 

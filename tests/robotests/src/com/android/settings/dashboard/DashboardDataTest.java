@@ -16,9 +16,17 @@
 
 package com.android.settings.dashboard;
 
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_CONTAINER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_FOOTER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
+import android.widget.RemoteViews;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
@@ -35,18 +43,10 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_CONTAINER;
-import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_FOOTER;
-import static com.android.settings.dashboard.DashboardData
-        .STABLE_ID_SUGGESTION_CONDITION_TOP_HEADER;
-import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -215,6 +215,38 @@ public class DashboardDataTest {
     }
 
     @Test
+    public void testDiffUtil_RemoveOneSuggestion_causeItemRemoveAndChange() {
+        //Build testResultData
+        final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        testResultData.add(new ListUpdateResult.ResultData(
+                ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 1));
+        testResultData.add(new ListUpdateResult.ResultData(
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 1, 1));
+        // Build DashboardData
+        final List<Condition> oneItemConditions = new ArrayList<>();
+        when(mTestCondition.shouldShow()).thenReturn(true);
+        oneItemConditions.add(mTestCondition);
+        final List<Tile> suggestions = new ArrayList<>();
+        mTestSuggestion.title = TEST_SUGGESTION_TITLE;
+        suggestions.add(mTestSuggestion);
+
+        final DashboardData oldData = new DashboardData.Builder()
+                .setConditions(oneItemConditions)
+                .setCategory(mDashboardCategory)
+                .setSuggestions(suggestions)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_DEFAULT)
+                .build();
+        final DashboardData newData = new DashboardData.Builder()
+                .setConditions(oneItemConditions)
+                .setSuggestions(null)
+                .setCategory(mDashboardCategory)
+                .setSuggestionConditionMode(DashboardData.HEADER_MODE_DEFAULT)
+                .build();
+
+        testDiffUtil(oldData, newData, testResultData);
+    }
+
+    @Test
     public void testDiffUtil_DeleteAllData_ResultDataOneDeleted() {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
@@ -222,6 +254,28 @@ public class DashboardDataTest {
                 ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 4));
 
         testDiffUtil(mDashboardDataWithOneConditions, mDashboardDataWithNoItems, testResultData);
+    }
+
+    @Test
+    public void testDiffUtil_typeSuggestedContainer_ResultDataNothingChanged() {
+        //Build testResultData
+        final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
+        testResultData.add(new ListUpdateResult.ResultData(
+                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
+        Tile tile = new Tile();
+        tile.remoteViews = mock(RemoteViews.class);
+
+        DashboardData prevData = new DashboardData.Builder()
+                .setConditions(null)
+                .setCategory(null)
+                .setSuggestions(Arrays.asList(tile))
+                .build();
+        DashboardData currentData = new DashboardData.Builder()
+                .setConditions(null)
+                .setCategory(null)
+                .setSuggestions(Arrays.asList(tile))
+                .build();
+        testDiffUtil(prevData, currentData, testResultData);
     }
 
     /**
