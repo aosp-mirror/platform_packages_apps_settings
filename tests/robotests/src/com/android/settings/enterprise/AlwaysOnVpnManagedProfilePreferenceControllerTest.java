@@ -38,7 +38,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link AlwaysOnVpnManagedProfilePreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public final class AlwaysOnVpnManagedProfilePreferenceControllerTest {
 
     private static final String KEY_ALWAYS_ON_VPN_MANAGED_PROFILE = "always_on_vpn_managed_profile";
