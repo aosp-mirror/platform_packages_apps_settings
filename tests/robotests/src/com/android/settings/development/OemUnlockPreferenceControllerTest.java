@@ -48,7 +48,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class OemUnlockPreferenceControllerTest {
 
     @Mock
@@ -108,6 +108,7 @@ public class OemUnlockPreferenceControllerTest {
         doReturn(false).when(mController).showKeyguardConfirmation(mResources,
                 REQUEST_CODE_ENABLE_OEM_UNLOCK);
         doNothing().when(mController).confirmEnableOemUnlock();
+
         mController.onPreferenceChange(null, true);
 
         verify(mController).confirmEnableOemUnlock();
@@ -115,17 +116,20 @@ public class OemUnlockPreferenceControllerTest {
 
     @Test
     public void onPreferenceChanged_turnOffUnlock() {
+        mController = spy(mController);
         mController.onPreferenceChange(null, false);
-        verify(mOemLockManager).setOemUnlockAllowedByUser(false);
+        doReturn(false).when(mController).isBootloaderUnlocked();
+
         verify(mFragment).getChildFragmentManager();
     }
 
     @Test
     public void updateState_preferenceShouldBeCheckedAndShouldBeDisabled() {
         mController = spy(mController);
-        when(mOemLockManager.isOemUnlockAllowed()).thenReturn(true);
+        doReturn(true).when(mController).isOemUnlockedAllowed();
         doReturn(true).when(mController).isOemUnlockAllowedByUserAndCarrier();
-        when(mOemLockManager.isDeviceOemUnlocked()).thenReturn(true);
+        doReturn(true).when(mController).isBootloaderUnlocked();
+
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -135,9 +139,10 @@ public class OemUnlockPreferenceControllerTest {
     @Test
     public void updateState_preferenceShouldBeUncheckedAndShouldBeDisabled() {
         mController = spy(mController);
-        when(mOemLockManager.isOemUnlockAllowed()).thenReturn(false);
+        doReturn(false).when(mController).isOemUnlockedAllowed();
         doReturn(true).when(mController).isOemUnlockAllowedByUserAndCarrier();
-        when(mOemLockManager.isDeviceOemUnlocked()).thenReturn(true);
+        doReturn(true).when(mController).isBootloaderUnlocked();
+
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -147,9 +152,10 @@ public class OemUnlockPreferenceControllerTest {
     @Test
     public void updateState_preferenceShouldBeCheckedAndShouldBeEnabled() {
         mController = spy(mController);
-        when(mOemLockManager.isOemUnlockAllowed()).thenReturn(true);
+        doReturn(true).when(mController).isOemUnlockedAllowed();
         doReturn(true).when(mController).isOemUnlockAllowedByUserAndCarrier();
-        when(mOemLockManager.isDeviceOemUnlocked()).thenReturn(false);
+        doReturn(false).when(mController).isBootloaderUnlocked();
+
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -176,7 +182,9 @@ public class OemUnlockPreferenceControllerTest {
     public void onDeveloperOptionsEnabled_preferenceShouldCheckRestriction() {
         mController = spy(mController);
         doReturn(false).when(mController).isOemUnlockAllowedByUserAndCarrier();
+        doReturn(false).when(mController).isBootloaderUnlocked();
         when(mPreference.isEnabled()).thenReturn(true);
+
         mController.onDeveloperOptionsEnabled();
 
         verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
@@ -186,8 +194,11 @@ public class OemUnlockPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsDisabled_preferenceShouldCheckRestriction() {
         mController = spy(mController);
+        doReturn(true).when(mController).isOemUnlockedAllowed();
         doReturn(false).when(mController).isOemUnlockAllowedByUserAndCarrier();
+        doReturn(false).when(mController).isBootloaderUnlocked();
         when(mPreference.isEnabled()).thenReturn(true);
+
         mController.onDeveloperOptionsDisabled();
 
         verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
