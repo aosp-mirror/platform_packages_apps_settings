@@ -26,6 +26,7 @@ import java.util.List;
 
 /**
  * A controller mixin that adds mobile settings specific functionality
+ * TODO (b/69808530) Replace with BasePreferenceController.
  */
 public interface PreferenceControllerMixin {
 
@@ -60,7 +61,11 @@ public interface PreferenceControllerMixin {
 
     /**
      * @return the {@link ResultPayload} corresponding to the search result type for the preference.
+     *
+     * Do not rely on this method for intent-based or inline results. It will be removed in the
+     * unbundling effort.
      */
+    @Deprecated
     default ResultPayload getResultPayload() {
         return null;
     }
