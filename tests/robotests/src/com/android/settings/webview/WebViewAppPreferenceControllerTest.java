@@ -31,7 +31,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 /**
- * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceControllerV2}
+ * Deprecated in favor of {@link com.android.settings.development.WebViewAppPreferenceController}
  */
 @Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)

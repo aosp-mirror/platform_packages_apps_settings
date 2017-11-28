@@ -40,7 +40,6 @@ public class EmergencyBroadcastPreferenceController extends AbstractPreferenceCo
     private AccountRestrictionHelper mHelper;
     private UserManager mUserManager;
     private PackageManager mPm;
-    private boolean mCellBroadcastAppLinkEnabled;
 
     public EmergencyBroadcastPreferenceController(Context context, String prefKey) {
         this(context, new AccountRestrictionHelper(context), prefKey);
@@ -54,8 +53,6 @@ public class EmergencyBroadcastPreferenceController extends AbstractPreferenceCo
         mHelper = helper;
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mPm = mContext.getPackageManager();
-        // Enable link to CMAS app settings depending on the value in config.xml.
-        mCellBroadcastAppLinkEnabled = isCellBroadcastAppLinkEnabled();
     }
 
     @Override
@@ -79,12 +76,13 @@ public class EmergencyBroadcastPreferenceController extends AbstractPreferenceCo
 
     @Override
     public boolean isAvailable() {
-        return mUserManager.isAdminUser() && mCellBroadcastAppLinkEnabled
+        return mUserManager.isAdminUser() && isCellBroadcastAppLinkEnabled()
                 && !mHelper.hasBaseUserRestriction(
                 UserManager.DISALLOW_CONFIG_CELL_BROADCASTS, UserHandle.myUserId());
     }
 
     private boolean isCellBroadcastAppLinkEnabled() {
+        // Enable link to CMAS app settings depending on the value in config.xml.
         boolean enabled = mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_cellBroadcastAppLinks);
         if (enabled) {

@@ -36,20 +36,20 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class BugReportPreferenceControllerV2Test {
+public class BugReportPreferenceControllerTest {
 
     @Mock
     private Context mContext;
     @Mock
     private UserManager mUserManager;
 
-    private BugReportPreferenceControllerV2 mController;
+    private BugReportPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new BugReportPreferenceControllerV2(mContext);
+        mController = new BugReportPreferenceController(mContext);
     }
 
     @Test

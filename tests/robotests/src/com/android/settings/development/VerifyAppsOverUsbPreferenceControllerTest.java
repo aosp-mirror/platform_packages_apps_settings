@@ -52,7 +52,7 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class VerifyAppsOverUsbPreferenceControllerV2Test {
+public class VerifyAppsOverUsbPreferenceControllerTest {
 
     @Mock
     private PackageManagerWrapper mPackageManager;
@@ -62,11 +62,11 @@ public class VerifyAppsOverUsbPreferenceControllerV2Test {
     private RestrictedSwitchPreference mPreference;
 
     @Mock
-    private VerifyAppsOverUsbPreferenceControllerV2.RestrictedLockUtilsDelegate
+    private VerifyAppsOverUsbPreferenceController.RestrictedLockUtilsDelegate
             mRestrictedLockUtilsDelegate;
 
     private Context mContext;
-    private VerifyAppsOverUsbPreferenceControllerV2 mController;
+    private VerifyAppsOverUsbPreferenceController mController;
 
     /** Convenience class for setting global int settings. */
     class GlobalSetter {
@@ -83,7 +83,7 @@ public class VerifyAppsOverUsbPreferenceControllerV2Test {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mController = new VerifyAppsOverUsbPreferenceControllerV2(mContext);
+        mController = new VerifyAppsOverUsbPreferenceController(mContext);
         ReflectionHelpers.setField(
                 mController, "mRestrictedLockUtils", mRestrictedLockUtilsDelegate);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
@@ -188,7 +188,7 @@ public class VerifyAppsOverUsbPreferenceControllerV2Test {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, -1 /* default */);
 
-        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceControllerV2.SETTING_VALUE_ON);
+        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceController.SETTING_VALUE_ON);
     }
 
     @Test
@@ -198,7 +198,7 @@ public class VerifyAppsOverUsbPreferenceControllerV2Test {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 android.provider.Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, -1 /* default */);
 
-        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceControllerV2.SETTING_VALUE_OFF);
+        assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceController.SETTING_VALUE_OFF);
     }
 
     @Test

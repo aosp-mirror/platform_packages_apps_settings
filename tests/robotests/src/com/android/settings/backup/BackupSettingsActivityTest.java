@@ -58,7 +58,7 @@ import java.util.List;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {BackupSettingsActivityTest.ShadowBackupSettingsHelper.class,
                 BackupSettingsActivityTest.ShadowUserHandle.class})
 public class BackupSettingsActivityTest {

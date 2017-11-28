@@ -20,14 +20,13 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.SystemProperties;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
-import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.R;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,27 +41,36 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH,
         sdk = TestConfig.SDK_VERSION,
         shadows = {SettingsShadowSystemProperties.class})
-public class LogPersistPreferenceControllerV2Test {
+public class LogdSizePreferenceControllerTest {
 
-    @Mock
-    private ListPreference mPreference;
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
+    private ListPreference mPreference;
 
+    /**
+     * List Values
+     *
+     * 0: off
+     * 1: 64k
+     * 2: 256k
+     * 3: 1M
+     * 4: 4M
+     * 5: 16M
+     */
+    private String[] mListValues;
+    private String[] mListSummaries;
     private Context mContext;
-    private LogPersistPreferenceControllerV2 mController;
-    private Lifecycle mLifecycle;
+    private LogdSizePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
-        mController = new LogPersistPreferenceControllerV2(mContext, mFragment, mLifecycle);
+        mListValues = mContext.getResources().getStringArray(R.array.select_logd_size_values);
+        mListSummaries = mContext.getResources().getStringArray(R.array.select_logd_size_summaries);
+        mController = new LogdSizePreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        SystemProperties.set("ro.debuggable", "1");
         mController.displayPreference(mScreen);
     }
 
@@ -72,9 +80,11 @@ public class LogPersistPreferenceControllerV2Test {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
+    public void onDeveloperOptionsSwitchDisabled_shouldDisableAndResetPreferenceToDefault() {
         mController.onDeveloperOptionsSwitchDisabled();
 
+        verify(mPreference).setValue(mListValues[2]);
+        verify(mPreference).setSummary(mListSummaries[2]);
         verify(mPreference).setEnabled(false);
     }
 

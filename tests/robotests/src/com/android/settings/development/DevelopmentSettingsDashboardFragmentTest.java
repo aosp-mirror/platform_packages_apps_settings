@@ -223,10 +223,10 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Test
     public void onDisableLogPersistDialogConfirmed_shouldCallControllerDialogConfirmed() {
-        final LogPersistPreferenceControllerV2 controller = mock(
-                LogPersistPreferenceControllerV2.class);
+        final LogPersistPreferenceController controller = mock(
+                LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
-                LogPersistPreferenceControllerV2.class);
+                LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogConfirmed();
 
         verify(controller).onDisableLogPersistDialogConfirmed();
@@ -234,10 +234,10 @@ public class DevelopmentSettingsDashboardFragmentTest {
 
     @Test
     public void onDisableLogPersistDialogRejected_shouldCallControllerDialogRejected() {
-        final LogPersistPreferenceControllerV2 controller = mock(
-                LogPersistPreferenceControllerV2.class);
+        final LogPersistPreferenceController controller = mock(
+                LogPersistPreferenceController.class);
         doReturn(controller).when(mDashboard).getDevelopmentOptionsController(
-                LogPersistPreferenceControllerV2.class);
+                LogPersistPreferenceController.class);
         mDashboard.onDisableLogPersistDialogRejected();
 
         verify(controller).onDisableLogPersistDialogRejected();

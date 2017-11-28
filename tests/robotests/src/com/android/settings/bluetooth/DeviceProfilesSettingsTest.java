@@ -56,7 +56,7 @@ import java.util.ArrayList;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
         ShadowEventLogWriter.class
 })
 public class DeviceProfilesSettingsTest {

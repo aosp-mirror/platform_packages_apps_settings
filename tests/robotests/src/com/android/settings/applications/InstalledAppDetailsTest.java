@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
@@ -83,9 +84,9 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = InstalledAppDetailsTest.ShadowUtils.class
+        manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION_O,
+        shadows = InstalledAppDetailsTest.ShadowUtils.class
 )
 public final class InstalledAppDetailsTest {
 
@@ -192,7 +193,7 @@ public final class InstalledAppDetailsTest {
         when(stats.getTotalBytes()).thenReturn(1L);
 
         assertThat(InstalledAppDetails.getStorageSummary(context, stats, true))
-                .isEqualTo("1.00 B used in external storage");
+                .isEqualTo("1 B used in external storage");
     }
 
     @Test
@@ -202,7 +203,7 @@ public final class InstalledAppDetailsTest {
         when(stats.getTotalBytes()).thenReturn(1L);
 
         assertThat(InstalledAppDetails.getStorageSummary(context, stats, false))
-                .isEqualTo("1.00 B used in internal storage");
+                .isEqualTo("1 B used in internal storage");
     }
 
     @Test
