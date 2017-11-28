@@ -21,6 +21,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -81,7 +82,7 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return isAvailable(mConfig);
+        return alwaysOnAvailableForUser(mConfig);
     }
 
     public static boolean isAvailable(AmbientDisplayConfiguration config) {
@@ -101,5 +102,10 @@ public class AmbientDisplayAlwaysOnPreferenceController extends
         return new InlineSwitchPayload(Settings.Secure.DOZE_ALWAYS_ON,
                 ResultPayload.SettingsSource.SECURE, ON /* onValue */, intent, isAvailable(),
                 ON /* defaultValue */);
+    }
+
+    @VisibleForTesting
+    boolean alwaysOnAvailableForUser(AmbientDisplayConfiguration config) {
+        return isAvailable(config);
     }
 }
