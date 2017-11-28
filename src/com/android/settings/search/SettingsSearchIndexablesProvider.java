@@ -40,15 +40,23 @@ import static android.provider.SearchIndexablesContract.COLUMN_INDEX_XML_RES_RES
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 import static android.provider.SearchIndexablesContract.INDEXABLES_XML_RES_COLUMNS;
 import static android.provider.SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS;
+import static android.provider.SearchIndexablesContract.SITE_MAP_COLUMNS;
+import static com.android.settings.dashboard.DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.SearchIndexableResource;
+import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesProvider;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
+import com.android.settings.SettingsActivity;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -131,6 +139,38 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
             cursor.addRow(ref);
         }
 
+        return cursor;
+    }
+
+    @Override
+    public Cursor querySiteMapPairs() {
+        final MatrixCursor cursor = new MatrixCursor(SITE_MAP_COLUMNS);
+        final Context context = getContext();
+        // Loop through all IA categories and pages and build additional SiteMapPairs
+        final List<DashboardCategory> categories = FeatureFactory.getFactory(context)
+                .getDashboardFeatureProvider(context).getAllCategories();
+        for (DashboardCategory category : categories) {
+            // Use the category key to look up parent (which page hosts this key)
+            final String parentClass = CATEGORY_KEY_TO_PARENT_MAP.get(category.key);
+            if (parentClass == null) {
+                continue;
+            }
+            // Build parent-child class pairs for all children listed under this key.
+            for (Tile tile : category.tiles) {
+                String childClass = null;
+                if (tile.metaData != null) {
+                    childClass = tile.metaData.getString(
+                            SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS);
+                }
+                if (childClass == null) {
+                    continue;
+                }
+                cursor.newRow()
+                        .add(SearchIndexablesContract.SiteMapColumns.PARENT_CLASS, parentClass)
+                        .add(SearchIndexablesContract.SiteMapColumns.CHILD_CLASS, childClass);
+            }
+        }
+        // Done.
         return cursor;
     }
 

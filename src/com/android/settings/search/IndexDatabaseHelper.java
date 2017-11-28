@@ -22,6 +22,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.provider.SearchIndexablesContract.SiteMapColumns;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,7 +34,7 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "IndexDatabaseHelper";
 
     private static final String DATABASE_NAME = "search_index.db";
-    private static final int DATABASE_VERSION = 117;
+    private static final int DATABASE_VERSION = 118;
 
     private static final String SHARED_PREFS_TAG = "indexing_manager";
 
@@ -78,14 +79,6 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     public interface SavedQueriesColumns {
         String QUERY = "query";
         String TIME_STAMP = "timestamp";
-    }
-
-    public interface SiteMapColumns {
-        String DOCID = "docid";
-        String PARENT_CLASS = "parent_class";
-        String CHILD_CLASS = "child_class";
-        String PARENT_TITLE = "parent_title";
-        String CHILD_TITLE = "child_title";
     }
 
     private static final String CREATE_INDEX_TABLE =

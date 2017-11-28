@@ -16,23 +16,26 @@
 
 package com.android.settings.dashboard;
 
+import static android.provider.SearchIndexablesContract.SITE_MAP_COLUMNS;
 import static com.android.settings.dashboard.DashboardFragmentRegistry.CATEGORY_KEY_TO_PARENT_MAP;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.SearchIndexablesContract.SiteMapColumns;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.search.IndexDatabaseHelper.IndexColumns;
-import com.android.settings.search.IndexDatabaseHelper.SiteMapColumns;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,14 +49,6 @@ public class SiteMapManager {
 
     private static final String TAG = "SiteMapManager";
     private static final boolean DEBUG_TIMING = false;
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    public static final String[] SITE_MAP_COLUMNS = {
-            SiteMapColumns.PARENT_CLASS,
-            SiteMapColumns.PARENT_TITLE,
-            SiteMapColumns.CHILD_CLASS,
-            SiteMapColumns.CHILD_TITLE
-    };
 
     private static final String[] CLASS_TO_SCREEN_TITLE_COLUMNS = {
             IndexColumns.CLASS_NAME,
@@ -108,7 +103,7 @@ public class SiteMapManager {
      * 2. IA: We know from {@link DashboardFeatureProvider} which page can be dynamically
      * injected to where.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     @WorkerThread
     synchronized void init(Context context) {
         if (mInitialized) {

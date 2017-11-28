@@ -19,20 +19,18 @@ package com.android.settings.search;
 
 
 import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_ID;
-import static com.android.settings.search.CursorToSearchResultConverter
-        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
-        .DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ENABLED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.ICON;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.INTENT_ACTION;
@@ -55,6 +53,7 @@ import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.SearchIndexablesContract;
+import android.provider.SearchIndexablesContract.SiteMapColumns;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
@@ -68,7 +67,6 @@ import com.android.settings.search.indexing.PreIndexDataCollector;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -276,17 +274,11 @@ public class DatabaseIndexingManager {
 
             if (!TextUtils.isEmpty(dataRow.className)
                     && !TextUtils.isEmpty(dataRow.childClassName)) {
-                ContentValues siteMapPair = new ContentValues();
-                final int pairDocId = Objects.hash(dataRow.className, dataRow.childClassName);
-                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.DOCID, pairDocId);
-                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_CLASS,
-                        dataRow.className);
-                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.PARENT_TITLE,
-                        dataRow.screenTitle);
-                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_CLASS,
-                        dataRow.childClassName);
-                siteMapPair.put(IndexDatabaseHelper.SiteMapColumns.CHILD_TITLE,
-                        dataRow.updatedTitle);
+                final ContentValues siteMapPair = new ContentValues();
+                siteMapPair.put(SiteMapColumns.PARENT_CLASS, dataRow.className);
+                siteMapPair.put(SiteMapColumns.PARENT_TITLE, dataRow.screenTitle);
+                siteMapPair.put(SiteMapColumns.CHILD_CLASS, dataRow.childClassName);
+                siteMapPair.put(SiteMapColumns.CHILD_TITLE, dataRow.updatedTitle);
 
                 database.replaceOrThrow(IndexDatabaseHelper.Tables.TABLE_SITE_MAP,
                         null /* nullColumnHack */, siteMapPair);
