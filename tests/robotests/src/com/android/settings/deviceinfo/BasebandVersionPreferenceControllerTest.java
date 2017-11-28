@@ -24,6 +24,7 @@ import android.net.ConnectivityManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.TestConfig;
+import com.android.settings.deviceinfo.firmwareversion.BasebandVersionDialogController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -36,6 +37,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+/**
+ * Deprecated in favor of {@link BasebandVersionDialogController}
+ */
+@Deprecated
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = ShadowConnectivityManager.class)

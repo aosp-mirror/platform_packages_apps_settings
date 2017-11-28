@@ -34,7 +34,7 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class ManualPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
