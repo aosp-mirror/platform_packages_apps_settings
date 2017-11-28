@@ -45,7 +45,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class})
 public class BackupSettingsActivityPreferenceControllerTest {
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
