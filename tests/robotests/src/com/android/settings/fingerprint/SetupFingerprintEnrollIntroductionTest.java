@@ -60,7 +60,7 @@ import org.robolectric.shadows.ShadowKeyguardManager;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 ShadowEventLogWriter.class,
                 ShadowFingerprintManager.class,

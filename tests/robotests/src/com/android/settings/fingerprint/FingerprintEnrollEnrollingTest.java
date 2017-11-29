@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = Config.NEWEST_SDK,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 ShadowUtils.class,
                 ShadowVibrator.class
