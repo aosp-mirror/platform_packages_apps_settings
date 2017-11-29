@@ -31,7 +31,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AnomalyPreferenceTest {
     @Anomaly.AnomalyType
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;

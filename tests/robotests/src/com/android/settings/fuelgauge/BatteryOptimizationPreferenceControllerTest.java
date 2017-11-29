@@ -45,7 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class BatteryOptimizationPreferenceControllerTest {
     private static final String PKG_IN_WHITELIST = "com.pkg.in.whitelist";
     private static final String PKG_NOT_IN_WHITELIST = "com.pkg.not.in.whitelist";
