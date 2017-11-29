@@ -58,7 +58,7 @@ import org.robolectric.annotation.Config;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class BatteryInfoTest {
 
     private static final String STATUS_FULL = "Full";

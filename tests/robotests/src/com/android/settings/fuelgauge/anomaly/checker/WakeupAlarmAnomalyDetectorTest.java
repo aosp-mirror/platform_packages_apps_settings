@@ -56,7 +56,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class WakeupAlarmAnomalyDetectorTest {
     private static final String TARGET_PACKAGE_NAME = "com.android.target";
     private static final String ANOMALY_PACKAGE_NAME = "com.android.anomaly";

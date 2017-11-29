@@ -86,7 +86,7 @@ import java.util.List;
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,

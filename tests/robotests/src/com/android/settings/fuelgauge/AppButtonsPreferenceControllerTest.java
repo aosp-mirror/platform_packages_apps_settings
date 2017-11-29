@@ -66,7 +66,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AppButtonsPreferenceControllerTest {
     private static final String PACKAGE_NAME = "com.android.settings";
     private static final String RESOURCE_STRING = "string";
