@@ -48,7 +48,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
+    sdk = TestConfig.SDK_VERSION_O,
     shadows = ShadowSystemSettings.class
 )
 public class AutoRotatePreferenceControllerTest {

@@ -40,6 +40,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -178,11 +179,11 @@ public class IndexDataConverter {
             final String intentTargetPackage = sir.intentTargetPackage;
             final String intentTargetClass = sir.intentTargetClass;
 
-            Map<String, PreferenceControllerMixin> controllerUriMap = null;
+            Map<String, ResultPayload> controllerUriMap = new HashMap<>();
 
             if (fragmentName != null) {
                 controllerUriMap = DatabaseIndexingUtils
-                        .getPreferenceControllerUriMap(fragmentName, context);
+                        .getPayloadKeyMap(fragmentName, context);
             }
 
             headerTitle = XmlParserUtils.getDataTitle(context, attrs);
@@ -249,7 +250,7 @@ public class IndexDataConverter {
                     }
 
                     // TODO (b/62254931) index primitives instead of payload
-                    payload = DatabaseIndexingUtils.getPayloadFromUriMap(controllerUriMap, key);
+                    payload = controllerUriMap.get(key);
                     childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
 
                     builder.setSummaryOn(summary)

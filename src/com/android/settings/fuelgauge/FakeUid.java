@@ -51,6 +51,11 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public Timer getMulticastWakelockStats() {
+        return null;
+    }
+
+    @Override
     public ArrayMap<String, ? extends Timer> getSyncStats() {
         return null;
     }

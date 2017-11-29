@@ -17,10 +17,13 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.RuntimeEnvironment.application;
@@ -30,7 +33,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -60,6 +64,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowApplication;
@@ -69,7 +74,7 @@ import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = ShadowUserManager.class)
 public class DashboardFeatureProviderImplTest {
 
@@ -79,21 +84,28 @@ public class DashboardFeatureProviderImplTest {
     private UserManager mUserManager;
     @Mock
     private CategoryManager mCategoryManager;
+    @Mock
+    private PackageManager mPackageManager;
     private FakeFeatureFactory mFeatureFactory;
 
+    private Context mContext;
     private DashboardFeatureProviderImpl mImpl;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
+                new ResolveInfo());
         FakeFeatureFactory.setupForTest(mActivity);
         mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        mImpl = new DashboardFeatureProviderImpl(mActivity);
+        mImpl = new DashboardFeatureProviderImpl(mContext);
     }
 
     @Test
     public void shouldHoldAppContext() {
-        assertThat(mImpl.mContext).isEqualTo(mActivity.getApplicationContext());
+        assertThat(mImpl.mContext).isEqualTo(mContext.getApplicationContext());
     }
 
     @Test
@@ -342,7 +354,7 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void bindPreference_withIntentActionMetatdata_shouldSetLaunchAction() {
+    public void bindPreference_withIntentActionMetadata_shouldSetLaunchAction() {
         Activity activity = Robolectric.buildActivity(Activity.class).get();
         final ShadowApplication application = ShadowApplication.getInstance();
         final Preference preference = new Preference(application.getApplicationContext());
@@ -437,14 +449,13 @@ public class DashboardFeatureProviderImplTest {
     }
 
     @Test
-    public void testShouldTintIcon_shouldReturnValueFromResource() {
-        final Resources res = mActivity.getApplicationContext().getResources();
-        when(res.getBoolean(R.bool.config_tintSettingIcon))
-                .thenReturn(false);
-        assertThat(mImpl.shouldTintIcon()).isFalse();
-
-        when(res.getBoolean(R.bool.config_tintSettingIcon))
-                .thenReturn(true);
+    public void testShouldTintIcon_enabledInResources_shouldBeTrue() {
         assertThat(mImpl.shouldTintIcon()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testShouldTintIcon_disabledInResources_shouldBeFalse() {
+        assertThat(mImpl.shouldTintIcon()).isFalse();
     }
 }
