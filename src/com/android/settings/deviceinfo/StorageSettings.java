@@ -100,7 +100,7 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_storage;
     }
 

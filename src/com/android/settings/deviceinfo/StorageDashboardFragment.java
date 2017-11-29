@@ -117,7 +117,7 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_storage_dashboard;
     }
 

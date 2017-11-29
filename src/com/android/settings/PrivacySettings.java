@@ -220,7 +220,7 @@ public class PrivacySettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_backup_reset;
     }
 

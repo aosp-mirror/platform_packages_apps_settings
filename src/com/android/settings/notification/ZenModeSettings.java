@@ -54,7 +54,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_interruptions;
     }
 

@@ -133,7 +133,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_unrestricted_data_access;
     }
 

@@ -76,7 +76,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_about;
     }
 

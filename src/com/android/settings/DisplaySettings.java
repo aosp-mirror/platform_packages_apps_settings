@@ -77,7 +77,7 @@ public class DisplaySettings extends DashboardFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_display;
     }
 

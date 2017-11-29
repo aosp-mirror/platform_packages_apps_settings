@@ -78,7 +78,7 @@ public class ScreenPinningSettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_screen_pinning;
     }
 

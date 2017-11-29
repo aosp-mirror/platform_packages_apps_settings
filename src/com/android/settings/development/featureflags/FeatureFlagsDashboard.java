@@ -46,7 +46,7 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return 0;
     }
 

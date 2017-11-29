@@ -66,7 +66,7 @@ public final class MagnificationPreferenceFragment extends SettingsPreferenceFra
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_magnification;
     }
 
