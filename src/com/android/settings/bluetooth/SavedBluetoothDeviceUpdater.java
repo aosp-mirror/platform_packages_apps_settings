@@ -25,17 +25,17 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 /**
- * Controller to maintain connected bluetooth devices
+ * Maintain and update saved bluetooth devices(bonded but not connected)
  */
-public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
+public class SavedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
 
-    public ConnectedBluetoothDeviceUpdater(DashboardFragment fragment,
+    public SavedBluetoothDeviceUpdater(DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
         super(fragment, devicePreferenceCallback);
     }
 
     @VisibleForTesting
-    ConnectedBluetoothDeviceUpdater(DashboardFragment fragment,
+    SavedBluetoothDeviceUpdater(DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback,
             LocalBluetoothManager localBluetoothManager) {
         super(fragment, devicePreferenceCallback, localBluetoothManager);
@@ -44,15 +44,15 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     @Override
     public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {
         if (state == BluetoothAdapter.STATE_CONNECTED) {
-            addPreference(cachedDevice);
-        } else if (state == BluetoothAdapter.STATE_DISCONNECTED) {
             removePreference(cachedDevice);
+        } else if (state == BluetoothAdapter.STATE_DISCONNECTED) {
+            addPreference(cachedDevice);
         }
     }
 
     @Override
     public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && !device.isConnected();
     }
 }
