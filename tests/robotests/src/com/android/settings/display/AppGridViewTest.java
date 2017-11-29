@@ -18,9 +18,16 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.util.IconDrawableFactory;
 
 import com.android.settings.TestConfig;
@@ -35,13 +42,19 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AppGridViewTest {
 
     @Mock
     private ResolveInfo mInfo;
     @Mock
     private ActivityInfo mActivityInfo;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
+    @Mock
+    private Drawable mIcon;
+    @Mock
+    private PackageManager mPackageManager;
     private Context mContext;
     private IconDrawableFactory mIconFactory;
 
@@ -49,13 +62,16 @@ public class AppGridViewTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mInfo.activityInfo = mActivityInfo;
-        mContext = RuntimeEnvironment.application;
+        mInfo.activityInfo.applicationInfo = mApplicationInfo;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
         mIconFactory = IconDrawableFactory.newInstance(mContext);
     }
 
     @Test
     public void appEntry_shouldLoadIcon() {
-
+        when(mPackageManager.loadUnbadgedItemIcon(mActivityInfo, mApplicationInfo)).thenReturn(
+                mIcon);
         final AppGridView.ActivityEntry activityEntry = new AppGridView.ActivityEntry(
                 mInfo, "label", mIconFactory);
 
