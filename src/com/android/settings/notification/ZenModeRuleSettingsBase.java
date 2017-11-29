@@ -26,7 +26,6 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.SearchIndexableResource;
 import android.service.notification.ConditionProviderService;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
@@ -44,15 +43,9 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import java.util.Arrays;
-import java.util.List;
-
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
@@ -62,8 +55,6 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
 
     private static final String KEY_RULE_NAME = "rule_name";
     private static final String KEY_ZEN_MODE = "zen_mode";
-    private static final String KEY_EVENT_RULE_SETTINGS = "zen_mode_event_rule_settings";
-    private static final String KEY_SCHEDULE_RULE_SETTINGS = "zen_mode_schedule_rule_settings";
 
     protected Context mContext;
     protected boolean mDisableListeners;
@@ -306,26 +297,4 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
         }
         mDisableListeners = false;
     }
-
-    /**
-     * For Search.
-     */
-    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableResource> getXmlResourcesToIndex(
-                        Context context, boolean enabled) {
-                    final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    // not indexable
-                    return Arrays.asList(sir);
-                }
-
-                @Override
-                public List<String> getNonIndexableKeys(Context context) {
-                    final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_SCHEDULE_RULE_SETTINGS);
-                    keys.add(KEY_EVENT_RULE_SETTINGS);
-                    return keys;
-                }
-            };
 }
