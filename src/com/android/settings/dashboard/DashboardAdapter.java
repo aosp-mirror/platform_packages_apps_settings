@@ -477,7 +477,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
         a.recycle();
         if (category != null) {
-            for (Tile tile : category.tiles) {
+            for (Tile tile : category.getTiles()) {
                 if (tile.isIconTintable) {
                     // If this drawable is tintable, tint it to match the color.
                     tile.icon.setTint(tintColor);

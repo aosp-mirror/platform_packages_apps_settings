@@ -222,14 +222,12 @@ public class DashboardAdapterTest {
         doReturn(mockTypedArray).when(mContext).obtainStyledAttributes(any(int[].class));
         doReturn(0x89000000).when(mockTypedArray).getColor(anyInt(), anyInt());
 
-        final DashboardCategory category = mock(DashboardCategory.class);
-        final List<Tile> tiles = new ArrayList<>();
+        final DashboardCategory category = new DashboardCategory();
         final Icon mockIcon = mock(Icon.class);
         final Tile tile = new Tile();
         tile.isIconTintable = true;
         tile.icon = mockIcon;
-        tiles.add(tile);
-        category.tiles = tiles;
+        category.addTile(tile);
 
         mDashboardAdapter.setCategory(category);
 
@@ -250,10 +248,8 @@ public class DashboardAdapterTest {
     public void testBindConditionAndSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null, null);
         final List<Tile> suggestions = makeSuggestions("pkg1");
-        final DashboardCategory category = mock(DashboardCategory.class);
-        final List<Tile> tiles = new ArrayList<>();
-        tiles.add(mock(Tile.class));
-        category.tiles = tiles;
+        final DashboardCategory category = new DashboardCategory();
+        category.addTile(mock(Tile.class));
 
         mDashboardAdapter.setCategoriesAndSuggestions(category, suggestions);
 
@@ -277,10 +273,8 @@ public class DashboardAdapterTest {
     public void testBindConditionAndSuggestion_v2_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapter(mContext, null, null, null, null, null);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
-        final DashboardCategory category = mock(DashboardCategory.class);
-        final List<Tile> tiles = new ArrayList<>();
-        tiles.add(mock(Tile.class));
-        category.tiles = tiles;
+        final DashboardCategory category = new DashboardCategory();
+        category.addTile(mock(Tile.class));
 
         mDashboardAdapter.setSuggestionsV2(suggestions);
 
@@ -310,10 +304,8 @@ public class DashboardAdapterTest {
                 null /* SuggestionDismissController.Callback */);
 
         final List<Tile> suggestions = new ArrayList<>();
-        final DashboardCategory category = mock(DashboardCategory.class);
-        final List<Tile> tiles = new ArrayList<>();
-        tiles.add(mock(Tile.class));
-        category.tiles = tiles;
+        final DashboardCategory category = new DashboardCategory();
+        category.addTile(mock(Tile.class));
         mDashboardAdapter.setCategoriesAndSuggestions(category, suggestions);
 
         final RecyclerView data = mock(RecyclerView.class);

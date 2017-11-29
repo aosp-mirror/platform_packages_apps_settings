@@ -431,7 +431,7 @@ public class DashboardFeatureProviderImplTest {
         mImpl = new DashboardFeatureProviderImpl(mActivity);
         ReflectionHelpers.setField(mImpl, "mCategoryManager", mCategoryManager);
         final DashboardCategory category = new DashboardCategory();
-        category.tiles.add(new Tile());
+        category.addTile(new Tile());
         when(mCategoryManager
                 .getTilesByCategory(any(Context.class), eq(CategoryKey.CATEGORY_HOMEPAGE)))
                 .thenReturn(category);

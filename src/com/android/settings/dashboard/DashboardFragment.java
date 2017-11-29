@@ -307,7 +307,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             Log.d(TAG, "NO dashboard tiles for " + TAG);
             return;
         }
-        List<Tile> tiles = category.tiles;
+        final List<Tile> tiles = category.getTiles();
         if (tiles == null) {
             Log.d(TAG, "tile list is empty, skipping category " + category.title);
             return;

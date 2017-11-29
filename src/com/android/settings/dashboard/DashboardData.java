@@ -268,8 +268,9 @@ public class DashboardData {
                         && hiddenSuggestion == 0);
 
         if (mCategory != null) {
-            for (int j = 0; j < mCategory.tiles.size(); j++) {
-                final Tile tile = mCategory.tiles.get(j);
+            final List<Tile> tiles = mCategory.getTiles();
+            for (int j = 0; j < tiles.size(); j++) {
+                final Tile tile = tiles.get(j);
                 addToItemList(tile, R.layout.dashboard_tile, Objects.hash(tile.title),
                         true /* add */);
             }
