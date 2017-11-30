@@ -1142,11 +1142,11 @@ public class RadioInfo extends Activity {
             switch (state) {
                 case TelephonyManager.DATA_CONNECTED:
                     //FIXME: Replace with a TelephonyManager call
-                    phone.setDataEnabled(false);
+                    phone.setUserDataEnabled(false);
                     break;
                 case TelephonyManager.DATA_DISCONNECTED:
                     //FIXME: Replace with a TelephonyManager call
-                    phone.setDataEnabled(true);
+                    phone.setUserDataEnabled(true);
                     break;
                 default:
                     // do nothing
