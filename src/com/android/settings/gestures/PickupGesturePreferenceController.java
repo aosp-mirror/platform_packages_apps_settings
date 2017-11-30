@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -90,7 +91,7 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
     @Override
     public boolean canHandleClicks() {
-        return mAmbientConfig.pulseOnPickupCanBeModified(mUserId);
+        return pulseOnPickupCanBeModified();
     }
 
     @Override
@@ -101,5 +102,10 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
 
         return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
                 ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
+    }
+
+    @VisibleForTesting
+    boolean pulseOnPickupCanBeModified() {
+        return mAmbientConfig.pulseOnPickupCanBeModified(mUserId);
     }
 }
