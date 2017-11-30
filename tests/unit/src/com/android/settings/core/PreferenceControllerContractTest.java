@@ -54,7 +54,7 @@ public class PreferenceControllerContractTest {
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
         final Set<String> errorClasses = new ArraySet<>();
 
-        for (Class clazz: SearchIndexableResources.providerValues()) {
+        for (Class clazz : SearchIndexableResources.providerValues()) {
 
             final Indexable.SearchIndexProvider provider =
                     DatabaseIndexingUtils.getSearchIndexProvider(clazz);
@@ -68,7 +68,8 @@ public class PreferenceControllerContractTest {
                 continue;
             }
             for (AbstractPreferenceController controller : controllers) {
-                if (!(controller instanceof PreferenceControllerMixin)) {
+                if (!(controller instanceof PreferenceControllerMixin)
+                        && !(controller instanceof BasePreferenceController)) {
                     errorClasses.add(controller.getClass().getName());
                 }
             }
@@ -76,7 +77,8 @@ public class PreferenceControllerContractTest {
 
         if (!errorClasses.isEmpty()) {
             final StringBuilder errorMessage = new StringBuilder()
-                    .append("Each preference must implement PreferenceControllerMixin, ")
+                    .append("Each preference must implement PreferenceControllerMixin ")
+                    .append("or extend BasePreferenceController, ")
                     .append("the following classes don't:\n");
             for (String c : errorClasses) {
                 errorMessage.append(c).append("\n");
