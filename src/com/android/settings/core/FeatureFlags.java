@@ -20,7 +20,6 @@ package com.android.settings.core;
  * This class keeps track of all feature flags in Settings.
  */
 public class FeatureFlags {
-    public static final String DEVICE_INFO_V2 = "device_info_v2";
     public static final String SEARCH_V2 = "settings_search_v2";
     public static final String SUGGESTIONS_V2 = "new_settings_suggestion";
     public static final String APP_INFO_V2 = "settings_app_info_v2";

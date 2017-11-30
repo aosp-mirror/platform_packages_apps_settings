@@ -65,12 +65,9 @@ import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
-import com.android.settings.deviceinfo.ImeiInformation;
 import com.android.settings.deviceinfo.PrivateVolumeForget;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.PublicVolumeSettings;
-import com.android.settings.deviceinfo.SimStatus;
-import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.NightDisplaySettings;
@@ -235,9 +232,6 @@ public class SettingsGateway {
             ManagedProfileSettings.class.getName(),
             ChooseAccountActivity.class.getName(),
             IccLockSettings.class.getName(),
-            ImeiInformation.class.getName(),
-            SimStatus.class.getName(),
-            Status.class.getName(),
             TestingSettings.class.getName(),
             WifiAPITest.class.getName(),
             WifiInfo.class.getName(),
