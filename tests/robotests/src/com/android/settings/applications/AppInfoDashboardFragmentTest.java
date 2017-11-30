@@ -73,8 +73,7 @@ import java.util.HashSet;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
-    shadows = AppInfoDashboardFragmentTest.ShadowUtils.class
+    sdk = TestConfig.SDK_VERSION_O
 )
 public final class AppInfoDashboardFragmentTest {
 
@@ -369,6 +368,7 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabled_buttonShouldWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";
@@ -411,6 +411,7 @@ public final class AppInfoDashboardFragmentTest {
     }
 
     @Test
+    @Config(shadows = ShadowUtils.class)
     public void handleDisableable_appIsEnabledAndInKeepEnabledWhitelist_buttonShouldNotWork() {
         final ApplicationInfo info = new ApplicationInfo();
         info.packageName = "pkg";

@@ -39,21 +39,18 @@
 
     <Preference
         android:key="notification_settings"
-        android:title="@string/notifications_label"
-        android:selectable="true"/>
+        android:title="@string/notifications_label"/>
 
     <com.android.settings.widget.FixedLineSummaryPreference
         android:key="permission_settings"
         android:title="@string/permissions_label"
         android:summary="@string/summary_placeholder"
-        android:selectable="true"
         app:summaryLineCount="1" />
 
     <Preference
         android:key="storage_settings"
         android:title="@string/storage_settings"
-        android:summary="@string/summary_placeholder"
-        android:selectable="true"/>
+        android:summary="@string/summary_placeholder"/>
 
     <com.android.settings.applications.AppDomainsPreference
         android:key="instant_app_launch_supported_domain_urls"
@@ -63,14 +60,12 @@
     <Preference
         android:key="data_settings"
         android:title="@string/data_usage_summary_title"
-        android:summary="@string/summary_placeholder"
-        android:selectable="true"/>
+        android:summary="@string/summary_placeholder"/>
 
     <Preference
         android:key="battery"
         android:title="@string/power_usage_summary_title"
-        android:summary="@string/summary_placeholder"
-        android:selectable="true"/>
+        android:summary="@string/summary_placeholder"/>
 
     <Preference
         android:key="preferred_settings"
@@ -82,8 +77,33 @@
         android:key="memory"
         android:title="@string/memory_settings_title"
         android:summary="@string/summary_placeholder"
-        android:enabled="false"
-        android:selectable="true"/>
+        android:enabled="false"/>
+
+    <!-- Default apps shortcuts -->
+    <Preference
+        android:key="default_home"
+        android:title="@string/home_app"
+        android:summary="@string/summary_placeholder" />
+
+    <Preference
+        android:key="default_browser"
+        android:title="@string/default_browser_title"
+        android:summary="@string/summary_placeholder" />
+
+    <Preference
+        android:key="default_phone_app"
+        android:title="@string/default_phone_title"
+        android:summary="@string/default_phone_title" />
+
+    <Preference
+        android:key="default_emergency_app"
+        android:title="@string/default_emergency_app"
+        android:summary="@string/summary_placeholder" />
+
+    <Preference
+        android:key="default_sms_app"
+        android:title="@string/sms_application_title"
+        android:summary="@string/summary_placeholder" />
 
     <Preference
         android:key="app_version"
