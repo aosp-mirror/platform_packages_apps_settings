@@ -31,6 +31,7 @@ import com.android.settings.password.ChooseLockPassword.ChooseLockPasswordFragme
 import com.android.settings.password.ChooseLockPassword.IntentBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.setupwizardlib.GlifLayout;
@@ -47,9 +48,10 @@ import org.robolectric.shadows.ShadowDrawable;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
+                SettingsShadowResourcesImpl.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
                 ShadowEventLogWriter.class,
                 ShadowUtils.class
