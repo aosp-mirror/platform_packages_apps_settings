@@ -172,6 +172,22 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     }
 
     /**
+     * Update Phone book permission
+     *
+     */
+     public void  setContactSharingState() {
+        if ((mDevice.getPhonebookAccessPermission() != BluetoothDevice.ACCESS_ALLOWED)
+                && (mDevice.getPhonebookAccessPermission() != BluetoothDevice.ACCESS_REJECTED)) {
+                 if (mDevice.getBluetoothClass().getDeviceClass()
+                        == BluetoothClass.Device.AUDIO_VIDEO_HANDSFREE) {
+                    onCheckedChanged(null, true);
+            } else {
+                onCheckedChanged(null, false);
+            }
+        }
+    }
+
+    /**
      * A method for querying if the provided editable is a valid passkey/pin format for this device.
      *
      * @param s - The passkey/pin
