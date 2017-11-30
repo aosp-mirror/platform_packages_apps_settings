@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
@@ -86,6 +87,7 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
 
         // Start the new Fragment.
         args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
+        args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
         startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
         mSendExtraWindowStateChanged = true;
     }
