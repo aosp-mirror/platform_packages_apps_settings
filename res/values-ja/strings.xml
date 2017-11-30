@@ -114,7 +114,7 @@
     <string name="bluetooth_disconnect_all_profiles" product="device" msgid="3995834526315103965">"この端末と <xliff:g id="DEVICE_NAME">%1$s</xliff:g> との接続を解除します。"</string>
     <string name="bluetooth_disconnect_dialog_ok" msgid="3308586619539119106">"接続を解除"</string>
     <string name="bluetooth_empty_list_user_restricted" msgid="603521233563983689">"Bluetooth設定を変更する権限がありません。"</string>
-    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"新しいデバイスとペア設定"</string>
+    <string name="bluetooth_pairing_pref_title" msgid="7429413067477968637">"新しいデバイスとペア設定する"</string>
     <string name="bluetooth_is_visible_message" msgid="6222396240776971862">"Bluetooth設定を開いている間は、<xliff:g id="DEVICE_NAME">%1$s</xliff:g>は付近のデバイスに表示されています。"</string>
     <string name="bluetooth_footer_mac_message" product="default" msgid="1109366350000220283">"スマートフォンの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_footer_mac_message" product="tablet" msgid="6807634484499166486">"タブレットの Bluetooth アドレス: <xliff:g id="BLUETOOTH_MAC_ADDRESS">%1$s</xliff:g>"</string>
@@ -166,7 +166,7 @@
     <string name="bluetooth_map_acceptance_dialog_text" msgid="8712508202081143737">"%1$sがメッセージにアクセスしようとしています。%2$sにアクセスを許可しますか？"</string>
     <string name="bluetooth_sap_request" msgid="2669762224045354417">"SIMアクセスリクエスト"</string>
     <string name="bluetooth_sap_acceptance_dialog_text" msgid="4414253873553608690">"<xliff:g id="DEVICE_NAME_0">%1$s</xliff:g>がSIMカードにアクセスしようとしています。SIMカードへのアクセスを許可すると、接続を処理している間、端末上のデータ接続は無効になります。<xliff:g id="DEVICE_NAME_1">%2$s?</xliff:g>にアクセスを許可します"</string>
-    <string name="bluetooth_device_name_summary" msgid="4757990010751789977">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
+    <string name="bluetooth_device_name_summary" msgid="522235742194965734">"他の端末には「<xliff:g id="DEVICE_NAME">^1</xliff:g>」として表示されます"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"端末"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"新しいデバイスとペア設定"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日付と時刻"</string>
@@ -372,6 +372,9 @@
     <string name="security_settings_fingerprint_enroll_introduction_continue" msgid="7472492858148162530">"次へ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup" msgid="5021369420474432665">"スキップ"</string>
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup" msgid="1961957425135180242">"次へ"</string>
+    <string name="setup_fingerprint_enroll_skip_title" msgid="362050541117362034">"指紋の設定をスキップしますか？"</string>
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text" msgid="958990414356204763">"指紋の設定にかかる時間は 1～2 分です。スキップした場合は、後で設定から指紋を追加できます。"</string>
+    <string name="lock_screen_intro_skip_title" msgid="4988210105913705679">"画面ロックをスキップしますか？"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet" msgid="1581834104051243425">"端末保護機能は ON になりません。このタブレットの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="device" msgid="4629503416877189572">"端末保護機能は ON になりません。この端末の紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
     <string name="lock_screen_intro_skip_dialog_text_frp" product="default" msgid="2423428240245737909">"端末保護機能は ON になりません。このスマートフォンの紛失、盗難、リセット時に、他人に使用されるのを阻止することはできません。"</string>
@@ -389,7 +392,7 @@
     <string name="security_settings_fingerprint_enroll_start_title" msgid="2068961812439460133">"センサーに触れる"</string>
     <string name="security_settings_fingerprint_enroll_start_message" msgid="3909929328942564524">"指をセンサーに当て、振動したら離します。"</string>
     <string name="security_settings_fingerprint_enroll_repeat_title" msgid="2819679722403209778">"指を離してからもう一度触れる"</string>
-    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を何度か離して、あらゆる角度から指紋を登録します"</string>
+    <string name="security_settings_fingerprint_enroll_repeat_message" msgid="6158989350522518586">"指を何度か離して、あらゆる角度から指紋を登録します。"</string>
     <string name="security_settings_fingerprint_enroll_finish_title" msgid="7567276170287972230">"指紋の登録完了"</string>
     <string name="security_settings_fingerprint_enroll_finish_message" msgid="4796715961273420536">"このアイコンが表示されているときは、本人確認や購入の承認に指紋認証を使用します。"</string>
     <string name="security_settings_fingerprint_enroll_enrolling_skip" msgid="3710211704052369752">"後で行う"</string>
@@ -457,7 +460,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"タブレットの保護"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"端末の保護"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"スマートフォンの保護"</string>
-    <string name="setup_lock_settings_picker_fingerprint_message" msgid="5585650064305600578">"セキュリティを強化するには、予備の画面ロック方式を設定してください。"</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5474935724843291107">"セキュリティを強化するには、予備の画面ロック方式を設定してください。"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"このタブレットが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"この端末が他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"このスマートフォンが他人に無断で使用されるのを防ぐには、端末保護機能を有効にします。利用する画面ロックを選択してください。"</string>
@@ -530,7 +533,7 @@
     <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile" msgid="4994062501123299418">"画面ロックがないと、プロファイル保護機能は利用できません。<xliff:g id="EMPTY_LINE">
 
 </xliff:g>保存してある指紋もこのプロファイルから削除されるため、指紋を使用してプロファイルのロック解除、購入の承認、アプリへのログインを行うことはできなくなります。"</string>
-    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"削除する"</string>
+    <string name="unlock_disable_frp_warning_ok" msgid="7075138677177748705">"無効にする"</string>
     <string name="unlock_change_lock_pattern_title" msgid="2044092014872741130">"ロック解除パターンの変更"</string>
     <string name="unlock_change_lock_pin_title" msgid="806629901095938484">"ロック解除PINの変更"</string>
     <string name="unlock_change_lock_password_title" msgid="5606298470358768865">"ロック解除パスワードの変更"</string>
@@ -588,6 +591,7 @@
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"一連の数字を昇順や降順にしたり、繰り返したりすることはできません"</string>
     <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"キャンセル"</string>
+    <string name="lockpassword_clear_label" msgid="5724429464960458155">"消去"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"キャンセル"</string>
     <string name="lockpattern_tutorial_continue_label" msgid="3559793618653400434">"次へ"</string>
     <string name="lock_setup" msgid="3355847066343753943">"設定が完了しました。"</string>
@@ -636,7 +640,7 @@
     <string name="bluetooth_pairing_dialog_sharing_phonebook_title" msgid="7664141669886358618">"電話帳を共有する"</string>
     <string name="bluetooth_pairing_dialog_contants_request" msgid="5531109163573611348">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>が連絡先と通話履歴にアクセスしようとしています。"</string>
     <string name="bluetooth_pairing_dialog_paring_request" msgid="8451248193517851958">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>がBluetoothとペア設定しようとしています。接続されると、連絡先や通話履歴にアクセスします。"</string>
-    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"ペアリングされたデバイス"</string>
+    <string name="bluetooth_preference_paired_devices" msgid="1970524193086791964">"ペア設定したデバイス"</string>
     <string name="bluetooth_preference_found_devices" msgid="1647983835063249680">"使用可能なデバイス"</string>
     <string name="bluetooth_preference_no_found_devices" msgid="7594339669961811591">"利用可能なデバイスがありません"</string>
     <string name="bluetooth_device_context_connect" msgid="3997659895003244941">"接続"</string>
@@ -647,8 +651,8 @@
     <string name="bluetooth_device_context_connect_advanced" msgid="2643129703569788771">"オプション..."</string>
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"詳細設定"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"Bluetooth詳細設定"</string>
-    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"BluetoothをONにすると、お使いの端末は近くにある他のBluetoothデバイスと通信できます。"</string>
-    <string name="ble_scan_notify_text" msgid="1295915006005700650">"位置情報の精度を向上させるため、BluetoothがOFFの場合でもシステムのアプリやサービスはBluetoothデバイスを検出できます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
+    <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"Bluetooth を ON にすると、お使いの端末は近くにある他の Bluetooth デバイスと通信できます。"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"位置情報の精度を向上させるため、Bluetooth が OFF の場合でもシステムのアプリやサービスは Bluetooth デバイスを検出できます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"接続できませんでした。もう一度お試しください。"</string>
     <string name="device_details_title" msgid="6576953269221085300">"端末の詳細"</string>
     <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"端末の Bluetooth アドレス: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -731,7 +735,7 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"この機能を使用するには、ネットワーク評価プロバイダを選択してください"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"この機能を使用するには、対応するネットワーク評価プロバイダを選択してください"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"証明書のインストール"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"位置情報の精度を向上させるため、Wi-FiがOFFの場合でもシステムのアプリやサービスはWi‑Fiネットワークをスキャンできます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
+    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"位置情報の精度を向上させるため、Wi-Fi が OFF の場合でもシステムのアプリやサービスは Wi‑Fi ネットワークをスキャンできます。この設定は、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で変更できます。"</string>
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"位置情報の精度を上げるには、<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>スキャンの設定<xliff:g id="LINK_END_1">LINK_END</xliff:g>で Wi-Fi のスキャンをオンにしてください。"</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"次回から表示しない"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"スリープ時にWi-Fi接続を維持"</string>
@@ -766,7 +770,7 @@
     <string name="wifi_empty_list_user_restricted" msgid="7322372065475939129">"Wi-Fiネットワークを変更する権限がありません。"</string>
     <string name="wifi_more" msgid="3195296805089107950">"その他"</string>
     <string name="wifi_setup_wps" msgid="8128702488486283957">"自動設定（WPS）"</string>
-    <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定項目"</string>
+    <string name="wifi_show_advanced" msgid="3409422789616520979">"詳細設定"</string>
     <string name="wifi_advanced_toggle_description_expanded" msgid="2380600578544493084">"詳細オプションのプルダウン リストです。折りたたむにはダブルタップします。"</string>
     <string name="wifi_advanced_toggle_description_collapsed" msgid="1463812308429197263">"詳細オプションのプルダウン リストです。展開するにはダブルタップします。"</string>
     <string name="wifi_wps_setup_title" msgid="8207552222481570175">"Wi-Fi保護設定"</string>
@@ -781,6 +785,7 @@
     <string name="wifi_wps_failed_tkip" msgid="4282401586860713349">"無線ルーターのセキュリティ設定（TKIP）はサポートされていません"</string>
     <string name="wifi_wps_failed_auth" msgid="1174614355181181958">"認証に失敗しました。もう一度お試しください。"</string>
     <string name="wifi_wps_failed_overlap" msgid="5159533685596844778">"別のWPSセッションが検出されました。数分後にもう一度お試しください。"</string>
+    <string name="wifi_wps_failed_wifi_disconnected" msgid="3829472117754104164">"Wi‑Fi 接続が解除されました。WPS セットアップをキャンセルしました。"</string>
     <string name="wifi_ssid" msgid="5519636102673067319">"ネットワーク名"</string>
     <string name="wifi_ssid_hint" msgid="897593601067321355">"SSIDを入力します"</string>
     <string name="wifi_security" msgid="6603611185592956936">"セキュリティ"</string>
@@ -817,6 +822,8 @@
     <string name="wifi_wps_available_first_item" msgid="4422547079984583502">"WPS利用可"</string>
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" （WPS利用可）"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"ネットワークパスワードを入力してください"</string>
+    <string name="wifi_carrier_connect" msgid="8174696557882299911">"携帯通信会社の Wi‑Fi ネットワーク"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"<xliff:g id="NAME">%1%s</xliff:g> 経由で接続"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"現在地情報の精度向上やその他の目的で、<xliff:g id="APP_NAME">%1$s</xliff:g>ではWi-FiがOFFのときでもネットワークスキャンをオンにすることを要求しています。\n\nスキャンを必要とするすべてのアプリでスキャンを許可しますか？"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"この機能をOFFにするには、オーバーフローメニューの[詳細設定]にアクセスします。"</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"許可する"</string>
@@ -834,6 +841,7 @@
     <string name="wifi_connect" msgid="1076622875777072845">"接続"</string>
     <string name="wifi_failed_connect_message" msgid="8491902558970292871">"ネットワークに接続できませんでした"</string>
     <string name="wifi_forget" msgid="8168174695608386644">"削除"</string>
+    <string name="wifi_modify" msgid="6100248070440710782">"変更"</string>
     <string name="wifi_failed_forget_message" msgid="1348172929201654986">"ネットワークを削除できませんでした"</string>
     <string name="wifi_save" msgid="3331121567988522826">"保存"</string>
     <string name="wifi_failed_save_message" msgid="6650004874143815692">"ネットワークを保存できませんでした"</string>
@@ -846,6 +854,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Wi-Fi詳細設定"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MACアドレス"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IPアドレス"</string>
+    <string name="wifi_details_title" msgid="3471132676909349382">"ネットワーク情報"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"サブネット マスク"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 アドレス"</string>
@@ -878,16 +887,15 @@
     <string name="wifi_p2p_cancel_connect_title" msgid="255267538099324413">"招待状のキャンセル"</string>
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g>との接続への招待をキャンセルしますか？"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"このグループを削除しますか？"</string>
-    <string name="wifi_tether_checkbox_text" msgid="1847167643625779136">"ポータブルWi-Fiアクセスポイント"</string>
-    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fiアクセスポイント"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"インターネット接続やコンテンツを他の端末と共有しません"</string>
+    <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Wi-Fi アクセス ポイント"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"インターネット接続やコンテンツを他の端末と共有しない"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"このタブレットのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"このスマートフォンのインターネット接続をアクセス ポイント経由で共有"</string>
     <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"アプリがコンテンツを共有しています。インターネット接続を共有するには、アクセス ポイントをオフにしてから再度オンにします"</string>
-    <string name="wifi_hotspot_name_title" msgid="1341735529132128887">"Wi‑Fi 名"</string>
+    <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"アクセス ポイント名"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> を ON にしています..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"他の端末が <xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> に接続できます"</string>
-    <string name="wifi_hotspot_password_title" msgid="1955592302902091281">"Wi-Fi パスワード"</string>
+    <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"アクセス ポイントのパスワード"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 帯域幅"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"アクセス ポイントを使って他の端末との Wi‑Fi ネットワークを作成します。アクセス ポイントはモバイルデータ接続によるインターネット接続を提供します。モバイルデータ通信料が追加で発生する可能性があります。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"アプリを使ってアクセス ポイントを作成し、コンテンツを近くの端末と共有できます。"</string>
@@ -939,7 +947,7 @@
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Wi-Fi発信をONにすると、ユーザーの設定と信号の強度に応じて、スマートフォンからWi-Fiネットワークか携帯通信会社ネットワークのいずれかを経由して通話をルーティングできるようになります。この機能をONにする場合は、事前に料金などの条件について携帯通信会社にご確認ください。"</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="3571902448699714454">"緊急対応の住所の更新"</string>
-    <string name="emergency_address_summary" msgid="306028701568728126">"Wi-Fi を使用して 110 に電話した場合に、緊急サービスが現在地として使用する住所"</string>
+    <string name="emergency_address_summary" msgid="3266760199681945746">"Wi‑Fi を使用して緊急通報を行った場合に、緊急サービスが現在地として使用する住所"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"表示"</string>
     <string name="sound_settings" msgid="5534671337768745343">"音"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"音量"</string>
@@ -993,6 +1001,7 @@
     <string name="search_settings" msgid="1910951467596035063">"検索"</string>
     <string name="search_settings_summary" msgid="9205656546570654169">"検索設定と履歴の管理"</string>
     <string name="search_settings_no_results" msgid="8799027492641230999">"一致する結果はありません"</string>
+    <string name="search_clear_history" msgid="4196658962573162457">"履歴を削除"</string>
     <string name="display_settings" msgid="7965901687241669598">"ディスプレイ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"画面の自動回転"</string>
     <string name="color_mode_title" msgid="3159275920408338215">"鮮明な色"</string>
@@ -1056,13 +1065,13 @@
     <string name="screensaver_settings_summary_never" msgid="5165622985174349585">"なし"</string>
     <string name="screensaver_settings_summary_off" msgid="2481581696365146473">"OFF"</string>
     <string name="screensaver_settings_disabled_prompt" msgid="1239088321034437608">"スマートフォンのホルダー装着時やスリープ時の動作を管理するには、スクリーン セーバーを ON にします。"</string>
-    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"開始時間"</string>
+    <string name="screensaver_settings_when_to_dream" msgid="7262410541382890146">"起動するタイミング"</string>
     <string name="screensaver_settings_current" msgid="4663846038247130023">"現在のスクリーン セーバー"</string>
     <string name="screensaver_settings_dream_start" msgid="4998187847985120168">"今すぐ起動"</string>
     <string name="screensaver_settings_button" msgid="7292214707625717013">"設定"</string>
     <string name="automatic_brightness" msgid="5014143533884135461">"明るさを自動調整"</string>
     <string name="lift_to_wake_title" msgid="4555378006856277635">"指を離してスリープ状態から復帰"</string>
-    <string name="ambient_display_screen_title" msgid="4252755516328775766">"常に画面表示"</string>
+    <string name="ambient_display_screen_title" msgid="4252755516328775766">"アンビエント表示"</string>
     <string name="ambient_display_screen_summary_always_on" msgid="7337555569694794132">"常に ON / 電池使用量が増えます"</string>
     <string name="ambient_display_screen_summary_notifications" msgid="1449570742600868654">"新しい通知"</string>
     <string name="ambient_display_category_triggers" msgid="4359289754456268573">"表示するタイミング"</string>
@@ -1326,6 +1335,7 @@
     <string name="menu_restore" msgid="8260067415075573273">"初期設定にリセット"</string>
     <string name="restore_default_apn_completed" msgid="2824775307377604897">"APN設定をリセットしました。"</string>
     <string name="reset_dashboard_title" msgid="6254873816990678620">"リセット オプション"</string>
+    <string name="reset_dashboard_summary" msgid="4851012632493522755">"ネットワーク、アプリ、または端末をリセットできます"</string>
     <string name="reset_network_title" msgid="6166025966016873843">"Wi-Fi、モバイル、Bluetooth をリセット"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"以下を含む、すべてのネットワーク設定がリセットされます。\n\n"<li>"Wi‑Fi"</li>\n<li>"モバイルデータ"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"設定をリセット"</string>
@@ -1334,17 +1344,14 @@
     <string name="reset_network_confirm_title" msgid="1759888886976962773">"リセットしますか？"</string>
     <string name="network_reset_not_available" msgid="7188610385577164676">"ネットワークのリセットはこのユーザーには許可されていません"</string>
     <string name="reset_network_complete_toast" msgid="787829973559541880">"ネットワーク設定をリセットしました"</string>
-    <string name="master_clear_title" msgid="6617679904229218425">"すべてのデータを消去（初期状態にリセット）"</string>
-    <plurals name="master_clear_with_account_summary" formatted="false" msgid="5911377203778818712">
-      <item quantity="other"><xliff:g id="ACCOUNT_COUNT">%1$d</xliff:g> 件のアカウントをリセットします</item>
-      <item quantity="one">1 件のアカウントをリセットします</item>
-    </plurals>
-    <string name="master_clear_summary" msgid="6902443944660426951">"内部ストレージとすべてのデータをリセットします"</string>
+    <string name="master_clear_title" msgid="3531267871084279512">"すべてのデータを消去（初期状態にリセット）"</string>
     <string name="master_clear_desc" product="tablet" msgid="9146059417023157222">"この操作を行うと、タブレットの以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Googleアカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="master_clear_desc" product="default" msgid="4800386183314202571">"この操作を行うと、モバイル端末の以下のデータを含む"<b>"内部ストレージ"</b>"の全データが消去されます。\n\n"<li>"Googleアカウント"</li>\n<li>"システムやアプリのデータと設定"</li>\n<li>"ダウンロードしたアプリ"</li></string>
     <string name="master_clear_accounts" product="default" msgid="6412857499147999073">\n\n"以下のアカウントにログインしています:\n"</string>
     <string name="master_clear_other_users_present" product="default" msgid="5161423070702470742">\n\n"この端末には他にもユーザーがいます。\n"</string>
     <string name="master_clear_desc_also_erases_external" msgid="1903185203791274237"><li>"音楽"</li>\n<li>"画像"</li>\n<li>"他のユーザーデータ"</li></string>
+    <string name="master_clear_desc_also_erases_esim" msgid="312352697653096008"><li>"eSIM の携帯通信会社"</li></string>
+    <string name="master_clear_desc_no_cancel_mobile_plan" msgid="5460926449093211144">\n\n"この操作を行っても、ご利用のモバイル サービス プランはキャンセルされません。"</string>
     <string name="master_clear_desc_erase_external_storage" product="nosdcard" msgid="7744115866662613411">\n\n"音楽、画像、その他のユーザーデータを消去する場合は"<b>"USBストレージデータ"</b>"を消去する必要があります。"</string>
     <string name="master_clear_desc_erase_external_storage" product="default" msgid="4801026652617377093">\n\n"音楽、画像、その他のユーザーデータを消去するには、"<b>"SDカード"</b>"を消去する必要があります。"</string>
     <string name="erase_external_storage" product="nosdcard" msgid="969364037450286809">"USBストレージ内データの消去"</string>
@@ -1365,7 +1372,7 @@
     <string name="master_clear_progress_text" msgid="6559096229480527510">"お待ちください..."</string>
     <string name="call_settings_title" msgid="5188713413939232801">"通話設定"</string>
     <string name="call_settings_summary" msgid="7291195704801002886">"ボイスメール、着信転送、発信者番号など"</string>
-    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USBテザリング"</string>
+    <string name="tether_settings_title_usb" msgid="6688416425801386511">"USB テザリング"</string>
     <string name="tether_settings_title_wifi" msgid="3277144155960302049">"ポータブルアクセスポイント"</string>
     <string name="tether_settings_title_bluetooth" msgid="355855408317564420">"Bluetoothテザリング"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="5355828977109785001">"テザリング"</string>
@@ -1375,12 +1382,12 @@
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="1618256180720077354">"テザリング"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"データセーバーが ON のときは、テザリングやポータブル アクセス ポイントを使用できません"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
-    <string name="usb_tethering_button_text" msgid="585829947108007917">"USBテザリング"</string>
+    <string name="usb_tethering_button_text" msgid="585829947108007917">"USB テザリング"</string>
     <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"スマートフォンのインターネット接続を USB 経由で共有する"</string>
     <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"タブレットのインターネット接続を USB 経由で共有する"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Bluetoothテザリング"</string>
     <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"タブレットのインターネット接続を Bluetooth で共有"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"スマートフォンのインターネット接続を Bluetooth で共有"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"スマートフォンのインターネット接続を Bluetooth で共有する"</string>
     <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"この <xliff:g id="DEVICE_NAME">%1$d</xliff:g> のインターネット接続を Bluetooth で共有"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"テザリングできるデバイスは<xliff:g id="MAXCONNECTION">%1$d</xliff:g>個までです。"</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>のテザリングを解除します。"</string>
@@ -1461,15 +1468,16 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"安全に関する情報"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"データ接続されていません。この情報を表示するにはインターネットに接続されているパソコンから%sにアクセスしてください。"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"読み込み中..."</string>
-    <string name="lockpassword_choose_your_password_header" msgid="8624900666929394990">"パスワードを選択"</string>
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"画面ロックの設定"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"セキュリティを強化するには、パスワードを設定してください"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"指紋認証にはパスワードが必要です"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="6949761069941694050">"パターンの選択"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"指紋認証にはパターンが必要です"</string>
-    <string name="lockpassword_choose_your_pin_header" msgid="7598849519816138302">"PINを選択"</string>
+    <string name="lockpassword_choose_your_pin_message" msgid="1875420718677275646">"セキュリティを強化するには、PIN を設定してください"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"指紋認証には PIN が必要です"</string>
-    <string name="lockpassword_confirm_your_password_header" msgid="6308478184889846633">"パスワードを確認"</string>
+    <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"パスワードの再入力"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"パターンの確認"</string>
-    <string name="lockpassword_confirm_your_pin_header" msgid="49038294648213197">"PINの確認"</string>
+    <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"PIN の再入力"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="5140892109439191415">"パスワードが一致しません"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="7226244811505606217">"PINが一致しません"</string>
     <string name="lockpassword_choose_lock_generic_header" msgid="3811438094903786145">"ロック解除方法の選択"</string>
@@ -1488,6 +1496,12 @@
     <string name="lockpassword_strong_auth_required_work_pattern" msgid="3003781907040522053">"セキュリティ強化のため、仕事用のパターンを入力してください"</string>
     <string name="lockpassword_strong_auth_required_work_pin" msgid="3367491332598821552">"セキュリティ強化のため、仕事用の PIN を入力してください"</string>
     <string name="lockpassword_strong_auth_required_work_password" msgid="8159775129968582940">"セキュリティ強化のため、仕事用のパスワードを入力してください"</string>
+    <string name="lockpassword_confirm_your_pattern_details_frp" msgid="6757336656791723193">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパターンを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pin_details_frp" msgid="826520613445990470">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前の PIN を入力してください。"</string>
+    <string name="lockpassword_confirm_your_password_details_frp" msgid="8944081074615739040">"スマートフォンは出荷時の設定にリセットされました。使用するには、以前のパスワードを入力してください。"</string>
+    <string name="lockpassword_confirm_your_pattern_header_frp" msgid="2898036091609128286">"パターンの確認"</string>
+    <string name="lockpassword_confirm_your_pin_header_frp" msgid="4141601774778898803">"PIN の確認"</string>
+    <string name="lockpassword_confirm_your_password_header_frp" msgid="3762615419295360480">"パスワードの確認"</string>
     <string name="lockpassword_invalid_pin" msgid="15588049067548470">"PINが正しくありません"</string>
     <string name="lockpassword_invalid_password" msgid="4038507398784975200">"パスワードが正しくありません"</string>
     <string name="lockpattern_need_to_unlock_wrong" msgid="1745247595356012176">"パターンが正しくありません"</string>
@@ -1544,7 +1558,7 @@
     <string name="advanced_settings_summary" msgid="4016682978071086747">"詳細設定オプションを有効にする"</string>
     <string name="application_info_label" msgid="5736524913065714880">"アプリ情報"</string>
     <string name="storage_label" msgid="8700867073480107253">"メモリ"</string>
-    <string name="auto_launch_label" msgid="2669236885531442195">"既定で開く"</string>
+    <string name="auto_launch_label" msgid="2669236885531442195">"デフォルトで開く"</string>
     <string name="auto_launch_label_generic" msgid="3230569852551968694">"デフォルト"</string>
     <string name="screen_compatibility_label" msgid="663250687205465394">"画面の互換性"</string>
     <string name="permissions_label" msgid="2605296874922726203">"権限"</string>
@@ -1737,7 +1751,7 @@
     <string name="show_ime" msgid="2658582193437188227">"仮想キーボードの表示"</string>
     <string name="show_ime_summary" msgid="8164993045923240698">"物理キーボードが有効になっていても画面に表示されます"</string>
     <string name="keyboard_shortcuts_helper" msgid="4839453720463798145">"キーボード ショートカット ヘルパー"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"使用可能なショートカットを表示"</string>
+    <string name="keyboard_shortcuts_helper_summary" msgid="5871299901459743288">"使用可能なショートカットを表示します"</string>
     <string name="default_keyboard_layout" msgid="4172606673510531271">"デフォルト"</string>
     <string name="pointer_speed" msgid="1221342330217861616">"ポインタの速度"</string>
     <string name="game_controller_settings_category" msgid="8794508575329923718">"ゲーム用コントローラ"</string>
@@ -1801,7 +1815,7 @@
     <string name="accessibility_settings_summary" msgid="981260486011624939">"スクリーン リーダー、表示、操作のコントロール"</string>
     <string name="vision_settings_title" msgid="4204111425716868288">"視覚補助"</string>
     <string name="vision_settings_description" msgid="5679491180156408260">"この端末を必要に応じてカスタマイズできます。このユーザー補助機能は後から [設定] で変更できます。"</string>
-    <string name="vision_settings_suggestion_title" msgid="917294957154878441">"フォントサイズを拡大"</string>
+    <string name="vision_settings_suggestion_title" msgid="8058794060304707004">"フォントサイズの変更"</string>
     <string name="screen_reader_category_title" msgid="7739154903913400641">"スクリーン リーダー"</string>
     <string name="audio_and_captions_category_title" msgid="3420727114421447524">"音声と画面上のテキスト"</string>
     <string name="display_category_title" msgid="685461049938269166">"表示"</string>
@@ -1838,7 +1852,6 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"パフォーマンスに影響することがあります"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"ポインタが停止したらクリック"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"クリックまでの時間"</string>
-    <string name="preference_summary_default_combination" msgid="8532964268242666060">"<xliff:g id="STATE">%1$s</xliff:g> / <xliff:g id="DESCRIPTION">%2$s</xliff:g>"</string>
     <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"ON"</string>
     <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"OFF"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"クイック設定に表示"</string>
@@ -2153,7 +2166,7 @@
     <string name="voice_input_settings" msgid="1099937800539324567">"音声入力の設定"</string>
     <string name="voice_input_settings_title" msgid="2676028028084981891">"音声入力"</string>
     <string name="voice_service_preference_section_title" msgid="3778706644257601021">"音声入力サービス"</string>
-    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"完全な注目ワードと対話"</string>
+    <string name="voice_interactor_preference_summary" msgid="1801414022026937190">"完全な起動ワードと対話"</string>
     <string name="voice_recognizer_preference_summary" msgid="669880813593690527">"シンプルな音声認識"</string>
     <string name="voice_interaction_security_warning" msgid="6378608263983737325">"この音声入力サービスを使用すると、常時音声監視を実行し、音声対応アプリの管理をユーザーに代わって行えるようになります。これは<xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>の一部です。このサービスの使用を有効にしますか？"</string>
     <string name="tts_engine_preference_title" msgid="1578826947311494239">"優先するエンジン"</string>
@@ -2354,6 +2367,7 @@
     <string name="misc_files_selected_count" msgid="4647048020823912088">"選択済み: <xliff:g id="NUMBER">%1$d</xliff:g>/<xliff:g id="TOTAL">%2$d</xliff:g>件"</string>
     <string name="misc_files_selected_count_bytes" msgid="2876232009069114352">"<xliff:g id="NUMBER">%1$s</xliff:g>/<xliff:g id="TOTAL">%2$s</xliff:g>"</string>
     <string name="select_all" msgid="1562774643280376715">"すべて選択"</string>
+    <string name="data_plan_usage_manage_plans_button_text" msgid="8997761990902708162">"プランを管理"</string>
     <string name="data_usage_summary_title" msgid="3804110657238092929">"データ使用量"</string>
     <string name="data_usage_app_summary_title" msgid="4147258989837459172">"アプリのデータ使用"</string>
     <string name="data_usage_accounting" msgid="7170028915873577387">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
@@ -2437,8 +2451,11 @@
     <string name="data_usage_metered_title" msgid="7383175371006596441">"ネットワーク制限"</string>
     <string name="data_usage_metered_body" msgid="7655851702771342507">"バックグラウンド データが制限されている場合、従量制のネットワークはモバイル ネットワークと同様に扱われます。これらのネットワークを使用して大量のダウンロードが行われる前に、アプリが警告を表示することがあります。"</string>
     <string name="data_usage_metered_mobile" msgid="5423305619126978393">"モバイルネットワーク"</string>
-    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"従量制のWi‑Fiネットワーク"</string>
-    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"従量制のネットワークを選択するにはWi‑FiをONにします。"</string>
+    <string name="data_usage_metered_wifi" msgid="1761738002328299714">"従量制の Wi‑Fi ネットワーク"</string>
+    <string name="data_usage_metered_wifi_disabled" msgid="727808462375941567">"従量制のネットワークを選択するには Wi‑Fi を ON にします。"</string>
+    <string name="data_usage_metered_auto" msgid="1262028400911918865">"自動"</string>
+    <string name="data_usage_metered_yes" msgid="9217539611385225894">"従量制"</string>
+    <string name="data_usage_metered_no" msgid="4025232961929071789">"定額制"</string>
     <string name="data_usage_disclaimer" msgid="6887858149980673444">"端末で記録されるデータ使用量と携帯通信会社のデータ使用量は異なる場合があります。"</string>
     <string name="cryptkeeper_emergency_call" msgid="198578731586097145">"緊急通報"</string>
     <string name="cryptkeeper_return_to_call" msgid="5613717339452772491">"通話に戻る"</string>
@@ -2562,7 +2579,7 @@
     <string name="user_summary_not_set_up" msgid="8778205026866794909">"セットアップしていません"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1628116001964325544">"セットアップしていません - 制限付きプロファイル"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="1659125858619760573">"セットアップしていません - 仕事用プロファイル"</string>
-    <string name="user_admin" msgid="993402590002400782">"管理"</string>
+    <string name="user_admin" msgid="993402590002400782">"管理者"</string>
     <string name="user_you" msgid="1639158809315025986">"自分（<xliff:g id="NAME">%s</xliff:g>）"</string>
     <string name="user_nickname" msgid="5148818000228994488">"ニックネーム"</string>
     <string name="user_add_user_type_title" msgid="2146438670792322349">"追加"</string>
@@ -2575,7 +2592,7 @@
     <string name="user_add_user_message_long" msgid="8562152293752222985">"追加ユーザーを作成して、この端末を他のユーザーと共有できます。各ユーザーは各自のスペースを所有でき、アプリや壁紙などを使用してカスタマイズできます。Wi-Fiなど、すべてのユーザーに影響する端末設定を変更することもできます。\n\n新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_add_user_message_short" msgid="1511354412249044381">"新しいユーザーを追加したら、そのユーザーは自分のスペースをセットアップする必要があります。\n\nすべてのユーザーは他のユーザーに代わってアプリを更新できます。"</string>
     <string name="user_setup_dialog_title" msgid="1765794166801864563">"ユーザーを今すぐセットアップ"</string>
-    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ユーザーが端末を使って各自のスペースをセットアップできるよう確認してください"</string>
+    <string name="user_setup_dialog_message" msgid="1004068621380867148">"ユーザーが端末を使って各自のスペースをセットアップできるようにします"</string>
     <string name="user_setup_profile_dialog_message" msgid="3896568553327558731">"プロファイルを今すぐセットアップしますか？"</string>
     <string name="user_setup_button_setup_now" msgid="3391388430158437629">"今すぐセットアップ"</string>
     <string name="user_setup_button_setup_later" msgid="3068729597269172401">"後で行う"</string>
@@ -2725,6 +2742,7 @@
     <string name="sim_pref_divider" msgid="6778907671867621874">"優先SIM:"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"その都度確認"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"選択してください"</string>
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"SIM の選択"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"設定"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="other">%d 件の非表示のアイテムを表示</item>
@@ -2816,7 +2834,7 @@
     <string name="other_sound_settings" msgid="3151004537006844718">"その他の音"</string>
     <string name="dial_pad_tones_title" msgid="1999293510400911558">"ダイヤルパッドの操作音"</string>
     <string name="screen_locking_sounds_title" msgid="1340569241625989837">"画面ロック音"</string>
-    <string name="charging_sounds_title" msgid="1132272552057504251">"充電中の音"</string>
+    <string name="charging_sounds_title" msgid="1132272552057504251">"充電時の音"</string>
     <string name="docking_sounds_title" msgid="155236288949940607">"装着音"</string>
     <string name="touch_sounds_title" msgid="5326587106892390176">"タッチ操作音"</string>
     <string name="vibrate_on_touch_title" msgid="5388579924689395023">"タップ操作時のバイブ"</string>
@@ -2876,12 +2894,13 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"アプリの通知"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"通知のカテゴリ"</string>
     <string name="notification_importance_title" msgid="848692592679312666">"重要度"</string>
-    <string name="notification_importance_unspecified" msgid="2196023702875112081">"アプリに判断させる"</string>
+    <string name="notification_importance_unspecified" msgid="6622173510486113958">"音の許可"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"通知を表示しない"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"音声や画面表示を使用しない"</string>
     <string name="notification_importance_low" msgid="8881468429453766553">"音声なし"</string>
     <string name="notification_importance_default" msgid="5958338024601957516">"音声で知らせる"</string>
     <string name="notification_importance_high" msgid="2082429479238228527">"音声とポップアップで知らせる"</string>
+    <string name="notification_importance_high_silent" msgid="2667033773703765252">"ポップアップ"</string>
     <string name="notification_importance_min_title" msgid="6974673091137544803">"低"</string>
     <string name="notification_importance_low_title" msgid="8131254047772814309">"中"</string>
     <string name="notification_importance_default_title" msgid="9120383978536089489">"高"</string>
@@ -2945,8 +2964,8 @@
     <string name="notification_content_block_summary" msgid="7746185794438882389">"シェードにも周辺端末にも通知を表示しない"</string>
     <string name="notification_badge_title" msgid="6370122441168519809">"通知ドットの許可"</string>
     <string name="notification_channel_badge_title" msgid="2240827899882847087">"通知ドットの表示"</string>
-    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"マナーモードをオーバーライドする"</string>
-    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"[マナーモード] が [優先する通知のみ] に設定されているとき、この通知を引き続き表示する"</string>
+    <string name="app_notification_override_dnd_title" msgid="7867458246395884830">"マナーモードのオーバーライド"</string>
+    <string name="app_notification_override_dnd_summary" msgid="3516007157020189746">"[マナーモード] が [優先する通知のみ] に設定されているとき、この通知を引き続き表示します"</string>
     <string name="app_notification_visibility_override_title" msgid="2187232730902430718">"ロック画面"</string>
     <string name="app_notification_row_banned" msgid="5983655258784814773">"ブロック済み"</string>
     <string name="app_notification_row_priority" msgid="7723839972982746568">"優先"</string>
@@ -2988,7 +3007,7 @@
     <string name="zen_mode_schedule_rule_days" msgid="3195058680641389948">"曜日"</string>
     <string name="zen_mode_schedule_rule_days_none" msgid="4954143628634166317">"指定しない"</string>
     <string name="zen_mode_schedule_rule_days_all" msgid="146511166522076034">"毎日"</string>
-    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"終了時間よりアラームを優先できます"</string>
+    <string name="zen_mode_schedule_alarm_title" msgid="767054141267122030">"終了時間よりアラームを優先"</string>
     <string name="zen_mode_schedule_alarm_summary" msgid="4597050434723180422">"終了時間か次回のアラームのうちどちらか早い方で停止します"</string>
     <string name="summary_divider_text" msgid="7228986578690919294">"、 "</string>
     <string name="summary_range_symbol_combination" msgid="5695218513421897027">"<xliff:g id="START">%1$s</xliff:g>～<xliff:g id="END">%2$s</xliff:g>"</string>
@@ -3002,6 +3021,7 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"スター付きの連絡先のみ"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"なし"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"アラーム"</string>
+    <string name="zen_mode_alarms_summary" msgid="3774926045611788635">"アラームは常に優先的な割り込みとして音が鳴ります"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"リマインダー"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"予定"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"すべての発信者"</string>
@@ -3055,7 +3075,7 @@
     <string name="encryption_interstitial_message_pattern" msgid="7081249914068568570">"端末の起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンを必要としますか？"</string>
     <string name="encryption_interstitial_message_password" msgid="7796567133897436443">"この端末の起動時にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパスワードを必要としますか？"</string>
     <string name="encryption_interstitial_message_pin_for_fingerprint" msgid="4550632760119547492">"端末のロック解除に指紋を使うだけでなく、起動時に PIN を入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動に PIN を必要としますか？"</string>
-    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"端末のロック解除に指紋を使うだけでなく、起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンを必要としますか？"</string>
+    <string name="encryption_interstitial_message_pattern_for_fingerprint" msgid="932184823193006087">"端末のロック解除に指紋を使うだけでなく、起動時にパターンを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパターンの入力を必須としますか？"</string>
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"端末のロック解除に指紋を使うだけでなく、起動時にパスワードを入力することでこの端末の保護を強化できます。端末が起動するまで、通話、メッセージ、アラームなどの通知を受信することはできません。\n\nこれにより、端末を紛失したり盗まれたりしても端末上のデータを保護することができます。この端末の起動にパスワードを必要としますか？"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"はい"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"いいえ"</string>
@@ -3069,7 +3089,7 @@
     <string name="imei_information_title" msgid="8499085421609752290">"IMEI情報"</string>
     <string name="imei_information_summary" msgid="2074095606556565233">"IMEI関連情報"</string>
     <string name="slot_number" msgid="3762676044904653577">"（スロット<xliff:g id="SLOT_NUM">%1$d</xliff:g>）"</string>
-    <string name="launch_by_default" msgid="1840761193189009248">"既定で開く"</string>
+    <string name="launch_by_default" msgid="1840761193189009248">"デフォルトで開く"</string>
     <string name="app_launch_domain_links_title" msgid="1160925981363706090">"リンクを開く"</string>
     <string name="app_launch_open_domain_urls_title" msgid="8914721351596745701">"対応リンクを開く"</string>
     <string name="app_launch_open_domain_urls_summary" msgid="5367573364240712217">"確認なしで開く"</string>
@@ -3172,7 +3192,7 @@
     <string name="process_format" msgid="77905604092541454">"<xliff:g id="APP_NAME">%1$s</xliff:g>（<xliff:g id="COUNT">%2$d</xliff:g>）"</string>
     <string name="high_power_apps" msgid="3459065925679828230">"電池の最適化"</string>
     <string name="additional_battery_info" msgid="4754099329165411970">"使用状況に関する通知"</string>
-    <string name="show_all_apps" msgid="1512506948197818534">"フル充電以降の端末の電池使用状況を表示"</string>
+    <string name="show_all_apps" msgid="1512506948197818534">"フル充電以降の電池使用状況を表示"</string>
     <string name="hide_extra_apps" msgid="5016497281322459633">"アプリの使用状況を表示"</string>
     <string name="power_high_usage_title" msgid="6027369425057347826">"使用量が多いアイテム"</string>
     <plurals name="power_high_usage_summary" formatted="false" msgid="467347882627862744">
@@ -3209,7 +3229,7 @@
     <string name="usb_use_power_only_desc" msgid="3461232831015575152">"接続されている端末を充電します。USB 充電に対応している端末でのみ選択できます。"</string>
     <string name="usb_use_file_transfers" msgid="7409600791007250137">"ファイルを転送する"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"ファイルを別の端末に転送します"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真の転送（PTP）"</string>
+    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"写真を転送する（PTP）"</string>
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"写真を転送またはMTPがサポートされない場合にファイルを転送する（PTP）"</string>
     <string name="usb_use_MIDI" msgid="870922185938298263">"この端末を MIDI として利用する"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"この端末を MIDI として利用する際に使用します"</string>
@@ -3220,6 +3240,7 @@
     <string name="usb_summary_file_transfers" msgid="6435943692610175111">"ファイルを転送する"</string>
     <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"写真を転送する（PTP）"</string>
     <string name="usb_summary_MIDI" msgid="5687906612187885908">"この端末を MIDI として利用する"</string>
+    <string name="sms_mirroring_pref" msgid="6475043279147376031">"SMS ミラーリング"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"バックグラウンド チェック"</string>
     <string name="background_check_title" msgid="4534254315824525593">"バックグラウンドへのフルアクセス"</string>
     <string name="assist_access_context_title" msgid="2269032346698890257">"画面のテキストを使用"</string>
@@ -3276,7 +3297,7 @@
     <string name="system_alert_window_summary" msgid="602892301318324492">"他のアプリの上に重ねて表示できるアプリの数: <xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g> 個"</string>
     <string name="filter_overlay_apps" msgid="6965969283342557573">"権限のあるアプリ"</string>
     <string name="app_permission_summary_allowed" msgid="1505409933012886711">"許可"</string>
-    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"不許可"</string>
+    <string name="app_permission_summary_not_allowed" msgid="2592617058101882802">"許可しない"</string>
     <string name="keywords_install_other_apps" msgid="761078076051006558">"インストール アプリ 不明 提供元"</string>
     <string name="write_settings" msgid="4797457275727195681">"システム設定の変更"</string>
     <string name="keywords_write_settings" msgid="6415597272561105138">"書き込み 変更 システム設定"</string>
@@ -3384,6 +3405,7 @@
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Telephony Monitor の変更を適用するには、端末を再起動してください"</string>
     <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"カメラ HAL HDR+"</string>
     <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"カメラ HAL HDR+ の変更を適用するには、端末を再起動してください"</string>
+    <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"カメラのレーザー センサー"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"自動システム アップデート"</string>
     <string name="usage" msgid="2977875522080448986">"使用量"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"モバイルデータ使用"</string>
@@ -3409,7 +3431,7 @@
     <string name="data_warning" msgid="209133958008062117">"データ警告"</string>
     <string name="set_data_limit" msgid="2901526323210516923">"データ上限の設定"</string>
     <string name="data_limit" msgid="1885406964934590552">"データ上限"</string>
-    <string name="data_usage_template" msgid="392191945602400904">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
+    <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> 使用（<xliff:g id="ID_2">%2$s</xliff:g>）"</string>
     <string name="configure" msgid="1029654422228677273">"設定"</string>
     <string name="data_usage_other_apps" msgid="3272872663517382050">"データ使用量に含まれている他のアプリ"</string>
     <plurals name="data_saver_unrestricted_summary" formatted="false" msgid="2635267833484232703">
@@ -3478,7 +3500,7 @@
     <string name="button_confirm_convert_fbe" msgid="7101855374850373091">"消去して変換"</string>
     <string name="reset_shortcut_manager_throttling" msgid="6495066467198668994">"ShortcutManager のレート制限をリセット"</string>
     <string name="reset_shortcut_manager_throttling_complete" msgid="1826770872063707900">"ShortcutManager のレート制限をリセットしました"</string>
-    <string name="notification_suggestion_title" msgid="4506524937307816475">"ロック画面の通知を管理する"</string>
+    <string name="notification_suggestion_title" msgid="387052719462473500">"ロック画面に表示される情報の管理"</string>
     <string name="notification_suggestion_summary" msgid="8521159741445416875">"通知内容の表示と非表示を切り替える"</string>
     <string name="page_tab_title_summary" msgid="4070309266374993258">"すべて"</string>
     <string name="page_tab_title_support" msgid="8483187649355540109">"サポートとヒント"</string>
@@ -3486,7 +3508,7 @@
     <string name="premium_sms_none" msgid="8268105565738040566">"プレミアム SMS へのアクセスをリクエストしたインストール済みアプリはありません"</string>
     <string name="premium_sms_warning" msgid="9086859595338944882">"プレミアム SMS で料金が発生した場合は、携帯通信会社の請求に加算されます。アプリで権限を有効にすると、そのアプリを使用してプレミアム SMS を送信できるようになります。"</string>
     <string name="premium_sms_access" msgid="4660047004791638305">"プレミアム SMS へのアクセス"</string>
-    <string name="bluetooth_disabled" msgid="2456198532288640046">"他の端末には非表示"</string>
+    <string name="bluetooth_disabled" msgid="6244000672828617410">"OFF"</string>
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> に接続しました"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"複数のデバイスに接続しました"</string>
     <string name="demo_mode" msgid="2798762752209330277">"システム UI デモモード"</string>
@@ -3588,7 +3610,7 @@
     <string name="web_action_enable_title" msgid="4051513950976670853">"Instant Apps"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"アプリがインストールされていなくても、アプリ内のリンクを開くことができます"</string>
     <string name="web_action_section_title" msgid="7364647086538399136">"Instant Apps"</string>
-    <string name="instant_apps_account" msgid="1433620209791992528">"Instant Apps アカウント"</string>
+    <string name="instant_apps_settings" msgid="8827777916518348213">"Instant Apps の設定"</string>
     <string name="domain_url_section_title" msgid="7046835219056428883">"インストール済みアプリ"</string>
     <string name="automatic_storage_manager_activation_warning" msgid="6353100011690933254">"お使いのストレージの管理はストレージ マネージャが行うようになりました"</string>
     <string name="account_for_section_header" msgid="5356566418548737121">"<xliff:g id="USER_NAME">%1$s</xliff:g>のアカウント"</string>
@@ -3635,7 +3657,9 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="9217774730260037434">"個人プロフィールで常時接続 VPN は ON です"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="7244472958208315814">"仕事用プロファイルで常時接続 VPN は ON です"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="7936664553416257333">"グローバル HTTP プロキシが設定されています"</string>
-    <string name="enterprise_privacy_ca_certs" msgid="5885892204903688909">"信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="2019652712782510262">"信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_personal" msgid="2279084820904076599">"個人用プロファイル内の信頼できる認証情報"</string>
+    <string name="enterprise_privacy_ca_certs_work" msgid="6187377647815301809">"仕事用プロファイル内の信頼できる認証情報"</string>
     <plurals name="enterprise_privacy_number_ca_certs" formatted="false" msgid="526375234629534165">
       <item quantity="other">CA 証明書: <xliff:g id="COUNT_1">%d</xliff:g> 件以上</item>
       <item quantity="one">CA 証明書: <xliff:g id="COUNT_0">%d</xliff:g> 件以上</item>
@@ -3698,6 +3722,11 @@
     <string name="carrier_provisioning" msgid="4398683675591893169">"携帯通信会社のプロビジョニング情報"</string>
     <string name="trigger_carrier_provisioning" msgid="3434865918009286187">"携帯通信会社のプロビジョニングをトリガー"</string>
     <string name="new_device_suggestion_title" msgid="698847081680980774">"注目の新機能"</string>
-    <string name="new_device_suggestion_summary" msgid="7172709269203435870">"5 つの優れた機能をご覧ください"</string>
+    <string name="new_device_suggestion_summary" product="default" msgid="206396571522515855">"新しいスマートフォンの使い方をご紹介します"</string>
+    <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"新しいタブレットの使い方をご紹介します"</string>
+    <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"新しい端末の使い方をご紹介します"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"この機能は、お使いの端末ではご利用いただけません"</string>
+    <string name="ims_reg_title" msgid="7609782759207241443">"IMS 登録ステータス"</string>
+    <string name="ims_reg_status_registered" msgid="933003316932739188">"登録済み"</string>
+    <string name="ims_reg_status_not_registered" msgid="6529783773485229486">"未登録"</string>
 </resources>
