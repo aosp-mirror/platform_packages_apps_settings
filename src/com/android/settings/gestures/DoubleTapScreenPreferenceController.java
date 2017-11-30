@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -55,8 +56,13 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
     }
 
     public static boolean isSuggestionComplete(Context context, SharedPreferences prefs) {
-        AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
-        return !ambientConfig.pulseOnDoubleTapAvailable()
+        return isSuggestionComplete(new AmbientDisplayConfiguration(context), prefs);
+    }
+
+    @VisibleForTesting
+    static boolean isSuggestionComplete(AmbientDisplayConfiguration config,
+            SharedPreferences prefs) {
+        return !config.pulseOnDoubleTapAvailable()
                 || prefs.getBoolean(DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
     }
 
