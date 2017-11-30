@@ -16,7 +16,6 @@
 
 package com.android.settings.widget;
 
-import android.widget.Switch;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /*
@@ -108,12 +107,4 @@ public abstract class SwitchWidgetController {
      * is {@code null}, then this preference will be enabled. Otherwise, it will be disabled.
      */
     public abstract void setDisabledByAdmin(EnforcedAdmin admin);
-
-    /**
-     * Get the underlying switch widget.
-     *
-     * @return the switch widget.
-     */
-    public abstract Switch getSwitch();
-
 }
