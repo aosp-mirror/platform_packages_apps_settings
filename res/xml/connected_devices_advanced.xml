@@ -56,6 +56,11 @@
                 android:targetClass="com.android.settings.deviceinfo.UsbModeChooserActivity"/>
     </Preference>
 
+    <Preference
+        android:key="bt_received_files"
+        android:icon="@drawable/ic_folder_vd_theme_24"
+        android:title="@string/bluetooth_show_received_files" />
+
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="50"/>

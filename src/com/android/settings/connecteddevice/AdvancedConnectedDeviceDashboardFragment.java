@@ -22,6 +22,7 @@ import android.provider.SearchIndexableResource;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -94,6 +95,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         AbstractPreferenceController smsMirroringController =
                 smsMirroringFeatureProvider.getController(context);
         controllers.add(smsMirroringController);
+        controllers.add(new BluetoothFilesPreferenceController(context));
         return controllers;
     }
 
