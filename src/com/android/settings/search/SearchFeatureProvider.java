@@ -38,6 +38,8 @@ import java.util.concurrent.FutureTask;
  */
 public interface SearchFeatureProvider {
 
+    Intent SEARCH_UI_INTENT = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+
     /**
      * Ensures the caller has necessary privilege to launch search result page.
      *
@@ -165,6 +167,10 @@ public interface SearchFeatureProvider {
         return null;
     }
 
+    default boolean isSearchV2Enabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlags.SEARCH_V2);
+    }
+
     /**
      * Initializes the search toolbar.
      */
@@ -174,8 +180,8 @@ public interface SearchFeatureProvider {
         }
         toolbar.setOnClickListener(tb -> {
             final Intent intent;
-            if (FeatureFlagUtils.isEnabled(activity, FeatureFlags.SEARCH_V2)) {
-                intent = new Intent("com.android.settings.action.SETTINGS_SEARCH");
+            if (isSearchV2Enabled(activity)) {
+                intent = SEARCH_UI_INTENT;
             } else {
                 intent = new Intent(activity, SearchActivity.class);
             }
