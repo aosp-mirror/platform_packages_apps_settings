@@ -42,6 +42,7 @@ import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.AmbientDisplaySettings;
+import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
@@ -170,6 +171,7 @@ public final class SearchIndexableResources {
         addIndex(WifiDisplaySettings.class);
         addIndex(ZenModeBehaviorSettings.class);
         addIndex(ZenModeAutomationSettings.class);
+        addIndex(NightDisplaySettings.class);
     }
 
     private SearchIndexableResources() {

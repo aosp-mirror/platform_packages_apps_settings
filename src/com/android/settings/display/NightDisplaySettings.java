@@ -20,27 +20,34 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
-import android.widget.TimePicker;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.text.DateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.TimeZone;
 
 /**
  * Settings screen for Night display.
+ * TODO (b/69912911) Upgrade to Dashboard fragment
  */
 public class NightDisplaySettings extends SettingsPreferenceFragment
-        implements ColorDisplayController.Callback, Preference.OnPreferenceChangeListener {
+        implements ColorDisplayController.Callback, Preference.OnPreferenceChangeListener,
+        Indexable {
 
     private static final String KEY_NIGHT_DISPLAY_AUTO_MODE = "night_display_auto_mode";
     private static final String KEY_NIGHT_DISPLAY_START_TIME = "night_display_start_time";
@@ -92,12 +99,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         mActivatedPreference = (TwoStatePreference) findPreference(KEY_NIGHT_DISPLAY_ACTIVATED);
         mTemperaturePreference = (SeekBarPreference) findPreference(KEY_NIGHT_DISPLAY_TEMPERATURE);
 
-        mAutoModePreference.setEntries(new CharSequence[] {
+        mAutoModePreference.setEntries(new CharSequence[]{
                 getString(R.string.night_display_auto_mode_never),
                 getString(R.string.night_display_auto_mode_custom),
                 getString(R.string.night_display_auto_mode_twilight)
         });
-        mAutoModePreference.setEntryValues(new CharSequence[] {
+        mAutoModePreference.setEntryValues(new CharSequence[]{
                 String.valueOf(ColorDisplayController.AUTO_MODE_DISABLED),
                 String.valueOf(ColorDisplayController.AUTO_MODE_CUSTOM),
                 String.valueOf(ColorDisplayController.AUTO_MODE_TWILIGHT)
@@ -155,15 +162,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
 
             final Context context = getContext();
             final boolean use24HourFormat = android.text.format.DateFormat.is24HourFormat(context);
-            return new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    final LocalTime time = LocalTime.of(hourOfDay, minute);
-                    if (dialogId == DIALOG_START_TIME) {
-                        mController.setCustomStartTime(time);
-                    } else {
-                        mController.setCustomEndTime(time);
-                    }
+            return new TimePickerDialog(context, (view, hourOfDay, minute) -> {
+                final LocalTime time = LocalTime.of(hourOfDay, minute);
+                if (dialogId == DIALOG_START_TIME) {
+                    mController.setCustomStartTime(time);
+                } else {
+                    mController.setCustomEndTime(time);
                 }
             }, initialTime.getHour(), initialTime.getMinute(), use24HourFormat);
         }
@@ -247,4 +251,23 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     public int getMetricsCategory() {
         return MetricsEvent.NIGHT_DISPLAY_SETTINGS;
     }
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.night_display_settings;
+                    result.add(sir);
+                    return result;
+                }
+
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return ColorDisplayController.isAvailable(context);
+                }
+            };
 }
