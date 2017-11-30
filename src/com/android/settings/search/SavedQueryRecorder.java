@@ -24,7 +24,7 @@ import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
 import com.android.settings.search.IndexDatabaseHelper;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_SAVED_QUERIES;
 

@@ -24,9 +24,9 @@ import android.os.UserHandle;
 import android.util.Log;
 
 import com.android.internal.util.Preconditions;
-import com.android.settings.utils.AsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
+import com.android.settingslib.utils.AsyncLoader;
 
 import java.io.IOException;
 

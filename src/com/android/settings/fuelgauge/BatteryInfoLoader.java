@@ -25,7 +25,7 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 /**
  * Loader that can be used by classes to load BatteryInfo in a background thread. This loader will
