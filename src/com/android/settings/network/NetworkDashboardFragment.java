@@ -78,7 +78,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_network_dashboard;
     }
 

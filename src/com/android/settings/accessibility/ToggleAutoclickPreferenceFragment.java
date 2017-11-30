@@ -103,7 +103,7 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_autoclick;
     }
 

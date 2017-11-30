@@ -753,7 +753,7 @@ public class ChooseLockGeneric extends SettingsActivity {
         }
 
         @Override
-        protected int getHelpResource() {
+        public int getHelpResource() {
             return R.string.help_url_choose_lockscreen;
         }
 

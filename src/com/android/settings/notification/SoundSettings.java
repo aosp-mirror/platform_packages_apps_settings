@@ -71,7 +71,7 @@ public class SoundSettings extends DashboardFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_sound;
     }
 

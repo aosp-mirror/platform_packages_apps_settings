@@ -141,7 +141,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_remote_display;
     }
 

@@ -131,7 +131,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     };
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         // Helper resource is already defined in the container fragment.
         return 0;
     }

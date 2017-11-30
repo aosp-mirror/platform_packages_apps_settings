@@ -41,7 +41,7 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_color_correction;
     }
 

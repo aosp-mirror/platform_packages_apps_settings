@@ -292,7 +292,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return 0;
     }
 

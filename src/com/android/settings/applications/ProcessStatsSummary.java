@@ -103,7 +103,7 @@ public class ProcessStatsSummary extends ProcessStatsBase implements OnPreferenc
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_process_stats_summary;
     }
 

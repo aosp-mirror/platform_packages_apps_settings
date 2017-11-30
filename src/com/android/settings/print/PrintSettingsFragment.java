@@ -98,7 +98,7 @@ public class PrintSettingsFragment extends ProfileSettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_printing;
     }
 

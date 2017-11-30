@@ -33,7 +33,8 @@
 
     <!-- Turn on DND button -->
     <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
-    <PreferenceCategory>
+    <PreferenceCategory
+        android:key="zen_mode_settings_button_category">
         <com.android.settings.applications.LayoutPreference
             android:key="zen_mode_settings_button_container"
             android:selectable="false"
