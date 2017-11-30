@@ -99,7 +99,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_account_detail;
     }
 

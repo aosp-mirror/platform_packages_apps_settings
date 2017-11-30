@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
         ShadowKeyValueListParserWrapperImpl.class})
 public class AnomalyUtilsTest {
     private static final String PACKAGE_NAME_WAKEUP = "com.android.app1";

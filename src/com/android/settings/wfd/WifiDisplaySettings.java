@@ -36,7 +36,7 @@ import android.net.wifi.p2p.WifiP2pManager.Channel;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.ServiceManager;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.ListPreference;
@@ -63,6 +63,11 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.search.Indexable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Settings screen for WifiDisplay configuration and connection management.
@@ -72,7 +77,7 @@ import com.android.settings.dashboard.SummaryLoader;
  * on the system.  In that case, the enable option will not be shown but other
  * remote display routes will continue to be made available.
  */
-public final class WifiDisplaySettings extends SettingsPreferenceFragment {
+public final class WifiDisplaySettings extends SettingsPreferenceFragment implements Indexable {
     private static final String TAG = "WifiDisplaySettings";
     private static final boolean DEBUG = false;
 
@@ -136,7 +141,7 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_remote_display;
     }
 
@@ -823,4 +828,18 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment {
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
             = (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
+
+    public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final ArrayList<SearchIndexableResource> result = new ArrayList<>();
+
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.wifi_display_settings;
+                    result.add(sir);
+                    return result;
+                }
+            };
 }

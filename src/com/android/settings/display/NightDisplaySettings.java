@@ -75,7 +75,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_night_display;
     }
 

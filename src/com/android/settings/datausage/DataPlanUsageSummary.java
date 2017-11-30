@@ -74,7 +74,7 @@ public class DataPlanUsageSummary extends DataUsageBase {
     private NetworkPolicyEditor mPolicyEditor;
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_data_usage;
     }
 

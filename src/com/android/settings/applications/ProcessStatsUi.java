@@ -96,7 +96,7 @@ public class ProcessStatsUi extends ProcessStatsBase {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_uri_process_stats_apps;
     }
 

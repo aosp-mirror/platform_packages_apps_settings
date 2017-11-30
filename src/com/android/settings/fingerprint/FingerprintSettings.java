@@ -545,7 +545,7 @@ public class FingerprintSettings extends SubSettings {
         }
 
         @Override
-        protected int getHelpResource() {
+        public int getHelpResource() {
             return R.string.help_url_fingerprint;
         }
 

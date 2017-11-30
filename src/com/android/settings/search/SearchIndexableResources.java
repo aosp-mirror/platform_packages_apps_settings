@@ -39,7 +39,6 @@ import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
-import com.android.settings.deviceinfo.Status;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
 import com.android.settings.deviceinfo.StorageSettings;
 import com.android.settings.display.AmbientDisplaySettings;
@@ -69,8 +68,6 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
-import com.android.settings.notification.ZenModeEventRuleSettings;
-import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.EncryptionAndCredential;
@@ -86,6 +83,7 @@ import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.tts.TtsEnginePreferenceFragment;
 import com.android.settings.users.UserSettings;
 import com.android.settings.wallpaper.WallpaperTypeSettings;
+import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.wifi.ConfigureWifiSettings;
 import com.android.settings.wifi.WifiSettings;
 
@@ -169,10 +167,9 @@ public final class SearchIndexableResources {
         addIndex(PowerUsageSummary.class);
         addIndex(BatterySaverSettings.class);
         addIndex(LockscreenDashboardFragment.class);
+        addIndex(WifiDisplaySettings.class);
         addIndex(ZenModeBehaviorSettings.class);
         addIndex(ZenModeAutomationSettings.class);
-        addIndex(ZenModeEventRuleSettings.class);
-        addIndex(ZenModeScheduleRuleSettings.class);
     }
 
     private SearchIndexableResources() {

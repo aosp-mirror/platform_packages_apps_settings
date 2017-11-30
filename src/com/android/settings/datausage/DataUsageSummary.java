@@ -91,7 +91,7 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private NetworkPolicyEditor mPolicyEditor;
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_data_usage;
     }
 

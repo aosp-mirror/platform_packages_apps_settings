@@ -64,9 +64,8 @@ public class DashboardFragmentTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
-    private DashboardCategory mDashboardCategory;
-    @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
+    private DashboardCategory mDashboardCategory;
     private TestFragment mTestFragment;
 
     @Before
@@ -74,8 +73,8 @@ public class DashboardFragmentTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest(mContext);
         mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
-        mDashboardCategory.tiles = new ArrayList<>();
-        mDashboardCategory.tiles.add(new Tile());
+        mDashboardCategory = new DashboardCategory();
+        mDashboardCategory.addTile(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -117,7 +116,7 @@ public class DashboardFragmentTest {
 
     @Test
     public void displayTilesAsPreference_withEmptyCategory_shouldNotAddTiles() {
-        mDashboardCategory.tiles = null;
+        mDashboardCategory.removeTile(0);
         mTestFragment.onCreatePreferences(new Bundle(), "rootKey");
 
         verify(mTestFragment.mScreen, never()).addPreference(nullable(Preference.class));

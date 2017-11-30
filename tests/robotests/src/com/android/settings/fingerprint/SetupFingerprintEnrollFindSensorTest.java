@@ -47,7 +47,7 @@ import org.robolectric.shadows.ShadowAlertDialog;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,

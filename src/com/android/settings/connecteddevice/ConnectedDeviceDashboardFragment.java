@@ -48,7 +48,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_connected_devices;
     }
 
@@ -62,9 +62,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
 
-        final ConnectedDeviceGroupController connectedDeviceGroupController =
-                new ConnectedDeviceGroupController(this, lifecycle);
-        controllers.add(connectedDeviceGroupController);
+        controllers.add(new ConnectedDeviceGroupController(this, lifecycle));
+        controllers.add(new SavedDeviceGroupController(this, lifecycle));
         return controllers;
 
     }

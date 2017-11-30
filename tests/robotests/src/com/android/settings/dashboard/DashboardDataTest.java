@@ -57,12 +57,11 @@ public class DashboardDataTest {
     private DashboardData mDashboardDataWithOneConditions;
     private DashboardData mDashboardDataWithTwoConditions;
     private DashboardData mDashboardDataWithNoItems;
+    private DashboardCategory mDashboardCategory;
     @Mock
     private Tile mTestCategoryTile;
     @Mock
     private Tile mTestSuggestion;
-    @Mock
-    private DashboardCategory mDashboardCategory;
     @Mock
     private Condition mTestCondition;
     @Mock
@@ -71,6 +70,8 @@ public class DashboardDataTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
+
+        mDashboardCategory = new DashboardCategory();
 
         // Build suggestions
         final List<Tile> suggestions = new ArrayList<>();
@@ -91,8 +92,8 @@ public class DashboardDataTest {
         // Build category
         mTestCategoryTile.title = TEST_CATEGORY_TILE_TITLE;
         mDashboardCategory.title = "test";
-        mDashboardCategory.tiles = new ArrayList<>();
-        mDashboardCategory.tiles.add(mTestCategoryTile);
+
+        mDashboardCategory.addTile(mTestCategoryTile);
 
         // Build DashboardData
         mDashboardDataWithOneConditions = new DashboardData.Builder()

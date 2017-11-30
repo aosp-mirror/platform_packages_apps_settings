@@ -73,8 +73,8 @@ public class BluetoothDeviceUpdaterTest {
         mBluetoothDeviceUpdater = new BluetoothDeviceUpdater(mDashboardFragment,
                 mDevicePreferenceCallback, null) {
             @Override
-            public void update(CachedBluetoothDevice cachedBluetoothDevice) {
-                // do nothing
+            public boolean isFilterMatched(CachedBluetoothDevice cachedBluetoothDevice) {
+                return true;
             }
         };
         mBluetoothDeviceUpdater.setPrefContext(mContext);

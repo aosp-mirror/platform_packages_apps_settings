@@ -43,6 +43,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -58,9 +59,10 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
+                SettingsShadowResourcesImpl.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
                 ShadowEntityHeaderController.class
         })

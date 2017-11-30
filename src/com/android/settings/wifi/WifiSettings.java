@@ -1071,7 +1071,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_wifi;
     }
 

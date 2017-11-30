@@ -169,7 +169,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_bluetooth;
     }
 

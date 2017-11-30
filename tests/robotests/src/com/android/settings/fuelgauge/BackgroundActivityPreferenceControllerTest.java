@@ -39,6 +39,7 @@ import android.widget.Button;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
 import org.junit.Before;
@@ -57,10 +58,11 @@ import org.robolectric.util.FragmentTestUtil;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
+        sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class
+                SettingsShadowResources.SettingsShadowTheme.class,
+                ShadowFragment.class
         })
 public class BackgroundActivityPreferenceControllerTest {
     private static final int UID_LOW_SDK = 1234;

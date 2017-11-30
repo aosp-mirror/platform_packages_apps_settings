@@ -51,16 +51,8 @@ public class ConnectedBluetoothDeviceUpdater extends BluetoothDeviceUpdater {
     }
 
     @Override
-    public void update(CachedBluetoothDevice cachedDevice) {
+    public boolean isFilterMatched(CachedBluetoothDevice cachedDevice) {
         final BluetoothDevice device = cachedDevice.getDevice();
-        final boolean filterMatch =
-                device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
-
-        if (filterMatch) {
-            // Add the preference if it is new one
-            addPreference(cachedDevice);
-        } else {
-            removePreference(cachedDevice);
-        }
+        return device.getBondState() == BluetoothDevice.BOND_BONDED && device.isConnected();
     }
 }

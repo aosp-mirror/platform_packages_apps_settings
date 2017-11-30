@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class PowerUsageAnomalyDetailsTest {
     private static final String NAME_APP_1 = "app1";
     private static final String NAME_APP_2 = "app2";

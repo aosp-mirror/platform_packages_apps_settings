@@ -79,7 +79,7 @@ public class TrustAgentSettings extends SettingsPreferenceFragment implements
     }
 
     @Override
-    protected int getHelpResource() {
+    public int getHelpResource() {
         return R.string.help_url_trust_agent;
     }
 

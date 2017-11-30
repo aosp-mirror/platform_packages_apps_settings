@@ -55,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class WakeLockAnomalyDetectorTest {
     private static final String TARGET_PACKAGE_NAME = "com.android.app";
     private static final long ANOMALY_WAKELOCK_TIME_MS = 2 * DateUtils.HOUR_IN_MILLIS;
