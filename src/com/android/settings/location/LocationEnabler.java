@@ -13,6 +13,7 @@
  */
 package com.android.settings.location;
 
+import android.app.ActivityManager;
 import android.Manifest.permission;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -32,6 +33,8 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
+import static com.android.settingslib.Utils.updateLocationMode;
+
 /**
  * A class that listens to location settings change and modifies location settings
  * settings.
@@ -39,11 +42,6 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "LocationEnabler";
-    @VisibleForTesting
-    static final String MODE_CHANGING_ACTION =
-            "com.android.settings.location.MODE_CHANGING";
-    private static final String CURRENT_MODE_KEY = "CURRENT_MODE";
-    private static final String NEW_MODE_KEY = "NEW_MODE";
     @VisibleForTesting
     static final IntentFilter INTENT_FILTER_LOCATION_MODE_CHANGED =
             new IntentFilter(LocationManager.MODE_CHANGED_ACTION);
@@ -122,7 +120,7 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
             return;
         }
 
-        updateLocationMode(currentMode, mode);
+        updateLocationMode(mContext, currentMode, mode, ActivityManager.getCurrentUser());
         refreshLocationMode();
     }
 
@@ -153,14 +151,5 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
 
     private boolean isRestricted() {
         return mUserManager.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION);
-    }
-
-    private boolean updateLocationMode(int oldMode, int newMode) {
-        final Intent intent = new Intent(MODE_CHANGING_ACTION);
-        intent.putExtra(CURRENT_MODE_KEY, oldMode);
-        intent.putExtra(NEW_MODE_KEY, newMode);
-        mContext.sendBroadcast(intent, permission.WRITE_SECURE_SETTINGS);
-        return Settings.Secure.putInt(
-                mContext.getContentResolver(), Settings.Secure.LOCATION_MODE, newMode);
     }
 }

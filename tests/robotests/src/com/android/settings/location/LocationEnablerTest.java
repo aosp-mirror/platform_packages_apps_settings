@@ -16,9 +16,7 @@
 package com.android.settings.location;
 
 import static android.Manifest.permission.WRITE_SECURE_SETTINGS;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -31,18 +29,21 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
+import android.location.LocationManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
-
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,11 +53,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION,
+        shadows = {ShadowSecureSettings.class})
 public class LocationEnablerTest {
 
     @Mock
@@ -178,8 +178,11 @@ public class LocationEnablerTest {
 
         mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
 
-        verify(mContext).sendBroadcast(argThat(actionMatches(mEnabler.MODE_CHANGING_ACTION)),
+        verify(mContext).sendBroadcastAsUser(
+                argThat(actionMatches(LocationManager.MODE_CHANGING_ACTION)),
+                eq(UserHandle.of(ActivityManager.getCurrentUser())),
                 eq(WRITE_SECURE_SETTINGS));
+
     }
 
     @Test
