@@ -16,13 +16,14 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,6 +31,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
@@ -49,13 +51,15 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class OwnerInfoPreferenceControllerTest {
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
+    @Mock
     private PreferenceFragment mFragment;
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private PreferenceManager mPreferenceManager;
     @Mock
     private FragmentManager mFragmentManager;
     @Mock
@@ -76,7 +80,8 @@ public class OwnerInfoPreferenceControllerTest {
 
         when(mFragment.isAdded()).thenReturn(true);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        when(mPreference.getContext()).thenReturn(mContext);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
 
@@ -187,7 +192,8 @@ public class OwnerInfoPreferenceControllerTest {
 
         preference.performClick();
 
-        verify(mFragment).getFragmentManager();
+        // Called once in setTargetFragment, and a second time to display the fragment.
+        verify(mFragment, times(2)).getFragmentManager();
         verify(mFragment.getFragmentManager().beginTransaction())
                 .add(any(OwnerInfoSettings.class), anyString());
     }
