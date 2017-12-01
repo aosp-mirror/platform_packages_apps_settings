@@ -340,6 +340,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(mDisplayHomeAsUpEnabled);
             actionBar.setHomeButtonEnabled(mDisplayHomeAsUpEnabled);
+            actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
         }
         mSwitchBar = findViewById(R.id.switch_bar);
         if (mSwitchBar != null) {
