@@ -36,7 +36,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
+    sdk = TestConfig.SDK_VERSION_O,
     shadows = ShadowEventLogWriter.class
 )
 public class ConfigureKeyGuardDialogTest {
