@@ -46,7 +46,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, qualifiers = "mcc999")
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, qualifiers = "mcc999")
 public class IndexDataConverterTest {
 
     private final String localeStr = "en_US";
