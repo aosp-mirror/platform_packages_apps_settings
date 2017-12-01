@@ -17,6 +17,7 @@
 package com.android.settings.search;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
@@ -26,6 +27,7 @@ import android.util.IconDrawableFactory;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -84,8 +86,7 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
             AppSearchResult appResult = (AppSearchResult) result;
             PackageManager pm = fragment.getActivity().getPackageManager();
             UserHandle userHandle = appResult.getAppUserHandle();
-            Drawable badgedIcon =
-                    mIconDrawableFactory.getBadgedIcon(appResult.info, userHandle.getIdentifier());
+            Drawable badgedIcon = getBadgedIcon(appResult.info, userHandle.getIdentifier());
             iconView.setImageDrawable(badgedIcon);
             titleView.setContentDescription(
                     pm.getUserBadgedLabel(appResult.info.loadLabel(pm), userHandle));
@@ -111,5 +112,10 @@ public abstract class SearchViewHolder extends RecyclerView.ViewHolder {
         }
         breadcrumbView.setText(breadcrumb);
         breadcrumbView.setVisibility(View.VISIBLE);
+    }
+
+    @VisibleForTesting
+    Drawable getBadgedIcon(ApplicationInfo info, int userId) {
+        return mIconDrawableFactory.getBadgedIcon(info, userId);
     }
 }
