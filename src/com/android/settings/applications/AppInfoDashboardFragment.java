@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy
@@ -25,34 +25,22 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.LoaderManager;
-import android.app.LoaderManager.LoaderCallbacks;
 import android.app.admin.DevicePolicyManager;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.Loader;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
-import android.content.res.Resources;
-import android.hardware.usb.IUsbManager;
-import android.icu.text.ListFormatter;
-import android.net.INetworkStatsService;
-import android.net.INetworkStatsSession;
-import android.net.NetworkTemplate;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.BatteryStats;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
@@ -64,8 +52,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
-import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,13 +61,19 @@ import android.webkit.IWebViewUpdateService;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.applications.appinfo.AppBatteryPreferenceController;
+import com.android.settings.applications.appinfo.AppDataUsagePreferenceController;
+import com.android.settings.applications.appinfo.AppMemoryPreferenceController;
+import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
+import com.android.settings.applications.appinfo.AppOpenByDefaultPreferenceController;
+import com.android.settings.applications.appinfo.AppPermissionPreferenceController;
+import com.android.settings.applications.appinfo.AppStoragePreferenceController;
+import com.android.settings.applications.appinfo.AppVersionPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
@@ -90,32 +82,17 @@ import com.android.settings.applications.defaultapps.DefaultSmsPreferenceControl
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settings.datausage.AppDataUsage;
-import com.android.settings.datausage.DataUsageList;
-import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
-import com.android.settings.fuelgauge.BatteryEntry;
-import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.notification.AppNotificationSettings;
-import com.android.settings.notification.NotificationBackend;
-import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
-import com.android.settingslib.AppItem;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
-import com.android.settingslib.applications.PermissionsSummaryHelper;
-import com.android.settingslib.applications.PermissionsSummaryHelper.PermissionsResultCallback;
-import com.android.settingslib.applications.StorageStatsSource;
-import com.android.settingslib.applications.StorageStatsSource.AppStorageStats;
-import com.android.settingslib.development.DevelopmentSettingsEnabler;
-import com.android.settingslib.net.ChartData;
-import com.android.settingslib.net.ChartDataLoader;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.lang.ref.WeakReference;
@@ -133,11 +110,10 @@ import java.util.Set;
  * For non-system applications, there is no option to clear data. Instead there is an option to
  * uninstall the application.
  */
-public class AppInfoDashboardFragment extends SettingsPreferenceFragment
-        implements ApplicationsState.Callbacks, OnPreferenceClickListener,
-        LoaderCallbacks<AppStorageStats> {
+public class AppInfoDashboardFragment extends DashboardFragment
+        implements ApplicationsState.Callbacks {
 
-    private static final String LOG_TAG = "AppInfoDashboardFragment";
+    private static final String TAG = "AppInfoDashboard";
 
     // Menu identifiers
     public static final int UNINSTALL_ALL_USERS_MENU = 1;
@@ -147,37 +123,27 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
     public static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
 
-    private static final int SUB_INFO_FRAGMENT = 1;
+    public static final int SUB_INFO_FRAGMENT = 1;
 
-    private static final int LOADER_CHART_DATA = 2;
-    private static final int LOADER_STORAGE = 3;
+    public static final int LOADER_CHART_DATA = 2;
+    public static final int LOADER_STORAGE = 3;
     @VisibleForTesting
-    static final int LOADER_BATTERY = 4;
+    public static final int LOADER_BATTERY = 4;
 
     // Dialog identifiers used in showDialog
     private static final int DLG_BASE = 0;
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
-    private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
     private static final String KEY_HEADER = "header_view";
     private static final String KEY_INSTANT_APP_BUTTONS = "instant_app_buttons";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
-    private static final String KEY_NOTIFICATION = "notification_settings";
-    private static final String KEY_STORAGE = "storage_settings";
-    private static final String KEY_PERMISSION = "permission_settings";
-    private static final String KEY_DATA = "data_settings";
-    private static final String KEY_LAUNCH = "preferred_settings";
-    private static final String KEY_BATTERY = "battery";
-    private static final String KEY_MEMORY = "memory";
-    private static final String KEY_VERSION = "app_version";
     private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
             "instant_app_launch_supported_domain_urls";
-    // The following copied from AppInfoBase
+
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
 
-    protected static final String TAG = AppInfoBase.class.getSimpleName();
     protected static final boolean localLOGV = false;
 
     private EnforcedAdmin mAppsControlDisallowedAdmin;
@@ -191,7 +157,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
     private int mUserId;
     private String mPackageName;
 
-    private IUsbManager mUsbManager;
     private DevicePolicyManagerWrapper mDpm;
     private UserManager mUserManager;
     private PackageManager mPm;
@@ -206,66 +171,22 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
     private boolean mUpdatedSysApp = false;
-    private Preference mNotificationPreference;
-    private Preference mStoragePreference;
-    private Preference mPermissionsPreference;
-    private Preference mLaunchPreference;
-    private Preference mDataPreference;
-    private Preference mMemoryPreference;
-    private Preference mVersionPreference;
     private AppDomainsPreference mInstantAppDomainsPreference;
     private boolean mDisableAfterUninstall;
 
-    // Used for updating notification preference.
-    private final NotificationBackend mBackend = new NotificationBackend();
-
-    private ChartData mChartData;
-    private INetworkStatsSession mStatsSession;
+    private List<Callback> mCallbacks = new ArrayList<>();
 
     @VisibleForTesting
     ActionButtonPreference mActionButtons;
-    @VisibleForTesting
-    Preference mBatteryPreference;
-    @VisibleForTesting
-    BatterySipper mSipper;
-    @VisibleForTesting
-    BatteryStatsHelper mBatteryHelper;
-    @VisibleForTesting
-    BatteryUtils mBatteryUtils;
-
-    protected ProcStatsData mStatsManager;
-    protected ProcStatsPackageEntry mStats;
 
     private InstantAppButtonsController mInstantAppButtonsController;
 
-    private AppStorageStats mLastResult;
-    private String mBatteryPercent;
-
-    @VisibleForTesting
-    final LoaderCallbacks<BatteryStatsHelper> mBatteryCallbacks =
-            new LoaderCallbacks<BatteryStatsHelper>() {
-
-                @Override
-                public Loader<BatteryStatsHelper> onCreateLoader(int id, Bundle args) {
-                    return new BatteryStatsHelperLoader(getContext());
-                }
-
-                @Override
-                public void onLoadFinished(Loader<BatteryStatsHelper> loader,
-                        BatteryStatsHelper batteryHelper) {
-                    mBatteryHelper = batteryHelper;
-                    if (mPackageInfo != null) {
-                        mSipper = findTargetSipper(batteryHelper, mPackageInfo.applicationInfo.uid);
-                        if (getActivity() != null) {
-                            updateBattery();
-                        }
-                    }
-                }
-
-                @Override
-                public void onLoaderReset(Loader<BatteryStatsHelper> loader) {
-                }
-            };
+    /**
+     * Callback to invoke when app info has been changed.
+     */
+    public interface Callback {
+        void refreshUi();
+    }
 
     @VisibleForTesting
     boolean handleDisableable() {
@@ -400,14 +321,10 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         final Activity activity = getActivity();
         mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
                 .getApplicationFeatureProvider(activity);
-        mState = ApplicationsState.getInstance(activity.getApplication());
-        mSession = mState.newSession(this, getLifecycle());
         mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
-        IBinder b = ServiceManager.getService(Context.USB_SERVICE);
-        mUsbManager = IUsbManager.Stub.asInterface(b);
 
         retrieveAppEntry();
         startListeningToPackageRemove();
@@ -417,21 +334,8 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         }
 
         setHasOptionsMenu(true);
-        addPreferencesFromResource(R.xml.installed_app_details);
 
         addDynamicPrefs();
-        if (Utils.isBandwidthControlEnabled()) {
-            INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
-                    ServiceManager.getService(Context.NETWORK_STATS_SERVICE));
-            try {
-                mStatsSession = statsService.openSession();
-            } catch (RemoteException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            removePreference(KEY_DATA);
-        }
-        mBatteryUtils = BatteryUtils.getInstance(getContext());
     }
 
     @Override
@@ -454,31 +358,54 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         if (mFinishing) {
             return;
         }
-        AppItem app = new AppItem(mAppEntry.info.uid);
-        app.addUid(mAppEntry.info.uid);
-        if (mStatsSession != null) {
-            LoaderManager loaderManager = getLoaderManager();
-            loaderManager.restartLoader(LOADER_CHART_DATA,
-                    ChartDataLoader.buildArgs(getTemplate(getContext()), app),
-                    mDataCallbacks);
-            loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
-        }
-        restartBatteryStatsLoader();
-        if (DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext())) {
-            new MemoryUpdater().execute();
-        }
         updateDynamicPrefs();
     }
 
-    @VisibleForTesting
-    public void restartBatteryStatsLoader() {
-        getLoaderManager().restartLoader(LOADER_BATTERY, Bundle.EMPTY, mBatteryCallbacks);
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.app_info_settings;
     }
 
     @Override
-    public void onPause() {
-        getLoaderManager().destroyLoader(LOADER_CHART_DATA);
-        super.onPause();
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final String packageName = getPackageName();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final Lifecycle lifecycle = getLifecycle();
+
+        // The following are controllers for preferences that needs to refresh the preference state
+        // when app state changes.
+        controllers.add(new AppStoragePreferenceController(context, this, lifecycle));
+        controllers.add(new AppDataUsagePreferenceController(context, this, lifecycle));
+        controllers.add(new AppNotificationPreferenceController(context, this));
+        controllers.add(new AppOpenByDefaultPreferenceController(context, this));
+        controllers.add(new AppPermissionPreferenceController(context, this, packageName));
+        controllers.add(new AppVersionPreferenceController(context, this));
+
+        for (AbstractPreferenceController controller : controllers) {
+            mCallbacks.add((Callback) controller);
+        }
+
+        // The following are controllers for preferences that don't need to refresh the preference
+        // state when app state changes.
+        controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
+        controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
+        return controllers;
+    }
+
+    public ApplicationsState.AppEntry getAppEntry() {
+        if (mAppEntry == null) {
+            retrieveAppEntry();
+        }
+        return mAppEntry;
+    }
+
+    public PackageInfo getPackageInfo() {
+        return mPackageInfo;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -501,43 +428,14 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
                 .styleActionBar(activity)
                 .bindHeaderButtons();
 
-        mNotificationPreference = findPreference(KEY_NOTIFICATION);
-        mNotificationPreference.setOnPreferenceClickListener(this);
-        mStoragePreference = findPreference(KEY_STORAGE);
-        mStoragePreference.setOnPreferenceClickListener(this);
-        mPermissionsPreference = findPreference(KEY_PERMISSION);
-        mPermissionsPreference.setOnPreferenceClickListener(this);
-        mDataPreference = findPreference(KEY_DATA);
-        if (mDataPreference != null) {
-            mDataPreference.setOnPreferenceClickListener(this);
-        }
-        mBatteryPreference = findPreference(KEY_BATTERY);
-        mBatteryPreference.setEnabled(false);
-        mBatteryPreference.setOnPreferenceClickListener(this);
-        mMemoryPreference = findPreference(KEY_MEMORY);
-        mMemoryPreference.setOnPreferenceClickListener(this);
-        mMemoryPreference.setVisible(
-                DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(getContext()));
-        mVersionPreference = findPreference(KEY_VERSION);
         mInstantAppDomainsPreference =
                 (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
-        mLaunchPreference = findPreference(KEY_LAUNCH);
-        if (mAppEntry != null && mAppEntry.info != null) {
-            if ((mAppEntry.info.flags&ApplicationInfo.FLAG_INSTALLED) == 0 ||
-                    !mAppEntry.info.enabled) {
-                mLaunchPreference.setEnabled(false);
-            } else {
-                mLaunchPreference.setOnPreferenceClickListener(this);
-            }
-        } else {
-            mLaunchPreference.setEnabled(false);
-        }
     }
 
     @Override
     public void onPackageSizeChanged(String packageName) {
         if (!TextUtils.equals(packageName, mPackageName)) {
-            Log.d(LOG_TAG, "Package change irrelevant, skipping");
+            Log.d(TAG, "Package change irrelevant, skipping");
           return;
         }
         refreshUi();
@@ -553,7 +451,7 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
     boolean ensurePackageInfoAvailable(Activity activity) {
         if (mPackageInfo == null) {
             mFinishing = true;
-            Log.w(LOG_TAG, "Package info not available. Is this package already uninstalled?");
+            Log.w(TAG, "Package info not available. Is this package already uninstalled?");
             activity.finishAndRemoveTask();
             return false;
         }
@@ -622,23 +520,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    @Override
-    public Loader<AppStorageStats> onCreateLoader(int id, Bundle args) {
-        Context context = getContext();
-        return new FetchPackageStorageAsyncLoader(
-                context, new StorageStatsSource(context), mAppEntry.info, UserHandle.of(mUserId));
-    }
-
-    @Override
-    public void onLoadFinished(Loader<AppStorageStats> loader, AppStorageStats result) {
-        mLastResult = result;
-        refreshUi();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<AppStorageStats> loader) {
-    }
-
     /**
      * Utility method to hide and show specific preferences based on whether the app being displayed
      * is an Instant App or an installed app.
@@ -652,7 +533,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
             mInstantAppDomainsPreference.setTitles(handledDomains);
             // Dummy values, unused in the implementation
             mInstantAppDomainsPreference.setValues(new int[handledDomains.length]);
-            getPreferenceScreen().removePreference(mLaunchPreference);
         } else {
             getPreferenceScreen().removePreference(mInstantAppDomainsPreference);
         }
@@ -672,8 +552,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
                 .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
-        mVersionPreference.setSummary(getString(R.string.version_text,
-                BidiFormatter.getInstance().unicodeWrap(pkgInfo.versionName)));
     }
 
     @VisibleForTesting
@@ -698,19 +576,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
             showIt = false;
         }
         return showIt;
-    }
-
-    @VisibleForTesting
-    BatterySipper findTargetSipper(BatteryStatsHelper batteryHelper, int uid) {
-        List<BatterySipper> usageList = batteryHelper.getUsageList();
-        for (int i = 0, size = usageList.size(); i < size; i++) {
-            BatterySipper sipper = usageList.get(i);
-            if (sipper.getUid() == uid) {
-                return sipper;
-            }
-        }
-
-        return null;
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {
@@ -764,17 +629,8 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
 
         // Update the preference summaries.
         Activity context = getActivity();
-        boolean isExternal = ((mAppEntry.info.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0);
-        mStoragePreference.setSummary(getStorageSummary(context, mLastResult, isExternal));
-
-        PermissionsSummaryHelper.getPermissionSummary(getContext(),
-                mPackageName, mPermissionCallback);
-        mLaunchPreference.setSummary(AppUtils.getLaunchByDefaultSummary(mAppEntry, mUsbManager,
-                mPm, context));
-        mNotificationPreference.setSummary(getNotificationSummary(mAppEntry, context,
-                mBackend));
-        if (mDataPreference != null) {
-            mDataPreference.setSummary(getDataSummary());
+        for (Callback callback : mCallbacks) {
+            callback.refreshUi();
         }
 
         if (!mInitialized) {
@@ -801,63 +657,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         }
 
         return true;
-    }
-
-    @VisibleForTesting
-    void updateBattery() {
-        mBatteryPreference.setEnabled(true);
-        if (isBatteryStatsAvailable()) {
-            final int dischargeAmount = mBatteryHelper.getStats().getDischargeAmount(
-                    BatteryStats.STATS_SINCE_CHARGED);
-
-            final List<BatterySipper> usageList = new ArrayList<>(mBatteryHelper.getUsageList());
-            final double hiddenAmount = mBatteryUtils.removeHiddenBatterySippers(usageList);
-            final int percentOfMax = (int) mBatteryUtils.calculateBatteryPercent(
-                    mSipper.totalPowerMah, mBatteryHelper.getTotalPower(), hiddenAmount,
-                    dischargeAmount);
-            mBatteryPercent = Utils.formatPercentage(percentOfMax);
-            mBatteryPreference.setSummary(getString(R.string.battery_summary, mBatteryPercent));
-        } else {
-            mBatteryPreference.setSummary(getString(R.string.no_battery_summary));
-        }
-    }
-
-    private CharSequence getDataSummary() {
-        if (mChartData != null) {
-            long totalBytes = mChartData.detail.getTotalBytes();
-            if (totalBytes == 0) {
-                return getString(R.string.no_data_usage);
-            }
-            Context context = getActivity();
-            return getString(R.string.data_summary_format,
-                    Formatter.formatFileSize(context, totalBytes),
-                    DateUtils.formatDateTime(context, mChartData.detail.getStart(),
-                            DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_MONTH));
-        }
-        return getString(R.string.computing_size);
-    }
-
-    @VisibleForTesting
-    static CharSequence getStorageSummary(
-            Context context, AppStorageStats stats, boolean isExternal) {
-        if (stats == null) {
-            return context.getText(R.string.computing_size);
-        } else {
-            CharSequence storageType = context.getString(isExternal
-                    ? R.string.storage_type_external
-                    : R.string.storage_type_internal);
-            return context.getString(R.string.storage_summary_format,
-                    getSize(context, stats), storageType.toString().toLowerCase());
-        }
-    }
-
-    @VisibleForTesting
-    boolean isBatteryStatsAvailable() {
-        return mBatteryHelper != null && mSipper != null;
-    }
-
-    private static CharSequence getSize(Context context, AppStorageStats stats) {
-        return Formatter.formatFileSize(context, stats.getTotalBytes());
     }
 
     protected AlertDialog createDialog(int id, int errorCode) {
@@ -928,7 +727,7 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
-        Log.d(LOG_TAG, "Stopping package " + pkgName);
+        Log.d(TAG, "Stopping package " + pkgName);
         am.forceStopPackage(pkgName);
         int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
@@ -950,7 +749,7 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
     void checkForceStop() {
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             // User can't force stop device admin.
-            Log.w(LOG_TAG, "User can't force stop device admin");
+            Log.w(TAG, "User can't force stop device admin");
             updateForceStopButton(false);
         } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
             updateForceStopButton(false);
@@ -958,7 +757,7 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
             // If the app isn't explicitly stopped, then always show the
             // force stop button.
-            Log.w(LOG_TAG, "App is not explicitly stopped");
+            Log.w(TAG, "App is not explicitly stopped");
             updateForceStopButton(true);
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
@@ -966,22 +765,10 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
-            Log.d(LOG_TAG, "Sending broadcast to query restart status for "
+            Log.d(TAG, "Sending broadcast to query restart status for "
                     + mAppEntry.info.packageName);
             getActivity().sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
                     mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
-        }
-    }
-
-    private void startManagePermissionsActivity() {
-        // start new activity to manage app permissions
-        Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
-        intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
-        intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
-        try {
-            getActivity().startActivityForResult(intent, SUB_INFO_FRAGMENT);
-        } catch (ActivityNotFoundException e) {
-            Log.w(LOG_TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS");
         }
     }
 
@@ -1068,38 +855,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         final int userCount = mUserManager.getUserCount();
         return userCount == 1
                 || (mUserManager.isSplitSystemUser() && userCount == 2);
-    }
-
-    @Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference == mStoragePreference) {
-            startAppInfoFragment(AppStorageSettings.class, R.string.storage_settings);
-        } else if (preference == mNotificationPreference) {
-            startAppInfoFragment(AppNotificationSettings.class, R.string.app_notifications_title);
-        } else if (preference == mPermissionsPreference) {
-            startManagePermissionsActivity();
-        } else if (preference == mLaunchPreference) {
-            startAppInfoFragment(AppLaunchSettings.class, R.string.launch_by_default);
-        } else if (preference == mMemoryPreference) {
-            ProcessStatsBase.launchMemoryDetail((SettingsActivity) getActivity(),
-                    mStatsManager.getMemInfo(), mStats, false);
-        } else if (preference == mDataPreference) {
-            startAppInfoFragment(AppDataUsage.class, R.string.app_data_usage);
-        } else if (preference == mBatteryPreference) {
-            if (isBatteryStatsAvailable()) {
-                BatteryEntry entry = new BatteryEntry(getContext(), null, mUserManager, mSipper);
-                entry.defaultPackageName = mPackageName;
-                AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
-                        this, mBatteryHelper, BatteryStats.STATS_SINCE_CHARGED, entry,
-                        mBatteryPercent, null /* mAnomalies */);
-            } else {
-                AdvancedPowerUsageDetail.startBatteryDetailPage((SettingsActivity) getActivity(),
-                        this, mPackageName);
-            }
-        } else {
-            return false;
-        }
-        return true;
     }
 
     private void addDynamicPrefs() {
@@ -1330,76 +1085,9 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    public static NetworkTemplate getTemplate(Context context) {
-        if (DataUsageList.hasReadyMobileRadio(context)) {
-            return NetworkTemplate.buildTemplateMobileWildcard();
-        }
-        if (DataUsageUtils.hasWifiRadio(context)) {
-            return NetworkTemplate.buildTemplateWifiWildcard();
-        }
-        return NetworkTemplate.buildTemplateEthernet();
-    }
-
-    public static CharSequence getNotificationSummary(AppEntry appEntry, Context context,
-            NotificationBackend backend) {
-        AppRow appRow = backend.loadAppRow(context, context.getPackageManager(), appEntry.info);
-        return getNotificationSummary(appRow, context);
-    }
-
-    public static CharSequence getNotificationSummary(AppRow appRow, Context context) {
-        // TODO: implement summary when it is known what it should say
-        return "";
-    }
-
     private void onPackageRemoved() {
         getActivity().finishActivity(SUB_INFO_FRAGMENT);
         getActivity().finishAndRemoveTask();
-    }
-
-    private class MemoryUpdater extends AsyncTask<Void, Void, ProcStatsPackageEntry> {
-
-        @Override
-        protected ProcStatsPackageEntry doInBackground(Void... params) {
-            if (getActivity() == null) {
-                return null;
-            }
-            if (mPackageInfo == null) {
-                return null;
-            }
-            if (mStatsManager == null) {
-                mStatsManager = new ProcStatsData(getActivity(), false);
-                mStatsManager.setDuration(ProcessStatsBase.sDurations[0]);
-            }
-            mStatsManager.refreshStats(true);
-            for (ProcStatsPackageEntry pkgEntry : mStatsManager.getEntries()) {
-                for (ProcStatsEntry entry : pkgEntry.mEntries) {
-                    if (entry.mUid == mPackageInfo.applicationInfo.uid) {
-                        pkgEntry.updateMetrics();
-                        return pkgEntry;
-                    }
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(ProcStatsPackageEntry entry) {
-            if (getActivity() == null) {
-                return;
-            }
-            if (entry != null) {
-                mStats = entry;
-                mMemoryPreference.setEnabled(true);
-                double amount = Math.max(entry.mRunWeight, entry.mBgWeight)
-                        * mStatsManager.getMemInfo().weightToRam;
-                mMemoryPreference.setSummary(getString(R.string.memory_use_summary,
-                        Formatter.formatShortFileSize(getContext(), (long) amount)));
-            } else {
-                mMemoryPreference.setEnabled(false);
-                mMemoryPreference.setSummary(getString(R.string.no_memory_use_summary));
-            }
-        }
-
     }
 
     /**
@@ -1453,76 +1141,22 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    private final LoaderCallbacks<ChartData> mDataCallbacks = new LoaderCallbacks<ChartData>() {
-
-        @Override
-        public Loader<ChartData> onCreateLoader(int id, Bundle args) {
-            return new ChartDataLoader(getActivity(), mStatsSession, args);
-        }
-
-        @Override
-        public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
-            mChartData = data;
-            mDataPreference.setSummary(getDataSummary());
-        }
-
-        @Override
-        public void onLoaderReset(Loader<ChartData> loader) {
-            // Leave last result.
-        }
-    };
-
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final boolean enabled = getResultCode() != Activity.RESULT_CANCELED;
-            Log.d(LOG_TAG, "Got broadcast response: Restart status for "
+            Log.d(TAG, "Got broadcast response: Restart status for "
                     + mAppEntry.info.packageName + " " + enabled);
             updateForceStopButton(enabled);
         }
     };
 
-    private final PermissionsResultCallback mPermissionCallback
-            = new PermissionsResultCallback() {
-        @Override
-        public void onPermissionSummaryResult(int standardGrantedPermissionCount,
-                int requestedPermissionCount, int additionalGrantedPermissionCount,
-                List<CharSequence> grantedGroupLabels) {
-            if (getActivity() == null) {
-                return;
-            }
-            final Resources res = getResources();
-            CharSequence summary = null;
-
-            if (requestedPermissionCount == 0) {
-                summary = res.getString(
-                        R.string.runtime_permissions_summary_no_permissions_requested);
-                mPermissionsPreference.setOnPreferenceClickListener(null);
-                mPermissionsPreference.setEnabled(false);
-            } else {
-                final ArrayList<CharSequence> list = new ArrayList<>(grantedGroupLabels);
-                if (additionalGrantedPermissionCount > 0) {
-                    // N additional permissions.
-                    list.add(res.getQuantityString(
-                            R.plurals.runtime_permissions_additional_count,
-                            additionalGrantedPermissionCount, additionalGrantedPermissionCount));
-                }
-                if (list.size() == 0) {
-                    summary = res.getString(
-                            R.string.runtime_permissions_summary_no_permissions_granted);
-                } else {
-                    summary = ListFormatter.getInstance().format(list);
-                }
-                mPermissionsPreference.setOnPreferenceClickListener(AppInfoDashboardFragment.this);
-                mPermissionsPreference.setEnabled(true);
-            }
-            mPermissionsPreference.setSummary(summary);
+    private String getPackageName() {
+        if (mPackageName != null) {
+            return mPackageName;
         }
-    };
-
-    private String retrieveAppEntry() {
         final Bundle args = getArguments();
-        mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+        String mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
             Intent intent = (args == null) ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
@@ -1530,12 +1164,25 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
+        return mPackageName;
+    }
+
+    private void retrieveAppEntry() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        if (mState == null) {
+            mState = ApplicationsState.getInstance(activity.getApplication());
+            mSession = mState.newSession(this, getLifecycle());
+        }
         mUserId = UserHandle.myUserId();
-        mAppEntry = mState.getEntry(mPackageName, mUserId);
+        mAppEntry = mState.getEntry(getPackageName(), UserHandle.myUserId());
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {
-                mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
+                mPackageInfo = activity.getPackageManager().getPackageInfo(
+                        mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS |
                                 PackageManager.MATCH_ANY_USER |
                                 PackageManager.GET_SIGNATURES |
@@ -1547,8 +1194,6 @@ public class AppInfoDashboardFragment extends SettingsPreferenceFragment
             Log.w(TAG, "Missing AppEntry; maybe reinstalling?");
             mPackageInfo = null;
         }
-
-        return mPackageName;
     }
 
     private void setIntentAndFinish(boolean finish, boolean appChanged) {

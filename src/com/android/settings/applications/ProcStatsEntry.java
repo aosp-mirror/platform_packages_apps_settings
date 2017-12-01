@@ -297,6 +297,10 @@ public final class ProcStatsEntry implements Parcelable {
         }
     }
 
+    public int getUid() {
+        return mUid;
+    }
+
     public static final Parcelable.Creator<ProcStatsEntry> CREATOR
             = new Parcelable.Creator<ProcStatsEntry>() {
         public ProcStatsEntry createFromParcel(Parcel in) {
