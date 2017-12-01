@@ -130,4 +130,21 @@ public class ZenModeButtonPreferenceControllerTest {
         verify(mZenButtonOn).setVisibility(View.VISIBLE);
         verify(mZenButtonOff).setVisibility(View.GONE);
     }
+
+    @Test
+    public void updateState_otherUserChangedZen() {
+        final Preference mockPref = mock(Preference.class);
+        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_OFF);
+        mController.updateState(mockPref);
+        verify(mZenButtonOn).setVisibility(View.VISIBLE);
+        verify(mZenButtonOff).setVisibility(View.GONE);
+
+        Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+        final int GUEST_USER_ID = 10;
+        mController.mSettingObserver.onChange(false,
+                Settings.Global.getUriFor(Settings.Global.ZEN_MODE), GUEST_USER_ID);
+
+        verify(mZenButtonOn).setVisibility(View.GONE);
+        verify(mZenButtonOff).setVisibility(View.VISIBLE);
+    }
 }
