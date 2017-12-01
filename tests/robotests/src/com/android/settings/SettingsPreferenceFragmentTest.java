@@ -42,6 +42,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -64,6 +65,7 @@ public class SettingsPreferenceFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mFragment = spy(new TestFragment());
         doReturn(mActivity).when(mFragment).getActivity();
