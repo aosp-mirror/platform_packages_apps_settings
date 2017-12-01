@@ -17,7 +17,9 @@
 package com.android.settings.webview;
 
 import static android.provider.Settings.ACTION_WEBVIEW_SETTINGS;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -43,7 +45,6 @@ import android.os.UserManager;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.wrapper.UserPackageWrapper;
@@ -62,16 +63,16 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Arrays;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class WebViewAppPickerTest {
-    private Context mContext = RuntimeEnvironment.application;
+    private Context mContext;
 
     private UserInfo mFirstUser;
     private UserInfo mSecondUser;
 
     private final static String DEFAULT_PACKAGE_NAME = "DEFAULT_PACKAGE_NAME";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private Activity mActivity;
     @Mock
     private UserManager mUserManager;
@@ -90,8 +91,8 @@ public class WebViewAppPickerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
-        when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         mFirstUser = new UserInfo(0, "FIRST_USER", 0);
         mSecondUser = new UserInfo(0, "SECOND_USER", 0);
         mPicker = new WebViewAppPicker();
@@ -168,7 +169,7 @@ public class WebViewAppPickerTest {
     @Test
     public void testDisabledPackageShownAsDisabled() {
         String disabledReason = "disabled";
-        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mActivity, mPackageManager,
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), disabledReason);
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
@@ -183,7 +184,7 @@ public class WebViewAppPickerTest {
     @Test
     public void testEnabledPackageShownAsEnabled() {
         String disabledReason = "";
-        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mActivity, mPackageManager,
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), disabledReason);
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
@@ -198,7 +199,7 @@ public class WebViewAppPickerTest {
     @Test
     public void testDisabledPackageShowsDisabledReasonSummary() {
         String disabledReason = "disabled";
-        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mActivity, mPackageManager,
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), disabledReason);
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
@@ -214,7 +215,7 @@ public class WebViewAppPickerTest {
     @Test
     public void testEnabledPackageShowsEmptySummary() {
         String disabledReason = null;
-        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mActivity, mPackageManager,
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 createApplicationInfo(DEFAULT_PACKAGE_NAME), disabledReason);
 
         RadioButtonPreference mockPreference = mock(RadioButtonPreference.class);
@@ -228,14 +229,14 @@ public class WebViewAppPickerTest {
     @Test
     public void testFinishIfNotAdmin() {
         doReturn(false).when(mUserManager).isAdminUser();
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(mContext);
         verify(mActivity, times(1)).finish();
     }
 
     @Test
     public void testNotFinishedIfAdmin() {
         doReturn(true).when(mUserManager).isAdminUser();
-        mPicker.onAttach((Context) mActivity);
+        mPicker.onAttach(mContext);
         verify(mActivity, never()).finish();
     }
 
@@ -348,7 +349,7 @@ public class WebViewAppPickerTest {
         PackageItemInfo mockPackageItemInfo = mock(PackageItemInfo.class);
         mockPackageItemInfo.packageName = DEFAULT_PACKAGE_NAME;
         when(mockPackageItemInfo.loadLabel(any())).thenReturn("myPackage");
-        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mActivity, mPackageManager,
+        DefaultAppInfo webviewAppInfo = mPicker.createDefaultAppInfo(mContext, mPackageManager,
                 mockPackageItemInfo, "" /* disabledReason */);
 
         PackageInfo packageInfo = new PackageInfo();
