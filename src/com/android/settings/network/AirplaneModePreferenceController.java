@@ -100,12 +100,16 @@ public class AirplaneModePreferenceController extends AbstractPreferenceControll
     }
 
     public void onResume() {
-        mAirplaneModeEnabler.resume();
+        if (mAirplaneModeEnabler != null) {
+            mAirplaneModeEnabler.resume();
+        }
     }
 
     @Override
     public void onPause() {
-        mAirplaneModeEnabler.pause();
+        if (mAirplaneModeEnabler != null) {
+            mAirplaneModeEnabler.pause();
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
