@@ -73,8 +73,18 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     public void onStart() {
         super.onStart();
 
-        updateContent(mLocalAdapter.getBluetoothState());
+        updateBluetooth();
         mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
+    }
+
+    @VisibleForTesting
+    void updateBluetooth() {
+        if (mLocalAdapter.isEnabled()) {
+            updateContent(mLocalAdapter.getBluetoothState());
+        } else {
+            // Turn on bluetooth if it is disabled
+            mLocalAdapter.enable();
+        }
     }
 
     @Override

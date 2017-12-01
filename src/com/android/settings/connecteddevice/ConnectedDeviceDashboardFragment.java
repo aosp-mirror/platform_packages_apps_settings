@@ -64,8 +64,8 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
         controllers.add(new ConnectedDeviceGroupController(this, lifecycle));
         controllers.add(new SavedDeviceGroupController(this, lifecycle));
-        return controllers;
 
+        return controllers;
     }
 
     @VisibleForTesting
