@@ -37,7 +37,7 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class InlineSwitchPayloadTest {
 
     private static final String DUMMY_SETTING = "inline_test";

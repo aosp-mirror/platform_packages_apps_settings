@@ -28,6 +28,7 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.UserManager;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.TestConfig;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class AccessibilityServiceResultFutureTaskTest {
 
     private static final String QUERY = "test_query";
@@ -59,6 +60,8 @@ public class AccessibilityServiceResultFutureTaskTest {
     private AccessibilityManager mAccessibilityManager;
     @Mock
     private SiteMapManager mSiteMapManager;
+    @Mock
+    private UserManager mUserManager;
 
     private AccessibilityServiceResultLoader.AccessibilityServiceResultCallable mCallable;
 
@@ -67,6 +70,7 @@ public class AccessibilityServiceResultFutureTaskTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.ACCESSIBILITY_SERVICE))
                 .thenReturn(mAccessibilityManager);
+        when((Object)mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
 
         mCallable = new AccessibilityServiceResultLoader.AccessibilityServiceResultCallable(

@@ -46,7 +46,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class SearchResultsAdapterTest {
 
     @Mock

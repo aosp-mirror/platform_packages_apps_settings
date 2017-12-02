@@ -293,7 +293,8 @@ public class IndexDatabaseHelper extends SQLiteOpenHelper {
     }
 
     static void setBuildIndexed(Context context, String buildNo) {
-        context.getSharedPreferences(SHARED_PREFS_TAG, 0).edit().putBoolean(buildNo, true).commit();
+        // Use #apply() instead of #commit() since #commit() Robolectric loop indefinitely in sdk 26
+        context.getSharedPreferences(SHARED_PREFS_TAG, 0).edit().putBoolean(buildNo, true).apply();
     }
 
     private void dropTables(SQLiteDatabase db) {
