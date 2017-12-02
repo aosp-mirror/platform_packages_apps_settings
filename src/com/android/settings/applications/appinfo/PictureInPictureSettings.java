@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import static android.content.pm.PackageManager.GET_ACTIVITIES;
 
@@ -37,6 +37,7 @@ import android.view.View;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoBase;
 import com.android.settings.notification.EmptyTextSettings;
 import com.android.settings.widget.AppPreference;
 import com.android.settings.wrapper.ActivityInfoWrapper;
@@ -95,7 +96,7 @@ public class PictureInPictureSettings extends EmptyTextSettings {
      * @return true if the package has any activities that declare that they support
      *         picture-in-picture.
      */
-    static boolean checkPackageHasPictureInPictureActivities(String packageName,
+    public static boolean checkPackageHasPictureInPictureActivities(String packageName,
             ActivityInfo[] activities) {
         ActivityInfoWrapper[] wrappedActivities = null;
         if (activities != null) {

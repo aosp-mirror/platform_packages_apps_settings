@@ -105,6 +105,33 @@
         android:title="@string/sms_application_title"
         android:summary="@string/summary_placeholder" />
 
+    <!-- Advanced apps settings -->
+    <PreferenceCategory
+        android:key="advanced_app_info"
+        android:title="@string/advanced_apps">
+
+        <Preference
+            android:key="system_alert_window"
+            android:title="@string/draw_overlay"
+            android:summary="@string/summary_placeholder" />
+
+        <Preference
+            android:key="write_settings_apps"
+            android:title="@string/write_settings"
+            android:summary="@string/summary_placeholder" />
+
+        <Preference
+            android:key="picture_in_picture"
+            android:title="@string/picture_in_picture_app_detail_title"
+            android:summary="@string/summary_placeholder" />
+
+        <Preference
+            android:key="install_other_apps"
+            android:title="@string/install_other_apps"
+            android:summary="@string/summary_placeholder" />
+
+    </PreferenceCategory>
+
     <Preference
         android:key="app_version"
         android:selectable="false"

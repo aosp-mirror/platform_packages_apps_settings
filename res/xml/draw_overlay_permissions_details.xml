@@ -15,15 +15,19 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/install_other_apps">
+    android:key="draw_overlay_permission_detail_settings"
+    android:title="@string/draw_overlay">
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="external_sources_settings_switch"
-        android:title="@string/external_source_switch_title" />
+    <SwitchPreference
+        android:key="app_ops_settings_switch"
+        android:title="@string/permit_draw_overlay"/>
 
     <Preference
-        android:key="external_sources_settings_description"
-        android:summary="@string/install_all_warning"
-        android:selectable="false" />
+        android:key="app_ops_settings_preference"
+        android:title="@string/app_overlay_permission_preference"/>
+
+    <Preference
+        android:summary="@string/allow_overlay_description"
+        android:selectable="false"/>
 
 </PreferenceScreen>

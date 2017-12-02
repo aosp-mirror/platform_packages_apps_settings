@@ -15,15 +15,19 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/install_other_apps">
+    android:key="write_system_settings_permission_detail_settings"
+    android:title="@string/write_settings">
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="external_sources_settings_switch"
-        android:title="@string/external_source_switch_title" />
+    <SwitchPreference
+        android:key="app_ops_settings_switch"
+        android:title="@string/permit_write_settings"/>
 
     <Preference
-        android:key="external_sources_settings_description"
-        android:summary="@string/install_all_warning"
-        android:selectable="false" />
+        android:key="app_ops_settings_preference"
+        android:title="@string/write_settings_preference"/>
+
+    <Preference
+        android:summary="@string/write_settings_description"
+        android:selectable="false"/>
 
 </PreferenceScreen>
