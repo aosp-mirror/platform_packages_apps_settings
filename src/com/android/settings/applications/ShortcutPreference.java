@@ -21,7 +21,12 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.applications.appinfo.DefaultAppShortcutPreferenceControllerBase;
 
+/**
+ * deprecated in favor of {@link DefaultAppShortcutPreferenceControllerBase}
+ */
+@Deprecated
 public class ShortcutPreference extends Preference {
 
     private final Class mTarget;

@@ -50,7 +50,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -74,6 +73,11 @@ import com.android.settings.applications.appinfo.AppOpenByDefaultPreferenceContr
 import com.android.settings.applications.appinfo.AppPermissionPreferenceController;
 import com.android.settings.applications.appinfo.AppStoragePreferenceController;
 import com.android.settings.applications.appinfo.AppVersionPreferenceController;
+import com.android.settings.applications.appinfo.DefaultBrowserShortcutPreferenceController;
+import com.android.settings.applications.appinfo.DefaultEmergencyShortcutPreferenceController;
+import com.android.settings.applications.appinfo.DefaultHomeShortcutPreferenceController;
+import com.android.settings.applications.appinfo.DefaultPhoneShortcutPreferenceController;
+import com.android.settings.applications.appinfo.DefaultSmsShortcutPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
@@ -394,6 +398,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
         // state when app state changes.
         controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
+        controllers.add(new DefaultHomeShortcutPreferenceController(context, packageName));
+        controllers.add(new DefaultBrowserShortcutPreferenceController(context, packageName));
+        controllers.add(new DefaultPhoneShortcutPreferenceController(context, packageName));
+        controllers.add(new DefaultEmergencyShortcutPreferenceController(context, packageName));
+        controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
+
         return controllers;
     }
 
@@ -863,31 +873,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         final PreferenceScreen screen = getPreferenceScreen();
         final Context context = getContext();
-        if (DefaultHomePreferenceController.hasHomePreference(mPackageName, context)) {
-            screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    DefaultAppSettings.class, "default_home", R.string.home_app,
-                    R.string.configure_apps));
-        }
-        if (DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, context)) {
-            screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    DefaultAppSettings.class, "default_browser", R.string.default_browser_title,
-                    R.string.configure_apps));
-        }
-        if (DefaultPhonePreferenceController.hasPhonePreference(mPackageName, context)) {
-            screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    DefaultAppSettings.class, "default_phone_app", R.string.default_phone_title,
-                    R.string.configure_apps));
-        }
-        if (DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, context)) {
-            screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    DefaultAppSettings.class, "default_emergency_app",
-                    R.string.default_emergency_app, R.string.configure_apps));
-        }
-        if (DefaultSmsPreferenceController.hasSmsPreference(mPackageName, context)) {
-            screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    DefaultAppSettings.class, "default_sms_app", R.string.sms_application_title,
-                    R.string.configure_apps));
-        }
 
         // Get the package info with the activities
         PackageInfo packageInfoWithActivities = null;
@@ -1037,36 +1022,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private void updateDynamicPrefs() {
         final Context context = getContext();
-        Preference pref = findPreference("default_home");
-
-        if (pref != null) {
-            pref.setSummary(DefaultHomePreferenceController.isHomeDefault(mPackageName,
-                    new PackageManagerWrapper(context.getPackageManager()))
-                    ? R.string.yes : R.string.no);
-        }
-        pref = findPreference("default_browser");
-        if (pref != null) {
-            pref.setSummary(new DefaultBrowserPreferenceController(context)
-                    .isBrowserDefault(mPackageName, mUserId)
-                    ? R.string.yes : R.string.no);
-        }
-        pref = findPreference("default_phone_app");
-        if (pref != null) {
-            pref.setSummary(
-                    DefaultPhonePreferenceController.isPhoneDefault(mPackageName, context)
-                    ? R.string.yes : R.string.no);
-        }
-        pref = findPreference("default_emergency_app");
-        if (pref != null) {
-            pref.setSummary(DefaultEmergencyPreferenceController.isEmergencyDefault(mPackageName,
-                    getContext()) ? R.string.yes : R.string.no);
-        }
-        pref = findPreference("default_sms_app");
-        if (pref != null) {
-            pref.setSummary(DefaultSmsPreferenceController.isSmsDefault(mPackageName, context)
-                    ? R.string.yes : R.string.no);
-        }
-        pref = findPreference("system_alert_window");
+        Preference pref = findPreference("system_alert_window");
         if (pref != null) {
             pref.setSummary(DrawOverlayDetails.getSummary(getContext(), mAppEntry));
         }
