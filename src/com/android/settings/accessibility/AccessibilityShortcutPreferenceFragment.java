@@ -16,6 +16,7 @@
 package com.android.settings.accessibility;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
+import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.support.v7.preference.Preference;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Switch;
 
+import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -87,7 +89,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         super.onInstallSwitchBarToggleSwitch();
         mSwitchBar.addOnSwitchChangeListener((Switch switchView, boolean enabled) -> {
             Context context = getContext();
-            if (enabled && (getServiceInfo(context) == null)) {
+            if (enabled && !shortcutFeatureAvailable(context)) {
                 // If no service is configured, we'll disable the shortcut shortly. Give the
                 // user a chance to select a service. We'll update the preferences when we resume.
                 Settings.Secure.putInt(
@@ -110,7 +112,7 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         ContentResolver cr = getContentResolver();
         Context context = getContext();
         mServicePreference.setSummary(getServiceName(context));
-        if (getServiceInfo(context) == null) {
+        if (!shortcutFeatureAvailable(context)) {
             // If no service is configured, make sure the overall shortcut is turned off
             Settings.Secure.putInt(
                     getContentResolver(), Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, 0);
@@ -132,19 +134,38 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
      * @return The name of the service or a string saying that none is selected.
      */
     public static CharSequence getServiceName(Context context) {
+        if (!shortcutFeatureAvailable(context)) {
+            return context.getString(R.string.accessibility_no_service_selected);
+        }
         AccessibilityServiceInfo shortcutServiceInfo = getServiceInfo(context);
         if (shortcutServiceInfo != null) {
             return shortcutServiceInfo.getResolveInfo().loadLabel(context.getPackageManager());
         }
-        return context.getString(R.string.accessibility_no_service_selected);
+        return AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                .get(getShortcutComponent(context)).getLabel(context);
     }
 
     private static AccessibilityServiceInfo getServiceInfo(Context context) {
-        ComponentName shortcutServiceName = ComponentName.unflattenFromString(
-                AccessibilityUtils.getShortcutTargetServiceComponentNameString(
-                        context, UserHandle.myUserId()));
         return AccessibilityManager.getInstance(context)
-                .getInstalledServiceInfoWithComponentName(shortcutServiceName);
+                .getInstalledServiceInfoWithComponentName(getShortcutComponent(context));
+    }
+
+    private static boolean shortcutFeatureAvailable(Context context) {
+        ComponentName shortcutFeature = getShortcutComponent(context);
+        if (shortcutFeature == null) return false;
+
+        if (AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                .containsKey(shortcutFeature)) {
+            return true;
+        }
+        return getServiceInfo(context) != null;
+    }
+
+    private static @Nullable ComponentName getShortcutComponent(Context context) {
+        String componentNameString = AccessibilityUtils.getShortcutTargetServiceComponentNameString(
+                context, UserHandle.myUserId());
+        if (componentNameString == null) return null;
+        return ComponentName.unflattenFromString(componentNameString);
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
