@@ -18,9 +18,7 @@ package com.android.settings;
 
 import static com.android.settings.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
 import static com.android.settings.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -34,10 +32,10 @@ import android.os.SystemProperties;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
-import android.view.View;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -54,7 +52,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
@@ -81,6 +78,7 @@ public class DeviceInfoSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mSettings = spy(new DeviceInfoSettings());
 

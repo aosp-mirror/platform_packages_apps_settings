@@ -175,4 +175,17 @@ public class ProcStatsPackageEntry implements Parcelable {
                     Utils.formatPercentage((int) (amount * 100)));
         }
     }
+
+    public double getRunWeight() {
+        return mRunWeight;
+    }
+
+    public double getBgWeight() {
+        return mBgWeight;
+    }
+
+    public ArrayList<ProcStatsEntry> getEntries() {
+        return mEntries;
+    }
+
 }

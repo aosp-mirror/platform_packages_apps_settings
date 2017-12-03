@@ -18,6 +18,8 @@ package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -46,7 +48,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
         SettingsShadowResources.class
 })
 public class PickupGesturePreferenceControllerTest {
@@ -105,14 +107,16 @@ public class PickupGesturePreferenceControllerTest {
 
     @Test
     public void testCanHandleClicks_configIsSet_shouldReturnTrue() {
-        when(mAmbientDisplayConfiguration.pulseOnPickupCanBeModified(anyInt())).thenReturn(true);
+        mController = spy(mController);
+        doReturn(true).when(mController).pulseOnPickupCanBeModified();
 
         assertThat(mController.canHandleClicks()).isTrue();
     }
 
     @Test
     public void testCanHandleClicks_configIsNotSet_shouldReturnFalse() {
-        when(mAmbientDisplayConfiguration.pulseOnPickupCanBeModified(anyInt())).thenReturn(false);
+        mController = spy(mController);
+        doReturn(false).when(mController).pulseOnPickupCanBeModified();
 
         assertThat(mController.canHandleClicks()).isFalse();
     }

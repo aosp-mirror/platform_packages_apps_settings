@@ -48,7 +48,7 @@ import org.robolectric.annotation.Config;
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class NetworkScorerPickerTest {
 
     private static final String TEST_SCORER_PACKAGE_1 = "Test Package 1";

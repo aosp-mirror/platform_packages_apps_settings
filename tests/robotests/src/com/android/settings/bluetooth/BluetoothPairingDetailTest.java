@@ -31,7 +31,6 @@ import static org.mockito.Mockito.verify;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.UserManager;
 import android.support.v7.preference.PreferenceGroup;
 
 import com.android.settings.R;
@@ -55,8 +54,6 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class BluetoothPairingDetailTest {
 
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private Resources mResource;
     @Mock
@@ -134,6 +131,25 @@ public class BluetoothPairingDetailTest {
     }
 
     @Test
+    public void testUpdateBluetooth_bluetoothOff_turnOnBluetooth() {
+        doReturn(false).when(mLocalAdapter).isEnabled();
+
+        mFragment.updateBluetooth();
+
+        verify(mLocalAdapter).enable();
+    }
+
+    @Test
+    public void testUpdateBluetooth_bluetoothOn_updateState() {
+        doReturn(true).when(mLocalAdapter).isEnabled();
+        doNothing().when(mFragment).updateContent(anyInt());
+
+        mFragment.updateBluetooth();
+
+        verify(mFragment).updateContent(anyInt());
+    }
+
+    @Test
     public void testOnScanningStateChanged_restartScanAfterInitialScanning() {
         mFragment.mAvailableDevicesCategory = mAvailableDevicesCategory;
         mFragment.mFooterPreference = mFooterPreference;
@@ -180,7 +196,5 @@ public class BluetoothPairingDetailTest {
         // Verify that clean up only happen once at initialization
         verify(mAvailableDevicesCategory, times(1)).removeAll();
     }
-
-
 
 }

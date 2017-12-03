@@ -70,7 +70,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public static final int UNAVAILABLE_UNKNOWN = 4;
 
-    private final String mPreferenceKey;
+    protected final String mPreferenceKey;
 
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);

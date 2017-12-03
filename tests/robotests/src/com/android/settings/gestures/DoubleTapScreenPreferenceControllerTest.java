@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -46,9 +47,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class
-})
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class DoubleTapScreenPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -139,25 +138,19 @@ public class DoubleTapScreenPreferenceControllerTest {
 
     @Test
     public void isSuggestionCompleted_ambientDisplay_falseWhenNotVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
+        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(true);
         // No stored value in shared preferences if not visited yet.
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
                 .getSharedPrefs(context);
 
-        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(context, prefs))
-                .isFalse();
+        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(
+                mAmbientDisplayConfiguration, prefs)).isFalse();
     }
 
     @Test
     public void isSuggestionCompleted_ambientDisplay_trueWhenVisited() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeComponent, "foo");
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.string.config_dozeDoubleTapSensorType, "bar");
+        when(mAmbientDisplayConfiguration.pulseOnDoubleTapAvailable()).thenReturn(false);
         final Context context = RuntimeEnvironment.application;
         final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
                 .getSharedPrefs(context);
@@ -165,7 +158,7 @@ public class DoubleTapScreenPreferenceControllerTest {
         prefs.edit().putBoolean(
                 DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
-        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(context, prefs))
-                .isTrue();
+        assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(
+                mAmbientDisplayConfiguration, prefs)).isTrue();
     }
 }

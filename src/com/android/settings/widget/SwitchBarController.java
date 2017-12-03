@@ -82,10 +82,4 @@ public class SwitchBarController extends SwitchWidgetController implements
     public void setDisabledByAdmin(EnforcedAdmin admin) {
         mSwitchBar.setDisabledByAdmin(admin);
     }
-
-    @Override
-    public Switch getSwitch() {
-        return mSwitchBar.getSwitch();
-    }
-
 }
