@@ -22,10 +22,12 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -37,7 +39,8 @@ abstract public class AbstractZenModePreferenceController extends
         AbstractPreferenceController implements PreferenceControllerMixin, LifecycleObserver,
         OnResume, OnPause {
 
-    private SettingObserver mSettingObserver;
+    @VisibleForTesting
+    protected SettingObserver mSettingObserver;
     private final String KEY;
     final private NotificationManager mNotificationManager;
 
@@ -94,8 +97,8 @@ abstract public class AbstractZenModePreferenceController extends
         }
 
         public void register(ContentResolver cr) {
-            cr.registerContentObserver(ZEN_MODE_URI, false, this);
-            cr.registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this);
+            cr.registerContentObserver(ZEN_MODE_URI, false, this, UserHandle.USER_ALL);
+            cr.registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this, UserHandle.USER_ALL);
         }
 
         public void unregister(ContentResolver cr) {
