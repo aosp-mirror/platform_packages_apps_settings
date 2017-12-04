@@ -33,6 +33,7 @@ import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.backup.BackupSettingsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
+import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
 import com.android.settings.datausage.DataUsageMeteredSettings;
@@ -155,6 +156,7 @@ public final class SearchIndexableResources {
         addIndex(StorageDashboardFragment.class);
         addIndex(ConnectedDeviceDashboardFragment.class);
         addIndex(ConnectedDeviceDashboardFragmentOld.class);
+        addIndex(AdvancedConnectedDeviceDashboardFragment.class);
         addIndex(EnterprisePrivacySettings.class);
         addIndex(PaymentSettings.class);
         addIndex(TextToSpeechSettings.class);
