@@ -19,10 +19,11 @@
     android:key="connected_devices_screen"
     android:title="@string/connected_devices_dashboard_title">
 
-    <com.android.settings.widget.MasterSwitchPreference
-      android:key="toggle_bluetooth"
+    <SwitchPreference
+      android:key="toggle_bluetooth_switch"
       android:title="@string/bluetooth_settings_title"
       android:icon="@drawable/ic_settings_bluetooth"
+      android:summary="@string/bluetooth_pref_summary"
       android:order="-7"/>
 
     <SwitchPreference
