@@ -112,6 +112,17 @@ public class ImeiInfoDialogControllerTest {
     }
 
     @Test
+    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinToEmpty() {
+        ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(ID_MIN_NUMBER_VALUE, "");
+        verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
+    }
+
+    @Test
     public void populateImeinfo_gsm_shouldSetImeiAndRemoveCdmaSettings() {
         when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_GSM);
 
