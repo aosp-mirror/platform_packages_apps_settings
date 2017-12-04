@@ -55,7 +55,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class CachedStorageValuesHelperTest {
     private Context mContext;
 
@@ -94,7 +94,7 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
+        final PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
 
         assertThat(info.freeBytes).isEqualTo(1000L);
         assertThat(info.totalBytes).isEqualTo(6000L);
@@ -122,7 +122,7 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result =
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
                 mCachedValuesHelper.getCachedAppsStorageResult();
 
         StorageAsyncLoader.AppsStorageResult primaryResult = result.get(0);
@@ -161,7 +161,7 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
+        final PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
         assertThat(info).isNull();
     }
 
@@ -187,7 +187,7 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result =
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
                 mCachedValuesHelper.getCachedAppsStorageResult();
         assertThat(result).isNull();
     }
@@ -214,7 +214,7 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
+        final PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
         assertThat(info).isNull();
     }
 
@@ -240,20 +240,20 @@ public class CachedStorageValuesHelperTest {
                 .putLong(TIMESTAMP_KEY, 10000L)
                 .apply();
 
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result =
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
                 mCachedValuesHelper.getCachedAppsStorageResult();
         assertThat(result).isNull();
     }
 
     @Test
     public void getCachedPrivateStorageInfo_nullIfEmpty() throws Exception {
-        PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
+        final PrivateStorageInfo info = mCachedValuesHelper.getCachedPrivateStorageInfo();
         assertThat(info).isNull();
     }
 
     @Test
     public void getCachedAppsStorageResult_nullIfEmpty() throws Exception {
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result =
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result =
                 mCachedValuesHelper.getCachedAppsStorageResult();
         assertThat(result).isNull();
     }
