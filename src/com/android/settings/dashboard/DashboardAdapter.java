@@ -161,7 +161,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     public void setSuggestionsV2(List<Suggestion> data) {
-        // TODO: Tint icon
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
                 .setSuggestionsV2(data)

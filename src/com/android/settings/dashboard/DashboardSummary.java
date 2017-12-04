@@ -81,6 +81,9 @@ public class DashboardSummary extends InstrumentedFragment
     private boolean isOnCategoriesChangedCalled;
     private boolean mOnConditionsChangedCalled;
 
+    private DashboardCategory mStagingCategory;
+    private List<Suggestion> mStagingSuggestions;
+
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.DASHBOARD_SUMMARY;
@@ -291,7 +294,13 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public void onSuggestionReady(List<Suggestion> suggestions) {
+        mStagingSuggestions = suggestions;
         mAdapter.setSuggestionsV2(suggestions);
+        if (mStagingCategory != null) {
+            Log.d(TAG, "Category has loaded, setting category from suggestionReady");
+            mHandler.removeCallbacksAndMessages(null);
+            mAdapter.setCategory(mStagingCategory);
+        }
     }
 
     /**
@@ -342,7 +351,19 @@ public class DashboardSummary extends InstrumentedFragment
         final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
                 CategoryKey.CATEGORY_HOMEPAGE);
         mSummaryLoader.updateSummaryToCache(category);
-        ThreadUtils.postOnMainThread(() -> mAdapter.setCategory(category));
+        mStagingCategory = category;
+        if (mSuggestionControllerMixin.isSuggestionLoaded()) {
+            Log.d(TAG, "Suggestion has loaded, setting suggestion/category");
+            ThreadUtils.postOnMainThread(() -> {
+                if (mStagingSuggestions != null) {
+                    mAdapter.setSuggestionsV2(mStagingSuggestions);
+                }
+                mAdapter.setCategory(mStagingCategory);
+            });
+        } else {
+            Log.d(TAG, "Suggestion NOT loaded, delaying setCategory by " + MAX_WAIT_MILLIS + "ms");
+            mHandler.postDelayed(() -> mAdapter.setCategory(mStagingCategory), MAX_WAIT_MILLIS);
+        }
     }
 
     /**
