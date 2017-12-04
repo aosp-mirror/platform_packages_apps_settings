@@ -82,7 +82,7 @@ public class SuggestionAdapterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         final Tile suggestion1 = new Tile();
         final Tile suggestion2 = new Tile();

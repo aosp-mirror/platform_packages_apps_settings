@@ -18,13 +18,10 @@ package com.android.settings.applications.instantapps;
 
 import static com.android.settings.applications.instantapps.InstantAppButtonsController
         .ShowDialogDelegate;
-
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.isNull;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -44,10 +41,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -124,7 +121,7 @@ public class InstantAppButtonsControllerTest {
         controller.setPackageName(TEST_AIA_PACKAGE_NAME);
         ReflectionHelpers.setField(
                 controller, "mPackageManagerWrapper", mockPackageManagerWrapper);
-        FakeFeatureFactory.setupForTest(mockContext);
+        FakeFeatureFactory.setupForTest();
     }
 
     @Test

@@ -108,7 +108,7 @@ public class AppButtonsPreferenceControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mSettingsActivity);
+        FakeFeatureFactory.setupForTest();
         doReturn(mUserManager).when(mSettingsActivity).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManger).when(mSettingsActivity).getPackageManager();
         doReturn(mAm).when(mSettingsActivity).getSystemService(Context.ACTIVITY_SERVICE);

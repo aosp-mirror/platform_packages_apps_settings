@@ -59,7 +59,7 @@ public class ZenModeCallsTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mActivity.getSystemService(Context.NOTIFICATION_SERVICE))
                 .thenReturn(mNotificationManager);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
 
         mCalls = new ZenModeCallsSettings();
         mCalls.onAttach((Context)mActivity);

@@ -63,8 +63,8 @@ public class DrawOverlayDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test

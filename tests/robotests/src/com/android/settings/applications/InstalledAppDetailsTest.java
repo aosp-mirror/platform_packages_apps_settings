@@ -130,7 +130,7 @@ public final class InstalledAppDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
         mAppDetail.mBatteryUtils = mBatteryUtils;

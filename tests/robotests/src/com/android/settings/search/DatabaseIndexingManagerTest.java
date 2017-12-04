@@ -19,10 +19,10 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -69,11 +69,11 @@ import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
-    shadows = {
-        ShadowRunnableAsyncTask.class,
-    }
+        manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION_O,
+        shadows = {
+                ShadowRunnableAsyncTask.class,
+        }
 )
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";
@@ -128,7 +128,7 @@ public class DatabaseIndexingManagerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(FAKE_PROVIDER_LIST).when(mPackageManager)
                 .queryIntentContentProviders(any(Intent.class), anyInt());
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
     }
 
     @After

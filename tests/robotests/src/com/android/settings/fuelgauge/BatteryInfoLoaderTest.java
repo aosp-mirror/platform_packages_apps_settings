@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -27,11 +26,13 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryStats;
+
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +62,7 @@ public class BatteryInfoLoaderTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         mProvider = FakeFeatureFactory
-                .setupForTest(mContext)
+                .setupForTest()
                 .getPowerUsageFeatureProvider(mContext);
 
         mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();

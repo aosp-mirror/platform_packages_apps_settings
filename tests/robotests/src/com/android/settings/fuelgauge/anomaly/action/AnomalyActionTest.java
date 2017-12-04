@@ -57,8 +57,7 @@ public class AnomalyActionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         doReturn(mAppOpsManagerr).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
 
         mAnomaly = new Anomaly.Builder()

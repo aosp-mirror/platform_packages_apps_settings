@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -41,7 +39,6 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
@@ -53,15 +50,13 @@ public class ForgetDeviceDialogFragmentTest {
     private CachedBluetoothDevice mCachedDevice;
 
     private ForgetDeviceDialogFragment mFragment;
-    private Context mContext;
     private Activity mActivity;
     private AlertDialog mDialog;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         String deviceAddress = "55:66:77:88:99:AA";
         when(mCachedDevice.getAddress()).thenReturn(deviceAddress);
         mFragment = spy(ForgetDeviceDialogFragment.newInstance(deviceAddress));

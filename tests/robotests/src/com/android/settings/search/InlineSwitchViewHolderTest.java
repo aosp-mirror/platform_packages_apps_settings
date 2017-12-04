@@ -33,7 +33,6 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -49,8 +48,6 @@ public class InlineSwitchViewHolderTest {
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private SearchFragment mFragment;
 
@@ -66,8 +63,7 @@ public class InlineSwitchViewHolderTest {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
         mIcon = context.getDrawable(R.drawable.ic_search_24dp);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mHolder = new InlineSwitchViewHolder(
                 LayoutInflater.from(context).inflate(R.layout.search_inline_switch_item, null),

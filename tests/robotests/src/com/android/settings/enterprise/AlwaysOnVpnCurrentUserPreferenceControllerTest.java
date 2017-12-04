@@ -55,8 +55,7 @@ public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new AlwaysOnVpnCurrentUserPreferenceController(mContext);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_device))
                 .thenReturn(VPN_SET_DEVICE);

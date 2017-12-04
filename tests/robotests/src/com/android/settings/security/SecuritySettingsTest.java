@@ -75,7 +75,7 @@ public class SecuritySettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mSummaryProvider = new SecuritySettings.SummaryProvider(mContext, mSummaryLoader);
     }
 

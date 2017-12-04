@@ -17,7 +17,8 @@ package com.android.settings.deviceinfo.storage;
 
 
 import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ID;
-import static com.android.settings.applications.manageapplications.ManageApplications.EXTRA_WORK_ONLY;
+import static com.android.settings.applications.manageapplications.ManageApplications
+        .EXTRA_WORK_ONLY;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
@@ -96,8 +97,7 @@ public class StorageItemPreferenceControllerTest {
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        FakeFeatureFactory.setupForTest(mContext);
-        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mVolume = spy(new VolumeInfo("id", 0, null, "id"));
         // Note: null is passed as the Lifecycle because we are handling it outside of the normal
@@ -203,12 +203,12 @@ public class StorageItemPreferenceControllerTest {
         assertThat(intent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0))
                 .isEqualTo(R.string.apps_storage);
         assertThat(
-                        intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                                .getBoolean(EXTRA_WORK_ONLY))
+                intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                        .getBoolean(EXTRA_WORK_ONLY))
                 .isTrue();
         assertThat(
-                        intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-                                .getInt(EXTRA_WORK_ID))
+                intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+                        .getInt(EXTRA_WORK_ID))
                 .isEqualTo(0);
     }
 

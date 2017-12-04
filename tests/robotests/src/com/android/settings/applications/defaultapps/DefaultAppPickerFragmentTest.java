@@ -67,7 +67,7 @@ public class DefaultAppPickerFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);

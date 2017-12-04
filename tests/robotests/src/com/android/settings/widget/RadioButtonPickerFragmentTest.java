@@ -61,7 +61,7 @@ public class RadioButtonPickerFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);

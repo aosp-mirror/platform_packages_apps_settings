@@ -52,21 +52,20 @@ public class PhoneLanguagePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new PhoneLanguagePreferenceController(mContext);
     }
 
     @Test
     public void testIsAvailable_hasMultipleLocales_shouldReturnTrue() {
-        when(mContext.getAssets().getLocales()).thenReturn(new String[]{"en", "de"});
+        when(mContext.getAssets().getLocales()).thenReturn(new String[] {"en", "de"});
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void testIsAvailable_hasSingleLocales_shouldReturnFalse() {
-        when(mContext.getAssets().getLocales()).thenReturn(new String[]{"en"});
+        when(mContext.getAssets().getLocales()).thenReturn(new String[] {"en"});
 
         assertThat(mController.isAvailable()).isFalse();
     }

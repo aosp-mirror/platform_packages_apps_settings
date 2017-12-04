@@ -100,7 +100,7 @@ public final class AppInfoDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new AppInfoDashboardFragment());
         doReturn(mActivity).when(mAppDetail).getActivity();

@@ -15,13 +15,32 @@
  */
 package com.android.settings.fuelgauge;
 
+import static android.os.BatteryStats.Uid.PROCESS_STATE_BACKGROUND;
+import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
+import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
+import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP;
+import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.BatteryStats;
-import android.os.Bundle;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Process;
 import android.os.SystemClock;
 import android.os.UserManager;
@@ -30,10 +49,10 @@ import android.text.format.DateUtils;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -46,27 +65,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.os.BatteryStats.Uid.PROCESS_STATE_BACKGROUND;
-import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
-import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
-import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP;
-import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
@@ -148,8 +146,7 @@ public class BatteryUtilsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mProvider = mFeatureFactory.powerUsageFeatureProvider;
 
         doReturn(TIME_STATE_TOP).when(mUid).getProcessStateTime(eq(PROCESS_STATE_TOP), anyLong(),

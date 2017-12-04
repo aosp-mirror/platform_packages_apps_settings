@@ -59,7 +59,7 @@ public class ZenModeMessagesTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mActivity.getSystemService(Context.NOTIFICATION_SERVICE))
                 .thenReturn(mNotificationManager);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
 
         mMessages = new ZenModeMessagesSettings();
         mMessages.onAttach((Context)mActivity);

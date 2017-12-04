@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -61,8 +60,6 @@ import org.robolectric.util.ReflectionHelpers;
         shadows = ShadowEntityHeaderController.class)
 public class AppInfoWithHeaderTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 
     private FakeFeatureFactory mFactory;
@@ -71,9 +68,7 @@ public class AppInfoWithHeaderTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.metricsFeatureProvider.getMetricsCategory(any(Object.class)))
                 .thenReturn(MetricsProto.MetricsEvent.SETTINGS_APP_NOTIF_CATEGORY);
         mAppInfoWithHeader = new TestFragment();

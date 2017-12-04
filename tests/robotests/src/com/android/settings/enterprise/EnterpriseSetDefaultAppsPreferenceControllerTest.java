@@ -67,8 +67,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new EnterpriseSetDefaultAppsPreferenceController(mContext);
     }
 

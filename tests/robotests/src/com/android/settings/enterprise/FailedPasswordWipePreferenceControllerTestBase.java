@@ -51,8 +51,7 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     public abstract void setMaximumFailedPasswordsBeforeWipe(int maximum);

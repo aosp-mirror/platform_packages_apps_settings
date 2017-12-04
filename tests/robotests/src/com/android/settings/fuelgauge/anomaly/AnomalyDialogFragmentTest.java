@@ -99,7 +99,7 @@ public class AnomalyDialogFragmentTest {
                 .setPackageName(PACKAGE_NAME)
                 .setDisplayName(DISPLAY_NAME)
                 .build();
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         ShadowRuntimePermissionPresenter.setRuntimePermissionPresenter(mRuntimePermissionPresenter);
     }
 

@@ -87,7 +87,7 @@ public class BatteryInfoTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
 
