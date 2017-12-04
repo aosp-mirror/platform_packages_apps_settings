@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo.storage;
 import static com.google.common.truth.Truth.assertThat;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -53,7 +54,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class UserProfileControllerTest {
     private static final String TEST_NAME = "Fred";
 
@@ -82,7 +83,7 @@ public class UserProfileControllerTest {
     public void controllerAddsPrimaryProfilePreference() throws Exception {
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
-        Preference preference = argumentCaptor.getValue();
+        final Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getTitle()).isEqualTo(TEST_NAME);
         assertThat(preference.getKey()).isEqualTo("pref_profile_10");
@@ -93,12 +94,12 @@ public class UserProfileControllerTest {
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
-        Preference preference = argumentCaptor.getValue();
+        final Preference preference = argumentCaptor.getValue();
         assertThat(mController.handlePreferenceTreeClick(preference)).isTrue();
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         verify(mContext).startActivity(intentCaptor.capture());
 
-        Intent intent = intentCaptor.getValue();
+        final Intent intent = intentCaptor.getValue();
         assertThat(intent.getComponent().getClassName()).isEqualTo(SubSettings.class.getName());
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
                 StorageProfileFragment.class.getName());
@@ -106,8 +107,8 @@ public class UserProfileControllerTest {
 
     @Test
     public void acceptingResultUpdatesPreferenceSize() throws Exception {
-        SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
-        StorageAsyncLoader.AppsStorageResult userResult =
+        final SparseArray<StorageAsyncLoader.AppsStorageResult> result = new SparseArray<>();
+        final StorageAsyncLoader.AppsStorageResult userResult =
                 new StorageAsyncLoader.AppsStorageResult();
         userResult.externalStats =
                 new StorageStatsSource.ExternalStorageStats(
@@ -120,25 +121,23 @@ public class UserProfileControllerTest {
         mController.handleResult(result);
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
-        Preference preference = argumentCaptor.getValue();
+        final Preference preference = argumentCaptor.getValue();
 
         assertThat(preference.getSummary()).isEqualTo("0.10 GB");
     }
 
     @Test
     public void iconCallbackChangesPreferenceIcon() throws Exception {
-        SparseArray<Drawable> icons = new SparseArray<>();
-        Bitmap userBitmap =
-                BitmapFactory.decodeResource(
-                        RuntimeEnvironment.application.getResources(), R.drawable.home);
-        UserIconDrawable drawable = new UserIconDrawable(100 /* size */).setIcon(userBitmap).bake();
-        icons.put(10, drawable);
+        final SparseArray<Drawable> icons = new SparseArray<>();
+        final UserIconDrawable drawable = mock(UserIconDrawable.class);
+        when(drawable.mutate()).thenReturn(drawable);
+        icons.put(mPrimaryProfile.id, drawable);
 
         mController.handleUserIcons(icons);
 
         final ArgumentCaptor<Preference> argumentCaptor = ArgumentCaptor.forClass(Preference.class);
         verify(mScreen).addPreference(argumentCaptor.capture());
-        Preference preference = argumentCaptor.getValue();
+        final Preference preference = argumentCaptor.getValue();
         assertThat(preference.getIcon()).isEqualTo(drawable);
     }
 }
