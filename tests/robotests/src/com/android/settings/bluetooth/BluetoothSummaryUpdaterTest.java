@@ -29,7 +29,6 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
@@ -51,7 +50,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothSummaryUpdaterTest {
     private static final String DEVICE_NAME = "Nightshade";
     private static final String DEVICE_KEYBOARD_NAME = "Bluetooth Keyboard";

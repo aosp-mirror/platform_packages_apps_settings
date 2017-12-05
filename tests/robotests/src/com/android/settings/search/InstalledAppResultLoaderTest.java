@@ -63,7 +63,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InstalledAppResultLoaderTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

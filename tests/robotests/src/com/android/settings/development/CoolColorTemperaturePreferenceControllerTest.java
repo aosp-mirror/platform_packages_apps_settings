@@ -21,7 +21,6 @@ import static com.android.settings.development.CoolColorTemperaturePreferenceCon
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -45,7 +44,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {SettingsShadowSystemProperties.class})
 public class CoolColorTemperaturePreferenceControllerTest {
 

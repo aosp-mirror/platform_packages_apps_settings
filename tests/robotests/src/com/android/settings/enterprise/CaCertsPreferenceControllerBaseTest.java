@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link CaCertsPreferenceControllerBase}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CaCertsPreferenceControllerBaseTest extends CaCertsPreferenceControllerTestBase {
     private static final String PREF_KEY = "pref";
 

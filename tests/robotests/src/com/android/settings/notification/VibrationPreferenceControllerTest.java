@@ -35,7 +35,6 @@ import static org.mockito.Mockito.when;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.UserManager;
 import android.os.Vibrator;
 import android.support.v7.preference.Preference;
@@ -57,7 +56,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VibrationPreferenceControllerTest {
 
     private Context mContext;

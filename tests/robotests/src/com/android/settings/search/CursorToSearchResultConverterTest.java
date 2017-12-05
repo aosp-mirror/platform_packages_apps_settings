@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CursorToSearchResultConverterTest {
 
     private static final List<String> TITLES = Arrays.asList("title1", "title2", "title3");

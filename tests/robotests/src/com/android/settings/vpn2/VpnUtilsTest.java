@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
  * Tests for {@link VpnUtils}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class VpnUtilsTest {
     @Test
     public void testIsAlwaysOnVpnSet() {

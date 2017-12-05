@@ -52,7 +52,7 @@ import java.util.List;
  * Tests for {@link EnterpriseSetDefaultAppsPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";

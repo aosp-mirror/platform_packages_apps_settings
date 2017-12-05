@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link AlwaysOnVpnCurrentUserPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
 
     private static final String VPN_SET_DEVICE = "VPN set";

@@ -69,11 +69,9 @@ import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
-        shadows = {
-                ShadowRunnableAsyncTask.class,
-        }
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowRunnableAsyncTask.class,}
 )
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";

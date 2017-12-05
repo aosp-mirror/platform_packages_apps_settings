@@ -42,7 +42,7 @@ import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {ShadowImsManager.class})
 public class WifiCallingPreferenceControllerTest {
 

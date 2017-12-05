@@ -28,7 +28,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link AdminGrantedMicrophonePermissionPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AdminGrantedMicrophonePermissionPreferenceControllerTest extends
         AdminGrantedPermissionsPreferenceControllerTestBase {
 

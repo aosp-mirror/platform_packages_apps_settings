@@ -58,7 +58,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
     private static final int USER_ID = 0;
     private static final int APP_UID = 0;

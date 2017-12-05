@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsMacAddressControllerTest extends BluetoothDetailsControllerTestBase {
 

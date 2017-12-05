@@ -43,9 +43,9 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
-        shadows = ShadowSecureSettings.class
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowSecureSettings.class
 )
 public class AssistGestureSettingsPreferenceControllerTest {
 

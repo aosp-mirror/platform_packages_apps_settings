@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardDataTest {
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";
     private static final String TEST_CATEGORY_TILE_TITLE = "Display";
