@@ -59,7 +59,7 @@ public class StopAndBackgroundActionTest {
                 .setPackageName(PACKAGE_NAME)
                 .build();
 
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mStopAndBackgroundCheckAction = new StopAndBackgroundCheckAction(mContext, mForceStopAction,
                 mBackgroundCheckAction);
     }

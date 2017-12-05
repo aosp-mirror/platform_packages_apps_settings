@@ -41,17 +41,13 @@ import org.robolectric.shadows.ShadowApplication;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
 public class PremiumSmsAccessTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
     private FakeFeatureFactory mFeatureFactory;
     private PremiumSmsAccess mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = new PremiumSmsAccess();
         mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
     }

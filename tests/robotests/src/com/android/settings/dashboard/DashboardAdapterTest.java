@@ -92,8 +92,7 @@ public class DashboardAdapterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
         when(mFactory.suggestionsFeatureProvider
                 .getSuggestionIdentifier(any(Context.class), any(Tile.class)))

@@ -61,7 +61,7 @@ public class GesturesSettingsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
         mController = new GesturesSettingPreferenceController(mActivity);
     }
 

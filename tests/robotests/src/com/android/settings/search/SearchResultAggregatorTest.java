@@ -1,7 +1,6 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -63,8 +62,7 @@ public class SearchResultAggregatorTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mAggregator = spy(SearchResultAggregator.getInstance());
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         // Return mock loaders from feature provider
         when(mFeatureFactory.searchFeatureProvider.getStaticSearchResultTask(any(Context.class),

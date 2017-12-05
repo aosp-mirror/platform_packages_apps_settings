@@ -15,6 +15,13 @@
  */
 package com.android.settings.connecteddevice;
 
+import static android.content.Context.NFC_SERVICE;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.nfc.NfcAdapter;
@@ -22,12 +29,12 @@ import android.nfc.NfcManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -41,13 +48,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.List;
-
-import static android.content.Context.NFC_SERVICE;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
@@ -82,8 +82,7 @@ public class ConnectedDeviceDashboardFragment2Test {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
 
         mFragment = new ConnectedDeviceDashboardFragmentOld();

@@ -65,7 +65,7 @@ public class NewDeviceIntroSuggestionActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mMockContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = application;
         mShadowPackageManager = Shadows.shadowOf(application.getPackageManager());
 

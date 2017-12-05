@@ -66,11 +66,9 @@ public class FakeFeatureFactory extends FeatureFactory {
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
-     *
-     * @param context The context must be a deep mock.
      */
-    @Deprecated
-    public static FakeFeatureFactory setupForTest(Context context) {
+    public static FakeFeatureFactory setupForTest() {
+        final Context context = mock(Context.class, Answers.RETURNS_DEEP_STUBS);
         sFactory = null;
         when(context.getString(com.android.settings.R.string.config_featureFactory))
                 .thenReturn(FakeFeatureFactory.class.getName());
@@ -81,14 +79,6 @@ public class FakeFeatureFactory extends FeatureFactory {
             // Ignore.
         }
         return (FakeFeatureFactory) FakeFeatureFactory.getFactory(context);
-    }
-
-    /**
-     * Call this in {@code @Before} method of the test class to use fake factory.
-     */
-    public static FakeFeatureFactory setupForTest() {
-        final Context context = mock(Context.class, Answers.RETURNS_DEEP_STUBS);
-        return setupForTest(context);
     }
 
     /**

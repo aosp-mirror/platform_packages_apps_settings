@@ -18,9 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
@@ -50,7 +48,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -70,8 +67,6 @@ import java.util.ArrayList;
         })
 public class WifiTetherPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mFeatureFactoryContext;
     @Mock
     private Context mContext;
     @Mock
@@ -89,14 +84,14 @@ public class WifiTetherPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLifecycle = new Lifecycle(() -> mLifecycle);
-        FakeFeatureFactory.setupForTest(mFeatureFactoryContext);
+        FakeFeatureFactory.setupForTest();
         mPreference = new MasterSwitchPreference(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
                 .thenReturn(mConnectivityManager);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[] {"1", "2"});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle);
     }
 
@@ -107,7 +102,7 @@ public class WifiTetherPreferenceControllerTest {
 
     @Test
     public void isAvailable_noTetherRegex_shouldReturnFalse() {
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
+        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[] {});
         mController = new WifiTetherPreferenceController(mContext, mLifecycle);
 
         assertThat(mController.isAvailable()).isFalse();
@@ -272,6 +267,7 @@ public class WifiTetherPreferenceControllerTest {
     /**
      * Helper to cause the controller to receive a WIFI_AP_STATE_CHANGED_ACTION with a specific
      * state.
+     *
      * @param state - the state, as specified by one of the WifiManager.WIFI_AP_STATE_* values
      */
     private void receiveApStateChangedBroadcast(int state) {

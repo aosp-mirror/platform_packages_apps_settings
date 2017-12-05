@@ -175,8 +175,7 @@ public class PowerUsageSummaryTest {
         MockitoAnnotations.initMocks(this);
 
         mRealContext = RuntimeEnvironment.application;
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mContext.getSystemService(Context.POWER_SERVICE)).thenReturn(mPowerManager);
 
         mPreference = new PowerGaugePreference(mRealContext);

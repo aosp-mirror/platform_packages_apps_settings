@@ -21,7 +21,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.android.settings.TestConfig;
@@ -34,8 +33,6 @@ import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
@@ -47,8 +44,6 @@ public class SummaryLoaderTest {
     private static final String SUMMARY_1 = "summary1";
     private static final String SUMMARY_2 = "summary2";
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     private SummaryLoader mSummaryLoader;
     private boolean mCallbackInvoked;
     private Tile mTile;
@@ -57,7 +52,7 @@ public class SummaryLoaderTest {
     @Before
     public void SetUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mTile = new Tile();
         mTile.summary = SUMMARY_1;

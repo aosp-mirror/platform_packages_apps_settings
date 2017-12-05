@@ -50,7 +50,7 @@ public class UserDictionaryPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mController = new TestController(mContext);
         mPreference = new Preference(ShadowApplication.getInstance().getApplicationContext());
     }

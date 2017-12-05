@@ -52,8 +52,7 @@ public final class AlwaysOnVpnManagedProfilePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new AlwaysOnVpnManagedProfilePreferenceController(mContext);
     }
 

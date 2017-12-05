@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly.action;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -25,11 +24,11 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Build;
 
-import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +58,7 @@ public class BackgroundCheckActionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
 
         mAnomaly = new Anomaly.Builder()

@@ -51,7 +51,7 @@ public class LocationCheckActionTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mLocationCheckAction = new LocationCheckAction(mContext, null);
         mAnomaly = new Anomaly.Builder()
                 .setType(Anomaly.AnomalyType.BLUETOOTH_SCAN)

@@ -55,8 +55,7 @@ public final class ImePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new ImePreferenceController(mContext);
         when(mContext.getResources().getString(R.string.enterprise_privacy_input_method_name,
                 DEFAULT_IME_LABEL)).thenReturn(DEFAULT_IME_TEXT);

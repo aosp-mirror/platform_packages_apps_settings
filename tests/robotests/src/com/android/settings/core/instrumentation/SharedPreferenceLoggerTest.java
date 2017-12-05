@@ -63,8 +63,7 @@ public class SharedPreferenceLoggerTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeature = mFactory.metricsFeatureProvider;
 
         mSharedPrefLogger = new SharedPreferencesLogger(mContext, TEST_TAG);

@@ -98,8 +98,7 @@ public class DashboardFeatureProviderImplTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
                 new ResolveInfo());
-        FakeFeatureFactory.setupForTest(mActivity);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
     }
 

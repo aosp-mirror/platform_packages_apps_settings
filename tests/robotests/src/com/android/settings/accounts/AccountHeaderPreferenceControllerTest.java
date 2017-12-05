@@ -80,7 +80,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
         doReturn(mContext).when(mActivity).getApplicationContext();

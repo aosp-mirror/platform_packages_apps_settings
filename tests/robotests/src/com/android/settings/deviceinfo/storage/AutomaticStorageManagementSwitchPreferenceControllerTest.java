@@ -131,9 +131,7 @@ public class AutomaticStorageManagementSwitchPreferenceControllerTest {
     public void togglingShouldCauseMetricsEvent() {
         // FakeFeatureFactory uses mock contexts, so this test scaffolds itself rather than using
         // the instance variables.
-        FakeFeatureFactory.setupForTest(mMockContext);
-        final FakeFeatureFactory factory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
+        final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();
         final AutomaticStorageManagementSwitchPreferenceController controller =
                 new AutomaticStorageManagementSwitchPreferenceController(
                         mMockContext, factory.metricsFeatureProvider, mFragmentManager);
