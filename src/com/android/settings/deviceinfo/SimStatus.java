@@ -406,6 +406,12 @@ public class SimStatus extends SettingsPreferenceFragment {
         if (!mShowLatestAreaInfo) {
             removePreferenceFromScreen(KEY_LATEST_AREA_INFO);
         }
+
+        boolean hideSignalStrength = carrierConfig.getBoolean(
+                CarrierConfigManager.KEY_HIDE_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
+        if (hideSignalStrength) {
+            removePreferenceFromScreen(KEY_SIGNAL_STRENGTH);
+        }
     }
 
     private void updatePhoneInfos() {
