@@ -2213,16 +2213,13 @@
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
                 android:icon="@drawable/ic_settings_battery"
-                android:taskAffinity="">
-            <intent-filter android:priority="1">
+                android:enabled="false">
+            <!-- TODO(b/69867246): add priority for this intent-filter -->
+            <intent-filter>
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
+            <!-- TODO(b/69867246): add shortcut intent-filter  -->
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2240,6 +2237,27 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.fuelgauge.PowerUsageSummary" />
         </activity-alias>
+
+        <activity android:name=".Settings$PowerUsageSummaryLegacyActivity"
+                  android:label="@string/power_usage_summary_title"
+                  android:icon="@drawable/ic_settings_battery">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="8">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.fuelgauge.PowerUsageSummaryLegacy" />
+        </activity>
 
         <activity android:name="Settings$BatterySaverSettingsActivity"
                 android:label="@string/battery_saver"

@@ -16,12 +16,15 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.core.FeatureFlags.BATTERY_SETTINGS_V2;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Process;
+import android.util.FeatureFlagUtils;
 import android.util.SparseIntArray;
 
 import com.android.internal.os.BatterySipper;
@@ -36,9 +39,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
             PACKAGE_CALENDAR_PROVIDER, PACKAGE_SYSTEMUI};
 
     protected PackageManager mPackageManager;
+    protected Context mContext;
 
     public PowerUsageFeatureProviderImpl(Context context) {
         mPackageManager = context.getPackageManager();
+        mContext = context.getApplicationContext();
     }
 
     @Override
@@ -132,5 +137,10 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     @Override
     public String getAdvancedUsageScreenInfoString() {
         return null;
+    }
+
+    @Override
+    public boolean isBatteryV2Enabled() {
+        return FeatureFlagUtils.isEnabled(mContext, BATTERY_SETTINGS_V2);
     }
 }

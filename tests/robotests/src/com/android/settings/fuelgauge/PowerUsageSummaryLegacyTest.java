@@ -91,7 +91,7 @@ import java.util.List;
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
         })
-public class PowerUsageSummaryTest {
+public class PowerUsageSummaryLegacyTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String STUB_STRING = "stub_string";
     private static final int UID = 123;
@@ -542,7 +542,7 @@ public class PowerUsageSummaryTest {
         verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
     }
 
-    public static class TestFragment extends PowerUsageSummary {
+    public static class TestFragment extends PowerUsageSummaryLegacy {
 
         private Context mContext;
         private boolean mStartActivityCalled;

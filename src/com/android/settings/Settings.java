@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import static com.android.settings.core.FeatureFlags.BATTERY_SETTINGS_V2;
 import static com.android.settings.core.FeatureFlags.CONNECTED_DEVICE_V2;
 
 import android.os.Bundle;
@@ -72,7 +73,6 @@ public class Settings extends SettingsActivity {
     public static class PrivacySettingsActivity extends SettingsActivity { /* empty */ }
     public static class FactoryResetActivity extends SettingsActivity { /* empty */ }
     public static class RunningServicesActivity extends SettingsActivity { /* empty */ }
-    public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class BatterySaverSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
@@ -174,6 +174,8 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class ConnectedDeviceDashboardActivityOld extends SettingsActivity {}
+    public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
+    public static class PowerUsageSummaryLegacyActivity extends SettingsActivity { /* empty */ }
     public static class AppAndNotificationDashboardActivity extends SettingsActivity {}
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class UserAndAccountDashboardActivity extends SettingsActivity {}
