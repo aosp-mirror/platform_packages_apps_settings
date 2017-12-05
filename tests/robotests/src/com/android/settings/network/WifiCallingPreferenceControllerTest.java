@@ -16,56 +16,59 @@
 
 package com.android.settings.network;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.telephony.CarrierConfigManager;
-import android.telephony.TelephonyManager;
 
 import com.android.ims.ImsManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.network.WifiCallingPreferenceControllerTest.ShadowImsManager;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION_O,
+        shadows = {ShadowImsManager.class})
 public class WifiCallingPreferenceControllerTest {
 
     @Mock
-    private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private CarrierConfigManager mCarrierConfigManager;
-    @Mock
-    private TelephonyManager mTelephonyManager;
-    @Mock
     private Preference mPreference;
+
+    private Context mContext;
     private WifiCallingPreferenceController mController;
 
     @Before
     public void setUp() {
+        mContext = RuntimeEnvironment.application;
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.CARRIER_CONFIG_SERVICE))
-                .thenReturn(mCarrierConfigManager);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
-                .thenReturn(mTelephonyManager);
+
         mController = new WifiCallingPreferenceController(mContext);
+    }
+
+    @After
+    public void teardown() {
+        ShadowImsManager.reset();
     }
 
     @Test
     public void isAvailable_platformEnabledAndProvisioned_shouldReturnTrue() {
-        ImsManager.wfcEnabledByPlatform = true;
-        ImsManager.wfcProvisioned = true;
+        ShadowImsManager.wfcProvisioned = true;
+        ShadowImsManager.wfcEnabledByPlatform = true;
 
         assertThat(mController.isAvailable()).isTrue();
     }
@@ -76,4 +79,27 @@ public class WifiCallingPreferenceControllerTest {
 
         verify(mPreference).setSummary(anyInt());
     }
+
+    @Implements(ImsManager.class)
+    public static class ShadowImsManager {
+
+        public static boolean wfcEnabledByPlatform;
+        public static boolean wfcProvisioned;
+
+        public static void reset() {
+            wfcEnabledByPlatform = false;
+            wfcProvisioned = false;
+        }
+
+        @Implementation
+        public static boolean isWfcEnabledByPlatform(Context context) {
+            return wfcEnabledByPlatform;
+        }
+
+        @Implementation
+        public static boolean isWfcProvisionedOnDevice(Context context) {
+            return wfcProvisioned;
+        }
+    }
+
 }
