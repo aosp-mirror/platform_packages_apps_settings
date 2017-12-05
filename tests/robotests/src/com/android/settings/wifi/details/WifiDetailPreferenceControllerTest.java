@@ -66,6 +66,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowBidiFormatter;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.testutils.shadow.ShadowPackageManagerWrapper;
@@ -97,11 +98,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = {
                 ShadowDevicePolicyManagerWrapper.class,
                 ShadowEntityHeaderController.class,
                 ShadowPackageManagerWrapper.class,
+                ShadowBidiFormatter.class
         })
 public class WifiDetailPreferenceControllerTest {
 
