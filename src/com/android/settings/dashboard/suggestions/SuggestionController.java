@@ -104,6 +104,9 @@ public class SuggestionController {
         }
         try {
             return mRemoteService.getSuggestions();
+        } catch (NullPointerException e) {
+            Log.w(TAG, "mRemote service detached before able to query", e);
+            return null;
         } catch (RemoteException e) {
             Log.w(TAG, "Error when calling getSuggestion()", e);
             return null;
