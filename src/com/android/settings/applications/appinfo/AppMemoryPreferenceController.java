@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.Activity;
-import android.app.slice.Slice;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.AsyncTask;
@@ -108,11 +107,6 @@ public class AppMemoryPreferenceController extends BasePreferenceController
     public int getAvailabilityStatus() {
         return DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)
                 ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
-    }
-
-    @Override
-    public Slice getSettingSlice() {
-        return null;
     }
 
     @Override

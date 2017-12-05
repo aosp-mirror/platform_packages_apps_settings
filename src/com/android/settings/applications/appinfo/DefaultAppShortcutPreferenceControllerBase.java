@@ -51,11 +51,6 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
     }
 
     @Override
-    public Slice getSettingSlice() {
-        return null;
-    }
-
-    @Override
     public void updateState(Preference preference) {
         preference.setSummary(isDefaultApp() ? R.string.yes : R.string.no);
     }
