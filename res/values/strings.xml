@@ -6775,19 +6775,16 @@
     <string name="zen_mode_button_turn_off">TURN OFF NOW</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing end time of DND -->
-    <string name="zen_mode_settings_dnd_manual_end_time_next_day">Do Not Disturb is on until <xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g></string>
+    <string name="zen_mode_settings_dnd_manual_end_time">Do Not Disturb is on until <xliff:g id="formatted_time" example="7:00 AM">%s</xliff:g></string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing length of DND -->
-    <string name="zen_mode_settings_dnd_manual_indefinite">Do Not Disturb will stay on until you turn it off.</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite">Do Not Disturb will stay on until you turn it off</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer showing how DND was triggered by an automatic DND rule -->
-    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a rule <xliff:g id="rule_name" example="Weeknights">%s</xliff:g></string>
+    <string name="zen_mode_settings_dnd_automatic_rule">Do Not Disturb was automatically turned on by a rule (<xliff:g id="rule_name" example="Weeknights">%s</xliff:g>)</string>
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
-    <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app <xliff:g id="app_name" example="Pixel Services">%s</xliff:g></string>
-
-    <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by multiple rules and/or apps -->
-    <string name="zen_mode_settings_dnd_automatic_rule_multiple">Do Not Disturb was automatically turned on by a rule or app</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -7204,6 +7201,15 @@
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Configure external rule -->
     <string name="zen_mode_configure_rule">Configure rule</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode behavior settings footer: footer describing why the user cannot change the current do not disturb behavior settings -->
+    <string name="zen_mode_app_set_behavior">These settings can\'t be changed right now. An app (<xliff:g id="app_name" example="Android Services">%1$s</xliff:g>) has automatically turned on Do Not Disturb with custom behavior."</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode behavior settings footer: footer describing why the user cannot change the current do not disturb behavior settings -->
+    <string name="zen_mode_unknown_app_set_behavior">These settings can\'t be changed right now. An app has automatically turned on Do Not Disturb with custom behavior."</string>
+
+    <!-- [CHAR LIMIT=NONE] Zen mode behavior settings footer: footer describing why the user cannot change the current do not disturb behavior settings -->
+    <string name="zen_mode_qs_set_behavior">These settings can\'t be changed right now. Do Not Disturb was manually turned on with custom behavior."</string>
 
     <!-- [CHAR LIMIT=40] Zen mode settings: Schedule rule type name -->
     <string name="zen_schedule_rule_type_name">Time</string>

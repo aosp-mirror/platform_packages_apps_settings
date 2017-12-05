@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.AlarmManager.AlarmClockInfo;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,8 +27,11 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.notification.ScheduleCalendar;
+import android.service.notification.ZenModeConfig;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Slog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -41,12 +47,15 @@ abstract public class AbstractZenModePreferenceController extends
 
     @VisibleForTesting
     protected SettingObserver mSettingObserver;
+
     private final String KEY;
     final private NotificationManager mNotificationManager;
+    protected static ZenModeConfigWrapper mZenModeConfigWrapper;
 
     public AbstractZenModePreferenceController(Context context, String key,
             Lifecycle lifecycle) {
         super(context);
+        mZenModeConfigWrapper = new ZenModeConfigWrapper(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -77,6 +86,10 @@ abstract public class AbstractZenModePreferenceController extends
 
     protected NotificationManager.Policy getPolicy() {
         return mNotificationManager.getNotificationPolicy();
+    }
+
+    protected ZenModeConfig getZenModeConfig() {
+        return mNotificationManager.getZenModeConfig();
     }
 
     protected int getZenMode() {
@@ -116,5 +129,70 @@ abstract public class AbstractZenModePreferenceController extends
                 updateState(mPreference);
             }
         }
+    }
+
+    /**
+     * Wrapper for testing compatibility
+     */
+    @VisibleForTesting
+    static class ZenModeConfigWrapper {
+        private final Context mContext;
+
+        public ZenModeConfigWrapper(Context context) {
+            mContext = context;
+        }
+
+        protected String getOwnerCaption(String owner) {
+            return ZenModeConfig.getOwnerCaption(mContext, owner);
+        }
+
+        protected boolean isTimeRule(Uri id) {
+            return ZenModeConfig.isValidEventConditionId(id) ||
+                    ZenModeConfig.isValidScheduleConditionId(id);
+        }
+
+        protected CharSequence getFormattedTime(long time, int userHandle) {
+            return ZenModeConfig.getFormattedTime(mContext, time, isToday(time), userHandle);
+        }
+
+        private boolean isToday(long time) {
+            return ZenModeConfig.isToday(time);
+        }
+
+        protected long parseManualRuleTime(Uri id) {
+            return ZenModeConfig.tryParseCountdownConditionId(id);
+        }
+
+        protected long parseAutomaticRuleEndTime(Uri id) {
+            if (ZenModeConfig.isValidEventConditionId(id)) {
+                // cannot look up end times for events
+                return Long.MAX_VALUE;
+            }
+
+            if (ZenModeConfig.isValidScheduleConditionId(id)) {
+                ScheduleCalendar schedule = ZenModeConfig.toScheduleCalendar(id);
+                long endTimeMs = schedule.getNextChangeTime(System.currentTimeMillis());
+
+                // check if automatic rule will end on next alarm
+                if (schedule.exitAtAlarm()) {
+                    long nextAlarm = getNextAlarm(mContext);
+                    schedule.maybeSetNextAlarm(System.currentTimeMillis(), nextAlarm);
+                    if (schedule.shouldExitForAlarm(endTimeMs)) {
+                        return nextAlarm;
+                    }
+                }
+
+
+                return endTimeMs;
+            }
+
+            return -1;
+        }
+    }
+
+    private static long getNextAlarm(Context context) {
+        final AlarmManager alarms = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        final AlarmClockInfo info = alarms.getNextAlarmClock(ActivityManager.getCurrentUser());
+        return info != null ? info.getTriggerTime() : 0;
     }
 }
