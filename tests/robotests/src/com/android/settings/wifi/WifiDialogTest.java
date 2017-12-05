@@ -21,7 +21,7 @@ import org.robolectric.annotation.Config;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
         shadows = ShadowEntityHeaderController.class)
 public class WifiDialogTest {
     @Mock private AccessPoint mockAccessPoint;
