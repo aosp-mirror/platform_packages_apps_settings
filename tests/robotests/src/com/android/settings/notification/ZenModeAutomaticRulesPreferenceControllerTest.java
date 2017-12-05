@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.app.AutomaticZenRule;
 import android.app.Fragment;
 import android.app.NotificationManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceCategory;
@@ -45,7 +43,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -53,6 +53,9 @@ import java.util.Map;
 public class ZenModeAutomaticRulesPreferenceControllerTest {
     private ZenModeAutomaticRulesPreferenceController mController;
     private final String GENERIC_RULE_NAME = "test";
+    final String DEFAULT_ID_1 = "DEFAULT_1";
+    final String DEFAULT_ID_2 = "DEFAULT_2";
+    private final List<String> mDefaultIds = Arrays.asList(DEFAULT_ID_1, DEFAULT_ID_2);
 
     @Mock
     private ZenModeBackend mBackend;
@@ -66,7 +69,6 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
-    private ContentResolver mContentResolver;
 
     @Before
     public void setup() {
@@ -75,11 +77,12 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
         mContext = shadowApplication.getApplicationContext();
-        mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mController = new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
                 mock(Lifecycle.class));
+
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
+        ReflectionHelpers.setField(mController, "DEFAULT_RULE_IDS", mDefaultIds);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mockPref);
@@ -97,7 +100,7 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
 
         // check ordering, most recent should be at the bottom/end (ie higher creation time)
         for (int i = 0; i < NUM_RULES; i++) {
-            assertEquals(rules[i].getKey(), GENERIC_RULE_NAME + (NUM_RULES - 1 - i));
+            assertEquals(GENERIC_RULE_NAME + (NUM_RULES - 1 - i), rules[i].getKey());
         }
     }
 
@@ -112,7 +115,29 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
 
         // check ordering, most recent should be at the bottom/end (ie higher creation time)
         for (int i = 0; i < NUM_RULES; i++) {
-            assertEquals(rules[i].getKey(), GENERIC_RULE_NAME + i);
+            assertEquals(GENERIC_RULE_NAME + i, rules[i].getKey());
+        }
+    }
+
+    @Test
+    public void updateState_checkRuleOrderingDescending_withDefaultRules() {
+        final int NUM_RULES = 4;
+
+        Map<String, AutomaticZenRule> ruleMap = mockAutoZenRulesDecreasingCreationTime(NUM_RULES);
+        ruleMap.put(DEFAULT_ID_2, new AutomaticZenRule("DEFAULT_1_NAME", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 20));
+        ruleMap.put(DEFAULT_ID_1, new AutomaticZenRule("DEFAULT_1_NAME", null,
+                null, Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, true, 10));
+        when(mNotificationManager.getAutomaticZenRules()).thenReturn(ruleMap);
+
+        Map.Entry<String, AutomaticZenRule>[] rules = mController.sortedRules();
+        assertEquals(NUM_RULES + 2, rules.length);
+
+        assertEquals(rules[0].getKey(), DEFAULT_ID_1);
+        assertEquals(rules[1].getKey(), DEFAULT_ID_2);
+        // NON-DEFAULT RULES check ordering, most recent at the bottom/end
+        for (int i = 0; i < NUM_RULES; i++) {
+            assertEquals(GENERIC_RULE_NAME + (NUM_RULES - 1 - i), rules[i + 2].getKey());
         }
     }
 
@@ -138,8 +163,8 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         assertEquals(NUM_RULES + 2, rules.length); // inserted 2 rules
 
         // check ordering of inserted rules
-        assertEquals(rules[4].getKey(), insertedRule1);
-        assertEquals(rules[2].getKey(), insertedRule2);
+        assertEquals(insertedRule1, rules[4].getKey());
+        assertEquals(insertedRule2, rules[2].getKey());
     }
 
     private Map<String, AutomaticZenRule> mockAutoZenRulesAscendingCreationTime(int numRules) {

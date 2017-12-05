@@ -73,6 +73,10 @@ public class ZenRulePreference extends TwoTargetPreference {
 
     @Override
     protected int getSecondTargetResId() {
+        if (mId != null && ZenModeConfig.DEFAULT_RULE_IDS.contains(mId)) {
+            return 0;
+        }
+
         return R.layout.zen_rule_widget;
     }
 
