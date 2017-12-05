@@ -80,9 +80,6 @@ public class ImeiInfoDialogController {
      * Sets IMEI/MEID information based on whether the device is CDMA or GSM.
      */
     public void populateImeiInfo() {
-        if (mSubscriptionInfo == null) {
-            return;
-        }
         if (mTelephonyManager.getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
             updateDialogForCdmaPhone();
         } else {
@@ -94,7 +91,8 @@ public class ImeiInfoDialogController {
         final Resources res = mDialog.getContext().getResources();
         mDialog.setText(ID_MEID_NUMBER_VALUE, getMeid());
         mDialog.setText(ID_MIN_NUMBER_VALUE,
-                mTelephonyManager.getCdmaMin(mSubscriptionInfo.getSubscriptionId()));
+                mSubscriptionInfo != null ? mTelephonyManager.getCdmaMin(
+                        mSubscriptionInfo.getSubscriptionId()) : "");
 
         if (res.getBoolean(R.bool.config_msid_enable)) {
             mDialog.setText(ID_MIN_NUMBER_LABEL,
@@ -103,7 +101,7 @@ public class ImeiInfoDialogController {
 
         mDialog.setText(ID_PRL_VERSION_VALUE, getCdmaPrlVersion());
 
-        if (isCdmaLteEnabled()) {
+        if (mSubscriptionInfo != null && isCdmaLteEnabled()) {
             // Show IMEI for LTE device
             mDialog.setText(ID_IMEI_VALUE,
                     getTextAsDigits(mTelephonyManager.getImei(mSlotId)));
