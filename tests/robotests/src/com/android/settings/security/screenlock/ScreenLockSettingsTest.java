@@ -48,7 +48,8 @@ public class ScreenLockSettingsTest {
 
     @Test
     public void verifyConstants() {
-        assertThat(mSettings.getMetricsCategory()).isEqualTo(MetricsProto.MetricsEvent.SECURITY);
+        assertThat(mSettings.getMetricsCategory())
+                .isEqualTo(MetricsProto.MetricsEvent.SCREEN_LOCK_SETTINGS);
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.screen_lock_settings);
     }
 
