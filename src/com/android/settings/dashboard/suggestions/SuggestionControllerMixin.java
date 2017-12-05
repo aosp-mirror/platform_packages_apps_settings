@@ -59,6 +59,8 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
     private final SuggestionController mSuggestionController;
     private final SuggestionControllerHost mHost;
 
+    private boolean mSuggestionLoaded;
+
     public SuggestionControllerMixin(Context context, SuggestionControllerHost host,
             Lifecycle lifecycle) {
         mContext = context.getApplicationContext();
@@ -106,6 +108,7 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
     @Override
     public Loader<List<Suggestion>> onCreateLoader(int id, Bundle args) {
         if (id == SuggestionLoader.LOADER_ID_SUGGESTIONS) {
+            mSuggestionLoaded = false;
             return new SuggestionLoader(mContext, mSuggestionController);
         }
         throw new IllegalArgumentException("This loader id is not supported " + id);
@@ -113,12 +116,17 @@ public class SuggestionControllerMixin implements SuggestionController.ServiceCo
 
     @Override
     public void onLoadFinished(Loader<List<Suggestion>> loader, List<Suggestion> data) {
+        mSuggestionLoaded = true;
         mHost.onSuggestionReady(data);
     }
 
     @Override
     public void onLoaderReset(Loader<List<Suggestion>> loader) {
+        mSuggestionLoaded = false;
+    }
 
+    public boolean isSuggestionLoaded() {
+        return mSuggestionLoaded;
     }
 
     public void dismissSuggestion(Suggestion suggestion) {
