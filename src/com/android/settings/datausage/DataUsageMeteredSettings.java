@@ -14,20 +14,19 @@
 
 package com.android.settings.datausage;
 
+import static android.net.wifi.WifiInfo.removeDoubleQuotes;
+
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.NetworkPolicy;
 import android.net.NetworkPolicyManager;
-import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
-import android.telephony.TelephonyManager;
-
+import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
@@ -35,21 +34,13 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.NetworkPolicyEditor;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.wifi.WifiInfo.removeDoubleQuotes;
-import static com.android.settings.datausage.DataUsageList.hasReadyMobileRadio;
-import static com.android.settings.datausage.DataUsageSummary.hasWifiRadio;
-
 /**
- * Panel to configure {@link NetworkPolicy#metered} for networks.
+ * Panel to configure {@link WifiConfiguration#meteredOverride}.
  */
 public class DataUsageMeteredSettings extends SettingsPreferenceFragment implements Indexable {
-
-    private static final boolean SHOW_MOBILE_CATEGORY = false;
 
     private NetworkPolicyManager mPolicyManager;
     private WifiManager mWifiManager;
@@ -85,18 +76,14 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
     }
 
     private void updateNetworks(Context context) {
-        if (SHOW_MOBILE_CATEGORY && hasReadyMobileRadio(context)) {
-            mMobileCategory.removeAll();
-            mMobileCategory.addPreference(buildMobilePref(context));
-        } else {
-            getPreferenceScreen().removePreference(mMobileCategory);
-        }
+        getPreferenceScreen().removePreference(mMobileCategory);
 
         mWifiCategory.removeAll();
-        if (hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
+        if (DataUsageUtils.hasWifiRadio(context) && mWifiManager.isWifiEnabled()) {
             for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
-                if (config.SSID != null) {
-                    mWifiCategory.addPreference(buildWifiPref(config));
+                final Preference pref = new MeteredPreference(getPrefContext(), config);
+                if (!TextUtils.isEmpty(pref.getTitle())) {
+                    mWifiCategory.addPreference(pref);
                 }
             }
         } else {
@@ -104,57 +91,40 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
         }
     }
 
-    private Preference buildMobilePref(Context context) {
-        final TelephonyManager tele = TelephonyManager.from(context);
-        final NetworkTemplate template = NetworkTemplate.buildTemplateMobileAll(
-                tele.getSubscriberId());
-        final MeteredPreference pref = new MeteredPreference(getPrefContext(), template);
-        pref.setTitle(tele.getNetworkOperatorName());
-        return pref;
-    }
+    private class MeteredPreference extends DropDownPreference {
+        private final WifiConfiguration mConfig;
 
-    private Preference buildWifiPref(WifiConfiguration config) {
-        final String networkId = config.isPasspoint() ?
-                config.providerFriendlyName : config.SSID;
-        final NetworkTemplate template = NetworkTemplate.buildTemplateWifi(networkId);
-        final MeteredPreference pref = new MeteredPreference(getPrefContext(), template);
-        pref.setTitle(removeDoubleQuotes(networkId));
-        return pref;
-    }
-
-    private class MeteredPreference extends SwitchPreference {
-        private final NetworkTemplate mTemplate;
-        private boolean mBinding;
-
-        public MeteredPreference(Context context, NetworkTemplate template) {
+        public MeteredPreference(Context context, WifiConfiguration config) {
             super(context);
-            mTemplate = template;
+            mConfig = config;
 
             setPersistent(false);
+            setEntries(new CharSequence[] {
+                    getString(R.string.data_usage_metered_auto),
+                    getString(R.string.data_usage_metered_yes),
+                    getString(R.string.data_usage_metered_no),
+            });
+            setEntryValues(new CharSequence[] {
+                    Integer.toString(WifiConfiguration.METERED_OVERRIDE_NONE),
+                    Integer.toString(WifiConfiguration.METERED_OVERRIDE_METERED),
+                    Integer.toString(WifiConfiguration.METERED_OVERRIDE_NOT_METERED),
+            });
+            setValue(Integer.toString(mConfig.meteredOverride));
+            setTitle(NetworkPolicyManager.resolveNetworkId(mConfig));
+            setSummary(getEntries()[mConfig.meteredOverride]);
 
-            mBinding = true;
-            final NetworkPolicy policy = mPolicyEditor.getPolicyMaybeUnquoted(template);
-            if (policy != null) {
-                if (policy.limitBytes != LIMIT_DISABLED) {
-                    setChecked(true);
-                    setEnabled(false);
-                } else {
-                    setChecked(policy.metered);
+            setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    mConfig.meteredOverride = Integer.parseInt((String) newValue);
+                    setSummary(getEntries()[mConfig.meteredOverride]);
+
+                    mWifiManager.updateNetwork(mConfig);
+                    // Stage the backup of the SettingsProvider package which backs this up
+                    BackupManager.dataChanged("com.android.providers.settings");
+                    return true;
                 }
-            } else {
-                setChecked(false);
-            }
-            mBinding = false;
-        }
-
-        @Override
-        protected void notifyChanged() {
-            super.notifyChanged();
-            if (!mBinding) {
-                mPolicyEditor.setPolicyMetered(mTemplate, isChecked());
-                // Stage the backup of the SettingsProvider package which backs this up
-                BackupManager.dataChanged("com.android.providers.settings");
-            }
+            });
         }
     }
 
@@ -180,21 +150,6 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
                 data.screenTitle = res.getString(R.string.data_usage_menu_metered);
                 result.add(data);
 
-                if (SHOW_MOBILE_CATEGORY && hasReadyMobileRadio(context)) {
-                    // Mobile networks category
-                    data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.data_usage_metered_mobile);
-                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                    result.add(data);
-
-                    final TelephonyManager tele = TelephonyManager.from(context);
-
-                    data = new SearchIndexableRaw(context);
-                    data.title = tele.getNetworkOperatorName();
-                    data.screenTitle = res.getString(R.string.data_usage_menu_metered);
-                    result.add(data);
-                }
-
                 // Wi-Fi networks category
                 data = new SearchIndexableRaw(context);
                 data.title = res.getString(R.string.data_usage_metered_wifi);
@@ -203,7 +158,7 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
 
                 final WifiManager wifiManager =
                         (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                if (hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
+                if (DataUsageUtils.hasWifiRadio(context) && wifiManager.isWifiEnabled()) {
                     for (WifiConfiguration config : wifiManager.getConfiguredNetworks()) {
                         if (config.SSID != null) {
                             final String networkId = config.SSID;
@@ -227,12 +182,8 @@ public class DataUsageMeteredSettings extends SettingsPreferenceFragment impleme
             @Override
             public List<String> getNonIndexableKeys(Context context) {
                 final List<String> result = super.getNonIndexableKeys(context);
-                if (!SHOW_MOBILE_CATEGORY || !hasReadyMobileRadio(context)) {
-                    result.add("mobile");
-                }
-
+                result.add("mobile");
                 return result;
             }
         };
-
 }

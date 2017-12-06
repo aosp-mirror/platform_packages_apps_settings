@@ -18,88 +18,115 @@ package com.android.settings.testutils.shadow;
 
 import android.content.ContentResolver;
 import android.provider.Settings;
-
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import java.util.Map;
+import java.util.WeakHashMap;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Implements(Settings.Secure.class)
 public class ShadowSecureSettings {
 
-    private static final Map<String, Object> mValueMap = new HashMap<>();
-
-    @Implementation
-    public static boolean putInt(ContentResolver resolver, String name, int value) {
-        mValueMap.put(name, value);
-        return true;
-    }
-
-    @Implementation
-    public static boolean putString(ContentResolver resolver, String name, String value) {
-        mValueMap.put(name, value);
-        return true;
-    }
+    private static final Map<ContentResolver, Table<Integer, String, Object>> sUserDataMap =
+        new WeakHashMap<>();
 
     @Implementation
     public static boolean putStringForUser(ContentResolver resolver, String name, String value,
-            int userHandle) {
-        mValueMap.put(name, value);
-        return true;
-    }
-
-    @Implementation
-    public static String getString(ContentResolver resolver, String name) {
-        return (String) mValueMap.get(name);
+        int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            if (value != null) {
+                userTable.put(userHandle, name, value);
+            } else {
+                userTable.remove(userHandle, name);
+            }
+            return true;
+        }
     }
 
     @Implementation
     public static String getStringForUser(ContentResolver resolver, String name, int userHandle) {
-        return getString(resolver, name);
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            return (String) userTable.get(userHandle, name);
+        }
     }
 
     @Implementation
-    public static boolean putIntForUser(ContentResolver cr, String name, int value,
-            int userHandle) {
-        return putInt(cr, name, value);
+    public static boolean putIntForUser(ContentResolver resolver, String name, int value,
+        int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            userTable.put(userHandle, name, value);
+            return true;
+        }
     }
 
     @Implementation
-    public static int getIntForUser(ContentResolver cr, String name, int def, int userHandle) {
-        return getInt(cr, name, def);
+    public static int getIntForUser(ContentResolver resolver, String name, int def,
+        int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            final Object object = userTable.get(userHandle, name);
+            return object instanceof Integer ? (Integer) object : def;
+        }
     }
 
     @Implementation
-    public static int getInt(ContentResolver resolver, String name, int defaultValue) {
-        Integer value = (Integer) mValueMap.get(name);
-        return value == null ? defaultValue : value;
+    public static boolean putLongForUser(ContentResolver resolver, String name, long value,
+        int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            userTable.put(userHandle, name, value);
+            return true;
+        }
     }
 
     @Implementation
-    public static boolean putFloat(ContentResolver resolver, String name, float value) {
-        mValueMap.put(name, value);
-        return true;
+    public static long getLongForUser(ContentResolver resolver, String name, long def,
+        int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            final Object object = userTable.get(userHandle, name);
+            return object instanceof Long ? (Long) object : def;
+        }
     }
 
     @Implementation
-    public static boolean putFloatForUser(ContentResolver cr, String name, float value,
-            float userHandle) {
-        return putFloat(cr, name, value);
+    public static boolean putFloatForUser(
+            ContentResolver resolver, String name, float value, int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            userTable.put(userHandle, name, value);
+            return true;
+        }
     }
 
     @Implementation
-    public static float getFloatForUser(ContentResolver cr, String name, float def, int userHandle) {
-        return getFloat(cr, name, def);
-    }
-
-    @Implementation
-    public static float getFloat(ContentResolver resolver, String name, float defaultValue) {
-        Float value = (Float) mValueMap.get(name);
-        return value == null ? defaultValue : value;
+    public static float getFloatForUser(
+            ContentResolver resolver, String name, float def, int userHandle) {
+        final Table<Integer, String, Object> userTable = getUserTable(resolver);
+        synchronized (userTable) {
+            final Object object = userTable.get(userHandle, name);
+            return object instanceof Float ? (Float) object : def;
+        }
     }
 
     public static void clear() {
-        mValueMap.clear();
+        synchronized (sUserDataMap) {
+            sUserDataMap.clear();
+        }
+    }
+
+    private static Table<Integer, String, Object> getUserTable(ContentResolver contentResolver) {
+        synchronized (sUserDataMap) {
+            Table<Integer, String, Object> table = sUserDataMap.get(contentResolver);
+            if (table == null) {
+                table = HashBasedTable.create();
+                sUserDataMap.put(contentResolver, table);
+            }
+            return table;
+        }
     }
 }

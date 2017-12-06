@@ -17,11 +17,11 @@
 
 package com.android.settings.search;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-
 import com.android.settings.R;
 
 /**
@@ -87,17 +87,18 @@ public class XmlParserUtils {
                 R.styleable.Preference_android_fragment);
     }
 
+    @Nullable
     private static String getData(Context context, AttributeSet set, int[] attrs, int resId) {
         final TypedArray ta = context.obtainStyledAttributes(set, attrs);
         String data = ta.getString(resId);
         ta.recycle();
-        return (data != null) ? data.toString() : null;
+        return data;
     }
 
     private static String getDataEntries(Context context, AttributeSet set, int[] attrs, int resId) {
         final TypedArray sa = context.obtainStyledAttributes(set, attrs);
         final TypedValue tv = sa.peekValue(resId);
-
+        sa.recycle();
         String[] data = null;
         if (tv != null && tv.type == TypedValue.TYPE_REFERENCE) {
             if (tv.resourceId != 0) {

@@ -121,7 +121,7 @@ public class ActionBarShadowController implements LifecycleObserver, OnStart, On
             final boolean shouldShowShadow = view.canScrollVertically(-1);
             if (mAnchorView != null) {
                 mAnchorView.setElevation(shouldShowShadow ? ELEVATION_HIGH : ELEVATION_LOW);
-            } else {
+            } else if (mActivity != null) { // activity can become null when running monkey
                 final ActionBar actionBar = mActivity.getActionBar();
                 if (actionBar != null) {
                     actionBar.setElevation(shouldShowShadow ? ELEVATION_HIGH : ELEVATION_LOW);

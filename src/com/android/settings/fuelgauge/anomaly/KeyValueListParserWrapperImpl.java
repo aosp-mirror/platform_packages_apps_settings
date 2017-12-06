@@ -39,6 +39,11 @@ public class KeyValueListParserWrapperImpl implements KeyValueListParserWrapper 
     }
 
     @Override
+    public String getString(String key, String defaultValue) {
+        return mParser.getString(key, defaultValue);
+    }
+
+    @Override
     public boolean getBoolean(String key, boolean defaultValue) {
         return mParser.getBoolean(key, defaultValue);
     }

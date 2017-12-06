@@ -26,10 +26,10 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
@@ -184,8 +184,8 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
                 getLifecycle());
         controllers.add(mDeviceNamePrefController);

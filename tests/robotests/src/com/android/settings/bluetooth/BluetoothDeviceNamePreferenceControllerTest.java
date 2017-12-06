@@ -72,8 +72,9 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         mController.updateDeviceName(mPreference, DEVICE_NAME);
 
         final CharSequence summary = mPreference.getSummary();
+
         assertThat(summary.toString())
-                .isEqualTo("Visible as 'Nightshade' to other devices");
+                .isEqualTo("Visible as \u201CNightshade\u201D to other devices");
         assertThat(mPreference.isSelectable()).isFalse();
     }
 

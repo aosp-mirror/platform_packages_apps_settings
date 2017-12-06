@@ -17,6 +17,14 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,10 +34,10 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.search.SearchResult.Builder;
 import com.android.settings.search.ranking.SearchResultsRankerCallback;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,14 +56,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -83,6 +83,8 @@ public class SearchResultsAdapterTest {
         mLoaderClassName = DatabaseResultLoader.class.getName();
         when(mFragment.getContext()).thenReturn(mMockContext);
         when(mMockContext.getApplicationContext()).thenReturn(mContext);
+        when(mSearchFeatureProvider.smartSearchRankingTimeoutMs(any(Context.class)))
+                .thenReturn(300L);
         mAdapter = new SearchResultsAdapter(mFragment, mSearchFeatureProvider);
     }
 
@@ -220,6 +222,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[5]); // appCharlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.SUCCEEDED);
     }
 
     @Test
@@ -245,6 +248,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[5]); // appCharlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.SUCCEEDED);
     }
 
     @Test
@@ -270,6 +274,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.FAILED);
     }
 
     @Test
@@ -295,6 +300,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.FAILED);
     }
 
     @Test
@@ -321,6 +327,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.TIMED_OUT);
     }
 
     @Test
@@ -348,6 +355,7 @@ public class SearchResultsAdapterTest {
         assertThat(results.get(5).title).isEqualTo(TITLES[2]); // charlie
         verify(mFragment).onSearchResultsDisplayed(mSearchResultsCountCaptor.capture());
         assertThat(mSearchResultsCountCaptor.getValue()).isEqualTo(6);
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.TIMED_OUT);
     }
 
     @Test
@@ -451,6 +459,7 @@ public class SearchResultsAdapterTest {
         mAdapter.notifyResultsLoaded();
         verify(mSearchFeatureProvider, never()).querySearchResults(
                 any(Context.class), anyString(), any(SearchResultsRankerCallback.class));
+        assertThat(mAdapter.getAsyncRankingState()).isEqualTo(SearchResultsAdapter.DISABLED);
     }
 
     @Test
@@ -460,6 +469,8 @@ public class SearchResultsAdapterTest {
         mAdapter.notifyResultsLoaded();
         verify(mSearchFeatureProvider, times(1)).querySearchResults(
                 any(Context.class), anyString(), any(SearchResultsRankerCallback.class));
+        assertThat(mAdapter.getAsyncRankingState())
+                .isEqualTo(SearchResultsAdapter.PENDING_RESULTS);
     }
 
     @Test
@@ -544,7 +555,7 @@ public class SearchResultsAdapterTest {
     private Set<SearchResult> getIntentSampleResults() {
         Set<SearchResult> sampleResults = new HashSet<>();
         ArrayList<String> breadcrumbs = new ArrayList<>();
-        final Drawable icon = mContext.getDrawable(R.drawable.ic_search_history);
+        final Drawable icon = mContext.getDrawable(R.drawable.ic_search_24dp);
         final ResultPayload payload = new ResultPayload(null);
         final SearchResult.Builder builder = new Builder();
         builder.setTitle("title")

@@ -24,7 +24,6 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.datetime.AutoTimePreferenceController;
@@ -36,6 +35,7 @@ import com.android.settings.datetime.TimePreferenceController;
 import com.android.settings.datetime.TimeZonePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.util.ArrayList;
@@ -72,8 +72,8 @@ public class DateTimeSettings extends DashboardFragment implements
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Activity activity = getActivity();
         final Intent intent = activity.getIntent();
         final boolean isFromSUW = intent.getBooleanExtra(EXTRA_IS_FROM_SUW, false);

@@ -137,7 +137,8 @@ public class ProcessStatsDetail extends SettingsPreferenceFragment {
                 .setUid(mApp.mUiTargetApp != null
                         ? mApp.mUiTargetApp.uid
                         : UserHandle.USER_NULL)
-                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+                .setHasAppInfoLink(true)
+                .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }

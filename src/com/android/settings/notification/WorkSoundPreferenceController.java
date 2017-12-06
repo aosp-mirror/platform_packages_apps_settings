@@ -43,15 +43,17 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DefaultRingtonePreference;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class WorkSoundPreferenceController extends PreferenceController implements
-        OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+public class WorkSoundPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, OnPreferenceChangeListener, LifecycleObserver,
+        OnResume, OnPause {
 
     private static final String TAG = "WorkSoundPrefController";
     private static final String KEY_WORK_CATEGORY = "sound_work_settings_section";

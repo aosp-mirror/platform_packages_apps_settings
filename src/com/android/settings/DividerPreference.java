@@ -19,8 +19,8 @@ import android.content.res.TypedArray;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
+@Deprecated
 public class DividerPreference extends Preference {
 
     private Boolean mAllowAbove;
@@ -35,10 +35,11 @@ public class DividerPreference extends Preference {
         if (a.hasValue(R.styleable.DividerPreference_allowDividerBelow)) {
             mAllowBelow = a.getBoolean(R.styleable.DividerPreference_allowDividerBelow, false);
         }
+        a.recycle();
     }
 
     public DividerPreference(Context context) {
-        this(context, null);
+        this(context, null /* attrs */);
     }
 
     public void setDividerAllowedAbove(boolean allowed) {

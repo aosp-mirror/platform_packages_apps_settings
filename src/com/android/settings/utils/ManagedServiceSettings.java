@@ -17,9 +17,12 @@
 package com.android.settings.utils;
 
 import android.annotation.Nullable;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -55,6 +58,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     private PackageManager mPm;
     private DevicePolicyManager mDpm;
     protected ServiceListing mServiceListing;
+    protected NotificationManager mNm;
     private IconDrawableFactory mIconDrawableFactory;
 
     abstract protected Config getConfig();
@@ -70,6 +74,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         mContext = getActivity();
         mPm = mContext.getPackageManager();
         mDpm = (DevicePolicyManager) mContext.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mNm = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mIconDrawableFactory = IconDrawableFactory.newInstance(mContext);
         mServiceListing = new ServiceListing(mContext, mConfig);
         mServiceListing.addCallback(new ServiceListing.Callback() {
@@ -90,8 +95,12 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     @Override
     public void onResume() {
         super.onResume();
-        mServiceListing.reload();
-        mServiceListing.setListening(true);
+        if (!ActivityManager.isLowRamDeviceStatic()) {
+            mServiceListing.reload();
+            mServiceListing.setListening(true);
+        } else {
+            setEmptyText(R.string.disabled_low_ram_device);
+        }
     }
 
     @Override
@@ -129,7 +138,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 pref.setTitle(summary);
             }
             pref.setKey(cn.flattenToString());
-            pref.setChecked(mServiceListing.isEnabled(cn));
+            pref.setChecked(isServiceEnabled(cn));
             if (managedProfileId != UserHandle.USER_NULL
                     && !mDpm.isNotificationListenerServicePermitted(
                             service.packageName, managedProfileId)) {
@@ -153,6 +162,10 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
         return UserHandle.myUserId();
     }
 
+    protected boolean isServiceEnabled(ComponentName cn) {
+        return mServiceListing.isEnabled(cn);
+    }
+
     protected boolean setEnabled(ComponentName service, String title, boolean enable) {
         if (!enable) {
             // the simple version: disabling
@@ -168,6 +181,10 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                     .show(getFragmentManager(), "dialog");
             return false;
         }
+    }
+
+    protected void enable(ComponentName service) {
+        mServiceListing.setEnabled(service, true);
     }
 
     public static class ScaryWarningDialogFragment extends InstrumentedDialogFragment {
@@ -207,7 +224,7 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                     .setPositiveButton(R.string.allow,
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    parent.mServiceListing.setEnabled(cn, true);
+                                    parent.enable(cn);
                                 }
                             })
                     .setNegativeButton(R.string.deny,
@@ -223,7 +240,6 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
     public static class Config {
         public String tag;
         public String setting;
-        public String secondarySetting;
         public String intentAction;
         public String permission;
         public String noun;

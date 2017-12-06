@@ -23,56 +23,56 @@
     <Preference
         android:key="assist_and_voice_input"
         android:title="@string/assist_and_voice_input_title"
-        android:fragment="com.android.settings.applications.assist.ManageAssist"
-        android:order="-20"/>
+        android:fragment="com.android.settings.applications.assist.ManageAssist" />
 
     <Preference
         android:key="default_browser"
         android:title="@string/default_browser_title"
-        android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker"
-        android:order="-19">
-        <extra android:name="for_work" android:value="false"/>
+        android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
+        <extra android:name="for_work" android:value="false" />
     </Preference>
 
     <Preference
         android:key="default_home"
         android:title="@string/home_app"
         android:fragment="com.android.settings.applications.defaultapps.DefaultHomePicker"
-        settings:keywords="@string/keywords_home"
-        android:order="-18"/>
+        settings:keywords="@string/keywords_home" />
 
     <Preference
         android:key="default_phone_app"
         android:title="@string/default_phone_title"
         android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
-        settings:keywords="@string/keywords_default_phone_app"
-        android:order="-17"/>
+        settings:keywords="@string/keywords_default_phone_app" />
 
     <Preference
         android:key="default_sms_app"
         android:title="@string/sms_application_title"
         android:fragment="com.android.settings.applications.defaultapps.DefaultSmsPicker"
-        settings:keywords="@string/keywords_more_default_sms_app"
-        android:order="-16"/>
+        settings:keywords="@string/keywords_more_default_sms_app" />
+
+    <Preference
+        android:key="default_payment_app"
+        android:title="@string/nfc_payment_settings_title"
+        android:summary="@string/summary_placeholder"
+        android:fragment="com.android.settings.nfc.PaymentSettings" />
 
     <Preference
         android:key="default_emergency_app"
         android:title="@string/default_emergency_app"
-        settings:keywords="@string/keywords_emergency_app"
-        android:order="-15"/>
+        settings:keywords="@string/keywords_emergency_app" />
 
     <!--
     <Preference
         android:key="default_notification_asst_app"
         android:title="@string/default_notification_assistant"
         android:fragment="com.android.settings.applications.defaultapps.DefaultNotificationAssistantPicker"
-        android:order="-13"/>
+        />
      -->
 
     <Preference
         android:key="domain_urls"
         android:title="@string/domain_urls_title"
-        android:fragment="com.android.settings.applications.ManageDomainUrls"/>
+        android:fragment="com.android.settings.applications.ManageDomainUrls" />
 
     <com.android.settings.WorkOnlyCategory
         android:key="work_defaults"
@@ -82,7 +82,7 @@
             android:key="work_default_browser"
             android:title="@string/default_browser_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultBrowserPicker">
-            <extra android:name="for_work" android:value="true"/>
+            <extra android:name="for_work" android:value="true" />
         </Preference>
 
         <Preference
@@ -90,7 +90,7 @@
             android:title="@string/default_phone_title"
             android:fragment="com.android.settings.applications.defaultapps.DefaultPhonePicker"
             settings:keywords="@string/keywords_default_phone_app">
-            <extra android:name="for_work" android:value="true"/>
+            <extra android:name="for_work" android:value="true" />
         </Preference>
 
     </com.android.settings.WorkOnlyCategory>

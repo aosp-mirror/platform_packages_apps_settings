@@ -32,6 +32,7 @@ import com.android.settings.widget.SeekBarPreference;
 import com.android.settings.SettingsPreferenceFragment;
 
 import java.text.DateFormat;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -144,7 +145,7 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     @Override
     public Dialog onCreateDialog(final int dialogId) {
         if (dialogId == DIALOG_START_TIME || dialogId == DIALOG_END_TIME) {
-            final NightDisplayController.LocalTime initialTime;
+            final LocalTime initialTime;
             if (dialogId == DIALOG_START_TIME) {
                 initialTime = mController.getCustomStartTime();
             } else {
@@ -156,15 +157,14 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
             return new TimePickerDialog(context, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                    final NightDisplayController.LocalTime time =
-                            new NightDisplayController.LocalTime(hourOfDay, minute);
+                    final LocalTime time = LocalTime.of(hourOfDay, minute);
                     if (dialogId == DIALOG_START_TIME) {
                         mController.setCustomStartTime(time);
                     } else {
                         mController.setCustomEndTime(time);
                     }
                 }
-            }, initialTime.hourOfDay, initialTime.minute, use24HourFormat);
+            }, initialTime.getHour(), initialTime.getMinute(), use24HourFormat);
         }
         return super.onCreateDialog(dialogId);
     }
@@ -201,11 +201,11 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
         mTemperaturePreference.setProgress(convertTemperature(colorTemperature));
     }
 
-    private String getFormattedTimeString(NightDisplayController.LocalTime localTime) {
+    private String getFormattedTimeString(LocalTime localTime) {
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(mTimeFormatter.getTimeZone());
-        c.set(Calendar.HOUR_OF_DAY, localTime.hourOfDay);
-        c.set(Calendar.MINUTE, localTime.minute);
+        c.set(Calendar.HOUR_OF_DAY, localTime.getHour());
+        c.set(Calendar.MINUTE, localTime.getMinute());
         c.set(Calendar.SECOND, 0);
         c.set(Calendar.MILLISECOND, 0);
         return mTimeFormatter.format(c.getTime());
@@ -221,12 +221,12 @@ public class NightDisplaySettings extends SettingsPreferenceFragment
     }
 
     @Override
-    public void onCustomStartTimeChanged(NightDisplayController.LocalTime startTime) {
+    public void onCustomStartTimeChanged(LocalTime startTime) {
         mStartTimePreference.setSummary(getFormattedTimeString(startTime));
     }
 
     @Override
-    public void onCustomEndTimeChanged(NightDisplayController.LocalTime endTime) {
+    public void onCustomEndTimeChanged(LocalTime endTime) {
         mEndTimePreference.setSummary(getFormattedTimeString(endTime));
     }
 

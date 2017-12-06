@@ -78,6 +78,13 @@ public class PremiumSmsAccess extends EmptyTextSettings implements Callback, Cal
     }
 
     @Override
+    public void onDestroy() {
+        mSmsBackend.release();
+        mSession.release();
+        super.onDestroy();
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.PREMIUM_SMS_ACCESS;
     }

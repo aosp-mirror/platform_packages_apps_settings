@@ -51,7 +51,8 @@ public abstract class AppInfoWithHeader extends AppInfoBase {
                 .setIsInstantApp(AppUtils.isInstant(mPackageInfo.applicationInfo))
                 .setPackageName(mPackageName)
                 .setUid(mPackageInfo.applicationInfo.uid)
-                .setButtonActions(ActionType.ACTION_APP_INFO, ActionType.ACTION_NONE)
+                .setHasAppInfoLink(true)
+                .setButtonActions(ActionType.ACTION_NONE, ActionType.ACTION_NONE)
                 .done(activity, getPrefContext());
         getPreferenceScreen().addPreference(pref);
     }

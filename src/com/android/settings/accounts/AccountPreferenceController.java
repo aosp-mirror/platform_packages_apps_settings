@@ -16,6 +16,12 @@
 
 package com.android.settings.accounts;
 
+import static android.content.Intent.EXTRA_USER;
+import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
+import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
+import static android.provider.Settings.ACTION_ADD_ACCOUNT;
+import static android.provider.Settings.EXTRA_AUTHORITIES;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.BroadcastReceiver;
@@ -45,13 +51,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SearchFeatureProviderImpl;
+import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accounts.AuthenticatorHelper;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -61,17 +68,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static android.content.Intent.EXTRA_USER;
-import static android.os.UserManager.DISALLOW_MODIFY_ACCOUNTS;
-import static android.os.UserManager.DISALLOW_REMOVE_MANAGED_PROFILE;
-import static android.provider.Settings.EXTRA_AUTHORITIES;
-
-public class AccountPreferenceController extends PreferenceController
-        implements AuthenticatorHelper.OnAccountsUpdateListener,
+public class AccountPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, AuthenticatorHelper.OnAccountsUpdateListener,
         OnPreferenceClickListener, LifecycleObserver, OnPause, OnResume {
 
     private static final String TAG = "AccountPrefController";
-    private static final String ADD_ACCOUNT_ACTION = "android.settings.ADD_ACCOUNT_SETTINGS";
 
     private static final int ORDER_ACCOUNT_PROFILES = 1;
     private static final int ORDER_LAST = 1002;
@@ -232,7 +233,7 @@ public class AccountPreferenceController extends PreferenceController
         for (int i = 0; i < count; i++) {
             ProfileData profileData = mProfiles.valueAt(i);
             if (preference == profileData.addAccountPreference) {
-                Intent intent = new Intent(ADD_ACCOUNT_ACTION);
+                Intent intent = new Intent(ACTION_ADD_ACCOUNT);
                 intent.putExtra(EXTRA_USER, profileData.userInfo.getUserHandle());
                 intent.putExtra(EXTRA_AUTHORITIES, mAuthorities);
                 mContext.startActivity(intent);

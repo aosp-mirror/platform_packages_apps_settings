@@ -17,6 +17,9 @@
 
 package com.android.settings.search;
 
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
+import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,9 +30,6 @@ import com.android.settings.utils.AsyncLoader;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns;
-import static com.android.settings.search.IndexDatabaseHelper.Tables.TABLE_PREFS_INDEX;
 
 /**
  * AsyncTask to retrieve Settings, First party app and any intent based results.
@@ -191,10 +191,12 @@ public class DatabaseResultLoader extends AsyncLoader<Set<? extends SearchResult
      * @return A set of the matching results.
      */
     private Set<SearchResult> query(String whereClause, String[] selection, int baseRank) {
-        SQLiteDatabase database = IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();
-        final Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
-                selection, null, null, null);
-        return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
+        final SQLiteDatabase database =
+                IndexDatabaseHelper.getInstance(mContext).getReadableDatabase();
+        try (Cursor resultCursor = database.query(TABLE_PREFS_INDEX, SELECT_COLUMNS, whereClause,
+                selection, null, null, null)) {
+            return mConverter.convertCursor(mSiteMapManager, resultCursor, baseRank);
+        }
     }
 
     /**

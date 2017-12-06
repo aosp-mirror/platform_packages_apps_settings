@@ -18,9 +18,7 @@ package com.android.settings.fuelgauge;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADDITIONAL_BATTERY_INFO;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -60,14 +58,13 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -93,7 +90,6 @@ import java.util.List;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class
         })
 public class PowerUsageSummaryTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
@@ -337,13 +333,13 @@ public class PowerUsageSummaryTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_screen_usage)).when(mFragment).getText(
-                R.string.battery_screen_usage);
+        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
+                R.string.battery_used_for);
         doReturn(mRealContext).when(mFragment).getContext();
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
-        assertThat(mPreference.getSummary().toString()).isEqualTo("Screen usage 2m");
+        assertThat(mPreference.getSummary().toString()).isEqualTo("Used for 2m");
     }
 
     @Test
@@ -455,7 +451,7 @@ public class PowerUsageSummaryTest {
                 fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
 
-        for (PreferenceController controller : fragment.getPreferenceControllers(context)) {
+        for (AbstractPreferenceController controller : fragment.getPreferenceControllers(context)) {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 

@@ -32,9 +32,6 @@ public class OemLockManager {
         return false;
     }
 
-    public boolean canUserAllowOemUnlock() {
-        return true;
-    }
     public boolean isOemUnlockAllowed() {
         return false;
     }

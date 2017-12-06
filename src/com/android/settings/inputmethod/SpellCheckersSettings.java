@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
@@ -105,7 +106,8 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
 
     @Override
     public void onSwitchChanged(final Switch switchView, final boolean isChecked) {
-        mTsm.setSpellCheckerEnabled(isChecked);
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.SPELL_CHECKER_ENABLED,
+                isChecked ? 1 : 0);
         updatePreferenceScreen();
     }
 
@@ -203,12 +205,17 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         builder.setSingleChoiceItems(items, checkedItemId, new AlertDialog.OnClickListener() {
             @Override
             public void onClick(final DialogInterface dialog, final int item) {
+                final int subtypeId;
                 if (item == ITEM_ID_USE_SYSTEM_LANGUAGE) {
-                    mTsm.setSpellCheckerSubtype(null);
+                    subtypeId = SpellCheckerSubtype.SUBTYPE_ID_NONE;
                 } else {
                     final int index = convertDialogItemIdToSubtypeIndex(item);
-                    mTsm.setSpellCheckerSubtype(currentSci.getSubtypeAt(index));
+                    subtypeId = currentSci.getSubtypeAt(index).hashCode();
                 }
+
+                Settings.Secure.putInt(getContentResolver(),
+                        Settings.Secure.SELECTED_SPELL_CHECKER_SUBTYPE, subtypeId);
+
                 if (DBG) {
                     final SpellCheckerSubtype subtype = mTsm.getCurrentSpellCheckerSubtype(
                             true /* allowImplicitlySelectedSubtype */);
@@ -248,7 +255,11 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
     }
 
     private void changeCurrentSpellChecker(final SpellCheckerInfo sci) {
-        mTsm.setCurrentSpellChecker(sci);
+        Settings.Secure.putString(getContentResolver(), Settings.Secure.SELECTED_SPELL_CHECKER,
+                sci.getId());
+        // Reset the spell checker subtype
+        Settings.Secure.putInt(getContentResolver(), Settings.Secure.SELECTED_SPELL_CHECKER_SUBTYPE,
+                SpellCheckerSubtype.SUBTYPE_ID_NONE);
         if (DBG) {
             Log.d(TAG, "Current spell check is " + mTsm.getCurrentSpellChecker().getId());
         }

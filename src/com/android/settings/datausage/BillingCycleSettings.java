@@ -14,13 +14,18 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicy.CYCLE_NONE;
+import static android.net.NetworkPolicy.LIMIT_DISABLED;
+import static android.net.NetworkPolicy.WARNING_DISABLED;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.icu.text.MeasureFormat;
+import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -31,6 +36,7 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -41,9 +47,6 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
-
-import static android.net.NetworkPolicy.LIMIT_DISABLED;
-import static android.net.NetworkPolicy.WARNING_DISABLED;
 
 public class BillingCycleSettings extends DataUsageBase implements
         Preference.OnPreferenceChangeListener, DataUsageEditController {
@@ -100,11 +103,15 @@ public class BillingCycleSettings extends DataUsageBase implements
     }
 
     private void updatePrefs() {
-        NetworkPolicy policy = services.mPolicyEditor.getPolicy(mNetworkTemplate);
-        mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, policy != null ?
-                policy.cycleDay : 1));
-        if (policy != null && policy.warningBytes != WARNING_DISABLED) {
-            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), policy.warningBytes));
+        final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mNetworkTemplate);
+        if (cycleDay != CYCLE_NONE) {
+            mBillingCycle.setSummary(getString(R.string.billing_cycle_fragment_summary, cycleDay));
+        } else {
+            mBillingCycle.setSummary(null);
+        }
+        final long warningBytes = services.mPolicyEditor.getPolicyWarningBytes(mNetworkTemplate);
+        if (warningBytes != WARNING_DISABLED) {
+            mDataWarning.setSummary(Formatter.formatFileSize(getContext(), warningBytes));
             mDataWarning.setEnabled(true);
             mEnableDataWarning.setChecked(true);
         } else {
@@ -112,8 +119,9 @@ public class BillingCycleSettings extends DataUsageBase implements
             mDataWarning.setEnabled(false);
             mEnableDataWarning.setChecked(false);
         }
-        if (policy != null && policy.limitBytes != LIMIT_DISABLED) {
-            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), policy.limitBytes));
+        final long limitBytes = services.mPolicyEditor.getPolicyLimitBytes(mNetworkTemplate);
+        if (limitBytes != LIMIT_DISABLED) {
+            mDataLimit.setSummary(Formatter.formatFileSize(getContext(), limitBytes));
             mDataLimit.setEnabled(true);
             mEnableDataLimit.setChecked(true);
         } else {
@@ -248,6 +256,17 @@ public class BillingCycleSettings extends DataUsageBase implements
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
 
+            final MeasureFormat formatter = MeasureFormat.getInstance(
+                    getContext().getResources().getConfiguration().locale,
+                    MeasureFormat.FormatWidth.SHORT);
+            final String[] unitNames = new String[] {
+                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
+                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
+            };
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                    getContext(), R.layout.data_usage_spinner_item, unitNames);
+            type.setAdapter(adapter);
+
             if (bytes > 1.5f * GB_IN_BYTES) {
                 final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
                 bytesPicker.setText(bytesText);
@@ -305,7 +324,7 @@ public class BillingCycleSettings extends DataUsageBase implements
     }
 
     /**
-     * Dialog to edit {@link NetworkPolicy#cycleDay}.
+     * Dialog to edit {@link NetworkPolicy}.
      */
     public static class CycleEditorFragment extends InstrumentedDialogFragment implements
             DialogInterface.OnClickListener {

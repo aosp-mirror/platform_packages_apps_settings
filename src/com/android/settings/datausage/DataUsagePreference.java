@@ -19,14 +19,12 @@ import android.content.Intent;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
-import android.telephony.SubscriptionManager;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
-
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settingslib.net.DataUsageController;
-import com.android.settings.R;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
 

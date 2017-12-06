@@ -36,7 +36,6 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,12 +59,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.R;
 import com.android.settings.users.UserDialogs;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -353,23 +351,13 @@ public class DeviceAdminAdd extends Activity {
         restrictedAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (!mActionButton.isEnabled()) {
+                    showPolicyTransparencyDialogIfRequired();
                     return;
                 }
                 if (mAdding) {
                     addAndFinish();
                 } else if (isManagedProfile(mDeviceAdmin)
                         && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
-                    if (hasBaseCantRemoveProfileRestriction()) {
-                        // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
-                        // point showing a dialog saying it's disabled by an admin.
-                        return;
-                    }
-                    EnforcedAdmin enforcedAdmin = getAdminEnforcingCantRemoveProfile();
-                    if (enforcedAdmin != null) {
-                        RestrictedLockUtils.sendShowAdminSupportDetailsIntent(DeviceAdminAdd.this,
-                                enforcedAdmin);
-                        return;
-                    }
                     final int userId = UserHandle.myUserId();
                     UserDialogs.createRemoveDialog(DeviceAdminAdd.this, userId,
                             new DialogInterface.OnClickListener() {
@@ -380,7 +368,7 @@ public class DeviceAdminAdd extends Activity {
                                     finish();
                                 }
                             }
-                            ).show();
+                    ).show();
                 } else if (mUninstalling) {
                     mDPM.uninstallPackageWithActiveAdmins(mDeviceAdmin.getPackageName());
                     finish();
@@ -412,6 +400,26 @@ public class DeviceAdminAdd extends Activity {
                 }
             }
         });
+    }
+
+    /**
+     * Shows a dialog to explain why the button is disabled if required.
+     */
+    private void showPolicyTransparencyDialogIfRequired() {
+        if (isManagedProfile(mDeviceAdmin)
+                && mDeviceAdmin.getComponent().equals(mDPM.getProfileOwner())) {
+            if (hasBaseCantRemoveProfileRestriction()) {
+                // If DISALLOW_REMOVE_MANAGED_PROFILE is set by the system, there's no
+                // point showing a dialog saying it's disabled by an admin.
+                return;
+            }
+            EnforcedAdmin enforcedAdmin = getAdminEnforcingCantRemoveProfile();
+            if (enforcedAdmin != null) {
+                RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
+                        DeviceAdminAdd.this,
+                        enforcedAdmin);
+            }
+        }
     }
 
     void addAndFinish() {

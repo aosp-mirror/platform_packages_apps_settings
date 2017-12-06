@@ -20,8 +20,9 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -30,11 +31,12 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import java.util.List;
 
 /**
- * {@link PreferenceController} that controls whether a user wants to enable the "use open networks
- * automatically" feature provider by the current network recommendation provider.
+ * {@link AbstractPreferenceController} that controls whether a user wants to enable the "use open
+ * networks automatically" feature provider by the current network recommendation provider.
  */
-public class UseOpenWifiPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+public class UseOpenWifiPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume, OnPause {
     private static final String KEY_USE_OPEN_WIFI_AUTOMATICALLY = "use_open_wifi_automatically";
     @VisibleForTesting static final int REQUEST_CODE_OPEN_WIFI_AUTOMATICALLY = 400;
 

@@ -23,10 +23,10 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -73,8 +73,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         final LockScreenNotificationPreferenceController notificationController =
             new LockScreenNotificationPreferenceController(context,
@@ -111,8 +111,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
             }
 
             @Override
-            public List<PreferenceController> getPreferenceControllers(Context context) {
-                final List<PreferenceController> controllers = new ArrayList<>();
+            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                final List<AbstractPreferenceController> controllers = new ArrayList<>();
                 controllers.add(new LockScreenNotificationPreferenceController(context));
                 controllers.add(new AddUserWhenLockedPreferenceController(context));
                 controllers.add(new OwnerInfoPreferenceController(

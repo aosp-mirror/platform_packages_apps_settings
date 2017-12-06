@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Parcel;
@@ -40,8 +42,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedChangeListener,
         View.OnClickListener {
@@ -71,8 +71,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
     private String mMetricsTag;
 
-    private ArrayList<OnSwitchChangeListener> mSwitchChangeListeners =
-            new ArrayList<OnSwitchChangeListener>();
+    private final ArrayList<OnSwitchChangeListener> mSwitchChangeListeners = new ArrayList<>();
 
     private static int[] XML_ATTRIBUTES = {
             R.attr.switchBarMarginStart, R.attr.switchBarMarginEnd,

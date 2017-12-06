@@ -26,7 +26,6 @@ public class WebViewAppPreferenceController extends DefaultAppPreferenceControll
 
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
-    private final Context mContext;
     private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
     private Preference mPreference;
 
@@ -37,7 +36,6 @@ public class WebViewAppPreferenceController extends DefaultAppPreferenceControll
     public WebViewAppPreferenceController(Context context,
             WebViewUpdateServiceWrapper webviewUpdateServiceWrapper) {
         super(context);
-        mContext = context;
         mWebViewUpdateServiceWrapper = webviewUpdateServiceWrapper;
     }
 
