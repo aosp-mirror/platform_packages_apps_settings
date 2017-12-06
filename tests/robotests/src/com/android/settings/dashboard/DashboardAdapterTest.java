@@ -68,7 +68,7 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
@@ -92,8 +92,7 @@ public class DashboardAdapterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
         when(mFactory.suggestionsFeatureProvider
                 .getSuggestionIdentifier(any(Context.class), any(Tile.class)))

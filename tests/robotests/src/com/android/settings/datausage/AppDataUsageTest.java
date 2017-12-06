@@ -28,7 +28,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
@@ -57,12 +56,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = ShadowEntityHeaderController.class)
 public class AppDataUsageTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
     @Mock
@@ -73,7 +70,7 @@ public class AppDataUsageTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
     }
 
     @After

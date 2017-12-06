@@ -46,7 +46,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DrawOverlayDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -63,8 +63,8 @@ public class DrawOverlayDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test

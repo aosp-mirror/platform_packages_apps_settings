@@ -16,6 +16,12 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -23,33 +29,24 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiMasterSwitchPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    Context mMockContext;
     @Mock
     private WifiManager mWifiManager;
     @Mock
@@ -65,8 +62,7 @@ public class WifiMasterSwitchPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mMockContext);
-        mFakeFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mMockContext);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         mController = new WifiMasterSwitchPreferenceController(mContext, mMetricsFeatureProvider);

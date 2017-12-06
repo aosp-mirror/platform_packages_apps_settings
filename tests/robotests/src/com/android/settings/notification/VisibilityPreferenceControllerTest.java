@@ -42,7 +42,6 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.os.Build;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
@@ -68,7 +67,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
         ShadowRestrictionUtils.class,
 })
 public class VisibilityPreferenceControllerTest {

@@ -62,7 +62,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SuggestionAdapterTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -82,7 +82,7 @@ public class SuggestionAdapterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         final Tile suggestion1 = new Tile();
         final Tile suggestion2 = new Tile();

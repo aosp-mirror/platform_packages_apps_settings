@@ -19,9 +19,7 @@ package com.android.settings.search;
 
 import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import static android.content.pm.ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
@@ -65,7 +63,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InstalledAppResultLoaderTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -83,7 +81,7 @@ public class InstalledAppResultLoaderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest(mContext);
+        final FakeFeatureFactory factory = FakeFeatureFactory.setupForTest();
         when(factory.searchFeatureProvider.getSiteMapManager())
                 .thenReturn(mSiteMapManager);
         final List<UserInfo> infos = new ArrayList<>();
@@ -127,7 +125,7 @@ public class InstalledAppResultLoaderTest {
                 mPackageManagerWrapper, query,
                 mSiteMapManager));
         when(mSiteMapManager.buildBreadCrumb(eq(mContext), anyString(), anyString()))
-                .thenReturn(Arrays.asList(new String[]{"123"}));
+                .thenReturn(Arrays.asList(new String[] {"123"}));
 
         assertThat(mCallable.call()).hasSize(3);
         verify(mSiteMapManager)

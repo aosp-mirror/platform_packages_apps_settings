@@ -14,13 +14,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,8 +31,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SurveyMixinTest {
 
     private static final String FAKE_KEY = "fake_key";
@@ -51,8 +54,7 @@ public class SurveyMixinTest {
         // set up the fakefeature factory to mock out the survey provider
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         mProvider = mFactory.getSurveyFeatureProvider(mContext);
         when(mProvider.getSurveyId(any(), eq(FAKE_KEY))).thenReturn(FAKE_SURVEY_ID);
     }

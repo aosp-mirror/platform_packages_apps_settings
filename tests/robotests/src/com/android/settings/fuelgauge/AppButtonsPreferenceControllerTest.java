@@ -66,7 +66,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppButtonsPreferenceControllerTest {
     private static final String PACKAGE_NAME = "com.android.settings";
     private static final String RESOURCE_STRING = "string";
@@ -108,7 +108,7 @@ public class AppButtonsPreferenceControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mSettingsActivity);
+        FakeFeatureFactory.setupForTest();
         doReturn(mUserManager).when(mSettingsActivity).getSystemService(Context.USER_SERVICE);
         doReturn(mPackageManger).when(mSettingsActivity).getPackageManager();
         doReturn(mAm).when(mSettingsActivity).getSystemService(Context.ACTIVITY_SERVICE);

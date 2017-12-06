@@ -45,7 +45,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link EnterpriseInstalledPackagesPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
@@ -60,8 +60,7 @@ public final class EnterpriseInstalledPackagesPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new EnterpriseInstalledPackagesPreferenceController(mContext,
                 true /* async */);
     }

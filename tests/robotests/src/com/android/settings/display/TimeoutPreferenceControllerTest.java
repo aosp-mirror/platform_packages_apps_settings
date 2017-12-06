@@ -33,7 +33,7 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TimeoutPreferenceControllerTest {
     private static final int TIMEOUT = 30;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

@@ -27,8 +27,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -40,7 +38,6 @@ import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.deviceinfo.StorageProfileFragment;
 import com.android.settings.wrapper.UserManagerWrapper;
-import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.drawable.UserIconDrawable;
 
@@ -54,7 +51,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserProfileControllerTest {
     private static final String TEST_NAME = "Fred";
 

@@ -40,7 +40,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
     Set<Class> sProviderClassCopy;

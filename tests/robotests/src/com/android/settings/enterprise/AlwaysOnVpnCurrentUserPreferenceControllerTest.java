@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link AlwaysOnVpnCurrentUserPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
 
     private static final String VPN_SET_DEVICE = "VPN set";
@@ -55,8 +55,7 @@ public final class AlwaysOnVpnCurrentUserPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new AlwaysOnVpnCurrentUserPreferenceController(mContext);
         when(mContext.getString(R.string.enterprise_privacy_always_on_vpn_device))
                 .thenReturn(VPN_SET_DEVICE);

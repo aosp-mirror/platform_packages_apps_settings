@@ -46,7 +46,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SharedPreferenceLoggerTest {
 
     private static final String TEST_TAG = "tag";
@@ -63,8 +63,7 @@ public class SharedPreferenceLoggerTest {
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         mMetricsFeature = mFactory.metricsFeatureProvider;
 
         mSharedPrefLogger = new SharedPreferencesLogger(mContext, TEST_TAG);

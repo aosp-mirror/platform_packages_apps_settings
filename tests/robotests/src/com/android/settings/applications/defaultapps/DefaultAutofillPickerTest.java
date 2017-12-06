@@ -17,7 +17,6 @@
 package com.android.settings.applications.defaultapps;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -43,7 +42,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAutofillPickerTest {
 
     private static final String TEST_APP_KEY = "foo.bar/foo.bar.Baz";
@@ -59,7 +58,7 @@ public class DefaultAutofillPickerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mPicker = spy(new DefaultAutofillPicker());
         mPicker.onAttach((Context) mActivity);

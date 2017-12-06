@@ -56,7 +56,7 @@ import org.robolectric.annotation.Implements;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
+    sdk = TestConfig.SDK_VERSION,
     shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class
 )
 public class AccountHeaderPreferenceControllerTest {
@@ -80,7 +80,7 @@ public class AccountHeaderPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
         doReturn(mContext).when(mActivity).getApplicationContext();

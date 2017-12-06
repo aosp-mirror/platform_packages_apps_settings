@@ -32,7 +32,6 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowDoubleTwistPreferenceController;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
@@ -51,7 +50,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
         SettingsShadowResources.class
 })
 public class DoubleTwistPreferenceControllerTest {

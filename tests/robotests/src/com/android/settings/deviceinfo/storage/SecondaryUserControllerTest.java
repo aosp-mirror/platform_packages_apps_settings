@@ -27,8 +27,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.UserInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -38,7 +36,6 @@ import android.util.SparseArray;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.wrapper.UserManagerWrapper;
-import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
@@ -56,7 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecondaryUserControllerTest {
     private static final String TEST_NAME = "Fred";
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";

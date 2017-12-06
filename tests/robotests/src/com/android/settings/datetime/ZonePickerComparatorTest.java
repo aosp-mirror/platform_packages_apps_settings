@@ -1,6 +1,5 @@
 package com.android.settings.datetime;
 
-import com.android.settings.datetime.ZonePicker;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settingslib.datetime.ZoneGetter;
@@ -23,7 +22,7 @@ import java.util.TimeZone;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZonePickerComparatorTest {
 
     // Strings in Chinese are sorted by alphabet order of their Pinyin.

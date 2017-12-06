@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -27,7 +26,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,26 +42,23 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RemoteDeviceNameDialogFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private CachedBluetoothDevice mCachedDevice;
 
     private RemoteDeviceNameDialogFragment mFragment;
-    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
 
         String deviceAddress = "55:66:77:88:99:AA";
         when(mCachedDevice.getAddress()).thenReturn(deviceAddress);

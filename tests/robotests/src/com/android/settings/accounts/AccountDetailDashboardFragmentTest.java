@@ -15,6 +15,15 @@
  */
 package com.android.settings.accounts;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
+
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -30,7 +39,6 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.Tile;
@@ -45,17 +53,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AccountDetailDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";
@@ -127,9 +126,6 @@ public class AccountDetailDashboardFragmentTest {
 
     @Test
     public void refreshDashboardTiles_HasAccountType_shouldAddAccountNameToIntent() {
-        FakeFeatureFactory.setupForTest(mContext);
-        final FakeFeatureFactory featureFactory =
-                (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
         final DashboardFeatureProviderImpl dashboardFeatureProvider =
                 new DashboardFeatureProviderImpl(mContext);
         final PackageManager packageManager = mock(PackageManager.class);

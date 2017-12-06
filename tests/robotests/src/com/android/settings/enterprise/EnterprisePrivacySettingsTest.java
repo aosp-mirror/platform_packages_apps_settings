@@ -44,7 +44,7 @@ import java.util.List;
  * Tests for {@link EnterprisePrivacySettings}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacySettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -55,8 +55,7 @@ public final class EnterprisePrivacySettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mSettings = new EnterprisePrivacySettings();
     }

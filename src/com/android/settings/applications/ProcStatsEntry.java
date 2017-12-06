@@ -23,7 +23,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.util.SparseArray;
+import android.util.LongSparseArray;
 
 import com.android.internal.app.procstats.ProcessState;
 import com.android.internal.app.procstats.ProcessStats;
@@ -142,7 +142,7 @@ public final class ProcStatsEntry implements Parcelable {
         // Collect information about each package running in the process.
         ArrayList<ProcStatsEntry> subProcs = new ArrayList<>();
         for (int ipkg=0; ipkg<mPackages.size(); ipkg++) {
-            SparseArray<ProcessStats.PackageState> vpkgs
+            LongSparseArray<ProcessStats.PackageState> vpkgs
                     = stats.mPackages.get(mPackages.get(ipkg), mUid);
             for (int ivers=0;  ivers<vpkgs.size(); ivers++) {
                 ProcessStats.PackageState pkgState = vpkgs.valueAt(ivers);

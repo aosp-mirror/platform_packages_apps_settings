@@ -85,7 +85,7 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = InstalledAppDetailsTest.ShadowUtils.class
 )
 public final class InstalledAppDetailsTest {
@@ -130,7 +130,7 @@ public final class InstalledAppDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new InstalledAppDetails());
         mAppDetail.mBatteryUtils = mBatteryUtils;

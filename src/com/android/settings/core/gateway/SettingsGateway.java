@@ -79,6 +79,7 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.fuelgauge.PowerUsageSummaryLegacy;
 import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
@@ -181,6 +182,7 @@ public class SettingsGateway {
             AndroidBeam.class.getName(),
             WifiDisplaySettings.class.getName(),
             PowerUsageSummary.class.getName(),
+            PowerUsageSummaryLegacy.class.getName(),
             AccountSyncSettings.class.getName(),
             AssistGestureSettings.class.getName(),
             SwipeToNotificationSettings.class.getName(),

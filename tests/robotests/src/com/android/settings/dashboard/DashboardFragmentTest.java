@@ -16,9 +16,7 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -33,12 +31,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
@@ -58,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -71,8 +68,7 @@ public class DashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFakeFeatureFactory = (FakeFeatureFactory) FeatureFactory.getFactory(mContext);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory();
         mDashboardCategory.addTile(new Tile());
         mTestFragment = new TestFragment(ShadowApplication.getInstance().getApplicationContext());

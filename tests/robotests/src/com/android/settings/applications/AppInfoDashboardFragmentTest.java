@@ -73,7 +73,7 @@ import java.util.HashSet;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O
+    sdk = TestConfig.SDK_VERSION
 )
 public final class AppInfoDashboardFragmentTest {
 
@@ -100,7 +100,7 @@ public final class AppInfoDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         mAppDetail = spy(new AppInfoDashboardFragment());
         doReturn(mActivity).when(mAppDetail).getActivity();

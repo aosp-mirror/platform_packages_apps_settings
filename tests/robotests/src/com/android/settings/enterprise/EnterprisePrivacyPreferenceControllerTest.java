@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link EnterprisePrivacyPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterprisePrivacyPreferenceControllerTest {
 
     private static final String MANAGED_GENERIC = "managed by organization";
@@ -56,8 +56,7 @@ public final class EnterprisePrivacyPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new EnterprisePrivacyPreferenceController(mContext);
     }
 

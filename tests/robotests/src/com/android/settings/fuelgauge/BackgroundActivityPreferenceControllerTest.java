@@ -58,7 +58,7 @@ import org.robolectric.util.FragmentTestUtil;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,

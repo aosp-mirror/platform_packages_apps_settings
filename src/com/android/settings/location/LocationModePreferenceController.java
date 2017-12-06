@@ -41,6 +41,11 @@ public class LocationModePreferenceController extends LocationBasePreferenceCont
     }
 
     @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_location_mode_available);
+    }
+
+    @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(KEY_LOCATION_MODE);

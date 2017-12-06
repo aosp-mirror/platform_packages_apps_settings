@@ -17,7 +17,6 @@
 package com.android.settings.network;
 
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
@@ -38,7 +36,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
@@ -65,7 +62,7 @@ public class AirplaneModePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         doReturn(mResources).when(mContext).getResources();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = spy(new AirplaneModePreferenceController(mContext, null));

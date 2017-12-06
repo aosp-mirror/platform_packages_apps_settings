@@ -18,21 +18,16 @@ package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.UserInfo;
 import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,7 +37,6 @@ import com.android.settingslib.wrapper.PackageManagerWrapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
@@ -51,14 +45,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PictureInPictureSettingsTest {
 
     private static final int PRIMARY_USER_ID = 0;
     private static final int PROFILE_USER_ID = 10;
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
     private PictureInPictureSettings mFragment;
@@ -73,8 +64,7 @@ public class PictureInPictureSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = new PictureInPictureSettings(mPackageManager, mUserManager);
         mPrimaryUserPackages = new ArrayList<>();
         mProfileUserPackages = new ArrayList<>();

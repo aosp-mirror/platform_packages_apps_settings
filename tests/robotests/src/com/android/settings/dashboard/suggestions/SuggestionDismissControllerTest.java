@@ -17,7 +17,6 @@
 package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -31,9 +30,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
@@ -46,7 +45,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SuggestionDismissControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -66,8 +65,7 @@ public class SuggestionDismissControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
 
         when(mRecyclerView.getResources().getDimension(anyInt())).thenReturn(50F);
 

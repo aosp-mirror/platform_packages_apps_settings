@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppPickerFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -67,7 +67,7 @@ public class DefaultAppPickerFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = spy(new TestFragment());
 
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);

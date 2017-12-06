@@ -53,7 +53,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDeviceDetailsFragmentTest {
     private BluetoothDeviceDetailsFragment mFragment;
     private Context mContext;
@@ -68,7 +68,7 @@ public class BluetoothDeviceDetailsFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
 
         String deviceAddress = "55:66:77:88:99:AA";
         mFragment = spy(BluetoothDeviceDetailsFragment.newInstance(deviceAddress));

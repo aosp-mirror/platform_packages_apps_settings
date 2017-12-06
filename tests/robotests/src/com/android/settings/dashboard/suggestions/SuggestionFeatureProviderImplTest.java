@@ -68,7 +68,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O, shadows = {
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
         ShadowSecureSettings.class,
         SettingsShadowResources.class,
         SettingsShadowSystemProperties.class
@@ -98,8 +98,7 @@ public class SuggestionFeatureProviderImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         // Explicit casting to object due to MockitoCast bug
         when((Object) mContext.getSystemService(FingerprintManager.class))

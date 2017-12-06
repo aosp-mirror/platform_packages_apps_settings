@@ -52,7 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothScanAnomalyDetectorTest {
     private static final String TARGET_PACKAGE_NAME = "com.android.app";
     private static final int ANOMALY_UID = 111;

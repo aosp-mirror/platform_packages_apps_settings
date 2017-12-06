@@ -15,6 +15,8 @@
  */
 package com.android.settings.location;
 
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -43,7 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationModePreferenceControllerTest {
 
     @Mock
@@ -70,6 +72,17 @@ public class LocationModePreferenceControllerTest {
         mController = new LocationModePreferenceController(mContext, mFragment, mLifecycle);
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void locationModePreference_ifXmlSetToFalse_shouldNotBeAvailable() {
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    public void locationModePreference_ifXmlSetToTrue_shouldBeAvailable() {
+        assertTrue(mController.isAvailable());
     }
 
     @Test

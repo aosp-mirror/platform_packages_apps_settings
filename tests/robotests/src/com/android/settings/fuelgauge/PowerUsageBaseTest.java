@@ -23,7 +23,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -47,7 +46,7 @@ import java.util.List;
  * Unit tests for {@link PowerUsageBase}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = ShadowDashboardFragment.class)
 public class PowerUsageBaseTest {
     @Mock

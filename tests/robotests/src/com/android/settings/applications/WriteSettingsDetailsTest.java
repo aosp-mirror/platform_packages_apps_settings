@@ -23,24 +23,19 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WriteSettingsDetailsTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
     private WriteSettingsDetails mFragment;
@@ -48,8 +43,8 @@ public class WriteSettingsDetailsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = new WriteSettingsDetails();
     }
 

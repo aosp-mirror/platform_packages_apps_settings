@@ -18,7 +18,6 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -28,14 +27,12 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -54,7 +51,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -64,19 +60,14 @@ import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.List;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
         })
 public class SearchFragmentTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private SearchResultLoader mSearchResultLoader;
     @Mock
@@ -92,7 +83,7 @@ public class SearchFragmentTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @After

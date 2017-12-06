@@ -23,11 +23,6 @@ import android.os.Build;
  */
 public class TestConfig {
 
-    /**
-     * @deprecated New tests should use {@link #SDK_VERSION_O}
-     */
-    @Deprecated
-    public static final int SDK_VERSION = 23;
-    public static final int SDK_VERSION_O = Build.VERSION_CODES.O;
+    public static final int SDK_VERSION = Build.VERSION_CODES.O;
     public static final String MANIFEST_PATH = "packages/apps/Settings/AndroidManifest.xml";
 }

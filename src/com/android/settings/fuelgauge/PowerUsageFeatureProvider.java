@@ -115,4 +115,9 @@ public interface PowerUsageFeatureProvider {
      * enabled. This string notifies users that the estimate is using enhanced prediction.
      */
     String getAdvancedUsageScreenInfoString();
+
+    /**
+     * Checks whether to display the battery v2.
+     */
+    boolean isBatteryV2Enabled();
 }

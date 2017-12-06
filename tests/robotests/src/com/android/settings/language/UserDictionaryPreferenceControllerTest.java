@@ -39,7 +39,7 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.TreeSet;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserDictionaryPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -50,7 +50,7 @@ public class UserDictionaryPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mController = new TestController(mContext);
         mPreference = new Preference(ShadowApplication.getInstance().getApplicationContext());
     }

@@ -17,6 +17,16 @@
 
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -35,7 +45,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -51,23 +60,10 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StaticSearchResultFutureTaskTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mMockContext;
     @Mock
     private SiteMapManager mSiteMapManager;
     @Mock
@@ -86,7 +82,7 @@ public class StaticSearchResultFutureTaskTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mFeatureFactory = FakeFeatureFactory.setupForTest(mMockContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.searchFeatureProvider.getExecutorService()).thenReturn(mService);
         when(mFeatureFactory.searchFeatureProvider.getSiteMapManager())
                 .thenReturn(mSiteMapManager);

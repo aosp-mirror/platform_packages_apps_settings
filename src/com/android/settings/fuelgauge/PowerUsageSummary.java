@@ -251,7 +251,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY;
+        return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY_V2;
     }
 
     @Override

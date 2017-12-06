@@ -49,7 +49,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ImeiInfoDialogControllerTest {
 
     private static final String PRL_VERSION = "some_prl_version";
@@ -108,6 +108,17 @@ public class ImeiInfoDialogControllerTest {
         verify(mDialog).setText(ID_MEID_NUMBER_VALUE, MEID_NUMBER);
         verify(mDialog).setText(ID_MIN_NUMBER_VALUE, MIN_NUMBER);
         verify(mDialog).setText(ID_PRL_VERSION_VALUE, PRL_VERSION);
+        verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
+    }
+
+    @Test
+    public void populateImeiInfo_cdmaSimDisabled_shouldRemoveImeiInfoAndSetMinToEmpty() {
+        ReflectionHelpers.setField(mController, "mSubscriptionInfo", null);
+        when(mTelephonyManager.getPhoneType()).thenReturn(TelephonyManager.PHONE_TYPE_CDMA);
+
+        mController.populateImeiInfo();
+
+        verify(mDialog).setText(ID_MIN_NUMBER_VALUE, "");
         verify(mDialog).removeViewFromScreen(ID_GSM_SETTINGS);
     }
 

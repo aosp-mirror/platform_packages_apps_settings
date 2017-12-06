@@ -64,6 +64,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
         return controllers;
     }
 

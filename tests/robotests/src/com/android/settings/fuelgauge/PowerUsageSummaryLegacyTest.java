@@ -86,12 +86,12 @@ import java.util.List;
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
         })
-public class PowerUsageSummaryTest {
+public class PowerUsageSummaryLegacyTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String STUB_STRING = "stub_string";
     private static final int UID = 123;
@@ -175,8 +175,7 @@ public class PowerUsageSummaryTest {
         MockitoAnnotations.initMocks(this);
 
         mRealContext = RuntimeEnvironment.application;
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mContext.getSystemService(Context.POWER_SERVICE)).thenReturn(mPowerManager);
 
         mPreference = new PowerGaugePreference(mRealContext);
@@ -543,7 +542,7 @@ public class PowerUsageSummaryTest {
         verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
     }
 
-    public static class TestFragment extends PowerUsageSummary {
+    public static class TestFragment extends PowerUsageSummaryLegacy {
 
         private Context mContext;
         private boolean mStartActivityCalled;

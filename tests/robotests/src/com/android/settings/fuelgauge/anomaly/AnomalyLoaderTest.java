@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION
 )
 public class AnomalyLoaderTest {
     private static final String PACKAGE_NAME = "com.android.settings";
@@ -81,7 +81,7 @@ public class AnomalyLoaderTest {
     public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
 
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         doReturn(true).when(mAnomalyDetectionPolicy).isAnomalyDetectorEnabled(anyInt());
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
         when(mContext.getPackageManager().getPackageUid(anyString(), anyInt())).thenReturn(UID);

@@ -17,7 +17,6 @@
 package com.android.settings.gestures;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
@@ -45,7 +44,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
+    sdk = TestConfig.SDK_VERSION,
     shadows = ShadowSecureSettings.class
 )
 public class AssistGestureSettingsPreferenceControllerTest {
@@ -60,8 +59,7 @@ public class AssistGestureSettingsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFactory = FakeFeatureFactory.setupForTest();
         mController = new AssistGestureSettingsPreferenceController(mContext, null, KEY_ASSIST,
                 false);
     }

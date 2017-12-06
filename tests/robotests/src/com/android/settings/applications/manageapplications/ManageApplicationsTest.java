@@ -73,7 +73,7 @@ import java.util.ArrayList;
 @RunWith(SettingsRobolectricTestRunner.class)
 // TODO: Consider making the shadow class set global using a robolectric.properties file.
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowTheme.class,

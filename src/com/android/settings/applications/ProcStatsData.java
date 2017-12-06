@@ -26,6 +26,7 @@ import android.os.SystemClock;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.Log;
+import android.util.LongSparseArray;
 import android.util.SparseArray;
 
 import com.android.internal.app.ProcessMap;
@@ -270,10 +271,10 @@ public class ProcStatsData {
 
         final ProcessMap<ProcStatsEntry> entriesMap = new ProcessMap<ProcStatsEntry>();
         for (int ipkg = 0, N = mStats.mPackages.getMap().size(); ipkg < N; ipkg++) {
-            final SparseArray<SparseArray<ProcessStats.PackageState>> pkgUids = mStats.mPackages
+            final SparseArray<LongSparseArray<ProcessStats.PackageState>> pkgUids = mStats.mPackages
                     .getMap().valueAt(ipkg);
             for (int iu = 0; iu < pkgUids.size(); iu++) {
-                final SparseArray<ProcessStats.PackageState> vpkgs = pkgUids.valueAt(iu);
+                final LongSparseArray<ProcessStats.PackageState> vpkgs = pkgUids.valueAt(iu);
                 for (int iv = 0; iv < vpkgs.size(); iv++) {
                     final ProcessStats.PackageState st = vpkgs.valueAt(iv);
                     for (int iproc = 0; iproc < st.mProcesses.size(); iproc++) {
@@ -311,10 +312,10 @@ public class ProcStatsData {
 
         // Add in service info.
         for (int ip = 0, N = mStats.mPackages.getMap().size(); ip < N; ip++) {
-            SparseArray<SparseArray<ProcessStats.PackageState>> uids = mStats.mPackages.getMap()
+            SparseArray<LongSparseArray<ProcessStats.PackageState>> uids = mStats.mPackages.getMap()
                     .valueAt(ip);
             for (int iu = 0; iu < uids.size(); iu++) {
-                SparseArray<ProcessStats.PackageState> vpkgs = uids.valueAt(iu);
+                LongSparseArray<ProcessStats.PackageState> vpkgs = uids.valueAt(iu);
                 for (int iv = 0; iv < vpkgs.size(); iv++) {
                     ProcessStats.PackageState ps = vpkgs.valueAt(iv);
                     for (int is = 0, NS = ps.mServices.size(); is < NS; is++) {

@@ -16,6 +16,10 @@
 
 package com.android.settings;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -25,30 +29,22 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceAdminAddTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     private DeviceAdminAdd mDeviceAdminAdd;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mDeviceAdminAdd = Robolectric.buildActivity(DeviceAdminAdd.class).get();
     }
 

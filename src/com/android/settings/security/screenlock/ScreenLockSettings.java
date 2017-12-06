@@ -46,7 +46,7 @@ public class ScreenLockSettings extends DashboardFragment
 
     @Override
     public int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.SECURITY;
+        return MetricsProto.MetricsEvent.SCREEN_LOCK_SETTINGS;
     }
 
     @Override

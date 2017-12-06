@@ -43,11 +43,11 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedConnectedDeviceDashboardFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    Context mContext;
+    private Context mContext;
 
     @Mock
     private PackageManager mManager;
@@ -75,8 +75,7 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
 
         mFragment = new AdvancedConnectedDeviceDashboardFragment();

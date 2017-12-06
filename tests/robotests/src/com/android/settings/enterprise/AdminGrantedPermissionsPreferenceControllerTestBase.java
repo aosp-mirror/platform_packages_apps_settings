@@ -58,8 +58,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = createController(true /* async */);
     }
 
@@ -69,9 +68,10 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
                 ((ApplicationFeatureProvider.NumberOfAppsCallback)
                         invocation.getArguments()[2]).onNumberOfAppsResult(number);
                 return null;
-            }}).when(mFeatureFactory.applicationFeatureProvider)
-                    .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
-                            eq(async), anyObject());
+            }
+        }).when(mFeatureFactory.applicationFeatureProvider)
+                .calculateNumberOfAppsWithAdminGrantedPermissions(eq(mPermissions),
+                        eq(async), anyObject());
     }
 
     @Test

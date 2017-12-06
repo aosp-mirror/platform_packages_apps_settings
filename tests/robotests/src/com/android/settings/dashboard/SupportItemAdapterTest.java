@@ -49,7 +49,7 @@ import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SupportItemAdapterTest {
     private static final String ACCOUNT_TYPE = "com.google";
     private final Account USER_1 = new Account("user1", ACCOUNT_TYPE);

@@ -74,7 +74,7 @@ import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = ShadowUserManager.class)
 public class DashboardFeatureProviderImplTest {
 
@@ -98,8 +98,7 @@ public class DashboardFeatureProviderImplTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
                 new ResolveInfo());
-        FakeFeatureFactory.setupForTest(mActivity);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mImpl = new DashboardFeatureProviderImpl(mContext);
     }
 

@@ -41,7 +41,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeCallsTest {
     private ZenModeCallsSettings mCalls;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -59,7 +59,7 @@ public class ZenModeCallsTest {
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mActivity.getSystemService(Context.NOTIFICATION_SERVICE))
                 .thenReturn(mNotificationManager);
-        FakeFeatureFactory.setupForTest(mActivity);
+        FakeFeatureFactory.setupForTest();
 
         mCalls = new ZenModeCallsSettings();
         mCalls.onAttach((Context)mActivity);

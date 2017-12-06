@@ -38,7 +38,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link AlwaysOnVpnManagedProfilePreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AlwaysOnVpnManagedProfilePreferenceControllerTest {
 
     private static final String KEY_ALWAYS_ON_VPN_MANAGED_PROFILE = "always_on_vpn_managed_profile";
@@ -52,8 +52,7 @@ public final class AlwaysOnVpnManagedProfilePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new AlwaysOnVpnManagedProfilePreferenceController(mContext);
     }
 

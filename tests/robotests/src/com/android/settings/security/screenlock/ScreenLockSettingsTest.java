@@ -36,7 +36,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ScreenLockSettingsTest {
 
     private ScreenLockSettings mSettings;
@@ -48,7 +48,8 @@ public class ScreenLockSettingsTest {
 
     @Test
     public void verifyConstants() {
-        assertThat(mSettings.getMetricsCategory()).isEqualTo(MetricsProto.MetricsEvent.SECURITY);
+        assertThat(mSettings.getMetricsCategory())
+                .isEqualTo(MetricsProto.MetricsEvent.SCREEN_LOCK_SETTINGS);
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.screen_lock_settings);
     }
 

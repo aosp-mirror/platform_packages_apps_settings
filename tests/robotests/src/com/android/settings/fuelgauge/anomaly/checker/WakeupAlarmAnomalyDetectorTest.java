@@ -25,7 +25,6 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.BatteryStats;
 import android.os.Build;
 import android.text.format.DateUtils;
@@ -56,7 +55,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WakeupAlarmAnomalyDetectorTest {
     private static final String TARGET_PACKAGE_NAME = "com.android.target";
     private static final String ANOMALY_PACKAGE_NAME = "com.android.anomaly";

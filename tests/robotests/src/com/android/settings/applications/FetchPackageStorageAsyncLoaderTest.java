@@ -44,7 +44,7 @@ import org.robolectric.annotation.Config;
 import java.io.IOException;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FetchPackageStorageAsyncLoaderTest {
     private static final String PACKAGE_NAME = "com.test.package";
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

@@ -52,7 +52,7 @@ import java.util.List;
  * Tests for {@link EnterpriseSetDefaultAppsPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";
@@ -67,8 +67,7 @@ public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new EnterpriseSetDefaultAppsPreferenceController(mContext);
     }
 

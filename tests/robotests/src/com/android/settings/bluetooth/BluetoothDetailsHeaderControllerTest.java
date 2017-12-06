@@ -20,17 +20,16 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -45,8 +44,10 @@ import org.mockito.Mock;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
-        shadows={SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class,
+
+@Config(manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION,
+        shadows = {SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class,
                 SettingsShadowResources.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsHeaderController mController;
@@ -58,7 +59,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     @Override
     public void setUp() {
         super.setUp();
-        FakeFeatureFactory.setupForTest(spy(mContext));
+        FakeFeatureFactory.setupForTest();
         ShadowEntityHeaderController.setUseMock(mHeaderController);
         mController = new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice,
                 mLifecycle);

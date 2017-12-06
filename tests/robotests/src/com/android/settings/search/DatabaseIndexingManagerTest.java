@@ -19,10 +19,10 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -70,10 +70,8 @@ import java.util.Set;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
-    shadows = {
-        ShadowRunnableAsyncTask.class,
-    }
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowRunnableAsyncTask.class,}
 )
 public class DatabaseIndexingManagerTest {
     private final String localeStr = "en_US";
@@ -128,7 +126,7 @@ public class DatabaseIndexingManagerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
         doReturn(FAKE_PROVIDER_LIST).when(mPackageManager)
                 .queryIntentContentProviders(any(Intent.class), anyInt());
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
     }
 
     @After
@@ -240,27 +238,6 @@ public class DatabaseIndexingManagerTest {
         mManager.performIndexing();
 
         verify(mManager).updateDatabase(data, true /* isFullIndex */);
-    }
-
-    @Test
-    public void testPerformIndexing_onPackageChange_fullIndex() {
-        final List<ResolveInfo> providers = getDummyResolveInfo();
-        final String buildNumber = Build.FINGERPRINT;
-        final String locale = Locale.getDefault().toString();
-        skipFullIndex(providers);
-
-        // This snapshot is already indexed. Should return false
-        assertThat(mManager.isFullIndex(
-                mContext, locale, buildNumber,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
-                .isFalse();
-
-        // Change provider version number, this should trigger full index.
-        providers.get(0).providerInfo.applicationInfo.versionCode++;
-
-        assertThat(mManager.isFullIndex(mContext, locale, buildNumber,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
-                .isTrue();
     }
 
     @Test
@@ -412,13 +389,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     // Util functions
-
-    private void skipFullIndex(List<ResolveInfo> providers) {
-        IndexDatabaseHelper.setLocaleIndexed(mContext, Locale.getDefault().toString());
-        IndexDatabaseHelper.setBuildIndexed(mContext, Build.FINGERPRINT);
-        IndexDatabaseHelper.setProvidersIndexed(mContext,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers));
-    }
 
     private SearchIndexableRaw getFakeRaw() {
         return getFakeRaw(localeStr);

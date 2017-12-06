@@ -17,7 +17,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -48,7 +47,7 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
     manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION_O,
+    sdk = TestConfig.SDK_VERSION,
     shadows = ShadowSystemSettings.class
 )
 public class AutoRotatePreferenceControllerTest {
@@ -65,7 +64,7 @@ public class AutoRotatePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mContext);
+        FakeFeatureFactory.setupForTest();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mPreference = new SwitchPreference(RuntimeEnvironment.application);

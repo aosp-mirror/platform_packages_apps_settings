@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -45,14 +44,14 @@ import android.support.v7.widget.RecyclerView;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.R;
+import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
@@ -78,7 +77,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {ShadowEntityHeaderController.class, ShadowActivityManager.class})
 public class AdvancedPowerUsageDetailTest {
     private static final String APP_LABEL = "app label";
@@ -148,8 +147,7 @@ public class AdvancedPowerUsageDetailTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        FakeFeatureFactory.setupForTest(mContext);
-        mFeatureFactory = (FakeFeatureFactory) FakeFeatureFactory.getFactory(mContext);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mFragment = spy(new AdvancedPowerUsageDetail());
         doReturn(mContext).when(mFragment).getContext();
@@ -387,7 +385,7 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
-            PackageManager.NameNotFoundException{
+            PackageManager.NameNotFoundException {
         doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);

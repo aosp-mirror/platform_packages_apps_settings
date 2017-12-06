@@ -57,7 +57,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link SetNewPasswordController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class SetNewPasswordControllerTest {
     private static final int CURRENT_USER_ID = 101;
     private static final long FINGERPRINT_CHALLENGE = -9876512313131L;

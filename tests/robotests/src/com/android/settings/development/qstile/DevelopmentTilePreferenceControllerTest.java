@@ -45,7 +45,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DevelopmentTilePreferenceControllerTest {
 
     @Mock
