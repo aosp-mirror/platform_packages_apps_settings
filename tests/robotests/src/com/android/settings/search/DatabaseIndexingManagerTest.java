@@ -243,27 +243,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     @Test
-    public void testPerformIndexing_onPackageChange_fullIndex() {
-        final List<ResolveInfo> providers = getDummyResolveInfo();
-        final String buildNumber = Build.FINGERPRINT;
-        final String locale = Locale.getDefault().toString();
-        skipFullIndex(providers);
-
-        // This snapshot is already indexed. Should return false
-        assertThat(mManager.isFullIndex(
-                mContext, locale, buildNumber,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
-                .isFalse();
-
-        // Change provider version number, this should trigger full index.
-        providers.get(0).providerInfo.applicationInfo.versionCode++;
-
-        assertThat(mManager.isFullIndex(mContext, locale, buildNumber,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers)))
-                .isTrue();
-    }
-
-    @Test
     public void testPerformIndexing_onOta_buildNumberIsCached() {
         mManager.performIndexing();
 
@@ -412,13 +391,6 @@ public class DatabaseIndexingManagerTest {
     }
 
     // Util functions
-
-    private void skipFullIndex(List<ResolveInfo> providers) {
-        IndexDatabaseHelper.setLocaleIndexed(mContext, Locale.getDefault().toString());
-        IndexDatabaseHelper.setBuildIndexed(mContext, Build.FINGERPRINT);
-        IndexDatabaseHelper.setProvidersIndexed(mContext,
-                IndexDatabaseHelper.buildProviderVersionedNames(providers));
-    }
 
     private SearchIndexableRaw getFakeRaw() {
         return getFakeRaw(localeStr);
