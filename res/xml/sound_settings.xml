@@ -14,12 +14,15 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-          android:title="@string/sound_settings"
-          android:key="sound_settings"
-          settings:keywords="@string/keywords_sounds">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
+    android:title="@string/sound_settings"
+    android:key="sound_settings"
+    settings:keywords="@string/keywords_sounds">
 
+    <PreferenceCategory
+        android:order="-100">
         <!-- Media volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="media_volume"
@@ -49,7 +52,6 @@
                 android:key="vibrate_when_ringing"
                 android:title="@string/vibrate_when_ringing_title" />
 
-
         <!-- Interruptions -->
         <com.android.settingslib.RestrictedPreference
                 android:key="zen_mode"
@@ -68,27 +70,31 @@
             android:ringtoneType="ringtone"
             settings:allowDividerAbove="true" />
 
-        <!-- Default notification ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="notification_ringtone"
-            android:title="@string/notification_ringtone_title"
-            android:dialogTitle="@string/notification_ringtone_title"
-            android:summary="@string/summary_placeholder"
-            android:ringtoneType="notification" />
+    </PreferenceCategory>
 
-        <!-- Default alarm ringtone -->
-        <com.android.settings.DefaultRingtonePreference
-            android:key="alarm_ringtone"
-            android:title="@string/alarm_ringtone_title"
-            android:dialogTitle="@string/alarm_ringtone_title"
-            android:summary="@string/summary_placeholder"
-            android:persistent="false"
-            android:ringtoneType="alarm" />
+    <!-- Default notification ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="notification_ringtone"
+        android:title="@string/notification_ringtone_title"
+        android:dialogTitle="@string/notification_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:ringtoneType="notification"
+        android:order="-99"/>
 
-        <!-- Other sounds -->
-        <PreferenceCategory
-          android:key="other_sound_preferecence_category"
-          android:title="@string/other_sound_category_preference_title" />
+    <!-- Default alarm ringtone -->
+    <com.android.settings.DefaultRingtonePreference
+        android:key="alarm_ringtone"
+        android:title="@string/alarm_ringtone_title"
+        android:dialogTitle="@string/alarm_ringtone_title"
+        android:summary="@string/summary_placeholder"
+        android:persistent="false"
+        android:ringtoneType="alarm"
+        android:order="-98"/>
+
+    <!-- Other sounds -->
+    <PreferenceCategory
+          android:title="@string/other_sound_category_preference_title"
+          android:order="-50">
 
         <!-- Dial pad tones -->
         <SwitchPreference
@@ -136,21 +142,24 @@
           android:key="emergency_tone"
           android:title="@string/emergency_tone_title"
           android:summary="%s" />
+    </PreferenceCategory>
 
-        <com.android.settingslib.RestrictedPreference
-          android:key="cell_broadcast_settings"
-          android:title="@string/cell_broadcast_settings"
-          settings:useAdminDisabledSummary="true"
-          settings:allowDividerAbove="true" >
-                <intent
-                  android:action="android.intent.action.MAIN"
-                  android:targetPackage="com.android.cellbroadcastreceiver"
-                  android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
-        </com.android.settingslib.RestrictedPreference>
+    <com.android.settingslib.RestrictedPreference
+      android:key="cell_broadcast_settings"
+      android:title="@string/cell_broadcast_settings"
+      settings:useAdminDisabledSummary="true"
+      settings:allowDividerAbove="true"
+      android:order="-1">
+            <intent
+              android:action="android.intent.action.MAIN"
+              android:targetPackage="com.android.cellbroadcastreceiver"
+              android:targetClass="com.android.cellbroadcastreceiver.CellBroadcastSettings" />
+    </com.android.settingslib.RestrictedPreference>
 
-        <com.android.settings.WorkOnlyCategory
-            android:key="sound_work_settings_section"
-            android:title="@string/sound_work_settings">
+    <com.android.settings.WorkOnlyCategory
+        android:key="sound_work_settings_section"
+        android:title="@string/sound_work_settings"
+        android:order="100">
 
                 <!-- Use the same sounds of the work profile -->
                 <SwitchPreference
@@ -184,5 +193,5 @@
                     android:ringtoneType="alarm"
                     android:dependency="work_use_personal_sounds" />
 
-        </com.android.settings.WorkOnlyCategory>
+    </com.android.settings.WorkOnlyCategory>
 </PreferenceScreen>

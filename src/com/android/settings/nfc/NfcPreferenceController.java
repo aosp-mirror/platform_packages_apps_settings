@@ -23,12 +23,10 @@ import android.nfc.NfcManager;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
-import com.android.settings.network.AirplaneModePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -36,8 +34,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.List;
 
-public class NfcPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume, OnPause {
+public class NfcPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     public static final String KEY_TOGGLE_NFC = "toggle_nfc";
     public static final String KEY_ANDROID_BEAM_SETTINGS = "android_beam_settings";

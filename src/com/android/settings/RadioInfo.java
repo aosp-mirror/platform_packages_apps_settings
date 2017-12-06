@@ -173,6 +173,7 @@ public class RadioInfo extends Activity {
 
     private TextView mDeviceId; //DeviceId is the IMEI in GSM and the MEID in CDMA
     private TextView number;
+    private TextView mSubscriberId;
     private TextView callState;
     private TextView operatorName;
     private TextView roamingState;
@@ -371,8 +372,9 @@ public class RadioInfo extends Activity {
         mImsManager = ImsManager.getInstance(getApplicationContext(),
                 SubscriptionManager.getDefaultVoicePhoneId());
 
-        mDeviceId= (TextView) findViewById(R.id.imei);
+        mDeviceId = (TextView) findViewById(R.id.imei);
         number = (TextView) findViewById(R.id.number);
+        mSubscriberId = (TextView) findViewById(R.id.imsi);
         callState = (TextView) findViewById(R.id.call);
         operatorName = (TextView) findViewById(R.id.operator);
         roamingState = (TextView) findViewById(R.id.roaming);
@@ -895,6 +897,10 @@ public class RadioInfo extends Activity {
         s = phone.getDeviceId();
         if (s == null) s = r.getString(R.string.radioInfo_unknown);
         mDeviceId.setText(s);
+
+        s = phone.getSubscriberId();
+        if (s == null) s = r.getString(R.string.radioInfo_unknown);
+        mSubscriberId.setText(s);
 
         //FIXME: Replace with a TelephonyManager call
         s = phone.getLine1Number();

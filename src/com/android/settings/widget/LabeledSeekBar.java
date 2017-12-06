@@ -201,6 +201,7 @@ public class LabeledSeekBar extends SeekBar {
             int posBase = Math.max(0,
                     ((int) x - LabeledSeekBar.this.getPaddingStart()) / getHalfVirtualViewWidth());
             posBase = (posBase + 1) / 2;
+            posBase = Math.min(posBase, LabeledSeekBar.this.getMax());
             return mIsLayoutRtl ? LabeledSeekBar.this.getMax() - posBase : posBase;
         }
 

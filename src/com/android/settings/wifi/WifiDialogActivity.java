@@ -55,7 +55,7 @@ public class WifiDialogActivity extends Activity implements WifiDialog.WifiDialo
             accessPoint = new AccessPoint(this, accessPointState);
         }
 
-        WifiDialog dialog = new WifiDialog(this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
+        WifiDialog dialog = WifiDialog.createModal(this, this, accessPoint, WifiConfigUiBase.MODE_CONNECT);
         dialog.show();
         dialog.setOnDismissListener(this);
     }

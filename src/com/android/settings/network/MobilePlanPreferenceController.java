@@ -31,7 +31,8 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
@@ -45,8 +46,8 @@ import static android.os.UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS;
 import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
 
 
-public class MobilePlanPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnCreate, OnSaveInstanceState {
+public class MobilePlanPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
     public interface MobilePlanPreferenceHost {
         void showMobilePlanMessageDialog();

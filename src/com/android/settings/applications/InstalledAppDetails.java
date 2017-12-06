@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2007 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -15,6 +15,8 @@
  */
 
 package com.android.settings.applications;
+
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.Manifest.permission;
 import android.app.Activity;
@@ -55,6 +57,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.BidiFormatter;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Formatter;
@@ -69,7 +72,6 @@ import android.widget.Button;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.AppHeader;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
@@ -83,7 +85,8 @@ import com.android.settings.applications.defaultapps.DefaultSmsPreferenceControl
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
-import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.datausage.DataUsageUtils;
+import com.android.settings.development.DevelopmentSettingsEnabler;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;
 import com.android.settings.fuelgauge.BatteryStatsHelperLoader;
@@ -109,8 +112,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 /**
  * Activity to display application information from Settings. This activity presents
@@ -145,7 +146,7 @@ public class InstalledAppDetails extends AppInfoBase
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
-
+    private static final String EXTRA_HIDE_INFO_BUTTON = "hideInfoButton";
     private static final String KEY_HEADER = "header_view";
     private static final String KEY_INSTANT_APP_BUTTONS = "instant_app_buttons";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
@@ -177,7 +178,7 @@ public class InstalledAppDetails extends AppInfoBase
     private Preference mMemoryPreference;
     private Preference mVersionPreference;
     private AppDomainsPreference mInstantAppDomainsPreference;
-
+    private DevelopmentSettingsEnabler mDevelopmentSettingsEnabler;
     private boolean mDisableAfterUninstall;
 
     // Used for updating notification preference.
@@ -273,7 +274,7 @@ public class InstalledAppDetails extends AppInfoBase
         // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
             enabled = false;
         }
 
@@ -348,23 +349,6 @@ public class InstalledAppDetails extends AppInfoBase
         return enabled;
     }
 
-    /** Returns if the supplied package is device owner or profile owner of at least one user */
-    private boolean isProfileOrDeviceOwner(String packageName) {
-        List<UserInfo> userInfos = mUserManager.getUsers();
-        DevicePolicyManager dpm = (DevicePolicyManager)
-                getContext().getSystemService(Context.DEVICE_POLICY_SERVICE);
-        if (dpm.isDeviceOwnerAppOnAnyUser(packageName)) {
-            return true;
-        }
-        for (UserInfo userInfo : userInfos) {
-            ComponentName cn = dpm.getProfileOwnerAsUser(userInfo.id);
-            if (cn != null && cn.getPackageName().equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle icicle) {
@@ -377,6 +361,7 @@ public class InstalledAppDetails extends AppInfoBase
 
         setHasOptionsMenu(true);
         addPreferencesFromResource(R.xml.installed_app_details);
+
         addDynamicPrefs();
         if (Utils.isBandwidthControlEnabled()) {
             INetworkStatsService statsService = INetworkStatsService.Stub.asInterface(
@@ -390,6 +375,8 @@ public class InstalledAppDetails extends AppInfoBase
             removePreference(KEY_DATA);
         }
         mBatteryUtils = BatteryUtils.getInstance(getContext());
+        mDevelopmentSettingsEnabler = new DevelopmentSettingsEnabler(
+                activity, null /* lifecycle */);
     }
 
     @Override
@@ -413,7 +400,9 @@ public class InstalledAppDetails extends AppInfoBase
             loaderManager.restartLoader(LOADER_STORAGE, Bundle.EMPTY, this);
         }
         restartBatteryStatsLoader();
-        new MemoryUpdater().execute();
+        if (mDevelopmentSettingsEnabler.getLastEnabledState()) {
+            new MemoryUpdater().execute();
+        }
         updateDynamicPrefs();
     }
 
@@ -445,6 +434,7 @@ public class InstalledAppDetails extends AppInfoBase
         EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
                 .setRecyclerView(getListView(), getLifecycle())
                 .setPackageName(mPackageName)
+                .setHasAppInfoLink(false)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .styleActionBar(activity)
@@ -466,6 +456,7 @@ public class InstalledAppDetails extends AppInfoBase
         mBatteryPreference.setOnPreferenceClickListener(this);
         mMemoryPreference = findPreference(KEY_MEMORY);
         mMemoryPreference.setOnPreferenceClickListener(this);
+        mMemoryPreference.setVisible(mDevelopmentSettingsEnabler.getLastEnabledState());
         mVersionPreference = findPreference(KEY_VERSION);
         mInstantAppDomainsPreference =
                 (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
@@ -626,7 +617,8 @@ public class InstalledAppDetails extends AppInfoBase
                 .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
-        mVersionPreference.setSummary(getString(R.string.version_text, pkgInfo.versionName));
+        mVersionPreference.setSummary(getString(R.string.version_text,
+                BidiFormatter.getInstance().unicodeWrap(pkgInfo.versionName)));
     }
 
     @VisibleForTesting
@@ -935,7 +927,7 @@ public class InstalledAppDetails extends AppInfoBase
         // start new activity to manage app permissions
         Intent intent = new Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS);
         intent.putExtra(Intent.EXTRA_PACKAGE_NAME, mAppEntry.info.packageName);
-        intent.putExtra(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
+        intent.putExtra(EXTRA_HIDE_INFO_BUTTON, true);
         try {
             getActivity().startActivityForResult(intent, SUB_INFO_FRAGMENT);
         } catch (ActivityNotFoundException e) {
@@ -953,7 +945,6 @@ public class InstalledAppDetails extends AppInfoBase
         Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
-        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, true);
 
         SettingsActivity sa = (SettingsActivity) caller.getActivity();
         sa.startPreferencePanel(caller, fragment.getName(), args, -1, title, caller,
@@ -1072,27 +1063,27 @@ public class InstalledAppDetails extends AppInfoBase
         final Context context = getContext();
         if (DefaultHomePreferenceController.hasHomePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_home", R.string.home_app,
+                    DefaultAppSettings.class, "default_home", R.string.home_app,
                     R.string.configure_apps));
         }
         if (DefaultBrowserPreferenceController.hasBrowserPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_browser", R.string.default_browser_title,
+                    DefaultAppSettings.class, "default_browser", R.string.default_browser_title,
                     R.string.configure_apps));
         }
         if (DefaultPhonePreferenceController.hasPhonePreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_phone_app", R.string.default_phone_title,
+                    DefaultAppSettings.class, "default_phone_app", R.string.default_phone_title,
                     R.string.configure_apps));
         }
         if (DefaultEmergencyPreferenceController.hasEmergencyPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_emergency_app",
+                    DefaultAppSettings.class, "default_emergency_app",
                     R.string.default_emergency_app, R.string.configure_apps));
         }
         if (DefaultSmsPreferenceController.hasSmsPreference(mPackageName, context)) {
             screen.addPreference(new ShortcutPreference(getPrefContext(),
-                    AdvancedAppSettings.class, "default_sms_app", R.string.sms_application_title,
+                    DefaultAppSettings.class, "default_sms_app", R.string.sms_application_title,
                     R.string.configure_apps));
         }
 
@@ -1298,7 +1289,7 @@ public class InstalledAppDetails extends AppInfoBase
         if (DataUsageList.hasReadyMobileRadio(context)) {
             return NetworkTemplate.buildTemplateMobileWildcard();
         }
-        if (DataUsageSummary.hasWifiRadio(context)) {
+        if (DataUsageUtils.hasWifiRadio(context)) {
             return NetworkTemplate.buildTemplateWifiWildcard();
         }
         return NetworkTemplate.buildTemplateEthernet();

@@ -14,14 +14,15 @@
 package com.android.settings.enterprise;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ManageDeviceAdminPreferenceController extends PreferenceController {
+public class ManageDeviceAdminPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_MANAGE_DEVICE_ADMIN = "manage_device_admin";
     private final EnterprisePrivacyFeatureProvider mFeatureProvider;

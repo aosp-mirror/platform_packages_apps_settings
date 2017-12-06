@@ -25,7 +25,6 @@
     <style name="GlifTheme" parent="SuwThemeGlif">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
-        <item name="android:colorPrimary">@color/suw_color_accent_dark</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -46,7 +45,6 @@
     <style name="GlifTheme.Light" parent="SuwThemeGlif.Light">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
-        <item name="android:colorPrimary">@color/suw_color_accent_light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -66,7 +64,6 @@
     <style name="GlifV2Theme" parent="SuwThemeGlifV2">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
-        <item name="android:colorPrimary">@color/suw_color_accent_dark</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -87,7 +84,6 @@
     <style name="GlifV2Theme.Light" parent="SuwThemeGlifV2.Light">
         <!-- For all Alert Dialogs -->
         <item name="android:alertDialogTheme">@style/ThemeOverlay.AlertDialog</item>
-        <item name="android:colorPrimary">@color/suw_color_accent_light</item>
         <item name="android:windowBackground">?android:attr/colorBackground</item>
         <item name="*android:preferencePanelStyle">@*android:style/PreferencePanel.Dialog</item>
         <item name="fingerprint_layout_theme">@style/FingerprintLayoutTheme</item>
@@ -122,19 +118,10 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Activity</item>
     </style>
 
-    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
-        <!-- Parent path frameworks/support/v14/preference/res/values/themes.xml -->
-        <item name="android:scrollbars">vertical</item>
+    <style name="PreferenceTheme" parent="@style/PreferenceThemeOverlay.SettingsBase">
+        <item name="preferenceFragmentStyle">@style/SettingsPreferenceFragmentStyle</item>
         <item name="apnPreferenceStyle">@style/ApnPreference</item>
-        <item name="footerPreferenceStyle">@style/FooterPreference</item>
-        <item name="dialogPreferenceStyle">@style/SettingsDialogPreference</item>
-        <item name="dropdownPreferenceStyle">@style/SettingsDropdownPreference</item>
-        <item name="editTextPreferenceStyle">@style/EditTextPreference</item>
-        <item name="preferenceCategoryStyle">@style/SettingsPreferenceCategory</item>
-        <item name="preferenceFragmentStyle">@style/PreferenceFragmentStyle</item>
-        <item name="preferenceStyle">@style/SettingsPreference</item>
         <item name="seekBarPreferenceStyle">@style/SettingsSeekBarPreference</item>
-        <item name="switchPreferenceStyle">@style/SettingsSwitchPreference</item>
     </style>
 
     <style name="PreferenceTheme.SetupWizard" parent="PreferenceTheme">

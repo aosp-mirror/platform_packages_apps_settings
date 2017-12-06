@@ -78,8 +78,8 @@ public class AssistFlashScreenPreferenceControllerTest {
     @Config(shadows = {ShadowSecureSettings.class})
     public void isAvailable_hasAssistantAndAllowDisclosure_shouldReturnTrue() {
         ReflectionHelpers.setField(mController, "mContext", mMockContext);
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT,
-                "com.android.settings/assist");
+        final ContentResolver cr = mContext.getContentResolver();
+        Settings.Secure.putString(cr, Settings.Secure.ASSISTANT, "com.android.settings/assist");
         doReturn(true).when(mController).allowDisablingAssistDisclosure();
 
         assertThat(mController.isAvailable()).isTrue();
@@ -89,8 +89,8 @@ public class AssistFlashScreenPreferenceControllerTest {
     @Config(shadows = {ShadowSecureSettings.class})
     public void isAvailable_hasAssistantAndDisallowDisclosure_shouldReturnTrue() {
         ReflectionHelpers.setField(mController, "mContext", mMockContext);
-        ShadowSecureSettings.putString(null, Settings.Secure.ASSISTANT,
-                "com.android.settings/assist");
+        final ContentResolver cr = mContext.getContentResolver();
+        Settings.Secure.putString(cr, Settings.Secure.ASSISTANT, "com.android.settings/assist");
         doReturn(false).when(mController).allowDisablingAssistDisclosure();
 
         assertThat(mController.isAvailable()).isFalse();
@@ -98,8 +98,7 @@ public class AssistFlashScreenPreferenceControllerTest {
 
     @Test
     public void isAvailable_hasNoAssistant_shouldReturnFalse() {
-        Settings.Secure.putString(mContext.getContentResolver(),
-                Settings.Secure.ASSISTANT, "");
+        Settings.Secure.putString(mContext.getContentResolver(), Settings.Secure.ASSISTANT, "");
 
         assertThat(mController.isAvailable()).isFalse();
     }

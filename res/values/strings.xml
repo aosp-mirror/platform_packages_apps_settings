@@ -387,7 +387,7 @@
     <string name="bluetooth_sap_acceptance_dialog_text"><xliff:g id="device_name">%1$s</xliff:g> wants to access your SIM card. Granting access to the SIM card will disable data connectivity on your device for the duration of the connection. Give access to <xliff:g id="device_name">%2$s?</xliff:g></string>
 
     <!-- Description for bluetooth device name summary [CHAR LIMIT=none] -->
-    <string name="bluetooth_device_name_summary">Visible as \'<xliff:g id="device_name">^1</xliff:g>\' to other devices</string>
+    <string name="bluetooth_device_name_summary">Visible as \u201C<xliff:g id="device_name">^1</xliff:g>\u201D to other devices</string>
 
     <!-- Title for paired device group [CHAR LIMIT=none] -->
     <string name="bluetooth_paired_device_title">Your devices</string>
@@ -462,6 +462,8 @@
     <string name="radio_info_roaming_label">Roaming:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_imei_label">IMEI:</string>
+    <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, DO NOT TRANSLATE. -->
+    <string name="radio_info_imsi_label">IMSI:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
     <string name="radio_info_call_redirect_label">Call Redirect:</string>
     <!-- Radio Info screen. Label for a status item.  Used for diagnostic info screens, precise translation isn't needed -->
@@ -832,6 +834,12 @@
     <string name="security_settings_fingerprint_enroll_introduction_cancel_setup">Skip</string>
     <!-- Button text to continue to the next screen from the introduction (this string variant is used while in setup wizard) [CHAR LIMIT=22] -->
     <string name="security_settings_fingerprint_enroll_introduction_continue_setup">Next</string>
+    <!-- Title of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup. [CHAR LIMIT=30] -->
+    <string name="setup_fingerprint_enroll_skip_title">Skip fingerprint?</string>
+    <!-- Body text of dialog shown when the user tries to skip setting up fingerprint after adding lock screen during initial setup [CHAR LIMIT=NONE] -->
+    <string name="setup_fingerprint_enroll_skip_after_adding_lock_text">Fingerprint setup only takes a minute or two. If you skip this, you can add your fingerprint later in settings.</string>
+    <!-- Title of dialog shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so [CHAR LIMIT=30]-->
+    <string name="lock_screen_intro_skip_title">Skip screen lock?</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_intro_skip_dialog_text_frp" product="tablet">Device protection features won\u2019t be turned on. You won\u2019t be able to prevent others from using this tablet if it\u2019s lost, stolen or reset.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning them of potential consequences of not doing so, including loss of factory reset protection. (device) [CHAR LIMIT=NONE] -->
@@ -917,6 +925,12 @@
 
     <!-- Title shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=50]-->
     <string name="fingerprint_last_delete_title">Remove all fingerprints?</string>
+
+    <!-- Title shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=50]-->
+    <string name="fingerprint_delete_title">Remove \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\'</string>
+
+    <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
+    <string name="fingerprint_delete_message">Do you want to delete this fingerprint?</string>
 
     <!-- Message shown in a dialog which asks the user to confirm when the last fingerprint gets deleted by him. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_last_delete_message">You won\'t be able to use your fingerprints to
@@ -1091,8 +1105,8 @@
     <!--  Title for security picker in setup wizard to choose the unlock method: None/Pattern/PIN/Password (phone) [CHAR LIMIT=22] -->
     <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
 
-    <!-- Title for screen in setup wizard, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
-    <string name="setup_lock_settings_picker_fingerprint_message">For added security, set up a backup screen lock.</string>
+    <!-- Message shown when setting up screen lock, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
+    <string name="lock_settings_picker_fingerprint_added_security_message">For added security, set up a backup screen lock.</string>
 
     <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
     <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
@@ -1210,36 +1224,36 @@
     <!-- Content of the dialog shown when the user removes the device lock pattern [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pattern">"Device protection features will not work without your pattern."</string>
     <!-- Content of the dialog shown when the user removes the device lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Device protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won't be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint">"Device protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin">"Device protection features will not work without your PIN."</string>
     <!-- Content of the dialog shown when the user removes the device lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Device protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won't be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint">"Device protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the device lock password [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_password">"Device protection features will not work without your password."</string>
     <!-- Content of the dialog shown when the user removes the device lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Device protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won't be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint">"Device protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_unknown">"Device protection features will not work without your screen lock."</string>
     <!-- Content of the dialog shown when the user removes the device lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won't be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint">"Device protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this device and you won\'t be able to unlock your phone, authorize purchases, or sign in to apps with them."</string>
 
     <!-- Content of the dialog shown when the user removes the profile lock pattern [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pattern_profile">"Profile protection features will not work without your pattern."</string>
     <!-- Content of the dialog shown when the user removes the profile lock pattern and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile">"Profile protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won't be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pattern_fingerprint_profile">"Profile protection features will not work without your pattern.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the profile lock PIN [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_pin_profile">"Profile protection features will not work without your PIN."</string>
     <!-- Content of the dialog shown when the user removes the profile lock PIN and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile">"Profile protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won't be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_pin_fingerprint_profile">"Profile protection features will not work without your PIN.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the profile lock password [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_password_profile">"Profile protection features will not work without your password."</string>
     <!-- Content of the dialog shown when the user removes the profile lock password and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_password_fingerprint_profile">"Profile protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won't be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_password_fingerprint_profile">"Profile protection features will not work without your password.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
     <!-- Content of the dialog shown when the user removes the profile lock of unknown type [CHAR LIMIT=NONE] -->
     <string name="unlock_disable_frp_warning_content_unknown_profile">"Profile protection features will not work without your screen lock."</string>
     <!-- Content of the dialog shown when the user removes the profile lock of unknown type and the user has fingerprints enrolled [CHAR LIMIT=NONE] -->
-    <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile">"Profile protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won't be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
+    <string name="unlock_disable_frp_warning_content_unknown_fingerprint_profile">"Profile protection features will not work without your screen lock.<xliff:g id="empty_line">\n\n</xliff:g>Your saved fingerprints will also be removed from this profile and you won\'t be able to unlock your profile, authorize purchases, or sign in to apps with them."</string>
 
     <!-- Affirmative action of the dialog shown when the user removes the device lock [CHAR LIMIT=25] -->
     <string name="unlock_disable_frp_warning_ok">Yes, remove</string>
@@ -1366,6 +1380,9 @@
 
     <!-- Label for ChoosePassword/PIN OK button -->
     <string name="lockpassword_cancel_label">Cancel</string>
+
+    <!-- Label for ChoosePassword/PIN Clear button that clears all text entered by the user so far. -->
+    <string name="lockpassword_clear_label">Clear</string>
 
     <!-- Label for LockPatternTutorial Cancel button -->
     <string name="lockpattern_tutorial_cancel_label">Cancel</string>
@@ -1824,11 +1841,11 @@
     <string name="wifi_wps_failed_generic">WPS failed. Please try again in a few minutes.</string>
     <!-- Text displayed when WPS fails due to WEP [CHAR LIMIT=150] -->
     <string name="wifi_wps_failed_wep">The wireless router security setting (WEP) is not supported</string>
-     <!-- Text displayed when WPS fails to TKIP [CHAR LIMIT=150] -->
+    <!-- Text displayed when WPS fails to TKIP [CHAR LIMIT=150] -->
     <string name="wifi_wps_failed_tkip">The wireless router security setting (TKIP) is not supported</string>
-     <!-- Text displayed when WPS fails due to authentication issues [CHAR LIMIT=150] -->
+    <!-- Text displayed when WPS fails due to authentication issues [CHAR LIMIT=150] -->
     <string name="wifi_wps_failed_auth">Authentication failure. Please try again.</string>
-     <!-- Text displayed when WPS fails due to another session [CHAR LIMIT=150] -->
+    <!-- Text displayed when WPS fails due to another session [CHAR LIMIT=150] -->
     <string name="wifi_wps_failed_overlap">Another WPS session was detected. Please try again in a few minutes.</string>
     <!-- Text displayed when WPS fails due to wifi disconnected [CHAR LIMIT=150] -->
     <string name="wifi_wps_failed_wifi_disconnected">Wi\u2011Fi disconnected. WPS setup canceled.</string>
@@ -1908,6 +1925,11 @@
     <!-- Message in WriteWifiConfigToNfcDialog when prompted to enter network password [CHAR_LIMIT=40] -->
     <string name="wifi_wps_nfc_enter_password">Enter your network password</string>
 
+    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=40] -->
+    <string name="wifi_carrier_connect">Carrier Wi\u2011Fi network</string>
+    <!-- Message in dialog when the user tries to connect to a carrier network[CHAR_LIMIT=60] -->
+    <string name="wifi_carrier_content">Connect via <xliff:g id="name">%1%s</xliff:g></string>
+
     <string name="wifi_scan_always_turnon_message">To improve location accuracy and for other purposes, <xliff:g id="app_name">%1$s</xliff:g> wants to turn on network scanning, even when Wi-Fi is off.\n\nAllow this for all apps that want to scan?</string>
     <!-- Message informing the user how to turn off  [CHAR LIMIT=200] -->
     <string name="wifi_scan_always_turnoff_message">To turn this off, go to Advanced in the overflow menu.</string>
@@ -1939,6 +1961,8 @@
     <string name="wifi_failed_connect_message">Failed to connect to network</string>
     <!-- Button label to delete a Wi-Fi network -->
     <string name="wifi_forget">Forget</string>
+    <!-- Button label to modify a Wi-Fi network -->
+    <string name="wifi_modify">Modify</string>
     <!-- Failured notification for forget -->
     <string name="wifi_failed_forget_message">Failed to forget network</string>
     <!-- Button label to save a Wi-Fi network configuration -->
@@ -1965,6 +1989,8 @@
     <string name="wifi_advanced_ip_address_title">IP address</string>
 
     <!-- Wifi Network Details -->
+    <!-- Wifi details title-->
+    <string name="wifi_details_title">Network info</string>
     <!-- Wifi details preference title to display router IP subnet mask -->
     <string name="wifi_details_subnet_mask">Subnet mask</string>
     <!-- Wifi details preference title to display router DNS info -->
@@ -2032,8 +2058,6 @@
     <string name="wifi_p2p_delete_group_message">Forget this group?</string>
 
     <!-- Wifi AP settings-->
-    <!-- Label for Wifi tether checkbox. Toggles Access Point on/off -->
-    <string name="wifi_tether_checkbox_text">Portable Wi\u2011Fi hotspot</string>
     <!-- Label for Wifi tether checkbox. Toggles Access Point on/off  [CHAR LIMIT=30] -->
     <string name="wifi_hotspot_checkbox_text">Wi\u2011Fi hotspot</string>
     <!-- Summary text when turning hotspot off -->
@@ -2047,13 +2071,13 @@
 
     <!-- Wifi hotspot settings -->
     <!-- Label for Wifi hotspot name. -->
-    <string name="wifi_hotspot_name_title">Wi\u2011Fi name</string>
+    <string name="wifi_hotspot_name_title">Hotspot name</string>
     <!-- Summary for Wifi hotspot name when connection is in progress. -->
     <string name="wifi_hotspot_name_summary_connecting">Turning on <xliff:g id="wifi_hotspot_name">%1$s</xliff:g>...</string>
     <!-- Summary for Wifi hotspot name when connected. -->
     <string name="wifi_hotspot_name_summary_connected">Other devices can connect to <xliff:g id="wifi_hotspot_name">%1$s</xliff:g></string>
     <!-- Label for Wifi hotspot password. -->
-    <string name="wifi_hotspot_password_title">Wi\u2011Fi password</string>
+    <string name="wifi_hotspot_password_title">Hotspot password</string>
     <!-- Label for Wifi hotspot AP Band. -->
     <string name="wifi_hotspot_ap_band_title">AP Band</string>
     <!-- Wifi hotspot footer info for regular hotspot [CHAR LIMIT=NONE]-->
@@ -2213,7 +2237,7 @@
     <!-- Title of a preference for updating emergency address [CHAR LIMIT=40] -->
     <string name="emergency_address_title">Update Emergency Address</string>
     <!-- Summary of Update Emergency Address preference, explaining usage of emergency address [CHAR LIMIT=NONE] -->
-    <string name="emergency_address_summary">Address used by emergency services as your location if you make a 911 call using WiFi</string>
+    <string name="emergency_address_summary">Address used by emergency services as your location if you make an emergency call using Wi\u2011Fi</string>
 
 
     <!-- Sound and alerts settings -->
@@ -2336,6 +2360,9 @@
     <string name="search_settings_summary">Manage search settings and history</string>
     <!-- There are no search results for the user's search [CHAR LIMIT=NONE]-->
     <string name="search_settings_no_results">No results</string>
+
+    <!-- Button to clear all search history in Settings [CHAR LIMIT=40]-->
+    <string name="search_clear_history">Clear history</string>
 
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
@@ -3101,11 +3128,14 @@
 
 
     <!-- Title for a screen containing all device reset options [CHAR LIMIT=50] -->
-    <string name="reset_dashboard_title">Reset</string>
+    <string name="reset_dashboard_title">Reset options</string>
+
+    <!-- Summary text for a screen containing all device reset options [CHAR LIMIT=None] -->
+    <string name="reset_dashboard_summary">Network, apps, or device can be reset</string>
 
     <!-- Reset Network -->
-    <!-- SD card & phone storage settings screen, setting option name under Backup & Restore heading -->
-    <string name="reset_network_title">Network settings reset</string>
+    <!-- Button title to reset Wi-Fi settings, Mobile data setting, bluetooth settings -->
+    <string name="reset_network_title">Reset Wi-Fi, mobile &amp; Bluetooth</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
@@ -3122,14 +3152,8 @@
     <string name="reset_network_complete_toast">Network settings have been reset</string>
 
     <!-- Master Clear -->
-    <!-- SD card & phone storage settings screen, setting option name under Internal phone storage heading -->
-    <string name="master_clear_title">Factory data reset</string>
-    <!-- Summary text for factory data reset describing what will be reset [CHAR_LIMIT=NONE]-->
-    <plurals name="master_clear_with_account_summary">
-        <item quantity="one">1 account will be reset</item>
-        <item quantity="other"><xliff:g id="account_count">%1$d</xliff:g> accounts will be reset</item>
-    </plurals>
-    <string name="master_clear_summary">Internal storage &amp; all data will be reset</string>
+    <!-- Button title to factory data reset the entire device -->
+    <string name="master_clear_title">Erase all data (factory reset)</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
     <string name="master_clear_desc" product="tablet">"This will erase all data from your tablet\u2019s <b>internal storage</b>, including:\n\n<li>Your Google account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Factory data reset [CHAR LIMIT=NONE] -->
@@ -3405,24 +3429,26 @@
     <string name="settings_safetylegal_activity_loading">Loading\u2026</string>
 
     <!-- Lock Pattern settings -->
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
-    <string name="lockpassword_choose_your_password_header">Choose your password</string>
+    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_screen_lock_header">Set a screen lock</string>
+    <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_your_password_message">For security, set a password</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pattern_header">Choose your pattern</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint">To use fingerprint, set pattern</string>
-    <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=30] -->
-    <string name="lockpassword_choose_your_pin_header">Choose your PIN</string>
+    <!-- Message on first screen of choose PIN flow [CHAR LIMIT=NONE] -->
+    <string name="lockpassword_choose_your_pin_message">For security, set a PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow [CHAR LIMIT=30] -->
     <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
-    <!-- Header on password confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_password_header">Confirm your password</string>
+    <!-- Header on password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_your_pattern_header">Confirm your pattern</string>
-    <!-- Header on password confirm screen [CHAR LIMIT=30] -->
-    <string name="lockpassword_confirm_your_pin_header">Confirm your PIN</string>
+    <!-- Header on password confirm screen [CHAR LIMIT=40] -->
+    <string name="lockpassword_confirm_your_pin_header">Re-enter your PIN</string>
     <!-- Header on password confirm screen if second password doesn't match the first. [CHAR LIMIT=30] -->
     <string name="lockpassword_confirm_passwords_dont_match">Passwords don\u2019t match</string>
     <!-- Header on pin confirm screen if second pin doesn't match the first. [CHAR LIMIT=30]-->
@@ -3455,19 +3481,48 @@
          particular operation. [CHAR LIMIT=70]-->
     <string name="lockpassword_confirm_your_password_generic_profile">Enter your work password to continue</string>
 
-    <!-- An explanation text that the pattern needs to be solved since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_device_pattern">Use your device pattern to continue. Required after device restarts.</string>
-    <!-- An explanation text that the pin needs to be entered since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_device_pin">Enter your device PIN to continue. Required after device restarts.</string>
-    <!-- An explanation text that the password needs to be entered since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_device_password">Enter your device password to continue. Required after device restarts.</string>
+    <!-- This string shows up on a screen where a user can enter a pattern that
+         unlocks their device. This is an extra security measure that's required for them to
+         continue. [CHAR LIMIT=100] -->
+    <string name="lockpassword_strong_auth_required_device_pattern">For added security, use your device pattern</string>
+    <!-- This string shows up on a screen where a user can enter a PIN that unlocks their device.
+         This is an extra security measure that's required for them to continue. [CHAR LIMIT=100]
+         -->
+    <string name="lockpassword_strong_auth_required_device_pin">For added security, enter your device PIN</string>
+    <!-- This string shows up on a screen where a user can enter a password that unlocks their
+         device. This is an extra security measure that's required for them to continue. [CHAR
+         LIMIT=100] -->
+    <string name="lockpassword_strong_auth_required_device_password">For added security, enter your device password</string>
 
-    <!-- An explanation text that the pattern needs to be solved since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_work_pattern">Use your work pattern to continue. Required after device restarts.</string>
-    <!-- An explanation text that the pin needs to be entered since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_work_pin">Enter your work PIN to continue. Required after device restarts.</string>
-    <!-- An explanation text that the password needs to be entered since the device has just been restarted. [CHAR LIMIT=100] -->
-    <string name="lockpassword_strong_auth_required_reason_restart_work_password">Enter your work password to continue. Required after device restarts.</string>
+    <!-- This string shows up on a screen where a user can enter a pattern that lets them access
+         their work profile, which is a part of their device that's specifically for work apps and
+         managed by their employer. This is an extra security measure that's required for them to
+         continue. [CHAR LIMIT=100] -->
+    <string name="lockpassword_strong_auth_required_work_pattern">For added security, use your work pattern</string>
+    <!-- This string shows up on a screen where a user can enter a PIN that lets them access their
+         work profile, which is a part of their device that's specifically for work apps and managed
+         by their employer. This is an extra security measure that's required for them to continue.
+         [CHAR LIMIT=100] -->
+    <string name="lockpassword_strong_auth_required_work_pin">For added security, enter your work PIN</string>
+    <!-- This string shows up on a screen where a user can enter a password that lets them access
+         their work profile, which is a part of their device that's specifically for work apps and
+         managed by their employer. This is an extra security measure that's required for them to
+         continue. [CHAR LIMIT=100] -->
+    <string name="lockpassword_strong_auth_required_work_password">For added security, enter your work password</string>
+
+    <!-- An explanation text that the pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous pattern.</string>
+    <!-- An explanation text that the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous PIN.</string>
+    <!-- An explanation text that the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_details_frp">Your phone was reset to factory settings. To use this phone, enter your previous password.</string>
+
+    <!-- Header shown when pattern needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pattern_header_frp">Verify pattern</string>
+    <!-- Header shown when the pin needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_pin_header_frp">Verify PIN</string>
+    <!-- Header shown when the password needs to be solved because the device was factory reset. [CHAR LIMIT=100] -->
+    <string name="lockpassword_confirm_your_password_header_frp">Verify password</string>
 
     <!-- Security & location settings screen, change security method screen instruction if user
          enters incorrect PIN [CHAR LIMIT=30] -->
@@ -3903,7 +3958,7 @@
     <!-- Descriptive text of a running process: singular process, plural service. -->
     <string name="running_processes_item_description_s_p"><xliff:g id="numprocess">%1$d</xliff:g>
         process and <xliff:g id="numservices">%2$d</xliff:g> services</string>
-     <!-- Descriptive text of a running process: plural process, singular service. -->
+    <!-- Descriptive text of a running process: plural process, singular service. -->
     <string name="running_processes_item_description_p_s"><xliff:g id="numprocess">%1$d</xliff:g>
         processes and <xliff:g id="numservices">%2$d</xliff:g> service</string>
     <!-- Descriptive text of a running process: plural process, plural service. -->
@@ -4178,27 +4233,6 @@
     <!-- Text for checkbox that pops up when an app requests permission to bind a widget [CHAR LIMIT=NONE] -->
     <string name="allow_bind_app_widget_activity_always_allow_bind">Always allow <xliff:g id="widget_host_name">%1$s</xliff:g> to create widgets and access their data</string>
 
-    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_days"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m <xliff:g id="seconds">%4$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_hours"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m <xliff:g id="seconds">%3$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes"><xliff:g id="minutes">%1$d</xliff:g>m <xliff:g id="seconds">%2$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "s seconds" in BatteryHistory -->
-    <string name="battery_history_seconds"><xliff:g id="seconds">%1$d</xliff:g>s</string>
-
-    <!-- Used to show an amount of time in the form "d days, h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_days_no_seconds"><xliff:g id="days">%1$d</xliff:g>d <xliff:g id="hours">%2$d</xliff:g>h <xliff:g id="minutes">%3$d</xliff:g>m</string>
-
-    <!-- Used to show an amount of time in the form "h hours, m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_hours_no_seconds"><xliff:g id="hours">%1$d</xliff:g>h <xliff:g id="minutes">%2$d</xliff:g>m</string>
-
-    <!-- Used to show an amount of time in the form "m minutes, s seconds" in BatteryHistory -->
-    <string name="battery_history_minutes_no_seconds"><xliff:g id="minutes">%1$d</xliff:g>m</string>
-
     <!-- XXX remove? Strings used for displaying usage statistics -->
     <string name="usage_stats_label">Usage statistics</string>
 
@@ -4227,7 +4261,7 @@
     <!-- Settings description for a brief version of Vision-Related Accessibility Settings. Tells the user that they can adjust these settings now to help them through the remainder of the Setup Wizard and that they can later be changed in Settings. Displayed in Setup Wizard only. [CHAR LIMIT=none] -->
     <string name="vision_settings_description">You can customize this device to fit your needs. These accessibility features can be changed later in Settings.</string>
     <!-- Label for suggested action which will allow the user to change the font size and other accessibility settings. [CHAR LIMIT=40] -->
-    <string name="vision_settings_suggestion_title">Increase font size</string>
+    <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen readers</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -4268,14 +4302,14 @@
     <string name="accessibility_screen_magnification_navbar_summary">When magnification is turned on, use the Accessibility button at the bottom of the screen to quickly magnify.\n\n<b>To zoom</b>, tap the Accessibility button, then tap anywhere on the screen.\n<ul><li>Drag 2 or more fingers to scroll</li>\n<li>Pinch 2 or more fingers to adjust zoom</li></ul>\n\n<b>To zoom temporarily</b>, tap the Accessibility button, then touch &amp; hold anywhere on the screen.\n<ul><li>Drag to move around the screen</li>\n<li>Lift finger to zoom out</li></ul>\n\nYou can’t zoom in on the keyboard or navigation bar.</string>
     <!-- Summary text appearing on the accessibility preference screen to enable screen magnification from the nav bar when the feature is enabled, but the accessibility button is not configured correctly for the feature to be used [CHAR LIMIT=none] -->
     <string name="accessibility_screen_magnification_navbar_configuration_warning">The Accessibility button is set to <xliff:g id="service" example="Select to Speak">%1$s</xliff:g>. To use magnification, touch &amp; hold the Accessibility button, then select magnification.</string>
-    <!-- Title for the preference to configure the accessibility shortcut. [CHAR LIMIT=35] -->
-    <string name="accessibility_global_gesture_preference_title">Accessibility shortcut</string>
+    <!-- Title for the preference to configure the accessibility shortcut, which uses the volume keys. [CHAR LIMIT=35] -->
+    <string name="accessibility_global_gesture_preference_title">Volume key shortcut</string>
     <!-- Title for the preference to choose the service that is turned on and off by the accessibility shortcut. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_title">Shortcut service</string>
     <!-- Title for the switch preference that controls whether or not the accessibility shortcut works on the lock screen. [CHAR LIMIT=35] -->
     <string name="accessibility_shortcut_service_on_lock_screen_title">Allow from lock screen</string>
     <!-- Description of accessibility shortcut. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume buttons for 3 seconds to start an accessibility feature.</string>
+    <string name="accessibility_shortcut_description">When the shortcut is on, you can press both volume keys for 3 seconds to start an accessibility feature.</string>
     <!-- Title for the accessibility preference to high contrast text. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_high_text_contrast_preference_title">High contrast text</string>
     <!-- Title for the accessibility preference to auto update screen magnification. [CHAR LIMIT=35] -->
@@ -4303,8 +4337,6 @@
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
 
-    <!-- Summary text for accessibility service preferences, or preferences including a short description (eg. "ON / High accuracy mode"). -->
-    <string name="accessibility_summary_default_combination"><xliff:g id="state" example="ON">%1$s</xliff:g> / <xliff:g id="description" example="High accuracy mode">%2$s</xliff:g></string>
     <!-- Preference's state when enabled. Note: UPPERCASE -->
     <string name="accessibility_summary_state_enabled">ON</string>
     <!-- Preference's state when disabled. Note: UPPERCASE -->
@@ -4475,7 +4507,7 @@
     <!-- Accessibility settings: button for lauching settings for an accessibility service -->
     <string name="settings_button">Settings</string>
 
-     <!-- Printing settings -->
+    <!-- Printing settings -->
     <skip />
 
     <!-- Title in main settings screen for printing settings [CHAR LIMIT=15] -->
@@ -5530,6 +5562,9 @@
     <!--  action to select all [CHAR LIMIT=30] -->
     <string name="select_all">Select all</string>
 
+    <!-- A button that gets displayed in data plan usage preference in settings page to manage data plans [CHAR LIMIT=25] -->
+    <string name="data_plan_usage_manage_plans_button_text">Manage plans</string>
+
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
     <!-- Activity title for Appk data usage summary. [CHAR LIMIT=25] -->
@@ -5718,6 +5753,13 @@
     <string name="data_usage_metered_wifi">Metered Wi\u2011Fi networks</string>
     <!-- Body text prompting user to enable Wi-Fi to configure metered networks. [CHAR LIMIT=64] -->
     <string name="data_usage_metered_wifi_disabled">To select metered networks, turn Wi\u2011Fi on.</string>
+
+    <!-- Option for indicating that a network being metered (expensive) should be determined automatically. [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_auto">Automatic</string>
+    <!-- Option for indicating that a network is metered (expensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_yes">Metered</string>
+    <!-- Option for indicating that a network is not metered (inexpensive). [CHAR LIMIT=32] -->
+    <string name="data_usage_metered_no">Not metered</string>
 
     <!-- Disclaimer string for data usage measured by device. [CHAR LIMIT=80] -->
     <string name="data_usage_disclaimer">Carrier data accounting may differ from your device.</string>
@@ -6795,8 +6837,8 @@
     <!-- [CHAR LIMIT=100] Notification importance screen title -->
     <string name="notification_importance_title">Importance</string>
 
-    <!-- [CHAR LIMIT=100] Notification Importance: unspecified importance level description -->
-    <string name="notification_importance_unspecified">Let the app decide</string>
+    <!-- [CHAR LIMIT=100 BACKUP_MESSAGE_ID=1820188704793497324] Notification Importance: unspecified importance level description -->
+    <string name="notification_importance_unspecified">Allow sound</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: blocked importance level description -->
     <string name="notification_importance_blocked">Never show notifications</string>
@@ -6819,6 +6861,10 @@
     <!-- [CHAR LIMIT=100] Notification Importance: high importance level description -->
     <string name="notification_importance_high">Make sound and pop on screen</string>
 
+    <!-- [CHAR LIMIT=100] Notification Importance: high importance level description,
+     when the user has picked high importance but disabled sound for it -->
+    <string name="notification_importance_high_silent">Pop on screen</string>
+
     <!-- Importance title strings for the Importance page. Also the first part of the importance
      summary on the channel page-->
 
@@ -6834,11 +6880,11 @@
     <!-- [CHAR LIMIT=100] Notification Importance title: high importance level title -->
     <string name="notification_importance_high_title">Urgent</string>
 
-    <!-- [CHAR LIMIT=40 BACKUP_MESSAGE_ID:6585849855452076626] Notification importance title -->
-    <string name="allow_sound">Allow sound</string>
+    <!-- [CHAR LIMIT=40] Notification importance title. This setting controls how notifications in older apps may alert the user (eg, sound, visual, vibrate). -->
+    <string name="allow_interruption">Allow interruptions</string>
 
-    <!-- [CHAR LIMIT=180] Notification importance summary -->
-    <string name="show_silently_summary">Don\'t make sound, vibrate, or peek these notifications into view on the current screen.</string>
+    <!-- [CHAR LIMIT=180] Notification importance description. More details from allow_interruption string - specifics of how notifications may interrupt. -->
+    <string name="allow_interruption_summary">Let the app make sound, vibrate, and/or pop notifications on screen</string>
 
     <!-- Channel summaries for the app notification page -->
 
@@ -6938,7 +6984,7 @@
     <string name="picture_in_picture_app_detail_switch">Allow picture-in-picture</string>
 
     <!-- Apps > App Details > Picture-in-picture > Description. [CHAR LIMIT=NONE] -->
-    <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you're using.</string>
+    <string name="picture_in_picture_app_detail_summary">Allow this app to create a picture-in-picture window while the app is open or after you leave it (for example, to continue watching a video).  This window displays on top of other apps you\'re using.</string>
 
     <!-- Sound & notification > Advanced section: Title for managing Do Not Disturb access option. [CHAR LIMIT=40] -->
     <string name="manage_zen_access_title">Do Not Disturb access</string>
@@ -7267,8 +7313,8 @@
     <string name="notification_app_settings_button">Notification settings</string>
 
 
-   <!-- [CHAR LIMIT=35] Feedback on the device -->
-   <string name="device_feedback">Send feedback about this device</string>
+    <!-- [CHAR LIMIT=35] Feedback on the device -->
+    <string name="device_feedback">Send feedback about this device</string>
 
     <!-- Full package name of OEM preferred device feedback reporter [DO NOT TRANSLATE] -->
     <string name="oem_preferred_feedback_reporter" translatable="false"></string>
@@ -7335,66 +7381,66 @@
     <!-- Button label to say no to the question of whether to require PIN/password/pattern to start your device. [CHAR LIMIT=20] -->
     <string name="encryption_interstitial_no">No</string>
 
-   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-   <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
+    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+    <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
 
-   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-   <string name="encrypt_talkback_dialog_require_pattern">Require pattern?</string>
+    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+    <string name="encrypt_talkback_dialog_require_pattern">Require pattern?</string>
 
-   <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
-   <string name="encrypt_talkback_dialog_require_password">Require password?</string>
+    <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
+    <string name="encrypt_talkback_dialog_require_password">Require password?</string>
 
-   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_pin">When you enter your PIN to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
+    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+    <string name="encrypt_talkback_dialog_message_pin">When you enter your PIN to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
-   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_pattern">When you enter your pattern to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
+    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+    <string name="encrypt_talkback_dialog_message_pattern">When you enter your pattern to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
-   <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
-   <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
+    <!-- Message for encryption dialog telling the user that Talkback and other accessibility services will be disabled. -->
+    <string name="encrypt_talkback_dialog_message_password">When you enter your password to start this device, accessibility services like <xliff:g id="service" example="TalkBack">%1$s</xliff:g> won\u2019t yet be available.</string>
 
-   <!-- [CHAR LIMIT=NONE] Dialog body explaining that the app just selected by the user will not work after a reboot until until after the user enters their credentials, such as a PIN or password. -->
-   <string name="direct_boot_unaware_dialog_message">Note: After a reboot, this app can\'t start until you unlock your phone</string>
+    <!-- [CHAR LIMIT=NONE] Dialog body explaining that the app just selected by the user will not work after a reboot until until after the user enters their credentials, such as a PIN or password. -->
+    <string name="direct_boot_unaware_dialog_message">Note: After a reboot, this app can\'t start until you unlock your phone</string>
 
-   <!-- Title and summary for SIM Status -->
-   <string name="imei_information_title">IMEI information</string>
-   <string name="imei_information_summary">IMEI relative information</string>
-   <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
+    <!-- Title and summary for SIM Status -->
+    <string name="imei_information_title">IMEI information</string>
+    <string name="imei_information_summary">IMEI relative information</string>
+    <string name="slot_number">(Slot<xliff:g id="slot_num">%1$d</xliff:g>)</string>
 
-   <!-- New strings needed for App Info 2 -->
-   <!-- Preference label for app default launch settings [CHAR LIMIT=35]-->
-   <string name="launch_by_default">Open by default</string>
+    <!-- New strings needed for App Info 2 -->
+    <!-- Preference label for app default launch settings [CHAR LIMIT=35]-->
+    <string name="launch_by_default">Open by default</string>
 
-   <!-- Category name for App Launch -->
-   <string name="app_launch_domain_links_title">Opening links</string>
-   <string name="app_launch_open_domain_urls_title">Open supported links</string>
-   <string name="app_launch_open_domain_urls_summary">Open without asking</string>
-   <string name="app_launch_supported_domain_urls_title">Supported links</string>
-   <string name="app_launch_other_defaults_title">Other defaults</string>
+    <!-- Category name for App Launch -->
+    <string name="app_launch_domain_links_title">Opening links</string>
+    <string name="app_launch_open_domain_urls_title">Open supported links</string>
+    <string name="app_launch_open_domain_urls_summary">Open without asking</string>
+    <string name="app_launch_supported_domain_urls_title">Supported links</string>
+    <string name="app_launch_other_defaults_title">Other defaults</string>
 
-   <!-- Summary for app storage preference -->
-   <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
-   <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
-   <string name="storage_type_internal">Internal storage</string>
-   <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
-   <string name="storage_type_external">External storage</string>
+    <!-- Summary for app storage preference -->
+    <string name="storage_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used in <xliff:g id="storage_type" example="internal memory">%2$s</xliff:g></string>
+    <!-- Summary describing internal storage for applications [CHAR LIMIT=25] -->
+    <string name="storage_type_internal">Internal storage</string>
+    <!-- Summary describing external storage for applications [CHAR LIMIT=25] -->
+    <string name="storage_type_external">External storage</string>
 
-   <!-- Title for data usage screen when entered from app info [CHAR LIMIT=30] -->
-   <string name="app_data_usage">App data usage</string>
-   <!-- Summary for data usage preference [CHAR LIMIT=15] -->
-   <string name="data_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used since <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
+    <!-- Title for data usage screen when entered from app info [CHAR LIMIT=30] -->
+    <string name="app_data_usage">App data usage</string>
+    <!-- Summary for data usage preference [CHAR LIMIT=15] -->
+    <string name="data_summary_format"><xliff:g id="size" example="30.00MB">%1$s</xliff:g> used since <xliff:g id="date" example="Jan 12">%2$s</xliff:g></string>
 
-   <!-- Title of storage preference to control where app is stored -->
-   <string name="storage_used">Storage used</string>
+    <!-- Title of storage preference to control where app is stored -->
+    <string name="storage_used">Storage used</string>
 
-   <!-- Title of button to change storage [CHAR LIMIT=25] -->
-   <string name="change">Change</string>
+    <!-- Title of button to change storage [CHAR LIMIT=25] -->
+    <string name="change">Change</string>
 
-   <!-- Title of dialog to change storage [CHAR LIMIT=25] -->
-   <string name="change_storage">Change storage</string>
+    <!-- Title of dialog to change storage [CHAR LIMIT=25] -->
+    <string name="change_storage">Change storage</string>
 
-   <!-- Label for notification settings for an specific app [CHAR LIMIT=40] -->
-     <string name="notifications_label">App notifications</string>
+    <!-- Label for notification settings for an specific app [CHAR LIMIT=40] -->
+    <string name="notifications_label">App notifications</string>
     <!-- App notification summary with notifications enabled [CHAR LIMIT=40] -->
     <string name="notifications_enabled">On</string>
     <!-- Label for showing apps with blocked notifications in list [CHAR LIMIT=30] -->
@@ -7417,17 +7463,17 @@
     <string name="notification_summary_channel"><xliff:g id="channel_name">%1$s</xliff:g> \u2022 <xliff:g id="group_name">%2$s</xliff:g></string>
 
 
-   <!-- Permissions preference summary [CHAR LIMIT=40] -->
+    <!-- Permissions preference summary [CHAR LIMIT=40] -->
     <plurals name="permissions_summary">
-       <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
-       <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
     </plurals>
 
-   <!-- Runtime permissions preference summary [CHAR LIMIT=40] -->
-   <plurals name="runtime_permissions_summary">
-       <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> of <xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
-       <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
-   </plurals>
+    <!-- Runtime permissions preference summary [CHAR LIMIT=40] -->
+    <plurals name="runtime_permissions_summary">
+        <item quantity="one"><xliff:g id="count" example="1">%d</xliff:g> of <xliff:g id="count" example="1">%d</xliff:g> permission granted</item>
+        <item quantity="other"><xliff:g id="count" example="10">%d</xliff:g> of <xliff:g id="count" example="10">%d</xliff:g> permissions granted</item>
+    </plurals>
 
     <!-- Runtime permissions preference summary.  Number of additional permissions granted. [CHAR LIMIT=40] -->
     <plurals name="runtime_permissions_additional_count">
@@ -7471,19 +7517,19 @@
     <!-- Title for application configuration settings [CHAR LIMIT=30] -->
     <string name="configure_apps">Configure apps</string>
 
-   <!-- Warning toast shown when data usage screen can't find specified app -->
-   <string name="unknown_app">Unknown app</string>
+    <!-- Warning toast shown when data usage screen can't find specified app -->
+    <string name="unknown_app">Unknown app</string>
 
-   <!-- Label for list that shows all permissions -->
-   <string name="app_permissions">App permissions</string>
-   <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
-   <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
+    <!-- Label for list that shows all permissions -->
+    <string name="app_permissions">App permissions</string>
+    <!-- Summary of permissions currently granted to apps [CHAR LIMIT=60] -->
+    <string name="app_permissions_summary">Apps using <xliff:g id="apps" example="location">%1$s</xliff:g></string>
 
-   <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
-   <string name="tap_to_wake">Tap to wake</string>
+    <!-- Label for tap to wake setting [CHAR LIMIT=30] -->
+    <string name="tap_to_wake">Tap to wake</string>
 
-   <!-- Summary for take to wake setting [CHAR LIMIT=90] -->
-   <string name="tap_to_wake_summary">Double-tap anywhere on the screen to wake device</string>
+    <!-- Summary for take to wake setting [CHAR LIMIT=90] -->
+    <string name="tap_to_wake_summary">Double-tap anywhere on the screen to wake device</string>
 
     <!-- Title of a preference item that will show the user's preferences for this app's priority for opening links to websites that it claims to support [CHAR LIMIT=30] -->
     <string name="domain_urls_title">Opening links</string>
@@ -7757,6 +7803,9 @@
     <string name="usb_summary_photo_transfers">Transferring photos (PTP)</string>
     <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
     <string name="usb_summary_MIDI">Using device as MIDI</string>
+
+    <!-- Settings item title for SMS Mirroring preference [CHAR LIMIT=35] -->
+    <string name="sms_mirroring_pref">SMS Mirroring</string>
 
     <!-- Settings item title for background check prefs [CHAR LIMIT=35] -->
     <string name="background_check_pref">Background check</string>
@@ -8134,6 +8183,12 @@
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
 
+    <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
+    <string name="night_display_suggestion_title">Set Night Light schedule</string>
+
+    <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
+    <string name="night_display_suggestion_summary">Tint screen amber to help you fall asleep</string>
+
     <!-- Title of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="condition_night_display_title">Night Light is on</string>
 
@@ -8178,6 +8233,15 @@
 
     <!-- Toast message letting the user know the how to trigger telephony monitor -->
     <string name="telephony_monitor_toast">To apply telephony monitor change, reboot device</string>
+
+    <!-- Title for Camera HAL HDR+ switch [CHAR LIMIT=50] -->
+    <string name="camera_hal_hdrplus_switch">Camera HAL HDR+</string>
+
+    <!-- Toast message letting the user know how to enable Camera HAL HDR+ -->
+    <string name="camera_hal_hdrplus_toast">To apply Camera HAL HDR+ change, reboot device</string>
+
+    <!-- Title for Camera laser sensor switch [CHAR LIMIT=NONE] -->
+    <string name="camera_laser_sensor_switch">Camera Laser Sensor</string>
 
     <!-- Name of the setting to disable the automatic update -->
     <string name="ota_disable_automatic_update">Automatic system updates</string>
@@ -8249,7 +8313,7 @@
     <string name="data_limit">Data limit</string>
 
     <!-- Summary about how much data has been used in a date range [CHAR LIMIT=NONE] -->
-    <string name="data_usage_template"><xliff:g name="amount" example="200 MB">%1$s</xliff:g> used between <xliff:g name="date_range" example="Jan 1 -- Feb 2">%2$s</xliff:g></string>
+    <string name="data_usage_template"><xliff:g name="amount" example="200 MB">%1$s</xliff:g> used <xliff:g name="date_range" example="Jan 1 -- Feb 2">%2$s</xliff:g></string>
 
     <!-- Accessibility label for button that leads to screen with more configuration options [CHAR LIMIT=NONE] -->
     <string name="configure">Configure</string>
@@ -8326,11 +8390,6 @@
 
     <!-- Text for the setting on whether you can type text into notifications without unlocking the device. -->
     <string name="lockscreen_remote_input">If device is locked, prevent typing replies or other text in notifications</string>
-
-    <string-array name="bytes_picker_sizes" translatable="false">
-        <item>@*android:string/megabyteShort</item>
-        <item>@*android:string/gigabyteShort</item>
-    </string-array>
 
     <!-- [CHAR LIMIT=30] Label for setting to control the default spell checker -->
     <string name="default_spell_checker">Default spell checker</string>
@@ -8424,7 +8483,7 @@
     <string name="reset_shortcut_manager_throttling_complete">ShortcutManager rate-limiting has been reset</string>
 
     <!-- Title of notification suggestion during optional steps of setup. [CHAR_LIMIT=60] -->
-    <string name="notification_suggestion_title">Control lock screen notifications</string>
+    <string name="notification_suggestion_title">Control info on lock screen</string>
     <!-- Summary of notification suggestion during optional steps of setup. [CHAR_LIMIT=80] -->
     <string name="notification_suggestion_summary">Show or hide notification content</string>
     <!-- Setting tab title for all setting options. [CHAR LIMIT=20] -->
@@ -8448,7 +8507,7 @@
     <string name="premium_sms_access">Premium SMS access</string>
 
     <!-- Summary for Bluetooth when disabled. [CHAR LIMIT=NONE] -->
-    <string name="bluetooth_disabled">Not visible to other devices</string>
+    <string name="bluetooth_disabled">Off</string>
 
     <!-- Summary for Bluetooth when connected to one device. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_connected_summary">Connected to <xliff:g name="device">%1$s</xliff:g></string>
@@ -8730,8 +8789,8 @@
     <!-- Section title for the Web Action preference [CHAR LIMIT=60] -->
     <string name="web_action_section_title">Instant apps</string>
 
-    <!-- Preference label for an tappable preference that will open the account chooser for instant apps. [CHAR LIMIT=60] -->
-    <string name="instant_apps_account">Instant apps account</string>
+    <!-- Preference label for an tappable preference that will open the instant apps settings. [CHAR LIMIT=60] -->
+    <string name="instant_apps_settings">Instant Apps preferences</string>
 
     <!-- Section title for the Domain URL app preference list [CHAR LIMIT=60]-->
     <string name="domain_url_section_title">Installed apps</string>
@@ -8826,8 +8885,12 @@
     <string name="enterprise_privacy_always_on_vpn_work">Always-on VPN turned on in your work profile</string>
     <!-- Label explaining that a global HTTP proxy was set by the admin. [CHAR LIMIT=NONE] -->
     <string name="enterprise_privacy_global_http_proxy">Global HTTP proxy set</string>
-    <!-- Label explaining that the admin installed trusted CA certificates. [CHAR LIMIT=NONE] -->
-    <string name="enterprise_privacy_ca_certs">Trusted credentials</string>
+    <!-- Label explaining that the admin installed trusted CA certificates for the entire device. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_ca_certs_device">Trusted credentials</string>
+    <!-- Label explaining that the admin installed trusted CA certificates in personal profile. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_ca_certs_personal">Trusted credentials in your personal profile</string>
+    <!-- Label explaining that the admin installed trusted CA certificates in work profile. [CHAR LIMIT=NONE] -->
+    <string name="enterprise_privacy_ca_certs_work">Trusted credentials in your work profile</string>
     <!-- Summary indicating the number of trusted CA certificates installed by the admin. The number shown is a minimum as there may be additional CA certificates we do not know about. [CHAR LIMIT=NONE] -->
     <plurals name="enterprise_privacy_number_ca_certs">
         <item quantity="one">Minimum <xliff:g id="count">%d</xliff:g> CA certificate</item>
@@ -8979,10 +9042,19 @@
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>
 
     <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
-    <string name="new_device_suggestion_summary">Check out the top 5 features</string>
+    <string name="new_device_suggestion_summary" product="default">Take a tour of your new phone</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="tablet">Take a tour of your new tablet</string>
+
+    <!-- Summary label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
+    <string name="new_device_suggestion_summary" product="device">Take a tour of your new device</string>
 
     <!-- The divider symbol between different parts of the notification header including spaces. not translatable [CHAR LIMIT=3] -->
     <string name="notification_header_divider_symbol_with_spaces" translatable="false">" • "</string>
+
+    <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
+    <string name="disabled_low_ram_device">This feature is not available on this device</string>
 
     <!--Label of IMS registration header -->
     <string name="ims_reg_title">"IMS registration state"</string>

@@ -25,21 +25,22 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class BluetoothMasterSwitchPreferenceController extends PreferenceController
-        implements OnSummaryChangeListener,
-        LifecycleObserver, OnResume, OnPause, OnStart, OnStop {
+public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, OnSummaryChangeListener, LifecycleObserver, OnResume,
+        OnPause, OnStart, OnStop {
 
     public static final String KEY_TOGGLE_BLUETOOTH = "toggle_bluetooth";
 

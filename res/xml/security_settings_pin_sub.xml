@@ -22,7 +22,7 @@
     <com.android.settings.TimeoutListPreference
         android:key="lock_after_timeout"
         android:title="@string/lock_after_timeout"
-        android:summary="@string/lock_after_timeout_summary"
+        android:summary="@string/summary_placeholder"
         android:entries="@array/lock_after_timeout_entries"
         android:entryValues="@array/lock_after_timeout_values" />
 
@@ -32,7 +32,6 @@
 
     <com.android.settingslib.RestrictedPreference
         android:key="owner_info_settings"
-        android:title="@string/owner_info_settings_title"
-        android:summary="@string/owner_info_settings_summary" />
+        android:title="@string/owner_info_settings_title" />
 
 </PreferenceScreen>

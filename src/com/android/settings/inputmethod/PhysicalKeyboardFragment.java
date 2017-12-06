@@ -31,6 +31,7 @@ import android.hardware.input.KeyboardLayout;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings.Secure;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -51,11 +52,11 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 
 import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -288,6 +289,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         final PhysicalKeyboardFragment mPhysicalKeyboardFragment;
         @NonNull
         final List<HardKeyboardDeviceInfo> mHardKeyboards;
+
         public Callbacks(
                 @NonNull Context context,
                 @NonNull PhysicalKeyboardFragment physicalKeyboardFragment,
@@ -532,43 +534,14 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
     }
 
-    public static List<InputDevice> getPhysicalFullKeyboards() {
-        List<InputDevice> keyboards = null;
-        for (final int deviceId : InputDevice.getDeviceIds()) {
-            final InputDevice device = InputDevice.getDevice(deviceId);
-            if (device != null && !device.isVirtual() && device.isFullKeyboard()) {
-                if (keyboards == null) keyboards = new ArrayList<>();
-                keyboards.add(device);
-            }
-        }
-        return (keyboards == null) ? Collections.emptyList() : keyboards;
-    }
-
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            final InputManager inputManager = (InputManager) context.getSystemService(
-                    Context.INPUT_SERVICE);
-            final String screenTitle = context.getString(R.string.physical_keyboard_title);
-            final List<SearchIndexableRaw> indexes = new ArrayList<>();
-            for (final InputDevice device : getPhysicalFullKeyboards()) {
-                final String keyboardLayoutDescriptor = inputManager
-                        .getCurrentKeyboardLayoutForInputDevice(device.getIdentifier());
-                final KeyboardLayout keyboardLayout = (keyboardLayoutDescriptor != null)
-                        ? inputManager.getKeyboardLayout(keyboardLayoutDescriptor) : null;
-                final String summary = (keyboardLayout != null)
-                        ? keyboardLayout.toString()
-                        : context.getString(R.string.keyboard_layout_default_label);
-                final SearchIndexableRaw index = new SearchIndexableRaw(context);
-                index.key = device.getName();
-                index.title = device.getName();
-                index.summaryOn = summary;
-                index.summaryOff = summary;
-                index.screenTitle = screenTitle;
-                indexes.add(index);
-            }
-            return indexes;
-        }
-    };
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.physical_keyboard_settings;
+                    return Arrays.asList(sir);
+                }
+            };
 }

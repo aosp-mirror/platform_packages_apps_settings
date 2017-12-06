@@ -73,6 +73,13 @@ public class SettingsSuggestionsTest {
                 R.string.wifi_calling_suggestion_title, R.string.wifi_calling_suggestion_summary);
     }
 
+    @Test
+    public void nightDisplaySuggestion_isValid() {
+        assertSuggestionEquals("Settings$NightDisplaySuggestionActivity",
+            CATEGORY_FIRST_IMPRESSION,
+            R.string.night_display_suggestion_title, R.string.night_display_suggestion_summary);
+    }
+
     private void assertSuggestionEquals(String activityName, String category, @StringRes int title,
             @StringRes int summary) {
         final AndroidManifest androidManifest = ShadowApplication.getInstance().getAppManifest();

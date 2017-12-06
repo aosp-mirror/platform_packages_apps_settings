@@ -32,12 +32,12 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.PackageManagerWrapperImpl;
 import com.android.settings.applications.UserManagerWrapperImpl;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader;
 import com.android.settings.deviceinfo.storage.StorageAsyncLoader.AppsStorageResult;
 import com.android.settings.deviceinfo.storage.StorageItemPreferenceController;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
 import java.util.ArrayList;
@@ -98,11 +98,16 @@ public class StorageProfileFragment extends DashboardFragment
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final StorageManager sm = context.getSystemService(StorageManager.class);
-        mPreferenceController = new StorageItemPreferenceController(context, this,
-                mVolume, new StorageManagerVolumeProvider(sm));
+        mPreferenceController =
+                new StorageItemPreferenceController(
+                        context,
+                        this,
+                        mVolume,
+                        new StorageManagerVolumeProvider(sm),
+                        /* isWorkProfile */ true);
         controllers.add(mPreferenceController);
         return controllers;
     }

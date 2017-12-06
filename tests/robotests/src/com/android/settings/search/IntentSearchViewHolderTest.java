@@ -87,7 +87,7 @@ public class IntentSearchViewHolderTest {
         final View view = LayoutInflater.from(context).inflate(R.layout.search_intent_item, null);
         mHolder = new IntentSearchViewHolder(view);
 
-        mIcon = context.getDrawable(R.drawable.ic_search_history);
+        mIcon = context.getDrawable(R.drawable.ic_search_24dp);
         mBadgedIcon = context.getDrawable(R.drawable.ic_add);
         when(mFragment.getActivity().getPackageManager()).thenReturn(mPackageManager);
     }

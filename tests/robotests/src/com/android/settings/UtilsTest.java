@@ -8,14 +8,17 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.UserInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
 import android.net.LinkProperties;
 import android.net.Network;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
@@ -23,6 +26,7 @@ import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,12 +38,15 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
 
     private static final String TIME_DESCRIPTION = "1 day 20 hours 30 minutes";
+    private static final String PACKAGE_NAME = "com.android.app";
     private Context mContext;
     @Mock
     private WifiManager wifiManager;
@@ -47,6 +54,10 @@ public class UtilsTest {
     private Network network;
     @Mock
     private ConnectivityManager connectivityManager;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
 
     @Before
     public void setUp() {
@@ -94,8 +105,8 @@ public class UtilsTest {
 
     @Test
     public void testFormatElapsedTime_WithSeconds_ShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "5m 0s";
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "5m 30s";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
                 expectedTime);
@@ -103,8 +114,8 @@ public class UtilsTest {
 
     @Test
     public void testFormatElapsedTime_NoSeconds_DoNotShowSeconds() {
-        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS;
-        final String expectedTime = "5m";
+        final double testMillis = 5 * DateUtils.MINUTE_IN_MILLIS + 30 * DateUtils.SECOND_IN_MILLIS;
+        final String expectedTime = "6m";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
                 expectedTime);
@@ -115,6 +126,33 @@ public class UtilsTest {
         final double testMillis = 2 * DateUtils.DAY_IN_MILLIS
                 + 4 * DateUtils.HOUR_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
         final String expectedTime = "2d 4h 15m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_ZeroFieldsInTheMiddleDontShow() {
+        final double testMillis = 2 * DateUtils.DAY_IN_MILLIS + 15 * DateUtils.MINUTE_IN_MILLIS;
+        final String expectedTime = "2d 15m";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_FormatZero_WithSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0s";
+
+        assertThat(Utils.formatElapsedTime(mContext, testMillis, true).toString()).isEqualTo(
+                expectedTime);
+    }
+
+    @Test
+    public void testFormatElapsedTime_FormatZero_NoSeconds() {
+        final double testMillis = 0;
+        final String expectedTime = "0m";
 
         assertThat(Utils.formatElapsedTime(mContext, testMillis, false).toString()).isEqualTo(
                 expectedTime);
@@ -166,5 +204,26 @@ public class UtilsTest {
         info.enabled = false;
 
         assertThat(Utils.getInstallationStatus(info)).isEqualTo(R.string.disabled);
+    }
+
+    @Test
+    public void testIsProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
+        when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
+
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
+                PACKAGE_NAME)).isTrue();
+    }
+
+    @Test
+    public void testIsProfileOrDeviceOwner_profileOwnerApp_returnTrue() {
+        final List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo());
+
+        when(mUserManager.getUsers()).thenReturn(userInfos);
+        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id)).thenReturn(
+                new ComponentName(PACKAGE_NAME, ""));
+
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
+                PACKAGE_NAME)).isTrue();
     }
 }

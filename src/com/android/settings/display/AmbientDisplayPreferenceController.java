@@ -19,12 +19,13 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.app.NightDisplayController;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AmbientDisplayPreferenceController extends PreferenceController {
+public class AmbientDisplayPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final int MY_USER_ID = UserHandle.myUserId();
 

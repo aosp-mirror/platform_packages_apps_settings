@@ -36,7 +36,6 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.IFingerprintManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.ShadowDynamicIndexableContentMonitor;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -61,7 +60,6 @@ import org.robolectric.shadows.ShadowActivity.IntentForResult;
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowDynamicIndexableContentMonitor.class,
                 ShadowEventLogWriter.class,
                 ShadowUtils.class
         })

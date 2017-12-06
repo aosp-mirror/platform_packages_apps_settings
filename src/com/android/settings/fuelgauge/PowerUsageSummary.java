@@ -57,7 +57,6 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.AmbientDisplayPreferenceController;
@@ -71,6 +70,7 @@ import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -303,8 +303,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
                 context, getActivity(), this /* host */, getLifecycle());
         controllers.add(mBatteryHeaderPreferenceController);
@@ -715,7 +715,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             preference.setSummary(
                     (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence
-                            : TextUtils.expandTemplate(getText(R.string.battery_screen_usage),
+                            : TextUtils.expandTemplate(getText(R.string.battery_used_for),
                                     timeSequence));
         }
     }
@@ -887,7 +887,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
                     public void onBatteryInfoLoaded(BatteryInfo info) {
                         mLoader.setSummary(SummaryProvider.this, info.chargeLabel);
                     }
-                });
+                }, true /* shortString */);
             });
         }
 

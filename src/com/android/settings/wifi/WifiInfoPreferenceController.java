@@ -22,23 +22,25 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.v4.text.BidiFormatter;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that updates MAC/IP address.
+ * {@link PreferenceControllerMixin} that updates MAC/IP address.
  */
-public class WifiInfoPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+public class WifiInfoPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_CURRENT_IP_ADDRESS = "current_ip_address";
     private static final String KEY_MAC_ADDRESS = "mac_address";
@@ -103,7 +105,7 @@ public class WifiInfoPreferenceController extends PreferenceController implement
             final String ipAddress = Utils.getWifiIpAddresses(mContext);
             mWifiIpAddressPref.setSummary(ipAddress == null
                     ? mContext.getString(R.string.status_unavailable)
-                    : ipAddress);
+                    : BidiFormatter.getInstance().unicodeWrap(ipAddress));
         }
     }
 

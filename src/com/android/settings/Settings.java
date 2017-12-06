@@ -21,7 +21,6 @@ import android.os.Bundle;
 import com.android.settings.applications.AppOpsSummary;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
-import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.password.ChooseLockGeneric;
 
 /**
@@ -53,6 +52,7 @@ public class Settings extends SettingsActivity {
     public static class UserDictionarySettingsActivity extends SettingsActivity { /* empty */ }
     public static class DisplaySettingsActivity extends SettingsActivity { /* empty */ }
     public static class NightDisplaySettingsActivity extends SettingsActivity { /* empty */ }
+    public static class NightDisplaySuggestionActivity extends NightDisplaySettingsActivity { /* empty */ }
     public static class DeviceInfoSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ApplicationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManageApplicationsActivity extends SettingsActivity { /* empty */ }
@@ -66,7 +66,7 @@ public class Settings extends SettingsActivity {
                 return true;
             }
             return super.isValidFragment(className);
-            }
+        }
     }
     public static class BackgroundCheckSummaryActivity extends SettingsActivity { /* empty */ }
     public static class StorageUseActivity extends SettingsActivity { /* empty */ }
@@ -88,6 +88,7 @@ public class Settings extends SettingsActivity {
     public static class AccountSyncSettingsInAddAccountActivity extends SettingsActivity { /* empty */ }
     public static class CryptKeeperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeviceAdminSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DataPlanUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class DataUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class MobileDataUsageListActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureWifiSettingsActivity extends SettingsActivity { /* empty */ }
@@ -98,6 +99,7 @@ public class Settings extends SettingsActivity {
     public static class DreamSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationStationActivity extends SettingsActivity { /* empty */ }
     public static class UserSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class SpecialAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class NotificationAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class VrListenersSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PictureInPictureSettingsActivity extends SettingsActivity { /* empty */ }
@@ -125,6 +127,9 @@ public class Settings extends SettingsActivity {
     public static class AutomaticStorageManagerSettingsActivity extends SettingsActivity { /* empty */ }
     public static class GamesStorageActivity extends SettingsActivity { /* empty */ }
     public static class MoviesStorageActivity extends SettingsActivity { /* empty */ }
+    public static class PhotosStorageActivity extends SettingsActivity {
+        /* empty */
+    }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }

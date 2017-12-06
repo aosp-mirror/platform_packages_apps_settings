@@ -15,6 +15,8 @@
  */
 package com.android.settings.accounts;
 
+import static android.provider.Settings.EXTRA_AUTHORITIES;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.UserInfo;
@@ -25,17 +27,15 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 public class UserAndAccountDashboardFragment extends DashboardFragment {
 
@@ -63,8 +63,8 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new EmergencyInfoPreferenceController(context));
         AddUserWhenLockedPreferenceController addUserWhenLockedPrefController =
                 new AddUserWhenLockedPreferenceController(context);
@@ -79,15 +79,6 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
         getLifecycle().addObserver(accountPrefController);
         controllers.add(accountPrefController);
         return controllers;
-    }
-
-    @Override
-    protected boolean displayTile(Tile tile) {
-        final Bundle metadata = tile.metaData;
-        if (metadata != null) {
-            return metadata.getString(METADATA_IA_ACCOUNT) == null;
-        }
-        return true;
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {

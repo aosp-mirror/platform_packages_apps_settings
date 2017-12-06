@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.os.Bundle;
+import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -52,6 +53,10 @@ public abstract class DeviceListPreferenceFragment extends
 
     private static final String KEY_BT_SCAN = "bt_scan";
 
+    // Copied from DevelopmentSettings.java
+    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
+            "persist.bluetooth.showdeviceswithoutnames";
+
     private BluetoothDeviceFilter.Filter mFilter;
 
     @VisibleForTesting
@@ -67,6 +72,8 @@ public abstract class DeviceListPreferenceFragment extends
 
     final WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference> mDevicePreferenceMap =
             new WeakHashMap<CachedBluetoothDevice, BluetoothDevicePreference>();
+
+    boolean mShowDevicesWithoutNames;
 
     DeviceListPreferenceFragment(String restrictedKey) {
         super(restrictedKey);
@@ -103,6 +110,8 @@ public abstract class DeviceListPreferenceFragment extends
     @Override
     public void onStart() {
         super.onStart();
+        mShowDevicesWithoutNames = SystemProperties.getBoolean(
+                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         if (mLocalManager == null || isUiRestricted()) return;
 
         mLocalManager.setForegroundActivity(getActivity());
@@ -181,7 +190,7 @@ public abstract class DeviceListPreferenceFragment extends
         BluetoothDevicePreference preference = (BluetoothDevicePreference) getCachedPreference(key);
 
         if (preference == null) {
-            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice);
+            preference = new BluetoothDevicePreference(getPrefContext(), cachedDevice, this);
             preference.setKey(key);
             mDeviceListGroup.addPreference(preference);
         } else {
@@ -271,4 +280,8 @@ public abstract class DeviceListPreferenceFragment extends
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices
      */
     public abstract String getDeviceListKey();
+
+    public boolean shouldShowDevicesWithoutNames() {
+        return mShowDevicesWithoutNames;
+    }
 }

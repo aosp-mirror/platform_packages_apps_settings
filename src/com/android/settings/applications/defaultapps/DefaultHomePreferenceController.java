@@ -23,8 +23,6 @@ import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 
 import com.android.settings.applications.PackageManagerWrapper;
 
@@ -59,27 +57,20 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
     }
 
     @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        final DefaultAppInfo defaultApp = getDefaultAppInfo();
-        final CharSequence defaultAppLabel = defaultApp != null ? defaultApp.loadLabel() : null;
-        if (TextUtils.isEmpty(defaultAppLabel)) {
-            final String onlyAppLabel = getOnlyAppLabel();
-            if (!TextUtils.isEmpty(onlyAppLabel)) {
-                preference.setSummary(onlyAppLabel);
-            }
-        }
-    }
-
-    @Override
     protected DefaultAppInfo getDefaultAppInfo() {
         final ArrayList<ResolveInfo> homeActivities = new ArrayList<>();
         final ComponentName currentDefaultHome = mPackageManager.getHomeActivities(homeActivities);
-
-        return new DefaultAppInfo(mPackageManager, mUserId, currentDefaultHome);
+        if (currentDefaultHome != null) {
+            return new DefaultAppInfo(mPackageManager, mUserId, currentDefaultHome);
+        }
+        final ActivityInfo onlyAppInfo = getOnlyAppInfo();
+        if (onlyAppInfo != null) {
+            return new DefaultAppInfo(mPackageManager, mUserId, onlyAppInfo.getComponentName());
+        }
+        return null;
     }
 
-    private String getOnlyAppLabel() {
+    private ActivityInfo getOnlyAppInfo() {
         final List<ResolveInfo> homeActivities = new ArrayList<>();
         final List<ActivityInfo> appLabels = new ArrayList<>();
 
@@ -92,7 +83,7 @@ public class DefaultHomePreferenceController extends DefaultAppPreferenceControl
             appLabels.add(info);
         }
         return appLabels.size() == 1
-                ? appLabels.get(0).loadLabel(mPackageManager.getPackageManager()).toString()
+                ? appLabels.get(0)
                 : null;
     }
 

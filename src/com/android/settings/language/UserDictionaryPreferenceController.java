@@ -21,13 +21,15 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.UserDictionarySettings;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionarySettings;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.TreeSet;
 
-public class UserDictionaryPreferenceController extends PreferenceController {
+public class UserDictionaryPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_USER_DICTIONARY_SETTINGS = "key_user_dictionary_settings";
 
@@ -37,10 +39,7 @@ public class UserDictionaryPreferenceController extends PreferenceController {
 
     @Override
     public boolean isAvailable() {
-        final TreeSet<String> localeSet = getDictionaryLocales();
-        // The locale list is null if and only if the user dictionary service is
-        // not present or disabled. In this case we need to remove the preference.
-        return localeSet != null;
+        return true;
     }
 
     @Override

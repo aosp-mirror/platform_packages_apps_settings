@@ -27,7 +27,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -63,11 +64,17 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
             return getNonIndexableKeysFromXml(context);
         }
-        final List<PreferenceController> controllers = getPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers != null && !controllers.isEmpty()) {
             final List<String> nonIndexableKeys = new ArrayList<>();
-            for (PreferenceController controller : controllers) {
-                controller.updateNonIndexableKeys(nonIndexableKeys);
+            for (AbstractPreferenceController controller : controllers) {
+                if (controller instanceof PreferenceControllerMixin) {
+                    ((PreferenceControllerMixin) controller)
+                            .updateNonIndexableKeys(nonIndexableKeys);
+                } else {
+                    throw new IllegalStateException(controller.getClass().getName()
+                            + " must implement " + PreferenceControllerMixin.class.getName());
+                }
             }
             return nonIndexableKeys;
         } else {
@@ -76,7 +83,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
-    public List<PreferenceController> getPreferenceControllers(Context context) {
+    public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return null;
     }
 

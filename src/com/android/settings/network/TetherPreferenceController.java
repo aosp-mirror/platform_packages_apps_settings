@@ -15,6 +15,10 @@
  */
 package com.android.settings.network;
 
+import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
+import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
@@ -35,7 +39,8 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TetherSettings;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -45,13 +50,8 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static android.os.UserManager.DISALLOW_CONFIG_TETHERING;
-
-import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
-import static com.android.settingslib.RestrictedLockUtils.hasBaseUserRestriction;
-
-public class TetherPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {
+public class TetherPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, LifecycleObserver, OnCreate, OnResume, OnPause, OnDestroy {
 
     private static final String KEY_TETHER_SETTINGS = "tether_settings";
 

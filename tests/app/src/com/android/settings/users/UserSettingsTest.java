@@ -31,7 +31,7 @@ import org.junit.Test;
 @SmallTest
 public class UserSettingsTest extends InstrumentationTestCase {
 
-    private static final String USER_AND_ACCOUNTS = "User & accounts";
+    private static final String USER_AND_ACCOUNTS = "Users & accounts";
     private static final String USERS = "Users";
     private static final String EMERGNENCY_INFO = "Emergency information";
     private static final String ADD_USERS_WHEN_LOCKED = "Add users";

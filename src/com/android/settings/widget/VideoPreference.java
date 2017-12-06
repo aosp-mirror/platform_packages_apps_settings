@@ -45,6 +45,7 @@ public class VideoPreference extends Preference {
     private MediaPlayer mMediaPlayer;
     private boolean mAnimationAvailable;
     private boolean mVideoReady;
+    private boolean mVideoPaused;
     private int mPreviewResource;
 
     public VideoPreference(Context context, AttributeSet attrs) {
@@ -100,9 +101,11 @@ public class VideoPreference extends Preference {
                 if (mMediaPlayer.isPlaying()) {
                     mMediaPlayer.pause();
                     playButton.setVisibility(View.VISIBLE);
+                    mVideoPaused = true;
                 } else {
                     mMediaPlayer.start();
                     playButton.setVisibility(View.GONE);
+                    mVideoPaused = false;
                 }
             }
         });
@@ -131,8 +134,14 @@ public class VideoPreference extends Preference {
 
             @Override
             public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-                if (mVideoReady && imageView.getVisibility() == View.VISIBLE) {
-                    imageView.setVisibility(View.GONE);
+                if (mVideoReady) {
+                    if (imageView.getVisibility() == View.VISIBLE) {
+                        imageView.setVisibility(View.GONE);
+                    }
+                    if (!mVideoPaused && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
+                        mMediaPlayer.start();
+                        playButton.setVisibility(View.GONE);
+                    }
                 }
                 if (mMediaPlayer != null && !mMediaPlayer.isPlaying() &&
                         playButton.getVisibility() != View.VISIBLE) {
@@ -152,7 +161,8 @@ public class VideoPreference extends Preference {
         super.onDetached();
     }
 
-    public void onViewVisible() {
+    public void onViewVisible(boolean videoPaused) {
+        mVideoPaused = videoPaused;
         if (mVideoReady && mMediaPlayer != null && !mMediaPlayer.isPlaying()) {
             mMediaPlayer.seekTo(0);
         }
@@ -163,4 +173,9 @@ public class VideoPreference extends Preference {
             mMediaPlayer.pause();
         }
     }
+
+    public boolean isVideoPaused() {
+        return mVideoPaused;
+    }
+
 }

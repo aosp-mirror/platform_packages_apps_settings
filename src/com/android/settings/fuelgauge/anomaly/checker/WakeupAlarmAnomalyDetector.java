@@ -29,10 +29,11 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
-import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Check whether apps has too many wakeup alarms
@@ -42,6 +43,7 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
     private long mWakeupAlarmThreshold;
+    private Set<String> mWakeupBlacklistedTags;
     private Context mContext;
     private AnomalyUtils mAnomalyUtils;
 
@@ -56,6 +58,7 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
         mBatteryUtils = BatteryUtils.getInstance(context);
         mAnomalyUtils = anomalyUtils;
         mWakeupAlarmThreshold = policy.wakeupAlarmThreshold;
+        mWakeupBlacklistedTags = policy.wakeupBlacklistedTags;
     }
 
     @Override
@@ -123,11 +126,14 @@ public class WakeupAlarmAnomalyDetector implements AnomalyDetector {
             final BatteryStats.Uid.Pkg ps = packageStats.valueAt(ipkg);
             final ArrayMap<String, ? extends BatteryStats.Counter> alarms =
                     ps.getWakeupAlarmStats();
-            for (int iwa = alarms.size() - 1; iwa >= 0; iwa--) {
-                int count = alarms.valueAt(iwa).getCountLocked(BatteryStats.STATS_SINCE_CHARGED);
+            for (Map.Entry<String, ? extends BatteryStats.Counter> alarm : alarms.entrySet()) {
+                if (mWakeupBlacklistedTags != null
+                        && mWakeupBlacklistedTags.contains(alarm.getKey())) {
+                    continue;
+                }
+                int count = alarm.getValue().getCountLocked(BatteryStats.STATS_SINCE_CHARGED);
                 wakeups += count;
             }
-
         }
 
         return wakeups;

@@ -31,7 +31,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.search.Indexable;
 
-public class ZenModePrioritySettings extends ZenModeSettingsBase implements Indexable {
+public class ZenModePrioritySettings extends ZenModeSettingsBase {
     private static final String KEY_REMINDERS = "reminders";
     private static final String KEY_EVENTS = "events";
     private static final String KEY_MESSAGES = "messages";

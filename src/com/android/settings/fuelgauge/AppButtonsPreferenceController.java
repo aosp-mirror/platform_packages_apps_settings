@@ -50,13 +50,14 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -76,9 +77,9 @@ import java.util.List;
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
 //TODO(b/35810915): Make InstalledAppDetails use this controller
-public class AppButtonsPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause, OnDestroy, View.OnClickListener,
-        ApplicationsState.Callbacks {
+public class AppButtonsPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause, OnDestroy,
+        View.OnClickListener, ApplicationsState.Callbacks {
     public static final String APP_CHG = "chg";
 
     private static final String TAG = "AppButtonsPrefCtl";
@@ -380,7 +381,7 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
         // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
         // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
         // will clear data on all users.
-        if (isProfileOrDeviceOwner(mPackageInfo.packageName)) {
+        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
             enabled = false;
         }
 
@@ -578,21 +579,6 @@ public class AppButtonsPreferenceController extends PreferenceController impleme
         final int userCount = mUserManager.getUserCount();
         return userCount == 1
                 || (mUserManager.isSplitSystemUser() && userCount == 2);
-    }
-
-    /** Returns if the supplied package is device owner or profile owner of at least one user */
-    private boolean isProfileOrDeviceOwner(String packageName) {
-        List<UserInfo> userInfos = mUserManager.getUsers();
-        if (mDpm.isDeviceOwnerAppOnAnyUser(packageName)) {
-            return true;
-        }
-        for (int i = 0, size = userInfos.size(); i < size; i++) {
-            ComponentName cn = mDpm.getProfileOwnerAsUser(userInfos.get(i).id);
-            if (cn != null && cn.getPackageName().equals(packageName)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {

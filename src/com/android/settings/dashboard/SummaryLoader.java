@@ -34,7 +34,6 @@ import android.util.Log;
 import com.android.settings.SettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
 
 import java.lang.reflect.Field;
@@ -47,7 +46,8 @@ public class SummaryLoader {
     public static final String SUMMARY_PROVIDER_FACTORY = "SUMMARY_PROVIDER_FACTORY";
 
     private final Activity mActivity;
-    private final ArrayMap<SummaryProvider, ComponentName> mSummaryMap = new ArrayMap<>();
+    private final ArrayMap<SummaryProvider, ComponentName> mSummaryProviderMap = new ArrayMap<>();
+    private final ArrayMap<String, CharSequence> mSummaryTextMap = new ArrayMap<>();
     private final DashboardFeatureProvider mDashboardFeatureProvider;
     private final String mCategoryKey;
 
@@ -111,13 +111,13 @@ public class SummaryLoader {
     }
 
     public void setSummary(SummaryProvider provider, final CharSequence summary) {
-        final ComponentName component = mSummaryMap.get(provider);
+        final ComponentName component = mSummaryProviderMap.get(provider);
         mHandler.post(new Runnable() {
             @Override
             public void run() {
 
                 final Tile tile = getTileFromCategory(
-                    mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
+                        mDashboardFeatureProvider.getTilesForCategory(mCategoryKey), component);
 
                 if (tile == null) {
                     if (DEBUG) {
@@ -142,6 +142,7 @@ public class SummaryLoader {
             }
             return;
         }
+        mSummaryTextMap.put(mDashboardFeatureProvider.getDashboardKeyForTile(tile), summary);
         tile.summary = summary;
         if (mSummaryConsumer != null) {
             mSummaryConsumer.notifySummaryChanged(tile);
@@ -223,11 +224,27 @@ public class SummaryLoader {
         });
     }
 
+    /**
+     * Updates all tile's summary to latest cached version. This is necessary to handle the case
+     * where category is updated after summary change.
+     */
+    public void updateSummaryToCache(DashboardCategory category) {
+        if (category == null) {
+            return;
+        }
+        for (Tile tile : category.tiles) {
+            final String key = mDashboardFeatureProvider.getDashboardKeyForTile(tile);
+            if (mSummaryTextMap.containsKey(key)) {
+                tile.summary = mSummaryTextMap.get(key);
+            }
+        }
+    }
+
     private synchronized void setListeningW(boolean listening) {
         if (mWorkerListening == listening) return;
         mWorkerListening = listening;
         if (DEBUG) Log.d(TAG, "Listening " + listening);
-        for (SummaryProvider p : mSummaryMap.keySet()) {
+        for (SummaryProvider p : mSummaryProviderMap.keySet()) {
             try {
                 p.setListening(listening);
             } catch (Exception e) {
@@ -240,26 +257,8 @@ public class SummaryLoader {
         SummaryProvider provider = getSummaryProvider(tile);
         if (provider != null) {
             if (DEBUG) Log.d(TAG, "Creating " + tile);
-            mSummaryMap.put(provider, tile.intent.getComponent());
+            mSummaryProviderMap.put(provider, tile.intent.getComponent());
         }
-    }
-
-    private Tile getTileFromCategory(List<DashboardCategory> categories, ComponentName component) {
-        if (categories == null) {
-            if (DEBUG) {
-                Log.d(TAG, "Category is null, can't find tile");
-            }
-            return null;
-        }
-        final int categorySize = categories.size();
-        for (int i = 0; i < categorySize; i++) {
-            final DashboardCategory category = categories.get(i);
-            final Tile tile = getTileFromCategory(category, component);
-            if (tile != null) {
-                return tile;
-            }
-        }
-        return null;
     }
 
     private Tile getTileFromCategory(DashboardCategory category, ComponentName component) {
@@ -275,6 +274,8 @@ public class SummaryLoader {
         }
         return null;
     }
+
+
 
     public interface SummaryProvider {
         void setListening(boolean listening);

@@ -21,14 +21,15 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
-public class ResetAppPrefPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnCreate, OnSaveInstanceState {
+public class ResetAppPrefPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnCreate, OnSaveInstanceState {
 
     private ResetAppsHelper mResetAppsHelper;
 

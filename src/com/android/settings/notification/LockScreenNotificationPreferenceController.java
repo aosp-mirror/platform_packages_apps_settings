@@ -16,6 +16,9 @@
 
 package com.android.settings.notification;
 
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
+import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
@@ -32,19 +35,18 @@ import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
 
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
-import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
-public class LockScreenNotificationPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnResume, OnPause {
+public class LockScreenNotificationPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnResume, OnPause {
 
     private static final String TAG = "LockScreenNotifPref";
 
@@ -77,11 +79,10 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
         mProfileChallengeUserId = Utils.getManagedProfileId(
                 UserManager.get(context), UserHandle.myUserId());
         final LockPatternUtils utils = new LockPatternUtils(context);
-        final boolean isUnified =
-                !utils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId);
         mSecure = utils.isSecure(UserHandle.myUserId());
         mSecureProfile = (mProfileChallengeUserId != UserHandle.USER_NULL)
-                && (utils.isSecure(mProfileChallengeUserId) || (isUnified && mSecure));
+                && (utils.isSecure(mProfileChallengeUserId)
+                || (!utils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId) && mSecure));
     }
 
     @Override
@@ -108,8 +109,6 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
     private void initLockScreenNotificationPrefDisplay() {
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
-        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable));
-        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
 
         String summaryShowEntry =
                 mContext.getString(R.string.lock_screen_notifications_summary_show);
@@ -131,6 +130,10 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
 
+        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable));
+        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable));
+
+
         mLockscreen.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreen.setEntryValues(values.toArray(new CharSequence[values.size()]));
         updateLockscreenNotifications();
@@ -150,8 +153,6 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
         }
         ArrayList<CharSequence> entries = new ArrayList<>();
         ArrayList<CharSequence> values = new ArrayList<>();
-        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable_profile));
-        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable_profile));
 
         String summaryShowEntry = mContext.getString(
                 R.string.lock_screen_notifications_summary_show_profile);
@@ -172,6 +173,10 @@ public class LockScreenNotificationPreferenceController extends PreferenceContro
             setRestrictedIfNotificationFeaturesDisabled(summaryHideEntry, summaryHideEntryValue,
                     KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
         }
+
+        entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable_profile));
+        values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable_profile));
+
         mLockscreenProfile.setOnPreClickListener(
                 (Preference p) -> Utils.startQuietModeDialogIfNecessary(mContext,
                         UserManager.get(mContext), mProfileChallengeUserId)

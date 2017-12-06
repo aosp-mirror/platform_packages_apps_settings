@@ -22,6 +22,7 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -46,6 +47,7 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
@@ -179,8 +181,9 @@ public class RecentAppsPreferenceControllerTest {
                 .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
-        when(mMockContext.getString(eq(R.string.battery_history_minutes_no_seconds), anyInt()))
-            .thenReturn(mContext.getString(R.string.battery_history_minutes_no_seconds, 45));
+        final Configuration configuration = new Configuration();
+        configuration.locale = Locale.US;
+        when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
 
         mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
@@ -245,15 +248,17 @@ public class RecentAppsPreferenceControllerTest {
             .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
             .thenReturn(stats);
-        when(mMockContext.getString(eq(R.string.battery_history_minutes_no_seconds), anyInt()))
-            .thenReturn(mContext.getString(R.string.battery_history_minutes_no_seconds, 35));
+
         when(mMockContext.getResources().getText(eq(R.string.recent_app_summary)))
             .thenReturn(mContext.getResources().getText(R.string.recent_app_summary));
+        final Configuration configuration = new Configuration();
+        configuration.locale = Locale.US;
+        when(mMockContext.getResources().getConfiguration()).thenReturn(configuration);
 
         mController = new RecentAppsPreferenceController(mMockContext, mAppState, null);
         mController.displayPreference(mScreen);
 
-        verify(mCategory).addPreference(argThat(summaryMatches("35m ago")));
+        verify(mCategory).addPreference(argThat(summaryMatches("0m ago")));
     }
 
     private static ArgumentMatcher<Preference> summaryMatches(String expected) {

@@ -23,28 +23,38 @@ import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.KeyguardManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.fingerprint.SetupFingerprintEnrollIntroductionTest
+        .ShadowStorageManagerWrapper;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
+import com.android.settings.password.StorageManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
+import com.android.settings.testutils.shadow.ShadowFingerprintManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
 import org.robolectric.util.ActivityController;
 
@@ -54,7 +64,9 @@ import org.robolectric.util.ActivityController;
         sdk = TestConfig.SDK_VERSION,
         shadows = {
                 ShadowEventLogWriter.class,
+                ShadowFingerprintManager.class,
                 ShadowLockPatternUtils.class,
+                ShadowStorageManagerWrapper.class,
                 ShadowUserManager.class
         })
 public class SetupFingerprintEnrollIntroductionTest {
@@ -68,10 +80,20 @@ public class SetupFingerprintEnrollIntroductionTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        RuntimeEnvironment.getRobolectricPackageManager()
+                .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
+        ShadowFingerprintManager.addToServiceMap();
+
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class, intent);
 
         ShadowUserManager.getShadow().setUserInfo(0, mUserInfo);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowStorageManagerWrapper.reset();
+        ShadowFingerprintManager.reset();
     }
 
     @Test
@@ -188,8 +210,41 @@ public class SetupFingerprintEnrollIntroductionTest {
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 
+    @Test
+    public void testLockPattern() {
+        ShadowStorageManagerWrapper.sIsFileEncrypted = false;
+
+        mController.create().postCreate(null).resume();
+
+        SetupFingerprintEnrollIntroduction activity = mController.get();
+
+        final Button nextButton = activity.findViewById(R.id.fingerprint_next_button);
+        nextButton.performClick();
+
+        ShadowActivity shadowActivity = Shadows.shadowOf(activity);
+        IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
+        assertThat(startedActivity).isNotNull();
+        assertThat(startedActivity.intent.hasExtra(
+                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isFalse();
+    }
+
 
     private ShadowKeyguardManager getShadowKeyguardManager() {
         return Shadows.shadowOf(application.getSystemService(KeyguardManager.class));
+    }
+
+    @Implements(StorageManagerWrapper.class)
+    public static class ShadowStorageManagerWrapper {
+
+        private static boolean sIsFileEncrypted = true;
+
+        public static void reset() {
+            sIsFileEncrypted = true;
+        }
+
+        @Implementation
+        public static boolean isFileEncryptedNativeOrEmulated() {
+            return sIsFileEncrypted;
+        }
     }
 }

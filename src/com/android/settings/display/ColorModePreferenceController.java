@@ -23,10 +23,11 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
 import android.util.Log;
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ColorModePreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class ColorModePreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
     private static final String TAG = "ColorModePreference";
 
     private static final String KEY_COLOR_MODE = "color_mode";

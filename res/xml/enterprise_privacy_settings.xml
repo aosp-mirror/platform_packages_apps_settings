@@ -77,8 +77,11 @@
         <Preference android:key="global_http_proxy"
                     android:title="@string/enterprise_privacy_global_http_proxy"
                     android:selectable="false"/>
-        <Preference android:key="ca_certs"
-                    android:title="@string/enterprise_privacy_ca_certs"
+        <Preference android:key="ca_certs_current_user"
+                    android:title="@string/enterprise_privacy_ca_certs_personal"
+                    android:selectable="false"/>
+        <Preference android:key="ca_certs_managed_profile"
+                    android:title="@string/enterprise_privacy_ca_certs_work"
                     android:selectable="false"/>
     </PreferenceCategory>
 
