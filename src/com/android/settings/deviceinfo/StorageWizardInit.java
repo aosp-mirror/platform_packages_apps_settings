@@ -16,17 +16,25 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.app.ActivityManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.VolumeInfo;
+import android.util.DebugUtils;
+import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 
 import com.android.settings.R;
+
+import java.io.File;
 
 public class StorageWizardInit extends StorageWizardBase {
     private RadioButton mRadioExternal;
@@ -69,12 +77,15 @@ public class StorageWizardInit extends StorageWizardBase {
             mRadioExternal.setChecked(true);
             onNavigateNext();
             finish();
-        }
-
-        // TODO: Show a message about why this is disabled for guest and that only an admin user
-        // can adopt an sd card.
-        if (!mIsPermittedToAdopt) {
+        } else if (!mIsPermittedToAdopt) {
+            // TODO: Show a message about why this is disabled for guest and
+            // that only an admin user can adopt an sd card.
             mRadioInternal.setEnabled(false);
+        } else if (mVolume != null && mVolume.getType() == VolumeInfo.TYPE_PUBLIC
+                && mVolume.isMountedReadable()) {
+            // Device is mounted, so classify contents to possibly pick a
+            // recommended default operation.
+            new ClassifyTask().execute(mVolume.getPath());
         }
     }
 
@@ -119,6 +130,31 @@ public class StorageWizardInit extends StorageWizardBase {
             intent.putExtra(DiskInfo.EXTRA_DISK_ID, mDisk.getId());
             intent.putExtra(StorageWizardFormatConfirm.EXTRA_FORMAT_PRIVATE, true);
             startActivity(intent);
+        }
+    }
+
+    /**
+     * Task that classifies the contents of a mounted storage device, and sets a
+     * recommended default operation based on result.
+     */
+    public class ClassifyTask extends AsyncTask<File, Void, Integer> {
+        @Override
+        protected Integer doInBackground(File... params) {
+            int classes = Environment.classifyExternalStorageDirectory(params[0]);
+            Log.v(TAG, "Classified " + params[0] + " as "
+                    + DebugUtils.flagsToString(Environment.class, "HAS_", classes));
+            return classes;
+        }
+
+        @Override
+        protected void onPostExecute(Integer classes) {
+            if (classes == 0) {
+                // Empty is strong signal for adopt
+                mRadioInternal.setChecked(true);
+            } else if ((classes & (Environment.HAS_PICTURES | Environment.HAS_DCIM)) != 0) {
+                // Photos is strong signal for portable
+                mRadioExternal.setChecked(true);
+            }
         }
     }
 }
