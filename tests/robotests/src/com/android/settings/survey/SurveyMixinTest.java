@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SurveyMixinTest {
 
     private static final String FAKE_KEY = "fake_key";

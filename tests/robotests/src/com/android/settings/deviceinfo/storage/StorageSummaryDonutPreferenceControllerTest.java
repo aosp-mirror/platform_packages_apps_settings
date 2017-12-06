@@ -55,7 +55,7 @@ import org.robolectric.annotation.Config;
 import java.io.File;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
                 SettingsShadowResources.SettingsShadowTheme.class

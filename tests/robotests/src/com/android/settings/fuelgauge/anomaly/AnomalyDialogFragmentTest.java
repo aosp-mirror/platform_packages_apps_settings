@@ -49,7 +49,7 @@ import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = ShadowRuntimePermissionPresenter.class)
 public class AnomalyDialogFragmentTest {
     private static final String PACKAGE_NAME = "com.android.app";

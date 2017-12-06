@@ -18,7 +18,6 @@ package com.android.settings.datetime;
 
 import android.app.AlarmManager;
 import android.content.Context;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -37,7 +36,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DatePreferenceControllerTest {
 
     @Mock

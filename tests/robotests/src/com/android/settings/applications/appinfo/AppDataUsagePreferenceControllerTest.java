@@ -36,7 +36,6 @@ import android.net.INetworkStatsSession;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.datausage.AppDataUsage;
@@ -53,7 +52,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppDataUsagePreferenceControllerTest {
 
     @Mock

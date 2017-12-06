@@ -34,7 +34,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationAccessSettingsTest {
 
     private FakeFeatureFactory mFeatureFactory;

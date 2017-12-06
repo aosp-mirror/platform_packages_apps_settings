@@ -41,7 +41,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O,
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {BackupSettingsPreferenceControllerTest.ShadowBackupSettingsHelper.class})
 public class BackupSettingsPreferenceControllerTest {
     private static final String BACKUP_SETTINGS = "backup_settings";

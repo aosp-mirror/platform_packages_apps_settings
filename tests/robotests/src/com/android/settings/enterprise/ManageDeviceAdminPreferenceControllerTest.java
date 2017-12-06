@@ -39,7 +39,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link ManageDeviceAdminPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class ManageDeviceAdminPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

@@ -46,7 +46,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkDashboardFragmentTest {
 
     @Mock

@@ -17,6 +17,7 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
@@ -44,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PictureInPictureSettingsTest {
 
     private static final int PRIMARY_USER_ID = 0;

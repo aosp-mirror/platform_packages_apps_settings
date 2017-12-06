@@ -38,7 +38,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SetNewPasswordActivityTest {
 
     private int mProvisioned;

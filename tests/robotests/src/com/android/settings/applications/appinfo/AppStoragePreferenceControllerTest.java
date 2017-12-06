@@ -31,7 +31,6 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppStorageSettings;
@@ -48,7 +47,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppStoragePreferenceControllerTest {
 
     @Mock

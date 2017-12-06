@@ -25,7 +25,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,12 +33,10 @@ import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.UserManager;
 import android.support.v14.preference.PreferenceFragment;
 import android.view.View;
 
-import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -54,7 +51,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HeaderPreferenceControllerTest {
 
     private Context mContext;

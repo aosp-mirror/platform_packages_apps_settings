@@ -13,7 +13,7 @@ import org.robolectric.annotation.Config;
 import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageInfoControllerTest {
     private DataUsageInfoController mInfoController;
     private DataUsageInfo info;

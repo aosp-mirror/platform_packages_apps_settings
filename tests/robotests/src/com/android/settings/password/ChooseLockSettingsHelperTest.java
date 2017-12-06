@@ -33,7 +33,7 @@ import org.robolectric.shadows.ShadowActivity.IntentForResult;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {
                 ShadowUserManager.class,
                 ShadowUtils.class

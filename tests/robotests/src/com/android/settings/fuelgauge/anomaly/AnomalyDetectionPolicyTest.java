@@ -39,7 +39,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyDetectionPolicyTest {
     private static final String ANOMALY_DETECTION_CONSTANTS_VALUE =
             "anomaly_detection_enabled=true"

@@ -39,7 +39,6 @@ import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -49,7 +48,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalySummaryPreferenceControllerTest {
     @Anomaly.AnomalyType
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;

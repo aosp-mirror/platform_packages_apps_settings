@@ -38,7 +38,7 @@ import org.robolectric.annotation.Config;
  * Tests for {@link GlobalHttpProxyPreferenceController}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class GlobalHttpProxyPreferenceControllerTest {
 
     private static final String KEY_GLOBAL_HTTP_PROXY = "global_http_proxy";

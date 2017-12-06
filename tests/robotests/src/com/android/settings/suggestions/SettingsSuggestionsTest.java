@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSuggestionsTest {
 
     private static final String CATEGORY_FIRST_IMPRESSION =

@@ -60,7 +60,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class IntentSearchViewHolderTest {
 
     private static final String TITLE = "title";

@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CurrentDreamPickerTest {
     private static String COMPONENT_KEY = "mocked_component_name_string";
 

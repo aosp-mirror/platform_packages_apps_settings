@@ -37,7 +37,7 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchResultBuilderTest {
 
     private static final String TITLE = "title";

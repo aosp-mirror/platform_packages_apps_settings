@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ApplicationListPreferenceControllerTest {
 
     private static final int MAIN_USER_ID = 0;

@@ -58,7 +58,7 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
         manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION_O,
+        sdk = TestConfig.SDK_VERSION,
         shadows = {ShadowUtils.class, ShadowConnectivityManager.class, ShadowUserManager.class}
 )
 public class DeviceInfoSettingsTest {

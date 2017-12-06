@@ -43,7 +43,7 @@ import org.xmlpull.v1.XmlPullParser;
  * with another preference with a matchin replacement attribute.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION_O)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class XmlParserUtilTest {
 
     private Context mContext;
