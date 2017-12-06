@@ -83,15 +83,22 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        final Bundle arguments = getArguments();
         if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2) || true) {
-            // Increase the number of children when the device contains more than 1 sim.
-            final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(
-                    Context.TELEPHONY_SERVICE);
-            final int numberOfChildren = Math.max(SIM_PREFERENCES_COUNT,
-                    SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
-                    + NON_SIM_PREFERENCES_COUNT;
-            getPreferenceScreen().setInitialExpandedChildrenCount(numberOfChildren);
+            // Do not override initial expand children count if we come from
+            // search (EXTRA_FRAGMENT_ARG_KEY is set) - we need to display every if entry point
+            // is search.
+            if (arguments == null
+                    || !arguments.containsKey(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY)) {
+
+                // Increase the number of children when the device contains more than 1 sim.
+                final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(
+                        Context.TELEPHONY_SERVICE);
+                final int numberOfChildren = Math.max(SIM_PREFERENCES_COUNT,
+                        SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
+                        + NON_SIM_PREFERENCES_COUNT;
+                getPreferenceScreen().setInitialExpandedChildrenCount(numberOfChildren);
+            }
         }
     }
 
