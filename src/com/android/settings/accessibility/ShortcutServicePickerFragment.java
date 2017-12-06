@@ -25,29 +25,40 @@ import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.util.IconDrawableFactory;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.accessibility.AccessibilityShortcutController.ToggleableFrameworkFeatureInfo;
 import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
+import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.accessibility.AccessibilityUtils;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fragment for picking accessibility shortcut service
  */
-public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
+public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
 
     @Override
     public int getMetricsCategory() {
@@ -60,22 +71,29 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
     }
 
     @Override
-    protected List<? extends DefaultAppInfo> getCandidates() {
+    protected List<? extends CandidateInfo> getCandidates() {
         final Context context = getContext();
+        final PackageManager pm = context.getPackageManager();
         final AccessibilityManager accessibilityManager = context
                 .getSystemService(AccessibilityManager.class);
         final List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
         final int numInstalledServices = installedServices.size();
+        final PackageManagerWrapper pmw = new PackageManagerWrapper(context.getPackageManager());
 
-        List<DefaultAppInfo> candidates = new ArrayList<>(numInstalledServices);
+        final List<CandidateInfo> candidates = new ArrayList<>(numInstalledServices);
+        Map<ComponentName, ToggleableFrameworkFeatureInfo> frameworkFeatureInfoMap =
+                AccessibilityShortcutController.getFrameworkShortcutFeaturesMap();
+        for (ComponentName componentName : frameworkFeatureInfoMap.keySet()) {
+            // Lookup icon
+            candidates.add(new FrameworkCandidateInfo(frameworkFeatureInfoMap.get(componentName),
+                    R.drawable.empty_icon, componentName.flattenToString()));
+        }
         for (int i = 0; i < numInstalledServices; i++) {
-            AccessibilityServiceInfo installedServiceInfo = installedServices.get(i);
-            candidates.add(new DefaultAppInfo(context, mPm,
-                    UserHandle.myUserId(),
+            final AccessibilityServiceInfo installedServiceInfo = installedServices.get(i);
+            candidates.add(new DefaultAppInfo(context, pmw, UserHandle.myUserId(),
                     installedServiceInfo.getComponentName(),
-                    (String) installedServiceInfo.loadSummary(mPm.getPackageManager()),
-                    true /* enabled */));
+                    (String) installedServiceInfo.loadSummary(pm), true /* enabled */));
         }
 
         return candidates;
@@ -105,13 +123,21 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
     public void onRadioButtonClicked(RadioButtonPreference selected) {
         final String selectedKey = selected.getKey();
 
-        final Activity activity = getActivity();
         if (TextUtils.isEmpty(selectedKey)) {
             super.onRadioButtonClicked(selected);
-        } else if (activity != null) {
-            final DialogFragment fragment = ConfirmationDialogFragment.newInstance(
-                    this, selectedKey);
-            fragment.show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+        } else {
+            final ComponentName selectedComponent = ComponentName.unflattenFromString(selectedKey);
+            if (AccessibilityShortcutController.getFrameworkShortcutFeaturesMap()
+                    .containsKey(selectedComponent)) {
+                // This is a framework feature. It doesn't need to be confirmed.
+                onRadioButtonConfirmed(selectedKey);
+            } else {
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    ConfirmationDialogFragment.newInstance(this, selectedKey)
+                            .show(activity.getFragmentManager(), ConfirmationDialogFragment.TAG);
+                }
+            }
         }
     }
 
@@ -156,11 +182,40 @@ public class ShortcutServicePickerFragment extends DefaultAppPickerFragment {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             final Fragment fragment = getTargetFragment();
-            if ((which == BUTTON_POSITIVE) && (fragment instanceof DefaultAppPickerFragment)) {
+            if ((which == BUTTON_POSITIVE) && (fragment instanceof ShortcutServicePickerFragment)) {
                 final Bundle bundle = getArguments();
                 ((ShortcutServicePickerFragment) fragment).onServiceConfirmed(
                         bundle.getString(EXTRA_KEY));
             }
+        }
+    }
+
+    private class FrameworkCandidateInfo extends CandidateInfo {
+        ToggleableFrameworkFeatureInfo mToggleableFrameworkFeatureInfo;
+        int mIconResId;
+        String mKey;
+
+        public FrameworkCandidateInfo(
+                ToggleableFrameworkFeatureInfo frameworkFeatureInfo, int iconResId, String key) {
+            super(true /* enabled */);
+            mToggleableFrameworkFeatureInfo = frameworkFeatureInfo;
+            mIconResId = iconResId;
+            mKey = key;
+        }
+
+        @Override
+        public CharSequence loadLabel() {
+            return mToggleableFrameworkFeatureInfo.getLabel(getContext());
+        }
+
+        @Override
+        public Drawable loadIcon() {
+            return getContext().getDrawable(mIconResId);
+        }
+
+        @Override
+        public String getKey() {
+            return mKey;
         }
     }
 }
