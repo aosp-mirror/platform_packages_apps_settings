@@ -92,7 +92,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     private static boolean isV2Enabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, SUGGESTIONS_V2) || true;
+        return FeatureFlagUtils.isEnabled(context, SUGGESTIONS_V2);
     }
 
     @Override
