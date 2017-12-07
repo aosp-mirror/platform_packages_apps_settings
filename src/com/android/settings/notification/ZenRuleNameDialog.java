@@ -17,73 +17,103 @@
 package com.android.settings.notification;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.service.notification.ZenModeConfig;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public abstract class ZenRuleNameDialog {
-    private static final String TAG = "ZenRuleNameDialog";
-    private static final boolean DEBUG = ZenModeSettings.DEBUG;
+public class ZenRuleNameDialog extends InstrumentedDialogFragment {
+    protected static final String TAG = "ZenRuleNameDialog";
+    private static final String EXTRA_ZEN_RULE_NAME = "zen_rule_name";
+    private static final String EXTRA_CONDITION_ID = "extra_zen_condition_id";
+    protected static PositiveClickListener mPositiveClickListener;
 
-    private final AlertDialog mDialog;
-    private final EditText mEditText;
-    private final CharSequence mOriginalRuleName;
-    private final boolean mIsNew;
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_RULE_NAME_DIALOG;
+    }
 
-    public ZenRuleNameDialog(Context context, CharSequence ruleName, Uri conditionId) {
-        mIsNew = ruleName == null;
-        mOriginalRuleName = ruleName;
+    /**
+     * The interface we expect a listener to implement.
+     */
+    public interface PositiveClickListener {
+        void onOk(String newName, Fragment parent);
+    }
+
+    public static void show(Fragment parent, String ruleName, Uri conditionId, PositiveClickListener
+            listener) {
+        final Bundle args = new Bundle();
+        args.putString(EXTRA_ZEN_RULE_NAME, ruleName);
+        args.putParcelable(EXTRA_CONDITION_ID, conditionId);
+        mPositiveClickListener = listener;
+
+        ZenRuleNameDialog dialog = new ZenRuleNameDialog();
+        dialog.setArguments(args);
+        dialog.setTargetFragment(parent, 0);
+        dialog.show(parent.getFragmentManager(), TAG);
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Bundle arguments = getArguments();
+        Uri conditionId = arguments.getParcelable(EXTRA_CONDITION_ID);
+        String ruleName = arguments.getString(EXTRA_ZEN_RULE_NAME);
+
+        boolean isNew = ruleName == null;
+        CharSequence originalRuleName = ruleName;
+        Context context = getContext();
         final View v = LayoutInflater.from(context).inflate(R.layout.zen_rule_name, null,
                 false);
-        mEditText = (EditText) v.findViewById(R.id.zen_mode_rule_name);
-        if (!mIsNew) {
-            mEditText.setText(ruleName);
+        EditText editText = (EditText) v.findViewById(R.id.zen_mode_rule_name);
+        if (!isNew) {
+            // set text to current rule name
+            editText.setText(ruleName);
+            // move cursor to end of text
+            editText.setSelection(editText.getText().length());
         }
-        mEditText.setSelectAllOnFocus(true);
-        mDialog = new AlertDialog.Builder(context)
-                .setTitle(getTitleResource(conditionId))
+        editText.setSelectAllOnFocus(true);
+        return new AlertDialog.Builder(context)
+                .setTitle(getTitleResource(conditionId, isNew))
                 .setView(v)
-                .setPositiveButton(mIsNew ? R.string.zen_mode_add : R.string.okay,
+                .setPositiveButton(isNew ? R.string.zen_mode_add : R.string.okay,
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        final String newName = trimmedText();
-                        if (TextUtils.isEmpty(newName)) {
-                            return;
-                        }
-                        if (!mIsNew && mOriginalRuleName != null
-                                && mOriginalRuleName.equals(newName)) {
-                            return;  // no change to an existing rule, just dismiss
-                        }
-                        onOk(newName);
-                    }
-                })
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                final String newName = trimmedText(editText);
+                                if (TextUtils.isEmpty(newName)) {
+                                    return;
+                                }
+                                if (!isNew && originalRuleName != null
+                                        && originalRuleName.equals(newName)) {
+                                    return;  // no change to an existing rule, just dismiss
+                                }
+                               mPositiveClickListener.onOk(newName, getTargetFragment());
+                            }
+                        })
                 .setNegativeButton(R.string.cancel, null)
                 .create();
     }
 
-    abstract public void onOk(String ruleName);
-
-    public void show() {
-        mDialog.show();
+    private String trimmedText(EditText editText) {
+        return editText.getText() == null ? null : editText.getText().toString().trim();
     }
 
-    private String trimmedText() {
-        return mEditText.getText() == null ? null : mEditText.getText().toString().trim();
-    }
-
-    private int getTitleResource(Uri conditionId) {
+    private int getTitleResource(Uri conditionId, boolean isNew) {
         final boolean isEvent = ZenModeConfig.isValidEventConditionId(conditionId);
         final boolean isTime = ZenModeConfig.isValidScheduleConditionId(conditionId);
         int titleResource =  R.string.zen_mode_rule_name;
-        if (mIsNew) {
+        if (isNew) {
             if (isEvent) {
                 titleResource = R.string.zen_mode_add_event_rule;
             } else if (isTime) {

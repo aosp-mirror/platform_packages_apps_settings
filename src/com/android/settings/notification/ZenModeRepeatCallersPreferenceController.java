@@ -23,6 +23,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePreferenceController
@@ -77,8 +78,11 @@ public class ZenModeRepeatCallersPreferenceController extends AbstractZenModePre
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allowRepeatCallers = (Boolean) newValue;
-        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allowRepeatCallers="
-                + allowRepeatCallers);
+        if (ZenModeSettingsBase.DEBUG) {
+            Log.d(TAG, "onPrefChange allowRepeatCallers=" + allowRepeatCallers);
+        }
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_REPEAT_CALLS, allowRepeatCallers);
         mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allowRepeatCallers);
         return true;
     }

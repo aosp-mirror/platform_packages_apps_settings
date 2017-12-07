@@ -22,6 +22,7 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class ZenModeScreenOffPreferenceController extends
@@ -56,8 +57,11 @@ public class ZenModeScreenOffPreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean bypass = (Boolean) newValue;
-        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allowWhenScreenOff="
-                + !bypass);
+        if (ZenModeSettingsBase.DEBUG) {
+            Log.d(TAG, "onPrefChange allowWhenScreenOff=" + bypass);
+        }
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_ZEN_ALLOW_WHEN_SCREEN_OFF, bypass);
         mBackend.saveVisualEffectsPolicy(Policy.SUPPRESSED_EFFECT_SCREEN_OFF, bypass);
         return true;
     }

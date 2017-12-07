@@ -42,6 +42,7 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -74,21 +75,6 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.zen_mode_schedule_rule_settings;
-    }
-
-    @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return null;
-    }
-
-    @Override
-    protected String getZenModeDependency() {
-        return mDays.getKey();
-    }
-
-    @Override
-    protected int getEnabledToastText() {
-        return R.string.zen_schedule_rule_enabled_toast;
     }
 
     @Override
@@ -206,6 +192,20 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
         mEnd.setTime(mSchedule.endHour, mSchedule.endMinute);
         mExitAtAlarm.setChecked(mSchedule.exitAtAlarm);
         updateEndSummary();
+    }
+
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        List<AbstractPreferenceController> controllers = new ArrayList<>();
+        mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
+                getLifecycle());
+        mSwitch = new ZenAutomaticRuleSwitchPreferenceController(context, this,
+                R.string.zen_schedule_rule_enabled_toast, getLifecycle());
+
+        controllers.add(mHeader);
+        controllers.add(mSwitch);
+        return controllers;
     }
 
     @Override

@@ -20,19 +20,19 @@
 <resources>
 
     <!-- Fragment style -->
-    <style name="SettingsPreferenceFragmentStyle" parent="@style/PreferenceFragment.Material">
+    <style name="SettingsPreferenceFragmentStyle" parent="@style/PreferenceFragmentStyle.SettingsBase">
         <item name="android:layout">@layout/preference_list_fragment</item>
     </style>
 
-    <style name="ApnPreference" parent="@style/Preference.Material">
+    <style name="ApnPreference" parent="Preference.SettingsBase">
         <item name="android:layout">@layout/apn_preference_layout</item>
     </style>
 
-    <style name="SettingsSeekBarPreference" parent="@style/Preference.Material">
+    <style name="SettingsSeekBarPreference" parent="Preference.SettingsBase">
         <item name="android:layout">@layout/preference_widget_seekbar_settings</item>
     </style>
 
-    <style name="SyncSwitchPreference" parent="@style/Preference.Material">
+    <style name="SyncSwitchPreference" parent="Preference.SettingsBase">
         <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
     </style>
 

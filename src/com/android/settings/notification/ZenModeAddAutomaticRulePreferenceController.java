@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.android.settings.utils.ZenServiceListing;
 
@@ -28,19 +29,18 @@ public class ZenModeAddAutomaticRulePreferenceController extends
         AbstractZenModeAutomaticRulePreferenceController implements
         Preference.OnPreferenceClickListener {
 
-    private final String KEY_ADD_RULE;
+    protected static final String KEY = "zen_mode_add_automatic_rule";
     private final ZenServiceListing mZenServiceListing;
 
-    public ZenModeAddAutomaticRulePreferenceController(Context context, String key,
-            Fragment parent, ZenServiceListing serviceListing) {
-        super(context, parent);
-        KEY_ADD_RULE = key;
+    public ZenModeAddAutomaticRulePreferenceController(Context context, Fragment parent,
+            ZenServiceListing serviceListing, Lifecycle lifecycle) {
+        super(context, KEY, parent, lifecycle);
         mZenServiceListing = serviceListing;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_ADD_RULE;
+        return KEY;
     }
 
     @Override
@@ -51,25 +51,30 @@ public class ZenModeAddAutomaticRulePreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Preference pref = screen.findPreference(KEY_ADD_RULE);
+        Preference pref = screen.findPreference(KEY);
         pref.setPersistent(false);
         pref.setOnPreferenceClickListener(this);
     }
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        new ZenRuleSelectionDialog(mContext, mZenServiceListing) {
-            @Override
-            public void onSystemRuleSelected(ZenRuleInfo ri) {
-                showNameRuleDialog(ri);
-            }
-
-            @Override
-            public void onExternalRuleSelected(ZenRuleInfo ri) {
-                Intent intent = new Intent().setComponent(ri.configurationActivity);
-                mParent.startActivity(intent);
-            }
-        }.show();
+        ZenRuleSelectionDialog.show(mContext, mParent, new RuleSelectionListener(),
+                mZenServiceListing);
         return true;
+    }
+
+    public class RuleSelectionListener implements ZenRuleSelectionDialog.PositiveClickListener {
+        public RuleSelectionListener() {}
+
+        @Override
+        public void onSystemRuleSelected(ZenRuleInfo ri, Fragment parent) {
+            showNameRuleDialog(ri, parent);
+        }
+
+        @Override
+        public void onExternalRuleSelected(ZenRuleInfo ri, Fragment parent) {
+            Intent intent = new Intent().setComponent(ri.configurationActivity);
+            parent.startActivity(intent);
+        }
     }
 }

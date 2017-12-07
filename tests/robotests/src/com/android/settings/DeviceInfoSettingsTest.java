@@ -18,6 +18,7 @@ package com.android.settings;
 
 import static com.android.settings.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
 import static com.android.settings.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
@@ -116,6 +118,19 @@ public class DeviceInfoSettingsTest {
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
+            SettingsShadowSystemProperties.class})
+    public void onCreate_fromSearch_shouldNotOverrideInitialExpandedCount() {
+        final Bundle args = new Bundle();
+        args.putString(EXTRA_FRAGMENT_ARG_KEY, "search_key");
+        mSettings.setArguments(args);
+
+        mSettings.onCreate(null /* icicle */);
+
+        verify(mScreen).setInitialExpandedChildrenCount(Integer.MAX_VALUE);
     }
 
     @Test
