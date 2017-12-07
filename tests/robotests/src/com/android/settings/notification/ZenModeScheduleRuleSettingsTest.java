@@ -17,10 +17,10 @@
 package com.android.settings.notification;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
-import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
@@ -34,6 +34,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
+import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -58,13 +60,18 @@ public class ZenModeScheduleRuleSettingsTest {
     private Intent mIntent;
 
     @Mock
-    private UserManager mUserManager;
+    private NotificationManager mNotificationManager;
 
     private TestFragment mFragment;
+    private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+
+        ShadowApplication shadowApplication = ShadowApplication.getInstance();
+        shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
+        mContext = shadowApplication.getApplicationContext();
 
         mFragment = spy(new TestFragment());
         mFragment.onAttach(application);
@@ -77,13 +84,13 @@ public class ZenModeScheduleRuleSettingsTest {
         when(mActivity.getTheme()).thenReturn(res.newTheme());
         when(mActivity.getIntent()).thenReturn(mIntent);
         when(mActivity.getResources()).thenReturn(res);
-        when(mFragment.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        when(mFragment.getContext()).thenReturn(mContext);
     }
 
     @Test
     public void onCreate_noRuleId_shouldToastAndFinishAndNoCrash() {
-        final Context ctx = application.getApplicationContext();
-        final String expected = ctx.getResources().getString(R.string.zen_mode_rule_not_found_text);
+        final String expected = mContext.getResources().getString(
+                R.string.zen_mode_rule_not_found_text);
 
         mFragment.onCreate(null);
 
@@ -93,7 +100,7 @@ public class ZenModeScheduleRuleSettingsTest {
         // verify the finish
         verify(mActivity).finish();
 
-        //shoud not crash
+        //should not crash
     }
 
     public static class TestFragment extends ZenModeScheduleRuleSettings {
