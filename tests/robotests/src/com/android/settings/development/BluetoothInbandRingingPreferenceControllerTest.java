@@ -18,7 +18,7 @@ package com.android.settings.development;
 
 
 import static com.android.settings.development.BluetoothInbandRingingPreferenceController
-        .BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY;
+        .BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -84,7 +84,7 @@ public class BluetoothInbandRingingPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
         final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, false /* default */);
+                BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -94,14 +94,14 @@ public class BluetoothInbandRingingPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
         final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, false /* default */);
+                BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY,
+        SettingsShadowSystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
                 Boolean.toString(true));
         mController.updateState(mPreference);
 
@@ -110,7 +110,7 @@ public class BluetoothInbandRingingPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY,
+        SettingsShadowSystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
                 Boolean.toString(false));
         mController.updateState(mPreference);
 
@@ -122,11 +122,11 @@ public class BluetoothInbandRingingPreferenceControllerTest {
         mController.onDeveloperOptionsDisabled();
 
         final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, false /* default */);
+                BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false /* default */);
 
-        assertThat(mode).isTrue();
+        assertThat(mode).isFalse();
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setChecked(true);
+        verify(mPreference).setChecked(false);
     }
 
     @Test
