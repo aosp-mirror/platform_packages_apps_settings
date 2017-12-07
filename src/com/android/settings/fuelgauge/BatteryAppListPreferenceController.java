@@ -36,6 +36,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
@@ -45,6 +46,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -149,7 +151,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST);
     }
 
     @Override

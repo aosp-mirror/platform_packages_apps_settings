@@ -27,6 +27,7 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.FeatureFlagUtils;
 import android.util.SparseArray;
 
 import com.android.internal.os.BatterySipper;
@@ -34,8 +35,10 @@ import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +52,8 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
+        SettingsShadowSystemProperties.class)
 public class BatteryAppListPreferenceControllerTest {
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String KEY_APP_LIST = "app_list";
@@ -169,6 +173,7 @@ public class BatteryAppListPreferenceControllerTest {
 
     @Test
     public void testRefreshAnomalyIcon_containsAnomaly_showAnomalyIcon() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, true);
         PowerGaugePreference preference = new PowerGaugePreference(mContext);
         final String key = mPreferenceController.extractKeyFromUid(UID);
         final SparseArray<List<Anomaly>> anomalySparseArray = new SparseArray<>();
@@ -200,5 +205,19 @@ public class BatteryAppListPreferenceControllerTest {
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
 
         assertThat(mPreferenceController.shouldHideSipper(mNormalBatterySipper)).isFalse();
+    }
+
+    @Test
+    public void testIsAvailable_featureOn_returnTrue() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, true);
+
+        assertThat(mPreferenceController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testIsAvailable_featureOff_returnFalse() {
+        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, false);
+
+        assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 }
