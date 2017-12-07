@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.support.test.filters.SmallTest;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
+import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiScrollable;
 import android.support.test.uiautomator.UiSelector;
 import android.test.InstrumentationTestCase;
@@ -79,9 +80,15 @@ public class SpecialAppAccessSettingsTest extends InstrumentationTestCase {
         final String titleSpecialApps = mTargetContext.getResources().getString(
             R.string.special_access);
 
-        final UiScrollable settings = new UiScrollable(
-                new UiSelector().packageName(mTargetContext.getPackageName()).scrollable(true));
-        settings.scrollTextIntoView(titleSpecialApps);
+        try {
+            // scollbar may or may not be present, depending on how many recents app are there. If
+            // the page is scrollable, scroll to the bottom to show the special app access settings.
+            final UiScrollable settings = new UiScrollable(
+                    new UiSelector().packageName(mTargetContext.getPackageName()).scrollable(true));
+            settings.scrollTextIntoView(titleSpecialApps);
+        } catch (UiObjectNotFoundException e) {
+            // ignore
+        }
 
         mDevice.findObject(new UiSelector().text(titleSpecialApps)).click();
     }

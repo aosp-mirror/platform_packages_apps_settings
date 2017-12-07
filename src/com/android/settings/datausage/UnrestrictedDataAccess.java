@@ -32,7 +32,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.AppStateBaseBridge;
 import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.overlay.FeatureFactory;

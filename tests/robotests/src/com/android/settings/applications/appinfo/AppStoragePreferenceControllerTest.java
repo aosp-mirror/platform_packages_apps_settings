@@ -32,7 +32,6 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

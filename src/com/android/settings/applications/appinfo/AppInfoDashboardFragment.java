@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -23,7 +23,6 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -59,27 +58,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.appinfo.AppBatteryPreferenceController;
-import com.android.settings.applications.appinfo.AppDataUsagePreferenceController;
-import com.android.settings.applications.appinfo.AppInstallerInfoPreferenceController;
-import com.android.settings.applications.appinfo.AppInstallerPreferenceCategoryController;
-import com.android.settings.applications.appinfo.AppMemoryPreferenceController;
-import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
-import com.android.settings.applications.appinfo.AppOpenByDefaultPreferenceController;
-import com.android.settings.applications.appinfo.AppPermissionPreferenceController;
-import com.android.settings.applications.appinfo.AppStoragePreferenceController;
-import com.android.settings.applications.appinfo.AppVersionPreferenceController;
-import com.android.settings.applications.appinfo.DefaultBrowserShortcutPreferenceController;
-import com.android.settings.applications.appinfo.DefaultEmergencyShortcutPreferenceController;
-import com.android.settings.applications.appinfo.DefaultHomeShortcutPreferenceController;
-import com.android.settings.applications.appinfo.DefaultPhoneShortcutPreferenceController;
-import com.android.settings.applications.appinfo.DefaultSmsShortcutPreferenceController;
-import com.android.settings.applications.appinfo.DrawOverlayDetailPreferenceController;
-import com.android.settings.applications.appinfo.ExternalSourceDetailPreferenceController;
-import com.android.settings.applications.appinfo.InstantAppButtonsPreferenceController;
-import com.android.settings.applications.appinfo.InstantAppDomainsPreferenceController;
-import com.android.settings.applications.appinfo.PictureInPictureDetailPreferenceController;
-import com.android.settings.applications.appinfo.WriteSystemSettingsPreferenceController;
+import com.android.settings.applications.ApplicationFeatureProvider;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -116,19 +96,19 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final String TAG = "AppInfoDashboard";
 
     // Menu identifiers
-    public static final int UNINSTALL_ALL_USERS_MENU = 1;
-    public static final int UNINSTALL_UPDATES = 2;
+    private static final int UNINSTALL_ALL_USERS_MENU = 1;
+    private static final int UNINSTALL_UPDATES = 2;
 
     // Result code identifiers
-    public static final int REQUEST_UNINSTALL = 0;
+    @VisibleForTesting
+    static final int REQUEST_UNINSTALL = 0;
     private static final int REQUEST_REMOVE_DEVICE_ADMIN = 1;
 
-    public static final int SUB_INFO_FRAGMENT = 1;
+    static final int SUB_INFO_FRAGMENT = 1;
 
-    public static final int LOADER_CHART_DATA = 2;
-    public static final int LOADER_STORAGE = 3;
-    @VisibleForTesting
-    public static final int LOADER_BATTERY = 4;
+    static final int LOADER_CHART_DATA = 2;
+    static final int LOADER_STORAGE = 3;
+    static final int LOADER_BATTERY = 4;
 
     // Dialog identifiers used in showDialog
     private static final int DLG_BASE = 0;
@@ -137,12 +117,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
     private static final String KEY_HEADER = "header_view";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
+    private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
 
-    protected static final boolean localLOGV = false;
-    private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
+    private static final boolean localLOGV = false;
 
     private EnforcedAdmin mAppsControlDisallowedAdmin;
     private boolean mAppsControlDisallowedBySystem;
@@ -278,7 +258,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
 
         try {
-            IWebViewUpdateService webviewUpdateService =
+            final IWebViewUpdateService webviewUpdateService =
                 IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
             if (webviewUpdateService.isFallbackPackage(mAppEntry.info.packageName)) {
                 enabled = false;
@@ -414,20 +394,21 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return controllers;
     }
 
-    public ApplicationsState.AppEntry getAppEntry() {
+    ApplicationsState.AppEntry getAppEntry() {
         if (mAppEntry == null) {
             retrieveAppEntry();
         }
         return mAppEntry;
     }
 
-    public PackageInfo getPackageInfo() {
+    PackageInfo getPackageInfo() {
         if (mAppEntry == null) {
             retrieveAppEntry();
         }
         return mPackageInfo;
     }
 
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (mFinishing) {
@@ -492,7 +473,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
-        MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
+        final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
         uninstallUpdatesItem.setVisible(mUpdatedSysApp && !mAppsControlDisallowedBySystem);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
@@ -525,7 +506,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     mDisableAfterUninstall = false;
                     new DisableChanger(this, mAppEntry.info,
                             PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
-                            .execute((Object)null);
+                            .execute((Object) null);
                 }
                 // continue with following operations
             case REQUEST_REMOVE_DEVICE_ADMIN:
@@ -569,7 +550,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             showIt = false;
         } else if (mUserManager.getUsers().size() < 2) {
             showIt = false;
-        } else if (PackageUtil.countPackageInUsers(mPm, mUserManager, mPackageName) < 2
+        } else if (getNumberOfUserWithPackageInstalled(mPackageName) < 2
                 && (appEntry.info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
             showIt = false;
         } else if (AppUtils.isInstant(appEntry.info)) {
@@ -605,11 +586,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
 
         // Get list of "home" apps and trace through any meta-data references
-        List<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
+        final List<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
         mPm.getHomeActivities(homeActivities);
         mHomePackages.clear();
         for (int i = 0; i< homeActivities.size(); i++) {
-            ResolveInfo ri = homeActivities.get(i);
+            final ResolveInfo ri = homeActivities.get(i);
             final String activityPkg = ri.activityInfo.packageName;
             mHomePackages.add(activityPkg);
 
@@ -628,7 +609,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         initUninstallButtons();
 
         // Update the preference summaries.
-        Activity context = getActivity();
+        final Activity context = getActivity();
         for (Callback callback : mCallbacks) {
             callback.refreshUi();
         }
@@ -641,7 +622,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             // All other times: if the app no longer exists then we want
             // to go away.
             try {
-                ApplicationInfo ainfo = context.getPackageManager().getApplicationInfo(
+                final ApplicationInfo ainfo = context.getPackageManager().getApplicationInfo(
                         mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS
                         | PackageManager.MATCH_ANY_USER);
@@ -712,8 +693,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
         stopListeningToPackageRemove();
          // Create new intent to launch Uninstaller activity
-        Uri packageURI = Uri.parse("package:"+packageName);
-        Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
+        final Uri packageURI = Uri.parse("package:"+packageName);
+        final Intent uninstallIntent = new Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageURI);
         uninstallIntent.putExtra(Intent.EXTRA_UNINSTALL_ALL_USERS, allUsers);
         mMetricsFeatureProvider.action(
                 getContext(), MetricsEvent.ACTION_SETTINGS_UNINSTALL_APP);
@@ -723,13 +704,13 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private void forceStopPackage(String pkgName) {
         mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
-        ActivityManager am = (ActivityManager) getActivity().getSystemService(
+        final ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
         Log.d(TAG, "Stopping package " + pkgName);
         am.forceStopPackage(pkgName);
-        int userId = UserHandle.getUserId(mAppEntry.info.uid);
+        final int userId = UserHandle.getUserId(mAppEntry.info.uid);
         mState.invalidatePackage(pkgName, userId);
-        AppEntry newEnt = mState.getEntry(pkgName, userId);
+        final AppEntry newEnt = mState.getEntry(pkgName, userId);
         if (newEnt != null) {
             mAppEntry = newEnt;
         }
@@ -758,7 +739,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             Log.w(TAG, "App is not explicitly stopped");
             updateForceStopButton(true);
         } else {
-            Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
+            final Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mAppEntry.info.packageName, null));
             intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
             intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
@@ -773,11 +754,11 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public static void startAppInfoFragment(Class<?> fragment, int title,
             SettingsPreferenceFragment caller, AppEntry appEntry) {
         // start new fragment to display extended information
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
 
-        SettingsActivity sa = (SettingsActivity) caller.getActivity();
+        final SettingsActivity sa = (SettingsActivity) caller.getActivity();
         sa.startPreferencePanel(caller, fragment.getName(), args, title, null, caller,
                 SUB_INFO_FRAGMENT);
     }
@@ -790,8 +771,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final String packageName = mAppEntry.info.packageName;
         if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
             stopListeningToPackageRemove();
-            Activity activity = getActivity();
-            Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
+            final Activity activity = getActivity();
+            final Intent uninstallDAIntent = new Intent(activity, DeviceAdminAdd.class);
             uninstallDAIntent.putExtra(DeviceAdminAdd.EXTRA_DEVICE_ADMIN_PACKAGE_NAME,
                     mPackageName);
             mMetricsFeatureProvider.action(
@@ -799,9 +780,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
             activity.startActivityForResult(uninstallDAIntent, REQUEST_REMOVE_DEVICE_ADMIN);
             return;
         }
-        EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
+        final EnforcedAdmin admin = RestrictedLockUtils.checkIfUninstallBlocked(getActivity(),
                 packageName, mUserId);
-        boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
+        final boolean uninstallBlockedBySystem = mAppsControlDisallowedBySystem ||
                 RestrictedLockUtils.hasBaseUserRestriction(getActivity(), packageName, mUserId);
         if (admin != null && !uninstallBlockedBySystem) {
             RestrictedLockUtils.sendShowAdminSupportDetailsIntent(getActivity(), admin);
@@ -847,8 +828,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     /** Returns whether there is only one user on this device, not including the system-only user */
     private boolean isSingleUser() {
         final int userCount = mUserManager.getUserCount();
-        return userCount == 1
-                || (mUserManager.isSplitSystemUser() && userCount == 2);
+        return userCount == 1 || (mUserManager.isSplitSystemUser() && userCount == 2);
     }
 
     private void onPackageRemoved() {
@@ -856,35 +836,25 @@ public class AppInfoDashboardFragment extends DashboardFragment
         getActivity().finishAndRemoveTask();
     }
 
-    /**
-     * Elicit this class for testing. Test cannot be done in robolectric because it
-     * invokes the new API.
-     */
     @VisibleForTesting
-    public static class PackageUtil {
-        /**
-         * Count how many users in device have installed package {@paramref packageName}
-         */
-        public static int countPackageInUsers(PackageManager packageManager, UserManager
-                userManager, String packageName) {
-            final List<UserInfo> userInfos = userManager.getUsers(true);
-            int count = 0;
+    int getNumberOfUserWithPackageInstalled(String packageName) {
+        final List<UserInfo> userInfos = mUserManager.getUsers(true);
+        int count = 0;
 
-            for (final UserInfo userInfo : userInfos) {
-                try {
-                    // Use this API to check whether user has this package
-                    final ApplicationInfo info = packageManager.getApplicationInfoAsUser(
-                            packageName, PackageManager.GET_META_DATA, userInfo.id);
-                    if ((info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
-                        count++;
-                    }
-                } catch(NameNotFoundException e) {
-                    Log.e(TAG, "Package: " + packageName + " not found for user: " + userInfo.id);
+        for (final UserInfo userInfo : userInfos) {
+            try {
+                // Use this API to check whether user has this package
+                final ApplicationInfo info = mPm.getApplicationInfoAsUser(
+                        packageName, PackageManager.GET_META_DATA, userInfo.id);
+                if ((info.flags & ApplicationInfo.FLAG_INSTALLED) != 0) {
+                    count++;
                 }
+            } catch(NameNotFoundException e) {
+                Log.e(TAG, "Package: " + packageName + " not found for user: " + userInfo.id);
             }
-
-            return count;
         }
+
+        return count;
     }
 
     private static class DisableChanger extends AsyncTask<Object, Object, Object> {
@@ -924,7 +894,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
-            Intent intent = (args == null) ?
+            final Intent intent = (args == null) ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
@@ -964,16 +934,15 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private void setIntentAndFinish(boolean finish, boolean appChanged) {
         if (localLOGV) Log.i(TAG, "appChanged="+appChanged);
-        Intent intent = new Intent();
+        final Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
-        SettingsActivity sa = (SettingsActivity)getActivity();
+        final SettingsActivity sa = (SettingsActivity)getActivity();
         sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 
-    public void showDialogInner(int id, int moveErrorCode) {
-        DialogFragment newFragment =
-                MyAlertDialogFragment.newInstance(id, moveErrorCode);
+    void showDialogInner(int id, int moveErrorCode) {
+        final DialogFragment newFragment = MyAlertDialogFragment.newInstance(id, moveErrorCode);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "dialog " + id);
     }
@@ -1015,24 +984,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
-            String pkg, int uid, Fragment source, int request, int sourceMetricsCategory) {
-        startAppInfoFragment(fragment, titleRes, pkg, uid, source.getActivity(), request,
-                sourceMetricsCategory);
-    }
-
-    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
-            String pkg, int uid, Activity source, int request, int sourceMetricsCategory) {
-        Bundle args = new Bundle();
-        args.putString(ARG_PACKAGE_NAME, pkg);
-        args.putInt(ARG_PACKAGE_UID, uid);
-
-        Intent intent = Utils.onBuildStartFragmentIntent(source, fragment.getName(),
-                args, null, titleRes, null, false, sourceMetricsCategory);
-        source.startActivityForResultAsUser(intent, request,
-                new UserHandle(UserHandle.getUserId(uid)));
-    }
-
     public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
 
         private static final String ARG_ID = "id";
@@ -1044,10 +995,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            int id = getArguments().getInt(ARG_ID);
-            int errorCode = getArguments().getInt("moveError");
-            Dialog dialog = ((AppInfoDashboardFragment) getTargetFragment())
-                    .createDialog(id, errorCode);
+            final int id = getArguments().getInt(ARG_ID);
+            final int errorCode = getArguments().getInt("moveError");
+            final Dialog dialog =
+                    ((AppInfoDashboardFragment) getTargetFragment()).createDialog(id, errorCode);
             if (dialog == null) {
                 throw new IllegalArgumentException("unknown id " + id);
             }
@@ -1055,8 +1006,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
 
         public static MyAlertDialogFragment newInstance(int id, int errorCode) {
-            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
-            Bundle args = new Bundle();
+            final MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
+            final Bundle args = new Bundle();
             args.putInt(ARG_ID, id);
             args.putInt("moveError", errorCode);
             dialogFragment.setArguments(args);
@@ -1085,7 +1036,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String packageName = intent.getData().getSchemeSpecificPart();
+            final String packageName = intent.getData().getSchemeSpecificPart();
             if (!mFinishing && (mAppEntry == null || mAppEntry.info == null
                     || TextUtils.equals(mAppEntry.info.packageName, packageName))) {
                 onPackageRemoved();

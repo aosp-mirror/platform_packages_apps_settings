@@ -34,7 +34,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.testutils.FakeFeatureFactory;

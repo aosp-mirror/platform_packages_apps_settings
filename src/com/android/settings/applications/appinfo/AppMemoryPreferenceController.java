@@ -26,7 +26,6 @@ import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcStatsEntry;
 import com.android.settings.applications.ProcStatsPackageEntry;

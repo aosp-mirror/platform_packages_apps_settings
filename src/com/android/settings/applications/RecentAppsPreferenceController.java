@@ -40,6 +40,7 @@ import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.AppPreference;

@@ -28,7 +28,6 @@ import android.text.format.Formatter;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.FetchPackageStorageAsyncLoader;
 import com.android.settingslib.applications.StorageStatsSource;

@@ -45,7 +45,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.applications.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;

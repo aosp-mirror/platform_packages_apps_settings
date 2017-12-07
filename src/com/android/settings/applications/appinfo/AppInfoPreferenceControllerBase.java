@@ -22,7 +22,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 
 /*
