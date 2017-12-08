@@ -94,7 +94,12 @@ public class DeviceInfoSettingsTest {
     }
 
     @Test
+    @Config(shadows = {
+            SettingsShadowSystemProperties.class
+    })
     public void getPrefXml_shouldReturnDeviceInfoXml() {
+        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
+                "true");
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings_v2);
     }
 

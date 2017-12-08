@@ -84,7 +84,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         final Bundle arguments = getArguments();
-        if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2) || true) {
+        if (FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)) {
             // Do not override initial expand children count if we come from
             // search (EXTRA_FRAGMENT_ARG_KEY is set) - we need to display every if entry point
             // is search.
@@ -119,7 +119,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2) || true
+        return FeatureFlagUtils.isEnabled(getContext(), DEVICE_INFO_V2)
                 ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
     }
 
@@ -156,7 +156,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
-        if (FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2) || true) {
+        if (FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2)) {
             final List<AbstractPreferenceController> controllers = new ArrayList<>();
             // Device name
 
@@ -220,7 +220,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2) || true
+                    sir.xmlResId = FeatureFlagUtils.isEnabled(context, DEVICE_INFO_V2)
                             ? R.xml.device_info_settings_v2 : R.xml.device_info_settings;
                     return Arrays.asList(sir);
                 }
