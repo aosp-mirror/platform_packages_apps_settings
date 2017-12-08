@@ -29,10 +29,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -41,8 +40,8 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Controller that shows and updates the bluetooth device name
  */
-public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
+public class BluetoothDeviceNamePreferenceController extends BasePreferenceController implements
+        LifecycleObserver, OnStart, OnStop {
     private static final String TAG = "BluetoothNamePrefCtrl";
 
     public static final String KEY_DEVICE_NAME = "device_name";
@@ -62,12 +61,22 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
             return;
         }
         mLocalAdapter = mLocalManager.getBluetoothAdapter();
-        lifecycle.addObserver(this);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    /**
+     * Constructor exclusively used for Slice.
+     */
+    public BluetoothDeviceNamePreferenceController(Context context) {
+        this(context, (Lifecycle) null);
     }
 
     @VisibleForTesting
     BluetoothDeviceNamePreferenceController(Context context, LocalBluetoothAdapter localAdapter) {
-        super(context);
+        super(context, KEY_DEVICE_NAME);
         mLocalAdapter = localAdapter;
     }
 
@@ -89,8 +98,8 @@ public class BluetoothDeviceNamePreferenceController extends AbstractPreferenceC
     }
 
     @Override
-    public boolean isAvailable() {
-        return mLocalAdapter != null;
+    public int getAvailabilityStatus() {
+        return mLocalAdapter != null ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override
