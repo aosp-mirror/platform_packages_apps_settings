@@ -26,7 +26,7 @@ import android.util.Log;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.util.ArrayUtils;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
