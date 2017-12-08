@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
-import android.Manifest.permission;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -47,7 +46,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -58,7 +56,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.IWebViewUpdateService;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
@@ -78,11 +75,10 @@ import com.android.settings.applications.appinfo.DefaultEmergencyShortcutPrefere
 import com.android.settings.applications.appinfo.DefaultHomeShortcutPreferenceController;
 import com.android.settings.applications.appinfo.DefaultPhoneShortcutPreferenceController;
 import com.android.settings.applications.appinfo.DefaultSmsShortcutPreferenceController;
-import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
-import com.android.settings.applications.defaultapps.DefaultEmergencyPreferenceController;
-import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
-import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
-import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
+import com.android.settings.applications.appinfo.DrawOverlayDetailPreferenceController;
+import com.android.settings.applications.appinfo.ExternalSourceDetailPreferenceController;
+import com.android.settings.applications.appinfo.PictureInPictureDetailPreferenceController;
+import com.android.settings.applications.appinfo.WriteSystemSettingsPreferenceController;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -90,6 +86,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.applications.AppUtils;
@@ -97,7 +94,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -149,6 +145,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public static final String ARG_PACKAGE_UID = "uid";
 
     protected static final boolean localLOGV = false;
+    private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
     private EnforcedAdmin mAppsControlDisallowedAdmin;
     private boolean mAppsControlDisallowedBySystem;
@@ -358,11 +355,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (!refreshUi()) {
             setIntentAndFinish(true, true);
         }
-
-        if (mFinishing) {
-            return;
-        }
-        updateDynamicPrefs();
     }
 
     @Override
@@ -404,6 +396,17 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new DefaultEmergencyShortcutPreferenceController(context, packageName));
         controllers.add(new DefaultSmsShortcutPreferenceController(context, packageName));
 
+        final List<AbstractPreferenceController> advancedAppInfoControllers = new ArrayList<>();
+        advancedAppInfoControllers.add(new DrawOverlayDetailPreferenceController(context, this));
+        advancedAppInfoControllers.add(new WriteSystemSettingsPreferenceController(context, this));
+        advancedAppInfoControllers.add(
+                new PictureInPictureDetailPreferenceController(context, this, packageName));
+        advancedAppInfoControllers.add(
+                new ExternalSourceDetailPreferenceController(context, this, packageName));
+        controllers.addAll(advancedAppInfoControllers);
+        controllers.add(new PreferenceCategoryController(
+                context, KEY_ADVANCED_APP_INFO_CATEGORY, advancedAppInfoControllers));
+
         return controllers;
     }
 
@@ -415,6 +418,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     public PackageInfo getPackageInfo() {
+        if (mAppEntry == null) {
+            retrieveAppEntry();
+        }
         return mPackageInfo;
     }
 
@@ -603,7 +609,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return false;
     }
 
-    protected boolean refreshUi() {
+    @VisibleForTesting
+    boolean refreshUi() {
         retrieveAppEntry();
         if (mAppEntry == null) {
             return false; // onCreate must have failed, make sure to exit
@@ -782,10 +789,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private void startAppInfoFragment(Class<?> fragment, int title) {
-        startAppInfoFragment(fragment, title, this, mAppEntry);
-    }
-
     public static void startAppInfoFragment(Class<?> fragment, int title,
             SettingsPreferenceFragment caller, AppEntry appEntry) {
         // start new fragment to display extended information
@@ -871,98 +874,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (UserManager.get(getContext()).isManagedProfile()) {
             return;
         }
-        final PreferenceScreen screen = getPreferenceScreen();
-        final Context context = getContext();
-
-        // Get the package info with the activities
-        PackageInfo packageInfoWithActivities = null;
-        try {
-            packageInfoWithActivities = mPm.getPackageInfoAsUser(mPackageName,
-                    PackageManager.GET_ACTIVITIES, UserHandle.myUserId());
-        } catch (NameNotFoundException e) {
-            Log.e(TAG, "Exception while retrieving the package info of " + mPackageName, e);
-        }
-
-        boolean hasDrawOverOtherApps = hasPermission(permission.SYSTEM_ALERT_WINDOW);
-        boolean hasWriteSettings = hasPermission(permission.WRITE_SETTINGS);
-        boolean hasPictureInPictureActivities = (packageInfoWithActivities != null) &&
-                PictureInPictureSettings.checkPackageHasPictureInPictureActivities(
-                        packageInfoWithActivities.packageName,
-                        packageInfoWithActivities.activities);
-        boolean isPotentialAppSource = isPotentialAppSource();
-        if (hasDrawOverOtherApps || hasWriteSettings || hasPictureInPictureActivities ||
-                isPotentialAppSource) {
-            PreferenceCategory category = new PreferenceCategory(getPrefContext());
-            category.setTitle(R.string.advanced_apps);
-            screen.addPreference(category);
-
-            if (hasDrawOverOtherApps) {
-                Preference pref = new Preference(getPrefContext());
-                pref.setTitle(R.string.draw_overlay);
-                pref.setKey("system_alert_window");
-                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        startAppInfoFragment(DrawOverlayDetails.class, R.string.draw_overlay);
-                        return true;
-                    }
-                });
-                category.addPreference(pref);
-            }
-            if (hasWriteSettings) {
-                Preference pref = new Preference(getPrefContext());
-                pref.setTitle(R.string.write_settings);
-                pref.setKey("write_settings_apps");
-                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        startAppInfoFragment(WriteSettingsDetails.class, R.string.write_settings);
-                        return true;
-                    }
-                });
-                category.addPreference(pref);
-            }
-            if (hasPictureInPictureActivities) {
-                Preference pref = new Preference(getPrefContext());
-                pref.setTitle(R.string.picture_in_picture_app_detail_title);
-                pref.setKey("picture_in_picture");
-                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        AppInfoBase.startAppInfoFragment(PictureInPictureDetails.class,
-                                R.string.picture_in_picture_app_detail_title, mPackageName,
-                                mPackageInfo.applicationInfo.uid, AppInfoDashboardFragment.this,
-                                -1, getMetricsCategory());
-                        return true;
-                    }
-                });
-                category.addPreference(pref);
-            }
-            if (isPotentialAppSource) {
-                Preference pref = new Preference(getPrefContext());
-                pref.setTitle(R.string.install_other_apps);
-                pref.setKey("install_other_apps");
-                pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-                    @Override
-                    public boolean onPreferenceClick(Preference preference) {
-                        startAppInfoFragment(ExternalSourcesDetails.class,
-                                R.string.install_other_apps);
-                        return true;
-                    }
-                });
-                category.addPreference(pref);
-            }
-        }
-
-        addAppInstallerInfoPref(screen);
+        addAppInstallerInfoPref(getPreferenceScreen());
         maybeAddInstantAppButtons();
-    }
-
-    private boolean isPotentialAppSource() {
-        AppStateInstallAppsBridge.InstallAppsState appState =
-                new AppStateInstallAppsBridge(getContext(), null, null)
-                        .createInstallAppsStateFor(mPackageName, mPackageInfo.applicationInfo.uid);
-        return appState.isPotentialAppSource();
     }
 
     private void addAppInstallerInfoPref(PreferenceScreen screen) {
@@ -1005,39 +918,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
                             id -> showDialogInner(id, 0))
                     .setPackageName(mPackageName)
                     .show();
-        }
-    }
-
-    private boolean hasPermission(String permission) {
-        if (mPackageInfo == null || mPackageInfo.requestedPermissions == null) {
-            return false;
-        }
-        for (int i = 0; i < mPackageInfo.requestedPermissions.length; i++) {
-            if (mPackageInfo.requestedPermissions[i].equals(permission)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void updateDynamicPrefs() {
-        final Context context = getContext();
-        Preference pref = findPreference("system_alert_window");
-        if (pref != null) {
-            pref.setSummary(DrawOverlayDetails.getSummary(getContext(), mAppEntry));
-        }
-        pref = findPreference("picture_in_picture");
-        if (pref != null) {
-            pref.setSummary(PictureInPictureDetails.getPreferenceSummary(getContext(),
-                    mPackageInfo.applicationInfo.uid, mPackageName));
-        }
-        pref = findPreference("write_settings_apps");
-        if (pref != null) {
-            pref.setSummary(WriteSettingsDetails.getSummary(getContext(), mAppEntry));
-        }
-        pref = findPreference("install_other_apps");
-        if (pref != null) {
-            pref.setSummary(ExternalSourcesDetails.getPreferenceSummary(getContext(), mAppEntry));
         }
     }
 
@@ -1112,7 +992,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return mPackageName;
         }
         final Bundle args = getArguments();
-        String mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+        mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         if (mPackageName == null) {
             Intent intent = (args == null) ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
@@ -1229,7 +1109,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
         @Override
         public int getMetricsCategory() {
-            return MetricsProto.MetricsEvent.DIALOG_APP_INFO_ACTION;
+            return MetricsEvent.DIALOG_APP_INFO_ACTION;
         }
 
         @Override

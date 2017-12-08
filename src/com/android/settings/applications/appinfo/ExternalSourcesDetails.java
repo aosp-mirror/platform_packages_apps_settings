@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -30,6 +30,8 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.applications.AppInfoWithHeader;
+import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge.InstallAppsState;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;

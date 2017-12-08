@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -28,6 +26,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.overlay.FeatureFactory;
 
 import static android.app.AppOpsManager.MODE_ALLOWED;
@@ -38,42 +37,31 @@ public class PictureInPictureDetails extends AppInfoWithHeader
         implements OnPreferenceChangeListener {
 
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
-    private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
-    private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
     private static final String LOG_TAG = "PictureInPictureDetails";
 
     private SwitchPreference mSwitchPref;
-    private Preference mOverlayDesc;
-    private Intent mSettingsIntent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // find preferences
-        addPreferencesFromResource(R.xml.app_ops_permissions_details);
+        addPreferencesFromResource(R.xml.picture_in_picture_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
-        mOverlayDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
-        getPreferenceScreen().removePreference(findPreference(KEY_APP_OPS_SETTINGS_PREFS));
 
         // set title/summary for all of them
-        getPreferenceScreen().setTitle(R.string.picture_in_picture_app_detail_title);
         mSwitchPref.setTitle(R.string.picture_in_picture_app_detail_switch);
-        mOverlayDesc.setSummary(R.string.picture_in_picture_app_detail_summary);
 
         // install event listeners
         mSwitchPref.setOnPreferenceChangeListener(this);
-
-        mSettingsIntent = new Intent(Intent.ACTION_MAIN)
-                .setAction(Settings.ACTION_PICTURE_IN_PICTURE_SETTINGS);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mSwitchPref) {
             logSpecialPermissionChange((Boolean) newValue, mPackageName);
-            setEnterPipStateForPackage(getActivity(), mPackageInfo.applicationInfo.uid, mPackageName,
-                    (Boolean) newValue);
+            setEnterPipStateForPackage(getActivity(), mPackageInfo.applicationInfo.uid,
+                    mPackageName, (Boolean) newValue);
             return true;
         }
         return false;
@@ -121,7 +109,7 @@ public class PictureInPictureDetails extends AppInfoWithHeader
      * @return the summary for the current state of whether the app associated with the given
      *         {@param packageName} is allowed to enter picture-in-picture.
      */
-    static int getPreferenceSummary(Context context, int uid, String packageName) {
+    public static int getPreferenceSummary(Context context, int uid, String packageName) {
         final boolean enabled = PictureInPictureDetails.getEnterPipStateForPackage(context, uid,
                 packageName);
         return enabled ? R.string.app_permission_summary_allowed

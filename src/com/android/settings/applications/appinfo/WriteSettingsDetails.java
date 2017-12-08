@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -31,7 +33,9 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
+import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge.WriteSettingsState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -42,7 +46,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     private static final String KEY_APP_OPS_PREFERENCE_SCREEN = "app_ops_preference_screen";
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
-    private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
     private static final String LOG_TAG = "WriteSettingsDetails";
 
     private static final int [] APP_OPS_OP_CODE = {
@@ -55,7 +58,6 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
     private Preference mWriteSettingsPrefs;
-    private Preference mWriteSettingsDesc;
     private Intent mSettingsIntent;
     private WriteSettingsState mWriteSettingsState;
 
@@ -67,15 +69,9 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         mAppBridge = new AppStateWriteSettingsBridge(context, mState, null);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 
-        addPreferencesFromResource(R.xml.app_ops_permissions_details);
+        addPreferencesFromResource(R.xml.write_system_settings_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mWriteSettingsPrefs = findPreference(KEY_APP_OPS_SETTINGS_PREFS);
-        mWriteSettingsDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
-
-        getPreferenceScreen().setTitle(R.string.write_settings);
-        mSwitchPref.setTitle(R.string.permit_write_settings);
-        mWriteSettingsPrefs.setTitle(R.string.write_settings_preference);
-        mWriteSettingsDesc.setSummary(R.string.write_settings_description);
 
         mSwitchPref.setOnPreferenceChangeListener(this);
         mWriteSettingsPrefs.setOnPreferenceClickListener(this);
@@ -147,8 +143,13 @@ public class WriteSettingsDetails extends AppInfoWithHeader implements OnPrefere
         // you can't ask a user for a permission you didn't even declare!
         mSwitchPref.setEnabled(mWriteSettingsState.permissionDeclared);
         mWriteSettingsPrefs.setEnabled(canWrite);
-        if (getPreferenceScreen().findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
-            getPreferenceScreen().removePreference(mWriteSettingsPrefs);
+
+        ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
+                PackageManager.GET_META_DATA, mUserId);
+        if (resolveInfo == null) {
+            if (getPreferenceScreen().findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
+                getPreferenceScreen().removePreference(mWriteSettingsPrefs);
+            }
         }
         return true;
     }
