@@ -37,6 +37,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.LargeTest;
+import android.support.test.filters.Suppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
@@ -56,6 +57,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+@Suppress
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ExternalSourcesSettingsTest {
