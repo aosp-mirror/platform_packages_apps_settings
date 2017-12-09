@@ -16,6 +16,8 @@
 package com.android.settings.accessibility;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
+import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Activity;
@@ -85,9 +87,16 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         Map<ComponentName, ToggleableFrameworkFeatureInfo> frameworkFeatureInfoMap =
                 AccessibilityShortcutController.getFrameworkShortcutFeaturesMap();
         for (ComponentName componentName : frameworkFeatureInfoMap.keySet()) {
-            // Lookup icon
+            final int iconId;
+            if (componentName.equals(COLOR_INVERSION_COMPONENT_NAME)) {
+                iconId = R.drawable.ic_color_inversion;
+            } else if (componentName.equals(DALTONIZER_COMPONENT_NAME)) {
+                iconId = R.drawable.ic_daltonizer;
+            } else {
+                iconId = R.drawable.empty_icon;
+            }
             candidates.add(new FrameworkCandidateInfo(frameworkFeatureInfoMap.get(componentName),
-                    R.drawable.empty_icon, componentName.flattenToString()));
+                    iconId, componentName.flattenToString()));
         }
         for (int i = 0; i < numInstalledServices; i++) {
             final AccessibilityServiceInfo installedServiceInfo = installedServices.get(i);
