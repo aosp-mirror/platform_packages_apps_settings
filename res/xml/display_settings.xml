@@ -25,8 +25,9 @@
     <Preference
         android:key="brightness"
         android:title="@string/brightness"
-        settings:keywords="@string/keywords_display_brightness_level">
-        <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
+        settings:keywords="@string/keywords_display_brightness_level"
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController">
+    <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
     </Preference>
 
     <com.android.settings.display.NightDisplayPreference

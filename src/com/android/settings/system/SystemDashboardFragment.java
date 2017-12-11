@@ -67,7 +67,7 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
+        controllers.add(new SystemUpdatePreferenceController(context));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
         controllers.add(new BackupSettingsActivityPreferenceController(context));
         controllers.add(new GesturesSettingPreferenceController(context));
@@ -88,15 +88,16 @@ public class SystemDashboardFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add((new BackupSettingsActivityPreferenceController(context)
-                            .getPreferenceKey()));
+                    keys.add((new BackupSettingsActivityPreferenceController(
+                            context).getPreferenceKey()));
                     keys.add(KEY_RESET);
                     return keys;
                 }

@@ -17,26 +17,23 @@ package com.android.settings.deviceinfo;
 
 import android.content.Context;
 
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AdditionalSystemUpdatePreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin {
+public class AdditionalSystemUpdatePreferenceController extends BasePreferenceController {
 
     private static final String KEY_UPDATE_SETTING = "additional_system_update_settings";
 
     public AdditionalSystemUpdatePreferenceController(Context context) {
-        super(context);
+        super(context, KEY_UPDATE_SETTING);
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         return mContext.getResources().getBoolean(
-                com.android.settings.R.bool.config_additional_system_update_setting_enable);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_UPDATE_SETTING;
+                com.android.settings.R.bool.config_additional_system_update_setting_enable)
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 }

@@ -22,31 +22,29 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class BackupSettingsActivityPreferenceController extends
-        AbstractPreferenceController implements PreferenceControllerMixin {
+public class BackupSettingsActivityPreferenceController extends BasePreferenceController {
+    private static final String TAG = "BackupSettingActivityPC";
+
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
-    private static final String TAG = "BackupSettingActivityPC" ;
 
     private final UserManager mUm;
     private final BackupManager mBackupManager;
 
     public BackupSettingsActivityPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_BACKUP_SETTINGS);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mBackupManager = new BackupManager(context);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mUm.isAdminUser();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BACKUP_SETTINGS;
+    public int getAvailabilityStatus() {
+        return mUm.isAdminUser()
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override
