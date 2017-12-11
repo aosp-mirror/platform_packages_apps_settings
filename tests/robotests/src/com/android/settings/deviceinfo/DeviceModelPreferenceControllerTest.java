@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import static com.android.settings.deviceinfo.DeviceModelPreferenceController.getDeviceModel;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
@@ -26,16 +27,12 @@ import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +54,7 @@ public class DeviceModelPreferenceControllerTest {
     @Mock
     private PreferenceScreen mPreferenceScreen;
 
+
     private Context mContext;
     private DeviceModelPreferenceController mController;
 
@@ -76,12 +74,7 @@ public class DeviceModelPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {
-            SettingsShadowSystemProperties.class
-    })
     public void displayPref_shouldSetSummary() {
-        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
-                "true");
         mController.displayPreference(mPreferenceScreen);
 
         verify(mPreference).setSummary(mContext.getResources().getString(R.string.model_summary,

@@ -21,10 +21,8 @@ import android.os.Build;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -51,12 +49,8 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
         super.displayPreference(screen);
         final Preference pref = screen.findPreference(KEY_DEVICE_MODEL);
         if (pref != null) {
-            if (FeatureFlagUtils.isEnabled(mContext, FeatureFlags.DEVICE_INFO_V2)) {
-                pref.setSummary(mContext.getResources().getString(R.string.model_summary,
-                        getDeviceModel()));
-            } else {
-                pref.setSummary(getDeviceModel());
-            }
+            pref.setSummary(mContext.getResources().getString(R.string.model_summary,
+                    getDeviceModel()));
         }
     }
 
