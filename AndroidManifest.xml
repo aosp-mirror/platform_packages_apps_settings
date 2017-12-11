@@ -2573,7 +2573,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.PictureInPictureSettings" />
+                android:value="com.android.settings.applications.appinfo.PictureInPictureSettings" />
         </activity>
 
         <activity android:name="Settings$AppPictureInPictureSettingsActivity"
@@ -2585,7 +2585,7 @@
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.PictureInPictureDetails" />
+                android:value="com.android.settings.applications.appinfo.PictureInPictureDetails" />
         </activity>
 
         <activity android:name="Settings$ZenAccessSettingsActivity"
@@ -2939,7 +2939,7 @@
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.applications.DrawOverlayDetails" />
+                android:value="com.android.settings.applications.appinfo.DrawOverlayDetails" />
         </activity>
 
         <activity android:name="Settings$WriteSettingsActivity"
@@ -2963,7 +2963,7 @@
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.WriteSettingsDetails" />
+                       android:value="com.android.settings.applications.appinfo.WriteSettingsDetails" />
         </activity>
 
         <activity android:name="Settings$ManageExternalSourcesActivity"
@@ -2986,7 +2986,7 @@
                 <data android:scheme="package" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.applications.ExternalSourcesDetails" />
+                       android:value="com.android.settings.applications.appinfo.ExternalSourcesDetails" />
         </activity>
 
         <activity android:name="ShowAdminSupportDetailsDialog"
