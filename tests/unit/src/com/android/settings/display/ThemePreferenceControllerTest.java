@@ -118,8 +118,8 @@ public class ThemePreferenceControllerTest {
             }
             return info;
         });
-        PackageInfo pi = new PackageInfo();
-        pi.isStaticOverlay = true;
+        PackageInfo pi = mock(PackageInfo.class);
+        when(pi.isStaticOverlayPackage()).thenReturn(true);
         when(mMockPackageManager.getPackageInfo(eq("com.android.Theme1"), anyInt())).thenReturn(pi);
         when(mMockPackageManager.getPackageInfo(eq("com.android.Theme2"), anyInt())).thenReturn(
                 new PackageInfo());
