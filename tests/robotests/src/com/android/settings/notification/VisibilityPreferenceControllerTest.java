@@ -209,7 +209,7 @@ public class VisibilityPreferenceControllerTest {
             ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertFalse(toStringList(argumentCaptor.getValue())
-                .contains(VISIBILITY_NO_OVERRIDE));
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
     }
 
     @Test
@@ -228,7 +228,7 @@ public class VisibilityPreferenceControllerTest {
             ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
         assertFalse(toStringList(argumentCaptor.getValue())
-                .contains(VISIBILITY_NO_OVERRIDE));
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
     }
 
     @Test
