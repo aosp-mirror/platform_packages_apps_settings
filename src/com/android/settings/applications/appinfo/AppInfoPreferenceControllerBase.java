@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.slice.Slice;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -48,11 +47,6 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public Slice getSettingSlice() {
-        return null;
     }
 
     @Override

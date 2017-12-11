@@ -23,13 +23,11 @@ import android.content.res.Resources;
 import android.icu.text.ListFormatter;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settingslib.applications.PermissionsSummaryHelper;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;

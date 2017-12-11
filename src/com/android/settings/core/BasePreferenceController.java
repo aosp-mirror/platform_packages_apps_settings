@@ -14,14 +14,10 @@
 package com.android.settings.core;
 
 import android.annotation.IntDef;
-import android.app.slice.Slice;
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
 
-
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -88,11 +84,6 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     @AvailabilityStatus
     public abstract int getAvailabilityStatus();
 
-    /**
-     * @return A slice for the corresponding setting.
-     */
-    public abstract Slice getSettingSlice();
-
     @Override
     public String getPreferenceKey() {
         return mPreferenceKey;
@@ -150,10 +141,4 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public ResultPayload getResultPayload() {
         return null;
     }
-
-    // TODO (b/69380366) Add Method to get preference UI
-
-    // TODO (b/69380464) Add method to get intent
-
-    // TODO (b/69380560) Add method to get broadcast intent
 }

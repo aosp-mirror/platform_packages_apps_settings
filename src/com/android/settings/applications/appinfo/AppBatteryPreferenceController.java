@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import android.app.LoaderManager;
-import android.app.slice.Slice;
 import android.content.Context;
 import android.content.Loader;
 import android.content.pm.PackageInfo;
@@ -79,11 +78,6 @@ public class AppBatteryPreferenceController extends BasePreferenceController
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
-    }
-
-    @Override
-    public Slice getSettingSlice() {
-        return null;
     }
 
     @Override
