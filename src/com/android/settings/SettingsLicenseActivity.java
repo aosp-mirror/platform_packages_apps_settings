@@ -20,12 +20,10 @@ import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.FileProvider;
@@ -34,10 +32,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.users.RestrictedProfileSettings;
+import com.android.settingslib.license.LicenseHtmlLoader;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The "dialog" that shows from "License" in the Settings app.
@@ -111,9 +108,9 @@ public class SettingsLicenseActivity extends Activity implements
             return;
         }
         showHtmlFromUri(Uri.fromFile(file));
-     }
+    }
 
-     private void showHtmlFromUri(Uri uri) {
+    private void showHtmlFromUri(Uri uri) {
         // Kick off external viewer due to WebView security restrictions; we
         // carefully point it at HTMLViewer, since it offers to decompress
         // before viewing.

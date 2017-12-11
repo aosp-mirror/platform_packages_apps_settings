@@ -20,7 +20,7 @@ import android.content.Context;
 import android.service.settings.suggestions.Suggestion;
 import android.util.Log;
 
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 import java.util.List;
 

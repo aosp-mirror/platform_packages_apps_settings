@@ -26,7 +26,7 @@ import android.view.Menu;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 /**
  * Common base class for things that need to show the battery usage graph.

@@ -13,7 +13,21 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:alpha="?android:attr/secondaryContentAlpha"
-          android:color="?android:attr/colorError"/>
-</selector>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="draw_overlay_permission_detail_settings"
+    android:title="@string/draw_overlay">
+
+    <SwitchPreference
+        android:key="app_ops_settings_switch"
+        android:title="@string/permit_draw_overlay"/>
+
+    <Preference
+        android:key="app_ops_settings_preference"
+        android:title="@string/app_overlay_permission_preference"/>
+
+    <Preference
+        android:summary="@string/allow_overlay_description"
+        android:selectable="false"/>
+
+</PreferenceScreen>

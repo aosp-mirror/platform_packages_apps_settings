@@ -17,7 +17,6 @@
 package com.android.settings.development.featureflags;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.FeatureFlagUtils;
 
@@ -68,14 +67,8 @@ public class FeatureFlagsPreferenceController extends AbstractPreferenceControll
         }
         mScreen.removeAll();
         final Context prefContext = mScreen.getContext();
-        for (String prefixedFeature : featureMap.keySet()) {
-            if (prefixedFeature.startsWith(FeatureFlagUtils.FFLAG_PREFIX)
-                    && !prefixedFeature.startsWith(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX)) {
-                final String feature = prefixedFeature.substring(
-                        FeatureFlagUtils.FFLAG_PREFIX.length());
-                final Preference pref = new FeatureFlagPreference(prefContext, feature);
-                mScreen.addPreference(pref);
-            }
+        for (String feature : featureMap.keySet()) {
+            mScreen.addPreference(new FeatureFlagPreference(prefContext, feature));
         }
     }
 }

@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.eq;

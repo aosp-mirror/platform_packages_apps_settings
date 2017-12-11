@@ -82,7 +82,7 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
                 mock(Lifecycle.class));
 
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
-        ReflectionHelpers.setField(mController, "DEFAULT_RULE_IDS", mDefaultIds);
+        ReflectionHelpers.setField(mController, "mDefaultRuleIds", mDefaultIds);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mockPref);

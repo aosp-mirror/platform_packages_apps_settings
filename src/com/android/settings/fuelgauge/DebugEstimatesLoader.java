@@ -22,7 +22,7 @@ import android.os.BatteryStats;
 import android.os.SystemClock;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 import java.util.ArrayList;
 import java.util.List;
 

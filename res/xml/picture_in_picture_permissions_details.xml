@@ -13,7 +13,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:alpha="?android:attr/secondaryContentAlpha"
-          android:color="?android:attr/colorError"/>
-</selector>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="picture_in_picture_permission_detail_settings"
+    android:title="@string/picture_in_picture_app_detail_title">
+
+    <SwitchPreference
+        android:key="app_ops_settings_switch"
+        android:title="@string/picture_in_picture_app_detail_switch"/>
+
+    <Preference
+        android:summary="@string/picture_in_picture_app_detail_summary"
+        android:selectable="false"/>
+
+</PreferenceScreen>

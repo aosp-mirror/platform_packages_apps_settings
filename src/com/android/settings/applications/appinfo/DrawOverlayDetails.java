@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -29,12 +31,13 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 
-import android.view.Window;
 import android.view.WindowManager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.applications.AppInfoWithHeader;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
+import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStateOverlayBridge.OverlayState;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -44,7 +47,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
     private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
-    private static final String KEY_APP_OPS_SETTINGS_DESC = "app_ops_settings_description";
     private static final String LOG_TAG = "DrawOverlayDetails";
 
     private static final int [] APP_OPS_OP_CODE = {
@@ -57,7 +59,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
     private Preference mOverlayPrefs;
-    private Preference mOverlayDesc;
     private Intent mSettingsIntent;
     private OverlayState mOverlayState;
 
@@ -70,16 +71,9 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
 
         // find preferences
-        addPreferencesFromResource(R.xml.app_ops_permissions_details);
+        addPreferencesFromResource(R.xml.draw_overlay_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
         mOverlayPrefs = findPreference(KEY_APP_OPS_SETTINGS_PREFS);
-        mOverlayDesc = findPreference(KEY_APP_OPS_SETTINGS_DESC);
-
-        // set title/summary for all of them
-        getPreferenceScreen().setTitle(R.string.draw_overlay);
-        mSwitchPref.setTitle(R.string.permit_draw_overlay);
-        mOverlayPrefs.setTitle(R.string.app_overlay_permission_preference);
-        mOverlayDesc.setSummary(R.string.allow_overlay_description);
 
         // install event listeners
         mSwitchPref.setOnPreferenceChangeListener(this);
@@ -116,7 +110,8 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
                 try {
                     getActivity().startActivityAsUser(mSettingsIntent, new UserHandle(mUserId));
                 } catch (ActivityNotFoundException e) {
-                    Log.w(LOG_TAG, "Unable to launch app draw overlay settings " + mSettingsIntent, e);
+                    Log.w(LOG_TAG, "Unable to launch app draw overlay settings " + mSettingsIntent,
+                            e);
                 }
             }
             return true;
@@ -161,7 +156,14 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         // you cannot ask a user to grant you a permission you did not have!
         mSwitchPref.setEnabled(mOverlayState.permissionDeclared && mOverlayState.controlEnabled);
         mOverlayPrefs.setEnabled(isAllowed);
-        getPreferenceScreen().removePreference(mOverlayPrefs);
+
+        ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
+                PackageManager.GET_META_DATA, mUserId);
+        if (resolveInfo == null) {
+            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
+                getPreferenceScreen().removePreference(mOverlayPrefs);
+            }
+        }
 
         return true;
     }

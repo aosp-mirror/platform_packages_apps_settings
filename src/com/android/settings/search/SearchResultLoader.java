@@ -1,6 +1,6 @@
 package com.android.settings.search;
 
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 import android.content.Context;
 

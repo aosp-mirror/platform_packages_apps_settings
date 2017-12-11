@@ -23,7 +23,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.search.IndexDatabaseHelper.SavedQueriesColumns;
-import com.android.settings.utils.AsyncLoader;
+import com.android.settingslib.utils.AsyncLoader;
 
 import java.util.ArrayList;
 import java.util.List;
