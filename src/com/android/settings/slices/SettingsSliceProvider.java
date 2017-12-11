@@ -14,18 +14,22 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.slices;
 
 import android.app.PendingIntent;
-import android.app.slice.Slice;
-import android.app.slice.SliceProvider;
+
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
+import com.android.settings.R;
+
+import androidx.app.slice.Slice;
+import androidx.app.slice.SliceProvider;
+import androidx.app.slice.builders.ListBuilder;
 
 public class SettingsSliceProvider extends SliceProvider {
     public static final String SLICE_AUTHORITY = "com.android.settings.slices";
@@ -33,9 +37,8 @@ public class SettingsSliceProvider extends SliceProvider {
     public static final String PATH_WIFI = "wifi";
     public static final String ACTION_WIFI_CHANGED =
             "com.android.settings.slice.action.WIFI_CHANGED";
-    // TODO -- Associate slice URI with search result instead of separate hardcoded thing
-    public static final String[] WIFI_SEARCH_TERMS = {"wi-fi", "wifi", "internet"};
 
+    // TODO -- Associate slice URI with search result instead of separate hardcoded thing
     public static Uri getUri(String path) {
         return new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -44,7 +47,7 @@ public class SettingsSliceProvider extends SliceProvider {
     }
 
     @Override
-    public boolean onCreate() {
+    public boolean onCreateSliceProvider() {
         return true;
     }
 
@@ -53,15 +56,15 @@ public class SettingsSliceProvider extends SliceProvider {
         String path = sliceUri.getPath();
         switch (path) {
             case "/" + PATH_WIFI:
-                return createWifi(sliceUri);
-
+                return createWifiSlice(sliceUri);
         }
         throw new IllegalArgumentException("Unrecognized slice uri: " + sliceUri);
     }
 
-    private Slice createWifi(Uri uri) {
+
+    // TODO (b/70622039) remove this when the proper wifi slice is enabled.
+    private Slice createWifiSlice(Uri sliceUri) {
         // Get wifi state
-        String[] toggleHints;
         WifiManager wifiManager = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         int wifiState = wifiManager.getWifiState();
         boolean wifiEnabled = false;
@@ -74,7 +77,6 @@ public class SettingsSliceProvider extends SliceProvider {
             case WifiManager.WIFI_STATE_ENABLED:
             case WifiManager.WIFI_STATE_ENABLING:
                 state = wifiManager.getConnectionInfo().getSSID();
-                WifiInfo.removeDoubleQuotes(state);
                 wifiEnabled = true;
                 break;
             case WifiManager.WIFI_STATE_UNKNOWN:
@@ -82,28 +84,17 @@ public class SettingsSliceProvider extends SliceProvider {
                 state = ""; // just don't show anything?
                 break;
         }
-        if (wifiEnabled) {
-            toggleHints = new String[] {Slice.HINT_TOGGLE, Slice.HINT_SELECTED};
-        } else {
-            toggleHints = new String[] {Slice.HINT_TOGGLE};
-        }
-        // Construct the slice
-        Slice.Builder b = new Slice.Builder(uri);
-        b.addSubSlice(new Slice.Builder(b)
-                .addAction(getIntent("android.settings.WIFI_SETTINGS"),
-                        new Slice.Builder(b)
-                                .addText(getContext().getString(R.string.wifi_settings), null)
-                                .addText(state, null)
-                                .addIcon(Icon.createWithResource(getContext(),
-                                        R.drawable.ic_settings_wireless), null, Slice.HINT_HIDDEN)
-                                .addHints(Slice.HINT_TITLE)
-                                .build())
-                .addAction(getBroadcastIntent(ACTION_WIFI_CHANGED),
-                        new Slice.Builder(b)
-                                .addHints(toggleHints)
-                                .build())
-                .build());
-        return b.build();
+
+        boolean finalWifiEnabled = wifiEnabled;
+        return new ListBuilder(sliceUri)
+                .setColor(R.color.material_blue_500)
+                .add(b -> b
+                        .setTitle(getContext().getString(R.string.wifi_settings))
+                        .setTitleItem(Icon.createWithResource(getContext(), R.drawable.wifi_signal))
+                        .setSubtitle(state)
+                        .addToggle(getBroadcastIntent(ACTION_WIFI_CHANGED), finalWifiEnabled)
+                        .setContentIntent(getIntent(Intent.ACTION_MAIN)))
+                .build();
     }
 
     private PendingIntent getIntent(String action) {

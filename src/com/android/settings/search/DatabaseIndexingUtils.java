@@ -43,7 +43,7 @@ public class DatabaseIndexingUtils {
 
     private static final String TAG = "IndexingUtil";
 
-    private static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
+    public static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
             "SEARCH_INDEX_DATA_PROVIDER";
 
     /**
