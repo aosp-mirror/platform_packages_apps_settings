@@ -19,11 +19,12 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -34,6 +35,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -57,6 +60,8 @@ public class DashboardSummaryTest {
     private LinearLayoutManager mLayoutManager;
     @Mock
     private ConditionManager mConditionManager;
+    @Mock
+    private SummaryLoader mSummaryLoader;
 
     private DashboardSummary mSummary;
 
@@ -70,18 +75,22 @@ public class DashboardSummaryTest {
         ReflectionHelpers.setField(mSummary, "mDashboard", mDashboard);
         ReflectionHelpers.setField(mSummary, "mLayoutManager", mLayoutManager);
         ReflectionHelpers.setField(mSummary, "mConditionManager", mConditionManager);
+        ReflectionHelpers.setField(mSummary, "mSummaryLoader", mSummaryLoader);
     }
 
     @Test
     public void updateCategoryAndSuggestion_shouldGetCategoryFromFeatureProvider() {
         doReturn(mock(Activity.class)).when(mSummary).getActivity();
         mSummary.updateCategoryAndSuggestion(null);
+
+        verify(mSummaryLoader).updateSummaryToCache(nullable(DashboardCategory.class));
         verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
     }
 
     @Test
     public void onConditionChanged_PositionAtTop_ScrollToTop() {
         when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(1);
+        mSummary.onConditionsChanged();
         mSummary.onConditionsChanged();
         verify(mDashboard).scrollToPosition(0);
     }
@@ -90,7 +99,21 @@ public class DashboardSummaryTest {
     public void onConditionChanged_PositionNotTop_RemainPosition() {
         when(mLayoutManager.findFirstCompletelyVisibleItemPosition()).thenReturn(2);
         mSummary.onConditionsChanged();
+        mSummary.onConditionsChanged();
         verify(mDashboard, never()).scrollToPosition(0);
+    }
+
+    @Test
+    public void onConditionChanged_firstCall_shouldIgnore() {
+        mSummary.onConditionsChanged();
+        verify(mAdapter, never()).setConditions(any());
+    }
+
+    @Test
+    public void onConditionChanged_secondCall_shouldSetConditionsOnAdapter() {
+        mSummary.onConditionsChanged();
+        mSummary.onConditionsChanged();
+        verify(mAdapter).setConditions(any());
     }
 
     @Test

@@ -22,7 +22,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.view.ViewGroup.LayoutParams;
-
 import com.android.settings.R;
 
 /**
@@ -50,6 +49,7 @@ public class SpacePreference extends Preference {
         final TypedArray a = context.obtainStyledAttributes(attrs,
                 new int[] { com.android.internal.R.attr.layout_height }, defStyleAttr, defStyleRes);
         mHeight = a.getDimensionPixelSize(0, 0);
+        a.recycle();
     }
 
     public void setHeight(int height) {

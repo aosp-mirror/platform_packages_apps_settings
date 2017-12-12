@@ -16,15 +16,16 @@
 
 package com.android.settings.language;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
-import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.UserDictionarySettings;
 import com.android.settings.inputmethod.UserDictionaryList;
+import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,16 +38,12 @@ import org.robolectric.shadows.ShadowApplication;
 
 import java.util.TreeSet;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserDictionaryPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock
-    private TtsEngines mTtsEngines;
     private Preference mPreference;
     private TestController mController;
 
@@ -59,16 +56,7 @@ public class UserDictionaryPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_noLocale_shouldReturnFalse() {
-        mController.mLocales = null;
-
-        assertThat(mController.isAvailable()).isFalse();
-    }
-
-    @Test
-    public void testIsAvailable_hasLocale_shouldReturnTrue() {
-        mController.mLocales.add("en");
-
+    public void testIsAvailable_shouldReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
     }
 

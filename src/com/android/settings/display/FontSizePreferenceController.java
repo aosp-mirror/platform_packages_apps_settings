@@ -20,9 +20,11 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.ToggleFontSizePreferenceFragment;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class FontSizePreferenceController extends PreferenceController {
+public class FontSizePreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_FONT_SIZE = "font_size";
 

@@ -16,20 +16,24 @@
 
 package com.android.settings.dashboard.suggestions;
 
+import android.app.ActivityManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.UserHandle;
-import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
 import android.util.Log;
+import android.util.Pair;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.AmbientDisplayPickupSuggestionActivity;
 import com.android.settings.Settings.AmbientDisplaySuggestionActivity;
 import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
 import com.android.settings.Settings.DoubleTwistSuggestionActivity;
+import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
@@ -42,6 +46,7 @@ import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider {
@@ -55,6 +60,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
+    public boolean isSuggestionEnabled(Context context) {
+        final ActivityManager am =
+                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return !am.isLowRamDevice();
+    }
+
+    @Override
     public boolean isSmartSuggestionEnabled(Context context) {
         return false;
     }
@@ -62,6 +74,9 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     @Override
     public boolean isSuggestionCompleted(Context context, @NonNull ComponentName component) {
         final String className = component.getClassName();
+        if (className.equals(NightDisplaySuggestionActivity.class.getName())) {
+            return hasUsedNightDisplay(context);
+        }
         if (className.equals(NewDeviceIntroSuggestionActivity.class.getName())) {
             return NewDeviceIntroSuggestionActivity.isSuggestionComplete(context);
         } else if (className.equals(DoubleTapPowerSuggestionActivity.class.getName())) {
@@ -117,12 +132,14 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         if (parser == null || suggestion == null || context == null) {
             return;
         }
-        mMetricsFeatureProvider.action(
-                context, MetricsProto.MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                getSuggestionIdentifier(context, suggestion));
+        final Pair<Integer, Object>[] taggedData =
+                SuggestionLogHelper.getSuggestionTaggedData(isSmartSuggestionEnabled(context));
 
-        final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
-        if (!parser.dismissSuggestion(suggestion, isSmartSuggestionEnabled)) {
+        mMetricsFeatureProvider.action(
+                context, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
+                getSuggestionIdentifier(context, suggestion),
+                taggedData);
+        if (!parser.dismissSuggestion(suggestion)) {
             return;
         }
         context.getPackageManager().setComponentEnabledSetting(
@@ -146,4 +163,10 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return packageName;
     }
 
+    @VisibleForTesting
+    boolean hasUsedNightDisplay(Context context) {
+        final ContentResolver cr = context.getContentResolver();
+        return Secure.getInt(cr, Secure.NIGHT_DISPLAY_AUTO_MODE, 0) != 0
+                || Secure.getString(cr, Secure.NIGHT_DISPLAY_LAST_ACTIVATED_TIME) != null;
+    }
 }

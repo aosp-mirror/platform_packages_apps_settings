@@ -195,6 +195,8 @@ public class BatteryUtilsTest {
         doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
         mBatteryUtils = spy(new BatteryUtils(shadowContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
+        doReturn(0L).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
+                any(BatteryStats.Uid.class), anyLong());
     }
 
     @Test
@@ -453,7 +455,7 @@ public class BatteryUtilsTest {
         if (!isUidNull) {
             final BatteryStats.Uid uid = mock(BatteryStats.Uid.class, RETURNS_DEEP_STUBS);
             doReturn(topTime).when(mBatteryUtils).getProcessTimeMs(
-                    eq(BatteryUtils.StatusType.FOREGROUND), eq(uid), anyInt());
+                    eq(BatteryUtils.StatusType.SCREEN_USAGE), eq(uid), anyInt());
             doReturn(uidCode).when(uid).getUid();
             sipper.uidObj = uid;
         }

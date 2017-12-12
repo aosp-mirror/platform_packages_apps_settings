@@ -20,7 +20,6 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -52,7 +51,6 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -493,7 +491,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     getString(R.string.accessibility_summary_state_disabled);
             final CharSequence serviceSummary = info.loadSummary(getPackageManager());
             final String stateSummaryCombo = getString(
-                    R.string.accessibility_summary_default_combination,
+                    R.string.preference_summary_default_combination,
                     serviceState, serviceSummary);
             preference.setSummary((TextUtils.isEmpty(serviceSummary)) ? serviceState
                     : stateSummaryCombo);
@@ -727,40 +725,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            List<SearchIndexableRaw> indexables = new ArrayList<>();
-
-            PackageManager packageManager = context.getPackageManager();
-            AccessibilityManager accessibilityManager =
-                    context.getSystemService(AccessibilityManager.class);
-
-            String screenTitle = context.getResources().getString(
-                    R.string.accessibility_settings);
-
-            // Indexing all services, regardless if enabled.
-            List<AccessibilityServiceInfo> services = accessibilityManager
-                    .getInstalledAccessibilityServiceList();
-            final int serviceCount = services.size();
-            for (int i = 0; i < serviceCount; i++) {
-                AccessibilityServiceInfo service = services.get(i);
-                if (service == null || service.getResolveInfo() == null) {
-                    continue;
-                }
-
-                ServiceInfo serviceInfo = service.getResolveInfo().serviceInfo;
-                ComponentName componentName = new ComponentName(serviceInfo.packageName,
-                        serviceInfo.name);
-
-                SearchIndexableRaw indexable = new SearchIndexableRaw(context);
-                indexable.key = componentName.flattenToString();
-                indexable.title = service.getResolveInfo().loadLabel(packageManager).toString();
-                indexable.screenTitle = screenTitle;
-                indexables.add(indexable);
-            }
-
-            return indexables;
-        }
 
         @Override
         public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,

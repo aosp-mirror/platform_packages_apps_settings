@@ -14,9 +14,10 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicy.CYCLE_NONE;
+
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.RemoteException;
@@ -32,7 +33,6 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
 
     private NetworkTemplate mTemplate;
     private NetworkServices mServices;
-    private NetworkPolicy mPolicy;
     private int mSubId;
 
     public BillingCyclePreference(Context context, AttributeSet attrs) {
@@ -57,16 +57,18 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
         mTemplate = template;
         mSubId = subId;
         mServices = services;
-        mPolicy = services.mPolicyEditor.getPolicy(mTemplate);
-        setSummary(getContext().getString(R.string.billing_cycle_fragment_summary, mPolicy != null
-                ? mPolicy.cycleDay
-                : "1"));
+        final int cycleDay = services.mPolicyEditor.getPolicyCycleDay(mTemplate);
+        if (cycleDay != CYCLE_NONE) {
+            setSummary(getContext().getString(R.string.billing_cycle_fragment_summary, cycleDay));
+        } else {
+            setSummary(null);
+        }
         setIntent(getIntent());
     }
 
     private void updateEnabled() {
         try {
-            setEnabled(mPolicy != null && mServices.mNetworkService.isBandwidthControlEnabled()
+            setEnabled(mServices.mNetworkService.isBandwidthControlEnabled()
                     && mServices.mTelephonyManager.getDataEnabled(mSubId)
                     && mServices.mUserManager.isAdminUser());
         } catch (RemoteException e) {

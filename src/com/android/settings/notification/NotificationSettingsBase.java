@@ -35,8 +35,10 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -44,6 +46,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
@@ -51,6 +54,7 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.support.v7.preference.DropDownPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -108,6 +112,8 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     protected NotificationBackend.AppRow mAppRow;
     protected boolean mShowLegacyChannelConfig = false;
 
+    protected boolean mListeningToPackageRemove;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -159,6 +165,13 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
         }
 
         mUserId = UserHandle.getUserId(mUid);
+        startListeningToPackageRemove();
+    }
+
+    @Override
+    public void onDestroy() {
+        stopListeningToPackageRemove();
+        super.onDestroy();
     }
 
     @Override
@@ -184,12 +197,16 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
     }
 
     protected void setVisible(Preference p, boolean visible) {
-        final boolean isVisible = getPreferenceScreen().findPreference(p.getKey()) != null;
+        setVisible(getPreferenceScreen(), p, visible);
+    }
+
+    protected void setVisible(PreferenceGroup parent, Preference p, boolean visible) {
+        final boolean isVisible = parent.findPreference(p.getKey()) != null;
         if (isVisible == visible) return;
         if (visible) {
-            getPreferenceScreen().addPreference(p);
+            parent.addPreference(p);
         } else {
-            getPreferenceScreen().removePreference(p);
+            parent.removePreference(p);
         }
     }
 
@@ -264,12 +281,9 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
     protected void addAppLinkPref() {
         if (mAppRow.settingsIntent != null && mAppLink == null) {
-            mAppLink = new Preference(getPrefContext());
-            mAppLink.setKey(KEY_APP_LINK);
-            mAppLink.setOrder(500);
+            addPreferencesFromResource(R.xml.inapp_notification_settings);
+            mAppLink = (Preference) findPreference(KEY_APP_LINK);
             mAppLink.setIntent(mAppRow.settingsIntent);
-            mAppLink.setTitle(mContext.getString(R.string.app_settings_link));
-            getPreferenceScreen().addPreference(mAppLink);
         }
     }
 
@@ -458,5 +472,43 @@ abstract public class NotificationSettingsBase extends SettingsPreferenceFragmen
 
         return channel.isBlockableSystem()
                 || channel.getImportance() == NotificationManager.IMPORTANCE_NONE;
+    }
+
+    protected void startListeningToPackageRemove() {
+        if (mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = true;
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_PACKAGE_REMOVED);
+        filter.addDataScheme("package");
+        getContext().registerReceiver(mPackageRemovedReceiver, filter);
+    }
+
+    protected void stopListeningToPackageRemove() {
+        if (!mListeningToPackageRemove) {
+            return;
+        }
+        mListeningToPackageRemove = false;
+        getContext().unregisterReceiver(mPackageRemovedReceiver);
+    }
+
+    protected void onPackageRemoved() {
+        getActivity().finishAndRemoveTask();
+    }
+
+    protected final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String packageName = intent.getData().getSchemeSpecificPart();
+            if (mPkgInfo == null || TextUtils.equals(mPkgInfo.packageName, packageName)) {
+                if (DEBUG) Log.d(TAG, "Package (" + packageName + ") removed. Removing"
+                        + "NotificationSettingsBase.");
+                onPackageRemoved();
+            }
+        }
+    };
+
+    boolean hasValidSound(NotificationChannel channel) {
+        return channel.getSound() != null && !Uri.EMPTY.equals(channel.getSound());
     }
 }

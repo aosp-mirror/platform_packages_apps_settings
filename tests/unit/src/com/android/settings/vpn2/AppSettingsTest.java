@@ -16,25 +16,25 @@
 
 package com.android.settings.vpn2;
 
-import static com.android.settings.vpn2.AppManagementFragment.isAlwaysOnSupportedByApp;
 import static com.android.settings.vpn2.AppManagementFragment.appHasVpnPermission;
-import static org.mockito.Mockito.*;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.when;
 
 import android.app.AppOpsManager;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.os.Build;
 import android.os.Process;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.content.Context;
-
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class AppSettingsTest extends AndroidTestCase {
     private static final String TAG = AppSettingsTest.class.getSimpleName();
@@ -46,23 +46,6 @@ public class AppSettingsTest extends AndroidTestCase {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(eq(Context.APP_OPS_SERVICE))).thenReturn(mAppOps);
-    }
-
-    @SmallTest
-    public void testAlwaysOnVersionRestriction() {
-        ApplicationInfo mockApp = createMockApp();
-
-        // API 23 (MNC) = not supported
-        mockApp.targetSdkVersion = Build.VERSION_CODES.M;
-        assertFalse(isAlwaysOnSupportedByApp(mockApp));
-
-        // API 24 (NYC) = supported
-        mockApp.targetSdkVersion = Build.VERSION_CODES.N;
-        assertTrue(isAlwaysOnSupportedByApp(mockApp));
-
-        // API 25 (NYC MR1) = supported
-        mockApp.targetSdkVersion = Build.VERSION_CODES.N_MR1;
-        assertTrue(isAlwaysOnSupportedByApp(mockApp));
     }
 
     @SmallTest

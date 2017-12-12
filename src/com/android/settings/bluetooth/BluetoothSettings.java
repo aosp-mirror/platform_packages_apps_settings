@@ -16,15 +16,15 @@
 
 package com.android.settings.bluetooth;
 
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -39,7 +39,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -60,9 +59,6 @@ import com.android.settingslib.widget.FooterPreference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
 /**
  * BluetoothSettings is the Settings screen for Bluetooth configuration and
@@ -144,6 +140,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             mBluetoothEnabler.resume(getActivity());
         }
         super.onStart();
+        // Always show paired devices regardless whether user-friendly name exists
+        mShowDevicesWithoutNames = true;
         if (isUiRestricted()) {
             getPreferenceScreen().removeAll();
             if (!isUiRestrictedByOnlyAdmin()) {
@@ -362,8 +360,8 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context, lifecycle);
         mPairingPrefController = new BluetoothPairingPreferenceController(context, this,

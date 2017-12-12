@@ -31,11 +31,11 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
 import com.android.settings.fuelgauge.anomaly.AnomalyPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
@@ -119,7 +119,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return null;
     }
 

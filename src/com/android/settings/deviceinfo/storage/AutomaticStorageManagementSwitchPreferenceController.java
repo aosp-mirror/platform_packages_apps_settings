@@ -16,25 +16,27 @@
 
 package com.android.settings.deviceinfo.storage;
 
+import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class AutomaticStorageManagementSwitchPreferenceController extends PreferenceController
-        implements LifecycleObserver, OnResume, SwitchWidgetController.OnSwitchChangeListener {
+public class AutomaticStorageManagementSwitchPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin, LifecycleObserver,
+        OnResume, SwitchWidgetController.OnSwitchChangeListener {
     private static final String KEY_TOGGLE_ASM = "toggle_asm";
     @VisibleForTesting
     static final String STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY = "ro.storage_manager.enabled";
@@ -59,7 +61,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends Prefer
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return !ActivityManager.isLowRamDeviceStatic();
     }
 
     @Override
@@ -69,6 +71,9 @@ public class AutomaticStorageManagementSwitchPreferenceController extends Prefer
 
     @Override
     public void onResume() {
+        if (!isAvailable()) {
+            return;
+        }
         boolean isStorageManagerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
         mSwitch.setChecked(isStorageManagerEnabled);

@@ -31,6 +31,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -41,7 +42,6 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.enterprise.DevicePolicyManagerWrapper;
 import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
@@ -52,6 +52,7 @@ import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,16 +114,16 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private List<Anomaly> mAnomalies;
     private String mPackageName;
 
-    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
-            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent,
-            List<Anomaly> anomalies) {
+    @VisibleForTesting
+    static void startBatteryDetailPage(SettingsActivity caller, BatteryUtils batteryUtils,
+            PreferenceFragment fragment, BatteryStatsHelper helper, int which, BatteryEntry entry,
+            String usagePercent, List<Anomaly> anomalies) {
         // Initialize mStats if necessary.
         helper.getStats();
 
         final Bundle args = new Bundle();
         final BatterySipper sipper = entry.sipper;
         final BatteryStats.Uid uid = sipper.uidObj;
-        final BatteryUtils batteryUtils = BatteryUtils.getInstance(caller);
         final boolean isTypeApp = sipper.drainType == BatterySipper.DrainType.APP;
 
         final long foregroundTimeMs = isTypeApp ? batteryUtils.getProcessTimeMs(
@@ -155,10 +156,23 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
+            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent,
+            List<Anomaly> anomalies) {
+        startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
+                entry, usagePercent, anomalies);
+    }
+
+    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
             String packageName) {
-        final Bundle args = new Bundle(2);
+        final Bundle args = new Bundle(3);
+        final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
         args.putString(EXTRA_POWER_USAGE_PERCENT, Utils.formatPercentage(0));
+        try {
+            args.putInt(EXTRA_UID, packageManager.getPackageUid(packageName, 0 /* no flag */));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find package: " + packageName, e);
+        }
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
                 R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
@@ -290,8 +304,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Bundle bundle = getArguments();
         final int uid = bundle.getInt(EXTRA_UID, 0);
         final String packageName = bundle.getString(EXTRA_PACKAGE_NAME);

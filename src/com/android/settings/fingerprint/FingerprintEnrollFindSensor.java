@@ -139,12 +139,16 @@ public class FingerprintEnrollFindSensor extends FingerprintEnrollBase {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.skip_button:
-                setResult(RESULT_SKIP);
-                finish();
+                onSkipButtonClick();
                 break;
             default:
                 super.onClick(v);
         }
+    }
+
+    protected void onSkipButtonClick() {
+        setResult(RESULT_SKIP);
+        finish();
     }
 
     private void proceedToEnrolling(boolean cancelEnrollment) {

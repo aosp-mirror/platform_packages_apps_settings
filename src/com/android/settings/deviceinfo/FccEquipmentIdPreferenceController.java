@@ -22,9 +22,11 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class FccEquipmentIdPreferenceController extends PreferenceController {
+public class FccEquipmentIdPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
 
     private static final String PROPERTY_EQUIPMENT_ID = "ro.ril.fccid";

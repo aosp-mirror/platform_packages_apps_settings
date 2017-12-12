@@ -1,27 +1,27 @@
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.util.ArraySet;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.R;
 import com.android.settings.SecuritySettings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.codeinspection.CodeInspector;
+import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -60,6 +60,7 @@ public class DataIntegrityTest {
                 // Skip classes that are invalid or cannot be mocked. Add them as special Xml below.
                 if (clazz == null
                         || clazz == DateTimeSettings.class
+                        || clazz == DataPlanUsageSummary.class
                         || clazz == DataUsageSummary.class
                         || clazz == SecuritySettings.class) {
                     continue;

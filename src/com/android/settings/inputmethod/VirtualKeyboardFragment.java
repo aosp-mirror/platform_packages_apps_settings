@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -33,14 +34,12 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.inputmethod.InputMethodAndSubtypeUtil;
 import com.android.settingslib.inputmethod.InputMethodPreference;
 
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 
 public final class VirtualKeyboardFragment extends SettingsPreferenceFragment implements Indexable {
@@ -121,13 +120,19 @@ public final class VirtualKeyboardFragment extends SettingsPreferenceFragment im
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-        @Override
-        public List<SearchIndexableRaw> getRawDataToIndex(Context context, boolean enabled) {
-            final InputMethodManager imm = context.getSystemService(InputMethodManager.class);
-            final List<InputMethodInfo> enabledInputMethods = imm.getEnabledInputMethodList();
-            final String screenTitle = context.getString(R.string.virtual_keyboard_category);
-            return AvailableVirtualKeyboardFragment
-                    .buildSearchIndexOfInputMethods(context, enabledInputMethods, screenTitle);
-        }
-    };
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.virtual_keyboard_settings;
+                    return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add("add_virtual_keyboard_screen");
+                    return keys;
+                }
+            };
 }

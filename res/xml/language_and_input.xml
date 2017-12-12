@@ -18,7 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res/com.android.settings"
-    android:title="@string/language_input_gesture_title" >
+    android:title="@string/language_settings" >
 
     <Preference
         android:key="phone_language"
@@ -62,43 +62,6 @@
             android:title="@string/user_dict_settings_title"/>
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:key="gesture_settings_category"
-        android:title="@string/gesture_preference_title"
-        settings:keywords="@string/keywords_gesture">
-
-        <Preference
-            android:key="gesture_assist_input_summary"
-            android:title="@string/assist_gesture_title"
-            android:fragment="com.android.settings.gestures.AssistGestureSettings" />
-
-        <Preference
-            android:key="gesture_swipe_down_fingerprint_input_summary"
-            android:title="@string/fingerprint_swipe_for_notifications_title"
-            android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
-
-        <Preference
-            android:key="gesture_double_tap_screen_input_summary"
-            android:title="@string/ambient_display_title"
-            android:fragment="com.android.settings.gestures.DoubleTapScreenSettings" />
-
-        <Preference
-            android:key="gesture_pick_up_input_summary"
-            android:title="@string/ambient_display_pickup_title"
-            android:fragment="com.android.settings.gestures.PickupGestureSettings" />
-
-        <Preference
-            android:key="gesture_double_tap_power_input_summary"
-            android:title="@string/double_tap_power_for_camera_title"
-            android:fragment="com.android.settings.gestures.DoubleTapPowerSettings" />
-
-        <Preference
-            android:key="gesture_double_twist_input_summary"
-            android:title="@string/double_twist_for_camera_mode_title"
-            android:fragment="com.android.settings.gestures.DoubleTwistGestureSettings" />
-
-    </PreferenceCategory>
-
     <PreferenceCategory>
 
         <com.android.settings.PointerSpeedPreference
@@ -120,8 +83,7 @@
         <SwitchPreference
             android:key="vibrate_input_devices"
             android:title="@string/vibrate_input_devices"
-            android:summaryOn="@string/vibrate_input_devices_summary"
-            android:summaryOff="@string/vibrate_input_devices_summary"/>
+            android:summary="@string/vibrate_input_devices_summary" />
 
     </PreferenceCategory>
 

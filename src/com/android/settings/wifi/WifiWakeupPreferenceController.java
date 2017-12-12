@@ -26,29 +26,28 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import com.android.settings.R;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.network.NetworkScoreManagerWrapper;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} that controls whether the Wi-Fi Wakeup feature should be enabled.
+ * {@link PreferenceControllerMixin} that controls whether the Wi-Fi Wakeup feature should be
+ * enabled.
  */
-public class WifiWakeupPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnResume, OnPause {
+public class WifiWakeupPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
-    private final NetworkScoreManagerWrapper mNetworkScoreManager;
     private SettingObserver mSettingObserver;
 
-    public WifiWakeupPreferenceController(
-            Context context, Lifecycle lifecycle, NetworkScoreManagerWrapper networkScoreManager) {
+    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
-        mNetworkScoreManager = networkScoreManager;
         lifecycle.addObserver(this);
     }
 
@@ -114,11 +113,9 @@ public class WifiWakeupPreferenceController extends PreferenceController impleme
         boolean networkRecommendationsEnabled = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
-        boolean activeScorerSet = mNetworkScoreManager.getActiveScorerPackage() != null;
-        enableWifiWakeup.setEnabled(
-                networkRecommendationsEnabled && wifiScanningEnabled && activeScorerSet);
+        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
 
-        if (!activeScorerSet) {
+        if (!networkRecommendationsEnabled) {
             enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scoring_disabled);
         } else if (!wifiScanningEnabled) {
             enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);

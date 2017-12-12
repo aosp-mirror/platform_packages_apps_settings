@@ -163,6 +163,14 @@
             android:title="@string/telephony_monitor_switch"
             android:summary="@string/telephony_monitor_switch_summary"/>
 
+        <SwitchPreference
+            android:key="camera_laser_sensor_switch"
+            android:title="@string/camera_laser_sensor_switch" />
+
+        <SwitchPreference
+            android:key="camera_hal_hdrplus_switch"
+            android:title="@string/camera_hal_hdrplus_switch" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_networking_category"
@@ -204,6 +212,11 @@
             android:dialogTitle="@string/select_usb_configuration_dialog_title"
             android:entries="@array/usb_configuration_titles"
             android:entryValues="@array/usb_configuration_values" />
+
+        <SwitchPreference
+            android:key="bluetooth_show_devices_without_names"
+            android:title="@string/bluetooth_show_devices_without_names"
+            android:summary="@string/bluetooth_show_devices_without_names_summary"/>
 
         <SwitchPreference
             android:key="bluetooth_disable_absolute_volume"

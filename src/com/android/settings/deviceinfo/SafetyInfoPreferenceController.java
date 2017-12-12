@@ -19,9 +19,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class SafetyInfoPreferenceController extends PreferenceController {
+public class SafetyInfoPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final Intent INTENT_PROBE =
             new Intent("android.settings.SHOW_SAFETY_AND_REGULATORY_INFO");

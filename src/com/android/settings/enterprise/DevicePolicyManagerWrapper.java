@@ -18,6 +18,7 @@ package com.android.settings.enterprise;
 
 import android.annotation.NonNull;
 import android.content.ComponentName;
+import android.content.Intent;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
 
@@ -150,4 +151,11 @@ public interface DevicePolicyManagerWrapper {
      * @see android.app.admin.DevicePolicyManager#isUninstallInQueue
      */
     boolean isUninstallInQueue(String packageName);
+
+    /**
+     * Calls {@code DevicePolicyManager.createAdminSupportIntent()}.
+     *
+     * @see android.app.admin.DevicePolicyManager#createAdminSupportIntent
+     */
+    Intent createAdminSupportIntent(String restriction);
 }

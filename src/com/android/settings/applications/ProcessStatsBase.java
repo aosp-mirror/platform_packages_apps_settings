@@ -24,7 +24,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.android.internal.app.procstats.ProcessStats;
-import com.android.settings.AppHeader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -138,7 +137,6 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE,
                 memInfo.usedWeight * memInfo.weightToRam);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
-        args.putBoolean(AppHeader.EXTRA_HIDE_INFO_BUTTON, !includeAppInfo);
         activity.startPreferencePanel(null, ProcessStatsDetail.class.getName(), args,
                 R.string.memory_usage, null, null, 0);
     }

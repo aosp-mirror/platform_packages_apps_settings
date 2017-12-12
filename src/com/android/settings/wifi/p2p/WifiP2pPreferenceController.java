@@ -24,17 +24,18 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
- * {@link PreferenceController} to toggle Wifi Direct preference on Wi-Fi state.
+ * {@link PreferenceControllerMixin} to toggle Wifi Direct preference on Wi-Fi state.
  */
-public class WifiP2pPreferenceController extends PreferenceController implements
-        LifecycleObserver, OnPause, OnResume {
+public class WifiP2pPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnResume {
 
     private static final String KEY_WIFI_DIRECT = "wifi_direct";
 

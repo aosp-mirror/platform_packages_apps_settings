@@ -18,6 +18,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/header_category_system">
 
+    <Preference
+        android:key="gesture_settings"
+        android:title="@string/gesture_preference_title"
+        android:icon="@drawable/ic_settings_gestures"
+        android:order="-250"
+        android:fragment="com.android.settings.gestures.GestureSettings" />
+
     <!-- Backup -->
     <Preference
         android:key="backup_settings"
@@ -50,6 +57,7 @@
     <Preference
         android:key="reset_dashboard"
         android:title="@string/reset_dashboard_title"
+        android:summary="@string/reset_dashboard_summary"
         android:icon="@drawable/ic_restore"
         android:order="-20"
         android:fragment="com.android.settings.system.ResetDashboardFragment" />

@@ -51,8 +51,8 @@ import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,8 +168,8 @@ public class WifiP2pSettings extends DashboardFragment
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mPersistentCategoryController =
                 new P2pPersistentCategoryPreferenceController(context);
         mPeerCategoryController =
@@ -186,7 +186,8 @@ public class WifiP2pSettings extends DashboardFragment
         final Activity activity = getActivity();
         mWifiP2pManager = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
         if (mWifiP2pManager != null) {
-            mChannel = mWifiP2pManager.initialize(activity, getActivity().getMainLooper(), null);
+            mChannel = mWifiP2pManager.initialize(activity.getApplicationContext(),
+                    getActivity().getMainLooper(), null);
             if (mChannel == null) {
                 //Failure to set up connection
                 Log.e(TAG, "Failed to set up connection with wifi p2p service");

@@ -24,13 +24,15 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class AmbientDisplayAlwaysOnPreferenceController extends PreferenceController
-        implements Preference.OnPreferenceChangeListener {
+public class AmbientDisplayAlwaysOnPreferenceController extends
+        AbstractPreferenceController implements PreferenceControllerMixin,
+        Preference.OnPreferenceChangeListener {
 
     private final int ON = 1;
     private final int OFF = 0;

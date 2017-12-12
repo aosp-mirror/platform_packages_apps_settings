@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
@@ -86,6 +87,18 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
         return getOnlyAppLabel();
     }
 
+    @Override
+    public Drawable getDefaultAppIcon() {
+        if (!isAvailable()) {
+            return null;
+        }
+        final DefaultAppInfo defaultApp = getDefaultAppInfo();
+        if (defaultApp != null) {
+            return defaultApp.loadIcon();
+        }
+        return getOnlyAppIcon();
+    }
+
     private List<ResolveInfo> getCandidates() {
         return mPackageManager.queryIntentActivitiesAsUser(BROWSE_PROBE, PackageManager.MATCH_ALL,
                 mUserId);
@@ -101,6 +114,18 @@ public class DefaultBrowserPreferenceController extends DefaultAppPreferenceCont
             final String packageName = cn == null ? null : cn.packageName;
             Log.d(TAG, "Getting label for the only browser app: " + packageName + label);
             return label;
+        }
+        return null;
+    }
+
+    private Drawable getOnlyAppIcon() {
+        final List<ResolveInfo> list = getCandidates();
+        if (list != null && list.size() == 1) {
+            final ResolveInfo info = list.get(0);
+            final ComponentInfo cn = info.getComponentInfo();
+            final String packageName = cn == null ? null : cn.packageName;
+            Log.d(TAG, "Getting icon for the only browser app: " + packageName);
+            return info.loadIcon(mPackageManager.getPackageManager());
         }
         return null;
     }

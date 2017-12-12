@@ -16,8 +16,9 @@
 
 package com.android.settings.deviceinfo.storage;
 
-import static com.google.common.truth.Truth.assertThat;
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
+
+import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -36,9 +37,9 @@ import android.util.SparseArray;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.UserManagerWrapper;
-import com.android.settings.core.PreferenceController;
 import com.android.settingslib.R;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.drawable.UserIconDrawable;
 
 import org.junit.Before;
@@ -103,7 +104,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
 
         Preference preference = argumentCaptor.getValue();
-        assertThat(preference.getSummary()).isEqualTo("0.01GB");
+        assertThat(preference.getSummary()).isEqualTo("0.01 GB");
     }
 
     @Test
@@ -112,7 +113,7 @@ public class SecondaryUserControllerTest {
         userInfos.add(mPrimaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        List<PreferenceController> controllers =
+        List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
@@ -130,7 +131,7 @@ public class SecondaryUserControllerTest {
         userInfos.add(secondaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        List<PreferenceController> controllers =
+        List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);
@@ -147,7 +148,7 @@ public class SecondaryUserControllerTest {
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
 
-        List<PreferenceController> controllers =
+        List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(2);
@@ -176,7 +177,7 @@ public class SecondaryUserControllerTest {
         verify(mGroup).addPreference(argumentCaptor.capture());
         Preference preference = argumentCaptor.getValue();
 
-        assertThat(preference.getSummary()).isEqualTo("0.03GB");
+        assertThat(preference.getSummary()).isEqualTo("0.03 GB");
     }
 
     @Test
@@ -190,7 +191,7 @@ public class SecondaryUserControllerTest {
         userInfos.add(primaryUserRenamed);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        List<PreferenceController> controllers =
+        List<AbstractPreferenceController> controllers =
                 SecondaryUserController.getSecondaryUserControllers(mContext, mUserManager);
 
         assertThat(controllers).hasSize(1);

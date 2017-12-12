@@ -16,6 +16,8 @@
 
 package com.android.settings.bluetooth;
 
+import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothDevicePicker;
@@ -29,10 +31,8 @@ import android.view.MenuInflater;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
-
-import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
@@ -170,7 +170,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return null;
     }
 

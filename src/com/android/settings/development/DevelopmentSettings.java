@@ -54,6 +54,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.IStorageManager;
 import android.provider.SearchIndexableResource;
@@ -61,6 +62,7 @@ import android.provider.Settings;
 import android.service.oemlock.OemLockManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -96,6 +98,7 @@ import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -121,7 +124,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
      */
     public static final String PREF_SHOW = "show";
 
-    private static final String ENABLE_ADB = "enable_adb";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
     private static final String ENABLE_TERMINAL = "enable_terminal";
     private static final String KEEP_SCREEN_ON = "keep_screen_on";
@@ -198,6 +200,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
+    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY =
+            "bluetooth_show_devices_without_names";
+    private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
+            "persist.bluetooth.showdeviceswithoutnames";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY =
             "bluetooth_disable_absolute_volume";
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
@@ -260,7 +266,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private boolean mHaveDebugSettings;
     private boolean mDontPokeProperties;
-    private SwitchPreference mEnableAdb;
+    private EnableAdbPreferenceController mEnableAdbController;
     private Preference mClearAdbKeys;
     private SwitchPreference mEnableTerminal;
     private RestrictedSwitchPreference mKeepScreenOn;
@@ -283,6 +289,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mWifiAggressiveHandover;
     private SwitchPreference mMobileDataAlwaysOn;
     private SwitchPreference mTetheringHardwareOffload;
+    private SwitchPreference mBluetoothShowDevicesWithoutNames;
     private SwitchPreference mBluetoothDisableAbsVolume;
     private SwitchPreference mBluetoothEnableInbandRinging;
 
@@ -347,7 +354,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     // To track whether a confirmation dialog was clicked.
     private boolean mDialogClicked;
     private Dialog mEnableDialog;
-    private Dialog mAdbDialog;
 
     private Dialog mAdbKeysDialog;
     private boolean mUnavailable;
@@ -356,9 +362,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private Dialog mLogpersistClearDialog;
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevelopmentSettingsEnabler mSettingsEnabler;
+    private DevelopmentSwitchBarController mSwitchBarController;
     private BugReportPreferenceController mBugReportController;
     private BugReportInPowerPreferenceController mBugReportInPowerController;
     private TelephonyMonitorPreferenceController mTelephonyMonitorController;
+    private CameraHalHdrplusPreferenceController mCameraHalHdrplusController;
+    private CameraLaserSensorPreferenceController mCameraLaserSensorController;
+
+    private BroadcastReceiver mEnableAdbReceiver;
 
     public DevelopmentSettings() {
         super(UserManager.DISALLOW_DEBUGGING_FEATURES);
@@ -397,6 +408,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mTelephonyMonitorController = new TelephonyMonitorPreferenceController(getActivity());
         mWebViewAppPrefController = new WebViewAppPreferenceController(getActivity());
         mVerifyAppsOverUsbController = new VerifyAppsOverUsbPreferenceController(getActivity());
+        mCameraHalHdrplusController = new CameraHalHdrplusPreferenceController(getActivity());
+        mCameraLaserSensorController = new CameraLaserSensorPreferenceController(getActivity());
 
         setIfOnlyAvailableForAdmins(true);
         if (isUiRestricted() || !Utils.isDeviceProvisioned(getActivity())) {
@@ -411,7 +424,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         final PreferenceGroup debugDebuggingCategory = (PreferenceGroup)
                 findPreference(DEBUG_DEBUGGING_CATEGORY_KEY);
-        mEnableAdb = findAndInitSwitchPref(ENABLE_ADB);
+        mEnableAdbController = new EnableAdbPreferenceController(getActivity());
         mClearAdbKeys = findPreference(CLEAR_ADB_KEYS);
         if (!SystemProperties.getBoolean("ro.adb.secure", false)) {
             if (debugDebuggingCategory != null) {
@@ -429,6 +442,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBugReportInPowerController.displayPreference(getPreferenceScreen());
         mTelephonyMonitorController.displayPreference(getPreferenceScreen());
         mWebViewAppPrefController.displayPreference(getPreferenceScreen());
+        mCameraHalHdrplusController.displayPreference(getPreferenceScreen());
+        mEnableAdbController.displayPreference(getPreferenceScreen());
+
+        mCameraLaserSensorController.displayPreference(getPreferenceScreen());
 
         mKeepScreenOn = (RestrictedSwitchPreference) findAndInitSwitchPref(KEEP_SCREEN_ON);
         mBtHciSnoopLog = findAndInitSwitchPref(BT_HCI_SNOOP_LOG);
@@ -444,7 +461,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mAllPrefs.add(mPassword);
 
         if (!mUm.isAdminUser()) {
-            disableForUser(mEnableAdb);
             disableForUser(mClearAdbKeys);
             disableForUser(mEnableTerminal);
             disableForUser(mPassword);
@@ -494,6 +510,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             mLogpersist = null;
         }
         mUsbConfiguration = addListPreference(USB_CONFIGURATION_KEY);
+        mBluetoothShowDevicesWithoutNames =
+                findAndInitSwitchPref(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
         mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
         if (!BluetoothHeadset.isInbandRingingSupported(getContext())) {
@@ -621,15 +639,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        final SettingsActivity activity = (SettingsActivity) getActivity();
-
-        mSwitchBar = activity.getSwitchBar();
-        if (mUnavailable) {
-            mSwitchBar.setEnabled(false);
-            return;
-        }
-
-        mSwitchBar.addOnSwitchChangeListener(this);
+        mSwitchBar = ((SettingsActivity) getActivity()).getSwitchBar();
+        mSwitchBarController = new DevelopmentSwitchBarController(
+                this /* DevelopmentSettings */, mSwitchBar, !mUnavailable,  getLifecycle());
     }
 
     private boolean removePreferenceForProduction(Preference preference) {
@@ -651,9 +663,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             Preference pref = mAllPrefs.get(i);
             pref.setEnabled(enabled && !mDisabledPrefs.contains(pref));
         }
+        mEnableAdbController.enablePreference(enabled);
         mBugReportInPowerController.enablePreference(enabled);
         mTelephonyMonitorController.enablePreference(enabled);
         mWebViewAppPrefController.enablePreference(enabled);
+        mCameraHalHdrplusController.enablePreference(enabled);
+        mCameraLaserSensorController.enablePreference(enabled);
         updateAllOptions();
     }
 
@@ -733,6 +748,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             updateBluetoothA2dpConfigurationValues();
         }
 
+        mEnableAdbReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                mVerifyAppsOverUsbController.updatePreference();
+                updateBugreportOptions();
+            }
+        };
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(mEnableAdbReceiver, new IntentFilter(
+                        AbstractEnableAdbPreferenceController.ACTION_ENABLE_ADB_STATE_CHANGED));
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -743,14 +769,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mUnavailable) {
             return;
         }
-        mSwitchBar.removeOnSwitchChangeListener(this);
-        mSwitchBar.hide();
         getActivity().unregisterReceiver(mUsbReceiver);
         getActivity().unregisterReceiver(mBluetoothA2dpReceiver);
         BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
         if (adapter != null) {
             adapter.closeProfileProxy(BluetoothProfile.A2DP, mBluetoothA2dp);
             mBluetoothA2dp = null;
+        }
+
+        if (mEnableAdbReceiver != null) {
+            LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mEnableAdbReceiver);
+            mEnableAdbReceiver = null;
         }
     }
 
@@ -763,8 +792,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         final Context context = getActivity();
         final ContentResolver cr = context.getContentResolver();
         mHaveDebugSettings = false;
-        updateSwitchPreference(mEnableAdb, Settings.Global.getInt(cr,
-                Settings.Global.ADB_ENABLED, 0) != 0);
+        final Preference enableAdb = findPreference(mEnableAdbController.getPreferenceKey());
+        mEnableAdbController.updateState(enableAdb);
+        mHaveDebugSettings |= mEnableAdbController.haveDebugSettings();
         if (mEnableTerminal != null) {
             updateSwitchPreference(mEnableTerminal,
                     context.getPackageManager().getApplicationEnabledSetting(TERMINAL_APP_PACKAGE)
@@ -772,6 +802,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         mHaveDebugSettings |= mBugReportInPowerController.updatePreference();
         mHaveDebugSettings |= mTelephonyMonitorController.updatePreference();
+        mHaveDebugSettings |= mCameraHalHdrplusController.updatePreference();
+        mHaveDebugSettings |= mCameraLaserSensorController.updatePreference();
         updateSwitchPreference(mKeepScreenOn, Settings.Global.getInt(cr,
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, 0) != 0);
         updateSwitchPreference(mBtHciSnoopLog, SystemProperties.getBoolean(
@@ -824,6 +856,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         if (mColorTemperaturePreference != null) {
             updateColorTemperature();
         }
+        updateBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         updateBluetoothDisableAbsVolumeOptions();
         updateBluetoothEnableInbandRingingOptions();
         updateBluetoothA2dpConfigurationValues();
@@ -839,7 +872,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 onPreferenceTreeClick(cb);
             }
         }
+        if (mBluetoothEnableInbandRinging != null) {
+            mBluetoothEnableInbandRinging.setChecked(true);
+            onPreferenceTreeClick(mBluetoothEnableInbandRinging);
+        }
         mBugReportInPowerController.resetPreference();
+        mEnableAdbController.resetPreference();
         resetDebuggerOptions();
         writeLogpersistOption(null, true);
         writeLogdSizeOption(null);
@@ -878,14 +916,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void updatePasswordSummary() {
-        try {
-            if (mBackupManager.hasBackupPassword()) {
-                mPassword.setSummary(R.string.local_backup_password_summary_change);
-            } else {
-                mPassword.setSummary(R.string.local_backup_password_summary_none);
+        mPassword.setEnabled(mBackupManager != null);
+        if (mBackupManager != null) {
+            try {
+                if (mBackupManager.hasBackupPassword()) {
+                    mPassword.setSummary(R.string.local_backup_password_summary_change);
+                } else {
+                    mPassword.setSummary(R.string.local_backup_password_summary_none);
+                }
+            } catch (RemoteException e) {
+                // Not much we can do here
             }
-        } catch (RemoteException e) {
-            // Not much we can do here
         }
     }
 
@@ -1025,8 +1066,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         return context.getSystemService(Context.OEM_LOCK_SERVICE) != null;
     }
 
+    /**
+     * Returns whether OEM unlock is allowed by the user and carrier.
+     *
+     * This does not take into account any restrictions imposed by the device policy.
+     */
+    private boolean isOemUnlockAllowedByUserAndCarrier() {
+        final UserHandle userHandle = UserHandle.of(UserHandle.myUserId());
+        return mOemLockManager.isOemUnlockAllowedByCarrier()
+                && !mUm.hasBaseUserRestriction(UserManager.DISALLOW_FACTORY_RESET, userHandle);
+    }
+
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && mOemLockManager.canUserAllowOemUnlock();
+        return !isBootloaderUnlocked() && isOemUnlockAllowedByUserAndCarrier();
     }
 
     private void updateOemUnlockOptions() {
@@ -1039,10 +1091,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             if (mEnableOemUnlock.isEnabled()) {
                 // Check restriction, disable mEnableOemUnlock and apply policy transparency.
                 mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-            }
-            if (mEnableOemUnlock.isEnabled()) {
-                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
-                mEnableOemUnlock.checkRestrictionAndSetDisabled(UserManager.DISALLOW_OEM_UNLOCK);
             }
         }
     }
@@ -1452,6 +1500,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     private void writeWifiAllowScansWithTrafficOptions() {
         mWifiManager.setAllowScansWithTraffic(mWifiAllowScansWithTraffic.isChecked() ? 1 : 0);
+    }
+
+    private void updateBluetoothShowDevicesWithoutUserFriendlyNameOptions() {
+        updateSwitchPreference(mBluetoothShowDevicesWithoutNames,
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false));
+    }
+
+    private void writeBluetoothShowDevicesWithoutUserFriendlyNameOptions() {
+        SystemProperties.set(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
+                mBluetoothShowDevicesWithoutNames.isChecked() ? "true" : "false");
     }
 
     private void updateBluetoothDisableAbsVolumeOptions() {
@@ -2422,24 +2481,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             return true;
         }
 
-        if (preference == mEnableAdb) {
-            if (mEnableAdb.isChecked()) {
-                mDialogClicked = false;
-                if (mAdbDialog != null) dismissDialogs();
-                mAdbDialog = new AlertDialog.Builder(getActivity()).setMessage(
-                        getActivity().getResources().getString(R.string.adb_warning_message))
-                        .setTitle(R.string.adb_warning_title)
-                        .setPositiveButton(android.R.string.yes, this)
-                        .setNegativeButton(android.R.string.no, this)
-                        .show();
-                mAdbDialog.setOnDismissListener(this);
-            } else {
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.ADB_ENABLED, 0);
-                mVerifyAppsOverUsbController.updatePreference();
-                updateBugreportOptions();
-            }
-        } else if (preference == mClearAdbKeys) {
+        if (mCameraHalHdrplusController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (mEnableAdbController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (mCameraLaserSensorController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+
+        if (preference == mClearAdbKeys) {
             if (mAdbKeysDialog != null) dismissDialogs();
             mAdbKeysDialog = new AlertDialog.Builder(getActivity())
                     .setMessage(R.string.adb_keys_warning_message)
@@ -2534,6 +2588,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeUSBAudioOptions();
         } else if (preference == mForceResizable) {
             writeForceResizableOptions();
+        } else if (preference == mBluetoothShowDevicesWithoutNames) {
+            writeBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mBluetoothEnableInbandRinging) {
@@ -2613,10 +2669,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     private void dismissDialogs() {
-        if (mAdbDialog != null) {
-            mAdbDialog.dismiss();
-            mAdbDialog = null;
-        }
+        mEnableAdbController.dismissDialogs();
         if (mAdbKeysDialog != null) {
             mAdbKeysDialog.dismiss();
             mAdbKeysDialog = null;
@@ -2632,18 +2685,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     }
 
     public void onClick(DialogInterface dialog, int which) {
-        if (dialog == mAdbDialog) {
-            if (which == DialogInterface.BUTTON_POSITIVE) {
-                mDialogClicked = true;
-                Settings.Global.putInt(getActivity().getContentResolver(),
-                        Settings.Global.ADB_ENABLED, 1);
-                mVerifyAppsOverUsbController.updatePreference();
-                updateBugreportOptions();
-            } else {
-                // Reset the toggle
-                mEnableAdb.setChecked(false);
-            }
-        } else if (dialog == mAdbKeysDialog) {
+        if (dialog == mAdbKeysDialog) {
             if (which == DialogInterface.BUTTON_POSITIVE) {
                 try {
                     IBinder b = ServiceManager.getService(Context.USB_SERVICE);
@@ -2673,12 +2715,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
     public void onDismiss(DialogInterface dialog) {
         // Assuming that onClick gets called first
-        if (dialog == mAdbDialog) {
-            if (!mDialogClicked) {
-                mEnableAdb.setChecked(false);
-            }
-            mAdbDialog = null;
-        } else if (dialog == mEnableDialog) {
+        if (dialog == mEnableDialog) {
             if (!mDialogClicked) {
                 mSwitchBar.setChecked(false);
             }
@@ -2827,7 +2864,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
             } else if (isSimLockedDevice()) {
                 oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-            } else if (!mOemLockManager.canUserAllowOemUnlock()) {
+            } else if (!isOemUnlockAllowedByUserAndCarrier()) {
                 // If the device isn't SIM-locked but OEM unlock is disallowed by some party, this
                 // means either some other carrier restriction is in place or the device hasn't been
                 // able to confirm which restrictions (SIM-lock or otherwise) apply.

@@ -21,6 +21,7 @@ import android.accounts.AccountManagerCallback;
 import android.accounts.AccountManagerFuture;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
+import android.app.admin.DevicePolicyManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -29,33 +30,46 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Process;
 import android.os.UserHandle;
+import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.io.IOException;
 
-public class RemoveAccountPreferenceController extends PreferenceController
-    implements OnClickListener {
+public class RemoveAccountPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, OnClickListener {
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
 
     private Account mAccount;
     private Fragment mParentFragment;
     private UserHandle mUserHandle;
+    private DevicePolicyManagerWrapper mDpm;
 
     public RemoveAccountPreferenceController(Context context, Fragment parent) {
+        this(context, parent, new DevicePolicyManagerWrapperImpl(
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE)));
+    }
+
+    @VisibleForTesting
+    RemoveAccountPreferenceController(Context context, Fragment parent,
+            DevicePolicyManagerWrapper dpm) {
         super(context);
         mParentFragment = parent;
+        mDpm = dpm;
     }
 
     @Override
@@ -79,6 +93,12 @@ public class RemoveAccountPreferenceController extends PreferenceController
 
     @Override
     public void onClick(View v) {
+        final Intent intent = mDpm.createAdminSupportIntent(UserManager.DISALLOW_MODIFY_ACCOUNTS);
+        if (intent != null) {
+            // DISALLOW_MODIFY_ACCOUNTS is active, show admin support dialog
+            mContext.startActivity(intent);
+            return;
+        }
         ConfirmRemoveAccountDialog.show(mParentFragment, mAccount, mUserHandle);
     }
 

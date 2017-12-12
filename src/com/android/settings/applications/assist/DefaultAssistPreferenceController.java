@@ -23,8 +23,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.service.voice.VoiceInteractionService;
 import android.service.voice.VoiceInteractionServiceInfo;
-
 import android.support.annotation.VisibleForTesting;
+
 import com.android.internal.app.AssistUtils;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
@@ -33,17 +33,23 @@ import java.util.List;
 
 public class DefaultAssistPreferenceController extends DefaultAppPreferenceController {
 
-    private static final String KEY_DEFAULT_ASSIST = "default_assist";
+    private final AssistUtils mAssistUtils;
+    private final boolean mShowSetting;
+    private final String mPrefKey;
 
-    private AssistUtils mAssistUtils;
-
-    public DefaultAssistPreferenceController(Context context) {
+    public DefaultAssistPreferenceController(Context context, String prefKey,
+            boolean showSetting) {
         super(context);
+        mPrefKey = prefKey;
+        mShowSetting = showSetting;
         mAssistUtils = new AssistUtils(context);
     }
 
     @Override
     protected Intent getSettingIntent(DefaultAppInfo info) {
+        if (!mShowSetting) {
+            return null;
+        }
         final ComponentName cn = mAssistUtils.getAssistComponentForUser(mUserId);
         if (cn == null) {
             return null;
@@ -72,7 +78,7 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
 
     @Override
     public String getPreferenceKey() {
-        return KEY_DEFAULT_ASSIST;
+        return mPrefKey;
     }
 
     @Override

@@ -17,6 +17,7 @@
 package com.android.settings.gestures;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
@@ -34,10 +35,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -84,27 +87,70 @@ public class GesturePreferenceControllerTest {
     }
 
     @Test
-    public void onStart_shouldStartVideoPreference() {
+    public void onResume_shouldStartVideoPreferenceWithVideoPauseState() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
         when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
 
         mController.displayPreference(mScreen);
-        mController.onStart();
+        final Bundle savedState = new Bundle();
 
-        verify(videoPreference).onViewVisible();
+        mController.onCreate(null);
+        mController.onResume();
+        verify(videoPreference).onViewVisible(false);
+
+        reset(videoPreference);
+        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, true);
+        mController.onCreate(savedState);
+        mController.onResume();
+        verify(videoPreference).onViewVisible(true);
+
+        reset(videoPreference);
+        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, false);
+        mController.onCreate(savedState);
+        mController.onResume();
+        verify(videoPreference).onViewVisible(false);
     }
 
     @Test
-    public void onStop_shouldStopVideoPreference() {
+    public void onPause_shouldStopVideoPreference() {
         final VideoPreference videoPreference = mock(VideoPreference.class);
         when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
         mController.mIsPrefAvailable = true;
 
         mController.displayPreference(mScreen);
-        mController.onStop();
+        mController.onPause();
 
         verify(videoPreference).onViewInvisible();
+    }
+
+    @Test
+    public void onPause_shouldUpdateVideoPauseState() {
+        final VideoPreference videoPreference = mock(VideoPreference.class);
+        when(mScreen.findPreference(mController.getVideoPrefKey())).thenReturn(videoPreference);
+        mController.mIsPrefAvailable = true;
+        mController.displayPreference(mScreen);
+
+        when(videoPreference.isVideoPaused()).thenReturn(true);
+        mController.onPause();
+        assertThat(mController.mVideoPaused).isTrue();
+
+        when(videoPreference.isVideoPaused()).thenReturn(false);
+        mController.onPause();
+        assertThat(mController.mVideoPaused).isFalse();
+    }
+
+    @Test
+    public void onSaveInstanceState_shouldSaveVideoPauseState() {
+        final Bundle outState = mock(Bundle.class);
+
+        mController.mVideoPaused = true;
+        mController.onSaveInstanceState(outState);
+        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, true);
+
+        mController.mVideoPaused = false;
+        mController.onSaveInstanceState(outState);
+        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, false);
     }
 
     @Test
