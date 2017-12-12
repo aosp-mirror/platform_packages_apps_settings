@@ -2,6 +2,18 @@
 <issues format="4">
 
     <issue
+        id="LintError"
+        severity="Error"
+        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="."/>
+    </issue>
+
+    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -93,7 +105,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout-land/choose_lock_pattern.xml"
-            line="152"
+            line="160"
             column="17"/>
     </issue>
 
@@ -1085,7 +1097,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout-land/confirm_lock_pattern_internal.xml"
-            line="110"
+            line="111"
             column="17"/>
     </issue>
 
@@ -1279,6 +1291,134 @@
             file="res/layout/gesture_preference.xml"
             line="78"
             column="17"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#19263238&quot; android:offset=&quot;0.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_color_inversion.xml"
+            line="17"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#00212121&quot; android:offset=&quot;1.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_color_inversion.xml"
+            line="18"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#19FFFFFF&quot; android:offset=&quot;0.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_color_inversion.xml"
+            line="32"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#00FFFFFF&quot; android:offset=&quot;1.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_color_inversion.xml"
+            line="33"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                    &lt;item android:color=&quot;#19263238&quot; android:offset=&quot;0.0&quot;/>"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_daltonizer.xml"
+            line="16"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                    &lt;item android:color=&quot;#00212121&quot; android:offset=&quot;1.0&quot;/>"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_daltonizer.xml"
+            line="17"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#19FFFFFF&quot; android:offset=&quot;0.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_daltonizer.xml"
+            line="36"
+            column="23"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="                &lt;item android:color=&quot;#00FFFFFF&quot; android:offset=&quot;1.0&quot;/>"
+        errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_daltonizer.xml"
+            line="37"
+            column="23"/>
     </issue>
 
     <issue
@@ -1869,7 +2009,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/layout/settings_main_dashboard.xml"
-            line="29"
+            line="30"
             column="9"/>
     </issue>
 
@@ -1933,7 +2073,7 @@
         errorLine2="                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="2335"
+            line="2333"
             column="168"/>
     </issue>
 
@@ -1949,7 +2089,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="2341"
+            line="2334"
             column="64"/>
     </issue>
 
@@ -1965,7 +2105,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="2341"
+            line="2334"
             column="64"/>
     </issue>
 
@@ -1981,7 +2121,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2341"
+            line="2334"
             column="64"/>
     </issue>
 
@@ -1997,7 +2137,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2341"
+            line="2334"
             column="64"/>
     </issue>
 
@@ -2013,7 +2153,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5501"
+            line="5512"
             column="36"/>
     </issue>
 
@@ -2029,7 +2169,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values/styles.xml"
-            line="245"
+            line="246"
             column="41"/>
     </issue>
 
@@ -2045,7 +2185,7 @@
         errorLine2="                                         ^">
         <location
             file="res/values/styles.xml"
-            line="364"
+            line="366"
             column="42"/>
     </issue>
 
@@ -2061,7 +2201,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="441"
+            line="443"
             column="44"/>
     </issue>
 
@@ -2077,7 +2217,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="447"
+            line="449"
             column="44"/>
     </issue>
 
@@ -2093,7 +2233,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="448"
+            line="450"
             column="44"/>
     </issue>
 
@@ -2109,7 +2249,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values/styles.xml"
-            line="471"
+            line="473"
             column="41"/>
     </issue>
 

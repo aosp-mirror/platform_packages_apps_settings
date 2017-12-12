@@ -13,7 +13,6 @@
  */
 package com.android.settings.core;
 
-import android.app.slice.Slice;
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
@@ -54,11 +53,5 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
         boolean auto = (Boolean) newValue;
         setChecked(auto);
         return true;
-    }
-
-    @Override
-    public Slice getSettingSlice() {
-        // TODO
-        return null;
     }
 }

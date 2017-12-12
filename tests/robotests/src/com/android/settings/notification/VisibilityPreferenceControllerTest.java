@@ -205,10 +205,11 @@ public class VisibilityPreferenceControllerTest {
         RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
         mController.updateState(pref);
 
-        ArgumentCaptor<String[]> argumentCaptor = ArgumentCaptor.forClass(String[].class);
+        ArgumentCaptor<CharSequence[]> argumentCaptor =
+            ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
-        assertFalse(Arrays.asList(argumentCaptor.getValue())
-                .contains(VISIBILITY_NO_OVERRIDE));
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
     }
 
     @Test
@@ -223,10 +224,11 @@ public class VisibilityPreferenceControllerTest {
         RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
         mController.updateState(pref);
 
-        ArgumentCaptor<String[]> argumentCaptor = ArgumentCaptor.forClass(String[].class);
+        ArgumentCaptor<CharSequence[]> argumentCaptor =
+            ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
-        assertFalse(Arrays.asList(argumentCaptor.getValue())
-                .contains(VISIBILITY_NO_OVERRIDE));
+        assertFalse(toStringList(argumentCaptor.getValue())
+                .contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
     }
 
     @Test
@@ -238,13 +240,22 @@ public class VisibilityPreferenceControllerTest {
         RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
         mController.updateState(pref);
 
-        ArgumentCaptor<String[]> argumentCaptor = ArgumentCaptor.forClass(String[].class);
+        ArgumentCaptor<CharSequence[]> argumentCaptor =
+            ArgumentCaptor.forClass(CharSequence[].class);
         verify(pref, times(1)).setEntryValues(argumentCaptor.capture());
-        List<String> values = Arrays.asList(argumentCaptor.getValue());
+        List<String> values = toStringList(argumentCaptor.getValue());
         assertEquals(3, values.size());
         assertTrue(values.contains(String.valueOf(VISIBILITY_NO_OVERRIDE)));
         assertTrue(values.contains(String.valueOf(Notification.VISIBILITY_PRIVATE)));
         assertTrue(values.contains(String.valueOf(Notification.VISIBILITY_SECRET)));
+    }
+
+    private static List<String> toStringList(CharSequence[] charSequences) {
+        List<String> result = new ArrayList<>();
+        for (CharSequence charSequence : charSequences) {
+            result.add(charSequence.toString());
+        }
+        return result;
     }
 
     @Test

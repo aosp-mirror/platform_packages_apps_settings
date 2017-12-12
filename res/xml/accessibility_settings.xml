@@ -118,12 +118,14 @@
         <Preference
                 android:fragment="com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment"
                 android:key="daltonizer_preference_screen"
-                android:title="@string/accessibility_display_daltonizer_preference_title" />
+                android:title="@string/accessibility_display_daltonizer_preference_title"
+                android:icon="@drawable/ic_daltonizer"/>
 
         <SwitchPreference
                 android:key="toggle_inversion_preference"
                 android:title="@string/accessibility_display_inversion_preference_title"
                 android:summary="@string/accessibility_display_inversion_preference_subtitle"
-                android:persistent="false" />
+                android:persistent="false"
+                android:icon="@drawable/ic_color_inversion"/>
     </PreferenceCategory>
 </PreferenceScreen>

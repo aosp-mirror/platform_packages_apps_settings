@@ -30,12 +30,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemProperties;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
-import android.util.FeatureFlagUtils;
 
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -98,8 +95,6 @@ public class DeviceInfoSettingsTest {
             SettingsShadowSystemProperties.class
     })
     public void getPrefXml_shouldReturnDeviceInfoXml() {
-        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
-                "true");
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings_v2);
     }
 
@@ -142,8 +137,6 @@ public class DeviceInfoSettingsTest {
     @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
             SettingsShadowSystemProperties.class})
     public void onCreate_singleSim_shouldAddSingleSimCount() {
-        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
-                "true");
         doReturn(1).when(mTelephonyManager).getPhoneCount();
 
         mSettings.onCreate(null /* icicle */);
@@ -156,8 +149,6 @@ public class DeviceInfoSettingsTest {
     @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
             SettingsShadowSystemProperties.class})
     public void onCreate_dualeSim_shouldAddDualSimCount() {
-        SystemProperties.set(FeatureFlagUtils.FFLAG_OVERRIDE_PREFIX + FeatureFlags.DEVICE_INFO_V2,
-                "true");
         doReturn(2).when(mTelephonyManager).getPhoneCount();
 
         mSettings.onCreate(null /* icicle */);

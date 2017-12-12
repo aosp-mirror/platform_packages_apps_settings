@@ -42,6 +42,7 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityManager;
 
+import com.android.internal.accessibility.AccessibilityShortcutController;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.view.RotationPolicy;
@@ -57,6 +58,7 @@ import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -172,13 +174,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     };
 
-    private final SettingsContentObserver mSettingsContentObserver =
-            new SettingsContentObserver(mHandler) {
-                @Override
-                public void onChange(boolean selfChange, Uri uri) {
-                    updateServicePreferences();
-                }
-            };
+    private final SettingsContentObserver mSettingsContentObserver;
 
     private final RotationPolicyListener mRotationPolicyListener = new RotationPolicyListener() {
         @Override
@@ -222,6 +218,22 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     public static boolean isColorTransformAccelerated(Context context) {
         return context.getResources()
                 .getBoolean(com.android.internal.R.bool.config_setColorTransformAccelerated);
+    }
+
+    public AccessibilitySettings() {
+        // Observe changes to anything that the shortcut can toggle, so we can reflect updates
+        final Collection<AccessibilityShortcutController.ToggleableFrameworkFeatureInfo> features =
+                AccessibilityShortcutController.getFrameworkShortcutFeaturesMap().values();
+        final List<String> shortcutFeatureKeys = new ArrayList<>(features.size());
+        for (AccessibilityShortcutController.ToggleableFrameworkFeatureInfo feature : features) {
+            shortcutFeatureKeys.add(feature.getSettingKey());
+        }
+        mSettingsContentObserver = new SettingsContentObserver(mHandler, shortcutFeatureKeys) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                updateAllPreferences();
+            }
+        };
     }
 
     @Override
