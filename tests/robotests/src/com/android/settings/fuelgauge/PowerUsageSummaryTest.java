@@ -339,15 +339,14 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testInitAnomalyDetectionIfPossible_detectionEnabled_init() {
+    public void testRestartBatteryTipLoader() {
+        //TODO: add policy logic here when BatteryTipPolicy is implemented
         doReturn(mLoaderManager).when(mFragment).getLoaderManager();
-        doReturn(mAnomalyDetectionPolicy).when(mFragment).getAnomalyDetectionPolicy();
-        when(mAnomalyDetectionPolicy.isAnomalyDetectionEnabled()).thenReturn(true);
 
-        mFragment.restartAnomalyDetectionIfPossible();
+        mFragment.restartBatteryTipLoader();
 
-        verify(mLoaderManager).restartLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
-                any());
+        verify(mLoaderManager).restartLoader(eq(PowerUsageSummary.BATTERY_TIP_LOADER),
+                eq(Bundle.EMPTY), any());
     }
 
     @Test

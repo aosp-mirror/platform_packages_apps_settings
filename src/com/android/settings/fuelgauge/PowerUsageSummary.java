@@ -55,10 +55,9 @@ import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
-import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment.AnomalyDialogListener;
-import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
-import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
-import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
+import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -72,14 +71,15 @@ import java.util.List;
  * Displays a list of apps and subsystems that consume power, ordered by how much power was
  * consumed since the last time it was unplugged.
  */
-public class PowerUsageSummary extends PowerUsageBase implements
-        AnomalyDialogListener, OnLongClickListener, OnClickListener {
+public class PowerUsageSummary extends PowerUsageBase implements OnLongClickListener,
+        OnClickListener, BatteryTipPreferenceController.BatteryTipListener {
 
     static final String TAG = "PowerUsageSummary";
 
     private static final boolean DEBUG = false;
     private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
+    private static final String KEY_BATTERY_TIP = "battery_tip";
     private static final String KEY_SHOW_ALL_APPS = "show_all_apps";
 
     private static final String KEY_SCREEN_USAGE = "screen_usage";
@@ -89,12 +89,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout_battery";
     private static final String KEY_AMBIENT_DISPLAY = "ambient_display_battery";
     private static final String KEY_BATTERY_SAVER_SUMMARY = "battery_saver_summary";
-    private static final String KEY_HIGH_USAGE = "high_usage";
 
     @VisibleForTesting
-    static final int ANOMALY_LOADER = 1;
+    static final int BATTERY_INFO_LOADER = 1;
     @VisibleForTesting
-    static final int BATTERY_INFO_LOADER = 2;
+    static final int BATTERY_TIP_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
@@ -126,35 +125,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
     private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
-    private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
+    private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
-
-    private LoaderManager.LoaderCallbacks<List<Anomaly>> mAnomalyLoaderCallbacks =
-            new LoaderManager.LoaderCallbacks<List<Anomaly>>() {
-
-                @Override
-                public Loader<List<Anomaly>> onCreateLoader(int id, Bundle args) {
-                    return new AnomalyLoader(getContext(), mStatsHelper);
-                }
-
-                @Override
-                public void onLoadFinished(Loader<List<Anomaly>> loader, List<Anomaly> data) {
-                    final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(getContext());
-                    anomalyUtils.logAnomalies(mMetricsFeatureProvider, data,
-                            MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
-
-                    // show high usage preference if possible
-                    mAnomalySummaryPreferenceController.updateAnomalySummaryPreference(data);
-
-                    updateAnomalySparseArray(data);
-                    mBatteryAppListPreferenceController.refreshAnomalyIcon(mAnomalySparseArray);
-                }
-
-                @Override
-                public void onLoaderReset(Loader<List<Anomaly>> loader) {
-
-                }
-            };
 
     @VisibleForTesting
     LoaderManager.LoaderCallbacks<BatteryInfo> mBatteryInfoLoaderCallbacks =
@@ -217,6 +189,26 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 }
             };
 
+    private LoaderManager.LoaderCallbacks<List<BatteryTip>> mBatteryTipsCallbacks =
+            new LoaderManager.LoaderCallbacks<List<BatteryTip>>() {
+
+                @Override
+                public Loader<List<BatteryTip>> onCreateLoader(int id, Bundle args) {
+                    return new BatteryTipLoader(getContext(), mStatsHelper);
+                }
+
+                @Override
+                public void onLoadFinished(Loader<List<BatteryTip>> loader,
+                        List<BatteryTip> data) {
+                    mBatteryTipPreferenceController.updateBatteryTips(data);
+                }
+
+                @Override
+                public void onLoaderReset(Loader<List<BatteryTip>> loader) {
+
+                }
+            };
+
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -229,8 +221,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mLastFullChargePref = (PowerGaugePreference) findPreference(
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
-        mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this, MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
         mAnomalySparseArray = new SparseArray<>();
 
@@ -251,9 +241,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (mAnomalySummaryPreferenceController.onPreferenceTreeClick(preference)) {
-            return true;
-        }
         if (KEY_BATTERY_HEADER.equals(preference.getKey())) {
             performBatteryHeaderClick();
             return true;
@@ -282,6 +269,9 @@ public class PowerUsageSummary extends PowerUsageBase implements
         mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
                 KEY_APP_LIST, lifecycle, activity, this);
         controllers.add(mBatteryAppListPreferenceController);
+        mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
+                KEY_BATTERY_TIP, this);
+        controllers.add(mBatteryTipPreferenceController);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
         controllers.add(new BatterySaverController(context, getLifecycle()));
@@ -382,7 +372,7 @@ public class PowerUsageSummary extends PowerUsageBase implements
             return;
         }
 
-        restartAnomalyDetectionIfPossible();
+        restartBatteryTipLoader();
 
         // reload BatteryInfo and updateUI
         restartBatteryInfoLoader();
@@ -398,10 +388,8 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @VisibleForTesting
-    void restartAnomalyDetectionIfPossible() {
-        if (getAnomalyDetectionPolicy().isAnomalyDetectionEnabled()) {
-            getLoaderManager().restartLoader(ANOMALY_LOADER, Bundle.EMPTY, mAnomalyLoaderCallbacks);
-        }
+    void restartBatteryTipLoader() {
+        getLoaderManager().restartLoader(BATTERY_TIP_LOADER, Bundle.EMPTY, mBatteryTipsCallbacks);
     }
 
     @VisibleForTesting
@@ -485,11 +473,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
     }
 
     @Override
-    public void onAnomalyHandled(Anomaly anomaly) {
-        mAnomalySummaryPreferenceController.hideHighUsagePreference();
-    }
-
-    @Override
     public boolean onLongClick(View view) {
         showBothEstimates();
         view.setOnLongClickListener(null);
@@ -511,6 +494,11 @@ public class PowerUsageSummary extends PowerUsageBase implements
         if (clearHeader) {
             mBatteryHeaderPreferenceController.quickUpdateHeaderPreference();
         }
+    }
+
+    @Override
+    public void onBatteryTipHandled(BatteryTip batteryTip) {
+        restartBatteryTipLoader();
     }
 
     private static class SummaryProvider implements SummaryLoader.SummaryProvider {
@@ -555,7 +543,6 @@ public class PowerUsageSummary extends PowerUsageBase implements
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> niks = super.getNonIndexableKeys(context);
-                    niks.add(KEY_HIGH_USAGE);
                     niks.add(KEY_BATTERY_SAVER_SUMMARY);
                     // Duplicates in display
                     niks.add(KEY_AUTO_BRIGHTNESS);

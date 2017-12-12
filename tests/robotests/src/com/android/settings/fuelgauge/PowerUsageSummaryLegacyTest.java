@@ -452,8 +452,8 @@ public class PowerUsageSummaryLegacyTest {
 
         mFragment.restartAnomalyDetectionIfPossible();
 
-        verify(mLoaderManager).restartLoader(eq(PowerUsageSummary.ANOMALY_LOADER), eq(Bundle.EMPTY),
-                any());
+        verify(mLoaderManager).restartLoader(eq(PowerUsageSummaryLegacy.ANOMALY_LOADER),
+                eq(Bundle.EMPTY), any());
     }
 
     @Test
