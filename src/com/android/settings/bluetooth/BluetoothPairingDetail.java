@@ -46,9 +46,8 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     static final String KEY_AVAIL_DEVICES = "available_devices";
     @VisibleForTesting
     static final String KEY_FOOTER_PREF = "footer_preference";
+    private static final String KEY_RENAME_DEVICES = "bt_pair_rename_devices";
 
-    @VisibleForTesting
-    BluetoothDeviceNamePreferenceController mDeviceNamePrefController;
     @VisibleForTesting
     BluetoothProgressCategory mAvailableDevicesCategory;
     @VisibleForTesting
@@ -195,10 +194,10 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        List<AbstractPreferenceController> controllers = new ArrayList<>();
-        mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context,
-                getLifecycle());
-        controllers.add(mDeviceNamePrefController);
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(
+                new BluetoothDeviceRenamePreferenceController(context, KEY_RENAME_DEVICES, this,
+                        getLifecycle()));
 
         return controllers;
     }

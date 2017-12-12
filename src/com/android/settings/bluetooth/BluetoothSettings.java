@@ -73,6 +73,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
     static final String KEY_PAIRED_DEVICES = "paired_devices";
     @VisibleForTesting
     static final String KEY_FOOTER_PREF = "footer_preference";
+    private static final String KEY_RENAME_DEVICES = "bt_rename_device";
 
     @VisibleForTesting
     PreferenceGroup mPairedDevicesCategory;
@@ -369,7 +370,9 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         controllers.add(mDeviceNamePrefController);
         controllers.add(mPairingPrefController);
         controllers.add(new BluetoothFilesPreferenceController(context));
-        controllers.add(new BluetoothDeviceRenamePreferenceController(context, this, lifecycle));
+        controllers.add(
+                new BluetoothDeviceRenamePreferenceController(context, KEY_RENAME_DEVICES, this,
+                        lifecycle));
 
         return controllers;
     }

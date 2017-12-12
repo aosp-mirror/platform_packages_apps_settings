@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
@@ -30,29 +31,39 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class BluetoothDeviceRenamePreferenceController extends
         BluetoothDeviceNamePreferenceController {
 
-    public static final String PREF_KEY = "bt_rename_device";
-
     private final Fragment mFragment;
+    private String mPrefKey;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    public BluetoothDeviceRenamePreferenceController(Context context, Fragment fragment,
-            Lifecycle lifecycle) {
+    public BluetoothDeviceRenamePreferenceController(Context context, String prefKey,
+            Fragment fragment, Lifecycle lifecycle) {
         super(context, lifecycle);
+        mPrefKey = prefKey;
         mFragment = fragment;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
+    /**
+     * Constructor exclusively used for Slice.
+     */
+    public BluetoothDeviceRenamePreferenceController(Context context, String prefKey) {
+        super(context, (Lifecycle) null);
+        mPrefKey = prefKey;
+        mFragment = null;
+    }
+
     @VisibleForTesting
-    BluetoothDeviceRenamePreferenceController(Context context, Fragment fragment,
+    BluetoothDeviceRenamePreferenceController(Context context, String prefKey, Fragment fragment,
             LocalBluetoothAdapter localAdapter) {
         super(context, localAdapter);
+        mPrefKey = prefKey;
         mFragment = fragment;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
     public String getPreferenceKey() {
-        return PREF_KEY;
+        return mPrefKey;
     }
 
     @Override
@@ -62,7 +73,7 @@ public class BluetoothDeviceRenamePreferenceController extends
 
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
-        if (PREF_KEY.equals(preference.getKey())) {
+        if (TextUtils.equals(mPrefKey, preference.getKey()) && mFragment != null) {
             mMetricsFeatureProvider.action(mContext,
                     MetricsProto.MetricsEvent.ACTION_BLUETOOTH_RENAME);
             LocalDeviceNameDialogFragment.newInstance()

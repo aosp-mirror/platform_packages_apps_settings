@@ -47,6 +47,7 @@ import org.robolectric.annotation.Config;
 public class BluetoothDeviceRenamePreferenceControllerTest {
 
     private static final String DEVICE_NAME = "Nightshade";
+    private static final String PREF_KEY = "bt_rename_devices";
 
     @Mock
     private LocalBluetoothAdapter mLocalAdapter;
@@ -66,10 +67,10 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
 
         mContext = spy(RuntimeEnvironment.application);
         mPreference = new Preference(mContext);
-        mPreference.setKey(BluetoothDeviceRenamePreferenceController.PREF_KEY);
+        mPreference.setKey(PREF_KEY);
 
         mController = new BluetoothDeviceRenamePreferenceController(
-                mContext, mFragment, mLocalAdapter);
+                mContext, PREF_KEY, mFragment, mLocalAdapter);
     }
 
     @Test
