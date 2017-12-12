@@ -58,6 +58,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
     private DotsPageIndicator mPageIndicator;
 
     private TextView mLabel;
+    private LabeledSeekBar mSeekBar;
     private View mLarger;
     private View mSmaller;
 
@@ -110,19 +111,17 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         // seek bar.
         final int max = Math.max(1, mEntries.length - 1);
 
-        final LabeledSeekBar seekBar = (LabeledSeekBar) content.findViewById(R.id.seek_bar);
-        seekBar.setLabels(mEntries);
-        seekBar.setMax(max);
-        seekBar.setProgress(mInitialIndex);
-        seekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
+        mSeekBar = (LabeledSeekBar) content.findViewById(R.id.seek_bar);
+        mSeekBar.setLabels(mEntries);
+        mSeekBar.setMax(max);
 
         mSmaller = content.findViewById(R.id.smaller);
         mSmaller.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int progress = seekBar.getProgress();
+                final int progress = mSeekBar.getProgress();
                 if (progress > 0) {
-                    seekBar.setProgress(progress - 1, true);
+                    mSeekBar.setProgress(progress - 1, true);
                 }
             }
         });
@@ -131,9 +130,9 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         mLarger.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final int progress = seekBar.getProgress();
-                if (progress < seekBar.getMax()) {
-                    seekBar.setProgress(progress + 1, true);
+                final int progress = mSeekBar.getProgress();
+                if (progress < mSeekBar.getMax()) {
+                    mSeekBar.setProgress(progress + 1, true);
                 }
             }
         });
@@ -141,7 +140,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
         if (mEntries.length == 1) {
             // The larger and smaller buttons will be disabled when we call
             // setPreviewLayer() later in this method.
-            seekBar.setEnabled(false);
+            mSeekBar.setEnabled(false);
         }
 
         final Context context = getContext();
@@ -170,6 +169,21 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         setPreviewLayer(mInitialIndex, false);
         return root;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Set SeekBar listener here to avoid onProgressChanged() is called
+        // during onRestoreInstanceState().
+        mSeekBar.setProgress(mCurrentIndex);
+        mSeekBar.setOnSeekBarChangeListener(new onPreviewSeekBarChangeListener());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mSeekBar.setOnSeekBarChangeListener(null);
     }
 
     /**
