@@ -136,7 +136,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             }
         }
         final Preference p = new Preference(getPrefContext());
-        p.setIcon(R.drawable.ic_add);
+        p.setIcon(R.drawable.ic_menu_add);
         p.setTitle(R.string.zen_mode_add_rule);
         p.setPersistent(false);
         p.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -178,8 +178,6 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     private static ManagedServiceSettings.Config getConditionProviderConfig() {
         final ManagedServiceSettings.Config c = new ManagedServiceSettings.Config();
         c.tag = TAG;
-        c.setting = Settings.Secure.ENABLED_NOTIFICATION_POLICY_ACCESS_PACKAGES;
-        c.secondarySetting = Settings.Secure.ENABLED_NOTIFICATION_LISTENERS;
         c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
         c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
         c.noun = "condition provider";

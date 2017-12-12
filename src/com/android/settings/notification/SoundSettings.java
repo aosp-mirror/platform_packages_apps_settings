@@ -31,9 +31,9 @@ import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class SoundSettings extends DashboardFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mProgressiveDisclosureMixin.setTileLimit(6);
+        mProgressiveDisclosureMixin.setTileLimit(1);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class SoundSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, this, mVolumeCallback, getLifecycle());
     }
 
@@ -182,10 +182,10 @@ public class SoundSettings extends DashboardFragment {
         }
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             SoundSettings fragment, VolumeSeekBarPreference.Callback callback,
             Lifecycle lifecycle) {
-        final List<PreferenceController> controllers = new ArrayList<>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context));
         controllers.add(new EmergencyBroadcastPreferenceController(
                 context, KEY_CELL_BROADCAST_SETTINGS));
@@ -233,7 +233,7 @@ public class SoundSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<PreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* callback */, null /* lifecycle */);
                 }

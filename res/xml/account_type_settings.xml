@@ -25,15 +25,15 @@
         android:selectable="false"
         android:order="-10000"/>
 
+    <PreferenceCategory
+      android:key="dashboard_tile_placeholder"
+      android:order="100"/>
+
     <Preference
         android:key="account_sync"
         android:title="@string/account_sync_title"
         android:icon="@drawable/ic_sync"
-        android:order="-9999"/>
-
-    <PreferenceCategory
-      android:key="dashboard_tile_placeholder"
-      android:order="-9998"/>
+        android:order="200"/>
 
     <com.android.settings.applications.LayoutPreference
       android:key="remove_account"

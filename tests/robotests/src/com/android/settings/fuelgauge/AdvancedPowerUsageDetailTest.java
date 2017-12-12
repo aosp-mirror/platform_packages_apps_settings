@@ -87,10 +87,17 @@ public class AdvancedPowerUsageDetailTest {
     private static final int ICON_ID = 123;
     private static final int UID = 1;
     private static final int POWER_MAH = 150;
-    private static final long BACKGROUND_TIME_US = 100 * 1000;
-    private static final long FOREGROUND_TIME_US = 200 * 1000;
     private static final long BACKGROUND_TIME_MS = 100;
-    private static final long FOREGROUND_TIME_MS = 200;
+    private static final long FOREGROUND_ACTIVITY_TIME_MS = 123;
+    private static final long FOREGROUND_SERVICE_TIME_MS = 444;
+    private static final long FOREGROUND_TIME_MS =
+            FOREGROUND_ACTIVITY_TIME_MS + FOREGROUND_SERVICE_TIME_MS;
+    private static final long PROCSTATE_TOP_TIME_MS = FOREGROUND_ACTIVITY_TIME_MS;
+    private static final long BACKGROUND_TIME_US = BACKGROUND_TIME_MS * 1000;
+    private static final long FOREGROUND_ACTIVITY_TIME_US = FOREGROUND_ACTIVITY_TIME_MS * 1000;
+    private static final long FOREGROUND_SERVICE_TIME_US = FOREGROUND_SERVICE_TIME_MS * 1000;
+    private static final long FOREGROUND_TIME_US = FOREGROUND_TIME_MS * 1000;
+    private static final long PROCSTATE_TOP_TIME_US = PROCSTATE_TOP_TIME_MS * 1000;
     private static final long PHONE_FOREGROUND_TIME_MS = 250 * 1000;
     private static final long PHONE_BACKGROUND_TIME_MS = 0;
 
@@ -123,7 +130,9 @@ public class AdvancedPowerUsageDetailTest {
     @Mock
     private AnomalySummaryPreferenceController mAnomalySummaryPreferenceController;
     @Mock
-    private BatteryStats.Timer mTimer;
+    private BatteryStats.Timer mForegroundActivityTimer;
+    @Mock
+    private BatteryUtils mBatteryUtils;
     private Context mContext;
     private Preference mForegroundPreference;
     private Preference mBackgroundPreference;
@@ -171,10 +180,11 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(APP_LABEL).when(mBatteryEntry).getLabel();
         doReturn(BACKGROUND_TIME_US).when(mUid).getProcessStateTime(
                 eq(BatteryStats.Uid.PROCESS_STATE_BACKGROUND), anyLong(), anyInt());
-        doReturn(FOREGROUND_TIME_US).when(mUid).getProcessStateTime(
+        doReturn(PROCSTATE_TOP_TIME_US).when(mUid).getProcessStateTime(
                 eq(BatteryStats.Uid.PROCESS_STATE_TOP), anyLong(), anyInt());
-        doReturn(mTimer).when(mUid).getForegroundActivityTimer();
-        doReturn(FOREGROUND_TIME_US).when(mTimer).getTotalTimeLocked(anyLong(), anyInt());
+        doReturn(mForegroundActivityTimer).when(mUid).getForegroundActivityTimer();
+        doReturn(FOREGROUND_ACTIVITY_TIME_US).when(mForegroundActivityTimer)
+                .getTotalTimeLocked(anyLong(), anyInt());
         ReflectionHelpers.setField(mBatteryEntry, "sipper", mBatterySipper);
         mBatteryEntry.iconId = ICON_ID;
         mBatterySipper.uidObj = mUid;
@@ -188,6 +198,10 @@ public class AdvancedPowerUsageDetailTest {
         mTestActivity = spy(new SettingsActivity());
         doReturn(mPackageManager).when(mTestActivity).getPackageManager();
         doReturn(mAppOpsManager).when(mTestActivity).getSystemService(Context.APP_OPS_SERVICE);
+
+        mBatteryUtils = spy(BatteryUtils.getInstance(mTestActivity));
+        doReturn(FOREGROUND_SERVICE_TIME_US).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
+                any(BatteryStats.Uid.class), anyLong());
 
         final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
 
@@ -263,8 +277,8 @@ public class AdvancedPowerUsageDetailTest {
 
     @Test
     public void testStartBatteryDetailPage_hasBasicData() {
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, mAnomalies);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, mAnomalies);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_BACKGROUND_TIME)).isEqualTo(
@@ -282,8 +296,8 @@ public class AdvancedPowerUsageDetailTest {
         mBatterySipper.drainType = BatterySipper.DrainType.PHONE;
         mBatterySipper.usageTimeMs = PHONE_FOREGROUND_TIME_MS;
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, null);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
 
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
         assertThat(mBundle.getLong(AdvancedPowerUsageDetail.EXTRA_FOREGROUND_TIME)).isEqualTo(
@@ -300,8 +314,8 @@ public class AdvancedPowerUsageDetailTest {
     public void testStartBatteryDetailPage_NormalApp() {
         mBatterySipper.mPackages = PACKAGE_NAME;
         mBatteryEntry.defaultPackageName = PACKAGE_NAME[0];
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, mAnomalies);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, mAnomalies);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);
@@ -312,8 +326,8 @@ public class AdvancedPowerUsageDetailTest {
     @Test
     public void testStartBatteryDetailPage_SystemApp() {
         mBatterySipper.mPackages = null;
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, null);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_LABEL)).isEqualTo(APP_LABEL);
         assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_ICON_ID)).isEqualTo(ICON_ID);
@@ -327,8 +341,8 @@ public class AdvancedPowerUsageDetailTest {
         final int appUid = 1010019;
         mBatterySipper.mPackages = PACKAGE_NAME;
         doReturn(appUid).when(mBatterySipper).getUid();
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, null);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
 
         verify(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
@@ -355,12 +369,22 @@ public class AdvancedPowerUsageDetailTest {
     }
 
     @Test
-    public void testStartBatteryDetailPage_defaultPackageNull_choseFromBatterySipper() {
+    public void testStartBatteryDetailPage_batteryEntryNotExisted_extractUidFromPackageName() throws
+            PackageManager.NameNotFoundException{
+        doReturn(UID).when(mPackageManager).getPackageUid(PACKAGE_NAME[0], 0 /* no flag */);
+
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);
+
+        assertThat(mBundle.getInt(AdvancedPowerUsageDetail.EXTRA_UID)).isEqualTo(UID);
+    }
+
+    @Test
+    public void testStartBatteryDetailPage_defaultPackageNull_chooseFromBatterySipper() {
         mBatteryEntry.defaultPackageName = null;
         mBatteryEntry.sipper.mPackages = PACKAGE_NAME;
 
-        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, mBatteryStatsHelper, 0,
-                mBatteryEntry, USAGE_PERCENT, null);
+        AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, mBatteryUtils, null,
+                mBatteryStatsHelper, 0, mBatteryEntry, USAGE_PERCENT, null);
 
         assertThat(mBundle.getString(AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME)).isEqualTo(
                 PACKAGE_NAME[0]);

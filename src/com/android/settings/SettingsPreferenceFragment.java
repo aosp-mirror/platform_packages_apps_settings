@@ -49,6 +49,7 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreference;
 import com.android.settingslib.CustomEditTextPreference;
 import com.android.settingslib.HelpUtils;
@@ -240,14 +241,11 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         unregisterObserverIfNeeded();
     }
 
-    public void showLoadingWhenEmpty() {
-        View loading = getView().findViewById(R.id.loading_container);
-        setEmptyView(loading);
-    }
-
     public void setLoading(boolean loading, boolean animate) {
-        View loading_container = getView().findViewById(R.id.loading_container);
-        Utils.handleLoadingContainer(loading_container, getListView(), !loading, animate);
+        View loadingContainer = getView().findViewById(R.id.loading_container);
+        LoadingViewController.handleLoadingContainer(loadingContainer, getListView(),
+                !loading /* done */,
+                animate);
     }
 
     public void registerObserverIfNeeded() {

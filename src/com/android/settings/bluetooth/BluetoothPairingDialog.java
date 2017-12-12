@@ -108,12 +108,6 @@ public class BluetoothPairingDialog extends Activity {
     @VisibleForTesting
     void dismiss() {
         if (!isFinishing()) {
-            BluetoothPairingDialogFragment bluetoothFragment =
-                (BluetoothPairingDialogFragment) getFragmentManager()
-                    .findFragmentByTag(FRAGMENT_TAG);
-            if (bluetoothFragment != null) {
-                bluetoothFragment.dismiss();
-            }
             finish();
         }
     }

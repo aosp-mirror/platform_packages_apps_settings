@@ -19,9 +19,11 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class ManualPreferenceController extends PreferenceController {
+public class ManualPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_MANUAL = "manual";
 

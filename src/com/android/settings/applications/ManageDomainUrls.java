@@ -141,7 +141,7 @@ public class ManageDomainUrls extends SettingsPreferenceFragment
                     final Intent launchIntent = instantAppSettingsIntent;
                     // TODO: Make this button actually launch the account chooser.
                     mInstantAppAccountPreference = new Preference(getPrefContext());
-                    mInstantAppAccountPreference.setTitle(R.string.instant_apps_account);
+                    mInstantAppAccountPreference.setTitle(R.string.instant_apps_settings);
                     mInstantAppAccountPreference.setOnPreferenceClickListener(pref -> {
                         startActivity(launchIntent);
                         return true;

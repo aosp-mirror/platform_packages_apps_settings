@@ -24,10 +24,12 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
-public class TelephonyMonitorPreferenceController extends PreferenceController {
+public class TelephonyMonitorPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String KEY_TELEPHONY_MONITOR_SWITCH = "telephony_monitor_switch";
     @VisibleForTesting

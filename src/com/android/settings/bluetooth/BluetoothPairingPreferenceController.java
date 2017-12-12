@@ -22,14 +22,16 @@ import android.support.v7.preference.Preference;
 import android.os.UserHandle;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 
 /**
  * Controller that shows and updates the bluetooth device name
  */
-public class BluetoothPairingPreferenceController extends PreferenceController {
+public class BluetoothPairingPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
     private static final String TAG = "BluetoothPairingPrefCtrl";
 
     public static final String KEY_PAIRING = "pref_bt_pairing";
@@ -74,7 +76,7 @@ public class BluetoothPairingPreferenceController extends PreferenceController {
     public Preference createBluetoothPairingPreference(int order) {
         mPreference = new Preference(mFragment.getPreferenceScreen().getContext());
         mPreference.setKey(KEY_PAIRING);
-        mPreference.setIcon(R.drawable.ic_add);
+        mPreference.setIcon(R.drawable.ic_menu_add);
         mPreference.setOrder(order);
         mPreference.setTitle(R.string.bluetooth_pairing_pref_title);
 

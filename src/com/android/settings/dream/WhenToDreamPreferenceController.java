@@ -18,10 +18,12 @@ package com.android.settings.dream;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.dream.DreamBackend;
 
-public class WhenToDreamPreferenceController extends PreferenceController {
+public class WhenToDreamPreferenceController extends AbstractPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String WHEN_TO_START = "when_to_start";
     private final DreamBackend mBackend;

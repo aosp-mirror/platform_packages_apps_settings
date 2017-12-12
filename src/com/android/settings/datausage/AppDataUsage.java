@@ -14,6 +14,8 @@
 
 package com.android.settings.datausage;
 
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -30,6 +32,7 @@ import android.net.TrafficStats;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -51,8 +54,6 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.UidDetail;
 import com.android.settingslib.net.UidDetailProvider;
-
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
 
 public class AppDataUsage extends DataUsageBase implements Preference.OnPreferenceChangeListener,
         DataSaverBackend.Listener {
@@ -117,8 +118,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 : null;
         if (mTemplate == null) {
             Context context = getContext();
-            mTemplate = DataUsageSummary.getDefaultTemplate(context,
-                    DataUsageSummary.getDefaultSubscriptionId(context));
+            mTemplate = DataUsageUtils.getDefaultTemplate(context,
+                    DataUsageUtils.getDefaultSubscriptionId(context));
         }
         if (mAppItem == null) {
             int uid = (args != null) ? args.getInt(AppInfoBase.ARG_PACKAGE_UID, -1)
@@ -235,6 +236,7 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mRestrictBackground) {
             mDataSaverBackend.setIsBlacklisted(mAppItem.key, mPackageName, !(Boolean) newValue);
+            updatePrefs();
             return true;
         } else if (preference == mUnrestrictedData) {
             mDataSaverBackend.setIsWhitelisted(mAppItem.key, mPackageName, (Boolean) newValue);
@@ -254,7 +256,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
         return super.onPreferenceTreeClick(preference);
     }
 
-    private void updatePrefs() {
+    @VisibleForTesting
+    void updatePrefs() {
         updatePrefs(getAppRestrictBackground(), getUnrestrictData());
     }
 
@@ -338,9 +341,8 @@ public class AppDataUsage extends DataUsageBase implements Preference.OnPreferen
                 .newInstance(activity, this, null /* header */)
                 .setRecyclerView(getListView(), getLifecycle())
                 .setUid(uid)
-                .setButtonActions(showInfoButton
-                                ? EntityHeaderController.ActionType.ACTION_APP_INFO
-                                : EntityHeaderController.ActionType.ACTION_NONE,
+                .setHasAppInfoLink(showInfoButton)
+                .setButtonActions(EntityHeaderController.ActionType.ACTION_NONE,
                         EntityHeaderController.ActionType.ACTION_NONE)
                 .setIcon(mIcon)
                 .setLabel(mLabel)

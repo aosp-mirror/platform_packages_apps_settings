@@ -75,6 +75,7 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
+    private boolean mOnConditionsChangedCalled;
 
     @Override
     public int getMetricsCategory() {
@@ -95,9 +96,11 @@ public class DashboardSummary extends InstrumentedFragment
 
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
-        mSuggestionParser = new SuggestionParser(activity,
-                mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
-        mSuggestionsChecks = new SuggestionsChecks(getContext());
+        if (mSuggestionFeatureProvider.isSuggestionEnabled(activity)) {
+            mSuggestionParser = new SuggestionParser(activity,
+                    mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
+            mSuggestionsChecks = new SuggestionsChecks(getContext());
+        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime)
                     + " ms");
@@ -191,7 +194,6 @@ public class DashboardSummary extends InstrumentedFragment
         }
         mDashboard.setLayoutManager(mLayoutManager);
         mDashboard.setHasFixedSize(true);
-        mDashboard.addItemDecoration(new DashboardDecorator(getContext()));
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
             mSuggestionParser, this /* SuggestionDismissController.Callback */);
@@ -210,11 +212,16 @@ public class DashboardSummary extends InstrumentedFragment
 
     @VisibleForTesting
     void rebuildUI() {
-        new SuggestionLoader().execute();
-        // Set categories on their own if loading suggestions takes too long.
-        mHandler.postDelayed(() -> {
+        if (!mSuggestionFeatureProvider.isSuggestionEnabled(getContext())) {
+            Log.d(TAG, "Suggestion feature is disabled, skipping suggestion entirely");
             updateCategoryAndSuggestion(null /* tiles */);
-        }, MAX_WAIT_MILLIS);
+        } else {
+            new SuggestionLoader().execute();
+            // Set categories on their own if loading suggestions takes too long.
+            mHandler.postDelayed(() -> {
+                updateCategoryAndSuggestion(null /* tiles */);
+            }, MAX_WAIT_MILLIS);
+        }
     }
 
     @Override
@@ -231,10 +238,21 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onConditionsChanged() {
         Log.d(TAG, "onConditionsChanged");
-        final boolean scrollToTop = mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
-        mAdapter.setConditions(mConditionManager.getConditions());
-        if (scrollToTop) {
-            mDashboard.scrollToPosition(0);
+        // Bypass refreshing the conditions on the first call of onConditionsChanged.
+        // onConditionsChanged is called immediately everytime we start listening to the conditions
+        // change when we gain window focus. Since the conditions are passed to the adapter's
+        // constructor when we create the view, the first handling is not necessary.
+        // But, on the subsequent calls we need to handle it because there might be real changes to
+        // conditions.
+        if (mOnConditionsChangedCalled) {
+            final boolean scrollToTop =
+                    mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
+            mAdapter.setConditions(mConditionManager.getConditions());
+            if (scrollToTop) {
+                mDashboard.scrollToPosition(0);
+            }
+        } else {
+            mOnConditionsChangedCalled = true;
         }
     }
 
@@ -293,15 +311,14 @@ public class DashboardSummary extends InstrumentedFragment
             return;
         }
 
-        // Temporary hack to wrap homepage category into a list. Soon we will create adapter
-        // API that takes a single category.
-        List<DashboardCategory> categories = new ArrayList<>();
-        categories.add(mDashboardFeatureProvider.getTilesForCategory(
-                CategoryKey.CATEGORY_HOMEPAGE));
+        final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
+                CategoryKey.CATEGORY_HOMEPAGE);
+        mSummaryLoader.updateSummaryToCache(category);
         if (suggestions != null) {
-            mAdapter.setCategoriesAndSuggestions(categories, suggestions);
+            mAdapter.setCategoriesAndSuggestions(category, suggestions);
         } else {
-            mAdapter.setCategory(categories);
+            mAdapter.setCategory(category);
         }
     }
+
 }

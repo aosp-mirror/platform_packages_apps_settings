@@ -16,9 +16,20 @@
 
 package com.android.settings.language;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -30,15 +41,13 @@ import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.view.textservice.TextServicesManager;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 
@@ -53,15 +62,6 @@ import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -86,7 +86,6 @@ public class LanguageAndInputSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest(mActivity);
         when(mActivity.getSystemService(Context.USER_SERVICE)).thenReturn(mock(UserManager.class));
         when(mActivity.getSystemService(Context.INPUT_SERVICE))
                 .thenReturn(mock(InputManager.class));
@@ -107,10 +106,10 @@ public class LanguageAndInputSettingsTest {
 
     @Test
     public void testGetPreferenceControllers_shouldRegisterLifecycleObservers() {
-        final List<PreferenceController> controllers =
+        final List<AbstractPreferenceController> controllers =
                 mFragment.getPreferenceControllers(mActivity);
         int lifecycleObserverCount = 0;
-        for (PreferenceController controller : controllers) {
+        for (AbstractPreferenceController controller : controllers) {
             if (controller instanceof LifecycleObserver) {
                 lifecycleObserverCount++;
             }
@@ -120,9 +119,8 @@ public class LanguageAndInputSettingsTest {
     }
 
     @Test
-
     public void testGetPreferenceControllers_shouldAllBeCreated() {
-        final List<PreferenceController> controllers =
+        final List<AbstractPreferenceController> controllers =
                 mFragment.getPreferenceControllers(mActivity);
 
         assertThat(controllers.isEmpty()).isFalse();
@@ -136,7 +134,8 @@ public class LanguageAndInputSettingsTest {
         final Activity activity = mock(Activity.class);
         final SummaryLoader loader = mock(SummaryLoader.class);
         final ComponentName componentName = new ComponentName("pkg", "cls");
-        ShadowSecureSettings.putString(null, Settings.Secure.DEFAULT_INPUT_METHOD,
+        final ContentResolver cr = activity.getContentResolver();
+        Settings.Secure.putString(cr, Settings.Secure.DEFAULT_INPUT_METHOD,
                 componentName.flattenToString());
         when(activity.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .thenReturn(mInputMethodManager);
@@ -153,40 +152,6 @@ public class LanguageAndInputSettingsTest {
 
         verify(imis.get(0)).loadLabel(mPackageManager);
         verify(loader).setSummary(provider, null);
-    }
-
-    @Test
-    @Config(shadows = {
-            ShadowSecureSettings.class,
-    })
-    public void testSummary_assistSupported_shouldSetToAssistGestureStatus() {
-        final FakeFeatureFactory featureFactory =
-            (FakeFeatureFactory) FakeFeatureFactory.getFactory(mActivity);
-        when(featureFactory.assistGestureFeatureProvider.isSupported(any(Context.class)))
-            .thenReturn(true);
-        when(featureFactory.assistGestureFeatureProvider.isSensorAvailable(any(Context.class)))
-                .thenReturn(true);
-
-        final SummaryLoader loader = mock(SummaryLoader.class);
-        SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
-                .createSummaryProvider(mActivity, loader);
-
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        provider.setListening(true);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_off);
-
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
-        provider.setListening(true);
-        verify(mActivity).getString(
-                R.string.language_input_gesture_summary_on_with_assist);
-
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
-        ShadowSecureSettings.putInt(null, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1);
-        provider.setListening(true);
-        verify(mActivity).getString(
-                R.string.language_input_gesture_summary_on_non_assist);
     }
 
     @Test
@@ -217,7 +182,7 @@ public class LanguageAndInputSettingsTest {
                 fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
 
-        for (PreferenceController controller : fragment.getPreferenceControllers(context)) {
+        for (AbstractPreferenceController controller : fragment.getPreferenceControllers(context)) {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 
@@ -235,7 +200,6 @@ public class LanguageAndInputSettingsTest {
         public TestFragment(Context context) {
             mContext = context;
             mLifecycle = mock(Lifecycle.class);
-            setAmbientDisplayConfig(mock(AmbientDisplayConfiguration.class));
         }
 
         @Override

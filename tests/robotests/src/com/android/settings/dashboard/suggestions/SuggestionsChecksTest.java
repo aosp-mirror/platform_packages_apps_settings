@@ -101,7 +101,6 @@ public class SuggestionsChecksTest {
         assertThat(mSuggestionsChecks.isSuggestionComplete(tile)).isTrue();
     }
 
-
     @Test
     public void testFingerprintEnrollmentIntroductionIsCompleteWhenFingerprintNotSupported() {
         stubFingerprintSupported(false);
@@ -127,7 +126,7 @@ public class SuggestionsChecksTest {
     }
 
     private Tile createFingerprintTile() {
-        Tile tile = new Tile();
+        final Tile tile = new Tile();
         tile.intent = new Intent();
         tile.intent.setComponent(new ComponentName(mContext,
                 Settings.FingerprintEnrollSuggestionActivity.class));

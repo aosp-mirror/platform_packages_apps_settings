@@ -14,6 +14,12 @@
 
 package com.android.settings.datausage;
 
+import static android.net.ConnectivityManager.TYPE_MOBILE;
+import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
+import static android.net.TrafficStats.UID_REMOVED;
+import static android.net.TrafficStats.UID_TETHERING;
+import static android.telephony.TelephonyManager.SIM_STATE_READY;
+
 import android.app.ActivityManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
@@ -46,27 +52,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
-
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
 import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.SummaryForAllUidLoader;
 import com.android.settingslib.net.UidDetailProvider;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static android.net.ConnectivityManager.TYPE_MOBILE;
-import static android.net.NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND;
-import static android.net.TrafficStats.UID_REMOVED;
-import static android.net.TrafficStats.UID_TETHERING;
-import static android.telephony.TelephonyManager.SIM_STATE_READY;
-import static com.android.settings.datausage.DataUsageSummary.TEST_RADIOS;
-import static com.android.settings.datausage.DataUsageSummary.TEST_RADIOS_PROP;
 
 /**
  * Panel showing data usage history across various networks, including options
@@ -96,19 +93,20 @@ public class DataUsageList extends DataUsageBase {
             };
 
     private INetworkStatsSession mStatsSession;
-
     private ChartDataUsagePreference mChart;
 
     private NetworkTemplate mTemplate;
     private int mSubId;
     private ChartData mChartData;
 
+    private LoadingViewController mLoadingViewController;
     private UidDetailProvider mUidDetailProvider;
     private CycleAdapter mCycleAdapter;
     private Spinner mCycleSpinner;
     private Preference mUsageAmount;
     private PreferenceGroup mApps;
     private View mHeader;
+
 
     @Override
     public int getMetricsCategory() {
@@ -176,7 +174,10 @@ public class DataUsageList extends DataUsageBase {
                 mCycleSpinner.setSelection(position);
             }
         }, mCycleListener, true);
-        setLoading(true, false);
+
+        mLoadingViewController = new LoadingViewController(
+                getView().findViewById(R.id.loading_container), getListView());
+        mLoadingViewController.showLoadingViewDelayed();
     }
 
     @Override
@@ -437,8 +438,8 @@ public class DataUsageList extends DataUsageBase {
      * Test if device has a mobile data radio with SIM in ready state.
      */
     public static boolean hasReadyMobileRadio(Context context) {
-        if (TEST_RADIOS) {
-            return SystemProperties.get(TEST_RADIOS_PROP).contains("mobile");
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
@@ -471,8 +472,8 @@ public class DataUsageList extends DataUsageBase {
      * TODO: consider adding to TelephonyManager or SubscriptionManager.
      */
     public static boolean hasReadyMobileRadio(Context context, int subId) {
-        if (TEST_RADIOS) {
-            return SystemProperties.get(TEST_RADIOS_PROP).contains("mobile");
+        if (DataUsageUtils.TEST_RADIOS) {
+            return SystemProperties.get(DataUsageUtils.TEST_RADIOS_PROP).contains("mobile");
         }
 
         final ConnectivityManager conn = ConnectivityManager.from(context);
@@ -523,7 +524,7 @@ public class DataUsageList extends DataUsageBase {
 
         @Override
         public void onLoadFinished(Loader<ChartData> loader, ChartData data) {
-            setLoading(false, true);
+            mLoadingViewController.showContent(false /* animate */);
             mChartData = data;
             mChart.setNetworkStats(mChartData.network);
 

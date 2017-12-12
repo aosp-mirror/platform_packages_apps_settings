@@ -21,10 +21,11 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.DynamicAvailabilityPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
@@ -51,17 +52,18 @@ public class EnterprisePrivacySettings extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle(), true /* async */);
     }
 
-    private static List<PreferenceController> buildPreferenceControllers(Context context,
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Lifecycle lifecycle, boolean async) {
-        final List controllers = new ArrayList<PreferenceController>();
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new NetworkLogsPreferenceController(context));
         controllers.add(new BugReportsPreferenceController(context));
         controllers.add(new SecurityLogsPreferenceController(context));
-        final List exposureChangesCategoryControllers = new ArrayList<PreferenceController>();
+        final List<DynamicAvailabilityPreferenceController> exposureChangesCategoryControllers =
+                new ArrayList<>();
         exposureChangesCategoryControllers.add(new EnterpriseInstalledPackagesPreferenceController(
                 context, lifecycle, async));
         exposureChangesCategoryControllers.add(
@@ -80,7 +82,10 @@ public class EnterprisePrivacySettings extends DashboardFragment {
         exposureChangesCategoryControllers.add(new ImePreferenceController(context, lifecycle));
         exposureChangesCategoryControllers.add(new GlobalHttpProxyPreferenceController(context,
                 lifecycle));
-        exposureChangesCategoryControllers.add(new CaCertsPreferenceController(context, lifecycle));
+        exposureChangesCategoryControllers.add(new CaCertsCurrentUserPreferenceController(
+                context, lifecycle));
+        exposureChangesCategoryControllers.add(new CaCertsManagedProfilePreferenceController(
+                context, lifecycle));
         controllers.addAll(exposureChangesCategoryControllers);
         controllers.add(new ExposureChangesCategoryPreferenceController(context, lifecycle,
                 exposureChangesCategoryControllers, async));
@@ -112,7 +117,7 @@ public class EnterprisePrivacySettings extends DashboardFragment {
             }
 
             @Override
-            public List<PreferenceController> getPreferenceControllers(Context context) {
+            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
                 return buildPreferenceControllers(context, null /* lifecycle */, false /* async */);
                 }
             };

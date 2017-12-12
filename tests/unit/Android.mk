@@ -9,10 +9,12 @@ LOCAL_JAVA_LIBRARIES := android.test.runner
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-test \
-    mockito-target-minus-junit4 \
     espresso-core \
+    legacy-android-test \
+    mockito-target-minus-junit4 \
     truth-prebuilt \
-    legacy-android-test
+    ub-uiautomator \
+
 
 # Include all test java files.
 LOCAL_SRC_FILES := $(call all-java-files-under, src)

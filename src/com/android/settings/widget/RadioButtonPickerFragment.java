@@ -118,7 +118,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             String key, CandidateInfo info, String defaultKey, String systemDefaultKey) {
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     public void updateCandidates() {
         mCandidates.clear();
         final List<? extends CandidateInfo> candidateList = getCandidates();
@@ -139,16 +139,18 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
             nonePref.setOnClickListener(this);
             screen.addPreference(nonePref);
         }
-        for (Map.Entry<String, CandidateInfo> app : mCandidates.entrySet()) {
-            RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
-            bindPreference(pref, app.getKey(), app.getValue(), defaultKey);
-            bindPreferenceExtra(pref, app.getKey(), app.getValue(), defaultKey, systemDefaultKey);
-            screen.addPreference(pref);
+        if (candidateList != null) {
+            for (CandidateInfo info : candidateList) {
+                RadioButtonPreference pref = new RadioButtonPreference(getPrefContext());
+                bindPreference(pref, info.getKey(), info, defaultKey);
+                bindPreferenceExtra(pref, info.getKey(), info, defaultKey, systemDefaultKey);
+                screen.addPreference(pref);
+            }
         }
         mayCheckOnlyRadioButton();
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     public RadioButtonPreference bindPreference(RadioButtonPreference pref,
             String key, CandidateInfo info, String defaultKey) {
         pref.setTitle(info.loadLabel());
@@ -162,7 +164,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         return pref;
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     public void updateCheckedState(String selectedKey) {
         final PreferenceScreen screen = getPreferenceScreen();
         if (screen != null) {
@@ -180,7 +182,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         }
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    @VisibleForTesting
     public void mayCheckOnlyRadioButton() {
         final PreferenceScreen screen = getPreferenceScreen();
         // If there is only 1 thing on screen, select it.

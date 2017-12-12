@@ -15,22 +15,22 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.ManageApplications;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller that jumps to high power optimization fragment
  */
-public class BatteryOptimizationPreferenceController extends PreferenceController {
+public class BatteryOptimizationPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_BACKGROUND_ACTIVITY = "battery_optimization";
 

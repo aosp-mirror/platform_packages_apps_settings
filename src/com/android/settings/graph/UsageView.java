@@ -81,6 +81,7 @@ public class UsageView extends FrameLayout {
             }
         }
         mUsageGraph.setAccentColor(a.getColor(R.styleable.UsageView_android_colorAccent, 0));
+        a.recycle();
     }
 
     public void clearPaths() {

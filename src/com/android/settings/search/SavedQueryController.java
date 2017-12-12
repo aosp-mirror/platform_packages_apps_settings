@@ -21,19 +21,23 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Loader;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 
-public class SavedQueryController implements LoaderManager.LoaderCallbacks {
+public class SavedQueryController implements LoaderManager.LoaderCallbacks,
+        MenuItem.OnMenuItemClickListener {
 
     // TODO: make a generic background task manager to handle one-off tasks like this one.
-
-    private static final int LOADER_ID_SAVE_QUERY_TASK = 0;
-    private static final int LOADER_ID_REMOVE_QUERY_TASK = 1;
-    private static final int LOADER_ID_SAVED_QUERIES = 2;
     private static final String ARG_QUERY = "remove_query";
+    private static final String TAG = "SearchSavedQueryCtrl";
+
+    private static final int MENU_SEARCH_HISTORY = 1000;
 
     private final Context mContext;
     private final LoaderManager mLoaderManager;
@@ -52,11 +56,11 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks {
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
         switch (id) {
-            case LOADER_ID_SAVE_QUERY_TASK:
+            case SearchFragment.SearchLoaderId.SAVE_QUERY_TASK:
                 return new SavedQueryRecorder(mContext, args.getString(ARG_QUERY));
-            case LOADER_ID_REMOVE_QUERY_TASK:
-                return new SavedQueryRemover(mContext, args.getString(ARG_QUERY));
-            case LOADER_ID_SAVED_QUERIES:
+            case SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK:
+                return new SavedQueryRemover(mContext);
+            case SearchFragment.SearchLoaderId.SAVED_QUERIES:
                 return mSearchFeatureProvider.getSavedQueryLoader(mContext);
         }
         return null;
@@ -65,10 +69,14 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks {
     @Override
     public void onLoadFinished(Loader loader, Object data) {
         switch (loader.getId()) {
-            case LOADER_ID_REMOVE_QUERY_TASK:
-                mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
+            case SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK:
+                mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVED_QUERIES,
+                        null /* args */, this /* callback */);
                 break;
-            case LOADER_ID_SAVED_QUERIES:
+            case SearchFragment.SearchLoaderId.SAVED_QUERIES:
+                if (SettingsSearchIndexablesProvider.DEBUG) {
+                    Log.d(TAG, "Saved queries loaded");
+                }
                 mResultAdapter.displaySavedQuery((List<SearchResult>) data);
                 break;
         }
@@ -76,22 +84,44 @@ public class SavedQueryController implements LoaderManager.LoaderCallbacks {
 
     @Override
     public void onLoaderReset(Loader loader) {
+    }
 
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if (item.getItemId() != MENU_SEARCH_HISTORY) {
+            return false;
+        }
+        removeQueries();
+        return true;
+    }
+
+    public void buildMenuItem(Menu menu) {
+        final MenuItem item =
+                menu.add(Menu.NONE, MENU_SEARCH_HISTORY, Menu.NONE, R.string.search_clear_history);
+        item.setOnMenuItemClickListener(this);
     }
 
     public void saveQuery(String query) {
         final Bundle args = new Bundle();
         args.putString(ARG_QUERY, query);
-        mLoaderManager.restartLoader(LOADER_ID_SAVE_QUERY_TASK, args, this);
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVE_QUERY_TASK, args,
+                this /* callback */);
     }
 
-    public void removeQuery(String query) {
+    /**
+     * Remove all saved queries from DB
+     */
+    public void removeQueries() {
         final Bundle args = new Bundle();
-        args.putString(ARG_QUERY, query);
-        mLoaderManager.restartLoader(LOADER_ID_REMOVE_QUERY_TASK, args, this);
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.REMOVE_QUERY_TASK, args,
+                this /* callback */);
     }
 
     public void loadSavedQueries() {
-        mLoaderManager.restartLoader(LOADER_ID_SAVED_QUERIES, null, this);
+        if (SettingsSearchIndexablesProvider.DEBUG) {
+            Log.d(TAG, "loading saved queries");
+        }
+        mLoaderManager.restartLoader(SearchFragment.SearchLoaderId.SAVED_QUERIES, null /* args */,
+                this /* callback */);
     }
 }

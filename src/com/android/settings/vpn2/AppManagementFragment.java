@@ -15,6 +15,8 @@
  */
 package com.android.settings.vpn2;
 
+import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
+
 import android.annotation.NonNull;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
@@ -27,7 +29,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -45,12 +46,10 @@ import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
-import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import java.util.List;
-
-import static android.app.AppOpsManager.OP_ACTIVATE_VPN;
 
 public class AppManagementFragment extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener,
@@ -223,19 +222,6 @@ public class AppManagementFragment extends SettingsPreferenceFragment
                 isEnabled ? mPackageName : null, isLockdown);
     }
 
-    @VisibleForTesting
-    static boolean isAlwaysOnSupportedByApp(@NonNull ApplicationInfo appInfo) {
-        final int targetSdk = appInfo.targetSdkVersion;
-        if (targetSdk < Build.VERSION_CODES.N) {
-            if (Log.isLoggable(TAG, Log.DEBUG)) {
-                Log.d(TAG, "Package " + appInfo.packageName + " targets SDK version: " + targetSdk
-                        + "; must target at least " + Build.VERSION_CODES.N + " to use always-on.");
-            }
-            return false;
-        }
-        return true;
-    }
-
     private void updateUI() {
         if (isAdded()) {
             final boolean alwaysOn = isVpnAlwaysOn();
@@ -257,7 +243,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
             mPreferenceForget.checkRestrictionAndSetDisabled(UserManager.DISALLOW_CONFIG_VPN,
                     mUserId);
 
-            if (isAlwaysOnSupportedByApp(mPackageInfo.applicationInfo)) {
+            if (mConnectivityManager.isAlwaysOnVpnPackageSupportedForUser(mUserId, mPackageName)) {
                 // setSummary doesn't override the admin message when user restriction is applied
                 mPreferenceAlwaysOn.setSummary(R.string.vpn_always_on_summary);
                 // setEnabled is not required here, as checkRestrictionAndSetDisabled

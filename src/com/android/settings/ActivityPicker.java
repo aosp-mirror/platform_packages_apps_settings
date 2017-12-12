@@ -78,6 +78,10 @@ public class ActivityPicker extends AlertActivity implements
         Parcelable parcel = intent.getParcelableExtra(Intent.EXTRA_INTENT);
         if (parcel instanceof Intent) {
             mBaseIntent = (Intent) parcel;
+            mBaseIntent.setFlags(mBaseIntent.getFlags() & ~(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+                    | Intent.FLAG_GRANT_PREFIX_URI_PERMISSION));
         } else {
             mBaseIntent = new Intent(Intent.ACTION_MAIN, null);
             mBaseIntent.addCategory(Intent.CATEGORY_DEFAULT);

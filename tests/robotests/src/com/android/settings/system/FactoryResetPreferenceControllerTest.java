@@ -37,7 +37,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = {ShadowSecureSettings.class, ShadowUtils.class}
+)
 public class FactoryResetPreferenceControllerTest {
 
     private static final String FACTORY_RESET_KEY = "factory_reset";
@@ -72,7 +76,6 @@ public class FactoryResetPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = { ShadowSecureSettings.class, ShadowUtils.class })
     public void isAvailable_nonSystemUser() {
         when(mUserManager.isAdminUser()).thenReturn(false);
         ShadowUtils.setIsDemoUser(false);
@@ -81,7 +84,6 @@ public class FactoryResetPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = { ShadowSecureSettings.class, ShadowUtils.class })
     public void isAvailable_demoUser() {
         when(mUserManager.isAdminUser()).thenReturn(false);
         ShadowUtils.setIsDemoUser(true);

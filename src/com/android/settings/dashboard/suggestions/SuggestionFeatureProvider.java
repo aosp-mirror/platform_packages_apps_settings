@@ -30,6 +30,11 @@ import java.util.List;
 public interface SuggestionFeatureProvider {
 
     /**
+     * Whether or not the whole suggestion feature is enabled.
+     */
+    boolean isSuggestionEnabled(Context context);
+
+    /**
      * Returns true if smart suggestion should be used instead of xml based SuggestionParser.
      */
     boolean isSmartSuggestionEnabled(Context context);

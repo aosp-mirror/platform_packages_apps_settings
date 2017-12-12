@@ -219,10 +219,8 @@ public class BatteryInfo {
                 CharSequence timeString = Utils.formatElapsedTime(context,
                         BatteryUtils.convertUsToMs(drainTimeUs), false /* withSeconds */);
                 info.remainingLabel = TextUtils.expandTemplate(context.getText(shortString ?
-                        (basedOnUsage ?
-                                R.string.power_remaining_duration_only_short_enhanced :
-                                R.string.power_remaining_duration_only_short) :
-                        (basedOnUsage ?
+                                R.string.power_remaining_duration_only_short :
+                         (basedOnUsage ?
                                 R.string.power_remaining_duration_only_enhanced :
                                 R.string.power_remaining_duration_only)), timeString);
                 info.chargeLabel = TextUtils.expandTemplate(context.getText(
@@ -245,8 +243,7 @@ public class BatteryInfo {
                 info.remainingTimeUs = chargeTime;
                 CharSequence timeString = Utils.formatElapsedTime(context,
                         BatteryUtils.convertUsToMs(chargeTime), false /* withSeconds */);
-                int resId = shortString ? R.string.power_charging_duration_short
-                        : R.string.power_charging_duration;
+                int resId = R.string.power_charging_duration;
                 info.remainingLabel = TextUtils.expandTemplate(context.getText(
                         R.string.power_remaining_charging_duration_only), timeString);
                 info.chargeLabel = TextUtils.expandTemplate(context.getText(resId),

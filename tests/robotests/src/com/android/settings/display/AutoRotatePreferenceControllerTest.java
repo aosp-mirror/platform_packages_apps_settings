@@ -45,7 +45,11 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowSystemSettings.class
+)
 public class AutoRotatePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -88,7 +92,6 @@ public class AutoRotatePreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowSystemSettings.class)
     public void updatePreference_settingsIsOff_shouldTurnOffToggle() {
         Settings.System.putIntForUser(mContentResolver,
                 Settings.System.ACCELEROMETER_ROTATION, 0, UserHandle.USER_CURRENT);
@@ -99,7 +102,6 @@ public class AutoRotatePreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowSystemSettings.class)
     public void updatePreference_settingsIsOn_shouldTurnOnToggle() {
         Settings.System.putIntForUser(mContentResolver,
                 Settings.System.ACCELEROMETER_ROTATION, 1, UserHandle.USER_CURRENT);

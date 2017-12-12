@@ -21,15 +21,14 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.vpn2.ConnectivityManagerWrapperImpl;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wifi.AccessPoint;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,13 +38,18 @@ import java.util.List;
  * {@link AccessPoint#saveWifiState(Bundle)} in order to properly render this page.
  */
 public class WifiNetworkDetailsFragment extends DashboardFragment {
+
     private static final String TAG = "WifiNetworkDetailsFrg";
 
     private AccessPoint mAccessPoint;
     private WifiDetailPreferenceController mWifiDetailPreferenceController;
+    private WifiDetailActionBarObserver mWifiDetailActionBarObserver;
 
     @Override
     public void onAttach(Context context) {
+        mWifiDetailActionBarObserver = new WifiDetailActionBarObserver(context, this);
+        getLifecycle().addObserver(mWifiDetailActionBarObserver);
+
         mAccessPoint = new AccessPoint(context, getArguments());
         super.onAttach(context);
     }
@@ -66,7 +70,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<PreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         mWifiDetailPreferenceController = new WifiDetailPreferenceController(
                 mAccessPoint,
@@ -78,8 +82,6 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
 
-        ArrayList<PreferenceController> controllers = new ArrayList(1);
-        controllers.add(mWifiDetailPreferenceController);
-        return controllers;
+        return new ArrayList<>(Collections.singletonList(mWifiDetailPreferenceController));
     }
 }

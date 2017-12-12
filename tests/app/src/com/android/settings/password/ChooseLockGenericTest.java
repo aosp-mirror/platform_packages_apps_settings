@@ -18,9 +18,7 @@ package com.android.settings.password;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
@@ -39,6 +37,7 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiSelector;
 import android.text.format.DateUtils;
+import android.view.WindowManager;
 
 import com.android.internal.widget.LockPatternUtils;
 
@@ -93,7 +92,9 @@ public class ChooseLockGenericTest {
             // WHEN ChooseLockGeneric is launched with no extras.
             mChooseLockGenericActivityRule.launchActivity(null /* No extras */);
             // THEN ConfirmLockPassword.InternalActivity is shown.
-            assertThat(getCurrentActivity())
+            final Activity activity = getCurrentActivity();
+            assertThat(isSecureWindow(activity)).isTrue();
+            assertThat(activity)
                     .isInstanceOf(ConfirmLockPassword.InternalActivity.class);
         } finally {
             finishAllAppTasks();
@@ -110,7 +111,9 @@ public class ChooseLockGenericTest {
             // WHEN ChooseLockGeneric is launched with extras to by-pass lock password confirmation.
             mChooseLockGenericActivityRule.launchActivity(PHISHING_ATTACK_INTENT);
             // THEN ConfirmLockPassword.InternalActivity is still shown.
-            assertThat(getCurrentActivity())
+            final Activity activity = getCurrentActivity();
+            assertThat(isSecureWindow(activity)).isTrue();
+            assertThat(activity)
                     .isInstanceOf(ConfirmLockPassword.InternalActivity.class);
         } finally {
             finishAllAppTasks();
@@ -216,5 +219,10 @@ public class ChooseLockGenericTest {
         view.setText("12345");
         mDevice.pressEnter();
         mDevice.waitForIdle();
+    }
+
+    private boolean isSecureWindow(Activity activity) {
+        return (activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_SECURE)
+                != 0;
     }
 }

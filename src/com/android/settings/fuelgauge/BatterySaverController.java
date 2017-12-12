@@ -25,20 +25,22 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.conditional.BatterySaverCondition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class BatterySaverController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver, OnStart, OnStop,
-        BatterySaverReceiver.BatterySaverListener {
-    private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
+import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
 
+public class BatterySaverController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
+        LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
+    private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private final BatterySaverReceiver mBatteryStateChangeReceiver;
     private final PowerManager mPowerManager;
     private MasterSwitchPreference mBatterySaverPref;

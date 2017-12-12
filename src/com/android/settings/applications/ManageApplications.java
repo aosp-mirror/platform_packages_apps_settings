@@ -59,6 +59,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.Settings;
 import com.android.settings.Settings.AllApplicationsActivity;
 import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
@@ -81,6 +82,7 @@ import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
+import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -114,6 +116,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final String EXTRA_VOLUME_UUID = "volumeUuid";
     public static final String EXTRA_VOLUME_NAME = "volumeName";
     public static final String EXTRA_STORAGE_TYPE = "storageType";
+    public static final String EXTRA_WORK_ONLY = "workProfileOnly";
+    public static final String EXTRA_WORK_ID = "workId";
 
     private static final String EXTRA_SORT_ORDER = "sortOrder";
     private static final String EXTRA_SHOW_SYSTEM = "showSystem";
@@ -217,6 +221,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int STORAGE_TYPE_DEFAULT = 0; // Show all apps that are not categorized.
     public static final int STORAGE_TYPE_MUSIC = 1;
     public static final int STORAGE_TYPE_LEGACY = 2; // Show apps even if they can be categorized.
+    public static final int STORAGE_TYPE_PHOTOS_VIDEOS = 3;
+
+    private static final int NO_USER_SPECIFIED = -1;
 
     // sort order
     private int mSortOrder = R.id.sort_order_alpha;
@@ -260,6 +267,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_MANAGE_SOURCES = 8;
     public static final int LIST_TYPE_GAMES = 9;
     public static final int LIST_TYPE_MOVIES = 10;
+    public static final int LIST_TYPE_PHOTOGRAPHY = 11;
 
 
     // List types that should show instant apps.
@@ -276,6 +284,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private ResetAppsHelper mResetAppsHelper;
     private String mVolumeUuid;
     private int mStorageType;
+    private boolean mIsWorkOnly;
+    private int mWorkUserId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -323,10 +333,16 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         } else if (className.equals(MoviesStorageActivity.class.getName())) {
             mListType = LIST_TYPE_MOVIES;
             mSortOrder = R.id.sort_order_size;
+        } else if (className.equals(Settings.PhotosStorageActivity.class.getName())) {
+            mListType = LIST_TYPE_PHOTOGRAPHY;
+            mSortOrder = R.id.sort_order_size;
+            mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
         } else {
             mListType = LIST_TYPE_MAIN;
         }
         mFilter = getDefaultFilter();
+        mIsWorkOnly = args != null ? args.getBoolean(EXTRA_WORK_ONLY) : false;
+        mWorkUserId = args != null ? args.getInt(EXTRA_WORK_ID) : NO_USER_SPECIFIED;
 
         if (savedInstanceState != null) {
             mSortOrder = savedInstanceState.getInt(EXTRA_SORT_ORDER, mSortOrder);
@@ -367,13 +383,23 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mApplications.mHasReceivedBridgeCallback =
                         savedInstanceState.getBoolean(EXTRA_HAS_BRIDGE, false);
             }
+            int userId = mIsWorkOnly ? mWorkUserId : UserHandle.getUserId(mCurrentUid);
             if (mStorageType == STORAGE_TYPE_MUSIC) {
                 Context context = getContext();
-                mApplications.setExtraViewController(new MusicViewHolderController(
-                        context,
-                        new StorageStatsSource(context),
-                        mVolumeUuid,
-                        UserHandle.of(UserHandle.getUserId(mCurrentUid))));
+                mApplications.setExtraViewController(
+                        new MusicViewHolderController(
+                                context,
+                                new StorageStatsSource(context),
+                                mVolumeUuid,
+                                UserHandle.of(userId)));
+            } else if (mStorageType == STORAGE_TYPE_PHOTOS_VIDEOS) {
+                Context context = getContext();
+                mApplications.setExtraViewController(
+                        new PhotosViewHolderController(
+                                context,
+                                new StorageStatsSource(context),
+                                mVolumeUuid,
+                                UserHandle.of(userId)));
             }
             mListView.setAdapter(mApplications);
             mListView.setRecyclerListener(mApplications);
@@ -422,6 +448,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         }
 
         AppFilter compositeFilter = getCompositeFilter(mListType, mStorageType, mVolumeUuid);
+        if (mIsWorkOnly) {
+            compositeFilter = new CompoundFilter(compositeFilter, FILTERS[FILTER_APPS_WORK]);
+        }
         if (compositeFilter != null) {
             mApplications.setCompositeFilter(compositeFilter);
         }
@@ -443,6 +472,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             return new CompoundFilter(ApplicationsState.FILTER_GAMES, filter);
         } else if (listType == LIST_TYPE_MOVIES) {
             return new CompoundFilter(ApplicationsState.FILTER_MOVIES, filter);
+        } else if (listType == LIST_TYPE_PHOTOGRAPHY) {
+            return new CompoundFilter(ApplicationsState.FILTER_PHOTOS, filter);
         }
 
         return null;
@@ -472,6 +503,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_STORAGE:
             case LIST_TYPE_GAMES:
             case LIST_TYPE_MOVIES:
+            case LIST_TYPE_PHOTOGRAPHY:
                 return mSortOrder == R.id.sort_order_alpha;
             default:
                 return false;
@@ -494,6 +526,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return MetricsEvent.APPLICATIONS_STORAGE_GAMES;
             case LIST_TYPE_MOVIES:
                 return MetricsEvent.APPLICATIONS_STORAGE_MOVIES;
+            case LIST_TYPE_PHOTOGRAPHY:
+                return MetricsEvent.APPLICATIONS_STORAGE_PHOTOS;
             case LIST_TYPE_USAGE_ACCESS:
                 return MetricsEvent.USAGE_ACCESS;
             case LIST_TYPE_HIGH_POWER:
@@ -597,6 +631,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_MOVIES:
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_movies_tv);
                 break;
+            case LIST_TYPE_PHOTOGRAPHY:
+                startAppInfoFragment(AppStorageSettings.class, R.string.storage_photos_videos);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -687,7 +724,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                             ADVANCED_SETTINGS);
                 } else {
                     ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                            AdvancedAppSettings.class.getName(), null, R.string.configure_apps,
+                            DefaultAppSettings.class.getName(), null, R.string.configure_apps,
                             null, this, ADVANCED_SETTINGS);
                 }
                 return true;
@@ -849,6 +886,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         private final AppStateBaseBridge mExtraInfoBridge;
         private final Handler mBgHandler;
         private final Handler mFgHandler;
+        private final LoadingViewController mLoadingViewController;
 
         private int mFilterMode;
         private ArrayList<ApplicationsState.AppEntry> mBaseEntries;
@@ -894,12 +932,6 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             }
         };
 
-        private Runnable mShowLoadingContainerRunnable = new Runnable() {
-            public void run() {
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, false /* done */, false /* animate */);
-            }
-        };
 
         public ApplicationsAdapter(ApplicationsState state, ManageApplications manageApplications,
                 int filterMode) {
@@ -908,6 +940,10 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mBgHandler = new Handler(mState.getBackgroundLooper());
             mSession = state.newSession(this);
             mManageApplications = manageApplications;
+            mLoadingViewController = new LoadingViewController(
+                    mManageApplications.mLoadingContainer,
+                    mManageApplications.mListContainer
+            );
             mContext = manageApplications.getActivity();
             mPm = mContext.getPackageManager();
             mFilterMode = filterMode;
@@ -1109,11 +1145,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
 
             if (mSession.getAllApps().size() != 0
                     && mManageApplications.mListContainer.getVisibility() != View.VISIBLE) {
-                // Cancel any pending task to show the loading animation and show the list of
-                // apps directly.
-                mFgHandler.removeCallbacks(mShowLoadingContainerRunnable);
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, true, true);
+                mLoadingViewController.showContent(true /* animate */);
             }
             if (mManageApplications.mListType == LIST_TYPE_USAGE_ACCESS) {
                 // No enabled or disabled filters for usage access.
@@ -1167,11 +1199,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         void updateLoading() {
             final boolean appLoaded = mHasReceivedLoadEntries && mSession.getAllApps().size() != 0;
             if (appLoaded) {
-                Utils.handleLoadingContainer(mManageApplications.mLoadingContainer,
-                        mManageApplications.mListContainer, true /* done */, false /* animate */);
+                mLoadingViewController.showContent(false /* animate */);
             } else {
-                mFgHandler.postDelayed(
-                        mShowLoadingContainerRunnable, DELAY_SHOW_LOADING_CONTAINER_THRESHOLD_MS);
+                mLoadingViewController.showLoadingViewDelayed();
             }
         }
 

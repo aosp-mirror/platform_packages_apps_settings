@@ -123,15 +123,18 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_pluggedIn_dischargingFalse() {
+    public void testGetBatteryInfo_pluggedInUsingShortString_usesCorrectData() {
+        doReturn(TEST_CHARGE_TIME_REMAINING).when(mBatteryStats).computeChargeTimeRemaining(
+                anyLong());
         BatteryInfo info = BatteryInfo.getBatteryInfoOld(mContext, mChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */);
 
         assertThat(info.discharging).isEqualTo(false);
+        assertThat(info.chargeLabel.toString()).isEqualTo("50% - 1m until fully charged");
     }
 
     @Test
-    public void testGetBatteryInfo_basedOnUsageTrue_usesUsageString() {
+    public void testGetBatteryInfo_basedOnUsageTrue_usesCorrectString() {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
                 1000, true /* basedOnUsage */);
@@ -139,8 +142,10 @@ public class BatteryInfoTest {
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
                 1000, true /* basedOnUsage */);
 
+        // We only add special mention for the long string
         assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
-        assertThat(info2.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
+        // shortened string should not have extra text
+        assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
     }
 
     @Test

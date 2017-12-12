@@ -26,8 +26,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,6 @@ public class SavedQueryViewHolderTest {
     private SavedQueryViewHolder mHolder;
     private View mView;
     private View mTitleView;
-    private View mRemoveButton;
 
     @Before
     public void setUp() {
@@ -56,7 +55,6 @@ public class SavedQueryViewHolderTest {
         mView = LayoutInflater.from(mContext)
                 .inflate(R.layout.search_saved_query_item, null);
         mTitleView = mView.findViewById(android.R.id.title);
-        mRemoveButton = mView.findViewById(android.R.id.icon);
         mHolder = new SavedQueryViewHolder(mView);
     }
 
@@ -65,10 +63,8 @@ public class SavedQueryViewHolderTest {
         final SearchResult result = mock(SearchResult.class);
         mHolder.onBind(mSearchFragment, result);
 
-        mTitleView.performClick();
-        mRemoveButton.performClick();
+        mHolder.itemView.performClick();
 
         verify(mSearchFragment).onSavedQueryClicked(nullable(CharSequence.class));
-        verify(mSearchFragment).onRemoveSavedQueryClicked(nullable(CharSequence.class));
     }
 }

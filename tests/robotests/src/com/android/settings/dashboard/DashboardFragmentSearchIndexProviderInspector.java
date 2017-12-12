@@ -19,9 +19,9 @@ package com.android.settings.dashboard;
 import android.app.Fragment;
 import android.content.Context;
 
-import com.android.settings.core.PreferenceController;
-import com.android.settings.search.Indexable;
 import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.robolectric.RuntimeEnvironment;
 
@@ -47,8 +47,8 @@ public class DashboardFragmentSearchIndexProviderInspector {
         if (provider == null) {
             return true;
         }
-        final List<PreferenceController> controllersFromSearchIndexProvider;
-        final List<PreferenceController> controllersFromFragment;
+        final List<AbstractPreferenceController> controllersFromSearchIndexProvider;
+        final List<AbstractPreferenceController> controllersFromFragment;
         try {
             controllersFromSearchIndexProvider = provider.getPreferenceControllers(context);
         } catch (Throwable e) {

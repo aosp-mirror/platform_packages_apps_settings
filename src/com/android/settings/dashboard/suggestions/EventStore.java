@@ -82,7 +82,7 @@ public class EventStore {
     }
 
     private void writePref(String prefKey, long value) {
-        mSharedPrefs.edit().putLong(prefKey, value).commit();
+        mSharedPrefs.edit().putLong(prefKey, value).apply();
     }
 
     private long readPref(String prefKey, Long defaultValue) {

@@ -109,9 +109,15 @@ public interface EnterprisePrivacyFeatureProvider {
 
     /**
      * Returns the number of CA certificates that the Device Owner or Profile Owner installed in
-     * the current user and the user's managed profile (if any).
+     * current user.
      */
-    int getNumberOfOwnerInstalledCaCertsForCurrentUserAndManagedProfile();
+    int getNumberOfOwnerInstalledCaCertsForCurrentUser();
+
+    /**
+     * Returns the number of CA certificates that the Device Owner or Profile Owner installed in
+     * the current user's managed profile  (if any).
+     */
+    int getNumberOfOwnerInstalledCaCertsForManagedProfile();
 
     /**
      * Returns the number of Device Admin apps active in the current user and the user's managed

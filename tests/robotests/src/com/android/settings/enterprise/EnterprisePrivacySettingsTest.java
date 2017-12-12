@@ -16,16 +16,20 @@
 
 package com.android.settings.enterprise;
 
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.core.DynamicAvailabilityPreferenceController;
-import com.android.settings.core.PreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,9 +45,6 @@ import org.xmlpull.v1.XmlPullParser;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link EnterprisePrivacySettings}.
@@ -111,23 +112,23 @@ public final class EnterprisePrivacySettingsTest {
 
     @Test
     public void getPreferenceControllers() throws Exception {
-        final List<PreferenceController> controllers = mSettings.getPreferenceControllers(
+        final List<AbstractPreferenceController> controllers = mSettings.getPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }
 
     @Test
     public void getSearchIndexProviderPreferenceControllers() throws Exception {
-        final List<PreferenceController> controllers
+        final List<AbstractPreferenceController> controllers
                 = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(
                         ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }
 
-    private void verifyPreferenceControllers(List<PreferenceController> controllers)
+    private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers)
             throws Exception {
         assertThat(controllers).isNotNull();
-        assertThat(controllers.size()).isEqualTo(16);
+        assertThat(controllers.size()).isEqualTo(17);
         int position = 0;
         assertThat(controllers.get(position++)).isInstanceOf(NetworkLogsPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(BugReportsPreferenceController.class);
@@ -151,8 +152,11 @@ public final class EnterprisePrivacySettingsTest {
         assertThat(controllers.get(position++)).isInstanceOf(
                 GlobalHttpProxyPreferenceController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
-                CaCertsPreferenceController.class);
-        final PreferenceController exposureChangesCategoryController = controllers.get(position);
+                CaCertsCurrentUserPreferenceController.class);
+        assertThat(controllers.get(position++)).isInstanceOf(
+                CaCertsManagedProfilePreferenceController.class);
+        final AbstractPreferenceController exposureChangesCategoryController =
+                controllers.get(position);
         final int exposureChangesCategoryControllerIndex = position;
         assertThat(controllers.get(position++)).isInstanceOf(
                 ExposureChangesCategoryPreferenceController.class);
@@ -200,7 +204,7 @@ public final class EnterprisePrivacySettingsTest {
         final Set<String> actualObserved = new HashSet<>();
         int maxObservedIndex = -1;
         for (int i = 0; i < controllers.size(); i++) {
-            final PreferenceController controller = controllers.get(i);
+            final AbstractPreferenceController controller = controllers.get(i);
             if (controller instanceof DynamicAvailabilityPreferenceController &&
                     ((DynamicAvailabilityPreferenceController) controller).getAvailabilityObserver()
                             == exposureChangesCategoryController) {

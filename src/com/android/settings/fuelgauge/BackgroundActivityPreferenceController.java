@@ -15,37 +15,49 @@
 package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
+import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceController;
+import com.android.settings.Utils;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.enterprise.DevicePolicyManagerWrapper;
+import com.android.settings.enterprise.DevicePolicyManagerWrapperImpl;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 /**
  * Controller to control whether an app can run in the background
  */
-public class BackgroundActivityPreferenceController extends PreferenceController implements
-        Preference.OnPreferenceChangeListener {
+public class BackgroundActivityPreferenceController extends AbstractPreferenceController
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "BgActivityPrefContr";
     private static final String KEY_BACKGROUND_ACTIVITY = "background_activity";
 
     private final PackageManager mPackageManager;
     private final AppOpsManager mAppOpsManager;
+    private final UserManager mUserManager;
     private final String[] mPackages;
     private final int mUid;
+    @VisibleForTesting
+    DevicePolicyManagerWrapper mDpm;
 
     private String mTargetPackage;
 
     public BackgroundActivityPreferenceController(Context context, int uid) {
         super(context);
         mPackageManager = context.getPackageManager();
+        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mDpm = new DevicePolicyManagerWrapperImpl(
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mUid = uid;
         mPackages = mPackageManager.getPackagesForUid(mUid);
@@ -55,11 +67,14 @@ public class BackgroundActivityPreferenceController extends PreferenceController
     public void updateState(Preference preference) {
         final int mode = mAppOpsManager
                 .checkOpNoThrow(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage);
-        if (mode == AppOpsManager.MODE_ERRORED) {
-            preference.setEnabled(false);
-        } else {
+        // Set checked or not before we may set it disabled
+        if (mode != AppOpsManager.MODE_ERRORED) {
             final boolean checked = mode != AppOpsManager.MODE_IGNORED;
             ((SwitchPreference) preference).setChecked(checked);
+        }
+        if (mode == AppOpsManager.MODE_ERRORED
+                || Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mTargetPackage)) {
+            preference.setEnabled(false);
         }
 
         updateSummary(preference);

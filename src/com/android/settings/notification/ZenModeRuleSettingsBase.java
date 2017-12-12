@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
@@ -262,8 +263,14 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase
     }
 
     private void updateRuleName() {
-        getActivity().setTitle(mRule.getName());
-        mRuleName.setSummary(mRule.getName());
+        Activity activity = getActivity();
+        if (activity != null) {
+            activity.setTitle(mRule.getName());
+            mRuleName.setSummary(mRule.getName());
+        } else {
+            if (DEBUG) Log.d(TAG, "updateRuleName - activity title and mRuleName "
+                    + "not updated; getActivity() returned null");
+        }
     }
 
     private AutomaticZenRule getZenRule() {

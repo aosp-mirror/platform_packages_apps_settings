@@ -31,6 +31,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -91,6 +92,8 @@ public class PowerUsageAdvancedTest {
     private BatteryHistoryPreference mHistPref;
     @Mock
     private PreferenceGroup mUsageListGroup;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
     private PowerUsageAdvanced mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
@@ -127,8 +130,10 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.setPowerUsageFeatureProvider(mPowerUsageFeatureProvider);
         mPowerUsageAdvanced.setUserManager(mUserManager);
         mPowerUsageAdvanced.setBatteryUtils(BatteryUtils.getInstance(mShadowContext));
+        when(mShadowContext.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(
+                mConnectivityManager);
 
-        mPowerUsageData = new PowerUsageData(UsageType.SYSTEM);
+        mPowerUsageData = new PowerUsageData(UsageType.USER);
         mMaxBatterySipper.totalPowerMah = TYPE_BLUETOOTH_USAGE;
         mMaxBatterySipper.drainType = DrainType.BLUETOOTH;
         mNormalBatterySipper.drainType = DrainType.SCREEN;
@@ -297,6 +302,24 @@ public class PowerUsageAdvancedTest {
     }
 
     @Test
+    public void testShouldHideCategory_typeCellWhileNotSupported_returnTrue() {
+        mPowerUsageData.usageType = UsageType.CELL;
+        doReturn(false).when(mConnectivityManager).isNetworkSupported(
+                ConnectivityManager.TYPE_MOBILE);
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideCategory_typeCellWhileSupported_returnFalse() {
+        mPowerUsageData.usageType = UsageType.CELL;
+        doReturn(true).when(mConnectivityManager).isNetworkSupported(
+                ConnectivityManager.TYPE_MOBILE);
+
+        assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isFalse();
+    }
+
+    @Test
     public void testShouldHideCategory_typeUserAndMoreThanOne_returnFalse() {
         mPowerUsageData.usageType = UsageType.USER;
         doReturn(2).when(mUserManager).getUserCount();
@@ -314,6 +337,13 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testShouldHideSummary_typeCell_returnTrue() {
         mPowerUsageData.usageType = UsageType.CELL;
+
+        assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
+    }
+
+    @Test
+    public void testShouldHideSummary_typeSystem_returnTrue() {
+        mPowerUsageData.usageType = UsageType.SYSTEM;
 
         assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isTrue();
     }
@@ -341,7 +371,7 @@ public class PowerUsageAdvancedTest {
 
     @Test
     public void testShouldHideSummary_typeNormal_returnFalse() {
-        mPowerUsageData.usageType = UsageType.SYSTEM;
+        mPowerUsageData.usageType = UsageType.IDLE;
 
         assertThat(mPowerUsageAdvanced.shouldHideSummary(mPowerUsageData)).isFalse();
     }

@@ -22,6 +22,7 @@
         android:key="apn_name"
         android:singleLine="true"
         android:inputType="text"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_apn"
@@ -29,6 +30,7 @@
         android:key="apn_apn"
         android:singleLine="true"
         android:inputType="textEmailAddress"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_http_proxy"
@@ -36,6 +38,7 @@
         android:key="apn_http_proxy"
         android:singleLine="true"
         android:inputType="textUri"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_http_port"
@@ -43,6 +46,7 @@
         android:key="apn_http_port"
         android:singleLine="true"
         android:inputType="number"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_user"
@@ -50,6 +54,7 @@
         android:key="apn_user"
         android:singleLine="true"
         android:inputType="textEmailAddress"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_password"
@@ -57,6 +62,7 @@
         android:key="apn_password"
         android:singleLine="true"
         android:inputType="textPassword"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_server"
@@ -64,6 +70,7 @@
         android:key="apn_server"
         android:singleLine="true"
         android:inputType="textUri"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_mmsc"
@@ -71,6 +78,7 @@
         android:key="apn_mmsc"
         android:singleLine="true"
         android:inputType="textUri"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_mms_proxy"
@@ -78,6 +86,7 @@
         android:key="apn_mms_proxy"
         android:singleLine="true"
         android:inputType="textUri"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_mms_port"
@@ -85,6 +94,7 @@
         android:key="apn_mms_port"
         android:singleLine="true"
         android:inputType="number"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_mcc"
@@ -92,6 +102,7 @@
         android:key="apn_mcc"
         android:singleLine="true"
         android:inputType="number"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_mnc"
@@ -99,12 +110,14 @@
         android:key="apn_mnc"
         android:singleLine="true"
         android:inputType="number"
+        android:persistent="false"
         />
     <ListPreference
         android:title="@string/apn_auth_type"
         android:key="auth_type"
         android:entries="@array/apn_auth_entries"
         android:entryValues="@array/apn_auth_values"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/apn_type"
@@ -112,6 +125,7 @@
         android:key="apn_type"
         android:singleLine="true"
         android:inputType="textNoSuggestions"
+        android:persistent="false"
         />
     <ListPreference
         android:title="@string/apn_protocol"
@@ -119,6 +133,7 @@
         android:key="apn_protocol"
         android:entries="@array/apn_protocol_entries"
         android:entryValues="@array/apn_protocol_values"
+        android:persistent="false"
         />
     <ListPreference
         android:title="@string/apn_roaming_protocol"
@@ -126,6 +141,7 @@
         android:key="apn_roaming_protocol"
         android:entries="@array/apn_protocol_entries"
         android:entryValues="@array/apn_protocol_values"
+        android:persistent="false"
         />
     <SwitchPreference
         android:title="@string/carrier_enabled"
@@ -133,18 +149,21 @@
         android:enabled="false"
         android:summaryOn="@string/carrier_enabled_summaryOn"
         android:summaryOff="@@string/carrier_enabled_summaryOff"
+        android:persistent="false"
         />
     <MultiSelectListPreference
         android:title="@string/bearer"
         android:key="bearer_multi"
         android:entries="@array/bearer_entries"
         android:entryValues="@array/bearer_values"
+        android:persistent="false"
         />
     <ListPreference
         android:title="@string/mvno_type"
         android:key="mvno_type"
         android:entries="@array/mvno_type_entries"
         android:entryValues="@array/mvno_type_values"
+        android:persistent="false"
         />
     <EditTextPreference
         android:title="@string/mvno_match_data"
@@ -152,5 +171,6 @@
         android:key="mvno_match_data"
         android:singleLine="true"
         android:inputType="text"
+        android:persistent="false"
         />
 </PreferenceScreen>

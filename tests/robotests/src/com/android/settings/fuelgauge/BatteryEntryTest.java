@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Handler;
+import android.os.Process;
 import android.os.UserManager;
 
 import com.android.internal.os.BatterySipper;
@@ -46,9 +47,12 @@ import static org.mockito.Mockito.when;
 public class BatteryEntryTest {
 
     private static final int APP_UID = 123;
+    private static final int SYSTEM_UID = Process.SYSTEM_UID;
     private static final String APP_DEFAULT_PACKAGE_NAME = "com.android.test";
     private static final String APP_LABEL = "Test App Name";
     private static final String HIGH_DRAIN_PACKAGE = "com.android.test.screen";
+    private static final String ANDROID_PACKAGE = "android";
+    private static final String[] SYSTEM_PACKAGES = {HIGH_DRAIN_PACKAGE, ANDROID_PACKAGE};
 
     @Rule public MockitoRule mocks = MockitoJUnit.rule();
 
@@ -81,6 +85,18 @@ public class BatteryEntryTest {
         BatterySipper sipper =
             new BatterySipper(DrainType.APP, new FakeUid(APP_UID), 0 /* power use */);
         sipper.packageWithHighestDrain = HIGH_DRAIN_PACKAGE;
+        return sipper;
+    }
+
+    private BatteryEntry createBatteryEntryForSystem() {
+        return new BatteryEntry(mockContext, mockHandler, mockUserManager, createSipperForSystem());
+    }
+
+    private BatterySipper createSipperForSystem() {
+        BatterySipper sipper =
+                new BatterySipper(DrainType.APP, new FakeUid(SYSTEM_UID), 0 /* power use */);
+        sipper.packageWithHighestDrain = HIGH_DRAIN_PACKAGE;
+        sipper.mPackages = SYSTEM_PACKAGES;
         return sipper;
     }
 
@@ -118,7 +134,22 @@ public class BatteryEntryTest {
             new String[]{APP_DEFAULT_PACKAGE_NAME, "package2", "package3"});
 
         BatteryEntry entry = createBatteryEntryForApp();
-        
+
         assertThat(entry.getLabel()).isEqualTo(HIGH_DRAIN_PACKAGE);
+    }
+
+    @Test
+    public void extractPackageFromSipper_systemSipper_returnSystemPackage() {
+        BatteryEntry entry = createBatteryEntryForSystem();
+
+        assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(
+                new String[]{ANDROID_PACKAGE});
+    }
+
+    @Test
+    public void extractPackageFromSipper_normalSipper_returnDefaultPakcage() {
+        BatteryEntry entry = createBatteryEntryForApp();
+
+        assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(entry.sipper.mPackages);
     }
 }

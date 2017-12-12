@@ -34,11 +34,14 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(
+    manifest = TestConfig.MANIFEST_PATH,
+    sdk = TestConfig.SDK_VERSION,
+    shadows = ShadowEventLogWriter.class
+)
 public class ConfigureKeyGuardDialogTest {
 
     @Test
-    @Config(shadows = ShadowEventLogWriter.class)
     public void displayDialog_clickPositiveButton_launchSetNewPassword() {
         final FragmentController<ConfigureKeyGuardDialog> fragmentController =
                 Robolectric.buildFragment(ConfigureKeyGuardDialog.class);
