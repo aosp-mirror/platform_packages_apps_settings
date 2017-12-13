@@ -16,11 +16,9 @@
 
 package com.android.settings.applications;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.util.Log;
 
 // This class provides methods that help dealing with app stores.
@@ -42,9 +40,6 @@ public class AppStoreUtil {
                     context.getPackageManager().getInstallerPackageName(packageName);
         } catch (IllegalArgumentException e) {
             Log.e(LOG_TAG, "Exception while retrieving the package installer of " + packageName, e);
-        }
-        if (installerPackageName == null) {
-            return null;
         }
         return installerPackageName;
     }

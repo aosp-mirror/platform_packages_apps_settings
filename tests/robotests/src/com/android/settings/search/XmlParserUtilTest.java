@@ -129,6 +129,16 @@ public class XmlParserUtilTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void testControllerAttribute_returnsValidData() {
+        XmlResourceParser parser = getChildByType(R.xml.about_legal, "Preference");
+        final AttributeSet attrs = Xml.asAttributeSet(parser);
+
+        String controller = XmlParserUtils.getController(mContext, attrs);
+        assertThat(controller).isEqualTo("mind_flayer");
+    }
+
+    @Test
     public void testDataSummaryInvalid_ReturnsNull() {
         XmlResourceParser parser = getParentPrimedParser(R.xml.display_settings);
         final AttributeSet attrs = Xml.asAttributeSet(parser);

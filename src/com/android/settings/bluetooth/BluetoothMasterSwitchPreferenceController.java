@@ -38,6 +38,7 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
+//TODO(b/69926683): remove this controller in Android P.
 public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, OnSummaryChangeListener, LifecycleObserver, OnResume,
         OnPause, OnStart, OnStop {

@@ -57,7 +57,9 @@ public class SystemUpdatePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mController = new SystemUpdatePreferenceController(mContext, mUserManager);
+
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mController = new SystemUpdatePreferenceController(mContext);
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -82,7 +84,7 @@ public class SystemUpdatePreferenceControllerTest {
 
         mController.updateNonIndexableKeys(keys);
 
-        assertThat(keys.size()).isEqualTo(1);
+        assertThat(keys).hasSize(1);
     }
 
     @Test
@@ -94,8 +96,8 @@ public class SystemUpdatePreferenceControllerTest {
 
     @Test
     public void updateState_shouldSetToAndroidVersion() {
-        mController = new SystemUpdatePreferenceController(
-                RuntimeEnvironment.application, mUserManager);
+        mController = new SystemUpdatePreferenceController(RuntimeEnvironment.application);
+
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())

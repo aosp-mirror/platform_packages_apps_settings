@@ -23,13 +23,10 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -37,16 +34,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceManager;
-import android.support.v7.preference.PreferenceScreen;
-import android.view.View;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
-import com.android.settings.applications.instantapps.InstantAppButtonsController.ShowDialogDelegate;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ActionButtonPreferenceTest;
@@ -244,101 +235,6 @@ public final class AppInfoDashboardFragmentTest {
 
         mAppDetail.checkForceStop();
         verify(mAppDetail.mActionButtons).setButton2Visible(false);
-    }
-
-    @Test
-    public void instantApps_buttonControllerHandlesDialog() {
-        InstantAppButtonsController mockController = mock(InstantAppButtonsController.class);
-        ReflectionHelpers.setField(
-                mAppDetail, "mInstantAppButtonsController", mockController);
-        // Make sure first that button controller is not called for supported dialog id
-        AlertDialog mockDialog = mock(AlertDialog.class);
-        when(mockController.createDialog(InstantAppButtonsController.DLG_CLEAR_APP))
-                .thenReturn(mockDialog);
-        assertThat(mAppDetail.createDialog(InstantAppButtonsController.DLG_CLEAR_APP, 0))
-                .isEqualTo(mockDialog);
-        verify(mockController).createDialog(InstantAppButtonsController.DLG_CLEAR_APP);
-    }
-
-    // A helper class for testing the InstantAppButtonsController - it lets us look up the
-    // preference associated with a key for instant app buttons and get back a mock
-    // LayoutPreference (to avoid a null pointer exception).
-    public static class InstalledAppDetailsWithMockInstantButtons extends InstalledAppDetails {
-        @Mock
-        private LayoutPreference mInstantButtons;
-
-        public InstalledAppDetailsWithMockInstantButtons() {
-            super();
-            MockitoAnnotations.initMocks(this);
-        }
-
-        @Override
-        public Preference findPreference(CharSequence key) {
-            if (key == "instant_app_buttons") {
-                return mInstantButtons;
-            }
-            return super.findPreference(key);
-        }
-    }
-
-    @Test
-    public void instantApps_instantSpecificButtons() {
-        // Make this app appear to be instant.
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> true));
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-
-        final InstalledAppDetailsWithMockInstantButtons
-                fragment = new InstalledAppDetailsWithMockInstantButtons();
-        ReflectionHelpers.setField(fragment, "mPackageInfo", packageInfo);
-        ReflectionHelpers.setField(fragment, "mApplicationFeatureProvider",
-                mFeatureFactory.applicationFeatureProvider);
-
-        final InstantAppButtonsController buttonsController =
-                mock(InstantAppButtonsController.class);
-        when(buttonsController.setPackageName(nullable(String.class)))
-                .thenReturn(buttonsController);
-        when(mFeatureFactory.applicationFeatureProvider.newInstantAppButtonsController(
-                nullable(Fragment.class), nullable(View.class), nullable(ShowDialogDelegate.class)))
-                .thenReturn(buttonsController);
-
-        fragment.maybeAddInstantAppButtons();
-        verify(buttonsController).setPackageName(nullable(String.class));
-        verify(buttonsController).show();
-    }
-
-    @Test
-    public void instantApps_removeCorrectPref() {
-        PreferenceScreen mockPreferenceScreen = mock(PreferenceScreen.class);
-        PreferenceManager mockPreferenceManager = mock(PreferenceManager.class);
-        AppDomainsPreference mockAppDomainsPref = mock(AppDomainsPreference.class);
-        PackageInfo mockPackageInfo = mock(PackageInfo.class);
-        PackageManager mockPackageManager = mock(PackageManager.class);
-        ReflectionHelpers.setField(
-                mAppDetail, "mInstantAppDomainsPreference", mockAppDomainsPref);
-        ReflectionHelpers.setField(
-                mAppDetail, "mPreferenceManager", mockPreferenceManager);
-        ReflectionHelpers.setField(
-                mAppDetail, "mPackageInfo", mockPackageInfo);
-        ReflectionHelpers.setField(
-                mAppDetail, "mPm", mockPackageManager);
-        when(mockPreferenceManager.getPreferenceScreen()).thenReturn(mockPreferenceScreen);
-
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> false));
-        mAppDetail.prepareInstantAppPrefs();
-
-        // For the non instant case we remove the app domain pref, and leave the launch pref
-        verify(mockPreferenceScreen).removePreference(mockAppDomainsPref);
-
-        // For the instant app case we remove the launch preff, and leave the app domain pref
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> true));
-
-        mAppDetail.prepareInstantAppPrefs();
-        // Will be 1 still due to above call
-        verify(mockPreferenceScreen, times(1))
-                .removePreference(mockAppDomainsPref);
     }
 
     @Test

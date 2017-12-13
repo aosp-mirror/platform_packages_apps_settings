@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
+import android.os.PowerManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -79,6 +80,14 @@ public class BatteryBroadcastReceiverTest {
                 Utils.getBatteryPercentage(mChargingIntent));
         assertThat(mBatteryBroadcastReceiver.mBatteryStatus).isEqualTo(
                 Utils.getBatteryStatus(mContext.getResources(), mChargingIntent));
+        verify(mBatteryListener).onBatteryChanged();
+    }
+
+    @Test
+    public void testOnReceive_powerSaveModeChanged_listenerInvoked() {
+        mBatteryBroadcastReceiver.onReceive(mContext,
+                new Intent(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+
         verify(mBatteryListener).onBatteryChanged();
     }
 

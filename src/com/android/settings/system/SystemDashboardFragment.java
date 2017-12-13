@@ -16,8 +16,12 @@
 package com.android.settings.system;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -39,6 +43,17 @@ public class SystemDashboardFragment extends DashboardFragment {
     private static final String TAG = "SystemDashboardFrag";
 
     private static final String KEY_RESET = "reset_dashboard";
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        // We do not want to display an advanced button if only one setting is hidden
+        if (getVisiblePreferenceCount(screen) == screen.getInitialExpandedChildrenCount() + 1) {
+            screen.setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+        }
+    }
 
     @Override
     public int getMetricsCategory() {
@@ -67,11 +82,24 @@ public class SystemDashboardFragment extends DashboardFragment {
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new SystemUpdatePreferenceController(context, UserManager.get(context)));
+        controllers.add(new SystemUpdatePreferenceController(context));
         controllers.add(new AdditionalSystemUpdatePreferenceController(context));
         controllers.add(new BackupSettingsActivityPreferenceController(context));
         controllers.add(new GesturesSettingPreferenceController(context));
         return controllers;
+    }
+
+    private int getVisiblePreferenceCount(PreferenceGroup group) {
+        int visibleCount = 0;
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            final Preference preference = group.getPreference(i);
+            if (preference instanceof PreferenceGroup) {
+                visibleCount += getVisiblePreferenceCount((PreferenceGroup) preference);
+            } else if (preference.isVisible()) {
+                visibleCount++;
+            }
+        }
+        return visibleCount;
     }
 
     /**
@@ -88,15 +116,16 @@ public class SystemDashboardFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add((new BackupSettingsActivityPreferenceController(context)
-                            .getPreferenceKey()));
+                    keys.add((new BackupSettingsActivityPreferenceController(
+                            context).getPreferenceKey()));
                     keys.add(KEY_RESET);
                     return keys;
                 }
