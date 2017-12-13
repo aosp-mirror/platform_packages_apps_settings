@@ -37,7 +37,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.LargeTest;
-import android.support.test.filters.Suppress;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.By;
 import android.support.test.uiautomator.BySelector;
@@ -46,7 +45,7 @@ import android.support.test.uiautomator.Direction;
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject2;
 import android.support.test.uiautomator.Until;
-import android.widget.ListView;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -57,7 +56,6 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-@Suppress
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class ExternalSourcesSettingsTest {
@@ -124,7 +122,8 @@ public class ExternalSourcesSettingsTest {
         final String testAppLabel = getApplicationLabel(mPackageName);
 
         mContext.startActivity(createManageExternalSourcesListIntent());
-        final BySelector preferenceListSelector = By.clazz(ListView.class).res("android:id/list");
+        final BySelector preferenceListSelector =
+                By.clazz(RecyclerView.class).res("com.android.settings:id/apps_list");
         final UiObject2 preferenceList = mUiDevice.wait(Until.findObject(preferenceListSelector),
                 START_ACTIVITY_TIMEOUT);
         assertNotNull("App list not shown", preferenceList);
