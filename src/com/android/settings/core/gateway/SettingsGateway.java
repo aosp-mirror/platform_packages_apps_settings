@@ -271,6 +271,7 @@ public class SettingsGateway {
             Settings.SoundSettingsActivity.class.getName(),
             Settings.StorageDashboardActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
+            Settings.PowerUsageSummaryLegacyActivity.class.getName(),
             Settings.UserAndAccountDashboardActivity.class.getName(),
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
