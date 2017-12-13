@@ -14,7 +14,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 
 LOCAL_JAVA_LIBRARIES := \
     junit \
-    platform-robolectric-3.4.2-prebuilt \
+    platform-robolectric-3.5.1-prebuilt \
     telephony-common
 
 LOCAL_INSTRUMENTATION_FOR := Settings
@@ -42,4 +42,4 @@ LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src
 
 LOCAL_ROBOTEST_TIMEOUT := 36000
 
-include prebuilts/misc/common/robolectric/3.4.2/run_robotests.mk
+include prebuilts/misc/common/robolectric/3.5.1/run_robotests.mk

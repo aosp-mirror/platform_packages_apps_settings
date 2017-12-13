@@ -62,8 +62,8 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
 
         // By adding any resources from libraries we need the AndroidManifest, we can access
         // them from within the parallel universe's resource loader.
-        final AndroidManifest manifest = new AndroidManifest(Fs.fileFromPath(manifestPath),
-                Fs.fileFromPath(resDir), Fs.fileFromPath(assetsDir)) {
+        return new AndroidManifest(Fs.fileFromPath(manifestPath), Fs.fileFromPath(resDir),
+            Fs.fileFromPath(assetsDir), "com.android.settings") {
             @Override
             public List<ResourcePath> getIncludedResourcePaths() {
                 List<ResourcePath> paths = super.getIncludedResourcePaths();
@@ -71,10 +71,6 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
                 return paths;
             }
         };
-
-        // Set the package name to the renamed one
-        manifest.setPackageName("com.android.settings");
-        return manifest;
     }
 
     public static void getIncludedResourcePaths(String packageName, List<ResourcePath> paths) {

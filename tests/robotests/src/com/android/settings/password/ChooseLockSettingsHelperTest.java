@@ -131,9 +131,7 @@ public class ChooseLockSettingsHelperTest {
     public void testLaunchConfirmationActivity_internal_shouldPropagateTheme() {
         Intent intent = new Intent()
                 .putExtra(WizardManagerHelper.EXTRA_THEME, WizardManagerHelper.THEME_GLIF_V2);
-        Activity activity = Robolectric.buildActivity(Activity.class)
-                .withIntent(intent)
-                .get();
+        Activity activity = Robolectric.buildActivity(Activity.class, intent).get();
         ChooseLockSettingsHelper helper = getChooseLockSettingsHelper(activity);
         helper.launchConfirmationActivity(123, "test title", true, 0 /* userId */);
 
