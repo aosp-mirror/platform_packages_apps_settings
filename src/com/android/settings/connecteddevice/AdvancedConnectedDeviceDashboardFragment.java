@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
+import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.UsbBackend;
@@ -83,10 +84,8 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
         lifecycle.addObserver(mUsbPrefController);
         controllers.add(mUsbPrefController);
-        final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
-                new BluetoothMasterSwitchPreferenceController(
-                        context, Utils.getLocalBtManager(context), this,
-                        (SettingsActivity) getActivity());
+        final BluetoothSwitchPreferenceController bluetoothPreferenceController =
+                new BluetoothSwitchPreferenceController(context);
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
 

@@ -19,6 +19,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
@@ -42,26 +43,31 @@ public class ConnectedDeviceGroupController extends AbstractPreferenceController
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
+    private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
 
     public ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
         super(fragment.getContext());
-        init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this));
+        init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this),
+                new ConnectedUsbDeviceUpdater(fragment.getContext(), this));
     }
 
     @VisibleForTesting
     ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle,
-            BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+            BluetoothDeviceUpdater bluetoothDeviceUpdater,
+            ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
         super(fragment.getContext());
-        init(lifecycle, bluetoothDeviceUpdater);
+        init(lifecycle, bluetoothDeviceUpdater, connectedUsbDeviceUpdater);
     }
 
     @Override
     public void onStart() {
         mBluetoothDeviceUpdater.registerCallback();
+        mConnectedUsbDeviceUpdater.registerCallback();
     }
 
     @Override
     public void onStop() {
+        mConnectedUsbDeviceUpdater.unregisterCallback();
         mBluetoothDeviceUpdater.unregisterCallback();
     }
 
@@ -70,8 +76,10 @@ public class ConnectedDeviceGroupController extends AbstractPreferenceController
         super.displayPreference(screen);
         mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
         mPreferenceGroup.setVisible(false);
+
         mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
         mBluetoothDeviceUpdater.forceUpdate();
+        mConnectedUsbDeviceUpdater.initUsbPreference(screen.getContext());
     }
 
     @Override
@@ -100,10 +108,12 @@ public class ConnectedDeviceGroupController extends AbstractPreferenceController
         }
     }
 
-    private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater) {
+    private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater,
+            ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
+        mConnectedUsbDeviceUpdater = connectedUsbDeviceUpdater;
     }
 }

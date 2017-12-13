@@ -37,6 +37,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -45,13 +46,17 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedDeviceGroupControllerTest {
+    private static final String PREFERENCE_KEY_1 = "pref_key_1";
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
     private ConnectedBluetoothDeviceUpdater mConnectedBluetoothDeviceUpdater;
     @Mock
-    private PreferenceScreen mPreferenceScreen;
+    private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
     @Mock
+    private PreferenceScreen mPreferenceScreen;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
 
     private PreferenceGroup mPreferenceGroup;
@@ -66,30 +71,33 @@ public class ConnectedDeviceGroupControllerTest {
 
         mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
+        mPreference.setKey(PREFERENCE_KEY_1);
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         doReturn(mContext).when(mDashboardFragment).getContext();
 
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mDashboardFragment,
-                mLifecycle, mConnectedBluetoothDeviceUpdater);
+                mLifecycle, mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
         mConnectedDeviceGroupController.mPreferenceGroup = mPreferenceGroup;
     }
 
     @Test
-    public void testOnDeviceAdded_firstAdd_becomeVisible() {
+    public void testOnDeviceAdded_firstAdd_becomeVisibleAndPreferenceAdded() {
         mConnectedDeviceGroupController.onDeviceAdded(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isTrue();
+        assertThat(mPreferenceGroup.findPreference(PREFERENCE_KEY_1)).isEqualTo(mPreference);
     }
 
     @Test
-    public void testOnDeviceRemoved_lastRemove_becomeInvisible() {
+    public void testOnDeviceRemoved_lastRemove_becomeInvisibleAndPreferenceRemoved() {
         mPreferenceGroup.addPreference(mPreference);
 
         mConnectedDeviceGroupController.onDeviceRemoved(mPreference);
 
         assertThat(mPreferenceGroup.isVisible()).isFalse();
+        assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
     }
 
     @Test
@@ -117,9 +125,11 @@ public class ConnectedDeviceGroupControllerTest {
         // register the callback in onStart()
         mLifecycle.handleLifecycleEvent(android.arch.lifecycle.Lifecycle.Event.ON_START);
         verify(mConnectedBluetoothDeviceUpdater).registerCallback();
+        verify(mConnectedUsbDeviceUpdater).registerCallback();
 
         // unregister the callback in onStop()
         mLifecycle.handleLifecycleEvent(android.arch.lifecycle.Lifecycle.Event.ON_STOP);
         verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
+        verify(mConnectedUsbDeviceUpdater).unregisterCallback();
     }
 }

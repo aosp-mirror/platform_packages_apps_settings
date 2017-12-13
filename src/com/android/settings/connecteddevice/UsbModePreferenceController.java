@@ -15,17 +15,12 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.hardware.usb.UsbManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -44,19 +39,21 @@ public class UsbModePreferenceController extends AbstractPreferenceController
     public UsbModePreferenceController(Context context, UsbBackend usbBackend) {
         super(context);
         mUsbBackend = usbBackend;
-        mUsbReceiver = new UsbConnectionBroadcastReceiver();
+        mUsbReceiver = new UsbConnectionBroadcastReceiver(mContext, (connected) -> {
+            updateSummary(mUsbPreference);
+        });
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mUsbPreference = screen.findPreference(KEY_USB_MODE);
-        updataSummary(mUsbPreference);
+        updateSummary(mUsbPreference);
     }
 
     @Override
     public void updateState(Preference preference) {
-        updataSummary(preference);
+        updateSummary(preference);
     }
 
     @Override
@@ -79,8 +76,7 @@ public class UsbModePreferenceController extends AbstractPreferenceController
         mUsbReceiver.register();
     }
 
-    @VisibleForTesting
-    int getSummary(int mode) {
+    public static int getSummary(int mode) {
         switch (mode) {
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
                 return R.string.usb_summary_charging_only;
@@ -96,11 +92,11 @@ public class UsbModePreferenceController extends AbstractPreferenceController
         return 0;
     }
 
-    private void updataSummary(Preference preference) {
-        updataSummary(preference, mUsbBackend.getCurrentMode());
+    private void updateSummary(Preference preference) {
+        updateSummary(preference, mUsbBackend.getCurrentMode());
     }
 
-    private void updataSummary(Preference preference, int mode) {
+    private void updateSummary(Preference preference, int mode) {
         if (preference != null) {
             if (mUsbReceiver.isConnected()) {
                 preference.setEnabled(true);
@@ -109,42 +105,6 @@ public class UsbModePreferenceController extends AbstractPreferenceController
                 preference.setSummary(R.string.disconnected);
                 preference.setEnabled(false);
             }
-        }
-    }
-
-    private class UsbConnectionBroadcastReceiver extends BroadcastReceiver {
-        private boolean mListeningToUsbEvents;
-        private boolean mConnected;
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            boolean connected = intent != null
-                    && intent.getExtras().getBoolean(UsbManager.USB_CONNECTED);
-            if (connected != mConnected) {
-                mConnected = connected;
-                updataSummary(mUsbPreference);
-            }
-        }
-
-        public void register() {
-            if (!mListeningToUsbEvents) {
-                IntentFilter intentFilter = new IntentFilter(UsbManager.ACTION_USB_STATE);
-                Intent intent = mContext.registerReceiver(this, intentFilter);
-                mConnected = intent != null
-                        && intent.getExtras().getBoolean(UsbManager.USB_CONNECTED);
-                mListeningToUsbEvents = true;
-            }
-        }
-
-        public void unregister() {
-            if (mListeningToUsbEvents) {
-                mContext.unregisterReceiver(this);
-                mListeningToUsbEvents = false;
-            }
-        }
-
-        public boolean isConnected() {
-            return mConnected;
         }
     }
 
