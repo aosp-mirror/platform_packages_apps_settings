@@ -45,9 +45,6 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -64,6 +61,8 @@ import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.appinfo.AppBatteryPreferenceController;
 import com.android.settings.applications.appinfo.AppDataUsagePreferenceController;
+import com.android.settings.applications.appinfo.AppInstallerInfoPreferenceController;
+import com.android.settings.applications.appinfo.AppInstallerPreferenceCategoryController;
 import com.android.settings.applications.appinfo.AppMemoryPreferenceController;
 import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
 import com.android.settings.applications.appinfo.AppOpenByDefaultPreferenceController;
@@ -77,9 +76,10 @@ import com.android.settings.applications.appinfo.DefaultPhoneShortcutPreferenceC
 import com.android.settings.applications.appinfo.DefaultSmsShortcutPreferenceController;
 import com.android.settings.applications.appinfo.DrawOverlayDetailPreferenceController;
 import com.android.settings.applications.appinfo.ExternalSourceDetailPreferenceController;
+import com.android.settings.applications.appinfo.InstantAppButtonsPreferenceController;
+import com.android.settings.applications.appinfo.InstantAppDomainsPreferenceController;
 import com.android.settings.applications.appinfo.PictureInPictureDetailPreferenceController;
 import com.android.settings.applications.appinfo.WriteSystemSettingsPreferenceController;
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
@@ -97,9 +97,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Dashboard fragment to display application information from Settings. This activity presents
@@ -136,10 +136,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
     private static final String KEY_HEADER = "header_view";
-    private static final String KEY_INSTANT_APP_BUTTONS = "instant_app_buttons";
     private static final String KEY_ACTION_BUTTONS = "action_buttons";
-    private static final String KEY_INSTANT_APP_SUPPORTED_LINKS =
-            "instant_app_launch_supported_domain_urls";
 
     public static final String ARG_PACKAGE_NAME = "package";
     public static final String ARG_PACKAGE_UID = "uid";
@@ -172,7 +169,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
     private boolean mUpdatedSysApp = false;
-    private AppDomainsPreference mInstantAppDomainsPreference;
     private boolean mDisableAfterUninstall;
 
     private List<Callback> mCallbacks = new ArrayList<>();
@@ -180,7 +176,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @VisibleForTesting
     ActionButtonPreference mActionButtons;
 
-    private InstantAppButtonsController mInstantAppButtonsController;
+    private InstantAppButtonsPreferenceController mInstantAppButtonPreferenceController;
 
     /**
      * Callback to invoke when app info has been changed.
@@ -335,8 +331,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
 
         setHasOptionsMenu(true);
-
-        addDynamicPrefs();
     }
 
     @Override
@@ -381,6 +375,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.add(new AppOpenByDefaultPreferenceController(context, this));
         controllers.add(new AppPermissionPreferenceController(context, this, packageName));
         controllers.add(new AppVersionPreferenceController(context, this));
+        controllers.add(new InstantAppDomainsPreferenceController(context, this));
+        final AppInstallerInfoPreferenceController appInstallerInfoPreferenceController =
+                new AppInstallerInfoPreferenceController(context, this, packageName);
+        controllers.add(appInstallerInfoPreferenceController);
 
         for (AbstractPreferenceController controller : controllers) {
             mCallbacks.add((Callback) controller);
@@ -388,6 +386,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
         // The following are controllers for preferences that don't need to refresh the preference
         // state when app state changes.
+        mInstantAppButtonPreferenceController =
+                new InstantAppButtonsPreferenceController(context, this, packageName);
+        controllers.add(mInstantAppButtonPreferenceController);
         controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
         controllers.add(new DefaultHomeShortcutPreferenceController(context, packageName));
@@ -406,6 +407,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         controllers.addAll(advancedAppInfoControllers);
         controllers.add(new PreferenceCategoryController(
                 context, KEY_ADVANCED_APP_INFO_CATEGORY, advancedAppInfoControllers));
+
+        controllers.add(new AppInstallerPreferenceCategoryController(
+                context, Arrays.asList(appInstallerInfoPreferenceController)));
 
         return controllers;
     }
@@ -444,8 +448,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 .styleActionBar(activity)
                 .bindHeaderButtons();
 
-        mInstantAppDomainsPreference =
-                (AppDomainsPreference) findPreference(KEY_INSTANT_APP_SUPPORTED_LINKS);
     }
 
     @Override
@@ -533,24 +535,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
                     startListeningToPackageRemove();
                 }
                 break;
-        }
-    }
-
-    /**
-     * Utility method to hide and show specific preferences based on whether the app being displayed
-     * is an Instant App or an installed app.
-     */
-    @VisibleForTesting
-    void prepareInstantAppPrefs() {
-        final boolean isInstant = AppUtils.isInstant(mPackageInfo.applicationInfo);
-        if (isInstant) {
-            Set<String> handledDomainSet = Utils.getHandledDomains(mPm, mPackageInfo.packageName);
-            String[] handledDomains = handledDomainSet.toArray(new String[handledDomainSet.size()]);
-            mInstantAppDomainsPreference.setTitles(handledDomains);
-            // Dummy values, unused in the implementation
-            mInstantAppDomainsPreference.setValues(new int[handledDomains.length]);
-        } else {
-            getPreferenceScreen().removePreference(mInstantAppDomainsPreference);
         }
     }
 
@@ -642,7 +626,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         checkForceStop();
         setAppLabelAndIcon(mPackageInfo);
         initUninstallButtons();
-        prepareInstantAppPrefs();
 
         // Update the preference summaries.
         Activity context = getActivity();
@@ -676,7 +659,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return true;
     }
 
-    protected AlertDialog createDialog(int id, int errorCode) {
+    @VisibleForTesting
+    AlertDialog createDialog(int id, int errorCode) {
         switch (id) {
             case DLG_DISABLE:
                 return new AlertDialog.Builder(getActivity())
@@ -722,10 +706,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
         }
-        if (mInstantAppButtonsController != null) {
-            return mInstantAppButtonsController.createDialog(id);
-        }
-        return null;
+        return mInstantAppButtonPreferenceController.createDialog(id);
     }
 
     private void uninstallPkg(String packageName, boolean allUsers, boolean andDisable) {
@@ -870,57 +851,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 || (mUserManager.isSplitSystemUser() && userCount == 2);
     }
 
-    private void addDynamicPrefs() {
-        if (UserManager.get(getContext()).isManagedProfile()) {
-            return;
-        }
-        addAppInstallerInfoPref(getPreferenceScreen());
-        maybeAddInstantAppButtons();
-    }
-
-    private void addAppInstallerInfoPref(PreferenceScreen screen) {
-        String installerPackageName =
-                AppStoreUtil.getInstallerPackageName(getContext(), mPackageName);
-
-        final CharSequence installerLabel = Utils.getApplicationLabel(getContext(),
-                installerPackageName);
-        if (installerLabel == null) {
-            return;
-        }
-        final int detailsStringId = AppUtils.isInstant(mPackageInfo.applicationInfo)
-                ? R.string.instant_app_details_summary
-                : R.string.app_install_details_summary;
-        PreferenceCategory category = new PreferenceCategory(getPrefContext());
-        category.setTitle(R.string.app_install_details_group_title);
-        screen.addPreference(category);
-        Preference pref = new Preference(getPrefContext());
-        pref.setTitle(R.string.app_install_details_title);
-        pref.setKey("app_info_store");
-        pref.setSummary(getString(detailsStringId, installerLabel));
-
-        Intent intent =
-                AppStoreUtil.getAppStoreLink(getContext(), installerPackageName, mPackageName);
-        if (intent != null) {
-            pref.setIntent(intent);
-        } else {
-            pref.setEnabled(false);
-        }
-        category.addPreference(pref);
-    }
-
-    @VisibleForTesting
-    void maybeAddInstantAppButtons() {
-        if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
-            LayoutPreference buttons = (LayoutPreference) findPreference(KEY_INSTANT_APP_BUTTONS);
-            mInstantAppButtonsController = mApplicationFeatureProvider
-                    .newInstantAppButtonsController(this,
-                            buttons.findViewById(R.id.instant_app_button_container),
-                            id -> showDialogInner(id, 0))
-                    .setPackageName(mPackageName)
-                    .show();
-        }
-    }
-
     private void onPackageRemoved() {
         getActivity().finishActivity(SUB_INFO_FRAGMENT);
         getActivity().finishAndRemoveTask();
@@ -1041,9 +971,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mFinishing = true;
     }
 
-    private void showDialogInner(int id, int moveErrorCode) {
+    public void showDialogInner(int id, int moveErrorCode) {
         DialogFragment newFragment =
-                AppInfoBase.MyAlertDialogFragment.newInstance(id, moveErrorCode);
+                MyAlertDialogFragment.newInstance(id, moveErrorCode);
         newFragment.setTargetFragment(this, 0);
         newFragment.show(getFragmentManager(), "dialog " + id);
     }
@@ -1094,8 +1024,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
     public static void startAppInfoFragment(Class<?> fragment, int titleRes,
             String pkg, int uid, Activity source, int request, int sourceMetricsCategory) {
         Bundle args = new Bundle();
-        args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
-        args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
+        args.putString(ARG_PACKAGE_NAME, pkg);
+        args.putInt(ARG_PACKAGE_UID, uid);
 
         Intent intent = Utils.onBuildStartFragmentIntent(source, fragment.getName(),
                 args, null, titleRes, null, false, sourceMetricsCategory);
@@ -1116,16 +1046,16 @@ public class AppInfoDashboardFragment extends DashboardFragment
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int id = getArguments().getInt(ARG_ID);
             int errorCode = getArguments().getInt("moveError");
-            Dialog dialog = ((AppInfoBase) getTargetFragment()).createDialog(id, errorCode);
+            Dialog dialog = ((AppInfoDashboardFragment) getTargetFragment())
+                    .createDialog(id, errorCode);
             if (dialog == null) {
                 throw new IllegalArgumentException("unknown id " + id);
             }
             return dialog;
         }
 
-        public static AppInfoBase.MyAlertDialogFragment newInstance(int id, int errorCode) {
-            AppInfoBase.MyAlertDialogFragment
-                    dialogFragment = new AppInfoBase.MyAlertDialogFragment();
+        public static MyAlertDialogFragment newInstance(int id, int errorCode) {
+            MyAlertDialogFragment dialogFragment = new MyAlertDialogFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_ID, id);
             args.putInt("moveError", errorCode);

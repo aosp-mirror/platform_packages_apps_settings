@@ -132,6 +132,17 @@
 
     </PreferenceCategory>
 
+    <!-- App installer info -->
+    <PreferenceCategory
+        android:key="app_installer"
+        android:title="@string/app_install_details_group_title">
+
+        <Preference
+            android:key="app_info_store"
+            android:title="@string/app_install_details_title" />
+
+    </PreferenceCategory>
+
     <Preference
         android:key="app_version"
         android:selectable="false"
