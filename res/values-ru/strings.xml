@@ -646,7 +646,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Для подключения к устройству&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;на нем должен отображаться этот код доступа:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Запрос от: &lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Подключиться к этому устройству?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Для подключения к устройству <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> введите на нем код <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, а затем нажмите клавишу Return или Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Открыть <xliff:g id="DEVICE_NAME">%1$s</xliff:g> доступ к списку контактов и журналу звонков"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Разрешить доступ к контактам и журналу звонков"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Не удалось подключиться к <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Поиск устройств"</string>
@@ -1701,7 +1701,7 @@
     <string name="app_disable_notifications_dlg_text" msgid="5088484670924769845">"Если в настройках этого приложения отключены уведомления, вы можете пропустить важные оповещения и обновления."</string>
     <string name="app_install_details_group_title" msgid="7084623031296083574">"Магазин"</string>
     <string name="app_install_details_title" msgid="6905279702654975207">"О приложении"</string>
-    <string name="app_install_details_summary" msgid="6464796332049327547">"Приложение скачано из <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
+    <string name="app_install_details_summary" msgid="6464796332049327547">"Откуда скачано приложение: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="4529934403276907045">"Подробнее (<xliff:g id="APP_STORE">%1$s</xliff:g>)"</string>
     <string name="app_ops_settings" msgid="5108481883575527511">"Операции в приложениях"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"Выполняется"</string>
@@ -2957,7 +2957,7 @@
     <string name="notification_importance_default_title" msgid="9120383978536089489">"Высокий"</string>
     <string name="notification_importance_high_title" msgid="3058778300264746473">"Крайняя важность"</string>
     <string name="allow_interruption" msgid="7136150018111848721">"Разрешить оповещения"</string>
-    <string name="allow_interruption_summary" msgid="7870159391333957050">"Включить звуковой сигнал, вибрацию, а также показывать оповещения поверх других приложений"</string>
+    <string name="allow_interruption_summary" msgid="7870159391333957050">"Включить звуковой сигнал, вибрацию, а также показывать уведомления поверх других приложений"</string>
     <string name="notification_channel_summary_min" msgid="5401718014765921892">"Низкая важность"</string>
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Средняя важность"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Высокая важность"</string>
@@ -3484,8 +3484,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Использовать более холодные цвета на экране"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Для изменения цветовых настроек нужно отключить экран"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Чтобы включить Telephony Monitor, перезагрузите устройство"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"HDR+ HAL камеры"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Чтобы включить HDR+ HAL камеры, перезагрузите устройство"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Лазерный датчик камеры"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматические обновления системы"</string>
     <string name="usage" msgid="2977875522080448986">"Передача данных"</string>
@@ -3533,9 +3531,9 @@
     <string name="home_app" msgid="4066188520886810030">"Главное приложение"</string>
     <string name="no_default_home" msgid="7184117487704520238">"Главное приложение не выбрано"</string>
     <string name="lockpattern_settings_require_cred_before_startup" msgid="3832020101401318248">"Безопасный запуск"</string>
-    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Запрашивать графический ключ при запуске. Когда устройство отключено, вызовы, сообщения и оповещения не принимаются."</string>
-    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Запрашивать PIN-код при запуске. Когда устройство отключено, вызовы, сообщения и оповещения не принимаются."</string>
-    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Запрашивать пароль при запуске. Когда устройство отключено, вызовы, сообщения и оповещения не принимаются."</string>
+    <string name="lockpattern_settings_require_pattern_before_startup_summary" msgid="7873036097628404476">"Запрашивать графический ключ при запуске. Когда устройство отключено, вызовы, сообщения и уведомления не принимаются."</string>
+    <string name="lockpattern_settings_require_pin_before_startup_summary" msgid="6022831284097476933">"Запрашивать PIN-код при запуске. Когда устройство отключено, вызовы, сообщения и уведомления не принимаются."</string>
+    <string name="lockpattern_settings_require_password_before_startup_summary" msgid="6818285221244966231">"Запрашивать пароль при запуске. Когда устройство отключено, вызовы, сообщения и уведомления не принимаются."</string>
     <string name="suggestion_additional_fingerprints" msgid="2214281455363797037">"Добавьте ещё один отпечаток"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="5471253233176471245">"Добавьте отпечаток другого пальца"</string>
     <string name="battery_saver_on_summary" msgid="9072203872401530722">"Включено/<xliff:g id="ID_1">%1$s</xliff:g>"</string>

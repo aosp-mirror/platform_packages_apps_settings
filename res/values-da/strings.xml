@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Sådan parrer du med:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Sørg for, at den viser denne adgangsnøgle:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Fra:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Par med denne enhed?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Sådan parres med:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Skriv på den:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, og tryk derefter på Retur eller Enter."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Giv <xliff:g id="DEVICE_NAME">%1$s</xliff:g> adgang til dine kontaktpersoner og din opkaldshistorik"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Giv adgang til dine kontaktpersoner og din opkaldshistorik"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Der kunne ikke oprettes forbindelse til <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Søg efter enheder"</string>
@@ -2803,7 +2803,7 @@
     <string name="keywords_unification" msgid="1922900767659821025">"arbejdsprofil, administreret profil, samle, samling, arbejde, profil"</string>
     <string name="keywords_gesture" msgid="3526905012224714078">"bevægelser"</string>
     <string name="keywords_payment_settings" msgid="5220104934130446416">"betal, tryk, betalinger"</string>
-    <string name="keywords_backup" msgid="470070289135403022">"sikkerhedskopiering, sikkerhedskopiér"</string>
+    <string name="keywords_backup" msgid="470070289135403022">"backup, sikkerhedskopiér"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"bevægelse"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Konfigurer NFC-tag for Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
@@ -3038,7 +3038,7 @@
       <item quantity="other">Skift til Kun alarmer i <xliff:g id="DURATION">%1$d</xliff:g> minutter (indtil <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g>)</item>
     </plurals>
     <plurals name="zen_mode_summary_alarms_only_by_hour" formatted="false" msgid="2407703455581767748">
-      <item quantity="one">Skift til Kun alarmer i <xliff:g id="DURATION">%1$d</xliff:g> timer indtil <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
+      <item quantity="one">Skift til Kun alarmer i <xliff:g id="DURATION">%1$d</xliff:g> time indtil <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
       <item quantity="other">Skift til Kun alarmer i <xliff:g id="DURATION">%1$d</xliff:g> timer indtil <xliff:g id="FORMATTEDTIME_1">%2$s</xliff:g></item>
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Skift til Kun alarmer frem til <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
@@ -3052,7 +3052,7 @@
     <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Når skærmen er tændt"</string>
     <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Når skærmen er slukket"</string>
     <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Når skærmen er tændt eller slukket"</string>
-    <string name="notification_app_settings_button" msgid="6685640230371477485">"Indstillinger for underretninger"</string>
+    <string name="notification_app_settings_button" msgid="6685640230371477485">"Underretningsindstillinger"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Send feedback om denne enhed"</string>
     <string name="restr_pin_enter_admin_pin" msgid="1085834515677448072">"Indtast administratorpinkoden"</string>
     <string name="switch_on_text" msgid="1124106706920572386">"Til"</string>
@@ -3350,7 +3350,7 @@
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> er standard"</string>
     <string name="location_on_summary" msgid="5127631544018313587">"TIL/<xliff:g id="LOCATION_MODE">%1$s</xliff:g>"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"FRA"</string>
-    <string name="backup_disabled" msgid="485189128759595412">"Sikkerhedskopiering er slået fra"</string>
+    <string name="backup_disabled" msgid="485189128759595412">"Backup er slået fra"</string>
     <string name="about_summary" msgid="924181828102801010">"Opdateret til Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Handlingen er ikke tilladt"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"Lydstyrken kan ikke ændres"</string>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Brug køligere skærmfarver"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"Du skal slå skærmen fra, før du kan anvende farveændringer"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"Genstart enheden for at anvende ændringen i forbindelse med Overvågning af telefoni"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Camera HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Genstart enheden for at anvende ændringen i forbindelse med Camera HAL HDR+"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Kameraets lasersensor"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automatiske systemopdateringer"</string>
     <string name="usage" msgid="2977875522080448986">"Forbrug"</string>
