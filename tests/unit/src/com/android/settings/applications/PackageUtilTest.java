@@ -35,6 +35,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(AndroidJUnit4.class)
 @SmallTest
+@Deprecated
 public class PackageUtilTest {
     private static final String ALL_USERS_APP_NAME = "com.google.allusers.app";
     private static final String ONE_USER_APP_NAME = "com.google.oneuser.app";

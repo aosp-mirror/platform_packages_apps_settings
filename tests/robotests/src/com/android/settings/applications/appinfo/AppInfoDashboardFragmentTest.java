@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.applications;
+package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -32,6 +32,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.UserManager;
 
@@ -59,7 +60,9 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -84,7 +87,7 @@ public final class AppInfoDashboardFragmentTest {
     private AppOpsManager mAppOpsManager;
 
     private FakeFeatureFactory mFeatureFactory;
-    private AppInfoDashboardFragment mAppDetail;
+    private AppInfoDashboardFragment mFragment;
     private Context mShadowContext;
 
 
@@ -93,12 +96,12 @@ public final class AppInfoDashboardFragmentTest {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
-        mAppDetail = spy(new AppInfoDashboardFragment());
-        doReturn(mActivity).when(mAppDetail).getActivity();
-        doReturn(mShadowContext).when(mAppDetail).getContext();
+        mFragment = spy(new AppInfoDashboardFragment());
+        doReturn(mActivity).when(mFragment).getActivity();
+        doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
         doReturn(mAppOpsManager).when(mActivity).getSystemService(Context.APP_OPS_SERVICE);
-        mAppDetail.mActionButtons = ActionButtonPreferenceTest.createMock();
+        mFragment.mActionButtons = ActionButtonPreferenceTest.createMock();
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
@@ -109,68 +112,68 @@ public final class AppInfoDashboardFragmentTest {
     public void shouldShowUninstallForAll_installForOneOtherUserOnly_shouldReturnTrue() {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
-        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
         info.enabled = true;
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = info;
         final PackageInfo packageInfo = mock(PackageInfo.class);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isTrue();
+        assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isTrue();
     }
 
     @Test
     public void shouldShowUninstallForAll_installForSelfOnly_shouldReturnFalse() {
         when(mDevicePolicyManager.packageHasActiveAdmins(nullable(String.class))).thenReturn(false);
         when(mUserManager.getUsers().size()).thenReturn(2);
-        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
         final ApplicationInfo info = new ApplicationInfo();
         info.flags = ApplicationInfo.FLAG_INSTALLED;
         info.enabled = true;
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = info;
         final PackageInfo packageInfo = mock(PackageInfo.class);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isFalse();
+        assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
     }
 
     @Test
     public void launchFragment_hasNoPackageInfo_shouldFinish() {
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", null);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", null);
 
-        assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isFalse();
+        assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isFalse();
         verify(mActivity).finishAndRemoveTask();
     }
 
     @Test
     public void launchFragment_hasPackageInfo_shouldReturnTrue() {
         final PackageInfo packageInfo = mock(PackageInfo.class);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        assertThat(mAppDetail.ensurePackageInfoAvailable(mActivity)).isTrue();
+        assertThat(mFragment.ensurePackageInfoAvailable(mActivity)).isTrue();
         verify(mActivity, never()).finishAndRemoveTask();
     }
 
     @Test
     public void packageSizeChange_isOtherPackage_shouldNotRefreshUi() {
-        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
-        mAppDetail.onPackageSizeChanged("Not_" + PACKAGE_NAME);
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
+        mFragment.onPackageSizeChanged("Not_" + PACKAGE_NAME);
 
-        verify(mAppDetail, never()).refreshUi();
+        verify(mFragment, never()).refreshUi();
     }
 
     @Test
     public void packageSizeChange_isOwnPackage_shouldRefreshUi() {
-        doReturn(Boolean.TRUE).when(mAppDetail).refreshUi();
-        ReflectionHelpers.setField(mAppDetail, "mPackageName", PACKAGE_NAME);
+        doReturn(Boolean.TRUE).when(mFragment).refreshUi();
+        ReflectionHelpers.setField(mFragment, "mPackageName", PACKAGE_NAME);
 
-        mAppDetail.onPackageSizeChanged(PACKAGE_NAME);
+        mFragment.onPackageSizeChanged(PACKAGE_NAME);
 
-        verify(mAppDetail).refreshUi();
+        verify(mFragment).refreshUi();
     }
 
     // Tests that we don't show the "uninstall for all users" button for instant apps.
@@ -188,11 +191,11 @@ public final class AppInfoDashboardFragmentTest {
         appEntry.info = info;
         final PackageInfo packageInfo = mock(PackageInfo.class);
 
-        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        assertThat(mAppDetail.shouldShowUninstallForAll(appEntry)).isFalse();
+        assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
     }
 
     // Tests that we don't show the uninstall button for instant apps"
@@ -209,12 +212,12 @@ public final class AppInfoDashboardFragmentTest {
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = info;
 
-        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        mAppDetail.initUninstallButtonForUserApp();
-        verify(mAppDetail.mActionButtons).setButton1Visible(false);
+        mFragment.initUninstallButtonForUserApp();
+        verify(mFragment.mActionButtons).setButton1Visible(false);
     }
 
     // Tests that we don't show the force stop button for instant apps (they aren't allowed to run
@@ -229,19 +232,19 @@ public final class AppInfoDashboardFragmentTest {
         final ApplicationInfo info = new ApplicationInfo();
         appEntry.info = info;
 
-        ReflectionHelpers.setField(mAppDetail, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
 
-        mAppDetail.checkForceStop();
-        verify(mAppDetail.mActionButtons).setButton2Visible(false);
+        mFragment.checkForceStop();
+        verify(mFragment.mActionButtons).setButton2Visible(false);
     }
 
     @Test
     public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
-        doReturn(true).when(mAppDetail).refreshUi();
+        doReturn(true).when(mFragment).refreshUi();
 
-        mAppDetail.onActivityResult(InstalledAppDetails.REQUEST_UNINSTALL, 0, mock(Intent.class));
+        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
     }
@@ -256,11 +259,11 @@ public final class AppInfoDashboardFragmentTest {
         final HashSet<String> homePackages = new HashSet<>();
         homePackages.add(info.packageName);
 
-        ReflectionHelpers.setField(mAppDetail, "mHomePackages", homePackages);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mHomePackages", homePackages);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
 
-        assertThat(mAppDetail.handleDisableable()).isFalse();
-        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
+        assertThat(mFragment.handleDisableable()).isFalse();
+        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
     }
 
     @Test
@@ -276,12 +279,12 @@ public final class AppInfoDashboardFragmentTest {
         when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
                 new HashSet<>());
 
-        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
 
-        assertThat(mAppDetail.handleDisableable()).isTrue();
-        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
+        assertThat(mFragment.handleDisableable()).isTrue();
+        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
     }
 
     @Test
@@ -297,13 +300,13 @@ public final class AppInfoDashboardFragmentTest {
         when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
                 new HashSet<>());
 
-        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
 
-        assertThat(mAppDetail.handleDisableable()).isTrue();
-        verify(mAppDetail.mActionButtons).setButton1Text(R.string.enable_text);
-        verify(mAppDetail.mActionButtons).setButton1Positive(true);
+        assertThat(mFragment.handleDisableable()).isTrue();
+        verify(mFragment.mActionButtons).setButton1Text(R.string.enable_text);
+        verify(mFragment.mActionButtons).setButton1Positive(true);
     }
 
     @Test
@@ -322,12 +325,12 @@ public final class AppInfoDashboardFragmentTest {
         when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
                 packages);
 
-        ReflectionHelpers.setField(mAppDetail, "mApplicationFeatureProvider",
+        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mAppDetail, "mAppEntry", appEntry);
+        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
 
-        assertThat(mAppDetail.handleDisableable()).isFalse();
-        verify(mAppDetail.mActionButtons).setButton1Text(R.string.disable_text);
+        assertThat(mFragment.handleDisableable()).isFalse();
+        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
     }
 
     @Test
@@ -337,12 +340,61 @@ public final class AppInfoDashboardFragmentTest {
         info.enabled = true;
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = info;
-        ReflectionHelpers.setField(mAppDetail, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mAppDetail, "mPackageInfo", packageInfo);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
-        mAppDetail.initUninstallButtonForUserApp();
+        mFragment.initUninstallButtonForUserApp();
 
-        verify(mAppDetail.mActionButtons).setButton1Positive(false);
+        verify(mFragment.mActionButtons).setButton1Positive(false);
+    }
+
+    @Test
+    public void getNumberOfUserWithPackageInstalled_twoUsersInstalled_shouldReturnTwo()
+            throws PackageManager.NameNotFoundException{
+        final String packageName = "Package1";
+        final int userID1 = 1;
+        final int userID2 = 2;
+        final List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
+        userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
+        when(mUserManager.getUsers(true)).thenReturn(userInfos);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        final ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        when(mPackageManager.getApplicationInfoAsUser(
+                packageName, PackageManager.GET_META_DATA, userID1))
+                .thenReturn(appInfo);
+        when(mPackageManager.getApplicationInfoAsUser(
+                packageName, PackageManager.GET_META_DATA, userID2))
+                .thenReturn(appInfo);
+        ReflectionHelpers.setField(mFragment, "mPm", mPackageManager);
+
+        assertThat(mFragment.getNumberOfUserWithPackageInstalled(packageName)).isEqualTo(2);
+    }
+
+    @Test
+    public void getNumberOfUserWithPackageInstalled_oneUserInstalled_shouldReturnOne()
+            throws PackageManager.NameNotFoundException{
+        final String packageName = "Package1";
+        final int userID1 = 1;
+        final int userID2 = 2;
+        final List<UserInfo> userInfos = new ArrayList<>();
+        userInfos.add(new UserInfo(userID1, "User1", UserInfo.FLAG_PRIMARY));
+        userInfos.add(new UserInfo(userID2, "yue", UserInfo.FLAG_GUEST));
+        when(mUserManager.getUsers(true)).thenReturn(userInfos);
+        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
+        final ApplicationInfo appInfo = new ApplicationInfo();
+        appInfo.flags = ApplicationInfo.FLAG_INSTALLED;
+        when(mPackageManager.getApplicationInfoAsUser(
+                packageName, PackageManager.GET_META_DATA, userID1))
+                .thenReturn(appInfo);
+        when(mPackageManager.getApplicationInfoAsUser(
+                packageName, PackageManager.GET_META_DATA, userID2))
+                .thenThrow(new PackageManager.NameNotFoundException());
+        ReflectionHelpers.setField(mFragment, "mPm", mPackageManager);
+
+        assertThat(mFragment.getNumberOfUserWithPackageInstalled(packageName)).isEqualTo(1);
+
     }
 
     @Implements(Utils.class)

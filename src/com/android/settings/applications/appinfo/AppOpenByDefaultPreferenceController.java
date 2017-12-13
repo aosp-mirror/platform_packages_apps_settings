@@ -26,7 +26,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppLaunchSettings;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;

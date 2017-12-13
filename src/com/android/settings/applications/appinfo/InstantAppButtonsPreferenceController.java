@@ -22,7 +22,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.instantapps.InstantAppButtonsController;

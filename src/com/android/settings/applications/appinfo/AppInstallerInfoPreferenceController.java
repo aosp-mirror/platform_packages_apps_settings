@@ -23,7 +23,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppStoreUtil;
 import com.android.settingslib.applications.AppUtils;
 
