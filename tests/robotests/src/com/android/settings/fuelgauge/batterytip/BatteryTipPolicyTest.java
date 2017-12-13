@@ -1,0 +1,95 @@
+/*
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.fuelgauge.batterytip;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
+import android.content.Context;
+import android.provider.Settings;
+
+import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+@RunWith(SettingsRobolectricTestRunner.class)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+public class BatteryTipPolicyTest {
+    private static final String BATTERY_TIP_CONSTANTS_VALUE = "battery_tip_enabled=true"
+            + ",summary_enabled=false"
+            + ",battery_saver_tip_enabled=false"
+            + ",high_usage_enabled=true"
+            + ",high_usage_app_count=5"
+            + ",app_restriction_enabled=true"
+            + ",reduced_battery_enabled=true"
+            + ",reduced_battery_percent=30"
+            + ",low_battery_enabled=false"
+            + ",low_battery_hour=10";
+    private Context mContext;
+
+    @Before
+    public void setUp() {
+        mContext = RuntimeEnvironment.application;
+    }
+
+    @Test
+    public void testInit_usesConfigValues() {
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.BATTERY_TIP_CONSTANTS, BATTERY_TIP_CONSTANTS_VALUE);
+
+        final BatteryTipPolicy batteryTipPolicy = new BatteryTipPolicy(mContext);
+
+        assertThat(batteryTipPolicy.batteryTipEnabled).isTrue();
+        assertThat(batteryTipPolicy.summaryEnabled).isFalse();
+        assertThat(batteryTipPolicy.batterySaverTipEnabled).isFalse();
+        assertThat(batteryTipPolicy.highUsageEnabled).isTrue();
+        assertThat(batteryTipPolicy.highUsageAppCount).isEqualTo(5);
+        assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
+        assertThat(batteryTipPolicy.reducedBatteryEnabled).isTrue();
+        assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(30);
+        assertThat(batteryTipPolicy.lowBatteryEnabled).isFalse();
+        assertThat(batteryTipPolicy.lowBatteryHour).isEqualTo(10);
+    }
+
+    @Test
+    public void testInit_defaultValues() {
+        Settings.Global.putString(mContext.getContentResolver(),
+                Settings.Global.BATTERY_TIP_CONSTANTS, "");
+
+        final BatteryTipPolicy batteryTipPolicy = new BatteryTipPolicy(mContext);
+
+        assertThat(batteryTipPolicy.batteryTipEnabled).isTrue();
+        assertThat(batteryTipPolicy.summaryEnabled).isTrue();
+        assertThat(batteryTipPolicy.batterySaverTipEnabled).isTrue();
+        assertThat(batteryTipPolicy.highUsageEnabled).isTrue();
+        assertThat(batteryTipPolicy.highUsageAppCount).isEqualTo(3);
+        assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
+        assertThat(batteryTipPolicy.reducedBatteryEnabled).isTrue();
+        assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(50);
+        assertThat(batteryTipPolicy.lowBatteryEnabled).isTrue();
+        assertThat(batteryTipPolicy.lowBatteryHour).isEqualTo(16);
+    }
+
+}
