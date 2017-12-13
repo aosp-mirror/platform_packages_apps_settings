@@ -37,6 +37,7 @@ import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
+import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
 import org.mockito.Answers;
@@ -63,6 +64,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final BluetoothFeatureProvider bluetoothFeatureProvider;
     public final DataPlanFeatureProvider dataPlanFeatureProvider;
     public final SmsMirroringFeatureProvider smsMirroringFeatureProvider;
+    public final SlicesFeatureProvider slicesFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -101,6 +103,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         bluetoothFeatureProvider = mock(BluetoothFeatureProvider.class);
         dataPlanFeatureProvider = mock(DataPlanFeatureProvider.class);
         smsMirroringFeatureProvider = mock(SmsMirroringFeatureProvider.class);
+        slicesFeatureProvider = mock(SlicesFeatureProvider.class);
     }
 
     @Override
@@ -181,5 +184,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SmsMirroringFeatureProvider getSmsMirroringFeatureProvider() {
         return smsMirroringFeatureProvider;
+    }
+
+    @Override
+    public SlicesFeatureProvider getSlicesFeatureProvider() {
+        return slicesFeatureProvider;
     }
 }

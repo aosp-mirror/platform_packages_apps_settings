@@ -105,19 +105,6 @@ public class SliceDataTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void testBuilder_noUri_throwsIllegalStateException() {
-        new SliceData.Builder()
-                .setKey(KEY)
-                .setTitle(TITLE)
-                .setSummary(SUMMARY)
-                .setScreenTitle(SCREEN_TITLE)
-                .setIcon(ICON)
-                .setFragmentName(FRAGMENT_NAME)
-                .setPreferenceControllerClassName(PREF_CONTROLLER)
-                .build();
-    }
-
-    @Test(expected = IllegalStateException.class)
     public void testBuilder_noPrefController_throwsIllegalStateException() {
         new SliceData.Builder()
                 .setKey(KEY)
@@ -196,6 +183,30 @@ public class SliceDataTest {
         assertThat(data.getIconResource()).isEqualTo(0);
         assertThat(data.getFragmentClassName()).isEqualTo(FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(URI);
+        assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
+    }
+
+    @Test
+    public void testBuilder_noUri_buildsMatchingObject() {
+        SliceData.Builder builder = new SliceData.Builder()
+                .setKey(KEY)
+                .setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setScreenTitle(SCREEN_TITLE)
+                .setIcon(ICON)
+                .setFragmentName(FRAGMENT_NAME)
+                .setUri(null)
+                .setPreferenceControllerClassName(PREF_CONTROLLER);
+
+        SliceData data = builder.build();
+
+        assertThat(data.getKey()).isEqualTo(KEY);
+        assertThat(data.getTitle()).isEqualTo(TITLE);
+        assertThat(data.getSummary()).isEqualTo(SUMMARY);
+        assertThat(data.getScreenTitle()).isEqualTo(SCREEN_TITLE);
+        assertThat(data.getIconResource()).isEqualTo(ICON);
+        assertThat(data.getFragmentClassName()).isEqualTo(FRAGMENT_NAME);
+        assertThat(data.getUri()).isNull();
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
     }
 
