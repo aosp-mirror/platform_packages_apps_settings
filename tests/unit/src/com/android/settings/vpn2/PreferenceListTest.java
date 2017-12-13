@@ -36,9 +36,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.mockito.ArgumentCaptor;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.compat.ArgumentMatcher;
 
 public class PreferenceListTest extends AndroidTestCase {
     private static final String TAG = "PreferenceListTest";
@@ -135,13 +135,10 @@ public class PreferenceListTest extends AndroidTestCase {
                 /* lockdownVpnKey */ null);
         updater.run();
 
-        final ArgumentMatcher<VpnProfile> equalsFake = new ArgumentMatcher<VpnProfile>() {
-            @Override
-            public boolean matchesObject(final Object arg) {
-                if (arg == vpnProfile) return true;
-                if (arg == null) return false;
-                return TextUtils.equals(((VpnProfile) arg).key, vpnProfile.key);
-            }
+        final ArgumentMatcher<VpnProfile> equalsFake = arg -> {
+            if (arg == vpnProfile) return true;
+            if (arg == null) return false;
+            return TextUtils.equals(arg.key, vpnProfile.key);
         };
 
         // The VPN profile should have been used to create a preference and set up at laest once
