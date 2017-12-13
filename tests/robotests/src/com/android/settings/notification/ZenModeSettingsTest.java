@@ -18,6 +18,7 @@ package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 import android.app.NotificationManager;
@@ -53,7 +54,7 @@ public class ZenModeSettingsTest {
     }
 
     @Test
-    public void testGetBehaviorSettingSummary_sameOrderAsTargetPage() {
+    public void testGetBehaviorSettingSummary_customBehavior() {
         NotificationManager.Policy policy = new NotificationManager.Policy(
                 NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS
                         | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS
@@ -63,18 +64,31 @@ public class ZenModeSettingsTest {
         final String result = mBuilder.getBehaviorSettingSummary(policy,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
-        String alarms = mContext.getString(R.string.zen_mode_alarms).toLowerCase();
-        String reminders = mContext.getString(R.string.zen_mode_reminders).toLowerCase();
-        String events = mContext.getString(R.string.zen_mode_events).toLowerCase();
-        String media = mContext.getString(R.string.zen_mode_media_system_other).toLowerCase();
+        String custom = mContext.getString(R.string.zen_mode_behavior_summary_custom);
+        assertEquals(custom, result);
+    }
 
-        assertThat(result).contains(alarms);
-        assertThat(result).contains(reminders);
-        assertThat(result).contains(events);
-        assertThat(result).contains(media);
-        assertTrue(result.indexOf(alarms) < result.indexOf(media)
-                && result.indexOf(media) < result.indexOf(reminders)
-                && result.indexOf(reminders) < result.indexOf(events));
+    @Test
+    public void testGetBehaviorSettingSummary_totalSilence() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0);
+        final String result = mBuilder.getBehaviorSettingSummary(policy,
+                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+
+        String totalSilence = mContext.getString(R.string.zen_mode_behavior_total_silence);
+        assertEquals(totalSilence, result);
+    }
+
+    @Test
+    public void testGetBehaviorSettingSummary_alarmsAndMedia() {
+        NotificationManager.Policy policy = new NotificationManager.Policy(
+                        NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER,
+                0, 0);
+        final String result = mBuilder.getBehaviorSettingSummary(policy,
+                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+
+        String alarmsAndMedia = mContext.getString(R.string.zen_mode_behavior_alarms_only);
+        assertEquals(alarmsAndMedia, result);
     }
 
     @Test
