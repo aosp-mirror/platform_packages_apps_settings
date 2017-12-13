@@ -26,7 +26,8 @@
         android:title="@string/gesture_preference_title"
         android:icon="@drawable/ic_settings_gestures"
         android:order="-250"
-        android:fragment="com.android.settings.gestures.GestureSettings" />
+        android:fragment="com.android.settings.gestures.GestureSettings"
+        settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController"/>
 
     <!-- Backup -->
     <Preference
@@ -34,7 +35,8 @@
         android:title="@string/privacy_settings_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_settings_backup"
-        android:order="-60">
+        android:order="-60"
+        settings:controller="com.android.settings.backup.BackupSettingsActivityPreferenceController">
         <intent android:action="android.settings.BACKUP_AND_RESET_SETTINGS" />
     </Preference>
 
@@ -44,14 +46,16 @@
         android:title="@string/system_update_settings_list_item_title"
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_system_update"
-        android:order="-30">
+        android:order="-30"
+        settings:controller="com.android.settings.deviceinfo.SystemUpdatePreferenceController">
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
     </Preference>
 
     <Preference
         android:key="additional_system_update_settings"
         android:title="@string/additional_system_update_settings_list_item_title"
-        android:order="-31">
+        android:order="-31"
+        settings:controller="com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu" />

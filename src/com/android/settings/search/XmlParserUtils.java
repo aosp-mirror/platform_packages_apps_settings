@@ -71,6 +71,10 @@ public class XmlParserUtils {
         return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
     }
 
+    public static String getController(Context context, AttributeSet attrs) {
+        return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_controller);
+    }
+
     public static int getDataIcon(Context context, AttributeSet attrs) {
         final TypedArray ta = context.obtainStyledAttributes(attrs,
                 com.android.internal.R.styleable.Preference);

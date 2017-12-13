@@ -23,27 +23,26 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
-public class GesturesSettingPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
-
-    private static final String KEY_GESTURES_SETTINGS = "gesture_settings";
-
+public class GesturesSettingPreferenceController extends BasePreferenceController {
     private final AssistGestureFeatureProvider mFeatureProvider;
     private List<AbstractPreferenceController> mGestureControllers;
 
+    private static final String KEY_GESTURES_SETTINGS = "gesture_settings";
+
     public GesturesSettingPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_GESTURES_SETTINGS);
         mFeatureProvider = FeatureFactory.getFactory(context).getAssistGestureFeatureProvider();
     }
 
     @Override
-    public boolean isAvailable() {
+    public int getAvailabilityStatus() {
         if (mGestureControllers == null) {
             mGestureControllers = GestureSettings.buildPreferenceControllers(mContext,
                     null /* lifecycle */, new AmbientDisplayConfiguration(mContext));
@@ -52,12 +51,9 @@ public class GesturesSettingPreferenceController extends AbstractPreferenceContr
         for (AbstractPreferenceController controller : mGestureControllers) {
             isAvailable = isAvailable || controller.isAvailable();
         }
-        return isAvailable;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_GESTURES_SETTINGS;
+        return isAvailable
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override
@@ -83,5 +79,4 @@ public class GesturesSettingPreferenceController extends AbstractPreferenceContr
         }
         preference.setSummary(summary);
     }
-
 }
