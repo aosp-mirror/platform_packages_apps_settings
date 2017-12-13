@@ -25,7 +25,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,13 +33,10 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
@@ -50,7 +46,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.IWebViewUpdateService;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DeviceAdminAdd;
@@ -58,13 +53,10 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
@@ -78,7 +70,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -115,8 +106,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
+
     private static final String KEY_HEADER = "header_view";
-    private static final String KEY_ACTION_BUTTONS = "action_buttons";
     private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
     public static final String ARG_PACKAGE_NAME = "package";
@@ -127,7 +118,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private EnforcedAdmin mAppsControlDisallowedAdmin;
     private boolean mAppsControlDisallowedBySystem;
 
-    private ApplicationFeatureProvider mApplicationFeatureProvider;
     private ApplicationsState mState;
     private ApplicationsState.Session mSession;
     private ApplicationsState.AppEntry mAppEntry;
@@ -143,8 +133,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private boolean mListeningToPackageRemove;
 
 
-    private final HashSet<String> mHomePackages = new HashSet<>();
-
     private boolean mInitialized;
     private boolean mShowUninstalled;
     private LayoutPreference mHeader;
@@ -153,10 +141,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private List<Callback> mCallbacks = new ArrayList<>();
 
-    @VisibleForTesting
-    ActionButtonPreference mActionButtons;
-
     private InstantAppButtonsPreferenceController mInstantAppButtonPreferenceController;
+    private AppActionButtonPreferenceController mAppActionButtonPreferenceController;
 
     /**
      * Callback to invoke when app info has been changed.
@@ -165,129 +151,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         void refreshUi();
     }
 
-    @VisibleForTesting
-    boolean handleDisableable() {
-        boolean disableable = false;
-        // Try to prevent the user from bricking their phone
-        // by not allowing disabling of apps signed with the
-        // system cert and any launcher app in the system.
-        if (mHomePackages.contains(mAppEntry.info.packageName)
-                || Utils.isSystemPackage(getContext().getResources(), mPm, mPackageInfo)) {
-            // Disable button for core system applications.
-            mActionButtons
-                    .setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
-        } else if (mAppEntry.info.enabled && !isDisabledUntilUsed()) {
-            mActionButtons
-                    .setButton1Text(R.string.disable_text)
-                    .setButton1Positive(false);
-            disableable = !mApplicationFeatureProvider.getKeepEnabledPackages()
-                    .contains(mAppEntry.info.packageName);
-        } else {
-            mActionButtons
-                    .setButton1Text(R.string.enable_text)
-                    .setButton1Positive(true);
-            disableable = true;
-        }
-
-        return disableable;
-    }
-
     private boolean isDisabledUntilUsed() {
         return mAppEntry.info.enabledSetting
                 == PackageManager.COMPONENT_ENABLED_STATE_DISABLED_UNTIL_USED;
-    }
-
-    private void initUninstallButtons() {
-        final boolean isBundled = (mAppEntry.info.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
-        boolean enabled;
-        if (isBundled) {
-            enabled = handleDisableable();
-        } else {
-            enabled = initUninstallButtonForUserApp();
-        }
-        // If this is a device admin, it can't be uninstalled or disabled.
-        // We do this here so the text of the button is still set correctly.
-        if (isBundled && mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-            enabled = false;
-        }
-
-        // We don't allow uninstalling DO/PO on *any* users, because if it's a system app,
-        // "uninstall" is actually "downgrade to the system version + disable", and "downgrade"
-        // will clear data on all users.
-        if (Utils.isProfileOrDeviceOwner(mUserManager, mDpm, mPackageInfo.packageName)) {
-            enabled = false;
-        }
-
-        // Don't allow uninstalling the device provisioning package.
-        if (Utils.isDeviceProvisioningPackage(getResources(), mAppEntry.info.packageName)) {
-            enabled = false;
-        }
-
-        // If the uninstall intent is already queued, disable the uninstall button
-        if (mDpm.isUninstallInQueue(mPackageName)) {
-            enabled = false;
-        }
-
-        // Home apps need special handling.  Bundled ones we don't risk downgrading
-        // because that can interfere with home-key resolution.  Furthermore, we
-        // can't allow uninstallation of the only home app, and we don't want to
-        // allow uninstallation of an explicitly preferred one -- the user can go
-        // to Home settings and pick a different one, after which we'll permit
-        // uninstallation of the now-not-default one.
-        if (enabled && mHomePackages.contains(mPackageInfo.packageName)) {
-            if (isBundled) {
-                enabled = false;
-            } else {
-                ArrayList<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
-                ComponentName currentDefaultHome  = mPm.getHomeActivities(homeActivities);
-                if (currentDefaultHome == null) {
-                    // No preferred default, so permit uninstall only when
-                    // there is more than one candidate
-                    enabled = (mHomePackages.size() > 1);
-                } else {
-                    // There is an explicit default home app -- forbid uninstall of
-                    // that one, but permit it for installed-but-inactive ones.
-                    enabled = !mPackageInfo.packageName.equals(currentDefaultHome.getPackageName());
-                }
-            }
-        }
-
-        if (mAppsControlDisallowedBySystem) {
-            enabled = false;
-        }
-
-        try {
-            final IWebViewUpdateService webviewUpdateService =
-                IWebViewUpdateService.Stub.asInterface(ServiceManager.getService("webviewupdate"));
-            if (webviewUpdateService.isFallbackPackage(mAppEntry.info.packageName)) {
-                enabled = false;
-            }
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-
-        mActionButtons.setButton1Enabled(enabled);
-        if (enabled) {
-            // Register listener
-            mActionButtons.setButton1OnClickListener(v -> handleUninstallButtonClick());
-        }
-    }
-
-    @VisibleForTesting
-    boolean initUninstallButtonForUserApp() {
-        boolean enabled = true;
-        if ((mPackageInfo.applicationInfo.flags & ApplicationInfo.FLAG_INSTALLED) == 0
-                && mUserManager.getUsers().size() >= 2) {
-            // When we have multiple users, there is a separate menu
-            // to uninstall for all users.
-            enabled = false;
-        } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
-            enabled = false;
-            mActionButtons.setButton1Visible(false);
-        }
-        mActionButtons.setButton1Text(R.string.uninstall_text).setButton1Positive(false);
-        return enabled;
     }
 
     /** Called when the activity is first created. */
@@ -296,8 +162,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         super.onCreate(icicle);
         mFinishing = false;
         final Activity activity = getActivity();
-        mApplicationFeatureProvider = FeatureFactory.getFactory(activity)
-                .getApplicationFeatureProvider(activity);
         mDpm = new DevicePolicyManagerWrapper(
                 (DevicePolicyManager) activity.getSystemService(Context.DEVICE_POLICY_SERVICE));
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
@@ -359,6 +223,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final AppInstallerInfoPreferenceController appInstallerInfoPreferenceController =
                 new AppInstallerInfoPreferenceController(context, this, packageName);
         controllers.add(appInstallerInfoPreferenceController);
+        mAppActionButtonPreferenceController =
+                new AppActionButtonPreferenceController(context, this, packageName);
+        controllers.add(mAppActionButtonPreferenceController);
 
         for (AbstractPreferenceController controller : controllers) {
             mCallbacks.add((Callback) controller);
@@ -416,10 +283,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         final Activity activity = getActivity();
         mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-        mActionButtons = ((ActionButtonPreference) findPreference(KEY_ACTION_BUTTONS))
-                .setButton2Text(R.string.force_stop)
-                .setButton2Positive(false)
-                .setButton2Enabled(false);
         EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
                 .setRecyclerView(getListView(), getLifecycle())
                 .setPackageName(mPackageName)
@@ -559,21 +422,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return showIt;
     }
 
-    private boolean signaturesMatch(String pkg1, String pkg2) {
-        if (pkg1 != null && pkg2 != null) {
-            try {
-                final int match = mPm.checkSignatures(pkg1, pkg2);
-                if (match >= PackageManager.SIGNATURE_MATCH) {
-                    return true;
-                }
-            } catch (Exception e) {
-                // e.g. named alternate package not found during lookup;
-                // this is an expected case sometimes
-            }
-        }
-        return false;
-    }
-
     @VisibleForTesting
     boolean refreshUi() {
         retrieveAppEntry();
@@ -585,28 +433,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return false; // onCreate must have failed, make sure to exit
         }
 
-        // Get list of "home" apps and trace through any meta-data references
-        final List<ResolveInfo> homeActivities = new ArrayList<ResolveInfo>();
-        mPm.getHomeActivities(homeActivities);
-        mHomePackages.clear();
-        for (int i = 0; i< homeActivities.size(); i++) {
-            final ResolveInfo ri = homeActivities.get(i);
-            final String activityPkg = ri.activityInfo.packageName;
-            mHomePackages.add(activityPkg);
 
-            // Also make sure to include anything proxying for the home app
-            final Bundle metadata = ri.activityInfo.metaData;
-            if (metadata != null) {
-                final String metaPkg = metadata.getString(ActivityManager.META_HOME_ALTERNATE);
-                if (signaturesMatch(metaPkg, activityPkg)) {
-                    mHomePackages.add(metaPkg);
-                }
-            }
-        }
-
-        checkForceStop();
         setAppLabelAndIcon(mPackageInfo);
-        initUninstallButtons();
 
         // Update the preference summaries.
         final Activity context = getActivity();
@@ -714,41 +542,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (newEnt != null) {
             mAppEntry = newEnt;
         }
-        checkForceStop();
-    }
-
-    private void updateForceStopButton(boolean enabled) {
-        mActionButtons
-                .setButton2Enabled(mAppsControlDisallowedBySystem ? false : enabled)
-                .setButton2OnClickListener(mAppsControlDisallowedBySystem
-                        ? null : v -> handleForceStopButtonClick());
-    }
-
-    @VisibleForTesting
-    void checkForceStop() {
-        if (mDpm.packageHasActiveAdmins(mPackageInfo.packageName)) {
-            // User can't force stop device admin.
-            Log.w(TAG, "User can't force stop device admin");
-            updateForceStopButton(false);
-        } else if (AppUtils.isInstant(mPackageInfo.applicationInfo)) {
-            updateForceStopButton(false);
-            mActionButtons.setButton2Visible(false);
-        } else if ((mAppEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
-            // If the app isn't explicitly stopped, then always show the
-            // force stop button.
-            Log.w(TAG, "App is not explicitly stopped");
-            updateForceStopButton(true);
-        } else {
-            final Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
-                    Uri.fromParts("package", mAppEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { mAppEntry.info.packageName });
-            intent.putExtra(Intent.EXTRA_UID, mAppEntry.info.uid);
-            intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mAppEntry.info.uid));
-            Log.d(TAG, "Sending broadcast to query restart status for "
-                    + mAppEntry.info.packageName);
-            getActivity().sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
-                    mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
-        }
+        mAppActionButtonPreferenceController.checkForceStop(mAppEntry, mPackageInfo);
     }
 
     public static void startAppInfoFragment(Class<?> fragment, int title,
@@ -763,7 +557,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 SUB_INFO_FRAGMENT);
     }
 
-    private void handleUninstallButtonClick() {
+    void handleUninstallButtonClick() {
         if (mAppEntry == null) {
             setIntentAndFinish(true, true);
             return;
@@ -811,7 +605,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private void handleForceStopButtonClick() {
+    void handleForceStopButtonClick() {
         if (mAppEntry == null) {
             setIntentAndFinish(true, true);
             return;
@@ -876,16 +670,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return null;
         }
     }
-
-    private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final boolean enabled = getResultCode() != Activity.RESULT_CANCELED;
-            Log.d(TAG, "Got broadcast response: Restart status for "
-                    + mAppEntry.info.packageName + " " + enabled);
-            updateForceStopButton(enabled);
-        }
-    };
 
     private String getPackageName() {
         if (mPackageName != null) {

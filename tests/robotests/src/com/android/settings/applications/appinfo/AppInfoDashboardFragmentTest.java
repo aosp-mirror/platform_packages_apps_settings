@@ -26,24 +26,18 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
-import android.content.res.Resources;
 import android.os.UserManager;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.ActionButtonPreferenceTest;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
-import com.android.settingslib.Utils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -56,12 +50,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.annotation.Implementation;
-import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -74,19 +65,14 @@ public final class AppInfoDashboardFragmentTest {
     private static final String PACKAGE_NAME = "test_package_name";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
     private SettingsActivity mActivity;
     @Mock
     private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private PackageManager mPackageManager;
-    @Mock
-    private AppOpsManager mAppOpsManager;
 
-    private FakeFeatureFactory mFeatureFactory;
     private AppInfoDashboardFragment mFragment;
     private Context mShadowContext;
 
@@ -94,14 +80,11 @@ public final class AppInfoDashboardFragmentTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mShadowContext = RuntimeEnvironment.application;
         mFragment = spy(new AppInfoDashboardFragment());
         doReturn(mActivity).when(mFragment).getActivity();
         doReturn(mShadowContext).when(mFragment).getContext();
         doReturn(mPackageManager).when(mActivity).getPackageManager();
-        doReturn(mAppOpsManager).when(mActivity).getSystemService(Context.APP_OPS_SERVICE);
-        mFragment.mActionButtons = ActionButtonPreferenceTest.createMock();
 
         // Default to not considering any apps to be instant (individual tests can override this).
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
@@ -198,48 +181,6 @@ public final class AppInfoDashboardFragmentTest {
         assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
     }
 
-    // Tests that we don't show the uninstall button for instant apps"
-    @Test
-    public void instantApps_noUninstallButton() {
-        // Make this app appear to be instant.
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> true));
-        final ApplicationInfo info = new ApplicationInfo();
-        info.flags = ApplicationInfo.FLAG_INSTALLED;
-        info.enabled = true;
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = info;
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        packageInfo.applicationInfo = info;
-
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
-
-        mFragment.initUninstallButtonForUserApp();
-        verify(mFragment.mActionButtons).setButton1Visible(false);
-    }
-
-    // Tests that we don't show the force stop button for instant apps (they aren't allowed to run
-    // when they aren't in the foreground).
-    @Test
-    public void instantApps_noForceStop() {
-        // Make this app appear to be instant.
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> true));
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        final AppEntry appEntry = mock(AppEntry.class);
-        final ApplicationInfo info = new ApplicationInfo();
-        appEntry.info = info;
-
-        ReflectionHelpers.setField(mFragment, "mDpm", mDevicePolicyManager);
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-
-        mFragment.checkForceStop();
-        verify(mFragment.mActionButtons).setButton2Visible(false);
-    }
-
     @Test
     public void onActivityResult_uninstalledUpdates_shouldInvalidateOptionsMenu() {
         doReturn(true).when(mFragment).refreshUi();
@@ -247,105 +188,6 @@ public final class AppInfoDashboardFragmentTest {
         mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
-    }
-
-    @Test
-    public void handleDisableable_appIsHomeApp_buttonShouldNotWork() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.packageName = "pkg";
-        info.enabled = true;
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = info;
-        final HashSet<String> homePackages = new HashSet<>();
-        homePackages.add(info.packageName);
-
-        ReflectionHelpers.setField(mFragment, "mHomePackages", homePackages);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-
-        assertThat(mFragment.handleDisableable()).isFalse();
-        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
-    }
-
-    @Test
-    @Config(shadows = ShadowUtils.class)
-    public void handleDisableable_appIsEnabled_buttonShouldWork() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.packageName = "pkg";
-        info.enabled = true;
-        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = info;
-        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
-                new HashSet<>());
-
-        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
-                mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-
-        assertThat(mFragment.handleDisableable()).isTrue();
-        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
-    }
-
-    @Test
-    @Config(shadows = ShadowUtils.class)
-    public void handleDisableable_appIsDisabled_buttonShouldShowEnable() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.packageName = "pkg";
-        info.enabled = false;
-        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = info;
-        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
-                new HashSet<>());
-
-        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
-                mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-
-        assertThat(mFragment.handleDisableable()).isTrue();
-        verify(mFragment.mActionButtons).setButton1Text(R.string.enable_text);
-        verify(mFragment.mActionButtons).setButton1Positive(true);
-    }
-
-    @Test
-    @Config(shadows = ShadowUtils.class)
-    public void handleDisableable_appIsEnabledAndInKeepEnabledWhitelist_buttonShouldNotWork() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.packageName = "pkg";
-        info.enabled = true;
-        info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-
-        final AppEntry appEntry = mock(AppEntry.class);
-        appEntry.info = info;
-
-        final HashSet<String> packages = new HashSet<>();
-        packages.add(info.packageName);
-        when(mFeatureFactory.applicationFeatureProvider.getKeepEnabledPackages()).thenReturn(
-                packages);
-
-        ReflectionHelpers.setField(mFragment, "mApplicationFeatureProvider",
-                mFeatureFactory.applicationFeatureProvider);
-        ReflectionHelpers.setField(mFragment, "mAppEntry", appEntry);
-
-        assertThat(mFragment.handleDisableable()).isFalse();
-        verify(mFragment.mActionButtons).setButton1Text(R.string.disable_text);
-    }
-
-    @Test
-    public void initUninstallButtonForUserApp_shouldSetNegativeButton() {
-        final ApplicationInfo info = new ApplicationInfo();
-        info.flags = ApplicationInfo.FLAG_INSTALLED;
-        info.enabled = true;
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        packageInfo.applicationInfo = info;
-        ReflectionHelpers.setField(mFragment, "mUserManager", mUserManager);
-        ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
-
-        mFragment.initUninstallButtonForUserApp();
-
-        verify(mFragment.mActionButtons).setButton1Positive(false);
     }
 
     @Test
@@ -395,14 +237,5 @@ public final class AppInfoDashboardFragmentTest {
 
         assertThat(mFragment.getNumberOfUserWithPackageInstalled(packageName)).isEqualTo(1);
 
-    }
-
-    @Implements(Utils.class)
-    public static class ShadowUtils {
-        @Implementation
-        public static boolean isSystemPackage(Resources resources, PackageManager pm,
-                PackageInfo pkg) {
-            return false;
-        }
     }
 }
