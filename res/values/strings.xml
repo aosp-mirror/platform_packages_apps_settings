@@ -6728,14 +6728,14 @@
     <!-- Do not disturb: Subtitle for DND behavior indicating no sound will get past DND. [CHAR LIMIT=30] -->
     <string name="zen_mode_behavior_no_sound">No sound</string>
 
-    <!-- Do not disturb: Subtitle for DND behavior indicating no sound will get past DND due to user and/or API-invoked Total Silence mode. [CHAR LIMIT=40] -->
-    <string name="zen_mode_behavior_total_silence">No sound (Total Silence)</string>
+    <!-- Do not disturb: Subtitle for DND behavior indicating no sound will get past DND. [CHAR LIMIT=40] -->
+    <string name="zen_mode_behavior_total_silence">Total Silence</string>
 
     <!-- Do not disturb: Used before specifying which sounds can bypass DND (ie: No sound except alarms and reminders). [CHAR LIMIT=40] -->
     <string name="zen_mode_behavior_no_sound_except">No sound except <xliff:g id="categories" example="alarms, media and system feedback">%1$s</xliff:g></string>
 
-    <!-- Do not disturb: Specifies sounds that can bypass DND in user and/or API-invoked Alarms Only mode.  [CHAR LIMIT=100] -->
-    <string name="zen_mode_behavior_alarms_only">No sound except alarms, media and system feedback (Alarms only)</string>
+    <!-- Do not disturb: Specifies alarms and media can bypass DND.  [CHAR LIMIT=100] -->
+    <string name="zen_mode_behavior_alarms_only">No sound except alarms and media</string>
 
     <!--  Do not disturb: Title for the zen mode automation option in Settings. [CHAR LIMIT=40] -->
     <string name="zen_mode_automation_settings_title">Turn on automatically</string>
@@ -7315,8 +7315,11 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Alarms option -->
     <string name="zen_mode_alarms">Alarms</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Media and system sounds option -->
-    <string name="zen_mode_media_system_other">Media and system feedback</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
+    <string name="zen_mode_media_system_other">Media</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings: Media secondary text explaining sounds include system feedback such as system tapping sounds, haptic feedback, etc. -->
+    <string name="zen_mode_media_system_other_secondary_text">Includes system feedback</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
     <string name="zen_mode_reminders">Reminders</string>
@@ -7335,6 +7338,9 @@
 
     <!-- [CHAR LIMIT=200] Zen mode settings: Repeat callers option summary -->
     <string name="zen_mode_repeat_callers_summary">If the same person calls a second time within a <xliff:g id="minutes">%d</xliff:g> minute period</string>
+
+    <!-- [CHAR LIMIT=50] Zen mode settings dnd beahvior description: when a user has chosen custom sounds to bypass DND -->
+    <string name="zen_mode_behavior_summary_custom">Custom</string>
 
     <!-- [CHAR LIMIT=20] Zen mode settings: When option -->
     <string name="zen_mode_when">Automatically turn on</string>

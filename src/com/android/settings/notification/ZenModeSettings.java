@@ -97,23 +97,21 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 enabledCategories = getEnabledCategories(policy);
             }
 
+            // no sound categories can bypass dnd
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_behavior_no_sound);
+                return mContext.getString(R.string.zen_mode_behavior_total_silence);
             }
 
-            String s = enabledCategories.get(0).toLowerCase();
-            for (int i = 1; i < numCategories; i++) {
-                if (i == numCategories - 1) {
-                    s = mContext.getString(R.string.join_many_items_last,
-                            s, enabledCategories.get(i).toLowerCase());
-                } else {
-                    s = mContext.getString(R.string.join_many_items_middle,
-                            s, enabledCategories.get(i).toLowerCase());
-                }
+            // only alarms and media/system can bypass dnd
+            if (numCategories == 2 &&
+                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_ALARMS) &&
+                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER)) {
+                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
             }
 
-            return mContext.getString(R.string.zen_mode_behavior_no_sound_except, s);
+            // custom
+            return mContext.getString(R.string.zen_mode_behavior_summary_custom);
         }
 
         String getAutomaticRulesSummary() {
