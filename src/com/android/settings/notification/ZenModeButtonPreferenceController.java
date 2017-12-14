@@ -34,11 +34,9 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
     protected static final String KEY = "zen_mode_settings_button_container";
     private Button mZenButtonOn;
     private Button mZenButtonOff;
-    private ZenModeBackend mBackend;
 
     public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override
