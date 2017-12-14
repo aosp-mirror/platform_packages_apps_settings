@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.util.FeatureFlagUtils;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 
 public class InstalledAppDetailsTop extends SettingsActivity {

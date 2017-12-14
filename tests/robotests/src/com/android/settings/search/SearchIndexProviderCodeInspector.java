@@ -43,13 +43,13 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
             "SettingsPreferenceFragment should implement Indexable, but these do not:\n";
     private static final String NOT_CONTAINING_PROVIDER_OBJECT_ERROR =
             "Indexable should have public field "
-                    + DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
+                    + DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " but these are not:\n";
     private static final String NOT_SHARING_PREF_CONTROLLERS_BETWEEN_FRAG_AND_PROVIDER =
             "DashboardFragment should share pref controllers with its SearchIndexProvider, but "
                     + " these are not: \n";
     private static final String NOT_IN_INDEXABLE_PROVIDER_REGISTRY =
-            "Class containing " + DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
+            "Class containing " + DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER
                     + " must be added to " + SearchIndexableResources.class.getName()
                     + " but these are not: \n";
     private static final String NOT_PROVIDING_VALID_RESOURCE_ERROR =
@@ -173,7 +173,7 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
     private boolean hasSearchIndexProvider(Class clazz) {
         try {
             final Field f = clazz.getField(
-                    DatabaseIndexingManager.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
+                    DatabaseIndexingUtils.FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER);
             return f != null;
         } catch (NoClassDefFoundError e) {
             // Cannot find class def, ignore

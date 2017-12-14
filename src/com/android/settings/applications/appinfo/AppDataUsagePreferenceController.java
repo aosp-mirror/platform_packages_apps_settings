@@ -34,7 +34,6 @@ import android.text.format.Formatter;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageUtils;

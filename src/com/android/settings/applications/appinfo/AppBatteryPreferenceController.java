@@ -32,7 +32,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
 import com.android.settings.fuelgauge.BatteryEntry;

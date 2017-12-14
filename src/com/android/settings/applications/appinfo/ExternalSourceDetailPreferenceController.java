@@ -22,7 +22,6 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 
 public class ExternalSourceDetailPreferenceController extends AppInfoPreferenceControllerBase {

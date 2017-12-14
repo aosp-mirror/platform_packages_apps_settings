@@ -14,9 +14,9 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.slices;
 
-import static com.android.settings.SettingsSliceProvider.ACTION_WIFI_CHANGED;
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -42,8 +42,8 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 // Wait a bit for wifi to update (TODO: is there a better way to do this?)
                 Handler h = new Handler();
                 h.postDelayed(() -> {
-                        Uri uri = SettingsSliceProvider.getUri(SettingsSliceProvider.PATH_WIFI);
-                        context.getContentResolver().notifyChange(uri, null);
+                    Uri uri = SettingsSliceProvider.getUri(SettingsSliceProvider.PATH_WIFI);
+                    context.getContentResolver().notifyChange(uri, null);
                 }, 1000);
                 break;
         }

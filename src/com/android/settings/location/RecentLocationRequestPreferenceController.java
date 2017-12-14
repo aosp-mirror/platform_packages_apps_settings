@@ -25,7 +25,7 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.InstalledAppDetails;
-import com.android.settings.applications.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;

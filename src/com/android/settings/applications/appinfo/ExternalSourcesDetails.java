@@ -107,6 +107,9 @@ public class ExternalSourcesDetails extends AppInfoWithHeader
 
     @Override
     protected boolean refreshUi() {
+        if (mPackageInfo == null || mPackageInfo.applicationInfo == null) {
+            return false;
+        }
         if (mUserManager.hasBaseUserRestriction(UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES,
                 UserHandle.of(UserHandle.myUserId()))) {
             mSwitchPref.setChecked(false);

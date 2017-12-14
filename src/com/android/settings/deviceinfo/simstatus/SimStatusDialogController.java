@@ -68,6 +68,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     @VisibleForTesting
     final static int SERVICE_STATE_VALUE_ID = R.id.service_state_value;
     @VisibleForTesting
+    final static int SIGNAL_STRENGTH_LABEL_ID = R.id.signal_strength_label;
+    @VisibleForTesting
     final static int SIGNAL_STRENGTH_VALUE_ID = R.id.signal_strength_value;
     @VisibleForTesting
     final static int CELLULAR_NETWORK_TYPE_VALUE_ID = R.id.network_type_value;
@@ -262,6 +264,21 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     private void updateSignalStrength(SignalStrength signalStrength) {
+        final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
+        final PersistableBundle carrierConfig =
+                mCarrierConfigManager.getConfigForSubId(subscriptionId);
+        // by default we show the signal strength
+        boolean showSignalStrength = true;
+        if (carrierConfig != null) {
+            showSignalStrength = carrierConfig.getBoolean(
+                    CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL);
+        }
+        if (!showSignalStrength) {
+            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_LABEL_ID);
+            mDialog.removeSettingFromScreen(SIGNAL_STRENGTH_VALUE_ID);
+            return;
+        }
+
         final int state = getCurrentServiceState().getState();
 
         if ((ServiceState.STATE_OUT_OF_SERVICE == state) ||
@@ -327,9 +344,14 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private void updateIccidNumber() {
         final int subscriptionId = mSubscriptionInfo.getSubscriptionId();
-        final PersistableBundle carrierConfig = mCarrierConfigManager.getConfigForSubId(subscriptionId);
-        final boolean showIccId = carrierConfig.getBoolean(
-                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
+        final PersistableBundle carrierConfig =
+                mCarrierConfigManager.getConfigForSubId(subscriptionId);
+        // do not show iccid by default
+        boolean showIccId = false;
+        if (carrierConfig != null) {
+            showIccId = carrierConfig.getBoolean(
+                    CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL);
+        }
         if (!showIccId) {
             mDialog.removeSettingFromScreen(ICCID_INFO_LABEL_ID);
             mDialog.removeSettingFromScreen(ICCID_INFO_VALUE_ID);

@@ -28,7 +28,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.AppInfoDashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

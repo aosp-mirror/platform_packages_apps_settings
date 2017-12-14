@@ -50,7 +50,7 @@ public class HelpTrampolineTest {
         final Intent intent = new Intent().setClassName(
                 RuntimeEnvironment.application.getPackageName(), HelpTrampoline.class.getName());
 
-        Robolectric.buildActivity(HelpTrampoline.class).withIntent(intent).create().get();
+        Robolectric.buildActivity(HelpTrampoline.class, intent).create().get();
 
         assertThat(ShadowHelpUtils.isGetHelpIntentCalled()).isFalse();
     }
@@ -60,8 +60,8 @@ public class HelpTrampolineTest {
         final Intent intent = new Intent().setClassName(
                 RuntimeEnvironment.application.getPackageName(), HelpTrampoline.class.getName())
                 .putExtra(Intent.EXTRA_TEXT, "help_url_upgrading");
-        final ShadowActivity shadow = shadowOf(Robolectric.buildActivity(HelpTrampoline.class)
-                .withIntent(intent).create().get());
+        final ShadowActivity shadow =
+            shadowOf(Robolectric.buildActivity(HelpTrampoline.class, intent).create().get());
         final Intent launchedIntent = shadow.getNextStartedActivity();
 
         assertThat(ShadowHelpUtils.isGetHelpIntentCalled()).isTrue();

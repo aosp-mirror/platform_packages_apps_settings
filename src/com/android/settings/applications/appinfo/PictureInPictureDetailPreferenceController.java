@@ -26,7 +26,6 @@ import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.applications.AppInfoDashboardFragment;
 
 public class PictureInPictureDetailPreferenceController extends AppInfoPreferenceControllerBase {
 
