@@ -95,6 +95,11 @@ public class LocationMode extends DashboardFragment {
                 }
 
                 @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources().getBoolean(R.bool.config_location_mode_available);
+                }
+
+                @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
