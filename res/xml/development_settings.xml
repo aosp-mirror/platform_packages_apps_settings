@@ -133,6 +133,11 @@
             android:title="@string/mock_location_app" />
 
         <SwitchPreference
+            android:key="enable_gnss_raw_meas_full_tracking"
+            android:title="@string/enable_gnss_raw_meas_full_tracking"
+            android:summary="@string/enable_gnss_raw_meas_full_tracking_summary"/>
+
+        <SwitchPreference
                 android:key="debug_view_attributes"
                 android:title="@string/debug_view_attributes" />
 
