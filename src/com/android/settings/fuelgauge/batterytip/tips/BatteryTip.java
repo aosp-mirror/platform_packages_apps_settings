@@ -31,7 +31,7 @@ import java.lang.annotation.RetentionPolicy;
  * Each {@link BatteryTip} contains basic data(e.g. title, summary, icon) as well as the
  * pre-defined action(e.g. turn on battery saver)
  */
-public abstract class BatteryTip {
+public abstract class BatteryTip implements Comparable<BatteryTip> {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StateType.NEW,
             StateType.HANDLED,
@@ -113,5 +113,14 @@ public abstract class BatteryTip {
     @StateType
     public int getState() {
         return mState;
+    }
+
+    public boolean isVisible() {
+        return mState != StateType.INVISIBLE;
+    }
+
+    @Override
+    public int compareTo(BatteryTip o) {
+        return mType - o.mType;
     }
 }

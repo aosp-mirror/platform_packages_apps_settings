@@ -22,29 +22,29 @@ import android.content.Context;
 import com.android.settings.R;
 
 /**
- * Tip to show general summary about battery life
+ * Tip to show current battery life is short
  */
-public class SummaryTip extends BatteryTip {
+public class LowBatteryTip extends BatteryTip {
 
-    public SummaryTip(@StateType int state) {
+    public LowBatteryTip(@StateType int state) {
         mShowDialog = false;
         mState = state;
-        mType = TipType.SUMMARY;
+        mType = TipType.LOW_BATTERY;
     }
 
     @Override
     public CharSequence getTitle(Context context) {
-        return context.getString(R.string.battery_tip_summary_title);
+        return context.getString(R.string.battery_tip_low_battery_title);
     }
 
     @Override
     public CharSequence getSummary(Context context) {
-        return context.getString(R.string.battery_tip_summary_summary);
+        return context.getString(R.string.battery_tip_low_battery_summary);
     }
 
     @Override
     public int getIconId() {
-        return R.drawable.ic_check_circle_green_24dp;
+        return R.drawable.ic_perm_device_information_red_24dp;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SummaryTip extends BatteryTip {
 
     @Override
     public Dialog buildDialog() {
-        //TODO(b/70570352): create the dialog for summary tip and add test
+        //TODO(b/70570352): create the dialog for low battery tip and add test
         return null;
     }
 }
