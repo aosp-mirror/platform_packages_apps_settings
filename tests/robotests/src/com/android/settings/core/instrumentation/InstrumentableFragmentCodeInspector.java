@@ -16,6 +16,8 @@
 
 package com.android.settings.core.instrumentation;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
 import android.app.Fragment;
 import android.util.ArraySet;
 
@@ -24,8 +26,6 @@ import com.android.settings.core.codeinspection.CodeInspector;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import static com.google.common.truth.Truth.assertWithMessage;
 
 /**
  * {@link CodeInspector} that verifies all fragments implements Instrumentable.
@@ -67,7 +67,5 @@ public class InstrumentableFragmentCodeInspector extends CodeInspector {
         assertWithMessage(sb.toString())
                 .that(broken.isEmpty())
                 .isTrue();
-        assertNoObsoleteInGrandfatherList("grandfather_not_implementing_instrumentable",
-                grandfather_notImplementingInstrumentable);
     }
 }
