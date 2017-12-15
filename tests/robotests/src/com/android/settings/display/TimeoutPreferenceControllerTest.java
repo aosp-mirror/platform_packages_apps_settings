@@ -16,38 +16,54 @@
 
 package com.android.settings.display;
 
+import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import com.android.settings.TestConfig;
 import com.android.settings.TimeoutListPreference;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-import static com.google.common.truth.Truth.assertThat;
+import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
+        shadows = {ShadowDevicePolicyManagerWrapper.class})
 public class TimeoutPreferenceControllerTest {
     private static final int TIMEOUT = 30;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private TimeoutListPreference mPreference;
-    private TimeoutPreferenceController mController;
+    @Mock
+    private UserManager mUserManager;
 
+    private TimeoutPreferenceController mController;
     private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new TimeoutPreferenceController(mContext, KEY_SCREEN_TIMEOUT);
     }
 
@@ -58,5 +74,24 @@ public class TimeoutPreferenceControllerTest {
         final int mode = Settings.System.getInt(mContext.getContentResolver(),
                 SCREEN_OFF_TIMEOUT, 0);
         assertThat(mode).isEqualTo(TIMEOUT);
+    }
+
+    @Test
+    public void testUpdateStateNoAdminTimeouts() {
+        when(mUserManager.getProfiles(anyInt())).thenReturn(Collections.emptyList());
+        mController.updateState(mPreference);
+        verify(mPreference).removeUnusableTimeouts(0, null);
+    }
+
+    @Test
+    public void testUpdateStateWithAdminTimeouts() {
+        final int profileUserId = UserHandle.myUserId();
+        final long timeout = 10000;
+        when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
+        ShadowDevicePolicyManagerWrapper
+                .setMaximumTimeToLockForUserAndProfiles(profileUserId, timeout);
+
+        mController.updateState(mPreference);
+        verify(mPreference).removeUnusableTimeouts(timeout, null);
     }
 }
