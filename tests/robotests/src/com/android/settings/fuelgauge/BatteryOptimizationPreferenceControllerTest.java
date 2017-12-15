@@ -120,10 +120,11 @@ public class BatteryOptimizationPreferenceControllerTest {
     /**
      * Create this test class so we could mock it
      */
-    public static class TestPowerWhitelistBackend extends PowerWhitelistBackend {
+    public static class TestPowerWhitelistBackend extends
+            com.android.settingslib.fuelgauge.PowerWhitelistBackend {
 
         @Override
-        void refreshList() {
+        public void refreshList() {
             // Do nothing so we could mock it without error
         }
     }

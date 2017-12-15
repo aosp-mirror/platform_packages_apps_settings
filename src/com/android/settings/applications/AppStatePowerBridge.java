@@ -15,11 +15,11 @@
  */
 package com.android.settings.applications;
 
-import com.android.settings.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import com.android.settingslib.applications.ApplicationsState.CompoundFilter;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import java.util.ArrayList;
 
