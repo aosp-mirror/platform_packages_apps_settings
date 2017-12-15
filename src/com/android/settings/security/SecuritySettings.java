@@ -73,6 +73,7 @@ import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComp
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
@@ -144,7 +145,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private ManagedLockPasswordProvider mManagedPasswordProvider;
 
     private SwitchPreference mVisiblePatternProfile;
-    private SwitchPreference mUnifyProfile;
+    private RestrictedSwitchPreference mUnifyProfile;
 
     private SwitchPreference mShowPassword;
 
@@ -319,7 +320,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
 
         mVisiblePatternProfile =
                 (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN_PROFILE);
-        mUnifyProfile = (SwitchPreference) root.findPreference(KEY_UNIFICATION);
+        mUnifyProfile = (RestrictedSwitchPreference) root.findPreference(KEY_UNIFICATION);
 
         // Append the rest of the settings
         addPreferencesFromResource(R.xml.security_settings_misc);
@@ -560,10 +561,17 @@ public class SecuritySettings extends SettingsPreferenceFragment
         mLocationcontroller.updateSummary();
     }
 
-    private void updateUnificationPreference() {
+    @VisibleForTesting
+    void updateUnificationPreference() {
         if (mUnifyProfile != null) {
-            mUnifyProfile.setChecked(!mLockPatternUtils.isSeparateProfileChallengeEnabled(
-                    mProfileChallengeUserId));
+            final boolean separate =
+                    mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId);
+            mUnifyProfile.setChecked(!separate);
+            if (separate) {
+                mUnifyProfile.setDisabledByAdmin(RestrictedLockUtils.checkIfRestrictionEnforced(
+                        getContext(), UserManager.DISALLOW_UNIFIED_PASSWORD,
+                        mProfileChallengeUserId));
+            }
         }
     }
 
@@ -930,14 +938,11 @@ public class SecuritySettings extends SettingsPreferenceFragment
                     .setPositiveButton(
                             compliant ? R.string.lock_settings_profile_unification_dialog_confirm
                             : R.string.lock_settings_profile_unification_dialog_uncompliant_confirm,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                    if (compliant) {
-                                        parentFragment.launchConfirmDeviceLockForUnification();
-                                    }    else {
-                                        parentFragment.unifyUncompliantLocks();
-                                    }
+                            (dialog, whichButton) -> {
+                                if (compliant) {
+                                    parentFragment.launchConfirmDeviceLockForUnification();
+                                }    else {
+                                    parentFragment.unifyUncompliantLocks();
                                 }
                             }
                     )

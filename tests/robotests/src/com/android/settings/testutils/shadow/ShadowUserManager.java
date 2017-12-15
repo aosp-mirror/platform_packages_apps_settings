@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.UserManager.EnforcingUser;
 import android.util.SparseArray;
 
 import org.robolectric.RuntimeEnvironment;
@@ -31,14 +32,18 @@ import org.robolectric.shadow.api.Shadow;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Implements(UserManager.class)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
     private boolean mAdminUser;
-    private List<String> mRestrictions = new ArrayList<>();
+    private final List<String> mRestrictions = new ArrayList<>();
+    private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
+
 
     public void setIsAdminUser(boolean isAdminUser) {
         mAdminUser = isAdminUser;
@@ -90,5 +95,16 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     public static ShadowUserManager getShadow() {
         return (ShadowUserManager) Shadow.extract(
                 RuntimeEnvironment.application.getSystemService(UserManager.class));
+    }
+
+    @Implementation
+    public List<EnforcingUser> getUserRestrictionSources(
+            String restrictionKey, UserHandle userHandle) {
+        return mRestrictionSources.get(restrictionKey + userHandle.getIdentifier());
+    }
+
+    public void setUserRestrictionSources(
+            String restrictionKey, UserHandle userHandle, List<EnforcingUser> enforcers) {
+        mRestrictionSources.put(restrictionKey + userHandle.getIdentifier(), enforcers);
     }
 }
