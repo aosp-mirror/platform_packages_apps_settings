@@ -770,7 +770,11 @@ public class TextToSpeechSettings extends SettingsPreferenceFragment
         if (KEY_TTS_ENGINE_PREFERENCE.equals(p.getKey())) {
             EngineInfo info = mEnginesHelper.getEngineInfo(mCurrentEngine);
             final Intent settingsIntent = mEnginesHelper.getSettingsIntent(info.name);
-            startActivity(settingsIntent);
+            if (settingsIntent != null) {
+                startActivity(settingsIntent);
+            } else {
+                Log.e(TAG, "settingsIntent is null");
+            }
         }
     }
 
