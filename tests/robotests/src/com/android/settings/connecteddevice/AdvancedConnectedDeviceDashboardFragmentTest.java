@@ -148,6 +148,11 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     }
 
     @Test
+    public void testGetCategoryKey_returnCategoryDevice() {
+        assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_DEVICE);
+    }
+
+    @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
         when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
