@@ -1,0 +1,86 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License
+ */
+
+package com.android.settings.slices;
+
+import static com.android.settings.TestConfig.SDK_VERSION;
+
+import static com.google.common.truth.Truth.assertThat;
+
+import android.content.Context;
+import android.net.Uri;
+
+import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import androidx.app.slice.Slice;
+
+@RunWith(SettingsRobolectricTestRunner.class)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = SDK_VERSION)
+public class SlicesDatabaseUtilsTest {
+
+    private final String KEY = "KEY";
+    private final String TITLE = "title";
+    private final String SUMMARY = "summary";
+    private final String SCREEN_TITLE = "screen title";
+    private final String FRAGMENT_NAME = "fragment name";
+    private final int ICON = 1234; // I declare a thumb war
+    private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private final String PREF_CONTROLLER = FakeToggleController.class.getName();
+    ;
+
+    private Context mContext;
+
+    @Before
+    public void setUp() {
+        mContext = RuntimeEnvironment.application;
+    }
+
+    @Test
+    public void testBuildSlice_returnsMatchingSlice() {
+        Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData());
+
+        assertThat(slice).isNotNull(); // TODO improve test for Slice content
+    }
+
+    @Test
+    public void testGetPreferenceController_buildsMatchingController() {
+        BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(mContext,
+                getDummyData());
+
+        assertThat(controller).isInstanceOf(FakeToggleController.class);
+    }
+
+    private SliceData getDummyData() {
+        return new SliceData.Builder()
+                .setKey(KEY)
+                .setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setScreenTitle(SCREEN_TITLE)
+                .setIcon(ICON)
+                .setFragmentName(FRAGMENT_NAME)
+                .setUri(URI)
+                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .build();
+    }
+}

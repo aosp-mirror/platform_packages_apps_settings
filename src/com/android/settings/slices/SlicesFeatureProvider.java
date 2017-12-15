@@ -13,5 +13,15 @@ public interface SlicesFeatureProvider {
 
     SliceDataConverter getSliceDataConverter(Context context);
 
+    /**
+     * Asynchronous call to index the data used to build Slices.
+     * If the data is already indexed, the data will not change.
+     */
+    void indexSliceDataAsync(Context context);
+
+    /**
+     * Indexes the data used to build Slices.
+     * If the data is already indexed, the data will not change.
+     */
     void indexSliceData(Context context);
 }
