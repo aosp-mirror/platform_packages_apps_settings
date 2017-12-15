@@ -88,7 +88,7 @@ public class SettingsSliceProvider extends SliceProvider {
         boolean finalWifiEnabled = wifiEnabled;
         return new ListBuilder(sliceUri)
                 .setColor(R.color.material_blue_500)
-                .add(b -> b
+                .addRow(b -> b
                         .setTitle(getContext().getString(R.string.wifi_settings))
                         .setTitleItem(Icon.createWithResource(getContext(), R.drawable.wifi_signal))
                         .setSubtitle(state)
