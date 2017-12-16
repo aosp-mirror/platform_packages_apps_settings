@@ -97,6 +97,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_lock_screen_rotation_preference";
     private static final String TOGGLE_LARGE_POINTER_ICON =
             "toggle_large_pointer_icon";
+    private static final String TOGGLE_DISABLE_ANIMATIONS = "toggle_disable_animations";
     private static final String TOGGLE_MASTER_MONO =
             "toggle_master_mono";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
@@ -134,6 +135,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // to generate the AccessibilityServiceInfo we need for proper
     // presentation.
     private static final long DELAY_UPDATE_SERVICES_MILLIS = 1000;
+
+    // Settings that should be changed when toggling animations
+    private static final String[] TOGGLE_ANIMATION_TARGETS = {
+            Settings.Global.WINDOW_ANIMATION_SCALE, Settings.Global.TRANSITION_ANIMATION_SCALE,
+            Settings.Global.ANIMATOR_DURATION_SCALE
+    };
+    private static final String ANIMATION_ON_VALUE = "1";
+    private static final String ANIMATION_OFF_VALUE = "0";
 
     private final Map<String, String> mLongPressTimeoutValueToTitleMap = new HashMap<>();
 
@@ -194,6 +203,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     private SwitchPreference mTogglePowerButtonEndsCallPreference;
     private SwitchPreference mToggleLockScreenRotationPreference;
     private SwitchPreference mToggleLargePointerIconPreference;
+    private SwitchPreference mToggleDisableAnimationsPreference;
     private SwitchPreference mToggleMasterMonoPreference;
     private ListPreference mSelectLongPressTimeoutPreference;
     private Preference mNoServicesMessagePreference;
@@ -317,6 +327,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         } else if (mToggleLargePointerIconPreference == preference) {
             handleToggleLargePointerIconPreferenceClick();
             return true;
+        } else if (mToggleDisableAnimationsPreference == preference) {
+            handleToggleDisableAnimations();
+            return true;
         } else if (mToggleMasterMonoPreference == preference) {
             handleToggleMasterMonoPreferenceClick();
             return true;
@@ -347,6 +360,14 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         Settings.Secure.putInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON,
                 mToggleLargePointerIconPreference.isChecked() ? 1 : 0);
+    }
+
+    private void handleToggleDisableAnimations() {
+        String newAnimationValue = mToggleDisableAnimationsPreference.isChecked()
+                ? ANIMATION_OFF_VALUE : ANIMATION_ON_VALUE;
+        for (String animationPreference : TOGGLE_ANIMATION_TARGETS) {
+            Settings.Global.putString(getContentResolver(), animationPreference, newAnimationValue);
+        }
     }
 
     private void handleToggleMasterMonoPreferenceClick() {
@@ -388,6 +409,9 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         // Large pointer icon.
         mToggleLargePointerIconPreference =
                 (SwitchPreference) findPreference(TOGGLE_LARGE_POINTER_ICON);
+
+        mToggleDisableAnimationsPreference =
+                (SwitchPreference) findPreference(TOGGLE_DISABLE_ANIMATIONS);
 
         // Master Mono
         mToggleMasterMonoPreference =
@@ -620,6 +644,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         mToggleLargePointerIconPreference.setChecked(Settings.Secure.getInt(getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_LARGE_POINTER_ICON, 0) != 0);
 
+        updateDisableAnimationsToggle();
+
         // Master mono
         updateMasterMono();
 
@@ -700,6 +726,19 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             mToggleLockScreenRotationPreference.setChecked(
                     !RotationPolicy.isRotationLocked(context));
         }
+    }
+
+    private void updateDisableAnimationsToggle() {
+        boolean allAnimationsDisabled = true;
+        for (String animationSetting : TOGGLE_ANIMATION_TARGETS) {
+            if (!TextUtils.equals(
+                    Settings.Global.getString(getContentResolver(), animationSetting),
+                    ANIMATION_OFF_VALUE)) {
+                allAnimationsDisabled = false;
+                break;
+            }
+        }
+        mToggleDisableAnimationsPreference.setChecked(allAnimationsDisabled);
     }
 
     private void updateMasterMono() {
