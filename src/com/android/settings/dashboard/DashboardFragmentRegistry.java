@@ -23,6 +23,7 @@ import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.UserAndAccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
+import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
@@ -61,6 +62,8 @@ public class DashboardFragmentRegistry {
                 NetworkDashboardFragment.class.getName(), CategoryKey.CATEGORY_NETWORK);
         //TODO(b/69471219): update ConnectedDeviceDashboardFragment once new feature is done.
         PARENT_TO_CATEGORY_KEY_MAP.put(ConnectedDeviceDashboardFragmentOld.class.getName(),
+                CategoryKey.CATEGORY_DEVICE);
+        PARENT_TO_CATEGORY_KEY_MAP.put(AdvancedConnectedDeviceDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_DEVICE);
         PARENT_TO_CATEGORY_KEY_MAP.put(AppAndNotificationDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_APPS);

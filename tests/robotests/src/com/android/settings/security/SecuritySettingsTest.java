@@ -17,9 +17,11 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -29,7 +31,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.os.UserHandle;
 import android.os.UserManager;
+import android.os.UserManager.EnforcingUser;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -43,6 +47,9 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,12 +62,15 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                ShadowLockPatternUtils.class
+                ShadowLockPatternUtils.class,
+                ShadowUserManager.class,
         })
 public class SecuritySettingsTest {
 
@@ -186,5 +196,50 @@ public class SecuritySettingsTest {
                 R.xml.encryption_and_credential));
 
         assertThat(keys).containsAllIn(niks);
+    }
+
+    @Test
+    public void testUnifyLockRestriction() {
+        // Set up instance under test.
+        final Context context = spy(RuntimeEnvironment.application);
+        final SecuritySettings securitySettings = spy(new SecuritySettings());
+        when(securitySettings.getContext()).thenReturn(context);
+
+        final int userId = 123;
+        ReflectionHelpers.setField(securitySettings, "mProfileChallengeUserId", userId);
+
+        final LockPatternUtils utils = mock(LockPatternUtils.class);
+        when(utils.isSeparateProfileChallengeEnabled(userId)).thenReturn(true);
+        ReflectionHelpers.setField(securitySettings, "mLockPatternUtils", utils);
+
+        final RestrictedSwitchPreference unifyProfile = mock(RestrictedSwitchPreference.class);
+        ReflectionHelpers.setField(securitySettings, "mUnifyProfile", unifyProfile);
+
+        // Pretend that no admins enforce the restriction.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_UNIFIED_PASSWORD,
+                UserHandle.of(userId),
+                Collections.emptyList());
+
+        securitySettings.updateUnificationPreference();
+
+        verify(unifyProfile).setDisabledByAdmin(null);
+
+        reset(unifyProfile);
+
+        // Pretend that the restriction is enforced by several admins. Having just one would
+        // require more mocking of implementation details.
+        final EnforcingUser enforcer1 = new EnforcingUser(
+                userId, UserManager.RESTRICTION_SOURCE_PROFILE_OWNER);
+        final EnforcingUser enforcer2 = new EnforcingUser(
+                UserHandle.USER_SYSTEM, UserManager.RESTRICTION_SOURCE_DEVICE_OWNER);
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_UNIFIED_PASSWORD,
+                UserHandle.of(userId),
+                Arrays.asList(enforcer1, enforcer2));
+
+        securitySettings.updateUnificationPreference();
+
+        verify(unifyProfile).setDisabledByAdmin(EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN);
     }
 }

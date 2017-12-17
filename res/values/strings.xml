@@ -4353,6 +4353,8 @@
     <string name="accessibility_power_button_ends_call_prerefence_title">Power button ends call</string>
     <!-- Title for the accessibility preference for enabling/disabling large icons for mouse/trackpad pointers. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_large_pointer_icon_title">Large mouse pointer</string>
+    <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
+    <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Title for the accessibility preference for master mono. [CHAR LIMIT=35] -->
     <string name="accessibility_toggle_master_mono_title">Mono audio</string>
     <!-- Summary for the accessibility preference for master mono. [CHAR LIMIT=50] -->
@@ -7318,8 +7320,8 @@
     <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
     <string name="zen_mode_media_system_other">Media</string>
 
-    <!-- [CHAR LIMIT=50] Zen mode settings: Media secondary text explaining sounds include system feedback such as system tapping sounds, haptic feedback, etc. -->
-    <string name="zen_mode_media_system_other_secondary_text">Includes system feedback</string>
+    <!-- [CHAR LIMIT=120] Zen mode settings: Media secondary text explaining sounds include system feedback such as system tapping sounds, haptic feedback, etc. -->
+    <string name="zen_mode_media_system_other_secondary_text">Includes system feedback like touch and charging sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
     <string name="zen_mode_reminders">Reminders</string>
@@ -9131,5 +9133,10 @@
 
     <!-- Note displayed when certain features are not available on low ram devices. [CHAR LIMIT=NONE] -->
     <string name="disabled_low_ram_device">This feature is not available on this device</string>
+
+    <!-- UI debug setting: enable gnss raw meas full tracking [CHAR LIMIT=25] -->
+    <string name="enable_gnss_raw_meas_full_tracking">Force Full GnssMeasurement</string>
+    <!-- UI debug setting: enable gpu debug layers summary [CHAR LIMIT=50] -->
+    <string name="enable_gnss_raw_meas_full_tracking_summary">Disable GNSS duty-cycling, track all constellations and frequencies.</string>
 
 </resources>

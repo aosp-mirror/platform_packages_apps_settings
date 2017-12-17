@@ -25,11 +25,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class ExternalSourcesSettingsTest extends AppOpsSettingsTest {
+public class DrawOverlaySettingsTest extends AppOpsSettingsTest {
 
-    public ExternalSourcesSettingsTest() {
-        super(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,
-                AppOpsManager.OP_REQUEST_INSTALL_PACKAGES);
+    public DrawOverlaySettingsTest() {
+        super(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, AppOpsManager.OP_SYSTEM_ALERT_WINDOW);
     }
 
     // Test cases are in the superclass.

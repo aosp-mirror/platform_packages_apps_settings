@@ -40,7 +40,7 @@ public class UserCredentialsTest extends InstrumentationTestCase {
         Credential c = new Credential(alias, Process.SYSTEM_UID);
 
         c.storedTypes.add(Credential.Type.CA_CERTIFICATE);
-        c.storedTypes.add(Credential.Type.USER_SECRET_KEY);
+        c.storedTypes.add(Credential.Type.USER_KEY);
 
         Parcel p = Parcel.obtain();
         c.writeToParcel(p, /* flags */ 0);

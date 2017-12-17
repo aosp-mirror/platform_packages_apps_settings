@@ -68,12 +68,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     }
 
     @Override
-    public String getCategoryKey() {
-        //TODO(b/69926683): remove this method and change DashboardFragmentRegistry directly for P
-        return CategoryKey.CATEGORY_DEVICE;
-    }
-
-    @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
