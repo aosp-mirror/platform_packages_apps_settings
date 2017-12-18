@@ -37,6 +37,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 /**
  * Controller to control whether an app can run in the background

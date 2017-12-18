@@ -25,6 +25,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 /**
  * Controller that jumps to high power optimization fragment
