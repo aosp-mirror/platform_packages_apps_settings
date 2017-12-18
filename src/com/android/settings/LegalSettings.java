@@ -24,13 +24,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceGroup;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
     private static final String KEY_LICENSE = "license";
     private static final String KEY_COPYRIGHT = "copyright";
     private static final String KEY_WEBVIEW_LICENSE = "webview_license";
-    private static final String KEY_WALLPAPER_ATTRIBUTIONS = "wallpaper_attributions";
+    @VisibleForTesting static final String KEY_WALLPAPER_ATTRIBUTIONS = "wallpaper_attributions";
 
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
@@ -57,11 +58,21 @@ public class LegalSettings extends SettingsPreferenceFragment implements Indexab
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
         Utils.updatePreferenceToSpecificActivityOrRemove(act, parentPreference, KEY_WEBVIEW_LICENSE,
                 Utils.UPDATE_PREFERENCE_FLAG_SET_TITLE_TO_MATCHING_ACTIVITY);
+
+        checkWallpaperAttributionAvailability(act);
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.ABOUT_LEGAL_SETTINGS;
+    }
+
+    @VisibleForTesting
+    void checkWallpaperAttributionAvailability(Context context) {
+        if (!context.getResources().getBoolean(
+                R.bool.config_show_wallpaper_attribution)) {
+            removePreference(KEY_WALLPAPER_ATTRIBUTIONS);
+        }
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
