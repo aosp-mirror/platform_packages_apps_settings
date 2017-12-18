@@ -90,8 +90,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // Preferences
     private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
             "toggle_high_text_contrast_preference";
-    private static final String TOGGLE_INVERSION_PREFERENCE =
-            "toggle_inversion_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
@@ -113,9 +111,11 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "tts_settings_preference";
     private static final String AUTOCLICK_PREFERENCE_SCREEN =
             "autoclick_preference_screen";
-    private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
-            "daltonizer_preference_screen";
 
+    @VisibleForTesting static final String TOGGLE_INVERSION_PREFERENCE =
+            "toggle_inversion_preference";
+    @VisibleForTesting static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
+            "daltonizer_preference_screen";
     @VisibleForTesting static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
             "accessibility_shortcut_preference";
 
@@ -619,6 +619,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }
+        checkColorCorrectionVisibility(mDisplayDaltonizerPreferenceScreen);
+        checkColorInversionVisibility(mToggleInversionPreference);
 
         // Text contrast.
         mToggleHighTextContrastPreference.setChecked(
@@ -766,6 +768,20 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     ? AccessibilityShortcutPreferenceFragment.getServiceName(getContext())
                     : getString(R.string.accessibility_feature_state_off);
             mAccessibilityShortcutPreferenceScreen.setSummary(summary);
+        }
+    }
+
+    @VisibleForTesting void checkColorCorrectionVisibility(Preference preference) {
+        if (!getContext().getResources().getBoolean(
+                R.bool.config_show_color_correction_preference)) {
+            removePreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
+        }
+    }
+
+    @VisibleForTesting void checkColorInversionVisibility(Preference preference) {
+        if (!getContext().getResources().getBoolean(
+                R.bool.config_show_color_inversion_preference)) {
+            removePreference(TOGGLE_INVERSION_PREFERENCE);
         }
     }
 
