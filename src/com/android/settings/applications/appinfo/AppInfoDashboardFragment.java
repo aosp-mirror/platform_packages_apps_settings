@@ -107,7 +107,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
-    private static final String KEY_HEADER = "header_view";
     private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
     public static final String ARG_PACKAGE_NAME = "package";
@@ -135,7 +134,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private boolean mInitialized;
     private boolean mShowUninstalled;
-    private LayoutPreference mHeader;
     private boolean mUpdatedSysApp = false;
     private boolean mDisableAfterUninstall;
 
@@ -213,6 +211,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
         // The following are controllers for preferences that needs to refresh the preference state
         // when app state changes.
+        controllers.add(
+                new AppHeaderViewPreferenceController(context, this, packageName, lifecycle));
         controllers.add(new AppStoragePreferenceController(context, this, lifecycle));
         controllers.add(new AppDataUsagePreferenceController(context, this, lifecycle));
         controllers.add(new AppNotificationPreferenceController(context, this));
@@ -273,25 +273,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
             retrieveAppEntry();
         }
         return mPackageInfo;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (mFinishing) {
-            return;
-        }
-        final Activity activity = getActivity();
-        mHeader = (LayoutPreference) findPreference(KEY_HEADER);
-        EntityHeaderController.newInstance(activity, this, mHeader.findViewById(R.id.entity_header))
-                .setRecyclerView(getListView(), getLifecycle())
-                .setPackageName(mPackageName)
-                .setHasAppInfoLink(false)
-                .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
-                        EntityHeaderController.ActionType.ACTION_NONE)
-                .styleActionBar(activity)
-                .bindHeaderButtons();
-
     }
 
     @Override
@@ -382,22 +363,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    // Utility method to set application label and icon.
-    private void setAppLabelAndIcon(PackageInfo pkgInfo) {
-        final View appSnippet = mHeader.findViewById(R.id.entity_header);
-        mState.ensureIcon(mAppEntry);
-        final Activity activity = getActivity();
-        final boolean isInstantApp = AppUtils.isInstant(mPackageInfo.applicationInfo);
-        final CharSequence summary =
-                isInstantApp ? null : getString(Utils.getInstallationStatus(mAppEntry.info));
-        EntityHeaderController.newInstance(activity, this, appSnippet)
-                .setLabel(mAppEntry)
-                .setIcon(mAppEntry)
-                .setSummary(summary)
-                .setIsInstantApp(isInstantApp)
-                .done(activity, false /* rebindActions */);
-    }
-
     @VisibleForTesting
     boolean shouldShowUninstallForAll(AppEntry appEntry) {
         boolean showIt = true;
@@ -433,11 +398,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return false; // onCreate must have failed, make sure to exit
         }
 
-
-        setAppLabelAndIcon(mPackageInfo);
+        mState.ensureIcon(mAppEntry);
 
         // Update the preference summaries.
-        final Activity context = getActivity();
         for (Callback callback : mCallbacks) {
             callback.refreshUi();
         }
@@ -450,7 +413,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
             // All other times: if the app no longer exists then we want
             // to go away.
             try {
-                final ApplicationInfo ainfo = context.getPackageManager().getApplicationInfo(
+                final ApplicationInfo ainfo = getActivity().getPackageManager().getApplicationInfo(
                         mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS
                         | PackageManager.MATCH_ANY_USER);
