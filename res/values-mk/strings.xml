@@ -624,7 +624,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"За да се спари со:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Проверете дали се прикажува оваа лозинка:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"Од:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Спари се со овој уред?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"За да се спари со:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Напишете на него:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, потоа притиснете „Врати“ или „Внеси“."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Дозволете <xliff:g id="DEVICE_NAME">%1$s</xliff:g> да пристапува до контактите и историјата на повици."</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Дозволете пристап до вашите контакти и историјата на повици"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Не можеше да се поврзе со <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Скенирај за уреди"</string>
@@ -688,7 +688,7 @@
     <string name="wifi_display_status_connected" msgid="8364125226376985558">"Поврзана"</string>
     <string name="wifi_display_status_in_use" msgid="8556830875615434792">"Во употреба"</string>
     <string name="wifi_display_status_not_available" msgid="5714978725794210102">"Недостапна"</string>
-    <string name="wifi_display_details" msgid="7791118209992162698">"Подесувања на приказ"</string>
+    <string name="wifi_display_details" msgid="7791118209992162698">"Поставки за приказ"</string>
     <string name="wifi_display_options_title" msgid="5740656401635054838">"Опции за приказ на безжична мрежа"</string>
     <string name="wifi_display_options_forget" msgid="9119048225398894580">"Заборави"</string>
     <string name="wifi_display_options_done" msgid="5703116500357822557">"Готово"</string>
@@ -1207,7 +1207,7 @@
     <string name="unmount_inform_text" product="default" msgid="1904212716075458402">"СД картичката ќе се одмонтира."</string>
     <string name="sd_ejecting_title" msgid="8824572198034365468">"Одмонтирање"</string>
     <string name="sd_ejecting_summary" msgid="2028753069184908491">"Одмонтирање во тек"</string>
-    <string name="storage_low_title" msgid="1388569749716225155">"Меморијата е речиси полна"</string>
+    <string name="storage_low_title" msgid="1388569749716225155">"Капацитетот е речиси полн"</string>
     <string name="storage_low_summary" msgid="7737465774892563129">"Некои функции на системот, како што е синхронизирањето, може да не функционираат правилно. Обидете се да ослободите простор со бришење или откачување предмети, како што се апликации или медиумски содржини."</string>
     <string name="storage_menu_rename" msgid="7141058657592615390">"Преименувај"</string>
     <string name="storage_menu_mount" msgid="1014683672493425425">"Монтирај"</string>
@@ -2334,7 +2334,7 @@
     <string name="sync_calendar" msgid="9056527206714733735">"Календар"</string>
     <string name="sync_contacts" msgid="9174914394377828043">"Контакти"</string>
     <string name="sync_plug" msgid="3905078969081888738"><font fgcolor="#ffffffff">"Добре дојдовте на Google Sync!"</font>\n"Дозволен е пристап кон Google за синхронизирање на податоците за да се овозможи пристап кон вашите контакти, состаноци и повеќе, од каде и да сте."</string>
-    <string name="header_application_sync_settings" msgid="6205903695598000286">"Подесувања на синхронизација на апликација"</string>
+    <string name="header_application_sync_settings" msgid="6205903695598000286">"Поставки за синхронизација на апликации"</string>
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Податоци и синхронизација"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"Смени лозинка"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Поставки на сметка"</string>
@@ -3400,8 +3400,6 @@
     <string name="color_temperature_desc" msgid="4793729830226404052">"Користи поладни бои на екранот"</string>
     <string name="color_temperature_toast" msgid="4974218172133854827">"За да се примени промената на бојата, исклучете го екранот"</string>
     <string name="telephony_monitor_toast" msgid="7003764250271195384">"За да се примени промената на мониторот за телефонија, рестартирајте го уредот"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Камера HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"За применување промена на Камера HAL HDR+, рестартиртирајте го уредот"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Ласерски сензор за камерата"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Автоматски ажурирања на системот"</string>
     <string name="usage" msgid="2977875522080448986">"Користење"</string>
