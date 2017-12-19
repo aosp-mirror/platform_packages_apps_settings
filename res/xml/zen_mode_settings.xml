@@ -41,8 +41,9 @@
             android:layout="@layout/zen_mode_settings_button" />
     </PreferenceCategory>
 
-    <PreferenceCategory>
-        <com.android.settingslib.widget.FooterPreference/>
+    <PreferenceCategory
+        android:key="zen_mode_footer_container">
+        <com.android.settingslib.widget.FooterPreference />
     </PreferenceCategory>
 
 </PreferenceScreen>
