@@ -18,6 +18,7 @@ package com.android.settings.wrapper;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.UserIdInt;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -215,5 +216,14 @@ public class DevicePolicyManagerWrapper {
      */
     public int getDeviceOwnerUserId() {
         return mDpm.getDeviceOwnerUserId();
+    }
+
+    /**
+     * Calls {@code DevicePolicyManager#getMaximumTimeToLock()}.
+     *
+     * @see DevicePolicyManager#getMaximumTimeToLock(ComponentName, int)
+     */
+    public long getMaximumTimeToLockForUserAndProfiles(@UserIdInt int userHandle) {
+        return mDpm.getMaximumTimeToLockForUserAndProfiles(userHandle);
     }
 }

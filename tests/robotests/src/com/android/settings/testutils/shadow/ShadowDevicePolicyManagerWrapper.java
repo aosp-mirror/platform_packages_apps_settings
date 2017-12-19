@@ -16,12 +16,16 @@
 
 package com.android.settings.testutils.shadow;
 
+import android.annotation.UserIdInt;
 import android.content.ComponentName;
 
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Shadow for {@link DevicePolicyManagerWrapper} to allow stubbing hidden methods.
@@ -30,6 +34,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowDevicePolicyManagerWrapper {
     private static ComponentName deviceOComponentName = null;
     private static int deviceOwnerUserId = -1;
+    private static final Map<Integer, Long> profileTimeouts = new HashMap<>();
 
     @Implementation
     public ComponentName getDeviceOwnerComponentOnAnyUser() {
@@ -41,11 +46,21 @@ public class ShadowDevicePolicyManagerWrapper {
         return deviceOwnerUserId;
     }
 
+    @Implementation
+    public long getMaximumTimeToLockForUserAndProfiles(@UserIdInt int userHandle) {
+        return profileTimeouts.getOrDefault(userHandle, 0L);
+    }
+
     public static void setDeviceOComponentName(ComponentName deviceOComponentName) {
         ShadowDevicePolicyManagerWrapper.deviceOComponentName = deviceOComponentName;
     }
 
     public static void setDeviceOwnerUserId(int deviceOwnerUserId) {
         ShadowDevicePolicyManagerWrapper.deviceOwnerUserId = deviceOwnerUserId;
+    }
+
+    public static void setMaximumTimeToLockForUserAndProfiles(
+            @UserIdInt int userHandle, Long timeout) {
+        profileTimeouts.put(userHandle, timeout);
     }
 }
