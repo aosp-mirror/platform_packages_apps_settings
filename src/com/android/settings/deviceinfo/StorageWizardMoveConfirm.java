@@ -16,20 +16,30 @@
 
 package com.android.settings.deviceinfo;
 
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Bundle;
-
-import com.android.internal.util.Preconditions;
-import com.android.settings.R;
-
 import static android.content.Intent.EXTRA_PACKAGE_NAME;
 import static android.content.Intent.EXTRA_TITLE;
 import static android.content.pm.PackageManager.EXTRA_MOVE_ID;
 import static android.os.storage.VolumeInfo.EXTRA_VOLUME_ID;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.UserInfo;
+import android.os.Bundle;
+import android.os.UserManager;
+import android.os.storage.StorageManager;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.android.internal.util.Preconditions;
+import com.android.settings.R;
+import com.android.settings.password.ChooseLockSettingsHelper;
+
 public class StorageWizardMoveConfirm extends StorageWizardBase {
+    private static final int REQUEST_CREDENTIAL = 100;
+
     private String mPackageName;
     private ApplicationInfo mApp;
 
@@ -66,6 +76,20 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
 
     @Override
     public void onNavigateNext() {
+        // Ensure that all users are unlocked so that we can move their data
+        if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
+                if (!StorageManager.isUserKeyUnlocked(user.id)) {
+                    Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
+                    final CharSequence description = TextUtils.expandTemplate(
+                            getText(R.string.storage_wizard_move_unlock), user.name);
+                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
+                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    return;
+                }
+            }
+        }
+
         // Kick off move before we transition
         final String appName = getPackageManager().getApplicationLabel(mApp).toString();
         final int moveId = getPackageManager().movePackage(mPackageName, mVolume);
@@ -76,5 +100,23 @@ public class StorageWizardMoveConfirm extends StorageWizardBase {
         intent.putExtra(EXTRA_VOLUME_ID, mVolume.getId());
         startActivity(intent);
         finishAffinity();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CREDENTIAL) {
+            if (resultCode == RESULT_OK) {
+                // Credentials confirmed, so storage should be unlocked; let's
+                // go look for the next locked user.
+                onNavigateNext();
+            } else {
+                // User wasn't able to confirm credentials, so we're okay
+                // landing back at the wizard page again, where they read
+                // instructions again and tap "Next" to try again.
+                Log.w(TAG, "Failed to confirm credentials");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
