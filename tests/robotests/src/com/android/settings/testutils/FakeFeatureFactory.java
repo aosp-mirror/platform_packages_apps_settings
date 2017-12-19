@@ -21,6 +21,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
+import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
@@ -65,6 +66,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final SmsMirroringFeatureProvider smsMirroringFeatureProvider;
     public final SlicesFeatureProvider slicesFeatureProvider;
     public SearchFeatureProvider searchFeatureProvider;
+    public final AccountFeatureProvider mAccountFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -104,6 +106,7 @@ public class FakeFeatureFactory extends FeatureFactory {
         dataPlanFeatureProvider = mock(DataPlanFeatureProvider.class);
         smsMirroringFeatureProvider = mock(SmsMirroringFeatureProvider.class);
         slicesFeatureProvider = mock(SlicesFeatureProvider.class);
+        mAccountFeatureProvider = mock(AccountFeatureProvider.class);
     }
 
     @Override
@@ -189,5 +192,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public SlicesFeatureProvider getSlicesFeatureProvider() {
         return slicesFeatureProvider;
+    }
+
+    @Override
+    public AccountFeatureProvider getAccountFeatureProvider() {
+        return mAccountFeatureProvider;
     }
 }
