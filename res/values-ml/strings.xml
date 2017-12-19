@@ -169,6 +169,12 @@
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"<xliff:g id="DEVICE_NAME">^1</xliff:g> എന്ന പേരിൽ മറ്റ് ഉപകരണങ്ങൾക്ക് ദൃശ്യമാക്കുക"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"നിങ്ങളുടെ ഉപകരണങ്ങൾ"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"പുതിയ ഉപകരണവുമായി ജോടിയാക്കുക"</string>
+    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"bluetooth ഉപകരണങ്ങളിലേക്ക് ജോടിയാക്കാനും കണക്‌റ്റ് ചെയ്യാനും ഉപകരണത്തെ അനുവദിക്കുക"</string>
+    <string name="connected_device_connected_title" msgid="5871712271201945606">"നിലവിൽ കണക്റ്റ് ചെയ്തു"</string>
+    <string name="connected_device_saved_title" msgid="688364359746674536">"സംരക്ഷിച്ച ഉപകരണങ്ങൾ"</string>
+    <string name="connected_device_add_device_title" msgid="7803521577708810621">"ഉപകരണം ചേർക്കുക"</string>
+    <string name="connected_device_add_device_summary" msgid="5514219577320066914">"ജോടിയാക്കൽ പ്രവർത്തനക്ഷമമാക്കാൻ Bluetooth ഓണാക്കപ്പെടും"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"കണക്ഷൻ മുൻഗണനകൾ"</string>
     <string name="date_and_time" msgid="9062980487860757694">"തീയതിയും സമയവും"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"സമയ മേഖല തിരഞ്ഞെടുക്കുക"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -591,7 +597,7 @@
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"ഒരു സമീപകാല പാസ്‌വേഡ് ഉപയോഗിക്കാൻ ഉപകരണ അഡ്‌മിൻ അനുവദിക്കുന്നില്ല"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"അക്കങ്ങൾ ആരോഹണ ക്രമത്തിലോ അവരോഹണ ക്രമത്തിലോ അനുക്രമമായോ നൽകുന്നത് അനുവദനീയമല്ല"</string>
-    <string name="lockpassword_ok_label" msgid="313822574062553672">"ശരി"</string>
+    <string name="lockpassword_confirm_label" msgid="8176726201389902380">"സ്ഥിരീകരിക്കുക"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"റദ്ദാക്കുക"</string>
     <string name="lockpassword_clear_label" msgid="5724429464960458155">"മായ്‌ക്കുക"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"റദ്ദാക്കുക"</string>
@@ -626,7 +632,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"ഇതുമായി ജോടിയാക്കുന്നതിന്:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;അത് ഈ പാസ്കീ തന്നെയാണ് ദൃശ്യമാക്കുന്നതെന്ന് ഉറപ്പാക്കുക:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"ഇതിൽ നിന്ന്:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;ഈ ഉപകരണവുമായി ജോടിയാക്കണോ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"ഇതുമായി ജോടിയാക്കുക:<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>ഇതിൽ ടൈപ്പുചെയ്യുക:<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, തുടർന്ന് മടങ്ങുക അല്ലെങ്കിൽ നൽകുക അമർത്തുക."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"നിങ്ങളുടെ കോൺടാക്റ്റുകളെയും കോൾ ചരിത്രവും ആക്സസ് ചെയ്യാൻ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്നതിനെ അനുവദിക്കുക"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"കോൺടാക്‌റ്റുകളിലേക്കും കോൾ ചരിത്രത്തിലേക്കും ആക്‌സസ് അനുവദിക്കുക"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> എന്നതിലേക്ക് കണക്റ്റുചെയ്യാനായില്ല."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"ഉപകരണങ്ങൾക്കായി സ്‌കാൻ ചെയ്യുക"</string>
@@ -668,16 +674,16 @@
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"ഹാൻഡ്സ്ഫ്രീ ഓഡിയോയിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"ഇൻപുട്ട് ഉപകരണത്തിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> വഴിയുള്ള ഇന്റ‌ർനെറ്റ് ആക്‌സസ്സ് വിച്‌ഛേദിക്കപ്പെടും."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="1262792320446274407">"ഈ ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നതിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്ഛേദിക്കപ്പെടും."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5700332050175684571">"ഈ ഫോണിന്റെ ഇന്റർനെറ്റ് കണ‌ക്ഷൻ പങ്കിടുന്നതിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="8355910926439312604">"ഈ ടാബ്‌ലെറ്റിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നതിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്ഛേദിക്കപ്പെടും."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="6251611115860359886">"ഈ ഫോണിന്‍റെ ഇന്‍റർനെറ്റ് കണ‌ക്ഷൻ പങ്കിടുന്നതിൽ നിന്ന് <xliff:g id="DEVICE_NAME">%1$s</xliff:g> വിച്‌ഛേദിക്കപ്പെടും."</string>
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"ജോടിയാക്കിയ ബ്ലൂടൂത്ത് ഉപകരണം"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"കണക്റ്റുചെയ്യുക"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"ബ്ലൂടൂത്ത് ഉപകരണത്തിൽ കണ‌ക്‌റ്റുചെയ്യുക"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"ഇതിന് ഉപയോഗിക്കുക"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"പേര് മാറ്റുക"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"ഇൻകമിംഗ് ഫയൽ കൈമാറ്റങ്ങൾ അനുവദിക്കുക"</string>
-    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"ഇന്റ‌ർനെറ്റ് ആക്‌‌സസ്സിനായി ഉപകരണത്തിൽ കണ‌ക്‌റ്റുചെയ്‌തു"</string>
-    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"ഉപകരണവുമായി പ്രദേശിക ഇന്റ‌ർനെറ്റ്‌ കണക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="6436258151814414028">"ഇന്‍റ‌ർനെറ്റ് ആക്‌‌സസിനായി ഉപകരണത്തിൽ കണ‌ക്‌റ്റ് ചെയ്‌തു"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1322694224800769308">"ഉപകരണവുമായി ലോക്കൽ ഇന്‍റ‌ർനെറ്റ്‌ കണക്ഷൻ പങ്കിടുന്നു"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"ഡോക്ക് ക്രമീകരണങ്ങൾ"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"ഓഡിയോയ്ക്കായി ഡോക്ക് ഉപയോഗിക്കുക"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"സ്‌പീക്കർ ഫോണായി"</string>
@@ -730,8 +736,8 @@
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"വൈഫൈ സ്‌കാനിംഗ് ഓഫുചെ‌യ്‌തിരിക്കുന്നതിനാൽ ‌ലഭ്യമല്ല"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"ഉപയോഗിക്കാനായി, ഒരു നെറ്റ്‌വർക്ക് റേറ്റിംഗ് ദാതാവിനെ തിരഞ്ഞെടുക്കുക"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"മോശം കണക്ഷനുകൾ ഒഴിവാക്കുക"</string>
-    <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"മികച്ച ഇന്റർനെറ്റ് കണക്ഷൻ ഉണ്ടാകുന്നതുവരെ വൈഫൈ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കരുത്"</string>
-    <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"മികച്ച ഇന്റർനെറ്റ് കണക്ഷനുള്ള നെറ്റ്‌വർക്കുകൾ മാത്രം ഉപയോഗിക്കുക"</string>
+    <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"മികച്ച ഇന്‍റർനെറ്റ് കണക്ഷൻ ഉണ്ടാകുന്നതുവരെ വൈഫൈ നെറ്റ്‌വർക്ക് ഉപയോഗിക്കരുത്"</string>
+    <string name="wifi_avoid_poor_network_detection_summary" msgid="1644292503152790501">"മികച്ച ഇന്‍റർനെറ്റ് കണക്ഷനുള്ള നെറ്റ്‌വർക്കുകൾ മാത്രം ഉപയോഗിക്കുക"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"ഓപ്പൺ നെറ്റ്‌വർക്കുകളിലേക്ക് കണക്റ്റുചെയ്യുക"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"ഉയർന്ന ഗുണമേന്മയുള്ള പബ്ലിക് നെറ്റ്‌വർക്കുകളിലേക്ക് സ്വമേധയാ കണക്റ്റുചെയ്യുക"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"ഉപയോഗിക്കാനായി, ഒരു നെറ്റ്‌വർക്ക് റേറ്റിംഗ് ദാതാവിനെ തിരഞ്ഞെടുക്കുക"</string>
@@ -747,9 +753,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"വൈഫൈ ഒപ്റ്റിമൈസുചെയ്യൽ"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"വൈഫൈ ഓണായിരിക്കുമ്പോൾ ബാറ്ററി ഉപഭോഗം കുറയ്‌ക്കുക"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"വൈഫൈ യുടെ ബാറ്ററി ഉപഭോഗം പരിമിതമാണ്"</string>
-    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"വൈഫൈയിൽ ഇന്റർനെറ്റ് ആക്‌സസ്സ് ഇല്ലെങ്കിൽ മൊബൈൽ ഡാറ്റയിലേക്ക് മാറുക."</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="8593144541347373394">"വൈഫൈയിൽ ഇന്‍റർനെറ്റ് ആക്‌സസ് ഇല്ലെങ്കിൽ മൊബൈൽ ഡാറ്റയിലേക്ക് മാറുക."</string>
     <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"മൊബൈൽ ഡാറ്റയിലേക്ക് സ്വയമേവ മാറുക"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"വൈഫൈയിൽ നിന്നുള്ള ഇന്റർനെറ്റ് ഇല്ലാത്തപ്പോൾ മൊബൈൽ ഡാറ്റ ഉപയോഗിക്കുക. ഡാറ്റായുടെ ഉപയോഗ നിരക്ക് ബാധകമായേക്കാം."</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1403505355490119307">"വൈഫൈയിൽ നിന്നുള്ള ഇന്‍റർനെറ്റ് ഇല്ലാത്തപ്പോൾ മൊബൈൽ ഡാറ്റ ഉപയോഗിക്കുക. ഡാറ്റാ ഉപയോഗ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"നെറ്റ്‌വർക്ക് ചേർക്കുക"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"വൈ-ഫൈ മുൻഗണനകൾ"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"വൈ-ഫൈ വീണ്ടും സ്വയമേവ ഓണാക്കുന്നു"</string>
@@ -833,9 +839,9 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"കണക്‌റ്റുചെയ്യാൻ സൈൻ ഇൻ ചെയ്യണോ?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"നെറ്റ്‌വർക്കിൽ കണക്‌റ്റുചെയ്യുന്നതിന് മുമ്പ് നിങ്ങളോട് ഓൺലൈനിൽ സൈൻ ഇൻ ചെയ്യാൻ <xliff:g id="APP_NAME">%1$s</xliff:g> ആവശ്യപ്പെടുന്നു."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"കണക്റ്റുചെയ്യുക"</string>
-    <string name="no_internet_access_text" msgid="7133561752896706392">"ഈ നെറ്റ്‌വർക്കിൽ ഇന്റർനെറ്റ് ആക്‌സസ് ഇല്ല. കണക്റ്റുചെയ്ത നിലയിൽ തുടരണോ?"</string>
+    <string name="no_internet_access_text" msgid="5926979351959279577">"ഈ നെറ്റ്‌വർക്കിൽ ഇന്‍റർനെറ്റ് ആക്‌സസ് ഇല്ല. കണക്‌റ്റ് ചെയ്ത നിലയിൽ തുടരണോ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"ഈ നെറ്റ്‌വർക്കിനായി വീണ്ടും ആവശ്യപ്പെടരുത്"</string>
-    <string name="lost_internet_access_title" msgid="6228530645663584505">"ഇന്റർനെറ്റിലേക്ക് വൈഫൈ കണക്റ്റുചെയ്‌തിട്ടില്ല"</string>
+    <string name="lost_internet_access_title" msgid="5779478650636392426">"ഇന്‍റർനെറ്റിലേക്ക് വൈഫൈ കണക്‌റ്റ് ചെയ്‌തിട്ടില്ല"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"വൈഫൈ കണക്ഷൻ മോശമാകുമ്പോഴെല്ലാം നിങ്ങൾക്ക് മൊബൈൽ നെറ്റ്‌വർക്കിലേക്ക് മാറാവുന്നതാണ്. അതിന് ഡാറ്റ ഉപയോഗ നിരക്ക് ബാധകമായേക്കാം."</string>
     <string name="lost_internet_access_switch" msgid="2262459569601190039">"മൊബൈലിലേക്ക് മാറുക"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"വൈഫൈയിൽ തുടരുക"</string>
@@ -856,7 +862,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"വിപുലമായ വൈഫൈ"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"MAC വിലാസം"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"IP വിലാസം"</string>
-    <string name="wifi_details_title" msgid="3471132676909349382">"നെറ്റ്‍വർക്ക് ‌വിവരങ്ങൾ"</string>
+    <string name="wifi_details_title" msgid="8954667664081737098">"നെറ്റ്‌വർക്ക് വിശദാംശങ്ങൾ"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"സബ്‌നെറ്റ് മാസ്‌ക്"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"IPv6 വിലാസങ്ങൾ"</string>
@@ -890,16 +896,16 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"<xliff:g id="PEER_NAME">%1$s</xliff:g> എന്നതുമായി കണക്റ്റുചെയ്യാനുള്ള ക്ഷണം റദ്ദാക്കണോ?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"ഈ ഗ്രൂപ്പിനെ മറക്കണോ?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"വൈഫൈ ഹോട്ട്‌സ്‌പോട്ട്"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"മറ്റ് ഉപകരണങ്ങളുമായി ഇന്റർനെറ്റോ ഉള്ളടക്കമോ പങ്കിടുന്നില്ല"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
-    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"ആപ്പ് ഉള്ളടക്കം പങ്കിടുന്നു. ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നതിന്, ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുക, തുടർന്ന് ഓണാക്കുക"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2199911382555864644">"മറ്റ് ഉപകരണങ്ങളുമായി ഇന്‍റർനെറ്റോ ഉള്ളടക്കമോ പങ്കിടുന്നില്ല"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ടാബ്‌ലെറ്റിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"ഹോട്ട്‌സ്‌പോട്ട് വഴി, ഈ ഫോണിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"ആപ്പ് ഉള്ളടക്കം പങ്കിടുന്നു. ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടാൻ, ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുക, തുടർന്ന് ഓണാക്കുക:"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"ഹോട്ട്‌സ്‌പോട്ടിന്റെ പേര്"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ഓണാക്കുന്നു..."</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g> ഹോട്ട്‌സ്പോട്ടിലേക്ക് മറ്റ് ഉപകരണങ്ങൾക്ക് കണക്റ്റുചെയ്യാൻ കഴിയും"</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"ഹോട്ട്‌സ്‌പോട്ടിന്റെ പാസ്‌വേഡ്"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP ബാൻഡ്"</string>
-    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"നിങ്ങളുടെ മറ്റ് ഉപകരണങ്ങൾക്കായി ഒരു വൈഫൈ നെറ്റ്‌വർക്ക് സൃഷ്ടിക്കുന്നതിന് ഹോട്ട്‌സ്പോട്ട് ഉപയോഗിക്കുക. ഹോട്ട്‌സ്പോട്ട് ഇന്റർനെറ്റ് നൽകുന്നത് നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ ഉപയോഗിച്ചുകൊണ്ടാണ്. അധിക മൊബൈൽ ഡാറ്റ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"നിങ്ങളുടെ മറ്റ് ഉപകരണങ്ങൾക്കായി ഒരു വൈഫൈ നെറ്റ്‌വർക്ക് സൃഷ്ടിക്കുന്നതിന് ഹോട്ട്‌സ്പോട്ട് ഉപയോഗിക്കുക. ഹോട്ട്‌സ്പോട്ട് ഇന്‍റർനെറ്റ് നൽകുന്നത് നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ ഉപയോഗിച്ചുകൊണ്ടാണ്. അധിക മൊബൈൽ ഡാറ്റാ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടുന്നതിന് ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"ഹോട്ട്‌സ്പോട്ട് ഓണാക്കുന്നു…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുന്നു…"</string>
@@ -947,8 +953,8 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"വൈഫൈ കോളിംഗ് ഓണായിരിക്കുമ്പോൾ, നിങ്ങളുടെ മുൻഗണനയും ഏത് സിഗ്നലാണ് ശക്തമെന്നതും അടിസ്ഥാനമാക്കി ഫോണിന് വൈഫൈ നെറ്റ്‌വർക്കോ കാരിയർ നെറ്റ്‌വർക്കോ വഴി കോളുകൾ റൂട്ട് ചെയ്യാനാകും. ഈ ഫീച്ചർ ഓണാക്കുന്നതിനുമുമ്പ്, നിരക്കുകളും മറ്റ് വിശദാംശങ്ങളും അറിയുന്നതിന് നിങ്ങളുടെ കാരിയറെ ബന്ധപ്പെടുക."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
-    <string name="emergency_address_title" msgid="3571902448699714454">"അടിയന്തര വിലാസം അപ്ഡേറ്റുചെയ്യുക"</string>
-    <string name="emergency_address_summary" msgid="3266760199681945746">"വൈഫൈ ഉപയോഗിച്ച് നിങ്ങളൊരു അടിയന്തര കോൾ വിളിക്കുമ്പോൾ, ലൊക്കേഷൻ പോലുള്ള അടിയന്തര സേവനങ്ങൾ ഉപയോഗിക്കുന്ന വിലാസം"</string>
+    <string name="emergency_address_title" msgid="932729250447887545">"അടിയന്തര വിലാസം"</string>
+    <string name="emergency_address_summary" msgid="7751971156196115129">"വൈഫൈ ഉപയോഗിച്ച് നിങ്ങളൊരു അടിയന്തര കോൾ ചെയ്യുമ്പോൾ, നിങ്ങളുടെ ലൊക്കേഷനായി ഉപയോഗിക്കപ്പെടും"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"ഡിസ്പ്ലേ"</string>
     <string name="sound_settings" msgid="5534671337768745343">"ശബ്‌ദം"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"വോളിയം"</string>
@@ -1005,7 +1011,10 @@
     <string name="search_clear_history" msgid="4196658962573162457">"ചരിത്രം മായ്‌ക്കുക"</string>
     <string name="display_settings" msgid="7965901687241669598">"ഡിസ്പ്ലേ"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"സ്‌ക്രീൻ സ്വയമേ തിരിക്കുക"</string>
-    <string name="color_mode_title" msgid="3159275920408338215">"കടും നിറങ്ങൾ"</string>
+    <string name="color_mode_title" msgid="9186249332902370471">"നിറങ്ങൾ"</string>
+    <string name="color_mode_option_natural" msgid="5013837483986772758">"സ്വാഭാവികം"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"ബൂസ്‌റ്റ് ചെയ്‌‌ത"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"സാച്ചുറേറ്റ് ചെയ്‌‌ത"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"ഫോൺ തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"ടാബ്‌ലെറ്റ് തിരിക്കുമ്പോൾ ഒാറിയൻ്റേഷനിലേയ്ക്ക് സ്വയം മാറുക"</string>
@@ -1124,8 +1133,10 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"സി‌സ്‌റ്റം അപ്‌ഡേറ്റുകൾ"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android പതിപ്പ്"</string>
+    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Android സുരക്ഷാ പാച്ച് നില"</string>
     <string name="model_info" msgid="1952009518045740889">"മോഡല്‍"</string>
+    <string name="model_summary" msgid="8306235877567782987">"മോഡൽ: %1$s"</string>
     <string name="hardware_info" msgid="2605080746512527805">"മോഡലും ഹാർഡ്‌വെയറും"</string>
     <string name="hardware_revision" msgid="8893547686367095527">"ഹാർഡ്‌വെയർ പതിപ്പ്"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ഉപകരണ ഐഡി"</string>
@@ -1142,11 +1153,17 @@
     <string name="storage_settings_title" msgid="8746016738388094064">"സംഭരണ ക്രമീകരണങ്ങൾ"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB സ്റ്റോറേജ്  അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സ്റ്റോറേജ്  കാണുക"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD കാർഡ് അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സ്റ്റോറേജ്  കാണുക"</string>
-    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
-    <string name="status_number" product="default" msgid="5123197324870153205">"എന്റെ ഫോൺ നമ്പർ"</string>
+    <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (സിം സ്ലോട്ട് %1$d)"</string>
+    <!-- no translation found for status_number (5948892105546651296) -->
+    <skip />
+    <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (സിം സ്ലോട്ട് %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"ഫോൺ നമ്പർ (സിം സ്ലോട്ട് %1$d)"</string>
+    <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"സിമ്മിലെ MDN"</string>
+    <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"സിമ്മിലെ ഫോൺ നമ്പർ"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"PRL പതിപ്പ്"</string>
+    <string name="meid_multi_sim" msgid="748999971744491771">"MEID (സിം സ്ലോട്ട് %1$d)"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"മൊബൈൽ നെറ്റ്‌വർക്ക് തരം"</string>
@@ -1256,7 +1273,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"മറ്റുള്ളവ"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"സിസ്‌റ്റം"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"<xliff:g id="NAME">^1</xliff:g> അടുത്തറിയുക"</string>
-    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"ആപ്‌സ് സംരക്ഷിച്ചിട്ടുള്ള പങ്കിട്ട ഫയലുകളും ഇന്റർനെറ്റിൽ നിന്നോ Bluetooth-ൽ നിന്നോ ഡൗൺലോഡ് ചെയ്തിട്ടുള്ള ഫയലുകളും Android ഫയലുകളും ഉൾപ്പെടെയുള്ളവ മറ്റുള്ളവയിൽ ഉൾപ്പെടുന്നു. \n\n ഈ <xliff:g id="NAME">^1</xliff:g> എന്നതിന്റെ മുഴുവൻ ഉള്ളടക്കങ്ങളും കാണുന്നതിന്, ടാപ്പ് ചെയ്യുക."</string>
+    <string name="storage_detail_dialog_other" msgid="8845766044697204852">"മറ്റുള്ളവയിൽ, ആപ്പുകൾ സംരക്ഷിച്ചിട്ടുള്ള പങ്കിട്ട ഫയലുകളും ഇന്‍റർനെറ്റിൽ നിന്നോ Bluetooth-ൽ നിന്നോ ഡൗൺലോഡ് ചെയ്തിട്ടുള്ള ഫയലുകളും Android ഫയലുകളും മറ്റും ഉൾപ്പെടുന്നു. \n\nഈ <xliff:g id="NAME">^1</xliff:g> എന്നതിന്‍റെ മുഴുവൻ ഉള്ളടക്കങ്ങളും കാണാൻ, ടാപ്പ് ചെയ്യുക."</string>
     <string name="storage_detail_dialog_system" msgid="862835644848361569">"സിസ്‌റ്റത്തിൽ Android പതിപ്പ് <xliff:g id="VERSION">%s</xliff:g> റൺ ചെയ്യാൻ ഉപയോഗിച്ച ഫയലുകളും ഉൾപ്പെടുന്നു"</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> എന്ന ഉപയോക്താവിന്, സ്റ്റോറേജിന്റെ <xliff:g id="SIZE">^2</xliff:g> ഉപയോഗിക്കുന്ന, സംരക്ഷിച്ചിട്ടുള്ള ഫോട്ടോകളോ സംഗീതമോ ആപ്‌സോ മറ്റ് ഡാറ്റയോ ഉണ്ടായേക്കാം. \n\nകൂടുതൽ വിശദാംശങ്ങൾ കാണുന്നതിന്, <xliff:g id="USER_1">^1</xliff:g> എന്ന ഉപയോക്താവിലേക്ക് മാറുക."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"നിങ്ങളുടെ <xliff:g id="NAME">^1</xliff:g> സജ്ജമാക്കുക"</string>
@@ -1382,15 +1399,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"ഡാറ്റ സേവർ ഓണായിരിക്കുന്ന സമയത്ത് പോർട്ടബിൾ ഹോട്ട്സ്പോട്ടുകൾ ടെതർ ചെയ്യാനോ ഉപയോഗിക്കാനോ കഴിയില്ല"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"USB ടെതറിംഗ്"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"USB വഴിയായി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"USB വഴിയായി ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"USB വഴി, ഫോണിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="2292916486612255069">"USB വഴി, ടാബ്‌ലെറ്റിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"ബ്ലൂടൂത്ത് ടെതറിംഗ്"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Bluetooth വഴിയായി ടാബ്‌ലെറ്റിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Bluetooth വഴിയായി ഫോണിന്റെ ഇന്റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
-    <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Bluetooth വഴി, ഈ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> ഉപകരണത്തിന്റെ ഇന്റർനെറ്റ് കണ‌ക്ഷൻ പങ്കിടുന്നു"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="8828883800511737077">"Bluetooth വഴി, ടാബ്‌ലെറ്റിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1904667146601254812">"Bluetooth വഴി, ഫോണിന്‍റെ ഇന്‍റർനെറ്റ് കണക്ഷൻ പങ്കിടുക"</string>
+    <string name="bluetooth_tethering_off_subtext_config" msgid="376389105752995580">"Bluetooth വഴി, ഈ <xliff:g id="DEVICE_NAME">%1$d</xliff:g> ഉപകരണത്തിന്‍റെ ഇന്‍റർനെറ്റ് കണ‌ക്ഷൻ പങ്കിടുന്നു"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"<xliff:g id="MAXCONNECTION">%1$d</xliff:g>-ൽ കൂടുതൽ ഉപകരണങ്ങളിൽ ടെതർ ചെയ്യാനായില്ല."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ടെതർ ചെയ്‌തത് മാറ്റും."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്റർനെറ്റ് നൽകുന്നതിന് ഹോട്ട്‌സ്പോട്ടും ‌ടെതറിംഗും ഉപയോഗിക്കുക. ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടുന്നതിന് ആപ്പുകൾക്കും ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
+    <string name="tethering_footer_info" msgid="7112228674056306147">"നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷനിലൂടെ മറ്റ് ഉപകരണങ്ങളിലേക്ക് ഇന്‍റർനെറ്റ് നൽകാൻ ഹോട്ട്‌സ്പോട്ടും ‌ടെതറിംഗും ഉപയോഗിക്കുക. ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടാൻ ആപ്പുകൾക്കും ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"സഹായം"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"മൊബൈൽ നെറ്റ്‌വർക്ക്"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"മൊബൈൽ പ്ലാൻ"</string>
@@ -1465,7 +1482,7 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"ലോഡുചെയ്യുന്നു..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"സുരക്ഷാ വിവരം"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"സുരക്ഷാ വിവരം"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"നിങ്ങൾക്ക് ഒരു ഡാറ്റ കണ‌ക്ഷൻ ഇല്ല. ഈ വിവരം ഇപ്പോൾ കാണുന്നതിന്, ഇന്റ‌ർനെറ്റിൽ കണ‌ക്റ്റുചെ‌യ്‌തിരിക്കുന്ന ഏതൊരു കമ്പ്യൂട്ടറിൽ നിന്നും %s എന്നതിലേക്ക് പോകുക."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"നിങ്ങൾക്കൊരു ഡാറ്റ കണ‌ക്ഷൻ ഇല്ല. ഈ വിവരം ഇപ്പോൾ കാണാൻ, ഇന്‍റ‌ർനെറ്റിൽ കണ‌ക്‌റ്റ് ചെ‌യ്‌തിരിക്കുന്ന ഏതൊരു കമ്പ്യൂട്ടറിൽ നിന്നും %s എന്നതിലേക്ക് പോകുക."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"ലോഡുചെയ്യുന്നു..."</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"ഒരു സ്‌ക്രീൻ ലോക്ക് സജ്ജമാക്കുക"</string>
     <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"സുരക്ഷയ്‌ക്കായി, ഒരു പാസ്‌വേഡ് സജ്ജമാക്കുക"</string>
@@ -1671,7 +1688,6 @@
     <string name="app_install_details_title" msgid="6905279702654975207">"ആപ്പ് വിശദാംശങ്ങൾ"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"<xliff:g id="APP_STORE">%1$s</xliff:g> എന്നതിൽ നിന്ന് ആപ്പ് ഇൻസ്റ്റാൾ ചെയ്തു"</string>
     <string name="instant_app_details_summary" msgid="4529934403276907045">"<xliff:g id="APP_STORE">%1$s</xliff:g> സംബന്ധിച്ച കൂടുതൽ ‌വിവരങ്ങൾ"</string>
-    <string name="app_ops_settings" msgid="5108481883575527511">"App ops"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"പ്രവര്‍ത്തിക്കുന്നു"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(ഒരിക്കലും ഉപയോഗിക്കരുത്)"</string>
     <string name="no_default_apps" msgid="2915315663141025400">"സ്ഥിര അപ്ലിക്കേഷനുകളൊന്നുമില്ല."</string>
@@ -1723,6 +1739,7 @@
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
     <string name="language_settings" msgid="8758655933029560944">"ഭാഷകളും ഇൻപുട്ടും"</string>
+    <string name="language_empty_list_user_restricted" msgid="5984015900102140696">"ഉപകരണ ഭാഷ മാറ്റാൻ നിങ്ങൾക്ക് അനുമതിയില്ല."</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"ഭാഷകളും ഇൻപുട്ടും"</string>
     <string name="input_assistance" msgid="7577795275222555487">"ഇൻപുട്ട് സഹായം"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"കീബോർഡും ടൈപ്പുചെയ്യൽ രീതികളും"</string>
@@ -1843,6 +1860,8 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"അപ്ലിക്കേഷൻ സംക്രമണങ്ങളിൽ സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ അപ്‌ഡേറ്റുചെയ്യുക"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"പവർബട്ടൺ കോൾ നിർത്തുന്നു"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"വലിയ മൗസ് പോയിന്റർ"</string>
+    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
+    <skip />
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"മോണോ ഓഡിയോ"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"ഓഡിയോ പ്ലേ ചെയ്യുമ്പോൾ ചാനലുകൾ സംയോജിപ്പിക്കുക"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"സ്‌പർശിച്ച് കുറെനേരം അമർത്തിപ്പിടിക്കൂ"</string>
@@ -2113,7 +2132,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"മീഡിയ സെർവർ"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"ആപ്പ് ഓപ്റ്റിമൈസേഷന്‍"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"ബാറ്ററി ലാഭിക്കൽ"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"ബാറ്ററി ലാഭിക്കൽ"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"ഒരിക്കലും"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"<xliff:g id="PERCENT">%1$s</xliff:g> ബാറ്ററിയിൽ"</string>
@@ -2139,14 +2158,6 @@
     <string name="services_subtitle" msgid="4296402367067266425">"സേവനങ്ങള്‍"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"ദൈർഘ്യം"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"മെമ്മറി വിശദാംശങ്ങൾ"</string>
-    <string name="mem_state_subtitle" msgid="2407238869781011933">"മെമ്മറി സ്‌റ്റേറ്റ്സ്"</string>
-    <string name="mem_use_subtitle" msgid="7319468770222422412">"മെമ്മറി ഉപയോഗം"</string>
-    <string name="mem_use_kernel_type" msgid="8698327165935012484">"കേർനൽ"</string>
-    <string name="mem_use_native_type" msgid="5976704902328347400">"നേറ്റീവ്"</string>
-    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"കേർനൽ കാഷെകൾ"</string>
-    <string name="mem_use_zram_type" msgid="9087217476795358232">"ZRam സ്വാപ്പുചെയ്യുക"</string>
-    <string name="mem_use_free_type" msgid="717708548454880840">"ഇഷ്‌ടാനുസൃത അളവ്"</string>
-    <string name="mem_use_total" msgid="6308786055749777934">"മൊത്തം"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 മണിക്കൂർ"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 മണിക്കൂർ"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 മണിക്കൂർ"</string>
@@ -2492,8 +2503,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"VPN മറക്കുക"</string>
     <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"നിലവിലുള്ള VPN-ന് പകരം പുതിയതാക്കണോ?"</string>
     <string name="vpn_set_vpn_title" msgid="4009987321156037267">"\'എല്ലായ്പ്പോഴും ഓൺ\' VPN സജ്ജമാക്കണോ?"</string>
-    <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"ഈ ക്രമീകരണം ഓണാക്കുകയാണെങ്കിൽ, VPN കണക്റ്റുചെയ്യുന്നത് വരെ നിങ്ങൾക്ക് ഇന്റർനെറ്റ് കണക്ഷൻ ഉണ്ടായിരിക്കുകയില്ല."</string>
-    <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"നിലവിലുള്ള VPN-ന് പകരം പുതിയത് ഉപയോഗിക്കും, VPN കണക്റ്റുചെയ്യുന്നത് വരെ നിങ്ങൾക്ക് ഇന്റർനെറ്റ് കണക്ഷൻ ഉണ്ടായിരിക്കുകയുമില്ല."</string>
+    <string name="vpn_first_always_on_vpn_message" msgid="7144543717673197102">"ഈ ക്രമീകരണം ഓണായിരിക്കുമ്പോൾ, VPN കണക്‌റ്റ് ചെയ്യുന്നത് വരെ നിങ്ങൾക്ക് ഇന്‍റർനെറ്റ് കണക്ഷൻ ഉണ്ടായിരിക്കുകയില്ല"</string>
+    <string name="vpn_replace_always_on_vpn_enable_message" msgid="798121133114824006">"നിലവിലുള്ള VPN-ന് പകരം പുതിയത് ഉപയോഗിക്കും, VPN കണക്‌റ്റ് ചെയ്യുന്നത് വരെ നിങ്ങൾക്ക് ഇന്‍റർനെറ്റ് കണക്ഷൻ ഉണ്ടായിരിക്കുകയില്ല"</string>
     <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"ഇതിനകം തന്നെ നിങ്ങളൊരു \'എല്ലായ്പ്പോഴും ഓൺ\' VPN-ലേക്ക് കണക്റ്റുചെയ്തിട്ടുണ്ട്. നിങ്ങൾ വേറൊരു VPN-ലേക്ക് കണക്റ്റുചെയ്യുന്ന പക്ഷം, നിലവിലുള്ളതിന് പകരം പുതിയത് ഉപയോഗിക്കും, \'എല്ലായ്പ്പോഴും ഓൺ\' മോഡ് ഓഫാവുകയും ചെയ്യും."</string>
     <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"ഇതിനകം തന്നെ നിങ്ങൾ ഒരു VPN-ലേക്ക് കണക്റ്റുചെയ്തിട്ടുണ്ട്. നിങ്ങൾ വേറൊരു VPN-ലേക്ക് കണക്റ്റുചെയ്യുന്ന പക്ഷം, നിലവിലുള്ളതിന് പകരം പുതിയത് ഉപയോഗിക്കും."</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"ഓൺ ചെയ്യുക"</string>
@@ -2720,6 +2731,7 @@
     <string name="color_purple" msgid="3888532466427762504">"പര്‍പ്പിള്‍"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"സിം കാർഡുകളൊന്നും ചേർത്തിട്ടില്ല"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"സിം നില"</string>
+    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"സിം നില (സിം സ്ലോട്ട് %1$d)"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"സ്ഥിര സിമ്മിൽ നിന്ന് തിരിച്ചുവിളിക്കുക"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"ഔട്ട്‌ഗോയിംഗ് കോളുകൾക്കുള്ള സിം"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"മറ്റ് കോൾ ക്രമീകരണങ്ങൾ"</string>
@@ -2733,13 +2745,14 @@
     <string name="sim_pref_divider" msgid="6778907671867621874">"ഈ പ്രവർത്തനത്തിനുള്ള SIM"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"എപ്പോഴും ചോദിക്കുക"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"തിരഞ്ഞെടുക്കൽ ആവശ്യമാണ്"</string>
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"സിം തിരഞ്ഞെടുക്കൽ"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"ക്രമീകരണം"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="other">മറച്ച %d ഇനങ്ങൾ കാണിക്കുക</item>
       <item quantity="one">മറച്ച %d ഇനം കാണിക്കുക</item>
     </plurals>
     <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"ചുരുക്കുക"</string>
-    <string name="network_dashboard_title" msgid="4771589228992391573">"നെറ്റ്‌വർക്കും ഇന്റർനെറ്റും"</string>
+    <string name="network_dashboard_title" msgid="3135144174846753758">"നെറ്റ്‌വർക്കും ഇന്റർനെറ്റും"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"മൊബൈല്‍"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"ഡാറ്റ ഉപയോഗം"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"ഹോട്ട്‌സ്‌പോട്ട്"</string>
@@ -2799,6 +2812,10 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"പണമടയ്ക്കുക. ടാപ്പുചെയ്യുക, പേയ്‌മെന്റുകൾ"</string>
     <string name="keywords_backup" msgid="470070289135403022">"ബാക്കപ്പ് ചെയ്യൂ"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"വിരൽചലനം"</string>
+    <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, prl പതിപ്പ്, imei sv"</string>
+    <string name="keywords_sim_status" msgid="1474422416860990564">"നെറ്റ്‌വർക്ക്, മൊബൈൽ നെറ്റ്‌വർക്ക് നില, സേവന നില, സിഗ്നൽ ശക്തി, മൊബൈൽ നെറ്റ്‌വർക്ക് നില, റോമിംഗ്, iccid"</string>
+    <string name="keywords_model_and_hardware" msgid="1459248377212829642">"സീരിയൽ നമ്പർ, ഹാർഡ്‌വെയർ പതിപ്പ്"</string>
+    <string name="keywords_android_version" msgid="9069747153590902819">"android സുരക്ഷാ പാച്ച് നില, ബേസ്‌ബാൻഡ് പതിപ്പ്, കെർണൽ പതിപ്പ്"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"വൈഫൈ NFC ടാഗ് സജ്ജമാക്കുക"</string>
     <string name="write_tag" msgid="8571858602896222537">"റൈറ്റുചെയ്യുക"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"റൈറ്റുചെയ്യാൻ ഒരു ടാഗ് ടാപ്പുചെയ്യുക..."</string>
@@ -2836,20 +2853,23 @@
     <string name="emergency_tone_alert" msgid="8941852695428130667">"അലേർട്ട്"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"വൈബ്രേറ്റുചെയ്യുക"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"ശബ്ദങ്ങൾ ഓണാക്കുക"</string>
-    <string name="zen_mode_settings_summary_off" msgid="1857165567766351925">"സ്വയമേവയുള്ള നിയമങ്ങളൊന്നും ഓണാക്കിയിട്ടില്ല"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1216562765753405784">
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> സ്വമേധയായുള്ള നയങ്ങൾ ഓണാക്കി</item>
-      <item quantity="one">1 സ്വമേധയായുള്ള നയം ഓണാക്കി</item>
+    <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"ഒരിക്കലും ഇല്ല"</string>
+    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> നയങ്ങൾ</item>
+      <item quantity="one">ഒരു നയം</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"ശല്യം ചെയ്യരുത്"</string>
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"പ്രവർത്തനരീതി"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"ഇനിപ്പറയുന്നതിൽ നിന്നുള്ള ശബ്ദങ്ങളും അലാറമുകളും അനുവദിക്കുക"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"ശബ്‌ദമില്ല"</string>
-    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"ശബ്ദമില്ല (മൊത്തം നിശബ്ദം)"</string>
-    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> ഒഴികെ ശബ്ദമില്ല"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
+    <!-- no translation found for zen_mode_behavior_total_silence (2229976744274214528) -->
     <skip />
-    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"സ്വയമേയുള്ള നയങ്ങൾ"</string>
+    <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> ഒഴികെ ശബ്ദമില്ല"</string>
+    <!-- no translation found for zen_mode_behavior_alarms_only (6455884547877702466) -->
+    <skip />
+    <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"സ്വമേധയാ ഓണാക്കുക"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"സ്വമേധയാലുള്ള നയങ്ങൾ"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"സ്വമേധയായുള്ള നയം"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"\'ശല്യപ്പെടുത്തരുത്\' നിയമങ്ങൾ സജ്ജമാക്കുക"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"ചില സമയത്ത് ശബ്‌ദവും വൈബ്രേഷനും പരിമിതപ്പെടുത്തുക"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"മുൻഗണന മാത്രം"</string>
@@ -2857,6 +2877,14 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"പൂർണ്ണ നിശബ്‌ദത"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ദൃശ്യതടസങ്ങൾ ബ്ലോക്കുചെയ്യൂ"</string>
+    <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ദൃശ്യ സിഗ്നലുകൾ അനുവദിക്കുക"</string>
+    <string name="zen_mode_add" msgid="90014394953272517">"ചേർക്കുക"</string>
+    <string name="zen_mode_button_turn_on" msgid="5074744714613374902">"ഇപ്പോൾ ഓണാക്കുക"</string>
+    <string name="zen_mode_button_turn_off" msgid="1995551537320422792">"ഇപ്പോൾ ഓഫ് ചെയ്യുക"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"<xliff:g id="FORMATTED_TIME">%s</xliff:g> വരെ \'ശല്യപ്പെടുത്തരുത്\' ഓണാണ്"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"നിങ്ങൾ ഓഫാക്കുന്നത് വരെ \'ശല്യപ്പെടുത്തരുത്\' ഓണായി തുടരും"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="7780048616476170427">"ഒരു നയം (<xliff:g id="RULE_NAME">%s</xliff:g>) സ്വമേധയാ \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കി"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"ഒരു ആപ്പ് (<xliff:g id="APP_NAME">%s</xliff:g>) സ്വമേധയാ \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കി"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"ഔദ്യോഗിക പ്രൊഫൈൽ ശബ്ദങ്ങൾ"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"സ്വകാര്യ പ്രൊഫൈൽ ശബ്ദങ്ങൾ ഉപയോഗിക്കുക"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"ഔദ്യോഗിക പ്രൊഫൈലുകൾക്കും വ്യക്തിഗത പ്രൊഫൈലുകൾക്കുമുള്ള ശബ്ദങ്ങൾ ഒന്നുതന്നെ ആയിരിക്കും"</string>
@@ -2983,7 +3011,9 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"നയത്തിന്റെ പേര്"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"നയത്തിന്റെ പേര് നൽകുക"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"നയത്തിന്റെ പേര് ഇപ്പോൾ ഉപയോഗത്തിലുണ്ട്"</string>
-    <string name="zen_mode_add_rule" msgid="7459154136384467057">"കൂടുതൽ ചേർക്കുക"</string>
+    <string name="zen_mode_add_rule" msgid="9100929184624317193">"നയം ചേർക്കുക"</string>
+    <string name="zen_mode_add_event_rule" msgid="3997335103633946552">"ഇവന്റ് നയം ചേർക്കുക"</string>
+    <string name="zen_mode_add_time_rule" msgid="5002080000597838703">"സമയ നയം ചേർക്കുക"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"നയം ഇല്ലാതാക്കുക"</string>
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"റൂൾ തരം തിരഞ്ഞെടുക്കുക"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\"<xliff:g id="RULE">%1$s</xliff:g>\" നയം ഇല്ലാതാക്കണോ?"</string>
@@ -2991,9 +3021,12 @@
     <string name="zen_mode_rule_type" msgid="2289413469580142888">"നയത്തിന്റെ തരം"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"അജ്ഞാതം"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"നയം കോൺഫിഗർ ചെയ്യുക"</string>
-    <string name="zen_schedule_rule_type_name" msgid="142936744435271449">"സമയ നയം"</string>
+    <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"ഈ ക്രമീകരണം ഇപ്പോൾ മാറ്റാനാവില്ല. ഒരു ആപ്പ് (<xliff:g id="APP_NAME">%1$s</xliff:g>) ഇഷ്‌ടാനുസൃത പ്രവർത്തനരീതി ഉപയോഗിച്ച് സ്വമേധയാ \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കിയിട്ടുണ്ട്."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"ഈ ക്രമീകരണം ഇപ്പോൾ മാറ്റാനാവില്ല. ഒരു ആപ്പ് ഇഷ്‌ടാനുസൃത പ്രവർത്തനരീതി ഉപയോഗിച്ച് സ്വമേധയാ \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കിയിട്ടുണ്ട്."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"ഈ ക്രമീകരണം ഇപ്പോൾ മാറ്റാനാവില്ല. ഇഷ്‌ടാനുസൃത പ്രവർത്തനരീതി ഉപയോഗിച്ച് നേരിട്ട് \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കപ്പെട്ടിട്ടുണ്ട്."</string>
+    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"സമയം"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"പ്രത്യേക സമയത്ത് \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കുന്നതിന് സ്വയമേവയുള്ള നയം സജ്ജമാക്കുക"</string>
-    <string name="zen_event_rule_type_name" msgid="2645981990973086797">"ഇവന്റ് നയം"</string>
+    <string name="zen_event_rule_type_name" msgid="6503468472212606158">"ഇവന്‍റ്"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"പ്രത്യേക ഇവന്റുകൾ നടക്കുന്ന സമയത്ത് \'ശല്യപ്പെടുത്തരുത്\' ഓണാക്കുന്നതിന് സ്വയമേവയുള്ള നയം സജ്ജമാക്കുക"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"ഈ ഇവന്റുകളിൽ"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"<xliff:g id="CALENDAR">%1$s</xliff:g> ഇവന്റുകളിൽ"</string>
@@ -3024,7 +3057,9 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"നക്ഷത്രമിട്ട കോൺടാക്‌റ്റിൽ നിന്നുമാത്രം"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ആരിൽ നിന്നും വേണ്ട"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"അലാറങ്ങൾ"</string>
-    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
+    <!-- no translation found for zen_mode_media_system_other (5937422836400161702) -->
+    <skip />
+    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
     <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"റിമൈൻഡറുകൾ"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ഇവന്റുകൾ"</string>
@@ -3032,6 +3067,8 @@
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"തിരഞ്ഞെടുത്ത കോളർമാർ"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"ആവർത്തിച്ച് വിളിക്കുന്നവർ"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"<xliff:g id="MINUTES">%d</xliff:g> മിനിറ്റ് കാലയളവിനുള്ളിൽ അതേ വ്യക്തി രണ്ടാമതൊരു തവണ വിളിക്കുകയാണെങ്കിൽ"</string>
+    <!-- no translation found for zen_mode_behavior_summary_custom (168127313238020146) -->
+    <skip />
     <string name="zen_mode_when" msgid="2767193283311106373">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ഒരിക്കലും"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"എല്ലാ രാത്രിയും"</string>
@@ -3050,15 +3087,11 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g> വരെ മാത്രം അലാറങ്ങളിലേക്ക് മാറ്റുക"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"\'എല്ലായ്‌പ്പോഴും തടസ്സപ്പെടുത്തുക\' എന്നതിലേക്ക് മാറ്റുക"</string>
-    <string name="zen_mode_screen_on" msgid="7712038508173845101">"ഓണായിരിക്കുമ്പോൾ ബ്ലോക്കുചെയ്യുക"</string>
-    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"സ്ക്രീനിൽ എത്തിനോക്കുന്നതിൽ നിന്നോ ദൃശ്യമാകുന്നതിൽ നിന്നോ, \'ശല്യപ്പെടുത്തരുത്\' വഴി അറിയിപ്പുകളെ തടയുക"</string>
-    <string name="zen_mode_screen_off" msgid="5026854939192419879">"ഓഫായിരിക്കുമ്പോൾ ബ്ലോക്കുചെയ്യുക"</string>
-    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"സ്ക്രീൻ ഓണാക്കുന്നതിൽ നിന്നോ അറിയിപ്പ് വെളിച്ചം തെളിയുന്നതിൽ നിന്നോ, \'ശല്യപ്പെടുത്തരുത്\' വഴി അറിയിപ്പുകളെ തടയുക"</string>
-    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"സ്ക്രീൻ ഓണാക്കുന്നതിൽ നിന്ന്, \'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്ദമാക്കപ്പെടുന്ന അറിയിപ്പുകളെ തടയുക"</string>
-    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"ഓഫ്"</string>
-    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"സ്ക്രീൻ ഓണായിരിക്കുമ്പോൾ"</string>
-    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"സ്ക്രീൻ ഓഫായിരിയ്ക്കുമ്പോൾ"</string>
-    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"സ്ക്രീൻ ഓണോ ഓഫോ ആയിരിക്കുമ്പോൾ"</string>
+    <string name="zen_mode_screen_on" msgid="8774571998575673502">"സ്‌ക്രീൻ ഓണാകുമ്പോൾ"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"\'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്‌ദമാക്കിയ അറിയിപ്പുകളെ സ്‌ക്രീൻ പോപ്പ് ചെയ്യാൻ അനുവദിക്കുക"</string>
+    <string name="zen_mode_screen_off" msgid="3144446765110327937">"സ്‌ക്രീൻ ഓഫാകുമ്പോൾ"</string>
+    <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"\'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്‌ദമാക്കിയ അറിയിപ്പുകളെ സ്‌ക്രീൻ ഓണാക്കാനും ലൈറ്റ് മിന്നിക്കാനും അനുവദിക്കുക"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"\'ശല്യപ്പെടുത്തരുത്\' വഴി നിശബ്‌ദമാക്കിയ അറിയിപ്പുകളെ സ്‌ക്രീൻ ഓണാക്കാൻ അനുവദിക്കുക"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"അറിയിപ്പ് ക്രമീകരണങ്ങൾ"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"ശരി"</string>
     <string name="device_feedback" msgid="3238056036766293294">"ഇതേക്കുറിച്ചുള്ള ഫീഡ്‌ബാക്ക് അയയ്‌ക്കൂ"</string>
@@ -3378,7 +3411,7 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"ഹോട്ട്സ്പോട്ട് ഓണാണ്"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"പോർട്ടബിൾ വൈഫൈ ഹോട്ട്‌സ്പോട്ട് <xliff:g id="ID_1">%1$s</xliff:g> സജീവമാണ്, ഈ ഉപകരണത്തിനായുള്ള വൈഫൈ ഓഫാക്കിയിരിക്കുന്നു."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"വിമാന മോഡ് ഓണാണ്"</string>
-    <string name="condition_airplane_summary" msgid="5561586417832393666">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്ക് എന്നിവ ഓഫാക്കിയിരിക്കുന്നു. നിങ്ങൾക്ക് കോൾ ചെയ്യാനോ ഇന്റർനെറ്റിലേക്ക് കണക്റ്റുചെയ്യാനോ കഴിയില്ല."</string>
+    <string name="condition_airplane_summary" msgid="3738805058182535606">"വൈഫൈ, Bluetooth, മൊബൈൽ നെറ്റ്‌വർക്ക് എന്നിവ ഓഫാക്കിയിരിക്കുന്നു. നിങ്ങൾക്ക് കോൾ ചെയ്യാനോ ഇന്‍റർനെറ്റിലേക്ക് കണക്‌റ്റ് ചെയ്യാനോ ആവില്ല."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"\'ശല്യപ്പെടുത്തരുത്\' ഓണാണ് (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"ബാറ്ററി ലാഭിക്കൽ ഓണാണ്"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"പ്രകടനനിലവാരം കുറഞ്ഞിരിക്കുന്നു. ലൊക്കേഷൻ സേവനങ്ങളും പശ്ചാത്തല ഡാറ്റയും ഓഫാക്കി."</string>
@@ -3410,8 +3443,6 @@
     <string name="connectivity_monitor_switch" msgid="9059759348648583421">"കണക്റ്റിവിറ്റി മോണിറ്റർ"</string>
     <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"കണക്‌റ്റിവിറ്റി മോണിറ്റർ, ഒരു പ്രശ്‌നം കണ്ടെത്തുമ്പോൾ അതിന്‍റെ ലോഗുകൾ ശേഖരിക്കുകയും ബഗ് ഫയൽ ചെയ്യാൻ ഉപയോക്താവിന് അറിയിയിപ്പ് നൽകുകയും ചെയ്യും"</string>
     <string name="connectivity_monitor_toast" msgid="5551859612881173028">"കണക്‌റ്റിവിറ്റി മോണിറ്ററിലെ മാറ്റം പ്രാവര്‍ത്തികമാക്കാൻ ഉപകരണം റീബൂട്ട് ചെയ്യുക"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"ക്യാമറ HAL HDR+"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"ക്യാമറ HAL HDR+ മാറ്റം പ്രയോഗിക്കാൻ, ഉപകരണം റീബൂട്ട് ചെയ്യുക"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"ക്യാമറ ലേസർ സെൻസർ"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"സ്വയമേവയുള്ള സിസ്റ്റം അപ്ഡേറ്റുകൾ"</string>
     <string name="usage" msgid="2977875522080448986">"ഉപയോഗം"</string>
@@ -3561,13 +3592,6 @@
       <item quantity="one">ഒരു സെക്കൻഡ്</item>
     </plurals>
     <string name="support_estimated_wait_time" msgid="6523081420029378051">"~<xliff:g id="ESTIMATE">%1$s</xliff:g> കാക്കുക"</string>
-    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"കമ്പ്യൂട്ടർ"</string>
-    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"ഹെഡ്‌സെറ്റ്"</string>
-    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"ഫോൺ"</string>
-    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"ഇമേജിംഗ്"</string>
-    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"ഹെഡ്ഫോൺ"</string>
-    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"ഇൻപുട്ട് പെരിഫറൽ"</string>
-    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"സ്റ്റോറേജ്  നിയന്ത്രിക്കുക"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"സ്റ്റോറേജ് ഇടം സൃഷ്ടിക്കുന്നതിന്, ബാക്കപ്പെടുത്ത ഫോട്ടോകളും വീഡിയോകളും നിങ്ങളുടെ ഉപകരണത്തിൽ നിന്ന് സ്റ്റോറേജ് മാനേജർ നീക്കംചെയ്യുന്നു."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"ഫോട്ടോകളും വീഡിയോകളും നീക്കംചെയ്യുക"</string>
@@ -3602,6 +3626,7 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"സമയം, അറിയിപ്പ് ഐക്കണുകൾ, മറ്റ് വിവരങ്ങൾ എന്നിവ നോക്കുന്നതിന്, ഫോൺ കയ്യിലെടുക്കുക."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"സ്ക്രീൻ ഓഫായിരിക്കുമ്പോൾ അറിയിപ്പുകൾ പരിശോധിക്കുക"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"അറിയിപ്പുകൾക്ക് വിരലടയാളം സ്വൈപ്പുചെയ്യുക"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"ഫിംഗർപ്രിന്‍റ് സ്വൈപ്പ്"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ ഫോണിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ടാബ്‌ലെറ്റിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"നിങ്ങളുടെ അറിയിപ്പുകൾ പരിശോധിക്കാൻ, ഉപകരണത്തിന്റെ പിൻവശത്തുള്ള വിരലടയാള സെൻസറിൽ താഴേക്ക് സ്വൈപ്പുചെയ്യുക."</string>
@@ -3610,9 +3635,10 @@
     <string name="gesture_setting_on" msgid="3455094265233870280">"ഓൺ"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"ഓഫ്"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"ബൂട്ട്‌ലോഡർ ഇതിനകം അൺലോക്കുചെയ്തിട്ടുണ്ട്"</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"ആദ്യം ഇന്റർനെറ്റിലേക്ക് കണക്റ്റുചെയ്യുക"</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"ഇന്റർനെറ്റിൽ കണക്റ്റുചെയ്യുക അല്ലെങ്കിൽ കാരിയറുമായി ബന്ധപ്പെടുക"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="3361344735430813695">"ആദ്യം ഇന്‍റർനെറ്റിലേക്ക് കണക്‌റ്റ് ചെയ്യുക"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="2479038689567925511">"ഇന്‍റർനെറ്റിൽ കണക്‌റ്റ് ചെയ്യുക അല്ലെങ്കിൽ കാരിയറുമായി ബന്ധപ്പെടുക"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"കാരിയർ ലോക്കുചെയ്തിട്ടുള്ള ഉപകരണങ്ങളിൽ ലഭ്യമല്ല"</string>
+    <string name="oem_lock_info_message" msgid="9218313722236417510">"ഉപകരണ പരിരക്ഷ ഫീച്ചർ പ്രവർത്തനക്ഷമമാക്കാൻ ഉപകരണം റീസ്‌റ്റാർട്ട് ചെയ്യുക"</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> മൊത്തം ലഭ്യമാക്കിയിരിക്കുന്നു\n\nഅവസാനം റൺ ചെയ്തത് <xliff:g id="DATE">%2$s</xliff:g>-ന്"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"ഇൻസ്‌റ്റ‌ന്റ് ആപ്പ്"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"ആപ്പുകൾ ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ലെങ്കിൽ പോലും, അവയിൽ ലിങ്കുകൾ തുറക്കുക"</string>
@@ -3720,6 +3746,8 @@
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;ഈ ആപ്പിനെ നിങ്ങൾ വിശ്വസിക്കുന്നുണ്ടെന്ന് ഉറപ്പുവരുത്തുക&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; സ്വയമേവ പൂരിപ്പിക്കേണ്ടത് എന്താണെന്ന് നിർണ്ണയിക്കുന്നതിന് നിങ്ങളുടെ സ്‌ക്രീനിൽ ഉള്ളത് ഉപയോഗിക്കുന്നു."</string>
     <string name="device_theme" msgid="4571803018917608588">"ഉപകരണത്തിന്റെ തീം"</string>
     <string name="default_theme" msgid="7085644992078579076">"ഡിഫോൾട്ട്"</string>
+    <string name="show_operator_name_title" msgid="805135053530442951">"നെറ്റ്‌വർക്കിന്‍റെ പേര്"</string>
+    <string name="show_operator_name_summary" msgid="5962567590205757550">"സ്‌റ്റാറ്റസ് ബാറിൽ നെറ്റ്‍വര്‍ക്കിന്‍റെ പേര് പ്രദര്‍ശിപ്പിക്കുക"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"സ്റ്റോറേജ് മാനേജര്‍: <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"ഓഫ്"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"ഓൺ"</string>
@@ -3733,4 +3761,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"നിങ്ങളുടെ ‌പുതിയ ‌ടാബ്‌ലെറ്റിനെ അറിയുക‌"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"നിങ്ങളുടെ പുതിയ ഉപകരണത്തെ അറിയുക"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ഈ ഫീച്ചർ ഈ ഉപകരണത്തിൽ ലഭ്യമല്ല"</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (3135751504042445872) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (1669257168039506151) -->
+    <skip />
 </resources>
