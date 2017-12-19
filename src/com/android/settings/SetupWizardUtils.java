@@ -48,11 +48,16 @@ public class SetupWizardUtils {
     }
 
     public static int getTransparentTheme(Intent intent) {
-        if (WizardManagerHelper.isLightTheme(intent, true)) {
-            return R.style.SetupWizardTheme_Light_Transparent;
-        } else {
-            return R.style.SetupWizardTheme_Transparent;
+        final int suwTheme = getTheme(intent);
+        int wifiDialogTheme = R.style.GlifV2Theme_Light_Transparent;
+        if (suwTheme == R.style.GlifV2Theme) {
+            wifiDialogTheme = R.style.GlifV2Theme_Transparent;
+        } else if (suwTheme == R.style.GlifTheme_Light) {
+            wifiDialogTheme = R.style.SetupWizardTheme_Light_Transparent;
+        } else if (suwTheme == R.style.GlifTheme) {
+            wifiDialogTheme = R.style.SetupWizardTheme_Transparent;
         }
+        return wifiDialogTheme;
     }
 
     public static void copySetupExtras(Intent fromIntent, Intent toIntent) {
