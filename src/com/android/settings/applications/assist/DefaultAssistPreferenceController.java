@@ -26,6 +26,7 @@ import android.service.voice.VoiceInteractionServiceInfo;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.app.AssistUtils;
+import com.android.settings.R;
 import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
 
@@ -73,7 +74,7 @@ public class DefaultAssistPreferenceController extends DefaultAppPreferenceContr
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_assist_and_voice_input);
     }
 
     @Override

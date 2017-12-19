@@ -50,6 +50,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -62,23 +63,30 @@ public class DefaultAssistPreferenceControllerTest {
     private static final String TEST_KEY = "test_pref_key";
 
     @Mock
-    private Context mContext;
-    @Mock
     private SearchManager mSearchManager;
     @Mock
     private PackageManager mPackageManager;
+
+    private Context mContext;
     private DefaultAssistPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mController = new DefaultAssistPreferenceController(mContext, TEST_KEY,
                 true /* showSetting */);
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void testAssistAndVoiceInput_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testAssistAndVoiceInput_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -91,7 +99,8 @@ public class DefaultAssistPreferenceControllerTest {
     @Config(shadows = {ShadowSecureSettings.class})
     public void getDefaultAppInfo_hasDefaultAssist_shouldReturnKey() {
         final String flattenKey = "com.android.settings/assist";
-        Settings.Secure.putString(null, Settings.Secure.ASSISTANT, flattenKey);
+        Settings.Secure.putString(mContext.getContentResolver(), Settings.Secure.ASSISTANT,
+                flattenKey);
         DefaultAppInfo appInfo = mController.getDefaultAppInfo();
 
         assertThat(appInfo.getKey()).isEqualTo(flattenKey);
