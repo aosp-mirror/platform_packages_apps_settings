@@ -1336,6 +1336,9 @@
     <!-- Error shown when in PIN mode and PIN has been used recently. Please keep this string short! -->
     <string name="lockpassword_pin_recently_used">Device admin doesn\'t allow using a recent PIN</string>
 
+    <!-- Error shown when a user is choosing a PIN for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PIN that's less common and more complicated. -->
+    <string name="lockpassword_pin_blacklisted_by_admin">Common PINs are blocked by your IT admin. Try a different PIN.</string>
+
     <!-- Error shown when in PASSWORD mode and user enters an invalid character -->
     <string name="lockpassword_illegal_character">This can\'t include an invalid character</string>
 
@@ -1387,6 +1390,9 @@
     <!-- Error shown when in PASSWORD mode and password has been used recently. Please keep this string short! -->
     <string name="lockpassword_password_recently_used">Device admin doesn\'t allow using a recent
         password</string>
+
+    <!-- Error shown when a user is choosing a PASSWORD for their work phone, but what they suggest is blocked by their company's IT administrator. The user should try another PASSWORD that's less common and more complicated. -->
+    <string name="lockpassword_password_blacklisted_by_admin">Common passwords are blocked by your IT admin. Try a different password.</string>
 
     <!-- [CHAR_LIMIT=NONE] Error shown when the user tries to set an ascending or descending sequence of digits -->
     <string name="lockpassword_pin_no_sequential_digits">Ascending, descending, or repeated sequence
