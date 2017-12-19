@@ -45,6 +45,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
@@ -55,17 +56,17 @@ import java.util.Arrays;
 public class DefaultHomePreferenceControllerTest {
 
     @Mock
-    private Context mContext;
-    @Mock
     private UserManager mUserManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PackageManagerWrapper mPackageManager;
 
+    private Context mContext;
     private DefaultHomePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mController = spy(new DefaultHomePreferenceController(mContext));
@@ -73,8 +74,14 @@ public class DefaultHomePreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void testDefaultHome_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testDefaultHome_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
