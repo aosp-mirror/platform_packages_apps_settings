@@ -169,6 +169,12 @@
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"向其他裝置顯示為「<xliff:g id="DEVICE_NAME">^1</xliff:g>」"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"你的裝置"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"配對新裝置"</string>
+    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"允許裝置與藍牙裝置配對並建立連線"</string>
+    <string name="connected_device_connected_title" msgid="5871712271201945606">"目前已連線的裝置"</string>
+    <string name="connected_device_saved_title" msgid="688364359746674536">"已儲存的裝置"</string>
+    <string name="connected_device_add_device_title" msgid="7803521577708810621">"新增裝置"</string>
+    <string name="connected_device_add_device_summary" msgid="5514219577320066914">"系統將開啟藍牙以啟用配對功能"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"連線偏好設定"</string>
     <string name="date_and_time" msgid="9062980487860757694">"日期和時間"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"選擇時區"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -626,7 +632,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"如要與下列裝置配對：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;請確認該裝置是否顯示下列密碼金鑰：&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"來自：&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;要與這個裝置配對嗎？"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"如要與 <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> 配對，請輸入：<xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>，然後按下 [返回] 或 [輸入]。"</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"允許「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」存取你的聯絡人和通話紀錄"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"允許存取你的聯絡人和通話紀錄"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"無法連線至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"掃描裝置"</string>
@@ -1147,21 +1153,17 @@
     <string name="storage_settings_title" msgid="8746016738388094064">"儲存設定"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"卸載 USB 儲存裝置、查看可用的儲存空間"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"卸載 SD 卡，檢視可用儲存媒體。"</string>
-    <!-- no translation found for imei_multi_sim (6387012961838800539) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (SIM 卡插槽 %1$d)"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5948892105546651296">"電話號碼"</string>
-    <!-- no translation found for status_number_sim_slot (2755592991367858860) -->
-    <skip />
-    <!-- no translation found for status_number_sim_slot (1898212200138025729) -->
-    <skip />
+    <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (SIM 卡插槽 %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"電話號碼 (SIM 卡插槽 %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"SIM 卡上的 MDN"</string>
     <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"SIM 卡上的電話號碼"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"PRL 版本"</string>
-    <!-- no translation found for meid_multi_sim (748999971744491771) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="748999971744491771">"MEID (SIM 卡插槽 %1$d)"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"行動網路類型"</string>
@@ -1858,6 +1860,8 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"更新應用程式轉場後的螢幕放大設定"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按電源鍵結束通話"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大型滑鼠游標"</string>
+    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
+    <skip />
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"單聲道音訊"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"播放音訊時合併聲道"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"輕觸並按住的延遲時間"</string>
@@ -2128,7 +2132,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android 作業系統"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"媒體伺服器"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"應用程式最佳化"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"節約耗電量模式"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"節約耗電量"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"自動開啟"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"永遠不要"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"電量為 <xliff:g id="PERCENT">%1$s</xliff:g> 時"</string>
@@ -2731,8 +2735,7 @@
     <string name="color_purple" msgid="3888532466427762504">"紫色"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"尚未插入 SIM 卡"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"SIM 卡狀態"</string>
-    <!-- no translation found for sim_status_title_sim_slot (5725659316463979194) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"SIM 卡狀態 (SIM 卡插槽 %1$d)"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"使用預設 SIM 卡回撥"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"用於撥出電話的 SIM 卡"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"其他通話設定"</string>
@@ -2746,8 +2749,7 @@
     <string name="sim_pref_divider" msgid="6778907671867621874">"適用於以下用途的偏好 SIM 卡"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"每次都詢問"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"請選取偏好設定"</string>
-    <!-- no translation found for sim_selection_channel_title (2760909074892782589) -->
-    <skip />
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"SIM 卡選項"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"設定"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="other">顯示 %d 個隱藏項目</item>
@@ -2814,14 +2816,10 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"支付、輕觸、付款"</string>
     <string name="keywords_backup" msgid="470070289135403022">"備份內容, 備份"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"手勢"</string>
-    <!-- no translation found for keywords_imei_info (7230982940217544527) -->
-    <skip />
-    <!-- no translation found for keywords_sim_status (1474422416860990564) -->
-    <skip />
-    <!-- no translation found for keywords_model_and_hardware (1459248377212829642) -->
-    <skip />
-    <!-- no translation found for keywords_android_version (5591055570309015111) -->
-    <skip />
+    <string name="keywords_imei_info" msgid="7230982940217544527">"IMEI、MEID、MIN、PRL 版本、IMEI SV"</string>
+    <string name="keywords_sim_status" msgid="1474422416860990564">"網路、行動網路狀態、服務狀態、訊號強度、行動網路類型、漫遊、ICCID"</string>
+    <string name="keywords_model_and_hardware" msgid="1459248377212829642">"序號、硬體版本"</string>
+    <string name="keywords_android_version" msgid="9069747153590902819">"Android 安全性修補程式等級、基頻版本、核心版本"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"設定 Wi-Fi NFC 標記"</string>
     <string name="write_tag" msgid="8571858602896222537">"寫入"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"輕觸標記即可寫入..."</string>
@@ -2868,11 +2866,12 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"行為"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"只允許下列類型的音效與震動："</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"不發出音效"</string>
-    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"不發出音效 (完全靜音)"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"完全靜音"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"除了<xliff:g id="CATEGORIES">%1$s</xliff:g>以外一律不發出音效"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2423480992071472963">"除了鬧鐘、媒體和系統以外一律不發出音效 (僅限鬧鐘)"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"除了鬧鐘和媒體以外一律不發出音效"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"自動開啟"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"自動規則"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"自動規則"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"設定「零打擾」規則"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"在特定時間禁用音效和震動"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"僅限優先通知"</string>
@@ -2882,20 +2881,12 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"封鎖視覺干擾"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"允許視覺信號"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"新增"</string>
-    <!-- no translation found for zen_mode_button_turn_on (5074744714613374902) -->
-    <skip />
-    <!-- no translation found for zen_mode_button_turn_off (1995551537320422792) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_manual_end_time_next_day (3090599225533484203) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_manual_indefinite (2746903915016850399) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule (3856133183910726786) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule_app (7112871101701453067) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule_multiple (5792308957602984360) -->
-    <skip />
+    <string name="zen_mode_button_turn_on" msgid="5074744714613374902">"立即開啟"</string>
+    <string name="zen_mode_button_turn_off" msgid="1995551537320422792">"立即關閉"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"零打擾模式結束時間：<xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"零打擾模式會保持開啟，直到你關閉為止"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="7780048616476170427">"規則 (<xliff:g id="RULE_NAME">%s</xliff:g>) 已將零打擾模式自動開啟"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"應用程式 (<xliff:g id="APP_NAME">%s</xliff:g>) 已將零打擾模式自動開啟"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Work 設定檔音效"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"使用個人設定檔音效"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Work 設定檔和個人設定檔使用相同的音效"</string>
@@ -3032,6 +3023,9 @@
     <string name="zen_mode_rule_type" msgid="2289413469580142888">"規則類型"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"不明"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"設定規則"</string>
+    <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"目前無法變更這些設定。應用程式 (<xliff:g id="APP_NAME">%1$s</xliff:g>) 已依自訂行為將零打擾模式自動開啟。"</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"目前無法變更這些設定。應用程式已依自訂行為將零打擾模式自動開啟。"</string>
+    <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"目前無法變更這些設定。使用者已依自訂行為將零打擾模式手動開啟。"</string>
     <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"時間"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"可在指定時間開啟「零打擾」設定的自動規則集"</string>
     <string name="zen_event_rule_type_name" msgid="6503468472212606158">"活動"</string>
@@ -3065,13 +3059,16 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"來自已加星號的聯絡人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"無"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"鬧鐘"</string>
-    <string name="zen_mode_media_system_other" msgid="8900209390529859777">"媒體和系統音效"</string>
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"媒體"</string>
+    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活動"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有來電者"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"所選來電者"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"重複來電者"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"如果同一個人在 <xliff:g id="MINUTES">%d</xliff:g> 分鐘的時間內第二次來電"</string>
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"自訂"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自動開啟"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永遠不要"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>
@@ -3735,7 +3732,7 @@
     <string name="storage_other_apps" msgid="5524321740031718083">"其他應用程式"</string>
     <string name="storage_files" msgid="8581083146777364063">"檔案"</string>
     <string name="storage_size_large_alternate" msgid="3550744227788333060">"<xliff:g id="NUMBER">^1</xliff:g>"<small>" <xliff:g id="UNIT">^2</xliff:g>"</small>""</string>
-    <string name="storage_volume_total" msgid="3499221850532701342">"總儲存空間：<xliff:g id="TOTAL">%1$s</xliff:g>"</string>
+    <string name="storage_volume_total" msgid="3499221850532701342">"(總儲存空間：<xliff:g id="TOTAL">%1$s</xliff:g>)"</string>
     <string name="storage_percent_full" msgid="6095012055875077036">"已使用"</string>
     <string name="clear_instant_app_data" msgid="2004222610585890909">"清除應用程式"</string>
     <string name="clear_instant_app_confirmation" msgid="7451671214898856857">"要移除這個免安裝應用程式嗎？"</string>
@@ -3764,4 +3761,6 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"認識你的新平板電腦"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"認識你的新裝置"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"這個裝置不支援此功能"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"強制啟用完整 GnssMeasurement"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"停用 GNSS 工作週期，追蹤所有群集和頻率。"</string>
 </resources>

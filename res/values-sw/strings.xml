@@ -169,6 +169,12 @@
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Inaonekana kama \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' kwenye vifaa vingine"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Vifaa vyako"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Oanisha kifaa kipya"</string>
+    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"Ruhusu kifaa kuoanisha na kuunganisha kwenye vifaa vya Bluetooth"</string>
+    <string name="connected_device_connected_title" msgid="5871712271201945606">"Kwa sasa imeunganishwa"</string>
+    <string name="connected_device_saved_title" msgid="688364359746674536">"Vifaa vilivyohifadhiwa"</string>
+    <string name="connected_device_add_device_title" msgid="7803521577708810621">"Ongeza kifaa"</string>
+    <string name="connected_device_add_device_summary" msgid="5514219577320066914">"Bluetooth itawaka ili ianze kuoanisha"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Mapendeleo ya muunganisho"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Tarehe na saa"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Chagua saa za eneo"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -626,7 +632,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Ili kuoanisha na :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;hakikisha inaonyesha nenosiri hili:&lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt;"</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"From:&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Llinganisha na kifaa hiki?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Kulinganisha na: <xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="DEVICE_NAME">%1$s</xliff:g> <xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g> Andika: <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g> <xliff:g id="PASSKEY">%2$s</xliff:g> <xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, kisha bonyeza Rejea au Ingiza."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Ruhusu <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ifikie anwani zako na rekodi ya simu"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Ruhusu ufikiaji wa anwani na historia ya simu ulizopiga"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Haikuweza kuunganisha kwa <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Chunguza vifaa"</string>
@@ -1147,21 +1153,17 @@
     <string name="storage_settings_title" msgid="8746016738388094064">"Hifadhi mipangilio"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Ondoa hifadhi ya USB, angalia hifadhi inayopatikana"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Ondoa SIM kadi, angalia hifadhi iliyopo"</string>
-    <!-- no translation found for imei_multi_sim (6387012961838800539) -->
-    <skip />
+    <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (nafasi ya sim ya %1$d)"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
     <string name="status_number" product="default" msgid="5948892105546651296">"Nambari ya simu"</string>
-    <!-- no translation found for status_number_sim_slot (2755592991367858860) -->
-    <skip />
-    <!-- no translation found for status_number_sim_slot (1898212200138025729) -->
-    <skip />
+    <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (nafasi ya sim ya %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Nambari ya simu (nafasi ya sim ya %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN kwenye SIM"</string>
     <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"Nambari ya simu kwenye SIM"</string>
     <string name="status_min_number" msgid="3519504522179420597">"NDOGO"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"Toleo la PRL"</string>
-    <!-- no translation found for meid_multi_sim (748999971744491771) -->
-    <skip />
+    <string name="meid_multi_sim" msgid="748999971744491771">"MEID (nafasi ya sim ya %1$d)"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Aina ya mtandao wa simu ya mkononi"</string>
@@ -1858,6 +1860,8 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Sasisha ukuzaji wa skrini kwenye mipito ya  programu"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Kata simu kwa kitufe cha kuwasha/kuzima"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Kielekezi kikubwa cha kipanya"</string>
+    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
+    <skip />
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Sauti ya mono"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Changanya vituo wakati wa kucheza sauti"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Muda wa kugusa na kushikilia"</string>
@@ -2128,7 +2132,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"OS ya Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Seva ya media"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Uboreshaji wa programu"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"Kiokoa betri"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"Kiokoa Betri"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Kujiwasha kiotomatiki"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Kisiwahi kujiwasha"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"chaji ya betri ikiwa <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2504,7 +2508,7 @@
     <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"Tayari umeunganisha kwenye VPN ambayo imewashwa kila mara. Ikiwa utaunganisha kwenye programu tofauti, programu hiyo itaondoa VPN iliyopo na kuzima hali ya imewashwa kila mara."</string>
     <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"Tayari umeunganisha kwenye VPN. Ikiwa utaunganisha kwenye programu tofauti, programu hiyo itaondoa VPN iliyopo."</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"Washa"</string>
-    <string name="vpn_cant_connect_title" msgid="4517706987875907511">"Haiwezi kuunganisha <xliff:g id="VPN_NAME">%1$s</xliff:g>"</string>
+    <string name="vpn_cant_connect_title" msgid="4517706987875907511">"<xliff:g id="VPN_NAME">%1$s</xliff:g> imeshindwa kuunganisha"</string>
     <string name="vpn_cant_connect_message" msgid="1352832123114214283">"Programu hii haitumii VPN iliyo katika hali ya kuwaka kila mara"</string>
     <string name="vpn_title" msgid="6317731879966640551">"VPN"</string>
     <string name="vpn_create" msgid="5628219087569761496">"Ongeza wasifu wa VPN"</string>
@@ -2727,8 +2731,7 @@
     <string name="color_purple" msgid="3888532466427762504">"Zambarau"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Hakuna SIM kadi zilizoingizwa"</string>
     <string name="sim_status_title" msgid="6744870675182447160">"Hali ya SIM"</string>
-    <!-- no translation found for sim_status_title_sim_slot (5725659316463979194) -->
-    <skip />
+    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"Hali ya SIM (nafasi ya sim ya %1$d)"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Piga simu kwa kutumia SIM kadi chaguo-msingi"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"SIM ya kutumia kupiga simu"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Mipangilio mingine ya simu"</string>
@@ -2742,8 +2745,7 @@
     <string name="sim_pref_divider" msgid="6778907671867621874">"SIM inayopendelewa kwa"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Uliza kila wakati"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Uteuzi unahitajika"</string>
-    <!-- no translation found for sim_selection_channel_title (2760909074892782589) -->
-    <skip />
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"Uteuzi wa SIM"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Mipangilio"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="other">Onyesha vipengee %d vilivyofichwa</item>
@@ -2810,14 +2812,10 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"lipa, gusa, malipo"</string>
     <string name="keywords_backup" msgid="470070289135403022">"hifadhi rudufu, hifadhi nakala"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"ishara"</string>
-    <!-- no translation found for keywords_imei_info (7230982940217544527) -->
-    <skip />
-    <!-- no translation found for keywords_sim_status (1474422416860990564) -->
-    <skip />
-    <!-- no translation found for keywords_model_and_hardware (1459248377212829642) -->
-    <skip />
-    <!-- no translation found for keywords_android_version (5591055570309015111) -->
-    <skip />
+    <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, toleo la prl, imei sv"</string>
+    <string name="keywords_sim_status" msgid="1474422416860990564">"mtandao, hali ya mtandao wa simu, hali ya huduma, uthabiti wa mtandao, aina ya mtandao wa simu, matumizi ya mitandao mingine, iccid"</string>
+    <string name="keywords_model_and_hardware" msgid="1459248377212829642">"nambari ya ufuatiliaji, toleo la maunzi"</string>
+    <string name="keywords_android_version" msgid="9069747153590902819">"kiwango cha rekebisho la usalama wa android, toleo la mitambo ya redio, toleo la kiini"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Sanidi tagi ya NFC ya Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Andika"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Gusa tagi ya NFC ili uandike..."</string>
@@ -2864,11 +2862,12 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"Tabia"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Ruhusu sauti na mitetemo kutoka"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Hakuna sauti"</string>
-    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"Hakuna sauti (Kimya Kabisa)"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Kimya Kabisa"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Hakuna sauti ila <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="2423480992071472963">"Inaruhusu tu sauti za kengele, maudhui na mfumo (Kengele pekee)"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Sauti za kengele na maudhui pekee"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"Washa kiotomatiki"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"Sheria otomatiki"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"Amri ya kiotomatiki"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Weka sheria za Usinisumbue"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Dhibiti sauti na mitetemo wakati fulani"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Kipaumbele tu"</string>
@@ -2878,20 +2877,12 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Zuia ukatizaji wa maonyesho"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Ruhusu ishara zinazoonekena"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Ongeza"</string>
-    <!-- no translation found for zen_mode_button_turn_on (5074744714613374902) -->
-    <skip />
-    <!-- no translation found for zen_mode_button_turn_off (1995551537320422792) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_manual_end_time_next_day (3090599225533484203) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_manual_indefinite (2746903915016850399) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule (3856133183910726786) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule_app (7112871101701453067) -->
-    <skip />
-    <!-- no translation found for zen_mode_settings_dnd_automatic_rule_multiple (5792308957602984360) -->
-    <skip />
+    <string name="zen_mode_button_turn_on" msgid="5074744714613374902">"WASHA SASA"</string>
+    <string name="zen_mode_button_turn_off" msgid="1995551537320422792">"ZIMA SASA"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"Kipengele cha Usinisumbue kitaendelea kutumika hadi <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"Kipengele cha Usinisumbue kitaendelea kutumika hadi utakapokizima"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="7780048616476170427">"Kipengele cha Usinisumbue kimewashwa kiotomatiki na amri ya (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Kipengele cha Usinisumbue kimewashwa kiotomatiki na programu ya (<xliff:g id="APP_NAME">%s</xliff:g>)"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sauti za wasifu wa kazi"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Tumia sauti za wasifu wako binafsi"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Sauti za wasifu wa binafsi na wa kazini ni sawa"</string>
@@ -3028,6 +3019,9 @@
     <string name="zen_mode_rule_type" msgid="2289413469580142888">"Aina ya sheria"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Isiyojulikana"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Sanidi sheria"</string>
+    <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Huwezi kubadilisha mipangilio hii sasa hivi. Programu (<xliff:g id="APP_NAME">%1$s</xliff:g>) imewasha kiotomatiki hali ya Usinisumbue yenye shughuli maalum."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Huwezi kubadilisha mipangilio hii sasa hivi. Programu imewasha kiotomatiki hali ya Usinisumbue yenye shughuli maalum."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Huwezi kubadilisha mipangilio hii sasa hivi. Mtu aliwasha Hali ya Usinisumbue yenye shughuli maalum."</string>
     <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Saa"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Sheria ya kiotomatiki imewekwa kuwasha kipengee cha Usinisumbue katika nyakati maalum"</string>
     <string name="zen_event_rule_type_name" msgid="6503468472212606158">"Tukio"</string>
@@ -3061,13 +3055,16 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Kutoka kwa anwani zenye nyota pekee"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Hamna"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Kengele"</string>
-    <string name="zen_mode_media_system_other" msgid="8900209390529859777">"Sauti za mfumo na maudhui"</string>
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Maudhui"</string>
+    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Vikumbusho"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Matukio"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Wapiga simu wote"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Wale uliowachagua"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Wanaorudia kupiga simu"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Mtu yule yule akipiga simu mara ya pili katika kipindi cha dakika <xliff:g id="MINUTES">%d</xliff:g>"</string>
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"Maalum"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Washa kiotomatiki"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Katu"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Kila usiku"</string>
@@ -3760,4 +3757,6 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Kagua kompyuta yako kibao mpya"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Kagua kifaa chako kipya"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Kipengele hiki hakipatikani kwenye kifaa hiki"</string>
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Lazimisha GnssMeasurement Kamili"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Zima muda wa utendakazi wa GNSS, fuatilia mikusanyiko na mawimbi yote."</string>
 </resources>
