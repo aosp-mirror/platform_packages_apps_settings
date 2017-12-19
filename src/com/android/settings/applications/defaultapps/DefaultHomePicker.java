@@ -18,6 +18,7 @@ package com.android.settings.applications.defaultapps;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -110,6 +111,14 @@ public class DefaultHomePicker extends DefaultAppPickerFragment {
                     IntentFilter.MATCH_CATEGORY_EMPTY,
                     allComponents.toArray(new ComponentName[0]),
                     component);
+
+            // Launch the new Home app so the change is immediately visible even if
+            // the Home button is not pressed.
+            final Context context = getContext();
+            Intent i = new Intent(Intent.ACTION_MAIN);
+            i.addCategory(Intent.CATEGORY_HOME);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(i);
             return true;
         }
         return false;

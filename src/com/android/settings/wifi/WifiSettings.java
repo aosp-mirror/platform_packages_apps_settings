@@ -881,7 +881,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             SettingsActivity activity = (SettingsActivity) WifiSettings.this.getActivity();
             activity.startPreferencePanel(this,
                     WifiNetworkDetailsFragment.class.getName(), pref.getExtras(),
-                    R.string.wifi_details_title, null, null, 0);
+                    -1 /* resId */, pref.getTitle(), null, 0 /* resultRequestCode */);
         });
 
         pref.refresh();

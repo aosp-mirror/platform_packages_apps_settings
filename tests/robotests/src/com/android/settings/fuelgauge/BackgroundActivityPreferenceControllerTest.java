@@ -41,6 +41,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowFragment;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
 import org.junit.Before;
 import org.junit.Test;
