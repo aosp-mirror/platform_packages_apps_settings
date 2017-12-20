@@ -20,6 +20,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.R;
 import com.android.settings.widget.SummaryUpdater;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.MasterSwitchController;
@@ -56,7 +57,7 @@ public class WifiMasterSwitchPreferenceController extends AbstractPreferenceCont
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_wifi_settings);
     }
 
     @Override
