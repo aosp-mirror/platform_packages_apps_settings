@@ -54,6 +54,8 @@ import java.util.Set;
 public class UniquePreferenceTest {
 
     private static final String TAG = "UniquePreferenceTest";
+    private static final List<String> IGNORE_PREF_TYPES = Arrays.asList(
+            "com.android.settingslib.widget.FooterPreference");
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
             "Preference", "PreferenceCategory", "PreferenceScreen");
     private static final List<String> WHITELISTED_DUPLICATE_KEYS = Arrays.asList(
@@ -63,8 +65,15 @@ public class UniquePreferenceTest {
                                             // should be formed as one single xml and this entry
                                             // should be removed.
 
-            "dashboard_tile_placeholder"    // This is the placeholder pref for injecting dynamic
+            "dashboard_tile_placeholder",   // This is the placeholder pref for injecting dynamic
                                             // tiles.
+            // Dup keys from connected device page experiment.
+            "usb_mode",
+            "connected_devices_screen",
+            "toggle_bluetooth",
+            "toggle_nfc",
+            "android_beam_settings",
+            "sms_mirroring"
     );
 
     private Context mContext;
@@ -158,6 +167,9 @@ public class UniquePreferenceTest {
                     continue;
                 }
                 final String nodeName = parser.getName();
+                if (IGNORE_PREF_TYPES.contains(nodeName)) {
+                    continue;
+                }
                 if (!SUPPORTED_PREF_TYPES.contains(nodeName) && !nodeName.endsWith("Preference")) {
                     continue;
                 }

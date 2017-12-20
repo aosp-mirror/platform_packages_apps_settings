@@ -20,8 +20,10 @@ package com.android.settings.search;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
+import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FakeIndexProvider implements Indexable {
@@ -33,7 +35,11 @@ public class FakeIndexProvider implements Indexable {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
                         boolean enabled) {
-                    return null;
+                    List<SearchIndexableResource> resources = new ArrayList<>();
+                    SearchIndexableResource res = new SearchIndexableResource(context);
+                    res.xmlResId = R.xml.location_settings;
+                    resources.add(res);
+                    return resources;
                 }
 
                 @Override
@@ -44,7 +50,8 @@ public class FakeIndexProvider implements Indexable {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
                     return null;
                 }
             };

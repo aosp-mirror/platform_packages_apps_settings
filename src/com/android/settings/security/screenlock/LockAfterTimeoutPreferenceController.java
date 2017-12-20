@@ -32,6 +32,7 @@ import com.android.settings.TimeoutListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.security.trustagent.TrustAgentManager;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -43,14 +44,14 @@ public class LockAfterTimeoutPreferenceController extends AbstractPreferenceCont
     private final int mUserId;
     private final LockPatternUtils mLockPatternUtils;
     private final TrustAgentManager mTrustAgentManager;
-    private final DevicePolicyManager mDPM;
+    private final DevicePolicyManagerWrapper mDPM;
 
     public LockAfterTimeoutPreferenceController(Context context, int userId,
             LockPatternUtils lockPatternUtils) {
         super(context);
         mUserId = userId;
         mLockPatternUtils = lockPatternUtils;
-        mDPM = context.getSystemService(DevicePolicyManager.class);
+        mDPM = DevicePolicyManagerWrapper.from(context);
         mTrustAgentManager = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider().getTrustAgentManager();
     }

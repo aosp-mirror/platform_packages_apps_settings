@@ -48,6 +48,8 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.security.SecurityFeatureProviderImpl;
+import com.android.settings.slices.SlicesFeatureProvider;
+import com.android.settings.slices.SlicesFeatureProviderImpl;
 import com.android.settings.users.UserFeatureProvider;
 import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
@@ -75,6 +77,7 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
     private DataPlanFeatureProvider mDataPlanFeatureProvider;
     private SmsMirroringFeatureProvider mSmsMirroringFeatureProvider;
+    private SlicesFeatureProvider mSlicesFeatureProvider;
 
     @Override
     public SupportFeatureProvider getSupportFeatureProvider(Context context) {
@@ -207,5 +210,13 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mSmsMirroringFeatureProvider = new SmsMirroringFeatureProviderImpl();
         }
         return mSmsMirroringFeatureProvider;
+    }
+
+    @Override
+    public SlicesFeatureProvider getSlicesFeatureProvider() {
+        if (mSlicesFeatureProvider == null) {
+            mSlicesFeatureProvider = new SlicesFeatureProviderImpl();
+        }
+        return mSlicesFeatureProvider;
     }
 }

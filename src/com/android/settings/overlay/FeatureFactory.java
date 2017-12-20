@@ -34,6 +34,7 @@ import com.android.settings.gestures.AssistGestureFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
 import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
 
 /**
@@ -105,6 +106,8 @@ public abstract class FeatureFactory {
     public abstract DataPlanFeatureProvider getDataPlanFeatureProvider();
 
     public abstract SmsMirroringFeatureProvider getSmsMirroringFeatureProvider();
+
+    public abstract SlicesFeatureProvider getSlicesFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
