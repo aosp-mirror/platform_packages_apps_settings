@@ -32,6 +32,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class RecentLocationRequestPreferenceController extends LocationBasePreferenceController {
@@ -107,15 +108,17 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
 
         final Context prefContext = preference.getContext();
         final List<RecentLocationApps.Request> recentLocationRequests =
-                mRecentLocationApps.getAppList();
+                mRecentLocationApps.getAppListSorted();
 
         final List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
         for (final RecentLocationApps.Request request : recentLocationRequests) {
             recentLocationPrefs.add(createAppPreference(prefContext, request));
         }
         if (recentLocationRequests.size() > 0) {
-            LocationSettings.addPreferencesSorted(
-                    recentLocationPrefs, mCategoryRecentLocationRequests);
+            // Add preferences to container in original order (already sorted by recency).
+            for (Preference entry : recentLocationPrefs) {
+                mCategoryRecentLocationRequests.addPreference(entry);
+            }
         } else {
             // If there's no item to display, add a "No recent apps" item.
             final Preference banner = createAppPreference(prefContext);
