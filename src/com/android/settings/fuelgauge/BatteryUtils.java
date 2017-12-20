@@ -17,8 +17,13 @@ package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.Bundle;
 import android.os.Build;
@@ -28,6 +33,7 @@ import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
+import android.support.annotation.WorkerThread;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.util.SparseLongArray;
@@ -73,6 +79,7 @@ public class BatteryUtils {
 
     private PackageManager mPackageManager;
     private AppOpsManager mAppOpsManager;
+    private Context mContext;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
@@ -85,6 +92,7 @@ public class BatteryUtils {
 
     @VisibleForTesting
     BatteryUtils(Context context) {
+        mContext = context.getApplicationContext();
         mPackageManager = context.getPackageManager();
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
         mPowerUsageFeatureProvider = FeatureFactory.getFactory(
@@ -386,6 +394,44 @@ public class BatteryUtils {
         statsHelper.create(bundle);
         statsHelper.clearStats();
         statsHelper.refreshStats(BatteryStats.STATS_SINCE_CHARGED, userManager.getUserProfiles());
+    }
+
+    @WorkerThread
+    public BatteryInfo getBatteryInfo(final BatteryStatsHelper statsHelper, final String tag) {
+        final long startTime = System.currentTimeMillis();
+
+        // Stuff we always need to get BatteryInfo
+        final Intent batteryBroadcast = mContext.registerReceiver(null,
+                new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        final long elapsedRealtimeUs = BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+        BatteryInfo batteryInfo;
+
+        // 0 means we are discharging, anything else means charging
+        final boolean discharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
+                == 0;
+        // Get enhanced prediction if available and discharging, otherwise use the old code
+        Cursor cursor = null;
+        if (discharging && mPowerUsageFeatureProvider != null &&
+                mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
+            final Uri queryUri = mPowerUsageFeatureProvider.getEnhancedBatteryPredictionUri();
+            cursor = mContext.getContentResolver().query(queryUri, null, null, null, null);
+        }
+        final BatteryStats stats = statsHelper.getStats();
+        BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
+        if (cursor != null && cursor.moveToFirst()) {
+            long enhancedEstimate = mPowerUsageFeatureProvider.getTimeRemainingEstimate(cursor);
+            batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
+                    elapsedRealtimeUs, false /* shortString */,
+                    BatteryUtils.convertMsToUs(enhancedEstimate), true /* basedOnUsage */);
+        } else {
+            batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
+                    elapsedRealtimeUs, false /* shortString */,
+                    discharging ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0,
+                    false /* basedOnUsage */);
+        }
+        BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
+
+        return batteryInfo;
     }
 
     private boolean isDataCorrupted() {
