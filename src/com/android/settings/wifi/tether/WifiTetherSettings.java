@@ -48,6 +48,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
 
     private static final String TAG = "WifiTetherSettings";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
+    private static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
 
     private WifiTetherSwitchBarController mSwitchBarController;
     private WifiTetherSSIDPreferenceController mSSIDPreferenceController;
@@ -133,6 +134,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(mSSIDPreferenceController);
         controllers.add(mPasswordPreferenceController);
         controllers.add(mApBandPreferenceController);
+        controllers.add(
+                new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
         return controllers;
     }
 

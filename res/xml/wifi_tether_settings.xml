@@ -17,7 +17,9 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/wifi_hotspot_checkbox_text">
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/wifi_hotspot_checkbox_text"
+    settings:initialExpandedChildrenCount="2">
 
     <com.android.settings.widget.ValidatedEditTextPreference
         android:key="wifi_tether_network_name"
@@ -27,6 +29,11 @@
     <com.android.settings.widget.ValidatedEditTextPreference
         android:key="wifi_tether_network_password"
         android:title="@string/wifi_hotspot_password_title" />
+
+    <SwitchPreference
+        android:key="wifi_tether_auto_turn_off"
+        android:title="@string/wifi_hotspot_auto_off_title"
+        android:summary="@string/wifi_hotspot_auto_off_summary"/>
 
     <ListPreference
         android:key="wifi_tether_network_ap_band"
