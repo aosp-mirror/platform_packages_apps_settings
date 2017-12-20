@@ -20,8 +20,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 /**
- * TODO (b/67996923) Add SlicesIndexingManager
- * Data class representing a slice stored by {@link SlicesIndexingManager}.
+ * Data class representing a slice stored by {@link SlicesIndexer}.
  * Note that {@link #key} is treated as a primary key for this class and determines equality.
  */
 public class SliceData {
@@ -171,10 +170,6 @@ public class SliceData {
 
             if (TextUtils.isEmpty(mPrefControllerClassName)) {
                 throw new IllegalStateException("Preference Controller cannot be empty");
-            }
-
-            if (mUri == null) {
-                throw new IllegalStateException("Uri cannot be null");
             }
 
             return new SliceData(this);

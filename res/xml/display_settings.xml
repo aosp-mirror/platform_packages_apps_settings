@@ -25,8 +25,7 @@
     <Preference
         android:key="brightness"
         android:title="@string/brightness"
-        settings:keywords="@string/keywords_display_brightness_level"
-        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController">
+        settings:keywords="@string/keywords_display_brightness_level">
     <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
     </Preference>
 
@@ -43,7 +42,8 @@
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
         settings:keywords="@string/keywords_display_auto_brightness"
-        android:summary="@string/auto_brightness_summary" />
+        android:summary="@string/auto_brightness_summary"
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
