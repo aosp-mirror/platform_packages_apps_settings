@@ -13,3 +13,6 @@ option java_package com.android.settings
 
 # log whether user uninstalled device admin on activation screen
 90203 exp_det_device_admin_uninstalled_by_user (app_signature|3)
+
+# log latency for settings UI events
+90204 settings_latency (action|1|6),(latency|1|3)
