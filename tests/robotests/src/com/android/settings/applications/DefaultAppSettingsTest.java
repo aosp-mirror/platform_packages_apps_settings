@@ -147,20 +147,19 @@ public class DefaultAppSettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = spy(RuntimeEnvironment.application);
-        final Context mockContext = mock(Context.class);
-        when(mockContext.getApplicationContext()).thenReturn(mockContext);
+        when(context.getApplicationContext()).thenReturn(context);
         final UserManager userManager = mock(UserManager.class, RETURNS_DEEP_STUBS);
 
-        when(mockContext.getSystemService(Context.USER_SERVICE))
+        when(context.getSystemService(Context.USER_SERVICE))
                 .thenReturn(userManager);
         when(userManager.getUserInfo(anyInt()).isRestricted()).thenReturn(true);
 
-        when(mockContext.getSystemService(Context.TELEPHONY_SERVICE))
+        when(context.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mock(TelephonyManager.class));
-        when(mockContext.getPackageManager())
+        when(context.getPackageManager())
                 .thenReturn(mock(PackageManager.class));
         final List<String> niks = DefaultAppSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mockContext);
+                .getNonIndexableKeys(context);
 
         final int xmlId = (new DefaultAppSettings()).getPreferenceScreenResId();
 
