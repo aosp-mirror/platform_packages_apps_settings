@@ -27,20 +27,16 @@ import com.android.settings.utils.ManagedServiceSettings;
 
 public class VrListenerSettings extends ManagedServiceSettings {
     private static final String TAG = VrListenerSettings.class.getSimpleName();
-    private static final Config CONFIG = getVrListenerConfig();
-
-    private static final Config getVrListenerConfig() {
-        final Config c = new Config();
-        c.tag = TAG;
-        c.setting = Settings.Secure.ENABLED_VR_LISTENERS;
-        c.intentAction = VrListenerService.SERVICE_INTERFACE;
-        c.permission = android.Manifest.permission.BIND_VR_LISTENER_SERVICE;
-        c.noun = "vr listener";
-        c.warningDialogTitle = R.string.vr_listener_security_warning_title;
-        c.warningDialogSummary = R.string.vr_listener_security_warning_summary;
-        c.emptyText = R.string.no_vr_listeners;
-        return c;
-    }
+    private static final Config CONFIG = new Config.Builder()
+            .setTag(TAG)
+            .setSetting(Settings.Secure.ENABLED_VR_LISTENERS)
+            .setIntentAction(VrListenerService.SERVICE_INTERFACE)
+            .setPermission(android.Manifest.permission.BIND_VR_LISTENER_SERVICE)
+            .setNoun("vr listener")
+            .setWarningDialogTitle(R.string.vr_listener_security_warning_title)
+            .setWarningDialogSummary(R.string.vr_listener_security_warning_summary)
+            .setEmptyText(R.string.no_vr_listeners)
+            .build();
 
     @Override
     protected Config getConfig() {
