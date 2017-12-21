@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.view.InputDevice;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -73,6 +74,11 @@ public class GameControllerPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
+        // If device explicitly wants to hide this, return early.
+        if (!mContext.getResources().getBoolean(R.bool.config_show_vibrate_input_devices)) {
+            return false;
+        }
+
         final int[] devices = mIm.getInputDeviceIds();
         for (int deviceId : devices) {
             InputDevice device = mIm.getInputDevice(deviceId);

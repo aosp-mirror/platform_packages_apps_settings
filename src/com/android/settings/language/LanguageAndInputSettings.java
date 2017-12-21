@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.speech.tts.TtsEngines;
@@ -40,6 +41,7 @@ import com.android.settings.inputmethod.PhysicalKeyboardPreferenceController;
 import com.android.settings.inputmethod.SpellCheckerPreferenceController;
 import com.android.settings.inputmethod.VirtualKeyboardPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -51,7 +53,10 @@ public class LanguageAndInputSettings extends DashboardFragment {
 
     private static final String TAG = "LangAndInputSettings";
 
+    private static final String KEY_KEYBOARDS_CATEGORY = "keyboards_category";
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
+    private static final String KEY_POINTER_AND_TTS_CATEGORY = "pointer_and_tts_category";
+    private static final String KEY_GAME_CONTROLLER_CATEGORY = "game_controller_settings_category";
     private static final String KEY_PHYSICAL_KEYBOARD = "physical_keyboard_pref";
 
     @Override
@@ -92,20 +97,45 @@ public class LanguageAndInputSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Language
         controllers.add(new PhoneLanguagePreferenceController(context));
-        controllers.add(new SpellCheckerPreferenceController(context));
-        controllers.add(new UserDictionaryPreferenceController(context));
-        controllers.add(new TtsPreferenceController(context, new TtsEngines(context)));
+
         // Input
-        controllers.add(new VirtualKeyboardPreferenceController(context));
-        controllers.add(new PhysicalKeyboardPreferenceController(context, lifecycle));
+        final VirtualKeyboardPreferenceController virtualKeyboardPreferenceController =
+                new VirtualKeyboardPreferenceController(context);
+        final PhysicalKeyboardPreferenceController physicalKeyboardPreferenceController =
+                new PhysicalKeyboardPreferenceController(context, lifecycle);
+        controllers.add(virtualKeyboardPreferenceController);
+        controllers.add(physicalKeyboardPreferenceController);
+        controllers.add(new PreferenceCategoryController(context,
+                KEY_KEYBOARDS_CATEGORY,
+                Arrays.asList(virtualKeyboardPreferenceController,
+                        physicalKeyboardPreferenceController)));
+
+        // Pointer and Tts
+        final TtsPreferenceController ttsPreferenceController =
+                new TtsPreferenceController(context, new TtsEngines(context));
+        controllers.add(ttsPreferenceController);
+        final PointerSpeedController pointerController = new PointerSpeedController(context);
+        controllers.add(pointerController);
+        controllers.add(new PreferenceCategoryController(context,
+                KEY_POINTER_AND_TTS_CATEGORY,
+                Arrays.asList(pointerController, ttsPreferenceController)));
+
+        // Input Assistance
+        controllers.add(new SpellCheckerPreferenceController(context));
+        controllers.add(new DefaultAutofillPreferenceController(context));
+        controllers.add(new UserDictionaryPreferenceController(context));
+
+        // Game Controller
         final GameControllerPreferenceController gameControllerPreferenceController
                 = new GameControllerPreferenceController(context);
         if (lifecycle != null) {
             lifecycle.addObserver(gameControllerPreferenceController);
         }
-
         controllers.add(gameControllerPreferenceController);
-        controllers.add(new DefaultAutofillPreferenceController(context));
+        controllers.add(new PreferenceCategoryController(context,
+                KEY_GAME_CONTROLLER_CATEGORY,
+                Arrays.asList(gameControllerPreferenceController)));
+
         return controllers;
     }
 

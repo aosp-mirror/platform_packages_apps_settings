@@ -18,6 +18,7 @@ package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -45,19 +46,19 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TtsPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private TtsEngines mTtsEngines;
     @Mock
     private PreferenceScreen mScreen;
 
+    private Context mContext;
     private TtsPreferenceController mController;
     private Preference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
 
         mController = new TtsPreferenceController(mContext, mTtsEngines);
         mPreference = new Preference(RuntimeEnvironment.application);
@@ -88,5 +89,12 @@ public class TtsPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isVisible()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testIsAvailable_ifDisabled_shouldReturnFalse() {
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 }

@@ -20,6 +20,7 @@ import android.content.Context;
 import android.speech.tts.TtsEngines;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public class TtsPreferenceController extends AbstractPreferenceController
@@ -37,7 +38,8 @@ public class TtsPreferenceController extends AbstractPreferenceController
 
     @Override
     public boolean isAvailable() {
-        return !mTtsEngines.getEngines().isEmpty();
+        return !mTtsEngines.getEngines().isEmpty() &&
+                mContext.getResources().getBoolean(R.bool.config_show_tts_settings_summary);
     }
 
     @Override
