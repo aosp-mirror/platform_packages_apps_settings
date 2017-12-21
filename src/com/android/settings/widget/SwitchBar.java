@@ -64,6 +64,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     private TextView mTextView;
     private String mLabel;
     private String mSummary;
+    private int mOnTextId;
+    private int mOffTextId;
 
     private boolean mLoggingIntialized;
     private boolean mDisabledByAdmin;
@@ -102,9 +104,7 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
 
         mTextView = (TextView) findViewById(R.id.switch_text);
         mTextView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
-        mLabel = getResources().getString(R.string.switch_off_text);
         mSummarySpan = new TextAppearanceSpan(mContext, R.style.TextAppearance_Small_SwitchBar);
-        updateText();
         ViewGroup.MarginLayoutParams lp = (MarginLayoutParams) mTextView.getLayoutParams();
         lp.setMarginStart(switchBarMarginStart);
 
@@ -116,6 +116,8 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
         lp = (MarginLayoutParams) mSwitch.getLayoutParams();
         lp.setMarginEnd(switchBarMarginEnd);
         setBackgroundColor(switchBarBackgroundColor);
+
+        setSwitchBarText(R.string.switch_on_text, R.string.switch_off_text);
 
         addOnSwitchChangeListener(new OnSwitchChangeListener() {
             @Override
@@ -139,9 +141,14 @@ public class SwitchBar extends LinearLayout implements CompoundButton.OnCheckedC
     }
 
     public void setTextViewLabel(boolean isChecked) {
-        mLabel = getResources()
-                .getString(isChecked ? R.string.switch_on_text : R.string.switch_off_text);
+        mLabel = getResources().getString(isChecked ? mOnTextId : mOffTextId);
         updateText();
+    }
+
+    public void setSwitchBarText(int onText, int offText) {
+        mOnTextId = onText;
+        mOffTextId = offText;
+        setTextViewLabel(isChecked());
     }
 
     public void setSummary(String summary) {
