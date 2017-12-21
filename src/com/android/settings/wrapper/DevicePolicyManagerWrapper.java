@@ -223,7 +223,7 @@ public class DevicePolicyManagerWrapper {
      *
      * @see DevicePolicyManager#getMaximumTimeToLock(ComponentName, int)
      */
-    public long getMaximumTimeToLockForUserAndProfiles(@UserIdInt int userHandle) {
-        return mDpm.getMaximumTimeToLockForUserAndProfiles(userHandle);
+    public long getMaximumTimeToLock(@Nullable ComponentName admin, @UserIdInt int userHandle) {
+        return mDpm.getMaximumTimeToLock(admin, userHandle);
     }
 }
