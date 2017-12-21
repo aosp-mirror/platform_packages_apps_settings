@@ -287,8 +287,14 @@ public class PreIndexDataCollector {
             String[] projection) {
 
         final ContentResolver resolver = packageContext.getContentResolver();
-        final Cursor cursor = resolver.query(uri, projection, null, null, null);
         final List<String> result = new ArrayList<>();
+        Cursor cursor;
+        try {
+            cursor = resolver.query(uri, projection, null, null, null);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "Exception querying the keys!", e);
+            return result;
+        }
 
         if (cursor == null) {
             Log.w(TAG, "Cannot add index data for Uri: " + uri.toString());
