@@ -61,6 +61,7 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -214,7 +215,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         }
         for (ResolveInfo ri : resolveInfos) {
             final ActivityInfo activityInfo = ri.activityInfo;
-            final ApplicationInfo appInfo = activityInfo.applicationInfo;
             if (mAppRow.settingsIntent != null) {
                 if (DEBUG) {
                     Log.d(TAG, "Ignoring duplicate notification preference activity ("
@@ -225,7 +225,8 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             }
             mAppRow.settingsIntent = intent
                     .setPackage(null)
-                    .setClassName(activityInfo.packageName, activityInfo.name);
+                    .setClassName(activityInfo.packageName, activityInfo.name)
+                    .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (mChannel != null) {
                 mAppRow.settingsIntent.putExtra(Notification.EXTRA_CHANNEL_ID, mChannel.getId());
             }
@@ -257,17 +258,41 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         return null;
     }
 
+    protected void populateGroupToggle(final PreferenceGroup parent,
+            NotificationChannelGroup group) {
+        RestrictedSwitchPreference preference = new RestrictedSwitchPreference(getPrefContext());
+        preference.setTitle(R.string.notification_switch_label);
+        preference.setEnabled(mSuspendedAppsAdmin == null
+                && isChannelGroupBlockable(group));
+        preference.setChecked(!group.isBlocked());
+        preference.setOnPreferenceClickListener(preference1 -> {
+            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
+            group.setBlocked(!allowGroup);
+            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
+
+            for (int i = 0; i < parent.getPreferenceCount(); i++) {
+                Preference pref = parent.getPreference(i);
+                if (pref instanceof MasterSwitchPreference) {
+                    ((MasterSwitchPreference) pref).setSwitchEnabled(allowGroup);
+                }
+            }
+            return true;
+        });
+
+        parent.addPreference(preference);
+    }
+
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,
-            final NotificationChannel channel, String summary) {
+            final NotificationChannel channel, final boolean groupBlocked) {
         MasterSwitchPreference channelPref = new MasterSwitchPreference(
                 getPrefContext());
         channelPref.setSwitchEnabled(mSuspendedAppsAdmin == null
                 && isChannelBlockable(channel)
-                && isChannelConfigurable(channel));
+                && isChannelConfigurable(channel)
+                && !groupBlocked);
         channelPref.setKey(channel.getId());
         channelPref.setTitle(channel.getName());
         channelPref.setChecked(channel.getImportance() != IMPORTANCE_NONE);
-        channelPref.setSummary(summary);
         Bundle channelArgs = new Bundle();
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
@@ -288,7 +313,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
                         channel.setImportance(importance);
                         channel.lockFields(
                                 NotificationChannel.USER_LOCKED_IMPORTANCE);
-                        channelPref.setSummary(summary);
                         mBackend.updateChannel(mPkg, mUid, channel);
 
                         return true;

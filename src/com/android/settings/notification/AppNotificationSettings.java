@@ -135,7 +135,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         return new ArrayList<>(mControllers);
     }
 
-
     private void populateList() {
         if (!mDynamicPreferences.isEmpty()) {
             // If there's anything in mChannelGroups, we've called populateChannelList twice.
@@ -164,59 +163,39 @@ public class AppNotificationSettings extends NotificationSettingsBase {
     }
 
     private void populateGroupList() {
-        PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
-        groupCategory.setTitle(R.string.notification_channels);
-        groupCategory.setKey(KEY_GENERAL_CATEGORY);
-        groupCategory.setOrderingAsAdded(true);
-        getPreferenceScreen().addPreference(groupCategory);
-        mDynamicPreferences.add(groupCategory);
         for (NotificationChannelGroup group : mChannelGroupList) {
-            final List<NotificationChannel> channels = group.getChannels();
-            int N = channels.size();
-            // app defined groups with one channel and channels with no group display the channel
-            // name and no summary and link directly to the channel page unless the group is blocked
-            if ((group.getId() == null || N < 2) && !group.isBlocked()) {
-                Collections.sort(channels, mChannelComparator);
-                for (int i = 0; i < N; i++) {
-                    final NotificationChannel channel = channels.get(i);
-                    populateSingleChannelPrefs(groupCategory, channel, "");
-                }
+            PreferenceCategory groupCategory = new PreferenceCategory(getPrefContext());
+            groupCategory.setOrderingAsAdded(true);
+            getPreferenceScreen().addPreference(groupCategory);
+            mDynamicPreferences.add(groupCategory);
+            if (group.getId() == null) {
+                groupCategory.setTitle(mChannelGroupList.size() > 1
+                        ? R.string.notification_channels_other
+                        : R.string.notification_channels);
+                groupCategory.setKey(KEY_GENERAL_CATEGORY);
             } else {
-                populateGroupPreference(groupCategory, group, N);
+                groupCategory.setTitle(group.getName());
+                groupCategory.setKey(group.getId());
+                Bundle groupArgs = new Bundle();
+                groupArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
+                groupArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
+                groupArgs.putString(Settings.EXTRA_CHANNEL_GROUP_ID, group.getId());
+                Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
+                        ChannelGroupNotificationSettings.class.getName(),
+                        groupArgs, null, R.string.notification_group_title,
+                        null, false, getMetricsCategory());
+                groupCategory.setIntent(channelIntent);
+                populateGroupToggle(groupCategory, group);
+            }
+
+            final List<NotificationChannel> channels = group.getChannels();
+            Collections.sort(channels, mChannelComparator);
+            int N = channels.size();
+            for (int i = 0; i < N; i++) {
+                final NotificationChannel channel = channels.get(i);
+                populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
             }
         }
-    }
-
-    void populateGroupPreference(PreferenceGroup parent,
-            final NotificationChannelGroup group, int channelCount) {
-        MasterSwitchPreference groupPref = new MasterSwitchPreference(
-                getPrefContext());
-        groupPref.setSwitchEnabled(mSuspendedAppsAdmin == null
-                && isChannelGroupBlockable(group));
-        groupPref.setKey(group.getId());
-        groupPref.setTitle(group.getName());
-        groupPref.setChecked(!group.isBlocked());
-        groupPref.setSummary(getResources().getQuantityString(
-                R.plurals.notification_group_summary, channelCount, channelCount));
-        Bundle groupArgs = new Bundle();
-        groupArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-        groupArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-        groupArgs.putString(Settings.EXTRA_CHANNEL_GROUP_ID, group.getId());
-        Intent groupIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                ChannelGroupNotificationSettings.class.getName(),
-                groupArgs, null, R.string.notification_group_title, null, false,
-                getMetricsCategory());
-        groupPref.setIntent(groupIntent);
-
-        groupPref.setOnPreferenceChangeListener(
-                (preference, o) -> {
-                    boolean value = (Boolean) o;
-                    group.setBlocked(!value);
-                    mBackend.updateChannelGroup(mPkg, mUid, group);
-
-                    return true;
-                });
-        parent.addPreference(groupPref);
     }
 
     private Comparator<NotificationChannelGroup> mChannelGroupComparator =

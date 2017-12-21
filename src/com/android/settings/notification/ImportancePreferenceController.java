@@ -73,7 +73,8 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
             if (preference.isEnabled()) {
                 Intent channelIntent = Utils.onBuildStartFragmentIntent(mContext,
                         ChannelImportanceSettings.class.getName(),
-                        channelArgs, null, R.string.notification_importance_title, null,
+                        channelArgs, null,
+                        R.string.notification_importance_title, null,
                         false, getMetricsCategory());
                 preference.setIntent(channelIntent);
                 preference.setSummary(getImportanceSummary(mContext, mChannel));
@@ -82,23 +83,19 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
     }
 
     protected static String getImportanceSummary(Context context, NotificationChannel channel) {
-        String title;
-        String summary = null;
+        String summary = "";
         int importance = channel.getImportance();
         switch (importance) {
             case IMPORTANCE_UNSPECIFIED:
-                title = context.getString(R.string.notification_importance_unspecified);
+                summary = context.getString(R.string.notification_importance_unspecified);
                 break;
             case NotificationManager.IMPORTANCE_MIN:
-                title = context.getString(R.string.notification_importance_min_title);
                 summary = context.getString(R.string.notification_importance_min);
                 break;
             case NotificationManager.IMPORTANCE_LOW:
-                title = context.getString(R.string.notification_importance_low_title);
                 summary = context.getString(R.string.notification_importance_low);
                 break;
             case NotificationManager.IMPORTANCE_DEFAULT:
-                title = context.getString(R.string.notification_importance_default_title);
                 if (SoundPreferenceController.hasValidSound(channel)) {
                     summary = context.getString(R.string.notification_importance_default);
                 } else {
@@ -107,7 +104,6 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
                 break;
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
-                title = context.getString(R.string.notification_importance_high_title);
                 if (SoundPreferenceController.hasValidSound(channel)) {
                     summary = context.getString(R.string.notification_importance_high);
                 } else {
@@ -118,10 +114,6 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
                 return "";
         }
 
-        if (summary != null) {
-            return context.getString(R.string.notification_importance_divider, title, summary);
-        } else {
-            return title;
-        }
+        return summary;
     }
 }

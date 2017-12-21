@@ -19,7 +19,6 @@ package com.android.settings.notification;
 import android.app.NotificationChannel;
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -98,9 +97,7 @@ public class ChannelGroupNotificationSettings extends NotificationSettingsBase {
             Collections.sort(channels, mChannelComparator);
             for (NotificationChannel channel : channels) {
                 mDynamicPreferences.add(populateSingleChannelPrefs(
-                        getPreferenceScreen(), channel,
-                        ImportancePreferenceController.getImportanceSummary(
-                                getPrefContext(), channel)));
+                        getPreferenceScreen(), channel, mChannelGroup.isBlocked()));
             }
 
         }
