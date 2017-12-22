@@ -33,6 +33,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -55,10 +57,12 @@ public class ScreenLockSettingsTest {
 
     @Test
     public void onOwnerInfoUpdated_shouldUpdateOwnerInfoController() {
-        final Map<Class, AbstractPreferenceController> preferenceControllers =
+        final Map<Class, List<AbstractPreferenceController>> preferenceControllers =
                 ReflectionHelpers.getField(mSettings, "mPreferenceControllers");
         final OwnerInfoPreferenceController controller = mock(OwnerInfoPreferenceController.class);
-        preferenceControllers.put(OwnerInfoPreferenceController.class, controller);
+        List<AbstractPreferenceController> controllerList = new ArrayList<>();
+        controllerList.add(controller);
+        preferenceControllers.put(OwnerInfoPreferenceController.class, controllerList);
 
         mSettings.onOwnerInfoUpdated();
 
