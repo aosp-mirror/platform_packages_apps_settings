@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Պետք է <xliff:g id="NUMBER">%d</xliff:g> թվանշանից քիչ պարունակի"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Պետք է պարունակի միայն 0-9 թվանշաններ"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Սարքի ադմինիստրատորը չի թույլատրում օգտագործել վերջին PIN կոդերը"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ՏՏ ադմինիստրատորն արգելափակել է պարզ PIN կոդերը: Փորձեք մեկ այլ PIN:"</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Այն չի կարող պարունակել անվավեր գրանշան"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Պետք է պարունակի առնվազն մեկ տառ"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Պետք է պարունակի առնվազն մեկ թվանշան"</string>
@@ -596,6 +597,7 @@
       <item quantity="other">Պետք է պարունակի առնվազն <xliff:g id="COUNT">%d</xliff:g> ոչ-տառային գրանշան</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Սարքի ադմինիստրատորը թույլ չի տալիս օգտագործել վերջին գաղտնաբառը"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"ՏՏ ադմինիստրատորն արգելափակել է պարզ գաղտնաբառերը: Փորձեք մեկ այլ գաղտնաբառ:"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Թվանշանների աճող, նվազող կամ կրկնվող հաջորդականությունն արգելված է"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Հաստատել"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Չեղարկել"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Հաճախականությունների դիապազոն"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Թեժ կետի միջոցով ստեղծեք Wi‑Fi ցանց ձեր այլ սարքերի hամար: Թեժ կետը տրամադրում է ինտերնետային կապ բջջային ցանցի միջոցով: Կարող են կիրառվել լրացուցիչ գանձումներ։"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Հավելվածները կարող են ստեղծել թեժ կետ՝ բովանդակությունը մոտակա սարքերին փոխանցելու համար:"</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Թեժ կետի միացում…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Թեժ կետերը անջատվում են..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ցանցն ակտիվ է"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Թարմացնել էկրանի խոշորությունը ծրագրի տարանցումների վրա"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Սնուցման կոճակը ավարտում է զանգը"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Մկնիկի խոշոր նշորդ"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Անջատել շարժանկարները"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Մոնո ձայն"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Աուդիո նվագարկելիս միավորել ալիքները"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Սեղմելու և պահելու հապաղումը"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Սարքը հանում է քնի ռեժիմից ֆոնում"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Հայցում է տեղադրության տվյալները շատ հաճախ"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> հավելված ցուցաբերում է արտասովոր պահվածք"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Փակե՞լ հավելվածը"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Ձեր հեռախոսը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը սարքին թույլ չի տալիս անցնել քնի ռեժիմ:։\n\nԱյս խնդիրը շտկելու համար կարող եք դադարեցնել\n\nհավելվածի աշխատանքը: Եթե խնդիրը չվերանա, ապա հնարավոր է պահանջվի ապատեղադրել հավելվածը՝ մարտկոցի աշխատանքը բարելավելու համար:"</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Ձեր պլանշետը չի կարող ինչպես հարկն է կառավարել մարտկոցի լիցքը, քանի որ <xliff:g id="APP">%1$s</xliff:g> հավելվածը պլանշետին թույլ չի տալիս անցնել քնի ռեժիմ:\n\nԱյս խնդիրը շտկելու համար կարող եք դադարեցնել\n\nհավելվածի աշխատանքը: Եթե խնդիրը չվերանա, ապա հնարավոր է պահանջվի ապատեղադրել հավելվածը՝ մարտկոցի աշխատանքը բարելավելու համար:"</string>
@@ -3056,8 +3069,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ոչ ոքից"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Զարթուցիչ"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Մեդիա"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Ներառում է համակարգի ազդանշաններ, օրինակ՝ հպման և մարտկոցի լիցքի ձայները"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Հիշեցումներ"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Միջոցառումներ"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Բոլոր զանգողները"</string>
@@ -3757,6 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Ծանոթացեք ձեր նոր պլանշետին"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Ծանոթացեք ձեր նոր սարքին"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Տվյալ գործառույթը հասանելի չէ այս սարքի վրա"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"GnssMeasurement-ի ամբողջական բեռնում"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Անջատել GNSS-ի աշխատաշրջանը, հետագծել բոլոր սխեմաներն ու հաճախականությունները։"</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

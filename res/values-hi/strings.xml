@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"इसमें <xliff:g id="NUMBER">%d</xliff:g> से कम अंक होने चाहिए"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"इसमें सिर्फ़ 0 से 9 तक के अंक होने चाहिए"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"डिवाइस व्यवस्थापक हाल ही के पिन का उपयोग करने की अनुमति नहीं देता"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"आपके आईटी एडमिन ने आम तौर पर इस्तेमाल होने वाले पिन पर रोक लगा रखी है. दूसरा पिन बनाएं."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"इसमें अमान्य वर्ण शामिल नहीं हो सकता"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"कम से कम एक अक्षर होना चाहिए"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"कम से कम एक अंक होना चाहिए"</string>
@@ -596,6 +597,7 @@
       <item quantity="other">इसमें कम से कम <xliff:g id="COUNT">%d</xliff:g> वर्ण ऐसे होने चाहिए जो अक्षर ना हों</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"डिवाइस व्यवस्थापक हाल ही के पासवर्ड का उपयोग करने की अनुमति नहीं देता"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"आपके आईटी एडमिन ने आम तौर पर इस्तेमाल होने वाले पासवर्ड पर रोक लगा रखी है. कोई दूसरा पासवर्ड बनाएं."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"अंकों के बढ़ते, घटते या दोहराए जाने वाले क्रम की अनुमति नहीं है"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"पुष्टि करें"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"रद्द करें"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP बैंड"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"अपने दूसरे डिवाइस के लिए हॉटस्पॉट का इस्तेमाल करके वाई-फ़ाई नेटवर्क बनाएं. हॉटस्पॉट आपके मोबाइल डेटा कनेक्शन के ज़रिए इंटरनेट की सुविधा देता है. मोबाइल डेटा के लिए अतिरिक्त भुगतान करना पड़ सकता है."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"ऐप्लिकेशन आस-पास के डिवाइस से सामग्री साझा करने के लिए कोई हॉटस्पॉट बना सकते हैं."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"हॉटस्‍पॉट को चालू किया जा रहा है…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"हॉटस्‍पॉट को बंद किया जा रहा है…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> सक्रिय है"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"एेप ट्रांज़िशन पर स्क्रीन को बड़ा दिखाना अपडेट करें"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"पावर बटन कॉल बंद करता है"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"बड़ा माउस सूचक"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"ऐनिमेशन हटाएं"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"मोनो ऑडियो"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"ऑडियो चलाते समय चैनल संयोजित करें"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"स्‍पर्श करके रखने पर विलंब"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"डिवाइस को बैकग्राउंड में सक्रिय करना"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"बार-बार जगह का अनुरोध कर रहा है"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> ऐप्लिकेशन ठीक से काम नहीं कर रहे हैं"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"ऐप्लिकेशन रोकना चाहते हैं?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"आपका फ़ोन बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप्लिकेशन को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"आपका टैबलेट बैटरी को सामान्य सामान्य तौर पर प्रबंधित नहीं कर पा रहा है क्योंकि <xliff:g id="APP">%1$s</xliff:g> उसे चालू रख रहा है.\n\nइस समस्या को ठीक करने के लिए, आप ऐप को रोक सकते हैं.\n\nअगर ऐसा बार-बार हो रहा है, तो बैटरी का प्रदर्शन बेहतर करने के लिए आपको ऐप अनइंस्टॉल करना पड़ सकता है."</string>
@@ -2862,11 +2875,9 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"व्यवहार"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"आवाज़ और वाइब्रेशन की अनुमति दें"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"कोई आवाज़ नहीं"</string>
-    <!-- no translation found for zen_mode_behavior_total_silence (2229976744274214528) -->
-    <skip />
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"एकदम शांत"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> के अलावा कोई आवाज़ नहीं"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (6455884547877702466) -->
-    <skip />
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"अलार्म और मीडिया को छोड़कर कोई साउंड नहीं"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"अपने आप चालू करें"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"अपने आप लागू होने वाले नियम"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"अपने आप लागू होने वाला नियम"</string>
@@ -3057,18 +3068,15 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"सिर्फ़ तारांकित संपर्कों से"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"कोई नहीं"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"अलार्म"</string>
-    <!-- no translation found for zen_mode_media_system_other (5937422836400161702) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"मीडिया"</string>
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"इसमें सिस्टम फ़ीडबैक शामिल है, जैसे कि छूने और चार्ज करते समय आने वाला साउंड"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"रिमाइंडर"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"इवेंट"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"सभी कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"चुनिंदा कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"बार-बार कॉल करने वाले (कॉलर)"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"अगर कोई व्यक्ति <xliff:g id="MINUTES">%d</xliff:g> मिनट के अंदर दोबारा कॉल करे"</string>
-    <!-- no translation found for zen_mode_behavior_summary_custom (168127313238020146) -->
-    <skip />
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"पसंद के मुताबिक"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"स्वचालित रूप से चालू"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"कभी नहीं"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"हर रात"</string>
@@ -3761,8 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"अपने नए टैबलेट के बारे में अच्छी तरह जानें"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"अपने नए डिवाइस के बारे में अच्छी तरह जानें"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"यह सुविधा इस डिवाइस पर उपलब्ध नहीं है"</string>
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking (3135751504042445872) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
     <skip />
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (1669257168039506151) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
     <skip />
 </resources>

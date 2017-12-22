@@ -573,6 +573,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Павінен змяшчаць менш за наступную колькасць лічбаў: <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Павінен змяшчаць толькі лічбы 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Адміністратар прылады не дазваляе выкарыстоўваць апошні PIN-код"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT адміністратар блакіруе папулярныя PIN-коды. Паспрабуйце іншы PIN-код."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Не можа змяшчаць недапушчальны сімвал"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Павінен змяшчаць не менш за адну літару"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Павінен змяшчаць не менш за адну лічбу"</string>
@@ -614,6 +615,7 @@
       <item quantity="other">Павінен змяшчаць не менш за <xliff:g id="COUNT">%d</xliff:g> сімвала, якія не з\'яўляюцца літарамі</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Адміністратар прылады не дазваляе выкарыстоўваць апошні пароль"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"IT адміністратар блакіруе папулярныя паролі. Паспрабуйце іншы пароль."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Забаронена ўводзіць узрастаючую, убываючую або паўторную паслядоўнасць лічбаў"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Пацвердзіць"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Скасаваць"</string>
@@ -931,6 +933,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Дыяпазон для пунктаў доступу"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Выкарыстоўвайце хот-спот для стварэння сеткі Wi‑Fi для іншых прылад. Хот-спот дае доступ да інтэрнэту праз падключэнне да мабільнай перадачы даных. Мабільны аператар можа спаганяць дадатковую плату."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Праграмы могуць ствараць хот-спот для абагульвання змесціва з прыладамі паблізу."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Уключэнне кропкi доступу..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Выключэнне кропкi доступу..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"Сетка <xliff:g id="NETWORK_SSID">%1$s</xliff:g> актыўная"</string>
@@ -1889,8 +1895,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Абнаўленне павелiчэння экрану падчас перахода з прыкладання"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"ВЫКЛ завяршае выклік"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Вялікі ўказальнік мышы"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Адключыць анімацыю"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Монафанія"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Аб\'ядноўваць каналы пры прайграванні аўдыя"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Затрымка пры націсканні і ўтрыманні"</string>
@@ -2068,6 +2073,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Выводзіць прыладу з рэжыму сну ў фонавым рэжыме"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Запытвае месцазнаходжанне занадта часта"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> праграм паводзяць сябе незвычайна"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Спыніць праграму?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Ваш тэлефон не можа нармальна кіраваць зарадам акумулятара, бо <xliff:g id="APP">%1$s</xliff:g> трымае тэлефон у актыўным рэжыме.\n\nВырашыць гэту праблему можна, прымусова спыніўшы праграму.\n\nКалі гэта не дапамагло, трэба выдаліць праграму, каб павысіць прадукцыйнасць акумулятара."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Ваш планшэт не можа нармальна кіраваць зарадам акумулятара, бо <xliff:g id="APP">%1$s</xliff:g> трымае планшэт у актыўным рэжыме.\n\nВырашыць гэту праблему можна, прымусова спыніўшы праграму.\n\nКалі гэта не дапамагло, трэба выдаліць праграму, каб павысіць прадукцыйнасць акумулятара."</string>
@@ -3119,8 +3132,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ні ад каго"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Будзільнікі"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Медыя"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Уключае такую рэакцыю сістэмы як гукі націску і зарадкі"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Напаміны"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Падзеі"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Усе абаненты"</string>
@@ -3871,6 +3883,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Аглядны тур па новаму планшэту"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Аглядны тур па новай прыладзе"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Гэта функцыя недаступная на гэтай прыладзе"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Прымус. укл. GnssMeasurement"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Выкл. прац. цыкл GNSS, адсоч. усе групы і частоты."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

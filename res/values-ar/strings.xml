@@ -579,6 +579,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"يجب ألا يزيد رقم التعريف الشخصي عن <xliff:g id="NUMBER">%d</xliff:g> من الأرقام"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"يجب أن يحتوي رقم التعريف الشخصي على أرقام من ۰–٩ فقط."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"لا يسمح مشرف الجهاز باستخدام رقم تعريف شخصي تم استخدامه مؤخرًا"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"حظرَ مشرف تكنولوجيا المعلومات استخدام أرقام التعريف الشخصية الشائعة. جرِّب استخدام رقم تعريف شخصي مختلف."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"لا يجب أن تتضمن كلمة المرور حرفًا غير صالح."</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"يجب أن تحتوي كلمة المرور على حرف واحد على الأقل."</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"يجب أن تحتوي كلمة المرور على رقم واحد على الأقل."</string>
@@ -632,6 +633,7 @@
       <item quantity="one">يجب أن تحتوي كلمة المرور على حرف واحد ليس من الأحرف الأبجدية على الأقل</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"لا يسمح مشرف الجهاز باستخدام كلمة مرور تم استخدامها مؤخرًا"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"حظرَ مشرف تكنولوجيا المعلومات استخدام كلمات المرور الشائعة. جرِّب استخدام كلمة مرور مختلفة."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"غير مسموح باستخدام الترتيب التصاعدي أو التنازلي أو المكرر للأرقام"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"تأكيد"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"إلغاء"</string>
@@ -955,6 +957,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"‏نطاق AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"‏يمكنك استخدام نقطة اتصال لإنشاء شبكة Wi‑Fi لأجهزتك الأخرى. حيث توفِّر نقطة الاتصال إمكانية الاتصال بالإنترنت باستخدام اتصال بيانات الجوّال. وقد يتم فرض رسوم إضافية على بيانات الجوّال."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"يمكن للتطبيقات إنشاء نقطة اتصال لمشاركة المحتوى مع الأجهزة المجاورة."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"جارٍ تشغيل نقطة الاتصال…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"جارٍ إيقاف نقطة الاتصال…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> نشطة"</string>
@@ -1916,8 +1922,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"تحديث تكبير الشاشة أثناء تنقلات التطبيق"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"زر الطاقة ينهي الاتصال"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"مؤشر الماوس الكبير"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"إزالة الصور المتحركة"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"صوت أحادي"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"الجمع بين القنوات عند تشغيل الصوت"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"مهلة اللمس مع الاستمرار"</string>
@@ -2109,6 +2114,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"ينشِّط الجهاز في الخلفية"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"يطلب معرفة الموقع بشكل متكرر"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"يعمل <xliff:g id="NUMBER">%1$d</xliff:g> من التطبيقات بطريقة غير طبيعية"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"هل تريد إيقاف التطبيق؟"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"لا يستطيع هاتفك إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي هاتفك نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"لا يستطيع جهازك اللوحي إدارة البطارية بشكل طبيعي لأن <xliff:g id="APP">%1$s</xliff:g> يبقي جهازك اللوحي نشطًا بشكل مستمر.\n\nلمحاولة حل هذه المشكلة، يمكنك إيقاف التطبيق.\n\nإذا استمر حدوث هذا الأمر، يمكنك إلغاء تثبيت التطبيق لتحسين أداء البطارية."</string>
@@ -3180,8 +3193,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"من لا أحد"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"التنبيهات"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"الوسائط"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"يتضمّن تعليقات النظام مثل أصوات اللمس والشحن"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"التذكيرات"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"الأحداث"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"جميع المتصلين"</string>
@@ -3981,6 +3993,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"الحصول على جولة في جهازك اللوحي الجديد"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"الحصول على جولة في جهازك الجديد"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"لا تتوفر هذه الميزة على هذا الجهاز"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"‏فرض GnssMeasurement كامل"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"‏إيقاف دورات تشغيل GNSS وتتبع المجموعات والتكرارات."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

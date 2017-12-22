@@ -169,7 +169,7 @@
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Boshqa qurilmalarga “<xliff:g id="DEVICE_NAME">^1</xliff:g>” sifatida ko‘rinadi"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Qurilmalaringiz"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Yangi qurilmani ulash"</string>
-    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"Qurilmaning Bluetooth qurilmalariga ulanishiga ruxsat berish"</string>
+    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"Qurilmaning Bluetooth qurilmalarga ulanishiga ruxsat berish"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Hozirda ulangan"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Saqlangan qurilmalar"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Qurilma qo‘shish"</string>
@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"PIN kod ko‘pi bilan <xliff:g id="NUMBER">%d</xliff:g> ta raqamdan iborat bo‘lishi lozim"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN kod faqat 0-9 raqamlaridan iborat bo‘lishi lozim"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Qurilma administratori oxirgi PIN koddan yana foydalanishga ruxsat bermaydi"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Oddiy PIN kodlar AT admini tomonidan bloklangan. Murakkabroq PIN kod tanlang."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Parol yaroqsiz belgidan iborat bo‘lmasligi lozim"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Parol kamida bitta harfdan iborat bo‘lishi lozim"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Parol kamida bitta raqamdan iborat bo‘lishi lozim"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">Parol tarkibida kamida 1 ta harf bo‘lmagan belgi bo‘lishi lozim</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Qurilma administratori yaqinda foydalanilgan paroldan yana foydalanishga ruxsat bermaydi"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Oddiy parollar AT admini tomonidan bloklangan. Murakkabroq parol tanlang."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Oshib boruvchi, kamayib boruvchi yoki qaytarilgan ketma-ket raqamlarga ruxsat berilmaydi"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Tasdiqlash"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Bekor qilish"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Wi-Fi chastotalari diapazoni"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Boshqa qurilmalaringiz uchun Wi-Fi tarmoq yaratish uchun hotspotdan foydalaning. Hotspot mobil internetingizni tarqatadi. Mobil internet uchun qo‘shimcha to‘lovlar olinishi mumkin."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Ilovalar yaqin-atrofdagi qurilmalarga kontent ulashish uchun hotspot yarata oladi."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Ulanish nuqtasi yoqilmoqda…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Ulanish nuqtasi o‘chirilmoqda…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> faol"</string>
@@ -1154,8 +1160,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB xotirani uzib, xotiradagi qolgan joyni ko‘rish"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD kartani uzib, xotirada qolgan joyni ko‘rsatish"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (%1$d-SIM uyasi)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"Telefon raqami"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (%1$d-SIM uyasi)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Telefon raqami (%1$d-SIM uyasi)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN (SIM)"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Bir ilovadan ikkinchisiga o‘tishda ekranda kattalashtirish xususiyatini yangilash"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Quvvat tugmasi qo‘n-ni tugatadi"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Yirik sichqoncha kursori"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Animatsiyalarni olib tashlash"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Mono audio"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Ovoz ijro qilinayotganda kanallarni birlashtirish"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Bosganda va bosib turganda kechikish"</string>
@@ -2031,6 +2036,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Qurilmani fonda uyg‘otmoqda"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Joylashuv axborotini tez-tez so‘ramoqda"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> ta ilova xato ishlayapti"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Ilova yopilsinmi?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Telefoningiz batareyani normal boshqara olmayapti, chunki <xliff:g id="APP">%1$s</xliff:g> ilovasi telefoningizni yoniq qoldirmoqda.\n\nBu muammoni tuzatish uchun ilovani majburan to‘xtatishingiz mumkin.\n\nAgar bu yana takrorlansa, batareya quvvati unumdorligini oshirish uchun ilovani o‘chirib tashlashingiz lozim bo‘ladi."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Planshetingiz batareyani normal boshqara olmayapti, chunki <xliff:g id="APP">%1$s</xliff:g> ilovasi planshetingizni yoniq qoldirmoqda.\n\nBu muammoni tuzatish uchun ilovani majburan to‘xtatishingiz mumkin.\n\nAgar bu yana takrorlansa, batareya quvvati unumdorligini oshirish uchun ilovani o‘chirib tashlashingiz lozim bo‘ladi."</string>
@@ -2876,7 +2889,7 @@
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Ovozsiz"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Jimjitlik"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Ovozsiz (istisno: <xliff:g id="CATEGORIES">%1$s</xliff:g>)"</string>
-    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Signallar va media ovozlaridan boshqasi ovozsiz"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Signallar va media ovozlaridan boshqasi ovozsiz qilinadi"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"Avtomatik yoqish"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"Avtomatik qoidalar"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"Avtomatik qoida"</string>
@@ -3068,8 +3081,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Hech kimdan"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Signallar"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Multimedia"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Sensor va quvvatlash tovushlari kabi tizim qaytaradigan javoblar ham kiradi"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Eslatmalar"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Tadbirlar"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Barcha abonentlar"</string>
@@ -3769,6 +3781,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Yangi planshetingiz bilan tanishib chiqing"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Yangi qurilmangiz bilan tanishib chiqing"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Bu funksiya ushbu qurilmada ishlamaydi"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"GnssMeasurementni to‘liq yuklash"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"GNSS siklini faolsizlantirish, barcha sxema va davriylikni kuzatish"</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

@@ -566,6 +566,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> сандан ашпашы керек"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0-9 сандарынан гана турушу керек"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Түзмөктүн администратору акыркы PIN кодду колдонууга тыюу салган"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Жөнөкөй PIN-коддорду коюу IT администраторуңуз тарабынан бөгөттөлгөн. Татаалыраак PIN-кодду коюп көрүңүз."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Бул жерде жараксыз белги камтылбашы керек"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Кеминде бир тамга болушу керек"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Кеминде бир сан болушу керек"</string>
@@ -595,6 +596,7 @@
       <item quantity="one">Тамгадан башка кеминде 1 белги болушу керек</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Түзмөктүн администратору акыркы сырсөздү колдонууга тыюу салган"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Жөнөкөй сырсөздөрү коюу IT администраторуңуз тарабынан бөгөттөлгөн. Татаалыраак сырсөздү коюп көрүңүз."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Сандар чоңойгон, кичирейген же кайталанган ыраатта болбошу керек"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Ырастоо"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Жокко чыгаруу"</string>
@@ -906,6 +908,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP жыштыгы"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Башка түзмөктөрүңүзгө Wi‑Fi тармагын түзүү үчүн туташуу түйүнү режимин пайдаланыңыз. Туташуу түйүнү аркылуу башка түзмөктөр сиздин мобилдик Интернетти колдонот. Мобилдик Интернет үчүн кошумча акы алынышы мүмкүн."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Жакын жердеги түзмөктөр менен мазмунду бөлүшүү үчүн колдонмолор хотспот болуп бере алышат."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Хотспот жандырылууда…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Хоспот өчүрүлүүдө…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> иштеп жатат"</string>
@@ -1153,8 +1159,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB сактагычты ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD картаны ажыратып, жеткиликтүү сактагычты көрүү"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (SIM-карта оюкчасы %1$d)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"Телефон номери"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (SIM-карта оюкчасы %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Телефон номери (SIM-карта оюкчасы %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"SIM-картадагы MDN"</string>
@@ -1859,8 +1865,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Колдонмо кубулган сайын, экрандын чоңойтуусун жаңыртуу"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Чалууну кубат баскычы бүтүрөт"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Чычкандын чоң көрсөткүчү"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Анимацияларды алып салуу"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Моно аудио"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Аудио ойнотулуп жатканда каналдар бириктирилсин"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Коё бербей басып туруу узактыгы"</string>
@@ -2024,6 +2029,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Түзмөк фондо ойготулууда"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Жайгашкан жер көп суралууда"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> колдонмо кызыктай иштеп жатат"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Колдонмону токтотосузбу?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g> колдонмосу телефонуңузга көшүү режимине өткөнгө мүмкүнчүлүк бербей жаткандыктан, анын батареясы тез отуруп калып жатат.\n\nМаселени чечүү үчүн колдонмону мажбурлап токтотуп коюңуз.\n\nЭгер көйгөй кайталана берсе, колдонмону телефондон чыгарып салууга туура келет."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"<xliff:g id="APP">%1$s</xliff:g> колдонмосу планшетиңизге көшүү режимине өткөнгө мүмкүнчүлүк бербей жаткандыктан, анын батареясы тез отуруп калып жатат.\n\nМаселени чечүү үчүн колдонмону мажбурлап токтотуп коюңуз.\n\nЭгер көйгөй кайталана берсе, колдонмону планшеттен чыгарып салууга туура келет."</string>
@@ -3059,8 +3072,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Эч бир"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Ойготкучтар"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Медиа"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Басуу жана кубаттоо добуштары сыяктуу тутум эскертүүлөрү камтылат"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Эстеткичтер"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Окуялар"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Бардык чалуучулар"</string>
@@ -3760,6 +3772,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Жаңы планшетиңизди карап чыгыңыз"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Жаңы түзмөгүңүзду карап чыгыңыз"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Бул функция бул түзмөктө иштебейт"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"GnssMeasurement куралын иштетүү"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"GNSS милдеттүү иштөөсүн өчүрүп, бардык топторго жана жыштыктарга көз салуу."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Peab olema lühem kui <xliff:g id="NUMBER">%d</xliff:g> numbrit"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Tohib sisaldada ainult numbreid 0–9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Seadme administraator ei luba kasutada viimast PIN-koodi"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IT-administraator on levinud PIN-koodid blokeerinud. Proovige muud PIN-koodi."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"See ei tohi sisaldada sobimatut tähemärki"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Peab sisaldama vähemalt ühte tähte"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Peab sisaldama vähemalt ühte numbrit"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">Peab sisaldama vähemalt 1 tähemärki, mis ei ole täht</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Seadme administraator ei luba kasutada hiljutist parooli"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"IT-administraator on levinud paroolid blokeerinud. Proovige muud parooli."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Kasvavad, kahanevad või korduvad numbrijadad on keelatud"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Kinnita"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Tühista"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-riba"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Teiste seadmete jaoks WiFi-võrgu loomiseks kasutage leviala. Leviala kasutab Interneti pakkumiseks mobiilset andmesideühendust. Rakenduda võivad mobiilse andmeside tasud."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Rakendused saavad luua kuumkoha, et jagada läheduses olevate seadmetega sisu."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Kuumkoha sisselülitamine ..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Kuumkoha väljalülitamine ..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> on aktiivne"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Ekraanisuurenduse kasutus rakenduste vahetamisel"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Toitenupp lõpetab kõne"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Suur hiirekursor"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Animatsioonide eemaldamine"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Monoheli"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Heli esitamisel ühendatakse kanalid"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Puute ja hoidmise viide"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Seadme äratamine taustal"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Asukohateabe sage taotlemine"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> valesti käituvat rakendust"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Kas peatada rakendus?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Teie telefon ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Teie tahvelarvuti ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
@@ -3056,8 +3069,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Mitte kelleltki"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Äratused"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Meedia"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Hõlmab süsteemi tagasisidet, nt puudutamise ja laadimise helisid"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Meeldetuletused"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Sündmused"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Kõik helistajad"</string>
@@ -3757,6 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Tutvuge oma uue tahvelarvutiga"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Tutvuge oma uue seadmega"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Sellel seadmel pole see funktsioon saadaval"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Jõusta täielik GnssMeasurement"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Keela GNSS-i töötsükkel, jälgi kõiki tähtkujusid ja sagedusi."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

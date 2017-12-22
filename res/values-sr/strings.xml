@@ -570,6 +570,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Максималан број цифара је <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Мора да садржи само цифре 0–9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Администратор уређаја не дозвољава употребу недавно коришћеног PIN-а"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"ИТ администратор блокира честе PIN-ове. Изаберите други PIN."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Не сме да обухвата неважећи знак"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Мора да садржи најмање једно слово"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Мора да садржи најмање једну цифру"</string>
@@ -605,6 +606,7 @@
       <item quantity="other">Мора да садржи најмање <xliff:g id="COUNT">%d</xliff:g> знакова који нису словa</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Администратор уређаја не дозвољава употребу недавно коришћене лозинке"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"ИТ администратор блокира честе лозинке. Изаберите другу лозинку."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Растући, опадајући или поновљени низ цифара није дозвољен"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Потврди"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Откажи"</string>
@@ -919,6 +921,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Опсег приступне тачке"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Користите хотспот да бисте направили Wi‑Fi мрежу за друге уређаје. Хотспот пружа интернет помоћу везе за мобилне податке. Можда ће важити додатне тарифе за мобилне податке."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Апликације могу да праве хотспотове за дељење садржаја са оближњим уређајима."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Укључивање хотспота…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Искључивање хотспота..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> је активан"</string>
@@ -1874,8 +1880,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Ажурира увеличавање екрана при прелазу апликација"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Дугме укључи/искључи прекида позив"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Велики показивач миша"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Уклони анимације"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Моно звук"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Комбинујте канале када пуштате аудио садржај"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Одлагање додира и задржавањa"</string>
@@ -2046,6 +2051,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Будимо уређај у позадини"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Често тражи локацију"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"Неке апликације (<xliff:g id="NUMBER">%1$d</xliff:g>) се чудно понашају"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Заустављате апликацију?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Телефон не може да управља батеријом на уобичајен начин јер му <xliff:g id="APP">%1$s</xliff:g> не дозвољава да пређе у стање спавања.\n\nДа бисте решили овај проблем, можете да зауставите ту апликацију.\n\nАко се ово дешава и даље, можда треба да деинсталирате апликацију да бисте побољшали перформансе батерије."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Таблет не може да управља батеријом на уобичајен начин јер му <xliff:g id="APP">%1$s</xliff:g> не дозвољава да пређе у стање спавања.\n\nДа бисте решили овај проблем, можете да зауставите ту апликацију.\n\nАко се ово дешава и даље, можда треба да деинсталирате апликацију да бисте побољшали перформансе батерије."</string>
@@ -3087,8 +3100,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ни од кога"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Аларми"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Медији"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Обухвата системске повратне информације, попут звукова при додиру и пуњењу"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Подсетници"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Догађаји"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Сви позиваоци"</string>
@@ -3813,6 +3825,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Упознајте нови таблет"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Упознајте нови уређај"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ова функција није доступна на овом уређају."</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Пр. пок. пуно Gnss мерење"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Онемогући GNSS циклусе рада, прати све констелације и фреквенције."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>
