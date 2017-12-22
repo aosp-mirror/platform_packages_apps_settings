@@ -751,6 +751,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         PackageManager pm = getPackageManager();
         final UserManager um = UserManager.get(this);
         final boolean isAdmin = um.isAdminUser();
+        final FeatureFactory featureFactory = FeatureFactory.getFactory(this);
         boolean somethingChanged = false;
         String packageName = getPackageName();
         somethingChanged = setTileEnabled(
@@ -805,12 +806,26 @@ public class SettingsActivity extends SettingsDrawerActivity
                 !isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
                 isAdmin) || somethingChanged;
 
+        final boolean isSecurityV2Enabled = featureFactory.getSecurityFeatureProvider()
+                .isSecuritySettingsV2Enabled(this);
+
+        // Enable new security page if v2 enabled
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,Settings.SecuritySettingsActivityV2.class.getName()),
+                isSecurityV2Enabled,
+                isAdmin) || somethingChanged;
+        // Enable old security page if v2 disabled
+        somethingChanged = setTileEnabled(
+                new ComponentName(packageName,Settings.SecuritySettingsActivity.class.getName()),
+                !isSecurityV2Enabled,
+                isAdmin) || somethingChanged;
+
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin)
                 || somethingChanged;
 
-        final boolean isBatterySettingsV2Enabled = FeatureFactory.getFactory(this)
+        final boolean isBatterySettingsV2Enabled = featureFactory
                 .getPowerUsageFeatureProvider(this)
                 .isBatteryV2Enabled();
         // Enable new battery page if v2 enabled

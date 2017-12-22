@@ -18,13 +18,19 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.FeatureFlagUtils;
 
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
 
 
 /** FeatureProvider for security. */
 public interface SecurityFeatureProvider {
+
+    default boolean isSecuritySettingsV2Enabled(Context context) {
+        return FeatureFlagUtils.isEnabled(context, FeatureFlags.SECURITY_SETTINGS_V2);
+    }
 
     /** Update preferences with data from associated tiles. */
     void updatePreferences(Context context, PreferenceScreen preferenceScreen,

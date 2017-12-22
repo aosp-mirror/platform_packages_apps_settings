@@ -1287,6 +1287,28 @@
                 android:value="true" />
         </activity>
 
+        <!-- TODO(32953042) Merge with Settings$SecuritySettingsActivity -->
+        <activity android:name="Settings$SecuritySettingsActivityV2"
+                  android:label="@string/security_settings_title"
+                  android:icon="@drawable/ic_settings_security"
+                  android:enabled="false"
+                  android:configChanges="orientation|keyboardHidden|screenSize"
+                  android:taskAffinity=""
+                  android:parentActivityName="Settings">
+            <intent-filter android:priority="-1">
+                <action android:name="android.settings.SECURITY_SETTINGS" />
+                <action android:name="android.credentials.UNLOCK" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="4">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.homepage" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.security.SecuritySettingsV2" />
+        </activity>
+
         <activity android:name="MonitoringCertInfoActivity"
                 android:label=""
                 android:theme="@style/Transparent"
