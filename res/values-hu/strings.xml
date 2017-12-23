@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> számjegynél rövidebbnek kell lennie"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Csak számokat tartalmazhat, 0-tól 9-ig"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Az eszközrendszergazda nem engedélyezi a legutóbbi PIN-kódok használatát"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Rendszergazdája letiltotta a gyakran használt PIN-kódokat. Próbálkozzon másik PIN-kóddal."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Ez nem tartalmazhat érvénytelen karaktert"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Tartalmazzon legalább egy betűt"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Tartalmazzon legalább egy számjegyet"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">Tartalmaznia kell legalább 1 olyan karaktert, amely nem betű</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Az eszközrendszergazda nem engedélyezi a legutóbbi jelszavak használatát"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Rendszergazdája letiltotta a gyakran használt jelszavakat. Próbálkozzon másik jelszóval."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Növekvő, csökkenő vagy ismétlődő számsor megadása nem engedélyezett"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Megerősítés"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Mégse"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP-sáv"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Hotspot használatával hozzon létre Wi‑Fi-hálózatot további eszközei számára. A hotspot internetet biztosít mobiladat-kapcsolata használatával. A szolgáltató további díjat számíthat fel."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Az alkalmazások létrehozhatnak hotspotokat tartalom megosztására a közeli eszközökkel."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Hotspot bekapcsolása..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Hotspot kikapcsolása..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktív"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Nagyítás frissítése az alkalmazások közti átmeneteknél"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Bekapcs. gomb megszakítja a hívást"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Nagy egérmutató"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Animációk eltávolítása"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Monó hang"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Csatornák kombinálása hang lejátszásakor"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Érintés és tartási késleltetés"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Eszköz felébresztése a háttérben"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Tartózkodási hely gyakori lekérése"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> nem megfelelően működő alkalmazás"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Leállítja az alkalmazást?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"A telefon nem képes az akkumulátor normál kezelésére, mivel a(z) <xliff:g id="APP">%1$s</xliff:g> alkalmazás ébren tartja az eszközt.\n\nA probléma megoldásához leállíthatja az alkalmazást.\n\nHa a probléma továbbra is fennáll, akkor az akkumulátor teljesítményének javításához lehet, hogy el kell távolítania az alkalmazást."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"A táblagép nem képes az akkumulátor normál kezelésére, mivel a(z) <xliff:g id="APP">%1$s</xliff:g> alkalmazás ébren tartja az eszközt.\n\nA probléma megoldásához leállíthatja az alkalmazást.\n\nHa a probléma továbbra is fennáll, akkor az akkumulátor teljesítményének javításához lehet, hogy el kell távolítania az alkalmazást."</string>
@@ -3058,8 +3071,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Senkitől"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Riasztások"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Média"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Tartalmazza a rendszervisszajelzéseket, mint például az érintés- és a töltéshangok"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Emlékeztetők"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Események"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Minden hívó"</string>
@@ -3759,6 +3771,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Az új táblagép bemutatójának megtekintése"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Az új eszköz bemutatójának megtekintése"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ez a funkció nem áll rendelkezésre ezen az eszközön"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Teljes GnssMeasurement indítása"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"GNSS aktívciklus-szabályzásának letiltása, összes műhold és frekvencia nyomon követése."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

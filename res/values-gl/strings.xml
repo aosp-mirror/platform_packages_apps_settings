@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Debe conter menos de <xliff:g id="NUMBER">%d</xliff:g> díxitos"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Só pode conter díxitos comprendidos entre o 0 e o 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"O administrador de dispositivos non permite o uso dun PIN recente"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"O teu administrador de TI bloqueou os PIN comúns. Proba cun PIN diferente."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Non pode conter un carácter non válido"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Debe conter polo menos unha letra"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Debe conter polo menos un díxito"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">Debe conter polo menos 1 carácter que non sexa unha letra</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"O administrador de dispositivos non permite o uso dun contrasinal recente"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"O teu administrador de TI bloqueou os contrasinais comúns. Proba cun contrasinal diferente."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Non se permite unha secuencia de díxitos ascendente, descendente nin repetida"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Confirmar"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Cancelar"</string>
@@ -907,6 +909,8 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Banda do punto de acceso"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Utiliza a zona wifi para crear unha rede wifi para os teus outros dispositivos. A zona wifi ofrece acceso a Internet a través da túa conexión de datos móbiles. É posible que se apliquen cargos de datos móbiles adicionais."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"As aplicacións poden crear unha zona wifi para compartir contido cos dispositivos que están cerca."</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="1590313508558948079">"Desactivar a zona wifi automaticamente"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="5858098059725925084">"Desactivarase a zona wifi se non se conecta ningún dispositivo"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Activando zona wifi..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Desactivando zona wifi..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> está activa"</string>
@@ -1154,8 +1158,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Retira o almacenamento USB e visualiza o almacenamento dispoñible"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desactiva a tarxeta SD, visualiza o almacenamento dispoñible"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (rañura da SIM %1$d)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"Número de teléfono"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (rañura da SIM %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"N.º teléfono (rañura SIM %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN da SIM"</string>
@@ -1860,8 +1864,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Actualizar aumento pantalla en transicións de apps"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"O botón de acendido colga"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Punteiro do rato grande"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Eliminar animacións"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Audio en mono"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Combina canles ao reproducir audio"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Retardo de pulsación prolongada"</string>
@@ -2025,6 +2028,12 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Activando o dispositivo en segundo plano"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Solicitando a localización con frecuencia"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> aplicacións funcionan incorrectamente"</string>
+    <string name="battery_tip_summary_title" msgid="7060523369832289878">"A batería funciona ben"</string>
+    <string name="battery_tip_summary_summary" msgid="7832491466325707487">"As aplicacións estanse comportando con normalidade"</string>
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Queres deter a aplicación?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"O teléfono non pode xestionar o uso da batería con normalidade porque a aplicación <xliff:g id="APP">%1$s</xliff:g> manteno activo.\n\nPara tentar solucionar este problema, podes deter a aplicación.\n\nSe o problema persiste, é posible que necesites desinstalala para mellorar o rendemento da batería."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"A tableta non pode xestionar o uso da batería con normalidade porque a aplicación <xliff:g id="APP">%1$s</xliff:g> mantena activa.\n\nPara tentar solucionar este problema, podes deter a aplicación.\n\nSe o problema persiste, é posible que necesites desinstalala para mellorar o rendemento da batería."</string>
@@ -3056,8 +3065,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Ningunha"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmas"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Contido multimedia"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Inclúe comentarios do sistema como sons táctiles e de carga"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Recordatorios"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventos"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Todos os emisores de chamadas"</string>
@@ -3757,6 +3765,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Realiza unha visita guiada pola túa nova tableta"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Realiza unha visita guiada polo teu novo dispositivo"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Esta función non está dispoñible neste dispositivo"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Forzar GnssMeasurement"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Desactivar ciclos GNSS, e facer seguimento constela. e frecuencias."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

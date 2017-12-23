@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> അക്കങ്ങളേക്കാൾ കുറവായിരിക്കണം"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0 മുതൽ 9 വരെയുള്ള അക്കങ്ങൾ മാത്രം അടങ്ങിയിരിക്കണം"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ഉപകരണ അഡ്‌മിൻ സമീപകാലത്തുള്ള പിൻ ഉപയോഗിക്കുന്നത് അനുവദിക്കുന്നില്ല"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"നിങ്ങളുടെ ഐടി അഡ്‌മിൻ സാധാരണ പിന്നുകൾ ബ്ലോക്ക് ചെയ്‌തിട്ടുണ്ട്. മറ്റൊരു പിൻ പരീക്ഷിക്കുക."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"ഇതിൽ അസാധുവായൊരു പ്രതീകം ഉണ്ടായിരിക്കാൻ പാടില്ല"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"കുറഞ്ഞത് ഒരു അക്ഷരമെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"കുറഞ്ഞത് ഒരു അക്കമെങ്കിലും അടങ്ങിയിരിക്കണം"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">കുറഞ്ഞത് അക്ഷരമല്ലാത്ത ഒരു പ്രതീകമെങ്കിലും അടങ്ങിയിരിക്കണം</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"ഒരു സമീപകാല പാസ്‌വേഡ് ഉപയോഗിക്കാൻ ഉപകരണ അഡ്‌മിൻ അനുവദിക്കുന്നില്ല"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"നിങ്ങളുടെ IT അഡ്‌മിൻ സാധാരണ പാസ്‍വേഡുകൾ ബ്ലോക്ക് ചെയ്‌തിട്ടുണ്ട്. മറ്റൊരു പാസ്‍വേഡ് പരീക്ഷിക്കുക."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"അക്കങ്ങൾ ആരോഹണ ക്രമത്തിലോ അവരോഹണ ക്രമത്തിലോ അനുക്രമമായോ നൽകുന്നത് അനുവദനീയമല്ല"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"സ്ഥിരീകരിക്കുക"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"റദ്ദാക്കുക"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP ബാൻഡ്"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"നിങ്ങളുടെ മറ്റ് ഉപകരണങ്ങൾക്കായി ഒരു വൈഫൈ നെറ്റ്‌വർക്ക് സൃഷ്ടിക്കുന്നതിന് ഹോട്ട്‌സ്പോട്ട് ഉപയോഗിക്കുക. ഹോട്ട്‌സ്പോട്ട് ഇന്‍റർനെറ്റ് നൽകുന്നത് നിങ്ങളുടെ മൊബൈൽ ഡാറ്റാ കണക്ഷൻ ഉപയോഗിച്ചുകൊണ്ടാണ്. അധിക മൊബൈൽ ഡാറ്റാ നിരക്കുകൾ ബാധകമായേക്കാം."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"ചുറ്റുവട്ടത്തുള്ള ഉപകരണങ്ങളുമായി ഉള്ളടക്കം പങ്കിടുന്നതിന് ആപ്പുകൾക്ക് ഹോട്ട്‌സ്പോട്ട് സൃഷ്ടിക്കാൻ കഴിയും."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"ഹോട്ട്‌സ്പോട്ട് ഓണാക്കുന്നു…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"ഹോട്ട്‌സ്പോട്ട് ഓഫാക്കുന്നു…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> സജീവമാണ്"</string>
@@ -1154,8 +1160,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB സ്റ്റോറേജ്  അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സ്റ്റോറേജ്  കാണുക"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD കാർഡ് അൺമൗണ്ടുചെയ്യുക, ലഭ്യമായ സ്റ്റോറേജ്  കാണുക"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (സിം സ്ലോട്ട് %1$d)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"ഫോൺ നമ്പർ"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (സിം സ്ലോട്ട് %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"ഫോൺ നമ്പർ (സിം സ്ലോട്ട് %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"സിമ്മിലെ MDN"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"അപ്ലിക്കേഷൻ സംക്രമണങ്ങളിൽ സ്‌ക്രീൻ മാഗ്‌നിഫിക്കേഷൻ അപ്‌ഡേറ്റുചെയ്യുക"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"പവർബട്ടൺ കോൾ നിർത്തുന്നു"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"വലിയ മൗസ് പോയിന്റർ"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"ആനിമേഷനുകൾ നീക്കം ചെയ്യുക"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"മോണോ ഓഡിയോ"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"ഓഡിയോ പ്ലേ ചെയ്യുമ്പോൾ ചാനലുകൾ സംയോജിപ്പിക്കുക"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"സ്‌പർശിച്ച് കുറെനേരം അമർത്തിപ്പിടിക്കൂ"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"പശ്ചാത്തലത്തിൽ ഉപകരണം സജീവമാക്കുന്നു"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"ലൊക്കേഷൻ കൂടെക്കൂടെ അഭ്യർത്ഥിക്കുന്നു"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> ആപ്പുകൾ അസ്വാഭാവികമായി പ്രവർത്തിക്കുന്നു"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"ആപ്പ് നിർത്തണോ?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"നിങ്ങളുടെ ഫോണിനെ <xliff:g id="APP">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ഫോണിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, ഈ ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"നിങ്ങളുടെ ടാബ്‌ലെറ്റിനെ <xliff:g id="APP">%1$s</xliff:g> സജീവമാക്കി നിലനിർത്തുന്നതിനാൽ ടാബ്‌ലെറ്റിന് സാധാരണ ഗതിയിൽ ബാറ്ററി മാനേജുചെയ്യാൻ കഴിയില്ല.\n\nഈ പ്രശ്‌നം പരിഹരിക്കാൻ ശ്രമിക്കുന്നതിന്, ഈ ആപ്പിന്റെ പ്രവർത്തനം നിർത്തുക.\n\nപ്രശ്‌നം നിലനിൽക്കുകയാണെങ്കിൽ, ബാറ്ററി പ്രകടനം മെച്ചപ്പെടുത്തുന്നതിന് നിങ്ങൾക്ക് ഈ ആപ്പ് അൺ‌ഇൻസ്‌റ്റാൾ ചെയ്യേണ്ടി വന്നേക്കാം."</string>
@@ -2862,11 +2875,9 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"പ്രവർത്തനരീതി"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"ഇനിപ്പറയുന്നതിൽ നിന്നുള്ള ശബ്ദങ്ങളും അലാറമുകളും അനുവദിക്കുക"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"ശബ്‌ദമില്ല"</string>
-    <!-- no translation found for zen_mode_behavior_total_silence (2229976744274214528) -->
-    <skip />
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"പൂർണ്ണ നിശബ്‌ദത"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> ഒഴികെ ശബ്ദമില്ല"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (6455884547877702466) -->
-    <skip />
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"അലാറങ്ങളും മീഡിയയുമൊഴികെ ശബ്‌ദമൊന്നുമില്ല"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"സ്വമേധയാ ഓണാക്കുക"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"സ്വമേധയാലുള്ള നയങ്ങൾ"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"സ്വമേധയായുള്ള നയം"</string>
@@ -3057,18 +3068,15 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"നക്ഷത്രമിട്ട കോൺടാക്‌റ്റിൽ നിന്നുമാത്രം"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"ആരിൽ നിന്നും വേണ്ട"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"അലാറങ്ങൾ"</string>
-    <!-- no translation found for zen_mode_media_system_other (5937422836400161702) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"മീഡിയ"</string>
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"സ്‌പർശന, ചാർജ് ശബ്ദങ്ങൾ പോലുള്ള സിസ്റ്റം ഫീഡ്ബാക്കും ഉൾപ്പെടുന്നു"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"റിമൈൻഡറുകൾ"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ഇവന്റുകൾ"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"കോൾ ചെയ്യുന്ന എല്ലാവരും"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"തിരഞ്ഞെടുത്ത കോളർമാർ"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"ആവർത്തിച്ച് വിളിക്കുന്നവർ"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"<xliff:g id="MINUTES">%d</xliff:g> മിനിറ്റ് കാലയളവിനുള്ളിൽ അതേ വ്യക്തി രണ്ടാമതൊരു തവണ വിളിക്കുകയാണെങ്കിൽ"</string>
-    <!-- no translation found for zen_mode_behavior_summary_custom (168127313238020146) -->
-    <skip />
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"ഇഷ്ടാനുസൃതം"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"ഓട്ടോമാറ്റിക്കായി ഓണാക്കുക"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"ഒരിക്കലും"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"എല്ലാ രാത്രിയും"</string>
@@ -3761,8 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"നിങ്ങളുടെ ‌പുതിയ ‌ടാബ്‌ലെറ്റിനെ അറിയുക‌"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"നിങ്ങളുടെ പുതിയ ഉപകരണത്തെ അറിയുക"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"ഈ ഫീച്ചർ ഈ ഉപകരണത്തിൽ ലഭ്യമല്ല"</string>
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking (3135751504042445872) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
     <skip />
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (1669257168039506151) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
     <skip />
 </resources>

@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g> digitu baino gutxiago izan behar ditu"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"0 eta 9 arteko digituak soilik izan ditzake"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Gailuaren administratzaileak ez du eman beste PIN kode bat erabiltzeko baimenik"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"IKT administratzaileak blokeatu egiten ditu asmatzen errazak diren PIN kodeak. Erabili beste PIN bat."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Ezin da erabili onartzen ez den karaktererik"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Hizki bat eduki behar du gutxienez"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Zenbaki bat eduki behar du gutxienez"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">Hizkia ez den karaktere bat izan behar du gutxienez</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Gailuaren administratzaileak ez du eman beste pasahitz bat erabiltzeko baimenik"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"IKT administratzaileak blokeatu egiten ditu asmatzen errazak diren pasahitzak. Erabili beste pasahitz bat."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Ezin da erabili goranzko, beheranzko edo errepikatutako digitu-sekuentziarik"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Berretsi"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Utzi"</string>
@@ -907,6 +909,8 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Sarbide-puntuaren banda"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Erabili sare publikoa beste gailuentzako Wi-Fi sare bat sortzeko. Sare publikoen bidez, Interneteko konexioa ematen da datu mugikorrak erabilita. Agian datu mugikorrak erabiltzearen ondoriozko kostu gehigarriak izango dituzu."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplikazioek sare publikoak sor ditzakete edukia inguruko gailuekin partekatzeko."</string>
+    <string name="wifi_hotspot_auto_off_title" msgid="1590313508558948079">"Desaktibatu automatikoki sare publikoa"</string>
+    <string name="wifi_hotspot_auto_off_summary" msgid="5858098059725925084">"Wi‑Fi sare publikoa desaktibatu egingo da ez badago gailurik konektatuta"</string>
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Sare publikoa aktibatzen…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Sare publikoa desaktibatzen…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"Aktibatu da <xliff:g id="NETWORK_SSID">%1$s</xliff:g>"</string>
@@ -1154,8 +1158,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Desmuntatu USB memoria, ikusi erabilgarri dagoen memoria"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Desmuntatu SD txartela, ikusi memoria erabilgarria"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (%1$d. SIM zirrikitua)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"Telefono-zenbakia"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (%1$d. SIM zirrikitua)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Telefono-zenbakia (%1$d. SIM zirrikitua)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"SIMeko MDNa"</string>
@@ -1860,8 +1864,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Eguneratu handiagotzea aplik. batetik bestera pasatzean."</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Amaitu deiak pizteko etengailuarekin"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Saguaren erakusle handia"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Kendu animazioak"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Audio monofonikoa"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Konbinatu kanalak audioa erreproduzitzean"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Sakatuta edukitzearen atzerapena"</string>
@@ -2025,6 +2028,12 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Zerbait gailua esnarazten aritu da atzeko planoan"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Gailua sarriegi ari da eskatzen kokapena"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> aplikazio ez dira ari behar bezala funtzionatzen"</string>
+    <string name="battery_tip_summary_title" msgid="7060523369832289878">"Bateriaren egoera ona da"</string>
+    <string name="battery_tip_summary_summary" msgid="7832491466325707487">"Aplikazioen portaera normala da"</string>
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Aplikazioa gelditu nahi duzu?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g>\n\n\n\n"</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Tabletak ezin du kudeatu bateria modu normalean <xliff:g id="APP">%1$s</xliff:g> aplikazioak esnarazi egiten duelako etengabe.\n\nArazoa konpontzeko, geldiarazi aplikazioa.\nArazoa horrela ere konpontzen ez bada\n, agian aplikazioa desinstalatu beharko duzu bateriak gehiago iraun dezan."</string>
@@ -3056,8 +3065,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Bat ere ez"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmak"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Multimedia-edukia"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Sistemaren soinuak sartzen dira (adibidez, ukipenaren eta kargatzearen soinuak)"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Abisuak"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Gertaerak"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Deitzaile guztiak"</string>
@@ -3757,6 +3765,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Eman txango bat tableta berrian barrena"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Eman txango bat gailu berrian barrena"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Eginbidea ez dago erabilgarri gailu honetan"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Behartu GnssMeasurement osoa gauzatzera"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Desgaitu GNSS eginbeharren zikloak, eta egin konstelazio eta maiztasun guztien jarraipena."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"باید کمتر از <xliff:g id="NUMBER">%d</xliff:g> رقم باشد"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"فقط می‌تواند شامل اعداد ۰ تا ۹ باشد"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"سرپرست دستگاه اجازه استفاده از پین اخیر را نمی‌دهد"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"پین‌های رایج توسط سرپرست فناوری اطلاعات شما مسدود شده‌اند. پین متفاوتی را امتحان کنید."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"نمی‌تواند نویسه نامعتبر داشته باشد"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"باید حداقل یک حرف داشته باشد"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"باید حداقل یک عدد داشته باشد"</string>
@@ -596,6 +597,7 @@
       <item quantity="other">باید حداقل <xliff:g id="COUNT">%d</xliff:g> نویسه غیرحرف داشته باشد</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"سرپرست دستگاه اجازه استفاده از گذرواژه اخیر را نمی‌دهد"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"گذرواژه‌های رایج توسط سرپرست فناوری اطلاعات شما مسدود شده‌اند. گذرواژه متفاوتی را امتحان کنید."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"ترتیب صعودی، نزولی یا تکراری ارقام مجاز نیست"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"تأیید"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"لغو"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"‏باند AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"‏برای ایجاد یک شبکه Wi‑Fi برای سایر دستگاه‌ها، از نقطه اتصال استفاده کنید. نقطه اتصال با استفاده از اتصال داده تلفن همراه، اینترنت ارائه می‌دهد. ممکن است هزینه‌های داده تلفن همراه اضافه اعمال شوند."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"برنامه‌ها می‌توانند نقطه اتصالی ایجاد کنند تا محتوا را با دستگاه‌های اطراف به اشتراک بگذارند."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"در حال روشن کردن نقطه اتصال…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"در حال خاموش کردن نقطه اتصال…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> فعال است"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"به‌روزرسانی بزرگ‌نمایی صفحه در انتقال‌های برنامه"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"قطع تماس با دکمه روشن/خاموش"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"اشاره‌گر موشواره بزرگ"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"برداشتن پویانمایی‌ها"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"صدای مونو"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"ترکیب کانال‌ها هنگام پخش صدا"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"تأخیر لمس کردن و نگه داشتن"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"دستگاه را در پس‌زمینه بیدار می‌کند"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"به‌طور مکرر مکان را درخواست می‌کند"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> برنامه عملکرد نادرست دارند"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"برنامه متوقف شود؟"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"تلفنتان نمی‌تواند به‌طور عادی میزان استفاده از شارژ باتری را مدیریت کند، زیرا <xliff:g id="APP">%1$s</xliff:g> آن را بیدار نگه می‌دارد.\n\nبرای برطرف کردن این مشکل، می‌توانید برنامه را متوقف کنید.\n\nاگر مشکل ادامه داشت، ممکن است لازم باشد برنامه را حذف نصب کنید تا عملکرد باتری بهبود یابد."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"رایانه لوحی‌تان نمی‌تواند به‌طور عادی میزان استفاده از شارژ باتری را مدیریت کند، زیرا <xliff:g id="APP">%1$s</xliff:g> آن را بیدار نگه می‌دارد.\n\nبرای برطرف کردن این مشکل، می‌توانید برنامه را متوقف کنید.\n\nاگر مشکل ادامه داشت، ممکن است لازم باشد برنامه را حذف نصب کنید تا عملکرد باتری بهبود یابد."</string>
@@ -3056,8 +3069,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"هیچ‌کدام"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"هشدارها"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"رسانه"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"شامل بازخورد سیستم مانند صداهای شارژ کردن و لمس کردن"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"یادآوری‌ها"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"رویدادها"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"همه تماس‌گیرندگان"</string>
@@ -3757,6 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"در رایانه لوحی جدیدتان گشتی بزنید"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"در دستگاه جدیدتان گشتی بزنید"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"این ویدیو در این دستگاه دردسترس نیست."</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"‏اجرای کامل GnssMeasurement"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"‏دوره کاری GNSS را غیرفعال کنید، همه زنجیره عکس‌های پانوراما و فرکانس‌ها را ردیابی کنید."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

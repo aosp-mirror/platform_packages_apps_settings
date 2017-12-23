@@ -573,6 +573,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"PIN musí obsahovat méně než tento počet číslic: <xliff:g id="NUMBER">%d</xliff:g>"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"PIN smí obsahovat pouze číslice 0 až 9."</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Administrátor zařízení nedovoluje použití nedávno použitého kódu PIN"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Obvyklé kódy PIN jsou blokovány administrátorem IT. Použijte jiný PIN."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Heslo nesmí obsahovat neplatné znaky."</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Heslo musí obsahovat alespoň jedno písmeno."</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Heslo musí obsahovat alespoň jednu číslici."</string>
@@ -614,6 +615,7 @@
       <item quantity="one">Heslo musí obsahovat alespoň 1 znak jiný než písmeno</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Administrátor zařízení neumožňuje použít heslo, které jste použili nedávno"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Obvyklá hesla jsou blokována administrátorem IT. Použijte jiné heslo."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Posloupnost rostoucích, klesajících nebo opakujících se číslic není povolena"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Potvrdit"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Zrušit"</string>
@@ -931,6 +933,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Pásmo přístupového bodu"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Pomocí hotspotu můžete vytvořit síť Wi‑Fi pro další zařízení. Hotspot poskytuje připojení k internetu pomocí vašeho mobilního datového připojení. Mohou být účtovány dodatečné poplatky za mobilní data."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Aplikace mohou vytvořit hotspot ke sdílení obsahu s okolními zařízeními."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Zapínání hotspotu…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Vypínání hotspotu…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"Síť <xliff:g id="NETWORK_SSID">%1$s</xliff:g> je aktivní"</string>
@@ -1888,8 +1894,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Aktual. přiblížení obrazovky při přepnutí aplikací"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Vypínač ukončí hovor"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Velký kurzor myši"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Odstranit animace"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Zvuk mono"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Při přehrávání zvuku kombinovat kanály"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Prodleva přidržení"</string>
@@ -2067,6 +2072,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Buzení zařízen na pozadí"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Časté žádosti o polohu"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"Počet aplikací, které se nechovají správně: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Zastavit aplikaci?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Telefon nemůže normálně šetřit baterii, protože mu aplikace <xliff:g id="APP">%1$s</xliff:g> znemožňuje přejít do režimu spánku.\n\nTento problém můžete zkusit vyřešit tím, že aplikaci ukončíte.\n\nPokud se to bude dít neustále, kvůli prodloužení výdrže baterie bude aplikaci možná nutné odinstalovat."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Tablet nemůže normálně šetřit baterii, protože mu aplikace <xliff:g id="APP">%1$s</xliff:g> znemožňuje přejít do režimu spánku.\n\nTento problém můžete zkusit vyřešit tím, že aplikaci ukončíte.\n\nPokud se to bude dít neustále, kvůli prodloužení výdrže baterie bude aplikaci možná nutné odinstalovat."</string>
@@ -3118,8 +3131,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Žádné"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Budíky"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Média"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Zahrnuje systémovou odezvu, např. zvuky dotyků a nabíjení"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Připomenutí"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Události"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Všichni volající"</string>
@@ -3869,6 +3881,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Prohlédněte si svůj nový tablet"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Prohlédněte si své nové zařízení"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Funkce v tomto zařízení není k dispozici"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Vynutit úplné měření GNSS"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Zakázat cyklus povinností GNSS, měřit všechny konstelace a frekvence"</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

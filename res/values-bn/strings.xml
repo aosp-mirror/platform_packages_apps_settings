@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"<xliff:g id="NUMBER">%d</xliff:g>টি সংখ্যার চেয়ে কম হতে হবে"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"শুধুমাত্র ০-৯ সংখ্যাগুলি থাকবে"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পিন ব্যবহার করতে দেয় না"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"একইধরনের পিন আপনার আইটি অ্যাডমিনের মাধ্যমে ব্লক করা হয়। অন্য একটি পিন ব্যবহার করার চেষ্টা করুন।"</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"এতে কোনো অবৈধ অক্ষর অন্তর্ভুক্ত করা যাবে না"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"কমপক্ষে একটি অক্ষর থাকতে হবে"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"কমপক্ষে একটি সংখ্যা থাকতে হবে"</string>
@@ -596,6 +597,7 @@
       <item quantity="other">কমপক্ষে এমন <xliff:g id="COUNT">%d</xliff:g>টি অক্ষর থাকতে হবে যেটি বর্ণ নয়</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"ডিভাইস প্রশাসক একটি সাম্প্রতিক পাসওয়ার্ড ব্যবহার করতে দেয় না"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"একইধরনের পাসওয়ার্ড আপনার আইটি অ্যাডমিনের মাধ্যমে ব্লক করা হয়। অন্য একটি পাসওয়ার্ড ব্যবহার করার চেষ্টা করুন।"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"সংখ্যাগুলি ছোট থেকে বড় ক্রমে, বড় থেকে ছোট ক্রমে বা একই সংখ্যাকে বার বার লেখা যাবে না"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"নিশ্চিত করুন"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"বাতিল"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP Band"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"আপনার অন্যান্য ডিভাইসের জন্য একটি ওয়াই-ফাই নেটওয়ার্ক তৈরি করতে হটস্পট ব্যবহার করুন। হটস্পটের মাধ্যমে আপনার মোবাইলের ডেটা ব্যবহার করে ইন্টারনেট সংযোগ দেওয়া হয়। মোবাইলের ডেটার জন্য অতিরিক্ত চার্জ প্রযোজ্য হতে পারে।"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"অ্যাপগুলি আশেপাশের ডিভাইসের সাথে কন্টেন্ট শেয়ার করার জন্য হটস্পট তৈরি করতে পারে।"</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"হটস্পট চালু হচ্ছে..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"হটস্পট বন্ধ হচ্ছে..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> সক্রিয় আছে"</string>
@@ -1154,8 +1160,8 @@
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"USB স্টোরেজ আনমাউন্ট করুন, উপলব্ধ স্টোরেজ দেখুন"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"SD কার্ড আনমাউন্ট করুন, উপলব্ধ স্টোরেজ দেখুন"</string>
     <string name="imei_multi_sim" msgid="6387012961838800539">"IMEI (সিম স্লট %1$d)"</string>
-    <!-- no translation found for status_number (5948892105546651296) -->
-    <skip />
+    <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"ফোন নম্বর"</string>
     <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (সিম স্লট %1$d)"</string>
     <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"ফোন নম্বর (সিম স্লট %1$d)"</string>
     <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"সিমের MDN"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"অ্যাপ্লিকেশান ট্রানজিশনের উপর স্ক্রীন বৃহত্তরীকরণ আপডেট"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"পাওয়ার বোতামে কল শেষ হয়"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"বড় মাউস পয়েন্টার"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"অ্যানিমেশন সরিয়ে দিন"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"মোনো অডিও"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"অডিও বাজানোর সময় চ্যানেলগুলিকে একত্রিত করুন"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"স্পর্শ করে ধরে রাখায় বিলম্ব"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"ডিভাইসটিকে পটভূমিতে সক্রিয় করা হচ্ছে"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"বারবার অবস্থানের অনুরোধ করা হচ্ছে"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g>টি অ্যাপে অস্বাভাবিক কার্যকলাপ দেখা যাচ্ছে"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"অ্যাপটি বন্ধ করবেন?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g> অ্যাপটি আপনার ফোনকে জাগিয়ে রাখছে, তাই আপনার ফোন স্বাভাবিকভাবে ব্যাটারি পরিচালনা করতে পারছে না।\n\nএই সমস্যার সমাধানের জন্য আপনি অ্যাপটি বন্ধ করতে পারেন।\n\nতার পরেও যদি এরকম ঘটতে থাকে, তাহলে ব্যাটারির পারফরম্যান্সের উন্নতি করতে এই অ্যাপটি আনইনস্টল করতে হতে পারে।"</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"<xliff:g id="APP">%1$s</xliff:g> অ্যাপটি আপনার ট্যাবলেট জাগিয়ে রাখছে, তাই আপনার ট্যাবলেট স্বাভাবিকভাবে ব্যাটারি পরিচালনা করতে পারছে না।\n\nএই সমস্যার সমাধানের জন্য আপনি অ্যাপটি বন্ধ করতে পারেন।\n\nতার পরেও যদি এরকম ঘটতে থাকে, তাহলে ব্যাটারির পারফরম্যান্সের উন্নতি করতে এই অ্যাপটি আনইনস্টল করতে হতে পারে।"</string>
@@ -2862,11 +2875,9 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"আচরণ"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"এগুলির সাউন্ড ও ভাইব্রেশন হবে"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"কোনও সাউন্ড নয়"</string>
-    <!-- no translation found for zen_mode_behavior_total_silence (2229976744274214528) -->
-    <skip />
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"সম্পূর্ণ নীরব"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"<xliff:g id="CATEGORIES">%1$s</xliff:g> ছাড়া কোনও সাউন্ড নয়"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (6455884547877702466) -->
-    <skip />
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"অ্যালার্ম এবং মিডিয়া ছাড়া কোনও সাউন্ড করা হবে না"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"নিজে থেকে চালু করুন"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"অটোমেটিক নিয়ম"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"অটোমেটিক নিয়ম"</string>
@@ -3057,18 +3068,15 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"শুধুমাত্র তারকাচিহ্নিত পরিচিতিদের থেকে"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"কোনো কিছুই নয়"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"অ্যালার্মগুলি"</string>
-    <!-- no translation found for zen_mode_media_system_other (5937422836400161702) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"মিডিয়া"</string>
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"স্পর্শ এবং চার্জ করার সময় হওয়া সাউন্ডের মতো সিস্টেম ফিডব্যাক অন্তর্ভুক্ত"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"অনুস্মারকগুলি"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ইভেন্টগুলি"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"সমস্ত কলার"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"নির্বাচিত কলারগুলি"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"কলারগুলির পুনরাবৃত্তি করুন"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"একই ব্যক্তি দ্বিতীয়বার কল করলে <xliff:g id="MINUTES">%d</xliff:g>"</string>
-    <!-- no translation found for zen_mode_behavior_summary_custom (168127313238020146) -->
-    <skip />
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"কাস্টম"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"স্বয়ংক্রিয়ভাবে চালু"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"কখনও নয়"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"প্রতিদিন রাতে"</string>
@@ -3504,7 +3512,7 @@
     <string name="notification_log_details_delimiter" msgid="3116559361552416747">": "</string>
     <string name="notification_log_details_package" msgid="2596495677039100284">"pkg"</string>
     <string name="notification_log_details_key" msgid="2995791937075862968">"কী"</string>
-    <string name="notification_log_details_group" msgid="2430467015200368698">"গোষ্ঠী"</string>
+    <string name="notification_log_details_group" msgid="2430467015200368698">"গ্রুপ"</string>
     <string name="notification_log_details_group_summary" msgid="7945543958255585829">"(সারাংশ)"</string>
     <string name="notification_log_details_visibility" msgid="2552873780715930971">"দৃশ্যমানতা"</string>
     <string name="notification_log_details_public_version" msgid="4247242364605495240">"সর্বজনীন-ভার্সন"</string>
@@ -3761,8 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"আপনার নতুন ট্যাবলেট চালিয়ে দেখুন"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"আপনার নতুন ডিভাইস চালিয়ে দেখুন"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"এই বৈশিষ্ট্যটি এই ডিভাইসে উপলব্ধ নেই"</string>
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking (3135751504042445872) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
     <skip />
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (1669257168039506151) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
     <skip />
 </resources>

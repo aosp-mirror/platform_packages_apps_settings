@@ -573,6 +573,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"צריך להיות פחות מ-<xliff:g id="NUMBER">%d</xliff:g> ספרות"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"צריך להכיל רק את הספרות 0-9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"מנהל המכשיר לא מאפשר להשתמש בקוד גישה שנעשה בו שימוש לאחרונה"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"‏קודי גישה נפוצים חסומים בידי מנהל ה-IT. יש לנסות קוד גישה אחר."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"לא ניתן לכלול תו לא חוקי"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"חייבת להכיל אות אחת לפחות"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"צריכה להכיל ספרה אחת לפחות"</string>
@@ -614,6 +615,7 @@
       <item quantity="one">צריכה להכיל לפחות תו אחד שאינו אות</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"מנהל המכשיר לא מאפשר להשתמש בסיסמה שנעשה בה שימוש לאחרונה"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"‏סיסמאות נפוצות חסומות בידי מנהל ה-IT. יש לנסות סיסמה אחרת."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"אין להגדיר רצף ספרות עולה, יורד או חוזר"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"אישור"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"ביטול"</string>
@@ -931,6 +933,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"‏תדר AP"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"‏יש לך אפשרות להשתמש בנקודה לשיתוף אינטרנט כדי ליצור רשת Wi‑Fi ולחבר אליה את המכשירים האחרים. נקודות לשיתוף אינטרנט מספקות חיבור לאינטרנט דרך חבילת הגלישה שלך. ייתכן שהשימוש יהיה כרוך בתשלום נוסף על חבילת הגלישה."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"אפשר להשתמש באפליקציות כדי ליצור נקודה לשיתוף אינטרנט ולשתף תכנים בין מכשירים שנמצאים בקרבת מקום."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"מפעיל נקודה לשיתוף אינטרנט…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"מכבה נקודה לשיתוף אינטרנט…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> פעיל"</string>
@@ -1888,8 +1894,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"עדכון הגדלת מסך במעבר בין אפליקציות"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"לחצן ההפעלה מסיים שיחה"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"מצביע עכבר גדול"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"הסרת אנימציות"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"אודיו במונו"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"שילוב ערוצים כאשר מפעילים אודיו"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"עיכוב של נגיעה והחזקה"</string>
@@ -2067,6 +2072,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"המכשיר יוצא ממצב שינה ברקע"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"בקשות מיקום בתדירות גבוהה"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> אפליקציות פועלות בצורה חריגה"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"לעצור את האפליקציה?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"הניהול של צריכת הסוללה בטלפון לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> לא מאפשרת למכשיר להיכנס למצב שינה.\n\nכדי לפתור את הבעיה, ניתן להפסיק את פעולת האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את התקנת האפליקציה כדי לשפר את ביצועי הסוללה."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"הניהול של צריכת הסוללה בטאבלט לא תקין, כי האפליקציה <xliff:g id="APP">%1$s</xliff:g> לא מאפשרת למכשיר להיכנס למצב שינה.\n\nכדי לפתור את הבעיה, ניתן להפסיק את פעולת האפליקציה.\n\nאם הבעיה תימשך, ייתכן שיהיה עליך להסיר את התקנת האפליקציה כדי לשפר את ביצועי הסוללה."</string>
@@ -3120,8 +3133,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"בלי הודעות"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"התראות"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"מדיה"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"כולל משוב מערכת, למשל צלילי נגיעה וטעינה"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"אירועים"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"כל המתקשרים"</string>
@@ -3871,6 +3883,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"סיור היכרות עם הטאבלט החדש"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"סיור היכרות עם המכשיר החדש"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"התכונה לא זמינה במכשיר הזה"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"‏אילוץ של הרצה מלאה של GnssMeasurement"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"‏השבתת מחזור הפעילות של GNSS, מעקב אחר כל מערכות הניווט וכל התדרים."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>
