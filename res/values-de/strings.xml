@@ -566,6 +566,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Es müssen weniger als <xliff:g id="NUMBER">%d</xliff:g> Ziffern sein"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Es dürfen nur Ziffern von 0 bis 9 enthalten sein"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Der Geräteadministrator lässt die Verwendung einer früheren PIN nicht zu"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Häufig verwendete PINs werden von deinem IT-Administrator blockiert. Versuch es mit einer anderen PIN."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Es sind keine ungültigen Zeichen zulässig"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Es muss mindestens ein Buchstabe enthalten sein"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Es muss mindestens eine Ziffer enthalten sein"</string>
@@ -595,6 +596,7 @@
       <item quantity="one">Das Passwort muss mindestens ein Zeichen enthalten, das kein Buchstabe ist</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Der Geräteadministrator lässt die Verwendung eines früheren Passworts nicht zu"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Häufig verwendete Passwörter werden von deinem IT-Administrator blockiert. Versuch es mit einem anderen Passwort."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Aufsteigende, absteigende oder wiederholte Ziffernfolgen sind unzulässig"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Bestätigen"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Abbrechen"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Band für Zugangspunkt"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Mit einem Hotspot kannst du ein WLAN für andere Geräte einrichten. Die Internetverbindung wird über deine mobilen Daten hergestellt, sodass zusätzliche Kosten anfallen können."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"In Apps können über einen Hotspot Inhalte mit Geräten in der Nähe geteilt werden."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Hotspot wird aktiviert…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Hotspot wird deaktiviert…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> ist aktiviert"</string>
@@ -1130,7 +1136,7 @@
     <string name="pin_failed" msgid="1848423634948587645">"Fehler beim Entsperren mit der PIN der SIM-Karte"</string>
     <string name="device_info_settings" product="tablet" msgid="1119755927536987178">"Tablet-Status"</string>
     <string name="device_info_settings" product="default" msgid="475872867864762157">"Telefonstatus"</string>
-    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemaktualisierungen"</string>
+    <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Systemupdates"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Android-Version"</string>
     <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Vergrößerung bei App-Übergängen aktualisieren"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Ein/Aus beendet Anruf"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Großer Mauszeiger"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Animationen entfernen"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Mono-Audio"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Kanäle bei der Audiowiedergabe verbinden"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Reaktionszeit Berühren/Halten"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Gerät wird im Hintergrund aktiviert"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Häufige Standortabfrage"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> fehlerhafte Apps"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"App beenden?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Eine normale Verwaltung des Akkuverbrauchs deines Smartphones ist nicht möglich, weil es durch <xliff:g id="APP">%1$s</xliff:g> aktiv gehalten wird.\n\nUm das Problem zu beheben, kannst du die App beenden.\n\nWenn dies öfter vorkommt, musst du die App eventuell deinstallieren, um die Laufzeit des Smartphones zu erhöhen."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Eine normale Verwaltung des Akkuverbrauchs deines Tablets ist nicht möglich, weil es durch <xliff:g id="APP">%1$s</xliff:g> aktiv gehalten wird.\n\nUm das Problem zu beheben, kannst du die App beenden.\n\nWenn dies öfter vorkommt, musst du die App eventuell deinstallieren, um die Laufzeit des Tablets zu erhöhen."</string>
@@ -2108,7 +2121,7 @@
     <string name="battery_msg_unaccounted" msgid="1963583522633067961">"Der Akkuverbrauch ist nur eine ungefähre Angabe, die nicht jede Quelle der Akkuentladung berücksichtigt. Der sonstige Verbrauch bezieht sich auf die Differenz zwischen dem errechneten ungefähren Akkuverbrauch und der ermittelten tatsächlichen Akkuentladung."</string>
     <string name="battery_desc_overcounted" msgid="5481865509489228603">"Zu hoch berechneter Stromverbrauch"</string>
     <string name="mah" msgid="95245196971239711">"<xliff:g id="NUMBER">%d</xliff:g> mAh"</string>
-    <string name="battery_used_for" msgid="2690821851327075443">"Seit <xliff:g id="TIME">^1</xliff:g> verwendet"</string>
+    <string name="battery_used_for" msgid="2690821851327075443">"Verwendungsdauer <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_active_for" msgid="2964359540508103032">"Aktiv seit <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_screen_usage" msgid="6537658662149713585">"Displaynutzung: <xliff:g id="TIME">^1</xliff:g>"</string>
     <string name="battery_used_by" msgid="1135316757755282999">"<xliff:g id="PERCENT">%1$s</xliff:g> durch <xliff:g id="APP">%2$s</xliff:g> verbraucht"</string>
@@ -3056,8 +3069,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Keine"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Wecker"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Medien"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Einschließlich Systemtönen, beispielsweise Tönen beim Tippen und Aufladen"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Erinnerungen"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Termine"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Alle Anrufer"</string>
@@ -3757,6 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Lass dir zeigen, was dein neues Tablet alles kann"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Lass dir zeigen, was dein neues Gerät alles kann"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Diese Funktion ist auf diesem Gerät nicht verfügbar"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Vollständige GNSS-Messung erzwingen"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"GNSS-Zyklus deaktivieren, alle Konstellationen und Frequenzen erfassen."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

@@ -20,7 +20,9 @@ import static com.android.settings.deviceinfo.StorageSettings.TAG;
 
 import android.annotation.LayoutRes;
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.storage.DiskInfo;
@@ -30,16 +32,12 @@ import android.os.storage.VolumeInfo;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.setupwizardlib.SetupWizardLayout;
-import com.android.setupwizardlib.view.Illustration;
+import com.android.setupwizardlib.GlifLayout;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -51,8 +49,7 @@ public abstract class StorageWizardBase extends Activity {
     protected VolumeInfo mVolume;
     protected DiskInfo mDisk;
 
-    private View mCustomNav;
-    private Button mCustomNext;
+    private Button mNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +69,6 @@ public abstract class StorageWizardBase extends Activity {
             mDisk = mVolume.getDisk();
         }
 
-        setTheme(R.style.SetupWizardStorageStyle);
-
         if (mDisk != null) {
             mStorage.registerListener(mStorageListener);
         }
@@ -83,53 +78,13 @@ public abstract class StorageWizardBase extends Activity {
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
 
-        // Our wizard is a unique flower, so it has custom buttons
-        final ViewGroup navParent = (ViewGroup) findViewById(R.id.suw_layout_navigation_bar)
-                .getParent();
-        mCustomNav = getLayoutInflater().inflate(R.layout.storage_wizard_navigation,
-                navParent, false);
-
-        mCustomNext = (Button) mCustomNav.findViewById(R.id.suw_navbar_next);
-        mCustomNext.setOnClickListener(new View.OnClickListener() {
+        mNext = (Button) findViewById(R.id.storage_next_button);
+        mNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onNavigateNext();
             }
         });
-
-        // Swap our custom navigation bar into place
-        for (int i = 0; i < navParent.getChildCount(); i++) {
-            if (navParent.getChildAt(i).getId() == R.id.suw_layout_navigation_bar) {
-                navParent.removeViewAt(i);
-                navParent.addView(mCustomNav, i);
-                break;
-            }
-        }
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        final Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS |
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN |
-                WindowManager.LayoutParams.FLAG_LAYOUT_INSET_DECOR);
-        window.setStatusBarColor(Color.TRANSPARENT);
-
-        mCustomNav.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-
-        final View scrollView = findViewById(R.id.suw_bottom_scroll_view);
-        scrollView.setVerticalFadingEdgeEnabled(true);
-        scrollView.setFadingEdgeLength(scrollView.getVerticalFadingEdgeLength() * 2);
-
-        if (findViewById(R.id.suw_layout_decor) instanceof Illustration) {
-            // Our header illustration already have padding baked in
-            final View title = findViewById(R.id.suw_layout_title);
-            title.setPadding(title.getPaddingLeft(), 0, title.getPaddingRight(),
-                    title.getPaddingBottom());
-        }
     }
 
     @Override
@@ -139,11 +94,11 @@ public abstract class StorageWizardBase extends Activity {
     }
 
     protected Button getNextButton() {
-        return mCustomNext;
+        return mNext;
     }
 
-    protected SetupWizardLayout getSetupWizardLayout() {
-        return (SetupWizardLayout) findViewById(R.id.setup_wizard_layout);
+    protected GlifLayout getGlifLayout() {
+        return (GlifLayout) findViewById(R.id.setup_wizard_layout);
     }
 
     protected ProgressBar getProgressBar() {
@@ -158,7 +113,7 @@ public abstract class StorageWizardBase extends Activity {
 
     protected void setHeaderText(int resId, String... args) {
         final CharSequence headerText = TextUtils.expandTemplate(getText(resId), args);
-        getSetupWizardLayout().setHeaderText(headerText);
+        getGlifLayout().setHeaderText(headerText);
         setTitle(headerText);
     }
 
@@ -178,27 +133,16 @@ public abstract class StorageWizardBase extends Activity {
     protected static final int ILLUSTRATION_PORTABLE = 2;
 
     protected void setIllustrationType(int type) {
-        switch (type) {
-            case ILLUSTRATION_SETUP:
-                getSetupWizardLayout().setIllustration(
-                        R.drawable.bg_setup_header,
-                        R.drawable.bg_header_horizontal_tile);
-                break;
-            case ILLUSTRATION_INTERNAL:
-                getSetupWizardLayout().setIllustration(
-                        R.drawable.bg_internal_storage_header,
-                        R.drawable.bg_header_horizontal_tile);
-                break;
-            case ILLUSTRATION_PORTABLE:
-                getSetupWizardLayout().setIllustration(
-                        R.drawable.bg_portable_storage_header,
-                        R.drawable.bg_header_horizontal_tile);
-                break;
-        }
+        // TODO: map type to updated icons once provided by UX
+        TypedArray array = obtainStyledAttributes(new int[] {android.R.attr.colorAccent});
+        Drawable icon = getDrawable(com.android.internal.R.drawable.ic_sd_card_48dp).mutate();
+        icon.setTint(array.getColor(0, 0));
+        array.recycle();
+        getGlifLayout().setIcon(icon);
     }
 
     protected void setKeepScreenOn(boolean keepScreenOn) {
-        getSetupWizardLayout().setKeepScreenOn(keepScreenOn);
+        getGlifLayout().setKeepScreenOn(keepScreenOn);
     }
 
     public void onNavigateNext() {

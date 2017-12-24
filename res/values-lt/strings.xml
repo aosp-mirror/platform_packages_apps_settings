@@ -573,6 +573,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Turi būti mažiau nei <xliff:g id="NUMBER">%d</xliff:g> skaitmen."</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Turi būti sudarytas tik iš skaitmenų (0–9)"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"Įrenginio administratorius neleidžia naudoti pastarojo PIN kodo"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Dažnai naudojamus PIN kodus užblokavo IT administratorius. Bandykite naudoti kitą PIN kodą."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Negali būti netinkamų simbolių"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Turi būti bent viena raidė"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Turi būti bent vienas skaitmuo"</string>
@@ -614,6 +615,7 @@
       <item quantity="other">Turi būti bent <xliff:g id="COUNT">%d</xliff:g> neraidinių simbolių</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"Įrenginio administratorius neleidžia naudoti pastarojo slaptažodžio"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Dažnai naudojamus slaptažodžius užblokavo IT administratorius. Bandykite naudoti kitą slaptažodį."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Didėjanti, mažėjanti ar pasikartojanti skaitmenų seka neleidžiama"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Patvirtinti"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Atšaukti"</string>
@@ -931,6 +933,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Prieigos taško juosta"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Naudodami viešosios interneto prieigos tašką, galite sukurti „Wi‑Fi“ tinklą kitiems įrenginiams. Internetas teikiamas per viešosios interneto prieigos tašką naudojant mobiliųjų duomenų ryšį. Gali būti taikomi papildomi mobiliojo ryšio duomenų mokesčiai."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Programos gali sukurti viešosios interneto prieigos tašką ir bendrinti turinį su netoliese esančiais įrenginiais."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Įjungiamas viešosios interneto prieigos taškas…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Išjungiamas viešosios interneto prieigos taškas…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> aktyvus"</string>
@@ -1888,8 +1894,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Atnaujinti ekrano didinimą perkeliant programas"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Maitinimo mygt. baig. skamb."</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Didelis pelės žymeklis"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Pašalinti animacijas"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Monofoninis garsas"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Sujungti kanalus leidžiant garsą"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"„Paliesti ir laikyti“ delsa"</string>
@@ -2067,6 +2072,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Įrenginys pažadinamas fone"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Dažnai siunčiamos vietos užklausos"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"Netinkamai veikiančių programų: <xliff:g id="NUMBER">%1$d</xliff:g>"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Sustabdyti programą?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Telefonas negali įprastai tvarkyti akumuliatoriaus, nes „<xliff:g id="APP">%1$s</xliff:g>“ jį pažadina.\n\nKad pabandytumėte išspręsti šią problemą, galite sustabdyti programą.\n\nJei tai kartosis, gali reikėti pašalinti programą, kad pagerintumėte akumuliatoriaus našumą."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Planšetinis kompiuteris negali įprastai tvarkyti akumuliatoriaus, nes „<xliff:g id="APP">%1$s</xliff:g>“ jį pažadina.\n\nKad pabandytumėte išspręsti šią problemą, galite sustabdyti programą.\n\nJei tai kartosis, gali reikėti pašalinti programą, kad pagerintumėte akumuliatoriaus našumą."</string>
@@ -3118,8 +3131,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Nėra"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Signalai"</string>
     <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Medija"</string>
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Įtraukiami sistemos garsai, pvz., palietimo ir įkrovimo"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Priminimai"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Įvykiai"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Visi skambintojai"</string>
@@ -3869,6 +3881,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Peržiūrėkite naujo planšetinio kompiuterio apžvalgą"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Peržiūrėkite naujo įrenginio apžvalgą"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Ši funkcija nepasiekiama šiame įrenginyje"</string>
-    <string name="enable_gnss_raw_meas_full_tracking" msgid="3135751504042445872">"Priv. įkelti visą „GnssMeasurement“"</string>
-    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="1669257168039506151">"Išj. GNSS darb. ciklus, steb. visas konf. ir dažn."</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

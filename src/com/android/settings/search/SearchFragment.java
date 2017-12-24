@@ -28,6 +28,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.EventLog;
 import android.util.Log;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -43,6 +44,7 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.EventLogTags;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -338,6 +340,8 @@ public class SearchFragment extends InstrumentedFragment implements SearchView.O
             mNoResultsView.setVisibility(View.VISIBLE);
             mMetricsFeatureProvider.visible(getContext(), getMetricsCategory(),
                     MetricsEvent.SETTINGS_SEARCH_NO_RESULT);
+            // Log settings_latency for search end-to-end.
+            EventLog.writeEvent(EventLogTags.SETTINGS_LATENCY, 1, 10);
         } else {
             mNoResultsView.setVisibility(View.GONE);
             mResultsRecyclerView.scrollToPosition(0);

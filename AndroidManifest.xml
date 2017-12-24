@@ -29,6 +29,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS" />
     <uses-permission android:name="android.permission.ACCESS_WIMAX_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIMAX_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -1861,35 +1862,43 @@
 
         <!-- Exported for SystemUI to launch into -->
         <activity android:name=".deviceinfo.StorageWizardInit"
-                android:theme="@style/SuwThemeMaterial.Light"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardFormatConfirm"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardFormatProgress"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMigrate"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMigrateConfirm"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMigrateProgress"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
         <activity android:name=".deviceinfo.StorageWizardReady"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
         <activity android:name=".deviceinfo.StorageWizardMoveConfirm"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="false" />
         <activity android:name=".deviceinfo.StorageWizardMoveProgress"
+                android:theme="@style/SetupWizardStorageStyle"
                 android:taskAffinity="com.android.settings.storage_wizard"
                 android:exported="true"
                 android:permission="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />

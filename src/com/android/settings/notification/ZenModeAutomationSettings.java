@@ -64,12 +64,12 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     }
 
     protected static ManagedServiceSettings.Config getConditionProviderConfig() {
-        final ManagedServiceSettings.Config c = new ManagedServiceSettings.Config();
-        c.tag = TAG;
-        c.intentAction = ConditionProviderService.SERVICE_INTERFACE;
-        c.permission = android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE;
-        c.noun = "condition provider";
-        return c;
+        return new ManagedServiceSettings.Config.Builder()
+                .setTag(TAG)
+                .setIntentAction(ConditionProviderService.SERVICE_INTERFACE)
+                .setPermission(android.Manifest.permission.BIND_CONDITION_PROVIDER_SERVICE)
+                .setNoun("condition provider")
+                .build();
     }
 
     /**

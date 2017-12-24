@@ -567,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"必须少于 <xliff:g id="NUMBER">%d</xliff:g> 位数"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"只能包含 0-9 的数字"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"设备管理员不允许使用最近用过的 PIN 码"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"常用 PIN 码已被您的 IT 管理员屏蔽。请尝试一个不同的 PIN 码。"</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"密码不得包含无效字符"</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"必须包含至少 1 个字母"</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"必须包含至少 1 个数字"</string>
@@ -596,6 +597,7 @@
       <item quantity="one">必须包含至少 1 个非字母字符</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"设备管理员不允许使用最近用过的密码"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"常用密码已被您的 IT 管理员屏蔽。请尝试一个不同的密码。"</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"不允许使用以升序、降序或重复序列进行排列的一串数字"</string>
     <string name="lockpassword_confirm_label" msgid="8176726201389902380">"确认"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"取消"</string>
@@ -907,6 +909,10 @@
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"AP 频段"</string>
     <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"使用热点创建 WLAN 网络供其他设备使用。热点会使用您的移动数据连接提供互联网连接。这可能会产生额外的移动数据流量费用。"</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"应用可以通过创建热点，与附近的设备共享内容。"</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"正在打开热点..."</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"正在关闭热点..."</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> 已连接"</string>
@@ -1860,8 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"在应用转换时更新屏幕放大状态"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"按电源按钮结束通话"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"大号鼠标指针"</string>
-    <!-- no translation found for accessibility_disable_animations (5876035711526394795) -->
-    <skip />
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"移除动画"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"单声道音频"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"播放音频时合并声道"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"触摸和按住延迟"</string>
@@ -2025,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"在后台唤醒设备"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"请求获取位置信息的频率过高"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> 个应用出现异常"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"要停止该应用吗？"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"由于<xliff:g id="APP">%1$s</xliff:g>一直让手机保持唤醒状态，因此您的手机无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"由于<xliff:g id="APP">%1$s</xliff:g>一直让平板电脑保持唤醒状态，因此您的平板电脑无法正常管理电池。\n\n要尝试解决此问题，您可以停止该应用。\n\n如果问题仍然存在，您可能需要卸载此应用，以改善电池性能。"</string>
@@ -2862,11 +2875,9 @@
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"行为"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"允许以下类型的提示音和振动："</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"不发出提示音"</string>
-    <!-- no translation found for zen_mode_behavior_total_silence (2229976744274214528) -->
-    <skip />
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"完全静音"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"不发出提示音（<xliff:g id="CATEGORIES">%1$s</xliff:g>除外）"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (6455884547877702466) -->
-    <skip />
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"静音（闹钟和媒体音频除外）"</string>
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"自动开启"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"自动规则"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"自动规则"</string>
@@ -3057,18 +3068,15 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"仅限来自收藏的联系人"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"无"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"闹钟"</string>
-    <!-- no translation found for zen_mode_media_system_other (5937422836400161702) -->
-    <skip />
-    <!-- no translation found for zen_mode_media_system_other_secondary_text (785130341801887185) -->
-    <skip />
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"媒体"</string>
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"包括系统反馈（例如触摸和充电提示音）"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"提醒"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"活动"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"所有来电者"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"所选的来电者"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"重复来电者"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"如果同一个人在 <xliff:g id="MINUTES">%d</xliff:g> 分钟内第二次来电"</string>
-    <!-- no translation found for zen_mode_behavior_summary_custom (168127313238020146) -->
-    <skip />
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"自定义"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"自动开启"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"永不"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"每晚"</string>
@@ -3761,8 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"新平板电脑功能导览"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"新设备功能导览"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"该设备不支持此功能"</string>
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking (3135751504042445872) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
     <skip />
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (1669257168039506151) -->
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
     <skip />
 </resources>

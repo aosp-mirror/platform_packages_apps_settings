@@ -198,7 +198,7 @@ public class AdvancedPowerUsageDetailTest {
         doReturn(mPackageManager).when(mTestActivity).getPackageManager();
         doReturn(mAppOpsManager).when(mTestActivity).getSystemService(Context.APP_OPS_SERVICE);
 
-        mBatteryUtils = spy(BatteryUtils.getInstance(mTestActivity));
+        mBatteryUtils = spy(new BatteryUtils(mContext));
         doReturn(FOREGROUND_SERVICE_TIME_US).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
                 any(BatteryStats.Uid.class), anyLong());
 

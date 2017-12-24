@@ -93,8 +93,11 @@ public class BluetoothDeviceUpdaterTest {
     public void testAddPreference_deviceNotExist_addPreference() {
         mBluetoothDeviceUpdater.addPreference(mCachedBluetoothDevice);
 
-        verify(mDevicePreferenceCallback).onDeviceAdded(any(Preference.class));
-        assertThat(mBluetoothDeviceUpdater.mPreferenceMap.containsKey(mBluetoothDevice)).isTrue();
+        final Preference preference = mBluetoothDeviceUpdater.mPreferenceMap.get(mBluetoothDevice);
+        assertThat(preference).isNotNull();
+        assertThat(preference.getSummary()).isEqualTo(
+                mContext.getString(R.string.summary_placeholder));
+        verify(mDevicePreferenceCallback).onDeviceAdded(preference);
     }
 
     @Test

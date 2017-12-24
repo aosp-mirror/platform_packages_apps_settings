@@ -361,4 +361,14 @@ public class FakeUid extends Uid {
     public long[] getScreenOffCpuFreqTimes(int which) {
         return null;
     }
+
+    @Override
+    public long[] getCpuFreqTimes(int procState, int which) {
+        return null;
+    }
+
+    @Override
+    public long[] getScreenOffCpuFreqTimes(int procState, int which) {
+        return null;
+    }
 }

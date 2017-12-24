@@ -30,7 +30,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.NetworkScorerPickerPreferenceController;
-import com.android.settings.network.WifiCallingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settings.wifi.p2p.WifiP2pPreferenceController;
@@ -96,7 +95,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
         controllers.add(new WifiInfoPreferenceController(context, getLifecycle(), wifiManager));
         controllers.add(new CellularFallbackPreferenceController(context));
         controllers.add(new WifiP2pPreferenceController(context, getLifecycle(), wifiManager));
-        controllers.add(new WifiCallingPreferenceController(context));
         controllers.add(new WpsPreferenceController(
                 context, getLifecycle(), wifiManager, getFragmentManager()));
         return controllers;

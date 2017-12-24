@@ -176,6 +176,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
                             mShowDeviceWithoutNames);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
+            btPreference.setSummary(R.string.summary_placeholder);
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
         }

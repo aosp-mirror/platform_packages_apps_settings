@@ -169,6 +169,12 @@
     <string name="bluetooth_device_name_summary" msgid="522235742194965734">"Visible avec le nom \"<xliff:g id="DEVICE_NAME">^1</xliff:g>\" pour les autres appareils"</string>
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"Vos appareils"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Associer un nouvel appareil"</string>
+    <string name="bluetooth_pref_summary" msgid="2606502649251443574">"Autoriser l\'appareil à s\'associer et à se connecter à des appareils Bluetooth"</string>
+    <string name="connected_device_connected_title" msgid="5871712271201945606">"Actuellement connecté"</string>
+    <string name="connected_device_saved_title" msgid="688364359746674536">"Appareils enregistrés"</string>
+    <string name="connected_device_add_device_title" msgid="7803521577708810621">"Ajouter un appareil"</string>
+    <string name="connected_device_add_device_summary" msgid="5514219577320066914">"Le Bluetooth sera activé pour permettre l\'association"</string>
+    <string name="connected_device_connections_title" msgid="5988939345181466770">"Préférences de connexion"</string>
     <string name="date_and_time" msgid="9062980487860757694">"Date et heure"</string>
     <string name="choose_timezone" msgid="1362834506479536274">"Sélectionner le fuseau horaire"</string>
     <!-- no translation found for intent_sender_data_label (6332324780477289261) -->
@@ -561,6 +567,7 @@
     <string name="lockpassword_pin_too_long" msgid="2079396149560490458">"Le code doit comporter moins de <xliff:g id="NUMBER">%d</xliff:g> chiffres"</string>
     <string name="lockpassword_pin_contains_non_digits" msgid="7284664023164191198">"Le code ne doit comporter que des chiffres compris entre 0 et 9"</string>
     <string name="lockpassword_pin_recently_used" msgid="1401569207976460727">"L\'administrateur de l\'appareil n\'autorise pas l\'utilisation d\'un code récent"</string>
+    <string name="lockpassword_pin_blacklisted_by_admin" msgid="8563366383328811472">"Les codes courants sont bloqués par votre administrateur informatique. Choisissez un autre code."</string>
     <string name="lockpassword_illegal_character" msgid="8049611046639943217">"Vous ne pouvez pas inclure de caractère non valide."</string>
     <string name="lockpassword_password_requires_alpha" msgid="3036589522150097731">"Veuillez inclure au moins une lettre."</string>
     <string name="lockpassword_password_requires_digit" msgid="5140062925787058765">"Veuillez inclure au moins un chiffre."</string>
@@ -590,8 +597,9 @@
       <item quantity="other">Le mot de passe doit comporter au moins <xliff:g id="COUNT">%d</xliff:g> caractères autre qu\'une lettre</item>
     </plurals>
     <string name="lockpassword_password_recently_used" msgid="942665351220525547">"L\'administrateur de l\'appareil n\'autorise pas l\'utilisation d\'un mot de passe récent"</string>
+    <string name="lockpassword_password_blacklisted_by_admin" msgid="9105101266246197027">"Les mots de passe courants sont bloqués par votre administrateur informatique. Choisissez un autre mot de passe."</string>
     <string name="lockpassword_pin_no_sequential_digits" msgid="680765285206990584">"Les suites de chiffres croissantes, décroissantes ou répétitives ne sont pas autorisées"</string>
-    <string name="lockpassword_ok_label" msgid="313822574062553672">"OK"</string>
+    <string name="lockpassword_confirm_label" msgid="8176726201389902380">"Confirmer"</string>
     <string name="lockpassword_cancel_label" msgid="8818529276331121899">"Annuler"</string>
     <string name="lockpassword_clear_label" msgid="5724429464960458155">"Effacer"</string>
     <string name="lockpattern_tutorial_cancel_label" msgid="6431583477570493261">"Annuler"</string>
@@ -626,7 +634,7 @@
     <string name="bluetooth_confirm_passkey_msg" msgid="3708312912841950052">"Pour associer votre appareil à :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Assurez-vous que le mot de passe &lt;br&gt;&lt;b&gt;<xliff:g id="PASSKEY">%2$s</xliff:g>&lt;/b&gt; s\'affiche."</string>
     <string name="bluetooth_incoming_pairing_msg" msgid="1615930853859551491">"De :&lt;br&gt;&lt;b&gt;<xliff:g id="DEVICE_NAME">%1$s</xliff:g>&lt;/b&gt;&lt;br&gt;&lt;br&gt;Associer à cet appareil ?"</string>
     <string name="bluetooth_display_passkey_pin_msg" msgid="2796550001376088433">"Pour l\'association à :<xliff:g id="BOLD1_0">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="DEVICE_NAME">%1$s</xliff:g><xliff:g id="END_BOLD1">&lt;/b&gt;&lt;br&gt;&lt;br&gt;</xliff:g>Saisissez <xliff:g id="BOLD2_1">&lt;br&gt;&lt;b&gt;</xliff:g><xliff:g id="PASSKEY">%2$s</xliff:g><xliff:g id="END_BOLD2">&lt;/b&gt;</xliff:g>, puis appuyez sur \"Retour\" ou sur \"Entrée\"."</string>
-    <string name="bluetooth_pairing_shares_phonebook" msgid="2277931851483023208">"Autoriser <xliff:g id="DEVICE_NAME">%1$s</xliff:g> à accéder à vos contacts et à l\'historique des appels"</string>
+    <string name="bluetooth_pairing_shares_phonebook" msgid="9082518313285787097">"Autoriser l\'accès à vos contacts et à l\'historique des appels"</string>
     <string name="bluetooth_error_title" msgid="6850384073923533096"></string>
     <string name="bluetooth_connecting_error_message" msgid="1397388344342081090">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_scan_title" msgid="2277464653118896016">"Rechercher des appareils"</string>
@@ -668,16 +676,16 @@
     <string name="bluetooth_disconnect_headset_profile" msgid="8635908811168780720">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté de l\'audio en mains libres."</string>
     <string name="bluetooth_disconnect_hid_profile" msgid="3282295189719352075">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté du périphérique d\'entrée."</string>
     <string name="bluetooth_disconnect_pan_user_profile" msgid="8037627994382458698">"L\'accès à Internet via <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être interrompu."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="1262792320446274407">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ne partagera plus la connexion Internet de la tablette."</string>
-    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="5700332050175684571">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté et ne partagera plus la connexion Internet du téléphone."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="tablet" msgid="8355910926439312604">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté et ne partagera plus la connexion Internet de cette tablette."</string>
+    <string name="bluetooth_disconnect_pan_nap_profile" product="default" msgid="6251611115860359886">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> sera déconnecté et ne partagera plus la connexion Internet de ce téléphone."</string>
     <string name="bluetooth_device_advanced_title" msgid="6066342531927499308">"Appareil Bluetooth associé"</string>
     <string name="bluetooth_device_advanced_online_mode_title" msgid="3689050071425683114">"Se connecter"</string>
     <string name="bluetooth_device_advanced_online_mode_summary" msgid="1204424107263248336">"Connecter à un appareil Bluetooth"</string>
     <string name="bluetooth_device_advanced_profile_header_title" msgid="102745381968579605">"Utiliser pour"</string>
     <string name="bluetooth_device_advanced_rename_device" msgid="5148578059584955791">"Renommer"</string>
     <string name="bluetooth_device_advanced_enable_opp_title" msgid="8222550640371627365">"Autoriser les fichiers entrants"</string>
-    <string name="bluetooth_pan_user_profile_summary_connected" msgid="4602294638909590612">"Connecté à l\'appareil pour accès Internet"</string>
-    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1561383706411975199">"Connexion Internet locale partagée"</string>
+    <string name="bluetooth_pan_user_profile_summary_connected" msgid="6436258151814414028">"Connecté à l\'appareil pour accès Internet"</string>
+    <string name="bluetooth_pan_nap_profile_summary_connected" msgid="1322694224800769308">"Connexion Internet locale partagée"</string>
     <string name="bluetooth_dock_settings" msgid="3218335822716052885">"Paramètres de la station d\'accueil"</string>
     <string name="bluetooth_dock_settings_title" msgid="5543069893044375188">"Utiliser station d\'accueil pour l\'audio"</string>
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Comme téléphone à haut-parleur"</string>
@@ -730,8 +738,8 @@
     <string name="wifi_wakeup_summary_scanning_disabled" msgid="7247227922074840445">"Indisponible, car la recherche Wi‑Fi est désactivée"</string>
     <string name="wifi_wakeup_summary_scoring_disabled" msgid="108339002136866897">"Pour utiliser cette fonctionnalité, sélectionnez un fournisseur d\'évaluation de l\'état du réseau"</string>
     <string name="wifi_poor_network_detection" msgid="4925789238170207169">"Éviter les connexions instables"</string>
-    <string name="wifi_poor_network_detection_summary" msgid="2784135142239546291">"Ne pas utiliser de réseau Wi-Fi, sauf en cas de connexion Internet de bonne qualité"</string>
-    <string name="wifi_avoid_poor_network_detection_summary" msgid="4674423884870027498">"N\'utiliser que réseaux dotés d\'une connexion Internet stable"</string>
+    <string name="wifi_poor_network_detection_summary" msgid="7016103106105907127">"Ne pas utiliser de réseau Wi-Fi à moins qu\'il ne dispose d\'une bonne connexion Internet"</string>
+    <string name="wifi_avoid_poor_network_detection_summary" msgid="1644292503152790501">"N\'utiliser que les réseaux dotés de connexion Internet stable"</string>
     <string name="use_open_wifi_automatically_title" msgid="6851951242903078588">"Connexion aux réseaux ouverts"</string>
     <string name="use_open_wifi_automatically_summary" msgid="2982091714252931713">"Se connecter automatiquement aux réseaux publics haute qualité"</string>
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Pour utiliser cette fonctionnalité, sélectionnez un fournisseur d\'évaluation de l\'état du réseau"</string>
@@ -747,9 +755,9 @@
     <string name="wifi_suspend_optimizations" msgid="1220174276403689487">"Optimisation du Wi-Fi"</string>
     <string name="wifi_suspend_optimizations_summary" msgid="4151428966089116856">"Minimiser la consommation de la batterie lorsque le Wi-Fi est activé"</string>
     <string name="wifi_limit_optimizations_summary" msgid="9000801068363468950">"Limiter batterie util. par Wi‑Fi"</string>
-    <string name="wifi_switch_away_when_unvalidated" msgid="1707247692180853058">"Utiliser les données mobiles si vous n\'avez plus accès à Internet via le réseau Wi‑Fi"</string>
+    <string name="wifi_switch_away_when_unvalidated" msgid="8593144541347373394">"Utiliser les données mobiles si vous n\'avez plus accès à Internet via le réseau Wi‑Fi"</string>
     <string name="wifi_cellular_data_fallback_title" msgid="8753386877755616476">"Se connecter automatiquement au réseau de données mobiles"</string>
-    <string name="wifi_cellular_data_fallback_summary" msgid="6375399280719867214">"Les données mobiles seront utilisées si vous n\'avez pas accès à Internet via le réseau Wi‑Fi. Des frais liés à la consommation des données peuvent s\'appliquer."</string>
+    <string name="wifi_cellular_data_fallback_summary" msgid="1403505355490119307">"Les données mobiles sont utilisées si vous n\'avez pas accès à Internet via le réseau Wi‑Fi. Des frais liés à la consommation des données peuvent s\'appliquer."</string>
     <string name="wifi_add_network" msgid="6234851776910938957">"Ajouter un réseau"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2913345003906899146">"Préférences Wi-Fi"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="646393113104367290">"Le Wi‑Fi est rétabli automatiquement"</string>
@@ -833,9 +841,9 @@
     <string name="wifi_hotspot_title" msgid="7726205804813286950">"Se connecter au point d\'accès pour la connexion ?"</string>
     <string name="wifi_hotspot_message" msgid="3673833421453455747">"\"<xliff:g id="APP_NAME">%1$s</xliff:g>\" requiert une connexion en ligne pour autoriser la connexion au réseau."</string>
     <string name="wifi_hotspot_connect" msgid="5065506390164939225">"SE CONNECTER"</string>
-    <string name="no_internet_access_text" msgid="7133561752896706392">"Ce réseau ne dispose d\'aucun accès à Internet. Rester connecté ?"</string>
+    <string name="no_internet_access_text" msgid="5926979351959279577">"Ce réseau ne dispose d\'aucun accès à Internet. Rester connecté ?"</string>
     <string name="no_internet_access_remember" msgid="4697314331614625075">"Ne plus demander pour ce réseau"</string>
-    <string name="lost_internet_access_title" msgid="6228530645663584505">"Le réseau Wi‑Fi n\'est pas connecté à Internet"</string>
+    <string name="lost_internet_access_title" msgid="5779478650636392426">"Le réseau Wi‑Fi n\'est pas connecté à Internet"</string>
     <string name="lost_internet_access_text" msgid="9029649339816197345">"Vous pouvez vous connecter au réseau mobile lorsque vous rencontrez un problème de connexion Wi-Fi. Des frais liés à la consommation de données peuvent s\'appliquer."</string>
     <string name="lost_internet_access_switch" msgid="2262459569601190039">"Se connecter au réseau mobile"</string>
     <string name="lost_internet_access_cancel" msgid="338273139419871110">"Rester en Wi‑Fi"</string>
@@ -856,7 +864,7 @@
     <string name="wifi_advanced_titlebar" msgid="4485841401774142908">"Paramètres Wi-Fi avancés"</string>
     <string name="wifi_advanced_mac_address_title" msgid="6571335466330978393">"Adresse MAC"</string>
     <string name="wifi_advanced_ip_address_title" msgid="6215297094363164846">"Adresse IP"</string>
-    <string name="wifi_details_title" msgid="3471132676909349382">"Informations sur le réseau"</string>
+    <string name="wifi_details_title" msgid="8954667664081737098">"Informations sur le réseau"</string>
     <string name="wifi_details_subnet_mask" msgid="6720279144174924410">"Masque de sous-réseau"</string>
     <string name="wifi_details_dns" msgid="8648826607751830768">"DNS"</string>
     <string name="wifi_details_ipv6_address_header" msgid="6734119149106422148">"Adresses IPv6"</string>
@@ -890,17 +898,21 @@
     <string name="wifi_p2p_cancel_connect_message" msgid="7477756213423749402">"Voulez-vous annuler l\'invitation à se connecter avec <xliff:g id="PEER_NAME">%1$s</xliff:g> ?"</string>
     <string name="wifi_p2p_delete_group_message" msgid="834559380069647086">"Voulez-vous vraiment supprimer ce groupe ?"</string>
     <string name="wifi_hotspot_checkbox_text" msgid="7763495093333664887">"Point d\'accès Wi‑Fi"</string>
-    <string name="wifi_hotspot_off_subtext" msgid="5466126533609394170">"Ne partager ni la connexion, ni aucun contenu, avec d\'autres appareils"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5752490509369962007">"Connexion Internet de la tablette partagée via un point d\'accès"</string>
-    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="6461075246164300670">"Connexion Internet du téléphone partagée via un point d\'accès"</string>
-    <string name="wifi_hotspot_on_local_only_subtext" msgid="2068110388011294735">"L\'application partage du contenu. Pour partager la connexion Internet, désactivez le point d\'accès, puis réactivez-le"</string>
+    <string name="wifi_hotspot_off_subtext" msgid="2199911382555864644">"Ne partager ni la connexion, ni aucun contenu avec d\'autres appareils"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="tablet" msgid="5936710887156133458">"Connexion Internet de cette tablette partagée via un point d\'accès"</string>
+    <string name="wifi_hotspot_tethering_on_subtext" product="default" msgid="5556202634866621632">"Connexion Internet de ce téléphone partagée via un point d\'accès"</string>
+    <string name="wifi_hotspot_on_local_only_subtext" msgid="5017191966153008">"L\'application partage du contenu. Pour partager la connexion Internet, désactivez le point d\'accès, puis réactivez-le"</string>
     <string name="wifi_hotspot_name_title" msgid="8237000746618636778">"Nom du point d\'accès"</string>
     <string name="wifi_hotspot_name_summary_connecting" msgid="3378299995508671967">"Activation du point d\'accès \"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>\"…"</string>
     <string name="wifi_hotspot_name_summary_connected" msgid="3888672084861445362">"D\'autres appareils peuvent se connecter au point d\'accès \"<xliff:g id="WIFI_HOTSPOT_NAME">%1$s</xliff:g>\""</string>
     <string name="wifi_hotspot_password_title" msgid="8676859981917573801">"Mot de passe du point d\'accès"</string>
     <string name="wifi_hotspot_ap_band_title" msgid="1165801173359290681">"Bande du point d\'accès"</string>
-    <string name="wifi_hotspot_footer_info_regular" msgid="1203489406068036455">"Utilisez un point d\'accès afin de créer un réseau Wi‑Fi pour vos autres appareils. Un point d\'accès fournit un accès à Internet via votre connexion de données mobiles. Des frais supplémentaires peuvent s\'appliquer pour l\'utilisation des données mobiles."</string>
+    <string name="wifi_hotspot_footer_info_regular" msgid="4789553667374849566">"Utilisez un point d\'accès afin de créer un réseau Wi‑Fi pour vos autres appareils. Un point d\'accès fournit un accès à Internet via votre connexion de données mobiles. Des frais supplémentaires peuvent s\'appliquer pour l\'utilisation des données mobiles."</string>
     <string name="wifi_hotspot_footer_info_local_only" msgid="857988412470694109">"Les applications peuvent créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
+    <!-- no translation found for wifi_hotspot_auto_off_title (1590313508558948079) -->
+    <skip />
+    <!-- no translation found for wifi_hotspot_auto_off_summary (5858098059725925084) -->
+    <skip />
     <string name="wifi_tether_starting" msgid="1322237938998639724">"Activation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_stopping" msgid="4835852171686388107">"Désactivation du point d\'accès Wi-Fi en cours…"</string>
     <string name="wifi_tether_enabled_subtext" msgid="7842111748046063857">"<xliff:g id="NETWORK_SSID">%1$s</xliff:g> est actif"</string>
@@ -947,8 +959,8 @@
   </string-array>
     <string name="wifi_calling_off_explanation" msgid="2597566001655908391">"Lorsque les appels Wi-Fi sont activés, votre téléphone peut transférer les appels via les réseaux Wi-Fi ou le réseau de votre opérateur, en fonction de votre préférence et du signal le plus puissant. Avant d\'activer cette fonctionnalité, renseignez-vous auprès de votre opérateur pour en savoir plus sur les frais et d\'autres détails."</string>
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
-    <string name="emergency_address_title" msgid="3571902448699714454">"Mettre à jour l\'adresse d\'urgence"</string>
-    <string name="emergency_address_summary" msgid="3266760199681945746">"Adresse utilisée par les services d\'urgence pour votre position si vous effectuez un appel d\'urgence à l\'aide du Wi-Fi"</string>
+    <string name="emergency_address_title" msgid="932729250447887545">"Adresse d\'urgence"</string>
+    <string name="emergency_address_summary" msgid="7751971156196115129">"Adresse utilisée pour votre position si vous effectuez un appel d\'urgence à l\'aide du Wi-Fi"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Affichage"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Son"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volume"</string>
@@ -1005,7 +1017,10 @@
     <string name="search_clear_history" msgid="4196658962573162457">"Effacer l\'historique"</string>
     <string name="display_settings" msgid="7965901687241669598">"Affichage"</string>
     <string name="accelerometer_title" msgid="7854608399547349157">"Rotation auto de l\'écran"</string>
-    <string name="color_mode_title" msgid="3159275920408338215">"Couleurs vives"</string>
+    <string name="color_mode_title" msgid="9186249332902370471">"Couleurs"</string>
+    <string name="color_mode_option_natural" msgid="5013837483986772758">"Naturel"</string>
+    <string name="color_mode_option_boosted" msgid="8588223970257287524">"Contrasté"</string>
+    <string name="color_mode_option_saturated" msgid="4569683960058798843">"Saturé"</string>
     <string name="accelerometer_summary_on" product="tablet" msgid="429982132339828942">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
     <string name="accelerometer_summary_on" product="default" msgid="1133737282813048021">"Changer automatiquement d\'orientation lors de la rotation du téléphone"</string>
     <string name="accelerometer_summary_off" product="tablet" msgid="4781734213242521682">"Changer automatiquement d\'orientation lors de la rotation de la tablette"</string>
@@ -1124,8 +1139,10 @@
     <string name="system_update_settings_list_item_title" msgid="3342887311059985961">"Mises à jour du système"</string>
     <string name="system_update_settings_list_item_summary" msgid="3853057315907710747"></string>
     <string name="firmware_version" msgid="4801135784886859972">"Version d\'Android"</string>
+    <string name="firmware_title" msgid="5203122368389157877">"Android"</string>
     <string name="security_patch" msgid="8438384045870296634">"Mise à jour du correctif de sécurité Android"</string>
     <string name="model_info" msgid="1952009518045740889">"Modèle"</string>
+    <string name="model_summary" msgid="8306235877567782987">"Modèle : %1$s"</string>
     <string name="hardware_info" msgid="2605080746512527805">"Modèle et matériel"</string>
     <string name="hardware_revision" msgid="8893547686367095527">"Version du matériel"</string>
     <string name="fcc_equipment_id" msgid="149114368246356737">"ID de l\'équipement"</string>
@@ -1142,11 +1159,17 @@
     <string name="storage_settings_title" msgid="8746016738388094064">"Paramètres de stockage"</string>
     <string name="storage_settings_summary" product="nosdcard" msgid="3543813623294870759">"Désinstaller la mémoire de stockage USB, afficher l\'espace disponible"</string>
     <string name="storage_settings_summary" product="default" msgid="9176693537325988610">"Désinstaller la carte SD, afficher la mémoire disponible"</string>
+    <string name="imei_multi_sim" msgid="6387012961838800539">"Code IMEI (emplacement SIM %1$d)"</string>
     <string name="status_number" product="tablet" msgid="1138837891091222272">"MDN"</string>
-    <string name="status_number" product="default" msgid="5123197324870153205">"Mon numéro de téléphone"</string>
+    <string name="status_number" product="default" msgid="5948892105546651296">"Numéro de téléphone"</string>
+    <string name="status_number_sim_slot" product="tablet" msgid="2755592991367858860">"MDN (emplacement SIM %1$d)"</string>
+    <string name="status_number_sim_slot" product="default" msgid="1898212200138025729">"Num. tél. (emplacement SIM %1$d)"</string>
+    <string name="status_number_sim_status" product="tablet" msgid="1367110147304523864">"MDN sur SIM"</string>
+    <string name="status_number_sim_status" product="default" msgid="9123351360569466330">"Numéro de téléphone sur SIM"</string>
     <string name="status_min_number" msgid="3519504522179420597">"MIN"</string>
     <string name="status_msid_number" msgid="909010114445780530">"MSID"</string>
     <string name="status_prl_version" msgid="1007470446618081441">"Version de la liste d\'itinérance préférée"</string>
+    <string name="meid_multi_sim" msgid="748999971744491771">"MEID (emplacement SIM %1$d)"</string>
     <string name="status_meid_number" msgid="1751442889111731088">"MEID"</string>
     <string name="status_icc_id" msgid="943368755577172747">"ICCID"</string>
     <string name="status_network_type" msgid="3279383550222116235">"Type de réseau mobile"</string>
@@ -1256,7 +1279,7 @@
     <string name="storage_detail_other" msgid="8404938385075638238">"Autre"</string>
     <string name="storage_detail_system" msgid="4629506366064709687">"Système"</string>
     <string name="storage_detail_explore" msgid="7911344011431568294">"Explorer la mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\""</string>
-    <string name="storage_detail_dialog_other" msgid="8907101974576694793">"Le libellé \"Autre\" fait référence aux fichiers partagés enregistrés par les applications, aux fichiers téléchargés sur Internet ou via le Bluetooth, aux fichiers Android, etc. \n\nPour afficher l\'intégralité du contenu de la mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\", appuyez sur \"Explorer\"."</string>
+    <string name="storage_detail_dialog_other" msgid="8845766044697204852">"Le libellé \"Autre\" fait référence aux fichiers partagés enregistrés par les applications, aux fichiers téléchargés sur Internet ou via Bluetooth, aux fichiers Android, etc. \n\nPour afficher l\'intégralité du contenu de la mémoire de stockage \"<xliff:g id="NAME">^1</xliff:g>\", appuyez sur \"Explorer\"."</string>
     <string name="storage_detail_dialog_system" msgid="862835644848361569">"Le système contient des fichiers servant à l\'exécution d\'Android <xliff:g id="VERSION">%s</xliff:g>."</string>
     <string name="storage_detail_dialog_user" msgid="3267254783294197804">"<xliff:g id="USER_0">^1</xliff:g> a peut-être enregistré des photos, de la musique, des applications ou d\'autres données en utilisant <xliff:g id="SIZE">^2</xliff:g> d\'espace de stockage. \n\nPour afficher des informations, basculez vers <xliff:g id="USER_1">^1</xliff:g>."</string>
     <string name="storage_wizard_init_title" msgid="5085400514028585772">"Configurer la mémoire \"<xliff:g id="NAME">^1</xliff:g>\""</string>
@@ -1382,15 +1405,15 @@
     <string name="tether_settings_disabled_on_data_saver" msgid="1576908608463904152">"Impossible de partager la connexion ou d\'utiliser des points d\'accès mobiles lorsque la sauvegarde des données est activée"</string>
     <string name="usb_title" msgid="7483344855356312510">"USB"</string>
     <string name="usb_tethering_button_text" msgid="585829947108007917">"Via USB"</string>
-    <string name="usb_tethering_subtext" product="default" msgid="5991482890033484794">"Partager la connexion Internet du téléphone via un câble USB"</string>
-    <string name="usb_tethering_subtext" product="tablet" msgid="5988796139573211318">"Partager la connexion Internet de la tablette via un câble USB"</string>
+    <string name="usb_tethering_subtext" product="default" msgid="3711893746716442706">"Partager la connexion Internet du téléphone via un câble USB"</string>
+    <string name="usb_tethering_subtext" product="tablet" msgid="2292916486612255069">"Partager la connexion Internet de la tablette via un câble USB"</string>
     <string name="bluetooth_tether_checkbox_text" msgid="2379175828878753652">"Via Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="tablet" msgid="4558227863463153412">"Partager la connexion Internet de la tablette via Bluetooth"</string>
-    <string name="bluetooth_tethering_subtext" product="default" msgid="1055197887836203595">"Partager la connexion Internet du téléphone via Bluetooth"</string>
-    <string name="bluetooth_tethering_off_subtext_config" msgid="6326877798974938021">"Partage de la connexion Internet de <xliff:g id="DEVICE_NAME">%1$d</xliff:g> via Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="tablet" msgid="8828883800511737077">"Partager la connexion Internet de la tablette via Bluetooth"</string>
+    <string name="bluetooth_tethering_subtext" product="default" msgid="1904667146601254812">"Partager la connexion Internet du téléphone via Bluetooth"</string>
+    <string name="bluetooth_tethering_off_subtext_config" msgid="376389105752995580">"Partage de la connexion Internet de l\'appareil <xliff:g id="DEVICE_NAME">%1$d</xliff:g> via Bluetooth"</string>
     <string name="bluetooth_tethering_overflow_error" msgid="2135590598511178690">"Partage connexion impossible au-delà de <xliff:g id="MAXCONNECTION">%1$d</xliff:g> appareils."</string>
     <string name="bluetooth_untether_blank" msgid="2871192409329334813">"Le partage connexion avec <xliff:g id="DEVICE_NAME">%1$s</xliff:g> va être annulé."</string>
-    <string name="tethering_footer_info" msgid="1308462275952345985">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès à Internet à d\'autres appareils via votre connexion au réseau mobile. Les applications peuvent également créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
+    <string name="tethering_footer_info" msgid="7112228674056306147">"Utilisez un point d\'accès et le partage de connexion pour fournir un accès à Internet à d\'autres appareils via votre connexion de données mobiles. Les applications peuvent également créer un point d\'accès pour partager du contenu avec des appareils à proximité."</string>
     <string name="tethering_help_button_text" msgid="656117495547173630">"Aide"</string>
     <string name="network_settings_title" msgid="2876509814832830757">"Réseau mobile"</string>
     <string name="manage_mobile_plan_title" msgid="7630170375010107744">"Forfait mobile"</string>
@@ -1465,7 +1488,7 @@
     <string name="settings_license_activity_loading" msgid="3337535809093591740">"Chargement..."</string>
     <string name="settings_safetylegal_title" msgid="1289483965535937431">"Informations de sécurité"</string>
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Informations de sécurité"</string>
-    <string name="settings_safetylegal_activity_unreachable" msgid="250674109915859456">"Vous n\'avez pas de connexion Internet. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
+    <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Vous n\'avez pas de connexion de données. Pour consulter ces informations maintenant, accédez à %s depuis un ordinateur connecté à Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Chargement…"</string>
     <string name="lockpassword_choose_your_screen_lock_header" msgid="3872462096767152394">"Configurer le verrouillage de l\'écran"</string>
     <string name="lockpassword_choose_your_password_message" msgid="1197569283524841412">"Pour des raisons de sécurité, définissez un mot de passe"</string>
@@ -1671,7 +1694,6 @@
     <string name="app_install_details_title" msgid="6905279702654975207">"Infos sur l\'application"</string>
     <string name="app_install_details_summary" msgid="6464796332049327547">"Application installée depuis la boutique <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
     <string name="instant_app_details_summary" msgid="4529934403276907045">"Plus d\'informations sur <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
-    <string name="app_ops_settings" msgid="5108481883575527511">"Fonctionnement des applications"</string>
     <string name="app_ops_running" msgid="7706949900637284122">"En cours d\'exécution"</string>
     <string name="app_ops_never_used" msgid="9114608022906887802">"(Jamais utilisé)"</string>
     <string name="no_default_apps" msgid="2915315663141025400">"Aucune appli par défaut"</string>
@@ -1723,6 +1745,7 @@
     <string name="language_input_gesture_summary_on_non_assist" msgid="756147879200943161"></string>
     <string name="language_input_gesture_summary_off" msgid="4617198819416948217"></string>
     <string name="language_settings" msgid="8758655933029560944">"Langues et saisie"</string>
+    <string name="language_empty_list_user_restricted" msgid="5984015900102140696">"Vous n\'êtes pas autorisé à modifier la langue de l\'appareil."</string>
     <string name="language_keyboard_settings_title" msgid="3709159207482544398">"Langues et saisie"</string>
     <string name="input_assistance" msgid="7577795275222555487">"Aide à la saisie"</string>
     <string name="keyboard_settings_category" msgid="8275523930352487827">"Clavier et modes de saisie"</string>
@@ -1843,6 +1866,7 @@
     <string name="accessibility_toggle_screen_magnification_auto_update_preference_summary" msgid="4392059334816220155">"Mettre à jour la loupe si transition entre applis"</string>
     <string name="accessibility_power_button_ends_call_prerefence_title" msgid="6673851944175874235">"Bouton Marche/Arrêt pour raccrocher"</string>
     <string name="accessibility_toggle_large_pointer_icon_title" msgid="535173100516295580">"Grand curseur de souris"</string>
+    <string name="accessibility_disable_animations" msgid="5876035711526394795">"Supprimer les animations"</string>
     <string name="accessibility_toggle_master_mono_title" msgid="4363806997971905302">"Audio mono"</string>
     <string name="accessibility_toggle_master_mono_summary" msgid="5634277025251530927">"Combiner les chaînes lors de la lecture audio"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="6708467774619266508">"Délai de pression"</string>
@@ -2006,6 +2030,14 @@
     <string name="battery_abnormal_wakeup_alarm_summary" msgid="644657277875785240">"Activation de l\'appareil en arrière-plan"</string>
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Position demandée fréquemment"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> applications ne fonctionnent pas correctement"</string>
+    <!-- no translation found for battery_tip_summary_title (7060523369832289878) -->
+    <skip />
+    <!-- no translation found for battery_tip_summary_summary (7832491466325707487) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <skip />
+    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Arrêter l\'application ?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Votre téléphone ne peut pas gérer la batterie normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> le maintient activé.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la batterie."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Votre tablette ne peut pas gérer la batterie normalement, car l\'application <xliff:g id="APP">%1$s</xliff:g> la maintient activée.\n\nPour y remédier, vous pouvez arrêter l\'application.\n\nSi le problème persiste, vous devrez peut-être désinstaller l\'application pour améliorer les performances de la batterie."</string>
@@ -2113,7 +2145,7 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Plate-forme Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Serveur multimédia"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Optimisation des applications"</string>
-    <string name="battery_saver" msgid="1426682272004907982">"Économiseur de batterie"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"Économiseur de batterie"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Activer automatiquement"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Jamais"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"niveau de la batterie : <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2139,14 +2171,6 @@
     <string name="services_subtitle" msgid="4296402367067266425">"Services"</string>
     <string name="menu_proc_stats_duration" msgid="2323483592994720196">"Durée"</string>
     <string name="mem_details_title" msgid="6548392825497290498">"Détails de la mémoire"</string>
-    <string name="mem_state_subtitle" msgid="2407238869781011933">"États de la mémoire"</string>
-    <string name="mem_use_subtitle" msgid="7319468770222422412">"Utilisation de la mémoire"</string>
-    <string name="mem_use_kernel_type" msgid="8698327165935012484">"Noyau"</string>
-    <string name="mem_use_native_type" msgid="5976704902328347400">"Natif"</string>
-    <string name="mem_use_kernel_cache_type" msgid="6411475064463957513">"Caches du noyau"</string>
-    <string name="mem_use_zram_type" msgid="9087217476795358232">"Échange ZRam"</string>
-    <string name="mem_use_free_type" msgid="717708548454880840">"Gratuit"</string>
-    <string name="mem_use_total" msgid="6308786055749777934">"Total"</string>
     <string name="menu_duration_3h" msgid="4714866438374738385">"3 heures"</string>
     <string name="menu_duration_6h" msgid="1940846763432184132">"6 heures"</string>
     <string name="menu_duration_12h" msgid="7890465404584356294">"12 heures"</string>
@@ -2492,8 +2516,8 @@
     <string name="vpn_forget_long" msgid="2232239391189465752">"Supprimer le VPN"</string>
     <string name="vpn_replace_vpn_title" msgid="2963898301277610248">"Remplacer le VPN existant ?"</string>
     <string name="vpn_set_vpn_title" msgid="4009987321156037267">"Définir le VPN permanent ?"</string>
-    <string name="vpn_first_always_on_vpn_message" msgid="3025322109743675467">"Si vous activez ce paramètre, vous ne disposerez d\'aucune connexion Internet jusqu\'à ce que le VPN parvienne à se connecter"</string>
-    <string name="vpn_replace_always_on_vpn_enable_message" msgid="2577928591361606641">"Votre VPN existant sera remplacé, et vous ne disposerez d\'aucune connexion Internet jusqu\'à ce que le VPN parvienne à se connecter"</string>
+    <string name="vpn_first_always_on_vpn_message" msgid="7144543717673197102">"Lorsque ce paramètre est activé, vous ne disposez d\'aucune connexion Internet jusqu\'à ce que le VPN parvienne à se connecter"</string>
+    <string name="vpn_replace_always_on_vpn_enable_message" msgid="798121133114824006">"Votre VPN existant sera remplacé, et vous ne disposerez d\'aucune connexion Internet jusqu\'à ce que le VPN parvienne à se connecter"</string>
     <string name="vpn_replace_always_on_vpn_disable_message" msgid="3011818750025879902">"Vous êtes déjà connecté à un VPN permanent. Si vous vous connectez à un autre VPN, le VPN actuel sera remplacé et le mode permanent sera désactivé."</string>
     <string name="vpn_replace_vpn_message" msgid="5611635724578812860">"Vous êtes déjà connecté à un VPN. Si vous vous connectez à un autre VPN, le VPN actuel sera remplacé."</string>
     <string name="vpn_turn_on" msgid="2363136869284273872">"Activer"</string>
@@ -2720,6 +2744,7 @@
     <string name="color_purple" msgid="3888532466427762504">"Violet"</string>
     <string name="sim_no_inserted_msg" msgid="210316755353227087">"Aucune carte SIM insérée."</string>
     <string name="sim_status_title" msgid="6744870675182447160">"État de la carte SIM"</string>
+    <string name="sim_status_title_sim_slot" msgid="5725659316463979194">"État carte SIM (emplacement SIM %1$d)"</string>
     <string name="sim_call_back_title" msgid="5181549885999280334">"Rappeler depuis la carte SIM par défaut"</string>
     <string name="sim_outgoing_call_title" msgid="1019763076116874255">"Carte SIM pour appels sortants"</string>
     <string name="sim_other_call_settings" msgid="8247802316114482477">"Autres paramètres d\'appel"</string>
@@ -2733,13 +2758,14 @@
     <string name="sim_pref_divider" msgid="6778907671867621874">"Carte SIM préférée pour"</string>
     <string name="sim_calls_ask_first_prefs_title" msgid="7941299533514115976">"Toujours demander"</string>
     <string name="sim_selection_required_pref" msgid="3446721423206414652">"Veuillez sélectionner une option."</string>
+    <string name="sim_selection_channel_title" msgid="2760909074892782589">"Sélection de la carte SIM"</string>
     <string name="dashboard_title" msgid="5453710313046681820">"Paramètres"</string>
     <plurals name="settings_suggestion_header_summary_hidden_items" formatted="false" msgid="5597356221942118048">
       <item quantity="one">Afficher %d élément masqué</item>
       <item quantity="other">Afficher %d éléments masqués</item>
     </plurals>
     <string name="dashboard_suggestion_condition_footer_content_description" msgid="2898588191174845961">"Réduire"</string>
-    <string name="network_dashboard_title" msgid="4771589228992391573">"Réseau et Internet"</string>
+    <string name="network_dashboard_title" msgid="3135144174846753758">"Réseau et Internet"</string>
     <string name="network_dashboard_summary_mobile" msgid="3851083934739500429">"mobile"</string>
     <string name="network_dashboard_summary_data_usage" msgid="3843261364705042212">"consommation des données"</string>
     <string name="network_dashboard_summary_hotspot" msgid="8494210248613254574">"point d\'accès"</string>
@@ -2799,6 +2825,10 @@
     <string name="keywords_payment_settings" msgid="5220104934130446416">"payer, appuyer, paiements"</string>
     <string name="keywords_backup" msgid="470070289135403022">"sauvegarde, sauvegarder"</string>
     <string name="keywords_assist_gesture_launch" msgid="813968759791342591">"geste"</string>
+    <string name="keywords_imei_info" msgid="7230982940217544527">"imei, meid, min, version prl, imei sv"</string>
+    <string name="keywords_sim_status" msgid="1474422416860990564">"réseau, état du réseau mobile, état du service, force du signal, type de réseau mobile, roaming, iccid"</string>
+    <string name="keywords_model_and_hardware" msgid="1459248377212829642">"numéro de série, version logicielle"</string>
+    <string name="keywords_android_version" msgid="9069747153590902819">"mise à jour du correctif de sécurité Android, version de bande de base, version de noyau"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Créer un tag NFC pour Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Modifier"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Appuyer sur un tag pour le modifier…"</string>
@@ -2836,20 +2866,21 @@
     <string name="emergency_tone_alert" msgid="8941852695428130667">"Alerte"</string>
     <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibreur"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Sons de mise en route"</string>
-    <string name="zen_mode_settings_summary_off" msgid="1857165567766351925">"Aucune règle automatique activée"</string>
-    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="1216562765753405784">
-      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> règle automatique activée</item>
-      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> règles automatiques activées</item>
+    <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Jamais"</string>
+    <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
+      <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g> règle</item>
+      <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> règles</item>
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Ne pas déranger"</string>
     <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"Comportement"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Autoriser sons et vibrations de"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Aucun son"</string>
-    <string name="zen_mode_behavior_total_silence" msgid="6716603819806610626">"Aucun son (silence total)"</string>
+    <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Aucune interruption"</string>
     <string name="zen_mode_behavior_no_sound_except" msgid="4968477585788243114">"Aucun son, sauf <xliff:g id="CATEGORIES">%1$s</xliff:g>"</string>
-    <!-- no translation found for zen_mode_behavior_alarms_only (2423480992071472963) -->
-    <skip />
-    <string name="zen_mode_automation_settings_title" msgid="4228995740594063774">"Règles automatiques"</string>
+    <string name="zen_mode_behavior_alarms_only" msgid="6455884547877702466">"Aucun son, sauf alarmes et médias"</string>
+    <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"Activer automatiquement"</string>
+    <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"Règles automatiques"</string>
+    <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"Règle automatique"</string>
     <string name="zen_mode_automation_suggestion_title" msgid="5105443455143476201">"Définir règles Ne pas déranger"</string>
     <string name="zen_mode_automation_suggestion_summary" msgid="4732808039946935657">"Limiter les sons et le vibreur"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Prioritaires uniquement"</string>
@@ -2857,6 +2888,14 @@
     <string name="zen_mode_option_no_interruptions" msgid="8107126344850276878">"Aucune interruption"</string>
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g> : <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Bloquer nuisances visuelles"</string>
+    <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Autoriser les signaux visuels"</string>
+    <string name="zen_mode_add" msgid="90014394953272517">"Ajouter"</string>
+    <string name="zen_mode_button_turn_on" msgid="5074744714613374902">"ACTIVER MAINTENANT"</string>
+    <string name="zen_mode_button_turn_off" msgid="1995551537320422792">"DÉSACTIVER MAINTENANT"</string>
+    <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"Le mode Ne pas déranger est activé jusqu\'à <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
+    <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"Le mode Ne pas déranger restera activé jusqu\'à ce que vous le désactiviez"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule" msgid="7780048616476170427">"Le mode Ne pas déranger a été activé automatiquement par une règle (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
+    <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Le mode Ne pas déranger a été activé automatiquement par une application (<xliff:g id="APP_NAME">%s</xliff:g>)"</string>
     <string name="sound_work_settings" msgid="6774324553228566442">"Sons du profil professionnel"</string>
     <string name="work_use_personal_sounds_title" msgid="1148331221338458874">"Utiliser sons du profil perso"</string>
     <string name="work_use_personal_sounds_summary" msgid="6207040454949823153">"Les sons des profils professionnel et personnel sont identiques"</string>
@@ -2983,7 +3022,9 @@
     <string name="zen_mode_rule_name" msgid="5149068059383837549">"Nom de la règle"</string>
     <string name="zen_mode_rule_name_hint" msgid="3781174510556433384">"Saisissez le nom de la règle"</string>
     <string name="zen_mode_rule_name_warning" msgid="4517805381294494314">"Ce nom de règle est déjà utilisé."</string>
-    <string name="zen_mode_add_rule" msgid="7459154136384467057">"Ajouter d\'autres règles"</string>
+    <string name="zen_mode_add_rule" msgid="9100929184624317193">"Ajouter une règle"</string>
+    <string name="zen_mode_add_event_rule" msgid="3997335103633946552">"Ajouter une règle d\'événement"</string>
+    <string name="zen_mode_add_time_rule" msgid="5002080000597838703">"Ajouter une règle basée sur l\'heure"</string>
     <string name="zen_mode_delete_rule" msgid="2985902330199039533">"Supprimer la règle"</string>
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Sélectionner le type de règle"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Supprimer la règle \"<xliff:g id="RULE">%1$s</xliff:g>\" ?"</string>
@@ -2991,9 +3032,12 @@
     <string name="zen_mode_rule_type" msgid="2289413469580142888">"Type de règle"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Inconnu"</string>
     <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Configurer une règle"</string>
-    <string name="zen_schedule_rule_type_name" msgid="142936744435271449">"Règle basée sur l\'heure"</string>
+    <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Vous ne pouvez pas modifier ces paramètres pour le moment. Une application (<xliff:g id="APP_NAME">%1$s</xliff:g>) a activé le mode Ne pas déranger automatiquement avec un comportement personnalisé."</string>
+    <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Vous ne pouvez pas modifier ces paramètres pour le moment. Une application a activé le mode Ne pas déranger automatiquement avec un comportement personnalisé."</string>
+    <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Vous ne pouvez pas modifier ces paramètres pour le moment. Le mode Ne pas déranger a été activé automatiquement avec un comportement personnalisé."</string>
+    <string name="zen_schedule_rule_type_name" msgid="6163149826036287324">"Heure"</string>
     <string name="zen_schedule_rule_enabled_toast" msgid="3379499360390382259">"Règle automatique pour activer le mode \"Ne pas déranger\" aux heures indiquées"</string>
-    <string name="zen_event_rule_type_name" msgid="2645981990973086797">"Règle d\'événement"</string>
+    <string name="zen_event_rule_type_name" msgid="6503468472212606158">"Événement"</string>
     <string name="zen_event_rule_enabled_toast" msgid="6910577623330811480">"Règle automatique pour activer le mode \"Ne pas déranger\" pendant les événements indiqués"</string>
     <string name="zen_mode_event_rule_calendar" msgid="8787906563769067418">"Durant les événements pour"</string>
     <string name="zen_mode_event_rule_summary_calendar_template" msgid="5135844750232403975">"Durant les événements pour <xliff:g id="CALENDAR">%1$s</xliff:g>"</string>
@@ -3024,14 +3068,15 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Des contacts favoris uniquement"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Aucun"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
-    <!-- no translation found for zen_mode_media_system_other (8900209390529859777) -->
-    <skip />
+    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Médias"</string>
+    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Inclut les sons du système, comme ceux relatifs à l\'appui et au chargement"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Rappels"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Événements"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Tous les appelants"</string>
     <string name="zen_mode_selected_callers" msgid="3127598874060615742">"Appelants sélectionnés"</string>
     <string name="zen_mode_repeat_callers" msgid="5019521886428322131">"Appels répétés"</string>
     <string name="zen_mode_repeat_callers_summary" msgid="239685342222975733">"Si la même personne appelle deux fois en <xliff:g id="MINUTES">%d</xliff:g> minute(s)"</string>
+    <string name="zen_mode_behavior_summary_custom" msgid="168127313238020146">"Personnalisé"</string>
     <string name="zen_mode_when" msgid="2767193283311106373">"Activation auto"</string>
     <string name="zen_mode_when_never" msgid="8809494351918405602">"Jamais"</string>
     <string name="zen_mode_when_every_night" msgid="3122486110091921009">"Tous les soirs"</string>
@@ -3050,15 +3095,11 @@
     </plurals>
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ne recevoir que les alarmes jusqu\'à <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Toujours interrompre"</string>
-    <string name="zen_mode_screen_on" msgid="7712038508173845101">"Bloquer lorsque l\'écran est allumé"</string>
-    <string name="zen_mode_screen_on_summary" msgid="6444425984146305149">"Empêcher les notifications désactivées par le mode \"Ne pas déranger\" d\'apparaître à l\'écran"</string>
-    <string name="zen_mode_screen_off" msgid="5026854939192419879">"Bloquer lorsque l\'écran est éteint"</string>
-    <string name="zen_mode_screen_off_summary" msgid="6490932947651798094">"Empêcher les notifications désactivées par le mode \"Ne pas déranger\" d\'activer l\'écran ou de faire clignoter le voyant de notification"</string>
-    <string name="zen_mode_screen_off_summary_no_led" msgid="3758698381956461866">"Empêcher les notifications désactivées par le mode \"Ne pas déranger\" d\'activer l\'écran"</string>
-    <string name="zen_mode_all_visual_interruptions" msgid="2851308980832487411">"Désactivé"</string>
-    <string name="zen_mode_screen_on_visual_interruptions" msgid="7373348148129140528">"Lorsque l\'écran est allumé"</string>
-    <string name="zen_mode_screen_off_visual_interruptions" msgid="4850792880144382633">"Lorsque l\'écran est éteint"</string>
-    <string name="zen_mode_no_visual_interruptions" msgid="8742776003822778472">"Lorsque l\'écran est allumé ou éteint"</string>
+    <string name="zen_mode_screen_on" msgid="8774571998575673502">"Lorsque l\'écran est allumé"</string>
+    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"Autoriser les notifications désactivées par le mode Ne pas déranger à s\'afficher à l\'écran"</string>
+    <string name="zen_mode_screen_off" msgid="3144446765110327937">"Lorsque l\'écran est éteint"</string>
+    <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"Autoriser les notifications désactivées par le mode Ne pas déranger à allumer l\'écran et à faire clignoter le voyant"</string>
+    <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Autoriser les notifications désactivées par le mode Ne pas déranger à allumer l\'écran"</string>
     <string name="notification_app_settings_button" msgid="6685640230371477485">"Paramètres de notification"</string>
     <string name="suggestion_button_text" msgid="3275010948381252006">"OK"</string>
     <string name="device_feedback" msgid="3238056036766293294">"Envoyer commentaires sur appareil"</string>
@@ -3378,7 +3419,7 @@
     <string name="condition_hotspot_title" msgid="7778958849468560027">"Le point d\'accès est activé"</string>
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Le point d\'accès Wi-Fi mobile \"<xliff:g id="ID_1">%1$s</xliff:g>\" est actif. Le Wi-Fi est désactivé pour cet appareil."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Le mode Avion est activé"</string>
-    <string name="condition_airplane_summary" msgid="5561586417832393666">"Le Wi-Fi, le Bluetooth et le réseau mobile sont désactivés. Vous ne pouvez pas passer d\'appels téléphoniques ni vous connecter à Internet."</string>
+    <string name="condition_airplane_summary" msgid="3738805058182535606">"Le Wi-Fi, le Bluetooth et le réseau mobile sont désactivés. Vous ne pouvez pas passer d\'appels téléphoniques ni vous connecter à Internet."</string>
     <string name="condition_zen_title" msgid="2679168532600816392">"\"Ne pas déranger\" activé (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
     <string name="condition_battery_title" msgid="3272131008388575349">"Économiseur de batterie activé"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Les performances sont réduites. Les services de localisation et les données en arrière-plan sont désactivés."</string>
@@ -3410,8 +3451,6 @@
     <string name="connectivity_monitor_switch" msgid="9059759348648583421">"ConnectivityMonitor"</string>
     <string name="connectivity_monitor_switch_summary" msgid="2828658652378866401">"ConnectivityMonitor recueille des journaux lorsqu\'il détecte un problème de connectivité, puis invite l\'utilisateur à créer un bug"</string>
     <string name="connectivity_monitor_toast" msgid="5551859612881173028">"Pour appliquer la modification effectuée par ConnectivityMonitor, redémarrez l\'appareil"</string>
-    <string name="camera_hal_hdrplus_switch" msgid="8377365197105267466">"Fonction HDR+ HAL de la caméra"</string>
-    <string name="camera_hal_hdrplus_toast" msgid="2063703797270055299">"Pour activer la fonction HDR+ dans l\'HAL de la caméra, redémarrez l\'appareil"</string>
     <string name="camera_laser_sensor_switch" msgid="8913588990743234440">"Capteur du laser de l\'appareil photo"</string>
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Mises à jour automatiques du système"</string>
     <string name="usage" msgid="2977875522080448986">"Consommation"</string>
@@ -3561,13 +3600,6 @@
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> secondes</item>
     </plurals>
     <string name="support_estimated_wait_time" msgid="6523081420029378051">"Attente de <xliff:g id="ESTIMATE">%1$s</xliff:g> environ"</string>
-    <string name="bluetooth_talkback_computer" msgid="4875089335641234463">"Ordinateur"</string>
-    <string name="bluetooth_talkback_headset" msgid="5140152177885220949">"Casque"</string>
-    <string name="bluetooth_talkback_phone" msgid="4260255181240622896">"Téléphone"</string>
-    <string name="bluetooth_talkback_imaging" msgid="551146170554589119">"Imagerie"</string>
-    <string name="bluetooth_talkback_headphone" msgid="26580326066627664">"Casque audio"</string>
-    <string name="bluetooth_talkback_input_peripheral" msgid="5165842622743212268">"Périphérique d\'entrée"</string>
-    <string name="bluetooth_talkback_bluetooth" msgid="5615463912185280812">"Bluetooth"</string>
     <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"Gérer l\'espace de stockage"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Pour libérer de l\'espace de stockage, le gestionnaire d\'espace de stockage supprime des photos et des vidéos sauvegardées sur votre appareil."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Supprimer des photos et des vidéos"</string>
@@ -3602,6 +3634,7 @@
     <string name="ambient_display_pickup_summary" product="device" msgid="8256669101643381568">"Pour afficher l\'heure, les icônes de notification et d\'autres informations, soulevez votre appareil."</string>
     <string name="ambient_display_pickup_suggestion_summary" msgid="7014700589991761035">"Consulter les notifications lorsque l\'écran est éteint"</string>
     <string name="fingerprint_swipe_for_notifications_title" msgid="5816346492253270243">"Utiliser le lecteur d\'empreinte pour afficher les notifications"</string>
+    <string name="fingerprint_gesture_screen_title" msgid="8562169633234041196">"Balayer empreinte digitale"</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="default" msgid="1770661868393713922">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le lecteur d\'empreinte digitale à l\'arrière du téléphone."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="tablet" msgid="902719947767712895">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le lecteur d\'empreinte digitale à l\'arrière de la tablette."</string>
     <string name="fingerprint_swipe_for_notifications_summary" product="device" msgid="5372926094116306647">"Pour consulter vos notifications, passez votre doigt de haut en bas sur le lecteur d\'empreinte digitale à l\'arrière de l\'appareil."</string>
@@ -3610,9 +3643,10 @@
     <string name="gesture_setting_on" msgid="3455094265233870280">"Activé"</string>
     <string name="gesture_setting_off" msgid="5230169535435881894">"Désactivé"</string>
     <string name="oem_unlock_enable_disabled_summary_bootloader_unlocked" msgid="4265541229765635629">"Bootloader déjà déverrouillé"</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="415954951226204461">"Connectez-vous tout d\'abord à Internet."</string>
-    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="5884723935668892613">"Connectez-vous à Internet ou contactez votre opérateur."</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity" msgid="3361344735430813695">"Connectez-vous d\'abord à Internet"</string>
+    <string name="oem_unlock_enable_disabled_summary_connectivity_or_locked" msgid="2479038689567925511">"Connectez-vous à Internet ou contactez votre opérateur"</string>
     <string name="oem_unlock_enable_disabled_summary_sim_locked_device" msgid="4149387448213399630">"Indisponible sur les appareils verrouillés par l\'opérateur"</string>
+    <string name="oem_lock_info_message" msgid="9218313722236417510">"Veuillez redémarrer l\'appareil pour activer la fonctionnalité de protection de ce dernier."</string>
     <string name="automatic_storage_manager_freed_bytes" msgid="7517560170441007788">"<xliff:g id="SIZE">%1$s</xliff:g> libéré(s) au total\n\nDernière exécution le <xliff:g id="DATE">%2$s</xliff:g>"</string>
     <string name="web_action_enable_title" msgid="4051513950976670853">"Applis instantanées"</string>
     <string name="web_action_enable_summary" msgid="3108127559723396382">"Ouvrez des liens dans des applications, même si celles-ci ne sont pas installées"</string>
@@ -3720,6 +3754,8 @@
     <string name="autofill_confirmation_message" msgid="2784869528908005194">"&lt;b&gt;Assurez-vous de faire confiance à cette application&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; utilise les éléments affichés à l\'écran pour déterminer les champs qui peuvent bénéficier de la saisie automatique."</string>
     <string name="device_theme" msgid="4571803018917608588">"Thème de l\'appareil"</string>
     <string name="default_theme" msgid="7085644992078579076">"Par défaut"</string>
+    <string name="show_operator_name_title" msgid="805135053530442951">"Nom du réseau"</string>
+    <string name="show_operator_name_summary" msgid="5962567590205757550">"Afficher le nom du réseau dans la barre d\'état"</string>
     <string name="storage_manager_indicator" msgid="1516810749625915020">"Gestionnaire d\'espace de stockage : <xliff:g id="STATUS">^1</xliff:g>"</string>
     <string name="storage_manager_indicator_off" msgid="7488057587180724388">"Désactivé"</string>
     <string name="storage_manager_indicator_on" msgid="8625551710194584733">"Activé"</string>
@@ -3733,4 +3769,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Découvrez votre nouvelle tablette"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Découvrez votre nouvel appareil"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Cette fonctionnalité n\'est pas disponible sur cet appareil"</string>
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
+    <skip />
+    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
+    <skip />
 </resources>

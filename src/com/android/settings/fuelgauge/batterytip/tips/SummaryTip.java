@@ -29,6 +29,7 @@ public class SummaryTip extends BatteryTip {
     public SummaryTip(@StateType int state) {
         mShowDialog = false;
         mState = state;
+        mType = TipType.SUMMARY;
     }
 
     @Override
