@@ -92,6 +92,8 @@ public class StorageItemPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        SettingsShadowResources.overrideResource("android:string/fileSizeSuffix", "%1$s %2$s");
+        SettingsShadowResources.overrideResource("android:string/gigabyteShort", "GB");
         when(mFragment.getActivity()).thenReturn(mActivity);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);

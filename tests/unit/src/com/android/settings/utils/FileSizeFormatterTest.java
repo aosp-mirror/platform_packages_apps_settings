@@ -22,7 +22,6 @@ import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.icu.util.MeasureUnit;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -47,7 +46,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 0 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("0.00 GB");
     }
@@ -58,7 +57,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 MEGABYTE_IN_BYTES * 11 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("0.01 GB");
     }
@@ -69,7 +68,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 MEGABYTE_IN_BYTES * 155 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("0.16 GB");
     }
@@ -80,7 +79,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 MEGABYTE_IN_BYTES * 1551 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("1.6 GB");
     }
@@ -92,7 +91,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 GIGABYTE_IN_BYTES * 15 + MEGABYTE_IN_BYTES * 50 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("15 GB");
     }
@@ -103,7 +102,7 @@ public class FileSizeFormatterTest {
                         FileSizeFormatter.formatFileSize(
                                 mContext,
                                 MEGABYTE_IN_BYTES * -155 /* size */,
-                                MeasureUnit.GIGABYTE,
+                                com.android.internal.R.string.gigabyteShort,
                                 GIGABYTE_IN_BYTES))
                 .isEqualTo("-0.16 GB");
     }
