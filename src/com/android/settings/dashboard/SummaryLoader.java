@@ -306,7 +306,7 @@ public class SummaryLoader {
                     makeProviderW(tile);
                     break;
                 case MSG_SET_LISTENING:
-                    boolean listening = msg.arg1 != 0;
+                    boolean listening = msg.obj != null && msg.obj.equals(1);
                     setListeningW(listening);
                     break;
             }
