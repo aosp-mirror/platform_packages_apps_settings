@@ -63,8 +63,7 @@
     </PreferenceCategory>
 
     <Preference android:key="sim_lock_settings"
-                android:title="@string/sim_lock_settings_category"
-                android:persistent="false">
+                android:title="@string/sim_lock_settings_category">
 
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
@@ -86,7 +85,7 @@
     <Preference
         android:key="screen_pinning_settings"
         android:title="@string/screen_pinning_title"
-        android:summary="@string/switch_off_text"
+        android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings"/>
 
     <Preference android:key="security_misc_usage_access"
