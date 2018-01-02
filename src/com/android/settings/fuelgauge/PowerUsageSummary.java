@@ -369,8 +369,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         restartBatteryInfoLoader();
         final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
                 System.currentTimeMillis());
-        updateScreenPreference();
         updateLastFullChargePreference(lastFullChargeTime);
+        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(getContext(),
+                mBatteryUtils.calculateScreenUsageTime(mStatsHelper), false));
 
         final CharSequence timeSequence = Utils.formatRelativeTime(context, lastFullChargeTime,
                 false);
@@ -391,26 +392,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     AnomalyDetectionPolicy getAnomalyDetectionPolicy() {
         return new AnomalyDetectionPolicy(getContext());
-    }
-
-    @VisibleForTesting
-    BatterySipper findBatterySipperByType(List<BatterySipper> usageList, DrainType type) {
-        for (int i = 0, size = usageList.size(); i < size; i++) {
-            final BatterySipper sipper = usageList.get(i);
-            if (sipper.drainType == type) {
-                return sipper;
-            }
-        }
-        return null;
-    }
-
-    @VisibleForTesting
-    void updateScreenPreference() {
-        final BatterySipper sipper = findBatterySipperByType(
-                mStatsHelper.getUsageList(), DrainType.SCREEN);
-        final long usageTimeMs = sipper != null ? sipper.usageTimeMs : 0;
-
-        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(getContext(), usageTimeMs, false));
     }
 
     @VisibleForTesting

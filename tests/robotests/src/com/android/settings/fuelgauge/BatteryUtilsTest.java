@@ -20,7 +20,9 @@ import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -141,6 +143,7 @@ public class BatteryUtilsTest {
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
+    private List<BatterySipper> mUsageList;
 
     @Before
     public void setUp() {
@@ -194,6 +197,12 @@ public class BatteryUtilsTest {
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
         doReturn(0L).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
                 any(BatteryStats.Uid.class), anyLong());
+
+        mUsageList = new ArrayList<>();
+        mUsageList.add(mNormalBatterySipper);
+        mUsageList.add(mScreenBatterySipper);
+        mUsageList.add(mCellBatterySipper);
+        doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
     }
 
     @Test
@@ -467,5 +476,29 @@ public class BatteryUtilsTest {
         verify(mBatteryStatsHelper).create(mBundle);
         verify(mBatteryStatsHelper).refreshStats(BatteryStats.STATS_SINCE_CHARGED,
                 mUserManager.getUserProfiles());
+    }
+
+    @Test
+    public void testFindBatterySipperByType_findTypeScreen() {
+        BatterySipper sipper = mBatteryUtils.findBatterySipperByType(mUsageList,
+                BatterySipper.DrainType.SCREEN);
+
+        assertThat(sipper).isSameAs(mScreenBatterySipper);
+    }
+
+    @Test
+    public void testFindBatterySipperByType_findTypeApp() {
+        BatterySipper sipper = mBatteryUtils.findBatterySipperByType(mUsageList,
+                BatterySipper.DrainType.APP);
+
+        assertThat(sipper).isSameAs(mNormalBatterySipper);
+    }
+
+    @Test
+    public void testCalculateScreenUsageTime_returnCorrectTime() {
+        mScreenBatterySipper.usageTimeMs = TIME_EXPECTED_FOREGROUND;
+
+        assertThat(mBatteryUtils.calculateScreenUsageTime(mBatteryStatsHelper)).isEqualTo(
+                TIME_EXPECTED_FOREGROUND);
     }
 }
