@@ -26,6 +26,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.HighUsageApp;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -41,7 +42,7 @@ import java.util.List;
 public class HighUsageDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
     private BatteryStatsHelper mBatteryStatsHelper;
-    private List<HighUsageTip.HighUsageApp> mHighUsageAppList;
+    private List<HighUsageApp> mHighUsageAppList;
     private Context mContext;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
@@ -67,7 +68,7 @@ public class HighUsageDetector implements BatteryTipDetector {
                     final long foregroundTimeMs = mBatteryUtils.getProcessTimeMs(
                             BatteryUtils.StatusType.FOREGROUND, batterySipper.uidObj,
                             BatteryStats.STATS_SINCE_CHARGED);
-                    mHighUsageAppList.add(new HighUsageTip.HighUsageApp(
+                    mHighUsageAppList.add(new HighUsageApp(
                             mBatteryUtils.getPackageName(batterySipper.getUid()),
                             foregroundTimeMs));
                 }
@@ -78,7 +79,6 @@ public class HighUsageDetector implements BatteryTipDetector {
             Collections.sort(mHighUsageAppList, Collections.reverseOrder());
         }
 
-        return new HighUsageTip(Utils.formatElapsedTime(mContext, screenUsageTimeMs, false),
-                mHighUsageAppList);
+        return new HighUsageTip(screenUsageTimeMs, mHighUsageAppList);
     }
 }

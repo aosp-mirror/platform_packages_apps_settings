@@ -67,7 +67,6 @@ public class PowerUsageAnomalyDetailsTest {
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
     private static final String PACKAGE_NAME_3 = "com.android.app3";
-    private static final int USER_ID = 1;
 
     @Mock
     private SettingsActivity mSettingsActivity;
@@ -197,17 +196,5 @@ public class PowerUsageAnomalyDetailsTest {
 
         assertThat(mBundle.getParcelableArrayList(
                 PowerUsageAnomalyDetails.EXTRA_ANOMALY_LIST)).isEqualTo(mAnomalyList);
-    }
-
-    @Test
-    public void testGetBadgedIcon_usePackageNameAndUserId() throws
-            PackageManager.NameNotFoundException {
-        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME_1,
-                PackageManager.GET_META_DATA);
-
-        mFragment.getBadgedIcon(PACKAGE_NAME_1, USER_ID);
-
-        // Verify that it uses the correct user id
-        verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
     }
 }

@@ -16,8 +16,9 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.android.settings.R;
 
@@ -27,9 +28,11 @@ import com.android.settings.R;
 public class LowBatteryTip extends BatteryTip {
 
     public LowBatteryTip(@StateType int state) {
-        mShowDialog = false;
-        mState = state;
-        mType = TipType.LOW_BATTERY;
+        super(TipType.LOW_BATTERY, state, false /* showDialog */);
+    }
+
+    private LowBatteryTip(Parcel in) {
+        super(in);
     }
 
     @Override
@@ -57,9 +60,14 @@ public class LowBatteryTip extends BatteryTip {
         // do nothing
     }
 
-    @Override
-    public Dialog buildDialog() {
-        //TODO(b/70570352): create the dialog for low battery tip and add test
-        return null;
-    }
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public BatteryTip createFromParcel(Parcel in) {
+            return new LowBatteryTip(in);
+        }
+
+        public BatteryTip[] newArray(int size) {
+            return new LowBatteryTip[size];
+        }
+    };
+
 }

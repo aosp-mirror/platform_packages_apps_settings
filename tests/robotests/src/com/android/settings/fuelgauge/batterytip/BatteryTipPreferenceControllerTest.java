@@ -85,7 +85,7 @@ public class BatteryTipPreferenceControllerTest {
         mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE));
 
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(mContext, KEY_PREF,
-                mBatteryTipListener);
+                null, mBatteryTipListener);
         mBatteryTipPreferenceController.mPreferenceGroup = mPreferenceGroup;
         mBatteryTipPreferenceController.mPrefContext = mContext;
     }

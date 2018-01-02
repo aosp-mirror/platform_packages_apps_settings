@@ -16,10 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.fuelgauge.batterytip.HighUsageApp;
 
 import java.util.List;
 
@@ -28,15 +32,29 @@ import java.util.List;
  */
 public class HighUsageTip extends BatteryTip {
 
-    private final CharSequence mScreenTimeText;
-    private final List<HighUsageApp> mHighUsageAppList;
+    private final long mScreenTimeMs;
+    @VisibleForTesting
+    final List<HighUsageApp> mHighUsageAppList;
 
-    public HighUsageTip(CharSequence screenTimeText, List<HighUsageApp> appList) {
-        mShowDialog = true;
-        mScreenTimeText = screenTimeText;
-        mType = TipType.HIGH_DEVICE_USAGE;
+    public HighUsageTip(long screenTimeMs, List<HighUsageApp> appList) {
+        super(TipType.HIGH_DEVICE_USAGE, appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW,
+                true /* showDialog */);
+        mScreenTimeMs = screenTimeMs;
         mHighUsageAppList = appList;
-        mState = appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW;
+    }
+
+    @VisibleForTesting
+    HighUsageTip(Parcel in) {
+        super(in);
+        mScreenTimeMs = in.readLong();
+        mHighUsageAppList = in.createTypedArrayList(HighUsageApp.CREATOR);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(mScreenTimeMs);
+        dest.writeTypedList(mHighUsageAppList);
     }
 
     @Override
@@ -46,7 +64,8 @@ public class HighUsageTip extends BatteryTip {
 
     @Override
     public CharSequence getSummary(Context context) {
-        return context.getString(R.string.battery_tip_high_usage_summary, mScreenTimeText);
+        return context.getString(R.string.battery_tip_high_usage_summary,
+                Utils.formatElapsedTime(context, mScreenTimeMs, false));
     }
 
     @Override
@@ -64,27 +83,22 @@ public class HighUsageTip extends BatteryTip {
         // do nothing
     }
 
-    @Override
-    public Dialog buildDialog() {
-        //TODO(b/70570352): build the real dialog
-        return null;
+    public long getScreenTimeMs() {
+        return mScreenTimeMs;
     }
 
-    /**
-     * Class representing app with high screen usage
-     */
-    public static class HighUsageApp implements Comparable<HighUsageApp> {
-        public final String packageName;
-        public final long screenOnTimeMs;
-
-        public HighUsageApp(String packageName, long screenOnTimeMs) {
-            this.packageName = packageName;
-            this.screenOnTimeMs = screenOnTimeMs;
-        }
-
-        @Override
-        public int compareTo(HighUsageApp o) {
-            return Long.compare(screenOnTimeMs, o.screenOnTimeMs);
-        }
+    public List<HighUsageApp> getHighUsageAppList() {
+        return mHighUsageAppList;
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public BatteryTip createFromParcel(Parcel in) {
+            return new HighUsageTip(in);
+        }
+
+        public BatteryTip[] newArray(int size) {
+            return new HighUsageTip[size];
+        }
+    };
+
 }

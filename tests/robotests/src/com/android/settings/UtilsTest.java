@@ -4,13 +4,16 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.net.ConnectivityManager;
 import android.net.LinkAddress;
@@ -25,6 +28,7 @@ import android.os.storage.VolumeInfo;
 import android.text.SpannableStringBuilder;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
+import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,8 +50,8 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
-
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final int USER_ID = 1;
 
     @Mock
     private WifiManager wifiManager;
@@ -59,6 +63,12 @@ public class UtilsTest {
     private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private UserManager mUserManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private IconDrawableFactory mIconDrawableFactory;
+    @Mock
+    private ApplicationInfo mApplicationInfo;
     private Context mContext;
 
     @Before
@@ -332,4 +342,17 @@ public class UtilsTest {
 
         assertThat(editText.getSelectionEnd()).isEqualTo(length);
     }
+
+    @Test
+    public void testGetBadgedIcon_usePackageNameAndUserId() throws
+            PackageManager.NameNotFoundException {
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
+                PackageManager.GET_META_DATA);
+
+        Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, PACKAGE_NAME, USER_ID);
+
+        // Verify that it uses the correct user id
+        verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
+    }
+
 }
