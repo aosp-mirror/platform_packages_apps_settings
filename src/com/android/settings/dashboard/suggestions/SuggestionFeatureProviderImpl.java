@@ -16,19 +16,15 @@
 
 package com.android.settings.dashboard.suggestions;
 
-import static com.android.settings.core.FeatureFlags.SUGGESTIONS_V2;
-
 import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.provider.Settings.Secure;
 import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 import android.support.annotation.VisibleForTesting;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
 
@@ -54,7 +50,6 @@ import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiCallingSuggestionActivity;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.List;
 
@@ -65,23 +60,13 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     private static final String SHARED_PREF_FILENAME = "suggestions";
 
-    private final SuggestionRanker mSuggestionRanker;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
-
-    @Override
-    public boolean isSuggestionEnabled(Context context) {
-        final ActivityManager am =
-                (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        boolean isLowRamDevice = am.isLowRamDevice();
-        return !isLowRamDevice && !isV2Enabled(context);
-    }
 
     @Override
     public boolean isSuggestionV2Enabled(Context context) {
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        boolean isLowRamDevice = am.isLowRamDevice();
-        return !isLowRamDevice && isV2Enabled(context);
+        return !am.isLowRamDevice();
     }
 
     @Override
@@ -89,10 +74,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
         return new ComponentName(
                 "com.android.settings.intelligence",
                 "com.android.settings.intelligence.suggestions.SuggestionService");
-    }
-
-    private static boolean isV2Enabled(Context context) {
-        return FeatureFlagUtils.isEnabled(context, SUGGESTIONS_V2);
     }
 
     @Override
@@ -143,15 +124,8 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
 
     public SuggestionFeatureProviderImpl(Context context) {
         final Context appContext = context.getApplicationContext();
-        mSuggestionRanker = new SuggestionRanker(
-                new SuggestionFeaturizer(new EventStore(appContext)));
         mMetricsFeatureProvider = FeatureFactory.getFactory(appContext)
                 .getMetricsFeatureProvider();
-    }
-
-    @Override
-    public void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds) {
-        mSuggestionRanker.rankSuggestions(suggestions, suggestionIds);
     }
 
     @Override
@@ -163,26 +137,6 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
             Log.d(TAG, "Removing exclusive suggestion");
             suggestions.remove(i);
         }
-    }
-
-    @Override
-    public void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion) {
-        if (parser == null || suggestion == null || context == null) {
-            return;
-        }
-        final Pair<Integer, Object>[] taggedData = getLoggingTaggedData(context);
-
-        mMetricsFeatureProvider.action(
-                context, MetricsEvent.ACTION_SETTINGS_DISMISS_SUGGESTION,
-                getSuggestionIdentifier(context, suggestion),
-                taggedData);
-        if (!parser.dismissSuggestion(suggestion)) {
-            return;
-        }
-        context.getPackageManager().setComponentEnabledSetting(
-                suggestion.intent.getComponent(),
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
     }
 
     @Override
@@ -198,24 +152,9 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     }
 
     @Override
-    public String getSuggestionIdentifier(Context context, Tile suggestion) {
-        if (suggestion.intent == null || suggestion.intent.getComponent() == null
-                || context == null) {
-            return "unknown_suggestion";
-        }
-        String packageName = suggestion.intent.getComponent().getPackageName();
-        if (packageName.equals(context.getPackageName())) {
-            // Since Settings provides several suggestions, fill in the class instead of the
-            // package for these.
-            packageName = suggestion.intent.getComponent().getClassName();
-        }
-        return packageName;
-    }
-
-    @Override
     public Pair<Integer, Object>[] getLoggingTaggedData(Context context) {
         final boolean isSmartSuggestionEnabled = isSmartSuggestionEnabled(context);
-        return new Pair[]{Pair.create(
+        return new Pair[] {Pair.create(
                 MetricsEvent.FIELD_SETTINGS_SMART_SUGGESTIONS_ENABLED,
                 isSmartSuggestionEnabled ? 1 : 0)};
     }

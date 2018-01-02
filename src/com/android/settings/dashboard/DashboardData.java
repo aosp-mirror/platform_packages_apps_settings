@@ -69,16 +69,14 @@ public class DashboardData {
     private final List<Item> mItems;
     private final DashboardCategory mCategory;
     private final List<Condition> mConditions;
-    private final List<Tile> mSuggestions;
-    private final List<Suggestion> mSuggestionsV2;
+    private final List<Suggestion> mSuggestions;
     @HeaderMode
     private final int mSuggestionConditionMode;
 
     private DashboardData(Builder builder) {
         mCategory = builder.mCategory;
         mConditions = builder.mConditions;
-        mSuggestions = builder.mSuggestions;
-        mSuggestionsV2 = builder.mSuggestionsV2;
+        mSuggestions = builder.mSuggestionsV2;
         mSuggestionConditionMode = builder.mSuggestionConditionMode;
 
         mItems = new ArrayList<>();
@@ -123,12 +121,8 @@ public class DashboardData {
         return mConditions;
     }
 
-    public List<Tile> getSuggestions() {
+    public List<Suggestion> getSuggestions() {
         return mSuggestions;
-    }
-
-    public List<Suggestion> getSuggestionsV2() {
-        return mSuggestionsV2;
     }
 
     public int getSuggestionConditionMode() {
@@ -197,22 +191,15 @@ public class DashboardData {
      * and mIsShowingAll, mSuggestionConditionMode flag.
      */
     private void buildItemsData() {
-        final boolean useSuggestionV2 = mSuggestionsV2 != null;
-        final boolean hasSuggestions = useSuggestionV2
-                ? sizeOf(mSuggestionsV2) > 0
-                : sizeOf(mSuggestions) > 0;
+        final boolean hasSuggestions = sizeOf(mSuggestions) > 0;
         final List<Condition> conditions = getConditionsToShow(mConditions);
         final boolean hasConditions = sizeOf(conditions) > 0;
 
-        final List<Tile> suggestions = getSuggestionsToShow(mSuggestions);
-        final List<Suggestion> suggestionsV2 = getSuggestionsV2ToShow(mSuggestionsV2);
+        final List<Suggestion> suggestions = getSuggestionsToShow(mSuggestions);
 
-        final int hiddenSuggestion;
-        if (useSuggestionV2) {
-            hiddenSuggestion = hasSuggestions ? sizeOf(mSuggestionsV2) - sizeOf(suggestionsV2) : 0;
-        } else {
-            hiddenSuggestion = hasSuggestions ? sizeOf(mSuggestions) - sizeOf(suggestions) : 0;
-        }
+        final int hiddenSuggestion = hasSuggestions
+                ? sizeOf(mSuggestions) - sizeOf(suggestions)
+                : 0;
 
         final boolean hasSuggestionAndCollapsed = hasSuggestions
                 && mSuggestionConditionMode == HEADER_MODE_COLLAPSED;
@@ -231,15 +218,8 @@ public class DashboardData {
                 R.layout.suggestion_condition_header,
                 STABLE_ID_SUGGESTION_CONDITION_MIDDLE_HEADER, onlyHasConditionAndCollapsed);
 
-        if (useSuggestionV2) {
-            addToItemList(suggestionsV2, R.layout.suggestion_condition_container,
-                    STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestionsV2) > 0);
-        } else {
-            /* Suggestion container. This is the card view that contains the list of suggestions.
-             * This will be added whenever the suggestion list is not empty */
-            addToItemList(suggestions, R.layout.suggestion_condition_container,
-                    STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestions) > 0);
-        }
+        addToItemList(suggestions, R.layout.suggestion_condition_container,
+                STABLE_ID_SUGGESTION_CONTAINER, sizeOf(suggestions) > 0);
 
         /* Second suggestion/condition header. This will be added when there is at least one
          * suggestion or condition that is not currently displayed, and the user can expand the
@@ -296,22 +276,7 @@ public class DashboardData {
         return result;
     }
 
-    /**
-     * @deprecated in favor of {@link #getSuggestionsV2ToShow}.
-     */
-    @Deprecated
-    private List<Tile> getSuggestionsToShow(List<Tile> suggestions) {
-        if (suggestions == null || mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
-            return null;
-        }
-        if (mSuggestionConditionMode != HEADER_MODE_DEFAULT
-                || suggestions.size() <= DEFAULT_SUGGESTION_COUNT) {
-            return suggestions;
-        }
-        return suggestions.subList(0, DEFAULT_SUGGESTION_COUNT);
-    }
-
-    private List<Suggestion> getSuggestionsV2ToShow(List<Suggestion> suggestions) {
+    private List<Suggestion> getSuggestionsToShow(List<Suggestion> suggestions) {
         if (suggestions == null || mSuggestionConditionMode == HEADER_MODE_COLLAPSED) {
             return null;
         }
@@ -333,11 +298,6 @@ public class DashboardData {
 
         private DashboardCategory mCategory;
         private List<Condition> mConditions;
-        /**
-         * @deprecated in favor of SuggestionList
-         */
-        @Deprecated
-        private List<Tile> mSuggestions;
         private List<Suggestion> mSuggestionsV2;
 
         public Builder() {
@@ -346,8 +306,7 @@ public class DashboardData {
         public Builder(DashboardData dashboardData) {
             mCategory = dashboardData.mCategory;
             mConditions = dashboardData.mConditions;
-            mSuggestions = dashboardData.mSuggestions;
-            mSuggestionsV2 = dashboardData.mSuggestionsV2;
+            mSuggestionsV2 = dashboardData.mSuggestions;
             mSuggestionConditionMode = dashboardData.mSuggestionConditionMode;
         }
 
@@ -361,16 +320,7 @@ public class DashboardData {
             return this;
         }
 
-        /**
-         * @deprecated in favor of {@link #setSuggestionsV2(List)})}
-         */
-        @Deprecated
-        public Builder setSuggestions(List<Tile> suggestions) {
-            this.mSuggestions = suggestions;
-            return this;
-        }
-
-        public Builder setSuggestionsV2(List<Suggestion> suggestions) {
+        public Builder setSuggestions(List<Suggestion> suggestions) {
             this.mSuggestionsV2 = suggestions;
             return this;
         }

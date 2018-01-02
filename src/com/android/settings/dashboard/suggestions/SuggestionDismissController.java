@@ -23,27 +23,10 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback {
 
     public interface Callback {
-
-        /**
-         * @deprecated in favor of {@link #getSuggestionAt(int)}
-         * Returns suggestion tile data from the callback
-         */
-        @Deprecated
-        Tile getSuggestionForPosition(int position);
-
-        /**
-         * @deprecated in favor of {@link #onSuggestionDismissed(Suggestion)}
-         * Called when a suggestion is dismissed.
-         */
-        @Deprecated
-        void onSuggestionDismissed(Tile suggestion);
-
         /**
          * Returns suggestion tile data from the callback
          */
@@ -58,20 +41,13 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
     private final Context mContext;
     private final SuggestionFeatureProvider mSuggestionFeatureProvider;
     private final SuggestionControllerMixin mSuggestionMixin;
-
-    /**
-     * @deprecated in favor of the new Suggestion backend.
-     */
-    @Deprecated
-    private final SuggestionParser mSuggestionParser;
     private final Callback mCallback;
 
     public SuggestionDismissController(Context context, RecyclerView recyclerView,
-            SuggestionControllerMixin suggestionMixin, SuggestionParser parser, Callback callback) {
+            SuggestionControllerMixin suggestionMixin, Callback callback) {
         super(0, ItemTouchHelper.START | ItemTouchHelper.END);
         mSuggestionMixin = suggestionMixin;
         mContext = context;
-        mSuggestionParser = parser;
         mSuggestionFeatureProvider = FeatureFactory.getFactory(context)
                 .getSuggestionFeatureProvider(context);
         mCallback = callback;
@@ -103,13 +79,7 @@ public class SuggestionDismissController extends ItemTouchHelper.SimpleCallback 
         }
         final int position = viewHolder.getAdapterPosition();
         final Suggestion suggestionV2 = mCallback.getSuggestionAt(position);
-        if (suggestionV2 != null) {
-            mSuggestionFeatureProvider.dismissSuggestion(mContext, mSuggestionMixin, suggestionV2);
-            mCallback.onSuggestionDismissed(suggestionV2);
-        } else {
-            final Tile suggestion = mCallback.getSuggestionForPosition(position);
-            mSuggestionFeatureProvider.dismissSuggestion(mContext, mSuggestionParser, suggestion);
-            mCallback.onSuggestionDismissed(suggestion);
-        }
+        mSuggestionFeatureProvider.dismissSuggestion(mContext, mSuggestionMixin, suggestionV2);
+        mCallback.onSuggestionDismissed(suggestionV2);
     }
 }
