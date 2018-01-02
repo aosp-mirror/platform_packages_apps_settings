@@ -401,18 +401,6 @@ public class PowerUsageSummaryLegacyTest {
     }
 
     @Test
-    public void testNonIndexableKeys_MatchPreferenceKeys() {
-        final Context context = RuntimeEnvironment.application;
-        final List<String> niks = PowerUsageSummary.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
-
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.power_usage_summary);
-
-        assertThat(keys).containsAllIn(niks);
-    }
-
-    @Test
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
         final Context context = RuntimeEnvironment.application;
         final PowerUsageSummary fragment = new PowerUsageSummary();

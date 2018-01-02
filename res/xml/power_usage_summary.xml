@@ -31,23 +31,7 @@
         android:layout="@layout/preference_category_no_title"/>
 
     <PreferenceCategory
-        android:key="device_usage_list">
-
-        <com.android.settings.fuelgauge.PowerGaugePreference
-            android:key="last_full_charge"
-            android:title="@string/battery_last_full_charge"
-            android:selectable="false"/>
-
-        <com.android.settings.fuelgauge.PowerGaugePreference
-            android:key="screen_usage"
-            android:title="@string/device_screen_usage"
-            android:selectable="false"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="power_management"
-        android:title="@string/battery_power_management">
+        android:key="power_management">
 
         <com.android.settings.widget.MasterSwitchPreference
             android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"
@@ -59,26 +43,20 @@
             android:title="@string/battery_percentage"
             android:summary="@string/battery_percentage_description"/>
 
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <SwitchPreference
-            android:key="auto_brightness_battery"
-            android:title="@string/auto_brightness_title"
-            android:summary="@string/auto_brightness_summary"
-            settings:keywords="@string/keywords_display_auto_brightness"/>
+    </PreferenceCategory>
 
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <com.android.settings.TimeoutListPreference
-            android:key="screen_timeout_battery"
-            android:title="@string/screen_timeout"
-            android:summary="@string/screen_timeout_summary"
-            android:entries="@array/screen_timeout_entries"
-            android:entryValues="@array/screen_timeout_values"/>
+    <PreferenceCategory
+        android:key="device_usage_list">
 
-        <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <Preference
-            android:key="ambient_display_battery"
-            android:title="@string/ambient_display_screen_title"
-            android:fragment="com.android.settings.display.AmbientDisplaySettings" />
+        <com.android.settings.fuelgauge.PowerGaugePreference
+            android:key="last_full_charge"
+            android:title="@string/battery_last_full_charge"
+            android:selectable="false"/>
+
+        <com.android.settings.fuelgauge.PowerGaugePreference
+            android:key="screen_usage"
+            android:title="@string/device_screen_usage"
+            android:selectable="false"/>
 
     </PreferenceCategory>
 
