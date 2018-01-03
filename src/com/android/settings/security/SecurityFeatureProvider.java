@@ -20,6 +20,7 @@ import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.FeatureFlagUtils;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -38,4 +39,9 @@ public interface SecurityFeatureProvider {
 
     /** Returns the {@link TrustAgentManager} bound to this {@link SecurityFeatureProvider}. */
     TrustAgentManager getTrustAgentManager();
+
+    /**
+     * Returns a {@link LockPatternUtils} instance bound to application context.
+     */
+    LockPatternUtils getLockPatternUtils(Context context);
 }
