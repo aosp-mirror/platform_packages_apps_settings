@@ -96,8 +96,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
         mController.isDefault = true;
 
         mController.updateState(mPreference);
-
-        verify(mPreference).setSummary(R.string.yes);
+        String yesString = mContext.getString(R.string.yes);
+        verify(mPreference).setSummary(yesString);
     }
 
     @Test
@@ -106,7 +106,8 @@ public class DefaultAppShortcutPreferenceControllerBaseTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(R.string.no);
+        String noString = mContext.getString(R.string.no);
+        verify(mPreference).setSummary(noString);
     }
 
     @Test

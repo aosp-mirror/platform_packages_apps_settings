@@ -14,7 +14,6 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.slice.Slice;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -52,7 +51,13 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(isDefaultApp() ? R.string.yes : R.string.no);
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public String getSummary() {
+        int summaryResId = isDefaultApp() ? R.string.yes : R.string.no;
+        return mContext.getString(summaryResId);
     }
 
     @Override
@@ -69,12 +74,14 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
 
     /**
      * Check whether the app has the default app capability
+     *
      * @return true if the app has the default app capability
      */
     protected abstract boolean hasAppCapability();
 
     /**
      * Check whether the app is the default app
+     *
      * @return true if the app is the default app
      */
     protected abstract boolean isDefaultApp();

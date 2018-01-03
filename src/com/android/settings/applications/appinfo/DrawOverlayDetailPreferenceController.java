@@ -21,7 +21,6 @@ import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -61,9 +60,8 @@ public class DrawOverlayDetailPreferenceController extends AppInfoPreferenceCont
         return DrawOverlayDetails.class;
     }
 
-    @VisibleForTesting
-    CharSequence getSummary() {
-        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry());
+    @Override
+    public String getSummary() {
+        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry()).toString();
     }
-
 }

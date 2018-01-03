@@ -109,7 +109,19 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
     @Override
     public void updateState(Preference preference) {
-        updateDeviceName(preference, mLocalAdapter.getName());
+        updateDeviceName(preference);
+    }
+
+    @Override
+    public String getSummary() {
+        String deviceName = getDeviceName();
+        if (TextUtils.isEmpty(deviceName)) {
+            return super.getSummary();
+        }
+
+        return TextUtils.expandTemplate(
+                mContext.getText(R.string.bluetooth_device_name_summary),
+                BidiFormatter.getInstance().unicodeWrap(deviceName)).toString();
     }
 
     /**
@@ -132,18 +144,14 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
      * Update device summary with {@code deviceName}, where {@code deviceName} has accent color
      *
      * @param preference to set the summary for
-     * @param deviceName bluetooth device name to show in the summary
      */
-    protected void updateDeviceName(final Preference preference, final String deviceName) {
-        if (deviceName == null) {
-            // TODO: show error message in preference subtitle
-            return;
-        }
-        final CharSequence summary = TextUtils.expandTemplate(
-                mContext.getText(R.string.bluetooth_device_name_summary),
-                BidiFormatter.getInstance().unicodeWrap(deviceName));
+    protected void updateDeviceName(final Preference preference) {
         preference.setSelectable(false);
-        preference.setSummary(summary);
+        preference.setSummary(getSummary());
+    }
+
+    protected String getDeviceName() {
+        return mLocalAdapter.getName();
     }
 
     /**
@@ -158,7 +166,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
 
             if (TextUtils.equals(action, BluetoothAdapter.ACTION_LOCAL_NAME_CHANGED)) {
                 if (mPreference != null && mLocalAdapter != null && mLocalAdapter.isEnabled()) {
-                    updateDeviceName(mPreference, mLocalAdapter.getName());
+                    updateDeviceName(mPreference);
                 }
             }
         }
