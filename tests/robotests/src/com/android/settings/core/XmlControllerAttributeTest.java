@@ -16,6 +16,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableResources;
 import com.android.settings.search.XmlParserUtils;
 import com.android.settings.security.SecuritySettings;
+import com.android.settings.security.SecuritySettingsV2;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -42,7 +43,8 @@ public class XmlControllerAttributeTest {
     // List of classes that are too hard to mock in order to retrieve xml information.
     private final List<Class> illegalClasses = new ArrayList<>(
             Arrays.asList(
-                    SecuritySettings.class
+                    SecuritySettings.class,
+                    SecuritySettingsV2.class
             ));
 
     // List of XML that could be retrieved from the illegalClasses list.
