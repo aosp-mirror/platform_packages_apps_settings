@@ -34,6 +34,7 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static com.android.settingslib.Utils.updateLocationMode;
+import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
 
 /**
  * A class that listens to location settings change and modifies location settings
@@ -140,8 +141,14 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
     }
 
     RestrictedLockUtils.EnforcedAdmin getShareLocationEnforcedAdmin(int userId) {
-        return RestrictedLockUtils.checkIfRestrictionEnforced(
+        RestrictedLockUtils.EnforcedAdmin admin =  checkIfRestrictionEnforced(
                 mContext, UserManager.DISALLOW_SHARE_LOCATION, userId);
+
+        if (admin == null) {
+            admin = RestrictedLockUtils.checkIfRestrictionEnforced(
+                    mContext, UserManager.DISALLOW_CONFIG_LOCATION_MODE, userId);
+        }
+        return admin;
     }
 
     boolean hasShareLocationRestriction(int userId) {
