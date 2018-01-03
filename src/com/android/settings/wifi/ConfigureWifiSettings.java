@@ -44,6 +44,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
 
+    public static final String KEY_WIFI_CONFIGURE = "wifi_configure_settings_screen";
     public static final String KEY_IP_ADDRESS = "current_ip_address";
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
@@ -133,6 +134,11 @@ public class ConfigureWifiSettings extends DashboardFragment {
                     }
 
                     return keys;
+                }
+
+                protected boolean isPageSearchEnabled(Context context) {
+                    return context.getResources()
+                            .getBoolean(R.bool.config_show_wifi_settings);
                 }
             };
 }
