@@ -36,6 +36,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -78,7 +79,9 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
 
         mProfileChallengeUserId = Utils.getManagedProfileId(
                 UserManager.get(context), UserHandle.myUserId());
-        final LockPatternUtils utils = new LockPatternUtils(context);
+        final LockPatternUtils utils = FeatureFactory.getFactory(context)
+                .getSecurityFeatureProvider()
+                .getLockPatternUtils(context);
         mSecure = utils.isSecure(UserHandle.myUserId());
         mSecureProfile = (mProfileChallengeUserId != UserHandle.USER_NULL)
                 && (utils.isSecure(mProfileChallengeUserId)
@@ -278,10 +281,14 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         }
     }
 
-    public int getSummaryResource() {
-        final boolean enabled = getLockscreenNotificationsEnabled(UserHandle.myUserId());
-        final boolean allowPrivate = !mSecure
-            || getLockscreenAllowPrivateNotifications(UserHandle.myUserId());
+    public static int getSummaryResource(Context context) {
+        final boolean enabled = getLockscreenNotificationsEnabled(context, UserHandle.myUserId());
+        final boolean secure = FeatureFactory.getFactory(context)
+                .getSecurityFeatureProvider()
+                .getLockPatternUtils(context)
+                .isSecure(UserHandle.myUserId());
+        final boolean allowPrivate = !secure
+            || getLockscreenAllowPrivateNotifications(context, UserHandle.myUserId());
         return !enabled ? R.string.lock_screen_notifications_summary_disable :
             allowPrivate ? R.string.lock_screen_notifications_summary_show :
                 R.string.lock_screen_notifications_summary_hide;
@@ -291,7 +298,7 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         if (mLockscreen == null) {
             return;
         }
-        mLockscreenSelectedValue = getSummaryResource();
+        mLockscreenSelectedValue = getSummaryResource(mContext);
         mLockscreen.setSummary("%s");
         mLockscreen.setValue(Integer.toString(mLockscreenSelectedValue));
     }
@@ -303,9 +310,9 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         if (mLockscreenProfile == null) {
             return;
         }
-        final boolean enabled = getLockscreenNotificationsEnabled(mProfileChallengeUserId);
+        final boolean enabled = getLockscreenNotificationsEnabled(mContext,mProfileChallengeUserId);
         final boolean allowPrivate = !mSecureProfile
-                || getLockscreenAllowPrivateNotifications(mProfileChallengeUserId);
+                || getLockscreenAllowPrivateNotifications(mContext, mProfileChallengeUserId);
         mLockscreenProfile.setSummary("%s");
         mLockscreenSelectedValueProfile = !enabled
                 ? R.string.lock_screen_notifications_summary_disable_profile
@@ -314,13 +321,13 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         mLockscreenProfile.setValue(Integer.toString(mLockscreenSelectedValueProfile));
     }
 
-    private boolean getLockscreenNotificationsEnabled(int userId) {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+    private static boolean getLockscreenNotificationsEnabled(Context context, int userId) {
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, userId) != 0;
     }
 
-    private boolean getLockscreenAllowPrivateNotifications(int userId) {
-        return Settings.Secure.getIntForUser(mContext.getContentResolver(),
+    private static boolean getLockscreenAllowPrivateNotifications(Context context, int userId) {
+        return Settings.Secure.getIntForUser(context.getContentResolver(),
                 Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 0, userId) != 0;
     }
 

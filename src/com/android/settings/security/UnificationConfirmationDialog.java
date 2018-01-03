@@ -27,9 +27,11 @@ import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
 public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
+
+    static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
     private static final String EXTRA_COMPLIANT = "compliant";
 
-    public static UnificationConfirmationDialog newIntance(boolean compliant) {
+    public static UnificationConfirmationDialog newInstance(boolean compliant) {
         UnificationConfirmationDialog
                 dialog = new UnificationConfirmationDialog();
         Bundle args = new Bundle();
@@ -38,11 +40,11 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
         return dialog;
     }
 
-    @Override
-    public void show(FragmentManager manager, String tag) {
-        if (manager.findFragmentByTag(tag) == null) {
+    public void show(SecuritySettingsV2 host) {
+        final FragmentManager manager = host.getChildFragmentManager();
+        if (manager.findFragmentByTag(TAG_UNIFICATION_DIALOG) == null) {
             // Prevent opening multiple dialogs if tapped on button quickly
-            super.show(manager, tag);
+            show(manager, TAG_UNIFICATION_DIALOG);
         }
     }
 
@@ -56,11 +58,12 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
                         : R.string.lock_settings_profile_unification_dialog_uncompliant_body)
                 .setPositiveButton(
                         compliant ? R.string.lock_settings_profile_unification_dialog_confirm
-                                : R.string.lock_settings_profile_unification_dialog_uncompliant_confirm,
+                                : R.string
+                                        .lock_settings_profile_unification_dialog_uncompliant_confirm,
                         (dialog, whichButton) -> {
                             if (compliant) {
                                 parentFragment.launchConfirmDeviceLockForUnification();
-                            }    else {
+                            } else {
                                 parentFragment.unifyUncompliantLocks();
                             }
                         }

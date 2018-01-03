@@ -974,6 +974,10 @@ public class FingerprintSettings extends SubSettings {
         }
     }
 
+    /**
+     * @deprecated in favor of new SecuritySettings.
+     */
+    @Deprecated
     public static Preference getFingerprintPreferenceForUser(Context context, final int userId) {
         final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(context);
         if (fpm == null || !fpm.isHardwareDetected()) {

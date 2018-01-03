@@ -161,7 +161,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
     private LocationPreferenceController mLocationcontroller;
     private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
     private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
-    private LockScreenNotificationPreferenceController mLockScreenNotificationPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -208,8 +207,6 @@ public class SecuritySettings extends SettingsPreferenceFragment
                 = new ManageDeviceAdminPreferenceController(activity);
         mEnterprisePrivacyPreferenceController
                 = new EnterprisePrivacyPreferenceController(activity);
-        mLockScreenNotificationPreferenceController
-                = new LockScreenNotificationPreferenceController(activity);
     }
 
     private static int getResIdForLockUnlockScreen(LockPatternUtils lockPatternUtils,
@@ -430,7 +427,7 @@ public class SecuritySettings extends SettingsPreferenceFragment
         final Preference lockscreenPreferences = group.findPreference(KEY_LOCKSCREEN_PREFERENCES);
         if (lockscreenPreferences != null) {
             lockscreenPreferences.setSummary(
-                mLockScreenNotificationPreferenceController.getSummaryResource());
+                LockScreenNotificationPreferenceController.getSummaryResource(getContext()));
         }
     }
 
