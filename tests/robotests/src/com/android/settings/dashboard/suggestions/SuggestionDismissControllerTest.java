@@ -33,8 +33,6 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,8 +51,6 @@ public class SuggestionDismissControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private RecyclerView mRecyclerView;
     @Mock
-    private SuggestionParser mSuggestionParser;
-    @Mock
     private SuggestionControllerMixin mSuggestionControllerMixin;
     @Mock
     private SuggestionDismissController.Callback mCallback;
@@ -70,7 +66,7 @@ public class SuggestionDismissControllerTest {
         when(mRecyclerView.getResources().getDimension(anyInt())).thenReturn(50F);
 
         mController = new SuggestionDismissController(mContext, mRecyclerView,
-                mSuggestionControllerMixin, mSuggestionParser, mCallback);
+                mSuggestionControllerMixin, mCallback);
     }
 
     @Test
@@ -107,17 +103,6 @@ public class SuggestionDismissControllerTest {
 
     @Test
     public void onSwiped_shouldTriggerDismissSuggestion() {
-        final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
-
-        mController.onSwiped(vh, ItemTouchHelper.START);
-
-        verify(mFactory.suggestionsFeatureProvider).dismissSuggestion(
-                eq(mContext), eq(mSuggestionParser), nullable(Tile.class));
-        verify(mCallback).onSuggestionDismissed(nullable(Tile.class));
-    }
-
-    @Test
-    public void onSwiped_v2_shouldTriggerDismissSuggestion() {
         final RecyclerView.ViewHolder vh = mock(RecyclerView.ViewHolder.class);
         when(mCallback.getSuggestionAt(anyInt())).thenReturn(
                 new Suggestion.Builder("id").build());

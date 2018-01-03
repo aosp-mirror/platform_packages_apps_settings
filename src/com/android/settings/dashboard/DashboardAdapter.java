@@ -52,7 +52,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         implements SummaryLoader.SummaryConsumer {
     public static final String TAG = "DashboardAdapter";
     private static final String STATE_SUGGESTION_LIST = "suggestion_list";
-    private static final String STATE_SUGGESTION_LIST_V2 = "suggestion_list_v2";
     private static final String STATE_CATEGORY_LIST = "category_list";
     private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
 
@@ -69,8 +67,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
     @VisibleForTesting
     static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
-    @VisibleForTesting
-    static final int MAX_SUGGESTION_TO_SHOW = 5;
 
     private final IconCache mCache;
     private final Context mContext;
@@ -80,7 +76,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     private final ArrayList<String> mSuggestionsShownLogged;
     private boolean mFirstFrameDrawn;
     private RecyclerView mRecyclerView;
-    private SuggestionParser mSuggestionParser;
     private SuggestionAdapter mSuggestionAdapter;
     private SuggestionDismissController mSuggestionDismissHandler;
     private SuggestionDismissController.Callback mCallback;
@@ -97,13 +92,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, SuggestionParser suggestionParser,
-            SuggestionControllerMixin suggestionControllerMixin,
+            List<Condition> conditions, SuggestionControllerMixin suggestionControllerMixin,
             SuggestionDismissController.Callback callback) {
 
-        // @deprecated In favor of suggestionsV2 below.
-        List<Tile> suggestions = null;
-        List<Suggestion> suggestionsV2 = null;
+        List<Suggestion> suggestions = null;
         DashboardCategory category = null;
         int suggestionConditionMode = DashboardData.HEADER_MODE_DEFAULT;
 
@@ -113,14 +105,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
         mCache = new IconCache(context);
-        mSuggestionParser = suggestionParser;
         mCallback = callback;
 
         setHasStableIds(true);
 
         if (savedInstanceState != null) {
             suggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
-            suggestionsV2 = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST_V2);
             category = savedInstanceState.getParcelable(STATE_CATEGORY_LIST);
             suggestionConditionMode = savedInstanceState.getInt(
                     STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
@@ -133,37 +123,15 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         mDashboardData = new DashboardData.Builder()
                 .setConditions(conditions)
                 .setSuggestions(suggestions)
-                .setSuggestionsV2(suggestionsV2)
                 .setCategory(category)
                 .setSuggestionConditionMode(suggestionConditionMode)
                 .build();
     }
 
-    public List<Tile> getSuggestions() {
-        return mDashboardData.getSuggestions();
-    }
-
-    /**
-     * @deprecated in favor of {@link #setCategory(DashboardCategory)} and
-     * {@link #setSuggestionsV2(List)}.
-     */
-    @Deprecated
-    public void setCategoriesAndSuggestions(DashboardCategory category, List<Tile> suggestions) {
-        tintIcons(category, suggestions);
-
+    public void setSuggestions(List<Suggestion> data) {
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestions(suggestions.subList(0,
-                        Math.min(suggestions.size(), MAX_SUGGESTION_TO_SHOW)))
-                .setCategory(category)
-                .build();
-        notifyDashboardDataChanged(prevData);
-    }
-
-    public void setSuggestionsV2(List<Suggestion> data) {
-        final DashboardData prevData = mDashboardData;
-        mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestionsV2(data)
+                .setSuggestions(data)
                 .build();
         notifyDashboardDataChanged(prevData);
     }
@@ -187,30 +155,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         notifyDashboardDataChanged(prevData);
     }
 
-    /**
-     * @deprecated in favor of {@link #onSuggestionDismissed(Suggestion)}.
-     */
-    @Deprecated
-    public void onSuggestionDismissed(Tile suggestion) {
-        final List<Tile> suggestions = mDashboardData.getSuggestions();
-        if (suggestions == null || suggestions.isEmpty()) {
-            return;
-        }
-        if (suggestions.size() == 1) {
-            // The only suggestion is dismissed, and the the empty suggestion container will
-            // remain as the dashboard item. Need to refresh the dashboard list.
-            final DashboardData prevData = mDashboardData;
-            mDashboardData = new DashboardData.Builder(prevData)
-                    .setSuggestions(null)
-                    .build();
-            notifyDashboardDataChanged(prevData);
-        } else {
-            mSuggestionAdapter.removeSuggestion(suggestion);
-        }
-    }
-
     public void onSuggestionDismissed(Suggestion suggestion) {
-        final List<Suggestion> list = mDashboardData.getSuggestionsV2();
+        final List<Suggestion> list = mDashboardData.getSuggestions();
         if (list == null || list.size() == 0) {
             return;
         }
@@ -219,7 +165,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             // remain as the dashboard item. Need to refresh the dashboard list.
             final DashboardData prevData = mDashboardData;
             mDashboardData = new DashboardData.Builder(prevData)
-                    .setSuggestionsV2(null)
+                    .setSuggestions(null)
                     .build();
             notifyDashboardDataChanged(prevData);
         } else {
@@ -309,16 +255,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         return mDashboardData.getItemEntityById(itemId);
     }
 
-    /**
-     * @deprecated in favor of {@link #getSuggestionV2(int)}.
-     */
-    @Deprecated
-    public Tile getSuggestion(int position) {
+    public Suggestion getSuggestion(int position) {
         return mSuggestionAdapter.getSuggestion(position);
-    }
-
-    public Suggestion getSuggestionV2(int position) {
-        return mSuggestionAdapter.getSuggestionsV2(position);
     }
 
     @VisibleForTesting
@@ -422,26 +360,17 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             int position) {
         // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
         // header anymore.
-        final List<Suggestion> suggestionsV2 = mDashboardData.getSuggestionsV2();
-        final List<Tile> suggestions = mDashboardData.getSuggestions();
+        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
 
         boolean conditionOnly = true;
         if (position == SUGGESTION_CONDITION_HEADER_POSITION) {
-            if (suggestions != null && suggestions.size() > 0) {
+           if (suggestions != null && suggestions.size() > 0) {
                 conditionOnly = false;
                 mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                        (List<Tile>) mDashboardData.getItemEntityByPosition(position),
-                        null, mSuggestionsShownLogged);
-                mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                        holder.data, mSuggestionControllerMixin, mSuggestionParser, mCallback);
-                holder.data.setAdapter(mSuggestionAdapter);
-            } else if (suggestionsV2 != null && suggestionsV2.size() > 0) {
-                conditionOnly = false;
-                mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                        null, (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
+                        (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
                         mSuggestionsShownLogged);
                 mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                        holder.data, mSuggestionControllerMixin, null /* parser */, mCallback);
+                        holder.data, mSuggestionControllerMixin, mCallback);
                 holder.data.setAdapter(mSuggestionAdapter);
             }
         }
@@ -494,14 +423,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     void onSaveInstanceState(Bundle outState) {
         final DashboardCategory category = mDashboardData.getCategory();
-        final List<Tile> suggestions = mDashboardData.getSuggestions();
-        final List<Suggestion> suggestionV2 = mDashboardData.getSuggestionsV2();
+        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
         if (suggestions != null) {
-            outState.putParcelableArrayList(STATE_SUGGESTION_LIST, new ArrayList<>(suggestions));
-        }
-        if (suggestionV2 != null) {
-            outState.putParcelableArrayList(STATE_SUGGESTION_LIST_V2,
-                    new ArrayList<>(suggestionV2));
+            outState.putParcelableArrayList(STATE_SUGGESTION_LIST,
+                    new ArrayList<>(suggestions));
         }
         if (category != null) {
             outState.putParcelable(STATE_CATEGORY_LIST, category);

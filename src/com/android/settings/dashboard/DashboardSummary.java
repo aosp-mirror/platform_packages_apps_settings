@@ -19,7 +19,6 @@ package com.android.settings.dashboard;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.service.settings.suggestions.Suggestion;
@@ -41,19 +40,14 @@ import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
 import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
-import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
-import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionList;
-import com.android.settingslib.suggestions.SuggestionParser;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
@@ -73,11 +67,9 @@ public class DashboardSummary extends InstrumentedFragment
     private DashboardAdapter mAdapter;
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
-    private SuggestionParser mSuggestionParser;
     private LinearLayoutManager mLayoutManager;
     private SuggestionControllerMixin mSuggestionControllerMixin;
     private DashboardFeatureProvider mDashboardFeatureProvider;
-    private SuggestionFeatureProvider mSuggestionFeatureProvider;
     private boolean isOnCategoriesChangedCalled;
     private boolean mOnConditionsChangedCalled;
 
@@ -92,13 +84,9 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mSuggestionFeatureProvider = FeatureFactory.getFactory(context)
-                .getSuggestionFeatureProvider(context);
-        if (mSuggestionFeatureProvider.isSuggestionV2Enabled(context)) {
-            Log.d(TAG, "Suggestion v2 is enabled, creating SuggestionControllerMixin");
-            mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
-                    getLifecycle());
-        }
+        Log.d(TAG, "Creating SuggestionControllerMixin");
+        mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
+                getLifecycle());
     }
 
     @Override
@@ -121,10 +109,6 @@ public class DashboardSummary extends InstrumentedFragment
 
         mConditionManager = ConditionManager.get(activity, false);
         getLifecycle().addObserver(mConditionManager);
-        if (mSuggestionFeatureProvider.isSuggestionEnabled(activity)) {
-            mSuggestionParser = new SuggestionParser(activity,
-                    mSuggestionFeatureProvider.getSharedPrefs(activity), R.xml.suggestion_ordering);
-        }
         if (DEBUG_TIMING) {
             Log.d(TAG, "onCreate took " + (System.currentTimeMillis() - startTime) + " ms");
         }
@@ -211,8 +195,7 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
-                mSuggestionParser, mSuggestionControllerMixin,
-                this /* SuggestionDismissController.Callback */);
+                mSuggestionControllerMixin, this /* SuggestionDismissController.Callback */);
         mDashboard.setAdapter(mAdapter);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
         mSummaryLoader.setSummaryConsumer(mAdapter);
@@ -228,16 +211,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @VisibleForTesting
     void rebuildUI() {
-        if (!mSuggestionFeatureProvider.isSuggestionEnabled(getContext())) {
-            Log.d(TAG, "Suggestion v1 feature is disabled, skipping suggestion v1");
-            ThreadUtils.postOnBackgroundThread(() -> updateCategory());
-        } else {
-            new SuggestionLoader().execute();
-            // Set categories on their own if loading suggestions takes too long.
-            mHandler.postDelayed(() -> {
-                updateCategory();
-            }, MAX_WAIT_MILLIS);
-        }
+        ThreadUtils.postOnBackgroundThread(() -> updateCategory());
     }
 
     @Override
@@ -274,17 +248,7 @@ public class DashboardSummary extends InstrumentedFragment
 
     @Override
     public Suggestion getSuggestionAt(int position) {
-        return mAdapter.getSuggestionV2(position);
-    }
-
-    @Override
-    public Tile getSuggestionForPosition(int position) {
         return mAdapter.getSuggestion(position);
-    }
-
-    @Override
-    public void onSuggestionDismissed(Tile suggestion) {
-        mAdapter.onSuggestionDismissed(suggestion);
     }
 
     @Override
@@ -295,54 +259,11 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSuggestionReady(List<Suggestion> suggestions) {
         mStagingSuggestions = suggestions;
-        mAdapter.setSuggestionsV2(suggestions);
+        mAdapter.setSuggestions(suggestions);
         if (mStagingCategory != null) {
             Log.d(TAG, "Category has loaded, setting category from suggestionReady");
             mHandler.removeCallbacksAndMessages(null);
             mAdapter.setCategory(mStagingCategory);
-        }
-    }
-
-    /**
-     * @deprecated in favor of {@link #mSuggestionControllerMixin}.
-     */
-    @Deprecated
-    private class SuggestionLoader extends AsyncTask<Void, Void, List<Tile>> {
-        @Override
-        protected List<Tile> doInBackground(Void... params) {
-            final Context context = getContext();
-            boolean isSmartSuggestionEnabled =
-                    mSuggestionFeatureProvider.isSmartSuggestionEnabled(context);
-            final SuggestionList sl = mSuggestionParser.getSuggestions(isSmartSuggestionEnabled);
-            final List<Tile> suggestions = sl.getSuggestions();
-
-            if (isSmartSuggestionEnabled) {
-                List<String> suggestionIds = new ArrayList<>(suggestions.size());
-                for (Tile suggestion : suggestions) {
-                    suggestionIds.add(mSuggestionFeatureProvider.getSuggestionIdentifier(
-                            context, suggestion));
-                }
-                // TODO: create a Suggestion class to maintain the id and other info
-                mSuggestionFeatureProvider.rankSuggestions(suggestions, suggestionIds);
-            }
-            for (int i = 0; i < suggestions.size(); i++) {
-                Tile suggestion = suggestions.get(i);
-                if (mSuggestionFeatureProvider.isSuggestionComplete(context,
-                        suggestion.intent.getComponent())) {
-                    suggestions.remove(i--);
-                }
-            }
-            if (sl.isExclusiveSuggestionCategory()) {
-                mSuggestionFeatureProvider.filterExclusiveSuggestions(suggestions);
-            }
-            return suggestions;
-        }
-
-        @Override
-        protected void onPostExecute(List<Tile> tiles) {
-            // tell handler that suggestions were loaded quickly enough
-            mHandler.removeCallbacksAndMessages(null);
-            updateCategoryAndSuggestion(tiles);
         }
     }
 
@@ -356,7 +277,7 @@ public class DashboardSummary extends InstrumentedFragment
             Log.d(TAG, "Suggestion has loaded, setting suggestion/category");
             ThreadUtils.postOnMainThread(() -> {
                 if (mStagingSuggestions != null) {
-                    mAdapter.setSuggestionsV2(mStagingSuggestions);
+                    mAdapter.setSuggestions(mStagingSuggestions);
                 }
                 mAdapter.setCategory(mStagingCategory);
             });
@@ -365,26 +286,4 @@ public class DashboardSummary extends InstrumentedFragment
             mHandler.postDelayed(() -> mAdapter.setCategory(mStagingCategory), MAX_WAIT_MILLIS);
         }
     }
-
-    /**
-     * @deprecated in favor of {@link #mSuggestionControllerMixin}.
-     */
-    @Deprecated
-    @VisibleForTesting
-    void updateCategoryAndSuggestion(List<Tile> suggestions) {
-        final Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-
-        final DashboardCategory category = mDashboardFeatureProvider.getTilesForCategory(
-                CategoryKey.CATEGORY_HOMEPAGE);
-        mSummaryLoader.updateSummaryToCache(category);
-        if (suggestions != null) {
-            mAdapter.setCategoriesAndSuggestions(category, suggestions);
-        } else {
-            mAdapter.setCategory(category);
-        }
-    }
-
 }
