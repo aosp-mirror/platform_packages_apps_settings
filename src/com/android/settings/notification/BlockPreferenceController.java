@@ -67,6 +67,8 @@ public class BlockPreferenceController extends NotificationPreferenceController
         LayoutPreference pref = (LayoutPreference) preference;
         SwitchBar bar = pref.findViewById(R.id.switch_bar);
         if (bar != null) {
+            bar.setSwitchBarText(R.string.notification_switch_label,
+                    R.string.notification_switch_label);
             bar.show();
             try {
                 bar.addOnSwitchChangeListener(this);
