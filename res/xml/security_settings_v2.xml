@@ -47,6 +47,7 @@
         <Preference
             android:key="lockscreen_preferences"
             android:title="@string/lockscreen_settings_title"
+            android:summary="@string/summary_placeholder"
             android:fragment="com.android.settings.security.LockscreenDashboardFragment" />
 
         <Preference
@@ -77,6 +78,7 @@
 
         <SwitchPreference
             android:key="visiblepattern_profile"
+            android:summary="@string/summary_placeholder"
             android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile" />
 
         <Preference
@@ -95,8 +97,8 @@
         <Preference
             android:key="location"
             android:title="@string/location_settings_title"
-            android:fragment="com.android.settings.location.LocationSettings">
-        </Preference>
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.location.LocationSettings" />
 
         <SwitchPreference
             android:key="show_password"
@@ -109,15 +111,17 @@
         android:order="40"
         android:key="security_settings_device_admin_category">
 
-        <Preference android:key="manage_device_admin"
-                    android:title="@string/manage_device_admin"
-                    android:persistent="false"
-                    android:fragment="com.android.settings.DeviceAdminSettings" />
+        <Preference
+            android:key="manage_device_admin"
+            android:title="@string/manage_device_admin"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.DeviceAdminSettings" />
 
-        <Preference android:key="enterprise_privacy"
-                    android:title="@string/enterprise_privacy_settings"
-                    android:persistent="false"
-                    android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
+        <Preference
+            android:key="enterprise_privacy"
+            android:title="@string/enterprise_privacy_settings"
+            android:summary="@string/summary_placeholder"
+            android:fragment="com.android.settings.enterprise.EnterprisePrivacySettings" />
 
     </PreferenceCategory>
 
@@ -144,7 +148,7 @@
         android:order="70"
         android:key="manage_trust_agents"
         android:title="@string/manage_trust_agents"
-        android:persistent="false"
+        android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.trustagent.TrustAgentSettings" />
 
     <Preference

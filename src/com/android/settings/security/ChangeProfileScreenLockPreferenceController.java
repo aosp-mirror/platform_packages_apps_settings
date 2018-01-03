@@ -30,7 +30,6 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.password.ChooseLockGeneric;
-import com.android.settings.widget.GearPreference;
 
 public class ChangeProfileScreenLockPreferenceController extends
         ChangeScreenLockPreferenceController {
@@ -42,12 +41,6 @@ public class ChangeProfileScreenLockPreferenceController extends
         super(context, host);
     }
 
-    @Override
-    public void onGearClick(GearPreference p) {
-
-    }
-
-    @Override
     public boolean isAvailable() {
         if (mProfileChallengeUserId == UserHandle.USER_NULL ||
                 !mLockPatternUtils.isSeparateProfileChallengeAllowed(mProfileChallengeUserId)) {
