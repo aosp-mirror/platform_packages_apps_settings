@@ -19,43 +19,45 @@ package com.android.settings.security;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
-public class EncryptionStatusPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class EncryptionStatusPreferenceController extends BasePreferenceController {
 
-    private static final String PREF_KEY = "encryption_and_credentials_encryption_status";
+
+    static final String PREF_KEY_ENCRYPTION_DETAIL_PAGE =
+            "encryption_and_credentials_encryption_status";
+    static final String PREF_KEY_ENCRYPTION_SECURITY_PAGE = "encryption_and_credential";
 
     private final UserManager mUserManager;
 
-    public EncryptionStatusPreferenceController(Context context) {
-        super(context);
+    public EncryptionStatusPreferenceController(Context context, String key) {
+        super(context, key);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Override
-    public boolean isAvailable() {
-        return mUserManager.isAdminUser();
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return PREF_KEY;
+    public int getAvailabilityStatus() {
+        return mUserManager.isAdminUser() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
     public void updateState(Preference preference) {
         final boolean encryptionEnabled = LockPatternUtils.isDeviceEncryptionEnabled();
         if (encryptionEnabled) {
-            preference.setFragment(null);
+            if (TextUtils.equals(getPreferenceKey(), PREF_KEY_ENCRYPTION_DETAIL_PAGE)) {
+                preference.setFragment(null);
+            }
             preference.setSummary(R.string.crypt_keeper_encrypted_summary);
         } else {
-            preference.setFragment(CryptKeeperSettings.class.getName());
+            if (TextUtils.equals(getPreferenceKey(), PREF_KEY_ENCRYPTION_DETAIL_PAGE)) {
+                preference.setFragment(CryptKeeperSettings.class.getName());
+            }
             preference.setSummary(R.string.summary_placeholder);
         }
+
     }
 }

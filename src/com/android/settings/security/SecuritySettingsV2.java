@@ -1,5 +1,8 @@
 package com.android.settings.security;
 
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -118,6 +121,7 @@ public class SecuritySettingsV2 extends DashboardFragment
     private LocationPreferenceController mLocationController;
     private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
     private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
+    private EncryptionStatusPreferenceController mEncryptionStatusPreferenceController;
     private LockScreenNotificationPreferenceController mLockScreenNotificationPreferenceController;
     private ManageTrustAgentsPreferenceController mManageTrustAgentsPreferenceController;
     private ScreenPinningPreferenceController mScreenPinningPreferenceController;
@@ -166,6 +170,8 @@ public class SecuritySettingsV2 extends DashboardFragment
         mScreenPinningPreferenceController = new ScreenPinningPreferenceController(context);
         mSimLockPreferenceController = new SimLockPreferenceController(context);
         mShowPasswordPreferenceController = new ShowPasswordPreferenceController(context);
+        mEncryptionStatusPreferenceController = new EncryptionStatusPreferenceController(
+                context, PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         return null;
     }
 
@@ -288,15 +294,6 @@ public class SecuritySettingsV2 extends DashboardFragment
 
         mSimLockPreferenceController.displayPreference(root);
         mScreenPinningPreferenceController.displayPreference(root);
-
-        // Encryption status of device
-        if (LockPatternUtils.isDeviceEncryptionEnabled()) {
-            root.findPreference(KEY_ENCRYPTION_AND_CREDENTIALS).setSummary(
-                    R.string.encryption_and_credential_settings_summary);
-        } else {
-            root.findPreference(KEY_ENCRYPTION_AND_CREDENTIALS).setSummary(
-                    R.string.summary_placeholder);
-        }
 
         // Advanced Security features
         mManageTrustAgentsPreferenceController.displayPreference(root);
@@ -439,10 +436,16 @@ public class SecuritySettingsV2 extends DashboardFragment
         }
 
         updateUnificationPreference();
+
         final Preference showPasswordPref = getPreferenceScreen().findPreference(
                 mShowPasswordPreferenceController.getPreferenceKey());
         showPasswordPref.setOnPreferenceChangeListener(mShowPasswordPreferenceController);
         mShowPasswordPreferenceController.updateState(showPasswordPref);
+
+        final Preference encryptionStatusPref = getPreferenceScreen().findPreference(
+                mEncryptionStatusPreferenceController.getPreferenceKey());
+        mEncryptionStatusPreferenceController.updateState(encryptionStatusPref);
+
         mLocationController.updateSummary();
     }
 
