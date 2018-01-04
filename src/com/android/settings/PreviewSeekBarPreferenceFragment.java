@@ -67,7 +67,7 @@ public abstract class PreviewSeekBarPreferenceFragment extends SettingsPreferenc
 
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            setPreviewLayer(progress, true);
+            setPreviewLayer(progress, false);
             if (!mSeekByTouch) {
                 commit();
             }
