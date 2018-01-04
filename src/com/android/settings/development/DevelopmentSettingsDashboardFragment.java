@@ -404,6 +404,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
+        controllers.add(new BluetoothDelayReportsPreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
