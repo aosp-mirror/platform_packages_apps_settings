@@ -91,6 +91,19 @@ public class DashboardFragmentTest {
     }
 
     @Test
+    public void testPreferenceControllerSetter_shouldAddAndNotReplace() {
+        final TestPreferenceController controller1 = new TestPreferenceController(mContext);
+        mTestFragment.addPreferenceController(controller1);
+        final TestPreferenceController controller2 = new TestPreferenceController(mContext);
+        mTestFragment.addPreferenceController(controller2);
+
+        final TestPreferenceController retrievedController = mTestFragment.getPreferenceController
+                (TestPreferenceController.class);
+
+        assertThat(controller1).isSameAs(retrievedController);
+    }
+
+    @Test
     public void displayTilesAsPreference_shouldAddTilesWithIntent() {
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
@@ -142,6 +155,23 @@ public class DashboardFragmentTest {
         mTestFragment.onResume();
 
         verify(mockController1, never()).getPreferenceKey();
+        verify(mockController2).getPreferenceKey();
+    }
+
+    @Test
+    public void updateState_doesNotSkipControllersOfSameClass() {
+        final AbstractPreferenceController mockController1 =
+                mock(AbstractPreferenceController.class);
+        final AbstractPreferenceController mockController2 =
+                mock(AbstractPreferenceController.class);
+        mTestFragment.addPreferenceController(mockController1);
+        mTestFragment.addPreferenceController(mockController2);
+        when(mockController1.isAvailable()).thenReturn(true);
+        when(mockController2.isAvailable()).thenReturn(true);
+
+        mTestFragment.updatePreferenceStates();
+
+        verify(mockController1).getPreferenceKey();
         verify(mockController2).getPreferenceKey();
     }
 

@@ -54,7 +54,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         SummaryLoader.SummaryConsumer {
     private static final String TAG = "DashboardFragment";
 
-    private final Map<Class, AbstractPreferenceController> mPreferenceControllers =
+    private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
 
@@ -156,14 +156,17 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
+        Collection<List<AbstractPreferenceController>> controllers =
+                mPreferenceControllers.values();
         // If preference contains intent, log it before handling.
         mMetricsFeatureProvider.logDashboardStartIntent(
                 getContext(), preference.getIntent(), getMetricsCategory());
         // Give all controllers a chance to handle click.
-        for (AbstractPreferenceController controller : controllers) {
-            if (controller.handlePreferenceTreeClick(preference)) {
-                return true;
+        for (List<AbstractPreferenceController> controllerList : controllers) {
+            for (AbstractPreferenceController controller : controllerList) {
+                if (controller.handlePreferenceTreeClick(preference)) {
+                    return true;
+                }
             }
         }
         return super.onPreferenceTreeClick(preference);
@@ -189,12 +192,23 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     protected abstract int getPreferenceScreenResId();
 
     protected <T extends AbstractPreferenceController> T getPreferenceController(Class<T> clazz) {
-        AbstractPreferenceController controller = mPreferenceControllers.get(clazz);
-        return (T) controller;
+        List<AbstractPreferenceController> controllerList = mPreferenceControllers.get(clazz);
+        if (controllerList != null) {
+            if (controllerList.size() > 1) {
+                Log.w(TAG, "Multiple controllers of Class " + clazz.getSimpleName()
+                        + " found, returning first one.");
+            }
+            return (T) controllerList.get(0);
+        }
+
+        return null;
     }
 
     protected void addPreferenceController(AbstractPreferenceController controller) {
-        mPreferenceControllers.put(controller.getClass(), controller);
+        if (mPreferenceControllers.get(controller.getClass()) == null) {
+            mPreferenceControllers.put(controller.getClass(), new ArrayList<>());
+        }
+        mPreferenceControllers.get(controller.getClass()).add(controller);
     }
 
     /**
@@ -249,31 +263,32 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         }
         addPreferencesFromResource(resId);
         final PreferenceScreen screen = getPreferenceScreen();
-        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
-        for (AbstractPreferenceController controller : controllers) {
-            controller.displayPreference(screen);
-        }
+        mPreferenceControllers.values().stream().flatMap(Collection::stream).forEach(
+                controller -> controller.displayPreference(screen));
     }
 
     /**
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {
-        Collection<AbstractPreferenceController> controllers = mPreferenceControllers.values();
         final PreferenceScreen screen = getPreferenceScreen();
-        for (AbstractPreferenceController controller : controllers) {
-            if (!controller.isAvailable()) {
-                continue;
-            }
-            final String key = controller.getPreferenceKey();
+        Collection<List<AbstractPreferenceController>> controllerLists =
+                mPreferenceControllers.values();
+        for (List<AbstractPreferenceController> controllerList : controllerLists) {
+            for (AbstractPreferenceController controller : controllerList) {
+                if (!controller.isAvailable()) {
+                    continue;
+                }
+                final String key = controller.getPreferenceKey();
 
-            final Preference preference = screen.findPreference(key);
-            if (preference == null) {
-                Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
-                        key, controller.getClass().getSimpleName()));
-                continue;
+                final Preference preference = screen.findPreference(key);
+                if (preference == null) {
+                    Log.d(TAG, String.format("Cannot find preference with key %s in Controller %s",
+                            key, controller.getClass().getSimpleName()));
+                    continue;
+                }
+                controller.updateState(preference);
             }
-            controller.updateState(preference);
         }
     }
 
