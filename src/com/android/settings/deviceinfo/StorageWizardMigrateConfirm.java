@@ -16,22 +16,28 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.deviceinfo.StorageSettings.TAG;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
+import android.text.TextUtils;
 import android.util.Log;
-
 import android.widget.Toast;
+
 import com.android.settings.R;
+import com.android.settings.password.ChooseLockSettingsHelper;
 
 import java.util.Objects;
 
-import static com.android.settings.deviceinfo.StorageSettings.TAG;
-
 public class StorageWizardMigrateConfirm extends StorageWizardBase {
+    private static final int REQUEST_CREDENTIAL = 100;
+
     private MigrateEstimateTask mEstimate;
 
     @Override
@@ -75,9 +81,22 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
 
     @Override
     public void onNavigateNext() {
-        int moveId;
+        // Ensure that all users are unlocked so that we can move their data
+        if (StorageManager.isFileEncryptedNativeOrEmulated()) {
+            for (UserInfo user : getSystemService(UserManager.class).getUsers()) {
+                if (!StorageManager.isUserKeyUnlocked(user.id)) {
+                    Log.d(TAG, "User " + user.id + " is currently locked; requesting unlock");
+                    final CharSequence description = TextUtils.expandTemplate(
+                            getText(R.string.storage_wizard_move_unlock), user.name);
+                    new ChooseLockSettingsHelper(this).launchConfirmationActivityForAnyUser(
+                            REQUEST_CREDENTIAL, null, null, description, user.id);
+                    return;
+                }
+            }
+        }
 
         // We only expect exceptions from StorageManagerService#setPrimaryStorageUuid
+        int moveId;
         try {
             moveId = getPackageManager().movePrimaryStorage(mVolume);
         } catch (IllegalArgumentException e) {
@@ -107,5 +126,23 @@ public class StorageWizardMigrateConfirm extends StorageWizardBase {
         intent.putExtra(PackageManager.EXTRA_MOVE_ID, moveId);
         startActivity(intent);
         finishAffinity();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CREDENTIAL) {
+            if (resultCode == RESULT_OK) {
+                // Credentials confirmed, so storage should be unlocked; let's
+                // go look for the next locked user.
+                onNavigateNext();
+            } else {
+                // User wasn't able to confirm credentials, so we're okay
+                // landing back at the wizard page again, where they read
+                // instructions again and tap "Next" to try again.
+                Log.w(TAG, "Failed to confirm credentials");
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

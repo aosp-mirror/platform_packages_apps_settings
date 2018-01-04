@@ -94,6 +94,11 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedPr
     protected boolean mFrp;
     private CharSequence mFrpAlternateButtonText;
 
+    private boolean isInternalActivity() {
+        return (getActivity() instanceof ConfirmLockPassword.InternalActivity)
+                || (getActivity() instanceof ConfirmLockPattern.InternalActivity);
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +108,8 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedPr
                 ChooseLockSettingsHelper.EXTRA_KEY_RETURN_CREDENTIALS, false);
         // Only take this argument into account if it belongs to the current profile.
         Intent intent = getActivity().getIntent();
-        mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras());
+        mUserId = Utils.getUserIdFromBundle(getActivity(), intent.getExtras(),
+                isInternalActivity());
         mFrp = (mUserId == LockPatternUtils.USER_FRP);
         mUserManager = UserManager.get(getActivity());
         mEffectiveUserId = mUserManager.getCredentialOwnerProfile(mUserId);
@@ -141,7 +147,7 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedPr
                 getActivity(),
                 Utils.getUserIdFromBundle(
                         getActivity(),
-                        getActivity().getIntent().getExtras()));
+                        getActivity().getIntent().getExtras(), isInternalActivity()));
         if (mUserManager.isManagedProfile(credentialOwnerUserId)) {
             setWorkChallengeBackground(view, credentialOwnerUserId);
         }

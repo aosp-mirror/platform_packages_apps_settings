@@ -106,6 +106,7 @@ import android.widget.TabWidget;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.FingerprintManagerWrapper;
 
@@ -995,20 +996,37 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Returns the user id present in the bundle with {@link Intent#EXTRA_USER_ID} if it
-     * belongs to the current user.
+     * Returns the user id present in the bundle with
+     * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
      *
-     * @throws SecurityException if the given userId does not belong to the current user group.
+     * @throws SecurityException if the given userId does not belong to the
+     *             current user group.
      */
     public static int getUserIdFromBundle(Context context, Bundle bundle) {
+        return getUserIdFromBundle(context, bundle, false);
+    }
+
+    /**
+     * Returns the user id present in the bundle with
+     * {@link Intent#EXTRA_USER_ID} if it belongs to the current user.
+     *
+     * @param isInternal indicating if the caller is "internal" to the system,
+     *            meaning we're willing to trust extras like
+     *            {@link ChooseLockSettingsHelper#EXTRA_ALLOW_ANY_USER}.
+     * @throws SecurityException if the given userId does not belong to the
+     *             current user group.
+     */
+    public static int getUserIdFromBundle(Context context, Bundle bundle, boolean isInternal) {
         if (bundle == null) {
             return getCredentialOwnerUserId(context);
         }
+        final boolean allowAnyUser = isInternal
+                && bundle.getBoolean(ChooseLockSettingsHelper.EXTRA_ALLOW_ANY_USER, false);
         int userId = bundle.getInt(Intent.EXTRA_USER_ID, UserHandle.myUserId());
         if (userId == LockPatternUtils.USER_FRP) {
-            return enforceSystemUser(context, userId);
+            return allowAnyUser ? userId : enforceSystemUser(context, userId);
         } else {
-            return enforceSameOwner(context, userId);
+            return allowAnyUser ? userId : enforceSameOwner(context, userId);
         }
     }
 
