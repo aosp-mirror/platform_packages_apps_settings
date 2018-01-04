@@ -316,6 +316,26 @@
                     android:orientation="vertical"
                     android:visibility="gone">
 
+            <LinearLayout android:id="@+id/metered_settings_fields"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item">
+
+                <TextView android:id="@+id/metered_settings_title"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          style="@style/wifi_item_label"
+                          android:text="@string/data_usage_metered_yes" />
+
+                <Spinner android:id="@+id/metered_settings"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         style="@style/wifi_item_spinner"
+                         android:prompt="@string/data_usage_metered_yes"
+                         android:entries="@array/wifi_metered_entries"/>
+
+            </LinearLayout>
+
             <LinearLayout android:id="@+id/proxy_settings_fields"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

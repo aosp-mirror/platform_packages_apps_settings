@@ -36,7 +36,6 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
-import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
@@ -110,7 +109,6 @@ public final class SearchIndexableResources {
         addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
-        addIndex(DataUsageMeteredSettings.class);
         addIndex(ScreenZoomSettings.class);
         addIndex(DisplaySettings.class);
         addIndex(AmbientDisplaySettings.class);
