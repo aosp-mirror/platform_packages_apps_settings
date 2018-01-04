@@ -135,11 +135,9 @@ public class SetupChooseLockPasswordTest {
         fragment.onLockTypeSelected(ScreenLockType.PATTERN);
 
         ShadowActivity shadowActivity = shadowOf(activity);
-        IntentForResult chooseLockIntent = shadowActivity.getNextStartedActivityForResult();
-        assertThat(chooseLockIntent).isNotNull();
-        assertThat(chooseLockIntent.requestCode)
-                .isEqualTo(SetupChooseLockPasswordFragment.REQUEST_SCREEN_LOCK_OPTIONS);
-        assertThat(chooseLockIntent.intent.getStringExtra("foo")).named("Foo extra")
+        final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
+        assertThat(nextStartedActivity).isNotNull();
+        assertThat(nextStartedActivity.getStringExtra("foo")).named("Foo extra")
                 .isEqualTo("bar");
     }
 
