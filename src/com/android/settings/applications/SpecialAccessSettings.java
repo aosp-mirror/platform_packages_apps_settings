@@ -17,6 +17,7 @@ package com.android.settings.applications;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -31,7 +32,6 @@ import java.util.List;
 public class SpecialAccessSettings extends DashboardFragment {
 
     private static final String TAG = "SpecialAccessSettings";
-
     private static final String[] DISABLED_FEATURES_LOW_RAM =
             new String[]{"notification_access", "zen_access", "enabled_vr_listeners",
                     "picture_in_picture"};
@@ -62,7 +62,18 @@ public class SpecialAccessSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        return buildPreferenceControllers(context);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(
+            @NonNull Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new HighPowerAppsController(context));
+        controllers.add(new DeviceAdministratorsController(context));
+        controllers.add(new PremiumSmsController(context));
+        controllers.add(new DataSaverController(context));
+        controllers.add(new EnabledVrListenersController(context));
+        return controllers;
     }
 
     @Override
@@ -81,6 +92,12 @@ public class SpecialAccessSettings extends DashboardFragment {
                     sir.xmlResId = R.xml.special_access;
                     result.add(sir);
                     return result;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
+                    return buildPreferenceControllers(context);
                 }
             };
 }
