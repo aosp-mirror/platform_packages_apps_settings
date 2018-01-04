@@ -47,15 +47,8 @@ import java.util.List;
  * <ul>
  *     <li>Platform location controls</li>
  *     <ul>
- *         <li>In switch bar: location master switch. Used to toggle
- *         {@link android.provider.Settings.Secure#LOCATION_MODE} between
- *         {@link android.provider.Settings.Secure#LOCATION_MODE_OFF} and another location mode.
+ *         <li>In switch bar: location master switch. Used to toggle location on and off.
  *         </li>
- *         <li>Mode preference: only available if the master switch is on, selects between
- *         {@link android.provider.Settings.Secure#LOCATION_MODE} of
- *         {@link android.provider.Settings.Secure#LOCATION_MODE_HIGH_ACCURACY},
- *         {@link android.provider.Settings.Secure#LOCATION_MODE_BATTERY_SAVING}, or
- *         {@link android.provider.Settings.Secure#LOCATION_MODE_SENSORS_ONLY}.</li>
  *     </ul>
  *     <li>Recent location requests: automatically populated by {@link RecentLocationApps}</li>
  *     <li>Location services: multi-app settings provided from outside the Android framework. Each

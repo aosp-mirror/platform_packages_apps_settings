@@ -34,7 +34,9 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import static com.android.settingslib.Utils.updateLocationMode;
+import static com.android.settingslib.Utils.updateLocationEnabled;
 import static com.android.settingslib.RestrictedLockUtils.checkIfRestrictionEnforced;
+
 
 /**
  * A class that listens to location settings change and modifies location settings
@@ -104,6 +106,25 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
         if (mListener != null) {
             mListener.onLocationModeChanged(mode, isRestricted());
         }
+    }
+
+    void setLocationEnabled(boolean enabled) {
+        final int currentMode = Settings.Secure.getInt(mContext.getContentResolver(),
+            Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
+
+        if (isRestricted()) {
+            // Location toggling disabled by user restriction. Read the current location mode to
+            // update the location master switch.
+            if (Log.isLoggable(TAG, Log.INFO)) {
+                Log.i(TAG, "Restricted user, not setting location mode");
+            }
+            if (mListener != null) {
+                mListener.onLocationModeChanged(currentMode, true);
+            }
+            return;
+        }
+        updateLocationEnabled(mContext, enabled, UserHandle.myUserId());
+        refreshLocationMode();
     }
 
     void setLocationMode(int mode) {
