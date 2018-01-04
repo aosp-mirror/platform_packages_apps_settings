@@ -214,11 +214,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                                     "persist.bluetooth.disableinbandringing";
     private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
                                     "persist.bluetooth.btsnoopenable";
+    private static final String BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY =
+            "persist.bluetooth.enabledelayreports";
 
     static final String BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY =
             "persist.bluetooth.maxconnectedaudiodevices";
 
     private static final String BLUETOOTH_DISABLE_INBAND_RINGING_KEY = "bluetooth_disable_inband_ringing";
+    private static final String BLUETOOTH_ENABLE_AVDTP_DELAY_REPORT_KEY = "bluetooth_enable_avdtp_delay_reports";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
@@ -297,6 +300,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mBluetoothShowDevicesWithoutNames;
     private SwitchPreference mBluetoothDisableAbsVolume;
     private SwitchPreference mBluetoothDisableInbandRinging;
+    private SwitchPreference mBluetoothEnableAvdtpDelayReport;
 
     private BluetoothA2dp mBluetoothA2dp;
     private final Object mBluetoothA2dpLock = new Object();
@@ -526,6 +530,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             removePreference(mBluetoothDisableInbandRinging);
             mBluetoothDisableInbandRinging = null;
         }
+        mBluetoothEnableAvdtpDelayReport = findAndInitSwitchPref(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORT_KEY);
 
         mBluetoothSelectAvrcpVersion = addListPreference(BLUETOOTH_SELECT_AVRCP_VERSION_KEY);
         mBluetoothSelectA2dpCodec = addListPreference(BLUETOOTH_SELECT_A2DP_CODEC_KEY);
@@ -868,6 +873,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         updateBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         updateBluetoothDisableAbsVolumeOptions();
         updateBluetoothDisableInbandRingingOptions();
+        updateBluetoothEnableAvdtpDelayReportOptions();
         updateBluetoothA2dpConfigurationValues();
         updatePrivateDnsSummary();
     }
@@ -1540,6 +1546,16 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             SystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
                 mBluetoothDisableInbandRinging.isChecked() ? "true" : "false");
         }
+    }
+
+    private void updateBluetoothEnableAvdtpDelayReportOptions() {
+        updateSwitchPreference(mBluetoothEnableAvdtpDelayReport,
+                SystemProperties.getBoolean(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false));
+    }
+
+    private void writeBluetoothEnableAvdtpDelayReportOptions() {
+        SystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
+                mBluetoothEnableAvdtpDelayReport.isChecked() ? "true" : "false");
     }
 
     private void updateMobileDataAlwaysOnOptions() {
@@ -2616,6 +2632,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothDisableAbsVolumeOptions();
         } else if (preference == mBluetoothDisableInbandRinging) {
             writeBluetoothDisableInbandRingingOptions();
+        } else if (preference == mBluetoothEnableAvdtpDelayReport) {
+            writeBluetoothEnableAvdtpDelayReportOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {
