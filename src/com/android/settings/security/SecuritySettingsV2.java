@@ -41,7 +41,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
-import com.android.settings.security.trustagent.TrustAgentManager;
+import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
@@ -58,8 +58,6 @@ public class SecuritySettingsV2 extends DashboardFragment
 
     private static final String TAG = "SecuritySettingsV2";
 
-    private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
-
     // Lock Settings
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
@@ -73,15 +71,12 @@ public class SecuritySettingsV2 extends DashboardFragment
     private static final String KEY_LOCATION = "location";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
-    private static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
+    public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE = 127;
     private static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     private static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     private static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
     private static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
-
-    // Misc Settings
-    private static final String KEY_TRUST_AGENT = "trust_agent";
 
     // Security status
     private static final String KEY_SECURITY_STATUS = "security_status";
@@ -101,7 +96,6 @@ public class SecuritySettingsV2 extends DashboardFragment
     private DashboardFeatureProvider mDashboardFeatureProvider;
     private DevicePolicyManager mDPM;
     private SecurityFeatureProvider mSecurityFeatureProvider;
-    private TrustAgentManager mTrustAgentManager;
     private UserManager mUm;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -110,8 +104,6 @@ public class SecuritySettingsV2 extends DashboardFragment
 
     private SwitchPreference mVisiblePatternProfile;
     private RestrictedSwitchPreference mUnifyProfile;
-
-    private Intent mTrustAgentClickIntent;
 
     private int mProfileChallengeUserId;
 
@@ -127,6 +119,7 @@ public class SecuritySettingsV2 extends DashboardFragment
     private ScreenPinningPreferenceController mScreenPinningPreferenceController;
     private SimLockPreferenceController mSimLockPreferenceController;
     private ShowPasswordPreferenceController mShowPasswordPreferenceController;
+    private TrustAgentListPreferenceController mTrustAgentListPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -145,7 +138,7 @@ public class SecuritySettingsV2 extends DashboardFragment
         mDashboardFeatureProvider = FeatureFactory.getFactory(context)
                 .getDashboardFeatureProvider(context);
 
-        mTrustAgentManager = mSecurityFeatureProvider.getTrustAgentManager();
+        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
     }
 
     @Override
@@ -172,19 +165,9 @@ public class SecuritySettingsV2 extends DashboardFragment
         mShowPasswordPreferenceController = new ShowPasswordPreferenceController(context);
         mEncryptionStatusPreferenceController = new EncryptionStatusPreferenceController(
                 context, PREF_KEY_ENCRYPTION_SECURITY_PAGE);
+        mTrustAgentListPreferenceController = new TrustAgentListPreferenceController(getActivity(),
+                this /* host */, getLifecycle());
         return null;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
-            mTrustAgentClickIntent = savedInstanceState.getParcelable(TRUST_AGENT_CLICK_INTENT);
-        }
     }
 
     private static int getResIdForLockUnlockScreen(LockPatternUtils lockPatternUtils,
@@ -237,6 +220,7 @@ public class SecuritySettingsV2 extends DashboardFragment
         }
         addPreferencesFromResource(R.xml.security_settings_v2);
         root = getPreferenceScreen();
+        mTrustAgentListPreferenceController.displayPreference(root);
 
         // Add options for lock/unlock screen
         final int resid = getResIdForLockUnlockScreen(mLockPatternUtils,
@@ -272,7 +256,6 @@ public class SecuritySettingsV2 extends DashboardFragment
                         mProfileChallengeUserId);
             }
         }
-
         Preference unlockSetOrChange = findPreference(KEY_UNLOCK_SET_OR_CHANGE);
         if (unlockSetOrChange instanceof GearPreference) {
             ((GearPreference) unlockSetOrChange).setOnGearClickListener(this);
@@ -284,7 +267,6 @@ public class SecuritySettingsV2 extends DashboardFragment
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
             maybeAddFingerprintPreference(securityCategory, UserHandle.myUserId());
-            addTrustAgentSettings(securityCategory);
             setLockscreenPreferencesSummary(securityCategory);
         }
 
@@ -379,46 +361,10 @@ public class SecuritySettingsV2 extends DashboardFragment
         }
     }
 
-    // Return the number of trust agents being added
-    private int addTrustAgentSettings(PreferenceGroup securityCategory) {
-        final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
-        final List<TrustAgentManager.TrustAgentComponentInfo> agents =
-                mTrustAgentManager.getActiveTrustAgents(getActivity(), mLockPatternUtils);
-        for (TrustAgentManager.TrustAgentComponentInfo agent : agents) {
-            final RestrictedPreference trustAgentPreference =
-                    new RestrictedPreference(securityCategory.getContext());
-            trustAgentPreference.setKey(KEY_TRUST_AGENT);
-            trustAgentPreference.setTitle(agent.title);
-            trustAgentPreference.setSummary(agent.summary);
-            // Create intent for this preference.
-            Intent intent = new Intent();
-            intent.setComponent(agent.componentName);
-            intent.setAction(Intent.ACTION_MAIN);
-            trustAgentPreference.setIntent(intent);
-            // Add preference to the settings menu.
-            securityCategory.addPreference(trustAgentPreference);
-
-            trustAgentPreference.setDisabledByAdmin(agent.admin);
-            if (!trustAgentPreference.isDisabledByAdmin() && !hasSecurity) {
-                trustAgentPreference.setEnabled(false);
-                trustAgentPreference.setSummary(R.string.disabled_because_no_backup_security);
-            }
-        }
-        return agents.size();
-    }
-
     @Override
     public void onGearClick(GearPreference p) {
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(p.getKey())) {
             startFragment(this, ScreenLockSettings.class.getName(), 0, 0, null);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mTrustAgentClickIntent != null) {
-            outState.putParcelable(TRUST_AGENT_CLICK_INTENT, mTrustAgentClickIntent);
         }
     }
 
@@ -445,7 +391,7 @@ public class SecuritySettingsV2 extends DashboardFragment
         final Preference encryptionStatusPref = getPreferenceScreen().findPreference(
                 mEncryptionStatusPreferenceController.getPreferenceKey());
         mEncryptionStatusPreferenceController.updateState(encryptionStatusPref);
-
+        mTrustAgentListPreferenceController.onResume();
         mLocationController.updateSummary();
     }
 
@@ -465,6 +411,9 @@ public class SecuritySettingsV2 extends DashboardFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
+        if (mTrustAgentListPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
         final String key = preference.getKey();
         if (KEY_UNLOCK_SET_OR_CHANGE.equals(key)) {
             // TODO(b/35930129): Remove once existing password can be passed into vold directly.
@@ -491,17 +440,6 @@ public class SecuritySettingsV2 extends DashboardFragment
             startFragment(this, ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
                     R.string.lock_settings_picker_title_profile,
                     SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
-        } else if (KEY_TRUST_AGENT.equals(key)) {
-            ChooseLockSettingsHelper helper =
-                    new ChooseLockSettingsHelper(this.getActivity(), this);
-            mTrustAgentClickIntent = preference.getIntent();
-            boolean confirmationLaunched = helper.launchConfirmationActivity(
-                    CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
-            if (!confirmationLaunched && mTrustAgentClickIntent != null) {
-                // If this returns false, it means no password confirmation is required.
-                startActivity(mTrustAgentClickIntent);
-                mTrustAgentClickIntent = null;
-            }
         } else {
             // If we didn't handle it, let preferences handle it.
             return super.onPreferenceTreeClick(preference);
@@ -516,10 +454,7 @@ public class SecuritySettingsV2 extends DashboardFragment
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
-            if (mTrustAgentClickIntent != null) {
-                startActivity(mTrustAgentClickIntent);
-                mTrustAgentClickIntent = null;
-            }
+            mTrustAgentListPreferenceController.handleActivityResult(resultCode);
             return;
         } else if (requestCode == UNIFY_LOCK_CONFIRM_DEVICE_REQUEST
                 && resultCode == Activity.RESULT_OK) {
@@ -760,14 +695,8 @@ public class SecuritySettingsV2 extends DashboardFragment
         @Override
         public List<String> getNonIndexableKeys(Context context) {
             final List<String> keys = super.getNonIndexableKeys(context);
-            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
 
             new SimLockPreferenceController(context).updateNonIndexableKeys(keys);
-
-            // TrustAgent settings disappear when the user has no primary security.
-            if (!lockPatternUtils.isSecure(MY_USER_ID)) {
-                keys.add(KEY_TRUST_AGENT);
-            }
 
             if (!(new EnterprisePrivacyPreferenceController(context))
                     .isAvailable()) {

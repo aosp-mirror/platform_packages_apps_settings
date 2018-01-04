@@ -28,6 +28,22 @@
         android:title="@string/security_status_title" />
 
     <!-- TODO Need security section -->
+    <PreferenceCategory
+        android:key="security_category"
+        android:title="@string/lock_settings_title">
+
+        <!-- security_settings_chooser -->
+        <com.android.settings.widget.GearPreference
+            android:key="unlock_set_or_change"
+            android:title="@string/unlock_set_unlock_launch_picker_title"
+            android:summary="@string/unlock_set_unlock_mode_none"
+            settings:keywords="@string/keywords_lockscreen" />
+
+        <Preference android:key="lockscreen_preferences"
+                    android:title="@string/lockscreen_settings_title"
+                    android:fragment="com.android.settings.security.LockscreenDashboardFragment"/>
+
+    </PreferenceCategory>
 
     <!-- security_settings_misc.xml -->
     <PreferenceCategory
