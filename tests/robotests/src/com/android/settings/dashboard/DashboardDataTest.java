@@ -23,10 +23,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import android.app.PendingIntent;
+import android.service.settings.suggestions.Suggestion;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
-import android.widget.RemoteViews;
 
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
@@ -61,11 +62,10 @@ public class DashboardDataTest {
     @Mock
     private Tile mTestCategoryTile;
     @Mock
-    private Tile mTestSuggestion;
-    @Mock
     private Condition mTestCondition;
     @Mock
     private Condition mSecondCondition; // condition used to test insert in DiffUtil
+    private Suggestion mTestSuggestion;
 
     @Before
     public void SetUp() {
@@ -74,8 +74,11 @@ public class DashboardDataTest {
         mDashboardCategory = new DashboardCategory();
 
         // Build suggestions
-        final List<Tile> suggestions = new ArrayList<>();
-        mTestSuggestion.title = TEST_SUGGESTION_TITLE;
+        final List<Suggestion> suggestions = new ArrayList<>();
+        mTestSuggestion = new Suggestion.Builder("pkg")
+                .setTitle(TEST_SUGGESTION_TITLE)
+                .setPendingIntent(mock(PendingIntent.class))
+                .build();
         suggestions.add(mTestSuggestion);
 
         // Build oneItemConditions
@@ -227,8 +230,7 @@ public class DashboardDataTest {
         final List<Condition> oneItemConditions = new ArrayList<>();
         when(mTestCondition.shouldShow()).thenReturn(true);
         oneItemConditions.add(mTestCondition);
-        final List<Tile> suggestions = new ArrayList<>();
-        mTestSuggestion.title = TEST_SUGGESTION_TITLE;
+        final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(mTestSuggestion);
 
         final DashboardData oldData = new DashboardData.Builder()
@@ -261,20 +263,16 @@ public class DashboardDataTest {
     public void testDiffUtil_typeSuggestedContainer_ResultDataNothingChanged() {
         //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
-        testResultData.add(new ListUpdateResult.ResultData(
-                ListUpdateResult.ResultData.TYPE_OPERATION_CHANGE, 0, 1));
-        Tile tile = new Tile();
-        tile.remoteViews = mock(RemoteViews.class);
 
         DashboardData prevData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(tile))
+                .setSuggestions(Arrays.asList(mTestSuggestion))
                 .build();
         DashboardData currentData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(tile))
+                .setSuggestions(Arrays.asList(mTestSuggestion))
                 .build();
         testDiffUtil(prevData, currentData, testResultData);
     }

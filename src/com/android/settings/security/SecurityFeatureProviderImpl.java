@@ -29,6 +29,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Pair;
 
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -43,6 +44,7 @@ import java.util.TreeMap;
 public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
 
     private TrustAgentManager mTrustAgentManager;
+    private LockPatternUtils mLockPatternUtils;
 
     @VisibleForTesting
     static final Drawable DEFAULT_ICON = null;
@@ -194,5 +196,13 @@ public class SecurityFeatureProviderImpl implements SecurityFeatureProvider {
             mTrustAgentManager = new TrustAgentManager();
         }
         return mTrustAgentManager;
+    }
+
+    @Override
+    public LockPatternUtils getLockPatternUtils(Context context) {
+        if (mLockPatternUtils == null) {
+            mLockPatternUtils = new LockPatternUtils(context.getApplicationContext());
+        }
+        return mLockPatternUtils;
     }
 }

@@ -16,25 +16,6 @@
 
 package com.android.settings.dashboard;
 
-import android.app.Activity;
-import android.support.v7.widget.LinearLayoutManager;
-
-import com.android.settings.TestConfig;
-import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.dashboard.conditional.FocusRecyclerView;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.drawer.CategoryKey;
-import com.android.settingslib.drawer.DashboardCategory;
-import com.android.settingslib.drawer.Tile;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
@@ -44,6 +25,27 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import android.app.Activity;
+import android.content.Context;
+import android.service.settings.suggestions.Suggestion;
+import android.support.v7.widget.LinearLayoutManager;
+
+import com.android.settings.TestConfig;
+import com.android.settings.dashboard.conditional.ConditionManager;
+import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.drawer.CategoryKey;
+import com.android.settingslib.drawer.DashboardCategory;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -63,11 +65,13 @@ public class DashboardSummaryTest {
     @Mock
     private SummaryLoader mSummaryLoader;
 
+    private Context mContext;
     private DashboardSummary mSummary;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mSummary = spy(new DashboardSummary());
         ReflectionHelpers.setField(mSummary, "mAdapter", mAdapter);
         ReflectionHelpers.setField(mSummary, "mDashboardFeatureProvider",
@@ -79,9 +83,10 @@ public class DashboardSummaryTest {
     }
 
     @Test
-    public void updateCategoryAndSuggestion_shouldGetCategoryFromFeatureProvider() {
+    public void updateCategory_shouldGetCategoryFromFeatureProvider() {
         doReturn(mock(Activity.class)).when(mSummary).getActivity();
-        mSummary.updateCategoryAndSuggestion(null);
+        mSummary.onAttach(mContext);
+        mSummary.updateCategory();
 
         verify(mSummaryLoader).updateSummaryToCache(nullable(DashboardCategory.class));
         verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
@@ -135,7 +140,7 @@ public class DashboardSummaryTest {
 
     @Test
     public void onSuggestionDismissed_shouldNotRebuildUI() {
-        mSummary.onSuggestionDismissed(mock(Tile.class));
+        mSummary.onSuggestionDismissed(mock(Suggestion.class));
         verify(mSummary, never()).rebuildUI();
     }
 }

@@ -24,7 +24,6 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
-import com.android.settingslib.suggestions.SuggestionParser;
 
 import java.util.List;
 
@@ -33,14 +32,6 @@ public interface SuggestionFeatureProvider {
 
     /**
      * Whether or not the whole suggestion feature is enabled.
-     *
-     * @deprecated in favor of {@link #isSuggestionV2Enabled(Context)}
-     */
-    @Deprecated
-    boolean isSuggestionEnabled(Context context);
-
-    /**
-     * Whether or not the suggestion v2 feature is enabled.
      */
     boolean isSuggestionV2Enabled(Context context);
 
@@ -63,42 +54,15 @@ public interface SuggestionFeatureProvider {
     SharedPreferences getSharedPrefs(Context context);
 
     /**
-     * Ranks the list of suggestions in place.
-     *
-     * @param suggestions   List of suggestion Tiles
-     * @param suggestionIds List of suggestion ids corresponding to the suggestion tiles.
-     * @deprecated in favor of SettingsIntelligence
-     */
-    @Deprecated
-    void rankSuggestions(final List<Tile> suggestions, List<String> suggestionIds);
-
-    /**
      * Only keep top few suggestions from exclusive suggestions.
      */
     void filterExclusiveSuggestions(List<Tile> suggestions);
 
     /**
      * Dismisses a suggestion.
-     *
-     * @deprecated in favor of {@link #dismissSuggestion(Context, SuggestionControllerMixin,
-     * Suggestion)}
-     */
-    @Deprecated
-    void dismissSuggestion(Context context, SuggestionParser parser, Tile suggestion);
-
-    /**
-     * Dismisses a suggestion.
      */
     void dismissSuggestion(Context context, SuggestionControllerMixin suggestionMixin,
             Suggestion suggestion);
-
-    /**
-     * Returns an identifier for the suggestion
-     *
-     * @deprecated in favor or {@link Suggestion#getId()}
-     */
-    @Deprecated
-    String getSuggestionIdentifier(Context context, Tile suggestion);
 
     /**
      * Returns common tagged data for suggestion logging.

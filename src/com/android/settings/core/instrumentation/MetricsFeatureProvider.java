@@ -39,7 +39,6 @@ public class MetricsFeatureProvider {
 
     protected void installLogWriters() {
         mLoggerWriters.add(new EventLogWriter());
-        mLoggerWriters.add(new SettingSuggestionsLogWriter());
     }
 
     public void visible(Context context, int source, int category) {

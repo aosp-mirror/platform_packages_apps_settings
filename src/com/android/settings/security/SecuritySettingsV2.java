@@ -7,21 +7,15 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
-import android.telephony.CarrierConfigManager;
-import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -43,6 +37,7 @@ import com.android.settings.password.ManagedLockPasswordProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.security.screenlock.ScreenLockSettings;
+import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
@@ -67,13 +62,11 @@ public class SecuritySettingsV2 extends DashboardFragment
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
     private static final String KEY_SECURITY_CATEGORY = "security_category";
-    @VisibleForTesting
-    static final String KEY_MANAGE_TRUST_AGENTS = "manage_trust_agents";
     private static final String KEY_UNIFICATION = "unification";
     @VisibleForTesting
     static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
     private static final String KEY_ENCRYPTION_AND_CREDENTIALS = "encryption_and_credential";
-    private static final String KEY_LOCATION_SCANNING  = "location_scanning";
+    private static final String KEY_LOCATION_SCANNING = "location_scanning";
     private static final String KEY_LOCATION = "location";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
@@ -85,10 +78,7 @@ public class SecuritySettingsV2 extends DashboardFragment
     private static final String TAG_UNIFICATION_DIALOG = "unification_dialog";
 
     // Misc Settings
-    private static final String KEY_SIM_LOCK = "sim_lock_settings";
-    private static final String KEY_SHOW_PASSWORD = "show_password";
     private static final String KEY_TRUST_AGENT = "trust_agent";
-    private static final String KEY_SCREEN_PINNING = "screen_pinning_settings";
 
     // Security status
     private static final String KEY_SECURITY_STATUS = "security_status";
@@ -100,7 +90,7 @@ public class SecuritySettingsV2 extends DashboardFragment
 
     // These switch preferences need special handling since they're not all stored in Settings.
     private static final String SWITCH_PREFERENCE_KEYS[] = {
-            KEY_SHOW_PASSWORD, KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
+            KEY_UNIFICATION, KEY_VISIBLE_PATTERN_PROFILE
     };
 
     private static final int MY_USER_ID = UserHandle.myUserId();
@@ -109,7 +99,6 @@ public class SecuritySettingsV2 extends DashboardFragment
     private DevicePolicyManager mDPM;
     private SecurityFeatureProvider mSecurityFeatureProvider;
     private TrustAgentManager mTrustAgentManager;
-    private SubscriptionManager mSubscriptionManager;
     private UserManager mUm;
 
     private ChooseLockSettingsHelper mChooseLockSettingsHelper;
@@ -118,10 +107,6 @@ public class SecuritySettingsV2 extends DashboardFragment
 
     private SwitchPreference mVisiblePatternProfile;
     private RestrictedSwitchPreference mUnifyProfile;
-
-    private SwitchPreference mShowPassword;
-
-    private boolean mIsAdmin;
 
     private Intent mTrustAgentClickIntent;
 
@@ -134,6 +119,10 @@ public class SecuritySettingsV2 extends DashboardFragment
     private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
     private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
     private LockScreenNotificationPreferenceController mLockScreenNotificationPreferenceController;
+    private ManageTrustAgentsPreferenceController mManageTrustAgentsPreferenceController;
+    private ScreenPinningPreferenceController mScreenPinningPreferenceController;
+    private SimLockPreferenceController mSimLockPreferenceController;
+    private ShowPasswordPreferenceController mShowPasswordPreferenceController;
 
     @Override
     public int getMetricsCategory() {
@@ -143,15 +132,15 @@ public class SecuritySettingsV2 extends DashboardFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mSecurityFeatureProvider = FeatureFactory.getFactory(context).getSecurityFeatureProvider();
         mLocationController = new LocationPreferenceController(context, getLifecycle());
-        mSubscriptionManager = SubscriptionManager.from(context);
-        mLockPatternUtils = new LockPatternUtils(context);
+        mLockPatternUtils = mSecurityFeatureProvider.getLockPatternUtils(context);
         mManagedPasswordProvider = ManagedLockPasswordProvider.get(context, MY_USER_ID);
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         mUm = UserManager.get(context);
         mDashboardFeatureProvider = FeatureFactory.getFactory(context)
                 .getDashboardFeatureProvider(context);
-        mSecurityFeatureProvider = FeatureFactory.getFactory(context).getSecurityFeatureProvider();
+
         mTrustAgentManager = mSecurityFeatureProvider.getTrustAgentManager();
     }
 
@@ -173,6 +162,10 @@ public class SecuritySettingsV2 extends DashboardFragment
                 = new EnterprisePrivacyPreferenceController(context);
         mLockScreenNotificationPreferenceController
                 = new LockScreenNotificationPreferenceController(context);
+        mManageTrustAgentsPreferenceController = new ManageTrustAgentsPreferenceController(context);
+        mScreenPinningPreferenceController = new ScreenPinningPreferenceController(context);
+        mSimLockPreferenceController = new SimLockPreferenceController(context);
+        mShowPasswordPreferenceController = new ShowPasswordPreferenceController(context);
         return null;
     }
 
@@ -181,7 +174,6 @@ public class SecuritySettingsV2 extends DashboardFragment
         super.onCreate(savedInstanceState);
 
         mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
-
 
         if (savedInstanceState != null
                 && savedInstanceState.containsKey(TRUST_AGENT_CLICK_INTENT)) {
@@ -280,15 +272,13 @@ public class SecuritySettingsV2 extends DashboardFragment
             ((GearPreference) unlockSetOrChange).setOnGearClickListener(this);
         }
 
-        mIsAdmin = mUm.isAdminUser();
 
         // Fingerprint and trust agents
-        int numberOfTrustAgent = 0;
         PreferenceGroup securityCategory = (PreferenceGroup)
                 root.findPreference(KEY_SECURITY_CATEGORY);
         if (securityCategory != null) {
             maybeAddFingerprintPreference(securityCategory, UserHandle.myUserId());
-            numberOfTrustAgent = addTrustAgentSettings(securityCategory);
+            addTrustAgentSettings(securityCategory);
             setLockscreenPreferencesSummary(securityCategory);
         }
 
@@ -296,24 +286,8 @@ public class SecuritySettingsV2 extends DashboardFragment
                 (SwitchPreference) root.findPreference(KEY_VISIBLE_PATTERN_PROFILE);
         mUnifyProfile = (RestrictedSwitchPreference) root.findPreference(KEY_UNIFICATION);
 
-
-        // Do not display SIM lock for devices without an Icc card
-        TelephonyManager tm = TelephonyManager.getDefault();
-        CarrierConfigManager cfgMgr = (CarrierConfigManager)
-                getActivity().getSystemService(Context.CARRIER_CONFIG_SERVICE);
-        PersistableBundle b = cfgMgr.getConfig();
-        if (!mIsAdmin || !isSimIccReady() ||
-                b.getBoolean(CarrierConfigManager.KEY_HIDE_SIM_LOCK_SETTINGS_BOOL)) {
-            root.removePreference(root.findPreference(KEY_SIM_LOCK));
-        } else {
-            // Disable SIM lock if there is no ready SIM card.
-            root.findPreference(KEY_SIM_LOCK).setEnabled(isSimReady());
-        }
-        if (Settings.System.getInt(getContentResolver(),
-                Settings.System.LOCK_TO_APP_ENABLED, 0) != 0) {
-            root.findPreference(KEY_SCREEN_PINNING).setSummary(
-                    getResources().getString(R.string.switch_on_text));
-        }
+        mSimLockPreferenceController.displayPreference(root);
+        mScreenPinningPreferenceController.displayPreference(root);
 
         // Encryption status of device
         if (LockPatternUtils.isDeviceEncryptionEnabled()) {
@@ -324,14 +298,8 @@ public class SecuritySettingsV2 extends DashboardFragment
                     R.string.summary_placeholder);
         }
 
-        // Show password
-        mShowPassword = (SwitchPreference) root.findPreference(KEY_SHOW_PASSWORD);
-
-        // Credential storage
-        final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-
         // Advanced Security features
-        initTrustAgentPreference(root, numberOfTrustAgent);
+        mManageTrustAgentsPreferenceController.displayPreference(root);
 
         PreferenceGroup securityStatusPreferenceGroup =
                 (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
@@ -381,23 +349,6 @@ public class SecuritySettingsV2 extends DashboardFragment
     }
 
     @VisibleForTesting
-    void initTrustAgentPreference(PreferenceScreen root, int numberOfTrustAgent) {
-        Preference manageAgents = root.findPreference(KEY_MANAGE_TRUST_AGENTS);
-        if (manageAgents != null) {
-            if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
-                manageAgents.setEnabled(false);
-                manageAgents.setSummary(R.string.disabled_because_no_backup_security);
-            } else if (numberOfTrustAgent > 0) {
-                manageAgents.setSummary(getActivity().getResources().getQuantityString(
-                        R.plurals.manage_trust_agents_summary_on,
-                        numberOfTrustAgent, numberOfTrustAgent));
-            } else {
-                manageAgents.setSummary(R.string.manage_trust_agents_summary);
-            }
-        }
-    }
-
-    @VisibleForTesting
     void setLockscreenPreferencesSummary(PreferenceGroup group) {
         final Preference lockscreenPreferences = group.findPreference(KEY_LOCKSCREEN_PREFERENCES);
         if (lockscreenPreferences != null) {
@@ -411,8 +362,9 @@ public class SecuritySettingsV2 extends DashboardFragment
      * The preference must be a RestrictedPreference.
      */
     private void disableIfPasswordQualityManaged(String preferenceKey, int userId) {
-        final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
-                getActivity(), userId);
+        final RestrictedLockUtils.EnforcedAdmin admin =
+                RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                        getActivity(), userId);
         if (admin != null && mDPM.getPasswordQuality(admin.component, userId) ==
                 DevicePolicyManager.PASSWORD_QUALITY_MANAGED) {
             final RestrictedPreference pref =
@@ -433,8 +385,8 @@ public class SecuritySettingsV2 extends DashboardFragment
     // Return the number of trust agents being added
     private int addTrustAgentSettings(PreferenceGroup securityCategory) {
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
-        final List<TrustAgentManager.TrustAgentComponentInfo> agents = mTrustAgentManager.getActiveTrustAgents(
-                getActivity(), mLockPatternUtils);
+        final List<TrustAgentManager.TrustAgentComponentInfo> agents =
+                mTrustAgentManager.getActiveTrustAgents(getActivity(), mLockPatternUtils);
         for (TrustAgentManager.TrustAgentComponentInfo agent : agents) {
             final RestrictedPreference trustAgentPreference =
                     new RestrictedPreference(securityCategory.getContext());
@@ -456,43 +408,6 @@ public class SecuritySettingsV2 extends DashboardFragment
             }
         }
         return agents.size();
-    }
-
-    /* Return true if a there is a Slot that has Icc.
-     */
-    private boolean isSimIccReady() {
-        TelephonyManager tm = TelephonyManager.getDefault();
-        final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
-
-        if (subInfoList != null) {
-            for (SubscriptionInfo subInfo : subInfoList) {
-                if (tm.hasIccCard(subInfo.getSimSlotIndex())) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /* Return true if a SIM is ready for locking.
-     * TODO: consider adding to TelephonyManager or SubscritpionManasger.
-     */
-    private boolean isSimReady() {
-        final List<SubscriptionInfo> subInfoList =
-                mSubscriptionManager.getActiveSubscriptionInfoList();
-        if (subInfoList != null) {
-            for (SubscriptionInfo subInfo : subInfoList) {
-                final int simState = TelephonyManager.getDefault()
-                        .getSimState(subInfo.getSimSlotIndex());
-                if ((simState != TelephonyManager.SIM_STATE_ABSENT) &&
-                        (simState != TelephonyManager.SIM_STATE_UNKNOWN)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     @Override
@@ -524,12 +439,10 @@ public class SecuritySettingsV2 extends DashboardFragment
         }
 
         updateUnificationPreference();
-
-        if (mShowPassword != null) {
-            mShowPassword.setChecked(Settings.System.getInt(getContentResolver(),
-                    Settings.System.TEXT_SHOW_PASSWORD, 1) != 0);
-        }
-
+        final Preference showPasswordPref = getPreferenceScreen().findPreference(
+                mShowPasswordPreferenceController.getPreferenceKey());
+        showPasswordPref.setOnPreferenceChangeListener(mShowPasswordPreferenceController);
+        mShowPasswordPreferenceController.updateState(showPasswordPref);
         mLocationController.updateSummary();
     }
 
@@ -581,7 +494,7 @@ public class SecuritySettingsV2 extends DashboardFragment
             mTrustAgentClickIntent = preference.getIntent();
             boolean confirmationLaunched = helper.launchConfirmationActivity(
                     CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
-            if (!confirmationLaunched&&  mTrustAgentClickIntent != null) {
+            if (!confirmationLaunched && mTrustAgentClickIntent != null) {
                 // If this returns false, it means no password confirmation is required.
                 startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;
@@ -715,15 +628,11 @@ public class SecuritySettingsV2 extends DashboardFragment
                         R.string.unlock_set_unlock_launch_picker_title);
                 final ChooseLockSettingsHelper helper =
                         new ChooseLockSettingsHelper(getActivity(), this);
-                if(!helper.launchConfirmationActivity(
+                if (!helper.launchConfirmationActivity(
                         UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST, title, true, MY_USER_ID)) {
                     ununifyLocks();
                 }
             }
-        } else if (KEY_SHOW_PASSWORD.equals(key)) {
-            Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
-                    ((Boolean) value) ? 1 : 0);
-            lockPatternUtils.setVisiblePasswordEnabled((Boolean) value, MY_USER_ID);
         }
         return result;
     }
@@ -788,8 +697,9 @@ public class SecuritySettingsV2 extends DashboardFragment
         }
 
         private boolean isPasswordManaged(int userId, Context context, DevicePolicyManager dpm) {
-            final RestrictedLockUtils.EnforcedAdmin admin = RestrictedLockUtils.checkIfPasswordQualityIsSet(
-                    context, userId);
+            final RestrictedLockUtils.EnforcedAdmin admin =
+                    RestrictedLockUtils.checkIfPasswordQualityIsSet(
+                            context, userId);
             return admin != null && dpm.getPasswordQuality(admin.component, userId) ==
                     DevicePolicyManager.PASSWORD_QUALITY_MANAGED;
         }
@@ -847,20 +757,13 @@ public class SecuritySettingsV2 extends DashboardFragment
         @Override
         public List<String> getNonIndexableKeys(Context context) {
             final List<String> keys = super.getNonIndexableKeys(context);
+            final LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
 
-            LockPatternUtils lockPatternUtils = new LockPatternUtils(context);
-
-            // Do not display SIM lock for devices without an Icc card
-            final UserManager um = UserManager.get(context);
-            final TelephonyManager tm = TelephonyManager.from(context);
-            if (!um.isAdminUser() || !tm.hasIccCard()) {
-                keys.add(KEY_SIM_LOCK);
-            }
+            new SimLockPreferenceController(context).updateNonIndexableKeys(keys);
 
             // TrustAgent settings disappear when the user has no primary security.
             if (!lockPatternUtils.isSecure(MY_USER_ID)) {
                 keys.add(KEY_TRUST_AGENT);
-                keys.add(KEY_MANAGE_TRUST_AGENTS);
             }
 
             if (!(new EnterprisePrivacyPreferenceController(context))
@@ -873,7 +776,6 @@ public class SecuritySettingsV2 extends DashboardFragment
             // Duplicates between parent-child
             keys.add(KEY_LOCATION);
             keys.add(KEY_ENCRYPTION_AND_CREDENTIALS);
-            keys.add(KEY_SCREEN_PINNING);
             keys.add(KEY_LOCATION_SCANNING);
 
             return keys;
