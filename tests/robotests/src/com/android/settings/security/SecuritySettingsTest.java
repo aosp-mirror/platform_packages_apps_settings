@@ -23,13 +23,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.UserManager.EnforcingUser;
@@ -84,54 +81,6 @@ public class SecuritySettingsTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mSummaryProvider = new SecuritySettings.SummaryProvider(mContext, mSummaryLoader);
-    }
-
-    @Test
-    public void testSummaryProvider_notListening() {
-        mSummaryProvider.setListening(false);
-
-        verifyNoMoreInteractions(mSummaryLoader);
-    }
-
-    @Test
-    public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
-        final FingerprintManager fpm = mock(FingerprintManager.class);
-        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-                .thenReturn(true);
-
-        // Cast to Object to workaround a robolectric casting bug
-        when((Object) mContext.getSystemService(FingerprintManager.class)).thenReturn(fpm);
-        when(fpm.isHardwareDetected()).thenReturn(true);
-
-        mSummaryProvider.setListening(true);
-
-        verify(mContext).getString(R.string.security_dashboard_summary);
-    }
-
-    @Test
-    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoFingerprint() {
-        final FingerprintManager fpm = mock(FingerprintManager.class);
-        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-                .thenReturn(false);
-
-        mSummaryProvider.setListening(true);
-
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
-    }
-
-    @Test
-    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoFingerprint() {
-        final FingerprintManager fpm = mock(FingerprintManager.class);
-        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
-                .thenReturn(true);
-
-        // Cast to Object to workaround a robolectric casting bug
-        when((Object) mContext.getSystemService(FingerprintManager.class)).thenReturn(fpm);
-        when(fpm.isHardwareDetected()).thenReturn(false);
-
-        mSummaryProvider.setListening(true);
-
-        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
     }
 
     @Test

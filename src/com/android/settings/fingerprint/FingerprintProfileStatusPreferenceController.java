@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.fingerprint;
 
 import android.content.Context;
 import android.os.UserHandle;

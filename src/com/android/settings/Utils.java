@@ -1222,7 +1222,7 @@ public final class Utils extends com.android.settingslib.Utils {
 
     public static FingerprintManager getFingerprintManagerOrNull(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)) {
-            return context.getSystemService(FingerprintManager.class);
+            return (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
         } else {
             return null;
         }

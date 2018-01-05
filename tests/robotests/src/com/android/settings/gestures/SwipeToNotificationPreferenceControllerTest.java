@@ -59,8 +59,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new SwipeToNotificationPreferenceController(mContext, null, KEY_SWIPE_DOWN);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
-        // Explicit casting to object due to MockitoCast bug
-        when((Object) mContext.getSystemService(FingerprintManager.class))
+        when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
     }
 
