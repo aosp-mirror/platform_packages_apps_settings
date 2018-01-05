@@ -67,6 +67,7 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, newValue.toString());
+        updateState(preference);
         return true;
     }
 
@@ -88,13 +89,13 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
     @Override
     protected void onDeveloperOptionsSwitchEnabled() {
         mPreference.setEnabled(true);
-        mPreference.setValue(mListValues[0]);
-        mPreference.setSummary(mListSummaries[0]);
+        updateState(mPreference);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         mPreference.setEnabled(false);
+        SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, mListValues[0]);
         mPreference.setValue(mListValues[0]);
         mPreference.setSummary(mListSummaries[0]);
     }
