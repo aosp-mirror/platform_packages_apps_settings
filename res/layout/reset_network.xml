@@ -14,7 +14,8 @@
      limitations under the License.
 -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -27,7 +28,8 @@
         android:layout_marginTop="12dp"
         android:layout_weight="1">
 
-        <LinearLayout android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -37,6 +39,11 @@
                 android:textSize="18sp"
                 android:textDirection="locale"
                 android:text="@string/reset_network_desc" />
+
+            <include layout="@layout/reset_esim_checkbox"
+                android:id="@+id/erase_esim_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

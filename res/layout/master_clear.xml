@@ -93,7 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:paddingEnd="8dp"
+                        android:paddingEnd="@dimen/reset_checkbox_padding_end"
                         android:focusable="false"
                         android:clickable="false"
                         android:duplicateParentState="true" />
@@ -104,14 +104,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="12dp"
-                        android:textSize="18sp"
+                        android:paddingTop="@dimen/reset_checkbox_title_padding_top"
+                        android:textSize="@dimen/reset_checkbox_title_text_size"
                         android:text="@string/erase_external_storage" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingTop="4sp"
-                        android:textSize="14sp"
+                        android:paddingTop="@dimen/reset_checkbox_summary_padding_top"
+                        android:textSize="@dimen/reset_checkbox_summary_text_size"
                         android:text="@string/erase_external_storage_description" />
                 </LinearLayout>
             </LinearLayout>
