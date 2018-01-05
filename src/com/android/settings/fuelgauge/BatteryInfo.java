@@ -170,11 +170,12 @@ public class BatteryInfo {
 
                 if (discharging && provider != null
                         && provider.isEnhancedBatteryPredictionEnabled(context)) {
-                    final long prediction = provider.getEnhancedBatteryPrediction(context);
+                    Estimate estimate = provider.getEnhancedBatteryPrediction(context);
                     BatteryUtils.logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
                     return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
-                            elapsedRealtimeUs, shortString, BatteryUtils.convertMsToUs(prediction),
-                            true);
+                            elapsedRealtimeUs, shortString,
+                            BatteryUtils.convertMsToUs(estimate.estimateMillis),
+                            estimate.isBasedOnUsage);
                 } else {
                     long prediction = discharging
                             ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0;
