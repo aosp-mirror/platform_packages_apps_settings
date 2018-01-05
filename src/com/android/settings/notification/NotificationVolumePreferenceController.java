@@ -20,6 +20,7 @@ import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -45,7 +46,8 @@ public class NotificationVolumePreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume();
+        return mContext.getResources().getBoolean(R.bool.config_show_notification_volume)
+                && !Utils.isVoiceCapable(mContext) && !mHelper.isSingleVolume();
     }
 
     @Override
