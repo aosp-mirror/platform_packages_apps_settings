@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -24,6 +25,7 @@ import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,8 +35,11 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.setupwizardlib.util.WizardManagerHelper;
 
 import java.util.List;
 
@@ -60,6 +65,36 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
 
     public interface OnLockTypeSelectedListener {
         void onLockTypeSelected(ScreenLockType lock);
+
+        default void startChooseLockActivity(ScreenLockType selectedLockType, Activity activity) {
+            Intent activityIntent = activity.getIntent();
+            Intent intent = new Intent(activity, SetupChooseLockGeneric.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+
+            // Copy the original extras into the new intent
+            if (activityIntent.hasExtra(
+                    ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS)) {
+                intent.putExtras(activityIntent.getBundleExtra(
+                        ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
+            }
+            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, selectedLockType.defaultQuality);
+
+            // Propagate the fingerprint challenge
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE,
+                    activityIntent.getBooleanExtra(
+                            ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
+            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
+                    activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
+
+            // The user is already given the choice of the what screen lock to set up. No need to
+            // show this button again.
+            intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
+
+            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
+
+            activity.startActivity(intent);
+            activity.finish();
+        }
     }
 
     @Override

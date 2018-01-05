@@ -107,6 +107,14 @@
             android:textSize="14sp"
             android:visibility="gone"/>
 
+        <Button
+            android:id="@+id/screen_lock_options"
+            style="@style/SuwGlifButton.Tertiary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setup_lock_settings_options_button_label"
+            android:visibility="gone" />
+
     </com.android.internal.widget.LinearLayoutWithDefaultTouchRecepient>
 
 </com.android.setupwizardlib.GlifLayout>

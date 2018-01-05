@@ -28,13 +28,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.android.internal.annotations.VisibleForTesting;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
-import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
 import com.android.settings.password.ChooseLockTypeDialogFragment.OnLockTypeSelectedListener;
-import com.android.setupwizardlib.util.WizardManagerHelper;
 
 /**
  * Setup Wizard's version of ChooseLockPassword screen. It inherits the logic and basic structure
@@ -75,9 +71,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
     public static class SetupChooseLockPasswordFragment extends ChooseLockPasswordFragment
             implements OnLockTypeSelectedListener {
 
-        @VisibleForTesting
-        static final int REQUEST_SCREEN_LOCK_OPTIONS = 1;
-
         @Nullable
         private Button mOptionsButton;
 
@@ -90,8 +83,7 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
             boolean anyOptionsShown = chooseLockGenericController.getVisibleScreenLockTypes(
                     DevicePolicyManager.PASSWORD_QUALITY_SOMETHING, false).size() > 0;
             boolean showOptionsButton = activity.getIntent().getBooleanExtra(
-                    ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
-
+                    ChooseLockGeneric.ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (!anyOptionsShown) {
                 Log.w(TAG, "Visible screen lock types is empty!");
             }
@@ -107,9 +99,10 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.screen_lock_options:
-                    launchChooseLockGeneric();
+                    ChooseLockTypeDialogFragment.newInstance(mUserId)
+                            .show(getChildFragmentManager(), null);
                     break;
-                case R.id.cancel_button:
+                case R.id.skip_button:
                     SetupSkipDialog dialog = SetupSkipDialog.newInstance(
                             getActivity().getIntent()
                                     .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
@@ -118,11 +111,6 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
                 default:
                     super.onClick(v);
             }
-        }
-
-        private void launchChooseLockGeneric() {
-            ChooseLockTypeDialogFragment.newInstance(mUserId)
-                    .show(getChildFragmentManager(), null);
         }
 
         @Override
@@ -137,57 +125,16 @@ public class SetupChooseLockPassword extends ChooseLockPassword {
         public void onLockTypeSelected(ScreenLockType lock) {
             ScreenLockType currentLockType = mIsAlphaMode ?
                     ScreenLockType.PASSWORD : ScreenLockType.PIN;
-            if (currentLockType.equals(lock)) {
-                // ignore same lock type.
+            if (lock == currentLockType) {
                 return;
             }
-            Intent activityIntent = getActivity().getIntent();
-            Intent intent = new Intent(getContext(), SetupChooseLockGeneric.class);
-
-            // Copy the original extras into the new intent
-            if (activityIntent
-                    .hasExtra(ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS)) {
-                intent.putExtras(activityIntent.getBundleExtra(
-                        ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
-            }
-            intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, lock.defaultQuality);
-
-            // Propagate the fingerprint challenge
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE,
-                    activityIntent.getBooleanExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE,
-                            false));
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
-                    activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
-
-            // The user is already given the choice of the what screen lock to set up. No need to
-            // show this button again.
-            intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
-
-            WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
-
-            startActivityForResult(intent, REQUEST_SCREEN_LOCK_OPTIONS);
-        }
-
-        @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-            if (requestCode == REQUEST_SCREEN_LOCK_OPTIONS) {
-                if (resultCode != Activity.RESULT_CANCELED) {
-                    Activity activity = getActivity();
-                    activity.setResult(resultCode, data);
-                    activity.finish();
-                }
-            }
+            startChooseLockActivity(lock, getActivity());
         }
 
         @Override
         protected void updateUi() {
             super.updateUi();
-            if (mForFingerprint) {
-                mCancelButton.setVisibility(View.GONE);
-            } else {
-                mCancelButton.setText(R.string.skip_label);
-            }
+            mSkipButton.setVisibility(mForFingerprint ? View.GONE : View.VISIBLE);
 
             if (mOptionsButton != null) {
                 mOptionsButton.setVisibility(

@@ -21,9 +21,12 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
@@ -40,6 +43,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowPackageManager.ComponentState;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -83,6 +87,19 @@ public class SetupChooseLockPatternTest {
                         new ComponentName(application, SetupRedactionInterstitial.class));
         assertThat(redactionComponentState.newState).named("Redaction component state")
                 .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+    }
+
+    @Test
+    public void screenLockOptions_shouldBeVisible() {
+        Button button = mActivity.findViewById(R.id.screen_lock_options);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+
+        button.performClick();
+        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertThat(chooserDialog).isNotNull();
+        int count = Shadows.shadowOf(chooserDialog).getAdapter().getCount();
+        assertThat(count).named("List items shown").isEqualTo(3);
     }
 
     private ChooseLockPatternFragment findFragment(Activity activity) {
