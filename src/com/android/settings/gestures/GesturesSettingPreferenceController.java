@@ -24,7 +24,6 @@ import android.support.v7.preference.Preference;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -58,25 +57,28 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
 
     @Override
     public void updateState(Preference preference) {
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public String getSummary() {
         if (!mFeatureProvider.isSensorAvailable(mContext)) {
-            preference.setSummary("");
-            return;
+            return "";
         }
         final ContentResolver contentResolver = mContext.getContentResolver();
         final boolean assistGestureEnabled = Settings.Secure.getInt(
                 contentResolver, Settings.Secure.ASSIST_GESTURE_ENABLED, 1) != 0;
         final boolean assistGestureSilenceEnabled = Settings.Secure.getInt(
                 contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1) != 0;
-        final String summary;
+
         if (mFeatureProvider.isSupported(mContext) && assistGestureEnabled) {
-            summary = mContext.getString(
+            return mContext.getString(
                     R.string.language_input_gesture_summary_on_with_assist);
-        } else if (assistGestureSilenceEnabled) {
-            summary = mContext.getString(
-                    R.string.language_input_gesture_summary_on_non_assist);
-        } else {
-            summary = mContext.getString(R.string.language_input_gesture_summary_off);
         }
-        preference.setSummary(summary);
+        if (assistGestureSilenceEnabled) {
+            return mContext.getString(
+                    R.string.language_input_gesture_summary_on_non_assist);
+        }
+        return mContext.getString(R.string.language_input_gesture_summary_off);
     }
 }

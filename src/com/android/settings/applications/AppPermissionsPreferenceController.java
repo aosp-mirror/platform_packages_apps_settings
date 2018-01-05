@@ -75,7 +75,8 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
        The 3 permissions are the first three from the list which any app has granted:
        Location, Microphone, Camera, Sms, Contacts, and Phone
      */
-    private String getSummary() {
+    @Override
+    public String getSummary() {
         final Set<String> permissions = getAllPermissionsInGroups();
         Set<String> grantedPermissionGroups = getGrantedPermissionGroups(permissions);
         CharSequence summary = null;
