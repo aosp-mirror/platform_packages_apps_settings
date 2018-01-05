@@ -45,9 +45,10 @@ public class AutoBrightnessPreferenceController extends TogglePreferenceControll
     }
 
     @Override
-    public void setChecked(boolean isChecked) {
+    public boolean setChecked(boolean isChecked) {
         Settings.System.putInt(mContext.getContentResolver(), SYSTEM_KEY,
                 isChecked ? SCREEN_BRIGHTNESS_MODE_AUTOMATIC : DEFAULT_VALUE);
+        return true;
     }
 
     @Override

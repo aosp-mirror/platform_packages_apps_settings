@@ -40,8 +40,9 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
      * Set the Setting to {@param isChecked}
      *
      * @param isChecked Is {@true} when the setting should be enabled.
+     * @return {@true} if the underlying setting is updated.
      */
-    public abstract void setChecked(boolean isChecked);
+    public abstract boolean setChecked(boolean isChecked);
 
     @Override
     public final void updateState(Preference preference) {
@@ -50,8 +51,6 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     @Override
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
-        boolean auto = (Boolean) newValue;
-        setChecked(auto);
-        return true;
+        return setChecked((Boolean) newValue);
     }
 }

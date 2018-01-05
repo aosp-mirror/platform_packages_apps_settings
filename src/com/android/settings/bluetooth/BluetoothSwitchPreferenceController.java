@@ -98,10 +98,11 @@ public class BluetoothSwitchPreferenceController extends TogglePreferenceControl
     }
 
     @Override
-    public void setChecked(boolean isChecked) {
+    public boolean setChecked(boolean isChecked) {
         if (mBluetoothAdapter != null) {
             mBluetoothAdapter.setBluetoothEnabled(isChecked);
         }
+        return true;
     }
 
     /**

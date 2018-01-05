@@ -22,7 +22,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;

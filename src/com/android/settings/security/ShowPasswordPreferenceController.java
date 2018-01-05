@@ -44,10 +44,11 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
     }
 
     @Override
-    public void setChecked(boolean isChecked) {
+    public boolean setChecked(boolean isChecked) {
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                 isChecked ? 1 : 0);
         mLockPatternUtils.setVisiblePasswordEnabled(isChecked, MY_USER_ID);
+        return true;
     }
 
     @Override

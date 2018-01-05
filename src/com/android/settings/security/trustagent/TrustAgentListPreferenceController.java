@@ -16,6 +16,8 @@
 
 package com.android.settings.security.trustagent;
 
+import static com.android.settings.security.SecuritySettingsV2.CHANGE_TRUST_AGENT_SETTINGS;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -113,7 +115,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(mActivity, mHost);
         mTrustAgentClickIntent = preference.getIntent();
         boolean confirmationLaunched = helper.launchConfirmationActivity(
-                SecuritySettingsV2.CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
+                CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
 
         if (!confirmationLaunched && mTrustAgentClickIntent != null) {
             // If this returns false, it means no password confirmation is required.
@@ -163,10 +165,14 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         }
     }
 
-    public void handleActivityResult(int resultCode) {
-        if (resultCode == Activity.RESULT_OK && mTrustAgentClickIntent != null) {
-            mHost.startActivity(mTrustAgentClickIntent);
-            mTrustAgentClickIntent = null;
+    public boolean handleActivityResult(int requestCode, int resultCode) {
+        if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
+            if (mTrustAgentClickIntent != null){
+                mHost.startActivity(mTrustAgentClickIntent);
+                mTrustAgentClickIntent = null;
+            }
+            return true;
         }
+        return false;
     }
 }
