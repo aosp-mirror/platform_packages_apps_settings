@@ -79,13 +79,19 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = (RestrictedPreference) screen.findPreference(getPreferenceKey());
-        if (mPreference != null && mPreference instanceof GearPreference) {
-            ((GearPreference) mPreference).setOnGearClickListener(this);
-        }
     }
 
     @Override
     public void updateState(Preference preference) {
+        if (mPreference != null && mPreference instanceof GearPreference) {
+            if (mLockPatternUtils.isSecure(mUserId)
+                    || !mLockPatternUtils.isLockScreenDisabled(mUserId)) {
+                ((GearPreference) mPreference).setOnGearClickListener(this);
+            } else {
+                ((GearPreference) mPreference).setOnGearClickListener(null);
+            }
+        }
+
         updateSummary(preference, mUserId);
         disableIfPasswordQualityManaged(mUserId);
         if (!mLockPatternUtils.isSeparateProfileChallengeEnabled(mProfileChallengeUserId)) {
@@ -148,6 +154,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
                     break;
             }
         }
+        mPreference.setEnabled(true);
     }
 
     /**

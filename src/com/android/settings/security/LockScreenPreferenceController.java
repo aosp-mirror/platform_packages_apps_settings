@@ -27,18 +27,32 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class LockScreenPreferenceController extends BasePreferenceController {
+public class LockScreenPreferenceController extends BasePreferenceController implements
+        LifecycleObserver, OnResume {
 
     static final String KEY_LOCKSCREEN_PREFERENCES = "lockscreen_preferences";
 
     private static final int MY_USER_ID = UserHandle.myUserId();
     private final LockPatternUtils mLockPatternUtils;
+    private Preference mPreference;
 
-    public LockScreenPreferenceController(Context context) {
+    public LockScreenPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_LOCKSCREEN_PREFERENCES);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider().getLockPatternUtils(context);
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -54,12 +68,13 @@ public class LockScreenPreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference lockscreenPreferences = screen.findPreference(getPreferenceKey());
-        if (lockscreenPreferences != null) {
-            lockscreenPreferences.setSummary(
-                    LockScreenNotificationPreferenceController.getSummaryResource(mContext));
-        }
+    public void updateState(Preference preference) {
+        preference.setSummary(
+                LockScreenNotificationPreferenceController.getSummaryResource(mContext));
+    }
+
+    @Override
+    public void onResume() {
+        mPreference.setVisible(isAvailable());
     }
 }

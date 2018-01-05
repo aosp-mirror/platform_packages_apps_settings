@@ -75,7 +75,7 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.EncryptionAndCredential;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.ScreenPinningSettings;
-import com.android.settings.security.SecuritySettings;
+import com.android.settings.security.SecuritySettingsV2;
 import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.support.SupportDashboardActivity;
@@ -135,7 +135,7 @@ public final class SearchIndexableResources {
         addIndex(LocationSettings.class);
         addIndex(LocationMode.class);
         addIndex(ScanningSettings.class);
-        addIndex(SecuritySettings.class);
+        addIndex(SecuritySettingsV2.class);
         addIndex(ScreenLockSettings.class);
         addIndex(EncryptionAndCredential.class);
         addIndex(ScreenPinningSettings.class);
@@ -179,5 +179,7 @@ public final class SearchIndexableResources {
     private SearchIndexableResources() {
     }
 
-    public static Collection<Class> providerValues() { return sProviders;}
+    public static Collection<Class> providerValues() {
+        return sProviders;
+    }
 }

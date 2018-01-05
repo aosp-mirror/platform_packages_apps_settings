@@ -21,13 +21,19 @@ import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.Utils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnResume;
 
-public class VisiblePatternProfilePreferenceController extends TogglePreferenceController {
+public class VisiblePatternProfilePreferenceController extends TogglePreferenceController
+        implements LifecycleObserver, OnResume {
 
     private static final String KEY_VISIBLE_PATTERN_PROFILE = "visiblepattern_profile";
 
@@ -36,13 +42,18 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
     private final int mUserId = UserHandle.myUserId();
     private final int mProfileChallengeUserId;
 
-    public VisiblePatternProfilePreferenceController(Context context) {
+    private Preference mPreference;
+
+    public VisiblePatternProfilePreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_VISIBLE_PATTERN_PROFILE);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mLockPatternUtils = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider()
                 .getLockPatternUtils(context);
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override
@@ -68,5 +79,16 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
         }
         mLockPatternUtils.setVisiblePatternEnabled(isChecked, mProfileChallengeUserId);
         return true;
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onResume() {
+        mPreference.setVisible(isAvailable());
     }
 }

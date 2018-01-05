@@ -19,6 +19,7 @@ package com.android.settings.security.trustagent;
 import static com.android.settings.security.SecuritySettingsV2.CHANGE_TRUST_AGENT_SETTINGS;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -56,20 +57,18 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     private final LockPatternUtils mLockPatternUtils;
     private final TrustAgentManager mTrustAgentManager;
-    private final Activity mActivity;
     private final SecuritySettingsV2 mHost;
 
     private Intent mTrustAgentClickIntent;
     private PreferenceCategory mSecurityCategory;
 
-    public TrustAgentListPreferenceController(Activity activity, SecuritySettingsV2 host,
+    public TrustAgentListPreferenceController(Context context, SecuritySettingsV2 host,
             Lifecycle lifecycle) {
-        super(activity);
-        final SecurityFeatureProvider provider = FeatureFactory.getFactory(activity)
+        super(context);
+        final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)
                 .getSecurityFeatureProvider();
-        mActivity = activity;
         mHost = host;
-        mLockPatternUtils = provider.getLockPatternUtils(activity);
+        mLockPatternUtils = provider.getLockPatternUtils(context);
         mTrustAgentManager = provider.getTrustAgentManager();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -90,6 +89,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mSecurityCategory = (PreferenceCategory) screen.findPreference(PREF_KEY_SECURITY_CATEGORY);
+        updateTrustAgents();
     }
 
     @Override
@@ -112,7 +112,8 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
         if (!TextUtils.equals(preference.getKey(), getPreferenceKey())) {
             return super.handlePreferenceTreeClick(preference);
         }
-        final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(mActivity, mHost);
+        final ChooseLockSettingsHelper helper = new ChooseLockSettingsHelper(
+                mHost.getActivity(), mHost);
         mTrustAgentClickIntent = preference.getIntent();
         boolean confirmationLaunched = helper.launchConfirmationActivity(
                 CHANGE_TRUST_AGENT_SETTINGS, preference.getTitle());
@@ -127,6 +128,10 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public void onResume() {
+        updateTrustAgents();
+    }
+
+    private void updateTrustAgents() {
         if (mSecurityCategory == null) {
             return;
         }
@@ -167,7 +172,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     public boolean handleActivityResult(int requestCode, int resultCode) {
         if (requestCode == CHANGE_TRUST_AGENT_SETTINGS && resultCode == Activity.RESULT_OK) {
-            if (mTrustAgentClickIntent != null){
+            if (mTrustAgentClickIntent != null) {
                 mHost.startActivity(mTrustAgentClickIntent);
                 mTrustAgentClickIntent = null;
             }

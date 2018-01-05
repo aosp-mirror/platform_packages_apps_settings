@@ -66,7 +66,8 @@ public class EncryptionAndCredential extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final EncryptionStatusPreferenceController encryptStatusController =
-                new EncryptionStatusPreferenceController(context, PREF_KEY_ENCRYPTION_DETAIL_PAGE);
+                new EncryptionStatusPreferenceController(context,
+                        PREF_KEY_ENCRYPTION_DETAIL_PAGE);
         controllers.add(encryptStatusController);
         controllers.add(new PreferenceCategoryController(context,
                 "encryption_and_credentials_status_category",

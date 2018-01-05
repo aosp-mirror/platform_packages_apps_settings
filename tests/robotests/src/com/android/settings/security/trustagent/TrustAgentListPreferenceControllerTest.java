@@ -23,6 +23,7 @@ import static com.android.settings.security.trustagent.TrustAgentListPreferenceC
         .PREF_KEY_TRUST_AGENT;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -127,6 +128,6 @@ public class TrustAgentListPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onResume();
 
-        verify(mCategory).addPreference(any(Preference.class));
+        verify(mCategory, atLeastOnce()).addPreference(any(Preference.class));
     }
 }

@@ -1,33 +1,28 @@
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
-import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.enterprise.EnterprisePrivacyPreferenceController;
 import com.android.settings.enterprise.ManageDeviceAdminPreferenceController;
 import com.android.settings.location.LocationPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.security.trustagent.ManageTrustAgentsPreferenceController;
 import com.android.settings.security.trustagent.TrustAgentListPreferenceController;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,57 +38,9 @@ public class SecuritySettingsV2 extends DashboardFragment {
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
 
-
-    // Security status
-    private static final String KEY_SECURITY_STATUS = "security_status";
-    private static final String SECURITY_STATUS_KEY_PREFIX = "security_status_";
-
-    private static final int MY_USER_ID = UserHandle.myUserId();
-
-    private DashboardFeatureProvider mDashboardFeatureProvider;
-    private SecurityFeatureProvider mSecurityFeatureProvider;
-    private UserManager mUm;
-
-    private ChooseLockSettingsHelper mChooseLockSettingsHelper;
-    private LockPatternUtils mLockPatternUtils;
-
-    private int mProfileChallengeUserId;
-
-    private LocationPreferenceController mLocationController;
-    private ManageDeviceAdminPreferenceController mManageDeviceAdminPreferenceController;
-    private EnterprisePrivacyPreferenceController mEnterprisePrivacyPreferenceController;
-    private EncryptionStatusPreferenceController mEncryptionStatusPreferenceController;
-    private ManageTrustAgentsPreferenceController mManageTrustAgentsPreferenceController;
-    private ScreenPinningPreferenceController mScreenPinningPreferenceController;
-    private SimLockPreferenceController mSimLockPreferenceController;
-    private ShowPasswordPreferenceController mShowPasswordPreferenceController;
-    private TrustAgentListPreferenceController mTrustAgentListPreferenceController;
-    private LockScreenPreferenceController mLockScreenPreferenceController;
-    private ChangeScreenLockPreferenceController mChangeScreenLockPreferenceController;
-    private ChangeProfileScreenLockPreferenceController
-            mChangeProfileScreenLockPreferenceController;
-    private LockUnificationPreferenceController mLockUnificationPreferenceController;
-    private VisiblePatternProfilePreferenceController mVisiblePatternProfilePreferenceController;
-    private FingerprintStatusPreferenceController mFingerprintStatusPreferenceController;
-    private FingerprintProfileStatusPreferenceController
-            mFingerprintProfileStatusPreferenceController;
-
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.SECURITY;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mSecurityFeatureProvider = FeatureFactory.getFactory(context).getSecurityFeatureProvider();
-        mLocationController = new LocationPreferenceController(context, getLifecycle());
-        mLockPatternUtils = mSecurityFeatureProvider.getLockPatternUtils(context);
-        mUm = UserManager.get(context);
-        mDashboardFeatureProvider = FeatureFactory.getFactory(context)
-                .getDashboardFeatureProvider(context);
-
-        mChooseLockSettingsHelper = new ChooseLockSettingsHelper(getActivity());
     }
 
     @Override
@@ -106,7 +53,6 @@ public class SecuritySettingsV2 extends DashboardFragment {
         return TAG;
     }
 
-
     @Override
     public int getHelpResource() {
         return R.string.help_url_security;
@@ -114,161 +60,7 @@ public class SecuritySettingsV2 extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        mManageDeviceAdminPreferenceController
-                = new ManageDeviceAdminPreferenceController(context);
-        mEnterprisePrivacyPreferenceController
-                = new EnterprisePrivacyPreferenceController(context);
-        mManageTrustAgentsPreferenceController = new ManageTrustAgentsPreferenceController(context);
-        mScreenPinningPreferenceController = new ScreenPinningPreferenceController(context);
-        mSimLockPreferenceController = new SimLockPreferenceController(context);
-        mShowPasswordPreferenceController = new ShowPasswordPreferenceController(context);
-        mEncryptionStatusPreferenceController = new EncryptionStatusPreferenceController(
-                context, PREF_KEY_ENCRYPTION_SECURITY_PAGE);
-        mTrustAgentListPreferenceController = new TrustAgentListPreferenceController(getActivity(),
-                this /* host */, getLifecycle());
-        mLockScreenPreferenceController = new LockScreenPreferenceController(context);
-        mChangeScreenLockPreferenceController = new ChangeScreenLockPreferenceController(context,
-                this /* host */);
-        mChangeProfileScreenLockPreferenceController =
-                new ChangeProfileScreenLockPreferenceController(context, this /* host */);
-        mLockUnificationPreferenceController = new LockUnificationPreferenceController(context,
-                this /* host */);
-        mVisiblePatternProfilePreferenceController =
-                new VisiblePatternProfilePreferenceController(context);
-        mFingerprintStatusPreferenceController = new FingerprintStatusPreferenceController(context);
-        mFingerprintProfileStatusPreferenceController =
-                new FingerprintProfileStatusPreferenceController(context);
-        return null;
-    }
-
-    /**
-     * Important!
-     *
-     * Don't forget to update the SecuritySearchIndexProvider if you are doing any change in the
-     * logic or adding/removing preferences here.
-     */
-    private PreferenceScreen createPreferenceHierarchy() {
-        final PreferenceScreen root = getPreferenceScreen();
-        mTrustAgentListPreferenceController.displayPreference(root);
-        mLockScreenPreferenceController.displayPreference(root);
-        mChangeScreenLockPreferenceController.displayPreference(root);
-        mChangeProfileScreenLockPreferenceController.displayPreference(root);
-        mLockUnificationPreferenceController.displayPreference(root);
-        mVisiblePatternProfilePreferenceController.displayPreference(root);
-        mFingerprintStatusPreferenceController.displayPreference(root);
-        mFingerprintProfileStatusPreferenceController.displayPreference(root);
-
-        mSimLockPreferenceController.displayPreference(root);
-        mScreenPinningPreferenceController.displayPreference(root);
-
-        // Advanced Security features
-        mManageTrustAgentsPreferenceController.displayPreference(root);
-
-//        PreferenceGroup securityStatusPreferenceGroup =
-//                (PreferenceGroup) root.findPreference(KEY_SECURITY_STATUS);
-//        final List<Preference> tilePrefs = mDashboardFeatureProvider.getPreferencesForCategory(
-//                getActivity(), getPrefContext(), getMetricsCategory(),
-//                CategoryKey.CATEGORY_SECURITY);
-//        int numSecurityStatusPrefs = 0;
-//        if (tilePrefs != null && !tilePrefs.isEmpty()) {
-//            for (Preference preference : tilePrefs) {
-//                if (!TextUtils.isEmpty(preference.getKey())
-//                        && preference.getKey().startsWith(SECURITY_STATUS_KEY_PREFIX)) {
-//                    // Injected security status settings are placed under the Security status
-//                    // category.
-//                    securityStatusPreferenceGroup.addPreference(preference);
-//                    numSecurityStatusPrefs++;
-//                } else {
-//                    // Other injected settings are placed under the Security preference screen.
-//                    root.addPreference(preference);
-//                }
-//            }
-//        }
-//
-//        if (numSecurityStatusPrefs == 0) {
-//            root.removePreference(securityStatusPreferenceGroup);
-//        } else if (numSecurityStatusPrefs > 0) {
-//            // Update preference data with tile data. Security feature provider only updates the
-//            // data if it actually needs to be changed.
-//            mSecurityFeatureProvider.updatePreferences(getActivity(), root,
-//                    mDashboardFeatureProvider.getTilesForCategory(
-//                            CategoryKey.CATEGORY_SECURITY));
-//        }
-
-        mLocationController.displayPreference(root);
-        mManageDeviceAdminPreferenceController.updateState(
-                root.findPreference(mManageDeviceAdminPreferenceController.getPreferenceKey()));
-        mEnterprisePrivacyPreferenceController.displayPreference(root);
-        final Preference enterprisePrivacyPreference = root.findPreference(
-                mEnterprisePrivacyPreferenceController.getPreferenceKey());
-        mEnterprisePrivacyPreferenceController.updateState(enterprisePrivacyPreference);
-
-        return root;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        // Make sure we reload the preference hierarchy since some of these settings
-        // depend on others...
-        createPreferenceHierarchy();
-
-        final Preference visiblePatternProfilePref = getPreferenceScreen().findPreference(
-                mVisiblePatternProfilePreferenceController.getPreferenceKey());
-        if (visiblePatternProfilePref != null) {
-            visiblePatternProfilePref
-                    .setOnPreferenceChangeListener(mVisiblePatternProfilePreferenceController);
-            mVisiblePatternProfilePreferenceController.updateState(visiblePatternProfilePref);
-        }
-
-        final Preference showPasswordPref = getPreferenceScreen().findPreference(
-                mShowPasswordPreferenceController.getPreferenceKey());
-        showPasswordPref.setOnPreferenceChangeListener(mShowPasswordPreferenceController);
-        mShowPasswordPreferenceController.updateState(showPasswordPref);
-
-        final Preference lockUnificationPref = getPreferenceScreen().findPreference(
-                mLockUnificationPreferenceController.getPreferenceKey());
-        lockUnificationPref.setOnPreferenceChangeListener(mLockUnificationPreferenceController);
-        mLockUnificationPreferenceController.updateState(lockUnificationPref);
-
-        final Preference changeDeviceLockPref = getPreferenceScreen().findPreference(
-                mChangeScreenLockPreferenceController.getPreferenceKey());
-        mChangeScreenLockPreferenceController.updateState(changeDeviceLockPref);
-
-        mFingerprintStatusPreferenceController.updateState(
-                getPreferenceScreen().findPreference(
-                        mFingerprintStatusPreferenceController.getPreferenceKey()));
-
-        mFingerprintProfileStatusPreferenceController.updateState(
-                getPreferenceScreen().findPreference(
-                        mFingerprintProfileStatusPreferenceController.getPreferenceKey()));
-
-        final Preference changeProfileLockPref = getPreferenceScreen().findPreference(
-                mChangeProfileScreenLockPreferenceController.getPreferenceKey());
-        mChangeProfileScreenLockPreferenceController.updateState(changeProfileLockPref);
-
-        final Preference encryptionStatusPref = getPreferenceScreen().findPreference(
-                mEncryptionStatusPreferenceController.getPreferenceKey());
-        mEncryptionStatusPreferenceController.updateState(encryptionStatusPref);
-        mTrustAgentListPreferenceController.onResume();
-        mLocationController.updateSummary();
-    }
-
-
-    @Override
-    public boolean onPreferenceTreeClick(Preference preference) {
-        if (mTrustAgentListPreferenceController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
-        if (mChangeScreenLockPreferenceController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
-        if (mChangeProfileScreenLockPreferenceController.handlePreferenceTreeClick(preference)) {
-            return true;
-        }
-        // If we didn't handle it, let preferences handle it.
-        return super.onPreferenceTreeClick(preference);
+        return buildPreferenceControllers(context, getLifecycle(), this /* host*/);
     }
 
     /**
@@ -276,50 +68,85 @@ public class SecuritySettingsV2 extends DashboardFragment {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (getPreferenceController(TrustAgentListPreferenceController.class)
+                .handleActivityResult(requestCode, resultCode)) {
+            return;
+        }
+        if (getPreferenceController(LockUnificationPreferenceController.class)
+                .handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
         super.onActivityResult(requestCode, resultCode, data);
-        if (mTrustAgentListPreferenceController.handleActivityResult(requestCode, resultCode)) {
-            return;
-        }
-        if (mLockUnificationPreferenceController.handleActivityResult(
-                requestCode, resultCode, data)) {
-            return;
-        }
-        createPreferenceHierarchy();
+    }
+
+    void launchConfirmDeviceLockForUnification() {
+        getPreferenceController(LockUnificationPreferenceController.class)
+                .launchConfirmDeviceLockForUnification();
+    }
+
+    void unifyUncompliantLocks() {
+        getPreferenceController(LockUnificationPreferenceController.class).unifyUncompliantLocks();
+    }
+
+    void updateUnificationPreference() {
+        getPreferenceController(LockUnificationPreferenceController.class).updateState(null);
+    }
+
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle, SecuritySettingsV2 host) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new LocationPreferenceController(context, lifecycle));
+        controllers.add(new ManageDeviceAdminPreferenceController(context));
+        controllers.add(new EnterprisePrivacyPreferenceController(context));
+        controllers.add(new ManageTrustAgentsPreferenceController(context));
+        controllers.add(new ScreenPinningPreferenceController(context));
+        controllers.add(new SimLockPreferenceController(context));
+        controllers.add(new ShowPasswordPreferenceController(context));
+        controllers.add(new FingerprintStatusPreferenceController(context));
+        controllers.add(new EncryptionStatusPreferenceController(context,
+                PREF_KEY_ENCRYPTION_SECURITY_PAGE));
+        controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
+        controllers.add(new LockScreenPreferenceController(context, lifecycle));
+        controllers.add(new ChangeScreenLockPreferenceController(context, host));
+
+        final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();
+        profileSecurityControllers.add(new ChangeProfileScreenLockPreferenceController(
+                context, host));
+        profileSecurityControllers.add(new LockUnificationPreferenceController(context, host));
+        profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
+                context, lifecycle));
+        profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
+        controllers.add(new PreferenceCategoryController(context, "security_category_profile",
+                profileSecurityControllers));
+        controllers.addAll(profileSecurityControllers);
+
+        return controllers;
     }
 
     /**
      * For Search. Please keep it in sync when updating "createPreferenceHierarchy()"
      */
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new SecuritySearchIndexProvider();
+            new BaseSearchIndexProvider() {
 
-    void launchConfirmDeviceLockForUnification() {
-        mLockUnificationPreferenceController.launchConfirmDeviceLockForUnification();
-    }
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(
+                        Context context, boolean enabled) {
+                    final List<SearchIndexableResource> index = new ArrayList<>();
+                    // Append the rest of the settings
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.security_settings_v2;
+                    index.add(sir);
+                    return index;
+                }
 
-    void unifyUncompliantLocks() {
-        mLockUnificationPreferenceController.unifyUncompliantLocks();
-    }
-
-    void updateUnificationPreference() {
-        mLockUnificationPreferenceController.updateState(null);
-    }
-
-    private static class SecuritySearchIndexProvider extends BaseSearchIndexProvider {
-
-        // TODO (b/68001777) Refactor indexing to include all XML and block other settings.
-
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(
-                Context context, boolean enabled) {
-            final List<SearchIndexableResource> index = new ArrayList<>();
-            // Append the rest of the settings
-            final SearchIndexableResource sir = new SearchIndexableResource(context);
-            sir.xmlResId = R.xml.security_settings_v2;
-            index.add(sir);
-            return index;
-        }
-    }
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                        context) {
+                    return buildPreferenceControllers(context, null /* lifecycle */,
+                            null /* host*/);
+                }
+            };
 
     static class SummaryProvider implements SummaryLoader.SummaryProvider {
 
