@@ -18,6 +18,7 @@ package com.android.settings.deviceinfo.simstatus;
 
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .CELLULAR_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
         .ICCID_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
@@ -60,6 +61,7 @@ import android.telephony.TelephonyManager;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wrapper.EuiccManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -91,7 +93,8 @@ public class SimStatusDialogControllerTest {
     private CarrierConfigManager mCarrierConfigManager;
     @Mock
     private PersistableBundle mPersistableBundle;
-
+    @Mock
+    private EuiccManagerWrapper mEuiccManager;
 
     private SimStatusDialogController mController;
     private Context mContext;
@@ -107,15 +110,18 @@ public class SimStatusDialogControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(
                 new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
+        mEuiccManager = spy(new EuiccManagerWrapper(mContext));
         doReturn(mServiceState).when(mController).getCurrentServiceState();
         doReturn(0).when(mController).getDbm(any());
         doReturn(0).when(mController).getAsuLevel(any());
         doReturn(mPhoneStateListener).when(mController).getPhoneStateListener();
         doReturn("").when(mController).getPhoneNumber();
         doReturn(mSignalStrength).when(mController).getSignalStrength();
+        doReturn("").when(mEuiccManager).getEid();
         ReflectionHelpers.setField(mController, "mTelephonyManager", mTelephonyManager);
         ReflectionHelpers.setField(mController, "mCarrierConfigManager", mCarrierConfigManager);
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
+        ReflectionHelpers.setField(mController, "mEuiccManager", mEuiccManager);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
     }
 
@@ -272,5 +278,15 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(ICCID_INFO_VALUE_ID, iccid);
+    }
+
+    @Test
+    public void initialize_showEid_shouldSetEidToSetting() {
+        final String eid = "12351351231241";
+        doReturn(eid).when(mEuiccManager).getEid();
+
+        mController.initialize();
+
+        verify(mDialog).setText(EID_INFO_VALUE_ID, eid);
     }
 }
