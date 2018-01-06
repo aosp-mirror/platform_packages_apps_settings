@@ -22,22 +22,30 @@ import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.utils.AnnotationSpan;
+import com.android.settingslib.HelpUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +55,8 @@ import java.util.Map;
  */
 public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment implements
         DialogInterface.OnClickListener, RadioGroup.OnCheckedChangeListener, TextWatcher {
+
+    public static final String ANNOTATION_URL = "url";
 
     private static final String TAG = "PrivateDnsModeDialogFragment";
     // DNS_MODE -> RadioButton id
@@ -72,6 +82,21 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
     Button mSaveButton;
     @VisibleForTesting
     String mMode;
+
+    private final AnnotationSpan.LinkInfo mUrlLinkInfo = new AnnotationSpan.LinkInfo(
+            ANNOTATION_URL, (widget) -> {
+        final Context context = widget.getContext();
+        final Intent intent = HelpUtils.getHelpIntent(context,
+                getString(R.string.help_uri_private_dns),
+                context.getClass().getName());
+        if (intent != null) {
+            try {
+                widget.startActivityForResult(intent, 0);
+            } catch (ActivityNotFoundException e) {
+                Log.w(TAG, "Activity was not found for intent, " + intent.toString());
+            }
+        }
+    });
 
     public static void show(FragmentManager fragmentManager) {
         if (fragmentManager.findFragmentByTag(TAG) == null) {
@@ -112,25 +137,30 @@ public class PrivateDnsModeDialogFragment extends InstrumentedDialogFragment imp
         mRadioGroup.setOnCheckedChangeListener(this);
         mRadioGroup.check(PRIVATE_DNS_MAP.getOrDefault(mMode, R.id.private_dns_mode_opportunistic));
 
+        final TextView helpTextView = view.findViewById(R.id.private_dns_help_info);
+        helpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        helpTextView.setText(AnnotationSpan.linkify(
+                context.getText(R.string.private_dns_help_message), mUrlLinkInfo));
+
         return view;
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        //TODO(b/34953048): add metric action
         if (mMode.equals(PRIVATE_DNS_MODE_PROVIDER_HOSTNAME)) {
             // Only clickable if hostname is valid, so we could save it safely
             Settings.Global.putString(getContext().getContentResolver(), HOSTNAME_KEY,
                     mEditText.getText().toString());
         }
 
+        mMetricsFeatureProvider.action(getContext(),
+                MetricsProto.MetricsEvent.ACTION_PRIVATE_DNS_MODE, mMode);
         Settings.Global.putString(getContext().getContentResolver(), MODE_KEY, mMode);
     }
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/68030013): add metric id
-        return 0;
+        return MetricsProto.MetricsEvent.DIALOG_PRIVATE_DNS;
     }
 
     @Override
