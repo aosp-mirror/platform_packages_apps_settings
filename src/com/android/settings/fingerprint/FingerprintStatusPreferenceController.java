@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.fingerprint;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,8 +28,6 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.fingerprint.FingerprintEnrollIntroduction;
-import com.android.settings.fingerprint.FingerprintSettings;
 import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;

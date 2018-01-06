@@ -58,7 +58,8 @@ public class FingerprintEnrollSuggestionActivityTest {
                 .thenReturn(mDevicePolicyManager);
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(), anyInt()))
                 .thenReturn(0);
-        when(mContext.getSystemService(FingerprintManager.class)).thenReturn(mFingerprintManager);
+        when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
+                .thenReturn(mFingerprintManager);
     }
 
     @Test

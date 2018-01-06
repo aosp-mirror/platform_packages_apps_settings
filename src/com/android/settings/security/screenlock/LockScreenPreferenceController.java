@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.security.screenlock;
 
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
 
