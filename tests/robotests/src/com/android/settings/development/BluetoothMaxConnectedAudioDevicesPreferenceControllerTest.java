@@ -94,6 +94,8 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
                     BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY);
 
             assertThat(currentValue).isEqualTo(mListValues[numberOfDevices]);
+            assertThat(mPreference.getValue()).isEqualTo(mListValues[numberOfDevices]);
+            assertThat(mPreference.getSummary()).isEqualTo(mListSummaries[numberOfDevices]);
         }
     }
 
@@ -122,20 +124,28 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceControllerTest {
     @Test
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
-        mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.getValue()).isEqualTo(mListValues[0]);
         assertThat(mPreference.getSummary()).isEqualTo(mListSummaries[0]);
+        final String currentValue = SystemProperties.get(
+                BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY);
+        assertThat(currentValue).isEqualTo(mListValues[0]);
     }
 
     @Test
     public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-        mController.updateState(mPreference);
+        for (int numberOfDevices = 0; numberOfDevices < mListValues.length; numberOfDevices++) {
+            mController.onDeveloperOptionsSwitchDisabled();
+            assertThat(mPreference.isEnabled()).isFalse();
 
-        assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.getValue()).isEqualTo(mListValues[0]);
-        assertThat(mPreference.getSummary()).isEqualTo(mListSummaries[0]);
+            SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY,
+                    mListValues[numberOfDevices]);
+            mController.onDeveloperOptionsSwitchEnabled();
+
+            assertThat(mPreference.isEnabled()).isTrue();
+            assertThat(mPreference.getValue()).isEqualTo(mListValues[numberOfDevices]);
+            assertThat(mPreference.getSummary()).isEqualTo(mListSummaries[numberOfDevices]);
+        }
     }
 }
