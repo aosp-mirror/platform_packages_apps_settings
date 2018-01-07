@@ -16,6 +16,10 @@
 
 package com.android.settings.security;
 
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_DETAIL_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController
+        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -48,7 +52,8 @@ public class EncryptionStatusPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new EncryptionStatusPreferenceController(mContext);
+        mController = new EncryptionStatusPreferenceController(mContext,
+                PREF_KEY_ENCRYPTION_DETAIL_PAGE);
         mPreference = new Preference(mContext);
     }
 
@@ -85,6 +90,21 @@ public class EncryptionStatusPreferenceControllerTest {
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getText(R.string.summary_placeholder));
+        assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
+    }
+
+    @Test
+    public void updateSummary_unencrypted_securityPage_shouldNotHaveEncryptionFragment() {
+        mController = new EncryptionStatusPreferenceController(mContext,
+                PREF_KEY_ENCRYPTION_SECURITY_PAGE);
+        ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary())
+                .isEqualTo(mContext.getText(R.string.summary_placeholder));
+
+        assertThat(mPreference.getFragment()).isNotEqualTo(CryptKeeperSettings.class.getName());
     }
 }

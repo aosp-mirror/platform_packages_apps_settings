@@ -396,6 +396,11 @@
     <!-- Summary for bluetooth item in connection detail page -->
     <string name="bluetooth_pref_summary">Allow device to pair and connect to bluetooth devices</string>
 
+    <!-- Setting Checkbox title for disabling Bluetooth inband ringing in Development Settings -->
+    <string name="bluetooth_disable_inband_ringing">Disable in-band ringing</string>
+    <!-- Summary of checkbox for disabling Bluetooth inband ringing in Development Settings -->
+    <string name="bluetooth_disable_inband_ringing_summary">Don’t play custom phone ringtones on Bluetooth headsets</string>
+
     <!-- Title for connected device group [CHAR LIMIT=none]-->
     <string name="connected_device_connected_title">Currently connected</string>
     <!-- Title for connected device group [CHAR LIMIT=none]-->
@@ -1624,6 +1629,11 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
+    <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
+    <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
+    <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
+    <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
+
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
     <!-- Wifi Display settings. The title of a menu item to enable wireless display [CHAR LIMIT=40] -->
@@ -2264,7 +2274,8 @@
     <string name="emergency_address_title">Emergency Address</string>
     <!-- Summary of Update Emergency Address preference, explaining usage of emergency address [CHAR LIMIT=NONE] -->
     <string name="emergency_address_summary">Used as your location when you make an emergency call over Wi\u2011Fi</string>
-
+    <!-- Message of private dns that provides a help link. [CHAR LIMIT=NONE] -->
+    <string name="private_dns_help_message"><annotation id="url">Learn more</annotation> about Private DNS features</string>
 
     <!-- Sound and alerts settings -->
     <skip/>
@@ -3063,6 +3074,9 @@
     <string name="storage_wizard_move_confirm_body">Moving <xliff:g id="app" example="Calculator">^1</xliff:g> and its data to <xliff:g id="name" example="SD card">^2</xliff:g> will take only a few moments. You won\u2019t be able to use the app until the move is complete.
 \n\nDon\u2019t remove the <xliff:g id="name" example="SD card">^2</xliff:g> during the move.
     </string>
+
+    <!-- Body of lock screen challenge message explaining that the given user must be unlocked before data can be moved [CHAR LIMIT=64] -->
+    <string name="storage_wizard_move_unlock">To move data you need to unlock user <xliff:g id="app" example="Joey">^1</xliff:g>.</string>
 
     <!-- Title of wizard step showing app move progress [CHAR LIMIT=32] -->
     <string name="storage_wizard_move_progress_title">Moving <xliff:g id="app" example="Calculator">^1</xliff:g>\u2026</string>
@@ -6333,6 +6347,7 @@
     <string name="help_url_icc_lock" translatable="false"></string>
     <string name="help_uri_process_stats_summary" translatable="false"></string>
     <string name="help_uri_process_stats_apps" translatable="false"></string>
+    <string name="help_uri_private_dns" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -8504,6 +8519,11 @@
 
     <!-- Text for the setting on whether you can type text into notifications without unlocking the device. -->
     <string name="lockscreen_remote_input">If device is locked, prevent typing replies or other text in notifications</string>
+
+    <string-array name="bytes_picker_sizes" translatable="false">
+        <item>@*android:string/megabyteShort</item>
+        <item>@*android:string/gigabyteShort</item>
+    </string-array>
 
     <!-- [CHAR LIMIT=30] Label for setting to control the default spell checker -->
     <string name="default_spell_checker">Default spell checker</string>

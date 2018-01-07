@@ -78,8 +78,12 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
 
     @Override
     public void updateState(Preference preference) {
-        preference.setSummary(mContext.getString(R.string.about_summary,
-                Build.VERSION.RELEASE));
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public String getSummary() {
+        return mContext.getString(R.string.about_summary, Build.VERSION.RELEASE);
     }
 
     /**

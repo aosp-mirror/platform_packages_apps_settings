@@ -290,8 +290,6 @@ public class ChooseLockPattern extends SettingsActivity {
          * The states of the left footer button.
          */
         enum LeftButtonMode {
-            Cancel(R.string.cancel, true),
-            CancelDisabled(R.string.cancel, false),
             Retry(R.string.lockpattern_retry_button_text, true),
             RetryDisabled(R.string.lockpattern_retry_button_text, false),
             Gone(ID_EMPTY_MESSAGE, false);
@@ -342,7 +340,7 @@ public class ChooseLockPattern extends SettingsActivity {
                     R.string.lock_settings_picker_fingerprint_added_security_message,
                     R.string.lockpassword_choose_your_pattern_message,
                     R.string.lockpattern_recording_intro_header,
-                    LeftButtonMode.Cancel, RightButtonMode.ContinueDisabled,
+                    LeftButtonMode.Gone, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             HelpScreen(
                     ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_settings_help_how_to_record,
@@ -360,15 +358,15 @@ public class ChooseLockPattern extends SettingsActivity {
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
                     ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_confirm,
-                    LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
+                    LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ConfirmWrong(
                     ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_need_to_unlock_wrong,
-                    LeftButtonMode.Cancel, RightButtonMode.ConfirmDisabled,
+                    LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ChoiceConfirmed(
                     ID_EMPTY_MESSAGE, ID_EMPTY_MESSAGE, R.string.lockpattern_pattern_confirmed_header,
-                    LeftButtonMode.Cancel, RightButtonMode.Confirm, ID_EMPTY_MESSAGE, false);
+                    LeftButtonMode.Gone, RightButtonMode.Confirm, ID_EMPTY_MESSAGE, false);
 
 
             /**
@@ -413,7 +411,7 @@ public class ChooseLockPattern extends SettingsActivity {
 
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private SaveAndFinishWorker mSaveAndFinishWorker;
-        private int mUserId;
+        protected int mUserId;
         private boolean mForFingerprint;
 
         private static final String KEY_UI_STAGE = "uiStage";
@@ -558,8 +556,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 mChosenPattern = null;
                 mLockPatternView.clearPattern();
                 updateStage(Stage.Introduction);
-            } else if (mUiStage.leftMode == LeftButtonMode.Cancel) {
-                getActivity().finish();
             } else {
                 throw new IllegalStateException("left footer button pressed, but stage of " +
                         mUiStage + " doesn't make sense");

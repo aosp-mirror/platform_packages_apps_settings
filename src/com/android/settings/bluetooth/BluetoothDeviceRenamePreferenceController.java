@@ -67,8 +67,13 @@ public class BluetoothDeviceRenamePreferenceController extends
     }
 
     @Override
-    protected void updateDeviceName(final Preference preference, final String deviceName) {
-        preference.setSummary(deviceName);
+    protected void updateDeviceName(final Preference preference) {
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public String getSummary() {
+        return getDeviceName();
     }
 
     @Override

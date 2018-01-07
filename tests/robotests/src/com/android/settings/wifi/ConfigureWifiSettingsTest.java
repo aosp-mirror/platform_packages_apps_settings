@@ -45,6 +45,17 @@ public class ConfigureWifiSettingsTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void testNonIndexableKeys_ifPageDisabled_shouldNotIndexResource() {
+        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
+                .getNonIndexableKeys(mContext);
+        final int xmlId = new ConfigureWifiSettings().getPreferenceScreenResId();
+
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+        assertThat(niks).containsAllIn(keys);
+    }
+
+    @Test
     public void testNonIndexableKeys_noConnection_blocksIP() {
         ConnectivityManager manager = mock(ConnectivityManager.class);
         when(manager.getActiveNetworkInfo()).thenReturn(null);

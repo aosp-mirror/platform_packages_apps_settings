@@ -45,10 +45,15 @@ public abstract class ConfirmDeviceCredentialBaseActivity extends SettingsActivi
     private boolean mIsKeyguardLocked = false;
     private ConfirmCredentialTheme mConfirmCredentialTheme;
 
+    private boolean isInternalActivity() {
+        return (this instanceof ConfirmLockPassword.InternalActivity)
+                || (this instanceof ConfirmLockPattern.InternalActivity);
+    }
+
     @Override
     protected void onCreate(Bundle savedState) {
         int credentialOwnerUserId = Utils.getCredentialOwnerUserId(this,
-                Utils.getUserIdFromBundle(this, getIntent().getExtras()));
+                Utils.getUserIdFromBundle(this, getIntent().getExtras(), isInternalActivity()));
         if (UserManager.get(this).isManagedProfile(credentialOwnerUserId)) {
             setTheme(R.style.Theme_ConfirmDeviceCredentialsWork);
             mConfirmCredentialTheme = ConfirmCredentialTheme.WORK;

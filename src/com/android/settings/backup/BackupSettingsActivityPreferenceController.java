@@ -23,8 +23,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 public class BackupSettingsActivityPreferenceController extends BasePreferenceController {
     private static final String TAG = "BackupSettingActivityPC";
@@ -49,10 +47,15 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
 
     @Override
     public void updateState(Preference preference) {
+        preference.setSummary(getSummary());
+    }
+
+    @Override
+    public String getSummary() {
         final boolean backupEnabled = mBackupManager.isBackupEnabled();
 
-        preference.setSummary(backupEnabled
-                ? R.string.accessibility_feature_state_on
-                : R.string.accessibility_feature_state_off);
+        return backupEnabled
+                ? mContext.getString(R.string.accessibility_feature_state_on)
+                : mContext.getString(R.string.accessibility_feature_state_off);
     }
 }

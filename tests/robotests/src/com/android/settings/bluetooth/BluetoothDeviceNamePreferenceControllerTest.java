@@ -63,13 +63,14 @@ public class BluetoothDeviceNamePreferenceControllerTest {
         doReturn(mContext).when(mPreferenceScreen).getContext();
         mPreference = new Preference(mContext);
         mPreference.setKey(BluetoothDeviceNamePreferenceController.KEY_DEVICE_NAME);
-        mController = new BluetoothDeviceNamePreferenceController(
-                mContext, mLocalAdapter);
+        mController = spy(new BluetoothDeviceNamePreferenceController(
+                mContext, mLocalAdapter));
+        doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference, DEVICE_NAME);
+        mController.updateDeviceName(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 

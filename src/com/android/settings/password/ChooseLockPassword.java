@@ -210,7 +210,7 @@ public class ChooseLockPassword extends SettingsActivity {
         private String mFirstPin;
         private RecyclerView mPasswordRestrictionView;
         protected boolean mIsAlphaMode;
-        protected Button mCancelButton;
+        protected Button mSkipButton;
         private Button mClearButton;
         private Button mNextButton;
         private TextView mMessage;
@@ -377,8 +377,8 @@ public class ChooseLockPassword extends SettingsActivity {
             ViewGroup container = view.findViewById(R.id.password_container);
             container.setOpticalInsets(Insets.NONE);
 
-            mCancelButton = (Button) view.findViewById(R.id.cancel_button);
-            mCancelButton.setOnClickListener(this);
+            mSkipButton = (Button) view.findViewById(R.id.skip_button);
+            mSkipButton.setOnClickListener(this);
             mNextButton = (Button) view.findViewById(R.id.next_button);
             mNextButton.setOnClickListener(this);
             mClearButton = view.findViewById(R.id.clear_button);
@@ -774,10 +774,6 @@ public class ChooseLockPassword extends SettingsActivity {
                     handleNext();
                     break;
 
-                case R.id.cancel_button:
-                    getActivity().finish();
-                    break;
-
                 case R.id.clear_button:
                     mPasswordEntry.setText("");
                     break;
@@ -901,7 +897,6 @@ public class ChooseLockPassword extends SettingsActivity {
             }
 
             mClearButton.setVisibility(toVisibility(mUiStage != Stage.Introduction));
-            mCancelButton.setVisibility(toVisibility(mUiStage == Stage.Introduction));
 
             setNextText(mUiStage.buttonText);
             mPasswordEntryInputDisabler.setInputEnabled(canInput);

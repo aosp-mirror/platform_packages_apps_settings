@@ -21,7 +21,6 @@ import static android.Manifest.permission.WRITE_SETTINGS;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -62,9 +61,9 @@ public class WriteSystemSettingsPreferenceController extends AppInfoPreferenceCo
         return WriteSettingsDetails.class;
     }
 
-    @VisibleForTesting
-    CharSequence getSummary() {
-        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry());
-    }
+    @Override
+    public String getSummary() {
+        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry()).toString();
 
+    }
 }

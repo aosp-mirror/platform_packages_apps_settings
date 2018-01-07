@@ -19,6 +19,7 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -69,13 +70,14 @@ public class BluetoothDeviceRenamePreferenceControllerTest {
         mPreference = new Preference(mContext);
         mPreference.setKey(PREF_KEY);
 
-        mController = new BluetoothDeviceRenamePreferenceController(
-                mContext, PREF_KEY, mFragment, mLocalAdapter);
+        mController = spy(new BluetoothDeviceRenamePreferenceController(
+                mContext, PREF_KEY, mFragment, mLocalAdapter));
+        doReturn(DEVICE_NAME).when(mController).getDeviceName();
     }
 
     @Test
     public void testUpdateDeviceName_showSummaryWithDeviceName() {
-        mController.updateDeviceName(mPreference, DEVICE_NAME);
+        mController.updateDeviceName(mPreference);
 
         final CharSequence summary = mPreference.getSummary();
 

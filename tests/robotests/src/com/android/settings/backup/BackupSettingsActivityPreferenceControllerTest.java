@@ -77,8 +77,8 @@ public class BackupSettingsActivityPreferenceControllerTest {
         mBackupEnabled = true;
 
         mController.updateState(mBackupPreference);
-
-        verify(mBackupPreference).setSummary(R.string.accessibility_feature_state_on);
+        String summaryString = mContext.getString(R.string.accessibility_feature_state_on);
+        verify(mBackupPreference).setSummary(summaryString);
     }
 
     @Test
@@ -86,8 +86,8 @@ public class BackupSettingsActivityPreferenceControllerTest {
         mBackupEnabled = false;
 
         mController.updateState(mBackupPreference);
-
-        verify(mBackupPreference).setSummary(R.string.accessibility_feature_state_off);
+        String summaryString = mContext.getString(R.string.accessibility_feature_state_off);
+        verify(mBackupPreference).setSummary(summaryString);
     }
 
     @Test

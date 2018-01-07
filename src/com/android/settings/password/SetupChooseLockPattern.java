@@ -19,7 +19,11 @@ package com.android.settings.password;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 
 /**
@@ -46,7 +50,26 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         return SetupChooseLockPatternFragment.class;
     }
 
-    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment {
+    public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
+            implements ChooseLockTypeDialogFragment.OnLockTypeSelectedListener {
+
+        @Override
+        public void onViewCreated(View view, Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            Button optionsButton = (Button) view.findViewById(R.id.screen_lock_options);
+            optionsButton.setVisibility(View.VISIBLE);
+            optionsButton.setOnClickListener((btn) ->
+                    ChooseLockTypeDialogFragment.newInstance(mUserId)
+                            .show(getChildFragmentManager(), null));
+        }
+
+        @Override
+        public void onLockTypeSelected(ScreenLockType lock) {
+            if (ScreenLockType.PATTERN == lock) {
+                return;
+            }
+            startChooseLockActivity(lock, getActivity());
+        }
 
         @Override
         protected Intent getRedactionInterstitialIntent(Context context) {

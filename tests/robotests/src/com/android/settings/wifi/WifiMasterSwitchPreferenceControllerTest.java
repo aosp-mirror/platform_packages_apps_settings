@@ -72,9 +72,16 @@ public class WifiMasterSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void testWifiMasterSwitch_byDefault_shouldBeShown() {
         assertThat(mController.isAvailable()).isTrue();
     }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testWifiMasterSwitch_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
 
     @Test
     public void onResume_shouldRegisterCallback() {

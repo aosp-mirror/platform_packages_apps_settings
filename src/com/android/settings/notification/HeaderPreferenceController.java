@@ -77,7 +77,8 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                         : mAppRow.label;
     }
 
-    CharSequence getSummary() {
+    @Override
+    public String getSummary() {
         if (mChannel != null) {
            if (mChannelGroup != null && mChannelGroup.getGroup() != null
                 && !TextUtils.isEmpty(mChannelGroup.getGroup().getName())) {
@@ -87,12 +88,12 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                summary.append(bidi.unicodeWrap(mContext.getText(
                        R.string.notification_header_divider_symbol_with_spaces)));
                summary.append(bidi.unicodeWrap(mChannelGroup.getGroup().getName().toString()));
-               return summary;
+               return summary.toString();
            } else {
-               return mAppRow.label;
+               return mAppRow.label.toString();
            }
         } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
-            return mAppRow.label;
+            return mAppRow.label.toString();
         } else {
             return "";
         }
