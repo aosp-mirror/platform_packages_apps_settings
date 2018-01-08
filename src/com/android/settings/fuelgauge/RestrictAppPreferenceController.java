@@ -20,9 +20,11 @@ package com.android.settings.fuelgauge;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
 
@@ -37,10 +39,19 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
 
     private AppOpsManager mAppOpsManager;
     private List<AppOpsManager.PackageOps> mPackageOps;
+    private SettingsActivity mSettingsActivity;
+    private PreferenceFragment mPreferenceFragment;
 
     public RestrictAppPreferenceController(Context context) {
         super(context, KEY_RESTRICT_APP);
         mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+    }
+
+    public RestrictAppPreferenceController(SettingsActivity settingsActivity,
+            PreferenceFragment preferenceFragment) {
+        this(settingsActivity.getApplicationContext());
+        mSettingsActivity = settingsActivity;
+        mPreferenceFragment = preferenceFragment;
     }
 
     @Override
@@ -51,13 +62,27 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+
         mPackageOps = mAppOpsManager.getPackagesForOps(
                 new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
         final int num = mPackageOps != null ? mPackageOps.size() : 0;
 
+        // Enable the preference if some apps already been restricted, otherwise disable it
+        preference.setEnabled(num > 0);
         preference.setSummary(
                 mContext.getResources().getQuantityString(R.plurals.restricted_app_summary, num,
                         num));
     }
 
+    @Override
+    public boolean handlePreferenceTreeClick(Preference preference) {
+        if (getPreferenceKey().equals(preference.getKey())) {
+            // start fragment
+            RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mPreferenceFragment,
+                    mPackageOps);
+            return true;
+        }
+
+        return super.handlePreferenceTreeClick(preference);
+    }
 }

@@ -19,9 +19,11 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
+import android.support.v14.preference.PreferenceFragment;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -63,14 +65,20 @@ public class SmartBatterySettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context);
+        return buildPreferenceControllers(context, (SettingsActivity) getActivity(), this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(
-            Context context) {
+            Context context, SettingsActivity settingsActivity, PreferenceFragment fragment) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new SmartBatteryPreferenceController(context));
-        controllers.add(new RestrictAppPreferenceController(context));
+        if (settingsActivity != null && fragment != null) {
+            controllers.add(
+                    new RestrictAppPreferenceController(settingsActivity, fragment));
+        } else {
+            controllers.add(new RestrictAppPreferenceController(context));
+        }
+
         return controllers;
     }
 
@@ -92,7 +100,7 @@ public class SmartBatterySettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context);
+                    return buildPreferenceControllers(context, null, null);
                 }
             };
 }

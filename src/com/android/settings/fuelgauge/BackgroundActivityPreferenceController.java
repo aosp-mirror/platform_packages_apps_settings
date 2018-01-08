@@ -54,9 +54,10 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     private final int mUid;
     @VisibleForTesting
     DevicePolicyManagerWrapper mDpm;
+    @VisibleForTesting
+    BatteryUtils mBatteryUtils;
     private Fragment mFragment;
     private String mTargetPackage;
-    private boolean mIsPreOApp;
     private PowerWhitelistBackend mPowerWhitelistBackend;
 
     public BackgroundActivityPreferenceController(Context context, Fragment fragment,
@@ -77,7 +78,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
         mUid = uid;
         mFragment = fragment;
         mTargetPackage = packageName;
-        mIsPreOApp = isLegacyApp(packageName);
+        mBatteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -109,12 +110,7 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
      * activity for this package
      */
     public void setUnchecked(Preference preference) {
-        if (mIsPreOApp) {
-            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage,
-                    AppOpsManager.MODE_IGNORED);
-        }
-        mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mTargetPackage,
-                AppOpsManager.MODE_IGNORED);
+        mBatteryUtils.setForceAppStandby(mUid, mTargetPackage, AppOpsManager.MODE_IGNORED);
         ((SwitchPreference) preference).setChecked(false);
         updateSummary(preference);
     }
@@ -133,28 +129,9 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
             dialogFragment.show(mFragment.getFragmentManager(), TAG);
             return false;
         }
-        if (mIsPreOApp) {
-            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, mUid, mTargetPackage,
-                    AppOpsManager.MODE_ALLOWED);
-        }
-        mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mTargetPackage,
-                AppOpsManager.MODE_ALLOWED);
+        mBatteryUtils.setForceAppStandby(mUid, mTargetPackage, AppOpsManager.MODE_ALLOWED);
         updateSummary(preference);
         return true;
-    }
-
-    @VisibleForTesting
-    boolean isLegacyApp(final String packageName) {
-        try {
-            ApplicationInfo info = mPackageManager.getApplicationInfo(packageName,
-                    PackageManager.GET_META_DATA);
-
-            return info.targetSdkVersion < Build.VERSION_CODES.O;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Cannot find package: " + packageName, e);
-        }
-
-        return false;
     }
 
     @VisibleForTesting
