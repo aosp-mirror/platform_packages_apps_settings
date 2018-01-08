@@ -78,7 +78,8 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
-        mController = new ZenModeRepeatCallersPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeRepeatCallersPreferenceController(mContext, mock(Lifecycle.class),
+                15);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
