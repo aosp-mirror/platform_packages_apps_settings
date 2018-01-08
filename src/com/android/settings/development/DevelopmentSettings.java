@@ -210,12 +210,12 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             "persist.bluetooth.disableabsvol";
     private static final String BLUETOOTH_AVRCP_VERSION_PROPERTY =
                                     "persist.bluetooth.avrcpversion";
-    private static final String BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY =
-                                    "persist.bluetooth.enableinbandringing";
+    private static final String BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY =
+                                    "persist.bluetooth.disableinbandringing";
     private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
                                     "persist.bluetooth.btsnoopenable";
 
-    private static final String BLUETOOTH_ENABLE_INBAND_RINGING_KEY = "bluetooth_enable_inband_ringing";
+    private static final String BLUETOOTH_DISABLE_INBAND_RINGING_KEY = "bluetooth_disable_inband_ringing";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
     private static final String BLUETOOTH_SELECT_A2DP_SAMPLE_RATE_KEY = "bluetooth_select_a2dp_sample_rate";
@@ -291,7 +291,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private SwitchPreference mTetheringHardwareOffload;
     private SwitchPreference mBluetoothShowDevicesWithoutNames;
     private SwitchPreference mBluetoothDisableAbsVolume;
-    private SwitchPreference mBluetoothEnableInbandRinging;
+    private SwitchPreference mBluetoothDisableInbandRinging;
 
     private BluetoothA2dp mBluetoothA2dp;
     private final Object mBluetoothA2dpLock = new Object();
@@ -510,10 +510,10 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothShowDevicesWithoutNames =
                 findAndInitSwitchPref(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_KEY);
         mBluetoothDisableAbsVolume = findAndInitSwitchPref(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY);
-        mBluetoothEnableInbandRinging = findAndInitSwitchPref(BLUETOOTH_ENABLE_INBAND_RINGING_KEY);
+        mBluetoothDisableInbandRinging = findAndInitSwitchPref(BLUETOOTH_DISABLE_INBAND_RINGING_KEY);
         if (!BluetoothHeadset.isInbandRingingSupported(getContext())) {
-            removePreference(mBluetoothEnableInbandRinging);
-            mBluetoothEnableInbandRinging = null;
+            removePreference(mBluetoothDisableInbandRinging);
+            mBluetoothDisableInbandRinging = null;
         }
 
         mBluetoothSelectAvrcpVersion = addListPreference(BLUETOOTH_SELECT_AVRCP_VERSION_KEY);
@@ -853,7 +853,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         }
         updateBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         updateBluetoothDisableAbsVolumeOptions();
-        updateBluetoothEnableInbandRingingOptions();
+        updateBluetoothDisableInbandRingingOptions();
         updateBluetoothA2dpConfigurationValues();
         updatePrivateDnsSummary();
     }
@@ -866,10 +866,6 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 cb.setChecked(false);
                 onPreferenceTreeClick(cb);
             }
-        }
-        if (mBluetoothEnableInbandRinging != null) {
-            mBluetoothEnableInbandRinging.setChecked(true);
-            onPreferenceTreeClick(mBluetoothEnableInbandRinging);
         }
         mBugReportInPowerController.resetPreference();
         mEnableAdbController.resetPreference();
@@ -1518,17 +1514,17 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                 mBluetoothDisableAbsVolume.isChecked() ? "true" : "false");
     }
 
-    private void updateBluetoothEnableInbandRingingOptions() {
-        if (mBluetoothEnableInbandRinging != null) {
-            updateSwitchPreference(mBluetoothEnableInbandRinging,
-                SystemProperties.getBoolean(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY, true));
+    private void updateBluetoothDisableInbandRingingOptions() {
+        if (mBluetoothDisableInbandRinging != null) {
+            updateSwitchPreference(mBluetoothDisableInbandRinging,
+                SystemProperties.getBoolean(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false));
         }
     }
 
-    private void writeBluetoothEnableInbandRingingOptions() {
-        if (mBluetoothEnableInbandRinging != null) {
-            SystemProperties.set(BLUETOOTH_ENABLE_INBAND_RINGING_PROPERTY,
-                mBluetoothEnableInbandRinging.isChecked() ? "true" : "false");
+    private void writeBluetoothDisableInbandRingingOptions() {
+        if (mBluetoothDisableInbandRinging != null) {
+            SystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
+                mBluetoothDisableInbandRinging.isChecked() ? "true" : "false");
         }
     }
 
@@ -2583,8 +2579,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             writeBluetoothShowDevicesWithoutUserFriendlyNameOptions();
         } else if (preference == mBluetoothDisableAbsVolume) {
             writeBluetoothDisableAbsVolumeOptions();
-        } else if (preference == mBluetoothEnableInbandRinging) {
-            writeBluetoothEnableInbandRingingOptions();
+        } else if (preference == mBluetoothDisableInbandRinging) {
+            writeBluetoothDisableInbandRingingOptions();
         } else if (SHORTCUT_MANAGER_RESET_KEY.equals(preference.getKey())) {
             resetShortcutManagerThrottling();
         } else {
