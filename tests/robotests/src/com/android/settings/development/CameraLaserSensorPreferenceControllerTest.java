@@ -96,11 +96,11 @@ public class CameraLaserSensorPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_withUserBuild_shouldReturnFalse() {
+    public void isAvailable_withUserBuild_shouldReturnTrue() {
         SettingsShadowSystemProperties.set(
                 CameraLaserSensorPreferenceController.BUILD_TYPE, USER_BUILD);
 
-        assertThat(mController.isAvailable()).isFalse();
+        assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
