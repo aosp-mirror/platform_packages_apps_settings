@@ -268,6 +268,7 @@ public class SettingsGateway {
             Settings.PowerUsageSummaryLegacyActivity.class.getName(),
             Settings.UserAndAccountDashboardActivity.class.getName(),
             Settings.SecuritySettingsActivity.class.getName(),
+            Settings.SecuritySettingsActivityV2.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             SupportDashboardActivity.class.getName(),
