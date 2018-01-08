@@ -59,7 +59,6 @@ import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
-import com.android.settings.dashboard.SupportFragment;
 import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -242,7 +241,6 @@ public class SettingsGateway {
             NightDisplaySettings.class.getName(),
             ManageDomainUrls.class.getName(),
             AutomaticStorageManagerSettings.class.getName(),
-            SupportFragment.class.getName(),
             StorageDashboardFragment.class.getName(),
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),

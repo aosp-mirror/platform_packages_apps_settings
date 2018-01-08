@@ -8655,93 +8655,6 @@
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
-    <!-- Title text for connecting to customer support [CHAR LIMIT=80]-->
-    <string name="support_escalation_title">We\'re here to help</string>
-
-    <!-- Title text for connecting to 24/7 available customer support [CHAR LIMIT=80]-->
-    <string name="support_escalation_24_7_title">We\'re here for you 24/7</string>
-
-    <!-- Content description for connecting customer support. The "24 7" part indicates
-    support is available 24 hours a day, 7 days a week. It's used by screenreaders so it
-    cannot contain any symbol other that space. [CHAR LIMIT=80]-->
-    <string name="support_escalation_24_7_content_description">We\'re here for you 24 7</string>
-
-    <!-- Summary text for connecting to customer support [CHAR LIMIT=NONE]-->
-    <string name="support_escalation_summary">Our support team is here to help address any issue</string>
-
-    <!-- Summary text for connecting to 24/7 customer support [CHAR LIMIT=NONE]-->
-    <string name="support_escalation_24_7_summary">Our support team is available all day, every day</string>
-
-    <!-- Summary text when customer support is closed. [CHAR LIMIT=NONE]-->
-    <string name="support_escalation_closed_summary">Search help or come back during support hours (local time):&lt;br&gt;&lt;b&gt;<xliff:g id="operation_hours">%s</xliff:g>&lt;/b&gt;</string>
-
-    <!-- Summary text to call customer support when there is no internet. [CHAR LIMIT=NONE]-->
-    <string name="support_escalation_no_internet_summary">Phone support hours (local time)&lt;br&gt;&lt;b&gt;<xliff:g id="operation_hours">%s</xliff:g>&lt;/b&gt;</string>
-
-    <!-- Summary text when customer support is unavailable in the region. [CHAR LIMIT=NONE]-->
-    <string name="support_escalation_unavailable_summary">Search help or explore tips &amp; tricks</string>
-
-    <!-- Template for formatting support hours eg Mon - Fri, 8:00 AM - 19:30 PM. [CHAR LIMIT=NONE]-->
-    <string name="support_hour_format" translatable="false">
-        <xliff:g id="start_day">%1$s</xliff:g> - <xliff:g id="end_day">%2$s</xliff:g>, <xliff:g id="start_time">%3$s</xliff:g> - <xliff:g id="end_time">%4$s</xliff:g>&lt;br&gt;
-    </string>
-
-    <!-- Button label for choosing country for phone support. [CHAR LIMIT=40]-->
-    <string name="support_country_list_title">Support for:</string>
-
-    <!-- Template for formatting country and language. eg Canada - French [CHAR LIMIT=NONE]-->
-    <string name="support_country_format"><xliff:g id="country" example="Canada">%1$s</xliff:g> - <xliff:g id="language" example="French">%2$s</xliff:g></string>
-
-    <!-- Template for formatting phone number and language. eg English (800-000-0000) [CHAR LIMIT=NONE]-->
-    <string name ="support_phone_international_format">
-        <xliff:g id="language" example="English">%1$s</xliff:g> (<xliff:g id="phone" example="800-000-0000">%2$s</xliff:g>)
-    </string>
-
-    <!-- Title text for a list of international support phone numbers. [CHAR LIMIT=60]-->
-    <string name="support_international_phone_title">Traveling abroad?</string>
-
-    <!-- Description text warning international phone charge may apply when dialing support numbers. [CHAR LIMIT=NONE]-->
-    <string name="support_international_phone_summary">International charges may apply</string>
-
-    <!-- Button label for contacting customer support by phone [CHAR LIMIT=20]-->
-    <string name="support_escalation_by_phone">Phone</string>
-
-    <!-- Button label for contacting customer support by chat [CHAR LIMIT=20]-->
-    <string name="support_escalation_by_chat">Chat</string>
-
-    <!-- Button label for visiting the tips & tricks site [CHAR LIMIT=60]-->
-    <string name="support_tips_and_tricks_title">Explore tips &amp; tricks</string>
-
-    <!-- Button label for visiting help and/or send feedback [CHAR LIMIT=60]-->
-    <string name="support_help_feedback_title">Search help &amp; send feedback</string>
-
-    <!-- Title text that indicates user needs to sign in to get customer support. [CHAR LIMIT=80]-->
-    <string name="support_sign_in_required_title">Contact support</string>
-
-    <!-- Summary text that indicates user needs to sign-in to get real time customer support. [CHAR LIMIT=NONE]-->
-    <string name="support_sign_in_required_summary" translatable="false"></string>
-
-    <!-- Button label for signing in an account [CHAR LIMIT=40]-->
-    <string name="support_sign_in_button_text">Sign in</string>
-
-    <!-- Button label that redirects user who needs help for signin to help screen [CHAR LIMIT=NONE]-->
-    <string name="support_sign_in_required_help">Can\'t sign in?</string>
-
-    <!-- Dialog title displayed before initiating real time support [CHAR LIMIT=80]-->
-    <string name="support_disclaimer_title">Send system information</string>
-
-    <!-- Checkbox text, when checked dialog will not show again [CHAR LIMIT=80] -->
-    <string name="support_disclaimer_do_not_show">Do not show again</string>
-
-    <!-- Prefix text for the account picker, e.g. "Requesting as user@gmail.com" [CHAR LIMIT=60] -->
-    <string name="support_account_request_prefix">Requesting as</string>
-
-    <!-- Spinner dropdown text, when selected will try to add account [CHAR LIMIT=60] -->
-    <string name="support_account_picker_add_account">Add account</string>
-
-    <!-- Title for the dialog containing system information shown [CHAR LIMIT=30] -->
-    <string name="support_system_information_title">System information</string>
-
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
     <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
@@ -8766,9 +8679,6 @@
         <item quantity="one">1 second</item>
         <item quantity="other"><xliff:g id="number" example="7">%s</xliff:g> seconds</item>
     </plurals>
-
-    <!-- Estimated wait time range for real time supports -->
-    <string name="support_estimated_wait_time">~<xliff:g id="ESTIMATE" example="2 minutes">%1$s</xliff:g> wait</string>
 
     <!-- Used as title on the automatic storage manager settings. [CHAR LIMIT=60] -->
     <string name="automatic_storage_manager_settings">Manage storage</string>
