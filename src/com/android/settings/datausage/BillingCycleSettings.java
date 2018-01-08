@@ -24,8 +24,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.icu.text.MeasureFormat;
-import android.icu.util.MeasureUnit;
 import android.net.NetworkPolicy;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
@@ -36,7 +34,6 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
@@ -255,17 +252,6 @@ public class BillingCycleSettings extends DataUsageBase implements
             final long bytes = isLimit ? editor.getPolicyLimitBytes(template)
                     : editor.getPolicyWarningBytes(template);
             final long limitDisabled = isLimit ? LIMIT_DISABLED : WARNING_DISABLED;
-
-            final MeasureFormat formatter = MeasureFormat.getInstance(
-                    getContext().getResources().getConfiguration().locale,
-                    MeasureFormat.FormatWidth.SHORT);
-            final String[] unitNames = new String[] {
-                formatter.getUnitDisplayName(MeasureUnit.MEGABYTE),
-                formatter.getUnitDisplayName(MeasureUnit.GIGABYTE)
-            };
-            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                    getContext(), R.layout.data_usage_spinner_item, unitNames);
-            type.setAdapter(adapter);
 
             if (bytes > 1.5f * GB_IN_BYTES) {
                 final String bytesText = formatText(bytes / (float) GB_IN_BYTES);
