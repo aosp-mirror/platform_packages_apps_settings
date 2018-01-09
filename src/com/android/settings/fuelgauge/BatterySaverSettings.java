@@ -26,12 +26,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.SearchIndexableResource;
+import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
@@ -88,13 +90,19 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
         mSwitch = mSwitchBar.getSwitch();
         mSwitchBar.show();
 
+        int[] levelChoices = getResources().getIntArray(R.array.battery_saver_trigger_values);
+        final int currentThreshold = Global.getInt(mContext.getContentResolver(),
+                Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+        levelChoices = ArrayUtils.appendInt(levelChoices, currentThreshold);
+        Arrays.sort(levelChoices);
+
         mTriggerPref = new SettingPref(SettingPref.TYPE_GLOBAL, KEY_TURN_ON_AUTOMATICALLY,
                 Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                 0, /*default*/
-                getResources().getIntArray(R.array.battery_saver_trigger_values)) {
+                levelChoices) {
             @Override
             protected String getCaption(Resources res, int value) {
-                if (value > 0 && value < 100) {
+                if (value > 0 && value <= 100) {
                     return res.getString(R.string.battery_saver_turn_on_automatically_pct,
                             Utils.formatPercentage(value));
                 }
