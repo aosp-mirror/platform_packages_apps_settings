@@ -30,11 +30,9 @@ public class ZenModeRemindersPreferenceController extends AbstractZenModePrefere
         implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_reminders";
-    private final ZenModeBackend mBackend;
 
     public ZenModeRemindersPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override

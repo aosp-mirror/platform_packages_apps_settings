@@ -31,11 +31,9 @@ public class ZenModeEventsPreferenceController extends AbstractZenModePreference
         implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_events";
-        private final ZenModeBackend mBackend;
 
     public ZenModeEventsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override
