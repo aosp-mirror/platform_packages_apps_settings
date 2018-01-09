@@ -5580,10 +5580,12 @@
     <string name="add_account_label">Add account</string>
     <!-- Label for the state of the work profile [CHAR LIMIT=80] -->
     <string name="managed_profile_not_available_label">Work profile isn\u2019t available yet</string>
-    <!-- Account Settings. The preference title for enabling work mode -->
-    <string name="work_mode_label">Work mode</string>
-    <!-- Account Settings. The preference summary for enabling work mode -->
-    <string name="work_mode_summary">Allow work profile to function, including apps, background sync, and related features</string>
+    <!-- This string is the title of a setting. If a user taps the setting, they can turn their work profile on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective. -->
+    <string name="work_mode_label">Work profile</string>
+    <!-- This string is located under a setting and describes what the setting does. It's letting a user know whether their work profile is on or off, and they can use the setting to turn it on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective.-->
+    <string name="work_mode_on_summary">Managed by your organization</string>
+    <!-- This string is located under a setting and describes what the setting does. It's letting a user know whether their work profile is on or off, and they can use the setting to turn it on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective.-->
+    <string name="work_mode_off_summary">Apps and notifications are off</string>
     <!-- Button label to remove the work profile [CHAR LIMIT=35] -->
     <string name="remove_managed_profile_label">Remove work profile</string>
     <!-- Data synchronization settings screen, title of setting that controls whether background data should be used [CHAR LIMIT=30] -->
