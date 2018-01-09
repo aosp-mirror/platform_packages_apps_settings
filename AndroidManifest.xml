@@ -3104,13 +3104,6 @@
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.deletionhelper.AutomaticStorageManagerSettings" />
         </activity>
-
-        <activity android:name="Settings$LegacySupportActivity"
-                  android:label="@string/page_tab_title_support">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-            android:value="com.android.settings.dashboard.SupportFragment"/>
-        </activity>
-
         <!-- Information architecture host activities -->
 
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->

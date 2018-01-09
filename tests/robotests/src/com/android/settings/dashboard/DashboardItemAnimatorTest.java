@@ -17,10 +17,11 @@
 package com.android.settings.dashboard;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.dashboard.SupportItemAdapter.ViewHolder;
 import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,5 +68,13 @@ public class DashboardItemAnimatorTest {
         final boolean hasPendingAnimation = mDashboardItemAnimator
                 .animateChange(mViewHolder, mViewHolder, 0, 1, 0, 1);
         assertThat(hasPendingAnimation).isFalse();
+    }
+
+    // Sample viewholder to use for test
+    static final class ViewHolder extends RecyclerView.ViewHolder {
+
+        ViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

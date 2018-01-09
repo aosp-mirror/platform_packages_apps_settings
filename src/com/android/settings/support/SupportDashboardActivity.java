@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.android.settings.R;
-import com.android.settings.Settings.LegacySupportActivity;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.SupportFeatureProvider;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -43,12 +42,10 @@ public class SupportDashboardActivity extends Activity implements Indexable {
                 .getSupportFeatureProvider(this);
 
         // try to launch support v2 if we have the feature provider
-        if (supportFeatureProvider != null && supportFeatureProvider.isSupportV2Enabled()) {
-            supportFeatureProvider.startSupportV2(this);
-        } else {
-            startActivity(new Intent(this, LegacySupportActivity.class));
+        if (supportFeatureProvider != null) {
+          supportFeatureProvider.startSupportV2(this);
+          finish();
         }
-        finish();
     }
 
     /**

@@ -42,8 +42,6 @@ public class RunningServices extends SettingsPreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
-
         getActivity().setTitle(R.string.runningservices_settings_title);
     }
 
@@ -64,9 +62,9 @@ public class RunningServices extends SettingsPreferenceFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         mOptionsMenu = menu;
         menu.add(0, SHOW_RUNNING_SERVICES, 1, R.string.show_running_services)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         menu.add(0, SHOW_BACKGROUND_PROCESSES, 2, R.string.show_background_processes)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         updateOptionsMenu();
     }
 
