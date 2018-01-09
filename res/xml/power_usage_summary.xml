@@ -38,6 +38,11 @@
             android:key="battery_saver_summary"
             android:title="@string/battery_saver"/>
 
+        <Preference
+            android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"
+            android:key="smart_battery_manager"
+            android:title="@string/smart_battery_manager_title"/>
+
         <SwitchPreference
             android:key="battery_percentage"
             android:title="@string/battery_percentage"
