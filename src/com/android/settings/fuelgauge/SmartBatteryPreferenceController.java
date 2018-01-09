@@ -18,7 +18,9 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.applications.LayoutPreference;
@@ -30,6 +32,8 @@ import com.android.settings.core.BasePreferenceController;
 public class SmartBatteryPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
     private static final String KEY_SMART_BATTERY = "smart_battery";
+    private static final int ON = 1;
+    private static final int OFF = 0;
 
     public SmartBatteryPreferenceController(Context context) {
         super(context, KEY_SMART_BATTERY);
@@ -37,18 +41,23 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
+        // TODO(b/71502850): get Availability from API. The device may not support it.
         return AVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.APP_STANDBY_ENABLED, ON) == ON;
+        ((SwitchPreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean smartBatteryOn = (Boolean) newValue;
-        //TODO(b/71502850): use smart battery API here to update the state
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.APP_STANDBY_ENABLED,
+                smartBatteryOn ? ON : OFF);
         return true;
     }
 }
