@@ -77,8 +77,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     // Wifi keys
     public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
     public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
-    public static final String KEY_NETWORK_RESTRICTIONS = "network_restrictions";
-
 
     private DataUsageController mDataUsageController;
     private DataUsageInfoController mDataInfoController;
@@ -86,8 +84,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     private Preference mLimitPreference;
     private NetworkTemplate mDefaultTemplate;
     private int mDataUsageTemplate;
-    private NetworkRestrictionsPreference mNetworkRestrictionPreference;
-    private WifiManager mWifiManager;
     private NetworkPolicyEditor mPolicyEditor;
 
     @Override
@@ -101,7 +97,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
         final Context context = getContext();
         NetworkPolicyManager policyManager = NetworkPolicyManager.from(context);
-        mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
@@ -203,8 +198,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         TemplatePreferenceCategory category = (TemplatePreferenceCategory)
                 inflatePreferences(R.xml.data_usage_wifi);
         category.setTemplate(NetworkTemplate.buildTemplateWifiWildcard(), 0, services);
-        mNetworkRestrictionPreference =
-            (NetworkRestrictionsPreference) category.findPreference(KEY_NETWORK_RESTRICTIONS);
     }
 
     private void addEthernetSection() {
@@ -293,8 +286,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             mLimitPreference.setSummary(null);
         }
 
-        updateNetworkRestrictionSummary(mNetworkRestrictionPreference);
-
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
             ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
@@ -319,22 +310,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
     @Override
     public void updateDataUsage() {
         updateState();
-    }
-
-    @VisibleForTesting
-    void updateNetworkRestrictionSummary(NetworkRestrictionsPreference preference) {
-        if (preference == null) {
-            return;
-        }
-        mPolicyEditor.read();
-        int count = 0;
-        for (WifiConfiguration config : mWifiManager.getConfiguredNetworks()) {
-            if (WifiConfiguration.isMetered(config, null)) {
-                count++;
-            }
-        }
-        preference.setSummary(getResources().getQuantityString(
-            R.plurals.network_restrictions_summary, count, count));
     }
 
     private static class SummaryProvider
@@ -409,7 +384,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
 
                 if (!DataUsageUtils.hasWifiRadio(context)) {
                     keys.add(KEY_WIFI_DATA_USAGE);
-                    keys.add(KEY_NETWORK_RESTRICTIONS);
                 }
 
                 // This title is named Wifi, and will confuse users.

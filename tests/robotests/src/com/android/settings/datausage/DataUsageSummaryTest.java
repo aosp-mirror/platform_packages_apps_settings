@@ -69,23 +69,6 @@ public class DataUsageSummaryTest {
     }
 
     @Test
-    public void testUpdateNetworkRestrictionSummary_shouldSetSummary() {
-        final DataUsageSummary dataUsageSummary = spy(new DataUsageSummary());
-        final NetworkRestrictionsPreference preference = mock(NetworkRestrictionsPreference.class);
-        final NetworkPolicyEditor policyEditor = mock(NetworkPolicyEditor.class);
-        final WifiManager wifiManager = mock(WifiManager.class);
-        ReflectionHelpers.setField(dataUsageSummary, "mPolicyEditor", policyEditor);
-        ReflectionHelpers.setField(dataUsageSummary, "mWifiManager", wifiManager);
-        when(wifiManager.getConfiguredNetworks()).thenReturn(new ArrayList<WifiConfiguration>());
-        doReturn(mContext.getResources()).when(dataUsageSummary).getResources();
-
-        dataUsageSummary.updateNetworkRestrictionSummary(preference);
-
-        verify(preference).setSummary(mContext.getResources().getQuantityString(
-                R.plurals.network_restrictions_summary, 0, 0));
-    }
-
-    @Test
     @Config(shadows = {
             SettingsShadowResources.class,
             SettingsShadowResources.SettingsShadowTheme.class

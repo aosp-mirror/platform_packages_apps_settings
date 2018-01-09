@@ -146,11 +146,11 @@ public class WifiConfigController implements TextWatcher,
     private TextView mDns2View;
 
     private Spinner mProxySettingsSpinner;
+    private Spinner mMeteredSettingsSpinner;
     private TextView mProxyHostView;
     private TextView mProxyPortView;
     private TextView mProxyExclusionListView;
     private TextView mProxyPacView;
-
     private CheckBox mSharedCheckBox;
 
     private IpAssignment mIpAssignment = IpAssignment.UNASSIGNED;
@@ -208,6 +208,7 @@ public class WifiConfigController implements TextWatcher,
         mProxySettingsSpinner = (Spinner) mView.findViewById(R.id.proxy_settings);
         mProxySettingsSpinner.setOnItemSelectedListener(this);
         mSharedCheckBox = (CheckBox) mView.findViewById(R.id.shared);
+        mMeteredSettingsSpinner = mView.findViewById(R.id.metered_settings);
 
         if (mAccessPoint == null) { // new network
             mConfigUi.setTitle(R.string.wifi_add_network);
@@ -237,6 +238,7 @@ public class WifiConfigController implements TextWatcher,
             boolean showAdvancedFields = false;
             if (mAccessPoint.isSaved()) {
                 WifiConfiguration config = mAccessPoint.getConfig();
+                mMeteredSettingsSpinner.setSelection(config.meteredOverride);
                 if (config.getIpAssignment() == IpAssignment.STATIC) {
                     mIpSettingsSpinner.setSelection(STATIC_IP);
                     showAdvancedFields = true;
@@ -671,6 +673,9 @@ public class WifiConfigController implements TextWatcher,
         config.setIpConfiguration(
                 new IpConfiguration(mIpAssignment, mProxySettings,
                                     mStaticIpConfiguration, mHttpProxy));
+        if (mMeteredSettingsSpinner != null) {
+            config.meteredOverride = mMeteredSettingsSpinner.getSelectedItemPosition();
+        }
 
         return config;
     }

@@ -20,10 +20,13 @@ import static com.android.settings.wifi.WifiSettings.WIFI_DIALOG_ID;
 import android.app.Dialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.NetworkPolicyManager;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.preference.DropDownPreference;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -122,6 +125,7 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
         ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         mWifiDetailPreferenceController = WifiDetailPreferenceController.newInstance(
                 mAccessPoint,
@@ -133,6 +137,9 @@ public class WifiNetworkDetailsFragment extends DashboardFragment {
                 context.getSystemService(WifiManager.class),
                 mMetricsFeatureProvider);
 
-        return new ArrayList<>(Collections.singletonList(mWifiDetailPreferenceController));
+        controllers.add(mWifiDetailPreferenceController);
+        controllers.add(new WifiMeteredPreferenceController(context, mAccessPoint.getConfig()));
+
+        return controllers;
     }
 }
