@@ -266,7 +266,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 KEY_APP_LIST, lifecycle, activity, this);
         controllers.add(mBatteryAppListPreferenceController);
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
-                KEY_BATTERY_TIP, this, this);
+                KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this, this);
         controllers.add(mBatteryTipPreferenceController);
         controllers.add(new BatterySaverController(context, getLifecycle()));
         controllers.add(new BatteryPercentagePreferenceController(context));
