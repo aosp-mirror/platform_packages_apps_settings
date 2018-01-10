@@ -16,7 +16,7 @@
 
 package com.android.settings.network;
 
-import static junit.framework.Assert.assertFalse;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -38,17 +38,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AirplaneModePreferenceControllerTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
-    @Mock
-    private Resources mResources;
 
     @Mock
     private PreferenceScreen mScreen;
@@ -56,6 +51,7 @@ public class AirplaneModePreferenceControllerTest {
     @Mock
     private PackageManager mPackageManager;
 
+    private Context mContext;
     private AirplaneModePreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -65,7 +61,7 @@ public class AirplaneModePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
-        doReturn(mResources).when(mContext).getResources();
+        mContext = spy(RuntimeEnvironment.application);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = spy(new AirplaneModePreferenceController(mContext, null));
         mLifecycleOwner = () -> mLifecycle;
@@ -74,14 +70,32 @@ public class AirplaneModePreferenceControllerTest {
     }
 
     @Test
-    public void airplaneModePreference_shouldNotBeAvailable_ifHasLeanbackFeature() {
-        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)).thenReturn(true);
-        assertFalse(mController.isAvailable());
+    @Config(qualifiers = "mcc999")
+    public void airplaneModePreference_shouldNotBeAvailable_ifSetToNotVisible() {
+        assertThat(mController.isAvailable()).isFalse();
 
         mController.displayPreference(mScreen);
 
         // This should not crash
         mController.onResume();
         mController.onPause();
+    }
+
+    @Test
+    public void airplaneModePreference_shouldNotBeAvailable_ifHasLeanbackFeature() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)).thenReturn(true);
+        assertThat(mController.isAvailable()).isFalse();
+
+        mController.displayPreference(mScreen);
+
+        // This should not crash
+        mController.onResume();
+        mController.onPause();
+    }
+
+    @Test
+    public void airplaneModePreference_shouldBeAvailable_ifNoLeanbackFeature() {
+        when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_LEANBACK)).thenReturn(false);
+        assertThat(mController.isAvailable()).isTrue();
     }
 }
