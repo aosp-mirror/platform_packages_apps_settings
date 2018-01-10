@@ -63,7 +63,8 @@ public class UserRestrictionTest {
             UserManager.DISALLOW_FACTORY_RESET,
             UserManager.DISALLOW_CONFIG_TETHERING,
             UserManager.DISALLOW_CONFIG_VPN,
-            UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS
+            UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
+            UserManager.DISALLOW_AIRPLANE_MODE
     );
 
     @Before
