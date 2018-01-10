@@ -16,8 +16,9 @@
 
 package com.android.settings.fuelgauge.batterytip.tips;
 
-import android.app.Dialog;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
 import android.support.v7.preference.Preference;
@@ -31,7 +32,7 @@ import java.lang.annotation.RetentionPolicy;
  * Each {@link BatteryTip} contains basic data(e.g. title, summary, icon) as well as the
  * pre-defined action(e.g. turn on battery saver)
  */
-public abstract class BatteryTip implements Comparable<BatteryTip> {
+public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({StateType.NEW,
             StateType.HANDLED,
@@ -62,11 +63,33 @@ public abstract class BatteryTip implements Comparable<BatteryTip> {
 
     private static final String KEY_PREFIX = "key_battery_tip";
 
-    @TipType
     protected int mType;
-    @StateType
     protected int mState;
     protected boolean mShowDialog;
+
+    BatteryTip(Parcel in) {
+        mType = in.readInt();
+        mState = in.readInt();
+        mShowDialog = in.readBoolean();
+    }
+
+    BatteryTip(int type, int state, boolean showDialog) {
+        mType = type;
+        mState = state;
+        mShowDialog = showDialog;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(mType);
+        dest.writeInt(mState);
+        dest.writeBoolean(mShowDialog);
+    }
 
     public abstract CharSequence getTitle(Context context);
 
@@ -77,6 +100,7 @@ public abstract class BatteryTip implements Comparable<BatteryTip> {
 
     /**
      * Update the current {@link #mState} using the new {@code tip}.
+     *
      * @param tip used to update
      */
     public abstract void updateState(BatteryTip tip);
@@ -85,12 +109,6 @@ public abstract class BatteryTip implements Comparable<BatteryTip> {
      * Execute the action for this {@link BatteryTip}
      */
     public abstract void action();
-
-    /**
-     * Build the dialog to display either the info about {@link BatteryTip} or confirmation
-     * about the action.
-     */
-    public abstract Dialog buildDialog();
 
     public Preference buildPreference(Context context) {
         Preference preference = new Preference(context);
@@ -108,6 +126,10 @@ public abstract class BatteryTip implements Comparable<BatteryTip> {
 
     public String getKey() {
         return KEY_PREFIX + mType;
+    }
+
+    public int getType() {
+        return mType;
     }
 
     @StateType

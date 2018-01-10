@@ -248,50 +248,12 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testFindBatterySipperByType_findTypeScreen() {
-        BatterySipper sipper = mFragment.findBatterySipperByType(mUsageList,
-                BatterySipper.DrainType.SCREEN);
-
-        assertThat(sipper).isSameAs(mScreenBatterySipper);
-    }
-
-    @Test
-    public void testFindBatterySipperByType_findTypeApp() {
-        BatterySipper sipper = mFragment.findBatterySipperByType(mUsageList,
-                BatterySipper.DrainType.APP);
-
-        assertThat(sipper).isSameAs(mNormalBatterySipper);
-    }
-
-    @Test
-    public void testUpdateScreenPreference_showCorrectSummary() {
-        doReturn(mScreenBatterySipper).when(mFragment).findBatterySipperByType(any(), any());
-        doReturn(mRealContext).when(mFragment).getContext();
-        final CharSequence expectedSummary = Utils.formatElapsedTime(mRealContext, USAGE_TIME_MS,
-                false);
-
-        mFragment.updateScreenPreference();
-
-        assertThat(mScreenUsagePref.getSubtitle()).isEqualTo(expectedSummary);
-    }
-
-    @Test
     public void testUpdateLastFullChargePreference_showCorrectSummary() {
         doReturn(mRealContext).when(mFragment).getContext();
 
         mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
         assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
-    }
-
-    @Test
-    public void testUpdatePreference_usageListEmpty_shouldNotCrash() {
-        when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<BatterySipper>());
-        doReturn(STUB_STRING).when(mFragment).getString(anyInt(), any());
-        doReturn(mRealContext).when(mFragment).getContext();
-
-        // Should not crash when update
-        mFragment.updateScreenPreference();
     }
 
     @Test
