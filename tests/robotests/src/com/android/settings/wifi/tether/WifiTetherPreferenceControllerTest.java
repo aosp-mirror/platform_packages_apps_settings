@@ -137,7 +137,6 @@ public class WifiTetherPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mLifecycle.handleLifecycleEvent(ON_START);
 
-        assertThat(ShadowWifiTetherSwitchBarController.onStartCalled).isTrue();
         verify(mContext).registerReceiver(eq(receiver), any(IntentFilter.class));
         verify(pref).setChecked(false);
     }
