@@ -25,13 +25,40 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settingslib.utils.ThreadUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import androidx.app.slice.Slice;
 import androidx.app.slice.SliceProvider;
 import androidx.app.slice.builders.ListBuilder;
 
+/**
+ * A {@link SliceProvider} for Settings to enabled inline results in system apps.
+ *
+ * <p>{@link SettingsSliceProvider} accepts a {@link Uri} with {@link #SLICE_AUTHORITY} and a
+ * {@code String} key based on the setting intended to be changed. This provider builds a
+ * {@link Slice} and responds to Slice actions through the database defined by
+ * {@link SlicesDatabaseHelper}, whose data is written by {@link SlicesIndexer}.
+ *
+ * <p>When a {@link Slice} is requested, we start loading {@link SliceData} in the background and
+ * return an stub {@link Slice} with the correct {@link Uri} immediately. In the background, the
+ * data corresponding to the key in the {@link Uri} is read by {@link SlicesDatabaseAccessor}, and
+ * the entire row is converted into a {@link SliceData}. Once complete, it is stored in
+ * {@link #mSliceDataCache}, and then an update sent via the Slice framework to the Slice.
+ * The {@link Slice} displayed by the Slice-presenter will re-query this Slice-provider and find
+ * the {@link SliceData} cached to build the full {@link Slice}.
+ *
+ * <p>When an action is taken on that {@link Slice}, we receive the action in
+ * {@link SliceBroadcastReceiver}, and use the
+ * {@link com.android.settings.core.BasePreferenceController} indexed as
+ * {@link SlicesDatabaseHelper.IndexColumns#CONTROLLER} to manipulate the setting.
+ */
 public class SettingsSliceProvider extends SliceProvider {
 
     private static final String TAG = "SettingsSliceProvider";
@@ -52,6 +79,9 @@ public class SettingsSliceProvider extends SliceProvider {
     @VisibleForTesting
     SlicesDatabaseAccessor mSlicesDatabaseAccessor;
 
+    @VisibleForTesting
+    Map<Uri, SliceData> mSliceDataCache;
+
     public static Uri getUri(String path) {
         return new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -62,6 +92,7 @@ public class SettingsSliceProvider extends SliceProvider {
     @Override
     public boolean onCreateSliceProvider() {
         mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
+        mSliceDataCache = new WeakHashMap<>();
         return true;
     }
 
@@ -75,10 +106,41 @@ public class SettingsSliceProvider extends SliceProvider {
                 return createWifiSlice(sliceUri);
         }
 
-        return getHoldingSlice(sliceUri);
+        SliceData cachedSliceData = mSliceDataCache.get(sliceUri);
+        if (cachedSliceData == null) {
+            loadSliceInBackground(sliceUri);
+            return getSliceStub(sliceUri);
+        }
+
+        // Remove the SliceData from the cache after it has been used to prevent a memory-leak.
+        mSliceDataCache.remove(sliceUri);
+        return SliceBuilderUtils.buildSlice(getContext(), cachedSliceData);
     }
 
-    private Slice getHoldingSlice(Uri uri) {
+    @VisibleForTesting
+    void loadSlice(Uri uri) {
+        long startBuildTime = System.currentTimeMillis();
+
+        SliceData sliceData = mSlicesDatabaseAccessor.getSliceDataFromUri(uri);
+        mSliceDataCache.put(uri, sliceData);
+        getContext().getContentResolver().notifyChange(uri, null /* content observer */);
+
+        Log.d(TAG, "Built slice (" + uri + ") in: " +
+                (System.currentTimeMillis() - startBuildTime));
+    }
+
+    @VisibleForTesting
+    void loadSliceInBackground(Uri uri) {
+        ThreadUtils.postOnBackgroundThread(() -> {
+            loadSlice(uri);
+        });
+    }
+
+    /**
+     * @return an empty {@link Slice} with {@param uri} to be used as a stub while the real
+     * {@link SliceData} is loaded from {@link SlicesDatabaseHelper.Tables#TABLE_SLICES_INDEX}.
+     */
+    private Slice getSliceStub(Uri uri) {
         return new ListBuilder(getContext(), uri).build();
     }
 
