@@ -57,10 +57,7 @@ public class CameraLaserSensorPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        final String buildType = SystemProperties.get(BUILD_TYPE);
-        return mContext.getResources().getBoolean(R.bool.config_show_camera_laser_sensor) &&
-                (TextUtils.equals(USERDEBUG_BUILD, buildType) || TextUtils.equals(ENG_BUILD,
-                        buildType));
+        return mContext.getResources().getBoolean(R.bool.config_show_camera_laser_sensor);
     }
 
     @Override
