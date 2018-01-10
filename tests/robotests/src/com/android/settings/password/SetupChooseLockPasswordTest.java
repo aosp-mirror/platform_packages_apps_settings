@@ -137,6 +137,8 @@ public class SetupChooseLockPasswordTest {
         ShadowActivity shadowActivity = shadowOf(activity);
         final Intent nextStartedActivity = shadowActivity.getNextStartedActivity();
         assertThat(nextStartedActivity).isNotNull();
+        assertThat(nextStartedActivity.getBooleanExtra(
+                ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false)).isTrue();
         assertThat(nextStartedActivity.getStringExtra("foo")).named("Foo extra")
                 .isEqualTo("bar");
     }
