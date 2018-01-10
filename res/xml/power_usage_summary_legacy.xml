@@ -61,11 +61,13 @@
             android:summary="@string/battery_percentage_description"/>
 
         <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="auto_brightness_battery"
             android:title="@string/auto_brightness_title"
             android:summary="@string/auto_brightness_summary"
-            settings:keywords="@string/keywords_display_auto_brightness"/>
+            settings:keywords="@string/keywords_display_auto_brightness"
+            settings:useAdminDisabledSummary="true"
+            settings:userRestriction="no_config_brightness" />
 
         <!-- Cross-listed item, if you change this, also change it in display_settings.xml -->
         <com.android.settings.TimeoutListPreference

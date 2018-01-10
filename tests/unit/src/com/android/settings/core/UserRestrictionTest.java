@@ -64,7 +64,8 @@ public class UserRestrictionTest {
             UserManager.DISALLOW_CONFIG_TETHERING,
             UserManager.DISALLOW_CONFIG_VPN,
             UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
-            UserManager.DISALLOW_AIRPLANE_MODE
+            UserManager.DISALLOW_AIRPLANE_MODE,
+            UserManager.DISALLOW_CONFIG_BRIGHTNESS
     );
 
     @Before
