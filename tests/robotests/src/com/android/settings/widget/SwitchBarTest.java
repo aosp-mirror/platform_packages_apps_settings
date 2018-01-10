@@ -17,10 +17,10 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -38,36 +38,50 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SwitchBarTest {
 
+    private static final int COLOR_BACKGROUND = 1;
+    private static final int COLOR_BACKGROUND_ACTIVATED = 2;
+
     private Context mContext;
     private SwitchBar mBar;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mBar = new SwitchBar(application, Robolectric.buildAttributeSet().build());
+        mBar = new SwitchBar(application, Robolectric.buildAttributeSet()
+                .addAttribute(R.attr.switchBarBackgroundColor, String.valueOf(COLOR_BACKGROUND))
+                .addAttribute(R.attr.switchBarBackgroundActivatedColor,
+                        String.valueOf(COLOR_BACKGROUND_ACTIVATED))
+                .build());
     }
 
     @Test
-    public void testDefaultLabels() {
-        int defaultOnText = R.string.switch_on_text;
-        int defaultOffText = R.string.switch_off_text;
+    public void cycleChecked_defaultLabel_shouldUpdateTextAndBackground() {
+        final int defaultOnText = R.string.switch_on_text;
+        final int defaultOffText = R.string.switch_off_text;
+
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOffText));
+        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
 
         mBar.setChecked(true);
+
+        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(defaultOnText));
     }
 
     @Test
-    public void testCustomLabels() {
-        int onText = R.string.master_clear_progress_text;
-        int offText = R.string.manage_space_text;
+    public void cycleChecked_customLabel_shouldUpdateTextAndBackground() {
+        final int onText = R.string.master_clear_progress_text;
+        final int offText = R.string.manage_space_text;
+
         mBar.setSwitchBarText(onText, offText);
+        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(offText));
 
         mBar.setChecked(true);
+        assertThat(mBar.getBackground()).isEqualTo(new ColorDrawable(COLOR_BACKGROUND_ACTIVATED));
         assertThat(((TextView) mBar.findViewById(R.id.switch_text)).getText())
                 .isEqualTo(mContext.getString(onText));
     }
