@@ -18,7 +18,6 @@ package com.android.settings.slices;
 
 import android.net.Uri;
 import android.text.TextUtils;
-
 /**
  * Data class representing a slice stored by {@link SlicesIndexer}.
  * Note that {@link #key} is treated as a primary key for this class and determines equality.
@@ -179,5 +178,4 @@ public class SliceData {
             return mKey;
         }
     }
-
 }

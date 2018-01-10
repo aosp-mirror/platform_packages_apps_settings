@@ -16,7 +16,9 @@
 
 package com.android.settings.slices;
 
+import static com.android.settings.slices.SettingsSliceProvider.ACTION_TOGGLE_CHANGED;
 import static com.android.settings.slices.SettingsSliceProvider.ACTION_WIFI_CHANGED;
+import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
 import android.app.slice.Slice;
 import android.content.BroadcastReceiver;
@@ -25,19 +27,34 @@ import android.content.Intent;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.text.TextUtils;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.TogglePreferenceController;
 
 /**
  * Responds to actions performed on slices and notifies slices of updates in state changes.
  */
 public class SliceBroadcastReceiver extends BroadcastReceiver {
 
+    private static String TAG = "SettSliceBroadcastRec";
+
+    /**
+     * TODO (b/) move wifi action into generalized case.
+     */
     @Override
-    public void onReceive(Context context, Intent i) {
-        String action = i.getAction();
+    public void onReceive(Context context, Intent intent) {
+        String action = intent.getAction();
+        String key = intent.getStringExtra(EXTRA_SLICE_KEY);
+
         switch (action) {
+            case ACTION_TOGGLE_CHANGED:
+                handleToggleAction(context, key);
+                break;
             case ACTION_WIFI_CHANGED:
                 WifiManager wm = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                boolean newState = i.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE, wm.isWifiEnabled());
+                boolean newState = intent.getBooleanExtra(Slice.EXTRA_TOGGLE_STATE,
+                        wm.isWifiEnabled());
                 wm.setWifiEnabled(newState);
                 // Wait a bit for wifi to update (TODO: is there a better way to do this?)
                 Handler h = new Handler();
@@ -47,5 +64,29 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 }, 1000);
                 break;
         }
+    }
+
+    private void handleToggleAction(Context context, String key) {
+        if (TextUtils.isEmpty(key)) {
+            throw new IllegalStateException("No key passed to Intent for toggle controller");
+        }
+
+        BasePreferenceController controller = getBasePreferenceController(context, key);
+
+        if (!(controller instanceof TogglePreferenceController)) {
+            throw new IllegalStateException("Toggle action passed for a non-toggle key: " + key);
+        }
+
+        // TODO post context.getContentResolver().notifyChanged(uri, null) in the Toggle controller
+        // so that it's automatically broadcast to any slice.
+        TogglePreferenceController toggleController = (TogglePreferenceController) controller;
+        boolean currentValue = toggleController.isChecked();
+        toggleController.setChecked(!currentValue);
+    }
+
+    private BasePreferenceController getBasePreferenceController(Context context, String key) {
+        final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(context);
+        final SliceData sliceData = accessor.getSliceDataFromKey(key);
+        return SliceBuilderUtils.getPreferenceController(context, sliceData);
     }
 }

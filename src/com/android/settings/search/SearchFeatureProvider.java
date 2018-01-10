@@ -28,6 +28,7 @@ import android.widget.Toolbar;
 
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SiteMapManager;
+import com.android.settings.overlay.FeatureFactory;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -185,6 +186,9 @@ public interface SearchFeatureProvider {
             } else {
                 intent = new Intent(activity, SearchActivity.class);
             }
+            FeatureFactory.getFactory(
+                    activity.getApplicationContext()).getSlicesFeatureProvider()
+                    .indexSliceDataAsync(activity.getApplicationContext());
             activity.startActivityForResult(intent, 0 /* requestCode */);
         });
     }

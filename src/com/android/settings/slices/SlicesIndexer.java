@@ -20,6 +20,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.dashboard.DashboardFragment;
 
@@ -36,7 +37,7 @@ import java.util.List;
  */
 class SlicesIndexer implements Runnable {
 
-    private static final String TAG = "SlicesIndexingManager";
+    private static final String TAG = "SlicesIndexer";
 
     private Context mContext;
 
@@ -48,18 +49,27 @@ class SlicesIndexer implements Runnable {
     }
 
     /**
-     * Synchronously takes data obtained from {@link SliceDataConverter} and indexes it into a
-     * SQLite database.
+     * Asynchronously index slice data from {@link #indexSliceData()}.
      */
     @Override
     public void run() {
+        indexSliceData();
+    }
+
+    /**
+     * Synchronously takes data obtained from {@link SliceDataConverter} and indexes it into a
+     * SQLite database
+     */
+    protected void indexSliceData() {
         if (mHelper.isSliceDataIndexed()) {
+            Log.d(TAG, "Slices already indexed - returning.");
             return;
         }
 
         SQLiteDatabase database = mHelper.getWritableDatabase();
 
         try {
+            long startTime = System.currentTimeMillis();
             database.beginTransaction();
 
             mHelper.reconstruct(mHelper.getWritableDatabase());
@@ -67,6 +77,10 @@ class SlicesIndexer implements Runnable {
             insertSliceData(database, indexData);
 
             mHelper.setIndexedState();
+
+            // TODO (b/71503044) Log indexing time.
+            Log.d(TAG,
+                    "Indexing slices database took: " + (System.currentTimeMillis() - startTime));
             database.setTransactionSuccessful();
         } finally {
             database.endTransaction();

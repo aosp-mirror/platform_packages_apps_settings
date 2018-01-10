@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 
@@ -32,13 +33,25 @@ import androidx.app.slice.SliceProvider;
 import androidx.app.slice.builders.ListBuilder;
 
 public class SettingsSliceProvider extends SliceProvider {
+
+    private static final String TAG = "SettingsSliceProvider";
+
     public static final String SLICE_AUTHORITY = "com.android.settings.slices";
 
     public static final String PATH_WIFI = "wifi";
     public static final String ACTION_WIFI_CHANGED =
             "com.android.settings.slice.action.WIFI_CHANGED";
 
+    public static final String ACTION_TOGGLE_CHANGED =
+            "com.android.settings.slice.action.TOGGLE_CHANGED";
+
+    public static final String EXTRA_SLICE_KEY = "com.android.settings.slice.extra.key";
+
     // TODO -- Associate slice URI with search result instead of separate hardcoded thing
+
+    @VisibleForTesting
+    SlicesDatabaseAccessor mSlicesDatabaseAccessor;
+
     public static Uri getUri(String path) {
         return new Uri.Builder()
                 .scheme(ContentResolver.SCHEME_CONTENT)
@@ -48,19 +61,26 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @Override
     public boolean onCreateSliceProvider() {
+        mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(getContext());
         return true;
     }
 
     @Override
     public Slice onBindSlice(Uri sliceUri) {
         String path = sliceUri.getPath();
+        // If adding a new Slice, do not directly match Slice URIs.
+        // Use {@link SlicesDatabaseAccessor}.
         switch (path) {
             case "/" + PATH_WIFI:
                 return createWifiSlice(sliceUri);
         }
-        throw new IllegalArgumentException("Unrecognized slice uri: " + sliceUri);
+
+        return getHoldingSlice(sliceUri);
     }
 
+    private Slice getHoldingSlice(Uri uri) {
+        return new ListBuilder(uri).build();
+    }
 
     // TODO (b/70622039) remove this when the proper wifi slice is enabled.
     private Slice createWifiSlice(Uri sliceUri) {
