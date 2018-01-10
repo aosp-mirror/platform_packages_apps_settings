@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.deviceinfo;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -26,23 +26,13 @@ import android.support.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.deviceinfo.BluetoothAddressPreferenceController;
-import com.android.settings.deviceinfo.BuildNumberPreferenceController;
-import com.android.settings.deviceinfo.DeviceModelPreferenceController;
-import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
-import com.android.settings.deviceinfo.FeedbackPreferenceController;
-import com.android.settings.deviceinfo.ImsStatusPreferenceController;
-import com.android.settings.deviceinfo.IpAddressPreferenceController;
-import com.android.settings.deviceinfo.ManualPreferenceController;
-import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
-import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
-import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
-import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
-import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceControllerV2;
-import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceControllerV2;
-import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceControllerV2;
+import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController;
+import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
+import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -84,8 +74,8 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 || !arguments.containsKey(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY)) {
 
             // Increase the number of children when the device contains more than 1 sim.
-            final TelephonyManager telephonyManager = (TelephonyManager) getSystemService(
-                    Context.TELEPHONY_SERVICE);
+            final TelephonyManager telephonyManager = (TelephonyManager) getContext()
+                    .getSystemService(Context.TELEPHONY_SERVICE);
             final int numberOfChildren = Math.max(SIM_PREFERENCES_COUNT,
                     SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
                     + NON_SIM_PREFERENCES_COUNT;
@@ -110,7 +100,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.device_info_settings_v2;
+        return R.xml.device_info_settings;
     }
 
     @Override
@@ -148,10 +138,10 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PhoneNumberPreferenceController(context));
-        controllers.add(new SimStatusPreferenceControllerV2(context, fragment));
+        controllers.add(new SimStatusPreferenceController(context, fragment));
         controllers.add(new DeviceModelPreferenceController(context, fragment));
-        controllers.add(new ImeiInfoPreferenceControllerV2(context, fragment));
-        controllers.add(new FirmwareVersionPreferenceControllerV2(context, fragment));
+        controllers.add(new ImeiInfoPreferenceController(context, fragment));
+        controllers.add(new FirmwareVersionPreferenceController(context, fragment));
         controllers.add(new ImsStatusPreferenceController(context, lifecycle));
         controllers.add(new IpAddressPreferenceController(context, lifecycle));
         controllers.add(new WifiMacAddressPreferenceController(context, lifecycle));
@@ -176,7 +166,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.device_info_settings_v2;
+                    sir.xmlResId = R.xml.device_info_settings;
                     return Arrays.asList(sir);
                 }
 

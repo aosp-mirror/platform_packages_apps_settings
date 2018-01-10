@@ -47,7 +47,9 @@
             style="@style/device_info_dialog_value"
             android:id="@+id/security_patch_level_value"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="?android:attr/colorAccent"/>
 
         <TextView
             style="@style/device_info_dialog_label"

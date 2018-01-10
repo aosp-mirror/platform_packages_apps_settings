@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Controller that manages preference for single and multi sim devices.
  */
-public class ImeiInfoPreferenceControllerV2 extends
+public class ImeiInfoPreferenceController extends
         AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_IMEI_INFO = "imei_info";
@@ -45,7 +45,7 @@ public class ImeiInfoPreferenceControllerV2 extends
     private final List<Preference> mPreferenceList = new ArrayList<>();
     private final Fragment mFragment;
 
-    public ImeiInfoPreferenceControllerV2(Context context, Fragment fragment) {
+    public ImeiInfoPreferenceController(Context context, Fragment fragment) {
         super(context);
 
         mFragment = fragment;

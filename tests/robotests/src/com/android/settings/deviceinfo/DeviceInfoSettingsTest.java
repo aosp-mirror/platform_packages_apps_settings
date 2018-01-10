@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.deviceinfo;
 
-import static com.android.settings.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
-import static com.android.settings.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+import static com.android.settings.deviceinfo.DeviceInfoSettings.NON_SIM_PREFERENCES_COUNT;
+import static com.android.settings.deviceinfo.DeviceInfoSettings.SIM_PREFERENCES_COUNT;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -33,6 +33,8 @@ import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
+import com.android.settings.R;
+import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -51,6 +53,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
 
@@ -82,12 +85,14 @@ public class DeviceInfoSettingsTest {
         mSettings = spy(new DeviceInfoSettings());
 
         doReturn(mActivity).when(mSettings).getActivity();
+        doReturn(mContext).when(mSettings).getContext();
         doReturn(mContext.getTheme()).when(mActivity).getTheme();
         doReturn(mContext.getResources()).when(mSettings).getResources();
         doNothing().when(mSettings).onCreatePreferences(any(), any());
 
         doReturn(mScreen).when(mSettings).getPreferenceScreen();
-        doReturn(mTelephonyManager).when(mSettings).getSystemService(Context.TELEPHONY_SERVICE);
+        ShadowApplication.getInstance().setSystemService(Context.TELEPHONY_SERVICE,
+                mTelephonyManager);
     }
 
     @Test
@@ -95,7 +100,7 @@ public class DeviceInfoSettingsTest {
             SettingsShadowSystemProperties.class
     })
     public void getPrefXml_shouldReturnDeviceInfoXml() {
-        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings_v2);
+        assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings);
     }
 
     @Test

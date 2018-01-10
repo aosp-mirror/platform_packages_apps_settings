@@ -26,19 +26,18 @@ import android.text.TextUtils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-public class FirmwareVersionPreferenceControllerV2 extends AbstractPreferenceController implements
+public class FirmwareVersionPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin {
 
     private final static String FIRMWARE_VERSION_KEY = "firmware_version";
 
     private final Fragment mFragment;
 
-    public FirmwareVersionPreferenceControllerV2(Context context, Fragment fragment) {
+    public FirmwareVersionPreferenceController(Context context, Fragment fragment) {
         super(context);
 
         mFragment = fragment;
     }
-
 
     @Override
     public boolean isAvailable() {

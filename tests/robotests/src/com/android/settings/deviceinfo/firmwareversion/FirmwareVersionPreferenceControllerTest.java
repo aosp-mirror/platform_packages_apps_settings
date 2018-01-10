@@ -44,7 +44,7 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class FirmwareVersionPreferenceControllerV2Test {
+public class FirmwareVersionPreferenceControllerTest {
 
     @Mock
     private Preference mPreference;
@@ -54,13 +54,13 @@ public class FirmwareVersionPreferenceControllerV2Test {
     private Fragment mFragment;
 
     private Context mContext;
-    private FirmwareVersionPreferenceControllerV2 mController;
+    private FirmwareVersionPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new FirmwareVersionPreferenceControllerV2(mContext, mFragment);
+        mController = new FirmwareVersionPreferenceController(mContext, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
