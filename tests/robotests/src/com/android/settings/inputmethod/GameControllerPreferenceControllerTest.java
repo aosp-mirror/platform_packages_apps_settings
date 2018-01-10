@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,6 +35,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -44,18 +46,18 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class GameControllerPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private InputManager mInputManager;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private InputDevice mInputDevice;
 
+    private Context mContext;
     private GameControllerPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mInputManager);
         mController = new GameControllerPreferenceController(mContext);
     }
@@ -106,6 +108,14 @@ public class GameControllerPreferenceControllerTest {
     @Test
     public void testIsAvailable_hasNoDevice_shouldReturnFalse() {
         when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testIsAvailable_ifDisabled_shouldReturnFalse() {
+        mController = new GameControllerPreferenceController(mContext);
 
         assertThat(mController.isAvailable()).isFalse();
     }

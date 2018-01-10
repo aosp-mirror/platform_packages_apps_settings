@@ -17,10 +17,13 @@
 package com.android.settings.language;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.TestConfig;
@@ -33,6 +36,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
@@ -42,31 +46,41 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PhoneLanguagePreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private Preference mPreference;
+    @Mock
+    private AssetManager mAssets;
+
+    private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
     private PhoneLanguagePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getAssets()).thenReturn(mAssets);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new PhoneLanguagePreferenceController(mContext);
     }
 
     @Test
     public void testIsAvailable_hasMultipleLocales_shouldReturnTrue() {
-        when(mContext.getAssets().getLocales()).thenReturn(new String[] {"en", "de"});
+        when(mAssets.getLocales()).thenReturn(new String[] {"en", "de"});
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void testIsAvailable_hasSingleLocales_shouldReturnFalse() {
-        when(mContext.getAssets().getLocales()).thenReturn(new String[] {"en"});
+        when(mAssets.getLocales()).thenReturn(new String[] {"en"});
 
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testIsAvailable_ifDisabled_shouldReturnFalse() {
         assertThat(mController.isAvailable()).isFalse();
     }
 
