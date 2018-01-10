@@ -3432,6 +3432,8 @@
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="default">About phone</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="device">About device</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="emulator">About emulated device</string>
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
@@ -3703,6 +3705,15 @@
         to attack by unknown apps. By installing apps from
         this source, you agree that you are responsible for
         any damage to your phone or loss of data that may
+        result from their use.
+    </string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="device">
+        Your device and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your device or loss of data that may
         result from their use.
     </string>
 
@@ -5600,6 +5611,8 @@
     <string name="really_remove_account_message" product="tablet">Removing this account will delete all of its messages, contacts, and other data from the tablet!</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
+    <string name="really_remove_account_message" product="device">Removing this account will delete all of its messages, contacts, and other data from the device!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
     <string name="remove_account_failed">This change isn\'t allowed by your admin</string>
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
