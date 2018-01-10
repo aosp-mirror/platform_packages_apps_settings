@@ -30,11 +30,9 @@ public class ZenModeAlarmsPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_alarms";
-    private final ZenModeBackend mBackend;
 
     public ZenModeAlarmsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override

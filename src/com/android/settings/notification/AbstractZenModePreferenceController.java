@@ -31,7 +31,6 @@ import android.service.notification.ScheduleCalendar;
 import android.service.notification.ZenModeConfig;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.Slog;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -54,6 +53,7 @@ abstract public class AbstractZenModePreferenceController extends
     final private NotificationManager mNotificationManager;
     protected static ZenModeConfigWrapper mZenModeConfigWrapper;
     protected MetricsFeatureProvider mMetricsFeatureProvider;
+    protected final ZenModeBackend mBackend;
 
     public AbstractZenModePreferenceController(Context context, String key,
             Lifecycle lifecycle) {
@@ -68,6 +68,7 @@ abstract public class AbstractZenModePreferenceController extends
 
         final FeatureFactory featureFactory = FeatureFactory.getFactory(mContext);
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
+        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override
@@ -90,6 +91,14 @@ abstract public class AbstractZenModePreferenceController extends
         }
     }
 
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        mBackend.updatePolicy();
+        mBackend.updateZenMode();
+    }
+
     protected NotificationManager.Policy getPolicy() {
         return mNotificationManager.getNotificationPolicy();
     }
@@ -99,8 +108,8 @@ abstract public class AbstractZenModePreferenceController extends
     }
 
     protected int getZenMode() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.ZEN_MODE, 0);
+        return Settings.Global.getInt(mContext.getContentResolver(), Settings.Global.ZEN_MODE,
+                mBackend.mZenMode);
     }
 
     class SettingObserver extends ContentObserver {
@@ -187,7 +196,6 @@ abstract public class AbstractZenModePreferenceController extends
                         return nextAlarm;
                     }
                 }
-
 
                 return endTimeMs;
             }

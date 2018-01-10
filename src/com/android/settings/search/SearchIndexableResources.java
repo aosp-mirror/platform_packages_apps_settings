@@ -36,7 +36,6 @@ import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
-import com.android.settings.datausage.DataUsageMeteredSettings;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
@@ -50,6 +49,7 @@ import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageSummary;
+import com.android.settings.fuelgauge.SmartBatterySettings;
 import com.android.settings.gestures.AssistGestureSettings;
 import com.android.settings.gestures.DoubleTapPowerSettings;
 import com.android.settings.gestures.DoubleTapScreenSettings;
@@ -110,7 +110,6 @@ public final class SearchIndexableResources {
         addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
-        addIndex(DataUsageMeteredSettings.class);
         addIndex(ScreenZoomSettings.class);
         addIndex(DisplaySettings.class);
         addIndex(AmbientDisplaySettings.class);
@@ -174,6 +173,7 @@ public final class SearchIndexableResources {
         addIndex(ZenModeBehaviorSettings.class);
         addIndex(ZenModeAutomationSettings.class);
         addIndex(NightDisplaySettings.class);
+        addIndex(SmartBatterySettings.class);
     }
 
     private SearchIndexableResources() {

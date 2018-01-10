@@ -82,7 +82,6 @@ public class ZenModeBackend {
         mZenMode = zenMode;
     }
 
-    /** gets last zen mode set by setZenMode or updateZenMode **/
     protected int getZenMode() {
         mZenMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ZEN_MODE, mZenMode);

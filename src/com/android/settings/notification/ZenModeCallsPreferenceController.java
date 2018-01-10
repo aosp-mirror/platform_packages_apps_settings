@@ -26,11 +26,9 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeCallsPreferenceController extends AbstractZenModePreferenceController {
 
     protected static final String KEY = "zen_mode_calls";
-    private final ZenModeBackend mBackend;
 
     public ZenModeCallsPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override

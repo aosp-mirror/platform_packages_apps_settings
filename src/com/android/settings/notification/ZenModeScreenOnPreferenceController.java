@@ -29,11 +29,9 @@ public class ZenModeScreenOnPreferenceController extends
         AbstractZenModePreferenceController implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_screen_on";
-    private final ZenModeBackend mBackend;
 
     public ZenModeScreenOnPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
-        mBackend = ZenModeBackend.getInstance(context);
     }
 
     @Override
