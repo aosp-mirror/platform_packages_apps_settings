@@ -84,9 +84,19 @@
                         android:id="@+id/headerText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="10dp"
                         android:gravity="?attr/suwGlifHeaderGravity"
                         android:textSize="18sp"/>
+
+                    <Button
+                        android:id="@+id/screen_lock_options"
+                        style="@style/SuwGlifButton.Tertiary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="?attr/suwGlifHeaderGravity"
+                        android:text="@string/setup_lock_settings_options_button_label"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
