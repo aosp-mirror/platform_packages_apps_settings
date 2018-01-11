@@ -27,11 +27,11 @@ import android.support.v7.preference.Preference;
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AmbientDisplayNotificationsPreferenceController extends
         AbstractPreferenceController implements PreferenceControllerMixin,

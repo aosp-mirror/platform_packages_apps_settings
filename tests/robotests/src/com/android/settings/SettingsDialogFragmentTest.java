@@ -17,6 +17,7 @@ package com.android.settings;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,8 @@ public class SettingsDialogFragmentTest {
     private static final int DIALOG_ID = 15;
 
     @Mock
+    private Context mContext;
+    @Mock
     private DialogCreatableFragment mDialogCreatable;
     private SettingsPreferenceFragment.SettingsDialogFragment mDialogFragment;
 
@@ -53,9 +56,10 @@ public class SettingsDialogFragmentTest {
 
         mDialogFragment =
                 new SettingsPreferenceFragment.SettingsDialogFragment(mDialogCreatable, DIALOG_ID);
+        mDialogFragment.onAttach(mContext);
         mDialogFragment.getMetricsCategory();
 
-        // getDialogMetricsCategory called in constructor, and explicitly in test.
+        // getDialogMetricsCategory called in onAttach, and explicitly in test.
         verify(mDialogCreatable, times(2)).getDialogMetricsCategory(DIALOG_ID);
     }
 
@@ -66,6 +70,7 @@ public class SettingsDialogFragmentTest {
         try {
             mDialogFragment = new SettingsPreferenceFragment.SettingsDialogFragment(
                     mDialogCreatable, DIALOG_ID);
+            mDialogFragment.onAttach(mContext);
         } catch (IllegalStateException e) {
             // getDialogMetricsCategory called in constructor
             verify(mDialogCreatable).getDialogMetricsCategory(DIALOG_ID);

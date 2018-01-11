@@ -31,11 +31,11 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;

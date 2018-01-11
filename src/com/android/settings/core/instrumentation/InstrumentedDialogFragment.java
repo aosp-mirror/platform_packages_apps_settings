@@ -19,6 +19,9 @@ import android.content.Context;
 
 import com.android.settings.DialogCreatable;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservableDialogFragment;
 
 public abstract class InstrumentedDialogFragment extends ObservableDialogFragment
@@ -38,13 +41,15 @@ public abstract class InstrumentedDialogFragment extends ObservableDialogFragmen
     public InstrumentedDialogFragment(DialogCreatable dialogCreatable, int dialogId) {
         mDialogCreatable = dialogCreatable;
         mDialogId = dialogId;
-        mLifecycle.addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
     }
-
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context)
+                .getMetricsFeatureProvider();
+        mLifecycle.addObserver(new VisibilityLoggerMixin(getMetricsCategory(),
+                mMetricsFeatureProvider));
+        mLifecycle.onAttach(context);
     }
 }

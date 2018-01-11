@@ -30,10 +30,10 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
