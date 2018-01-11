@@ -51,22 +51,15 @@ public class SummaryDetectorTest {
     @Test
     public void testDetect_disabledByPolicy_tipInvisible() {
         ReflectionHelpers.setField(mPolicy, "summaryEnabled", false);
-        SummaryDetector detector = new SummaryDetector(mPolicy, 0 /* visibleTips */);
+        SummaryDetector detector = new SummaryDetector(mPolicy);
 
         assertThat(detector.detect().isVisible()).isFalse();
     }
 
     @Test
-    public void testDetect_noOtherTips_tipVisible() {
-        SummaryDetector detector = new SummaryDetector(mPolicy, 0 /* visibleTips */);
+    public void testDetect_notDisabled_tipVisible() {
+        SummaryDetector detector = new SummaryDetector(mPolicy);
 
         assertThat(detector.detect().isVisible()).isTrue();
-    }
-
-    @Test
-    public void testDetect_hasOtherTips_tipInVisible() {
-        SummaryDetector detector = new SummaryDetector(mPolicy, 1 /* visibleTips */);
-
-        assertThat(detector.detect().isVisible()).isFalse();
     }
 }

@@ -22,7 +22,6 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.batterytip.detectors.BatteryTipDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
@@ -47,9 +46,8 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
     private static final boolean USE_FAKE_DATA = false;
 
     private BatteryStatsHelper mBatteryStatsHelper;
-    private BatteryUtils mBatteryUtils;
     @VisibleForTesting
-    int mVisibleTips;
+    BatteryUtils mBatteryUtils;
 
     public BatteryTipLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
         super(context);
@@ -66,16 +64,12 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG);
         final Context context = getContext();
-        mVisibleTips = 0;
 
-        addBatteryTipFromDetector(tips, new LowBatteryDetector(policy, batteryInfo));
-        addBatteryTipFromDetector(tips,
-                new HighUsageDetector(context, policy, mBatteryStatsHelper));
-        addBatteryTipFromDetector(tips,
-                new SmartBatteryDetector(policy, context.getContentResolver()));
-        addBatteryTipFromDetector(tips, new EarlyWarningDetector(policy, context));
-        // Add summary detector at last since it need other detectors to update the mVisibleTips
-        addBatteryTipFromDetector(tips, new SummaryDetector(policy, mVisibleTips));
+        tips.add(new LowBatteryDetector(policy, batteryInfo).detect());
+        tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper).detect());
+        tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
+        tips.add(new EarlyWarningDetector(policy, context).detect());
+        tips.add(new SummaryDetector(policy).detect());
 
         Collections.sort(tips);
         return tips;
@@ -91,14 +85,6 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         tips.add(new LowBatteryTip(BatteryTip.StateType.NEW));
 
         return tips;
-    }
-
-    @VisibleForTesting
-    void addBatteryTipFromDetector(final List<BatteryTip> tips,
-            final BatteryTipDetector detector) {
-        final BatteryTip batteryTip = detector.detect();
-        mVisibleTips += batteryTip.isVisible() ? 1 : 0;
-        tips.add(batteryTip);
     }
 
 }

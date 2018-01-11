@@ -98,6 +98,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
                 final Preference preference = batteryTip.buildPreference(mPrefContext);
                 mBatteryTipMap.put(preference.getKey(), batteryTip);
                 mPreferenceGroup.addPreference(preference);
+                break;
             }
         }
     }

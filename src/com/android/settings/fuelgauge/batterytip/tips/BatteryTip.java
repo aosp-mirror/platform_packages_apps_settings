@@ -52,13 +52,13 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
             TipType.REDUCED_BATTERY,
             TipType.LOW_BATTERY})
     public @interface TipType {
-        int SUMMARY = 0;
-        int BATTERY_SAVER = 1;
+        int SMART_BATTERY_MANAGER = 0;
+        int APP_RESTRICTION = 1;
         int HIGH_DEVICE_USAGE = 2;
-        int SMART_BATTERY_MANAGER = 3;
-        int APP_RESTRICTION = 4;
-        int REDUCED_BATTERY = 5;
-        int LOW_BATTERY = 6;
+        int BATTERY_SAVER = 3;
+        int REDUCED_BATTERY = 4;
+        int LOW_BATTERY = 5;
+        int SUMMARY = 6;
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
