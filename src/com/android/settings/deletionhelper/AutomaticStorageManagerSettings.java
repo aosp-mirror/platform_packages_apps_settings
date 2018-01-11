@@ -81,6 +81,8 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     private void initializeSwitchBar() {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        mSwitchBar.setSwitchBarText(R.string.automatic_storage_manager_master_switch_title,
+                R.string.automatic_storage_manager_master_switch_title);
         mSwitchBar.show();
         mSwitchController =
                 new AutomaticStorageManagerSwitchBarController(

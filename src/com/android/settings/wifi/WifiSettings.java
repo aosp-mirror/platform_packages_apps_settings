@@ -190,6 +190,9 @@ public class WifiSettings extends RestrictedSettingsFragment
                     .findViewById(R.id.progress_bar_animation);
             setProgressBarVisible(false);
         }
+        ((SettingsActivity) activity).getSwitchBar().setSwitchBarText(
+                R.string.wifi_settings_master_switch_title,
+                R.string.wifi_settings_master_switch_title);
     }
 
     @Override

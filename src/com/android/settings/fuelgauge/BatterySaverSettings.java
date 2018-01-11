@@ -87,6 +87,8 @@ public class BatterySaverSettings extends SettingsPreferenceFragment
                 .setTitle(com.android.internal.R.string.battery_saver_description);
         mContext = getActivity();
         mSwitchBar = ((SettingsActivity) mContext).getSwitchBar();
+        mSwitchBar.setSwitchBarText(R.string.battery_saver_master_switch_title,
+                R.string.battery_saver_master_switch_title);
         mSwitch = mSwitchBar.getSwitch();
         mSwitchBar.show();
 
