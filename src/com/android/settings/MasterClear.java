@@ -78,6 +78,9 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     private static final int KEYGUARD_REQUEST = 55;
     private static final int CREDENTIAL_CONFIRM_REQUEST = 56;
 
+    private static final String KEY_SHOW_ESIM_RESET_CHECKBOX
+            = "masterclear.allow_retain_esim_profiles_after_fdr";
+
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
@@ -85,6 +88,8 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     private Button mInitiateButton;
     private View mExternalStorageContainer;
     @VisibleForTesting CheckBox mExternalStorage;
+    private View mEsimStorageContainer;
+    @VisibleForTesting CheckBox mEsimStorage;
     private ScrollView mScrollView;
 
     private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
@@ -134,8 +139,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     void showFinalConfirmation() {
         Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
-        // TODO: Offer the user a choice to wipe eSIMs when it is technically feasible to do so.
-        args.putBoolean(ERASE_ESIMS_EXTRA, true);
+        args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
         ((SettingsActivity) getActivity()).startPreferencePanel(
                 this, MasterClearConfirm.class.getName(),
                 args, R.string.master_clear_confirm_title, null, null, 0);
@@ -214,6 +218,8 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
         mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
+        mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
         mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
@@ -248,11 +254,25 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         }
 
         if (showWipeEuicc()) {
-            final View esimAlsoErased = mContentView.findViewById(R.id.also_erases_esim);
-            esimAlsoErased.setVisibility(View.VISIBLE);
+            if (showWipeEuiccCheckbox()) {
+                TextView title = mContentView.findViewById(R.id.erase_esim_title);
+                title.setText(R.string.erase_esim_storage);
+                mEsimStorageContainer.setVisibility(View.VISIBLE);
+                mEsimStorageContainer.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mEsimStorage.toggle();
+                    }
+                });
+            } else {
+                final View esimAlsoErased = mContentView.findViewById(R.id.also_erases_esim);
+                esimAlsoErased.setVisibility(View.VISIBLE);
 
-            final View noCancelMobilePlan = mContentView.findViewById(R.id.no_cancel_mobile_plan);
-            noCancelMobilePlan.setVisibility(View.VISIBLE);
+                final View noCancelMobilePlan = mContentView.findViewById(
+                        R.id.no_cancel_mobile_plan);
+                noCancelMobilePlan.setVisibility(View.VISIBLE);
+                mEsimStorage.setChecked(true /* checked */);
+            }
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
@@ -291,6 +311,12 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         }
         ContentResolver cr = context.getContentResolver();
         return Settings.Global.getInt(cr, Settings.Global.EUICC_PROVISIONED, 0) != 0;
+    }
+
+    @VisibleForTesting
+    boolean showWipeEuiccCheckbox() {
+        return SystemProperties
+                .getBoolean(KEY_SHOW_ESIM_RESET_CHECKBOX, false /* def */);
     }
 
     @VisibleForTesting

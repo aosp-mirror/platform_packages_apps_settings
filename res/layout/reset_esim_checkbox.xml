@@ -13,7 +13,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -21,7 +22,8 @@
     android:clickable="true"
     android:visibility="gone">
 
-    <CheckBox android:id="@+id/erase_esim"
+    <CheckBox
+        android:id="@+id/erase_esim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -30,12 +32,14 @@
         android:clickable="false"
         android:duplicateParentState="true" />
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
-        <TextView android:id="@+id/erase_esim_title"
+        <TextView
+            android:id="@+id/erase_esim_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/reset_checkbox_title_padding_top"
