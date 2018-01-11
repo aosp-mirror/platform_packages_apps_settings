@@ -43,7 +43,7 @@ public class SwitchBarController extends SwitchWidgetController implements
 
     @Override
     public void updateTitle(boolean isChecked) {
-        mSwitchBar.setTextViewLabel(isChecked);
+        mSwitchBar.setTextViewLabelAndBackground(isChecked);
     }
 
     @Override

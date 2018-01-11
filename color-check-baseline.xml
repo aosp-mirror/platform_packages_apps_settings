@@ -2,18 +2,6 @@
 <issues format="4">
 
     <issue
-        id="LintError"
-        severity="Error"
-        message="No `.class` files were found in project &quot;.&quot;, so none of the classfile based checks could be run. Does the project need to be built first?"
-        category="Lint"
-        priority="10"
-        summary="Lint Failure"
-        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.&#xA;These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
-        <location
-            file="."/>
-    </issue>
-
-    <issue
         id="HardCodedColor"
         severity="Error"
         message="Avoid using hardcoded color"
@@ -757,11 +745,27 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="    &lt;color name=&quot;switch_bar_background&quot;>#ff80868B&lt;/color>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/values/colors.xml"
+            line="84"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="    &lt;color name=&quot;message_text_incoming&quot;>#ffffffff&lt;/color>"
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="85"
+            line="87"
             column="5"/>
     </issue>
 
@@ -777,7 +781,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="86"
+            line="88"
             column="5"/>
     </issue>
 
@@ -793,7 +797,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="87"
+            line="89"
             column="5"/>
     </issue>
 
@@ -809,7 +813,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="88"
+            line="90"
             column="5"/>
     </issue>
 
@@ -825,7 +829,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="89"
+            line="91"
             column="5"/>
     </issue>
 
@@ -841,7 +845,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="90"
+            line="92"
             column="5"/>
     </issue>
 
@@ -857,7 +861,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="91"
+            line="93"
             column="5"/>
     </issue>
 
@@ -873,7 +877,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="92"
+            line="94"
             column="5"/>
     </issue>
 
@@ -889,7 +893,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="93"
+            line="95"
             column="5"/>
     </issue>
 
@@ -905,7 +909,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="94"
+            line="96"
             column="5"/>
     </issue>
 
@@ -921,7 +925,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="95"
+            line="97"
             column="5"/>
     </issue>
 
@@ -937,7 +941,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="98"
+            line="100"
             column="5"/>
     </issue>
 
@@ -953,7 +957,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="100"
+            line="102"
             column="5"/>
     </issue>
 
@@ -969,7 +973,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="103"
+            line="105"
             column="5"/>
     </issue>
 
@@ -985,7 +989,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="105"
+            line="107"
             column="5"/>
     </issue>
 
@@ -1001,7 +1005,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="108"
+            line="110"
             column="5"/>
     </issue>
 
@@ -1017,7 +1021,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="111"
+            line="113"
             column="5"/>
     </issue>
 
@@ -1033,7 +1037,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="114"
+            line="116"
             column="5"/>
     </issue>
 
@@ -1049,7 +1053,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="117"
+            line="119"
             column="5"/>
     </issue>
 
@@ -1065,7 +1069,7 @@
         errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/colors.xml"
-            line="118"
+            line="120"
             column="5"/>
     </issue>
 
@@ -1305,7 +1309,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_color_inversion.xml"
-            line="17"
+            line="32"
             column="23"/>
     </issue>
 
@@ -1321,7 +1325,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_color_inversion.xml"
-            line="18"
+            line="33"
             column="23"/>
     </issue>
 
@@ -1337,7 +1341,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_color_inversion.xml"
-            line="32"
+            line="47"
             column="23"/>
     </issue>
 
@@ -1353,7 +1357,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_color_inversion.xml"
-            line="33"
+            line="48"
             column="23"/>
     </issue>
 
@@ -1369,7 +1373,7 @@
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_daltonizer.xml"
-            line="16"
+            line="31"
             column="27"/>
     </issue>
 
@@ -1385,7 +1389,7 @@
         errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_daltonizer.xml"
-            line="17"
+            line="32"
             column="27"/>
     </issue>
 
@@ -1401,7 +1405,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_daltonizer.xml"
-            line="36"
+            line="51"
             column="23"/>
     </issue>
 
@@ -1417,7 +1421,7 @@
         errorLine2="                      ~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_daltonizer.xml"
-            line="37"
+            line="52"
             column="23"/>
     </issue>
 
@@ -2073,7 +2077,7 @@
         errorLine2="                                                                                                                                                                       ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rXC/strings.xml"
-            line="2333"
+            line="2353"
             column="168"/>
     </issue>
 
@@ -2089,7 +2093,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rAU/strings.xml"
-            line="2334"
+            line="2354"
             column="64"/>
     </issue>
 
@@ -2105,7 +2109,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rCA/strings.xml"
-            line="2334"
+            line="2354"
             column="64"/>
     </issue>
 
@@ -2121,7 +2125,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rGB/strings.xml"
-            line="2334"
+            line="2354"
             column="64"/>
     </issue>
 
@@ -2137,7 +2141,7 @@
         errorLine2="                                                               ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values-en-rIN/strings.xml"
-            line="2334"
+            line="2354"
             column="64"/>
     </issue>
 
@@ -2153,7 +2157,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5512"
+            line="5539"
             column="36"/>
     </issue>
 
@@ -2181,27 +2185,11 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;android:colorAccent&quot;>#ff009688&lt;/item>"
-        errorLine2="                                         ^">
-        <location
-            file="res/values/styles.xml"
-            line="366"
-            column="42"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="        &lt;item name=&quot;*android:regularColor&quot;>@color/lock_pattern_view_regular_color&lt;/item>"
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="443"
+            line="442"
             column="44"/>
     </issue>
 
@@ -2217,7 +2205,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="449"
+            line="448"
             column="44"/>
     </issue>
 
@@ -2233,7 +2221,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="450"
+            line="449"
             column="44"/>
     </issue>
 
@@ -2249,7 +2237,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values/styles.xml"
-            line="473"
+            line="472"
             column="41"/>
     </issue>
 
@@ -2393,7 +2381,7 @@
         errorLine2="                                          ^">
         <location
             file="res/values/themes.xml"
-            line="139"
+            line="154"
             column="43"/>
     </issue>
 
@@ -2409,7 +2397,7 @@
         errorLine2="                                         ^">
         <location
             file="res/values/themes.xml"
-            line="140"
+            line="155"
             column="42"/>
     </issue>
 
@@ -2425,7 +2413,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="141"
+            line="156"
             column="45"/>
     </issue>
 
@@ -2437,28 +2425,12 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;switchBarBackgroundColor&quot;>@color/material_grey_200&lt;/item>"
+        errorLine1="        &lt;item name=&quot;switchBarBackgroundColor&quot;>@color/switch_bar_background&lt;/item>"
         errorLine2="                                              ^">
         <location
             file="res/values/themes.xml"
-            line="147"
+            line="233"
             column="47"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="        &lt;item name=&quot;android:colorControlActivated&quot;>@color/material_blue_500&lt;/item>"
-        errorLine2="                                                   ^">
-        <location
-            file="res/values/themes.xml"
-            line="148"
-            column="52"/>
     </issue>
 
     <issue
@@ -2473,7 +2445,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="298"
+            line="316"
             column="45"/>
     </issue>
 
@@ -2489,7 +2461,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="299"
+            line="317"
             column="49"/>
     </issue>
 
@@ -2505,7 +2477,7 @@
         errorLine2="                                            ^">
         <location
             file="res/values/themes.xml"
-            line="307"
+            line="325"
             column="45"/>
     </issue>
 
@@ -2521,7 +2493,7 @@
         errorLine2="                                                ^">
         <location
             file="res/values/themes.xml"
-            line="308"
+            line="326"
             column="49"/>
     </issue>
 

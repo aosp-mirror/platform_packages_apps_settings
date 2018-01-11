@@ -24,8 +24,8 @@ public class ToggleSwitch extends Switch {
 
     private ToggleSwitch.OnBeforeCheckedChangeListener mOnBeforeListener;
 
-    public static interface OnBeforeCheckedChangeListener {
-        public boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked);
+    public interface OnBeforeCheckedChangeListener {
+        boolean onBeforeCheckedChanged(ToggleSwitch toggleSwitch, boolean checked);
     }
 
     public ToggleSwitch(Context context) {
