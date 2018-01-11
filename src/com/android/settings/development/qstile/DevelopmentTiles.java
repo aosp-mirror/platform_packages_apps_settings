@@ -16,20 +16,27 @@
 
 package com.android.settings.development.qstile;
 
+import android.os.IBinder;
+import android.os.Parcel;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.WindowManagerGlobal;
 
 import com.android.internal.app.LocalePicker;
+import com.android.settings.wrapper.IWindowManagerWrapper;
 import com.android.settingslib.development.SystemPropPoker;
 
 public abstract class DevelopmentTiles extends TileService {
+    private static final String TAG = "DevelopmentTiles";
 
     protected abstract boolean isEnabled();
 
@@ -129,6 +136,108 @@ public abstract class DevelopmentTiles extends TileService {
                 wm.setAnimationScale(1, scale);
                 wm.setAnimationScale(2, scale);
             } catch (RemoteException e) { }
+        }
+    }
+
+    /**
+     * Tile to toggle Window Trace.
+     */
+    public static class WindowTrace extends DevelopmentTiles {
+        @VisibleForTesting
+        IWindowManagerWrapper mWindowManager;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            mWindowManager = new IWindowManagerWrapper(WindowManagerGlobal
+                    .getWindowManagerService());
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            try {
+                return mWindowManager.isWindowTraceEnabled();
+            } catch (RemoteException e) {
+                Log.e(TAG,
+                        "Could not get window trace status, defaulting to false." + e.toString());
+            }
+            return false;
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            try {
+                if (isEnabled) {
+                    mWindowManager.startWindowTrace();
+                } else {
+                    mWindowManager.stopWindowTrace();
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not set window trace status." + e.toString());
+            }
+        }
+    }
+
+    /**
+     * Tile to toggle Layer Trace.
+     */
+    public static class LayerTrace extends DevelopmentTiles {
+        @VisibleForTesting
+        static final int SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE = 1025;
+        @VisibleForTesting
+        static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
+        @VisibleForTesting
+        IBinder mSurfaceFlinger;
+
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
+        }
+
+        @Override
+        protected boolean isEnabled() {
+            boolean surfaceTraceEnabled = false;
+            Parcel reply = null;
+            Parcel data = null;
+            try {
+                if (mSurfaceFlinger != null) {
+                    reply = Parcel.obtain();
+                    data = Parcel.obtain();
+                    data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                    mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE,
+                            data, reply, 0 /* flags */ );
+                    surfaceTraceEnabled = reply.readBoolean();
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not get layer trace status, defaulting to false." + e.toString());
+            } finally {
+                if (data != null) {
+                    data.recycle();
+                    reply.recycle();
+                }
+            }
+            return surfaceTraceEnabled;
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            Parcel data = null;
+            try {
+                if (mSurfaceFlinger != null) {
+                    data = Parcel.obtain();
+                    data.writeInterfaceToken("android.ui.ISurfaceComposer");
+                    data.writeInt(isEnabled ? 1 : 0);
+                    mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE,
+                            data, null, 0 /* flags */);
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not set layer tracing." + e.toString());
+            } finally {
+                if (data != null) {
+                    data.recycle();
+                }
+            }
         }
     }
 }
