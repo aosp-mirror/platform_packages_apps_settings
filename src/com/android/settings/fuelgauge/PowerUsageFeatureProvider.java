@@ -109,4 +109,13 @@ public interface PowerUsageFeatureProvider {
      * Checks whether to display the battery v2.
      */
     boolean isBatteryV2Enabled();
+
+    /**
+     * Returns a signal to indicate if the device will need to warn the user they may not make it
+     * to their next charging time.
+     *
+     * @param id Optional string used to identify the caller for metrics. Usually the class name of
+     * the caller
+     */
+    boolean getEarlyWarningSignal(Context context, String id);
 }
