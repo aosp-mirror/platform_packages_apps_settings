@@ -93,6 +93,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
         mOwnerInfoPreferenceController =
                 new OwnerInfoPreferenceController(context, this, lifecycle);
         controllers.add(mOwnerInfoPreferenceController);
+        controllers.add(new LockdownButtonPreferenceController(context));
+
         return controllers;
     }
 
@@ -122,6 +124,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                             KEY_ADD_USER_FROM_LOCK_SCREEN));
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */, null /* lifecycle */));
+                    controllers.add(new LockdownButtonPreferenceController(context));
                     return controllers;
                 }
 
