@@ -39,7 +39,7 @@
             android:title="@string/location_scanning_screen_title"
             android:fragment="com.android.settings.location.ScanningSettings"/>
 
-        <!-- This preference category gets removed if there is no managed profile -->
+        <!-- This preference gets removed if there is no managed profile -->
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="managed_profile_location_switch"
             android:title="@string/managed_profile_location_switch_title"
