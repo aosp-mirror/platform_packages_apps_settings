@@ -88,4 +88,9 @@ public interface DashboardFeatureProvider {
      */
     void openTileIntent(Activity activity, Tile tile);
 
+    /**
+     * Whether or not we should use the v2 of suggestions UI.
+     */
+    boolean useSuggestionUiV2();
+
 }

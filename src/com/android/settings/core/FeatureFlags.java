@@ -27,4 +27,5 @@ public class FeatureFlags {
     public static final String BATTERY_DISPLAY_APP_LIST = "settings_battery_display_app_list";
     public static final String SECURITY_SETTINGS_V2 = "settings_security_settings_v2";
     public static final String ZONE_PICKER_V2 = "settings_zone_picker_v2";
+    public static final String SUGGESTION_UI_V2 = "settings_suggestion_ui_v2";
 }
