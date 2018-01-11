@@ -31,7 +31,6 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.overlay.FeatureFactory;
@@ -39,6 +38,7 @@ import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiCallingSuggestionActivity;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;

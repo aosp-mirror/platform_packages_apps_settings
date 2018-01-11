@@ -29,13 +29,13 @@ import android.widget.Switch;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.BeforeClass;

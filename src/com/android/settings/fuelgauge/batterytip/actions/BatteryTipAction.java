@@ -18,7 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.content.Context;
 
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Abstract class for battery tip action, which is triggered if we need to handle the battery tip

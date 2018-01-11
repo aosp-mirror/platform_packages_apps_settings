@@ -34,9 +34,9 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;

@@ -41,7 +41,6 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderData;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
@@ -50,6 +49,7 @@ import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
