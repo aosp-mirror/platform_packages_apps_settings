@@ -41,7 +41,8 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
 
     @Override
     public boolean isAvailable() {
-        return mContext.getAssets().getLocales().length > 1;
+        return mContext.getResources().getBoolean(R.bool.config_show_phone_language)
+                && mContext.getAssets().getLocales().length > 1;
     }
 
     @Override

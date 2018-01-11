@@ -31,6 +31,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -151,12 +152,6 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
 
     @VisibleForTesting
     Drawable getBadgedIcon(String packageName, int userId) {
-        try {
-            final ApplicationInfo appInfo = mPackageManager.getApplicationInfo(packageName,
-                    PackageManager.GET_META_DATA);
-            return mIconDrawableFactory.getBadgedIcon(appInfo, userId);
-        } catch (PackageManager.NameNotFoundException e) {
-            return mPackageManager.getDefaultActivityIcon();
-        }
+        return Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, packageName, userId);
     }
 }

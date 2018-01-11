@@ -94,6 +94,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.TtsSpan;
 import android.util.ArraySet;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -1381,5 +1382,19 @@ public final class Utils extends com.android.settingslib.Utils {
             original.draw(canvas);
         }
         return new BitmapDrawable(null, bitmap);
+    }
+
+    /**
+     * Get the {@link Drawable} that represents the app icon
+     */
+    public static Drawable getBadgedIcon(IconDrawableFactory iconDrawableFactory,
+            PackageManager packageManager, String packageName, int userId) {
+        try {
+            final ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName,
+                    PackageManager.GET_META_DATA);
+            return iconDrawableFactory.getBadgedIcon(appInfo, userId);
+        } catch (PackageManager.NameNotFoundException e) {
+            return packageManager.getDefaultActivityIcon();
+        }
     }
 }

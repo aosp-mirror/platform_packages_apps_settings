@@ -47,7 +47,7 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_virtual_keyboard_pref);
     }
 
     @Override

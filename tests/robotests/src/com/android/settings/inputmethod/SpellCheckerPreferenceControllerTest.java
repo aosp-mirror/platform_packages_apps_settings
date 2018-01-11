@@ -16,7 +16,10 @@
 
 package com.android.settings.inputmethod;
 
+import static org.mockito.Mockito.spy;
+
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 import android.view.textservice.SpellCheckerInfo;
 import android.view.textservice.TextServicesManager;
@@ -46,6 +49,9 @@ public class SpellCheckerPreferenceControllerTest {
     private Context mContext;
     @Mock
     private TextServicesManager mTextServicesManager;
+    @Mock
+    private Resources mResources;
+
     private Context mAppContext;
     private Preference mPreference;
     private SpellCheckerPreferenceController mController;
@@ -56,8 +62,21 @@ public class SpellCheckerPreferenceControllerTest {
         mAppContext = RuntimeEnvironment.application;
         when(mContext.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE))
                 .thenReturn(mTextServicesManager);
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(R.bool.config_show_spellcheckers_settings)).thenReturn(true);
         mPreference = new Preference(mAppContext);
         mController = new SpellCheckerPreferenceController(mContext);
+    }
+
+    @Test
+    public void testSpellChecker_byDefault_shouldBeShown() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testSpellChecker_ifDisabled_shouldNotBeShown() {
+        when(mResources.getBoolean(R.bool.config_show_spellcheckers_settings)).thenReturn(false);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

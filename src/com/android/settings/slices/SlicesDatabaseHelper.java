@@ -104,7 +104,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
 
     public static synchronized SlicesDatabaseHelper getInstance(Context context) {
         if (sSingleton == null) {
-            sSingleton = new SlicesDatabaseHelper(context);
+            sSingleton = new SlicesDatabaseHelper(context.getApplicationContext());
         }
         return sSingleton;
     }

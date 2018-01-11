@@ -75,12 +75,13 @@
         settings:userRestriction="no_config_mobile_networks"
         settings:useAdminDisabledSummary="true" />
 
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="toggle_airplane"
         android:title="@string/airplane_mode"
         android:icon="@drawable/ic_airplanemode_active"
         android:disableDependentsState="true"
-        android:order="5" />
+        android:order="5"
+        settings:userRestriction="no_airplane_mode"/>
 
     <Preference
         android:fragment="com.android.settings.ProxySelector"

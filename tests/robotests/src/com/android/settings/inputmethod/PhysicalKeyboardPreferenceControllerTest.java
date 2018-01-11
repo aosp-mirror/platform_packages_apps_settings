@@ -18,6 +18,7 @@ package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,6 +38,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -65,8 +67,20 @@ public class PhysicalKeyboardPreferenceControllerTest {
     }
 
     @Test
-    public void shouldAlwaysBeAvailable() {
+    public void testPhysicalKeyboard_byDefault_shouldBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new PhysicalKeyboardPreferenceController(context, null);
+
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testPhysicalKeyboard_ifDisabled_shouldNotBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new PhysicalKeyboardPreferenceController(context, null);
+
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

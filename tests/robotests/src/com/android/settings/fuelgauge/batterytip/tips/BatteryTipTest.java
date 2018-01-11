@@ -19,6 +19,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.v7.preference.Preference;
 
@@ -58,10 +60,32 @@ public class BatteryTipTest {
         assertThat(preference.getIcon()).isEqualTo(mContext.getDrawable(ICON_ID));
     }
 
+    @Test
+    public void testParcelable() {
+        final BatteryTip batteryTip = new TestBatteryTip();
+
+        Parcel parcel = Parcel.obtain();
+        batteryTip.writeToParcel(parcel, batteryTip.describeContents());
+        parcel.setDataPosition(0);
+
+        final BatteryTip parcelTip = new TestBatteryTip(parcel);
+
+        assertThat(parcelTip.getTitle(mContext)).isEqualTo(TITLE);
+        assertThat(parcelTip.getSummary(mContext)).isEqualTo(SUMMARY);
+        assertThat(parcelTip.getIconId()).isEqualTo(ICON_ID);
+    }
+
     /**
      * Used to test the non abstract methods in {@link TestBatteryTip}
      */
-    public class TestBatteryTip extends BatteryTip {
+    public static class TestBatteryTip extends BatteryTip {
+        TestBatteryTip() {
+            super(TipType.SUMMARY, StateType.NEW, true);
+        }
+
+        TestBatteryTip(Parcel in) {
+            super(in);
+        }
 
         @Override
         public String getTitle(Context context) {
@@ -88,10 +112,15 @@ public class BatteryTipTest {
             // do nothing
         }
 
-        @Override
-        public Dialog buildDialog() {
-            return null;
-        }
+        public final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+            public BatteryTip createFromParcel(Parcel in) {
+                return new TestBatteryTip(in);
+            }
+
+            public BatteryTip[] newArray(int size) {
+                return new TestBatteryTip[size];
+            }
+        };
     }
 
 }

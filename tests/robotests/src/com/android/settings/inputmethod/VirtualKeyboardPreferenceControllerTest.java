@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -75,8 +76,18 @@ public class VirtualKeyboardPreferenceControllerTest {
     }
 
     @Test
-    public void shouldAlwaysBeAvailable() {
+    public void testVirtualKeyboard_byDefault_shouldBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new VirtualKeyboardPreferenceController(context);
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testVirtualKeyboard_ifDisabled_shouldNotBeShown() {
+        final Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        mController = new VirtualKeyboardPreferenceController(context);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

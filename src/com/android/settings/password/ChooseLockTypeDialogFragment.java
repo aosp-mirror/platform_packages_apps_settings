@@ -72,30 +72,30 @@ public class ChooseLockTypeDialogFragment extends InstrumentedDialogFragment
             intent.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
 
             // Copy the original extras into the new intent
+            copyBooleanExtra(activityIntent, intent,
+                    ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false);
+            copyBooleanExtra(activityIntent, intent,
+                    ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
             if (activityIntent.hasExtra(
                     ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS)) {
                 intent.putExtras(activityIntent.getBundleExtra(
                         ChooseLockGenericFragment.EXTRA_CHOOSE_LOCK_GENERIC_EXTRAS));
             }
             intent.putExtra(LockPatternUtils.PASSWORD_TYPE_KEY, selectedLockType.defaultQuality);
-
-            // Propagate the fingerprint challenge
-            intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE,
-                    activityIntent.getBooleanExtra(
-                            ChooseLockSettingsHelper.EXTRA_KEY_HAS_CHALLENGE, false));
             intent.putExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE,
                     activityIntent.getLongExtra(ChooseLockSettingsHelper.EXTRA_KEY_CHALLENGE, 0));
-
-            // The user is already given the choice of the what screen lock to set up. No need to
-            // show this button again.
-            intent.putExtra(ChooseLockGenericFragment.EXTRA_SHOW_OPTIONS_BUTTON, false);
-
             WizardManagerHelper.copyWizardManagerExtras(activityIntent, intent);
-
             activity.startActivity(intent);
             activity.finish();
         }
+
     }
+
+    private static void copyBooleanExtra(Intent from, Intent to, String name,
+            boolean defaultValue) {
+        to.putExtra(name, from.getBooleanExtra(name, defaultValue));
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

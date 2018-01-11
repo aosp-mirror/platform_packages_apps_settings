@@ -345,6 +345,17 @@ public class BatteryUtils {
 
     }
 
+    /**
+     * Calculate the screen usage time since last full charge.
+     * @param batteryStatsHelper utility class that contains the screen usage data
+     * @return time in millis
+     */
+    public long calculateScreenUsageTime(BatteryStatsHelper batteryStatsHelper) {
+        final BatterySipper sipper = findBatterySipperByType(
+                batteryStatsHelper.getUsageList(), BatterySipper.DrainType.SCREEN);
+        return sipper != null ? sipper.usageTimeMs : 0;
+    }
+
     public static void logRuntime(String tag, String message, long startTime) {
         Log.d(tag, message + ": " + (System.currentTimeMillis() - startTime) + "ms");
     }
@@ -430,6 +441,20 @@ public class BatteryUtils {
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;
+    }
+
+    /**
+     * Find the {@link BatterySipper} with the corresponding {@link BatterySipper.DrainType}
+     */
+    public BatterySipper findBatterySipperByType(List<BatterySipper> usageList,
+            BatterySipper.DrainType type) {
+        for (int i = 0, size = usageList.size(); i < size; i++) {
+            final BatterySipper sipper = usageList.get(i);
+            if (sipper.drainType == type) {
+                return sipper;
+            }
+        }
+        return null;
     }
 
     private boolean isDataCorrupted() {

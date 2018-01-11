@@ -15,7 +15,7 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     @Override
     public SlicesIndexer getSliceIndexer(Context context) {
         if (mSlicesIndexer == null) {
-            mSlicesIndexer = new SlicesIndexer(context.getApplicationContext());
+            mSlicesIndexer = new SlicesIndexer(context);
         }
         return mSlicesIndexer;
     }
@@ -29,9 +29,14 @@ public class SlicesFeatureProviderImpl implements SlicesFeatureProvider {
     }
 
     @Override
-    public void indexSliceData(Context context) {
-        // TODO (b/67996923) add indexing time log
+    public void indexSliceDataAsync(Context context) {
         SlicesIndexer indexer = getSliceIndexer(context);
         ThreadUtils.postOnBackgroundThread(indexer);
+    }
+
+    @Override
+    public void indexSliceData(Context context) {
+        SlicesIndexer indexer = getSliceIndexer(context);
+        indexer.indexSliceData();
     }
 }
