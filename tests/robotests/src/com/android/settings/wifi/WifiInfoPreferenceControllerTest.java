@@ -26,6 +26,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
@@ -61,12 +62,14 @@ public class WifiInfoPreferenceControllerTest {
     private Preference mMacPreference;
 
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private WifiInfoPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(WifiManager.class))
                 .thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString()))

@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.IConnectivityManager;
@@ -65,6 +66,7 @@ public class VpnPreferenceControllerTest {
     private Preference mPreference;
     private VpnPreferenceController mController;
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
@@ -77,7 +79,8 @@ public class VpnPreferenceControllerTest {
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
         mController = spy(new VpnPreferenceController(mContext));
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mLifecycle.addObserver(mController);
     }
 

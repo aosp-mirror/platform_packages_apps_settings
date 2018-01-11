@@ -18,6 +18,7 @@ package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 
@@ -47,11 +48,13 @@ public class RestrictedEncryptionPreferenceControllerTest {
     private ResetCredentialsPreferenceController mResetCredentialsPreferenceController;
     private UserCredentialsPreferenceController mUserCredentialsPreferenceController;
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mCredentialStoragePreferenceController =
                 new CredentialStoragePreferenceController(mContext);
         mInstallCredentialsPreferenceController =

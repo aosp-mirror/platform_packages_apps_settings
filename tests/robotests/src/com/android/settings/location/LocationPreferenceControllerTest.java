@@ -25,6 +25,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -62,6 +63,7 @@ public class LocationPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
 
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private LocationPreferenceController mController;
 
@@ -71,7 +73,8 @@ public class LocationPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new LocationPreferenceController(mContext, mLifecycle);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }

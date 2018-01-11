@@ -26,6 +26,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.preference.PreferenceScreen;
@@ -55,13 +56,15 @@ public class PictureColorModePreferenceControllerTest {
     @Mock
     private Resources mResources;
 
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private PictureColorModePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new PictureColorModePreferenceController(mContext, mLifecycle);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
                 mPreference);

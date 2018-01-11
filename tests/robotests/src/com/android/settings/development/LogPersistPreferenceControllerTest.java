@@ -19,6 +19,7 @@ package com.android.settings.development;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.support.v7.preference.ListPreference;
@@ -53,13 +54,15 @@ public class LogPersistPreferenceControllerTest {
 
     private Context mContext;
     private LogPersistPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new LogPersistPreferenceController(mContext, mFragment, mLifecycle);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         SystemProperties.set("ro.debuggable", "1");

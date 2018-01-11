@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -154,6 +155,7 @@ public class WifiDetailPreferenceControllerTest {
 
     private Context mContext;
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private LinkProperties mLinkProperties;
     private WifiDetailPreferenceController mController;
 
@@ -214,7 +216,8 @@ public class WifiDetailPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
 
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfig);
         when(mockAccessPoint.getLevel()).thenReturn(LEVEL);

@@ -28,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -64,13 +65,15 @@ public class AssistFlashScreenPreferenceControllerTest {
     private AssistFlashScreenPreferenceController.SettingObserver mObserver;
     private Context mContext;
     private AssistFlashScreenPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = RuntimeEnvironment.application;
         mController = spy(new AssistFlashScreenPreferenceController(mContext, mLifecycle));
         mLifecycle.addObserver(mController);

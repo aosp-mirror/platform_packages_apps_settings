@@ -30,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.BatteryManager;
@@ -89,13 +90,15 @@ public class BatteryHeaderPreferenceControllerTest {
     private TextView mSummary2;
     private LayoutPreference mBatteryLayoutPref;
     private Intent mBatteryIntent;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
         mBatteryMeterView = new BatteryMeterView(mContext);
         mBatteryPercentText = new TextView(mContext);

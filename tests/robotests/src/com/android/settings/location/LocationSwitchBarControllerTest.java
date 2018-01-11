@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings;
 
@@ -54,6 +55,7 @@ public class LocationSwitchBarControllerTest {
 
     private Context mContext;
     private LocationSwitchBarController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
@@ -61,7 +63,8 @@ public class LocationSwitchBarControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         ReflectionHelpers.setField(mSwitchBar, "mSwitch", mSwitch);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new LocationSwitchBarController(
                 mContext, mSwitchBar, mLifecycle));
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);

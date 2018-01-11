@@ -29,6 +29,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ComponentName;
 import android.content.Context;
 import android.support.v7.preference.Preference;
@@ -69,6 +70,7 @@ public class TrustAgentListPreferenceControllerTest {
     private SecuritySettingsV2 mFragment;
 
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private FakeFeatureFactory mFeatureFactory;
     private Activity mActivity;
 
@@ -79,7 +81,8 @@ public class TrustAgentListPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mActivity = Robolectric.buildActivity(Activity.class).get();
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(any(Context.class)))
                 .thenReturn(mLockPatternUtils);

@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
 import android.support.v7.preference.ListPreference;
@@ -65,13 +66,15 @@ public class BluetoothAudioCodecPreferenceControllerTest {
     private String[] mListValues;
     private Context mContext;
     private BluetoothAudioCodecPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new BluetoothAudioCodecPreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();
