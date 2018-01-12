@@ -34,6 +34,9 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController.
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+
+import java.util.List;
 
 /**
  * Dialog Fragment to show action dialog for each anomaly
@@ -83,6 +86,23 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                                         false /* withSeconds */)))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
+                        .create();
+            case BatteryTip.TipType.APP_RESTRICTION:
+                final RestrictAppTip restrictAppTip = (RestrictAppTip) mBatteryTip;
+                final RecyclerView restrictionView = (RecyclerView) LayoutInflater.from(
+                        context).inflate(R.layout.recycler_view, null);
+                final List<AppInfo> restrictedAppList = restrictAppTip.getRestrictAppList();
+                final int num = restrictedAppList.size();
+                restrictionView.setLayoutManager(new LinearLayoutManager(context));
+                restrictionView.setAdapter(new HighUsageAdapter(context, restrictedAppList));
+
+                return new AlertDialog.Builder(context)
+                        .setTitle(context.getResources().getQuantityString(
+                                R.plurals.battery_tip_restrict_title, num, num))
+                        .setMessage(getString(R.string.battery_tip_restrict_app_dialog_message))
+                        .setView(restrictionView)
+                        .setPositiveButton(R.string.battery_tip_restrict_app_dialog_ok, this)
+                        .setNegativeButton(android.R.string.cancel, null)
                         .create();
             default:
                 throw new IllegalArgumentException("unknown type " + mBatteryTip.getType());

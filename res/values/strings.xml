@@ -4842,6 +4842,28 @@
     <string name="battery_tip_dialog_message" product="tablet">Your tablet was used heavily and this consumed a lot of battery. Your battery is behaving normally.\n\n Your tablet was used for about <xliff:g id="hour">%1$s</xliff:g> since last full charge.\n\n Total usage:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
     <string name="battery_tip_dialog_message" product="device">Your device was used heavily and this consumed a lot of battery. Your battery is behaving normally.\n\n Your device was used for about <xliff:g id="hour">%1$s</xliff:g> since last full charge.\n\n Total usage:</string>
+    <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
+    <plurals name="battery_tip_restrict_title">
+        <item quantity="one">Restrict %1$d app</item>
+        <item quantity="other">Restrict %1$d apps</item>
+    </plurals>
+    <!-- Title for restricted app preference, showing how many app been restricted [CHAR LIMIT=NONE] -->
+    <plurals name="battery_tip_restrict_handled_title">
+        <item quantity="one">%1$d recently restricted</item>
+        <item quantity="other">%1$d apps recently restricted</item>
+    </plurals>
+    <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
+    <plurals name="battery_tip_restrict_summary">
+        <item quantity="one">%1$s has high battery usage</item>
+        <item quantity="other">%2$d apps have high battery usage</item>
+    </plurals>
+    <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_handled_summary">App changes are in progress</string>
+
+    <!-- Message for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_app_dialog_message">To save battery, you can stop this app from running in the background when it’s not being used.</string>
+    <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_app_dialog_ok">Restrict</string>
 
     <!-- Title for the smart battery manager preference [CHAR LIMIT=NONE] -->
     <string name="smart_battery_manager_title">Smart battery manager</string>

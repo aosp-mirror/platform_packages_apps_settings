@@ -27,7 +27,9 @@ import android.text.format.DateUtils;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRuntimePermissionPresenter;
@@ -55,6 +57,7 @@ public class BatteryTipDialogFragmentTest {
     private BatteryTipDialogFragment mDialogFragment;
     private Context mContext;
     private HighUsageTip mHighUsageTip;
+    private RestrictAppTip mRestrictedAppTip;
 
     @Before
     public void setUp() {
@@ -67,6 +70,7 @@ public class BatteryTipDialogFragmentTest {
         highUsageTips.add(new AppInfo.Builder().setScreenOnTimeMs(SCREEN_TIME_MS).setPackageName(
                 PACKAGE_NAME).build());
         mHighUsageTip = new HighUsageTip(SCREEN_TIME_MS, highUsageTips);
+        mRestrictedAppTip = new RestrictAppTip(BatteryTip.StateType.NEW, highUsageTips);
     }
 
     @Test
@@ -80,6 +84,20 @@ public class BatteryTipDialogFragmentTest {
 
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.battery_tip_dialog_message, "1h"));
+    }
+
+    @Test
+    public void testOnCreateDialog_restrictAppTip_fireRestrictAppDialog() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedAppTip);
+
+        FragmentTestUtil.startFragment(mDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 1 app");
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.battery_tip_restrict_app_dialog_message));
     }
 
 
