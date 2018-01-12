@@ -59,7 +59,7 @@ public class SliceBuilderUtils {
                 ? sliceData.getScreenTitle()
                 : summaryText;
 
-        RowBuilder builder = new RowBuilder(sliceData.getUri())
+        RowBuilder builder = new RowBuilder(context, sliceData.getUri())
                 .setTitle(sliceData.getTitle())
                 .setTitleItem(icon)
                 .setSubtitle(subtitleText)
@@ -75,7 +75,7 @@ public class SliceBuilderUtils {
                     sliceData.getKey());
         }
 
-        return new ListBuilder(sliceData.getUri())
+        return new ListBuilder(context, sliceData.getUri())
                 .addRow(builder)
                 .build();
     }
