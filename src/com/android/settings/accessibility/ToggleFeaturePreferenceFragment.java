@@ -23,6 +23,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
 
+import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SwitchBar;
@@ -55,6 +56,7 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         mSwitchBar = activity.getSwitchBar();
+        updateSwitchBarText(mSwitchBar);
         mToggleSwitch = mSwitchBar.getSwitch();
 
         onProcessArguments(getArguments());
@@ -81,6 +83,12 @@ public abstract class ToggleFeaturePreferenceFragment extends SettingsPreference
         super.onDestroyView();
 
         removeActionBarToggleSwitch();
+    }
+
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        // Implement this to provide meaningful text in switch bar
+        switchBar.setSwitchBarText(R.string.accessibility_service_master_switch_title,
+                R.string.accessibility_service_master_switch_title);
     }
 
     protected abstract void onPreferenceToggled(String preferenceKey, boolean enabled);

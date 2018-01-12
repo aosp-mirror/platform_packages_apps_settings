@@ -93,6 +93,12 @@ public class ToggleDaltonizerPreferenceFragment extends ToggleFeaturePreferenceF
         mSwitchBar.removeOnSwitchChangeListener(this);
     }
 
+    @Override
+    protected void updateSwitchBarText(SwitchBar switchBar) {
+        switchBar.setSwitchBarText(R.string.accessibility_daltonizer_master_switch_title,
+                R.string.accessibility_daltonizer_master_switch_title);
+    }
+
     private void initPreferences() {
         final String value = Integer.toString(
                 Settings.Secure.getInt(getContentResolver(), TYPE, DEFAULT_TYPE));
