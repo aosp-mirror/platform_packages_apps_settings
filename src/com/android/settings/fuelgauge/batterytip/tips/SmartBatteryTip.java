@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,31 +18,31 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.content.Context;
 import android.os.Parcel;
-import android.os.Parcelable;
+import android.provider.Settings;
 
 import com.android.settings.R;
 
 /**
- * Tip to show current battery life is short
+ * Tip to suggest turn on smart battery if it is not on
  */
-public class LowBatteryTip extends BatteryTip {
+public class SmartBatteryTip extends BatteryTip {
 
-    public LowBatteryTip(@StateType int state) {
-        super(TipType.LOW_BATTERY, state, false /* showDialog */);
+    public SmartBatteryTip(@StateType int state) {
+        super(TipType.SMART_BATTERY_MANAGER, state, false /* showDialog */);
     }
 
-    private LowBatteryTip(Parcel in) {
+    private SmartBatteryTip(Parcel in) {
         super(in);
     }
 
     @Override
     public CharSequence getTitle(Context context) {
-        return context.getString(R.string.battery_tip_low_battery_title);
+        return context.getString(R.string.battery_tip_smart_battery_title);
     }
 
     @Override
     public CharSequence getSummary(Context context) {
-        return context.getString(R.string.battery_tip_low_battery_summary);
+        return context.getString(R.string.battery_tip_smart_battery_summary);
     }
 
     @Override
@@ -55,13 +55,13 @@ public class LowBatteryTip extends BatteryTip {
         mState = tip.mState;
     }
 
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+    public static final Creator CREATOR = new Creator() {
         public BatteryTip createFromParcel(Parcel in) {
-            return new LowBatteryTip(in);
+            return new SmartBatteryTip(in);
         }
 
         public BatteryTip[] newArray(int size) {
-            return new LowBatteryTip[size];
+            return new SmartBatteryTip[size];
         }
     };
 

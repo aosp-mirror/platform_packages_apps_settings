@@ -107,11 +107,6 @@ public class BatteryTipTest {
             // do nothing
         }
 
-        @Override
-        public void action() {
-            // do nothing
-        }
-
         public final Parcelable.Creator CREATOR = new Parcelable.Creator() {
             public BatteryTip createFromParcel(Parcel in) {
                 return new TestBatteryTip(in);

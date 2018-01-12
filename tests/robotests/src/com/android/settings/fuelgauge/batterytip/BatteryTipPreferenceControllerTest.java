@@ -15,6 +15,9 @@
  */
 package com.android.settings.fuelgauge.batterytip;
 
+import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
+        .SMART_BATTERY_MANAGER;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -29,6 +32,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -57,6 +61,8 @@ public class BatteryTipPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock
     private BatteryTip mBatteryTip;
+    @Mock
+    private SettingsActivity mSettingsActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
 
@@ -85,7 +91,7 @@ public class BatteryTipPreferenceControllerTest {
         mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE));
 
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(mContext, KEY_PREF,
-                null, mBatteryTipListener);
+                mSettingsActivity, null, mBatteryTipListener);
         mBatteryTipPreferenceController.mPreferenceGroup = mPreferenceGroup;
         mBatteryTipPreferenceController.mPrefContext = mContext;
     }
@@ -109,7 +115,8 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_noDialog_invokeAction() {
+    public void testHandlePreferenceTreeClick_noDialog_invokeCallback() {
+        doReturn(SMART_BATTERY_MANAGER).when(mBatteryTip).getType();
         List<BatteryTip> batteryTips = new ArrayList<>();
         batteryTips.add(mBatteryTip);
         doReturn(mPreference).when(mBatteryTip).buildPreference(any());
@@ -119,7 +126,7 @@ public class BatteryTipPreferenceControllerTest {
 
         mBatteryTipPreferenceController.handlePreferenceTreeClick(mPreference);
 
-        verify(mBatteryTip).action();
+        verify(mBatteryTipListener).onBatteryTipHandled(mBatteryTip);
     }
 
     private void assertOnlyContainsSummaryTip(final PreferenceGroup preferenceGroup) {

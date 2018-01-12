@@ -78,11 +78,6 @@ public class HighUsageTip extends BatteryTip {
         mState = tip.mState;
     }
 
-    @Override
-    public void action() {
-        // do nothing
-    }
-
     public long getScreenTimeMs() {
         return mScreenTimeMs;
     }

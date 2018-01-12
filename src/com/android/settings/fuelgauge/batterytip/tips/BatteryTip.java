@@ -105,11 +105,6 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      */
     public abstract void updateState(BatteryTip tip);
 
-    /**
-     * Execute the action for this {@link BatteryTip}
-     */
-    public abstract void action();
-
     public Preference buildPreference(Context context) {
         Preference preference = new Preference(context);
 
