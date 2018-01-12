@@ -232,7 +232,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         Intent intent = activity.getIntent();
         Bundle args = getArguments();
         int screenTitle = intent.getIntExtra(
-                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.notifications_label);
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, R.string.application_info_label);
         String className = args != null ? args.getString(EXTRA_CLASSNAME) : null;
         if (className == null) {
             className = intent.getComponent().getClassName();
