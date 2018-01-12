@@ -15,24 +15,16 @@
  */
 package com.android.settings.testutils;
 
-import android.app.Fragment;
-import android.content.Intent;
-
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
 import org.robolectric.res.Fs;
 import org.robolectric.res.ResourcePath;
-import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
-
-import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
-import static org.robolectric.Robolectric.getShadowsAdapter;
-
-import com.android.settings.SettingsActivity;
 
 /**
  * Custom test runner for the testing of BluetoothPairingDialogs. This is needed because the
@@ -54,68 +46,49 @@ public class SettingsRobolectricTestRunner extends RobolectricTestRunner {
      */
     @Override
     protected AndroidManifest getAppManifest(Config config) {
-        // Using the manifest file's relative path, we can figure out the application directory.
-        final String appRoot = "packages/apps/Settings";
-        final String manifestPath = appRoot + "/AndroidManifest.xml";
-        final String resDir = appRoot + "/tests/robotests/res";
-        final String assetsDir = appRoot + config.assetDir();
+        try {
+            // Using the manifest file's relative path, we can figure out the application directory.
+            final URL appRoot = new URL("file:packages/apps/Settings/");
+            final URL manifestPath = new URL(appRoot, "AndroidManifest.xml");
+            final URL resDir = new URL(appRoot, "tests/robotests/res");
+            final URL assetsDir = new URL(appRoot, "tests/robotests/assets");
 
-        // By adding any resources from libraries we need the AndroidManifest, we can access
-        // them from within the parallel universe's resource loader.
-        return new AndroidManifest(Fs.fileFromPath(manifestPath), Fs.fileFromPath(resDir),
-            Fs.fileFromPath(assetsDir), "com.android.settings") {
-            @Override
-            public List<ResourcePath> getIncludedResourcePaths() {
-                List<ResourcePath> paths = super.getIncludedResourcePaths();
-                SettingsRobolectricTestRunner.getIncludedResourcePaths(getPackageName(), paths);
-                return paths;
-            }
-        };
+            // By adding any resources from libraries we need the AndroidManifest, we can access
+            // them from within the parallel universe's resource loader.
+            return new AndroidManifest(Fs.fromURL(manifestPath), Fs.fromURL(resDir),
+                Fs.fromURL(assetsDir), "com.android.settings") {
+                @Override
+                public List<ResourcePath> getIncludedResourcePaths() {
+                    final List<ResourcePath> paths = super.getIncludedResourcePaths();
+                    addIncludedResourcePaths(paths);
+                    return paths;
+                }
+            };
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("SettingsRobolectricTestRunner failure", e);
+        }
     }
 
-    public static void getIncludedResourcePaths(String packageName, List<ResourcePath> paths) {
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./packages/apps/Settings/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/base/packages/SettingsLib/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/base/core/res/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/opt/setupwizard/library/main/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/opt/setupwizard/library/gingerbread/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/opt/setupwizard/library/recyclerview/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/support/v7/appcompat/res"),
-                null));
-        paths.add(new ResourcePath(
-                null,
-                Fs.fileFromPath("./frameworks/support/v7/cardview/res"),
-                null));
-    }
-
-    // A simple utility class to start a Settings fragment with an intent. The code here is almost
-    // the same as FragmentTestUtil.startFragment except that it starts an activity with an intent.
-    public static void startSettingsFragment(
-            Fragment fragment, Class<? extends SettingsActivity> activityClass) {
-        Intent intent = new Intent().putExtra(EXTRA_SHOW_FRAGMENT, fragment.getClass().getName());
-        SettingsActivity activity = ActivityController.of(
-                getShadowsAdapter(), ReflectionHelpers.callConstructor(activityClass), intent)
-                .setup().get();
-        activity.getFragmentManager().beginTransaction().add(fragment, null).commit();
+    public static void addIncludedResourcePaths(List<ResourcePath> paths) {
+        try {
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:packages/apps/Settings/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/base/packages/SettingsLib/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/base/core/res/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/main/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/gingerbread/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/opt/setupwizard/library/recyclerview/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/support/v7/appcompat/res")), null));
+            paths.add(new ResourcePath(null,
+                Fs.fromURL(new URL("file:frameworks/support/v7/cardview/res")), null));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("SettingsRobolectricTestRunner failure", e);
+        }
     }
 }
