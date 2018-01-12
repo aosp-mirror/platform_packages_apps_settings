@@ -23,6 +23,7 @@ import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
+import com.android.settings.applications.AppStateStorageAccessBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settingslib.applications.ApplicationsState;
@@ -65,14 +66,15 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_WITH_OVERLAY = 10;
     public static final int FILTER_APPS_WRITE_SETTINGS = 11;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
-    // Next id: 13
+    public static final int FILTER_APP_HAS_STORAGE_ACCESS = 13;
+    // Next id: 14
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[13];
+        mFilters = new AppFilterItem[14];
 
         // High power whitelist, on
         mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
@@ -155,6 +157,12 @@ public class AppFilterRegistry {
                 AppStateInstallAppsBridge.FILTER_APP_SOURCES,
                 FILTER_APPS_INSTALL_SOURCES,
                 R.string.filter_install_sources_apps);
+
+        // Apps that interacted with storage access permissions (A.K.A. Scoped Directory Access)
+        mFilters[FILTER_APP_HAS_STORAGE_ACCESS] = new AppFilterItem(
+                AppStateStorageAccessBridge.FILTER_APP_HAS_STORAGE_ACCESS,
+                FILTER_APP_HAS_STORAGE_ACCESS,
+                R.string.filter_install_sources_apps);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -177,6 +185,8 @@ public class AppFilterRegistry {
                 return FILTER_APPS_WRITE_SETTINGS;
             case ManageApplications.LIST_TYPE_MANAGE_SOURCES:
                 return FILTER_APPS_INSTALL_SOURCES;
+            case ManageApplications.LIST_TYPE_STORAGE_ACCESS:
+                return FILTER_APP_HAS_STORAGE_ACCESS;
             default:
                 return FILTER_APPS_ALL;
         }
