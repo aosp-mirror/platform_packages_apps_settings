@@ -129,7 +129,7 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if (preference == mWorkModePreference) {
             boolean quietModeEnabled = !(boolean) newValue;
-            mUserManager.trySetQuietModeEnabled(quietModeEnabled, mManagedUser);
+            mUserManager.requestQuietModeEnabled(quietModeEnabled, mManagedUser);
             return true;
         }
         if (preference == mContactPrefrence) {

@@ -91,7 +91,7 @@ public class WorkModeCondition extends Condition {
     public void onActionClick(int index) {
         if (index == 0) {
             if (mUserHandle != null) {
-                mUm.trySetQuietModeEnabled(false, mUserHandle);
+                mUm.requestQuietModeEnabled(false, mUserHandle);
             }
             setActive(false);
         } else {
