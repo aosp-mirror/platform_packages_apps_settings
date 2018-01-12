@@ -63,12 +63,14 @@ public class EntityHeaderController {
 
     @IntDef({ActionType.ACTION_NONE,
             ActionType.ACTION_APP_PREFERENCE,
-            ActionType.ACTION_NOTIF_PREFERENCE})
+            ActionType.ACTION_NOTIF_PREFERENCE,
+            ActionType.ACTION_DND_RULE_PREFERENCE,})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ActionType {
         int ACTION_NONE = 0;
         int ACTION_APP_PREFERENCE = 1;
         int ACTION_NOTIF_PREFERENCE = 2;
+        int ACTION_DND_RULE_PREFERENCE = 3;
     }
 
     public static final String PREF_KEY_APP_HEADER = "pref_app_header";
@@ -98,6 +100,8 @@ public class EntityHeaderController {
     private boolean mHasAppInfoLink;
 
     private boolean mIsInstantApp;
+
+    private View.OnClickListener mEditRuleNameOnClickListener;
 
     /**
      * Creates a new instance of the controller.
@@ -209,6 +213,11 @@ public class EntityHeaderController {
 
     public EntityHeaderController setIsInstantApp(boolean isInstantApp) {
         this.mIsInstantApp = isInstantApp;
+        return this;
+    }
+
+    public EntityHeaderController setEditZenRuleNameListener(View.OnClickListener listener) {
+        this.mEditRuleNameOnClickListener = listener;
         return this;
     }
 
@@ -330,6 +339,16 @@ public class EntityHeaderController {
             return;
         }
         switch (action) {
+            case ActionType.ACTION_DND_RULE_PREFERENCE: {
+                if (mEditRuleNameOnClickListener == null) {
+                    button.setVisibility(View.GONE);
+                } else {
+                    button.setImageResource(R.drawable.ic_mode_edit);
+                    button.setVisibility(View.VISIBLE);
+                    button.setOnClickListener(mEditRuleNameOnClickListener);
+                }
+                return;
+            }
             case ActionType.ACTION_NOTIF_PREFERENCE: {
                 if (mAppNotifPrefIntent == null) {
                     button.setVisibility(View.GONE);
