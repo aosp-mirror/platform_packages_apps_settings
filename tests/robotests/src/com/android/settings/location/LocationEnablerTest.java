@@ -30,6 +30,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.ActivityManager;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.UserInfo;
@@ -66,6 +67,7 @@ public class LocationEnablerTest {
 
     private Context mContext;
     private LocationEnabler mEnabler;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
@@ -73,7 +75,8 @@ public class LocationEnablerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mEnabler = spy(new LocationEnabler(mContext, mListener, mLifecycle));
     }
 

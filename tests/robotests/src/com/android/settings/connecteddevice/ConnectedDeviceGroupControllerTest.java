@@ -22,6 +22,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -63,6 +64,7 @@ public class ConnectedDeviceGroupControllerTest {
     private Context mContext;
     private Preference mPreference;
     private ConnectedDeviceGroupController mConnectedDeviceGroupController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
@@ -72,7 +74,8 @@ public class ConnectedDeviceGroupControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
         doReturn(mContext).when(mDashboardFragment).getContext();

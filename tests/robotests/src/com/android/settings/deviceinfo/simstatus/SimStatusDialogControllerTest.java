@@ -47,6 +47,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
@@ -94,6 +95,7 @@ public class SimStatusDialogControllerTest {
 
     private SimStatusDialogController mController;
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
@@ -101,7 +103,8 @@ public class SimStatusDialogControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         when(mDialog.getContext()).thenReturn(mContext);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(
                 new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
         doReturn(mServiceState).when(mController).getCurrentServiceState();

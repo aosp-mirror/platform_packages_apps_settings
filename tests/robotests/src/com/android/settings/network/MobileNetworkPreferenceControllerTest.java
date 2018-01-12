@@ -27,6 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.shadow.api.Shadow.extract;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.UserManager;
@@ -66,13 +67,15 @@ public class MobileNetworkPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private MobileNetworkPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
                 .thenReturn(mTelephonyManager);
     }

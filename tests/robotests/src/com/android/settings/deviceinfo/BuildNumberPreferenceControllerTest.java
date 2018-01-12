@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Build;
 import android.os.UserManager;
@@ -74,6 +75,7 @@ public class BuildNumberPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
 
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
     private Preference mPreference;
@@ -83,7 +85,8 @@ public class BuildNumberPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new BuildNumberPreferenceController(
                 mContext, mActivity, mFragment, mLifecycle);

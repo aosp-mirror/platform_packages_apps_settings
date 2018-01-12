@@ -23,6 +23,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 
 import com.android.settings.TestConfig;
@@ -53,6 +54,7 @@ public class DevelopmentSwitchBarControllerTest {
     @Mock
     private DevelopmentSettingsDashboardFragment mSettings;
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private SwitchBar mSwitchBar;
     private DevelopmentSwitchBarController mController;
@@ -61,7 +63,8 @@ public class DevelopmentSwitchBarControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mSwitchBar = new SwitchBar(mContext);
         when(mSettings.getContext()).thenReturn(mContext);
     }

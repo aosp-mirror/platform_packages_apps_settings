@@ -29,6 +29,7 @@ import static org.mockito.Mockito.when;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -55,6 +56,7 @@ public class ActionBarShadowControllerTest {
     @Mock
     private ActionBar mActionBar;
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private View mView;
 
     @Before
@@ -62,7 +64,8 @@ public class ActionBarShadowControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mActivity.getActionBar()).thenReturn(mActionBar);
         mView = new View(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
     }
 
     @Test
