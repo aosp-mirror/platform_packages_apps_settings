@@ -103,11 +103,18 @@ public class ZenModeBackend {
     }
 
     protected int getPriorityCallSenders() {
-        return mPolicy.priorityCallSenders;
+        if (isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS)) {
+            return mPolicy.priorityCallSenders;
+        }
+
+        return SOURCE_NONE;
     }
 
     protected int getPriorityMessageSenders() {
-        return mPolicy.priorityMessageSenders;
+        if (isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_MESSAGES)) {
+            return mPolicy.priorityMessageSenders;
+        }
+        return SOURCE_NONE;
     }
 
     protected void saveVisualEffectsPolicy(int category, boolean canBypass) {
