@@ -141,6 +141,7 @@ public class LocationSettings extends DashboardFragment {
                 new RecentLocationRequestPreferenceController(context, fragment, lifecycle));
         controllers.add(
                 new LocationServicePreferenceController(context, fragment, lifecycle));
+        controllers.add(new LocationScanningPreferenceController(context));
         return controllers;
     }
 
