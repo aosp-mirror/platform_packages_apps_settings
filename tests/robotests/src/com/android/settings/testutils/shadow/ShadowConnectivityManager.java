@@ -26,6 +26,7 @@ import org.robolectric.annotation.Implements;
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
     private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();
+    private boolean mTetheringSupported = false;
 
     public void setNetworkSupported(int networkType, boolean supported) {
         mSupportedNetworkTypes.put(networkType, supported);
@@ -34,5 +35,14 @@ public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowCon
     @Implementation
     public boolean isNetworkSupported(int networkType) {
         return mSupportedNetworkTypes.get(networkType);
+    }
+
+    public void setTetheringSupported(boolean supported) {
+        mTetheringSupported = supported;
+    }
+
+    @Implementation
+    public boolean isTetheringSupported() {
+        return mTetheringSupported;
     }
 }

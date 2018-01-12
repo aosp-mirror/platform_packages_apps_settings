@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.connecteddevice;
+package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -33,27 +33,27 @@ public class UsbModePreferenceController extends AbstractPreferenceController
     private static final String KEY_USB_MODE = "usb_mode";
 
     private UsbBackend mUsbBackend;
-    private UsbConnectionBroadcastReceiver mUsbReceiver;
+    @VisibleForTesting
+    UsbConnectionBroadcastReceiver mUsbReceiver;
     private Preference mUsbPreference;
 
     public UsbModePreferenceController(Context context, UsbBackend usbBackend) {
         super(context);
         mUsbBackend = usbBackend;
-        mUsbReceiver = new UsbConnectionBroadcastReceiver(mContext, (connected) -> {
-            updateSummary(mUsbPreference);
-        });
+        mUsbReceiver = new UsbConnectionBroadcastReceiver(mContext, (connected, newMode) -> {
+            updateSummary(mUsbPreference, connected, newMode);
+        }, mUsbBackend);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mUsbPreference = screen.findPreference(KEY_USB_MODE);
-        updateSummary(mUsbPreference);
     }
 
     @Override
     public void updateState(Preference preference) {
-        updateSummary(preference);
+        updateSummary(preference, mUsbReceiver.isConnected(), mUsbBackend.getCurrentMode());
     }
 
     @Override
@@ -88,17 +88,24 @@ public class UsbModePreferenceController extends AbstractPreferenceController
                 return R.string.usb_summary_photo_transfers;
             case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
                 return R.string.usb_summary_MIDI;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_TETHER:
+                return R.string.usb_summary_tether;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_summary_file_transfers_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_summary_photo_transfers_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_summary_MIDI_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_TETHER:
+                return R.string.usb_summary_tether_power;
+            default:
+                return R.string.usb_summary_charging_only;
         }
-        return 0;
     }
 
-    private void updateSummary(Preference preference) {
-        updateSummary(preference, mUsbBackend.getCurrentMode());
-    }
-
-    private void updateSummary(Preference preference, int mode) {
+    private void updateSummary(Preference preference, boolean connected, int mode) {
         if (preference != null) {
-            if (mUsbReceiver.isConnected()) {
+            if (connected) {
                 preference.setEnabled(true);
                 preference.setSummary(getSummary(mode));
             } else {
@@ -107,5 +114,4 @@ public class UsbModePreferenceController extends AbstractPreferenceController
             }
         }
     }
-
 }

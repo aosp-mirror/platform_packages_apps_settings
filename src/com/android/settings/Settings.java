@@ -96,6 +96,7 @@ public class Settings extends SettingsActivity {
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConditionProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class UsbDetailsActivity extends SettingsActivity { /* empty */ }
     public static class TrustedCredentialsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PaymentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrintSettingsActivity extends SettingsActivity { /* empty */ }

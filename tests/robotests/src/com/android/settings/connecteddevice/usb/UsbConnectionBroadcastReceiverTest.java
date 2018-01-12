@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.connecteddevice;
+package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assertWithMessage;
@@ -52,6 +52,8 @@ public class UsbConnectionBroadcastReceiverTest {
 
     @Mock
     private UsbConnectionBroadcastReceiver.UsbConnectionListener mListener;
+    @Mock
+    private UsbBackend mUsbBackend;
 
     @Before
     public void setUp() {
@@ -59,27 +61,42 @@ public class UsbConnectionBroadcastReceiverTest {
 
         mShadowApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
-        mReceiver = new UsbConnectionBroadcastReceiver(mContext, mListener);
+        mReceiver = new UsbConnectionBroadcastReceiver(mContext, mListener, mUsbBackend);
     }
 
     @Test
     public void testOnReceive_usbConnected_invokeCallback() {
         final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
         intent.putExtra(UsbManager.USB_CONNECTED, true);
 
         mReceiver.onReceive(mContext, intent);
 
-        verify(mListener).onUsbConnectionChanged(true);
+        verify(mListener).onUsbConnectionChanged(true /* connected */, UsbBackend.MODE_DATA_NONE);
     }
 
     @Test
     public void testOnReceive_usbDisconnected_invokeCallback() {
         final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
         intent.putExtra(UsbManager.USB_CONNECTED, false);
 
         mReceiver.onReceive(mContext, intent);
 
-        verify(mListener).onUsbConnectionChanged(false);
+        verify(mListener).onUsbConnectionChanged(false /* connected */, UsbBackend.MODE_DATA_NONE);
+    }
+
+    @Test
+    public void testOnReceive_usbConnectedMtpEnabled_invokeCallback() {
+        final Intent intent = new Intent();
+        intent.setAction(UsbManager.ACTION_USB_STATE);
+        intent.putExtra(UsbManager.USB_CONNECTED, true);
+        intent.putExtra(UsbManager.USB_FUNCTION_MTP, true);
+        intent.putExtra(UsbManager.USB_DATA_UNLOCKED, true);
+
+        mReceiver.onReceive(mContext, intent);
+
+        verify(mListener).onUsbConnectionChanged(true /* connected */, UsbBackend.MODE_DATA_MTP);
     }
 
     @Test

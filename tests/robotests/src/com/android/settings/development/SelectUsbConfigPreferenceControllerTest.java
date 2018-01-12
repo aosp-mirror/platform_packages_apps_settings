@@ -25,6 +25,7 @@ import static junit.framework.Assert.assertTrue;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -37,11 +38,13 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbManagerExtras;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
+import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -69,6 +72,8 @@ public class SelectUsbConfigPreferenceControllerTest {
     private UsbManager mUsbManager;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private UsbBackend.UsbManagerPassThrough mUsbManagerPassThrough;
 
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -101,6 +106,13 @@ public class SelectUsbConfigPreferenceControllerTest {
         mController = spy(new SelectUsbConfigPreferenceController(mContext, mLifecycle));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
+        mController.mUsbManagerPassThrough = mUsbManagerPassThrough;
+
+        when(mUsbManagerPassThrough.usbFunctionsFromString("mtp")).thenReturn(UsbManagerExtras.MTP);
+        when(mUsbManagerPassThrough.usbFunctionsFromString("rndis"))
+                .thenReturn(UsbManagerExtras.RNDIS);
+        when(mUsbManagerPassThrough.usbFunctionsFromString("none"))
+                .thenReturn(UsbManagerExtras.NONE);
 
     }
 
@@ -111,11 +123,13 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_setCharging_shouldEnableCharging() {
-        when(mUsbManager.isFunctionEnabled(mValues[0])).thenReturn(true);
-        doNothing().when(mController).setCurrentFunction(anyString(), anyBoolean());
+        when(mUsbManagerPassThrough.getCurrentFunctions()).thenReturn(
+                UsbManagerExtras.usbFunctionsFromString(mValues[0]));
+        doNothing().when(mController).setCurrentFunctions(anyLong());
         mController.onPreferenceChange(mPreference, mValues[0]);
 
-        verify(mController).setCurrentFunction(mValues[0], false /* usb data unlock */);
+        verify(mController).setCurrentFunctions(
+                UsbManagerExtras.usbFunctionsFromString(mValues[0]));
     }
 
     @Test
@@ -144,28 +158,32 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_setMtp_shouldEnableMtp() {
-        when(mUsbManager.isFunctionEnabled(mValues[1])).thenReturn(true);
-        doNothing().when(mController).setCurrentFunction(anyString(), anyBoolean());
+        when(mUsbManagerPassThrough.getCurrentFunctions())
+                .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[1]));
+        doNothing().when(mController).setCurrentFunctions(anyLong());
         mController.onPreferenceChange(mPreference, mValues[1]);
 
-        verify(mController).setCurrentFunction(mValues[1], true /* usb data unlock */);
+        verify(mController).setCurrentFunctions(
+                UsbManagerExtras.usbFunctionsFromString(mValues[1]));
     }
 
     @Test
     public void onPreferenceChange_monkeyUser_shouldReturnFalse() {
-        when(mUsbManager.isFunctionEnabled(mValues[1])).thenReturn(true);
+        when(mUsbManagerPassThrough.getCurrentFunctions())
+                .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[1]));
         ShadowUtils.setIsUserAMonkey(true);
-        doNothing().when(mController).setCurrentFunction(anyString(), anyBoolean());
+        doNothing().when(mController).setCurrentFunctions(anyLong());
 
         final boolean isHandled = mController.onPreferenceChange(mPreference, mValues[1]);
 
         assertThat(isHandled).isFalse();
-        verify(mController, never()).setCurrentFunction(any(), anyBoolean());
+        verify(mController, never()).setCurrentFunctions(anyLong());
     }
 
     @Test
     public void updateState_chargingEnabled_shouldSetPreferenceToCharging() {
-        when(mUsbManager.isFunctionEnabled(mValues[0])).thenReturn(true);
+        when(mUsbManagerPassThrough.getCurrentFunctions())
+                .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[0]));
 
         mController.updateState(mPreference);
 
@@ -175,7 +193,8 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void updateState_RndisEnabled_shouldEnableRndis() {
-        when(mUsbManager.isFunctionEnabled(mValues[3])).thenReturn(true);
+        when(mUsbManagerPassThrough.getCurrentFunctions())
+                .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[3]));
 
         mController.updateState(mPreference);
 
@@ -185,6 +204,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void updateState_noValueSet_shouldEnableChargingAsDefault() {
+        when(mUsbManagerPassThrough.getCurrentFunctions()).thenReturn(UsbManagerExtras.NONE);
         mController.updateState(mPreference);
 
         verify(mPreference).setValue(mValues[0]);

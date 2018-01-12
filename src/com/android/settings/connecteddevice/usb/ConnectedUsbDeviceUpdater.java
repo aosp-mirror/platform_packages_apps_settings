@@ -13,22 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.connecteddevice;
+package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
+import android.support.v14.preference.PreferenceFragment;
 
 import com.android.settings.R;
-import com.android.settings.deviceinfo.UsbBackend;
-import com.android.settings.deviceinfo.UsbModeChooserActivity;
+import com.android.settings.SettingsActivity;
+import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.GearPreference;
 
 /**
  * Controller to maintain connected usb device
  */
 public class ConnectedUsbDeviceUpdater {
-    private Context mContext;
+    private PreferenceFragment mFragment;
     private UsbBackend mUsbBackend;
     private DevicePreferenceCallback mDevicePreferenceCallback;
     @VisibleForTesting
@@ -36,8 +38,9 @@ public class ConnectedUsbDeviceUpdater {
     @VisibleForTesting
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
-    private UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected) -> {
+    @VisibleForTesting
+    UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
+            (connected, newMode) -> {
                 if (connected) {
                     mUsbPreference.setSummary(
                             UsbModePreferenceController.getSummary(mUsbBackend.getCurrentMode()));
@@ -47,18 +50,19 @@ public class ConnectedUsbDeviceUpdater {
                 }
             };
 
-    public ConnectedUsbDeviceUpdater(Context context,
+    public ConnectedUsbDeviceUpdater(DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
-        this(context, devicePreferenceCallback, new UsbBackend(context));
+        this(fragment, devicePreferenceCallback, new UsbBackend(fragment.getContext()));
     }
 
     @VisibleForTesting
-    ConnectedUsbDeviceUpdater(Context context, DevicePreferenceCallback devicePreferenceCallback,
-            UsbBackend usbBackend) {
-        mContext = context;
+    ConnectedUsbDeviceUpdater(DashboardFragment fragment,
+            DevicePreferenceCallback devicePreferenceCallback, UsbBackend usbBackend) {
+        mFragment = fragment;
         mDevicePreferenceCallback = devicePreferenceCallback;
         mUsbBackend = usbBackend;
-        mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener);
+        mUsbReceiver = new UsbConnectionBroadcastReceiver(fragment.getContext(),
+                mUsbConnectionListener, mUsbBackend);
     }
 
     public void registerCallback() {
@@ -76,8 +80,12 @@ public class ConnectedUsbDeviceUpdater {
         mUsbPreference.setIcon(R.drawable.ic_usb);
         mUsbPreference.setSelectable(false);
         mUsbPreference.setOnGearClickListener((GearPreference p) -> {
-            final Intent intent = new Intent(mContext, UsbModeChooserActivity.class);
-            mContext.startActivity(intent);
+            // New version - uses a separate screen.
+            final Bundle args = new Bundle();
+            final SettingsActivity activity = (SettingsActivity) mFragment.getContext();
+            activity.startPreferencePanel(mFragment,
+                    UsbDetailsFragment.class.getName(), args,
+                    R.string.device_details_title, null /* titleText */, null /* resultTo */, 0);
         });
 
         forceUpdate();
@@ -87,6 +95,5 @@ public class ConnectedUsbDeviceUpdater {
         // Register so we can get the connection state from sticky intent.
         //TODO(b/70336520): Use an API to get data instead of sticky intent
         mUsbReceiver.register();
-        mUsbConnectionListener.onUsbConnectionChanged(mUsbReceiver.isConnected());
     }
 }

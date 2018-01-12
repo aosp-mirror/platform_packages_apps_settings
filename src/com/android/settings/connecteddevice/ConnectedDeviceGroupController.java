@@ -20,6 +20,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
@@ -48,7 +49,7 @@ public class ConnectedDeviceGroupController extends AbstractPreferenceController
     public ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
         super(fragment.getContext());
         init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this),
-                new ConnectedUsbDeviceUpdater(fragment.getContext(), this));
+                new ConnectedUsbDeviceUpdater(fragment, this));
     }
 
     @VisibleForTesting

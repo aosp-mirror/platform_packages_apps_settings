@@ -27,11 +27,11 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -48,6 +48,8 @@ public class SelectUsbConfigPreferenceController extends
     private final String[] mListValues;
     private final String[] mListSummaries;
     private final UsbManager mUsbManager;
+    @VisibleForTesting
+    UsbBackend.UsbManagerPassThrough mUsbManagerPassThrough;
     private BroadcastReceiver mUsbReceiver;
     private ListPreference mPreference;
 
@@ -57,6 +59,7 @@ public class SelectUsbConfigPreferenceController extends
         mListValues = context.getResources().getStringArray(R.array.usb_configuration_values);
         mListSummaries = context.getResources().getStringArray(R.array.usb_configuration_titles);
         mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
+        mUsbManagerPassThrough = new UsbBackend.UsbManagerPassThrough(mUsbManager);
         mUsbReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -95,7 +98,8 @@ public class SelectUsbConfigPreferenceController extends
             return false;
         }
 
-        writeUsbConfigurationOption(newValue.toString());
+        writeUsbConfigurationOption(mUsbManagerPassThrough
+                .usbFunctionsFromString(newValue.toString()));
         updateUsbConfigurationValues();
         return true;
     }
@@ -129,14 +133,15 @@ public class SelectUsbConfigPreferenceController extends
     }
 
     @VisibleForTesting
-    void setCurrentFunction(String newValue, boolean usbDataUnlocked) {
-        mUsbManager.setCurrentFunction(newValue, usbDataUnlocked);
+    void setCurrentFunctions(long functions) {
+        mUsbManager.setCurrentFunctions(functions);
     }
 
     private void updateUsbConfigurationValues() {
+        long functions = mUsbManagerPassThrough.getCurrentFunctions();
         int index = 0;
         for (int i = 0; i < mListValues.length; i++) {
-            if (mUsbManager.isFunctionEnabled(mListValues[i])) {
+            if (functions == mUsbManagerPassThrough.usbFunctionsFromString(mListValues[i])) {
                 index = i;
                 break;
             }
@@ -145,11 +150,7 @@ public class SelectUsbConfigPreferenceController extends
         mPreference.setSummary(mListSummaries[index]);
     }
 
-    private void writeUsbConfigurationOption(String newValue) {
-        if (TextUtils.equals(newValue, "none")) {
-            setCurrentFunction(newValue, false);
-        } else {
-            setCurrentFunction(newValue, true);
-        }
+    private void writeUsbConfigurationOption(long newValue) {
+        setCurrentFunctions(newValue);
     }
 }
