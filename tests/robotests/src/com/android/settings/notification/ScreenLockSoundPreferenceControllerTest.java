@@ -31,11 +31,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -50,15 +52,15 @@ public class ScreenLockSoundPreferenceControllerTest {
     private ContentResolver mContentResolver;
     @Mock
     private SoundSettings mSetting;
-    @Mock
-    private Context mContext;
 
+    private Context mContext;
     private ScreenLockSoundPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mSetting.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
         mPreference = new SwitchPreference(ShadowApplication.getInstance().getApplicationContext());
@@ -68,8 +70,14 @@ public class ScreenLockSoundPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_isAlwaysTrue() {
+    public void isAvailable_byDefault_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

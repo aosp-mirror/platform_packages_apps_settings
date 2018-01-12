@@ -23,6 +23,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.provider.Settings.System;
+import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -52,5 +53,10 @@ public class TouchSoundPreferenceController extends SettingPrefController {
                 return super.setSetting(context, value);
             }
         };
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_touch_sounds);
     }
 }

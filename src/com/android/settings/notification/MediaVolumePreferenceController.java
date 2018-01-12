@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.content.Context;
 import android.media.AudioManager;
 import com.android.settings.notification.VolumeSeekBarPreference.Callback;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class MediaVolumePreferenceController extends
@@ -32,7 +33,7 @@ public class MediaVolumePreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_media_volume);
     }
 
     @Override

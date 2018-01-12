@@ -32,11 +32,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -54,15 +56,15 @@ public class TouchSoundPreferenceControllerTest {
     private ContentResolver mContentResolver;
     @Mock
     private SoundSettings mSetting;
-    @Mock
-    private Context mContext;
 
+    private Context mContext;
     private TouchSoundPreferenceController mController;
     private SwitchPreference mPreference;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mActivity.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
         when(mSetting.getActivity()).thenReturn(mActivity);
         when(mActivity.getContentResolver()).thenReturn(mContentResolver);
@@ -73,8 +75,14 @@ public class TouchSoundPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_isAlwaysTrue() {
+    public void isAvailable_byDefault_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
