@@ -20,6 +20,8 @@ import android.content.Context;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settingslib.utils.AsyncLoader;
 
+import com.android.internal.annotations.VisibleForTesting;
+
 /**
  * Loader that can be used by classes to load BatteryInfo in a background thread. This loader will
  * automatically grab enhanced battery estimates if available or fall back to the system estimate
@@ -30,9 +32,13 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
     BatteryStatsHelper mStatsHelper;
     private static final String LOG_TAG = "BatteryInfoLoader";
 
+    @VisibleForTesting
+    BatteryUtils batteryUtils;
+
     public BatteryInfoLoader(Context context, BatteryStatsHelper batteryStatsHelper) {
         super(context);
         mStatsHelper = batteryStatsHelper;
+        batteryUtils = BatteryUtils.getInstance(context);
     }
 
     @Override
@@ -42,7 +48,6 @@ public class BatteryInfoLoader extends AsyncLoader<BatteryInfo>{
 
     @Override
     public BatteryInfo loadInBackground() {
-        final BatteryUtils batteryUtils = BatteryUtils.getInstance(getContext());
         return batteryUtils.getBatteryInfo(mStatsHelper, LOG_TAG);
     }
 }

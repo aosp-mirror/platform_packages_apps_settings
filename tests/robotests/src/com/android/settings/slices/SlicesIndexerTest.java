@@ -79,7 +79,6 @@ public class SlicesIndexerTest {
         String newKey = "newKey";
         String newTitle = "newTitle";
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
-        Locale.setDefault(new Locale("ca"));
         insertSpecialCase(newKey, newTitle);
 
         // Attempt indexing - should not do anything.
