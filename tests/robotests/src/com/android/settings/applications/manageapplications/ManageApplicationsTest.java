@@ -197,11 +197,6 @@ public class ManageApplicationsTest {
     }
 
     @Test
-    public void shouldUseStableItemHeight_notificationType_no() {
-
-    }
-
-    @Test
     public void onRebuildComplete_shouldHideLoadingView() {
         final Context context = RuntimeEnvironment.application;
         final ManageApplications fragment = mock(ManageApplications.class);
