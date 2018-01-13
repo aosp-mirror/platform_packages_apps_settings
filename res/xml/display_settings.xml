@@ -22,12 +22,14 @@
     settings:keywords="@string/keywords_display"
     settings:initialExpandedChildrenCount="4">
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="brightness"
         android:title="@string/brightness"
-        settings:keywords="@string/keywords_display_brightness_level">
-    <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
-    </Preference>
+        settings:keywords="@string/keywords_display_brightness_level"
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_brightness">
+        <intent android:action="com.android.intent.action.SHOW_BRIGHTNESS_DIALOG" />
+    </com.android.settingslib.RestrictedPreference>
 
     <com.android.settings.display.NightDisplayPreference
         android:key="night_display"
@@ -38,12 +40,13 @@
         settings:keywords="@string/keywords_display_night_display" />
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <SwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
         settings:keywords="@string/keywords_display_auto_brightness"
         android:summary="@string/auto_brightness_summary"
-        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController" />
+        settings:useAdminDisabledSummary="true"
+        settings:userRestriction="no_config_brightness" />
 
     <com.android.settingslib.RestrictedPreference
         android:key="wallpaper"
