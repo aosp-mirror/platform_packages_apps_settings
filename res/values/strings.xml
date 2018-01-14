@@ -752,6 +752,17 @@
     <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
+    <!-- Label describing when a given time zone changes to DST or standard time -->
+    <string name="zone_change_to_from_dst"><xliff:g id="time_type" example="Pacific Summer Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
+    <!-- Describes the time type "daylight savings time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_dst">Daylight savings time</string>
+    <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
+    <string name="zone_time_type_standard">Standard time</string>
+    <!-- The menu item to switch to selecting a time zone by region (default) -->
+    <string name="zone_menu_by_region">Time zone by region</string>
+    <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) -->
+    <string name="zone_menu_by_offset">Fixed offset time zones</string>
+
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
     <string name="date_picker_title">Date</string>
@@ -793,6 +804,9 @@
     <string name="Accounts_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the location screen -->
     <string name="location_settings_title">Location</string>
+    <!-- Used in the location settings to control turning on/off the feature entirely -->
+    <string name="location_settings_master_switch_title">Use location</string>
+
     <!-- Main Settings screen setting option title for the item to take you to the accounts screen [CHAR LIMIT=22] -->
     <string name="account_settings_title">Accounts</string>
     <!-- Main Settings screen setting option title for the item to take you to the security screen -->
@@ -1682,6 +1696,8 @@
     <string name="wifi_band_24ghz">2.4 GHz</string>
     <!-- Wifi Internal 5GHz as an universal itendifier for 5GHz band -->
     <string name="wifi_band_5ghz">5 GHz</string>
+    <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
+    <string name="wifi_sign_in_button_text">Sign in</string>
     <!-- Link speed on Wifi Status screen -->
     <string name="link_speed">%1$d Mbps</string>
 
@@ -1722,6 +1738,9 @@
     <string name="wifi_quick_toggle_summary">Turn on Wi\u2011Fi</string>
     <!-- Used in the 1st-level settings screen to go to the 2nd-level settings screen  [CHAR LIMIT=20]-->
     <string name="wifi_settings">Wi\u2011Fi</string>
+
+    <!-- Used in the Wi-Fi settings screen to control turning on/off Wi-Fi entirely [CHAR LIMIT=30]-->
+    <string name="wifi_settings_master_switch_title">Use Wi\u2011Fi</string>
     <!-- Title of the Wi-fi settings screen -->
     <string name="wifi_settings_category">Wi\u2011Fi settings</string>
     <!-- Title of the Wi-fi settings entry in the left top level menu -->
@@ -3432,6 +3451,8 @@
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="default">About phone</string>
     <!-- Main settings screen, setting title for the user to go into the About phone screen -->
+    <string name="about_settings" product="device">About device</string>
+    <!-- Main settings screen, setting title for the user to go into the About phone screen -->
     <string name="about_settings" product="emulator">About emulated device</string>
     <!-- Main settings screen, setting summary for the user to go into the About phone screen-->
     <string name="about_settings_summary">View legal info, status, software version</string>
@@ -3703,6 +3724,15 @@
         to attack by unknown apps. By installing apps from
         this source, you agree that you are responsible for
         any damage to your phone or loss of data that may
+        result from their use.
+    </string>
+
+    <!-- Warning that appears below the unknown sources switch in settings -->
+    <string name="install_all_warning" product="device">
+        Your device and personal data are more vulnerable
+        to attack by unknown apps. By installing apps from
+        this source, you agree that you are responsible for
+        any damage to your device or loss of data that may
         result from their use.
     </string>
 
@@ -4394,6 +4424,12 @@
     <string name="accessibility_autoclick_preference_title">Click after pointer stops moving</string>
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
+    <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
+    <string name="accessibility_service_master_switch_title">Use service</string>
+    <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
+    <string name="accessibility_daltonizer_master_switch_title">Use color correction</string>
+    <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
+    <string name="accessibility_caption_master_switch_title">Use captions</string>
 
     <!-- Preference's state when enabled. Note: UPPERCASE -->
     <string name="accessibility_summary_state_enabled">ON</string>
@@ -4773,6 +4809,10 @@
     <string name="battery_tip_low_battery_title">Low battery capacity</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_summary">Battery can\'t provide good battery life</string>
+    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_smart_battery_title">Turn on smart battery manager</string>
+    <!-- Summary for the smart battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_smart_battery_summary">Turn on to optimize battery usage</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_high_usage_title" product="default">Phone used heavily</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
@@ -5048,6 +5088,9 @@
 
     <!-- [CHAR_LIMIT=40] Battery saver: Label for feature, title + menu item -->
     <string name="battery_saver">Battery Saver</string>
+
+    <!-- Used in the Battery Saver settings screen to control turning on/off the feature entirely -->
+    <string name="battery_saver_master_switch_title">Use Battery Saver</string>
 
     <!-- [CHAR_LIMIT=40] Battery saver: Title for automatic entry option -->
     <string name="battery_saver_turn_on_automatically_title">Turn on automatically</string>
@@ -5600,6 +5643,8 @@
     <string name="really_remove_account_message" product="tablet">Removing this account will delete all of its messages, contacts, and other data from the tablet!</string>
     <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
     <string name="really_remove_account_message" product="default">Removing this account will delete all of its messages, contacts, and other data from the phone!</string>
+    <!-- Remove account message in dialog [CHAR LIMIT=NONE] -->
+    <string name="really_remove_account_message" product="device">Removing this account will delete all of its messages, contacts, and other data from the device!</string>
     <!-- This is shown if the autheticator for a given account fails to remove it. [CHAR LIMIT=NONE] -->
     <string name="remove_account_failed">This change isn\'t allowed by your admin</string>
     <!-- What to show in messaging that refers to this provider, e.g. AccountSyncSettings -->
@@ -8683,6 +8728,12 @@
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
+    <!-- [CHAR LIMIT=25] Title of developer tile to toggle window trace -->
+    <string name="window_trace_quick_settings_title">Window Trace</string>
+
+    <!-- [CHAR LIMIT=25] Title of developer tile to toggle layer trace -->
+    <string name="layer_trace_quick_settings_title">Layer Trace</string>
+
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
     <!-- [CHAR LIMIT=60] The preference title for enabling cross-profile remote contact search -->
@@ -8719,6 +8770,9 @@
 
     <!-- Preference title for the automatic storage manager toggle. [CHAR LIMIT=60]-->
     <string name="automatic_storage_manager_preference_title">Storage manager</string>
+
+    <!-- Used in the storage manager settings screen to control turning on/off the feature entirely -->
+    <string name="automatic_storage_manager_master_switch_title">Use Storage manager</string>
 
     <!-- Category title for the automatic settings in the storage manager settings. [CHAR LIMIT=40] -->
     <string name="deletion_helper_automatic_title">Automatic</string>

@@ -27,6 +27,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothA2dp;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
@@ -60,6 +61,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
     @Mock
     private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
 
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
     private AbstractBluetoothA2dpPreferenceController mController;
@@ -68,7 +70,8 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new AbstractBluetoothA2dpPreferenceControllerImpl(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig();

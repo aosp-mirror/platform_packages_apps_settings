@@ -19,6 +19,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
 import android.bluetooth.BluetoothDevice;
@@ -44,6 +45,7 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDetailsControllerTestBase {
     protected Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     protected Lifecycle mLifecycle;
     protected DeviceConfig mDeviceConfig;
     protected BluetoothDevice mDevice;
@@ -73,7 +75,8 @@ public class BluetoothDetailsControllerTestBase {
         when(mFragment.getContext()).thenReturn(mContext);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
-        mLifecycle = spy(new Lifecycle(() -> mLifecycle));
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = spy(new Lifecycle(mLifecycleOwner));
         mBluetoothManager = new BluetoothManager(mContext);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
     }

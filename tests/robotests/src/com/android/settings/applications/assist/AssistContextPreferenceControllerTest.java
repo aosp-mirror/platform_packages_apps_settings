@@ -26,6 +26,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
@@ -57,13 +58,15 @@ public class AssistContextPreferenceControllerTest {
     private AssistContextPreferenceController.SettingObserver mObserver;
     private Context mContext;
     private AssistContextPreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = RuntimeEnvironment.application;
         mController = new AssistContextPreferenceController(mContext, mLifecycle);
         ReflectionHelpers.setField(mController, "mSettingObserver", mObserver);

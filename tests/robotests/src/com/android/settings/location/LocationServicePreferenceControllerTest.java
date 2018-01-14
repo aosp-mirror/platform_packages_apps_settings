@@ -25,6 +25,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -62,13 +63,15 @@ public class LocationServicePreferenceControllerTest {
 
     private Context mContext;
     private LocationServicePreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new LocationServicePreferenceController(
                 mContext, mFragment, mLifecycle, mSettingsInjector));
         final String key = mController.getPreferenceKey();

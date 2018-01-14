@@ -33,6 +33,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
@@ -70,6 +71,7 @@ public class SelectUsbConfigPreferenceControllerTest {
     private PackageManager mPackageManager;
 
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private SelectUsbConfigPreferenceController mController;
 
@@ -89,7 +91,8 @@ public class SelectUsbConfigPreferenceControllerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mUsbManager).when(mContext).getSystemService(Context.USB_SERVICE);
         doReturn(mPackageManager).when(mContext).getPackageManager();

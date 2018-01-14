@@ -32,7 +32,7 @@ import com.android.settingslib.deviceinfo.AbstractSimStatusImeiInfoPreferenceCon
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimStatusPreferenceControllerV2 extends
+public class SimStatusPreferenceController extends
         AbstractSimStatusImeiInfoPreferenceController implements PreferenceControllerMixin {
 
     private static final String KEY_SIM_STATUS = "sim_status";
@@ -42,7 +42,7 @@ public class SimStatusPreferenceControllerV2 extends
     private final Fragment mFragment;
     private final List<Preference> mPreferenceList = new ArrayList<>();
 
-    public SimStatusPreferenceControllerV2(Context context, Fragment fragment) {
+    public SimStatusPreferenceController(Context context, Fragment fragment) {
         super(context);
 
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

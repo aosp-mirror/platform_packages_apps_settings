@@ -19,7 +19,6 @@ package com.android.settings.security;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -38,19 +37,16 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference == null) {
-            return;
-        }
-        if (Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.LOCK_TO_APP_ENABLED, 0) != 0) {
-            preference.setSummary(
-                    mContext.getString(R.string.switch_on_text));
-        } else {
-            preference.setSummary(
-                    mContext.getString(R.string.switch_off_text));
-        }
+    public String getSummary() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.LOCK_TO_APP_ENABLED, 0) != 0
+                ? mContext.getString(R.string.switch_on_text)
+                : mContext.getString(R.string.switch_off_text);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        preference.setSummary(getSummary());
     }
 }

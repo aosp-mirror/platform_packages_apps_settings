@@ -29,17 +29,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationVolumePreferenceControllerTest {
 
-    @Mock
-    private Context mContext;
     @Mock
     private AudioHelper mHelper;
     @Mock
@@ -49,15 +50,23 @@ public class NotificationVolumePreferenceControllerTest {
     @Mock
     private Vibrator mVibrator;
 
+    private Context mContext;
     private NotificationVolumePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
         when(mContext.getSystemService(Context.VIBRATOR_SERVICE)).thenReturn(mVibrator);
         mController = new NotificationVolumePreferenceController(mContext, null, null, mHelper);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_shouldReturnFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

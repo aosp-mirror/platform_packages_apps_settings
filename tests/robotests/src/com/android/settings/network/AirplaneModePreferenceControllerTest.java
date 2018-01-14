@@ -21,6 +21,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -56,6 +57,7 @@ public class AirplaneModePreferenceControllerTest {
     private PackageManager mPackageManager;
 
     private AirplaneModePreferenceController mController;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
 
@@ -66,7 +68,8 @@ public class AirplaneModePreferenceControllerTest {
         doReturn(mResources).when(mContext).getResources();
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = spy(new AirplaneModePreferenceController(mContext, null));
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mLifecycle.addObserver(mController);
     }
 

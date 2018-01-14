@@ -190,8 +190,7 @@ public class XmlParserUtilTest {
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && type != XmlPullParser.START_TAG) {
             }
-            while (parser.getName() != xmlType) {
-                parser.next();
+            while (parser.getName() != xmlType && parser.next() != XmlPullParser.END_DOCUMENT) {
             }
         } catch (Exception e) {
 

@@ -136,7 +136,7 @@ public class SlicesDatabaseHelper extends SQLiteOpenHelper {
         mContext.getSharedPreferences(SHARED_PREFS_TAG, Context.MODE_PRIVATE)
                 .edit()
                 .clear()
-                .commit();
+                .apply();
         dropTables(db);
         createDatabases(db);
     }

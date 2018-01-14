@@ -45,6 +45,8 @@ public class AccessibilitySettingsTest {
     private Context mContext;
     private AccessibilitySettings mFragment;
     private boolean mAccessibilityShortcutPreferenceRemoved;
+    private boolean mColorInversionPreferenceRemoved;
+    private boolean mColorCorrectionPreferenceRemoved;
 
     @Before
     public void setUp() {
@@ -60,7 +62,16 @@ public class AccessibilitySettingsTest {
             protected boolean removePreference(String key) {
                 if (AccessibilitySettings.ACCESSIBILITY_SHORTCUT_PREFERENCE.equals(key)) {
                     mAccessibilityShortcutPreferenceRemoved = true;
+                    return true;
+                }
 
+                if (AccessibilitySettings.TOGGLE_INVERSION_PREFERENCE.equals(key)) {
+                    mColorInversionPreferenceRemoved = true;
+                    return true;
+                }
+
+                if (AccessibilitySettings.DISPLAY_DALTONIZER_PREFERENCE_SCREEN.equals(key)) {
+                    mColorCorrectionPreferenceRemoved = true;
                     return true;
                 }
                 return false;
@@ -103,5 +114,39 @@ public class AccessibilitySettingsTest {
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).contains(AccessibilitySettings.ACCESSIBILITY_SHORTCUT_PREFERENCE);
+    }
+
+    @Test
+    public void testColorInversionPreference_byDefault_shouldBeShown() {
+        final Preference preference = new Preference(mContext);
+        mFragment.checkColorInversionVisibility(preference);
+
+        assertThat(mColorInversionPreferenceRemoved).isEqualTo(false);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testColorInversionPreference_ifDisabled_shouldNotBeShown() {
+        final Preference preference = new Preference(mContext);
+        mFragment.checkColorInversionVisibility(preference);
+
+        assertThat(mColorInversionPreferenceRemoved).isEqualTo(true);
+    }
+
+    @Test
+    public void testColorCorrectionPreference_byDefault_shouldBeShown() {
+        final Preference preference = new Preference(mContext);
+        mFragment.checkColorCorrectionVisibility(preference);
+
+        assertThat(mColorCorrectionPreferenceRemoved).isEqualTo(false);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testColorCorrectionPreference_ifDisabled_shouldNotBeShown() {
+        final Preference preference = new Preference(mContext);
+        mFragment.checkColorCorrectionVisibility(preference);
+
+        assertThat(mColorCorrectionPreferenceRemoved).isEqualTo(true);
     }
 }

@@ -76,6 +76,7 @@ public class BatteryInfoLoaderTest {
     @Test
     public void test_loadInBackground_dischargingOldEstimate_dischargingLabelNotNull() {
         BatteryInfoLoader loader = new BatteryInfoLoader(mContext, mHelper);
+        loader.batteryUtils = new BatteryUtils(mContext);
 
         BatteryInfo info = loader.loadInBackground();
 

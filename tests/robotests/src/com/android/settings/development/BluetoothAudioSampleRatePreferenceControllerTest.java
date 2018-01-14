@@ -22,6 +22,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.bluetooth.BluetoothCodecConfig;
 import android.content.Context;
 import android.support.v7.preference.ListPreference;
@@ -60,6 +61,7 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
      * 4: 96.0 kHz
      */
     private String[] mListValues;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private Context mContext;
     private BluetoothAudioSampleRatePreferenceController mController;
@@ -68,7 +70,8 @@ public class BluetoothAudioSampleRatePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new BluetoothAudioSampleRatePreferenceController(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
         mListValues = mController.getListValues();

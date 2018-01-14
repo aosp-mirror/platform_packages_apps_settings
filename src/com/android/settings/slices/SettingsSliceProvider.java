@@ -79,7 +79,7 @@ public class SettingsSliceProvider extends SliceProvider {
     }
 
     private Slice getHoldingSlice(Uri uri) {
-        return new ListBuilder(uri).build();
+        return new ListBuilder(getContext(), uri).build();
     }
 
     // TODO (b/70622039) remove this when the proper wifi slice is enabled.
@@ -106,7 +106,7 @@ public class SettingsSliceProvider extends SliceProvider {
         }
 
         boolean finalWifiEnabled = wifiEnabled;
-        return new ListBuilder(sliceUri)
+        return new ListBuilder(getContext(), sliceUri)
                 .setColor(R.color.material_blue_500)
                 .addRow(b -> b
                         .setTitle(getContext().getString(R.string.wifi_settings))

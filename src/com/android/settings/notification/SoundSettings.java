@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.RingtonePreference;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -201,15 +202,45 @@ public class SoundSettings extends DashboardFragment {
         controllers.add(new WorkSoundPreferenceController(context, fragment, lifecycle));
 
         // === Other Sound Settings ===
-        controllers.add(new DialPadTonePreferenceController(context, fragment, lifecycle));
-        controllers.add(new ScreenLockSoundPreferenceController(context, fragment, lifecycle));
-        controllers.add(new ChargingSoundPreferenceController(context, fragment, lifecycle));
-        controllers.add(new DockingSoundPreferenceController(context, fragment, lifecycle));
-        controllers.add(new TouchSoundPreferenceController(context, fragment, lifecycle));
-        controllers.add(new VibrateOnTouchPreferenceController(context, fragment, lifecycle));
-        controllers.add(new DockAudioMediaPreferenceController(context, fragment, lifecycle));
-        controllers.add(new BootSoundPreferenceController(context));
-        controllers.add(new EmergencyTonePreferenceController(context, fragment, lifecycle));
+        final DialPadTonePreferenceController dialPadTonePreferenceController =
+                new DialPadTonePreferenceController(context, fragment, lifecycle);
+        final ScreenLockSoundPreferenceController screenLockSoundPreferenceController =
+                new ScreenLockSoundPreferenceController(context, fragment, lifecycle);
+        final ChargingSoundPreferenceController chargingSoundPreferenceController =
+                new ChargingSoundPreferenceController(context, fragment, lifecycle);
+        final DockingSoundPreferenceController dockingSoundPreferenceController =
+                new DockingSoundPreferenceController(context, fragment, lifecycle);
+        final TouchSoundPreferenceController touchSoundPreferenceController =
+                new TouchSoundPreferenceController(context, fragment, lifecycle);
+        final VibrateOnTouchPreferenceController vibrateOnTouchPreferenceController =
+                new VibrateOnTouchPreferenceController(context, fragment, lifecycle);
+        final DockAudioMediaPreferenceController dockAudioMediaPreferenceController =
+                new DockAudioMediaPreferenceController(context, fragment, lifecycle);
+        final BootSoundPreferenceController bootSoundPreferenceController =
+                new BootSoundPreferenceController(context);
+        final EmergencyTonePreferenceController emergencyTonePreferenceController =
+                new EmergencyTonePreferenceController(context, fragment, lifecycle);
+
+        controllers.add(dialPadTonePreferenceController);
+        controllers.add(screenLockSoundPreferenceController);
+        controllers.add(chargingSoundPreferenceController);
+        controllers.add(dockingSoundPreferenceController);
+        controllers.add(touchSoundPreferenceController);
+        controllers.add(vibrateOnTouchPreferenceController);
+        controllers.add(dockAudioMediaPreferenceController);
+        controllers.add(bootSoundPreferenceController);
+        controllers.add(emergencyTonePreferenceController);
+        controllers.add(new PreferenceCategoryController(context,
+                "other_sounds_and_vibrations_category",
+                Arrays.asList(dialPadTonePreferenceController,
+                        screenLockSoundPreferenceController,
+                        chargingSoundPreferenceController,
+                        dockingSoundPreferenceController,
+                        touchSoundPreferenceController,
+                        vibrateOnTouchPreferenceController,
+                        dockAudioMediaPreferenceController,
+                        bootSoundPreferenceController,
+                        emergencyTonePreferenceController)));
 
         return controllers;
     }

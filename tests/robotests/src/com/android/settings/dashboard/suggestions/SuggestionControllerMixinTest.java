@@ -24,6 +24,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 
 import com.android.settings.TestConfig;
@@ -49,7 +50,9 @@ public class SuggestionControllerMixinTest {
 
     @Mock
     private SuggestionControllerMixin.SuggestionControllerHost mHost;
+
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private SuggestionControllerMixin mMixin;
 
@@ -58,7 +61,8 @@ public class SuggestionControllerMixinTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         FakeFeatureFactory.setupForTest();
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
     }
 
     @After

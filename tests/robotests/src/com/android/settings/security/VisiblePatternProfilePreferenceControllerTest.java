@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
@@ -63,6 +64,7 @@ public class VisiblePatternProfilePreferenceControllerTest {
     private UserManager mUm;
 
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private VisiblePatternProfilePreferenceController mController;
@@ -82,7 +84,8 @@ public class VisiblePatternProfilePreferenceControllerTest {
                 .thenReturn(mLockPatternUtils);
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {FAKE_PROFILE_USER_ID});
 
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new VisiblePatternProfilePreferenceController(mContext, mLifecycle);
     }
 

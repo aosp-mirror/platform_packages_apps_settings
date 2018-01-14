@@ -26,6 +26,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
@@ -60,6 +61,7 @@ public class LockScreenPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Lifecycle mLifecycle;
+    private LifecycleOwner mLifecycleOwner;
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private LockScreenPreferenceController mController;
@@ -78,7 +80,8 @@ public class LockScreenPreferenceControllerTest {
         when(mUm.getProfileIdsWithDisabled(anyInt())).thenReturn(new int[] {FAKE_PROFILE_USER_ID});
         mPreference = new Preference(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new LockScreenPreferenceController(mContext, mLifecycle);
 
     }

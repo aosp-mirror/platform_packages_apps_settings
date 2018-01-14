@@ -23,7 +23,9 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 
@@ -41,6 +43,7 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     private BatteryTipListener mBatteryTipListener;
     private List<BatteryTip> mBatteryTips;
     private Map<String, BatteryTip> mBatteryTipMap;
+    private SettingsActivity mSettingsActivity;
     @VisibleForTesting
     PreferenceGroup mPreferenceGroup;
     @VisibleForTesting
@@ -48,15 +51,17 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     PreferenceFragment mFragment;
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
-        this(context, preferenceKey, null, null);
+        this(context, preferenceKey, null, null, null);
     }
 
     public BatteryTipPreferenceController(Context context, String preferenceKey,
-            PreferenceFragment fragment, BatteryTipListener batteryTipListener) {
+            SettingsActivity settingsActivity, PreferenceFragment fragment,
+            BatteryTipListener batteryTipListener) {
         super(context, preferenceKey);
         mBatteryTipListener = batteryTipListener;
         mBatteryTipMap = new HashMap<>();
         mFragment = fragment;
+        mSettingsActivity = settingsActivity;
     }
 
     @Override
@@ -107,7 +112,11 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
-                batteryTip.action();
+                final BatteryTipAction action = BatteryTipUtils.getActionForBatteryTip(batteryTip,
+                        mSettingsActivity, mFragment);
+                if (action != null) {
+                    action.handlePositiveAction();
+                }
                 if (mBatteryTipListener != null) {
                     mBatteryTipListener.onBatteryTipHandled(batteryTip);
                 }

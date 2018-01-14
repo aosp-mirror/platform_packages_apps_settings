@@ -17,15 +17,14 @@
 package com.android.settings.accounts;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
@@ -55,9 +54,9 @@ import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class
+        manifest = TestConfig.MANIFEST_PATH,
+        sdk = TestConfig.SDK_VERSION,
+        shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class
 )
 public class AccountHeaderPreferenceControllerTest {
 
@@ -74,8 +73,8 @@ public class AccountHeaderPreferenceControllerTest {
 
     private AccountHeaderPreferenceController mController;
 
-    private Lifecycle mLifecycle =
-            new Lifecycle(() -> AccountHeaderPreferenceControllerTest.this.mLifecycle);
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
 
     @Before
     public void setUp() {
@@ -84,7 +83,8 @@ public class AccountHeaderPreferenceControllerTest {
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
         doReturn(mContext).when(mActivity).getApplicationContext();
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
     }
 
     @Test

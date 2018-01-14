@@ -27,9 +27,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -37,16 +40,22 @@ import static org.mockito.Mockito.when;
 public class AlarmVolumePreferenceControllerTest {
 
     @Mock
-    private Context mContext;
-    @Mock
     private AudioHelper mHelper;
 
+    private Context mContext;
     private AlarmVolumePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mController = new AlarmVolumePreferenceController(mContext, null, null, mHelper);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

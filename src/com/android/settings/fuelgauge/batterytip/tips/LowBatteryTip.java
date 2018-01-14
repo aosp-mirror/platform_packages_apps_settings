@@ -55,11 +55,6 @@ public class LowBatteryTip extends BatteryTip {
         mState = tip.mState;
     }
 
-    @Override
-    public void action() {
-        // do nothing
-    }
-
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public BatteryTip createFromParcel(Parcel in) {
             return new LowBatteryTip(in);

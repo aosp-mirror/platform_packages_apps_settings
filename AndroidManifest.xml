@@ -1006,7 +1006,7 @@
             <meta-data android:name="com.android.settings.title"
                 android:resource="@string/about_settings" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.DeviceInfoSettings" />
+                android:value="com.android.settings.deviceinfo.DeviceInfoSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
@@ -1781,45 +1781,6 @@
 
         <activity android:name=".EncryptionInterstitial"
             android:theme="@style/GlifTheme.Light" />
-
-        <activity android:name=".Settings$StatusActivity"
-                android:label="@string/device_status_activity_title"
-                android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$DeviceInfoSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.Status" />
-        </activity>
-
-        <!-- Runs in the phone process since it needs access to the Phone object -->
-        <activity android:name=".Settings$SimStatusActivity"
-                android:label="@string/sim_status_title"
-                android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.SimStatus" />
-        </activity>
-
-        <!-- Runs in the phone process since it needs access to the Phone object -->
-        <activity android:name=".Settings$ImeiInformationActivity"
-                android:label="@string/imei_information_title"
-                android:process="com.android.phone">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.VOICE_LAUNCH" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.deviceinfo.ImeiInformation" />
-        </activity>
 
         <activity android:name=".Settings$StorageDashboardActivity"
                 android:label="@string/storage_settings"
@@ -3214,6 +3175,26 @@
             android:name=".development.qstile.DevelopmentTiles$AnimationSpeed"
             android:label="@string/window_animation_scale_title"
             android:icon="@drawable/tile_icon_animation_speed"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".development.qstile.DevelopmentTiles$WindowTrace"
+            android:label="@string/window_trace_quick_settings_title"
+            android:icon="@drawable/tile_icon_window_trace"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".development.qstile.DevelopmentTiles$LayerTrace"
+            android:label="@string/layer_trace_quick_settings_title"
+            android:icon="@drawable/tile_icon_layer_trace"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:enabled="false">
             <intent-filter>

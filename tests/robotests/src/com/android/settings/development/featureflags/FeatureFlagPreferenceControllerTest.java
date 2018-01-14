@@ -25,6 +25,7 @@ import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -47,6 +48,7 @@ public class FeatureFlagPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FeatureFlagsPreferenceController mController;
 
@@ -54,7 +56,8 @@ public class FeatureFlagPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mLifecycle = new Lifecycle(() -> mLifecycle);
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = new FeatureFlagsPreferenceController(mContext, mLifecycle);
         when(mScreen.getContext()).thenReturn(mContext);
         mController.displayPreference(mScreen);
