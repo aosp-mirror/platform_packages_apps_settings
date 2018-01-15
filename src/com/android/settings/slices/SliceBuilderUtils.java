@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -85,17 +86,46 @@ public class SliceBuilderUtils {
      */
     public static BasePreferenceController getPreferenceController(Context context,
             SliceData sliceData) {
-        // TODO check for context-only controller first.
+        try {
+            return getController(context, sliceData, true /* isContextOnly */);
+        } catch (IllegalStateException e) {
+            // Do nothing
+            Log.d(TAG, "Could not find Context-only controller for preference controller: "
+                    + sliceData.getKey());
+        }
+
+        return getController(context, sliceData, false /* isContextOnly */);
+    }
+
+    /**
+     * Attempts to build a {@link BasePreferenceController} from {@param SliceData}.
+     *
+     * @param sliceData     Backing data for the Slice.
+     * @param contextOnlyCtor {@code true} when the constructor for the
+     *                      {@link BasePreferenceController}
+     *                      only takes a {@link Context}. Else the constructor will be ({@link
+     *                      Context}, {@code String}.
+     */
+    private static BasePreferenceController getController(Context context, SliceData sliceData,
+            boolean contextOnlyCtor) {
         try {
             Class<?> clazz = Class.forName(sliceData.getPreferenceController());
-            Constructor<?> preferenceConstructor = clazz.getConstructor(Context.class,
-                    String.class);
-            return (BasePreferenceController) preferenceConstructor.newInstance(
-                    new Object[]{context, sliceData.getKey()});
+            Constructor<?> preferenceConstructor;
+            Object[] params;
+
+            if (contextOnlyCtor) {
+                preferenceConstructor = clazz.getConstructor(Context.class);
+                params = new Object[]{context};
+            } else {
+                preferenceConstructor = clazz.getConstructor(Context.class, String.class);
+                params = new Object[]{context, sliceData.getKey()};
+            }
+
+            return (BasePreferenceController) preferenceConstructor.newInstance(params);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalStateException(
-                    "Invalid preference controller: " + sliceData.getPreferenceController());
+                    "Invalid preference controller: " + sliceData.getPreferenceController(), e);
         }
     }
 
