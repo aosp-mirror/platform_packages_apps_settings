@@ -44,6 +44,7 @@ import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
+import com.android.settings.applications.StorageAccessDetails;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -252,7 +253,8 @@ public class SettingsGateway {
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
             BluetoothDeviceDetailsFragment.class.getName(),
-            DataUsageList.class.getName()
+            DataUsageList.class.getName(),
+            StorageAccessDetails.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
