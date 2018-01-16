@@ -20,19 +20,15 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.FeatureFlagUtils;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class RecentLocationRequestPreferenceController extends LocationBasePreferenceController {
@@ -60,19 +56,11 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         public boolean onPreferenceClick(Preference preference) {
             // start new fragment to display extended information
             final Bundle args = new Bundle();
-            if (FeatureFlagUtils.isEnabled(mFragment.getActivity(), FeatureFlags.APP_INFO_V2)) {
-                args.putString(AppInfoDashboardFragment.ARG_PACKAGE_NAME, mPackage);
-                ((SettingsActivity) mFragment.getActivity()).startPreferencePanelAsUser(
-                        mFragment,
-                        AppInfoDashboardFragment.class.getName(), args,
-                        R.string.application_info_label, null, mUserHandle);
-            } else {
-                args.putString(InstalledAppDetails.ARG_PACKAGE_NAME, mPackage);
-                ((SettingsActivity) mFragment.getActivity()).startPreferencePanelAsUser(
-                        mFragment,
-                        InstalledAppDetails.class.getName(), args,
-                        R.string.application_info_label, null, mUserHandle);
-            }
+            args.putString(AppInfoDashboardFragment.ARG_PACKAGE_NAME, mPackage);
+            ((SettingsActivity) mFragment.getActivity()).startPreferencePanelAsUser(
+                mFragment,
+                AppInfoDashboardFragment.class.getName(), args,
+                R.string.application_info_label, null, mUserHandle);
             return true;
         }
     }
