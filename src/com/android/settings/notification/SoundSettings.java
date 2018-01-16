@@ -44,7 +44,6 @@ import java.util.List;
 public class SoundSettings extends DashboardFragment {
     private static final String TAG = "SoundSettings";
 
-    private static final String KEY_CELL_BROADCAST_SETTINGS = "cell_broadcast_settings";
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
 
@@ -182,8 +181,6 @@ public class SoundSettings extends DashboardFragment {
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModePreferenceController(context));
-        controllers.add(new EmergencyBroadcastPreferenceController(
-                context, KEY_CELL_BROADCAST_SETTINGS));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===
@@ -268,7 +265,6 @@ public class SoundSettings extends DashboardFragment {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicate results
                     keys.add((new ZenModePreferenceController(context)).getPreferenceKey());
-                    keys.add(KEY_CELL_BROADCAST_SETTINGS);
                     return keys;
                 }
             };
