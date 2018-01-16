@@ -23,6 +23,8 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.BidiFormatter;
+import android.text.TextDirectionHeuristics;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -120,7 +122,7 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
         final String phoneNumber = DeviceInfoUtils.getFormattedPhoneNumber(mContext,
                 subscriptionInfo);
         return TextUtils.isEmpty(phoneNumber) ? mContext.getString(R.string.device_info_default)
-                : phoneNumber;
+                : BidiFormatter.getInstance().unicodeWrap(phoneNumber, TextDirectionHeuristics.LTR);
     }
 
     @VisibleForTesting
