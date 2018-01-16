@@ -215,6 +215,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BLUETOOTH_BTSNOOP_ENABLE_PROPERTY =
                                     "persist.bluetooth.btsnoopenable";
 
+    static final String BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY =
+            "persist.bluetooth.maxconnectedaudiodevices";
+
     private static final String BLUETOOTH_DISABLE_INBAND_RINGING_KEY = "bluetooth_disable_inband_ringing";
     private static final String BLUETOOTH_SELECT_AVRCP_VERSION_KEY = "bluetooth_select_avrcp_version";
     private static final String BLUETOOTH_SELECT_A2DP_CODEC_KEY = "bluetooth_select_a2dp_codec";
@@ -222,6 +225,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private static final String BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY = "bluetooth_select_a2dp_bits_per_sample";
     private static final String BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY = "bluetooth_select_a2dp_channel_mode";
     private static final String BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY = "bluetooth_select_a2dp_ldac_playback_quality";
+    private static final String BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_KEY =
+            "bluetooth_max_connected_audio_devices";
 
     private static final String PRIVATE_DNS_PREF_KEY = "select_private_dns_configuration";
 
@@ -301,6 +306,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
     private ListPreference mBluetoothSelectA2dpBitsPerSample;
     private ListPreference mBluetoothSelectA2dpChannelMode;
     private ListPreference mBluetoothSelectA2dpLdacPlaybackQuality;
+    private ListPreference mBluetoothSelectMaxConnectedAudioDevices;
 
     private SwitchPreference mOtaDisableAutomaticUpdate;
     private SwitchPreference mWifiAllowScansWithTraffic;
@@ -525,6 +531,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         mBluetoothSelectA2dpBitsPerSample = addListPreference(BLUETOOTH_SELECT_A2DP_BITS_PER_SAMPLE_KEY);
         mBluetoothSelectA2dpChannelMode = addListPreference(BLUETOOTH_SELECT_A2DP_CHANNEL_MODE_KEY);
         mBluetoothSelectA2dpLdacPlaybackQuality = addListPreference(BLUETOOTH_SELECT_A2DP_LDAC_PLAYBACK_QUALITY_KEY);
+        mBluetoothSelectMaxConnectedAudioDevices = addListPreference(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_KEY);
         initBluetoothConfigurationValues();
 
         updatePrivateDnsSummary();
@@ -1858,6 +1865,13 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         index = 3;
         mBluetoothSelectA2dpLdacPlaybackQuality.setValue(values[index]);
         mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(summaries[index]);
+
+        // Init the maximum connected devices - Default
+        values = getResources().getStringArray(R.array.bluetooth_max_connected_audio_devices_values);
+        summaries = getResources().getStringArray(R.array.bluetooth_max_connected_audio_devices);
+        index = 0;
+        mBluetoothSelectMaxConnectedAudioDevices.setValue(values[index]);
+        mBluetoothSelectMaxConnectedAudioDevices.setSummary(summaries[index]);
     }
 
     private void writeBluetoothAvrcpVersion(Object newValue) {
@@ -2023,6 +2037,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
             summaries = resources.getStringArray(R.array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
             streaming = resources.getString(R.string.bluetooth_select_a2dp_codec_streaming_label, summaries[index]);
             mBluetoothSelectA2dpLdacPlaybackQuality.setSummary(streaming);
+        }
+    }
+
+    private void writeBluetoothMaxConnectedAudioDevices(Object newValue) {
+        SystemProperties.set(BLUETOOTH_MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, newValue.toString());
+        int index = mBluetoothSelectMaxConnectedAudioDevices.findIndexOfValue(newValue.toString());
+        if (index >= 0) {
+            String[] titles = getResources().getStringArray(R.array.bluetooth_max_connected_audio_devices);
+            mBluetoothSelectMaxConnectedAudioDevices.setSummary(titles[index]);
         }
     }
 
@@ -2620,6 +2643,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
                    (preference == mBluetoothSelectA2dpChannelMode) ||
                    (preference == mBluetoothSelectA2dpLdacPlaybackQuality)) {
             writeBluetoothConfigurationOption(preference, newValue);
+            return true;
+        } else if (preference == mBluetoothSelectMaxConnectedAudioDevices) {
+            writeBluetoothMaxConnectedAudioDevices(newValue);
             return true;
         } else if (preference == mLogdSize) {
             writeLogdSizeOption(newValue);
