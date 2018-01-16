@@ -18,14 +18,12 @@ package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
@@ -38,14 +36,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        final Context context = host.getContext();
-        final boolean isSearchV2Enabled = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider()
-                .isSearchV2Enabled(context);
-
-        if (isSearchV2Enabled) {
-            host.getLifecycle().addObserver(new SearchMenuController(host));
-        }
+        host.getLifecycle().addObserver(new SearchMenuController(host));
     }
 
     private SearchMenuController(@NonNull Fragment host) {

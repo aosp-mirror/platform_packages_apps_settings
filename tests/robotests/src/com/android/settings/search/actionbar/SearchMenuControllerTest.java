@@ -16,20 +16,16 @@
 
 package com.android.settings.search.actionbar;
 
-import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
@@ -47,30 +43,15 @@ public class SearchMenuControllerTest {
     @Mock
     private Menu mMenu;
     private TestFragment mHost;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mHost = new TestFragment();
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
-    public void init_searchV2Disabled_shouldNotAddMenu() {
-        when(mFeatureFactory.searchFeatureProvider.isSearchV2Enabled(nullable(Context.class)))
-                .thenReturn(false);
-
-        SearchMenuController.init(mHost);
-        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
-
-        verifyZeroInteractions(mMenu);
-    }
-
-    @Test
-    public void init_searchV2Enabled_shouldAddMenu() {
-        when(mFeatureFactory.searchFeatureProvider.isSearchV2Enabled(nullable(Context.class)))
-                .thenReturn(true);
+    public void init_shouldAddMenu() {
         when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
                 .thenReturn(mock(MenuItem.class));
 

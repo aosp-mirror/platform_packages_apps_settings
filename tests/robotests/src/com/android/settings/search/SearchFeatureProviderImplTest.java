@@ -18,19 +18,15 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.util.FeatureFlagUtils;
 import android.widget.Toolbar;
 
 import com.android.settings.TestConfig;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
@@ -73,31 +69,10 @@ public class SearchFeatureProviderImplTest {
     }
 
     @Test
-    public void getDatabaseSearchLoader_shouldCleanupQuery() {
-        final String query = "  space ";
-
-        mProvider.getStaticSearchResultTask(mActivity, query);
-
-        verify(mProvider).cleanQuery(eq(query));
-    }
-
-    @Test
-    public void getInstalledAppSearchLoader_shouldCleanupQuery() {
-        final String query = "  space ";
-
-        mProvider.getInstalledAppSearchTask(mActivity, query);
-
-        verify(mProvider).cleanQuery(eq(query));
-    }
-
-    @Test
-    public void initSearchToolbar_searchV2_shouldInitWithOnClickListener() {
+    public void initSearchToolbar_shouldInitWithOnClickListener() {
         mProvider.initSearchToolbar(mActivity, null);
         // Should not crash.
 
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.SEARCH_V2,
-                "true");
         final Toolbar toolbar = new Toolbar(mActivity);
         mProvider.initSearchToolbar(mActivity, toolbar);
 
@@ -107,25 +82,6 @@ public class SearchFeatureProviderImplTest {
 
         assertThat(launchIntent.getAction())
                 .isEqualTo("com.android.settings.action.SETTINGS_SEARCH");
-    }
-
-    @Test
-    public void initSearchToolbar_searchV1_shouldInitWithOnClickListener() {
-        mProvider.initSearchToolbar(mActivity, null);
-        // Should not crash.
-
-        SettingsShadowSystemProperties.set(
-                FeatureFlagUtils.FFLAG_PREFIX + FeatureFlags.SEARCH_V2,
-                "false");
-        final Toolbar toolbar = new Toolbar(mActivity);
-        mProvider.initSearchToolbar(mActivity, toolbar);
-
-        toolbar.performClick();
-
-        final Intent launchIntent = shadowOf(mActivity).getNextStartedActivity();
-
-        assertThat(launchIntent.getComponent().getClassName())
-                .isEqualTo(SearchActivity.class.getName());
     }
 
     @Test(expected = IllegalArgumentException.class)
