@@ -160,6 +160,13 @@ public class MasterClearTest {
         assertThat(componentName.getPackageName()).isEqualTo(intent.getPackage());
     }
 
+    @Test
+    public void testTryShowAccountConfirmation_unsupported() {
+      doReturn(mActivity).when(mMasterClear).getActivity();
+      /* Using the default resources, account confirmation shouldn't trigger */
+      assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+    }
+
     private void initScrollView(int height, int scrollY, int childBottom) {
         when(mScrollView.getHeight()).thenReturn(height);
         when(mScrollView.getScrollY()).thenReturn(scrollY);
