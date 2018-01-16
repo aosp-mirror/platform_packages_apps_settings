@@ -25,6 +25,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.hardware.display.DisplayManager;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
@@ -746,7 +747,7 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     R.drawable.appwidget_settings_ind_on_r_holo);
         } else {
             final int brightness = getBrightness(context);
-            final PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+            final PowerManager pm = context.getSystemService(PowerManager.class);
             // Set the icon
             final int full = (int)(pm.getMaximumScreenBrightnessSetting()
                     * FULL_BRIGHTNESS_THRESHOLD);
@@ -882,53 +883,48 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
      */
     private void toggleBrightness(Context context) {
         try {
-            IPowerManager power = IPowerManager.Stub.asInterface(
-                    ServiceManager.getService("power"));
-            if (power != null) {
-                PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+            DisplayManager dm = context.getSystemService(DisplayManager.class);
+            PowerManager pm = context.getSystemService(PowerManager.class);
 
-                ContentResolver cr = context.getContentResolver();
-                int brightness = Settings.System.getInt(cr,
-                        Settings.System.SCREEN_BRIGHTNESS);
-                int brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
-                //Only get brightness setting if available
-                if (context.getResources().getBoolean(
-                        com.android.internal.R.bool.config_automatic_brightness_available)) {
-                    brightnessMode = Settings.System.getInt(cr,
-                            Settings.System.SCREEN_BRIGHTNESS_MODE);
-                }
-
-                // Rotate AUTO -> MINIMUM -> DEFAULT -> MAXIMUM
-                // Technically, not a toggle...
-                if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-                    brightness = pm.getMinimumScreenBrightnessSetting();
-                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
-                } else if (brightness < pm.getDefaultScreenBrightnessSetting()) {
-                    brightness = pm.getDefaultScreenBrightnessSetting();
-                } else if (brightness < pm.getMaximumScreenBrightnessSetting()) {
-                    brightness = pm.getMaximumScreenBrightnessSetting();
-                } else {
-                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-                    brightness = pm.getMinimumScreenBrightnessSetting();
-                }
-
-                if (context.getResources().getBoolean(
-                        com.android.internal.R.bool.config_automatic_brightness_available)) {
-                    // Set screen brightness mode (automatic or manual)
-                    Settings.System.putInt(context.getContentResolver(),
-                            Settings.System.SCREEN_BRIGHTNESS_MODE,
-                            brightnessMode);
-                } else {
-                    // Make sure we set the brightness if automatic mode isn't available
-                    brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
-                }
-                if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) {
-                    power.setTemporaryScreenBrightnessSettingOverride(brightness);
-                    Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
-                }
+            ContentResolver cr = context.getContentResolver();
+            int brightness = Settings.System.getInt(cr,
+                    Settings.System.SCREEN_BRIGHTNESS);
+            int brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+            //Only get brightness setting if available
+            if (context.getResources().getBoolean(
+                    com.android.internal.R.bool.config_automatic_brightness_available)) {
+                brightnessMode = Settings.System.getInt(cr,
+                        Settings.System.SCREEN_BRIGHTNESS_MODE);
             }
-        } catch (RemoteException e) {
-            Log.d(TAG, "toggleBrightness: " + e);
+
+            // Rotate AUTO -> MINIMUM -> DEFAULT -> MAXIMUM
+            // Technically, not a toggle...
+            if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
+                brightness = pm.getMinimumScreenBrightnessSetting();
+                brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+            } else if (brightness < pm.getDefaultScreenBrightnessSetting()) {
+                brightness = pm.getDefaultScreenBrightnessSetting();
+            } else if (brightness < pm.getMaximumScreenBrightnessSetting()) {
+                brightness = pm.getMaximumScreenBrightnessSetting();
+            } else {
+                brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
+                brightness = pm.getMinimumScreenBrightnessSetting();
+            }
+
+            if (context.getResources().getBoolean(
+                    com.android.internal.R.bool.config_automatic_brightness_available)) {
+                // Set screen brightness mode (automatic or manual)
+                Settings.System.putInt(context.getContentResolver(),
+                        Settings.System.SCREEN_BRIGHTNESS_MODE,
+                        brightnessMode);
+            } else {
+                // Make sure we set the brightness if automatic mode isn't available
+                brightnessMode = Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
+            }
+            if (brightnessMode == Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) {
+                dm.setTemporaryBrightness(brightness);
+                Settings.System.putInt(cr, Settings.System.SCREEN_BRIGHTNESS, brightness);
+            }
         } catch (Settings.SettingNotFoundException e) {
             Log.d(TAG, "toggleBrightness: " + e);
         }
