@@ -45,7 +45,7 @@ public class ManageDeviceAdminPreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_manage_device_admin);
     }
 
     @Override

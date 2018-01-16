@@ -104,6 +104,12 @@ public class TrustAgentListPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void onResume_shouldClearOldAgents() {
         final Preference oldAgent = new Preference(mActivity);
         oldAgent.setKey(PREF_KEY_TRUST_AGENT);

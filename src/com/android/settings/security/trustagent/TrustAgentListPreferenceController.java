@@ -79,7 +79,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_trust_agent_click_intent);
     }
 
     @Override
