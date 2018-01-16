@@ -144,9 +144,9 @@ public class BatteryTipPolicy {
         highUsageEnabled = mParser.getBoolean(KEY_HIGH_USAGE_ENABLED, true);
         highUsageAppCount = mParser.getInt(KEY_HIGH_USAGE_APP_COUNT, 3);
         appRestrictionEnabled = mParser.getBoolean(KEY_APP_RESTRICTION_ENABLED, true);
-        reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, true);
+        reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, false);
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
-        lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, true);
+        lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, false);
         lowBatteryHour = mParser.getInt(KEY_LOW_BATTERY_HOUR, 16);
     }
 
