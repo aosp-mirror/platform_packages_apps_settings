@@ -143,8 +143,10 @@ public abstract class ManagedServiceSettings extends EmptyTextSettings {
                 final boolean enable = (boolean) newValue;
                 return setEnabled(cn, summary, enable);
             });
+            pref.setKey(cn.flattenToString());
             screen.addPreference(pref);
         }
+        highlightPreferenceIfNeeded();
     }
 
     private int getCurrentUser(int managedProfileId) {

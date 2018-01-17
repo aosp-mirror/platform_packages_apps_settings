@@ -137,6 +137,7 @@ public class ZenAccessSettings extends EmptyTextSettings {
             final String pkg = app.packageName;
             final CharSequence label = app.loadLabel(mPkgMan);
             final SwitchPreference pref = new AppSwitchPreference(getPrefContext());
+            pref.setKey(pkg);
             pref.setPersistent(false);
             pref.setIcon(app.loadIcon(mPkgMan));
             pref.setTitle(label);
