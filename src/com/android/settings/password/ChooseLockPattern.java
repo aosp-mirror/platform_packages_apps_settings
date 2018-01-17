@@ -412,7 +412,7 @@ public class ChooseLockPattern extends SettingsActivity {
         private ChooseLockSettingsHelper mChooseLockSettingsHelper;
         private SaveAndFinishWorker mSaveAndFinishWorker;
         protected int mUserId;
-        private boolean mForFingerprint;
+        protected boolean mForFingerprint;
 
         private static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
@@ -657,13 +657,7 @@ public class ChooseLockPattern extends SettingsActivity {
                 mFooterText.setText(stage.footerMessage);
             }
 
-            if (stage.leftMode == LeftButtonMode.Gone) {
-                mFooterLeftButton.setVisibility(View.GONE);
-            } else {
-                mFooterLeftButton.setVisibility(View.VISIBLE);
-                mFooterLeftButton.setText(stage.leftMode.text);
-                mFooterLeftButton.setEnabled(stage.leftMode.enabled);
-            }
+            updateFooterLeftButton(stage, mFooterLeftButton);
 
             setRightButtonText(stage.rightMode.text);
             setRightButtonEnabled(stage.rightMode.enabled);
@@ -710,6 +704,16 @@ public class ChooseLockPattern extends SettingsActivity {
             // is a no-op when accessibility is disabled.
             if (previousStage != stage || announceAlways) {
                 mHeaderText.announceForAccessibility(mHeaderText.getText());
+            }
+        }
+
+        protected void updateFooterLeftButton(Stage stage, TextView footerLeftButton) {
+            if (stage.leftMode == LeftButtonMode.Gone) {
+                footerLeftButton.setVisibility(View.GONE);
+            } else {
+                footerLeftButton.setVisibility(View.VISIBLE);
+                footerLeftButton.setText(stage.leftMode.text);
+                footerLeftButton.setEnabled(stage.leftMode.enabled);
             }
         }
 

@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
@@ -69,6 +70,24 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
                 return;
             }
             startChooseLockActivity(lock, getActivity());
+        }
+
+        @Override
+        protected void updateFooterLeftButton(Stage stage, TextView footerLeftButton) {
+            super.updateFooterLeftButton(stage, footerLeftButton);
+            // enable skip button only during setupwizard and not with fingerprint flow.
+            if (!mForFingerprint) {
+                footerLeftButton.setVisibility(View.VISIBLE);
+                footerLeftButton.setText(R.string.skip_label);
+            }
+        }
+
+        @Override
+        public void handleLeftButton() {
+            SetupSkipDialog dialog = SetupSkipDialog.newInstance(
+                    getActivity().getIntent()
+                            .getBooleanExtra(SetupSkipDialog.EXTRA_FRP_SUPPORTED, false));
+            dialog.show(getFragmentManager());
         }
 
         @Override

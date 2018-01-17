@@ -102,6 +102,33 @@ public class SetupChooseLockPatternTest {
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
+    @Test
+    public void skipButton_shouldBeVisible_duringNonFingerprintFlow() {
+        Button button = mActivity.findViewById(R.id.footerLeftButton);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+
+        button.performClick();
+        AlertDialog chooserDialog = ShadowAlertDialog.getLatestAlertDialog();
+        assertThat(chooserDialog).isNotNull();
+    }
+
+    @Test
+    public void skipButton_shouldNotBeVisible_duringFingerprintFlow() {
+        mActivity = Robolectric.buildActivity(
+                SetupChooseLockPattern.class,
+                SetupChooseLockPattern.modifyIntentForSetup(
+                        application,
+                        new IntentBuilder(application)
+                                .setUserId(UserHandle.myUserId())
+                                .setForFingerprint(true)
+                                .build()))
+                .setup().get();
+        Button button = mActivity.findViewById(R.id.footerLeftButton);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.GONE);
+    }
+
     private ChooseLockPatternFragment findFragment(Activity activity) {
         return (ChooseLockPatternFragment)
                 activity.getFragmentManager().findFragmentById(R.id.main_content);
