@@ -146,6 +146,10 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
                 mSecurityCategory.removePreference(oldAgent);
             }
         }
+        // If for some reason the preference is no longer available, don't proceed to add.
+        if (!isAvailable()) {
+            return;
+        }
         // Then add new ones.
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);
         final List<TrustAgentManager.TrustAgentComponentInfo> agents =
