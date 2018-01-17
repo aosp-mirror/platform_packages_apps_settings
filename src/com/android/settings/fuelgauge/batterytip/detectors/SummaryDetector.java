@@ -26,17 +26,15 @@ import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
  */
 public class SummaryDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
-    private int mVisibleTips;
 
-    public SummaryDetector(BatteryTipPolicy policy, int visibleTips) {
+    public SummaryDetector(BatteryTipPolicy policy) {
         mPolicy = policy;
-        mVisibleTips = visibleTips;
     }
 
     @Override
     public BatteryTip detect() {
         // Show it if there is no other tips shown
-        final int state = mPolicy.summaryEnabled && mVisibleTips == 0
+        final int state = mPolicy.summaryEnabled
                 ? BatteryTip.StateType.NEW
                 : BatteryTip.StateType.INVISIBLE;
         return new SummaryTip(state);
