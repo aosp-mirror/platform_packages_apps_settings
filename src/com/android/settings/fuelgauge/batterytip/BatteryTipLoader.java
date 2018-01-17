@@ -23,6 +23,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryTipDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
@@ -64,13 +65,15 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         final List<BatteryTip> tips = new ArrayList<>();
         final BatteryTipPolicy policy = new BatteryTipPolicy(getContext());
         final BatteryInfo batteryInfo = mBatteryUtils.getBatteryInfo(mBatteryStatsHelper, TAG);
+        final Context context = getContext();
         mVisibleTips = 0;
 
         addBatteryTipFromDetector(tips, new LowBatteryDetector(policy, batteryInfo));
         addBatteryTipFromDetector(tips,
-                new HighUsageDetector(getContext(), policy, mBatteryStatsHelper));
+                new HighUsageDetector(context, policy, mBatteryStatsHelper));
         addBatteryTipFromDetector(tips,
-                new SmartBatteryDetector(policy, getContext().getContentResolver()));
+                new SmartBatteryDetector(policy, context.getContentResolver()));
+        addBatteryTipFromDetector(tips, new EarlyWarningDetector(policy, context));
         // Add summary detector at last since it need other detectors to update the mVisibleTips
         addBatteryTipFromDetector(tips, new SummaryDetector(policy, mVisibleTips));
 

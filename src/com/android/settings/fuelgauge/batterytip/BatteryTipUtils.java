@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip;
 import android.app.Fragment;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -40,6 +41,8 @@ public class BatteryTipUtils {
         switch (batteryTip.getType()) {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
+            case BatteryTip.TipType.BATTERY_SAVER:
+                return new BatterySaverAction(settingsActivity.getApplicationContext());
             default:
                 return null;
         }
