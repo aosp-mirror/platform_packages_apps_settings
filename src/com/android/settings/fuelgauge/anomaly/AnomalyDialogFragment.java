@@ -100,13 +100,9 @@ public class AnomalyDialogFragment extends InstrumentedDialogFragment implements
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
-        final Context context = getContext();
-        final AnomalyUtils anomalyUtils = AnomalyUtils.getInstance(context);
-
         mAnomaly = bundle.getParcelable(ARG_ANOMALY);
-        anomalyUtils.logAnomaly(mMetricsFeatureProvider, mAnomaly,
-                MetricsProto.MetricsEvent.DIALOG_HANDLE_ANOMALY);
 
+        final Context context = getContext();
         final AnomalyAction anomalyAction = mAnomalyUtils.getAnomalyAction(mAnomaly);
         switch (anomalyAction.getActionType()) {
             case Anomaly.AnomalyActionType.FORCE_STOP:

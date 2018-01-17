@@ -58,6 +58,5 @@ public abstract class AnomalyAction {
      */
     public abstract boolean isActionActive(Anomaly anomaly);
 
-    @Anomaly.AnomalyActionType
     public abstract int getActionType();
 }
