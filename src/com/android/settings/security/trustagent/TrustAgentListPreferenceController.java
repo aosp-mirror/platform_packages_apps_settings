@@ -31,6 +31,7 @@ import android.text.TextUtils;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.SecurityFeatureProvider;
@@ -46,7 +47,8 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import java.util.List;
 
 public class TrustAgentListPreferenceController extends AbstractPreferenceController
-        implements LifecycleObserver, OnSaveInstanceState, OnCreate, OnResume {
+        implements PreferenceControllerMixin, LifecycleObserver, OnSaveInstanceState,
+        OnCreate, OnResume {
 
     private static final String TRUST_AGENT_CLICK_INTENT = "trust_agent_click_intent";
     @VisibleForTesting
