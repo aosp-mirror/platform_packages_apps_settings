@@ -150,6 +150,9 @@ public class ShowAdminSupportDetailsDialog extends Activity
             case DevicePolicyManager.POLICY_DISABLE_SCREEN_CAPTURE:
                 titleView.setText(R.string.disabled_by_policy_title_screen_capture);
                 break;
+            case DevicePolicyManager.POLICY_MANDATORY_BACKUPS:
+                titleView.setText(R.string.disabled_by_policy_title_turn_off_backups);
+                break;
             default:
                 // Use general text if no specialized title applies
                 titleView.setText(R.string.disabled_by_policy_title);
