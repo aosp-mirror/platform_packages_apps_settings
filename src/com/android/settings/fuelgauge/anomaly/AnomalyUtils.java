@@ -19,8 +19,12 @@ package com.android.settings.fuelgauge.anomaly;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.VisibleForTesting;
+import android.util.Pair;
+import android.util.SparseIntArray;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.os.BatteryStatsHelper;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.action.LocationCheckAction;
@@ -39,6 +43,17 @@ import java.util.List;
 public class AnomalyUtils {
     private Context mContext;
     private static AnomalyUtils sInstance;
+
+    private static final SparseIntArray mMetricArray;
+    static {
+        mMetricArray = new SparseIntArray();
+        mMetricArray.append(Anomaly.AnomalyType.WAKE_LOCK,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_WAKELOCK);
+        mMetricArray.append(Anomaly.AnomalyType.WAKEUP_ALARM,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_WAKEUP_ALARM);
+        mMetricArray.append(Anomaly.AnomalyType.BLUETOOTH_SCAN,
+                MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+    }
 
     @VisibleForTesting
     AnomalyUtils(Context context) {
@@ -116,6 +131,41 @@ public class AnomalyUtils {
         }
 
         return anomalies;
+    }
+
+    /**
+     * Log the list of {@link Anomaly} using {@link MetricsFeatureProvider}, which contains
+     * anomaly type, package name, field_context, field_action_type
+     *
+     * @param provider  provider to do the logging
+     * @param anomalies contains the data to log
+     * @param contextId which page invoke this logging
+     * @see #logAnomaly(MetricsFeatureProvider, Anomaly, int)
+     */
+    public void logAnomalies(MetricsFeatureProvider provider, List<Anomaly> anomalies,
+            int contextId) {
+        for (int i = 0, size = anomalies.size(); i < size; i++) {
+            logAnomaly(provider, anomalies.get(i), contextId);
+        }
+    }
+
+    /**
+     * Log the {@link Anomaly} using {@link MetricsFeatureProvider}, which contains
+     * anomaly type, package name, field_context, field_action_type
+     *
+     * @param provider  provider to do the logging
+     * @param anomaly   contains the data to log
+     * @param contextId which page invoke this logging
+     * @see #logAnomalies(MetricsFeatureProvider, List, int)
+     */
+    public void logAnomaly(MetricsFeatureProvider provider, Anomaly anomaly, int contextId) {
+        provider.action(
+                mContext,
+                mMetricArray.get(anomaly.type, MetricsProto.MetricsEvent.VIEW_UNKNOWN),
+                anomaly.packageName,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, contextId),
+                Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_ACTION_TYPE,
+                        getAnomalyAction(anomaly).getActionType()));
     }
 
 }
