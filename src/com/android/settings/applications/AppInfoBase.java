@@ -138,7 +138,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         if (mPackageName == null) {
             Intent intent = (args == null) ?
                     getActivity().getIntent() : (Intent) args.getParcelable("intent");
-            if (intent != null) {
+            if (intent != null && intent.getData() != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
