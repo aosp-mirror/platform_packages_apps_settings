@@ -52,6 +52,8 @@ public class LowBatteryDetectorTest {
 
         mContext = RuntimeEnvironment.application;
         mPolicy = spy(new BatteryTipPolicy(mContext));
+        ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
+
         mLowBatteryDetector = new LowBatteryDetector(mPolicy, mBatteryInfo);
     }
 
