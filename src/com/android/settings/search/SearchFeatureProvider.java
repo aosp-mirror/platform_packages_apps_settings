@@ -21,15 +21,12 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Pair;
 import android.widget.Toolbar;
 
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.FutureTask;
 
 /**
  * FeatureProvider for Settings Search
@@ -69,11 +66,8 @@ public interface SearchFeatureProvider {
      */
     ExecutorService getExecutorService();
 
-    /**
-     * Return a FutureTask to get a list of scores for search results.
-     */
-    default FutureTask<List<Pair<String, Float>>> getRankerTask(Context context, String query) {
-        return null;
+    default String getSettingsIntelligencePkgName() {
+        return "com.android.settings.intelligence";
     }
 
     /**
@@ -85,6 +79,7 @@ public interface SearchFeatureProvider {
         }
         toolbar.setOnClickListener(tb -> {
             final Intent intent = SEARCH_UI_INTENT;
+            intent.setPackage(getSettingsIntelligencePkgName());
 
             FeatureFactory.getFactory(
                     activity.getApplicationContext()).getSlicesFeatureProvider()
