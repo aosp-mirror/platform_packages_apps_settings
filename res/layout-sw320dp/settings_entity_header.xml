@@ -45,6 +45,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:orientation="vertical">
@@ -57,8 +58,7 @@
                 android:singleLine="false"
                 android:ellipsize="marquee"
                 android:gravity="start"
-                android:textDirection="locale"
-                android:paddingTop="8dp" />
+                android:textDirection="locale" />
 
             <TextView
                 android:id="@+id/install_type"

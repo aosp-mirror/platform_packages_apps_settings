@@ -95,8 +95,6 @@ public class BluetoothDeviceUpdaterTest {
 
         final Preference preference = mBluetoothDeviceUpdater.mPreferenceMap.get(mBluetoothDevice);
         assertThat(preference).isNotNull();
-        assertThat(preference.getSummary()).isEqualTo(
-                mContext.getString(R.string.summary_placeholder));
         verify(mDevicePreferenceCallback).onDeviceAdded(preference);
     }
 
