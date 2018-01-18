@@ -19,6 +19,8 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -26,8 +28,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.android.settings.TestConfig;
 import com.android.settings.search.FakeIndexProvider;
-import com.android.settings.search.SearchIndexableResources;
-import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProviderImpl;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -36,9 +39,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -54,30 +54,30 @@ public class SliceBroadcastReceiverTest {
     private Context mContext;
     private SQLiteDatabase mDb;
     private SliceBroadcastReceiver mReceiver;
-
-    private Set<Class> mProviderClassesCopy;
+    private SearchFeatureProvider mSearchFeatureProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         mReceiver = new SliceBroadcastReceiver();
-        mProviderClassesCopy = new HashSet<>(SearchIndexableResources.providerValues());
         SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(mContext);
         helper.setIndexedState();
+        mSearchFeatureProvider = new SearchFeatureProviderImpl();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
     }
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb(mContext);
-        SearchIndexableResources.providerValues().clear();
-        SearchIndexableResources.providerValues().addAll(mProviderClassesCopy);
+        mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Test
     public void testOnReceive_toggleChanged() {
         String key = "key";
-        SearchIndexableResources.providerValues().clear();
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
         insertSpecialCase(key);
         // Turn on toggle setting
         FakeToggleController fakeToggleController = new FakeToggleController(mContext, key);

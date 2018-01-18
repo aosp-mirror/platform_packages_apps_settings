@@ -26,6 +26,7 @@ import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.ArraySet;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableResources;
@@ -54,7 +55,10 @@ public class PreferenceControllerContractTest {
     public void controllersInSearchShouldImplementPreferenceControllerMixin() {
         final Set<String> errorClasses = new ArraySet<>();
 
-        for (Class clazz : SearchIndexableResources.providerValues()) {
+        final SearchIndexableResources resources =
+                FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
+                        .getSearchIndexableResources();
+        for (Class<?> clazz : resources.getProviderValues()) {
 
             final Indexable.SearchIndexProvider provider =
                     DatabaseIndexingUtils.getSearchIndexProvider(clazz);

@@ -48,6 +48,11 @@ public interface SearchFeatureProvider {
 
     DatabaseIndexingManager getIndexingManager(Context context);
 
+    /**
+     * @return a {@link SearchIndexableResources} to be used for indexing search results.
+     */
+    SearchIndexableResources getSearchIndexableResources();
+
     default String getSettingsIntelligencePkgName() {
         return "com.android.settings.intelligence";
     }

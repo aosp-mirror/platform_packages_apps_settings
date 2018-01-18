@@ -55,7 +55,6 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final LocaleFeatureProvider localeFeatureProvider;
     public final ApplicationFeatureProvider applicationFeatureProvider;
     public final EnterprisePrivacyFeatureProvider enterprisePrivacyFeatureProvider;
-    public final SearchFeatureProvider searchFeatureProvider;
     public final SurveyFeatureProvider surveyFeatureProvider;
     public final SecurityFeatureProvider securityFeatureProvider;
     public final SuggestionFeatureProvider suggestionsFeatureProvider;
@@ -65,6 +64,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public final DataPlanFeatureProvider dataPlanFeatureProvider;
     public final SmsMirroringFeatureProvider smsMirroringFeatureProvider;
     public final SlicesFeatureProvider slicesFeatureProvider;
+    public SearchFeatureProvider searchFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
