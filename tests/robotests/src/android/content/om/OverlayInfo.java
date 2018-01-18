@@ -15,4 +15,9 @@
 package android.content.om;
 
 public class OverlayInfo {
+
+    public boolean isEnabled() {
+        return false;
+    }
+
 }

@@ -16,7 +16,11 @@ package android.content.om;
 
 import android.os.IBinder;
 
-public class IOverlayManager {
+public interface IOverlayManager {
+
+    public OverlayInfo getOverlayInfo(String packageName, int userId);
+
+    public boolean setEnabled(java.lang.String packageName, boolean enable, int userId);
 
     public static class Stub {
         public static IOverlayManager asInterface(IBinder b) {
