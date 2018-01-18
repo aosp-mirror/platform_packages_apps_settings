@@ -29,7 +29,6 @@ import android.graphics.drawable.Drawable;
 import com.android.settings.DisplaySettings;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.search.ResultPayload.Availability;
 import com.android.settings.search.ResultPayload.PayloadType;
@@ -40,8 +39,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
@@ -69,8 +66,6 @@ public class CursorToSearchResultConverterTest {
         sIntent = new Intent("com.android.settings");
     }
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private SiteMapManager mSiteMapManager;
     private Drawable mDrawable;
     private CursorToSearchResultConverter mConverter;
 
@@ -83,52 +78,11 @@ public class CursorToSearchResultConverterTest {
     }
 
     @Test
-    public void testParseNullResults_ReturnsNull() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, null, BASE_RANK);
-        assertThat(results).isNull();
-    }
-
-    @Test
-    public void testParseCursor_NotNull() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
-        assertThat(results).isNotNull();
-    }
-
-    @Test
-    public void testParseCursor_MatchesRank() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
-        for (SearchResult result : results) {
-            assertThat(result.rank).isEqualTo(BASE_RANK);
-        }
-    }
-
-    @Test
-    public void testParseCursor_MatchesTitle() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
-        for (SearchResult result : results) {
-            assertThat(TITLES).contains(result.title);
-        }
-    }
-
-    @Test
-    public void testParseCursor_MatchesSummary() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
-        for (SearchResult result : results) {
-            assertThat(result.summary).isEqualTo(SUMMARY);
-        }
-    }
-
-    @Test
     public void testParseCursor_MatchesIcon() {
         final MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(sIntent));
         final String BLANK = "";
-        cursor.addRow(new Object[]{
+        cursor.addRow(new Object[] {
                 KEY.hashCode(),      // Doc ID
                 "Longer than 20 characters", // Title
                 SUMMARY, // Summary on
@@ -144,8 +98,7 @@ public class CursorToSearchResultConverterTest {
                 payload     // Payload
         });
 
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, cursor, BASE_RANK);
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             Drawable resultDrawable = result.icon;
@@ -157,7 +110,7 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testParseCursor_NoIcon() {
         final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor("noIcon" /* key */, "" /* className */), BASE_RANK);
+                getDummyCursor("noIcon" /* key */, "" /* className */), BASE_RANK);
         for (SearchResult result : results) {
             assertThat(result.icon).isNull();
         }
@@ -165,8 +118,7 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesPayloadType() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
+        final Set<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         ResultPayload payload;
         for (SearchResult result : results) {
             payload = result.payload;
@@ -179,7 +131,7 @@ public class CursorToSearchResultConverterTest {
         final MatrixCursor cursor = new MatrixCursor(DatabaseResultLoader.SELECT_COLUMNS);
         final byte[] payload = ResultPayloadUtils.marshall(new ResultPayload(sIntent));
         final String BLANK = "";
-        cursor.addRow(new Object[]{
+        cursor.addRow(new Object[] {
                 KEY.hashCode(),      // Doc ID
                 "Longer than 20 characters", // Title
                 SUMMARY, // Summary on
@@ -194,8 +146,7 @@ public class CursorToSearchResultConverterTest {
                 PayloadType.INTENT,       // Payload Type
                 payload     // Payload
         });
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(BASE_RANK + 1);
         }
@@ -203,8 +154,7 @@ public class CursorToSearchResultConverterTest {
 
     @Test
     public void testParseCursor_MatchesResultPayload() {
-        final Set<SearchResult> results = mConverter.convertCursor(
-                mSiteMapManager, getDummyCursor(), BASE_RANK);
+        final Set<SearchResult> results = mConverter.convertCursor(getDummyCursor(), BASE_RANK);
         ResultPayload payload;
         for (SearchResult result : results) {
             payload = result.payload;
@@ -228,7 +178,7 @@ public class CursorToSearchResultConverterTest {
         final InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1 /* onValue */,
                 intent, true /* isDeviceSupported */, 0 /* defautValue */);
 
-        cursor.addRow(new Object[]{
+        cursor.addRow(new Object[] {
                 KEY.hashCode(),      // Doc ID
                 TITLES.get(0), // Title
                 SUMMARY, // Summary on
@@ -243,8 +193,7 @@ public class CursorToSearchResultConverterTest {
                 type,    // Payload Type
                 ResultPayloadUtils.marshall(payload) // Payload
         });
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             final InlineSwitchPayload newPayload = (InlineSwitchPayload) result.payload;
@@ -264,9 +213,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testWifiKey_PrioritizedResult() {
         final String key = "main_toggle_wifi";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -276,9 +224,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testBluetoothKey_PrioritizedResult() {
         final String key = "main_toggle_bluetooth";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -288,8 +235,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testAirplaneKey_PrioritizedResult() {
         final String key = "toggle_airplane";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor, BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
         }
@@ -298,9 +245,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testHotspotKey_PrioritizedResult() {
         final String key = "tether_settings";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -310,9 +256,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testBatterySaverKey_PrioritizedResult() {
         final String key = "battery_saver";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -322,9 +267,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testNFCKey_PrioritizedResult() {
         final String key = "toggle_nfc";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -334,9 +278,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testDataSaverKey_PrioritizedResult() {
         final String key = "restrict_background";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
@@ -346,9 +289,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testDataUsageKey_PrioritizedResult() {
         final String key = "data_usage_enable";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);
         }
@@ -357,9 +299,8 @@ public class CursorToSearchResultConverterTest {
     @Test
     public void testRoamingKey_PrioritizedResult() {
         final String key = "button_roaming_key";
-        final Cursor cursor = getDummyCursor(key,  WifiSettings.class.getName());
-        final Set<SearchResult> results = mConverter.convertCursor(mSiteMapManager, cursor,
-                BASE_RANK);
+        final Cursor cursor = getDummyCursor(key, WifiSettings.class.getName());
+        final Set<SearchResult> results = mConverter.convertCursor(cursor, BASE_RANK);
 
         for (SearchResult result : results) {
             assertThat(result.rank).isEqualTo(SearchResult.TOP_RANK);

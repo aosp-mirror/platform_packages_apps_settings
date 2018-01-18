@@ -19,7 +19,8 @@ package com.android.settings.search;
 
 
 import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_ID;
-import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
+import static com.android.settings.search.CursorToSearchResultConverter
+        .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
 import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
@@ -27,7 +28,8 @@ import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEYWORDS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_KEY_REF;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON;
-import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_SUMMARY_ON_NORMALIZED;
+import static com.android.settings.search.IndexDatabaseHelper.IndexColumns
+        .DATA_SUMMARY_ON_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_TITLE_NORMALIZED;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DOCID;
@@ -50,7 +52,6 @@ import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.SearchIndexablesContract;
 import android.provider.SearchIndexablesContract.SiteMapColumns;
@@ -58,7 +59,6 @@ import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
 import com.android.settings.search.indexing.IndexDataConverter;
 import com.android.settings.search.indexing.PreIndexData;
@@ -68,7 +68,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Consumes the SearchIndexableProvider content providers.
@@ -80,15 +79,6 @@ public class DatabaseIndexingManager {
 
     private static final String LOG_TAG = "DatabaseIndexingManager";
 
-    private static final String METRICS_ACTION_SETTINGS_ASYNC_INDEX =
-            "search_asynchronous_indexing";
-
-    public static final String FIELD_NAME_SEARCH_INDEX_DATA_PROVIDER =
-            "SEARCH_INDEX_DATA_PROVIDER";
-
-    @VisibleForTesting
-    final AtomicBoolean mIsIndexingComplete = new AtomicBoolean(false);
-
     private PreIndexDataCollector mCollector;
     private IndexDataConverter mConverter;
 
@@ -96,15 +86,6 @@ public class DatabaseIndexingManager {
 
     public DatabaseIndexingManager(Context context) {
         mContext = context;
-    }
-
-    public boolean isIndexingComplete() {
-        return mIsIndexingComplete.get();
-    }
-
-    public void indexDatabase(IndexingCallback callback) {
-        IndexingTask task = new IndexingTask(callback);
-        task.execute();
     }
 
     /**
@@ -361,41 +342,6 @@ public class DatabaseIndexingManager {
         } catch (SQLiteException e) {
             Log.e(LOG_TAG, "Cannot open writable database", e);
             return null;
-        }
-    }
-
-    public class IndexingTask extends AsyncTask<Void, Void, Void> {
-
-        @VisibleForTesting
-        IndexingCallback mCallback;
-        private long mIndexStartTime;
-
-        public IndexingTask(IndexingCallback callback) {
-            mCallback = callback;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            mIndexStartTime = System.currentTimeMillis();
-            mIsIndexingComplete.set(false);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            performIndexing();
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            int indexingTime = (int) (System.currentTimeMillis() - mIndexStartTime);
-            FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
-                    .histogram(mContext, METRICS_ACTION_SETTINGS_ASYNC_INDEX, indexingTime);
-
-            mIsIndexingComplete.set(true);
-            if (mCallback != null) {
-                mCallback.onIndexingFinished();
-            }
         }
     }
 }

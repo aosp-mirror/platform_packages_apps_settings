@@ -22,13 +22,10 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
 
 import java.util.Locale;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * FeatureProvider for the refactored search code.
@@ -39,8 +36,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
     private DatabaseIndexingManager mDatabaseIndexingManager;
-    private SiteMapManager mSiteMapManager;
-    private ExecutorService mExecutorService;
 
     @Override
     public void verifyLaunchSearchResultPageCaller(Context context, ComponentName caller) {
@@ -69,32 +64,12 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public boolean isIndexingComplete(Context context) {
-        return getIndexingManager(context).isIndexingComplete();
-    }
-
-    public SiteMapManager getSiteMapManager() {
-        if (mSiteMapManager == null) {
-            mSiteMapManager = new SiteMapManager();
-        }
-        return mSiteMapManager;
-    }
-
-    @Override
     public void updateIndex(Context context) {
         long indexStartTime = System.currentTimeMillis();
         getIndexingManager(context).performIndexing();
         int indexingTime = (int) (System.currentTimeMillis() - indexStartTime);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
-    }
-
-    @Override
-    public ExecutorService getExecutorService() {
-        if (mExecutorService == null) {
-            mExecutorService = Executors.newCachedThreadPool();
-        }
-        return mExecutorService;
     }
 
     protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
