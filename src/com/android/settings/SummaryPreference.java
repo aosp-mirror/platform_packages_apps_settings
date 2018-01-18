@@ -21,7 +21,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import com.android.settings.applications.LinearColorBar;
+
+import com.android.settings.widget.LinearColorBar;
 
 /**
  * Provides a summary of a setting page in a preference.  Such as memory or data usage.
@@ -92,7 +93,7 @@ public class SummaryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        LinearColorBar colorBar = (LinearColorBar) holder.itemView.findViewById(R.id.color_bar);
+        final LinearColorBar colorBar = holder.itemView.findViewById(R.id.color_bar);
 
         if (mChartEnabled) {
             colorBar.setVisibility(View.VISIBLE);
