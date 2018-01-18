@@ -56,10 +56,7 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
     private final ArrayList<String> mSuggestionsShownLogged;
     private final SuggestionControllerMixin mSuggestionControllerMixin;
     private final Callback mCallback;
-    private final int mMultipleCardsMarginEnd;
-    private final int mWidthSingleCard;
-    private final int mWidthTwoCards;
-    private final int mWidthMultipleCards;
+    private final CardConfig mConfig;
 
     private List<Suggestion> mSuggestions;
 
@@ -89,13 +86,7 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-
-        final Resources res = mContext.getResources();
-        mMultipleCardsMarginEnd = res.getDimensionPixelOffset(R.dimen.suggestion_card_margin_end);
-        mWidthSingleCard = res.getDimensionPixelOffset(R.dimen.suggestion_card_width_one_card);
-        mWidthTwoCards = res.getDimensionPixelOffset(R.dimen.suggestion_card_width_two_cards);
-        mWidthMultipleCards =
-            res.getDimensionPixelOffset(R.dimen.suggestion_card_width_multiple_cards);
+        mConfig = CardConfig.get(context);
 
         setHasStableIds(true);
     }
@@ -116,7 +107,7 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
                     mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
             mSuggestionsShownLogged.add(id);
         }
-        setCardWidthAndMargin(holder, suggestionCount);
+        mConfig.setCardLayout(holder, suggestionCount, position);
         holder.icon.setImageDrawable(mCache.getIcon(suggestion.getIcon()));
         holder.title.setText(suggestion.getTitle());
         holder.title.setSingleLine(suggestionCount == 1);
@@ -220,12 +211,61 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
         return mSuggestions;
     }
 
-    private void setCardWidthAndMargin(DashboardItemHolder holder, int suggestionCount) {
-        final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-            suggestionCount == 1
-                ? mWidthSingleCard : suggestionCount == 2 ? mWidthTwoCards : mWidthMultipleCards,
-            LinearLayout.LayoutParams.WRAP_CONTENT);
-        params.setMarginEnd(suggestionCount == 1 ? 0 : mMultipleCardsMarginEnd);
-        holder.itemView.setLayoutParams(params);
+    private static class CardConfig {
+        // Card start/end margin
+        private final int mMarginInner;
+        private final int mMarginOuter;
+        // Card width for different numbers of cards
+        private final int mWidthSingleCard;
+        private final int mWidthTwoCards;
+        private final int mWidthMultipleCards;
+        // padding between icon and title
+        private final int mPaddingTitleTopSingleCard;
+        private final int mPaddingTitleTopMultipleCards;
+
+        private static CardConfig sConfig;
+
+        private CardConfig(Context context) {
+            final Resources res = context.getResources();
+            mMarginInner =
+                res.getDimensionPixelOffset(R.dimen.suggestion_card_inner_margin);
+            mMarginOuter =
+                res.getDimensionPixelOffset(R.dimen.suggestion_card_outer_margin);
+            mWidthSingleCard = res.getDimensionPixelOffset(R.dimen.suggestion_card_width_one_card);
+            mWidthTwoCards = res.getDimensionPixelOffset(R.dimen.suggestion_card_width_two_cards);
+            mWidthMultipleCards =
+                res.getDimensionPixelOffset(R.dimen.suggestion_card_width_multiple_cards);
+            mPaddingTitleTopSingleCard =
+                res.getDimensionPixelOffset(R.dimen.suggestion_card_title_padding_bottom_one_card);
+            mPaddingTitleTopMultipleCards = res.getDimensionPixelOffset(
+                R.dimen.suggestion_card_title_padding_bottom_multiple_cards);
+        }
+
+        public static CardConfig get(Context context) {
+            if (sConfig == null) {
+                sConfig = new CardConfig(context);
+            }
+            return sConfig;
+        }
+
+        private void setCardLayout(DashboardItemHolder holder, int suggestionCount,
+            int position) {
+            final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                suggestionCount == 1
+                    ? mWidthSingleCard : suggestionCount == 2
+                    ? mWidthTwoCards : mWidthMultipleCards,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+            if (suggestionCount == 1) {
+                params.setMarginStart(mMarginOuter);
+                params.setMarginEnd(mMarginOuter);
+            } else {
+                params.setMarginStart(
+                    position == 0 ? mMarginOuter : mMarginInner);
+                params.setMarginEnd(position == suggestionCount - 1 ? mMarginOuter : 0);
+            }
+            holder.itemView.setLayoutParams(params);
+        }
+
     }
+
 }
