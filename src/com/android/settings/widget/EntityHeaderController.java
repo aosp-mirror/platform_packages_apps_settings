@@ -16,6 +16,10 @@
 
 package com.android.settings.widget;
 
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
+        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
+import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
+
 import android.annotation.IdRes;
 import android.annotation.UserIdInt;
 import android.app.ActionBar;
@@ -27,6 +31,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
@@ -53,10 +58,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent
-        .ACTION_OPEN_APP_NOTIFICATION_SETTING;
-import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_OPEN_APP_SETTING;
 
 public class EntityHeaderController {
 
@@ -291,6 +292,11 @@ public class EntityHeaderController {
         return;
     }
 
+    /**
+     * Styles the action bar (elevation, scrolling behaviors, color, etc).
+     * <p/>
+     * This method must be called after {@link Fragment#onCreate(Bundle)}.
+     */
     public EntityHeaderController styleActionBar(Activity activity) {
         if (activity == null) {
             Log.w(TAG, "No activity, cannot style actionbar.");
