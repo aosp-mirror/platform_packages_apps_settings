@@ -13,17 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings;
+package com.android.settings.wifi.tether;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 
+import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import java.util.ArrayList;
@@ -86,5 +92,23 @@ public class TetherServiceTest {
 
         mService.cancelAlarmIfNecessary();
         verify(mContext).unregisterReceiver(any(HotspotOffReceiver.class));
+    }
+
+    @Test
+    public void onDestroy_shouldUnregisterReceiver() {
+        final ArrayList<Integer> tethers = new ArrayList<>();
+        ReflectionHelpers.setField(mService, "mCurrentTethers", tethers);
+        ReflectionHelpers.setField(mService, "mBase", mContext);
+        final SharedPreferences prefs = mock(SharedPreferences .class);
+        final SharedPreferences.Editor editor = mock(SharedPreferences.Editor.class);
+        when(mContext.getSharedPreferences(anyString(), anyInt())).thenReturn(prefs);
+        when(prefs.edit()).thenReturn(editor);
+        when(editor.putString(anyString(), anyString())).thenReturn(editor);
+        final HotspotOffReceiver hotspotOffReceiver = mock(HotspotOffReceiver.class);
+        mService.setHotspotOffReceiver(hotspotOffReceiver);
+
+        mService.onDestroy();
+
+        verify(hotspotOffReceiver).unregister();
     }
 }

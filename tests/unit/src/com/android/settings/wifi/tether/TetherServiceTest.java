@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.wifi.tether;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.*;
@@ -49,16 +49,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.os.SystemClock;
 import android.test.ServiceTestCase;
-import android.test.mock.MockResources;
 import android.util.Log;
-
-import com.android.settings.TetherService;
 
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
