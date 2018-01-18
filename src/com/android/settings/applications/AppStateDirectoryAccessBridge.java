@@ -34,11 +34,11 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 import java.util.Set;
 
 // TODO(b/63720392): add unit tests
-public class AppStateStorageAccessBridge extends AppStateBaseBridge {
+public class AppStateDirectoryAccessBridge extends AppStateBaseBridge {
 
-    private static final String TAG = "StorageAccessBridge";
+    private static final String TAG = "DirectoryAccessBridge";
 
-    public AppStateStorageAccessBridge(ApplicationsState appState, Callback callback) {
+    public AppStateDirectoryAccessBridge(ApplicationsState appState, Callback callback) {
         super(appState, callback);
     }
 
@@ -48,7 +48,7 @@ public class AppStateStorageAccessBridge extends AppStateBaseBridge {
     @Override
     protected void updateExtraInfo(AppEntry app, String pkg, int uid) { }
 
-    public static final AppFilter FILTER_APP_HAS_STORAGE_ACCESS = new AppFilter() {
+    public static final AppFilter FILTER_APP_HAS_DIRECTORY_ACCESS = new AppFilter() {
 
         private Set<String> mPackages;
 

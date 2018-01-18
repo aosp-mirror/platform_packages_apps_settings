@@ -84,7 +84,7 @@ import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
-import com.android.settings.applications.AppStateStorageAccessBridge;
+import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
@@ -93,7 +93,7 @@ import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.NotificationApps;
-import com.android.settings.applications.StorageAccessDetails;
+import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
@@ -206,7 +206,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_GAMES = 9;
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
-    public static final int LIST_TYPE_STORAGE_ACCESS = 12;
+    public static final int LIST_TYPE_DIRECTORY_ACCESS = 12;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -282,9 +282,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mListType = LIST_TYPE_PHOTOGRAPHY;
             mSortOrder = R.id.sort_order_size;
             mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);
-        } else if (className.equals(Settings.StorageAccessSettingsActivity.class.getName())) {
-            mListType = LIST_TYPE_STORAGE_ACCESS;
-            screenTitle = R.string.storage_access;
+        } else if (className.equals(Settings.DirectoryAccessSettingsActivity.class.getName())) {
+            mListType = LIST_TYPE_DIRECTORY_ACCESS;
+            screenTitle = R.string.directory_access;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -449,8 +449,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return MetricsEvent.SYSTEM_ALERT_WINDOW_APPS;
             case LIST_TYPE_MANAGE_SOURCES:
                 return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
-            case LIST_TYPE_STORAGE_ACCESS:
-                return MetricsEvent.STORAGE_ACCESS;
+            case LIST_TYPE_DIRECTORY_ACCESS:
+                return MetricsEvent.DIRECTORY_ACCESS;
             default:
                 return MetricsEvent.VIEW_UNKNOWN;
         }
@@ -545,8 +545,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_PHOTOGRAPHY:
                 startAppInfoFragment(AppStorageSettings.class, R.string.storage_photos_videos);
                 break;
-            case LIST_TYPE_STORAGE_ACCESS:
-                startAppInfoFragment(StorageAccessDetails.class, R.string.storage_access);
+            case LIST_TYPE_DIRECTORY_ACCESS:
+                startAppInfoFragment(DirectoryAccessDetails.class, R.string.directory_access);
                 break;
 
             // TODO: Figure out if there is a way where we can spin up the profile's settings
@@ -852,8 +852,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mExtraInfoBridge = new AppStateWriteSettingsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_MANAGE_SOURCES) {
                 mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
-            } else if (mManageApplications.mListType == LIST_TYPE_STORAGE_ACCESS) {
-                mExtraInfoBridge = new AppStateStorageAccessBridge(mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_DIRECTORY_ACCESS) {
+                mExtraInfoBridge = new AppStateDirectoryAccessBridge(mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1255,7 +1255,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 case LIST_TYPE_MANAGE_SOURCES:
                     holder.setSummary(ExternalSourcesDetails.getPreferenceSummary(mContext, entry));
                     break;
-                case LIST_TYPE_STORAGE_ACCESS:
+                case LIST_TYPE_DIRECTORY_ACCESS:
                     holder.setSummary(null);
                     break;
                 default:
