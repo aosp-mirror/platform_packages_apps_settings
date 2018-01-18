@@ -80,7 +80,7 @@ public class WifiTetherApBandPreferenceControllerTest {
 
         mController.displayPreference(mScreen);
 
-        assertThat(mListPreference.getEntries().length).isEqualTo(2);
+        assertThat(mListPreference.getEntries().length).isEqualTo(3);
     }
 
     @Test
@@ -113,13 +113,18 @@ public class WifiTetherApBandPreferenceControllerTest {
         when(mWifiManager.is5GHzBandSupported()).thenReturn(true);
 
         mController.displayPreference(mScreen);
+
+        // -1 is WifiConfiguration.AP_BAND_ANY, for 'Auto' option.
+        mController.onPreferenceChange(mListPreference, "-1");
+        assertThat(mController.getBandIndex()).isEqualTo(-1);
+
         mController.onPreferenceChange(mListPreference, "1");
         assertThat(mController.getBandIndex()).isEqualTo(1);
 
         mController.onPreferenceChange(mListPreference, "0");
         assertThat(mController.getBandIndex()).isEqualTo(0);
 
-        verify(mListener, times(2)).onTetherConfigUpdated();
+        verify(mListener, times(3)).onTetherConfigUpdated();
     }
 
     @Test
