@@ -25,12 +25,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.os.RemoteException;
+import android.widget.Toast;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowParcel;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.IWindowManagerWrapper;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,6 +46,8 @@ import org.robolectric.util.ReflectionHelpers;
 public class WindowTraceTest {
     @Mock
     private IWindowManagerWrapper mWindowManager;
+    @Mock
+    private Toast mToast;
 
     private DevelopmentTiles.WindowTrace mWindowTrace;
 
@@ -51,8 +55,13 @@ public class WindowTraceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mWindowTrace = spy(new DevelopmentTiles.WindowTrace());
-        mWindowTrace.onCreate();
         ReflectionHelpers.setField(mWindowTrace, "mWindowManager", mWindowManager);
+        ReflectionHelpers.setField(mWindowTrace, "mToast", mToast);
+    }
+
+    @After
+    public void teardown() {
+        verifyNoMoreInteractions(mToast);
     }
 
     @Test
@@ -83,9 +92,10 @@ public class WindowTraceTest {
 
     @Test
     @Config(shadows = {ShadowParcel.class})
-    public void setIsEnableFalse_shouldDisableWindowTrace() throws RemoteException {
+    public void setIsEnableFalse_shouldDisableWindowTraceAndShowToast() throws RemoteException {
         mWindowTrace.setIsEnabled(false);
         verify(mWindowManager).stopWindowTrace();
+        verify(mToast).show();
         verifyNoMoreInteractions(mWindowManager);
     }
 

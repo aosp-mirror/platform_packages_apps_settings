@@ -33,6 +33,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.widget.Toast;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowParcel;
@@ -52,6 +53,8 @@ import org.robolectric.util.ReflectionHelpers;
 public class LayerTraceTest {
     @Mock
     private IBinder mSurfaceFlinger;
+    @Mock
+    private Toast mToast;
 
     private DevelopmentTiles.LayerTrace mLayerTraceTile;
 
@@ -59,13 +62,14 @@ public class LayerTraceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mLayerTraceTile = spy(new DevelopmentTiles.LayerTrace());
-        mLayerTraceTile.onCreate();
         ReflectionHelpers.setField(mLayerTraceTile, "mSurfaceFlinger", mSurfaceFlinger);
+        ReflectionHelpers.setField(mLayerTraceTile, "mToast", mToast);
     }
 
     @After
     public void after() {
         verifyNoMoreInteractions(mSurfaceFlinger);
+        verifyNoMoreInteractions(mToast);
     }
 
     @Test
@@ -106,12 +110,13 @@ public class LayerTraceTest {
 
     @Test
     @Config(shadows = {ShadowParcel.class})
-    public void setIsEnableFalse_shouldDisableLayerTrace() throws RemoteException {
+    public void setIsEnableFalse_shouldDisableLayerTraceAndShowToast() throws RemoteException {
         mLayerTraceTile.setIsEnabled(false);
         assertThat(ShadowParcel.sWriteIntResult).isEqualTo(0);
         verify(mSurfaceFlinger)
                 .transact(eq(SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE), any(), isNull(),
                         eq(0 /* flags */));
+        verify(mToast).show();
     }
 
     @Test
