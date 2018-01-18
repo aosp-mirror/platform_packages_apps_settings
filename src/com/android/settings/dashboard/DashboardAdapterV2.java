@@ -305,7 +305,8 @@ public class DashboardAdapterV2 extends RecyclerView.Adapter<DashboardAdapterV2.
     void onBindSuggestion(final SuggestionContainerHolder holder, int position) {
         // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
         // header anymore.
-        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
+        final List<Suggestion> suggestions =
+            (List<Suggestion>) mDashboardData.getItemEntityByPosition(position);
         final int suggestionCount = suggestions.size();
         if (suggestions != null && suggestionCount > 0) {
             holder.summary.setText(""+suggestionCount);

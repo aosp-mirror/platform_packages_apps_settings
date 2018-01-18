@@ -323,6 +323,15 @@
         <item name="android:textColor">?android:attr/colorAccent</item>
     </style>
 
+    <style name="SuggestionCardText">
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="SuggestionCardIcon">
+        <item name="android:layout_centerHorizontal">false</item>
+        <item name="android:layout_alignParentStart">true</item>
+    </style>
+
     <style name="TextAppearance.SuggestionTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:fontFamily">sans-serif-medium</item>

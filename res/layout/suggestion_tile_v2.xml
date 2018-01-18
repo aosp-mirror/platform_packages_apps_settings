@@ -21,7 +21,8 @@
     android:layout_width="328dp"
     android:layout_height="wrap_content"
     app:cardUseCompatPadding="true"
-    app:cardElevation="2dp">
+    app:cardElevation="2dp"
+    app:cardCornerRadius="@dimen/suggestion_card_corner_radius">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
                 android:id="@android:id/icon"
                 android:layout_width="@dimen/dashboard_tile_image_size"
                 android:layout_height="@dimen/dashboard_tile_image_size"
-                android:layout_centerHorizontal = "true"
+                style="@style/SuggestionCardIcon"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp" />
 
@@ -55,21 +56,23 @@
 
         <TextView
             android:id="@android:id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            style="@style/SuggestionCardText"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:singleLine="true"
-            android:layout_marginLeft="12dp"
-            android:layout_marginRight="12dp"
             android:textAppearance="@style/TextAppearance.TileTitle"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal" />
 
         <TextView
             android:id="@android:id/summary"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            style="@style/SuggestionCardText"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:textAppearance="@style/TextAppearance.SuggestionSummary" />
 
     </LinearLayout>
