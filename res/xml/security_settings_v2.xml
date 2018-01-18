@@ -158,14 +158,4 @@
         android:summary="@string/summary_placeholder"
         android:fragment="com.android.settings.security.ScreenPinningSettings" />
 
-    <Preference
-        android:order="90"
-        android:key="security_misc_usage_access"
-        android:title="@string/usage_access_title"
-        android:fragment="com.android.settings.applications.manageapplications.ManageApplications">
-        <extra
-            android:name="classname"
-            android:value="com.android.settings.Settings$UsageAccessSettingsActivity" />
-    </Preference>
-
 </PreferenceScreen>
