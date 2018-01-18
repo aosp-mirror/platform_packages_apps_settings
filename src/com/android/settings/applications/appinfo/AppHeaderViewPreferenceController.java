@@ -29,9 +29,11 @@ import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 
 public class AppHeaderViewPreferenceController extends BasePreferenceController
-        implements AppInfoDashboardFragment.Callback {
+        implements AppInfoDashboardFragment.Callback, LifecycleObserver, OnStart {
 
     private static final String KEY_HEADER = "header_view";
 
@@ -40,12 +42,17 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
     private final String mPackageName;
     private final Lifecycle mLifecycle;
 
+    private EntityHeaderController mEntityHeaderController;
+
     public AppHeaderViewPreferenceController(Context context, AppInfoDashboardFragment parent,
             String packageName, Lifecycle lifecycle) {
         super(context, KEY_HEADER);
         mParent = parent;
         mPackageName = packageName;
         mLifecycle = lifecycle;
+        if (mLifecycle != null) {
+            mLifecycle.addObserver(this);
+        }
     }
 
     @Override
@@ -58,15 +65,19 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
         super.displayPreference(screen);
         mHeader = (LayoutPreference) screen.findPreference(KEY_HEADER);
         final Activity activity = mParent.getActivity();
-        EntityHeaderController
+        mEntityHeaderController = EntityHeaderController
                 .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
-                .setRecyclerView(mParent.getListView(), mLifecycle)
                 .setPackageName(mPackageName)
-                .setHasAppInfoLink(false)
                 .setButtonActions(EntityHeaderController.ActionType.ACTION_APP_PREFERENCE,
                         EntityHeaderController.ActionType.ACTION_NONE)
-                .styleActionBar(activity)
                 .bindHeaderButtons();
+    }
+
+    @Override
+    public void onStart() {
+        mEntityHeaderController
+                .setRecyclerView(mParent.getListView(), mLifecycle)
+                .styleActionBar(mParent.getActivity());
     }
 
     @Override
@@ -80,13 +91,11 @@ public class AppHeaderViewPreferenceController extends BasePreferenceController
         final boolean isInstantApp = AppUtils.isInstant(pkgInfo.applicationInfo);
         final CharSequence summary = isInstantApp
                 ? null : mContext.getString(Utils.getInstallationStatus(appEntry.info));
-        EntityHeaderController
-                .newInstance(activity, mParent, mHeader.findViewById(R.id.entity_header))
+        mEntityHeaderController
                 .setLabel(appEntry)
                 .setIcon(appEntry)
                 .setSummary(summary)
                 .setIsInstantApp(isInstantApp)
                 .done(activity, false /* rebindActions */);
     }
-
 }
