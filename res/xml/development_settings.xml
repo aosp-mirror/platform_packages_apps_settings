@@ -458,6 +458,10 @@
                 android:fragment="com.android.settings.applications.appops.BackgroundCheckSummary"
                 android:title="@string/background_check_pref" />
 
+        <SwitchPreference
+            android:key="show_first_crash_dialog"
+            android:title="@string/show_first_crash_dialog"
+            android:summary="@string/show_first_crash_dialog_summary"/>
 
         <SwitchPreference
             android:key="show_all_anrs"
