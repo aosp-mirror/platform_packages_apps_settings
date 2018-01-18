@@ -20,13 +20,11 @@ package com.android.settings.search;
 import android.content.ComponentName;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.indexing.IndexData;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
@@ -63,40 +61,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
     }
 
     @Override
-    public SearchResultLoader getSearchResultLoader(Context context, String query) {
-        return new SearchResultLoader(context, cleanQuery(query));
-    }
-
-    @Override
-    public DatabaseResultLoader getStaticSearchResultTask(Context context, String query) {
-        return new DatabaseResultLoader(context, cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public InstalledAppResultLoader getInstalledAppSearchTask(Context context, String query) {
-        return new InstalledAppResultLoader(
-                context, new PackageManagerWrapper(context.getPackageManager()),
-                cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public AccessibilityServiceResultLoader getAccessibilityServiceResultTask(Context context,
-            String query) {
-        return new AccessibilityServiceResultLoader(context, cleanQuery(query),
-                getSiteMapManager());
-    }
-
-    @Override
-    public InputDeviceResultLoader getInputDeviceResultTask(Context context, String query) {
-        return new InputDeviceResultLoader(context, cleanQuery(query), getSiteMapManager());
-    }
-
-    @Override
-    public SavedQueryLoader getSavedQueryLoader(Context context) {
-        return new SavedQueryLoader(context);
-    }
-
-    @Override
     public DatabaseIndexingManager getIndexingManager(Context context) {
         if (mDatabaseIndexingManager == null) {
             mDatabaseIndexingManager = new DatabaseIndexingManager(context.getApplicationContext());
@@ -114,14 +78,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
             mSiteMapManager = new SiteMapManager();
         }
         return mSiteMapManager;
-    }
-
-    @Override
-    public void updateIndexAsync(Context context, IndexingCallback callback) {
-        if (SettingsSearchIndexablesProvider.DEBUG) {
-            Log.d(TAG, "updating index async");
-        }
-        getIndexingManager(context).indexDatabase(callback);
     }
 
     @Override
@@ -143,10 +99,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
         return false;
-    }
-
-    protected String getSettingsIntelligencePkgName() {
-        return "com.android.settings.intelligence";
     }
 
     /**

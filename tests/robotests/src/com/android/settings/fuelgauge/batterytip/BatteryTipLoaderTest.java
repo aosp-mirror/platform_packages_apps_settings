@@ -18,12 +18,18 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.PowerManager;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.detectors.BatteryTipDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,46 +48,45 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipLoaderTest {
+    private static final int[] TIP_ORDER = {
+            BatteryTip.TipType.SMART_BATTERY_MANAGER,
+            BatteryTip.TipType.HIGH_DEVICE_USAGE,
+            BatteryTip.TipType.BATTERY_SAVER,
+            BatteryTip.TipType.LOW_BATTERY,
+            BatteryTip.TipType.SUMMARY};
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
-    private BatteryTipDetector mBatteryTipDetector;
+    private PowerManager mPowerManager;
     @Mock
-    private BatteryTip mBatteryTip;
+    private Intent mIntent;
+    @Mock
+    private BatteryUtils mBatteryUtils;
+    @Mock
+    private BatteryInfo mBatteryInfo;
     private Context mContext;
     private BatteryTipLoader mBatteryTipLoader;
-    private List<BatteryTip> mBatteryTips;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        doReturn(mBatteryTip).when(mBatteryTipDetector).detect();
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mContext).when(mContext).getApplicationContext();
+        doReturn(mPowerManager).when(mContext).getSystemService(Context.POWER_SERVICE);
+        doReturn(mIntent).when(mContext).registerReceiver(any(), any());
+        doReturn(mBatteryInfo).when(mBatteryUtils).getBatteryInfo(any(), any());
         mBatteryTipLoader = new BatteryTipLoader(mContext, mBatteryStatsHelper);
-        mBatteryTips = new ArrayList<>();
+        mBatteryTipLoader.mBatteryUtils = mBatteryUtils;
     }
 
     @Test
-    public void testAddBatteryTipFromDetector_tipVisible_addAndUpdateCount() {
-        doReturn(true).when(mBatteryTip).isVisible();
-        mBatteryTipLoader.mVisibleTips = 0;
+    public void testLoadBackground_containsAllTipsWithOrder() {
+        final List<BatteryTip> batteryTips = mBatteryTipLoader.loadInBackground();
 
-        mBatteryTipLoader.addBatteryTipFromDetector(mBatteryTips, mBatteryTipDetector);
-
-        assertThat(mBatteryTips.contains(mBatteryTip)).isTrue();
-        assertThat(mBatteryTipLoader.mVisibleTips).isEqualTo(1);
+        assertThat(batteryTips.size()).isEqualTo(TIP_ORDER.length);
+        for (int i = 0, size = batteryTips.size(); i < size; i++) {
+            assertThat(batteryTips.get(i).getType()).isEqualTo(TIP_ORDER[i]);
+        }
     }
-
-    @Test
-    public void testAddBatteryTipFromDetector_tipInvisible_doNotAddCount() {
-        doReturn(false).when(mBatteryTip).isVisible();
-        mBatteryTipLoader.mVisibleTips = 0;
-
-        mBatteryTipLoader.addBatteryTipFromDetector(mBatteryTips, mBatteryTipDetector);
-
-        assertThat(mBatteryTips.contains(mBatteryTip)).isTrue();
-        assertThat(mBatteryTipLoader.mVisibleTips).isEqualTo(0);
-    }
-
 }

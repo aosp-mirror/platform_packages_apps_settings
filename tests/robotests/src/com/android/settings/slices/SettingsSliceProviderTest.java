@@ -19,6 +19,8 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.content.ContentValues;
@@ -38,15 +40,22 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.HashMap;
+
 import androidx.app.slice.Slice;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSliceProviderTest {
 
-    private final String fakeTitle = "title";
-    private final String KEY = "key";
-
+    private final String KEY = "KEY";
+    private final String TITLE = "title";
+    private final String SUMMARY = "summary";
+    private final String SCREEN_TITLE = "screen title";
+    private final String FRAGMENT_NAME = "fragment name";
+    private final int ICON = 1234; // I declare a thumb war
+    private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
+    private final String PREF_CONTROLLER = FakeToggleController.class.getName();
     private Context mContext;
     private SettingsSliceProvider mProvider;
     private SQLiteDatabase mDb;
@@ -55,6 +64,7 @@ public class SettingsSliceProviderTest {
     public void setUp() {
         mContext = spy(RuntimeEnvironment.application);
         mProvider = spy(new SettingsSliceProvider());
+        mProvider.mSliceDataCache = new HashMap<>();
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
     }
@@ -82,10 +92,39 @@ public class SettingsSliceProviderTest {
         assertThat(uri.getLastPathSegment()).isEqualTo(KEY);
     }
 
+    @Test
+    public void testLoadSlice_returnsSliceFromAccessor() {
+        ContentResolver mockResolver = mock(ContentResolver.class);
+        doReturn(mockResolver).when(mContext).getContentResolver();
+        doReturn(mContext).when(mProvider).getContext();
+        mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
+        insertSpecialCase(KEY);
+        Uri uri = SettingsSliceProvider.getUri(KEY);
+
+        mProvider.loadSlice(uri);
+        SliceData data = mProvider.mSliceDataCache.get(uri);
+
+        assertThat(data.getKey()).isEqualTo(KEY);
+        assertThat(data.getTitle()).isEqualTo(TITLE);
+    }
+
+    @Test
+    public void testLoadSlice_cachedEntryRemovedOnBuild() {
+        doReturn(mContext).when(mProvider).getContext();
+        SliceData data = getDummyData();
+        mProvider.mSliceDataCache.put(data.getUri(), data);
+        mProvider.onBindSlice(data.getUri());
+        insertSpecialCase(data.getKey());
+
+        SliceData cachedData = mProvider.mSliceDataCache.get(data.getUri());
+
+        assertThat(cachedData).isNull();
+    }
+
     private void insertSpecialCase(String key) {
         ContentValues values = new ContentValues();
         values.put(SlicesDatabaseHelper.IndexColumns.KEY, key);
-        values.put(SlicesDatabaseHelper.IndexColumns.TITLE, fakeTitle);
+        values.put(SlicesDatabaseHelper.IndexColumns.TITLE, TITLE);
         values.put(SlicesDatabaseHelper.IndexColumns.SUMMARY, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.SCREENTITLE, "s");
         values.put(SlicesDatabaseHelper.IndexColumns.ICON_RESOURCE, 1234);
@@ -93,5 +132,18 @@ public class SettingsSliceProviderTest {
         values.put(SlicesDatabaseHelper.IndexColumns.CONTROLLER, "test");
 
         mDb.replaceOrThrow(SlicesDatabaseHelper.Tables.TABLE_SLICES_INDEX, null, values);
+    }
+
+    private SliceData getDummyData() {
+        return new SliceData.Builder()
+                .setKey(KEY)
+                .setTitle(TITLE)
+                .setSummary(SUMMARY)
+                .setScreenTitle(SCREEN_TITLE)
+                .setIcon(ICON)
+                .setFragmentName(FRAGMENT_NAME)
+                .setUri(URI)
+                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .build();
     }
 }

@@ -33,12 +33,14 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.drawer.CategoryManager;
@@ -211,6 +213,11 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
+    }
+
+    @Override
+    public boolean useSuggestionUiV2() {
+        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SUGGESTION_UI_V2);
     }
 
     private void bindSummary(Preference preference, Tile tile) {

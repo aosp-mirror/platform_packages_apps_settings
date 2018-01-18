@@ -242,13 +242,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".search.SearchActivity"
-                  android:label="@string/search_settings"
-                  android:icon="@drawable/ic_search_24dp"
-                  android:parentActivityName="Settings"
-                  android:theme="@style/Theme.Settings.NoActionBar">
-        </activity>
-
         <activity android:name=".search.SearchResultTrampoline"
                   android:theme="@android:style/Theme.NoDisplay"
                   android:excludeFromRecents="true"
@@ -1206,7 +1199,6 @@
         </activity>
 
         <activity android:name="Settings$NotificationStationActivity"
-                android:theme="@style/Theme.NotificationStation"
                 android:label="@string/notification_log_title"
                 android:taskAffinity="">
             <intent-filter>

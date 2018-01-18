@@ -36,7 +36,6 @@ import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,10 +61,8 @@ public class SuggestionAdapterTest {
     private Context mContext;
     private SuggestionAdapter mSuggestionAdapter;
     private DashboardAdapter.DashboardItemHolder mSuggestionHolder;
-    private List<Tile> mOneSuggestion;
-    private List<Tile> mTwoSuggestions;
-    private List<Suggestion> mOneSuggestionV2;
-    private List<Suggestion> mTwoSuggestionsV2;
+    private List<Suggestion> mOneSuggestion;
+    private List<Suggestion> mTwoSuggestions;
 
     @Before
     public void setUp() {
@@ -73,45 +70,34 @@ public class SuggestionAdapterTest {
         mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
-        final Tile suggestion1 = new Tile();
-        final Tile suggestion2 = new Tile();
-        final Suggestion suggestion1V2 = new Suggestion.Builder("id1")
+        final Suggestion suggestion1 = new Suggestion.Builder("id1")
                 .setTitle("Test suggestion 1")
                 .build();
-        final Suggestion suggestion2V2 = new Suggestion.Builder("id2")
+        final Suggestion suggestion2 = new Suggestion.Builder("id2")
                 .setTitle("Test suggestion 2")
                 .build();
-        suggestion1.title = "Test Suggestion 1";
-        suggestion1.icon = mock(Icon.class);
-        suggestion2.title = "Test Suggestion 2";
-        suggestion2.icon = mock(Icon.class);
         mOneSuggestion = new ArrayList<>();
         mOneSuggestion.add(suggestion1);
         mTwoSuggestions = new ArrayList<>();
         mTwoSuggestions.add(suggestion1);
         mTwoSuggestions.add(suggestion2);
-        mOneSuggestionV2 = new ArrayList<>();
-        mOneSuggestionV2.add(suggestion1V2);
-        mTwoSuggestionsV2 = new ArrayList<>();
-        mTwoSuggestionsV2.add(suggestion1V2);
-        mTwoSuggestionsV2.add(suggestion2V2);
     }
 
     @Test
     public void getItemCount_shouldReturnListSize() {
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                mOneSuggestionV2, new ArrayList<>());
+                mOneSuggestion, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(1);
 
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                mTwoSuggestionsV2, new ArrayList<>());
+                mTwoSuggestions, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemCount()).isEqualTo(2);
     }
 
     @Test
     public void getItemViewType_shouldReturnSuggestionTile() {
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                mOneSuggestionV2, new ArrayList<>());
+                mOneSuggestion, new ArrayList<>());
         assertThat(mSuggestionAdapter.getItemViewType(0))
                 .isEqualTo(R.layout.suggestion_tile);
     }
@@ -137,7 +123,7 @@ public class SuggestionAdapterTest {
                 R.layout.suggestion_tile, new LinearLayout(mContext), true));
         mSuggestionHolder = new DashboardAdapter.DashboardItemHolder(view);
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                mOneSuggestionV2, new ArrayList<>());
+                mOneSuggestion, new ArrayList<>());
 
         // Bind twice
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -146,13 +132,13 @@ public class SuggestionAdapterTest {
         // Log once
         verify(mFeatureFactory.metricsFeatureProvider).action(
                 mContext, MetricsProto.MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION,
-                mOneSuggestionV2.get(0).getId());
+                mOneSuggestion.get(0).getId());
     }
 
     @Test
     public void onBindViewHolder_itemViewShouldHandleClick()
             throws PendingIntent.CanceledException {
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
         setupSuggestions(mActivity, suggestions);
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -164,21 +150,21 @@ public class SuggestionAdapterTest {
 
     @Test
     public void getSuggestions_shouldReturnSuggestionWhenMatch() {
-        final List<Suggestion> suggestionsV2 = makeSuggestionsV2("pkg1");
-        setupSuggestions(mActivity, suggestionsV2);
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
+        setupSuggestions(mActivity, suggestions);
 
         assertThat(mSuggestionAdapter.getSuggestion(0)).isNotNull();
     }
 
-    private void setupSuggestions(Context context, List<Suggestion> suggestionsV2) {
+    private void setupSuggestions(Context context, List<Suggestion> suggestions) {
         mSuggestionAdapter = new SuggestionAdapter(context, mSuggestionControllerMixin,
-                suggestionsV2, new ArrayList<>());
+                suggestions, new ArrayList<>());
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
                 new FrameLayout(RuntimeEnvironment.application),
                 mSuggestionAdapter.getItemViewType(0));
     }
 
-    private List<Suggestion> makeSuggestionsV2(String... pkgNames) {
+    private List<Suggestion> makeSuggestions(String... pkgNames) {
         final List<Suggestion> suggestions = new ArrayList<>();
         for (String pkgName : pkgNames) {
             final Suggestion suggestion = new Suggestion.Builder(pkgName)

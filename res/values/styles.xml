@@ -316,6 +316,13 @@
     <style name="TextAppearance.RecentsTitle" parent="TextAppearance.CategoryTitle" />
     <style name="TextAppearance.ResultTitle" parent="TextAppearance.CategoryTitle" />
 
+    <style name="TextAppearance.SuggestionHeader"
+           parent="@android:style/TextAppearance.Material.Subhead">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
     <style name="TextAppearance.SuggestionTitle"
            parent="@android:style/TextAppearance.Material.Subhead">
         <item name="android:fontFamily">sans-serif-medium</item>

@@ -43,6 +43,7 @@ import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.widget.LinearColorBar;
 
 import java.util.ArrayList;
 import java.util.Collections;

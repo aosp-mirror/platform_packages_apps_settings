@@ -267,14 +267,6 @@
         <item name="android:actionBarStyle">@style/Theme.ActionBar</item>
     </style>
 
-    <style name="Theme.NotificationStation" parent="@style/Theme.Settings">
-        <!-- Redefine the ActionBar style for contentInsetStart -->
-        <item name="android:actionBarStyle">@style/Theme.ActionBar.SubSettings</item>
-        <item name="*android:actionBarSize">@dimen/actionbar_size</item>
-
-        <item name="preferenceBackgroundColor">@android:color/transparent</item>
-    </style>
-
     <style name="Theme.ConfirmDeviceCredentials" parent="Theme.SubSettings">
         <item name="confirmDeviceCredentialsSideMargin">@dimen/confirm_credentials_side_margin</item>
         <item name="confirmDeviceCredentialsTopMargin">@dimen/confirm_credentials_top_margin</item>

@@ -99,10 +99,11 @@
         android:fragment="com.android.settings.dream.DreamSettings" />
 
     <!-- Cross-listed item, if you change this, also change it in power_usage_summary.xml -->
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="ambient_display"
         android:title="@string/ambient_display_screen_title"
-        android:fragment="com.android.settings.display.AmbientDisplaySettings" />
+        android:fragment="com.android.settings.display.AmbientDisplaySettings"
+        settings:userRestriction="no_ambient_display" />
 
     <!-- Hide night mode for now
     <ListPreference

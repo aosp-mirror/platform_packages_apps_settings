@@ -16,15 +16,25 @@
 
 package com.android.settings.applications.appinfo;
 
+import static android.arch.lifecycle.Lifecycle.Event.ON_START;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
+import android.app.ActionBar;
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.graphics.drawable.Drawable;
 import android.support.v7.preference.PreferenceScreen;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,12 +43,14 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -48,19 +60,34 @@ public class AppHeaderViewPreferenceControllerTest {
 
     @Mock
     private AppInfoDashboardFragment mFragment;
+
     @Mock
-    private Activity mActivity;
+    private PreferenceScreen mScreen;
+    @Mock
+    private LayoutPreference mPreference;
 
     private Context mContext;
+    private Activity mActivity;
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
+    private View mHeader;
     private AppHeaderViewPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mHeader = LayoutInflater.from(mContext).inflate(R.layout.settings_entity_header, null);
+
         when(mFragment.getActivity()).thenReturn(mActivity);
-        when(mActivity.getApplicationContext()).thenReturn(mContext);
-        mController = new AppHeaderViewPreferenceController(mContext, mFragment, "Package1", null);
+        when(mScreen.findPreference(anyString())).thenReturn(mPreference);
+        when(mPreference.findViewById(R.id.entity_header)).thenReturn(mHeader);
+
+        mController = new AppHeaderViewPreferenceController(mContext, mFragment, "Package1",
+                mLifecycle);
     }
 
     @Test
@@ -77,21 +104,29 @@ public class AppHeaderViewPreferenceControllerTest {
         when(mFragment.getAppEntry()).thenReturn(appEntry);
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
 
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        final LayoutPreference preference = mock(LayoutPreference.class);
-        when(screen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
-        final View header = mock(View.class);
-        when(preference.findViewById(R.id.entity_header)).thenReturn(header);
-        final TextView title = mock(TextView.class);
-        when(header.findViewById(R.id.entity_header_title)).thenReturn(title);
-        final TextView summary = mock(TextView.class);
-        when(header.findViewById(R.id.entity_header_summary)).thenReturn(summary);
-        mController.displayPreference(screen);
 
+        final TextView title = mHeader.findViewById(R.id.entity_header_title);
+        final TextView summary = mHeader.findViewById(R.id.entity_header_summary);
+
+        mController.displayPreference(mScreen);
         mController.refreshUi();
 
-        verify(title).setText(appLabel);
-        verify(summary).setText(mContext.getString(R.string.installed));
+        assertThat(title.getText()).isEqualTo(appLabel);
+        assertThat(summary.getText()).isEqualTo(mContext.getString(R.string.installed));
+    }
+
+    @Test
+    public void onStart_shouldStyleActionBar() {
+        final ActionBar actionBar = mock(ActionBar.class);
+        when(mActivity.getActionBar()).thenReturn(actionBar);
+
+        mController.displayPreference(mScreen);
+
+        verifyZeroInteractions(actionBar);
+
+        mLifecycle.handleLifecycleEvent(ON_START);
+
+        verify(actionBar).setBackgroundDrawable(any(Drawable.class));
     }
 
 }

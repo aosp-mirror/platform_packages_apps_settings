@@ -170,6 +170,8 @@
     <string name="bluetooth_paired_device_title" msgid="8638994696317952019">"I tuoi dispositivi"</string>
     <string name="bluetooth_pairing_page_title" msgid="7712127387361962608">"Accoppia nuovo dispositivo"</string>
     <string name="bluetooth_pref_summary" msgid="2606502649251443574">"Consenti l\'accoppiamento e la connessione del dispositivo a dispositivi Bluetooth"</string>
+    <string name="bluetooth_disable_inband_ringing" msgid="8919353393497325693">"Disattiva suoneria in banda"</string>
+    <string name="bluetooth_disable_inband_ringing_summary" msgid="7898974890913984364">"Non riprodurre le suonerie del telefono personalizzate tramite gli auricolari Bluetooth"</string>
     <string name="connected_device_connected_title" msgid="5871712271201945606">"Attualmente connessi"</string>
     <string name="connected_device_saved_title" msgid="688364359746674536">"Dispositivi salvati"</string>
     <string name="connected_device_add_device_title" msgid="7803521577708810621">"Aggiungi dispositivo"</string>
@@ -330,6 +332,11 @@
     <string name="date_time_set_date" msgid="7021491668550232105">"Imposta data"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Ordina per nome"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Ordina per fuso orario"</string>
+    <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> inizia il giorno <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_time_type_dst" msgid="8850494578766845276">"Ora legale"</string>
+    <string name="zone_time_type_standard" msgid="3462424485380376522">"Ora solare"</string>
+    <string name="zone_menu_by_region" msgid="4603214570803607532">"Fuso orario per area geografica"</string>
+    <string name="zone_menu_by_offset" msgid="1172774718486088771">"Fusi orari con offset fisso"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Ora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Blocca automaticamente"</string>
@@ -348,6 +355,7 @@
     <string name="profile_info_settings_title" msgid="3518603215935346604">"Informazioni profilo"</string>
     <string name="Accounts_settings_title" msgid="1643879107901699406">"Account"</string>
     <string name="location_settings_title" msgid="1369675479310751735">"Geolocalizzazione"</string>
+    <string name="location_settings_master_switch_title" msgid="3560242980335542411">"Usa posizione"</string>
     <string name="account_settings_title" msgid="626177544686329806">"Account"</string>
     <string name="security_settings_title" msgid="4918904614964215087">"Sicurezza e posizione"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Crittografia e credenziali"</string>
@@ -691,6 +699,8 @@
     <string name="bluetooth_dock_settings_headset" msgid="1001821426078644650">"Come vivavoce"</string>
     <string name="bluetooth_dock_settings_a2dp" msgid="8791004998846630574">"Per musica e audio media"</string>
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Ricorda impostazioni"</string>
+    <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Numero massimo di dispositivi audio Bluetooth connessi"</string>
+    <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Seleziona il numero massimo di dispositivi audio Bluetooth connessi"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Trasmetti"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Attiva display wireless"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Nessun dispositivo vicino."</string>
@@ -705,6 +715,7 @@
     <string name="wifi_display_options_name" msgid="4756080222307467898">"Nome"</string>
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
+    <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Accedi"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> chiede di attivare il Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> chiede di disattivare il Wi-Fi"</string>
@@ -722,6 +733,7 @@
     <string name="wifi_quick_toggle_title" msgid="8850161330437693895">"Wi‑Fi"</string>
     <string name="wifi_quick_toggle_summary" msgid="2696547080481267642">"Attiva Wi‑Fi"</string>
     <string name="wifi_settings" msgid="29722149822540994">"Wi‑Fi"</string>
+    <string name="wifi_settings_master_switch_title" msgid="4746267967669683259">"Utilizza Wi-Fi"</string>
     <string name="wifi_settings_category" msgid="8719175790520448014">"Impostazioni Wi‑Fi"</string>
     <string name="wifi_settings_title" msgid="3103415012485692233">"Wi‑Fi"</string>
     <string name="wifi_settings_summary" msgid="668767638556052820">"Configura e gestisci punti di accesso wireless"</string>
@@ -833,7 +845,7 @@
     <string name="wifi_wps_available_second_item" msgid="8427520131718215301">" (WPS disponibile)"</string>
     <string name="wifi_wps_nfc_enter_password" msgid="2288214226916117159">"Inserisci la password di rete"</string>
     <string name="wifi_carrier_connect" msgid="8174696557882299911">"Rete Wi‑Fi dell\'operatore"</string>
-    <string name="wifi_carrier_content" msgid="4634077285415851933">"Connettiti tramite <xliff:g id="NAME">%1%s</xliff:g>"</string>
+    <string name="wifi_carrier_content" msgid="4634077285415851933">"Connettiti tramite <xliff:g id="NAME">%1$s</xliff:g>"</string>
     <string name="wifi_scan_always_turnon_message" msgid="203123538572122989">"Per migliorare la precisione della posizione e per altri scopi, <xliff:g id="APP_NAME">%1$s</xliff:g> chiede di attivare la ricerca della rete, anche quando il Wi-Fi è disattivato.\n\nConsetirlo a tutte le app che vogliono eseguire la ricerca?"</string>
     <string name="wifi_scan_always_turnoff_message" msgid="5538901671131941043">"Per disattivare questa impostazione, vai alla sezione Avanzate nel menu extra."</string>
     <string name="wifi_scan_always_confirm_allow" msgid="5355973075896817232">"Consenti"</string>
@@ -959,6 +971,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="2329334487851497223"></string>
     <string name="emergency_address_title" msgid="932729250447887545">"Indirizzo per le emergenze"</string>
     <string name="emergency_address_summary" msgid="7751971156196115129">"Viene considerato la tua posizione quando fai una chiamata di emergenza tramite Wi‑Fi"</string>
+    <string name="private_dns_help_message" msgid="3299567069152568958"><annotation id="url">"Ulteriori informazioni"</annotation>" sulle funzioni DNS private"</string>
     <string name="display_settings_title" msgid="1708697328627382561">"Display"</string>
     <string name="sound_settings" msgid="5534671337768745343">"Audio"</string>
     <string name="all_volume_title" msgid="4296957391257836961">"Volumi"</string>
@@ -1306,6 +1319,7 @@
     <string name="storage_wizard_ready_internal_body" msgid="122532674037860197">"La tua nuova <xliff:g id="NAME">^1</xliff:g> è attiva. \n\nPer spostare foto, file e dati delle app su questo dispositivo, seleziona Impostazioni &gt; Memoria."</string>
     <string name="storage_wizard_move_confirm_title" msgid="292782012677890250">"Sposta <xliff:g id="APP">^1</xliff:g>"</string>
     <string name="storage_wizard_move_confirm_body" msgid="5176432115206478941">"Lo spostamento dell\'app <xliff:g id="APP">^1</xliff:g> e dei relativi dati sulla <xliff:g id="NAME_0">^2</xliff:g> sarà veloce. Potrai utilizzare l\'app soltanto al termine dello spostamento. \n\nNon rimuovere la <xliff:g id="NAME_1">^2</xliff:g> durante lo spostamento."</string>
+    <string name="storage_wizard_move_unlock" msgid="1526216561023200694">"Per spostare i dati devi sbloccare l\'utente <xliff:g id="APP">^1</xliff:g>."</string>
     <string name="storage_wizard_move_progress_title" msgid="4443920302548035674">"Spostamento dell\'app <xliff:g id="APP">^1</xliff:g>…"</string>
     <string name="storage_wizard_move_progress_body" msgid="7802577486578105609">"Non rimuovere la <xliff:g id="NAME">^1</xliff:g> durante lo spostamento. \n\nL\'app <xliff:g id="APP">^2</xliff:g> su questo dispositivo sarà disponibile soltanto al termine dello spostamento."</string>
     <string name="storage_wizard_move_progress_cancel" msgid="542047237524588792">"Annulla spostamento"</string>
@@ -1466,6 +1480,7 @@
     <string name="location_sources_heading" msgid="1278732419851088319">"Fonti di geolocalizzazione"</string>
     <string name="about_settings" product="tablet" msgid="593457295516533765">"Informazioni sul tablet"</string>
     <string name="about_settings" product="default" msgid="1743378368185371685">"Informazioni sul telefono"</string>
+    <string name="about_settings" product="device" msgid="6717640957897546887">"Informazioni sul dispositivo"</string>
     <string name="about_settings" product="emulator" msgid="221313099578564438">"Informazioni sul dispositivo emulato"</string>
     <string name="about_settings_summary" msgid="3371517697156165959">"Visualizza informazioni legali, stato, versione del software"</string>
     <string name="legal_information" msgid="5769301644270604095">"Informazioni legali"</string>
@@ -1573,6 +1588,7 @@
     <string name="see_all_apps_title" msgid="1317153498074308438">"Mostra tutte le app (<xliff:g id="COUNT">%1$d</xliff:g>)"</string>
     <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"Il tablet e i dati personali sono più vulnerabili agli attacchi provenienti da app sconosciute. Installando le app provenienti da questa origine, accetti di essere responsabile degli eventuali danni al tablet o della perdita di dati che potrebbero derivare dall\'utilizzo di queste app."</string>
     <string name="install_all_warning" product="default" msgid="1952257127370115988">"Il telefono e i dati personali sono più vulnerabili agli attacchi provenienti da app sconosciute. Installando le app provenienti da questa origine, accetti di essere responsabile degli eventuali danni al telefono o della perdita di dati che potrebbero derivare dall\'utilizzo di queste app."</string>
+    <string name="install_all_warning" product="device" msgid="3648003301476423145">"Il dispositivo e i dati personali sono più vulnerabili agli attacchi provenienti da app sconosciute. Installando le app provenienti da questa origine, accetti di essere responsabile degli eventuali danni al dispositivo o della perdita di dati che potrebbero derivare dall\'utilizzo di queste app."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Impostazioni avanzate"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Attiva altre impostazioni"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Informazioni app"</string>
@@ -1872,6 +1888,9 @@
     <string name="accessibility_display_inversion_preference_subtitle" msgid="7052959202195368109">"Potrebbe influire sulle prestazioni"</string>
     <string name="accessibility_autoclick_preference_title" msgid="7014499339068449623">"Clic quando puntatore si ferma"</string>
     <string name="accessibility_autoclick_delay_preference_title" msgid="3962261178385106006">"Ritardo prima del clic"</string>
+    <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Utilizza servizio"</string>
+    <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Utilizza correzione colore"</string>
+    <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Utilizza sottotitoli"</string>
     <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"ATTIVO"</string>
     <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"DISATTIVATO"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Mostra in Impostazioni rapide"</string>
@@ -2030,10 +2049,33 @@
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> app con comportamenti anomali"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"La batteria è in buone condizioni"</string>
     <string name="battery_tip_summary_summary" msgid="7832491466325707487">"Le app hanno un comportamento normale"</string>
-    <!-- no translation found for battery_tip_low_battery_title (5103420355109677385) -->
+    <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Capacità della batteria in esaurimento"</string>
+    <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"La batteria non può fornire una buona durata"</string>
+    <string name="battery_tip_smart_battery_title" msgid="8471762806923764455">"Attiva gestione batteria intelligente"</string>
+    <string name="battery_tip_smart_battery_summary" msgid="3024670691742861841">"Attiva per ottimizzare l\'utilizzo della batteria"</string>
+    <!-- no translation found for battery_tip_early_heads_up_title (1454605424618204941) -->
     <skip />
-    <!-- no translation found for battery_tip_low_battery_summary (4702986182940709150) -->
+    <!-- no translation found for battery_tip_early_heads_up_summary (4003736326324428487) -->
     <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_title (1545434816346760843) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_summary (8191928150995385163) -->
+    <skip />
+    <string name="battery_tip_high_usage_title" product="default" msgid="7981031050318555946">"Telefono usato in modo massiccio"</string>
+    <string name="battery_tip_high_usage_title" product="tablet" msgid="8767749911858231430">"Tablet usato in modo massiccio"</string>
+    <string name="battery_tip_high_usage_title" product="device" msgid="4964729505519290954">"Dispositivo usato in modo massiccio"</string>
+    <string name="battery_tip_high_usage_summary" msgid="5437023146333888605">"Circa <xliff:g id="HOUR">%1$s</xliff:g> di utilizzo dall\'ultima ricarica completa"</string>
+    <string name="battery_tip_dialog_message" product="default" msgid="6744251070067861233">"Il telefono è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il telefono è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
+    <string name="battery_tip_dialog_message" product="tablet" msgid="7091442312127403445">"Il tablet è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il tablet è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
+    <string name="battery_tip_dialog_message" product="device" msgid="7621045312469814256">"Il dispositivo è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il dispositivo è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
+    <string name="smart_battery_manager_title" msgid="5677222263071864438">"Gestione batteria intelligente"</string>
+    <string name="smart_battery_title" msgid="7014692334636228916">"Gestione automatica della batteria"</string>
+    <string name="smart_battery_summary" msgid="6435844879637999044">"Regola automaticamente il consumo di batteria delle app in base all\'utilizzo"</string>
+    <string name="restricted_app_title" msgid="8982477293044330653">"App con limitazioni"</string>
+    <plurals name="restricted_app_summary" formatted="false" msgid="2541739220193274244">
+      <item quantity="other">%1$d app</item>
+      <item quantity="one">%1$d app</item>
+    </plurals>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Arrestare l\'app?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Il telefono non può gestire normalmente la batteria perché l\'app <xliff:g id="APP">%1$s</xliff:g> lo mantiene attivo.\n\nProva a risolvere il problema interrompendo l\'app.\n\nSe il problema persiste, potresti dover disinstallare l\'app per migliorare le prestazioni della batteria."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Il tablet non può gestire normalmente la batteria perché l\'app <xliff:g id="APP">%1$s</xliff:g> lo mantiene attivo.\n\nProva a risolvere il problema interrompendo l\'app.\n\nSe il problema persiste, potresti dover disinstallare l\'app per migliorare le prestazioni della batteria."</string>
@@ -2142,6 +2184,7 @@
     <string name="process_mediaserver_label" msgid="6500382062945689285">"MediaServer"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Ottimizzazione delle app"</string>
     <string name="battery_saver" msgid="8172485772238572153">"Risparmio energetico"</string>
+    <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Utilizza Risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Attiva automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6610846456314373">"Mai"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="8665950426992057191">"al seguente livello di carica: <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
@@ -2362,6 +2405,7 @@
     <string name="really_remove_account_title" msgid="8800653398717172460">"Rimuovere l\'account?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"La rimozione di questo account comporterà l\'eliminazione di tutti i relativi messaggi, contatti e altri dati dal tablet."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"La rimozione di questo account comporterà l\'eliminazione di tutti i relativi messaggi, contatti e altri dati dal telefono."</string>
+    <string name="really_remove_account_message" product="device" msgid="7507474724882080166">"La rimozione di questo account comporta l\'eliminazione di tutti i relativi messaggi, contatti e altri dati dal dispositivo."</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"Questa modifica non è consentita dall\'amministratore"</string>
     <string name="provider_label" msgid="7724593781904508866">"Sottoscrizioni push"</string>
     <!-- no translation found for sync_item_title (4782834606909853006) -->
@@ -2886,8 +2930,8 @@
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Blocca interruzioni visive"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Consenti segnali visivi"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Aggiungi"</string>
-    <string name="zen_mode_button_turn_on" msgid="5074744714613374902">"ATTIVA ORA"</string>
-    <string name="zen_mode_button_turn_off" msgid="1995551537320422792">"DISATTIVA ORA"</string>
+    <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Attiva ora"</string>
+    <string name="zen_mode_button_turn_off" msgid="6181953727880503094">"Disattiva ora"</string>
     <string name="zen_mode_settings_dnd_manual_end_time" msgid="8860646554263965569">"La funzione Non disturbare è attiva fino alle ore <xliff:g id="FORMATTED_TIME">%s</xliff:g>"</string>
     <string name="zen_mode_settings_dnd_manual_indefinite" msgid="7186615007561990908">"La funzione Non disturbare rimarrà attiva fino alla disattivazione"</string>
     <string name="zen_mode_settings_dnd_automatic_rule" msgid="7780048616476170427">"La funzione Non disturbare è stata attivata automaticamente da una regola (<xliff:g id="RULE_NAME">%s</xliff:g>)"</string>
@@ -2926,7 +2970,7 @@
     <string name="app_notifications_title" msgid="5810577805218003760">"Notifiche app"</string>
     <string name="notification_channel_title" msgid="2260666541030178452">"Categoria della notifica"</string>
     <string name="notification_group_title" msgid="7180506440133859601">"Gruppo di categorie di notifica"</string>
-    <string name="notification_importance_title" msgid="848692592679312666">"Importanza"</string>
+    <string name="notification_importance_title" msgid="4368578960344731828">"Comportamento"</string>
     <string name="notification_importance_unspecified" msgid="6622173510486113958">"Attiva audio"</string>
     <string name="notification_importance_blocked" msgid="7938180808339386300">"Non mostrare mai notifiche"</string>
     <string name="notification_importance_min" msgid="5455049524984686275">"Senza suoneria o interruzione visiva"</string>
@@ -2944,6 +2988,7 @@
     <string name="notification_channel_summary_low" msgid="322317684244981244">"Importanza media"</string>
     <string name="notification_channel_summary_default" msgid="1111749130423589931">"Importanza elevata"</string>
     <string name="notification_channel_summary_high" msgid="2085017556511003283">"Urgente"</string>
+    <string name="notification_switch_label" msgid="6843075654538931025">"Mostra notifiche"</string>
     <string name="default_notification_assistant" msgid="7631945224761430146">"Assistente notifica"</string>
     <string name="manage_notification_access_title" msgid="7510080164564944891">"Accesso alle notifiche"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8748026238701253040">"Accosso bloccato alle notifiche del profilo di lavoro"</string>
@@ -2974,9 +3019,9 @@
     <string name="manage_zen_access_title" msgid="2611116122628520522">"Accesso Non disturbare"</string>
     <string name="zen_access_empty_text" msgid="8772967285742259540">"Nessuna delle app installate ha richiesto l\'accesso Non disturbare"</string>
     <string name="loading_notification_apps" msgid="5031818677010335895">"Caricamento app..."</string>
-    <string name="app_notifications_off_desc" msgid="4882445501376722969">"Android sta bloccando la visualizzazione sul dispositivo delle notifiche dell\'app"</string>
-    <string name="channel_notifications_off_desc" msgid="5899225298718840635">"Android sta bloccando la visualizzazione sul dispositivo di questa categoria di notifiche"</string>
-    <string name="channel_group_notifications_off_desc" msgid="1620950416247316370">"Android sta bloccando la visualizzazione di questo gruppo di notifiche sul dispositivo in uso"</string>
+    <string name="app_notifications_off_desc" msgid="8289223211387083447">"Come richiesto, Android sta bloccando la visualizzazione delle notifiche dell\'app sul dispositivo in uso"</string>
+    <string name="channel_notifications_off_desc" msgid="9013011134681491778">"Come richiesto, Android sta bloccando la visualizzazione di questa categoria di notifiche sul dispositivo in uso"</string>
+    <string name="channel_group_notifications_off_desc" msgid="2315252834146837470">"Come richiesto, Android sta bloccando la visualizzazione di questo gruppo di notifiche sul dispositivo in uso"</string>
     <string name="notification_channels" msgid="5346841743182627500">"Categorie"</string>
     <string name="notification_channels_other" msgid="5645317113885788226">"Altro"</string>
     <plurals name="notification_group_summary" formatted="false" msgid="3420621520561455358">
@@ -3555,31 +3600,8 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Connesso a più dispositivi"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Modalità demo dell\'interfaccia utente di sistema"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Riquadri sviluppatore per impostazioni rapide"</string>
-    <string name="support_escalation_title" msgid="4111071371281023145">"Siamo qui per aiutarti"</string>
-    <string name="support_escalation_24_7_title" msgid="8118369197749832074">"Siamo a tua disposizione 24 ore su 24, 7 giorni su 7"</string>
-    <string name="support_escalation_24_7_content_description" msgid="3772776213036994533">"Siamo a tua disposizione 24 ore su 24, 7 giorni su 7"</string>
-    <string name="support_escalation_summary" msgid="8473084168776014405">"Il nostro team di assistenza è a disposizione per risolvere qualsiasi problema"</string>
-    <string name="support_escalation_24_7_summary" msgid="2802773279262547187">"Il nostro team di assistenza è disponibile tutto il giorno, tutti i giorni"</string>
-    <string name="support_escalation_closed_summary" msgid="2240967274380168303">"Cerca nella Guida o chiamaci in orario d\'ufficio (ora locale):&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <string name="support_escalation_no_internet_summary" msgid="2526082812336597989">"Orari d\'ufficio per l\'assistenza telefonica (ora locale)&lt;br&gt;&lt;b&gt;<xliff:g id="OPERATION_HOURS">%s</xliff:g>&lt;/b&gt;"</string>
-    <string name="support_escalation_unavailable_summary" msgid="5208552975245211898">"Cerca nella guida o leggi i suggerimenti"</string>
-    <string name="support_country_list_title" msgid="823853371280534111">"Supporto per:"</string>
-    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
-    <string name="support_phone_international_format" msgid="2143528744844720829">"<xliff:g id="LANGUAGE">%1$s</xliff:g> (<xliff:g id="PHONE">%2$s</xliff:g>)"</string>
-    <string name="support_international_phone_title" msgid="1308334014138718455">"Stai viaggiando all\'estero?"</string>
-    <string name="support_international_phone_summary" msgid="208231793637026927">"Potrebbero essere applicate tariffe internazionali"</string>
-    <string name="support_escalation_by_phone" msgid="4843223043487058711">"Telefono"</string>
-    <string name="support_escalation_by_chat" msgid="977019859110763749">"Chat"</string>
-    <string name="support_tips_and_tricks_title" msgid="4153466795695447828">"Leggi i suggerimenti"</string>
-    <string name="support_help_feedback_title" msgid="693440287222186718">"Cerca nella guida e invia feedback"</string>
-    <string name="support_sign_in_required_title" msgid="1367187789121480440">"Contatta l\'assistenza"</string>
-    <string name="support_sign_in_button_text" msgid="3054769428620671241">"Accedi"</string>
-    <string name="support_sign_in_required_help" msgid="5200654782405538114">"Non riesci ad accedere?"</string>
-    <string name="support_disclaimer_title" msgid="4825302018208770031">"Invia informazioni sul sistema"</string>
-    <string name="support_disclaimer_do_not_show" msgid="3378367075323727539">"Non mostrare più"</string>
-    <string name="support_account_request_prefix" msgid="6387847874661861650">"Richiesta come"</string>
-    <string name="support_account_picker_add_account" msgid="5076277544846506214">"Aggiungi account"</string>
-    <string name="support_system_information_title" msgid="3439905790018934773">"Informazioni di sistema"</string>
+    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Traccia finestra"</string>
+    <string name="layer_trace_quick_settings_title" msgid="2447147947568109649">"Traccia livello"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Impostazioni profilo di lavoro"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Ricerca di contatti"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Consenti ricerche di contatti in base all\'organizzazione per identificare chiamanti e contatti"</string>
@@ -3595,11 +3617,11 @@
       <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> secondi</item>
       <item quantity="one">1 secondo</item>
     </plurals>
-    <string name="support_estimated_wait_time" msgid="6523081420029378051">"Tempo di attesa: <xliff:g id="ESTIMATE">%1$s</xliff:g> circa"</string>
     <string name="automatic_storage_manager_settings" msgid="7819434542155181607">"Gestisci archiviazione"</string>
     <string name="automatic_storage_manager_text" msgid="4562950476680600604">"Per liberare spazio, la gestione memoria rimuove foto e video dal dispositivo dopo averne eseguito il backup."</string>
     <string name="automatic_storage_manager_days_title" msgid="2017913896160914647">"Rimuovi foto e video"</string>
     <string name="automatic_storage_manager_preference_title" msgid="5753702798151073383">"Gestione memoria"</string>
+    <string name="automatic_storage_manager_master_switch_title" msgid="6792996736190821417">"Utilizza Gestione archiviazione"</string>
     <string name="deletion_helper_automatic_title" msgid="6605660435498272520">"Automatiche"</string>
     <string name="deletion_helper_manual_title" msgid="7947432164411214029">"Manuali"</string>
     <string name="deletion_helper_preference_title" msgid="5271510052022285884">"Libera spazio ora"</string>
@@ -3765,8 +3787,8 @@
     <string name="new_device_suggestion_summary" product="tablet" msgid="393751455688210956">"Scopri il tuo nuovo tablet"</string>
     <string name="new_device_suggestion_summary" product="device" msgid="2939870049868336652">"Scopri il tuo nuovo dispositivo"</string>
     <string name="disabled_low_ram_device" msgid="3751578499721173344">"Questa funzione non è disponibile su questo dispositivo"</string>
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking (1294470289520660584) -->
-    <skip />
-    <!-- no translation found for enable_gnss_raw_meas_full_tracking_summary (496344699046454200) -->
-    <skip />
+    <string name="enable_gnss_raw_meas_full_tracking" msgid="1294470289520660584">"Forza esecuzione completa delle misurazioni GNSS"</string>
+    <string name="enable_gnss_raw_meas_full_tracking_summary" msgid="496344699046454200">"Monitora tutte le costellazioni e le frequenze GNSS senza ciclo di lavoro utile"</string>
+    <string name="storage_access" msgid="8905018810338984531">"Accesso allo spazio di archiviazione"</string>
+    <string name="keywords_storage_access" msgid="3708874088152933579">"directory per l\'accesso allo spazio di archiviazione"</string>
 </resources>

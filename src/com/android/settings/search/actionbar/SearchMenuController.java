@@ -18,7 +18,7 @@ package com.android.settings.search.actionbar;
 
 import android.annotation.NonNull;
 import android.app.Fragment;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,14 +38,7 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
-        final Context context = host.getContext();
-        final boolean isSearchV2Enabled = FeatureFactory.getFactory(context)
-                .getSearchFeatureProvider()
-                .isSearchV2Enabled(context);
-
-        if (isSearchV2Enabled) {
-            host.getLifecycle().addObserver(new SearchMenuController(host));
-        }
+        host.getLifecycle().addObserver(new SearchMenuController(host));
     }
 
     private SearchMenuController(@NonNull Fragment host) {
@@ -67,8 +60,11 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
         searchItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         searchItem.setOnMenuItemClickListener(target -> {
-            mHost.startActivityForResult(
-                    SearchFeatureProvider.SEARCH_UI_INTENT, 0 /* requestCode */);
+            final Intent intent = SearchFeatureProvider.SEARCH_UI_INTENT;
+            intent.setPackage(FeatureFactory.getFactory(mHost.getContext())
+                    .getSearchFeatureProvider().getSettingsIntelligencePkgName());
+
+            mHost.startActivityForResult(intent, 0 /* requestCode */);
             return true;
         });
     }

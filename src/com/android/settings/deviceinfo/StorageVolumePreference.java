@@ -16,6 +16,7 @@
 
 package com.android.settings.deviceinfo;
 
+import android.app.usage.StorageStatsManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -25,6 +26,7 @@ import android.os.storage.VolumeInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -34,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.deviceinfo.StorageSettings.UnmountTask;
 import com.android.settingslib.Utils;
 
+import java.io.IOException;
 import java.io.File;
 
 /**
@@ -41,6 +44,8 @@ import java.io.File;
  * quick actions like unmounting.
  */
 public class StorageVolumePreference extends Preference {
+    private static final String TAG = StorageVolumePreference.class.getSimpleName();
+
     private final StorageManager mStorageManager;
     private final VolumeInfo mVolume;
 
@@ -70,11 +75,28 @@ public class StorageVolumePreference extends Preference {
         if (volume.isMountedReadable()) {
             // TODO: move statfs() to background thread
             final File path = volume.getPath();
-            if (totalBytes <= 0) {
-                totalBytes = path.getTotalSpace();
+
+            long freeBytes = 0;
+            long usedBytes = 0;
+            if (volume.getType() == VolumeInfo.TYPE_PRIVATE) {
+                final StorageStatsManager stats =
+                        context.getSystemService(StorageStatsManager.class);
+                try {
+                    totalBytes = stats.getTotalBytes(volume.getFsUuid());
+                    freeBytes = stats.getFreeBytes(volume.getFsUuid());
+                    usedBytes = totalBytes - freeBytes;
+                } catch (IOException e) {
+                    Log.w(TAG, e);
+                }
+            } else {
+                // StorageStatsManager can only query private volumes.
+                // Default to previous storage calculation for public volumes.
+                if (totalBytes <= 0) {
+                    totalBytes = path.getTotalSpace();
+                }
+                freeBytes = path.getFreeSpace();
+                usedBytes = totalBytes - freeBytes;
             }
-            final long freeBytes = path.getFreeSpace();
-            final long usedBytes = totalBytes - freeBytes;
 
             final String used = Formatter.formatFileSize(context, usedBytes);
             final String total = Formatter.formatFileSize(context, totalBytes);
