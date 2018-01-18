@@ -163,7 +163,7 @@ class SliceDataConverter {
 
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
                 // Note that without a controller, dynamic summaries are impossible.
-                // TODO (b/67996923) This will not work if preferences have nested intens:
+                // TODO (b/67996923) This will not work if preferences have nested intents:
                 // <pref ....>
                 //      <intent action="blab"/> </pref>
                 controllerClassName = XmlParserUtils.getController(mContext, attrs);
