@@ -17,9 +17,12 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -33,6 +36,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 /**
@@ -42,15 +46,17 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class ManageDeviceAdminPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock
+    private Resources mResources;
+
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-
     private ManageDeviceAdminPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mController = new ManageDeviceAdminPreferenceController(mContext);
     }
@@ -61,22 +67,29 @@ public final class ManageDeviceAdminPreferenceControllerTest {
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile()).thenReturn(0);
-        when(mContext.getResources().getString(R.string.number_of_device_admins_none))
+        when (mContext.getResources()).thenReturn(mResources);
+        when(mResources.getString(R.string.number_of_device_admins_none))
                 .thenReturn("no apps");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("no apps");
 
         when(mFeatureFactory.enterprisePrivacyFeatureProvider
                 .getNumberOfActiveDeviceAdminsForCurrentUserAndManagedProfile()).thenReturn(5);
-        when(mContext.getResources().getQuantityString(R.plurals.number_of_device_admins, 5, 5))
+        when(mResources.getQuantityString(R.plurals.number_of_device_admins, 5, 5))
                 .thenReturn("5 active apps");
         mController.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("5 active apps");
     }
 
     @Test
-    public void testIsAvailable() {
+    public void isAvailable_byDefault_isTrue() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

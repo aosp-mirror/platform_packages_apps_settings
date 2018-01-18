@@ -75,8 +75,14 @@ public class ManageTrustAgentsPreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    public void isAvailable_byDefault_isTrue() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

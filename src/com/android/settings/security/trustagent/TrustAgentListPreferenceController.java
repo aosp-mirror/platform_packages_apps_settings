@@ -79,7 +79,7 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_trust_agent_click_intent);
     }
 
     @Override
@@ -145,6 +145,10 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
             } else {
                 mSecurityCategory.removePreference(oldAgent);
             }
+        }
+        // If for some reason the preference is no longer available, don't proceed to add.
+        if (!isAvailable()) {
+            return;
         }
         // Then add new ones.
         final boolean hasSecurity = mLockPatternUtils.isSecure(MY_USER_ID);

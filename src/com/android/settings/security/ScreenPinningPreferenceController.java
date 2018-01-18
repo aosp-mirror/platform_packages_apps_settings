@@ -33,7 +33,8 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_screen_pinning_settings)
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
 
     @Override

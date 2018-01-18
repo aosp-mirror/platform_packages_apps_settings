@@ -23,6 +23,7 @@ import android.provider.Settings;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.R;
 
 public class ShowPasswordPreferenceController extends TogglePreferenceController {
 
@@ -53,7 +54,9 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_show_password)
+                ? AVAILABLE : DISABLED_UNSUPPORTED;
     }
+
 }
 
