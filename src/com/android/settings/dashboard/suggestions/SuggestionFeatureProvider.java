@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.util.Pair;
 
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
 

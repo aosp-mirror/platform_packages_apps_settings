@@ -33,6 +33,7 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import org.junit.Before;
 import org.junit.Test;

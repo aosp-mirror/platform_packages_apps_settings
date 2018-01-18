@@ -31,6 +31,7 @@ import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardAdapter.IconCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
 import java.util.Objects;
