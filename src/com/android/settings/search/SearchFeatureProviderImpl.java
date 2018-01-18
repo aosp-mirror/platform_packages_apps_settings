@@ -101,10 +101,6 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         return false;
     }
 
-    protected String getSettingsIntelligencePkgName() {
-        return "com.android.settings.intelligence";
-    }
-
     /**
      * A generic method to make the query suitable for searching the database.
      *
