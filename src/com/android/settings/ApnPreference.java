@@ -16,11 +16,12 @@
 
 package com.android.settings;
 
+import static android.provider.Telephony.Carriers.FILTERED_URI;
+
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.Telephony;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
@@ -118,7 +119,7 @@ public class ApnPreference extends Preference implements
             Context context = getContext();
             if (context != null) {
                 int pos = Integer.parseInt(getKey());
-                Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+                Uri url = ContentUris.withAppendedId(FILTERED_URI, pos);
                 Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
                 editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
                 context.startActivity(editIntent);
