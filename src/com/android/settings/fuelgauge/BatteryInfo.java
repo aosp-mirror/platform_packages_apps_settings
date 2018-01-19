@@ -272,7 +272,7 @@ public class BatteryInfo {
         void onParsingDone();
     }
 
-    private static void parse(BatteryStats stats, BatteryDataParser... parsers) {
+    public static void parse(BatteryStats stats, BatteryDataParser... parsers) {
         long startWalltime = 0;
         long endWalltime = 0;
         long historyStart = 0;
