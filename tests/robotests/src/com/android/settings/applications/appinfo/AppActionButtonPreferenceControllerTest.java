@@ -18,27 +18,18 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -120,16 +111,14 @@ public class AppActionButtonPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_shouldInitializeForceStopButton() {
+    public void displayPreference_shouldSetButton2Invisible() {
         final PreferenceScreen screen = mock(PreferenceScreen.class);
         final ActionButtonPreference preference = spy(new ActionButtonPreference(mContext));
         when(screen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
 
         mController.displayPreference(screen);
 
-        verify(preference).setButton2Positive(false);
-        verify(preference).setButton2Text(R.string.force_stop);
-        verify(preference).setButton2Enabled(false);
+        verify(preference).setButton2Visible(false);
     }
 
     @Test
@@ -138,14 +127,12 @@ public class AppActionButtonPreferenceControllerTest {
         final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
         final ApplicationInfo info = new ApplicationInfo();
         appEntry.info = info;
-        doNothing().when(mController).checkForceStop(appEntry, packageInfo);
         doNothing().when(mController).initUninstallButtons(appEntry, packageInfo);
         when(mFragment.getAppEntry()).thenReturn(appEntry);
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
 
         mController.refreshUi();
 
-        verify(mController).checkForceStop(appEntry, packageInfo);
         verify(mController).initUninstallButtons(appEntry, packageInfo);
     }
 
@@ -196,71 +183,6 @@ public class AppActionButtonPreferenceControllerTest {
         when(mUserManager.getUsers(true)).thenReturn(userInfos);
 
         assertThat(mController.initUninstallButtonForUserApp()).isFalse();
-    }
-
-    // Tests that we don't show the force stop button for instant apps (they aren't allowed to run
-    // when they aren't in the foreground).
-    @Test
-    public void checkForceStop_instantApps_shouldNotShowForceStop() {
-        // Make this app appear to be instant.
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> true));
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
-        final ApplicationInfo info = new ApplicationInfo();
-        appEntry.info = info;
-
-        mController.checkForceStop(appEntry, packageInfo);
-
-        verify(mController.mActionButtons).setButton2Visible(false);
-    }
-
-    @Test
-    public void checkForceStop_hasActiveAdmin_shouldDisableForceStop() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> false));
-        final String packageName = "Package1";
-        final PackageInfo packageInfo = new PackageInfo();
-        packageInfo.packageName = packageName;
-        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
-        when(mDevicePolicyManager.packageHasActiveAdmins(packageName)).thenReturn(true);
-
-        mController.checkForceStop(appEntry, packageInfo);
-
-        verify(mController.mActionButtons).setButton2Enabled(false);
-    }
-
-    @Test
-    public void checkForceStop_appRunning_shouldEnableForceStop() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> false));
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
-        final ApplicationInfo info = new ApplicationInfo();
-        appEntry.info = info;
-
-        mController.checkForceStop(appEntry, packageInfo);
-
-        verify(mController.mActionButtons).setButton2Enabled(true);
-    }
-
-    @Test
-    public void checkForceStop_appStopped_shouldQueryPackageRestart() {
-        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (i -> false));
-        final PackageInfo packageInfo = mock(PackageInfo.class);
-        final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
-        final ApplicationInfo info = new ApplicationInfo();
-        appEntry.info = info;
-        info.flags = ApplicationInfo.FLAG_STOPPED;
-        info.packageName = "com.android.setting";
-
-        mController.checkForceStop(appEntry, packageInfo);
-
-        verify(mContext).sendOrderedBroadcastAsUser(argThat(intent-> intent != null
-                        && intent.getAction().equals(Intent.ACTION_QUERY_PACKAGE_RESTART)),
-                any(UserHandle.class), nullable(String.class), any(BroadcastReceiver.class),
-                nullable(Handler.class), anyInt(), nullable(String.class), nullable(Bundle.class));
     }
 
     @Test

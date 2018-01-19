@@ -16,18 +16,14 @@
 
 package com.android.settings.applications.appinfo;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -35,7 +31,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.Log;
 import android.webkit.IWebViewUpdateService;
 
 import com.android.settings.R;
@@ -71,16 +66,6 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
     private UserManager mUserManager;
     private PackageManager mPm;
 
-    private final BroadcastReceiver mCheckKillProcessesReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            final boolean enabled = getResultCode() != Activity.RESULT_CANCELED;
-            Log.d(TAG, "Got broadcast response: Restart status for "
-                    + mParent.getAppEntry().info.packageName + " " + enabled);
-            updateForceStopButton(enabled);
-        }
-    };
-
     public AppActionButtonPreferenceController(Context context, AppInfoDashboardFragment parent,
             String packageName) {
         super(context, KEY_ACTION_BUTTONS);
@@ -101,9 +86,7 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mActionButtons = ((ActionButtonPreference) screen.findPreference(KEY_ACTION_BUTTONS))
-                .setButton2Text(R.string.force_stop)
-                .setButton2Positive(false)
-                .setButton2Enabled(false);
+                .setButton2Visible(false);
     }
 
     @Override
@@ -140,7 +123,6 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
             }
         }
 
-        checkForceStop(appEntry, packageInfo);
         initUninstallButtons(appEntry, packageInfo);
     }
 
@@ -267,41 +249,6 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
         }
 
         return disableable;
-    }
-
-    private void updateForceStopButton(boolean enabled) {
-        final boolean disallowedBySystem = RestrictedLockUtils.hasBaseUserRestriction(
-                mContext, UserManager.DISALLOW_APPS_CONTROL, mUserId);
-        mActionButtons
-                .setButton2Enabled(disallowedBySystem ? false : enabled)
-                .setButton2OnClickListener(
-                        disallowedBySystem ? null : v -> mParent.handleForceStopButtonClick());
-    }
-
-    void checkForceStop(AppEntry appEntry, PackageInfo packageInfo) {
-        if (mDpm.packageHasActiveAdmins(packageInfo.packageName)) {
-            // User can't force stop device admin.
-            Log.w(TAG, "User can't force stop device admin");
-            updateForceStopButton(false);
-        } else if (AppUtils.isInstant(packageInfo.applicationInfo)) {
-            updateForceStopButton(false);
-            mActionButtons.setButton2Visible(false);
-        } else if ((appEntry.info.flags & ApplicationInfo.FLAG_STOPPED) == 0) {
-            // If the app isn't explicitly stopped, then always show the
-            // force stop button.
-            Log.w(TAG, "App is not explicitly stopped");
-            updateForceStopButton(true);
-        } else {
-            final Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
-                    Uri.fromParts("package", appEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] { appEntry.info.packageName });
-            intent.putExtra(Intent.EXTRA_UID, appEntry.info.uid);
-            intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(appEntry.info.uid));
-            Log.d(TAG, "Sending broadcast to query restart status for "
-                    + appEntry.info.packageName);
-            mContext.sendOrderedBroadcastAsUser(intent, UserHandle.CURRENT, null,
-                    mCheckKillProcessesReceiver, null, Activity.RESULT_CANCELED, null, null);
-        }
     }
 
     private boolean signaturesMatch(String pkg1, String pkg2) {
