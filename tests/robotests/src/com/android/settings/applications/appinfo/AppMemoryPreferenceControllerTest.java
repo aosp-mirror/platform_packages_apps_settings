@@ -84,6 +84,24 @@ public class AppMemoryPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_devSettingsEnabled_butNotVisible_shouldReturnUnsupported() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAvailabilityStatus_devSettingsDisabled_butNotVisible_shouldReturnUnsupported() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+    }
+
+    @Test
     public void getAvailabilityStatus_developmentSettingsDisabled_shouldReturnDisabled() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);

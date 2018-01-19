@@ -76,7 +76,9 @@ public class AppBatteryPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_app_info_settings_battery)
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override
