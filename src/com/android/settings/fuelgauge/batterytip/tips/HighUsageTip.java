@@ -23,7 +23,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.batterytip.HighUsageApp;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 
 import java.util.List;
 
@@ -34,9 +34,9 @@ public class HighUsageTip extends BatteryTip {
 
     private final long mScreenTimeMs;
     @VisibleForTesting
-    final List<HighUsageApp> mHighUsageAppList;
+    final List<AppInfo> mHighUsageAppList;
 
-    public HighUsageTip(long screenTimeMs, List<HighUsageApp> appList) {
+    public HighUsageTip(long screenTimeMs, List<AppInfo> appList) {
         super(TipType.HIGH_DEVICE_USAGE, appList.isEmpty() ? StateType.INVISIBLE : StateType.NEW,
                 true /* showDialog */);
         mScreenTimeMs = screenTimeMs;
@@ -47,7 +47,7 @@ public class HighUsageTip extends BatteryTip {
     HighUsageTip(Parcel in) {
         super(in);
         mScreenTimeMs = in.readLong();
-        mHighUsageAppList = in.createTypedArrayList(HighUsageApp.CREATOR);
+        mHighUsageAppList = in.createTypedArrayList(AppInfo.CREATOR);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class HighUsageTip extends BatteryTip {
         return mScreenTimeMs;
     }
 
-    public List<HighUsageApp> getHighUsageAppList() {
+    public List<AppInfo> getHighUsageAppList() {
         return mHighUsageAppList;
     }
 
