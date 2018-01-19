@@ -178,5 +178,10 @@ public class Settings extends SettingsActivity {
     public static class StorageDashboardActivity extends SettingsActivity {}
     public static class UserAndAccountDashboardActivity extends SettingsActivity {}
     public static class SystemDashboardActivity extends SettingsActivity {}
+    public static class AdvancedConnectedDeviceActivity extends SettingsActivity {
+        public static final boolean isEnabled() {
+            return FeatureFlagUtils.isEnabled(null /* context */, CONNECTED_DEVICE_V2);
+        }
+    }
 
 }

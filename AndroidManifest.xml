@@ -3311,6 +3311,25 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="Settings$AdvancedConnectedDeviceActivity"
+                  android:label="@string/connected_device_connections_title"
+                  android:taskAffinity="com.android.settings"
+                  android:parentActivityName="Settings$ConnectedDeviceDashboardActivity"
+                  android:enabled="false">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.ADVANCED_CONNECTED_DEVICE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <provider android:name=".slices.SettingsSliceProvider"
                   android:authorities="com.android.settings.slices"
                   android:exported="true">
