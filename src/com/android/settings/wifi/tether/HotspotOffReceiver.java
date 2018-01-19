@@ -1,5 +1,5 @@
 
-package com.android.settings;
+package com.android.settings.wifi.tether;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

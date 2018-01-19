@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.wifi.tether;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -167,9 +167,14 @@ public class TetherService extends Service {
         SharedPreferences prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
         prefs.edit().putString(KEY_TETHERS, tethersToString(mCurrentTethers)).commit();
 
+        unregisterReceivers();
         if (DEBUG) Log.d(TAG, "Destroying TetherService");
-        unregisterReceiver(mReceiver);
         super.onDestroy();
+    }
+
+    private void unregisterReceivers() {
+        unregisterReceiver(mReceiver);
+        mHotspotReceiver.unregister();
     }
 
     private void removeTypeAtIndex(int index) {
