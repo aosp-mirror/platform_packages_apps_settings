@@ -16,9 +16,14 @@ package android.content.om;
 
 import android.os.IBinder;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public interface IOverlayManager {
 
     public OverlayInfo getOverlayInfo(String packageName, int userId);
+
+    public java.util.List getOverlayInfosForTarget(java.lang.String targetPackageName, int userId);
 
     public boolean setEnabled(java.lang.String packageName, boolean enable, int userId);
 
