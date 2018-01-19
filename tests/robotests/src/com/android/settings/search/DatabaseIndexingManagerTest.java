@@ -23,9 +23,7 @@ import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyList;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
@@ -55,7 +53,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -164,33 +161,6 @@ public class DatabaseIndexingManagerTest {
         );
         // Prevent database schema regressions
         assertThat(columnNames).containsAllIn(expColumnNames);
-    }
-
-    // Tests for the flow: IndexOneRaw -> UpdateOneRowWithFilteredData -> UpdateOneRow
-
-    @Test
-    public void testAddResource_withChildFragment_shouldUpdateSiteMapDb() {
-        // FIXME: This test was failing. (count = 6 at the end)
-
-//        SearchIndexableResource resource = getFakeResource(R.xml.network_and_internet);
-//        mManager.indexOneSearchIndexableData(mDb, localeStr, resource,
-//                new HashMap<>());
-//        Cursor query = mDb.query(IndexDatabaseHelper.Tables.TABLE_SITE_MAP, SITE_MAP_COLUMNS,
-//                null, null, null, null, null);
-//        query.moveToPosition(-1);
-//        int count = 0;
-//        while (query.moveToNext()) {
-//            count++;
-//            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.PARENT_CLASS)))
-//                    .isEqualTo(className);
-//            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.PARENT_TITLE)))
-//                    .isEqualTo(mContext.getString(R.string.network_dashboard_title));
-//            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.CHILD_CLASS)))
-//                    .isNotEmpty();
-//            assertThat(query.getString(query.getColumnIndex(SiteMapColumns.CHILD_TITLE)))
-//                    .isNotEmpty();
-//        }
-//        assertThat(count).isEqualTo(5);
     }
 
     // Test new public indexing flow
@@ -361,31 +331,6 @@ public class DatabaseIndexingManagerTest {
         cursor.moveToPosition(0);
         assertThat(cursor.getCount()).isEqualTo(1);
         assertThat(cursor.getString(2)).isEqualTo(TITLE_ONE);
-    }
-
-    @Test
-    public void testUpdateAsyncTask_onPostExecute_performsCallback() {
-        IndexingCallback callback = mock(IndexingCallback.class);
-
-        DatabaseIndexingManager.IndexingTask task = mManager.new IndexingTask(callback);
-        task.execute();
-
-        Robolectric.flushForegroundThreadScheduler();
-
-        verify(callback).onIndexingFinished();
-    }
-
-    @Test
-    public void testUpdateAsyncTask_onPostExecute_setsIndexingComplete() {
-        SearchFeatureProviderImpl provider = new SearchFeatureProviderImpl();
-        DatabaseIndexingManager manager = spy(provider.getIndexingManager(mContext));
-        DatabaseIndexingManager.IndexingTask task = manager.new IndexingTask(null);
-        doNothing().when(manager).performIndexing();
-
-        task.execute();
-        Robolectric.flushForegroundThreadScheduler();
-
-        assertThat(provider.isIndexingComplete(mContext)).isTrue();
     }
 
     // Util functions

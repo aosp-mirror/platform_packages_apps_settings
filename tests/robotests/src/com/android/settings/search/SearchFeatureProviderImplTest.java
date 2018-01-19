@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.widget.Toolbar;
 
 import com.android.settings.TestConfig;
-import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
@@ -58,14 +57,6 @@ public class SearchFeatureProviderImplTest {
     @After
     public void tearDown() {
         SettingsShadowSystemProperties.clear();
-    }
-
-    @Test
-    public void getSiteMapManager_shouldCacheInstance() {
-        final SiteMapManager manager1 = mProvider.getSiteMapManager();
-        final SiteMapManager manager2 = mProvider.getSiteMapManager();
-
-        assertThat(manager1).isSameAs(manager2);
     }
 
     @Test

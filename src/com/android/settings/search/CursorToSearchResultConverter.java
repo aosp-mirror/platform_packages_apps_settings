@@ -17,6 +17,9 @@
 
 package com.android.settings.search;
 
+import static com.android.settings.search.DatabaseResultLoader.BASE_RANKS;
+import static com.android.settings.search.SearchResult.TOP_RANK;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -26,17 +29,11 @@ import android.os.BadParcelableException;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.settings.dashboard.SiteMapManager;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static com.android.settings.search.DatabaseResultLoader.BASE_RANKS;
-import static com.android.settings.search.SearchResult.TOP_RANK;
 
 /**
  * Controller to Build search results from {@link Cursor} Objects.
@@ -94,8 +91,7 @@ public class CursorToSearchResultConverter {
         mContext = context;
     }
 
-    public Set<SearchResult> convertCursor(SiteMapManager sitemapManager,
-            Cursor cursorResults, int baseRank) {
+    public Set<SearchResult> convertCursor(Cursor cursorResults, int baseRank) {
         if (cursorResults == null) {
             return null;
         }
@@ -103,8 +99,8 @@ public class CursorToSearchResultConverter {
         final Set<SearchResult> results = new HashSet<>();
 
         while (cursorResults.moveToNext()) {
-            SearchResult result = buildSingleSearchResultFromCursor(sitemapManager,
-                    contextMap, cursorResults, baseRank);
+            SearchResult result = buildSingleSearchResultFromCursor(contextMap, cursorResults,
+                    baseRank);
             if (result != null) {
                 results.add(result);
             }
@@ -132,8 +128,8 @@ public class CursorToSearchResultConverter {
         return null;
     }
 
-    private SearchResult buildSingleSearchResultFromCursor(SiteMapManager sitemapManager,
-            Map<String, Context> contextMap, Cursor cursor, int baseRank) {
+    private SearchResult buildSingleSearchResultFromCursor(Map<String, Context> contextMap,
+            Cursor cursor, int baseRank) {
         final int docId = cursor.getInt(COLUMN_INDEX_ID);
         final String pkgName = cursor.getString(COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE);
         final String title = cursor.getString(COLUMN_INDEX_TITLE);
@@ -145,14 +141,12 @@ public class CursorToSearchResultConverter {
         final byte[] marshalledPayload = cursor.getBlob(COLUMN_INDEX_PAYLOAD);
         final ResultPayload payload = getUnmarshalledPayload(marshalledPayload, payloadType);
 
-        final List<String> breadcrumbs = getBreadcrumbs(sitemapManager, cursor);
         final int rank = getRank(title, baseRank, key);
 
         final SearchResult.Builder builder = new SearchResult.Builder()
                 .setStableId(docId)
                 .setTitle(title)
                 .setSummary(summaryOn)
-                .addBreadcrumbs(breadcrumbs)
                 .setRank(rank)
                 .setIcon(getIconForPackage(contextMap, pkgName, className, iconResStr))
                 .setPayload(payload);
@@ -191,12 +185,6 @@ public class CursorToSearchResultConverter {
         return icon;
     }
 
-    private List<String> getBreadcrumbs(SiteMapManager siteMapManager, Cursor cursor) {
-        final String screenTitle = cursor.getString(COLUMN_INDEX_SCREEN_TITLE);
-        final String screenClass = cursor.getString(COLUMN_INDEX_CLASS_NAME);
-        return siteMapManager == null ? null : siteMapManager.buildBreadCrumb(mContext, screenClass,
-                screenTitle);
-    }
 
     /** Uses the breadcrumbs to determine the offset to the base rank.
      *  There are three checks
