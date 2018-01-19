@@ -22,8 +22,8 @@ import android.support.v14.preference.PreferenceFragment;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.SmartBatterySettings;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SmartBatteryAction extends BatteryTipAction {
     private SettingsActivity mSettingsActivity;

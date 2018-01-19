@@ -30,8 +30,8 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneStateIntentReceiver;
 import com.android.internal.telephony.TelephonyProperties;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.WirelessUtils;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class AirplaneModeEnabler implements Preference.OnPreferenceChangeListener {
 

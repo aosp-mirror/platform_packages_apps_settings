@@ -49,8 +49,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -63,8 +64,7 @@ import java.util.List;
 public class DeviceAdminSettings extends ListFragment implements Instrumentable {
     static final String TAG = "DeviceAdminSettings";
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(getMetricsCategory());
+    private VisibilityLoggerMixin mVisibilityLoggerMixin;
     private DevicePolicyManager mDPM;
     private UserManager mUm;
 
@@ -83,12 +83,6 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
             }
             return this.name.compareTo(other.name);
         }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mVisibilityLoggerMixin.onAttach(context);
     }
 
     /**
@@ -121,6 +115,8 @@ public class DeviceAdminSettings extends ListFragment implements Instrumentable 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
     }
 
     @Override

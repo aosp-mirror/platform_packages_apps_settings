@@ -33,10 +33,10 @@ import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import static android.os.UserManager.DISALLOW_CONFIG_BLUETOOTH;
 
