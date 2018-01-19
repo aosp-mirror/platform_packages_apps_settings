@@ -38,13 +38,13 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 
 /**
- * Detailed settings for an app's storage access permissions (A.K.A Scoped Directory Access).
+ * Detailed settings for an app's directory access permissions (A.K.A Scoped Directory Access).
  */
 // TODO(b/63720392): explain its layout
 // TODO(b/63720392): add unit tests
-public class StorageAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
+public class DirectoryAccessDetails extends AppInfoWithHeader implements OnPreferenceChangeListener,
         OnPreferenceClickListener {
-    private static final String MY_TAG = "StorageAccessDetails";
+    private static final String MY_TAG = "DirectoryAccessDetails";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,6 +105,6 @@ public class StorageAccessDetails extends AppInfoWithHeader implements OnPrefere
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.APPLICATIONS_USAGE_ACCESS_DETAIL;
+        return MetricsEvent.APPLICATIONS_DIRECTORY_ACCESS_DETAIL;
     }
 }

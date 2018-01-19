@@ -120,7 +120,7 @@ public class Settings extends SettingsActivity {
     public static class PhotosStorageActivity extends SettingsActivity {
         /* empty */
     }
-    public static class StorageAccessSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class DirectoryAccessSettingsActivity extends SettingsActivity { /* empty */ }
 
     public static class TopLevelSettings extends SettingsActivity { /* empty */ }
     public static class ApnSettingsActivity extends SettingsActivity { /* empty */ }
