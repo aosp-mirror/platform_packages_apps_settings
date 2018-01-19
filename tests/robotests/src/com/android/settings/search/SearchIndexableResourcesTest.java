@@ -21,12 +21,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static junit.framework.Assert.fail;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.database.Cursor;
 import android.text.TextUtils;
 
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
 
@@ -36,49 +38,56 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
-    Set<Class> sProviderClassCopy;
+    SearchFeatureProviderImpl mSearchProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
-        sProviderClassCopy = new HashSet<>(SearchIndexableResources.sProviders);
+        mSearchProvider = new SearchFeatureProviderImpl();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.sProviders.addAll(sProviderClassCopy);
+        mFakeFeatureFactory.searchFeatureProvider = mock(
+                SearchFeatureProvider.class);
     }
 
     @Test
     public void testAddIndex() {
         final Class stringClass = java.lang.String.class;
         // Confirms that String.class isn't contained in SearchIndexableResources.
-        assertThat(SearchIndexableResources.sProviders).doesNotContain(stringClass);
-        final int beforeCount = SearchIndexableResources.providerValues().size();
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .doesNotContain(stringClass);
+        final int beforeCount =
+                mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
-        SearchIndexableResources.addIndex(java.lang.String.class);
+        ( (SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+                .addIndex(java.lang.String.class);
 
-        assertThat(SearchIndexableResources.sProviders).contains(stringClass);
-        final int afterCount = SearchIndexableResources.providerValues().size();
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .contains(stringClass);
+        final int afterCount =
+                mSearchProvider.getSearchIndexableResources().getProviderValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
     }
 
     @Test
     public void testIndexHasWifiSettings() {
-        assertThat(sProviderClassCopy).contains(WifiSettings.class);
+        assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
+                .contains(WifiSettings.class);
     }
 
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.addIndex(FakeIndexProvider.class);
+        mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
+        ( (SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+                .addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
@@ -97,7 +106,7 @@ public class SearchIndexableResourcesTest {
 
     @Test
     public void testAllClassNamesHaveProviders() {
-        for (Class clazz: sProviderClassCopy) {
+        for (Class clazz: mSearchProvider.getSearchIndexableResources().getProviderValues()) {
             if(DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
                 fail(clazz.getName() + "is not an index provider");
             }

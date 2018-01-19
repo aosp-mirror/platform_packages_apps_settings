@@ -2,6 +2,7 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.Manifest;
@@ -14,6 +15,7 @@ import android.provider.SearchIndexablesContract;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.search.indexing.FakeSettingsFragment;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -23,9 +25,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSearchIndexablesProviderTest {
@@ -33,8 +32,8 @@ public class SettingsSearchIndexablesProviderTest {
     private final String BASE_AUTHORITY = "com.android.settings";
 
     private SettingsSearchIndexablesProvider mProvider;
-
-    Set<Class> sProviderClasses;
+    private SearchFeatureProvider mFeatureProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
     Context mContext;
 
     @Before
@@ -49,15 +48,18 @@ public class SettingsSearchIndexablesProviderTest {
         info.readPermission = Manifest.permission.READ_SEARCH_INDEXABLES;
         mProvider.attachInfo(mContext, info);
 
-        sProviderClasses = new HashSet<>(SearchIndexableResources.sProviders);
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.sProviders.add(FakeSettingsFragment.class);
+        mFeatureProvider = new SearchFeatureProviderImpl();
+        mFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        mFeatureProvider.getSearchIndexableResources().getProviderValues()
+                .add(FakeSettingsFragment.class);
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mFeatureProvider;
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.sProviders.clear();
-        SearchIndexableResources.sProviders.addAll(sProviderClasses);
+        mFakeFeatureFactory.searchFeatureProvider = mock(
+                SearchFeatureProvider.class);
     }
 
     @Test

@@ -27,9 +27,9 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable.SearchIndexProvider;
-import com.android.settings.search.SearchIndexableResources;
 import com.android.settings.search.XmlParserUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -62,7 +62,8 @@ class SliceDataConverter {
      * @return a list of {@link SliceData} to be indexed and later referenced as a Slice.
      *
      * The collection works as follows:
-     * - Collects a list of Fragments from {@link SearchIndexableResources}.
+     * - Collects a list of Fragments from
+     * {@link FeatureFactory#getSearchFeatureProvider()}.
      * - From each fragment, grab a {@link SearchIndexProvider}.
      * - For each provider, collect XML resource layout and a list of
      * {@link com.android.settings.core.BasePreferenceController}.
@@ -72,7 +73,8 @@ class SliceDataConverter {
             return mSliceData;
         }
 
-        final Collection<Class> indexableClasses = SearchIndexableResources.providerValues();
+        final Collection<Class> indexableClasses = FeatureFactory.getFactory(mContext)
+                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
 
         for (Class clazz : indexableClasses) {
             final String fragmentName = clazz.getName();

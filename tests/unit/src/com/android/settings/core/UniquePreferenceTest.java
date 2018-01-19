@@ -31,6 +31,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
@@ -100,7 +101,10 @@ public class UniquePreferenceTest {
         final Set<String> uniqueKeys = new HashSet<>();
         final Set<String> nullKeyClasses = new HashSet<>();
         final Set<String> duplicatedKeys = new HashSet<>();
-        for (Class<?> clazz : SearchIndexableResources.providerValues()) {
+        final SearchIndexableResources resources =
+                FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
+                        .getSearchIndexableResources();
+        for (Class<?> clazz : resources.getProviderValues()) {
             verifyPreferenceKeys(uniqueKeys, duplicatedKeys, nullKeyClasses, clazz);
         }
 

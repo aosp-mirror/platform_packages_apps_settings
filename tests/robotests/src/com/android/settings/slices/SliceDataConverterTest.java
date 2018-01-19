@@ -18,11 +18,15 @@ package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.Context;
 
 import com.android.settings.TestConfig;
 import com.android.settings.search.FakeIndexProvider;
-import com.android.settings.search.SearchIndexableResources;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProviderImpl;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -32,9 +36,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -49,28 +51,31 @@ public class SliceDataConverterTest {
 
     Context mContext;
 
-    private Set<Class> mProviderClassesCopy;
-
     SliceDataConverter mSliceDataConverter;
+    SearchFeatureProvider mSearchFeatureProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mProviderClassesCopy = new HashSet<>(SearchIndexableResources.providerValues());
         mSliceDataConverter = new SliceDataConverter(mContext);
+        mSearchFeatureProvider = new SearchFeatureProviderImpl();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.providerValues().clear();
-        SearchIndexableResources.providerValues().addAll(mProviderClassesCopy);
+        mFakeFeatureFactory.searchFeatureProvider = mock(
+                SearchFeatureProvider.class);
     }
 
     @Test
     @Config(qualifiers = "mcc999")
     public void testFakeProvider_convertsFakeData() {
-        SearchIndexableResources.providerValues().clear();
-        SearchIndexableResources.providerValues().add(FakeIndexProvider.class);
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
+        mSearchFeatureProvider.getSearchIndexableResources().getProviderValues()
+                .add(FakeIndexProvider.class);
 
         List<SliceData> sliceDataList = mSliceDataConverter.getSliceData();
 

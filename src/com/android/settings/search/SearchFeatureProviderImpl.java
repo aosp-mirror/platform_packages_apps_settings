@@ -36,6 +36,7 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
 
     private static final String METRICS_ACTION_SETTINGS_INDEX = "search_synchronous_indexing";
     private DatabaseIndexingManager mDatabaseIndexingManager;
+    private SearchIndexableResources mSearchIndexableResources;
 
     @Override
     public void verifyLaunchSearchResultPageCaller(Context context, ComponentName caller) {
@@ -70,6 +71,14 @@ public class SearchFeatureProviderImpl implements SearchFeatureProvider {
         int indexingTime = (int) (System.currentTimeMillis() - indexStartTime);
         FeatureFactory.getFactory(context).getMetricsFeatureProvider()
                 .histogram(context, METRICS_ACTION_SETTINGS_INDEX, indexingTime);
+    }
+
+    @Override
+    public SearchIndexableResources getSearchIndexableResources() {
+        if (mSearchIndexableResources == null) {
+            mSearchIndexableResources = new SearchIndexableResourcesImpl();
+        }
+        return mSearchIndexableResources;
     }
 
     protected boolean isSignatureWhitelisted(Context context, String callerPackage) {
