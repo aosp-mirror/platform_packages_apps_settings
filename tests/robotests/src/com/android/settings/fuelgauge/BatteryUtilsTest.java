@@ -103,6 +103,8 @@ public class BatteryUtilsTest {
     private static final double PRECISION = 0.001;
     private static final int SDK_VERSION = Build.VERSION_CODES.L;
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final String HIGH_SDK_PACKAGE = "com.android.package.high";
+    private static final String LOW_SDK_PACKAGE = "com.android.package.low";
 
     @Mock
     private BatteryStats.Uid mUid;
@@ -137,16 +139,18 @@ public class BatteryUtilsTest {
     @Mock
     private ApplicationInfo mApplicationInfo;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
+    @Mock
+    private ApplicationInfo mHighApplicationInfo;
+    @Mock
+    private ApplicationInfo mLowApplicationInfo;
     private BatteryUtils mBatteryUtils;
     private FakeFeatureFactory mFeatureFactory;
     private PowerUsageFeatureProvider mProvider;
     private List<BatterySipper> mUsageList;
 
     @Before
-    public void setUp() {
+    public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
@@ -164,6 +168,14 @@ public class BatteryUtilsTest {
                 anyLong(), anyInt());
         when(mBatteryStatsHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
                 TIME_SINCE_LAST_FULL_CHARGE_US);
+
+        when(mPackageManager.getApplicationInfo(HIGH_SDK_PACKAGE, PackageManager.GET_META_DATA))
+                .thenReturn(mHighApplicationInfo);
+        when(mPackageManager.getApplicationInfo(LOW_SDK_PACKAGE, PackageManager.GET_META_DATA))
+                .thenReturn(mLowApplicationInfo);
+        mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
+        mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
+
 
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
@@ -500,5 +512,15 @@ public class BatteryUtilsTest {
 
         assertThat(mBatteryUtils.calculateScreenUsageTime(mBatteryStatsHelper)).isEqualTo(
                 TIME_EXPECTED_FOREGROUND);
+    }
+
+    @Test
+    public void testIsLegacyApp_SdkLowerThanO_ReturnTrue() {
+        assertThat(mBatteryUtils.isLegacyApp(LOW_SDK_PACKAGE)).isTrue();
+    }
+
+    @Test
+    public void testIsLegacyApp_SdkLargerOrEqualThanO_ReturnFalse() {
+        assertThat(mBatteryUtils.isLegacyApp(HIGH_SDK_PACKAGE)).isFalse();
     }
 }
