@@ -20,8 +20,12 @@ import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,16 +38,20 @@ import com.android.settings.TestConfig;
 import com.android.settings.TimeoutListPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
+import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
@@ -92,5 +100,35 @@ public class TimeoutPreferenceControllerTest {
 
         mController.updateState(mPreference);
         verify(mPreference).removeUnusableTimeouts(timeout, null);
+    }
+
+    @Test
+    public void testUpdateStateWithAdminTimeoutsAndRestriction() {
+        final int profileUserId = UserHandle.myUserId();
+        final long timeout = 100;
+        when(mUserManager.getProfiles(profileUserId)).thenReturn(Collections.emptyList());
+        ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(profileUserId, timeout);
+
+        int userId = UserHandle.myUserId();
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        // Add two enforcing users so that RestrictedLockUtils.checkIfRestrictionEnforced returns
+        // non-null.
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_PROFILE_OWNER));
+        when(mUserManager.getUserRestrictionSources(
+                UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT, UserHandle.of(userId)))
+                .thenReturn(enforcingUsers);
+
+        mController.updateState(mPreference);
+
+        ArgumentCaptor<Long> longCaptor = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<EnforcedAdmin> adminCaptor = ArgumentCaptor.forClass(EnforcedAdmin.class);
+
+        verify(mPreference, times(2)).removeUnusableTimeouts(
+                longCaptor.capture(), adminCaptor.capture());
+        assertEquals(0, (long)longCaptor.getValue());
+        assertTrue(adminCaptor.getValue() != null);
     }
 }

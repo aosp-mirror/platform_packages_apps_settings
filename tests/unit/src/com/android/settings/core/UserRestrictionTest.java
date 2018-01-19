@@ -66,7 +66,8 @@ public class UserRestrictionTest {
             UserManager.DISALLOW_CONFIG_VPN,
             UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
             UserManager.DISALLOW_AIRPLANE_MODE,
-            UserManager.DISALLOW_CONFIG_BRIGHTNESS
+            UserManager.DISALLOW_CONFIG_BRIGHTNESS,
+            UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT
     );
 
     @Before
