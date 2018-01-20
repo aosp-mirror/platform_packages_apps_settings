@@ -16,6 +16,7 @@
 
 package com.android.settings;
 
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.ContentResolver;
@@ -24,9 +25,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkPolicyManager;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.support.annotation.VisibleForTesting;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
@@ -39,6 +43,7 @@ import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.wrapper.RecoverySystemWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -57,6 +62,43 @@ public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+    @VisibleForTesting boolean mEraseEsim;
+    @VisibleForTesting EraseEsimAsyncTask mEraseEsimTask;
+    @VisibleForTesting static RecoverySystemWrapper mRecoverySystem;
+
+    /**
+     * Async task used to erase all the eSIM profiles from the phone. If error happens during
+     * erasing eSIM profiles or timeout, an error msg is shown.
+     */
+    private static class EraseEsimAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        private final Context mContext;
+        private final String mPackageName;
+
+        EraseEsimAsyncTask(Context context, String packageName) {
+            mContext = context;
+            mPackageName = packageName;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            return mRecoverySystem.wipeEuiccData(
+                    mContext, true /* isWipeEuicc */, mPackageName);
+        }
+
+        @Override
+        protected void onPostExecute(Boolean succeeded) {
+            if (succeeded) {
+                Toast.makeText(mContext, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                new AlertDialog.Builder(mContext)
+                        .setTitle(R.string.reset_esim_error_title)
+                        .setMessage(R.string.reset_esim_error_msg)
+                        .setPositiveButton(android.R.string.ok, null /* listener */)
+                        .show();
+            }
+        }
+    }
 
     /**
      * The user has gone through the multiple confirmation, so now we go ahead
@@ -69,7 +111,8 @@ public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
             if (Utils.isMonkeyRunning()) {
                 return;
             }
-            // TODO maybe show a progress dialog if this ends up taking a while
+            // TODO maybe show a progress screen if this ends up taking a while and won't let user
+            // go back until the tasks finished.
             Context context = getActivity();
 
             ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -108,11 +151,20 @@ public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
 
             ImsManager.factoryReset(context);
             restoreDefaultApn(context);
+            esimFactoryReset(context, context.getPackageName());
+        }
+    };
 
+    @VisibleForTesting
+    void esimFactoryReset(Context context, String packageName) {
+        if (mEraseEsim) {
+            mEraseEsimTask = new EraseEsimAsyncTask(context, packageName);
+            mEraseEsimTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        } else {
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();
         }
-    };
+    }
 
     /**
      * Restore APN settings to default.
@@ -163,6 +215,16 @@ public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
         if (args != null) {
             mSubId = args.getInt(PhoneConstants.SUBSCRIPTION_KEY,
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+            mEraseEsim = args.getBoolean(MasterClear.ERASE_ESIMS_EXTRA);
+        }
+        mRecoverySystem = new RecoverySystemWrapper();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mEraseEsimTask != null) {
+            mEraseEsimTask.cancel(true /* mayInterruptIfRunning */);
+            mEraseEsimTask = null;
         }
     }
 
