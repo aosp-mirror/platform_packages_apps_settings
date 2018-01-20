@@ -36,6 +36,7 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+import com.android.settingslib.utils.StringUtil;
 
 import java.util.List;
 
@@ -83,7 +84,8 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
                 return new AlertDialog.Builder(context)
                         .setMessage(getString(R.string.battery_tip_dialog_message,
-                                Utils.formatElapsedTime(context, highUsageTip.getScreenTimeMs(),
+                                StringUtil.formatElapsedTime(
+                                        context, highUsageTip.getScreenTimeMs(),
                                         false /* withSeconds */)))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)

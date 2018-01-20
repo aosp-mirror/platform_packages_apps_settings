@@ -43,6 +43,9 @@ import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import com.android.settingslib.R;
+import com.android.settingslib.utils.PowerUtil;
+import java.time.Duration;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,6 +75,8 @@ public class BatteryInfoTest {
     public static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     public static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
             "1m left until fully charged";
+    public static final String TEST_BATTERY_LEVEL_10 = "10%";
+    public static final String FIFTEEN_MIN_FORMATTED = "15m";
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
@@ -134,19 +139,56 @@ public class BatteryInfoTest {
     }
 
     @Test
-    public void testGetBatteryInfo_basedOnUsageTrue_usesCorrectString() {
+    public void testGetBatteryInfo_basedOnUsageTrueMoreThanFifteenMinutes_usesCorrectString() {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                1000, true /* basedOnUsage */);
+                PowerUtil.convertMsToUs(Duration.ofHours(4).toMillis()),
+                true /* basedOnUsage */);
         BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
                 mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
-                1000, true /* basedOnUsage */);
+                PowerUtil.convertMsToUs(Duration.ofHours(4).toMillis()),
+                true /* basedOnUsage */);
 
         // We only add special mention for the long string
         assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
         // shortened string should not have extra text
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
     }
+
+    @Test
+    public void testGetBatteryInfo_basedOnUsageTrueLessThanSevenMinutes_usesCorrectString() {
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
+                PowerUtil.convertMsToUs(Duration.ofMinutes(7).toMillis()),
+                true /* basedOnUsage */);
+        BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
+                PowerUtil.convertMsToUs(Duration.ofMinutes(7).toMillis()),
+                true /* basedOnUsage */);
+
+        // These should be identical in either case
+        assertThat(info.remainingLabel.toString()).isEqualTo(
+                mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
+        assertThat(info2.remainingLabel.toString()).isEqualTo(
+                mContext.getString(R.string.power_remaining_duration_only_shutdown_imminent));
+    }
+
+    @Test
+    public void testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
+        BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
+                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
+                PowerUtil.convertMsToUs(Duration.ofMinutes(10).toMillis()),
+                true /* basedOnUsage */);
+
+        // Check that strings are showing less than 15 minutes remaining regardless of exact time.
+        assertThat(info.chargeLabel.toString()).isEqualTo(
+                mContext.getString(R.string.power_remaining_less_than_duration,
+                        TEST_BATTERY_LEVEL_10, FIFTEEN_MIN_FORMATTED));
+        assertThat(info.remainingLabel.toString()).isEqualTo(
+                mContext.getString(R.string.power_remaining_less_than_duration_only,
+                        FIFTEEN_MIN_FORMATTED));
+    }
+
 
     @Test
     public void testGetBatteryInfo_basedOnUsageFalse_usesDefaultString() {
