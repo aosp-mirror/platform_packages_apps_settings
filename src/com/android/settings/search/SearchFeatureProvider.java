@@ -23,10 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toolbar;
 
-import com.android.settings.dashboard.SiteMapManager;
 import com.android.settings.overlay.FeatureFactory;
-
-import java.util.concurrent.ExecutorService;
 
 /**
  * FeatureProvider for Settings Search
@@ -45,11 +42,6 @@ public interface SearchFeatureProvider {
             throws SecurityException, IllegalArgumentException;
 
     /**
-     * Returns the manager for looking up breadcrumbs.
-     */
-    SiteMapManager getSiteMapManager();
-
-    /**
      * Synchronously updates the Settings database.
      */
     void updateIndex(Context context);
@@ -57,14 +49,9 @@ public interface SearchFeatureProvider {
     DatabaseIndexingManager getIndexingManager(Context context);
 
     /**
-     * @returns true when indexing is complete.
+     * @return a {@link SearchIndexableResources} to be used for indexing search results.
      */
-    boolean isIndexingComplete(Context context);
-
-    /**
-     * @return a {@link ExecutorService} to be shared between search tasks.
-     */
-    ExecutorService getExecutorService();
+    SearchIndexableResources getSearchIndexableResources();
 
     default String getSettingsIntelligencePkgName() {
         return "com.android.settings.intelligence";

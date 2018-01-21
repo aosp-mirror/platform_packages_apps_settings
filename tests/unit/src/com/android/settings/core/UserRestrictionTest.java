@@ -32,6 +32,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableResources;
@@ -65,7 +66,8 @@ public class UserRestrictionTest {
             UserManager.DISALLOW_CONFIG_VPN,
             UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS,
             UserManager.DISALLOW_AIRPLANE_MODE,
-            UserManager.DISALLOW_CONFIG_BRIGHTNESS
+            UserManager.DISALLOW_CONFIG_BRIGHTNESS,
+            UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT
     );
 
     @Before
@@ -79,7 +81,10 @@ public class UserRestrictionTest {
     @Test
     public void userRestrictionAttributeShouldBeValid()
             throws IOException, XmlPullParserException, Resources.NotFoundException {
-        for (Class<?> clazz : SearchIndexableResources.providerValues()) {
+        final SearchIndexableResources resources =
+                FeatureFactory.getFactory(mContext).getSearchFeatureProvider()
+                        .getSearchIndexableResources();
+        for (Class<?> clazz : resources.getProviderValues()) {
             verifyUserRestriction(clazz);
         }
     }

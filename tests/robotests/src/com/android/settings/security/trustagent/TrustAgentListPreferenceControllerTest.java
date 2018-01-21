@@ -25,6 +25,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -104,6 +105,12 @@ public class TrustAgentListPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_whenNotVisible_isFalse() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void onResume_shouldClearOldAgents() {
         final Preference oldAgent = new Preference(mActivity);
         oldAgent.setKey(PREF_KEY_TRUST_AGENT);
@@ -134,5 +141,25 @@ public class TrustAgentListPreferenceControllerTest {
         mController.onResume();
 
         verify(mCategory, atLeastOnce()).addPreference(any(Preference.class));
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void onResume_ifNotAvailable_shouldNotAddNewAgents() {
+        final List<TrustAgentManager.TrustAgentComponentInfo> agents = new ArrayList<>();
+        final TrustAgentManager.TrustAgentComponentInfo agent = mock(
+                TrustAgentManager.TrustAgentComponentInfo.class);
+        agent.title = "Test_title";
+        agent.summary = "test summary";
+        agent.componentName = new ComponentName("pkg", "agent");
+        agent.admin = null;
+        agents.add(agent);
+        when(mTrustAgentManager.getActiveTrustAgents(mActivity, mLockPatternUtils))
+                .thenReturn(agents);
+
+        mController.displayPreference(mScreen);
+        mController.onResume();
+
+        verify(mCategory, never()).addPreference(any(Preference.class));
     }
 }

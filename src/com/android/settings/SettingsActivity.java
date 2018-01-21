@@ -56,13 +56,13 @@ import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.gateway.SettingsGateway;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
-import com.android.settings.core.instrumentation.SharedPreferencesLogger;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
@@ -91,11 +91,6 @@ public class SettingsActivity extends SettingsDrawerActivity
      * activity.
      */
     public static final String EXTRA_SHOW_FRAGMENT = ":settings:show_fragment";
-
-    /**
-     * The metrics category constant for logging source when a setting fragment is opened.
-     */
-    public static final String EXTRA_SOURCE_METRICS_CATEGORY = ":settings:source_metrics";
 
     /**
      * When starting this activity and using {@link #EXTRA_SHOW_FRAGMENT},
@@ -220,7 +215,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     @Override
     public SharedPreferences getSharedPreferences(String name, int mode) {
         if (name.equals(getPackageName() + "_preferences")) {
-            return new SharedPreferencesLogger(this, getMetricsTag());
+            return new SharedPreferencesLogger(this, getMetricsTag(),
+                    FeatureFactory.getFactory(this).getMetricsFeatureProvider());
         }
         return super.getSharedPreferences(name, mode);
     }

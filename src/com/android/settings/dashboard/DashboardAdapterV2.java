@@ -39,13 +39,13 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardDataV2.ConditionHeaderData;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterV2;
 import com.android.settings.dashboard.suggestions.SuggestionAdapterV2;
 import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
@@ -305,7 +305,8 @@ public class DashboardAdapterV2 extends RecyclerView.Adapter<DashboardAdapterV2.
     void onBindSuggestion(final SuggestionContainerHolder holder, int position) {
         // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
         // header anymore.
-        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
+        final List<Suggestion> suggestions =
+            (List<Suggestion>) mDashboardData.getItemEntityByPosition(position);
         final int suggestionCount = suggestions.size();
         if (suggestions != null && suggestionCount > 0) {
             holder.summary.setText(""+suggestionCount);

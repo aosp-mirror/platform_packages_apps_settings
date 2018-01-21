@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.util.ArraySet;
 
 import com.android.settings.core.codeinspection.CodeInspector;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import java.util.ArrayList;
 import java.util.List;

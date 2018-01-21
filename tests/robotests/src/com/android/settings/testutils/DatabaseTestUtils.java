@@ -18,6 +18,7 @@ package com.android.settings.testutils;
 
 import android.content.Context;
 
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.search.IndexDatabaseHelper;
 import com.android.settings.slices.SlicesDatabaseHelper;
 
@@ -28,6 +29,7 @@ public class DatabaseTestUtils {
     public static void clearDb(Context context) {
         clearSearchDb(context);
         clearSlicesDb(context);
+        clearAnomalyDb(context);
     }
 
     private static void clearSlicesDb(Context context) {
@@ -36,6 +38,21 @@ public class DatabaseTestUtils {
 
         Field instance;
         Class clazz = SlicesDatabaseHelper.class;
+        try {
+            instance = clazz.getDeclaredField("sSingleton");
+            instance.setAccessible(true);
+            instance.set(null, null);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    private static void clearAnomalyDb(Context context) {
+        AnomalyDatabaseHelper helper = AnomalyDatabaseHelper.getInstance(context);
+        helper.close();
+
+        Field instance;
+        Class clazz = AnomalyDatabaseHelper.class;
         try {
             instance = clazz.getDeclaredField("sSingleton");
             instance.setAccessible(true);

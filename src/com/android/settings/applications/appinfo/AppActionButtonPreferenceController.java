@@ -93,7 +93,8 @@ public class AppActionButtonPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return AppUtils.isInstant(mParent.getPackageInfo().applicationInfo)
+            ? DISABLED_FOR_USER : AVAILABLE;
     }
 
     @Override

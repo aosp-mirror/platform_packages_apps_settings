@@ -3213,6 +3213,10 @@
     <string name="reset_network_title">Reset Wi-Fi, mobile &amp; Bluetooth</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset network settings [CHAR LIMIT=NONE] -->
     <string name="reset_network_desc">This will reset all network settings, including:\n\n<li>Wi\u2011Fi</li>\n<li>Mobile data</li>\n<li>Bluetooth</li>"</string>
+    <!-- SD card & phone storage settings screen, title for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
+    <string name="reset_esim_title">Also reset eSIMs</string>
+    <!-- SD card & phone storage settings screen, message for the checkbox to let user decide whether erase eSIM data together [CHAR LIMIT=NONE] -->
+    <string name="reset_esim_desc">Erase all eSIMs on the phone. You\u2019ll have to contract your carrier to redownload your eSIMs. This will not cancel your mobile service plan.</string>
     <!-- SD card & phone storage settings screen, button on screen after user selects Reset network settings -->
     <string name="reset_network_button_text">Reset settings</string>
     <!-- SD card & phone storage settings screen, message on screen after user selects Reset settings button -->
@@ -3225,6 +3229,10 @@
     <string name="network_reset_not_available">Network reset is not available for this user</string>
     <!-- Reset settings complete toast text [CHAR LIMIT=75] -->
     <string name="reset_network_complete_toast">Network settings have been reset</string>
+    <!-- Title of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
+    <string name="reset_esim_error_title">Cant\u2019t reset eSIMs</string>
+    <!-- Message of the error message shown when error happens during erase eSIM data [CHAR LIMIT=NONE] -->
+    <string name="reset_esim_error_msg">The eSIMs can\u2019tt be reset due to an error.</string>
 
     <!-- Master Clear -->
     <!-- Button title to factory data reset the entire device -->
@@ -6870,6 +6878,9 @@
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_automation_suggestion_summary">Limit sounds &amp; vibrations at certain times</string>
 
+    <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
+    <string name="zen_mode_use_automatic_rule">Use rule</string>
+
     <!--  Do not disturb: Zen mode option: Important interruptions [CHAR LIMIT=60] -->
     <string name="zen_mode_option_important_interruptions">Priority only</string>
 
@@ -8677,6 +8688,9 @@
     <!-- Notification log debug tool: the word 'none' -->
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
+    <string name="display_cutout_emulation">Emulate a display with a cutout</string>
+
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
 
@@ -8743,7 +8757,7 @@
     <string name="window_trace_quick_settings_title">Window Trace</string>
 
     <!-- [CHAR LIMIT=25] Title of developer tile to toggle layer trace -->
-    <string name="layer_trace_quick_settings_title">Layer Trace</string>
+    <string name="layer_trace_quick_settings_title">Surface Trace</string>
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>
@@ -9185,9 +9199,21 @@
     <!-- UI debug setting: preference summary - describes the behavior of forcing full raw GNSS satellite measurements [CHAR LIMIT=NONE] -->
     <string name="enable_gnss_raw_meas_full_tracking_summary">Track all GNSS constellations and frequencies with no duty cycling</string>
 
-    <!-- Title for Storage Access settings -->
-    <string name="storage_access">Storage access</string>
-    <!-- Keywords for Storage Access settings -->
-    <string name="keywords_storage_access">storage access scoped directory</string>
+    <!-- UI debug setting: preference title - show all crash dialogs [CHAR LIMIT=60] -->
+    <string name="show_first_crash_dialog">Always show crash dialog</string>
+    <!-- UI debug setting: preference summary - describes the behavior of showing a dialog every time an app crashes [CHAR LIMIT=NONE] -->
+    <string name="show_first_crash_dialog_summary">Show dialog every time an app crashes</string>
+
+    <!-- Title for Directory Access settings -->
+    <string name="directory_access">Directory access</string>
+    <!-- Keywords for Directory Access settings -->
+    <string name="keywords_directory_access">directory access</string>
+
+    <!-- Account type associated with the backup account. Empty for AOSP. [DO NOT TRANSLATE] -->
+    <string name="account_type"></string>
+    <!-- Package to target for Account credential confirmation. This will allow users to
+         remind/rediscover their backup account password prior to a reset. Empty for AOSP.
+         [DO NOT TRANSLATE] -->
+    <string name="account_confirmation_package"></string>
 
 </resources>

@@ -50,16 +50,21 @@ import android.text.TextUtils;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -194,6 +199,55 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
+    public void display_showRecentsWithInstantApp() {
+        // Regular app.
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "com.foo.bar";
+        stats.add(stat1);
+
+        // Instant app.
+        final UsageStats stat2 = new UsageStats();
+        stat2.mLastTimeUsed = System.currentTimeMillis() + 200;
+        stat2.mPackageName = "com.foo.barinstant";
+        stats.add(stat2);
+
+        ApplicationsState.AppEntry stat1Entry = mock(ApplicationsState.AppEntry.class);
+        ApplicationsState.AppEntry stat2Entry = mock(ApplicationsState.AppEntry.class);
+        stat1Entry.info = mApplicationInfo;
+        stat2Entry.info = mApplicationInfo;
+
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId())).thenReturn(stat1Entry);
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId())).thenReturn(stat2Entry);
+
+        // Only the regular app stat1 should have its intent resolve.
+        when(mPackageManager.resolveActivity(argThat(intentMatcher(stat1.mPackageName)),
+                anyInt())).thenReturn(new ResolveInfo());
+
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+
+        // Make sure stat2 is considered an instant app.
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+                (InstantAppDataProvider) (ApplicationInfo info) -> {
+                    if (info == stat2Entry.info) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+
+        mController.displayPreference(mScreen);
+
+        ArgumentCaptor<Preference> prefCaptor = ArgumentCaptor.forClass(Preference.class);
+        verify(mCategory, times(2)).addPreference(prefCaptor.capture());
+        List<Preference> prefs = prefCaptor.getAllValues();
+        assertThat(prefs.get(1).getKey()).isEqualTo(stat1.mPackageName);
+        assertThat(prefs.get(0).getKey()).isEqualTo(stat2.mPackageName);
+    }
+
+    @Test
     public void display_hasRecentButNoneDisplayable_showAppInfo() {
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
@@ -249,4 +303,8 @@ public class RecentAppsPreferenceControllerTest {
         return preference -> TextUtils.equals(expected, preference.getSummary());
     }
 
+    // Used for matching an intent with a specific package name.
+    private static ArgumentMatcher<Intent> intentMatcher(String packageName) {
+        return intent -> packageName.equals(intent.getPackage());
+    }
 }

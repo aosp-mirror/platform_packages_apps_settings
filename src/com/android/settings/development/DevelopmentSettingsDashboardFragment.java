@@ -398,8 +398,6 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new CameraLaserSensorPreferenceController(context));
         controllers.add(new WifiDisplayCertificationPreferenceController(context));
         controllers.add(new WifiVerboseLoggingPreferenceController(context));
-        controllers.add(new WifiAggressiveHandoverPreferenceController(context));
-        controllers.add(new WifiRoamScansPreferenceController(context));
         controllers.add(new MobileDataAlwaysOnPreferenceController(context));
         controllers.add(new TetheringHardwareAccelPreferenceController(context));
         controllers.add(new SelectUsbConfigPreferenceController(context, lifecycle));
@@ -424,6 +422,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ShowLayoutBoundsPreferenceController(context));
         controllers.add(new RtlLayoutPreferenceController(context));
         controllers.add(new WindowAnimationScalePreferenceController(context));
+        controllers.add(new EmulateDisplayCutoutPreferenceController(context));
         controllers.add(new TransitionAnimationScalePreferenceController(context));
         controllers.add(new AnimatorDurationScalePreferenceController(context));
         controllers.add(new SecondaryDisplayPreferenceController(context));
@@ -441,6 +440,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new ProfileGpuRenderingPreferenceController(context));
         controllers.add(new KeepActivitiesPreferenceController(context));
         controllers.add(new BackgroundProcessLimitPreferenceController(context));
+        controllers.add(new ShowFirstCrashDialogPreferenceController(context));
         controllers.add(new AppsNotRespondingPreferenceController(context));
         controllers.add(new NotificationChannelWarningsPreferenceController(context));
         controllers.add(new AllowAppsOnExternalPreferenceController(context));

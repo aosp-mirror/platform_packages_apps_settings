@@ -79,6 +79,8 @@ public class AppActionButtonPreferenceControllerTest {
     private DevicePolicyManagerWrapper mDevicePolicyManager;
     @Mock
     private AppInfoDashboardFragment mFragment;
+    @Mock
+    private ApplicationInfo mAppInfo;
 
     private Context mContext;
     private AppActionButtonPreferenceController mController;
@@ -96,6 +98,25 @@ public class AppActionButtonPreferenceControllerTest {
         ReflectionHelpers.setField(mController, "mApplicationFeatureProvider",
                 mFeatureFactory.applicationFeatureProvider);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        final PackageInfo packageInfo = mock(PackageInfo.class);
+        packageInfo.applicationInfo = mAppInfo;
+        when(mFragment.getPackageInfo()).thenReturn(packageInfo);
+    }
+
+    @Test
+    public void getAvailabilityStatus_notInstantApp_shouldReturnAvailable() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+            (InstantAppDataProvider) (i -> false));
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_isInstantApp_shouldReturnDisabled() {
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+            (InstantAppDataProvider) (i -> true));
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
     }
 
     @Test

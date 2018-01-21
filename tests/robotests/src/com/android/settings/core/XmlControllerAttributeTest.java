@@ -2,6 +2,8 @@ package com.android.settings.core;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
@@ -13,10 +15,12 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableResources;
+import com.android.settings.search.SearchFeatureProvider;
+import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.search.XmlParserUtils;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.security.SecuritySettingsV2;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -82,19 +86,21 @@ public class XmlControllerAttributeTest {
                     + "IllegalAccessException. Please fix the following classes:\n";
 
     Context mContext;
-
-    private Set<Class> mProviderClassesCopy;
+    SearchFeatureProvider mSearchProvider;
+    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mProviderClassesCopy = new HashSet<>(SearchIndexableResources.providerValues());
+        mSearchProvider = new SearchFeatureProviderImpl();
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
     }
 
     @After
     public void cleanUp() {
-        SearchIndexableResources.providerValues().clear();
-        SearchIndexableResources.providerValues().addAll(mProviderClassesCopy);
+        mFakeFeatureFactory.searchFeatureProvider = mock(
+                SearchFeatureProvider.class);
     }
 
     @Test
@@ -156,7 +162,8 @@ public class XmlControllerAttributeTest {
     private Set<Integer> getIndexableXml() {
         Set<Integer> xmlResSet = new HashSet();
 
-        Collection<Class> indexableClasses = SearchIndexableResources.providerValues();
+        Collection<Class> indexableClasses =
+                mSearchProvider.getSearchIndexableResources().getProviderValues();
         indexableClasses.removeAll(illegalClasses);
 
         for (Class clazz : indexableClasses) {

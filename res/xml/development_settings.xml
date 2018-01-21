@@ -203,16 +203,6 @@
             android:summary="@string/wifi_verbose_logging_summary"/>
 
         <SwitchPreference
-            android:key="wifi_aggressive_handover"
-            android:title="@string/wifi_aggressive_handover"
-            android:summary="@string/wifi_aggressive_handover_summary"/>
-
-        <SwitchPreference
-            android:key="wifi_allow_scan_with_traffic"
-            android:title="@string/wifi_allow_scan_with_traffic"
-            android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
-
-        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
@@ -356,6 +346,10 @@
             android:key="density"
             android:title="@string/developer_smallest_width" />
 
+        <SwitchPreference
+            android:key="display_cutout_emulation"
+            android:title="@string/display_cutout_emulation" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:key="debug_hw_drawing_category"
@@ -459,6 +453,10 @@
                 android:fragment="com.android.settings.applications.appops.BackgroundCheckSummary"
                 android:title="@string/background_check_pref" />
 
+        <SwitchPreference
+            android:key="show_first_crash_dialog"
+            android:title="@string/show_first_crash_dialog"
+            android:summary="@string/show_first_crash_dialog_summary"/>
 
         <SwitchPreference
             android:key="show_all_anrs"

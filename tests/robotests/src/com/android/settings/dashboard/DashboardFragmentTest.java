@@ -33,10 +33,10 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.drawer.TileUtils;

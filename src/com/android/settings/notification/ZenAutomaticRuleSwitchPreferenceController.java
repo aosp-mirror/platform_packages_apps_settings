@@ -20,6 +20,7 @@ import android.app.AutomaticZenRule;
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     private String mId;
     private Toast mEnabledToast;
     private int mToastTextResource;
+    private SwitchBar mSwitchBar;
 
     public ZenAutomaticRuleSwitchPreferenceController(Context context, Fragment parent,
             int toastTextResource, Lifecycle lifecycle) {
@@ -54,26 +56,34 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
         return mRule != null && mId != null;
     }
 
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        LayoutPreference pref = (LayoutPreference) screen.findPreference(KEY);
+        mSwitchBar = pref.findViewById(R.id.switch_bar);
+
+        if (mSwitchBar != null) {
+            mSwitchBar.setSwitchBarText(R.string.zen_mode_use_automatic_rule,
+                    R.string.zen_mode_use_automatic_rule);
+            try {
+                mSwitchBar.addOnSwitchChangeListener(this);
+            } catch (IllegalStateException e) {
+                // an exception is thrown if you try to add the listener twice
+            }
+            mSwitchBar.show();
+        }
+    }
+
+
     public void onResume(AutomaticZenRule rule, String id) {
         mRule = rule;
         mId = id;
     }
 
     public void updateState(Preference preference) {
-        LayoutPreference pref = (LayoutPreference) preference;
-        SwitchBar bar = pref.findViewById(R.id.switch_bar);
         if (mRule != null) {
-            bar.setChecked(mRule.isEnabled());
+            mSwitchBar.setChecked(mRule.isEnabled());
         }
-        if (bar != null) {
-            bar.show();
-            try {
-                bar.addOnSwitchChangeListener(this);
-            } catch (IllegalStateException e) {
-                // an exception is thrown if you try to add the listener twice
-            }
-        }
-        bar.show();
     }
 
     @Override

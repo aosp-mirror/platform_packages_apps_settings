@@ -363,6 +363,16 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public long getCpuActiveTime() {
+        return 0;
+    }
+
+    @Override
+    public long[] getCpuClusterTimes() {
+        return null;
+    }
+
+    @Override
     public long[] getCpuFreqTimes(int procState, int which) {
         return null;
     }

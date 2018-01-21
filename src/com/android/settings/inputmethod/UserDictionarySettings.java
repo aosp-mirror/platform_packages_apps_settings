@@ -42,10 +42,11 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settingslib.core.instrumentation.Instrumentable;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 public class UserDictionarySettings extends ListFragment implements Instrumentable,
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -59,8 +60,7 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     private static final int OPTIONS_MENU_ADD = Menu.FIRST;
     private static final int LOADER_ID = 1;
 
-    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
-            new VisibilityLoggerMixin(getMetricsCategory());
+    private VisibilityLoggerMixin mVisibilityLoggerMixin;
 
     private Cursor mCursor;
     private String mLocale;
@@ -71,14 +71,11 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mVisibilityLoggerMixin.onAttach(context);
-    }
-
-    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
+                FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
 
         final Intent intent = getActivity().getIntent();
         final String localeFromIntent =

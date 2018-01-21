@@ -36,7 +36,6 @@ import com.android.settings.Settings.DoubleTapPowerSuggestionActivity;
 import com.android.settings.Settings.DoubleTwistSuggestionActivity;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
 import com.android.settings.Settings.SwipeToNotificationSuggestionActivity;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
 import com.android.settings.gestures.DoubleTapPowerPreferenceController;
@@ -49,6 +48,7 @@ import com.android.settings.password.ScreenLockSuggestionActivity;
 import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiCallingSuggestionActivity;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
 
 import java.util.List;

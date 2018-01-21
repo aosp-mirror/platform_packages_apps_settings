@@ -44,6 +44,7 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.AppPreference;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -321,9 +322,13 @@ public class RecentAppsPreferenceController extends AbstractPreferenceController
                 .setPackage(pkgName);
 
         if (mPm.resolveActivity(launchIntent, 0) == null) {
-            // Not visible on launcher -> likely not a user visible app, skip
-            Log.d(TAG, "Not a user visible app, skipping " + pkgName);
-            return false;
+            // Not visible on launcher -> likely not a user visible app, skip if non-instant.
+            final ApplicationsState.AppEntry appEntry =
+                    mApplicationsState.getEntry(pkgName, mUserId);
+            if (!AppUtils.isInstant(appEntry.info)) {
+                Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
+                return false;
+            }
         }
         return true;
     }

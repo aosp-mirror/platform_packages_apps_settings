@@ -209,6 +209,23 @@ public class LocationEnablerTest {
         assertThat(mEnabler.isManagedProfileRestrictedByBase()).isTrue();
     }
 
+    @Test
+    public void setRestriction_getShareLocationEnforcedAdmin_shouldReturnEnforcedAdmin() {
+        int userId = UserHandle.myUserId();
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        // Add two enforcing users so that RestrictedLockUtils.checkIfRestrictionEnforced returns
+        // non-null.
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_PROFILE_OWNER));
+        when(mUserManager.getUserRestrictionSources(
+                UserManager.DISALLOW_CONFIG_LOCATION_MODE, UserHandle.of(userId)))
+                .thenReturn(enforcingUsers);
+
+        assertThat(mEnabler.getShareLocationEnforcedAdmin(userId) != null).isTrue();
+    }
+
     private void mockManagedProfile() {
         final List<UserHandle> userProfiles = new ArrayList<>();
         final UserHandle userHandle = mock(UserHandle.class);
@@ -223,4 +240,6 @@ public class LocationEnablerTest {
     private static ArgumentMatcher<Intent> actionMatches(String expected) {
         return intent -> TextUtils.equals(expected, intent.getAction());
     }
+
+
 }

@@ -39,7 +39,7 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
     private final Context mContext;
     private final IconDrawableFactory mIconDrawableFactory;
     private final PackageManager mPackageManager;
-    private final List<HighUsageApp> mHighUsageAppList;
+    private final List<AppInfo> mHighUsageAppList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View view;
@@ -56,7 +56,7 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
         }
     }
 
-    public HighUsageAdapter(Context context, List<HighUsageApp> highUsageAppList) {
+    public HighUsageAdapter(Context context, List<AppInfo> highUsageAppList) {
         mContext = context;
         mHighUsageAppList = highUsageAppList;
         mIconDrawableFactory = IconDrawableFactory.newInstance(context);
@@ -72,7 +72,7 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final HighUsageApp app = mHighUsageAppList.get(position);
+        final AppInfo app = mHighUsageAppList.get(position);
         holder.appIcon.setImageDrawable(
                 Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
                         UserHandle.myUserId()));

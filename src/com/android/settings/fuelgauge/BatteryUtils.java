@@ -398,6 +398,19 @@ public class BatteryUtils {
         return timeMs * 1000;
     }
 
+    public void setForceAppStandby(int uid, String packageName,
+            int mode) {
+        final boolean isPreOApp = isLegacyApp(packageName);
+        if (isPreOApp) {
+            // Control whether app could run in the background if it is pre O app
+            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName,
+                    mode);
+        }
+        // Control whether app could run jobs in the background
+        mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName,
+                mode);
+    }
+
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
             UserManager userManager) {
         statsHelper.create(bundle);
@@ -479,6 +492,19 @@ public class BatteryUtils {
         }
 
         return 0;
+    }
+
+    public boolean isLegacyApp(final String packageName) {
+        try {
+            ApplicationInfo info = mPackageManager.getApplicationInfo(packageName,
+                    PackageManager.GET_META_DATA);
+
+            return info.targetSdkVersion < Build.VERSION_CODES.O;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Cannot find package: " + packageName, e);
+        }
+
+        return false;
     }
 
 }

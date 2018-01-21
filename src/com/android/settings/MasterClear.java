@@ -28,6 +28,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -39,6 +40,7 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.euicc.EuiccManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +76,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
+    private static final int CREDENTIAL_CONFIRM_REQUEST = 56;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
@@ -114,7 +117,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode != KEYGUARD_REQUEST) {
+        if (requestCode != KEYGUARD_REQUEST || requestCode != CREDENTIAL_CONFIRM_REQUEST) {
             return;
         }
 
@@ -138,6 +141,33 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                 args, R.string.master_clear_confirm_title, null, null, 0);
     }
 
+    @VisibleForTesting
+    boolean tryShowAccountConfirmation() {
+        final Context context = getActivity();
+        final String accountType = context.getString(R.string.account_type);
+        final String packageName = context.getString(R.string.account_confirmation_package);
+        if (TextUtils.isEmpty(accountType) || TextUtils.isEmpty(packageName)) {
+            return false;
+        }
+        final AccountManager am = AccountManager.get(context);
+        Account[] accounts = am.getAccountsByType(accountType);
+        if (accounts != null && accounts.length > 0) {
+            final Intent requestAccountConfirmation = new Intent()
+                .setPackage(packageName)
+                .setAction("android.accounts.action.PRE_FACTORY_RESET");
+            // Check to make sure that the intent is supported.
+            final PackageManager pm = context.getPackageManager();
+            final List<ResolveInfo> resolutions =
+                pm.queryIntentActivities(requestAccountConfirmation, 0);
+            if (resolutions != null && resolutions.size() > 0) {
+                getActivity().startActivityForResult(
+                    requestAccountConfirmation, CREDENTIAL_CONFIRM_REQUEST);
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * If the user clicks to begin the reset sequence, we next require a
      * keyguard confirmation if the user has currently enabled one.  If there
@@ -158,7 +188,10 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                             .setAction(Intent.ACTION_FACTORY_RESET);
                     context.startActivity(requestFactoryReset);
                 }
-            } else if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+                return;
+            }
+
+            if (!tryShowAccountConfirmation() && !runKeyguardConfirmation(KEYGUARD_REQUEST)) {
                 showFinalConfirmation();
             }
         }

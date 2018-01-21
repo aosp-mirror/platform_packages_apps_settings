@@ -165,6 +165,57 @@ public class EntityHeaderControllerTest {
     }
 
     @Test
+    public void bindButton_hasEditRuleNameClickListener_shouldShowButton() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = "123";
+        info.activityInfo.name = "321";
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        when(mActivity.getApplicationContext()).thenReturn(mContext);
+
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        mController.setEditZenRuleNameListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // do nothing
+            }
+        });
+        mController.setButtonActions(
+                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_NONE);
+        mController.done(mActivity);
+
+        final ImageButton button1 = view.findViewById(android.R.id.button1);
+        assertThat(button1.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(button1.getDrawable()).isNotNull();
+        assertThat(view.findViewById(android.R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindButton_noEditRuleNameClickListener_shouldNotShowButton() {
+        final ResolveInfo info = new ResolveInfo();
+        info.activityInfo = new ActivityInfo();
+        info.activityInfo.packageName = "123";
+        info.activityInfo.name = "321";
+        final View view = mLayoutInflater
+                .inflate(R.layout.settings_entity_header, null /* root */);
+        when(mActivity.getApplicationContext()).thenReturn(mContext);
+
+        mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
+        mController.setButtonActions(
+                EntityHeaderController.ActionType.ACTION_DND_RULE_PREFERENCE,
+                EntityHeaderController.ActionType.ACTION_NONE);
+        mController.done(mActivity);
+
+        assertThat(view.findViewById(android.R.id.button1).getVisibility())
+                .isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button2).getVisibility())
+                .isEqualTo(View.GONE);
+    }
+
+
+    @Test
     public void bindButton_noAppPref_shouldNotShowButton() {
         final View appLinks = mLayoutInflater
                 .inflate(R.layout.settings_entity_header, null /* root */);

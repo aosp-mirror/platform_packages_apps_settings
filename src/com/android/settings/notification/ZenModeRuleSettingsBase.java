@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
-import android.app.Fragment;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -25,12 +24,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.service.notification.ConditionProviderService;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -39,14 +36,11 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected static final String TAG = ZenModeSettingsBase.TAG;
     protected static final boolean DEBUG = ZenModeSettingsBase.DEBUG;
 
-    private static final String KEY_RULE_NAME = "rule_name";
-
     protected Context mContext;
     protected boolean mDisableListeners;
     protected AutomaticZenRule mRule;
     protected String mId;
 
-    private Preference mRuleName;
     protected ZenAutomaticRuleHeaderPreferenceController mHeader;
     protected ZenAutomaticRuleSwitchPreferenceController mSwitch;
 
@@ -79,18 +73,7 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         }
 
         super.onCreate(icicle);
-
         onCreateInternal();
-
-        final PreferenceScreen root = getPreferenceScreen();
-        mRuleName = root.findPreference(KEY_RULE_NAME);
-        mRuleName.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                showRuleNameDialog();
-                return true;
-            }
-        });
     }
 
     @Override
@@ -113,11 +96,11 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
     protected void updateHeader() {
         final PreferenceScreen screen = getPreferenceScreen();
 
-        mSwitch.onResume(mRule,mId);
+        mSwitch.onResume(mRule, mId);
         mSwitch.displayPreference(screen);
         updatePreference(mSwitch);
 
-        mHeader.onResume(mRule);
+        mHeader.onResume(mRule, mId);
         mHeader.displayPreference(screen);
         updatePreference(mHeader);
     }
@@ -161,23 +144,10 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
         return false;
     }
 
-    private void showRuleNameDialog() {
-        ZenRuleNameDialog.show(this, mRule.getName(), null, new RuleNameChangeListener());
-    }
-
     private void toastAndFinish() {
         Toast.makeText(mContext, R.string.zen_mode_rule_not_found_text, Toast.LENGTH_SHORT)
                     .show();
         getActivity().finish();
-    }
-
-    private void updateRuleName() {
-        if (mRule != null) {
-            mRuleName.setSummary(mRule.getName());
-        } else {
-            if (DEBUG) Log.d(TAG, "updateRuleName - mRuleName "
-                    + "not updated; mRuleName returned null");
-        }
     }
 
     private AutomaticZenRule getZenRule() {
@@ -186,21 +156,8 @@ public abstract class ZenModeRuleSettingsBase extends ZenModeSettingsBase {
 
     private void updateControls() {
         mDisableListeners = true;
-        updateRuleName();
         updateControlsInternal();
         updateHeader();
         mDisableListeners = false;
-    }
-
-    public class RuleNameChangeListener implements ZenRuleNameDialog.PositiveClickListener {
-        public RuleNameChangeListener() {}
-
-        @Override
-        public void onOk(String ruleName, Fragment parent) {
-            mMetricsFeatureProvider.action(mContext,
-                    MetricsProto.MetricsEvent.ACTION_ZEN_MODE_RULE_NAME_CHANGE_OK);
-            mRule.setName(ruleName);
-            mBackend.setZenRule(mId, mRule);
-        }
     }
 }

@@ -71,7 +71,7 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
             throw new IllegalStateException("No key passed to Intent for toggle controller");
         }
 
-        BasePreferenceController controller = getBasePreferenceController(context, key);
+        final BasePreferenceController controller = getPreferenceController(context, key);
 
         if (!(controller instanceof TogglePreferenceController)) {
             throw new IllegalStateException("Toggle action passed for a non-toggle key: " + key);
@@ -79,12 +79,12 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
 
         // TODO post context.getContentResolver().notifyChanged(uri, null) in the Toggle controller
         // so that it's automatically broadcast to any slice.
-        TogglePreferenceController toggleController = (TogglePreferenceController) controller;
-        boolean currentValue = toggleController.isChecked();
+        final TogglePreferenceController toggleController = (TogglePreferenceController) controller;
+        final boolean currentValue = toggleController.isChecked();
         toggleController.setChecked(!currentValue);
     }
 
-    private BasePreferenceController getBasePreferenceController(Context context, String key) {
+    private BasePreferenceController getPreferenceController(Context context, String key) {
         final SlicesDatabaseAccessor accessor = new SlicesDatabaseAccessor(context);
         final SliceData sliceData = accessor.getSliceDataFromKey(key);
         return SliceBuilderUtils.getPreferenceController(context, sliceData);

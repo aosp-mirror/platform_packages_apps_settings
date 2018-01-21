@@ -25,8 +25,8 @@ import android.os.RemoteException;
 import android.util.SparseIntArray;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.ArrayList;
@@ -203,6 +203,10 @@ public class DataSaverBackend {
         @Override
         public void onRestrictBackgroundChanged(final boolean isDataSaving) throws RemoteException {
             ThreadUtils.postOnMainThread(() -> handleRestrictBackgroundChanged(isDataSaving));
+        }
+
+        @Override
+        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue) {
         }
     };
 

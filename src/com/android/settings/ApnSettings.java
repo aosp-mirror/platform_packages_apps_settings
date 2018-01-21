@@ -16,6 +16,9 @@
 
 package com.android.settings;
 
+import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
+import static android.provider.Telephony.Carriers.FILTERED_URI;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -39,7 +42,6 @@ import android.os.UserManager;
 import android.provider.Telephony;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
-import android.support.v7.preference.PreferenceScreen;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
@@ -50,7 +52,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -246,6 +247,17 @@ public class ApnSettings extends RestrictedSettingsFragment implements
         return null;
     }
 
+    private boolean isDpcApnEnforced() {
+        try (Cursor enforceCursor = getContentResolver().query(ENFORCE_MANAGED_URI,
+                null, null, null, null)) {
+            if (enforceCursor == null || enforceCursor.getCount() != 1) {
+                return false;
+            }
+            enforceCursor.moveToFirst();
+            return enforceCursor.getInt(0) > 0;
+        }
+    }
+
     private void fillList() {
         final TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         final int subId = mSubscriptionInfo != null ? mSubscriptionInfo.getSubscriptionId()
@@ -259,9 +271,9 @@ public class ApnSettings extends RestrictedSettingsFragment implements
             where.append(" AND NOT (type='ims')");
         }
 
-        Cursor cursor = getContentResolver().query(Telephony.Carriers.CONTENT_URI, new String[] {
-                "_id", "name", "apn", "type", "mvno_type", "mvno_match_data"}, where.toString(),
-                null, Telephony.Carriers.DEFAULT_SORT_ORDER);
+        Cursor cursor = getContentResolver().query(FILTERED_URI,
+                new String[] {"_id", "name", "apn", "type", "mvno_type", "mvno_match_data"},
+                where.toString(), null, Telephony.Carriers.DEFAULT_SORT_ORDER);
 
         if (cursor != null) {
             IccRecords r = null;
@@ -343,15 +355,14 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!mUnavailable) {
+        if (!mUnavailable && !isDpcApnEnforced()) {
             if (mAllowAddingApns) {
                 menu.add(0, MENU_NEW, 0,
                         getResources().getString(R.string.menu_new))
                         .setIcon(R.drawable.ic_menu_add_white)
                         .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
             }
-            menu.add(0, MENU_RESTORE, 0,
-                    getResources().getString(R.string.menu_restore))
+            menu.add(0, MENU_RESTORE, 0, getResources().getString(R.string.menu_restore))
                     .setIcon(android.R.drawable.ic_menu_upload);
         }
 
@@ -387,7 +398,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         int pos = Integer.parseInt(preference.getKey());
-        Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
+        Uri url = ContentUris.withAppendedId(FILTERED_URI, pos);
         startActivity(new Intent(Intent.ACTION_EDIT, url));
         return true;
     }

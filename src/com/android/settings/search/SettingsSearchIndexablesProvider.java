@@ -175,7 +175,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<String> getNonIndexableKeysFromProvider(Context context) {
-        final Collection<Class> values = SearchIndexableResources.providerValues();
+        final Collection<Class> values = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
         final List<String> nonIndexableKeys = new ArrayList<>();
 
         for (Class<?> clazz : values) {
@@ -209,7 +210,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableResource> getSearchIndexableResourcesFromProvider(Context context) {
-        Collection<Class> values = SearchIndexableResources.providerValues();
+        Collection<Class> values = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
         List<SearchIndexableResource> resourceList = new ArrayList<>();
 
         for (Class<?> clazz : values) {
@@ -236,7 +238,8 @@ public class SettingsSearchIndexablesProvider extends SearchIndexablesProvider {
     }
 
     private List<SearchIndexableRaw> getSearchIndexableRawFromProvider(Context context) {
-        final Collection<Class> values = SearchIndexableResources.providerValues();
+        final Collection<Class> values = FeatureFactory.getFactory(context)
+                .getSearchFeatureProvider().getSearchIndexableResources().getProviderValues();
         final List<SearchIndexableRaw> rawList = new ArrayList<>();
 
         for (Class<?> clazz : values) {

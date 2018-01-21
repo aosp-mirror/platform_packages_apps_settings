@@ -22,7 +22,7 @@ import android.os.Parcel;
 import android.text.format.DateUtils;
 
 import com.android.settings.TestConfig;
-import com.android.settings.fuelgauge.batterytip.HighUsageApp;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -42,14 +42,17 @@ public class HighUsageTipTest {
 
     private Context mContext;
     private HighUsageTip mBatteryTip;
-    private List<HighUsageApp> mUsageAppList;
+    private List<AppInfo> mUsageAppList;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
 
         mUsageAppList = new ArrayList<>();
-        mUsageAppList.add(new HighUsageApp(PACKAGE_NAME, SCREEN_TIME));
+        mUsageAppList.add(new AppInfo.Builder()
+                .setPackageName(PACKAGE_NAME)
+                .setScreenOnTimeMs(SCREEN_TIME)
+                .build());
         mBatteryTip = new HighUsageTip(SCREEN_TIME, mUsageAppList);
     }
 
@@ -67,7 +70,7 @@ public class HighUsageTipTest {
         assertThat(parcelTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
         assertThat(parcelTip.getScreenTimeMs()).isEqualTo(SCREEN_TIME);
         assertThat(parcelTip.mHighUsageAppList.size()).isEqualTo(1);
-        final HighUsageApp app = parcelTip.mHighUsageAppList.get(0);
+        final AppInfo app = parcelTip.mHighUsageAppList.get(0);
         assertThat(app.packageName).isEqualTo(PACKAGE_NAME);
         assertThat(app.screenOnTimeMs).isEqualTo(SCREEN_TIME);
     }

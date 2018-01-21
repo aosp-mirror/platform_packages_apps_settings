@@ -16,6 +16,7 @@
 
 package com.android.settings.development.qstile;
 
+import android.content.Context;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
@@ -30,6 +31,7 @@ import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.View;
 import android.view.WindowManagerGlobal;
+import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settings.wrapper.IWindowManagerWrapper;
@@ -145,12 +147,17 @@ public abstract class DevelopmentTiles extends TileService {
     public static class WindowTrace extends DevelopmentTiles {
         @VisibleForTesting
         IWindowManagerWrapper mWindowManager;
+        @VisibleForTesting
+        Toast mToast;
 
         @Override
         public void onCreate() {
             super.onCreate();
             mWindowManager = new IWindowManagerWrapper(WindowManagerGlobal
                     .getWindowManagerService());
+            Context context = getApplicationContext();
+            CharSequence text = "Trace written to /data/misc/wmtrace/wm_trace.pb";
+            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         }
 
         @Override
@@ -171,6 +178,7 @@ public abstract class DevelopmentTiles extends TileService {
                     mWindowManager.startWindowTrace();
                 } else {
                     mWindowManager.stopWindowTrace();
+                    mToast.show();
                 }
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not set window trace status." + e.toString());
@@ -188,11 +196,16 @@ public abstract class DevelopmentTiles extends TileService {
         static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
         @VisibleForTesting
         IBinder mSurfaceFlinger;
+        @VisibleForTesting
+        Toast mToast;
 
         @Override
         public void onCreate() {
             super.onCreate();
             mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
+            Context context = getApplicationContext();
+            CharSequence text = "Trace written to /data/misc/wmtrace/layers_trace.pb";
+            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         }
 
         @Override
@@ -230,6 +243,9 @@ public abstract class DevelopmentTiles extends TileService {
                     data.writeInt(isEnabled ? 1 : 0);
                     mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE,
                             data, null, 0 /* flags */);
+                    if (!isEnabled){
+                        mToast.show();
+                    }
                 }
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not set layer tracing." + e.toString());

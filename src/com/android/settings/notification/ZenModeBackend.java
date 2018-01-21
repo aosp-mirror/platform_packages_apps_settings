@@ -173,8 +173,8 @@ public class ZenModeBackend {
         savePolicy(getNewPriorityCategories(allowSenders, category),
             priorityCallSenders, priorityMessagesSenders, mPolicy.suppressedVisualEffects);
 
-        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allow=" +
-                stringCategory + allowSenders + " allow" + stringCategory + "From="
+        if (ZenModeSettingsBase.DEBUG) Log.d(TAG, "onPrefChange allow" +
+                stringCategory + "=" + allowSenders + " allow" + stringCategory + "From="
                 + ZenModeConfig.sourceToString(allowSendersFrom));
     }
 

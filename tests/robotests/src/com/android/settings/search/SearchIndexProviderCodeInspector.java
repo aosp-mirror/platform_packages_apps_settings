@@ -121,7 +121,8 @@ public class SearchIndexProviderCodeInspector extends CodeInspector {
                 continue;
             }
             // Must be in SearchProviderRegistry
-            if (!SearchIndexableResources.providerValues().contains(clazz)) {
+            SearchFeatureProvider provider = new SearchFeatureProviderImpl();
+            if (!provider.getSearchIndexableResources().getProviderValues().contains(clazz)) {
                 if (!notInSearchIndexableRegistryGrandfatherList.remove(className)) {
                     notInSearchProviderRegistry.add(className);
                 }
