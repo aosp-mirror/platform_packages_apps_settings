@@ -17,6 +17,8 @@
 package com.android.settings.notification;
 
 import android.app.Activity;
+import android.app.Application;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,11 +79,18 @@ public class ConfigureNotificationSettings extends DashboardFragment {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        final Activity activity = getActivity();
+        final Application app;
+        if (activity != null) {
+            app = activity.getApplication();
+        } else {
+            app = null;
+        }
+        return buildPreferenceControllers(context, getLifecycle(), app, this);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Lifecycle lifecycle, Application app, Fragment host) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final BadgingNotificationPreferenceController badgeController =
                 new BadgingNotificationPreferenceController(context);
@@ -96,6 +105,8 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             lifecycle.addObserver(pulseController);
             lifecycle.addObserver(lockScreenNotificationController);
         }
+        controllers.add(new RecentNotifyingAppsPreferenceController(
+                context, new NotificationBackend(), app, host));
         controllers.add(new SwipeToNotificationPreferenceController(context, lifecycle,
                 KEY_SWIPE_DOWN));
         controllers.add(badgeController);
@@ -167,7 +178,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null);
+                    return buildPreferenceControllers(context, null, null, null);
                 }
 
                 @Override
