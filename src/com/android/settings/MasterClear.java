@@ -76,7 +76,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     private static final String TAG = "MasterClear";
 
     private static final int KEYGUARD_REQUEST = 55;
-    private static final int CREDENTIAL_CONFIRM_REQUEST = 56;
+    @VisibleForTesting static final int CREDENTIAL_CONFIRM_REQUEST = 56;
 
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
@@ -157,9 +157,12 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                 .setAction("android.accounts.action.PRE_FACTORY_RESET");
             // Check to make sure that the intent is supported.
             final PackageManager pm = context.getPackageManager();
-            final List<ResolveInfo> resolutions =
-                pm.queryIntentActivities(requestAccountConfirmation, 0);
-            if (resolutions != null && resolutions.size() > 0) {
+            final ResolveInfo resolution = pm.resolveActivity(requestAccountConfirmation, 0);
+            if (resolution != null
+                    && resolution.activityInfo != null
+                    && packageName.equals(resolution.activityInfo.packageName)) {
+                // Note that we need to check the packagename to make sure that an Activity resolver
+                // wasn't returned.
                 getActivity().startActivityForResult(
                     requestAccountConfirmation, CREDENTIAL_CONFIRM_REQUEST);
                 return true;

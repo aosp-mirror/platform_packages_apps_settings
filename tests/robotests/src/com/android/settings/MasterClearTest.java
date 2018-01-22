@@ -19,16 +19,24 @@ package com.android.settings;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -46,6 +54,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowAccountManager;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -55,6 +64,9 @@ import org.robolectric.shadows.ShadowActivity;
     shadows = {ShadowUtils.class}
 )
 public class MasterClearTest {
+    private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
+    private static final String TEST_CONFIRMATION_PACKAGE = "android.test.confirmation.pkg";
+    private static final String TEST_ACCOUNT_NAME = "test@example.com";
 
     @Mock
     private MasterClear mMasterClear;
@@ -62,7 +74,18 @@ public class MasterClearTest {
     private ScrollView mScrollView;
     @Mock
     private LinearLayout mLinearLayout;
+
+    @Mock
+    private PackageManager mPackageManager;
+
+    @Mock
+    private AccountManager mAccountManager;
+
+    @Mock
+    private Activity mMockActivity;
+
     private ShadowActivity mShadowActivity;
+    private ShadowAccountManager mShadowAccountManager;
     private Activity mActivity;
     private View mContentView;
 
@@ -86,6 +109,7 @@ public class MasterClearTest {
         mMasterClear = spy(new MasterClear());
         mActivity = Robolectric.setupActivity(Activity.class);
         mShadowActivity = shadowOf(mActivity);
+        // mShadowAccountManager = shadowOf(AccountManager.get(mActivity));
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
         // Make scrollView only have one child
@@ -162,9 +186,61 @@ public class MasterClearTest {
 
     @Test
     public void testTryShowAccountConfirmation_unsupported() {
-      doReturn(mActivity).when(mMasterClear).getActivity();
-      /* Using the default resources, account confirmation shouldn't trigger */
-      assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+        when(mMasterClear.getActivity()).thenReturn(mActivity);
+        /* Using the default resources, account confirmation shouldn't trigger */
+        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+    }
+
+    @Test
+    public void testTryShowAccountConfirmation_no_relevant_accounts() {
+        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
+        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+
+        Account[] accounts = new Account[0];
+        when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
+        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+    }
+
+    @Test
+    public void testTryShowAccountConfirmation_unresolved() {
+        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
+        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+        when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
+        // The package manager should not resolve the confirmation intent targeting the non-existent
+        // confirmation package.
+        when(mMockActivity.getPackageManager()).thenReturn(mPackageManager);
+        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+    }
+
+    @Test
+    public void testTryShowAccountConfirmation_ok() {
+        when(mMasterClear.getActivity()).thenReturn(mMockActivity);
+        // Only try to show account confirmation if the appropriate resource overlays are available.
+        when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
+        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+        // Add accounts to trigger the search for a resolving intent.
+        Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
+        when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
+        when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
+        // The package manager should not resolve the confirmation intent targeting the non-existent
+        // confirmation package.
+        when(mMockActivity.getPackageManager()).thenReturn(mPackageManager);
+
+        ActivityInfo activityInfo = new ActivityInfo();
+        activityInfo.packageName = TEST_CONFIRMATION_PACKAGE;
+        ResolveInfo resolveInfo = new ResolveInfo();
+        resolveInfo.activityInfo = activityInfo;
+        when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
+
+        // Finally mock out the startActivityForResultCall
+        doNothing().when(mMockActivity).startActivityForResult(any(), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+
+        assertThat(mMasterClear.tryShowAccountConfirmation()).isTrue();
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {
