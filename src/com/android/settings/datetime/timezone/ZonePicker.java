@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -56,11 +57,14 @@ public class ZonePicker extends InstrumentedFragment
     private List<RegionInfo> mRegions;
     private Map<String, List<TimeZoneInfo>> mZoneInfos;
     private List<TimeZoneInfo> mFixedOffsetTimeZones;
-    private TimeZoneAdapter mTimeZoneAdapter;
     private String mSelectedTimeZone;
     private boolean mSelectByRegion;
     private DataLoader mDataLoader;
+    private TimeZoneAdapter mTimeZoneAdapter;
+
     private RecyclerView mRecyclerView;
+    private LinearLayout mRegionSpinnerLayout;
+    private Spinner mRegionSpinner;
 
     @Override
     public int getMetricsCategory() {
@@ -88,15 +92,17 @@ public class ZonePicker extends InstrumentedFragment
         final ArrayAdapter<RegionInfo> regionAdapter = new ArrayAdapter<>(getContext(),
                 R.layout.filter_spinner_item, mRegions);
         regionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        final Spinner spinner = view.findViewById(R.id.tz_region_spinner);
-        spinner.setAdapter(regionAdapter);
-        spinner.setOnItemSelectedListener(this);
-        setupForCurrentTimeZone(spinner);
+
+        mRegionSpinnerLayout = view.findViewById(R.id.tz_region_spinner_layout);
+        mRegionSpinner = view.findViewById(R.id.tz_region_spinner);
+        mRegionSpinner.setAdapter(regionAdapter);
+        mRegionSpinner.setOnItemSelectedListener(this);
+        setupForCurrentTimeZone();
         setHasOptionsMenu(true);
         return view;
     }
 
-    private void setupForCurrentTimeZone(Spinner spinner) {
+    private void setupForCurrentTimeZone() {
         final String localeRegionId = mLocale.getCountry().toUpperCase(Locale.ROOT);
         final String currentTimeZone = TimeZone.getDefault().getID();
         boolean fixedOffset = currentTimeZone.startsWith("Etc/GMT") ||
@@ -105,12 +111,12 @@ public class ZonePicker extends InstrumentedFragment
         for (int regionIndex = 0; regionIndex < mRegions.size(); regionIndex++) {
             final RegionInfo region = mRegions.get(regionIndex);
             if (localeRegionId.equals(region.getId())) {
-                spinner.setSelection(regionIndex);
+                mRegionSpinner.setSelection(regionIndex);
             }
             if (!fixedOffset) {
                 for (String timeZoneId: region.getTimeZoneIds()) {
                     if (TextUtils.equals(timeZoneId, mSelectedTimeZone)) {
-                        spinner.setSelection(regionIndex);
+                        mRegionSpinner.setSelection(regionIndex);
                         return;
                     }
                 }
@@ -179,16 +185,15 @@ public class ZonePicker extends InstrumentedFragment
 
     private void setSelectByRegion(boolean selectByRegion) {
         mSelectByRegion = selectByRegion;
-        getView().findViewById(R.id.tz_region_spinner_layout).setVisibility(
+        mRegionSpinnerLayout.setVisibility(
             mSelectByRegion ? View.VISIBLE : View.GONE);
         List<TimeZoneInfo> tzInfos;
         if (selectByRegion) {
-            Spinner regionSpinner = getView().findViewById(R.id.tz_region_spinner);
-            int selectedRegion = regionSpinner.getSelectedItemPosition();
+            int selectedRegion = mRegionSpinner.getSelectedItemPosition();
             if (selectedRegion == -1) {
                 // Arbitrarily pick the first item if no region was selected above.
                 selectedRegion = 0;
-                regionSpinner.setSelection(selectedRegion);
+                mRegionSpinner.setSelection(selectedRegion);
             }
             tzInfos = getTimeZoneInfos(mRegions.get(selectedRegion));
         } else {
