@@ -19,8 +19,11 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
+
+import java.time.Duration;
 
 /**
  * Class to store the policy for battery tips, which comes from
@@ -34,6 +37,8 @@ public class BatteryTipPolicy {
     private static final String KEY_BATTERY_SAVER_TIP_ENABLED = "battery_saver_tip_enabled";
     private static final String KEY_HIGH_USAGE_ENABLED = "high_usage_enabled";
     private static final String KEY_HIGH_USAGE_APP_COUNT = "high_usage_app_count";
+    private static final String KEY_HIGH_USAGE_PERIOD_MS = "high_usage_period_ms";
+    private static final String KEY_HIGH_USAGE_BATTERY_DRAINING = "high_usage_battery_draining";
     private static final String KEY_APP_RESTRICTION_ENABLED = "app_restriction_enabled";
     private static final String KEY_REDUCED_BATTERY_ENABLED = "reduced_battery_enabled";
     private static final String KEY_REDUCED_BATTERY_PERCENT = "reduced_battery_percent";
@@ -79,6 +84,24 @@ public class BatteryTipPolicy {
      * @see #KEY_HIGH_USAGE_APP_COUNT
      */
     public final int highUsageAppCount;
+
+    /**
+     * The size of the window(milliseconds) for checking if the device is being heavily used
+     *
+     * @see Settings.Global#BATTERY_TIP_CONSTANTS
+     * @see #KEY_HIGH_USAGE_PERIOD_MS
+     */
+    public final long highUsagePeriodMs;
+
+    /**
+     * The battery draining threshold to detect whether device is heavily used.
+     * If battery drains more than {@link #highUsageBatteryDraining} in last {@link
+     * #highUsagePeriodMs}, treat device as heavily used.
+     *
+     * @see Settings.Global#BATTERY_TIP_CONSTANTS
+     * @see #KEY_HIGH_USAGE_BATTERY_DRAINING
+     */
+    public final int highUsageBatteryDraining;
 
     /**
      * {@code true} if app restriction tip is enabled
@@ -143,6 +166,9 @@ public class BatteryTipPolicy {
         batterySaverTipEnabled = mParser.getBoolean(KEY_BATTERY_SAVER_TIP_ENABLED, true);
         highUsageEnabled = mParser.getBoolean(KEY_HIGH_USAGE_ENABLED, true);
         highUsageAppCount = mParser.getInt(KEY_HIGH_USAGE_APP_COUNT, 3);
+        highUsagePeriodMs = mParser.getLong(KEY_HIGH_USAGE_PERIOD_MS,
+                Duration.ofHours(2).toMillis());
+        highUsageBatteryDraining = mParser.getInt(KEY_HIGH_USAGE_BATTERY_DRAINING, 25);
         appRestrictionEnabled = mParser.getBoolean(KEY_APP_RESTRICTION_ENABLED, true);
         reducedBatteryEnabled = mParser.getBoolean(KEY_REDUCED_BATTERY_ENABLED, false);
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
