@@ -30,10 +30,10 @@ import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.utils.ManagedServiceSettings;
 import com.android.settings.utils.ZenServiceListing;
 import com.android.settingslib.TwoTargetPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Map;
 

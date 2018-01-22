@@ -24,6 +24,7 @@ import android.os.Build;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
@@ -31,7 +32,6 @@ import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;

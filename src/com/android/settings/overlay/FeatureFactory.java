@@ -24,6 +24,7 @@ import com.android.settings.R;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.datausage.DataPlanFeatureProvider;
@@ -35,7 +36,6 @@ import com.android.settings.security.SecurityFeatureProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.users.UserFeatureProvider;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Abstract class for creating feature controllers. Allows OEM implementations to define their own

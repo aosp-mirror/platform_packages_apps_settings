@@ -20,7 +20,6 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 
@@ -28,7 +27,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
@@ -41,11 +39,6 @@ public class LocaleListEditorTest {
 
     private LocaleListEditor mLocaleListEditor;
 
-    @Mock
-    private Context mContext;
-
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         mLocaleListEditor = new LocaleListEditor();
@@ -55,13 +48,11 @@ public class LocaleListEditorTest {
                 RuntimeEnvironment.application.getSystemService(Context.RESTRICTIONS_SERVICE));
         ReflectionHelpers.setField(mLocaleListEditor, "mUserManager",
                 RuntimeEnvironment.application.getSystemService(Context.USER_SERVICE));
-        mFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
     public void testDisallowConfigLocale_unrestrict() {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", true);
-        mLocaleListEditor.onAttach(mContext);
         mLocaleListEditor.onResume();
         Assert.assertEquals(View.GONE, mLocaleListEditor.getEmptyTextView().getVisibility());
     }
@@ -69,7 +60,6 @@ public class LocaleListEditorTest {
     @Test
     public void testDisallowConfigLocale_restrict() {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", false);
-        mLocaleListEditor.onAttach(mContext);
         mLocaleListEditor.onResume();
         Assert.assertEquals(View.VISIBLE, mLocaleListEditor.getEmptyTextView().getVisibility());
     }

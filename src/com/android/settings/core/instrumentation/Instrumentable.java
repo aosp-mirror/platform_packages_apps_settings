@@ -14,20 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.core;
+package com.android.settings.core.instrumentation;
 
-import com.android.settings.core.instrumentation.Instrumentable;
-import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
-import com.android.settingslib.core.lifecycle.ObservableActivity;
+public interface Instrumentable {
 
-/**
- * Instrumented activity that logs visibility state.
- */
-public abstract class InstrumentedActivity extends ObservableActivity implements Instrumentable {
+    int METRICS_CATEGORY_UNKNOWN = 0;
 
-    public InstrumentedActivity() {
-        // Mixin that logs visibility change for activity.
-        getLifecycle().addObserver(new VisibilityLoggerMixin(getMetricsCategory()));
-    }
-
+    /**
+     * Instrumented name for a view as defined in
+     * {@link com.android.internal.logging.nano.MetricsProto.MetricsEvent}.
+     */
+    int getMetricsCategory();
 }

@@ -19,7 +19,7 @@ package com.android.settings.testutils.shadow;
 
 import android.content.Context;
 
-import com.android.settingslib.core.instrumentation.EventLogWriter;
+import com.android.settings.core.instrumentation.EventLogWriter;
 
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;

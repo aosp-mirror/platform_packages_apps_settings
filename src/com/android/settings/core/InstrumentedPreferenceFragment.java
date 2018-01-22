@@ -23,11 +23,11 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.survey.SurveyMixin;
-import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 /**
@@ -44,17 +44,19 @@ public abstract class InstrumentedPreferenceFragment extends ObservablePreferenc
     // metrics placeholder value. Only use this for development.
     protected final int PLACEHOLDER_METRIC = 10000;
 
-    private VisibilityLoggerMixin mVisibilityLoggerMixin;
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin;
+
+    public InstrumentedPreferenceFragment() {
+        // Mixin that logs visibility change for activity.
+        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory());
+        getLifecycle().addObserver(mVisibilityLoggerMixin);
+        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
+    }
 
     @Override
     public void onAttach(Context context) {
-        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-        // Mixin that logs visibility change for activity.
-        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
-                mMetricsFeatureProvider);
-        getLifecycle().addObserver(mVisibilityLoggerMixin);
-        getLifecycle().addObserver(new SurveyMixin(this, getClass().getSimpleName()));
         super.onAttach(context);
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override

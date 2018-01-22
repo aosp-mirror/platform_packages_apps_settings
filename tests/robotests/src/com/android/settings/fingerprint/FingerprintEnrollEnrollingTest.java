@@ -36,7 +36,6 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockSettingsHelper;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.testutils.shadow.ShadowVibrator;
@@ -70,15 +69,12 @@ public class FingerprintEnrollEnrollingTest {
 
     private FingerprintEnrollEnrolling mActivity;
 
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         ShadowVibrator.addToServiceMap();
 
-        mFactory = FakeFeatureFactory.setupForTest();
         mActivity = Robolectric.buildActivity(
                 FingerprintEnrollEnrolling.class,
                 new Intent()

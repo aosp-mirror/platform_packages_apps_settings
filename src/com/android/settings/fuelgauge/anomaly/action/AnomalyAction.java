@@ -20,9 +20,9 @@ import android.content.Context;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Abstract class for anomaly action, which is triggered if we need to handle the anomaly

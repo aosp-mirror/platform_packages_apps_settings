@@ -60,7 +60,6 @@ public class DataUsageListTest {
 
     @Test
     public void resumePause_shouldListenUnlistenDataStateChange() {
-        mDataUsageList.onAttach(mContext);
         mDataUsageList.onResume();
 
         verify(mListener).setListener(true, 0, mContext);
