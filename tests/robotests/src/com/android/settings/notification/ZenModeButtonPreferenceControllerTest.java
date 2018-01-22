@@ -26,6 +26,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -79,7 +80,8 @@ public class ZenModeButtonPreferenceControllerTest {
 
         mContext = shadowApplication.getApplicationContext();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        mController = new ZenModeButtonPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeButtonPreferenceController(mContext, mock(Lifecycle.class),
+                mock(FragmentManager.class));
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
         ReflectionHelpers.setField(mController, "mZenButtonOn", mZenButtonOn);
