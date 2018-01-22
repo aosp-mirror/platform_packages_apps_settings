@@ -24,6 +24,7 @@ import android.net.ConnectivityManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.provider.Settings;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
@@ -51,7 +52,11 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     private final WifiManager mWifiManager;
     private final Lifecycle mLifecycle;
     private WifiTetherSwitchBarController mSwitchController;
-    private MasterSwitchPreference mPreference;
+    private int mSoftApState;
+    @VisibleForTesting
+    MasterSwitchPreference mPreference;
+    @VisibleForTesting
+    WifiTetherSoftApManager mWifiTetherSoftApManager;
 
     static {
         WIFI_TETHER_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
@@ -60,6 +65,12 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     }
 
     public WifiTetherPreferenceController(Context context, Lifecycle lifecycle) {
+        this(context, lifecycle, true /* initSoftApManager */);
+    }
+
+    @VisibleForTesting
+    WifiTetherPreferenceController(Context context, Lifecycle lifecycle,
+            boolean initSoftApManager) {
         super(context);
         mConnectivityManager =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -68,6 +79,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         mLifecycle = lifecycle;
         if (lifecycle != null) {
             lifecycle.addObserver(this);
+        }
+        if (initSoftApManager) {
+            initWifiTetherSoftApManager();
         }
     }
 
@@ -101,6 +115,9 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         if (mPreference != null) {
             mContext.registerReceiver(mReceiver, WIFI_TETHER_INTENT_FILTER);
             clearSummaryForAirplaneMode();
+            if (mWifiTetherSoftApManager != null) {
+                mWifiTetherSoftApManager.registerSoftApCallback();
+            }
         }
     }
 
@@ -108,7 +125,34 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     public void onStop() {
         if (mPreference != null) {
             mContext.unregisterReceiver(mReceiver);
+            if (mWifiTetherSoftApManager != null) {
+                mWifiTetherSoftApManager.unRegisterSoftApCallback();
+            }
         }
+    }
+
+    @VisibleForTesting
+    void initWifiTetherSoftApManager() {
+        // This manager only handles the number of connected devices, other parts are handled by
+        // normal BroadcastReceiver in this controller
+        mWifiTetherSoftApManager = new WifiTetherSoftApManager(mWifiManager,
+                new WifiTetherSoftApManager.WifiTetherSoftApCallback() {
+                    @Override
+                    public void onStateChanged(int state, int failureReason) {
+                        mSoftApState = state;
+                    }
+
+                    @Override
+                    public void onNumClientsChanged(int numClients) {
+                        if (mPreference != null
+                                && mSoftApState == WifiManager.WIFI_AP_STATE_ENABLED) {
+                            // Only show the number of clients when state is on
+                            mPreference.setSummary(mContext.getResources().getQuantityString(
+                                    R.plurals.wifi_tether_connected_summary, numClients,
+                                    numClients));
+                        }
+                    }
+                });
     }
 
     //
