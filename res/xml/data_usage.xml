@@ -20,24 +20,8 @@
     android:key="data_usage_screen"
     android:title="@string/data_usage_summary_title">
 
-    <PreferenceCategory
-        android:key="data_usage_category"
-        android:title="@string/usage">
-
-        <com.android.settings.SummaryPreference
+    <com.android.settings.datausage.DataUsageSummaryPreference
             android:key="status_header"
             android:selectable="false" />
-
-        <Preference
-            android:key="limit_summary"
-            android:selectable="false"
-            settings:allowDividerBelow="true" />
-
-        <com.android.settings.datausage.DataSaverPreference
-            android:key="restrict_background"
-            android:title="@string/data_saver_title"
-            android:fragment="com.android.settings.datausage.DataSaverSummary" />
-
-    </PreferenceCategory>
 
 </PreferenceScreen>
