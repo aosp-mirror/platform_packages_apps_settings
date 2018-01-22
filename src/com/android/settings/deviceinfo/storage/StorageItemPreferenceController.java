@@ -38,11 +38,11 @@ import com.android.settings.Settings;
 import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 

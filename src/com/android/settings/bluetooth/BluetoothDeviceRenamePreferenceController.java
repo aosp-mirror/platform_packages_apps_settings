@@ -23,9 +23,9 @@ import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 public class BluetoothDeviceRenamePreferenceController extends

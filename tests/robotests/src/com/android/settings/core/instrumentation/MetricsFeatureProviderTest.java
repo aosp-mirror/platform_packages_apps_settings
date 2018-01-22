@@ -31,9 +31,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.TestConfig;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.instrumentation.LogWriter;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -61,6 +58,7 @@ public class MetricsFeatureProviderTest {
     @Mock private VisibilityLoggerMixin mockVisibilityLogger;
 
     private Context mContext;
+    private MetricsFeatureProvider mProvider;
 
     @Captor
     private ArgumentCaptor<Pair> mPairCaptor;
@@ -69,6 +67,12 @@ public class MetricsFeatureProviderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        mProvider = new MetricsFeatureProvider();
+        List<LogWriter> writers = new ArrayList<>();
+        writers.add(mockLogWriter);
+        ReflectionHelpers.setField(mProvider, "mLoggerWriters", writers);
+
+        when(mockVisibilityLogger.elapsedTimeSinceVisible()).thenReturn(ELAPSED_TIME);
     }
 
     @Test
@@ -79,5 +83,61 @@ public class MetricsFeatureProviderTest {
                 FeatureFactory.getFactory(mContext).getMetricsFeatureProvider();
 
         assertThat(feature1 == feature2).isTrue();
+    }
+
+    @Test
+    public void logDashboardStartIntent_intentEmpty_shouldNotLog() {
+        mProvider.logDashboardStartIntent(mContext, null /* intent */,
+                MetricsEvent.SETTINGS_GESTURES);
+
+        verifyNoMoreInteractions(mockLogWriter);
+    }
+
+    @Test
+    public void logDashboardStartIntent_intentHasNoComponent_shouldLog() {
+        final Intent intent = new Intent(Intent.ACTION_ASSIST);
+
+        mProvider.logDashboardStartIntent(mContext, intent, MetricsEvent.SETTINGS_GESTURES);
+
+        verify(mockLogWriter).action(
+                eq(mContext),
+                eq(MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                anyString(),
+                eq(Pair.create(MetricsEvent.FIELD_CONTEXT, MetricsEvent.SETTINGS_GESTURES)));
+    }
+
+    @Test
+    public void logDashboardStartIntent_intentIsExternal_shouldLog() {
+        final Intent intent = new Intent().setComponent(new ComponentName("pkg", "cls"));
+
+        mProvider.logDashboardStartIntent(mContext, intent, MetricsEvent.SETTINGS_GESTURES);
+
+        verify(mockLogWriter).action(
+                eq(mContext),
+                eq(MetricsEvent.ACTION_SETTINGS_TILE_CLICK),
+                anyString(),
+                eq(Pair.create(MetricsEvent.FIELD_CONTEXT, MetricsEvent.SETTINGS_GESTURES)));
+    }
+
+    @Test
+    public void action_BooleanLogsElapsedTime() {
+        mProvider.action(mockVisibilityLogger, CATEGORY, SUBTYPE_BOOLEAN);
+        verify(mockLogWriter).action(eq(CATEGORY), eq(SUBTYPE_BOOLEAN), mPairCaptor.capture());
+
+        Pair value = mPairCaptor.getValue();
+        assertThat(value.first instanceof Integer).isTrue();
+        assertThat((int) value.first).isEqualTo(MetricsEvent.NOTIFICATION_SINCE_VISIBLE_MILLIS);
+        assertThat(value.second).isEqualTo(ELAPSED_TIME);
+    }
+
+    @Test
+    public void action_IntegerLogsElapsedTime() {
+        mProvider.action(mockVisibilityLogger, CATEGORY, SUBTYPE_INTEGER);
+        verify(mockLogWriter).action(eq(CATEGORY), eq(SUBTYPE_INTEGER), mPairCaptor.capture());
+
+        Pair value = mPairCaptor.getValue();
+        assertThat(value.first instanceof Integer).isTrue();
+        assertThat((int) value.first).isEqualTo(MetricsEvent.NOTIFICATION_SINCE_VISIBLE_MILLIS);
+        assertThat(value.second).isEqualTo(ELAPSED_TIME);
     }
 }

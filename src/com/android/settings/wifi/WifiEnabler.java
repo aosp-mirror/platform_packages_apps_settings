@@ -33,9 +33,9 @@ import android.widget.Toast;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.WirelessUtils;

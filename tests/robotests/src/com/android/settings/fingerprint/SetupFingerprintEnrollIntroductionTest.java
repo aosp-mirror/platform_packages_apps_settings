@@ -35,7 +35,6 @@ import com.android.settings.fingerprint.SetupFingerprintEnrollIntroductionTest
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.password.StorageManagerWrapper;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
@@ -73,7 +72,6 @@ public class SetupFingerprintEnrollIntroductionTest {
 
     @Mock
     private UserInfo mUserInfo;
-    private FakeFeatureFactory mFactory;
 
     private ActivityController<SetupFingerprintEnrollIntroduction> mController;
 
@@ -84,8 +82,6 @@ public class SetupFingerprintEnrollIntroductionTest {
         Shadows.shadowOf(application.getPackageManager())
                 .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
         ShadowFingerprintManager.addToServiceMap();
-
-        mFactory = FakeFeatureFactory.setupForTest();
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class, intent);

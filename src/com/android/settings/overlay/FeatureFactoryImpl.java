@@ -29,6 +29,7 @@ import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProviderImpl;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -54,7 +55,6 @@ import com.android.settings.users.UserFeatureProviderImpl;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 /**

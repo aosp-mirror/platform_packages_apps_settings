@@ -28,8 +28,8 @@ import android.view.ViewGroup;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settings.testutils.shadow.ShadowZoneGetter;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
