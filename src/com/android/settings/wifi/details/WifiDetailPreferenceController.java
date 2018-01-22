@@ -280,7 +280,7 @@ public class WifiDetailPreferenceController extends AbstractPreferenceController
                 .setButton1Text(R.string.forget)
                 .setButton1Positive(false)
                 .setButton1OnClickListener(view -> forgetNetwork())
-                .setButton2Text(R.string.support_sign_in_button_text)
+                .setButton2Text(R.string.wifi_sign_in_button_text)
                 .setButton2Positive(true)
                 .setButton2OnClickListener(view -> signIntoNetwork());
 
