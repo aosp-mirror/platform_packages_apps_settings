@@ -27,14 +27,19 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.BluetoothDeviceFilter;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
+import com.android.settingslib.bluetooth.HeadsetProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import android.util.Log;
 
 /**
  * Update the bluetooth devices. It gets bluetooth event from {@link LocalBluetoothManager} using
@@ -45,6 +50,7 @@ import java.util.Map;
  * whether the {@link CachedBluetoothDevice} is relevant.
  */
 public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
+    private static final String TAG = "BluetoothDeviceUpdater";
     private static final String BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY =
             "persist.bluetooth.showdeviceswithoutnames";
 
@@ -55,6 +61,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
 
     private final boolean mShowDeviceWithoutNames;
     private DashboardFragment mFragment;
+    private Preference.OnPreferenceClickListener mDevicePreferenceClickListener = null;
 
     @VisibleForTesting
     final GearPreference.OnGearClickListener mDeviceProfilesListener = pref -> {
@@ -73,6 +80,38 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
 
     };
 
+    private class PreferenceClickListener implements
+        Preference.OnPreferenceClickListener {
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            final CachedBluetoothDevice device =
+                ((BluetoothDevicePreference) preference).getBluetoothDevice();
+            if (device == null) {
+                return false;
+            }
+
+            // Set the device as active per profile only if the device supports that profile
+            // TODO: The active device selector location might change in the future
+            Log.i(TAG, "OnPreferenceClickListener: device=" + device);
+            boolean result = false;
+            A2dpProfile a2dpProfile = mLocalManager.getProfileManager().getA2dpProfile();
+            if ((a2dpProfile != null) && device.isConnectedProfile(a2dpProfile)) {
+                if (a2dpProfile.setActiveDevice(device.getDevice())) {
+                    Log.i(TAG, "OnPreferenceClickListener: A2DP active device=" + device);
+                    result = true;
+                }
+            }
+            HeadsetProfile headsetProfile = mLocalManager.getProfileManager().getHeadsetProfile();
+            if ((headsetProfile != null) && device.isConnectedProfile(headsetProfile)) {
+                if (headsetProfile.setActiveDevice(device.getDevice())) {
+                    Log.i(TAG, "OnPreferenceClickListener: Headset active device=" + device);
+                    result = true;
+                }
+            }
+            return result;
+        }
+    }
+
     public BluetoothDeviceUpdater(DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
         this(fragment, devicePreferenceCallback, Utils.getLocalBtManager(fragment.getContext()));
@@ -87,6 +126,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
                 BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false);
         mPreferenceMap = new HashMap<>();
         mLocalManager = localManager;
+        mDevicePreferenceClickListener = new PreferenceClickListener();
     }
 
     /**
@@ -141,6 +181,18 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     @Override
     public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) {}
 
+    @Override
+    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
+        Collection<CachedBluetoothDevice> cachedDevices =
+                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
+        // TODO: The state update of the Cached Bluetooth Devices should be
+        // moved to the device manager: b/72316092
+        for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
+            boolean isActive = Objects.equals(cachedBluetoothDevice, activeDevice);
+            cachedBluetoothDevice.setActiveDevice(isActive, bluetoothProfile);
+        }
+    }
+
     /**
      * Set the context to generate the {@link Preference}, so it could get the correct theme.
      */
@@ -176,6 +228,7 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
                     new BluetoothDevicePreference(mPrefContext, cachedDevice,
                             mShowDeviceWithoutNames);
             btPreference.setOnGearClickListener(mDeviceProfilesListener);
+            btPreference.setOnPreferenceClickListener(mDevicePreferenceClickListener);
             mPreferenceMap.put(device, btPreference);
             mDevicePreferenceCallback.onDeviceAdded(btPreference);
         }
