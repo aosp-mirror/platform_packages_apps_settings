@@ -1116,14 +1116,18 @@
 
     <!-- Security Picker --><skip />
 
-    <!-- Title for suggested actions for screen lock -->
-    <string name="suggested_lock_settings_title">Set screen lock</string>
+    <!-- Title for suggested actions for screen lock [CHAR LIMIT=34] -->
+    <string name="suggested_lock_settings_title">Set screen lock for security</string>
 
-    <!-- Summary for suggested actions for screen lock -->
-    <string name="suggested_lock_settings_summary">Protect your device</string>
+    <!-- Summary for suggested actions for screen lock (tablet) -->
+    <string name="suggested_lock_settings_summary" product="tablet">Prevent others from using your tablet</string>
+    <!-- Summary for suggested actions for screen lock (device) -->
+    <string name="suggested_lock_settings_summary" product="device">Prevent others from using your device</string>
+    <!-- Summary for suggested actions for screen lock (phone) -->
+    <string name="suggested_lock_settings_summary" product="default">Prevent others from using your phone</string>
 
-    <!-- Title for suggested actions for settings up a fingerprint lock -->
-    <string name="suggested_fingerprint_lock_settings_title">Use fingerprint</string>
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=34] -->
+    <string name="suggested_fingerprint_lock_settings_title">Unlock with fingerprint</string>
 
     <!-- Summary for suggested actions for settings up a fingerprint lock -->
     <string name="suggested_fingerprint_lock_settings_summary">Unlock with your fingerprint</string>
@@ -2247,7 +2251,7 @@
     <!-- Title of suggestion to turn on wifi calling [CHAR LIMIT=30] -->
     <string name="wifi_calling_suggestion_title">Turn on Wi-Fi Calling</string>
     <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=60] -->
-    <string name="wifi_calling_suggestion_summary">Use Wi-Fi instead of mobile network</string>
+    <string name="wifi_calling_suggestion_summary">Extend coverage by calling over Wi-Fi</string>
     <!-- Title of WFC preference item [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_title">Calling preference</string>
     <!-- Title of WFC preference selection dialog [CHAR LIMIT=30] -->
@@ -6872,11 +6876,11 @@
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
 
-    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=50] -->
-    <string name="zen_mode_automation_suggestion_title">Set Do Not Disturb rules</string>
+    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=34] -->
+    <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_automation_suggestion_summary">Limit sounds &amp; vibrations at certain times</string>
+    <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use rule</string>
@@ -8408,7 +8412,7 @@
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
 
     <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="night_display_suggestion_summary">Tint screen amber to help you fall asleep</string>
+    <string name="night_display_suggestion_summary">Automatically tint screen every night</string>
 
     <!-- Title of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="condition_night_display_title">Night Light is on</string>
