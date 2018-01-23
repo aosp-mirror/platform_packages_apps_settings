@@ -266,14 +266,16 @@
         <item>PWD</item>
     </string-array>
 
-   <!-- Wi-Fi AP band settings.  Either 2.4GHz or 5GHz. -->
+   <!-- Wi-Fi AP band settings.  Either Auto, 2.4GHz or 5GHz. -->
    <!-- Note that adding/removing/moving the items will need wifi settings code change. -->
     <string-array name="wifi_ap_band_config_full">
+        <item>@string/wifi_ap_choose_auto</item>
         <item>@string/wifi_ap_choose_2G</item>
         <item>@string/wifi_ap_choose_5G</item>
     </string-array>
 
     <string-array name="wifi_ap_band_config_2G_only">
+        <item>@string/wifi_ap_choose_auto</item>
         <item>@string/wifi_ap_choose_2G</item>
     </string-array>
 

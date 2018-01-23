@@ -18,6 +18,7 @@ package com.android.settings.wifi.tether;
 
 import static android.net.wifi.WifiConfiguration.AP_BAND_2GHZ;
 import static android.net.wifi.WifiConfiguration.AP_BAND_5GHZ;
+import static android.net.wifi.WifiConfiguration.AP_BAND_ANY;
 
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
@@ -32,7 +33,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private static final String TAG = "WifiTetherApBandPref";
     private static final String PREF_KEY = "wifi_tether_network_ap_band";
     private static final String[] BAND_VALUES =
-            {String.valueOf(AP_BAND_2GHZ), String.valueOf(AP_BAND_5GHZ)};
+            {String.valueOf(AP_BAND_ANY), String.valueOf(AP_BAND_2GHZ),
+                    String.valueOf(AP_BAND_5GHZ)};
 
     private final String[] mBandEntries;
     private int mBandIndex;
@@ -65,7 +67,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         } else {
             preference.setEntries(mBandEntries);
             preference.setEntryValues(BAND_VALUES);
-            preference.setSummary(mBandEntries[mBandIndex]);
+            preference.setSummary(mBandEntries[mBandIndex + 1]);
             preference.setValue(String.valueOf(mBandIndex));
         }
     }
@@ -78,7 +80,8 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         mBandIndex = Integer.parseInt((String) newValue);
-        preference.setSummary(mBandEntries[mBandIndex]);
+        Log.d(TAG, "Band preference changed, updating band index to " + mBandIndex);
+        preference.setSummary(mBandEntries[mBandIndex + 1]);
         mListener.onTetherConfigUpdated();
         return true;
     }
