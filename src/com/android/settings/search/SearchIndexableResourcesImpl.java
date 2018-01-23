@@ -21,6 +21,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.settings.DateTimeSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
+import com.android.settings.MeCardFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.MagnificationPreferenceFragment;
@@ -173,6 +174,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(ZenModeAutomationSettings.class);
         addIndex(NightDisplaySettings.class);
         addIndex(SmartBatterySettings.class);
+        addIndex(MeCardFragment.class);
     }
 
     @Override

@@ -298,5 +298,6 @@ public class SettingsGateway {
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.DeviceInfoSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
+            Settings.MeCardActivity.class.getName(),
     };
 }

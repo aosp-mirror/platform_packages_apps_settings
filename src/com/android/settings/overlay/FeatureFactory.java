@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
@@ -108,6 +109,8 @@ public abstract class FeatureFactory {
     public abstract SmsMirroringFeatureProvider getSmsMirroringFeatureProvider();
 
     public abstract SlicesFeatureProvider getSlicesFeatureProvider();
+
+    public abstract AccountFeatureProvider getAccountFeatureProvider();
 
     public static final class FactoryNotFoundException extends RuntimeException {
         public FactoryNotFoundException(Throwable throwable) {
