@@ -270,6 +270,13 @@ public class MasterClearTest {
         assertThat(mMasterClear.tryShowAccountConfirmation()).isTrue();
     }
 
+    @Test
+    public void testIsValidRequestCode() {
+        assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
+        assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST)).isTrue();
+        assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
+    }
+
     private void initScrollView(int height, int scrollY, int childBottom) {
         when(mScrollView.getHeight()).thenReturn(height);
         when(mScrollView.getScrollY()).thenReturn(scrollY);
