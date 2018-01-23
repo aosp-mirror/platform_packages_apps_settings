@@ -23,10 +23,10 @@ import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.widget.Switch;
 
-import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.Preconditions;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.widget.SwitchBar;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 
 /** Handles the logic for flipping the storage management toggle on a {@link SwitchBar}. */
 public class AutomaticStorageManagerSwitchBarController

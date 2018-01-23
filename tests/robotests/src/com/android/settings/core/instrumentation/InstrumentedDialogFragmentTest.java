@@ -21,7 +21,6 @@ import android.os.Bundle;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

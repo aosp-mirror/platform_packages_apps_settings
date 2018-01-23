@@ -41,9 +41,8 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.drawer.CategoryManager;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.ProfileSelectDialog;
@@ -160,8 +159,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             pref.setFragment(clsName);
         } else if (tile.intent != null) {
             final Intent intent = new Intent(tile.intent);
-            intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
-                    sourceMetricsCategory);
+            intent.putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
             if (action != null) {
                 intent.setAction(action);
             }
@@ -210,7 +208,7 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
             return;
         }
         final Intent intent = new Intent(tile.intent)
-                .putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
+                .putExtra(SettingsActivity.EXTRA_SOURCE_METRICS_CATEGORY,
                         MetricsEvent.DASHBOARD_SUMMARY)
                 .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

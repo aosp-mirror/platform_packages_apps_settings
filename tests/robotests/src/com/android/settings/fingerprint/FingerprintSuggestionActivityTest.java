@@ -30,7 +30,6 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
@@ -64,12 +63,9 @@ public class FingerprintSuggestionActivityTest {
 
     private ActivityController<FingerprintSuggestionActivity> mController;
 
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest();
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(FingerprintSuggestionActivity.class, intent);

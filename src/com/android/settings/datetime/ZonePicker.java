@@ -35,9 +35,8 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
+import com.android.settings.core.instrumentation.Instrumentable;
+import com.android.settings.core.instrumentation.VisibilityLoggerMixin;
 import com.android.settingslib.datetime.ZoneGetter;
 
 import java.text.Collator;
@@ -58,7 +57,8 @@ public class ZonePicker extends ListFragment implements Instrumentable {
 
     private static final int MENU_TIMEZONE = Menu.FIRST+1;
     private static final int MENU_ALPHABETICAL = Menu.FIRST;
-    private VisibilityLoggerMixin mVisibilityLoggerMixin;
+    private final VisibilityLoggerMixin mVisibilityLoggerMixin =
+            new VisibilityLoggerMixin(getMetricsCategory());
 
     private boolean mSortedByTimezone;
 
@@ -145,6 +145,12 @@ public class ZonePicker extends ListFragment implements Instrumentable {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mVisibilityLoggerMixin.onAttach(context);
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ZONE_PICKER;
     }
@@ -161,13 +167,6 @@ public class ZonePicker extends ListFragment implements Instrumentable {
         setSorting(true);
         setHasOptionsMenu(true);
         activity.setTitle(R.string.date_time_set_timezone);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
-            FeatureFactory.getFactory(getContext()).getMetricsFeatureProvider());
     }
 
     @Override

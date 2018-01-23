@@ -27,13 +27,13 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardData;
 import com.android.settings.dashboard.DashboardData.HeaderMode;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.WirelessUtils;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.List;
 import java.util.Objects;
