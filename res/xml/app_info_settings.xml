@@ -207,9 +207,16 @@
     <Preference
         android:key="app_version"
         android:selectable="false"
-        android:order="9999"
+        android:order="9998"
         settings:controller="com.android.settings.applications.appinfo.AppVersionPreferenceController"
         settings:allowDividerAbove="true"
+        settings:enableCopying="true"/>
+
+    <Preference
+        android:key="app_package_name"
+        android:selectable="false"
+        android:order="9999"
+        settings:controller="com.android.settings.applications.appinfo.AppPackageNamePreferenceController"
         settings:enableCopying="true"/>
 
 </PreferenceScreen>
