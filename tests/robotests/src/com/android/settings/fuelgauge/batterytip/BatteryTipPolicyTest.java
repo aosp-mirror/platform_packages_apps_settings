@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.text.format.DateUtils;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,6 +43,8 @@ public class BatteryTipPolicyTest {
             + ",battery_saver_tip_enabled=false"
             + ",high_usage_enabled=true"
             + ",high_usage_app_count=5"
+            + ",high_usage_period_ms=2000"
+            + ",high_usage_battery_draining=30"
             + ",app_restriction_enabled=true"
             + ",reduced_battery_enabled=true"
             + ",reduced_battery_percent=30"
@@ -66,6 +69,8 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.batterySaverTipEnabled).isFalse();
         assertThat(batteryTipPolicy.highUsageEnabled).isTrue();
         assertThat(batteryTipPolicy.highUsageAppCount).isEqualTo(5);
+        assertThat(batteryTipPolicy.highUsagePeriodMs).isEqualTo(2000);
+        assertThat(batteryTipPolicy.highUsageBatteryDraining).isEqualTo(30);
         assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
         assertThat(batteryTipPolicy.reducedBatteryEnabled).isTrue();
         assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(30);
@@ -85,6 +90,8 @@ public class BatteryTipPolicyTest {
         assertThat(batteryTipPolicy.batterySaverTipEnabled).isTrue();
         assertThat(batteryTipPolicy.highUsageEnabled).isTrue();
         assertThat(batteryTipPolicy.highUsageAppCount).isEqualTo(3);
+        assertThat(batteryTipPolicy.highUsagePeriodMs).isEqualTo(2 * DateUtils.HOUR_IN_MILLIS);
+        assertThat(batteryTipPolicy.highUsageBatteryDraining).isEqualTo(25);
         assertThat(batteryTipPolicy.appRestrictionEnabled).isTrue();
         assertThat(batteryTipPolicy.reducedBatteryEnabled).isFalse();
         assertThat(batteryTipPolicy.reducedBatteryPercent).isEqualTo(50);

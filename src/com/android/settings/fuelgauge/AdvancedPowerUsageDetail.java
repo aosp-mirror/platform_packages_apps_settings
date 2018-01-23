@@ -374,7 +374,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
     @Override
     public void onLimitBackgroundActivity() {
-        mBackgroundActivityPreferenceController.setUnchecked(
+        mBackgroundActivityPreferenceController.setRestricted(
                 findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
     }
 }

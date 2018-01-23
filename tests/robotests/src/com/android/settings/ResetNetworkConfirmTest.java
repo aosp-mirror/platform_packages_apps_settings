@@ -66,7 +66,7 @@ public class ResetNetworkConfirmTest {
     public void testResetNetworkData_resetEsim() {
         mResetNetworkConfirm.mEraseEsim = true;
         doReturn(true)
-                .when(mRecoverySystem).wipeEuiccData(any(Context.class), anyBoolean(), anyString());
+                .when(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
 
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
         try {
@@ -77,7 +77,7 @@ public class ResetNetworkConfirmTest {
         }
 
         Assert.assertNotNull(mResetNetworkConfirm.mEraseEsimTask);
-        verify(mRecoverySystem).wipeEuiccData(any(Context.class), anyBoolean(), anyString());
+        verify(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
     }
 
     @Test
@@ -88,6 +88,6 @@ public class ResetNetworkConfirmTest {
 
         Assert.assertNull(mResetNetworkConfirm.mEraseEsimTask);
         verify(mRecoverySystem, never())
-                .wipeEuiccData(any(Context.class), anyBoolean(), anyString());
+                .wipeEuiccData(any(Context.class), anyString());
     }
 }

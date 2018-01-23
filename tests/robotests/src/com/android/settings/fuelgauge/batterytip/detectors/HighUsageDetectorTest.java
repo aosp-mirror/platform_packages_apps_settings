@@ -18,6 +18,8 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -31,6 +33,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
+import com.android.settings.fuelgauge.batterytip.HighUsageDataParser;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -55,6 +58,8 @@ public class HighUsageDetectorTest {
     private BatteryUtils mBatteryUtils;
     @Mock
     private BatterySipper mBatterySipper;
+    @Mock
+    private HighUsageDataParser mDataParser;
 
     private BatteryTipPolicy mPolicy;
     private HighUsageDetector mHighUsageDetector;
@@ -66,8 +71,10 @@ public class HighUsageDetectorTest {
 
         mContext = RuntimeEnvironment.application;
         mPolicy = spy(new BatteryTipPolicy(mContext));
-        mHighUsageDetector = new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper);
+        mHighUsageDetector = spy(new HighUsageDetector(mContext, mPolicy, mBatteryStatsHelper));
         mHighUsageDetector.mBatteryUtils = mBatteryUtils;
+        mHighUsageDetector.mDataParser = mDataParser;
+        doNothing().when(mHighUsageDetector).parseBatteryData();
 
         mUsageList = new ArrayList<>();
         mUsageList.add(mBatterySipper);
@@ -82,8 +89,7 @@ public class HighUsageDetectorTest {
 
     @Test
     public void testDetect_containsHighUsageApp_tipVisible() {
-        doReturn(2 * DateUtils.HOUR_IN_MILLIS).when(mBatteryUtils).calculateScreenUsageTime(
-                mBatteryStatsHelper);
+        doReturn(true).when(mDataParser).isDeviceHeavilyUsed();
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
         doReturn(DateUtils.HOUR_IN_MILLIS).when(mBatteryUtils).getProcessTimeMs(
                 BatteryUtils.StatusType.FOREGROUND, mBatterySipper.uidObj,

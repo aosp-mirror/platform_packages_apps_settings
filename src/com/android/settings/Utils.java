@@ -514,7 +514,8 @@ public final class Utils extends com.android.settingslib.Utils {
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
             CharSequence title, boolean isShortcut, int metricsCategory) {
         startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, isShortcut, metricsCategory, 0);
+                titleResPackageName, titleResId, title, isShortcut, metricsCategory,
+                Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
 

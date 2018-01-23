@@ -18,11 +18,15 @@ package com.android.settings.wifi.tether;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,6 +69,7 @@ import java.util.ArrayList;
         shadows = {
                 WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
                 WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
+                WifiTetherPreferenceControllerTest.ShadowWifiTetherSoftApManager.class
         })
 public class WifiTetherPreferenceControllerTest {
 
@@ -94,8 +99,9 @@ public class WifiTetherPreferenceControllerTest {
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
 
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[] {"1", "2"});
-        mController = new WifiTetherPreferenceController(mContext, mLifecycle);
+        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{"1", "2"});
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle,
+                false /* initSoftApManager */);
     }
 
     @After
@@ -105,8 +111,9 @@ public class WifiTetherPreferenceControllerTest {
 
     @Test
     public void isAvailable_noTetherRegex_shouldReturnFalse() {
-        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[] {});
-        mController = new WifiTetherPreferenceController(mContext, mLifecycle);
+        when(mConnectivityManager.getTetherableWifiRegexs()).thenReturn(new String[]{});
+        mController = new WifiTetherPreferenceController(mContext, mLifecycle,
+                false /* initSoftApManager */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -241,6 +248,19 @@ public class WifiTetherPreferenceControllerTest {
         @Implementation
         public static boolean isTetherSettingPageEnabled() {
             return true;
+        }
+    }
+
+    @Implements(WifiTetherSoftApManager.class)
+    public static final class ShadowWifiTetherSoftApManager {
+        @Implementation
+        public void registerSoftApCallback() {
+            // do nothing
+        }
+
+        @Implementation
+        public void unRegisterSoftApCallback() {
+            // do nothing
         }
     }
 

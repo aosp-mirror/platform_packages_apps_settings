@@ -33,10 +33,14 @@ import com.android.settingslib.applications.ApplicationsState.AppFilter;
 
 import java.util.Set;
 
-// TODO(b/63720392): add unit tests
+// TODO(b/72055774): add unit tests
 public class AppStateDirectoryAccessBridge extends AppStateBaseBridge {
 
     private static final String TAG = "DirectoryAccessBridge";
+
+    // TODO(b/72055774): set to false once feature is ready (or use Log.isLoggable)
+    static final boolean DEBUG = true;
+    static final boolean VERBOSE = true;
 
     public AppStateDirectoryAccessBridge(ApplicationsState appState, Callback callback) {
         super(appState, callback);
@@ -59,26 +63,33 @@ public class AppStateDirectoryAccessBridge extends AppStateBaseBridge {
 
         @Override
         public void init(Context context) {
-            try (Cursor cursor = context.getContentResolver().query(
-                    new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
-                            .authority(AUTHORITY).appendPath(TABLE_PACKAGES).appendPath("*")
-                            .build(), TABLE_PACKAGES_COLUMNS, null, null)) {
+            mPackages = null;
+            final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
+                    .authority(AUTHORITY).appendPath(TABLE_PACKAGES).appendPath("*")
+                    .build();
+            try (Cursor cursor = context.getContentResolver().query(providerUri,
+                    TABLE_PACKAGES_COLUMNS, null, null)) {
                 if (cursor == null) {
-                    Log.w(TAG, "didn't get cursor");
+                    Log.w(TAG, "Didn't get cursor for " + providerUri);
                     return;
                 }
                 final int count = cursor.getCount();
                 if (count == 0) {
-                    Log.d(TAG, "no packages");
+                    if (DEBUG) {
+                        Log.d(TAG, "No packages anymore (was " + mPackages + ")");
+                    }
                     return;
                 }
                 mPackages = new ArraySet<>(count);
                 while (cursor.moveToNext()) {
                     mPackages.add(cursor.getString(TABLE_PACKAGES_COL_PACKAGE));
                 }
-                Log.v(TAG, "init(): " + mPackages);
+                if (DEBUG) {
+                    Log.d(TAG, "init(): " + mPackages);
+                }
             }
         }
+
 
         @Override
         public boolean filterApp(AppEntry info) {

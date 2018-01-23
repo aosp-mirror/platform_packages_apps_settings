@@ -277,6 +277,9 @@ public abstract class DeviceListPreferenceFragment extends
 
     public void onConnectionStateChanged(CachedBluetoothDevice cachedDevice, int state) { }
 
+    @Override
+    public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) { }
+
     /**
      * Return the key of the {@link PreferenceGroup} that contains the bluetooth devices
      */
