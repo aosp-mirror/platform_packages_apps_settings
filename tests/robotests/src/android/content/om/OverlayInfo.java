@@ -14,7 +14,16 @@
 
 package android.content.om;
 
+import android.annotation.NonNull;
+
 public class OverlayInfo {
+
+    public final String packageName;
+
+    public OverlayInfo(@NonNull String packageName, @NonNull String targetPackageName,
+            @NonNull String baseCodePath, int state, int userId) {
+        this.packageName = packageName;
+    }
 
     public boolean isEnabled() {
         return false;
