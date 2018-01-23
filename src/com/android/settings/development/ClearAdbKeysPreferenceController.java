@@ -17,7 +17,7 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.hardware.usb.IUsbManager;
+import android.debug.IAdbManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -42,7 +42,7 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
     @VisibleForTesting
     static final String RO_ADB_SECURE_PROPERTY_KEY = "ro.adb.secure";
 
-    private final IUsbManager mUsbManager;
+    private final IAdbManager mAdbManager;
     private final DevelopmentSettingsDashboardFragment mFragment;
 
     public ClearAdbKeysPreferenceController(Context context,
@@ -50,7 +50,7 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
         super(context);
 
         mFragment = fragment;
-        mUsbManager = IUsbManager.Stub.asInterface(ServiceManager.getService(Context.USB_SERVICE));
+        mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
     }
 
     @Override
@@ -94,7 +94,7 @@ public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreference
 
     public void onClearAdbKeysConfirmed() {
         try {
-            mUsbManager.clearUsbDebuggingKeys();
+            mAdbManager.clearDebuggingKeys();
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to clear adb keys", e);
         }

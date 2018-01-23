@@ -28,7 +28,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.hardware.usb.IUsbManager;
+import android.debug.IAdbManager;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 
@@ -60,7 +60,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
     @Mock
-    private IUsbManager mUsbManager;
+    private IAdbManager mAdbManager;
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
 
@@ -71,7 +71,7 @@ public class ClearAdbKeysPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         final Context context = RuntimeEnvironment.application;
         mController = spy(new ClearAdbKeysPreferenceController(context, mFragment));
-        ReflectionHelpers.setField(mController, "mUsbManager", mUsbManager);
+        ReflectionHelpers.setField(mController, "mAdbManager", mAdbManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
@@ -168,7 +168,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     public void onClearAdbKeysConfirmed_shouldClearKeys() throws RemoteException {
         mController.onClearAdbKeysConfirmed();
 
-        verify(mUsbManager).clearUsbDebuggingKeys();
+        verify(mAdbManager).clearDebuggingKeys();
     }
 
     @Implements(ClearAdbKeysWarningDialog.class)
