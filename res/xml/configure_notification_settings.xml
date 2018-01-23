@@ -19,8 +19,28 @@
                   android:key="configure_notification_settings">
 
     <PreferenceCategory
-        android:key="dashboard_tile_placeholder"
-        android:order="1"/>
+        android:key="recent_notifications_category"
+        android:title="@string/recent_notifications"
+        android:order="-200">
+        <!-- Placeholder for a list of recent apps -->
+
+        <!-- See all apps button -->
+        <Preference
+            android:title="@string/notifications_title"
+            android:key="all_notifications"
+            android:order="20">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$NotificationAppListActivity">
+            </intent>
+        </Preference>
+    </PreferenceCategory>
+
+    <!-- Empty category to draw divider -->
+    <PreferenceCategory
+        android:key="all_notifications_divider"
+        android:order="-190"/>
 
     <!-- When device is locked -->
     <com.android.settings.notification.RestrictedDropDownPreference
