@@ -6847,6 +6847,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
+    <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
+
     <!-- Do not disturb: Title for the behaviors option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_behavior_settings_title">Behavior</string>
 
@@ -6904,6 +6907,9 @@
     <!--  Do not disturb: Button to add new automatic rule to DND. [CHAR LIMIT=30] -->
     <string name="zen_mode_add">Add</string>
 
+    <!--  Do not disturb: Label for button in enable zen dialog that will turn on zen mode. [CHAR LIMIT=30] -->
+    <string name="zen_mode_enable_dialog_turn_on">Turn on</string>
+
     <!--  Do not disturb: Label for button that will turn on zen mode. [CHAR LIMIT=30] -->
     <string name="zen_mode_button_turn_on">Turn on now</string>
 
@@ -6921,6 +6927,12 @@
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
     <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
+
+    <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
+    <string name="zen_interruption_level_priority">Priority only</string>
+
+    <!-- [CHAR LIMIT=20] Accessibility string for current zen mode and selected exit condition. A template that simply concatenates existing mode string and the current condition description.  -->
+    <string name="zen_mode_and_condition"><xliff:g id="zen_mode" example="Priority interruptions only">%1$s</xliff:g>. <xliff:g id="exit_condition" example="For one hour">%2$s</xliff:g></string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>

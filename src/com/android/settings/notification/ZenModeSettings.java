@@ -17,6 +17,7 @@
 package com.android.settings.notification;
 
 import android.app.AutomaticZenRule;
+import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
@@ -50,7 +51,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return buildPreferenceControllers(context, getLifecycle());
+        return buildPreferenceControllers(context, getLifecycle(), getFragmentManager());
     }
 
     @Override
@@ -59,11 +60,11 @@ public class ZenModeSettings extends ZenModeSettingsBase {
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
-            Lifecycle lifecycle) {
+            Lifecycle lifecycle, FragmentManager fragmentManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
-        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
         return controllers;
     }
@@ -211,7 +212,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 @Override
                 public List<AbstractPreferenceController> getPreferenceControllers(Context
                         context) {
-                    return buildPreferenceControllers(context, null);
+                    return buildPreferenceControllers(context, null, null);
                 }
             };
 }
