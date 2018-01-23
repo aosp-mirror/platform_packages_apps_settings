@@ -66,12 +66,9 @@ public class SystemUpdatePreferenceControllerTest {
     }
 
     @Test
-    public void updateNonIndexable_bothAvailable_shouldNotUpdate() {
+    public void updateNonIndexable_ifAvailable_shouldNotUpdate() {
         final List<String> keys = new ArrayList<>();
         when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mContext.getResources().getBoolean(
-                R.bool.config_additional_system_update_setting_enable))
-                .thenReturn(true);
 
         mController.updateNonIndexableKeys(keys);
 
@@ -79,7 +76,8 @@ public class SystemUpdatePreferenceControllerTest {
     }
 
     @Test
-    public void updateNonIndexable_nothingAvailable_shouldUpdateWith2Prefs() {
+    public void updateNonIndexable_ifNotAvailable_shouldUpdate() {
+        // mUserManager.isAdminUser() returns false here
         final List<String> keys = new ArrayList<>();
 
         mController.updateNonIndexableKeys(keys);
@@ -88,10 +86,20 @@ public class SystemUpdatePreferenceControllerTest {
     }
 
     @Test
-    public void displayPrefs_nothingAvailable_shouldNotDisplay() {
+    public void displayPrefs_ifNotAvailable_shouldNotDisplay() {
+        // mUserManager.isAdminUser() returns false here
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isVisible()).isFalse();
+    }
+
+    @Test
+    public void displayPrefs_ifAvailable_shouldDisplay() {
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
 
     @Test
@@ -103,16 +111,5 @@ public class SystemUpdatePreferenceControllerTest {
         assertThat(mPreference.getSummary())
                 .isEqualTo(RuntimeEnvironment.application.getString(R.string.about_summary,
                         Build.VERSION.RELEASE));
-    }
-
-    @Test
-    public void displayPrefs_oneAvailable_shouldDisplayOne() {
-        when(mContext.getResources().getBoolean(
-                R.bool.config_additional_system_update_setting_enable))
-                .thenReturn(true);
-
-        mController.displayPreference(mScreen);
-
-        assertThat(mPreference.isVisible()).isFalse();
     }
 }
