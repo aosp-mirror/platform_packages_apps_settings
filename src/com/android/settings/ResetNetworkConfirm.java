@@ -81,8 +81,7 @@ public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            return mRecoverySystem.wipeEuiccData(
-                    mContext, true /* isWipeEuicc */, mPackageName);
+            return mRecoverySystem.wipeEuiccData(mContext, mPackageName);
         }
 
         @Override

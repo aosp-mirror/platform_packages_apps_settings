@@ -29,11 +29,10 @@ public class RecoverySystemWrapper {
     /**
      * Returns whether wipe Euicc data successfully or not.
      *
-     * @param isWipeEuicc whether we want to wipe Euicc data or not
      * @param packageName the package name of the caller app.
      */
     public boolean wipeEuiccData(
-            Context context, final boolean isWipeEuicc, final String packageName) {
-        return RecoverySystem.wipeEuiccData(context, isWipeEuicc, packageName);
+            Context context, final String packageName) {
+        return RecoverySystem.wipeEuiccData(context, packageName);
     }
 }

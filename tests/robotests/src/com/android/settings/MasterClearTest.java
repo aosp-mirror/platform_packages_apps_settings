@@ -41,6 +41,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -115,6 +116,32 @@ public class MasterClearTest {
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
         when(mScrollView.getChildCount()).thenReturn(1);
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimChecked() {
+        ActivityForTest testActivity = new ActivityForTest();
+        when(mMasterClear.getActivity()).thenReturn(testActivity);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorage.setChecked(true);
+        mMasterClear.showFinalConfirmation();
+        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+                .isTrue();
+    }
+
+    @Test
+    public void testShowFinalConfirmation_eraseEsimUnchecked() {
+        ActivityForTest testActivity = new ActivityForTest();
+        when(mMasterClear.getActivity()).thenReturn(testActivity);
+
+        mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
+        mMasterClear.mEsimStorage.setChecked(false);
+        mMasterClear.showFinalConfirmation();
+        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, true))
+                .isFalse();
     }
 
     @Test
