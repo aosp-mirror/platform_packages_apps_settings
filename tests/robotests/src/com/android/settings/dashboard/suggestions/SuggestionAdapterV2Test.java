@@ -200,7 +200,10 @@ public class SuggestionAdapterV2Test {
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.findViewById(R.id.close_button).performClick();
 
-        verify(callback).onSuggestionClosed(suggestions.get(0));
+        final Suggestion suggestion = suggestions.get(0);
+        verify(mFeatureFactory.suggestionsFeatureProvider).dismissSuggestion(
+            mActivity, mSuggestionControllerMixin, suggestion);
+        verify(callback).onSuggestionClosed(suggestion);
     }
 
     private void setupSuggestions(Context context, List<Suggestion> suggestions) {

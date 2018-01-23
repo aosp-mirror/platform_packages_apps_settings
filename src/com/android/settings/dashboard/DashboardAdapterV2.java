@@ -151,13 +151,10 @@ public class DashboardAdapterV2 extends RecyclerView.Adapter<DashboardAdapterV2.
         if (list.size() == 1) {
             // The only suggestion is dismissed, and the the empty suggestion container will
             // remain as the dashboard item. Need to refresh the dashboard list.
-            final DashboardDataV2 prevData = mDashboardData;
-            mDashboardData = new DashboardDataV2.Builder(prevData)
-                    .setSuggestions(null)
-                    .build();
-            notifyDashboardDataChanged(prevData);
+            setSuggestions(null);
         } else {
             mSuggestionAdapter.removeSuggestion(suggestion);
+            notifyItemChanged(0, null);
         }
     }
 
