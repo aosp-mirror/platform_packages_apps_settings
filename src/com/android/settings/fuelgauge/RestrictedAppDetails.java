@@ -20,11 +20,9 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v14.preference.PreferenceFragment;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -36,9 +34,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.fuelgauge.anomaly.Anomaly;
-import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
-import com.android.settings.fuelgauge.anomaly.AnomalyPreference;
+import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
@@ -120,7 +116,7 @@ public class RestrictedAppDetails extends DashboardFragment {
         final Context context = getPrefContext();
 
         for (int i = 0, size = mPackageOpsList.size(); i < size; i++) {
-            final CheckBoxPreference checkBoxPreference = new CheckBoxPreference(context);
+            final CheckBoxPreference checkBoxPreference = new AppCheckBoxPreference(context);
             final AppOpsManager.PackageOps packageOps = mPackageOpsList.get(i);
             try {
                 final ApplicationInfo applicationInfo = mPackageManager.getApplicationInfo(
@@ -128,6 +124,10 @@ public class RestrictedAppDetails extends DashboardFragment {
                 checkBoxPreference.setChecked(true);
                 checkBoxPreference.setTitle(mPackageManager.getApplicationLabel(applicationInfo));
                 checkBoxPreference.setKey(packageOps.getPackageName());
+                checkBoxPreference.setIcon(
+                        Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager,
+                                packageOps.getPackageName(),
+                                UserHandle.getUserId(packageOps.getUid())));
                 checkBoxPreference.setOnPreferenceChangeListener((pref, value) -> {
                     // change the toggle
                     final int mode = (Boolean) value ? AppOpsManager.MODE_IGNORED
