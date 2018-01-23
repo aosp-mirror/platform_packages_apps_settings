@@ -16,6 +16,8 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="app_data_usage_screen"
     android:title="@string/data_usage_app_summary_title">
 
     <com.android.settings.datausage.SpinnerPreference
@@ -50,15 +52,19 @@
             android:key="app_settings"
             android:title="@string/data_usage_app_settings" />
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="restrict_background"
             android:title="@string/data_usage_app_restrict_background"
-            android:summary="@string/data_usage_app_restrict_background_summary" />
+            android:summary="@string/data_usage_app_restrict_background_summary"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/disabled_by_admin" />
 
-        <SwitchPreference
+        <com.android.settingslib.RestrictedSwitchPreference
             android:key="unrestricted_data_saver"
             android:title="@string/unrestricted_app_title"
-            android:summary="@string/unrestricted_app_summary" />
+            android:summary="@string/unrestricted_app_summary"
+            settings:useAdditionalSummary="true"
+            settings:restrictedSwitchSummary="@string/disabled_by_admin" />
 
     </PreferenceCategory>
 
