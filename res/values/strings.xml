@@ -2606,6 +2606,9 @@
         <item quantity="one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</item>
         <item quantity="other">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempts.</item>
     </plurals>
+    <!-- This is instruction text to inform the user that they have entered the wrong SIM PIN while trying to unlock the keyguard.
+The variable will be replaced with a number. -->
+    <string name="wrong_pin_code_one">Incorrect SIM PIN code, you have <xliff:g id="number">%d</xliff:g> remaining attempt before you must contact your carrier to unlock your device.</string>
     <!-- Instructions telling the user that the operation to unlock the keyguard with SIM PIN failed. Displayed in one line in a large font.  [CHAR LIMIT=40] -->
     <string name="pin_failed">SIM PIN operation failed!</string>
 
