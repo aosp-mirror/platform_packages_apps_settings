@@ -2714,10 +2714,6 @@
         <!-- Show channel group-level notification settings (group passed in as extras) -->
         <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
                   android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.CHANNEL_GROUP_NOTIFICATION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
