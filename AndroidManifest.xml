@@ -2200,12 +2200,15 @@
                 android:label="@string/power_usage_summary_title"
                 android:icon="@drawable/ic_settings_battery"
                 android:enabled="false">
-            <!-- TODO(b/69867246): add priority for this intent-filter -->
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <!-- TODO(b/69867246): add shortcut intent-filter  -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2227,14 +2230,9 @@
         <activity android:name=".Settings$PowerUsageSummaryLegacyActivity"
                   android:label="@string/power_usage_summary_title"
                   android:icon="@drawable/ic_settings_battery">
-            <intent-filter android:priority="1">
+            <intent-filter>
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
