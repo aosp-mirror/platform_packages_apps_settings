@@ -75,7 +75,7 @@ import java.util.List;
 public class MasterClear extends InstrumentedPreferenceFragment {
     private static final String TAG = "MasterClear";
 
-    private static final int KEYGUARD_REQUEST = 55;
+    @VisibleForTesting static final int KEYGUARD_REQUEST = 55;
     @VisibleForTesting static final int CREDENTIAL_CONFIRM_REQUEST = 56;
 
     private static final String KEY_SHOW_ESIM_RESET_CHECKBOX
@@ -118,11 +118,16 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                 request, res.getText(R.string.master_clear_title));
     }
 
+    @VisibleForTesting
+    boolean isValidRequestCode(int requestCode) {
+        return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST));
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode != KEYGUARD_REQUEST || requestCode != CREDENTIAL_CONFIRM_REQUEST) {
+        if (!isValidRequestCode(requestCode)) {
             return;
         }
 
