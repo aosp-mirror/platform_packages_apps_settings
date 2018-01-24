@@ -3391,16 +3391,6 @@
     <string name="location_title">My Location</string>
     <!-- [CHAR LIMIT=30] Title for managed profile location switch  -->
     <string name="managed_profile_location_switch_title">Location for work profile</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, setting preference screen box label for location mode -->
-    <string name="location_mode_title">Mode</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, high accuracy location mode -->
-    <string name="location_mode_high_accuracy_title">High accuracy</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, battery saving location mode -->
-    <string name="location_mode_battery_saving_title">Battery saving</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, device only location mode -->
-    <string name="location_mode_sensors_only_title">Device only</string>
-    <!-- [CHAR LIMIT=30] Location settings screen, location off mode -->
-    <string name="location_mode_location_off_title">Location off</string>
     <!-- [CHAR LIMIT=30] Location settings screen. It's a link that directs the user to a page that
       shows the location permission setting for each installed app -->
     <string name="location_app_level_permissions">App-level permissions</string>
@@ -3414,14 +3404,6 @@
     <string name="location_high_battery_use">High battery use</string>
     <!-- [CHAR LIMIT=30] Location settings screen, recent location requests low battery use-->
     <string name="location_low_battery_use">Low battery use</string>
-    <!-- [CHAR LIMIT=30] Location mode screen, screen title -->
-    <string name="location_mode_screen_title">Location mode</string>
-    <!-- [CHAR LIMIT=130] Location mode screen, description for high accuracy mode -->
-    <string name="location_mode_high_accuracy_description">Use GPS, Wi\u2011Fi, Bluetooth, or mobile networks to determine location </string>
-    <!-- [CHAR LIMIT=130] Location mode screen, description for battery saving mode -->
-    <string name="location_mode_battery_saving_description">Use Wi\u2011Fi, Bluetooth, or mobile networks to determine location</string>
-    <!-- [CHAR LIMIT=130] Location mode screen, description for sensors only mode -->
-    <string name="location_mode_sensors_only_description">Use GPS and device sensors to determine location</string>
     <!-- [CHAR LIMIT=30] Wireless background scanning settings screen, screen title -->
     <string name="location_scanning_screen_title">Scanning</string>
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
@@ -6709,7 +6691,6 @@
     <string name="keywords_sounds_and_notifications_interruptions">dont don\u2019t disturb, interrupt, interruption, break</string>
     <string name="keywords_app">RAM</string>
     <string name="keywords_location">nearby, location, history, reporting</string>
-    <string name="keywords_location_mode">accuracy</string>
     <string name="keywords_accounts">account</string>
     <string name="keywords_users">restriction, restrict, restricted</string>
     <string name="keywords_keyboard_and_ime">text correction, correct, sound, vibrate, auto, language, gesture, suggest, suggestion, theme, offensive, word, type, emoji, international</string>
@@ -8346,8 +8327,8 @@
     <!-- Summary of payment screen [CHAR LIMIT=NONE] -->
     <string name="payment_summary"><xliff:g id="app_name" example="Payment App">%1$s</xliff:g> is default</string>
 
-    <!-- Summary of location screen [CHAR LIMIT=NONE] -->
-    <string name="location_on_summary">ON / <xliff:g id="location_mode" example="High accuracy">%1$s</xliff:g></string>
+    <!-- Summary of location on screen [CHAR LIMIT=NONE] -->
+    <string name="location_on_summary">ON</string>
 
     <!-- Location off [CHAR LIMIT=NONE] -->
     <string name="location_off_summary">OFF</string>

@@ -105,24 +105,9 @@ public class LocationPreferenceController extends AbstractPreferenceController
         int mode = Secure.getInt(context.getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
         if (mode != Secure.LOCATION_MODE_OFF) {
-            return context.getString(R.string.location_on_summary,
-                    context.getString(getLocationString(mode)));
+            return context.getString(R.string.location_on_summary);
         }
         return context.getString(R.string.location_off_summary);
-    }
-
-    public static int getLocationString(int mode) {
-        switch (mode) {
-            case Secure.LOCATION_MODE_OFF:
-                return R.string.location_mode_location_off_title;
-            case Secure.LOCATION_MODE_SENSORS_ONLY:
-                return R.string.location_mode_sensors_only_title;
-            case Secure.LOCATION_MODE_BATTERY_SAVING:
-                return R.string.location_mode_battery_saving_title;
-            case Secure.LOCATION_MODE_HIGH_ACCURACY:
-                return R.string.location_mode_high_accuracy_title;
-        }
-        return 0;
     }
 
     @Override
