@@ -203,6 +203,11 @@
             android:summary="@string/wifi_verbose_logging_summary"/>
 
         <SwitchPreference
+            android:key="wifi_connected_mac_randomization"
+            android:title="@string/wifi_connected_mac_randomization"
+            android:summary="@string/wifi_connected_mac_randomization_summary"/>
+
+        <SwitchPreference
             android:key="mobile_data_always_on"
             android:title="@string/mobile_data_always_on"
             android:summary="@string/mobile_data_always_on_summary"/>
@@ -346,7 +351,7 @@
             android:key="density"
             android:title="@string/developer_smallest_width" />
 
-        <SwitchPreference
+        <ListPreference
             android:key="display_cutout_emulation"
             android:title="@string/display_cutout_emulation" />
 

@@ -788,6 +788,10 @@
     <string name="security_enable_widgets_title">Enable widgets</string>
     <!-- Summary for settings checkbox to disable widgets when the setting has been disabled by an installed device admin [CHAR LIMIT=50] -->
     <string name="security_enable_widgets_disabled_summary">Disabled by admin</string>
+    <!-- Text shown for the title of the lockdown option -->
+    <string name="lockdown_settings_title">Show lockdown option</string>
+    <!-- Text shown for the description of the lockdown option -->
+    <string name="lockdown_settings_summary">Display power button option that turns off extended access and fingerprint unlocking.</string>
     <!-- Text shown for summary of owner info setting (if none set) [CHAR LIMIT=40]-->
     <string name="owner_info_settings_summary">None</string>
     <!-- Description of how many characters are used in owner info [CHAR LIMIT=40]-->
@@ -1116,14 +1120,18 @@
 
     <!-- Security Picker --><skip />
 
-    <!-- Title for suggested actions for screen lock -->
-    <string name="suggested_lock_settings_title">Set screen lock</string>
+    <!-- Title for suggested actions for screen lock [CHAR LIMIT=34] -->
+    <string name="suggested_lock_settings_title">Set screen lock for security</string>
 
-    <!-- Summary for suggested actions for screen lock -->
-    <string name="suggested_lock_settings_summary">Protect your device</string>
+    <!-- Summary for suggested actions for screen lock (tablet) -->
+    <string name="suggested_lock_settings_summary" product="tablet">Prevent others from using your tablet</string>
+    <!-- Summary for suggested actions for screen lock (device) -->
+    <string name="suggested_lock_settings_summary" product="device">Prevent others from using your device</string>
+    <!-- Summary for suggested actions for screen lock (phone) -->
+    <string name="suggested_lock_settings_summary" product="default">Prevent others from using your phone</string>
 
-    <!-- Title for suggested actions for settings up a fingerprint lock -->
-    <string name="suggested_fingerprint_lock_settings_title">Use fingerprint</string>
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=34] -->
+    <string name="suggested_fingerprint_lock_settings_title">Unlock with fingerprint</string>
 
     <!-- Summary for suggested actions for settings up a fingerprint lock -->
     <string name="suggested_fingerprint_lock_settings_summary">Unlock with your fingerprint</string>
@@ -1941,6 +1949,8 @@
     <string name="wifi_show_password">Show password</string>
     <!-- Label for the RadioGroup to choose wifi ap band -->
     <string name="wifi_ap_band_config">Select AP Band</string>
+    <!-- Label for the radio button to choose wifi ap channel automatically-->
+    <string name="wifi_ap_choose_auto">Auto</string>
     <!-- Label for the radio button to choose wifi ap 2.4 GHz band -->
     <string name="wifi_ap_choose_2G">2.4 GHz Band</string>
     <!-- Label for the radio button to choose wifi ap 5GHz band -->
@@ -2247,7 +2257,7 @@
     <!-- Title of suggestion to turn on wifi calling [CHAR LIMIT=30] -->
     <string name="wifi_calling_suggestion_title">Turn on Wi-Fi Calling</string>
     <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=60] -->
-    <string name="wifi_calling_suggestion_summary">Use Wi-Fi instead of mobile network</string>
+    <string name="wifi_calling_suggestion_summary">Extend coverage by calling over Wi-Fi</string>
     <!-- Title of WFC preference item [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_title">Calling preference</string>
     <!-- Title of WFC preference selection dialog [CHAR LIMIT=30] -->
@@ -5588,10 +5598,12 @@
     <string name="add_account_label">Add account</string>
     <!-- Label for the state of the work profile [CHAR LIMIT=80] -->
     <string name="managed_profile_not_available_label">Work profile isn\u2019t available yet</string>
-    <!-- Account Settings. The preference title for enabling work mode -->
-    <string name="work_mode_label">Work mode</string>
-    <!-- Account Settings. The preference summary for enabling work mode -->
-    <string name="work_mode_summary">Allow work profile to function, including apps, background sync, and related features</string>
+    <!-- This string is the title of a setting. If a user taps the setting, they can turn their work profile on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective. -->
+    <string name="work_mode_label">Work profile</string>
+    <!-- This string is located under a setting and describes what the setting does. It's letting a user know whether their work profile is on or off, and they can use the setting to turn it on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective.-->
+    <string name="work_mode_on_summary">Managed by your organization</string>
+    <!-- This string is located under a setting and describes what the setting does. It's letting a user know whether their work profile is on or off, and they can use the setting to turn it on or off. The work profile is a section of their phone that's managed by their employer. "Work" is an adjective.-->
+    <string name="work_mode_off_summary">Apps and notifications are off</string>
     <!-- Button label to remove the work profile [CHAR LIMIT=35] -->
     <string name="remove_managed_profile_label">Remove work profile</string>
     <!-- Data synchronization settings screen, title of setting that controls whether background data should be used [CHAR LIMIT=30] -->
@@ -6437,6 +6449,7 @@
     <string name="help_uri_process_stats_summary" translatable="false"></string>
     <string name="help_uri_process_stats_apps" translatable="false"></string>
     <string name="help_uri_private_dns" translatable="false"></string>
+    <string name="help_uri_about_phone_v2" translatable="false"></string>
 
     <!-- User account title [CHAR LIMIT=30] -->
     <string name="user_account_title">Account for content</string>
@@ -6845,6 +6858,9 @@
     <!-- Sound: Title for the Do not Disturb option and associated settings page. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_title">Do Not Disturb</string>
 
+    <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
+    <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
+
     <!-- Do not disturb: Title for the behaviors option and associated settings page. [CHAR LIMIT=30] -->
     <string name="zen_mode_behavior_settings_title">Behavior</string>
 
@@ -6872,11 +6888,11 @@
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
 
-    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=50] -->
-    <string name="zen_mode_automation_suggestion_title">Set Do Not Disturb rules</string>
+    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=34] -->
+    <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
     <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=NONE] -->
-    <string name="zen_mode_automation_suggestion_summary">Limit sounds &amp; vibrations at certain times</string>
+    <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
     <string name="zen_mode_use_automatic_rule">Use rule</string>
@@ -6902,6 +6918,9 @@
     <!--  Do not disturb: Button to add new automatic rule to DND. [CHAR LIMIT=30] -->
     <string name="zen_mode_add">Add</string>
 
+    <!--  Do not disturb: Label for button in enable zen dialog that will turn on zen mode. [CHAR LIMIT=30] -->
+    <string name="zen_mode_enable_dialog_turn_on">Turn on</string>
+
     <!--  Do not disturb: Label for button that will turn on zen mode. [CHAR LIMIT=30] -->
     <string name="zen_mode_button_turn_on">Turn on now</string>
 
@@ -6919,6 +6938,12 @@
 
     <!-- [CHAR LIMIT=110] Zen mode settings footer: Footer how DND was triggered by an app -->
     <string name="zen_mode_settings_dnd_automatic_rule_app">Do Not Disturb was automatically turned on by an app (<xliff:g id="app_name" example="Android Services">%s</xliff:g>)</string>
+
+    <!--[CHAR LIMIT=40] Zen Interruption level: Priority.  -->
+    <string name="zen_interruption_level_priority">Priority only</string>
+
+    <!-- [CHAR LIMIT=20] Accessibility string for current zen mode and selected exit condition. A template that simply concatenates existing mode string and the current condition description.  -->
+    <string name="zen_mode_and_condition"><xliff:g id="zen_mode" example="Priority interruptions only">%1$s</xliff:g>. <xliff:g id="exit_condition" example="For one hour">%2$s</xliff:g></string>
 
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
@@ -6964,6 +6989,9 @@
 
     <!-- Configure Notifications Settings title. [CHAR LIMIT=30] -->
     <string name="configure_notification_settings">Notifications</string>
+
+    <!-- notification header - apps that have recently sent notifications -->
+    <string name="recent_notifications">Recently sent</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
     <string name="advanced_section_header">Advanced</string>
@@ -8415,7 +8443,7 @@
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
 
     <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
-    <string name="night_display_suggestion_summary">Tint screen amber to help you fall asleep</string>
+    <string name="night_display_suggestion_summary">Automatically tint screen every night</string>
 
     <!-- Title of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
     <string name="condition_night_display_title">Night Light is on</string>
@@ -8696,7 +8724,10 @@
     <string name="notification_log_details_ranking_none">Ranking object doesn\'t contain this key.</string>
 
     <!-- [CHAR_LIMIT=NONE] Developer Settings: Title of the setting which turns on emulation of a display cutout. -->
-    <string name="display_cutout_emulation">Emulate a display with a cutout</string>
+    <string name="display_cutout_emulation">Simulate a display with a cutout</string>
+
+    <!-- [CHAR_LIMIT=NONE] Developer Settings: Label for the option that turns off display cutout emulation. -->
+    <string name="display_cutout_emulation_none">None</string>
 
     <!-- [CHAR_LIMIT=60] Label for special access screen -->
     <string name="special_access">Special app access</string>
@@ -8834,9 +8865,6 @@
     <!-- Title for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
     <string name="double_tap_power_for_camera_suggestion_title">Open camera quickly</string>
 
-    <!-- Summary for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
-    <string name="double_tap_power_for_camera_suggestion_summary">Press power button twice to open camera</string>
-
     <!-- Title text for double twist for camera mode [CHAR LIMIT=60]-->
     <string name="double_twist_for_camera_mode_title">Flip camera</string>
 
@@ -8845,13 +8873,6 @@
 
     <!-- Title for settings suggestion for double twist for camera [CHAR LIMIT=60] -->
     <string name="double_twist_for_camera_suggestion_title">Take selfies faster</string>
-
-    <!-- Summary for settings suggestion for double twist for camera (phone) [CHAR LIMIT=60] -->
-    <string name="double_twist_for_camera_suggestion_summary" product="default">Double-twist phone for selfie mode</string>
-    <!-- Summary for settings suggestion for double twist for camera (tablet) [CHAR LIMIT=60] -->
-    <string name="double_twist_for_camera_suggestion_summary" product="tablet">Double-twist tablet for selfie mode</string>
-    <!-- Summary for settings suggestion for double twist for camera (device) [CHAR LIMIT=60] -->
-    <string name="double_twist_for_camera_suggestion_summary" product="device">Double-twist device for selfie mode</string>
 
     <!-- Preference and settings suggestion title text for ambient display double tap (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_title" product="default">Double-tap to check phone</string>
@@ -8862,9 +8883,6 @@
 
     <!-- Summary text for ambient display double tap [CHAR LIMIT=NONE]-->
     <string name="ambient_display_summary">To check time, notification icons, and other info, double-tap your screen.</string>
-
-    <!-- Summary for settings suggestion for double tap power for camera [CHAR LIMIT=60] -->
-    <string name="ambient_display_suggestion_summary">Check notifications when screen is off</string>
 
     <!-- Preference and settings suggestion title text for ambient display pick up (phone) [CHAR LIMIT=60]-->
     <string name="ambient_display_pickup_title" product="default">Lift to check phone</string>
@@ -8880,9 +8898,6 @@
     <!-- Summary text for ambient display (device) [CHAR LIMIT=NONE]-->
     <string name="ambient_display_pickup_summary" product="device">To check time, notification icons, and other info, pick up your device.</string>
 
-    <!-- Summary for settings suggestion for ambient display pick up [CHAR LIMIT=60] -->
-    <string name="ambient_display_pickup_suggestion_summary">Check notifications when screen is off</string>
-
     <!-- Title text for swiping downwards on fingerprint sensor for notifications [CHAR LIMIT=80]-->
     <string name="fingerprint_swipe_for_notifications_title">Swipe fingerprint for notifications</string>
     <!-- Title text for fingerprint gesture preference screen [CHAR LIMIT=25] -->
@@ -8897,9 +8912,6 @@
 
     <!-- Title for settings suggestion for fingerprint swipe for notifications [CHAR LIMIT=60] -->
     <string name="fingerprint_swipe_for_notifications_suggestion_title">See notifications quickly</string>
-
-    <!-- Summary for settings suggestion for fingerprint swipe for notifications [CHAR LIMIT=60] -->
-    <string name="fingerprint_swipe_for_notifications_suggestion_summary">Swipe down on the fingerprint sensor</string>
 
     <!-- Title text for the assist gesture [CHAR LIMIT=60] DO NOT TRANSLATE -->
     <string name="assist_gesture_title" translatable="false"></string>
@@ -9222,5 +9234,16 @@
          remind/rediscover their backup account password prior to a reset. Empty for AOSP.
          [DO NOT TRANSLATE] -->
     <string name="account_confirmation_package"></string>
+
+    <!-- Title for the new About Phone screen [CHAR LIMIT=40] -->
+    <string name="my_device_info_title" product="default">My Phone</string>
+    <!-- Title for the new About Phone screen [CHAR LIMIT=40] -->
+    <string name="my_device_info_title" product="tablet">My Tablet</string>
+    <!-- Title for the new About Phone screen [CHAR LIMIT=40] -->
+    <string name="my_device_info_title" product="device">My Device</string>
+    <!-- Title for preference showing the primary account on the device [CHAR LIMIT=60]-->
+    <string name="my_device_info_account_preference_title">Account</string>
+    <!-- Title for preference showing the name of the device. [CHAR LIMIT=60]-->
+    <string name="my_device_info_device_name_preference_title">Device name</string>
 
 </resources>

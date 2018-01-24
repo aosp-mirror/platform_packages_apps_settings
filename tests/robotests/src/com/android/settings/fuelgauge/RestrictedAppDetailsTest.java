@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
+import android.util.IconDrawableFactory;
 
 import com.android.settings.TestConfig;
 
@@ -53,6 +54,8 @@ public class RestrictedAppDetailsTest {
     private PackageManager mPackageManager;
     @Mock
     private ApplicationInfo mApplicationInfo;
+    @Mock
+    private IconDrawableFactory mIconDrawableFactory;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
     private RestrictedAppDetails mFragment;
@@ -68,6 +71,7 @@ public class RestrictedAppDetailsTest {
         doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
         doReturn(mContext).when(mPreferenceManager).getContext();
         mFragment.mPackageManager = mPackageManager;
+        mFragment.mIconDrawableFactory = mIconDrawableFactory;
         mFragment.mPackageOpsList = new ArrayList<>();
         mFragment.mPackageOpsList.add(
                 new AppOpsManager.PackageOps(PACKAGE_NAME, UID, null /* entries */));

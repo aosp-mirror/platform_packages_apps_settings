@@ -27,11 +27,15 @@ import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Drawable;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.service.notification.NotifyingApp;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settingslib.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationBackend {
     private static final String TAG = "NotificationBackend";
@@ -185,7 +189,6 @@ public class NotificationBackend {
         }
     }
 
-
     public int getDeletedChannelCount(String pkg, int uid) {
         try {
             return sINM.getDeletedChannelCount(pkg, uid);
@@ -201,6 +204,15 @@ public class NotificationBackend {
         } catch (Exception e) {
             Log.w(TAG, "Error calling NoMan", e);
             return false;
+        }
+    }
+
+    public List<NotifyingApp> getRecentApps() {
+        try {
+            return sINM.getRecentNotifyingAppsForUser(UserHandle.myUserId()).getList();
+        } catch (Exception e) {
+            Log.w(TAG, "Error calling NoMan", e);
+            return new ArrayList<>();
         }
     }
 

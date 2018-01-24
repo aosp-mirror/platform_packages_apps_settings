@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -31,12 +32,16 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 public class ZenModeButtonPreferenceController extends AbstractZenModePreferenceController
         implements PreferenceControllerMixin {
 
+    private static final String TAG = "EnableZenModeButton";
     protected static final String KEY = "zen_mode_settings_button_container";
     private Button mZenButtonOn;
     private Button mZenButtonOff;
+    private FragmentManager mFragment;
 
-    public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModeButtonPreferenceController(Context context, Lifecycle lifecycle, FragmentManager
+            fragment) {
         super(context, KEY, lifecycle);
+        mFragment = fragment;
     }
 
     @Override
@@ -56,11 +61,8 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         if (null == mZenButtonOn) {
             mZenButtonOn = (Button) ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
-            mZenButtonOn.setOnClickListener(v -> {
-                mMetricsFeatureProvider.action(mContext,
-                        MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, true);
-                mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-            });
+            mZenButtonOn.setOnClickListener(v ->
+                    new EnableZenModeDialog().show(mFragment, TAG));
         }
 
         if (null == mZenButtonOff) {

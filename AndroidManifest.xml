@@ -1004,6 +1004,34 @@
                 android:value="true" />
         </activity>
 
+
+        <activity android:name="Settings$MeCardActivity"
+                  android:label="@string/device_info_settings"
+                  android:icon="@drawable/ic_settings_about"
+                  android:taskAffinity="com.android.settings"
+                  android:parentActivityName="Settings">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.DEVICE_INFO_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.title"
+                       android:resource="@string/about_settings" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
         <activity android:name="SettingsLicenseActivity"
                 android:label="@string/settings_license_activity_title"
                 android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
@@ -2200,12 +2228,15 @@
                 android:label="@string/power_usage_summary_title"
                 android:icon="@drawable/ic_settings_battery"
                 android:enabled="false">
-            <!-- TODO(b/69867246): add priority for this intent-filter -->
-            <intent-filter>
+            <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <!-- TODO(b/69867246): add shortcut intent-filter  -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2227,14 +2258,9 @@
         <activity android:name=".Settings$PowerUsageSummaryLegacyActivity"
                   android:label="@string/power_usage_summary_title"
                   android:icon="@drawable/ic_settings_battery">
-            <intent-filter android:priority="1">
+            <intent-filter>
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
             </intent-filter>
             <intent-filter android:priority="8">
                 <action android:name="com.android.settings.action.SETTINGS" />
@@ -2686,10 +2712,6 @@
         <!-- Show channel group-level notification settings (group passed in as extras) -->
         <activity android:name="Settings$ChannelGroupNotificationSettingsActivity"
                   android:exported="true">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.CHANNEL_GROUP_NOTIFICATION_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -3200,99 +3222,6 @@
             android:permission="android.permission.DUMP"
             android:enabled="@bool/config_has_help" />
 
-
-        <!-- Activities for moves/gestures suggestions -->
-        <activity
-            android:name=".Settings$DoubleTapPowerSuggestionActivity"
-            android:label="@string/double_tap_power_for_camera_title"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.GESTURE" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="4,8,30" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.DoubleTapPowerSettings"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/double_tap_power_for_camera_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/double_tap_power_for_camera_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".Settings$DoubleTwistSuggestionActivity"
-            android:label="@string/double_twist_for_camera_mode_title"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.GESTURE" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="4,8,30" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.DoubleTwistGestureSettings"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/double_twist_for_camera_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/double_twist_for_camera_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".Settings$AmbientDisplaySuggestionActivity"
-            android:label="@string/ambient_display_title"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.GESTURE" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="9,13,30" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.DoubleTapScreenSettings"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/ambient_display_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/ambient_display_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".Settings$AmbientDisplayPickupSuggestionActivity"
-            android:label="@string/ambient_display_pickup_title"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.GESTURE" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="9,13,30" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.PickupGestureSettings"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/ambient_display_pickup_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/ambient_display_pickup_suggestion_summary" />
-        </activity>
-
-        <activity
-            android:name=".Settings$SwipeToNotificationSuggestionActivity"
-            android:label="@string/fingerprint_swipe_for_notifications_title"
-            android:icon="@drawable/ic_settings_gestures">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="com.android.settings.suggested.category.GESTURE" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.dismiss"
-                       android:value="9,13,30" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.gestures.SwipeToNotificationSettings"/>
-            <meta-data android:name="com.android.settings.title"
-                       android:resource="@string/fingerprint_swipe_for_notifications_suggestion_title" />
-            <meta-data android:name="com.android.settings.summary"
-                       android:resource="@string/fingerprint_swipe_for_notifications_suggestion_summary" />
-        </activity>
-        <!-- End activities for moves/gestures suggestions -->
-
         <activity android:name=".applications.autofill.AutofillPickerActivity"
                 android:excludeFromRecents="true"
                 android:launchMode="singleInstance"
@@ -3328,6 +3257,17 @@
                        android:value="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
+        </activity>
+
+        <activity android:name="Settings$DirectoryAccessSettingsActivity"
+                android:label="@string/directory_access"
+                android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.settings.STORAGE_VOLUME_ACCESS_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.applications.manageapplications.ManageApplications" />
         </activity>
 
         <provider android:name=".slices.SettingsSliceProvider"

@@ -104,8 +104,7 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
 
     private void loadDataAndPopulateUi() {
         if (mWorkModePreference != null) {
-            mWorkModePreference.setChecked(
-                    !mUserManager.isQuietModeEnabled(mManagedUser));
+            updateWorkModePreference();
         }
 
         if (mContactPrefrence != null) {
@@ -122,6 +121,14 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.ACCOUNTS_WORK_PROFILE_SETTINGS;
+    }
+
+    private void updateWorkModePreference() {
+        boolean isWorkModeOn = !mUserManager.isQuietModeEnabled(mManagedUser);
+        mWorkModePreference.setChecked(isWorkModeOn);
+        mWorkModePreference.setSummary(isWorkModeOn
+                ? R.string.work_mode_on_summary
+                : R.string.work_mode_off_summary);
     }
 
 
@@ -159,8 +166,7 @@ public class ManagedProfileSettings extends SettingsPreferenceFragment
                     || action.equals(Intent.ACTION_MANAGED_PROFILE_UNAVAILABLE)) {
                 if (intent.getIntExtra(Intent.EXTRA_USER_HANDLE,
                         UserHandle.USER_NULL) == mManagedUser.getIdentifier()) {
-                    mWorkModePreference.setChecked(
-                            !mUserManager.isQuietModeEnabled(mManagedUser));
+                    updateWorkModePreference();
                 }
                 return;
             }

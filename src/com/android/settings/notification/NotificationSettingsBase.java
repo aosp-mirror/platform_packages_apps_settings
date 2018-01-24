@@ -168,14 +168,7 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
                 mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
 
-        NotificationChannelGroup group =
-                (args != null && args.containsKey(Settings.EXTRA_CHANNEL_GROUP_ID))
-                        ? mBackend.getGroupWithChannels(mPkg, mUid,
-                        args.getString(Settings.EXTRA_CHANNEL_GROUP_ID))
-                        : null;
-        if (group != null) {
-            mChannelGroup = new NotificationChannelGroupWrapper(group);
-        }
+        NotificationChannelGroup group = null;
 
         mSuspendedAppsAdmin = RestrictedLockUtils.checkIfApplicationIsSuspended(
                 mContext, mPkg, mUserId);

@@ -176,15 +176,6 @@ public class AppNotificationSettings extends NotificationSettingsBase {
             } else {
                 groupCategory.setTitle(group.getName());
                 groupCategory.setKey(group.getId());
-                Bundle groupArgs = new Bundle();
-                groupArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
-                groupArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
-                groupArgs.putString(Settings.EXTRA_CHANNEL_GROUP_ID, group.getId());
-                Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                        ChannelGroupNotificationSettings.class.getName(),
-                        groupArgs, null, R.string.notification_group_title,
-                        null, false, getMetricsCategory());
-                groupCategory.setIntent(channelIntent);
                 populateGroupToggle(groupCategory, group);
             }
 

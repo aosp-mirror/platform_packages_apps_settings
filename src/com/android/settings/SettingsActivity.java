@@ -877,6 +877,19 @@ public class SettingsActivity extends SettingsDrawerActivity
                 WifiDisplaySettings.isAvailable(this), isAdmin)
                 || somethingChanged;
 
+        // Enable/disable the Me Card page.
+        final boolean isMeCardEnabled = featureFactory
+                .getAccountFeatureProvider()
+                .isMeCardEnabled(this);
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.MeCardActivity.class.getName()),
+                isMeCardEnabled, isAdmin)
+                || somethingChanged;
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.DeviceInfoSettingsActivity.class.getName()),
+                !isMeCardEnabled, isAdmin)
+                || somethingChanged;
+
         if (UserHandle.MU_ENABLED && !isAdmin) {
 
             // When on restricted users, disable all extra categories (but only the settings ones).
