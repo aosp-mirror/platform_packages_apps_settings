@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import static com.android.settings.core.FeatureFlags.BATTERY_SETTINGS_V2;
 import static com.android.settings.core.FeatureFlags.CONNECTED_DEVICE_V2;
 
 import android.os.Bundle;
@@ -134,16 +133,8 @@ public class Settings extends SettingsActivity {
     public static class AppWriteSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AdvancedAppsActivity extends SettingsActivity { /* empty */ }
 
-    public static class ManageExternalSourcesActivity extends SettingsActivity {
-        /* empty */ }
+    public static class ManageExternalSourcesActivity extends SettingsActivity {/* empty */ }
     public static class ManageAppExternalSourcesActivity extends SettingsActivity { /* empty */ }
-    public static class DoubleTapPowerSuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class DoubleTwistSuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class AmbientDisplaySuggestionActivity extends SettingsActivity { /* empty */ }
-    public static class AmbientDisplayPickupSuggestionActivity extends SettingsActivity {
-        /* empty */ }
-    public static class SwipeToNotificationSuggestionActivity extends SettingsActivity {
-        /* empty */ }
     public static class WallpaperSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ManagedProfileSettingsActivity extends SettingsActivity { /* empty */ }
     public static class DeletionHelperActivity extends SettingsActivity { /* empty */ }
