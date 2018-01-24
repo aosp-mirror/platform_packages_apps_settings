@@ -21,11 +21,9 @@ import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
-import com.android.settings.bluetooth.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.deviceinfo.UsbBackend;
 import com.android.settings.nfc.NfcPreferenceController;
@@ -33,7 +31,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.drawer.CategoryKey;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,6 +86,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                 smsMirroringFeatureProvider.getController(context);
         controllers.add(smsMirroringController);
         controllers.add(new BluetoothFilesPreferenceController(context));
+        controllers.add(new BluetoothOnWhileDrivingPreferenceController(context));
         return controllers;
     }
 

@@ -47,11 +47,18 @@
         android:summary="@string/summary_placeholder"
         android:order="-3"/>
 
+    <SwitchPreference
+        android:key="bluetooth_on_while_driving"
+        android:title="@string/bluetooth_on_while_driving_pref"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:summary="@string/bluetooth_on_while_driving_summary"
+        android:order="-2"/>
+
     <Preference
         android:key="usb_mode"
         android:title="@string/usb_pref"
         android:icon="@drawable/ic_usb"
-        android:order="-2">
+        android:order="-1">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.UsbModeChooserActivity"/>

@@ -28,4 +28,5 @@ public class FeatureFlags {
     public static final String ZONE_PICKER_V2 = "settings_zone_picker_v2";
     public static final String SUGGESTION_UI_V2 = "settings_suggestion_ui_v2";
     public static final String ABOUT_PHONE_V2 = "settings_about_phone_v2";
+    public static final String BLUETOOTH_WHILE_DRIVING = "settings_bluetooth_while_driving";
 }
