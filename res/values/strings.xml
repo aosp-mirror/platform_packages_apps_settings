@@ -9230,6 +9230,10 @@
     <!-- Keywords for Directory Access settings -->
     <string name="keywords_directory_access">directory access</string>
 
+    <!-- String used to describe the name of a directory in a volume; it must
+         show both names, with the directory name wrapped in parenthesis -->
+    <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
+
     <!-- Account type associated with the backup account. Empty for AOSP. [DO NOT TRANSLATE] -->
     <string name="account_type" translatable="false"></string>
     <!-- Package to target for Account credential confirmation. This will allow users to

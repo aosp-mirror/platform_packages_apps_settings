@@ -24,6 +24,7 @@ import static android.os.storage.StorageVolume.ScopedAccessProviderContract.COL_
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS_COLUMNS;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS_COL_DIRECTORY;
+import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS_COL_GRANTED;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS_COL_PACKAGE;
 import static android.os.storage.StorageVolume.ScopedAccessProviderContract.TABLE_PERMISSIONS_COL_VOLUME_UUID;
 
@@ -120,8 +121,7 @@ public class DirectoryAccessDetails extends AppInfoBase {
         addPreferencesFromResource(R.xml.directory_access_details);
         final PreferenceScreen prefsGroup = getPreferenceScreen();
 
-        // Set external directory UUIDs.
-        ArraySet<String> externalDirectoryUuids = null;
+        final Map<String, ExternalVolume> externalVolumes = new HashMap<>();
 
         final Uri providerUri = new Uri.Builder().scheme(ContentResolver.SCHEME_CONTENT)
                 .authority(AUTHORITY).appendPath(TABLE_PERMISSIONS).appendPath("*")
@@ -146,8 +146,10 @@ public class DirectoryAccessDetails extends AppInfoBase {
                 final String pkg = cursor.getString(TABLE_PERMISSIONS_COL_PACKAGE);
                 final String uuid = cursor.getString(TABLE_PERMISSIONS_COL_VOLUME_UUID);
                 final String dir = cursor.getString(TABLE_PERMISSIONS_COL_DIRECTORY);
+                final boolean granted = cursor.getInt(TABLE_PERMISSIONS_COL_GRANTED) == 1;
                 if (VERBOSE) {
-                    Log.v(TAG, "Pkg:"  + pkg + " uuid: " + uuid + " dir: " + dir);
+                    Log.v(TAG, "Pkg:"  + pkg + " uuid: " + uuid + " dir: " + dir
+                            + " granted:" + granted);
                 }
 
                 if (!mPackageName.equals(pkg)) {
@@ -159,64 +161,92 @@ public class DirectoryAccessDetails extends AppInfoBase {
 
                 if (uuid == null) {
                     // Primary storage entry: add right away
-                    prefsGroup.addPreference(
-                            newPreference(context, dir, providerUri, /* uuid= */ null, dir));
+                    prefsGroup.addPreference(newPreference(context, dir, providerUri,
+                            /* uuid= */ null, dir, granted));
                 } else {
                     // External volume entry: save it for later.
-                    if (externalDirectoryUuids == null) {
-                        externalDirectoryUuids = new ArraySet<>(1);
+                    ExternalVolume externalVolume = externalVolumes.get(uuid);
+                    if (externalVolume == null) {
+                        externalVolume = new ExternalVolume(uuid);
+                        externalVolumes.put(uuid, externalVolume);
                     }
-                    externalDirectoryUuids.add(uuid);
+                    if (dir == null) {
+                        // Whole volume
+                        externalVolume.granted = granted;
+                    } else {
+                        // Directory only
+                        externalVolume.children.add(new Pair<>(dir, granted));
+                    }
                 }
             }
+        }
+
+        if (VERBOSE) {
+            Log.v(TAG, "external volumes: " + externalVolumes);
+        }
+
+        if (externalVolumes.isEmpty()) {
+            // We're done!
+            return;
         }
 
         // Add entries from external volumes
-        if (externalDirectoryUuids != null) {
-            if (VERBOSE) {
-                Log.v(TAG, "adding external directories: " + externalDirectoryUuids);
-            }
 
-            // Query StorageManager to get the user-friendly volume names.
-            final StorageManager sm = context.getSystemService(StorageManager.class);
-            final List<VolumeInfo> volumes = sm.getVolumes();
-            if (volumes.isEmpty()) {
-                Log.w(TAG, "StorageManager returned no secondary volumes");
-                return;
-            }
-            final Map<String, String> volumeNames = new HashMap<>(volumes.size());
-            for (VolumeInfo volume : volumes) {
-                final String uuid = volume.getFsUuid();
-                if (uuid == null) continue; // Primary storage; not used.
+        // Query StorageManager to get the user-friendly volume names.
+        final StorageManager sm = context.getSystemService(StorageManager.class);
+        final List<VolumeInfo> volumes = sm.getVolumes();
+        if (volumes.isEmpty()) {
+            Log.w(TAG, "StorageManager returned no secondary volumes");
+            return;
+        }
+        final Map<String, String> volumeNames = new HashMap<>(volumes.size());
+        for (VolumeInfo volume : volumes) {
+            final String uuid = volume.getFsUuid();
+            if (uuid == null) continue; // Primary storage; not used.
 
-                String name = sm.getBestVolumeDescription(volume);
-                if (name == null) {
-                    Log.w(TAG, "No description for " + volume + "; using uuid instead: " + uuid);
-                    name = uuid;
-                }
-                volumeNames.put(uuid, name);
+            String name = sm.getBestVolumeDescription(volume);
+            if (name == null) {
+                Log.w(TAG, "No description for " + volume + "; using uuid instead: " + uuid);
+                name = uuid;
             }
-            if (VERBOSE) {
-                Log.v(TAG, "UUID -> name mapping: " + volumeNames);
-            }
+            volumeNames.put(uuid, name);
+        }
+        if (VERBOSE) {
+            Log.v(TAG, "UUID -> name mapping: " + volumeNames);
+        }
 
-            externalDirectoryUuids.forEach((uuid) ->{
-                final String name = volumeNames.get(uuid);
-                // TODO(b/72055774): add separator
-                prefsGroup.addPreference(
-                        newPreference(context, name, providerUri, uuid, /* dir= */ null));
+        for (ExternalVolume volume : externalVolumes.values()) {
+            final String volumeName = volumeNames.get(volume.uuid);
+            if (volumeName == null) {
+                Log.w(TAG, "Ignoring entry for invalid UUID: " + volume.uuid);
+                continue;
+            }
+            // First add the pref for the whole volume...
+            // TODO(b/72055774): add separator
+            prefsGroup.addPreference(newPreference(context, volumeName, providerUri, volume.uuid,
+                    /* dir= */ null, volume.granted));
+            // TODO(b/72055774): make sure children are gone when parent is toggled on - should be
+            // handled automatically if we're refreshing the activity on change, otherwise we'll
+            // need to explicitly remove them
+
+            // ... then the children prefs
+            volume.children.forEach((pair) -> {
+                final String dir = pair.first;
+                final String name = context.getResources()
+                        .getString(R.string.directory_on_volume, volumeName, dir);
+                prefsGroup
+                        .addPreference(newPreference(context, name, providerUri, volume.uuid,
+                                dir, pair.second));
             });
         }
-        return;
     }
 
-
     private SwitchPreference newPreference(Context context, String title, Uri providerUri,
-            String uuid, String dir) {
+            String uuid, String dir, boolean granted) {
         final SwitchPreference pref = new SwitchPreference(context);
         pref.setKey(String.format("%s:%s", uuid, dir));
         pref.setTitle(title);
-        pref.setChecked(false);
+        pref.setChecked(granted);
         pref.setOnPreferenceChangeListener((unused, value) -> {
             resetDoNotAskAgain(context, value, providerUri, uuid, dir);
             return true;
@@ -258,5 +288,21 @@ public class DirectoryAccessDetails extends AppInfoBase {
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_DIRECTORY_ACCESS_DETAIL;
+    }
+
+    private static class ExternalVolume {
+        final String uuid;
+        final List<Pair<String, Boolean>> children = new ArrayList<>();
+        boolean granted;
+
+        ExternalVolume(String uuid) {
+            this.uuid = uuid;
+        }
+
+        @Override
+        public String toString() {
+            return "ExternalVolume: [uuid=" + uuid + ", granted=" + granted +
+                    ", children=" + children + "]";
+        }
     }
 }
