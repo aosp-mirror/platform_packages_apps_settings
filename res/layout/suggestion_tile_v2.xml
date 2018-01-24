@@ -20,6 +20,7 @@
     android:id="@+id/suggestion_card"
     android:layout_width="328dp"
     android:layout_height="wrap_content"
+    app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
     app:cardElevation="2dp"
     app:cardCornerRadius="@dimen/suggestion_card_corner_radius">
@@ -45,8 +46,9 @@
 
             <ImageView
                 android:id="@+id/close_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:alpha="0.54"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -62,7 +64,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.TileTitle"
+            android:textAppearance="@style/TextAppearance.SuggestionTitleV2"
             android:ellipsize="marquee"
             android:fadingEdge="horizontal" />
 
