@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="connected_devices_screen"
     android:title="@string/connected_device_connections_title">
 
@@ -24,6 +25,7 @@
       android:title="@string/bluetooth_settings_title"
       android:icon="@drawable/ic_settings_bluetooth"
       android:summary="@string/bluetooth_pref_summary"
+      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
       android:order="-7"/>
 
     <SwitchPreference

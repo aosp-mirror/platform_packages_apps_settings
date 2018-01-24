@@ -30,7 +30,6 @@ import android.util.Log;
 import com.android.settings.R;
 import com.android.settingslib.utils.ThreadUtils;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
