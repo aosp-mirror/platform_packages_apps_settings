@@ -55,6 +55,9 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
                 stats, elapsedRealtimeUs, false);
 
         Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
+        if (estimate == null) {
+            estimate = new Estimate(0, false);
+        }
         BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
                 elapsedRealtimeUs, false,
                 BatteryUtils.convertMsToUs(estimate.estimateMillis),
