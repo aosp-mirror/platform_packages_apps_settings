@@ -19,7 +19,7 @@
     android:key="security_lockscreen_settings_screen"
     android:title="@string/lockscreen_settings_title">
 
-    <com.android.settings.notification.RestrictedDropDownPreference
+    <com.android.settings.RestrictedListPreference
         android:key="security_setting_lock_screen_notif"
         android:title="@string/lock_screen_notifications_title"
         android:summary="@string/summary_placeholder" />
@@ -42,7 +42,7 @@
         android:key="security_setting_lock_screen_notif_work_header"
         android:title="@string/profile_section_header">
 
-        <com.android.settings.notification.RestrictedDropDownPreference
+        <com.android.settings.RestrictedListPreference
             android:key="security_setting_lock_screen_notif_work"
             android:title="@string/lock_screen_notifications_title"
             android:summary="@string/summary_placeholder" />

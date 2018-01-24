@@ -29,6 +29,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -65,7 +66,7 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
 
     public void updateState(Preference preference) {
         if (mChannel != null && mAppRow != null) {
-            RestrictedDropDownPreference pref = (RestrictedDropDownPreference) preference;
+            RestrictedListPreference pref = (RestrictedListPreference) preference;
             ArrayList<CharSequence> entries = new ArrayList<>();
             ArrayList<CharSequence> values = new ArrayList<>();
 
@@ -120,14 +121,14 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
         return true;
     }
 
-    private void setRestrictedIfNotificationFeaturesDisabled(RestrictedDropDownPreference pref,
+    private void setRestrictedIfNotificationFeaturesDisabled(RestrictedListPreference pref,
             CharSequence entry, CharSequence entryValue, int keyguardNotificationFeatures) {
         RestrictedLockUtils.EnforcedAdmin admin =
                 RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                         mContext, keyguardNotificationFeatures, mAppRow.userId);
         if (admin != null) {
-            RestrictedDropDownPreference.RestrictedItem item =
-                    new RestrictedDropDownPreference.RestrictedItem(entry, entryValue, admin);
+            RestrictedListPreference.RestrictedItem item =
+                    new RestrictedListPreference.RestrictedItem(entry, entryValue, admin);
             pref.addRestrictedItem(item);
         }
     }
