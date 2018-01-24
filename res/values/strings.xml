@@ -9231,11 +9231,15 @@
     <string name="keywords_directory_access">directory access</string>
 
     <!-- Account type associated with the backup account. Empty for AOSP. [DO NOT TRANSLATE] -->
-    <string name="account_type"></string>
+    <string name="account_type" translatable="false"></string>
     <!-- Package to target for Account credential confirmation. This will allow users to
          remind/rediscover their backup account password prior to a reset. Empty for AOSP.
          [DO NOT TRANSLATE] -->
-    <string name="account_confirmation_package"></string>
+    <string name="account_confirmation_package" translatable="false"></string>
+    <!-- Class to target for Account credential confirmation. This will allow users to
+         remind/rediscover their backup account password prior to a reset. Empty for AOSP.
+         [DO NOT TRANSLATE] -->
+    <string name="account_confirmation_class" translatable="false"></string>
 
     <!-- Title for the new About Phone screen [CHAR LIMIT=40] -->
     <string name="my_device_info_title" product="default">My Phone</string>
