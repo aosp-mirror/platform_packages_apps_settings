@@ -96,9 +96,6 @@ public class LocationSwitchBarController implements SwitchBar.OnSwitchChangeList
      */
     @Override
     public void onSwitchChanged(Switch switchView, boolean isChecked) {
-        mLocationEnabler.setLocationMode(isChecked
-                ? android.provider.Settings.Secure.LOCATION_MODE_PREVIOUS
-                : android.provider.Settings.Secure.LOCATION_MODE_OFF);
+        mLocationEnabler.setLocationEnabled(isChecked);
     }
-
 }

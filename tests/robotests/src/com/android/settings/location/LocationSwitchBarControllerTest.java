@@ -88,18 +88,17 @@ public class LocationSwitchBarControllerTest {
     }
 
     @Test
-    public void onSwitchChanged_switchChecked_shouldSetPreviousLocationMode() {
+    public void onSwitchChanged_switchChecked_shouldSetLocationEnabled() {
         mController.onSwitchChanged(mSwitch, true);
 
-        verify(mEnabler).setLocationMode(
-                android.provider.Settings.Secure.LOCATION_MODE_PREVIOUS);
+        verify(mEnabler).setLocationEnabled(true);
     }
 
     @Test
-    public void onSwitchChanged_switchUnchecked_shouldSetLocationModeOff() {
+    public void onSwitchChanged_switchUnchecked_shouldSetLocationDisabled() {
         mController.onSwitchChanged(mSwitch, false);
 
-        verify(mEnabler).setLocationMode(android.provider.Settings.Secure.LOCATION_MODE_OFF);
+        verify(mEnabler).setLocationEnabled(false);
     }
 
     @Test

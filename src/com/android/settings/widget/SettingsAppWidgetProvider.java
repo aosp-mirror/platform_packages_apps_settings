@@ -16,6 +16,7 @@
 
 package com.android.settings.widget;
 
+import android.app.ActivityManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -33,10 +34,12 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.IPowerManager;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -561,27 +564,14 @@ public class SettingsAppWidgetProvider extends AppWidgetProvider {
                     final UserManager um =
                             (UserManager) context.getSystemService(Context.USER_SERVICE);
                     if (!um.hasUserRestriction(UserManager.DISALLOW_SHARE_LOCATION)) {
-                        int currentMode = Settings.Secure.getInt(resolver,
-                                Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
-                        int mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
-                        switch (currentMode) {
-                            case Settings.Secure.LOCATION_MODE_HIGH_ACCURACY:
-                                mode = Settings.Secure.LOCATION_MODE_BATTERY_SAVING;
-                                break;
-                            case Settings.Secure.LOCATION_MODE_BATTERY_SAVING:
-                                mode = Settings.Secure.LOCATION_MODE_HIGH_ACCURACY;
-                                break;
-                            case Settings.Secure.LOCATION_MODE_SENSORS_ONLY:
-                                mode = Settings.Secure.LOCATION_MODE_OFF;
-                                break;
-                            case Settings.Secure.LOCATION_MODE_OFF:
-                                mode = Settings.Secure.LOCATION_MODE_PREVIOUS;
-                                break;
-                        }
-                        Settings.Secure.putInt(resolver, Settings.Secure.LOCATION_MODE, mode);
-                        return mode != Settings.Secure.LOCATION_MODE_OFF;
+                        LocationManager lm =
+                                (LocationManager) context.getSystemService(
+                                        Context.LOCATION_SERVICE);
+                        boolean currentLocationEnabled = lm.isLocationEnabled();
+                        lm.setLocationEnabledForUser(
+                                !currentLocationEnabled, Process.myUserHandle());
+                        return lm.isLocationEnabled();
                     }
-
                     return getActualState(context) == STATE_ENABLED;
                 }
 
