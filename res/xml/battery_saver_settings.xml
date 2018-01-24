@@ -14,14 +14,32 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/battery_saver"
-        android:key="battery_saver">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/battery_saver"
+    android:key="battery_saver">
 
     <!-- Turn on automatically -->
-    <DropDownPreference
-            android:key="turn_on_automatically"
-            android:title="@string/battery_saver_turn_on_automatically_title"
-            android:summary="%s" />
+    <SwitchPreference
+        android:key="auto_battery_saver"
+        android:title="@string/battery_saver_auto_title"
+        android:summary="@string/battery_saver_auto_summary"/>
+    <com.android.settings.widget.SeekBarPreference
+        android:key="battery_saver_seek_bar"
+        android:title="@string/battery_saver_seekbar_title"
+        android:max="75"
+        android:min="5"/>
+    <com.android.settings.applications.LayoutPreference
+        android:key="battery_saver_button_container"
+        android:selectable="false"
+        android:layout="@layout/battery_saver_settings_button"/>
+
+    <PreferenceCategory
+        android:key="battery_saver_footer">
+        <com.android.settingslib.widget.FooterPreference
+            android:key="battery_saver_footer_preference"
+            android:title="@*android:string/battery_saver_description"
+            android:selectable="false"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>

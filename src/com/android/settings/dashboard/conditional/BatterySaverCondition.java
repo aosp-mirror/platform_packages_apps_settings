@@ -20,7 +20,7 @@ import android.os.PowerManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 
 public class BatterySaverCondition extends Condition {
     public BatterySaverCondition(ConditionManager manager) {
