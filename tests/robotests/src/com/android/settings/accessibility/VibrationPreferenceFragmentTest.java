@@ -1,0 +1,138 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.accessibility;
+
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_LOW;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_MEDIUM;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_HIGH;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.UserManager;
+import android.os.Vibrator;
+import android.provider.Settings;
+
+import com.android.settings.TestConfig;
+import com.android.settings.accessibility.VibrationPreferenceFragment.VibrationIntensityCandidateInfo;
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.widget.RadioButtonPickerFragment.CandidateInfo;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Answers;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RunWith(SettingsRobolectricTestRunner.class)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+public class VibrationPreferenceFragmentTest {
+    public static final Map<Integer, String> INTENSITY_TO_KEY = new HashMap<>();
+
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Activity mActivity;
+    @Mock
+    private UserManager mUserManager;
+
+    private Context mContext;
+    private TestVibrationPreferenceFragment mFragment;
+
+    static {
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_OFF, KEY_INTENSITY_OFF);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_LOW, KEY_INTENSITY_LOW);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_MEDIUM, KEY_INTENSITY_MEDIUM);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_HIGH, KEY_INTENSITY_HIGH);
+    }
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
+
+        mContext = RuntimeEnvironment.application;
+
+        mFragment = spy(new TestVibrationPreferenceFragment());
+        doReturn(mUserManager).when(mActivity).getSystemService(Context.USER_SERVICE);
+        doReturn(mContext).when(mFragment).getContext();
+        mFragment.onAttach(mActivity);
+    }
+
+    @Test
+    public void changeIntensitySetting_shouldResultInCorrespondingKey() {
+        for (Map.Entry<Integer, String> entry : INTENSITY_TO_KEY.entrySet()) {
+            Settings.System.putInt(mContext.getContentResolver(),
+                    Settings.System.HAPTIC_FEEDBACK_INTENSITY, entry.getKey());
+            assertThat(mFragment.getDefaultKey()).isEqualTo(entry.getValue());
+        }
+    }
+
+    @Test
+    public void initialDefaultKey_shouldBeMedium() {
+        assertThat(mFragment.getDefaultKey()).isEqualTo(KEY_INTENSITY_MEDIUM);
+    }
+
+    @Test
+    public void candidates_shouldBeSortedByIntensity() {
+        final List<? extends CandidateInfo> candidates = mFragment.getCandidates();
+        assertThat(candidates.size()).isEqualTo(INTENSITY_TO_KEY.size());
+        VibrationIntensityCandidateInfo prevCandidate =
+                (VibrationIntensityCandidateInfo) candidates.get(0);
+        for (int i = 1; i < candidates.size(); i++) {
+            VibrationIntensityCandidateInfo candidate =
+                    (VibrationIntensityCandidateInfo) candidates.get(i);
+            assertThat(candidate.getIntensity()).isLessThan(prevCandidate.getIntensity());
+        }
+    }
+
+    private class TestVibrationPreferenceFragment extends VibrationPreferenceFragment {
+        @Override
+        protected int getPreferenceScreenResId() {
+            return 0;
+        }
+
+        @Override
+        public int getMetricsCategory() {
+            return 0;
+        }
+
+        /**
+        * Get the setting string of the vibration intensity setting this preference is dealing with.
+        */
+        @Override
+        protected String getVibrationIntensitySetting() {
+            return Settings.System.HAPTIC_FEEDBACK_INTENSITY;
+        }
+
+        @Override
+        protected int getDefaultVibrationIntensity() {
+            return Vibrator.VIBRATION_INTENSITY_MEDIUM;
+        }
+    }
+}
+
