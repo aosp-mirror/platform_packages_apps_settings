@@ -20,14 +20,13 @@
 
     <SwitchPreference
         android:key="work_mode"
-        android:summary="@string/work_mode_summary"
-        android:title="@string/work_mode_label"/>
+        android:title="@string/work_mode_label"
+        android:summary="@string/summary_placeholder"/>
 
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="contacts_search"
         android:summary="@string/managed_profile_contact_search_summary"
         android:title="@string/managed_profile_contact_search_title"
-        settings:useAdditionalSummary="true"
-        />
+        settings:useAdditionalSummary="true"/>
 
 </PreferenceScreen>
