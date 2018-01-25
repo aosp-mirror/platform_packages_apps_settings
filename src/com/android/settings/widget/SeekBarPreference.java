@@ -40,6 +40,7 @@ public class SeekBarPreference extends RestrictedPreference
 
     private int mProgress;
     private int mMax;
+    private int mMin;
     private boolean mTrackingTouch;
 
     private boolean mContinuousUpdates;
@@ -55,6 +56,7 @@ public class SeekBarPreference extends RestrictedPreference
         TypedArray a = context.obtainStyledAttributes(
                 attrs, com.android.internal.R.styleable.ProgressBar, defStyleAttr, defStyleRes);
         setMax(a.getInt(com.android.internal.R.styleable.ProgressBar_max, mMax));
+        setMin(a.getInt(com.android.internal.R.styleable.ProgressBar_min, mMin));
         a.recycle();
 
         a = context.obtainStyledAttributes(attrs,
@@ -94,6 +96,7 @@ public class SeekBarPreference extends RestrictedPreference
                 com.android.internal.R.id.seekbar);
         mSeekBar.setOnSeekBarChangeListener(this);
         mSeekBar.setMax(mMax);
+        mSeekBar.setMin(mMin);
         mSeekBar.setProgress(mProgress);
         mSeekBar.setEnabled(isEnabled());
         final CharSequence title = getTitle();
@@ -154,8 +157,19 @@ public class SeekBarPreference extends RestrictedPreference
         }
     }
 
+    public void setMin(int min) {
+        if (min != mMin) {
+            mMin = min;
+            notifyChanged();
+        }
+    }
+
     public int getMax() {
         return mMax;
+    }
+
+    public int getMin() {
+        return mMin;
     }
 
     public void setProgress(int progress) {
@@ -187,8 +201,8 @@ public class SeekBarPreference extends RestrictedPreference
         if (progress > mMax) {
             progress = mMax;
         }
-        if (progress < 0) {
-            progress = 0;
+        if (progress < mMin) {
+            progress = mMin;
         }
         if (progress != mProgress) {
             mProgress = progress;
@@ -257,6 +271,7 @@ public class SeekBarPreference extends RestrictedPreference
         final SavedState myState = new SavedState(superState);
         myState.progress = mProgress;
         myState.max = mMax;
+        myState.min = mMin;
         return myState;
     }
 
@@ -273,6 +288,7 @@ public class SeekBarPreference extends RestrictedPreference
         super.onRestoreInstanceState(myState.getSuperState());
         mProgress = myState.progress;
         mMax = myState.max;
+        mMin = myState.min;
         notifyChanged();
     }
 
@@ -285,6 +301,7 @@ public class SeekBarPreference extends RestrictedPreference
     private static class SavedState extends BaseSavedState {
         int progress;
         int max;
+        int min;
 
         public SavedState(Parcel source) {
             super(source);
@@ -292,6 +309,7 @@ public class SeekBarPreference extends RestrictedPreference
             // Restore the click counter
             progress = source.readInt();
             max = source.readInt();
+            min = source.readInt();
         }
 
         @Override
@@ -301,6 +319,7 @@ public class SeekBarPreference extends RestrictedPreference
             // Save the click counter
             dest.writeInt(progress);
             dest.writeInt(max);
+            dest.writeInt(min);
         }
 
         public SavedState(Parcelable superState) {
