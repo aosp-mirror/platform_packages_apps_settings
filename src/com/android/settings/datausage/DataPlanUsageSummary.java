@@ -48,6 +48,11 @@ import com.android.settingslib.net.DataUsageController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @deprecated This fragment was supposed to be new version of {@link DataUsageSummary} however
+ * unfinished and used nowhere. Keep it in case we may bring it back someday.
+ */
+@Deprecated
 public class DataPlanUsageSummary extends DataUsageBase {
 
     public static final String KEY_DATA_PLAN_USAGE = "data_plan_usage";
