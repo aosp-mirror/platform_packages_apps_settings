@@ -34,6 +34,7 @@ import android.util.Log;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
@@ -55,8 +56,8 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     private final String mWorkSettingCategoryKey;
     private final String mWorkSettingKey;
 
-    private RestrictedDropDownPreference mLockscreen;
-    private RestrictedDropDownPreference mLockscreenProfile;
+    private RestrictedListPreference mLockscreen;
+    private RestrictedListPreference mLockscreenProfile;
 
     private final int mProfileChallengeUserId;
     private final boolean mSecure;
@@ -92,13 +93,13 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mLockscreen =
-                (RestrictedDropDownPreference) screen.findPreference(mSettingKey);
+                (RestrictedListPreference) screen.findPreference(mSettingKey);
         if (mLockscreen == null) {
             Log.i(TAG, "Preference not found: " + mSettingKey);
             return;
         }
         if (mProfileChallengeUserId != UserHandle.USER_NULL) {
-            mLockscreenProfile = (RestrictedDropDownPreference) screen.findPreference(
+            mLockscreenProfile = (RestrictedListPreference) screen.findPreference(
                     mWorkSettingKey);
         } else {
             setVisible(screen, mWorkSettingKey, false /* visible */);
@@ -180,11 +181,6 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
         entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable_profile));
         values.add(Integer.toString(R.string.lock_screen_notifications_summary_disable_profile));
 
-        mLockscreenProfile.setOnPreClickListener(
-                (Preference p) -> Utils.startQuietModeDialogIfNecessary(mContext,
-                        UserManager.get(mContext), mProfileChallengeUserId)
-        );
-
         mLockscreenProfile.setEntries(entries.toArray(new CharSequence[entries.size()]));
         mLockscreenProfile.setEntryValues(values.toArray(new CharSequence[values.size()]));
         updateLockscreenNotificationsForProfile();
@@ -224,36 +220,40 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final String key = preference.getKey();
         if (TextUtils.equals(mWorkSettingKey, key)) {
-                final int val = Integer.parseInt((String) newValue);
-                if (val == mLockscreenSelectedValueProfile) {
-                    return false;
-                }
-                final boolean enabled =
-                        val != R.string.lock_screen_notifications_summary_disable_profile;
-                final boolean show =
-                        val == R.string.lock_screen_notifications_summary_show_profile;
-                Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
-                        show ? 1 : 0, mProfileChallengeUserId);
-                Settings.Secure.putIntForUser(mContext.getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS,
-                        enabled ? 1 : 0, mProfileChallengeUserId);
-                mLockscreenSelectedValueProfile = val;
-                return true;
+            if (Utils.startQuietModeDialogIfNecessary(mContext, UserManager.get(mContext),
+                    mProfileChallengeUserId)) {
+                return false;
+            }
+            final int val = Integer.parseInt((String) newValue);
+            if (val == mLockscreenSelectedValueProfile) {
+                return false;
+            }
+            final boolean enabled =
+                    val != R.string.lock_screen_notifications_summary_disable_profile;
+            final boolean show =
+                    val == R.string.lock_screen_notifications_summary_show_profile;
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS,
+                    show ? 1 : 0, mProfileChallengeUserId);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS,
+                    enabled ? 1 : 0, mProfileChallengeUserId);
+            mLockscreenSelectedValueProfile = val;
+            return true;
         } else if (TextUtils.equals(mSettingKey, key)) {
-                final int val = Integer.parseInt((String) newValue);
-                if (val == mLockscreenSelectedValue) {
-                    return false;
-                }
-                final boolean enabled =
-                        val != R.string.lock_screen_notifications_summary_disable;
-                final boolean show = val == R.string.lock_screen_notifications_summary_show;
-                Settings.Secure.putInt(mContext.getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
-                Settings.Secure.putInt(mContext.getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
-                mLockscreenSelectedValue = val;
-                return true;
+            final int val = Integer.parseInt((String) newValue);
+            if (val == mLockscreenSelectedValue) {
+                return false;
+            }
+            final boolean enabled =
+                    val != R.string.lock_screen_notifications_summary_disable;
+            final boolean show = val == R.string.lock_screen_notifications_summary_show;
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, show ? 1 : 0);
+            Settings.Secure.putInt(mContext.getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, enabled ? 1 : 0);
+            mLockscreenSelectedValue = val;
+            return true;
         }
         return false;
     }
@@ -264,8 +264,8 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
                 RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                         mContext, keyguardNotificationFeatures, UserHandle.myUserId());
         if (admin != null && mLockscreen != null) {
-            RestrictedDropDownPreference.RestrictedItem item =
-                    new RestrictedDropDownPreference.RestrictedItem(entry, entryValue, admin);
+            RestrictedListPreference.RestrictedItem item =
+                    new RestrictedListPreference.RestrictedItem(entry, entryValue, admin);
             mLockscreen.addRestrictedItem(item);
         }
         if (mProfileChallengeUserId != UserHandle.USER_NULL) {
@@ -273,8 +273,8 @@ public class LockScreenNotificationPreferenceController extends AbstractPreferen
                     RestrictedLockUtils.checkIfKeyguardFeaturesDisabled(
                             mContext, keyguardNotificationFeatures, mProfileChallengeUserId);
             if (profileAdmin != null && mLockscreenProfile != null) {
-                RestrictedDropDownPreference.RestrictedItem item =
-                        new RestrictedDropDownPreference.RestrictedItem(
+                RestrictedListPreference.RestrictedItem item =
+                        new RestrictedListPreference.RestrictedItem(
                                 entry, entryValue, profileAdmin);
                 mLockscreenProfile.addRestrictedItem(item);
             }
