@@ -109,45 +109,30 @@ public class LocationPreferenceControllerTest {
     }
 
     @Test
-    public void getLocationSummary_sensorsOnly_shouldSetSummarySensorsOnly() {
+    public void getLocationSummary_sensorsOnly_shouldSetSummaryOn() {
         Secure.putInt(mContext.getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_SENSORS_ONLY);
 
         assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_sensors_only_title)));
+                mContext.getString(R.string.location_on_summary));
     }
 
     @Test
-    public void getLocationSummary_highAccuracy_shouldSetSummarHighAccuracy() {
+    public void getLocationSummary_highAccuracy_shouldSetSummaryOn() {
         Secure.putInt(mContext.getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_HIGH_ACCURACY);
 
         assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_high_accuracy_title)));
+            mContext.getString(R.string.location_on_summary));
     }
 
     @Test
-    public void getLocationSummary_batterySaving_shouldSetSummaryBatterySaving() {
+    public void getLocationSummary_batterySaving_shouldSetSummaryOn() {
         Secure.putInt(mContext.getContentResolver(),
                 Secure.LOCATION_MODE, Secure.LOCATION_MODE_BATTERY_SAVING);
 
         assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary,
-                        mContext.getString(R.string.location_mode_battery_saving_title)));
-    }
-
-    @Test
-    public void getLocationString_shouldCorrectString() {
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_OFF)).isEqualTo(
-                R.string.location_mode_location_off_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_SENSORS_ONLY)).isEqualTo(
-                R.string.location_mode_sensors_only_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_BATTERY_SAVING)).isEqualTo(
-                R.string.location_mode_battery_saving_title);
-        assertThat(mController.getLocationString(Secure.LOCATION_MODE_HIGH_ACCURACY)).isEqualTo(
-                R.string.location_mode_high_accuracy_title);
+            mContext.getString(R.string.location_on_summary));
     }
 
     @Test

@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="connected_devices_screen"
     android:title="@string/connected_device_connections_title">
 
@@ -24,6 +25,7 @@
       android:title="@string/bluetooth_settings_title"
       android:icon="@drawable/ic_settings_bluetooth"
       android:summary="@string/bluetooth_pref_summary"
+      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
       android:order="-7"/>
 
     <SwitchPreference
@@ -47,11 +49,18 @@
         android:summary="@string/summary_placeholder"
         android:order="-3"/>
 
+    <SwitchPreference
+        android:key="bluetooth_on_while_driving"
+        android:title="@string/bluetooth_on_while_driving_pref"
+        android:icon="@drawable/ic_settings_bluetooth"
+        android:summary="@string/bluetooth_on_while_driving_summary"
+        android:order="-2"/>
+
     <Preference
         android:key="usb_mode"
         android:title="@string/usb_pref"
         android:icon="@drawable/ic_usb"
-        android:order="-2">
+        android:order="-1">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="com.android.settings"
                 android:targetClass="com.android.settings.deviceinfo.UsbModeChooserActivity"/>

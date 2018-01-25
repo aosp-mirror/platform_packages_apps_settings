@@ -30,7 +30,7 @@
 
     <!-- Account name -->
     <Preference
-        android:key="account"
+        android:key="branded_account"
         android:order="1"
         android:title="@string/my_device_info_account_preference_title"
         android:summary="@string/summary_placeholder"/>
@@ -43,7 +43,7 @@
         android:summary="@string/summary_placeholder"/>
 
     <!-- Device name -->
-    <Preference
+    <com.android.settings.widget.ValidatedEditTextPreference
         android:key="device_name"
         android:order="3"
         android:title="@string/my_device_info_device_name_preference_title"

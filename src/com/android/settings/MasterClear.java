@@ -123,17 +123,21 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST));
     }
 
+    @VisibleForTesting
+    boolean isShowFinalConfirmation(int requestCode, int resultCode) {
+        return (resultCode == Activity.RESULT_OK) || (requestCode == CREDENTIAL_CONFIRM_REQUEST);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (!isValidRequestCode(requestCode)) {
             return;
         }
 
         // If the user entered a valid keyguard trace, present the final
         // confirmation prompt; otherwise, go back to the initial state.
-        if (resultCode == Activity.RESULT_OK) {
+        if (isShowFinalConfirmation(requestCode, resultCode)) {
             showFinalConfirmation();
         } else {
             establishInitialState();
@@ -155,7 +159,10 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         final Context context = getActivity();
         final String accountType = context.getString(R.string.account_type);
         final String packageName = context.getString(R.string.account_confirmation_package);
-        if (TextUtils.isEmpty(accountType) || TextUtils.isEmpty(packageName)) {
+        final String className = context.getString(R.string.account_confirmation_class);
+        if (TextUtils.isEmpty(accountType)
+                || TextUtils.isEmpty(packageName)
+                || TextUtils.isEmpty(className)) {
             return false;
         }
         final AccountManager am = AccountManager.get(context);
@@ -163,7 +170,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         if (accounts != null && accounts.length > 0) {
             final Intent requestAccountConfirmation = new Intent()
                 .setPackage(packageName)
-                .setAction("android.accounts.action.PRE_FACTORY_RESET");
+                .setComponent(new ComponentName(packageName, className));
             // Check to make sure that the intent is supported.
             final PackageManager pm = context.getPackageManager();
             final ResolveInfo resolution = pm.resolveActivity(requestAccountConfirmation, 0);
@@ -172,7 +179,7 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                     && packageName.equals(resolution.activityInfo.packageName)) {
                 // Note that we need to check the packagename to make sure that an Activity resolver
                 // wasn't returned.
-                getActivity().startActivityForResult(
+                startActivityForResult(
                     requestAccountConfirmation, CREDENTIAL_CONFIRM_REQUEST);
                 return true;
             }

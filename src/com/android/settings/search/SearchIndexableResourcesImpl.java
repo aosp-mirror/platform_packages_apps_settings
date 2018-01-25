@@ -62,7 +62,6 @@ import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
-import com.android.settings.location.LocationMode;
 import com.android.settings.location.LocationSettings;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
@@ -132,7 +131,6 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(GestureSettings.class);
         addIndex(LanguageAndInputSettings.class);
         addIndex(LocationSettings.class);
-        addIndex(LocationMode.class);
         addIndex(ScanningSettings.class);
         addIndex(SecuritySettingsV2.class);
         addIndex(ScreenLockSettings.class);

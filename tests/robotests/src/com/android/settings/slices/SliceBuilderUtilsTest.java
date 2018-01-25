@@ -50,8 +50,8 @@ public class SliceBuilderUtilsTest {
     private final String FRAGMENT_NAME = "fragment name";
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
-    private final String PREF_CONTROLLER = FakeToggleController.class.getName();
-    ;
+    private final Class PREF_CONTROLLER = FakeToggleController.class;
+    private final Class PREF_CONTROLLER2 = FakeContextOnlyPreferenceController.class;
 
     private Context mContext;
 
@@ -76,6 +76,14 @@ public class SliceBuilderUtilsTest {
     }
 
     @Test
+    public void testGetPreferenceController_contextOnly_buildsMatchingController() {
+        BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(mContext,
+                getDummyData(PREF_CONTROLLER2));
+
+        assertThat(controller).isInstanceOf(FakeContextOnlyPreferenceController.class);
+    }
+
+    @Test
     public void testDynamicSummary_returnsSliceSummary() {
         SliceData data = getDummyData();
         FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
@@ -87,7 +95,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testDynamicSummary_returnsFragmentSummary() {
-        SliceData data = getDummyData(null);
+        SliceData data = getDummyData((String) null);
         FakePreferenceController controller = spy(new FakePreferenceController(mContext, KEY));
         String controllerSummary = "new_Summary";
         doReturn(controllerSummary).when(controller).getSummary();
@@ -99,7 +107,7 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testDynamicSummary_returnsSliceScreenTitle() {
-        SliceData data = getDummyData(null);
+        SliceData data = getDummyData((String) null);
         FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
 
         String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
@@ -129,10 +137,18 @@ public class SliceBuilderUtilsTest {
     }
 
     private SliceData getDummyData() {
-        return getDummyData(SUMMARY);
+        return getDummyData(PREF_CONTROLLER, SUMMARY);
     }
 
     private SliceData getDummyData(String summary) {
+        return getDummyData(PREF_CONTROLLER, summary);
+    }
+
+    private SliceData getDummyData(Class prefController) {
+        return getDummyData(prefController, SUMMARY);
+    }
+
+    private SliceData getDummyData(Class prefController, String summary) {
         return new SliceData.Builder()
                 .setKey(KEY)
                 .setTitle(TITLE)
@@ -141,7 +157,7 @@ public class SliceBuilderUtilsTest {
                 .setIcon(ICON)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .setPreferenceControllerClassName(prefController.getName())
                 .build();
     }
 }

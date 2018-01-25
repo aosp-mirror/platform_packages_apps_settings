@@ -31,7 +31,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
 public class BrandedAccountPreferenceController extends BasePreferenceController {
-    private static final String KEY_PREFERENCE_TITLE = "account";
+    private static final String KEY_PREFERENCE_TITLE = "branded_account";
     private final Account[] mAccounts;
 
     public BrandedAccountPreferenceController(Context context) {

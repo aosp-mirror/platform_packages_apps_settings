@@ -15,6 +15,9 @@
  */
 package com.android.settings.applications;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -95,7 +98,9 @@ abstract public class AppOpsSettingsTest {
      * Creates an intent for showing the permission settings for all apps.
      */
     private Intent createManageAllAppsIntent() {
-        return new Intent(mActivityAction);
+        final Intent intent = new Intent(mActivityAction);
+        intent.addFlags(FLAG_ACTIVITY_CLEAR_TASK | FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
     /**

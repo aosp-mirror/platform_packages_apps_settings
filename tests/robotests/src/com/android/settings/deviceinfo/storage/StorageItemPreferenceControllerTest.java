@@ -50,13 +50,13 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.manageapplications.ManageApplications;
-import com.android.settings.core.instrumentation.MetricsFeatureProvider;
 import com.android.settings.deviceinfo.PrivateVolumeSettings;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.applications.StorageStatsSource;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.deviceinfo.StorageVolumeProvider;
 
 import org.junit.After;

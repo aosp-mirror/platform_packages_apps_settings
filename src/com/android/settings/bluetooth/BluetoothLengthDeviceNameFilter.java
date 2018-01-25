@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package com.android.settings.core.instrumentation;
+package com.android.settings.bluetooth;
 
-public interface Instrumentable {
+/**
+ * Filter to max the length of a Bluetotoh device name to 248 bytes, as defined by the spec.
+ */
+public class BluetoothLengthDeviceNameFilter extends Utf8ByteLengthFilter {
+    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
 
-    int METRICS_CATEGORY_UNKNOWN = 0;
-
-    /**
-     * Instrumented name for a view as defined in
-     * {@link com.android.internal.logging.nano.MetricsProto.MetricsEvent}.
-     */
-    int getMetricsCategory();
+    public BluetoothLengthDeviceNameFilter() {
+        super(BLUETOOTH_NAME_MAX_LENGTH_BYTES);
+    }
 }

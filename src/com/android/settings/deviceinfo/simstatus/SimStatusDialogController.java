@@ -26,6 +26,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserHandle;
@@ -41,10 +42,12 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.TextDirectionHeuristics;
+import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
+import com.android.settings.wrapper.EuiccManagerWrapper;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -81,6 +84,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     final static int ICCID_INFO_LABEL_ID = R.id.icc_id_label;
     @VisibleForTesting
     final static int ICCID_INFO_VALUE_ID = R.id.icc_id_value;
+    @VisibleForTesting
+    final static int EID_INFO_VALUE_ID = R.id.esim_id_value;
 
     private final static String CB_AREA_INFO_RECEIVED_ACTION =
             "com.android.cellbroadcastreceiver.CB_AREA_INFO_RECEIVED";
@@ -92,6 +97,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     private final SubscriptionInfo mSubscriptionInfo;
     private final TelephonyManager mTelephonyManager;
     private final CarrierConfigManager mCarrierConfigManager;
+    private final EuiccManagerWrapper mEuiccManager;
     private final Resources mRes;
     private final Context mContext;
 
@@ -116,7 +122,6 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         }
     };
 
-
     private PhoneStateListener mPhoneStateListener;
 
     public SimStatusDialogController(@NonNull SimStatusDialogFragment dialog, Lifecycle lifecycle,
@@ -128,6 +133,7 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                 TELEPHONY_SERVICE);
         mCarrierConfigManager = (CarrierConfigManager) mContext.getSystemService(
                 CARRIER_CONFIG_SERVICE);
+        mEuiccManager = new EuiccManagerWrapper(mContext);
 
         mRes = mContext.getResources();
 
@@ -137,6 +143,8 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     }
 
     public void initialize() {
+        updateEid();
+
         if (mSubscriptionInfo == null) {
             return;
         }
@@ -361,6 +369,10 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
         } else {
             mDialog.setText(ICCID_INFO_VALUE_ID, getSimSerialNumber(subscriptionId));
         }
+    }
+
+    private void updateEid() {
+        mDialog.setText(EID_INFO_VALUE_ID, mEuiccManager.getEid());
     }
 
     private SubscriptionInfo getPhoneSubscriptionInfo(int slotId) {

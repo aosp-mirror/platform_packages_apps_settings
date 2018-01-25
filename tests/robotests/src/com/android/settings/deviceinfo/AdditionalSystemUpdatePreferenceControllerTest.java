@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,45 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.location;
+package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-
-import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.provider.Settings;
 
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class LocationModeBatterySavingPreferenceControllerTest {
+public class AdditionalSystemUpdatePreferenceControllerTest {
 
-    private LifecycleOwner mLifecycleOwner;
-    private Lifecycle mLifecycle;
+    private Context mContext;
+    private AdditionalSystemUpdatePreferenceController mController;
 
     @Before
     public void setUp() {
-        mLifecycleOwner = () -> mLifecycle;
-        mLifecycle = new Lifecycle(mLifecycleOwner);
+        MockitoAnnotations.initMocks(this);
+
+        mContext = RuntimeEnvironment.application;
+        mController = new AdditionalSystemUpdatePreferenceController(mContext);
     }
 
     @Test
-    public void getLocationMode_shouldReturnModeBatterySaving() {
-        final LocationModeBatterySavingPreferenceController controller =
-                new LocationModeBatterySavingPreferenceController(mock(Context.class), mLifecycle);
-
-        assertThat(controller.getLocationMode())
-                .isEqualTo(Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
+    public void displayPrefs_ifNotAvailable_shouldNotDisplay() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void displayPrefs_ifAvailable_shouldDisplay() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
 }

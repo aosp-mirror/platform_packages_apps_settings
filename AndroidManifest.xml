@@ -36,6 +36,7 @@
     <uses-permission android:name="com.android.certinstaller.INSTALL_AS_USER" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.TETHER_PRIVILEGED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_USER_DATA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -157,7 +158,7 @@
         <activity android:name=".Settings$NetworkDashboardActivity"
             android:taskAffinity="com.android.settings"
             android:label="@string/network_dashboard_title"
-            android:icon="@drawable/ic_settings_wireless"
+            android:icon="@drawable/ic_homepage_network"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.WIRELESS_SETTINGS" />
@@ -183,7 +184,7 @@
         <activity android:name=".Settings$ConnectedDeviceDashboardActivity"
             android:taskAffinity="com.android.settings"
             android:label="@string/connected_devices_dashboard_title"
-            android:icon="@drawable/ic_devices_other"
+            android:icon="@drawable/ic_homepage_connected_device"
             android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_SETTINGS" />
@@ -209,7 +210,7 @@
                   android:enabled="false"
                   android:taskAffinity="com.android.settings"
                   android:label="@string/connected_devices_dashboard_title"
-                  android:icon="@drawable/ic_devices_other"
+                  android:icon="@drawable/ic_homepage_connected_device"
                   android:parentActivityName="Settings">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.NFC_SETTINGS" />
@@ -902,7 +903,7 @@
 
         <activity android:name="Settings$DisplaySettingsActivity"
                 android:label="@string/display_settings"
-                android:icon="@drawable/ic_settings_display"
+                android:icon="@drawable/ic_homepage_display"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.DISPLAY_SETTINGS" />
@@ -1283,7 +1284,7 @@
 
         <activity android:name="Settings$SecuritySettingsActivity"
                 android:label="@string/security_settings_title"
-                android:icon="@drawable/ic_settings_security"
+                android:icon="@drawable/ic_homepage_security"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity=""
                 android:parentActivityName="Settings">
@@ -1311,7 +1312,7 @@
         <!-- TODO(32953042) Merge with Settings$SecuritySettingsActivity -->
         <activity android:name="Settings$SecuritySettingsActivityV2"
                   android:label="@string/security_settings_title"
-                  android:icon="@drawable/ic_settings_security"
+                  android:icon="@drawable/ic_homepage_security"
                   android:enabled="false"
                   android:configChanges="orientation|keyboardHidden|screenSize"
                   android:taskAffinity=""
@@ -1474,7 +1475,7 @@
 
         <activity android:name="Settings$AccessibilitySettingsActivity"
                 android:label="@string/accessibility_settings"
-                android:icon="@drawable/ic_settings_accessibility"
+                android:icon="@drawable/ic_homepage_accessibility"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:taskAffinity="">
             <intent-filter android:priority="1">
@@ -1804,7 +1805,7 @@
 
         <activity android:name=".Settings$StorageDashboardActivity"
                 android:label="@string/storage_settings"
-                android:icon="@drawable/ic_settings_storage"
+                android:icon="@drawable/ic_homepage_storage"
                 android:taskAffinity="com.android.settings"
                 android:parentActivityName="Settings">
             <intent-filter android:priority="1">
@@ -2226,7 +2227,7 @@
 
         <activity android:name="Settings$PowerUsageSummaryActivity"
                 android:label="@string/power_usage_summary_title"
-                android:icon="@drawable/ic_settings_battery"
+                android:icon="@drawable/ic_homepage_battery"
                 android:enabled="false">
             <intent-filter android:priority="1">
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
@@ -2257,7 +2258,7 @@
 
         <activity android:name=".Settings$PowerUsageSummaryLegacyActivity"
                   android:label="@string/power_usage_summary_title"
-                  android:icon="@drawable/ic_settings_battery">
+                  android:icon="@drawable/ic_homepage_battery">
             <intent-filter>
                 <action android:name="android.intent.action.POWER_USAGE_SUMMARY" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2642,7 +2643,7 @@
         <!-- Keep compatibility with old shortcuts. -->
         <activity android:name="Settings$SoundSettingsActivity"
                 android:label="@string/sound_settings"
-                android:icon="@drawable/ic_settings_sound"
+                android:icon="@drawable/ic_homepage_sound"
                 android:taskAffinity=""
                 android:exported="true">
             <intent-filter android:priority="1">
@@ -3085,7 +3086,7 @@
         <!-- Alias for battery settings in new IA. Remove and merge metadata into TargetActivity -->
         <activity android:name=".Settings$AppAndNotificationDashboardActivity"
                   android:label="@string/app_and_notification_dashboard_title"
-                  android:icon="@drawable/ic_apps">
+                  android:icon="@drawable/ic_homepage_apps">
             <intent-filter android:priority="9">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3099,7 +3100,7 @@
 
         <activity android:name=".Settings$UserAndAccountDashboardActivity"
                   android:label="@string/account_dashboard_title"
-                  android:icon="@drawable/ic_settings_accounts">
+                  android:icon="@drawable/ic_homepage_accounts">
             <intent-filter android:priority="3">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3117,7 +3118,7 @@
 
         <activity android:name=".Settings$SystemDashboardActivity"
                   android:label="@string/header_category_system"
-                  android:icon="@drawable/ic_settings_about">
+                  android:icon="@drawable/ic_homepage_system_dashboard">
             <intent-filter android:priority="-1">
                 <action android:name="com.android.settings.action.SETTINGS"/>
             </intent-filter>
@@ -3131,7 +3132,7 @@
 
         <activity android:name=".support.SupportDashboardActivity"
                   android:label="@string/page_tab_title_support"
-                  android:icon="@drawable/ic_help"
+                  android:icon="@drawable/ic_homepage_support"
                   android:theme="@android:style/Theme.DeviceDefault.Light.Panel"
                   android:enabled="@bool/config_support_enabled">
             <intent-filter android:priority="-2">

@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo.aboutphone;
 
+import static com.android.settings.bluetooth.Utils.getLocalBtManager;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -54,6 +56,7 @@ import com.android.settings.search.Indexable;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settings.deviceinfo.DeviceNamePreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,6 +105,10 @@ public class MyDeviceInfoFragment extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new PhoneNumberPreferenceController(context));
         controllers.add(new BrandedAccountPreferenceController(context));
+        DeviceNamePreferenceController deviceNamePreferenceController =
+                new DeviceNamePreferenceController(context);
+        deviceNamePreferenceController.setLocalBluetoothManager(getLocalBtManager(context));
+        controllers.add(deviceNamePreferenceController);
         controllers.add(new SimStatusPreferenceController(context, fragment));
         controllers.add(new DeviceModelPreferenceController(context, fragment));
         controllers.add(new ImeiInfoPreferenceController(context, fragment));
@@ -117,7 +124,6 @@ public class MyDeviceInfoFragment extends DashboardFragment {
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(
                 new BuildNumberPreferenceController(context, activity, fragment, lifecycle));
-        // TODO: Add preference controller for getting the device name.
         return controllers;
     }
 

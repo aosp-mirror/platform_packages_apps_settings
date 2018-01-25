@@ -66,7 +66,8 @@ import org.robolectric.shadows.ShadowActivity;
 )
 public class MasterClearTest {
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
-    private static final String TEST_CONFIRMATION_PACKAGE = "android.test.confirmation.pkg";
+    private static final String TEST_CONFIRMATION_PACKAGE = "android.test.conf.pkg";
+    private static final String TEST_CONFIRMATION_CLASS = "android.test.conf.pkg.ConfActivity";
     private static final String TEST_ACCOUNT_NAME = "test@example.com";
 
     @Mock
@@ -223,6 +224,7 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
 
         Account[] accounts = new Account[0];
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -235,6 +237,7 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
         Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
@@ -250,6 +253,7 @@ public class MasterClearTest {
         // Only try to show account confirmation if the appropriate resource overlays are available.
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
         when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
         // Add accounts to trigger the search for a resolving intent.
         Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -265,7 +269,7 @@ public class MasterClearTest {
         when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
 
         // Finally mock out the startActivityForResultCall
-        doNothing().when(mMockActivity).startActivityForResult(any(), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+        doNothing().when(mMasterClear).startActivityForResult(any(), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
 
         assertThat(mMasterClear.tryShowAccountConfirmation()).isTrue();
     }
