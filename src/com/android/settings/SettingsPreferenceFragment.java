@@ -45,7 +45,6 @@ import android.widget.Button;
 
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.InstrumentedPreferenceFragment;
-import com.android.settings.core.instrumentation.Instrumentable;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpMenuController;
@@ -53,6 +52,7 @@ import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.CustomDialogPreference;
 import com.android.settingslib.CustomEditTextPreference;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.widget.FooterPreferenceMixin;
 
 import java.util.UUID;
