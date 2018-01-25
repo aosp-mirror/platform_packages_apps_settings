@@ -46,6 +46,7 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.ArrayList;
@@ -53,11 +54,11 @@ import java.util.List;
 
 /**
  * Settings preference fragment that displays data usage summary.
- *
- * This class in deprecated use {@link DataPlanUsageSummary}.
  */
-@Deprecated
-public class DataUsageSummary extends DataUsageBase implements Indexable, DataUsageEditController {
+public class DataUsageSummary extends DataUsageBaseFragment implements Indexable,
+        DataUsageEditController {
+
+    private static final String TAG = "DataUsageSummary";
 
     static final boolean LOGD = false;
 
@@ -100,7 +101,6 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
         mDataUsageController = new DataUsageController(context);
         mDataInfoController = new DataUsageInfoController();
-        addPreferencesFromResource(R.xml.data_usage);
 
         int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
@@ -175,6 +175,21 @@ public class DataUsageSummary extends DataUsageBase implements Indexable, DataUs
             return false;
         }
         return super.onPreferenceTreeClick(preference);
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.data_usage;
+    }
+
+    @Override
+    protected String getLogTag() {
+        return TAG;
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return null;
     }
 
     private void addMobileSection(int subId) {
