@@ -179,7 +179,7 @@ public class LocationEnablerTest {
     }
 
     @Test
-    public void setLocationMode_notRestricted_shouldBroadcastUpdate() {
+    public void setLocationMode_notRestricted_shouldBroadcastUpdateAndSetChanger() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_BATTERY_SAVING);
@@ -189,6 +189,9 @@ public class LocationEnablerTest {
                 argThat(actionMatches(LocationManager.MODE_CHANGING_ACTION)),
                 eq(UserHandle.of(ActivityManager.getCurrentUser())),
                 eq(WRITE_SECURE_SETTINGS));
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_CHANGER, Settings.Secure.LOCATION_CHANGER_UNKNOWN))
+                .isEqualTo(Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
     }
 
     @Test
@@ -202,7 +205,7 @@ public class LocationEnablerTest {
     }
 
     @Test
-    public void setLocationEnabled_notRestricted_shouldBroadcastUpdate() {
+    public void setLocationEnabled_notRestricted_shouldBroadcastUpdateAndSetChanger() {
         when(mUserManager.hasUserRestriction(anyString())).thenReturn(false);
         Settings.Secure.putInt(mContext.getContentResolver(),
             Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_OFF);
@@ -212,6 +215,9 @@ public class LocationEnablerTest {
             argThat(actionMatches(LocationManager.MODE_CHANGING_ACTION)),
             eq(UserHandle.of(ActivityManager.getCurrentUser())),
             eq(WRITE_SECURE_SETTINGS));
+        assertThat(Settings.Secure.getInt(mContext.getContentResolver(),
+                Settings.Secure.LOCATION_CHANGER, Settings.Secure.LOCATION_CHANGER_UNKNOWN))
+                .isEqualTo(Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
     }
 
     @Test
