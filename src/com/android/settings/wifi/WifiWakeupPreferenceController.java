@@ -31,52 +31,28 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
 
 /**
  * {@link PreferenceControllerMixin} that controls whether the Wi-Fi Wakeup feature should be
  * enabled.
  */
 public class WifiWakeupPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+        implements PreferenceControllerMixin {
 
     private static final String KEY_ENABLE_WIFI_WAKEUP = "enable_wifi_wakeup";
-    private SettingObserver mSettingObserver;
 
-    public WifiWakeupPreferenceController(Context context, Lifecycle lifecycle) {
+    public WifiWakeupPreferenceController(Context context) {
         super(context);
-        lifecycle.addObserver(this);
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_ENABLE_WIFI_WAKEUP));
-    }
-
-    @Override
-    public void onResume() {
-        if (mSettingObserver != null) {
-            mSettingObserver.register(mContext.getContentResolver(), true /* register */);
-        }
-    }
-
-    @Override
-    public void onPause() {
-        if (mSettingObserver != null) {
-            mSettingObserver.register(mContext.getContentResolver(), false /* register */);
-        }
     }
 
     @Override
     public boolean isAvailable() {
-        final int defaultValue = mContext.getResources().getInteger(
-                com.android.internal.R.integer.config_wifi_wakeup_available);
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultValue) == 1;
+      return true;
     }
 
     @Override
@@ -110,45 +86,12 @@ public class WifiWakeupPreferenceController extends AbstractPreferenceController
 
         boolean wifiScanningEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1;
-        boolean networkRecommendationsEnabled = Settings.Global.getInt(
-                mContext.getContentResolver(),
-                Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1;
-        enableWifiWakeup.setEnabled(networkRecommendationsEnabled && wifiScanningEnabled);
+        enableWifiWakeup.setEnabled(wifiScanningEnabled);
 
-        if (!networkRecommendationsEnabled) {
-            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scoring_disabled);
-        } else if (!wifiScanningEnabled) {
-            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);
-        } else {
+        if (wifiScanningEnabled) {
             enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary);
-        }
-    }
-
-    class SettingObserver extends ContentObserver {
-        private final Uri NETWORK_RECOMMENDATIONS_ENABLED_URI =
-                Settings.Global.getUriFor(Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED);
-
-        private final Preference mPreference;
-
-        public SettingObserver(Preference preference) {
-            super(new Handler());
-            mPreference = preference;
-        }
-
-        public void register(ContentResolver cr, boolean register) {
-            if (register) {
-                cr.registerContentObserver(NETWORK_RECOMMENDATIONS_ENABLED_URI, false, this);
-            } else {
-                cr.unregisterContentObserver(this);
-            }
-        }
-
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            super.onChange(selfChange, uri);
-            if (NETWORK_RECOMMENDATIONS_ENABLED_URI.equals(uri)) {
-                updateState(mPreference);
-            }
+        } else {
+            enableWifiWakeup.setSummary(R.string.wifi_wakeup_summary_scanning_disabled);
         }
     }
 }
