@@ -248,6 +248,33 @@ public class RecentAppsPreferenceControllerTest {
     }
 
     @Test
+    public void display_showRecentsWithNullAppEntryOrInfo() {
+        final List<UsageStats> stats = new ArrayList<>();
+        final UsageStats stat1 = new UsageStats();
+        final UsageStats stat2 = new UsageStats();
+        stat1.mLastTimeUsed = System.currentTimeMillis();
+        stat1.mPackageName = "pkg.class";
+        stats.add(stat1);
+
+        stat2.mLastTimeUsed = System.currentTimeMillis();
+        stat2.mPackageName = "pkg.class2";
+        stats.add(stat2);
+
+        // app1 has AppEntry with null info, app2 has null AppEntry.
+        mAppEntry.info = null;
+        when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
+                .thenReturn(mAppEntry);
+        when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
+                .thenReturn(null);
+
+        when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
+                .thenReturn(stats);
+
+        // We should not crash here.
+        mController.displayPreference(mScreen);
+    }
+
+    @Test
     public void display_hasRecentButNoneDisplayable_showAppInfo() {
         final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
