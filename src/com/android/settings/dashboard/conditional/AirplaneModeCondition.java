@@ -21,10 +21,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Icon;
 import android.net.ConnectivityManager;
+import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Settings;
 import com.android.settingslib.WirelessUtils;
 
 public class AirplaneModeCondition extends Condition {
@@ -33,7 +34,7 @@ public class AirplaneModeCondition extends Condition {
     private final Receiver mReceiver;
 
     private static final IntentFilter AIRPLANE_MODE_FILTER =
-        new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+            new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 
     public AirplaneModeCondition(ConditionManager conditionManager) {
         super(conditionManager);
@@ -79,13 +80,14 @@ public class AirplaneModeCondition extends Condition {
 
     @Override
     public CharSequence[] getActions() {
-        return new CharSequence[] { mManager.getContext().getString(R.string.condition_turn_off) };
+        return new CharSequence[] {mManager.getContext().getString(R.string.condition_turn_off)};
     }
 
     @Override
     public void onPrimaryClick() {
-        mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.NetworkDashboardActivity.class));
+        mManager.getContext().startActivity(
+                new Intent(Settings.ACTION_WIRELESS_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override

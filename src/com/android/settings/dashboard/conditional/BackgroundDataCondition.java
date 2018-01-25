@@ -56,7 +56,7 @@ public class BackgroundDataCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.DataUsageSummaryActivity.class));
+                Settings.DataUsageSummaryActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
