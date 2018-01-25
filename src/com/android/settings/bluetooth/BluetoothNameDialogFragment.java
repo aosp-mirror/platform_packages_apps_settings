@@ -43,8 +43,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
  */
 abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         implements TextWatcher {
-    private static final int BLUETOOTH_NAME_MAX_LENGTH_BYTES = 248;
-
     private AlertDialog mAlertDialog;
     private Button mOkButton;
 
@@ -109,7 +107,7 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
         View view = layoutInflater.inflate(R.layout.dialog_edittext, null);
         mDeviceNameView = (EditText) view.findViewById(R.id.edittext);
         mDeviceNameView.setFilters(new InputFilter[] {
-                new Utf8ByteLengthFilter(BLUETOOTH_NAME_MAX_LENGTH_BYTES)
+                new BluetoothLengthDeviceNameFilter()
         });
         mDeviceNameView.setText(deviceName);    // set initial value before adding listener
         if (!TextUtils.isEmpty(deviceName)) {

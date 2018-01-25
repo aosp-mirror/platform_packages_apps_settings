@@ -35,10 +35,12 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     static final String DEFAULT_SSID = "AndroidAP";
 
     private String mSSID;
+    private WifiDeviceNameTextValidator mWifiDeviceNameTextValidator;
 
     public WifiTetherSSIDPreferenceController(Context context,
             OnTetherConfigUpdateListener listener) {
         super(context, listener);
+        mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
     }
 
     @Override
@@ -70,7 +72,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
 
     @Override
     public boolean isTextValid(String value) {
-        return !WifiUtils.isSSIDTooLong(value) && !WifiUtils.isSSIDTooShort(value);
+        return mWifiDeviceNameTextValidator.isTextValid(value);
     }
 
     public String getSSID() {
