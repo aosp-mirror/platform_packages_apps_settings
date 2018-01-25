@@ -74,7 +74,24 @@ public class UniquePreferenceTest {
             "toggle_bluetooth",
             "toggle_nfc",
             "android_beam_settings",
-            "sms_mirroring"
+            "sms_mirroring",
+            // Dup keys from About Phone v2 experiment.
+            "ims_reg_state",
+            "bt_address",
+            "device_model",
+            "firmware_version",
+            "regulatory_info",
+            "manual",
+            "legal_container",
+            "device_feedback",
+            "fcc_equipment_id",
+            "sim_status",
+            "build_number",
+            "phone_number",
+            "imei_info",
+            "wifi_ip_address",
+            "wifi_mac_address",
+            "safety_info"
     );
 
     private Context mContext;
