@@ -283,7 +283,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             // Not visible on launcher -> likely not a user visible app, skip if non-instant.
             final ApplicationsState.AppEntry appEntry =
                     mApplicationsState.getEntry(pkgName, mUserId);
-            if (!AppUtils.isInstant(appEntry.info)) {
+            if (appEntry == null || appEntry.info == null || !AppUtils.isInstant(appEntry.info)) {
                 Log.d(TAG, "Not a user visible or instant app, skipping " + pkgName);
                 return false;
             }
