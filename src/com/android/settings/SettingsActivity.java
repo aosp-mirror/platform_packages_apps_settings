@@ -878,7 +878,7 @@ public class SettingsActivity extends SettingsDrawerActivity
                 .getAccountFeatureProvider()
                 .isMeCardEnabled(this);
         somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.MeCardActivity.class.getName()),
+                        Settings.MyDeviceInfoActivity.class.getName()),
                 isMeCardEnabled, isAdmin)
                 || somethingChanged;
         somethingChanged = setTileEnabled(new ComponentName(packageName,

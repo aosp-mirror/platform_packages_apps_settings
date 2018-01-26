@@ -22,7 +22,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.accounts.AddUserWhenLockedPreferenceController;
+import com.android.settings.users.AddUserWhenLockedPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -86,10 +86,8 @@ public class LockscreenDashboardFragment extends DashboardFragment
                         KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
         lifecycle.addObserver(notificationController);
         controllers.add(notificationController);
-        final AddUserWhenLockedPreferenceController addUserWhenLockedController =
-                new AddUserWhenLockedPreferenceController(context, KEY_ADD_USER_FROM_LOCK_SCREEN);
-        lifecycle.addObserver(addUserWhenLockedController);
-        controllers.add(addUserWhenLockedController);
+        controllers.add(new AddUserWhenLockedPreferenceController(
+                context, KEY_ADD_USER_FROM_LOCK_SCREEN, lifecycle));
         mOwnerInfoPreferenceController =
                 new OwnerInfoPreferenceController(context, this, lifecycle);
         controllers.add(mOwnerInfoPreferenceController);
@@ -121,7 +119,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                     final List<AbstractPreferenceController> controllers = new ArrayList<>();
                     controllers.add(new LockScreenNotificationPreferenceController(context));
                     controllers.add(new AddUserWhenLockedPreferenceController(context,
-                            KEY_ADD_USER_FROM_LOCK_SCREEN));
+                            KEY_ADD_USER_FROM_LOCK_SCREEN, null /* lifecycle */));
                     controllers.add(new OwnerInfoPreferenceController(
                             context, null /* fragment */, null /* lifecycle */));
                     controllers.add(new LockdownButtonPreferenceController(context));

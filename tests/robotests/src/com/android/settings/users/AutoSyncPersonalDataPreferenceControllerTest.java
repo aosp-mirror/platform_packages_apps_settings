@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accounts;
+package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -22,10 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -45,19 +43,18 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class AutoSyncDataPreferenceControllerTest {
+public class AutoSyncPersonalDataPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
-    @Mock
+    @Mock(answer = RETURNS_DEEP_STUBS)
     private Fragment mFragment;
 
-    private Preference mPreference;
     private Context mContext;
-    private AutoSyncDataPreferenceController mController;
-    private AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment mConfirmSyncFragment;
+    private Preference mPreference;
+    private AutoSyncPersonalDataPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -65,9 +62,7 @@ public class AutoSyncDataPreferenceControllerTest {
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = shadowContext.getApplicationContext();
-        mController = new AutoSyncDataPreferenceController(mContext, mFragment);
-        mConfirmSyncFragment = new AutoSyncDataPreferenceController.ConfirmAutoSyncChangeFragment();
-        mConfirmSyncFragment.setTargetFragment(mFragment, 0);
+        mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mPreference.getKey())).thenReturn(mPreference);
@@ -83,33 +78,19 @@ public class AutoSyncDataPreferenceControllerTest {
     }
 
     @Test
-    public void displayPref_linkedUser_shouldDisplay() {
+    public void displayPref_linkedUser_shouldNotDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.isLinkedUser()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
-        assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mPreference.isVisible()).isFalse();
     }
 
     @Test
-    public void displayPref_oneProfile_shouldDisplay() {
+    public void displayPref_oneProfile_shouldNotDisplay() {
         List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
-        when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
-        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
-
-        mController.displayPreference(mScreen);
-
-        assertThat(mPreference.isVisible()).isTrue();
-    }
-
-    @Test
-    public void displayPref_moreThanOneProfile_shouldNotDisplay() {
-        List<UserInfo> infos = new ArrayList<>();
-        infos.add(new UserInfo(1, "user 1", 0));
-        infos.add(new UserInfo(2, "user 2", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.isLinkedUser()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
@@ -120,16 +101,17 @@ public class AutoSyncDataPreferenceControllerTest {
     }
 
     @Test
-    public void autoSyncData_shouldNotBeSetOnCancel() {
-        final ShadowApplication application = ShadowApplication.getInstance();
-        final Context context = application.getApplicationContext();
-        final SwitchPreference preference = new SwitchPreference(context);
-        preference.setChecked(false);
-        mController = new AutoSyncDataPreferenceController(context, mFragment);
-        mConfirmSyncFragment.mPreference = preference;
-        mConfirmSyncFragment.mEnabling = true;
+    public void displayPref_prefAvailable_shouldDisplay() {
+        List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        infos.add(new UserInfo(2, "user 2", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
-        mConfirmSyncFragment.onClick(null, DialogInterface.BUTTON_NEGATIVE);
-        assertThat(preference.isChecked()).isFalse();
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.isVisible()).isTrue();
     }
+
 }

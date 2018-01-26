@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accounts;
+package com.android.settings.users;
 
 import android.content.Context;
 import android.provider.Settings.Global;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.users.UserCapabilities;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -35,10 +35,13 @@ public class AddUserWhenLockedPreferenceController extends AbstractPreferenceCon
     private final UserCapabilities mUserCaps;
     private boolean mShouldUpdateUserList;
 
-    public AddUserWhenLockedPreferenceController(Context context, String key) {
+    public AddUserWhenLockedPreferenceController(Context context, String key, Lifecycle lifecycle) {
         super(context);
         mPrefKey = key;
         mUserCaps = UserCapabilities.create(context);
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override

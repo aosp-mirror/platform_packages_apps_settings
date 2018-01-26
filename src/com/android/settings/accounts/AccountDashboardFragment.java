@@ -35,10 +35,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserAndAccountDashboardFragment extends DashboardFragment {
+public class AccountDashboardFragment extends DashboardFragment {
 
-    private static final String TAG = "UserAndAccountDashboard";
-    private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
+    private static final String TAG = "AccountDashboardFrag";
+
 
     @Override
     public int getMetricsCategory() {
@@ -52,7 +52,7 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.user_and_accounts_settings;
+        return R.xml.accounts_dashboard_settings;
     }
 
     @Override
@@ -63,16 +63,7 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new EmergencyInfoPreferenceController(context));
-        AddUserWhenLockedPreferenceController addUserWhenLockedPrefController =
-                new AddUserWhenLockedPreferenceController(
-                        context, KEY_ADD_USER_WHEN_LOCKED);
-        controllers.add(addUserWhenLockedPrefController);
-        getLifecycle().addObserver(addUserWhenLockedPrefController);
-        controllers.add(new AutoSyncDataPreferenceController(context, this));
-        controllers.add(new AutoSyncPersonalDataPreferenceController(context, this));
-        controllers.add(new AutoSyncWorkDataPreferenceController(context, this));
-        String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
+        final String[] authorities = getIntent().getStringArrayExtra(EXTRA_AUTHORITIES);
         final AccountPreferenceController accountPrefController =
                 new AccountPreferenceController(context, this, authorities);
         getLifecycle().addObserver(accountPrefController);
@@ -116,7 +107,7 @@ public class UserAndAccountDashboardFragment extends DashboardFragment {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.user_and_accounts_settings;
+                    sir.xmlResId = R.xml.accounts_dashboard_settings;
                     return Arrays.asList(sir);
                 }
             };

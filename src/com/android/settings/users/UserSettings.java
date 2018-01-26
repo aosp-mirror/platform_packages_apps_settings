@@ -103,6 +103,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_USER_LIST = "user_list";
     private static final String KEY_USER_ME = "user_me";
     private static final String KEY_ADD_USER = "user_add";
+    private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
 
     private static final int MENU_REMOVE_USER = Menu.FIRST;
 
@@ -145,8 +146,11 @@ public class UserSettings extends SettingsPreferenceFragment
     private SparseArray<Bitmap> mUserIcons = new SparseArray<>();
     private static SparseArray<Bitmap> sDarkDefaultUserBitmapCache = new SparseArray<>();
 
-    private EditUserInfoController mEditUserInfoController =
-            new EditUserInfoController();
+    private EditUserInfoController mEditUserInfoController = new EditUserInfoController();
+    private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
+    private AutoSyncDataPreferenceController mAutoSyncDataPreferenceController;
+    private AutoSyncPersonalDataPreferenceController mAutoSyncPersonalDataPreferenceController;
+    private AutoSyncWorkDataPreferenceController mAutoSyncWorkDataPreferenceController;
 
     // A place to cache the generated default avatar
     private Drawable mDefaultIconDrawable;
@@ -191,6 +195,28 @@ public class UserSettings extends SettingsPreferenceFragment
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        addPreferencesFromResource(R.xml.user_settings);
+        if (Global.getInt(getContext().getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
+            getActivity().finish();
+            return;
+        }
+        final Context context = getActivity();
+        mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
+                context, KEY_ADD_USER_WHEN_LOCKED, getLifecycle());
+
+        mAutoSyncDataPreferenceController = new AutoSyncDataPreferenceController(context, this);
+        mAutoSyncPersonalDataPreferenceController =
+                new AutoSyncPersonalDataPreferenceController(context, this);
+        mAutoSyncWorkDataPreferenceController =
+                new AutoSyncWorkDataPreferenceController(context, this);
+
+        final PreferenceScreen screen = getPreferenceScreen();
+        mAddUserWhenLockedPreferenceController.displayPreference(screen);
+        mAutoSyncDataPreferenceController.displayPreference(screen);
+        mAutoSyncPersonalDataPreferenceController.displayPreference(screen);
+        mAutoSyncWorkDataPreferenceController.displayPreference(screen);
+        screen.findPreference(mAddUserWhenLockedPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mAddUserWhenLockedPreferenceController);
 
         if (icicle != null) {
             if (icicle.containsKey(SAVE_ADDING_USER)) {
@@ -201,7 +227,7 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             mEditUserInfoController.onRestoreInstanceState(icicle);
         }
-        final Context context = getActivity();
+
         mUserCaps = UserCapabilities.create(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
         if (!mUserCaps.mEnabled) {
@@ -210,7 +236,6 @@ public class UserSettings extends SettingsPreferenceFragment
 
         final int myUserId = UserHandle.myUserId();
 
-        addPreferencesFromResource(R.xml.user_settings);
         mUserListCategory = (PreferenceGroup) findPreference(KEY_USER_LIST);
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId,
                 null /* settings icon handler */,
@@ -230,25 +255,40 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
         }
-        setHasOptionsMenu(true);
-        IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
         context.registerReceiverAsUser(mUserChangeReceiver, UserHandle.ALL, filter, null, mHandler);
         loadProfile();
         updateUserList();
         mShouldUpdateUserList = false;
-
-        if (Global.getInt(getContext().getContentResolver(), Global.DEVICE_PROVISIONED, 0) == 0) {
-            getActivity().finish();
-            return;
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        if (!mUserCaps.mEnabled) return;
+        if (!mUserCaps.mEnabled) {
+            return;
+        }
+        final PreferenceScreen screen = getPreferenceScreen();
+
+        if (mAutoSyncDataPreferenceController.isAvailable()) {
+            mAutoSyncDataPreferenceController.updateState(screen.findPreference(
+                    mAutoSyncDataPreferenceController.getPreferenceKey()));
+        }
+        if (mAddUserWhenLockedPreferenceController.isAvailable()) {
+            mAddUserWhenLockedPreferenceController.updateState(screen.findPreference(
+                    mAddUserWhenLockedPreferenceController.getPreferenceKey()));
+        }
+        if (mAutoSyncPersonalDataPreferenceController.isAvailable()) {
+            mAutoSyncPersonalDataPreferenceController.updateState(screen.findPreference(
+                    mAutoSyncPersonalDataPreferenceController.getPreferenceKey()));
+        }
+        if (mAutoSyncWorkDataPreferenceController.isAvailable()) {
+            mAutoSyncWorkDataPreferenceController.updateState(screen.findPreference(
+                    mAutoSyncWorkDataPreferenceController.getPreferenceKey()));
+        }
+
         if (mShouldUpdateUserList) {
             mUserCaps.updateAddUserCapabilities(getActivity());
             loadProfile();
@@ -266,7 +306,9 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onDestroy() {
         super.onDestroy();
 
-        if (!mUserCaps.mEnabled) return;
+        if (!mUserCaps.mEnabled) {
+            return;
+        }
 
         getActivity().unregisterReceiver(mUserChangeReceiver);
     }
@@ -283,6 +325,20 @@ public class UserSettings extends SettingsPreferenceFragment
     public void startActivityForResult(Intent intent, int requestCode) {
         mEditUserInfoController.startingActivityForResult();
         super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(Preference preference) {
+        if (mAutoSyncDataPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+        if (mAutoSyncPersonalDataPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+        if (mAutoSyncWorkDataPreferenceController.handlePreferenceTreeClick(preference)) {
+            return true;
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -857,32 +913,24 @@ public class UserSettings extends SettingsPreferenceFragment
             loadIconsAsync(missingIcons);
         }
 
-        PreferenceScreen preferenceScreen = getPreferenceScreen();
-        preferenceScreen.removeAll();
-
-        // If profiles are supported, userPreferences will be added to the category labeled
-        // "User & Profiles", otherwise the category is skipped and elements are added directly
-        // to preferenceScreen
-        PreferenceGroup groupToAddUsers;
+        // Remove everything from mUserListCategory and add new users.
+        mUserListCategory.removeAll();
+        // If profiles are supported, mUserListCategory will have a special title
         if (mUserCaps.mCanAddRestrictedProfile) {
-            mUserListCategory.removeAll();
-            mUserListCategory.setOrder(Preference.DEFAULT_ORDER);
-            preferenceScreen.addPreference(mUserListCategory);
-            groupToAddUsers = mUserListCategory;
+            mUserListCategory.setTitle(R.string.user_list_title);
         } else {
-            groupToAddUsers = preferenceScreen;
+            mUserListCategory.setTitle(null);
         }
+
         for (UserPreference userPreference : userPreferences) {
             userPreference.setOrder(Preference.DEFAULT_ORDER);
-            groupToAddUsers.addPreference(userPreference);
+            mUserListCategory.addPreference(userPreference);
         }
 
         // Append Add user to the end of the list
         if ((mUserCaps.mCanAddUser || mUserCaps.mDisallowAddUserSetByAdmin) &&
                 Utils.isDeviceProvisioned(getActivity())) {
             boolean moreUsers = mUserManager.canAddMoreUsers();
-            mAddUser.setOrder(Preference.DEFAULT_ORDER);
-            preferenceScreen.addPreference(mAddUser);
             mAddUser.setEnabled(moreUsers && !mAddingUser);
             if (!moreUsers) {
                 mAddUser.setSummary(getString(R.string.user_add_max_count, getMaxRealUsers()));
