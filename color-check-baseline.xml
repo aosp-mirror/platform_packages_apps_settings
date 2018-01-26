@@ -1661,7 +1661,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_accessibility.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1677,7 +1677,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_accounts.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1693,7 +1693,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_apps.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1709,7 +1709,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_battery.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1725,7 +1725,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_connected_device.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1741,8 +1741,24 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_display.xml"
-            line="24"
+            line="23"
             column="17"/>
+    </issue>
+
+    <issue
+        id="HardCodedColor"
+        severity="Error"
+        message="Avoid using hardcoded color"
+        category="Correctness"
+        priority="4"
+        summary="Using hardcoded color"
+        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
+        errorLine1="        android:color=&quot;@color/homepage_generic_icon_background&quot; />"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="res/drawable/ic_homepage_generic_background.xml"
+            line="20"
+            column="9"/>
     </issue>
 
     <issue
@@ -1757,7 +1773,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_network.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1773,7 +1789,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_security.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1789,7 +1805,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_sound.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1805,7 +1821,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_storage.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1821,7 +1837,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_support.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -1837,7 +1853,7 @@
         errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/drawable/ic_homepage_system_dashboard.xml"
-            line="24"
+            line="23"
             column="17"/>
     </issue>
 
@@ -2557,7 +2573,7 @@
         errorLine2="                                   ~~~~~~~~~~~~~~~~~~~">
         <location
             file="res/values/strings.xml"
-            line="5637"
+            line="5651"
             column="36"/>
     </issue>
 
@@ -2589,7 +2605,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="437"
+            line="442"
             column="44"/>
     </issue>
 
@@ -2605,7 +2621,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="443"
+            line="448"
             column="44"/>
     </issue>
 
@@ -2621,7 +2637,7 @@
         errorLine2="                                           ^">
         <location
             file="res/values/styles.xml"
-            line="444"
+            line="449"
             column="44"/>
     </issue>
 
@@ -2637,7 +2653,7 @@
         errorLine2="                                        ^">
         <location
             file="res/values/styles.xml"
-            line="467"
+            line="472"
             column="41"/>
     </issue>
 

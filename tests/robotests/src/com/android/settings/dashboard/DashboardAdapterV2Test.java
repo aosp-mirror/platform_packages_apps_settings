@@ -16,11 +16,8 @@
 package com.android.settings.dashboard;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -31,11 +28,12 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,7 +45,6 @@ import com.android.settings.dashboard.suggestions.SuggestionAdapterV2;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 
 import org.junit.Before;
@@ -58,6 +55,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +95,7 @@ public class DashboardAdapterV2Test {
         mConditionList.add(mCondition);
         when(mCondition.shouldShow()).thenReturn(true);
         mDashboardAdapter = new DashboardAdapterV2(mContext, null /* savedInstanceState */,
-            mConditionList, null /* suggestionControllerMixin */, null /* lifecycle */);
+                mConditionList, null /* suggestionControllerMixin */, null /* lifecycle */);
         when(mView.getTag()).thenReturn(mCondition);
     }
 
@@ -105,7 +103,8 @@ public class DashboardAdapterV2Test {
     public void testSuggestionDismissed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapterV2 adapter =
                 spy(new DashboardAdapterV2(mContext, null /* savedInstanceState */,
-            null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */));
+                        null /* conditions */, null /* suggestionControllerMixin */, null /*
+                        lifecycle */));
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3");
         adapter.setSuggestions(suggestions);
 
@@ -143,8 +142,9 @@ public class DashboardAdapterV2Test {
                 new DashboardAdapterV2.SuggestionContainerHolder(itemView);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3", "pkg4");
         final DashboardAdapterV2 adapter = spy(new DashboardAdapterV2(mContext,
-            null /*savedInstance */, null /* conditions */, null /* suggestionControllerMixin */,
-            null /* lifecycle */));
+                null /*savedInstance */, null /* conditions */,
+                null /* suggestionControllerMixin */,
+                null /* lifecycle */));
         adapter.setSuggestions(suggestions);
         adapter.onBindSuggestion(holder, 0);
 
@@ -160,7 +160,8 @@ public class DashboardAdapterV2Test {
     public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapterV2 adapter =
                 spy(new DashboardAdapterV2(mContext, null /* savedInstanceState */,
-            null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */));
+                        null /* conditions */, null /* suggestionControllerMixin */, null /*
+                        lifecycle */));
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
         adapter.setSuggestions(suggestions);
         final DashboardDataV2 dashboardData = adapter.mDashboardData;
@@ -173,27 +174,9 @@ public class DashboardAdapterV2Test {
     }
 
     @Test
-    public void testSetCategories_iconTinted() {
-        TypedArray mockTypedArray = mock(TypedArray.class);
-        doReturn(mockTypedArray).when(mContext).obtainStyledAttributes(any(int[].class));
-        doReturn(0x89000000).when(mockTypedArray).getColor(anyInt(), anyInt());
-
-        final DashboardCategory category = new DashboardCategory();
-        final Icon mockIcon = mock(Icon.class);
-        final Tile tile = new Tile();
-        tile.isIconTintable = true;
-        tile.icon = mockIcon;
-        category.addTile(tile);
-
-        mDashboardAdapter.setCategory(category);
-
-        verify(mockIcon).setTint(eq(0x89000000));
-    }
-
-    @Test
     public void testBindSuggestion_shouldSetSuggestionAdapterAndNoCrash() {
         mDashboardAdapter = new DashboardAdapterV2(mContext, null /* savedInstanceState */,
-            null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
 
         mDashboardAdapter.setSuggestions(suggestions);
@@ -217,7 +200,7 @@ public class DashboardAdapterV2Test {
     @Test
     public void testBindSuggestion_shouldSetSummary() {
         mDashboardAdapter = new DashboardAdapterV2(mContext, null /* savedInstanceState */,
-            null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
 
         mDashboardAdapter.setSuggestions(suggestions);
@@ -231,7 +214,7 @@ public class DashboardAdapterV2Test {
         final TextView summary = mock(TextView.class);
         when(itemView.findViewById(android.R.id.summary)).thenReturn(summary);
         final DashboardAdapterV2.SuggestionContainerHolder holder =
-            new DashboardAdapterV2.SuggestionContainerHolder(itemView);
+                new DashboardAdapterV2.SuggestionContainerHolder(itemView);
 
         mDashboardAdapter.onBindSuggestion(holder, 0);
 
@@ -243,6 +226,46 @@ public class DashboardAdapterV2Test {
         mDashboardAdapter.onBindSuggestion(holder, 0);
 
         verify(summary).setText("4");
+    }
+
+    @Test
+    public void onBindTile_internalTile_shouldNotUseGenericBackgroundIcon() {
+        final Context context = RuntimeEnvironment.application;
+        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
+        final DashboardAdapterV2.DashboardItemHolder holder =
+                new DashboardAdapterV2.DashboardItemHolder(view);
+        final Tile tile = new Tile();
+        tile.icon = Icon.createWithResource(context, R.drawable.ic_settings);
+        final DashboardAdapterV2.IconCache iconCache = mock(DashboardAdapterV2.IconCache.class);
+        when(iconCache.getIcon(tile.icon)).thenReturn(context.getDrawable(R.drawable.ic_settings));
+
+        mDashboardAdapter = new DashboardAdapterV2(context, null /* savedInstanceState */,
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
+        mDashboardAdapter.onBindTile(holder, tile);
+
+        verify(iconCache, never()).updateIcon(any(Icon.class), any(Drawable.class));
+    }
+
+    @Test
+    public void onBindTile_externalTile_shouldNotUseGenericBackgroundIcon() {
+        final Context context = RuntimeEnvironment.application;
+        final View view = LayoutInflater.from(context).inflate(R.layout.dashboard_tile, null);
+        final DashboardAdapterV2.DashboardItemHolder holder =
+                new DashboardAdapterV2.DashboardItemHolder(view);
+        final Tile tile = new Tile();
+        tile.icon = mock(Icon.class);
+        when(tile.icon.getResPackage()).thenReturn("another.package");
+
+        final DashboardAdapterV2.IconCache iconCache = mock(DashboardAdapterV2.IconCache.class);
+        when(iconCache.getIcon(tile.icon)).thenReturn(context.getDrawable(R.drawable.ic_settings));
+
+        mDashboardAdapter = new DashboardAdapterV2(context, null /* savedInstanceState */,
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
+        ReflectionHelpers.setField(mDashboardAdapter, "mCache", iconCache);
+        mDashboardAdapter.onBindTile(holder, tile);
+
+        verify(iconCache).updateIcon(eq(tile.icon), any(RoundedHomepageIcon.class));
     }
 
     private List<Suggestion> makeSuggestionsV2(String... pkgNames) {
