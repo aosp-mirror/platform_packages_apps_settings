@@ -25,20 +25,20 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.provider.SearchIndexableResource;
-import android.telephony.TelephonyManager;
 import android.view.View;
 
-import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.accounts.EmergencyInfoPreferenceController;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.BluetoothAddressPreferenceController;
 import com.android.settings.deviceinfo.BrandedAccountPreferenceController;
 import com.android.settings.deviceinfo.BuildNumberPreferenceController;
 import com.android.settings.deviceinfo.DeviceModelPreferenceController;
+import com.android.settings.deviceinfo.DeviceNamePreferenceController;
 import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.ImsStatusPreferenceController;
@@ -52,11 +52,9 @@ import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreference
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
 import com.android.settings.deviceinfo.simstatus.SimStatusPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-import com.android.settings.deviceinfo.DeviceNamePreferenceController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -103,6 +101,7 @@ public class MyDeviceInfoFragment extends DashboardFragment {
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
             Activity activity, Fragment fragment, Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new EmergencyInfoPreferenceController(context));
         controllers.add(new PhoneNumberPreferenceController(context));
         controllers.add(new BrandedAccountPreferenceController(context));
         DeviceNamePreferenceController deviceNamePreferenceController =
@@ -153,6 +152,25 @@ public class MyDeviceInfoFragment extends DashboardFragment {
 
         controller.done(context, true /* rebindActions */);
     }
+
+    private static class SummaryProvider implements SummaryLoader.SummaryProvider {
+
+        private final SummaryLoader mSummaryLoader;
+
+        public SummaryProvider(SummaryLoader summaryLoader) {
+            mSummaryLoader = summaryLoader;
+        }
+
+        @Override
+        public void setListening(boolean listening) {
+            if (listening) {
+                mSummaryLoader.setSummary(this, DeviceModelPreferenceController.getDeviceModel());
+            }
+        }
+    }
+
+    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
+            = (activity, summaryLoader) -> new SummaryProvider(summaryLoader);
 
     /**
      * For Search.

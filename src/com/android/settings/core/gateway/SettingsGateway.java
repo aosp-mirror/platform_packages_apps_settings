@@ -36,7 +36,7 @@ import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
-import com.android.settings.accounts.UserAndAccountDashboardFragment;
+import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.InstalledAppDetails;
@@ -249,7 +249,7 @@ public class SettingsGateway {
             ConnectedDeviceDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragmentOld.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
-            UserAndAccountDashboardFragment.class.getName(),
+            AccountDashboardFragment.class.getName(),
             EnterprisePrivacySettings.class.getName(),
             WebViewAppPicker.class.getName(),
             LockscreenDashboardFragment.class.getName(),
@@ -270,7 +270,7 @@ public class SettingsGateway {
             Settings.StorageDashboardActivity.class.getName(),
             Settings.PowerUsageSummaryActivity.class.getName(),
             Settings.PowerUsageSummaryLegacyActivity.class.getName(),
-            Settings.UserAndAccountDashboardActivity.class.getName(),
+            Settings.AccountDashboardActivity.class.getName(),
             Settings.SecuritySettingsActivity.class.getName(),
             Settings.SecuritySettingsActivityV2.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
@@ -298,6 +298,6 @@ public class SettingsGateway {
             Settings.DateTimeSettingsActivity.class.getName(),
             Settings.DeviceInfoSettingsActivity.class.getName(),
             Settings.EnterprisePrivacySettingsActivity.class.getName(),
-            Settings.MeCardActivity.class.getName(),
+            Settings.MyDeviceInfoActivity.class.getName(),
     };
 }

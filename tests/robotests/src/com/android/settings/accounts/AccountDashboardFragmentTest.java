@@ -44,19 +44,19 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class UserAndAccountDashboardFragmentTest {
+public class AccountDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
 
     @Mock
     private UserManager mUserManager;
-    private UserAndAccountDashboardFragment mFragment;
+    private AccountDashboardFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFragment = new UserAndAccountDashboardFragment();
+        mFragment = new AccountDashboardFragment();
     }
 
     @Test
@@ -85,7 +85,7 @@ public class UserAndAccountDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                UserAndAccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                AccountDashboardFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
                         ShadowApplication.getInstance().getApplicationContext(),
                         true /* enabled */);
 

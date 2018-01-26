@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accounts;
+package com.android.settings.users;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.os.UserHandle;
 
-import com.android.settings.Utils;
+public class AutoSyncPersonalDataPreferenceController extends AutoSyncDataPreferenceController {
 
-public class AutoSyncWorkDataPreferenceController extends AutoSyncPersonalDataPreferenceController {
+    private static final String TAG = "AutoSyncPersonalData";
+    private static final String KEY_AUTO_SYNC_PERSONAL_ACCOUNT = "auto_sync_personal_account_data";
 
-    private static final String TAG = "AutoSyncWorkData";
-    private static final String KEY_AUTO_SYNC_WORK_ACCOUNT = "auto_sync_work_account_data";
-
-    public AutoSyncWorkDataPreferenceController(Context context, Fragment parent) {
+    public AutoSyncPersonalDataPreferenceController(Context context, Fragment parent) {
         super(context, parent);
-        mUserHandle = Utils.getManagedProfileWithDisabled(mUserManager);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !mUserManager.isManagedProfile() && !mUserManager.isLinkedUser()
+                && mUserManager.getProfiles(UserHandle.myUserId()).size() > 1;
     }
 
     @Override
     public String getPreferenceKey() {
-        return KEY_AUTO_SYNC_WORK_ACCOUNT;
+        return KEY_AUTO_SYNC_PERSONAL_ACCOUNT;
     }
+
 }
