@@ -44,6 +44,11 @@ public class VisiblePatternProfilePreferenceController extends TogglePreferenceC
 
     private Preference mPreference;
 
+    public VisiblePatternProfilePreferenceController(Context context) {
+         this(context, null /* lifecycle */);
+    }
+
+    // TODO (b/73074893) Replace this constructor without Lifecycle using setter method instead.
     public VisiblePatternProfilePreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_VISIBLE_PATTERN_PROFILE);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);

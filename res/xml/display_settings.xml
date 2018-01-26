@@ -43,8 +43,9 @@
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="auto_brightness"
         android:title="@string/auto_brightness_title"
-        settings:keywords="@string/keywords_display_auto_brightness"
         android:summary="@string/auto_brightness_summary"
+        settings:keywords="@string/keywords_display_auto_brightness"
+        settings:controller="com.android.settings.display.AutoBrightnessPreferenceController"
         settings:useAdminDisabledSummary="true"
         settings:userRestriction="no_config_brightness" />
 

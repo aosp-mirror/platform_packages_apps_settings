@@ -25,8 +25,8 @@
       android:title="@string/bluetooth_settings_title"
       android:icon="@drawable/ic_settings_bluetooth"
       android:summary="@string/bluetooth_pref_summary"
-      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
-      android:order="-7"/>
+      android:order="-7"
+      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
@@ -54,6 +54,7 @@
         android:title="@string/bluetooth_on_while_driving_pref"
         android:icon="@drawable/ic_settings_bluetooth"
         android:summary="@string/bluetooth_on_while_driving_summary"
+        settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
         android:order="-2"/>
 
     <Preference

@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="security_lockscreen_settings_screen"
     android:title="@string/lockscreen_settings_title">
 
@@ -36,7 +37,8 @@
     <SwitchPreference
         android:key="security_setting_lockdown_enabled"
         android:title="@string/lockdown_settings_title"
-        android:summary="@string/lockdown_settings_summary" />
+        android:summary="@string/lockdown_settings_summary"
+        settings:controller="com.android.settings.security.LockdownButtonPreferenceController"/>
 
     <PreferenceCategory
         android:key="security_setting_lock_screen_notif_work_header"

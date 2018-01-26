@@ -31,6 +31,7 @@ import android.net.Uri;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.DatabaseTestUtils;
+import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
