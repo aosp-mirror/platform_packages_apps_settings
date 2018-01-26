@@ -142,18 +142,17 @@ public class BackgroundActivityPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mController).showDialog();
+        verify(mController).showDialog(false /* restrict */);
     }
 
     @Test
-    public void testHandlePreferenceTreeClick_unRestrictApp_setModeAllowed() {
+    public void testHandlePreferenceTreeClick_unRestrictApp_showDialog() {
         doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(anyInt(),
                 anyInt(), anyString());
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mBatteryUtils).setForceAppStandby(UID_LOW_SDK, LOW_SDK_PACKAGE,
-                AppOpsManager.MODE_ALLOWED);
+        verify(mController).showDialog(true /* restrict */);
     }
 
     @Test
@@ -210,18 +209,5 @@ public class BackgroundActivityPreferenceControllerTest {
     @Test
     public void testIsAvailable_ReturnTrue() {
         assertThat(mController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void testWarningDialog() {
-        BackgroundActivityPreferenceController.WarningDialogFragment dialogFragment =
-                new BackgroundActivityPreferenceController.WarningDialogFragment();
-        dialogFragment.setTargetFragment(mFragment, 0);
-        FragmentTestUtil.startFragment(dialogFragment);
-        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
-        ShadowAlertDialog shadowDialog = shadowOf(dialog);
-        final Button okButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        shadowDialog.clickOn(okButton.getId());
-        verify(mFragment).onLimitBackgroundActivity();
     }
 }

@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,9 +34,15 @@ import java.util.List;
 public class RestrictAppTip extends BatteryTip {
     private List<AppInfo> mRestrictAppList;
 
-    public RestrictAppTip(@StateType int state, List<AppInfo> highUsageApps) {
+    public RestrictAppTip(@StateType int state, List<AppInfo> restrictApps) {
         super(TipType.APP_RESTRICTION, state, true /* showDialog */);
-        mRestrictAppList = highUsageApps;
+        mRestrictAppList = restrictApps;
+    }
+
+    public RestrictAppTip(@StateType int state, AppInfo appInfo) {
+        super(TipType.APP_RESTRICTION, state, true /* showDialog */);
+        mRestrictAppList = new ArrayList<>();
+        mRestrictAppList.add(appInfo);
     }
 
     @VisibleForTesting

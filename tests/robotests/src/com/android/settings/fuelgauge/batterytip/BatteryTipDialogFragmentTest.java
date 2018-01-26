@@ -30,9 +30,10 @@ import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowRuntimePermissionPresenter;
+import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,15 +50,18 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowRuntimePermissionPresenter.class)
+        shadows = ShadowUtils.class)
 public class BatteryTipDialogFragmentTest {
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final String DISPLAY_NAME = "app";
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
 
     private BatteryTipDialogFragment mDialogFragment;
     private Context mContext;
     private HighUsageTip mHighUsageTip;
-    private RestrictAppTip mRestrictedAppTip;
+    private RestrictAppTip mRestrictedOneAppTip;
+    private RestrictAppTip mRestrictAppsTip;
+    private UnrestrictAppTip mUnrestrictAppTip;
 
     @Before
     public void setUp() {
@@ -67,10 +71,22 @@ public class BatteryTipDialogFragmentTest {
         FakeFeatureFactory.setupForTest();
 
         List<AppInfo> highUsageTips = new ArrayList<>();
-        highUsageTips.add(new AppInfo.Builder().setScreenOnTimeMs(SCREEN_TIME_MS).setPackageName(
-                PACKAGE_NAME).build());
+        final AppInfo appInfo = new AppInfo.Builder()
+                .setScreenOnTimeMs(SCREEN_TIME_MS)
+                .setPackageName(PACKAGE_NAME)
+                .build();
+        highUsageTips.add(appInfo);
         mHighUsageTip = new HighUsageTip(SCREEN_TIME_MS, highUsageTips);
-        mRestrictedAppTip = new RestrictAppTip(BatteryTip.StateType.NEW, highUsageTips);
+
+        final List<AppInfo> restrictApps = new ArrayList<>();
+        restrictApps.add(appInfo);
+        mRestrictedOneAppTip = new RestrictAppTip(BatteryTip.StateType.NEW,
+                new ArrayList<>(restrictApps));
+        restrictApps.add(appInfo);
+        mRestrictAppsTip = new RestrictAppTip(BatteryTip.StateType.NEW,
+                new ArrayList<>(restrictApps));
+
+        mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo);
     }
 
     @Test
@@ -87,17 +103,47 @@ public class BatteryTipDialogFragmentTest {
     }
 
     @Test
-    public void testOnCreateDialog_restrictAppTip_fireRestrictAppDialog() {
-        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedAppTip);
+    public void testOnCreateDialog_restrictOneAppTip_fireRestrictOneAppDialog() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictedOneAppTip);
 
         FragmentTestUtil.startFragment(mDialogFragment);
 
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
-        assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 1 app");
+        assertThat(shadowDialog.getTitle()).isEqualTo("Restrict app?");
         assertThat(shadowDialog.getMessage()).isEqualTo(
                 mContext.getString(R.string.battery_tip_restrict_app_dialog_message));
+    }
+
+    @Test
+    public void testOnCreateDialog_restrictAppsTip_fireRestrictAppsDialog() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mRestrictAppsTip);
+
+        FragmentTestUtil.startFragment(mDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getTitle()).isEqualTo("Restrict 2 apps?");
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.battery_tip_restrict_app_dialog_message));
+        assertThat(shadowDialog.getView()).isNotNull();
+    }
+
+    @Test
+    public void testOnCreateDialog_unRestrictAppTip_fireUnRestrictDialog() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mUnrestrictAppTip);
+        ShadowUtils.setApplicationLabel(PACKAGE_NAME, DISPLAY_NAME);
+
+        FragmentTestUtil.startFragment(mDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction for app?");
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                mContext.getString(R.string.battery_tip_unrestrict_app_dialog_message));
     }
 
 
