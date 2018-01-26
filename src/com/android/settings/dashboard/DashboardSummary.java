@@ -38,7 +38,6 @@ import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
-import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
@@ -46,6 +45,7 @@ import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.SettingsDrawerActivity.CategoryListener;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
@@ -87,7 +87,9 @@ public class DashboardSummary extends InstrumentedFragment
         super.onAttach(context);
         Log.d(TAG, "Creating SuggestionControllerMixin");
         mSuggestionControllerMixin = new SuggestionControllerMixin(context, this /* host */,
-                getLifecycle());
+                getLifecycle(), FeatureFactory.getFactory(context)
+                                    .getSuggestionFeatureProvider(context)
+                                    .getSuggestionServiceComponent());
     }
 
     @Override

@@ -40,6 +40,7 @@ import com.android.settings.wallpaper.WallpaperSuggestionActivity;
 import com.android.settings.wifi.WifiCallingSuggestionActivity;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
 

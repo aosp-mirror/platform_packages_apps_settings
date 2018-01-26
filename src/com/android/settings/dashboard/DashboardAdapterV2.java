@@ -42,7 +42,6 @@ import com.android.settings.dashboard.DashboardDataV2.ConditionHeaderData;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapterV2;
 import com.android.settings.dashboard.suggestions.SuggestionAdapterV2;
-import com.android.settings.dashboard.suggestions.SuggestionControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -50,6 +49,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.List;
 
