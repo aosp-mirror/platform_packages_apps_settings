@@ -15,8 +15,8 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
+import static com.android.settings.fuelgauge.PowerUsageSummaryLegacy.MENU_HIGH_POWER_APPS;
+import static com.android.settings.fuelgauge.PowerUsageSummaryLegacy.MENU_TOGGLE_APPS;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
