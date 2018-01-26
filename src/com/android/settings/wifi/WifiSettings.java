@@ -884,13 +884,14 @@ public class WifiSettings extends RestrictedSettingsFragment
                 connectedAp);
 
         // Launch details page on click.
-        pref.setOnGearClickListener(l -> {
+        pref.setOnPreferenceClickListener(preference -> {
             pref.getAccessPoint().saveWifiState(pref.getExtras());
 
             SettingsActivity activity = (SettingsActivity) WifiSettings.this.getActivity();
             activity.startPreferencePanel(this,
                     WifiNetworkDetailsFragment.class.getName(), pref.getExtras(),
                     -1 /* resId */, pref.getTitle(), null, 0 /* resultRequestCode */);
+            return true;
         });
 
         pref.refresh();
