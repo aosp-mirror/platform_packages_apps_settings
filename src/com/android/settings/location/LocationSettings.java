@@ -70,8 +70,10 @@ public class LocationSettings extends DashboardFragment {
     public int getInitialExpandedChildCount() {
         final RecentLocationApps recentLocationApps = new RecentLocationApps(getActivity());
         final int locationRequestsApps = recentLocationApps.getAppList().size();
-        final int locationRequestsPrefs = locationRequestsApps == 0 ? 1 : locationRequestsApps;
-        return locationRequestsPrefs + 2;
+        final int locationRequestsPrefs =
+                locationRequestsApps == 0
+                        ? 1 : (locationRequestsApps > 3 ? 4 : locationRequestsApps);
+        return locationRequestsPrefs + 1;
     }
 
     @Override
