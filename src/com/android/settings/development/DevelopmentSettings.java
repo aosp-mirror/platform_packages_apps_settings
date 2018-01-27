@@ -1876,7 +1876,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                codecStatus = mBluetoothA2dp.getCodecStatus();
+                codecStatus = mBluetoothA2dp.getCodecStatus(null);      // Use current active device
                 if (codecStatus != null) {
                     codecConfig = codecStatus.getCodecConfig();
                     codecsLocalCapabilities = codecStatus.getCodecsLocalCapabilities();
@@ -2095,14 +2095,14 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
         case 6:
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.enableOptionalCodecs();
+                mBluetoothA2dp.enableOptionalCodecs(null); // Use current active device
             }
         }
         return;
         case 7:
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.disableOptionalCodecs();
+                mBluetoothA2dp.disableOptionalCodecs(null); // Use current active device
             }
         }
         return;
@@ -2225,7 +2225,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
 
         synchronized (mBluetoothA2dpLock) {
             if (mBluetoothA2dp != null) {
-                mBluetoothA2dp.setCodecConfigPreference(codecConfig);
+                // Use current active device
+                mBluetoothA2dp.setCodecConfigPreference(null, codecConfig);
             }
         }
     }
