@@ -919,12 +919,12 @@
   <string-array name="wifi_calling_mode_choices">
     <item msgid="2124257075906188844">"Wifi preferida"</item>
     <item msgid="1335127656328817518">"Datos móbiles preferidos"</item>
-    <item msgid="3132912693346866895">"Só wifi"</item>
+    <item msgid="3132912693346866895">"Só por wifi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_choices_v2">
     <item msgid="742988808283756263">"Wifi"</item>
     <item msgid="7715869266611010880">"Datos móbiles"</item>
-    <item msgid="2838022395783120596">"Só wifi"</item>
+    <item msgid="2838022395783120596">"Só por wifi"</item>
   </string-array>
   <string-array name="wifi_calling_mode_values">
     <item msgid="4799585830102342375">"2"</item>
@@ -1554,8 +1554,8 @@
     <string name="recent_app_category_title" msgid="6673071268966003928">"Aplicacións abertas recentemente"</string>
     <string name="see_all_apps_title" msgid="1317153498074308438">"Ver as <xliff:g id="COUNT">%1$d</xliff:g> aplicacións"</string>
     <string name="recent_app_summary" msgid="3366446669844932300">"Hai <xliff:g id="TIME">^1</xliff:g>"</string>
-    <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"A tableta e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados na tableta ou da perda dos datos que se poden derivar do seu uso."</string>
-    <string name="install_all_warning" product="default" msgid="1952257127370115988">"O teléfono e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados no teléfono ou da perda dos datos que se poden derivar do seu uso."</string>
+    <string name="install_all_warning" product="tablet" msgid="8310489909586138165">"A tableta e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados na tableta ou da perda dos datos que se poidan derivar do seu uso."</string>
+    <string name="install_all_warning" product="default" msgid="1952257127370115988">"O teléfono e os datos persoais son máis vulnerables aos ataques de aplicacións descoñecidas. Ao instalar aplicacións desta fonte, aceptas que es responsable dos danos ocasionados no teléfono ou da perda dos datos que se poidan derivar do seu uso."</string>
     <string name="advanced_settings" msgid="1777249286757067969">"Configuración avanzada"</string>
     <string name="advanced_settings_summary" msgid="4016682978071086747">"Activa máis opcións de configuración"</string>
     <string name="application_info_label" msgid="5736524913065714880">"Info da app"</string>
@@ -2338,10 +2338,10 @@
     <string name="header_data_and_synchronization" msgid="5165024023936509896">"Datos e sincronización"</string>
     <string name="preference_change_password_title" msgid="8955581790270130056">"Cambiar contrasinal"</string>
     <string name="header_account_settings" msgid="5382475087121880626">"Configuración da conta"</string>
-    <string name="remove_account_label" msgid="5921986026504804119">"Eliminar conta"</string>
+    <string name="remove_account_label" msgid="5921986026504804119">"Quitar conta"</string>
     <string name="header_add_an_account" msgid="756108499532023798">"Engadir unha conta"</string>
     <string name="finish_button_label" msgid="481587707657751116">"Finalizar"</string>
-    <string name="really_remove_account_title" msgid="8800653398717172460">"Eliminar conta?"</string>
+    <string name="really_remove_account_title" msgid="8800653398717172460">"Queres quitar a conta?"</string>
     <string name="really_remove_account_message" product="tablet" msgid="1936147502815641161">"A eliminación desta conta eliminará todas as súas mensaxes, contactos e demais datos da tableta."</string>
     <string name="really_remove_account_message" product="default" msgid="3483528757922948356">"Se eliminas esta conta borraranse todas as súas mensaxes, contactos e demais datos do teléfono."</string>
     <string name="remove_account_failed" msgid="3901397272647112455">"O administrador non admite este cambio"</string>
@@ -3206,7 +3206,7 @@
     <string name="high_power_system" msgid="7362862974428225301">"A optimización da batería non está dispoñible"</string>
     <string name="high_power_desc" msgid="6283926163708585760">"Non aplicar a optimización da batería, xa que esta pode esgotarse máis rápido."</string>
     <string name="high_power_prompt_title" msgid="6358673688590282655">"Queres permitir que esta aplicación se execute sempre en segundo plano?"</string>
-    <string name="high_power_prompt_body" msgid="1031422980602565049">"É posible que permitir a <xliff:g id="APP_NAME">%1$s</xliff:g> executarse sempre en segundo plano reduza a duración da batería. \n\nPodes cambiar esta opción máis tarde en Configuración &gt; Aplicacións e notificacións."</string>
+    <string name="high_power_prompt_body" msgid="1031422980602565049">"Se permites que <xliff:g id="APP_NAME">%1$s</xliff:g> estea executándose sempre en segundo plano, é posible que se  reduza a duración da batería. \n\nPodes cambiar esta opción máis tarde en Configuración &gt; Aplicacións e notificacións."</string>
     <string name="battery_summary" msgid="8044042095190688654">"Uso do <xliff:g id="PERCENTAGE">%1$s</xliff:g> desde a última carga completa"</string>
     <string name="battery_power_management" msgid="5571519699679107523">"Xestión da batería"</string>
     <string name="no_battery_summary" msgid="3528036835462846814">"Non hai uso da batería desde a última carga completa"</string>
@@ -3375,9 +3375,9 @@
     <string name="condition_battery_title" msgid="3272131008388575349">"Aforro de batería activado"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Reduciuse o rendemento. Desactiváronse os servizos de localización e os datos en segundo plano."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Datos móbiles desactivados"</string>
-    <string name="condition_cellular_summary" msgid="1818046558419658463">"Só hai Internet a través de wifi"</string>
+    <string name="condition_cellular_summary" msgid="1818046558419658463">"Só hai Internet a través da wifi"</string>
     <string name="condition_bg_data_title" msgid="2483860304802846542">"Economizador de datos activado"</string>
-    <string name="condition_bg_data_summary" msgid="656957852895282228">"Os datos en segundo plano só están dispoñibles a través de wifi. Esta opción pode afectar a algunhas aplicacións ou servizos cando non haxa wifi."</string>
+    <string name="condition_bg_data_summary" msgid="656957852895282228">"Os datos en segundo plano só están dispoñibles a través da wifi. Esta opción pode afectar a algunhas aplicacións ou servizos cando non haxa wifi."</string>
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de traballo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"As aplicacións, a sincronización en segundo plano e outras funcións relacionadas co teu perfil de traballo están desactivadas."</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Define a programación da Luz nocturna"</string>
