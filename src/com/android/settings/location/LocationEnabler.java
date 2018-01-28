@@ -123,7 +123,8 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
             }
             return;
         }
-        updateLocationEnabled(mContext, enabled, UserHandle.myUserId());
+        updateLocationEnabled(mContext, enabled, UserHandle.myUserId(),
+                Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
         refreshLocationMode();
     }
 
@@ -142,7 +143,8 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
             return;
         }
 
-        updateLocationMode(mContext, currentMode, mode, ActivityManager.getCurrentUser());
+        updateLocationMode(mContext, currentMode, mode, ActivityManager.getCurrentUser(),
+                Settings.Secure.LOCATION_CHANGER_SYSTEM_SETTINGS);
         refreshLocationMode();
     }
 

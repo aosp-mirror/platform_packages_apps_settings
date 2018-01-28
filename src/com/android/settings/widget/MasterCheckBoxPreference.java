@@ -34,6 +34,7 @@ public class MasterCheckBoxPreference extends TwoTargetPreference {
 
     private CheckBox mCheckBox;
     private boolean mChecked;
+    private boolean mEnableCheckBox = true;
 
     public MasterCheckBoxPreference(Context context, AttributeSet attrs,
             int defStyleAttr, int defStyleRes) {
@@ -88,9 +89,7 @@ public class MasterCheckBoxPreference extends TwoTargetPreference {
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        if (mCheckBox != null) {
-            mCheckBox.setEnabled(enabled);
-        }
+        setCheckBoxEnabled(enabled);
     }
 
     public boolean isChecked() {
@@ -101,6 +100,13 @@ public class MasterCheckBoxPreference extends TwoTargetPreference {
         mChecked = checked;
         if (mCheckBox != null) {
             mCheckBox.setChecked(checked);
+        }
+    }
+
+    public void setCheckBoxEnabled(boolean enabled) {
+        mEnableCheckBox = enabled;
+        if (mCheckBox != null) {
+            mCheckBox.setEnabled(enabled);
         }
     }
 

@@ -47,6 +47,7 @@ import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictionUtils;
@@ -115,8 +116,8 @@ public class VisibilityPreferenceControllerTest {
     @Test
     public void testNoCrashIfNoOnResume() throws Exception {
         mController.isAvailable();
-        mController.updateState(mock(RestrictedDropDownPreference.class));
-        mController.onPreferenceChange(mock(RestrictedDropDownPreference.class), true);
+        mController.updateState(mock(RestrictedListPreference.class));
+        mController.onPreferenceChange(mock(RestrictedListPreference.class), true);
     }
 
     @Test
@@ -165,7 +166,7 @@ public class VisibilityPreferenceControllerTest {
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         verify(pref, times(2)).addRestrictedItem(any());
@@ -187,7 +188,7 @@ public class VisibilityPreferenceControllerTest {
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         verify(pref, times(1)).addRestrictedItem(any());
@@ -202,7 +203,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
@@ -221,7 +222,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
@@ -237,7 +238,7 @@ public class VisibilityPreferenceControllerTest {
         NotificationChannel channel = mock(NotificationChannel.class);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         ArgumentCaptor<CharSequence[]> argumentCaptor =
@@ -268,7 +269,7 @@ public class VisibilityPreferenceControllerTest {
         when(channel.getLockscreenVisibility()).thenReturn(VISIBILITY_NO_OVERRIDE);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
@@ -287,7 +288,7 @@ public class VisibilityPreferenceControllerTest {
         when(channel.getLockscreenVisibility()).thenReturn(Notification.VISIBILITY_SECRET);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
@@ -306,7 +307,7 @@ public class VisibilityPreferenceControllerTest {
         channel.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         mController.onPreferenceChange(pref, String.valueOf(Notification.VISIBILITY_PRIVATE));
@@ -325,7 +326,7 @@ public class VisibilityPreferenceControllerTest {
         channel.setLockscreenVisibility(VISIBILITY_NO_OVERRIDE);
         mController.onResume(appRow, channel, null, null);
 
-        RestrictedDropDownPreference pref = mock(RestrictedDropDownPreference.class);
+        RestrictedListPreference pref = mock(RestrictedListPreference.class);
         mController.updateState(pref);
 
         mController.onPreferenceChange(pref, String.valueOf(Notification.VISIBILITY_SECRET));

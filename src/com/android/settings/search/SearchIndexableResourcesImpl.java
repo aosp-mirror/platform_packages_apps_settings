@@ -25,7 +25,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.MagnificationPreferenceFragment;
-import com.android.settings.accounts.UserAndAccountDashboardFragment;
+import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.SpecialAccessSettings;
@@ -136,7 +136,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(ScreenLockSettings.class);
         addIndex(EncryptionAndCredential.class);
         addIndex(ScreenPinningSettings.class);
-        addIndex(UserAndAccountDashboardFragment.class);
+        addIndex(AccountDashboardFragment.class);
         addIndex(VirtualKeyboardFragment.class);
         addIndex(AvailableVirtualKeyboardFragment.class);
         addIndex(PhysicalKeyboardFragment.class);

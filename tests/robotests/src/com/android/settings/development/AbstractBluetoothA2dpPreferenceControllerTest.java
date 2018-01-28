@@ -74,8 +74,8 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new AbstractBluetoothA2dpPreferenceControllerImpl(mContext, mLifecycle,
                 mBluetoothA2dpConfigStore));
-        doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig();
-        doNothing().when(mController).setCodecConfigPreference(any());
+        doReturn(mBluetoothCodecConfig).when(mController).getCodecConfig(null);
+        doNothing().when(mController).setCodecConfigPreference(any(), any());
         when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mBluetoothCodecConfig);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
@@ -87,7 +87,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, "" /* new value */);
 
-        verify(mController).setCodecConfigPreference(any());
+        verify(mController).setCodecConfigPreference(any(), any());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
 
         mController.onPreferenceChange(mPreference, "" /* new value */);
 
-        verify(mController, never()).setCodecConfigPreference(any());
+        verify(mController, never()).setCodecConfigPreference(any(), any());
     }
 
     @Test

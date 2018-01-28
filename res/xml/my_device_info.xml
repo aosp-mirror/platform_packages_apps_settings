@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="my_device_info_pref_screen"
     android:title="@string/my_device_info_title"
-    settings:initialExpandedChildrenCount="4">
+    settings:initialExpandedChildrenCount="7">
 
     <com.android.settings.applications.LayoutPreference
         android:key="my_device_info_header"
@@ -49,10 +49,31 @@
         android:title="@string/my_device_info_device_name_preference_title"
         android:summary="@string/summary_placeholder"/>
 
+    <Preference
+        android:key="emergency_info"
+        android:order="4"
+        android:title="@string/emergency_info_title"
+        android:summary="@string/summary_placeholder"/>
+
+    <!-- Legal information -->
+    <Preference
+        android:key="legal_container"
+        android:order="5"
+        android:title="@string/legal_information"
+        android:fragment="com.android.settings.LegalSettings" />
+
+    <!-- Regulatory labels -->
+    <Preference
+        android:key="regulatory_info"
+        android:order="6"
+        android:title="@string/regulatory_labels">
+        <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
+    </Preference>
+
     <!-- SIM status -->
     <Preference
         android:key="sim_status"
-        android:order="4"
+        android:order="7"
         android:title="@string/sim_status_title"
         settings:keywords="@string/keywords_sim_status"
         android:summary="@string/summary_placeholder"/>
@@ -109,23 +130,6 @@
         android:order="36"
         android:title="@string/status_bt_address"
         android:summary="@string/summary_placeholder"/>
-
-
-    <!-- Legal information -->
-    <Preference
-        android:key="legal_container"
-        android:order="37"
-        android:title="@string/legal_information"
-        android:fragment="com.android.settings.LegalSettings"
-        settings:allowDividerAbove="true"/>
-
-    <!-- Regulatory labels -->
-    <Preference
-        android:key="regulatory_info"
-        android:order="38"
-        android:title="@string/regulatory_labels">
-        <intent android:action="android.settings.SHOW_REGULATORY_INFO"/>
-    </Preference>
 
     <!-- Safety & regulatory manual -->
     <Preference

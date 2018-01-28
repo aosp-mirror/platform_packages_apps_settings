@@ -20,7 +20,7 @@ import android.util.ArrayMap;
 
 import com.android.settings.DisplaySettings;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
-import com.android.settings.accounts.UserAndAccountDashboardFragment;
+import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
@@ -81,7 +81,7 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SECURITY);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDetailDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT_DETAIL);
-        PARENT_TO_CATEGORY_KEY_MAP.put(UserAndAccountDashboardFragment.class.getName(),
+        PARENT_TO_CATEGORY_KEY_MAP.put(AccountDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT);
         PARENT_TO_CATEGORY_KEY_MAP.put(
                 SystemDashboardFragment.class.getName(), CategoryKey.CATEGORY_SYSTEM);

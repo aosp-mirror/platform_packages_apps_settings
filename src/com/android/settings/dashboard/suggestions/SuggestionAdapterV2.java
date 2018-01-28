@@ -38,6 +38,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import java.util.ArrayList;
 import java.util.List;

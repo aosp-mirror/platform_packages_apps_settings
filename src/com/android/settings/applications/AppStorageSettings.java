@@ -22,6 +22,7 @@ import static android.content.pm.ApplicationInfo.FLAG_SYSTEM;
 import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppGlobals;
+import android.app.GrantedUriPermission;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -399,7 +400,7 @@ public class AppStorageSettings extends AppInfoWithHeader
         // Gets all URI permissions from am.
         ActivityManager am = (ActivityManager) getActivity().getSystemService(
                 Context.ACTIVITY_SERVICE);
-        List<UriPermission> perms =
+        List<GrantedUriPermission> perms =
                 am.getGrantedUriPermissions(mAppEntry.info.packageName).getList();
 
         if (perms.isEmpty()) {
@@ -411,8 +412,8 @@ public class AppStorageSettings extends AppInfoWithHeader
 
         // Group number of URIs by app.
         Map<CharSequence, MutableInt> uriCounters = new TreeMap<>();
-        for (UriPermission perm : perms) {
-            String authority = perm.getUri().getAuthority();
+        for (GrantedUriPermission perm : perms) {
+            String authority = perm.uri.getAuthority();
             ProviderInfo provider = pm.resolveContentProvider(authority, 0);
             CharSequence app = provider.applicationInfo.loadLabel(pm);
             MutableInt count = uriCounters.get(app);

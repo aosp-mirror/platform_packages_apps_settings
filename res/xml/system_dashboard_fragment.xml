@@ -40,6 +40,14 @@
         <intent android:action="android.settings.BACKUP_AND_RESET_SETTINGS" />
     </Preference>
 
+    <Preference
+        android:key="reset_dashboard"
+        android:title="@string/reset_dashboard_title"
+        android:summary="@string/reset_dashboard_summary"
+        android:icon="@drawable/ic_restore"
+        android:order="-50"
+        android:fragment="com.android.settings.system.ResetDashboardFragment" />
+
     <!-- System updates -->
     <Preference
         android:key="system_update_settings"
@@ -60,13 +68,5 @@
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu" />
     </Preference>
-
-    <Preference
-        android:key="reset_dashboard"
-        android:title="@string/reset_dashboard_title"
-        android:summary="@string/reset_dashboard_summary"
-        android:icon="@drawable/ic_restore"
-        android:order="-20"
-        android:fragment="com.android.settings.system.ResetDashboardFragment" />
 
 </PreferenceScreen>

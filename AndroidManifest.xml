@@ -1006,7 +1006,7 @@
         </activity>
 
 
-        <activity android:name="Settings$MeCardActivity"
+        <activity android:name=".Settings$MyDeviceInfoActivity"
                   android:label="@string/device_info_settings"
                   android:icon="@drawable/ic_settings_about"
                   android:taskAffinity="com.android.settings"
@@ -1020,7 +1020,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="10">
+            <intent-filter android:priority="270">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -1085,9 +1085,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <intent-filter android:priority="3">
-                <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.ProcessStatsSummary" />
@@ -1943,7 +1940,7 @@
                 <action android:name="com.android.settings.APPLICATION_DEVELOPMENT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="50">
+            <intent-filter android:priority="40">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
@@ -2332,7 +2329,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/header_add_an_account"
             android:taskAffinity="com.android.settings"
-            android:parentActivityName="Settings$UserAndAccountDashboardActivity">
+            android:parentActivityName=".Settings$AccountDashboardActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.ADD_ACCOUNT_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -2487,11 +2484,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter android:priority="8">
+            <intent-filter  android:priority="45">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
             <meta-data android:name="com.android.settings.category"
-                android:value="com.android.settings.category.ia.accounts" />
+                android:value="com.android.settings.category.ia.system" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.users.UserSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -2689,8 +2686,6 @@
             <intent-filter android:priority="150">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.notifications" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.applications.NotificationApps" />
         </activity>
@@ -3061,9 +3056,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
-            <intent-filter android:priority="60">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
             <meta-data android:name="com.android.settings.summary"
                        android:resource="@string/summary_empty"/>
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
@@ -3098,7 +3090,7 @@
                        android:resource="@string/app_and_notification_dashboard_summary"/>
         </activity>
 
-        <activity android:name=".Settings$UserAndAccountDashboardActivity"
+        <activity android:name=".Settings$AccountDashboardActivity"
                   android:label="@string/account_dashboard_title"
                   android:icon="@drawable/ic_homepage_accounts">
             <intent-filter android:priority="3">
@@ -3109,11 +3101,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.accounts.UserAndAccountDashboardFragment"/>
+                       android:value="com.android.settings.accounts.AccountDashboardFragment"/>
             <meta-data android:name="com.android.settings.category"
                        android:value="com.android.settings.category.ia.homepage"/>
-            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
-              android:value="true" />
         </activity>
 
         <activity android:name=".Settings$SystemDashboardActivity"

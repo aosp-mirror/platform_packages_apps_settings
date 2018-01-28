@@ -15,38 +15,26 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:title="@string/configure_notification_settings"
                   android:key="configure_notification_settings">
 
-    <PreferenceCategory
-        android:key="recent_notifications_category"
-        android:title="@string/recent_notifications"
-        android:order="-200">
-        <!-- Placeholder for a list of recent apps -->
-
-        <!-- See all apps button -->
-        <Preference
-            android:title="@string/notifications_title"
-            android:key="all_notifications"
-            android:order="20">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.Settings$NotificationAppListActivity">
-            </intent>
-        </Preference>
-    </PreferenceCategory>
-
-    <!-- Empty category to draw divider -->
-    <PreferenceCategory
-        android:key="all_notifications_divider"
-        android:order="-190"/>
-
     <!-- When device is locked -->
-    <com.android.settings.notification.RestrictedDropDownPreference
+    <com.android.settings.RestrictedListPreference
         android:key="lock_screen_notifications"
         android:title="@string/lock_screen_notifications_title"
         android:summary="@string/summary_placeholder"/>
+
+    <PreferenceCategory
+        android:key="lock_screen_notifications_profile_header"
+        android:title="@string/profile_section_header">
+
+        <com.android.settings.RestrictedListPreference
+            android:key="lock_screen_notifications_profile"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="@string/summary_placeholder"/>
+
+    </PreferenceCategory>
 
     <!-- Notification badging -->
     <SwitchPreference
@@ -71,14 +59,30 @@
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
 
+    <!-- Empty category to draw divider -->
     <PreferenceCategory
-        android:key="lock_screen_notifications_profile_header"
-        android:title="@string/profile_section_header">
+        android:key="all_notifications_divider"
+        android:order="20"/>
 
-        <com.android.settings.notification.RestrictedDropDownPreference
-            android:key="lock_screen_notifications_profile"
-            android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder"/>
+    <PreferenceCategory
+        android:key="recent_notifications_category"
+        android:title="@string/recent_notifications"
+        settings:allowDividerAbove="false"
+        android:order="21">
+        <!-- Placeholder for a list of recent apps -->
 
+        <!-- See all apps button -->
+        <Preference
+            android:title="@string/notifications_title"
+            android:key="all_notifications"
+            android:order="22">
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$NotificationAppListActivity">
+            </intent>
+        </Preference>
     </PreferenceCategory>
+
+
 </PreferenceScreen>

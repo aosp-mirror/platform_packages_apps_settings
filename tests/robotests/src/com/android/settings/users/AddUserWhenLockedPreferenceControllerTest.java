@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.accounts;
+package com.android.settings.users;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
@@ -22,6 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
@@ -31,6 +32,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,6 +53,8 @@ public class AddUserWhenLockedPreferenceControllerTest {
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
 
+    private LifecycleOwner mLifecycleOwner;
+    private Lifecycle mLifecycle;
     private Context mContext;
     private AddUserWhenLockedPreferenceController mController;
 
@@ -60,7 +64,9 @@ public class AddUserWhenLockedPreferenceControllerTest {
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.USER_SERVICE, mUserManager);
         mContext = shadowContext.getApplicationContext();
-        mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key");
+        mLifecycleOwner = () -> mLifecycle;
+        mLifecycle = new Lifecycle(mLifecycleOwner);
+        mController = new AddUserWhenLockedPreferenceController(mContext, "fake_key", mLifecycle);
     }
 
     @Test

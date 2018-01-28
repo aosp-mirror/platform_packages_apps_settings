@@ -56,7 +56,9 @@ public interface DashboardFeatureProvider {
 
     /**
      * Whether or not we should tint icons in setting pages.
+     * @deprecated in favor of color icons in homepage
      */
+    @Deprecated
     boolean shouldTintIcon();
 
     /**

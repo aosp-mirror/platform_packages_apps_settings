@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
  * except in compliance with the License. You may obtain a copy of the License at
@@ -33,14 +33,12 @@ import android.os.UserManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.NetworkPolicyEditor;
 
-/**
- * @deprecated please use {@link DataUsageBaseFragment} instead.
- */
-@Deprecated
-public abstract class DataUsageBase extends SettingsPreferenceFragment {
+public abstract class DataUsageBaseFragment extends DashboardFragment {
     private static final String TAG = "DataUsageBase";
     private static final String ETHERNET = "ethernet";
 

@@ -6141,7 +6141,7 @@
     <skip/>
 
     <!-- User settings screen title [CHAR LIMIT=25] -->
-    <string name="user_settings_title">Users</string>
+    <string name="user_settings_title">Multiple users</string>
     <!-- User settings header for list of users and profiles [CHAR LIMIT=40] -->
     <string name="user_list_title">Users &amp; profiles</string>
     <!-- User settings add user or restricted profile menu [CHAR LIMIT=35] -->
@@ -6645,8 +6645,8 @@
     <string name="app_and_notification_dashboard_title">Apps &amp; notifications</string>
     <!-- Summary for Apps & Notification settings, explaining a few important settings under it [CHAR LIMIT=NONE]-->
     <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
-    <!-- Title for setting tile leading to User and accounts settings [CHAR LIMIT=40]-->
-    <string name="account_dashboard_title">Users &amp; accounts</string>
+    <!-- Title for setting tile leading to account settings [CHAR LIMIT=40]-->
+    <string name="account_dashboard_title">Accounts</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -9210,6 +9210,10 @@
     <string name="directory_access">Directory access</string>
     <!-- Keywords for Directory Access settings -->
     <string name="keywords_directory_access">directory access</string>
+
+    <!-- String used to describe the name of a directory in a volume; it must
+         show both names, with the directory name wrapped in parenthesis -->
+    <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
 
     <!-- Account type associated with the backup account. Empty for AOSP. [DO NOT TRANSLATE] -->
     <string name="account_type" translatable="false"></string>
