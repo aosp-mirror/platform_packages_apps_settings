@@ -19,7 +19,6 @@ import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
 import com.android.settings.search.XmlParserUtils;
 import com.android.settings.security.SecuritySettings;
-import com.android.settings.security.SecuritySettingsV2;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -32,7 +31,6 @@ import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,25 +45,13 @@ public class XmlControllerAttributeTest {
     // List of classes that are too hard to mock in order to retrieve xml information.
     private final List<Class> illegalClasses = new ArrayList<>(
             Arrays.asList(
-                    SecuritySettings.class,
-                    SecuritySettingsV2.class
+                    SecuritySettings.class
             ));
 
     // List of XML that could be retrieved from the illegalClasses list.
     private final List<Integer> whitelistXml = new ArrayList<>(
             Arrays.asList(
-                    R.xml.security_settings_misc,
-                    R.xml.security_settings_lockscreen_profile,
-                    R.xml.security_settings_lockscreen,
-                    R.xml.security_settings_chooser,
-                    R.xml.security_settings_pattern_profile,
-                    R.xml.security_settings_pin_profile,
-                    R.xml.security_settings_password_profile,
-                    R.xml.security_settings_pattern,
-                    R.xml.security_settings_pin,
-                    R.xml.security_settings_password,
-                    R.xml.security_settings,
-                    R.xml.security_settings_status
+                    R.xml.security_dashboard_settings
             ));
 
     private static final String NO_VALID_CONSTRUCTOR_ERROR =

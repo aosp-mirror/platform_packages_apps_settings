@@ -40,7 +40,7 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
         return dialog;
     }
 
-    public void show(SecuritySettingsV2 host) {
+    public void show(SecuritySettings host) {
         final FragmentManager manager = host.getChildFragmentManager();
         if (manager.findFragmentByTag(TAG_UNIFICATION_DIALOG) == null) {
             // Prevent opening multiple dialogs if tapped on button quickly
@@ -50,7 +50,7 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final SecuritySettingsV2 parentFragment = ((SecuritySettingsV2) getParentFragment());
+        final SecuritySettings parentFragment = ((SecuritySettings) getParentFragment());
         final boolean compliant = getArguments().getBoolean(EXTRA_COMPLIANT);
         return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.lock_settings_profile_unification_dialog_title)
@@ -75,7 +75,7 @@ public class UnificationConfirmationDialog extends InstrumentedDialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
-        ((SecuritySettingsV2) getParentFragment()).updateUnificationPreference();
+        ((SecuritySettings) getParentFragment()).updateUnificationPreference();
     }
 
     @Override

@@ -55,7 +55,7 @@ public class LockUnificationPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
     @Mock
-    private SecuritySettingsV2 mHost;
+    private SecuritySettings mHost;
 
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;

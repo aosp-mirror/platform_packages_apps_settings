@@ -33,7 +33,7 @@ import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
-import com.android.settings.security.SecuritySettingsV2;
+import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settingslib.drawer.CategoryKey;
 
@@ -77,7 +77,7 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_SOUND);
         PARENT_TO_CATEGORY_KEY_MAP.put(StorageDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_STORAGE);
-        PARENT_TO_CATEGORY_KEY_MAP.put(SecuritySettingsV2.class.getName(),
+        PARENT_TO_CATEGORY_KEY_MAP.put(SecuritySettings.class.getName(),
                 CategoryKey.CATEGORY_SECURITY);
         PARENT_TO_CATEGORY_KEY_MAP.put(AccountDetailDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_ACCOUNT_DETAIL);

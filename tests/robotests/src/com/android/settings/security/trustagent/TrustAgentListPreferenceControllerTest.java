@@ -40,7 +40,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.security.SecuritySettingsV2;
+import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -69,7 +69,7 @@ public class TrustAgentListPreferenceControllerTest {
     @Mock
     private PreferenceCategory mCategory;
     @Mock
-    private SecuritySettingsV2 mFragment;
+    private SecuritySettings mFragment;
 
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;

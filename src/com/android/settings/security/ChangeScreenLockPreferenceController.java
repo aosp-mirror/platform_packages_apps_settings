@@ -16,7 +16,7 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.SecuritySettingsV2.SET_OR_CHANGE_LOCK_METHOD_REQUEST;
+import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -45,7 +45,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
     protected final DevicePolicyManager mDPM;
-    protected final SecuritySettingsV2 mHost;
+    protected final SecuritySettings mHost;
     protected final UserManager mUm;
     protected final LockPatternUtils mLockPatternUtils;
 
@@ -54,7 +54,7 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
     protected RestrictedPreference mPreference;
 
-    public ChangeScreenLockPreferenceController(Context context, SecuritySettingsV2 host) {
+    public ChangeScreenLockPreferenceController(Context context, SecuritySettings host) {
         super(context);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
         mDPM = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
