@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.shortcut;
 
 import android.app.LauncherActivity;
 import android.content.ComponentName;
@@ -28,7 +28,9 @@ import android.content.pm.ShortcutManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
+import android.graphics.drawable.LayerDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.annotation.VisibleForTesting;
@@ -40,6 +42,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.overlay.FeatureFactory;
 
@@ -65,7 +68,8 @@ public class CreateShortcut extends LauncherActivity {
         finish();
     }
 
-    protected Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
+    @VisibleForTesting
+    Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
             CharSequence label) {
         shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         ShortcutManager sm = getSystemService(ShortcutManager.class);
@@ -94,8 +98,8 @@ public class CreateShortcut extends LauncherActivity {
 
         if (activityInfo.icon != 0) {
             intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, createIcon(activityInfo.icon,
-                R.layout.shortcut_badge,
-                getResources().getDimensionPixelSize(R.dimen.shortcut_size)));
+                    R.layout.shortcut_badge,
+                    getResources().getDimensionPixelSize(R.dimen.shortcut_size)));
         }
         return intent;
     }
@@ -112,7 +116,11 @@ public class CreateShortcut extends LauncherActivity {
     private Bitmap createIcon(int resource, int layoutRes, int size) {
         Context context = new ContextThemeWrapper(this, android.R.style.Theme_Material);
         View view = LayoutInflater.from(context).inflate(layoutRes, null);
-        ((ImageView) view.findViewById(android.R.id.icon)).setImageResource(resource);
+        Drawable iconDrawable = getDrawable(resource);
+        if (iconDrawable instanceof LayerDrawable) {
+            iconDrawable = ((LayerDrawable) iconDrawable).getDrawable(1);
+        }
+        ((ImageView) view.findViewById(android.R.id.icon)).setImageDrawable(iconDrawable);
 
         int spec = MeasureSpec.makeMeasureSpec(size, MeasureSpec.EXACTLY);
         view.measure(spec, spec);

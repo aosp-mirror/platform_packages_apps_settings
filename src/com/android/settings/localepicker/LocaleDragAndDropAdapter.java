@@ -34,7 +34,7 @@ import android.widget.CompoundButton;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 
-import com.android.settings.CreateShortcut;
+import com.android.settings.shortcut.CreateShortcut;
 import com.android.settings.R;
 
 import java.text.NumberFormat;
