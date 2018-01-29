@@ -777,7 +777,7 @@ public class WifiSettings extends RestrictedSettingsFragment
             AccessPoint accessPoint = accessPoints.get(index);
             // Ignore access points that are out of range.
             if (accessPoint.isReachable()) {
-                String key = AccessPointPreference.generatePreferenceKey(accessPoint);
+                String key = accessPoint.getKey();
                 hasAvailableAccessPoints = true;
                 LongPressAccessPointPreference pref =
                         (LongPressAccessPointPreference) getCachedPreference(key);
