@@ -19,16 +19,22 @@ LOCAL_PACKAGE_NAME := SettingsUITests
 LOCAL_COMPATIBILITY_SUITE := device-tests
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 LOCAL_MODULE_TAGS := tests
-LOCAL_JAVA_LIBRARIES := android.test.runner android.test.base
+
+LOCAL_JAVA_LIBRARIES := \
+    android.test.runner \
+    android.test.base
+
 LOCAL_STATIC_JAVA_LIBRARIES := \
+    android-support-test \
     app-helpers-core \
     launcher-helper-lib \
-    settings-helper \
-    timeresult-helper-lib \
-    ub-uiautomator \
-    sysui-helper \
     metrics-helper-lib \
     platform-test-annotations \
+    settings-helper \
+    sysui-helper \
+    timeresult-helper-lib \
+    truth-prebuilt \
+    ub-uiautomator \
 
 #LOCAL_SDK_VERSION := current
 
