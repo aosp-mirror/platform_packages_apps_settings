@@ -35,7 +35,6 @@ import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -920,50 +919,5 @@ public class FingerprintSettings extends SubSettings {
                 }
             });
         }
-    }
-
-    /**
-     * @deprecated in favor of new SecuritySettings.
-     */
-    @Deprecated
-    public static Preference getFingerprintPreferenceForUser(Context context, final int userId) {
-        final FingerprintManager fpm = Utils.getFingerprintManagerOrNull(context);
-        if (fpm == null || !fpm.isHardwareDetected()) {
-            Log.v(TAG, "No fingerprint hardware detected!!");
-            return null;
-        }
-        Preference fingerprintPreference = new Preference(context);
-        fingerprintPreference.setKey(KEY_FINGERPRINT_SETTINGS);
-        fingerprintPreference.setTitle(R.string.security_settings_fingerprint_preference_title);
-        final List<Fingerprint> items = fpm.getEnrolledFingerprints(userId);
-        final int fingerprintCount = items != null ? items.size() : 0;
-        final String clazz;
-        if (fingerprintCount > 0) {
-            fingerprintPreference.setSummary(context.getResources().getQuantityString(
-                    R.plurals.security_settings_fingerprint_preference_summary,
-                    fingerprintCount, fingerprintCount));
-            clazz = FingerprintSettings.class.getName();
-        } else {
-            fingerprintPreference.setSummary(
-                    R.string.security_settings_fingerprint_preference_summary_none);
-            clazz = FingerprintEnrollIntroduction.class.getName();
-        }
-        fingerprintPreference.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                final Context context = preference.getContext();
-                final UserManager userManager = UserManager.get(context);
-                if (Utils.startQuietModeDialogIfNecessary(context, userManager,
-                        userId)) {
-                    return false;
-                }
-                Intent intent = new Intent();
-                intent.setClassName("com.android.settings", clazz);
-                intent.putExtra(Intent.EXTRA_USER_ID, userId);
-                context.startActivity(intent);
-                return true;
-            }
-        });
-        return fingerprintPreference;
     }
 }

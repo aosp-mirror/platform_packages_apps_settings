@@ -16,11 +16,10 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security
-        .SecuritySettingsV2.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
-import static com.android.settings.security.SecuritySettingsV2.UNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
-import static com.android.settings.security.SecuritySettingsV2.UNIFY_LOCK_CONFIRM_PROFILE_REQUEST;
-import static com.android.settings.security.SecuritySettingsV2.UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
+import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
+import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
+import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_PROFILE_REQUEST;
+import static com.android.settings.security.SecuritySettings.UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -53,7 +52,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     private final UserManager mUm;
     private final LockPatternUtils mLockPatternUtils;
     private final int mProfileChallengeUserId;
-    private final SecuritySettingsV2 mHost;
+    private final SecuritySettings mHost;
 
     private RestrictedSwitchPreference mUnifyProfile;
 
@@ -67,7 +66,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
         mUnifyProfile = (RestrictedSwitchPreference) screen.findPreference(KEY_UNIFICATION);
     }
 
-    public LockUnificationPreferenceController(Context context, SecuritySettingsV2 host) {
+    public LockUnificationPreferenceController(Context context, SecuritySettings host) {
         super(context);
         mHost = host;
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
@@ -212,7 +211,7 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
                 mCurrentProfilePassword);
         mHost.startFragment(mHost, ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
                 R.string.lock_settings_picker_title,
-                SecuritySettingsV2.SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+                SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
     }
 
 }

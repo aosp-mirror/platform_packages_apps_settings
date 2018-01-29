@@ -16,8 +16,7 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security
-        .SecuritySettingsV2.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
+import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
@@ -37,7 +36,7 @@ public class ChangeProfileScreenLockPreferenceController extends
     private static final String KEY_UNLOCK_SET_OR_CHANGE_PROFILE = "unlock_set_or_change_profile";
 
     public ChangeProfileScreenLockPreferenceController(Context context,
-            SecuritySettingsV2 host) {
+            SecuritySettings host) {
         super(context, host);
     }
 

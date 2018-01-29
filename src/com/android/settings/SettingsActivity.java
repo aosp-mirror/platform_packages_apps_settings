@@ -802,20 +802,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 !isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
                 isAdmin) || somethingChanged;
 
-        final boolean isSecurityV2Enabled = featureFactory.getSecurityFeatureProvider()
-                .isSecuritySettingsV2Enabled(this);
-
-        // Enable new security page if v2 enabled
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,Settings.SecuritySettingsActivityV2.class.getName()),
-                isSecurityV2Enabled,
-                isAdmin) || somethingChanged;
-        // Enable old security page if v2 disabled
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,Settings.SecuritySettingsActivity.class.getName()),
-                !isSecurityV2Enabled,
-                isAdmin) || somethingChanged;
-
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.SimSettingsActivity.class.getName()),
                 Utils.showSimCardTile(this), isAdmin)
