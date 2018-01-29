@@ -15,42 +15,40 @@
  */
 package com.android.settings.accounts;
 
-import android.app.Activity;
-import android.content.pm.UserInfo;
-import android.os.UserManager;
-import android.provider.SearchIndexableResource;
+import static com.android.settings.accounts.AccountDashboardFragmentTest
+        .ShadowAuthenticationHelper.LABELS;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-import com.android.settings.R;
+import android.app.Activity;
+import android.content.Context;
+import android.os.UserHandle;
+import android.provider.SearchIndexableResource;
+import android.text.TextUtils;
+
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.drawer.CategoryKey;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AccountDashboardFragmentTest {
 
-    private static final String METADATA_CATEGORY = "com.android.settings.category";
-    private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
-
-    @Mock
-    private UserManager mUserManager;
     private AccountDashboardFragment mFragment;
 
     @Before
@@ -65,21 +63,18 @@ public class AccountDashboardFragmentTest {
     }
 
     @Test
-    public void updateSummary_shouldDisplaySignedInUser() {
-        final Activity activity = mock(Activity.class);
+    @Config(shadows = {
+            ShadowAuthenticationHelper.class
+    })
+    public void updateSummary_shouldDisplayUpTo3AccountTypes() {
         final SummaryLoader loader = mock(SummaryLoader.class);
-        final UserInfo userInfo = new UserInfo();
-        userInfo.name = "test_name";
-
-        when(activity.getSystemService(UserManager.class)).thenReturn(mUserManager);
-        when(mUserManager.getUserInfo(anyInt())).thenReturn(userInfo);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
 
         final SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
                 .createSummaryProvider(activity, loader);
         provider.setListening(true);
 
-        verify(activity).getString(R.string.users_and_accounts_summary,
-                userInfo.name);
+        verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1] + ", " + LABELS[2]);
     }
 
     @Test
@@ -91,5 +86,37 @@ public class AccountDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
+    }
+
+    @Implements(AuthenticatorHelper.class)
+    public static class ShadowAuthenticationHelper {
+
+        static final String[] TYPES = new String[] {"type1", "type2", "type3", "type4"};
+        static final String[] LABELS = new String[] {"LABEL1", "LABEL2",
+                "LABEL3", "LABEL4"};
+
+        public void __constructor__(Context context, UserHandle userHandle,
+                AuthenticatorHelper.OnAccountsUpdateListener listener) {
+
+        }
+
+        @Implementation
+        public String[] getEnabledAccountTypes() {
+            return TYPES;
+        }
+
+        @Implementation
+        public CharSequence getLabelForType(Context context, final String accountType) {
+            if (TextUtils.equals(accountType, TYPES[0])) {
+                return LABELS[0];
+            } else if (TextUtils.equals(accountType, TYPES[1])) {
+                return LABELS[1];
+            } else if (TextUtils.equals(accountType, TYPES[2])) {
+                return LABELS[2];
+            } else if (TextUtils.equals(accountType, TYPES[3])) {
+                return LABELS[3];
+            }
+            return "no_label";
+        }
     }
 }

@@ -19,16 +19,16 @@ import static android.provider.Settings.EXTRA_AUTHORITIES;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.UserInfo;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
+import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -84,10 +84,27 @@ public class AccountDashboardFragment extends DashboardFragment {
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                UserInfo info = mContext.getSystemService(UserManager.class).getUserInfo(
-                        UserHandle.myUserId());
-                mSummaryLoader.setSummary(this,
-                        mContext.getString(R.string.users_and_accounts_summary, info.name));
+                final AuthenticatorHelper authHelper = new AuthenticatorHelper(mContext,
+                        UserHandle.of(UserHandle.myUserId()), null /* OnAccountsUpdateListener */);
+                final String[] types = authHelper.getEnabledAccountTypes();
+
+                final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
+
+                CharSequence summary = null;
+
+                // Show up to 3 account types
+                final int size = Math.min(3, types.length);
+
+                for (int i = 0; i < size; i++) {
+                    final CharSequence label = authHelper.getLabelForType(mContext, types[i]);
+                    if (summary == null) {
+                        summary = bidiFormatter.unicodeWrap(label);
+                    } else {
+                        summary = mContext.getString(R.string.join_many_items_middle, summary,
+                                bidiFormatter.unicodeWrap(label));
+                    }
+                }
+                mSummaryLoader.setSummary(this, summary);
             }
         }
     }
