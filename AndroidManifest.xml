@@ -146,7 +146,7 @@
                 android:parentActivityName="Settings">
         </activity>
 
-        <activity android:name="CreateShortcut"
+        <activity android:name=".shortcut.CreateShortcut"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT"/>

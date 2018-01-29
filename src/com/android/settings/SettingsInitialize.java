@@ -34,6 +34,8 @@ import static android.content.pm.PackageManager.GET_META_DATA;
 import static android.content.pm.PackageManager.GET_RESOLVED_FILTER;
 import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
 
+import com.android.settings.shortcut.CreateShortcut;
+
 /**
  * Listens to {@link Intent.ACTION_PRE_BOOT_COMPLETED} and {@link Intent.ACTION_USER_INITIALIZED}
  * performs setup steps for a managed profile (disables the launcher icon of the Settings app,
