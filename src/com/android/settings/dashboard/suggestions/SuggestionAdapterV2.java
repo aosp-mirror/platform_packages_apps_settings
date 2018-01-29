@@ -18,6 +18,8 @@ package com.android.settings.dashboard.suggestions;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.service.settings.suggestions.Suggestion;
 import android.support.v7.widget.RecyclerView;
@@ -34,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapterV2.DashboardItemHolder;
 import com.android.settings.dashboard.DashboardAdapterV2.IconCache;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -109,7 +112,12 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
             mSuggestionsShownLogged.add(id);
         }
         mConfig.setCardLayout(holder, suggestionCount, position);
-        holder.icon.setImageDrawable(mCache.getIcon(suggestion.getIcon()));
+        final Icon icon = suggestion.getIcon();
+        final Drawable drawable = mCache.getIcon(icon);
+        if (drawable != null && TextUtils.equals(icon.getResPackage(), mContext.getPackageName())) {
+            drawable.setTint(Utils.getColorAccent(mContext));
+        }
+        holder.icon.setImageDrawable(drawable);
         holder.title.setText(suggestion.getTitle());
         holder.title.setSingleLine(suggestionCount == 1);
 

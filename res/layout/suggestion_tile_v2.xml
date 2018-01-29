@@ -18,7 +18,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/suggestion_card"
-    android:layout_width="328dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
@@ -65,7 +65,7 @@
             android:layout_marginEnd="12dp"
             android:singleLine="true"
             android:textAppearance="@style/TextAppearance.SuggestionTitleV2"
-            android:ellipsize="marquee"
+            android:ellipsize="end"
             android:fadingEdge="horizontal" />
 
         <TextView
