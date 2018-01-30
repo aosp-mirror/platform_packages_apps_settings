@@ -15,7 +15,8 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:settings="http://schemas.android.com/apk/res-auto">
+        xmlns:settings="http://schemas.android.com/apk/res-auto"
+        settings:initialExpandedChildrenCount="500">
 
     <com.android.settings.applications.LayoutPreference
         android:key="pref_app_header"
@@ -25,24 +26,24 @@
         android:key="block"
         android:layout="@layout/styled_switch_bar" />
 
+    <com.android.settings.notification.NotificationFooterPreference
+        android:key="block_desc" />
+
+    <!-- Channels/Channel groups added here -->
+
     <!-- Show badge -->
     <com.android.settingslib.RestrictedSwitchPreference
         android:key="badge"
         android:title="@string/notification_badge_title"
+        android:order="501"
         settings:useAdditionalSummary="true"
+        settings:allowDividerAbove="true"
         settings:restrictedSwitchSummary="@string/enabled_by_admin" />
-
-    <!-- Channels/Channel groups added here -->
 
     <Preference
         android:key="app_link"
         android:title="@string/app_settings_link"
-        android:order="500"
-        settings:allowDividerAbove="true"/>
-
-    <com.android.settings.notification.NotificationFooterPreference
-        android:key="block_desc"
-        android:order="1000" />
+        android:order="502" />
 
     <com.android.settings.notification.NotificationFooterPreference
         android:key="desc"

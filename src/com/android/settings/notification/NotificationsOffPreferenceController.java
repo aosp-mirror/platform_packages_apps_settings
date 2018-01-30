@@ -57,7 +57,6 @@ public class NotificationsOffPreferenceController extends NotificationPreference
                 preference.setTitle(R.string.app_notifications_off_desc);
             }
         }
-        preference.setEnabled(false);
         preference.setSelectable(false);
     }
 }

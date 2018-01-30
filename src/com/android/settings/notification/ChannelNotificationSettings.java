@@ -79,7 +79,8 @@ public class ChannelNotificationSettings extends NotificationSettingsBase {
         mControllers = new ArrayList<>();
         mControllers.add(new HeaderPreferenceController(context, this));
         mControllers.add(new BlockPreferenceController(context, mImportanceListener, mBackend));
-        mControllers.add(new ImportancePreferenceController(context));
+        mControllers.add(new ImportancePreferenceController(
+                context, mImportanceListener, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
                 context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,

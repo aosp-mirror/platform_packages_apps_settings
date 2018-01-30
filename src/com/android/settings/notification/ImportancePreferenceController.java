@@ -16,40 +16,38 @@
 
 package com.android.settings.notification;
 
+import static android.app.NotificationChannel.USER_LOCKED_SOUND;
+import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
+import static android.app.NotificationManager.IMPORTANCE_HIGH;
+import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.provider.Settings;
+import android.media.RingtoneManager;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
+import com.android.settings.RestrictedListPreference;
 import com.android.settings.core.PreferenceControllerMixin;
 
 public class ImportancePreferenceController extends NotificationPreferenceController
-        implements PreferenceControllerMixin {
+        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener  {
 
     private static final String KEY_IMPORTANCE = "importance";
+    private NotificationSettingsBase.ImportanceListener mImportanceListener;
 
-    // Ironically doesn't take an importance listener because the importance is not changed
-    // by this controller's preference but by the screen it links to.
-    public ImportancePreferenceController(Context context) {
-        super(context, null);
+    public ImportancePreferenceController(Context context,
+            NotificationSettingsBase.ImportanceListener importanceListener,
+            NotificationBackend backend) {
+        super(context, backend);
+        mImportanceListener = importanceListener;
     }
 
     @Override
     public String getPreferenceKey() {
         return KEY_IMPORTANCE;
-    }
-    
-    private int getMetricsCategory() {
-        return MetricsProto.MetricsEvent.NOTIFICATION_TOPIC_NOTIFICATION;
     }
 
     @Override
@@ -63,51 +61,82 @@ public class ImportancePreferenceController extends NotificationPreferenceContro
         return !NotificationChannel.DEFAULT_CHANNEL_ID.equals(mChannel.getId());
     }
 
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow!= null && mChannel != null) {
             preference.setEnabled(mAdmin == null && isChannelConfigurable());
-            Bundle channelArgs = new Bundle();
-            channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mAppRow.uid);
-            channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mAppRow.pkg);
-            channelArgs.putString(Settings.EXTRA_CHANNEL_ID, mChannel.getId());
-            if (preference.isEnabled()) {
-                Intent channelIntent = Utils.onBuildStartFragmentIntent(mContext,
-                        ChannelImportanceSettings.class.getName(),
-                        channelArgs, null,
-                        R.string.notification_importance_title, null,
-                        false, getMetricsCategory());
-                preference.setIntent(channelIntent);
-                preference.setSummary(getImportanceSummary(mContext, mChannel));
+            preference.setSummary(getImportanceSummary(mChannel));
+
+            int importances = IMPORTANCE_HIGH - IMPORTANCE_MIN + 1;
+            CharSequence[] entries = new CharSequence[importances];
+            CharSequence[] values = new CharSequence[importances];
+
+            int index = 0;
+            for (int i = IMPORTANCE_HIGH; i >= IMPORTANCE_MIN; i--) {
+                NotificationChannel channel = new NotificationChannel("", "", i);
+                entries[index] = getImportanceSummary(channel);
+                values[index] = String.valueOf(i);
+                index++;
             }
+
+            RestrictedListPreference pref = (RestrictedListPreference) preference;
+            pref.setEntries(entries);
+            pref.setEntryValues(values);
+            pref.setValue(String.valueOf(mChannel.getImportance()));
         }
     }
 
-    protected static String getImportanceSummary(Context context, NotificationChannel channel) {
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (mChannel != null) {
+            final int importance = Integer.parseInt((String) newValue);
+
+            // If you are moving from an importance level without sound to one with sound,
+            // but the sound you had selected was "Silence",
+            // then set sound for this channel to your default sound,
+            // because you probably intended to cause this channel to actually start making sound.
+            if (mChannel.getImportance() < IMPORTANCE_DEFAULT
+                    && !SoundPreferenceController.hasValidSound(mChannel)
+                    && importance >= IMPORTANCE_DEFAULT) {
+                mChannel.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
+                        mChannel.getAudioAttributes());
+                mChannel.lockFields(USER_LOCKED_SOUND);
+            }
+
+            mChannel.setImportance(importance);
+            mChannel.lockFields(NotificationChannel.USER_LOCKED_IMPORTANCE);
+            saveChannel();
+            mImportanceListener.onImportanceChanged();
+        }
+        return true;
+    }
+
+    protected String getImportanceSummary(NotificationChannel channel) {
         String summary = "";
         int importance = channel.getImportance();
         switch (importance) {
             case IMPORTANCE_UNSPECIFIED:
-                summary = context.getString(R.string.notification_importance_unspecified);
+                summary = mContext.getString(R.string.notification_importance_unspecified);
                 break;
             case NotificationManager.IMPORTANCE_MIN:
-                summary = context.getString(R.string.notification_importance_min);
+                summary = mContext.getString(R.string.notification_importance_min);
                 break;
             case NotificationManager.IMPORTANCE_LOW:
-                summary = context.getString(R.string.notification_importance_low);
+                summary = mContext.getString(R.string.notification_importance_low);
                 break;
             case NotificationManager.IMPORTANCE_DEFAULT:
                 if (SoundPreferenceController.hasValidSound(channel)) {
-                    summary = context.getString(R.string.notification_importance_default);
+                    summary = mContext.getString(R.string.notification_importance_default);
                 } else {
-                    summary = context.getString(R.string.notification_importance_low);
+                    summary = mContext.getString(R.string.notification_importance_low);
                 }
                 break;
             case NotificationManager.IMPORTANCE_HIGH:
             case NotificationManager.IMPORTANCE_MAX:
                 if (SoundPreferenceController.hasValidSound(channel)) {
-                    summary = context.getString(R.string.notification_importance_high);
+                    summary = mContext.getString(R.string.notification_importance_high);
                 } else {
-                    summary = context.getString(R.string.notification_importance_high_silent);
+                    summary = mContext.getString(R.string.notification_importance_high_silent);
                 }
                 break;
             default:
