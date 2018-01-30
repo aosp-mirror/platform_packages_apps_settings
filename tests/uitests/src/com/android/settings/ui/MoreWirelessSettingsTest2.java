@@ -38,7 +38,7 @@ import android.util.Log;
 /**
  * Additional tests for Wifi Settings.
  */
-public class WirelessNetworkSettingsAdditionalTests extends InstrumentationTestCase {
+public class MoreWirelessSettingsTest2 extends InstrumentationTestCase {
     // These back button presses are performed in tearDown() to exit Wifi
     // Settings sub-menus that a test might finish in. This number should be
     // high enough to account for the deepest sub-menu a test might enter.
