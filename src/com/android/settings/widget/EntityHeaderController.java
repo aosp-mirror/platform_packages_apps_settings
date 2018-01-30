@@ -37,7 +37,6 @@ import android.support.annotation.IntDef;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,10 +47,8 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -285,17 +282,10 @@ public class EntityHeaderController {
         entityHeaderContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FeatureFlagUtils.isEnabled(mAppContext, FeatureFlags.APP_INFO_V2)) {
-                    AppInfoBase.startAppInfoFragment(
-                            AppInfoDashboardFragment.class, R.string.application_info_label,
-                            mPackageName, mUid, mFragment, 0 /* request */,
-                            mMetricsCategory);
-                } else {
-                    AppInfoBase.startAppInfoFragment(
-                            InstalledAppDetails.class, R.string.application_info_label,
-                            mPackageName, mUid, mFragment, 0 /* request */,
-                            mMetricsCategory);
-                }
+                AppInfoBase.startAppInfoFragment(
+                    AppInfoDashboardFragment.class, R.string.application_info_label,
+                    mPackageName, mUid, mFragment, 0 /* request */,
+                    mMetricsCategory);
             }
         });
         return;
