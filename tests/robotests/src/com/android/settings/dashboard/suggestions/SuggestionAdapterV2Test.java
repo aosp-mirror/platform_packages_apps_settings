@@ -17,12 +17,19 @@ package com.android.settings.dashboard.suggestions;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.Icon;
 import android.service.settings.suggestions.Suggestion;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +53,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,6 +212,67 @@ public class SuggestionAdapterV2Test {
         verify(mFeatureFactory.suggestionsFeatureProvider).dismissSuggestion(
             mActivity, mSuggestionControllerMixin, suggestion);
         verify(callback).onSuggestionClosed(suggestion);
+    }
+
+    @Test
+    public void onBindViewHolder_differentPackage_shouldNotTintIcon()
+            throws PendingIntent.CanceledException {
+        final Icon icon = mock(Icon.class);
+        when(icon.getResPackage()).thenReturn("pkg1");
+        when(mActivity.getPackageName()).thenReturn("pkg2");
+        final Suggestion suggestion = new Suggestion.Builder("pkg1")
+            .setPendingIntent(mock(PendingIntent.class))
+            .setIcon(icon)
+            .build();
+        final List<Suggestion> suggestions = new ArrayList<>();
+        suggestions.add(suggestion);
+        mSuggestionAdapter = new SuggestionAdapterV2(mActivity, mSuggestionControllerMixin,
+            null /* savedInstanceState */, null /* callback */, null /* lifecycle */);
+        mSuggestionAdapter.setSuggestions(suggestions);
+        mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
+            new FrameLayout(RuntimeEnvironment.application),
+            mSuggestionAdapter.getItemViewType(0));
+        DashboardAdapterV2.IconCache cache = mock(DashboardAdapterV2.IconCache.class);
+        final Drawable drawable = mock(Drawable.class);
+        when(cache.getIcon(icon)).thenReturn(drawable);
+        ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
+
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+
+        verify(drawable, never()).setTint(anyInt());
+    }
+
+    @Test
+    public void onBindViewHolder_samePackage_shouldTintIcon()
+            throws PendingIntent.CanceledException {
+        final Icon icon = mock(Icon.class);
+        final String packageName = "pkg1";
+        when(icon.getResPackage()).thenReturn(packageName);
+        when(mActivity.getPackageName()).thenReturn(packageName);
+        final Suggestion suggestion = new Suggestion.Builder(packageName)
+            .setPendingIntent(mock(PendingIntent.class))
+            .setIcon(icon)
+            .build();
+        final List<Suggestion> suggestions = new ArrayList<>();
+        suggestions.add(suggestion);
+        mSuggestionAdapter = new SuggestionAdapterV2(mActivity, mSuggestionControllerMixin,
+            null /* savedInstanceState */, null /* callback */, null /* lifecycle */);
+        mSuggestionAdapter.setSuggestions(suggestions);
+        mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
+            new FrameLayout(RuntimeEnvironment.application),
+            mSuggestionAdapter.getItemViewType(0));
+        DashboardAdapterV2.IconCache cache = mock(DashboardAdapterV2.IconCache.class);
+        final Drawable drawable = mock(Drawable.class);
+        when(cache.getIcon(icon)).thenReturn(drawable);
+        ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
+        TypedArray typedArray = mock(TypedArray.class);
+        final int colorAccent = 1234;
+        when(mActivity.obtainStyledAttributes(any())).thenReturn(typedArray);
+        when(typedArray.getColor(anyInt(), anyInt())).thenReturn(colorAccent);
+
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+
+        verify(drawable).setTint(colorAccent);
     }
 
     private void setupSuggestions(Context context, List<Suggestion> suggestions) {
