@@ -90,8 +90,6 @@ public class BrightnessLevelPreferenceControllerTest {
         controller.onStart();
 
         assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isNotEmpty();
-        assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS))).isNotEmpty();
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR))).isNotEmpty();
@@ -110,8 +108,6 @@ public class BrightnessLevelPreferenceControllerTest {
         controller.onStart();
         controller.onStop();
 
-        assertThat(shadowContentResolver.getContentObservers(
-            System.getUriFor(System.SCREEN_BRIGHTNESS_MODE))).isEmpty();
         assertThat(shadowContentResolver.getContentObservers(
             System.getUriFor(System.SCREEN_BRIGHTNESS))).isEmpty();
         assertThat(shadowContentResolver.getContentObservers(
@@ -136,11 +132,11 @@ public class BrightnessLevelPreferenceControllerTest {
         System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS_MODE,
             System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
 
-        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0.0f);
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, 31);
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("50%");
+        verify(mPreference).setSummary("31%");
     }
 
     @Test
@@ -175,11 +171,11 @@ public class BrightnessLevelPreferenceControllerTest {
                 System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC);
 
         reset(mPreference);
-        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, 1.5f);
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, 115);
         mController.updateState(mPreference);
         verify(mPreference).setSummary("100%");
 
-        System.putFloat(mContentResolver, System.SCREEN_AUTO_BRIGHTNESS_ADJ, -1.5f);
+        System.putInt(mContentResolver, System.SCREEN_BRIGHTNESS, -10);
         mController.updateState(mPreference);
         verify(mPreference).setSummary("0%");
 

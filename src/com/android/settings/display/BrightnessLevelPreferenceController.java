@@ -45,7 +45,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
 
     private static final String TAG = "BrightnessPrefCtrl";
     private static final String KEY_BRIGHTNESS = "brightness";
-    private static final Uri BRIGHTNESS_MODE_URI;
     private static final Uri BRIGHTNESS_URI;
     private static final Uri BRIGHTNESS_FOR_VR_URI;
     private static final Uri BRIGHTNESS_ADJ_URI;
@@ -59,7 +58,6 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     private Preference mPreference;
 
     static {
-        BRIGHTNESS_MODE_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_MODE);
         BRIGHTNESS_URI = System.getUriFor(System.SCREEN_BRIGHTNESS);
         BRIGHTNESS_FOR_VR_URI = System.getUriFor(System.SCREEN_BRIGHTNESS_FOR_VR);
         BRIGHTNESS_ADJ_URI = System.getUriFor(System.SCREEN_AUTO_BRIGHTNESS_ADJ);
@@ -112,10 +110,8 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
     public void updateState(Preference preference) {
         updatedSummary(preference);
     }
-
     @Override
     public void onStart() {
-        mContentResolver.registerContentObserver(BRIGHTNESS_MODE_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_FOR_VR_URI, false, mBrightnessObserver);
         mContentResolver.registerContentObserver(BRIGHTNESS_ADJ_URI, false, mBrightnessObserver);
@@ -137,18 +133,11 @@ public class BrightnessLevelPreferenceController extends AbstractPreferenceContr
             final double value = System.getInt(mContentResolver, System.SCREEN_BRIGHTNESS_FOR_VR,
                     mMaxBrightness);
             return getPercentage(value, mMinVrBrightness, mMaxVrBrightness);
+        } else {
+            final double value = Settings.System.getInt(mContentResolver, System.SCREEN_BRIGHTNESS,
+                    mMinBrightness);
+            return getPercentage(value, mMinBrightness, mMaxBrightness);
         }
-        final int brightnessMode = Settings.System.getInt(mContentResolver,
-                System.SCREEN_BRIGHTNESS_MODE, System.SCREEN_BRIGHTNESS_MODE_MANUAL);
-        if (brightnessMode == System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC) {
-            final float value = Settings.System.getFloat(mContentResolver,
-                    System.SCREEN_AUTO_BRIGHTNESS_ADJ, 0);
-            // auto brightness is between -1 and 1
-            return getPercentage(value, -1, 1);
-        }
-        final double value = Settings.System.getInt(mContentResolver, System.SCREEN_BRIGHTNESS,
-                mMinBrightness);
-        return getPercentage(value, mMinBrightness, mMaxBrightness);
     }
 
     private double getPercentage(double value, int min, int max) {
