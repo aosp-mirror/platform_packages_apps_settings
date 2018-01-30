@@ -34,7 +34,7 @@ public interface SuggestionFeatureProvider {
     /**
      * Whether or not the whole suggestion feature is enabled.
      */
-    boolean isSuggestionV2Enabled(Context context);
+    boolean isSuggestionEnabled(Context context);
 
     /**
      * Returns the component name for SuggestionService.

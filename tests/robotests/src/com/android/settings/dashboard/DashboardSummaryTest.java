@@ -16,6 +16,7 @@
 
 package com.android.settings.dashboard;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doNothing;
@@ -34,9 +35,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
 import com.android.settingslib.drawer.DashboardCategory;
+import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -67,10 +70,12 @@ public class DashboardSummaryTest {
 
     private Context mContext;
     private DashboardSummary mSummary;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = RuntimeEnvironment.application;
         mSummary = spy(new DashboardSummary());
         ReflectionHelpers.setField(mSummary, "mAdapter", mAdapter);
@@ -80,6 +85,28 @@ public class DashboardSummaryTest {
         ReflectionHelpers.setField(mSummary, "mLayoutManager", mLayoutManager);
         ReflectionHelpers.setField(mSummary, "mConditionManager", mConditionManager);
         ReflectionHelpers.setField(mSummary, "mSummaryLoader", mSummaryLoader);
+    }
+
+    @Test
+    public void onAttach_suggestionDisabled_shouldNotStartSuggestionControllerMixin() {
+        when(mFeatureFactory.suggestionsFeatureProvider.isSuggestionEnabled(any(Context.class)))
+                .thenReturn(false);
+
+        mSummary.onAttach(mContext);
+        final SuggestionControllerMixin mixin = ReflectionHelpers
+                .getField(mSummary, "mSuggestionControllerMixin");
+        assertThat(mixin).isNull();
+    }
+
+    @Test
+    public void onAttach_suggestionEnabled_shouldStartSuggestionControllerMixin() {
+        when(mFeatureFactory.suggestionsFeatureProvider.isSuggestionEnabled(any(Context.class)))
+                .thenReturn(true);
+
+        mSummary.onAttach(mContext);
+        final SuggestionControllerMixin mixin = ReflectionHelpers
+                .getField(mSummary, "mSuggestionControllerMixin");
+        assertThat(mixin).isNotNull();
     }
 
     @Test
