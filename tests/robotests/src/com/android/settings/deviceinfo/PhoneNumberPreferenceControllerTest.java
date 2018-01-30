@@ -16,6 +16,9 @@
 
 package com.android.settings.deviceinfo;
 
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
+
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -71,6 +74,20 @@ public class PhoneNumberPreferenceControllerTest {
         doReturn(mSubscriptionInfo).when(mController).getSubscriptionInfo(anyInt());
         doReturn(mSecondPreference).when(mController).createNewPreference(mContext);
         when(mPreference.isVisible()).thenReturn(true);
+    }
+
+    @Test
+    public void isAvailable_shouldBeTrueIfCallCapable() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(true);
+
+        assertTrue(mController.isAvailable());
+    }
+
+    @Test
+    public void isAvailable_shouldBeFalseIfNotCallCapable() {
+        when(mTelephonyManager.isVoiceCapable()).thenReturn(false);
+
+        assertFalse(mController.isAvailable());
     }
 
     @Test
