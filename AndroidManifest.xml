@@ -3294,6 +3294,11 @@
             </intent-filter>
         </receiver>
 
+        <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
+             PendingIntent to it-->
+        <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
+                  android:exported="false" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
