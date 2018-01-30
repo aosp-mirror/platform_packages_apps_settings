@@ -61,7 +61,6 @@ public class WirelessNetworkSettingsTests {
 
     @Before
     public void setUp() throws Exception {
-
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         try {
             mDevice.setOrientationNatural();
