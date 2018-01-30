@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo;
+package com.android.settings.system;
 
 import android.content.Context;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 public class AdditionalSystemUpdatePreferenceController extends BasePreferenceController {
 
