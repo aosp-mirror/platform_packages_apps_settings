@@ -18,11 +18,14 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -86,6 +89,9 @@ public class MasterClearTest {
     @Mock
     private Activity mMockActivity;
 
+    @Mock
+    private Intent mMockIntent;
+
     private ShadowActivity mShadowActivity;
     private ShadowAccountManager mShadowAccountManager;
     private Activity mActivity;
@@ -110,7 +116,7 @@ public class MasterClearTest {
         MockitoAnnotations.initMocks(this);
         mMasterClear = spy(new MasterClear());
         mActivity = Robolectric.setupActivity(Activity.class);
-        mShadowActivity = shadowOf(mActivity);
+        mShadowActivity = shadowOf(mActivity);https://stackoverflow.com/questions/14889951/how-to-verify-a-method-is-called-two-times-with-mockito-verify
         // mShadowAccountManager = shadowOf(AccountManager.get(mActivity));
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
@@ -213,38 +219,115 @@ public class MasterClearTest {
     }
 
     @Test
-    public void testTryShowAccountConfirmation_unsupported() {
-        when(mMasterClear.getActivity()).thenReturn(mActivity);
-        /* Using the default resources, account confirmation shouldn't trigger */
-        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+    public void testOnActivityResultInternal_invalideRequest() {
+        int invalidRequestCode = -1;
+        doReturn(false).when(mMasterClear).isValidRequestCode(eq(invalidRequestCode));
+
+        mMasterClear.onActivityResultInternal(invalidRequestCode, Activity.RESULT_OK, null);
+
+        verify(mMasterClear, times(1)).isValidRequestCode(eq(invalidRequestCode));
+        verify(mMasterClear, times(0)).establishInitialState();
+        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
+        verify(mMasterClear, times(0)).showFinalConfirmation();
     }
 
     @Test
-    public void testTryShowAccountConfirmation_no_relevant_accounts() {
+    public void testOnActivityResultInternal_resultCanceled() {
+        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        doNothing().when(mMasterClear).establishInitialState();
+
+        mMasterClear.onActivityResultInternal(
+            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED, null);
+
+        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        verify(mMasterClear, times(1)).establishInitialState();
+        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
+        verify(mMasterClear, times(0)).showFinalConfirmation();
+    }
+
+    @Test
+    public void testOnActivityResultInternal_keyguardRequestTriggeringConfirmAccount() {
+        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        doReturn(mMockIntent).when(mMasterClear).getAccountConfirmationIntent();
+        doNothing().when(mMasterClear).showAccountCredentialConfirmation(eq(mMockIntent));
+
+        mMasterClear.onActivityResultInternal(
+            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        verify(mMasterClear, times(0)).establishInitialState();
+        verify(mMasterClear, times(1)).getAccountConfirmationIntent();
+        verify(mMasterClear, times(1)).showAccountCredentialConfirmation(eq(mMockIntent));
+    }
+
+    @Test
+    public void testOnActivityResultInternal_keyguardRequestTriggeringShowFinal() {
+        doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        doReturn(null).when(mMasterClear).getAccountConfirmationIntent();
+        doNothing().when(mMasterClear).showFinalConfirmation();
+
+        mMasterClear.onActivityResultInternal(
+            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
+        verify(mMasterClear, times(0)).establishInitialState();
+        verify(mMasterClear, times(1)).getAccountConfirmationIntent();
+        verify(mMasterClear, times(1)).showFinalConfirmation();
+    }
+
+    @Test
+    public void testOnActivityResultInternal_confirmRequestTriggeringShowFinal() {
+        doReturn(true).when(mMasterClear)
+            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+        doNothing().when(mMasterClear).showFinalConfirmation();
+
+        mMasterClear.onActivityResultInternal(
+            MasterClear.CREDENTIAL_CONFIRM_REQUEST, Activity.RESULT_OK, null);
+
+        verify(mMasterClear, times(1))
+            .isValidRequestCode(eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+        verify(mMasterClear, times(0)).establishInitialState();
+        verify(mMasterClear, times(0)).getAccountConfirmationIntent();
+        verify(mMasterClear, times(1)).showFinalConfirmation();
+    }
+
+    @Test
+    public void testGetAccountConfirmationIntent_unsupported() {
+        when(mMasterClear.getActivity()).thenReturn(mActivity);
+        /* Using the default resources, account confirmation shouldn't trigger */
+        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
+    }
+
+    @Test
+    public void testGetAccountConfirmationIntent_no_relevant_accounts() {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
-        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
-        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
+        when(mMockActivity.getString(R.string.account_confirmation_package))
+            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class))
+            .thenReturn(TEST_CONFIRMATION_CLASS);
 
         Account[] accounts = new Account[0];
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
-        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
     }
 
     @Test
-    public void testTryShowAccountConfirmation_unresolved() {
+    public void testGetAccountConfirmationIntent_unresolved() {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
-        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
-        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
+        when(mMockActivity.getString(R.string.account_confirmation_package))
+            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class))
+            .thenReturn(TEST_CONFIRMATION_CLASS);
         Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
         when(mAccountManager.getAccountsByType(TEST_ACCOUNT_TYPE)).thenReturn(accounts);
         // The package manager should not resolve the confirmation intent targeting the non-existent
         // confirmation package.
         when(mMockActivity.getPackageManager()).thenReturn(mPackageManager);
-        assertThat(mMasterClear.tryShowAccountConfirmation()).isFalse();
+        assertThat(mMasterClear.getAccountConfirmationIntent()).isNull();
     }
 
     @Test
@@ -252,8 +335,10 @@ public class MasterClearTest {
         when(mMasterClear.getActivity()).thenReturn(mMockActivity);
         // Only try to show account confirmation if the appropriate resource overlays are available.
         when(mMockActivity.getString(R.string.account_type)).thenReturn(TEST_ACCOUNT_TYPE);
-        when(mMockActivity.getString(R.string.account_confirmation_package)).thenReturn(TEST_CONFIRMATION_PACKAGE);
-        when(mMockActivity.getString(R.string.account_confirmation_class)).thenReturn(TEST_CONFIRMATION_CLASS);
+        when(mMockActivity.getString(R.string.account_confirmation_package))
+            .thenReturn(TEST_CONFIRMATION_PACKAGE);
+        when(mMockActivity.getString(R.string.account_confirmation_class))
+            .thenReturn(TEST_CONFIRMATION_CLASS);
         // Add accounts to trigger the search for a resolving intent.
         Account[] accounts = new Account[] { new Account(TEST_ACCOUNT_NAME, TEST_ACCOUNT_TYPE) };
         when(mMockActivity.getSystemService(Context.ACCOUNT_SERVICE)).thenReturn(mAccountManager);
@@ -268,10 +353,18 @@ public class MasterClearTest {
         resolveInfo.activityInfo = activityInfo;
         when(mPackageManager.resolveActivity(any(), eq(0))).thenReturn(resolveInfo);
 
-        // Finally mock out the startActivityForResultCall
-        doNothing().when(mMasterClear).startActivityForResult(any(), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+        Intent actualIntent = mMasterClear.getAccountConfirmationIntent();
+        assertEquals(TEST_CONFIRMATION_PACKAGE, actualIntent.getComponent().getPackageName());
+        assertEquals(TEST_CONFIRMATION_CLASS, actualIntent.getComponent().getClassName());
+    }
 
-        assertThat(mMasterClear.tryShowAccountConfirmation()).isTrue();
+    public void testShowAccountCredentialConfirmation() {
+        // Finally mock out the startActivityForResultCall
+        doNothing().when(mMasterClear)
+            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
+        mMasterClear.showAccountCredentialConfirmation(mMockIntent);
+        verify(mMasterClear, times(1))
+            .startActivityForResult(eq(mMockIntent), eq(MasterClear.CREDENTIAL_CONFIRM_REQUEST));
     }
 
     @Test
