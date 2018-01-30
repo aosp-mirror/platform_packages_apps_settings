@@ -16,7 +16,7 @@
 
 package com.android.settings.security.trustagent;
 
-import static com.android.settings.security.SecuritySettingsV2.CHANGE_TRUST_AGENT_SETTINGS;
+import static com.android.settings.security.SecuritySettings.CHANGE_TRUST_AGENT_SETTINGS;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,7 +35,7 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.security.SecurityFeatureProvider;
-import com.android.settings.security.SecuritySettingsV2;
+import com.android.settings.security.SecuritySettings;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -59,12 +59,12 @@ public class TrustAgentListPreferenceController extends AbstractPreferenceContro
 
     private final LockPatternUtils mLockPatternUtils;
     private final TrustAgentManager mTrustAgentManager;
-    private final SecuritySettingsV2 mHost;
+    private final SecuritySettings mHost;
 
     private Intent mTrustAgentClickIntent;
     private PreferenceCategory mSecurityCategory;
 
-    public TrustAgentListPreferenceController(Context context, SecuritySettingsV2 host,
+    public TrustAgentListPreferenceController(Context context, SecuritySettings host,
             Lifecycle lifecycle) {
         super(context);
         final SecurityFeatureProvider provider = FeatureFactory.getFactory(context)

@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.shortcut;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.any;
@@ -39,8 +37,12 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.android.settings.R;
+import com.android.settings.Settings;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,12 +57,6 @@ import java.util.List;
 
 /**
  * Tests for {@link CreateShortcutTest}
- *
- m SettingsTests &&
- adb install \
- -r -g  ${ANDROID_PRODUCT_OUT}/data/app/SettingsTests/SettingsTests.apk &&
- adb shell am instrument -e class com.android.settings.CreateShortcutTest \
- -w com.android.settings.tests/android.support.test.runner.AndroidJUnitRunner
  */
 @RunWith(AndroidJUnit4.class)
 @SmallTest
@@ -71,8 +67,10 @@ public class CreateShortcutTest {
     private Instrumentation mInstrumentation;
     private Context mContext;
 
-    @Mock ShortcutManager mShortcutManager;
-    @Captor ArgumentCaptor<List<ShortcutInfo>> mListCaptor;
+    @Mock
+    ShortcutManager mShortcutManager;
+    @Captor
+    ArgumentCaptor<List<ShortcutInfo>> mListCaptor;
 
     @Before
     public void setup() {
@@ -84,15 +82,17 @@ public class CreateShortcutTest {
     @Test
     public void test_layoutDoesNotHaveCancelButton() {
         mInstrumentation.startActivitySync(new Intent(Intent.ACTION_CREATE_SHORTCUT)
-                .setClassName(mContext, CreateShortcut.class.getName()));
-        onView(withText(R.string.cancel)).check(doesNotExist());
+                .setClassName(mContext, CreateShortcut.class.getName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        onView(ViewMatchers.withText(R.string.cancel)).check(doesNotExist());
     }
 
     @Test
     public void createResultIntent() {
         CreateShortcut orgActivity = (CreateShortcut) mInstrumentation.startActivitySync(
                 new Intent(Intent.ACTION_CREATE_SHORTCUT)
-                        .setClassName(mContext, CreateShortcut.class.getName()));
+                        .setClassName(mContext, CreateShortcut.class.getName())
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         CreateShortcut activity = spy(orgActivity);
         doReturn(mShortcutManager).when(activity).getSystemService(eq(Context.SHORTCUT_SERVICE));
 

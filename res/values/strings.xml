@@ -2579,6 +2579,7 @@
 
     <!-- [CHAR LIMIT=30] Title of the preference that opens the Ambient display settings screen. -->
     <string name="ambient_display_screen_title">Ambient display</string>
+
     <!-- [CHAR LIMIT=50] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to be always on -->
     <string name="ambient_display_screen_summary_always_on">Always on / Increased battery usage</string>
     <!-- [CHAR LIMIT=30] Summary of the preference that opens the Ambient display settings screen, when Ambient display is set to show when new notifications come in. -->
@@ -6714,6 +6715,8 @@
     <string name="keywords_sim_status">network, mobile network state, service state, signal strength, mobile network type, roaming, iccid</string>
     <string name="keywords_model_and_hardware">serial number, hardware version</string>
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
+    <!-- Search keyword for Ambient display settings screen. -->
+    <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -8776,6 +8779,9 @@
 
     <!-- [CHAR LIMIT=25] Title of developer tile to toggle layer trace -->
     <string name="layer_trace_quick_settings_title">Surface Trace</string>
+
+    <!-- Template for formatting country and language. eg Canada - French [CHAR LIMIT=NONE]-->
+    <string name="support_country_format"><xliff:g id="country" example="Canada">%1$s</xliff:g> - <xliff:g id="language" example="French">%2$s</xliff:g></string>
 
     <!-- [CHAR LIMIT=60] Title of work profile setting page -->
     <string name="managed_profile_settings_title">Work profile settings</string>

@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -45,19 +44,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.DeviceAdminAdd;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.EntityHeaderController;
 import com.android.settings.widget.PreferenceCategoryController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
@@ -89,6 +84,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     // Menu identifiers
     private static final int UNINSTALL_ALL_USERS_MENU = 1;
     private static final int UNINSTALL_UPDATES = 2;
+    static final int FORCE_STOP_MENU = 3;
 
     // Result code identifiers
     @VisibleForTesting
@@ -103,7 +99,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     // Dialog identifiers used in showDialog
     private static final int DLG_BASE = 0;
-    private static final int DLG_FORCE_STOP = DLG_BASE + 1;
+    static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
 
@@ -141,6 +137,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     private InstantAppButtonsPreferenceController mInstantAppButtonPreferenceController;
     private AppActionButtonPreferenceController mAppActionButtonPreferenceController;
+    private ForceStopOptionsMenuController mForceStopOptionsMenuController;
 
     /**
      * Callback to invoke when app info has been changed.
@@ -172,6 +169,9 @@ public class AppInfoDashboardFragment extends DashboardFragment
             return;
         }
 
+        mForceStopOptionsMenuController =
+            new ForceStopOptionsMenuController(activity, this /* parent */, mDpm,
+                mMetricsFeatureProvider, getLifecycle());
         setHasOptionsMenu(true);
     }
 
@@ -268,11 +268,19 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return mAppEntry;
     }
 
+    void setAppEntry(ApplicationsState.AppEntry appEntry) {
+        mAppEntry = appEntry;
+    }
+
     PackageInfo getPackageInfo() {
         if (mAppEntry == null) {
             retrieveAppEntry();
         }
         return mPackageInfo;
+    }
+
+    ApplicationsState getAppState() {
+        return mState;
     }
 
     @Override
@@ -315,6 +323,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         if (mFinishing) {
             return;
         }
+        super.onPrepareOptionsMenu(menu);
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
@@ -335,7 +344,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 uninstallPkg(mAppEntry.info.packageName, false, false);
                 return true;
         }
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -465,18 +474,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
                         })
                         .setNegativeButton(R.string.dlg_cancel, null)
                         .create();
-            case DLG_FORCE_STOP:
-                return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.force_stop_dlg_title))
-                        .setMessage(getActivity().getText(R.string.force_stop_dlg_text))
-                        .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Force stop
-                                forceStopPackage(mAppEntry.info.packageName);
-                            }
-                        })
-                        .setNegativeButton(R.string.dlg_cancel, null)
-                        .create();
+        }
+        final AlertDialog dialog = mForceStopOptionsMenuController.createDialog(id);
+        if (dialog != null) {
+            return dialog;
         }
         return mInstantAppButtonPreferenceController.createDialog(id);
     }
@@ -491,21 +492,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
                 getContext(), MetricsEvent.ACTION_SETTINGS_UNINSTALL_APP);
         startActivityForResult(uninstallIntent, REQUEST_UNINSTALL);
         mDisableAfterUninstall = andDisable;
-    }
-
-    private void forceStopPackage(String pkgName) {
-        mMetricsFeatureProvider.action(getContext(), MetricsEvent.ACTION_APP_FORCE_STOP, pkgName);
-        final ActivityManager am = (ActivityManager) getActivity().getSystemService(
-                Context.ACTIVITY_SERVICE);
-        Log.d(TAG, "Stopping package " + pkgName);
-        am.forceStopPackage(pkgName);
-        final int userId = UserHandle.getUserId(mAppEntry.info.uid);
-        mState.invalidatePackage(pkgName, userId);
-        final AppEntry newEnt = mState.getEntry(pkgName, userId);
-        if (newEnt != null) {
-            mAppEntry = newEnt;
-        }
-        mAppActionButtonPreferenceController.checkForceStop(mAppEntry, mPackageInfo);
     }
 
     public static void startAppInfoFragment(Class<?> fragment, int title,
@@ -565,20 +551,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
             uninstallPkg(packageName, true, false);
         } else {
             uninstallPkg(packageName, false, false);
-        }
-    }
-
-    void handleForceStopButtonClick() {
-        if (mAppEntry == null) {
-            setIntentAndFinish(true, true);
-            return;
-        }
-        if (mAppsControlDisallowedAdmin != null && !mAppsControlDisallowedBySystem) {
-            RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
-                    getActivity(), mAppsControlDisallowedAdmin);
-        } else {
-            showDialogInner(DLG_FORCE_STOP, 0);
-            //forceStopPackage(mAppInfo.packageName);
         }
     }
 
@@ -679,7 +651,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private void setIntentAndFinish(boolean finish, boolean appChanged) {
+    void setIntentAndFinish(boolean finish, boolean appChanged) {
         if (localLOGV) Log.i(TAG, "appChanged="+appChanged);
         final Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);

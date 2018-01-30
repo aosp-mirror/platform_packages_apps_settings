@@ -66,7 +66,7 @@ public class SecuritySettingsLaunchTest {
     public void launchSecuritySettings() throws Exception {
         // Launch Settings
         SettingsHelper.launchSettingsPage(
-                InstrumentationRegistry.getContext(), Settings.ACTION_SECURITY_SETTINGS);
+                InstrumentationRegistry.getTargetContext(), Settings.ACTION_SECURITY_SETTINGS);
         mHelper.scrollVert(false);
         for (String category : CATEGORIES) {
             SettingsTestUtils.assertTitleMatch(mDevice, category);

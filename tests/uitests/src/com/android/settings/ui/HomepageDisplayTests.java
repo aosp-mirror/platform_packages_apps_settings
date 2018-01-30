@@ -16,6 +16,9 @@
 
 package com.android.settings.ui;
 
+import static com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE;
+import static com.android.settings.ui.testutils.SettingsTestUtils.TIMEOUT;
+
 import android.os.RemoteException;
 import android.platform.test.annotations.Presubmit;
 import android.provider.Settings;
@@ -36,9 +39,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.android.settings.ui.testutils.SettingsTestUtils.SETTINGS_PACKAGE;
-import static com.android.settings.ui.testutils.SettingsTestUtils.TIMEOUT;
-
 @MediumTest
 @RunWith(AndroidJUnit4.class)
 public class HomepageDisplayTests {
@@ -52,19 +52,17 @@ public class HomepageDisplayTests {
             "Sound",
             "Storage",
             "Security & location",
-            "Users & accounts",
+            "Accounts",
             "Accessibility",
             "System",
             "Support & tips"
     };
 
     private UiDevice mDevice;
-    private SettingsHelper mSettingsHelper;
 
     @Before
     public void setUp() throws Exception {
         mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
-        mSettingsHelper = new SettingsHelper();
         try {
             mDevice.setOrientationNatural();
         } catch (RemoteException e) {

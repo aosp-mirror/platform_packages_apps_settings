@@ -146,7 +146,7 @@
                 android:parentActivityName="Settings">
         </activity>
 
-        <activity android:name="CreateShortcut"
+        <activity android:name=".shortcut.CreateShortcut"
                   android:label="@string/settings_shortcut">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT"/>
@@ -1279,7 +1279,7 @@
                 android:value="true" />
         </activity>
 
-        <activity android:name="Settings$SecuritySettingsActivity"
+        <activity android:name=".Settings$SecurityDashboardActivity"
                 android:label="@string/security_settings_title"
                 android:icon="@drawable/ic_homepage_security"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -1304,28 +1304,6 @@
                 android:value="com.android.settings.security.SecuritySettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
-        </activity>
-
-        <!-- TODO(32953042) Merge with Settings$SecuritySettingsActivity -->
-        <activity android:name="Settings$SecuritySettingsActivityV2"
-                  android:label="@string/security_settings_title"
-                  android:icon="@drawable/ic_homepage_security"
-                  android:enabled="false"
-                  android:configChanges="orientation|keyboardHidden|screenSize"
-                  android:taskAffinity=""
-                  android:parentActivityName="Settings">
-            <intent-filter android:priority="-1">
-                <action android:name="android.settings.SECURITY_SETTINGS" />
-                <action android:name="android.credentials.UNLOCK" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter android:priority="4">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                       android:value="com.android.settings.category.ia.homepage" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.security.SecuritySettingsV2" />
         </activity>
 
         <activity android:name="MonitoringCertInfoActivity"
@@ -1357,16 +1335,6 @@
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                 android:value="true" />
         </activity>
-
-        <!-- Keep compatibility with old shortcuts. -->
-        <activity-alias android:name="SecuritySettings"
-                android:label="@string/security_settings_title"
-                android:configChanges="orientation|keyboardHidden|screenSize"
-                android:exported="true"
-                android:targetActivity="Settings$SecuritySettingsActivity">
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.security.SecuritySettings" />
-        </activity-alias>
 
         <activity android:name="Settings$PrivacySettingsActivity"
                 android:label="@string/privacy_settings_title"
@@ -1405,7 +1373,7 @@
         <activity android:name="Settings$DeviceAdminSettingsActivity"
                 android:label="@string/device_admin_settings_title"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$SecuritySettingsActivity">
+                android:parentActivityName=".Settings$SecurityDashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1436,7 +1404,7 @@
         <activity android:name="Settings$UsageAccessSettingsActivity"
                 android:label="@string/usage_access_title"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$SecuritySettingsActivity">
+                android:parentActivityName=".Settings$SecurityDashboardActivity">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.USAGE_ACCESS_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1574,7 +1542,7 @@
         <activity android:name="Settings$EnterprisePrivacySettingsActivity"
                 android:label="@string/enterprise_privacy_settings"
                 android:taskAffinity="com.android.settings"
-                android:parentActivityName="Settings$SecuritySettingsActivity">
+                android:parentActivityName=".Settings$SecurityDashboardActivity">
             <intent-filter>
                 <action android:name="android.settings.ENTERPRISE_PRIVACY_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />

@@ -42,7 +42,9 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
+import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -53,6 +55,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
@@ -103,7 +106,8 @@ public class AppHeaderViewPreferenceControllerTest {
         appEntry.info = info;
         when(mFragment.getAppEntry()).thenReturn(appEntry);
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
-
+        ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
+            (InstantAppDataProvider) (i -> false));
 
         final TextView title = mHeader.findViewById(R.id.entity_header_title);
         final TextView summary = mHeader.findViewById(R.id.entity_header_summary);

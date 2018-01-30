@@ -16,34 +16,18 @@
 
 package com.android.settings.security;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.UserHandle;
-import android.os.UserManager;
-import android.os.UserManager.EnforcingUser;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
+import android.content.pm.PackageManager;
+import android.hardware.fingerprint.FingerprintManager;
 
-import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
-import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
-import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,123 +35,65 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowLockPatternUtils.class,
-                ShadowUserManager.class,
-        })
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecuritySettingsTest {
-
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     @Mock
     private SummaryLoader mSummaryLoader;
-
+    @Mock
+    private FingerprintManager mFingerprintManager;
     private SecuritySettings.SummaryProvider mSummaryProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        FakeFeatureFactory.setupForTest();
+        when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
+                .thenReturn(mFingerprintManager);
+
         mSummaryProvider = new SecuritySettings.SummaryProvider(mContext, mSummaryLoader);
     }
 
     @Test
-    public void testInitTrustAgentPreference_secure_shouldSetSummaryToNumberOfTrustAgent() {
-        final Preference preference = mock(Preference.class);
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        when(screen.findPreference(SecuritySettings.KEY_MANAGE_TRUST_AGENTS))
-                .thenReturn(preference);
-        final LockPatternUtils utils = mock(LockPatternUtils.class);
-        when(utils.isSecure(anyInt())).thenReturn(true);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
-        final Activity activity = mock(Activity.class);
-        when(activity.getResources()).thenReturn(context.getResources());
-        final SecuritySettings securitySettings = spy(new SecuritySettings());
-        when(securitySettings.getActivity()).thenReturn(activity);
+    public void testSummaryProvider_notListening() {
+        mSummaryProvider.setListening(false);
 
-        ReflectionHelpers.setField(securitySettings, "mLockPatternUtils", utils);
-
-        securitySettings.initTrustAgentPreference(screen, 0);
-        verify(preference).setSummary(R.string.manage_trust_agents_summary);
-
-        securitySettings.initTrustAgentPreference(screen, 2);
-        verify(preference).setSummary(context.getResources().getQuantityString(
-                R.plurals.manage_trust_agents_summary_on, 2, 2));
+        verifyNoMoreInteractions(mSummaryLoader);
     }
 
     @Test
-    public void testNonIndexableKeys_existInXmlLayout() {
-        final Context context = spy(RuntimeEnvironment.application);
-        UserManager manager = mock(UserManager.class);
-        when(manager.isAdminUser()).thenReturn(false);
-        doReturn(manager).when(context).getSystemService(Context.USER_SERVICE);
-        final List<String> niks = SecuritySettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+    public void testSummaryProvider_hasFingerPrint_hasStaticSummary() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.security_settings_misc);
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.location_settings));
-        keys.addAll(XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.encryption_and_credential));
+        mSummaryProvider.setListening(true);
 
-        assertThat(keys).containsAllIn(niks);
+        verify(mContext).getString(R.string.security_dashboard_summary);
     }
 
     @Test
-    public void testUnifyLockRestriction() {
-        // Set up instance under test.
-        final Context context = spy(RuntimeEnvironment.application);
-        final SecuritySettings securitySettings = spy(new SecuritySettings());
-        when(securitySettings.getContext()).thenReturn(context);
+    public void testSummaryProvider_noFpFeature_shouldSetSummaryWithNoFingerprint() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(false);
 
-        final int userId = 123;
-        ReflectionHelpers.setField(securitySettings, "mProfileChallengeUserId", userId);
+        mSummaryProvider.setListening(true);
 
-        final LockPatternUtils utils = mock(LockPatternUtils.class);
-        when(utils.isSeparateProfileChallengeEnabled(userId)).thenReturn(true);
-        ReflectionHelpers.setField(securitySettings, "mLockPatternUtils", utils);
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
+    }
 
-        final RestrictedSwitchPreference unifyProfile = mock(RestrictedSwitchPreference.class);
-        ReflectionHelpers.setField(securitySettings, "mUnifyProfile", unifyProfile);
+    @Test
+    public void testSummaryProvider_noFpHardware_shouldSetSummaryWithNoFingerprint() {
+        when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FINGERPRINT))
+                .thenReturn(true);
+        when(mFingerprintManager.isHardwareDetected()).thenReturn(false);
 
-        // Pretend that no admins enforce the restriction.
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_UNIFIED_PASSWORD,
-                UserHandle.of(userId),
-                Collections.emptyList());
+        mSummaryProvider.setListening(true);
 
-        securitySettings.updateUnificationPreference();
-
-        verify(unifyProfile).setDisabledByAdmin(null);
-
-        reset(unifyProfile);
-
-        // Pretend that the restriction is enforced by several admins. Having just one would
-        // require more mocking of implementation details.
-        final EnforcingUser enforcer1 = new EnforcingUser(
-                userId, UserManager.RESTRICTION_SOURCE_PROFILE_OWNER);
-        final EnforcingUser enforcer2 = new EnforcingUser(
-                UserHandle.USER_SYSTEM, UserManager.RESTRICTION_SOURCE_DEVICE_OWNER);
-        ShadowUserManager.getShadow().setUserRestrictionSources(
-                UserManager.DISALLOW_UNIFIED_PASSWORD,
-                UserHandle.of(userId),
-                Arrays.asList(enforcer1, enforcer2));
-
-        securitySettings.updateUnificationPreference();
-
-        verify(unifyProfile).setDisabledByAdmin(EnforcedAdmin.MULTIPLE_ENFORCED_ADMIN);
+        verify(mContext).getString(R.string.security_dashboard_summary_no_fingerprint);
     }
 }

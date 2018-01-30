@@ -116,7 +116,6 @@ import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.CryptKeeperSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
-import com.android.settings.security.SecuritySettingsV2;
 import com.android.settings.sim.SimSettings;
 import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
@@ -165,7 +164,6 @@ public class SettingsGateway {
             NotificationStation.class.getName(),
             LocationSettings.class.getName(),
             SecuritySettings.class.getName(),
-            SecuritySettingsV2.class.getName(),
             UsageAccessDetails.class.getName(),
             PrivacySettings.class.getName(),
             DeviceAdminSettings.class.getName(),
@@ -271,8 +269,7 @@ public class SettingsGateway {
             Settings.PowerUsageSummaryActivity.class.getName(),
             Settings.PowerUsageSummaryLegacyActivity.class.getName(),
             Settings.AccountDashboardActivity.class.getName(),
-            Settings.SecuritySettingsActivity.class.getName(),
-            Settings.SecuritySettingsActivityV2.class.getName(),
+            Settings.SecurityDashboardActivity.class.getName(),
             Settings.AccessibilitySettingsActivity.class.getName(),
             Settings.SystemDashboardActivity.class.getName(),
             SupportDashboardActivity.class.getName(),

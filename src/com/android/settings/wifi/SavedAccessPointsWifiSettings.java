@@ -161,7 +161,7 @@ public class SavedAccessPointsWifiSettings extends SettingsPreferenceFragment
         final int accessPointsSize = accessPoints.size();
         for (int i = 0; i < accessPointsSize; ++i) {
             AccessPoint ap = accessPoints.get(i);
-            String key = AccessPointPreference.generatePreferenceKey(ap);
+            String key = ap.getKey();
             LongPressAccessPointPreference preference =
                     (LongPressAccessPointPreference) getCachedPreference(key);
             if (preference == null) {
