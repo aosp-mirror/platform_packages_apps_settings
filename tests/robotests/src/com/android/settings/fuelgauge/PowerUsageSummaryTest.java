@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_TOGGLE_APPS;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -170,7 +169,6 @@ public class PowerUsageSummaryTest {
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
-        when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
         when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
@@ -212,39 +210,6 @@ public class PowerUsageSummaryTest {
 
         verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
                 MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
-    }
-
-    @Test
-    public void testOptionsMenu_menuAppToggle_metricEventInvoked() {
-        mFragment.onOptionsItemSelected(mToggleAppsMenu);
-        mFragment.mShowAllApps = false;
-
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, true);
-    }
-
-    @Test
-    public void testOptionsMenu_toggleAppsEnabled() {
-        when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
-                .thenReturn(true);
-        mFragment.mShowAllApps = false;
-
-        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
-
-        verify(mMenu).add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE, R.string.show_all_apps);
-    }
-
-    @Test
-    public void testOptionsMenu_clickToggleAppsMenu_dataChanged() {
-        testToggleAllApps(true);
-        testToggleAllApps(false);
-    }
-
-    private void testToggleAllApps(final boolean isShowApps) {
-        mFragment.mShowAllApps = isShowApps;
-
-        mFragment.onOptionsItemSelected(mToggleAppsMenu);
-        assertThat(mFragment.mShowAllApps).isEqualTo(!isShowApps);
     }
 
     @Test
@@ -321,18 +286,6 @@ public class PowerUsageSummaryTest {
         Robolectric.flushBackgroundThreadScheduler();
         assertThat(summary2.getText().toString().contains(NEW_ML_EST_SUFFIX));
         assertThat(summary1.getText().toString().contains(OLD_EST_SUFFIX));
-    }
-
-    @Test
-    public void testSaveInstanceState_showAllAppsRestored() {
-        Bundle bundle = new Bundle();
-        mFragment.mShowAllApps = true;
-        doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-
-        mFragment.onSaveInstanceState(bundle);
-        mFragment.restoreSavedInstance(bundle);
-
-        assertThat(mFragment.mShowAllApps).isTrue();
     }
 
     @Test

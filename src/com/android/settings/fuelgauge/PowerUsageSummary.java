@@ -93,13 +93,9 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     private static final int MENU_STATS_TYPE = Menu.FIRST;
     @VisibleForTesting
     static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
-    @VisibleForTesting
-    static final int MENU_TOGGLE_APPS = Menu.FIRST + 4;
     private static final int MENU_HELP = Menu.FIRST + 5;
     public static final int DEBUG_INFO_LOADER = 3;
 
-    @VisibleForTesting
-    boolean mShowAllApps = false;
     @VisibleForTesting
     PowerGaugePreference mScreenUsagePref;
     @VisibleForTesting
@@ -221,18 +217,11 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mAnomalySparseArray = new SparseArray<>();
 
         restartBatteryInfoLoader();
-        restoreSavedInstance(icicle);
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY_V2;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(KEY_SHOW_ALL_APPS, mShowAllApps);
     }
 
     @Override
@@ -284,11 +273,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
         menu.add(Menu.NONE, MENU_HIGH_POWER_APPS, Menu.NONE, R.string.high_power_apps);
 
-        if (mPowerFeatureProvider.isPowerAccountingToggleEnabled()) {
-            menu.add(Menu.NONE, MENU_TOGGLE_APPS, Menu.NONE,
-                    mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
-        }
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -322,22 +306,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
                 return true;
-            case MENU_TOGGLE_APPS:
-                mShowAllApps = !mShowAllApps;
-                item.setTitle(mShowAllApps ? R.string.hide_extra_apps : R.string.show_all_apps);
-                metricsFeatureProvider.action(context,
-                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, mShowAllApps);
-                restartBatteryStatsLoader(false /* clearHeader */);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @VisibleForTesting
-    void restoreSavedInstance(Bundle savedInstance) {
-        if (savedInstance != null) {
-            mShowAllApps = savedInstance.getBoolean(KEY_SHOW_ALL_APPS, false);
         }
     }
 
@@ -375,8 +345,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
         final CharSequence timeSequence = Utils.formatRelativeTime(context, lastFullChargeTime,
                 false);
-        mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper, mShowAllApps,
-                timeSequence);
+        mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper,
+                false /* showAllApps */, timeSequence);
     }
 
     @VisibleForTesting
