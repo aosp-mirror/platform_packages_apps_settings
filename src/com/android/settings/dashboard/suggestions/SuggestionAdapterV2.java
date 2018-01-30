@@ -55,6 +55,7 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final IconCache mCache;
     private final ArrayList<String> mSuggestionsShownLogged;
+    private final SuggestionFeatureProvider mSuggestionFeatureProvider;
     private final SuggestionControllerMixin mSuggestionControllerMixin;
     private final Callback mCallback;
     private final CardConfig mConfig;
@@ -75,6 +76,7 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
         mCache = new IconCache(context);
         final FeatureFactory factory = FeatureFactory.getFactory(context);
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
+        mSuggestionFeatureProvider = factory.getSuggestionFeatureProvider(context);
         mCallback = callback;
         if (savedInstanceState != null) {
             mSuggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
@@ -129,13 +131,13 @@ public class SuggestionAdapterV2 extends RecyclerView.Adapter<DashboardItemHolde
 
         final ImageView closeButton = holder.itemView.findViewById(R.id.close_button);
         if (closeButton != null) {
-            if (mCallback != null) {
-                closeButton.setOnClickListener(v -> {
+            closeButton.setOnClickListener(v -> {
+                mSuggestionFeatureProvider.dismissSuggestion(
+                    mContext, mSuggestionControllerMixin, suggestion);
+                if (mCallback != null) {
                     mCallback.onSuggestionClosed(suggestion);
-                });
-            } else {
-                closeButton.setOnClickListener(null);
-            }
+                }
+            });
         }
 
         View clickHandler = holder.itemView;
