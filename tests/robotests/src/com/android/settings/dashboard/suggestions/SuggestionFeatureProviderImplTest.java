@@ -114,13 +114,13 @@ public class SuggestionFeatureProviderImplTest {
     public void isSuggestionEnabled_isLowMemoryDevice_shouldReturnFalse() {
         when(mActivityManager.isLowRamDevice()).thenReturn(true);
 
-        assertThat(mProvider.isSuggestionV2Enabled(mContext)).isFalse();
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isFalse();
     }
 
     @Test
     public void isSuggestionV2Enabled_isNotLowMemoryDevice_shouldReturnTrue() {
         when(mActivityManager.isLowRamDevice()).thenReturn(false);
-        assertThat(mProvider.isSuggestionV2Enabled(mContext)).isTrue();
+        assertThat(mProvider.isSuggestionEnabled(mContext)).isTrue();
     }
 
     @Test
