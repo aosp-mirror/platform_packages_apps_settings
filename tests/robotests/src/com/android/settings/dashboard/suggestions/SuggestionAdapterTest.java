@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -76,7 +77,7 @@ public class SuggestionAdapterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         final Suggestion suggestion1 = new Suggestion.Builder("id1")
@@ -136,6 +137,7 @@ public class SuggestionAdapterTest {
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
             null /* savedInstanceState */, null /* callback */, null /* lifecycle */);
         mSuggestionAdapter.setSuggestions(mOneSuggestion);
+        doReturn("sans").when(mContext).getString(anyInt());
 
         // Bind twice
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -177,6 +179,7 @@ public class SuggestionAdapterTest {
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
             new FrameLayout(RuntimeEnvironment.application),
             mSuggestionAdapter.getItemViewType(0));
+        doReturn("sans").when(mContext).getString(anyInt());
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.findViewById(android.R.id.primary).performClick();
