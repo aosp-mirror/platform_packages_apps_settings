@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo;
+package com.android.settings.connecteddevice.usb;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.argThat;
@@ -25,7 +25,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
+import android.net.ConnectivityManager;
 
+import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 
@@ -46,6 +48,8 @@ public class UsbBackendTest {
     private UsbManager mUsbManager;
     @Mock
     private UsbBackend.UserRestrictionUtil mUserRestrictionUtil;
+    @Mock
+    private ConnectivityManager mConnectivityManager;
 
     @Before
     public void setUp() {
@@ -53,22 +57,13 @@ public class UsbBackendTest {
         when(mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI))
             .thenReturn(true);
         when((Object)mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
+        when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
+                .thenReturn((Object) mConnectivityManager);
     }
 
     @Test
     public void constructor_noUsbPort_shouldNotCrash() {
-        UsbBackend usbBackend = new UsbBackend(mContext, mUserRestrictionUtil);
+        UsbBackend usbBackend = new UsbBackend(mContext, mUserRestrictionUtil, null);
         // Should not crash
-    }
-
-    @Test
-    public void getCurrentMode_shouldRegisterReceiverToGetUsbState() {
-        UsbBackend usbBackend = new UsbBackend(mContext, mUserRestrictionUtil);
-
-        usbBackend.getCurrentMode();
-
-        verify(mContext).registerReceiver(eq(null),
-            argThat(intentFilter -> intentFilter != null &&
-                UsbManager.ACTION_USB_STATE.equals(intentFilter.getAction(0))));
     }
 }
