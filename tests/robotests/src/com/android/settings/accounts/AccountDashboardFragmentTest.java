@@ -27,11 +27,13 @@ import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.drawer.CategoryKey;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +43,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.List;
@@ -57,6 +60,11 @@ public class AccountDashboardFragmentTest {
         mFragment = new AccountDashboardFragment();
     }
 
+    @After
+    public void tearDown() {
+        ShadowAuthenticationHelper.reset();
+    }
+
     @Test
     public void testCategory_isAccount() {
         assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_ACCOUNT);
@@ -66,7 +74,8 @@ public class AccountDashboardFragmentTest {
     @Config(shadows = {
             ShadowAuthenticationHelper.class
     })
-    public void updateSummary_shouldDisplayUpTo3AccountTypes() {
+    public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
+        ShadowAuthenticationHelper.setHasAccount(true);
         final SummaryLoader loader = mock(SummaryLoader.class);
         final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
 
@@ -75,6 +84,23 @@ public class AccountDashboardFragmentTest {
         provider.setListening(true);
 
         verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1] + ", " + LABELS[2]);
+    }
+
+    @Test
+    @Config(shadows = {
+            ShadowAuthenticationHelper.class
+    })
+    public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
+        ShadowAuthenticationHelper.setHasAccount(false);
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+
+        final SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(activity, loader);
+        provider.setListening(true);
+
+        verify(loader).setSummary(provider,
+                activity.getString(R.string.account_dashboard_default_summary));
     }
 
     @Test
@@ -94,15 +120,24 @@ public class AccountDashboardFragmentTest {
         static final String[] TYPES = new String[] {"type1", "type2", "type3", "type4"};
         static final String[] LABELS = new String[] {"LABEL1", "LABEL2",
                 "LABEL3", "LABEL4"};
+        private static boolean sHasAccount = true;
 
         public void __constructor__(Context context, UserHandle userHandle,
                 AuthenticatorHelper.OnAccountsUpdateListener listener) {
+        }
 
+        public static void setHasAccount(boolean hasAccount) {
+            sHasAccount = hasAccount;
+        }
+
+        @Resetter
+        public static void reset() {
+            sHasAccount = true;
         }
 
         @Implementation
         public String[] getEnabledAccountTypes() {
-            return TYPES;
+            return sHasAccount ? TYPES : null;
         }
 
         @Implementation
