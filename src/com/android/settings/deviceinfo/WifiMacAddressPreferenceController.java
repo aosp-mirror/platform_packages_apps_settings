@@ -19,6 +19,7 @@ package com.android.settings.deviceinfo;
 import android.content.Context;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.R;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.deviceinfo.AbstractWifiMacAddressPreferenceController;
 
@@ -29,6 +30,11 @@ public class WifiMacAddressPreferenceController extends AbstractWifiMacAddressPr
         implements PreferenceControllerMixin {
     public WifiMacAddressPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, lifecycle);
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return mContext.getResources().getBoolean(R.bool.config_show_wifi_mac_address);
     }
 
     // This space intentionally left blank

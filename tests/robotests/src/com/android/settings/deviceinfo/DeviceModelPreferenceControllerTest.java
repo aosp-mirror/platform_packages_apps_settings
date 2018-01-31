@@ -69,8 +69,14 @@ public class DeviceModelPreferenceControllerTest {
     }
 
     @Test
-    public void isAlwaysAvailable() {
+    public void isAvailable_returnTrueIfVisible() {
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_returnFalseIfNotVisible() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
