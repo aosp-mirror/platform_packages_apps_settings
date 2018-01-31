@@ -123,24 +123,34 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         return !((requestCode != KEYGUARD_REQUEST) && (requestCode != CREDENTIAL_CONFIRM_REQUEST));
     }
 
-    @VisibleForTesting
-    boolean isShowFinalConfirmation(int requestCode, int resultCode) {
-        return (resultCode == Activity.RESULT_OK) || (requestCode == CREDENTIAL_CONFIRM_REQUEST);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        onActivityResultInternal(requestCode, resultCode, data);
+    }
+
+    /*
+     * Internal method that allows easy testing without dealing with super references.
+     */
+    @VisibleForTesting
+    void onActivityResultInternal(int requestCode, int resultCode, Intent data) {
         if (!isValidRequestCode(requestCode)) {
             return;
         }
 
-        // If the user entered a valid keyguard trace, present the final
-        // confirmation prompt; otherwise, go back to the initial state.
-        if (isShowFinalConfirmation(requestCode, resultCode)) {
-            showFinalConfirmation();
-        } else {
+        if (resultCode != Activity.RESULT_OK) {
             establishInitialState();
+            return;
+        }
+
+        Intent intent = null;
+        // If returning from a Keyguard request, try to show an account confirmation request if
+        // applciable.
+        if (CREDENTIAL_CONFIRM_REQUEST != requestCode
+                && (intent = getAccountConfirmationIntent()) != null) {
+            showAccountCredentialConfirmation(intent);
+        } else {
+            showFinalConfirmation();
         }
     }
 
@@ -155,7 +165,12 @@ public class MasterClear extends InstrumentedPreferenceFragment {
     }
 
     @VisibleForTesting
-    boolean tryShowAccountConfirmation() {
+    void showAccountCredentialConfirmation(Intent intent) {
+        startActivityForResult(intent, CREDENTIAL_CONFIRM_REQUEST);
+    }
+
+    @VisibleForTesting
+    Intent getAccountConfirmationIntent() {
         final Context context = getActivity();
         final String accountType = context.getString(R.string.account_type);
         final String packageName = context.getString(R.string.account_confirmation_package);
@@ -163,7 +178,8 @@ public class MasterClear extends InstrumentedPreferenceFragment {
         if (TextUtils.isEmpty(accountType)
                 || TextUtils.isEmpty(packageName)
                 || TextUtils.isEmpty(className)) {
-            return false;
+            Log.i(TAG, "Resources not set for account confirmation.");
+            return null;
         }
         final AccountManager am = AccountManager.get(context);
         Account[] accounts = am.getAccountsByType(accountType);
@@ -179,12 +195,14 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                     && packageName.equals(resolution.activityInfo.packageName)) {
                 // Note that we need to check the packagename to make sure that an Activity resolver
                 // wasn't returned.
-                startActivityForResult(
-                    requestAccountConfirmation, CREDENTIAL_CONFIRM_REQUEST);
-                return true;
+                return requestAccountConfirmation;
+            } else {
+                Log.i(TAG, "Unable to resolve Activity: " + packageName + "/" + className);
             }
+        } else {
+            Log.d(TAG, "No " + accountType + " accounts installed!");
         }
-        return false;
+        return null;
     }
 
     /**
@@ -210,7 +228,14 @@ public class MasterClear extends InstrumentedPreferenceFragment {
                 return;
             }
 
-            if (!tryShowAccountConfirmation() && !runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+            if (runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+                return;
+            }
+
+            Intent intent = getAccountConfirmationIntent();
+            if (intent != null) {
+                showAccountCredentialConfirmation(intent);
+            } else {
                 showFinalConfirmation();
             }
         }
@@ -228,7 +253,8 @@ public class MasterClear extends InstrumentedPreferenceFragment {
      * time, then simply reuse the inflated views directly whenever we need
      * to change contents.
      */
-    private void establishInitialState() {
+    @VisibleForTesting
+    void establishInitialState() {
         mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_master_clear);
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
