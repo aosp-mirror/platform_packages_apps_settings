@@ -55,7 +55,7 @@
         android:summary="@string/summary_placeholder"
         android:icon="@drawable/ic_system_update"
         android:order="-30"
-        settings:controller="com.android.settings.deviceinfo.SystemUpdatePreferenceController">
+        settings:controller="com.android.settings.system.SystemUpdatePreferenceController">
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS" />
     </Preference>
 
@@ -63,7 +63,7 @@
         android:key="additional_system_update_settings"
         android:title="@string/additional_system_update_settings_list_item_title"
         android:order="-31"
-        settings:controller="com.android.settings.deviceinfo.AdditionalSystemUpdatePreferenceController">
+        settings:controller="com.android.settings.system.AdditionalSystemUpdatePreferenceController">
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="@string/additional_system_update"
                 android:targetClass="@string/additional_system_update_menu" />

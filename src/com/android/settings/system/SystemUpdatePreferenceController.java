@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo;
+package com.android.settings.system;
 
 import static android.content.Context.CARRIER_CONFIG_SERVICE;
+import static android.content.Context.SYSTEM_UPDATE_SERVICE;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.os.SystemUpdateManager;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -39,10 +42,12 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
     private static final String KEY_SYSTEM_UPDATE_SETTINGS = "system_update_settings";
 
     private final UserManager mUm;
+    private final SystemUpdateManager mUpdateManager;
 
     public SystemUpdatePreferenceController(Context context) {
         super(context, KEY_SYSTEM_UPDATE_SETTINGS);
         mUm = UserManager.get(context);
+        mUpdateManager = (SystemUpdateManager) context.getSystemService(SYSTEM_UPDATE_SERVICE);
     }
 
     @Override
@@ -84,7 +89,27 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
 
     @Override
     public String getSummary() {
-        return mContext.getString(R.string.about_summary, Build.VERSION.RELEASE);
+        final Bundle updateInfo = mUpdateManager.retrieveSystemUpdateInfo();
+        String summary = mContext.getString(R.string.android_version_summary,
+                Build.VERSION.RELEASE);
+        switch (updateInfo.getInt(SystemUpdateManager.KEY_STATUS)) {
+            case SystemUpdateManager.STATUS_WAITING_DOWNLOAD:
+            case SystemUpdateManager.STATUS_IN_PROGRESS:
+            case SystemUpdateManager.STATUS_WAITING_INSTALL:
+            case SystemUpdateManager.STATUS_WAITING_REBOOT:
+                summary = mContext.getString(R.string.android_version_pending_update_summary);
+                break;
+            case SystemUpdateManager.STATUS_UNKNOWN:
+                Log.d(TAG, "Update statue unknown");
+                // fall through to next branch
+            case SystemUpdateManager.STATUS_IDLE:
+                final String version = updateInfo.getString(SystemUpdateManager.KEY_TITLE);
+                if (!TextUtils.isEmpty(version)) {
+                    summary = mContext.getString(R.string.android_version_summary, version);
+                }
+                break;
+        }
+        return summary;
     }
 
     /**

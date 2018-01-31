@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo;
+package com.android.settings.system;
 
+import static android.os.SystemUpdateManager.KEY_STATUS;
+import static android.os.SystemUpdateManager.KEY_TITLE;
+import static android.os.SystemUpdateManager.STATUS_IDLE;
+import static android.os.SystemUpdateManager.STATUS_UNKNOWN;
+import static android.os.SystemUpdateManager.STATUS_WAITING_DOWNLOAD;
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.UserManager;
+import android.os.Bundle;
+import android.os.SystemUpdateManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -55,6 +58,8 @@ public class SystemUpdatePreferenceControllerTest {
 
     @Mock
     private PreferenceScreen mScreen;
+    @Mock
+    private SystemUpdateManager mSystemUpdateManager;
 
     private Context mContext;
     private SystemUpdatePreferenceController mController;
@@ -64,7 +69,8 @@ public class SystemUpdatePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-
+        ShadowApplication.getInstance().setSystemService(Context.SYSTEM_UPDATE_SERVICE,
+                mSystemUpdateManager);
         mController = new SystemUpdatePreferenceController(mContext);
         mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
@@ -118,11 +124,41 @@ public class SystemUpdatePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_shouldSetToAndroidVersion() {
+    public void updateState_systemUpdateStatusUnknown_shouldSetToAndroidVersion() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_STATUS, STATUS_UNKNOWN);
+        when(mSystemUpdateManager.retrieveSystemUpdateInfo()).thenReturn(bundle);
+
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary())
-                .isEqualTo(RuntimeEnvironment.application.getString(R.string.about_summary,
-                        Build.VERSION.RELEASE));
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.android_version_summary, Build.VERSION.RELEASE));
+    }
+
+    @Test
+    public void updateState_systemUpdateStatusIdle_shouldSetToAndroidVersion() {
+        final String testReleaseName = "ANDROID TEST VERSION";
+
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_STATUS, STATUS_IDLE);
+        bundle.putString(KEY_TITLE, testReleaseName);
+        when(mSystemUpdateManager.retrieveSystemUpdateInfo()).thenReturn(bundle);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.android_version_summary, testReleaseName));
+    }
+
+    @Test
+    public void updateState_systemUpdateInProgress_shouldSetToUpdatePending() {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(KEY_STATUS, STATUS_WAITING_DOWNLOAD);
+        when(mSystemUpdateManager.retrieveSystemUpdateInfo()).thenReturn(bundle);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getSummary()).isEqualTo(
+                mContext.getString(R.string.android_version_pending_update_summary));
     }
 }
