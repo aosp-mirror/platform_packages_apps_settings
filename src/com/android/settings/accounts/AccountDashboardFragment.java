@@ -91,17 +91,20 @@ public class AccountDashboardFragment extends DashboardFragment {
                 final BidiFormatter bidiFormatter = BidiFormatter.getInstance();
 
                 CharSequence summary = null;
+                if (types == null || types.length == 0) {
+                    summary = mContext.getString(R.string.account_dashboard_default_summary);
+                } else {
+                    // Show up to 3 account types
+                    final int size = Math.min(3, types.length);
 
-                // Show up to 3 account types
-                final int size = Math.min(3, types.length);
-
-                for (int i = 0; i < size; i++) {
-                    final CharSequence label = authHelper.getLabelForType(mContext, types[i]);
-                    if (summary == null) {
-                        summary = bidiFormatter.unicodeWrap(label);
-                    } else {
-                        summary = mContext.getString(R.string.join_many_items_middle, summary,
-                                bidiFormatter.unicodeWrap(label));
+                    for (int i = 0; i < size; i++) {
+                        final CharSequence label = authHelper.getLabelForType(mContext, types[i]);
+                        if (summary == null) {
+                            summary = bidiFormatter.unicodeWrap(label);
+                        } else {
+                            summary = mContext.getString(R.string.join_many_items_middle, summary,
+                                    bidiFormatter.unicodeWrap(label));
+                        }
                     }
                 }
                 mSummaryLoader.setSummary(this, summary);

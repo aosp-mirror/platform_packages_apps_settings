@@ -249,11 +249,14 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUser.useAdminDisabledSummary(false);
         // Determine if add user/profile button should be visible
         if (mUserCaps.mCanAddUser && Utils.isDeviceProvisioned(getActivity())) {
+            mAddUser.setVisible(true);
             mAddUser.setOnPreferenceClickListener(this);
             // change label to only mention user, if restricted profiles are not supported
             if (!mUserCaps.mCanAddRestrictedProfile) {
                 mAddUser.setTitle(R.string.user_add_user_menu);
             }
+        } else {
+            mAddUser.setVisible(false);
         }
         final IntentFilter filter = new IntentFilter(Intent.ACTION_USER_REMOVED);
         filter.addAction(Intent.ACTION_USER_INFO_CHANGED);
