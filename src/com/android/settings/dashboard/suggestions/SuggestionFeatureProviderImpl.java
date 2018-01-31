@@ -54,7 +54,7 @@ public class SuggestionFeatureProviderImpl implements SuggestionFeatureProvider 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Override
-    public boolean isSuggestionV2Enabled(Context context) {
+    public boolean isSuggestionEnabled(Context context) {
         final ActivityManager am =
                 (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         return !am.isLowRamDevice();

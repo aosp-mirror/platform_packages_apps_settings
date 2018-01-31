@@ -39,7 +39,6 @@ import com.android.settings.accounts.ManagedProfileSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
-import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.ProcessStatsSummary;
@@ -207,7 +206,6 @@ public class SettingsGateway {
             ConfigureNotificationSettings.class.getName(),
             ChooseLockPassword.ChooseLockPasswordFragment.class.getName(),
             ChooseLockPattern.ChooseLockPatternFragment.class.getName(),
-            InstalledAppDetails.class.getName(),
             AppInfoDashboardFragment.class.getName(),
             BatterySaverSettings.class.getName(),
             AppNotificationSettings.class.getName(),

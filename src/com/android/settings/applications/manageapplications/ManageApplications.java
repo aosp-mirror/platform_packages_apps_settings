@@ -50,7 +50,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.ArraySet;
-import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -91,15 +90,14 @@ import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.InstalledAppCounter;
-import com.android.settings.applications.InstalledAppDetails;
 import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
-import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
@@ -151,7 +149,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     private static final String EXTRA_HAS_ENTRIES = "hasEntries";
     private static final String EXTRA_HAS_BRIDGE = "hasBridge";
 
-    // attributes used as keys when passing values to InstalledAppDetails activity
+    // attributes used as keys when passing values to AppInfoDashboardFragment activity
     public static final String APP_CHG = "chg";
 
     // constant value that can be used to check return code from sub activity.
@@ -553,13 +551,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
             default:
-                if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.APP_INFO_V2)) {
-                    startAppInfoFragment(
-                            AppInfoDashboardFragment.class, R.string.application_info_label);
-                } else {
-                    startAppInfoFragment(
-                            InstalledAppDetails.class, R.string.application_info_label);
-                }
+                startAppInfoFragment(
+                    AppInfoDashboardFragment.class, R.string.application_info_label);
                 break;
         }
     }
@@ -1227,7 +1220,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             switch (mManageApplications.mListType) {
                 case LIST_TYPE_NOTIFICATION:
                     if (entry.extraInfo != null) {
-                        holder.setSummary(InstalledAppDetails.getNotificationSummary(
+                        holder.setSummary(
+                            AppNotificationPreferenceController.getNotificationSummary(
                                 (AppRow) entry.extraInfo, mContext));
                     } else {
                         holder.setSummary(null);

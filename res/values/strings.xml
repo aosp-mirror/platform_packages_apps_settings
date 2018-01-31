@@ -1133,8 +1133,12 @@
     <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=34] -->
     <string name="suggested_fingerprint_lock_settings_title">Unlock with fingerprint</string>
 
-    <!-- Summary for suggested actions for settings up a fingerprint lock -->
-    <string name="suggested_fingerprint_lock_settings_summary">Unlock with your fingerprint</string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (tablet)  -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet">Unlock with your fingerprint</string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (device)  -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="device">Unlock with your fingerprint</string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone)  -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="default">Unlock with your fingerprint</string>
 
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>

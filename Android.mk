@@ -37,8 +37,8 @@ LOCAL_JAVA_LIBRARIES := \
     ims-common
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    apptoolkit-arch-core-runtime \
-    apptoolkit-lifecycle-extensions \
+    android-arch-lifecycle-runtime \
+    android-arch-lifecycle-extensions \
     jsr305 \
     settings-logtags \
 

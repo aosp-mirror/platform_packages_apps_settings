@@ -17,7 +17,6 @@ package com.android.settings.system;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;

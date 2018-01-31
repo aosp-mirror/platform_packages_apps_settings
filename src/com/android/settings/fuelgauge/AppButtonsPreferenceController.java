@@ -74,7 +74,7 @@ import java.util.List;
  * An easy way to handle them is to delegate them to {@link #handleDialogClick(int)} and
  * {@link #handleActivityResult(int, int, Intent)} in this controller.
  */
-//TODO(b/35810915): Make InstalledAppDetails use this controller
+//TODO(b/35810915): Make AppInfoDashboardFragment use this controller
 public class AppButtonsPreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, LifecycleObserver, OnResume, OnDestroy,
         ApplicationsState.Callbacks {
