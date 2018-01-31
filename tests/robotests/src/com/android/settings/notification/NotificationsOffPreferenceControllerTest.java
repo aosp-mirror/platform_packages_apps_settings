@@ -110,7 +110,6 @@ public class NotificationsOffPreferenceControllerTest {
         mController.updateState(pref);
 
         assertTrue(pref.getTitle().toString().contains("category"));
-        assertFalse(pref.isEnabled());
         assertFalse(pref.isSelectable());
     }
 
@@ -125,7 +124,6 @@ public class NotificationsOffPreferenceControllerTest {
         mController.updateState(pref);
 
         assertTrue(pref.getTitle().toString().contains("group"));
-        assertFalse(pref.isEnabled());
         assertFalse(pref.isSelectable());
     }
 
@@ -139,7 +137,6 @@ public class NotificationsOffPreferenceControllerTest {
         mController.updateState(pref);
 
         assertTrue(pref.getTitle().toString().contains("app"));
-        assertFalse(pref.isEnabled());
         assertFalse(pref.isSelectable());
     }
 }

@@ -70,7 +70,6 @@ import com.android.settings.Settings.GamesStorageActivity;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.Settings.ManageExternalSourcesActivity;
 import com.android.settings.Settings.MoviesStorageActivity;
-import com.android.settings.Settings.NotificationAppListActivity;
 import com.android.settings.Settings.OverlaySettingsActivity;
 import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.Settings.UsageAccessSettingsActivity;
@@ -90,7 +89,6 @@ import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.applications.InstalledAppCounter;
-import com.android.settings.applications.NotificationApps;
 import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -238,12 +236,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         if (className == null) {
             className = intent.getComponent().getClassName();
         }
-        if (className.equals(NotificationAppListActivity.class.getName())
-                || this instanceof NotificationApps) {
-            mListType = LIST_TYPE_NOTIFICATION;
-            mNotifBackend = new NotificationBackend();
-            screenTitle = R.string.app_notifications_title;
-        } else if (className.equals(StorageUseActivity.class.getName())) {
+        if (className.equals(StorageUseActivity.class.getName())) {
             if (args != null && args.containsKey(EXTRA_VOLUME_UUID)) {
                 mVolumeUuid = args.getString(EXTRA_VOLUME_UUID);
                 mStorageType = args.getInt(EXTRA_STORAGE_TYPE, STORAGE_TYPE_DEFAULT);

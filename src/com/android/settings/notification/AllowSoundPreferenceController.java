@@ -56,6 +56,7 @@ public class AllowSoundPreferenceController extends NotificationPreferenceContro
 
     }
 
+    @Override
     public void updateState(Preference preference) {
         if (mChannel != null) {
             RestrictedSwitchPreference pref = (RestrictedSwitchPreference) preference;

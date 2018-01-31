@@ -30,9 +30,7 @@ import android.support.v7.preference.Preference;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.RingtonePreference;
-import com.android.settings.applications.NotificationApps;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.gestures.SwipeToNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -152,15 +150,6 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             outState.putString(SELECTED_PREFERENCE_KEY, mRequestPreference.getKey());
         }
     }
-
-    public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY
-        = new SummaryLoader.SummaryProviderFactory() {
-            @Override
-            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                    SummaryLoader summaryLoader) {
-                return new NotificationApps.SummaryProvider(activity, summaryLoader);
-            }
-    };
 
     /**
      * For Search.
