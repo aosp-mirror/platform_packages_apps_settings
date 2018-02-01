@@ -35,6 +35,7 @@ import com.android.settings.R;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Adapter for showing {@link TimeZoneInfo} objects in a recycler view.
@@ -55,7 +56,11 @@ class TimeZoneAdapter extends RecyclerView.Adapter {
     TimeZoneAdapter(View.OnClickListener onClickListener, Context context) {
         mOnClickListener = onClickListener;
         mContext = context;
-        mTimeFormat = DateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+        // Use android.text.format.DateFormat to observe 24-hour settings and find the best pattern
+        // using ICU with skeleton.
+        mTimeFormat = new SimpleDateFormat(
+                android.text.format.DateFormat.getTimeFormatString(context),
+                Locale.getDefault());
         mDateFormat = DateFormat.getDateInstance(SimpleDateFormat.MEDIUM);
         mDateFormat.setContext(DisplayContext.CAPITALIZATION_NONE);
         mCurrentTimeZone = TimeZone.getDefault().getID();
