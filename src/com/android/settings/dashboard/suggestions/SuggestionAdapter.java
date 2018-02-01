@@ -116,7 +116,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         mConfig.setCardLayout(holder, suggestionCount, position);
         final Icon icon = suggestion.getIcon();
         final Drawable drawable = mCache.getIcon(icon);
-        if (drawable != null && TextUtils.equals(icon.getResPackage(), mContext.getPackageName())) {
+        if ((suggestion.getFlags() & Suggestion.FLAG_ICON_TINTABLE) != 0) {
             drawable.setTint(Utils.getColorAccent(mContext));
         }
         holder.icon.setImageDrawable(drawable);

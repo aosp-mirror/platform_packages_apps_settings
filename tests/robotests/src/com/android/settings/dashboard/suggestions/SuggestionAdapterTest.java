@@ -215,11 +215,9 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_differentPackage_shouldNotTintIcon()
-        throws PendingIntent.CanceledException {
+    public void onBindViewHolder_iconNotTintable_shouldNotTintIcon()
+            throws PendingIntent.CanceledException {
         final Icon icon = mock(Icon.class);
-        when(icon.getResPackage()).thenReturn("pkg1");
-        when(mActivity.getPackageName()).thenReturn("pkg2");
         final Suggestion suggestion = new Suggestion.Builder("pkg1")
             .setPendingIntent(mock(PendingIntent.class))
             .setIcon(icon)
@@ -243,15 +241,14 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_samePackage_shouldTintIcon()
-        throws PendingIntent.CanceledException {
+    public void onBindViewHolder_iconTintable_shouldTintIcon()
+            throws PendingIntent.CanceledException {
         final Icon icon = mock(Icon.class);
-        final String packageName = "pkg1";
-        when(icon.getResPackage()).thenReturn(packageName);
-        when(mActivity.getPackageName()).thenReturn(packageName);
-        final Suggestion suggestion = new Suggestion.Builder(packageName)
+        final int FLAG_ICON_TINTABLE = 1 << 1;
+        final Suggestion suggestion = new Suggestion.Builder("pkg1")
             .setPendingIntent(mock(PendingIntent.class))
             .setIcon(icon)
+            .setFlags(FLAG_ICON_TINTABLE)
             .build();
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(suggestion);
