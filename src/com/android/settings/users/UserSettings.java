@@ -757,8 +757,12 @@ public class UserSettings extends SettingsPreferenceFragment
                     synchronized (mUserLock) {
                         if (userType == USER_TYPE_USER) {
                             mHandler.sendEmptyMessage(MESSAGE_UPDATE_LIST);
-                            mHandler.sendMessage(mHandler.obtainMessage(
-                                    MESSAGE_SETUP_USER, user.id, user.serialNumber));
+                            // Skip setting up user which results in user switching when the
+                            // restriction is set.
+                            if (!mUserCaps.mDisallowSwitchUser) {
+                                mHandler.sendMessage(mHandler.obtainMessage(
+                                        MESSAGE_SETUP_USER, user.id, user.serialNumber));
+                            }
                         } else {
                             mHandler.sendMessage(mHandler.obtainMessage(
                                     MESSAGE_CONFIG_USER, user.id, user.serialNumber));
@@ -845,8 +849,12 @@ public class UserSettings extends SettingsPreferenceFragment
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
                 }
-                pref.setOnPreferenceClickListener(this);
-                pref.setSelectable(true);
+                // Disallow setting up user which results in user switching when the restriction is
+                // set.
+                if (!mUserCaps.mDisallowSwitchUser) {
+                    pref.setOnPreferenceClickListener(this);
+                    pref.setSelectable(true);
+                }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);
             }
@@ -885,8 +893,13 @@ public class UserSettings extends SettingsPreferenceFragment
             pref.setTitle(R.string.user_guest);
             pref.setIcon(getEncircledDefaultIcon());
             userPreferences.add(pref);
-            pref.setDisabledByAdmin(
-                    mUserCaps.mDisallowAddUser ? mUserCaps.mEnforcedAdmin : null);
+            if (mUserCaps.mDisallowAddUser) {
+                pref.setDisabledByAdmin(mUserCaps.mEnforcedAdmin);
+            } else if (mUserCaps.mDisallowSwitchUser) {
+                pref.setDisabledByAdmin(RestrictedLockUtils.getDeviceOwner(context));
+            } else {
+                pref.setDisabledByAdmin(null);
+            }
             int finalGuestId = guestId;
             pref.setOnPreferenceClickListener(preference -> {
                 int id = finalGuestId;
