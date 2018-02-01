@@ -19,6 +19,7 @@ package com.android.settings.applications.appinfo;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -188,6 +189,22 @@ public final class AppInfoDashboardFragmentTest {
         mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
 
         verify(mActivity).invalidateOptionsMenu();
+    }
+
+    @Test
+    public void onActivityResult_packageUninstalled_shouldFinishAndRemoveTask() {
+        doReturn(false).when(mFragment).refreshUi();
+
+        mFragment.onActivityResult(mFragment.REQUEST_UNINSTALL, 0, mock(Intent.class));
+
+        verify(mActivity).finishAndRemoveTask();
+    }
+
+    @Test
+    public void getPreferenceControllers_noPackageInfo_shouldReturnNull() {
+        doNothing().when(mFragment).retrieveAppEntry();
+
+        assertThat(mFragment.getPreferenceControllers(mShadowContext)).isNull();
     }
 
     @Test
