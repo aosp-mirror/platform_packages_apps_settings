@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.deviceinfo;
+package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -22,6 +22,7 @@ import static org.mockito.Mockito.verify;
 
 import android.widget.TextView;
 import com.android.settings.R;
+import com.android.settings.connecteddevice.usb.UsbModeChooserActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import org.junit.Before;

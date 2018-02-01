@@ -119,7 +119,6 @@ public class DeletedChannelsPreferenceControllerTest {
         Preference pref = mock(Preference.class);
         mController.updateState(pref);
 
-        verify(pref, times(1)).setEnabled(false);
         verify(pref, times(1)).setSelectable(false);
         verify(mBackend, times(1)).getDeletedChannelCount(any(), anyInt());
         ArgumentCaptor<CharSequence> argumentCaptor = ArgumentCaptor.forClass(CharSequence.class);

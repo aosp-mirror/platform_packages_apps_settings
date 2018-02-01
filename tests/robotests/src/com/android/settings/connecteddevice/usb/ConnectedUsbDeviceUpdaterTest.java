@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License
  */
-package com.android.settings.connecteddevice;
+package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.deviceinfo.UsbBackend;
+import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -42,6 +44,8 @@ public class ConnectedUsbDeviceUpdaterTest {
     private ConnectedUsbDeviceUpdater mDeviceUpdater;
 
     @Mock
+    private DashboardFragment mFragment;
+    @Mock
     private UsbConnectionBroadcastReceiver mUsbReceiver;
     @Mock
     private DevicePreferenceCallback mDevicePreferenceCallback;
@@ -53,7 +57,8 @@ public class ConnectedUsbDeviceUpdaterTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mDeviceUpdater = new ConnectedUsbDeviceUpdater(mContext, mDevicePreferenceCallback,
+        when(mFragment.getContext()).thenReturn(mContext);
+        mDeviceUpdater = new ConnectedUsbDeviceUpdater(mFragment, mDevicePreferenceCallback,
                 mUsbBackend);
         mDeviceUpdater.mUsbReceiver = mUsbReceiver;
     }
@@ -70,18 +75,18 @@ public class ConnectedUsbDeviceUpdaterTest {
 
     @Test
     public void testInitUsbPreference_usbConnected_preferenceAdded() {
-        doReturn(true).when(mUsbReceiver).isConnected();
-
         mDeviceUpdater.initUsbPreference(mContext);
+        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbBackend.MODE_DATA_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(mDeviceUpdater.mUsbPreference);
     }
 
     @Test
     public void testInitUsbPreference_usbDisconnected_preferenceRemoved() {
-        doReturn(false).when(mUsbReceiver).isConnected();
-
         mDeviceUpdater.initUsbPreference(mContext);
+        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbBackend.MODE_DATA_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mDeviceUpdater.mUsbPreference);
     }

@@ -120,7 +120,8 @@ public class AppNotificationSettings extends NotificationSettingsBase {
         mControllers.add(new BadgePreferenceController(context, mBackend));
         mControllers.add(new AllowSoundPreferenceController(
                 context, mImportanceListener, mBackend));
-        mControllers.add(new ImportancePreferenceController(context));
+        mControllers.add(new ImportancePreferenceController(
+                context, mImportanceListener, mBackend));
         mControllers.add(new SoundPreferenceController(context, this,
                 mImportanceListener, mBackend));
         mControllers.add(new LightsPreferenceController(context, mBackend));

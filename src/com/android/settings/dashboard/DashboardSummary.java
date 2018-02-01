@@ -38,7 +38,6 @@ import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.dashboard.conditional.ConditionManager.ConditionListener;
 import com.android.settings.dashboard.conditional.FocusRecyclerView;
 import com.android.settings.dashboard.conditional.FocusRecyclerView.FocusListener;
-import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.ActionBarShadowController;
@@ -53,8 +52,7 @@ import java.util.List;
 
 public class DashboardSummary extends InstrumentedFragment
         implements CategoryListener, ConditionListener,
-        FocusListener, SuggestionDismissController.Callback,
-        SuggestionControllerMixin.SuggestionControllerHost {
+        FocusListener, SuggestionControllerMixin.SuggestionControllerHost {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
     private static final int MAX_WAIT_MILLIS = 700;
@@ -66,7 +64,6 @@ public class DashboardSummary extends InstrumentedFragment
 
     private FocusRecyclerView mDashboard;
     private DashboardAdapter mAdapter;
-    private DashboardAdapterV2 mAdapterV2;
     private SummaryLoader mSummaryLoader;
     private ConditionManager mConditionManager;
     private LinearLayoutManager mLayoutManager;
@@ -181,13 +178,10 @@ public class DashboardSummary extends InstrumentedFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mLayoutManager == null) return;
-        outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
-        if (!mDashboardFeatureProvider.useSuggestionUiV2()) {
-            if (mAdapter != null) {
-                mAdapter.onSaveInstanceState(outState);
-            }
+        if (mLayoutManager == null) {
+            return;
         }
+        outState.putInt(EXTRA_SCROLL_POSITION, mLayoutManager.findFirstVisibleItemPosition());
     }
 
     @Override
@@ -205,17 +199,10 @@ public class DashboardSummary extends InstrumentedFragment
         mDashboard.setHasFixedSize(true);
         mDashboard.setListener(this);
         mDashboard.setItemAnimator(new DashboardItemAnimator());
-        if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-            mAdapterV2 = new DashboardAdapterV2(getContext(), bundle,
-                    mConditionManager.getConditions(), mSuggestionControllerMixin, getLifecycle());
-            mDashboard.setAdapter(mAdapterV2);
-            mSummaryLoader.setSummaryConsumer(mAdapterV2);
-        } else {
-            mAdapter = new DashboardAdapter(getContext(), bundle, mConditionManager.getConditions(),
-                    mSuggestionControllerMixin, this /* SuggestionDismissController.Callback */);
-            mDashboard.setAdapter(mAdapter);
-            mSummaryLoader.setSummaryConsumer(mAdapter);
-        }
+        mAdapter = new DashboardAdapter(getContext(), bundle,
+            mConditionManager.getConditions(), mSuggestionControllerMixin, getLifecycle());
+        mDashboard.setAdapter(mAdapter);
+        mSummaryLoader.setSummaryConsumer(mAdapter);
         ActionBarShadowController.attachToRecyclerView(
                 getActivity().findViewById(R.id.search_bar_container), getLifecycle(), mDashboard);
         rebuildUI();
@@ -254,11 +241,7 @@ public class DashboardSummary extends InstrumentedFragment
         if (mOnConditionsChangedCalled) {
             final boolean scrollToTop =
                     mLayoutManager.findFirstCompletelyVisibleItemPosition() <= 1;
-            if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-                mAdapterV2.setConditions(mConditionManager.getConditions());
-            } else {
-                mAdapter.setConditions(mConditionManager.getConditions());
-            }
+            mAdapter.setConditions(mConditionManager.getConditions());
             if (scrollToTop) {
                 mDashboard.scrollToPosition(0);
             }
@@ -268,36 +251,13 @@ public class DashboardSummary extends InstrumentedFragment
     }
 
     @Override
-    public Suggestion getSuggestionAt(int position) {
-        if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-            return mAdapterV2.getSuggestion(position);
-        } else {
-            return mAdapter.getSuggestion(position);
-        }
-    }
-
-    @Override
-    public void onSuggestionDismissed(Suggestion suggestion) {
-        mAdapter.onSuggestionDismissed(suggestion);
-    }
-
-    @Override
     public void onSuggestionReady(List<Suggestion> suggestions) {
         mStagingSuggestions = suggestions;
-        if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-            mAdapterV2.setSuggestions(suggestions);
-            if (mStagingCategory != null) {
-                Log.d(TAG, "Category has loaded, setting category from suggestionReady");
-                mHandler.removeCallbacksAndMessages(null);
-                mAdapterV2.setCategory(mStagingCategory);
-            }
-        } else {
-            mAdapter.setSuggestions(suggestions);
-            if (mStagingCategory != null) {
-                Log.d(TAG, "Category has loaded, setting category from suggestionReady");
-                mHandler.removeCallbacksAndMessages(null);
-                mAdapter.setCategory(mStagingCategory);
-            }
+        mAdapter.setSuggestions(suggestions);
+        if (mStagingCategory != null) {
+            Log.d(TAG, "Category has loaded, setting category from suggestionReady");
+            mHandler.removeCallbacksAndMessages(null);
+            mAdapter.setCategory(mStagingCategory);
         }
     }
 
@@ -313,26 +273,14 @@ public class DashboardSummary extends InstrumentedFragment
         if (mSuggestionControllerMixin.isSuggestionLoaded()) {
             Log.d(TAG, "Suggestion has loaded, setting suggestion/category");
             ThreadUtils.postOnMainThread(() -> {
-                if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-                    if (mStagingSuggestions != null) {
-                        mAdapterV2.setSuggestions(mStagingSuggestions);
-                    }
-                    mAdapterV2.setCategory(mStagingCategory);
-                } else {
-                    if (mStagingSuggestions != null) {
-                        mAdapter.setSuggestions(mStagingSuggestions);
-                    }
-                    mAdapter.setCategory(mStagingCategory);
+                if (mStagingSuggestions != null) {
+                    mAdapter.setSuggestions(mStagingSuggestions);
                 }
+                mAdapter.setCategory(mStagingCategory);
             });
         } else {
             Log.d(TAG, "Suggestion NOT loaded, delaying setCategory by " + MAX_WAIT_MILLIS + "ms");
-            if (mDashboardFeatureProvider.useSuggestionUiV2()) {
-                mHandler.postDelayed(()
-                        -> mAdapterV2.setCategory(mStagingCategory), MAX_WAIT_MILLIS);
-            } else {
-                mHandler.postDelayed(() -> mAdapter.setCategory(mStagingCategory), MAX_WAIT_MILLIS);
-            }
+            mHandler.postDelayed(() -> mAdapter.setCategory(mStagingCategory), MAX_WAIT_MILLIS);
         }
     }
 }

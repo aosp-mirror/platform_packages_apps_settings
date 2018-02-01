@@ -217,11 +217,6 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
         launchIntentOrSelectProfile(activity, tile, intent, MetricsEvent.DASHBOARD_SUMMARY);
     }
 
-    @Override
-    public boolean useSuggestionUiV2() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.SUGGESTION_UI_V2);
-    }
-
     private void bindSummary(Preference preference, Tile tile) {
         if (tile.summary != null) {
             preference.setSummary(tile.summary);

@@ -6652,6 +6652,8 @@
     <string name="app_and_notification_dashboard_summary">Permissions, default apps</string>
     <!-- Title for setting tile leading to account settings [CHAR LIMIT=40]-->
     <string name="account_dashboard_title">Accounts</string>
+    <!-- Summary for account settings tiles when there is no accounts on device [CHAR LIMIT=NONE]-->
+    <string name="account_dashboard_default_summary">No accounts added</string>
     <!-- Title for setting tile leading to setting UI which allows user set default app to
     handle actions such as open web page, making phone calls, default SMS apps [CHAR  LIMIT=40]-->
     <string name="app_default_dashboard_title">Default apps</string>
@@ -6982,6 +6984,9 @@
 
     <!-- notification header - apps that have recently sent notifications -->
     <string name="recent_notifications">Recently sent</string>
+
+    <!-- Preference title for showing all apps on device [CHAR_LIMIT=50]-->
+    <string name="recent_notifications_see_all_title">See all apps</string>
 
     <!-- Configure Notifications: Advanced section header [CHAR LIMIT=30] -->
     <string name="advanced_section_header">Advanced</string>
@@ -8000,15 +8005,15 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for powering the other device only. -->
-    <string name="usb_use_power_only">Supply power</string>
+    <string name="usb_use_power_only">Charging connected device</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for powering the other device. -->
-    <string name="usb_use_power_only_desc">Charge the connected device. Works only with devices that support USB charging.</string>
+    <string name="usb_use_power_only_desc">Other settings unavailable when turned on</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
-    <string name="usb_use_file_transfers">Transfer files</string>
+    <string name="usb_use_file_transfers">File Transfer</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -8016,23 +8021,31 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
-    <string name="usb_use_photo_transfers">Transfer photos (PTP)</string>
+    <string name="usb_use_photo_transfers">PTP</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring photos via PTP. -->
     <string name="usb_use_photo_transfers_desc">Transfer photos or files if MTP is not supported (PTP)</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
+         is for USB tethering. -->
+    <string name="usb_use_tethering">USB tethering</string>
+    <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
+         select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
-    <string name="usb_use_MIDI">Use device as MIDI</string>
+    <string name="usb_use_MIDI">MIDI</string>
     <!-- Description of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for entering MIDI mode. -->
     <string name="usb_use_MIDI_desc">Use this device as MIDI</string>
     <!-- The title used in a dialog which lets the user select what the USB connection
-         for this device should be used for. Choices are usb_use_charging_only,
-         usb_use_file_transfer, use_use_photo_transfer, and usb_use_MIDI -->
-    <string name="usb_use">Use USB to</string>
+         for this device should be used for. These options are more commonly used.
+         Choices are usb_use_file_transfer.-->
+    <string name="usb_use">Use USB for</string>
+    <!-- The title used in a dialog which lets the user select what the USB connection
+         for this device should be used for. These options are less commonly used.
+         Choices are usb_use_tethering, usb_use_photo_transfers, usb_use_MIDI, and usb_use_power_only.-->
+    <string name="usb_use_also">Also use USB for</string>
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
@@ -8040,13 +8053,27 @@
     <!-- Settings item summary for USB preference when set to charging only [CHAR LIMIT=NONE] -->
     <string name="usb_summary_charging_only">Charging this device</string>
     <!-- Settings item summary for USB preference when set to powering the other device only [CHAR LIMIT=NONE] -->
-    <string name="usb_summary_power_only">Supplying power</string>
+    <string name="usb_summary_power_only">Charging connected device</string>
     <!-- Settings item summary for USB preference when set to transferring files via MTP [CHAR LIMIT=NONE] -->
-    <string name="usb_summary_file_transfers">Transferring files</string>
+    <string name="usb_summary_file_transfers">File transfer</string>
+    <!-- Settings item summary for USB preference when set to USB tethering [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_tether">USB tethering</string>
     <!-- Settings item summary for USB preference when set to transferring photos via PTP [CHAR LIMIT=NONE] -->
-    <string name="usb_summary_photo_transfers">Transferring photos (PTP)</string>
+    <string name="usb_summary_photo_transfers">PTP</string>
     <!-- Settings item summary for USB preference when set to entering MIDI mode [CHAR LIMIT=NONE] -->
-    <string name="usb_summary_MIDI">Using device as MIDI</string>
+    <string name="usb_summary_MIDI">MIDI</string>
+    <!-- Settings item summary for USB preference when set to transferring files via MTP
+          and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_file_transfers_power">File transfer and supplying power</string>
+    <!-- Settings item summary for USB preference when set to USB tethering
+         and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_tether_power">USB tethering and supplying power</string>
+    <!-- Settings item summary for USB preference when set to transferring photos via PTP
+         and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_photo_transfers_power">PTP and supplying power</string>
+    <!-- Settings item summary for USB preference when set to entering MIDI mode
+         and powering other device [CHAR LIMIT=NONE] -->
+    <string name="usb_summary_MIDI_power">MIDI and supplying power</string>
 
     <!-- Settings item title for SMS Mirroring preference [CHAR LIMIT=35] -->
     <string name="sms_mirroring_pref">SMS Mirroring</string>
@@ -8340,8 +8367,10 @@
     <!-- Backup disabled summary [CHAR LIMIT=NONE] -->
     <string name="backup_disabled">Back up disabled</string>
 
-    <!-- Summary of device info page [CHAR LIMIT=NONE] -->
-    <string name="about_summary">Updated to Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
+    <!-- Summary of Android version info [CHAR LIMIT=NONE] -->
+    <string name="android_version_summary">Updated to Android <xliff:g id="version" example="6.0">%1$s</xliff:g></string>
+    <!-- Summary of Android version info (when there is a pending upgrade available) [CHAR LIMIT=NONE] -->
+    <string name="android_version_pending_update_summary">Update available</string>
 
     <!-- Title for dialog displayed when user clicks on a setting locked by an admin [CHAR LIMIT=30] -->
     <string name="disabled_by_policy_title">Action not allowed</string>

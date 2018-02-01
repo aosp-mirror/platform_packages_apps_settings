@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.deviceinfo;
+package com.android.settings.connecteddevice.usb;
 
 import android.annotation.Nullable;
 import android.app.Activity;

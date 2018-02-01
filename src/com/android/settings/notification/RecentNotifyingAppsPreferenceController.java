@@ -147,7 +147,8 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             @Override
             protected void onCountComplete(int num) {
                 if (mHasRecentApps) {
-                    mSeeAllPref.setTitle(mContext.getString(R.string.see_all_apps_title, num));
+                    mSeeAllPref.setTitle(
+                            mContext.getString(R.string.recent_notifications_see_all_title));
                 } else {
                     mSeeAllPref.setSummary(mContext.getString(R.string.apps_summary, num));
                 }

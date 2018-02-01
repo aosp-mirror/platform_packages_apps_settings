@@ -27,10 +27,7 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
-import com.android.settings.dashboard.DashboardData;
-import com.android.settings.dashboard.DashboardData.HeaderMode;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.WirelessUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -44,7 +41,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
     private final Context mContext;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private List<Condition> mConditions;
-    private @HeaderMode int mMode;
+    private boolean mExpanded;
 
     private View.OnClickListener mConditionClickListener = new View.OnClickListener() {
 
@@ -84,10 +81,10 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
         }
     };
 
-    public ConditionAdapter(Context context, List<Condition> conditions, @HeaderMode int mode) {
+    public ConditionAdapter(Context context, List<Condition> conditions, boolean expanded) {
         mContext = context;
         mConditions = conditions;
-        mMode = mode;
+        mExpanded = expanded;
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
 
         setHasStableIds(true);
@@ -126,7 +123,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
 
     @Override
     public int getItemCount() {
-        if (mMode == DashboardData.HEADER_MODE_FULLY_EXPANDED) {
+        if (mExpanded) {
             return mConditions.size();
         }
         return 0;
@@ -138,7 +135,7 @@ public class ConditionAdapter extends RecyclerView.Adapter<DashboardItemHolder> 
     }
 
     private void bindViews(final Condition condition,
-            DashboardAdapter.DashboardItemHolder view, boolean isLastItem,
+            DashboardItemHolder view, boolean isLastItem,
             View.OnClickListener onClickListener) {
         if (condition instanceof AirplaneModeCondition) {
             Log.d(TAG, "Airplane mode condition has been bound with "

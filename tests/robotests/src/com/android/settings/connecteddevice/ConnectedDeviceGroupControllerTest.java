@@ -31,6 +31,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
+import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;

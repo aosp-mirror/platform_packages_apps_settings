@@ -164,10 +164,4 @@ public class DashboardSummaryTest {
         mSummary.onCategoriesChanged();
         verify(mSummary).rebuildUI();
     }
-
-    @Test
-    public void onSuggestionDismissed_shouldNotRebuildUI() {
-        mSummary.onSuggestionDismissed(mock(Suggestion.class));
-        verify(mSummary, never()).rebuildUI();
-    }
 }

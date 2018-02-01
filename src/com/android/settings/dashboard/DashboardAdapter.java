@@ -17,9 +17,6 @@ package com.android.settings.dashboard;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -41,44 +38,37 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.R.id;
-import com.android.settings.dashboard.DashboardData.SuggestionConditionHeaderData;
+import com.android.settings.dashboard.DashboardData.ConditionHeaderData;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.conditional.ConditionAdapter;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
-import com.android.settings.dashboard.suggestions.SuggestionDismissController;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.DashboardItemHolder>
-        implements SummaryLoader.SummaryConsumer {
+    implements SummaryLoader.SummaryConsumer, SuggestionAdapter.Callback, LifecycleObserver,
+    OnSaveInstanceState {
     public static final String TAG = "DashboardAdapter";
-    private static final String STATE_SUGGESTION_LIST = "suggestion_list";
     private static final String STATE_CATEGORY_LIST = "category_list";
-    private static final String STATE_SUGGESTIONS_SHOWN_LOGGED = "suggestions_shown_logged";
 
     @VisibleForTesting
-    static final String STATE_SUGGESTION_CONDITION_MODE = "suggestion_condition_mode";
-    @VisibleForTesting
-    static final int SUGGESTION_CONDITION_HEADER_POSITION = 0;
+    static final String STATE_CONDITION_EXPANDED = "condition_expanded";
 
     private final IconCache mCache;
     private final Context mContext;
-    private final SuggestionControllerMixin mSuggestionControllerMixin;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private final DashboardFeatureProvider mDashboardFeatureProvider;
-    private final ArrayList<String> mSuggestionsShownLogged;
     private boolean mFirstFrameDrawn;
     private RecyclerView mRecyclerView;
     private SuggestionAdapter mSuggestionAdapter;
-    private SuggestionDismissController mSuggestionDismissHandler;
-    private SuggestionDismissController.Callback mCallback;
 
     @VisibleForTesting
     DashboardData mDashboardData;
@@ -92,57 +82,54 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     };
 
     public DashboardAdapter(Context context, Bundle savedInstanceState,
-            List<Condition> conditions, SuggestionControllerMixin suggestionControllerMixin,
-            SuggestionDismissController.Callback callback) {
+        List<Condition> conditions, SuggestionControllerMixin suggestionControllerMixin,
+        Lifecycle lifecycle) {
 
-        List<Suggestion> suggestions = null;
         DashboardCategory category = null;
-        int suggestionConditionMode = DashboardData.HEADER_MODE_DEFAULT;
+        boolean conditionExpanded = false;
 
         mContext = context;
         final FeatureFactory factory = FeatureFactory.getFactory(context);
-        mSuggestionControllerMixin = suggestionControllerMixin;
         mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(context);
         mCache = new IconCache(context);
-        mCallback = callback;
+        mSuggestionAdapter = new SuggestionAdapter(mContext, suggestionControllerMixin,
+            savedInstanceState, this /* callback */, lifecycle);
 
         setHasStableIds(true);
 
         if (savedInstanceState != null) {
-            suggestions = savedInstanceState.getParcelableArrayList(STATE_SUGGESTION_LIST);
             category = savedInstanceState.getParcelable(STATE_CATEGORY_LIST);
-            suggestionConditionMode = savedInstanceState.getInt(
-                    STATE_SUGGESTION_CONDITION_MODE, suggestionConditionMode);
-            mSuggestionsShownLogged = savedInstanceState.getStringArrayList(
-                    STATE_SUGGESTIONS_SHOWN_LOGGED);
-        } else {
-            mSuggestionsShownLogged = new ArrayList<>();
+            conditionExpanded = savedInstanceState.getBoolean(
+                STATE_CONDITION_EXPANDED, conditionExpanded);
+        }
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
         }
 
         mDashboardData = new DashboardData.Builder()
-                .setConditions(conditions)
-                .setSuggestions(suggestions)
-                .setCategory(category)
-                .setSuggestionConditionMode(suggestionConditionMode)
-                .build();
+            .setConditions(conditions)
+            .setSuggestions(mSuggestionAdapter.getSuggestions())
+            .setCategory(category)
+            .setConditionExpanded(conditionExpanded)
+            .build();
     }
 
     public void setSuggestions(List<Suggestion> data) {
         final DashboardData prevData = mDashboardData;
         mDashboardData = new DashboardData.Builder(prevData)
-                .setSuggestions(data)
-                .build();
+            .setSuggestions(data)
+            .build();
         notifyDashboardDataChanged(prevData);
     }
 
     public void setCategory(DashboardCategory category) {
-        tintIcons(category, null);
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setCategory called");
         mDashboardData = new DashboardData.Builder(prevData)
-                .setCategory(category)
-                .build();
+            .setCategory(category)
+            .build();
         notifyDashboardDataChanged(prevData);
     }
 
@@ -150,12 +137,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         final DashboardData prevData = mDashboardData;
         Log.d(TAG, "adapter setConditions called");
         mDashboardData = new DashboardData.Builder(prevData)
-                .setConditions(conditions)
-                .build();
+            .setConditions(conditions)
+            .build();
         notifyDashboardDataChanged(prevData);
     }
 
-    public void onSuggestionDismissed(Suggestion suggestion) {
+    @Override
+    public void onSuggestionClosed(Suggestion suggestion) {
         final List<Suggestion> list = mDashboardData.getSuggestions();
         if (list == null || list.size() == 0) {
             return;
@@ -163,13 +151,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         if (list.size() == 1) {
             // The only suggestion is dismissed, and the the empty suggestion container will
             // remain as the dashboard item. Need to refresh the dashboard list.
-            final DashboardData prevData = mDashboardData;
-            mDashboardData = new DashboardData.Builder(prevData)
-                    .setSuggestions(null)
-                    .build();
-            notifyDashboardDataChanged(prevData);
+            setSuggestions(null);
         } else {
             mSuggestionAdapter.removeSuggestion(suggestion);
+            notifyItemChanged(0, null);
         }
     }
 
@@ -186,11 +171,14 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     @Override
     public DashboardItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
-        if (viewType == R.layout.suggestion_condition_header) {
-            return new SuggestionAndConditionHeaderHolder(view);
+        if (viewType == R.layout.condition_header) {
+            return new ConditionHeaderHolder(view);
         }
-        if (viewType == R.layout.suggestion_condition_container) {
-            return new SuggestionAndConditionContainerHolder(view);
+        if (viewType == R.layout.condition_container) {
+            return new ConditionContainerHolder(view);
+        }
+        if (viewType == R.layout.suggestion_container) {
+            return new SuggestionContainerHolder(view);
         }
         return new DashboardItemHolder(view);
     }
@@ -205,24 +193,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
                 holder.itemView.setTag(tile);
                 holder.itemView.setOnClickListener(mTileClickListener);
                 break;
-            case R.layout.suggestion_condition_container:
-                onBindConditionAndSuggestion(
-                        (SuggestionAndConditionContainerHolder) holder, position);
+            case R.layout.suggestion_container:
+                onBindSuggestion((SuggestionContainerHolder) holder, position);
                 break;
-            case R.layout.suggestion_condition_header:
-                onBindSuggestionConditionHeader((SuggestionAndConditionHeaderHolder) holder,
-                        (SuggestionConditionHeaderData)
-                                mDashboardData.getItemEntityByPosition(position));
+            case R.layout.condition_container:
+                onBindCondition((ConditionContainerHolder) holder, position);
                 break;
-            case R.layout.suggestion_condition_footer:
+            case R.layout.condition_header:
+                onBindConditionHeader((ConditionHeaderHolder) holder,
+                    (ConditionHeaderData) mDashboardData.getItemEntityByPosition(position));
+                break;
+            case R.layout.condition_footer:
                 holder.itemView.setOnClickListener(v -> {
                     mMetricsFeatureProvider.action(mContext,
-                            MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, false);
+                        MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, false);
                     DashboardData prevData = mDashboardData;
-                    mDashboardData = new DashboardData.Builder(prevData).setSuggestionConditionMode(
-                            DashboardData.HEADER_MODE_COLLAPSED).build();
+                    mDashboardData = new DashboardData.Builder(prevData).
+                        setConditionExpanded(false).build();
                     notifyDashboardDataChanged(prevData);
-                    mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
+                    scrollToTopOfConditions();
                 });
                 break;
         }
@@ -263,7 +252,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     void notifyDashboardDataChanged(DashboardData prevData) {
         if (mFirstFrameDrawn && prevData != null) {
             final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new DashboardData
-                    .ItemsDataDiffCallback(prevData.getItemList(), mDashboardData.getItemList()));
+                .ItemsDataDiffCallback(prevData.getItemList(), mDashboardData.getItemList()));
             diffResult.dispatchUpdatesTo(this);
         } else {
             mFirstFrameDrawn = true;
@@ -272,120 +261,66 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
     }
 
     @VisibleForTesting
-    void onBindSuggestionConditionHeader(final SuggestionAndConditionHeaderHolder holder,
-            SuggestionConditionHeaderData data) {
-        final int curMode = mDashboardData.getSuggestionConditionMode();
-        final int nextMode = data.hiddenSuggestionCount > 0
-                && data.conditionCount > 0
-                && curMode != DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
-                ? DashboardData.HEADER_MODE_SUGGESTION_EXPANDED
-                : DashboardData.HEADER_MODE_FULLY_EXPANDED;
-
-        final boolean hasConditions = data.conditionCount > 0;
-        if (data.conditionCount > 0) {
-            holder.icon.setImageIcon(data.conditionIcons.get(0));
-            holder.icon.setVisibility(View.VISIBLE);
-            if (data.conditionCount == 1) {
-                holder.title.setText(data.title);
-                holder.title.setTextColor(Utils.getColorAccent(mContext));
-                holder.icons.setVisibility(View.INVISIBLE);
-            } else {
-                holder.title.setText(null);
-                updateConditionIcons(data.conditionIcons, holder.icons);
-                holder.icons.setVisibility(View.VISIBLE);
-            }
-        } else {
-            holder.icon.setVisibility(View.INVISIBLE);
-            holder.icons.setVisibility(View.INVISIBLE);
-        }
-
-        if (data.hiddenSuggestionCount > 0) {
-            holder.summary.setTextColor(Color.BLACK);
-            if (curMode == DashboardData.HEADER_MODE_COLLAPSED) {
-                if (data.conditionCount > 0) {
-                    holder.summary.setText(mContext.getResources().getQuantityString(
-                            R.plurals.suggestions_collapsed_summary,
-                            data.hiddenSuggestionCount, data.hiddenSuggestionCount));
-                } else {
-                    holder.title.setText(mContext.getResources().getQuantityString(
-                            R.plurals.suggestions_collapsed_title,
-                            data.hiddenSuggestionCount, data.hiddenSuggestionCount));
-                    holder.title.setTextColor(Color.BLACK);
-                    holder.summary.setText(null);
-                }
-            } else if (curMode == DashboardData.HEADER_MODE_DEFAULT) {
-                if (data.conditionCount > 0) {
-                    holder.summary.setText(mContext.getString(
-                            R.string.suggestions_summary, data.hiddenSuggestionCount));
-                } else {
-                    holder.title.setText(mContext.getString(
-                            R.string.suggestions_more_title, data.hiddenSuggestionCount));
-                    holder.title.setTextColor(Color.BLACK);
-                    holder.summary.setText(null);
-                }
-            }
-        } else if (data.conditionCount > 1) {
-            holder.summary.setTextColor(Utils.getColorAccent(mContext));
-            holder.summary.setText(
-                    mContext.getString(R.string.condition_summary, data.conditionCount));
-        } else {
+    void onBindConditionHeader(final ConditionHeaderHolder holder, ConditionHeaderData data) {
+        holder.icon.setImageIcon(data.conditionIcons.get(0));
+        if (data.conditionCount == 1) {
+            holder.title.setText(data.title);
             holder.summary.setText(null);
+            holder.icons.setVisibility(View.INVISIBLE);
+        } else {
+            holder.title.setText(null);
+            holder.summary.setText(
+                mContext.getString(R.string.condition_summary, data.conditionCount));
+            updateConditionIcons(data.conditionIcons, holder.icons);
+            holder.icons.setVisibility(View.VISIBLE);
         }
-
-        final Resources res = mContext.getResources();
-        final int padding = res.getDimensionPixelOffset(
-                curMode == DashboardData.HEADER_MODE_COLLAPSED
-                        ? R.dimen.suggestion_condition_header_padding_collapsed
-                        : R.dimen.suggestion_condition_header_padding_expanded);
-        holder.itemView.setPadding(0, padding, 0, padding);
 
         holder.itemView.setOnClickListener(v -> {
-            if (hasConditions) {
-                mMetricsFeatureProvider.action(mContext,
-                        MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, true);
-            }
-            DashboardData prevData = mDashboardData;
-            final boolean wasCollapsed = curMode == DashboardData.HEADER_MODE_COLLAPSED;
+            mMetricsFeatureProvider.action(mContext,
+                MetricsEvent.ACTION_SETTINGS_CONDITION_EXPAND, true);
+            final DashboardData prevData = mDashboardData;
             mDashboardData = new DashboardData.Builder(prevData)
-                    .setSuggestionConditionMode(nextMode).build();
+                .setConditionExpanded(true).build();
             notifyDashboardDataChanged(prevData);
-            if (wasCollapsed) {
-                mRecyclerView.scrollToPosition(SUGGESTION_CONDITION_HEADER_POSITION);
-            }
+            scrollToTopOfConditions();
         });
     }
 
     @VisibleForTesting
-    void onBindConditionAndSuggestion(final SuggestionAndConditionContainerHolder holder,
-            int position) {
-        // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
-        // header anymore.
-        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
-
-        boolean conditionOnly = true;
-        if (position == SUGGESTION_CONDITION_HEADER_POSITION) {
-           if (suggestions != null && suggestions.size() > 0) {
-                conditionOnly = false;
-                mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
-                        (List<Suggestion>) mDashboardData.getItemEntityByPosition(position),
-                        mSuggestionsShownLogged);
-                mSuggestionDismissHandler = new SuggestionDismissController(mContext,
-                        holder.data, mSuggestionControllerMixin, mCallback);
-                holder.data.setAdapter(mSuggestionAdapter);
-            }
-        }
-        if (conditionOnly) {
-            ConditionAdapter adapter = new ConditionAdapter(mContext,
-                    (List<Condition>) mDashboardData.getItemEntityByPosition(position),
-                    mDashboardData.getSuggestionConditionMode());
-            adapter.addDismissHandling(holder.data);
-            holder.data.setAdapter(adapter);
-        }
+    void onBindCondition(final ConditionContainerHolder holder, int position) {
+        final ConditionAdapter adapter = new ConditionAdapter(mContext,
+            (List<Condition>) mDashboardData.getItemEntityByPosition(position),
+            mDashboardData.isConditionExpanded());
+        adapter.addDismissHandling(holder.data);
+        holder.data.setAdapter(adapter);
         holder.data.setLayoutManager(new LinearLayoutManager(mContext));
     }
 
-    private void onBindTile(DashboardItemHolder holder, Tile tile) {
-        holder.icon.setImageDrawable(mCache.getIcon(tile.icon));
+    @VisibleForTesting
+    void onBindSuggestion(final SuggestionContainerHolder holder, int position) {
+        // If there is suggestions to show, it will be at position 0 as we don't show the suggestion
+        // header anymore.
+        final List<Suggestion> suggestions =
+            (List<Suggestion>) mDashboardData.getItemEntityByPosition(position);
+        final int suggestionCount = suggestions.size();
+        if (suggestions != null && suggestionCount > 0) {
+            holder.summary.setText("" + suggestionCount);
+            mSuggestionAdapter.setSuggestions(suggestions);
+            holder.data.setAdapter(mSuggestionAdapter);
+        }
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        holder.data.setLayoutManager(layoutManager);
+    }
+
+    @VisibleForTesting
+    void onBindTile(DashboardItemHolder holder, Tile tile) {
+        Drawable icon = mCache.getIcon(tile.icon);
+        if (!TextUtils.equals(tile.icon.getResPackage(), mContext.getPackageName())) {
+            icon = new RoundedHomepageIcon(mContext, icon);
+            mCache.updateIcon(tile.icon, icon);
+        }
+        holder.icon.setImageDrawable(icon);
         holder.title.setText(tile.title);
         if (!TextUtils.isEmpty(tile.summary)) {
             holder.summary.setText(tile.summary);
@@ -395,45 +330,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    private void tintIcons(DashboardCategory category, List<Tile> suggestions) {
-        if (!mDashboardFeatureProvider.shouldTintIcon()) {
-            return;
-        }
-        // TODO: Better place for tinting?
-        final TypedArray a = mContext.obtainStyledAttributes(new int[]{
-                android.R.attr.colorControlNormal});
-        final int tintColor = a.getColor(0, mContext.getColor(R.color.fallback_tintColor));
-        a.recycle();
-        if (category != null) {
-            for (Tile tile : category.getTiles()) {
-                if (tile.isIconTintable) {
-                    // If this drawable is tintable, tint it to match the color.
-                    tile.icon.setTint(tintColor);
-                }
-            }
-        }
-        if (suggestions != null) {
-            for (Tile suggestion : suggestions) {
-                if (suggestion.isIconTintable) {
-                    suggestion.icon.setTint(tintColor);
-                }
-            }
-        }
-    }
-
-    void onSaveInstanceState(Bundle outState) {
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
         final DashboardCategory category = mDashboardData.getCategory();
-        final List<Suggestion> suggestions = mDashboardData.getSuggestions();
-        if (suggestions != null) {
-            outState.putParcelableArrayList(STATE_SUGGESTION_LIST,
-                    new ArrayList<>(suggestions));
-        }
         if (category != null) {
             outState.putParcelable(STATE_CATEGORY_LIST, category);
         }
-        outState.putStringArrayList(STATE_SUGGESTIONS_SHOWN_LOGGED, mSuggestionsShownLogged);
-        outState.putInt(STATE_SUGGESTION_CONDITION_MODE,
-                mDashboardData.getSuggestionConditionMode());
+        outState.putBoolean(STATE_CONDITION_EXPANDED, mDashboardData.isConditionExpanded());
     }
 
     private void updateConditionIcons(List<Icon> icons, ViewGroup parent) {
@@ -452,6 +355,10 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         parent.setVisibility(View.VISIBLE);
     }
 
+    private void scrollToTopOfConditions() {
+        mRecyclerView.scrollToPosition(mDashboardData.hasSuggestion() ? 1 : 0);
+    }
+
     public static class IconCache {
         private final Context mContext;
         private final ArrayMap<Icon, Drawable> mMap = new ArrayMap<>();
@@ -467,9 +374,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             Drawable drawable = mMap.get(icon);
             if (drawable == null) {
                 drawable = icon.loadDrawable(mContext);
-                mMap.put(icon, drawable);
+                updateIcon(icon, drawable);
             }
             return drawable;
+        }
+
+        public void updateIcon(Icon icon, Drawable drawable) {
+            mMap.put(icon, drawable);
         }
     }
 
@@ -486,23 +397,32 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         }
     }
 
-    public static class SuggestionAndConditionHeaderHolder extends DashboardItemHolder {
+    public static class ConditionHeaderHolder extends DashboardItemHolder {
         public final LinearLayout icons;
         public final ImageView expandIndicator;
 
-        public SuggestionAndConditionHeaderHolder(View itemView) {
+        public ConditionHeaderHolder(View itemView) {
             super(itemView);
             icons = itemView.findViewById(id.additional_icons);
             expandIndicator = itemView.findViewById(id.expand_indicator);
         }
     }
 
-    public static class SuggestionAndConditionContainerHolder extends DashboardItemHolder {
+    public static class ConditionContainerHolder extends DashboardItemHolder {
         public final RecyclerView data;
 
-        public SuggestionAndConditionContainerHolder(View itemView) {
+        public ConditionContainerHolder(View itemView) {
             super(itemView);
             data = itemView.findViewById(id.data);
+        }
+    }
+
+    public static class SuggestionContainerHolder extends DashboardItemHolder {
+        public final RecyclerView data;
+
+        public SuggestionContainerHolder(View itemView) {
+            super(itemView);
+            data = itemView.findViewById(id.suggestion_list);
         }
     }
 

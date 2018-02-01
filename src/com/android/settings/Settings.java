@@ -96,6 +96,7 @@ public class Settings extends SettingsActivity {
     public static class ZenAccessSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConditionProviderSettingsActivity extends SettingsActivity { /* empty */ }
     public static class UsbSettingsActivity extends SettingsActivity { /* empty */ }
+    public static class UsbDetailsActivity extends SettingsActivity { /* empty */ }
     public static class TrustedCredentialsSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PaymentSettingsActivity extends SettingsActivity { /* empty */ }
     public static class PrintSettingsActivity extends SettingsActivity { /* empty */ }
@@ -108,7 +109,6 @@ public class Settings extends SettingsActivity {
     public static class ZenModeExternalRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class NotificationAppListActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ChannelGroupNotificationSettingsActivity extends SettingsActivity { /* empty */ }

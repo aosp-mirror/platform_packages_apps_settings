@@ -55,7 +55,6 @@ public class DeletedChannelsPreferenceController extends NotificationPreferenceC
             preference.setTitle(mContext.getResources().getQuantityString(
                     R.plurals.deleted_channels, deletedChannelCount, deletedChannelCount));
         }
-        preference.setEnabled(false);
         preference.setSelectable(false);
     }
 }
