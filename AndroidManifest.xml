@@ -3197,14 +3197,9 @@
         <activity android:name="Settings$AdvancedConnectedDeviceActivity"
                   android:label="@string/connected_device_connections_title"
                   android:taskAffinity="com.android.settings"
-                  android:parentActivityName="Settings$ConnectedDeviceDashboardActivity"
-                  android:enabled="false">
+                  android:parentActivityName="Settings$ConnectedDeviceDashboardActivity">
             <intent-filter android:priority="1">
                 <action android:name="com.android.settings.ADVANCED_CONNECTED_DEVICE_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
