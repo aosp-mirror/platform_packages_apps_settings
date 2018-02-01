@@ -17,31 +17,25 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:gravity="bottom"
-    android:paddingStart="72dp"
-    android:paddingEnd="72dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <Button
         android:id="@+id/zen_mode_settings_turn_on_button"
         style="@style/ActionPrimaryButton"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_marginStart="@dimen/screen_margin_sides"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="@string/zen_mode_button_turn_on"
-        android:paddingEnd="8dp" />
+        android:text="@string/zen_mode_button_turn_on"/>
 
     <Button
         android:id="@+id/zen_mode_settings_turn_off_button"
         style="@style/ActionSecondaryButton"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_marginStart="@dimen/screen_margin_sides"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="@string/zen_mode_button_turn_off"
-        android:paddingEnd="8dp" />
+        android:text="@string/zen_mode_button_turn_off" />
 
 </LinearLayout>
