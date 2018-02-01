@@ -169,7 +169,7 @@ public class LocationEnabler implements LifecycleObserver, OnResume, OnPause {
 
         if (admin == null) {
             admin = RestrictedLockUtils.checkIfRestrictionEnforced(
-                    mContext, UserManager.DISALLOW_CONFIG_LOCATION_MODE, userId);
+                    mContext, UserManager.DISALLOW_CONFIG_LOCATION, userId);
         }
         return admin;
     }
