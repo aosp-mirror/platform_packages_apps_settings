@@ -25,4 +25,9 @@ public class StatsManagerConfig {
      * This value is used in {@link android.app.StatsManager#addConfiguration(long, byte[])}
      */
     public static final long ANOMALY_CONFIG_KEY = 1;
+
+    /**
+     * The key that represents subscriber, which is settings app.
+     */
+    public static final long SUBSCRIBER_ID = 1;
 }

@@ -3299,6 +3299,13 @@
         <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
                   android:exported="false" />
 
+        <receiver android:name=".fuelgauge.batterytip.AnomalyConfigReceiver">
+            <intent-filter>
+                <action android:name="android.app.action.STATSD_STARTED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
