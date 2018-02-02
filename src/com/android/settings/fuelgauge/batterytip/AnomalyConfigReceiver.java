@@ -21,14 +21,12 @@ import android.app.StatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Process;
-import android.os.StatsDimensionsValue;
+import android.content.SharedPreferences;
+import android.provider.Settings;
+import android.util.Base64;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.fuelgauge.BatteryUtils;
-
-import java.util.List;
 
 /**
  * Receive broadcast when {@link StatsManager} restart, then check the anomaly config and
@@ -37,6 +35,9 @@ import java.util.List;
 public class AnomalyConfigReceiver extends BroadcastReceiver {
     private static final String TAG = "AnomalyConfigReceiver";
     private static final int REQUEST_CODE = 0;
+    private static final String PREF_DB = "anomaly_pref";
+    private static final String KEY_ANOMALY_CONFIG_VERSION = "anomaly_config_version";
+    private static final int DEFAULT_VERSION = 0;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -44,9 +45,11 @@ public class AnomalyConfigReceiver extends BroadcastReceiver {
                 || Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             final StatsManager statsManager = context.getSystemService(StatsManager.class);
 
-            //TODO(b/72385333): Check whether to update the config
-            final Intent extraIntent = new Intent();
-            extraIntent.setClass(context, AnomalyDetectionReceiver.class);
+            // Check whether to update the config
+            checkAnomalyConfig(context, statsManager);
+
+            // Upload PendingIntent to StatsManager
+            final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
             final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
                     extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
@@ -61,5 +64,31 @@ public class AnomalyConfigReceiver extends BroadcastReceiver {
                 + StatsManagerConfig.SUBSCRIBER_ID);
         statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
                 StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
+    }
+
+    private void checkAnomalyConfig(Context context, StatsManager statsManager) {
+        final SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_DB,
+                Context.MODE_PRIVATE);
+        final int currentVersion = sharedPreferences.getInt(KEY_ANOMALY_CONFIG_VERSION,
+                DEFAULT_VERSION);
+        final int newVersion = Settings.Global.getInt(context.getContentResolver(),
+                Settings.Global.ANOMALY_CONFIG_VERSION, DEFAULT_VERSION);
+        Log.i(TAG, "CurrentVersion: " + currentVersion + " new version: " + newVersion);
+
+        if (newVersion > currentVersion) {
+            final byte[] config = Base64.decode(
+                    Settings.Global.getString(context.getContentResolver(),
+                            Settings.Global.ANOMALY_CONFIG), Base64.DEFAULT);
+            if (statsManager.addConfiguration(StatsManagerConfig.ANOMALY_CONFIG_KEY, config)) {
+                Log.i(TAG, "Upload the anomaly config. configKey: "
+                        + StatsManagerConfig.ANOMALY_CONFIG_KEY);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt(KEY_ANOMALY_CONFIG_VERSION, newVersion);
+                editor.apply();
+            } else {
+                Log.i(TAG, "Upload the anomaly config failed. configKey: "
+                        + StatsManagerConfig.ANOMALY_CONFIG_KEY);
+            }
+        }
     }
 }

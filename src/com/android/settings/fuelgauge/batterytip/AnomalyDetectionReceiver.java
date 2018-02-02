@@ -54,6 +54,7 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         StatsDimensionsValue intentDimsValue =
                 intent.getParcelableExtra(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
+        Log.i(TAG, "Extra stats value: " + intentDimsValue.toString());
         List<StatsDimensionsValue> intentTuple = intentDimsValue.getTupleValueList();
 
         if (!intentTuple.isEmpty()) {
