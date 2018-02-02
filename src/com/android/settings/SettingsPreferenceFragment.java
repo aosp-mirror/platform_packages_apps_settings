@@ -339,8 +339,10 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
 
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        final Bundle arguments = getArguments();
         mAdapter = new HighlightablePreferenceGroupAdapter(preferenceScreen,
-                getArguments().getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY),
+                arguments == null
+                        ? null : arguments.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY),
                 mPreferenceHighlighted);
         return mAdapter;
     }
