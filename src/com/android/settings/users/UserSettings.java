@@ -309,7 +309,7 @@ public class UserSettings extends SettingsPreferenceFragment
     public void onDestroy() {
         super.onDestroy();
 
-        if (!mUserCaps.mEnabled) {
+        if (mUserCaps == null || !mUserCaps.mEnabled) {
             return;
         }
 
