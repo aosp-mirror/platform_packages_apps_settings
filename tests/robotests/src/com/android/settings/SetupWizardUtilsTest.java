@@ -78,4 +78,14 @@ public class SetupWizardUtilsTest {
         assertResId(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV2Theme_Light);
     }
 
+    @Test
+    public void testGetTheme_glifV3Light_shouldReturnThemeResource() {
+        SettingsShadowSystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
+                WizardManagerHelper.THEME_GLIF_V3_LIGHT);
+        Intent intent = new Intent();
+
+        assertResId(SetupWizardUtils.getTheme(intent)).isEqualTo(R.style.GlifV3Theme_Light);
+        assertResId(SetupWizardUtils.getTransparentTheme(intent))
+                .isEqualTo(R.style.GlifV3Theme_Light_Transparent);
+    }
 }
