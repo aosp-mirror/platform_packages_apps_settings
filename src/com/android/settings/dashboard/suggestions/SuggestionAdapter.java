@@ -18,6 +18,7 @@ package com.android.settings.dashboard.suggestions;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
@@ -122,6 +123,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         holder.icon.setImageDrawable(drawable);
         holder.title.setText(suggestion.getTitle());
         holder.title.setSingleLine(suggestionCount == 1);
+        holder.title.setTypeface(Typeface.create(
+            mContext.getString(com.android.internal.R.string.config_headlineFontFamilyMedium),
+            Typeface.NORMAL));
 
         if (suggestionCount == 1) {
             final CharSequence summary = suggestion.getSummary();
