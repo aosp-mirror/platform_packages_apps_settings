@@ -911,17 +911,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private void setAdditionalSettingsSummaries() {
         mAdditionalSettingsPreferenceCategory.addPreference(mConfigureWifiSettingsPreference);
-        final int defaultWakeupAvailable = getResources().getInteger(
-                com.android.internal.R.integer.config_wifi_wakeup_available);
-        boolean wifiWakeupAvailable = Settings.Global.getInt(
-                getContentResolver(), Settings.Global.WIFI_WAKEUP_AVAILABLE, defaultWakeupAvailable)
-                == 1;
-        if (wifiWakeupAvailable) {
-            mConfigureWifiSettingsPreference.setSummary(getString(
-                    isWifiWakeupEnabled()
-                    ? R.string.wifi_configure_settings_preference_summary_wakeup_on
-                    : R.string.wifi_configure_settings_preference_summary_wakeup_off));
-        }
+        mConfigureWifiSettingsPreference.setSummary(getString(
+                isWifiWakeupEnabled()
+                        ? R.string.wifi_configure_settings_preference_summary_wakeup_on
+                        : R.string.wifi_configure_settings_preference_summary_wakeup_off));
         int numSavedNetworks = mWifiTracker.getNumSavedNetworks();
         if (numSavedNetworks > 0) {
             mAdditionalSettingsPreferenceCategory.addPreference(mSavedNetworksPreference);
@@ -942,8 +935,6 @@ public class WifiSettings extends RestrictedSettingsFragment
                         Settings.Global.WIFI_SCAN_ALWAYS_AVAILABLE, 0) == 1
                 && Settings.Global.getInt(contentResolver,
                         Settings.Global.AIRPLANE_MODE_ON, 0) == 0
-                && Settings.Global.getInt(contentResolver,
-                        Settings.Global.NETWORK_RECOMMENDATIONS_ENABLED, 0) == 1
                 && !powerManager.isPowerSaveMode();
     }
 
