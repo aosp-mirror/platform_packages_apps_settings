@@ -109,8 +109,14 @@ public class AppBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_shouldAlwaysReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+    public void testAppBattery_byDefault_shouldBeShown() {
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void testAppBattery_ifDisabled_shouldNotBeShown() {
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
