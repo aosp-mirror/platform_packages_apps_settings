@@ -16,7 +16,6 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BugReportInPowerPreferenceController.COMPONENT_NAME;
 import static com.android.settings.development.BugReportInPowerPreferenceController
         .SETTING_VALUE_OFF;
 import static com.android.settings.development.BugReportInPowerPreferenceController
@@ -30,7 +29,6 @@ import static org.mockito.Mockito.when;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
@@ -38,7 +36,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +56,6 @@ public class BugReportInPowerPreferenceControllerTest {
     @Mock
     private UserManager mUserManager;
     @Mock
-    private PackageManagerWrapper mPackageManager;
-    @Mock
     private Context mContext;
     @Mock
     private SwitchPreference mPreference;
@@ -76,7 +71,6 @@ public class BugReportInPowerPreferenceControllerTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         mController = new BugReportInPowerPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
-        ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
     }
 
     @Test
@@ -113,8 +107,6 @@ public class BugReportInPowerPreferenceControllerTest {
                 Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
-        verify(mPackageManager).setComponentEnabledSetting(COMPONENT_NAME,
-                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
     }
 
     @Test
@@ -127,8 +119,6 @@ public class BugReportInPowerPreferenceControllerTest {
                 Settings.Global.BUGREPORT_IN_POWER_MENU, -1 /* default */);
 
         assertThat(mode).isEqualTo(SETTING_VALUE_ON);
-        verify(mPackageManager).setComponentEnabledSetting(COMPONENT_NAME,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0 /* flags */);
     }
 
 
@@ -167,7 +157,5 @@ public class BugReportInPowerPreferenceControllerTest {
 
         assertThat(mode).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setChecked(false);
-        verify(mPackageManager).setComponentEnabledSetting(COMPONENT_NAME,
-                PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
     }
 }
