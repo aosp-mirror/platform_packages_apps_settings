@@ -18,7 +18,6 @@ package com.android.settings.development;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -28,7 +27,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 public class BugReportInPowerPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
@@ -37,21 +35,16 @@ public class BugReportInPowerPreferenceController extends
     private static final String KEY_BUGREPORT_IN_POWER = "bugreport_in_power";
 
     @VisibleForTesting
-    static final ComponentName COMPONENT_NAME = new ComponentName("com.android.shell",
-            "com.android.shell.BugreportStorageProvider");
-    @VisibleForTesting
     static int SETTING_VALUE_ON = 1;
     @VisibleForTesting
     static int SETTING_VALUE_OFF = 0;
 
-    private final PackageManagerWrapper mPackageManager;
     private final UserManager mUserManager;
     private SwitchPreference mPreference;
 
     public BugReportInPowerPreferenceController(Context context) {
         super(context);
         mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-        mPackageManager = new PackageManagerWrapper(context.getPackageManager());
     }
 
     @Override
@@ -77,7 +70,6 @@ public class BugReportInPowerPreferenceController extends
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Global.BUGREPORT_IN_POWER_MENU,
                 isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
-        setBugreportStorageProviderStatus(isEnabled);
         return true;
     }
 
@@ -97,13 +89,6 @@ public class BugReportInPowerPreferenceController extends
     protected void onDeveloperOptionsSwitchDisabled() {
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        setBugreportStorageProviderStatus(false);
         mPreference.setChecked(false);
-    }
-
-    private void setBugreportStorageProviderStatus(boolean isEnabled) {
-        mPackageManager.setComponentEnabledSetting(COMPONENT_NAME,
-                isEnabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                        : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
     }
 }
