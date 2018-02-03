@@ -109,6 +109,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
 
+    private static boolean isVerboseLoggingEnabled() {
+        return WifiTracker.sVerboseLogging || Log.isLoggable(TAG, Log.VERBOSE);
+    }
+
     private final Runnable mUpdateAccessPointsRunnable = () -> {
         updateAccessPointPreferences();
     };
@@ -371,7 +375,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         setProgressBarVisible(true);
         mWifiTracker.forceUpdate();
-        if (WifiTracker.sVerboseLogging) {
+        if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
         }
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
@@ -762,7 +766,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-        if (WifiTracker.sVerboseLogging) {
+        if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "updateAccessPoints called for: " + accessPoints);
         }
 
