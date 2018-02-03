@@ -18,6 +18,7 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -27,6 +28,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -42,6 +44,7 @@ import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -255,4 +258,18 @@ public final class AppInfoDashboardFragmentTest {
         assertThat(mFragment.getNumberOfUserWithPackageInstalled(packageName)).isEqualTo(1);
 
     }
+
+    @Test
+    public void onDestroy_shouldUnregisterReceiver() {
+        final Context context = mock(Context.class);
+        doReturn(context).when(mFragment).getContext();
+        ReflectionHelpers.setField(mFragment, "mLifecycle", mock(Lifecycle.class));
+        ReflectionHelpers.setField(mFragment, "mCheckedForLoaderManager", true);
+        mFragment.startListeningToPackageRemove();
+
+        mFragment.onDestroy();
+
+        verify(context).unregisterReceiver(mFragment.mPackageRemovedReceiver);
+    }
+
 }
