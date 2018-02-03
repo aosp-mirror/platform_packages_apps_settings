@@ -175,6 +175,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     @Override
+    public void onDestroy() {
+        stopListeningToPackageRemove();
+        super.onDestroy();
+    }
+
+    @Override
     public int getMetricsCategory() {
         return MetricsEvent.APPLICATIONS_INSTALLED_APP_DETAILS;
     }
@@ -737,7 +743,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private void startListeningToPackageRemove() {
+    @VisibleForTesting
+    void startListeningToPackageRemove() {
         if (mListeningToPackageRemove) {
             return;
         }
@@ -755,7 +762,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         getContext().unregisterReceiver(mPackageRemovedReceiver);
     }
 
-    private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String packageName = intent.getData().getSchemeSpecificPart();
