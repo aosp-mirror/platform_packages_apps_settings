@@ -347,10 +347,8 @@
     <string name="owner_info_settings_title" msgid="5530285568897386122">"Mensaje en la pantalla de bloqueo"</string>
     <string name="security_enable_widgets_title" msgid="2754833397070967846">"Habilitar widgets"</string>
     <string name="security_enable_widgets_disabled_summary" msgid="6392489775303464905">"Inhabilitado por el administrador"</string>
-    <!-- no translation found for lockdown_settings_title (7393790212603280213) -->
-    <skip />
-    <!-- no translation found for lockdown_settings_summary (8678086272188880615) -->
-    <skip />
+    <string name="lockdown_settings_title" msgid="7393790212603280213">"Mostrar opción de bloqueo"</string>
+    <string name="lockdown_settings_summary" msgid="8678086272188880615">"Muestra la opción del botón de encendido que desactiva el acceso ampliado y el desbloqueo con huella digital."</string>
     <string name="owner_info_settings_summary" msgid="7472393443779227052">"Ninguno"</string>
     <string name="owner_info_settings_status" msgid="120407527726476378">"<xliff:g id="COUNT_0">%1$d</xliff:g> / <xliff:g id="COUNT_1">%2$d</xliff:g>"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="7591869574491036360">"p. ej., Android de Juan"</string>
@@ -471,17 +469,14 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el tablet, debes restablecer el estado de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"La contraseña que has introducido es correcta pero, lamentablemente, tus datos están dañados. \n\nPara seguir utilizando el teléfono, debes restablecer el estado de fábrica. Al configurar el dispositivo después de este proceso, podrás restaurar los datos incluidos en la copia de seguridad de tu cuenta de Google."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Cambiar método de entrada"</string>
-    <!-- no translation found for suggested_lock_settings_title (8195437597439375655) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (7915739444107426777) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (9202820303111653610) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (1252628838133344781) -->
-    <skip />
-    <!-- no translation found for suggested_fingerprint_lock_settings_title (414499342011664436) -->
-    <skip />
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Desbloquear con tu huella digital"</string>
+    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"Bloqueo de pantalla por seguridad"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"Evita que otros usuarios utilicen tu tablet"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"Evita que otros usuarios utilicen tu dispositivo"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"Evita que otros usuarios utilicen tu teléfono"</string>
+    <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"Desbloquear con huella digital"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"Desbloquear con tu huella digital"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"Desbloquear con tu huella digital"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"Desbloquear con tu huella digital"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Elige un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Bloqueo de trabajo"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Protege tu tablet"</string>
@@ -945,8 +940,7 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Llamadas Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="9008010480466359578">"Activa la Llamada por Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_suggestion_summary (4277772016570248405) -->
-    <skip />
+    <string name="wifi_calling_suggestion_summary" msgid="4277772016570248405">"Llamar por Wi‑Fi para ampliar la cobertura"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Preferencia de llamada"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Modo de llamadas Wi-Fi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Preferencia de itinerancia"</string>
@@ -1199,8 +1193,7 @@
     <string name="status_network_type" msgid="3279383550222116235">"Tipo de red móvil"</string>
     <string name="status_latest_area_info" msgid="7222470836568238054">"Información de operador"</string>
     <string name="status_data_state" msgid="5503181397066522950">"Estado de la red móvil"</string>
-    <!-- no translation found for status_esim_id (6456255368300906317) -->
-    <skip />
+    <string name="status_esim_id" msgid="6456255368300906317">"EID"</string>
     <string name="status_service_state" msgid="2323931627519429503">"Estado del servicio"</string>
     <string name="status_signal_strength" msgid="3732655254188304547">"Intensidad de la señal"</string>
     <string name="status_roaming" msgid="2638800467430913403">"Itinerancia"</string>
@@ -1388,8 +1381,7 @@
     <string name="reset_network_title" msgid="6166025966016873843">"Recuperar ajustes de Wi-Fi, red móvil y Bluetooth"</string>
     <string name="reset_network_desc" msgid="5547979398298881406">"Se recuperarán todos los ajustes de red, como:\n\n"<li>"Wi‑Fi"</li>\n<li>"Datos móviles"</li>\n<li>"Bluetooth"</li></string>
     <string name="reset_esim_title" msgid="5914265121343650792">"Recuperar también el estado de las tarjetas eSIM"</string>
-    <!-- no translation found for reset_esim_desc (6412324670559060446) -->
-    <skip />
+    <string name="reset_esim_desc" msgid="6412324670559060446">"Borra todas las tarjetas eSIM del teléfono. Ponte en contacto con tu operador para volver a descargar tus tarjetas eSIM. Esta acción no cancelará tu plan de servicios móviles."</string>
     <string name="reset_network_button_text" msgid="2035676527471089853">"Recuperar ajustes"</string>
     <string name="reset_network_final_desc" msgid="6388371121099245116">"¿Quieres recuperar todos los ajustes de red? Esta acción no se puede deshacer."</string>
     <string name="reset_network_final_button_text" msgid="1797434793741744635">"Recuperar ajustes"</string>
@@ -2379,12 +2371,9 @@
     <string name="sync_is_failing" msgid="1591561768344128377">"En este momento hay incidencias con la sincronización. Se restablecerá en breve."</string>
     <string name="add_account_label" msgid="7811707265834013767">"Añadir cuenta"</string>
     <string name="managed_profile_not_available_label" msgid="852263300911325904">"El perfil de trabajo aún no está disponible"</string>
-    <!-- no translation found for work_mode_label (7157582467956920750) -->
-    <skip />
-    <!-- no translation found for work_mode_on_summary (3628349169847990263) -->
-    <skip />
-    <!-- no translation found for work_mode_off_summary (2657138190560082508) -->
-    <skip />
+    <string name="work_mode_label" msgid="7157582467956920750">"Perfil de trabajo"</string>
+    <string name="work_mode_on_summary" msgid="3628349169847990263">"Administrado por tu organización"</string>
+    <string name="work_mode_off_summary" msgid="2657138190560082508">"Las aplicaciones y las notificaciones están desactivadas"</string>
     <string name="remove_managed_profile_label" msgid="3856519337797285325">"Quitar perfil de trabajo"</string>
     <string name="background_data" msgid="5779592891375473817">"Datos en segundo plano"</string>
     <string name="background_data_summary" msgid="8328521479872763452">"Las aplicaciones pueden sincronizar datos, enviarlos y recibirlos."</string>
@@ -2635,8 +2624,7 @@
       <item quantity="other">Comprobar certificados</item>
       <item quantity="one">Comprobar certificado</item>
     </plurals>
-    <!-- no translation found for user_settings_title (3493908927709169019) -->
-    <skip />
+    <string name="user_settings_title" msgid="3493908927709169019">"Varios usuarios"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Usuarios y perfiles"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Añadir usuario o perfil"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Añadir usuario"</string>
@@ -2826,7 +2814,8 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, enviar contenido"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Aplicaciones y notificaciones"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Permisos, aplicaciones predeterminadas"</string>
-    <!-- no translation found for account_dashboard_title (5895948991491438911) -->
+    <string name="account_dashboard_title" msgid="5895948991491438911">"Cuentas"</string>
+    <!-- no translation found for account_dashboard_default_summary (3998347400161811075) -->
     <skip />
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Aplicaciones predeterminadas"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Idiomas, hora, copias de seguridad y actualizaciones"</string>
@@ -2881,6 +2870,7 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"red, estado de la red móvil, estado del servicio, intensidad de la señal, tipo de red móvil, itinerancia, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"número de serie, versión de hardware"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nivel de parche de seguridad de android, versión de banda base, versión de kernel"</string>
+    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Pantalla ambiente, pantalla de bloqueo"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Configurar etiqueta NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Editar"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Toca una etiqueta para editarla..."</string>
@@ -2934,10 +2924,8 @@
     <string name="zen_mode_automation_settings_title" msgid="2517800938791944915">"Activar automáticamente"</string>
     <string name="zen_mode_automation_settings_page_title" msgid="7069221762714457987">"Reglas automáticas"</string>
     <string name="zen_mode_automatic_rule_settings_page_title" msgid="9041488774587594301">"Regla automática"</string>
-    <!-- no translation found for zen_mode_automation_suggestion_title (4321254843908888574) -->
-    <skip />
-    <!-- no translation found for zen_mode_automation_suggestion_summary (6223252025075862701) -->
-    <skip />
+    <string name="zen_mode_automation_suggestion_title" msgid="4321254843908888574">"Silenciar teléfono en ciertos momentos"</string>
+    <string name="zen_mode_automation_suggestion_summary" msgid="6223252025075862701">"Definir reglas de No molestar"</string>
     <string name="zen_mode_use_automatic_rule" msgid="4509513632574025380">"Usar regla"</string>
     <string name="zen_mode_option_important_interruptions" msgid="3903928008177972500">"Solo prioritarias"</string>
     <string name="zen_mode_option_alarms" msgid="5785372117288803600">"Solo alarmas"</string>
@@ -2971,6 +2959,8 @@
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Otros sonidos y vibraciones"</string>
     <string name="configure_notification_settings" msgid="7616737397127242615">"Notificaciones"</string>
     <string name="recent_notifications" msgid="5660639387705060156">"Enviadas recientemente"</string>
+    <!-- no translation found for recent_notifications_see_all_title (3935564140468680831) -->
+    <skip />
     <string name="advanced_section_header" msgid="8833934850242546903">"Ajustes avanzados"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Notificaciones de trabajo"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Permitir burbujas de notificación"</string>
@@ -3334,21 +3324,43 @@
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Rechazar"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Cargar este dispositivo"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Cargar solo este dispositivo"</string>
-    <string name="usb_use_power_only" msgid="6426550616883919530">"Suministrar corriente eléctrica"</string>
-    <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Carga el dispositivo conectado. Solo funciona con dispositivos compatibles con la carga por USB."</string>
-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Transferir archivos"</string>
+    <!-- no translation found for usb_use_power_only (6449381364444187612) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (5674490059427055197) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (1223134119354320726) -->
+    <skip />
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Transferir archivos a otro dispositivo"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Transferir fotos (PTP)"</string>
+    <!-- no translation found for usb_use_photo_transfers (8192719651229326283) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Transferir fotos o archivos si no se admite MTP (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="870922185938298263">"Utilizar dispositivo como MIDI"</string>
+    <!-- no translation found for usb_use_tethering (3944506882789422118) -->
+    <skip />
+    <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Utilizar este dispositivo como MIDI"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Utilizar USB para"</string>
+    <string name="usb_use" msgid="3372728031108932425">"Utilizar USB para"</string>
+    <!-- no translation found for usb_use_also (557340935190819370) -->
+    <skip />
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Cargando el dispositivo"</string>
-    <string name="usb_summary_power_only" msgid="3629517713817003738">"Suministrar energía"</string>
-    <string name="usb_summary_file_transfers" msgid="6435943692610175111">"Transferir archivos"</string>
-    <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"Transferir fotos (PTP)"</string>
-    <string name="usb_summary_MIDI" msgid="5687906612187885908">"Utilizar el dispositivo como MIDI"</string>
+    <!-- no translation found for usb_summary_power_only (1996391096369798526) -->
+    <skip />
+    <!-- no translation found for usb_summary_file_transfers (6925168380589489645) -->
+    <skip />
+    <!-- no translation found for usb_summary_tether (951190049557074535) -->
+    <skip />
+    <!-- no translation found for usb_summary_photo_transfers (665584667685030007) -->
+    <skip />
+    <!-- no translation found for usb_summary_MIDI (2399066753961085360) -->
+    <skip />
+    <!-- no translation found for usb_summary_file_transfers_power (7700800611455849806) -->
+    <skip />
+    <!-- no translation found for usb_summary_tether_power (5825335393952752238) -->
+    <skip />
+    <!-- no translation found for usb_summary_photo_transfers_power (6826058111908423069) -->
+    <skip />
+    <!-- no translation found for usb_summary_MIDI_power (3308250484012677596) -->
+    <skip />
     <string name="sms_mirroring_pref" msgid="6475043279147376031">"Mirroring de SMS"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"comprobación de uso en segundo plano"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Acceso completo en segundo plano"</string>
@@ -3457,14 +3469,15 @@
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Fondo de pantalla, suspensión, tamaño de la fuente"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Suspender tras 10 minutos de inactividad"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Se está usando una media de <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de memoria"</string>
-    <string name="users_and_accounts_summary" msgid="245282689646897882">"Usuario actual: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Has iniciado sesión como <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"Aplicación predeterminada: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <!-- no translation found for location_on_summary (4083334422422067511) -->
-    <skip />
+    <string name="location_on_summary" msgid="4083334422422067511">"ACTIVADA"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"DESACTIVADO"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Copia de seguridad inhabilitada"</string>
-    <string name="about_summary" msgid="924181828102801010">"Actualizado a Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for android_version_summary (2935995161657697278) -->
+    <skip />
+    <!-- no translation found for android_version_pending_update_summary (487831391976523090) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Acción no permitida"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"No se puede cambiar el volumen"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"No se permite llamar"</string>
@@ -3485,7 +3498,8 @@
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"El punto de acceso Wi-Fi <xliff:g id="ID_1">%1$s</xliff:g> está activo y la conexión Wi-Fi de este dispositivo está desactivada."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Modo avión activado"</string>
     <string name="condition_airplane_summary" msgid="3738805058182535606">"La red móvil, la conexión Wi‑Fi y el Bluetooth están desactivados. No puedes hacer llamadas ni conectarte a Internet."</string>
-    <string name="condition_zen_title" msgid="2679168532600816392">"No molestar activado (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <!-- no translation found for condition_zen_title (2897779738211625) -->
+    <skip />
     <string name="condition_battery_title" msgid="3272131008388575349">"Ahorro de batería activado"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Ha disminuido el rendimiento. Las datos en segundo plano y los servicios de ubicación están desactivados."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Datos móviles desactivados"</string>
@@ -3495,8 +3509,7 @@
     <string name="condition_work_title" msgid="7293722361184366648">"Perfil de trabajo desactivado"</string>
     <string name="condition_work_summary" msgid="7543202177571590378">"Las aplicaciones, la sincronización en segundo plano y otras funciones relacionadas con tu perfil de trabajo están desactivadas."</string>
     <string name="night_display_suggestion_title" msgid="6602129097059325291">"Definir horario de luz nocturna"</string>
-    <!-- no translation found for night_display_suggestion_summary (228346372178218442) -->
-    <skip />
+    <string name="night_display_suggestion_summary" msgid="228346372178218442">"Cambiar automáticamente el color de la pantalla por la noche"</string>
     <string name="condition_night_display_title" msgid="5599814941976856183">"Luz nocturna activada"</string>
     <string name="condition_night_display_summary" msgid="5443722724310650381">"La pantalla adopta un tono ámbar que puede ayudarte a conciliar el sueño."</string>
     <string name="suggestions_title_v2" msgid="5601181602924147569">"Sugerencias personalizadas"</string>
@@ -3630,6 +3643,7 @@
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ajustes rápidos de mosaicos de desarrolladores"</string>
     <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Captura de ventanas"</string>
     <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"Captura de superficies"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Ajustes de perfil de trabajo"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Búsqueda de contactos"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Permitir que tu organización busque contactos para identificar llamadas y contactos"</string>
@@ -3814,20 +3828,12 @@
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Mostrar el cuadro de diálogo cuando una aplicación falle"</string>
     <string name="directory_access" msgid="4722237210725864244">"Acceso al directorio"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"acceso al directorio"</string>
-    <!-- no translation found for directory_on_volume (1246959267814974387) -->
-    <skip />
-    <!-- no translation found for my_device_info_title (5512426315065239032) -->
-    <skip />
-    <!-- no translation found for my_device_info_title (7850936731324591758) -->
-    <skip />
-    <!-- no translation found for my_device_info_title (5512071003076176919) -->
-    <skip />
-    <!-- no translation found for my_device_info_account_preference_title (342933638925781861) -->
-    <skip />
-    <!-- no translation found for my_device_info_device_name_preference_title (7104085224684165324) -->
-    <skip />
-    <!-- no translation found for bluetooth_on_while_driving_pref (2460847604498343330) -->
-    <skip />
-    <!-- no translation found for bluetooth_on_while_driving_summary (3196190732516898541) -->
-    <skip />
+    <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
+    <string name="my_device_info_title" product="default" msgid="5512426315065239032">"Mi teléfono"</string>
+    <string name="my_device_info_title" product="tablet" msgid="7850936731324591758">"Mi tablet"</string>
+    <string name="my_device_info_title" product="device" msgid="5512071003076176919">"Mi dispositivo"</string>
+    <string name="my_device_info_account_preference_title" msgid="342933638925781861">"Cuenta"</string>
+    <string name="my_device_info_device_name_preference_title" msgid="7104085224684165324">"Nombre del dispositivo"</string>
+    <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Usar Bluetooth al conducir"</string>
+    <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Activar el Bluetooth automáticamente al conducir"</string>
 </resources>
