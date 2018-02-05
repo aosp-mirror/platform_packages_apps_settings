@@ -103,6 +103,10 @@ public class BlockPreferenceController extends NotificationPreferenceController
                 mChannel.setImportance(importance);
                 saveChannel();
             }
+            if (mBackend.onlyHasDefaultChannel(mAppRow.pkg, mAppRow.uid)) {
+                mAppRow.banned = blocked;
+                mBackend.setNotificationsEnabledForPackage(mAppRow.pkg, mAppRow.uid, !blocked);
+            }
         } else if (mChannelGroup != null && mChannelGroup.getGroup() != null) {
             mChannelGroup.setBlocked(blocked);
             mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, mChannelGroup.getGroup());

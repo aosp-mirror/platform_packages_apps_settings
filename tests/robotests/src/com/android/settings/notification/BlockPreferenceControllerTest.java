@@ -29,7 +29,9 @@ import static junit.framework.Assert.assertTrue;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -238,19 +240,26 @@ public class BlockPreferenceControllerTest {
     @Test
     public void testOnSwitchChanged_channel_default() throws Exception {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
+        appRow.pkg = "pkg";
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_UNSPECIFIED);
+        when(mBackend.onlyHasDefaultChannel(anyString(), anyInt())).thenReturn(true);
         mController.onResume(appRow, channel, null, null);
         mController.updateState(mPreference);
 
         mController.onSwitchChanged(null, false);
         assertEquals(IMPORTANCE_NONE, channel.getImportance());
+        assertTrue(appRow.banned);
 
         mController.onSwitchChanged(null, true);
         assertEquals(IMPORTANCE_UNSPECIFIED, channel.getImportance());
+        assertFalse(appRow.banned);
 
         verify(mBackend, times(2)).updateChannel(any(), anyInt(), any());
 
+        // 2 calls for onSwitchChanged + once when calling updateState originally
+        verify(mBackend, times(3)).setNotificationsEnabledForPackage(
+                anyString(), anyInt(), anyBoolean());
     }
 
     @Test
