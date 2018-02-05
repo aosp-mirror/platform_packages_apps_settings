@@ -77,6 +77,11 @@
             android:fragment="com.android.settings.applications.RunningServices" />
 
         <Preference
+            android:key="android_o_battery_settings"
+            android:fragment="com.android.settings.fuelgauge.PowerUsageSummaryLegacy"
+            android:title="@string/dev_android_o_battery_settings_title" />
+
+        <Preference
             android:key="convert_to_file_encryption"
             android:title="@string/convert_to_file_encryption"
             android:summary="@string/convert_to_file_encryption_enabled"
@@ -470,7 +475,6 @@
             android:title="@string/app_process_limit_title"
             android:entries="@array/app_process_limit_entries"
             android:entryValues="@array/app_process_limit_values" />
-
 
         <Preference
             android:key="background_check"
