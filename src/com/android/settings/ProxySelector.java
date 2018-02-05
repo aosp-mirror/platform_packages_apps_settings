@@ -41,9 +41,9 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.SettingsPreferenceFragment.SettingsDialogFragment;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 
-public class ProxySelector extends InstrumentedPreferenceFragment implements DialogCreatable {
+public class ProxySelector extends InstrumentedFragment implements DialogCreatable {
     private static final String TAG = "ProxySelector";
 
     EditText    mHostnameField;
@@ -57,11 +57,6 @@ public class ProxySelector extends InstrumentedPreferenceFragment implements Dia
 
     private SettingsDialogFragment mDialogFragment;
     private View mView;
-
-    @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -179,6 +174,8 @@ public class ProxySelector extends InstrumentedPreferenceFragment implements Dia
         String title = intent.getStringExtra("title");
         if (!TextUtils.isEmpty(title)) {
             activity.setTitle(title);
+        } else {
+            activity.setTitle(R.string.proxy_settings_title);
         }
     }
 

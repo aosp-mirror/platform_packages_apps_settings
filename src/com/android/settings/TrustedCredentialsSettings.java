@@ -65,7 +65,7 @@ import com.android.internal.annotations.GuardedBy;
 import com.android.internal.app.UnlaunchableAppActivity;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
@@ -75,7 +75,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.IntConsumer;
 
-public class TrustedCredentialsSettings extends InstrumentedPreferenceFragment
+public class TrustedCredentialsSettings extends InstrumentedFragment
         implements TrustedCredentialsDialogBuilder.DelegateInterface {
 
     public static final String ARG_SHOW_NEW_FOR_USER = "ARG_SHOW_NEW_FOR_USER";
@@ -117,7 +117,8 @@ public class TrustedCredentialsSettings extends InstrumentedPreferenceFragment
         private final int mContentView;
         private final boolean mSwitch;
 
-        private Tab(String tag, int label, int view, int progress, int contentView, boolean withSwitch) {
+        private Tab(String tag, int label, int view, int progress, int contentView,
+                boolean withSwitch) {
             mTag = tag;
             mLabel = label;
             mView = view;

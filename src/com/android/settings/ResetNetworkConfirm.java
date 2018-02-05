@@ -42,8 +42,8 @@ import android.widget.Toast;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.wrapper.RecoverySystemWrapper;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -58,7 +58,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class ResetNetworkConfirm extends InstrumentedPreferenceFragment {
+public class ResetNetworkConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
