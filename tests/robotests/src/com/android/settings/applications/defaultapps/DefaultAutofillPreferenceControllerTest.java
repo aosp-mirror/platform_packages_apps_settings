@@ -104,10 +104,5 @@ public class DefaultAutofillPreferenceControllerTest {
         final DefaultAppInfo info = mController.getDefaultAppInfo();
 
         assertThat(info).isNotNull();
-
-        mController.getSettingIntent(info);
-
-        verify(mPackageManager.getPackageManager()).queryIntentServices(
-                DefaultAutofillPicker.AUTOFILL_PROBE, PackageManager.GET_META_DATA);
     }
 }
