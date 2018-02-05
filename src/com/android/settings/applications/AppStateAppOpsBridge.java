@@ -61,7 +61,7 @@ public abstract class AppStateAppOpsBridge extends AppStateBaseBridge {
             new IPackageManagerWrapper(AppGlobals.getPackageManager()));
     }
 
-    @VisibleForTesting(otherwise = VisibleForTesting.NONE)
+    @VisibleForTesting
     AppStateAppOpsBridge(Context context, ApplicationsState appState, Callback callback,
             int appOpsOpCode, String[] permissions, IPackageManagerWrapper packageManager) {
         super(appState, callback);

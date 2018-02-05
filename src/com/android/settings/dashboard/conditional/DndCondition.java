@@ -15,9 +15,7 @@
  */
 package com.android.settings.dashboard.conditional;
 
-import android.app.ActivityManager;
 import android.app.NotificationManager;
-import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +29,8 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.Utils;
+import com.android.settings.notification.ZenModeSettings;
 
 public class DndCondition extends Condition {
 
@@ -80,19 +80,6 @@ public class DndCondition extends Condition {
         mZen = bundle.getInt(KEY_STATE, Global.ZEN_MODE_OFF);
     }
 
-    private CharSequence getZenState() {
-        switch (mZen) {
-            case Settings.Global.ZEN_MODE_ALARMS:
-                return mManager.getContext().getString(R.string.zen_mode_option_alarms);
-            case Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS:
-                return mManager.getContext().getString(
-                        R.string.zen_mode_option_important_interruptions);
-            case Settings.Global.ZEN_MODE_NO_INTERRUPTIONS:
-                return mManager.getContext().getString(R.string.zen_mode_option_no_interruptions);
-        }
-        return null;
-    }
-
     @Override
     public Icon getIcon() {
         return Icon.createWithResource(mManager.getContext(), R.drawable.ic_zen);
@@ -100,17 +87,13 @@ public class DndCondition extends Condition {
 
     @Override
     public CharSequence getTitle() {
-        return mManager.getContext().getString(R.string.condition_zen_title, getZenState());
+        return mManager.getContext().getString(R.string.condition_zen_title);
     }
 
     @Override
     public CharSequence getSummary() {
-        final boolean isForever = mConfig != null && mConfig.manualRule != null
-                && mConfig.manualRule.conditionId == null;
-        return isForever ? mManager.getContext().getString(com.android.internal.R.string.zen_mode_forever_dnd)
-                : ZenModeConfig.getConditionSummary(mManager.getContext(), mConfig,
-                ActivityManager.getCurrentUser(),
-                false);
+        return ZenModeConfig.getDescription(mManager.getContext(), mZen != Global.ZEN_MODE_OFF,
+                mConfig);
     }
 
     @Override
@@ -120,8 +103,9 @@ public class DndCondition extends Condition {
 
     @Override
     public void onPrimaryClick() {
-        StatusBarManager statusBar = mManager.getContext().getSystemService(StatusBarManager.class);
-        statusBar.expandSettingsPanel("dnd");
+        Utils.startWithFragment(mManager.getContext(), ZenModeSettings.class.getName(), null,
+                null, 0, R.string.zen_mode_settings_title, null,
+                MetricsEvent.NOTIFICATION_ZEN_MODE);
     }
 
     @Override

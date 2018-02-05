@@ -252,7 +252,7 @@ public class LocationEnablerTest {
         enforcingUsers.add(new UserManager.EnforcingUser(userId,
                 UserManager.RESTRICTION_SOURCE_PROFILE_OWNER));
         when(mUserManager.getUserRestrictionSources(
-                UserManager.DISALLOW_CONFIG_LOCATION_MODE, UserHandle.of(userId)))
+                UserManager.DISALLOW_CONFIG_LOCATION, UserHandle.of(userId)))
                 .thenReturn(enforcingUsers);
 
         assertThat(mEnabler.getShareLocationEnforcedAdmin(userId) != null).isTrue();

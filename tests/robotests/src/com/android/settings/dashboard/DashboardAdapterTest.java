@@ -115,6 +115,7 @@ public class DashboardAdapterTest {
         final View itemView = mock(View.class);
         when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
         when(itemView.findViewById(android.R.id.summary)).thenReturn(mock(TextView.class));
+        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
         final DashboardAdapter.SuggestionContainerHolder holder =
             new DashboardAdapter.SuggestionContainerHolder(itemView);
 
@@ -138,6 +139,7 @@ public class DashboardAdapterTest {
         final View itemView = mock(View.class);
         when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
         when(itemView.findViewById(android.R.id.summary)).thenReturn(mock(TextView.class));
+        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
         final DashboardAdapter.SuggestionContainerHolder holder =
             new DashboardAdapter.SuggestionContainerHolder(itemView);
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3", "pkg4");
@@ -188,6 +190,7 @@ public class DashboardAdapterTest {
         final View itemView = mock(View.class);
         when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
         when(itemView.findViewById(android.R.id.summary)).thenReturn(mock(TextView.class));
+        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
         final DashboardAdapter.SuggestionContainerHolder holder =
             new DashboardAdapter.SuggestionContainerHolder(itemView);
 
@@ -213,6 +216,7 @@ public class DashboardAdapterTest {
         when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
         final TextView summary = mock(TextView.class);
         when(itemView.findViewById(android.R.id.summary)).thenReturn(summary);
+        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
         final DashboardAdapter.SuggestionContainerHolder holder =
             new DashboardAdapter.SuggestionContainerHolder(itemView);
 

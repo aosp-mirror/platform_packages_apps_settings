@@ -58,7 +58,7 @@ public class PhoneNumberPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mTelephonyManager.isVoiceCapable();
     }
 
     @Override

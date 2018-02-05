@@ -162,17 +162,22 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mUserManager = (UserManager) activity.getSystemService(Context.USER_SERVICE);
         mPm = activity.getPackageManager();
 
-        retrieveAppEntry();
-        startListeningToPackageRemove();
-
         if (!ensurePackageInfoAvailable(activity)) {
             return;
         }
+
+        startListeningToPackageRemove();
 
         mForceStopOptionsMenuController =
             new ForceStopOptionsMenuController(activity, this /* parent */, mDpm,
                 mMetricsFeatureProvider, getLifecycle());
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        stopListeningToPackageRemove();
+        super.onDestroy();
     }
 
     @Override
@@ -205,6 +210,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        retrieveAppEntry();
+        if (mPackageInfo == null) {
+            return null;
+        }
         final String packageName = getPackageName();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
@@ -262,9 +271,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     ApplicationsState.AppEntry getAppEntry() {
-        if (mAppEntry == null) {
-            retrieveAppEntry();
-        }
         return mAppEntry;
     }
 
@@ -273,9 +279,6 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     PackageInfo getPackageInfo() {
-        if (mAppEntry == null) {
-            retrieveAppEntry();
-        }
         return mPackageInfo;
     }
 
@@ -361,7 +364,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
                             PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER)
                             .execute((Object) null);
                 }
-                // continue with following operations
+                if (!refreshUi()) {
+                    onPackageRemoved();
+                } else {
+                    startListeningToPackageRemove();
+                }
+                break;
             case REQUEST_REMOVE_DEVICE_ADMIN:
                 if (!refreshUi()) {
                     setIntentAndFinish(true, true);
@@ -622,7 +630,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         return mPackageName;
     }
 
-    private void retrieveAppEntry() {
+    @VisibleForTesting
+    void retrieveAppEntry() {
         final Activity activity = getActivity();
         if (activity == null) {
             return;
@@ -734,7 +743,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
     }
 
-    private void startListeningToPackageRemove() {
+    @VisibleForTesting
+    void startListeningToPackageRemove() {
         if (mListeningToPackageRemove) {
             return;
         }
@@ -752,7 +762,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
         getContext().unregisterReceiver(mPackageRemovedReceiver);
     }
 
-    private final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
+    @VisibleForTesting
+    final BroadcastReceiver mPackageRemovedReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String packageName = intent.getData().getSchemeSpecificPart();

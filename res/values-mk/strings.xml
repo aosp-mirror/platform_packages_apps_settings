@@ -474,7 +474,9 @@
     <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"Спречете ги другите да го користат вашиот уред"</string>
     <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"Спречете ги другите да го користат вашиот телефон"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"Отклучи со отпечаток"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" msgid="2149569133725273864">"Отклучете со отпечаток"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"Отклучете со отпечаток"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"Отклучете со отпечаток"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"Отклучете со отпечаток"</string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Избери заклучување на екранот"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Избери закл. раб. профил"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Заштитете го таблетот"</string>
@@ -2622,8 +2624,7 @@
       <item quantity="one">Проверка на сертификати</item>
       <item quantity="other">Проверка на сертификати</item>
     </plurals>
-    <!-- no translation found for user_settings_title (3493908927709169019) -->
-    <skip />
+    <string name="user_settings_title" msgid="3493908927709169019">"Повеќе корисници"</string>
     <string name="user_list_title" msgid="7937158411137563543">"Корисници и профили"</string>
     <string name="user_add_user_or_profile_menu" msgid="6923838875175259418">"Додајте корисник или профил"</string>
     <string name="user_add_user_menu" msgid="1675956975014862382">"Додајте корисник"</string>
@@ -2813,7 +2814,8 @@
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="9106040742715366495">"Bluetooth, Cast"</string>
     <string name="app_and_notification_dashboard_title" msgid="7838365599185397539">"Апликации и известувања"</string>
     <string name="app_and_notification_dashboard_summary" msgid="2363314178802548682">"Дозволи, стандардни апликации"</string>
-    <!-- no translation found for account_dashboard_title (5895948991491438911) -->
+    <string name="account_dashboard_title" msgid="5895948991491438911">"Сметки"</string>
+    <!-- no translation found for account_dashboard_default_summary (3998347400161811075) -->
     <skip />
     <string name="app_default_dashboard_title" msgid="7342549305933047317">"Стандардни апликации"</string>
     <string name="system_dashboard_summary" msgid="5797743225249766685">"Јазици, време, бекап и ажурирања"</string>
@@ -2868,6 +2870,7 @@
     <string name="keywords_sim_status" msgid="1474422416860990564">"мрежа, состојба на мобилна мрежа, состојба на услуга, јачина на сигнал, тип на мобилна мрежа, роаминг, iccid"</string>
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"сериски број, верзија на хардвер"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"ниво на безбедносна лепенка на Android, верзија на радиомодул, верзија на кернел"</string>
+    <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Амбиентален екран, Екран за заклучување на екранот"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Поставете Wi-Fi ознака за NFC"</string>
     <string name="write_tag" msgid="8571858602896222537">"Пишувај"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Допрете ознака да пишувате…"</string>
@@ -2956,6 +2959,8 @@
     <string name="other_sound_category_preference_title" msgid="2521096636124314015">"Други звуци и вибрации"</string>
     <string name="configure_notification_settings" msgid="7616737397127242615">"Известувања"</string>
     <string name="recent_notifications" msgid="5660639387705060156">"Неодамна испратени"</string>
+    <!-- no translation found for recent_notifications_see_all_title (3935564140468680831) -->
+    <skip />
     <string name="advanced_section_header" msgid="8833934850242546903">"Напредни"</string>
     <string name="profile_section_header" msgid="2320848161066912001">"Известувања за работен профил"</string>
     <string name="notification_badging_title" msgid="5938709971403474078">"Дозволи точки за известување"</string>
@@ -3319,21 +3324,43 @@
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Одбиј"</string>
     <string name="usb_use_charging_only" msgid="2180443097365214467">"Полнење на уредов"</string>
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Само ја полни батеријата"</string>
-    <string name="usb_use_power_only" msgid="6426550616883919530">"Напојување"</string>
-    <string name="usb_use_power_only_desc" msgid="3461232831015575152">"Полнење на поврзаниот уред. Функционира само со уреди што поддржуваат полнење преку USB."</string>
-    <string name="usb_use_file_transfers" msgid="7409600791007250137">"Пренос на датотеки"</string>
+    <!-- no translation found for usb_use_power_only (6449381364444187612) -->
+    <skip />
+    <!-- no translation found for usb_use_power_only_desc (5674490059427055197) -->
+    <skip />
+    <!-- no translation found for usb_use_file_transfers (1223134119354320726) -->
+    <skip />
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Пренесете ги датотеките на друг уред"</string>
-    <string name="usb_use_photo_transfers" msgid="7794775645350330454">"Пренос на фотографии (PTP)"</string>
+    <!-- no translation found for usb_use_photo_transfers (8192719651229326283) -->
+    <skip />
     <string name="usb_use_photo_transfers_desc" msgid="2963034811151325996">"Пренесувај фотографии или датотеки ако не е подржан MTP (PTP)"</string>
-    <string name="usb_use_MIDI" msgid="870922185938298263">"Користете го уредот како MIDI"</string>
+    <!-- no translation found for usb_use_tethering (3944506882789422118) -->
+    <skip />
+    <string name="usb_use_MIDI" msgid="5116404702692483166">"МИДИ"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Користете го уредов како MIDI"</string>
-    <string name="usb_use" msgid="3256040963685055320">"Користете USB за"</string>
+    <string name="usb_use" msgid="3372728031108932425">"Користи USB за"</string>
+    <!-- no translation found for usb_use_also (557340935190819370) -->
+    <skip />
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Полнење на уредот"</string>
-    <string name="usb_summary_power_only" msgid="3629517713817003738">"Напојување со електрична енергија"</string>
-    <string name="usb_summary_file_transfers" msgid="6435943692610175111">"Пренесување датотеки"</string>
-    <string name="usb_summary_photo_transfers" msgid="8440204169576585250">"Пренесување фотографии (PTP)"</string>
-    <string name="usb_summary_MIDI" msgid="5687906612187885908">"Користење на уредот како MIDI"</string>
+    <!-- no translation found for usb_summary_power_only (1996391096369798526) -->
+    <skip />
+    <!-- no translation found for usb_summary_file_transfers (6925168380589489645) -->
+    <skip />
+    <!-- no translation found for usb_summary_tether (951190049557074535) -->
+    <skip />
+    <!-- no translation found for usb_summary_photo_transfers (665584667685030007) -->
+    <skip />
+    <!-- no translation found for usb_summary_MIDI (2399066753961085360) -->
+    <skip />
+    <!-- no translation found for usb_summary_file_transfers_power (7700800611455849806) -->
+    <skip />
+    <!-- no translation found for usb_summary_tether_power (5825335393952752238) -->
+    <skip />
+    <!-- no translation found for usb_summary_photo_transfers_power (6826058111908423069) -->
+    <skip />
+    <!-- no translation found for usb_summary_MIDI_power (3308250484012677596) -->
+    <skip />
     <string name="sms_mirroring_pref" msgid="6475043279147376031">"Отсликување SMS-пораки"</string>
     <string name="background_check_pref" msgid="7550258400138010979">"Проверка на заднината"</string>
     <string name="background_check_title" msgid="4534254315824525593">"Целосен пристап до заднината"</string>
@@ -3442,14 +3469,15 @@
     <string name="display_dashboard_summary" msgid="4145888780290131488">"Тапет, режим во мирување, големина на фонт"</string>
     <string name="display_summary_example" msgid="9102633726811090523">"Стави на режим во мирување по 10 минути неактивност"</string>
     <string name="memory_summary" msgid="8080825904671961872">"Искористени се просечно <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> меморија"</string>
-    <string name="users_and_accounts_summary" msgid="245282689646897882">"Тековен корисник: <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Најавени сте како <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> е стандардна"</string>
-    <!-- no translation found for location_on_summary (4083334422422067511) -->
-    <skip />
+    <string name="location_on_summary" msgid="4083334422422067511">"ВКЛУЧЕНО"</string>
     <string name="location_off_summary" msgid="6474350053215707957">"ИСКЛУЧЕНО"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Бекапот е оневозможен"</string>
-    <string name="about_summary" msgid="924181828102801010">"Ажурирано на Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
+    <!-- no translation found for android_version_summary (2935995161657697278) -->
+    <skip />
+    <!-- no translation found for android_version_pending_update_summary (487831391976523090) -->
+    <skip />
     <string name="disabled_by_policy_title" msgid="627023216027648534">"Дејството не е дозволено"</string>
     <string name="disabled_by_policy_title_adjust_volume" msgid="7399450998356045023">"Не може да се промени јачината на звукот"</string>
     <string name="disabled_by_policy_title_outgoing_calls" msgid="7919816644946067058">"Повикувањето не е дозволено"</string>
@@ -3470,7 +3498,8 @@
     <string name="condition_hotspot_summary" msgid="3433182779269409683">"Преносливата Wi-Fi-точка на пристап <xliff:g id="ID_1">%1$s</xliff:g> е активна. Wi-Fi за овој уред е исклучен."</string>
     <string name="condition_airplane_title" msgid="287356299107070503">"Авионскиот режим е вклучен"</string>
     <string name="condition_airplane_summary" msgid="3738805058182535606">"Wi-Fi, Bluetooth и мобилната мрежа се исклучени. Не може да воспоставувате телефонски повици или да се поврзувате на интернет."</string>
-    <string name="condition_zen_title" msgid="2679168532600816392">"Не вознемирувај е вклучено (<xliff:g id="ID_1">%1$s</xliff:g>)"</string>
+    <!-- no translation found for condition_zen_title (2897779738211625) -->
+    <skip />
     <string name="condition_battery_title" msgid="3272131008388575349">"Штедачот на батерија е вклучен"</string>
     <string name="condition_battery_summary" msgid="4418839236027977450">"Изведбата е намалена. Услугите според локација и податоците од заднина се исклучени."</string>
     <string name="condition_cellular_title" msgid="1327317003797575735">"Мобилниот интернет е исклучен"</string>
@@ -3614,6 +3643,7 @@
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Плочки на програмерот за брзи поставки"</string>
     <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Трага од прозорец"</string>
     <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"Површинска трага"</string>
+    <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Поставки на работен профил"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Пребарување контакти"</string>
     <string name="managed_profile_contact_search_summary" msgid="5431253552272970512">"Дозволете при пребарувањата контакти на вашата организација да се препознаваат повикувачи и контакти"</string>
@@ -3798,8 +3828,7 @@
     <string name="show_first_crash_dialog_summary" msgid="703224456285060428">"Прикажи дијалог при секој пад на апликација"</string>
     <string name="directory_access" msgid="4722237210725864244">"Пристап до адресарот"</string>
     <string name="keywords_directory_access" msgid="360557532842445280">"пристап до адресарот"</string>
-    <!-- no translation found for directory_on_volume (1246959267814974387) -->
-    <skip />
+    <string name="directory_on_volume" msgid="1246959267814974387">"<xliff:g id="VOLUME">%1$s</xliff:g> (<xliff:g id="DIRECTORY">%2$s</xliff:g>)"</string>
     <string name="my_device_info_title" product="default" msgid="5512426315065239032">"Мојот телефон"</string>
     <string name="my_device_info_title" product="tablet" msgid="7850936731324591758">"Мојот таблет"</string>
     <string name="my_device_info_title" product="device" msgid="5512071003076176919">"Мојот уред"</string>

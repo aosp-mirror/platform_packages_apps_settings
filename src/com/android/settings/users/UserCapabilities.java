@@ -34,6 +34,7 @@ public class UserCapabilities {
     boolean mCanAddGuest;
     boolean mDisallowAddUser;
     boolean mDisallowAddUserSetByAdmin;
+    boolean mDisallowSwitchUser;
     RestrictedLockUtils.EnforcedAdmin mEnforcedAdmin;
 
     private UserCapabilities() {}
@@ -79,6 +80,9 @@ public class UserCapabilities {
         final boolean canAddUsersWhenLocked = mIsAdmin || Settings.Global.getInt(
                 context.getContentResolver(), Settings.Global.ADD_USERS_WHEN_LOCKED, 0) == 1;
         mCanAddGuest = !mIsGuest && !mDisallowAddUser && canAddUsersWhenLocked;
+
+        UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mDisallowSwitchUser = userManager.hasUserRestriction(UserManager.DISALLOW_USER_SWITCH);
     }
 
     public boolean isAdmin() {
@@ -109,6 +113,7 @@ public class UserCapabilities {
                 ", mCanAddGuest=" + mCanAddGuest +
                 ", mDisallowAddUser=" + mDisallowAddUser +
                 ", mEnforcedAdmin=" + mEnforcedAdmin +
+                ", mDisallowSwitchUser=" + mDisallowSwitchUser +
                 '}';
     }
 }

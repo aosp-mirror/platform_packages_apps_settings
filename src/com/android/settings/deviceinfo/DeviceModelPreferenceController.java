@@ -41,7 +41,7 @@ public class DeviceModelPreferenceController extends AbstractPreferenceControlle
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return mContext.getResources().getBoolean(R.bool.config_show_device_model);
     }
 
     @Override

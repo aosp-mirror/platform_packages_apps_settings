@@ -19,6 +19,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -76,7 +77,7 @@ public class SuggestionAdapterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         final Suggestion suggestion1 = new Suggestion.Builder("id1")
@@ -136,6 +137,7 @@ public class SuggestionAdapterTest {
         mSuggestionAdapter = new SuggestionAdapter(mContext, mSuggestionControllerMixin,
             null /* savedInstanceState */, null /* callback */, null /* lifecycle */);
         mSuggestionAdapter.setSuggestions(mOneSuggestion);
+        doReturn("sans").when(mContext).getString(anyInt());
 
         // Bind twice
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
@@ -177,6 +179,7 @@ public class SuggestionAdapterTest {
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
             new FrameLayout(RuntimeEnvironment.application),
             mSuggestionAdapter.getItemViewType(0));
+        doReturn("sans").when(mContext).getString(anyInt());
 
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
         mSuggestionHolder.itemView.findViewById(android.R.id.primary).performClick();
@@ -215,11 +218,9 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_differentPackage_shouldNotTintIcon()
-        throws PendingIntent.CanceledException {
+    public void onBindViewHolder_iconNotTintable_shouldNotTintIcon()
+            throws PendingIntent.CanceledException {
         final Icon icon = mock(Icon.class);
-        when(icon.getResPackage()).thenReturn("pkg1");
-        when(mActivity.getPackageName()).thenReturn("pkg2");
         final Suggestion suggestion = new Suggestion.Builder("pkg1")
             .setPendingIntent(mock(PendingIntent.class))
             .setIcon(icon)
@@ -243,15 +244,14 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_samePackage_shouldTintIcon()
-        throws PendingIntent.CanceledException {
+    public void onBindViewHolder_iconTintable_shouldTintIcon()
+            throws PendingIntent.CanceledException {
         final Icon icon = mock(Icon.class);
-        final String packageName = "pkg1";
-        when(icon.getResPackage()).thenReturn(packageName);
-        when(mActivity.getPackageName()).thenReturn(packageName);
-        final Suggestion suggestion = new Suggestion.Builder(packageName)
+        final int FLAG_ICON_TINTABLE = 1 << 1;
+        final Suggestion suggestion = new Suggestion.Builder("pkg1")
             .setPendingIntent(mock(PendingIntent.class))
             .setIcon(icon)
+            .setFlags(FLAG_ICON_TINTABLE)
             .build();
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(suggestion);

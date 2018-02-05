@@ -63,10 +63,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        int tileLimit = 1;
-        if (mWifiWakeupPreferenceController.isAvailable()) {
-            tileLimit++;
-        }
+        int tileLimit = 2;
         if (mUseOpenWifiPreferenceController.isAvailable()) {
             tileLimit++;
         }
@@ -82,8 +79,7 @@ public class ConfigureWifiSettings extends DashboardFragment {
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final NetworkScoreManagerWrapper networkScoreManagerWrapper =
                 new NetworkScoreManagerWrapper(context.getSystemService(NetworkScoreManager.class));
-        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(
-                context, getLifecycle());
+        mWifiWakeupPreferenceController = new WifiWakeupPreferenceController(context);
         mUseOpenWifiPreferenceController = new UseOpenWifiPreferenceController(context, this,
                 networkScoreManagerWrapper, getLifecycle());
         final WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
