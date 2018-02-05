@@ -67,6 +67,8 @@ public class DashboardSummaryTest {
     private ConditionManager mConditionManager;
     @Mock
     private SummaryLoader mSummaryLoader;
+    @Mock
+    private SuggestionControllerMixin mSuggestionControllerMixin;
 
     private Context mContext;
     private DashboardSummary mSummary;
@@ -111,12 +113,31 @@ public class DashboardSummaryTest {
 
     @Test
     public void updateCategory_shouldGetCategoryFromFeatureProvider() {
+        ReflectionHelpers.setField(mSummary, "mSuggestionControllerMixin",
+                mSuggestionControllerMixin);
+
+        when(mSuggestionControllerMixin.isSuggestionLoaded()).thenReturn(true);
         doReturn(mock(Activity.class)).when(mSummary).getActivity();
         mSummary.onAttach(mContext);
         mSummary.updateCategory();
 
         verify(mSummaryLoader).updateSummaryToCache(nullable(DashboardCategory.class));
         verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
+        verify(mAdapter).setCategory(any());
+    }
+
+    @Test
+    public void updateCategory_shouldGetCategoryFromFeatureProvider_evenIfSuggestionDisabled() {
+        when(mFeatureFactory.suggestionsFeatureProvider.isSuggestionEnabled(any(Context.class)))
+                .thenReturn(false);
+
+        doReturn(mock(Activity.class)).when(mSummary).getActivity();
+        mSummary.onAttach(mContext);
+        mSummary.updateCategory();
+
+        verify(mSummaryLoader).updateSummaryToCache(nullable(DashboardCategory.class));
+        verify(mDashboardFeatureProvider).getTilesForCategory(CategoryKey.CATEGORY_HOMEPAGE);
+        verify(mAdapter).setCategory(any());
     }
 
     @Test
