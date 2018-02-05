@@ -21,6 +21,7 @@ import static android.net.ConnectivityManager.TETHERING_WIFI;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
@@ -36,11 +37,18 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 public class WifiTetherSwitchBarController implements SwitchWidgetController.OnSwitchChangeListener,
         LifecycleObserver, OnStart, OnStop {
 
+    private static final IntentFilter WIFI_INTENT_FILTER;
+
     private final Context mContext;
     private final SwitchWidgetController mSwitchBar;
     private final ConnectivityManager mConnectivityManager;
     private final DataSaverBackend mDataSaverBackend;
     private final WifiManager mWifiManager;
+
+    static {
+        WIFI_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
+        WIFI_INTENT_FILTER.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+    }
 
     WifiTetherSwitchBarController(Context context, SwitchWidgetController switchBar) {
         mContext = context;
@@ -56,8 +64,7 @@ public class WifiTetherSwitchBarController implements SwitchWidgetController.OnS
     @Override
     public void onStart() {
         mSwitchBar.startListening();
-        mContext.registerReceiver(mReceiver,
-                WifiTetherPreferenceController.WIFI_TETHER_INTENT_FILTER);
+        mContext.registerReceiver(mReceiver, WIFI_INTENT_FILTER);
     }
 
     @Override
