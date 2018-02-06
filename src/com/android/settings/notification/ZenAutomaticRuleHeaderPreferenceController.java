@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.service.notification.ZenModeConfig;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.util.Slog;
@@ -101,6 +102,13 @@ public class ZenAutomaticRuleHeaderPreferenceController extends AbstractZenModeP
             PackageManager packageManager =  mContext.getPackageManager();
             ApplicationInfo info = packageManager.getApplicationInfo(
                     mRule.getOwner().getPackageName(), 0);
+            if (info.isSystemApp()) {
+                if (ZenModeConfig.isValidScheduleConditionId(mRule.getConditionId())) {
+                    return mContext.getDrawable(R.drawable.ic_timelapse);
+                } else if (ZenModeConfig.isValidEventConditionId(mRule.getConditionId())) {
+                    return mContext.getDrawable(R.drawable.ic_event);
+                }
+            }
             return info.loadIcon(packageManager);
         } catch (PackageManager.NameNotFoundException e) {
            Slog.w(TAG, "Unable to load icon - PackageManager.NameNotFoundException");

@@ -119,13 +119,21 @@ public class ZenRuleSelectionDialog extends InstrumentedDialogFragment {
             final LinearLayout v = (LinearLayout) LayoutInflater.from(mContext).inflate(
                     R.layout.zen_rule_type, null, false);
 
-            LoadIconTask task = new LoadIconTask((ImageView) v.findViewById(R.id.icon));
-            task.execute(info);
+            ImageView iconView = v.findViewById(R.id.icon);
             ((TextView) v.findViewById(R.id.title)).setText(ri.title);
             if (!ri.isSystem) {
+                LoadIconTask task = new LoadIconTask(iconView);
+                task.execute(info);
+
                 TextView subtitle = (TextView) v.findViewById(R.id.subtitle);
                 subtitle.setText(info.loadLabel(mPm));
                 subtitle.setVisibility(View.VISIBLE);
+            } else {
+                if (ZenModeConfig.isValidScheduleConditionId(ri.defaultConditionId)) {
+                    iconView.setImageDrawable(mContext.getDrawable(R.drawable.ic_timelapse));
+                } else if (ZenModeConfig.isValidEventConditionId(ri.defaultConditionId)) {
+                    iconView.setImageDrawable(mContext.getDrawable(R.drawable.ic_event));
+                }
             }
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

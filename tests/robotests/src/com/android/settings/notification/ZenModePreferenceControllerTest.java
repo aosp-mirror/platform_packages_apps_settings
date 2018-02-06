@@ -19,6 +19,7 @@ package com.android.settings.notification;
 import android.app.NotificationManager;
 import android.app.NotificationManager.Policy;
 import android.content.Context;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -63,7 +64,7 @@ public class ZenModePreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         mContext = shadowApplication.getApplicationContext();
-        mController = new ZenModePreferenceController(mContext);
+        mController = new ZenModePreferenceController(mContext, null);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));
         ReflectionHelpers.setField(mController, "mSummaryBuilder", mSummaryBuilder);
@@ -76,16 +77,16 @@ public class ZenModePreferenceControllerTest {
     }
 
     @Test
-    public void updateState_preferenceEnabled_shouldSetSummary() {
+    public void updateState_automaticRuleEnabled_shouldSetSummary() {
         when(mPreference.isEnabled()).thenReturn(true);
 
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(mContext.getString(R.string.zen_mode_settings_summary_off));
+        verify(mPreference).setSummary(mContext.getResources().getString(
+                R.string.zen_mode_sound_summary_off));
 
         doReturn(1).when(mSummaryBuilder).getEnabledAutomaticRulesCount();
         mController.updateState(mPreference);
-        verify(mPreference).setSummary(mContext.getResources().getQuantityString(
-            R.plurals.zen_mode_settings_summary_on, 1, 1));
+        verify(mPreference).setSummary(mSummaryBuilder.getSoundSummary());
     }
 
     @Test

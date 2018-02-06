@@ -180,7 +180,7 @@ public class SoundSettings extends DashboardFragment {
             SoundSettings fragment, VolumeSeekBarPreference.Callback callback,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModePreferenceController(context));
+        controllers.add(new ZenModePreferenceController(context, lifecycle));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===
@@ -264,7 +264,7 @@ public class SoundSettings extends DashboardFragment {
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicate results
-                    keys.add((new ZenModePreferenceController(context)).getPreferenceKey());
+                    keys.add((new ZenModePreferenceController(context, null)).getPreferenceKey());
                     return keys;
                 }
             };

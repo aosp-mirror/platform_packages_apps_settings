@@ -16,18 +16,56 @@
 
 package com.android.settings.notification;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
+import android.util.Slog;
 
-public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController {
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnPause;
+import com.android.settingslib.core.lifecycle.events.OnResume;
+
+public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController
+        implements LifecycleObserver, OnResume, OnPause {
 
     private static final String KEY_ZEN_MODE = "zen_mode";
-
+    private SettingObserver mSettingObserver;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
-    public ZenModePreferenceController(Context context) {
+    public ZenModePreferenceController(Context context, Lifecycle lifecycle) {
         super(context);
         mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
+
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mSettingObserver = new SettingObserver(screen.findPreference(KEY_ZEN_MODE));
+    }
+
+    @Override
+    public void onResume() {
+        if (mSettingObserver != null) {
+            mSettingObserver.register(mContext.getContentResolver());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (mSettingObserver != null) {
+            mSettingObserver.unregister(mContext.getContentResolver());
+        }
     }
 
     @Override
@@ -44,7 +82,41 @@ public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenc
     public void updateState(Preference preference) {
         super.updateState(preference);
         if (preference.isEnabled()) {
-            preference.setSummary(mSummaryBuilder.getAutomaticRulesSummary());
+            preference.setSummary(mSummaryBuilder.getSoundSummary());
+        }
+    }
+
+    class SettingObserver extends ContentObserver {
+        private final Uri ZEN_MODE_URI = Settings.Global.getUriFor(Settings.Global.ZEN_MODE);
+        private final Uri ZEN_MODE_CONFIG_ETAG_URI = Settings.Global.getUriFor(
+                Settings.Global.ZEN_MODE_CONFIG_ETAG);
+
+        private final Preference mPreference;
+
+        public SettingObserver(Preference preference) {
+            super(new Handler());
+            mPreference = preference;
+        }
+
+        public void register(ContentResolver cr) {
+            cr.registerContentObserver(ZEN_MODE_URI, false, this, UserHandle.USER_ALL);
+            cr.registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this, UserHandle.USER_ALL);
+        }
+
+        public void unregister(ContentResolver cr) {
+            cr.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+            if (ZEN_MODE_URI.equals(uri)) {
+                updateState(mPreference);
+            }
+
+            if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
+                updateState(mPreference);
+            }
         }
     }
 }

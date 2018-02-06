@@ -62,7 +62,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             mZenButtonOn = (Button) ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
             mZenButtonOn.setOnClickListener(v ->
-                    new EnableZenModeDialog().show(mFragment, TAG));
+                    new SettingsEnableZenModeDialog().show(mFragment, TAG));
         }
 
         if (null == mZenButtonOff) {
