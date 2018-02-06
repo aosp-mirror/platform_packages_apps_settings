@@ -16,6 +16,8 @@
 
 package com.android.settings;
 
+import static android.view.View.IMPORTANT_FOR_ACCESSIBILITY_NO;
+
 import android.app.ActionBar;
 import android.app.ActivityManager;
 import android.app.Fragment;
@@ -329,6 +331,7 @@ public class SettingsActivity extends SettingsDrawerActivity
             // and goes to the search UI. Also set the background to null so there's no ripple.
             View navView = toolbar.getNavigationView();
             navView.setClickable(false);
+            navView.setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO);
             navView.setBackground(null);
         }
 
