@@ -24,13 +24,12 @@ import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
-import android.util.Log;
-
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Settings.PrivacySettingsActivity;
-import com.android.settingslib.drawer.SettingsDrawerActivity;
+
 import java.net.URISyntaxException;
 
 /**
@@ -153,8 +152,7 @@ public class BackupSettingsHelper {
 
     private Intent getIntentForDefaultBackupSettings() {
         // Extra needed by {@link SettingsDrawerActivity} to show the back button navigation.
-        return new Intent(mContext, PrivacySettingsActivity.class)
-                .putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
+        return new Intent(mContext, PrivacySettingsActivity.class);
     }
 
     /**
