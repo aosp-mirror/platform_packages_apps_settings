@@ -16,8 +16,8 @@
 package com.android.internal.app;
 
 /**
- * Fake controller to make robolectric test compile. Should be removed when Robolectric supports
- * API 25.
+ * Fake controller to make robolectric test compile. This is necessary since
+ * ColorDisplayController is not part of Android's API.
  */
 public class ColorDisplayController {
 
