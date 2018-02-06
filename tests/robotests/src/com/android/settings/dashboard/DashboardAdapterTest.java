@@ -35,6 +35,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -77,6 +78,8 @@ public class DashboardAdapterTest {
     private Condition mCondition;
     @Mock
     private Resources mResources;
+    @Mock
+    private WindowManager mWindowManager;
     private FakeFeatureFactory mFactory;
     private DashboardAdapter mDashboardAdapter;
     private List<Condition> mConditionList;
@@ -87,6 +90,7 @@ public class DashboardAdapterTest {
         mFactory = FakeFeatureFactory.setupForTest();
         when(mFactory.dashboardFeatureProvider.shouldTintIcon()).thenReturn(true);
 
+        when(mContext.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getQuantityString(any(int.class), any(int.class), any()))
                 .thenReturn("");
