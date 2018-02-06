@@ -17,12 +17,14 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 
 import com.android.settings.SubSettings;
 import com.android.settings.TestConfig;
@@ -42,16 +44,16 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class
-        })
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WallpaperSuggestionActivityTest {
 
     @Mock
     private Context mContext;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private Resources mResources;
+
     private ActivityController<WallpaperSuggestionActivity> mController;
 
     @Before
@@ -72,6 +74,17 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Test
+    public void wallpaperServiceEnabled_no_shouldReturnFalse() {
+        when(mContext.getResources()).thenReturn(mResources);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_enableWallpaperService)).thenReturn(false);
+
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext))
+                .isFalse();
+    }
+
+    @Test
+    @Config(shadows = WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class)
     public void hasWallpaperSet_no_shouldReturnFalse() {
         ShadowWallpaperManagerWrapper.setWallpaperId(0);
 
@@ -80,6 +93,7 @@ public class WallpaperSuggestionActivityTest {
     }
 
     @Test
+    @Config(shadows = WallpaperSuggestionActivityTest.ShadowWallpaperManagerWrapper.class)
     public void hasWallpaperSet_yes_shouldReturnTrue() {
         ShadowWallpaperManagerWrapper.setWallpaperId(100);
 
@@ -98,6 +112,15 @@ public class WallpaperSuggestionActivityTest {
 
         public static void reset() {
             sWallpaperId = 0;
+        }
+
+        public void __constructor__(Context context) {
+
+        }
+
+        @Implementation
+        public boolean isWallpaperServiceEnabled() {
+            return true;
         }
 
         @Implementation
