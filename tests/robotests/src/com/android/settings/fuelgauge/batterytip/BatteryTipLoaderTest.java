@@ -51,6 +51,7 @@ import java.util.List;
 public class BatteryTipLoaderTest {
     private static final int[] TIP_ORDER = {
             BatteryTip.TipType.SMART_BATTERY_MANAGER,
+            BatteryTip.TipType.APP_RESTRICTION,
             BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.BATTERY_SAVER,
             BatteryTip.TipType.LOW_BATTERY,

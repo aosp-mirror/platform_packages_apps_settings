@@ -27,6 +27,9 @@ import com.android.settings.wrapper.FingerprintManagerWrapper;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Implements(Utils.class)
 public class ShadowUtils {
 
@@ -34,6 +37,7 @@ public class ShadowUtils {
     private static boolean sIsUserAMonkey;
     private static boolean sIsDemoUser;
     private static ComponentName sDeviceOwnerComponentName;
+    private static Map<String, String> sAppNameMap;
 
     @Implementation
     public static int enforceSameOwner(Context context, int userId) {
@@ -88,5 +92,20 @@ public class ShadowUtils {
     @Implementation
     public static int getManagedProfileId(UserManager um, int parentUserId) {
         return UserHandle.USER_NULL;
+    }
+
+    @Implementation
+    public static CharSequence getApplicationLabel(Context context, String packageName) {
+        if (sAppNameMap != null) {
+            return sAppNameMap.get(packageName);
+        }
+        return null;
+    }
+
+    public static void setApplicationLabel(String packageName, String appLabel) {
+        if (sAppNameMap == null) {
+            sAppNameMap = new HashMap<>();
+        }
+        sAppNameMap.put(packageName, appLabel);
     }
 }
