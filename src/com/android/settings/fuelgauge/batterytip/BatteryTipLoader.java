@@ -26,6 +26,7 @@ import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SmartBatteryDetector;
+import com.android.settings.fuelgauge.batterytip.detectors.RestrictAppDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.SummaryDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.LowBatteryTip;
@@ -70,6 +71,7 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new SummaryDetector(policy).detect());
+        tips.add(new RestrictAppDetector(policy).detect());
 
         Collections.sort(tips);
         return tips;

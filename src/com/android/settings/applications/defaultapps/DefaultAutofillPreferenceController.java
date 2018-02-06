@@ -53,7 +53,7 @@ public class DefaultAutofillPreferenceController extends DefaultAppPreferenceCon
         }
         final DefaultAutofillPicker.AutofillSettingIntentProvider intentProvider =
                 new DefaultAutofillPicker.AutofillSettingIntentProvider(
-                        mPackageManager.getPackageManager(), info.getKey());
+                        mContext, info.getKey());
         return intentProvider.getIntent();
     }
 

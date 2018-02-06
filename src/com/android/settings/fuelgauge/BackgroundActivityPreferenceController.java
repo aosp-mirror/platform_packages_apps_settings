@@ -14,27 +14,22 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.os.Bundle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
@@ -99,15 +94,6 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
         return mTargetPackage != null;
     }
 
-    /**
-     * Called from the warning dialog, if the user decides to go ahead and disable background
-     * activity for this package
-     */
-    public void setRestricted(Preference preference) {
-        mBatteryUtils.setForceAppStandby(mUid, mTargetPackage, AppOpsManager.MODE_IGNORED);
-        updateSummary(preference);
-    }
-
     @Override
     public String getPreferenceKey() {
         return KEY_BACKGROUND_ACTIVITY;
@@ -119,20 +105,13 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
             final int mode = mAppOpsManager
                     .checkOpNoThrow(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, mUid, mTargetPackage);
             final boolean restricted = mode == AppOpsManager.MODE_IGNORED;
-            if (!restricted) {
-                showDialog();
-                return false;
-            }
-            mBatteryUtils.setForceAppStandby(mUid, mTargetPackage, AppOpsManager.MODE_ALLOWED);
-            updateSummary(preference);
-            return true;
+            showDialog(restricted);
         }
 
         return false;
     }
 
-    @VisibleForTesting
-    void updateSummary(Preference preference) {
+    public void updateSummary(Preference preference) {
         if (mPowerWhitelistBackend.isWhitelisted(mTargetPackage)) {
             preference.setSummary(R.string.background_activity_summary_whitelisted);
             return;
@@ -150,42 +129,16 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     }
 
     @VisibleForTesting
-    void showDialog() {
-        final WarningDialogFragment dialogFragment = new WarningDialogFragment();
+    void showDialog(boolean restricted) {
+        final AppInfo appInfo = new AppInfo.Builder()
+                .setPackageName(mTargetPackage)
+                .build();
+        BatteryTip tip = restricted
+                ? new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo)
+                : new RestrictAppTip(BatteryTip.StateType.NEW, appInfo);
+
+        final BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(tip);
         dialogFragment.setTargetFragment(mFragment, 0 /* requestCode */);
         dialogFragment.show(mFragment.getFragmentManager(), TAG);
-    }
-
-    interface WarningConfirmationListener {
-        void onLimitBackgroundActivity();
-    }
-
-    /**
-     * Warning dialog to show to the user as turning off background activity can lead to
-     * apps misbehaving as their background task scheduling guarantees will no longer be honored.
-     */
-    public static class WarningDialogFragment extends InstrumentedDialogFragment {
-        @Override
-        public int getMetricsCategory() {
-            // TODO (b/65494831): add metric id
-            return 0;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            final WarningConfirmationListener listener =
-                    (WarningConfirmationListener) getTargetFragment();
-            return new AlertDialog.Builder(getContext())
-                    .setTitle(R.string.background_activity_warning_dialog_title)
-                    .setMessage(R.string.background_activity_warning_dialog_text)
-                    .setPositiveButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            listener.onLimitBackgroundActivity();
-                        }
-                    })
-                    .setNegativeButton(R.string.dlg_cancel, null)
-                    .create();
-        }
     }
 }

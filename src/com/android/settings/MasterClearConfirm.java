@@ -33,7 +33,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.RestrictedLockUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -48,7 +48,7 @@ import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
  *
  * This is the confirmation screen.
  */
-public class MasterClearConfirm extends InstrumentedPreferenceFragment {
+public class MasterClearConfirm extends InstrumentedFragment {
 
     private View mContentView;
     private boolean mEraseSdCard;

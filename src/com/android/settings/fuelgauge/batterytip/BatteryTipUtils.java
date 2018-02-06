@@ -17,12 +17,17 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.app.Fragment;
+import android.content.Context;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
+import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
+import com.android.settings.fuelgauge.batterytip.actions.UnrestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
 /**
  * Utility class for {@link BatteryTip}
@@ -42,7 +47,11 @@ public class BatteryTipUtils {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
-                return new BatterySaverAction(settingsActivity.getApplicationContext());
+                return new BatterySaverAction(settingsActivity);
+            case BatteryTip.TipType.APP_RESTRICTION:
+                return new RestrictAppAction(settingsActivity, (RestrictAppTip) batteryTip);
+            case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
+                return new UnrestrictAppAction(settingsActivity, (UnrestrictAppTip) batteryTip);
             default:
                 return null;
         }

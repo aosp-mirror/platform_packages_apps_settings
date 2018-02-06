@@ -46,6 +46,8 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -69,7 +71,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         ButtonActionDialogFragment.AppButtonsDialogListener,
         AnomalyDialogFragment.AnomalyDialogListener,
         LoaderManager.LoaderCallbacks<List<Anomaly>>,
-        BackgroundActivityPreferenceController.WarningConfirmationListener {
+        BatteryTipPreferenceController.BatteryTipListener {
 
     public static final String TAG = "AdvancedPowerUsageDetail";
     public static final String EXTRA_UID = "extra_uid";
@@ -373,8 +375,8 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    public void onLimitBackgroundActivity() {
-        mBackgroundActivityPreferenceController.setRestricted(
+    public void onBatteryTipHandled(BatteryTip batteryTip) {
+        mBackgroundActivityPreferenceController.updateSummary(
                 findPreference(mBackgroundActivityPreferenceController.getPreferenceKey()));
     }
 }

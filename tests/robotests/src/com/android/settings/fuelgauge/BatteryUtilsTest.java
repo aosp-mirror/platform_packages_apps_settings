@@ -32,6 +32,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -522,5 +523,28 @@ public class BatteryUtilsTest {
     @Test
     public void testIsLegacyApp_SdkLargerOrEqualThanO_ReturnFalse() {
         assertThat(mBatteryUtils.isLegacyApp(HIGH_SDK_PACKAGE)).isFalse();
+    }
+
+    @Test
+    public void testSetForceAppStandby_forcePreOApp_forceTwoRestrictions() {
+        mBatteryUtils.setForceAppStandby(UID, LOW_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+
+        // Restrict both OP_RUN_IN_BACKGROUND and OP_RUN_ANY_IN_BACKGROUND
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID, LOW_SDK_PACKAGE,
+                AppOpsManager.MODE_IGNORED);
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID, LOW_SDK_PACKAGE,
+                AppOpsManager.MODE_IGNORED);
+    }
+
+    @Test
+    public void testSetForceAppStandby_forceOApp_forceOneRestriction() {
+        mBatteryUtils.setForceAppStandby(UID, HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+
+        // Don't restrict OP_RUN_IN_BACKGROUND because it is already been restricted for O app
+        verify(mAppOpsManager, never()).setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+        // Restrict OP_RUN_ANY_IN_BACKGROUND
+        verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
+                HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
     }
 }

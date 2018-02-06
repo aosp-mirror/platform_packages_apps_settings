@@ -39,13 +39,12 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import java.util.List;
-
 public class WifiTetherPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
-    public static final IntentFilter WIFI_TETHER_INTENT_FILTER;
     private static final String WIFI_TETHER_SETTINGS = "wifi_tether";
+    private static final IntentFilter AIRPLANE_INTENT_FILTER = new IntentFilter(
+            Intent.ACTION_AIRPLANE_MODE_CHANGED);
 
     private final ConnectivityManager mConnectivityManager;
     private final String[] mWifiRegexs;
@@ -57,12 +56,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     MasterSwitchPreference mPreference;
     @VisibleForTesting
     WifiTetherSoftApManager mWifiTetherSoftApManager;
-
-    static {
-        WIFI_TETHER_INTENT_FILTER = new IntentFilter(WifiManager.WIFI_AP_STATE_CHANGED_ACTION);
-        WIFI_TETHER_INTENT_FILTER.addAction(ConnectivityManager.ACTION_TETHER_STATE_CHANGED);
-        WIFI_TETHER_INTENT_FILTER.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-    }
 
     public WifiTetherPreferenceController(Context context, Lifecycle lifecycle) {
         this(context, lifecycle, true /* initSoftApManager */);
@@ -113,7 +106,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
     @Override
     public void onStart() {
         if (mPreference != null) {
-            mContext.registerReceiver(mReceiver, WIFI_TETHER_INTENT_FILTER);
+            mContext.registerReceiver(mReceiver, AIRPLANE_INTENT_FILTER);
             clearSummaryForAirplaneMode();
             if (mWifiTetherSoftApManager != null) {
                 mWifiTetherSoftApManager.registerSoftApCallback();
@@ -140,6 +133,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                     @Override
                     public void onStateChanged(int state, int failureReason) {
                         mSoftApState = state;
+                        handleWifiApStateChanged(state, failureReason);
                     }
 
                     @Override
@@ -162,34 +156,21 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (WifiManager.WIFI_AP_STATE_CHANGED_ACTION.equals(action)) {
-                int state = intent.getIntExtra(
-                        WifiManager.EXTRA_WIFI_AP_STATE, WifiManager.WIFI_AP_STATE_FAILED);
-                int reason = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_FAILURE_REASON,
-                        WifiManager.SAP_START_FAILURE_GENERAL);
-                handleWifiApStateChanged(state, reason);
-            } else if (ConnectivityManager.ACTION_TETHER_STATE_CHANGED.equals(action)) {
-                List<String> active = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_ACTIVE_TETHER);
-                List<String> errored = intent.getStringArrayListExtra(
-                        ConnectivityManager.EXTRA_ERRORED_TETHER);
-                updateTetherState(active.toArray(), errored.toArray());
-            } else if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
+            if (Intent.ACTION_AIRPLANE_MODE_CHANGED.equals(action)) {
                 clearSummaryForAirplaneMode();
             }
         }
     };
 
-    private void handleWifiApStateChanged(int state, int reason) {
+    @VisibleForTesting
+    void handleWifiApStateChanged(int state, int reason) {
         switch (state) {
             case WifiManager.WIFI_AP_STATE_ENABLING:
                 mPreference.setSummary(R.string.wifi_tether_starting);
                 break;
             case WifiManager.WIFI_AP_STATE_ENABLED:
-                /**
-                 * Summary on enable is handled by tether
-                 * broadcast notice
-                 */
+                WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
+                updateConfigSummary(wifiConfig);
                 break;
             case WifiManager.WIFI_AP_STATE_DISABLING:
                 mPreference.setSummary(R.string.wifi_tether_stopping);
@@ -206,32 +187,6 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
                 }
                 clearSummaryForAirplaneMode();
         }
-    }
-
-    private void updateTetherState(Object[] tethered, Object[] errored) {
-        boolean wifiTethered = matchRegex(tethered);
-        boolean wifiErrored = matchRegex(errored);
-
-        if (wifiTethered) {
-            WifiConfiguration wifiConfig = mWifiManager.getWifiApConfiguration();
-            updateConfigSummary(wifiConfig);
-        } else if (wifiErrored) {
-            mPreference.setSummary(R.string.wifi_error);
-        } else {
-            mPreference.setSummary(R.string.wifi_hotspot_off_subtext);
-        }
-    }
-
-    private boolean matchRegex(Object[] tethers) {
-        for (Object o : tethers) {
-            String s = (String) o;
-            for (String regex : mWifiRegexs) {
-                if (s.matches(regex)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private void updateConfigSummary(WifiConfiguration wifiConfig) {

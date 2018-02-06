@@ -50,7 +50,6 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
-        addPreferencesFromResource(R.xml.network_scorer_picker_prefs);
         updateCandidates();
     }
 
@@ -67,6 +66,11 @@ public class NetworkScorerPicker extends InstrumentedPreferenceFragment implemen
         // this is needed so the back button goes back to previous fragment
         setHasOptionsMenu(true);
         return view;
+    }
+
+    @Override
+    protected int getPreferenceScreenResId() {
+        return R.xml.network_scorer_picker_prefs;
     }
 
     @VisibleForTesting

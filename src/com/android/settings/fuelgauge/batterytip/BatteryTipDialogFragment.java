@@ -34,6 +34,10 @@ import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController.
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
+import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
+
+import java.util.List;
 
 /**
  * Dialog Fragment to show action dialog for each anomaly
@@ -83,6 +87,39 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                                         false /* withSeconds */)))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
+                        .create();
+            case BatteryTip.TipType.APP_RESTRICTION:
+                final RestrictAppTip restrictAppTip = (RestrictAppTip) mBatteryTip;
+                final List<AppInfo> restrictedAppList = restrictAppTip.getRestrictAppList();
+                final int num = restrictedAppList.size();
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context)
+                        .setTitle(context.getResources().getQuantityString(
+                                R.plurals.battery_tip_restrict_app_dialog_title, num, num))
+                        .setMessage(getString(R.string.battery_tip_restrict_app_dialog_message))
+                        .setPositiveButton(R.string.battery_tip_restrict_app_dialog_ok, this)
+                        .setNegativeButton(android.R.string.cancel, null);
+
+                // TODO(b/72385333): consider building dialog with 5+ apps when strings are done
+                if (num > 1) {
+                    final RecyclerView restrictionView = (RecyclerView) LayoutInflater.from(
+                            context).inflate(R.layout.recycler_view, null);
+                    restrictionView.setLayoutManager(new LinearLayoutManager(context));
+                    restrictionView.setAdapter(new HighUsageAdapter(context, restrictedAppList));
+                    builder.setView(restrictionView);
+                }
+
+                return builder.create();
+            case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
+                final UnrestrictAppTip unrestrictAppTip = (UnrestrictAppTip) mBatteryTip;
+                final CharSequence name = Utils.getApplicationLabel(context,
+                        unrestrictAppTip.getPackageName());
+
+                return new AlertDialog.Builder(context)
+                        .setTitle(getString(R.string.battery_tip_unrestrict_app_dialog_title, name))
+                        .setMessage(R.string.battery_tip_unrestrict_app_dialog_message)
+                        .setPositiveButton(R.string.battery_tip_unrestrict_app_dialog_ok, this)
+                        .setNegativeButton(R.string.battery_tip_unrestrict_app_dialog_cancel, null)
                         .create();
             default:
                 throw new IllegalArgumentException("unknown type " + mBatteryTip.getType());

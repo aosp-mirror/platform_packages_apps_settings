@@ -77,7 +77,9 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
                 Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
                         UserHandle.myUserId()));
         holder.appName.setText(Utils.getApplicationLabel(mContext, app.packageName));
-        holder.appTime.setText(Utils.formatElapsedTime(mContext, app.screenOnTimeMs, false));
+        if (app.screenOnTimeMs != 0) {
+            holder.appTime.setText(Utils.formatElapsedTime(mContext, app.screenOnTimeMs, false));
+        }
     }
 
     @Override

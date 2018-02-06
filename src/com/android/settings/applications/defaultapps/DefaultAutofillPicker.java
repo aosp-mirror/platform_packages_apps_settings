@@ -251,16 +251,16 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
     static final class AutofillSettingIntentProvider implements SettingIntentProvider {
 
         private final String mSelectedKey;
-        private final PackageManager mPackageManager;
+        private final Context mContext;
 
-        public AutofillSettingIntentProvider(PackageManager packageManager, String key) {
+        public AutofillSettingIntentProvider(Context context, String key) {
             mSelectedKey = key;
-            mPackageManager = packageManager;
+            mContext = context;
         }
 
         @Override
         public Intent getIntent() {
-            final List<ResolveInfo> resolveInfos = mPackageManager.queryIntentServices(
+            final List<ResolveInfo> resolveInfos = mContext.getPackageManager().queryIntentServices(
                     AUTOFILL_PROBE, PackageManager.GET_META_DATA);
 
             for (ResolveInfo resolveInfo : resolveInfos) {
@@ -270,7 +270,7 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 if (TextUtils.equals(mSelectedKey, flattenKey)) {
                     final String settingsActivity;
                     try {
-                        settingsActivity = new AutofillServiceInfo(mPackageManager, serviceInfo)
+                        settingsActivity = new AutofillServiceInfo(mContext, serviceInfo)
                                 .getSettingsActivity();
                     } catch (SecurityException e) {
                         // Service does not declare the proper permission, ignore it.
