@@ -28,6 +28,7 @@ import android.util.Pair;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeSliderController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -66,6 +67,14 @@ public class SliceBuilderUtilsTest {
         Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData());
 
         assertThat(slice).isNotNull(); // TODO improve test for Slice content
+    }
+
+    @Test
+    public void testSliderSlice_returnsSeekBarSlice() {
+        final Slice slice = SliceBuilderUtils.buildSlice(mContext, getDummyData(
+                FakeSliderController.class));
+
+        assertThat(slice).isNotNull();
     }
 
     @Test
