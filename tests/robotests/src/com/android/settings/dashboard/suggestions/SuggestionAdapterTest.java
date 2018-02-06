@@ -28,12 +28,15 @@ import static org.mockito.Mockito.when;
 
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.service.settings.suggestions.Suggestion;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
@@ -67,17 +70,33 @@ public class SuggestionAdapterTest {
     private SettingsActivity mActivity;
     @Mock
     private SuggestionControllerMixin mSuggestionControllerMixin;
+    @Mock
+    private Resources mResources;
+    @Mock
+    private WindowManager mWindowManager;
+
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
     private SuggestionAdapter mSuggestionAdapter;
     private DashboardAdapter.DashboardItemHolder mSuggestionHolder;
     private List<Suggestion> mOneSuggestion;
     private List<Suggestion> mTwoSuggestions;
+    private SuggestionAdapter.CardConfig mConfig;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
+        when(mActivity.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
+        when(mActivity.getResources()).thenReturn(mResources);
+        when(mResources.getDimensionPixelOffset(R.dimen.suggestion_card_inner_margin))
+            .thenReturn(10);
+        when(mResources.getDimensionPixelOffset(R.dimen.suggestion_card_outer_margin))
+            .thenReturn(20);
+        when(mResources.getDimensionPixelOffset(R.dimen.suggestion_card_width_multiple_cards))
+            .thenReturn(120);
+        mConfig = spy(SuggestionAdapter.CardConfig.get(mActivity));
+
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         final Suggestion suggestion1 = new Suggestion.Builder("id1")
@@ -273,6 +292,44 @@ public class SuggestionAdapterTest {
         mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
 
         verify(drawable).setTint(colorAccent);
+    }
+
+    @Test
+    public void setCardLayout_oneCard_shouldSetCardWidthToMatchParent() {
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
+        setupSuggestions(mContext, suggestions);
+
+        mConfig.setCardLayout(mSuggestionHolder, 1, 0);
+
+        assertThat(mSuggestionHolder.itemView.getLayoutParams().width)
+            .isEqualTo(LinearLayout.LayoutParams.MATCH_PARENT);
+    }
+
+    @Test
+    public void setCardLayout_twoCards_shouldSetCardWidthToHalfScreenMinusPadding() {
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
+        setupSuggestions(mContext, suggestions);
+        doReturn(200).when(mConfig).getScreenWidth();
+
+        mConfig.setCardLayout(mSuggestionHolder, 2, 0);
+
+        /*
+         * card width = (screen width - left margin - inner margin - right margin) / 2
+         *            = (200 - 20 - 10 - 20) / 2
+         *            = 75
+         */
+        assertThat(mSuggestionHolder.itemView.getLayoutParams().width).isEqualTo(75);
+    }
+
+
+    @Test
+    public void setCardLayout_multipleCards_shouldSetCardWidthFromResource() {
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
+        setupSuggestions(mContext, suggestions);
+
+        mConfig.setCardLayout(mSuggestionHolder, 3, 0);
+
+        assertThat(mSuggestionHolder.itemView.getLayoutParams().width).isEqualTo(120);
     }
 
     private void setupSuggestions(Context context, List<Suggestion> suggestions) {
