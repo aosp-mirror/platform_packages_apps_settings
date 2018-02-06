@@ -36,6 +36,8 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppPreferenceTest {
 
+    private static final int EXPECTED_APP_ICON_SIZE_DP = 32;
+
     private Context mContext;
     private View mRootView;
     private AppPreference mPref;
@@ -74,5 +76,13 @@ public class AppPreferenceTest {
 
         assertThat(mHolder.findViewById(R.id.summary_container).getVisibility())
                 .isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void foobar_testName() {
+        // Can't use isEquals() to compare float. Use isWithIn().of() instead.
+        assertThat(mContext.getResources().getDimension(R.dimen.secondary_app_icon_size))
+                .isWithin(0.01f)
+                .of(EXPECTED_APP_ICON_SIZE_DP);
     }
 }
