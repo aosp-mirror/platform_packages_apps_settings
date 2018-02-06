@@ -19,10 +19,8 @@ package com.android.settings.notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.provider.Settings;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -32,9 +30,8 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.widget.MasterCheckBoxPreference;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
@@ -179,15 +176,35 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                 groupCategory.setKey(group.getId());
                 populateGroupToggle(groupCategory, group);
             }
-
-            final List<NotificationChannel> channels = group.getChannels();
-            Collections.sort(channels, mChannelComparator);
-            int N = channels.size();
-            for (int i = 0; i < N; i++) {
-                final NotificationChannel channel = channels.get(i);
-                populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
+            if (!group.isBlocked()) {
+                final List<NotificationChannel> channels = group.getChannels();
+                Collections.sort(channels, mChannelComparator);
+                int N = channels.size();
+                for (int i = 0; i < N; i++) {
+                    final NotificationChannel channel = channels.get(i);
+                    populateSingleChannelPrefs(groupCategory, channel, group.isBlocked());
+                }
             }
         }
+    }
+
+    protected void populateGroupToggle(final PreferenceGroup parent,
+            NotificationChannelGroup group) {
+        RestrictedSwitchPreference preference = new RestrictedSwitchPreference(getPrefContext());
+        preference.setTitle(R.string.notification_switch_label);
+        preference.setEnabled(mSuspendedAppsAdmin == null
+                && isChannelGroupBlockable(group));
+        preference.setChecked(!group.isBlocked());
+        preference.setOnPreferenceClickListener(preference1 -> {
+            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
+            group.setBlocked(!allowGroup);
+            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
+
+            onGroupBlockStateChanged(group);
+            return true;
+        });
+
+        parent.addPreference(preference);
     }
 
     private Comparator<NotificationChannelGroup> mChannelGroupComparator =
@@ -204,4 +221,37 @@ public class AppNotificationSettings extends NotificationSettingsBase {
                     return left.getId().compareTo(right.getId());
                 }
             };
+
+    protected void onGroupBlockStateChanged(NotificationChannelGroup group) {
+        if (group == null) {
+            return;
+        }
+        PreferenceGroup groupGroup = (
+                PreferenceGroup) getPreferenceScreen().findPreference(group.getId());
+
+        if (groupGroup != null) {
+            if (group.isBlocked()) {
+                List<Preference> toRemove = new ArrayList<>();
+                int childCount = groupGroup.getPreferenceCount();
+                for (int i = 0; i < childCount; i++) {
+                    Preference pref = groupGroup.getPreference(i);
+                    if (pref instanceof MasterCheckBoxPreference) {
+                        toRemove.add(pref);
+                    }
+                }
+                for (Preference pref : toRemove) {
+                    groupGroup.removePreference(pref);
+                }
+            } else {
+                final List<NotificationChannel> channels = group.getChannels();
+                Collections.sort(channels, mChannelComparator);
+                int N = channels.size();
+                for (int i = 0; i < N; i++) {
+                    final NotificationChannel channel = channels.get(i);
+                    populateSingleChannelPrefs(groupGroup, channel, group.isBlocked());
+                }
+            }
+        }
+    }
+
 }
