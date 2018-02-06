@@ -67,19 +67,35 @@ public class TwoStateButtonPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateButtons_stateOn_onlyShowButtonOn() {
-        mController.updateButton(true /* stateOn */);
+    public void testSetButtonVisibility_stateOn_onlyShowButtonOn() {
+        mController.setButtonVisibility(true /* stateOn */);
 
         assertThat(mButtonOn.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mButtonOff.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
-    public void testUpdateButtons_stateOff_onlyShowButtonOff() {
-        mController.updateButton(false /* stateOn */);
+    public void testSetButtonVisibility_stateOff_onlyShowButtonOff() {
+        mController.setButtonVisibility(false /* stateOn */);
 
         assertThat(mButtonOn.getVisibility()).isEqualTo(View.GONE);
         assertThat(mButtonOff.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+    @Test
+    public void testSetButtonEnabled_enabled_buttonEnabled() {
+        mController.setButtonEnabled(true /* enabled */);
+
+        assertThat(mButtonOn.isEnabled()).isTrue();
+        assertThat(mButtonOff.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void testSetButtonEnabled_disabled_buttonDisabled() {
+        mController.setButtonEnabled(false /* enabled */);
+
+        assertThat(mButtonOn.isEnabled()).isFalse();
+        assertThat(mButtonOff.isEnabled()).isFalse();
     }
 
     /**

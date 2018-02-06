@@ -22,6 +22,7 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
+import com.android.settings.fuelgauge.BatterySaverReceiver;
 import com.android.settings.widget.TwoStateButtonPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -31,20 +32,19 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 /**
  * Controller to update the battery saver button
  */
-//TODO(b/72228477): disable the button if device is charging.
 public class BatterySaverButtonPreferenceController extends
         TwoStateButtonPreferenceController implements
-        LifecycleObserver, OnStart, OnStop, BatteryBroadcastReceiver.OnBatteryChangedListener {
+        LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final String KEY = "battery_saver_button_container";
-    private BatteryBroadcastReceiver mBatteryBroadcastReceiver;
+    private BatterySaverReceiver mBatterySaverReceiver;
     @VisibleForTesting
     PowerManager mPowerManager;
 
     public BatterySaverButtonPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY);
         mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        mBatteryBroadcastReceiver = new BatteryBroadcastReceiver(context);
-        mBatteryBroadcastReceiver.setBatteryChangedListener(this);
+        mBatterySaverReceiver = new BatterySaverReceiver(context);
+        mBatterySaverReceiver.setBatterySaverListener(this);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -52,19 +52,18 @@ public class BatterySaverButtonPreferenceController extends
 
     @Override
     public void onStart() {
-        mBatteryBroadcastReceiver.register();
+        mBatterySaverReceiver.setListening(true);
     }
 
     @Override
     public void onStop() {
-        mBatteryBroadcastReceiver.unRegister();
+        mBatterySaverReceiver.setListening(false);
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
-        final boolean lowPowerModeOn = mPowerManager.isPowerSaveMode();
-        updateButton(!lowPowerModeOn);
+        setButtonVisibility(!mPowerManager.isPowerSaveMode());
     }
 
     @Override
@@ -73,13 +72,17 @@ public class BatterySaverButtonPreferenceController extends
     }
 
     @Override
-    public void onBatteryChanged() {
-        final boolean lowPowerModeOn = mPowerManager.isPowerSaveMode();
-        updateButton(!lowPowerModeOn);
+    public void onButtonClicked(boolean stateOn) {
+        mPowerManager.setPowerSaveMode(stateOn);
     }
 
     @Override
-    public void onButtonClicked(boolean stateOn) {
-        mPowerManager.setPowerSaveMode(stateOn);
+    public void onPowerSaveModeChanged() {
+        setButtonVisibility(!mPowerManager.isPowerSaveMode());
+    }
+
+    @Override
+    public void onBatteryChanged(boolean pluggedIn) {
+        setButtonEnabled(!pluggedIn);
     }
 }

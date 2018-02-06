@@ -69,7 +69,7 @@ public class BatterySaverReceiver extends BroadcastReceiver {
         mBatterySaverListener = lsn;
     }
 
-    interface BatterySaverListener {
+    public interface BatterySaverListener {
         void onPowerSaveModeChanged();
         void onBatteryChanged(boolean pluggedIn);
     }

@@ -47,7 +47,7 @@ public abstract class TwoStateButtonPreferenceController extends BasePreferenceC
         mButtonOff.setOnClickListener(this);
     }
 
-    protected void updateButton(boolean stateOn) {
+    protected void setButtonVisibility(boolean stateOn) {
         if (stateOn) {
             mButtonOff.setVisibility(View.GONE);
             mButtonOn.setVisibility(View.VISIBLE);
@@ -55,6 +55,11 @@ public abstract class TwoStateButtonPreferenceController extends BasePreferenceC
             mButtonOff.setVisibility(View.VISIBLE);
             mButtonOn.setVisibility(View.GONE);
         }
+    }
+
+    protected void setButtonEnabled(boolean enabled) {
+        mButtonOn.setEnabled(enabled);
+        mButtonOff.setEnabled(enabled);
     }
 
     @Override
