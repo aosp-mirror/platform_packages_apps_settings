@@ -4431,6 +4431,12 @@
     <string name="accessibility_autoclick_preference_title">Click after pointer stops moving</string>
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
+    <!-- Title for accessibility preference screen for configuring vibrations. -->
+    <string name="accessibility_vibration_settings_title">Vibration</string>
+    <!-- Title for accessibility preference for configuring notification vibrations. -->
+    <string name="accessibility_notification_vibration_title">Ring &amp; notification vibration</string>
+    <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
+    <string name="accessibility_touch_vibration_title">Touch vibration</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use service</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
@@ -4473,6 +4479,30 @@
         <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to off-->
+    <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to low-->
+    <string name="accessibility_vibration_summary_low">Ring &amp; notification set to low</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to medium-->
+    <string name="accessibility_vibration_summary_medium">Ring &amp; notification set to medium</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to high-->
+    <string name="accessibility_vibration_summary_high">Ring &amp; notification set to high</string>
+
+    <!-- Label describing an option turning vibrations off. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_off">Off</string>
+
+    <!-- Label describing a low intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_low">Low</string>
+
+    <!-- Label describing a medium intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_medium">Medium</string>
+
+    <!-- Label describing a high intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_high">High</string>
 
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>

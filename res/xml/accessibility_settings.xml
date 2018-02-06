@@ -93,6 +93,12 @@
                 android:entries="@array/long_press_timeout_selector_titles"
                 android:entryValues="@array/long_press_timeout_selector_values"
                 android:persistent="false"/>
+
+        <Preference
+            android:fragment="com.android.settings.accessibility.VibrationSettings"
+            android:key="vibration_preference_screen"
+            android:title="@string/accessibility_vibration_settings_title" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
