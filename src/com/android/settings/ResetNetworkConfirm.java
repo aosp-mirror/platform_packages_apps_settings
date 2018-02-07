@@ -225,6 +225,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
             mEraseEsimTask.cancel(true /* mayInterruptIfRunning */);
             mEraseEsimTask = null;
         }
+        super.onDestroy();
     }
 
     @Override
