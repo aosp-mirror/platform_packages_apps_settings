@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -28,17 +27,14 @@ import static org.mockito.Mockito.when;
 import android.app.ActivityManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -47,9 +43,6 @@ import org.robolectric.annotation.Config;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsActivityTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
 
     @Mock
     private FragmentManager mFragmentManager;
@@ -83,14 +76,5 @@ public class SettingsActivityTest {
         mActivity.setTaskDescription(mTaskDescription);
 
         verify(mTaskDescription).setIcon(nullable(Bitmap.class));
-    }
-
-    @Test
-    public void testSaveState_EnabledHomeSaved() {
-        mActivity.mDisplayHomeAsUpEnabled = true;
-        Bundle bundle = new Bundle();
-        mActivity.saveState(bundle);
-
-        assertThat((boolean) bundle.get(SettingsActivity.SAVE_KEY_SHOW_HOME_AS_UP)).isTrue();
     }
 }

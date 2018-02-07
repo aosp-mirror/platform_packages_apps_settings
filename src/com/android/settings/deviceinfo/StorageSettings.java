@@ -236,7 +236,6 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
                         StorageDashboardFragment.class.getName(), args, null,
                         R.string.storage_settings, null, false, getMetricsCategory());
-                intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
                 getActivity().startActivity(intent);
                 finish();
             }
