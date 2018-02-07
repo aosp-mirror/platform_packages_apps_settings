@@ -37,10 +37,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.TextView;
 
-import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.os.BatterySipper;
-import com.android.internal.os.BatterySipper.DrainType;
 import com.android.settings.R;
 import com.android.settings.Settings.HighPowerApplicationsActivity;
 import com.android.settings.SettingsActivity;
@@ -48,10 +45,7 @@ import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.dashboard.SummaryLoader;
-import com.android.settings.display.AmbientDisplayPreferenceController;
-import com.android.settings.display.AutoBrightnessPreferenceController;
 import com.android.settings.display.BatteryPercentagePreferenceController;
-import com.android.settings.display.TimeoutPreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -63,6 +57,8 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -164,12 +160,12 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     // be unplugged for a period of time before being willing ot make an estimate.
                     summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    BatteryUtils.convertUsToMs(oldInfo.remainingTimeUs))));
+                                    PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
 
                     // for this one we can just set the string directly
                     summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    BatteryUtils.convertUsToMs(newInfo.remainingTimeUs))));
+                                    PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
 
                     batteryView.setBatteryLevel(oldInfo.batteryLevel);
                     batteryView.setCharging(!oldInfo.discharging);
@@ -314,10 +310,10 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(mStatsHelper,
                 System.currentTimeMillis());
         updateLastFullChargePreference(lastFullChargeTime);
-        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(getContext(),
+        mScreenUsagePref.setSubtitle(StringUtil.formatElapsedTime(getContext(),
                 mBatteryUtils.calculateScreenUsageTime(mStatsHelper), false));
 
-        final CharSequence timeSequence = Utils.formatRelativeTime(context, lastFullChargeTime,
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(context, lastFullChargeTime,
                 false);
         mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper,
                 false /* showAllApps */, timeSequence);
@@ -340,7 +336,7 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @VisibleForTesting
     void updateLastFullChargePreference(long timeMs) {
-        final CharSequence timeSequence = Utils.formatRelativeTime(getContext(), timeMs, false);
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(getContext(), timeMs, false);
         mLastFullChargePref.setSubtitle(timeSequence);
     }
 

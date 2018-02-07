@@ -43,6 +43,7 @@ import com.android.settings.R;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
+import com.android.settingslib.utils.PowerUtil;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -68,19 +69,18 @@ public class BatteryUtils {
         int BACKGROUND = 2;
         int ALL = 3;
     }
-
     private static final String TAG = "BatteryUtils";
 
     private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
+
     private static final int SECONDS_IN_HOUR = 60 * 60;
     private static BatteryUtils sInstance;
-
     private PackageManager mPackageManager;
+
     private AppOpsManager mAppOpsManager;
     private Context mContext;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerUsageFeatureProvider;
-
     public static BatteryUtils getInstance(Context context) {
         if (sInstance == null || sInstance.isDataCorrupted()) {
             sInstance = new BatteryUtils(context);
@@ -131,29 +131,30 @@ public class BatteryUtils {
 
         // Return the min value of STATE_TOP time and foreground activity time, since both of these
         // time have some errors
-        return convertUsToMs(
+        return PowerUtil.convertUsToMs(
                 Math.min(timeUs, getForegroundActivityTotalTimeUs(uid, rawRealTimeUs)));
     }
 
     private long getScreenUsageTimeMs(BatteryStats.Uid uid, int which) {
-        final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        final long rawRealTimeUs = PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
         return getScreenUsageTimeMs(uid, which, rawRealTimeUs);
     }
 
     private long getProcessBackgroundTimeMs(BatteryStats.Uid uid, int which) {
-        final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        final long rawRealTimeUs = PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
         final long timeUs = uid.getProcessStateTime(
                 BatteryStats.Uid.PROCESS_STATE_BACKGROUND, rawRealTimeUs, which);
 
         Log.v(TAG, "package: " + mPackageManager.getNameForUid(uid.getUid()));
         Log.v(TAG, "background time(us): " + timeUs);
-        return convertUsToMs(timeUs);
+        return PowerUtil.convertUsToMs(timeUs);
     }
 
     private long getProcessForegroundTimeMs(BatteryStats.Uid uid, int which) {
-        final long rawRealTimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        final long rawRealTimeUs = PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
         return getScreenUsageTimeMs(uid, which, rawRealTimeUs)
-                + convertUsToMs(getForegroundServiceTotalTimeUs(uid, rawRealTimeUs));
+                + PowerUtil.convertUsToMs(
+                        getForegroundServiceTotalTimeUs(uid, rawRealTimeUs));
     }
 
     /**
@@ -267,9 +268,10 @@ public class BatteryUtils {
      */
     public long calculateRunningTimeBasedOnStatsType(BatteryStatsHelper batteryStatsHelper,
             int statsType) {
-        final long elapsedRealtimeUs = convertMsToUs(SystemClock.elapsedRealtime());
+        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
+                SystemClock.elapsedRealtime());
         // Return the battery time (millisecond) on status mStatsType
-        return convertUsToMs(
+        return PowerUtil.convertUsToMs(
                 batteryStatsHelper.getStats().computeBatteryRealtime(elapsedRealtimeUs, statsType));
 
     }
@@ -390,25 +392,15 @@ public class BatteryUtils {
         }
     }
 
-    public static long convertUsToMs(long timeUs) {
-        return timeUs / 1000;
-    }
-
-    public static long convertMsToUs(long timeMs) {
-        return timeMs * 1000;
-    }
-
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
         final boolean isPreOApp = isLegacyApp(packageName);
         if (isPreOApp) {
             // Control whether app could run in the background if it is pre O app
-            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName,
-                    mode);
+            mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName, mode);
         }
         // Control whether app could run jobs in the background
-        mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName,
-                mode);
+        mAppOpsManager.setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, uid, packageName, mode);
     }
 
     public void initBatteryStatsHelper(BatteryStatsHelper statsHelper, Bundle bundle,
@@ -425,7 +417,8 @@ public class BatteryUtils {
         // Stuff we always need to get BatteryInfo
         final Intent batteryBroadcast = mContext.registerReceiver(null,
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        final long elapsedRealtimeUs = BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+        final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
+                SystemClock.elapsedRealtime());
         BatteryInfo batteryInfo;
 
         // 0 means we are discharging, anything else means charging
@@ -443,7 +436,7 @@ public class BatteryUtils {
         if (estimate != null) {
             batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
                     elapsedRealtimeUs, false /* shortString */,
-                    BatteryUtils.convertMsToUs(estimate.estimateMillis),
+                    PowerUtil.convertMsToUs(estimate.estimateMillis),
                     estimate.isBasedOnUsage);
         } else {
             batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,

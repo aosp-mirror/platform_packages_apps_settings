@@ -22,9 +22,9 @@ import android.os.Parcelable;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
+import com.android.settingslib.utils.StringUtil;
 import java.util.List;
 
 /**
@@ -65,7 +65,7 @@ public class HighUsageTip extends BatteryTip {
     @Override
     public CharSequence getSummary(Context context) {
         return context.getString(R.string.battery_tip_high_usage_summary,
-                Utils.formatElapsedTime(context, mScreenTimeMs, false));
+                StringUtil.formatElapsedTime(context, mScreenTimeMs, false));
     }
 
     @Override

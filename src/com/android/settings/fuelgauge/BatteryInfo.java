@@ -25,7 +25,6 @@ import android.os.BatteryStats.HistoryItem;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.WorkerThread;
-import android.text.TextUtils;
 import android.text.format.Formatter;
 import android.util.SparseIntArray;
 
@@ -34,8 +33,14 @@ import com.android.settings.Utils;
 import com.android.settings.graph.UsageView;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.R;
+import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.StringUtil;
+import java.util.concurrent.TimeUnit;
 
 public class BatteryInfo {
+    private static final long SEVEN_MINUTES_MICROS = TimeUnit.MINUTES.toMicros(7);
+    private static final long FIFTEEN_MINUTES_MICROS = TimeUnit.MINUTES.toMicros(15);
+    private static final long ONE_DAY_MICROS = TimeUnit.DAYS.toMicros(1);
 
     public CharSequence chargeLabel;
     public CharSequence remainingLabel;
@@ -100,7 +105,7 @@ public class BatteryInfo {
                         if (lastTime >= 0) {
                             points.put(lastTime, lastLevel);
                             points.put((int) (timePeriod +
-                                            BatteryUtils.convertUsToMs(remainingTimeUs)),
+                                            PowerUtil.convertUsToMs(remainingTimeUs)),
                                     mCharging ? 100 : 0);
                         }
                     }
@@ -160,7 +165,7 @@ public class BatteryInfo {
                 PowerUsageFeatureProvider provider =
                         FeatureFactory.getFactory(context).getPowerUsageFeatureProvider(context);
                 final long elapsedRealtimeUs =
-                        BatteryUtils.convertMsToUs(SystemClock.elapsedRealtime());
+                        PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
 
                 Intent batteryBroadcast = context.registerReceiver(null,
                         new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
@@ -176,7 +181,7 @@ public class BatteryInfo {
                                 .logRuntime(LOG_TAG, "time for enhanced BatteryInfo", startTime);
                         return BatteryInfo.getBatteryInfo(context, batteryBroadcast, stats,
                                 elapsedRealtimeUs, shortString,
-                                BatteryUtils.convertMsToUs(estimate.estimateMillis),
+                                PowerUtil.convertMsToUs(estimate.estimateMillis),
                                 estimate.isBasedOnUsage);
                     }
                 }
@@ -217,51 +222,59 @@ public class BatteryInfo {
 
         info.statusLabel = Utils.getBatteryStatus(resources, batteryBroadcast);
         if (!info.mCharging) {
-            if (drainTimeUs > 0) {
-                info.remainingTimeUs = drainTimeUs;
-                CharSequence timeString = Utils.formatElapsedTime(context,
-                        BatteryUtils.convertUsToMs(drainTimeUs), false /* withSeconds */);
-                info.remainingLabel = TextUtils.expandTemplate(context.getText(shortString ?
-                                R.string.power_remaining_duration_only_short :
-                         (basedOnUsage ?
-                                R.string.power_remaining_duration_only_enhanced :
-                                R.string.power_remaining_duration_only)), timeString);
-                info.chargeLabel = TextUtils.expandTemplate(context.getText(
-                        shortString ?
-                                R.string.power_discharging_duration_short :
-                                basedOnUsage ?
-                                        R.string.power_discharging_duration_enhanced :
-                                        R.string.power_discharging_duration),
-                        info.batteryPercentString, timeString);
-            } else {
-                info.remainingLabel = null;
-                info.chargeLabel = info.batteryPercentString;
-            }
+            updateBatteryInfoDischarging(context, shortString, drainTimeUs, basedOnUsage, info);
         } else {
-            final long chargeTime = stats.computeChargeTimeRemaining(elapsedRealtimeUs);
-            final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
-                    BatteryManager.BATTERY_STATUS_UNKNOWN);
-            info.discharging = false;
-            if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
-                info.remainingTimeUs = chargeTime;
-                CharSequence timeString = Utils.formatElapsedTime(context,
-                        BatteryUtils.convertUsToMs(chargeTime), false /* withSeconds */);
-                int resId = R.string.power_charging_duration;
-                info.remainingLabel = TextUtils.expandTemplate(context.getText(
-                        R.string.power_remaining_charging_duration_only), timeString);
-                info.chargeLabel = TextUtils.expandTemplate(context.getText(resId),
-                        info.batteryPercentString, timeString);
-            } else {
-                final String chargeStatusLabel = resources.getString(
-                        R.string.battery_info_status_charging_lower);
-                info.remainingLabel = null;
-                info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
-                        resources.getString(R.string.power_charging, info.batteryPercentString,
-                                chargeStatusLabel);
-            }
+            updateBatteryInfoCharging(context, batteryBroadcast, stats, elapsedRealtimeUs, info);
         }
         BatteryUtils.logRuntime(LOG_TAG, "time for getBatteryInfo", startTime);
         return info;
+    }
+
+    private static void updateBatteryInfoCharging(Context context, Intent batteryBroadcast,
+            BatteryStats stats, long elapsedRealtimeUs, BatteryInfo info) {
+        final Resources resources = context.getResources();
+        final long chargeTime = stats.computeChargeTimeRemaining(elapsedRealtimeUs);
+        final int status = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_STATUS,
+                BatteryManager.BATTERY_STATUS_UNKNOWN);
+        info.discharging = false;
+        if (chargeTime > 0 && status != BatteryManager.BATTERY_STATUS_FULL) {
+            info.remainingTimeUs = chargeTime;
+            CharSequence timeString = StringUtil.formatElapsedTime(context,
+                    PowerUtil.convertUsToMs(info.remainingTimeUs), false /* withSeconds */);
+            int resId = R.string.power_charging_duration;
+            info.remainingLabel = context.getString(
+                    R.string.power_remaining_charging_duration_only, timeString);
+            info.chargeLabel = context.getString(resId, info.batteryPercentString, timeString);
+        } else {
+            final String chargeStatusLabel = resources.getString(
+                    R.string.battery_info_status_charging_lower);
+            info.remainingLabel = null;
+            info.chargeLabel = info.batteryLevel == 100 ? info.batteryPercentString :
+                    resources.getString(R.string.power_charging, info.batteryPercentString,
+                            chargeStatusLabel);
+        }
+    }
+
+    private static void updateBatteryInfoDischarging(Context context, boolean shortString,
+            long drainTimeUs, boolean basedOnUsage, BatteryInfo info) {
+        if (drainTimeUs > 0) {
+            info.remainingTimeUs = drainTimeUs;
+            info.remainingLabel = PowerUtil.getBatteryRemainingStringFormatted(
+                    context,
+                    PowerUtil.convertUsToMs(drainTimeUs),
+                    null /* percentageString */,
+                    basedOnUsage && !shortString
+            );
+            info.chargeLabel = PowerUtil.getBatteryRemainingStringFormatted(
+                    context,
+                    PowerUtil.convertUsToMs(drainTimeUs),
+                    info.batteryPercentString,
+                    basedOnUsage && !shortString
+            );
+        } else {
+            info.remainingLabel = null;
+            info.chargeLabel = info.batteryPercentString;
+        }
     }
 
     public interface BatteryDataParser {
