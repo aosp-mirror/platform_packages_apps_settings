@@ -74,7 +74,7 @@ import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail;
-import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.PowerUsageSummaryLegacy;
 import com.android.settings.gestures.AssistGestureSettings;

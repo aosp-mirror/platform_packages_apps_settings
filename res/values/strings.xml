@@ -5159,8 +5159,17 @@
     <!-- Label for dex2oat process in battery usage used for the optimization of one or more apps -->
     <string name="process_dex2oat_label">App optimization</string>
 
-    <!-- [CHAR_LIMIT=40] Battery saver: Label for feature, title + menu item -->
-    <string name="battery_saver">Battery Saver</string>
+    <!-- Battery saver: Label for feature, title + menu item [CHAR_LIMIT=40] -->
+    <string name="battery_saver">Reduced power mode</string>
+
+    <!-- Battery saver: Label for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_title">Schedule</string>
+
+    <!-- Battery saver: Summary for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_summary">Turn on Reduced power mode automatically when battery is low</string>
+
+    <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_seekbar_title">Turn on automatically at <xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Used in the Battery Saver settings screen to control turning on/off the feature entirely -->
     <string name="battery_saver_master_switch_title">Use Battery Saver</string>
@@ -8733,6 +8742,12 @@
     <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: pct% battery -->
     <string name="battery_saver_desc_turn_on_auto_pct">Turn on automatically at %1$s battery</string>
 
+    <!--  Battery saver: Label for button that will turn on battery saver. [CHAR LIMIT=30] -->
+    <string name="battery_saver_button_turn_on">Turn on now</string>
+
+    <!--  Battery saver: Label for button that will turn off battery saver. [CHAR LIMIT=30] -->
+    <string name="battery_saver_button_turn_off">Turn off now</string>
+
     <!-- [CHAR_LIMIT=NONE] Label for when app is ignoring battery optimizations -->
     <string name="not_battery_optimizing">Not using battery optimization</string>
 
@@ -9286,6 +9301,9 @@
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
+
+    <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_saver_settings" translatable="false"></string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>
