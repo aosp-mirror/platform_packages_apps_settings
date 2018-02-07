@@ -731,31 +731,11 @@ public class SettingsActivity extends SettingsDrawerActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
 
-        boolean isDataPlanFeatureEnabled = FeatureFactory.getFactory(this)
-                .getDataPlanFeatureProvider()
-                .isEnabled();
-
-        // When the data plan feature flag is turned on we disable DataUsageSummaryActivity
-        // and enable DataPlanUsageSummaryActivity. When the feature flag is turned off we do the
-        // reverse.
-
-        // Disable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
-        // disable DataPlanUsageSummaryActivity.
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,
-                        isDataPlanFeatureEnabled
-                                ? Settings.DataUsageSummaryActivity.class.getName()
-                                : Settings.DataPlanUsageSummaryActivity.class.getName()),
-                false /* enabled */,
-                isAdmin) || somethingChanged;
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.
         somethingChanged = setTileEnabled(
-                new ComponentName(packageName,
-                        isDataPlanFeatureEnabled
-                                ? Settings.DataPlanUsageSummaryActivity.class.getName()
-                                : Settings.DataUsageSummaryActivity.class.getName()),
+                new ComponentName(packageName, Settings.DataUsageSummaryActivity.class.getName()),
                 Utils.isBandwidthControlEnabled() /* enabled */,
                 isAdmin) || somethingChanged;
 

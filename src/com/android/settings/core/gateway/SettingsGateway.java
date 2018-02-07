@@ -33,16 +33,16 @@ import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
 import com.android.settings.accessibility.CaptionPropertiesFragment;
 import com.android.settings.accessibility.ToggleDaltonizerPreferenceFragment;
+import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.accounts.AccountSyncSettings;
 import com.android.settings.accounts.ChooseAccountActivity;
 import com.android.settings.accounts.ManagedProfileSettings;
-import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
+import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.ManageDomainUrls;
 import com.android.settings.applications.ProcessStatsSummary;
 import com.android.settings.applications.ProcessStatsUi;
-import com.android.settings.applications.DirectoryAccessDetails;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.VrListenerSettings;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
@@ -59,7 +59,6 @@ import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFrag
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
-import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
@@ -187,7 +186,6 @@ public class SettingsGateway {
             PickupGestureSettings.class.getName(),
             DoubleTwistGestureSettings.class.getName(),
             CryptKeeperSettings.class.getName(),
-            DataPlanUsageSummary.class.getName(),
             DataUsageSummary.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
@@ -273,7 +271,6 @@ public class SettingsGateway {
             SupportDashboardActivity.class.getName(),
             // Home page > Network & Internet
             Settings.WifiSettingsActivity.class.getName(),
-            Settings.DataPlanUsageSummaryActivity.class.getName(),
             Settings.DataUsageSummaryActivity.class.getName(),
             Settings.SimSettingsActivity.class.getName(),
             // Home page > Connected devices
