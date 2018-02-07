@@ -74,6 +74,7 @@ import android.widget.Toast;
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -250,30 +251,6 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             }
         }
         return null;
-    }
-
-    protected void populateGroupToggle(final PreferenceGroup parent,
-            NotificationChannelGroup group) {
-        RestrictedSwitchPreference preference = new RestrictedSwitchPreference(getPrefContext());
-        preference.setTitle(R.string.notification_switch_label);
-        preference.setEnabled(mSuspendedAppsAdmin == null
-                && isChannelGroupBlockable(group));
-        preference.setChecked(!group.isBlocked());
-        preference.setOnPreferenceClickListener(preference1 -> {
-            final boolean allowGroup = ((SwitchPreference) preference1).isChecked();
-            group.setBlocked(!allowGroup);
-            mBackend.updateChannelGroup(mAppRow.pkg, mAppRow.uid, group);
-
-            for (int i = 0; i < parent.getPreferenceCount(); i++) {
-                Preference pref = parent.getPreference(i);
-                if (pref instanceof MasterSwitchPreference) {
-                    ((MasterSwitchPreference) pref).setSwitchEnabled(allowGroup);
-                }
-            }
-            return true;
-        });
-
-        parent.addPreference(preference);
     }
 
     protected Preference populateSingleChannelPrefs(PreferenceGroup parent,

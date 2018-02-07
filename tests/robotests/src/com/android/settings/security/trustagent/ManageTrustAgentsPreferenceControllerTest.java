@@ -16,14 +16,12 @@
 
 package com.android.settings.security.trustagent;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -50,8 +48,6 @@ public class ManageTrustAgentsPreferenceControllerTest {
     private TrustAgentManager mTrustAgentManager;
     @Mock
     private LockPatternUtils mLockPatternUtils;
-    @Mock
-    private PreferenceScreen mScreen;
 
     private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
@@ -70,8 +66,6 @@ public class ManageTrustAgentsPreferenceControllerTest {
         mController = new ManageTrustAgentsPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreference);
     }
 
     @Test
@@ -86,10 +80,10 @@ public class ManageTrustAgentsPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_isNotSecure_shouldDisablePreference() {
+    public void updateState_isNotSecure_shouldDisablePreference() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(false);
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.getSummary())
@@ -97,12 +91,12 @@ public class ManageTrustAgentsPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_isSecure_noTrustAgent_shouldShowGenericSummary() {
+    public void updateState_isSecure_noTrustAgent_shouldShowGenericSummary() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         when(mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils))
                 .thenReturn(new ArrayList<>());
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.getSummary())
@@ -110,12 +104,12 @@ public class ManageTrustAgentsPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_isSecure_hasTrustAgent_shouldShowDetailedSummary() {
+    public void updateState_isSecure_hasTrustAgent_shouldShowDetailedSummary() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         when(mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils))
                 .thenReturn(Arrays.asList(new TrustAgentManager.TrustAgentComponentInfo()));
 
-        mController.displayPreference(mScreen);
+        mController.updateState(mPreference);
 
         assertThat(mPreference.isEnabled()).isTrue();
         assertThat(mPreference.getSummary())

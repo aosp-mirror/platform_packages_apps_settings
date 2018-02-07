@@ -22,7 +22,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.widget.Switch;
-import android.widget.Toast;
 
 import com.android.settings.R;
 import com.android.settings.applications.LayoutPreference;
@@ -36,14 +35,11 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
     private static final String KEY = "zen_automatic_rule_switch";
     private AutomaticZenRule mRule;
     private String mId;
-    private Toast mEnabledToast;
-    private int mToastTextResource;
     private SwitchBar mSwitchBar;
 
     public ZenAutomaticRuleSwitchPreferenceController(Context context, Fragment parent,
-            int toastTextResource, Lifecycle lifecycle) {
+            Lifecycle lifecycle) {
         super(context, KEY, parent, lifecycle);
-        mToastTextResource = toastTextResource;
     }
 
     @Override
@@ -92,16 +88,5 @@ public class ZenAutomaticRuleSwitchPreferenceController extends
         if (enabled == mRule.isEnabled()) return;
         mRule.setEnabled(enabled);
         mBackend.setZenRule(mId, mRule);
-        if (enabled) {
-            final int toastText = mToastTextResource;
-            if (toastText != 0) {
-                mEnabledToast = Toast.makeText(mContext, toastText, Toast.LENGTH_SHORT);
-                mEnabledToast.show();
-            }
-        } else {
-            if (mEnabledToast != null) {
-                mEnabledToast.cancel();
-            }
-        }
     }
 }

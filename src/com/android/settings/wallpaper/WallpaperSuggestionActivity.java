@@ -59,7 +59,8 @@ public class WallpaperSuggestionActivity extends Activity {
     @VisibleForTesting
     public static boolean isSuggestionComplete(Context context) {
         final WallpaperManagerWrapper manager = new WallpaperManagerWrapper(context);
-        return manager.getWallpaperId(WallpaperManager.FLAG_SYSTEM) > 0;
+        return manager.isWallpaperServiceEnabled() ? manager.getWallpaperId(
+                WallpaperManager.FLAG_SYSTEM) > 0 : false;
     }
 
 }

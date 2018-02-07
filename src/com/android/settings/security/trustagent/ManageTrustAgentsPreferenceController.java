@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
@@ -52,21 +51,18 @@ public class ManageTrustAgentsPreferenceController extends BasePreferenceControl
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        final Preference preference = screen.findPreference(getPreferenceKey());
-        if (preference == null) {
-            return;
-        }
+    public void updateState(Preference preference) {
         final int numberOfTrustAgent = getTrustAgentCount();
         if (!mLockPatternUtils.isSecure(MY_USER_ID)) {
             preference.setEnabled(false);
             preference.setSummary(R.string.disabled_because_no_backup_security);
         } else if (numberOfTrustAgent > 0) {
+            preference.setEnabled(true);
             preference.setSummary(mContext.getResources().getQuantityString(
                     R.plurals.manage_trust_agents_summary_on,
                     numberOfTrustAgent, numberOfTrustAgent));
         } else {
+            preference.setEnabled(true);
             preference.setSummary(R.string.manage_trust_agents_summary);
         }
     }

@@ -115,6 +115,26 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             return mContext.getString(R.string.zen_mode_behavior_summary_custom);
         }
 
+        String getSoundSummary() {
+            int zenMode = NotificationManager.from(mContext).getZenMode();
+
+            if (zenMode != Settings.Global.ZEN_MODE_OFF) {
+                Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
+                return mContext.getString(R.string.zen_mode_sound_summary_on,
+                        getBehaviorSettingSummary(policy, zenMode));
+            } else {
+                final int count = getEnabledAutomaticRulesCount();
+                if (count > 0) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_off_with_info,
+                            mContext.getResources().getQuantityString(
+                                    R.plurals.zen_mode_sound_summary_summary_off_info,
+                                    count, count));
+                }
+
+                return mContext.getString(R.string.zen_mode_sound_summary_off);
+            }
+        }
+
         String getAutomaticRulesSummary() {
             final int count = getEnabledAutomaticRulesCount();
             return count == 0 ? mContext.getString(R.string.zen_mode_settings_summary_off)

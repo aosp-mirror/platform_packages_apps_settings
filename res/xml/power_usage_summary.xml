@@ -23,7 +23,7 @@
 
     <com.android.settings.applications.LayoutPreference
         android:key="battery_header"
-        android:selectable="true"
+        android:selectable="false"
         android:layout="@layout/battery_header"/>
 
     <PreferenceCategory
@@ -34,7 +34,7 @@
         android:key="power_management">
 
         <com.android.settings.widget.MasterSwitchPreference
-            android:fragment="com.android.settings.fuelgauge.BatterySaverSettings"
+            android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
             android:key="battery_saver_summary"
             android:title="@string/battery_saver"/>
 

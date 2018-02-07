@@ -36,31 +36,12 @@ public class ConnectedAccessPointPreference extends AccessPointPreference implem
     public ConnectedAccessPointPreference(AccessPoint accessPoint, Context context,
             UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks) {
         super(accessPoint, context, cache, iconResId, forSavedNetworks);
+        setWidgetLayoutResource(R.layout.preference_widget_gear_no_bg);
     }
 
     public void setOnGearClickListener(OnGearClickListener l) {
         mOnGearClickListener = l;
         notifyChanged();
-    }
-
-    @Override
-    protected int getSecondTargetResId() {
-        return R.layout.preference_widget_gear;
-    }
-
-    @Override
-    protected boolean shouldHideSecondTarget() {
-        return mOnGearClickListener == null;
-    }
-
-    @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
-        super.onBindViewHolder(holder);
-        final View gear = holder.findViewById(R.id.settings_button);
-        if (gear != null) {
-            gear.setOnClickListener(this);
-        }
-        setDividerVisibility(holder, View.VISIBLE);
     }
 
     @Override

@@ -15,6 +15,9 @@
  */
 package com.android.settings.notification;
 
+import static android.app.NotificationManager.IMPORTANCE_NONE;
+import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
+
 import android.app.INotificationManager;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
@@ -101,6 +104,12 @@ public class NotificationBackend {
 
     public boolean setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) {
         try {
+            if (onlyHasDefaultChannel(pkg, uid)) {
+                NotificationChannel defaultChannel =
+                        getChannel(pkg, uid, NotificationChannel.DEFAULT_CHANNEL_ID);
+                defaultChannel.setImportance(enabled ? IMPORTANCE_UNSPECIFIED : IMPORTANCE_NONE);
+                updateChannel(pkg, uid, defaultChannel);
+            }
             sINM.setNotificationsEnabledForPackage(pkg, uid, enabled);
             return true;
         } catch (Exception e) {

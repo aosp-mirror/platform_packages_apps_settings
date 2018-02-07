@@ -22,12 +22,23 @@ import android.content.Context;
 public class WallpaperManagerWrapper {
 
     private final WallpaperManager mWallpaperManager;
+    private final boolean mWallpaperServiceEnabled;
 
     public WallpaperManagerWrapper(Context context) {
-        mWallpaperManager = (WallpaperManager) context.getSystemService(Context.WALLPAPER_SERVICE);
+        mWallpaperServiceEnabled = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_enableWallpaperService);
+        mWallpaperManager = mWallpaperServiceEnabled ? (WallpaperManager) context.getSystemService(
+                Context.WALLPAPER_SERVICE) : null;
+    }
+
+    public boolean isWallpaperServiceEnabled() {
+        return mWallpaperServiceEnabled;
     }
 
     public int getWallpaperId(int which) {
+        if (!mWallpaperServiceEnabled) {
+            throw new RuntimeException("This device does not have wallpaper service enabled.");
+        }
         return mWallpaperManager.getWallpaperId(which);
     }
 }

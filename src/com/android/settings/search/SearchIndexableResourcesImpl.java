@@ -26,6 +26,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
 import com.android.settings.accessibility.MagnificationPreferenceFragment;
+import com.android.settings.accessibility.VibrationSettings;
 import com.android.settings.accounts.AccountDashboardFragment;
 import com.android.settings.applications.AppAndNotificationDashboardFragment;
 import com.android.settings.applications.DefaultAppSettings;
@@ -49,7 +50,7 @@ import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
-import com.android.settings.fuelgauge.BatterySaverSettings;
+import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageSummary;
 import com.android.settings.fuelgauge.SmartBatterySettings;
@@ -176,6 +177,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(NightDisplaySettings.class);
         addIndex(SmartBatterySettings.class);
         addIndex(MyDeviceInfoFragment.class);
+        addIndex(VibrationSettings.class);
     }
 
     @Override

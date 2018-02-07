@@ -2423,13 +2423,6 @@
 
     <!-- Main Settings screen, setting option name to go into search settings -->
     <string name="search_settings">Search</string>
-    <!-- Main Settings screen, setting option summary to go into search settings -->
-    <string name="search_settings_summary">Manage search settings and history</string>
-    <!-- There are no search results for the user's search [CHAR LIMIT=NONE]-->
-    <string name="search_settings_no_results">No results</string>
-
-    <!-- Button to clear all search history in Settings [CHAR LIMIT=40]-->
-    <string name="search_clear_history">Clear history</string>
 
     <!-- Display settings --><skip/>
     <!-- Sound & display settings screen, section header for settings related to display -->
@@ -4431,6 +4424,12 @@
     <string name="accessibility_autoclick_preference_title">Click after pointer stops moving</string>
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
+    <!-- Title for accessibility preference screen for configuring vibrations. -->
+    <string name="accessibility_vibration_settings_title">Vibration</string>
+    <!-- Title for accessibility preference for configuring notification vibrations. -->
+    <string name="accessibility_notification_vibration_title">Ring &amp; notification vibration</string>
+    <!-- Title for accessibility preference for configuring touch feedback vibrations. -->
+    <string name="accessibility_touch_vibration_title">Touch vibration</string>
     <!-- Used in the acessibilty service settings to control turning on/off the service entirely -->
     <string name="accessibility_service_master_switch_title">Use service</string>
     <!-- Used in the Color correction settings screen to control turning on/off the feature entirely -->
@@ -4473,6 +4472,30 @@
         <item quantity="one">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
         <item quantity="other">Very long delay (<xliff:g id="click_delay_label" example="200">%1$d</xliff:g> ms)</item>
     </plurals>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to off-->
+    <string name="accessibility_vibration_summary_off">Ring &amp; notification set to off</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to low-->
+    <string name="accessibility_vibration_summary_low">Ring &amp; notification set to low</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to medium-->
+    <string name="accessibility_vibration_summary_medium">Ring &amp; notification set to medium</string>
+
+    <!-- Summary for vibration settings preference when ring & notification are set to high-->
+    <string name="accessibility_vibration_summary_high">Ring &amp; notification set to high</string>
+
+    <!-- Label describing an option turning vibrations off. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_off">Off</string>
+
+    <!-- Label describing a low intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_low">Low</string>
+
+    <!-- Label describing a medium intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_medium">Medium</string>
+
+    <!-- Label describing a high intensity vibration option. [CHAR LIMIT=15] -->
+    <string name="accessibility_vibration_intensity_high">High</string>
 
     <!-- Title for accessibility menu item to lauch a settings activity. [CHAR LIMIT=15] -->
     <string name="accessibility_menu_item_settings">Settings</string>
@@ -5136,8 +5159,17 @@
     <!-- Label for dex2oat process in battery usage used for the optimization of one or more apps -->
     <string name="process_dex2oat_label">App optimization</string>
 
-    <!-- [CHAR_LIMIT=40] Battery saver: Label for feature, title + menu item -->
-    <string name="battery_saver">Battery Saver</string>
+    <!-- Battery saver: Label for feature, title + menu item [CHAR_LIMIT=40] -->
+    <string name="battery_saver">Reduced power mode</string>
+
+    <!-- Battery saver: Label for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_title">Schedule</string>
+
+    <!-- Battery saver: Summary for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
+    <string name="battery_saver_auto_summary">Turn on Reduced power mode automatically when battery is low</string>
+
+    <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
+    <string name="battery_saver_seekbar_title">Turn on automatically at <xliff:g id="percent">%1$s</xliff:g></string>
 
     <!-- Used in the Battery Saver settings screen to control turning on/off the feature entirely -->
     <string name="battery_saver_master_switch_title">Use Battery Saver</string>
@@ -6972,6 +7004,21 @@
     <!-- [CHAR LIMIT=20] Accessibility string for current zen mode and selected exit condition. A template that simply concatenates existing mode string and the current condition description.  -->
     <string name="zen_mode_and_condition"><xliff:g id="zen_mode" example="Priority interruptions only">%1$s</xliff:g>. <xliff:g id="exit_condition" example="For one hour">%2$s</xliff:g></string>
 
+    <!-- Sound settings screen, summary format of do not disturb when on. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_sound_summary_on">On / <xliff:g name="dnd_summary" example="No sound except alarms and media">%1$s</xliff:g></string>
+
+    <!-- Sound settings screen, summary format of do not disturb when off with extra information. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_sound_summary_off_with_info">Off / <xliff:g name="dnd_summary" example="1 rule can turn on automatically">%1$s</xliff:g></string>
+
+    <!-- Sound settings screen, summary format of do not disturb when off with no extra information. [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_sound_summary_off">Off</string>
+
+    <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
+    <plurals name="zen_mode_sound_summary_summary_off_info">
+        <item quantity="one">1 rule can turn on automatically</item>
+        <item quantity="other"><xliff:g id="on_count" example="3">%d</xliff:g> rules can turn on automatically</item>
+    </plurals>
+
     <!-- Work Sounds: Work sound settings section header.  [CHAR LIMIT=50] -->
     <string name="sound_work_settings">Work profile sounds</string>
 
@@ -7106,10 +7153,10 @@
      summary on the channel page-->
 
     <!-- [CHAR LIMIT=100] Notification Importance: min importance level description -->
-    <string name="notification_importance_min">No sound or visual interruption</string>
+    <string name="notification_importance_min">Show silently and minimize</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: low importance level description -->
-    <string name="notification_importance_low">No sound</string>
+    <string name="notification_importance_low">Show silently</string>
 
     <!-- [CHAR LIMIT=100] Notification Importance: normal importance level description -->
     <string name="notification_importance_default">Make sound</string>
@@ -8695,6 +8742,12 @@
     <!-- [CHAR_LIMIT=NONE] Battery saver: Description for automatic entry option: pct% battery -->
     <string name="battery_saver_desc_turn_on_auto_pct">Turn on automatically at %1$s battery</string>
 
+    <!--  Battery saver: Label for button that will turn on battery saver. [CHAR LIMIT=30] -->
+    <string name="battery_saver_button_turn_on">Turn on now</string>
+
+    <!--  Battery saver: Label for button that will turn off battery saver. [CHAR LIMIT=30] -->
+    <string name="battery_saver_button_turn_off">Turn off now</string>
+
     <!-- [CHAR_LIMIT=NONE] Label for when app is ignoring battery optimizations -->
     <string name="not_battery_optimizing">Not using battery optimization</string>
 
@@ -9248,6 +9301,9 @@
 
     <!-- Help URI, USB Audio [DO NOT TRANSLATE] -->
     <string name="help_url_audio_accessory_not_supported" translatable="false"></string>
+
+    <!-- Help URI, battery saver page [DO NOT TRANSLATE] -->
+    <string name="help_url_battery_saver_settings" translatable="false"></string>
 
     <!-- Title label for new device suggestion, which is displayed in Settings homepage [CHAR LIMIT=100] -->
     <string name="new_device_suggestion_title">What\'s new and exciting?</string>

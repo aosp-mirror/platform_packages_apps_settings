@@ -31,7 +31,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -90,6 +92,10 @@ public class RecentNotifyingAppsPreferenceControllerTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private NotificationBackend mBackend;
+    @Mock
+    private Fragment mHost;
+    @Mock
+    private Activity mActivity;
 
     private Context mContext;
     private RecentNotifyingAppsPreferenceController mController;
@@ -102,7 +108,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         doReturn(mPackageManager).when(mContext).getPackageManager();
 
         mController = new RecentNotifyingAppsPreferenceController(
-                mContext, mBackend, mAppState, null);
+                mContext, mBackend, mAppState, mHost);
         when(mScreen.findPreference(anyString())).thenReturn(mCategory);
 
         when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_SEE_ALL))
@@ -110,6 +116,7 @@ public class RecentNotifyingAppsPreferenceControllerTest {
         when(mScreen.findPreference(RecentNotifyingAppsPreferenceController.KEY_DIVIDER))
                 .thenReturn(mDivider);
         when(mCategory.getContext()).thenReturn(mContext);
+        when(mHost.getActivity()).thenReturn(mActivity);
     }
 
     @Test
