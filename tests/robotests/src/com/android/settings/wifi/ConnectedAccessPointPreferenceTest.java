@@ -16,6 +16,8 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -75,4 +77,9 @@ public class ConnectedAccessPointPreferenceTest {
         verify(mOnGearClickListener, never()).onGearClick(mConnectedAccessPointPreference);
     }
 
+    @Test
+    public void testWidgetLayoutPreference() {
+        assertThat(mConnectedAccessPointPreference.getWidgetLayoutResource()).isEqualTo(
+                R.layout.preference_widget_gear_no_bg);
+    }
 }
