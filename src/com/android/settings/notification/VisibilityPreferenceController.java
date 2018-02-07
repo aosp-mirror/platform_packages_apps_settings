@@ -84,14 +84,17 @@ public class VisibilityPreferenceController extends NotificationPreferenceContro
                                 | DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS);
             }
 
-            final String summaryHideEntry =
-                    mContext.getString(R.string.lock_screen_notifications_summary_hide);
-            final String summaryHideEntryValue = Integer.toString(Notification.VISIBILITY_PRIVATE);
-            entries.add(summaryHideEntry);
-            values.add(summaryHideEntryValue);
-            setRestrictedIfNotificationFeaturesDisabled(pref,
-                    summaryHideEntry, summaryHideEntryValue,
-                    DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
+            if (getLockscreenNotificationsEnabled()) {
+                final String summaryHideEntry =
+                        mContext.getString(R.string.lock_screen_notifications_summary_hide);
+                final String summaryHideEntryValue = Integer.toString(
+                        Notification.VISIBILITY_PRIVATE);
+                entries.add(summaryHideEntry);
+                values.add(summaryHideEntryValue);
+                setRestrictedIfNotificationFeaturesDisabled(pref,
+                        summaryHideEntry, summaryHideEntryValue,
+                        DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS);
+            }
             entries.add(mContext.getString(R.string.lock_screen_notifications_summary_disable));
             values.add(Integer.toString(Notification.VISIBILITY_SECRET));
             pref.setEntries(entries.toArray(new CharSequence[entries.size()]));
