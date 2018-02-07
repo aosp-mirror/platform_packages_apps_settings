@@ -37,7 +37,9 @@ import com.android.settings.TestConfig;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcessStatsDetail;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,7 +50,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        ShadowUserManager.class
+})
 public class AppMemoryPreferenceControllerTest {
 
     @Mock
@@ -67,12 +71,18 @@ public class AppMemoryPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mController =
                 spy(new AppMemoryPreferenceController(mContext, mFragment, null /* lifecycle */));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);
         when(mFragment.getActivity()).thenReturn(mActivity);
+    }
+
+    @After
+    public void tearDown() {
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test

@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -33,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
 import com.android.settingslib.development.AbstractEnableAdbPreferenceController;
@@ -52,7 +52,9 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
+        ShadowUserManager.class
+})
 public class DevelopmentSettingsDashboardFragmentTest {
 
     private SwitchBar mSwitchBar;
@@ -68,11 +70,13 @@ public class DevelopmentSettingsDashboardFragmentTest {
         mSwitch = mSwitchBar.getSwitch();
         mDashboard = spy(new DevelopmentSettingsDashboardFragment());
         ReflectionHelpers.setField(mDashboard, "mSwitchBar", mSwitchBar);
+        ShadowUserManager.getShadow().setIsAdminUser(true);
     }
 
     @After
     public void tearDown() {
         ShadowEnableDevelopmentSettingWarningDialog.reset();
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test
@@ -101,7 +105,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
             SettingsShadowResources.class,
             SettingsShadowResources.SettingsShadowTheme.class
     })
-    public void searchIndex_pageDisabled_shouldAddAllKeysToNonIndexable() {
+    public void searchIndex_pageDisabledBySetting_shouldAddAllKeysToNonIndexable() {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, false);
 
@@ -109,7 +113,24 @@ public class DevelopmentSettingsDashboardFragmentTest {
                 DevelopmentSettingsDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getNonIndexableKeys(appContext);
 
-        assertThat(nonIndexableKeys).contains("development_prefs_screen");
+        assertThat(nonIndexableKeys).contains("enable_adb");
+    }
+
+    @Test
+    @Config(shadows = {
+            SettingsShadowResources.class,
+            SettingsShadowResources.SettingsShadowTheme.class
+    })
+    public void searchIndex_pageDisabledForNonAdmin_shouldAddAllKeysToNonIndexable() {
+        final Context appContext = RuntimeEnvironment.application;
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
+        ShadowUserManager.getShadow().setIsAdminUser(false);
+
+        final List<String> nonIndexableKeys =
+                DevelopmentSettingsDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getNonIndexableKeys(appContext);
+
+        assertThat(nonIndexableKeys).contains("enable_adb");
     }
 
     @Test
