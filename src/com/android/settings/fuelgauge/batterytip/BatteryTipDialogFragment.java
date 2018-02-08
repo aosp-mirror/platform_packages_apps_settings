@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController.BatteryTipListener;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
@@ -141,7 +142,8 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
             return;
         }
         final BatteryTipAction action = BatteryTipUtils.getActionForBatteryTip(mBatteryTip,
-                (SettingsActivity) getActivity(), this);
+                (SettingsActivity) getActivity(),
+                (InstrumentedPreferenceFragment) getTargetFragment());
         if (action != null) {
             action.handlePositiveAction();
         }

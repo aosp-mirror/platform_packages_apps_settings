@@ -35,12 +35,12 @@ public class RestrictAppTip extends BatteryTip {
     private List<AppInfo> mRestrictAppList;
 
     public RestrictAppTip(@StateType int state, List<AppInfo> restrictApps) {
-        super(TipType.APP_RESTRICTION, state, true /* showDialog */);
+        super(TipType.APP_RESTRICTION, state, state == StateType.NEW /* showDialog */);
         mRestrictAppList = restrictApps;
     }
 
     public RestrictAppTip(@StateType int state, AppInfo appInfo) {
-        super(TipType.APP_RESTRICTION, state, true /* showDialog */);
+        super(TipType.APP_RESTRICTION, state, state == StateType.NEW /* showDialog */);
         mRestrictAppList = new ArrayList<>();
         mRestrictAppList.add(appInfo);
     }
@@ -85,9 +85,11 @@ public class RestrictAppTip extends BatteryTip {
             // Display it if new anomaly comes
             mState = StateType.NEW;
             mRestrictAppList = ((RestrictAppTip) tip).mRestrictAppList;
+            mShowDialog = true;
         } else if (mState == StateType.NEW && tip.mState == StateType.INVISIBLE) {
             // If anomaly becomes invisible, show it as handled
             mState = StateType.HANDLED;
+            mShowDialog = false;
         }
     }
 

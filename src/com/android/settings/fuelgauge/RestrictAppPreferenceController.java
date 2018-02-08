@@ -22,11 +22,14 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
+import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batterytip.AppInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +40,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     static final String KEY_RESTRICT_APP = "restricted_app";
 
     private AppOpsManager mAppOpsManager;
-    private List<AppOpsManager.PackageOps> mPackageOps;
+    private List<AppInfo> mAppInfos;
     private SettingsActivity mSettingsActivity;
     private InstrumentedPreferenceFragment mPreferenceFragment;
 
@@ -62,9 +65,17 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        mPackageOps = mAppOpsManager.getPackagesForOps(
+        final List<AppOpsManager.PackageOps> packageOpsList = mAppOpsManager.getPackagesForOps(
                 new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
-        final int num = mPackageOps != null ? mPackageOps.size() : 0;
+        final int num = CollectionUtils.size(packageOpsList);
+        mAppInfos = new ArrayList<>();
+
+        for (int i = 0; i < num; i++) {
+            final AppOpsManager.PackageOps packageOps = packageOpsList.get(i);
+            mAppInfos.add(new AppInfo.Builder()
+                    .setPackageName(packageOps.getPackageName())
+                    .build());
+        }
 
         // Enable the preference if some apps already been restricted, otherwise disable it
         preference.setEnabled(num > 0);
@@ -78,7 +89,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
         if (getPreferenceKey().equals(preference.getKey())) {
             // start fragment
             RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mPreferenceFragment,
-                    mPackageOps);
+                    mAppInfos);
             return true;
         }
 

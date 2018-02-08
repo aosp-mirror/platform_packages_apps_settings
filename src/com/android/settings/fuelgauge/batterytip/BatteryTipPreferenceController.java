@@ -25,6 +25,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -48,14 +49,14 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
     PreferenceGroup mPreferenceGroup;
     @VisibleForTesting
     Context mPrefContext;
-    PreferenceFragment mFragment;
+    InstrumentedPreferenceFragment mFragment;
 
     public BatteryTipPreferenceController(Context context, String preferenceKey) {
         this(context, preferenceKey, null, null, null);
     }
 
     public BatteryTipPreferenceController(Context context, String preferenceKey,
-            SettingsActivity settingsActivity, PreferenceFragment fragment,
+            SettingsActivity settingsActivity, InstrumentedPreferenceFragment fragment,
             BatteryTipListener batteryTipListener) {
         super(context, preferenceKey);
         mBatteryTipListener = batteryTipListener;
