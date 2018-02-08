@@ -106,6 +106,24 @@ public class MasterCheckBoxPreferenceTest {
     }
 
     @Test
+    public void onBindViewHolder_shouldSetCheckboxEnabledState() {
+        final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
+                LayoutInflater.from(mContext).inflate(
+                        R.layout.preference_widget_master_checkbox, null));
+        final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
+
+        mPreference.setCheckBoxEnabled(false);
+        mPreference.onBindViewHolder(holder);
+
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(checkBox.isEnabled()).isFalse();
+
+        mPreference.setCheckBoxEnabled(true);
+        assertThat(mPreference.isEnabled()).isTrue();
+        assertThat(checkBox.isEnabled()).isTrue();
+    }
+
+    @Test
     public void clickWidgetView_shouldToggleCheckBox() {
         final LayoutInflater inflater = LayoutInflater.from(mContext);
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
