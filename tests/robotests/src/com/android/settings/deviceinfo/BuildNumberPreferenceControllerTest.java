@@ -43,6 +43,7 @@ import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
@@ -60,7 +61,8 @@ import org.robolectric.util.ReflectionHelpers;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                ShadowUtils.class
+                ShadowUtils.class,
+                ShadowUserManager.class,
         })
 public class BuildNumberPreferenceControllerTest {
 
@@ -84,6 +86,7 @@ public class BuildNumberPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -98,6 +101,7 @@ public class BuildNumberPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test

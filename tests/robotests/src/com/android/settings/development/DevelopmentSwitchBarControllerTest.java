@@ -28,6 +28,7 @@ import android.content.Context;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -47,7 +48,8 @@ import java.util.ArrayList;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
-                ShadowUtils.class
+                ShadowUtils.class,
+                ShadowUserManager.class
         })
 public class DevelopmentSwitchBarControllerTest {
 
@@ -63,6 +65,7 @@ public class DevelopmentSwitchBarControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
+        ShadowUserManager.getShadow().setIsAdminUser(true);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mSwitchBar = new SwitchBar(mContext);
@@ -72,6 +75,7 @@ public class DevelopmentSwitchBarControllerTest {
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        ShadowUserManager.getShadow().reset();
     }
 
     @Test
