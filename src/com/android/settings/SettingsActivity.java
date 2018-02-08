@@ -46,6 +46,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.transition.TransitionManager;
+import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -57,6 +58,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
@@ -790,6 +792,19 @@ public class SettingsActivity extends SettingsDrawerActivity
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.PowerUsageSummaryLegacyActivity.class.getName()),
                 mBatteryPresent && !isBatterySettingsV2Enabled, isAdmin) || somethingChanged;
+
+        final boolean isDataUsageSettingsV2Enabled =
+                FeatureFlagUtils.isEnabled(this, FeatureFlags.DATA_USAGE_SETTINGS_V2);
+        // Enable new data usage page if v2 enabled
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.DataUsageSummaryActivity.class.getName()),
+                Utils.isBandwidthControlEnabled() && isDataUsageSettingsV2Enabled, isAdmin)
+                || somethingChanged;
+        // Enable legacy data usage page if v2 disabled
+        somethingChanged = setTileEnabled(new ComponentName(packageName,
+                        Settings.DataUsageSummaryLegacyActivity.class.getName()),
+                Utils.isBandwidthControlEnabled() && !isDataUsageSettingsV2Enabled, isAdmin)
+                || somethingChanged;
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.UserSettingsActivity.class.getName()),

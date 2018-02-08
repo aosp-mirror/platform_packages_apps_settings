@@ -62,6 +62,7 @@ import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataPlanUsageSummary;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
+import com.android.settings.datausage.DataUsageSummaryLegacy;
 import com.android.settings.deletionhelper.AutomaticStorageManagerSettings;
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 import com.android.settings.deviceinfo.DeviceInfoSettings;
@@ -189,6 +190,7 @@ public class SettingsGateway {
             CryptKeeperSettings.class.getName(),
             DataPlanUsageSummary.class.getName(),
             DataUsageSummary.class.getName(),
+            DataUsageSummaryLegacy.class.getName(),
             DreamSettings.class.getName(),
             UserSettings.class.getName(),
             NotificationAccessSettings.class.getName(),
