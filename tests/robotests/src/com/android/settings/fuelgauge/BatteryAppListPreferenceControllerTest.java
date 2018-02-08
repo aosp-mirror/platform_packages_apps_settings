@@ -220,4 +220,9 @@ public class BatteryAppListPreferenceControllerTest {
 
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
+
+    @Test
+    public void testNeverUseFakeData() {
+        assertThat(BatteryAppListPreferenceController.USE_FAKE_DATA).isFalse();
+    }
 }
