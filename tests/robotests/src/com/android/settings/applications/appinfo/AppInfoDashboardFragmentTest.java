@@ -16,6 +16,10 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
+        .UNINSTALL_ALL_USERS_MENU;
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,6 +29,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,6 +41,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
@@ -126,6 +133,42 @@ public final class AppInfoDashboardFragmentTest {
         ReflectionHelpers.setField(mFragment, "mPackageInfo", packageInfo);
 
         assertThat(mFragment.shouldShowUninstallForAll(appEntry)).isFalse();
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_setUpdateMenuVisible_byDefaultForSystemApps_shouldBeTrue() {
+        Menu menu = onPrepareOptionsMenuTestsSetup();
+        mFragment.onPrepareOptionsMenu(menu);
+
+        verify(menu.findItem(UNINSTALL_UPDATES), times(1)).setVisible(true);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void onPrepareOptionsMenu_setUpdateMenuVisible_ifDisabledByDevice_shouldBeFalse() {
+        Menu menu = onPrepareOptionsMenuTestsSetup();
+        mFragment.onPrepareOptionsMenu(menu);
+
+        verify(menu.findItem(UNINSTALL_UPDATES), times(1)).setVisible(false);
+    }
+
+    private Menu onPrepareOptionsMenuTestsSetup() {
+        // Menu mocking
+        Menu menu = mock(Menu.class);
+        final MenuItem uninstallUpdatesMenuItem = mock(MenuItem.class);
+        final MenuItem uninstallForAllMenuItem = mock(MenuItem.class);
+        when(menu.findItem(UNINSTALL_UPDATES)).thenReturn(uninstallUpdatesMenuItem);
+        when(menu.findItem(UNINSTALL_ALL_USERS_MENU)).thenReturn(uninstallForAllMenuItem);
+
+        // Setup work to prevent NPE
+        final ApplicationInfo info = new ApplicationInfo();
+        info.flags = ApplicationInfo.FLAG_UPDATED_SYSTEM_APP;
+        info.enabled = true;
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = info;
+        mFragment.setAppEntry(appEntry);
+
+        return menu;
     }
 
     @Test
