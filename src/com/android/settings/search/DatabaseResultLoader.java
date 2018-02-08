@@ -43,14 +43,11 @@ public class DatabaseResultLoader {
     };
 
     /**
-     * Base ranks defines the best possible rank based on what the query matches.
-     * If the query matches the prefix of the first word in the title, the best rank it can be
-     * is 1
-     * If the query matches the prefix of the other words in the title, the best rank it can be
-     * is 3
-     * If the query only matches the summary, the best rank it can be is 7
-     * If the query only matches keywords or entries, the best rank it can be is 9
+     * These indices are used to match the columns of the this loader's SELECT statement.
+     * These are not necessarily the same order nor similar coverage as the schema defined in
+     * IndexDatabaseHelper
      */
-    public static final int[] BASE_RANKS = {1, 3, 7, 9};
-
+    public static final int COLUMN_INDEX_ID = 0;
+    public static final int COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE = 8;
+    public static final int COLUMN_INDEX_KEY = 10;
 }
