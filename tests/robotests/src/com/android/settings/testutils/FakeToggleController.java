@@ -15,7 +15,7 @@
  *
  */
 
-package com.android.settings.slices;
+package com.android.settings.testutils;
 
 import android.content.Context;
 import android.provider.Settings;

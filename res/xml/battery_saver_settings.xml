@@ -16,6 +16,7 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/battery_saver"
     android:key="battery_saver">
 
@@ -23,12 +24,15 @@
     <SwitchPreference
         android:key="auto_battery_saver"
         android:title="@string/battery_saver_auto_title"
-        android:summary="@string/battery_saver_auto_summary"/>
+        android:summary="@string/battery_saver_auto_summary"
+        settings:controller="com.android.settings.fuelgauge.batterysaver.AutoBatterySaverPreferenceController"/>
+
     <com.android.settings.widget.SeekBarPreference
         android:key="battery_saver_seek_bar"
         android:title="@string/battery_saver_seekbar_title"
         android:max="75"
         android:min="5"/>
+
     <com.android.settings.applications.LayoutPreference
         android:key="battery_saver_button_container"
         android:selectable="false"
