@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.Utils;
 
+import com.android.settingslib.utils.StringUtil;
 import java.util.List;
 
 /**
@@ -78,7 +79,7 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
                         UserHandle.myUserId()));
         holder.appName.setText(Utils.getApplicationLabel(mContext, app.packageName));
         if (app.screenOnTimeMs != 0) {
-            holder.appTime.setText(Utils.formatElapsedTime(mContext, app.screenOnTimeMs, false));
+            holder.appTime.setText(StringUtil.formatElapsedTime(mContext, app.screenOnTimeMs, false));
         }
     }
 

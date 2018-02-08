@@ -35,8 +35,6 @@ import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
-import com.android.settings.datausage.DataPlanFeatureProvider;
-import com.android.settings.datausage.DataPlanFeatureProviderImpl;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProviderImpl;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
@@ -77,7 +75,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
-    private DataPlanFeatureProvider mDataPlanFeatureProvider;
     private SmsMirroringFeatureProvider mSmsMirroringFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
@@ -189,14 +186,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mBluetoothFeatureProvider = new BluetoothFeatureProviderImpl();
         }
         return mBluetoothFeatureProvider;
-    }
-
-    @Override
-    public DataPlanFeatureProvider getDataPlanFeatureProvider() {
-        if (mDataPlanFeatureProvider == null) {
-            mDataPlanFeatureProvider = new DataPlanFeatureProviderImpl();
-        }
-        return mDataPlanFeatureProvider;
     }
 
     @Override

@@ -46,6 +46,7 @@ import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.utils.StringUtil;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;
@@ -229,7 +230,7 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             pref.setKey(pkgName);
             pref.setTitle(appEntry.label);
             pref.setIcon(mIconDrawableFactory.getBadgedIcon(appEntry.info));
-            pref.setSummary(Utils.formatRelativeTime(mContext,
+            pref.setSummary(StringUtil.formatRelativeTime(mContext,
                     System.currentTimeMillis() - app.getLastNotified(), false));
             pref.setOrder(i);
             Bundle args = new Bundle();

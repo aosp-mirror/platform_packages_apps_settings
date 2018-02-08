@@ -85,16 +85,12 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     private static final String TAG = "WifiSettings";
 
-    /* package */ static final int MENU_ID_WPS_PBC = Menu.FIRST;
-    private static final int MENU_ID_WPS_PIN = Menu.FIRST + 1;
     private static final int MENU_ID_CONNECT = Menu.FIRST + 6;
     private static final int MENU_ID_FORGET = Menu.FIRST + 7;
     private static final int MENU_ID_MODIFY = Menu.FIRST + 8;
     private static final int MENU_ID_WRITE_NFC = Menu.FIRST + 9;
 
     public static final int WIFI_DIALOG_ID = 1;
-    /* package */ static final int WPS_PBC_DIALOG_ID = 2;
-    private static final int WPS_PIN_DIALOG_ID = 3;
     private static final int WRITE_NFC_DIALOG_ID = 6;
 
     // Instance state keys
@@ -108,6 +104,10 @@ public class WifiSettings extends RestrictedSettingsFragment
     private static final String PREF_KEY_ADDITIONAL_SETTINGS = "additional_settings";
     private static final String PREF_KEY_CONFIGURE_WIFI_SETTINGS = "configure_settings";
     private static final String PREF_KEY_SAVED_NETWORKS = "saved_networks";
+
+    private static boolean isVerboseLoggingEnabled() {
+        return WifiTracker.sVerboseLogging || Log.isLoggable(TAG, Log.VERBOSE);
+    }
 
     private final Runnable mUpdateAccessPointsRunnable = () -> {
         updateAccessPointPreferences();
@@ -371,7 +371,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         setProgressBarVisible(true);
         mWifiTracker.forceUpdate();
-        if (WifiTracker.sVerboseLogging) {
+        if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
         }
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
@@ -457,24 +457,6 @@ public class WifiSettings extends RestrictedSettingsFragment
             mWifiToNfcDialog.saveState(savedState);
             outState.putBundle(SAVED_WIFI_NFC_DIALOG_STATE, savedState);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // If the user is not allowed to configure wifi, do not handle menu selections.
-        if (mIsRestricted) {
-            return false;
-        }
-
-        switch (item.getItemId()) {
-            case MENU_ID_WPS_PBC:
-                showDialog(WPS_PBC_DIALOG_ID);
-                return true;
-            case MENU_ID_WPS_PIN:
-                showDialog(WPS_PIN_DIALOG_ID);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -635,10 +617,6 @@ public class WifiSettings extends RestrictedSettingsFragment
 
                 mSelectedAccessPoint = mDlgAccessPoint;
                 return mDialog;
-            case WPS_PBC_DIALOG_ID:
-                return new WpsDialog(getActivity(), WpsInfo.PBC);
-            case WPS_PIN_DIALOG_ID:
-                return new WpsDialog(getActivity(), WpsInfo.DISPLAY);
             case WRITE_NFC_DIALOG_ID:
                 if (mSelectedAccessPoint != null) {
                     mWifiToNfcDialog = new WriteWifiConfigToNfcDialog(
@@ -660,10 +638,6 @@ public class WifiSettings extends RestrictedSettingsFragment
         switch (dialogId) {
             case WIFI_DIALOG_ID:
                 return MetricsEvent.DIALOG_WIFI_AP_EDIT;
-            case WPS_PBC_DIALOG_ID:
-                return MetricsEvent.DIALOG_WIFI_PBC;
-            case WPS_PIN_DIALOG_ID:
-                return MetricsEvent.DIALOG_WIFI_PIN;
             case WRITE_NFC_DIALOG_ID:
                 return MetricsEvent.DIALOG_WIFI_WRITE_NFC;
             default:
@@ -762,7 +736,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
         // AccessPoints are sorted by the WifiTracker
         final List<AccessPoint> accessPoints = mWifiTracker.getAccessPoints();
-        if (WifiTracker.sVerboseLogging) {
+        if (isVerboseLoggingEnabled()) {
             Log.i(TAG, "updateAccessPoints called for: " + accessPoints);
         }
 

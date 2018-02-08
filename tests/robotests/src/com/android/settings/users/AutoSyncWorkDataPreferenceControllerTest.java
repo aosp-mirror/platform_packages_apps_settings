@@ -92,6 +92,21 @@ public class AutoSyncWorkDataPreferenceControllerTest {
     }
 
     @Test
+    public void checkIsAvailable_null_workProfileUserHandle_shouldNotDisplay() {
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isLinkedUser()).thenReturn(false);
+
+        final List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
+        infos.add(new UserInfo(999, "xspace", 800010));
+        when(mUserManager.getProfiles(eq(UserHandle.USER_SYSTEM))).thenReturn(infos);
+        mController = new AutoSyncWorkDataPreferenceController(mContext, mFragment);
+
+        assertThat(mController.mUserHandle).isEqualTo(null);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
     public void multipleProfile_shouldInitWithWorkProfileUserHandle() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         when(mUserManager.isLinkedUser()).thenReturn(false);

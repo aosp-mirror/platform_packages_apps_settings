@@ -58,6 +58,7 @@ import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -284,10 +285,10 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         final int powerMah = bundle.getInt(EXTRA_POWER_USAGE_AMOUNT);
         mForegroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_used_for),
-                        Utils.formatElapsedTime(context, foregroundTimeMs, false)));
+                        StringUtil.formatElapsedTime(context, foregroundTimeMs, false)));
         mBackgroundPreference.setSummary(
                 TextUtils.expandTemplate(getText(R.string.battery_active_for),
-                        Utils.formatElapsedTime(context, backgroundTimeMs, false)));
+                        StringUtil.formatElapsedTime(context, backgroundTimeMs, false)));
         mPowerUsagePreference.setSummary(
                 getString(R.string.battery_detail_power_percentage, usagePercent, powerMah));
     }

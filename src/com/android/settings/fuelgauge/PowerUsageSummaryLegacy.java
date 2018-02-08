@@ -69,6 +69,8 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 
+import com.android.settingslib.utils.PowerUtil;
+import com.android.settingslib.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,12 +212,12 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                     // be unplugged for a period of time before being willing ot make an estimate.
                     summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    BatteryUtils.convertUsToMs(oldInfo.remainingTimeUs))));
+                                    PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
 
                     // for this one we can just set the string directly
                     summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
                             Formatter.formatShortElapsedTime(getContext(),
-                                    BatteryUtils.convertUsToMs(newInfo.remainingTimeUs))));
+                                    PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
 
                     batteryView.setBatteryLevel(oldInfo.batteryLevel);
                     batteryView.setCharging(!oldInfo.discharging);
@@ -524,7 +526,7 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
         updateScreenPreference();
         updateLastFullChargePreference(lastFullChargeTime);
 
-        final CharSequence timeSequence = Utils.formatRelativeTime(context, lastFullChargeTime,
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(context, lastFullChargeTime,
                 false);
         final int resId = mShowAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
@@ -653,12 +655,13 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                 mStatsHelper.getUsageList(), DrainType.SCREEN);
         final long usageTimeMs = sipper != null ? sipper.usageTimeMs : 0;
 
-        mScreenUsagePref.setSubtitle(Utils.formatElapsedTime(getContext(), usageTimeMs, false));
+        mScreenUsagePref.setSubtitle(
+            StringUtil.formatElapsedTime(getContext(), usageTimeMs, false));
     }
 
     @VisibleForTesting
     void updateLastFullChargePreference(long timeMs) {
-        final CharSequence timeSequence = Utils.formatRelativeTime(getContext(), timeMs, false);
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(getContext(), timeMs, false);
         mLastFullChargePref.setSubtitle(timeSequence);
     }
 
@@ -685,8 +688,8 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
         // Only show summary when usage time is longer than one minute
         final long usageTimeMs = sipper.usageTimeMs;
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
-            final CharSequence timeSequence = Utils.formatElapsedTime(getContext(), usageTimeMs,
-                    false);
+            final CharSequence timeSequence =
+                    StringUtil.formatElapsedTime(getContext(), usageTimeMs, false);
             preference.setSummary(
                     (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence

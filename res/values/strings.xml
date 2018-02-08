@@ -1845,12 +1845,8 @@
     <string name="wifi_configure_settings_preference_summary_wakeup_off">Wi\u2011Fi doesn\u0027t turn back on automatically</string>
     <!-- Header for the list of wifi networks-->
     <string name="wifi_access_points">Wi\u2011Fi networks</string>
-    <!-- Menu option to do WPS Push Button [CHAR LIMIT=25]-->
-    <string name="wifi_menu_wps_pbc">WPS Push Button</string>
     <!-- Content description for menu button in Wifi setup. Not shown on the screen. [CHAR LIMIT=NONE] -->
     <string name="wifi_menu_more_options">More options</string>
-    <!-- Menu option to do WPS Pin Entry [CHAR LIMIT=25]-->
-    <string name="wifi_menu_wps_pin">WPS Pin Entry</string>
     <!-- Menu option to launch Wi-Fi Direct settings [CHAR LIMIT=20]-->
     <string name="wifi_menu_p2p">Wi\u2011Fi Direct</string>
     <!-- Menu option to scan Wi-Fi networks -->
@@ -1887,32 +1883,6 @@
     <string name="wifi_advanced_toggle_description_expanded">Drop down list Advanced Options. Double-tap to collapse.</string>
     <!-- Message for talkback to say when Advanced Options is collapsed [CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description_collapsed">Drop down list Advanced Options. Double-tap to expand.</string>
-    <!-- Title for the WPS setup dialog [CHAR LIMIT=50] -->
-    <string name="wifi_wps_setup_title">Wi\u2011Fi Protected Setup</string>
-    <!-- Message in WPS dialog at start up [CHAR LIMIT=150] -->
-    <string name="wifi_wps_setup_msg">Starting WPS\u2026</string>
-    <!-- Message in WPS dialog for PBC after start up [CHAR LIMIT=150] -->
-    <string name="wifi_wps_onstart_pbc">Press the Wi\u2011Fi Protected Setup button on your router. It may be called \u201cWPS\u201d or marked with this symbol:</string>
-    <!-- Message in WPS dialog for PIN after start up [CHAR LIMIT=150] -->
-    <string name="wifi_wps_onstart_pin">Enter pin <xliff:g id="number">%1$s</xliff:g> on your Wi\u2011Fi router. The setup can take up to two minutes to complete.</string>
-    <!-- Text displayed when WPS succeeds [CHAR LIMIT=150] -->
-    <string name="wifi_wps_complete">WPS succeeded. Connecting to the network\u2026</string>
-    <!-- Text displayed when Wi-Fi is connected through WPS [CHAR LIMIT=150] -->
-    <string name="wifi_wps_connected">Connected to Wi\u2011Fi network <xliff:g id="network_name">%s</xliff:g></string>
-    <!-- Text displayed when WPS setup is in progress [CHAR LIMIT=150] -->
-    <string name="wifi_wps_in_progress">WPS is already in progress and can take up to two minutes to complete</string>
-    <!-- Text displayed when WPS fails to start [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_generic">WPS failed. Please try again in a few minutes.</string>
-    <!-- Text displayed when WPS fails due to WEP [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_wep">The wireless router security setting (WEP) is not supported</string>
-    <!-- Text displayed when WPS fails to TKIP [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_tkip">The wireless router security setting (TKIP) is not supported</string>
-    <!-- Text displayed when WPS fails due to authentication issues [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_auth">Authentication failure. Please try again.</string>
-    <!-- Text displayed when WPS fails due to another session [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_overlap">Another WPS session was detected. Please try again in a few minutes.</string>
-    <!-- Text displayed when WPS fails due to wifi disconnected [CHAR LIMIT=150] -->
-    <string name="wifi_wps_failed_wifi_disconnected">Wi\u2011Fi disconnected. WPS setup canceled.</string>
     <!-- Label for the SSID of the network -->
     <string name="wifi_ssid">Network name</string>
     <!-- Hint for a text field to enter the SSID of a hidden wifi network. [CHAR LIMIT=35] -->
@@ -5133,6 +5103,9 @@
     <!-- Title for the battery management group [CHAR LIMIT=40] -->
     <string name ="battery_detail_manage_title">Manage battery usage</string>
 
+    <!-- Graph subtext displayed to user when enhanced battery estimate is being used [CHAR LIMIT=120] -->
+    <string name="advanced_battery_graph_subtext">Battery left estimate is based on your device usage</string>
+
     <!-- Description for battery time left, i.e. 50min Estimated time left. [CHAR LIMIT=80]-->
     <string name="estimated_time_left">Estimated time left</string>
 
@@ -5771,9 +5744,6 @@
     <string name="misc_files_selected_count_bytes"><xliff:g id="number" example="3.25MB">%1$s</xliff:g> out of <xliff:g id="total" example="15.25MB">%2$s</xliff:g></string>
     <!--  action to select all [CHAR LIMIT=30] -->
     <string name="select_all">Select all</string>
-
-    <!-- A button that gets displayed in data plan usage preference in settings page to manage data plans [CHAR LIMIT=25] -->
-    <string name="data_plan_usage_manage_plans_button_text">Manage plans</string>
 
     <!-- Activity title for network data usage summary. [CHAR LIMIT=25] -->
     <string name="data_usage_summary_title">Data usage</string>
@@ -7083,7 +7053,7 @@
     <string name="notification_pulse_title">Blink light</string>
 
     <!-- Configure Notifications: Title for the option controlling notifications on the lockscreen. [CHAR LIMIT=30] -->
-    <string name="lock_screen_notifications_title">On the lock screen</string>
+    <string name="lock_screen_notifications_title">On lock screen</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications:  all information will be
          shown in notifications shown on a secure lock screen
@@ -7093,7 +7063,7 @@
     <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
          hidden or redacted from notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide">Hide sensitive notification content</string>
+    <string name="lock_screen_notifications_summary_hide">Hide sensitive content</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
@@ -7113,7 +7083,7 @@
     <!-- Configure Notifications: Value for lockscreen notifications: sensitive information will be
          hidden or redacted from work notifications shown on a secure lock screen
          [CHAR LIMIT=50] -->
-    <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive work notification content</string>
+    <string name="lock_screen_notifications_summary_hide_profile">Hide sensitive work content</string>
 
     <!-- Configure Notifications: Value for lockscreen notifications: work notifications will not appear on a secure lock screen
          [CHAR LIMIT=50] -->
@@ -7373,7 +7343,7 @@
     <string name="app_notification_override_dnd_summary">Let these notifications continue to interrupt when Do Not Disturb is set to Priority Only</string>
 
     <!-- [CHAR LIMIT=NONE] App notification settings: Visibility override option title -->
-    <string name="app_notification_visibility_override_title">On the lock screen</string>
+    <string name="app_notification_visibility_override_title">On lock screen</string>
 
     <!-- [CHAR LIMIT=20] Notification settings: App notifications row summary when allowed -->
     <string name="app_notification_row_banned">Blocked</string>
@@ -8510,7 +8480,7 @@
     <!-- Summary of condition that airplane mode is on [CHAR LIMIT=NONE] -->
     <string name="condition_airplane_summary">Wi-Fi, Bluetooth, and mobile network are turned off. You can\'t make phone calls or connect to the internet.</string>
 
-    <!-- Title of condition that do not disturb is on [CHAR LIMIT=30] -->
+    <!-- Title of condition that do not disturb is on [CHAR LIMIT=36] -->
     <string name="condition_zen_title">Do Not Disturb is on</string>
 
     <!-- Title of condition that battery saver is on [CHAR LIMIT=30] -->
@@ -9369,4 +9339,6 @@
     <!-- Settings item summary for automatic Bluetooth on while driving preference [CHAR LIMIT=100] -->
     <string name="bluetooth_on_while_driving_summary">Turn on Bluetooth automatically when driving</string>
 
+    <!-- Title for item to go to old battery settings page when clicking [CHAR LIMIT=100] -->
+    <string name="dev_android_o_battery_settings_title">See Android 8.0 battery settings</string>
 </resources>

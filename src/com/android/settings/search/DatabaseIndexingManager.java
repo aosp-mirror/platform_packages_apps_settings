@@ -18,10 +18,10 @@
 package com.android.settings.search;
 
 
-import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_ID;
-import static com.android.settings.search.CursorToSearchResultConverter
+import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_ID;
+import static com.android.settings.search.DatabaseResultLoader
         .COLUMN_INDEX_INTENT_ACTION_TARGET_PACKAGE;
-import static com.android.settings.search.CursorToSearchResultConverter.COLUMN_INDEX_KEY;
+import static com.android.settings.search.DatabaseResultLoader.COLUMN_INDEX_KEY;
 import static com.android.settings.search.DatabaseResultLoader.SELECT_COLUMNS;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.CLASS_NAME;
 import static com.android.settings.search.IndexDatabaseHelper.IndexColumns.DATA_ENTRIES;

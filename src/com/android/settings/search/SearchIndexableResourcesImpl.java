@@ -22,6 +22,7 @@ import com.android.settings.DateTimeSettings;
 import com.android.settings.DisplaySettings;
 import com.android.settings.LegalSettings;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
+import com.android.settings.datausage.DataUsageSummaryLegacy;
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilityShortcutPreferenceFragment;
@@ -112,6 +113,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(BluetoothSettings.class);
         addIndex(SimSettings.class);
         addIndex(DataUsageSummary.class);
+        addIndex(DataUsageSummaryLegacy.class);
         addIndex(ScreenZoomSettings.class);
         addIndex(DisplaySettings.class);
         addIndex(AmbientDisplaySettings.class);

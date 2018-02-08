@@ -85,7 +85,6 @@ public class UserProfileController extends AbstractPreferenceController implemen
             Intent intent = Utils.onBuildStartFragmentIntent(mContext,
                     StorageProfileFragment.class.getName(), args, null, 0,
                     mUser.name, false, MetricsProto.MetricsEvent.DEVICEINFO_STORAGE);
-            intent.putExtra(SettingsDrawerActivity.EXTRA_SHOW_MENU, true);
             mContext.startActivity(intent);
             return true;
         }

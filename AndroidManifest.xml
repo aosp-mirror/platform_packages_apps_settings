@@ -2383,33 +2383,11 @@
                 android:value="com.android.settings.security.CryptKeeperSettings" />
         </activity>
 
-        <activity android:name="Settings$DataPlanUsageSummaryActivity"
-                android:label="@string/data_usage_summary_title"
-                android:icon="@drawable/ic_settings_data_usage"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
-            <intent-filter android:priority="10">
-                <action android:name="com.android.settings.action.SETTINGS" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.category"
-                    android:value="com.android.settings.category.ia.wireless" />
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                    android:value="com.android.settings.datausage.DataPlanUsageSummary" />
-        </activity>
-
         <activity android:name="Settings$DataUsageSummaryActivity"
                 android:label="@string/data_usage_summary_title"
                 android:icon="@drawable/ic_settings_data_usage"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="com.android.settings.SHORTCUT" />
-            </intent-filter>
+                android:enabled="false">
+            <!-- TODO(b/70950124): add shortcut intent-filter -->
             <intent-filter android:priority="10">
                 <action android:name="com.android.settings.action.SETTINGS" />
             </intent-filter>
@@ -2417,6 +2395,24 @@
                 android:value="com.android.settings.category.ia.wireless" />
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                 android:value="com.android.settings.datausage.DataUsageSummary" />
+        </activity>
+
+        <activity android:name="Settings$DataUsageSummaryLegacyActivity"
+                  android:label="@string/data_usage_summary_title"
+                  android:icon="@drawable/ic_settings_data_usage"
+                  android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.android.settings.SHORTCUT" />
+            </intent-filter>
+            <intent-filter android:priority="10">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.wireless" />
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.datausage.DataUsageSummaryLegacy" />
         </activity>
 
         <activity android:name="Settings$MobileDataUsageListActivity"
