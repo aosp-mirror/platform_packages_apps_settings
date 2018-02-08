@@ -49,6 +49,7 @@ public class RestrictAppTipTest {
     private Context mContext;
     private RestrictAppTip mNewBatteryTip;
     private RestrictAppTip mHandledBatteryTip;
+    private RestrictAppTip mInvisibleBatteryTip;
     private List<AppInfo> mUsageAppList;
     @Mock
     private ApplicationInfo mApplicationInfo;
@@ -71,6 +72,7 @@ public class RestrictAppTipTest {
                 .build());
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
+        mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, mUsageAppList);
     }
 
     @Test
@@ -107,5 +109,21 @@ public class RestrictAppTipTest {
     public void testGetSummary_stateHandled_showHandledSummary() {
         assertThat(mHandledBatteryTip.getSummary(mContext)).isEqualTo(
                 "App changes are in progress");
+    }
+
+    @Test
+    public void testUpdate_anomalyBecomeInvisible_stateHandled() {
+        mNewBatteryTip.updateState(mInvisibleBatteryTip);
+
+        assertThat(mNewBatteryTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
+    }
+
+    @Test
+    public void testUpdate_newAnomalyComes_stateNew() {
+        mInvisibleBatteryTip.updateState(mNewBatteryTip);
+        assertThat(mInvisibleBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
+
+        mHandledBatteryTip.updateState(mNewBatteryTip);
+        assertThat(mHandledBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 }

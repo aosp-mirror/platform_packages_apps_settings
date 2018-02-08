@@ -81,7 +81,14 @@ public class RestrictAppTip extends BatteryTip {
 
     @Override
     public void updateState(BatteryTip tip) {
-        mState = tip.mState;
+        if (tip.mState == StateType.NEW) {
+            // Display it if new anomaly comes
+            mState = StateType.NEW;
+            mRestrictAppList = ((RestrictAppTip) tip).mRestrictAppList;
+        } else if (mState == StateType.NEW && tip.mState == StateType.INVISIBLE) {
+            // If anomaly becomes invisible, show it as handled
+            mState = StateType.HANDLED;
+        }
     }
 
     public List<AppInfo> getRestrictAppList() {

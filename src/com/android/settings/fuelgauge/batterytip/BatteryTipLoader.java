@@ -71,7 +71,7 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
         tips.add(new SummaryDetector(policy).detect());
-        tips.add(new RestrictAppDetector(policy).detect());
+        tips.add(new RestrictAppDetector(context, policy).detect());
 
         Collections.sort(tips);
         return tips;
