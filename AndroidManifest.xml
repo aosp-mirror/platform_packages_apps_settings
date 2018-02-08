@@ -190,6 +190,10 @@
                 <action android:name="android.settings.NFC_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.BLUETOOTH_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -429,13 +433,10 @@
         </activity>
 
         <activity android:name="Settings$BluetoothSettingsActivity"
-                android:label="@string/bluetooth_settings_title"
-                android:icon="@drawable/ic_settings_bluetooth"
-                android:taskAffinity="">
-            <intent-filter android:priority="1">
-                <action android:name="android.settings.BLUETOOTH_SETTINGS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                  android:label="@string/bluetooth_settings_title"
+                  android:icon="@drawable/ic_settings_bluetooth"
+                  android:enabled="false"
+                  android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
