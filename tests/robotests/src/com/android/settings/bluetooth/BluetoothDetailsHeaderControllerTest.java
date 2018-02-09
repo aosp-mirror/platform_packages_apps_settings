@@ -32,6 +32,9 @@ import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 
+import com.android.settingslib.bluetooth.CachedBluetoothDeviceManager;
+import com.android.settingslib.bluetooth.LocalBluetoothManager;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,14 +53,21 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
+    @Mock
+    private LocalBluetoothManager mBluetoothManager;
+    @Mock
+    private CachedBluetoothDeviceManager mCachedDeviceManager;
 
     @Override
     public void setUp() {
         super.setUp();
         FakeFeatureFactory.setupForTest();
         ShadowEntityHeaderController.setUseMock(mHeaderController);
+        when(mBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
+        when(mCachedDeviceManager.getHearingAidPairDeviceSummary(mCachedDevice)).thenReturn("abc");
         mController =
-            new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle);
+            new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle,
+                mBluetoothManager);
         mPreference = new LayoutPreference(mContext, R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
@@ -86,6 +96,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         verify(mHeaderController).setIcon(any(Drawable.class));
         verify(mHeaderController).setIconContentDescription(any(String.class));
         verify(mHeaderController).setSummary(any(String.class));
+        verify(mHeaderController).setSecondSummary(any(String.class));
         verify(mHeaderController).done(mActivity, true);
     }
 

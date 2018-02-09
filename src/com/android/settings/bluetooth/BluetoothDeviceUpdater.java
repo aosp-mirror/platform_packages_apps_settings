@@ -152,7 +152,12 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
     }
 
     @Override
-    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {}
+    public void onDeviceDeleted(CachedBluetoothDevice cachedDevice) {
+        // Used to combine the hearing aid entries just after pairing. Once both the hearing aids
+        // get connected and their hiSyncId gets populated, this gets called for one of the
+        // 2 hearing aids so that only one entry in the connected devices list will be seen.
+        removePreference(cachedDevice);
+    }
 
     @Override
     public void onDeviceBondStateChanged(CachedBluetoothDevice cachedDevice, int bondState) {
