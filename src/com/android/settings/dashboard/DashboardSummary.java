@@ -55,7 +55,7 @@ public class DashboardSummary extends InstrumentedFragment
         FocusListener, SuggestionControllerMixin.SuggestionControllerHost {
     public static final boolean DEBUG = false;
     private static final boolean DEBUG_TIMING = false;
-    private static final int MAX_WAIT_MILLIS = 700;
+    private static final int MAX_WAIT_MILLIS = 3000;
     private static final String TAG = "DashboardSummary";
 
     private static final String EXTRA_SCROLL_POSITION = "scroll_position";
