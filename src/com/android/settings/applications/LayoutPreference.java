@@ -42,6 +42,24 @@ public class LayoutPreference extends Preference {
 
     public LayoutPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(context, attrs, 0 /* defStyleAttr */);
+    }
+
+    public LayoutPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
+    }
+
+    public LayoutPreference(Context context, int resource) {
+        this(context, LayoutInflater.from(context).inflate(resource, null, false));
+    }
+
+    public LayoutPreference(Context context, View view) {
+        super(context);
+        setView(view);
+    }
+
+    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.Preference);
         mAllowDividerAbove = TypedArrayUtils.getBoolean(a, R.styleable.Preference_allowDividerAbove,
                 R.styleable.Preference_allowDividerAbove, false);
@@ -50,7 +68,7 @@ public class LayoutPreference extends Preference {
         a.recycle();
 
         a = context.obtainStyledAttributes(
-                attrs, com.android.internal.R.styleable.Preference, 0, 0);
+                attrs, com.android.internal.R.styleable.Preference, defStyleAttr, 0);
         int layoutResource = a.getResourceId(com.android.internal.R.styleable.Preference_layout,
                 0);
         if (layoutResource == 0) {
@@ -61,15 +79,6 @@ public class LayoutPreference extends Preference {
         // Need to create view now so that findViewById can be called immediately.
         final View view = LayoutInflater.from(getContext())
                 .inflate(layoutResource, null, false);
-        setView(view);
-    }
-
-    public LayoutPreference(Context context, int resource) {
-        this(context, LayoutInflater.from(context).inflate(resource, null, false));
-    }
-
-    public LayoutPreference(Context context, View view) {
-        super(context);
         setView(view);
     }
 

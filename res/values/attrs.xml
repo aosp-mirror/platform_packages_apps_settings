@@ -162,4 +162,12 @@
         <attr name="showPercentString" format="boolean" />
         <attr name="thickness" format="dimension" />
     </declare-styleable>
+
+    <!-- For TwoStatesButtonPreference -->
+    <declare-styleable name="TwoStateButtonPreference">
+        <attr name="textOn" format="reference" />
+        <attr name="textOff" format="reference" />
+    </declare-styleable>
+
+    <attr name="twoStateButtonPreferenceStyle" format="reference" />
 </resources>

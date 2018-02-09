@@ -33,10 +33,11 @@
         android:max="75"
         android:min="5"/>
 
-    <com.android.settings.applications.LayoutPreference
+    <com.android.settings.widget.TwoStateButtonPreference
         android:key="battery_saver_button_container"
         android:selectable="false"
-        android:layout="@layout/battery_saver_settings_button"/>
+        settings:textOn="@string/battery_saver_button_turn_on"
+        settings:textOff="@string/battery_saver_button_turn_off"/>
 
     <PreferenceCategory
         android:key="battery_saver_footer">
