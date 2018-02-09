@@ -28,6 +28,7 @@ import com.android.settings.R;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 
@@ -38,6 +39,10 @@ public class SearchMenuController implements LifecycleObserver, OnCreateOptionsM
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
+        host.getLifecycle().addObserver(new SearchMenuController(host));
+    }
+
+    public static void init(@NonNull ObservableFragment host) {
         host.getLifecycle().addObserver(new SearchMenuController(host));
     }
 
