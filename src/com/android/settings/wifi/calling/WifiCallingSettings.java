@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.wifi.calling;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.telephony.SubscriptionInfo;
@@ -28,9 +27,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.R;
+import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.search.actionbar.SearchMenuController;
+import com.android.settings.support.actionbar.HelpMenuController;
+import com.android.settings.support.actionbar.HelpResourceProvider;
 import com.android.settings.widget.RtlCompatibleViewPager;
 import com.android.settings.widget.SlidingTabLayout;
 
@@ -40,7 +43,7 @@ import java.util.List;
  * "Wi-Fi Calling settings" screen. This is the container fragment which holds
  * {@link WifiCallingSettingsForSub} fragments.
  */
-public class WifiCallingSettings extends SettingsPreferenceFragment {
+public class WifiCallingSettings extends InstrumentedFragment implements HelpResourceProvider {
     private static final String TAG = "WifiCallingSettings";
     private List<SubscriptionInfo> mSil;
 
@@ -71,6 +74,10 @@ public class WifiCallingSettings extends SettingsPreferenceFragment {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setHasOptionsMenu(true);
+        SearchMenuController.init(this /* host */);
+        HelpMenuController.init(this /* host */);
+
         // TODO: besides in onCreate, we should also update subList when SIM / Sub status
         // changes.
         updateSubList();
@@ -85,6 +92,11 @@ public class WifiCallingSettings extends SettingsPreferenceFragment {
         } else {
             mTabLayout.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public int getHelpResource() {
+        return R.string.help_uri_wifi_calling;
     }
 
     private final class WifiCallingViewPagerAdapter extends FragmentPagerAdapter {
@@ -105,6 +117,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment {
         public Fragment getItem(int position) {
             Log.d(TAG, "Adapter getItem " + position);
             final Bundle args = new Bundle();
+            args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
             args.putInt(WifiCallingSettingsForSub.FRAGMENT_BUNDLE_SUBID,
                     mSil.get(position).getSubscriptionId());
             WifiCallingSettingsForSub fragment = new WifiCallingSettingsForSub();
@@ -132,26 +145,6 @@ public class WifiCallingSettings extends SettingsPreferenceFragment {
         }
     }
 
-    public static int getWfcModeSummary(Context context, int wfcMode) {
-        int resId = com.android.internal.R.string.wifi_calling_off_summary;
-        if (ImsManager.isWfcEnabledByUser(context)) {
-            switch (wfcMode) {
-                case ImsConfig.WfcModeFeatureValueConstants.WIFI_ONLY:
-                    resId = com.android.internal.R.string.wfc_mode_wifi_only_summary;
-                    break;
-                case ImsConfig.WfcModeFeatureValueConstants.CELLULAR_PREFERRED:
-                    resId = com.android.internal.R.string.wfc_mode_cellular_preferred_summary;
-                    break;
-                case ImsConfig.WfcModeFeatureValueConstants.WIFI_PREFERRED:
-                    resId = com.android.internal.R.string.wfc_mode_wifi_preferred_summary;
-                    break;
-                default:
-                    Log.e(TAG, "Unexpected WFC mode value: " + wfcMode);
-            }
-        }
-        return resId;
-    }
-
     private void updateSubList() {
         mSil = SubscriptionManager.from(getActivity()).getActiveSubscriptionInfoList();
 
@@ -159,7 +152,7 @@ public class WifiCallingSettings extends SettingsPreferenceFragment {
         if (mSil == null) {
             return;
         }
-        for (int i = 0; i < mSil.size();) {
+        for (int i = 0; i < mSil.size(); ) {
             ImsManager imsManager = ImsManager.getInstance(getActivity(),
                     mSil.get(i).getSimSlotIndex());
             if (!imsManager.isWfcEnabledByPlatform()) {

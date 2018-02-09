@@ -68,7 +68,7 @@ public class SettingsSuggestionsTest {
 
     @Test
     public void wifiCallingSuggestion_isValid() {
-        assertSuggestionEquals("com.android.settings.wifi.WifiCallingSuggestionActivity",
+        assertSuggestionEquals("com.android.settings.wifi.calling.WifiCallingSuggestionActivity",
                 CATEGORY_FIRST_IMPRESSION,
                 R.string.wifi_calling_suggestion_title, R.string.wifi_calling_suggestion_summary);
     }

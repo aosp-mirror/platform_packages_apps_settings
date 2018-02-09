@@ -2840,12 +2840,12 @@
                 <category android:name="android.intent.category.VOICE_LAUNCH" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.WifiCallingSettings" />
+                       android:value="com.android.settings.wifi.calling.WifiCallingSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
 
-        <activity android:name=".wifi.WifiCallingSuggestionActivity"
+        <activity android:name=".wifi.calling.WifiCallingSuggestionActivity"
                   android:label="@string/wifi_calling_settings_title"
                   android:icon="@drawable/ic_settings_wireless"
                   android:taskAffinity="">
@@ -2854,7 +2854,7 @@
                 <category android:name="com.android.settings.suggested.category.FIRST_IMPRESSION" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.WifiCallingSettings" />
+                       android:value="com.android.settings.wifi.calling.WifiCallingSettings" />
             <meta-data android:name="com.android.settings.dismiss"
                 android:value="10,14,30" />
             <meta-data android:name="com.android.settings.title"
