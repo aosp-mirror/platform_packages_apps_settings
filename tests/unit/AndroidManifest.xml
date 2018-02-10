@@ -53,6 +53,15 @@
             <meta-data android:name="com.android.settings.summary" android:resource="@string/manufacturer_settings_summary" />
             <meta-data android:name="com.android.settings.icon" android:resource="@drawable/ic_settings_applications" />
         </activity>
+
+        <service android:name="com.android.settings.accounts.TestAuthService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                       android:resource="@xml/authenticator" />
+        </service>
+
     </application>
 
     <instrumentation android:name="android.support.test.runner.AndroidJUnitRunner"
