@@ -79,7 +79,7 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
      */
     @Test
     public void testContextMock() {
-        assertThat(mContext.getString(R.string.bluetooth_connected)).isEqualTo("Connected");
+        assertThat(mContext.getString(R.string.bluetooth_connected)).isNotNull();
     }
 
     @Test
