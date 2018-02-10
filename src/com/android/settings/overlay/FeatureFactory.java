@@ -24,7 +24,6 @@ import com.android.settings.R;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
-import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
 import com.android.settings.enterprise.EnterprisePrivacyFeatureProvider;
@@ -102,8 +101,6 @@ public abstract class FeatureFactory {
     public abstract UserFeatureProvider getUserFeatureProvider(Context context);
 
     public abstract BluetoothFeatureProvider getBluetoothFeatureProvider(Context context);
-
-    public abstract SmsMirroringFeatureProvider getSmsMirroringFeatureProvider();
 
     public abstract SlicesFeatureProvider getSlicesFeatureProvider();
 
