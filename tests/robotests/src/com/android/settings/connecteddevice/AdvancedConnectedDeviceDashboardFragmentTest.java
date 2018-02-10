@@ -16,7 +16,6 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -24,9 +23,6 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -52,16 +48,14 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Mock
     private PackageManager mManager;
 
-    private FakeFeatureFactory mFeatureFactory;
     private AdvancedConnectedDeviceDashboardFragment mFragment;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mFragment = new AdvancedConnectedDeviceDashboardFragment();
-        when(mContext.getPackageManager()).thenReturn(mManager);
+        when(mContext.getApplicationContext().getPackageManager()).thenReturn(mManager);
     }
 
     @Test
@@ -77,28 +71,6 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
-    }
-
-    @Test
-    public void testSearchIndexProvider_NoNfc_KeyAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).contains(NfcPreferenceController.KEY_TOGGLE_NFC);
-        assertThat(keys).contains(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
-    }
-
-    @Test
-    public void testSearchIndexProvider_NFC_KeyNotAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_TOGGLE_NFC);
-        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
     }
 
     @Test

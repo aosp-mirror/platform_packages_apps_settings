@@ -1,12 +1,15 @@
 package com.android.settings.connecteddevice.usb;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Answers.RETURNS_DEEP_STUBS;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,20 +19,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsbModePreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UsbBackend mUsbBackend;
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
     @Mock
     private UsbConnectionBroadcastReceiver mUsbConnectionBroadcastReceiver;
 
@@ -40,7 +35,7 @@ public class UsbModePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = ShadowApplication.getInstance().getApplicationContext();
-        mController = new UsbModePreferenceController(mContext, mUsbBackend);
+        mController = new UsbModePreferenceController(mContext, mUsbBackend, null /* lifecycle */);
         mController.mUsbReceiver = mUsbConnectionBroadcastReceiver;
     }
 
