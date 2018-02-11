@@ -21,15 +21,18 @@ import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
+import android.util.ArrayMap;
 
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.TestConfig;
@@ -39,6 +42,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,6 +52,11 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.util.ReflectionHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(
@@ -96,5 +105,24 @@ public class MyDeviceInfoFragmentTest {
         mSettings.onCreate(null /* icicle */);
 
         verify(mScreen).setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+    }
+
+    @Test
+    public void onActivityResult_shouldCallBuildNumberPreferenceController() {
+        final BuildNumberPreferenceController controller =
+            mock(BuildNumberPreferenceController.class);
+        final Map<Class, List<AbstractPreferenceController>> preferenceControllers =
+            new ArrayMap<>();
+        final List<AbstractPreferenceController> controllerList = new ArrayList<>();
+        controllerList.add(controller);
+        preferenceControllers.put(BuildNumberPreferenceController.class, controllerList);
+        ReflectionHelpers.setField(mSettings, "mPreferenceControllers", preferenceControllers);
+
+        final int requestCode = 1;
+        final int resultCode = 2;
+        final Intent data = new Intent();
+        mSettings.onActivityResult(requestCode, resultCode, data);
+
+        verify(controller).onActivityResult(requestCode, resultCode, data);
     }
 }

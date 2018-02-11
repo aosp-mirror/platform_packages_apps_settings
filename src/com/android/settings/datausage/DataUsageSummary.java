@@ -18,7 +18,6 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkPolicyManager;
 import android.net.NetworkTemplate;
 import android.os.Bundle;
 import android.os.UserManager;
@@ -28,6 +27,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.telephony.SubscriptionPlan;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -40,7 +40,6 @@ import android.view.MenuItem;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SummaryPreference;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -65,7 +64,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     public static final String KEY_RESTRICT_BACKGROUND = "restrict_background";
 
     private static final String KEY_STATUS_HEADER = "status_header";
-    private static final String KEY_LIMIT_SUMMARY = "limit_summary";
 
     // Mobile data keys
     public static final String KEY_MOBILE_USAGE_TITLE = "mobile_category";
@@ -77,13 +75,9 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     public static final String KEY_WIFI_USAGE_TITLE = "wifi_category";
     public static final String KEY_WIFI_DATA_USAGE = "wifi_data_usage";
 
-    private DataUsageController mDataUsageController;
-    private DataUsageInfoController mDataInfoController;
-    private SummaryPreference mSummaryPreference;
-    private Preference mLimitPreference;
+    private DataUsageSummaryPreference mSummaryPreference;
+    private DataUsageSummaryPreferenceController mSummaryController;
     private NetworkTemplate mDefaultTemplate;
-    private int mDataUsageTemplate;
-    private NetworkPolicyEditor mPolicyEditor;
 
     @Override
     public int getHelpResource() {
@@ -95,25 +89,20 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         super.onCreate(icicle);
 
         final Context context = getContext();
-        NetworkPolicyManager policyManager = NetworkPolicyManager.from(context);
-        mPolicyEditor = new NetworkPolicyEditor(policyManager);
 
         boolean hasMobileData = DataUsageUtils.hasMobileData(context);
-        mDataUsageController = new DataUsageController(context);
-        mDataInfoController = new DataUsageInfoController();
 
         int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
         if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             hasMobileData = false;
         }
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
-        mSummaryPreference = (SummaryPreference) findPreference(KEY_STATUS_HEADER);
+        mSummaryPreference = (DataUsageSummaryPreference) findPreference(KEY_STATUS_HEADER);
 
         if (!hasMobileData || !isAdmin()) {
             removePreference(KEY_RESTRICT_BACKGROUND);
         }
         if (hasMobileData) {
-            mLimitPreference = findPreference(KEY_LIMIT_SUMMARY);
             List<SubscriptionInfo> subscriptions =
                     services.mSubscriptionManager.getActiveSubscriptionInfoList();
             if (subscriptions == null || subscriptions.size() == 0) {
@@ -127,10 +116,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                     addMobileSection(subInfo.getSubscriptionId());
                 }
             }
-            mSummaryPreference.setSelectable(true);
-        } else {
-            removePreference(KEY_LIMIT_SUMMARY);
-            mSummaryPreference.setSelectable(false);
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasWifiRadio) {
@@ -139,10 +124,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         if (hasEthernet(context)) {
             addEthernetSection();
         }
-        mDataUsageTemplate = hasMobileData ? R.string.cell_data_template
-                : hasWifiRadio ? R.string.wifi_data_template
-                : R.string.ethernet_data_template;
-
         setHasOptionsMenu(true);
     }
 
@@ -189,7 +170,11 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
 
     @Override
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
-        return null;
+        final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
+        mSummaryController =
+                new DataUsageSummaryPreferenceController(context);
+        controllers.add(mSummaryController);
+        return controllers;
     }
 
     private void addMobileSection(int subId) {
@@ -269,36 +254,6 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     }
 
     private void updateState() {
-        DataUsageController.DataUsageInfo info = mDataUsageController.getDataUsageInfo(
-                mDefaultTemplate);
-        Context context = getContext();
-        mDataInfoController.updateDataLimit(info,
-                services.mPolicyEditor.getPolicy(mDefaultTemplate));
-
-        if (mSummaryPreference != null) {
-            mSummaryPreference.setTitle(
-                    formatUsage(context, getString(mDataUsageTemplate), info.usageLevel));
-            final long limit = mDataInfoController.getSummaryLimit(info);
-            mSummaryPreference.setSummary(info.period);
-            if (limit <= 0) {
-                mSummaryPreference.setChartEnabled(false);
-            } else {
-                mSummaryPreference.setChartEnabled(true);
-                mSummaryPreference.setLabels(Formatter.formatFileSize(context, 0),
-                        Formatter.formatFileSize(context, limit));
-                mSummaryPreference.setRatios(info.usageLevel / (float) limit, 0,
-                        (limit - info.usageLevel) / (float) limit);
-            }
-        }
-        if (mLimitPreference != null && (info.warningLevel > 0 || info.limitLevel > 0)) {
-            String warning = Formatter.formatFileSize(context, info.warningLevel);
-            String limit = Formatter.formatFileSize(context, info.limitLevel);
-            mLimitPreference.setSummary(getString(info.limitLevel <= 0 ? R.string.cell_warning_only
-                    : R.string.cell_warning_and_limit, warning, limit));
-        } else if (mLimitPreference != null) {
-            mLimitPreference.setSummary(null);
-        }
-
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
             ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
@@ -323,6 +278,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     @Override
     public void updateDataUsage() {
         updateState();
+        mSummaryController.updateState(mSummaryPreference);
     }
 
     private static class SummaryProvider
@@ -341,17 +297,39 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                DataUsageController.DataUsageInfo info = mDataController.getDataUsageInfo();
-                String used;
-                if (info == null) {
-                    used = Formatter.formatFileSize(mActivity, 0);
-                } else if (info.limitLevel <= 0) {
-                    used = Formatter.formatFileSize(mActivity, info.usageLevel);
-                } else {
-                    used = Utils.formatPercentage(info.usageLevel, info.limitLevel);
-                }
                 mSummaryLoader.setSummary(this,
-                        mActivity.getString(R.string.data_usage_summary_format, used));
+                        mActivity.getString(R.string.data_usage_summary_format, formatUsedData()));
+            }
+        }
+
+        private String formatUsedData() {
+            SubscriptionManager subscriptionManager = (SubscriptionManager) mActivity
+                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+            int defaultSubId = subscriptionManager.getDefaultSubscriptionId();
+            if (defaultSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                return formatFallbackData();
+            }
+            SubscriptionPlan dfltPlan = DataUsageSummaryPreferenceController
+                    .getPrimaryPlan(subscriptionManager, defaultSubId);
+            if (dfltPlan == null) {
+                return formatFallbackData();
+            }
+            if (DataUsageSummaryPreferenceController.unlimited(dfltPlan.getDataLimitBytes())) {
+                return Formatter.formatFileSize(mActivity, dfltPlan.getDataUsageBytes());
+            } else {
+                return Utils.formatPercentage(dfltPlan.getDataUsageBytes(),
+                    dfltPlan.getDataLimitBytes());
+            }
+        }
+
+        private String formatFallbackData() {
+            DataUsageController.DataUsageInfo info = mDataController.getDataUsageInfo();
+            if (info == null) {
+                return Formatter.formatFileSize(mActivity, 0);
+            } else if (info.limitLevel <= 0) {
+                return Formatter.formatFileSize(mActivity, info.usageLevel);
+            } else {
+                return Utils.formatPercentage(info.usageLevel, info.limitLevel);
             }
         }
     }

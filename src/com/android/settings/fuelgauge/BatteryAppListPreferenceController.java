@@ -62,7 +62,8 @@ import java.util.List;
  */
 public class BatteryAppListPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnPause, OnDestroy {
-    private static final boolean USE_FAKE_DATA = true;
+    @VisibleForTesting
+    static final boolean USE_FAKE_DATA = false;
     private static final int MAX_ITEMS_TO_LIST = USE_FAKE_DATA ? 30 : 10;
     private static final int MIN_AVERAGE_POWER_THRESHOLD_MILLI_AMP = 10;
     private static final int STATS_TYPE = BatteryStats.STATS_SINCE_CHARGED;

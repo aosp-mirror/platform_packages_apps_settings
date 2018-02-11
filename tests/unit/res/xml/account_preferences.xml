@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2016 The Android Open Source Project
+<!-- Copyright (C) 2018 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,15 +13,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="data_usage_screen"
-    android:title="@string/data_usage_summary_title">
-
-    <com.android.settings.datausage.DataUsageSummaryPreference
-            android:key="status_header"
-            android:selectable="false" />
+    <SwitchPreference
+        android:key="account_test_switch"
+        android:title="@string/account_pref_title" />
 
 </PreferenceScreen>
+

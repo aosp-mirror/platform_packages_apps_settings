@@ -18,6 +18,7 @@ package com.android.settings.search.actionbar;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import android.view.MenuItem;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
 import org.junit.Before;
@@ -42,26 +44,47 @@ public class SearchMenuControllerTest {
 
     @Mock
     private Menu mMenu;
-    private TestFragment mHost;
+    private TestPreferenceFragment mPreferenceHost;
+    private ObservableFragment mHost;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mHost = new TestFragment();
+        mHost = new ObservableFragment();
+        mPreferenceHost = new TestPreferenceFragment();
+
+        when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
+                .thenReturn(mock(MenuItem.class));
     }
 
     @Test
-    public void init_shouldAddMenu() {
-        when(mMenu.add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu))
-                .thenReturn(mock(MenuItem.class));
+    public void init_prefFragment_shouldAddMenu() {
+        SearchMenuController.init(mPreferenceHost);
+        mPreferenceHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
+        verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
+    }
+
+    @Test
+    public void init_observableFragment_shouldAddMenu() {
         SearchMenuController.init(mHost);
         mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
 
         verify(mMenu).add(Menu.NONE, Menu.NONE, 0 /* order */, R.string.search_menu);
     }
 
-    public static class TestFragment extends ObservablePreferenceFragment {
+    @Test
+    public void init_doNotNeedSearchIcon_shouldNotAddMenu() {
+        final Bundle args = new Bundle();
+        args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
+        mHost.setArguments(args);
+
+        SearchMenuController.init(mHost);
+        mHost.getLifecycle().onCreateOptionsMenu(mMenu, null /* inflater */);
+        verifyZeroInteractions(mMenu);
+    }
+
+    public static class TestPreferenceFragment extends ObservablePreferenceFragment {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {

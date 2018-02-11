@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.ObservableFragment;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 import com.android.settingslib.core.lifecycle.events.OnCreateOptionsMenu;
 
@@ -38,6 +39,10 @@ public class HelpMenuController implements LifecycleObserver, OnCreateOptionsMen
     private final Fragment mHost;
 
     public static void init(@NonNull ObservablePreferenceFragment host) {
+        host.getLifecycle().addObserver(new HelpMenuController(host));
+    }
+
+    public static void init(@NonNull ObservableFragment host) {
         host.getLifecycle().addObserver(new HelpMenuController(host));
     }
 

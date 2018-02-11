@@ -83,6 +83,7 @@ public class MasterCheckBoxPreference extends TwoTargetPreference {
         if (mCheckBox != null) {
             mCheckBox.setContentDescription(getTitle());
             mCheckBox.setChecked(mChecked);
+            mCheckBox.setEnabled(mEnableCheckBox);
         }
     }
 

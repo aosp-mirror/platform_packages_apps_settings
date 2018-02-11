@@ -25,23 +25,21 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/battery_saver_on_button"
+        android:id="@+id/state_on_button"
         style="@style/ActionPrimaryButton"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/battery_saver_button_turn_on"
         android:paddingEnd="8dp" />
 
     <Button
-        android:id="@+id/battery_saver_off_button"
+        android:id="@+id/state_off_button"
         style="@style/ActionSecondaryButton"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/battery_saver_button_turn_off"
         android:paddingEnd="8dp" />
 
 </LinearLayout>

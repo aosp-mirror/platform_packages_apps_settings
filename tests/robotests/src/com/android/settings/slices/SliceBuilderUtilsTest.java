@@ -29,6 +29,7 @@ import android.net.Uri;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;

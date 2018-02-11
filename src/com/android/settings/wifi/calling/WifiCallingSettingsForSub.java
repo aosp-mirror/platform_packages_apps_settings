@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings;
+package com.android.settings.wifi.calling;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -45,6 +45,10 @@ import com.android.ims.ImsConfig;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.Phone;
+import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.Utils;
 import com.android.settings.widget.SwitchBar;
 
 /**
@@ -54,7 +58,7 @@ import com.android.settings.widget.SwitchBar;
 public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
         implements SwitchBar.OnSwitchChangeListener,
         Preference.OnPreferenceChangeListener {
-    private static final String TAG = "WifiCallingSettingsForSub";
+    private static final String TAG = "WifiCallingForSub";
 
     //String keys for preference lookup
     private static final String BUTTON_WFC_MODE = "wifi_calling_mode";
@@ -129,12 +133,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
             }
         }
     };
-
-    @Override
-    public int getHelpResource() {
-        // Helper resource is already defined in the container fragment.
-        return 0;
-    }
 
     private final OnPreferenceClickListener mUpdateAddressListener =
             new OnPreferenceClickListener() {
@@ -226,8 +224,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         // SubId should always be specified when creating this fragment. Either through
         // fragment.setArguments() or through savedInstanceState.
-        if (getArguments() != null && getArguments().containsKey(FRAGMENT_BUNDLE_SUBID))
-        {
+        if (getArguments() != null && getArguments().containsKey(FRAGMENT_BUNDLE_SUBID)) {
             mSubId = getArguments().getInt(FRAGMENT_BUNDLE_SUBID);
         } else if (savedInstanceState != null) {
             mSubId = savedInstanceState.getInt(

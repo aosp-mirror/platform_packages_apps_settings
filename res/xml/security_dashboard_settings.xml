@@ -79,7 +79,8 @@
         <SwitchPreference
             android:key="visiblepattern_profile"
             android:summary="@string/summary_placeholder"
-            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile" />
+            android:title="@string/lockpattern_settings_enable_visible_pattern_title_profile"
+            settings:controller="com.android.settings.security.VisiblePatternProfilePreferenceController"/>
 
         <Preference
             android:key="fingerprint_settings_profile"
@@ -103,7 +104,8 @@
         <SwitchPreference
             android:key="show_password"
             android:title="@string/show_password"
-            android:summary="@string/show_password_summary" />
+            android:summary="@string/show_password_summary"
+            settings:controller="com.android.settings.security.ShowPasswordPreferenceController"/>
 
     </PreferenceCategory>
 

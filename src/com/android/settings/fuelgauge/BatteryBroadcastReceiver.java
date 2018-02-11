@@ -27,7 +27,7 @@ import com.android.settings.Utils;
 
 /**
  * Use this broadcastReceiver to listen to the battery change, and it will invoke
- * {@link OnBatteryChangedListener} if any of the followings has been changed:
+ * {@link OnBatteryChangedListener} if any of the following has been changed:
  *
  * 1. Battery level(e.g. 100%->99%)
  * 2. Battery status(e.g. plugged->unplugged)
@@ -35,7 +35,14 @@ import com.android.settings.Utils;
  */
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
-    interface OnBatteryChangedListener {
+    /**
+     * Callback when the following has been changed:
+     *
+     * Battery level(e.g. 100%->99%)
+     * Battery status(e.g. plugged->unplugged)
+     * Battery saver(e.g. off->on)
+     */
+    public interface OnBatteryChangedListener {
         void onBatteryChanged();
     }
 

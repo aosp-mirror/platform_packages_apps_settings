@@ -137,7 +137,6 @@ public class BaseSearchIndexProviderTest {
         final List<String> nonIndexableKeys = provider
                 .getNonIndexableKeys(RuntimeEnvironment.application);
 
-        assertThat(nonIndexableKeys).containsAllOf("status_header", "limit_summary",
-                "restrict_background");
+        assertThat(nonIndexableKeys).contains("status_header");
     }
 }
