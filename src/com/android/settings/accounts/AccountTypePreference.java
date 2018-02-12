@@ -103,7 +103,8 @@ public class AccountTypePreference extends AppPreference implements OnPreference
             }
             Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
                 null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
-                mTitleResId, null /* title */, mMetricsCategory);
+                mTitleResId, null /* title */,false /* isShortCut */, mMetricsCategory,
+                    0 /* flag */);
             return true;
         }
         return false;
