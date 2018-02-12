@@ -53,37 +53,15 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     private PackageManager mManager;
 
     private FakeFeatureFactory mFeatureFactory;
-    private SmsMirroringFeatureProvider mFeatureProvider;
     private AdvancedConnectedDeviceDashboardFragment mFragment;
-    private TestSmsMirroringPreferenceController mSmsMirroringPreferenceController;
-
-    private static final class TestSmsMirroringPreferenceController
-            extends SmsMirroringPreferenceController implements PreferenceControllerMixin {
-
-        private boolean mIsAvailable;
-
-        public TestSmsMirroringPreferenceController(Context context) {
-            super(context);
-        }
-
-        @Override
-        public boolean isAvailable() {
-            return mIsAvailable;
-        }
-    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
 
         mFragment = new AdvancedConnectedDeviceDashboardFragment();
         when(mContext.getPackageManager()).thenReturn(mManager);
-
-        mSmsMirroringPreferenceController = new TestSmsMirroringPreferenceController(mContext);
-        when(mFeatureProvider.getController(mContext)).thenReturn(
-                mSmsMirroringPreferenceController);
     }
 
     @Test
@@ -121,30 +99,6 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
         assertThat(keys).isNotNull();
         assertThat(keys).doesNotContain(NfcPreferenceController.KEY_TOGGLE_NFC);
         assertThat(keys).doesNotContain(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
-    }
-
-    @Test
-    public void testSearchIndexProvider_NoSmsMirroring_KeyAdded() {
-        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(false);
-        mSmsMirroringPreferenceController.mIsAvailable = false;
-
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).contains(mSmsMirroringPreferenceController.getPreferenceKey());
-    }
-
-    @Test
-    public void testSearchIndexProvider_SmsMirroring_KeyNotAdded() {
-        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(true);
-        mSmsMirroringPreferenceController.mIsAvailable = true;
-
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).doesNotContain(mSmsMirroringPreferenceController.getPreferenceKey());
     }
 
     @Test

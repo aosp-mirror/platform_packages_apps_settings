@@ -81,11 +81,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
 
-        SmsMirroringFeatureProvider smsMirroringFeatureProvider =
-                FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
-        AbstractPreferenceController smsMirroringController =
-                smsMirroringFeatureProvider.getController(context);
-        controllers.add(smsMirroringController);
         controllers.add(new BluetoothFilesPreferenceController(context));
         controllers.add(new BluetoothOnWhileDrivingPreferenceController(context));
         return controllers;
@@ -113,12 +108,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                         keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
                     keys.add(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
-
-                    SmsMirroringFeatureProvider smsMirroringFeatureProvider =
-                            FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
-                    SmsMirroringPreferenceController smsMirroringController =
-                            smsMirroringFeatureProvider.getController(context);
-                    smsMirroringController.updateNonIndexableKeys(keys);
 
                     return keys;
                 }

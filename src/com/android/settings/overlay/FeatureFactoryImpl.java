@@ -29,8 +29,6 @@ import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.applications.ApplicationFeatureProviderImpl;
 import com.android.settings.bluetooth.BluetoothFeatureProvider;
 import com.android.settings.bluetooth.BluetoothFeatureProviderImpl;
-import com.android.settings.connecteddevice.SmsMirroringFeatureProvider;
-import com.android.settings.connecteddevice.SmsMirroringFeatureProviderImpl;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider;
@@ -75,7 +73,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
     private AssistGestureFeatureProvider mAssistGestureFeatureProvider;
     private UserFeatureProvider mUserFeatureProvider;
     private BluetoothFeatureProvider mBluetoothFeatureProvider;
-    private SmsMirroringFeatureProvider mSmsMirroringFeatureProvider;
     private SlicesFeatureProvider mSlicesFeatureProvider;
     private AccountFeatureProvider mAccountFeatureProvider;
 
@@ -194,14 +191,6 @@ public class FeatureFactoryImpl extends FeatureFactory {
             mAssistGestureFeatureProvider = new AssistGestureFeatureProviderImpl();
         }
         return mAssistGestureFeatureProvider;
-    }
-
-    @Override
-    public SmsMirroringFeatureProvider getSmsMirroringFeatureProvider() {
-        if (mSmsMirroringFeatureProvider == null) {
-            mSmsMirroringFeatureProvider = new SmsMirroringFeatureProviderImpl();
-        }
-        return mSmsMirroringFeatureProvider;
     }
 
     @Override
