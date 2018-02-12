@@ -54,7 +54,9 @@
                         style="@style/wifi_item_edit_content"
                         android:hint="@string/wifi_ssid_hint"
                         android:singleLine="true"
-                        android:inputType="textNoSuggestions" />
+                        android:inputType="textNoSuggestions">
+                    <requestFocus/>
+                </EditText>
 
                 <LinearLayout android:id="@+id/ssid_too_long_warning"
                               android:layout_width="match_parent"
