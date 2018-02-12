@@ -285,6 +285,7 @@ public class UnrestrictedDataAccess extends SettingsPreferenceFragment
                 // app is blacklisted, launch App Data Usage screen
                 AppInfoDashboardFragment.startAppInfoFragment(AppDataUsage.class,
                     R.string.app_data_usage,
+                    null /* arguments */,
                     UnrestrictedDataAccess.this,
                     mEntry);
             } else {

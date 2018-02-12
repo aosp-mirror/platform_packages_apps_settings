@@ -16,6 +16,8 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -24,7 +26,9 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -87,4 +91,22 @@ public class AppNotificationPreferenceControllerTest {
         verify(mPreference).setSummary(any());
     }
 
+    @Test
+    public void getArguments_nullIfChannelIsNull() {
+        assertThat(mController.getArguments()).isNull();
+    }
+
+    @Test
+    public void getArguments_containsChannelId() {
+        Activity activity = mock(Activity.class);
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_FRAGMENT_ARG_KEY, "test");
+        when(mFragment.getActivity()).thenReturn(activity);
+        when(activity.getIntent()).thenReturn(intent);
+        AppNotificationPreferenceController controller =
+                new AppNotificationPreferenceController(mContext, mFragment);
+
+        assertThat(controller.getArguments().containsKey(EXTRA_FRAGMENT_ARG_KEY)).isTrue();
+        assertThat(controller.getArguments().getString(EXTRA_FRAGMENT_ARG_KEY)).isEqualTo("test");
+    }
 }
