@@ -20,6 +20,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -46,7 +47,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
 
     public AutoBatterySeekBarPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_AUTO_BATTERY_SEEK_BAR);
-        mContentObserver = new AutoBatterySaverSettingObserver(new Handler());
+        mContentObserver = new AutoBatterySaverSettingObserver(new Handler(Looper.getMainLooper()));
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
