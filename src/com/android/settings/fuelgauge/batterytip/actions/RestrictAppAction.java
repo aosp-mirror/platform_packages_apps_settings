@@ -21,7 +21,9 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 
 import java.util.List;
@@ -32,12 +34,15 @@ import java.util.List;
 public class RestrictAppAction extends BatteryTipAction {
     private RestrictAppTip mRestrictAppTip;
     @VisibleForTesting
+    BatteryDatabaseManager mBatteryDatabaseManager;
+    @VisibleForTesting
     BatteryUtils mBatteryUtils;
 
     public RestrictAppAction(Context context, RestrictAppTip tip) {
         super(context);
         mRestrictAppTip = tip;
         mBatteryUtils = BatteryUtils.getInstance(context);
+        mBatteryDatabaseManager = new BatteryDatabaseManager(context);
     }
 
     /**
@@ -53,5 +58,7 @@ public class RestrictAppAction extends BatteryTipAction {
             mBatteryUtils.setForceAppStandby(mBatteryUtils.getPackageUid(packageName), packageName,
                     AppOpsManager.MODE_IGNORED);
         }
+
+        mBatteryDatabaseManager.updateAnomalies(appInfos, AnomalyDatabaseHelper.State.HANDLED);
     }
 }
