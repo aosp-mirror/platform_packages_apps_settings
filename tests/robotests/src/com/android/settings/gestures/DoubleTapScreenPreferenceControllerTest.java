@@ -161,4 +161,16 @@ public class DoubleTapScreenPreferenceControllerTest {
         assertThat(DoubleTapScreenPreferenceController.isSuggestionComplete(
                 mAmbientDisplayConfiguration, prefs)).isTrue();
     }
+
+    @Test
+    public void canHandleClicks_falseWhenAlwaysOnEnabled() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(true);
+        assertThat(mController.canHandleClicks()).isFalse();
+    }
+
+    @Test
+    public void canHandleClicks_trueWhenAlwaysOnDisabled() {
+        when(mAmbientDisplayConfiguration.alwaysOnEnabled(anyInt())).thenReturn(false);
+        assertThat(mController.canHandleClicks()).isTrue();
+    }
 }

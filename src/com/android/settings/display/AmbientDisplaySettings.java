@@ -79,7 +79,7 @@ public class AmbientDisplaySettings extends DashboardFragment {
     protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle(),
                 new AmbientDisplayConfiguration(context), mMetricsFeatureProvider,
-                () -> { updatePreferenceStates(); });
+                this::updatePreferenceStates);
     }
 
     @Override
