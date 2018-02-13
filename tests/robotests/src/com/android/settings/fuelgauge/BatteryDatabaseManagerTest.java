@@ -24,6 +24,7 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import com.android.settings.TestConfig;
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.testutils.DatabaseTestUtils;
@@ -37,6 +38,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -71,28 +73,54 @@ public class BatteryDatabaseManagerTest {
         mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD, TWO_DAYS_BEFORE);
 
         // In database, it contains two record
-        List<AppInfo> totalAppInfos = mBatteryDatabaseManager.queryAllAnomaliesAfter(0);
+        List<AppInfo> totalAppInfos = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
+                AnomalyDatabaseHelper.State.NEW);
         assertThat(totalAppInfos).hasSize(2);
-        verifyAppInfo(totalAppInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
-        verifyAppInfo(totalAppInfos.get(1), PACKAGE_NAME_OLD, TYPE_OLD);
+        assertAppInfo(totalAppInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(totalAppInfos.get(1), PACKAGE_NAME_OLD, TYPE_OLD);
 
         // Only one record shows up if we query by timestamp
-        List<AppInfo> appInfos = mBatteryDatabaseManager.queryAllAnomaliesAfter(ONE_DAY_BEFORE);
+        List<AppInfo> appInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
+                AnomalyDatabaseHelper.State.NEW);
         assertThat(appInfos).hasSize(1);
-        verifyAppInfo(appInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(appInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
 
         mBatteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(ONE_DAY_BEFORE);
 
         // The obsolete record is removed from database
-        List<AppInfo> appInfos1 = mBatteryDatabaseManager.queryAllAnomaliesAfter(0);
+        List<AppInfo> appInfos1 = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
+                AnomalyDatabaseHelper.State.NEW);
         assertThat(appInfos1).hasSize(1);
-        verifyAppInfo(appInfos1.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
-
+        assertAppInfo(appInfos1.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
     }
 
-    private void verifyAppInfo(final AppInfo appInfo, String packageName, int type) {
+    @Test
+    public void testUpdateAnomalies_updateSuccessfully() {
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW, NOW);
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD, NOW);
+        final AppInfo appInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME_OLD).build();
+        final List<AppInfo> updateAppInfos = new ArrayList<>();
+        updateAppInfos.add(appInfo);
+
+        // Change state of PACKAGE_NAME_OLD to handled
+        mBatteryDatabaseManager.updateAnomalies(updateAppInfos,
+                AnomalyDatabaseHelper.State.HANDLED);
+
+        // The state of PACKAGE_NAME_NEW is still new
+        List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
+                AnomalyDatabaseHelper.State.NEW);
+        assertThat(newAppInfos).hasSize(1);
+        assertAppInfo(newAppInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+
+        // The state of PACKAGE_NAME_OLD is changed to handled
+        List<AppInfo> handledAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
+                AnomalyDatabaseHelper.State.HANDLED);
+        assertThat(handledAppInfos).hasSize(1);
+        assertAppInfo(handledAppInfos.get(0), PACKAGE_NAME_OLD, TYPE_OLD);
+    }
+
+    private void assertAppInfo(final AppInfo appInfo, String packageName, int type) {
         assertThat(appInfo.packageName).isEqualTo(packageName);
         assertThat(appInfo.anomalyType).isEqualTo(type);
     }
-
 }
