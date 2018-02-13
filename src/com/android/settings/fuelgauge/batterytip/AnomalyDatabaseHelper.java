@@ -19,9 +19,13 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.IntDef;
 import android.util.Log;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * Database controls the anomaly logging(e.g. packageName, anomalyType and time)
@@ -30,7 +34,17 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "BatteryDatabaseHelper";
 
     private static final String DATABASE_NAME = "battery_settings.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({State.NEW,
+            State.HANDLED,
+            State.AUTO_HANDLED})
+    public @interface State {
+        int NEW = 0;
+        int HANDLED = 1;
+        int AUTO_HANDLED = 2;
+    }
 
     public interface Tables {
         String TABLE_ANOMALY = "anomaly";
@@ -47,6 +61,11 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
          */
         String ANOMALY_TYPE = "anomaly_type";
         /**
+         * The state of the anomaly app
+         * @see State
+         */
+        String ANOMALY_STATE = "anomaly_state";
+        /**
          * The time when anomaly happens
          */
         String TIME_STAMP_MS = "time_stamp_ms";
@@ -58,6 +77,8 @@ public class AnomalyDatabaseHelper extends SQLiteOpenHelper {
                     AnomalyColumns.PACKAGE_NAME +
                     " TEXT, " +
                     AnomalyColumns.ANOMALY_TYPE +
+                    " INTEGER, " +
+                    AnomalyColumns.ANOMALY_STATE +
                     " INTEGER, " +
                     AnomalyColumns.TIME_STAMP_MS +
                     " INTEGER)";
