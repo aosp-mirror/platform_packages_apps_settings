@@ -295,6 +295,19 @@ public class SuggestionAdapterTest {
     }
 
     @Test
+    public void onBindViewHolder_closeButtonShouldHaveContentDescription()
+        throws PendingIntent.CanceledException {
+        final List<Suggestion> suggestions = makeSuggestions("pkg1");
+        setupSuggestions(mActivity, suggestions);
+
+        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
+
+        assertThat(
+            mSuggestionHolder.itemView.findViewById(R.id.close_button).getContentDescription())
+            .isNotNull();
+    }
+
+    @Test
     public void setCardLayout_oneCard_shouldSetCardWidthToMatchParent() {
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
         setupSuggestions(mContext, suggestions);
