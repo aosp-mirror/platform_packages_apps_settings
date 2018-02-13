@@ -470,7 +470,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateServicePreferences();
     }
 
-    private void updateServicePreferences() {
+    protected void updateServicePreferences() {
         // Since services category is auto generated we have to do a pass
         // to generate it since services can come and go and then based on
         // the global accessibility state to decided whether it is enabled.
@@ -611,7 +611,7 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    private void updateSystemPreferences() {
+    protected void updateSystemPreferences() {
         // Move color inversion and color correction preferences to Display category if device
         // supports HWC hardware-accelerated color transform.
         if (isColorTransformAccelerated(getContext())) {
