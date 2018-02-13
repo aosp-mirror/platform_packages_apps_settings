@@ -15,8 +15,6 @@
  */
 package com.android.settings.fuelgauge;
 
-import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_HIGH_POWER_APPS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
@@ -108,14 +106,6 @@ public class PowerUsageSummaryTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Menu mMenu;
-    @Mock
-    private MenuItem mToggleAppsMenu;
-    @Mock
-    private MenuItem mHighPowerMenu;
-    @Mock
-    private MenuInflater mMenuInflater;
     @Mock
     private BatterySipper mNormalBatterySipper;
     @Mock
@@ -169,7 +159,6 @@ public class PowerUsageSummaryTest {
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
-        when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
                 .thenReturn(sAdditionalBatteryInfoIntent);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
@@ -202,14 +191,6 @@ public class PowerUsageSummaryTest {
         mFragment.mScreenUsagePref = mScreenUsagePref;
         mFragment.mLastFullChargePref = mLastFullChargePref;
         mFragment.mBatteryUtils = spy(new BatteryUtils(mRealContext));
-    }
-
-    @Test
-    public void testOptionsMenu_menuHighPower_metricEventInvoked() {
-        mFragment.onOptionsItemSelected(mHighPowerMenu);
-
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
-                MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
     }
 
     @Test
