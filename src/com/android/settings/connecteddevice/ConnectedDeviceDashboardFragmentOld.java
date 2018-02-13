@@ -80,8 +80,8 @@ public class ConnectedDeviceDashboardFragmentOld extends DashboardFragment {
                 new NfcPreferenceController(context);
         lifecycle.addObserver(nfcPreferenceController);
         controllers.add(nfcPreferenceController);
-        mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
-        lifecycle.addObserver(mUsbPrefController);
+        mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context),
+                lifecycle);
         controllers.add(mUsbPrefController);
         final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
                 new BluetoothMasterSwitchPreferenceController(

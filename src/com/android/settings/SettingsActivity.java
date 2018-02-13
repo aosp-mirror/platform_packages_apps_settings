@@ -802,11 +802,6 @@ public class SettingsActivity extends SettingsDrawerActivity
                 !UserManager.isDeviceInDemoMode(this), isAdmin)
                 || somethingChanged;
 
-        somethingChanged = setTileEnabled(new ComponentName(packageName,
-                        Settings.PrintSettingsActivity.class.getName()),
-                pm.hasSystemFeature(PackageManager.FEATURE_PRINTING), isAdmin)
-                || somethingChanged;
-
         final boolean showDev = DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(this)
                 && !Utils.isMonkeyRunning();
 

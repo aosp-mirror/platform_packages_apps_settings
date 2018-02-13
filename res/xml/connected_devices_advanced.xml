@@ -51,6 +51,14 @@
         android:order="-2"/>
 
     <Preference
+        android:key="connected_device_printing"
+        android:title="@string/print_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_print"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:order="-1"/>
+
+    <Preference
         android:key="bt_received_files"
         android:icon="@drawable/ic_folder_vd_theme_24"
         android:title="@string/bluetooth_show_received_files" />
