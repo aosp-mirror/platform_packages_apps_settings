@@ -21,6 +21,7 @@ import android.util.Log;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -69,6 +70,8 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public static final int UNAVAILABLE_UNKNOWN = 4;
 
     protected final String mPreferenceKey;
+
+    protected Lifecycle mLifecycle;
 
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);

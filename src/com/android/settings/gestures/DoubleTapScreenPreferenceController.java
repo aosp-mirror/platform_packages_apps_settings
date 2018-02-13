@@ -102,4 +102,9 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         return new InlineSwitchPayload(SECURE_KEY, ResultPayload.SettingsSource.SECURE,
                 ON /* onValue */, intent, isAvailable(), ON /* defaultValue */);
     }
+
+    @Override
+    protected boolean canHandleClicks() {
+        return !mAmbientConfig.alwaysOnEnabled(mUserId);
+    }
 }

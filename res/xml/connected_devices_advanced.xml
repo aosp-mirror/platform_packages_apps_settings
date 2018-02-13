@@ -42,13 +42,6 @@
         android:icon="@drawable/ic_android"
         android:order="-4"/>
 
-    <Preference
-        android:key="sms_mirroring"
-        android:title="@string/sms_mirroring_pref"
-        android:icon="@drawable/ic_sms_mirroring_24dp"
-        android:summary="@string/summary_placeholder"
-        android:order="-3"/>
-
     <SwitchPreference
         android:key="bluetooth_on_while_driving"
         android:title="@string/bluetooth_on_while_driving_pref"
@@ -56,6 +49,14 @@
         android:summary="@string/bluetooth_on_while_driving_summary"
         settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
         android:order="-2"/>
+
+    <Preference
+        android:key="connected_device_printing"
+        android:title="@string/print_settings"
+        android:summary="@string/summary_placeholder"
+        android:icon="@drawable/ic_settings_print"
+        android:fragment="com.android.settings.print.PrintSettingsFragment"
+        android:order="-1"/>
 
     <Preference
         android:key="bt_received_files"

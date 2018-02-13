@@ -15,13 +15,18 @@
  */
 package com.android.settings.datetime.timezone;
 
+import android.content.Context;
 import android.icu.util.TimeZone;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
+
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,8 +34,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
 
 import java.util.Collections;
+import java.util.Locale;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -38,17 +46,39 @@ import static com.google.common.truth.Truth.assertThat;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
         shadows = {
                 SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class})
+                SettingsShadowResources.SettingsShadowTheme.class,
+                TimeZoneAdapterTest.ShadowDataFormat.class})
 public class TimeZoneAdapterTest {
     @Mock
     private View.OnClickListener mOnClickListener;
 
     private TimeZoneAdapter mTimeZoneAdapter;
 
+    private Context mContext;
+    private Locale mDefaultLocale;
+
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mTimeZoneAdapter = new TimeZoneAdapter(mOnClickListener, RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
+        mTimeZoneAdapter = new TimeZoneAdapter(mOnClickListener, mContext);
+        mDefaultLocale = Locale.getDefault();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Locale.setDefault(mDefaultLocale);
+    }
+
+    @Implements(android.text.format.DateFormat.class)
+    public static class ShadowDataFormat {
+
+        public static String mTimeFormatString = "";
+
+        @Implementation
+        public static String getTimeFormatString(Context context) {
+            return mTimeFormatString;
+        }
     }
 
     @Test
@@ -87,6 +117,38 @@ public class TimeZoneAdapterTest {
         final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
         mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
         assertThat(viewHolder.mDstView.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void bindViewHolder_on24Hour() {
+        Locale.setDefault(Locale.US);
+        ShadowDataFormat.mTimeFormatString = "HH:mm";
+        mTimeZoneAdapter = new TimeZoneAdapter(mOnClickListener, mContext);
+
+        final TimeZoneInfo tzi = dummyTimeZoneInfo(TimeZone.getTimeZone("Etc/UTC"));
+        mTimeZoneAdapter.setTimeZoneInfos(Collections.singletonList(tzi));
+
+        final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
+
+        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mTimeView.getText().toString()).hasLength(5);
+    }
+
+    @Test
+    public void bindViewHolder_on12Hour() {
+        Locale.setDefault(Locale.US);
+        ShadowDataFormat.mTimeFormatString = "hh:mm a";
+        mTimeZoneAdapter = new TimeZoneAdapter(mOnClickListener, mContext);
+
+        final TimeZoneInfo tzi = dummyTimeZoneInfo(TimeZone.getTimeZone("Etc/UTC"));
+        mTimeZoneAdapter.setTimeZoneInfos(Collections.singletonList(tzi));
+
+        final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
+
+        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mTimeView.getText().toString()).hasLength(8);
     }
 
     // Pick an arbitrary time zone that's not the current default.

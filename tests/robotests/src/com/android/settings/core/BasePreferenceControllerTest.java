@@ -16,14 +16,11 @@
 package com.android.settings.core;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController
-        .DISABLED_DEPENDENT_SETTING;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 import static com.android.settings.core.BasePreferenceController.DISABLED_FOR_USER;
 import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
 import static com.android.settings.core.BasePreferenceController.UNAVAILABLE_UNKNOWN;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import com.android.settings.TestConfig;
@@ -41,7 +38,7 @@ import org.robolectric.annotation.Config;
 public class BasePreferenceControllerTest {
 
     @Mock
-    BasePreferenceController mPreferenceController;
+    private BasePreferenceController mPreferenceController;
 
     @Before
     public void setUp() {

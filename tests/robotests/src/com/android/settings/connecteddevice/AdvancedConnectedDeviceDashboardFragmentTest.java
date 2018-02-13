@@ -16,7 +16,6 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -24,9 +23,6 @@ import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.TestConfig;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -52,38 +48,14 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Mock
     private PackageManager mManager;
 
-    private FakeFeatureFactory mFeatureFactory;
-    private SmsMirroringFeatureProvider mFeatureProvider;
     private AdvancedConnectedDeviceDashboardFragment mFragment;
-    private TestSmsMirroringPreferenceController mSmsMirroringPreferenceController;
-
-    private static final class TestSmsMirroringPreferenceController
-            extends SmsMirroringPreferenceController implements PreferenceControllerMixin {
-
-        private boolean mIsAvailable;
-
-        public TestSmsMirroringPreferenceController(Context context) {
-            super(context);
-        }
-
-        @Override
-        public boolean isAvailable() {
-            return mIsAvailable;
-        }
-    }
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFeatureProvider = mFeatureFactory.smsMirroringFeatureProvider;
 
         mFragment = new AdvancedConnectedDeviceDashboardFragment();
-        when(mContext.getPackageManager()).thenReturn(mManager);
-
-        mSmsMirroringPreferenceController = new TestSmsMirroringPreferenceController(mContext);
-        when(mFeatureProvider.getController(mContext)).thenReturn(
-                mSmsMirroringPreferenceController);
+        when(mContext.getApplicationContext().getPackageManager()).thenReturn(mManager);
     }
 
     @Test
@@ -99,52 +71,6 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
-    }
-
-    @Test
-    public void testSearchIndexProvider_NoNfc_KeyAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).contains(NfcPreferenceController.KEY_TOGGLE_NFC);
-        assertThat(keys).contains(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
-    }
-
-    @Test
-    public void testSearchIndexProvider_NFC_KeyNotAdded() {
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(true);
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_TOGGLE_NFC);
-        assertThat(keys).doesNotContain(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
-    }
-
-    @Test
-    public void testSearchIndexProvider_NoSmsMirroring_KeyAdded() {
-        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(false);
-        mSmsMirroringPreferenceController.mIsAvailable = false;
-
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).contains(mSmsMirroringPreferenceController.getPreferenceKey());
-    }
-
-    @Test
-    public void testSearchIndexProvider_SmsMirroring_KeyNotAdded() {
-        when(mFeatureProvider.shouldShowSmsMirroring(mContext)).thenReturn(true);
-        mSmsMirroringPreferenceController.mIsAvailable = true;
-
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
-
-        assertThat(keys).isNotNull();
-        assertThat(keys).doesNotContain(mSmsMirroringPreferenceController.getPreferenceKey());
     }
 
     @Test

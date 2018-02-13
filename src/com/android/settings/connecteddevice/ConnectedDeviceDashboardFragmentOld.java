@@ -80,8 +80,8 @@ public class ConnectedDeviceDashboardFragmentOld extends DashboardFragment {
                 new NfcPreferenceController(context);
         lifecycle.addObserver(nfcPreferenceController);
         controllers.add(nfcPreferenceController);
-        mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context));
-        lifecycle.addObserver(mUsbPrefController);
+        mUsbPrefController = new UsbModePreferenceController(context, new UsbBackend(context),
+                lifecycle);
         controllers.add(mUsbPrefController);
         final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
                 new BluetoothMasterSwitchPreferenceController(
@@ -90,11 +90,6 @@ public class ConnectedDeviceDashboardFragmentOld extends DashboardFragment {
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
 
-        SmsMirroringFeatureProvider smsMirroringFeatureProvider =
-                FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
-        AbstractPreferenceController smsMirroringController =
-                smsMirroringFeatureProvider.getController(context);
-        controllers.add(smsMirroringController);
         return controllers;
     }
 
@@ -156,12 +151,6 @@ public class ConnectedDeviceDashboardFragmentOld extends DashboardFragment {
                         keys.add(NfcPreferenceController.KEY_ANDROID_BEAM_SETTINGS);
                     }
                     keys.add(BluetoothMasterSwitchPreferenceController.KEY_TOGGLE_BLUETOOTH);
-
-                    SmsMirroringFeatureProvider smsMirroringFeatureProvider =
-                            FeatureFactory.getFactory(context).getSmsMirroringFeatureProvider();
-                    SmsMirroringPreferenceController smsMirroringController =
-                            smsMirroringFeatureProvider.getController(context);
-                    smsMirroringController.updateNonIndexableKeys(keys);
 
                     return keys;
                 }

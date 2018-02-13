@@ -23,6 +23,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -37,12 +38,16 @@ public class UsbModePreferenceController extends AbstractPreferenceController
     UsbConnectionBroadcastReceiver mUsbReceiver;
     private Preference mUsbPreference;
 
-    public UsbModePreferenceController(Context context, UsbBackend usbBackend) {
+    public UsbModePreferenceController(Context context, UsbBackend usbBackend,
+            Lifecycle lifecycle) {
         super(context);
         mUsbBackend = usbBackend;
         mUsbReceiver = new UsbConnectionBroadcastReceiver(mContext, (connected, newMode) -> {
             updateSummary(mUsbPreference, connected, newMode);
         }, mUsbBackend);
+        if (lifecycle != null) {
+            lifecycle.addObserver(this);
+        }
     }
 
     @Override

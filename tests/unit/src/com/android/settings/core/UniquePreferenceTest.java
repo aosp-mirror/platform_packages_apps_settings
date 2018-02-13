@@ -74,7 +74,6 @@ public class UniquePreferenceTest {
             "toggle_bluetooth",
             "toggle_nfc",
             "android_beam_settings",
-            "sms_mirroring",
             // Dup keys from About Phone v2 experiment.
             "ims_reg_state",
             "bt_address",
