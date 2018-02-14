@@ -36,6 +36,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.google.android.collect.Lists;
@@ -226,6 +227,13 @@ public class UsbDetailsProfilesControllerTest {
         assertThat(switches.get(0).getKey()).isEqualTo(UsbManager.USB_FUNCTION_MTP);
         verify(mUsbBackend).setMode(UsbBackend.MODE_DATA_NONE);
         assertThat(!switches.get(0).isChecked());
+    }
+
+    @Test
+    @Config(shadows = ShadowUtils.class)
+    public void testIsAvailable_isMonkey_shouldReturnFalse() {
+        ShadowUtils.setIsUserAMonkey(true);
+        assertThat(mDetailsProfilesController.isAvailable()).isFalse();
     }
 
     private List<SwitchPreference> getProfileSwitches() {
