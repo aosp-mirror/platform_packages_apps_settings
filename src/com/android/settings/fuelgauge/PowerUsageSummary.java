@@ -86,9 +86,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     @VisibleForTesting
     static final int BATTERY_TIP_LOADER = 2;
     private static final int MENU_STATS_TYPE = Menu.FIRST;
-    @VisibleForTesting
-    static final int MENU_HIGH_POWER_APPS = Menu.FIRST + 3;
-    private static final int MENU_HELP = Menu.FIRST + 5;
     public static final int DEBUG_INFO_LOADER = 3;
 
     @VisibleForTesting
@@ -257,8 +254,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     .setAlphabeticShortcut('t');
         }
 
-        menu.add(Menu.NONE, MENU_HIGH_POWER_APPS, Menu.NONE, R.string.high_power_apps);
-
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -282,15 +277,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
                 refreshUi();
-                return true;
-            case MENU_HIGH_POWER_APPS:
-                Bundle args = new Bundle();
-                args.putString(ManageApplications.EXTRA_CLASSNAME,
-                        HighPowerApplicationsActivity.class.getName());
-                sa.startPreferencePanel(this, ManageApplications.class.getName(), args,
-                        R.string.high_power_apps, null, null, 0);
-                metricsFeatureProvider.action(context,
-                        MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -27,8 +27,10 @@ import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,6 +71,11 @@ public class RestrictAppActionTest {
         mRestrictAppAction.mBatteryUtils = mBatteryUtils;
     }
 
+    @After
+    public void cleanUp() {
+        DatabaseTestUtils.clearDb(mContext);
+    }
+
     @Test
     public void testHandlePositiveAction() {
         mRestrictAppAction.handlePositiveAction();
@@ -78,6 +85,5 @@ public class RestrictAppActionTest {
         verify(mBatteryUtils).setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2),
                 eq(AppOpsManager.MODE_IGNORED));
     }
-
 
 }

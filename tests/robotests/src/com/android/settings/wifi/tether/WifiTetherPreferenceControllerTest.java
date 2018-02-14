@@ -185,7 +185,7 @@ public class WifiTetherPreferenceControllerTest {
         receiver.onReceive(RuntimeEnvironment.application, broadcast);
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
-                RuntimeEnvironment.application.getString(R.string.summary_placeholder));
+                "Unavailable because airplane mode is turned on");
     }
 
     @Test

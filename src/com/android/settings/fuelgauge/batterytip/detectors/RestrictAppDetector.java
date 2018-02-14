@@ -16,7 +16,13 @@
 
 package com.android.settings.fuelgauge.batterytip.detectors;
 
+import android.content.Context;
+import android.support.annotation.VisibleForTesting;
+import android.text.format.DateUtils;
+
+import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
@@ -29,18 +35,47 @@ import java.util.List;
  * {@link BatteryTipDetector} since it need the most up-to-date {@code visibleTips}
  */
 public class RestrictAppDetector implements BatteryTipDetector {
+    @VisibleForTesting
+    static final boolean USE_FAKE_DATA = false;
     private BatteryTipPolicy mPolicy;
+    @VisibleForTesting
+    BatteryDatabaseManager mBatteryDatabaseManager;
 
-    public RestrictAppDetector(BatteryTipPolicy policy) {
+    public RestrictAppDetector(Context context, BatteryTipPolicy policy) {
         mPolicy = policy;
+        mBatteryDatabaseManager = new BatteryDatabaseManager(context);
     }
 
     @Override
     public BatteryTip detect() {
-        // TODO(b/70570352): Detect restrict apps here, get data from database
+        if (USE_FAKE_DATA) {
+            return getFakeData();
+        }
+        if (mPolicy.appRestrictionEnabled) {
+            // TODO(b/72385333): hook up the query timestamp to server side
+            final long oneDayBeforeMs = System.currentTimeMillis() - DateUtils.DAY_IN_MILLIS;
+            final List<AppInfo> highUsageApps = mBatteryDatabaseManager.queryAllAnomalies(
+                    oneDayBeforeMs, AnomalyDatabaseHelper.State.NEW);
+            if (!highUsageApps.isEmpty()) {
+                // If there are new anomalies, show them
+                return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);
+            } else {
+                // Otherwise, show auto-handled one if it exists
+                final List<AppInfo> autoHandledApps = mBatteryDatabaseManager.queryAllAnomalies(
+                        oneDayBeforeMs, AnomalyDatabaseHelper.State.AUTO_HANDLED);
+                return new RestrictAppTip(autoHandledApps.isEmpty() ? BatteryTip.StateType.INVISIBLE
+                        : BatteryTip.StateType.HANDLED, autoHandledApps);
+            }
+        } else {
+            return new RestrictAppTip(BatteryTip.StateType.INVISIBLE, new ArrayList<>());
+        }
+    }
+
+    private BatteryTip getFakeData() {
         final List<AppInfo> highUsageApps = new ArrayList<>();
-        return new RestrictAppTip(
-                highUsageApps.isEmpty() ? BatteryTip.StateType.INVISIBLE : BatteryTip.StateType.NEW,
-                highUsageApps);
+        highUsageApps.add(new AppInfo.Builder()
+                .setPackageName("com.android.settings")
+                .build());
+        return new RestrictAppTip(BatteryTip.StateType.NEW, highUsageApps);
     }
 }

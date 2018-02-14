@@ -17,6 +17,8 @@
 package com.android.settings.connecteddevice.usb;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
+
 import android.content.Context;
 import android.hardware.usb.UsbManager;
 import android.support.v14.preference.PreferenceFragment;
@@ -136,8 +138,15 @@ public class UsbDetailsProfilesController extends UsbDetailsController
         } else {
             mode &= ~thisMode;
         }
-        mUsbBackend.setMode(mode);
+        if (!Utils.isMonkeyRunning()) {
+            mUsbBackend.setMode(mode);
+        }
         return false;
+    }
+
+    @Override
+    public boolean isAvailable() {
+        return !Utils.isMonkeyRunning();
     }
 
     @Override

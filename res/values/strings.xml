@@ -1154,7 +1154,7 @@
     <string name="setup_lock_settings_picker_title" product="default">Protect your phone</string>
 
     <!-- Message shown when setting up screen lock, prompting user to choose the their backup screen lock method [CHAR LIMIT=NONE] -->
-    <string name="lock_settings_picker_fingerprint_added_security_message">For added security, set a backup screen lock.</string>
+    <string name="lock_settings_picker_fingerprint_added_security_message">For added security, set a backup screen lock</string>
 
     <!-- Description text for screen in setup wizard asking user to set up screen lock, explaining to the user how setting up a screen lock protect them from losing data. (tablet) [CHAR LIMIT=NONE] -->
     <string name="setup_lock_settings_picker_message" product="tablet">Prevent others from using this tablet without your permission by activating device protection features. Choose the screen lock you want to use.</string>
@@ -2142,6 +2142,8 @@
     <string name="wifi_hotspot_configure_ap_text_summary">AndroidAP WPA2 PSK hotspot</string>
     <!-- Default access point SSID used for tethering -->
     <string name="wifi_tether_configure_ssid_default">AndroidHotspot</string>
+    <!-- Summary text when hotspot is disabled because airplane mode is on [CHAR LIMIT=80]-->
+    <string name="wifi_tether_disabled_by_airplane">Unavailable because airplane mode is turned on</string>
 
     <!-- Do not translate. Used for diagnostic screens, precise translation is not necessary
          Wi-Fi Testing on the diagnostic screen-->
@@ -3477,19 +3479,19 @@
 
     <!-- Lock Pattern settings -->
     <!-- Header on first screen of choose password/PIN flow [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_screen_lock_header">Set a screen lock</string>
+    <string name="lockpassword_choose_your_screen_lock_header">Set screen lock</string>
     <!-- Message on first screen of choose password flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_password_message">For security, set a password</string>
+    <string name="lockpassword_choose_your_password_message">For security, set password</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set a password</string>
+    <string name="lockpassword_choose_your_password_header_for_fingerprint">To use fingerprint, set password</string>
     <!-- Header on first screen of choose pattern as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pattern_header_for_fingerprint">To use fingerprint, set a pattern</string>
+    <string name="lockpassword_choose_your_pattern_header_for_fingerprint">To use fingerprint, set pattern</string>
     <!-- Message on first screen of choose PIN flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_pin_message">For security, set a PIN</string>
+    <string name="lockpassword_choose_your_pin_message">For security, set PIN</string>
     <!-- Header on first screen of choose password/PIN as backup for fingerprint flow. If this string cannot be translated in under 40 characters, please translate "Set fingerprint backup" [CHAR LIMIT=40] -->
-    <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set a PIN</string>
+    <string name="lockpassword_choose_your_pin_header_for_fingerprint">To use fingerprint, set PIN</string>
     <!-- Message on first screen of choose pattern flow [CHAR LIMIT=NONE] -->
-    <string name="lockpassword_choose_your_pattern_message">For security, set a pattern</string>
+    <string name="lockpassword_choose_your_pattern_message">For security, set pattern</string>
     <!-- Header on password confirm screen [CHAR LIMIT=40] -->
     <string name="lockpassword_confirm_your_password_header">Re-enter your password</string>
     <!-- Header on pattern confirm screen [CHAR LIMIT=30] -->

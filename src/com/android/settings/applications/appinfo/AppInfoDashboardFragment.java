@@ -82,8 +82,8 @@ public class AppInfoDashboardFragment extends DashboardFragment
     private static final String TAG = "AppInfoDashboard";
 
     // Menu identifiers
-    private static final int UNINSTALL_ALL_USERS_MENU = 1;
-    private static final int UNINSTALL_UPDATES = 2;
+    @VisibleForTesting static final int UNINSTALL_ALL_USERS_MENU = 1;
+    @VisibleForTesting static final int UNINSTALL_UPDATES = 2;
     static final int FORCE_STOP_MENU = 3;
 
     // Result code identifiers
@@ -330,7 +330,10 @@ public class AppInfoDashboardFragment extends DashboardFragment
         menu.findItem(UNINSTALL_ALL_USERS_MENU).setVisible(shouldShowUninstallForAll(mAppEntry));
         mUpdatedSysApp = (mAppEntry.info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0;
         final MenuItem uninstallUpdatesItem = menu.findItem(UNINSTALL_UPDATES);
-        uninstallUpdatesItem.setVisible(mUpdatedSysApp && !mAppsControlDisallowedBySystem);
+        final boolean uninstallUpdateDisabled = getContext().getResources().getBoolean(
+                R.bool.config_disable_uninstall_update);
+        uninstallUpdatesItem.setVisible(
+                mUpdatedSysApp && !mAppsControlDisallowedBySystem && !uninstallUpdateDisabled);
         if (uninstallUpdatesItem.isVisible()) {
             RestrictedLockUtils.setMenuItemAsDisabledByAdmin(getActivity(),
                     uninstallUpdatesItem, mAppsControlDisallowedAdmin);
