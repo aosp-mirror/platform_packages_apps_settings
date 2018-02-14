@@ -72,11 +72,6 @@ public class ConnectedDeviceDashboardFragment2Test {
     }
 
     @Test
-    public void testCategory_isConnectedDevice() {
-        assertThat(mFragment.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_DEVICE);
-    }
-
-    @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
                 mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext,
