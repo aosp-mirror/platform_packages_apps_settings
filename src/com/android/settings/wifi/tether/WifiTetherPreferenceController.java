@@ -202,7 +202,7 @@ public class WifiTetherPreferenceController extends AbstractPreferenceController
         boolean isAirplaneMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.AIRPLANE_MODE_ON, 0) != 0;
         if (isAirplaneMode) {
-            mPreference.setSummary(R.string.summary_placeholder);
+            mPreference.setSummary(R.string.wifi_tether_disabled_by_airplane);
         }
     }
     //
