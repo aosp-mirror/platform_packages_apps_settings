@@ -195,6 +195,14 @@ public class DefaultAutofillPicker extends DefaultAppPickerFragment {
                 candidates.add(new DefaultAppInfo(context, mPm, mUserId, new ComponentName(
                         info.serviceInfo.packageName, info.serviceInfo.name)));
             }
+            if (Manifest.permission.BIND_AUTOFILL.equals(permission)) {
+                // Let it go for now...
+                Log.w(TAG, "AutofillService from '" + info.serviceInfo.packageName
+                        + "' uses unsupported permission " + Manifest.permission.BIND_AUTOFILL
+                        + ". It works for now, but might not be supported on future releases");
+                candidates.add(new DefaultAppInfo(context, mPm, mUserId, new ComponentName(
+                        info.serviceInfo.packageName, info.serviceInfo.name)));
+            }
         }
         return candidates;
     }
