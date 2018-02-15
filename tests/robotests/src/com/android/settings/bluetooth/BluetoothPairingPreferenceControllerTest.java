@@ -101,6 +101,6 @@ public class BluetoothPairingPreferenceControllerTest {
         mController.handlePreferenceTreeClick(mPreference);
 
         verify(mSettingsActivity).startPreferencePanelAsUser(eq(mFragment), anyString(), any(),
-                anyInt(), any(), any());
+                anyInt(), any());
     }
 }

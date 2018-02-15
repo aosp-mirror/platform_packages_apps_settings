@@ -28,6 +28,7 @@ import android.content.Intent;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,9 +50,25 @@ public class SubSettingLauncherTest {
 
     @Test(expected = IllegalStateException.class)
     public void cannotReuseLauncher() {
-        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
+                .setDestination(SubSettingLauncherTest.class.getName())
+                .setSourceMetricsCategory(123);
         doNothing().when(launcher).launch(any(Intent.class));
         launcher.launch();
+        launcher.launch();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void launch_noSourceMetricsCategory_shouldCrash() {
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
+                .setDestination(SubSettingLauncherTest.class.getName());
+        launcher.launch();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void launch_noDestination_shouldCrash() {
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext))
+                .setSourceMetricsCategory(123);
         launcher.launch();
     }
 
@@ -62,6 +79,7 @@ public class SubSettingLauncherTest {
         launcher.setTitle("123")
                 .setDestination(SubSettingLauncherTest.class.getName())
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setSourceMetricsCategory(123)
                 .launch();
         doNothing().when(launcher).launch(any(Intent.class));
         verify(launcher).launch(intentArgumentCaptor.capture());
@@ -72,5 +90,7 @@ public class SubSettingLauncherTest {
         assertThat(intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(SubSettingLauncherTest.class.getName());
         assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
+        assertThat(intent.getIntExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, -1))
+                .isEqualTo(123);
     }
 }

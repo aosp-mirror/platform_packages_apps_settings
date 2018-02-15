@@ -481,22 +481,6 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            int titleResId, CharSequence title, boolean isShortcut, int metricsCategory,
-            UserHandle userHandle) {
-        // workaround to avoid crash in b/17523189
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut,
-                    metricsCategory);
-        } else {
-            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivityAsUser(intent, userHandle);
-        }
-    }
-
     /**
      * Build an Intent to launch a new activity showing the selected fragment.
      * The implementation constructs an Intent that re-launches the current activity with the
