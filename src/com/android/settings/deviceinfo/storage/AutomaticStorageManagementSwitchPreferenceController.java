@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -23,12 +23,14 @@ import android.os.SystemProperties;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.deletionhelper.ActivationWarningFragment;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settings.widget.SwitchWidgetController;
+import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -74,9 +76,7 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
         if (!isAvailable()) {
             return;
         }
-        boolean isStorageManagerEnabled = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0) != 0;
-        mSwitch.setChecked(isStorageManagerEnabled);
+        mSwitch.setChecked(Utils.isStorageManagerEnabled(mContext));
 
         if (mSwitch != null) {
             mSwitchController = new MasterSwitchController(mSwitch);
@@ -97,9 +97,9 @@ public class AutomaticStorageManagementSwitchPreferenceController extends
                 SystemProperties.getBoolean(STORAGE_MANAGER_ENABLED_BY_DEFAULT_PROPERTY, false);
         final boolean storageManagerDisabledByPolicy =
                 Settings.Secure.getInt(
-                                mContext.getContentResolver(),
-                                Settings.Secure.AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY,
-                                0)
+                        mContext.getContentResolver(),
+                        Settings.Secure.AUTOMATIC_STORAGE_MANAGER_TURNED_OFF_BY_POLICY,
+                        0)
                         != 0;
         // Show warning if it is disabled by default and turning it on or if it was disabled by
         // policy and we're turning it on.

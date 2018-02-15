@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -96,7 +96,7 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
     @Override
     public void onResume() {
         super.onResume();
-        mDaysToRetain.setEnabled(isStorageManagerEnabled());
+        mDaysToRetain.setEnabled(Utils.isStorageManagerEnabled(getContext()));
     }
 
     @Override
@@ -151,12 +151,6 @@ public class AutomaticStorageManagerSettings extends DashboardFragment
             }
         }
         return indices.length - 1;
-    }
-
-    private boolean isStorageManagerEnabled() {
-        return Settings.Secure.getInt(
-                        getContentResolver(), Settings.Secure.AUTOMATIC_STORAGE_MANAGER_ENABLED, 0)
-                != 0;
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context) {
