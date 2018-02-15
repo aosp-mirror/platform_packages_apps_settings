@@ -452,8 +452,15 @@ public class ChooseLockPattern extends SettingsActivity {
             final GlifLayout layout = (GlifLayout) inflater.inflate(
                     R.layout.choose_lock_pattern, container, false);
             layout.setHeaderText(getActivity().getTitle());
-            if (mForFingerprint) {
-                layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
+            if (getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
+                View iconView = layout.findViewById(R.id.suw_layout_icon);
+                if (iconView != null) {
+                    iconView.setVisibility(View.GONE);
+                }
+            } else {
+                if (mForFingerprint) {
+                    layout.setIcon(getActivity().getDrawable(R.drawable.ic_fingerprint_header));
+                }
             }
             return layout;
         }

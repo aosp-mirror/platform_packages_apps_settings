@@ -57,11 +57,13 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-            Button optionsButton = (Button) view.findViewById(R.id.screen_lock_options);
-            optionsButton.setVisibility(View.VISIBLE);
-            optionsButton.setOnClickListener((btn) ->
-                    ChooseLockTypeDialogFragment.newInstance(mUserId)
-                            .show(getChildFragmentManager(), null));
+            if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
+                Button optionsButton = view.findViewById(R.id.screen_lock_options);
+                optionsButton.setVisibility(View.VISIBLE);
+                optionsButton.setOnClickListener((btn) ->
+                        ChooseLockTypeDialogFragment.newInstance(mUserId)
+                                .show(getChildFragmentManager(), null));
+            }
         }
 
         @Override
