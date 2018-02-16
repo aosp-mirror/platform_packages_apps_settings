@@ -48,6 +48,8 @@ import java.util.List;
 public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";
+    private static final String SECURITY_CATEGORY = "security_category";
+    private static final String WORK_PROFILE_SECURITY_CATEGORY = "security_category_profile";
 
     public static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
@@ -120,12 +122,17 @@ public class SecuritySettings extends DashboardFragment {
         controllers.add(new ScreenPinningPreferenceController(context));
         controllers.add(new SimLockPreferenceController(context));
         controllers.add(new ShowPasswordPreferenceController(context));
-        controllers.add(new FingerprintStatusPreferenceController(context));
         controllers.add(new EncryptionStatusPreferenceController(context,
                 PREF_KEY_ENCRYPTION_SECURITY_PAGE));
         controllers.add(new TrustAgentListPreferenceController(context, host, lifecycle));
-        controllers.add(new LockScreenPreferenceController(context, lifecycle));
-        controllers.add(new ChangeScreenLockPreferenceController(context, host));
+
+        final List<AbstractPreferenceController> securityPreferenceControllers = new ArrayList<>();
+        securityPreferenceControllers.add(new FingerprintStatusPreferenceController(context));
+        securityPreferenceControllers.add(new LockScreenPreferenceController(context, lifecycle));
+        securityPreferenceControllers.add(new ChangeScreenLockPreferenceController(context, host));
+        controllers.add(new PreferenceCategoryController(context, SECURITY_CATEGORY,
+                securityPreferenceControllers));
+        controllers.addAll(securityPreferenceControllers);
 
         final List<AbstractPreferenceController> profileSecurityControllers = new ArrayList<>();
         profileSecurityControllers.add(new ChangeProfileScreenLockPreferenceController(
@@ -134,7 +141,7 @@ public class SecuritySettings extends DashboardFragment {
         profileSecurityControllers.add(new VisiblePatternProfilePreferenceController(
                 context, lifecycle));
         profileSecurityControllers.add(new FingerprintProfileStatusPreferenceController(context));
-        controllers.add(new PreferenceCategoryController(context, "security_category_profile",
+        controllers.add(new PreferenceCategoryController(context, WORK_PROFILE_SECURITY_CATEGORY,
                 profileSecurityControllers));
         controllers.addAll(profileSecurityControllers);
 
