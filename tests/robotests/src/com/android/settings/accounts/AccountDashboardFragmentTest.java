@@ -17,6 +17,9 @@ package com.android.settings.accounts;
 
 import static com.android.settings.accounts.AccountDashboardFragmentTest
         .ShadowAuthenticationHelper.LABELS;
+import static com.android.settings.accounts.AccountDashboardFragmentTest
+        .ShadowAuthenticationHelper.TYPES;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -75,7 +78,6 @@ public class AccountDashboardFragmentTest {
             ShadowAuthenticationHelper.class
     })
     public void updateSummary_hasAccount_shouldDisplayUpTo3AccountTypes() {
-        ShadowAuthenticationHelper.setHasAccount(true);
         final SummaryLoader loader = mock(SummaryLoader.class);
         final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
 
@@ -91,7 +93,7 @@ public class AccountDashboardFragmentTest {
             ShadowAuthenticationHelper.class
     })
     public void updateSummary_noAccount_shouldDisplayDefaultSummary() {
-        ShadowAuthenticationHelper.setHasAccount(false);
+        ShadowAuthenticationHelper.setEnabledAccount(null);
         final SummaryLoader loader = mock(SummaryLoader.class);
         final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
 
@@ -101,6 +103,24 @@ public class AccountDashboardFragmentTest {
 
         verify(loader).setSummary(provider,
                 activity.getString(R.string.account_dashboard_default_summary));
+    }
+
+    @Test
+    @Config(shadows = {
+        ShadowAuthenticationHelper.class
+    })
+    public void updateSummary_noAccountTypeLabel_shouldNotDisplayNullEntry() {
+        final SummaryLoader loader = mock(SummaryLoader.class);
+        final Activity activity = Robolectric.buildActivity(Activity.class).setup().get();
+        final String[] enabledAccounts = {TYPES[0], "unlabled_account_type", TYPES[1]};
+        ShadowAuthenticationHelper.setEnabledAccount(enabledAccounts);
+
+        final SummaryLoader.SummaryProvider provider = mFragment.SUMMARY_PROVIDER_FACTORY
+            .createSummaryProvider(activity, loader);
+        provider.setListening(true);
+
+        // should only show the 2 accounts with labels
+        verify(loader).setSummary(provider, LABELS[0] + ", " + LABELS[1]);
     }
 
     @Test
@@ -118,26 +138,25 @@ public class AccountDashboardFragmentTest {
     public static class ShadowAuthenticationHelper {
 
         static final String[] TYPES = new String[] {"type1", "type2", "type3", "type4"};
-        static final String[] LABELS = new String[] {"LABEL1", "LABEL2",
-                "LABEL3", "LABEL4"};
-        private static boolean sHasAccount = true;
+        static final String[] LABELS = new String[] {"LABEL1", "LABEL2", "LABEL3", "LABEL4"};
+        private static String[] sEnabledAccount = TYPES;
 
         public void __constructor__(Context context, UserHandle userHandle,
                 AuthenticatorHelper.OnAccountsUpdateListener listener) {
         }
 
-        public static void setHasAccount(boolean hasAccount) {
-            sHasAccount = hasAccount;
+        public static void setEnabledAccount(String[] enabledAccount) {
+            sEnabledAccount = enabledAccount;
         }
 
         @Resetter
         public static void reset() {
-            sHasAccount = true;
+            sEnabledAccount = TYPES;
         }
 
         @Implementation
         public String[] getEnabledAccountTypes() {
-            return sHasAccount ? TYPES : null;
+            return sEnabledAccount;
         }
 
         @Implementation
@@ -151,7 +170,7 @@ public class AccountDashboardFragmentTest {
             } else if (TextUtils.equals(accountType, TYPES[3])) {
                 return LABELS[3];
             }
-            return "no_label";
+            return null;
         }
     }
 }
