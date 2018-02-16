@@ -36,7 +36,7 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final BatteryDatabaseManager databaseManager = new BatteryDatabaseManager(context);
+        final BatteryDatabaseManager databaseManager = BatteryDatabaseManager.getInstance(context);
         final BatteryUtils batteryUtils = BatteryUtils.getInstance(context);
         final long configUid = intent.getLongExtra(StatsManager.EXTRA_STATS_CONFIG_UID, -1);
         final long configKey = intent.getLongExtra(StatsManager.EXTRA_STATS_CONFIG_KEY, -1);
@@ -46,6 +46,8 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
         Log.i(TAG, "Anomaly intent received.  configUid = " + configUid + " configKey = "
                 + configKey + " subscriptionId = " + subscriptionId);
         saveAnomalyToDatabase(databaseManager, batteryUtils, intent);
+
+        AnomalyCleanUpJobService.scheduleCleanUp(context);
     }
 
     @VisibleForTesting

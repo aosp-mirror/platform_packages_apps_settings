@@ -3306,6 +3306,9 @@
             </intent-filter>
         </receiver>
 
+        <service android:name=".fuelgauge.batterytip.AnomalyCleanUpJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>
 </manifest>
