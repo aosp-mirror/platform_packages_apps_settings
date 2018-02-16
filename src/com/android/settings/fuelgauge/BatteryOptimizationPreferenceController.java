@@ -14,7 +14,6 @@
 
 package com.android.settings.fuelgauge;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
@@ -24,6 +23,8 @@ import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 
@@ -37,12 +38,12 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
 
 
     private PowerWhitelistBackend mBackend;
-    private Fragment mFragment;
+    private DashboardFragment mFragment;
     private SettingsActivity mSettingsActivity;
     private String mPackageName;
 
     public BatteryOptimizationPreferenceController(SettingsActivity settingsActivity,
-            Fragment fragment, String packageName) {
+            DashboardFragment fragment, String packageName) {
         super(settingsActivity);
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
@@ -52,7 +53,7 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
 
     @VisibleForTesting
     BatteryOptimizationPreferenceController(SettingsActivity settingsActivity,
-            Fragment fragment, String packageName, PowerWhitelistBackend backend) {
+            DashboardFragment fragment, String packageName, PowerWhitelistBackend backend) {
         super(settingsActivity);
         mFragment = fragment;
         mSettingsActivity = settingsActivity;
@@ -82,11 +83,16 @@ public class BatteryOptimizationPreferenceController extends AbstractPreferenceC
             return false;
         }
 
-        Bundle args = new Bundle(1);
+        final Bundle args = new Bundle();
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.HighPowerApplicationsActivity.class.getName());
-        mSettingsActivity.startPreferencePanel(mFragment, ManageApplications.class.getName(), args,
-                R.string.high_power_apps, null, null, 0);
+        new SubSettingLauncher(mSettingsActivity)
+                .setDestination(ManageApplications.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.high_power_apps)
+                .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                .launch();
+
         return true;
     }
 

@@ -23,6 +23,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -48,12 +49,14 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
@@ -97,27 +100,12 @@ public class MasterClearTest {
     private Activity mActivity;
     private View mContentView;
 
-    private class ActivityForTest extends SettingsActivity {
-        private Bundle mArgs;
-
-        @Override
-        public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
-            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-            mArgs = args;
-        }
-
-        public Bundle getArgs() {
-            return mArgs;
-        }
-    }
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mMasterClear = spy(new MasterClear());
         mActivity = Robolectric.setupActivity(Activity.class);
-        mShadowActivity = shadowOf(mActivity);https://stackoverflow.com/questions/14889951/how-to-verify-a-method-is-called-two-times-with-mockito-verify
-        // mShadowAccountManager = shadowOf(AccountManager.get(mActivity));
+        mShadowActivity = shadowOf(mActivity);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.master_clear, null);
 
         // Make scrollView only have one child
@@ -127,28 +115,37 @@ public class MasterClearTest {
 
     @Test
     public void testShowFinalConfirmation_eraseEsimChecked() {
-        ActivityForTest testActivity = new ActivityForTest();
-        when(mMasterClear.getActivity()).thenReturn(testActivity);
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
         mMasterClear.mEsimStorage.setChecked(true);
         mMasterClear.showFinalConfirmation();
-        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
-                .isTrue();
+
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .isTrue();
     }
 
     @Test
     public void testShowFinalConfirmation_eraseEsimUnchecked() {
-        ActivityForTest testActivity = new ActivityForTest();
-        when(mMasterClear.getActivity()).thenReturn(testActivity);
+        final Context context = mock(Context.class);
+        when(mMasterClear.getContext()).thenReturn(context);
 
         mMasterClear.mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         mMasterClear.mExternalStorage = mContentView.findViewById(R.id.erase_external);
         mMasterClear.mEsimStorage.setChecked(false);
         mMasterClear.showFinalConfirmation();
-        assertThat(testActivity.getArgs().getBoolean(MasterClear.ERASE_ESIMS_EXTRA, true))
-                .isFalse();
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
+        verify(context).startActivity(intent.capture());
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .getBoolean(MasterClear.ERASE_ESIMS_EXTRA, false))
+            .isFalse();
     }
 
     @Test

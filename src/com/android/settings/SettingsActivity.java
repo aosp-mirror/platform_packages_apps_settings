@@ -66,6 +66,7 @@ import com.android.settings.dashboard.DashboardSummary;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -200,7 +201,14 @@ public class SettingsActivity extends SettingsDrawerActivity
 
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
-        startPreferencePanel(caller, pref.getFragment(), pref.getExtras(), -1, null, null, 0);
+        new SubSettingLauncher(this)
+                .setDestination(pref.getFragment())
+                .setArguments(pref.getExtras())
+                .setSourceMetricsCategory(caller instanceof Instrumentable
+                        ? ((Instrumentable) caller).getMetricsCategory()
+                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setTitle(-1)
+                .launch();
         return true;
     }
 
@@ -594,6 +602,7 @@ public class SettingsActivity extends SettingsDrawerActivity
      * @param resultRequestCode If resultTo is non-null, this is the caller's
      *                          request code to be received with the result.
      */
+    @Deprecated
     public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
             int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
         String title = null;

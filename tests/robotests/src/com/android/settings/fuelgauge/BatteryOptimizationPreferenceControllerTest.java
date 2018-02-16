@@ -17,23 +17,21 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
+import com.android.settings.dashboard.DashboardFragment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,7 +52,7 @@ public class BatteryOptimizationPreferenceControllerTest {
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
-    private Fragment mFragment;
+    private DashboardFragment mFragment;
     @Mock
     private TestPowerWhitelistBackend mBackend;
 
@@ -82,9 +80,7 @@ public class BatteryOptimizationPreferenceControllerTest {
         final boolean handled = mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(handled).isTrue();
-        verify(mSettingsActivity).startPreferencePanel(nullable(Fragment.class),
-                nullable(String.class), nullable(Bundle.class), anyInt(),
-                nullable(CharSequence.class), nullable(Fragment.class), anyInt());
+        verify(mSettingsActivity).startActivity(any(Intent.class));
     }
 
     @Test
@@ -94,9 +90,7 @@ public class BatteryOptimizationPreferenceControllerTest {
         final boolean handled = mController.handlePreferenceTreeClick(mPreference);
 
         assertThat(handled).isFalse();
-        verify(mSettingsActivity, never()).startPreferencePanel(nullable(Fragment.class),
-                nullable(String.class), nullable(Bundle.class), anyInt(),
-                nullable(CharSequence.class), nullable(Fragment.class), anyInt());
+        verify(mSettingsActivity, never()).startActivity(any(Intent.class));
     }
 
     @Test

@@ -51,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -513,10 +514,13 @@ public class AppInfoDashboardFragment extends DashboardFragment
         }
         args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
-
-        final SettingsActivity sa = (SettingsActivity) caller.getActivity();
-        sa.startPreferencePanel(caller, fragment.getName(), args, title, null, caller,
-                SUB_INFO_FRAGMENT);
+        new SubSettingLauncher(caller.getContext())
+                .setDestination(fragment.getName())
+                .setArguments(args)
+                .setTitle(title)
+                .setResultListener(caller, SUB_INFO_FRAGMENT)
+                .setSourceMetricsCategory(caller.getMetricsCategory())
+                .launch();
     }
 
     void handleUninstallButtonClick() {

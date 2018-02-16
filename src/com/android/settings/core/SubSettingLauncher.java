@@ -108,7 +108,7 @@ public class SubSettingLauncher {
         }
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, mLaunchRequest.destinationName);
 
-        if (mLaunchRequest.sourceMetricsCategory <= 0) {
+        if (mLaunchRequest.sourceMetricsCategory < 0) {
             throw new IllegalArgumentException("Source metrics category must be set");
         }
         intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,

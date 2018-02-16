@@ -325,6 +325,7 @@ public final class AppInfoDashboardFragmentTest {
         final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
         final SettingsActivity sa = mock (SettingsActivity.class);
         when(caller.getActivity()).thenReturn(sa);
+        when(caller.getContext()).thenReturn(sa);
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = mock(ApplicationInfo.class);
 
@@ -337,6 +338,7 @@ public final class AppInfoDashboardFragmentTest {
         final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
         final SettingsActivity sa = mock (SettingsActivity.class);
         when(caller.getActivity()).thenReturn(sa);
+        when(caller.getContext()).thenReturn(sa);
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = mock(ApplicationInfo.class);
 
@@ -346,11 +348,14 @@ public final class AppInfoDashboardFragmentTest {
         AppInfoDashboardFragment.startAppInfoFragment(AppInfoDashboardFragment.class, 0, bundle,
                 caller, appEntry);
 
-        final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
-        verify(sa).startPreferencePanel(any(), anyString(), captor.capture(), anyInt(), any(),
-                any(), anyInt());
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
-        assertThat(captor.getValue().containsKey("test"));
-        assertThat(captor.getValue().containsKey(ARG_PACKAGE_NAME));
+        verify(sa).startActivityForResult(intent.capture(), any(Integer.class));
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .containsKey("test"))
+            .isTrue();
+        assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
+            .containsKey(ARG_PACKAGE_NAME))
+            .isTrue();
     }
 }

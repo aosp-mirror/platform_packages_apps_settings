@@ -61,9 +61,9 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.util.UserIcons;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -484,9 +484,12 @@ public class UserSettings extends SettingsPreferenceFragment
         if (userId == UserPreference.USERID_GUEST_DEFAULTS) {
             Bundle extras = new Bundle();
             extras.putBoolean(UserDetailsSettings.EXTRA_USER_GUEST, true);
-            ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                    UserDetailsSettings.class.getName(),
-                    extras, R.string.user_guest, null, null, 0);
+            new SubSettingLauncher(getContext())
+                    .setDestination(UserDetailsSettings.class.getName())
+                    .setArguments(extras)
+                    .setTitle(R.string.user_guest)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
             return;
         }
         UserInfo info = mUserManager.getUserInfo(userId);
@@ -494,23 +497,24 @@ public class UserSettings extends SettingsPreferenceFragment
             Bundle extras = new Bundle();
             extras.putInt(RestrictedProfileSettings.EXTRA_USER_ID, userId);
             extras.putBoolean(RestrictedProfileSettings.EXTRA_NEW_USER, newUser);
-            ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                    RestrictedProfileSettings.class.getName(),
-                    extras, R.string.user_restrictions_title, null,
-                    null, 0);
+            new SubSettingLauncher(getContext())
+                    .setDestination(RestrictedProfileSettings.class.getName())
+                    .setArguments(extras)
+                    .setTitle(R.string.user_restrictions_title)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
         } else if (info.id == UserHandle.myUserId()) {
             // Jump to owner info panel
             OwnerInfoSettings.show(this);
         } else if (mUserCaps.mIsAdmin) {
-            Bundle extras = new Bundle();
+            final Bundle extras = new Bundle();
             extras.putInt(UserDetailsSettings.EXTRA_USER_ID, userId);
-            ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                    UserDetailsSettings.class.getName(),
-                    extras,
-                    -1, /* No title res id */
-                    info.name, /* title */
-                    null, /* resultTo */
-                    0 /* resultRequestCode */);
+            new SubSettingLauncher(getContext())
+                    .setDestination(UserDetailsSettings.class.getName())
+                    .setArguments(extras)
+                    .setTitle(info.name)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
         }
     }
 

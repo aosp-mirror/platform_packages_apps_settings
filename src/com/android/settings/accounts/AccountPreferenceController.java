@@ -47,10 +47,10 @@ import android.util.SparseArray;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.AccessiblePreferenceCategory;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedPreference;
@@ -246,17 +246,17 @@ public class AccountPreferenceController extends AbstractPreferenceController
             if (preference == profileData.managedProfilePreference) {
                 Bundle arguments = new Bundle();
                 arguments.putParcelable(Intent.EXTRA_USER, profileData.userInfo.getUserHandle());
-                ((SettingsActivity) mParent.getActivity()).startPreferencePanel(mParent,
-                        ManagedProfileSettings.class.getName(), arguments,
-                        R.string.managed_profile_settings_title, null, null, 0);
+                new SubSettingLauncher(mContext)
+                        .setSourceMetricsCategory(mParent.getMetricsCategory())
+                        .setDestination(ManagedProfileSettings.class.getName())
+                        .setTitle(R.string.managed_profile_settings_title)
+                        .setArguments(arguments)
+                        .launch();
+
                 return true;
             }
         }
         return false;
-    }
-
-    SparseArray<ProfileData> getProfileData() {
-        return mProfiles;
     }
 
     private void updateUi() {
