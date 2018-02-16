@@ -26,7 +26,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.wrapper.WallpaperManagerWrapper;
 
 public class WallpaperSuggestionActivity extends Activity {
@@ -51,9 +51,12 @@ public class WallpaperSuggestionActivity extends Activity {
     @VisibleForTesting
     void startFallbackSuggestion() {
         // fall back to default wallpaper picker
-        Utils.startWithFragment(this, WallpaperTypeSettings.class.getName(),
-                R.string.wallpaper_suggestion_title, MetricsProto.MetricsEvent.DASHBOARD_SUMMARY,
-                Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        new SubSettingLauncher(this)
+                .setDestination(WallpaperTypeSettings.class.getName())
+                .setTitle(R.string.wallpaper_suggestion_title)
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.DASHBOARD_SUMMARY)
+                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT)
+                .launch();
     }
 
     @VisibleForTesting
