@@ -34,6 +34,9 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipTest {
@@ -73,6 +76,16 @@ public class BatteryTipTest {
         assertThat(parcelTip.getTitle(mContext)).isEqualTo(TITLE);
         assertThat(parcelTip.getSummary(mContext)).isEqualTo(SUMMARY);
         assertThat(parcelTip.getIconId()).isEqualTo(ICON_ID);
+    }
+
+    @Test
+    public void testTipOrder_orderUnique() {
+        final List<Integer> orders = new ArrayList<>();
+        for (int i = 0, size = BatteryTip.TIP_ORDER.size(); i < size; i++) {
+            orders.add(BatteryTip.TIP_ORDER.valueAt(i));
+        }
+
+        assertThat(orders).containsNoDuplicates();
     }
 
     /**
