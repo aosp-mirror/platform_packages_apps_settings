@@ -60,7 +60,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
             ((SettingsActivity) mFragment.getActivity()).startPreferencePanelAsUser(
                 mFragment,
                 AppInfoDashboardFragment.class.getName(), args,
-                R.string.application_info_label, null, mUserHandle);
+                R.string.application_info_label, mUserHandle);
             return true;
         }
     }

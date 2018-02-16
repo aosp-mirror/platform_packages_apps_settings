@@ -45,20 +45,20 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
-import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
-import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
 import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
+import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController;
+import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.widget.EntityHeaderController;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
-
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,7 +158,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title, null,
+                R.string.battery_details_title,
                 new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)));
     }
 
@@ -189,7 +189,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         }
 
         caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title, null, new UserHandle(UserHandle.myUserId()));
+                R.string.battery_details_title, new UserHandle(UserHandle.myUserId()));
     }
 
     @Override

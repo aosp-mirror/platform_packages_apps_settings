@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SubSettings;
@@ -102,8 +103,17 @@ public class SubSettingLauncher {
         mLaunched = true;
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(mContext, SubSettings.class);
-
+        if (TextUtils.isEmpty(mLaunchRequest.destinationName)) {
+            throw new IllegalArgumentException("Destination fragment must be set");
+        }
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, mLaunchRequest.destinationName);
+
+        if (mLaunchRequest.sourceMetricsCategory <= 0) {
+            throw new IllegalArgumentException("Source metrics category must be set");
+        }
+        intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
+                mLaunchRequest.sourceMetricsCategory);
+
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, mLaunchRequest.arguments);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME,
                 mLaunchRequest.titleResPackageName);
@@ -112,8 +122,6 @@ public class SubSettingLauncher {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, mLaunchRequest.title);
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT,
                 mLaunchRequest.isShortCut);
-        intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY,
-                mLaunchRequest.sourceMetricsCategory);
         intent.addFlags(mLaunchRequest.flags);
 
         if (mLaunchRequest.userHandle != null
@@ -150,7 +158,7 @@ public class SubSettingLauncher {
         String titleResPackageName;
         CharSequence title;
         boolean isShortCut;
-        int sourceMetricsCategory;
+        int sourceMetricsCategory = -100;
         int flags;
         Fragment mResultListener;
         int mRequestCode;

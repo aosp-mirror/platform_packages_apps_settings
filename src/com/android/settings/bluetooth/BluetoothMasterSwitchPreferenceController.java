@@ -88,7 +88,7 @@ public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenc
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_TOGGLE_BLUETOOTH.equals(preference.getKey())) {
             mActivity.startPreferencePanelAsUser(mFragment, BluetoothSettings.class.getName(), null,
-                    R.string.bluetooth, null, new UserHandle(UserHandle.myUserId()));
+                    R.string.bluetooth, new UserHandle(UserHandle.myUserId()));
             return true;
         }
         return super.handlePreferenceTreeClick(preference);

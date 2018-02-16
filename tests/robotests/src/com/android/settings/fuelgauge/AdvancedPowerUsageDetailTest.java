@@ -210,7 +210,7 @@ public class AdvancedPowerUsageDetailTest {
         };
         doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), captor.capture(), anyInt(),
-                nullable(CharSequence.class), nullable(UserHandle.class));
+                nullable(UserHandle.class));
 
         mForegroundPreference = new Preference(mContext);
         mBackgroundPreference = new Preference(mContext);
@@ -345,7 +345,7 @@ public class AdvancedPowerUsageDetailTest {
 
         verify(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
-                nullable(CharSequence.class), eq(new UserHandle(10)));
+                eq(new UserHandle(10)));
     }
 
     @Test
@@ -361,7 +361,7 @@ public class AdvancedPowerUsageDetailTest {
 
         verify(mTestActivity).startPreferencePanelAsUser(
                 nullable(Fragment.class), nullable(String.class), nullable(Bundle.class), anyInt(),
-                nullable(CharSequence.class), eq(new UserHandle(currentUser)));
+                eq(new UserHandle(currentUser)));
     }
 
     @Test
@@ -372,7 +372,7 @@ public class AdvancedPowerUsageDetailTest {
             return null;
         };
         doAnswer(callable).when(mTestActivity).startPreferencePanelAsUser(nullable(Fragment.class),
-                nullable(String.class), captor.capture(), anyInt(), nullable(CharSequence.class),
+                nullable(String.class), captor.capture(), anyInt(),
                 nullable(UserHandle.class));
 
         AdvancedPowerUsageDetail.startBatteryDetailPage(mTestActivity, null, PACKAGE_NAME[0]);

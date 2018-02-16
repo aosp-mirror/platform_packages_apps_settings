@@ -66,7 +66,7 @@ public class RestrictedAppDetails extends DashboardFragment {
         args.putParcelableList(EXTRA_PACKAGE_OPS_LIST, packageOpsList);
 
         caller.startPreferencePanelAsUser(fragment, RestrictedAppDetails.class.getName(), args,
-                R.string.restricted_app_title, null /* titleText */,
+                R.string.restricted_app_title,
                 new UserHandle(UserHandle.myUserId()));
     }
 

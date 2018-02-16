@@ -60,7 +60,7 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_PAIRING.equals(preference.getKey())) {
             mActivity.startPreferencePanelAsUser(mFragment, BluetoothPairingDetail.class.getName(),
-                    null, R.string.bluetooth_pairing_page_title, null,
+                    null, R.string.bluetooth_pairing_page_title,
                     new UserHandle(UserHandle.myUserId()));
             return true;
         }

@@ -178,7 +178,7 @@ public class RecentLocationRequestPreferenceControllerTest {
 
         verify(activity).startPreferencePanelAsUser(any(),
             eq(AppInfoDashboardFragment.class.getName()),
-            any(Bundle.class), anyInt(), any(), any());
+            any(Bundle.class), anyInt(), any());
     }
 
     private static ArgumentMatcher<Preference> titleMatches(String expected) {

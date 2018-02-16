@@ -18,12 +18,10 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.Fragment;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.SmartBatterySettings;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class SmartBatteryAction extends BatteryTipAction {
     private SettingsActivity mSettingsActivity;
@@ -42,7 +40,7 @@ public class SmartBatteryAction extends BatteryTipAction {
     public void handlePositiveAction() {
         mSettingsActivity.startPreferencePanelAsUser(mFragment,
                 SmartBatterySettings.class.getName(), null /* args */,
-                R.string.smart_battery_manager_title, null /* titleText */,
+                R.string.smart_battery_manager_title,
                 new UserHandle(UserHandle.myUserId()));
     }
 }

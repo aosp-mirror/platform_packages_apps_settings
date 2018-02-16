@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -69,8 +68,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
         args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
         caller.startPreferencePanelAsUser(fragment, PowerUsageAnomalyDetails.class.getName(), args,
-                R.string.battery_abnormal_details_title, null,
-                new UserHandle(UserHandle.myUserId()));
+                R.string.battery_abnormal_details_title, new UserHandle(UserHandle.myUserId()));
     }
 
     @Override

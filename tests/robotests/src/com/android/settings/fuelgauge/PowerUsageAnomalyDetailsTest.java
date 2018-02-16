@@ -17,8 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -26,7 +24,6 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -40,9 +37,9 @@ import android.support.v7.preference.PreferenceManager;
 import android.util.IconDrawableFactory;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -188,8 +185,7 @@ public class PowerUsageAnomalyDetailsTest {
             }
         };
         doAnswer(bundleCallable).when(mSettingsActivity).startPreferencePanelAsUser(any(),
-                anyString(),
-                bundleCaptor.capture(), anyInt(), any(), any());
+                anyString(), bundleCaptor.capture(), anyInt(), any());
 
         PowerUsageAnomalyDetails.startBatteryAbnormalPage(mSettingsActivity, mFragment,
                 mAnomalyList);

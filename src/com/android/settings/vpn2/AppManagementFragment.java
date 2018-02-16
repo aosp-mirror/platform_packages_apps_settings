@@ -44,7 +44,7 @@ import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -100,10 +100,15 @@ public class AppManagementFragment extends SettingsPreferenceFragment
     };
 
     public static void show(Context context, AppPreference pref, int sourceMetricsCategory) {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putString(ARG_PACKAGE_NAME, pref.getPackageName());
-        Utils.startWithFragmentAsUser(context, AppManagementFragment.class.getName(), args, -1,
-                pref.getLabel(), false, sourceMetricsCategory, new UserHandle(pref.getUserId()));
+        new SubSettingLauncher(context)
+                .setDestination(AppManagementFragment.class.getName())
+                .setArguments(args)
+                .setTitle(pref.getLabel())
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .setUserHandle(new UserHandle(pref.getUserId()))
+                .launch();
     }
 
     @Override
