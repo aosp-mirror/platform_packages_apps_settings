@@ -28,11 +28,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.AppPreference;
 
 public class AccountTypePreference extends AppPreference implements OnPreferenceClickListener {
     /**
      * Title of the tile that is shown to the user.
+     *
      * @attr ref android.R.styleable#PreferenceHeader_title
      */
     private final CharSequence mTitle;
@@ -56,6 +58,7 @@ public class AccountTypePreference extends AppPreference implements OnPreference
     /**
      * Full class name of the fragment to display when this tile is
      * selected.
+     *
      * @attr ref android.R.styleable#PreferenceHeader_fragment
      */
     private final String mFragment;
@@ -92,19 +95,21 @@ public class AccountTypePreference extends AppPreference implements OnPreference
     public boolean onPreferenceClick(Preference preference) {
         if (mFragment != null) {
             UserManager userManager =
-                (UserManager) getContext().getSystemService(Context.USER_SERVICE);
+                    (UserManager) getContext().getSystemService(Context.USER_SERVICE);
             UserHandle user = mFragmentArguments.getParcelable(EXTRA_USER);
             if (user != null && Utils.startQuietModeDialogIfNecessary(getContext(), userManager,
-                user.getIdentifier())) {
+                    user.getIdentifier())) {
                 return true;
             } else if (user != null && Utils.unlockWorkProfileIfNecessary(getContext(),
-                user.getIdentifier())) {
+                    user.getIdentifier())) {
                 return true;
             }
-            Utils.startWithFragment(getContext(), mFragment, mFragmentArguments,
-                null /* resultTo */, 0 /* resultRequestCode */, mTitleResPackageName,
-                mTitleResId, null /* title */,false /* isShortCut */, mMetricsCategory,
-                    0 /* flag */);
+            new SubSettingLauncher(getContext())
+                    .setDestination(mFragment)
+                    .setArguments(mFragmentArguments)
+                    .setTitle(mTitleResPackageName, mTitleResId)
+                    .setSourceMetricsCategory(mMetricsCategory)
+                    .launch();
             return true;
         }
         return false;
