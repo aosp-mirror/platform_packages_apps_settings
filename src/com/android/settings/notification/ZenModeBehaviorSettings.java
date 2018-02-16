@@ -40,7 +40,8 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
             Lifecycle lifecycle) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeAlarmsPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeMediaSystemOtherPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeMediaPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeSystemPreferenceController(context, lifecycle));
         controllers.add(new ZenModeEventsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeRemindersPreferenceController(context, lifecycle));
         controllers.add(new ZenModeMessagesPreferenceController(context, lifecycle));
@@ -85,7 +86,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     keys.add(ZenModeAlarmsPreferenceController.KEY);
-                    keys.add(ZenModeMediaSystemOtherPreferenceController.KEY);
+                    keys.add(ZenModeMediaPreferenceController.KEY);
                     keys.add(ZenModeEventsPreferenceController.KEY);
                     keys.add(ZenModeRemindersPreferenceController.KEY);
                     keys.add(ZenModeMessagesPreferenceController.KEY);
