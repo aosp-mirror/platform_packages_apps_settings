@@ -19,20 +19,18 @@ package com.android.settings.development;
 import static android.os.UserHandle.USER_SYSTEM;
 
 import android.content.Context;
-import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
-import android.os.ServiceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
+import android.view.DisplayCutout;
 
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.wrapper.OverlayManagerWrapper;
+import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 import java.util.List;
@@ -41,11 +39,9 @@ public class EmulateDisplayCutoutPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
         PreferenceControllerMixin {
 
-    public static final String EMULATION_OVERLAY_PREFIX =
-            "com.android.internal.display.cutout.emulation.";
     private static final String KEY = "display_cutout_emulation";
 
-    private final IOverlayManager mOverlayManager;
+    private final OverlayManagerWrapper mOverlayManager;
     private final boolean mAvailable;
 
     private ListPreference mPreference;
@@ -53,7 +49,7 @@ public class EmulateDisplayCutoutPreferenceController extends
 
     @VisibleForTesting
     EmulateDisplayCutoutPreferenceController(Context context, PackageManager packageManager,
-            IOverlayManager overlayManager) {
+            OverlayManagerWrapper overlayManager) {
         super(context);
         mOverlayManager = overlayManager;
         mPackageManager = packageManager;
@@ -61,8 +57,7 @@ public class EmulateDisplayCutoutPreferenceController extends
     }
 
     public EmulateDisplayCutoutPreferenceController(Context context) {
-        this(context, context.getPackageManager(), IOverlayManager.Stub.asInterface(
-                ServiceManager.getService(Context.OVERLAY_SERVICE)));
+        this(context, context.getPackageManager(), new OverlayManagerWrapper());
     }
 
     @Override
@@ -93,7 +88,7 @@ public class EmulateDisplayCutoutPreferenceController extends
 
     private boolean setEmulationOverlay(String packageName) {
         OverlayInfo[] overlays = getOverlayInfos();
-        CharSequence currentPackageName = null;
+        String currentPackageName = null;
         for (OverlayInfo o : overlays) {
             if (o.isEnabled()) {
                 currentPackageName = o.packageName;
@@ -106,19 +101,14 @@ public class EmulateDisplayCutoutPreferenceController extends
             return true;
         }
 
-        for (OverlayInfo o : overlays) {
-            boolean isEnabled = o.isEnabled();
-            boolean shouldBeEnabled = TextUtils.equals(o.packageName, packageName);
-            if (isEnabled != shouldBeEnabled) {
-                try {
-                    mOverlayManager.setEnabled(o.packageName, shouldBeEnabled, USER_SYSTEM);
-                } catch (RemoteException e) {
-                    throw e.rethrowFromSystemServer();
-                }
-            }
+        final boolean result;
+        if (TextUtils.isEmpty(packageName)) {
+            result = mOverlayManager.setEnabled(currentPackageName, false, USER_SYSTEM);
+        } else {
+            result = mOverlayManager.setEnabledExclusiveInCategory(packageName, USER_SYSTEM);
         }
         updateState(mPreference);
-        return true;
+        return result;
     }
 
     @Override
@@ -155,18 +145,15 @@ public class EmulateDisplayCutoutPreferenceController extends
     }
 
     private OverlayInfo[] getOverlayInfos() {
-        try {
-            @SuppressWarnings("unchecked") List<OverlayInfo> overlayInfos =
-                    mOverlayManager.getOverlayInfosForTarget("android", USER_SYSTEM);
-            for (int i = overlayInfos.size() - 1; i >= 0; i--) {
-                if (!overlayInfos.get(i).packageName.startsWith(EMULATION_OVERLAY_PREFIX)) {
-                    overlayInfos.remove(i);
-                }
+        @SuppressWarnings("unchecked") List<OverlayInfo> overlayInfos =
+                mOverlayManager.getOverlayInfosForTarget("android", USER_SYSTEM);
+        for (int i = overlayInfos.size() - 1; i >= 0; i--) {
+            if (!DisplayCutout.EMULATION_OVERLAY_CATEGORY.equals(
+                    overlayInfos.get(i).category)) {
+                overlayInfos.remove(i);
             }
-            return overlayInfos.toArray(new OverlayInfo[overlayInfos.size()]);
-        } catch (RemoteException e) {
-            throw e.rethrowFromSystemServer();
         }
+        return overlayInfos.toArray(new OverlayInfo[overlayInfos.size()]);
     }
 
     @Override
@@ -180,4 +167,5 @@ public class EmulateDisplayCutoutPreferenceController extends
         updateState(mPreference);
         mPreference.setEnabled(false);
     }
+
 }

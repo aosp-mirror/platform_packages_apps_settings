@@ -16,18 +16,19 @@ package android.content.om;
 
 import android.os.IBinder;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 public interface IOverlayManager {
 
-    public OverlayInfo getOverlayInfo(String packageName, int userId);
+    OverlayInfo getOverlayInfo(String packageName, int userId);
 
-    public java.util.List getOverlayInfosForTarget(java.lang.String targetPackageName, int userId);
+    List getOverlayInfosForTarget(String targetPackageName, int userId);
 
-    public boolean setEnabled(java.lang.String packageName, boolean enable, int userId);
+    boolean setEnabled(String packageName, boolean enabled, int userId);
 
-    public static class Stub {
+    boolean setEnabledExclusiveInCategory(String packageName, int userId);
+
+    class Stub {
         public static IOverlayManager asInterface(IBinder b) {
             return null;
         }
