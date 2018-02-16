@@ -47,38 +47,4 @@ public class AccessibilitySettingsTest {
 
         assertThat(keys).containsAllIn(niks);
     }
-
-    @Test
-    public void testColorInversionPreference_byDefault_shouldBeShown() {
-        final Preference preference = new Preference(mContext);
-        mFragment.checkColorInversionVisibility(preference);
-
-        assertThat(mColorInversionPreferenceRemoved).isEqualTo(false);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testColorInversionPreference_ifDisabled_shouldNotBeShown() {
-        final Preference preference = new Preference(mContext);
-        mFragment.checkColorInversionVisibility(preference);
-
-        assertThat(mColorInversionPreferenceRemoved).isEqualTo(true);
-    }
-
-    @Test
-    public void testColorCorrectionPreference_byDefault_shouldBeShown() {
-        final Preference preference = new Preference(mContext);
-        mFragment.checkColorCorrectionVisibility(preference);
-
-        assertThat(mColorCorrectionPreferenceRemoved).isEqualTo(false);
-    }
-
-    @Test
-    @Config(qualifiers = "mcc999")
-    public void testColorCorrectionPreference_ifDisabled_shouldNotBeShown() {
-        final Preference preference = new Preference(mContext);
-        mFragment.checkColorCorrectionVisibility(preference);
-
-        assertThat(mColorCorrectionPreferenceRemoved).isEqualTo(true);
-    }
 }
