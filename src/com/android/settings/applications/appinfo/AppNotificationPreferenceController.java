@@ -16,7 +16,10 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
@@ -27,12 +30,17 @@ import com.android.settingslib.applications.ApplicationsState;
 public class AppNotificationPreferenceController extends AppInfoPreferenceControllerBase {
 
     private static final String KEY_NOTIFICATION = "notification_settings";
+    private String mChannelId = null;
 
     // Used for updating notification preference.
     private final NotificationBackend mBackend = new NotificationBackend();
 
     public AppNotificationPreferenceController(Context context, AppInfoDashboardFragment parent) {
         super(context, parent, KEY_NOTIFICATION);
+        if (parent != null && parent.getActivity() != null
+                && parent.getActivity().getIntent() != null) {
+            mChannelId = parent.getActivity().getIntent().getStringExtra(EXTRA_FRAGMENT_ARG_KEY);
+        }
     }
 
     @Override
@@ -43,6 +51,16 @@ public class AppNotificationPreferenceController extends AppInfoPreferenceContro
     @Override
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
         return AppNotificationSettings.class;
+    }
+
+    @Override
+    protected Bundle getArguments() {
+        Bundle bundle = null;
+        if (mChannelId != null) {
+            bundle = new Bundle();
+            bundle.putString(EXTRA_FRAGMENT_ARG_KEY, mChannelId);
+        }
+        return bundle;
     }
 
     private CharSequence getNotificationSummary(ApplicationsState.AppEntry appEntry,
