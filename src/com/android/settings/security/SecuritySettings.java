@@ -49,9 +49,7 @@ public class SecuritySettings extends DashboardFragment {
 
     private static final String TAG = "SecuritySettings";
 
-    public static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     public static final int CHANGE_TRUST_AGENT_SETTINGS = 126;
-    public static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE = 127;
     public static final int UNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 128;
     public static final int UNIFY_LOCK_CONFIRM_PROFILE_REQUEST = 129;
     public static final int UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST = 130;
