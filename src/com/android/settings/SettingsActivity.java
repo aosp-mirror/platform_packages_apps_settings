@@ -75,7 +75,6 @@ import com.android.settingslib.drawer.SettingsDrawerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SettingsActivity extends SettingsDrawerActivity
         implements PreferenceManager.OnPreferenceTreeClickListener,
@@ -157,10 +156,6 @@ public class SettingsActivity extends SettingsDrawerActivity
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
 
-    private static final String[] LIKE_SHORTCUT_INTENT_ACTION_ARRAY = {
-            "android.settings.APPLICATION_DETAILS_SETTINGS"
-    };
-
     private BroadcastReceiver mDevelopmentSettingsListener;
 
     private boolean mBatteryPresent = true;
@@ -184,11 +179,8 @@ public class SettingsActivity extends SettingsDrawerActivity
     private Button mNextButton;
 
     private boolean mIsShowingDashboard;
-    private boolean mIsShortcut;
 
     private ViewGroup mContent;
-
-    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     // Categories
     private ArrayList<DashboardCategory> mCategories = new ArrayList<>();
@@ -237,22 +229,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         return tag;
     }
 
-    private static boolean isShortCutIntent(final Intent intent) {
-        Set<String> categories = intent.getCategories();
-        return (categories != null) && categories.contains("com.android.settings.SHORTCUT");
-    }
-
-    private static boolean isLikeShortCutIntent(final Intent intent) {
-        String action = intent.getAction();
-        if (action == null) {
-            return false;
-        }
-        for (int i = 0; i < LIKE_SHORTCUT_INTENT_ACTION_ARRAY.length; i++) {
-            if (LIKE_SHORTCUT_INTENT_ACTION_ARRAY[i].equals(action)) return true;
-        }
-        return false;
-    }
-
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -261,7 +237,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         final FeatureFactory factory = FeatureFactory.getFactory(this);
 
         mDashboardFeatureProvider = factory.getDashboardFeatureProvider(this);
-        mMetricsFeatureProvider = factory.getMetricsFeatureProvider();
 
         // Should happen before any call to getIntent()
         getMetaData();
@@ -273,9 +248,6 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = intent.getStringExtra(EXTRA_SHOW_FRAGMENT);
-
-        mIsShortcut = isShortCutIntent(intent) || isLikeShortCutIntent(intent) ||
-                intent.getBooleanExtra(EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, false);
 
         final ComponentName cn = intent.getComponent();
         final String className = cn.getClassName();
@@ -581,74 +553,6 @@ public class SettingsActivity extends SettingsDrawerActivity
         }
 
         return intentClass;
-    }
-
-    /**
-     * Start a new fragment containing a preference panel.  If the preferences
-     * are being displayed in multi-pane mode, the given fragment class will
-     * be instantiated and placed in the appropriate pane.  If running in
-     * single-pane mode, a new activity will be launched in which to show the
-     * fragment.
-     *
-     * @param fragmentClass     Full name of the class implementing the fragment.
-     * @param args              Any desired arguments to supply to the fragment.
-     * @param titleRes          Optional resource identifier of the title of this
-     *                          fragment.
-     * @param titleText         Optional text of the title of this fragment.
-     * @param resultTo          Optional fragment that result data should be sent to.
-     *                          If non-null, resultTo.onActivityResult() will be called when this
-     *                          preference panel is done.  The launched panel must use
-     *                          {@link #finishPreferencePanel(Fragment, int, Intent)} when done.
-     * @param resultRequestCode If resultTo is non-null, this is the caller's
-     *                          request code to be received with the result.
-     */
-    @Deprecated
-    public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
-            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-        String title = null;
-        if (titleRes < 0 && titleText != null) {
-            title = titleText.toString();
-        }
-        Utils.startWithFragment(this, fragmentClass, args, resultTo, resultRequestCode,
-                titleRes, title, mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller));
-    }
-
-    /**
-     * Start a new fragment in a new activity containing a preference panel for a given user. If the
-     * preferences are being displayed in multi-pane mode, the given fragment class will be
-     * instantiated and placed in the appropriate pane. If running in single-pane mode, a new
-     * activity will be launched in which to show the fragment.
-     *
-     * @param fragmentClass Full name of the class implementing the fragment.
-     * @param args          Any desired arguments to supply to the fragment.
-     * @param titleRes      Optional resource identifier of the title of this fragment.
-     * @param userHandle    The user for which the panel has to be started.
-     */
-    public void startPreferencePanelAsUser(Fragment caller, String fragmentClass,
-            Bundle args, int titleRes, UserHandle userHandle) {
-        // This is a workaround.
-        //
-        // Calling startWithFragmentAsUser() without specifying FLAG_ACTIVITY_NEW_TASK to the intent
-        // starting the fragment could cause a native stack corruption. See b/17523189. However,
-        // adding that flag and start the preference panel with the same UserHandler will make it
-        // impossible to use back button to return to the previous screen. See b/20042570.
-        //
-        // We work around this issue by adding FLAG_ACTIVITY_NEW_TASK to the intent, while doing
-        // another check here to call startPreferencePanel() instead of startWithFragmentAsUser()
-        // when we're calling it as the same user.
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startPreferencePanel(caller, fragmentClass, args, titleRes, null /* titleText */,
-                    null, 0);
-        } else {
-            new SubSettingLauncher(this)
-                    .setDestination(fragmentClass)
-                    .setArguments(args)
-                    .setTitle(titleRes)
-                    .setIsShortCut(mIsShortcut)
-                    .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(caller))
-                    .setUserHandle(userHandle)
-                    .launch();
-        }
     }
 
     /**

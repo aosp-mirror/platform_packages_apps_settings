@@ -23,7 +23,6 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.connecteddevice.usb.UsbBackend;
@@ -31,7 +30,6 @@ import com.android.settings.connecteddevice.usb.UsbModePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -85,8 +83,7 @@ public class ConnectedDeviceDashboardFragmentOld extends DashboardFragment {
         controllers.add(mUsbPrefController);
         final BluetoothMasterSwitchPreferenceController bluetoothPreferenceController =
                 new BluetoothMasterSwitchPreferenceController(
-                        context, Utils.getLocalBtManager(context), this,
-                        (SettingsActivity) getActivity());
+                        context, Utils.getLocalBtManager(context), this);
         lifecycle.addObserver(bluetoothPreferenceController);
         controllers.add(bluetoothPreferenceController);
 

@@ -17,24 +17,21 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +54,7 @@ public class AnomalySummaryPreferenceControllerTest {
     private static final int UID = 111;
 
     @Mock
-    private PreferenceFragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     @Mock
     private FragmentManager mFragmentManager;
     @Mock
@@ -89,7 +86,7 @@ public class AnomalySummaryPreferenceControllerTest {
         mAnomalyList = new ArrayList<>();
 
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                mSettingsActivity, mFragment, 0 /* metricskey */);
+                mSettingsActivity, mFragment);
     }
 
     @Test

@@ -27,7 +27,6 @@ import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
@@ -45,6 +44,7 @@ import com.android.internal.os.PowerProfile;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -52,8 +52,8 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
 import com.android.settingslib.core.lifecycle.events.OnPause;
-
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +77,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     BatteryUtils mBatteryUtils;
     private UserManager mUserManager;
     private SettingsActivity mActivity;
-    private PreferenceFragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     private Context mPrefContext;
     SparseArray<List<Anomaly>> mAnomalySparseArray;
 
@@ -112,7 +112,8 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     };
 
     public BatteryAppListPreferenceController(Context context, String preferenceKey,
-            Lifecycle lifecycle, SettingsActivity activity, PreferenceFragment fragment) {
+            Lifecycle lifecycle, SettingsActivity activity,
+            InstrumentedPreferenceFragment fragment) {
         super(context);
 
         if (lifecycle != null) {
