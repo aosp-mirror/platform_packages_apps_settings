@@ -42,7 +42,7 @@ public class RestrictAppAction extends BatteryTipAction {
         super(context);
         mRestrictAppTip = tip;
         mBatteryUtils = BatteryUtils.getInstance(context);
-        mBatteryDatabaseManager = new BatteryDatabaseManager(context);
+        mBatteryDatabaseManager = BatteryDatabaseManager.getInstance(context);
     }
 
     /**
