@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -112,7 +111,7 @@ public class RestrictAppPreferenceControllerTest {
 
         verify(mSettingsActivity).startPreferencePanelAsUser(eq(mFragment),
                 eq(RestrictedAppDetails.class.getName()), any(), eq(R.string.restricted_app_title),
-                any(), any());
+                any());
     }
 
 }

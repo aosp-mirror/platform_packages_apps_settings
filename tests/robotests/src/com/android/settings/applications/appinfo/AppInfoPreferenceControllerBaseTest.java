@@ -26,6 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.pm.ApplicationInfo;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -39,6 +40,7 @@ import com.android.settingslib.applications.ApplicationsState;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -90,9 +92,12 @@ public class AppInfoPreferenceControllerBaseTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
+        ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
         verify(mActivity).startPreferencePanel(any(),
-                eq(mController.getDetailFragmentClass().getName()), any(), anyInt(), any(), any(),
-                anyInt());
+                eq(mController.getDetailFragmentClass().getName()), captor.capture(), anyInt(),
+                any(), any(), anyInt());
+
+        assertThat(captor.getValue().containsKey("test"));
     }
 
     private class TestPreferenceController extends AppInfoPreferenceControllerBase {
@@ -111,6 +116,13 @@ public class AppInfoPreferenceControllerBaseTest {
         @Override
         public Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
             return AppNotificationSettings.class;
+        }
+
+        @Override
+        protected Bundle getArguments() {
+            Bundle bundle = new Bundle();
+            bundle.putString("test", "test");
+            return bundle;
         }
 
     }

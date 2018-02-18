@@ -35,8 +35,7 @@ import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.preference.ListPreference;
 
-import com.android.settings.display.ThemePreferenceController;
-import com.android.settings.display.ThemePreferenceController.OverlayManager;
+import com.android.settings.wrapper.OverlayManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -49,14 +48,14 @@ import java.util.ArrayList;
 @RunWith(AndroidJUnit4.class)
 public class ThemePreferenceControllerTest {
 
-    private OverlayManager mMockOverlayManager;
+    private OverlayManagerWrapper mMockOverlayManager;
     private ContextWrapper mContext;
     private ThemePreferenceController mPreferenceController;
     private PackageManager mMockPackageManager;
 
     @Before
     public void setup() {
-        mMockOverlayManager = mock(OverlayManager.class);
+        mMockOverlayManager = mock(OverlayManagerWrapper.class);
         mMockPackageManager = mock(PackageManager.class);
         mContext = new ContextWrapper(InstrumentationRegistry.getTargetContext()) {
             @Override
@@ -70,9 +69,9 @@ public class ThemePreferenceControllerTest {
     @Test
     public void testUpdateState() throws Exception {
         OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
-                "", OverlayInfo.STATE_ENABLED, 0);
+                "", "", OverlayInfo.STATE_ENABLED, 0);
         OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
-                "", 0, 0);
+                "", "", 0, 0);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
             if ("com.android.Theme1".equals(inv.getArguments()[0])) {
@@ -106,9 +105,9 @@ public class ThemePreferenceControllerTest {
     @Test
     public void testUpdateState_withStaticOverlay() throws Exception {
         OverlayInfo info1 = new OverlayInfo("com.android.Theme1", "android",
-                "", OverlayInfo.STATE_ENABLED, 0);
+                "", "", OverlayInfo.STATE_ENABLED, 0);
         OverlayInfo info2 = new OverlayInfo("com.android.Theme2", "android",
-                "", OverlayInfo.STATE_ENABLED, 0);
+                "", "", OverlayInfo.STATE_ENABLED, 0);
         when(mMockPackageManager.getApplicationInfo(any(), anyInt())).thenAnswer(inv -> {
             ApplicationInfo info = mock(ApplicationInfo.class);
             if ("com.android.Theme1".equals(inv.getArguments()[0])) {
@@ -146,7 +145,7 @@ public class ThemePreferenceControllerTest {
         when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
                 new PackageInfo());
         when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
-                .thenReturn(list(new OverlayInfo("", "", "", 0, 0)));
+                .thenReturn(list(new OverlayInfo("", "", "", "", 0, 0)));
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
@@ -155,15 +154,15 @@ public class ThemePreferenceControllerTest {
         when(mMockPackageManager.getPackageInfo(anyString(), anyInt())).thenReturn(
                  new PackageInfo());
         when(mMockOverlayManager.getOverlayInfosForTarget(any(), anyInt()))
-                .thenReturn(list(new OverlayInfo("", "", "", 0, 0),
-                        new OverlayInfo("", "", "", 0, 0)));
+                .thenReturn(list(new OverlayInfo("", "", "", "", 0, 0),
+                        new OverlayInfo("", "", "", "", 0, 0)));
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
-    private ArrayList<OverlayInfo> list(OverlayInfo... infos) {
-        ArrayList<OverlayInfo> list = new ArrayList<>();
-        for (int i = 0; i < infos.length; i++) {
-            list.add(infos[i]);
+    private ArrayList<OverlayManagerWrapper.OverlayInfo> list(OverlayInfo... infos) {
+        ArrayList<OverlayManagerWrapper.OverlayInfo> list = new ArrayList<>();
+        for (OverlayInfo info : infos) {
+            list.add(new OverlayManagerWrapper.OverlayInfo(info));
         }
         return list;
     }

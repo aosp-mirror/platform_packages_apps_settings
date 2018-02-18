@@ -59,6 +59,7 @@ import com.android.settings.Settings.WifiSettingsActivity;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.backup.BackupSettingsActivity;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.dashboard.DashboardSummary;
@@ -612,11 +613,10 @@ public class SettingsActivity extends SettingsDrawerActivity
      * @param fragmentClass Full name of the class implementing the fragment.
      * @param args          Any desired arguments to supply to the fragment.
      * @param titleRes      Optional resource identifier of the title of this fragment.
-     * @param titleText     Optional text of the title of this fragment.
      * @param userHandle    The user for which the panel has to be started.
      */
     public void startPreferencePanelAsUser(Fragment caller, String fragmentClass,
-            Bundle args, int titleRes, CharSequence titleText, UserHandle userHandle) {
+            Bundle args, int titleRes, UserHandle userHandle) {
         // This is a workaround.
         //
         // Calling startWithFragmentAsUser() without specifying FLAG_ACTIVITY_NEW_TASK to the intent
@@ -628,19 +628,17 @@ public class SettingsActivity extends SettingsDrawerActivity
         // another check here to call startPreferencePanel() instead of startWithFragmentAsUser()
         // when we're calling it as the same user.
         if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startPreferencePanel(caller, fragmentClass, args, titleRes, titleText, null, 0);
+            startPreferencePanel(caller, fragmentClass, args, titleRes, null /* titleText */,
+                    null, 0);
         } else {
-            String title = null;
-            if (titleRes < 0) {
-                if (titleText != null) {
-                    title = titleText.toString();
-                } else {
-                    // There not much we can do in that case
-                    title = "";
-                }
-            }
-            Utils.startWithFragmentAsUser(this, fragmentClass, args, titleRes, title,
-                    mIsShortcut, mMetricsFeatureProvider.getMetricsCategory(caller), userHandle);
+            new SubSettingLauncher(this)
+                    .setDestination(fragmentClass)
+                    .setArguments(args)
+                    .setTitle(titleRes)
+                    .setIsShortCut(mIsShortcut)
+                    .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(caller))
+                    .setUserHandle(userHandle)
+                    .launch();
         }
     }
 

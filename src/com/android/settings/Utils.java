@@ -23,9 +23,7 @@ import static android.text.format.DateUtils.FORMAT_SHOW_DATE;
 
 import android.annotation.Nullable;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.AppGlobals;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.IActivityManager;
 import android.app.KeyguardManager;
@@ -34,7 +32,6 @@ import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
@@ -52,9 +49,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
-import android.icu.text.RelativeDateTimeFormatter;
-import android.icu.text.RelativeDateTimeFormatter.RelativeUnit;
-import android.icu.util.ULocale;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
 import android.net.Network;
@@ -107,7 +101,6 @@ import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.FingerprintManagerWrapper;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
-import com.android.settingslib.utils.StringUtil;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -235,16 +228,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return formatIpAddresses(prop);
         }
         return null;
-    }
-
-    /**
-     * Returns the default link's IP addresses, if any, taking into account IPv4 and IPv6 style
-     * addresses.
-     * @return the formatted and newline-separated IP addresses, or null if none.
-     */
-    public static String getDefaultIpAddresses(ConnectivityManager cm) {
-        LinkProperties prop = cm.getActiveLinkProperties();
-        return formatIpAddresses(prop);
     }
 
     private static String formatIpAddresses(LinkProperties prop) {
@@ -400,23 +383,6 @@ public final class Utils extends com.android.settingslib.Utils {
         }
     }
 
-    /** Not global warming, it's global change warning. */
-    public static Dialog buildGlobalChangeWarningDialog(final Context context, int titleResId,
-            final Runnable positiveAction) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(titleResId);
-        builder.setMessage(R.string.global_change_warning);
-        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                positiveAction.run();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, null);
-
-        return builder.create();
-    }
-
     public static boolean hasMultipleUsers(Context context) {
         return ((UserManager) context.getSystemService(Context.USER_SERVICE))
                 .getUsers().size() > 1;
@@ -446,26 +412,6 @@ public final class Utils extends com.android.settingslib.Utils {
                 metricsCategory);
     }
 
-
-    /**
-     * Start a new instance of the activity, showing only the given fragment.
-     * When launched in this mode, the given preference fragment will be instantiated and fill the
-     * entire activity.
-     *
-     * @param context The context.
-     * @param fragmentName The name of the fragment to display.
-     * @param titleResId resource id for the String to display for the title of this set
-     *                   of preferences.
-     * @param metricsCategory The current metricsCategory for logging source when fragment starts
-     * @param intentFlags flag that should be added to the intent.
-     */
-    public static void startWithFragment(Context context, String fragmentName, int titleResId,
-            int metricsCategory, int intentFlags) {
-        startWithFragment(context, fragmentName, null, null, 0,
-                null /* titleResPackageName */, titleResId, null, false /* not a shortcut */,
-                metricsCategory, intentFlags);
-    }
-
     /**
      * Start a new instance of the activity, showing only the given fragment.
      * When launched in this mode, the given preference fragment will be instantiated and fill the
@@ -477,20 +423,11 @@ public final class Utils extends com.android.settingslib.Utils {
      * @param resultTo Option fragment that should receive the result of the activity launch.
      * @param resultRequestCode If resultTo is non-null, this is the request code in which
      *                          to report the result.
-     * @param titleResPackageName Optional package name for the resource id of the title.
      * @param titleResId resource id for the String to display for the title of this set
      *                   of preferences.
      * @param title String to display for the title of this set of preferences.
      * @param metricsCategory The current metricsCategory for logging source when fragment starts
      */
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, int metricsCategory) {
-        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, false /* not a shortcut */,
-                metricsCategory);
-    }
-
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, int titleResId,
             CharSequence title, boolean isShortcut, int metricsCategory) {
@@ -506,38 +443,13 @@ public final class Utils extends com.android.settingslib.Utils {
     public static void startWithFragment(Context context, String fragmentName, Bundle args,
             Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
             CharSequence title, boolean isShortcut, int metricsCategory) {
-        startWithFragment(context, fragmentName, args, resultTo, resultRequestCode,
-                titleResPackageName, titleResId, title, isShortcut, metricsCategory,
-                Intent.FLAG_ACTIVITY_NEW_TASK);
-    }
-
-
-    public static void startWithFragment(Context context, String fragmentName, Bundle args,
-            Fragment resultTo, int resultRequestCode, String titleResPackageName, int titleResId,
-            CharSequence title, boolean isShortcut, int metricsCategory, int flags) {
         Intent intent = onBuildStartFragmentIntent(context, fragmentName, args, titleResPackageName,
                 titleResId, title, isShortcut, metricsCategory);
-        intent.addFlags(flags);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (resultTo == null) {
             context.startActivity(intent);
         } else {
             resultTo.startActivityForResult(intent, resultRequestCode);
-        }
-    }
-
-    public static void startWithFragmentAsUser(Context context, String fragmentName, Bundle args,
-            int titleResId, CharSequence title, boolean isShortcut, int metricsCategory,
-            UserHandle userHandle) {
-        // workaround to avoid crash in b/17523189
-        if (userHandle.getIdentifier() == UserHandle.myUserId()) {
-            startWithFragment(context, fragmentName, args, null, 0, titleResId, title, isShortcut,
-                    metricsCategory);
-        } else {
-            Intent intent = onBuildStartFragmentIntent(context, fragmentName, args,
-                    null /* titleResPackageName */, titleResId, title, isShortcut, metricsCategory);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivityAsUser(intent, userHandle);
         }
     }
 

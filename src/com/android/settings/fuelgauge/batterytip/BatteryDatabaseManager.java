@@ -38,12 +38,24 @@ import java.util.List;
 
 /**
  * Database manager for battery data. Now it only contains anomaly data stored in {@link AppInfo}.
+ *
+ * This manager may be accessed by multi-threads. All the database related methods are synchronized
+ * so each operation won't be interfered by other threads.
  */
 public class BatteryDatabaseManager {
-    private final AnomalyDatabaseHelper mDatabaseHelper;
+    private static BatteryDatabaseManager sSingleton;
 
-    public BatteryDatabaseManager(Context context) {
+    private AnomalyDatabaseHelper mDatabaseHelper;
+
+    private BatteryDatabaseManager(Context context) {
         mDatabaseHelper = AnomalyDatabaseHelper.getInstance(context);
+    }
+
+    public static BatteryDatabaseManager getInstance(Context context) {
+        if (sSingleton == null) {
+            sSingleton = new BatteryDatabaseManager(context);
+        }
+        return sSingleton;
     }
 
     /**
@@ -53,7 +65,7 @@ public class BatteryDatabaseManager {
      * @param type        the type of the anomaly
      * @param timestampMs the time when it is happened
      */
-    public void insertAnomaly(String packageName, int type, long timestampMs) {
+    public synchronized void insertAnomaly(String packageName, int type, long timestampMs) {
         try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
             ContentValues values = new ContentValues();
             values.put(PACKAGE_NAME, packageName);
@@ -67,7 +79,7 @@ public class BatteryDatabaseManager {
     /**
      * Query all the anomalies that happened after {@code timestampMsAfter} and with {@code state}.
      */
-    public List<AppInfo> queryAllAnomalies(long timestampMsAfter, int state) {
+    public synchronized List<AppInfo> queryAllAnomalies(long timestampMsAfter, int state) {
         final List<AppInfo> appInfos = new ArrayList<>();
         try (SQLiteDatabase db = mDatabaseHelper.getReadableDatabase()) {
             final String[] projection = {PACKAGE_NAME, ANOMALY_TYPE};
@@ -90,7 +102,7 @@ public class BatteryDatabaseManager {
         return appInfos;
     }
 
-    public void deleteAllAnomaliesBeforeTimeStamp(long timestampMs) {
+    public synchronized void deleteAllAnomaliesBeforeTimeStamp(long timestampMs) {
         try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
             db.delete(TABLE_ANOMALY, TIME_STAMP_MS + " < ?",
                     new String[]{String.valueOf(timestampMs)});
@@ -103,7 +115,7 @@ public class BatteryDatabaseManager {
      * @param appInfos represents the anomalies
      * @param state    which state to update to
      */
-    public void updateAnomalies(List<AppInfo> appInfos, int state) {
+    public synchronized void updateAnomalies(List<AppInfo> appInfos, int state) {
         if (!appInfos.isEmpty()) {
             final int size = appInfos.size();
             final String[] whereArgs = new String[size];

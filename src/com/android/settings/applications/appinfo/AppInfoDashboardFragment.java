@@ -505,10 +505,12 @@ public class AppInfoDashboardFragment extends DashboardFragment
         mDisableAfterUninstall = andDisable;
     }
 
-    public static void startAppInfoFragment(Class<?> fragment, int title,
+    public static void startAppInfoFragment(Class<?> fragment, int title, Bundle args,
             SettingsPreferenceFragment caller, AppEntry appEntry) {
         // start new fragment to display extended information
-        final Bundle args = new Bundle();
+        if (args == null) {
+            args = new Bundle();
+        }
         args.putString(ARG_PACKAGE_NAME, appEntry.info.packageName);
         args.putInt(ARG_PACKAGE_UID, appEntry.info.uid);
 

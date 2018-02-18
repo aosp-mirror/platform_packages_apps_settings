@@ -16,27 +16,24 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.EmulateDisplayCutoutPreferenceController
-        .EMULATION_OVERLAY_PREFIX;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.om.IOverlayManager;
-import android.content.om.OverlayInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.ListPreference;
+import android.view.DisplayCutout;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wrapper.OverlayManagerWrapper;
+import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -51,17 +48,13 @@ import java.util.Arrays;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EmulateDisplayCutoutPreferenceControllerTest {
 
-    static final OverlayInfo ONE_DISABLED =
-            new FakeOverlay(EMULATION_OVERLAY_PREFIX + ".one", false);
-    static final OverlayInfo ONE_ENABLED =
-            new FakeOverlay(EMULATION_OVERLAY_PREFIX + ".one", true);
-    static final OverlayInfo TWO_DISABLED =
-            new FakeOverlay(EMULATION_OVERLAY_PREFIX + ".two", false);
-    static final OverlayInfo TWO_ENABLED =
-            new FakeOverlay(EMULATION_OVERLAY_PREFIX + ".two", true);
+    static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false);
+    static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true);
+    static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false);
+    static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true);
 
     @Mock Context mContext;
-    @Mock IOverlayManager mOverlayManager;
+    @Mock OverlayManagerWrapper mOverlayManager;
     @Mock PackageManager mPackageManager;
     @Mock ListPreference mPreference;
     EmulateDisplayCutoutPreferenceController mController;
@@ -101,7 +94,8 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
 
         mController.onPreferenceChange(null, TWO_DISABLED.packageName);
 
-        verify(mOverlayManager).setEnabled(eq(TWO_DISABLED.packageName), eq(true), anyInt());
+        verify(mOverlayManager).setEnabledExclusiveInCategory(
+                eq(TWO_DISABLED.packageName), anyInt());
     }
 
     @Test
@@ -138,7 +132,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchEnabled();
 
         verify(mPreference).setEnabled(true);
-        verify(mOverlayManager, never()).setEnabled(any(), eq(true), anyInt());
+        verify(mOverlayManager, never()).setEnabledExclusiveInCategory(any(), anyInt());
     }
 
     @Test
@@ -156,17 +150,7 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
                 mOverlayManager);
     }
 
-    private static class FakeOverlay extends OverlayInfo {
-        private final boolean mEnabled;
-
-        public FakeOverlay(String pkg, boolean enabled) {
-            super(pkg, "android", "/", 0, 0);
-            mEnabled = enabled;
-        }
-
-        @Override
-        public boolean isEnabled() {
-            return mEnabled;
-        }
+    private static OverlayInfo createFakeOverlay(String pkg, boolean enabled) {
+        return new OverlayInfo(pkg, DisplayCutout.EMULATION_OVERLAY_CATEGORY, enabled);
     }
 }

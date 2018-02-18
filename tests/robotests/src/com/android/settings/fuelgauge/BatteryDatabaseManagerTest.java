@@ -59,7 +59,7 @@ public class BatteryDatabaseManagerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mBatteryDatabaseManager = spy(new BatteryDatabaseManager(mContext));
+        mBatteryDatabaseManager = spy(BatteryDatabaseManager.getInstance(mContext));
     }
 
     @After

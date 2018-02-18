@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.appinfo;
 
+import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.ARG_PACKAGE_NAME;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
         .UNINSTALL_ALL_USERS_MENU;
 import static com.android.settings.applications.appinfo.AppInfoDashboardFragment.UNINSTALL_UPDATES;
@@ -23,6 +24,8 @@ import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -33,18 +36,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;
+import android.os.Bundle;
 import android.os.UserManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
@@ -57,6 +61,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -315,4 +320,37 @@ public final class AppInfoDashboardFragmentTest {
         verify(context).unregisterReceiver(mFragment.mPackageRemovedReceiver);
     }
 
+    @Test
+    public void startAppInfoFragment_noCrashOnNullArgs() {
+        final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
+        final SettingsActivity sa = mock (SettingsActivity.class);
+        when(caller.getActivity()).thenReturn(sa);
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = mock(ApplicationInfo.class);
+
+        AppInfoDashboardFragment.startAppInfoFragment(AppInfoDashboardFragment.class, 0, null,
+                caller, appEntry);
+    }
+
+    @Test
+    public void startAppInfoFragment_includesNewAndOldArgs() {
+        final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
+        final SettingsActivity sa = mock (SettingsActivity.class);
+        when(caller.getActivity()).thenReturn(sa);
+        final AppEntry appEntry = mock(AppEntry.class);
+        appEntry.info = mock(ApplicationInfo.class);
+
+        final Bundle bundle = new Bundle();
+        bundle.putString("test", "test");
+
+        AppInfoDashboardFragment.startAppInfoFragment(AppInfoDashboardFragment.class, 0, bundle,
+                caller, appEntry);
+
+        final ArgumentCaptor<Bundle> captor = ArgumentCaptor.forClass(Bundle.class);
+        verify(sa).startPreferencePanel(any(), anyString(), captor.capture(), anyInt(), any(),
+                any(), anyInt());
+
+        assertThat(captor.getValue().containsKey("test"));
+        assertThat(captor.getValue().containsKey(ARG_PACKAGE_NAME));
+    }
 }

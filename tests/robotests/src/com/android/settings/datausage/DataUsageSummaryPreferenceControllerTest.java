@@ -16,6 +16,9 @@
 
 package com.android.settings.datausage;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doReturn;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
@@ -68,8 +71,10 @@ public class DataUsageSummaryPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
 
+        doReturn("%1$s %2%s").when(mContext)
+            .getString(com.android.internal.R.string.fileSizeSuffix);
         mController = new DataUsageSummaryPreferenceController(
                 mContext,
                 mDataUsageController,

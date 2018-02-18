@@ -17,6 +17,7 @@
 package com.android.settings.applications.appinfo;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -58,7 +59,7 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), mPreferenceKey) && mDetailFragmenClass != null) {
             AppInfoDashboardFragment.startAppInfoFragment(
-                    mDetailFragmenClass, -1, mParent, mParent.getAppEntry());
+                    mDetailFragmenClass, -1, getArguments(), mParent, mParent.getAppEntry());
             return true;
         }
         return false;
@@ -74,6 +75,14 @@ public abstract class AppInfoPreferenceControllerBase extends BasePreferenceCont
      * @return the fragment to launch
      */
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
+        return null;
+    }
+
+    /**
+     * Gets any extras that should be passed to the fragment class when the preference is clicked.
+     * @return a bundle of extras to include in the launch intent
+     */
+    protected Bundle getArguments() {
         return null;
     }
 
