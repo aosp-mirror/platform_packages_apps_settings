@@ -28,7 +28,7 @@ import com.android.settings.R;
 import com.android.settings.SummaryPreference;
 import com.android.settingslib.utils.StringUtil;
 
-import libcore.util.Objects;
+import java.util.Objects;
 
 /**
  * Provides a summary of data usage.
@@ -51,7 +51,7 @@ public class DataUsageSummaryPreference extends SummaryPreference {
     }
 
     public void setLimitInfo(String text) {
-        if (!Objects.equal(text, mLimitInfoText)) {
+        if (!Objects.equals(text, mLimitInfoText)) {
             mLimitInfoText = text;
             notifyChanged();
         }
