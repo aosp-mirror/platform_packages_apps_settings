@@ -28,6 +28,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.applications.ProcStatsData.MemInfo;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         implements OnItemSelectedListener {
@@ -44,9 +46,9 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
     // smaller than the actual time selected instead of bumping up to 3 hours
     // beyond it.
     private static final long DURATION_QUANTUM = ProcessStats.COMMIT_PERIOD;
-    public  static long[] sDurations = new long[] {
-        3 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 6 * 60 *60 * 1000 - DURATION_QUANTUM / 2,
-        12 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 24 * 60 * 60 * 1000 - DURATION_QUANTUM / 2
+    public static long[] sDurations = new long[] {
+            3 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 6 * 60 * 60 * 1000 - DURATION_QUANTUM / 2,
+            12 * 60 * 60 * 1000 - DURATION_QUANTUM / 2, 24 * 60 * 60 * 1000 - DURATION_QUANTUM / 2
     };
     protected static int[] sDurationLabels = new int[] {
             R.string.menu_duration_3h, R.string.menu_duration_6h,
@@ -137,7 +139,11 @@ public abstract class ProcessStatsBase extends SettingsPreferenceFragment
         args.putDouble(ProcessStatsDetail.EXTRA_MAX_MEMORY_USAGE,
                 memInfo.usedWeight * memInfo.weightToRam);
         args.putDouble(ProcessStatsDetail.EXTRA_TOTAL_SCALE, memInfo.totalScale);
-        activity.startPreferencePanel(null, ProcessStatsDetail.class.getName(), args,
-                R.string.memory_usage, null, null, 0);
+        new SubSettingLauncher(activity)
+                .setDestination(ProcessStatsDetail.class.getName())
+                .setTitle(R.string.memory_usage)
+                .setArguments(args)
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .launch();
     }
 }

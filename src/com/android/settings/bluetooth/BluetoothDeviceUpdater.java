@@ -21,11 +21,12 @@ import android.os.Bundle;
 import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.GearPreference;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -38,8 +39,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import android.util.Log;
 
 /**
  * Update the bluetooth devices. It gets bluetooth event from {@link LocalBluetoothManager} using
@@ -73,10 +72,13 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
         final Bundle args = new Bundle();
         args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
                 device.getDevice().getAddress());
-        final SettingsActivity activity = (SettingsActivity) mFragment.getActivity();
-        activity.startPreferencePanel(mFragment,
-                BluetoothDeviceDetailsFragment.class.getName(), args,
-                R.string.device_details_title, null, null, 0);
+
+        new SubSettingLauncher(mFragment.getContext())
+                .setDestination(BluetoothDeviceDetailsFragment.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.device_details_title)
+                .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                .launch();
 
     };
 

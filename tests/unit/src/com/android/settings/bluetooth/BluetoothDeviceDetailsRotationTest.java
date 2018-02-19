@@ -29,8 +29,10 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -85,8 +87,12 @@ public class BluetoothDeviceDetailsRotationTest {
         SettingsActivity activity = (SettingsActivity) mInstrumentation.startActivitySync(intent);
         Bundle args = new Bundle(1);
         args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS, mDeviceAddress);
-        activity.startPreferencePanel(null, BluetoothDeviceDetailsFragment.class.getName(), args,
-               0, null, null, 0);
+        new SubSettingLauncher(activity)
+                .setDestination(BluetoothDeviceDetailsFragment.class.getName())
+                .setTitle("test")
+                .setArguments(args)
+                .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .launch();
         try {
             mUiDevice.setOrientationLeft();
             mUiDevice.setOrientationNatural();
