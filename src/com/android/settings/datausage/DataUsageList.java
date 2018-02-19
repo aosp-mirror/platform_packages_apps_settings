@@ -52,8 +52,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CycleAdapter.SpinnerInterface;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.AppItem;
@@ -61,6 +63,7 @@ import com.android.settingslib.net.ChartData;
 import com.android.settingslib.net.ChartDataLoader;
 import com.android.settingslib.net.SummaryForAllUidLoader;
 import com.android.settingslib.net.UidDetailProvider;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -149,8 +152,12 @@ public class DataUsageList extends DataUsageBase {
         mHeader.findViewById(R.id.filter_settings).setOnClickListener(btn -> {
             final Bundle args = new Bundle();
             args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
-            startFragment(DataUsageList.this, BillingCycleSettings.class.getName(),
-                    R.string.billing_cycle, 0, args);
+            new SubSettingLauncher(getContext())
+                    .setDestination(BillingCycleSettings.class.getName())
+                    .setTitle(R.string.billing_cycle)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .setArguments(args)
+                    .launch();
         });
         mCycleSpinner = mHeader.findViewById(R.id.filter_spinner);
         mCycleAdapter = new CycleAdapter(mCycleSpinner.getContext(), new SpinnerInterface() {
@@ -404,10 +411,16 @@ public class DataUsageList extends DataUsageBase {
     }
 
     private void startAppDataUsage(AppItem item) {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putParcelable(AppDataUsage.ARG_APP_ITEM, item);
         args.putParcelable(AppDataUsage.ARG_NETWORK_TEMPLATE, mTemplate);
-        startFragment(this, AppDataUsage.class.getName(), R.string.app_data_usage, 0, args);
+
+        new SubSettingLauncher(getContext())
+                .setDestination(AppDataUsage.class.getName())
+                .setTitle(R.string.app_data_usage)
+                .setArguments(args)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     /**

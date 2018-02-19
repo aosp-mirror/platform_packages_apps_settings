@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
@@ -31,6 +29,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.security.screenlock.ScreenLockSettings;
@@ -104,7 +103,10 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
     @Override
     public void onGearClick(GearPreference p) {
         if (TextUtils.equals(p.getKey(), getPreferenceKey())) {
-            mHost.startFragment(mHost, ScreenLockSettings.class.getName(), 0, 0, null);
+            new SubSettingLauncher(mContext)
+                    .setDestination(ScreenLockSettings.class.getName())
+                    .setSourceMetricsCategory(mHost.getMetricsCategory())
+                    .launch();
         }
     }
 
@@ -124,8 +126,12 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
                 return false;
             }
         }
-        mHost.startFragment(mHost, ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
-                R.string.lock_settings_picker_title, SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+
+        new SubSettingLauncher(mContext)
+                .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
+                .setTitle(R.string.lock_settings_picker_title)
+                .setSourceMetricsCategory(mHost.getMetricsCategory())
+                .launch();
         return true;
     }
 

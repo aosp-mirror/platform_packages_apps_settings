@@ -683,22 +683,4 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
         }
         getActivity().setResult(result);
     }
-
-    public boolean startFragment(Fragment caller, String fragmentClass, int titleRes,
-            int requestCode, Bundle extras) {
-        final Activity activity = getActivity();
-        if (activity instanceof SettingsActivity) {
-            SettingsActivity sa = (SettingsActivity) activity;
-            sa.startPreferencePanel(
-                    caller, fragmentClass, extras, titleRes, null, caller, requestCode);
-            return true;
-        } else {
-            Log.w(TAG,
-                    "Parent isn't SettingsActivity nor PreferenceActivity, thus there's no way to "
-                            + "launch the given Fragment (name: " + fragmentClass
-                            + ", requestCode: " + requestCode + ")");
-            return false;
-        }
-    }
-
 }
