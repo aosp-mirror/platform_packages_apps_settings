@@ -270,7 +270,7 @@ public class EntityHeaderControllerTest {
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setPackageName("123")
-                .setUid(UserHandle.USER_SYSTEM)
+                .setUid(123321)
                 .setHasAppInfoLink(true)
                 .setButtonActions(
                         EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,

@@ -101,6 +101,25 @@ public class SubSettingLauncher {
                     "This launcher has already been executed. Do not reuse");
         }
         mLaunched = true;
+
+        final Intent intent = toIntent();
+
+        boolean launchAsUser = mLaunchRequest.userHandle != null
+                && mLaunchRequest.userHandle.getIdentifier() != UserHandle.myUserId();
+        boolean launchForResult = mLaunchRequest.mResultListener != null;
+        if (launchAsUser && launchForResult) {
+            launchForResultAsUser(intent, mLaunchRequest.userHandle, mLaunchRequest.mResultListener,
+                    mLaunchRequest.mRequestCode);
+        } else if (launchAsUser && !launchForResult) {
+            launchAsUser(intent, mLaunchRequest.userHandle);
+        } else if (!launchAsUser && launchForResult) {
+            launchForResult(mLaunchRequest.mResultListener, intent, mLaunchRequest.mRequestCode);
+        } else {
+            launch(intent);
+        }
+    }
+
+    public Intent toIntent() {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClass(mContext, SubSettings.class);
         if (TextUtils.isEmpty(mLaunchRequest.destinationName)) {
@@ -123,15 +142,7 @@ public class SubSettingLauncher {
         intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT,
                 mLaunchRequest.isShortCut);
         intent.addFlags(mLaunchRequest.flags);
-
-        if (mLaunchRequest.userHandle != null
-                && mLaunchRequest.userHandle.getIdentifier() != UserHandle.myUserId()) {
-            launchAsUser(mContext, intent, mLaunchRequest.userHandle);
-        } else if (mLaunchRequest.mResultListener != null) {
-            launchForResult(mLaunchRequest.mResultListener, intent, mLaunchRequest.mRequestCode);
-        } else {
-            launch(intent);
-        }
+        return intent;
     }
 
     @VisibleForTesting
@@ -139,14 +150,21 @@ public class SubSettingLauncher {
         mContext.startActivity(intent);
     }
 
-    private static void launchForResult(Fragment listener, Intent intent, int requestCode) {
-        listener.getActivity().startActivityForResult(intent, requestCode);
-    }
-
-    private static void launchAsUser(Context context, Intent intent, UserHandle userHandle) {
+    @VisibleForTesting
+    void launchAsUser(Intent intent, UserHandle userHandle) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivityAsUser(intent, userHandle);
+        mContext.startActivityAsUser(intent, userHandle);
+    }
+
+    @VisibleForTesting
+    void launchForResultAsUser(Intent intent, UserHandle userHandle,
+            Fragment resultListener, int requestCode) {
+        resultListener.getActivity().startActivityForResultAsUser(intent, requestCode, userHandle);
+    }
+
+    private void launchForResult(Fragment listener, Intent intent, int requestCode) {
+        listener.getActivity().startActivityForResult(intent, requestCode);
     }
 
     /**

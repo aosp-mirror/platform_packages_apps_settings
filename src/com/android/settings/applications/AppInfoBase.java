@@ -43,8 +43,8 @@ import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
@@ -218,20 +218,18 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
 
     public static void startAppInfoFragment(Class<?> fragment, int titleRes,
             String pkg, int uid, Fragment source, int request, int sourceMetricsCategory) {
-        startAppInfoFragment(fragment, titleRes, pkg, uid, source.getActivity(), request,
-                sourceMetricsCategory);
-    }
-
-    public static void startAppInfoFragment(Class<?> fragment, int titleRes,
-            String pkg, int uid, Activity source, int request, int sourceMetricsCategory) {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkg);
         args.putInt(AppInfoBase.ARG_PACKAGE_UID, uid);
 
-        Intent intent = Utils.onBuildStartFragmentIntent(source, fragment.getName(),
-                args, null, titleRes, null, false, sourceMetricsCategory);
-        source.startActivityForResultAsUser(intent, request,
-                new UserHandle(UserHandle.getUserId(uid)));
+        new SubSettingLauncher(source.getContext())
+                .setDestination(fragment.getName())
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .setTitle(titleRes)
+                .setArguments(args)
+                .setUserHandle(new UserHandle(UserHandle.getUserId(uid)))
+                .setResultListener(source, request)
+                .launch();
     }
 
     public static class MyAlertDialogFragment extends InstrumentedDialogFragment {
