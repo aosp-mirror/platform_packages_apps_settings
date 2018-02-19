@@ -161,7 +161,7 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
         Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         SettingsActivity sa = (SettingsActivity)getActivity();
-        sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
+        sa.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 

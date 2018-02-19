@@ -67,7 +67,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wfd.WifiDisplaySettings;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.core.instrumentation.Instrumentable;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -558,34 +557,14 @@ public class SettingsActivity extends SettingsDrawerActivity
     /**
      * Called by a preference panel fragment to finish itself.
      *
-     * @param caller     The fragment that is asking to be finished.
      * @param resultCode Optional result code to send back to the original
      *                   launching fragment.
      * @param resultData Optional result data to send back to the original
      *                   launching fragment.
      */
-    public void finishPreferencePanel(Fragment caller, int resultCode, Intent resultData) {
+    public void finishPreferencePanel(int resultCode, Intent resultData) {
         setResult(resultCode, resultData);
         finish();
-    }
-
-    /**
-     * Start a new fragment.
-     *
-     * @param fragment The fragment to start
-     * @param push     If true, the current fragment will be pushed onto the back stack.  If false,
-     *                 the current fragment will be replaced.
-     */
-    public void startPreferenceFragment(Fragment fragment, boolean push) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_content, fragment);
-        if (push) {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            transaction.addToBackStack(BACK_STACK_PREFS);
-        } else {
-            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        }
-        transaction.commitAllowingStateLoss();
     }
 
     /**
