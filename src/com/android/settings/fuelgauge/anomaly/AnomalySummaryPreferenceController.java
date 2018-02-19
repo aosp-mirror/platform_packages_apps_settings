@@ -18,11 +18,11 @@ package com.android.settings.fuelgauge.anomaly;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageAnomalyDetails;
 
@@ -37,7 +37,7 @@ public class AnomalySummaryPreferenceController {
     public static final String ANOMALY_KEY = "high_usage";
 
     private static final int REQUEST_ANOMALY_ACTION = 0;
-    private PreferenceFragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     @VisibleForTesting
     Preference mAnomalyPreference;
     @VisibleForTesting
@@ -54,11 +54,11 @@ public class AnomalySummaryPreferenceController {
     private int mMetricsKey;
 
     public AnomalySummaryPreferenceController(SettingsActivity activity,
-            PreferenceFragment fragment, int metricsKey) {
+            InstrumentedPreferenceFragment fragment) {
         mFragment = fragment;
         mSettingsActivity = activity;
         mAnomalyPreference = mFragment.getPreferenceScreen().findPreference(ANOMALY_KEY);
-        mMetricsKey = metricsKey;
+        mMetricsKey = fragment.getMetricsCategory();
         mBatteryUtils = BatteryUtils.getInstance(activity.getApplicationContext());
         hideHighUsagePreference();
     }

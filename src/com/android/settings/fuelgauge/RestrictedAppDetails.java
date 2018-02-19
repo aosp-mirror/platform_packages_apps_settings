@@ -22,7 +22,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -33,6 +32,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.AppCheckBoxPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -61,13 +62,16 @@ public class RestrictedAppDetails extends DashboardFragment {
     PackageManager mPackageManager;
 
     public static void startRestrictedAppDetails(SettingsActivity caller,
-            PreferenceFragment fragment, List<AppOpsManager.PackageOps> packageOpsList) {
-        Bundle args = new Bundle();
+            InstrumentedPreferenceFragment fragment, List<AppOpsManager.PackageOps> packageOpsList) {
+        final Bundle args = new Bundle();
         args.putParcelableList(EXTRA_PACKAGE_OPS_LIST, packageOpsList);
 
-        caller.startPreferencePanelAsUser(fragment, RestrictedAppDetails.class.getName(), args,
-                R.string.restricted_app_title,
-                new UserHandle(UserHandle.myUserId()));
+        new SubSettingLauncher(caller)
+                .setDestination(RestrictedAppDetails.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.restricted_app_title)
+                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .launch();
     }
 
     @Override

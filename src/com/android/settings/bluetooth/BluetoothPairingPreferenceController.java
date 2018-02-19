@@ -17,13 +17,12 @@
 package com.android.settings.bluetooth;
 
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
-import android.os.UserHandle;
 
-import com.android.settings.SettingsActivity;
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.R;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 
@@ -35,15 +34,12 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
     private static final String TAG = "BluetoothPairingPrefCtrl";
 
     public static final String KEY_PAIRING = "pref_bt_pairing";
-    private PreferenceFragment mFragment;
-    private SettingsActivity mActivity;
+    private DashboardFragment mFragment;
     private Preference mPreference;
 
-    public BluetoothPairingPreferenceController(Context context, PreferenceFragment fragment,
-            SettingsActivity activity) {
+    public BluetoothPairingPreferenceController(Context context, DashboardFragment fragment) {
         super(context);
         mFragment = fragment;
-        mActivity = activity;
     }
 
     @Override
@@ -59,9 +55,12 @@ public class BluetoothPairingPreferenceController extends AbstractPreferenceCont
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_PAIRING.equals(preference.getKey())) {
-            mActivity.startPreferencePanelAsUser(mFragment, BluetoothPairingDetail.class.getName(),
-                    null, R.string.bluetooth_pairing_page_title,
-                    new UserHandle(UserHandle.myUserId()));
+            new SubSettingLauncher(mContext)
+                    .setDestination(BluetoothPairingDetail.class.getName())
+                    .setTitle(R.string.bluetooth_pairing_page_title)
+                    .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                    .launch();
+
             return true;
         }
 

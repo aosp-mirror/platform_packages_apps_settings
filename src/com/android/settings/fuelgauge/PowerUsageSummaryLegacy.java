@@ -243,7 +243,7 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this, MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
+                (SettingsActivity) getActivity(), this);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
         mAnomalySparseArray = new SparseArray<>();
 

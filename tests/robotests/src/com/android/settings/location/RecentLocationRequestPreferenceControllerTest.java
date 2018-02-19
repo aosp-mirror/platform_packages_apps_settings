@@ -15,8 +15,9 @@
  */
 package com.android.settings.location;
 
+import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
@@ -35,7 +36,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -47,6 +47,7 @@ import com.android.settingslib.location.RecentLocationApps.Request;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -163,8 +164,9 @@ public class RecentLocationRequestPreferenceControllerTest {
 
     @Test
     public void onPreferenceClick_shouldLaunchAppDetails() {
-        final SettingsActivity activity = mock(SettingsActivity.class);
-        when(mFragment.getActivity()).thenReturn(activity);
+        final Context context= mock(Context.class);
+        when(mFragment.getContext()).thenReturn(context);
+
         final List<RecentLocationApps.Request> requests = new ArrayList<>();
         final Request request = mock(Request.class);
         requests.add(request);
@@ -174,11 +176,14 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.updateState(mCategory);
 
+        final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
+
         preference.performClick();
 
-        verify(activity).startPreferencePanelAsUser(any(),
-            eq(AppInfoDashboardFragment.class.getName()),
-            any(Bundle.class), anyInt(), any());
+        verify(context).startActivity(intent.capture());
+
+        assertThat(intent.getValue().getStringExtra(EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(AppInfoDashboardFragment.class.getName());
     }
 
     private static ArgumentMatcher<Preference> titleMatches(String expected) {

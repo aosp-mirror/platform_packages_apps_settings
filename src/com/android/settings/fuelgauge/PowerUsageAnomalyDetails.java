@@ -21,7 +21,6 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.util.IconDrawableFactory;
@@ -31,6 +30,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -63,12 +64,16 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     IconDrawableFactory mIconDrawableFactory;
 
     public static void startBatteryAbnormalPage(SettingsActivity caller,
-            PreferenceFragment fragment, List<Anomaly> anomalies) {
+            InstrumentedPreferenceFragment fragment, List<Anomaly> anomalies) {
         Bundle args = new Bundle();
         args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
-        caller.startPreferencePanelAsUser(fragment, PowerUsageAnomalyDetails.class.getName(), args,
-                R.string.battery_abnormal_details_title, new UserHandle(UserHandle.myUserId()));
+        new SubSettingLauncher(caller)
+                .setDestination(PowerUsageAnomalyDetails.class.getName())
+                .setTitle(R.string.battery_abnormal_details_title)
+                .setArguments(args)
+                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .launch();
     }
 
     @Override

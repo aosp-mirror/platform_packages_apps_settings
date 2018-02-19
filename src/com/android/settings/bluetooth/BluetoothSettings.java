@@ -367,8 +367,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context, lifecycle);
-        mPairingPrefController = new BluetoothPairingPreferenceController(context, this,
-                (SettingsActivity) getActivity());
+        mPairingPrefController = new BluetoothPairingPreferenceController(context, this);
         controllers.add(mDeviceNamePrefController);
         controllers.add(mPairingPrefController);
         controllers.add(new BluetoothFilesPreferenceController(context));

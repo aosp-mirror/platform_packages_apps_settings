@@ -17,13 +17,11 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceGroup;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -36,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.core.FeatureFlags;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
@@ -66,7 +65,7 @@ public class BatteryAppListPreferenceControllerTest {
     @Mock
     private PreferenceGroup mAppListGroup;
     @Mock
-    private PreferenceFragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     @Mock
     private BatteryUtils mBatteryUtils;
 

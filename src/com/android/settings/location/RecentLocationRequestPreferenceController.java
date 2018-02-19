@@ -22,8 +22,8 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
@@ -57,10 +57,14 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
             // start new fragment to display extended information
             final Bundle args = new Bundle();
             args.putString(AppInfoDashboardFragment.ARG_PACKAGE_NAME, mPackage);
-            ((SettingsActivity) mFragment.getActivity()).startPreferencePanelAsUser(
-                mFragment,
-                AppInfoDashboardFragment.class.getName(), args,
-                R.string.application_info_label, mUserHandle);
+
+            new SubSettingLauncher(mFragment.getContext())
+                    .setDestination(AppInfoDashboardFragment.class.getName())
+                    .setArguments(args)
+                    .setTitle(R.string.application_info_label)
+                    .setUserHandle(mUserHandle)
+                    .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                    .launch();
             return true;
         }
     }

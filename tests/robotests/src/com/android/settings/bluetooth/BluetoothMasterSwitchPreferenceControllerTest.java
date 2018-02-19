@@ -22,13 +22,12 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -57,9 +56,7 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     @Mock
     private RestrictionUtils mRestrictionUtils;
     @Mock
-    private Fragment mFragment;
-    @Mock
-    private SettingsActivity mActivity;
+    private InstrumentedPreferenceFragment mFragment;
 
     private Context mContext;
     private BluetoothMasterSwitchPreferenceController mController;
@@ -72,7 +69,7 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mController = new BluetoothMasterSwitchPreferenceController(
-                mContext, mBluetoothManager, mRestrictionUtils, mFragment, mActivity);
+                mContext, mBluetoothManager, mRestrictionUtils, mFragment);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
     }
