@@ -67,14 +67,12 @@ public class LocationSettings extends DashboardFragment {
     private LocationSwitchBarController mSwitchBarController;
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public int getInitialExpandedChildCount() {
         final RecentLocationApps recentLocationApps = new RecentLocationApps(getActivity());
-        int locationRequestsApps = recentLocationApps.getAppList().size();
-        int locationRequestsPrefs = locationRequestsApps == 0 ? 1 : locationRequestsApps;
-        getPreferenceScreen().setInitialExpandedChildrenCount(locationRequestsPrefs + 2);
+        final int locationRequestsApps = recentLocationApps.getAppList().size();
+        final int locationRequestsPrefs = locationRequestsApps == 0 ? 1 : locationRequestsApps;
+        return locationRequestsPrefs + 2;
     }
-
 
     @Override
     public int getMetricsCategory() {
