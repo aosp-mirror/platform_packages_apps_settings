@@ -127,7 +127,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         holder.title.setText(suggestion.getTitle());
         holder.title.setSingleLine(suggestionCount == 1);
         holder.title.setTypeface(Typeface.create(
-            mContext.getString(com.android.internal.R.string.config_headlineFontFamilyMedium),
+            mContext.getString(com.android.internal.R.string.config_headlineFontFamily),
             Typeface.NORMAL));
 
         if (suggestionCount == 1) {
