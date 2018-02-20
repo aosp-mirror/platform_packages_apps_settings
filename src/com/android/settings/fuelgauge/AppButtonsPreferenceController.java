@@ -59,7 +59,6 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
-import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 
 import java.util.ArrayList;
@@ -434,7 +433,7 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
         }
         Intent intent = new Intent();
         intent.putExtra(APP_CHG, appChanged);
-        mActivity.finishPreferencePanel(mFragment, Activity.RESULT_OK, intent);
+        mActivity.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 

@@ -29,7 +29,7 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.ZenModeSettings;
 
 public class DndCondition extends Condition {
@@ -103,9 +103,12 @@ public class DndCondition extends Condition {
 
     @Override
     public void onPrimaryClick() {
-        Utils.startWithFragment(mManager.getContext(), ZenModeSettings.class.getName(), null,
-                null, 0, R.string.zen_mode_settings_title, null,
-                MetricsEvent.NOTIFICATION_ZEN_MODE);
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(ZenModeSettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.zen_mode_settings_title)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override

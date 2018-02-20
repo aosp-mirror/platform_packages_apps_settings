@@ -21,9 +21,8 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.localepicker.LocaleListEditor;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -72,9 +71,11 @@ public class PhoneLanguagePreferenceController extends AbstractPreferenceControl
         if (!KEY_PHONE_LANGUAGE.equals(preference.getKey())) {
             return false;
         }
-        Utils.startWithFragment(mContext, LocaleListEditor.class.getName(), null, null, 0,
-                R.string.pref_title_lang_selection, null,
-                MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY);
+        new SubSettingLauncher(mContext)
+                .setDestination(LocaleListEditor.class.getName())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.SETTINGS_LANGUAGE_CATEGORY)
+                .setTitle(R.string.pref_title_lang_selection)
+                .launch();
         return true;
     }
 

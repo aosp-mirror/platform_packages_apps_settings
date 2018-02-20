@@ -23,17 +23,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.inputmethod.UserDictionaryAddWordContents.LocaleRenderer;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Fragment to add a word/shortcut to the user dictionary.
@@ -41,9 +38,7 @@ import java.util.Locale;
  * As opposed to the UserDictionaryActivity, this is only invoked within Settings
  * from the UserDictionarySettings.
  */
-public class UserDictionaryAddWordFragment extends InstrumentedFragment
-        implements AdapterView.OnItemSelectedListener,
-        com.android.internal.app.LocalePicker.LocaleSelectionListener {
+public class UserDictionaryAddWordFragment extends InstrumentedFragment {
 
     private static final int OPTIONS_MENU_DELETE = Menu.FIRST;
 
@@ -135,31 +130,5 @@ public class UserDictionaryAddWordFragment extends InstrumentedFragment
         if (!mIsDeleting) {
             mContents.apply(getActivity(), null);
         }
-    }
-
-    @Override
-    public void onItemSelected(final AdapterView<?> parent, final View view, final int pos,
-            final long id) {
-        final LocaleRenderer locale = (LocaleRenderer)parent.getItemAtPosition(pos);
-        if (locale.isMoreLanguages()) {
-            SettingsActivity sa = (SettingsActivity)getActivity();
-            sa.startPreferenceFragment(new UserDictionaryLocalePicker(this), true);
-        } else {
-            mContents.updateLocale(locale.getLocaleString());
-        }
-    }
-
-    @Override
-    public void onNothingSelected(final AdapterView<?> parent) {
-        // I'm not sure we can come here, but if we do, that's the right thing to do.
-        final Bundle args = getArguments();
-        mContents.updateLocale(args.getString(UserDictionaryAddWordContents.EXTRA_LOCALE));
-    }
-
-    // Called by the locale picker
-    @Override
-    public void onLocaleSelected(final Locale locale) {
-        mContents.updateLocale(locale.toString());
-        getActivity().onBackPressed();
     }
 }
