@@ -18,12 +18,18 @@ package com.android.settings.core;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserHandle;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
@@ -34,6 +40,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -41,10 +49,16 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SubSettingLauncherTest {
 
+    @Mock
+    private Fragment mFragment;
+    @Mock
+    private Activity mActivity;
+
     private Context mContext;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
     }
 
@@ -92,5 +106,59 @@ public class SubSettingLauncherTest {
         assertThat(intent.getFlags()).isEqualTo(Intent.FLAG_ACTIVITY_NEW_TASK);
         assertThat(intent.getIntExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, -1))
                 .isEqualTo(123);
+    }
+
+    @Test
+    public void launch_hasRequestListener_shouldStartActivityForResult() {
+        final int requestCode = 123123;
+        when(mFragment.getActivity()).thenReturn(mActivity);
+
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        launcher.setTitle("123")
+                .setDestination(SubSettingLauncherTest.class.getName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setSourceMetricsCategory(123)
+                .setResultListener(mFragment, requestCode)
+                .launch();
+
+        verify(mActivity).startActivityForResult(any(Intent.class), eq(requestCode));
+    }
+
+    @Test
+    public void launch_hasUserHandle_shouldStartActivityAsUser() {
+        final UserHandle userHandle = new UserHandle(1234);
+
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        doNothing().when(launcher).launchAsUser(any(Intent.class), any(UserHandle.class));
+
+        launcher.setTitle("123")
+                .setDestination(SubSettingLauncherTest.class.getName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setSourceMetricsCategory(123)
+                .setUserHandle(userHandle)
+                .launch();
+
+        verify(launcher).launchAsUser(any(Intent.class), eq(userHandle));
+    }
+
+    @Test
+    public void launch_hasUserHandleAndRequestCode_shouldStartActivityForResultAsUser() {
+        final int requestCode = 123123;
+        final UserHandle userHandle = new UserHandle(1234);
+
+        final SubSettingLauncher launcher = spy(new SubSettingLauncher(mContext));
+        doNothing().when(launcher).launchForResultAsUser(
+                any(Intent.class), any(UserHandle.class), any(Fragment.class), anyInt());
+
+        launcher.setTitle("123")
+                .setDestination(SubSettingLauncherTest.class.getName())
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setSourceMetricsCategory(123)
+                .setUserHandle(userHandle)
+                .setResultListener(mFragment, requestCode)
+                .launch();
+
+        verify(launcher).launchForResultAsUser(any(Intent.class), eq(userHandle), eq(mFragment),
+                eq(requestCode));
     }
 }

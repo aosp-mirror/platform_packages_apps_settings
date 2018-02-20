@@ -389,39 +389,6 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
-     * Build an Intent to launch a new activity showing the selected fragment.
-     * The implementation constructs an Intent that re-launches the current activity with the
-     * appropriate arguments to display the fragment.
-     *
-     *
-     * @param context The Context.
-     * @param fragmentName The name of the fragment to display.
-     * @param args Optional arguments to supply to the fragment.
-     * @param titleResPackageName Optional package name for the resource id of the title.
-     * @param titleResId Optional title resource id to show for this item.
-     * @param title Optional title to show for this item.
-     * @param isShortcut  tell if this is a Launcher Shortcut or not
-     * @param sourceMetricsCategory The context (source) from which an action is performed
-     * @return Returns an Intent that can be launched to display the given
-     * fragment.
-     */
-    public static Intent onBuildStartFragmentIntent(Context context, String fragmentName,
-            Bundle args, String titleResPackageName, int titleResId, CharSequence title,
-            boolean isShortcut, int sourceMetricsCategory) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.setClass(context, SubSettings.class);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT, fragmentName);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS, args);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RES_PACKAGE_NAME,
-                titleResPackageName);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, titleResId);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE, title);
-        intent.putExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_AS_SHORTCUT, isShortcut);
-        intent.putExtra(VisibilityLoggerMixin.EXTRA_SOURCE_METRICS_CATEGORY, sourceMetricsCategory);
-        return intent;
-    }
-
-    /**
      * Returns the managed profile of the current user or {@code null} if none is found or a profile
      * exists but it is disabled.
      */

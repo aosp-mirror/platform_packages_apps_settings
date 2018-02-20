@@ -26,7 +26,7 @@ import android.util.AttributeSet;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.datausage.CellDataPreference.DataStateListener;
 
 public class BillingCyclePreference extends Preference implements TemplatePreference {
@@ -80,8 +80,12 @@ public class BillingCyclePreference extends Preference implements TemplatePrefer
     public Intent getIntent() {
         Bundle args = new Bundle();
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
-        return Utils.onBuildStartFragmentIntent(getContext(), BillingCycleSettings.class.getName(),
-                args, null, 0, getTitle(), false, MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+        return new SubSettingLauncher(getContext())
+                .setDestination(BillingCycleSettings.class.getName())
+                .setArguments(args)
+                .setTitle(getTitle())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
+                .toIntent();
     }
 
     private final DataStateListener mListener = new DataStateListener() {

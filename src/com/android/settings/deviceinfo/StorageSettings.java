@@ -47,7 +47,6 @@ import android.widget.Toast;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.dashboard.SummaryLoader;
@@ -232,10 +231,12 @@ public class StorageSettings extends SettingsPreferenceFragment implements Index
                 mHasLaunchedPrivateVolumeSettings = true;
                 final Bundle args = new Bundle();
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, VolumeInfo.ID_PRIVATE_INTERNAL);
-                Intent intent = Utils.onBuildStartFragmentIntent(getActivity(),
-                        StorageDashboardFragment.class.getName(), args, null,
-                        R.string.storage_settings, null, false, getMetricsCategory());
-                getActivity().startActivity(intent);
+                new SubSettingLauncher(getActivity())
+                        .setDestination(StorageDashboardFragment.class.getName())
+                        .setArguments(args)
+                        .setTitle(R.string.storage_settings)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .launch();
                 finish();
             }
         }
