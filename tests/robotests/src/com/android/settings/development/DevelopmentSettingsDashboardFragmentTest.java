@@ -118,6 +118,7 @@ public class DevelopmentSettingsDashboardFragmentTest {
         final Context appContext = RuntimeEnvironment.application;
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(appContext, true);
         mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(false);
 
         final List<String> nonIndexableKeys =
                 DevelopmentSettingsDashboardFragment.SEARCH_INDEX_DATA_PROVIDER

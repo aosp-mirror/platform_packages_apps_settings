@@ -22,7 +22,6 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -57,7 +56,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowUserManager;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = ShadowUtils.class)
@@ -84,24 +82,27 @@ public class BuildNumberPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final UserManager userManager =
-            (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+                (UserManager) mContext.getSystemService(Context.USER_SERVICE);
         mShadowUserManager = Shadows.shadowOf(userManager);
         mShadowUserManager.setIsAdminUser(true);
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController =
-            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
+                new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mContext, false);
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.DEVICE_PROVISIONED, 1);
     }
 
     @After
     public void tearDown() {
         ShadowUtils.reset();
         mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(false);
     }
 
     @Test
@@ -119,20 +120,36 @@ public class BuildNumberPreferenceControllerTest {
     }
 
     @Test
-    public void handlePrefTreeClick_notAdminUser_doNothing() {
+    public void handlePrefTreeClick_notAdminUser_notDemoUser_doNothing() {
         mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(false);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test
-    public void handlePrefTreeClick_deviceNotProvisioned_doNothing() {
-        final Context context = RuntimeEnvironment.application;
-        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 0);
+    public void handlePrefTreeClick_isAdminUser_notDemoUser_handleBuildNumberPref() {
+        mShadowUserManager.setIsAdminUser(true);
+        mShadowUserManager.setIsDemoUser(false);
 
-        mController =
-            new BuildNumberPreferenceController(context, mActivity, mFragment, mLifecycle);
-        ReflectionHelpers.setField(mController, "mContext", context);
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+    }
+
+    @Test
+    public void handlePrefTreeClick_notAdminUser_isDemoUser_handleBuildNumberPref() {
+        mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(true);
+
+        assertThat(mController.handlePreferenceTreeClick(mPreference)).isTrue();
+    }
+
+    @Test
+    public void handlePrefTreeClick_deviceNotProvisioned_doNothing() {
+        mShadowUserManager.setIsAdminUser(true);
+        mShadowUserManager.setIsDemoUser(false);
+
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_PROVISIONED,
+                0);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -142,26 +159,17 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void handlePrefTreeClick_isMonkeyRun_doNothing() {
-        final Context context = spy(RuntimeEnvironment.application);
-        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
         ShadowUtils.setIsUserAMonkey(true);
-        mController =
-            new BuildNumberPreferenceController(context, mActivity, mFragment, mLifecycle);
-
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test
     public void handlePrefTreeClick_userHasRestriction_doNothing() {
-        final Context context = spy(RuntimeEnvironment.application);
-        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
+        mShadowUserManager.setIsAdminUser(true);
+        mShadowUserManager.setIsDemoUser(false);
 
         mShadowUserManager.setUserRestriction(Process.myUserHandle(),
-            UserManager.DISALLOW_DEBUGGING_FEATURES, true);
-
-        mController =
-            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
-        ReflectionHelpers.setField(mController, "mContext", context);
+                UserManager.DISALLOW_DEBUGGING_FEATURES, true);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -197,7 +205,7 @@ public class BuildNumberPreferenceControllerTest {
                 .thenReturn(mock(DatabaseIndexingManager.class));
 
         mController =
-            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
+                new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
