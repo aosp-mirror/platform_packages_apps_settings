@@ -27,12 +27,16 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -55,6 +59,9 @@ public class HighlightablePreferenceGroupAdapterTest {
     private View mRoot;
     @Mock
     private PreferenceCategory mPreferenceCatetory;
+    @Mock
+    private SettingsPreferenceFragment mFragment;
+
     private Context mContext;
     private HighlightablePreferenceGroupAdapter mAdapter;
     private PreferenceViewHolder mViewHolder;
@@ -93,6 +100,57 @@ public class HighlightablePreferenceGroupAdapterTest {
         mAdapter.requestHighlight(mRoot, null /* recyclerView */);
 
         verifyZeroInteractions(mRoot);
+    }
+
+    @Test
+    public void adjustInitialExpandedChildCount_invalidInput_shouldNotadjust() {
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(null /* host */);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+        final Bundle args = new Bundle();
+        when(mFragment.getArguments()).thenReturn(args);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(mFragment.getArguments()).thenReturn(null);
+        when(mFragment.getPreferenceScreen()).thenReturn(screen);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+        verifyZeroInteractions(screen);
+    }
+
+    @Test
+    public void adjustInitialExpandedChildCount_hasHightlightKey_shouldExpandAllChildren() {
+        final Bundle args = new Bundle();
+        when(mFragment.getArguments()).thenReturn(args);
+        args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "testkey");
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(mFragment.getPreferenceScreen()).thenReturn(screen);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+
+        verify(screen).setInitialExpandedChildrenCount(Integer.MAX_VALUE);
+    }
+
+    @Test
+    public void adjustInitialExpandedChildCount_noKeyOrChildCountOverride_shouldDoNothing() {
+        final Bundle args = new Bundle();
+        when(mFragment.getArguments()).thenReturn(args);
+        when(mFragment.getInitialExpandedChildCount()).thenReturn(-1);
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(mFragment.getPreferenceScreen()).thenReturn(screen);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+
+        verify(mFragment).getInitialExpandedChildCount();
+        verifyZeroInteractions(screen);
+    }
+
+    @Test
+    public void adjustInitialExpandedChildCount_hasCountOverride_shouldDoNothing() {
+        when(mFragment.getInitialExpandedChildCount()).thenReturn(10);
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(mFragment.getPreferenceScreen()).thenReturn(screen);
+        HighlightablePreferenceGroupAdapter.adjustInitialExpandedChildCount(mFragment);
+
+        verify(mFragment).getInitialExpandedChildCount();
+
+        verify(screen).setInitialExpandedChildrenCount(10);
     }
 
     @Test
