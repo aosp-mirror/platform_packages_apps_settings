@@ -20,24 +20,39 @@
     android:id="@+id/instant_app_button_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="4dp"
-    android:paddingStart="8dp"
-    android:paddingEnd="8dp"
-    android:visibility="gone">
-    <Button
-        android:id="@+id/install"
-        style="@style/ActionPrimaryButton"
-        android:enabled="false"
+    android:gravity="center"
+    android:paddingTop="24dp"
+    android:paddingStart="68dp"
+    android:paddingEnd="24dp"
+    android:orientation="horizontal">
+
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/install_text"/>
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/install"
+            style="@style/ActionPrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/install_text"/>
+        <Button
+            android:id="@+id/launch"
+            style="@style/ActionPrimaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/launch_instant_app"/>
+    </FrameLayout>
+    <Space
+        android:layout_width="16dp"
+        android:layout_height="wrap_content" />
     <Button
         android:id="@+id/clear_data"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
         android:text="@string/clear_instant_app_data"/>
 </LinearLayout>

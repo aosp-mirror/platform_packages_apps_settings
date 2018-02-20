@@ -85,6 +85,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     @VisibleForTesting static final int UNINSTALL_ALL_USERS_MENU = 1;
     @VisibleForTesting static final int UNINSTALL_UPDATES = 2;
     static final int FORCE_STOP_MENU = 3;
+    static final int INSTALL_INSTANT_APP_MENU = 4;
 
     // Result code identifiers
     @VisibleForTesting
@@ -102,6 +103,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     static final int DLG_FORCE_STOP = DLG_BASE + 1;
     private static final int DLG_DISABLE = DLG_BASE + 2;
     private static final int DLG_SPECIAL_DISABLE = DLG_BASE + 3;
+    static final int DLG_CLEAR_INSTANT_APP = DLG_BASE + 4;
 
     private static final String KEY_ADVANCED_APP_INFO_CATEGORY = "advanced_app_info";
 
@@ -243,7 +245,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         // The following are controllers for preferences that don't need to refresh the preference
         // state when app state changes.
         mInstantAppButtonPreferenceController =
-                new InstantAppButtonsPreferenceController(context, this, packageName);
+                new InstantAppButtonsPreferenceController(context, this, packageName, lifecycle);
         controllers.add(mInstantAppButtonPreferenceController);
         controllers.add(new AppBatteryPreferenceController(context, this, packageName, lifecycle));
         controllers.add(new AppMemoryPreferenceController(context, this, lifecycle));
