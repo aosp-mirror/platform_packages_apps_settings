@@ -21,7 +21,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.IdRes;
 import android.support.annotation.IntDef;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
+import android.util.SparseIntArray;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -61,6 +63,20 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
         int LOW_BATTERY = 5;
         int SUMMARY = 6;
         int REMOVE_APP_RESTRICTION = 7;
+    }
+
+    @VisibleForTesting
+    static final SparseIntArray TIP_ORDER;
+    static {
+        TIP_ORDER = new SparseIntArray();
+        TIP_ORDER.append(TipType.APP_RESTRICTION, 0);
+        TIP_ORDER.append(TipType.BATTERY_SAVER, 1);
+        TIP_ORDER.append(TipType.HIGH_DEVICE_USAGE, 2);
+        TIP_ORDER.append(TipType.SUMMARY, 3);
+        TIP_ORDER.append(TipType.SMART_BATTERY_MANAGER, 4);
+        TIP_ORDER.append(TipType.REDUCED_BATTERY, 5);
+        TIP_ORDER.append(TipType.LOW_BATTERY, 6);
+        TIP_ORDER.append(TipType.REMOVE_APP_RESTRICTION, 7);
     }
 
     private static final String KEY_PREFIX = "key_battery_tip";
@@ -140,6 +156,6 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
 
     @Override
     public int compareTo(BatteryTip o) {
-        return mType - o.mType;
+        return TIP_ORDER.get(mType) - TIP_ORDER.get(o.mType);
     }
 }

@@ -50,12 +50,12 @@ import java.util.List;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipLoaderTest {
     private static final int[] TIP_ORDER = {
-            BatteryTip.TipType.SMART_BATTERY_MANAGER,
             BatteryTip.TipType.APP_RESTRICTION,
-            BatteryTip.TipType.HIGH_DEVICE_USAGE,
             BatteryTip.TipType.BATTERY_SAVER,
-            BatteryTip.TipType.LOW_BATTERY,
-            BatteryTip.TipType.SUMMARY};
+            BatteryTip.TipType.HIGH_DEVICE_USAGE,
+            BatteryTip.TipType.SUMMARY,
+            BatteryTip.TipType.SMART_BATTERY_MANAGER,
+            BatteryTip.TipType.LOW_BATTERY};
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
