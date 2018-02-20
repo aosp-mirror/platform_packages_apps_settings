@@ -16,21 +16,21 @@
 
 package com.android.settings.accessibility;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
 import android.view.Menu;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.search.actionbar.SearchMenuController;
 import com.android.settings.support.actionbar.HelpResourceProvider;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivity {
 
     private static final String SAVE_KEY_TITLE = "activity_title";
-
-    private boolean mSendExtraWindowStateChanged;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -53,12 +53,6 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mSendExtraWindowStateChanged = false;
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Return true, so we get notified when items in the menu are clicked.
         return true;
@@ -76,28 +70,20 @@ public class AccessibilitySettingsForSetupWizardActivity extends SettingsActivit
     }
 
     @Override
-    public void startPreferencePanel(Fragment caller, String fragmentClass, Bundle args,
-            int titleRes, CharSequence titleText, Fragment resultTo, int resultRequestCode) {
-        // Set the title.
-        if (!TextUtils.isEmpty(titleText)) {
-            setTitle(titleText);
-        } else if (titleRes > 0) {
-            setTitle(getString(titleRes));
+    public boolean onPreferenceStartFragment(PreferenceFragment caller, Preference pref) {
+        Bundle args = pref.getExtras();
+        if (args == null) {
+            args = new Bundle();
         }
-
-        // Start the new Fragment.
         args.putInt(HelpResourceProvider.HELP_URI_RESOURCE_KEY, 0);
         args.putBoolean(SearchMenuController.NEED_SEARCH_ICON_IN_ACTION_BAR, false);
-        startPreferenceFragment(Fragment.instantiate(this, fragmentClass, args), true);
-        mSendExtraWindowStateChanged = true;
-    }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        if (mSendExtraWindowStateChanged) {
-            // Clear accessibility focus and let the screen reader announce the new title.
-            getWindow().getDecorView()
-                    .sendAccessibilityEvent(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
-        }
+        new SubSettingLauncher(this)
+                .setDestination(pref.getFragment())
+                .setArguments(args)
+                .setSourceMetricsCategory(caller instanceof Instrumentable
+                        ? ((Instrumentable) caller).getMetricsCategory()
+                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .launch();
+        return true;
     }
 }

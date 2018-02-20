@@ -18,7 +18,6 @@ package com.android.settings.applications;
 
 import android.app.ActivityManager;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -41,8 +40,9 @@ import android.widget.TextView;
 
 import com.android.internal.util.MemInfoReader;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.widget.LinearColorBar;
 
 import java.util.ArrayList;
@@ -64,7 +64,7 @@ public class RunningProcessesView extends FrameLayout
 
     RunningState mState;
 
-    Fragment mOwner;
+    SettingsPreferenceFragment mOwner;
 
     Runnable mDataAvail;
 
@@ -411,9 +411,12 @@ public class RunningProcessesView extends FrameLayout
             args.putInt(RunningServiceDetails.KEY_USER_ID, mi.mUserId);
             args.putBoolean(RunningServiceDetails.KEY_BACKGROUND, mAdapter.mShowBackground);
 
-            SettingsActivity sa = (SettingsActivity) mOwner.getActivity();
-            sa.startPreferencePanel(mOwner, RunningServiceDetails.class.getName(), args,
-                    R.string.runningservicedetails_settings_title, null, null, 0);
+            new SubSettingLauncher(getContext())
+                    .setDestination(RunningServiceDetails.class.getName())
+                    .setArguments(args)
+                    .setTitle(R.string.runningservicedetails_settings_title)
+                    .setSourceMetricsCategory(mOwner.getMetricsCategory())
+                    .launch();
         }
     }
 
@@ -466,7 +469,7 @@ public class RunningProcessesView extends FrameLayout
         mOwner = null;
     }
 
-    public boolean doResume(Fragment owner, Runnable dataAvail) {
+    public boolean doResume(SettingsPreferenceFragment owner, Runnable dataAvail) {
         mOwner = owner;
         mState.resume(this);
         if (mState.hasData()) {

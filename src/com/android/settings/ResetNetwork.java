@@ -44,6 +44,7 @@ import android.widget.TextView;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -118,9 +119,12 @@ public class ResetNetwork extends InstrumentedFragment {
             args.putInt(PhoneConstants.SUBSCRIPTION_KEY, subscription.getSubscriptionId());
         }
         args.putBoolean(MasterClear.ERASE_ESIMS_EXTRA, mEsimCheckbox.isChecked());
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                this, ResetNetworkConfirm.class.getName(),
-                args, R.string.reset_network_confirm_title, null, null, 0);
+        new SubSettingLauncher(getContext())
+                .setDestination(ResetNetworkConfirm.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.reset_network_confirm_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     /**

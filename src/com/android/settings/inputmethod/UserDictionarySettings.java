@@ -42,9 +42,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.Instrumentable;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
@@ -187,10 +187,14 @@ public class UserDictionarySettings extends ListFragment implements Instrumentab
         args.putString(UserDictionaryAddWordContents.EXTRA_WORD, editingWord);
         args.putString(UserDictionaryAddWordContents.EXTRA_SHORTCUT, editingShortcut);
         args.putString(UserDictionaryAddWordContents.EXTRA_LOCALE, mLocale);
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(this,
-                com.android.settings.inputmethod.UserDictionaryAddWordFragment.class.getName(),
-                args, R.string.user_dict_settings_add_dialog_title, null, null, 0);
+
+        new SubSettingLauncher(getContext())
+                .setDestination(UserDictionaryAddWordFragment.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.user_dict_settings_add_dialog_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+
     }
 
     private String getWord(final int position) {

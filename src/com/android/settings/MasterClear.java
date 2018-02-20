@@ -56,6 +56,7 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -156,12 +157,15 @@ public class MasterClear extends InstrumentedFragment {
 
     @VisibleForTesting
     void showFinalConfirmation() {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putBoolean(ERASE_EXTERNAL_EXTRA, mExternalStorage.isChecked());
         args.putBoolean(ERASE_ESIMS_EXTRA, mEsimStorage.isChecked());
-        ((SettingsActivity) getActivity()).startPreferencePanel(
-                this, MasterClearConfirm.class.getName(),
-                args, R.string.master_clear_confirm_title, null, null, 0);
+        new SubSettingLauncher(getContext())
+                .setDestination(MasterClearConfirm.class.getName())
+                .setArguments(args)
+                .setTitle(R.string.master_clear_confirm_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     @VisibleForTesting

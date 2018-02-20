@@ -27,22 +27,21 @@ import android.widget.Button;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockSettingsHelper;
 
 /* Class to prompt for conversion of userdata to file based encryption
  */
 public class ConvertToFbe extends InstrumentedFragment {
     static final String TAG = "ConvertToFBE";
-    static final String CONVERT_FBE_EXTRA = "ConvertFBE";
     private static final int KEYGUARD_REQUEST = 55;
 
     private boolean runKeyguardConfirmation(int request) {
         Resources res = getActivity().getResources();
         return new ChooseLockSettingsHelper(getActivity(), this)
-            .launchConfirmationActivity(request,
-                                        res.getText(R.string.convert_to_file_encryption));
+                .launchConfirmationActivity(request,
+                        res.getText(R.string.convert_to_file_encryption));
     }
 
     @Override
@@ -53,15 +52,13 @@ public class ConvertToFbe extends InstrumentedFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.convert_fbe, null);
 
-        final Button button = (Button) rootView.findViewById(R.id.button_convert_fbe);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
-                    convert();
-                }
+        final Button button = rootView.findViewById(R.id.button_convert_fbe);
+        button.setOnClickListener(v -> {
+            if (!runKeyguardConfirmation(KEYGUARD_REQUEST)) {
+                convert();
             }
         });
 
@@ -84,9 +81,11 @@ public class ConvertToFbe extends InstrumentedFragment {
     }
 
     private void convert() {
-        SettingsActivity sa = (SettingsActivity) getActivity();
-        sa.startPreferencePanel(this, ConfirmConvertToFbe.class.getName(), null,
-                                R.string.convert_to_file_encryption, null, null, 0);
+        new SubSettingLauncher(getContext())
+                .setDestination(ConfirmConvertToFbe.class.getName())
+                .setTitle(R.string.convert_to_file_encryption)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
     }
 
     @Override

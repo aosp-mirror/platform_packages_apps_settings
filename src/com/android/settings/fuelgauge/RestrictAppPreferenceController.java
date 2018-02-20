@@ -20,13 +20,12 @@ package com.android.settings.fuelgauge;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     private AppOpsManager mAppOpsManager;
     private List<AppOpsManager.PackageOps> mPackageOps;
     private SettingsActivity mSettingsActivity;
-    private PreferenceFragment mPreferenceFragment;
+    private InstrumentedPreferenceFragment mPreferenceFragment;
 
     public RestrictAppPreferenceController(Context context) {
         super(context, KEY_RESTRICT_APP);
@@ -48,7 +47,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     }
 
     public RestrictAppPreferenceController(SettingsActivity settingsActivity,
-            PreferenceFragment preferenceFragment) {
+            InstrumentedPreferenceFragment preferenceFragment) {
         this(settingsActivity.getApplicationContext());
         mSettingsActivity = settingsActivity;
         mPreferenceFragment = preferenceFragment;

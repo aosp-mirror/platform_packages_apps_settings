@@ -30,7 +30,6 @@ import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.Log;
@@ -44,6 +43,8 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDialogFragment;
@@ -74,7 +75,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         LoaderManager.LoaderCallbacks<List<Anomaly>>,
         BatteryTipPreferenceController.BatteryTipListener {
 
-    public static final String TAG = "AdvancedPowerUsageDetail";
+    public static final String TAG = "AdvancedPowerDetail";
     public static final String EXTRA_UID = "extra_uid";
     public static final String EXTRA_PACKAGE_NAME = "extra_package_name";
     public static final String EXTRA_FOREGROUND_TIME = "extra_foreground_time";
@@ -122,9 +123,9 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     private String mPackageName;
 
     @VisibleForTesting
-    static void startBatteryDetailPage(SettingsActivity caller, BatteryUtils batteryUtils,
-            PreferenceFragment fragment, BatteryStatsHelper helper, int which, BatteryEntry entry,
-            String usagePercent, List<Anomaly> anomalies) {
+    static void startBatteryDetailPage(Activity caller, BatteryUtils batteryUtils,
+            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
+            BatteryEntry entry, String usagePercent, List<Anomaly> anomalies) {
         // Initialize mStats if necessary.
         helper.getStats();
 
@@ -157,9 +158,13 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         args.putInt(EXTRA_POWER_USAGE_AMOUNT, (int) sipper.totalPowerMah);
         args.putParcelableList(EXTRA_ANOMALY_LIST, anomalies);
 
-        caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title,
-                new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)));
+        new SubSettingLauncher(caller)
+                .setDestination(AdvancedPowerUsageDetail.class.getName())
+                .setTitle(R.string.battery_details_title)
+                .setArguments(args)
+                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .setUserHandle(new UserHandle(getUserIdToLaunchAdvancePowerUsageDetail(sipper)))
+                .launch();
     }
 
     private static @UserIdInt int getUserIdToLaunchAdvancePowerUsageDetail(BatterySipper bs) {
@@ -169,15 +174,15 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
         return UserHandle.getUserId(bs.getUid());
     }
 
-    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
-            BatteryStatsHelper helper, int which, BatteryEntry entry, String usagePercent,
-            List<Anomaly> anomalies) {
+    public static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, BatteryStatsHelper helper, int which,
+            BatteryEntry entry, String usagePercent, List<Anomaly> anomalies) {
         startBatteryDetailPage(caller, BatteryUtils.getInstance(caller), fragment, helper, which,
                 entry, usagePercent, anomalies);
     }
 
-    public static void startBatteryDetailPage(SettingsActivity caller, PreferenceFragment fragment,
-            String packageName) {
+    public static void startBatteryDetailPage(Activity caller,
+            InstrumentedPreferenceFragment fragment, String packageName) {
         final Bundle args = new Bundle(3);
         final PackageManager packageManager = caller.getPackageManager();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -188,8 +193,12 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
             Log.e(TAG, "Cannot find package: " + packageName, e);
         }
 
-        caller.startPreferencePanelAsUser(fragment, AdvancedPowerUsageDetail.class.getName(), args,
-                R.string.battery_details_title, new UserHandle(UserHandle.myUserId()));
+        new SubSettingLauncher(caller)
+                .setDestination(AdvancedPowerUsageDetail.class.getName())
+                .setTitle(R.string.battery_details_title)
+                .setArguments(args)
+                .setSourceMetricsCategory(fragment.getMetricsCategory())
+                .launch();
     }
 
     @Override
@@ -210,7 +219,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
 
         mPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this, MetricsEvent.FUELGAUGE_POWER_USAGE_DETAIL);
+                (SettingsActivity) getActivity(), this);
         mForegroundPreference = findPreference(KEY_PREF_FOREGROUND);
         mBackgroundPreference = findPreference(KEY_PREF_BACKGROUND);
         mPowerUsagePreference = findPreference(KEY_PREF_POWER_USAGE);

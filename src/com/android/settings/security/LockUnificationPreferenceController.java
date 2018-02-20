@@ -16,7 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
 import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
 import static com.android.settings.security.SecuritySettings.UNIFY_LOCK_CONFIRM_PROFILE_REQUEST;
 import static com.android.settings.security.SecuritySettings.UNUNIFY_LOCK_CONFIRM_DEVICE_REQUEST;
@@ -35,6 +34,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -153,12 +153,14 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     }
 
     private void ununifyLocks() {
-        Bundle extras = new Bundle();
+        final Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-        mHost.startFragment(mHost,
-                ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
-                R.string.lock_settings_picker_title_profile,
-                SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
+        new SubSettingLauncher(mContext)
+                .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
+                    .setTitle(R.string.lock_settings_picker_title_profile)
+                .setSourceMetricsCategory(mHost.getMetricsCategory())
+                .setArguments(extras)
+                .launch();
     }
 
     void launchConfirmDeviceLockForUnification() {
@@ -209,9 +211,11 @@ public class LockUnificationPreferenceController extends AbstractPreferenceContr
     void unifyUncompliantLocks() {
         mLockPatternUtils.setSeparateProfileChallengeEnabled(mProfileChallengeUserId, false,
                 mCurrentProfilePassword);
-        mHost.startFragment(mHost, ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
-                R.string.lock_settings_picker_title,
-                SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST, null);
+        new SubSettingLauncher(mContext)
+                .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
+                .setTitle(R.string.lock_settings_picker_title)
+                .setSourceMetricsCategory(mHost.getMetricsCategory())
+                .launch();
     }
 
 }

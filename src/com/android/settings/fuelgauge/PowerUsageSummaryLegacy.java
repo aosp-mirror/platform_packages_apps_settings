@@ -54,6 +54,7 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.AmbientDisplayPreferenceController;
 import com.android.settings.display.AutoBrightnessPreferenceController;
@@ -242,7 +243,7 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                 KEY_TIME_SINCE_LAST_FULL_CHARGE);
         mFooterPreferenceMixin.createFooterPreference().setTitle(R.string.battery_footer_summary);
         mAnomalySummaryPreferenceController = new AnomalySummaryPreferenceController(
-                (SettingsActivity) getActivity(), this, MetricsEvent.FUELGAUGE_POWER_USAGE_SUMMARY);
+                (SettingsActivity) getActivity(), this);
         mBatteryUtils = BatteryUtils.getInstance(getContext());
         mAnomalySparseArray = new SparseArray<>();
 
@@ -365,8 +366,12 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                 Bundle args = new Bundle();
                 args.putString(ManageApplications.EXTRA_CLASSNAME,
                         HighPowerApplicationsActivity.class.getName());
-                sa.startPreferencePanel(this, ManageApplications.class.getName(), args,
-                        R.string.high_power_apps, null, null, 0);
+                new SubSettingLauncher(context)
+                        .setDestination(ManageApplications.class.getName())
+                        .setArguments(args)
+                        .setTitle(R.string.high_power_apps)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .launch();
                 metricsFeatureProvider.action(context,
                         MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
                 return true;

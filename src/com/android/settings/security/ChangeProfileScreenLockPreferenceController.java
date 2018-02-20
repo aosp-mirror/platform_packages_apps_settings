@@ -16,8 +16,6 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.SecuritySettings.SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE;
-
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +26,7 @@ import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.password.ChooseLockGeneric;
 
 public class ChangeProfileScreenLockPreferenceController extends
@@ -76,9 +75,13 @@ public class ChangeProfileScreenLockPreferenceController extends
         }
         final Bundle extras = new Bundle();
         extras.putInt(Intent.EXTRA_USER_ID, mProfileChallengeUserId);
-        mHost.startFragment(mHost, ChooseLockGeneric.ChooseLockGenericFragment.class.getName(),
-                R.string.lock_settings_picker_title_profile,
-                SET_OR_CHANGE_LOCK_METHOD_REQUEST_PROFILE, extras);
+        new SubSettingLauncher(mContext)
+                .setDestination(ChooseLockGeneric.ChooseLockGenericFragment.class.getName())
+                .setTitle(R.string.lock_settings_picker_title_profile)
+                .setSourceMetricsCategory(mHost.getMetricsCategory())
+                .setArguments(extras)
+                .launch();
+
         return true;
     }
 

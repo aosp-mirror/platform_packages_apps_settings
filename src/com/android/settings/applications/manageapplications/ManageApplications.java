@@ -78,18 +78,18 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.AppStateAppOpsBridge.PermissionState;
 import com.android.settings.applications.AppStateBaseBridge;
+import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateInstallAppsBridge;
 import com.android.settings.applications.AppStateNotificationBridge;
 import com.android.settings.applications.AppStateOverlayBridge;
 import com.android.settings.applications.AppStatePowerBridge;
-import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateUsageBridge.UsageState;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
 import com.android.settings.applications.AppStorageSettings;
 import com.android.settings.applications.DefaultAppSettings;
-import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.DirectoryAccessDetails;
+import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.applications.UsageAccessDetails;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.applications.appinfo.AppNotificationPreferenceController;
@@ -97,6 +97,7 @@ import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
 import com.android.settings.notification.AppNotificationSettings;
@@ -628,14 +629,19 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return true;
             case R.id.advanced:
                 if (mListType == LIST_TYPE_NOTIFICATION) {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                            ConfigureNotificationSettings.class.getName(), null,
-                            R.string.configure_notification_settings, null, this,
-                            ADVANCED_SETTINGS);
+                    new SubSettingLauncher(getContext())
+                            .setDestination(ConfigureNotificationSettings.class.getName())
+                            .setTitle(R.string.configure_notification_settings)
+                            .setSourceMetricsCategory(getMetricsCategory())
+                            .setResultListener(this, ADVANCED_SETTINGS)
+                            .launch();
                 } else {
-                    ((SettingsActivity) getActivity()).startPreferencePanel(this,
-                            DefaultAppSettings.class.getName(), null, R.string.configure_apps,
-                            null, this, ADVANCED_SETTINGS);
+                    new SubSettingLauncher(getContext())
+                            .setDestination(DefaultAppSettings.class.getName())
+                            .setTitle(R.string.configure_apps)
+                            .setSourceMetricsCategory(getMetricsCategory())
+                            .setResultListener(this, ADVANCED_SETTINGS)
+                            .launch();
                 }
                 return true;
             default:

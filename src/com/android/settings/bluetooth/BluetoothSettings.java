@@ -39,6 +39,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.LinkifyUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.overlay.FeatureFactory;
@@ -248,11 +249,11 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             LinkifyUtils.linkify(emptyView, contentBuilder, new LinkifyUtils.OnClickListener() {
                 @Override
                 public void onClick() {
-                    final SettingsActivity activity =
-                            (SettingsActivity) BluetoothSettings.this.getActivity();
-                    activity.startPreferencePanel(BluetoothSettings.this,
-                            ScanningSettings.class.getName(), null,
-                            R.string.location_scanning_screen_title, null, null, 0);
+                    new SubSettingLauncher(getActivity())
+                            .setSourceMetricsCategory(getMetricsCategory())
+                            .setDestination(ScanningSettings.class.getName())
+                            .setTitle(R.string.location_scanning_screen_title)
+                            .launch();
                 }
             });
         }
@@ -322,11 +323,12 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
             // New version - uses a separate screen.
             args.putString(BluetoothDeviceDetailsFragment.KEY_DEVICE_ADDRESS,
                     device.getDevice().getAddress());
-            final SettingsActivity activity =
-                    (SettingsActivity) BluetoothSettings.this.getActivity();
-            activity.startPreferencePanel(this,
-                    BluetoothDeviceDetailsFragment.class.getName(), args,
-                    R.string.device_details_title, null, null, 0);
+            new SubSettingLauncher(context)
+                    .setDestination(BluetoothDeviceDetailsFragment.class.getName())
+                    .setArguments(args)
+                    .setTitle(R.string.device_details_title)
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .launch();
         }
     };
 
@@ -365,8 +367,7 @@ public class BluetoothSettings extends DeviceListPreferenceFragment implements I
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Lifecycle lifecycle = getLifecycle();
         mDeviceNamePrefController = new BluetoothDeviceNamePreferenceController(context, lifecycle);
-        mPairingPrefController = new BluetoothPairingPreferenceController(context, this,
-                (SettingsActivity) getActivity());
+        mPairingPrefController = new BluetoothPairingPreferenceController(context, this);
         controllers.add(mDeviceNamePrefController);
         controllers.add(mPairingPrefController);
         controllers.add(new BluetoothFilesPreferenceController(context));

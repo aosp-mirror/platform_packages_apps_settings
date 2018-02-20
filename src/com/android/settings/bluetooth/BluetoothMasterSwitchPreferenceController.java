@@ -15,17 +15,16 @@
  */
 package com.android.settings.bluetooth;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -50,27 +49,22 @@ public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenc
     private BluetoothEnabler mBluetoothEnabler;
     private BluetoothSummaryUpdater mSummaryUpdater;
     private RestrictionUtils mRestrictionUtils;
-    private Fragment mFragment;
-    private SettingsActivity mActivity;
-    private BluetoothFeatureProvider mBluetoothFeatureProvider;
+    private InstrumentedPreferenceFragment mFragment;
 
     public BluetoothMasterSwitchPreferenceController(Context context,
-            LocalBluetoothManager bluetoothManager, Fragment fragment, SettingsActivity activity) {
-        this(context, bluetoothManager, new RestrictionUtils(), fragment, activity);
+            LocalBluetoothManager bluetoothManager, InstrumentedPreferenceFragment fragment) {
+        this(context, bluetoothManager, new RestrictionUtils(), fragment);
     }
 
     @VisibleForTesting
     public BluetoothMasterSwitchPreferenceController(Context context,
             LocalBluetoothManager bluetoothManager, RestrictionUtils restrictionUtils,
-            Fragment fragment, SettingsActivity activity) {
+            InstrumentedPreferenceFragment fragment) {
         super(context);
         mBluetoothManager = bluetoothManager;
         mSummaryUpdater = new BluetoothSummaryUpdater(mContext, this, mBluetoothManager);
         mRestrictionUtils = restrictionUtils;
         mFragment = fragment;
-        mActivity = activity;
-        mBluetoothFeatureProvider = FeatureFactory.getFactory(
-                mContext).getBluetoothFeatureProvider(mContext);
     }
 
     @Override
@@ -87,8 +81,11 @@ public class BluetoothMasterSwitchPreferenceController extends AbstractPreferenc
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (KEY_TOGGLE_BLUETOOTH.equals(preference.getKey())) {
-            mActivity.startPreferencePanelAsUser(mFragment, BluetoothSettings.class.getName(), null,
-                    R.string.bluetooth, new UserHandle(UserHandle.myUserId()));
+            new SubSettingLauncher(mContext)
+                    .setDestination(BluetoothSettings.class.getName())
+                    .setTitle(R.string.bluetooth)
+                    .setSourceMetricsCategory(mFragment.getMetricsCategory())
+                    .launch();
             return true;
         }
         return super.handlePreferenceTreeClick(preference);

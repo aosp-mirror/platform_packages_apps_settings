@@ -57,6 +57,7 @@ import com.android.settings.Settings.StorageUseActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.deviceinfo.StorageSettings.MountTask;
 import com.android.settingslib.deviceinfo.StorageMeasurement;
@@ -430,13 +431,21 @@ public class PrivateVolumeSettings extends SettingsPreferenceFragment {
                 return true;
             case R.id.storage_unmount:
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
-                startFragment(this, PrivateVolumeUnmount.class.getCanonicalName(),
-                        R.string.storage_menu_unmount, 0, args);
+                new SubSettingLauncher(context)
+                        .setDestination(PrivateVolumeUnmount.class.getCanonicalName())
+                        .setTitle(R.string.storage_menu_unmount)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setArguments(args)
+                        .launch();
                 return true;
             case R.id.storage_format:
                 args.putString(VolumeInfo.EXTRA_VOLUME_ID, mVolume.getId());
-                startFragment(this, PrivateVolumeFormat.class.getCanonicalName(),
-                        R.string.storage_menu_format, 0, args);
+                new SubSettingLauncher(context)
+                        .setDestination(PrivateVolumeFormat.class.getCanonicalName())
+                        .setTitle(R.string.storage_menu_format)
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setArguments(args)
+                        .launch();
                 return true;
             case R.id.storage_migrate:
                 final Intent intent = new Intent(context, StorageWizardMigrateConfirm.class);

@@ -16,18 +16,16 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -38,6 +36,7 @@ import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -117,12 +116,13 @@ public class BluetoothDeviceUpdaterTest {
 
     @Test
     public void testDeviceProfilesListener_click_startBluetoothDeviceDetailPage() {
-        doReturn(mSettingsActivity).when(mDashboardFragment).getActivity();
+        doReturn(mSettingsActivity).when(mDashboardFragment).getContext();
 
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mBluetoothDeviceUpdater.mDeviceProfilesListener.onGearClick(mPreference);
 
-        verify(mSettingsActivity).startPreferencePanel(eq(mDashboardFragment),
-                eq(BluetoothDeviceDetailsFragment.class.getName()), any(),
-                eq(R.string.device_details_title), eq(null), eq(null), eq(0));
+        verify(mSettingsActivity).startActivity(intentCaptor.capture());
+        assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(BluetoothDeviceDetailsFragment.class.getName());
     }
 }

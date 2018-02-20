@@ -17,11 +17,12 @@
 package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.Fragment;
-import android.os.UserHandle;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.SmartBatterySettings;
+import com.android.settingslib.core.instrumentation.Instrumentable;
 
 public class SmartBatteryAction extends BatteryTipAction {
     private SettingsActivity mSettingsActivity;
@@ -38,9 +39,13 @@ public class SmartBatteryAction extends BatteryTipAction {
      */
     @Override
     public void handlePositiveAction() {
-        mSettingsActivity.startPreferencePanelAsUser(mFragment,
-                SmartBatterySettings.class.getName(), null /* args */,
-                R.string.smart_battery_manager_title,
-                new UserHandle(UserHandle.myUserId()));
+        new SubSettingLauncher(mSettingsActivity)
+                .setSourceMetricsCategory(mFragment instanceof Instrumentable
+                        ? ((Instrumentable) mFragment).getMetricsCategory()
+                        : Instrumentable.METRICS_CATEGORY_UNKNOWN)
+                .setDestination(SmartBatterySettings.class.getName())
+                .setTitle(R.string.smart_battery_manager_title)
+                .launch();
+
     }
 }
