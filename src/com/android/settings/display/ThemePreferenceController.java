@@ -33,10 +33,9 @@ import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
-import libcore.util.Objects;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.android.internal.logging.nano.MetricsProto.MetricsEvent.ACTION_THEME;
 
@@ -111,7 +110,7 @@ public class ThemePreferenceController extends AbstractPreferenceController impl
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String current = getTheme();
-        if (Objects.equal(newValue, current)) {
+        if (Objects.equals(newValue, current)) {
             return true;
         }
         mOverlayService.setEnabledExclusiveInCategory((String) newValue, UserHandle.myUserId());
