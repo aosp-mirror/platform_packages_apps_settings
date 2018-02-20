@@ -550,45 +550,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return null;
     }
 
-    /**
-     * Returns the target user for a Settings activity.
-     *
-     * The target user can be either the current user, the user that launched this activity or
-     * the user contained as an extra in the arguments or intent extras.
-     *
-     * You should use {@link #getSecureTargetUser(IBinder, UserManager, Bundle, Bundle)} if
-     * possible.
-     *
-     * @see #getInsecureTargetUser(IBinder, Bundle, Bundle)
-     */
-   public static UserHandle getInsecureTargetUser(IBinder activityToken, @Nullable Bundle arguments,
-           @Nullable Bundle intentExtras) {
-       UserHandle currentUser = new UserHandle(UserHandle.myUserId());
-       IActivityManager am = ActivityManager.getService();
-       try {
-           UserHandle launchedFromUser = new UserHandle(UserHandle.getUserId(
-                   am.getLaunchedFromUid(activityToken)));
-           if (launchedFromUser != null && !launchedFromUser.equals(currentUser)) {
-               return launchedFromUser;
-           }
-           UserHandle extrasUser = intentExtras != null
-                   ? (UserHandle) intentExtras.getParcelable(EXTRA_USER) : null;
-           if (extrasUser != null && !extrasUser.equals(currentUser)) {
-               return extrasUser;
-           }
-           UserHandle argumentsUser = arguments != null
-                   ? (UserHandle) arguments.getParcelable(EXTRA_USER) : null;
-           if (argumentsUser != null && !argumentsUser.equals(currentUser)) {
-               return argumentsUser;
-           }
-       } catch (RemoteException e) {
-           // Should not happen
-           Log.v(TAG, "Could not talk to activity manager.", e);
-           return null;
-       }
-       return currentUser;
-   }
-
    /**
     * Returns true if the user provided is in the same profiles group as the current user.
     */
@@ -635,28 +596,6 @@ public final class Utils extends com.android.settingslib.Utils {
                 0);
         a.recycle();
         return inflater.inflate(resId, parent, false);
-    }
-
-    /**
-     * Return if we are running low on storage space or not.
-     *
-     * @param context The context
-     * @return true if we are running low on storage space
-     */
-    public static boolean isLowStorage(Context context) {
-        final StorageManager sm = StorageManager.from(context);
-        return (sm.getStorageBytesUntilLow(context.getFilesDir()) < 0);
-    }
-
-
-    public static boolean hasPreferredActivities(PackageManager pm, String packageName) {
-        // Get list of preferred activities
-        List<ComponentName> prefActList = new ArrayList<>();
-        // Intent list cannot be null. so pass empty list
-        List<IntentFilter> intentList = new ArrayList<>();
-        pm.getPreferredActivities(intentList, prefActList, packageName);
-        Log.d(TAG, "Have " + prefActList.size() + " number of activities in preferred list");
-        return prefActList.size() > 0;
     }
 
     public static ArraySet<String> getHandledDomains(PackageManager pm, String packageName) {
@@ -808,12 +747,6 @@ public final class Utils extends com.android.settingslib.Utils {
         return um.getCredentialOwnerProfile(userId);
     }
 
-    public static int resolveResource(Context context, int attr) {
-        TypedValue value = new TypedValue();
-        context.getTheme().resolveAttribute(attr, value, true);
-        return value.resourceId;
-    }
-
     private static final StringBuilder sBuilder = new StringBuilder(50);
     private static final java.util.Formatter sFormatter = new java.util.Formatter(
             sBuilder, Locale.getDefault());
@@ -825,47 +758,6 @@ public final class Utils extends com.android.settingslib.Utils {
             sBuilder.setLength(0);
             return DateUtils.formatDateRange(context, sFormatter, start, end, flags, null)
                     .toString();
-        }
-    }
-
-    public static List<String> getNonIndexable(int xml, Context context) {
-        if (Looper.myLooper() == null) {
-            // Hack to make sure Preferences can initialize.  Prefs expect a looper, but
-            // don't actually use it for the basic stuff here.
-            Looper.prepare();
-        }
-        final List<String> ret = new ArrayList<>();
-        PreferenceManager manager = new PreferenceManager(context);
-        PreferenceScreen screen = manager.inflateFromResource(context, xml, null);
-        checkPrefs(screen, ret);
-
-        return ret;
-    }
-
-    private static void checkPrefs(PreferenceGroup group, List<String> ret) {
-        if (group == null) return;
-        for (int i = 0; i < group.getPreferenceCount(); i++) {
-            Preference pref = group.getPreference(i);
-            if (pref instanceof SelfAvailablePreference
-                    && !((SelfAvailablePreference) pref).isAvailable(group.getContext())) {
-                ret.add(pref.getKey());
-                if (pref instanceof PreferenceGroup) {
-                    addAll((PreferenceGroup) pref, ret);
-                }
-            } else if (pref instanceof PreferenceGroup) {
-                checkPrefs((PreferenceGroup) pref, ret);
-            }
-        }
-    }
-
-    private static void addAll(PreferenceGroup group, List<String> ret) {
-        if (group == null) return;
-        for (int i = 0; i < group.getPreferenceCount(); i++) {
-            Preference pref = group.getPreference(i);
-            ret.add(pref.getKey());
-            if (pref instanceof PreferenceGroup) {
-                addAll((PreferenceGroup) pref, ret);
-            }
         }
     }
 
@@ -894,14 +786,6 @@ public final class Utils extends com.android.settingslib.Utils {
             return false;
         }
         if (!(new LockPatternUtils(context)).isSecure(userId)) {
-            return false;
-        }
-        return confirmWorkProfileCredentials(context, userId);
-    }
-
-    public static boolean confirmWorkProfileCredentialsIfNecessary(Context context, int userId) {
-        KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
-        if (!km.isDeviceLocked(userId)) {
             return false;
         }
         return confirmWorkProfileCredentials(context, userId);
