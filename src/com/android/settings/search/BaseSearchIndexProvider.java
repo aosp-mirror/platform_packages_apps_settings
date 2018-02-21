@@ -28,6 +28,7 @@ import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -66,7 +67,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
             return getNonIndexableKeysFromXml(context);
         }
-        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers = getAllPreferenceControllers(context);
         if (controllers != null && !controllers.isEmpty()) {
             final List<String> nonIndexableKeys = new ArrayList<>();
             for (AbstractPreferenceController controller : controllers) {
@@ -88,6 +89,28 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
+    public List<AbstractPreferenceController> getAllPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllersFromCode =
+                getPreferenceControllers(context);
+        final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);
+        if (res == null || res.isEmpty()) {
+            return controllersFromCode;
+        }
+        List<BasePreferenceController> controllersFromXml = new ArrayList<>();
+        for (SearchIndexableResource sir : res) {
+            controllersFromXml.addAll(PreferenceControllerListHelper
+                    .getPreferenceControllersFromXml(context, sir.xmlResId));
+        }
+        controllersFromXml = PreferenceControllerListHelper.filterControllers(controllersFromXml,
+                controllersFromCode);
+        final List<AbstractPreferenceController> allControllers = new ArrayList<>();
+        if (controllersFromCode != null) {
+            allControllers.addAll(controllersFromCode);
+        }
+        allControllers.addAll(controllersFromXml);
+        return allControllers;
+    }
+
     public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         return null;
     }

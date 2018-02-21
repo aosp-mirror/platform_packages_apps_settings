@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Xml;
 
@@ -32,9 +33,13 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * These tests use a series of preferences that have specific attributes which are sometimes
@@ -45,13 +50,13 @@ import org.xmlpull.v1.XmlPullParser;
  */
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class XmlParserUtilTest {
+public class PreferenceXmlParserUtilTest {
 
     private Context mContext;
 
     @Before
     public void setUp() {
-        mContext = ShadowApplication.getInstance().getApplicationContext();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
@@ -91,7 +96,6 @@ public class XmlParserUtilTest {
         String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
         String expSummary = mContext.getString(R.string.summary_placeholder);
         assertThat(summary).isEqualTo(expSummary);
-
     }
 
     @Test
@@ -161,6 +165,20 @@ public class XmlParserUtilTest {
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         String entries = PreferenceXmlParserUtils.getDataEntries(mContext, attrs);
         assertThat(entries).isNull();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_shouldContainKeyAndControllerName()
+            throws IOException, XmlPullParserException {
+        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings);
+
+        assertThat(metadata).isNotEmpty();
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_KEY)).isNotNull();
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_CONTROLLER)).isNotNull();
+        }
     }
 
     /**

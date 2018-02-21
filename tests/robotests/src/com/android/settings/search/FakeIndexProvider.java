@@ -21,7 +21,6 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +46,6 @@ public class FakeIndexProvider implements Indexable {
                     List<String> result = super.getNonIndexableKeys(context);
                     result.add(KEY);
                     return result;
-                }
-
-                @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
-                        Context context) {
-                    return null;
                 }
             };
 
