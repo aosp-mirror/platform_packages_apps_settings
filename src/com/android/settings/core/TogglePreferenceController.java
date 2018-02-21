@@ -17,6 +17,8 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
 
+import com.android.settings.widget.MasterSwitchPreference;
+
 /**
  * Abstract class that consolidates logic for updating toggle controllers.
  * It automatically handles the getting and setting of the switch UI element.
@@ -46,7 +48,11 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
 
     @Override
     public final void updateState(Preference preference) {
-        ((TwoStatePreference) preference).setChecked(isChecked());
+        if (preference instanceof TwoStatePreference) {
+            ((TwoStatePreference) preference).setChecked(isChecked());
+        } if (preference instanceof MasterSwitchPreference) {
+            ((MasterSwitchPreference) preference).setChecked(isChecked());
+        }
     }
 
     @Override

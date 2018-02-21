@@ -21,42 +21,36 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.dashboard.conditional.BatterySaverCondition;
 import com.android.settings.dashboard.conditional.ConditionManager;
 import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-import static android.os.PowerManager.ACTION_POWER_SAVE_MODE_CHANGING;
-
-public class BatterySaverController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, Preference.OnPreferenceChangeListener,
-        LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
+public class BatterySaverController extends TogglePreferenceController
+        implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private final BatterySaverReceiver mBatteryStateChangeReceiver;
     private final PowerManager mPowerManager;
     private MasterSwitchPreference mBatterySaverPref;
 
-    public BatterySaverController(Context context, Lifecycle lifecycle) {
-        super(context);
+    public BatterySaverController(Context context) {
+        super(context, KEY_BATTERY_SAVER);
 
-        lifecycle.addObserver(this);
         mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mBatteryStateChangeReceiver = new BatterySaverReceiver(context);
         mBatteryStateChangeReceiver.setBatterySaverListener(this);
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     @Override
@@ -71,23 +65,20 @@ public class BatterySaverController extends AbstractPreferenceController
     }
 
     @Override
-    public void updateState(Preference preference) {
-        mBatterySaverPref.setChecked(mPowerManager.isPowerSaveMode());
-        updateSummary();
-    }
-
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean saverOn = (Boolean) newValue;
-        if (saverOn != mPowerManager.isPowerSaveMode()
-                && !mPowerManager.setPowerSaveMode(saverOn)) {
-            // Do nothing if power save mode doesn't set correctly
+    public boolean setChecked(boolean isChecked) {
+        mBatterySaverPref.setChecked(isChecked);
+        if (!mPowerManager.setPowerSaveMode(isChecked)) {
             return false;
         }
 
         refreshConditionManager();
         updateSummary();
         return true;
+    }
+
+    @Override
+    public boolean isChecked() {
+        return mPowerManager.isPowerSaveMode();
     }
 
     @Override
@@ -110,7 +101,8 @@ public class BatterySaverController extends AbstractPreferenceController
         ConditionManager.get(mContext).getCondition(BatterySaverCondition.class).refreshState();
     }
 
-    private void updateSummary() {
+    @Override
+    public String getSummary() {
         final boolean mode = mPowerManager.isPowerSaveMode();
         final int format = mode ? R.string.battery_saver_on_summary
                 : R.string.battery_saver_off_summary;
@@ -119,10 +111,12 @@ public class BatterySaverController extends AbstractPreferenceController
         final int percentFormat = percent > 0 ? R.string.battery_saver_desc_turn_on_auto_pct
                 : R.string.battery_saver_desc_turn_on_auto_never;
 
-        final String summary = mContext.getString(format, mContext.getString(percentFormat,
+        return mContext.getString(format, mContext.getString(percentFormat,
                 Utils.formatPercentage(percent)));
+    }
 
-        mBatterySaverPref.setSummary(summary);
+    private void updateSummary() {
+        mBatterySaverPref.setSummary(getSummary());
     }
 
     private final ContentObserver mObserver = new ContentObserver(new Handler()) {

@@ -36,7 +36,8 @@
         <com.android.settings.widget.MasterSwitchPreference
             android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
             android:key="battery_saver_summary"
-            android:title="@string/battery_saver"/>
+            android:title="@string/battery_saver"
+            settings:controller="com.android.settings.fuelgauge.BatterySaverController"/>
 
         <Preference
             android:fragment="com.android.settings.fuelgauge.SmartBatterySettings"

@@ -53,7 +53,7 @@ public class BatterySaverControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mBatterySaverController = spy(new BatterySaverController(mContext, mLifecycle));
+        mBatterySaverController = spy(new BatterySaverController(mContext));
         ReflectionHelpers.setField(mBatterySaverController, "mPowerManager", mPowerManager);
         ReflectionHelpers.setField(mBatterySaverController, "mBatterySaverPref", mBatterySaverPref);
         doNothing().when(mBatterySaverController).refreshConditionManager();
