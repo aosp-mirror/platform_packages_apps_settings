@@ -51,7 +51,7 @@ public class HighUsageDataParser implements BatteryInfo.BatteryDataParser {
 
     @Override
     public void onDataPoint(long time, BatteryStats.HistoryItem record) {
-        if (record.currentTime <= mEndTimeMs - mTimePeriodMs) {
+        if (time == 0 || record.currentTime <= mEndTimeMs - mTimePeriodMs) {
             // Since onDataPoint is invoked sorted by time, so we could use this way to get the
             // closet battery level 'mTimePeriodMs' time ago.
             mLastPeriodBatteryLevel = record.batteryLevel;
