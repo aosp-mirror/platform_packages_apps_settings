@@ -44,7 +44,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
-import com.android.settings.connecteddevice.usb.UsbBackend;
+import com.android.settings.wrapper.UsbManagerWrapper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -73,7 +73,7 @@ public class SelectUsbConfigPreferenceControllerTest {
     @Mock
     private PackageManager mPackageManager;
     @Mock
-    private UsbBackend.UsbManagerPassThrough mUsbManagerPassThrough;
+    private UsbManagerWrapper mUsbManagerWrapper;
 
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -106,12 +106,12 @@ public class SelectUsbConfigPreferenceControllerTest {
         mController = spy(new SelectUsbConfigPreferenceController(mContext, mLifecycle));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-        mController.mUsbManagerPassThrough = mUsbManagerPassThrough;
+        mController.mUsbManagerWrapper = mUsbManagerWrapper;
 
-        when(mUsbManagerPassThrough.usbFunctionsFromString("mtp")).thenReturn(UsbManagerExtras.MTP);
-        when(mUsbManagerPassThrough.usbFunctionsFromString("rndis"))
+        when(mUsbManagerWrapper.usbFunctionsFromString("mtp")).thenReturn(UsbManagerExtras.MTP);
+        when(mUsbManagerWrapper.usbFunctionsFromString("rndis"))
                 .thenReturn(UsbManagerExtras.RNDIS);
-        when(mUsbManagerPassThrough.usbFunctionsFromString("none"))
+        when(mUsbManagerWrapper.usbFunctionsFromString("none"))
                 .thenReturn(UsbManagerExtras.NONE);
 
     }
@@ -123,7 +123,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_setCharging_shouldEnableCharging() {
-        when(mUsbManagerPassThrough.getCurrentFunctions()).thenReturn(
+        when(mUsbManagerWrapper.getCurrentFunctions()).thenReturn(
                 UsbManagerExtras.usbFunctionsFromString(mValues[0]));
         doNothing().when(mController).setCurrentFunctions(anyLong());
         mController.onPreferenceChange(mPreference, mValues[0]);
@@ -158,7 +158,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_setMtp_shouldEnableMtp() {
-        when(mUsbManagerPassThrough.getCurrentFunctions())
+        when(mUsbManagerWrapper.getCurrentFunctions())
                 .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[1]));
         doNothing().when(mController).setCurrentFunctions(anyLong());
         mController.onPreferenceChange(mPreference, mValues[1]);
@@ -169,7 +169,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_monkeyUser_shouldReturnFalse() {
-        when(mUsbManagerPassThrough.getCurrentFunctions())
+        when(mUsbManagerWrapper.getCurrentFunctions())
                 .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[1]));
         ShadowUtils.setIsUserAMonkey(true);
         doNothing().when(mController).setCurrentFunctions(anyLong());
@@ -182,7 +182,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void updateState_chargingEnabled_shouldSetPreferenceToCharging() {
-        when(mUsbManagerPassThrough.getCurrentFunctions())
+        when(mUsbManagerWrapper.getCurrentFunctions())
                 .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[0]));
 
         mController.updateState(mPreference);
@@ -193,7 +193,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void updateState_RndisEnabled_shouldEnableRndis() {
-        when(mUsbManagerPassThrough.getCurrentFunctions())
+        when(mUsbManagerWrapper.getCurrentFunctions())
                 .thenReturn(UsbManagerExtras.usbFunctionsFromString(mValues[3]));
 
         mController.updateState(mPreference);
@@ -204,7 +204,7 @@ public class SelectUsbConfigPreferenceControllerTest {
 
     @Test
     public void updateState_noValueSet_shouldEnableChargingAsDefault() {
-        when(mUsbManagerPassThrough.getCurrentFunctions()).thenReturn(UsbManagerExtras.NONE);
+        when(mUsbManagerWrapper.getCurrentFunctions()).thenReturn(UsbManagerExtras.NONE);
         mController.updateState(mPreference);
 
         verify(mPreference).setValue(mValues[0]);

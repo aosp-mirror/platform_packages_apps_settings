@@ -17,6 +17,7 @@
 package com.android.settings.wrapper;
 
 import android.content.pm.UserInfo;
+import android.os.UserHandle;
 import android.os.UserManager;
 
 import java.util.List;
@@ -44,5 +45,23 @@ public class UserManagerWrapper {
 
     public List<UserInfo> getProfiles(int userHandle) {
         return mUserManager.getProfiles(userHandle);
+    }
+
+    public boolean isUsbFileTransferRestricted() {
+        return mUserManager.hasUserRestriction(UserManager.DISALLOW_USB_FILE_TRANSFER);
+    }
+
+    public boolean isUsbTetheringRestricted() {
+        return mUserManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_TETHERING);
+    }
+
+    public boolean isUsbFileTransferRestrictedBySystem() {
+        return mUserManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_USB_FILE_TRANSFER, UserHandle.of(UserHandle.myUserId()));
+    }
+
+    public boolean isUsbTetheringRestrictedBySystem() {
+        return mUserManager.hasBaseUserRestriction(
+                UserManager.DISALLOW_CONFIG_TETHERING, UserHandle.of(UserHandle.myUserId()));
     }
 }

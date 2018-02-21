@@ -235,12 +235,11 @@
             android:title="@string/tethering_hardware_offload"
             android:summary="@string/tethering_hardware_offload_summary" />
 
-        <ListPreference
-            android:key="select_usb_configuration"
-            android:title="@string/select_usb_configuration_title"
-            android:dialogTitle="@string/select_usb_configuration_dialog_title"
-            android:entries="@array/usb_configuration_titles"
-            android:entryValues="@array/usb_configuration_values" />
+        <Preference
+            android:key="default_usb_configuration"
+            android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
+            android:icon="@drawable/ic_usb"
+            android:title="@string/usb_default_label"/>
 
         <SwitchPreference
             android:key="bluetooth_show_devices_without_names"
