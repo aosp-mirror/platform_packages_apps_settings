@@ -51,6 +51,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.WifiSettingsActivity;
+import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.settingslib.wifi.TestAccessPointBuilder;
 import com.android.settingslib.wifi.WifiTracker;
@@ -261,26 +262,6 @@ public class WifiSettingsUiTest {
     }
 
     @Test
-    public void resumingAp_shouldNotForceUpdateWhenExistingAPsAreListed() {
-        setWifiState(WifiManager.WIFI_STATE_ENABLED);
-        setupConnectedAccessPoint();
-        when(mWifiTracker.isConnected()).thenReturn(true);
-
-        launchActivity();
-
-        onView(withText(resourceString(WIFI_DISPLAY_STATUS_CONNECTED))).check(
-                matches(isDisplayed()));
-        verify(mWifiTracker).forceUpdate();
-
-        Activity activity = mActivityRule.getActivity();
-        activity.finish();
-        getInstrumentation().waitForIdleSync();
-
-        getInstrumentation().callActivityOnStart(activity);
-        verify(mWifiTracker, atMost(1)).forceUpdate();
-    }
-
-    @Test
     public void changingSecurityStateOnApShouldNotCauseMultipleListItems() {
         setWifiState(WifiManager.WIFI_STATE_ENABLED);
         TestAccessPointBuilder builder = new TestAccessPointBuilder(mContext)
@@ -305,10 +286,10 @@ public class WifiSettingsUiTest {
 
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
 
-        mWifiListener.onAccessPointsChanged();
+        ThreadUtils.postOnMainThread(() -> mWifiListener.onAccessPointsChanged());
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
 
-        mWifiListener.onAccessPointsChanged();
+        ThreadUtils.postOnMainThread(() -> mWifiListener.onAccessPointsChanged());
         onView(withText(TEST_SSID)).check(matches(isDisplayed()));
     }
 
@@ -367,7 +348,6 @@ public class WifiSettingsUiTest {
 
         launchActivity();
 
-        verify(mWifiTracker, atMost(1)).forceUpdate();
         verify(mWifiTracker, times(1)).getAccessPoints();
         onView(withText(WIFI_DISPLAY_STATUS_CONNECTED)).check(matches(isDisplayed()));
 
