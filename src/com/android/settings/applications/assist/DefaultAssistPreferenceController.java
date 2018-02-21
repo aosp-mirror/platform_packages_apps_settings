@@ -27,8 +27,8 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.List;
 

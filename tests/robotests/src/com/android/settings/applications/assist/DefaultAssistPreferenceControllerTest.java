@@ -40,9 +40,9 @@ import android.provider.Settings;
 
 import com.android.internal.app.AssistUtils;
 import com.android.settings.TestConfig;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import org.junit.Before;
 import org.junit.Test;

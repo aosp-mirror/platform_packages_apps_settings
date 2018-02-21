@@ -35,7 +35,7 @@ import com.android.settings.TestConfig;
 import com.android.settings.accessibility.VibrationPreferenceFragment.VibrationIntensityCandidateInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.widget.RadioButtonPickerFragment.CandidateInfo;
+import com.android.settingslib.widget.CandidateInfo;
 
 import org.junit.Before;
 import org.junit.Test;

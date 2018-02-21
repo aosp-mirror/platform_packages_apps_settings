@@ -22,6 +22,7 @@ import com.android.internal.logging.nano.MetricsProto;
 
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.Arrays;
 import java.util.List;

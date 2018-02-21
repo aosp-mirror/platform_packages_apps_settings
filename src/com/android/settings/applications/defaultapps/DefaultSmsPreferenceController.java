@@ -21,6 +21,7 @@ import android.content.Context;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.telephony.SmsApplication;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 import java.util.Collection;
 

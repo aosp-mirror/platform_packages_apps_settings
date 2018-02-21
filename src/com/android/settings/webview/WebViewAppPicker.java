@@ -30,9 +30,9 @@ import android.text.TextUtils;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.applications.defaultapps.DefaultAppPickerFragment;
 import com.android.settings.wrapper.UserPackageWrapper;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.ArrayList;

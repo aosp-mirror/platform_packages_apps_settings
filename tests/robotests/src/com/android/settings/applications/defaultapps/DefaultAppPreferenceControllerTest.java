@@ -28,6 +28,7 @@ import android.support.v7.preference.Preference;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.TwoTargetPreference;
 
 import org.junit.Before;

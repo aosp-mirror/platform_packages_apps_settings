@@ -29,6 +29,7 @@ import android.os.UserManager;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;

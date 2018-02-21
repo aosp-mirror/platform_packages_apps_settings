@@ -27,6 +27,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
 import com.android.settings.wrapper.AutofillManagerWrapper;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
