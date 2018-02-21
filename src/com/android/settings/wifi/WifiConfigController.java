@@ -517,6 +517,7 @@ public class WifiConfigController implements TextWatcher,
                     mAccessPoint.getSsidStr());
         } else {
             config.networkId = mAccessPoint.getConfig().networkId;
+            config.hiddenSSID = mAccessPoint.getConfig().hiddenSSID;
         }
 
         config.shared = mSharedCheckBox.isChecked();
