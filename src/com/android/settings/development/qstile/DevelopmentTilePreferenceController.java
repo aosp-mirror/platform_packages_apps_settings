@@ -22,17 +22,23 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.service.quicksettings.TileService;
+import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
+import com.android.internal.statusbar.IStatusBarService;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.util.List;
 
 public class DevelopmentTilePreferenceController extends AbstractPreferenceController {
 
+    private static final String TAG = "DevTilePrefController";
     private final OnChangeHandler mOnChangeHandler;
     private final PackageManager mPackageManager;
 
@@ -78,24 +84,42 @@ public class DevelopmentTilePreferenceController extends AbstractPreferenceContr
         }
     }
 
-    private static class OnChangeHandler implements Preference.OnPreferenceChangeListener {
+    @VisibleForTesting
+    static class OnChangeHandler implements Preference.OnPreferenceChangeListener {
 
         private final Context mContext;
         private final PackageManager mPackageManager;
+        private IStatusBarService mStatusBarService;
 
         public OnChangeHandler(Context context) {
             mContext = context;
             mPackageManager = context.getPackageManager();
+            mStatusBarService = IStatusBarService.Stub.asInterface(
+                    ServiceManager.checkService(Context.STATUS_BAR_SERVICE));
         }
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            ComponentName cn = new ComponentName(
+            boolean enabled = ((Boolean) newValue).booleanValue();
+            ComponentName componentName = new ComponentName(
                     mContext.getPackageName(), preference.getKey());
-            mPackageManager.setComponentEnabledSetting(cn, (Boolean) newValue
+            mPackageManager.setComponentEnabledSetting(componentName, enabled
                             ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
                             : PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
+
+            try {
+                if (mStatusBarService != null) {
+                    if (enabled) {
+                        mStatusBarService.addTile(componentName);
+                    } else {
+                        mStatusBarService.remTile(componentName);
+                    }
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Failed to modify QS tile for component " +
+                        componentName.toString(), e);
+            }
             return true;
         }
     }
