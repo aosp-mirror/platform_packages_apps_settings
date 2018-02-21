@@ -29,13 +29,15 @@ import com.android.settings.core.TogglePreferenceController;
  */
 public class AutoBatterySaverPreferenceController extends TogglePreferenceController implements
         Preference.OnPreferenceChangeListener {
-    private static final int LOW_POWER_MODE_TRIGGER_THRESHOLD = 15;
+    private final int mDefWarnLevel;
 
     @VisibleForTesting
     static final String KEY_AUTO_BATTERY_SAVER = "auto_battery_saver";
 
     public AutoBatterySaverPreferenceController(Context context) {
         super(context, KEY_AUTO_BATTERY_SAVER);
+        mDefWarnLevel = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel);
     }
 
     @Override
@@ -46,7 +48,7 @@ public class AutoBatterySaverPreferenceController extends TogglePreferenceContro
     @Override
     public boolean isChecked() {
         return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0) != 0;
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, mDefWarnLevel) != 0;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class AutoBatterySaverPreferenceController extends TogglePreferenceContro
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL,
                 isChecked
-                        ? LOW_POWER_MODE_TRIGGER_THRESHOLD
+                        ? mDefWarnLevel
                         : 0);
         return true;
     }
