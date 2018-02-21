@@ -17,54 +17,24 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Vibrator;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Activity with the accessibility settings.
+ * Accessibility settings for the vibration.
  */
-public class VibrationSettings extends SettingsPreferenceFragment implements Indexable {
+public class VibrationSettings extends DashboardFragment {
 
-    // Preferences
-    @VisibleForTesting
-    static final String NOTIFICATION_VIBRATION_PREFERENCE_SCREEN =
-            "notification_vibration_preference_screen";
-    @VisibleForTesting
-    static final String TOUCH_VIBRATION_PREFERENCE_SCREEN =
-            "touch_vibration_preference_screen";
-
-    private final Handler mHandler = new Handler();
-    private final SettingsContentObserver mSettingsContentObserver;
-
-    private Preference mNotificationVibrationPreferenceScreen;
-    private Preference mTouchVibrationPreferenceScreen;
-
-    public VibrationSettings() {
-        List<String> vibrationSettings = new ArrayList<>();
-        vibrationSettings.add(Settings.System.HAPTIC_FEEDBACK_INTENSITY);
-        vibrationSettings.add(Settings.System.NOTIFICATION_VIBRATION_INTENSITY);
-        mSettingsContentObserver = new SettingsContentObserver(mHandler, vibrationSettings) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                updatePreferences();
-            }
-        };
-    }
+    private static final String TAG = "VibrationSettings";
 
     @Override
     public int getMetricsCategory() {
@@ -72,70 +42,35 @@ public class VibrationSettings extends SettingsPreferenceFragment implements Ind
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        addPreferencesFromResource(R.xml.accessibility_vibration_settings);
-        initializePreferences();
+    protected int getPreferenceScreenResId() {
+        return R.xml.accessibility_vibration_settings;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updatePreferences();
-        mSettingsContentObserver.register(getContentResolver());
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
-    public void onPause() {
-        mSettingsContentObserver.unregister(getContentResolver());
-        super.onPause();
+    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        return buildControllers(context, getLifecycle());
     }
 
-    private void initializePreferences() {
-        // Notification and notification vibration strength adjustments.
-        mNotificationVibrationPreferenceScreen =
-                findPreference(NOTIFICATION_VIBRATION_PREFERENCE_SCREEN);
+    public static List<AbstractPreferenceController> buildControllers(Context context,
+            Lifecycle lifecycle) {
 
-        // Touch feedback strength adjustments.
-        mTouchVibrationPreferenceScreen = findPreference(TOUCH_VIBRATION_PREFERENCE_SCREEN);
-    }
-
-    private void updatePreferences() {
-        updateNotificationVibrationSummary(mNotificationVibrationPreferenceScreen);
-        updateTouchVibrationSummary(mTouchVibrationPreferenceScreen);
-    }
-
-    private void updateNotificationVibrationSummary(Preference pref) {
-        Vibrator vibrator = getContext().getSystemService(Vibrator.class);
-        final int intensity = Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.NOTIFICATION_VIBRATION_INTENSITY,
-                vibrator.getDefaultNotificationVibrationIntensity());
-        CharSequence summary = getVibrationIntensitySummary(getContext(), intensity);
-        mNotificationVibrationPreferenceScreen.setSummary(summary);
-    }
-
-    private void updateTouchVibrationSummary(Preference pref) {
-        Vibrator vibrator = getContext().getSystemService(Vibrator.class);
-        final int intensity = Settings.System.getInt(getContext().getContentResolver(),
-                Settings.System.HAPTIC_FEEDBACK_INTENSITY,
-                vibrator.getDefaultHapticFeedbackIntensity());
-        CharSequence summary = getVibrationIntensitySummary(getContext(), intensity);
-        mTouchVibrationPreferenceScreen.setSummary(summary);
-    }
-
-    public static String getVibrationIntensitySummary(Context context, int intensity) {
-        switch (intensity) {
-            case Vibrator.VIBRATION_INTENSITY_OFF:
-                return context.getString(R.string.accessibility_vibration_intensity_off);
-            case Vibrator.VIBRATION_INTENSITY_LOW:
-                return context.getString(R.string.accessibility_vibration_intensity_low);
-            case Vibrator.VIBRATION_INTENSITY_MEDIUM:
-                return context.getString(R.string.accessibility_vibration_intensity_medium);
-            case Vibrator.VIBRATION_INTENSITY_HIGH:
-                return context.getString(R.string.accessibility_vibration_intensity_high);
-            default:
-                return "";
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        final NotificationVibrationIntensityPreferenceController notifVibPrefController =
+                new NotificationVibrationIntensityPreferenceController(context);
+        final HapticFeedbackIntensityPreferenceController hapticPreferenceController =
+                new HapticFeedbackIntensityPreferenceController(context);
+        controllers.add(hapticPreferenceController);
+        controllers.add(notifVibPrefController);
+        if (lifecycle != null) {
+            lifecycle.addObserver(hapticPreferenceController);
+            lifecycle.addObserver(notifVibPrefController);
         }
+        return controllers;
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
@@ -148,6 +83,12 @@ public class VibrationSettings extends SettingsPreferenceFragment implements Ind
                     indexable.xmlResId = R.xml.accessibility_vibration_settings;
                     indexables.add(indexable);
                     return indexables;
+                }
+
+                @Override
+                public List<AbstractPreferenceController> getPreferenceControllers(
+                        Context context) {
+                    return buildControllers(context, null /* lifecycle */);
                 }
             };
 }
