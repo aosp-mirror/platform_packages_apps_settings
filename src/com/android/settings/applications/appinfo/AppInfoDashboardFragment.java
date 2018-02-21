@@ -674,7 +674,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
         final Intent intent = new Intent();
         intent.putExtra(ManageApplications.APP_CHG, appChanged);
         final SettingsActivity sa = (SettingsActivity)getActivity();
-        sa.finishPreferencePanel(this, Activity.RESULT_OK, intent);
+        sa.finishPreferencePanel(Activity.RESULT_OK, intent);
         mFinishing = true;
     }
 

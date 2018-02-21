@@ -17,7 +17,6 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
-import com.android.settings.search.XmlParserUtils;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -183,7 +182,7 @@ public class XmlControllerAttributeTest {
                     continue;
                 }
 
-                controllerClassName = XmlParserUtils.getController(mContext, attrs);
+                controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
                 // If controller is not indexed, then it is not compatible with
                 if (!TextUtils.isEmpty(controllerClassName)) {
                     xmlControllers.add(controllerClassName);

@@ -29,6 +29,9 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.android.settings.Settings.AccessibilitySettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -59,7 +62,12 @@ public class ToggleFeaturePreferenceFragmentTest {
             Bundle args = new Bundle();
             args.putString(AccessibilitySettings.EXTRA_SUMMARY, SUMMARY_TEXT);
             fragment.setArguments(args);
-            mActivityRule.getActivity().startPreferenceFragment(fragment, false);
+            new SubSettingLauncher(mActivityRule.getActivity())
+                    .setDestination(MyToggleFeaturePreferenceFragment.class.getName())
+                    .setArguments(args)
+                    .setSourceMetricsCategory(
+                            InstrumentedPreferenceFragment.METRICS_CATEGORY_UNKNOWN)
+                    .launch();
         });
     }
 
@@ -70,7 +78,8 @@ public class ToggleFeaturePreferenceFragmentTest {
 
     public static class MyToggleFeaturePreferenceFragment extends ToggleFeaturePreferenceFragment {
         @Override
-        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {}
+        protected void onPreferenceToggled(String preferenceKey, boolean enabled) {
+        }
 
         @Override
         public int getMetricsCategory() {

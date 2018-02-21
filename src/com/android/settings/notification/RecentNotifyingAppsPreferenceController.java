@@ -33,16 +33,13 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IconDrawableFactory;
 import android.util.Log;
-import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.applications.InstalledAppCounter;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.widget.AppPreference;
-import com.android.settings.widget.MasterSwitchPreference;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -237,10 +234,13 @@ public class RecentNotifyingAppsPreferenceController extends AbstractPreferenceC
             args.putString(AppInfoBase.ARG_PACKAGE_NAME, pkgName);
             args.putInt(AppInfoBase.ARG_PACKAGE_UID, appEntry.info.uid);
 
-            pref.setIntent(Utils.onBuildStartFragmentIntent(mHost.getActivity(),
-                    AppNotificationSettings.class.getName(), args, null,
-                    R.string.notifications_title, null, false,
-                    MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS));
+            pref.setIntent(new SubSettingLauncher(mHost.getActivity())
+                    .setDestination(AppNotificationSettings.class.getName())
+                    .setTitle(R.string.notifications_title)
+                    .setArguments(args)
+                    .setSourceMetricsCategory(
+                            MetricsProto.MetricsEvent.MANAGE_APPLICATIONS_NOTIFICATIONS)
+                    .toIntent());
             pref.setOnPreferenceChangeListener((preference, newValue) -> {
                 boolean blocked = !(Boolean) newValue;
                 mNotificationBackend.setNotificationsEnabledForPackage(

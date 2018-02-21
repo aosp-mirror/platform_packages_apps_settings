@@ -30,7 +30,7 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable.SearchIndexProvider;
-import com.android.settings.search.XmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -151,7 +151,7 @@ class SliceDataConverter {
 
             final int outerDepth = parser.getDepth();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
-            final String screenTitle = XmlParserUtils.getDataTitle(mContext, attrs);
+            final String screenTitle = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
 
             // TODO (b/67996923) Investigate if we need headers for Slices, since they never
             // correspond to an actual setting.
@@ -168,15 +168,15 @@ class SliceDataConverter {
                 // TODO (b/67996923) This will not work if preferences have nested intents:
                 // <pref ....>
                 //      <intent action="blab"/> </pref>
-                controllerClassName = XmlParserUtils.getController(mContext, attrs);
+                controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
                 if (TextUtils.isEmpty(controllerClassName)) {
                     continue;
                 }
 
-                title = XmlParserUtils.getDataTitle(mContext, attrs);
-                key = XmlParserUtils.getDataKey(mContext, attrs);
-                iconResId = XmlParserUtils.getDataIcon(mContext, attrs);
-                summary = XmlParserUtils.getDataSummary(mContext, attrs);
+                title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
+                key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
+                iconResId = PreferenceXmlParserUtils.getDataIcon(mContext, attrs);
+                summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
 
                 xmlSlice = new SliceData.Builder()
                         .setKey(key)

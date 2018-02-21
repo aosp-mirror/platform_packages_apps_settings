@@ -20,10 +20,10 @@ import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.ResetNetwork;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 
 public class NetworkResetActionMenuController {
 
@@ -44,9 +44,11 @@ public class NetworkResetActionMenuController {
         }
         if (item != null) {
             item.setOnMenuItemClickListener(target -> {
-                Utils.startWithFragment(mContext, ResetNetwork.class.getName(), null, null,
-                        0, R.string.reset_network_title, null,
-                        MetricsProto.MetricsEvent.SETTINGS_NETWORK_CATEGORY);
+                new SubSettingLauncher(mContext)
+                        .setDestination(ResetNetwork.class.getName())
+                        .setSourceMetricsCategory(MetricsEvent.SETTINGS_NETWORK_CATEGORY)
+                        .setTitle(R.string.reset_network_title)
+                        .launch();
                 return true;
             });
         }

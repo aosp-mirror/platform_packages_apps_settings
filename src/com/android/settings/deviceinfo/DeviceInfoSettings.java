@@ -20,14 +20,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 import android.telephony.TelephonyManager;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.SettingsActivity;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionPreferenceController;
@@ -64,23 +62,12 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        final Bundle arguments = getArguments();
-        // Do not override initial expand children count if we come from
-        // search (EXTRA_FRAGMENT_ARG_KEY is set) - we need to display every if entry point
-        // is search.
-        if (arguments == null
-                || !arguments.containsKey(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY)) {
-
-            // Increase the number of children when the device contains more than 1 sim.
-            final TelephonyManager telephonyManager = (TelephonyManager) getContext()
-                    .getSystemService(Context.TELEPHONY_SERVICE);
-            final int numberOfChildren = Math.max(SIM_PREFERENCES_COUNT,
-                    SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
-                    + NON_SIM_PREFERENCES_COUNT;
-            getPreferenceScreen().setInitialExpandedChildrenCount(numberOfChildren);
-        }
+    public int getInitialExpandedChildCount() {
+        final TelephonyManager telephonyManager = (TelephonyManager) getContext()
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        return Math.max(SIM_PREFERENCES_COUNT,
+                SIM_PREFERENCES_COUNT * telephonyManager.getPhoneCount())
+                + NON_SIM_PREFERENCES_COUNT;
     }
 
     @Override

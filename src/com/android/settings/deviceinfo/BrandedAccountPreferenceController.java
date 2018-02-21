@@ -24,10 +24,10 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
 import com.android.settings.accounts.AccountDetailDashboardFragment;
 import com.android.settings.accounts.AccountFeatureProvider;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 
 public class BrandedAccountPreferenceController extends BasePreferenceController {
@@ -69,9 +69,13 @@ public class BrandedAccountPreferenceController extends BasePreferenceController
                     android.os.Process.myUserHandle());
             args.putString(AccountDetailDashboardFragment.KEY_ACCOUNT_TYPE,
                     accountFeatureProvider.getAccountType());
-            Utils.startWithFragment(mContext, AccountDetailDashboardFragment.class.getName(),
-                    args, null, 0,
-                    R.string.account_sync_title, null, MetricsEvent.ACCOUNT);
+
+            new SubSettingLauncher(mContext)
+                    .setDestination(AccountDetailDashboardFragment.class.getName())
+                    .setTitle(R.string.account_sync_title)
+                    .setArguments(args)
+                    .setSourceMetricsCategory(MetricsEvent.DEVICEINFO)
+                    .launch();
             return true;
         });
     }

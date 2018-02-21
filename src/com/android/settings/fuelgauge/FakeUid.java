@@ -348,6 +348,14 @@ public class FakeUid extends Uid {
     }
 
     @Override
+    public void getDeferredJobsCheckinLineLocked(StringBuilder sb, int which) {
+    }
+
+    @Override
+    public void getDeferredJobsLineLocked(StringBuilder sb, int which) {
+    }
+
+    @Override
     public long getMobileRadioApWakeupCount(int which) {
         return 0;
     }

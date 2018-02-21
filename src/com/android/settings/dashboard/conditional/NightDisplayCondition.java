@@ -16,12 +16,13 @@
 
 package com.android.settings.dashboard.conditional;
 
+import android.content.Intent;
 import android.graphics.drawable.Icon;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.display.NightDisplaySettings;
 
 public final class NightDisplayCondition extends Condition
@@ -62,8 +63,12 @@ public final class NightDisplayCondition extends Condition
 
     @Override
     public void onPrimaryClick() {
-        Utils.startWithFragment(mManager.getContext(), NightDisplaySettings.class.getName(), null,
-                null, 0, R.string.night_display_title, null, MetricsEvent.DASHBOARD_SUMMARY);
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(NightDisplaySettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.night_display_title)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override

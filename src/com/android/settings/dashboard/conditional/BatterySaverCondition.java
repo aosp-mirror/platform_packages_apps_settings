@@ -15,11 +15,13 @@
  */
 package com.android.settings.dashboard.conditional;
 
+import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.os.PowerManager;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.Utils;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 
 public class BatterySaverCondition extends Condition {
@@ -55,8 +57,12 @@ public class BatterySaverCondition extends Condition {
 
     @Override
     public void onPrimaryClick() {
-        Utils.startWithFragment(mManager.getContext(), BatterySaverSettings.class.getName(), null,
-                null, 0, R.string.battery_saver, null, MetricsEvent.DASHBOARD_SUMMARY);
+        new SubSettingLauncher(mManager.getContext())
+                .setDestination(BatterySaverSettings.class.getName())
+                .setSourceMetricsCategory(MetricsEvent.DASHBOARD_SUMMARY)
+                .setTitle(R.string.battery_saver)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .launch();
     }
 
     @Override

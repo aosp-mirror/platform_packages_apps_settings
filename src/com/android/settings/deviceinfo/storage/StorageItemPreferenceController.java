@@ -35,9 +35,9 @@ import android.util.SparseArray;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
-import com.android.settings.Utils;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.deviceinfo.PrivateVolumeSettings.SystemInfoFragment;
 import com.android.settings.deviceinfo.StorageItemPreference;
 import com.android.settings.overlay.FeatureFactory;
@@ -319,15 +319,12 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putInt(
                 ManageApplications.EXTRA_STORAGE_TYPE,
                 ManageApplications.STORAGE_TYPE_PHOTOS_VIDEOS);
-        return Utils.onBuildStartFragmentIntent(
-                mContext,
-                ManageApplications.class.getName(),
-                args,
-                null,
-                R.string.storage_photos_videos,
-                null,
-                false,
-                mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        return new SubSettingLauncher(mContext)
+                .setDestination(ManageApplications.class.getName())
+                .setTitle(R.string.storage_photos_videos)
+                .setArguments(args)
+                .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
+                .toIntent();
     }
 
     private Intent getAudioIntent() {
@@ -341,46 +338,57 @@ public class StorageItemPreferenceController extends AbstractPreferenceControlle
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
         args.putInt(ManageApplications.EXTRA_STORAGE_TYPE, ManageApplications.STORAGE_TYPE_MUSIC);
-        return Utils.onBuildStartFragmentIntent(mContext,
-                ManageApplications.class.getName(), args, null, R.string.storage_music_audio, null,
-                false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        return new SubSettingLauncher(mContext)
+                .setDestination(ManageApplications.class.getName())
+                .setTitle(R.string.storage_music_audio)
+                .setArguments(args)
+                .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
+                .toIntent();
     }
 
     private Intent getAppsIntent() {
         if (mVolume == null) {
             return null;
         }
-
-        Bundle args = getWorkAnnotatedBundle(3);
+        final Bundle args = getWorkAnnotatedBundle(3);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.StorageUseActivity.class.getName());
         args.putString(ManageApplications.EXTRA_VOLUME_UUID, mVolume.getFsUuid());
         args.putString(ManageApplications.EXTRA_VOLUME_NAME, mVolume.getDescription());
-        return Utils.onBuildStartFragmentIntent(mContext,
-                ManageApplications.class.getName(), args, null, R.string.apps_storage, null,
-                false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        return new SubSettingLauncher(mContext)
+                .setDestination(ManageApplications.class.getName())
+                .setTitle(R.string.apps_storage)
+                .setArguments(args)
+                .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
+                .toIntent();
     }
 
     private Intent getGamesIntent() {
-        Bundle args = getWorkAnnotatedBundle(1);
+        final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.GamesStorageActivity.class.getName());
-        return Utils.onBuildStartFragmentIntent(mContext,
-                ManageApplications.class.getName(), args, null, R.string.game_storage_settings,
-                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        return new SubSettingLauncher(mContext)
+                .setDestination(ManageApplications.class.getName())
+                .setTitle(R.string.game_storage_settings)
+                .setArguments(args)
+                .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
+                .toIntent();
     }
 
     private Intent getMoviesIntent() {
-        Bundle args = getWorkAnnotatedBundle(1);
+        final Bundle args = getWorkAnnotatedBundle(1);
         args.putString(ManageApplications.EXTRA_CLASSNAME,
                 Settings.MoviesStorageActivity.class.getName());
-        return Utils.onBuildStartFragmentIntent(mContext,
-                ManageApplications.class.getName(), args, null, R.string.storage_movies_tv,
-                null, false, mMetricsFeatureProvider.getMetricsCategory(mFragment));
+        return new SubSettingLauncher(mContext)
+                .setDestination(ManageApplications.class.getName())
+                .setTitle(R.string.storage_movies_tv)
+                .setArguments(args)
+                .setSourceMetricsCategory(mMetricsFeatureProvider.getMetricsCategory(mFragment))
+                .toIntent();
     }
 
     private Bundle getWorkAnnotatedBundle(int additionalCapacity) {
-        Bundle args = new Bundle(2 + additionalCapacity);
+        final Bundle args = new Bundle(2 + additionalCapacity);
         args.putBoolean(ManageApplications.EXTRA_WORK_ONLY, mIsWorkProfile);
         args.putInt(ManageApplications.EXTRA_WORK_ID, mUserId);
         return args;

@@ -23,7 +23,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkScoreManager;
 import android.net.wifi.WifiManager;
-import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -44,7 +43,6 @@ public class ConfigureWifiSettings extends DashboardFragment {
 
     private static final String TAG = "ConfigureWifiSettings";
 
-    public static final String KEY_WIFI_CONFIGURE = "wifi_configure_settings_screen";
     public static final String KEY_IP_ADDRESS = "current_ip_address";
 
     private WifiWakeupPreferenceController mWifiWakeupPreferenceController;
@@ -61,13 +59,12 @@ public class ConfigureWifiSettings extends DashboardFragment {
     }
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
+    public int getInitialExpandedChildCount() {
         int tileLimit = 2;
         if (mUseOpenWifiPreferenceController.isAvailable()) {
             tileLimit++;
         }
-        getPreferenceScreen().setInitialExpandedChildrenCount(tileLimit);
+        return tileLimit;
     }
 
     @Override

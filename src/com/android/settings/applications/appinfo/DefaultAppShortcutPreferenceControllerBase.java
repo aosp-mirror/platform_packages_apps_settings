@@ -23,9 +23,9 @@ import android.text.TextUtils;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.applications.DefaultAppSettings;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.SubSettingLauncher;
 
 /*
  * Abstract base controller for the default app shortcut preferences that launches the default app
@@ -63,10 +63,14 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(mPreferenceKey, preference.getKey())) {
-            Bundle bundle = new Bundle();
+            final Bundle bundle = new Bundle();
             bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, mPreferenceKey);
-            Utils.startWithFragment(mContext, DefaultAppSettings.class.getName(), bundle, null, 0,
-                    R.string.configure_apps, null, MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+            new SubSettingLauncher(mContext)
+                    .setDestination(DefaultAppSettings.class.getName())
+                    .setArguments(bundle)
+                    .setTitle(R.string.configure_apps)
+                    .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN)
+                    .launch();
             return true;
         }
         return false;

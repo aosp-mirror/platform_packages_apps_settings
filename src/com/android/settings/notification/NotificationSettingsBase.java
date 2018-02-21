@@ -16,65 +16,42 @@
 
 package com.android.settings.notification;
 
-import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-
-import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.R;
-import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
-import com.android.settings.applications.AppInfoBase;
-import com.android.settings.applications.LayoutPreference;
-import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settings.search.Indexable;
-import com.android.settings.widget.MasterCheckBoxPreference;
-import com.android.settings.widget.MasterSwitchPreference;
-import com.android.settings.widget.SwitchBar;
-import com.android.settings.wrapper.NotificationChannelGroupWrapper;
-import com.android.settingslib.RestrictedLockUtils;
-import com.android.settingslib.RestrictedSwitchPreference;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.FooterPreference;
+import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
 import android.app.NotificationManager;
-import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
-import android.content.pm.UserInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.UserHandle;
-import android.os.UserManager;
-import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.service.notification.NotificationListenerService;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.Toast;
 
-import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
+import com.android.settings.R;
+import com.android.settings.applications.AppInfoBase;
+import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.widget.MasterCheckBoxPreference;
+import com.android.settings.wrapper.NotificationChannelGroupWrapper;
+import com.android.settingslib.RestrictedLockUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -268,11 +245,12 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
         channelArgs.putInt(AppInfoBase.ARG_PACKAGE_UID, mUid);
         channelArgs.putString(AppInfoBase.ARG_PACKAGE_NAME, mPkg);
         channelArgs.putString(Settings.EXTRA_CHANNEL_ID, channel.getId());
-        Intent channelIntent = Utils.onBuildStartFragmentIntent(getActivity(),
-                ChannelNotificationSettings.class.getName(),
-                channelArgs, null, R.string.notification_channel_title, null, false,
-                getMetricsCategory());
-        channelPref.setIntent(channelIntent);
+        channelPref.setIntent(new SubSettingLauncher(getActivity())
+                .setDestination(ChannelNotificationSettings.class.getName())
+                .setArguments(channelArgs)
+                .setTitle(R.string.notification_channel_title)
+                .setSourceMetricsCategory(getMetricsCategory())
+                .toIntent());
 
         channelPref.setOnPreferenceChangeListener(
                 new Preference.OnPreferenceChangeListener() {

@@ -7,7 +7,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
-import com.android.settings.search.XmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -35,7 +35,7 @@ public class XmlTestUtils {
         try {
             while (parser.next() != XmlPullParser.END_DOCUMENT) {
                 try {
-                    key = XmlParserUtils.getDataKey(context, attrs);
+                    key = PreferenceXmlParserUtils.getDataKey(context, attrs);
                     if (!TextUtils.isEmpty(key)) {
                         keys.add(key);
                     }

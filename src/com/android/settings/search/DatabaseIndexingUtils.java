@@ -26,9 +26,9 @@ import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
-import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import java.lang.reflect.Field;
@@ -59,8 +59,12 @@ public class DatabaseIndexingUtils {
             String screenTitle, int sourceMetricsCategory) {
         final Bundle args = new Bundle();
         args.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key);
-        final Intent searchDestination = Utils.onBuildStartFragmentIntent(context,
-                className, args, null, 0, screenTitle, false, sourceMetricsCategory);
+        final Intent searchDestination = new SubSettingLauncher(context)
+                .setDestination(className)
+                .setArguments(args)
+                .setTitle(screenTitle)
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .toIntent();
         searchDestination.putExtra(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, key)
                 .setAction("com.android.settings.SEARCH_RESULT_TRAMPOLINE")
                 .setComponent(null);

@@ -23,10 +23,10 @@ import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.Utils;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
 
 public class DataUsagePreference extends Preference implements TemplatePreference {
@@ -38,7 +38,7 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
     public DataUsagePreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         final TypedArray a = context.obtainStyledAttributes(
-                attrs, new int[] { com.android.internal.R.attr.title },
+                attrs, new int[] {com.android.internal.R.attr.title},
                 TypedArrayUtils.getAttr(
                         context, android.support.v7.preference.R.attr.preferenceStyle,
                         android.R.attr.preferenceStyle), 0);
@@ -60,16 +60,18 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
 
     @Override
     public Intent getIntent() {
-        Bundle args = new Bundle();
+        final Bundle args = new Bundle();
         args.putParcelable(DataUsageList.EXTRA_NETWORK_TEMPLATE, mTemplate);
         args.putInt(DataUsageList.EXTRA_SUB_ID, mSubId);
+        final SubSettingLauncher launcher = new SubSettingLauncher(getContext())
+                .setArguments(args)
+                .setDestination(DataUsageList.class.getName())
+                .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
         if (mTitleRes > 0) {
-            return Utils.onBuildStartFragmentIntent(getContext(), DataUsageList.class.getName(),
-                    args, getContext().getPackageName(), mTitleRes, null, false,
-                    MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+            launcher.setTitle(mTitleRes);
+        } else {
+            launcher.setTitle(getTitle());
         }
-        return Utils.onBuildStartFragmentIntent(getContext(), DataUsageList.class.getName(), args,
-                getContext().getPackageName(), 0, getTitle(), false,
-                MetricsProto.MetricsEvent.VIEW_UNKNOWN);
+        return launcher.toIntent();
     }
 }

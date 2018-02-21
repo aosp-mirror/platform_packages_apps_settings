@@ -67,11 +67,11 @@ import com.android.settings.fuelgauge.anomaly.AnomalyLoader;
 import com.android.settings.fuelgauge.anomaly.AnomalySummaryPreferenceController;
 import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -407,8 +407,11 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
 
     private void performBatteryHeaderClick() {
         if (mPowerFeatureProvider.isAdvancedUiEnabled()) {
-            Utils.startWithFragment(getContext(), PowerUsageAdvanced.class.getName(), null,
-                    null, 0, R.string.advanced_battery_title, null, getMetricsCategory());
+            new SubSettingLauncher(getContext())
+                    .setDestination(PowerUsageAdvanced.class.getName())
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .setTitle(R.string.advanced_battery_title)
+                    .launch();
         } else {
             mStatsHelper.storeStatsHistoryInFile(BatteryHistoryDetail.BATTERY_HISTORY_FILE);
             Bundle args = new Bundle(2);
@@ -416,8 +419,12 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                     BatteryHistoryDetail.BATTERY_HISTORY_FILE);
             args.putParcelable(BatteryHistoryDetail.EXTRA_BROADCAST,
                     mStatsHelper.getBatteryBroadcast());
-            Utils.startWithFragment(getContext(), BatteryHistoryDetail.class.getName(), args,
-                    null, 0, R.string.history_details_title, null, getMetricsCategory());
+            new SubSettingLauncher(getContext())
+                    .setDestination(BatteryHistoryDetail.class.getName())
+                    .setSourceMetricsCategory(getMetricsCategory())
+                    .setArguments(args)
+                    .setTitle(R.string.history_details_title)
+                    .launch();
         }
     }
 
