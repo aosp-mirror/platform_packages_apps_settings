@@ -25,6 +25,7 @@ import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +35,8 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
+        SettingsShadowResources.class)
 public class AutoBatterySaverPreferenceControllerTest {
 
     private AutoBatterySaverPreferenceController mController;
@@ -45,6 +47,8 @@ public class AutoBatterySaverPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel, 15);
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
         mController = new AutoBatterySaverPreferenceController(mContext);
@@ -82,6 +86,11 @@ public class AutoBatterySaverPreferenceControllerTest {
 
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0)).isEqualTo(0);
+    }
+
+    @Test
+    public void testIsChecked_useDefaultValue_returnTrue() {
+        assertThat(mController.isChecked()).isTrue();
     }
 
 }

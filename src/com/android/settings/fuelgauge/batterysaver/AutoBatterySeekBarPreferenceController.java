@@ -42,12 +42,15 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
         LifecycleObserver, OnStart, OnStop, SeekBarPreference.OnPreferenceChangeListener {
     @VisibleForTesting
     static final String KEY_AUTO_BATTERY_SEEK_BAR = "battery_saver_seek_bar";
+    private final int mDefWarnLevel;
     private SeekBarPreference mPreference;
     private AutoBatterySaverSettingObserver mContentObserver;
 
     public AutoBatterySeekBarPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY_AUTO_BATTERY_SEEK_BAR);
         mContentObserver = new AutoBatterySaverSettingObserver(new Handler(Looper.getMainLooper()));
+        mDefWarnLevel = mContext.getResources().getInteger(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -94,7 +97,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
     void updatePreference(Preference preference) {
         final ContentResolver contentResolver = mContext.getContentResolver();
         final int level = Settings.Global.getInt(contentResolver,
-                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0);
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, mDefWarnLevel);
         if (level == 0) {
             preference.setVisible(false);
         } else {

@@ -24,6 +24,7 @@ import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.SeekBarPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -35,9 +36,11 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
+@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
+        SettingsShadowResources.class)
 public class AutoBatterySeekBarPreferenceControllerTest {
-    private static final int TRIGGER_LEVEL = 15;
+    private static final int TRIGGER_LEVEL = 20;
+    private static final int DEFAULT_LEVEL = 15;
 
     private AutoBatterySeekBarPreferenceController mController;
     private Context mContext;
@@ -51,6 +54,8 @@ public class AutoBatterySeekBarPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
 
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.integer.config_lowBatteryWarningLevel, DEFAULT_LEVEL);
         mContext = RuntimeEnvironment.application;
         mPreference = new SeekBarPreference(mContext);
         mPreference.setMax(100);
@@ -68,13 +73,21 @@ public class AutoBatterySeekBarPreferenceControllerTest {
     }
 
     @Test
+    public void testPreference_defaultValue_preferenceVisible() {
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.isVisible()).isTrue();
+        assertThat(mPreference.getProgress()).isEqualTo(DEFAULT_LEVEL);
+    }
+
+    @Test
     public void testPreference_lowPowerLevelNotZero_updatePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, TRIGGER_LEVEL);
         mController.updateState(mPreference);
 
         assertThat(mPreference.isVisible()).isTrue();
-        assertThat(mPreference.getTitle()).isEqualTo("Turn on automatically at 15%");
+        assertThat(mPreference.getTitle()).isEqualTo("Turn on automatically at 20%");
         assertThat(mPreference.getProgress()).isEqualTo(TRIGGER_LEVEL);
     }
 
