@@ -36,7 +36,6 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.search.SearchIndexableResources;
-import com.android.settings.search.XmlParserUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -203,7 +202,7 @@ public class UniquePreferenceTest {
                     continue;
                 }
                 final AttributeSet attrs = Xml.asAttributeSet(parser);
-                final String key = XmlParserUtils.getDataKey(mContext, attrs);
+                final String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
                 if (TextUtils.isEmpty(key)) {
                     Log.e(TAG, "Every preference must have an key; found null key"
                             + " in " + className

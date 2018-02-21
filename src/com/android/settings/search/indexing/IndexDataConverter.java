@@ -29,11 +29,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
 
-import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.search.DatabaseIndexingUtils;
+import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.search.XmlParserUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -161,8 +160,8 @@ public class IndexDataConverter {
             final int outerDepth = parser.getDepth();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
 
-            final String screenTitle = XmlParserUtils.getDataTitle(context, attrs);
-            String key = XmlParserUtils.getDataKey(context, attrs);
+            final String screenTitle = PreferenceXmlParserUtils.getDataTitle(context, attrs);
+            String key = PreferenceXmlParserUtils.getDataKey(context, attrs);
 
             String title;
             String headerTitle;
@@ -186,9 +185,9 @@ public class IndexDataConverter {
                         .getPayloadKeyMap(fragmentName, context);
             }
 
-            headerTitle = XmlParserUtils.getDataTitle(context, attrs);
-            headerSummary = XmlParserUtils.getDataSummary(context, attrs);
-            headerKeywords = XmlParserUtils.getDataKeywords(context, attrs);
+            headerTitle = PreferenceXmlParserUtils.getDataTitle(context, attrs);
+            headerSummary = PreferenceXmlParserUtils.getDataSummary(context, attrs);
+            headerKeywords = PreferenceXmlParserUtils.getDataKeywords(context, attrs);
             enabled = !nonIndexableKeys.contains(key);
 
             // TODO: Set payload type for header results
@@ -217,11 +216,11 @@ public class IndexDataConverter {
 
                 nodeName = parser.getName();
 
-                title = XmlParserUtils.getDataTitle(context, attrs);
-                key = XmlParserUtils.getDataKey(context, attrs);
+                title = PreferenceXmlParserUtils.getDataTitle(context, attrs);
+                key = PreferenceXmlParserUtils.getDataKey(context, attrs);
                 enabled = !nonIndexableKeys.contains(key);
-                keywords = XmlParserUtils.getDataKeywords(context, attrs);
-                iconResId = XmlParserUtils.getDataIcon(context, attrs);
+                keywords = PreferenceXmlParserUtils.getDataKeywords(context, attrs);
+                iconResId = PreferenceXmlParserUtils.getDataIcon(context, attrs);
 
                 if (isHeaderUnique && TextUtils.equals(headerTitle, title)) {
                     isHeaderUnique = false;
@@ -241,17 +240,17 @@ public class IndexDataConverter {
                         .setUserId(-1 /* default user id */);
 
                 if (!nodeName.equals(NODE_NAME_CHECK_BOX_PREFERENCE)) {
-                    summary = XmlParserUtils.getDataSummary(context, attrs);
+                    summary = PreferenceXmlParserUtils.getDataSummary(context, attrs);
 
                     String entries = null;
 
                     if (nodeName.endsWith(NODE_NAME_LIST_PREFERENCE)) {
-                        entries = XmlParserUtils.getDataEntries(context, attrs);
+                        entries = PreferenceXmlParserUtils.getDataEntries(context, attrs);
                     }
 
                     // TODO (b/62254931) index primitives instead of payload
                     payload = controllerUriMap.get(key);
-                    childFragment = XmlParserUtils.getDataChildFragment(context, attrs);
+                    childFragment = PreferenceXmlParserUtils.getDataChildFragment(context, attrs);
 
                     builder.setSummaryOn(summary)
                             .setEntries(entries)
@@ -263,11 +262,11 @@ public class IndexDataConverter {
                     // TODO (b/33577327) We removed summary off here. We should check if we can
                     // merge this 'else' section with the one above. Put a break point to
                     // investigate.
-                    String summaryOn = XmlParserUtils.getDataSummaryOn(context, attrs);
-                    String summaryOff = XmlParserUtils.getDataSummaryOff(context, attrs);
+                    String summaryOn = PreferenceXmlParserUtils.getDataSummaryOn(context, attrs);
+                    String summaryOff = PreferenceXmlParserUtils.getDataSummaryOff(context, attrs);
 
                     if (TextUtils.isEmpty(summaryOn) && TextUtils.isEmpty(summaryOff)) {
-                        summaryOn = XmlParserUtils.getDataSummary(context, attrs);
+                        summaryOn = PreferenceXmlParserUtils.getDataSummary(context, attrs);
                     }
 
                     builder.setSummaryOn(summaryOn);

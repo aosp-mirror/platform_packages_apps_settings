@@ -38,7 +38,7 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
-import com.android.settings.search.XmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -111,7 +111,7 @@ public class SliceControllerInXmlTest {
                     if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
                         continue;
                     }
-                    controllerClassName = XmlParserUtils.getController(mContext, attrs);
+                    controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
 
                     if (!TextUtils.isEmpty(controllerClassName)) {
                         mXmlDeclaredControllers.add(controllerClassName);
