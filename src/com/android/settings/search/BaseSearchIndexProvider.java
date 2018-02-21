@@ -29,6 +29,7 @@ import android.util.Xml;
 
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -119,7 +120,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         final AttributeSet attrs = Xml.asAttributeSet(parser);
         try {
             while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                final String key = XmlParserUtils.getDataKey(context, attrs);
+                final String key = PreferenceXmlParserUtils.getDataKey(context, attrs);
                 if (!TextUtils.isEmpty(key)) {
                     nonIndexableKeys.add(key);
                 }
