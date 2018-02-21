@@ -83,4 +83,38 @@ public class EarlyWarningTipTest {
 
         assertThat(mEarlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
     }
+
+    @Test
+    public void testUpdate_devicePluggedIn_typeBecomeInvisible() {
+        final EarlyWarningTip nextTip = new EarlyWarningTip(BatteryTip.StateType.INVISIBLE,
+                false /* powerModeOn */);
+
+        mEarlyWarningTip.updateState(nextTip);
+
+        assertThat(mEarlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+    }
+
+    @Test
+    public void testUpdate_turnOnLowPowerModeExplicitly_typeStillInvisible() {
+        final EarlyWarningTip earlyWarningTip = new EarlyWarningTip(BatteryTip.StateType.INVISIBLE,
+                false /* powerModeOn */);
+        final EarlyWarningTip nextTip = new EarlyWarningTip(BatteryTip.StateType.INVISIBLE,
+                true /* powerModeOn */);
+
+        earlyWarningTip.updateState(nextTip);
+
+        assertThat(earlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+    }
+
+    @Test
+    public void testUpdate_turnOffLowPowerModeExplicitly_typeBecomeInvisible() {
+        final EarlyWarningTip earlyWarningTip = new EarlyWarningTip(BatteryTip.StateType.HANDLED,
+                true /* powerModeOn */);
+        final EarlyWarningTip nextTip = new EarlyWarningTip(BatteryTip.StateType.INVISIBLE,
+                false /* powerModeOn */);
+
+        earlyWarningTip.updateState(nextTip);
+
+        assertThat(earlyWarningTip.getState()).isEqualTo(BatteryTip.StateType.INVISIBLE);
+    }
 }

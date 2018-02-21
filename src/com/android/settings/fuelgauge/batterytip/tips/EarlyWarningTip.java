@@ -62,13 +62,17 @@ public class EarlyWarningTip extends BatteryTip {
 
     @Override
     public void updateState(BatteryTip tip) {
-        final EarlyWarningTip earlyHeadsUpTip = (EarlyWarningTip) tip;
-        if (mPowerSaveModeOn != earlyHeadsUpTip.mPowerSaveModeOn) {
-            mPowerSaveModeOn = earlyHeadsUpTip.mPowerSaveModeOn;
-            mState = earlyHeadsUpTip.mPowerSaveModeOn ? StateType.HANDLED : StateType.NEW;
-        } else if (mState != StateType.HANDLED) {
-            mState = earlyHeadsUpTip.getState();
+        final EarlyWarningTip earlyWarningTip = (EarlyWarningTip) tip;
+        if (earlyWarningTip.mState == StateType.NEW) {
+            // Display it if there is early warning
+            mState = StateType.NEW;
+        } else if (mState == StateType.NEW && earlyWarningTip.mState == StateType.INVISIBLE) {
+            // If powerSaveMode is really on, show it as handled, otherwise just dismiss it.
+            mState = earlyWarningTip.mPowerSaveModeOn ? StateType.HANDLED : StateType.INVISIBLE;
+        } else {
+            mState = earlyWarningTip.getState();
         }
+        mPowerSaveModeOn = earlyWarningTip.mPowerSaveModeOn;
     }
 
     @Override
