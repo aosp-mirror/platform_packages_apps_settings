@@ -101,6 +101,13 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         return false;
     }
 
+    /**
+     * Populate any static preferences, independent of the radio buttons.
+     * These might be used to provide extra information about the choices.
+     **/
+    protected void addStaticPreferences(PreferenceScreen screen) {
+    }
+
     protected CandidateInfo getCandidate(String key) {
         return mCandidates.get(key);
     }
@@ -134,6 +141,7 @@ public abstract class RadioButtonPickerFragment extends InstrumentedPreferenceFr
         final String systemDefaultKey = getSystemDefaultKey();
         final PreferenceScreen screen = getPreferenceScreen();
         screen.removeAll();
+        addStaticPreferences(screen);
 
         final int customLayoutResId = getRadioButtonPreferenceCustomLayoutResId();
         if (shouldShowItemNone()) {
