@@ -313,12 +313,14 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
         controllers.add(mBatteryHeaderPreferenceController);
         controllers.add(new AutoBrightnessPreferenceController(context, KEY_AUTO_BRIGHTNESS));
         controllers.add(new TimeoutPreferenceController(context, KEY_SCREEN_TIMEOUT));
-        controllers.add(new BatterySaverController(context, getLifecycle()));
         controllers.add(new BatteryPercentagePreferenceController(context));
         controllers.add(new AmbientDisplayPreferenceController(
                 context,
                 new AmbientDisplayConfiguration(context),
                 KEY_AMBIENT_DISPLAY));
+        BatterySaverController batterySaverController = new BatterySaverController(context);
+        controllers.add(batterySaverController);
+        getLifecycle().addObserver(batterySaverController);
         return controllers;
     }
 
