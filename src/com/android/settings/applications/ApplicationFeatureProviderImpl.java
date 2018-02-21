@@ -16,7 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ComponentInfo;
@@ -26,9 +25,7 @@ import android.content.pm.UserInfo;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.ArraySet;
-import android.view.View;
 
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -52,12 +49,6 @@ public class ApplicationFeatureProviderImpl implements ApplicationFeatureProvide
         mPms = pms;
         mDpm = dpm;
         mUm = UserManager.get(mContext);
-    }
-
-    @Override
-    public InstantAppButtonsController newInstantAppButtonsController(Fragment fragment,
-            View view, InstantAppButtonsController.ShowDialogDelegate showDialogDelegate) {
-        return new InstantAppButtonsController(mContext, fragment, view, showDialogDelegate);
     }
 
     @Override

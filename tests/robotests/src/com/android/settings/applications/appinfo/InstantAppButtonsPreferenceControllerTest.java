@@ -18,28 +18,40 @@ package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.AlertDialog;
-import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
+import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.applications.instantapps.InstantAppButtonsController;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -54,27 +66,48 @@ import org.robolectric.util.ReflectionHelpers;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InstantAppButtonsPreferenceControllerTest {
 
+    private static final String TEST_INSTALLER_PACKAGE_NAME = "com.installer";
+    private static final String TEST_INSTALLER_ACTIVITY_NAME = "com.installer.InstallerActivity";
+    private static final String TEST_AIA_PACKAGE_NAME = "test.aia.package";
+
     @Mock
     private PackageManager mPackageManager;
     @Mock
     private ApplicationInfo mAppInfo;
     @Mock
     private AppInfoDashboardFragment mFragment;
+    @Mock
+    private LayoutPreference mPreference;
 
     private Context mContext;
+    private PreferenceScreen mScreen;
+    private PreferenceManager mPreferenceManager;
+    private Button mLaunchButton;
+    private Button mInstallButton;
+    private Button mClearAppButton;
     private InstantAppButtonsPreferenceController mController;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() throws PackageManager.NameNotFoundException {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         final PackageInfo packageInfo = mock(PackageInfo.class);
         packageInfo.applicationInfo = mAppInfo;
         when(mFragment.getPackageInfo()).thenReturn(packageInfo);
-        mController =
-                spy(new InstantAppButtonsPreferenceController(mContext, mFragment, "Package1"));
+        mPreferenceManager = new PreferenceManager(mContext);
+        mScreen = mPreferenceManager.createPreferenceScreen(mContext);
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        final View buttons = View.inflate(
+            RuntimeEnvironment.application, R.layout.instant_app_buttons, null /* parent */);
+        mLaunchButton = buttons.findViewById(R.id.launch);
+        mInstallButton = buttons.findViewById(R.id.install);
+        mClearAppButton = buttons.findViewById(R.id.clear_data);
+        mController = spy(new InstantAppButtonsPreferenceController(
+            mContext, mFragment, TEST_AIA_PACKAGE_NAME, null /* lifecycle */));
+        when(mPreference.getKey()).thenReturn("instant_app_buttons");
+        mScreen.addPreference(mPreference);
+        when(mPreference.findViewById(R.id.instant_app_button_container)).thenReturn(buttons);
     }
 
     @Test
@@ -94,39 +127,164 @@ public class InstantAppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void displayPreference_shouldSetPreferenceTitle() {
-        final PreferenceScreen screen = mock(PreferenceScreen.class);
-        final LayoutPreference preference = mock(LayoutPreference.class);
-        when(screen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
-        when(mController.getApplicationFeatureProvider())
-                .thenReturn(mFeatureFactory.applicationFeatureProvider);
-        final InstantAppButtonsController buttonsController =
-                mock(InstantAppButtonsController.class);
-        when(buttonsController.setPackageName(nullable(String.class)))
-                .thenReturn(buttonsController);
-        when(mFeatureFactory.applicationFeatureProvider.newInstantAppButtonsController(
-                nullable(Fragment.class), nullable(View.class),
-                nullable(InstantAppButtonsController.ShowDialogDelegate.class)))
-                .thenReturn(buttonsController);
+    public void onCreateOptionsMenu_noLaunchUri_shouldNotAddInstallInstantAppMenu() {
+        final Menu menu = mock(Menu.class);
+        when(menu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mock(MenuItem.class));
 
-        mController.displayPreference(screen);
+        mController.onCreateOptionsMenu(menu, null /* inflater */);
 
-        verify(buttonsController).setPackageName(nullable(String.class));
-        verify(buttonsController).show();
+        verify(menu, never()).add(anyInt(), eq(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU),
+            anyInt(), eq(R.string.install_text));
     }
 
     @Test
-    public void createDialog_shouldReturnDialogFromButtonController() {
-        final InstantAppButtonsController buttonsController =
-                mock(InstantAppButtonsController.class);
-        ReflectionHelpers.setField(
-                mController, "mInstantAppButtonsController", buttonsController);
-        final AlertDialog mockDialog = mock(AlertDialog.class);
-        when(buttonsController.createDialog(InstantAppButtonsController.DLG_CLEAR_APP))
-                .thenReturn(mockDialog);
+    public void onCreateOptionsMenu_hasLaunchUri_shouldAddForceStop() {
+        ReflectionHelpers.setField(mController, "mLaunchUri", "www.test.launch");
+        final Menu menu = mock(Menu.class);
+        when(menu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mock(MenuItem.class));
 
-        assertThat(mController.createDialog(InstantAppButtonsController.DLG_CLEAR_APP))
-                .isEqualTo(mockDialog);
+        mController.onCreateOptionsMenu(menu, null /* inflater */);
+
+        verify(menu).add(anyInt(), eq(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU),
+            anyInt(), eq(R.string.install_text));
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_noAppStoreLink_shoulDisableInstallInstantAppMenu() {
+        ReflectionHelpers.setField(mController, "mLaunchUri", "www.test.launch");
+        final Menu menu = mock(Menu.class);
+        final MenuItem menuItem = mock(MenuItem.class);
+        when(menu.findItem(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU)).thenReturn(menuItem);
+
+        mController.onPrepareOptionsMenu(menu);
+
+        verify(menuItem).setEnabled(false);
+    }
+
+    @Test
+    public void onPrepareOptionsMenu_hasAppStoreLink_shoulNotDisableInstallInstantAppMenu() {
+        ReflectionHelpers.setField(mController, "mLaunchUri", "www.test.launch");
+        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
+        final ActivityInfo activityInfo = mock(ActivityInfo.class);
+        resolveInfo.activityInfo = activityInfo;
+        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
+        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        final Menu menu = mock(Menu.class);
+        final MenuItem menuItem = mock(MenuItem.class);
+        when(menu.findItem(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU)).thenReturn(menuItem);
+
+        mController.onPrepareOptionsMenu(menu);
+
+        verify(menuItem, never()).setEnabled(false);
+    }
+
+    @Test
+    public void onOptionsItemSelected_shouldOpenAppStore() {
+        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
+        final ActivityInfo activityInfo = mock(ActivityInfo.class);
+        resolveInfo.activityInfo = activityInfo;
+        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
+        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        mController.displayPreference(mScreen);
+        final ComponentName componentName =
+            new ComponentName(TEST_INSTALLER_PACKAGE_NAME, TEST_INSTALLER_ACTIVITY_NAME);
+        final MenuItem menu = mock(MenuItem.class);
+        when(menu.getItemId()).thenReturn(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU);
+
+        mController.onOptionsItemSelected(menu);
+
+        verify(mFragment).startActivity(argThat(intent-> intent != null
+            && intent.getAction().equals(Intent.ACTION_SHOW_APP_INFO)
+            && intent.getComponent().equals(componentName)));
+    }
+
+    @Test
+    public void displayPreference_noLaunchUri_shouldShowHideLaunchButton() {
+        mController.displayPreference(mScreen);
+
+        assertThat(mLaunchButton.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void displayPreference_hasLaunchUri_shouldShowHideInstallButton() {
+        ReflectionHelpers.setField(mController, "mLaunchUri", "www.test.launch");
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mInstallButton.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void displayPreference_noAppStoreLink_shoulDisableInstallButton() {
+        mController.displayPreference(mScreen);
+
+        assertThat(mInstallButton.isEnabled()).isFalse();
+    }
+
+    @Test
+    public void displayPreference_hasAppStoreLink_shoulSetClickListenerForInstallButton() {
+        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
+        final ActivityInfo activityInfo = mock(ActivityInfo.class);
+        resolveInfo.activityInfo = activityInfo;
+        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
+        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+
+        mController.displayPreference(mScreen);
+
+        assertThat(mInstallButton.hasOnClickListeners()).isTrue();
+    }
+
+    @Test
+    public void displayPreference_shoulSetClickListenerForClearButton() {
+        mController.displayPreference(mScreen);
+
+        assertThat(mClearAppButton.hasOnClickListeners()).isTrue();
+    }
+
+    @Test
+    public void clickLaunchButton_shouldLaunchViewIntent() {
+        final String launchUri = "www.test.launch";
+        ReflectionHelpers.setField(mController, "mLaunchUri", launchUri);
+        mController.displayPreference(mScreen);
+
+        mLaunchButton.callOnClick();
+
+        verify(mFragment).startActivity(argThat(intent-> intent != null
+            && intent.getAction().equals(Intent.ACTION_VIEW)
+            && TextUtils.equals(intent.getDataString(), launchUri)));
+    }
+
+    @Test
+    public void clickInstallButton_shouldOpenAppStore() {
+        final ResolveInfo resolveInfo = mock(ResolveInfo.class);
+        final ActivityInfo activityInfo = mock(ActivityInfo.class);
+        resolveInfo.activityInfo = activityInfo;
+        activityInfo.packageName = TEST_INSTALLER_PACKAGE_NAME;
+        activityInfo.name = TEST_INSTALLER_ACTIVITY_NAME;
+        when(mPackageManager.resolveActivity(any(), anyInt())).thenReturn(resolveInfo);
+        mController.displayPreference(mScreen);
+        final ComponentName componentName =
+            new ComponentName(TEST_INSTALLER_PACKAGE_NAME, TEST_INSTALLER_ACTIVITY_NAME);
+
+        mInstallButton.callOnClick();
+
+        verify(mFragment).startActivity(argThat(intent-> intent != null
+            && intent.getAction().equals(Intent.ACTION_SHOW_APP_INFO)
+            && intent.getComponent().equals(componentName)));
+    }
+
+    @Test
+    public void onClick_shouldDeleteApp() {
+        PackageManagerWrapper packageManagerWrapper = mock(PackageManagerWrapper.class);
+        ReflectionHelpers.setField(mController, "mPackageManagerWrapper", packageManagerWrapper);
+
+        mController.onClick(mock(DialogInterface.class), DialogInterface.BUTTON_POSITIVE);
+
+        verify(packageManagerWrapper)
+            .deletePackageAsUser(eq(TEST_AIA_PACKAGE_NAME), any(), anyInt(),anyInt());
     }
 
 }
