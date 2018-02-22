@@ -44,6 +44,7 @@ import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.overlay.FeatureFactory;
 
 import com.android.settingslib.utils.PowerUtil;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -69,6 +70,7 @@ public class BatteryUtils {
         int BACKGROUND = 2;
         int ALL = 3;
     }
+
     private static final String TAG = "BatteryUtils";
 
     private static final int MIN_POWER_THRESHOLD_MILLI_AMP = 5;
@@ -81,6 +83,7 @@ public class BatteryUtils {
     private Context mContext;
     @VisibleForTesting
     PowerUsageFeatureProvider mPowerUsageFeatureProvider;
+
     public static BatteryUtils getInstance(Context context) {
         if (sInstance == null || sInstance.isDataCorrupted()) {
             sInstance = new BatteryUtils(context);
@@ -153,8 +156,7 @@ public class BatteryUtils {
     private long getProcessForegroundTimeMs(BatteryStats.Uid uid, int which) {
         final long rawRealTimeUs = PowerUtil.convertMsToUs(SystemClock.elapsedRealtime());
         return getScreenUsageTimeMs(uid, which, rawRealTimeUs)
-                + PowerUtil.convertUsToMs(
-                        getForegroundServiceTotalTimeUs(uid, rawRealTimeUs));
+                + PowerUtil.convertUsToMs(getForegroundServiceTotalTimeUs(uid, rawRealTimeUs));
     }
 
     /**
@@ -349,6 +351,7 @@ public class BatteryUtils {
 
     /**
      * Calculate the screen usage time since last full charge.
+     *
      * @param batteryStatsHelper utility class that contains the screen usage data
      * @return time in millis
      */
@@ -500,5 +503,35 @@ public class BatteryUtils {
         return false;
     }
 
+    /**
+     * Check if the app represented by {@code uid} has battery usage more than {@code threshold}
+     *
+     * @param batteryStatsHelper used to check the battery usage
+     * @param userManager        used to init the {@code batteryStatsHelper}
+     * @param uid                represent the app
+     * @param threshold          battery percentage threshold(e.g. 10 means 10% battery usage )
+     * @return {@code true} if battery drain is more than the threshold
+     */
+    public boolean isAppHeavilyUsed(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
+            int uid, int threshold) {
+        initBatteryStatsHelper(batteryStatsHelper, null /* bundle */, userManager);
+        final int dischargeAmount = batteryStatsHelper.getStats().getDischargeAmount(
+                BatteryStats.STATS_SINCE_CHARGED);
+        List<BatterySipper> batterySippers = batteryStatsHelper.getUsageList();
+        final double hiddenAmount = removeHiddenBatterySippers(batterySippers);
+
+        for (int i = 0, size = batterySippers.size(); i < size; i++) {
+            final BatterySipper batterySipper = batterySippers.get(i);
+            if (batterySipper.getUid() == uid) {
+                final int percent = (int) calculateBatteryPercent(
+                        batterySipper.totalPowerMah, batteryStatsHelper.getTotalPower(),
+                        hiddenAmount,
+                        dischargeAmount);
+                return percent >= threshold;
+            }
+        }
+
+        return false;
+    }
 }
 

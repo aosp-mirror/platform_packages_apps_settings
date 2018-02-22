@@ -33,10 +33,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StatsDimensionsValue;
 import android.os.SystemPropertiesProto;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settingslib.utils.ThreadUtils;
@@ -76,10 +78,14 @@ public class AnomalyDetectionJobService extends JobService {
             final BatteryTipPolicy policy = new BatteryTipPolicy(this);
             final BatteryUtils batteryUtils = BatteryUtils.getInstance(this);
             final ContentResolver contentResolver = getContentResolver();
+            final BatteryStatsHelper batteryStatsHelper = new BatteryStatsHelper(this,
+                    true /* collectBatteryBroadcast */);
+            final UserManager userManager = getSystemService(UserManager.class);
 
             for (JobWorkItem item = params.dequeueWork(); item != null;
                     item = params.dequeueWork()) {
-                saveAnomalyToDatabase(batteryDatabaseManager, batteryUtils, policy, contentResolver,
+                saveAnomalyToDatabase(batteryStatsHelper, userManager, batteryDatabaseManager,
+                        batteryUtils, policy, contentResolver,
                         item.getIntent().getExtras());
             }
             jobFinished(params, false /* wantsReschedule */);
@@ -94,9 +100,9 @@ public class AnomalyDetectionJobService extends JobService {
     }
 
     @VisibleForTesting
-    void saveAnomalyToDatabase(BatteryDatabaseManager databaseManager,
-            BatteryUtils batteryUtils, BatteryTipPolicy policy, ContentResolver contentResolver,
-            Bundle bundle) {
+    void saveAnomalyToDatabase(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
+            BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
+            BatteryTipPolicy policy, ContentResolver contentResolver, Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         final StatsDimensionsValue intentDimsValue =
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
@@ -116,7 +122,9 @@ public class AnomalyDetectionJobService extends JobService {
 
             if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
                 // TODO(b/72385333): check battery percentage draining in batterystats
-                if (batteryUtils.isLegacyApp(packageName)) {
+                if (batteryUtils.isLegacyApp(packageName) && batteryUtils.isAppHeavilyUsed(
+                        batteryStatsHelper, userManager, uid,
+                        policy.excessiveBgDrainPercentage)) {
                     Log.e(TAG, "Excessive detected uid=" + uid);
                     batteryUtils.setForceAppStandby(uid, packageName,
                             AppOpsManager.MODE_IGNORED);
