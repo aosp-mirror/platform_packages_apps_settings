@@ -27,9 +27,6 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -58,7 +55,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             new ArrayMap<>();
     private final Set<String> mDashboardTilePrefKeys = new ArraySet<>();
 
-    protected DashboardFeatureProvider mDashboardFeatureProvider;
+    private DashboardFeatureProvider mDashboardFeatureProvider;
     private DashboardTilePlaceholderPreferenceController mPlaceholderPreferenceController;
     private boolean mListeningToCategoryChange;
     private SummaryLoader mSummaryLoader;
@@ -92,13 +89,6 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
             // editing dialog is recreated (that would happen before onResume is called).
             updatePreferenceStates();
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        final View view = super.onCreateView(inflater, container, savedInstanceState);
-        return view;
     }
 
     @Override

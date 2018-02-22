@@ -353,32 +353,6 @@ public class WifiSettings extends RestrictedSettingsFragment
     }
 
     /**
-     * Only update the AP list if there are not any APs currently shown.
-     *
-     * <p>Thus forceUpdate will only be called during cold start or when toggling between wifi on
-     * and off. In other use cases, the previous APs will remain until the next update is received
-     * from {@link WifiTracker}.
-     */
-    private void conditionallyForceUpdateAPs() {
-        if (mAccessPointsPreferenceCategory.getPreferenceCount() > 0
-                && mAccessPointsPreferenceCategory.getPreference(0) instanceof
-                        AccessPointPreference) {
-            // Make sure we don't update due to callbacks initiated by sticky broadcasts in
-            // WifiTracker.
-            Log.d(TAG, "Did not force update APs due to existing APs displayed");
-            getView().removeCallbacks(mUpdateAccessPointsRunnable);
-            return;
-        }
-        setProgressBarVisible(true);
-        mWifiTracker.forceUpdate();
-        if (isVerboseLoggingEnabled()) {
-            Log.i(TAG, "WifiSettings force update APs: " + mWifiTracker.getAccessPoints());
-        }
-        getView().removeCallbacks(mUpdateAccessPointsRunnable);
-        updateAccessPointPreferences();
-    }
-
-    /**
      * @return new WifiEnabler or null (as overridden by WifiSettingsForSetupWizard)
      */
     private WifiEnabler createWifiEnabler() {
@@ -682,7 +656,7 @@ public class WifiSettings extends RestrictedSettingsFragment
         final int wifiState = mWifiManager.getWifiState();
         switch (wifiState) {
             case WifiManager.WIFI_STATE_ENABLED:
-                conditionallyForceUpdateAPs();
+                updateAccessPointPreferences();
                 break;
 
             case WifiManager.WIFI_STATE_ENABLING:

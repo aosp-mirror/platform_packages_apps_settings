@@ -59,6 +59,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -232,17 +233,20 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         final SettingsActivity activity = (SettingsActivity) getActivity();
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
-                context, activity, this /* host */, getLifecycle());
+                context, activity, this /* host */, lifecycle);
         controllers.add(mBatteryHeaderPreferenceController);
         mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
                 KEY_APP_LIST, lifecycle, activity, this);
         controllers.add(mBatteryAppListPreferenceController);
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
-                KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this, this);
+                KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
+                BatteryTipListener */);
         controllers.add(mBatteryTipPreferenceController);
-        controllers.add(new BatterySaverController(context, getLifecycle()));
+        BatterySaverController batterySaverController = new BatterySaverController(context);
+        controllers.add(batterySaverController);
         controllers.add(new BatteryPercentagePreferenceController(context));
 
+        lifecycle.addObserver(batterySaverController);
         return controllers;
     }
 
@@ -322,7 +326,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @VisibleForTesting
     void updateLastFullChargePreference(long timeMs) {
-        final CharSequence timeSequence = StringUtil.formatRelativeTime(getContext(), timeMs, false);
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(getContext(), timeMs,
+                false);
         mLastFullChargePref.setSubtitle(timeSequence);
     }
 

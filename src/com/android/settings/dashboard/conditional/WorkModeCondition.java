@@ -85,7 +85,7 @@ public class WorkModeCondition extends Condition {
     @Override
     public void onPrimaryClick() {
         mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.UserSettingsActivity.class)
+                Settings.AccountDashboardActivity.class)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 

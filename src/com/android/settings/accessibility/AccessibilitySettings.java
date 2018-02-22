@@ -33,7 +33,6 @@ import android.os.UserHandle;
 import android.os.Vibrator;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.ListPreference;
@@ -93,6 +92,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
     // Preferences
     private static final String TOGGLE_HIGH_TEXT_CONTRAST_PREFERENCE =
             "toggle_high_text_contrast_preference";
+    private static final String TOGGLE_INVERSION_PREFERENCE =
+            "toggle_inversion_preference";
     private static final String TOGGLE_POWER_BUTTON_ENDS_CALL_PREFERENCE =
             "toggle_power_button_ends_call_preference";
     private static final String TOGGLE_LOCK_SCREEN_ROTATION_PREFERENCE =
@@ -104,6 +105,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "toggle_master_mono";
     private static final String SELECT_LONG_PRESS_TIMEOUT_PREFERENCE =
             "select_long_press_timeout_preference";
+    private static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
+            "accessibility_shortcut_preference";
     private static final String CAPTIONING_PREFERENCE_SCREEN =
             "captioning_preference_screen";
     private static final String DISPLAY_MAGNIFICATION_PREFERENCE_SCREEN =
@@ -116,13 +119,8 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             "autoclick_preference_screen";
     private static final String VIBRATION_PREFERENCE_SCREEN =
             "vibration_preference_screen";
-
-    @VisibleForTesting static final String TOGGLE_INVERSION_PREFERENCE =
-            "toggle_inversion_preference";
-    @VisibleForTesting static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
+    private static final String DISPLAY_DALTONIZER_PREFERENCE_SCREEN =
             "daltonizer_preference_screen";
-    @VisibleForTesting static final String ACCESSIBILITY_SHORTCUT_PREFERENCE =
-            "accessibility_shortcut_preference";
 
     // Extras passed to sub-fragments.
     static final String EXTRA_PREFERENCE_KEY = "preference_key";
@@ -627,8 +625,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
             displayCategory.addPreference(mToggleInversionPreference);
             displayCategory.addPreference(mDisplayDaltonizerPreferenceScreen);
         }
-        checkColorCorrectionVisibility(mDisplayDaltonizerPreferenceScreen);
-        checkColorInversionVisibility(mToggleInversionPreference);
 
         // Text contrast.
         mToggleHighTextContrastPreference.setChecked(
@@ -683,7 +679,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         updateAutoclickSummary(mAutoclickPreferenceScreen);
 
         updateAccessibilityShortcut(mAccessibilityShortcutPreferenceScreen);
-        checkAccessibilityShortcutVisibility(mAccessibilityShortcutPreferenceScreen);
     }
 
     private void updateMagnificationSummary(Preference pref) {
@@ -804,27 +799,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
         }
     }
 
-    @VisibleForTesting void checkColorCorrectionVisibility(Preference preference) {
-        if (!getContext().getResources().getBoolean(
-                R.bool.config_show_color_correction_preference)) {
-            removePreference(DISPLAY_DALTONIZER_PREFERENCE_SCREEN);
-        }
-    }
-
-    @VisibleForTesting void checkColorInversionVisibility(Preference preference) {
-        if (!getContext().getResources().getBoolean(
-                R.bool.config_show_color_inversion_preference)) {
-            removePreference(TOGGLE_INVERSION_PREFERENCE);
-        }
-    }
-
-    @VisibleForTesting void checkAccessibilityShortcutVisibility(Preference preference) {
-        if (!getContext().getResources().getBoolean(
-                R.bool.config_show_accessibility_shortcut_preference)) {
-            removePreference(ACCESSIBILITY_SHORTCUT_PREFERENCE);
-        }
-    }
-
     private static void configureMagnificationPreferenceIfNeeded(Preference preference) {
         // Some devices support only a single magnification mode. In these cases, we redirect to
         // the magnification mode's UI directly, rather than showing a PreferenceScreen with a
@@ -859,12 +833,6 @@ public class AccessibilitySettings extends SettingsPreferenceFragment implements
                     // Duplicates in Display
                     keys.add(FONT_SIZE_PREFERENCE_SCREEN);
                     keys.add(KEY_DISPLAY_SIZE);
-
-                    // Remove Accessibility Shortcuts if it's not visible
-                    if (!context.getResources().getBoolean(
-                            R.bool.config_show_accessibility_shortcut_preference)) {
-                        keys.add(ACCESSIBILITY_SHORTCUT_PREFERENCE);
-                    }
 
                     // Duplicates in Language & Input
                     keys.add(TTS_SETTINGS_PREFERENCE);

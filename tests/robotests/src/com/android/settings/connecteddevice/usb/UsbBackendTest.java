@@ -27,9 +27,9 @@ import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 
-import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.wrapper.UserManagerWrapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class UsbBackendTest {
     @Mock
     private UsbManager mUsbManager;
     @Mock
-    private UsbBackend.UserRestrictionUtil mUserRestrictionUtil;
+    private UserManagerWrapper mUserManagerWrapper;
     @Mock
     private ConnectivityManager mConnectivityManager;
 
@@ -63,7 +63,7 @@ public class UsbBackendTest {
 
     @Test
     public void constructor_noUsbPort_shouldNotCrash() {
-        UsbBackend usbBackend = new UsbBackend(mContext, mUserRestrictionUtil, null);
+        UsbBackend usbBackend = new UsbBackend(mContext, mUserManagerWrapper, null);
         // Should not crash
     }
 }

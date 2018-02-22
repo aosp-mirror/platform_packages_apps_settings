@@ -30,8 +30,8 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.wrapper.UsbManagerWrapper;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
@@ -49,7 +49,7 @@ public class SelectUsbConfigPreferenceController extends
     private final String[] mListSummaries;
     private final UsbManager mUsbManager;
     @VisibleForTesting
-    UsbBackend.UsbManagerPassThrough mUsbManagerPassThrough;
+    UsbManagerWrapper mUsbManagerWrapper;
     private BroadcastReceiver mUsbReceiver;
     private ListPreference mPreference;
 
@@ -59,7 +59,7 @@ public class SelectUsbConfigPreferenceController extends
         mListValues = context.getResources().getStringArray(R.array.usb_configuration_values);
         mListSummaries = context.getResources().getStringArray(R.array.usb_configuration_titles);
         mUsbManager = (UsbManager) context.getSystemService(Context.USB_SERVICE);
-        mUsbManagerPassThrough = new UsbBackend.UsbManagerPassThrough(mUsbManager);
+        mUsbManagerWrapper = new UsbManagerWrapper(mUsbManager);
         mUsbReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -98,7 +98,7 @@ public class SelectUsbConfigPreferenceController extends
             return false;
         }
 
-        writeUsbConfigurationOption(mUsbManagerPassThrough
+        writeUsbConfigurationOption(mUsbManagerWrapper
                 .usbFunctionsFromString(newValue.toString()));
         updateUsbConfigurationValues();
         return true;
@@ -138,10 +138,10 @@ public class SelectUsbConfigPreferenceController extends
     }
 
     private void updateUsbConfigurationValues() {
-        long functions = mUsbManagerPassThrough.getCurrentFunctions();
+        long functions = mUsbManagerWrapper.getCurrentFunctions();
         int index = 0;
         for (int i = 0; i < mListValues.length; i++) {
-            if (functions == mUsbManagerPassThrough.usbFunctionsFromString(mListValues[i])) {
+            if (functions == mUsbManagerWrapper.usbFunctionsFromString(mListValues[i])) {
                 index = i;
                 break;
             }
