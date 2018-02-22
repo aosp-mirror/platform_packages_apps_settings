@@ -17,11 +17,12 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import android.app.Fragment;
-import android.content.Context;
 
 import com.android.settings.SettingsActivity;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
+import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
 import com.android.settings.fuelgauge.batterytip.actions.SmartBatteryAction;
 import com.android.settings.fuelgauge.batterytip.actions.UnrestrictAppAction;
@@ -42,14 +43,19 @@ public class BatteryTipUtils {
      * @return an action for {@code batteryTip}
      */
     public static BatteryTipAction getActionForBatteryTip(BatteryTip batteryTip,
-            SettingsActivity settingsActivity, Fragment fragment) {
+            SettingsActivity settingsActivity, InstrumentedPreferenceFragment fragment) {
         switch (batteryTip.getType()) {
             case BatteryTip.TipType.SMART_BATTERY_MANAGER:
                 return new SmartBatteryAction(settingsActivity, fragment);
             case BatteryTip.TipType.BATTERY_SAVER:
                 return new BatterySaverAction(settingsActivity);
             case BatteryTip.TipType.APP_RESTRICTION:
-                return new RestrictAppAction(settingsActivity, (RestrictAppTip) batteryTip);
+                if (batteryTip.getState() == BatteryTip.StateType.HANDLED) {
+                    return new OpenRestrictAppFragmentAction(settingsActivity, fragment,
+                            (RestrictAppTip) batteryTip);
+                } else {
+                    return new RestrictAppAction(settingsActivity, (RestrictAppTip) batteryTip);
+                }
             case BatteryTip.TipType.REMOVE_APP_RESTRICTION:
                 return new UnrestrictAppAction(settingsActivity, (UnrestrictAppTip) batteryTip);
             default:
