@@ -61,7 +61,7 @@ public class BackupSettingsFragment extends DashboardFragment {
      * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new BackupSettingsPreferenceController(context));
         return controllers;

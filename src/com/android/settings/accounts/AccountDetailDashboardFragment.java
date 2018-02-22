@@ -109,7 +109,7 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mAccountSynController = new AccountSyncPreferenceController(context);
         controllers.add(mAccountSynController);

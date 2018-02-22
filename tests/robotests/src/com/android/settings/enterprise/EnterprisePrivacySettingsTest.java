@@ -90,7 +90,7 @@ public final class EnterprisePrivacySettingsTest {
 
     @Test
     public void getPreferenceControllers() throws Exception {
-        final List<AbstractPreferenceController> controllers = mSettings.getPreferenceControllers(
+        final List<AbstractPreferenceController> controllers = mSettings.createPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }

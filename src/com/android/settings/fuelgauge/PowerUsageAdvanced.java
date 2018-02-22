@@ -167,7 +167,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

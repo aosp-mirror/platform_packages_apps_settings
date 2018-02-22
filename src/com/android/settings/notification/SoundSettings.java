@@ -107,7 +107,7 @@ public class SoundSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, this, mVolumeCallback, getLifecycle());
     }
 
@@ -274,7 +274,7 @@ public class SoundSettings extends DashboardFragment {
 
     void enableWorkSync() {
         final WorkSoundPreferenceController workSoundController =
-                getPreferenceController(WorkSoundPreferenceController.class);
+                use(WorkSoundPreferenceController.class);
         if (workSoundController != null) {
             workSoundController.enableWorkSync();
         }

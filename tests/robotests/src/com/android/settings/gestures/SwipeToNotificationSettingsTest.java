@@ -59,7 +59,7 @@ public class SwipeToNotificationSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<AbstractPreferenceController> controllers =
-                mFragment.getPreferenceControllers(mContext);
+                mFragment.createPreferenceControllers(mContext);
 
         assertThat(controllers.isEmpty()).isFalse();
     }

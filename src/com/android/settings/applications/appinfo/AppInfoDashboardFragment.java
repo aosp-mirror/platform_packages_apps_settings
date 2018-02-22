@@ -212,7 +212,7 @@ public class AppInfoDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         retrieveAppEntry();
         if (mPackageInfo == null) {
             return null;
