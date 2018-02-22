@@ -50,7 +50,7 @@
         settings:controller="com.android.settings.connecteddevice.BluetoothOnWhileDrivingPreferenceController"
         android:order="-2"/>
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:key="connected_device_printing"
         android:title="@string/print_settings"
         android:summary="@string/summary_placeholder"

@@ -20,26 +20,29 @@ import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.os.UserManager;
 import android.print.PrintJob;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.PrintManagerWrapper;
+import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -57,8 +60,11 @@ public class PrintSettingsPreferenceControllerTest {
 
     @Mock
     private PrintManagerWrapper mPrintManager;
+    @Mock
+    private UserManager mUserManager;
     private Context mContext;
-    private Preference mPreference;
+    @Mock
+    private RestrictedPreference mPreference;
     private PrintSettingPreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -66,8 +72,9 @@ public class PrintSettingsPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mPreference = new Preference(mContext);
+        mContext = spy(RuntimeEnvironment.application);
+        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
+        mPreference = spy(new RestrictedPreference(mContext));
         mController = new PrintSettingPreferenceController(mContext);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
@@ -121,5 +128,11 @@ public class PrintSettingsPreferenceControllerTest {
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.print_settings_summary_no_service));
+    }
+
+    @Test
+    public void updateState_shouldCheckRestriction() {
+        mController.updateState(mPreference);
+        verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_PRINTING);
     }
 }
