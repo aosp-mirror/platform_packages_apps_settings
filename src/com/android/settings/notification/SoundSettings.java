@@ -255,7 +255,8 @@ public class SoundSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context, null /* fragment */,
                             null /* callback */, null /* lifecycle */);
                 }

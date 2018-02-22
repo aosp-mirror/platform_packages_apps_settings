@@ -50,7 +50,7 @@ public class DashboardFragmentSearchIndexProviderInspector {
         final List<AbstractPreferenceController> controllersFromSearchIndexProvider;
         final List<AbstractPreferenceController> controllersFromFragment;
         try {
-            controllersFromSearchIndexProvider = provider.getAllPreferenceControllers(context);
+            controllersFromSearchIndexProvider = provider.getPreferenceControllers(context);
         } catch (Throwable e) {
             // Can't do much with exception, assume the test passed.
             return true;

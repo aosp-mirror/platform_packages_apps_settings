@@ -20,7 +20,6 @@ import static junit.framework.Assert.fail;
 
 import android.content.Context;
 import android.platform.test.annotations.Presubmit;
-import android.provider.SearchIndexableResource;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.MediumTest;
 import android.support.test.runner.AndroidJUnit4;
@@ -67,7 +66,7 @@ public class PreferenceControllerContractTest {
             }
 
             final List<AbstractPreferenceController> controllers =
-                    provider.getAllPreferenceControllers(mContext);
+                    provider.getPreferenceControllers(mContext);
             if (controllers == null) {
                 continue;
             }

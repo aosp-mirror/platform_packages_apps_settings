@@ -67,7 +67,7 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
             // Entire page should be suppressed, mark all keys from this page as non-indexable.
             return getNonIndexableKeysFromXml(context);
         }
-        final List<AbstractPreferenceController> controllers = getAllPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
         if (controllers != null && !controllers.isEmpty()) {
             final List<String> nonIndexableKeys = new ArrayList<>();
             for (AbstractPreferenceController controller : controllers) {
@@ -89,9 +89,9 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
     }
 
     @Override
-    public List<AbstractPreferenceController> getAllPreferenceControllers(Context context) {
+    public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllersFromCode =
-                getPreferenceControllers(context);
+                createPreferenceControllers(context);
         final List<SearchIndexableResource> res = getXmlResourcesToIndex(context, true);
         if (res == null || res.isEmpty()) {
             return controllersFromCode;
@@ -111,7 +111,12 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
         return allControllers;
     }
 
-    public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    /**
+     * Creates a list of {@link AbstractPreferenceController} programatically.
+     * <p/>
+     * This list should create controllers that are not defined in xml as a Slice controller.
+     */
+    public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

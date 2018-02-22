@@ -18,14 +18,9 @@ package com.android.settings.fuelgauge.batterysaver;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.provider.SearchIndexableResource;
-import android.provider.Settings.Global;
-import android.support.annotation.VisibleForTesting;
-import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.internal.util.ArrayUtils;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -96,7 +91,8 @@ public class BatterySaverSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
                     return buildPreferenceControllers(context, null);
                 }
             };

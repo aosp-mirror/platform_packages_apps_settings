@@ -230,7 +230,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* lifecycle */,
                             null /* metricsFeatureProvider */, null /* fragment */,

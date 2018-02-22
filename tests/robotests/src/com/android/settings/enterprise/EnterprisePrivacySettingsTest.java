@@ -98,7 +98,7 @@ public final class EnterprisePrivacySettingsTest {
     @Test
     public void getSearchIndexProviderPreferenceControllers() throws Exception {
         final List<AbstractPreferenceController> controllers
-                = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getAllPreferenceControllers(
+                = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(
                 ShadowApplication.getInstance().getApplicationContext());
         verifyPreferenceControllers(controllers);
     }

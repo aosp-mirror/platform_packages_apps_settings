@@ -86,7 +86,7 @@ public class VibrationSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildControllers(context, null /* lifecycle */);
                 }

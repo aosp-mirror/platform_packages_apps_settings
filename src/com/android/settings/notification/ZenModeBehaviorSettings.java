@@ -97,7 +97,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 }
 
             @Override
-            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
                 return buildPreferenceControllers(context, null);
             }
         };

@@ -88,7 +88,7 @@ public class DoubleTwistGestureSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
                     return buildPreferenceControllers(context, null /* lifecycle */);
                 }
             };

@@ -58,7 +58,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StorageDashboardFragment extends DashboardFragment
-    implements LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
+        implements
+        LoaderManager.LoaderCallbacks<SparseArray<StorageAsyncLoader.AppsStorageResult>> {
     private static final String TAG = "StorageDashboardFrag";
     private static final int STORAGE_JOB_ID = 0;
     private static final int ICON_JOB_ID = 1;
@@ -223,7 +224,8 @@ public class StorageDashboardFragment extends DashboardFragment
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
                     final StorageManager sm = context.getSystemService(StorageManager.class);
                     final UserManagerWrapper userManager =
                             new UserManagerWrapper(context.getSystemService(UserManager.class));
@@ -354,7 +356,8 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         @Override
-        public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {}
+        public void onLoaderReset(Loader<SparseArray<Drawable>> loader) {
+        }
     }
 
     public final class VolumeSizeCallbacks
@@ -369,7 +372,8 @@ public class StorageDashboardFragment extends DashboardFragment
         }
 
         @Override
-        public void onLoaderReset(Loader<PrivateStorageInfo> loader) {}
+        public void onLoaderReset(Loader<PrivateStorageInfo> loader) {
+        }
 
         @Override
         public void onLoadFinished(
