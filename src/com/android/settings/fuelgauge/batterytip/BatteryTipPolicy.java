@@ -19,7 +19,6 @@ package com.android.settings.fuelgauge.batterytip;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
-import android.text.format.DateUtils;
 import android.util.KeyValueListParser;
 import android.util.Log;
 
@@ -44,6 +43,7 @@ public class BatteryTipPolicy {
     private static final String KEY_REDUCED_BATTERY_PERCENT = "reduced_battery_percent";
     private static final String KEY_LOW_BATTERY_ENABLED = "low_battery_enabled";
     private static final String KEY_LOW_BATTERY_HOUR = "low_battery_hour";
+    private static final String KEY_DATA_HISTORY_RETAIN_HOUR = "data_history_retain_hour";
 
     /**
      * {@code true} if general battery tip is enabled
@@ -143,6 +143,14 @@ public class BatteryTipPolicy {
      */
     public final int lowBatteryHour;
 
+    /**
+     * TTL hour for anomaly data stored in database
+     *
+     * @see Settings.Global#BATTERY_TIP_CONSTANTS
+     * @see #KEY_DATA_HISTORY_RETAIN_HOUR
+     */
+    public final int dataHistoryRetainHour;
+
     private final KeyValueListParser mParser;
 
     public BatteryTipPolicy(Context context) {
@@ -174,6 +182,7 @@ public class BatteryTipPolicy {
         reducedBatteryPercent = mParser.getInt(KEY_REDUCED_BATTERY_PERCENT, 50);
         lowBatteryEnabled = mParser.getBoolean(KEY_LOW_BATTERY_ENABLED, false);
         lowBatteryHour = mParser.getInt(KEY_LOW_BATTERY_HOUR, 16);
+        dataHistoryRetainHour = mParser.getInt(KEY_DATA_HISTORY_RETAIN_HOUR, 72);
     }
 
 }
