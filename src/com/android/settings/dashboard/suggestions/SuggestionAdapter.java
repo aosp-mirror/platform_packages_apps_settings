@@ -38,7 +38,6 @@ import android.widget.LinearLayout;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardAdapter.DashboardItemHolder;
-import com.android.settings.dashboard.DashboardAdapter.IconCache;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -46,6 +45,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.utils.IconCache;
 
 import java.util.ArrayList;
 import java.util.List;
