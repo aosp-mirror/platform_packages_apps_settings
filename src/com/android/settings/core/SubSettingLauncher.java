@@ -164,7 +164,7 @@ public class SubSettingLauncher {
     }
 
     private void launchForResult(Fragment listener, Intent intent, int requestCode) {
-        listener.getActivity().startActivityForResult(intent, requestCode);
+        listener.startActivityForResult(intent, requestCode);
     }
 
     /**
