@@ -73,7 +73,7 @@ import java.util.List;
  *
  * This is the initial screen.
  */
-public class MasterClear extends InstrumentedFragment {
+public class MasterClear extends InstrumentedFragment implements OnGlobalLayoutListener {
     private static final String TAG = "MasterClear";
 
     @VisibleForTesting static final int KEYGUARD_REQUEST = 55;
@@ -86,20 +86,17 @@ public class MasterClear extends InstrumentedFragment {
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
     private View mContentView;
-    private Button mInitiateButton;
+    @VisibleForTesting Button mInitiateButton;
     private View mExternalStorageContainer;
     @VisibleForTesting CheckBox mExternalStorage;
     private View mEsimStorageContainer;
     @VisibleForTesting CheckBox mEsimStorage;
-    private ScrollView mScrollView;
+    @VisibleForTesting ScrollView mScrollView;
 
-    private final OnGlobalLayoutListener mOnGlobalLayoutListener = new OnGlobalLayoutListener() {
-        @Override
-        public void onGlobalLayout() {
-            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(mOnGlobalLayoutListener);
-            mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
-        }
-    };
+    @Override
+    public void onGlobalLayout() {
+        mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -259,13 +256,16 @@ public class MasterClear extends InstrumentedFragment {
      */
     @VisibleForTesting
     void establishInitialState() {
-        mInitiateButton = (Button) mContentView.findViewById(R.id.initiate_master_clear);
+        mInitiateButton = mContentView.findViewById(R.id.initiate_master_clear);
         mInitiateButton.setOnClickListener(mInitiateListener);
         mExternalStorageContainer = mContentView.findViewById(R.id.erase_external_container);
-        mExternalStorage = (CheckBox) mContentView.findViewById(R.id.erase_external);
+        mExternalStorage = mContentView.findViewById(R.id.erase_external);
         mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
-        mEsimStorage = (CheckBox) mContentView.findViewById(R.id.erase_esim);
-        mScrollView = (ScrollView) mContentView.findViewById(R.id.master_clear_scrollview);
+        mEsimStorage = mContentView.findViewById(R.id.erase_esim);
+        if (mScrollView != null) {
+            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        }
+        mScrollView = mContentView.findViewById(R.id.master_clear_scrollview);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -322,8 +322,8 @@ public class MasterClear extends InstrumentedFragment {
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
         loadAccountList(um);
-        StringBuffer contentDescription = new StringBuffer();
-        View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
+        final StringBuffer contentDescription = new StringBuffer();
+        final View masterClearContainer = mContentView.findViewById(R.id.master_clear_container);
         getContentDescription(masterClearContainer, contentDescription);
         masterClearContainer.setContentDescription(contentDescription);
 
@@ -334,12 +334,13 @@ public class MasterClear extends InstrumentedFragment {
                 int oldScrollY) {
                 if (v instanceof ScrollView && hasReachedBottom((ScrollView) v)) {
                     mInitiateButton.setEnabled(true);
+                    mScrollView.setOnScrollChangeListener(null);
                 }
             }
         });
 
         // Set the initial state of the initiateButton
-        mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(mOnGlobalLayoutListener);
+        mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
 
     /**
