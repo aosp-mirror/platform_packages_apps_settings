@@ -47,7 +47,8 @@ public class AppFilterItemTest {
                 R.string.filter_all_apps);
 
         // Same instance, should be same
-        assertThat(item).isEqualTo(item);
+        // (Use isTrue as isEqualsTo will prioritize reference equality!)
+        assertThat(item.equals(item)).isTrue();
 
         // Same content, should be same
         assertThat(item).isEqualTo(item2);
