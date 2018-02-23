@@ -22,7 +22,6 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
@@ -32,7 +31,7 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.concurrent.TimeUnit;
 
 /** A JobService to clean up obsolete data in anomaly database */
-public class AnomalyCleanUpJobService extends JobService {
+public class AnomalyCleanupJobService extends JobService {
     private static final String TAG = "AnomalyCleanUpJobService";
 
     @VisibleForTesting
@@ -41,12 +40,13 @@ public class AnomalyCleanUpJobService extends JobService {
     public static void scheduleCleanUp(Context context) {
         final JobScheduler jobScheduler = context.getSystemService(JobScheduler.class);
 
-        final ComponentName component = new ComponentName(context, AnomalyCleanUpJobService.class);
+        final ComponentName component = new ComponentName(context, AnomalyCleanupJobService.class);
         final JobInfo.Builder jobBuilder =
                 new JobInfo.Builder(R.id.job_anomaly_clean_up, component)
-                .setMinimumLatency(CLEAN_UP_FREQUENCY_MS)
-                .setRequiresDeviceIdle(true)
-                .setPersisted(true);
+                        .setPeriodic(CLEAN_UP_FREQUENCY_MS)
+                        .setRequiresDeviceIdle(true)
+                        .setRequiresCharging(true)
+                        .setPersisted(true);
 
         if (jobScheduler.schedule(jobBuilder.build()) != JobScheduler.RESULT_SUCCESS) {
             Log.i(TAG, "Anomaly clean up job service schedule failed.");
@@ -61,7 +61,7 @@ public class AnomalyCleanUpJobService extends JobService {
         ThreadUtils.postOnBackgroundThread(() -> {
             batteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(
                     System.currentTimeMillis() - TimeUnit.HOURS.toMillis(
-                            policy.dataHistoryRetainHour));
+                            policy.dataHistoryRetainDay));
             jobFinished(params, false /* wantsReschedule */);
         });
 
@@ -70,6 +70,6 @@ public class AnomalyCleanUpJobService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters jobParameters) {
-        return true;
+        return false;
     }
 }

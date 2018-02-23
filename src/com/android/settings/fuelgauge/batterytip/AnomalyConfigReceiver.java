@@ -54,6 +54,10 @@ public class AnomalyConfigReceiver extends BroadcastReceiver {
                     extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             uploadPendingIntent(statsManager, pendingIntent);
+
+            if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+                AnomalyCleanupJobService.scheduleCleanUp(context);
+            }
         }
     }
 
