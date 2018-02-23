@@ -117,15 +117,13 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                     mContext, MetricsEvent.ACTION_SHOW_SETTINGS_SUGGESTION, id);
             mSuggestionsShownLogged.add(id);
         }
-        mConfig.setCardLayout(holder, suggestionCount, position);
         final Icon icon = suggestion.getIcon();
         final Drawable drawable = mCache.getIcon(icon);
-        if (drawable != null && (suggestion.getFlags() & Suggestion.FLAG_ICON_TINTABLE) != 0) {
+        if (drawable != null) {
             drawable.setTint(Utils.getColorAccent(mContext));
         }
         holder.icon.setImageDrawable(drawable);
         holder.title.setText(suggestion.getTitle());
-        holder.title.setSingleLine(suggestionCount == 1);
         holder.title.setTypeface(Typeface.create(
             mContext.getString(com.android.internal.R.string.config_headlineFontFamily),
             Typeface.NORMAL));
@@ -139,9 +137,7 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                 holder.summary.setVisibility(View.GONE);
             }
         } else {
-            // Do not show summary if there are more than 1 suggestions
-            holder.summary.setVisibility(View.GONE);
-            holder.title.setMaxLines(3);
+            mConfig.setCardLayout(holder, position);
         }
 
         final ImageView closeButton = holder.itemView.findViewById(R.id.close_button);
@@ -183,9 +179,11 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         final Suggestion suggestion = getSuggestion(position);
         if ((suggestion.getFlags() & Suggestion.FLAG_HAS_BUTTON) != 0) {
             return R.layout.suggestion_tile_with_button;
-        } else {
+        }
+        if (getItemCount() == 1) {
             return R.layout.suggestion_tile;
         }
+        return R.layout.suggestion_tile_two_cards;
     }
 
     @Override
@@ -234,11 +232,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         // Card start/end margin
         private final int mMarginInner;
         private final int mMarginOuter;
-        // Card width if there are more than 2 cards
-        private final int mWidthMultipleCards;
-        // padding between icon and title
-        private final int mPaddingTitleTopSingleCard;
-        private final int mPaddingTitleTopMultipleCards;
         private final WindowManager mWindowManager;
 
         private static CardConfig sConfig;
@@ -250,12 +243,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
                 res.getDimensionPixelOffset(R.dimen.suggestion_card_inner_margin);
             mMarginOuter =
                 res.getDimensionPixelOffset(R.dimen.suggestion_card_outer_margin);
-            mWidthMultipleCards =
-                res.getDimensionPixelOffset(R.dimen.suggestion_card_width_multiple_cards);
-            mPaddingTitleTopSingleCard =
-                res.getDimensionPixelOffset(R.dimen.suggestion_card_title_padding_bottom_one_card);
-            mPaddingTitleTopMultipleCards = res.getDimensionPixelOffset(
-                R.dimen.suggestion_card_title_padding_bottom_multiple_cards);
         }
 
         public static CardConfig get(Context context) {
@@ -266,20 +253,11 @@ public class SuggestionAdapter extends RecyclerView.Adapter<DashboardItemHolder>
         }
 
         @VisibleForTesting
-        void setCardLayout(DashboardItemHolder holder, int suggestionCount, int position) {
+        void setCardLayout(DashboardItemHolder holder, int position) {
             final LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                suggestionCount == 1
-                    ? LinearLayout.LayoutParams.MATCH_PARENT : suggestionCount == 2
-                    ? getWidthForTwoCrads() : mWidthMultipleCards,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-            if (suggestionCount == 1) {
-                params.setMarginStart(mMarginOuter);
-                params.setMarginEnd(mMarginOuter);
-            } else {
-                params.setMarginStart(
-                    position == 0 ? mMarginOuter : mMarginInner);
-                params.setMarginEnd(position == suggestionCount - 1 ? mMarginOuter : 0);
-            }
+                getWidthForTwoCrads(), LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMarginStart(position == 0 ? mMarginOuter : mMarginInner);
+            params.setMarginEnd(position != 0 ? mMarginOuter : 0);
             holder.itemView.setLayoutParams(params);
         }
 
