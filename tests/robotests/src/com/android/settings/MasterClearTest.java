@@ -24,6 +24,7 @@ import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,7 +34,6 @@ import static org.robolectric.Shadows.shadowOf;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -41,11 +41,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
+import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -61,7 +61,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAccountManager;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -76,8 +75,6 @@ public class MasterClearTest {
     private static final String TEST_CONFIRMATION_CLASS = "android.test.conf.pkg.ConfActivity";
     private static final String TEST_ACCOUNT_NAME = "test@example.com";
 
-    @Mock
-    private MasterClear mMasterClear;
     @Mock
     private ScrollView mScrollView;
     @Mock
@@ -95,8 +92,8 @@ public class MasterClearTest {
     @Mock
     private Intent mMockIntent;
 
+    private MasterClear mMasterClear;
     private ShadowActivity mShadowActivity;
-    private ShadowAccountManager mShadowAccountManager;
     private Activity mActivity;
     private View mContentView;
 
@@ -355,6 +352,7 @@ public class MasterClearTest {
         assertEquals(TEST_CONFIRMATION_CLASS, actualIntent.getComponent().getClassName());
     }
 
+    @Test
     public void testShowAccountCredentialConfirmation() {
         // Finally mock out the startActivityForResultCall
         doNothing().when(mMasterClear)
@@ -369,6 +367,19 @@ public class MasterClearTest {
         assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
         assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST)).isTrue();
         assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
+    }
+
+    @Test
+    public void testOnGlobalLayout_shouldNotRemoveListener() {
+        final ViewTreeObserver viewTreeObserver = mock(ViewTreeObserver.class);
+        mMasterClear.mScrollView = mScrollView;
+        mMasterClear.mInitiateButton = mock(Button.class);
+        doReturn(true).when(mMasterClear).hasReachedBottom(any());
+        when(mScrollView.getViewTreeObserver()).thenReturn(viewTreeObserver);
+
+        mMasterClear.onGlobalLayout();
+
+        verify(viewTreeObserver, never()).removeOnGlobalLayoutListener(mMasterClear);
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {
