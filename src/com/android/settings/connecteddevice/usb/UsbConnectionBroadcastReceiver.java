@@ -15,8 +15,6 @@
  */
 package com.android.settings.connecteddevice.usb;
 
-
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,15 +35,22 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
     private Context mContext;
     private UsbConnectionListener mUsbConnectionListener;
     private boolean mListeningToUsbEvents;
-    private int mMode;
-    private boolean mConnected;
     private UsbBackend mUsbBackend;
+
+    private boolean mConnected;
+    private long mFunctions;
+    private int mDataRole;
+    private int mPowerRole;
 
     public UsbConnectionBroadcastReceiver(Context context,
             UsbConnectionListener usbConnectionListener, UsbBackend backend) {
         mContext = context;
         mUsbConnectionListener = usbConnectionListener;
         mUsbBackend = backend;
+
+        mFunctions = UsbManager.FUNCTION_NONE;
+        mDataRole = UsbPort.DATA_ROLE_NONE;
+        mPowerRole = UsbPort.POWER_ROLE_NONE;
     }
 
     @Override
@@ -54,42 +59,41 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
             mConnected = intent.getExtras().getBoolean(UsbManager.USB_CONNECTED)
                     || intent.getExtras().getBoolean(UsbManager.USB_HOST_CONNECTED);
             if (mConnected) {
-                mMode &= UsbBackend.MODE_POWER_MASK;
+                long functions = UsbManager.FUNCTION_NONE;
                 if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MTP)
                         && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
-                    mMode |= UsbBackend.MODE_DATA_MTP;
+                    functions |= UsbManager.FUNCTION_MTP;
                 }
                 if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_PTP)
                         && intent.getExtras().getBoolean(UsbManager.USB_DATA_UNLOCKED, false)) {
-                    mMode |= UsbBackend.MODE_DATA_PTP;
+                    functions |= UsbManager.FUNCTION_PTP;
                 }
                 if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_MIDI)) {
-                    mMode |= UsbBackend.MODE_DATA_MIDI;
+                    functions |= UsbManager.FUNCTION_MIDI;
                 }
                 if (intent.getExtras().getBoolean(UsbManager.USB_FUNCTION_RNDIS)) {
-                    mMode |= UsbBackend.MODE_DATA_TETHER;
+                    functions |= UsbManager.FUNCTION_RNDIS;
                 }
+                mFunctions = functions;
+                mDataRole = mUsbBackend.getDataRole();
+                mPowerRole = mUsbBackend.getPowerRole();
             }
         } else if (UsbManager.ACTION_USB_PORT_CHANGED.equals(intent.getAction())) {
-            mMode &= UsbBackend.MODE_DATA_MASK;
             UsbPortStatus portStatus = intent.getExtras()
                     .getParcelable(UsbManager.EXTRA_PORT_STATUS);
             if (portStatus != null) {
-                mConnected = portStatus.isConnected();
-                if (mConnected) {
-                    mMode |= portStatus.getCurrentPowerRole() == UsbPort.POWER_ROLE_SOURCE
-                            ? UsbBackend.MODE_POWER_SOURCE : UsbBackend.MODE_POWER_SINK;
-                }
+                mDataRole = portStatus.getCurrentDataRole();
+                mPowerRole = portStatus.getCurrentPowerRole();
             }
         }
         if (mUsbConnectionListener != null) {
-            mUsbConnectionListener.onUsbConnectionChanged(mConnected, mMode);
+            mUsbConnectionListener.onUsbConnectionChanged(mConnected, mFunctions, mPowerRole,
+                    mDataRole);
         }
     }
 
     public void register() {
         if (!mListeningToUsbEvents) {
-            mMode = mUsbBackend.getCurrentMode();
             mConnected = false;
             final IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(UsbManager.ACTION_USB_STATE);
@@ -124,6 +128,6 @@ public class UsbConnectionBroadcastReceiver extends BroadcastReceiver implements
      * Interface definition for a callback to be invoked when usb connection is changed.
      */
     interface UsbConnectionListener {
-        void onUsbConnectionChanged(boolean connected, int newMode);
+        void onUsbConnectionChanged(boolean connected, long functions, int powerRole, int dataRole);
     }
 }

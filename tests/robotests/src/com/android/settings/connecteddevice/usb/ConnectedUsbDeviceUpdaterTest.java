@@ -16,10 +16,13 @@
 package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
@@ -60,7 +63,7 @@ public class ConnectedUsbDeviceUpdaterTest {
     }
 
     @Test
-    public void testInitUsbPreference_preferenceInit() {
+    public void initUsbPreference_preferenceInit() {
         mDeviceUpdater.initUsbPreference(mContext);
 
         assertThat(mDeviceUpdater.mUsbPreference.getTitle()).isEqualTo("USB");
@@ -70,19 +73,19 @@ public class ConnectedUsbDeviceUpdaterTest {
     }
 
     @Test
-    public void testInitUsbPreference_usbConnected_preferenceAdded() {
+    public void initUsbPreference_usbConnected_preferenceAdded() {
         mDeviceUpdater.initUsbPreference(mContext);
-        mDeviceUpdater.mUsbConnectionListener
-            .onUsbConnectionChanged(true /* connected */, UsbBackend.MODE_DATA_NONE);
+        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
+                UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(mDeviceUpdater.mUsbPreference);
     }
 
     @Test
-    public void testInitUsbPreference_usbDisconnected_preferenceRemoved() {
+    public void initUsbPreference_usbDisconnected_preferenceRemoved() {
         mDeviceUpdater.initUsbPreference(mContext);
-        mDeviceUpdater.mUsbConnectionListener
-            .onUsbConnectionChanged(false /* connected */, UsbBackend.MODE_DATA_NONE);
+        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
+                UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_NONE, UsbPort.DATA_ROLE_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mDeviceUpdater.mUsbPreference);
     }

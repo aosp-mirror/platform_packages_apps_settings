@@ -27,8 +27,4 @@ public class UsbManagerWrapper {
     public long getCurrentFunctions() {
         return mUsbManager.getCurrentFunctions();
     }
-
-    public long usbFunctionsFromString(String str) {
-        return UsbManager.usbFunctionsFromString(str);
-    }
 }
