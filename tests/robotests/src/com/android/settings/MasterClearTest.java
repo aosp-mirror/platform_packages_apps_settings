@@ -355,6 +355,7 @@ public class MasterClearTest {
         assertEquals(TEST_CONFIRMATION_CLASS, actualIntent.getComponent().getClassName());
     }
 
+    @Test
     public void testShowAccountCredentialConfirmation() {
         // Finally mock out the startActivityForResultCall
         doNothing().when(mMasterClear)

@@ -61,6 +61,7 @@ import com.android.settingslib.wifi.WifiTrackerFactory;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -342,6 +343,8 @@ public class WifiSettingsUiTest {
         onView(withId(resourceId(ID, PASSWORD))).check(matches(isDisplayed()));
     }
 
+    @Ignore("b/73796195")
+    @Test
     public void onConnectedChanged_shouldNotFetchAPs() {
         setWifiState(WifiManager.WIFI_STATE_ENABLED);
         when(mWifiTracker.isConnected()).thenReturn(true);
