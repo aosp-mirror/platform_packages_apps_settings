@@ -40,8 +40,7 @@ public class ConnectedUsbDeviceUpdater {
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
             (connected, newMode) -> {
                 if (connected) {
-                    mUsbPreference.setSummary(
-                            UsbModePreferenceController.getSummary(mUsbBackend.getCurrentMode()));
+                    mUsbPreference.setSummary(getSummary(mUsbBackend.getCurrentMode()));
                     mDevicePreferenceCallback.onDeviceAdded(mUsbPreference);
                 } else {
                     mDevicePreferenceCallback.onDeviceRemoved(mUsbPreference);
@@ -93,5 +92,32 @@ public class ConnectedUsbDeviceUpdater {
         // Register so we can get the connection state from sticky intent.
         //TODO(b/70336520): Use an API to get data instead of sticky intent
         mUsbReceiver.register();
+    }
+
+    public static int getSummary(int mode) {
+        switch (mode) {
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_summary_charging_only;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
+                return R.string.usb_summary_power_only;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_summary_file_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_summary_photo_transfers;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_summary_MIDI;
+            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_TETHER:
+                return R.string.usb_summary_tether;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MTP:
+                return R.string.usb_summary_file_transfers_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_PTP:
+                return R.string.usb_summary_photo_transfers_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MIDI:
+                return R.string.usb_summary_MIDI_power;
+            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_TETHER:
+                return R.string.usb_summary_tether_power;
+            default:
+                return R.string.usb_summary_charging_only;
+        }
     }
 }

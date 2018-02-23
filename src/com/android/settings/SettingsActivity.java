@@ -631,19 +631,10 @@ public class SettingsActivity extends SettingsDrawerActivity
                 Utils.isBandwidthControlEnabled() /* enabled */,
                 isAdmin) || somethingChanged;
 
-        final boolean isConnectedDeviceV2Enabled =
-                Settings.ConnectedDeviceDashboardActivity.isEnabled();
-        // Enable new connected page if v2 enabled
         somethingChanged = setTileEnabled(
                 new ComponentName(packageName,
                         Settings.ConnectedDeviceDashboardActivity.class.getName()),
-                isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
-                isAdmin) || somethingChanged;
-        // Enable old connected page if v2 disabled
-        somethingChanged = setTileEnabled(
-                new ComponentName(packageName,
-                        Settings.ConnectedDeviceDashboardActivityOld.class.getName()),
-                !isConnectedDeviceV2Enabled && !UserManager.isDeviceInDemoMode(this) /* enabled */,
+                !UserManager.isDeviceInDemoMode(this) /* enabled */,
                 isAdmin) || somethingChanged;
 
         somethingChanged = setTileEnabled(new ComponentName(packageName,

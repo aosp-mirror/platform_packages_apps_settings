@@ -24,8 +24,6 @@ import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothFilesPreferenceController;
 import com.android.settings.bluetooth.BluetoothMasterSwitchPreferenceController;
 import com.android.settings.bluetooth.BluetoothSwitchPreferenceController;
-import com.android.settings.connecteddevice.usb.UsbBackend;
-import com.android.settings.connecteddevice.usb.UsbModePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.NfcPreferenceController;
 import com.android.settings.print.PrintSettingPreferenceController;
@@ -75,8 +73,6 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
         final NfcPreferenceController nfcPreferenceController =
                 new NfcPreferenceController(context);
         controllers.add(nfcPreferenceController);
-        controllers.add(new UsbModePreferenceController(
-                context, new UsbBackend(context), lifecycle));
         final BluetoothSwitchPreferenceController bluetoothPreferenceController =
                 new BluetoothSwitchPreferenceController(context);
         controllers.add(bluetoothPreferenceController);
