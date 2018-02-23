@@ -180,6 +180,15 @@ public class InstantAppButtonsPreferenceControllerTest {
     }
 
     @Test
+    public void onPrepareOptionsMenu_installMenuNotFound_shoulNotCrash() {
+        final Menu menu = mock(Menu.class);
+
+        mController.onPrepareOptionsMenu(menu);
+
+        // no crash
+    }
+
+    @Test
     public void onOptionsItemSelected_shouldOpenAppStore() {
         final ResolveInfo resolveInfo = mock(ResolveInfo.class);
         final ActivityInfo activityInfo = mock(ActivityInfo.class);
