@@ -23,6 +23,8 @@ import android.content.pm.ResolveInfo;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 
+import com.android.settingslib.applications.DefaultAppInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.widget.GearPreference;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.TwoTargetPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;

@@ -29,6 +29,8 @@ import android.text.TextUtils;
 import android.util.IconDrawableFactory;
 import android.util.Log;
 
+import com.android.settingslib.applications.DefaultAppInfo;
+
 import java.util.List;
 
 public class DefaultBrowserPreferenceController extends DefaultAppPreferenceController {

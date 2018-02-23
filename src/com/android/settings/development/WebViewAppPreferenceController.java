@@ -25,9 +25,9 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 

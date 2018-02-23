@@ -43,10 +43,10 @@ import android.content.pm.UserInfo;
 import android.os.UserManager;
 
 import com.android.settings.TestConfig;
-import com.android.settings.applications.defaultapps.DefaultAppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.wrapper.UserPackageWrapper;
+import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
