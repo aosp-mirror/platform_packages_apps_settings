@@ -177,9 +177,9 @@ public class BatteryUtilsTest {
         mHighApplicationInfo.targetSdkVersion = Build.VERSION_CODES.O;
         mLowApplicationInfo.targetSdkVersion = Build.VERSION_CODES.L;
 
-
         mNormalBatterySipper.drainType = BatterySipper.DrainType.APP;
         mNormalBatterySipper.totalPowerMah = TOTAL_BATTERY_USAGE;
+        doReturn(UID).when(mNormalBatterySipper).getUid();
 
         mWifiBatterySipper.drainType = BatterySipper.DrainType.WIFI;
         mWifiBatterySipper.totalPowerMah = BATTERY_WIFI_USAGE;
@@ -216,6 +216,10 @@ public class BatteryUtilsTest {
         mUsageList.add(mScreenBatterySipper);
         mUsageList.add(mCellBatterySipper);
         doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
+        doReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE).when(
+                mBatteryStatsHelper).getTotalPower();
+        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt())).thenReturn(
+                DISCHARGE_AMOUNT);
     }
 
     @Test
@@ -546,5 +550,17 @@ public class BatteryUtilsTest {
         // Restrict OP_RUN_ANY_IN_BACKGROUND
         verify(mAppOpsManager).setMode(AppOpsManager.OP_RUN_ANY_IN_BACKGROUND, UID,
                 HIGH_SDK_PACKAGE, AppOpsManager.MODE_IGNORED);
+    }
+
+    @Test
+    public void testIsAppHeavilyUsed_usageMoreThanThreshold_returnTrue() {
+        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
+                10 /* threshold */ )).isTrue();
+    }
+
+    @Test
+    public void testIsAppHeavilyUsed_usageLessThanThreshold_returnFalse() {
+        assertThat(mBatteryUtils.isAppHeavilyUsed(mBatteryStatsHelper, mUserManager, UID,
+                DISCHARGE_AMOUNT /* threshold */ )).isFalse();
     }
 }
