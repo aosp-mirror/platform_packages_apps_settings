@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
-import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.util.Log;
@@ -44,9 +43,6 @@ public class PictureInPictureDetailPreferenceController extends AppInfoPreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        if (UserManager.get(mContext).isManagedProfile()) {
-            return DISABLED_FOR_USER;
-        }
         return hasPictureInPictureActivites() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
