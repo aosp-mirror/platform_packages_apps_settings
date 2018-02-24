@@ -36,4 +36,9 @@
         <item name="android:widgetLayout">@layout/preference_widget_sync_toggle</item>
     </style>
 
+    <style name="SettingsMultiSelectListPreference" parent="Preference.SettingsBase">
+        <item name="android:positiveButtonText">@android:string/ok</item>
+        <item name="android:negativeButtonText">@android:string/cancel</item>
+    </style>
+
 </resources>
