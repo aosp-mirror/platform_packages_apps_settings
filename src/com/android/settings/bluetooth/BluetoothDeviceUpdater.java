@@ -185,14 +185,6 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
 
     @Override
     public void onActiveDeviceChanged(CachedBluetoothDevice activeDevice, int bluetoothProfile) {
-        Collection<CachedBluetoothDevice> cachedDevices =
-                mLocalManager.getCachedDeviceManager().getCachedDevicesCopy();
-        // TODO: The state update of the Cached Bluetooth Devices should be
-        // moved to the device manager: b/72316092
-        for (CachedBluetoothDevice cachedBluetoothDevice : cachedDevices) {
-            boolean isActive = Objects.equals(cachedBluetoothDevice, activeDevice);
-            cachedBluetoothDevice.setActiveDevice(isActive, bluetoothProfile);
-        }
     }
 
     /**
