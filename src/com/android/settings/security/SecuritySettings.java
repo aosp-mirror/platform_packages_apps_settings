@@ -77,7 +77,7 @@ public class SecuritySettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle(), this /* host*/);
     }
 
@@ -86,11 +86,11 @@ public class SecuritySettings extends DashboardFragment {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (getPreferenceController(TrustAgentListPreferenceController.class)
+        if (use(TrustAgentListPreferenceController.class)
                 .handleActivityResult(requestCode, resultCode)) {
             return;
         }
-        if (getPreferenceController(LockUnificationPreferenceController.class)
+        if (use(LockUnificationPreferenceController.class)
                 .handleActivityResult(requestCode, resultCode, data)) {
             return;
         }
@@ -98,16 +98,16 @@ public class SecuritySettings extends DashboardFragment {
     }
 
     void launchConfirmDeviceLockForUnification() {
-        getPreferenceController(LockUnificationPreferenceController.class)
+        use(LockUnificationPreferenceController.class)
                 .launchConfirmDeviceLockForUnification();
     }
 
     void unifyUncompliantLocks() {
-        getPreferenceController(LockUnificationPreferenceController.class).unifyUncompliantLocks();
+        use(LockUnificationPreferenceController.class).unifyUncompliantLocks();
     }
 
     void updateUnificationPreference() {
-        getPreferenceController(LockUnificationPreferenceController.class).updateState(null);
+        use(LockUnificationPreferenceController.class).updateState(null);
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

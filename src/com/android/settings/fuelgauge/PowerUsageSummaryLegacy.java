@@ -307,7 +307,7 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
                 context, getActivity(), this /* host */, getLifecycle());

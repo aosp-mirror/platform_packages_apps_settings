@@ -80,7 +80,7 @@ public class EnterpriseSetDefaultAppsListFragmentTest {
 
     @Test
     public void getPreferenceControllers() {
-        final List<AbstractPreferenceController> controllers = mFragment.getPreferenceControllers(mContext);
+        final List<AbstractPreferenceController> controllers = mFragment.createPreferenceControllers(mContext);
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(1);
         int position = 0;

@@ -72,7 +72,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
-                getPreferenceControllers(context);
+                createPreferenceControllers(context);
         // Load preference controllers from xml definition
         final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
                 .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
@@ -206,7 +206,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     protected abstract int getPreferenceScreenResId();
 
-    protected <T extends AbstractPreferenceController> T getPreferenceController(Class<T> clazz) {
+    protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
         List<AbstractPreferenceController> controllerList = mPreferenceControllers.get(clazz);
         if (controllerList != null) {
             if (controllerList.size() > 1) {
@@ -242,7 +242,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

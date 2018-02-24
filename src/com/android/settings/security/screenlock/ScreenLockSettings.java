@@ -60,7 +60,7 @@ public class ScreenLockSettings extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mLockPatternUtils = new LockPatternUtils(context);
         return buildPreferenceControllers(context, this /* parent */, getLifecycle(),
                 mLockPatternUtils);
@@ -68,7 +68,7 @@ public class ScreenLockSettings extends DashboardFragment
 
     @Override
     public void onOwnerInfoUpdated() {
-        getPreferenceController(OwnerInfoPreferenceController.class).updateSummary();
+        use(OwnerInfoPreferenceController.class).updateSummary();
     }
 
     private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,

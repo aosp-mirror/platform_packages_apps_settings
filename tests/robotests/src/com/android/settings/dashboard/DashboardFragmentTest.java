@@ -86,7 +86,7 @@ public class DashboardFragmentTest {
         final TestPreferenceController controller = new TestPreferenceController(mContext);
         mTestFragment.addPreferenceController(controller);
 
-        final TestPreferenceController retrievedController = mTestFragment.getPreferenceController
+        final TestPreferenceController retrievedController = mTestFragment.use
                 (TestPreferenceController.class);
 
         assertThat(controller).isSameAs(retrievedController);
@@ -99,7 +99,7 @@ public class DashboardFragmentTest {
         final TestPreferenceController controller2 = new TestPreferenceController(mContext);
         mTestFragment.addPreferenceController(controller2);
 
-        final TestPreferenceController retrievedController = mTestFragment.getPreferenceController
+        final TestPreferenceController retrievedController = mTestFragment.use
                 (TestPreferenceController.class);
 
         assertThat(controller1).isSameAs(retrievedController);
@@ -135,7 +135,7 @@ public class DashboardFragmentTest {
 
     @Test
     public void onAttach_shouldCreatePlaceholderPreferenceController() {
-        final AbstractPreferenceController controller = mTestFragment.getPreferenceController(
+        final AbstractPreferenceController controller = mTestFragment.use(
                 DashboardTilePlaceholderPreferenceController.class);
 
         assertThat(controller).isNotNull();
@@ -289,7 +289,7 @@ public class DashboardFragmentTest {
         }
 
         @Override
-        protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+        protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
             return mControllers;
         }
 

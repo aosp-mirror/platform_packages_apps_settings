@@ -24,8 +24,6 @@ import static com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -255,7 +253,7 @@ public final class AppInfoDashboardFragmentTest {
     public void getPreferenceControllers_noPackageInfo_shouldReturnNull() {
         doNothing().when(mFragment).retrieveAppEntry();
 
-        assertThat(mFragment.getPreferenceControllers(mShadowContext)).isNull();
+        assertThat(mFragment.createPreferenceControllers(mShadowContext)).isNull();
     }
 
     @Test

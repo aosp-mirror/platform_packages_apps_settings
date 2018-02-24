@@ -167,7 +167,7 @@ public class StorageDashboardFragment extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController = new StorageSummaryDonutPreferenceController(context);
         controllers.add(mSummaryController);

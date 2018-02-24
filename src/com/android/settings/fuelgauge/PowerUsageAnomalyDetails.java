@@ -123,7 +123,7 @@ public class PowerUsageAnomalyDetails extends DashboardFragment implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

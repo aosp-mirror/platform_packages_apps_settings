@@ -196,7 +196,7 @@ public class ZenModeScheduleRuleSettings extends ZenModeRuleSettingsBase {
 
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         mHeader = new ZenAutomaticRuleHeaderPreferenceController(context, this,
                 getLifecycle());

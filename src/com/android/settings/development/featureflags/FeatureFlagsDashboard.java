@@ -51,7 +51,7 @@ public class FeatureFlagsDashboard extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new FeatureFlagsPreferenceController(context, getLifecycle()));
         return controllers;

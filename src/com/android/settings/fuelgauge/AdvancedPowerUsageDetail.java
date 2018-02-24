@@ -327,7 +327,7 @@ public class AdvancedPowerUsageDetail extends DashboardFragment implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         final Bundle bundle = getArguments();
         final int uid = bundle.getInt(EXTRA_UID, 0);

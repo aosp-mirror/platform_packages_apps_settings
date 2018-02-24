@@ -90,7 +90,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle(), mMetricsFeatureProvider, this
                 /* fragment */,
                 this /* mobilePlanHost */);
@@ -140,7 +140,7 @@ public class NetworkDashboardFragment extends DashboardFragment implements
         switch (dialogId) {
             case MANAGE_MOBILE_PLAN_DIALOG_ID:
                 final MobilePlanPreferenceController controller =
-                        getPreferenceController(MobilePlanPreferenceController.class);
+                        use(MobilePlanPreferenceController.class);
                 return new AlertDialog.Builder(getActivity())
                         .setMessage(controller.getMobilePlanDialogMessage())
                         .setCancelable(false)

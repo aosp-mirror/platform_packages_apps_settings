@@ -107,7 +107,7 @@ public class LanguageAndInputSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldRegisterLifecycleObservers() {
         final List<AbstractPreferenceController> controllers =
-                mFragment.getPreferenceControllers(mActivity);
+                mFragment.createPreferenceControllers(mActivity);
         int lifecycleObserverCount = 0;
         for (AbstractPreferenceController controller : controllers) {
             if (controller instanceof LifecycleObserver) {
@@ -121,7 +121,7 @@ public class LanguageAndInputSettingsTest {
     @Test
     public void testGetPreferenceControllers_shouldAllBeCreated() {
         final List<AbstractPreferenceController> controllers =
-                mFragment.getPreferenceControllers(mActivity);
+                mFragment.createPreferenceControllers(mActivity);
 
         assertThat(controllers.isEmpty()).isFalse();
     }
@@ -189,7 +189,7 @@ public class LanguageAndInputSettingsTest {
                 fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
 
-        for (AbstractPreferenceController controller : fragment.getPreferenceControllers(context)) {
+        for (AbstractPreferenceController controller : fragment.createPreferenceControllers(context)) {
             preferenceKeys.add(controller.getPreferenceKey());
         }
 

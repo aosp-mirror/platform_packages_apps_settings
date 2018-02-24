@@ -169,7 +169,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
         mSummaryController =
                 new DataUsageSummaryPreferenceController(context);

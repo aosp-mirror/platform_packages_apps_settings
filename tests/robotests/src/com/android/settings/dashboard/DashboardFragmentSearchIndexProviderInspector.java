@@ -57,7 +57,7 @@ public class DashboardFragmentSearchIndexProviderInspector {
         }
         try {
             controllersFromFragment =
-                    ((DashboardFragment) fragment).getPreferenceControllers(context);
+                    ((DashboardFragment) fragment).createPreferenceControllers(context);
         } catch (Throwable e) {
             // Can't do much with exception, assume the test passed.
             return true;

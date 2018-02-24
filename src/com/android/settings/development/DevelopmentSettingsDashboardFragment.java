@@ -302,7 +302,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         if (Utils.isMonkeyRunning()) {
             mPreferenceControllers = new ArrayList<>();
             return null;
@@ -454,7 +454,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @VisibleForTesting
     <T extends AbstractPreferenceController> T getDevelopmentOptionsController(Class<T> clazz) {
-        return getPreferenceController(clazz);
+        return use(clazz);
     }
 
     /**

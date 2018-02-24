@@ -49,7 +49,7 @@ public abstract class ApplicationListFragment extends DashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         ApplicationListPreferenceController controller = new ApplicationListPreferenceController(
                 context, this, context.getPackageManager(), this);
