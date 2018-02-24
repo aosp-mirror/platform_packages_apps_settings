@@ -77,8 +77,7 @@ public class DatabaseIndexingUtils {
      * @return A map between {@link Uri}s and {@link PreferenceControllerMixin}s to get the payload
      * types for Settings.
      */
-    public static Map<String, ResultPayload> getPayloadKeyMap(
-            String className, Context context) {
+    public static Map<String, ResultPayload> getPayloadKeyMap(String className, Context context) {
         ArrayMap<String, ResultPayload> map = new ArrayMap<>();
         if (context == null) {
             return map;
@@ -96,8 +95,8 @@ public class DatabaseIndexingUtils {
         // SEARCH_INDEX_DATA_PROVIDER field
         final Indexable.SearchIndexProvider provider = getSearchIndexProvider(clazz);
 
-        List<AbstractPreferenceController> controllers =
-                provider.getPreferenceControllers(context);
+        final List<AbstractPreferenceController> controllers =
+                provider.getAllPreferenceControllers(context);
 
         if (controllers == null) {
             return map;

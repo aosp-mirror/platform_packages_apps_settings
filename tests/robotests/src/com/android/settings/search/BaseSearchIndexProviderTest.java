@@ -18,7 +18,6 @@ package com.android.settings.search;
 
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -26,15 +25,15 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -50,13 +49,13 @@ public class BaseSearchIndexProviderTest {
 
     private static final String TEST_PREF_KEY = "test_pref_key";
 
-    @Mock
     private Context mContext;
     private BaseSearchIndexProvider mIndexProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mIndexProvider = spy(BaseSearchIndexProvider.class);
     }
 
@@ -89,6 +88,38 @@ public class BaseSearchIndexProviderTest {
         doReturn(controllers).when(mIndexProvider).getPreferenceControllers(mContext);
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEqualTo(Collections.EMPTY_LIST);
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void getAllPreferenceControllers_shouldCreateControllerFromCodeAndXml() {
+
+        final BaseSearchIndexProvider provider = new BaseSearchIndexProvider() {
+            @Override
+            public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                    boolean enabled) {
+                final SearchIndexableResource sir = new SearchIndexableResource(context);
+                sir.xmlResId = R.xml.location_settings;
+                return Arrays.asList(sir);
+            }
+
+            @Override
+            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+                final List<AbstractPreferenceController> controllersFromCode = new ArrayList<>();
+                controllersFromCode.add(new BasePreferenceController(mContext, "TEST_KEY") {
+                    @Override
+                    public int getAvailabilityStatus() {
+                        return AVAILABLE;
+                    }
+                });
+                return controllersFromCode;
+            }
+        };
+
+        final List<AbstractPreferenceController> controllers =
+                provider.getAllPreferenceControllers(mContext);
+
+        assertThat(controllers).hasSize(3);
     }
 
     public static class NotAvailablePreferenceController extends AbstractPreferenceController

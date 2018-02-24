@@ -16,17 +16,39 @@
 
 package com.android.settings.core;
 
+import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.content.res.XmlResourceParser;
+import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
+import android.util.Xml;
+
 import com.android.settings.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utility class to parse elements of XML preferences
  */
 public class PreferenceXmlParserUtils {
+
+    private static final String TAG = "PreferenceXmlParserUtil";
+
+    private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
+            "Preference", "PreferenceCategory", "PreferenceScreen");
+
+    public static final String METADATA_KEY = "key";
+    public static final String METADATA_CONTROLLER = "controller";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -83,6 +105,47 @@ public class PreferenceXmlParserUtils {
     }
 
     /**
+     * Extracts metadata from preference xml and put them into a {@link Bundle}.
+     *
+     * TODO(zhfan): Similar logic exists in {@link SliceBuilderUtils} and
+     * {@link UniquePreferenceTest}. Need refactoring to consolidate them all.
+     */
+    @NonNull
+    public static List<Bundle> extractMetadata(Context context, int xmlResId)
+            throws IOException, XmlPullParserException {
+        final List<Bundle> metadata = new ArrayList<>();
+        if (xmlResId <= 0) {
+            Log.d(TAG, xmlResId + " is invalid.");
+            return metadata;
+        }
+        final XmlResourceParser parser = context.getResources().getXml(xmlResId);
+
+        int type;
+        while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
+                && type != XmlPullParser.START_TAG) {
+            // Parse next until start tag is found
+        }
+        final int outerDepth = parser.getDepth();
+
+        do {
+            if (type != XmlPullParser.START_TAG) {
+                continue;
+            }
+            final String nodeName = parser.getName();
+            if (!SUPPORTED_PREF_TYPES.contains(nodeName) && !nodeName.endsWith("Preference")) {
+                continue;
+            }
+            final Bundle preferenceMetadata = new Bundle();
+            final AttributeSet attrs = Xml.asAttributeSet(parser);
+            preferenceMetadata.putString(METADATA_KEY, getDataKey(context, attrs));
+            preferenceMetadata.putString(METADATA_CONTROLLER, getController(context, attrs));
+            metadata.add(preferenceMetadata);
+        } while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
+                && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
+        return metadata;
+    }
+
+    /**
      * Returns the fragment name if this preference launches a child fragment.
      */
     public static String getDataChildFragment(Context context, AttributeSet attrs) {
@@ -98,7 +161,8 @@ public class PreferenceXmlParserUtils {
         return data;
     }
 
-    private static String getDataEntries(Context context, AttributeSet set, int[] attrs, int resId) {
+    private static String getDataEntries(Context context, AttributeSet set, int[] attrs,
+            int resId) {
         final TypedArray sa = context.obtainStyledAttributes(set, attrs);
         final TypedValue tv = sa.peekValue(resId);
         sa.recycle();
@@ -108,7 +172,7 @@ public class PreferenceXmlParserUtils {
                 data = context.getResources().getStringArray(tv.resourceId);
             }
         }
-        final int count = (data == null ) ? 0 : data.length;
+        final int count = (data == null) ? 0 : data.length;
         if (count == 0) {
             return null;
         }

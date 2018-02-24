@@ -16,10 +16,8 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.TestConfig;
@@ -30,8 +28,6 @@ import com.android.settingslib.drawer.CategoryKey;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -41,13 +37,6 @@ import java.util.List;
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedConnectedDeviceDashboardFragmentTest {
-
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-
-    @Mock
-    private PackageManager mManager;
-
     private AdvancedConnectedDeviceDashboardFragment mFragment;
 
     @Before
@@ -55,7 +44,6 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
         MockitoAnnotations.initMocks(this);
 
         mFragment = new AdvancedConnectedDeviceDashboardFragment();
-        when(mContext.getApplicationContext().getPackageManager()).thenReturn(mManager);
     }
 
     @Test
@@ -66,7 +54,8 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext,
+                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                        RuntimeEnvironment.application,
                         true /* enabled */);
 
         assertThat(indexRes).isNotNull();
@@ -81,9 +70,8 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
-        when(mManager.hasSystemFeature(PackageManager.FEATURE_NFC)).thenReturn(false);
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+                .getNonIndexableKeys(context);
         final int xmlId = (new ConnectedDeviceDashboardFragment()).getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);

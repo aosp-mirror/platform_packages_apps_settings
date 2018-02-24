@@ -17,7 +17,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:key="fake_title_key"
-                  android:title="screen_title">
+                  android:title="screen_title"
+                  settings:controller="com.android.settings.slices.FakePreferenceController">
 
     <Preference
         android:key="key"

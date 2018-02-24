@@ -67,7 +67,7 @@ public class PreferenceControllerContractTest {
             }
 
             final List<AbstractPreferenceController> controllers =
-                    provider.getPreferenceControllers(mContext);
+                    provider.getAllPreferenceControllers(mContext);
             if (controllers == null) {
                 continue;
             }

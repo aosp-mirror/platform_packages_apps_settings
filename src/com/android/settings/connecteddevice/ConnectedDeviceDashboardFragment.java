@@ -119,15 +119,7 @@ public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
-
                     return new ArrayList<>();
-                }
-
-                @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
-                        Context context) {
-                    //TODO(b/69333961): update the index for controllers
-                    return super.getPreferenceControllers(context);
                 }
             };
 }
