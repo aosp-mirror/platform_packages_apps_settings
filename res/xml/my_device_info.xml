@@ -60,7 +60,8 @@
         android:key="legal_container"
         android:order="5"
         android:title="@string/legal_information"
-        android:fragment="com.android.settings.LegalSettings" />
+        android:fragment="com.android.settings.LegalSettings"
+        settings:allowDividerAbove="true"/>
 
     <!-- Regulatory labels -->
     <Preference
@@ -76,7 +77,8 @@
         android:order="7"
         android:title="@string/sim_status_title"
         settings:keywords="@string/keywords_sim_status"
-        android:summary="@string/summary_placeholder"/>
+        android:summary="@string/summary_placeholder"
+        settings:allowDividerAbove="true"/>
 
     <!-- Model & hardware -->
     <Preference
