@@ -478,7 +478,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* activity */,
                             null /* lifecycle */, null /* devOptionsDashboardFragment */,

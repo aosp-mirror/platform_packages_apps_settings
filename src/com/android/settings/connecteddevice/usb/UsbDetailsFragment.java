@@ -121,7 +121,7 @@ public class UsbDetailsFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     List<AbstractPreferenceController> ret = new ArrayList<>();
                     ret.addAll(createControllerList(context, new UsbBackend(context), null));

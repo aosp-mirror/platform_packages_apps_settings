@@ -96,7 +96,7 @@ public class DatabaseIndexingUtils {
         final Indexable.SearchIndexProvider provider = getSearchIndexProvider(clazz);
 
         final List<AbstractPreferenceController> controllers =
-                provider.getAllPreferenceControllers(context);
+                provider.getPreferenceControllers(context);
 
         if (controllers == null) {
             return map;

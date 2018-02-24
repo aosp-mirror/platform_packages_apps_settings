@@ -116,11 +116,5 @@ public class FakeSettingsFragment extends DashboardFragment {
                     keys.add("pref_key_3");
                     return keys;
                 }
-
-                @Override
-                public List<AbstractPreferenceController>
-                getPreferenceControllers(Context context) {
-                    return null;
-                }
             };
 }

@@ -98,7 +98,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null, null, null);
                 }

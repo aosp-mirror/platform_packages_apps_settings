@@ -85,7 +85,7 @@ public class BaseSearchIndexProviderTest {
     public void getNonIndexableKeys_preferenceIsAvailable_shouldReturnEmptyList() {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new AvailablePreferenceController(mContext));
-        doReturn(controllers).when(mIndexProvider).getPreferenceControllers(mContext);
+        doReturn(controllers).when(mIndexProvider).createPreferenceControllers(mContext);
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEqualTo(Collections.EMPTY_LIST);
     }
@@ -104,7 +104,7 @@ public class BaseSearchIndexProviderTest {
             }
 
             @Override
-            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
                 final List<AbstractPreferenceController> controllersFromCode = new ArrayList<>();
                 controllersFromCode.add(new BasePreferenceController(mContext, "TEST_KEY") {
                     @Override
@@ -117,7 +117,7 @@ public class BaseSearchIndexProviderTest {
         };
 
         final List<AbstractPreferenceController> controllers =
-                provider.getAllPreferenceControllers(mContext);
+                provider.getPreferenceControllers(mContext);
 
         assertThat(controllers).hasSize(3);
     }
@@ -143,7 +143,7 @@ public class BaseSearchIndexProviderTest {
     public void getNonIndexableKeys_preferenceIsNotAvailable_shouldReturnKey() {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new NotAvailablePreferenceController(mContext));
-        doReturn(controllers).when(mIndexProvider).getPreferenceControllers(mContext);
+        doReturn(controllers).when(mIndexProvider).createPreferenceControllers(mContext);
 
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).contains(TEST_PREF_KEY);
     }
