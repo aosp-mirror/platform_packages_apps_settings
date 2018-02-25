@@ -63,7 +63,7 @@ public class GestureSettings extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         if (mAmbientDisplayConfig == null) {
             mAmbientDisplayConfig = new AmbientDisplayConfiguration(context);
         }
@@ -100,7 +100,7 @@ public class GestureSettings extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null,
                             new AmbientDisplayConfiguration(context));

@@ -73,7 +73,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         final BuildNumberPreferenceController buildNumberPreferenceController =
-                getPreferenceController(BuildNumberPreferenceController.class);
+                use(BuildNumberPreferenceController.class);
         if (buildNumberPreferenceController.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
@@ -91,7 +91,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getActivity(), this /* fragment */,
                 getLifecycle());
     }
@@ -158,7 +158,7 @@ public class DeviceInfoSettings extends DashboardFragment implements Indexable {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null /*activity */,
                             null /* fragment */, null /* lifecycle */);

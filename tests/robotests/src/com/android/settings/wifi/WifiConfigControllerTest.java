@@ -199,15 +199,6 @@ public class WifiConfigControllerTest {
         assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.GONE);
     }
 
-    @Test
-    public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
-        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
-                WifiConfigUiBase.MODE_CONNECT);
-        final TextView ssid = mView.findViewById(R.id.ssid);
-        // Verify ssid text get focus when add new network
-        assertThat(ssid.isFocused()).isTrue();
-    }
-
     public class TestWifiConfigController extends WifiConfigController {
 
         public TestWifiConfigController(WifiConfigUiBase parent, View view,

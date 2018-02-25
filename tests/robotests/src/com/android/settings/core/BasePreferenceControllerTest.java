@@ -31,6 +31,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -43,6 +44,17 @@ public class BasePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+    }
+
+
+    @Test(expected = IllegalArgumentException.class)
+    public void newController_noKey_shouldCrash() {
+        new BasePreferenceController(RuntimeEnvironment.application, null /* key */) {
+            @Override
+            public int getAvailabilityStatus() {
+                return AVAILABLE;
+            }
+        };
     }
 
     @Test

@@ -35,6 +35,7 @@ import java.util.WeakHashMap;
 
 import androidx.app.slice.Slice;
 import androidx.app.slice.SliceProvider;
+import androidx.app.slice.builders.SliceAction;
 import androidx.app.slice.builders.ListBuilder;
 
 /**
@@ -173,8 +174,9 @@ public class SettingsSliceProvider extends SliceProvider {
                         .setTitle(getContext().getString(R.string.wifi_settings))
                         .setTitleItem(Icon.createWithResource(getContext(), R.drawable.wifi_signal))
                         .setSubtitle(state)
-                        .addToggle(getBroadcastIntent(ACTION_WIFI_CHANGED), finalWifiEnabled)
-                        .setContentIntent(getIntent(Intent.ACTION_MAIN)))
+                        .addEndItem(new SliceAction(getBroadcastIntent(ACTION_WIFI_CHANGED),
+                                null, finalWifiEnabled))
+                        .setPrimaryAction(new SliceAction(getIntent(Intent.ACTION_MAIN), null, null)))
                 .build();
     }
 

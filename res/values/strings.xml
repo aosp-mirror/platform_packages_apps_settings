@@ -1655,10 +1655,15 @@
     <!-- Bluetooth settings.  Dock Setting Dialog - Remember setting and don't ask user again -->
     <string name="bluetooth_dock_settings_remember">Remember settings</string>
 
+    <!-- Bluetooth developer options. -->
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
+    <!-- Bluetooth developer settings: Checkbox title for enabling Bluetooth receiving AVDTP delay reports -->
+    <string name="bluetooth_enable_avdtp_delay_reports">Enable Bluetooth AVDTP delay reports</string>
+    <!-- Bluetooth developer settings: Summary of checkbox for enabling Bluetooth receiving AVDTP delay reports -->
+    <string name="bluetooth_enable_avdtp_delay_reports_summary">Allow receiving Bluetooth AVDTP delay reports</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -4409,10 +4414,10 @@
     <!-- Used in the Captions settings screen to control turning on/off the feature entirely -->
     <string name="accessibility_caption_master_switch_title">Use captions</string>
 
-    <!-- Preference's state when enabled. Note: UPPERCASE -->
-    <string name="accessibility_summary_state_enabled">ON</string>
-    <!-- Preference's state when disabled. Note: UPPERCASE -->
-    <string name="accessibility_summary_state_disabled">OFF</string>
+    <!-- Preference's state when enabled. -->
+    <string name="accessibility_summary_state_enabled">On</string>
+    <!-- Preference's state when disabled. -->
+    <string name="accessibility_summary_state_disabled">Off</string>
 
     <!-- Title for the preference to show a tile for a particular feature in the Quick Settings pane. [CHAR LIMIT=NONE] -->
     <string name="enable_quick_setting">Show in Quick Settings</string>
@@ -6758,6 +6763,8 @@
     <string name="keywords_android_version">android security patch level, baseband version, kernel version</string>
     <!-- Search keyword for Ambient display settings screen. -->
     <string name="keywords_ambient_display_screen">Ambient display, Lock screen display</string>
+    <!-- Search keyword for fingerprint settings. -->
+    <string name="keywords_fingerprint_settings">fingerprint</string>
 
     <!-- NFC Wi-Fi pairing/setup strings-->
 
@@ -8410,10 +8417,10 @@
     <string name="payment_summary"><xliff:g id="app_name" example="Payment App">%1$s</xliff:g> is default</string>
 
     <!-- Summary of location on screen [CHAR LIMIT=NONE] -->
-    <string name="location_on_summary">ON</string>
+    <string name="location_on_summary">On</string>
 
     <!-- Location off [CHAR LIMIT=NONE] -->
-    <string name="location_off_summary">OFF</string>
+    <string name="location_off_summary">Off</string>
 
     <!-- Backup disabled summary [CHAR LIMIT=NONE] -->
     <string name="backup_disabled">Back up disabled</string>
@@ -8882,14 +8889,17 @@
     <!-- [CHAR LIMIT=60] Name of dev option called "System UI demo mode" -->
     <string name="demo_mode">System UI demo mode</string>
 
+    <!-- [CHAR LIMIT=60] Name of dev option that changes the UI Mode -->
+    <string name="dark_ui_mode">Night mode</string>
+
+    <!-- [CHAR LIMIT=60] Name of dev option that changes the color of the UI -->
+    <string name="dark_ui_mode_title">Set Night mode</string>
+
     <!-- [CHAR LIMIT=60] Name of dev option to enable extra quick settings tiles -->
     <string name="quick_settings_developer_tiles">Quick settings developer tiles</string>
 
-    <!-- [CHAR LIMIT=25] Title of developer tile to toggle window trace -->
-    <string name="window_trace_quick_settings_title">Window Trace</string>
-
-    <!-- [CHAR LIMIT=25] Title of developer tile to toggle layer trace -->
-    <string name="layer_trace_quick_settings_title">Surface Trace</string>
+    <!-- [CHAR LIMIT=25] Title of developer tile to toggle winscope trace -->
+    <string name="winscope_trace_quick_settings_title">Winscope Trace</string>
 
     <!-- Template for formatting country and language. eg Canada - French [CHAR LIMIT=NONE]-->
     <string name="support_country_format"><xliff:g id="country" example="Canada">%1$s</xliff:g> - <xliff:g id="language" example="French">%2$s</xliff:g></string>

@@ -29,9 +29,13 @@ import android.util.ArraySet;
 import android.util.Log;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.SettingsDrawerActivity;
 import com.android.settingslib.drawer.Tile;
@@ -63,13 +67,34 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mDashboardFeatureProvider =
-                FeatureFactory.getFactory(context).getDashboardFeatureProvider(context);
+        mDashboardFeatureProvider = FeatureFactory.getFactory(context).
+                getDashboardFeatureProvider(context);
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        // Load preference controllers from code
+        final List<AbstractPreferenceController> controllersFromCode =
+                createPreferenceControllers(context);
+        // Load preference controllers from xml definition
+        final List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
+                .getPreferenceControllersFromXml(context, getPreferenceScreenResId());
+        // Filter xml-based controllers in case a similar controller is created from code already.
+        final List<BasePreferenceController> uniqueControllerFromXml =
+                PreferenceControllerListHelper.filterControllers(
+                        controllersFromXml, controllersFromCode);
 
-        List<AbstractPreferenceController> controllers = getPreferenceControllers(context);
-        if (controllers == null) {
-            controllers = new ArrayList<>();
+        // Add unique controllers to list.
+        if (controllersFromCode != null) {
+            controllers.addAll(controllersFromCode);
         }
+        controllers.addAll(uniqueControllerFromXml);
+
+        // And wire up with lifecycle.
+        final Lifecycle lifecycle = getLifecycle();
+        uniqueControllerFromXml
+                .stream()
+                .filter(controller -> controller instanceof LifecycleObserver)
+                .forEach(
+                        controller -> lifecycle.addObserver((LifecycleObserver) controller));
+
         mPlaceholderPreferenceController =
                 new DashboardTilePlaceholderPreferenceController(context);
         controllers.add(mPlaceholderPreferenceController);
@@ -181,7 +206,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     @Override
     protected abstract int getPreferenceScreenResId();
 
-    protected <T extends AbstractPreferenceController> T getPreferenceController(Class<T> clazz) {
+    protected <T extends AbstractPreferenceController> T use(Class<T> clazz) {
         List<AbstractPreferenceController> controllerList = mPreferenceControllers.get(clazz);
         if (controllerList != null) {
             if (controllerList.size() > 1) {
@@ -217,7 +242,9 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
     /**
      * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
-    protected abstract List<AbstractPreferenceController> getPreferenceControllers(Context context);
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        return null;
+    }
 
     /**
      * Returns true if this tile should be displayed
@@ -327,7 +354,7 @@ public abstract class DashboardFragment extends SettingsPreferenceFragment
         final Context context = getContext();
         mSummaryLoader = new SummaryLoader(getActivity(), getCategoryKey());
         mSummaryLoader.setSummaryConsumer(this);
-        final TypedArray a = context.obtainStyledAttributes(new int[]{
+        final TypedArray a = context.obtainStyledAttributes(new int[] {
                 android.R.attr.colorControlNormal});
         final int tintColor = a.getColor(0, context.getColor(android.R.color.white));
         a.recycle();

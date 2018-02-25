@@ -40,7 +40,7 @@ public class DevelopmentTileConfigFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new DevelopmentTilePreferenceController(context));
         return controllers;

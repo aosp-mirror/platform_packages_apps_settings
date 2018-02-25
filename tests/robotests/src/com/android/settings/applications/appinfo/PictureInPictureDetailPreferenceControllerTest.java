@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
@@ -44,8 +43,6 @@ import org.robolectric.annotation.Config;
 public class PictureInPictureDetailPreferenceControllerTest {
 
     @Mock
-    private UserManager mUserManager;
-    @Mock
     private AppInfoDashboardFragment mFragment;
     @Mock
     private Preference mPreference;
@@ -57,7 +54,6 @@ public class PictureInPictureDetailPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
 
         mController = spy(
                 new PictureInPictureDetailPreferenceController(mContext, mFragment, "Package1"));
@@ -66,15 +62,7 @@ public class PictureInPictureDetailPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
-        when(mUserManager.isManagedProfile()).thenReturn(true);
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
-    }
-
-    @Test
     public void getAvailabilityStatus_noPictureInPictureActivities_shouldReturnDisabled() {
-        when(mUserManager.isManagedProfile()).thenReturn(false);
         doReturn(false).when(mController).hasPictureInPictureActivites();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
@@ -82,7 +70,6 @@ public class PictureInPictureDetailPreferenceControllerTest {
 
     @Test
     public void getAvailabilityStatus_hasPictureInPictureActivities_shouldReturnAvailable() {
-        when(mUserManager.isManagedProfile()).thenReturn(false);
         doReturn(true).when(mController).hasPictureInPictureActivites();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);

@@ -30,6 +30,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.UserHandle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -116,12 +118,66 @@ public class AppInfoWithHeaderTest {
         assertThat(mAppInfoWithHeader.mPackageRemovedCalled).isTrue();
     }
 
+    @Test
+    public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUsedId()
+            throws PackageManager.NameNotFoundException {
+        final String packageName = "com.android.settings";
+
+        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package",
+                packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(mAppInfoWithHeader.mState.getEntry(packageName,
+                UserHandle.myUserId())).thenReturn(entry);
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
+                PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.GET_SIGNING_CERTIFICATES |
+                        PackageManager.GET_PERMISSIONS, UserHandle.myUserId())).thenReturn(
+                mAppInfoWithHeader.mPackageInfo);
+
+        mAppInfoWithHeader.retrieveAppEntry();
+
+        assertThat(mAppInfoWithHeader.mUserId).isEqualTo(UserHandle.myUserId());
+        assertThat(mAppInfoWithHeader.mPackageInfo).isNotNull();
+        assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
+    }
+
+    @Test
+    public void extraUserHandleInIntent_retrieveAppEntryWithMyUsedId()
+            throws PackageManager.NameNotFoundException {
+        final int USER_ID = 1002;
+        final String packageName = "com.android.settings";
+
+        mAppInfoWithHeader.mIntent.putExtra(Intent.EXTRA_USER_HANDLE, new UserHandle(USER_ID));
+        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package",
+                packageName, null));
+        final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
+        entry.info = new ApplicationInfo();
+        entry.info.packageName = packageName;
+
+        when(mAppInfoWithHeader.mState.getEntry(packageName, USER_ID)).thenReturn(entry);
+        when(mAppInfoWithHeader.mPm.getPackageInfoAsUser(entry.info.packageName,
+                PackageManager.MATCH_DISABLED_COMPONENTS |
+                        PackageManager.GET_SIGNING_CERTIFICATES |
+                        PackageManager.GET_PERMISSIONS, USER_ID)).thenReturn(
+                mAppInfoWithHeader.mPackageInfo);
+
+        mAppInfoWithHeader.retrieveAppEntry();
+
+        assertThat(mAppInfoWithHeader.mUserId).isEqualTo(USER_ID);
+        assertThat(mAppInfoWithHeader.mPackageInfo).isNotNull();
+        assertThat(mAppInfoWithHeader.mAppEntry).isNotNull();
+    }
+
     public static class TestFragment extends AppInfoWithHeader {
 
         PreferenceManager mManager;
         PreferenceScreen mScreen;
         Context mShadowContext;
         boolean mPackageRemovedCalled;
+        Intent mIntent;
 
         public TestFragment() {
             mPm = mock(PackageManager.class);
@@ -129,6 +185,8 @@ public class AppInfoWithHeaderTest {
             mScreen = mock(PreferenceScreen.class);
             mPackageInfo = new PackageInfo();
             mPackageInfo.applicationInfo = new ApplicationInfo();
+            mState = mock(ApplicationsState.class);
+            mIntent = new Intent();
             mShadowContext = ShadowApplication.getInstance().getApplicationContext();
             ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                     (InstantAppDataProvider) (info -> false));
@@ -169,6 +227,8 @@ public class AppInfoWithHeaderTest {
         protected void onPackageRemoved() {
             mPackageRemovedCalled = true;
         }
-    }
 
+        @Override
+        protected Intent getIntent() { return mIntent; }
+    }
 }

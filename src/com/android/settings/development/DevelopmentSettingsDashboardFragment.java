@@ -302,7 +302,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         if (Utils.isMonkeyRunning()) {
             mPreferenceControllers = new ArrayList<>();
             return null;
@@ -375,6 +375,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new LocalBackupPasswordPreferenceController(context));
         controllers.add(new StayAwakePreferenceController(context, lifecycle));
         controllers.add(new HdcpCheckingPreferenceController(context));
+        controllers.add(new DarkUIPreferenceController(context));
         controllers.add(new BluetoothSnoopLogPreferenceController(context));
         controllers.add(new OemUnlockPreferenceController(context, activity, fragment));
         controllers.add(new FileEncryptionPreferenceController(context));
@@ -404,6 +405,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
         controllers.add(new BluetoothDeviceNoNamePreferenceController(context));
         controllers.add(new BluetoothAbsoluteVolumePreferenceController(context));
         controllers.add(new BluetoothInbandRingingPreferenceController(context));
+        controllers.add(new BluetoothDelayReportsPreferenceController(context));
         controllers.add(new BluetoothAvrcpVersionPreferenceController(context));
         controllers.add(new BluetoothAudioCodecPreferenceController(context, lifecycle,
                 bluetoothA2dpConfigStore));
@@ -452,7 +454,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
 
     @VisibleForTesting
     <T extends AbstractPreferenceController> T getDevelopmentOptionsController(Class<T> clazz) {
-        return getPreferenceController(clazz);
+        return use(clazz);
     }
 
     /**
@@ -476,7 +478,7 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(Context
+                public List<AbstractPreferenceController> createPreferenceControllers(Context
                         context) {
                     return buildPreferenceControllers(context, null /* activity */,
                             null /* lifecycle */, null /* devOptionsDashboardFragment */,

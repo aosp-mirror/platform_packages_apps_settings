@@ -170,7 +170,7 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

@@ -51,6 +51,7 @@ public class BatteryDatabaseManagerTest {
     private static long NOW = System.currentTimeMillis();
     private static long ONE_DAY_BEFORE = NOW - DateUtils.DAY_IN_MILLIS;
     private static long TWO_DAYS_BEFORE = NOW - 2 * DateUtils.DAY_IN_MILLIS;
+
     private Context mContext;
     private BatteryDatabaseManager mBatteryDatabaseManager;
 
@@ -69,8 +70,10 @@ public class BatteryDatabaseManagerTest {
 
     @Test
     public void testAllFunctions() {
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW, NOW);
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD, TWO_DAYS_BEFORE);
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW,
+                AnomalyDatabaseHelper.State.NEW, NOW);
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD,
+                AnomalyDatabaseHelper.State.NEW, TWO_DAYS_BEFORE);
 
         // In database, it contains two record
         List<AppInfo> totalAppInfos = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
@@ -96,8 +99,10 @@ public class BatteryDatabaseManagerTest {
 
     @Test
     public void testUpdateAnomalies_updateSuccessfully() {
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW, NOW);
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD, NOW);
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW,
+                AnomalyDatabaseHelper.State.NEW, NOW);
+        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD,
+                AnomalyDatabaseHelper.State.NEW, NOW);
         final AppInfo appInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME_OLD).build();
         final List<AppInfo> updateAppInfos = new ArrayList<>();
         updateAppInfos.add(appInfo);

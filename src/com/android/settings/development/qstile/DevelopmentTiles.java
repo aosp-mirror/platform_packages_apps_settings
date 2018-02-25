@@ -142,26 +142,29 @@ public abstract class DevelopmentTiles extends TileService {
     }
 
     /**
-     * Tile to toggle Window Trace.
+     * Tile to toggle Winscope trace which consists of Window and Layer traces.
      */
-    public static class WindowTrace extends DevelopmentTiles {
+    public static class WinscopeTrace extends DevelopmentTiles {
         @VisibleForTesting
-        IWindowManagerWrapper mWindowManager;
+        static final int SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE = 1025;
         @VisibleForTesting
-        Toast mToast;
+        static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
+        private IBinder mSurfaceFlinger;
+        private IWindowManagerWrapper mWindowManager;
+        private Toast mToast;
 
         @Override
         public void onCreate() {
             super.onCreate();
             mWindowManager = new IWindowManagerWrapper(WindowManagerGlobal
                     .getWindowManagerService());
+            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
             Context context = getApplicationContext();
-            CharSequence text = "Trace written to /data/misc/wmtrace/wm_trace.pb";
+            CharSequence text = "Trace files written to /data/misc/wmtrace";
             mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         }
 
-        @Override
-        protected boolean isEnabled() {
+        private boolean isWindowTraceEnabled() {
             try {
                 return mWindowManager.isWindowTraceEnabled();
             } catch (RemoteException e) {
@@ -171,46 +174,8 @@ public abstract class DevelopmentTiles extends TileService {
             return false;
         }
 
-        @Override
-        protected void setIsEnabled(boolean isEnabled) {
-            try {
-                if (isEnabled) {
-                    mWindowManager.startWindowTrace();
-                } else {
-                    mWindowManager.stopWindowTrace();
-                    mToast.show();
-                }
-            } catch (RemoteException e) {
-                Log.e(TAG, "Could not set window trace status." + e.toString());
-            }
-        }
-    }
-
-    /**
-     * Tile to toggle Layer Trace.
-     */
-    public static class LayerTrace extends DevelopmentTiles {
-        @VisibleForTesting
-        static final int SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE = 1025;
-        @VisibleForTesting
-        static final int SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE = 1026;
-        @VisibleForTesting
-        IBinder mSurfaceFlinger;
-        @VisibleForTesting
-        Toast mToast;
-
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            mSurfaceFlinger = ServiceManager.getService("SurfaceFlinger");
-            Context context = getApplicationContext();
-            CharSequence text = "Trace written to /data/misc/wmtrace/layers_trace.pb";
-            mToast = Toast.makeText(context, text, Toast.LENGTH_LONG);
-        }
-
-        @Override
-        protected boolean isEnabled() {
-            boolean surfaceTraceEnabled = false;
+        private boolean isLayerTraceEnabled() {
+            boolean layerTraceEnabled = false;
             Parcel reply = null;
             Parcel data = null;
             try {
@@ -219,8 +184,8 @@ public abstract class DevelopmentTiles extends TileService {
                     data = Parcel.obtain();
                     data.writeInterfaceToken("android.ui.ISurfaceComposer");
                     mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE,
-                            data, reply, 0 /* flags */ );
-                    surfaceTraceEnabled = reply.readBoolean();
+                            data, reply, 0 /* flags */);
+                    layerTraceEnabled = reply.readBoolean();
                 }
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not get layer trace status, defaulting to false." + e.toString());
@@ -230,11 +195,27 @@ public abstract class DevelopmentTiles extends TileService {
                     reply.recycle();
                 }
             }
-            return surfaceTraceEnabled;
+            return layerTraceEnabled;
         }
 
         @Override
-        protected void setIsEnabled(boolean isEnabled) {
+        protected boolean isEnabled() {
+            return isWindowTraceEnabled() || isLayerTraceEnabled();
+        }
+
+        private void setWindowTraceEnabled(boolean isEnabled) {
+            try {
+                if (isEnabled) {
+                    mWindowManager.startWindowTrace();
+                } else {
+                    mWindowManager.stopWindowTrace();
+                }
+            } catch (RemoteException e) {
+                Log.e(TAG, "Could not set window trace status." + e.toString());
+            }
+        }
+
+        private void setLayerTraceEnabled(boolean isEnabled) {
             Parcel data = null;
             try {
                 if (mSurfaceFlinger != null) {
@@ -243,9 +224,6 @@ public abstract class DevelopmentTiles extends TileService {
                     data.writeInt(isEnabled ? 1 : 0);
                     mSurfaceFlinger.transact(SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE,
                             data, null, 0 /* flags */);
-                    if (!isEnabled){
-                        mToast.show();
-                    }
                 }
             } catch (RemoteException e) {
                 Log.e(TAG, "Could not set layer tracing." + e.toString());
@@ -253,6 +231,15 @@ public abstract class DevelopmentTiles extends TileService {
                 if (data != null) {
                     data.recycle();
                 }
+            }
+        }
+
+        @Override
+        protected void setIsEnabled(boolean isEnabled) {
+            setWindowTraceEnabled(isEnabled);
+            setLayerTraceEnabled(isEnabled);
+            if (!isEnabled) {
+                mToast.show();
             }
         }
     }

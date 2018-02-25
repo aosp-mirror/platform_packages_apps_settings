@@ -32,7 +32,7 @@ import java.util.List;
 public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Indexable {
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildPreferenceControllers(context, getLifecycle());
     }
 
@@ -97,7 +97,7 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 }
 
             @Override
-            public List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+            public List<AbstractPreferenceController> createPreferenceControllers(Context context) {
                 return buildPreferenceControllers(context, null);
             }
         };

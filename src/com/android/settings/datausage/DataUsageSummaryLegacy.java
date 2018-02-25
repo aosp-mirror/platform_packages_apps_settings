@@ -188,7 +188,7 @@ public class DataUsageSummaryLegacy extends DataUsageBaseFragment implements Ind
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
 

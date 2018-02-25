@@ -112,9 +112,10 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         mInstallMenu = menu.findItem(AppInfoDashboardFragment.INSTALL_INSTANT_APP_MENU);
-        final Intent appStoreIntent = AppStoreUtil.getAppStoreLink(mContext, mPackageName);
-        if (appStoreIntent == null) {
-            mInstallMenu.setEnabled(false);
+        if (mInstallMenu != null) {
+            if (AppStoreUtil.getAppStoreLink(mContext, mPackageName) == null) {
+                mInstallMenu.setEnabled(false);
+            }
         }
     }
 

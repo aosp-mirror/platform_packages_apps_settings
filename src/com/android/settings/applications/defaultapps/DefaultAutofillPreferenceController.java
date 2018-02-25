@@ -24,6 +24,7 @@ import android.text.TextUtils;
 import android.view.autofill.AutofillManager;
 
 import com.android.settings.wrapper.AutofillManagerWrapper;
+import com.android.settingslib.applications.DefaultAppInfo;
 
 public class DefaultAutofillPreferenceController extends DefaultAppPreferenceController {
     private AutofillManagerWrapper mAutofillManager;

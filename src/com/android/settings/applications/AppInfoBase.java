@@ -128,23 +128,27 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     protected String retrieveAppEntry() {
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
+        Intent intent = (args == null) ?
+                getIntent() : (Intent) args.getParcelable("intent");
         if (mPackageName == null) {
-            Intent intent = (args == null) ?
-                    getActivity().getIntent() : (Intent) args.getParcelable("intent");
             if (intent != null && intent.getData() != null) {
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
-        mUserId = UserHandle.myUserId();
+        if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
+            mUserId = ((UserHandle) intent.getParcelableExtra(
+                    Intent.EXTRA_USER_HANDLE)).getIdentifier();
+        } else {
+            mUserId = UserHandle.myUserId();
+        }
         mAppEntry = mState.getEntry(mPackageName, mUserId);
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {
-                mPackageInfo = mPm.getPackageInfo(mAppEntry.info.packageName,
+                mPackageInfo = mPm.getPackageInfoAsUser(mAppEntry.info.packageName,
                         PackageManager.MATCH_DISABLED_COMPONENTS |
-                        PackageManager.MATCH_ANY_USER |
-                        PackageManager.GET_SIGNATURES |
-                        PackageManager.GET_PERMISSIONS);
+                                PackageManager.GET_SIGNING_CERTIFICATES |
+                                PackageManager.GET_PERMISSIONS, mUserId);
             } catch (NameNotFoundException e) {
                 Log.e(TAG, "Exception when retrieving package:" + mAppEntry.info.packageName, e);
             }

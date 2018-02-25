@@ -79,7 +79,7 @@ public class UsbDetailsFragment extends DashboardFragment {
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mUsbBackend = new UsbBackend(context);
         mControllers = createControllerList(context, mUsbBackend, this);
         mUsbReceiver = new UsbConnectionBroadcastReceiver(context, mUsbConnectionListener,
@@ -121,7 +121,7 @@ public class UsbDetailsFragment extends DashboardFragment {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     List<AbstractPreferenceController> ret = new ArrayList<>();
                     ret.addAll(createControllerList(context, new UsbBackend(context), null));

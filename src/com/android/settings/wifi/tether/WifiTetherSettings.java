@@ -125,7 +125,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
         mPasswordPreferenceController = new WifiTetherPasswordPreferenceController(context, this);
@@ -174,11 +174,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     }
 
     private void updateDisplayWithNewConfig() {
-        getPreferenceController(WifiTetherSSIDPreferenceController.class)
+        use(WifiTetherSSIDPreferenceController.class)
                 .updateDisplay();
-        getPreferenceController(WifiTetherPasswordPreferenceController.class)
+        use(WifiTetherPasswordPreferenceController.class)
                 .updateDisplay();
-        getPreferenceController(WifiTetherApBandPreferenceController.class)
+        use(WifiTetherApBandPreferenceController.class)
                 .updateDisplay();
     }
 

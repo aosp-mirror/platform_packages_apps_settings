@@ -22,6 +22,8 @@ import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import com.android.settingslib.applications.DefaultAppInfo;
+
 import java.util.List;
 
 public class DefaultEmergencyPreferenceController extends DefaultAppPreferenceController {

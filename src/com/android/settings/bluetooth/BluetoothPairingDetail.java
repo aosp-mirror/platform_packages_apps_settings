@@ -193,7 +193,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(
                 new BluetoothDeviceRenamePreferenceController(context, KEY_RENAME_DEVICES, this,

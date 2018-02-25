@@ -25,6 +25,8 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SmsApplication;
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settingslib.applications.DefaultAppInfo;
+import com.android.settingslib.widget.CandidateInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;

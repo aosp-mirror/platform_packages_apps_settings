@@ -84,7 +84,7 @@ public class ApplicationListFragmentTest {
 
     @Test
     public void getPreferenceControllers() {
-        final List<AbstractPreferenceController> controllers = mFragment.getPreferenceControllers(
+        final List<AbstractPreferenceController> controllers = mFragment.createPreferenceControllers(
                 mContext);
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(1);

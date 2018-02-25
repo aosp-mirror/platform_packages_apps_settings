@@ -60,18 +60,19 @@ public class BatteryDatabaseManager {
 
     /**
      * Insert an anomaly log to database.
-     *
-     * @param packageName the package name of the app
-     * @param type        the type of the anomaly
-     * @param timestampMs the time when it is happened
+     * @param packageName   the package name of the app
+     * @param type          the type of the anomaly
+     * @param anomalyState  the state of the anomaly
+     * @param timestampMs   the time when it is happened
      */
-    public synchronized void insertAnomaly(String packageName, int type, long timestampMs) {
+    public synchronized void insertAnomaly(String packageName, int type, int anomalyState,
+            long timestampMs) {
         try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
             ContentValues values = new ContentValues();
             values.put(PACKAGE_NAME, packageName);
             values.put(ANOMALY_TYPE, type);
+            values.put(ANOMALY_STATE, anomalyState);
             values.put(TIME_STAMP_MS, timestampMs);
-            values.put(ANOMALY_STATE, AnomalyDatabaseHelper.State.NEW);
             db.insert(TABLE_ANOMALY, null, values);
         }
     }

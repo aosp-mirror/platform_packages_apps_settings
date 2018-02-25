@@ -104,6 +104,7 @@ public class SettingsSearchIndexablesProviderTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
     public void testNonIndexablesColumnFetched() {
         Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);

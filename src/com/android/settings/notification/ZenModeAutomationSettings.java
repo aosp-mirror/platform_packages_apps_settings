@@ -37,7 +37,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
     protected final ManagedServiceSettings.Config CONFIG = getConditionProviderConfig();
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ZenServiceListing serviceListing = new ZenServiceListing(getContext(), CONFIG);
         serviceListing.reloadApprovedServices();
         return buildPreferenceControllers(context, this, serviceListing, getLifecycle());
@@ -98,7 +98,7 @@ public class ZenModeAutomationSettings extends ZenModeSettingsBase {
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildPreferenceControllers(context, null, null, null);
                 }

@@ -18,9 +18,8 @@ package com.android.settings.search;
 
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.fail;
-
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
@@ -36,6 +35,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -67,7 +67,7 @@ public class SearchIndexableResourcesTest {
         final int beforeCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
-        ( (SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
                 .addIndex(java.lang.String.class);
 
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
@@ -86,10 +86,12 @@ public class SearchIndexableResourcesTest {
     @Test
     public void testNonIndexableKeys_GetsKeyFromProvider() {
         mSearchProvider.getSearchIndexableResources().getProviderValues().clear();
-        ( (SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
+        ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
                 .addIndex(FakeIndexProvider.class);
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
+
+        doReturn(RuntimeEnvironment.application).when(provider).getContext();
 
         Cursor cursor = provider.queryNonIndexableKeys(null);
         boolean hasTestKey = false;
@@ -106,8 +108,8 @@ public class SearchIndexableResourcesTest {
 
     @Test
     public void testAllClassNamesHaveProviders() {
-        for (Class clazz: mSearchProvider.getSearchIndexableResources().getProviderValues()) {
-            if(DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
+        for (Class clazz : mSearchProvider.getSearchIndexableResources().getProviderValues()) {
+            if (DatabaseIndexingUtils.getSearchIndexProvider(clazz) == null) {
                 fail(clazz.getName() + "is not an index provider");
             }
         }

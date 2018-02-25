@@ -3213,19 +3213,9 @@
             </intent-filter>
         </service>
         <service
-            android:name=".development.qstile.DevelopmentTiles$WindowTrace"
-            android:label="@string/window_trace_quick_settings_title"
-            android:icon="@drawable/tile_icon_window_trace"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
-            android:enabled="false">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-        <service
-            android:name=".development.qstile.DevelopmentTiles$LayerTrace"
-            android:label="@string/layer_trace_quick_settings_title"
-            android:icon="@drawable/tile_icon_layer_trace"
+            android:name=".development.qstile.DevelopmentTiles$WinscopeTrace"
+            android:label="@string/winscope_trace_quick_settings_title"
+            android:icon="@drawable/tile_icon_winscope_trace"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
             android:enabled="false">
             <intent-filter>
@@ -3293,6 +3283,24 @@
                 <action android:name="com.android.settings.slice.action.WIFI_CHANGED"/>
             </intent-filter>
         </receiver>
+
+        <!-- Couldn't be triggered from outside of settings. Statsd can trigger it because we send
+             PendingIntent to it-->
+        <receiver android:name=".fuelgauge.batterytip.AnomalyDetectionReceiver"
+                  android:exported="false" />
+
+        <receiver android:name=".fuelgauge.batterytip.AnomalyConfigReceiver">
+            <intent-filter>
+                <action android:name="android.app.action.STATSD_STARTED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".fuelgauge.batterytip.AnomalyCleanUpJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
     </application>

@@ -12,6 +12,7 @@ include $(BUILD_STATIC_JAVA_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_PACKAGE_NAME := Settings
+LOCAL_PRIVATE_PLATFORM_APIS := true
 LOCAL_CERTIFICATE := platform
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_MODULE_TAGS := optional
@@ -39,6 +40,7 @@ LOCAL_JAVA_LIBRARIES := \
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-arch-lifecycle-runtime \
     android-arch-lifecycle-extensions \
+    guava \
     jsr305 \
     settings-logtags \
 

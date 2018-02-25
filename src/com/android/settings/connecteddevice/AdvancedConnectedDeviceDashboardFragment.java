@@ -28,7 +28,6 @@ import com.android.settings.connecteddevice.usb.UsbBackend;
 import com.android.settings.connecteddevice.usb.UsbModePreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.nfc.NfcPreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.print.PrintSettingPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -66,7 +65,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
     }
 
     @Override
-    protected List<AbstractPreferenceController> getPreferenceControllers(Context context) {
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return buildControllers(context, getLifecycle());
     }
 
@@ -123,7 +122,7 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                 }
 
                 @Override
-                public List<AbstractPreferenceController> getPreferenceControllers(
+                public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
                     return buildControllers(context, null /* lifecycle */);
                 }

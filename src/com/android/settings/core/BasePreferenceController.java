@@ -116,6 +116,9 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     public BasePreferenceController(Context context, String preferenceKey) {
         super(context);
         mPreferenceKey = preferenceKey;
+        if (TextUtils.isEmpty(mPreferenceKey)) {
+            throw new IllegalArgumentException("Preference key must be set");
+        }
     }
 
     /**

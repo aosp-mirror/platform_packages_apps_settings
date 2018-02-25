@@ -14,7 +14,7 @@
  * limitations under the License
  */
 
-package com.android.settings;
+package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -28,9 +28,11 @@ import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.settings.R;
+import com.android.settings.SetupRedactionInterstitial;
+import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
-import com.android.settings.password.SetupChooseLockPattern;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
@@ -89,8 +91,9 @@ public class SetupChooseLockPatternTest {
                 .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
+    @Config(qualifiers = "sw400dp")
     @Test
-    public void screenLockOptions_shouldBeVisible() {
+    public void sw400dp_shouldShowScreenLockOptions() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
         assertThat(button).isNotNull();
         assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
@@ -100,6 +103,13 @@ public class SetupChooseLockPatternTest {
         assertThat(chooserDialog).isNotNull();
         int count = Shadows.shadowOf(chooserDialog).getAdapter().getCount();
         assertThat(count).named("List items shown").isEqualTo(3);
+    }
+
+    @Test
+    public void smallScreens_shouldHideScreenLockOptions() {
+        Button button = mActivity.findViewById(R.id.screen_lock_options);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
