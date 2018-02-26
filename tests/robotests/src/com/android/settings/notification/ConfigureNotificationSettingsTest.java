@@ -17,21 +17,15 @@
 package com.android.settings.notification;
 
 import static com.android.settings.notification.ConfigureNotificationSettings.KEY_LOCKSCREEN;
-import static com.android.settings.notification.ConfigureNotificationSettings
-        .KEY_LOCKSCREEN_WORK_PROFILE;
-import static com.android.settings.notification.ConfigureNotificationSettings
-        .KEY_LOCKSCREEN_WORK_PROFILE_HEADER;
+import static com.android.settings.notification.ConfigureNotificationSettings.KEY_LOCKSCREEN_WORK_PROFILE;
+import static com.android.settings.notification.ConfigureNotificationSettings.KEY_LOCKSCREEN_WORK_PROFILE_HEADER;
 import static com.android.settings.notification.ConfigureNotificationSettings.KEY_SWIPE_DOWN;
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
-
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
@@ -40,15 +34,7 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConfigureNotificationSettingsTest {
-
-    private Context mContext;
-
-    @Before
-    public void setUp() {
-        mContext = RuntimeEnvironment.application;
-    }
 
     @Test
     @Config(shadows = {
@@ -57,7 +43,7 @@ public class ConfigureNotificationSettingsTest {
     })
     public void getNonIndexableKeys_shouldContainLockScreenPrefs() {
         final List<String> keys = ConfigureNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+                .getNonIndexableKeys(RuntimeEnvironment.application);
 
         assertThat(keys).containsAllOf(
                 KEY_SWIPE_DOWN, KEY_LOCKSCREEN, KEY_LOCKSCREEN_WORK_PROFILE,

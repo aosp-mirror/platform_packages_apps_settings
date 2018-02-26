@@ -16,10 +16,13 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,14 +30,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ManualPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -49,18 +46,15 @@ public class ManualPreferenceControllerTest {
 
     @Test
     public void isAvailable_configTurnedOff_shouldReturnFalse() {
-        when(mContext.getResources().getBoolean(anyInt()))
-                .thenReturn(false);
+        when(mContext.getResources().getBoolean(anyInt())).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_configTurnedOn_shouldReturnTrue() {
-        when(mContext.getResources().getBoolean(anyInt()))
-                .thenReturn(true);
+        when(mContext.getResources().getBoolean(anyInt())).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
-
 }

@@ -23,14 +23,11 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,10 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MemoryUsagePreferenceControllerTest {
 
     @Mock
@@ -53,14 +48,12 @@ public class MemoryUsagePreferenceControllerTest {
     @Mock
     private ProcStatsData.MemInfo mMemInfo;
 
-    private Context mContext;
     private MemoryUsagePreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = spy(new MemoryUsagePreferenceController(mContext));
+        mController = spy(new MemoryUsagePreferenceController(RuntimeEnvironment.application));
         doReturn(mProcStatsData).when(mController).getProcStatsData();
         doNothing().when(mController).setDuration();
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -69,9 +62,6 @@ public class MemoryUsagePreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {
-            ShadowThreadUtils.class
-    })
     public void updateState_shouldUpdatePreferenceSummary() {
         mController.updateState(mPreference);
 

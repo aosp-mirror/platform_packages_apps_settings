@@ -45,7 +45,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.AttributeSet;
 
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.RestrictedLockUtils;
@@ -61,9 +60,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class
-})
+@Config(shadows = SettingsShadowResources.class)
 public class SoundPreferenceControllerTest {
 
     private Context mContext;
@@ -107,7 +104,7 @@ public class SoundPreferenceControllerTest {
         mController.onPreferenceChange(mock(NotificationSoundPreference.class), Uri.EMPTY);
         mController.handlePreferenceTreeClick(mock(NotificationSoundPreference.class));
         mController.onActivityResult(1, 1, null);
-        mController.hasValidSound(null);
+        SoundPreferenceController.hasValidSound(null);
     }
 
     @Test
@@ -224,7 +221,6 @@ public class SoundPreferenceControllerTest {
         verify(mFragment, never()).startActivityForResult(any(), anyInt());
     }
 
-
     @Test
     public void testOnPreferenceTreeClick_correctPref() throws Exception {
         NotificationSoundPreference pref =
@@ -251,12 +247,12 @@ public class SoundPreferenceControllerTest {
     public void testHasValidSound() {
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
-        assertTrue(mController.hasValidSound(channel));
+        assertTrue(SoundPreferenceController.hasValidSound(channel));
 
         channel.setSound(Uri.EMPTY, Notification.AUDIO_ATTRIBUTES_DEFAULT);
-        assertFalse(mController.hasValidSound(channel));
+        assertFalse(SoundPreferenceController.hasValidSound(channel));
 
         channel.setSound(null, Notification.AUDIO_ATTRIBUTES_DEFAULT);
-        assertFalse(mController.hasValidSound(channel));
+        assertFalse(SoundPreferenceController.hasValidSound(channel));
     }
 }

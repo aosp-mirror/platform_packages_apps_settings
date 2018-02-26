@@ -20,12 +20,12 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,11 +37,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedBluetoothDeviceUpdaterTest {
+
     @Mock
     private DashboardFragment mDashboardFragment;
     @Mock
@@ -60,7 +59,7 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
         mContext = RuntimeEnvironment.application;
         doReturn(mContext).when(mDashboardFragment).getContext();
-        doReturn(mBluetoothDevice).when(mCachedBluetoothDevice).getDevice();
+        when(mCachedBluetoothDevice.getDevice()).thenReturn(mBluetoothDevice);
 
         mBluetoothDeviceUpdater = spy(new ConnectedBluetoothDeviceUpdater(mDashboardFragment,
                 mDevicePreferenceCallback, null));
@@ -104,5 +103,4 @@ public class ConnectedBluetoothDeviceUpdaterTest {
 
         verify(mBluetoothDeviceUpdater).removePreference(mCachedBluetoothDevice);
     }
-
 }

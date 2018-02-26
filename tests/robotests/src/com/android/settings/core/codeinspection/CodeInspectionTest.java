@@ -18,25 +18,22 @@ package com.android.settings.core.codeinspection;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.instrumentation.InstrumentableFragmentCodeInspector;
 import com.android.settings.search.SearchIndexProviderCodeInspector;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 /**
- * Test suite that scans all class in app package, and perform different types of code inspection
+ * Test suite that scans all classes in app package, and performs different types of code inspection
  * for conformance.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        assetDir = "/tests/robotests/assets")
 public class CodeInspectionTest {
 
     private List<Class<?>> mClasses;
@@ -48,8 +45,13 @@ public class CodeInspectionTest {
     }
 
     @Test
-    public void runCodeInspections() {
+    public void runInstrumentableFragmentCodeInspection() {
         new InstrumentableFragmentCodeInspector(mClasses).run();
+    }
+
+    @Ignore("b/73960706")
+    @Test
+    public void runSearchIndexProviderCodeInspection() {
         new SearchIndexProviderCodeInspector(mClasses).run();
     }
 }

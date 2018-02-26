@@ -16,8 +16,13 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -25,7 +30,6 @@ import android.view.autofill.AutofillManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.AutofillManagerWrapper;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -37,17 +41,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAutofillPreferenceControllerTest {
 
     @Mock
@@ -102,8 +98,6 @@ public class DefaultAutofillPreferenceControllerTest {
         Settings.Secure.putString(RuntimeEnvironment.application.getContentResolver(),
                 DefaultAutofillPicker.SETTING, "com.android.settings/SettingsActivity.class");
 
-        final DefaultAppInfo info = mController.getDefaultAppInfo();
-
-        assertThat(info).isNotNull();
+        assertThat(mController.getDefaultAppInfo()).isNotNull();
     }
 }

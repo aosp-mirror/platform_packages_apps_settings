@@ -26,7 +26,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.ApplicationFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,14 +38,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link EnterpriseInstalledPackagesPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class EnterpriseInstalledPackagesPreferenceControllerTest {
+public class EnterpriseInstalledPackagesPreferenceControllerTest {
 
     private static final String KEY_NUMBER_ENTERPRISE_INSTALLED_PACKAGES
             = "number_enterprise_installed_packages";

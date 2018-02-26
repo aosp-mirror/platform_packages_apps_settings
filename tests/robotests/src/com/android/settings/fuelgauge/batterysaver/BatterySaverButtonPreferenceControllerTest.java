@@ -17,12 +17,9 @@
 package com.android.settings.fuelgauge.batterysaver;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
@@ -32,7 +29,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.TwoStateButtonPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -43,21 +39,20 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPowerManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = com.android.settings.testutils.shadow.ShadowPowerManager.class)
+@Config(shadows = ShadowPowerManager.class)
 public class BatterySaverButtonPreferenceControllerTest {
+
     private BatterySaverButtonPreferenceController mController;
     private Context mContext;
     private Lifecycle mLifecycle;
     private LifecycleOwner mLifecycleOwner;
     private Button mButtonOn;
     private Button mButtonOff;
-    private ShadowPowerManager mShadowPowerManager;
+    private PowerManager mPowerManager;
     @Mock
     private TwoStateButtonPreference mPreference;
     @Mock
@@ -70,8 +65,7 @@ public class BatterySaverButtonPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mContext = spy(RuntimeEnvironment.application);
-        PowerManager powerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
-        mShadowPowerManager = Shadows.shadowOf(powerManager);
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         doReturn(mPreference).when(mPreferenceScreen).findPreference(anyString());
 
         mButtonOn = new Button(mContext);
@@ -87,7 +81,7 @@ public class BatterySaverButtonPreferenceControllerTest {
 
     @Test
     public void testUpdateState_lowPowerOn_displayButtonOff() {
-        mShadowPowerManager.setIsPowerSaveMode(true);
+        mPowerManager.setPowerSaveMode(true);
 
         mController.updateState(mPreference);
 
@@ -97,7 +91,7 @@ public class BatterySaverButtonPreferenceControllerTest {
 
     @Test
     public void testUpdateState_lowPowerOff_displayButtonOn() {
-        mShadowPowerManager.setIsPowerSaveMode(false);
+        mPowerManager.setPowerSaveMode(false);
 
         mController.updateState(mPreference);
 
@@ -109,13 +103,13 @@ public class BatterySaverButtonPreferenceControllerTest {
     public void testOnClick_clickButtonOn_setPowerSaveMode() {
         mController.onClick(mButtonOn);
 
-        assertThat(mShadowPowerManager.isPowerSaveMode()).isTrue();
+        assertThat(mPowerManager.isPowerSaveMode()).isTrue();
     }
 
     @Test
     public void testOnClick_clickButtonOff_clearPowerSaveMode() {
         mController.onClick(mButtonOff);
 
-        assertThat(mShadowPowerManager.isPowerSaveMode()).isFalse();
+        assertThat(mPowerManager.isPowerSaveMode()).isFalse();
     }
 }

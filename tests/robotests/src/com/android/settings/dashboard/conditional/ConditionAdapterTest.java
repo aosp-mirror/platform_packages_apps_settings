@@ -16,7 +16,6 @@
 package com.android.settings.dashboard.conditional;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +26,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -37,14 +35,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConditionAdapterTest {
+
     @Mock
     private Condition mCondition1;
     @Mock
@@ -92,27 +89,29 @@ public class ConditionAdapterTest {
 
     @Test
     public void onBindViewHolder_shouldSetListener() {
-        final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile, new LinearLayout(mContext), true);
+        final View view = LayoutInflater.from(mContext)
+            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
         mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
+        assertThat(card).isNotNull();
         assertThat(card.hasOnClickListeners()).isTrue();
     }
 
     @Test
     public void viewClick_shouldInvokeConditionPrimaryClick() {
-        final View view = LayoutInflater.from(mContext).inflate(
-            R.layout.condition_tile, new LinearLayout(mContext), true);
+        final View view = LayoutInflater.from(mContext)
+            .inflate(R.layout.condition_tile, new LinearLayout(mContext), true);
         final DashboardAdapter.DashboardItemHolder viewHolder =
             new DashboardAdapter.DashboardItemHolder(view);
         mConditionAdapter = new ConditionAdapter(mContext, mOneCondition, true);
 
         mConditionAdapter.onBindViewHolder(viewHolder, 0);
         final View card = view.findViewById(R.id.content);
+        assertThat(card).isNotNull();
         card.performClick();
         verify(mCondition1).onPrimaryClick();
     }
@@ -131,5 +130,4 @@ public class ConditionAdapterTest {
         mConditionAdapter.mSwipeCallback.onSwiped(viewHolder, 0);
         // no crash
     }
-
 }

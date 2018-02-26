@@ -25,19 +25,18 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.UserManager;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AppStateAppOpsBridgeTest {
 
     @Mock private Context mContext;
@@ -56,9 +55,8 @@ public final class AppStateAppOpsBridgeTest {
     public void getPermissionInfo_nullPackageInfo_shouldNotCrash() throws RemoteException {
         when(mPackageManagerService.getPackageInfo(anyString(), anyInt(), anyInt()))
             .thenReturn(null);
-        TestAppStateAppOpsBridge appStateAppOpsBridge = new TestAppStateAppOpsBridge();
 
-        appStateAppOpsBridge.getPermissionInfo("pkg1", 1);
+        new TestAppStateAppOpsBridge().getPermissionInfo("pkg1", 1);
         // should not crash
     }
 

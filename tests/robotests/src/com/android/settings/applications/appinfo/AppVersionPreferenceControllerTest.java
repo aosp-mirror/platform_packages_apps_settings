@@ -24,7 +24,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -33,10 +32,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppVersionPreferenceControllerTest {
 
     @Mock
@@ -64,5 +61,4 @@ public class AppVersionPreferenceControllerTest {
 
         verify(mPreference).setSummary("version test1234");
     }
-
 }

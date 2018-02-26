@@ -29,7 +29,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.VideoPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -41,12 +40,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class GesturePreferenceControllerTest {
-
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -100,13 +96,13 @@ public class GesturePreferenceControllerTest {
         verify(videoPreference).onViewVisible(false);
 
         reset(videoPreference);
-        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, true);
+        savedState.putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, true);
         mController.onCreate(savedState);
         mController.onResume();
         verify(videoPreference).onViewVisible(true);
 
         reset(videoPreference);
-        savedState.putBoolean(mController.KEY_VIDEO_PAUSED, false);
+        savedState.putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, false);
         mController.onCreate(savedState);
         mController.onResume();
         verify(videoPreference).onViewVisible(false);
@@ -146,11 +142,11 @@ public class GesturePreferenceControllerTest {
 
         mController.mVideoPaused = true;
         mController.onSaveInstanceState(outState);
-        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, true);
+        verify(outState).putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, true);
 
         mController.mVideoPaused = false;
         mController.onSaveInstanceState(outState);
-        verify(outState).putBoolean(mController.KEY_VIDEO_PAUSED, false);
+        verify(outState).putBoolean(GesturePreferenceController.KEY_VIDEO_PAUSED, false);
     }
 
     @Test
@@ -199,7 +195,7 @@ public class GesturePreferenceControllerTest {
         boolean mIsPrefAvailable;
         boolean mIsPrefEnabled;
 
-        public TestPrefController(Context context,
+        private TestPrefController(Context context,
                 Lifecycle lifecycle) {
             super(context, lifecycle);
         }

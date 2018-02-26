@@ -16,7 +16,6 @@
 
 package com.android.settings.dashboard.suggestions;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
@@ -38,7 +37,6 @@ import android.util.Pair;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.Settings.NightDisplaySuggestionActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -61,10 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowSecureSettings.class,
-        SettingsShadowResources.class,
-})
+@Config(shadows = ShadowSecureSettings.class)
 public class SuggestionFeatureProviderImplTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

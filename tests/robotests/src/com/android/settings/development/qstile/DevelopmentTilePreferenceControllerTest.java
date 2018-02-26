@@ -17,7 +17,6 @@
 package com.android.settings.development.qstile;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -37,7 +36,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -48,12 +46,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DevelopmentTilePreferenceControllerTest {
 
     private static final String SERVICE_INFO_NAME = "TestName";
@@ -133,11 +129,10 @@ public class DevelopmentTilePreferenceControllerTest {
         return preference;
     }
 
-    public static class FakeServiceInfo extends ServiceInfo {
+    private static class FakeServiceInfo extends ServiceInfo {
 
         public String loadLabel(PackageManager mgr) {
             return "hi";
         }
     }
-
 }

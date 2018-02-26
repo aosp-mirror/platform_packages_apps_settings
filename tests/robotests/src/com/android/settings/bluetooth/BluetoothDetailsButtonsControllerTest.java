@@ -30,7 +30,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settings.widget.ActionButtonPreference;
@@ -43,8 +42,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = SettingsShadowBluetoothDevice.class)
+@Config(shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsControllerTestBase {
     private BluetoothDetailsButtonsController mController;
     private ActionButtonPreference mButtonsPref;
@@ -58,8 +56,8 @@ public class BluetoothDetailsButtonsControllerTest extends BluetoothDetailsContr
                 RuntimeEnvironment.application, R.layout.two_action_buttons, null /* parent */);
         mConnectButton = buttons.findViewById(R.id.button2_positive);
         mForgetButton = buttons.findViewById(R.id.button1_positive);
-        mController = new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice,
-                mLifecycle);
+        mController =
+            new BluetoothDetailsButtonsController(mContext, mFragment, mCachedDevice, mLifecycle);
         mButtonsPref = ActionButtonPreferenceTest.createMock();
         when(mButtonsPref.getKey()).thenReturn(mController.getPreferenceKey());
         when(mButtonsPref.setButton2OnClickListener(any(View.OnClickListener.class)))

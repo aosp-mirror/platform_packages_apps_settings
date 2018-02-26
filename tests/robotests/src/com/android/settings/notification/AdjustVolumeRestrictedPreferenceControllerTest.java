@@ -16,23 +16,6 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
-import android.os.UserManager;
-import android.support.v7.preference.Preference;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.accounts.AccountRestrictionHelper;
-import com.android.settingslib.RestrictedPreference;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -42,8 +25,22 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.Context;
+import android.os.UserManager;
+import android.support.v7.preference.Preference;
+
+import com.android.settings.accounts.AccountRestrictionHelper;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.RestrictedPreference;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdjustVolumeRestrictedPreferenceControllerTest {
 
     @Mock
@@ -55,8 +52,7 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = spy(shadowContext.getApplicationContext());
+        mContext = spy(RuntimeEnvironment.application);
         mController =
             new AdjustVolumeRestrictedPreferenceControllerTestable(mContext, mAccountHelper);
     }
@@ -88,9 +84,10 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
             eq(UserManager.DISALLOW_ADJUST_VOLUME), anyInt());
     }
 
-    private class AdjustVolumeRestrictedPreferenceControllerTestable extends
-        AdjustVolumeRestrictedPreferenceController {
-        AdjustVolumeRestrictedPreferenceControllerTestable(Context context,
+    private class AdjustVolumeRestrictedPreferenceControllerTestable
+        extends AdjustVolumeRestrictedPreferenceController {
+
+        private AdjustVolumeRestrictedPreferenceControllerTestable(Context context,
             AccountRestrictionHelper helper) {
             super(context, helper);
         }
@@ -110,5 +107,4 @@ public class AdjustVolumeRestrictedPreferenceControllerTest {
             return true;
         }
     }
-
 }

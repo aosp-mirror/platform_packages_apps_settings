@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -26,7 +25,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultHomePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -41,7 +39,6 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultHomeShortcutPreferenceControllerTest {
 
     @Mock
@@ -95,5 +92,4 @@ public class DefaultHomeShortcutPreferenceControllerTest {
             return true;
         }
     }
-
 }

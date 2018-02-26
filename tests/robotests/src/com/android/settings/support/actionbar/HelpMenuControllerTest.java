@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 import android.os.Bundle;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.ObservablePreferenceFragment;
 
@@ -32,10 +31,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HelpMenuControllerTest {
 
     @Mock
@@ -60,7 +57,6 @@ public class HelpMenuControllerTest {
         mHost.getLifecycle().onCreateOptionsMenu(null /* menu */, null /* inflater */);
 
         verify(mContext).getString(123);
-
     }
 
     @Test
@@ -72,13 +68,12 @@ public class HelpMenuControllerTest {
         verify(mContext).getString(mHost.getHelpResource());
     }
 
-
-    public static class TestFragment extends ObservablePreferenceFragment
-            implements HelpResourceProvider {
+    private static class TestFragment
+        extends ObservablePreferenceFragment
+        implements HelpResourceProvider {
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-
         }
     }
 }

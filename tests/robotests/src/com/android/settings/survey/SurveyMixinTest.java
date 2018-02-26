@@ -4,7 +4,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -15,7 +14,6 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.overlay.SurveyFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -28,20 +26,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SurveyMixinTest {
 
     private static final String FAKE_KEY = "fake_key";
     private static final String FAKE_SURVEY_ID = "fake_id";
 
-    private FakeFeatureFactory mFactory;
     private Context mContext;
     private SurveyFeatureProvider mProvider;
     @Mock
@@ -53,9 +48,8 @@ public class SurveyMixinTest {
     public void setUp() {
         // set up the fakefeature factory to mock out the survey provider
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mFactory = FakeFeatureFactory.setupForTest();
-        mProvider = mFactory.getSurveyFeatureProvider(mContext);
+        mContext = RuntimeEnvironment.application;
+        mProvider = FakeFeatureFactory.setupForTest().getSurveyFeatureProvider(mContext);
         when(mProvider.getSurveyId(any(), eq(FAKE_KEY))).thenReturn(FAKE_SURVEY_ID);
     }
 
@@ -151,5 +145,4 @@ public class SurveyMixinTest {
         // Verify we do nothing
         verify(mProvider, never()).showSurveyIfAvailable(any(), any());
     }
-
 }

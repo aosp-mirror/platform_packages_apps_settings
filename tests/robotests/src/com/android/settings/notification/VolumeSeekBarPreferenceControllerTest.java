@@ -28,17 +28,14 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VolumeSeekBarPreferenceControllerTest {
 
     @Mock
@@ -56,8 +53,7 @@ public class VolumeSeekBarPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mScreen.findPreference(nullable(String.class))).thenReturn(mPreference);
-        mController =
-            new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback);
+        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback);
     }
 
     @Test
@@ -65,14 +61,13 @@ public class VolumeSeekBarPreferenceControllerTest {
         mController.displayPreference(mScreen);
 
         verify(mPreference).setCallback(mCallback);
-        verify(mPreference).setStream(mController.AUDIO_STREAM);
-        verify(mPreference).setMuteIcon(mController.MUTE_ICON);
+        verify(mPreference).setStream(VolumeSeekBarPreferenceControllerTestable.AUDIO_STREAM);
+        verify(mPreference).setMuteIcon(VolumeSeekBarPreferenceControllerTestable.MUTE_ICON);
     }
 
     @Test
     public void displayPreference_notAvailable_shouldNotUpdatePreference() {
-        mController =
-            new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, false);
+        mController = new VolumeSeekBarPreferenceControllerTestable(mContext, mCallback, false);
 
         mController.displayPreference(mScreen);
 
@@ -99,8 +94,8 @@ public class VolumeSeekBarPreferenceControllerTest {
         verify(mPreference).onActivityPause();
     }
 
-    private class VolumeSeekBarPreferenceControllerTestable extends
-        VolumeSeekBarPreferenceController {
+    private class VolumeSeekBarPreferenceControllerTestable
+        extends VolumeSeekBarPreferenceController {
 
         private final static int AUDIO_STREAM = 1;
         private final static int MUTE_ICON = 2;
@@ -142,10 +137,5 @@ public class VolumeSeekBarPreferenceControllerTest {
         public int getMuteIcon() {
             return MUTE_ICON;
         }
-
-        private void setAvailable(boolean available) {
-
-        }
     }
-
 }

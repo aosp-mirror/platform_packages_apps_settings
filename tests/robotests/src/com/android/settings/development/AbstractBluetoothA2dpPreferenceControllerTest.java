@@ -16,9 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.AbstractBluetoothA2dpPreferenceController
-        .STREAMING_LABEL_ID;
-
+import static com.android.settings.development.AbstractBluetoothA2dpPreferenceController.STREAMING_LABEL_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -34,7 +32,6 @@ import android.content.Context;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -44,10 +41,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AbstractBluetoothA2dpPreferenceControllerTest {
 
     @Mock
@@ -108,8 +103,8 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setValue(mController.getListValues()[2]);
-        verify(mPreference).setSummary(mContext.getResources().getString(STREAMING_LABEL_ID,
-                mController.getListSummaries()[2]));
+        verify(mPreference).setSummary(mContext.getString(STREAMING_LABEL_ID,
+            mController.getListSummaries()[2]));
     }
 
     @Test
@@ -119,10 +114,10 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         verify(mController).updateState(mPreference);
     }
 
-    static class AbstractBluetoothA2dpPreferenceControllerImpl extends
-            AbstractBluetoothA2dpPreferenceController {
+    private static class AbstractBluetoothA2dpPreferenceControllerImpl
+        extends AbstractBluetoothA2dpPreferenceController {
 
-        public AbstractBluetoothA2dpPreferenceControllerImpl(Context context,
+        private AbstractBluetoothA2dpPreferenceControllerImpl(Context context,
                 Lifecycle lifecycle, BluetoothA2dpConfigStore store) {
             super(context, lifecycle, store);
         }
@@ -156,5 +151,4 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
             return 0;
         }
     }
-
 }

@@ -15,25 +15,23 @@
  */
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SuppressorHelperTest {
     private static final String SUPPRESSOR_NAME = "wear";
 
@@ -53,7 +51,7 @@ public class SuppressorHelperTest {
         try {
             when(mContext.getPackageManager()).thenReturn(mPackageManager);
             when(mPackageManager.getServiceInfo(mSuppressor, 0)).thenReturn(mServiceInfo);
-            when(mServiceInfo.loadLabel(mPackageManager)).thenReturn(new String(SUPPRESSOR_NAME));
+            when(mServiceInfo.loadLabel(mPackageManager)).thenReturn(SUPPRESSOR_NAME);
         } catch (PackageManager.NameNotFoundException e) {
             // Do nothing. This exception will never happen in mock
         }
@@ -61,13 +59,13 @@ public class SuppressorHelperTest {
 
     @Test
     public void testGetSuppressionText_SuppressorNull_ReturnNull() {
-        String text = SuppressorHelper.getSuppressionText(mContext, null);
+        final String text = SuppressorHelper.getSuppressionText(mContext, null);
         assertThat(text).isNull();
     }
 
     @Test
     public void testGetSuppressorCaption_SuppressorNotNull_ReturnSuppressorName() {
-        String text = SuppressorHelper.getSuppressorCaption(mContext, mSuppressor);
+        final String text = SuppressorHelper.getSuppressorCaption(mContext, mSuppressor);
         assertThat(text).isEqualTo(SUPPRESSOR_NAME);
     }
 }

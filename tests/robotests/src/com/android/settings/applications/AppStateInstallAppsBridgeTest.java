@@ -21,20 +21,17 @@ import static com.google.common.truth.Truth.assertThat;
 import android.app.AppOpsManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppStateInstallAppsBridgeTest {
 
     @Test
     public void testInstallAppsStateCanInstallApps() {
-        AppStateInstallAppsBridge.InstallAppsState appState = new AppStateInstallAppsBridge
-                .InstallAppsState();
+        AppStateInstallAppsBridge.InstallAppsState appState =
+            new AppStateInstallAppsBridge.InstallAppsState();
         assertThat(appState.canInstallApps()).isFalse();
 
         appState.permissionGranted = true;
@@ -47,8 +44,8 @@ public class AppStateInstallAppsBridgeTest {
 
     @Test
     public void testInstallAppsStateIsPotentialAppSource() {
-        AppStateInstallAppsBridge.InstallAppsState appState = new AppStateInstallAppsBridge
-                .InstallAppsState();
+        AppStateInstallAppsBridge.InstallAppsState appState =
+            new AppStateInstallAppsBridge.InstallAppsState();
         assertThat(appState.isPotentialAppSource()).isFalse();
 
         appState.appOpMode = AppOpsManager.MODE_ERRORED;

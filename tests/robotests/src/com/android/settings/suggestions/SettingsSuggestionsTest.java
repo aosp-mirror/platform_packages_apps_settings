@@ -16,95 +16,106 @@
 
 package com.android.settings.suggestions;
 
-import static com.android.settings.TestConfig.MANIFEST_PATH;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.annotation.StringRes;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
+import com.android.settings.Settings;
+import com.android.settings.fingerprint.FingerprintEnrollSuggestionActivity;
 import com.android.settings.fingerprint.FingerprintSuggestionActivity;
+import com.android.settings.support.NewDeviceIntroSuggestionActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wallpaper.WallpaperSuggestionActivity;
+import com.android.settings.wifi.calling.WifiCallingSuggestionActivity;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.manifest.ActivityData;
-import org.robolectric.manifest.AndroidManifest;
-import org.robolectric.manifest.IntentFilterData;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSuggestionsTest {
-
-    private static final String CATEGORY_FIRST_IMPRESSION =
-            "com.android.settings.suggested.category.FIRST_IMPRESSION";
-
-    private static final String CATEGORY_SETTINGS_ONLY =
-            "com.android.settings.suggested.category.SETTINGS_ONLY";
 
     @Test
     public void wallpaperSuggestion_isValid() {
-        assertSuggestionEquals("com.android.settings.wallpaper.WallpaperSuggestionActivity",
-                CATEGORY_FIRST_IMPRESSION,
-                R.string.wallpaper_suggestion_title, R.string.wallpaper_suggestion_summary);
+        assertSuggestionEquals(
+            WallpaperSuggestionActivity.class.getName(),
+            R.string.wallpaper_suggestion_title,
+            R.string.wallpaper_suggestion_summary);
     }
 
     @Test
     public void fingerprintSuggestion_isValid() {
         assertSuggestionEquals(
-                FingerprintSuggestionActivity.class.getName(),
-                CATEGORY_FIRST_IMPRESSION,
-                R.string.suggestion_additional_fingerprints,
-                R.string.suggestion_additional_fingerprints_summary);
+            FingerprintSuggestionActivity.class.getName(),
+            R.string.suggestion_additional_fingerprints,
+            R.string.suggestion_additional_fingerprints_summary);
+    }
+
+    @Test
+    public void fingerprintEnrollSuggestion_isValid() {
+        assertSuggestionEquals(
+            FingerprintEnrollSuggestionActivity.class.getName(),
+            R.string.suggested_fingerprint_lock_settings_title,
+            R.string.suggested_fingerprint_lock_settings_summary);
     }
 
     @Test
     public void wifiCallingSuggestion_isValid() {
-        assertSuggestionEquals("com.android.settings.wifi.calling.WifiCallingSuggestionActivity",
-                CATEGORY_FIRST_IMPRESSION,
-                R.string.wifi_calling_suggestion_title, R.string.wifi_calling_suggestion_summary);
+        assertSuggestionEquals(
+            WifiCallingSuggestionActivity.class.getName(),
+            R.string.wifi_calling_suggestion_title,
+            R.string.wifi_calling_suggestion_summary);
     }
 
     @Test
     public void nightDisplaySuggestion_isValid() {
-        assertSuggestionEquals("Settings$NightDisplaySuggestionActivity",
-            CATEGORY_FIRST_IMPRESSION,
-            R.string.night_display_suggestion_title, R.string.night_display_suggestion_summary);
+        assertSuggestionEquals(
+            Settings.NightDisplaySuggestionActivity.class.getName(),
+            R.string.night_display_suggestion_title,
+            R.string.night_display_suggestion_summary);
     }
 
-    private void assertSuggestionEquals(String activityName, String category, @StringRes int title,
-            @StringRes int summary) {
-        final AndroidManifest androidManifest = ShadowApplication.getInstance().getAppManifest();
-        final ActivityData activityData = androidManifest.getActivityData(activityName);
-        final Map<String, Object> metaData = activityData.getMetaData().getValueMap();
+    @Test
+    public void newDeviceIntroSuggestion_isValid() {
+        assertSuggestionEquals(
+            NewDeviceIntroSuggestionActivity.class.getName(),
+            R.string.new_device_suggestion_title,
+            R.string.new_device_suggestion_summary);
+    }
+
+    private void assertSuggestionEquals(String activityName, @StringRes int titleRes,
+        @StringRes int summaryRes) {
+
         final Context context = RuntimeEnvironment.application;
-        final String expectedTitle = context.getString(title);
-        final String expectedSummary = context.getString(summary);
-
-        final String pName = context.getPackageName();
-        final String actualTitle = context.getString(context.getResources().getIdentifier(
-                ((String) metaData.get("com.android.settings.title")).substring(8), "string",
-                pName));
-        final String actualSummary = context.getString(context.getResources().getIdentifier(
-                ((String) metaData.get("com.android.settings.summary")).substring(8), "string",
-                pName));
-        assertThat(actualTitle).isEqualTo(expectedTitle);
-        assertThat(actualSummary).isEqualTo(expectedSummary);
-
-        final List<IntentFilterData> intentFilters = activityData.getIntentFilters();
-        final List<String> categories = new ArrayList<>();
-        for (IntentFilterData intentFilter : intentFilters) {
-            categories.addAll(intentFilter.getCategories());
+        final PackageManager pm = context.getPackageManager();
+        final ComponentName componentName = new ComponentName(context, activityName);
+        final ActivityInfo info;
+        try {
+            info = pm.getActivityInfo(componentName, PackageManager.GET_META_DATA);
+        } catch (NameNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
-        assertThat(categories).contains(category);
+        final String pName = context.getPackageName();
+        final Resources resources = context.getResources();
+
+        final String title = (String) info.metaData.get("com.android.settings.title");
+        final String actualTitle =
+            context.getString(resources.getIdentifier(title.substring(8), "string", pName));
+        final String expectedTitle = context.getString(titleRes);
+        assertThat(actualTitle).isEqualTo(expectedTitle);
+
+        final String summary = (String) info.metaData.get("com.android.settings.summary");
+        final String actualSummary =
+            context.getString(resources.getIdentifier(summary.substring(8), "string", pName));
+        final String expectedSummary = context.getString(summaryRes);
+        assertThat(actualSummary).isEqualTo(expectedSummary);
     }
 }

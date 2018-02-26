@@ -24,7 +24,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -33,13 +32,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeScreenOnPreferenceControllerTest {
+
+    private static final boolean MOCK_PRIORITY_SCREEN_ON_SETTING = false;
+
     private ZenModeScreenOnPreferenceController mController;
 
     @Mock
@@ -52,7 +53,6 @@ public class ZenModeScreenOnPreferenceControllerTest {
     private NotificationManager.Policy mPolicy;
 
     private Context mContext;
-    private final boolean MOCK_PRIORITY_SCREEN_ON_SETTING = false;
 
     @Before
     public void setup() {
@@ -60,7 +60,7 @@ public class ZenModeScreenOnPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
         mController = new ZenModeScreenOnPreferenceController(mContext, mock(Lifecycle.class));
@@ -82,8 +82,8 @@ public class ZenModeScreenOnPreferenceControllerTest {
         boolean allow = true;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveVisualEffectsPolicy(
-                NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
+        verify(mBackend)
+            .saveVisualEffectsPolicy(NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class ZenModeScreenOnPreferenceControllerTest {
         boolean allow = false;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveVisualEffectsPolicy(
-                NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
+        verify(mBackend)
+            .saveVisualEffectsPolicy(NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
     }
 }

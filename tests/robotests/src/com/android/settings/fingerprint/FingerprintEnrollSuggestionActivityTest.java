@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,10 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FingerprintEnrollSuggestionActivityTest {
 
     @Mock
@@ -56,8 +53,7 @@ public class FingerprintEnrollSuggestionActivityTest {
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mContext.getSystemService(eq(Context.DEVICE_POLICY_SERVICE)))
                 .thenReturn(mDevicePolicyManager);
-        when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(), anyInt()))
-                .thenReturn(0);
+        when(mDevicePolicyManager.getKeyguardDisabledFeatures(any(), anyInt())).thenReturn(0);
         when(mContext.getSystemService(Context.FINGERPRINT_SERVICE))
                 .thenReturn(mFingerprintManager);
     }

@@ -18,18 +18,17 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.ContentResolver;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,14 +38,15 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import java.util.HashMap;
 
 import androidx.app.slice.Slice;
 
+import java.util.HashMap;
+
+/**
+ * TODO Investigate using ShadowContentResolver.registerProviderInternal(String, ContentProvider)
+ */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSliceProviderTest {
 
     private final String KEY = "KEY";
@@ -66,6 +66,7 @@ public class SettingsSliceProviderTest {
         mContext = spy(RuntimeEnvironment.application);
         mProvider = spy(new SettingsSliceProvider());
         mProvider.mSliceDataCache = new HashMap<>();
+        mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
     }
@@ -76,7 +77,12 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void testInitialSliceReturned_emmptySlice() {
+    public void testInitialSliceReturned_emptySlice() {
+        insertSpecialCase(KEY);
+        ContentResolver mockResolver = mock(ContentResolver.class);
+        doReturn(mockResolver).when(mContext).getContentResolver();
+        when(mProvider.getContext()).thenReturn(mContext);
+
         Uri uri = SettingsSliceProvider.getUri(KEY);
         Slice slice = mProvider.onBindSlice(uri);
 
@@ -97,8 +103,7 @@ public class SettingsSliceProviderTest {
     public void testLoadSlice_returnsSliceFromAccessor() {
         ContentResolver mockResolver = mock(ContentResolver.class);
         doReturn(mockResolver).when(mContext).getContentResolver();
-        doReturn(mContext).when(mProvider).getContext();
-        mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
+        when(mProvider.getContext()).thenReturn(mContext);
         insertSpecialCase(KEY);
         Uri uri = SettingsSliceProvider.getUri(KEY);
 
@@ -111,7 +116,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
-        doReturn(mContext).when(mProvider).getContext();
+        when(mProvider.getContext()).thenReturn(mContext);
         SliceData data = getDummyData();
         mProvider.mSliceDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());

@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.any;
@@ -38,7 +37,7 @@ import android.content.pm.ResolveInfo;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -47,10 +46,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppInstallerInfoPreferenceControllerTest {
 
     @Mock
@@ -84,14 +81,16 @@ public class AppInstallerInfoPreferenceControllerTest {
     public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
     public void getAvailabilityStatus_noAppLabel_shouldReturnDisabled() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -100,7 +99,8 @@ public class AppInstallerInfoPreferenceControllerTest {
         when(mAppInfo.loadLabel(mPackageManager)).thenReturn("Label1");
         mController = new AppInstallerInfoPreferenceController(mContext, mFragment, "Package1");
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -142,5 +142,4 @@ public class AppInstallerInfoPreferenceControllerTest {
         verify(mPreference, never()).setEnabled(false);
         verify(mPreference).setIntent(any(Intent.class));
     }
-
 }

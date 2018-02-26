@@ -29,11 +29,9 @@ import android.os.UserManager;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowDoubleTwistPreferenceController;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,15 +42,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class
-})
+@Config(shadows = SettingsShadowResources.class)
 public class DoubleTwistPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -119,12 +114,10 @@ public class DoubleTwistPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {
-            ShadowDoubleTwistPreferenceController.class,
-            ShadowSecureSettings.class})
+    @Config(shadows = ShadowDoubleTwistPreferenceController.class)
     public void onPreferenceChange_hasWorkProfile_shouldUpdateSettingForWorkProfileUser() {
         final int managedId = 2;
-        ShadowSecureSettings.putIntForUser(
+        Settings.Secure.putIntForUser(
                 null, Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0, managedId);
         DoubleTwistPreferenceController controller =
                 spy(new DoubleTwistPreferenceController(mContext, null, KEY_DOUBLE_TWIST));
@@ -144,7 +137,7 @@ public class DoubleTwistPreferenceControllerTest {
     @Test
     public void testSwitchEnabled_configIsSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 1);
         mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);
@@ -155,7 +148,7 @@ public class DoubleTwistPreferenceControllerTest {
     @Test
     public void testSwitchEnabled_configIsNotSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(),
                 Settings.Secure.CAMERA_DOUBLE_TWIST_TO_FLIP_ENABLED, 0);
         mController = new DoubleTwistPreferenceController(context, null, KEY_DOUBLE_TWIST);

@@ -25,10 +25,8 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -38,24 +36,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = SettingsShadowResources.class)
 public class UtilsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
 
-    private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
     }
 
     @Test

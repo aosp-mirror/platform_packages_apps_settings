@@ -18,8 +18,8 @@ package com.android.settings.dashboard;
 
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_CONTAINER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_CONDITION_FOOTER;
-import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
 import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONDITION_DIVIDER;
+import static com.android.settings.dashboard.DashboardData.STABLE_ID_SUGGESTION_CONTAINER;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -30,7 +30,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.util.ListUpdateCallback;
 
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.AirplaneModeCondition;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settingslib.drawer.DashboardCategory;
@@ -42,17 +41,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardDataTest {
+
     private static final String TEST_SUGGESTION_TITLE = "Use fingerprint";
     private static final String TEST_CATEGORY_TILE_TITLE = "Display";
 
@@ -125,7 +122,7 @@ public class DashboardDataTest {
     public void testBuildItemsData_shouldSetstableId() {
         final List<DashboardData.Item> items = mDashboardDataWithOneConditions.getItemList();
 
-        // suggestion, seperator, condition, footer, 1 tile
+        // suggestion, separator, condition, footer, 1 tile
         assertThat(items).hasSize(5);
 
         assertThat(items.get(0).id).isEqualTo(STABLE_ID_SUGGESTION_CONTAINER);
@@ -151,8 +148,7 @@ public class DashboardDataTest {
             if (item instanceof List) {
                 assertThat(item).isEqualTo(expectedObjects[i]);
             } else if (item instanceof DashboardData.ConditionHeaderData) {
-                DashboardData.ConditionHeaderData i1 =
-                        (DashboardData.ConditionHeaderData) item;
+                DashboardData.ConditionHeaderData i1 = (DashboardData.ConditionHeaderData) item;
                 DashboardData.ConditionHeaderData i2 =
                         (DashboardData.ConditionHeaderData) expectedObjects[i];
                 assertThat(i1.title).isEqualTo(i2.title);
@@ -179,8 +175,7 @@ public class DashboardDataTest {
 
     @Test
     public void testGetPositionByTile_selfInstance_returnPositionFound() {
-        final int position = mDashboardDataWithOneConditions
-                .getPositionByTile(mTestCategoryTile);
+        final int position = mDashboardDataWithOneConditions.getPositionByTile(mTestCategoryTile);
         assertThat(position).isNotEqualTo(DashboardData.POSITION_NOT_FOUND);
     }
 
@@ -209,7 +204,6 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_InsertOneCondition_ResultDataOneChanged() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         // Item in position 3 is the condition container containing the list of conditions, which
         // gets 1 more item
@@ -222,7 +216,6 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_RemoveOneSuggestion_causeItemRemoveAndChange() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         // removed suggestion and the divider
         testResultData.add(new ListUpdateResult.ResultData(
@@ -254,7 +247,6 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_DeleteAllData_ResultDataOneDeleted() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
         testResultData.add(new ListUpdateResult.ResultData(
                 ListUpdateResult.ResultData.TYPE_OPERATION_REMOVE, 0, 5));
@@ -264,18 +256,17 @@ public class DashboardDataTest {
 
     @Test
     public void testDiffUtil_typeSuggestedContainer_ResultDataNothingChanged() {
-        //Build testResultData
         final List<ListUpdateResult.ResultData> testResultData = new ArrayList<>();
 
         DashboardData prevData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(mTestSuggestion))
+                .setSuggestions(Collections.singletonList(mTestSuggestion))
                 .build();
         DashboardData currentData = new DashboardData.Builder()
                 .setConditions(null)
                 .setCategory(null)
-                .setSuggestions(Arrays.asList(mTestSuggestion))
+                .setSuggestions(Collections.singletonList(mTestSuggestion))
                 .build();
         testDiffUtil(prevData, currentData, testResultData);
     }
@@ -333,7 +324,7 @@ public class DashboardDataTest {
             mResultData = new ArrayList<>();
         }
 
-        public List<ResultData> getResultData() {
+        private List<ResultData> getResultData() {
             return mResultData;
         }
 
@@ -368,16 +359,17 @@ public class DashboardDataTest {
          * or "The data is moved(operation) from position1(arg1) to position2(arg2)"
          */
         private static class ResultData implements Comparable<ResultData> {
-            public static final int TYPE_OPERATION_INSERT = 0;
-            public static final int TYPE_OPERATION_REMOVE = 1;
-            public static final int TYPE_OPERATION_MOVE = 2;
-            public static final int TYPE_OPERATION_CHANGE = 3;
 
-            public final int operation;
-            public final int arg1;
-            public final int arg2;
+            private static final int TYPE_OPERATION_INSERT = 0;
+            private static final int TYPE_OPERATION_REMOVE = 1;
+            private static final int TYPE_OPERATION_MOVE = 2;
+            private static final int TYPE_OPERATION_CHANGE = 3;
 
-            public ResultData(int operation, int arg1, int arg2) {
+            private final int operation;
+            private final int arg1;
+            private final int arg2;
+
+            private ResultData(int operation, int arg1, int arg2) {
                 this.operation = operation;
                 this.arg1 = arg1;
                 this.arg2 = arg2;

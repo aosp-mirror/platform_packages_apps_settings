@@ -16,11 +16,8 @@
 
 package com.android.settings.security.trustagent;
 
-
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_SECURITY_CATEGORY;
-import static com.android.settings.security.trustagent.TrustAgentListPreferenceController
-        .PREF_KEY_TRUST_AGENT;
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_SECURITY_CATEGORY;
+import static com.android.settings.security.trustagent.TrustAgentListPreferenceController.PREF_KEY_TRUST_AGENT;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
@@ -38,7 +35,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -57,7 +53,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TrustAgentListPreferenceControllerTest {
 
     @Mock
@@ -78,7 +73,6 @@ public class TrustAgentListPreferenceControllerTest {
 
     private TrustAgentListPreferenceController mController;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -87,13 +81,12 @@ public class TrustAgentListPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(any(Context.class)))
-                .thenReturn(mLockPatternUtils);
+            .thenReturn(mLockPatternUtils);
         when(mFeatureFactory.securityFeatureProvider.getTrustAgentManager())
-                .thenReturn(mTrustAgentManager);
+            .thenReturn(mTrustAgentManager);
         when(mCategory.getKey()).thenReturn(PREF_KEY_SECURITY_CATEGORY);
         when(mCategory.getContext()).thenReturn(mActivity);
-        when(mScreen.findPreference(PREF_KEY_SECURITY_CATEGORY))
-                .thenReturn(mCategory);
+        when(mScreen.findPreference(PREF_KEY_SECURITY_CATEGORY)).thenReturn(mCategory);
         mController = new TrustAgentListPreferenceController(mActivity, mFragment, mLifecycle);
     }
 
@@ -127,15 +120,15 @@ public class TrustAgentListPreferenceControllerTest {
     @Test
     public void onResume_shouldAddNewAgents() {
         final List<TrustAgentManager.TrustAgentComponentInfo> agents = new ArrayList<>();
-        final TrustAgentManager.TrustAgentComponentInfo agent = mock(
-                TrustAgentManager.TrustAgentComponentInfo.class);
+        final TrustAgentManager.TrustAgentComponentInfo agent =
+            mock(TrustAgentManager.TrustAgentComponentInfo.class);
         agent.title = "Test_title";
         agent.summary = "test summary";
         agent.componentName = new ComponentName("pkg", "agent");
         agent.admin = null;
         agents.add(agent);
         when(mTrustAgentManager.getActiveTrustAgents(mActivity, mLockPatternUtils))
-                .thenReturn(agents);
+            .thenReturn(agents);
 
         mController.displayPreference(mScreen);
         mController.onResume();
@@ -147,8 +140,8 @@ public class TrustAgentListPreferenceControllerTest {
     @Config(qualifiers = "mcc999")
     public void onResume_ifNotAvailable_shouldNotAddNewAgents() {
         final List<TrustAgentManager.TrustAgentComponentInfo> agents = new ArrayList<>();
-        final TrustAgentManager.TrustAgentComponentInfo agent = mock(
-                TrustAgentManager.TrustAgentComponentInfo.class);
+        final TrustAgentManager.TrustAgentComponentInfo agent =
+            mock(TrustAgentManager.TrustAgentComponentInfo.class);
         agent.title = "Test_title";
         agent.summary = "test summary";
         agent.componentName = new ComponentName("pkg", "agent");

@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -36,7 +35,7 @@ import android.net.INetworkStatsSession;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.datausage.AppDataUsage;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -47,11 +46,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppDataUsagePreferenceControllerTest {
 
     @Mock
@@ -74,14 +71,16 @@ public class AppDataUsagePreferenceControllerTest {
     public void getAvailabilityStatus_bandwidthControlEnabled_shouldReturnAvailable() {
         doReturn(true).when(mController).isBandwidthControlEnabled();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
     public void getAvailabilityStatus_bandwidthControlDisabled_shouldReturnDisabled() {
         doReturn(false).when(mController).isBandwidthControlEnabled();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
     @Test
@@ -134,5 +133,4 @@ public class AppDataUsagePreferenceControllerTest {
 
         verify(preference).setSummary(any());
     }
-
 }

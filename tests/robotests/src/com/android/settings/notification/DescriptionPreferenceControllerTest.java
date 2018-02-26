@@ -18,10 +18,8 @@ package com.android.settings.notification;
 
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -34,7 +32,6 @@ import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
@@ -44,11 +41,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DescriptionPreferenceControllerTest {
 
     private Context mContext;
@@ -70,19 +65,19 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(Preference.class));
     }
 
     @Test
-    public void testIsAvailable_notIfNull() throws Exception {
+    public void testIsAvailable_notIfNull() {
         mController.onResume(null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void testIsAvailable_notIfChannelGroupBlocked() throws Exception {
+    public void testIsAvailable_notIfChannelGroupBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
         when(group.isBlocked()).thenReturn(true);
@@ -91,7 +86,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfChannelBlocked() throws Exception {
+    public void testIsAvailable_notIfChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
@@ -100,7 +95,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfNoChannelDesc() throws Exception {
+    public void testIsAvailable_notIfNoChannelDesc() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -109,7 +104,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfNoChannelGroupDesc() throws Exception {
+    public void testIsAvailable_notIfNoChannelGroupDesc() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
         when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
@@ -118,7 +113,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_channel() throws Exception {
+    public void testIsAvailable_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -128,7 +123,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_channelGroup() throws Exception {
+    public void testIsAvailable_channelGroup() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
         when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));
@@ -139,7 +134,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_channel() throws Exception {
+    public void testUpdateState_channel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -155,7 +150,7 @@ public class DescriptionPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_channelGroup() throws Exception {
+    public void testUpdateState_channelGroup() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannelGroupWrapper group = mock(NotificationChannelGroupWrapper.class);
         when(group.getGroup()).thenReturn(mock(NotificationChannelGroup.class));

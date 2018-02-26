@@ -25,7 +25,6 @@ import static org.mockito.Mockito.when;
 import android.accounts.Account;
 import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v14.preference.PreferenceFragment;
@@ -33,7 +32,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -43,7 +41,6 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -51,17 +48,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class
-)
+@Config(shadows = AccountHeaderPreferenceControllerTest.ShadowAuthenticatorHelper.class)
 public class AccountHeaderPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private Activity mActivity;
     @Mock
@@ -82,7 +72,7 @@ public class AccountHeaderPreferenceControllerTest {
         FakeFeatureFactory.setupForTest();
         mHeaderPreference = new LayoutPreference(
                 RuntimeEnvironment.application, R.layout.settings_entity_header);
-        doReturn(mContext).when(mActivity).getApplicationContext();
+        doReturn(RuntimeEnvironment.application).when(mActivity).getApplicationContext();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
     }
@@ -115,7 +105,6 @@ public class AccountHeaderPreferenceControllerTest {
                 ((TextView) mHeaderPreference.findViewById(R.id.entity_header_title)).getText();
 
         assertThat(label).isEqualTo(account.name);
-
     }
 
     @Implements(AuthenticatorHelper.class)

@@ -29,7 +29,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
@@ -43,10 +42,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BadgingNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -90,7 +87,7 @@ public class BadgingNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenSettingIsOn() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_BADGING, 1);
 
         mController = new BadgingNotificationPreferenceController(context);
@@ -102,7 +99,7 @@ public class BadgingNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.Secure.putInt(context.getContentResolver(), NOTIFICATION_BADGING, 0);
 
         mController = new BadgingNotificationPreferenceController(context);
@@ -119,13 +116,13 @@ public class BadgingNotificationPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
-        int newValue = 0;
+        final int newValue = 0;
         ContentResolver resolver = mContext.getContentResolver();
         Settings.Secure.putInt(resolver, Settings.Secure.NOTIFICATION_BADGING, 1);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Settings.Secure.NOTIFICATION_BADGING,
-                1);
+        final int updatedValue =
+            Settings.Secure.getInt(resolver, Settings.Secure.NOTIFICATION_BADGING, 1);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }
@@ -133,11 +130,11 @@ public class BadgingNotificationPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
-        int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
+        final int currentValue = 1;
+        final ContentResolver resolver = mContext.getContentResolver();
         Settings.Secure.putInt(resolver, Settings.Secure.NOTIFICATION_BADGING, currentValue);
 
-        int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
+        final int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 
         assertThat(newValue).isEqualTo(currentValue);
     }

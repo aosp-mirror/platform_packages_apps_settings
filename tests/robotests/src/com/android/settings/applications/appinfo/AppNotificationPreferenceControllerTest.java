@@ -19,7 +19,6 @@ package com.android.settings.applications.appinfo;
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -33,7 +32,6 @@ import android.content.pm.ApplicationInfo;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -45,11 +43,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppNotificationPreferenceControllerTest {
 
     @Mock
@@ -66,8 +62,7 @@ public class AppNotificationPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController =
-                spy(new AppNotificationPreferenceController(mContext, mFragment));
+        mController = spy(new AppNotificationPreferenceController(mContext, mFragment));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         final String key = mController.getPreferenceKey();
         when(mPreference.getKey()).thenReturn(key);

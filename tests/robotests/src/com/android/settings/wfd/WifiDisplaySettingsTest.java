@@ -30,7 +30,6 @@ import android.media.MediaRouter;
 import android.net.wifi.p2p.WifiP2pManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -39,10 +38,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiDisplaySettingsTest {
 
     @Mock
@@ -59,13 +56,12 @@ public class WifiDisplaySettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mActivity.getSystemService(Context.MEDIA_ROUTER_SERVICE))
-                .thenReturn(mMediaRouter);
+        when(mActivity.getSystemService(Context.MEDIA_ROUTER_SERVICE)).thenReturn(mMediaRouter);
         when(mActivity.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)).thenReturn(true);
 
-        mSummaryProvider = WifiDisplaySettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(
-                mActivity, mSummaryLoader);
+        mSummaryProvider = WifiDisplaySettings.SUMMARY_PROVIDER_FACTORY
+            .createSummaryProvider(mActivity, mSummaryLoader);
     }
 
     @Test
@@ -92,28 +88,24 @@ public class WifiDisplaySettingsTest {
 
     @Test
     public void isAvailable_nullService_shouldReturnFalse() {
-        assertThat(WifiDisplaySettings.isAvailable(mActivity))
-                .isFalse();
+        assertThat(WifiDisplaySettings.isAvailable(mActivity)).isFalse();
     }
 
     @Test
     public void isAvailable_noWifiDirectFeature_shouldReturnFalse() {
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT))
-                .thenReturn(false);
+            .thenReturn(false);
 
-        assertThat(WifiDisplaySettings.isAvailable(mActivity))
-                .isFalse();
+        assertThat(WifiDisplaySettings.isAvailable(mActivity)).isFalse();
     }
 
     @Test
     public void isAvailable_hasService_shouldReturnTrue() {
         when(mActivity.getSystemService(Context.DISPLAY_SERVICE))
-                .thenReturn(mock(DisplayManager.class));
+            .thenReturn(mock(DisplayManager.class));
         when(mActivity.getSystemService(Context.WIFI_P2P_SERVICE))
-                .thenReturn(mock(WifiP2pManager.class));
+            .thenReturn(mock(WifiP2pManager.class));
 
-        assertThat(WifiDisplaySettings.isAvailable(mActivity))
-                .isTrue();
+        assertThat(WifiDisplaySettings.isAvailable(mActivity)).isTrue();
     }
-
 }

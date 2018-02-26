@@ -34,7 +34,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowRestrictedLockUtilsWrapper;
@@ -50,11 +49,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowRestrictedLockUtilsWrapper.class, ShadowConnectivityManager.class,
-                ShadowUserManager.class}
+@Config(shadows = {
+    ShadowRestrictedLockUtilsWrapper.class,
+    ShadowConnectivityManager.class,
+    ShadowUserManager.class}
 )
 public class MobileNetworkPreferenceControllerTest {
 
@@ -74,8 +72,7 @@ public class MobileNetworkPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        when(mContext.getSystemService(Context.TELEPHONY_SERVICE))
-                .thenReturn(mTelephonyManager);
+        when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
     }
 
     @Test

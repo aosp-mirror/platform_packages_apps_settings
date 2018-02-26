@@ -15,10 +15,16 @@
  */
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.support.annotation.NonNull;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -26,21 +32,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsDumpServiceTest {
+
     private static final String PACKAGE_BROWSER = "com.android.test.browser";
     private static final String PACKAGE_NULL = "android";
+
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -107,7 +108,7 @@ public class SettingsDumpServiceTest {
     private class TestPrintWriter extends PrintWriter {
         private Object mPrintObject;
 
-        public TestPrintWriter(@NonNull OutputStream out) {
+        private TestPrintWriter(@NonNull OutputStream out) {
             super(out);
         }
 
@@ -116,7 +117,7 @@ public class SettingsDumpServiceTest {
             mPrintObject = object;
         }
 
-        public Object getPrintObject() {
+        private Object getPrintObject() {
             return mPrintObject;
         }
     }

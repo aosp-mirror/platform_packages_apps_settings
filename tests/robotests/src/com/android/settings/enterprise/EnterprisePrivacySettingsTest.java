@@ -23,7 +23,6 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.PreferenceCategoryController;
@@ -35,17 +34,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
-/**
- * Tests for {@link EnterprisePrivacySettings}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class EnterprisePrivacySettingsTest {
+public class EnterprisePrivacySettingsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -56,7 +50,6 @@ public final class EnterprisePrivacySettingsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-
         mSettings = new EnterprisePrivacySettings();
     }
 
@@ -89,22 +82,21 @@ public final class EnterprisePrivacySettingsTest {
     }
 
     @Test
-    public void getPreferenceControllers() throws Exception {
-        final List<AbstractPreferenceController> controllers = mSettings.createPreferenceControllers(
-                ShadowApplication.getInstance().getApplicationContext());
+    public void getPreferenceControllers() {
+        final List<AbstractPreferenceController> controllers =
+            mSettings.createPreferenceControllers(RuntimeEnvironment.application);
         verifyPreferenceControllers(controllers);
     }
 
     @Test
-    public void getSearchIndexProviderPreferenceControllers() throws Exception {
-        final List<AbstractPreferenceController> controllers
-                = EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER.getPreferenceControllers(
-                ShadowApplication.getInstance().getApplicationContext());
+    public void getSearchIndexProviderPreferenceControllers() {
+        final List<AbstractPreferenceController> controllers =
+            EnterprisePrivacySettings.SEARCH_INDEX_DATA_PROVIDER
+                .getPreferenceControllers(RuntimeEnvironment.application);
         verifyPreferenceControllers(controllers);
     }
 
-    private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers)
-            throws Exception {
+    private void verifyPreferenceControllers(List<AbstractPreferenceController> controllers) {
         assertThat(controllers).isNotNull();
         assertThat(controllers.size()).isEqualTo(17);
         int position = 0;
@@ -137,7 +129,7 @@ public final class EnterprisePrivacySettingsTest {
                 PreferenceCategoryController.class);
         assertThat(controllers.get(position++)).isInstanceOf(
                 FailedPasswordWipeCurrentUserPreferenceController.class);
-        assertThat(controllers.get(position++)).isInstanceOf(
+        assertThat(controllers.get(position)).isInstanceOf(
                 FailedPasswordWipeManagedProfilePreferenceController.class);
     }
 }

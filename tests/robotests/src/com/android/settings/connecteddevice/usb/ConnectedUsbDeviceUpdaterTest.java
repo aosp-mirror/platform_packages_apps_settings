@@ -16,15 +16,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -35,11 +32,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedUsbDeviceUpdaterTest {
+
     private Context mContext;
     private ConnectedUsbDeviceUpdater mDeviceUpdater;
 
@@ -58,8 +54,8 @@ public class ConnectedUsbDeviceUpdaterTest {
 
         mContext = RuntimeEnvironment.application;
         when(mFragment.getContext()).thenReturn(mContext);
-        mDeviceUpdater = new ConnectedUsbDeviceUpdater(mFragment, mDevicePreferenceCallback,
-                mUsbBackend);
+        mDeviceUpdater =
+            new ConnectedUsbDeviceUpdater(mFragment, mDevicePreferenceCallback, mUsbBackend);
         mDeviceUpdater.mUsbReceiver = mUsbReceiver;
     }
 
@@ -68,16 +64,16 @@ public class ConnectedUsbDeviceUpdaterTest {
         mDeviceUpdater.initUsbPreference(mContext);
 
         assertThat(mDeviceUpdater.mUsbPreference.getTitle()).isEqualTo("USB");
-        assertThat(mDeviceUpdater.mUsbPreference.getIcon()).isEqualTo(mContext.getDrawable(
-                R.drawable.ic_usb));
+        assertThat(mDeviceUpdater.mUsbPreference.getIcon())
+            .isEqualTo(mContext.getDrawable(R.drawable.ic_usb));
         assertThat(mDeviceUpdater.mUsbPreference.isSelectable()).isFalse();
     }
 
     @Test
     public void testInitUsbPreference_usbConnected_preferenceAdded() {
         mDeviceUpdater.initUsbPreference(mContext);
-        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(true /* connected */,
-                UsbBackend.MODE_DATA_NONE);
+        mDeviceUpdater.mUsbConnectionListener
+            .onUsbConnectionChanged(true /* connected */, UsbBackend.MODE_DATA_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceAdded(mDeviceUpdater.mUsbPreference);
     }
@@ -85,10 +81,9 @@ public class ConnectedUsbDeviceUpdaterTest {
     @Test
     public void testInitUsbPreference_usbDisconnected_preferenceRemoved() {
         mDeviceUpdater.initUsbPreference(mContext);
-        mDeviceUpdater.mUsbConnectionListener.onUsbConnectionChanged(false /* connected */,
-                UsbBackend.MODE_DATA_NONE);
+        mDeviceUpdater.mUsbConnectionListener
+            .onUsbConnectionChanged(false /* connected */, UsbBackend.MODE_DATA_NONE);
 
         verify(mDevicePreferenceCallback).onDeviceRemoved(mDeviceUpdater.mUsbPreference);
     }
-
 }

@@ -22,7 +22,6 @@ import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -45,7 +44,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAccountManager;
@@ -57,11 +55,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RemoveAccountPreferenceControllerTest {
 
     private static final String KEY_REMOVE_ACCOUNT = "remove_account";
@@ -84,26 +82,23 @@ public class RemoveAccountPreferenceControllerTest {
     @Mock
     private LayoutPreference mPreference;
 
-    private Context mContext;
     private RemoveAccountPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
-        mContext = spy(shadowContext.getApplicationContext());
+        ShadowApplication.getInstance().setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
 
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
-        when(mPreferenceManager.getContext()).thenReturn(mContext);
+        when(mPreferenceManager.getContext()).thenReturn(RuntimeEnvironment.application);
         when(mFragment.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mFragmentTransaction);
-        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt())).thenReturn(
-            new AuthenticatorDescription[0]);
+        when(mAccountManager.getAuthenticatorTypesAsUser(anyInt()))
+            .thenReturn(new AuthenticatorDescription[0]);
         when(mAccountManager.getAccountsAsUser(anyInt())).thenReturn(new Account[0]);
-        mController = new RemoveAccountPreferenceController(mContext, mFragment,
-            mDevicePolicyManager);
+        mController = new RemoveAccountPreferenceController(RuntimeEnvironment.application,
+            mFragment, mDevicePolicyManager);
     }
 
     @Test

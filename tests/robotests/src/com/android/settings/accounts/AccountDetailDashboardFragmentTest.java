@@ -16,16 +16,13 @@
 package com.android.settings.accounts;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,10 +31,8 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardFeatureProviderImpl;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
@@ -46,41 +41,28 @@ import com.android.settingslib.drawer.Tile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AccountDetailDashboardFragmentTest {
 
     private static final String METADATA_CATEGORY = "com.android.settings.category";
     private static final String METADATA_ACCOUNT_TYPE = "com.android.settings.ia.account";
     private static final String METADATA_USER_HANDLE = "user_handle";
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private AccountManager mAccountManager;
-    @Mock
-    private Preference mPreference;
-    @Mock
-    private PreferenceScreen mScreen;
-
     private AccountDetailDashboardFragment mFragment;
     private Context mContext;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        shadowContext.setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
-        mContext = spy(shadowContext.getApplicationContext());
+        mContext = RuntimeEnvironment.application;
 
-        mFragment = spy(new AccountDetailDashboardFragment());
         final Bundle args = new Bundle();
         args.putParcelable(METADATA_USER_HANDLE, UserHandle.CURRENT);
+
+        mFragment = new AccountDetailDashboardFragment();
         mFragment.setArguments(args);
         mFragment.mAccountType = "com.abc";
         mFragment.mAccount = new Account("name1@abc.com", "com.abc");
@@ -89,7 +71,7 @@ public class AccountDetailDashboardFragmentTest {
     @Test
     public void testCategory_isAccountDetail() {
         assertThat(new AccountDetailDashboardFragment().getCategoryKey())
-                .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
+            .isEqualTo(CategoryKey.CATEGORY_ACCOUNT_DETAIL);
     }
 
     @Test
@@ -143,7 +125,7 @@ public class AccountDetailDashboardFragmentTest {
         tile.userHandle = null;
         mFragment.displayTile(tile);
 
-        final Activity activity = Robolectric.buildActivity(Activity.class).get();
+        final Activity activity = Robolectric.setupActivity(Activity.class);
         final Preference preference = new Preference(mContext);
         dashboardFeatureProvider.bindPreferenceToTile(activity,
                 MetricsProto.MetricsEvent.DASHBOARD_SUMMARY, preference, tile, "key",
@@ -153,7 +135,6 @@ public class AccountDetailDashboardFragmentTest {
 
         final Intent intent = shadowOf(activity).getNextStartedActivityForResult().intent;
 
-        assertThat(intent.getStringExtra("extra.accountName"))
-                .isEqualTo("name1@abc.com");
+        assertThat(intent.getStringExtra("extra.accountName")).isEqualTo("name1@abc.com");
     }
 }

@@ -15,6 +15,9 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -26,24 +29,17 @@ import android.os.UserManager;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoRule;
 import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryEntryTest {
 
     private static final int APP_UID = 123;
@@ -68,8 +64,8 @@ public class BatteryEntryTest {
 
     @Before
     public void stubPackageManagerToReturnAppPackageAndName() throws NameNotFoundException {
-        when(mockPackageManager.getPackagesForUid(APP_UID)).thenReturn(
-            new String[]{APP_DEFAULT_PACKAGE_NAME});
+        when(mockPackageManager.getPackagesForUid(APP_UID))
+            .thenReturn(new String[] {APP_DEFAULT_PACKAGE_NAME});
 
         ApplicationInfo appInfo = mock(ApplicationInfo.class);
         when(mockPackageManager.getApplicationInfo(APP_DEFAULT_PACKAGE_NAME, 0 /* no flags */))
@@ -130,8 +126,8 @@ public class BatteryEntryTest {
 
     @Test
     public void batteryEntryForApp_shouldSetHighestDrainPackage_whenMultiplePackagesFoundForUid() {
-        when(mockPackageManager.getPackagesForUid(APP_UID)).thenReturn(
-            new String[]{APP_DEFAULT_PACKAGE_NAME, "package2", "package3"});
+        when(mockPackageManager.getPackagesForUid(APP_UID))
+            .thenReturn(new String[] {APP_DEFAULT_PACKAGE_NAME, "package2", "package3"});
 
         BatteryEntry entry = createBatteryEntryForApp();
 
@@ -142,8 +138,8 @@ public class BatteryEntryTest {
     public void extractPackageFromSipper_systemSipper_returnSystemPackage() {
         BatteryEntry entry = createBatteryEntryForSystem();
 
-        assertThat(entry.extractPackagesFromSipper(entry.sipper)).isEqualTo(
-                new String[]{ANDROID_PACKAGE});
+        assertThat(entry.extractPackagesFromSipper(entry.sipper))
+            .isEqualTo(new String[] {ANDROID_PACKAGE});
     }
 
     @Test

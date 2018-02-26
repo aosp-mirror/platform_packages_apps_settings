@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -25,7 +24,6 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -33,14 +31,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyCleanupJobServiceTest {
     @Before
     public void setUp() {
@@ -51,8 +47,8 @@ public class AnomalyCleanupJobServiceTest {
     public void testScheduleCleanUp() {
         AnomalyCleanupJobService.scheduleCleanUp(application);
 
-        ShadowJobScheduler shadowJobScheduler = Shadows.shadowOf(
-                application.getSystemService(JobScheduler.class));
+        ShadowJobScheduler shadowJobScheduler =
+            Shadows.shadowOf(application.getSystemService(JobScheduler.class));
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);

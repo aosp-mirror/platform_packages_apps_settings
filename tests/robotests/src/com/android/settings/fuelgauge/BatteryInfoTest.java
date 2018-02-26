@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.any;
@@ -28,24 +27,22 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.BatteryManager;
 import android.os.BatteryStats;
 import android.os.SystemClock;
 import android.util.SparseIntArray;
 
-import com.android.settings.TestConfig;
 import com.android.settings.graph.UsageView;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
 import com.android.settingslib.R;
 import com.android.settingslib.utils.PowerUtil;
-import java.time.Duration;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,27 +53,25 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryInfoTest {
 
-    private static final String STATUS_FULL = "Full";
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0m until fully charged";
     private static final String STATUS_NOT_CHARGING = "Not charging";
     private static final int PLUGGED_IN = 1;
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
-    public static final String ENHANCED_STRING_SUFFIX = "based on your usage";
-    public static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
-    public static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
+    private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
+    private static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
+    private static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
             "1m left until fully charged";
-    public static final String TEST_BATTERY_LEVEL_10 = "10%";
-    public static final String FIFTEEN_MIN_FORMATTED = "15m";
+    private static final String TEST_BATTERY_LEVEL_10 = "10%";
+    private static final String FIFTEEN_MIN_FORMATTED = "15m";
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
@@ -84,9 +79,6 @@ public class BatteryInfoTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStats mBatteryStats;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Resources mResources;
-
 
     @Before
     public void setUp() {
@@ -189,7 +181,6 @@ public class BatteryInfoTest {
                         FIFTEEN_MIN_FORMATTED));
     }
 
-
     @Test
     public void testGetBatteryInfo_basedOnUsageFalse_usesDefaultString() {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
@@ -255,7 +246,7 @@ public class BatteryInfoTest {
     private void assertOnlyHistory(BatteryInfo info) {
         mockBatteryStatsHistory();
         UsageView view = mock(UsageView.class);
-        doReturn(mContext).when(view).getContext();
+        when(view.getContext()).thenReturn(mContext);
 
         info.bindHistory(view);
         verify(view, times(1)).configureGraph(anyInt(), anyInt());
@@ -266,7 +257,7 @@ public class BatteryInfoTest {
     private void assertHistoryAndLinearProjection(BatteryInfo info) {
         mockBatteryStatsHistory();
         UsageView view = mock(UsageView.class);
-        doReturn(mContext).when(view).getContext();
+        when(view.getContext()).thenReturn(mContext);
 
         info.bindHistory(view);
         verify(view, times(2)).configureGraph(anyInt(), anyInt());
@@ -283,7 +274,7 @@ public class BatteryInfoTest {
     private void assertHistoryAndEnhancedProjection(BatteryInfo info) {
         mockBatteryStatsHistory();
         UsageView view = mock(UsageView.class);
-        doReturn(mContext).when(view).getContext();
+        when(view.getContext()).thenReturn(mContext);
         SparseIntArray pointsExpected = new SparseIntArray();
         pointsExpected.append(2000, 96);
         pointsExpected.append(2500, 95);

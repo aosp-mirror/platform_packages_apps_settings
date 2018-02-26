@@ -26,7 +26,6 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 import android.view.InputDevice;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -43,7 +42,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class GameControllerPreferenceControllerTest {
 
     @Mock
@@ -123,7 +121,6 @@ public class GameControllerPreferenceControllerTest {
     @Test
     public void updateNonIndexableKeys_shouldIncludeCategoryAndPrefKeys() {
         when(mInputManager.getInputDeviceIds()).thenReturn(new int[]{});
-
 
         final List<String> nonIndexables = new ArrayList<>();
         mController.updateNonIndexableKeys(nonIndexables);

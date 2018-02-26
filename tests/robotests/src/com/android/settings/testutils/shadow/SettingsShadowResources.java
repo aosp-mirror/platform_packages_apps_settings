@@ -45,7 +45,7 @@ import java.util.Map;
  * Shadow Resources and Theme classes to handle resource references that Robolectric shadows cannot
  * handle because they are too new or private.
  */
-@Implements(Resources.class)
+@Implements(value = Resources.class, inheritImplementationMethods = true)
 public class SettingsShadowResources extends ShadowResources {
 
     @RealObject
@@ -177,7 +177,7 @@ public class SettingsShadowResources extends ShadowResources {
                 ClassParameter.from(int.class, id));
     }
 
-    @Implements(Theme.class)
+    @Implements(value = Theme.class, inheritImplementationMethods = true)
     public static class SettingsShadowTheme extends ShadowTheme {
 
         @RealObject

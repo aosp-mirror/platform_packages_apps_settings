@@ -17,7 +17,6 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.RETURNS_DEEP_STUBS;
 import static org.mockito.Mockito.doReturn;
@@ -41,7 +40,6 @@ import android.os.UserManager;
 import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.VolumeInfo;
-import android.text.format.DateUtils;
 import android.util.IconDrawableFactory;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -49,22 +47,20 @@ import android.widget.TextView;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 
-import com.android.settingslib.utils.StringUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UtilsTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int USER_ID = 1;
 
@@ -161,8 +157,8 @@ public class UtilsTest {
     public void testIsProfileOrDeviceOwner_deviceOwnerApp_returnTrue() {
         when(mDevicePolicyManager.isDeviceOwnerAppOnAnyUser(PACKAGE_NAME)).thenReturn(true);
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
-                PACKAGE_NAME)).isTrue();
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
+            .isTrue();
     }
 
     @Test
@@ -171,11 +167,11 @@ public class UtilsTest {
         userInfos.add(new UserInfo());
 
         when(mUserManager.getUsers()).thenReturn(userInfos);
-        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id)).thenReturn(
-                new ComponentName(PACKAGE_NAME, ""));
+        when(mDevicePolicyManager.getProfileOwnerAsUser(userInfos.get(0).id))
+            .thenReturn(new ComponentName(PACKAGE_NAME, ""));
 
-        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager,
-                PACKAGE_NAME)).isTrue();
+        assertThat(Utils.isProfileOrDeviceOwner(mUserManager, mDevicePolicyManager, PACKAGE_NAME))
+            .isTrue();
     }
 
     @Test
@@ -190,8 +186,8 @@ public class UtilsTest {
     }
 
     @Test
-    public void testGetBadgedIcon_usePackageNameAndUserId() throws
-            PackageManager.NameNotFoundException {
+    public void testGetBadgedIcon_usePackageNameAndUserId()
+        throws PackageManager.NameNotFoundException {
         doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME,
                 PackageManager.GET_META_DATA);
 
@@ -200,5 +196,4 @@ public class UtilsTest {
         // Verify that it uses the correct user id
         verify(mIconDrawableFactory).getBadgedIcon(mApplicationInfo, USER_ID);
     }
-
 }

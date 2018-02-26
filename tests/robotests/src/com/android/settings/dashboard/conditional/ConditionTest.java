@@ -15,22 +15,6 @@
  */
 package com.android.settings.dashboard.conditional;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.graphics.drawable.Icon;
-import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.RuntimeEnvironment;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -40,8 +24,23 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.graphics.drawable.Icon;
+
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConditionTest {
 
     @Mock
@@ -107,14 +106,12 @@ public class ConditionTest {
         private static final IntentFilter TESTS_INTENT_FILTER = new IntentFilter("TestIntent");
         private static final BroadcastReceiver mReceiver = mock(BroadcastReceiver.class);
 
-        TestCondition(ConditionManager manager,
-                MetricsFeatureProvider metricsFeatureProvider) {
+        TestCondition(ConditionManager manager, MetricsFeatureProvider metricsFeatureProvider) {
             super(manager, metricsFeatureProvider);
         }
 
         @Override
         public void refreshState() {
-
         }
 
         @Override
@@ -144,12 +141,10 @@ public class ConditionTest {
 
         @Override
         public void onPrimaryClick() {
-
         }
 
         @Override
         public void onActionClick(int index) {
-
         }
 
         @Override
@@ -161,6 +156,5 @@ public class ConditionTest {
         public IntentFilter getIntentFilter() {
             return TESTS_INTENT_FILTER;
         }
-
     }
 }

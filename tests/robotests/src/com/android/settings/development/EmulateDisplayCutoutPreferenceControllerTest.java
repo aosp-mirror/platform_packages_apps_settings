@@ -17,7 +17,6 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -32,7 +31,6 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.DisplayCutout;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.OverlayManagerWrapper;
 import com.android.settings.wrapper.OverlayManagerWrapper.OverlayInfo;
@@ -42,38 +40,40 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EmulateDisplayCutoutPreferenceControllerTest {
 
-    static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false);
-    static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true);
-    static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false);
-    static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true);
+    private static final OverlayInfo ONE_DISABLED = createFakeOverlay("emulation.one", false);
+    private static final OverlayInfo ONE_ENABLED = createFakeOverlay("emulation.one", true);
+    private static final OverlayInfo TWO_DISABLED = createFakeOverlay("emulation.two", false);
+    private static final OverlayInfo TWO_ENABLED = createFakeOverlay("emulation.two", true);
 
-    @Mock Context mContext;
-    @Mock OverlayManagerWrapper mOverlayManager;
-    @Mock PackageManager mPackageManager;
-    @Mock ListPreference mPreference;
-    EmulateDisplayCutoutPreferenceController mController;
+    @Mock
+    private Context mContext;
+    @Mock
+    private OverlayManagerWrapper mOverlayManager;
+    @Mock
+    private PackageManager mPackageManager;
+    @Mock
+    private ListPreference mPreference;
+    private EmulateDisplayCutoutPreferenceController mController;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mockCurrentOverlays();
-        when(mPackageManager.getApplicationInfo(any(), anyInt())).thenThrow(
-                PackageManager.NameNotFoundException.class);
+        when(mPackageManager.getApplicationInfo(any(), anyInt()))
+            .thenThrow(PackageManager.NameNotFoundException.class);
         mController = createController();
         mController.setPreference(mPreference);
     }
 
     Object mockCurrentOverlays(OverlayInfo... overlays) {
         return when(mOverlayManager.getOverlayInfosForTarget(eq("android"), anyInt()))
-                .thenReturn(Arrays.<OverlayInfo>asList(overlays));
+            .thenReturn(Arrays.asList(overlays));
     }
 
     @Test
@@ -96,8 +96,8 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
 
         mController.onPreferenceChange(null, TWO_DISABLED.packageName);
 
-        verify(mOverlayManager).setEnabledExclusiveInCategory(
-                eq(TWO_DISABLED.packageName), anyInt());
+        verify(mOverlayManager)
+            .setEnabledExclusiveInCategory(eq(TWO_DISABLED.packageName), anyInt());
     }
 
     @Test

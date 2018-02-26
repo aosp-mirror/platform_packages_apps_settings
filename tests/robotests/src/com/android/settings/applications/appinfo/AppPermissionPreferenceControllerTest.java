@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -33,7 +32,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -43,12 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppPermissionPreferenceControllerTest {
 
     @Mock
@@ -140,5 +136,4 @@ public class AppPermissionPreferenceControllerTest {
         verify(mActivity).startActivityForResult(argThat(intent-> intent != null &&
                 Intent.ACTION_MANAGE_APP_PERMISSIONS.equals(intent.getAction())), anyInt());
     }
-
 }

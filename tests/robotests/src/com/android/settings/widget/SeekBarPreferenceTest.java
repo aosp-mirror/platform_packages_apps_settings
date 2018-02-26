@@ -21,18 +21,16 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.os.Parcelable;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SeekBarPreferenceTest {
+
     private static final int MAX = 75;
     private static final int MIN = 5;
     private static final int PROGRESS = 16;

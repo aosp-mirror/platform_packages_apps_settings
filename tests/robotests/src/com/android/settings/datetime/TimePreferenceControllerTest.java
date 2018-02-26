@@ -16,10 +16,13 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -27,16 +30,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TimePreferenceControllerTest {
 
     @Mock
@@ -52,8 +48,7 @@ public class TimePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mPreference = new RestrictedPreference(
-                ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new RestrictedPreference(RuntimeEnvironment.application);
         mController = new TimePreferenceController(mContext, mHost, mAutoTimePreferenceController);
     }
 
@@ -96,5 +91,4 @@ public class TimePreferenceControllerTest {
         // Should show date picker
         verify(mHost).showTimePicker();
     }
-
 }

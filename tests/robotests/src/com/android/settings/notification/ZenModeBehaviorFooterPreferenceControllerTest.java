@@ -21,54 +21,47 @@ import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
-
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
-
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.ComponentName;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeConfig.ZenRule;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.ArrayMap;
 
 import com.android.settings.notification.AbstractZenModePreferenceController.ZenModeConfigWrapper;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeBehaviorFooterPreferenceControllerTest {
-    private ZenModeBehaviorFooterPreferenceController mController;
-    private final String TEST_APP_NAME = "test_app";
-    private final String MANUAL_RULE_FIELD = "manualRule";
-    private final String AUTOMATIC_RULES_FIELD = "automaticRules";
 
+    private static final String TEST_APP_NAME = "test_app";
+    private static final String MANUAL_RULE_FIELD = "manualRule";
+    private static final String AUTOMATIC_RULES_FIELD = "automaticRules";
+
+    private ZenModeBehaviorFooterPreferenceController mController;
     @Mock
     private NotificationManager mNotificationManager;
     @Mock
@@ -95,12 +88,12 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
-        mController = new ZenModeBehaviorFooterPreferenceController(mContext,
-                mock(Lifecycle.class));
+        mController =
+            new ZenModeBehaviorFooterPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -243,5 +236,4 @@ public class ZenModeBehaviorFooterPreferenceControllerTest {
         verify(mockPref).setTitle(mContext.getString(
                 com.android.settings.R.string.zen_mode_app_set_behavior, TEST_APP_NAME));
     }
-
 }

@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
@@ -28,33 +27,27 @@ import android.content.pm.PackageInfo;
 import android.content.pm.UserInfo;
 import android.util.Pair;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
-
 import com.google.common.collect.ImmutableList;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PictureInPictureSettingsTest {
 
     private static final int PRIMARY_USER_ID = 0;
     private static final int PROFILE_USER_ID = 10;
 
-    private FakeFeatureFactory mFeatureFactory;
     private PictureInPictureSettings mFragment;
     @Mock
     private PackageManagerWrapper mPackageManager;
@@ -66,7 +59,7 @@ public class PictureInPictureSettingsTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         mFragment = new PictureInPictureSettings(mPackageManager, mUserManager);
         mPrimaryUserPackages = new ArrayList<>();
         mProfileUserPackages = new ArrayList<>();
@@ -80,8 +73,8 @@ public class PictureInPictureSettingsTest {
         UserInfo profileUserInfo = new UserInfo();
         profileUserInfo.id = PROFILE_USER_ID;
 
-        when(mUserManager.getProfiles(PRIMARY_USER_ID)).thenReturn(
-                ImmutableList.of(primaryUserInfo, profileUserInfo));
+        when(mUserManager.getProfiles(PRIMARY_USER_ID))
+            .thenReturn(ImmutableList.of(primaryUserInfo, profileUserInfo));
     }
 
     @Test
@@ -96,7 +89,7 @@ public class PictureInPictureSettingsTest {
         mProfileUserPackages.add(profileP1);
         mProfileUserPackages.add(profileP2);
 
-        ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
+        List<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         assertThat(containsPackages(apps, primaryP1, profileP2)).isTrue();
         assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
     }
@@ -117,17 +110,17 @@ public class PictureInPictureSettingsTest {
         mProfileUserPackages.add(profileP2);
         mProfileUserPackages.add(profileP3);
 
-        ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
-        Collections.sort(apps, new PictureInPictureSettings.AppComparator(null));
+        List<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
+        apps.sort(new PictureInPictureSettings.AppComparator(null));
         assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2, primaryP3)).isTrue();
     }
 
-    private boolean containsPackages(ArrayList<Pair<ApplicationInfo, Integer>> apps,
+    private boolean containsPackages(List<Pair<ApplicationInfo, Integer>> apps,
             PackageInfo... packages) {
-        for (int i = 0; i < packages.length; i++) {
+        for (PackageInfo aPackage : packages) {
             boolean found = false;
-            for (int j = 0; j < apps.size(); j++) {
-                if (apps.get(j).first == packages[i].applicationInfo) {
+            for (Pair<ApplicationInfo, Integer> app : apps) {
+                if (app.first == aPackage.applicationInfo) {
                     found = true;
                     break;
                 }
@@ -139,8 +132,7 @@ public class PictureInPictureSettingsTest {
         return true;
     }
 
-    private boolean isOrdered(ArrayList<Pair<ApplicationInfo, Integer>> apps,
-            PackageInfo... packages) {
+    private boolean isOrdered(List<Pair<ApplicationInfo, Integer>> apps, PackageInfo... packages) {
         if (apps.size() != packages.length) {
             return false;
         }

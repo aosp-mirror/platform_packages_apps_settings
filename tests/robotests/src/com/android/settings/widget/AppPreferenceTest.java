@@ -23,20 +23,15 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppPreferenceTest {
-
-    private static final int EXPECTED_APP_ICON_SIZE_DP = 32;
 
     private Context mContext;
     private View mRootView;
@@ -80,9 +75,7 @@ public class AppPreferenceTest {
 
     @Test
     public void foobar_testName() {
-        // Can't use isEquals() to compare float. Use isWithIn().of() instead.
-        assertThat(mContext.getResources().getDimension(R.dimen.secondary_app_icon_size))
-                .isWithin(0.01f)
-                .of(EXPECTED_APP_ICON_SIZE_DP);
+        float iconSize = mContext.getResources().getDimension(R.dimen.secondary_app_icon_size);
+        assertThat(Float.floatToIntBits(iconSize)).isEqualTo(Float.floatToIntBits(32));
     }
 }

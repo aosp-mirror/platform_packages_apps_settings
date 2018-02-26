@@ -16,19 +16,16 @@
 
 package com.android.settings.network;
 
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,15 +33,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkResetActionMenuControllerTest {
 
     private static final int MENU_ID = Menu.FIRST;
-    private Context mContext;
+
     private NetworkResetActionMenuController mController;
     @Mock
     private Menu mMenu;
@@ -56,8 +51,7 @@ public class NetworkResetActionMenuControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new NetworkResetActionMenuController(mContext, MENU_ID);
+        mController = new NetworkResetActionMenuController(RuntimeEnvironment.application, MENU_ID);
         ReflectionHelpers.setField(mController, "mRestrictionChecker", mRestrictionChecker);
         when(mMenu.add(anyInt(), anyInt(), anyInt(), anyInt())).thenReturn(mMenuItem);
     }

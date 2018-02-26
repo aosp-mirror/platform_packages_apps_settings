@@ -18,18 +18,13 @@ package com.android.settings.enterprise;
 
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link CaCertsPreferenceControllerBase}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CaCertsPreferenceControllerBaseTest extends CaCertsPreferenceControllerTestBase {
+
     private static final String PREF_KEY = "pref";
 
     private int mNumOfCaCerts;
@@ -49,7 +44,7 @@ public class CaCertsPreferenceControllerBaseTest extends CaCertsPreferenceContro
     private class CaCertsPreferenceControllerBaseTestable extends
             CaCertsPreferenceControllerBase {
 
-        public CaCertsPreferenceControllerBaseTestable(Context context) {
+        private CaCertsPreferenceControllerBaseTestable(Context context) {
             super(context);
         }
 

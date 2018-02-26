@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.os.BatteryStats;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -40,37 +39,31 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryInfoLoaderTest {
+
     private static final long TEST_TIME_REMAINING = 1000L;
 
     @Mock (answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mHelper;
     @Mock (answer = Answers.RETURNS_DEEP_STUBS)
-    private PowerUsageFeatureProvider mProvider;
-    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStats mStats;
 
-    private Intent mDisChargingBatteryBroadcast;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
-        mProvider = FakeFeatureFactory
-                .setupForTest()
-                .getPowerUsageFeatureProvider(mContext);
-
-        mDisChargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
+        FakeFeatureFactory.setupForTest().getPowerUsageFeatureProvider(mContext);
 
         doReturn(mContext).when(mContext).getApplicationContext();
         when(mStats.computeBatteryTimeRemaining(anyLong())).thenReturn(TEST_TIME_REMAINING);
         doReturn(mStats).when(mHelper).getStats();
-        doReturn(mDisChargingBatteryBroadcast).when(mContext).registerReceiver(any(), any());
+
+        final Intent dischargingBatteryBroadcast = BatteryTestUtils.getDischargingIntent();
+        doReturn(dischargingBatteryBroadcast).when(mContext).registerReceiver(any(), any());
     }
 
     @Test

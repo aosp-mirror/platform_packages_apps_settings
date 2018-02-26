@@ -15,6 +15,15 @@
  */
 package com.android.settings.bluetooth;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -28,7 +37,6 @@ import android.widget.Switch;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.widget.MasterSwitchController;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -47,20 +55,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class, SettingsShadowResources.SettingsShadowTheme.class
-})
+@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class BluetoothEnablerTest {
 
     private static EnforcedAdmin sFakeEnforcedAdmin;
@@ -80,8 +76,7 @@ public class BluetoothEnablerTest {
     private LocalBluetoothAdapter mBluetoothAdapter;
 
     private Context mContext;
-    Switch mSwitch;
-    private MasterSwitchPreference mMasterSwitchPreference;
+    private Switch mSwitch;
     private MasterSwitchController mMasterSwitchController;
     private BluetoothEnabler mBluetoothEnabler;
 
@@ -92,8 +87,8 @@ public class BluetoothEnablerTest {
         when(mBluetoothManager.getBluetoothAdapter()).thenReturn(mBluetoothAdapter);
 
         mSwitch = new Switch(mContext);
-        mMasterSwitchPreference = new MasterSwitchPreference(mContext);
-        mMasterSwitchController = spy(new MasterSwitchController(mMasterSwitchPreference));
+        MasterSwitchPreference masterSwitchPreference = new MasterSwitchPreference(mContext);
+        mMasterSwitchController = spy(new MasterSwitchController(masterSwitchPreference));
         mBluetoothEnabler = new BluetoothEnabler(
                 mContext,
                 mMasterSwitchController,
@@ -103,7 +98,7 @@ public class BluetoothEnablerTest {
                 mRestrictionUtils);
         PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(mock(View.class));
         when(holder.findViewById(R.id.switchWidget)).thenReturn(mSwitch);
-        mMasterSwitchPreference.onBindViewHolder(holder);
+        masterSwitchPreference.onBindViewHolder(holder);
     }
 
     @Test

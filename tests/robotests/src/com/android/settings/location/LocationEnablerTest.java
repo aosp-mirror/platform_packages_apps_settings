@@ -39,13 +39,12 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.wrapper.LocationManagerWrapper;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,12 +56,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-            ShadowSecureSettings.class,
-            LocationEnablerTest.ShadowLocationManagerWrapper.class})
+@Config(shadows = {
+    ShadowSecureSettings.class,
+    LocationEnablerTest.ShadowLocationManagerWrapper.class})
 public class LocationEnablerTest {
 
     @Mock
@@ -90,7 +90,7 @@ public class LocationEnablerTest {
         mEnabler.onResume();
 
         verify(mContext).registerReceiver(eq(mEnabler.mReceiver),
-                eq(mEnabler.INTENT_FILTER_LOCATION_MODE_CHANGED));
+                eq(LocationEnabler.INTENT_FILTER_LOCATION_MODE_CHANGED));
     }
 
     @Test
@@ -150,8 +150,7 @@ public class LocationEnablerTest {
 
         mEnabler.setLocationMode(Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
 
-        verify(mListener)
-                .onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, true);
+        verify(mListener).onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, true);
     }
 
     @Test

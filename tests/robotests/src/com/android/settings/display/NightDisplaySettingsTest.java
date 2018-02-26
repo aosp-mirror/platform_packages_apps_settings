@@ -17,38 +17,26 @@ package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NightDisplaySettingsTest {
-
-    private Context mContext;
-
-    @Before
-    public void setUp() {
-        mContext = RuntimeEnvironment.application;
-    }
 
     @Test
     public void testNightDisplayIndexing_containsResource() {
         List<SearchIndexableResource> resources =
-                NightDisplaySettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(mContext,
-                        true /* enabled */);
+                NightDisplaySettings.SEARCH_INDEX_DATA_PROVIDER
+                    .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
 
         List<Integer> indexedXml = new ArrayList<>();
         for (SearchIndexableResource resource : resources) {

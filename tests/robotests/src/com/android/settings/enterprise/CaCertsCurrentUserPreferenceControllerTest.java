@@ -17,27 +17,20 @@
 package com.android.settings.enterprise;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link CaCertsCurrentUserPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class CaCertsCurrentUserPreferenceControllerTest extends
-        CaCertsPreferenceControllerTestBase {
+public class CaCertsCurrentUserPreferenceControllerTest
+    extends CaCertsPreferenceControllerTestBase {
 
     private static final String CA_CERT_DEVICE = "CA certs";
     private static final String CA_CERT_PERSONAL = "CA certs in personal profile";

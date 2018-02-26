@@ -21,7 +21,6 @@ import android.content.Context;
 import android.os.Parcel;
 import android.text.format.DateUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -29,14 +28,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HighUsageTipTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final long SCREEN_TIME = 30 * DateUtils.MINUTE_IN_MILLIS;
 
@@ -69,6 +67,7 @@ public class HighUsageTipTest {
         assertThat(parcelTip.getType()).isEqualTo(BatteryTip.TipType.HIGH_DEVICE_USAGE);
         assertThat(parcelTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
         assertThat(parcelTip.getScreenTimeMs()).isEqualTo(SCREEN_TIME);
+        assertThat(parcelTip.mHighUsageAppList).isNotNull();
         assertThat(parcelTip.mHighUsageAppList.size()).isEqualTo(1);
         final AppInfo app = parcelTip.mHighUsageAppList.get(0);
         assertThat(app.packageName).isEqualTo(PACKAGE_NAME);

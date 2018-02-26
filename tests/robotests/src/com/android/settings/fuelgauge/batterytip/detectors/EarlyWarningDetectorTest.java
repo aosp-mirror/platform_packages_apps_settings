@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -27,7 +26,6 @@ import android.content.Intent;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -38,12 +36,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EarlyWarningDetectorTest {
+
     private Context mContext;
     private BatteryTipPolicy mPolicy;
     private EarlyWarningDetector mEarlyWarningDetector;
@@ -63,8 +60,8 @@ public class EarlyWarningDetectorTest {
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(0).when(mIntent).getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        doReturn(true).when(mFakeFeatureFactory.powerUsageFeatureProvider).getEarlyWarningSignal(
-                any(), any());
+        doReturn(true).when(mFakeFeatureFactory.powerUsageFeatureProvider)
+            .getEarlyWarningSignal(any(), any());
 
         mEarlyWarningDetector = new EarlyWarningDetector(mPolicy, mContext);
     }
@@ -92,10 +89,9 @@ public class EarlyWarningDetectorTest {
 
     @Test
     public void testDetect_noEarlyWarning_tipInvisible() {
-        doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider).getEarlyWarningSignal(
-                any(), any());
+        doReturn(false).when(mFakeFeatureFactory.powerUsageFeatureProvider)
+            .getEarlyWarningSignal(any(), any());
 
         assertThat(mEarlyWarningDetector.detect().isVisible()).isFalse();
     }
-
 }

@@ -17,9 +17,6 @@
 package com.android.settings.connecteddevice.usb;
 
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
-import static org.mockito.Matchers.argThat;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
@@ -28,7 +25,6 @@ import android.hardware.usb.UsbManager;
 import android.net.ConnectivityManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.UserManagerWrapper;
 
 import org.junit.Before;
@@ -36,10 +32,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsbBackendTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -58,7 +52,7 @@ public class UsbBackendTest {
             .thenReturn(true);
         when((Object)mContext.getSystemService(UsbManager.class)).thenReturn(mUsbManager);
         when(mContext.getSystemService(Context.CONNECTIVITY_SERVICE))
-                .thenReturn((Object) mConnectivityManager);
+                .thenReturn(mConnectivityManager);
     }
 
     @Test

@@ -16,11 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ClearAdbKeysPreferenceController
-        .RO_ADB_SECURE_PROPERTY_KEY;
-
+import static com.android.settings.development.ClearAdbKeysPreferenceController.RO_ADB_SECURE_PROPERTY_KEY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -35,9 +32,7 @@ import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
@@ -53,9 +48,7 @@ import org.robolectric.annotation.Implements;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class, ShadowUtils.class})
+@Config(shadows = ShadowUtils.class)
 public class ClearAdbKeysPreferenceControllerTest {
 
     @Mock
@@ -67,15 +60,13 @@ public class ClearAdbKeysPreferenceControllerTest {
     @Mock
     private DevelopmentSettingsDashboardFragment mFragment;
 
-    private Context mContext;
-
     private ClearAdbKeysPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = spy(new ClearAdbKeysPreferenceController(mContext, mFragment));
+        final Context context = RuntimeEnvironment.application;
+        mController = spy(new ClearAdbKeysPreferenceController(context, mFragment));
         ReflectionHelpers.setField(mController, "mUsbManager", mUsbManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
@@ -83,7 +74,6 @@ public class ClearAdbKeysPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowClearAdbKeysWarningDialog.resetDialog();
-        SettingsShadowSystemProperties.clear();
         ShadowUtils.reset();
     }
 
@@ -112,9 +102,7 @@ public class ClearAdbKeysPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {
-            ShadowClearAdbKeysWarningDialog.class
-    })
+    @Config(shadows = ShadowClearAdbKeysWarningDialog.class)
     public void handlePreferenceTreeClick_clearAdbKeysPreference_shouldShowWarningDialog() {
         SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
         doReturn(true).when(mController).isAdminUser();
@@ -182,14 +170,14 @@ public class ClearAdbKeysPreferenceControllerTest {
     @Implements(ClearAdbKeysWarningDialog.class)
     public static class ShadowClearAdbKeysWarningDialog {
 
-        public static boolean sIsShowing;
+        private static boolean sIsShowing;
 
         @Implementation
         public static void show(Fragment host) {
             sIsShowing = true;
         }
 
-        public static void resetDialog() {
+        private static void resetDialog() {
             sIsShowing = false;
         }
     }

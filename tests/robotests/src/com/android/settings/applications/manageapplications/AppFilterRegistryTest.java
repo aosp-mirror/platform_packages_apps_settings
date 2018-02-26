@@ -16,76 +16,53 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ALL;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_INSTALL_SOURCES;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_POWER_WHITELIST;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_USAGE_ACCESS;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_WITH_OVERLAY;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_WRITE_SETTINGS;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_GAMES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_HIGH_POWER;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MAIN;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MANAGE_SOURCES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MOVIES;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_NOTIFICATION;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_OVERLAY;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_PHOTOGRAPHY;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_STORAGE;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_USAGE_ACCESS;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_WRITE_SETTINGS;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_INSTALL_SOURCES;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_POWER_WHITELIST;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WITH_OVERLAY;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_WRITE_SETTINGS;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_GAMES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_HIGH_POWER;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MANAGE_SOURCES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MOVIES;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_OVERLAY;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_PHOTOGRAPHY;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_STORAGE;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_USAGE_ACCESS;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_WRITE_SETTINGS;
 import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppFilterRegistryTest {
 
-    @Test
-    public void getDefaultType_shouldMatchForAllListType() {
-        final AppFilterRegistry registry = AppFilterRegistry.getInstance();
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_USAGE_ACCESS))
-                .isEqualTo(FILTER_APPS_USAGE_ACCESS);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_HIGH_POWER))
-                .isEqualTo(FILTER_APPS_POWER_WHITELIST);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_OVERLAY)).isEqualTo(
-                FILTER_APPS_WITH_OVERLAY);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_WRITE_SETTINGS)).isEqualTo(
-                FILTER_APPS_WRITE_SETTINGS);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_MANAGE_SOURCES)).isEqualTo(
-                FILTER_APPS_INSTALL_SOURCES);
+  @Test
+  public void getDefaultType_shouldMatchForAllListType() {
+    final AppFilterRegistry registry = AppFilterRegistry.getInstance();
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_USAGE_ACCESS))
+        .isEqualTo(FILTER_APPS_USAGE_ACCESS);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_HIGH_POWER))
+        .isEqualTo(FILTER_APPS_POWER_WHITELIST);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_OVERLAY))
+        .isEqualTo(FILTER_APPS_WITH_OVERLAY);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_WRITE_SETTINGS))
+        .isEqualTo(FILTER_APPS_WRITE_SETTINGS);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_MANAGE_SOURCES))
+        .isEqualTo(FILTER_APPS_INSTALL_SOURCES);
 
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_MAIN))
-                .isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_NOTIFICATION))
-                .isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_STORAGE)).isEqualTo(FILTER_APPS_ALL);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_MAIN)).isEqualTo(FILTER_APPS_ALL);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_NOTIFICATION)).isEqualTo(FILTER_APPS_ALL);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_STORAGE)).isEqualTo(FILTER_APPS_ALL);
 
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_GAMES)).isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_MOVIES)).isEqualTo(FILTER_APPS_ALL);
-        assertThat(registry.getDefaultFilterType(LIST_TYPE_PHOTOGRAPHY)).isEqualTo(FILTER_APPS_ALL);
-    }
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_GAMES)).isEqualTo(FILTER_APPS_ALL);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_MOVIES)).isEqualTo(FILTER_APPS_ALL);
+    assertThat(registry.getDefaultFilterType(LIST_TYPE_PHOTOGRAPHY)).isEqualTo(FILTER_APPS_ALL);
+  }
 }
-

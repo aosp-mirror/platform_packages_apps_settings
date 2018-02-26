@@ -16,15 +16,14 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.After;
@@ -36,7 +35,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ScreenPinningPreferenceControllerTest {
 
     private Context mContext;
@@ -54,8 +52,8 @@ public class ScreenPinningPreferenceControllerTest {
 
     @After
     public void tearDown() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.LOCK_TO_APP_ENABLED, 0);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.LOCK_TO_APP_ENABLED, 0);
     }
 
     @Test
@@ -71,8 +69,8 @@ public class ScreenPinningPreferenceControllerTest {
 
     @Test
     public void updateState_isOff_shouldDisableOffSummary() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.LOCK_TO_APP_ENABLED, 0);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.LOCK_TO_APP_ENABLED, 0);
 
         mController.updateState(mPreference);
 
@@ -82,13 +80,12 @@ public class ScreenPinningPreferenceControllerTest {
 
     @Test
     public void updateState_isOn_shouldDisableOnSummary() {
-        Settings.System.putInt(mContext.getContentResolver(),
-                Settings.System.LOCK_TO_APP_ENABLED, 1);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.LOCK_TO_APP_ENABLED, 1);
 
         mController.updateState(mPreference);
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.switch_on_text));
     }
-
 }

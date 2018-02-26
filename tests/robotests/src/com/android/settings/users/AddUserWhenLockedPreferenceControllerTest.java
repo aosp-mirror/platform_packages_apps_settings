@@ -29,7 +29,6 @@ import android.os.UserManager;
 import android.provider.Settings.Global;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -39,11 +38,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AddUserWhenLockedPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -123,5 +120,4 @@ public class AddUserWhenLockedPreferenceControllerTest {
         assertThat(Global.getInt(mContext.getContentResolver(), Global.ADD_USERS_WHEN_LOCKED, 0))
                 .isEqualTo(0);
     }
-
 }

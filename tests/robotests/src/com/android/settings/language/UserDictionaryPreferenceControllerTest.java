@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.inputmethod.UserDictionaryList;
 import com.android.settings.inputmethod.UserDictionarySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -33,13 +32,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.TreeSet;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserDictionaryPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -52,7 +49,7 @@ public class UserDictionaryPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         FakeFeatureFactory.setupForTest();
         mController = new TestController(mContext);
-        mPreference = new Preference(ShadowApplication.getInstance().getApplicationContext());
+        mPreference = new Preference(RuntimeEnvironment.application);
     }
 
     @Test
@@ -74,10 +71,9 @@ public class UserDictionaryPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getFragment())
-                .isEqualTo(UserDictionarySettings.class.getCanonicalName());
-        assertThat(mPreference.getExtras().getString("locale"))
-                .isEqualTo("en");
+        final String fragmentName = UserDictionarySettings.class.getCanonicalName();
+        assertThat(mPreference.getFragment()).isEqualTo(fragmentName);
+        assertThat(mPreference.getExtras().getString("locale")).isEqualTo("en");
     }
 
     @Test
@@ -102,9 +98,8 @@ public class UserDictionaryPreferenceControllerTest {
             return mLocales;
         }
 
-        public TestController(Context context) {
+        private TestController(Context context) {
             super(context);
         }
     }
-
 }

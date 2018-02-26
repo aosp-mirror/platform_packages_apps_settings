@@ -17,20 +17,18 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 
 import android.os.Build;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.action.ForceStopAction;
+import com.android.settings.fuelgauge.anomaly.action.StopAndBackgroundCheckAction;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
-import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowKeyValueListParserWrapperImpl;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -45,9 +43,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowKeyValueListParserWrapperImpl.class})
+@Config(shadows = ShadowKeyValueListParserWrapperImpl.class)
 public class AnomalyUtilsTest {
+
     private static final String PACKAGE_NAME_WAKEUP = "com.android.app1";
     private static final String PACKAGE_NAME_WAKELOCK = "com.android.app2";
     private static final int CONTEXT_ID = 55;

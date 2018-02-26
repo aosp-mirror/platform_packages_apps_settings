@@ -17,11 +17,9 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.os.RemoteException;
 import android.os.StrictMode;
 import android.os.SystemProperties;
@@ -29,24 +27,17 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class StrictModePreferenceControllerTest {
 
     @Mock
@@ -56,22 +47,15 @@ public class StrictModePreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
 
-    private Context mContext;
     private StrictModePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new StrictModePreferenceController(mContext);
+        mController = new StrictModePreferenceController(RuntimeEnvironment.application);
         ReflectionHelpers.setField(mController, "mWindowManager", mWindowManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test

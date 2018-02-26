@@ -16,12 +16,11 @@
 
 package com.android.settings.security;
 
-
-import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.os.UserHandle;
 import android.provider.Settings;
@@ -29,7 +28,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -42,7 +40,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ShowPasswordPreferenceControllerTest {
 
     @Mock
@@ -65,8 +62,7 @@ public class ShowPasswordPreferenceControllerTest {
         mController = new ShowPasswordPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreference);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -82,16 +78,16 @@ public class ShowPasswordPreferenceControllerTest {
 
     @Test
     public void isChecked_settingIsOff_false() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
-                0);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 0);
 
         assertThat(mController.isChecked()).isFalse();
     }
 
     @Test
     public void isChecked_settingIsOn_true() {
-        Settings.System.putInt(mContext.getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
-                1);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 1);
         assertThat(mController.isChecked()).isTrue();
     }
 

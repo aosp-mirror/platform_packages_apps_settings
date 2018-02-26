@@ -33,7 +33,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -49,16 +48,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DashboardFragmentTest {
-
 
     @Mock
     private FakeFeatureFactory mFakeFeatureFactory;
@@ -73,11 +69,11 @@ public class DashboardFragmentTest {
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mDashboardCategory = new DashboardCategory();
         mDashboardCategory.addTile(new Tile());
-        mTestFragment = new TestFragment(mContext);
+        mTestFragment = new TestFragment(RuntimeEnvironment.application);
         when(mFakeFeatureFactory.dashboardFeatureProvider
                 .getTilesForCategory(nullable(String.class)))
                 .thenReturn(mDashboardCategory);
-        mTestFragment.onAttach(mContext);
+        mTestFragment.onAttach(RuntimeEnvironment.application);
         when(mContext.getPackageName()).thenReturn("TestPackage");
     }
 
@@ -154,8 +150,7 @@ public class DashboardFragmentTest {
         preferenceControllers.add(mockController2);
         when(mockController1.isAvailable()).thenReturn(false);
         when(mockController2.isAvailable()).thenReturn(true);
-
-        mTestFragment.onAttach(mContext);
+        mTestFragment.onAttach(RuntimeEnvironment.application);
         mTestFragment.onResume();
 
         verify(mockController1).getPreferenceKey();
@@ -196,8 +191,7 @@ public class DashboardFragmentTest {
     @Test
     public void tintTileIcon_noIcon_shouldReturnFalse() {
         final Tile tile = new Tile();
-        final Bundle metaData = new Bundle();
-        tile.metaData = metaData;
+        tile.metaData = new Bundle();
 
         assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
     }
@@ -208,8 +202,8 @@ public class DashboardFragmentTest {
         tile.icon = mock(Icon.class);
         final Intent intent = new Intent();
         tile.intent = intent;
-
-        intent.setComponent(new ComponentName(mContext.getPackageName(), "TestClass"));
+        intent.setComponent(
+            new ComponentName(RuntimeEnvironment.application.getPackageName(), "TestClass"));
         assertThat(mTestFragment.tintTileIcon(tile)).isFalse();
 
         intent.setComponent(new ComponentName("OtherPackage", "TestClass"));
@@ -219,7 +213,7 @@ public class DashboardFragmentTest {
     public static class TestPreferenceController extends AbstractPreferenceController
             implements PreferenceControllerMixin {
 
-        public TestPreferenceController(Context context) {
+        private TestPreferenceController(Context context) {
             super(context);
         }
 
@@ -240,7 +234,6 @@ public class DashboardFragmentTest {
 
         @Override
         public void updateNonIndexableKeys(List<String> keys) {
-
         }
     }
 
@@ -298,5 +291,4 @@ public class DashboardFragmentTest {
             return mPreferenceManager;
         }
     }
-
 }

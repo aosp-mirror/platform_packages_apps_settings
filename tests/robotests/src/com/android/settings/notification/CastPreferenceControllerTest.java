@@ -16,33 +16,30 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CastPreferenceControllerTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
 
-    private Context mContext;
     private CastPreferenceController mController;
 
     @Before
@@ -50,8 +47,7 @@ public class CastPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowContext = ShadowApplication.getInstance();
         shadowContext.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
-        mContext = shadowContext.getApplicationContext();
-        mController = new CastPreferenceController(mContext);
+        mController = new CastPreferenceController(RuntimeEnvironment.application);
     }
 
     @Test
@@ -67,5 +63,4 @@ public class CastPreferenceControllerTest {
 
         assertThat(keys).isEmpty();
     }
-
 }

@@ -16,26 +16,20 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_BLOCKED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ENABLED;
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_USAGE_ACCESS;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_BLOCKED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ENABLED;
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_USAGE_ACCESS;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppFilterItemTest {
 
     @Test

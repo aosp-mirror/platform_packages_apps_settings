@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -31,10 +30,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HapticFeedbackIntensityPreferenceControllerTest {
 
     private LifecycleOwner mLifecycleOwner;

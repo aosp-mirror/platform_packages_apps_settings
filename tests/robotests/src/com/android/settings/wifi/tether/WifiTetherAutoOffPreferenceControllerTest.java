@@ -22,7 +22,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -30,11 +29,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiTetherAutoOffPreferenceControllerTest {
+
     private static final String KEY_PREF = "wifi_tether_auto_off";
     private static final int ON = 1;
     private static final int OFF = 0;

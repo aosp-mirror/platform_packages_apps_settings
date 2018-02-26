@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -33,7 +32,6 @@ import android.support.v7.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -52,11 +50,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows=SettingsShadowBluetoothDevice.class)
+@Config(shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsControllerTestBase {
+
     private BluetoothDetailsProfilesController mController;
     private List<LocalBluetoothProfile> mConnectableProfiles;
     private PreferenceCategory mProfiles;
@@ -87,14 +87,13 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     }
 
     static class FakeBluetoothProfile implements LocalBluetoothProfile {
-        protected HashSet<BluetoothDevice> mConnectedDevices;
-        protected HashMap<BluetoothDevice, Boolean> mPreferred;
-        protected Context mContext;
-        protected int mNameResourceId;
 
-        public FakeBluetoothProfile(Context context, int nameResourceId) {
-            mConnectedDevices = new HashSet<>();
-            mPreferred = new HashMap<>();
+        private Set<BluetoothDevice> mConnectedDevices = new HashSet<>();
+        private Map<BluetoothDevice, Boolean> mPreferred = new HashMap<>();
+        private Context mContext;
+        private int mNameResourceId;
+
+        private FakeBluetoothProfile(Context context, int nameResourceId) {
             mContext = context;
             mNameResourceId = nameResourceId;
         }
@@ -180,8 +179,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     /**
      * Creates and adds a mock LocalBluetoothProfile to the list of connectable profiles for the
      * device.
-     @param profileNameResId  the resource id for the name used by this profile
-     @param deviceIsPreferred  whether this profile should start out as enabled for the device
+     * @param profileNameResId  the resource id for the name used by this profile
+     * @param deviceIsPreferred  whether this profile should start out as enabled for the device
      */
     private LocalBluetoothProfile addFakeProfile(int profileNameResId,
             boolean deviceIsPreferred) {
@@ -200,7 +199,7 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
             assertThat(mConnectableProfiles).isNotEmpty();
             assertThat(mProfiles.getPreferenceCount()).isEqualTo(mConnectableProfiles.size());
         }
-        ArrayList<SwitchPreference> result = new ArrayList<>();
+        List<SwitchPreference> result = new ArrayList<>();
         for (int i = 0; i < mProfiles.getPreferenceCount(); i++) {
             result.add((SwitchPreference)mProfiles.getPreference(i));
         }
@@ -209,8 +208,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
      private void verifyProfileSwitchTitles(List<SwitchPreference> switches) {
         for (int i = 0; i < switches.size(); i++) {
-            String expectedTitle = mContext.getString(
-                    mConnectableProfiles.get(i).getNameResource(mDevice));
+            String expectedTitle =
+                mContext.getString(mConnectableProfiles.get(i).getNameResource(mDevice));
             assertThat(switches.get(i).getTitle()).isEqualTo(expectedTitle);
         }
     }
@@ -285,8 +284,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     @Test
     public void pbapProfileStartsEnabled() {
         setupDevice(makeDefaultDeviceConfig());
-        when(mCachedDevice.getPhonebookPermissionChoice()).thenReturn(
-                CachedBluetoothDevice.ACCESS_ALLOWED);
+        when(mCachedDevice.getPhonebookPermissionChoice())
+            .thenReturn(CachedBluetoothDevice.ACCESS_ALLOWED);
         PbapServerProfile psp = mock(PbapServerProfile.class);
         when(psp.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_pbap);
         when(psp.toString()).thenReturn(PbapServerProfile.NAME);
@@ -307,8 +306,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
     @Test
     public void pbapProfileStartsDisabled() {
         setupDevice(makeDefaultDeviceConfig());
-        when(mCachedDevice.getPhonebookPermissionChoice()).thenReturn(
-                CachedBluetoothDevice.ACCESS_REJECTED);
+        when(mCachedDevice.getPhonebookPermissionChoice())
+            .thenReturn(CachedBluetoothDevice.ACCESS_REJECTED);
         PbapServerProfile psp = mock(PbapServerProfile.class);
         when(psp.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_pbap);
         when(psp.toString()).thenReturn(PbapServerProfile.NAME);
@@ -333,8 +332,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         when(mapProfile.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_map);
         when(mProfileManager.getMapProfile()).thenReturn(mapProfile);
         when(mProfileManager.getProfileByName(eq(mapProfile.toString()))).thenReturn(mapProfile);
-        when(mCachedDevice.getMessagePermissionChoice()).thenReturn(
-                CachedBluetoothDevice.ACCESS_REJECTED);
+        when(mCachedDevice.getMessagePermissionChoice())
+            .thenReturn(CachedBluetoothDevice.ACCESS_REJECTED);
         showScreen(mController);
         List<SwitchPreference> switches = getProfileSwitches(false);
         assertThat(switches.size()).isEqualTo(1);
@@ -352,8 +351,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         A2dpProfile profile = mock(A2dpProfile.class);
         when(mProfileManager.getProfileByName(eq(profile.toString()))).thenReturn(profile);
         when(profile.getNameResource(mDevice)).thenReturn(R.string.bluetooth_profile_a2dp);
-        when(profile.getHighQualityAudioOptionLabel(mDevice)).thenReturn(mContext.getString(
-                R.string.bluetooth_profile_a2dp_high_quality_unknown_codec));
+        when(profile.getHighQualityAudioOptionLabel(mDevice)).thenReturn(
+            mContext.getString(R.string.bluetooth_profile_a2dp_high_quality_unknown_codec));
         when(profile.supportsHighQualityAudio(mDevice)).thenReturn(supportsHighQualityAudio);
         when(profile.isHighQualityAudioEnabled(mDevice)).thenReturn(highQualityAudioEnabled);
         when(profile.isPreferred(mDevice)).thenReturn(preferred);
@@ -390,8 +389,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         showScreen(mController);
         assertThat(mProfiles.getPreferenceCount()).isEqualTo(1);
         SwitchPreference pref = (SwitchPreference) mProfiles.getPreference(0);
-        assertThat(pref.getKey()).isNotEqualTo(
-                BluetoothDetailsProfilesController.HIGH_QUALITY_AUDIO_PREF_TAG);
+        assertThat(pref.getKey())
+            .isNotEqualTo(BluetoothDetailsProfilesController.HIGH_QUALITY_AUDIO_PREF_TAG);
         assertThat(pref.getTitle()).isEqualTo(mContext.getString(R.string.bluetooth_profile_a2dp));
     }
 
@@ -414,8 +413,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
         // Disabling media audio should cause the high quality audio switch to disappear, but not
         // the regular audio one.
-        SwitchPreference audioPref = (SwitchPreference) mScreen.findPreference(
-                audioProfile.toString());
+        SwitchPreference audioPref =
+            (SwitchPreference) mScreen.findPreference(audioProfile.toString());
         audioPref.performClick();
         verify(audioProfile).setPreferred(mDevice, false);
         when(audioProfile.isPreferred(mDevice)).thenReturn(false);
@@ -438,8 +437,8 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
         setupDevice(makeDefaultDeviceConfig());
         A2dpProfile audioProfile = addMockA2dpProfile(false, true, true);
         showScreen(mController);
-        SwitchPreference audioPref = (SwitchPreference) mScreen.findPreference(
-                audioProfile.toString());
+        SwitchPreference audioPref =
+            (SwitchPreference) mScreen.findPreference(audioProfile.toString());
         SwitchPreference highQualityAudioPref = getHighQualityAudioPref();
         assertThat(audioPref).isNotNull();
         assertThat(audioPref.isChecked()).isFalse();

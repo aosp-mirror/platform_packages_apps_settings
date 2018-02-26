@@ -19,17 +19,14 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.os.Bundle;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InstrumentedDialogFragmentTest {
 
     public static class TestDialogFragment extends InstrumentedDialogFragment {

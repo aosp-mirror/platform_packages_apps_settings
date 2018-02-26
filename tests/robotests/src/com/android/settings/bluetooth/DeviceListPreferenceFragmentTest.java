@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.eq;
@@ -28,12 +27,10 @@ import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -44,17 +41,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceListPreferenceFragmentTest {
+
     private static final String FOOTAGE_MAC_STRING = "Bluetooth mac: xxxx";
 
-    @Mock
-    private UserManager mUserManager;
     @Mock
     private Resources mResource;
     @Mock
@@ -78,8 +72,8 @@ public class DeviceListPreferenceFragmentTest {
 
     @Test
     public void setUpdateMyDevicePreference_setTitleCorrectly() {
-        doReturn(FOOTAGE_MAC_STRING).when(mFragment).getString(
-                eq(R.string.bluetooth_footer_mac_message), any());
+        doReturn(FOOTAGE_MAC_STRING).when(mFragment)
+            .getString(eq(R.string.bluetooth_footer_mac_message), any());
 
         mFragment.updateFooterPreference(mMyDevicePreference);
 
@@ -212,5 +206,4 @@ public class DeviceListPreferenceFragmentTest {
             return null;
         }
     }
-
 }

@@ -15,18 +15,6 @@
  */
 package com.android.settings.dashboard.conditional;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.never;
@@ -34,8 +22,19 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.pm.PackageManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DndConditionTest {
 
     @Mock
@@ -54,22 +53,21 @@ public class DndConditionTest {
 
     @Test
     public void constructor_shouldNotDisableReceiver() {
-        DndCondition condition = new DndCondition(mConditionManager);
+        new DndCondition(mConditionManager);
         verify(mPackageManager, never()).setComponentEnabledSetting(any(ComponentName.class),
             eq(PackageManager.COMPONENT_ENABLED_STATE_DISABLED), eq(PackageManager.DONT_KILL_APP));
     }
 
     @Test
     public void constructor_shouldRegisterReceiver() {
-        DndCondition condition = new DndCondition(mConditionManager);
+        new DndCondition(mConditionManager);
         verify(mContext).registerReceiver(any(DndCondition.Receiver.class),
             eq(DndCondition.DND_FILTER));
     }
 
     @Test
     public void silence_shouldNotDisableReceiver() {
-        DndCondition condition = new DndCondition(mConditionManager);
-        condition.silence();
+        new DndCondition(mConditionManager).silence();
 
         verify(mPackageManager, never()).setComponentEnabledSetting(any(ComponentName.class),
             eq(PackageManager.COMPONENT_ENABLED_STATE_DISABLED), eq(PackageManager.DONT_KILL_APP));
@@ -88,8 +86,7 @@ public class DndConditionTest {
 
     @Test
     public void onPause_shouldUnregisterReceiver() {
-        DndCondition condition = new DndCondition(mConditionManager);
-        condition.onPause();
+        new DndCondition(mConditionManager).onPause();
 
         verify(mContext).unregisterReceiver(any(DndCondition.Receiver.class));
     }

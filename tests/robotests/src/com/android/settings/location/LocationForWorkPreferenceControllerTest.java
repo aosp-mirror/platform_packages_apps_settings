@@ -16,7 +16,6 @@
 package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -34,7 +33,6 @@ import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -46,14 +44,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationForWorkPreferenceControllerTest {
 
     @Mock
@@ -95,8 +91,8 @@ public class LocationForWorkPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mUserManager).setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, false,
-                mUserHandle);
+        verify(mUserManager)
+            .setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, false, mUserHandle);
         verify(mPreference).setSummary(R.string.switch_on_text);
     }
 
@@ -107,14 +103,14 @@ public class LocationForWorkPreferenceControllerTest {
 
         mController.handlePreferenceTreeClick(mPreference);
 
-        verify(mUserManager).setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true,
-                mUserHandle);
+        verify(mUserManager)
+            .setUserRestriction(UserManager.DISALLOW_SHARE_LOCATION, true, mUserHandle);
         verify(mPreference).setSummary(R.string.switch_off_text);
     }
 
     @Test
     public void isAvailable_noManagedProfile_shouldReturnFalse() {
-        when(mUserManager.getUserProfiles()).thenReturn(new ArrayList<UserHandle>());
+        when(mUserManager.getUserProfiles()).thenReturn(new ArrayList<>());
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -194,5 +190,4 @@ public class LocationForWorkPreferenceControllerTest {
         when(mUserManager.getUserInfo(5))
                 .thenReturn(new UserInfo(5, "user 5", UserInfo.FLAG_MANAGED_PROFILE));
     }
-
 }

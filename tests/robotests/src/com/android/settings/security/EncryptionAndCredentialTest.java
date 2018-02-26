@@ -26,7 +26,6 @@ import android.os.UserManager;
 import android.provider.SearchIndexableResource;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
-import com.android.settings.TestConfig;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,14 +34,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EncryptionAndCredentialTest {
 
     @Mock
@@ -50,16 +47,15 @@ public class EncryptionAndCredentialTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
 
-    private ShadowApplication mApplication;
     private Context mContext;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mApplication = ShadowApplication.getInstance();
-        mApplication.setSystemService(Context.DEVICE_POLICY_SERVICE, mDevicePolicyManager);
-        mApplication.setSystemService(Context.USER_SERVICE, mUserManager);
-        mContext = mApplication.getApplicationContext();
+        ShadowApplication application = ShadowApplication.getInstance();
+        application.setSystemService(Context.DEVICE_POLICY_SERVICE, mDevicePolicyManager);
+        application.setSystemService(Context.USER_SERVICE, mUserManager);
+        mContext = application.getApplicationContext();
     }
 
     @Test

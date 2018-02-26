@@ -18,7 +18,6 @@ package com.android.settings.deviceinfo.imei;
 
 import static android.telephony.TelephonyManager.PHONE_TYPE_CDMA;
 import static android.telephony.TelephonyManager.PHONE_TYPE_GSM;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -35,7 +34,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -45,11 +43,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ImeiInfoPreferenceControllerTest {
 
     @Mock
@@ -157,8 +153,8 @@ public class ImeiInfoPreferenceControllerTest {
 
     @Test
     public void handlePreferenceTreeClick_shouldStartDialogFragment() {
-        when(mFragment.getChildFragmentManager()).thenReturn(
-                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        when(mFragment.getChildFragmentManager())
+            .thenReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         when(mPreference.getTitle()).thenReturn("SomeTitle");
         mController.displayPreference(mScreen);
 

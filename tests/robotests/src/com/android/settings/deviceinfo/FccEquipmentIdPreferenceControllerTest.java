@@ -15,14 +15,15 @@
  */
 package com.android.settings.deviceinfo;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +31,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FccEquipmentIdPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -52,7 +48,7 @@ public class FccEquipmentIdPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mController = new FccEquipmentIdPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreference);
+            .thenReturn(mPreference);
     }
 
     @Test
@@ -61,9 +57,8 @@ public class FccEquipmentIdPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = SettingsShadowSystemProperties.class)
     public void isAvailable_configNonEmpty_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set("ro.ril.fccid", "fcc_equipment");
+        SystemProperties.set("ro.ril.fccid", "fcc_equipment");
 
         assertThat(mController.isAvailable()).isTrue();
     }

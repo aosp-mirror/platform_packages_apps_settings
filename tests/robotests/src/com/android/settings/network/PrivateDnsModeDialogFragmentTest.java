@@ -19,9 +19,7 @@ package com.android.settings.network;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OFF;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_OPPORTUNISTIC;
 import static android.net.ConnectivityManager.PRIVATE_DNS_MODE_PROVIDER_HOSTNAME;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -30,7 +28,6 @@ import android.provider.Settings;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -38,11 +35,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PrivateDnsModeDialogFragmentTest {
+
     private static final String HOST_NAME = "192.168.1.1";
     private static final String INVALID_HOST_NAME = "...,";
 
@@ -115,5 +111,4 @@ public class PrivateDnsModeDialogFragmentTest {
         mFragment.onCheckedChanged(null, R.id.private_dns_mode_off);
         assertThat(mSaveButton.isEnabled()).isTrue();
     }
-
 }

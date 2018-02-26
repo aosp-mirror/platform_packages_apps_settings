@@ -16,28 +16,25 @@
 
 package com.android.settings.widget;
 
-import android.content.Context;
-import android.os.Handler;
-import android.view.View;
-
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.util.ReflectionHelpers;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import android.content.Context;
+import android.os.Handler;
+import android.view.View;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
+import org.robolectric.util.ReflectionHelpers;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LoadingViewControllerTest {
 
     private Context mContext;
@@ -70,5 +67,4 @@ public class LoadingViewControllerTest {
 
         verify(handler).postDelayed(any(Runnable.class), anyLong());
     }
-
 }

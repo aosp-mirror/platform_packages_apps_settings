@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.app.Activity;
+import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Loader;
@@ -188,46 +189,50 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
                 }
             };
 
-    LoaderCallbacks<List<BatteryInfo>> mBatteryInfoDebugLoaderCallbacks =
-            new LoaderCallbacks<List<BatteryInfo>>() {
-                @Override
-                public Loader<List<BatteryInfo>> onCreateLoader(int i, Bundle bundle) {
-                    return new DebugEstimatesLoader(getContext(), mStatsHelper);
-                }
+    LoaderManager.LoaderCallbacks<List<BatteryInfo>> mBatteryInfoDebugLoaderCallbacks =
+        new LoaderCallbacks<List<BatteryInfo>>() {
+            @Override
+            public Loader<List<BatteryInfo>> onCreateLoader(int i, Bundle bundle) {
+                return new DebugEstimatesLoader(getContext(), mStatsHelper);
+            }
 
-                @Override
-                public void onLoadFinished(Loader<List<BatteryInfo>> loader,
-                        List<BatteryInfo> batteryInfos) {
-                    final BatteryMeterView batteryView = (BatteryMeterView) mBatteryLayoutPref
-                            .findViewById(R.id.battery_header_icon);
-                    final TextView percentRemaining =
-                            mBatteryLayoutPref.findViewById(R.id.battery_percent);
-                    final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
-                    final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
-                    BatteryInfo oldInfo = batteryInfos.get(0);
-                    BatteryInfo newInfo = batteryInfos.get(1);
-                    percentRemaining.setText(Utils.formatPercentage(oldInfo.batteryLevel));
+            @Override
+            public void onLoadFinished(Loader<List<BatteryInfo>> loader,
+                List<BatteryInfo> batteryInfos) {
+                updateViews(batteryInfos);
+            }
 
-                    // set the text to the old estimate (copied from battery info). Note that this
-                    // can sometimes say 0 time remaining because battery stats requires the phone
-                    // be unplugged for a period of time before being willing ot make an estimate.
-                    summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
-                            Formatter.formatShortElapsedTime(getContext(),
-                                    PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
+            @Override
+            public void onLoaderReset(Loader<List<BatteryInfo>> loader) {
+            }
+        };
 
-                    // for this one we can just set the string directly
-                    summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
-                            Formatter.formatShortElapsedTime(getContext(),
-                                    PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
+    protected void updateViews(List<BatteryInfo> batteryInfos) {
+        final BatteryMeterView batteryView = mBatteryLayoutPref
+            .findViewById(R.id.battery_header_icon);
+        final TextView percentRemaining =
+            mBatteryLayoutPref.findViewById(R.id.battery_percent);
+        final TextView summary1 = mBatteryLayoutPref.findViewById(R.id.summary1);
+        final TextView summary2 = mBatteryLayoutPref.findViewById(R.id.summary2);
+        BatteryInfo oldInfo = batteryInfos.get(0);
+        BatteryInfo newInfo = batteryInfos.get(1);
+        percentRemaining.setText(Utils.formatPercentage(oldInfo.batteryLevel));
 
-                    batteryView.setBatteryLevel(oldInfo.batteryLevel);
-                    batteryView.setCharging(!oldInfo.discharging);
-                }
+        // set the text to the old estimate (copied from battery info). Note that this
+        // can sometimes say 0 time remaining because battery stats requires the phone
+        // be unplugged for a period of time before being willing ot make an estimate.
+        summary1.setText(mPowerFeatureProvider.getOldEstimateDebugString(
+            Formatter.formatShortElapsedTime(getContext(),
+                PowerUtil.convertUsToMs(oldInfo.remainingTimeUs))));
 
-                @Override
-                public void onLoaderReset(Loader<List<BatteryInfo>> loader) {
-                }
-            };
+        // for this one we can just set the string directly
+        summary2.setText(mPowerFeatureProvider.getEnhancedEstimateDebugString(
+            Formatter.formatShortElapsedTime(getContext(),
+                PowerUtil.convertUsToMs(newInfo.remainingTimeUs))));
+
+        batteryView.setBatteryLevel(oldInfo.batteryLevel);
+        batteryView.setCharging(!oldInfo.discharging);
+    }
 
     @Override
     public void onCreate(Bundle icicle) {

@@ -22,7 +22,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowKeyStore;
 
@@ -33,10 +32,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowKeyStore.class
-        })
+@Config(shadows = ShadowKeyStore.class)
 public class CredentialStoragePreferenceControllerTest {
 
     private Context mContext;

@@ -2,8 +2,6 @@ package com.android.settings.core;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import static org.mockito.Mockito.mock;
-
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.provider.SearchIndexableResource;
@@ -12,7 +10,6 @@ import android.util.AttributeSet;
 import android.util.Xml;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settings.search.SearchFeatureProvider;
@@ -21,12 +18,10 @@ import com.android.settings.security.SecuritySettings;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.lang.reflect.Constructor;
@@ -38,20 +33,13 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class XmlControllerAttributeTest {
 
     // List of classes that are too hard to mock in order to retrieve xml information.
-    private final List<Class> illegalClasses = new ArrayList<>(
-            Arrays.asList(
-                    SecuritySettings.class
-            ));
+    private final List<Class> illegalClasses = Arrays.asList(SecuritySettings.class);
 
     // List of XML that could be retrieved from the illegalClasses list.
-    private final List<Integer> whitelistXml = new ArrayList<>(
-            Arrays.asList(
-                    R.xml.security_dashboard_settings
-            ));
+    private final List<Integer> whitelistXml = Arrays.asList(R.xml.security_dashboard_settings);
 
     private static final String NO_VALID_CONSTRUCTOR_ERROR =
             "Controllers added in XML need a constructor following either:"
@@ -67,20 +55,12 @@ public class XmlControllerAttributeTest {
 
     Context mContext;
     SearchFeatureProvider mSearchProvider;
-    private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
         mSearchProvider = new SearchFeatureProviderImpl();
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFakeFeatureFactory.searchFeatureProvider = mSearchProvider;
-    }
-
-    @After
-    public void cleanUp() {
-        mFakeFeatureFactory.searchFeatureProvider = mock(
-                SearchFeatureProvider.class);
+        FakeFeatureFactory.setupForTest().searchFeatureProvider = mSearchProvider;
     }
 
     @Test
@@ -130,7 +110,7 @@ public class XmlControllerAttributeTest {
     }
 
     private Set<Integer> getIndexableXml() {
-        Set<Integer> xmlResSet = new HashSet();
+        Set<Integer> xmlResSet = new HashSet<>();
 
         Collection<Class> indexableClasses =
                 mSearchProvider.getSearchIndexableResources().getProviderValues();
@@ -138,15 +118,15 @@ public class XmlControllerAttributeTest {
 
         for (Class clazz : indexableClasses) {
 
-            Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
-                    clazz);
+            Indexable.SearchIndexProvider provider =
+                DatabaseIndexingUtils.getSearchIndexProvider(clazz);
 
             if (provider == null) {
                 continue;
             }
 
-            List<SearchIndexableResource> resources = provider.getXmlResourcesToIndex(mContext,
-                    true);
+            List<SearchIndexableResource> resources =
+                provider.getXmlResourcesToIndex(mContext, true);
 
             if (resources == null) {
                 continue;
@@ -203,19 +183,18 @@ public class XmlControllerAttributeTest {
     }
 
     private Class<?> getClassFromClassName(String className) {
-        Class<?> clazz = null;
         try {
-            clazz = Class.forName(className);
+            return Class.forName(className);
         } catch (ClassNotFoundException e) {
+            return null;
         }
-        return clazz;
     }
 
     private Constructor<?> getConstructorFromClass(Class<?> clazz) {
         Constructor<?> constructor = null;
         try {
             constructor = clazz.getConstructor(Context.class);
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException ignored) {
         }
 
         if (constructor != null) {
@@ -224,7 +203,7 @@ public class XmlControllerAttributeTest {
 
         try {
             constructor = clazz.getConstructor(Context.class, String.class);
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException ignored) {
         }
 
         return constructor;

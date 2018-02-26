@@ -16,12 +16,19 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -31,19 +38,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultPhonePickerTest {
 
     private static final String TEST_APP_KEY = "com.android.settings/PickerTest";
@@ -83,8 +80,8 @@ public class DefaultPhonePickerTest {
     public void setDefaultAppKey_shouldUpdateDefault() {
         mPicker.setDefaultKey(TEST_APP_KEY);
 
-        verify(mDefaultKeyUpdater).setDefaultDialerApplication(
-                any(Context.class), eq(TEST_APP_KEY), anyInt());
+        verify(mDefaultKeyUpdater)
+            .setDefaultDialerApplication(any(Context.class), eq(TEST_APP_KEY), anyInt());
     }
 
     @Test

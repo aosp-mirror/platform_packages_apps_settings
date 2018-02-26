@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -26,16 +25,14 @@ import static org.mockito.Mockito.spy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.view.View;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -45,12 +42,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothSettingsTest {
 
     private static final String FOOTAGE_MAC_STRING = "Bluetooth mac: xxxx";
@@ -103,8 +98,8 @@ public class BluetoothSettingsTest {
 
     @Test
     public void setUpdateMyDevicePreference_setTitleCorrectly() {
-        doReturn(FOOTAGE_MAC_STRING).when(mFragment).getString(
-                eq(R.string.bluetooth_footer_mac_message), any());
+        doReturn(FOOTAGE_MAC_STRING).when(mFragment)
+            .getString(eq(R.string.bluetooth_footer_mac_message), any());
 
         mFragment.updateFooterPreference(mFooterPreference);
 
@@ -129,10 +124,10 @@ public class BluetoothSettingsTest {
 
     @Test
     public void testInitPreferencesFromPreferenceScreen() {
-        doReturn(mPairedDevicesCategory).when(mFragment).findPreference(
-                BluetoothSettings.KEY_PAIRED_DEVICES);
-        doReturn(mFooterPreference).when(mFragment).findPreference(
-                BluetoothSettings.KEY_FOOTER_PREF);
+        doReturn(mPairedDevicesCategory).when(mFragment)
+            .findPreference(BluetoothSettings.KEY_PAIRED_DEVICES);
+        doReturn(mFooterPreference).when(mFragment)
+            .findPreference(BluetoothSettings.KEY_FOOTER_PREF);
 
         mFragment.initPreferencesFromPreferenceScreen();
 
@@ -144,18 +139,17 @@ public class BluetoothSettingsTest {
     public void testSearchIndexProvider_pairPageEnabled_keyNotAdded() {
         doReturn(true).when(mFeatureFactory.bluetoothFeatureProvider).isPairingPageEnabled();
 
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
+        final List<String> keys =
+            BluetoothSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(keys).doesNotContain(BluetoothSettings.DATA_KEY_REFERENCE);
     }
 
     @Test
     public void testSearchIndexProvider_pairPageDisabled_keyAdded() {
-        final List<String> keys = mFragment.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(
-                mContext);
+        final List<String> keys =
+            BluetoothSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
 
         assertThat(keys).contains(BluetoothSettings.DATA_KEY_REFERENCE);
     }
-
 }

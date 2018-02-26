@@ -17,14 +17,12 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import android.accounts.Account;
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -34,11 +32,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BrandedAccountPreferenceControllerTest {
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private BrandedAccountPreferenceController mController;
@@ -58,9 +55,8 @@ public class BrandedAccountPreferenceControllerTest {
 
     @Test
     public void isAvailable_onWhenAccountIsAvailable() {
-        when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class))).thenReturn(
-                new Account[]
-                        {new Account("fake@account.foo", "fake.reallyfake")});
+        when(fakeFeatureFactory.mAccountFeatureProvider.getAccounts(any(Context.class)))
+            .thenReturn(new Account[] {new Account("fake@account.foo", "fake.reallyfake")});
         mController = new BrandedAccountPreferenceController(mContext);
         assertThat(mController.isAvailable()).isTrue();
     }

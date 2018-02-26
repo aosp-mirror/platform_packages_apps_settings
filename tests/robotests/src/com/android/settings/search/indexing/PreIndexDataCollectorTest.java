@@ -17,54 +17,51 @@
 
 package com.android.settings.search.indexing;
 
-import android.content.ContentResolver;
-import android.content.Context;
-
-import android.content.pm.ApplicationInfo;
-import android.content.pm.ProviderInfo;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.provider.SearchIndexableResource;
-import com.android.settings.TestConfig;
-import com.android.settings.search.SearchIndexableRaw;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.provider.SearchIndexableResource;
+
+import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PreIndexDataCollectorTest {
 
-    private final String AUTHORITY_ONE = "authority";
-    private final String PACKAGE_ONE = "com.android.settings";
+    private static final String AUTHORITY_ONE = "authority";
+    private static final String PACKAGE_ONE = "com.android.settings";
 
     @Mock
-    ContentResolver mResolver;
+    private ContentResolver mResolver;
 
-    Context mContext;
+    private Context mContext;
 
-    PreIndexDataCollector mDataCollector;
+    private PreIndexDataCollector mDataCollector;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mResolver).when(mContext).getContentResolver();
-        //doReturn(mPackageManager).when(mContext).getPackageManager();
 
         mDataCollector = spy(new PreIndexDataCollector(mContext));
     }
@@ -78,8 +75,8 @@ public class PreIndexDataCollectorTest {
         doReturn(resources).when(mDataCollector).getIndexablesForXmlResourceUri(
                 any(Context.class), anyString(), any(Uri.class), any(String[].class));
 
-        PreIndexData data = mDataCollector.collectIndexableData(providerInfo,
-                true /* isFullIndex */);
+        PreIndexData data =
+            mDataCollector.collectIndexableData(providerInfo, true /* isFullIndex */);
 
         assertThat(data.dataToUpdate).containsAllIn(resources);
     }
@@ -94,8 +91,8 @@ public class PreIndexDataCollectorTest {
                 anyString(), any(Uri.class), any(String[].class));
 
 
-        PreIndexData data = mDataCollector.collectIndexableData(providerInfo,
-                true /* isFullIndex */);
+        PreIndexData data =
+            mDataCollector.collectIndexableData(providerInfo, true /* isFullIndex */);
 
         assertThat(data.dataToUpdate).containsAllIn(rawData);
     }
@@ -107,8 +104,8 @@ public class PreIndexDataCollectorTest {
 
         List<String> niks = getFakeNonIndexables();
 
-        doReturn(niks).when(mDataCollector).getNonIndexablesKeysFromRemoteProvider(anyString(),
-                anyString());
+        doReturn(niks).when(mDataCollector)
+            .getNonIndexablesKeysFromRemoteProvider(anyString(), anyString());
 
         PreIndexData data = mDataCollector.collectIndexableData(providerInfo,
                 true /* isFullIndex */);

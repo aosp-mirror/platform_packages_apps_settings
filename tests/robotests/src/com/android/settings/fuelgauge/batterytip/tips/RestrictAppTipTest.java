@@ -16,7 +16,6 @@
 package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -25,7 +24,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,14 +33,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RestrictAppTipTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String DISPLAY_NAME = "app";
 
@@ -67,9 +64,7 @@ public class RestrictAppTipTest {
         doReturn(DISPLAY_NAME).when(mApplicationInfo).loadLabel(mPackageManager);
 
         mUsageAppList = new ArrayList<>();
-        mUsageAppList.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .build());
+        mUsageAppList.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME).build());
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, mUsageAppList);
@@ -101,14 +96,14 @@ public class RestrictAppTipTest {
 
     @Test
     public void testGetSummary_stateNew_showRestrictSummary() {
-        assertThat(mNewBatteryTip.getSummary(mContext)).isEqualTo(
-                "app has high battery usage");
+        assertThat(mNewBatteryTip.getSummary(mContext))
+            .isEqualTo("app has high battery usage");
     }
 
     @Test
     public void testGetSummary_stateHandled_showHandledSummary() {
-        assertThat(mHandledBatteryTip.getSummary(mContext)).isEqualTo(
-                "App changes are in progress");
+        assertThat(mHandledBatteryTip.getSummary(mContext))
+            .isEqualTo("App changes are in progress");
     }
 
     @Test

@@ -16,20 +16,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assertWithMessage;
-
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.usb.UsbManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -38,17 +30,14 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-
-import java.util.List;
+import org.robolectric.shadows.ShadowApplication.Wrapper;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsbConnectionBroadcastReceiverTest {
+
     private Context mContext;
     private UsbConnectionBroadcastReceiver mReceiver;
-    private ShadowApplication mShadowApplication;
 
     @Mock
     private UsbConnectionBroadcastReceiver.UsbConnectionListener mListener;
@@ -59,7 +48,6 @@ public class UsbConnectionBroadcastReceiverTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mShadowApplication = ShadowApplication.getInstance();
         mContext = RuntimeEnvironment.application;
         mReceiver = new UsbConnectionBroadcastReceiver(mContext, mListener, mUsbBackend);
     }
@@ -104,9 +92,7 @@ public class UsbConnectionBroadcastReceiverTest {
         mReceiver.register();
         mReceiver.register();
 
-        final List<BroadcastReceiver> receivers = mShadowApplication.getReceiversForIntent(
-                new Intent(UsbManager.ACTION_USB_STATE));
-        assertHasOneUsbConnectionBroadcastReceiver(receivers);
+        assertThat(countUsbConnectionBroadcastReceivers()).isEqualTo(1);
     }
 
     @Test
@@ -115,29 +101,16 @@ public class UsbConnectionBroadcastReceiverTest {
         mReceiver.unregister();
         mReceiver.unregister();
 
-        final List<BroadcastReceiver> receivers = mShadowApplication.getReceiversForIntent(
-                new Intent(UsbManager.ACTION_USB_STATE));
-        assertHasNoUsbConnectionBroadcastReceiver(receivers);
+        assertThat(countUsbConnectionBroadcastReceivers()).isEqualTo(0);
     }
 
-    private void assertHasOneUsbConnectionBroadcastReceiver(List<BroadcastReceiver> receivers) {
-        boolean hasReceiver = false;
-        for (final BroadcastReceiver receiver : receivers) {
-            if (receiver instanceof UsbConnectionBroadcastReceiver) {
-                // If hasReceiver is true, then we're at the second copy of it so fail.
-                assertWithMessage(
-                        "Only one instance of UsbConnectionBroadcastReceiver should be "
-                                + "registered").that(
-                        hasReceiver).isFalse();
-                hasReceiver = true;
+    private int countUsbConnectionBroadcastReceivers() {
+        int count = 0;
+        for (Wrapper wrapper : ShadowApplication.getInstance().getRegisteredReceivers()) {
+            if (wrapper.getBroadcastReceiver() instanceof UsbConnectionBroadcastReceiver) {
+                count++;
             }
         }
-        assertThat(hasReceiver).isTrue();
-    }
-
-    private void assertHasNoUsbConnectionBroadcastReceiver(List<BroadcastReceiver> receivers) {
-        for (final BroadcastReceiver receiver : receivers) {
-            assertThat(receiver instanceof UsbConnectionBroadcastReceiver).isFalse();
-        }
+        return count;
     }
 }

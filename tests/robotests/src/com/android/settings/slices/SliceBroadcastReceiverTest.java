@@ -18,7 +18,6 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 
 import android.content.ContentValues;
@@ -26,7 +25,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
@@ -39,10 +37,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SliceBroadcastReceiverTest {
 
     private final String fakeTitle = "title";

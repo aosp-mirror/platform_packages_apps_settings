@@ -25,11 +25,8 @@ import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-
-import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -37,18 +34,15 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ChangeWifiStateDetailsTest {
+
     private static final String PACKAGE_NAME = "app";
     private FakeFeatureFactory mFeatureFactory;
     private ChangeWifiStateDetails mFragment;
     private Context mContext;
 
-    @Mock
-    private AppEntry mAppEntry;
     @Mock
     private AppStateChangeWifiStateBridge.WifiSettingsState mState;
 
@@ -80,14 +74,14 @@ public class ChangeWifiStateDetailsTest {
     @Test
     public void testGetSummary_permissibleTrue_returnAllowed() {
         when(mState.isPermissible()).thenReturn(true);
-        assertThat(mFragment.getSummary(mContext, mState)).isEqualTo(
-                mContext.getString(R.string.app_permission_summary_allowed));
+        assertThat(ChangeWifiStateDetails.getSummary(mContext, mState))
+            .isEqualTo(mContext.getString(R.string.app_permission_summary_allowed));
     }
 
     @Test
     public void testGetSummary_permissibleFalse_returnNotAllowed() {
         when(mState.isPermissible()).thenReturn(false);
-        assertThat(mFragment.getSummary(mContext, mState)).isEqualTo(
-                mContext.getString(R.string.app_permission_summary_not_allowed));
+        assertThat(ChangeWifiStateDetails.getSummary(mContext, mState))
+            .isEqualTo(mContext.getString(R.string.app_permission_summary_not_allowed));
     }
 }

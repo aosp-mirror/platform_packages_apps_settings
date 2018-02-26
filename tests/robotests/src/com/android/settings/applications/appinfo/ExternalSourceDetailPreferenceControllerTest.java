@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -27,7 +26,7 @@ import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,10 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ExternalSourceDetailPreferenceControllerTest {
 
     @Mock
@@ -67,7 +64,8 @@ public class ExternalSourceDetailPreferenceControllerTest {
     public void getAvailabilityStatus_managedProfile_shouldReturnDisabled() {
         when(mUserManager.isManagedProfile()).thenReturn(true);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -75,7 +73,8 @@ public class ExternalSourceDetailPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         doReturn(false).when(mController).isPotentialAppSource();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -83,7 +82,8 @@ public class ExternalSourceDetailPreferenceControllerTest {
         when(mUserManager.isManagedProfile()).thenReturn(false);
         doReturn(true).when(mController).isPotentialAppSource();
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -100,5 +100,4 @@ public class ExternalSourceDetailPreferenceControllerTest {
 
         verify(mPreference).setSummary(summary);
     }
-
 }

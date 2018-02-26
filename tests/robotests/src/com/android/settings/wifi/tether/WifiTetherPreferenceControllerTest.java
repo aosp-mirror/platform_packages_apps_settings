@@ -18,13 +18,10 @@ package com.android.settings.wifi.tether;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -42,8 +39,6 @@ import android.net.wifi.WifiManager;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -59,18 +54,14 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
-import org.robolectric.shadows.ShadowSettings;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
-                WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
-                WifiTetherPreferenceControllerTest.ShadowWifiTetherSoftApManager.class
-        })
+@Config(shadows = {
+    WifiTetherPreferenceControllerTest.ShadowWifiTetherSettings.class,
+    WifiTetherPreferenceControllerTest.ShadowWifiTetherSwitchBarController.class,
+    WifiTetherPreferenceControllerTest.ShadowWifiTetherSoftApManager.class
+})
 public class WifiTetherPreferenceControllerTest {
 
     private static final String SSID = "Pixel";
@@ -177,7 +168,7 @@ public class WifiTetherPreferenceControllerTest {
     public void testReceiver_goingToAirplaneMode_shouldClearPreferenceSummary() {
         final ContentResolver cr = mock(ContentResolver.class);
         when(mContext.getContentResolver()).thenReturn(cr);
-        ShadowSettings.ShadowGlobal.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 1);
+        Settings.Global.putInt(cr, Settings.Global.AIRPLANE_MODE_ON, 1);
         mController.displayPreference(mScreen);
         final BroadcastReceiver receiver = ReflectionHelpers.getField(mController, "mReceiver");
         final Intent broadcast = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -242,8 +233,8 @@ public class WifiTetherPreferenceControllerTest {
     @Implements(WifiTetherSwitchBarController.class)
     public static final class ShadowWifiTetherSwitchBarController {
 
-        public static boolean onStartCalled;
-        public static boolean onStopCalled;
+        private static boolean onStartCalled;
+        private static boolean onStopCalled;
 
         public static void reset() {
             onStartCalled = false;

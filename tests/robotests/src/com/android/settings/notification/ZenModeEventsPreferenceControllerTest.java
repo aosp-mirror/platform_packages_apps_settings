@@ -20,9 +20,6 @@ import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
-
-import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,7 +31,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -45,12 +41,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeEventsPreferenceControllerTest {
+
+    private static final boolean EVENTS_SETTINGS = true;
+
     private ZenModeEventsPreferenceController mController;
 
     @Mock
@@ -66,23 +63,21 @@ public class ZenModeEventsPreferenceControllerTest {
     private ContentResolver mContentResolver;
     private Context mContext;
 
-    private final boolean EVENTS_SETTINGS = true;
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
         mController = new ZenModeEventsPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -126,8 +121,8 @@ public class ZenModeEventsPreferenceControllerTest {
         boolean allow = true;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS,
-                allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS, allow);
     }
 
     @Test
@@ -135,7 +130,7 @@ public class ZenModeEventsPreferenceControllerTest {
         boolean allow = false;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS,
-                allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS, allow);
     }
 }

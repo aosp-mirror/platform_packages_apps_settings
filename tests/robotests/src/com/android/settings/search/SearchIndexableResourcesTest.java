@@ -19,14 +19,13 @@ package com.android.settings.search;
 import static android.provider.SearchIndexablesContract.COLUMN_INDEX_NON_INDEXABLE_KEYS_KEY_VALUE;
 import static com.google.common.truth.Truth.assertThat;
 import static junit.framework.Assert.fail;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.database.Cursor;
 import android.text.TextUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wifi.WifiSettings;
@@ -36,13 +35,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SearchIndexableResourcesTest {
 
-    SearchFeatureProviderImpl mSearchProvider;
+    private SearchFeatureProviderImpl mSearchProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
@@ -54,24 +51,22 @@ public class SearchIndexableResourcesTest {
 
     @After
     public void cleanUp() {
-        mFakeFeatureFactory.searchFeatureProvider = mock(
-                SearchFeatureProvider.class);
+        mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Test
     public void testAddIndex() {
-        final Class stringClass = java.lang.String.class;
         // Confirms that String.class isn't contained in SearchIndexableResources.
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
-                .doesNotContain(stringClass);
+                .doesNotContain(String.class);
         final int beforeCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
 
         ((SearchIndexableResourcesImpl) mSearchProvider.getSearchIndexableResources())
-                .addIndex(java.lang.String.class);
+                .addIndex(String.class);
 
         assertThat(mSearchProvider.getSearchIndexableResources().getProviderValues())
-                .contains(stringClass);
+                .contains(String.class);
         final int afterCount =
                 mSearchProvider.getSearchIndexableResources().getProviderValues().size();
         assertThat(afterCount).isEqualTo(beforeCount + 1);
@@ -91,7 +86,7 @@ public class SearchIndexableResourcesTest {
 
         SettingsSearchIndexablesProvider provider = spy(new SettingsSearchIndexablesProvider());
 
-        doReturn(RuntimeEnvironment.application).when(provider).getContext();
+        when(provider.getContext()).thenReturn(RuntimeEnvironment.application);
 
         Cursor cursor = provider.queryNonIndexableKeys(null);
         boolean hasTestKey = false;

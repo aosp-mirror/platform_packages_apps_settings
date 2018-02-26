@@ -24,10 +24,8 @@ import static org.mockito.Mockito.when;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -35,14 +33,12 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AirplaneModePreferenceControllerTest {
 
     @Mock
@@ -55,12 +51,11 @@ public class AirplaneModePreferenceControllerTest {
     private AirplaneModePreferenceController mController;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
-    private FakeFeatureFactory mFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mPackageManager).when(mContext).getPackageManager();
         mController = spy(new AirplaneModePreferenceController(mContext, null));

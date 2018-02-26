@@ -30,13 +30,11 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.UserHandle;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -54,13 +52,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowEntityHeaderController.class)
+@Config(shadows = ShadowEntityHeaderController.class)
 public class AppInfoWithHeaderTest {
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mHeaderController;
 
@@ -119,12 +116,11 @@ public class AppInfoWithHeaderTest {
     }
 
     @Test
-    public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUsedId()
+    public void noExtraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {
         final String packageName = "com.android.settings";
 
-        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package",
-                packageName, null));
+        mAppInfoWithHeader.mIntent.setData(Uri.fromParts("package", packageName, null));
         final ApplicationsState.AppEntry entry = mock(ApplicationsState.AppEntry.class);
         entry.info = new ApplicationInfo();
         entry.info.packageName = packageName;
@@ -145,7 +141,7 @@ public class AppInfoWithHeaderTest {
     }
 
     @Test
-    public void extraUserHandleInIntent_retrieveAppEntryWithMyUsedId()
+    public void extraUserHandleInIntent_retrieveAppEntryWithMyUserId()
             throws PackageManager.NameNotFoundException {
         final int USER_ID = 1002;
         final String packageName = "com.android.settings";
@@ -187,7 +183,7 @@ public class AppInfoWithHeaderTest {
             mPackageInfo.applicationInfo = new ApplicationInfo();
             mState = mock(ApplicationsState.class);
             mIntent = new Intent();
-            mShadowContext = ShadowApplication.getInstance().getApplicationContext();
+            mShadowContext = RuntimeEnvironment.application;
             ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                     (InstantAppDataProvider) (info -> false));
             when(mManager.getContext()).thenReturn(mShadowContext);

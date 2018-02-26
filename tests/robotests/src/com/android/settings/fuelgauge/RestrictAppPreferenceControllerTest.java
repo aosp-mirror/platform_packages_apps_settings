@@ -31,7 +31,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 
 import org.junit.Before;
@@ -42,13 +41,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RestrictAppPreferenceControllerTest {
 
     @Mock
@@ -71,8 +68,8 @@ public class RestrictAppPreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         doReturn(mAppOpsManager).when(mContext).getSystemService(Context.APP_OPS_SERVICE);
         doReturn(mContext).when(mSettingsActivity).getApplicationContext();
-        mRestrictAppPreferenceController = new RestrictAppPreferenceController(mSettingsActivity,
-                mFragment);
+        mRestrictAppPreferenceController =
+            new RestrictAppPreferenceController(mSettingsActivity, mFragment);
         mPackageOpsList = new ArrayList<>();
         mPreference = new Preference(mContext);
         mPreference.setKey(mRestrictAppPreferenceController.getPreferenceKey());
@@ -120,5 +117,4 @@ public class RestrictAppPreferenceControllerTest {
         assertThat(intent.getValue().getIntExtra(EXTRA_SHOW_FRAGMENT_TITLE_RESID, -1))
                 .isEqualTo(R.string.restricted_app_title);
     }
-
 }

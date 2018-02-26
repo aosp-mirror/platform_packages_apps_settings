@@ -16,31 +16,27 @@
 
 package com.android.settings.applications.assist;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
 import android.content.ComponentName;
 import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAssistPickerTest {
 
     private static ComponentName sTestAssist;
@@ -71,8 +67,7 @@ public class DefaultAssistPickerTest {
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEqualTo(sTestAssist.flattenToString());
-        assertThat(mPicker.getDefaultKey())
-                .isEqualTo(sTestAssist.flattenToString());
+        assertThat(mPicker.getDefaultKey()).isEqualTo(sTestAssist.flattenToString());
     }
 
     @Test
@@ -84,8 +79,7 @@ public class DefaultAssistPickerTest {
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEmpty();
-        assertThat(mPicker.getDefaultKey())
-                .isNull();
+        assertThat(mPicker.getDefaultKey()).isNull();
     }
 
     @Test
@@ -98,7 +92,6 @@ public class DefaultAssistPickerTest {
         assertThat(Settings.Secure.getString(mContext.getContentResolver(),
                 Settings.Secure.ASSISTANT))
                 .isEmpty();
-        assertThat(mPicker.getDefaultKey())
-                .isNull();
+        assertThat(mPicker.getDefaultKey()).isNull();
     }
 }

@@ -16,6 +16,18 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyList;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -30,7 +42,6 @@ import android.os.Build;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -41,26 +52,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyList;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultHomePickerTest {
 
     private static final String TEST_APP_KEY = "com.android.settings/DefaultEmergencyPickerTest";
@@ -103,8 +100,7 @@ public class DefaultHomePickerTest {
     @Test
     public void getDefaultAppKey_shouldReturnDefault() {
         final ComponentName cn = mock(ComponentName.class);
-        when(mPackageManagerWrapper.getHomeActivities(anyList()))
-                .thenReturn(cn);
+        when(mPackageManagerWrapper.getHomeActivities(anyList())).thenReturn(cn);
         mPicker.getDefaultKey();
         verify(cn).flattenToString();
     }
@@ -122,9 +118,11 @@ public class DefaultHomePickerTest {
     }
 
     @Test
-    public void getCandidates_onlyLollipopPlusLaunchersAvailableIfManagedProfile()
-            throws NameNotFoundException {
-        createManagedProfile();
+    public void getCandidates_onlyLollipopPlusLaunchersAvailableIfManagedProfile() {
+        List<UserInfo> profiles = new ArrayList<>();
+        profiles.add(new UserInfo(/*id=*/ 10, "TestUserName", UserInfo.FLAG_MANAGED_PROFILE));
+        when(mUserManager.getProfiles(anyInt())).thenReturn(profiles);
+
         addLaunchers();
         List<DefaultAppInfo> candidates = mPicker.getCandidates();
         assertThat(candidates.size()).isEqualTo(2);
@@ -135,12 +133,6 @@ public class DefaultHomePickerTest {
         DefaultAppInfo preLollipopLauncher = candidates.get(1);
         assertThat(preLollipopLauncher.summary).isNotNull();
         assertThat(preLollipopLauncher.enabled).isFalse();
-    }
-
-    private void createManagedProfile() {
-        ArrayList<UserInfo> profiles = new ArrayList<UserInfo>();
-        profiles.add(new UserInfo(/*id=*/ 10, "TestUserName", UserInfo.FLAG_MANAGED_PROFILE));
-        when(mUserManager.getProfiles(anyInt())).thenReturn(profiles);
     }
 
     private ResolveInfo createLauncher(
@@ -156,7 +148,7 @@ public class DefaultHomePickerTest {
         return launcher;
     }
 
-    private void addLaunchers() throws NameNotFoundException {
+    private void addLaunchers() {
         doAnswer(invocation -> {
                 // The result of this method is stored in the first parameter...
                 List<ResolveInfo> parameter = (List<ResolveInfo>) invocation.getArguments()[0];

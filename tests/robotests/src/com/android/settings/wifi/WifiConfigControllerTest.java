@@ -16,6 +16,14 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +33,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -37,12 +44,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.*;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowConnectivityManager.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class WifiConfigControllerTest {
 
     @Mock
@@ -85,6 +88,7 @@ public class WifiConfigControllerTest {
         mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
                 WifiConfigUiBase.MODE_CONNECT);
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎☎");
         mController.showWarningMessagesIfAppropriate();
 
@@ -98,6 +102,7 @@ public class WifiConfigControllerTest {
                 WifiConfigUiBase.MODE_CONNECT);
 
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("123456789012345678901234567890");
         mController.showWarningMessagesIfAppropriate();
 
@@ -114,6 +119,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_noSSID_shouldReturnFalse() {
         final TextView ssid = mView.findViewById(R.id.ssid);
+        assertThat(ssid).isNotNull();
         ssid.setText("");
         assertThat(mController.isSubmittable()).isFalse();
     }
@@ -121,6 +127,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_longPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(LONG_PSK);
         assertThat(mController.isSubmittable()).isFalse();
 
@@ -129,6 +136,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_shortPsk_shouldReturnFalse() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(SHORT_PSK);
         assertThat(mController.isSubmittable()).isFalse();
     }
@@ -136,6 +144,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_goodPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(GOOD_PSK);
         assertThat(mController.isSubmittable()).isTrue();
 
@@ -144,6 +153,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_hexPsk_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText(HEX_PSK);
         assertThat(mController.isSubmittable()).isTrue();
 
@@ -152,6 +162,7 @@ public class WifiConfigControllerTest {
     @Test
     public void isSubmittable_savedConfigZeroLengthPassword_shouldReturnTrue() {
         final TextView password = mView.findViewById(R.id.password);
+        assertThat(password).isNotNull();
         password.setText("");
         when(mAccessPoint.isSaved()).thenReturn(true);
         assertThat(mController.isSubmittable()).isTrue();
@@ -159,8 +170,8 @@ public class WifiConfigControllerTest {
 
     @Test
     public void isSubmittable_nullAccessPoint_noException() {
-        mController = new TestWifiConfigController(mConfigUiBase, mView, null,
-                WifiConfigUiBase.MODE_CONNECT);
+        mController =
+            new TestWifiConfigController(mConfigUiBase, mView, null, WifiConfigUiBase.MODE_CONNECT);
         mController.isSubmittable();
     }
 
@@ -201,8 +212,8 @@ public class WifiConfigControllerTest {
 
     public class TestWifiConfigController extends WifiConfigController {
 
-        public TestWifiConfigController(WifiConfigUiBase parent, View view,
-                AccessPoint accessPoint, int mode) {
+        private TestWifiConfigController(
+            WifiConfigUiBase parent, View view, AccessPoint accessPoint, int mode) {
             super(parent, view, accessPoint, mode);
         }
 

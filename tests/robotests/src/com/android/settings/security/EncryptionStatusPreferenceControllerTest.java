@@ -16,33 +16,27 @@
 
 package com.android.settings.security;
 
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_DETAIL_PAGE;
-import static com.android.settings.security.EncryptionStatusPreferenceController
-        .PREF_KEY_ENCRYPTION_SECURITY_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_DETAIL_PAGE;
+import static com.android.settings.security.EncryptionStatusPreferenceController.PREF_KEY_ENCRYPTION_SECURITY_PAGE;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
+import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUserManager.class,
-                ShadowLockPatternUtils.class
-        })
+@Config(shadows = ShadowLockPatternUtils.class)
 public class EncryptionStatusPreferenceControllerTest {
 
     private Context mContext;
@@ -52,21 +46,23 @@ public class EncryptionStatusPreferenceControllerTest {
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mController = new EncryptionStatusPreferenceController(mContext,
-                PREF_KEY_ENCRYPTION_DETAIL_PAGE);
+        mController =
+            new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_DETAIL_PAGE);
         mPreference = new Preference(mContext);
     }
 
     @Test
     public void isAvailable_admin_true() {
-        ShadowUserManager.getShadow().setIsAdminUser(true);
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        Shadows.shadowOf(userManager).setIsAdminUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_notAdmin_false() {
-        ShadowUserManager.getShadow().setIsAdminUser(false);
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        Shadows.shadowOf(userManager).setIsAdminUser(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -88,22 +84,22 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.summary_placeholder));
+        final CharSequence summary = mContext.getText(R.string.summary_placeholder);
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
     }
 
     @Test
     public void updateSummary_unencrypted_securityPage_shouldNotHaveEncryptionFragment() {
-        mController = new EncryptionStatusPreferenceController(mContext,
-                PREF_KEY_ENCRYPTION_SECURITY_PAGE);
+        mController =
+            new EncryptionStatusPreferenceController(mContext, PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         ShadowLockPatternUtils.setDeviceEncryptionEnabled(false);
 
         mController.updateState(mPreference);
 
-        assertThat(mPreference.getSummary())
-                .isEqualTo(mContext.getText(R.string.summary_placeholder));
+        final CharSequence summary = mContext.getText(R.string.summary_placeholder);
+        assertThat(mPreference.getSummary()).isEqualTo(summary);
 
         assertThat(mPreference.getFragment()).isNotEqualTo(CryptKeeperSettings.class.getName());
     }

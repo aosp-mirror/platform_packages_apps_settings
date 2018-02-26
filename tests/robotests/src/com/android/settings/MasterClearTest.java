@@ -17,12 +17,11 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -49,7 +48,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.android.settings.SettingsActivity;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
@@ -64,12 +62,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowUtils.class}
-)
+@Config(shadows = ShadowUtils.class)
 public class MasterClearTest {
+
     private static final String TEST_ACCOUNT_TYPE = "android.test.account.type";
     private static final String TEST_CONFIRMATION_PACKAGE = "android.test.conf.pkg";
     private static final String TEST_CONFIRMATION_CLASS = "android.test.conf.pkg.ConfActivity";
@@ -147,33 +142,27 @@ public class MasterClearTest {
 
     @Test
     public void testShowWipeEuicc_euiccDisabled() {
-        prepareEuiccState(
-                false /* isEuiccEnabled */, true /* isEuiccProvisioned */);
+        prepareEuiccState(false /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, false /* isEuiccProvisioned */);
+        prepareEuiccState(true /* isEuiccEnabled */, false /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_provisioned() {
-        prepareEuiccState(
-                true /* isEuiccEnabled */, true /* isEuiccProvisioned */);
+        prepareEuiccState(true /* isEuiccEnabled */, true /* isEuiccProvisioned */);
         assertThat(mMasterClear.showWipeEuicc()).isTrue();
     }
 
-    private void prepareEuiccState(
-            boolean isEuiccEnabled,
-            boolean isEuiccProvisioned) {
+    private void prepareEuiccState(boolean isEuiccEnabled, boolean isEuiccProvisioned) {
         doReturn(mActivity).when(mMasterClear).getContext();
         doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
         ContentResolver cr = mActivity.getContentResolver();
-        Settings.Global.putInt(
-                cr, android.provider.Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
+        Settings.Global.putInt(cr, Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
     }
 
     @Test
@@ -201,14 +190,15 @@ public class MasterClearTest {
     public void testInitiateMasterClear_inDemoMode_sendsIntent() {
         ShadowUtils.setIsDemoUser(true);
 
-        final ComponentName componentName = ComponentName.unflattenFromString(
-                "com.android.retaildemo/.DeviceAdminReceiver");
+        final ComponentName componentName =
+            ComponentName.unflattenFromString("com.android.retaildemo/.DeviceAdminReceiver");
         ShadowUtils.setDeviceOwnerComponent(componentName);
 
-        mMasterClear.mInitiateListener.onClick(
-                mContentView.findViewById(R.id.initiate_master_clear));
+        mMasterClear.mInitiateListener
+            .onClick(mContentView.findViewById(R.id.initiate_master_clear));
         final Intent intent = mShadowActivity.getNextStartedActivity();
         assertThat(Intent.ACTION_FACTORY_RESET).isEqualTo(intent.getAction());
+        assertThat(componentName).isNotNull();
         assertThat(componentName.getPackageName()).isEqualTo(intent.getPackage());
     }
 
@@ -230,8 +220,8 @@ public class MasterClearTest {
         doReturn(true).when(mMasterClear).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         doNothing().when(mMasterClear).establishInitialState();
 
-        mMasterClear.onActivityResultInternal(
-            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED, null);
+        mMasterClear
+            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_CANCELED, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(1)).establishInitialState();
@@ -245,8 +235,8 @@ public class MasterClearTest {
         doReturn(mMockIntent).when(mMasterClear).getAccountConfirmationIntent();
         doNothing().when(mMasterClear).showAccountCredentialConfirmation(eq(mMockIntent));
 
-        mMasterClear.onActivityResultInternal(
-            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+        mMasterClear
+            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -260,8 +250,8 @@ public class MasterClearTest {
         doReturn(null).when(mMasterClear).getAccountConfirmationIntent();
         doNothing().when(mMasterClear).showFinalConfirmation();
 
-        mMasterClear.onActivityResultInternal(
-            MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
+        mMasterClear
+            .onActivityResultInternal(MasterClear.KEYGUARD_REQUEST, Activity.RESULT_OK, null);
 
         verify(mMasterClear, times(1)).isValidRequestCode(eq(MasterClear.KEYGUARD_REQUEST));
         verify(mMasterClear, times(0)).establishInitialState();
@@ -365,7 +355,8 @@ public class MasterClearTest {
     @Test
     public void testIsValidRequestCode() {
         assertThat(mMasterClear.isValidRequestCode(MasterClear.KEYGUARD_REQUEST)).isTrue();
-        assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST)).isTrue();
+        assertThat(mMasterClear.isValidRequestCode(MasterClear.CREDENTIAL_CONFIRM_REQUEST))
+            .isTrue();
         assertThat(mMasterClear.isValidRequestCode(0)).isFalse();
     }
 

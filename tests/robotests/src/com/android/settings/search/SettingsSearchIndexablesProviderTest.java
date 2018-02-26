@@ -1,19 +1,16 @@
 package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.SearchIndexablesContract;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.search.indexing.FakeSettingsFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -26,40 +23,34 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsSearchIndexablesProviderTest {
 
-    private final String BASE_AUTHORITY = "com.android.settings";
+    private static final String BASE_AUTHORITY = "com.android.settings";
 
     private SettingsSearchIndexablesProvider mProvider;
-    private SearchFeatureProvider mFeatureProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
-    Context mContext;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-
         mProvider = spy(new SettingsSearchIndexablesProvider());
         ProviderInfo info = new ProviderInfo();
         info.exported = true;
         info.grantUriPermissions = true;
         info.authority = BASE_AUTHORITY;
         info.readPermission = Manifest.permission.READ_SEARCH_INDEXABLES;
-        mProvider.attachInfo(mContext, info);
+        mProvider.attachInfo(RuntimeEnvironment.application, info);
 
-        mFeatureProvider = new SearchFeatureProviderImpl();
-        mFeatureProvider.getSearchIndexableResources().getProviderValues().clear();
-        mFeatureProvider.getSearchIndexableResources().getProviderValues()
+        final SearchFeatureProvider featureProvider = new SearchFeatureProviderImpl();
+        featureProvider.getSearchIndexableResources().getProviderValues().clear();
+        featureProvider.getSearchIndexableResources().getProviderValues()
                 .add(FakeSettingsFragment.class);
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mFakeFeatureFactory.searchFeatureProvider = mFeatureProvider;
+        mFakeFeatureFactory.searchFeatureProvider = featureProvider;
     }
 
     @After
     public void cleanUp() {
-        mFakeFeatureFactory.searchFeatureProvider = mock(
-                SearchFeatureProvider.class);
+        mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Test
@@ -108,7 +99,6 @@ public class SettingsSearchIndexablesProviderTest {
     public void testNonIndexablesColumnFetched() {
         Uri rawUri = Uri.parse("content://" + BASE_AUTHORITY + "/" +
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH);
-        //final ContentResolver resolver = mContext.getContentResolver();
 
         final Cursor cursor = mProvider.query(rawUri,
                 SearchIndexablesContract.NON_INDEXABLES_KEYS_COLUMNS, null, null, null);

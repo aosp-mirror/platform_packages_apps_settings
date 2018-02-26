@@ -17,33 +17,19 @@
 package com.android.settings;
 
 import static com.android.settings.testutils.ResIdSubject.assertResId;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Intent;
+import android.os.SystemProperties;
 
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.setupwizardlib.util.WizardManagerHelper;
 
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowSystemProperties.class
-        })
 public class SetupWizardUtilsTest {
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
-    }
 
     @Test
     public void testCopySetupExtras() throws Throwable {
@@ -61,7 +47,7 @@ public class SetupWizardUtilsTest {
 
     @Test
     public void testGetTheme_withIntentExtra_shouldReturnExtraTheme() {
-        SettingsShadowSystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
+        SystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
                 WizardManagerHelper.THEME_GLIF);
         Intent intent = new Intent();
         intent.putExtra(WizardManagerHelper.EXTRA_THEME, WizardManagerHelper.THEME_GLIF_V2);
@@ -71,7 +57,7 @@ public class SetupWizardUtilsTest {
 
     @Test
     public void testGetTheme_withEmptyIntent_shouldReturnSystemProperty() {
-        SettingsShadowSystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
+        SystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
                 WizardManagerHelper.THEME_GLIF_V2_LIGHT);
         Intent intent = new Intent();
 
@@ -80,7 +66,7 @@ public class SetupWizardUtilsTest {
 
     @Test
     public void testGetTheme_glifV3Light_shouldReturnThemeResource() {
-        SettingsShadowSystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
+        SystemProperties.set(SetupWizardUtils.SYSTEM_PROP_SETUPWIZARD_THEME,
                 WizardManagerHelper.THEME_GLIF_V3_LIGHT);
         Intent intent = new Intent();
 

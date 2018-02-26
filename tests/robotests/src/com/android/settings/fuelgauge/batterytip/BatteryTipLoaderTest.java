@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -27,10 +26,8 @@ import android.content.Intent;
 import android.os.PowerManager;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
-import com.android.settings.fuelgauge.batterytip.detectors.BatteryTipDetector;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -41,14 +38,12 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipLoaderTest {
+
     private static final int[] TIP_ORDER = {
             BatteryTip.TipType.APP_RESTRICTION,
             BatteryTip.TipType.BATTERY_SAVER,

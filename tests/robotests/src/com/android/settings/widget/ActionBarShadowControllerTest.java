@@ -16,12 +16,9 @@
 
 package com.android.settings.widget;
 
-
 import static android.arch.lifecycle.Lifecycle.Event.ON_START;
 import static android.arch.lifecycle.Lifecycle.Event.ON_STOP;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,7 +30,6 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,10 +39,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ActionBarShadowControllerTest {
 
     @Mock
@@ -116,5 +110,4 @@ public class ActionBarShadowControllerTest {
         controller.mScrollChangeWatcher.onScrolled(mRecyclerView, 10 /* dx */, 10 /* dy */);
         // no crash
     }
-
 }

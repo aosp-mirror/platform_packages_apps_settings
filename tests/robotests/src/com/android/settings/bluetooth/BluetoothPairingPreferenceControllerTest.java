@@ -28,7 +28,6 @@ import android.content.Intent;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -39,11 +38,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothPairingPreferenceControllerTest {
+
     private static final int ORDER = 1;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -74,8 +72,8 @@ public class BluetoothPairingPreferenceControllerTest {
         assertThat(pref.getKey()).isEqualTo(BluetoothPairingPreferenceController.KEY_PAIRING);
         assertThat(pref.getIcon()).isEqualTo(mContext.getDrawable(R.drawable.ic_menu_add));
         assertThat(pref.getOrder()).isEqualTo(ORDER);
-        assertThat(pref.getTitle()).isEqualTo(
-                mContext.getString(R.string.bluetooth_pairing_pref_title));
+        assertThat(pref.getTitle())
+            .isEqualTo(mContext.getString(R.string.bluetooth_pairing_pref_title));
     }
 
     @Test

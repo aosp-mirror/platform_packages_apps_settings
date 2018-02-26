@@ -16,6 +16,13 @@
 
 package com.android.settings;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,6 +31,10 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.View;
+
+import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,20 +45,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import com.android.settings.testutils.FakeFeatureFactory;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsPreferenceFragmentTest {
 
     private static final int ITEM_COUNT = 5;
@@ -152,7 +150,7 @@ public class SettingsPreferenceFragmentTest {
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
         final Bundle bundle = new Bundle();
         bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "test_key");
-        doReturn(bundle).when(mFragment).getArguments();
+        when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.onCreate(null /* icicle */);
 
@@ -167,10 +165,9 @@ public class SettingsPreferenceFragmentTest {
         doReturn(null).when(mFragment).getPreferenceScreen();
         final Bundle bundle = new Bundle();
         bundle.putString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY, "test_key");
-        doReturn(bundle).when(mFragment).getArguments();
+        when(mFragment.getArguments()).thenReturn(bundle);
 
         mFragment.onCreate(null /* icicle */);
-
         // no crash
     }
 
@@ -181,5 +178,4 @@ public class SettingsPreferenceFragmentTest {
             return 0;
         }
     }
-
 }

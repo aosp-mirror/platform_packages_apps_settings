@@ -17,7 +17,6 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,21 +24,19 @@ import android.support.annotation.IdRes;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipTest {
+
     private static final String TITLE = "title";
     private static final String SUMMARY = "summary";
     @IdRes
@@ -130,5 +127,4 @@ public class BatteryTipTest {
             }
         };
     }
-
 }

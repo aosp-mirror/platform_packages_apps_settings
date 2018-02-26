@@ -29,7 +29,6 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -37,14 +36,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoSyncDataPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -85,7 +83,7 @@ public class AutoSyncDataPreferenceControllerTest {
     @Test
     public void displayPref_linkedUser_shouldDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(true);
+        when(mUserManager.isRestrictedProfile()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -97,7 +95,7 @@ public class AutoSyncDataPreferenceControllerTest {
         List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
         mController.displayPreference(mScreen);
@@ -111,7 +109,7 @@ public class AutoSyncDataPreferenceControllerTest {
         infos.add(new UserInfo(1, "user 1", 0));
         infos.add(new UserInfo(2, "user 2", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
         mController.displayPreference(mScreen);
@@ -121,8 +119,7 @@ public class AutoSyncDataPreferenceControllerTest {
 
     @Test
     public void autoSyncData_shouldNotBeSetOnCancel() {
-        final ShadowApplication application = ShadowApplication.getInstance();
-        final Context context = application.getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         final SwitchPreference preference = new SwitchPreference(context);
         preference.setChecked(false);
         mController = new AutoSyncDataPreferenceController(context, mFragment);

@@ -17,9 +17,7 @@ package com.android.settings.location;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -38,7 +36,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlineListPayload;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.ResultPayload;
@@ -56,7 +53,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationPreferenceControllerTest {
     @Mock
     private Preference mPreference;
@@ -101,38 +97,38 @@ public class LocationPreferenceControllerTest {
 
     @Test
     public void getLocationSummary_locationOff_shouldSetSummaryOff() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_off_summary));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_off_summary));
     }
 
     @Test
     public void getLocationSummary_sensorsOnly_shouldSetSummaryOn() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_SENSORS_ONLY);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_SENSORS_ONLY);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-                mContext.getString(R.string.location_on_summary));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
     public void getLocationSummary_highAccuracy_shouldSetSummaryOn() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_HIGH_ACCURACY);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_HIGH_ACCURACY);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-            mContext.getString(R.string.location_on_summary));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
     public void getLocationSummary_batterySaving_shouldSetSummaryOn() {
-        Secure.putInt(mContext.getContentResolver(),
-                Secure.LOCATION_MODE, Secure.LOCATION_MODE_BATTERY_SAVING);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Secure.putInt(contentResolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_BATTERY_SAVING);
 
-        assertThat(mController.getLocationSummary(mContext)).isEqualTo(
-            mContext.getString(R.string.location_on_summary));
+        final String locationSummary = mController.getLocationSummary(mContext);
+        assertThat(locationSummary).isEqualTo(mContext.getString(R.string.location_on_summary));
     }
 
     @Test
@@ -153,9 +149,8 @@ public class LocationPreferenceControllerTest {
         mController.displayPreference(mScreen);
         mController.onResume();
 
-        mController.mLocationProvidersChangedReceiver.onReceive(
-                mContext,
-                new Intent().setAction(LocationManager.PROVIDERS_CHANGED_ACTION));
+        mController.mLocationProvidersChangedReceiver
+            .onReceive(mContext, new Intent(LocationManager.PROVIDERS_CHANGED_ACTION));
 
         verify(mPreference).setSummary(any());
     }
@@ -171,13 +166,13 @@ public class LocationPreferenceControllerTest {
     @Test
     @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
-        int newValue = Secure.LOCATION_MODE_BATTERY_SAVING;
+        final int newValue = Secure.LOCATION_MODE_BATTERY_SAVING;
         ContentResolver resolver = mContext.getContentResolver();
         Settings.Secure.putInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Secure.LOCATION_MODE,
-                Secure.LOCATION_MODE_OFF);
+        final int updatedValue =
+            Settings.Secure.getInt(resolver, Secure.LOCATION_MODE, Secure.LOCATION_MODE_OFF);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }

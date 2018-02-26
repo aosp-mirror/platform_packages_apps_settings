@@ -16,7 +16,6 @@
 
 package com.android.settings.users;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 import static org.mockito.Matchers.eq;
@@ -28,7 +27,6 @@ import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,16 +34,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoSyncWorkDataPreferenceControllerTest {
 
-    private static int MANAGED_PROFILE_ID = 10;
+    private static final int MANAGED_PROFILE_ID = 10;
 
     @Mock(answer = RETURNS_DEEP_STUBS)
     private UserManager mUserManager;
@@ -74,7 +70,7 @@ public class AutoSyncWorkDataPreferenceControllerTest {
     @Test
     public void checkIsAvailable_linkedUser_shouldNotDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(true);
+        when(mUserManager.isRestrictedProfile()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -82,7 +78,7 @@ public class AutoSyncWorkDataPreferenceControllerTest {
     @Test
     public void checkIsAvailable_singleUserProfile_shouldNotDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
 
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
@@ -94,7 +90,7 @@ public class AutoSyncWorkDataPreferenceControllerTest {
     @Test
     public void checkIsAvailable_null_workProfileUserHandle_shouldNotDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
 
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));
@@ -109,7 +105,7 @@ public class AutoSyncWorkDataPreferenceControllerTest {
     @Test
     public void multipleProfile_shouldInitWithWorkProfileUserHandle() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
 
         final List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(UserHandle.USER_SYSTEM, "user 1", 0 /* flags */));

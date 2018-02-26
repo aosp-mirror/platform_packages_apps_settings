@@ -18,15 +18,14 @@
 package com.android.settings.graph;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.SparseIntArray;
 
-import com.android.settings.TestConfig;
 import com.android.settingslib.R;
 
 import org.junit.Before;
@@ -34,11 +33,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsageGraphTest {
+
     private UsageGraph mGraph;
 
     @Before
@@ -53,8 +51,8 @@ public class UsageGraphTest {
         doReturn(1).when(resources).getDimensionPixelSize(R.dimen.usage_graph_dot_interval);
         doReturn(1).when(resources).getDimensionPixelSize(R.dimen.usage_graph_divider_size);
         mGraph = spy(new UsageGraph(context, null));
-        doReturn(1000).when(mGraph).getWidth();
-        doReturn(200).when(mGraph).getHeight();
+        when(mGraph.getWidth()).thenReturn(1000);
+        when(mGraph.getHeight()).thenReturn(200);
 
         // Set the conceptual size of the graph to 500ms x 100%.
         mGraph.setMax(500, 100);

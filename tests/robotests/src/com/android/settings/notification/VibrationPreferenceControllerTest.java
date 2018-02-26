@@ -20,10 +20,8 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -40,7 +38,6 @@ import android.os.Vibrator;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -52,11 +49,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VibrationPreferenceControllerTest {
 
     private Context mContext;
@@ -65,7 +60,7 @@ public class VibrationPreferenceControllerTest {
     @Mock
     private NotificationManager mNm;
     @Mock
-    Vibrator mVibrator;
+    private Vibrator mVibrator;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -80,7 +75,7 @@ public class VibrationPreferenceControllerTest {
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
         shadowApplication.setSystemService(Context.VIBRATOR_SERVICE, mVibrator);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new VibrationPreferenceController(mContext, mBackend));
 
         // by default allow vibration
@@ -88,14 +83,14 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(RestrictedSwitchPreference.class));
         mController.onPreferenceChange(mock(RestrictedSwitchPreference.class), true);
     }
 
     @Test
-    public void testIsAvailable_notSystemDoesNotHave() throws Exception {
+    public void testIsAvailable_notSystemDoesNotHave() {
         when(mVibrator.hasVibrator()).thenReturn(false);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
@@ -104,7 +99,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfNotImportant() throws Exception {
+    public void testIsAvailable_notIfNotImportant() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
         mController.onResume(appRow, channel, null, null);
@@ -112,7 +107,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfDefaultChannel() throws Exception {
+    public void testIsAvailable_notIfDefaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel =
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "", IMPORTANCE_DEFAULT);
@@ -121,7 +116,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable() throws Exception {
+    public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
         mController.onResume(appRow, channel, null, null);
@@ -129,7 +124,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_disabledByAdmin() throws Exception {
+    public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
@@ -142,7 +137,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() throws Exception {
+    public void testUpdateState_notConfigurable() {
         String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = lockedId;
@@ -157,7 +152,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_configurable() throws Exception {
+    public void testUpdateState_configurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
@@ -170,7 +165,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_vibrateOn() throws Exception {
+    public void testUpdateState_vibrateOn() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldVibrate()).thenReturn(true);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
@@ -182,7 +177,7 @@ public class VibrationPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_vibrateOff() throws Exception {
+    public void testUpdateState_vibrateOff() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.shouldVibrate()).thenReturn(false);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);

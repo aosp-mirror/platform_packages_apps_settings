@@ -16,10 +16,7 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.TestConfig.SDK_VERSION;
-
 import static com.google.common.truth.Truth.assertWithMessage;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -29,7 +26,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.core.codeinspection.ClassScanner;
 import com.android.settings.core.codeinspection.CodeInspector;
@@ -46,21 +42,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = SDK_VERSION)
 public class SliceControllerInXmlTest {
 
-    private static final List<Class> mSliceControllerClasses = new ArrayList<>(Arrays.asList(
-            TogglePreferenceController.class
-    ));
+    private static final List<Class> mSliceControllerClasses = Collections.singletonList(
+        TogglePreferenceController.class
+    );
 
     private final List<String> mXmlDeclaredControllers = new ArrayList<>();
     private final List<String> mGrandfatheredClasses = new ArrayList<>();
@@ -73,7 +67,7 @@ public class SliceControllerInXmlTest {
 
     private Context mContext;
 
-    SearchFeatureProvider mSearchProvider;
+    private SearchFeatureProvider mSearchProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
@@ -125,8 +119,8 @@ public class SliceControllerInXmlTest {
 
     @Test
     public void testAllControllersDeclaredInXml() throws Exception {
-        final List<Class<?>> classes = new ClassScanner().getClassesForPackage(
-                mContext.getPackageName());
+        final List<Class<?>> classes =
+            new ClassScanner().getClassesForPackage(mContext.getPackageName());
         final List<String> missingControllersInXml = new ArrayList<>();
 
         for (Class<?> clazz : classes) {
@@ -144,8 +138,8 @@ public class SliceControllerInXmlTest {
         // Removed whitelisted classes
         missingControllersInXml.removeAll(mGrandfatheredClasses);
 
-        final String missingControllerError = buildErrorMessage(ERROR_MISSING_CONTROLLER,
-                missingControllersInXml);
+        final String missingControllerError =
+            buildErrorMessage(ERROR_MISSING_CONTROLLER, missingControllersInXml);
 
         assertWithMessage(missingControllerError).that(missingControllersInXml).isEmpty();
     }
@@ -176,7 +170,6 @@ public class SliceControllerInXmlTest {
                 .getProviderValues();
 
         for (Class clazz : indexableClasses) {
-
             Indexable.SearchIndexProvider provider = DatabaseIndexingUtils.getSearchIndexProvider(
                     clazz);
 

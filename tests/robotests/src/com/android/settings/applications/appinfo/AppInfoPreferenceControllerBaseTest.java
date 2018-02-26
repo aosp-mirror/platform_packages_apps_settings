@@ -31,7 +31,7 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.TestConfig;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.notification.AppNotificationSettings;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
@@ -43,10 +43,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppInfoPreferenceControllerBaseTest {
 
     @Mock
@@ -73,7 +71,8 @@ public class AppInfoPreferenceControllerBaseTest {
 
     @Test
     public void getAvailabilityStatus_shouldReturnAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -102,7 +101,7 @@ public class AppInfoPreferenceControllerBaseTest {
 
         private boolean preferenceUpdated;
 
-        public TestPreferenceController(AppInfoDashboardFragment parent) {
+        private TestPreferenceController(AppInfoDashboardFragment parent) {
             super(RuntimeEnvironment.application, parent, "TestKey");
         }
 
@@ -122,7 +121,5 @@ public class AppInfoPreferenceControllerBaseTest {
             bundle.putString("test", "test");
             return bundle;
         }
-
     }
-
 }

@@ -17,13 +17,11 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 
 import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
@@ -40,19 +38,15 @@ import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowConnectivityManager.class,
-                ShadowWifiManager.class
-        }
+@Config(shadows = {
+    SettingsShadowResources.SettingsShadowTheme.class,
+    ShadowConnectivityManager.class,
+    ShadowWifiManager.class
+}
 )
 public class WifiDialogActivityTest {
 
-    public static final String AP1_SSID = "\"ap1\"";
+    private static final String AP1_SSID = "\"ap1\"";
     @Mock
     private WifiConfigController mController;
 

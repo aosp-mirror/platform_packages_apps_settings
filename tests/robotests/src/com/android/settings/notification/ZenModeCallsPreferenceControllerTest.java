@@ -33,7 +33,6 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,13 +42,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeCallsPreferenceControllerTest {
+
     private ZenModeCallsPreferenceController mController;
 
     @Mock
@@ -74,10 +72,6 @@ public class ZenModeCallsPreferenceControllerTest {
      */
     private String[] mValues;
 
-    private final boolean CALLS_SETTINGS = true;
-    private final int MOCK_CALLS_SENDERS = NotificationManager.Policy.PRIORITY_SENDERS_STARRED;
-    private final int SUMMARY_ID_MOCK_CALLS_SENDERS = R.string.zen_mode_from_starred;
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -89,7 +83,8 @@ public class ZenModeCallsPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
-        when(mBackend.getPriorityCallSenders()).thenReturn(MOCK_CALLS_SENDERS);
+        when(mBackend.getPriorityCallSenders())
+            .thenReturn(NotificationManager.Policy.PRIORITY_SENDERS_STARRED);
         when(mBackend.getContactsSummary(ZenModeBackend.SOURCE_NONE))
                 .thenCallRealMethod();
         when(mBackend.getContactsSummary(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
@@ -134,12 +129,12 @@ public class ZenModeCallsPreferenceControllerTest {
 
         when(mBackend.isPriorityCategoryEnabled(
                 NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
-                .thenReturn(CALLS_SETTINGS);
+                .thenReturn(true);
 
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(true);
-        verify(mockPref).setSummary(SUMMARY_ID_MOCK_CALLS_SENDERS);
+        verify(mockPref).setSummary(R.string.zen_mode_from_starred);
     }
 
     @Test

@@ -16,15 +16,12 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.BuildNumberDialogController
-        .BUILD_NUMBER_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.BuildNumberDialogController.BUILD_NUMBER_VALUE_ID;
 import static org.mockito.Mockito.verify;
 
 import android.os.Build;
 import android.text.BidiFormatter;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -32,10 +29,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BuildNumberDialogControllerTest {
 
     @Mock
@@ -53,7 +48,7 @@ public class BuildNumberDialogControllerTest {
     public void initialize_shouldUpdateBuildNumberToDialog() {
         mController.initialize();
 
-        verify(mDialog).setText(BUILD_NUMBER_VALUE_ID,
-                BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
+        verify(mDialog)
+            .setText(BUILD_NUMBER_VALUE_ID, BidiFormatter.getInstance().unicodeWrap(Build.DISPLAY));
     }
 }

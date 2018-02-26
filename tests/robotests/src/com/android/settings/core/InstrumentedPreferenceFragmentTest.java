@@ -30,23 +30,16 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowSystemProperties.class
-})
 public class InstrumentedPreferenceFragmentTest {
 
     @Mock
@@ -65,11 +58,6 @@ public class InstrumentedPreferenceFragmentTest {
 
         mFragment = spy(new InstrumentedPreferenceFragmentTestable());
         ReflectionHelpers.setField(mFragment, "mPreferenceManager", mPreferenceManager);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test
@@ -118,7 +106,7 @@ public class InstrumentedPreferenceFragmentTest {
             return mScreenId;
         }
 
-        public void setPreferenceScreenResId(int id) {
+        private void setPreferenceScreenResId(int id) {
             mScreenId = id;
         }
     }

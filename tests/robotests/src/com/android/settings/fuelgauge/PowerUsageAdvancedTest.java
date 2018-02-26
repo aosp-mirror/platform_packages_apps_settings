@@ -16,11 +16,9 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.isNull;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -42,12 +40,11 @@ import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.testutils.BatteryTestUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData;
 import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
+import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -56,15 +53,14 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageAdvancedTest {
+
     private static final int FAKE_UID_1 = 50;
     private static final int FAKE_UID_2 = 100;
     private static final int DISCHARGE_AMOUNT = 60;
@@ -246,8 +242,8 @@ public class PowerUsageAdvancedTest {
     public void testUpdateUsageDataSummary_moreThanOneApp_showMaxUsageApp() {
         mPowerUsageData.usageList.add(mNormalBatterySipper);
         mPowerUsageData.usageList.add(mMaxBatterySipper);
-        doReturn(mMaxBatterySipper).when(mPowerUsageAdvanced).findBatterySipperWithMaxBatteryUsage(
-                mPowerUsageData.usageList);
+        doReturn(mMaxBatterySipper).when(mPowerUsageAdvanced)
+            .findBatterySipperWithMaxBatteryUsage(mPowerUsageData.usageList);
         final double percentage = (TYPE_BLUETOOTH_USAGE / TOTAL_POWER) * DISCHARGE_AMOUNT;
         mPowerUsageAdvanced.updateUsageDataSummary(mPowerUsageData, TOTAL_POWER, DISCHARGE_AMOUNT);
 
@@ -259,8 +255,8 @@ public class PowerUsageAdvancedTest {
     public void testFindBatterySipperWithMaxBatteryUsage_findCorrectOne() {
         mPowerUsageData.usageList.add(mNormalBatterySipper);
         mPowerUsageData.usageList.add(mMaxBatterySipper);
-        BatterySipper sipper = mPowerUsageAdvanced.findBatterySipperWithMaxBatteryUsage(
-                mPowerUsageData.usageList);
+        BatterySipper sipper =
+            mPowerUsageAdvanced.findBatterySipperWithMaxBatteryUsage(mPowerUsageData.usageList);
 
         assertThat(sipper).isEqualTo(mMaxBatterySipper);
     }
@@ -316,8 +312,8 @@ public class PowerUsageAdvancedTest {
     @Test
     public void testShouldHideCategory_typeCellWhileNotSupported_returnTrue() {
         mPowerUsageData.usageType = UsageType.CELL;
-        doReturn(false).when(mConnectivityManager).isNetworkSupported(
-                ConnectivityManager.TYPE_MOBILE);
+        doReturn(false).when(mConnectivityManager)
+            .isNetworkSupported(ConnectivityManager.TYPE_MOBILE);
 
         assertThat(mPowerUsageAdvanced.shouldHideCategory(mPowerUsageData)).isTrue();
     }
@@ -414,8 +410,8 @@ public class PowerUsageAdvancedTest {
         powerUsageDataList.add(new PowerUsageData(UsageType.APP, normalPower));
         powerUsageDataList.add(new PowerUsageData(UsageType.CELL, normalPower));
 
-        assertThat(mPowerUsageAdvanced.calculateHiddenPower(powerUsageDataList)).isWithin(
-                PRECISION).of(unaccountedPower);
+        assertThat(mPowerUsageAdvanced.calculateHiddenPower(powerUsageDataList))
+            .isWithin(PRECISION).of(unaccountedPower);
     }
 
     @Test
@@ -439,5 +435,4 @@ public class PowerUsageAdvancedTest {
         mPowerUsageAdvanced.refreshUi();
         verify(mHistPref, atLeastOnce()).setBottomSummary(any());
     }
-
 }

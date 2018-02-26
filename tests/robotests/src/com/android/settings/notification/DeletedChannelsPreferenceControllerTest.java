@@ -18,7 +18,6 @@ package com.android.settings.notification;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
@@ -32,7 +31,6 @@ import android.content.Context;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.NotificationChannelGroupWrapper;
 
 import org.junit.Before;
@@ -42,11 +40,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeletedChannelsPreferenceControllerTest {
 
     private Context mContext;
@@ -70,13 +66,13 @@ public class DeletedChannelsPreferenceControllerTest {
     }
 
     @Test
-    public void noCrashIfNoOnResume() throws Exception {
+    public void noCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(Preference.class));
     }
 
     @Test
-    public void isAvailable_appScreen_notIfAppBlocked() throws Exception {
+    public void isAvailable_appScreen_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, null, null, null);
@@ -84,35 +80,35 @@ public class DeletedChannelsPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_groupScreen_never() throws Exception {
+    public void isAvailable_groupScreen_never() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         mController.onResume(appRow, null, mock(NotificationChannelGroupWrapper.class), null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_channelScreen_never() throws Exception {
+    public void isAvailable_channelScreen_never() {
         mController.onResume(
                 new NotificationBackend.AppRow(), mock(NotificationChannel.class), null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_appScreen_notIfNoDeletedChannels() throws Exception {
+    public void isAvailable_appScreen_notIfNoDeletedChannels() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(0);
         mController.onResume(new NotificationBackend.AppRow(), null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void isAvailable_appScreen() throws Exception {
+    public void isAvailable_appScreen() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
         mController.onResume(new NotificationBackend.AppRow(), null, null, null);
         assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void updateState() throws Exception {
+    public void updateState() {
         when(mBackend.getDeletedChannelCount(any(), anyInt())).thenReturn(1);
         mController.onResume(new NotificationBackend.AppRow(), null, null, null);
 

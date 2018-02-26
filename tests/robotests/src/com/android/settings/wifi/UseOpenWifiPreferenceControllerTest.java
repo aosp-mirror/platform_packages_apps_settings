@@ -37,12 +37,11 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.NetworkScoreManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import com.google.common.collect.Lists;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,14 +51,13 @@ import org.mockito.Captor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UseOpenWifiPreferenceControllerTest {
+
     private static ComponentName sEnableActivityComponent;
     private static NetworkScorerAppData sAppData;
     private static NetworkScorerAppData sAppDataNoActivity;
@@ -71,10 +69,14 @@ public class UseOpenWifiPreferenceControllerTest {
         sAppDataNoActivity = new NetworkScorerAppData(0, null, null, null, null);
     }
 
-    @Mock private Lifecycle mLifecycle;
-    @Mock private Fragment mFragment;
-    @Mock private NetworkScoreManagerWrapper mNetworkScoreManagerWrapper;
-    @Captor private ArgumentCaptor<Intent> mIntentCaptor;
+    @Mock
+    private Lifecycle mLifecycle;
+    @Mock
+    private Fragment mFragment;
+    @Mock
+    private NetworkScoreManagerWrapper mNetworkScoreManagerWrapper;
+    @Captor
+    private ArgumentCaptor<Intent> mIntentCaptor;
     private Context mContext;
     private UseOpenWifiPreferenceController mController;
 
@@ -96,8 +98,8 @@ public class UseOpenWifiPreferenceControllerTest {
      *                First scorer in the list is the active scorer.
      */
     private void setupScorers(@NonNull List<NetworkScorerAppData> scorers) {
-        when(mNetworkScoreManagerWrapper.getActiveScorerPackage()).thenReturn(
-                sEnableActivityComponent.getPackageName());
+        when(mNetworkScoreManagerWrapper.getActiveScorerPackage())
+            .thenReturn(sEnableActivityComponent.getPackageName());
         when(mNetworkScoreManagerWrapper.getAllValidScorers()).thenReturn(scorers);
         when(mNetworkScoreManagerWrapper.getActiveScorer()).thenReturn(scorers.get(0));
     }

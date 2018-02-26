@@ -1,40 +1,40 @@
 #############################################
-# Settings Robolectric test target. #
+# Settings Robolectric test target.         #
 #############################################
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
+
+LOCAL_MODULE := SettingsRoboTests
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-# Include the testing libraries (JUnit4 + Robolectric libs).
-LOCAL_STATIC_JAVA_LIBRARIES := \
-    mockito-robolectric-prebuilt \
-    platform-robolectric-android-all-stubs \
-    truth-prebuilt
+LOCAL_JAVA_RESOURCE_DIRS := config
 
 LOCAL_JAVA_LIBRARIES := \
-    junit \
-    platform-robolectric-3.6.1-prebuilt \
-    telephony-common
+    robolectric_android-all-stub \
+    Robolectric_all-target \
+    mockito-robolectric-prebuilt \
+    truth-prebuilt
 
 LOCAL_INSTRUMENTATION_FOR := Settings
-LOCAL_MODULE := SettingsRoboTests
 
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 #############################################################
-# Settings runner target to run the previous target. #
+# Settings runner target to run the previous target.        #
 #############################################################
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := RunSettingsRoboTests
 
-LOCAL_SDK_VERSION := current
-
-LOCAL_STATIC_JAVA_LIBRARIES := \
-    SettingsRoboTests
+LOCAL_JAVA_LIBRARIES := \
+    SettingsRoboTests \
+    robolectric_android-all-stub \
+    Robolectric_all-target \
+    mockito-robolectric-prebuilt \
+    truth-prebuilt
 
 LOCAL_TEST_PACKAGE := Settings
 
@@ -42,4 +42,4 @@ LOCAL_INSTRUMENT_SOURCE_DIRS := $(dir $(LOCAL_PATH))../src
 
 LOCAL_ROBOTEST_TIMEOUT := 36000
 
-include prebuilts/misc/common/robolectric/3.6.1/run_robotests.mk
+include external/robolectric-shadows/run_robotests.mk

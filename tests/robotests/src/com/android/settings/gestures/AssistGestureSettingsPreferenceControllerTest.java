@@ -24,7 +24,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
@@ -42,26 +41,22 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = ShadowSecureSettings.class
-)
+@Config(shadows = ShadowSecureSettings.class)
 public class AssistGestureSettingsPreferenceControllerTest {
+
+    private static final String KEY_ASSIST = "gesture_assist";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
     private FakeFeatureFactory mFactory;
     private AssistGestureSettingsPreferenceController mController;
 
-    private static final String KEY_ASSIST = "gesture_assist";
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mFactory = FakeFeatureFactory.setupForTest();
-        mController = new AssistGestureSettingsPreferenceController(mContext, null, KEY_ASSIST,
-                false);
+        mController =
+            new AssistGestureSettingsPreferenceController(mContext, null, KEY_ASSIST, false);
     }
 
     @Test

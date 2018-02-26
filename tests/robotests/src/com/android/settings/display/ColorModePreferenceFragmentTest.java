@@ -16,7 +16,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
@@ -30,12 +29,9 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
-import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
 
 import org.junit.Before;
@@ -46,13 +42,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ColorModePreferenceFragmentTest {
 
     private ColorModePreferenceFragment mFragment;
@@ -63,7 +57,6 @@ public class ColorModePreferenceFragmentTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        SettingsShadowSystemProperties.clear();
 
         mFragment = spy(new ColorModePreferenceFragment());
         ReflectionHelpers.setField(mFragment, "mController", mController);
@@ -89,51 +82,45 @@ public class ColorModePreferenceFragmentTest {
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void getKey_natural() {
-        Mockito.when(mController.getColorMode()).thenReturn(
-                ColorDisplayController.COLOR_MODE_NATURAL);
+        Mockito.when(mController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_NATURAL);
 
         assertThat(mFragment.getDefaultKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void getKey_boosted() {
-        Mockito.when(mController.getColorMode()).thenReturn(
-                ColorDisplayController.COLOR_MODE_BOOSTED);
+        Mockito.when(mController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_BOOSTED);
 
         assertThat(mFragment.getDefaultKey())
                 .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void getKey_saturated() {
-        Mockito.when(mController.getColorMode()).thenReturn(
-                ColorDisplayController.COLOR_MODE_SATURATED);
+        Mockito.when(mController.getColorMode())
+            .thenReturn(ColorDisplayController.COLOR_MODE_SATURATED);
 
         assertThat(mFragment.getDefaultKey())
             .isEqualTo(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_natural() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_NATURAL);
         verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_NATURAL);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_boosted() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_BOOSTED);
         verify(mController).setColorMode(ColorDisplayController.COLOR_MODE_BOOSTED);
     }
 
-    @Config(shadows = {SettingsShadowSystemProperties.class})
     @Test
     public void setKey_saturated() {
         mFragment.setDefaultKey(ColorModePreferenceFragment.KEY_COLOR_MODE_SATURATED);

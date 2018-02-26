@@ -23,7 +23,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -33,14 +32,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link ImePreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class ImePreferenceControllerTest {
+public class ImePreferenceControllerTest {
 
     private static final String DEFAULT_IME_LABEL = "Test IME";
     private static final String DEFAULT_IME_TEXT = "Set to Test IME";

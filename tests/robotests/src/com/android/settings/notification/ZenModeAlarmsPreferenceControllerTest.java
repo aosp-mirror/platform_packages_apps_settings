@@ -20,9 +20,6 @@ import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
-
-import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,7 +31,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,14 +39,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeAlarmsPreferenceControllerTest {
+
+    private static final boolean ALARMS_SETTINGS = true;
+
     private ZenModeAlarmsPreferenceController mController;
 
     @Mock
@@ -67,8 +64,6 @@ public class ZenModeAlarmsPreferenceControllerTest {
     private Context mContext;
     private ContentResolver mContentResolver;
 
-    private final boolean ALARMS_SETTINGS = true;
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -81,8 +76,8 @@ public class ZenModeAlarmsPreferenceControllerTest {
         mController = new ZenModeAlarmsPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -126,8 +121,8 @@ public class ZenModeAlarmsPreferenceControllerTest {
         boolean allowAlarms = true;
         mController.onPreferenceChange(mockPref, allowAlarms);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS,
-                allowAlarms);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 
     @Test
@@ -135,7 +130,7 @@ public class ZenModeAlarmsPreferenceControllerTest {
         boolean allowAlarms = false;
         mController.onPreferenceChange(mockPref, allowAlarms);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS,
-                allowAlarms);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS, allowAlarms);
     }
 }

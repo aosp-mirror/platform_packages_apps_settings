@@ -21,7 +21,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.slices.FakePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -36,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PreferenceControllerListHelperTest {
 
     private Context mContext;
@@ -125,5 +123,4 @@ public class PreferenceControllerListHelperTest {
                 .filterControllers(controllers, filter);
         assertThat(result).isEmpty();
     }
-
 }

@@ -17,12 +17,12 @@
 package com.android.settings.fuelgauge.anomaly.checker;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.BatteryStats;
@@ -33,13 +33,12 @@ import android.util.ArraySet;
 
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
+import com.android.settings.fuelgauge.anomaly.AnomalyUtils;
 import com.android.settings.fuelgauge.anomaly.action.AnomalyAction;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -55,8 +53,8 @@ import java.util.List;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WakeupAlarmAnomalyDetectorTest {
+
     private static final String TARGET_PACKAGE_NAME = "com.android.target";
     private static final String ANOMALY_PACKAGE_NAME = "com.android.anomaly";
     private static final boolean TARGET_BACKGROUND_RESTRICTION_ON = false;
@@ -118,8 +116,8 @@ public class WakeupAlarmAnomalyDetectorTest {
         ReflectionHelpers.setField(mPolicy, "wakeupBlacklistedTags", blacklistedTags);
 
         doReturn(false).when(mBatteryUtils).shouldHideSipper(any());
-        doReturn(RUNNING_TIME_MS).when(mBatteryUtils).calculateRunningTimeBasedOnStatsType(any(),
-                anyInt());
+        doReturn(RUNNING_TIME_MS).when(mBatteryUtils)
+            .calculateRunningTimeBasedOnStatsType(any(), anyInt());
         doReturn(true).when(mAnomalyAction).isActionActive(any());
         doReturn(mAnomalyAction).when(mAnomalyUtils).getAnomalyAction(any());
 
@@ -134,7 +132,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         mUsageList.add(mAnomalySipper);
         mUsageList.add(mNormalSipper);
         mUsageList.add(mTargetSipper);
-        doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
+        when(mBatteryStatsHelper.getUsageList()).thenReturn(mUsageList);
 
         doReturn(TARGET_PACKAGE_NAME).when(mBatteryUtils).getPackageName(TARGET_UID);
         doReturn(ANOMALY_PACKAGE_NAME).when(mBatteryUtils).getPackageName(ANOMALY_UID);
@@ -162,20 +160,20 @@ public class WakeupAlarmAnomalyDetectorTest {
                 .setWakeupAlarmCount(ANOMALY_WAKEUP_FREQUENCY)
                 .build();
 
-        mWakeupAlarmAnomalyDetector = spy(
-                new WakeupAlarmAnomalyDetector(mContext, mPolicy, mAnomalyUtils));
+        mWakeupAlarmAnomalyDetector =
+            spy(new WakeupAlarmAnomalyDetector(mContext, mPolicy, mAnomalyUtils));
         mWakeupAlarmAnomalyDetector.mBatteryUtils = mBatteryUtils;
     }
 
     @Test
     public void testDetectAnomalies_containsAnomaly_detectIt() {
         doReturn(-1).when(mBatteryUtils).getPackageUid(nullable(String.class));
-        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mAnomalyUid);
-        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mTargetUid);
-        doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mNormalUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mAnomalyUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mTargetUid);
+        doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mNormalUid);
 
         List<Anomaly> mAnomalies = mWakeupAlarmAnomalyDetector.detectAnomalies(mBatteryStatsHelper);
 
@@ -185,15 +183,15 @@ public class WakeupAlarmAnomalyDetectorTest {
     @Test
     public void testDetectAnomalies_detectTargetAnomaly_detectIt() {
         doReturn(TARGET_UID).when(mBatteryUtils).getPackageUid(TARGET_PACKAGE_NAME);
-        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mAnomalyUid);
-        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mTargetUid);
-        doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector).getWakeupAlarmCountFromUid(
-                mNormalUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mAnomalyUid);
+        doReturn(ANOMALY_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mTargetUid);
+        doReturn(NORMAL_WAKEUP_COUNT).when(mWakeupAlarmAnomalyDetector)
+            .getWakeupAlarmCountFromUid(mNormalUid);
 
-        List<Anomaly> mAnomalies = mWakeupAlarmAnomalyDetector.detectAnomalies(mBatteryStatsHelper,
-                TARGET_PACKAGE_NAME);
+        List<Anomaly> mAnomalies = mWakeupAlarmAnomalyDetector
+            .detectAnomalies(mBatteryStatsHelper, TARGET_PACKAGE_NAME);
 
         assertThat(mAnomalies).containsExactly(mTargetAnomaly);
     }
@@ -209,8 +207,8 @@ public class WakeupAlarmAnomalyDetectorTest {
         alarms.put("1", mCounter);
         alarms.put("2", mCounter);
 
-        assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid)).isEqualTo(
-                2 * NORMAL_WAKEUP_COUNT);
+        assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid))
+            .isEqualTo(2 * NORMAL_WAKEUP_COUNT);
     }
 
     @Test
@@ -225,7 +223,7 @@ public class WakeupAlarmAnomalyDetectorTest {
         alarms.put("allowedTag", mCounter);
         alarms.put("blacklistedTag", mCounter2);
 
-        assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid)).isEqualTo(
-                NORMAL_WAKEUP_COUNT);
+        assertThat(mWakeupAlarmAnomalyDetector.getWakeupAlarmCountFromUid(mAnomalyUid))
+            .isEqualTo(NORMAL_WAKEUP_COUNT);
     }
 }

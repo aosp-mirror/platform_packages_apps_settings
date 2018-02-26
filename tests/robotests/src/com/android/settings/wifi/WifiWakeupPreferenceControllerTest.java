@@ -29,7 +29,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
@@ -38,16 +37,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = { SettingsShadowResources.class })
 public class WifiWakeupPreferenceControllerTest {
-
-    private static final String TEST_SCORER_PACKAGE_NAME = "Test Scorer";
 
     private Context mContext;
     private WifiWakeupPreferenceController mController;

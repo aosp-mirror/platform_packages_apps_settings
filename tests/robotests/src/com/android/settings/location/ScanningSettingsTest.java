@@ -22,33 +22,28 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ScanningSettingsTest {
 
     private Context mContext;
-    private ScanningSettings mSettings;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application;
-        mSettings = new ScanningSettings();
     }
 
     @Test
     public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = mSettings.SEARCH_INDEX_DATA_PROVIDER
+        final List<SearchIndexableResource> sir = ScanningSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(sir).hasSize(1);

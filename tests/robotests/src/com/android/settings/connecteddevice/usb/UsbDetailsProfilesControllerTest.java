@@ -17,7 +17,6 @@
 package com.android.settings.connecteddevice.usb;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,27 +24,20 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.usb.UsbManager;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.R;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
-
 import com.google.android.collect.Lists;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -55,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsbDetailsProfilesControllerTest {
 
     private UsbDetailsProfilesController mDetailsProfilesController;
@@ -238,7 +229,7 @@ public class UsbDetailsProfilesControllerTest {
     }
 
     private List<SwitchPreference> getProfileSwitches() {
-        ArrayList<SwitchPreference> result = new ArrayList<>();
+        List<SwitchPreference> result = new ArrayList<>();
         for (int i = 0; i < mPreference.getPreferenceCount(); i++) {
             result.add((SwitchPreference) mPreference.getPreference(i));
         }

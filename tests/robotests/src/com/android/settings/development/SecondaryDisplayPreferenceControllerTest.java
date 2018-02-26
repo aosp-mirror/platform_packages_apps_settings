@@ -17,17 +17,16 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.provider.Settings;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,10 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecondaryDisplayPreferenceControllerTest {
 
     @Mock
@@ -70,10 +67,9 @@ public class SecondaryDisplayPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(
-                R.array.overlay_display_devices_values);
-        mListSummaries = mContext.getResources().getStringArray(
-                R.array.overlay_display_devices_entries);
+        final Resources resources = mContext.getResources();
+        mListValues = resources.getStringArray(R.array.overlay_display_devices_values);
+        mListSummaries = resources.getStringArray(R.array.overlay_display_devices_entries);
         mController = new SecondaryDisplayPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);

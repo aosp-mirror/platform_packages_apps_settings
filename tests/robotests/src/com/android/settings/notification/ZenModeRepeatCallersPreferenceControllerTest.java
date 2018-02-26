@@ -20,9 +20,6 @@ import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
-
-import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,7 +31,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,14 +39,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeRepeatCallersPreferenceControllerTest {
+
+    private static final boolean REPEAT_CALLERS_SETTINGS = true;
+
     private ZenModeRepeatCallersPreferenceController mController;
 
     @Mock
@@ -65,8 +62,6 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
     private PreferenceScreen mPreferenceScreen;
     private ContentResolver mContentResolver;
     private Context mContext;
-
-    private final boolean REPEAT_CALLERS_SETTINGS = true;
 
     @Before
     public void setup() {
@@ -124,7 +119,6 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
 
     @Test
     public void updateState_Priority_anyCallers() {
-        boolean mockPriorityState = false;
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
         when(mBackend.isPriorityCategoryEnabled(NotificationManager.Policy.PRIORITY_CATEGORY_CALLS))
                 .thenReturn(true);
@@ -132,7 +126,7 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
                 NotificationManager.Policy.PRIORITY_SENDERS_ANY);
         when(mBackend.isPriorityCategoryEnabled(
                 NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS))
-                .thenReturn(mockPriorityState);
+                .thenReturn(false);
 
         mController.updateState(mockPref);
 
@@ -145,8 +139,8 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         boolean allow = true;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
     }
 
     @Test
@@ -154,7 +148,7 @@ public class ZenModeRepeatCallersPreferenceControllerTest {
         boolean allow = false;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REPEAT_CALLERS, allow);
     }
 }

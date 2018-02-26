@@ -21,12 +21,10 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -38,11 +36,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WebViewAppPreferenceControllerTest {
 
     @Mock
@@ -56,37 +52,33 @@ public class WebViewAppPreferenceControllerTest {
     @Mock
     private DefaultAppInfo mAppInfo;
 
-    private Context mContext;
     private WebViewAppPreferenceController mController;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = spy(new WebViewAppPreferenceController(mContext));
+        mController = spy(new WebViewAppPreferenceController(RuntimeEnvironment.application));
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
-        ReflectionHelpers.setField(mController, "mWebViewUpdateServiceWrapper",
-                mWebViewUpdateServiceWrapper);
+        ReflectionHelpers
+            .setField(mController, "mWebViewUpdateServiceWrapper", mWebViewUpdateServiceWrapper);
         doReturn(mAppInfo).when(mController).getDefaultAppInfo();
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
     @Test
     public void updateState_hasAppLabel_shouldSetAppLabelAndIcon() {
-        final String appLabel = "SomeRandomAppLabel!!!";
-        when(mAppInfo.loadLabel()).thenReturn(appLabel);
+        when(mAppInfo.loadLabel()).thenReturn("SomeRandomAppLabel!!!");
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(appLabel);
+        verify(mPreference).setSummary("SomeRandomAppLabel!!!");
     }
 
     @Test
     public void updateState_noAppLabel_shouldSetAppDefaultLabelAndNullIcon() {
-        final String appLabel = null;
-        when(mAppInfo.loadLabel()).thenReturn(appLabel);
+        when(mAppInfo.loadLabel()).thenReturn(null);
 
         mController.updateState(mPreference);
 

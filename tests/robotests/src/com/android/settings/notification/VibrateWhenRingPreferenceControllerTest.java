@@ -29,7 +29,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -38,11 +37,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VibrateWhenRingPreferenceControllerTest {
 
     @Mock
@@ -86,7 +82,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void updateState_settingIsOn_preferenceShouldBeChecked() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), VIBRATE_WHEN_RINGING, 1);
 
         mController = new VibrateWhenRingPreferenceController(context);
@@ -98,7 +94,7 @@ public class VibrateWhenRingPreferenceControllerTest {
     @Test
     public void updateState_settingIsOff_preferenceShouldNotBeChecked() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), VIBRATE_WHEN_RINGING, 0);
 
         mController = new VibrateWhenRingPreferenceController(context);

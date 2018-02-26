@@ -24,18 +24,17 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.ProcStatsData;
 import com.android.settings.applications.ProcessStatsDetail;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,13 +42,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowUserManager.class
-})
 public class AppMemoryPreferenceControllerTest {
 
     @Mock
@@ -68,7 +65,8 @@ public class AppMemoryPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        ShadowUserManager.getShadow().setIsAdminUser(true);
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        Shadows.shadowOf(userManager).setIsAdminUser(true);
         mController =
                 spy(new AppMemoryPreferenceController(mContext, mFragment, null /* lifecycle */));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -77,17 +75,13 @@ public class AppMemoryPreferenceControllerTest {
         when(mFragment.getActivity()).thenReturn(mActivity);
     }
 
-    @After
-    public void tearDown() {
-        ShadowUserManager.getShadow().reset();
-    }
-
     @Test
     public void getAvailabilityStatus_developmentSettingsEnabled_shouldReturnAvailable() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -96,7 +90,8 @@ public class AppMemoryPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
     @Test
@@ -105,7 +100,8 @@ public class AppMemoryPreferenceControllerTest {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_UNSUPPORTED);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
     @Test
@@ -114,7 +110,7 @@ public class AppMemoryPreferenceControllerTest {
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
 
         assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(mController.DISABLED_DEPENDENT_SETTING);
+                .isEqualTo(BasePreferenceController.DISABLED_DEPENDENT_SETTING);
     }
 
     @Test
@@ -131,5 +127,4 @@ public class AppMemoryPreferenceControllerTest {
         assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(ProcessStatsDetail.class.getName());
     }
-
 }

@@ -16,17 +16,15 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_DEBUG_APP;
-
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_DEBUG_APP;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
@@ -34,7 +32,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -44,11 +41,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SelectDebugAppPreferenceControllerTest {
 
     @Mock
@@ -68,10 +63,10 @@ public class SelectDebugAppPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = spy(new SelectDebugAppPreferenceController(mContext, mFragment));
-        ReflectionHelpers.setField(mController, "mPackageManager" /* field name */,
-                mPackageManagerWrapper);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        ReflectionHelpers
+            .setField(mController, "mPackageManager" /* field name */, mPackageManagerWrapper);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -89,23 +84,21 @@ public class SelectDebugAppPreferenceControllerTest {
     @Test
     public void updateState_foobarAppSelected_shouldUpdateSummaryWithDebugAppLabel() {
         final String debugApp = "foobar";
-        Settings.Global.putString(mContext.getContentResolver(), Settings.Global.DEBUG_APP,
-                debugApp);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.Global.putString(contentResolver, Settings.Global.DEBUG_APP, debugApp);
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.debug_app_set, debugApp));
+        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_set, debugApp));
     }
 
     @Test
     public void updateState_noAppSelected_shouldUpdateSummaryWithNoAppSelected() {
         final String debugApp = null;
-        Settings.Global.putString(mContext.getContentResolver(), Settings.Global.DEBUG_APP,
-                debugApp);
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.Global.putString(contentResolver, Settings.Global.DEBUG_APP, debugApp);
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.debug_app_not_set));
+        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_not_set));
     }
 
     @Test
@@ -113,12 +106,11 @@ public class SelectDebugAppPreferenceControllerTest {
         Intent activityResultIntent = new Intent(mContext, AppPicker.class);
         final String appLabel = "foobar";
         activityResultIntent.setAction(appLabel);
-        final boolean result = mController.onActivityResult(REQUEST_CODE_DEBUG_APP,
-                Activity.RESULT_OK, activityResultIntent);
+        final boolean result = mController
+            .onActivityResult(REQUEST_CODE_DEBUG_APP, Activity.RESULT_OK, activityResultIntent);
 
         assertThat(result).isTrue();
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.debug_app_set, appLabel));
+        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_set, appLabel));
     }
 
     @Test
@@ -132,7 +124,6 @@ public class SelectDebugAppPreferenceControllerTest {
         mController.onDeveloperOptionsSwitchDisabled();
 
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.debug_app_not_set));
+        verify(mPreference).setSummary(mContext.getString(R.string.debug_app_not_set));
     }
 }

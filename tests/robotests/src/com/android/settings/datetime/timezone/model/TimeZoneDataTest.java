@@ -16,29 +16,25 @@
 
 package com.android.settings.datetime.timezone.model;
 
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import libcore.util.CountryTimeZones;
-import libcore.util.CountryZonesFinder;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
+
+import libcore.util.CountryTimeZones;
+import libcore.util.CountryTimeZones.TimeZoneMapping;
+import libcore.util.CountryZonesFinder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.junit.Assert.assertSame;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TimeZoneDataTest {
 
     private CountryZonesFinder mCountryZonesFinder;
@@ -61,7 +57,7 @@ public class TimeZoneDataTest {
 
     @Test
     public void testGetRegionIds() {
-        when(mCountryZonesFinder.lookupAllCountryIsoCodes()).thenReturn(Arrays.asList());
+        when(mCountryZonesFinder.lookupAllCountryIsoCodes()).thenReturn(Collections.emptyList());
         TimeZoneData timeZoneData = new TimeZoneData(mCountryZonesFinder);
         assertThat(timeZoneData.getRegionIds()).isEmpty();
 
@@ -82,8 +78,8 @@ public class TimeZoneDataTest {
         ));
         CountryTimeZones GB = mock(CountryTimeZones.class);
         when(GB.getCountryIso()).thenReturn("gb");
-        when(GB.getTimeZoneMappings()).thenReturn(Arrays.asList(
-           new CountryTimeZones.TimeZoneMapping("Unknown/Secret_City", true)
+        when(GB.getTimeZoneMappings()).thenReturn(Collections.singletonList(
+            new TimeZoneMapping("Unknown/Secret_City", true)
         ));
         when(mCountryZonesFinder.lookupCountryTimeZonesForZoneId("Unknown/Secret_City"))
                 .thenReturn(Arrays.asList(US, GB));

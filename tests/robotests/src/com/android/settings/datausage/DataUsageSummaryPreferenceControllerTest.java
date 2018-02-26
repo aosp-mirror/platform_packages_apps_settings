@@ -16,15 +16,17 @@
 
 package com.android.settings.datausage;
 
-import static org.mockito.Mockito.spy;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkTemplate;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
@@ -35,17 +37,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.concurrent.TimeUnit;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageSummaryPreferenceControllerTest {
+
     private static final long UPDATE_BACKOFF_MS = TimeUnit.MINUTES.toMillis(13);
     private static final long CYCLE_BACKOFF_MS = TimeUnit.DAYS.toMillis(6);
     private static final long CYCLE_LENGTH_MS = TimeUnit.DAYS.toMillis(30);

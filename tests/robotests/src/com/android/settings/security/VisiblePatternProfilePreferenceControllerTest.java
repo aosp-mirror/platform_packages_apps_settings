@@ -16,7 +16,6 @@
 
 package com.android.settings.security;
 
-
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_ALPHABETIC;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_SOMETHING;
 import static android.app.admin.DevicePolicyManager.PASSWORD_QUALITY_UNSPECIFIED;
@@ -34,7 +33,6 @@ import android.hardware.fingerprint.FingerprintManager;
 import android.os.UserManager;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -45,11 +43,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VisiblePatternProfilePreferenceControllerTest {
 
     private static final int FAKE_PROFILE_USER_ID = 1234;
@@ -75,9 +71,9 @@ public class VisiblePatternProfilePreferenceControllerTest {
         mContext = spy(RuntimeEnvironment.application);
         when(mContext.getPackageManager()).thenReturn(mPackageManager);
         when(mPackageManager.hasSystemFeature(PackageManager.FEATURE_FINGERPRINT)).thenReturn(true);
-        ShadowApplication.getInstance().setSystemService(Context.FINGERPRINT_SERVICE,
-                mFingerprintManager);
-        ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUm);
+        final ShadowApplication application = ShadowApplication.getInstance();
+        application.setSystemService(Context.FINGERPRINT_SERVICE, mFingerprintManager);
+        application.setSystemService(Context.USER_SERVICE, mUm);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getLockPatternUtils(mContext))

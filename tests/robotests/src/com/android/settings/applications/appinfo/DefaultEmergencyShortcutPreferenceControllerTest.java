@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.spy;
@@ -29,7 +28,6 @@ import android.content.pm.ResolveInfo;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -38,13 +36,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultEmergencyShortcutPreferenceControllerTest {
 
     @Mock
@@ -94,5 +90,4 @@ public class DefaultEmergencyShortcutPreferenceControllerTest {
     public void isDefaultApp_notDefaultEmergency_shouldReturnFalse() {
         assertThat(mController.isDefaultApp()).isFalse();
     }
-
 }

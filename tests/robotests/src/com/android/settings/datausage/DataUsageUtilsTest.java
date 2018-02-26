@@ -22,20 +22,21 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class DataUsageUtilsTest {
-    @Mock private ConnectivityManager mManager;
+
+    @Mock
+    private ConnectivityManager mManager;
     private Context mContext;
 
     @Before

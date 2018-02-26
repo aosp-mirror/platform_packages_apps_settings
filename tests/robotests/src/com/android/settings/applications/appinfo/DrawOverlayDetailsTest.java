@@ -16,26 +16,23 @@
 
 package com.android.settings.applications.appinfo;
 
+import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import static android.view.WindowManager.LayoutParams.PRIVATE_FLAG_HIDE_NON_SYSTEM_OVERLAY_WINDOWS;
-
 import android.app.Activity;
 import android.content.Context;
-
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
-
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowAppInfoBase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,11 +41,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DrawOverlayDetailsTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -74,8 +70,7 @@ public class DrawOverlayDetailsTest {
 
     @Test
     public void logSpecialPermissionChange() {
-        when(mFragment.getContext()).thenReturn(
-                ShadowApplication.getInstance().getApplicationContext());
+        when(mFragment.getContext()).thenReturn(RuntimeEnvironment.application);
 
         mFragment.logSpecialPermissionChange(true, "app");
         verify(mFeatureFactory.metricsFeatureProvider).action(nullable(Context.class),

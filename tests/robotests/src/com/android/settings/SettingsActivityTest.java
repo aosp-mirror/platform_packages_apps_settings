@@ -38,10 +38,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SettingsActivityTest {
 
     @Mock
@@ -61,8 +59,7 @@ public class SettingsActivityTest {
     }
 
     @Test
-    public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash()
-            throws ClassNotFoundException {
+    public void launchSettingFragment_nullExtraShowFragment_shouldNotCrash() {
         when(mActivity.getFragmentManager()).thenReturn(mFragmentManager);
         when(mFragmentManager.beginTransaction()).thenReturn(mock(FragmentTransaction.class));
 

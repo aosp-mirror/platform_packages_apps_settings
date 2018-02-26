@@ -26,7 +26,6 @@ import android.util.AttributeSet;
 import android.util.Xml;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.core.PreferenceXmlParserUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -49,7 +48,6 @@ import java.util.List;
  * with another preference with a matchin replacement attribute.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PreferenceXmlParserUtilTest {
 
     private Context mContext;
@@ -118,8 +116,8 @@ public class PreferenceXmlParserUtilTest {
         String entries = PreferenceXmlParserUtils.getDataEntries(mContext, attrs);
         String[] expEntries = mContext.getResources()
                 .getStringArray(R.array.app_install_location_entries);
-        for (int i = 0; i < expEntries.length; i++) {
-            assertThat(entries).contains(expEntries[i]);
+        for (String expEntry : expEntries) {
+            assertThat(entries).contains(expEntry);
         }
     }
 
@@ -171,8 +169,8 @@ public class PreferenceXmlParserUtilTest {
     @Config(qualifiers = "mcc999")
     public void extractMetadata_shouldContainKeyAndControllerName()
             throws IOException, XmlPullParserException {
-        final List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
-                R.xml.location_settings);
+        final List<Bundle> metadata =
+            PreferenceXmlParserUtils.extractMetadata(mContext, R.xml.location_settings);
 
         assertThat(metadata).isNotEmpty();
         for (Bundle bundle : metadata) {

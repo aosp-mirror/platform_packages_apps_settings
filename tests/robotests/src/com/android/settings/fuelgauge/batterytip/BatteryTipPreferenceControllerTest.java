@@ -15,16 +15,14 @@
  */
 package com.android.settings.fuelgauge.batterytip;
 
-import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
-        .SMART_BATTERY_MANAGER;
-
+import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType.SMART_BATTERY_MANAGER;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.support.v7.preference.Preference;
@@ -35,7 +33,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -48,14 +45,13 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipPreferenceControllerTest {
+
     private static final String KEY_PREF = "battery_tip";
     private static final String KEY_TIP = "key_battery_tip";
     @Mock
@@ -83,8 +79,8 @@ public class BatteryTipPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
 
         mPreferenceGroup = spy(new PreferenceCategory(mContext));
-        doReturn(mContext).when(mPreferenceScreen).getContext();
-        doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
+        when(mPreferenceScreen.getContext()).thenReturn(mContext);
+        when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mPreferenceGroup).when(mPreferenceScreen).findPreference(KEY_PREF);
         mPreference = new Preference(mContext);
         mPreference.setKey(KEY_TIP);
@@ -130,7 +126,7 @@ public class BatteryTipPreferenceControllerTest {
 
     @Test
     public void testHandlePreferenceTreeClick_noDialog_invokeCallback() {
-        doReturn(SMART_BATTERY_MANAGER).when(mBatteryTip).getType();
+        when(mBatteryTip.getType()).thenReturn(SMART_BATTERY_MANAGER);
         List<BatteryTip> batteryTips = new ArrayList<>();
         batteryTips.add(mBatteryTip);
         doReturn(mPreference).when(mBatteryTip).buildPreference(any());

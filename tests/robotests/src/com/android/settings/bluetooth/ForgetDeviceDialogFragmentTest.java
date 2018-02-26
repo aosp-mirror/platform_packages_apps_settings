@@ -27,7 +27,6 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.app.AlertDialog;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -39,11 +38,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ForgetDeviceDialogFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)

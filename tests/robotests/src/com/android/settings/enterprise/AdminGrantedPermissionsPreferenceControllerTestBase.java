@@ -41,8 +41,9 @@ import org.mockito.stubbing.Answer;
  * Common base for testing subclasses of {@link AdminGrantedPermissionsPreferenceControllerBase}.
  */
 public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
-    protected final String mKey;
-    protected final String[] mPermissions;
+
+    private final String mKey;
+    final String[] mPermissions;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
@@ -50,7 +51,7 @@ public abstract class AdminGrantedPermissionsPreferenceControllerTestBase {
 
     protected AdminGrantedPermissionsPreferenceControllerBase mController;
 
-    public AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions) {
+    AdminGrantedPermissionsPreferenceControllerTestBase(String key, String[] permissions) {
         mKey = key;
         mPermissions = permissions;
     }

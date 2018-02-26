@@ -17,13 +17,11 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 import android.text.format.DateUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -36,14 +34,13 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryDatabaseManagerTest {
+
     private static String PACKAGE_NAME_NEW = "com.android.app1";
     private static int TYPE_NEW = 1;
     private static String PACKAGE_NAME_OLD = "com.android.app2";

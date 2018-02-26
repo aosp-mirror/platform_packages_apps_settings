@@ -16,12 +16,16 @@
 
 package com.android.settings.applications.defaultapps;
 
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -30,16 +34,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultBrowserPickerTest {
 
     private static final String TEST_APP_KEY = "";
@@ -67,14 +64,12 @@ public class DefaultBrowserPickerTest {
     @Test
     public void setDefaultAppKey_shouldUpdateDefaultBrowser() {
         mPicker.setDefaultKey(TEST_APP_KEY);
-        verify(mPackageManager)
-                .setDefaultBrowserPackageNameAsUser(eq(TEST_APP_KEY), anyInt());
+        verify(mPackageManager).setDefaultBrowserPackageNameAsUser(eq(TEST_APP_KEY), anyInt());
     }
 
     @Test
     public void getDefaultAppKey_shouldReturnDefaultBrowser() {
         mPicker.getDefaultKey();
-        verify(mPackageManager)
-                .getDefaultBrowserPackageNameAsUser(anyInt());
+        verify(mPackageManager).getDefaultBrowserPackageNameAsUser(anyInt());
     }
 }

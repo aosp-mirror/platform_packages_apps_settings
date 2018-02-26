@@ -17,9 +17,7 @@
 package com.android.settings.deviceinfo.storage;
 
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -34,7 +32,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.SparseArray;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -47,14 +44,13 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecondaryUserControllerTest {
+
     private static final String TEST_NAME = "Fred";
     private static final String TARGET_PREFERENCE_GROUP_KEY = "pref_secondary_users";
     @Mock
@@ -82,7 +78,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void controllerAddsSecondaryUser() throws Exception {
+    public void controllerAddsSecondaryUser() {
         mPrimaryUser.name = TEST_NAME;
         mController.displayPreference(mScreen);
 
@@ -93,7 +89,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void controllerUpdatesSummaryOfNewPreference() throws Exception {
+    public void controllerUpdatesSummaryOfNewPreference() {
         mPrimaryUser.name = TEST_NAME;
         mController.displayPreference(mScreen);
         mController.setSize(MEGABYTE_IN_BYTES * 10);
@@ -106,7 +102,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void noSecondaryUserAddedIfNoneExist() throws Exception {
+    public void noSecondaryUserAddedIfNoneExist() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         userInfos.add(mPrimaryUser);
         when(mUserManager.getPrimaryUser()).thenReturn(mPrimaryUser);
@@ -120,7 +116,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void secondaryUserAddedIfHasDistinctId() throws Exception {
+    public void secondaryUserAddedIfHasDistinctId() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = 10;
@@ -137,7 +133,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void profilesOfPrimaryUserAreNotIgnored() throws Exception {
+    public void profilesOfPrimaryUserAreNotIgnored() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         final UserInfo secondaryUser = new UserInfo();
         secondaryUser.id = mPrimaryUser.id;
@@ -155,7 +151,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void controllerUpdatesPreferenceOnAcceptingResult() throws Exception {
+    public void controllerUpdatesPreferenceOnAcceptingResult() {
         mPrimaryUser.name = TEST_NAME;
         mPrimaryUser.id = 10;
         mController.displayPreference(mScreen);
@@ -179,7 +175,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void dontAddPrimaryProfileAsASecondaryProfile() throws Exception {
+    public void dontAddPrimaryProfileAsASecondaryProfile() {
         final ArrayList<UserInfo> userInfos = new ArrayList<>();
         // The primary UserInfo may be a different object with a different name... but represent the
         // same user!
@@ -198,7 +194,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void iconCallbackChangesPreferenceIcon() throws Exception {
+    public void iconCallbackChangesPreferenceIcon() {
         final SparseArray<Drawable> icons = new SparseArray<>();
         final UserIconDrawable drawable = mock(UserIconDrawable.class);
         when(drawable.mutate()).thenReturn(drawable);
@@ -216,7 +212,7 @@ public class SecondaryUserControllerTest {
     }
 
     @Test
-    public void setIcon_doesntNpeOnNullPreference() throws Exception {
+    public void setIcon_doesntNpeOnNullPreference() {
         final SparseArray<Drawable> icons = new SparseArray<>();
         final UserIconDrawable drawable = mock(UserIconDrawable.class);
         mPrimaryUser.name = TEST_NAME;

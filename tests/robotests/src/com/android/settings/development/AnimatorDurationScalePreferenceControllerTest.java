@@ -16,11 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.AnimatorDurationScalePreferenceController
-        .ANIMATOR_DURATION_SCALE_SELECTOR;
-import static com.android.settings.development.AnimatorDurationScalePreferenceController
-        .DEFAULT_VALUE;
-
+import static com.android.settings.development.AnimatorDurationScalePreferenceController.ANIMATOR_DURATION_SCALE_SELECTOR;
+import static com.android.settings.development.AnimatorDurationScalePreferenceController.DEFAULT_VALUE;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +28,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -40,11 +36,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnimatorDurationScalePreferenceControllerTest {
 
     @Mock
@@ -72,10 +66,10 @@ public class AnimatorDurationScalePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(
-                R.array.animator_duration_scale_values);
-        mListSummaries = mContext.getResources().getStringArray(
-                R.array.animator_duration_scale_entries);
+        mListValues = mContext.getResources()
+            .getStringArray(R.array.animator_duration_scale_values);
+        mListSummaries = mContext.getResources()
+            .getStringArray(R.array.animator_duration_scale_entries);
         mController = new AnimatorDurationScalePreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mWindowManager", mWindowManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -99,8 +93,8 @@ public class AnimatorDurationScalePreferenceControllerTest {
 
     @Test
     public void updateState_option5Set_shouldUpdatePreferenceToOption5() throws RemoteException {
-        when(mWindowManager.getAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR)).thenReturn(
-                Float.valueOf(mListValues[5]));
+        when(mWindowManager.getAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR))
+            .thenReturn(Float.valueOf(mListValues[5]));
 
         mController.updateState(mPreference);
 
@@ -110,8 +104,8 @@ public class AnimatorDurationScalePreferenceControllerTest {
 
     @Test
     public void updateState_option3Set_shouldUpdatePreferenceToOption3() throws RemoteException {
-        when(mWindowManager.getAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR)).thenReturn(
-                Float.valueOf(mListValues[3]));
+        when(mWindowManager.getAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR))
+            .thenReturn(Float.valueOf(mListValues[3]));
 
         mController.updateState(mPreference);
 

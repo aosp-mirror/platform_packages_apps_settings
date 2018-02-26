@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.eq;
@@ -26,7 +25,6 @@ import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryDatabaseManager;
@@ -42,14 +40,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RestrictAppDetectorTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private Context mContext;
     private BatteryTipPolicy mPolicy;
@@ -63,9 +60,7 @@ public class RestrictAppDetectorTest {
         MockitoAnnotations.initMocks(this);
 
         mAppInfoList = new ArrayList<>();
-        mAppInfoList.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME)
-                .build());
+        mAppInfoList.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME).build());
 
         mContext = RuntimeEnvironment.application;
         mPolicy = spy(new BatteryTipPolicy(mContext));
@@ -80,30 +75,30 @@ public class RestrictAppDetectorTest {
 
     @Test
     public void testDetect_hasAnomaly_tipNew() {
-        doReturn(mAppInfoList).when(mBatteryDatabaseManager).queryAllAnomalies(anyLong(),
-                eq(AnomalyDatabaseHelper.State.NEW));
+        doReturn(mAppInfoList).when(mBatteryDatabaseManager)
+            .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.NEW));
 
         assertThat(mRestrictAppDetector.detect().getState()).isEqualTo(BatteryTip.StateType.NEW);
     }
 
     @Test
     public void testDetect_hasAutoHandledAnomaly_tipHandled() {
-        doReturn(new ArrayList<AppInfo>()).when(mBatteryDatabaseManager).queryAllAnomalies(
-                anyLong(), eq(AnomalyDatabaseHelper.State.NEW));
-        doReturn(mAppInfoList).when(mBatteryDatabaseManager).queryAllAnomalies(anyLong(),
-                eq(AnomalyDatabaseHelper.State.AUTO_HANDLED));
+        doReturn(new ArrayList<AppInfo>()).when(mBatteryDatabaseManager)
+            .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.NEW));
+        doReturn(mAppInfoList).when(mBatteryDatabaseManager)
+            .queryAllAnomalies(anyLong(), eq(AnomalyDatabaseHelper.State.AUTO_HANDLED));
 
-        assertThat(mRestrictAppDetector.detect().getState()).isEqualTo(
-                BatteryTip.StateType.HANDLED);
+        assertThat(mRestrictAppDetector.detect().getState())
+            .isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test
     public void testDetect_noAnomaly_tipInvisible() {
-        doReturn(new ArrayList<AppInfo>()).when(mBatteryDatabaseManager).queryAllAnomalies(
-                anyLong(), anyInt());
+        doReturn(new ArrayList<AppInfo>()).when(mBatteryDatabaseManager)
+            .queryAllAnomalies(anyLong(), anyInt());
 
-        assertThat(mRestrictAppDetector.detect().getState()).isEqualTo(
-                BatteryTip.StateType.INVISIBLE);
+        assertThat(mRestrictAppDetector.detect().getState())
+            .isEqualTo(BatteryTip.StateType.INVISIBLE);
     }
 
     @Test

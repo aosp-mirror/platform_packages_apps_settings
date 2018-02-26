@@ -16,36 +16,28 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.media.RingtoneManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationRingtonePreferenceControllerTest {
 
-    private Context mContext;
     private NotificationRingtonePreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = new NotificationRingtonePreferenceController(mContext);
+        mController = new NotificationRingtonePreferenceController(RuntimeEnvironment.application);
     }
 
     @Test
@@ -63,5 +55,4 @@ public class NotificationRingtonePreferenceControllerTest {
     public void getRingtoneType_shouldReturnNotification() {
         assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_NOTIFICATION);
     }
-
 }

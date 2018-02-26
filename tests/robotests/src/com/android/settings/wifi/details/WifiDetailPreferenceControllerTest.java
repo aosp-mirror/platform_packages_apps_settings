@@ -16,14 +16,11 @@
 package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
@@ -63,7 +60,6 @@ import android.widget.ImageView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowBidiFormatter;
@@ -99,13 +95,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowDevicePolicyManagerWrapper.class,
-                ShadowEntityHeaderController.class,
-                ShadowPackageManagerWrapper.class,
-                ShadowBidiFormatter.class
-        })
+@Config(shadows = {
+    ShadowDevicePolicyManagerWrapper.class,
+    ShadowEntityHeaderController.class,
+    ShadowPackageManagerWrapper.class,
+    ShadowBidiFormatter.class
+})
 public class WifiDetailPreferenceControllerTest {
 
     private static final int LEVEL = 1;
@@ -117,41 +112,69 @@ public class WifiDetailPreferenceControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceScreen mockScreen;
 
-    @Mock private AccessPoint mockAccessPoint;
-    @Mock private Activity mockActivity;
-    @Mock private ConnectivityManager mockConnectivityManager;
-    @Mock private ConnectivityManagerWrapper mockConnectivityManagerWrapper;
-    @Mock private Network mockNetwork;
-    @Mock private NetworkInfo mockNetworkInfo;
-    @Mock private WifiConfiguration mockWifiConfig;
-    @Mock private WifiInfo mockWifiInfo;
-    @Mock private WifiNetworkDetailsFragment mockFragment;
-    @Mock private WifiManager mockWifiManager;
-    @Mock private MetricsFeatureProvider mockMetricsFeatureProvider;
-    @Mock private WifiDetailPreferenceController.IconInjector mockIconInjector;
+    @Mock
+    private AccessPoint mockAccessPoint;
+    @Mock
+    private Activity mockActivity;
+    @Mock
+    private ConnectivityManager mockConnectivityManager;
+    @Mock
+    private ConnectivityManagerWrapper mockConnectivityManagerWrapper;
+    @Mock
+    private Network mockNetwork;
+    @Mock
+    private NetworkInfo mockNetworkInfo;
+    @Mock
+    private WifiConfiguration mockWifiConfig;
+    @Mock
+    private WifiInfo mockWifiInfo;
+    @Mock
+    private WifiNetworkDetailsFragment mockFragment;
+    @Mock
+    private WifiManager mockWifiManager;
+    @Mock
+    private MetricsFeatureProvider mockMetricsFeatureProvider;
+    @Mock
+    private WifiDetailPreferenceController.IconInjector mockIconInjector;
 
-    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private EntityHeaderController mockHeaderController;
-    @Mock (answer = Answers.RETURNS_DEEP_STUBS)
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private LayoutPreference mockHeaderLayoutPreference;
-    @Mock private ImageView mockHeaderIcon;
+    @Mock
+    private ImageView mockHeaderIcon;
 
-    @Mock private ActionButtonPreference mockButtonsPref;
-    @Mock private WifiDetailPreference mockSignalStrengthPref;
-    @Mock private WifiDetailPreference mockLinkSpeedPref;
-    @Mock private WifiDetailPreference mockFrequencyPref;
-    @Mock private WifiDetailPreference mockSecurityPref;
-    @Mock private WifiDetailPreference mockMacAddressPref;
-    @Mock private WifiDetailPreference mockIpAddressPref;
-    @Mock private WifiDetailPreference mockGatewayPref;
-    @Mock private WifiDetailPreference mockSubnetPref;
-    @Mock private WifiDetailPreference mockDnsPref;
-    @Mock private PreferenceCategory mockIpv6Category;
-    @Mock private WifiDetailPreference mockIpv6AddressesPref;
+    @Mock
+    private ActionButtonPreference mockButtonsPref;
+    @Mock
+    private WifiDetailPreference mockSignalStrengthPref;
+    @Mock
+    private WifiDetailPreference mockLinkSpeedPref;
+    @Mock
+    private WifiDetailPreference mockFrequencyPref;
+    @Mock
+    private WifiDetailPreference mockSecurityPref;
+    @Mock
+    private WifiDetailPreference mockMacAddressPref;
+    @Mock
+    private WifiDetailPreference mockIpAddressPref;
+    @Mock
+    private WifiDetailPreference mockGatewayPref;
+    @Mock
+    private WifiDetailPreference mockSubnetPref;
+    @Mock
+    private WifiDetailPreference mockDnsPref;
+    @Mock
+    private PreferenceCategory mockIpv6Category;
+    @Mock
+    private WifiDetailPreference mockIpv6AddressesPref;
 
-    @Captor private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
-    @Captor private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
-    @Captor private ArgumentCaptor<Preference> mIpv6AddressCaptor;
+    @Captor
+    private ArgumentCaptor<NetworkCallback> mCallbackCaptor;
+    @Captor
+    private ArgumentCaptor<View.OnClickListener> mForgetClickListener;
+    @Captor
+    private ArgumentCaptor<Preference> mIpv6AddressCaptor;
 
     private Context mContext;
     private Lifecycle mLifecycle;
@@ -348,8 +371,8 @@ public class WifiDetailPreferenceControllerTest {
         displayAndResume();
         mController.onPause();
 
-        verify(mockConnectivityManager, times(1)).unregisterNetworkCallback(
-                mCallbackCaptor.getValue());
+        verify(mockConnectivityManager, times(1))
+            .unregisterNetworkCallback(mCallbackCaptor.getValue());
     }
 
     @Test
@@ -472,8 +495,7 @@ public class WifiDetailPreferenceControllerTest {
     @Test
     public void noLinkProperties_allIpDetailsHidden() {
         when(mockConnectivityManager.getLinkProperties(mockNetwork)).thenReturn(null);
-        reset(mockIpv6Category, mockIpAddressPref, mockSubnetPref, mockGatewayPref,
-                mockDnsPref);
+        reset(mockIpv6Category, mockIpAddressPref, mockSubnetPref, mockGatewayPref, mockDnsPref);
 
         displayAndResume();
 

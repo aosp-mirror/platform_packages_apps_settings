@@ -17,13 +17,10 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
-import android.content.Context;
 import android.text.format.DateUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -34,13 +31,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LowBatteryDetectorTest {
-    private Context mContext;
+
     @Mock
     private BatteryInfo mBatteryInfo;
     private BatteryTipPolicy mPolicy;
@@ -50,8 +45,7 @@ public class LowBatteryDetectorTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mPolicy = spy(new BatteryTipPolicy(mContext));
+        mPolicy = spy(new BatteryTipPolicy(RuntimeEnvironment.application));
         ReflectionHelpers.setField(mPolicy, "lowBatteryEnabled", true);
 
         mLowBatteryDetector = new LowBatteryDetector(mPolicy, mBatteryInfo);
@@ -67,7 +61,7 @@ public class LowBatteryDetectorTest {
     @Test
     public void testDetect_shortBatteryLife_tipVisible() {
         mBatteryInfo.discharging = true;
-        mBatteryInfo.remainingTimeUs = 1 * DateUtils.MINUTE_IN_MILLIS;
+        mBatteryInfo.remainingTimeUs = DateUtils.MINUTE_IN_MILLIS;
 
         assertThat(mLowBatteryDetector.detect().isVisible()).isTrue();
     }
@@ -75,7 +69,7 @@ public class LowBatteryDetectorTest {
     @Test
     public void testDetect_longBatteryLife_tipInvisible() {
         mBatteryInfo.discharging = true;
-        mBatteryInfo.remainingTimeUs = 1 * DateUtils.DAY_IN_MILLIS;
+        mBatteryInfo.remainingTimeUs = DateUtils.DAY_IN_MILLIS;
 
         assertThat(mLowBatteryDetector.detect().isVisible()).isFalse();
     }

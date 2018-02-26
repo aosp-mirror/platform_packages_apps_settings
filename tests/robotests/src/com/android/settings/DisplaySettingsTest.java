@@ -2,8 +2,6 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.mock;
-
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -20,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DisplaySettingsTest {
 
     @Test

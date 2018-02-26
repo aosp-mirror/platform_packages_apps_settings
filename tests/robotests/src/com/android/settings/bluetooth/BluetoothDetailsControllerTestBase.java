@@ -29,7 +29,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -39,11 +38,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDetailsControllerTestBase {
+
     protected Context mContext;
     private LifecycleOwner mLifecycleOwner;
     protected Lifecycle mLifecycle;
@@ -82,58 +80,60 @@ public class BluetoothDetailsControllerTestBase {
     }
 
     protected static class DeviceConfig {
+
         private String name;
         private String address;
         private int majorDeviceClass;
         private boolean connected;
         private String connectionSummary;
 
-        public DeviceConfig setName(String newValue) {
+        DeviceConfig setName(String newValue) {
             this.name = newValue;
             return this;
         }
 
-        public DeviceConfig setAddress(String newValue) {
+        DeviceConfig setAddress(String newValue) {
             this.address = newValue;
             return this;
         }
 
-        public DeviceConfig setMajorDeviceClass(int newValue) {
+        DeviceConfig setMajorDeviceClass(int newValue) {
             this.majorDeviceClass = newValue;
             return this;
         }
 
-        public DeviceConfig setConnected(boolean newValue) {
+        DeviceConfig setConnected(boolean newValue) {
             this.connected = newValue;
             return this;
         }
-        public DeviceConfig setConnectionSummary(String connectionSummary) {
+
+        DeviceConfig setConnectionSummary(String connectionSummary) {
             this.connectionSummary = connectionSummary;
             return this;
         }
 
-        public String getName() {
+        String getName() {
             return name;
         }
 
-        public String getAddress() {
+        String getAddress() {
             return address;
         }
 
-        public int getMajorDeviceClass() {
+        int getMajorDeviceClass() {
             return majorDeviceClass;
         }
 
-        public boolean isConnected() {
+        boolean isConnected() {
             return connected;
         }
 
-        public String getConnectionSummary() {
+        String getConnectionSummary() {
             return connectionSummary;
         }
     }
 
-    protected DeviceConfig makeDefaultDeviceConfig() {
+    DeviceConfig makeDefaultDeviceConfig() {
         return new DeviceConfig()
                 .setName("Mock Device")
                 .setAddress("B4:B0:34:B5:3B:1B")
@@ -144,9 +144,8 @@ public class BluetoothDetailsControllerTestBase {
 
     /**
      * Sets up the device mock to return various state based on a test config.
-     * @param config
      */
-    protected void setupDevice(DeviceConfig config) {
+    void setupDevice(DeviceConfig config) {
         when(mCachedDevice.getName()).thenReturn(config.getName());
         when(mBluetoothDeviceClass.getMajorDeviceClass()).thenReturn(config.getMajorDeviceClass());
         when(mCachedDevice.isConnected()).thenReturn(config.isConnected());
@@ -160,7 +159,7 @@ public class BluetoothDetailsControllerTestBase {
     /**
      * Convenience method to call displayPreference and onResume.
      */
-    protected void showScreen(BluetoothDetailsController controller) {
+    void showScreen(BluetoothDetailsController controller) {
         controller.displayPreference(mScreen);
         controller.onResume();
     }

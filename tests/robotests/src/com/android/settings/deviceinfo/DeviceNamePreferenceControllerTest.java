@@ -17,10 +17,8 @@
 package com.android.settings.deviceinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,7 +29,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.ValidatedEditTextPreference;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -44,12 +41,9 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DeviceNamePreferenceControllerTest {
     private static final String TESTING_STRING = "Testing";
 
@@ -90,8 +84,8 @@ public class DeviceNamePreferenceControllerTest {
 
     @Test
     public void constructor_deviceNameLoadedIfSet() {
-        Settings.Global.putString(mContext.getContentResolver(), Settings.Global.DEVICE_NAME,
-                "Test");
+        Settings.Global
+            .putString(mContext.getContentResolver(), Settings.Global.DEVICE_NAME, "Test");
         mController = new DeviceNamePreferenceController(mContext);
         mController.setLocalBluetoothManager(mBluetoothManager);
         assertThat(mController.getSummary()).isEqualTo("Test");

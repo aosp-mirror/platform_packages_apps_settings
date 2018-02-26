@@ -15,11 +15,15 @@
  */
 package com.android.settings.fuelgauge;
 
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.os.PowerManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -28,17 +32,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatterySaverControllerTest {
+
     @Mock
     private MasterSwitchPreference mBatterySaverPref;
     @Mock

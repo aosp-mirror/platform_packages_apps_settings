@@ -18,19 +18,13 @@ package com.android.settings.enterprise;
 
 import android.Manifest;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link AdminGrantedMicrophonePermissionPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class AdminGrantedMicrophonePermissionPreferenceControllerTest extends
-        AdminGrantedPermissionsPreferenceControllerTestBase {
+public class AdminGrantedMicrophonePermissionPreferenceControllerTest
+    extends AdminGrantedPermissionsPreferenceControllerTestBase {
 
     public AdminGrantedMicrophonePermissionPreferenceControllerTest() {
         super("enterprise_privacy_number_microphone_access_packages",

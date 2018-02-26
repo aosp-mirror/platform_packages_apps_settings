@@ -36,7 +36,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.AppPreference;
@@ -55,10 +54,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RecentLocationRequestPreferenceControllerTest {
 
     @Mock
@@ -118,8 +115,8 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController.updateState(mCategory);
 
         verify(mCategory).removeAll();
-        verify(mCategory).addPreference(
-                argThat(titleMatches(mContext.getString(R.string.location_no_recent_apps))));
+        final String title = mContext.getString(R.string.location_no_recent_apps);
+        verify(mCategory).addPreference(argThat(titleMatches(title)));
     }
 
     @Test
@@ -207,7 +204,7 @@ public class RecentLocationRequestPreferenceControllerTest {
             AppPreference appPreference = mock(AppPreference.class, "AppPreference" + i);
             doReturn(title).when(appPreference).getTitle();
             doReturn(appPreference)
-                    .when(mController).createAppPreference(any(Context.class), eq(req));
+                .when(mController).createAppPreference(any(Context.class), eq(req));
         }
         return requests;
     }

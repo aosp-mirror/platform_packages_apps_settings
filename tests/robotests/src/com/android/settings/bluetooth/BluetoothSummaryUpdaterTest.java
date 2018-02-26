@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doCallRealMethod;
@@ -31,7 +30,6 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
@@ -44,14 +42,13 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothSummaryUpdaterTest {
+
     private static final String DEVICE_NAME = "Nightshade";
     private static final String DEVICE_KEYBOARD_NAME = "Bluetooth Keyboard";
 
@@ -91,8 +88,7 @@ public class BluetoothSummaryUpdaterTest {
         doAnswer(invocation -> mDeviceConnected[0]).when(mConnectedDevice).isConnected();
         // Setup second device
         doReturn(DEVICE_KEYBOARD_NAME).when(mConnectedKeyBoardDevice).getName();
-        doAnswer(invocation -> mDeviceConnected[1]).when(mConnectedKeyBoardDevice)
-                .isConnected();
+        doAnswer(invocation -> mDeviceConnected[1]).when(mConnectedKeyBoardDevice).isConnected();
         doReturn(mBondedDevices).when(mBtAdapter).getBondedDevices();
     }
 
@@ -242,8 +238,7 @@ public class BluetoothSummaryUpdaterTest {
         mSummaryUpdater.onConnectionStateChanged(null /* device */,
                 BluetoothAdapter.STATE_CONNECTED);
 
-        verify(mListener).onSummaryChanged(
-                mContext.getString(R.string.disconnected));
+        verify(mListener).onSummaryChanged(mContext.getString(R.string.disconnected));
     }
 
     @Test
@@ -274,8 +269,8 @@ public class BluetoothSummaryUpdaterTest {
     public void getConnectedDeviceSummary_hasConnectedDevice_returnOneDeviceSummary() {
         mBondedDevices.add(mConnectedDevice);
         mDeviceConnected[0] = true;
-        final String expectedSummary = mContext.getString(R.string.bluetooth_connected_summary,
-                DEVICE_NAME);
+        final String expectedSummary =
+            mContext.getString(R.string.bluetooth_connected_summary, DEVICE_NAME);
 
         assertThat(mSummaryUpdater.getConnectedDeviceSummary()).isEqualTo(expectedSummary);
     }
@@ -286,8 +281,8 @@ public class BluetoothSummaryUpdaterTest {
         mBondedDevices.add(mConnectedKeyBoardDevice);
         mDeviceConnected[0] = true;
         mDeviceConnected[1] = true;
-        final String expectedSummary = mContext.getString(
-                R.string.bluetooth_connected_multiple_devices_summary);
+        final String expectedSummary =
+            mContext.getString(R.string.bluetooth_connected_multiple_devices_summary);
 
         assertThat(mSummaryUpdater.getConnectedDeviceSummary()).isEqualTo(expectedSummary);
     }
@@ -300,5 +295,4 @@ public class BluetoothSummaryUpdaterTest {
             this.summary = summary;
         }
     }
-
 }

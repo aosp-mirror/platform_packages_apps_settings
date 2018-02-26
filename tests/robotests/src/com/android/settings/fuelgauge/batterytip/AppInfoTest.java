@@ -21,22 +21,20 @@ import static com.google.common.truth.Truth.assertThat;
 import android.os.Parcel;
 import android.text.format.DateUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppInfoTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;

@@ -16,25 +16,25 @@
 
 package com.android.settings.fuelgauge;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Process;
+
 import com.android.internal.os.BatterySipper;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.when;
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageFeatureProviderImplTest {
+
     private static final int UID_OTHER = Process.FIRST_APPLICATION_UID + 2;
     private static final int UID_CALENDAR = Process.FIRST_APPLICATION_UID + 3;
     private static final int UID_MEDIA = Process.FIRST_APPLICATION_UID + 4;
@@ -42,6 +42,7 @@ public class PowerUsageFeatureProviderImplTest {
     private static final String[] PACKAGES_CALENDAR = {"com.android.providers.calendar"};
     private static final String[] PACKAGES_MEDIA = {"com.android.providers.media"};
     private static final String[] PACKAGES_SYSTEMUI = {"com.android.systemui"};
+
     @Mock
     private Context mContext;
     @Mock

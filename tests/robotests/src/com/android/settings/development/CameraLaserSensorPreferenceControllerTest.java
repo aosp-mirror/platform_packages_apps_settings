@@ -17,36 +17,27 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.CameraLaserSensorPreferenceController.ENG_BUILD;
-import static com.android.settings.development.CameraLaserSensorPreferenceController
-        .USERDEBUG_BUILD;
+import static com.android.settings.development.CameraLaserSensorPreferenceController.USERDEBUG_BUILD;
 import static com.android.settings.development.CameraLaserSensorPreferenceController.USER_BUILD;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
-
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class CameraLaserSensorPreferenceControllerTest {
 
     @Mock
@@ -54,23 +45,15 @@ public class CameraLaserSensorPreferenceControllerTest {
     @Mock
     private SwitchPreference mPreference;
 
-    private Context mContext;
-
     private CameraLaserSensorPreferenceController mController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
-        mController = new CameraLaserSensorPreferenceController(mContext);
+        mController = new CameraLaserSensorPreferenceController(RuntimeEnvironment.application);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         when(mPreference.getKey()).thenReturn(mController.getPreferenceKey());
         mController.displayPreference(mScreen);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test
@@ -81,35 +64,30 @@ public class CameraLaserSensorPreferenceControllerTest {
 
     @Test
     public void isAvailable_withUserdebugBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(CameraLaserSensorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_withEngBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.BUILD_TYPE, ENG_BUILD);
+        SystemProperties.set(CameraLaserSensorPreferenceController.BUILD_TYPE, ENG_BUILD);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_withUserBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.BUILD_TYPE, USER_BUILD);
+        SystemProperties.set(CameraLaserSensorPreferenceController.BUILD_TYPE, USER_BUILD);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void updateState_cameraLaserSensorEnabled_shouldCheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
+        SystemProperties.set(CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
                 Integer.toString(CameraLaserSensorPreferenceController.ENABLED));
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(CameraLaserSensorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mScreen);
 
@@ -118,10 +96,9 @@ public class CameraLaserSensorPreferenceControllerTest {
 
     @Test
     public void updateState_cameraLaserSensorEnabled_shouldUncheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
+        SystemProperties.set(CameraLaserSensorPreferenceController.PROPERTY_CAMERA_LASER_SENSOR,
                 Integer.toString(CameraLaserSensorPreferenceController.DISABLED));
-        SettingsShadowSystemProperties.set(
+        SystemProperties.set(
                 CameraLaserSensorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mScreen);

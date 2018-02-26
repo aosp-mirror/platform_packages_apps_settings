@@ -16,27 +16,24 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
-import android.support.v7.preference.Preference;
 import android.media.RingtoneManager;
+import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RingtonePreferenceControllerBaseTest {
 
     @Mock
@@ -55,7 +52,6 @@ public class RingtonePreferenceControllerBaseTest {
         assertThat(mController.isAvailable()).isTrue();
     }
 
-
     @Test
     public void updateState_shouldSetSummary() {
         Preference preference = mock(Preference.class);
@@ -65,8 +61,8 @@ public class RingtonePreferenceControllerBaseTest {
         verify(preference).setSummary(anyString());
     }
 
-    private class RingtonePreferenceControllerBaseTestable extends
-        RingtonePreferenceControllerBase {
+    private class RingtonePreferenceControllerBaseTestable
+        extends RingtonePreferenceControllerBase {
         RingtonePreferenceControllerBaseTestable(Context context) {
             super(context);
         }
@@ -81,5 +77,4 @@ public class RingtonePreferenceControllerBaseTest {
             return RingtoneManager.TYPE_RINGTONE;
         }
     }
-
 }

@@ -17,7 +17,6 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -27,7 +26,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-import com.android.settings.TestConfig;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,14 +35,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SlicesIndexerTest {
 
     private final String[] KEYS = new String[]{"key1", "key2", "key3"};
@@ -93,7 +88,7 @@ public class SlicesIndexerTest {
 
     @Test
     public void testInsertSliceData_indexedStateSet() {
-        SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(mContext);
+        final SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(mContext);
         helper.setIndexedState();
         doReturn(new ArrayList<SliceData>()).when(mManager).getSliceData();
 
@@ -104,26 +99,26 @@ public class SlicesIndexerTest {
 
     @Test
     public void testInsertSliceData_mockDataInserted() {
-        List<SliceData> sliceData = getDummyIndexableData();
+        final List<SliceData> sliceData = getDummyIndexableData();
         doReturn(sliceData).when(mManager).getSliceData();
 
         mManager.run();
 
-        Cursor cursor = mDb.rawQuery("SELECT * FROM slices_index", null);
+        final Cursor cursor = mDb.rawQuery("SELECT * FROM slices_index", null);
         assertThat(cursor.getCount()).isEqualTo(sliceData.size());
 
         cursor.moveToFirst();
         for (int i = 0; i < sliceData.size(); i++) {
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY))).isEqualTo(
-                    KEYS[i]);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE))).isEqualTo(
-                    TITLES[i]);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY)))
+                .isEqualTo(KEYS[i]);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE)))
+                .isEqualTo(TITLES[i]);
             cursor.moveToNext();
         }
     }
 
     private void insertSpecialCase(String key, String title) {
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(IndexColumns.KEY, key);
         values.put(IndexColumns.TITLE, title);
 
@@ -131,18 +126,17 @@ public class SlicesIndexerTest {
     }
 
     private List<SliceData> getDummyIndexableData() {
-        List<SliceData> sliceData = new ArrayList<>();
-        SliceData.Builder builder = new SliceData.Builder();
-        builder.setSummary(SUMMARY)
-                .setScreenTitle(SCREEN_TITLE)
-                .setFragmentName(FRAGMENT_NAME)
-                .setIcon(ICON)
-                .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER);
+        final SliceData.Builder builder = new SliceData.Builder()
+            .setSummary(SUMMARY)
+            .setScreenTitle(SCREEN_TITLE)
+            .setFragmentName(FRAGMENT_NAME)
+            .setIcon(ICON)
+            .setUri(URI)
+            .setPreferenceControllerClassName(PREF_CONTROLLER);
 
+        final List<SliceData> sliceData = new ArrayList<>();
         for (int i = 0; i < KEYS.length; i++) {
-            builder.setKey(KEYS[i])
-                    .setTitle(TITLES[i]);
+            builder.setKey(KEYS[i]).setTitle(TITLES[i]);
             sliceData.add(builder.build());
         }
 
