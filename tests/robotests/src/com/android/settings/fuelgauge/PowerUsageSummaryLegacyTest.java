@@ -67,6 +67,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.utils.StringUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -444,6 +445,7 @@ public class PowerUsageSummaryLegacyTest {
                 eq(Bundle.EMPTY), any());
     }
 
+    @Ignore("b/73892008")
     @Test
     public void testShowBothEstimates_summariesAreBothModified() {
         doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary2);
@@ -452,8 +454,8 @@ public class PowerUsageSummaryLegacyTest {
         TextView summary1 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary1);
         TextView summary2 = mFragment.mBatteryLayoutPref.findViewById(R.id.summary2);
         Robolectric.flushBackgroundThreadScheduler();
-        assertThat(summary2.getText().toString().contains(NEW_ML_EST_SUFFIX));
-        assertThat(summary1.getText().toString().contains(OLD_EST_SUFFIX));
+        assertThat(summary2.getText().toString()).contains(NEW_ML_EST_SUFFIX);
+        assertThat(summary1.getText().toString()).contains(OLD_EST_SUFFIX);
     }
 
     @Test
