@@ -36,6 +36,7 @@ import java.time.Duration;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HighUsageDataParserTest {
     private static final long PERIOD_ONE_MINUTE_MS = Duration.ofMinutes(1).toMillis();
+    private static final long PERIOD_ONE_HOUR_MS = Duration.ofHours(1).toMillis();
     private static final long END_TIME_MS = 2 * PERIOD_ONE_MINUTE_MS;
     private static final int THRESHOLD_LOW = 10;
     private static final int THRESHOLD_HIGH = 20;
@@ -75,7 +76,17 @@ public class HighUsageDataParserTest {
         assertThat(mDataParser.isDeviceHeavilyUsed()).isFalse();
     }
 
+    @Test
+    public void testDataParser_heavilyUsedInShortTime_stillReportHeavilyUsed() {
+        // Set threshold to 1 hour however device only used for 2 minutes
+        mDataParser = new HighUsageDataParser(PERIOD_ONE_HOUR_MS, THRESHOLD_LOW);
+        parseData();
+
+        assertThat(mDataParser.isDeviceHeavilyUsed()).isTrue();
+    }
+
     private void parseData() {
+        // Report the battery usage in END_TIME_MS(2 minutes)
         mDataParser.onParsingStarted(0, END_TIME_MS);
         mDataParser.onDataPoint(0, mFirstItem);
         mDataParser.onDataPoint(PERIOD_ONE_MINUTE_MS, mSecondItem);
