@@ -38,6 +38,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -84,6 +85,7 @@ public class PictureInPictureSettingsTest {
         when(mUserManager.getProfiles(anyInt())).thenReturn(mUsers);
     }
 
+    @Ignore("b/73892555")
     @Test
     public void testCollectPipApps() {
         PackageInfo primaryP1 = createPackage("Calculator", true);
