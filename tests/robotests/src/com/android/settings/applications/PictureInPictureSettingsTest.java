@@ -103,6 +103,7 @@ public class PictureInPictureSettingsTest {
         assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
     }
 
+    @Ignore("b/73892683")
     @Test
     public void testAppSort() {
         PackageInfo primaryP1 = createPackage("Android", true);
