@@ -97,8 +97,8 @@ public class PictureInPictureSettingsTest {
         mProfileUserPackages.add(profileP2);
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
-        assertThat(containsPackages(apps, primaryP1, profileP2));
-        assertThat(!containsPackages(apps, primaryP2, profileP1));
+        assertThat(containsPackages(apps, primaryP1, profileP2)).isTrue();
+        assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
     }
 
     @Test
@@ -119,7 +119,7 @@ public class PictureInPictureSettingsTest {
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         Collections.sort(apps, new PictureInPictureSettings.AppComparator(null));
-        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2));
+        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2)).isTrue();
     }
 
     private boolean containsPackages(ArrayList<Pair<ApplicationInfo, Integer>> apps,
