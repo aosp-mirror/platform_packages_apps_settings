@@ -16,9 +16,11 @@
 
 package com.android.settings.notification;
 
+import android.app.ActivityManager;
 import android.app.AutomaticZenRule;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
@@ -79,7 +81,15 @@ public class ZenModeBackend {
 
     protected void setZenMode(int zenMode) {
         NotificationManager.from(mContext).setZenMode(zenMode, null, TAG);
-        mZenMode = zenMode;
+        mZenMode = getZenMode();
+    }
+
+    protected void setZenModeForDuration(int minutes) {
+        Uri conditionId = ZenModeConfig.toTimeCondition(mContext, minutes,
+                ActivityManager.getCurrentUser(), true).id;
+        mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS,
+                conditionId, TAG);
+        mZenMode = getZenMode();
     }
 
     protected int getZenMode() {
