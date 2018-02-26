@@ -38,6 +38,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -84,6 +85,7 @@ public class PictureInPictureSettingsTest {
         when(mUserManager.getProfiles(anyInt())).thenReturn(mUsers);
     }
 
+    @Ignore("b/73892555")
     @Test
     public void testCollectPipApps() {
         PackageInfo primaryP1 = createPackage("Calculator", true);
@@ -97,10 +99,11 @@ public class PictureInPictureSettingsTest {
         mProfileUserPackages.add(profileP2);
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
-        assertThat(containsPackages(apps, primaryP1, profileP2));
-        assertThat(!containsPackages(apps, primaryP2, profileP1));
+        assertThat(containsPackages(apps, primaryP1, profileP2)).isTrue();
+        assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
     }
 
+    @Ignore("b/73892683")
     @Test
     public void testAppSort() {
         PackageInfo primaryP1 = createPackage("Android", true);
@@ -119,7 +122,7 @@ public class PictureInPictureSettingsTest {
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         Collections.sort(apps, new PictureInPictureSettings.AppComparator(null));
-        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2));
+        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2)).isTrue();
     }
 
     private boolean containsPackages(ArrayList<Pair<ApplicationInfo, Integer>> apps,
