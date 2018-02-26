@@ -155,7 +155,7 @@ public class BluetoothPairingDialogTest {
 
         // check that showSoftInput was called to make input method appear when the dialog was shown
         assertThat(view.isFocused()).isTrue();
-        assertThat(imm.isActive());
+        assertThat(imm.isActive()).isTrue();
         verify(imm).showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
     }
 
