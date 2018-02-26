@@ -47,6 +47,7 @@ import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.drawer.Tile;
+import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -244,7 +245,7 @@ public class DashboardAdapterTest {
             new DashboardAdapter.DashboardItemHolder(view);
         final Tile tile = new Tile();
         tile.icon = Icon.createWithResource(context, R.drawable.ic_settings);
-        final DashboardAdapter.IconCache iconCache = mock(DashboardAdapter.IconCache.class);
+        final IconCache iconCache = mock(IconCache.class);
         when(iconCache.getIcon(tile.icon)).thenReturn(context.getDrawable(R.drawable.ic_settings));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
@@ -265,7 +266,7 @@ public class DashboardAdapterTest {
         tile.icon = mock(Icon.class);
         when(tile.icon.getResPackage()).thenReturn("another.package");
 
-        final DashboardAdapter.IconCache iconCache = mock(DashboardAdapter.IconCache.class);
+        final IconCache iconCache = mock(IconCache.class);
         when(iconCache.getIcon(tile.icon)).thenReturn(context.getDrawable(R.drawable.ic_settings));
 
         mDashboardAdapter = new DashboardAdapter(context, null /* savedInstanceState */,
