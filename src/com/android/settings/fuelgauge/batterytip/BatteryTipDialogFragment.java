@@ -26,6 +26,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
@@ -131,8 +132,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
     @Override
     public int getMetricsCategory() {
-        //TODO(b/70570352): add correct metric id
-        return 0;
+        return MetricsProto.MetricsEvent.FUELGAUGE_BATTERY_TIP_DIALOG;
     }
 
     @Override
