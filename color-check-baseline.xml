@@ -2121,38 +2121,6 @@
         priority="4"
         summary="Using hardcoded color"
         explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="                android:background=&quot;#00ffffff&quot;"
-        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/preference_importance_slider.xml"
-            line="59"
-            column="17"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
-        errorLine1="                android:progressBackgroundTint=&quot;@color/importance_secondary_slider_color&quot;"
-        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="res/layout/preference_importance_slider.xml"
-            line="60"
-            column="17"/>
-    </issue>
-
-    <issue
-        id="HardCodedColor"
-        severity="Error"
-        message="Avoid using hardcoded color"
-        category="Correctness"
-        priority="4"
-        summary="Using hardcoded color"
-        explanation="Hardcoded color values are bad because theme changes cannot be uniformly applied.Instead use the theme specific colors such as `?android:attr/textColorPrimary` in attributes.&#xA;This ensures that a theme change from a light to a dark theme can be uniformlyapplied across the app."
         errorLine1="            android:background=&quot;#000000&quot; />"
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
