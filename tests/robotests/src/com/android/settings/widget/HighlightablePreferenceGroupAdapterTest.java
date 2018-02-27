@@ -21,6 +21,8 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
@@ -71,8 +73,8 @@ public class HighlightablePreferenceGroupAdapterTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         when(mPreferenceCatetory.getContext()).thenReturn(mContext);
-        mAdapter = new HighlightablePreferenceGroupAdapter(mPreferenceCatetory, TEST_KEY,
-                false /* highlighted*/);
+        mAdapter = spy(new HighlightablePreferenceGroupAdapter(mPreferenceCatetory, TEST_KEY,
+                false /* highlighted*/));
         mViewHolder = PreferenceViewHolder.createInstanceForTests(
                 View.inflate(mContext, R.layout.app_preference_item, null));
     }
@@ -163,12 +165,36 @@ public class HighlightablePreferenceGroupAdapterTest {
     }
 
     @Test
-    public void updateBackground_highlight_shouldChangeBackgroundAndSetHighlightedTag() {
+    public void updateBackground_highlight_shouldAnimateBackgroundAndSetHighlightedTag() {
         ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+        assertThat(mAdapter.mFadeInAnimated).isFalse();
 
         mAdapter.updateBackground(mViewHolder, 10);
+
+        assertThat(mAdapter.mFadeInAnimated).isTrue();
         assertThat(mViewHolder.itemView.getBackground()).isInstanceOf(ColorDrawable.class);
         assertThat(mViewHolder.itemView.getTag(R.id.preference_highlighted)).isEqualTo(true);
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder.itemView);
+    }
+
+    @Test
+    public void updateBackgroundTwice_highlight_shouldAnimateOnce() {
+        ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+        ReflectionHelpers.setField(mViewHolder, "itemView", spy(mViewHolder.itemView));
+        assertThat(mAdapter.mFadeInAnimated).isFalse();
+        mAdapter.updateBackground(mViewHolder, 10);
+        // mFadeInAnimated change from false to true - indicating background change is scheduled
+        // through animation.
+        assertThat(mAdapter.mFadeInAnimated).isTrue();
+        // remove highlight should be requested.
+        verify(mAdapter).requestRemoveHighlightDelayed(mViewHolder.itemView);
+
+        ReflectionHelpers.setField(mAdapter, "mHighlightPosition", 10);
+        mAdapter.updateBackground(mViewHolder, 10);
+        // only sets background color once - if it's animation this would be called many times
+        verify(mViewHolder.itemView).setBackgroundColor(mAdapter.mHighlightColor);
+        // remove highlight should be requested.
+        verify(mAdapter, times(2)).requestRemoveHighlightDelayed(mViewHolder.itemView);
     }
 
     @Test
