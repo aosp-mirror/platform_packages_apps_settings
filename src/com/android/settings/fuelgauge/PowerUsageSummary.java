@@ -101,7 +101,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
-    private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
     private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -231,9 +230,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
                 context, activity, this /* host */, lifecycle);
         controllers.add(mBatteryHeaderPreferenceController);
-        mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
-                KEY_APP_LIST, lifecycle, activity, this);
-        controllers.add(mBatteryAppListPreferenceController);
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
                 KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
                 BatteryTipListener */);
@@ -294,11 +290,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         updateLastFullChargePreference(lastFullChargeTime);
         mScreenUsagePref.setSubtitle(StringUtil.formatElapsedTime(getContext(),
                 mBatteryUtils.calculateScreenUsageTime(mStatsHelper), false));
-
-        final CharSequence timeSequence = StringUtil.formatRelativeTime(context, lastFullChargeTime,
-                false);
-        mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper,
-                false /* showAllApps */, timeSequence);
     }
 
     @VisibleForTesting
