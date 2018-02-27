@@ -415,7 +415,7 @@ public class PowerUsageSummaryLegacy extends PowerUsageBase implements
     private void performBatteryHeaderClick() {
         if (mPowerFeatureProvider.isAdvancedUiEnabled()) {
             new SubSettingLauncher(getContext())
-                    .setDestination(PowerUsageAdvanced.class.getName())
+                    .setDestination(PowerUsageAdvancedLegacy.class.getName())
                     .setSourceMetricsCategory(getMetricsCategory())
                     .setTitle(R.string.advanced_battery_title)
                     .launch();

@@ -42,7 +42,7 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.datausage.DataUsageUtils;
-import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
+import com.android.settings.fuelgauge.PowerUsageAdvancedLegacy.PowerUsageData.UsageType;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -57,10 +57,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PowerUsageAdvanced extends PowerUsageBase {
+public class PowerUsageAdvancedLegacy extends PowerUsageBase {
     private static final String TAG = "AdvancedBatteryUsage";
-    private static final String KEY_BATTERY_GRAPH = "battery_graph";
-    private static final String KEY_BATTERY_USAGE_LIST = "battery_usage_list";
+    private static final String KEY_BATTERY_GRAPH = "battery_graph_legacy";
+    private static final String KEY_BATTERY_USAGE_LIST = "battery_usage_list_legacy";
     private static final int STATUS_TYPE = BatteryStats.STATS_SINCE_CHARGED;
 
     @VisibleForTesting
@@ -163,7 +163,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.power_usage_advanced;
+        return R.xml.power_usage_advanced_legacy;
     }
 
     @Override
@@ -477,7 +477,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
-                    sir.xmlResId = R.xml.power_usage_advanced;
+                    sir.xmlResId = R.xml.power_usage_advanced_legacy;
                     return Arrays.asList(sir);
                 }
             };
