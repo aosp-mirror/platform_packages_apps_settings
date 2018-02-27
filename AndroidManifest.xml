@@ -1152,6 +1152,17 @@
             </intent-filter>
         </activity-alias>
 
+        <activity android:name=".applications.InstalledAppOpenByDefaultPage"
+                  android:label="@string/application_info_label"
+                  android:permission="android.permission.OPEN_APPLICATION_DETAILS_OPEN_BY_DEFAULT_PAGE"
+                  android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.APPLICATION_DETAILS_SETTINGS_OPEN_BY_DEFAULT_PAGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="package" />
+            </intent-filter>
+        </activity>
+
         <!-- Provide direct entry into manage apps showing running services. -->
         <activity android:name="Settings$RunningServicesActivity"
                 android:label="@string/runningservices_settings_title"
