@@ -34,7 +34,10 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.UserManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
+import com.google.common.collect.ImmutableList;
+
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -59,7 +62,6 @@ public class PictureInPictureSettingsTest {
     private UserManagerWrapper mUserManager;
     private ArrayList<PackageInfo> mPrimaryUserPackages;
     private ArrayList<PackageInfo> mProfileUserPackages;
-    private ArrayList<UserInfo> mUsers;
 
     @Before
     public void setUp() {
@@ -68,12 +70,18 @@ public class PictureInPictureSettingsTest {
         mFragment = new PictureInPictureSettings(mPackageManager, mUserManager);
         mPrimaryUserPackages = new ArrayList<>();
         mProfileUserPackages = new ArrayList<>();
-        mUsers = new ArrayList<>();
         when(mPackageManager.getInstalledPackagesAsUser(anyInt(), eq(PRIMARY_USER_ID)))
                 .thenReturn(mPrimaryUserPackages);
         when(mPackageManager.getInstalledPackagesAsUser(anyInt(), eq(PROFILE_USER_ID)))
                 .thenReturn(mProfileUserPackages);
-        when(mUserManager.getProfiles(anyInt())).thenReturn(mUsers);
+
+        UserInfo primaryUserInfo = new UserInfo();
+        primaryUserInfo.id = PRIMARY_USER_ID;
+        UserInfo profileUserInfo = new UserInfo();
+        profileUserInfo.id = PROFILE_USER_ID;
+
+        when(mUserManager.getProfiles(PRIMARY_USER_ID)).thenReturn(
+                ImmutableList.of(primaryUserInfo, profileUserInfo));
     }
 
     @Test
@@ -89,8 +97,8 @@ public class PictureInPictureSettingsTest {
         mProfileUserPackages.add(profileP2);
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
-        assertThat(containsPackages(apps, primaryP1, profileP2));
-        assertThat(!containsPackages(apps, primaryP2, profileP1));
+        assertThat(containsPackages(apps, primaryP1, profileP2)).isTrue();
+        assertThat(containsPackages(apps, primaryP2, profileP1)).isFalse();
     }
 
     @Test
@@ -111,7 +119,7 @@ public class PictureInPictureSettingsTest {
 
         ArrayList<Pair<ApplicationInfo, Integer>> apps = mFragment.collectPipApps(PRIMARY_USER_ID);
         Collections.sort(apps, new PictureInPictureSettings.AppComparator(null));
-        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2));
+        assertThat(isOrdered(apps, primaryP1, profileP1, primaryP2, profileP2, primaryP3)).isTrue();
     }
 
     private boolean containsPackages(ArrayList<Pair<ApplicationInfo, Integer>> apps,

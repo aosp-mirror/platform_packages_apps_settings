@@ -51,6 +51,7 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.drawer.Tile;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.utils.IconCache;
 
 import java.util.List;
 
@@ -363,31 +364,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
 
     private void scrollToTopOfConditions() {
         mRecyclerView.scrollToPosition(mDashboardData.hasSuggestion() ? 1 : 0);
-    }
-
-    public static class IconCache {
-        private final Context mContext;
-        private final ArrayMap<Icon, Drawable> mMap = new ArrayMap<>();
-
-        public IconCache(Context context) {
-            mContext = context;
-        }
-
-        public Drawable getIcon(Icon icon) {
-            if (icon == null) {
-                return null;
-            }
-            Drawable drawable = mMap.get(icon);
-            if (drawable == null) {
-                drawable = icon.loadDrawable(mContext);
-                updateIcon(icon, drawable);
-            }
-            return drawable;
-        }
-
-        public void updateIcon(Icon icon, Drawable drawable) {
-            mMap.put(icon, drawable);
-        }
     }
 
     public static class DashboardItemHolder extends RecyclerView.ViewHolder {

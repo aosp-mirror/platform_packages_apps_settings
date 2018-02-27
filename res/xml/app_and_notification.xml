@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="apps_and_notification_screen"
     android:title="@string/app_and_notification_dashboard_title"
-    settings:initialExpandedChildrenCount="6">
+    settings:initialExpandedChildrenCount="8">
 
     <PreferenceCategory
         android:key="recent_apps_category"
@@ -46,17 +46,18 @@
         android:key="all_app_info_divider"
         android:order="-190"/>
 
-    <Preference
-        android:key="manage_perms"
-        android:title="@string/app_permissions"
-        android:order="-130"
-        settings:keywords="@string/keywords_app_permissions">
-        <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
-    </Preference>
-
+    <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory
         android:key="dashboard_tile_placeholder"
         android:order="10" />
+
+    <Preference
+        android:key="manage_perms"
+        android:title="@string/app_permissions"
+        android:order="12"
+        settings:keywords="@string/keywords_app_permissions">
+        <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
+    </Preference>
 
     <com.android.settingslib.RestrictedPreference
         android:key="app_and_notif_cell_broadcast_settings"

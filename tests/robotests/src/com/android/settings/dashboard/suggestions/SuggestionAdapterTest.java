@@ -48,6 +48,7 @@ import com.android.settings.dashboard.DashboardAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.suggestions.SuggestionControllerMixin;
+import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -252,7 +253,7 @@ public class SuggestionAdapterTest {
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
             new FrameLayout(RuntimeEnvironment.application),
             mSuggestionAdapter.getItemViewType(0));
-        DashboardAdapter.IconCache cache = mock(DashboardAdapter.IconCache.class);
+        IconCache cache = mock(IconCache.class);
         final Drawable drawable = mock(Drawable.class);
         when(cache.getIcon(icon)).thenReturn(drawable);
         ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
@@ -280,7 +281,7 @@ public class SuggestionAdapterTest {
         mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
             new FrameLayout(RuntimeEnvironment.application),
             mSuggestionAdapter.getItemViewType(0));
-        DashboardAdapter.IconCache cache = mock(DashboardAdapter.IconCache.class);
+        IconCache cache = mock(IconCache.class);
         final Drawable drawable = mock(Drawable.class);
         when(cache.getIcon(icon)).thenReturn(drawable);
         ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
