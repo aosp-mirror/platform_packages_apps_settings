@@ -49,6 +49,7 @@ import com.android.settings.display.NightDisplaySettings;
 import com.android.settings.display.ScreenZoomSettings;
 import com.android.settings.dream.DreamSettings;
 import com.android.settings.enterprise.EnterprisePrivacySettings;
+import com.android.settings.fuelgauge.PowerUsageAdvanced;
 import com.android.settings.fuelgauge.PowerUsageAdvancedLegacy;
 import com.android.settings.fuelgauge.batterysaver.BatterySaverSettings;
 import com.android.settings.fuelgauge.PowerUsageSummary;
@@ -121,6 +122,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(SoundSettings.class);
         addIndex(ZenModeSettings.class);
         addIndex(StorageSettings.class);
+        addIndex(PowerUsageAdvanced.class);
         addIndex(PowerUsageAdvancedLegacy.class);
         addIndex(DefaultAppSettings.class);
         addIndex(ManageAssist.class);
