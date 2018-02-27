@@ -41,10 +41,10 @@ import com.android.internal.os.BatterySipper.DrainType;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData;
-import com.android.settings.fuelgauge.PowerUsageAdvanced.PowerUsageData.UsageType;
 import com.android.settings.testutils.BatteryTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.fuelgauge.PowerUsageAdvancedLegacy.PowerUsageData;
+import com.android.settings.fuelgauge.PowerUsageAdvancedLegacy.PowerUsageData.UsageType;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,8 +59,7 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class PowerUsageAdvancedTest {
-
+public class PowerUsageAdvancedLegacyTest {
     private static final int FAKE_UID_1 = 50;
     private static final int FAKE_UID_2 = 100;
     private static final int DISCHARGE_AMOUNT = 60;
@@ -94,7 +93,7 @@ public class PowerUsageAdvancedTest {
     private UserInfo mNormalUserInfo;
     @Mock
     private UserInfo mManagedUserInfo;
-    private PowerUsageAdvanced mPowerUsageAdvanced;
+    private PowerUsageAdvancedLegacy mPowerUsageAdvanced;
     private PowerUsageData mPowerUsageData;
     private Context mShadowContext;
     private Intent mDischargingBatteryIntent;
@@ -103,7 +102,7 @@ public class PowerUsageAdvancedTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mShadowContext = spy(RuntimeEnvironment.application);
-        mPowerUsageAdvanced = spy(new PowerUsageAdvanced());
+        mPowerUsageAdvanced = spy(new PowerUsageAdvancedLegacy());
 
         List<BatterySipper> batterySippers = new ArrayList<>();
         batterySippers.add(new BatterySipper(DrainType.APP,

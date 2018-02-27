@@ -17,15 +17,15 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="power_usage_advanced_screen"
+    android:key="power_usage_advanced_screen_legacy"
     android:title="@string/advanced_battery_title"
     settings:keywords="@string/keywords_battery">
 
     <com.android.settings.fuelgauge.BatteryHistoryPreference
-        android:key="battery_graph"/>
+        android:key="battery_graph_legacy"/>
 
     <PreferenceCategory
-        android:key="battery_usage_list"
+        android:key="battery_usage_list_legacy"
         android:title="@string/battery_detail_since_full_charge"/>
 
 </PreferenceScreen>
