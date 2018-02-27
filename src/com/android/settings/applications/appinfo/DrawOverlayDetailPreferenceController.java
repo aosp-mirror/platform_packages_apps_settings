@@ -61,7 +61,7 @@ public class DrawOverlayDetailPreferenceController extends AppInfoPreferenceCont
     }
 
     @Override
-    public String getSummary() {
-        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry()).toString();
+    public CharSequence getSummary() {
+        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry());
     }
 }

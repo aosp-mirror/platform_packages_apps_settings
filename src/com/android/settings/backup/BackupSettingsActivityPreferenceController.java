@@ -51,11 +51,11 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final boolean backupEnabled = mBackupManager.isBackupEnabled();
 
         return backupEnabled
-                ? mContext.getString(R.string.accessibility_feature_state_on)
-                : mContext.getString(R.string.accessibility_feature_state_off);
+                ? mContext.getText(R.string.accessibility_feature_state_on)
+                : mContext.getText(R.string.accessibility_feature_state_off);
     }
 }

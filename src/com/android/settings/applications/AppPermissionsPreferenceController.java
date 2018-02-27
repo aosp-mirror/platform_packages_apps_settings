@@ -64,7 +64,7 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
 
     @Override
     public void updateState(Preference preference) {
-        final String summary = getSummary();
+        final CharSequence summary = getSummary();
         if (summary != null) {
             preference.setSummary(summary);
         }
@@ -76,7 +76,7 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
        Location, Microphone, Camera, Sms, Contacts, and Phone
      */
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final Set<String> permissions = getAllPermissionsInGroups();
         Set<String> grantedPermissionGroups = getGrantedPermissionGroups(permissions);
         CharSequence summary = null;

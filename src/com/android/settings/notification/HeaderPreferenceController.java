@@ -78,7 +78,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         if (mChannel != null) {
            if (mChannelGroup != null && mChannelGroup.getGroup() != null
                 && !TextUtils.isEmpty(mChannelGroup.getGroup().getName())) {

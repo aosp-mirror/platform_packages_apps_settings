@@ -106,17 +106,17 @@ public class GesturesSettingsPreferenceControllerTest {
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
         mController.updateState(mPreference);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_off);
+        verify(mActivity).getText(R.string.language_input_gesture_summary_off);
 
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 1);
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 0);
         mController.updateState(mPreference);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_on_with_assist);
+        verify(mActivity).getText(R.string.language_input_gesture_summary_on_with_assist);
 
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_ENABLED, 0);
         Settings.Secure.putInt(cr, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1);
         mController.updateState(mPreference);
-        verify(mActivity).getString(R.string.language_input_gesture_summary_on_non_assist);
+        verify(mActivity).getText(R.string.language_input_gesture_summary_on_non_assist);
     }
 
     @Test

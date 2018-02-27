@@ -62,8 +62,8 @@ public class WriteSystemSettingsPreferenceController extends AppInfoPreferenceCo
     }
 
     @Override
-    public String getSummary() {
-        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry()).toString();
+    public CharSequence getSummary() {
+        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry());
 
     }
 }
