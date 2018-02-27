@@ -171,6 +171,16 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     sir.xmlResId = R.xml.power_usage_advanced;
                     return Arrays.asList(sir);
                 }
+
+                @Override
+                public List<AbstractPreferenceController> createPreferenceControllers(
+                        Context context) {
+                    final List<AbstractPreferenceController> controllers = new ArrayList<>();
+                    controllers.add(new BatteryAppListPreferenceController(context,
+                            KEY_APP_LIST, null /* lifecycle */, null /* activity */,
+                            null /* fragment */));
+                    return controllers;
+                }
             };
 
 }
