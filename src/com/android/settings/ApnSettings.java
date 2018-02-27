@@ -16,7 +16,6 @@
 
 package com.android.settings;
 
-import static android.provider.Telephony.Carriers.CONTENT_URI;
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 import static android.provider.Telephony.Carriers.FILTERED_URI;
 
@@ -292,7 +291,6 @@ public class ApnSettings extends RestrictedSettingsFragment implements
 
             mSelectedKey = getSelectedApnKey();
             cursor.moveToFirst();
-            boolean enforced = isDpcApnEnforced();
             while (!cursor.isAfterLast()) {
                 String name = cursor.getString(NAME_INDEX);
                 String apn = cursor.getString(APN_INDEX);
@@ -309,7 +307,6 @@ public class ApnSettings extends RestrictedSettingsFragment implements
                 pref.setPersistent(false);
                 pref.setOnPreferenceChangeListener(this);
                 pref.setSubId(subId);
-                pref.setDpcEnforced(enforced);
 
                 boolean selectable = ((type == null) || !type.equals("mms"));
                 pref.setSelectable(selectable);
@@ -401,7 +398,7 @@ public class ApnSettings extends RestrictedSettingsFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         int pos = Integer.parseInt(preference.getKey());
-        Uri url = ContentUris.withAppendedId(isDpcApnEnforced() ? FILTERED_URI : CONTENT_URI, pos);
+        Uri url = ContentUris.withAppendedId(FILTERED_URI, pos);
         startActivity(new Intent(Intent.ACTION_EDIT, url));
         return true;
     }
