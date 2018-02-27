@@ -21,6 +21,7 @@ import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -32,10 +33,12 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -72,6 +75,7 @@ public class BatteryTipPreferenceControllerTest {
     private List<BatteryTip> mOldBatteryTips;
     private List<BatteryTip> mNewBatteryTips;
     private Preference mPreference;
+    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
@@ -84,6 +88,7 @@ public class BatteryTipPreferenceControllerTest {
         doReturn(mPreferenceGroup).when(mPreferenceScreen).findPreference(KEY_PREF);
         mPreference = new Preference(mContext);
         mPreference.setKey(KEY_TIP);
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mOldBatteryTips = new ArrayList<>();
         mOldBatteryTips.add(new SummaryTip(BatteryTip.StateType.NEW));
@@ -104,7 +109,7 @@ public class BatteryTipPreferenceControllerTest {
     }
 
     @Test
-    public void updateBatteryTips_updateTwice_firstShowSummaryTipThenRemoveIt() {
+    public void testUpdateBatteryTips_updateTwice_firstShowSummaryTipThenRemoveIt() {
         // Display summary tip because its state is new
         mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
         assertOnlyContainsSummaryTip(mPreferenceGroup);
@@ -112,6 +117,15 @@ public class BatteryTipPreferenceControllerTest {
         // Remove summary tip because its new state is invisible
         mBatteryTipPreferenceController.updateBatteryTips(mNewBatteryTips);
         assertThat(mPreferenceGroup.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void testUpdateBatteryTips_logBatteryTip() {
+        mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
+
+        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
+                eq(MetricsProto.MetricsEvent.ACTION_BATTERY_TIP_SHOWN),
+                eq(BatteryTip.TipType.SUMMARY));
     }
 
     @Test
