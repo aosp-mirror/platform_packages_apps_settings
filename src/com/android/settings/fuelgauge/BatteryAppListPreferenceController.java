@@ -149,7 +149,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
 
     @Override
     public boolean isAvailable() {
-        return FeatureFlagUtils.isEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST);
+        return true;
     }
 
     @Override
@@ -186,12 +186,17 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         }
     }
 
-    public void refreshAppListGroup(BatteryStatsHelper statsHelper, boolean showAllApps,
-            CharSequence timeSequence) {
+    public void refreshAppListGroup(BatteryStatsHelper statsHelper, boolean showAllApps) {
         if (!isAvailable()) {
             return;
         }
+
         mBatteryStatsHelper = statsHelper;
+        final long lastFullChargeTime = mBatteryUtils.calculateLastFullChargeTime(
+                mBatteryStatsHelper, System.currentTimeMillis());
+        final CharSequence timeSequence = StringUtil.formatRelativeTime(mContext,
+                lastFullChargeTime,
+                false);
         final int resId = showAllApps ? R.string.power_usage_list_summary_device
                 : R.string.power_usage_list_summary;
         mAppListGroup.setTitle(TextUtils.expandTemplate(mContext.getText(resId), timeSequence));
@@ -361,7 +366,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
         final long usageTimeMs = sipper.usageTimeMs;
         if (usageTimeMs >= DateUtils.MINUTE_IN_MILLIS) {
             final CharSequence timeSequence =
-                StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
+                    StringUtil.formatElapsedTime(mContext, usageTimeMs, false);
             preference.setSummary(
                     (sipper.drainType != DrainType.APP || mBatteryUtils.shouldHideSipper(sipper))
                             ? timeSequence
