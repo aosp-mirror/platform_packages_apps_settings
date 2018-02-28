@@ -121,7 +121,7 @@ public class SubSettingLauncherTest {
                 .setResultListener(mFragment, requestCode)
                 .launch();
 
-        verify(mActivity).startActivityForResult(any(Intent.class), eq(requestCode));
+        verify(mFragment).startActivityForResult(any(Intent.class), eq(requestCode));
     }
 
     @Test

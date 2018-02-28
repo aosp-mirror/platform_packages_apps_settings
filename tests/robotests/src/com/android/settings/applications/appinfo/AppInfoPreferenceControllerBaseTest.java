@@ -93,7 +93,7 @@ public class AppInfoPreferenceControllerBaseTest {
         mController.handlePreferenceTreeClick(mPreference);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
 
-        verify(mActivity).startActivityForResult(intentCaptor.capture(), eq(SUB_INFO_FRAGMENT));
+        verify(mFragment).startActivityForResult(intentCaptor.capture(), eq(SUB_INFO_FRAGMENT));
         assertThat(intentCaptor.getValue().getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(mController.getDetailFragmentClass().getName());
     }

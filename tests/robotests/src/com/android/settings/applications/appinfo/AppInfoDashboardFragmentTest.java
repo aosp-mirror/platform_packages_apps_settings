@@ -335,7 +335,6 @@ public final class AppInfoDashboardFragmentTest {
     public void startAppInfoFragment_includesNewAndOldArgs() {
         final SettingsPreferenceFragment caller = mock(SettingsPreferenceFragment.class);
         final SettingsActivity sa = mock (SettingsActivity.class);
-        when(caller.getActivity()).thenReturn(sa);
         when(caller.getContext()).thenReturn(sa);
         final AppEntry appEntry = mock(AppEntry.class);
         appEntry.info = mock(ApplicationInfo.class);
@@ -348,7 +347,7 @@ public final class AppInfoDashboardFragmentTest {
 
         final ArgumentCaptor<Intent> intent = ArgumentCaptor.forClass(Intent.class);
 
-        verify(sa).startActivityForResult(intent.capture(), any(Integer.class));
+        verify(caller).startActivityForResult(intent.capture(), any(Integer.class));
         assertThat(intent.getValue().getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
             .containsKey("test"))
             .isTrue();
