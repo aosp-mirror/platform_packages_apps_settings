@@ -90,5 +90,6 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getUri()).isNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(fakeFragmentClassName);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(fakeControllerName);
+        assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
     }
 }

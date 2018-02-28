@@ -30,4 +30,9 @@ public class FakePreferenceController extends BasePreferenceController {
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
+
+    @Override
+    public int getSliceType() {
+        return SliceData.SliceType.SLIDER;
+    }
 }
