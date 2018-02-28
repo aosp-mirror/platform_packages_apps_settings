@@ -52,10 +52,8 @@ public class AboutPhoneSettingsTests {
     // TODO: retrieve using name/ids from com.android.settings package
     private static final String[] sResourceTexts = {
             "Phone number",
-            "SIM status",
-            "Model & hardware",
-            "MEID",
-            "Android version"
+            "Legal information",
+            "Regulatory labels"
     };
 
     private UiDevice mDevice;
@@ -94,11 +92,11 @@ public class AboutPhoneSettingsTests {
     }
 
     @Test
-    public void testAllMenuEntriesExist() throws Exception {
+    public void testAllMenuEntriesExist() {
         searchForItemsAndTakeAction(mDevice, sResourceTexts);
     }
 
-    private void launchAboutPhoneSettings(String aboutSetting) throws Exception {
+    private void launchAboutPhoneSettings(String aboutSetting) {
         Intent aboutIntent = new Intent(aboutSetting);
         aboutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         InstrumentationRegistry.getTargetContext().startActivity(aboutIntent);
@@ -107,8 +105,7 @@ public class AboutPhoneSettingsTests {
     /**
      * Removes items found in the view and optionally takes some action.
      */
-    private void removeItemsAndTakeAction(UiDevice device, ArrayList<String> itemsLeftToFind)
-            throws Exception {
+    private void removeItemsAndTakeAction(UiDevice device, ArrayList<String> itemsLeftToFind) {
         for (Iterator<String> iterator = itemsLeftToFind.iterator(); iterator.hasNext(); ) {
             String itemText = iterator.next();
             UiObject2 item = device.wait(Until.findObject(By.text(itemText)), TIMEOUT);
@@ -124,8 +121,7 @@ public class AboutPhoneSettingsTests {
      * <p>Will scroll down the screen until it has found all elements or reached the bottom.
      * This allows elements to be found and acted on even if they change order.
      */
-    private void searchForItemsAndTakeAction(UiDevice device, String[] itemsToFind)
-            throws Exception {
+    private void searchForItemsAndTakeAction(UiDevice device, String[] itemsToFind) {
 
         ArrayList<String> itemsLeftToFind = new ArrayList<>(Arrays.asList(itemsToFind));
         assertWithMessage("There must be at least one item to search for on the screen!")

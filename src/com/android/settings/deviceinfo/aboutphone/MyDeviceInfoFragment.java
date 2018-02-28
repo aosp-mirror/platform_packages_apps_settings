@@ -62,7 +62,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MyDeviceInfoFragment extends DashboardFragment {
-    private static final String LOG_TAG = "MeCardFragment";
+    private static final String LOG_TAG = "MyDeviceInfoFragment";
 
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
     private static final String KEY_LEGAL_CONTAINER = "legal_container";
