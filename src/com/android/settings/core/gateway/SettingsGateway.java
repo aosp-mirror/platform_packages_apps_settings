@@ -55,9 +55,7 @@ import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
-import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragment;
-import com.android.settings.connecteddevice.ConnectedDeviceDashboardFragmentOld;
 import com.android.settings.connecteddevice.usb.UsbDetailsFragment;
 import com.android.settings.datausage.DataUsageList;
 import com.android.settings.datausage.DataUsageSummary;
@@ -242,7 +240,6 @@ public class SettingsGateway {
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragment.class.getName(),
-            ConnectedDeviceDashboardFragmentOld.class.getName(),
             UsbDetailsFragment.class.getName(),
             AppAndNotificationDashboardFragment.class.getName(),
             AccountDashboardFragment.class.getName(),
@@ -252,7 +249,6 @@ public class SettingsGateway {
             BluetoothDeviceDetailsFragment.class.getName(),
             DataUsageList.class.getName(),
             DirectoryAccessDetails.class.getName(),
-            AdvancedConnectedDeviceDashboardFragment.class.getName()
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

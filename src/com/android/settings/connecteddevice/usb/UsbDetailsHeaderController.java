@@ -53,7 +53,7 @@ public class UsbDetailsHeaderController extends UsbDetailsController {
         mHeaderController.setLabel(mContext.getString(R.string.usb_pref));
         mHeaderController.setIcon(mContext.getDrawable(R.drawable.ic_usb));
         mHeaderController.setSummary(
-                mContext.getString(UsbModePreferenceController.getSummary(newMode)));
+                mContext.getString(ConnectedUsbDeviceUpdater.getSummary(newMode)));
         mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
     }
 
