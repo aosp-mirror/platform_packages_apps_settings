@@ -103,7 +103,7 @@ public class BatterySaverController extends TogglePreferenceController
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final boolean mode = mPowerManager.isPowerSaveMode();
         final int format = mode ? R.string.battery_saver_on_summary
                 : R.string.battery_saver_off_summary;

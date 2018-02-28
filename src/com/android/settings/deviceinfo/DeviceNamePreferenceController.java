@@ -67,7 +67,7 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         return mDeviceName;
     }
 

@@ -113,7 +113,7 @@ public class BluetoothDeviceNamePreferenceController extends BasePreferenceContr
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         String deviceName = getDeviceName();
         if (TextUtils.isEmpty(deviceName)) {
             return super.getSummary();

@@ -38,11 +38,11 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         return Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.LOCK_TO_APP_ENABLED, 0) != 0
-                ? mContext.getString(R.string.switch_on_text)
-                : mContext.getString(R.string.switch_off_text);
+                ? mContext.getText(R.string.switch_on_text)
+                : mContext.getText(R.string.switch_off_text);
     }
 
     @Override

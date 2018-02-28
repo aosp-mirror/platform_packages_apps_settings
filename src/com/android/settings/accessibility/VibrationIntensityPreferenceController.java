@@ -82,19 +82,19 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final int intensity = Settings.System.getInt(mContext.getContentResolver(),
                 mSettingKey, getDefaultIntensity());
 
         switch (intensity) {
             case Vibrator.VIBRATION_INTENSITY_OFF:
-                return mContext.getString(R.string.accessibility_vibration_intensity_off);
+                return mContext.getText(R.string.accessibility_vibration_intensity_off);
             case Vibrator.VIBRATION_INTENSITY_LOW:
-                return mContext.getString(R.string.accessibility_vibration_intensity_low);
+                return mContext.getText(R.string.accessibility_vibration_intensity_low);
             case Vibrator.VIBRATION_INTENSITY_MEDIUM:
-                return mContext.getString(R.string.accessibility_vibration_intensity_medium);
+                return mContext.getText(R.string.accessibility_vibration_intensity_medium);
             case Vibrator.VIBRATION_INTENSITY_HIGH:
-                return mContext.getString(R.string.accessibility_vibration_intensity_high);
+                return mContext.getText(R.string.accessibility_vibration_intensity_high);
             default:
                 return "";
         }

@@ -57,7 +57,7 @@ public class SliceBuilderUtils {
         final Icon icon = Icon.createWithResource(context, sliceData.getIconResource());
         final BasePreferenceController controller = getPreferenceController(context, sliceData);
 
-        final String subtitleText = getSubtitleText(context, controller, sliceData);
+        final CharSequence subtitleText = getSubtitleText(context, controller, sliceData);
 
         final RowBuilder builder = new RowBuilder(context, sliceData.getUri())
                 .setTitle(sliceData.getTitle())
@@ -120,9 +120,9 @@ public class SliceBuilderUtils {
     }
 
     @VisibleForTesting
-    static String getSubtitleText(Context context, AbstractPreferenceController controller,
+    static CharSequence getSubtitleText(Context context, AbstractPreferenceController controller,
             SliceData sliceData) {
-        String summaryText = sliceData.getSummary();
+        CharSequence summaryText = sliceData.getSummary();
         if (isValidSummary(context, summaryText)) {
             return summaryText;
         }
@@ -138,13 +138,14 @@ public class SliceBuilderUtils {
         return sliceData.getScreenTitle();
     }
 
-    private static boolean isValidSummary(Context context, String summary) {
-        if (summary == null || TextUtils.isEmpty(summary.trim())) {
+    private static boolean isValidSummary(Context context, CharSequence summary) {
+        if (summary == null || TextUtils.isEmpty(summary.toString().trim())) {
             return false;
         }
 
-        final String placeHolder = context.getString(R.string.summary_placeholder);
-        final String doublePlaceHolder = context.getString(R.string.summary_two_lines_placeholder);
+        final CharSequence placeHolder = context.getText(R.string.summary_placeholder);
+        final CharSequence doublePlaceHolder =
+                context.getText(R.string.summary_two_lines_placeholder);
 
         return !(TextUtils.equals(summary, placeHolder)
                 || TextUtils.equals(summary, doublePlaceHolder));
