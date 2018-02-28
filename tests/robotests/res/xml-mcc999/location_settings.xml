@@ -24,6 +24,7 @@
         android:title="title"
         android:icon="@drawable/ic_android"
         android:summary="summary"
-        settings:controller="com.android.settings.slices.FakePreferenceController"/>
+        settings:controller="com.android.settings.slices.FakePreferenceController"
+        settings:platform_slice="true"/>
 
 </PreferenceScreen>

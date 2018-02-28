@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.provider.SettingsSlicesContract;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
@@ -63,6 +64,10 @@ public class SettingsSliceProvider extends SliceProvider {
 
     private static final String TAG = "SettingsSliceProvider";
 
+    /**
+     * Authority for Settings slices not officially supported by the platform, but extensible for
+     * OEMs.
+     */
     public static final String SLICE_AUTHORITY = "com.android.settings.slices";
 
     public static final String PATH_WIFI = "wifi";
@@ -81,13 +86,6 @@ public class SettingsSliceProvider extends SliceProvider {
 
     @VisibleForTesting
     Map<Uri, SliceData> mSliceDataCache;
-
-    public static Uri getUri(String path) {
-        return new Uri.Builder()
-                .scheme(ContentResolver.SCHEME_CONTENT)
-                .authority(SLICE_AUTHORITY)
-                .appendPath(path).build();
-    }
 
     @Override
     public boolean onCreateSliceProvider() {
@@ -176,7 +174,8 @@ public class SettingsSliceProvider extends SliceProvider {
                         .setSubtitle(state)
                         .addEndItem(new SliceAction(getBroadcastIntent(ACTION_WIFI_CHANGED),
                                 null, finalWifiEnabled))
-                        .setPrimaryAction(new SliceAction(getIntent(Intent.ACTION_MAIN), null, null)))
+                        .setPrimaryAction(
+                                new SliceAction(getIntent(Intent.ACTION_MAIN), null, null)))
                 .build();
     }
 

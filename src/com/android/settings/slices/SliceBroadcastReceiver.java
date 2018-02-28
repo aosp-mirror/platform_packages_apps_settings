@@ -59,7 +59,8 @@ public class SliceBroadcastReceiver extends BroadcastReceiver {
                 // Wait a bit for wifi to update (TODO: is there a better way to do this?)
                 Handler h = new Handler();
                 h.postDelayed(() -> {
-                    Uri uri = SettingsSliceProvider.getUri(SettingsSliceProvider.PATH_WIFI);
+                    Uri uri = SliceBuilderUtils.getUri(SettingsSliceProvider.PATH_WIFI,
+                            false /* isPlatformSlice */);
                     context.getContentResolver().notifyChange(uri, null);
                 }, 1000);
                 break;

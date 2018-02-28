@@ -19,9 +19,12 @@ package com.android.settings.slices;
 import static com.android.settings.slices.SettingsSliceProvider.EXTRA_SLICE_KEY;
 
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
+import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -96,6 +99,17 @@ public class SliceBuilderUtils {
             SliceData sliceData) {
         return getPreferenceController(context, sliceData.getPreferenceController(),
                 sliceData.getKey());
+    }
+
+    public static Uri getUri(String path, boolean isPlatformSlice) {
+        final String authority = isPlatformSlice
+                ? SettingsSlicesContract.AUTHORITY
+                : SettingsSliceProvider.SLICE_AUTHORITY;
+        return new Uri.Builder()
+                .scheme(ContentResolver.SCHEME_CONTENT)
+                .authority(authority)
+                .appendPath(path)
+                .build();
     }
 
     private static BasePreferenceController getPreferenceController(Context context,
