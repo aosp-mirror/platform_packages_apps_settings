@@ -71,7 +71,7 @@ public class CreateShortcut extends LauncherActivity {
     @VisibleForTesting
     Intent createResultIntent(Intent shortcutIntent, ResolveInfo resolveInfo,
             CharSequence label) {
-        shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        shortcutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         ShortcutManager sm = getSystemService(ShortcutManager.class);
         ActivityInfo activityInfo = resolveInfo.activityInfo;
 
