@@ -41,7 +41,7 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public class AnomalyCleanUpJobServiceTest {
+public class AnomalyCleanupJobServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -49,7 +49,7 @@ public class AnomalyCleanUpJobServiceTest {
 
     @Test
     public void testScheduleCleanUp() {
-        AnomalyCleanUpJobService.scheduleCleanUp(application);
+        AnomalyCleanupJobService.scheduleCleanUp(application);
 
         ShadowJobScheduler shadowJobScheduler = Shadows.shadowOf(
                 application.getSystemService(JobScheduler.class));
@@ -57,7 +57,8 @@ public class AnomalyCleanUpJobServiceTest {
         assertEquals(1, pendingJobs.size());
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_clean_up);
-        assertThat(pendingJob.getMinLatencyMillis()).isEqualTo(TimeUnit.DAYS.toMillis(1));
+        assertThat(pendingJob.getIntervalMillis()).isEqualTo(TimeUnit.DAYS.toMillis(1));
         assertThat(pendingJob.isRequireDeviceIdle()).isTrue();
+        assertThat(pendingJob.isRequireCharging()).isTrue();
     }
 }
