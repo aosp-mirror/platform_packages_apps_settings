@@ -70,6 +70,8 @@ public class SliceData {
     @SliceType
     private final int mSliceType;
 
+    private final boolean mIsPlatformDefined;
+
     public String getKey() {
         return mKey;
     }
@@ -106,6 +108,10 @@ public class SliceData {
         return mSliceType;
     }
 
+    public boolean isPlatformDefined() {
+        return mIsPlatformDefined;
+    }
+
     private SliceData(Builder builder) {
         mKey = builder.mKey;
         mTitle = builder.mTitle;
@@ -116,6 +122,7 @@ public class SliceData {
         mUri = builder.mUri;
         mPreferenceController = builder.mPrefControllerClassName;
         mSliceType = builder.mSliceType;
+        mIsPlatformDefined = builder.mIsPlatformDefined;
     }
 
     @Override
@@ -150,6 +157,8 @@ public class SliceData {
         private String mPrefControllerClassName;
 
         private int mSliceType;
+
+        private boolean mIsPlatformDefined;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -193,6 +202,11 @@ public class SliceData {
 
         public Builder setSliceType(@SliceType int sliceType) {
             mSliceType = sliceType;
+            return this;
+        }
+
+        public Builder setPlatformDefined(boolean isPlatformDefined) {
+            mIsPlatformDefined = isPlatformDefined;
             return this;
         }
 
