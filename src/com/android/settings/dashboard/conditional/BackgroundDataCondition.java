@@ -18,9 +18,12 @@ package com.android.settings.dashboard.conditional;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.net.NetworkPolicyManager;
+import android.util.FeatureFlagUtils;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.Settings;
+import com.android.settings.core.FeatureFlags;
 
 public class BackgroundDataCondition extends Condition {
 
@@ -55,8 +58,12 @@ public class BackgroundDataCondition extends Condition {
 
     @Override
     public void onPrimaryClick() {
-        mManager.getContext().startActivity(new Intent(mManager.getContext(),
-                Settings.DataUsageSummaryActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        final Class activityClass = FeatureFlagUtils.isEnabled(mManager.getContext(),
+                FeatureFlags.DATA_USAGE_SETTINGS_V2)
+                ? Settings.DataUsageSummaryActivity.class
+                : Settings.DataUsageSummaryLegacyActivity.class;
+        mManager.getContext().startActivity(new Intent(mManager.getContext(), activityClass)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     @Override
