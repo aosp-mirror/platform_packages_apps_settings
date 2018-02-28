@@ -32,11 +32,11 @@ import com.android.settings.wrapper.RestrictedLockUtilsWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
-import com.android.settingslib.core.lifecycle.events.OnPause;
-import com.android.settingslib.core.lifecycle.events.OnResume;
+import com.android.settingslib.core.lifecycle.events.OnStart;
+import com.android.settingslib.core.lifecycle.events.OnStop;
 
 public class MobileNetworkPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin, LifecycleObserver, OnResume, OnPause {
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop {
 
     private static final String KEY_MOBILE_NETWORK_SETTINGS = "mobile_network_settings";
 
@@ -71,9 +71,7 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreference = screen.findPreference(getPreferenceKey());
-        }
+        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -82,15 +80,13 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onResume() {
+    public void onStart() {
         if (isAvailable()) {
             if (mPhoneStateListener == null) {
                 mPhoneStateListener = new PhoneStateListener() {
                     @Override
                     public void onServiceStateChanged(ServiceState serviceState) {
-                        if (mPreference != null) {
-                            mPreference.setSummary(mTelephonyManager.getNetworkOperatorName());
-                        }
+                        updateState(mPreference);
                     }
                 };
             }
@@ -99,9 +95,14 @@ public class MobileNetworkPreferenceController extends AbstractPreferenceControl
     }
 
     @Override
-    public void onPause() {
+    public void onStop() {
         if (mPhoneStateListener != null) {
             mTelephonyManager.listen(mPhoneStateListener, PhoneStateListener.LISTEN_NONE);
         }
+    }
+
+    @Override
+    public CharSequence getSummary() {
+        return mTelephonyManager.getNetworkOperatorName();
     }
 }
