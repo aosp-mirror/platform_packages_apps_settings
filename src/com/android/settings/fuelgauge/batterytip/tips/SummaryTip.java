@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
@@ -28,13 +29,17 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  * Tip to show general summary about battery life
  */
 public class SummaryTip extends BatteryTip {
+    private long mAverageTimeMs;
 
-    public SummaryTip(@StateType int state) {
-        super(TipType.SUMMARY, state, false /* showDialog */);
+    public SummaryTip(@StateType int state, long averageTimeMs) {
+        super(TipType.SUMMARY, state, true /* showDialog */);
+        mAverageTimeMs = averageTimeMs;
     }
 
-    private SummaryTip(Parcel in) {
+    @VisibleForTesting
+    SummaryTip(Parcel in) {
         super(in);
+        mAverageTimeMs = in.readLong();
     }
 
     @Override
@@ -58,9 +63,19 @@ public class SummaryTip extends BatteryTip {
     }
 
     @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeLong(mAverageTimeMs);
+    }
+
+    @Override
     public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
         metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
                 mState);
+    }
+
+    public long getAverageTimeMs() {
+        return mAverageTimeMs;
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

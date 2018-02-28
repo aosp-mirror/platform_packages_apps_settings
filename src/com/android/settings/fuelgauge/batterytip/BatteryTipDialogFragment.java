@@ -32,11 +32,13 @@ import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
+import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPreferenceController.BatteryTipListener;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settingslib.utils.StringUtil;
 
@@ -72,9 +74,18 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
         switch (mBatteryTip.getType()) {
             case BatteryTip.TipType.SUMMARY:
-            case BatteryTip.TipType.LOW_BATTERY:
-                //TODO(b/70570352): add dialog
-                return null;
+                final long averageTimeMs = ((SummaryTip) mBatteryTip).getAverageTimeMs();
+                final String message = context.getString(
+                        averageTimeMs == Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN
+                                ? R.string.battery_tip_dialog_summary_message_no_estimation
+                                : R.string.battery_tip_dialog_summary_message,
+                        StringUtil.formatElapsedTime(context, averageTimeMs,
+                                false /* withSeconds */));
+
+                return new AlertDialog.Builder(context)
+                        .setMessage(message)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .create();
             case BatteryTip.TipType.HIGH_DEVICE_USAGE:
                 final HighUsageTip highUsageTip = (HighUsageTip) mBatteryTip;
                 final RecyclerView view = (RecyclerView) LayoutInflater.from(context).inflate(
