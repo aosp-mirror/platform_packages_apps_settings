@@ -67,14 +67,20 @@ public class PreferenceControllerListHelper {
             try {
                 controller = BasePreferenceController.createInstance(context, controllerName);
             } catch (IllegalStateException e) {
+                Log.d(TAG, "Could not find Context-only controller for pref: " + controllerName);
                 final String key = metadata.getString(METADATA_KEY);
                 if (TextUtils.isEmpty(key)) {
                     Log.w(TAG, "Controller requires key but it's not defined in xml: "
                             + controllerName);
                     continue;
                 }
-                Log.d(TAG, "Could not find Context-only controller for pref: " + key);
-                controller = BasePreferenceController.createInstance(context, controllerName, key);
+                try {
+                    controller = BasePreferenceController.createInstance(context, controllerName,
+                            key);
+                } catch (IllegalStateException e2) {
+                    Log.w(TAG, "Cannot instantiate controller from reflection: " + controllerName);
+                    continue;
+                }
             }
             controllers.add(controller);
         }

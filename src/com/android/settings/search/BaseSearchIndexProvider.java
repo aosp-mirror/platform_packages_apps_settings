@@ -78,8 +78,10 @@ public class BaseSearchIndexProvider implements Indexable.SearchIndexProvider {
                     ((BasePreferenceController) controller).updateNonIndexableKeys(
                             nonIndexableKeys);
                 } else {
-                    throw new IllegalStateException(controller.getClass().getName()
-                            + " must implement " + PreferenceControllerMixin.class.getName());
+                    Log.e(TAG, controller.getClass().getName()
+                            + " must implement " + PreferenceControllerMixin.class.getName()
+                            + " treating the key non-indexable");
+                    nonIndexableKeys.add(controller.getPreferenceKey());
                 }
             }
             return nonIndexableKeys;
