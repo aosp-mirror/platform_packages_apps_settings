@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -119,7 +120,8 @@ public class BatterySaverController extends TogglePreferenceController
         mBatterySaverPref.setSummary(getSummary());
     }
 
-    private final ContentObserver mObserver = new ContentObserver(new Handler()) {
+    private final ContentObserver mObserver = new ContentObserver(
+            new Handler(Looper.getMainLooper())) {
         @Override
         public void onChange(boolean selfChange) {
             updateSummary();

@@ -16,13 +16,11 @@
 
 package com.android.settings;
 
-import static android.provider.Telephony.Carriers.CONTENT_URI;
-import static android.provider.Telephony.Carriers.FILTERED_URI;
-
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.provider.Telephony;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.telephony.SubscriptionManager;
@@ -37,7 +35,6 @@ import android.widget.RelativeLayout;
 public class ApnPreference extends Preference implements
         CompoundButton.OnCheckedChangeListener, OnClickListener {
     final static String TAG = "ApnPreference";
-    private boolean mDpcEnforced = false;
 
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
@@ -121,8 +118,7 @@ public class ApnPreference extends Preference implements
             Context context = getContext();
             if (context != null) {
                 int pos = Integer.parseInt(getKey());
-                Uri url = ContentUris.withAppendedId(
-                        mDpcEnforced ? FILTERED_URI : CONTENT_URI, pos);
+                Uri url = ContentUris.withAppendedId(Telephony.Carriers.CONTENT_URI, pos);
                 Intent editIntent = new Intent(Intent.ACTION_EDIT, url);
                 editIntent.putExtra(ApnSettings.SUB_ID, mSubId);
                 context.startActivity(editIntent);
@@ -140,9 +136,5 @@ public class ApnPreference extends Preference implements
 
     public void setSubId(int subId) {
         mSubId = subId;
-    }
-
-    public void setDpcEnforced(boolean enforced) {
-        mDpcEnforced = enforced;
     }
 }

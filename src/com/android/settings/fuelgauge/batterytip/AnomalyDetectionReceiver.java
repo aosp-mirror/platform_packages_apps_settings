@@ -44,6 +44,5 @@ public class AnomalyDetectionReceiver extends BroadcastReceiver {
         bundle.putLong(KEY_ANOMALY_TIMESTAMP, System.currentTimeMillis());
 
         AnomalyDetectionJobService.scheduleAnomalyDetection(context, intent);
-        AnomalyCleanUpJobService.scheduleCleanUp(context);
     }
 }

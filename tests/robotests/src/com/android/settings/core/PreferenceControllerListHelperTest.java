@@ -60,6 +60,17 @@ public class PreferenceControllerListHelperTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc998")
+    public void getControllers_partialFailure_shouldReturnTheRest() {
+        final List<BasePreferenceController> controllers =
+                PreferenceControllerListHelper.getPreferenceControllersFromXml(mContext,
+                        R.xml.location_settings);
+
+        assertThat(controllers).hasSize(1);
+        assertThat(controllers.get(0)).isInstanceOf(FakePreferenceController.class);
+    }
+
+    @Test
     public void filterControllers_noFilter_shouldReturnSameList() {
         final List<BasePreferenceController> controllers = new ArrayList<>();
         controllers.add(new BasePreferenceController(mContext, "key") {
