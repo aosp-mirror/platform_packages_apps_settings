@@ -19,6 +19,8 @@ package com.android.settings.dashboard;
 import android.app.Fragment;
 import android.content.Context;
 
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerListHelper;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settings.search.Indexable;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -58,6 +60,14 @@ public class DashboardFragmentSearchIndexProviderInspector {
         try {
             controllersFromFragment =
                     ((DashboardFragment) fragment).createPreferenceControllers(context);
+            List<BasePreferenceController> controllersFromXml = PreferenceControllerListHelper
+                    .getPreferenceControllersFromXml(context,
+                            ((DashboardFragment) fragment).getPreferenceScreenResId());
+            final List<BasePreferenceController> uniqueControllerFromXml =
+                    PreferenceControllerListHelper.filterControllers(
+                            controllersFromXml, controllersFromFragment);
+            controllersFromFragment.addAll(uniqueControllerFromXml);
+
         } catch (Throwable e) {
             // Can't do much with exception, assume the test passed.
             return true;

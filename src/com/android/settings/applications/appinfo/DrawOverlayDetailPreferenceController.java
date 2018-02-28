@@ -21,7 +21,6 @@ import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -48,11 +47,6 @@ public class DrawOverlayDetailPreferenceController extends AppInfoPreferenceCont
             }
         }
         return DISABLED_FOR_USER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
     }
 
     @Override

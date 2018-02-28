@@ -84,10 +84,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
 
     @Override
     public void updateState(Preference preference) {
-        if (preference == null) {
-            return;
-        }
-        preference.setSummary(getSummary());
+        super.updateState(preference);
         ((RestrictedPreference) preference).checkRestrictionAndSetDisabled(
                 UserManager.DISALLOW_PRINTING);
     }

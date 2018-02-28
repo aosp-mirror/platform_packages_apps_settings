@@ -75,7 +75,6 @@ public class AppAndNotificationDashboardFragment extends DashboardFragment {
         controllers.add(new EmergencyBroadcastPreferenceController(context,
                 "app_and_notif_cell_broadcast_settings"));
         controllers.add(new SpecialAppAccessPreferenceController(context));
-        controllers.add(new AppPermissionsPreferenceController(context));
         controllers.add(new RecentAppsPreferenceController(context, app, host));
         return controllers;
     }

@@ -19,7 +19,6 @@ package com.android.settings.gestures;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -53,11 +52,6 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
         return isAvailable
                 ? AVAILABLE
                 : DISABLED_UNSUPPORTED;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
     }
 
     @Override
