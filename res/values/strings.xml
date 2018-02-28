@@ -9615,6 +9615,27 @@
          show both names, with the directory name wrapped in parenthesis -->
     <string name="directory_on_volume"><xliff:g id="volume" example="SD Card">%1$s</xliff:g> (<xliff:g id="directory" example="Movies">%2$s</xliff:g>)</string>
 
+    <!-- Slices Strings -->
+
+    <!-- Summary text on a card explaining that a setting does not exist / is not supported on the device [CHAR_LIMIT=NONE]-->
+    <string name="unsupported_setting_summary" product="default">Setting isn’t supported on this phone</string>
+
+    <!-- Summary text on a card explaining that a setting does not exist / is not supported on the device [CHAR_LIMIT=NONE]-->
+    <string name="unsupported_setting_summary" product="tablet">Setting isn’t supported on this tablet</string>
+
+    <!-- Summary text on a card explaining that a setting does not exist / is not supported on the device [CHAR_LIMIT=NONE]-->
+    <string name="unsupported_setting_summary" product="device">Setting isn’t supported on this device</string>
+
+    <!-- Summary text on a card explaining that a setting cannot be changed by the current user. [CHAR_LIMIT=NONE] -->
+    <string name="disabled_for_user_setting_summary">Setting can’t be changed by current user</string>
+
+    <!-- Summary text on a card explaining a setting cannot be changed right now because it needs another setting to be changed. [CHAR_LIMIT=NONE] -->
+    <string name="disabled_dependent_setting_summary">Depends on another setting</string>
+
+    <!-- Summary text on a card explaining a setting cannot be changed right now, but we don't know the reason. [CHAR_LIMIT=NONE] -->
+    <string name="unknown_unavailability_setting_summary">Setting unavailable</string>
+
+
     <!-- Account type associated with the backup account. Empty for AOSP. [DO NOT TRANSLATE] -->
     <string name="account_type" translatable="false"></string>
     <!-- Package to target for Account credential confirmation. This will allow users to
