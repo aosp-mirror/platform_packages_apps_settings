@@ -20,32 +20,33 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-
 import com.android.settings.R;
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecentLocationRequestPreferenceController extends LocationBasePreferenceController {
 
     /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
+    @VisibleForTesting
+    static final String KEY_SEE_ALL = "recent_location_requests_see_all";
     private final LocationSettings mFragment;
     private final RecentLocationApps mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
+    private Preference mSeeAllButton;
 
-    @VisibleForTesting
+    /** Used in this class and {@link RecentLocationRequestSeeAllPreferenceController}*/
     static class PackageEntryClickedListener implements Preference.OnPreferenceClickListener {
-        private final LocationSettings mFragment;
+        private final DashboardFragment mFragment;
         private final String mPackage;
         private final UserHandle mUserHandle;
 
-        public PackageEntryClickedListener(LocationSettings fragment, String packageName,
+        public PackageEntryClickedListener(DashboardFragment fragment, String packageName,
                 UserHandle userHandle) {
             mFragment = fragment;
             mPackage = packageName;
@@ -92,24 +93,32 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         super.displayPreference(screen);
         mCategoryRecentLocationRequests =
                 (PreferenceCategory) screen.findPreference(KEY_RECENT_LOCATION_REQUESTS);
+        mSeeAllButton = screen.findPreference(KEY_SEE_ALL);
+
     }
 
     @Override
     public void updateState(Preference preference) {
         mCategoryRecentLocationRequests.removeAll();
+        mSeeAllButton.setVisible(false);
 
         final Context prefContext = preference.getContext();
         final List<RecentLocationApps.Request> recentLocationRequests =
                 mRecentLocationApps.getAppListSorted();
 
-        final List<Preference> recentLocationPrefs = new ArrayList<>(recentLocationRequests.size());
-        for (final RecentLocationApps.Request request : recentLocationRequests) {
-            recentLocationPrefs.add(createAppPreference(prefContext, request));
-        }
-        if (recentLocationRequests.size() > 0) {
+        if (recentLocationRequests.size() > 3) {
+            // Display the top 3 preferences to container in original order.
+            for (int i = 0; i < 3; i ++) {
+                mCategoryRecentLocationRequests.addPreference(
+                        createAppPreference(prefContext, recentLocationRequests.get(i)));
+            }
+            // Display a button to list all requests
+            mSeeAllButton.setVisible(true);
+        } else if (recentLocationRequests.size() > 0) {
             // Add preferences to container in original order (already sorted by recency).
-            for (Preference entry : recentLocationPrefs) {
-                mCategoryRecentLocationRequests.addPreference(entry);
+            for (RecentLocationApps.Request request : recentLocationRequests) {
+                mCategoryRecentLocationRequests.addPreference(
+                        createAppPreference(prefContext, request));
             }
         } else {
             // If there's no item to display, add a "No recent apps" item.
@@ -132,7 +141,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
 
     @VisibleForTesting
     AppPreference createAppPreference(Context prefContext, RecentLocationApps.Request request) {
-        final AppPreference pref =  createAppPreference(prefContext);
+        final AppPreference pref = createAppPreference(prefContext);
         pref.setSummary(request.contentDescription);
         pref.setIcon(request.icon);
         pref.setTitle(request.label);
