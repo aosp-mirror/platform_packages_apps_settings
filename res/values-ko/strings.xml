@@ -707,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"설정 기억"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"연결된 블루투스 오디오 기기의 최대 개수"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"연결된 블루투스 오디오 기기의 최대 개수 선택"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"블루투스 AVDTP 지연 보고서 사용"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"블루투스 AVDTP 지연 보고서 수신 허용"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"전송"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"무선 디스플레이 사용"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"근처에 기기가 없습니다."</string>
@@ -1441,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"직장 프로필 위치"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"앱 수준 권한"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"최근 위치 요청"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"최근에 위치 정보를 요청한 앱이 없습니다."</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"위치 서비스"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"배터리 사용량 많음"</string>
@@ -1880,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"서비스 사용"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"색상 보정 사용"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"캡션 사용"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"사용"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"사용 안함"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"사용"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"사용 안함"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"빠른 설정에 표시"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"보정 모드"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2313,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"자격증명 저장소를 사용하려면 기기에 보안 잠금 화면을 설정해야 합니다."</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"잠금 설정"</string>
     <string name="usage_access_title" msgid="332333405495457839">"사용 액세스 권한을 보유한 앱"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"긴급 신호음"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"백업"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"백업 및 복원"</string>
@@ -2888,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"일련번호, 하드웨어 버전"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android 보안 패치 수준, 베이스밴드 버전, 커널 버전"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"절전 모드 자동 해제, 잠금 화면 표시"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"지문"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Wi-Fi NFC 태그 설정"</string>
     <string name="write_tag" msgid="8571858602896222537">"쓰기"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"태그를 탭하여 작성하세요..."</string>
@@ -2921,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"도크 스피커 재생"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"모든 오디오"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"미디어 오디오만"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"무음"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"알림"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"진동"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"부팅 소리"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"사용 안함"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3170,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"<xliff:g id="FORMATTEDTIME">%1$s</xliff:g>까지 알람만 수신 모드로 변경"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"항상 알림 모드로 변경"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"화면이 켜져 있을 때"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"알림 일시중지로 음소거된 알림이 화면에 표시되도록 허용"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"알림 일시중지로 음소거된 알림이 화면에 표시되고 상태 표시줄 아이콘에 나타나도록 허용"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"화면이 꺼져 있을 때"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"알림 일시중지로 음소거된 알림이 화면을 켜고 불빛을 깜박이도록 허용"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"알림 일시중지로 음소거된 알림이 화면을 켜도록 허용"</string>
@@ -3358,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"이 기기를 MIDI로 사용"</string>
     <string name="usb_use" msgid="3372728031108932425">"USB 사용"</string>
     <string name="usb_use_also" msgid="557340935190819370">"다음 항목에 USB 사용"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"기본 USB 설정"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"다른 기기가 연결되고 휴대전화가 잠금 해제되었을 때 이 설정이 적용됩니다. 신뢰할 수 있는 기기에만 연결하세요."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"기기 충전 중"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"연결된 기기 충전 중"</string>
@@ -3482,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"평균 <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> 저장용량 사용됨"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g>(으)로 로그인됨"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g>은(는) 기본 앱입니다."</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"사용"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"사용 안함"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"사용"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"사용 안함"</string>
     <string name="backup_disabled" msgid="485189128759595412">"백업 사용 안함"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> 버전으로 업데이트됨"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"업데이트 가능"</string>
@@ -3657,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g>에 연결됨"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"여러 기기에 연결됨"</string>
     <string name="demo_mode" msgid="2798762752209330277">"시스템 UI 데모 모드"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"야간 모드"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"야간 모드 설정"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"빠른 설정 개발자 타일"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"창 추적"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"표면 추적"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope 추적"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"직장 프로필 설정"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"연락처 검색"</string>
@@ -3855,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"운전 중 블루투스 사용"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"운전 중에 블루투스를 자동으로 사용 설정"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Android 8.0 배터리 설정 확인하기"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>

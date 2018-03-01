@@ -707,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"সেটিংস মনে রাখুন"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"ব্লুটুথের মাধ্যমে সংযুক্ত সর্বাধিক অডিও ডিভাইস"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"সর্বাধিক কতগুলি অডিও ডিভাইস ব্লুটুথের মাধ্যমে সংযুক্ত করা যাবে তা নির্দিষ্ট করুন"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"ব্লুটুথ AVDTP বিলম্ব সম্পর্কিত রিপোর্ট চালু করুন"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"ব্লুটুথ AVDTP বিলম্ব সম্পর্কিত রিপোর্ট পাওয়ার অনুমতি দিন"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"কাস্ট করুন"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ওয়্যারলেস প্রদর্শন সক্ষম করুন"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"কাছাকাছি কোনো ডিভাইস পাওয়া যায়নি।"</string>
@@ -1441,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"কাজের প্রোফাইলের জন্য অবস্থান"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"অ্যাপ-স্তরের অনুমতিগুলি"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"সাম্প্রতিক অবস্থান অনুরোধগুলি"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"সম্প্রতি কোনো অ্যাপ্লিকেশান অবস্থানের অনুরোধ করেনি"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"লোকেশন পরিষেবা"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"উচ্চ ব্যাটারির ব্যবহার"</string>
@@ -1880,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"পরিষেবা ব্যবহার করুন"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"কালার কারেকশন ব্যবহার করুন"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"ক্যাপশন ব্যবহার করুন"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"চালু"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"বন্ধ"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"চালু"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"বন্ধ"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"দ্রুত সেটিংসে দেখান"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"সংশোধন মোড"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2313,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"আপনি ক্রেডেনশিয়াল স্টোরেজ ব্যবহার করার আগে আপনার ডিভাইসে একটি সুরক্ষিত লক স্ক্রিন থাকতে হবে"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"লক সেট করুন"</string>
     <string name="usage_access_title" msgid="332333405495457839">"ব্যবহারের অ্যাক্সেস যুক্ত অ্যাপ্স"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"জরুরি টোন"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"জরুরি কল স্থাপন করা সময় কি ধরণের কার্যকলাপ করবে তা সেট করুন"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"ব্যাক-আপ"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"ব্যাকআপ ও পুনরুদ্ধার"</string>
@@ -2888,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"সিরিয়াল নম্বর, হার্ডওয়্যার ভার্সন"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"Android নিরাপত্তা প্যাচের স্তর, বেসব্যান্ড ভার্সন, কার্নেল ভার্সন"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"অ্যাম্বিয়েন্ট ডিসপ্লে, লক স্ক্রিন ডিসপ্লে"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"আঙ্গুলের ছাপ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"ওয়াই-ফাই NFC ট্যাগ সেটআপ করুন"</string>
     <string name="write_tag" msgid="8571858602896222537">"লিখুন"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"লিখতে একটি ট্যাগে আলতো চাপুন..."</string>
@@ -2921,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"ডক স্পিকার শুরু"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"সমস্ত অডিও"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"কেবলমাত্র মিডিয়া অডিও"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"নীরব"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"সতর্কতা"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ভাইব্রেট"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"ধ্বনিগুলিতে শক্তি"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"কখনও নয়"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3170,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"শুধুমাত্র <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> পর্যন্ত অ্যালার্মগুলি পরিবর্তন করুন"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"সর্বদা বাধা দেওয়াতে পরিবর্তন করুন"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"যখন স্ক্রিন চালু থাকে"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"\'বিরক্ত করবেন না\' দ্বারা নীরব করা বিজ্ঞপ্তিগুলিকে স্ক্রিনে প্রদর্শিত হতে দিন"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"\'বিরক্ত করবেন না\' দ্বারা মিউট করা বিজ্ঞপ্তিগুলিকে স্ক্রিনে প্রদর্শিত হতে এবং একটি স্ট্যাটাস বার আইকন দেখাতে দিন"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"যখন স্ক্রিন বন্ধ থাকে"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"\'বিরক্ত করবেন না\' দ্বারা নীরব করা বিজ্ঞপ্তিগুলিকে স্ক্রিন চালু করতে এবং লাইটটি জ্বলাতে ও নেভাতে দিন"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"\'বিরক্ত করবেন না\' দ্বারা নীরব করা বিজ্ঞপ্তিগুলিকে স্ক্রিন চালু করতে দিন"</string>
@@ -3358,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"MIDI হিসেবে এই ডিভাইসটি ব্যবহার করুন"</string>
     <string name="usb_use" msgid="3372728031108932425">"এর জন্য USB ব্যবহার করুন"</string>
     <string name="usb_use_also" msgid="557340935190819370">"এছাড়া এই সমস্ত কাজেও USB ব্যবহার করুন:"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"ডিফল্ট ইউএসবি কনফিগারেশন"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"যখন অন্য একটি ডিভাইস কানেক্ট হয়ে আছে এবং আপনার ফোন আনলক অবস্থায় থাকে তখন এই সেটিংস প্রয়োগ করা হবে। শুধুমাত্র বিশ্বস্ত ডিভাইসগুলির সাথেই কানেক্ট করুন।"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"এই ডিভাইসটি চার্জ করা হচ্ছে"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"সংযুক্ত ডিভাইসে চার্জ দেওয়া"</string>
@@ -3482,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> এর মধ্যে <xliff:g id="USED_MEMORY">%1$s</xliff:g> মেমোরি ব্যবহৃত হয়েছে"</string>
     <string name="users_summary" msgid="1674864467098487328">"<xliff:g id="USER_NAME">%1$s</xliff:g> হিসেবে প্রবেশ করেছেন"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> হল ডিফল্ট"</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"চালু"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"বন্ধ"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"চালু"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"বন্ধ"</string>
     <string name="backup_disabled" msgid="485189128759595412">"ব্যাক-আপ নেওয়া অক্ষম করা রয়েছে"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Android <xliff:g id="VERSION">%1$s</xliff:g> এ আপডেট করা হয়েছে"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"আপডেট পাওয়া যাচ্ছে"</string>
@@ -3657,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"<xliff:g id="ID_1">%1$s</xliff:g> এর সাথে সংযুক্ত আছে"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"একাধিক ডিভাইসের সাথে সংযুক্ত আছে"</string>
     <string name="demo_mode" msgid="2798762752209330277">"সিস্টেম UI ডেমো মোড"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"রাতের মোড"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"রাতের মোড সেট করুন"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"দ্রুত সেটিংস ডেভেলপার টাইলস"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"উইন্ডো ট্রেস"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"সারফেস ট্রেস"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"উইনস্কোপ ট্রেস"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"কর্মস্থলের প্রোফাইলের সেটিংস"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"পরিচিতির অনুসন্ধান"</string>
@@ -3855,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"ড্রাইভ করার সময় ব্লুটুথ চালু রাখুন"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"ড্রাইভ করার সময় নিজে থেকে ব্লুটুথ চালু হতে দিন"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Android 8.0 এর ব্যাটারি সেটিংস দেখুন"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>
