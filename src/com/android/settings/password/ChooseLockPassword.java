@@ -885,7 +885,7 @@ public class ChooseLockPassword extends SettingsActivity {
                 // Hide password requirement view when we are just asking user to confirm the pw.
                 mPasswordRestrictionView.setVisibility(View.GONE);
                 setHeaderText(getString(mUiStage.getHint(mIsAlphaMode, mForFingerprint)));
-                setNextEnabled(canInput && length > 0);
+                setNextEnabled(canInput && length >= mPasswordMinLength);
                 mClearButton.setEnabled(canInput && length > 0);
             }
             int message = mUiStage.getMessage(mIsAlphaMode, mForFingerprint);
