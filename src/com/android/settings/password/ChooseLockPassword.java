@@ -279,7 +279,7 @@ public class ChooseLockPassword extends SettingsActivity {
                     0,
                     0,
                     0,
-                    R.string.next_label);
+                    R.string.lockpassword_confirm_label);
 
             Stage(int hintInAlpha, int hintInAlphaForFingerprint,
                     int hintInNumeric, int hintInNumericForFingerprint,
