@@ -37,9 +37,9 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 
-public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, LifecycleObserver,
-        OnResume, OnPause, PreferenceControllerMixin {
+public class StayAwakePreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, LifecycleObserver,  OnResume, OnPause,
+        PreferenceControllerMixin {
 
     private static final String TAG = "StayAwakeCtrl";
     private static final String PREFERENCE_KEY = "keep_screen_on";
@@ -116,16 +116,11 @@ public class StayAwakePreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.STAY_ON_WHILE_PLUGGED_IN, SETTING_VALUE_OFF);
         mPreference.setChecked(false);
-        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting

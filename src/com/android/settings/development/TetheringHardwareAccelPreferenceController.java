@@ -21,14 +21,12 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class TetheringHardwareAccelPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class TetheringHardwareAccelPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String TETHERING_HARDWARE_OFFLOAD = "tethering_hardware_offload";
 
@@ -39,8 +37,6 @@ public class TetheringHardwareAccelPreferenceController extends
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 1;
 
-    private SwitchPreference mPreference;
-
     public TetheringHardwareAccelPreferenceController(Context context) {
         super(context);
     }
@@ -48,13 +44,6 @@ public class TetheringHardwareAccelPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return TETHERING_HARDWARE_OFFLOAD;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -71,19 +60,14 @@ public class TetheringHardwareAccelPreferenceController extends
         final int tetheringMode = Settings.Global.getInt(
                 mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, 0 /* default */);
-        mPreference.setChecked(tetheringMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(tetheringMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.TETHER_OFFLOAD_DISABLED, SETTING_VALUE_OFF);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

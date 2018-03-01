@@ -112,15 +112,4 @@ public class ForceMSAAPreferenceControllerTest {
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ForceMSAAPreferenceController.MSAA_PROPERTY, false /* default */);
-
-        assertThat(mode).isFalse();
-        verify(mPreference).setEnabled(true);
-    }
 }

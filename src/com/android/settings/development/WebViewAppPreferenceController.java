@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -31,16 +30,14 @@ import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class WebViewAppPreferenceController extends
-        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
+public class WebViewAppPreferenceController extends DeveloperOptionsPreferenceController implements
+        PreferenceControllerMixin {
 
     private static final String TAG = "WebViewAppPrefCtrl";
     private static final String WEBVIEW_APP_KEY = "select_webview_provider";
 
     private final PackageManagerWrapper mPackageManager;
     private final WebViewUpdateServiceWrapper mWebViewUpdateServiceWrapper;
-
-    private Preference mPreference;
 
     public WebViewAppPreferenceController(Context context) {
         super(context);
@@ -55,13 +52,6 @@ public class WebViewAppPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public void updateState(Preference preference) {
         final CharSequence defaultAppLabel = getDefaultAppLabel();
         if (!TextUtils.isEmpty(defaultAppLabel)) {
@@ -70,16 +60,6 @@ public class WebViewAppPreferenceController extends
             Log.d(TAG, "No default app");
             mPreference.setSummary(R.string.app_list_preference_none);
         }
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting

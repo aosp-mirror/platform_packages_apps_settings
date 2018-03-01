@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -31,8 +30,6 @@ public class DisableAutomaticUpdatesPreferenceController extends
         Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String OTA_DISABLE_AUTOMATIC_UPDATE_KEY = "ota_disable_automatic_update";
-
-    private SwitchPreference mPreference;
 
     // We use the "disabled status" in code, but show the opposite text
     // "Automatic system updates" on screen. So a value 0 indicates the
@@ -52,13 +49,6 @@ public class DisableAutomaticUpdatesPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean updatesEnabled = (Boolean) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -72,19 +62,14 @@ public class DisableAutomaticUpdatesPreferenceController extends
         final int updatesEnabled = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, 0 /* default */);
 
-        mPreference.setChecked(updatesEnabled != DISABLE_UPDATES_SETTING);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(updatesEnabled != DISABLE_UPDATES_SETTING);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.OTA_DISABLE_AUTOMATIC_UPDATE, DISABLE_UPDATES_SETTING);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

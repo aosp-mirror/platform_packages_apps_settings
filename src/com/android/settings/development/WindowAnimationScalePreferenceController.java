@@ -22,7 +22,6 @@ import android.os.ServiceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
@@ -44,8 +43,6 @@ public class WindowAnimationScalePreferenceController extends
     private final String[] mListValues;
     private final String[] mListSummaries;
 
-    private ListPreference mPreference;
-
     public WindowAnimationScalePreferenceController(Context context) {
         super(context);
 
@@ -62,13 +59,6 @@ public class WindowAnimationScalePreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         writeAnimationScaleOption(newValue);
         return true;
@@ -80,14 +70,9 @@ public class WindowAnimationScalePreferenceController extends
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeAnimationScaleOption(null);
-        mPreference.setEnabled(false);
     }
 
     private void writeAnimationScaleOption(Object newValue) {
@@ -111,8 +96,9 @@ public class WindowAnimationScalePreferenceController extends
                     break;
                 }
             }
-            mPreference.setValue(mListValues[index]);
-            mPreference.setSummary(mListSummaries[index]);
+            final ListPreference listPreference = (ListPreference) mPreference;
+            listPreference.setValue(mListValues[index]);
+            listPreference.setSummary(mListSummaries[index]);
         } catch (RemoteException e) {
             // intentional no-op
         }

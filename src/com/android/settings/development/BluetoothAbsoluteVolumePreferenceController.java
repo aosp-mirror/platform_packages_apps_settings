@@ -21,7 +21,6 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,8 +35,6 @@ public class BluetoothAbsoluteVolumePreferenceController extends
     static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
             "persist.bluetooth.disableabsvol";
 
-    private SwitchPreference mPreference;
-
     public BluetoothAbsoluteVolumePreferenceController(Context context) {
         super(context);
     }
@@ -45,13 +42,6 @@ public class BluetoothAbsoluteVolumePreferenceController extends
     @Override
     public String getPreferenceKey() {
         return BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -66,18 +56,13 @@ public class BluetoothAbsoluteVolumePreferenceController extends
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(
                 BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
-        mPreference.setChecked(isEnabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, "false");
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

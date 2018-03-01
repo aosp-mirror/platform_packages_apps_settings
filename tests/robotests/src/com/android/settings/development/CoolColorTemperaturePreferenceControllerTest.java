@@ -110,13 +110,6 @@ public class CoolColorTemperaturePreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_shouldBeFalse() {
         assertThat(mController.isAvailable()).isFalse();

@@ -192,20 +192,6 @@ public class OemUnlockPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsDisabled_preferenceShouldCheckRestriction() {
-        mController = spy(mController);
-        doReturn(true).when(mController).isOemUnlockedAllowed();
-        doReturn(false).when(mController).isOemUnlockAllowedByUserAndCarrier();
-        doReturn(false).when(mController).isBootloaderUnlocked();
-        when(mPreference.isEnabled()).thenReturn(true);
-
-        mController.onDeveloperOptionsDisabled();
-
-        verify(mPreference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
-
-    }
-
-    @Test
     public void onOemUnlockConfirmed_oemManagerShouldSetUnlockAllowedByUser() {
         mController.onOemUnlockConfirmed();
 

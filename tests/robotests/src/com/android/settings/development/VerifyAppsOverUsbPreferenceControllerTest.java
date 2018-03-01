@@ -200,12 +200,4 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
 
         assertThat(mode).isEqualTo(VerifyAppsOverUsbPreferenceController.SETTING_VALUE_OFF);
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldUpdateState() {
-        mController = spy(mController);
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mController).updateState(mPreference);
-    }
 }

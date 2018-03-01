@@ -24,7 +24,6 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
 import com.android.settings.core.PreferenceControllerMixin;
@@ -43,8 +42,6 @@ public class StrictModePreferenceController extends DeveloperOptionsPreferenceCo
 
     private final IWindowManager mWindowManager;
 
-    private SwitchPreference mPreference;
-
     public StrictModePreferenceController(Context context) {
         super(context);
 
@@ -58,13 +55,6 @@ public class StrictModePreferenceController extends DeveloperOptionsPreferenceCo
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         writeStrictModeVisualOptions(isEnabled);
@@ -73,19 +63,14 @@ public class StrictModePreferenceController extends DeveloperOptionsPreferenceCo
 
     @Override
     public void updateState(Preference preference) {
-        mPreference.setChecked(isStrictModeEnabled());
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(isStrictModeEnabled());
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeStrictModeVisualOptions(false);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     private boolean isStrictModeEnabled() {

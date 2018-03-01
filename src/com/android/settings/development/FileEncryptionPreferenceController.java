@@ -23,15 +23,14 @@ import android.os.SystemProperties;
 import android.os.storage.IStorageManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class FileEncryptionPreferenceController extends
-        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
+public class FileEncryptionPreferenceController extends DeveloperOptionsPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String KEY_CONVERT_FBE = "convert_to_file_encryption";
     private static final String KEY_STORAGE_MANAGER = "mount";
@@ -40,8 +39,6 @@ public class FileEncryptionPreferenceController extends
     static final String FILE_ENCRYPTION_PROPERTY_KEY = "ro.crypto.type";
 
     private final IStorageManager mStorageManager;
-
-    private Preference mPreference;
 
     public FileEncryptionPreferenceController(Context context) {
         super(context);
@@ -65,13 +62,6 @@ public class FileEncryptionPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return KEY_CONVERT_FBE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override

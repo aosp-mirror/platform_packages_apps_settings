@@ -38,7 +38,6 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
             "persist.bluetooth.maxconnectedaudiodevices";
 
     private final int mDefaultMaxConnectedAudioDevices;
-    private ListPreference mPreference;
 
     public BluetoothMaxConnectedAudioDevicesPreferenceController(Context context) {
         super(context);
@@ -54,10 +53,10 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-        final CharSequence[] entries = mPreference.getEntries();
+        final ListPreference listPreference = (ListPreference) mPreference;
+        final CharSequence[] entries = listPreference.getEntries();
         entries[0] = String.format(entries[0].toString(), mDefaultMaxConnectedAudioDevices);
-        mPreference.setEntries(entries);
+        listPreference.setEntries(entries);
     }
 
     @Override
@@ -93,13 +92,13 @@ public class BluetoothMaxConnectedAudioDevicesPreferenceController extends
 
     @Override
     protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        super.onDeveloperOptionsSwitchEnabled();
         updateState(mPreference);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(MAX_CONNECTED_AUDIO_DEVICES_PROPERTY, "");
         updateState(mPreference);
     }

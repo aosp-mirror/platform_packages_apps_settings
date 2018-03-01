@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,64 +17,62 @@
 package com.android.settings.development;
 
 import android.content.Context;
-import android.os.UserManager;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class BugReportInPowerPreferenceController extends
+/**
+ * Base controller for Switch preference that maps to a specific value in Settings.Global.
+ */
+public abstract class GlobalSettingSwitchPreferenceController extends
         DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
         PreferenceControllerMixin {
 
-    private static final String KEY_BUGREPORT_IN_POWER = "bugreport_in_power";
+    private static final int SETTING_VALUE_OFF = 0;
+    private static final int SETTING_VALUE_ON = 1;
 
-    @VisibleForTesting
-    static int SETTING_VALUE_ON = 1;
-    @VisibleForTesting
-    static int SETTING_VALUE_OFF = 0;
+    private final String mSettingsKey;
+    private final int mOn;
+    private final int mOff;
+    private final int mDefault;
 
-    private final UserManager mUserManager;
+    public GlobalSettingSwitchPreferenceController(Context context, String globalSettingsKey) {
+        this(context, globalSettingsKey, SETTING_VALUE_ON, SETTING_VALUE_OFF, SETTING_VALUE_OFF);
+    }
 
-    public BugReportInPowerPreferenceController(Context context) {
+    /**
+     * Use different on/off/default vaules other than the standard 1/0/0.
+     */
+    public GlobalSettingSwitchPreferenceController(Context context, String globalSettingsKey,
+            int valueOn, int valueOff, int valueDefault) {
         super(context);
-        mUserManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
-    }
-
-    @Override
-    public boolean isAvailable() {
-        return !mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_BUGREPORT_IN_POWER;
+        mSettingsKey = globalSettingsKey;
+        mOn = valueOn;
+        mOff = valueOff;
+        mDefault = valueDefault;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU,
-                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        Settings.Global.putInt(mContext.getContentResolver(), mSettingsKey, isEnabled ? mOn : mOff);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
+        final int mode =
+            Settings.Global.getInt(mContext.getContentResolver(), mSettingsKey, mDefault);
+        ((SwitchPreference) mPreference).setChecked(mode != mOff);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
+        Settings.Global.putInt(mContext.getContentResolver(), mSettingsKey, mOff);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

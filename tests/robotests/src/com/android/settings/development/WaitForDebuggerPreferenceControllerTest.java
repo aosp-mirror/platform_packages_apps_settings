@@ -192,11 +192,4 @@ public class WaitForDebuggerPreferenceControllerTest {
         verify(mPreference).setChecked(false);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

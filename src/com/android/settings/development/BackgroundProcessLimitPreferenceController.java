@@ -23,7 +23,6 @@ import android.os.RemoteException;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -37,7 +36,6 @@ public class BackgroundProcessLimitPreferenceController extends
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    private ListPreference mPreference;
 
     public BackgroundProcessLimitPreferenceController(Context context) {
         super(context);
@@ -49,13 +47,6 @@ public class BackgroundProcessLimitPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return APP_PROCESS_LIMIT_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -71,14 +62,9 @@ public class BackgroundProcessLimitPreferenceController extends
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeAppProcessLimitOptions(null);
-        mPreference.setEnabled(false);
     }
 
     private void updateAppProcessLimitOptions() {
@@ -92,8 +78,9 @@ public class BackgroundProcessLimitPreferenceController extends
                     break;
                 }
             }
-            mPreference.setValue(mListValues[index]);
-            mPreference.setSummary(mListSummaries[index]);
+            final ListPreference listPreference = (ListPreference) mPreference;
+            listPreference.setValue(mListValues[index]);
+            listPreference.setSummary(mListSummaries[index]);
         } catch (RemoteException e) {
             // intentional no-op
         }

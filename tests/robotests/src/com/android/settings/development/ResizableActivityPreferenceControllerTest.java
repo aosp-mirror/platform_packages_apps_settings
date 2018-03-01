@@ -114,11 +114,4 @@ public class ResizableActivityPreferenceControllerTest {
         verify(mPreference).setChecked(false);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_preferenceShouldBeEnabled() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

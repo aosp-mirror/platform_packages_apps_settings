@@ -127,11 +127,4 @@ public class HardwareOverlaysPreferenceControllerTest {
         verify(mPreference, never()).setChecked(anyBoolean());
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }
