@@ -18,10 +18,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/suggestion_card"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
     app:cardPreventCornerOverlap="false"
     app:cardUseCompatPadding="true"
     app:cardElevation="2dp"
@@ -29,7 +27,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
+        android:minHeight="112dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -43,7 +42,7 @@
                 android:layout_height="@dimen/suggestion_card_icon_size"
                 style="@style/SuggestionCardIcon"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="6dp" />
+                android:layout_marginBottom="8dp" />
 
             <ImageView
                 android:id="@+id/close_button"
@@ -62,32 +61,16 @@
             android:id="@android:id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             style="@style/SuggestionCardText"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
-            android:singleLine="true"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical"
             android:textAppearance="@style/TextAppearance.SuggestionTitle"
+            android:maxLines="3"
+            android:ellipsize="end"
             android:fadingEdge="horizontal" />
-
-        <TextView
-            android:id="@android:id/summary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/SuggestionCardText"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:singleLine="true"
-            android:textAppearance="@style/TextAppearance.SuggestionSummary" />
-
-        <Button
-            android:id="@android:id/primary"
-            style="@style/ActionPrimaryButton"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="18dp"
-            android:text="@string/suggestion_button_text" />
 
     </LinearLayout>
 

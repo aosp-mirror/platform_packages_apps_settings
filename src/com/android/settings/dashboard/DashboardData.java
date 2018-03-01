@@ -41,7 +41,7 @@ import java.util.Objects;
  */
 public class DashboardData {
     public static final int POSITION_NOT_FOUND = -1;
-    public static final int MAX_SUGGESTION_COUNT = 4;
+    public static final int MAX_SUGGESTION_COUNT = 2;
 
     // stable id for different type of items.
     @VisibleForTesting
