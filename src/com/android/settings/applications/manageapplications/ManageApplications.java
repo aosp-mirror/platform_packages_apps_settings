@@ -96,6 +96,8 @@ import com.android.settings.applications.appinfo.AppNotificationPreferenceContro
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
+
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
@@ -105,6 +107,8 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.NotificationBackend;
 import com.android.settings.notification.NotificationBackend.AppRow;
 import com.android.settings.widget.LoadingViewController;
+import com.android.settings.wifi.AppStateChangeWifiStateBridge;
+import com.android.settings.wifi.ChangeWifiStateDetails;
 import com.android.settingslib.HelpUtils;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -204,6 +208,7 @@ public class ManageApplications extends InstrumentedPreferenceFragment
     public static final int LIST_TYPE_MOVIES = 10;
     public static final int LIST_TYPE_PHOTOGRAPHY = 11;
     public static final int LIST_TYPE_DIRECTORY_ACCESS = 12;
+    public static final int LIST_TYPE_WIFI_ACCESS = 13;
 
     // List types that should show instant apps.
     public static final Set<Integer> LIST_TYPES_WITH_INSTANT = new ArraySet<>(Arrays.asList(
@@ -277,6 +282,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
         } else if (className.equals(Settings.DirectoryAccessSettingsActivity.class.getName())) {
             mListType = LIST_TYPE_DIRECTORY_ACCESS;
             screenTitle = R.string.directory_access;
+        } else if (className.equals(Settings.ChangeWifiStateActivity.class.getName())) {
+            mListType = LIST_TYPE_WIFI_ACCESS;
+            screenTitle = R.string.change_wifi_state_title;
         } else {
             mListType = LIST_TYPE_MAIN;
         }
@@ -443,6 +451,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 return MetricsEvent.MANAGE_EXTERNAL_SOURCES;
             case LIST_TYPE_DIRECTORY_ACCESS:
                 return MetricsEvent.DIRECTORY_ACCESS;
+            case LIST_TYPE_WIFI_ACCESS:
+                return MetricsEvent.CONFIGURE_WIFI;
             default:
                 return MetricsEvent.VIEW_UNKNOWN;
         }
@@ -540,7 +550,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             case LIST_TYPE_DIRECTORY_ACCESS:
                 startAppInfoFragment(DirectoryAccessDetails.class, R.string.directory_access);
                 break;
-
+            case LIST_TYPE_WIFI_ACCESS:
+                startAppInfoFragment(ChangeWifiStateDetails.class, R.string.change_wifi_state_title);
+                break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
@@ -846,6 +858,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 mExtraInfoBridge = new AppStateInstallAppsBridge(mContext, mState, this);
             } else if (mManageApplications.mListType == LIST_TYPE_DIRECTORY_ACCESS) {
                 mExtraInfoBridge = new AppStateDirectoryAccessBridge(mState, this);
+            } else if (mManageApplications.mListType == LIST_TYPE_WIFI_ACCESS) {
+                mExtraInfoBridge = new AppStateChangeWifiStateBridge(mContext, mState, this);
             } else {
                 mExtraInfoBridge = null;
             }
@@ -1250,6 +1264,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                     break;
                 case LIST_TYPE_DIRECTORY_ACCESS:
                     holder.setSummary(null);
+                    break;
+                case LIST_TYPE_WIFI_ACCESS:
+                    holder.setSummary(ChangeWifiStateDetails.getSummary(mContext, entry));
                     break;
                 default:
                     holder.updateSizeText(entry, mManageApplications.mInvalidSizeStr, mWhichSize);

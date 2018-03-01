@@ -121,4 +121,14 @@
             android:value="com.android.settings.Settings$DirectoryAccessSettingsActivity" />
     </Preference>
 
+    <Preference
+        android:key="change_wifi_state"
+        android:title="@string/change_wifi_state_title"
+        android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+        settings:keywords="@string/keywords_change_wifi_state">
+        <extra
+            android:name="classname"
+            android:value="com.android.settings.Settings$ChangeWifiStateActivity" />
+    </Preference>
+
 </PreferenceScreen>
