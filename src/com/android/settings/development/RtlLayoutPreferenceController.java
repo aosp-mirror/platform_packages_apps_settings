@@ -22,7 +22,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.LocalePicker;
 import com.android.settings.core.PreferenceControllerMixin;
@@ -38,8 +37,6 @@ public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceCon
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public RtlLayoutPreferenceController(Context context) {
         super(context);
     }
@@ -47,13 +44,6 @@ public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public String getPreferenceKey() {
         return FORCE_RTL_LAYOUT_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -68,20 +58,15 @@ public class RtlLayoutPreferenceController extends DeveloperOptionsPreferenceCon
     public void updateState(Preference preference) {
         int rtlLayoutMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RTL, SETTING_VALUE_OFF);
-        mPreference.setChecked(rtlLayoutMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(rtlLayoutMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeToForceRtlLayoutSetting(false);
         updateLocales();
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

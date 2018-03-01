@@ -79,14 +79,6 @@ public class AdbPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        mController.onDeveloperOptionsEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
     public void onAdbDialogConfirmed_shouldEnableAdbSetting() {
         mController.onAdbDialogConfirmed();
         final int mode = Settings.System.getInt(mContext.getContentResolver(),

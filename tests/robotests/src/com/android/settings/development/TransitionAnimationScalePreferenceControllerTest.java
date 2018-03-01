@@ -128,11 +128,4 @@ public class TransitionAnimationScalePreferenceControllerTest {
                 DEFAULT_VALUE);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() throws RemoteException {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

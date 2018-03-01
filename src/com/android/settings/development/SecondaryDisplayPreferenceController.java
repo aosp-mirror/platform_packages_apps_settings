@@ -20,22 +20,19 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class SecondaryDisplayPreferenceController extends
-        DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class SecondaryDisplayPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String OVERLAY_DISPLAY_DEVICES_KEY = "overlay_display_devices";
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    private ListPreference mPreference;
 
     public SecondaryDisplayPreferenceController(Context context) {
         super(context);
@@ -51,13 +48,6 @@ public class SecondaryDisplayPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         writeSecondaryDisplayDevicesOption(newValue.toString());
         return true;
@@ -69,14 +59,9 @@ public class SecondaryDisplayPreferenceController extends
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeSecondaryDisplayDevicesOption(null);
-        mPreference.setEnabled(false);
     }
 
     private void updateSecondaryDisplayDevicesOptions() {
@@ -89,8 +74,9 @@ public class SecondaryDisplayPreferenceController extends
                 break;
             }
         }
-        mPreference.setValue(mListValues[index]);
-        mPreference.setSummary(mListSummaries[index]);
+        final ListPreference listPreference = (ListPreference) mPreference;
+        listPreference.setValue(mListValues[index]);
+        listPreference.setSummary(mListSummaries[index]);
     }
 
     private void writeSecondaryDisplayDevicesOption(String newValue) {

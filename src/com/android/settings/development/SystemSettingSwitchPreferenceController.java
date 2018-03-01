@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,53 +18,48 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class UsbAudioRoutingPreferenceController extends DeveloperOptionsPreferenceController
-        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+/**
+ * Base controller for Switch preference that maps to a specific value in Settings.System.
+ */
+public abstract class SystemSettingSwitchPreferenceController extends
+        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
+        PreferenceControllerMixin {
 
-    private static final String USB_AUDIO_KEY = "usb_audio";
+    private static final int SETTING_VALUE_OFF = 0;
+    private static final int SETTING_VALUE_ON = 1;
 
-    @VisibleForTesting
-    static final int SETTING_VALUE_ON = 1;
-    @VisibleForTesting
-    static final int SETTING_VALUE_OFF = 0;
+    private final String mSettingsKey;
 
-    public UsbAudioRoutingPreferenceController(Context context) {
+    public SystemSettingSwitchPreferenceController(Context context, String systemSettingsKey) {
         super(context);
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return USB_AUDIO_KEY;
+        mSettingsKey = systemSettingsKey;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED,
-                isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
+        Settings.System.putInt(mContext.getContentResolver(), mSettingsKey,
+            isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final int usbAudioRoutingMode = Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, SETTING_VALUE_OFF);
-        ((SwitchPreference) mPreference).setChecked(usbAudioRoutingMode != SETTING_VALUE_OFF);
+        final int mode = Settings.System.getInt(
+            mContext.getContentResolver(), mSettingsKey, SETTING_VALUE_OFF);
+        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
         super.onDeveloperOptionsSwitchDisabled();
-        Settings.Secure.putInt(mContext.getContentResolver(),
-                Settings.Secure.USB_AUDIO_AUTOMATIC_ROUTING_DISABLED, SETTING_VALUE_OFF);
+        Settings.System.putInt(mContext.getContentResolver(), mSettingsKey, SETTING_VALUE_OFF);
         ((SwitchPreference) mPreference).setChecked(false);
     }
 }

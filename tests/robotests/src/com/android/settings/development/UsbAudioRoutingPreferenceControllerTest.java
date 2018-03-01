@@ -104,13 +104,6 @@ public class UsbAudioRoutingPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled_preferenceShouldBeEnabled() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeEnabled() {
         mController.onDeveloperOptionsSwitchDisabled();
 

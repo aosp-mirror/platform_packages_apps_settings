@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,6 +29,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.DisplayCutout;
 
 import com.android.settings.TestConfig;
@@ -126,18 +128,11 @@ public class EmulateDisplayCutoutPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled() throws Exception {
-        mockCurrentOverlays();
-
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-        verify(mOverlayManager, never()).setEnabledExclusiveInCategory(any(), anyInt());
-    }
-
-    @Test
     public void onDeveloperOptionsSwitchDisabled() throws Exception {
         mockCurrentOverlays(ONE_ENABLED, TWO_DISABLED);
+        final PreferenceScreen screen = mock(PreferenceScreen.class);
+        when(screen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
+        mController.displayPreference(screen);
 
         mController.onDeveloperOptionsSwitchDisabled();
 

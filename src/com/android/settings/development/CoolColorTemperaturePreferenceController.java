@@ -21,7 +21,6 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.android.settings.R;
@@ -29,16 +28,13 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
 
-public class CoolColorTemperaturePreferenceController extends
-        DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class CoolColorTemperaturePreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String COLOR_TEMPERATURE_KEY = "color_temperature";
 
     @VisibleForTesting
     static final String COLOR_TEMPERATURE_PROPERTY = "persist.sys.debug.color_temp";
-
-    private SwitchPreference mPreference;
 
     public CoolColorTemperaturePreferenceController(Context context) {
         super(context);
@@ -55,12 +51,6 @@ public class CoolColorTemperaturePreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isColorTemperatureEnabled = (Boolean) newValue;
         SystemProperties.set(COLOR_TEMPERATURE_PROPERTY,
@@ -74,19 +64,14 @@ public class CoolColorTemperaturePreferenceController extends
     public void updateState(Preference preference) {
         final boolean enableColorTemperature = SystemProperties.getBoolean(
                 COLOR_TEMPERATURE_PROPERTY, false /* default */);
-        mPreference.setChecked(enableColorTemperature);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(enableColorTemperature);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(COLOR_TEMPERATURE_PROPERTY, Boolean.toString(false));
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

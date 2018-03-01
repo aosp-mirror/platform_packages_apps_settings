@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -37,8 +36,6 @@ public class DebugViewAttributesPreferenceController extends
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public DebugViewAttributesPreferenceController(Context context) {
         super(context);
     }
@@ -46,13 +43,6 @@ public class DebugViewAttributesPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return DEBUG_VIEW_ATTRIBUTES_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -68,19 +58,14 @@ public class DebugViewAttributesPreferenceController extends
     public void updateState(Preference preference) {
         final int debugViewAttrMode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, 0 /* default */);
-        mPreference.setChecked(debugViewAttrMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(debugViewAttrMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEBUG_VIEW_ATTRIBUTES, SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

@@ -128,11 +128,4 @@ public class BluetoothInbandRingingPreferenceControllerTest {
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

@@ -114,16 +114,4 @@ public class BluetoothDelayReportsPreferenceControllerTest {
         assertThat(mPreference.isEnabled()).isFalse();
         assertThat(mPreference.isChecked()).isFalse();
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
-
-        assertThat(mode).isFalse();
-        assertThat(mPreference.isEnabled()).isTrue();
-        assertThat(mPreference.isChecked()).isFalse();
-    }
 }

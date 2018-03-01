@@ -14,14 +14,12 @@
  * limitations under the License.
  */
 
-
 package com.android.settings.development;
 
 import android.content.Context;
 import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -29,9 +27,8 @@ import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class CameraLaserSensorPreferenceController extends
-        DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class CameraLaserSensorPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String KEY_CAMERA_LASER_SENSOR_SWITCH = "camera_laser_sensor_switch";
     @VisibleForTesting
@@ -49,8 +46,6 @@ public class CameraLaserSensorPreferenceController extends
     @VisibleForTesting
     static final String USER_BUILD = "user";
 
-    private SwitchPreference mPreference;
-
     public CameraLaserSensorPreferenceController(Context context) {
         super(context);
     }
@@ -66,13 +61,6 @@ public class CameraLaserSensorPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         String value = Integer.toString(isEnabled ? ENABLED : DISABLED);
@@ -83,19 +71,14 @@ public class CameraLaserSensorPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         final boolean enabled = isLaserSensorEnabled();
-        mPreference.setChecked(enabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(enabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(PROPERTY_CAMERA_LASER_SENSOR, Integer.toString(DISABLED));
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     private boolean isLaserSensorEnabled() {

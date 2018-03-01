@@ -173,16 +173,6 @@ public class ClearAdbKeysPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        SystemProperties.set(RO_ADB_SECURE_PROPERTY_KEY, Boolean.toString(true));
-        doReturn(true).when(mController).isAdminUser();
-        mController.displayPreference(mScreen);
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
     public void onClearAdbKeysConfirmed_shouldClearKeys() throws RemoteException {
         mController.onClearAdbKeysConfirmed();
 

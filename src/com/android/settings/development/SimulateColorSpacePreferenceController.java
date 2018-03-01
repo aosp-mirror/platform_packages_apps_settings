@@ -23,16 +23,14 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class SimulateColorSpacePreferenceController extends
-        DeveloperOptionsPreferenceController implements
-        Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
+public class SimulateColorSpacePreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String SIMULATE_COLOR_SPACE = "simulate_color_space";
 
@@ -41,8 +39,6 @@ public class SimulateColorSpacePreferenceController extends
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
 
-    private ListPreference mPreference;
-
     public SimulateColorSpacePreferenceController(Context context) {
         super(context);
     }
@@ -50,13 +46,6 @@ public class SimulateColorSpacePreferenceController extends
     @Override
     public String getPreferenceKey() {
         return SIMULATE_COLOR_SPACE;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -71,16 +60,11 @@ public class SimulateColorSpacePreferenceController extends
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     public void onDeveloperOptionsDisabled() {
+        super.onDeveloperOptionsDisabled();
         if (usingDevelopmentColorSpace()) {
             writeSimulateColorSpace(-1);
         }
-        mPreference.setEnabled(false);
     }
 
     private void updateSimulateColorSpace() {
@@ -88,22 +72,23 @@ public class SimulateColorSpacePreferenceController extends
         final boolean enabled = Settings.Secure.getInt(
                 cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, SETTING_VALUE_OFF)
                 != SETTING_VALUE_OFF;
+        final ListPreference listPreference = (ListPreference) mPreference;
         if (enabled) {
             final String mode = Integer.toString(Settings.Secure.getInt(
                     cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
                     AccessibilityManager.DALTONIZER_DISABLED));
-            mPreference.setValue(mode);
-            final int index = mPreference.findIndexOfValue(mode);
+            listPreference.setValue(mode);
+            final int index = listPreference.findIndexOfValue(mode);
             if (index < 0) {
                 final Resources res = mContext.getResources();
                 // We're using a mode controlled by accessibility preferences.
-                mPreference.setSummary(res.getString(R.string.daltonizer_type_overridden,
+                listPreference.setSummary(res.getString(R.string.daltonizer_type_overridden,
                         res.getString(R.string.accessibility_display_daltonizer_preference_title)));
             } else {
-                mPreference.setSummary("%s");
+                listPreference.setSummary("%s");
             }
         } else {
-            mPreference.setValue(
+            listPreference.setValue(
                     Integer.toString(AccessibilityManager.DALTONIZER_DISABLED));
         }
     }
@@ -134,7 +119,7 @@ public class SimulateColorSpacePreferenceController extends
             final String mode = Integer.toString(Settings.Secure.getInt(
                     cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER,
                     AccessibilityManager.DALTONIZER_DISABLED));
-            final int index = mPreference.findIndexOfValue(mode);
+            final int index = ((ListPreference) mPreference).findIndexOfValue(mode);
             if (index >= 0) {
                 // We're using a mode controlled by developer preferences.
                 return true;

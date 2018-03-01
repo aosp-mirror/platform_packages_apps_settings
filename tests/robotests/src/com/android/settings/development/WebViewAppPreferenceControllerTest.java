@@ -92,18 +92,4 @@ public class WebViewAppPreferenceControllerTest {
 
         verify(mPreference).setSummary(R.string.app_list_preference_none);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeDisabled() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_preferenceShouldBeEnabled() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

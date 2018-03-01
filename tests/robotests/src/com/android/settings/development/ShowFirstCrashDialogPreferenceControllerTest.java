@@ -115,13 +115,6 @@ public class ShowFirstCrashDialogPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        assertThat(mPreference.isEnabled()).isTrue();
-    }
-
-    @Test
     public void onShowFirstCrashDialogGlobalOff_shouldEnablePreference() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.SHOW_FIRST_CRASH_DIALOG, SETTING_VALUE_OFF);

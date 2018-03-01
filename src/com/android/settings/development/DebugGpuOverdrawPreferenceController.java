@@ -20,7 +20,6 @@ import android.content.Context;
 import android.os.SystemProperties;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 import android.view.ThreadedRenderer;
 
@@ -37,7 +36,6 @@ public class DebugGpuOverdrawPreferenceController extends
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    private ListPreference mPreference;
 
     public DebugGpuOverdrawPreferenceController(Context context) {
         super(context);
@@ -52,13 +50,6 @@ public class DebugGpuOverdrawPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         writeDebugHwOverdrawOptions(newValue);
         updateDebugHwOverdrawOptions();
@@ -68,16 +59,6 @@ public class DebugGpuOverdrawPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         updateDebugHwOverdrawOptions();
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
     }
 
     private void writeDebugHwOverdrawOptions(Object newValue) {
@@ -97,7 +78,8 @@ public class DebugGpuOverdrawPreferenceController extends
                 break;
             }
         }
-        mPreference.setValue(mListValues[index]);
-        mPreference.setSummary(mListSummaries[index]);
+        final ListPreference listPreference = (ListPreference) mPreference;
+        listPreference.setValue(mListValues[index]);
+        listPreference.setSummary(mListSummaries[index]);
     }
 }

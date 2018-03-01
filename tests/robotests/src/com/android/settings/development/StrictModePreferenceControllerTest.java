@@ -117,11 +117,4 @@ public class StrictModePreferenceControllerTest {
         verify(mPreference).setChecked(false);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldTurnOnPreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

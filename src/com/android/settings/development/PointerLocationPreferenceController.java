@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,8 +35,6 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public PointerLocationPreferenceController(Context context) {
         super(context);
     }
@@ -45,13 +42,6 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
     @Override
     public String getPreferenceKey() {
         return POINTER_LOCATION_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -66,19 +56,14 @@ public class PointerLocationPreferenceController extends DeveloperOptionsPrefere
     public void updateState(Preference preference) {
         final int pointerLocationMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.POINTER_LOCATION, SETTING_VALUE_OFF);
-        mPreference.setChecked(pointerLocationMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(pointerLocationMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.POINTER_LOCATION,
                 SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

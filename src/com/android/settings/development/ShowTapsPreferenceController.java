@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,8 +35,6 @@ public class ShowTapsPreferenceController extends DeveloperOptionsPreferenceCont
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public ShowTapsPreferenceController(Context context) {
         super(context);
     }
@@ -45,13 +42,6 @@ public class ShowTapsPreferenceController extends DeveloperOptionsPreferenceCont
     @Override
     public String getPreferenceKey() {
         return SHOW_TOUCHES_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -66,19 +56,14 @@ public class ShowTapsPreferenceController extends DeveloperOptionsPreferenceCont
     public void updateState(Preference preference) {
         int showTapsMode = Settings.System.getInt(mContext.getContentResolver(),
                 Settings.System.SHOW_TOUCHES, SETTING_VALUE_OFF);
-        mPreference.setChecked(showTapsMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(showTapsMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.System.putInt(mContext.getContentResolver(), Settings.System.SHOW_TOUCHES,
                 SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

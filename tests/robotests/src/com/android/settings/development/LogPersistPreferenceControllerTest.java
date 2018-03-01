@@ -16,6 +16,7 @@
 
 package com.android.settings.development;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +64,7 @@ public class LogPersistPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = new LogPersistPreferenceController(mContext, mFragment, mLifecycle);
+        mController = spy(new LogPersistPreferenceController(mContext, mFragment, mLifecycle));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         SystemProperties.set("ro.debuggable", "1");
         mController.displayPreference(mScreen);
@@ -75,16 +76,9 @@ public class LogPersistPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
+    public void onDeveloperOptionsSwitchDisabled_shouldResetLogOption() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
+        verify(mController).writeLogpersistOption(null, true);
     }
 }

@@ -27,7 +27,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -37,9 +36,8 @@ import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import java.util.List;
 
-public class MockLocationAppPreferenceController extends
-        DeveloperOptionsPreferenceController implements PreferenceControllerMixin,
-        OnActivityResultListener {
+public class MockLocationAppPreferenceController extends DeveloperOptionsPreferenceController
+        implements PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String MOCK_LOCATION_APP_KEY = "mock_location_app";
     private static final int[] MOCK_LOCATION_APP_OPS = new int[]{AppOpsManager.OP_MOCK_LOCATION};
@@ -47,7 +45,6 @@ public class MockLocationAppPreferenceController extends
     private final DevelopmentSettingsDashboardFragment mFragment;
     private final AppOpsManager mAppsOpsManager;
     private final PackageManagerWrapper mPackageManager;
-    private Preference mPreference;
 
     public MockLocationAppPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
@@ -61,13 +58,6 @@ public class MockLocationAppPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return MOCK_LOCATION_APP_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -95,16 +85,6 @@ public class MockLocationAppPreferenceController extends
         writeMockLocation(data.getAction());
         updateMockLocation();
         return true;
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
     }
 
     private void updateMockLocation() {

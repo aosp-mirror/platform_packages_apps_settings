@@ -113,13 +113,6 @@ public class WifiConnectedMacRandomizationPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        assertThat(mPreference.isEnabled()).isTrue();
-    }
-
-    @Test
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 

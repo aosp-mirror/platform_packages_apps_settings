@@ -147,16 +147,6 @@ public abstract class AbstractBluetoothA2dpPreferenceController extends
         mBluetoothA2dp = null;
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
-    }
-
     /**
      * @return an array of string values that correspond to the current {@link ListPreference}.
      */
