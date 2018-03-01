@@ -51,6 +51,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         return mAppRow != null;
     }
 
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
             LayoutPreference pref = (LayoutPreference) preference;

@@ -86,25 +86,25 @@ public class NotificationVibrationIntensityPreferenceControllerTest {
     public void updateState_shouldRefreshSummary() {
         Settings.System.putInt(mContext.getContentResolver(),
                 NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_LOW);
-        mController.updateState(null);
+        mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_low));
 
         Settings.System.putInt(mContext.getContentResolver(),
                 NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_HIGH);
-        mController.updateState(null);
+        mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_high));
 
         Settings.System.putInt(mContext.getContentResolver(),
                 NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_MEDIUM);
-        mController.updateState(null);
+        mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_medium));
 
         Settings.System.putInt(mContext.getContentResolver(),
                 NOTIFICATION_VIBRATION_INTENSITY, Vibrator.VIBRATION_INTENSITY_OFF);
-        mController.updateState(null);
+        mController.updateState(mPreference);
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.accessibility_vibration_intensity_off));
     }

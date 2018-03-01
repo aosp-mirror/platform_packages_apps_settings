@@ -18,7 +18,6 @@ package com.android.settings.security;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -43,11 +42,5 @@ public class ScreenPinningPreferenceController extends BasePreferenceController 
                 Settings.System.LOCK_TO_APP_ENABLED, 0) != 0
                 ? mContext.getText(R.string.switch_on_text)
                 : mContext.getText(R.string.switch_off_text);
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        super.updateState(preference);
-        preference.setSummary(getSummary());
     }
 }

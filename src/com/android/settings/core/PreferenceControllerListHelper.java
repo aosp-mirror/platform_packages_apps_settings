@@ -41,7 +41,7 @@ import java.util.TreeSet;
  */
 public class PreferenceControllerListHelper {
 
-    private static final String TAG = "PrefCtrlListCreator";
+    private static final String TAG = "PrefCtrlListHelper";
 
     /**
      * Instantiates a list of controller based on xml definition.

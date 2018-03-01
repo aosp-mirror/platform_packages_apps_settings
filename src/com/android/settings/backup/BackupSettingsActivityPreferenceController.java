@@ -19,7 +19,6 @@ package com.android.settings.backup;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -43,11 +42,6 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
         return mUm.isAdminUser()
                 ? AVAILABLE
                 : DISABLED_UNSUPPORTED;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
     }
 
     @Override

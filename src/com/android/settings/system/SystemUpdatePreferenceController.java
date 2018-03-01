@@ -83,11 +83,6 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
     public CharSequence getSummary() {
         final Bundle updateInfo = mUpdateManager.retrieveSystemUpdateInfo();
         CharSequence summary = mContext.getString(R.string.android_version_summary,

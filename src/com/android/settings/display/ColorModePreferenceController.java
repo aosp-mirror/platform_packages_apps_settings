@@ -18,7 +18,6 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.support.v7.preference.Preference;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -43,11 +42,6 @@ public class ColorModePreferenceController extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return mConfigWrapper.isScreenWideColorGamut() ? AVAILABLE : DISABLED_FOR_USER;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
     }
 
     @Override

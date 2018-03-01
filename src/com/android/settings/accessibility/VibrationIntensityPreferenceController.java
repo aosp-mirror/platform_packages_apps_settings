@@ -49,7 +49,7 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
         mSettingsContentObserver = new SettingObserver(settingKey) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
-                updateState(null);
+                updateState(mPreference);
             }
         };
     }
@@ -71,14 +71,6 @@ public abstract class VibrationIntensityPreferenceController extends BasePrefere
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        if (mPreference == null) {
-            return;
-        }
-        mPreference.setSummary(getSummary());
     }
 
     @Override
