@@ -28,7 +28,7 @@ public interface AccountFeatureProvider {
     /**
      * Checks whether or not to display the new About Phone page.
      */
-    default boolean isMeCardEnabled(Context context) {
+    default boolean isAboutPhoneV2Enabled(Context context) {
         return FeatureFlagUtils.isEnabled(context, FeatureFlags.ABOUT_PHONE_V2);
     }
 }

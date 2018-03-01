@@ -702,16 +702,16 @@ public class SettingsActivity extends SettingsDrawerActivity
                 || somethingChanged;
 
         // Enable/disable the Me Card page.
-        final boolean isMeCardEnabled = featureFactory
+        final boolean aboutPhoneV2Enabled = featureFactory
                 .getAccountFeatureProvider()
-                .isMeCardEnabled(this);
+                .isAboutPhoneV2Enabled(this);
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.MyDeviceInfoActivity.class.getName()),
-                isMeCardEnabled, isAdmin)
+                aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
         somethingChanged = setTileEnabled(new ComponentName(packageName,
                         Settings.DeviceInfoSettingsActivity.class.getName()),
-                !isMeCardEnabled, isAdmin)
+                !aboutPhoneV2Enabled, isAdmin)
                 || somethingChanged;
 
         if (UserHandle.MU_ENABLED && !isAdmin) {

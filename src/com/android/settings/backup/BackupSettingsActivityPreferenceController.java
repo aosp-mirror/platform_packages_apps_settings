@@ -19,7 +19,6 @@ package com.android.settings.backup;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -46,16 +45,11 @@ public class BackupSettingsActivityPreferenceController extends BasePreferenceCo
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final boolean backupEnabled = mBackupManager.isBackupEnabled();
 
         return backupEnabled
-                ? mContext.getString(R.string.accessibility_feature_state_on)
-                : mContext.getString(R.string.accessibility_feature_state_off);
+                ? mContext.getText(R.string.accessibility_feature_state_on)
+                : mContext.getText(R.string.accessibility_feature_state_off);
     }
 }

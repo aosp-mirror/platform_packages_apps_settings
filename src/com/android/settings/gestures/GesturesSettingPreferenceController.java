@@ -19,7 +19,6 @@ package com.android.settings.gestures;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
 import com.android.settings.R;
@@ -56,12 +55,7 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         if (!mFeatureProvider.isSensorAvailable(mContext)) {
             return "";
         }
@@ -72,13 +66,13 @@ public class GesturesSettingPreferenceController extends BasePreferenceControlle
                 contentResolver, Settings.Secure.ASSIST_GESTURE_SILENCE_ALERTS_ENABLED, 1) != 0;
 
         if (mFeatureProvider.isSupported(mContext) && assistGestureEnabled) {
-            return mContext.getString(
+            return mContext.getText(
                     R.string.language_input_gesture_summary_on_with_assist);
         }
         if (assistGestureSilenceEnabled) {
-            return mContext.getString(
+            return mContext.getText(
                     R.string.language_input_gesture_summary_on_non_assist);
         }
-        return mContext.getString(R.string.language_input_gesture_summary_off);
+        return mContext.getText(R.string.language_input_gesture_summary_off);
     }
 }

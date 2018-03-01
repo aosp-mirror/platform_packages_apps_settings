@@ -51,6 +51,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
         return mAppRow != null;
     }
 
+    @Override
     public void updateState(Preference preference) {
         if (mAppRow != null && mFragment != null) {
             LayoutPreference pref = (LayoutPreference) preference;
@@ -78,7 +79,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         if (mChannel != null) {
            if (mChannelGroup != null && mChannelGroup.getGroup() != null
                 && !TextUtils.isEmpty(mChannelGroup.getGroup().getName())) {

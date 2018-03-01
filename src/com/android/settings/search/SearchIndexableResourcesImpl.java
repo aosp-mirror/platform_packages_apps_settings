@@ -65,6 +65,7 @@ import com.android.settings.inputmethod.PhysicalKeyboardFragment;
 import com.android.settings.inputmethod.VirtualKeyboardFragment;
 import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.location.LocationSettings;
+import com.android.settings.location.RecentLocationRequestSeeAllFragment;
 import com.android.settings.location.ScanningSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.nfc.PaymentSettings;
@@ -177,6 +178,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(SmartBatterySettings.class);
         addIndex(MyDeviceInfoFragment.class);
         addIndex(VibrationSettings.class);
+        addIndex(RecentLocationRequestSeeAllFragment.class);
     }
 
     @Override

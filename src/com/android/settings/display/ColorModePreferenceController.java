@@ -21,31 +21,47 @@ import android.os.ServiceManager;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.internal.app.ColorDisplayController;
+import com.android.settings.R;
+import com.android.settings.core.BasePreferenceController;
 
-public class ColorModePreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin {
+public class ColorModePreferenceController extends BasePreferenceController {
     private static final String TAG = "ColorModePreference";
     private static final String KEY_COLOR_MODE = "color_mode";
 
     private static final int SURFACE_FLINGER_TRANSACTION_QUERY_WIDE_COLOR = 1024;
 
     private final ConfigurationWrapper mConfigWrapper;
+    private ColorDisplayController mColorDisplayController;
 
     public ColorModePreferenceController(Context context) {
-        super(context);
+        super(context, KEY_COLOR_MODE);
         mConfigWrapper = new ConfigurationWrapper();
     }
 
     @Override
-    public String getPreferenceKey() {
-        return KEY_COLOR_MODE;
+    public int getAvailabilityStatus() {
+        return mConfigWrapper.isScreenWideColorGamut() ? AVAILABLE : DISABLED_FOR_USER;
     }
 
     @Override
-    public boolean isAvailable() {
-        return mConfigWrapper.isScreenWideColorGamut();
+    public CharSequence getSummary() {
+        final int colorMode = getColorDisplayController().getColorMode();
+        if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
+            return mContext.getText(R.string.color_mode_option_saturated);
+        }
+        if (colorMode == ColorDisplayController.COLOR_MODE_BOOSTED) {
+            return mContext.getText(R.string.color_mode_option_boosted);
+        }
+        return mContext.getText(R.string.color_mode_option_natural);
+    }
+
+    @VisibleForTesting
+    ColorDisplayController getColorDisplayController() {
+        if (mColorDisplayController == null) {
+            mColorDisplayController = new ColorDisplayController(mContext);
+        }
+        return mColorDisplayController;
     }
 
     @VisibleForTesting

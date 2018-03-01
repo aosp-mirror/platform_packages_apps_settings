@@ -28,6 +28,7 @@ import com.android.settings.Settings;
 import com.android.settings.TestingSettings;
 import com.android.settings.TetherSettings;
 import com.android.settings.TrustedCredentialsSettings;
+import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
 import com.android.settings.wifi.calling.WifiCallingSettings;
 import com.android.settings.accessibility.AccessibilitySettings;
 import com.android.settings.accessibility.AccessibilitySettingsForSetupWizard;
@@ -154,6 +155,7 @@ public class SettingsGateway {
             UserDictionarySettings.class.getName(),
             DisplaySettings.class.getName(),
             DeviceInfoSettings.class.getName(),
+            MyDeviceInfoFragment.class.getName(),
             ManageApplications.class.getName(),
             ManageAssist.class.getName(),
             ProcessStatsUi.class.getName(),

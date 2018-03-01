@@ -19,55 +19,40 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
-import android.support.v7.preference.Preference;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.settings.R;
-import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 import java.util.List;
 import java.util.Set;
 
-public class AppPermissionsPreferenceController extends AbstractPreferenceController
-        implements PreferenceControllerMixin {
+public class AppPermissionsPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "AppPermissionPrefCtrl";
     private static final String KEY_APP_PERMISSION_GROUPS = "manage_perms";
     private static final String[] PERMISSION_GROUPS = new String[] {
-        "android.permission-group.LOCATION",
-        "android.permission-group.MICROPHONE",
-        "android.permission-group.CAMERA",
-        "android.permission-group.SMS",
-        "android.permission-group.CONTACTS",
-        "android.permission-group.PHONE"};
+            "android.permission-group.LOCATION",
+            "android.permission-group.MICROPHONE",
+            "android.permission-group.CAMERA",
+            "android.permission-group.SMS",
+            "android.permission-group.CONTACTS",
+            "android.permission-group.PHONE"};
 
     private static final int NUM_PERMISSION_TO_USE = 3;
 
     private final PackageManager mPackageManager;
 
     public AppPermissionsPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_APP_PERMISSION_GROUPS);
         mPackageManager = context.getPackageManager();
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
-    }
-
-    @Override
-    public String getPreferenceKey() {
-        return KEY_APP_PERMISSION_GROUPS;
-    }
-
-    @Override
-    public void updateState(Preference preference) {
-        final String summary = getSummary();
-        if (summary != null) {
-            preference.setSummary(summary);
-        }
+    public int getAvailabilityStatus() {
+        return AVAILABLE;
     }
 
     /*
@@ -76,7 +61,7 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
        Location, Microphone, Camera, Sms, Contacts, and Phone
      */
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final Set<String> permissions = getAllPermissionsInGroups();
         Set<String> grantedPermissionGroups = getGrantedPermissionGroups(permissions);
         CharSequence summary = null;
@@ -96,7 +81,7 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
     private Set<String> getGrantedPermissionGroups(Set<String> permissions) {
         ArraySet<String> grantedPermissionGroups = new ArraySet<>();
         List<PackageInfo> installedPackages =
-            mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
+                mPackageManager.getInstalledPackages(PackageManager.GET_PERMISSIONS);
         for (PackageInfo installedPackage : installedPackages) {
             if (installedPackage.permissions == null) {
                 continue;
@@ -134,12 +119,12 @@ public class AppPermissionsPreferenceController extends AbstractPreferenceContro
         for (String group : PERMISSION_GROUPS) {
             try {
                 final List<PermissionInfo> permissions =
-                    mPackageManager.queryPermissionsByGroup(group, 0);
+                        mPackageManager.queryPermissionsByGroup(group, 0);
                 for (PermissionInfo permissionInfo : permissions) {
                     result.add(permissionInfo.name);
                 }
             } catch (NameNotFoundException e) {
-                Log.e(TAG, "Error getting permissions in group "+group, e);
+                Log.e(TAG, "Error getting permissions in group " + group, e);
             }
         }
         return result;

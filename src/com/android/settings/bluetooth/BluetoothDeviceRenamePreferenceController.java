@@ -72,7 +72,7 @@ public class BluetoothDeviceRenamePreferenceController extends
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         return getDeviceName();
     }
 

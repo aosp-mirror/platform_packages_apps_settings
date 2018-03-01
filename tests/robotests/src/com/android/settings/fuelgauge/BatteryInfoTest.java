@@ -71,7 +71,7 @@ public class BatteryInfoTest {
     private static final int PLUGGED_IN = 1;
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
-    public static final String ENHANCED_STRING_SUFFIX = "left based on your usage";
+    public static final String ENHANCED_STRING_SUFFIX = "based on your usage";
     public static final long TEST_CHARGE_TIME_REMAINING = TimeUnit.MINUTES.toMicros(1);
     public static final String TEST_CHARGE_TIME_REMAINING_STRINGIFIED =
             "1m left until fully charged";
@@ -183,7 +183,7 @@ public class BatteryInfoTest {
         // Check that strings are showing less than 15 minutes remaining regardless of exact time.
         assertThat(info.chargeLabel.toString()).isEqualTo(
                 mContext.getString(R.string.power_remaining_less_than_duration,
-                        TEST_BATTERY_LEVEL_10, FIFTEEN_MIN_FORMATTED));
+                        FIFTEEN_MIN_FORMATTED, TEST_BATTERY_LEVEL_10));
         assertThat(info.remainingLabel.toString()).isEqualTo(
                 mContext.getString(R.string.power_remaining_less_than_duration_only,
                         FIFTEEN_MIN_FORMATTED));

@@ -21,7 +21,6 @@ import static android.Manifest.permission.SYSTEM_ALERT_WINDOW;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -51,17 +50,12 @@ public class DrawOverlayDetailPreferenceController extends AppInfoPreferenceCont
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
         return DrawOverlayDetails.class;
     }
 
     @Override
-    public String getSummary() {
-        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry()).toString();
+    public CharSequence getSummary() {
+        return DrawOverlayDetails.getSummary(mContext, mParent.getAppEntry());
     }
 }

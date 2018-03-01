@@ -21,7 +21,6 @@ import static android.Manifest.permission.WRITE_SETTINGS;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.os.UserManager;
-import android.support.v7.preference.Preference;
 
 import com.android.settings.SettingsPreferenceFragment;
 
@@ -52,18 +51,13 @@ public class WriteSystemSettingsPreferenceController extends AppInfoPreferenceCo
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
     protected Class<? extends SettingsPreferenceFragment> getDetailFragmentClass() {
         return WriteSettingsDetails.class;
     }
 
     @Override
-    public String getSummary() {
-        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry()).toString();
+    public CharSequence getSummary() {
+        return WriteSettingsDetails.getSummary(mContext, mParent.getAppEntry());
 
     }
 }

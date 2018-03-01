@@ -89,7 +89,7 @@ public class SliceBuilderUtilsTest {
         SliceData data = getDummyData();
         FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
 
-        String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getSummary());
     }
@@ -101,7 +101,7 @@ public class SliceBuilderUtilsTest {
         String controllerSummary = "new_Summary";
         doReturn(controllerSummary).when(controller).getSummary();
 
-        String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(controllerSummary);
     }
@@ -111,7 +111,7 @@ public class SliceBuilderUtilsTest {
         SliceData data = getDummyData((String) null);
         FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
 
-        String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
     }
@@ -120,7 +120,7 @@ public class SliceBuilderUtilsTest {
     public void testDynamicSummary_placeHolderString_returnsScreenTitle() {
         SliceData data = getDummyData(mContext.getString(R.string.summary_placeholder));
         FakePreferenceController controller = new FakePreferenceController(mContext, KEY);
-        String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
     }
@@ -132,7 +132,7 @@ public class SliceBuilderUtilsTest {
         FakePreferenceController controller = spy(new FakePreferenceController(mContext, KEY));
         doReturn(summaryPlaceholder).when(controller).getSummary();
 
-        String summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
+        CharSequence summary = SliceBuilderUtils.getSubtitleText(mContext, controller, data);
 
         assertThat(summary).isEqualTo(data.getScreenTitle());
     }

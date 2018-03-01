@@ -50,14 +50,9 @@ public abstract class DefaultAppShortcutPreferenceControllerBase extends BasePre
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         int summaryResId = isDefaultApp() ? R.string.yes : R.string.no;
-        return mContext.getString(summaryResId);
+        return mContext.getText(summaryResId);
     }
 
     @Override

@@ -84,16 +84,13 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
 
     @Override
     public void updateState(Preference preference) {
-        if (preference == null) {
-            return;
-        }
-        preference.setSummary(getSummary());
+        super.updateState(preference);
         ((RestrictedPreference) preference).checkRestrictionAndSetDisabled(
                 UserManager.DISALLOW_PRINTING);
     }
 
     @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final List<PrintJob> printJobs = mPrintManager.getPrintJobs();
 
         int numActivePrintJobs = 0;
@@ -112,7 +109,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
             final List<PrintServiceInfo> services =
                     mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
             if (services == null || services.isEmpty()) {
-                return mContext.getString(R.string.print_settings_summary_no_service);
+                return mContext.getText(R.string.print_settings_summary_no_service);
             } else {
                 final int count = services.size();
                 return mContext.getResources().getQuantityString(

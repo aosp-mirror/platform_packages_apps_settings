@@ -83,21 +83,16 @@ public class SystemUpdatePreferenceController extends BasePreferenceController {
     }
 
     @Override
-    public void updateState(Preference preference) {
-        preference.setSummary(getSummary());
-    }
-
-    @Override
-    public String getSummary() {
+    public CharSequence getSummary() {
         final Bundle updateInfo = mUpdateManager.retrieveSystemUpdateInfo();
-        String summary = mContext.getString(R.string.android_version_summary,
+        CharSequence summary = mContext.getString(R.string.android_version_summary,
                 Build.VERSION.RELEASE);
         switch (updateInfo.getInt(SystemUpdateManager.KEY_STATUS)) {
             case SystemUpdateManager.STATUS_WAITING_DOWNLOAD:
             case SystemUpdateManager.STATUS_IN_PROGRESS:
             case SystemUpdateManager.STATUS_WAITING_INSTALL:
             case SystemUpdateManager.STATUS_WAITING_REBOOT:
-                summary = mContext.getString(R.string.android_version_pending_update_summary);
+                summary = mContext.getText(R.string.android_version_pending_update_summary);
                 break;
             case SystemUpdateManager.STATUS_UNKNOWN:
                 Log.d(TAG, "Update statue unknown");

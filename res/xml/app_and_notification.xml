@@ -55,7 +55,8 @@
         android:key="manage_perms"
         android:title="@string/app_permissions"
         android:order="12"
-        settings:keywords="@string/keywords_app_permissions">
+        settings:keywords="@string/keywords_app_permissions"
+        settings:controller="com.android.settings.applications.AppPermissionsPreferenceController">
         <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
     </Preference>
 

@@ -24,6 +24,13 @@
             android:key="recent_location_requests"
             android:title="@string/location_category_recent_location_requests"/>
 
+        <Preference
+            android:key="recent_location_requests_see_all"
+            android:title="@string/location_recent_location_requests_see_all"
+            android:icon="@drawable/ic_chevron_right_24dp"
+            android:selectable="true"
+            android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"/>
+
         <!-- This preference category gets removed if new_recent_location_ui is disabled -->
         <Preference
             android:key="app_level_permissions"
