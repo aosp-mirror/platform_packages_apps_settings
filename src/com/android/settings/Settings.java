@@ -103,7 +103,6 @@ public class Settings extends SettingsActivity {
     public static class ZenModeAutomationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeScheduleRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ZenModeEventRuleSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class ZenModeExternalRuleSettingsActivity extends SettingsActivity { /* empty */ }
     public static class SoundSettingsActivity extends SettingsActivity { /* empty */ }
     public static class ConfigureNotificationSettingsActivity extends SettingsActivity { /* empty */ }
     public static class AppNotificationSettingsActivity extends SettingsActivity { /* empty */ }
@@ -155,7 +154,6 @@ public class Settings extends SettingsActivity {
     // Top level categories for new IA
     public static class NetworkDashboardActivity extends SettingsActivity {}
     public static class ConnectedDeviceDashboardActivity extends SettingsActivity {}
-    public static class ConnectedDeviceDashboardActivityOld extends SettingsActivity {}
     public static class PowerUsageSummaryActivity extends SettingsActivity { /* empty */ }
     public static class PowerUsageSummaryLegacyActivity extends SettingsActivity { /* empty */ }
     public static class AppAndNotificationDashboardActivity extends SettingsActivity {}

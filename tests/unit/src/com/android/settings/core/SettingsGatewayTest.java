@@ -16,24 +16,38 @@
 
 package com.android.settings.core;
 
+import static android.content.pm.PackageManager.GET_ACTIVITIES;
+import static android.content.pm.PackageManager.GET_META_DATA;
+import static android.content.pm.PackageManager.MATCH_DISABLED_COMPONENTS;
+import static com.android.settings.SettingsActivity.META_DATA_KEY_FRAGMENT_CLASS;
+import static com.google.common.truth.Truth.assertThat;
+import static junit.framework.Assert.fail;
+import static org.junit.Assert.assertFalse;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.os.Bundle;
+import android.platform.test.annotations.Presubmit;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.filters.SmallTest;
 import android.support.test.runner.AndroidJUnit4;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.core.gateway.SettingsGateway;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.Assert.assertFalse;
 
 @SmallTest
 @RunWith(AndroidJUnit4.class)
@@ -41,19 +55,62 @@ public class SettingsGatewayTest {
 
     private static final String TAG = "SettingsGatewayTest";
 
+    private Context mContext;
+    private PackageManager mPackageManager;
+    private String mPackageName;
+
+    @Before
+    public void setUp() {
+        mContext = InstrumentationRegistry.getTargetContext();
+        mPackageManager = mContext.getPackageManager();
+        mPackageName = mContext.getPackageName();
+    }
+
     @Test
+    @Presubmit
     public void allRestrictedActivityMustBeDefinedInManifest() {
-        final Context context = InstrumentationRegistry.getTargetContext();
-        final PackageManager packageManager = context.getPackageManager();
-        final String packageName = context.getPackageName();
         for (String className : SettingsGateway.SETTINGS_FOR_RESTRICTED) {
             final Intent intent = new Intent();
-            intent.setComponent(new ComponentName(packageName, className));
-            List<ResolveInfo> resolveInfos = packageManager.queryIntentActivities(intent,
-                    PackageManager.MATCH_DISABLED_COMPONENTS);
-            Log.d(TAG, packageName + "/" + className + "; resolveInfo size: "
+            intent.setComponent(new ComponentName(mPackageName, className));
+            List<ResolveInfo> resolveInfos = mPackageManager.queryIntentActivities(intent,
+                    MATCH_DISABLED_COMPONENTS);
+            Log.d(TAG, mPackageName + "/" + className + "; resolveInfo size: "
                     + resolveInfos.size());
             assertFalse(className + " is not-defined in manifest", resolveInfos.isEmpty());
+        }
+    }
+
+    @Test
+    @Presubmit
+    public void publicFragmentMustAppearInSettingsGateway()
+            throws PackageManager.NameNotFoundException {
+        final List<String> whitelistedFragment = new ArrayList<>();
+        final StringBuilder error = new StringBuilder();
+
+        for (String fragment : SettingsGateway.ENTRY_FRAGMENTS) {
+            whitelistedFragment.add(fragment);
+        }
+        final PackageInfo pi = mPackageManager.getPackageInfo(mPackageName,
+                GET_META_DATA | MATCH_DISABLED_COMPONENTS | GET_ACTIVITIES);
+        final List<ActivityInfo> activities = Arrays.asList(pi.activities);
+
+        for (ActivityInfo activity : activities) {
+            final Bundle metaData = activity.metaData;
+            if (metaData == null || !metaData.containsKey(META_DATA_KEY_FRAGMENT_CLASS)) {
+                continue;
+            }
+            final String fragmentName = metaData.getString(META_DATA_KEY_FRAGMENT_CLASS);
+
+            assertThat(fragmentName).isNotNull();
+            if (!whitelistedFragment.contains(fragmentName)) {
+                error.append("SettingsGateway.ENTRY_FRAGMENTS must contain " + fragmentName
+                        + " because this fragment is used in manifest for " + activity.name)
+                        .append("\n");
+            }
+        }
+        final String message = error.toString();
+        if (!TextUtils.isEmpty(message)) {
+            fail(message);
         }
     }
 }
