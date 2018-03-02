@@ -25,17 +25,6 @@
         android:title="@string/lock_screen_notifications_title"
         android:summary="@string/summary_placeholder"/>
 
-    <PreferenceCategory
-        android:key="lock_screen_notifications_profile_header"
-        android:title="@string/profile_section_header">
-
-        <com.android.settings.RestrictedListPreference
-            android:key="lock_screen_notifications_profile"
-            android:title="@string/lock_screen_notifications_title"
-            android:summary="@string/summary_placeholder"/>
-
-    </PreferenceCategory>
-
     <!-- Notification badging -->
     <SwitchPreference
         android:key="notification_badging"
@@ -84,5 +73,19 @@
         </Preference>
     </PreferenceCategory>
 
+    <!-- Place work profile section at the bottom to avoid users thinking that any of the
+         above settings are specific to the work profile -->
+    <PreferenceCategory
+        android:key="lock_screen_notifications_profile_header"
+        android:title="@string/profile_section_header"
+        android:order="23">
+
+        <com.android.settings.RestrictedListPreference
+            android:key="lock_screen_notifications_profile"
+            android:title="@string/lock_screen_notifications_title"
+            android:summary="@string/summary_placeholder"
+            android:order="24"/>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
