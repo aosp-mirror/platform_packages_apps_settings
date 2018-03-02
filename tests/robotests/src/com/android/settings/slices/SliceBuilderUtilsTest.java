@@ -277,7 +277,7 @@ public class SliceBuilderUtilsTest {
 
         final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
-        assertThat(pathPair.first).isFalse();
+        assertThat(pathPair.first).isTrue();
         assertThat(pathPair.second).isEqualTo(KEY);
     }
 
@@ -291,7 +291,7 @@ public class SliceBuilderUtilsTest {
 
         final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
-        assertThat(pathPair.first).isTrue();
+        assertThat(pathPair.first).isFalse();
         assertThat(pathPair.second).isEqualTo(KEY);
     }
 
@@ -316,7 +316,7 @@ public class SliceBuilderUtilsTest {
 
         final Pair<Boolean, String> pathPair = SliceBuilderUtils.getPathData(uri);
 
-        assertThat(pathPair.first).isTrue();
+        assertThat(pathPair.first).isFalse();
         assertThat(pathPair.second).isEqualTo(KEY + "/" + KEY);
     }
 
