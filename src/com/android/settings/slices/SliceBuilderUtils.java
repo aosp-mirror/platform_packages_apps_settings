@@ -33,6 +33,7 @@ import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import androidx.app.slice.Slice;
+import androidx.app.slice.builders.SliceAction;
 import androidx.app.slice.builders.ListBuilder;
 import androidx.app.slice.builders.ListBuilder.RowBuilder;
 
@@ -62,7 +63,7 @@ public class SliceBuilderUtils {
                 .setTitle(sliceData.getTitle())
                 .setTitleItem(icon)
                 .setSubtitle(subtitleText)
-                .setContentIntent(contentIntent);
+                .setPrimaryAction(new SliceAction(contentIntent, null, null));
 
         // TODO (b/71640747) Respect setting availability.
 
@@ -112,7 +113,7 @@ public class SliceBuilderUtils {
             String key) {
         PendingIntent actionIntent = getActionIntent(context,
                 SettingsSliceProvider.ACTION_TOGGLE_CHANGED, key);
-        builder.addToggle(actionIntent, isChecked);
+        builder.addEndItem(new SliceAction(actionIntent, null, isChecked));
     }
 
     private static PendingIntent getActionIntent(Context context, String action, String key) {
