@@ -72,9 +72,11 @@
                       android:textColor="?android:attr/textColorSecondary" />
 
             <TextView android:id="@+id/appendix"
-                      android:layout_width="wrap_content"
+                      android:layout_width="0dp"
                       android:layout_height="wrap_content"
+                      android:layout_weight="1"
                       android:textAppearance="@style/TextAppearance.Small"
+                      android:textAlignment="viewEnd"
                       android:textColor="?android:attr/textColorSecondary"
                       android:maxLines="1"
                       android:ellipsize="end" />
