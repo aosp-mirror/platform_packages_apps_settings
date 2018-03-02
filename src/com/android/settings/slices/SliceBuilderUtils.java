@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Icon;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -67,7 +66,7 @@ public class SliceBuilderUtils {
 
         // TODO (b/71640747) Respect setting availability.
 
-        if (controller instanceof TogglePreferenceController) {
+        if (sliceData.getSliceType() == SliceData.SliceType.SWITCH) {
             addToggleAction(context, builder, ((TogglePreferenceController) controller).isChecked(),
                     sliceData.getKey());
         }
@@ -78,22 +77,35 @@ public class SliceBuilderUtils {
     }
 
     /**
+     * @return the {@link SliceData.SliceType} for the {@param controllerClassName} and key.
+     */
+    @SliceData.SliceType
+    public static int getSliceType(Context context, String controllerClassName,
+            String controllerKey) {
+        BasePreferenceController controller = getPreferenceController(context, controllerClassName,
+                controllerKey);
+        return controller.getSliceType();
+    }
+
+    /**
      * Looks at the {@link SliceData#preferenceController} from {@param sliceData} and attempts to
      * build an {@link AbstractPreferenceController}.
      */
     public static BasePreferenceController getPreferenceController(Context context,
             SliceData sliceData) {
+        return getPreferenceController(context, sliceData.getPreferenceController(),
+                sliceData.getKey());
+    }
+
+    private static BasePreferenceController getPreferenceController(Context context,
+            String controllerClassName, String controllerKey) {
         try {
-            return BasePreferenceController.createInstance(context,
-                    sliceData.getPreferenceController());
+            return BasePreferenceController.createInstance(context, controllerClassName);
         } catch (IllegalStateException e) {
             // Do nothing
-            Log.d(TAG, "Could not find Context-only controller for preference controller: "
-                    + sliceData.getKey());
         }
 
-        return BasePreferenceController.createInstance(context, sliceData.getPreferenceController(),
-                sliceData.getKey());
+        return BasePreferenceController.createInstance(context, controllerClassName, controllerKey);
     }
 
     private static void addToggleAction(Context context, RowBuilder builder, boolean isChecked,
