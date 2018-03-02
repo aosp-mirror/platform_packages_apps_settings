@@ -50,6 +50,8 @@ public class SlicesIndexerTest {
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
+    private final boolean PLATFORM_DEFINED = true;
+    private final int SLICE_TYPE = SliceData.SliceType.SLIDER;
 
     private Context mContext;
 
@@ -109,10 +111,22 @@ public class SlicesIndexerTest {
 
         cursor.moveToFirst();
         for (int i = 0; i < sliceData.size(); i++) {
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY)))
-                .isEqualTo(KEYS[i]);
-            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE)))
-                .isEqualTo(TITLES[i]);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.KEY))).isEqualTo(
+                    KEYS[i]);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE))).isEqualTo(
+                    TITLES[i]);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.FRAGMENT))).isEqualTo(
+                    FRAGMENT_NAME);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.SCREENTITLE))).isEqualTo(
+                    SCREEN_TITLE);
+            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.ICON_RESOURCE))).isEqualTo(
+                    ICON);
+            assertThat(cursor.getString(cursor.getColumnIndex(IndexColumns.CONTROLLER))).isEqualTo(
+                    PREF_CONTROLLER);
+            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE))).isEqualTo(
+                    1 /* true */);
+            assertThat(cursor.getInt(cursor.getColumnIndex(IndexColumns.SLICE_TYPE))).isEqualTo(
+                    SLICE_TYPE);
             cursor.moveToNext();
         }
     }
@@ -126,15 +140,17 @@ public class SlicesIndexerTest {
     }
 
     private List<SliceData> getDummyIndexableData() {
-        final SliceData.Builder builder = new SliceData.Builder()
-            .setSummary(SUMMARY)
-            .setScreenTitle(SCREEN_TITLE)
-            .setFragmentName(FRAGMENT_NAME)
-            .setIcon(ICON)
-            .setUri(URI)
-            .setPreferenceControllerClassName(PREF_CONTROLLER);
-
         final List<SliceData> sliceData = new ArrayList<>();
+        final SliceData.Builder builder = new SliceData.Builder()
+                .setSummary(SUMMARY)
+                .setScreenTitle(SCREEN_TITLE)
+                .setFragmentName(FRAGMENT_NAME)
+                .setIcon(ICON)
+                .setUri(URI)
+                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .setPlatformDefined(PLATFORM_DEFINED)
+                .setSliceType(SLICE_TYPE);
+
         for (int i = 0; i < KEYS.length; i++) {
             builder.setKey(KEYS[i]).setTitle(TITLES[i]);
             sliceData.add(builder.build());

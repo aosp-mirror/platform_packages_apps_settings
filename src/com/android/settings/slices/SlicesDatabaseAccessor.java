@@ -24,6 +24,7 @@ import android.net.Uri;
 
 import android.content.Context;
 import android.os.Binder;
+import android.util.Pair;
 
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
@@ -35,7 +36,7 @@ import androidx.slice.Slice;
  */
 public class SlicesDatabaseAccessor {
 
-    public static final String[] SELECT_COLUMNS = {
+    public static final String[] SELECT_COLUMNS_ALL = {
             IndexColumns.KEY,
             IndexColumns.TITLE,
             IndexColumns.SUMMARY,
@@ -43,7 +44,12 @@ public class SlicesDatabaseAccessor {
             IndexColumns.ICON_RESOURCE,
             IndexColumns.FRAGMENT,
             IndexColumns.CONTROLLER,
+            IndexColumns.PLATFORM_SLICE,
+            IndexColumns.SLICE_TYPE,
     };
+
+    // Cursor value for boolean true
+    private final int TRUE = 1;
 
     Context mContext;
 
@@ -58,9 +64,9 @@ public class SlicesDatabaseAccessor {
      * Used when building a {@link Slice}.
      */
     public SliceData getSliceDataFromUri(Uri uri) {
-        String key = uri.getLastPathSegment();
-        Cursor cursor = getIndexedSliceData(key);
-        return buildSliceData(cursor, uri);
+        Pair<Boolean, String> pathData = SliceBuilderUtils.getPathData(uri);
+        Cursor cursor = getIndexedSliceData(pathData.second /* key */);
+        return buildSliceData(cursor, uri, pathData.first /* isIntentOnly */);
     }
 
     /**
@@ -70,18 +76,18 @@ public class SlicesDatabaseAccessor {
      */
     public SliceData getSliceDataFromKey(String key) {
         Cursor cursor = getIndexedSliceData(key);
-        return buildSliceData(cursor, null /* uri */);
+        return buildSliceData(cursor, null /* uri */, false /* isInlineOnly */);
     }
 
     private Cursor getIndexedSliceData(String path) {
         verifyIndexing();
 
-        final String whereClause = buildWhereClause();
+        final String whereClause = buildKeyMatchWhereClause();
         final SlicesDatabaseHelper helper = SlicesDatabaseHelper.getInstance(mContext);
         final SQLiteDatabase database = helper.getReadableDatabase();
         final String[] selection = new String[]{path};
 
-        Cursor resultCursor = database.query(TABLE_SLICES_INDEX, SELECT_COLUMNS, whereClause,
+        Cursor resultCursor = database.query(TABLE_SLICES_INDEX, SELECT_COLUMNS_ALL, whereClause,
                 selection, null /* groupBy */, null /* having */, null /* orderBy */);
 
         int numResults = resultCursor.getCount();
@@ -99,13 +105,13 @@ public class SlicesDatabaseAccessor {
         return resultCursor;
     }
 
-    private String buildWhereClause() {
+    private String buildKeyMatchWhereClause() {
         return new StringBuilder(IndexColumns.KEY)
                 .append(" = ?")
                 .toString();
     }
 
-    private SliceData buildSliceData(Cursor cursor, Uri uri) {
+    private SliceData buildSliceData(Cursor cursor, Uri uri, boolean isInlineOnly) {
         final String key = cursor.getString(cursor.getColumnIndex(IndexColumns.KEY));
         final String title = cursor.getString(cursor.getColumnIndex(IndexColumns.TITLE));
         final String summary = cursor.getString(cursor.getColumnIndex(IndexColumns.SUMMARY));
@@ -116,6 +122,14 @@ public class SlicesDatabaseAccessor {
                 cursor.getColumnIndex(IndexColumns.FRAGMENT));
         final String controllerClassName = cursor.getString(
                 cursor.getColumnIndex(IndexColumns.CONTROLLER));
+        final boolean isPlatformDefined = cursor.getInt(
+                cursor.getColumnIndex(IndexColumns.PLATFORM_SLICE)) == TRUE;
+        int sliceType = cursor.getInt(
+                cursor.getColumnIndex(IndexColumns.SLICE_TYPE));
+
+        if (!isInlineOnly) {
+            sliceType = SliceData.SliceType.INTENT;
+        }
 
         return new SliceData.Builder()
                 .setKey(key)
@@ -126,6 +140,8 @@ public class SlicesDatabaseAccessor {
                 .setFragmentName(fragmentClassName)
                 .setPreferenceControllerClassName(controllerClassName)
                 .setUri(uri)
+                .setPlatformDefined(isPlatformDefined)
+                .setSliceType(sliceType)
                 .build();
     }
 

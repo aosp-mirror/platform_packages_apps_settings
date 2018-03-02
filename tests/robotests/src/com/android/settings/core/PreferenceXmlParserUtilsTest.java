@@ -48,7 +48,7 @@ import java.util.List;
  * with another preference with a matchin replacement attribute.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-public class PreferenceXmlParserUtilTest {
+public class PreferenceXmlParserUtilsTest {
 
     private Context mContext;
 
