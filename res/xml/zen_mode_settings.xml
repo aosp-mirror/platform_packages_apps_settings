@@ -19,7 +19,13 @@
     android:key="zen_mode_settings"
     android:title="@string/zen_mode_settings_title">
 
-    <!-- Priority behavior settings -->
+    <!-- What to block (effects) -->
+    <Preference
+        android:key="zen_mode_block_effects_settings"
+        android:title="@string/zen_mode_what_to_block_title"
+        android:fragment="com.android.settings.notification.ZenModeBlockedEffectsSettings" />
+
+    <!-- Behavior settings (exceptions) -->
     <Preference
             android:key="zen_mode_behavior_settings"
             android:title="@string/zen_mode_behavior_settings_title"

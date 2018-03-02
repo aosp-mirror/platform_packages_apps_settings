@@ -19,71 +19,51 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_behavior_settings_page"
-    android:title="@string/zen_mode_behavior_settings_title"
-    settings:initialExpandedChildrenCount="8">
+    android:title="@string/zen_mode_behavior_settings_title" >
 
-   <PreferenceCategory
-       android:title="@string/zen_mode_behavior_allow_title"
-       android:key="zen_mode_behavior_allow_preferences">
+   <!-- Alarms -->
+   <SwitchPreference
+       android:key="zen_mode_alarms"
+       android:title="@string/zen_mode_alarms"/>
 
-       <!-- Alarms -->
-       <SwitchPreference
-           android:key="zen_mode_alarms"
-           android:title="@string/zen_mode_alarms"/>
+   <!-- Media -->
+   <SwitchPreference
+       android:key="zen_mode_media"
+       android:title="@string/zen_mode_media"/>
 
-       <!-- Media -->
-       <SwitchPreference
-           android:key="zen_mode_media"
-           android:title="@string/zen_mode_media"/>
+   <!-- System -->
+   <SwitchPreference
+       android:key="zen_mode_system"
+       android:title="@string/zen_mode_system"/>
 
-       <!-- System -->
-       <SwitchPreference
-           android:key="zen_mode_system"
-           android:title="@string/zen_mode_system"/>
+   <!-- Reminders -->
+   <SwitchPreference
+       android:key="zen_mode_reminders"
+       android:title="@string/zen_mode_reminders"/>
 
-       <!-- Reminders -->
-       <SwitchPreference
-           android:key="zen_mode_reminders"
-           android:title="@string/zen_mode_reminders"/>
+   <!-- Events -->
+   <SwitchPreference
+       android:key="zen_mode_events"
+       android:title="@string/zen_mode_events"/>
 
-       <!-- Events -->
-       <SwitchPreference
-           android:key="zen_mode_events"
-           android:title="@string/zen_mode_events"/>
+   <!-- Messages -->
+   <ListPreference
+       android:key="zen_mode_messages"
+       android:title="@string/zen_mode_messages"
+       android:entries="@array/zen_mode_contacts_entries"
+       android:entryValues="@array/zen_mode_contacts_values"/>
 
-       <!-- Messages -->
-       <ListPreference
-           android:key="zen_mode_messages"
-           android:title="@string/zen_mode_messages"
-           android:entries="@array/zen_mode_contacts_entries"
-           android:entryValues="@array/zen_mode_contacts_values"/>
+   <!-- Calls -->
+   <ListPreference
+       android:key="zen_mode_calls"
+       android:title="@string/zen_mode_calls"
+       android:entries="@array/zen_mode_contacts_entries"
+       android:entryValues="@array/zen_mode_contacts_values"/>
 
-       <!-- Calls -->
-       <ListPreference
-           android:key="zen_mode_calls"
-           android:title="@string/zen_mode_calls"
-           android:entries="@array/zen_mode_contacts_entries"
-           android:entryValues="@array/zen_mode_contacts_values"/>
-
-       <!-- Repeat callers -->
-       <SwitchPreference
-           android:key="zen_mode_repeat_callers"
-           android:title="@string/zen_mode_repeat_callers" />
-
-   </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/zen_mode_visual_signals_settings_subtitle"
-        android:key="zen_mode_visual_signals_preferences">
-
-        <SwitchPreference android:key="zen_mode_screen_on"
-                          android:title="@string/zen_mode_screen_on"
-                          android:summary="@string/zen_mode_screen_on_summary" />
-
-        <SwitchPreference android:key="zen_mode_screen_off"
-                          android:title="@string/zen_mode_screen_off"
-                          android:summary="@string/zen_mode_screen_off_summary" />
-    </PreferenceCategory>
+   <!-- Repeat callers -->
+   <SwitchPreference
+       android:key="zen_mode_repeat_callers"
+       android:title="@string/zen_mode_repeat_callers" />
 
     <com.android.settingslib.widget.FooterPreference />
 

@@ -74,6 +74,7 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
+import com.android.settings.notification.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.print.PrintSettingsFragment;
 import com.android.settings.security.EncryptionAndCredential;
@@ -175,6 +176,7 @@ public class SearchIndexableResourcesImpl implements SearchIndexableResources {
         addIndex(UsbDetailsFragment.class);
         addIndex(WifiDisplaySettings.class);
         addIndex(ZenModeBehaviorSettings.class);
+        addIndex(ZenModeBlockedEffectsSettings.class);
         addIndex(ZenModeAutomationSettings.class);
         addIndex(NightDisplaySettings.class);
         addIndex(SmartBatterySettings.class);
