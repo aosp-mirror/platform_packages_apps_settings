@@ -707,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Kom ihåg inställningarna"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Maxantal för ljudenheter anslutna via Bluetooth"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Välj ett maxantal för ljudenheter anslutna via Bluetooth"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"Aktivera rapporter för Bluetooth AVDTP-fördröjning"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"Tillåt att rapporter för Bluetooth AVDTP-fördröjning tas emot"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Casta"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Aktivera Wi-Fi-skärmdelning"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Hittade inga enheter i närheten."</string>
@@ -1441,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Plats för jobbprofil"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"Behörigheter på appnivå"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Nya platsbegäranden"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Inga appar har begärt uppgifter om plats nyligen"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Platstjänster"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Hög batterianvändning"</string>
@@ -1880,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Använd tjänsten"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Använd färgkorrigering"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Använd textning"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"PÅ"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"AV"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"På"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Av"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Visa i Snabbinställningar"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Korrigeringsläge"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2313,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Enheten måste ha en säker låsskärm innan du kan använda uppgiftslagring"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"KONFIGURERA LÅS"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Appar med åtkomst"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"Nödsignal"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"Ange beteende vid nödsamtal"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Säkerhetskopiering"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Säkerhetskopiera och återställ"</string>
@@ -2888,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"serienummer, maskinvaruversion"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"nivå av programkorrigering för android, basbandsversion, kernel-version"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Aktiv låsskärm, visning av låsskärm"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"fingeravtryck"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Ange en NFC-tagg för Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Skriv"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Tryck på en etikett för att skriva ..."</string>
@@ -2921,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Spela upp i dockade högtalare"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Allt ljud"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Endast ljud från mediafiler"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Tyst"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Varning"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Vibration"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"Ljud vid uppstart"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Aldrig"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3170,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ändra till endast alarm fram till kl. <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Ändra till avbryt alltid"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"När skärmen är på"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"Tillåt att aviseringar som tystats via Stör ej visas på skärmen"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Tillåt att aviseringar som tystats via Stör ej visas på skärmen och visa en ikon i statusfältet"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"När skärmen är av"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"Tillåt att skärmen slås på och aviseringslampan blinkar för aviseringar som tystats via Stör ej"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Tillåt att skärmen slås på för aviseringar som tystats via Stör ej"</string>
@@ -3358,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Använd den här enheten som MIDI"</string>
     <string name="usb_use" msgid="3372728031108932425">"Använd USB för"</string>
     <string name="usb_use_also" msgid="557340935190819370">"Använd även USB för"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"Standardkonfiguration för USB"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"När en annan enhet ansluts och mobilen låses upp används de här inställningarna. Anslut bara till betrodda enheter."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Enheten laddas"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"Laddning av ansluten enhet"</string>
@@ -3482,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"Genomsnittlig minnesanvändning: <xliff:g id="USED_MEMORY">%1$s</xliff:g> av <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Inloggad som <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> är standardval"</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"PÅ"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"AV"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"På"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"Av"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Säkerhetskopiering har inaktiverats"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Uppdaterad till Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Det finns en uppdatering"</string>
@@ -3657,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Ansluten till <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Ansluten till flera enheter"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Demoläge för systemgränssnitt"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"Nattläge"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"Ställ in nattläge"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Utvecklarrutor för snabbinställningar"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Fönsterspårning"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"Ytspårning"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscopespårning"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> – <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Inställningar för jobbprofilen"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Kontaktsökning"</string>
@@ -3855,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Använd Bluetooth när du kör"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Aktivera Bluetooth automatiskt när du kör"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Visa batteriinställningarna för Android 8.0"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>

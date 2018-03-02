@@ -482,8 +482,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"ការពារថេប្លេតរបស់អ្នក"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"ការពារឧបករណ៍របស់អ្នក"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"ការពារទូរស័ព្ទរបស់អ្នក"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5008939545428518367) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"ដើម្បី​ទទួលបាន​សុវត្ថិភាព​បន្ថែម សូម​កំណត់​ការចាក់​សោអេក្រង់​បម្រុងទុក"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើថេប្លេតនេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើឧបករណ៍នេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"ទប់ស្កាត់អ្នកផ្សេងពីការប្រើទូរស័ព្ទនេះដោយគ្មានការអនុញ្ញាតពីអ្នកដោយធ្វើឲ្យលក្ខណៈពិសេសការពារឧបករណ៍សកម្ម។ សូមជ្រើសការចាក់សោអេក្រង់ដែលអ្នកចង់ប្រើ។"</string>
@@ -708,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"ចងចាំ​ការ​កំណត់"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស​"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"ជ្រើសរើស​ចំនួនអតិបរមា​នៃ​ឧបករណ៍​សំឡេង​ដែលភ្ជាប់​ប៊្លូធូស"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"បើក​របាយការណ៍អំពីការ​ពន្យារ​ពេល AVDTP របស់ប៊្លូធូស"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"អនុញ្ញាត​ឱ្យទទួល​របាយការណ៍​អំពីការ​ពន្យារ​ពេល AVDTP របស់ប៊្លូធូស"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"ភ្ជាប់"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"បើក​ការ​បង្ហាញ​ឥត​ខ្សែ"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"រក​មិន​ឃើញ​ឧបករណ៍​ដែល​នៅ​ជិត។"</string>
@@ -924,8 +925,7 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"រៀបចំ​ហតស្ប៉តវ៉ាយហ្វាយ"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"ហតស្ប៉ត AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_tether_disabled_by_airplane (414480185654767932) -->
-    <skip />
+    <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"មិន​អាច​ប្រើ​បាន​ទេ ដោយសារ​មុខងារ​ពេល​ជិះ​យន្តហោះ​បើក"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"ការហៅតាម Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"ពង្រីក​ដែន​សេវា​នៃការ​ហៅ​តាម Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"បើក​ការ​ហៅ​តាម Wi‑Fi"</string>
@@ -1443,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"ទីតាំងសម្រាប់ប្រវត្តិរូបការងាររបស់អ្នក"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"ការ​អនុញ្ញាត​កម្រិត​កម្មវិធី"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"សំណើ​ទីតាំង​ថ្មី"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"បច្ចុប្បន្ន​គ្មាន​កម្មវិធី​បាន​ស្នើ​ទីតាំង"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"សេវាកម្ម​ទីតាំង"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"ប្រើ​ថ្ម​ច្រើន"</string>
@@ -1491,17 +1493,13 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"ព័ត៌មាន​សុវត្ថិភាព"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"អ្នក​មិន​មាន​ការ​ភ្ជាប់​ទិន្នន័យទេ។ ឥឡូវនេះ ដើម្បី​មើល​ព័ត៌មាន​នេះ​ សូមចូល​ទៅ %s ពី​កុំព្យូទ័រណា​មួយ​ដែល​បាន​ភ្ជាប់​អ៊ីនធឺណិត​។"</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"កំពុង​ផ្ទុក..."</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (2942199737559900752) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (5377842480961577542) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"កំណត់ការចាក់សោអេក្រង់"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"ដើម្បី​សុវត្ថិភាព សូម​កំណត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"ដើម្បី​ប្រើប្រាស់​ស្នាម​ម្រាមដៃ សូម​កំណត់​ពាក្យសម្ងាត់"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"ដើម្បី​ប្រើស្នាម​ម្រាមដៃ សូម​កំណត់​លំនាំ"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (6658264750811929338) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"ដើម្បី​សុវត្ថិភាព សូម​កំណត់​កូដ PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"ដើម្បី​ប្រើប្រាស់​ស្នាម​ម្រាមដៃ សូម​កំណត់​កូដ PIN"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_message (8631545254345759087) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"ដើម្បី​សុវត្ថិភាព សូម​កំណត់​លំនាំ"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"បញ្ចូល​ពាក្យ​សម្ងាត់​របស់​អ្នក​ម្តងទៀត"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"បញ្ជាក់​លំនាំដើម​របស់​អ្នក"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"បញ្ចូល​កូដ PIN របស់អ្នក​ម្តងទៀត"</string>
@@ -1886,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"ប្រើ​សេវាកម្ម"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"ប្រើ​ការ​កែតម្រូវពណ៌"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"ប្រើ​អក្សររត់"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"បើក"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"បិទ"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"បើក"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"បិទ"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"បង្ហាញ​នៅ​ក្នុង​ការ​កំណត់​​រហ័ស"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"របៀប​កែ"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2319,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"មុនពេលដែលអ្នកអាចប្រើកន្លែងផ្ទុកព័ត៌មានសម្ងាត់ ឧបករណ៍របស់អ្នកត្រូវតែមានអេក្រង់ចាក់សោដែលមានសុវត្ថិភាព"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"កំណត់​ការ​ចាក់​សោ"</string>
     <string name="usage_access_title" msgid="332333405495457839">"កម្មវិធី​មាន​សិទ្ធិ​ប្រើប្រាស់"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"សំឡេង​ពេលអាសន្ន"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"កំណត់​ឥរិយាបថ​ពេល​ហៅ​ពេល​មាន​អាសន្ន"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"បម្រុង​ទុក"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"បម្រុងទុក &amp; ស្ដារ​ឡើងវិញ"</string>
@@ -2894,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"លេខស៊េរី កំណែផ្នែក​រឹង"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"កម្រិតផេឆសុវត្ថិភាព android, កំណែ​មូលដ្ឋាន, កំណែ​ខឺណែល"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"មុខងារ​អេក្រង់​សម្ងំ មុខងារ​អេក្រង់​ចាក់សោ"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"ស្នាមម្រាមដៃ"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"រៀបចំ​ស្លាក​អិនអេហ្វ​ស៊ី​វ៉ាយហ្វាយ"</string>
     <string name="write_tag" msgid="8571858602896222537">"សរសេរ"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"ប៉ះ​ស្លាក​ដើម្បី​សរសេរ..."</string>
@@ -2927,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"ភ្ជាប់ការ​ចាក់​តាមអូប៉ាល័រ"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"អូឌីយ៉ូ​​ទាំងអស់"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"តែ​អូឌីយ៉ូ​​មេឌៀ​ប៉ុណ្ណោះ"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"ស្ងាត់"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"ជូន​ដំណឹង"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"ញ័រ"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"បើកសំឡេង"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"កុំឱ្យសោះ"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3176,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"ប្តូរទៅម៉ោងរោទិ៍រហូតទាល់តែដល់ <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> ប៉ុណ្ណោះ"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"ប្តូរទៅរំខានជានិច្ច"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"នៅ​ពេល​អេកេ្រង់​បើក"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"អនុញ្ញាតឱ្យការជូនដំណឹង​ដែល​បិទសំឡេងដោយ​មុខងារ​កុំរំខាន ​លោត​ឡើង​នៅលើអេក្រង់"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"អនុញ្ញាតឱ្យការជូនដំណឹង​ដែល​បិទសំឡេងដោយ​មុខងារ​កុំរំខាន ​លោត​ឡើង​នៅលើ​អេក្រង់ និងបង្ហាញ​រូបតំណាង​របារស្ថានភាព"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"នៅពេល​អេក្រង់​បិទ"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"អនុញ្ញាតឱ្យការជូនដំណឹង​ដែល​បិទសំឡេងដោយ​មុខងារ​កុំរំខាន​ បើ​ក​អេក្រង់ និង​បញ្ចេញ​ពន្លឺភ្លឹបភ្លែត"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"អនុញ្ញាតឱ្យការជូនដំណឹង​ដែល​បិទសំឡេងដោយ​មុខងារ​កុំរំខាន ​បើក​អេក្រង់"</string>
@@ -3364,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"ប្រើឧបករណ៍នេះជាមីឌី"</string>
     <string name="usb_use" msgid="3372728031108932425">"ប្រើ USB ដើម្បី"</string>
     <string name="usb_use_also" msgid="557340935190819370">"ក៏ប្រើប្រាស់​ USB ​សម្រាប់"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"ការកំណត់​រចនាសម្ព័ន្ធ USB លំនាំ​ដើម"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"ការកំណត់​ទាំងនេះ​នឹងអនុវត្ត នៅពេល​ដែល​ទូរសព្ទ​របស់អ្នក​ដោះសោ ហើយឧបករណ៍​ផ្សេងទៀត​ត្រូវបានភ្ជាប់​។ សូម​ភ្ជាប់​ជាមួយឧបករណ៍​ដែលទុកចិត្ត​តែប៉ុណ្ណោះ។"</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"សាកថ្ម​ឧបករណ៍​នេះ"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"សាកថ្ម​ឧបករណ៍​ដែលបាន​ភ្ជាប់"</string>
@@ -3488,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"អង្គចងចាំត្រូវបានប្រើអស់ជាមធ្យម <xliff:g id="USED_MEMORY">%1$s</xliff:g> នៃ <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"ចូលជា <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> ជាកម្មវិធីលំនាំដើម"</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"បើក"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"បិទ"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"បើក"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"បិទ"</string>
     <string name="backup_disabled" msgid="485189128759595412">"បានបិទដំណើរការការបម្រុងទុក"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"បានដំឡើង​ជំនាន់ទៅ Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"មាន​កំណែថ្មី"</string>
@@ -3663,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"បាន​ភ្ជាប់ទៅ <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"បានភ្ជាប់​ទៅ​ឧបករណ៍​ច្រើន"</string>
     <string name="demo_mode" msgid="2798762752209330277">"មុខងារ​សាកល្បង​ UI ​ប្រព័ន្ធ"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"មុខងារយប់"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"កំណត់​មុខងារយប់"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"ប្រអប់​ការ​កំណត់​រហ័ស​សម្រាប់​អ្នកអភិវឌ្ឍន៍"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"ដាន​វិនដូ"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"ដាន​ផ្ទៃ"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope Trace"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"ការកំណត់ប្រវត្តិរូបការងារ"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"ការស្វែងរកទំនាក់ទំនង"</string>
@@ -3861,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"ប្រើ​ប៊្លូធូស​នៅ​ពេល​បើកបរ"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"​បើក​ប៊្លូធូស​ដោយ​ស្វ័យប្រវត្តិ នៅពេល​បើកបរ"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"មើល​ការកំណត់​ថ្ម​របស់ Android 8.0"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>
