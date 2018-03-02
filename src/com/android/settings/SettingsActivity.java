@@ -523,7 +523,7 @@ public class SettingsActivity extends SettingsDrawerActivity
         if (startingFragment != null) {
             Intent modIntent = new Intent(superIntent);
             modIntent.putExtra(EXTRA_SHOW_FRAGMENT, startingFragment);
-            Bundle args = superIntent.getExtras();
+            Bundle args = superIntent.getBundleExtra(EXTRA_SHOW_FRAGMENT_ARGUMENTS);
             if (args != null) {
                 args = new Bundle(args);
             } else {
