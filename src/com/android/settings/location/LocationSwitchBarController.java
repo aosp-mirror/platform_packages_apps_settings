@@ -16,7 +16,6 @@ package com.android.settings.location;
 import android.content.Context;
 import android.os.UserHandle;
 import android.widget.Switch;
-
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -48,12 +47,10 @@ public class LocationSwitchBarController implements SwitchBar.OnSwitchChangeList
             mSwitchBar.addOnSwitchChangeListener(this);
             mValidListener = true;
         }
-        mSwitchBar.show();
     }
 
     @Override
     public void onStop() {
-        mSwitchBar.hide();
         if (mValidListener) {
             mSwitchBar.removeOnSwitchChangeListener(this);
             mValidListener = false;
