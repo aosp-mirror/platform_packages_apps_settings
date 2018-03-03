@@ -58,12 +58,10 @@ public class DebugEstimatesLoader extends AsyncLoader<List<BatteryInfo>> {
 
         Estimate estimate = powerUsageFeatureProvider.getEnhancedBatteryPrediction(context);
         if (estimate == null) {
-            estimate = new Estimate(0, false);
+            estimate = new Estimate(0, false, Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
         BatteryInfo newInfo = BatteryInfo.getBatteryInfo(getContext(), batteryBroadcast, stats,
-                elapsedRealtimeUs, false,
-                PowerUtil.convertMsToUs(estimate.estimateMillis),
-                estimate.isBasedOnUsage);
+                estimate, elapsedRealtimeUs, false);
 
         List<BatteryInfo> infos = new ArrayList<>();
         infos.add(oldinfo);
