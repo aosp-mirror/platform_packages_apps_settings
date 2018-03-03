@@ -20,7 +20,9 @@ import android.annotation.Nullable;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
@@ -46,6 +48,12 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
 
     private Preference mServicePreference;
     private SwitchPreference mOnLockScreenSwitchPreference;
+    private final ContentObserver mContentObserver = new ContentObserver(new Handler()) {
+        @Override
+        public void onChange(boolean selfChange) {
+            updatePreferences();
+        }
+    };
 
     @Override
     public int getMetricsCategory() {
@@ -77,6 +85,15 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
     public void onResume() {
         super.onResume();
         updatePreferences();
+        getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN),
+                false, mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        getContentResolver().unregisterContentObserver(mContentObserver);
+        super.onPause();
     }
 
     @Override
@@ -120,8 +137,13 @@ public class AccessibilityShortcutPreferenceFragment extends ToggleFeaturePrefer
         boolean isEnabled = Settings.Secure
                 .getInt(cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ENABLED, 1) == 1;
         mSwitchBar.setChecked(isEnabled);
-        mOnLockScreenSwitchPreference.setChecked(Settings.Secure.getInt(
-                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, 0) == 1);
+        // The shortcut is enabled by default on the lock screen as long as the user has
+        // enabled the shortcut with the warning dialog
+        final int dialogShown = Settings.Secure.getInt(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_DIALOG_SHOWN, 0);
+        final boolean enabledFromLockScreen = Settings.Secure.getInt(
+                cr, Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN, dialogShown) == 1;
+        mOnLockScreenSwitchPreference.setChecked(enabledFromLockScreen);
         // Only enable changing the service and lock screen behavior if the shortcut is on
         mServicePreference.setEnabled(mToggleSwitch.isChecked());
         mOnLockScreenSwitchPreference.setEnabled(mToggleSwitch.isChecked());
