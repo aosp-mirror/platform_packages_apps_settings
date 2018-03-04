@@ -17,20 +17,16 @@ package com.android.settings.core;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.TestConfig;
+import com.android.settings.slices.SliceData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -38,35 +34,34 @@ import org.robolectric.annotation.Config;
 @Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TogglePreferenceControllerTest {
 
-    @Mock
-    TogglePreferenceController mTogglePreferenceController;
+    FakeToggle mToggleController;
 
     Context mContext;
     SwitchPreference mPreference;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
+        mToggleController = new FakeToggle(mContext, "key");
     }
 
     @Test
     public void testSetsPreferenceValue_setsChecked() {
-        when(mTogglePreferenceController.isChecked()).thenReturn(true);
+        mToggleController.setChecked(true);
         mPreference.setChecked(false);
 
-        mTogglePreferenceController.updateState(mPreference);
+        mToggleController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isTrue();
     }
 
     @Test
     public void testSetsPreferenceValue_setsNotChecked() {
-        when(mTogglePreferenceController.isChecked()).thenReturn(false);
+        mToggleController.setChecked(false);
         mPreference.setChecked(true);
 
-        mTogglePreferenceController.updateState(mPreference);
+        mToggleController.updateState(mPreference);
 
         assertThat(mPreference.isChecked()).isFalse();
     }
@@ -74,18 +69,51 @@ public class TogglePreferenceControllerTest {
     @Test
     public void testUpdatesPreferenceOnChange_turnsOn() {
         boolean newValue = true;
+        mToggleController.setChecked(!newValue);
 
-        mTogglePreferenceController.onPreferenceChange(mPreference, newValue);
+        mToggleController.onPreferenceChange(mPreference, newValue);
 
-        verify(mTogglePreferenceController).setChecked(newValue);
+        assertThat(mToggleController.isChecked()).isEqualTo(newValue);
     }
 
     @Test
     public void testUpdatesPreferenceOnChange_turnsOff() {
         boolean newValue = false;
+        mToggleController.setChecked(!newValue);
 
-        mTogglePreferenceController.onPreferenceChange(mPreference, newValue);
+        mToggleController.onPreferenceChange(mPreference, newValue);
 
-        verify(mTogglePreferenceController).setChecked(newValue);
+        assertThat(mToggleController.isChecked()).isEqualTo(newValue);
+    }
+
+    @Test
+    public void testSliceType_returnsSliceType() {
+        assertThat(mToggleController.getSliceType()).isEqualTo(
+                SliceData.SliceType.SWITCH);
+    }
+
+    private static class FakeToggle extends TogglePreferenceController {
+
+        private boolean checkedFlag;
+
+        public FakeToggle(Context context, String preferenceKey) {
+            super(context, preferenceKey);
+        }
+
+        @Override
+        public boolean isChecked() {
+            return checkedFlag;
+        }
+
+        @Override
+        public boolean setChecked(boolean isChecked) {
+            checkedFlag = isChecked;
+            return true;
+        }
+
+        @Override
+        public int getAvailabilityStatus() {
+            return AVAILABLE;
+        }
     }
 }

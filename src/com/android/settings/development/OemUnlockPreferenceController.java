@@ -129,11 +129,6 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
         handleDeveloperOptionsToggled();
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        handleDeveloperOptionsToggled();
-    }
-
     public void onOemUnlockConfirmed() {
         mOemLockManager.setOemUnlockAllowedByUser(true);
     }

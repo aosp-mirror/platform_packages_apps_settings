@@ -27,9 +27,8 @@ import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class PictureColorModePreferenceController extends
-        DeveloperOptionsPreferenceController implements
-        LifecycleObserver, OnResume, OnPause, PreferenceControllerMixin {
+public class PictureColorModePreferenceController extends DeveloperOptionsPreferenceController
+        implements LifecycleObserver, OnResume, OnPause, PreferenceControllerMixin {
 
     private static final String KEY_COLOR_MODE = "picture_color_mode";
 
@@ -77,16 +76,6 @@ public class PictureColorModePreferenceController extends
             return;
         }
         mPreference.stopListening();
-    }
-    
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting

@@ -34,7 +34,6 @@ public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceC
 
     private static final String MEMORY_USAGE_KEY = "memory";
 
-    private Preference mPreference;
     private ProcStatsData mProcStatsData;
 
     public MemoryUsagePreferenceController(Context context) {
@@ -50,7 +49,6 @@ public class MemoryUsagePreferenceController extends DeveloperOptionsPreferenceC
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = screen.findPreference(getPreferenceKey());
         mProcStatsData = getProcStatsData();
         setDuration();
     }

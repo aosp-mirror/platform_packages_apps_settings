@@ -22,22 +22,18 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class BluetoothInbandRingingPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class BluetoothInbandRingingPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String BLUETOOTH_DISABLE_INBAND_RINGING_KEY =
             "bluetooth_disable_inband_ringing";
     @VisibleForTesting
     static final String BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY =
             "persist.bluetooth.disableinbandringing";
-
-    private SwitchPreference mPreference;
 
     public BluetoothInbandRingingPreferenceController(Context context) {
         super(context);
@@ -54,13 +50,6 @@ public class BluetoothInbandRingingPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isChecked = (Boolean) newValue;
         SystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY,
@@ -72,18 +61,13 @@ public class BluetoothInbandRingingPreferenceController extends
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(
                 BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, false /* default */);
-        mPreference.setChecked(isEnabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        super.onDeveloperOptionsSwitchDisabled();
+        ((SwitchPreference) mPreference).setChecked(false);
         SystemProperties.set(BLUETOOTH_DISABLE_INBAND_RINGING_PROPERTY, "false");
     }
 

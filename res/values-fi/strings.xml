@@ -707,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Muista asetukset"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Liitettyjen Bluetooth-äänilaitteiden enimmäismäärä"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Valitse liitettyjen Bluetooth-äänilaitteiden enimmäismäärä"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"Ota käyttöön Bluetoothin AVDTP-viiveraportit"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"Salli Bluetoothin AVDTP-viiveraporttien vastaanottaminen"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Lähetä"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Ota langaton näyttö käyttöön"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Bluetooth-laitteita ei löydy lähistöltä."</string>
@@ -1441,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Työprofiilin sijainti"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"Sovellustason käyttöoikeudet"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Viimeisimmät sijaintipyynnöt"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Mikään sovellus ei ole pyytänyt sijaintia äskettäin"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Sijaintipalvelut"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Suuri akun kulutus"</string>
@@ -1880,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Käytä palvelua"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Käytä värinkorjausta"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Käytä tekstityksiä"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"KÄYTÖSSÄ"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"POIS KÄYTÖSTÄ"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"Käytössä"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Pois käytöstä"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Näytä pika-asetuksissa"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Korjaustila"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2313,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Näytön lukitustapa täytyy määrittää, ennen kuin voit käyttää kirjautumistietojen tallennustilaa."</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"ASETA LUKITUS"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Sovellukset, joilla käyttölupa"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"Hätäpuhelun ääni"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"Aseta toiminta hätäpuhelun tapauksessa"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Varmuuskopioi"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Varmuuskopiointi &amp; palautus"</string>
@@ -2888,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"sarjanumero, laitteistoversio"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"android-tietoturvakorjauksen taso, baseband-versio, kernel-versio"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Lepotilanäyttö, lukitusnäyttö"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"sormenjälki"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Määritä Wi-Fi ja NFC-tagi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Kirjoita"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Kirjoita napauttamalla tagia…"</string>
@@ -2921,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Telineen kaiutin"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Kaikki äänet"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Vain median ääni"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Äänetön"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Ilmoitus"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Värinä"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"Käynnistysäänet"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Ei koskaan"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3170,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Ota vain herätykset käyttöön kello <xliff:g id="FORMATTEDTIME">%1$s</xliff:g> asti."</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Salli keskeytykset aina."</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"Kun näyttö on päällä"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"Anna Älä häiritse ‑tilan hiljentämien ilmoitusten tulla näkyviin näytölle"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Anna Älä häiritse ‑tilan hiljentämien ilmoitusten tulla näkyviin näytölle ja näyttää tilapalkin kuvake"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"Kun näyttö on pois päältä"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"Anna Älä häiritse ‑tilan hiljentämien ilmoitusten käynnistää näyttö ja vilkuttaa ilmoitusvaloa"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Anna Älä häiritse ‑tilan hiljentämien ilmoitusten käynnistää näyttö"</string>
@@ -3358,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Käytä tätä laitetta MIDI-tilassa."</string>
     <string name="usb_use" msgid="3372728031108932425">"Käytä USB:tä:"</string>
     <string name="usb_use_also" msgid="557340935190819370">"Käytä USB:ta myös seuraaviin:"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"USB-oletusmääritys"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"Nämä asetukset otetaan käyttöön, kun puhelimeesi yhdistetään toinen laite sen lukituksen ollessa avoinna. Yhdistä puhelimeesi vain luotettuja laitteita."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Laitteen lataaminen"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"Yhdistetyn laitteen lataaminen"</string>
@@ -3482,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"Muistia käytetty keskimäärin <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
     <string name="users_summary" msgid="1674864467098487328">"Kirjautunut sisään käyttäjänä <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> on oletus."</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"PÄÄLLÄ"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"POIS KÄYTÖSTÄ"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"Käytössä"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"Pois käytöstä"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Varmuuskopiointi poistettu käytöstä"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Päivitetty Android-versioon <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Päivitys saatavilla"</string>
@@ -3657,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Yhdistetty laitteeseen <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Yhdistetty useisiin laitteisiin"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Käyttöliittymän esittelytila"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"Yötila"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"Aseta yötila"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Pika-asetusosiot kehittäjille"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Ikkunan jäljitys"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"Pinnan jäljitys"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Winscope-jäljitys"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> – <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Työprofiilin asetukset"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Yhteystietohaku"</string>
@@ -3855,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Käytä Bluetoothia ajon aikana"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Ota Bluetooth automaattisesti käyttöön ajon aikana"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Katso Android 8.0:n akkuasetukset"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>

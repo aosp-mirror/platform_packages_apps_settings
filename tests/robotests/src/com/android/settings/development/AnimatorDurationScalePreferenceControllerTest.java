@@ -126,11 +126,4 @@ public class AnimatorDurationScalePreferenceControllerTest {
         verify(mWindowManager).setAnimationScale(ANIMATOR_DURATION_SCALE_SELECTOR, DEFAULT_VALUE);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() throws RemoteException {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

@@ -113,15 +113,4 @@ public class HardwareLayersUpdatesPreferenceControllerTest {
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ThreadedRenderer.DEBUG_SHOW_LAYERS_UPDATES_PROPERTY, false /* default */);
-
-        assertThat(mode).isFalse();
-        verify(mPreference).setEnabled(true);
-    }
 }

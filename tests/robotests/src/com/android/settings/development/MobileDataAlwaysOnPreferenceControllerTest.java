@@ -98,13 +98,6 @@ public class MobileDataAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled_preferenceShouldBeEnabled() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
     public void onDeveloperOptionsSwitchDisabled_preferenceShouldBeDisabled() {
         mController.onDeveloperOptionsSwitchDisabled();
         final int mode = Settings.System.getInt(mContext.getContentResolver(),

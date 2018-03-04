@@ -16,10 +16,12 @@ package com.android.settings.display;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
 
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settingslib.widget.CandidateInfo;
@@ -48,6 +50,19 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.color_mode_settings;
+    }
+
+    @VisibleForTesting
+    void configureAndInstallPreview(LayoutPreference preview, PreferenceScreen screen) {
+        preview.setSelectable(false);
+        screen.addPreference(preview);
+    }
+
+    @Override
+    protected void addStaticPreferences(PreferenceScreen screen) {
+        final LayoutPreference preview = new LayoutPreference(screen.getContext(),
+                R.layout.color_mode_preview);
+        configureAndInstallPreview(preview, screen);
     }
 
     @Override

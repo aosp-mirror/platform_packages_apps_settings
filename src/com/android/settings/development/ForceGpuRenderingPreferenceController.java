@@ -21,22 +21,18 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
 
-public class ForceGpuRenderingPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class ForceGpuRenderingPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String FORCE_HARDWARE_UI_KEY = "force_hw_ui";
 
     @VisibleForTesting
     static final String HARDWARE_UI_PROPERTY = "persist.sys.ui.hw";
-
-    private SwitchPreference mPreference;
 
     public ForceGpuRenderingPreferenceController(Context context) {
         super(context);
@@ -45,13 +41,6 @@ public class ForceGpuRenderingPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return FORCE_HARDWARE_UI_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -67,18 +56,13 @@ public class ForceGpuRenderingPreferenceController extends
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(HARDWARE_UI_PROPERTY,
                 false /* default */);
-        mPreference.setChecked(isEnabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(HARDWARE_UI_PROPERTY, Boolean.toString(false));
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

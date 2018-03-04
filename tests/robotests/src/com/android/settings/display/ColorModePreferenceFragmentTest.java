@@ -20,13 +20,17 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.os.Bundle;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.app.ColorDisplayController;
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.applications.LayoutPreference;
 import com.android.settings.R;
 import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,6 +41,7 @@ import com.android.settingslib.widget.CandidateInfo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -145,4 +150,17 @@ public class ColorModePreferenceFragmentTest {
         verify(mFragment).addPreferencesFromResource(R.xml.color_mode_settings);
     }
 
+    @Test
+    public void addStaticPreferences_shouldAddPreviewImage() {
+        PreferenceScreen mockPreferenceScreen = Mockito.mock(PreferenceScreen.class);
+        LayoutPreference mockPreview = Mockito.mock(LayoutPreference.class);
+
+        ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(Preference.class);
+
+        mFragment.configureAndInstallPreview(mockPreview, mockPreferenceScreen);
+        Mockito.verify(mockPreview, times(1)).setSelectable(false);
+        Mockito.verify(mockPreferenceScreen, times(1)).addPreference(preferenceCaptor.capture());
+
+        assertThat(preferenceCaptor.getValue()).isEqualTo(mockPreview);
+    }
 }

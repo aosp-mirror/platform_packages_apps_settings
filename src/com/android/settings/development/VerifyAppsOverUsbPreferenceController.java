@@ -24,7 +24,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.RestrictedLockUtils;
@@ -38,13 +37,11 @@ import java.util.List;
 /**
  * Controller to manage the state of "Verify apps over USB" toggle.
  */
-public class VerifyAppsOverUsbPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        AdbOnChangeListener, PreferenceControllerMixin {
+public class VerifyAppsOverUsbPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, AdbOnChangeListener,
+        PreferenceControllerMixin {
     private static final String VERIFY_APPS_OVER_USB_KEY = "verify_apps_over_usb";
     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
-
-    private RestrictedSwitchPreference mPreference;
 
     @VisibleForTesting
     static final int SETTING_VALUE_ON = 1;
@@ -88,12 +85,6 @@ public class VerifyAppsOverUsbPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-        mPreference = (RestrictedSwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -104,26 +95,28 @@ public class VerifyAppsOverUsbPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
+        final RestrictedSwitchPreference restrictedPreference =
+            (RestrictedSwitchPreference) preference;
         if (!shouldBeEnabled()) {
-            mPreference.setChecked(false);
-            mPreference.setDisabledByAdmin(null);
-            mPreference.setEnabled(false);
+            restrictedPreference.setChecked(false);
+            restrictedPreference.setDisabledByAdmin(null);
+            restrictedPreference.setEnabled(false);
             return;
         }
 
         final EnforcedAdmin enforcingAdmin = mRestrictedLockUtils.checkIfRestrictionEnforced(
                 mContext, UserManager.ENSURE_VERIFY_APPS, UserHandle.myUserId());
         if (enforcingAdmin != null) {
-            mPreference.setChecked(true);
-            mPreference.setDisabledByAdmin(enforcingAdmin);
+            restrictedPreference.setChecked(true);
+            restrictedPreference.setDisabledByAdmin(enforcingAdmin);
             return;
         }
 
-        mPreference.setEnabled(true);
+        restrictedPreference.setEnabled(true);
         final boolean checked = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.PACKAGE_VERIFIER_INCLUDE_ADB, SETTING_VALUE_ON)
                 != SETTING_VALUE_OFF;
-        mPreference.setChecked(checked);
+        restrictedPreference.setChecked(checked);
     }
 
     @Override
@@ -135,13 +128,8 @@ public class VerifyAppsOverUsbPreferenceController extends
 
     @Override
     protected void onDeveloperOptionsSwitchEnabled() {
+        super.onDeveloperOptionsSwitchEnabled();
         updateState(mPreference);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        // intentional no-op
-        // We can rely on onAdbSettingChanged() to update this controller.
     }
 
     /**

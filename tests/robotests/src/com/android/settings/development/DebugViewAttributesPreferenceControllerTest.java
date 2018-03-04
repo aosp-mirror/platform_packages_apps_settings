@@ -108,11 +108,4 @@ public class DebugViewAttributesPreferenceControllerTest {
         verify(mPreference).setChecked(false);
     }
 
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
 }

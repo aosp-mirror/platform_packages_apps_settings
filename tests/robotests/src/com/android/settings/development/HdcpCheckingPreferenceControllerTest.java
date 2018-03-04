@@ -147,18 +147,4 @@ public class HdcpCheckingPreferenceControllerTest {
         verify(mPreference).setValue(mValues[1]);
         verify(mPreference).setSummary(mSummaries[1]);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

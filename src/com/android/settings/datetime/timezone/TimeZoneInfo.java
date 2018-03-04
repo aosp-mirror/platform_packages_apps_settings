@@ -15,8 +15,15 @@
  */
 package com.android.settings.datetime.timezone;
 
+import android.icu.text.TimeZoneFormat;
+import android.icu.text.TimeZoneNames;
 import android.icu.util.TimeZone;
 import android.text.TextUtils;
+
+import com.android.settingslib.datetime.ZoneGetter;
+
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Data object containing information for displaying a time zone for the user to select.
@@ -131,6 +138,51 @@ public class TimeZoneInfo {
             }
             return new TimeZoneInfo(this);
         }
-
     }
+
+    public static class Formatter {
+        private final Locale mLocale;
+        private final Date mNow;
+        private final TimeZoneFormat mTimeZoneFormat;
+
+        public Formatter(Locale locale, Date now) {
+            mLocale = locale;
+            mNow = now;
+            mTimeZoneFormat = TimeZoneFormat.getInstance(locale);
+        }
+
+        /**
+         * @param timeZoneId Olson time zone id
+         * @return TimeZoneInfo containing time zone names, exemplar locations and GMT offset
+         */
+        public TimeZoneInfo format(String timeZoneId) {
+            TimeZone timeZone = TimeZone.getFrozenTimeZone(timeZoneId);
+            return format(timeZone);
+        }
+
+        /**
+         * @param timeZone Olson time zone object
+         * @return TimeZoneInfo containing time zone names, exemplar locations and GMT offset
+         */
+        public TimeZoneInfo format(TimeZone timeZone) {
+            final String id = timeZone.getID();
+            final TimeZoneNames timeZoneNames = mTimeZoneFormat.getTimeZoneNames();
+            final java.util.TimeZone javaTimeZone = android.icu.impl.TimeZoneAdapter.wrap(timeZone);
+            final CharSequence gmtOffset = ZoneGetter.getGmtOffsetText(mTimeZoneFormat, mLocale,
+                javaTimeZone, mNow);
+            return new TimeZoneInfo.Builder(timeZone)
+                    .setGenericName(timeZoneNames.getDisplayName(id,
+                            TimeZoneNames.NameType.LONG_GENERIC, mNow.getTime()))
+                    .setStandardName(timeZoneNames.getDisplayName(id,
+                            TimeZoneNames.NameType.LONG_STANDARD, mNow.getTime()))
+                    .setDaylightName(timeZoneNames.getDisplayName(id,
+                            TimeZoneNames.NameType.LONG_DAYLIGHT, mNow.getTime()))
+                    .setExemplarLocation(timeZoneNames.getExemplarLocationName(id))
+                    .setGmtOffset(gmtOffset)
+                    // TODO: move Item id to TimeZoneInfoAdapter
+                    .setItemId(0)
+                    .build();
+        }
+    }
+
 }

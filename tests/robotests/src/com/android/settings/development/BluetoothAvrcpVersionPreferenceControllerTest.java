@@ -129,18 +129,4 @@ public class BluetoothAvrcpVersionPreferenceControllerTest {
         verify(mPreference).setValue(mListValues[0]);
         verify(mPreference).setSummary(mListSummaries[0]);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

@@ -18,20 +18,16 @@ package com.android.settings.development;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.AbstractLogpersistPreferenceController;
 
-public class LogPersistPreferenceController extends
-        AbstractLogpersistPreferenceController implements PreferenceControllerMixin {
+public class LogPersistPreferenceController extends AbstractLogpersistPreferenceController
+        implements PreferenceControllerMixin {
 
     private final DevelopmentSettingsDashboardFragment mFragment;
-    private ListPreference mPreference;
-
 
     public LogPersistPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment, Lifecycle lifecycle) {
@@ -56,26 +52,14 @@ public class LogPersistPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public void updateState(Preference preference) {
         updateLogpersistValues();
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeLogpersistOption(null /* new value */, true);
-        mPreference.setEnabled(false);
     }
 
     public void onDisableLogPersistDialogConfirmed() {

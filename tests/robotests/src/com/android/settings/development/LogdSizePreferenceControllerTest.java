@@ -87,11 +87,4 @@ public class LogdSizePreferenceControllerTest {
         verify(mPreference).setSummary(mListSummaries[2]);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

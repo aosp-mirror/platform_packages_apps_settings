@@ -32,8 +32,8 @@ import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class ClearAdbKeysPreferenceController extends
-        DeveloperOptionsPreferenceController implements PreferenceControllerMixin {
+public class ClearAdbKeysPreferenceController extends DeveloperOptionsPreferenceController
+        implements PreferenceControllerMixin {
 
     private static final String TAG = "ClearAdbPrefCtrl";
     private static final String CLEAR_ADB_KEYS = "clear_adb_keys";
@@ -43,8 +43,6 @@ public class ClearAdbKeysPreferenceController extends
 
     private final IUsbManager mUsbManager;
     private final DevelopmentSettingsDashboardFragment mFragment;
-
-    private Preference mPreference;
 
     public ClearAdbKeysPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
@@ -68,7 +66,6 @@ public class ClearAdbKeysPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = screen.findPreference(getPreferenceKey());
         if (mPreference != null && !isAdminUser()) {
             mPreference.setEnabled(false);
         }
@@ -92,11 +89,6 @@ public class ClearAdbKeysPreferenceController extends
         if (isAdminUser()) {
             mPreference.setEnabled(true);
         }
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
     }
 
     public void onClearAdbKeysConfirmed() {

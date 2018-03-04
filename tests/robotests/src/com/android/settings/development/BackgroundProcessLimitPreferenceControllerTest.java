@@ -124,13 +124,6 @@ public class BackgroundProcessLimitPreferenceControllerTest {
     }
 
     @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
     public void onDeveloperOptionsSwitchDisabled_shouldDisableAndResetPreference()
             throws RemoteException {
         mController.onDeveloperOptionsSwitchDisabled();

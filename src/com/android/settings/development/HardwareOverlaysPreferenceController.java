@@ -24,7 +24,6 @@ import android.os.ServiceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -45,7 +44,6 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
     private static final String SURFACE_COMPOSER_INTERFACE_KEY = "android.ui.ISurfaceComposer";
 
     private final IBinder mSurfaceFlinger;
-    private SwitchPreference mPreference;
 
     public HardwareOverlaysPreferenceController(Context context) {
         super(context);
@@ -55,13 +53,6 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
     @Override
     public String getPreferenceKey() {
         return DISABLE_OVERLAYS_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -77,19 +68,15 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        if (mPreference.isChecked()) {
+        super.onDeveloperOptionsSwitchDisabled();
+        final SwitchPreference switchPreference = (SwitchPreference) mPreference;
+        if (switchPreference.isChecked()) {
             // Writing false to the preference when the setting is already off will have a
             // side effect of turning on the preference that we wish to avoid
             writeHardwareOverlaysSetting(false);
-            mPreference.setChecked(false);
+            switchPreference.setChecked(false);
         }
-        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting
@@ -108,7 +95,7 @@ public class HardwareOverlaysPreferenceController extends DeveloperOptionsPrefer
             @SuppressWarnings("unused") final int showUpdates = reply.readInt();
             @SuppressWarnings("unused") final int showBackground = reply.readInt();
             final int disableOverlays = reply.readInt();
-            mPreference.setChecked(disableOverlays != SETTING_VALUE_OFF);
+            ((SwitchPreference) mPreference).setChecked(disableOverlays != SETTING_VALUE_OFF);
             reply.recycle();
             data.recycle();
         } catch (RemoteException ex) {

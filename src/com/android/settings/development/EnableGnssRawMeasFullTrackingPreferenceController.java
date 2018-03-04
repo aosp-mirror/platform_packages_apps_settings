@@ -21,7 +21,6 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -36,8 +35,6 @@ public class EnableGnssRawMeasFullTrackingPreferenceController extends
     static final int SETTING_VALUE_ON = 1;
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public EnableGnssRawMeasFullTrackingPreferenceController(Context context) {
         super(context);
     }
@@ -45,13 +42,6 @@ public class EnableGnssRawMeasFullTrackingPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return ENABLE_GNSS_RAW_MEAS_FULL_TRACKING_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -69,19 +59,14 @@ public class EnableGnssRawMeasFullTrackingPreferenceController extends
         final int enableGnssRawMeasFullTrackingMode =
                 Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_GNSS_RAW_MEAS_FULL_TRACKING, SETTING_VALUE_OFF);
-        mPreference.setChecked(enableGnssRawMeasFullTrackingMode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(enableGnssRawMeasFullTrackingMode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.ENABLE_GNSS_RAW_MEAS_FULL_TRACKING, SETTING_VALUE_OFF);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

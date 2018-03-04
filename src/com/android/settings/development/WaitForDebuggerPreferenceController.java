@@ -29,15 +29,14 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class WaitForDebuggerPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin, OnActivityResultListener {
+public class WaitForDebuggerPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin,
+        OnActivityResultListener {
 
     private static final String WAIT_FOR_DEBUGGER_KEY = "wait_for_debugger";
 
@@ -46,8 +45,6 @@ public class WaitForDebuggerPreferenceController extends
     @VisibleForTesting
     static final int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public WaitForDebuggerPreferenceController(Context context) {
         super(context);
     }
@@ -55,13 +52,6 @@ public class WaitForDebuggerPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return WAIT_FOR_DEBUGGER_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -75,13 +65,8 @@ public class WaitForDebuggerPreferenceController extends
 
     @Override
     public void updateState(Preference preference) {
-        final String debugApp = Settings.Global.getString(
-                mContext.getContentResolver(), Settings.Global.DEBUG_APP);
-        final boolean debuggerEnabled = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WAIT_FOR_DEBUGGER, SETTING_VALUE_OFF) != SETTING_VALUE_OFF;
-        writeDebuggerAppOptions(debugApp, debuggerEnabled, true /* persistent */);
-        mPreference.setChecked(debuggerEnabled);
-        mPreference.setEnabled(!TextUtils.isEmpty(debugApp));
+        updateState(mPreference, Settings.Global.getString(
+            mContext.getContentResolver(), Settings.Global.DEBUG_APP));
     }
 
     @Override
@@ -89,26 +74,25 @@ public class WaitForDebuggerPreferenceController extends
         if (requestCode != REQUEST_CODE_DEBUG_APP || resultCode != Activity.RESULT_OK) {
             return false;
         }
-        final boolean debuggerEnabled = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.WAIT_FOR_DEBUGGER, SETTING_VALUE_OFF) != SETTING_VALUE_OFF;
-        final String debugApp = data.getAction();
-        writeDebuggerAppOptions(debugApp, debuggerEnabled, true /* persistent */);
-        mPreference.setChecked(debuggerEnabled);
-        mPreference.setEnabled(!TextUtils.isEmpty(debugApp));
+        updateState(mPreference, data.getAction());
         return true;
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+    private void updateState(Preference preference, String debugApp) {
+        final SwitchPreference switchPreference = (SwitchPreference) preference;
+        final boolean debuggerEnabled = Settings.Global.getInt(mContext.getContentResolver(),
+            Settings.Global.WAIT_FOR_DEBUGGER, SETTING_VALUE_OFF) != SETTING_VALUE_OFF;
+        writeDebuggerAppOptions(debugApp, debuggerEnabled, true /* persistent */);
+        switchPreference.setChecked(debuggerEnabled);
+        switchPreference.setEnabled(!TextUtils.isEmpty(debugApp));
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeDebuggerAppOptions(null /* package name */,
                 false /* waitForDebugger */, false /* persistent */);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

@@ -12,9 +12,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class LocalTerminalPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class LocalTerminalPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String ENABLE_TERMINAL_KEY = "enable_terminal";
 
@@ -22,7 +21,6 @@ public class LocalTerminalPreferenceController extends
     static final String TERMINAL_APP_PACKAGE = "com.android.terminal";
 
     private PackageManagerWrapper mPackageManager;
-    private SwitchPreference mPreference;
     private UserManager mUserManager;
 
     public LocalTerminalPreferenceController(Context context) {
@@ -45,7 +43,6 @@ public class LocalTerminalPreferenceController extends
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
         mPackageManager = getPackageManagerWrapper();
 
         if (isAvailable() && !isEnabled()) {
@@ -66,7 +63,7 @@ public class LocalTerminalPreferenceController extends
     public void updateState(Preference preference) {
         final boolean isTerminalEnabled = mPackageManager.getApplicationEnabledSetting(
                 TERMINAL_APP_PACKAGE) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-        mPreference.setChecked(isTerminalEnabled);
+        ((SwitchPreference) mPreference).setChecked(isTerminalEnabled);
     }
 
     @Override
@@ -78,10 +75,10 @@ public class LocalTerminalPreferenceController extends
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         mPackageManager.setApplicationEnabledSetting(TERMINAL_APP_PACKAGE,
                 PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0 /* flags */);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     @VisibleForTesting

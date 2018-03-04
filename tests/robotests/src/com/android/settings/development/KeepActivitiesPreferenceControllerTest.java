@@ -110,11 +110,4 @@ public class KeepActivitiesPreferenceControllerTest {
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }
-
-    @Test
-    public void onDeveloperOptionsEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

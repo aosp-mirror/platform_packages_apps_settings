@@ -139,31 +139,6 @@ public class DashboardAdapterTest {
     }
 
     @Test
-    public void testSuggestionDismissed_moreThanTwoSuggestions_shouldNotCrash() {
-        final RecyclerView data = new RecyclerView(RuntimeEnvironment.application);
-        final View itemView = mock(View.class);
-        when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
-        when(itemView.findViewById(android.R.id.summary)).thenReturn(mock(TextView.class));
-        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
-        final DashboardAdapter.SuggestionContainerHolder holder =
-            new DashboardAdapter.SuggestionContainerHolder(itemView);
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3", "pkg4");
-        final DashboardAdapter adapter = spy(new DashboardAdapter(mContext,
-            null /*savedInstance */, null /* conditions */,
-            null /* suggestionControllerMixin */,
-            null /* lifecycle */));
-        adapter.setSuggestions(suggestions);
-        adapter.onBindSuggestion(holder, 0);
-
-        adapter.onSuggestionClosed(suggestions.get(1));
-
-        // verify operations that access the lists will not cause ConcurrentModificationException
-        assertThat(holder.data.getAdapter().getItemCount()).isEqualTo(3);
-        adapter.setSuggestions(suggestions);
-        // should not crash
-    }
-
-    @Test
     public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
             spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
@@ -203,38 +178,6 @@ public class DashboardAdapterTest {
 
         verify(data).setAdapter(any(SuggestionAdapter.class));
         // should not crash
-    }
-
-    @Test
-    public void testBindSuggestion_shouldSetSummary() {
-        mDashboardAdapter = new DashboardAdapter(mContext, null /* savedInstanceState */,
-            null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */);
-        final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
-
-        mDashboardAdapter.setSuggestions(suggestions);
-
-        final RecyclerView data = mock(RecyclerView.class);
-        when(data.getResources()).thenReturn(mResources);
-        when(data.getContext()).thenReturn(mContext);
-        when(mResources.getDisplayMetrics()).thenReturn(mock(DisplayMetrics.class));
-        final View itemView = mock(View.class);
-        when(itemView.findViewById(R.id.suggestion_list)).thenReturn(data);
-        final TextView summary = mock(TextView.class);
-        when(itemView.findViewById(android.R.id.summary)).thenReturn(summary);
-        when(itemView.findViewById(android.R.id.title)).thenReturn(mock(TextView.class));
-        final DashboardAdapter.SuggestionContainerHolder holder =
-            new DashboardAdapter.SuggestionContainerHolder(itemView);
-
-        mDashboardAdapter.onBindSuggestion(holder, 0);
-
-        verify(summary).setText("1");
-
-        suggestions.addAll(makeSuggestionsV2("pkg2", "pkg3", "pkg4"));
-        mDashboardAdapter.setSuggestions(suggestions);
-
-        mDashboardAdapter.onBindSuggestion(holder, 0);
-
-        verify(summary).setText("4");
     }
 
     @Test

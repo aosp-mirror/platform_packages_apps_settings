@@ -16,14 +16,12 @@
 
 package com.android.settings.development;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -40,7 +38,6 @@ public class BugReportInPowerPreferenceController extends
     static int SETTING_VALUE_OFF = 0;
 
     private final UserManager mUserManager;
-    private SwitchPreference mPreference;
 
     public BugReportInPowerPreferenceController(Context context) {
         super(context);
@@ -58,13 +55,6 @@ public class BugReportInPowerPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(KEY_BUGREPORT_IN_POWER);
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         Settings.Secure.putInt(mContext.getContentResolver(),
@@ -77,18 +67,14 @@ public class BugReportInPowerPreferenceController extends
     public void updateState(Preference preference) {
         final int mode = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        mPreference.setChecked(mode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        // no-op because this preference can never be disabled
+        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Secure.putInt(mContext.getContentResolver(),
                 Settings.Global.BUGREPORT_IN_POWER_MENU, SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

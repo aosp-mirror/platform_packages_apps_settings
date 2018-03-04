@@ -125,11 +125,4 @@ public class WindowAnimationScalePreferenceControllerTest {
         verify(mWindowManager).setAnimationScale(WINDOW_ANIMATION_SCALE_SELECTOR, DEFAULT_VALUE);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() throws RemoteException {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

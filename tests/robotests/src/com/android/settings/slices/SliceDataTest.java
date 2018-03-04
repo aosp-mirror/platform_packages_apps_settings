@@ -40,6 +40,7 @@ public class SliceDataTest {
     private final int ICON = 1234; // I declare a thumb war
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
+    private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
 
     @Test
     public void testBuilder_buildsMatchingObject() {
@@ -51,7 +52,8 @@ public class SliceDataTest {
                 .setIcon(ICON)
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
-                .setPreferenceControllerClassName(PREF_CONTROLLER);
+                .setPreferenceControllerClassName(PREF_CONTROLLER)
+                .setSliceType(SLICE_TYPE);
 
         SliceData data = builder.build();
 
@@ -63,6 +65,7 @@ public class SliceDataTest {
         assertThat(data.getFragmentClassName()).isEqualTo(FRAGMENT_NAME);
         assertThat(data.getUri()).isEqualTo(URI);
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
+        assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
     }
 
     @Test(expected = IllegalStateException.class)

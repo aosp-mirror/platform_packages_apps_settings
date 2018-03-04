@@ -27,23 +27,19 @@ import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
-public class SelectDebugAppPreferenceController extends
-        DeveloperOptionsPreferenceController implements PreferenceControllerMixin,
-        OnActivityResultListener {
+public class SelectDebugAppPreferenceController extends DeveloperOptionsPreferenceController
+        implements PreferenceControllerMixin, OnActivityResultListener {
 
     private static final String DEBUG_APP_KEY = "debug_app";
 
     private final DevelopmentSettingsDashboardFragment mFragment;
     private final PackageManagerWrapper mPackageManager;
-
-    private Preference mPreference;
 
     public SelectDebugAppPreferenceController(Context context,
             DevelopmentSettingsDashboardFragment fragment) {
@@ -55,13 +51,6 @@ public class SelectDebugAppPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return DEBUG_APP_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -92,13 +81,8 @@ public class SelectDebugAppPreferenceController extends
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
+        super.onDeveloperOptionsSwitchDisabled();
         mPreference.setSummary(mContext.getResources().getString(R.string.debug_app_not_set));
     }
 

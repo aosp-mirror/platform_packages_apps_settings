@@ -304,14 +304,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
         // header anymore.
         final List<Suggestion> suggestions =
             (List<Suggestion>) mDashboardData.getItemEntityByPosition(position);
-        final int suggestionCount = suggestions.size();
-        final Typeface fontMedium = Typeface.create(
-            mContext.getString(com.android.internal.R.string.config_headlineFontFamilyMedium),
-            Typeface.NORMAL);
-        holder.title.setTypeface(fontMedium);
-        if (suggestions != null && suggestionCount > 0) {
-            holder.summary.setText("" + suggestionCount);
-            holder.summary.setTypeface(fontMedium);
+        if (suggestions != null && suggestions.size() > 0) {
             mSuggestionAdapter.setSuggestions(suggestions);
             holder.data.setAdapter(mSuggestionAdapter);
         }

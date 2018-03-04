@@ -308,8 +308,9 @@ public class SettingsActivity extends SettingsDrawerActivity
 
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
+            boolean deviceProvisioned = Utils.isDeviceProvisioned(this);
+            actionBar.setDisplayHomeAsUpEnabled(deviceProvisioned);
+            actionBar.setHomeButtonEnabled(deviceProvisioned);
             actionBar.setDisplayShowTitleEnabled(!mIsShowingDashboard);
         }
         mSwitchBar = findViewById(R.id.switch_bar);

@@ -34,7 +34,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
     /** Key for preference category "Recent location requests" */
     private static final String KEY_RECENT_LOCATION_REQUESTS = "recent_location_requests";
     @VisibleForTesting
-    static final String KEY_SEE_ALL = "recent_location_requests_see_all";
+    static final String KEY_SEE_ALL_BUTTON = "recent_location_requests_see_all_button";
     private final LocationSettings mFragment;
     private final RecentLocationApps mRecentLocationApps;
     private PreferenceCategory mCategoryRecentLocationRequests;
@@ -93,7 +93,7 @@ public class RecentLocationRequestPreferenceController extends LocationBasePrefe
         super.displayPreference(screen);
         mCategoryRecentLocationRequests =
                 (PreferenceCategory) screen.findPreference(KEY_RECENT_LOCATION_REQUESTS);
-        mSeeAllButton = screen.findPreference(KEY_SEE_ALL);
+        mSeeAllButton = screen.findPreference(KEY_SEE_ALL_BUTTON);
 
     }
 

@@ -16,76 +16,111 @@
 
 package com.android.settings.slices;
 
+import android.annotation.IntDef;
 import android.net.Uri;
 import android.text.TextUtils;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * Data class representing a slice stored by {@link SlicesIndexer}.
- * Note that {@link #key} is treated as a primary key for this class and determines equality.
+ * Note that {@link #mKey} is treated as a primary key for this class and determines equality.
  */
 public class SliceData {
 
-    private final String key;
+    /**
+     * Flags indicating the UI type of the Slice.
+     */
+    @IntDef({SliceType.INTENT, SliceType.SWITCH, SliceType.SLIDER})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface SliceType {
+        /**
+         * Only supports content intent.
+         */
+        int INTENT = 0;
 
-    private final String title;
+        /**
+         * Supports toggle action.
+         */
+        int SWITCH = 1;
 
-    private final String summary;
+        /**
+         * Supports progress bar.
+         */
+        int SLIDER = 2;
+    }
 
-    private final String screenTitle;
+    private final String mKey;
 
-    private final int iconResource;
+    private final String mTitle;
 
-    private final String fragmentClassName;
+    private final String mSummary;
 
-    private final Uri uri;
+    private final String mScreenTitle;
 
-    private final String preferenceController;
+    private final int mIconResource;
+
+    private final String mFragmentClassName;
+
+    private final Uri mUri;
+
+    private final String mPreferenceController;
+
+    @SliceType
+    private final int mSliceType;
 
     public String getKey() {
-        return key;
+        return mKey;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public String getSummary() {
-        return summary;
+        return mSummary;
     }
 
     public String getScreenTitle() {
-        return screenTitle;
+        return mScreenTitle;
     }
 
     public int getIconResource() {
-        return iconResource;
+        return mIconResource;
     }
 
     public String getFragmentClassName() {
-        return fragmentClassName;
+        return mFragmentClassName;
     }
 
     public Uri getUri() {
-        return uri;
+        return mUri;
     }
 
     public String getPreferenceController() {
-        return preferenceController;
+        return mPreferenceController;
+    }
+
+    public int getSliceType() {
+        return mSliceType;
     }
 
     private SliceData(Builder builder) {
-        key = builder.mKey;
-        title = builder.mTitle;
-        summary = builder.mSummary;
-        screenTitle = builder.mScreenTitle;
-        iconResource = builder.mIconResource;
-        fragmentClassName = builder.mFragmentClassName;
-        uri = builder.mUri;
-        preferenceController = builder.mPrefControllerClassName;
+        mKey = builder.mKey;
+        mTitle = builder.mTitle;
+        mSummary = builder.mSummary;
+        mScreenTitle = builder.mScreenTitle;
+        mIconResource = builder.mIconResource;
+        mFragmentClassName = builder.mFragmentClassName;
+        mUri = builder.mUri;
+        mPreferenceController = builder.mPrefControllerClassName;
+        mSliceType = builder.mSliceType;
     }
 
     @Override
     public int hashCode() {
-        return key.hashCode();
+        return mKey.hashCode();
     }
 
     @Override
@@ -94,7 +129,7 @@ public class SliceData {
             return false;
         }
         SliceData newObject = (SliceData) obj;
-        return TextUtils.equals(key, newObject.key);
+        return TextUtils.equals(mKey, newObject.mKey);
     }
 
     static class Builder {
@@ -113,6 +148,8 @@ public class SliceData {
         private Uri mUri;
 
         private String mPrefControllerClassName;
+
+        private int mSliceType;
 
         public Builder setKey(String key) {
             mKey = key;
@@ -151,6 +188,11 @@ public class SliceData {
 
         public Builder setUri(Uri uri) {
             mUri = uri;
+            return this;
+        }
+
+        public Builder setSliceType(@SliceType int sliceType) {
+            mSliceType = sliceType;
             return this;
         }
 

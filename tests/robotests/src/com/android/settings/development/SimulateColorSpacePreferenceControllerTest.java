@@ -164,11 +164,4 @@ public class SimulateColorSpacePreferenceControllerTest {
         assertThat(settingValue).isEqualTo(SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

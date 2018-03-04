@@ -24,7 +24,6 @@ import android.os.ServiceManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -46,7 +45,6 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
     private static final String SURFACE_COMPOSER_INTERFACE_KEY = "android.ui.ISurfaceComposer";
 
     private final IBinder mSurfaceFlinger;
-    private SwitchPreference mPreference;
 
     public ShowSurfaceUpdatesPreferenceController(Context context) {
         super(context);
@@ -56,13 +54,6 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
     @Override
     public String getPreferenceKey() {
         return SHOW_SCREEN_UPDATES_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -78,19 +69,15 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        if (mPreference.isChecked()) {
+        super.onDeveloperOptionsSwitchDisabled();
+        final SwitchPreference preference = (SwitchPreference) mPreference;
+        if (preference.isChecked()) {
             // Writing false to the preference when the setting is already off will have a
             // side effect of turning on the preference that we wish to avoid
             writeShowUpdatesSetting(false);
-            mPreference.setChecked(false);
+            preference.setChecked(false);
         }
-        mPreference.setEnabled(false);
     }
 
     @VisibleForTesting
@@ -105,7 +92,7 @@ public class ShowSurfaceUpdatesPreferenceController extends DeveloperOptionsPref
                 @SuppressWarnings("unused") final int showCpu = reply.readInt();
                 @SuppressWarnings("unused") final int enableGL = reply.readInt();
                 final int showUpdates = reply.readInt();
-                mPreference.setChecked(showUpdates != SETTING_VALUE_OFF);
+                ((SwitchPreference) mPreference).setChecked(showUpdates != SETTING_VALUE_OFF);
                 reply.recycle();
                 data.recycle();
             }

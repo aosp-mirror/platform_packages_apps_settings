@@ -59,14 +59,9 @@ public class AdbPreferenceController extends AbstractEnableAdbPreferenceControll
     }
 
     @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeAdbSetting(false);
-        mPreference.setEnabled(false);
         mPreference.setChecked(false);
     }
 }

@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.SearchIndexableRaw;
+import com.android.settings.slices.SliceData;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -151,6 +152,14 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      */
     public final boolean isSupported() {
         return getAvailabilityStatus() != DISABLED_UNSUPPORTED;
+    }
+
+    /**
+     * @return the UI type supported by the controller.
+     */
+    @SliceData.SliceType
+    public int getSliceType() {
+        return SliceData.SliceType.INTENT;
     }
 
     /**

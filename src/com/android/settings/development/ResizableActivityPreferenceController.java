@@ -21,14 +21,12 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class ResizableActivityPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class ResizableActivityPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String FORCE_RESIZABLE_KEY = "force_resizable_activities";
 
@@ -37,8 +35,6 @@ public class ResizableActivityPreferenceController extends
     @VisibleForTesting
     final static int SETTING_VALUE_OFF = 0;
 
-    private SwitchPreference mPreference;
-
     public ResizableActivityPreferenceController(Context context) {
         super(context);
     }
@@ -46,13 +42,6 @@ public class ResizableActivityPreferenceController extends
     @Override
     public String getPreferenceKey() {
         return FORCE_RESIZABLE_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -68,19 +57,14 @@ public class ResizableActivityPreferenceController extends
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES, SETTING_VALUE_OFF);
-        mPreference.setChecked(mode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_FORCE_RESIZABLE_ACTIVITIES, SETTING_VALUE_OFF);
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

@@ -119,20 +119,6 @@ public class AbstractBluetoothA2dpPreferenceControllerTest {
         verify(mController).updateState(mPreference);
     }
 
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
     static class AbstractBluetoothA2dpPreferenceControllerImpl extends
             AbstractBluetoothA2dpPreferenceController {
 

@@ -86,7 +86,7 @@ public class RecentLocationRequestPreferenceControllerTest {
         mController = spy(new RecentLocationRequestPreferenceController(
                 mContext, mFragment, mLifecycle, mRecentLocationApps));
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mCategory);
-        when(mScreen.findPreference(mController.KEY_SEE_ALL)).thenReturn(mSeeAllButton);
+        when(mScreen.findPreference(mController.KEY_SEE_ALL_BUTTON)).thenReturn(mSeeAllButton);
         final String key = mController.getPreferenceKey();
         when(mCategory.getKey()).thenReturn(key);
         when(mCategory.getContext()).thenReturn(mContext);

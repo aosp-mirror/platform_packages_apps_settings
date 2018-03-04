@@ -26,6 +26,7 @@ import com.android.settings.applications.AppStatePowerBridge;
 import com.android.settings.applications.AppStateDirectoryAccessBridge;
 import com.android.settings.applications.AppStateUsageBridge;
 import com.android.settings.applications.AppStateWriteSettingsBridge;
+import com.android.settings.wifi.AppStateChangeWifiStateBridge;
 import com.android.settingslib.applications.ApplicationsState;
 
 /**
@@ -67,14 +68,15 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_WRITE_SETTINGS = 11;
     public static final int FILTER_APPS_INSTALL_SOURCES = 12;
     public static final int FILTER_APP_HAS_DIRECTORY_ACCESS = 13;
-    // Next id: 14
+    public static final int FILTER_APP_CAN_CHANGE_WIFI_STATE = 14;
+    // Next id: 15
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[14];
+        mFilters = new AppFilterItem[15];
 
         // High power whitelist, on
         mFilters[FILTER_APPS_POWER_WHITELIST] = new AppFilterItem(
@@ -163,6 +165,11 @@ public class AppFilterRegistry {
                 AppStateDirectoryAccessBridge.FILTER_APP_HAS_DIRECTORY_ACCESS,
                 FILTER_APP_HAS_DIRECTORY_ACCESS,
                 R.string.filter_install_sources_apps);
+
+        mFilters[FILTER_APP_CAN_CHANGE_WIFI_STATE] = new AppFilterItem(
+                AppStateChangeWifiStateBridge.FILTER_CHANGE_WIFI_STATE,
+                FILTER_APP_CAN_CHANGE_WIFI_STATE,
+                R.string.filter_write_settings_apps);
     }
 
     public static AppFilterRegistry getInstance() {
@@ -187,6 +194,8 @@ public class AppFilterRegistry {
                 return FILTER_APPS_INSTALL_SOURCES;
             case ManageApplications.LIST_TYPE_DIRECTORY_ACCESS:
                 return FILTER_APP_HAS_DIRECTORY_ACCESS;
+            case ManageApplications.LIST_TYPE_WIFI_ACCESS:
+                return FILTER_APP_CAN_CHANGE_WIFI_STATE;
             default:
                 return FILTER_APPS_ALL;
         }

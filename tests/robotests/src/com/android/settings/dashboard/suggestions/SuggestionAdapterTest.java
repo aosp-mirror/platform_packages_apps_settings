@@ -94,8 +94,6 @@ public class SuggestionAdapterTest {
             .thenReturn(10);
         when(mResources.getDimensionPixelOffset(R.dimen.suggestion_card_outer_margin))
             .thenReturn(20);
-        when(mResources.getDimensionPixelOffset(R.dimen.suggestion_card_width_multiple_cards))
-            .thenReturn(120);
         mConfig = spy(SuggestionAdapter.CardConfig.get(mActivity));
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
@@ -238,40 +236,12 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void onBindViewHolder_iconNotTintable_shouldNotTintIcon()
-            throws PendingIntent.CanceledException {
-        final Icon icon = mock(Icon.class);
-        final Suggestion suggestion = new Suggestion.Builder("pkg1")
-            .setPendingIntent(mock(PendingIntent.class))
-            .setIcon(icon)
-            .build();
-        final List<Suggestion> suggestions = new ArrayList<>();
-        suggestions.add(suggestion);
-        mSuggestionAdapter = new SuggestionAdapter(mActivity, mSuggestionControllerMixin,
-            null /* savedInstanceState */, null /* callback */, null /* lifecycle */);
-        mSuggestionAdapter.setSuggestions(suggestions);
-        mSuggestionHolder = mSuggestionAdapter.onCreateViewHolder(
-            new FrameLayout(RuntimeEnvironment.application),
-            mSuggestionAdapter.getItemViewType(0));
-        IconCache cache = mock(IconCache.class);
-        final Drawable drawable = mock(Drawable.class);
-        when(cache.getIcon(icon)).thenReturn(drawable);
-        ReflectionHelpers.setField(mSuggestionAdapter, "mCache", cache);
-
-        mSuggestionAdapter.onBindViewHolder(mSuggestionHolder, 0);
-
-        verify(drawable, never()).setTint(anyInt());
-    }
-
-    @Test
-    public void onBindViewHolder_iconTintable_shouldTintIcon()
-            throws PendingIntent.CanceledException {
+    public void onBindViewHolder_shouldTintIcon() throws PendingIntent.CanceledException {
         final Icon icon = mock(Icon.class);
         final int FLAG_ICON_TINTABLE = 1 << 1;
         final Suggestion suggestion = new Suggestion.Builder("pkg1")
             .setPendingIntent(mock(PendingIntent.class))
             .setIcon(icon)
-            .setFlags(FLAG_ICON_TINTABLE)
             .build();
         final List<Suggestion> suggestions = new ArrayList<>();
         suggestions.add(suggestion);
@@ -309,23 +279,12 @@ public class SuggestionAdapterTest {
     }
 
     @Test
-    public void setCardLayout_oneCard_shouldSetCardWidthToMatchParent() {
-        final List<Suggestion> suggestions = makeSuggestions("pkg1");
-        setupSuggestions(mContext, suggestions);
-
-        mConfig.setCardLayout(mSuggestionHolder, 1, 0);
-
-        assertThat(mSuggestionHolder.itemView.getLayoutParams().width)
-            .isEqualTo(LinearLayout.LayoutParams.MATCH_PARENT);
-    }
-
-    @Test
     public void setCardLayout_twoCards_shouldSetCardWidthToHalfScreenMinusPadding() {
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
         setupSuggestions(mContext, suggestions);
         doReturn(200).when(mConfig).getScreenWidth();
 
-        mConfig.setCardLayout(mSuggestionHolder, 2, 0);
+        mConfig.setCardLayout(mSuggestionHolder, 0);
 
         /*
          * card width = (screen width - left margin - inner margin - right margin) / 2
@@ -333,17 +292,6 @@ public class SuggestionAdapterTest {
          *            = 75
          */
         assertThat(mSuggestionHolder.itemView.getLayoutParams().width).isEqualTo(75);
-    }
-
-
-    @Test
-    public void setCardLayout_multipleCards_shouldSetCardWidthFromResource() {
-        final List<Suggestion> suggestions = makeSuggestions("pkg1");
-        setupSuggestions(mContext, suggestions);
-
-        mConfig.setCardLayout(mSuggestionHolder, 3, 0);
-
-        assertThat(mSuggestionHolder.itemView.getLayoutParams().width).isEqualTo(120);
     }
 
     private void setupSuggestions(Context context, List<Suggestion> suggestions) {

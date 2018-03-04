@@ -71,19 +71,17 @@ public class LocationSwitchBarControllerTest {
     }
 
     @Test
-    public void onStart_shouldShowSwitchBarAndAddOnSwitchChangeListener() {
+    public void onStart_shouldAddOnSwitchChangeListener() {
         mController.onStart();
 
-        verify(mSwitchBar).show();
         verify(mSwitchBar).addOnSwitchChangeListener(mController);
     }
 
     @Test
-    public void onStop_shouldHideSwitchBarAndRemoveOnSwitchChangeListener() {
+    public void onStop_shouldRemoveOnSwitchChangeListener() {
         mController.onStart();
         mController.onStop();
 
-        verify(mSwitchBar).hide();
         verify(mSwitchBar).removeOnSwitchChangeListener(mController);
     }
 

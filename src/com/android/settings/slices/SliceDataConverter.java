@@ -127,11 +127,6 @@ class SliceDataConverter {
         XmlResourceParser parser = null;
 
         final List<SliceData> xmlSliceData = new ArrayList<>();
-        String key;
-        String title;
-        String summary;
-        @DrawableRes int iconResId;
-        String controllerClassName;
 
         try {
             parser = mContext.getResources().getXml(xmlResId);
@@ -155,30 +150,33 @@ class SliceDataConverter {
 
             // TODO (b/67996923) Investigate if we need headers for Slices, since they never
             // correspond to an actual setting.
-            SliceData xmlSlice;
+
             while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                     && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth)) {
                 if (type == XmlPullParser.END_TAG || type == XmlPullParser.TEXT) {
                     continue;
                 }
 
-
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
                 // Note that without a controller, dynamic summaries are impossible.
                 // TODO (b/67996923) This will not work if preferences have nested intents:
                 // <pref ....>
                 //      <intent action="blab"/> </pref>
-                controllerClassName = PreferenceXmlParserUtils.getController(mContext, attrs);
+                final String controllerClassName = PreferenceXmlParserUtils.getController(mContext,
+                        attrs);
                 if (TextUtils.isEmpty(controllerClassName)) {
                     continue;
                 }
 
-                title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
-                key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
-                iconResId = PreferenceXmlParserUtils.getDataIcon(mContext, attrs);
-                summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
+                final String title = PreferenceXmlParserUtils.getDataTitle(mContext, attrs);
+                final String key = PreferenceXmlParserUtils.getDataKey(mContext, attrs);
+                @DrawableRes final int iconResId = PreferenceXmlParserUtils.getDataIcon(mContext,
+                        attrs);
+                final String summary = PreferenceXmlParserUtils.getDataSummary(mContext, attrs);
+                final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
+                        key);
 
-                xmlSlice = new SliceData.Builder()
+                final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
                         .setTitle(title)
                         .setSummary(summary)
@@ -186,6 +184,7 @@ class SliceDataConverter {
                         .setScreenTitle(screenTitle)
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
+                        .setSliceType(sliceType)
                         .build();
 
                 xmlSliceData.add(xmlSlice);

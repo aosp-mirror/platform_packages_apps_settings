@@ -21,7 +21,6 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
@@ -35,8 +34,6 @@ public class ForceMSAAPreferenceController extends DeveloperOptionsPreferenceCon
     @VisibleForTesting
     static final String MSAA_PROPERTY = "debug.egl.force_msaa";
 
-    private SwitchPreference mPreference;
-
     public ForceMSAAPreferenceController(Context context) {
         super(context);
     }
@@ -44,13 +41,6 @@ public class ForceMSAAPreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public String getPreferenceKey() {
         return FORCE_MSAA_KEY;
-    }
-
-    @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
     }
 
     @Override
@@ -65,18 +55,13 @@ public class ForceMSAAPreferenceController extends DeveloperOptionsPreferenceCon
     @Override
     public void updateState(Preference preference) {
         final boolean isEnabled = SystemProperties.getBoolean(MSAA_PROPERTY, false /* default */);
-        mPreference.setChecked(isEnabled);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(isEnabled);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         SystemProperties.set(MSAA_PROPERTY, Boolean.toString(false));
-        mPreference.setChecked(false);
-        mPreference.setEnabled(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

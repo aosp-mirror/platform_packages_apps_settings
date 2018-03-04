@@ -482,8 +482,7 @@
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Bảo vệ máy tính bảng của bạn"</string>
     <string name="setup_lock_settings_picker_title" product="device" msgid="2399952075134938929">"Bảo vệ thiết bị của bạn"</string>
     <string name="setup_lock_settings_picker_title" product="default" msgid="1572244299605153324">"Bảo vệ điện thoại của bạn"</string>
-    <!-- no translation found for lock_settings_picker_fingerprint_added_security_message (5008939545428518367) -->
-    <skip />
+    <string name="lock_settings_picker_fingerprint_added_security_message" msgid="5008939545428518367">"Để tăng cường bảo mật, hãy đặt khóa màn hình dự phòng"</string>
     <string name="setup_lock_settings_picker_message" product="tablet" msgid="8919671129189936210">"Ngăn người khác sử dụng máy tính bảng này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
     <string name="setup_lock_settings_picker_message" product="device" msgid="3787276514406353777">"Ngăn người khác sử dụng thiết bị này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
     <string name="setup_lock_settings_picker_message" product="default" msgid="3692856437543730446">"Ngăn người khác sử dụng điện thoại này mà không có sự cho phép của bạn bằng cách kích hoạt tính năng bảo vệ thiết bị. Chọn khóa màn hình bạn muốn sử dụng."</string>
@@ -708,6 +707,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Nhớ cài đặt"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Chọn số thiết bị âm thanh được kết nối qua Bluetooth tối đa"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"Bật báo cáo độ trễ AVDTP của Bluetooth"</string>
+    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"Cho phép nhận báo cáo độ trễ AVDTP của Bluetooth"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Truyền"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Bật hiển thị không dây"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Không tìm thấy thiết bị lân cận nào."</string>
@@ -924,8 +925,7 @@
     <string name="wifi_hotspot_configure_ap_text" msgid="5478614731464220432">"Thiết lập điểm phát sóng Wi‑Fi"</string>
     <string name="wifi_hotspot_configure_ap_text_summary" msgid="5560680057727007011">"Điểm phát sóng AndroidAP WPA2 PSK"</string>
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
-    <!-- no translation found for wifi_tether_disabled_by_airplane (414480185654767932) -->
-    <skip />
+    <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"Không sử dụng được vì chế độ trên máy bay đang bật"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Gọi qua Wi-Fi"</string>
     <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"Mở rộng vùng phủ sóng cuộc gọi bằng Wi‑Fi"</string>
     <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"Bật tính năng gọi qua Wi‑Fi"</string>
@@ -1443,6 +1443,8 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Vị trí của hồ sơ công việc"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"Quyền cấp ứng dụng"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Yêu cầu vị trí gần đây"</string>
+    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
+    <skip />
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Không có ứng dụng nào yêu cầu vị trí gần đây"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Dịch vụ vị trí"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Mức sử dụng pin cao"</string>
@@ -1491,17 +1493,13 @@
     <string name="settings_safetylegal_activity_title" msgid="6901214628496951727">"Thông tin an toàn"</string>
     <string name="settings_safetylegal_activity_unreachable" msgid="142307697309858185">"Bạn chưa có kết nối dữ liệu. Để xem thông tin này ngay bây giờ, hãy truy cập %s từ máy tính bất kỳ đã kết nối với Internet."</string>
     <string name="settings_safetylegal_activity_loading" msgid="8059022597639516348">"Đang tải…"</string>
-    <!-- no translation found for lockpassword_choose_your_screen_lock_header (2942199737559900752) -->
-    <skip />
-    <!-- no translation found for lockpassword_choose_your_password_message (5377842480961577542) -->
-    <skip />
+    <string name="lockpassword_choose_your_screen_lock_header" msgid="2942199737559900752">"Đặt khóa màn hình"</string>
+    <string name="lockpassword_choose_your_password_message" msgid="5377842480961577542">"Để bảo mật, hãy đặt mật khẩu"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="6624409510609085450">"Để dùng vân tay, đặt mật khẩu"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="5901096361617543819">"Để dùng vân tay, đặt hình m.khóa"</string>
-    <!-- no translation found for lockpassword_choose_your_pin_message (6658264750811929338) -->
-    <skip />
+    <string name="lockpassword_choose_your_pin_message" msgid="6658264750811929338">"Để bảo mật, hãy đặt mã PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="765344692615917183">"Để dùng vân tay, đặt mã PIN"</string>
-    <!-- no translation found for lockpassword_choose_your_pattern_message (8631545254345759087) -->
-    <skip />
+    <string name="lockpassword_choose_your_pattern_message" msgid="8631545254345759087">"Để bảo mật, hãy đặt hình mở khóa"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="1266027268220850931">"Nhập lại mật khẩu của bạn"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="7543433733032330821">"Xác nhận hình của bạn"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="7744513791910572550">"Nhập lại mã PIN của bạn"</string>
@@ -1886,8 +1884,8 @@
     <string name="accessibility_service_master_switch_title" msgid="6835441300276358239">"Sử dụng dịch vụ"</string>
     <string name="accessibility_daltonizer_master_switch_title" msgid="8655284637968823154">"Sử dụng tính năng sửa màu"</string>
     <string name="accessibility_caption_master_switch_title" msgid="4010227386676077826">"Sử dụng phụ đề"</string>
-    <string name="accessibility_summary_state_enabled" msgid="8359913912320966304">"BẬT"</string>
-    <string name="accessibility_summary_state_disabled" msgid="2241315620132005595">"TẮT"</string>
+    <string name="accessibility_summary_state_enabled" msgid="7914278500885887763">"Bật"</string>
+    <string name="accessibility_summary_state_disabled" msgid="2984230257590246745">"Tắt"</string>
     <string name="enable_quick_setting" msgid="2366999897816894536">"Hiển thị trong Cài đặt nhanh"</string>
     <string name="daltonizer_type" msgid="1124178250809091080">"Chế độ sửa"</string>
     <plurals name="accessibilty_autoclick_preference_subtitle_extremely_short_delay" formatted="false" msgid="7340347830562315800">
@@ -2319,7 +2317,8 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Trước khi bạn có thể sử dụng vùng lưu trữ thông tin xác thực, thiết bị của bạn cần có màn hình khóa bản mật"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"THIẾT LẬP KHÓA"</string>
     <string name="usage_access_title" msgid="332333405495457839">"ƯD có quyền tr.cập s.dụng"</string>
-    <string name="emergency_tone_title" msgid="1055954530111587114">"Âm khẩn cấp"</string>
+    <!-- no translation found for emergency_tone_title (254495218194925271) -->
+    <skip />
     <string name="emergency_tone_summary" msgid="722259232924572153">"Đặt chế độ khi cuộc gọi khẩn cấp được thực hiện"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Sao lưu"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Sao lưu &amp; khôi phục"</string>
@@ -2894,6 +2893,7 @@
     <string name="keywords_model_and_hardware" msgid="1459248377212829642">"số sê-ri, phiên bản phần cứng"</string>
     <string name="keywords_android_version" msgid="9069747153590902819">"mức bản vá bảo mật của android, phiên bản băng tần cơ sở, phiên bản kernel"</string>
     <string name="keywords_ambient_display_screen" msgid="5874969496073249362">"Màn hình sáng, Màn hình ở chế độ màn hình khóa"</string>
+    <string name="keywords_fingerprint_settings" msgid="239222512315619538">"vân tay"</string>
     <string name="setup_wifi_nfc_tag" msgid="9028353016222911016">"Thiết lập thẻ NFC Wi-Fi"</string>
     <string name="write_tag" msgid="8571858602896222537">"Ghi"</string>
     <string name="status_awaiting_tap" msgid="2130145523773160617">"Nhấn vào một thẻ để ghi..."</string>
@@ -2927,9 +2927,12 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Phát âm đế kết nối"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Tất cả âm thanh"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Chỉ âm thanh phương tiện"</string>
-    <string name="emergency_tone_silent" msgid="1067515631635824291">"Im lặng"</string>
-    <string name="emergency_tone_alert" msgid="8941852695428130667">"Thông báo"</string>
-    <string name="emergency_tone_vibrate" msgid="8281126443204950847">"Rung"</string>
+    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
+    <skip />
+    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
+    <skip />
+    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
+    <skip />
     <string name="boot_sounds_title" msgid="567029107382343709">"Âm thanh bật nguồn"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Không bao giờ"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -3176,7 +3179,7 @@
     <string name="zen_mode_summary_alarms_only_by_time" msgid="7465525754879341907">"Đổi sang báo thức chỉ đến khi <xliff:g id="FORMATTEDTIME">%1$s</xliff:g>"</string>
     <string name="zen_mode_summary_always" msgid="6172985102689237703">"Đổi sang luôn làm gián đoạn"</string>
     <string name="zen_mode_screen_on" msgid="8774571998575673502">"Khi màn hình bật"</string>
-    <string name="zen_mode_screen_on_summary" msgid="5385338884695802115">"Cho phép thông báo đã bị tắt tiếng bằng tính năng Không làm phiền hiển thị trên màn hình"</string>
+    <string name="zen_mode_screen_on_summary" msgid="2208664848367443505">"Cho phép thông báo đã bị tắt tiếng bằng tính năng Không làm phiền bật lên màn hình và hiển thị biểu tượng thanh trạng thái"</string>
     <string name="zen_mode_screen_off" msgid="3144446765110327937">"Khi màn hình tắt"</string>
     <string name="zen_mode_screen_off_summary" msgid="7430034620565812258">"Cho phép thông báo đã bị tắt tiếng bằng tính năng Không làm phiền bật màn hình và đèn"</string>
     <string name="zen_mode_screen_off_summary_no_led" msgid="2826121465026642017">"Cho phép thông báo đã bị tắt tiếng bằng tính năng Không làm phiền bật màn hình"</string>
@@ -3364,10 +3367,8 @@
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Sử dụng thiết bị này làm MIDI"</string>
     <string name="usb_use" msgid="3372728031108932425">"Sử dụng USB cho"</string>
     <string name="usb_use_also" msgid="557340935190819370">"Ngoài ra, sử dụng USB để"</string>
-    <!-- no translation found for usb_default_label (4217189967858707974) -->
-    <skip />
-    <!-- no translation found for usb_default_info (8864535445796200695) -->
-    <skip />
+    <string name="usb_default_label" msgid="4217189967858707974">"Cấu hình USB mặc định"</string>
+    <string name="usb_default_info" msgid="8864535445796200695">"Sẽ áp dụng những cài đặt này khi có một thiết bị khác được kết nối và điện thoại của bạn được mở khóa. Bạn chỉ nên kết nối với các thiết bị đáng tin cậy."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Sạc thiết bị này"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"Sạc thiết bị được kết nối"</string>
@@ -3488,8 +3489,8 @@
     <string name="memory_summary" msgid="8080825904671961872">"Trung bình <xliff:g id="USED_MEMORY">%1$s</xliff:g>/<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> bộ nhớ được sử dụng"</string>
     <string name="users_summary" msgid="1674864467098487328">"Đã đăng nhập với tên <xliff:g id="USER_NAME">%1$s</xliff:g>"</string>
     <string name="payment_summary" msgid="3472482669588561110">"<xliff:g id="APP_NAME">%1$s</xliff:g> là mặc định"</string>
-    <string name="location_on_summary" msgid="4083334422422067511">"BẬT"</string>
-    <string name="location_off_summary" msgid="6474350053215707957">"TẮT"</string>
+    <string name="location_on_summary" msgid="3637699010986988970">"Bật"</string>
+    <string name="location_off_summary" msgid="7217264690673949107">"Tắt"</string>
     <string name="backup_disabled" msgid="485189128759595412">"Đã tắt sao lưu"</string>
     <string name="android_version_summary" msgid="2935995161657697278">"Đã cập nhật lên Android <xliff:g id="VERSION">%1$s</xliff:g>"</string>
     <string name="android_version_pending_update_summary" msgid="487831391976523090">"Đã có bản cập nhật"</string>
@@ -3663,9 +3664,10 @@
     <string name="bluetooth_connected_summary" msgid="7672528674593152862">"Được kết nối với <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="bluetooth_connected_multiple_devices_summary" msgid="9173661896296663932">"Được kết nối với nhiều thiết bị"</string>
     <string name="demo_mode" msgid="2798762752209330277">"Chế độ trình diễn giao diện người dùng hệ thống"</string>
+    <string name="dark_ui_mode" msgid="2112241426441807273">"Chế độ ban đêm"</string>
+    <string name="dark_ui_mode_title" msgid="975299966259850992">"Đặt chế độ ban đêm"</string>
     <string name="quick_settings_developer_tiles" msgid="5947788063262762448">"Ô nhà phát triển cài đặt nhanh"</string>
-    <string name="window_trace_quick_settings_title" msgid="3839917000546526898">"Theo dõi cửa sổ"</string>
-    <string name="layer_trace_quick_settings_title" msgid="876797401275734018">"Hiển thị dấu vết"</string>
+    <string name="winscope_trace_quick_settings_title" msgid="1294290008255732032">"Dấu vết Winscope"</string>
     <string name="support_country_format" msgid="4502523713489559595">"<xliff:g id="COUNTRY">%1$s</xliff:g> - <xliff:g id="LANGUAGE">%2$s</xliff:g>"</string>
     <string name="managed_profile_settings_title" msgid="2729481936758125054">"Cài đặt hồ sơ công việc"</string>
     <string name="managed_profile_contact_search_title" msgid="6034734926815544221">"Tìm kiếm liên hệ"</string>
@@ -3861,4 +3863,14 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Sử dụng Bluetooth khi đang lái xe"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Tự động bật Bluetooth khi đang lái xe"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Xem cài đặt pin trong Android 8.0"</string>
+    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <skip />
+    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
+    <skip />
+    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
+    <skip />
 </resources>

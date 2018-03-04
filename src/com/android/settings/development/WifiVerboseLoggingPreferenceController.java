@@ -21,14 +21,12 @@ import android.net.wifi.WifiManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class WifiVerboseLoggingPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class WifiVerboseLoggingPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String WIFI_VERBOSE_LOGGING_KEY = "wifi_verbose_logging";
 
@@ -38,7 +36,6 @@ public class WifiVerboseLoggingPreferenceController extends
     static final int SETTING_VALUE_OFF = 0;
 
     private final WifiManager mWifiManager;
-    private SwitchPreference mPreference;
 
     public WifiVerboseLoggingPreferenceController(Context context) {
         super(context);
@@ -52,13 +49,6 @@ public class WifiVerboseLoggingPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
         mWifiManager.enableVerboseLogging(isEnabled ? SETTING_VALUE_ON : SETTING_VALUE_OFF);
@@ -68,19 +58,14 @@ public class WifiVerboseLoggingPreferenceController extends
     @Override
     public void updateState(Preference preference) {
         final boolean enabled = mWifiManager.getVerboseLoggingLevel() > 0;
-        mPreference.setChecked(enabled);
+        ((SwitchPreference) mPreference).setChecked(enabled);
 
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         mWifiManager.enableVerboseLogging(SETTING_VALUE_OFF);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 }

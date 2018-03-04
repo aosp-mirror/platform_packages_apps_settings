@@ -17,6 +17,7 @@ import android.content.Context;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.TwoStatePreference;
 
+import com.android.settings.slices.SliceData;
 import com.android.settings.widget.MasterSwitchPreference;
 
 /**
@@ -59,4 +60,11 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     public final boolean onPreferenceChange(Preference preference, Object newValue) {
         return setChecked((Boolean) newValue);
     }
+
+    @Override
+    @SliceData.SliceType
+    public int getSliceType() {
+        return SliceData.SliceType.SWITCH;
+    }
+
 }

@@ -149,18 +149,4 @@ public class MockLocationAppPreferenceControllerTest {
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
-        mController.onDeveloperOptionsSwitchDisabled();
-
-        verify(mPreference).setEnabled(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchEnabled_shouldEnablePreference() {
-        mController.onDeveloperOptionsSwitchEnabled();
-
-        verify(mPreference).setEnabled(true);
-    }
 }

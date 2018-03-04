@@ -22,7 +22,6 @@ import android.os.SystemProperties;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
@@ -30,9 +29,8 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 import com.android.settingslib.development.SystemPropPoker;
 
-public class HdcpCheckingPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class HdcpCheckingPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String HDCP_CHECKING_KEY = "hdcp_checking";
 
@@ -43,7 +41,6 @@ public class HdcpCheckingPreferenceController extends
 
     private final String[] mListValues;
     private final String[] mListSummaries;
-    private ListPreference mPreference;
 
     public HdcpCheckingPreferenceController(Context context) {
         super(context);
@@ -63,36 +60,19 @@ public class HdcpCheckingPreferenceController extends
     }
 
     @Override
-    public void displayPreference(PreferenceScreen screen) {
-        super.displayPreference(screen);
-
-        mPreference = (ListPreference) screen.findPreference(getPreferenceKey());
-    }
-
-    @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         SystemProperties.set(HDCP_CHECKING_PROPERTY, newValue.toString());
-        updateHdcpValues();
+        updateHdcpValues((ListPreference) mPreference);
         SystemPropPoker.getInstance().poke();
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        updateHdcpValues();
+        updateHdcpValues((ListPreference) mPreference);
     }
 
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchDisabled() {
-        mPreference.setEnabled(false);
-    }
-
-    private void updateHdcpValues() {
+    private void updateHdcpValues(ListPreference preference) {
         final String currentValue = SystemProperties.get(HDCP_CHECKING_PROPERTY);
         int index = 1; // Defaults to drm-only. Needs to match with R.array.hdcp_checking_values
         for (int i = 0; i < mListValues.length; i++) {
@@ -101,8 +81,8 @@ public class HdcpCheckingPreferenceController extends
                 break;
             }
         }
-        mPreference.setValue(mListValues[index]);
-        mPreference.setSummary(mListSummaries[index]);
+        preference.setValue(mListValues[index]);
+        preference.setSummary(mListSummaries[index]);
     }
 
     @VisibleForTesting

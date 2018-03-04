@@ -39,7 +39,6 @@ public class KeepActivitiesPreferenceController extends DeveloperOptionsPreferen
     static final int SETTING_VALUE_OFF = 0;
 
     private IActivityManager mActivityManager;
-    private SwitchPreference mPreference;
 
     public KeepActivitiesPreferenceController(Context context) {
         super(context);
@@ -54,7 +53,6 @@ public class KeepActivitiesPreferenceController extends DeveloperOptionsPreferen
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
 
-        mPreference = (SwitchPreference) screen.findPreference(getPreferenceKey());
         mActivityManager = getActivityManager();
     }
 
@@ -69,19 +67,14 @@ public class KeepActivitiesPreferenceController extends DeveloperOptionsPreferen
     public void updateState(Preference preference) {
         final int mode = Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.ALWAYS_FINISH_ACTIVITIES, SETTING_VALUE_OFF);
-        mPreference.setChecked(mode != SETTING_VALUE_OFF);
-    }
-
-    @Override
-    protected void onDeveloperOptionsSwitchEnabled() {
-        mPreference.setEnabled(true);
+        ((SwitchPreference) mPreference).setChecked(mode != SETTING_VALUE_OFF);
     }
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
+        super.onDeveloperOptionsSwitchDisabled();
         writeImmediatelyDestroyActivitiesOptions(false);
-        mPreference.setEnabled(false);
-        mPreference.setChecked(false);
+        ((SwitchPreference) mPreference).setChecked(false);
     }
 
     private void writeImmediatelyDestroyActivitiesOptions(boolean isEnabled) {
