@@ -96,9 +96,7 @@ import com.android.settings.applications.appinfo.AppNotificationPreferenceContro
 import com.android.settings.applications.appinfo.DrawOverlayDetails;
 import com.android.settings.applications.appinfo.ExternalSourcesDetails;
 import com.android.settings.applications.appinfo.WriteSettingsDetails;
-
-import com.android.settings.core.FeatureFlags;
-import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.fuelgauge.HighPowerDetail;
@@ -132,7 +130,7 @@ import java.util.Set;
  * can be launched through Settings or via the ACTION_MANAGE_PACKAGE_STORAGE
  * intent.
  */
-public class ManageApplications extends InstrumentedPreferenceFragment
+public class ManageApplications extends InstrumentedFragment
         implements View.OnClickListener, OnItemSelectedListener {
 
     static final String TAG = "ManageApplications";
@@ -286,6 +284,9 @@ public class ManageApplications extends InstrumentedPreferenceFragment
             mListType = LIST_TYPE_WIFI_ACCESS;
             screenTitle = R.string.change_wifi_state_title;
         } else {
+            if (screenTitle == -1) {
+                screenTitle = R.string.application_info_label;
+            }
             mListType = LIST_TYPE_MAIN;
         }
         final AppFilterRegistry appFilterRegistry = AppFilterRegistry.getInstance();
@@ -551,14 +552,15 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 startAppInfoFragment(DirectoryAccessDetails.class, R.string.directory_access);
                 break;
             case LIST_TYPE_WIFI_ACCESS:
-                startAppInfoFragment(ChangeWifiStateDetails.class, R.string.change_wifi_state_title);
+                startAppInfoFragment(ChangeWifiStateDetails.class,
+                        R.string.change_wifi_state_title);
                 break;
             // TODO: Figure out if there is a way where we can spin up the profile's settings
             // process ahead of time, to avoid a long load of data when user clicks on a managed
             // app. Maybe when they load the list of apps that contains managed profile apps.
             default:
                 startAppInfoFragment(
-                    AppInfoDashboardFragment.class, R.string.application_info_label);
+                        AppInfoDashboardFragment.class, R.string.application_info_label);
                 break;
         }
     }
@@ -1234,8 +1236,8 @@ public class ManageApplications extends InstrumentedPreferenceFragment
                 case LIST_TYPE_NOTIFICATION:
                     if (entry.extraInfo != null) {
                         holder.setSummary(
-                            AppNotificationPreferenceController.getNotificationSummary(
-                                (AppRow) entry.extraInfo, mContext));
+                                AppNotificationPreferenceController.getNotificationSummary(
+                                        (AppRow) entry.extraInfo, mContext));
                     } else {
                         holder.setSummary(null);
                     }
