@@ -17,8 +17,6 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.junit.Assert.assertEquals;
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.job.JobInfo;
@@ -26,34 +24,30 @@ import android.app.job.JobScheduler;
 import android.content.Intent;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowJobScheduler;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AnomalyDetectionJobServiceTest {
 
     @Test
     public void testScheduleCleanUp() {
-        AnomalyDetectionJobService.scheduleAnomalyDetection(application,
-                new Intent());
+        AnomalyDetectionJobService.scheduleAnomalyDetection(application, new Intent());
 
-        ShadowJobScheduler shadowJobScheduler = Shadows.shadowOf(
-                application.getSystemService(JobScheduler.class));
+        ShadowJobScheduler shadowJobScheduler =
+            Shadows.shadowOf(application.getSystemService(JobScheduler.class));
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertThat(pendingJobs).hasSize(1);
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_detection);
-        assertThat(pendingJob.getMaxExecutionDelayMillis()).isEqualTo(
-                TimeUnit.MINUTES.toMillis(30));
+        assertThat(pendingJob.getMaxExecutionDelayMillis())
+            .isEqualTo(TimeUnit.MINUTES.toMillis(30));
     }
 }

@@ -17,16 +17,14 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.view.View;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wifi.AccessPoint;
 
@@ -36,11 +34,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedAccessPointPreferenceTest {
+
     @Mock
     private AccessPoint mAccessPoint;
     @Mock
@@ -49,7 +46,6 @@ public class ConnectedAccessPointPreferenceTest {
     private ConnectedAccessPointPreference.OnGearClickListener mOnGearClickListener;
     private Context mContext;
     private ConnectedAccessPointPreference mConnectedAccessPointPreference;
-
 
     @Before
     public void setUp() {
@@ -63,7 +59,7 @@ public class ConnectedAccessPointPreferenceTest {
 
     @Test
     public void testOnClick_gearClicked_listenerInvoked() {
-        doReturn(R.id.settings_button).when(mView).getId();
+        when(mView.getId()).thenReturn(R.id.settings_button);
 
         mConnectedAccessPointPreference.onClick(mView);
 
@@ -79,7 +75,7 @@ public class ConnectedAccessPointPreferenceTest {
 
     @Test
     public void testWidgetLayoutPreference() {
-        assertThat(mConnectedAccessPointPreference.getWidgetLayoutResource()).isEqualTo(
-                R.layout.preference_widget_gear_no_bg);
+        assertThat(mConnectedAccessPointPreference.getWidgetLayoutResource())
+            .isEqualTo(R.layout.preference_widget_gear_no_bg);
     }
 }

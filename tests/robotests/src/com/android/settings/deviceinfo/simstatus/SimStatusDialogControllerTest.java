@@ -16,30 +16,18 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .CELLULAR_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELLULAR_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ICCID_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ICCID_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .NETWORK_PROVIDER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .OPERATOR_INFO_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .OPERATOR_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .PHONE_NUMBER_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .ROAMING_INFO_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SERVICE_STATE_VALUE_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SIGNAL_STRENGTH_LABEL_ID;
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController
-        .SIGNAL_STRENGTH_VALUE_ID;
-
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.NETWORK_PROVIDER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.OPERATOR_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.PHONE_NUMBER_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ROAMING_INFO_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SERVICE_STATE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_LABEL_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.SIGNAL_STRENGTH_VALUE_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -50,6 +38,7 @@ import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.os.PersistableBundle;
 import android.telephony.CarrierConfigManager;
 import android.telephony.PhoneStateListener;
@@ -59,7 +48,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.EuiccManagerWrapper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -70,11 +58,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SimStatusDialogControllerTest {
 
     @Mock
@@ -108,8 +96,7 @@ public class SimStatusDialogControllerTest {
         when(mDialog.getContext()).thenReturn(mContext);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(
-                new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
+        mController = spy(new SimStatusDialogController(mDialog, mLifecycle, 0 /* phone id */));
         mEuiccManager = spy(new EuiccManagerWrapper(mContext));
         doReturn(mServiceState).when(mController).getCurrentServiceState();
         doReturn(0).when(mController).getDbm(any());
@@ -123,6 +110,12 @@ public class SimStatusDialogControllerTest {
         ReflectionHelpers.setField(mController, "mSubscriptionInfo", mSubscriptionInfo);
         ReflectionHelpers.setField(mController, "mEuiccManager", mEuiccManager);
         when(mCarrierConfigManager.getConfigForSubId(anyInt())).thenReturn(mPersistableBundle);
+
+        final ShadowPackageManager shadowPackageManager =
+            Shadows.shadowOf(RuntimeEnvironment.application.getPackageManager());
+        final PackageInfo sysUIPackageInfo = new PackageInfo();
+        sysUIPackageInfo.packageName = "com.android.systemui";
+        shadowPackageManager.addPackage(sysUIPackageInfo);
     }
 
     @Test
@@ -161,8 +154,7 @@ public class SimStatusDialogControllerTest {
 
         mController.initialize();
 
-        final String inServiceText = mContext.getResources().getString(
-                R.string.radioInfo_service_in);
+        final String inServiceText = mContext.getString(R.string.radioInfo_service_in);
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, inServiceText);
     }
 
@@ -170,13 +162,11 @@ public class SimStatusDialogControllerTest {
     public void initialize_updateDataStateWithPowerOff_shouldUpdateSettingAndResetSignalStrength() {
         when(mServiceState.getState()).thenReturn(ServiceState.STATE_POWER_OFF);
         when(mPersistableBundle.getBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(
-                true);
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
         mController.initialize();
 
-        final String offServiceText = mContext.getResources().getString(
-                R.string.radioInfo_service_off);
+        final String offServiceText = mContext.getString(R.string.radioInfo_service_off);
         verify(mDialog).setText(SERVICE_STATE_VALUE_ID, offServiceText);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, "0");
     }
@@ -188,13 +178,12 @@ public class SimStatusDialogControllerTest {
         doReturn(signalDbm).when(mController).getDbm(mSignalStrength);
         doReturn(signalAsu).when(mController).getAsuLevel(mSignalStrength);
         when(mPersistableBundle.getBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(
-                true);
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(true);
 
         mController.initialize();
 
-        final String signalStrengthString = mContext.getResources().getString(
-                R.string.sim_signal_strength, signalDbm, signalAsu);
+        final String signalStrengthString =
+            mContext.getString(R.string.sim_signal_strength, signalDbm, signalAsu);
         verify(mDialog).setText(SIGNAL_STRENGTH_VALUE_ID, signalStrengthString);
     }
 
@@ -215,8 +204,7 @@ public class SimStatusDialogControllerTest {
 
         mController.initialize();
 
-        final String roamingOnString = mContext.getResources().getString(
-                R.string.radioInfo_roaming_in);
+        final String roamingOnString = mContext.getString(R.string.radioInfo_roaming_in);
         verify(mDialog).setText(ROAMING_INFO_VALUE_ID, roamingOnString);
     }
 
@@ -226,16 +214,14 @@ public class SimStatusDialogControllerTest {
 
         mController.initialize();
 
-        final String roamingOffString = mContext.getResources().getString(
-                R.string.radioInfo_roaming_not);
+        final String roamingOffString = mContext.getString(R.string.radioInfo_roaming_not);
         verify(mDialog).setText(ROAMING_INFO_VALUE_ID, roamingOffString);
     }
 
     @Test
     public void initialize_doNotShowIccid_shouldRemoveIccidSetting() {
         when(mPersistableBundle.getBoolean(
-                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(
-                false);
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(false);
 
         mController.initialize();
 
@@ -246,8 +232,8 @@ public class SimStatusDialogControllerTest {
     @Test
     public void initialize_doNotShowSignalStrength_shouldRemoveSignalStrengthSetting() {
         when(mPersistableBundle.getBoolean(
-                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL)).thenReturn(
-                false);
+                CarrierConfigManager.KEY_SHOW_SIGNAL_STRENGTH_IN_SIM_STATUS_BOOL))
+            .thenReturn(false);
 
         mController.initialize();
 
@@ -271,8 +257,7 @@ public class SimStatusDialogControllerTest {
     public void initialize_showIccid_shouldSetIccidToSetting() {
         final String iccid = "12351351231241";
         when(mPersistableBundle.getBoolean(
-                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(
-                true);
+                CarrierConfigManager.KEY_SHOW_ICCID_IN_SIM_STATUS_BOOL)).thenReturn(true);
         doReturn(iccid).when(mController).getSimSerialNumber(anyInt());
 
         mController.initialize();

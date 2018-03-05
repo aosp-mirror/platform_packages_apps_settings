@@ -16,33 +16,25 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothSnoopLogPreferenceController
-        .BLUETOOTH_BTSNOOP_ENABLE_PROPERTY;
-
+import static com.android.settings.development.BluetoothSnoopLogPreferenceController.BLUETOOTH_BTSNOOP_ENABLE_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class BluetoothSnoopLogPreferenceControllerTest {
 
     @Mock
@@ -57,8 +49,8 @@ public class BluetoothSnoopLogPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mController = new BluetoothSnoopLogPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -66,8 +58,7 @@ public class BluetoothSnoopLogPreferenceControllerTest {
     public void onPreferenceChanged_turnOnBluetoothSnoopLog() {
         mController.onPreferenceChange(null, true);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false);
+        final boolean mode = SystemProperties.getBoolean(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false);
 
         assertThat(mode).isTrue();
     }
@@ -76,16 +67,14 @@ public class BluetoothSnoopLogPreferenceControllerTest {
     public void onPreferenceChanged_turnOffBluetoothSnoopLog() {
         mController.onPreferenceChange(null, false);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false);
+        final boolean mode = SystemProperties.getBoolean(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, false);
 
         assertThat(mode).isFalse();
     }
 
     @Test
     public void updateState_preferenceShouldBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY,
-                Boolean.toString(true));
+        SystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, Boolean.toString(true));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -93,8 +82,7 @@ public class BluetoothSnoopLogPreferenceControllerTest {
 
     @Test
     public void updateState_preferenceShouldNotBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY,
-                Boolean.toString(false));
+        SystemProperties.set(BLUETOOTH_BTSNOOP_ENABLE_PROPERTY, Boolean.toString(false));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);

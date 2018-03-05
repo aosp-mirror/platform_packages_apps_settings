@@ -16,24 +16,19 @@
 
 package com.android.settings.connecteddevice.usb;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-import android.support.v14.preference.PreferenceFragment;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -49,8 +44,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowEntityHeaderController.class, SettingsShadowResources.class})
+@Config(shadows = ShadowEntityHeaderController.class)
 public class UsbDetailsHeaderControllerTest {
 
     private UsbDetailsHeaderController mDetailsHeaderController;
@@ -104,8 +98,8 @@ public class UsbDetailsHeaderControllerTest {
         mDetailsHeaderController.refresh(UsbBackend.MODE_DATA_NONE);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
         verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        verify(mHeaderController).setSummary(
-                mContext.getString(R.string.usb_summary_charging_only));
+        verify(mHeaderController)
+            .setSummary(mContext.getString(R.string.usb_summary_charging_only));
         verify(mHeaderController).done(mActivity, true);
     }
 
@@ -115,8 +109,8 @@ public class UsbDetailsHeaderControllerTest {
         mDetailsHeaderController.refresh(UsbBackend.MODE_DATA_MTP);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
         verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        verify(mHeaderController).setSummary(
-                mContext.getString(R.string.usb_summary_file_transfers));
+        verify(mHeaderController)
+            .setSummary(mContext.getString(R.string.usb_summary_file_transfers));
         verify(mHeaderController).done(mActivity, true);
     }
 }

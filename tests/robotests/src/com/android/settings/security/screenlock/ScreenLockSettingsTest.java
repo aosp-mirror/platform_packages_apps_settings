@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verify;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.security.OwnerInfoPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -30,7 +29,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
@@ -38,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ScreenLockSettingsTest {
 
     private ScreenLockSettings mSettings;
@@ -68,5 +65,4 @@ public class ScreenLockSettingsTest {
 
         verify(controller).updateSummary();
     }
-
 }

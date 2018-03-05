@@ -16,11 +16,14 @@
 
 package com.android.settings.datetime;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.app.AlarmManager;
 import android.content.Context;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.RestrictedPreference;
 
 import org.junit.Before;
@@ -28,15 +31,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DatePreferenceControllerTest {
 
     @Mock
@@ -55,8 +52,7 @@ public class DatePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.ALARM_SERVICE)).thenReturn(mAlarmManager);
-        mPreference = new RestrictedPreference(ShadowApplication.getInstance().
-                getApplicationContext());
+        mPreference = new RestrictedPreference(RuntimeEnvironment.application);
         mController = new DatePreferenceController(mContext, mHost, mAutoTimePreferenceController);
     }
 

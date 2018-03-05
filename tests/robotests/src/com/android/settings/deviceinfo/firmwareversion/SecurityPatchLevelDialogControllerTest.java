@@ -16,11 +16,8 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController
-        .SECURITY_PATCH_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController
-        .SECURITY_PATCH_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController.SECURITY_PATCH_LABEL_ID;
+import static com.android.settings.deviceinfo.firmwareversion.SecurityPatchLevelDialogController.SECURITY_PATCH_VALUE_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -33,7 +30,6 @@ import android.content.Context;
 import android.os.Build;
 import android.view.View;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -43,13 +39,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecurityPatchLevelDialogControllerTest {
 
     @Mock
@@ -93,8 +87,8 @@ public class SecurityPatchLevelDialogControllerTest {
 
     @Test
     public void onClick_noActivityIntent_shouldDoNothing() {
-        when(mPackageManager.queryIntentActivities(any(), anyInt())).thenReturn(
-                Collections.emptyList());
+        when(mPackageManager.queryIntentActivities(any(), anyInt()))
+            .thenReturn(Collections.emptyList());
         mController = new SecurityPatchLevelDialogController(mDialog);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
 
@@ -105,8 +99,8 @@ public class SecurityPatchLevelDialogControllerTest {
 
     @Test
     public void onClick_activityIntentFound_shouldStartActivity() {
-        when(mPackageManager.queryIntentActivities(any(), anyInt())).thenReturn(
-                Collections.singletonList(null));
+        when(mPackageManager.queryIntentActivities(any(), anyInt()))
+            .thenReturn(Collections.singletonList(null));
         mController = new SecurityPatchLevelDialogController(mDialog);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
 

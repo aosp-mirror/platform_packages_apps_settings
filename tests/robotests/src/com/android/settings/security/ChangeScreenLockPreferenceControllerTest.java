@@ -17,7 +17,6 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +25,6 @@ import android.content.Context;
 import android.os.UserManager;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -40,12 +38,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUtils.class
-        })
+@Config(shadows = ShadowUtils.class)
 public class ChangeScreenLockPreferenceControllerTest {
 
     @Mock

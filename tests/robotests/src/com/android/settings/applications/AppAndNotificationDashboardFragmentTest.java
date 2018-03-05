@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.notification.EmergencyBroadcastPreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
@@ -40,7 +38,6 @@ import org.robolectric.annotation.Implements;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppAndNotificationDashboardFragmentTest {
 
     @Test

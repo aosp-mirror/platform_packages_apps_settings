@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.provider.SearchIndexablesContract;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.annotation.Resetter;
 
 import static android.provider.SearchIndexablesContract.INDEXABLES_RAW_COLUMNS;
 

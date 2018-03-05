@@ -16,11 +16,12 @@
 
 package com.android.settings.bluetooth;
 
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
 import org.junit.Before;
@@ -30,12 +31,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothSettingsSummaryProviderTest {
 
     private Context mContext;
@@ -50,8 +47,8 @@ public class BluetoothSettingsSummaryProviderTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mSummaryProvider = new BluetoothSettings.SummaryProvider(mContext, mSummaryLoader,
-                mBluetoothManager);
+        mSummaryProvider =
+            new BluetoothSettings.SummaryProvider(mContext, mSummaryLoader, mBluetoothManager);
     }
 
     @Test
@@ -77,5 +74,4 @@ public class BluetoothSettingsSummaryProviderTest {
 
         verify(mSummaryLoader).setSummary(mSummaryProvider, summary);
     }
-
 }

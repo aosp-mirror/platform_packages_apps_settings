@@ -35,7 +35,6 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -49,8 +48,7 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {BackupSettingsHelperTest.ShadowBackupManagerStub.class})
+@Config(shadows = BackupSettingsHelperTest.ShadowBackupManagerStub.class)
 public class BackupSettingsHelperTest {
 
     private static final String DEFAULT_SETTINGS_CLASSNAME =
@@ -88,6 +86,8 @@ public class BackupSettingsHelperTest {
         when(mBackupManager.getDataManagementIntent(anyString())).thenReturn(intent);
 
         Intent backupIntent = mBackupSettingsHelper.getIntentForBackupSettingsFromTransport();
+
+        assertThat(backupIntent).isEqualTo(intent);
 
         verify(mBackupManager).getDataManagementIntent(anyString());
     }
@@ -260,8 +260,8 @@ public class BackupSettingsHelperTest {
 
         Intent backupIntent = mBackupSettingsHelper.getIntentForBackupSettings();
 
-        assertThat(backupIntent.getComponent().getClassName()).isEqualTo(
-                DEFAULT_SETTINGS_CLASSNAME);
+        assertThat(backupIntent.getComponent().getClassName())
+            .isEqualTo(DEFAULT_SETTINGS_CLASSNAME);
     }
 
     @Test

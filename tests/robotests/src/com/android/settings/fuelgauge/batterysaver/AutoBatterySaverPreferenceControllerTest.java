@@ -23,7 +23,6 @@ import android.content.Context;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -35,8 +34,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
-        SettingsShadowResources.class)
+@Config(shadows = SettingsShadowResources.class)
 public class AutoBatterySaverPreferenceControllerTest {
 
     private AutoBatterySaverPreferenceController mController;
@@ -92,5 +90,4 @@ public class AutoBatterySaverPreferenceControllerTest {
     public void testIsChecked_useDefaultValue_returnTrue() {
         assertThat(mController.isChecked()).isTrue();
     }
-
 }

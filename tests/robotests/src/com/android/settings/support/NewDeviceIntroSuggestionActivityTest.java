@@ -16,20 +16,13 @@
 
 package com.android.settings.support;
 
-
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PERMANENT_DISMISS_THRESHOLD;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_COMPLETE;
-import static com.android.settings.support.NewDeviceIntroSuggestionActivity
-        .PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PERMANENT_DISMISS_THRESHOLD;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_COMPLETE;
+import static com.android.settings.support.NewDeviceIntroSuggestionActivity.PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME;
 import static com.android.settings.support.NewDeviceIntroSuggestionActivity.isSuggestionComplete;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-import static org.robolectric.RuntimeEnvironment.application;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +30,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -47,28 +39,27 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NewDeviceIntroSuggestionActivityTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mMockContext;
 
-    private FakeFeatureFactory mFeatureFactory;
     private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
     private ShadowPackageManager mShadowPackageManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mContext = application;
-        mShadowPackageManager = Shadows.shadowOf(application.getPackageManager());
+        mContext = RuntimeEnvironment.application;
+        mShadowPackageManager = Shadows.shadowOf(mContext.getPackageManager());
 
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.suggestionsFeatureProvider.getSharedPrefs(any(Context.class)))
                 .thenReturn(getSharedPreferences());
     }
@@ -79,8 +70,7 @@ public class NewDeviceIntroSuggestionActivityTest {
                 .getBoolean(R.bool.config_new_device_intro_suggestion_supported))
                 .thenReturn(false);
 
-        assertThat(isSuggestionComplete(mContext))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
     @Test
@@ -89,16 +79,14 @@ public class NewDeviceIntroSuggestionActivityTest {
 
         getSharedPreferences().edit().putLong(PREF_KEY_SUGGGESTION_FIRST_DISPLAY_TIME,
                 currentTime - 2 * PERMANENT_DISMISS_THRESHOLD);
-        assertThat(isSuggestionComplete(mContext))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
     @Test
     public void isSuggestionComplete_noUrl_shouldReturnTrue() {
         when(mFeatureFactory.supportFeatureProvider.getNewDeviceIntroUrl(any(Context.class)))
                 .thenReturn(null);
-        assertThat(isSuggestionComplete(mContext))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
     @Test
@@ -108,8 +96,7 @@ public class NewDeviceIntroSuggestionActivityTest {
 
         getSharedPreferences().edit().putBoolean(PREF_KEY_SUGGGESTION_COMPLETE, true).commit();
 
-        assertThat(isSuggestionComplete(mContext))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext)).isTrue();
     }
 
     @Test
@@ -125,5 +112,4 @@ public class NewDeviceIntroSuggestionActivityTest {
     private SharedPreferences getSharedPreferences() {
         return mContext.getSharedPreferences("test_new_device_sugg", Context.MODE_PRIVATE);
     }
-
 }

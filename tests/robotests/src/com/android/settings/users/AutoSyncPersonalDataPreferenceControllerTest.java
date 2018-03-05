@@ -27,7 +27,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,14 +34,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoSyncPersonalDataPreferenceControllerTest {
 
     @Mock(answer = RETURNS_DEEP_STUBS)
@@ -80,7 +77,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
     @Test
     public void displayPref_linkedUser_shouldNotDisplay() {
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(true);
+        when(mUserManager.isRestrictedProfile()).thenReturn(true);
 
         mController.displayPreference(mScreen);
 
@@ -92,7 +89,7 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
         List<UserInfo> infos = new ArrayList<>();
         infos.add(new UserInfo(1, "user 1", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
         mController.displayPreference(mScreen);
@@ -106,12 +103,11 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
         infos.add(new UserInfo(1, "user 1", 0));
         infos.add(new UserInfo(2, "user 2", 0));
         when(mUserManager.isManagedProfile()).thenReturn(false);
-        when(mUserManager.isLinkedUser()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
         when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
 
         mController.displayPreference(mScreen);
 
         assertThat(mPreference.isVisible()).isTrue();
     }
-
 }

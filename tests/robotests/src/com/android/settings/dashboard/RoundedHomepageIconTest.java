@@ -16,7 +16,6 @@
 
 package com.android.settings.dashboard;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -24,17 +23,14 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RoundedHomepageIconTest {
 
     private Context mContext;
@@ -46,11 +42,11 @@ public class RoundedHomepageIconTest {
 
     @Test
     public void createIcon_shouldSetBackgroundAndInset() {
-        final RoundedHomepageIcon icon = new RoundedHomepageIcon(
-                mContext, new ColorDrawable(Color.BLACK));
+        final RoundedHomepageIcon icon =
+            new RoundedHomepageIcon(mContext, new ColorDrawable(Color.BLACK));
 
         assertThat(icon.getNumberOfLayers()).isEqualTo(2);
         assertThat(icon.getDrawable(0))
-                .isEqualTo(mContext.getDrawable(R.drawable.ic_homepage_generic_background));
+            .isEqualTo(mContext.getDrawable(R.drawable.ic_homepage_generic_background));
     }
 }

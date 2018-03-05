@@ -22,7 +22,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,9 +36,9 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
-        ShadowPermissionChecker.class)
+@Config(shadows = ShadowPermissionChecker.class)
 public class LocationCheckActionTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int UID = 12345;
 
@@ -81,5 +80,4 @@ public class LocationCheckActionTest {
     public void testIsActionActive_noLocationGranted_returnFalse() {
         assertThat(mLocationCheckAction.isActionActive(mAnomaly)).isFalse();
     }
-
 }

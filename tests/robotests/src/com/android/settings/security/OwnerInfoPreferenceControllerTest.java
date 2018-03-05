@@ -16,7 +16,6 @@
 package com.android.settings.security;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -35,7 +34,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.users.OwnerInfoSettings;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
@@ -46,12 +44,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class OwnerInfoPreferenceControllerTest {
 
     @Mock
@@ -75,8 +71,7 @@ public class OwnerInfoPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = spy(shadowContext.getApplicationContext());
+        mContext = spy(RuntimeEnvironment.application);
 
         when(mFragment.isAdded()).thenReturn(true);
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
@@ -181,9 +176,7 @@ public class OwnerInfoPreferenceControllerTest {
 
     @Test
     public void performClick_shouldLaunchOwnerInfoSettings() {
-        final ShadowApplication application = ShadowApplication.getInstance();
-        final RestrictedPreference preference =
-                new RestrictedPreference(application.getApplicationContext());
+        final RestrictedPreference preference = new RestrictedPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(preference);
         doReturn(false).when(mController).isDeviceOwnerInfoEnabled();
         doReturn(false).when(mLockPatternUtils).isLockScreenDisabled(anyInt());
@@ -197,5 +190,4 @@ public class OwnerInfoPreferenceControllerTest {
         verify(mFragment.getFragmentManager().beginTransaction())
                 .add(any(OwnerInfoSettings.class), anyString());
     }
-
 }

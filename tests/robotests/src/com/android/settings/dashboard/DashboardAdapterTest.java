@@ -40,7 +40,6 @@ import android.widget.TextView;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.conditional.Condition;
 import com.android.settings.dashboard.suggestions.SuggestionAdapter;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -63,12 +62,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-        })
+@Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
 public class DashboardAdapterTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -93,8 +87,7 @@ public class DashboardAdapterTest {
 
         when(mContext.getSystemService(Context.WINDOW_SERVICE)).thenReturn(mWindowManager);
         when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getQuantityString(any(int.class), any(int.class), any()))
-                .thenReturn("");
+        when(mResources.getQuantityString(any(int.class), any(int.class), any())).thenReturn("");
 
         mConditionList = new ArrayList<>();
         mConditionList.add(mCondition);
@@ -108,8 +101,7 @@ public class DashboardAdapterTest {
     public void testSuggestionDismissed_notOnlySuggestion_updateSuggestionOnly() {
         final DashboardAdapter adapter =
             spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /*
-                        lifecycle */));
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */));
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1", "pkg2", "pkg3");
         adapter.setSuggestions(suggestions);
 
@@ -142,8 +134,7 @@ public class DashboardAdapterTest {
     public void testSuggestionDismissed_onlySuggestion_updateDashboardData() {
         DashboardAdapter adapter =
             spy(new DashboardAdapter(mContext, null /* savedInstanceState */,
-                null /* conditions */, null /* suggestionControllerMixin */, null /*
-                        lifecycle */));
+                null /* conditions */, null /* suggestionControllerMixin */, null /* lifecycle */));
         final List<Suggestion> suggestions = makeSuggestionsV2("pkg1");
         adapter.setSuggestions(suggestions);
         final DashboardData dashboardData = adapter.mDashboardData;
@@ -229,10 +220,5 @@ public class DashboardAdapterTest {
             suggestions.add(suggestion);
         }
         return suggestions;
-    }
-
-    private void setupSuggestions(List<Suggestion> suggestions) {
-        final Context context = RuntimeEnvironment.application;
-        mDashboardAdapter.setSuggestions(suggestions);
     }
 }

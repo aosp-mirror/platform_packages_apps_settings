@@ -26,7 +26,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.dream.DreamBackend;
@@ -38,15 +37,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CurrentDreamPickerTest {
+
     private static String COMPONENT_KEY = "mocked_component_name_string";
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -85,7 +82,7 @@ public class CurrentDreamPickerTest {
 
         mockInfo.componentName = mockName;
         when(mockName.flattenToString()).thenReturn(COMPONENT_KEY);
-        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(Arrays.asList(mockInfo)));
+        when(mBackend.getDreamInfos()).thenReturn(Collections.singletonList(mockInfo));
 
         mPicker.setDefaultKey(COMPONENT_KEY);
 

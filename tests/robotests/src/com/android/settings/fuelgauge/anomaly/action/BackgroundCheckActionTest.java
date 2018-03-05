@@ -24,7 +24,6 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.os.Build;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -36,11 +35,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BackgroundCheckActionTest {
+
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int UID = 111;
     private static final int SDK_VERSION = Build.VERSION_CODES.L;
@@ -80,16 +78,16 @@ public class BackgroundCheckActionTest {
 
     @Test
     public void testIsActionActive_modeAllowed_returnTrue() {
-        doReturn(false).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME);
+        doReturn(false).when(mBatteryUtils)
+            .isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME);
 
         assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isTrue();
     }
 
     @Test
     public void testIsActionActive_modeIgnored_returnFalse() {
-        doReturn(true).when(mBatteryUtils).isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME);
+        doReturn(true).when(mBatteryUtils)
+            .isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME);
 
         assertThat(mBackgroundCheckAction.isActionActive(mAnomaly)).isFalse();
     }

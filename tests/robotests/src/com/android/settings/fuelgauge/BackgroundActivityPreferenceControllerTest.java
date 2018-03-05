@@ -17,33 +17,24 @@
 package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.robolectric.Shadows.shadowOf;
 
-import android.app.AlertDialog;
 import android.app.AppOpsManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.UserManager;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowFragment;
@@ -59,22 +50,12 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowDialog;
-import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowFragment.class
-        })
+@Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class, ShadowFragment.class})
 public class BackgroundActivityPreferenceControllerTest {
+
     private static final int UID_LOW_SDK = 1234;
-    private static final int UID_HIGH_SDK = 3456;
     private static final String HIGH_SDK_PACKAGE = "com.android.package.high";
     private static final String LOW_SDK_PACKAGE = "com.android.package.low";
 
@@ -137,8 +118,8 @@ public class BackgroundActivityPreferenceControllerTest {
 
     @Test
     public void testHandlePreferenceTreeClick_restrictApp_showDialog() {
-        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(anyInt(),
-                anyInt(), anyString());
+        doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager)
+            .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
         mController.handlePreferenceTreeClick(mPreference);
 
@@ -147,8 +128,8 @@ public class BackgroundActivityPreferenceControllerTest {
 
     @Test
     public void testHandlePreferenceTreeClick_unRestrictApp_showDialog() {
-        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager).checkOpNoThrow(anyInt(),
-                anyInt(), anyString());
+        doReturn(AppOpsManager.MODE_IGNORED).when(mAppOpsManager)
+            .checkOpNoThrow(anyInt(), anyInt(), anyString());
 
         mController.handlePreferenceTreeClick(mPreference);
 

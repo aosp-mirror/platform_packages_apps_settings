@@ -22,7 +22,6 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -31,13 +30,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SwipeToNotificationSettingsTest {
 
     @Mock
@@ -67,9 +64,8 @@ public class SwipeToNotificationSettingsTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        ShadowApplication.getInstance().getApplicationContext(),
-                        true /* enabled */);
+            SwipeToNotificationSettings.SEARCH_INDEX_DATA_PROVIDER
+                .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());

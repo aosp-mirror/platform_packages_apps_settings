@@ -23,7 +23,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -31,31 +30,26 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HighPowerDetailTest {
-
-    private Context mContext;
 
     private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
     }
 
     @Test
     public void logSpecialPermissionChange() {
         // Deny means app is whitelisted to opt out of power save restrictions
-        HighPowerDetail.logSpecialPermissionChange(true, "app", mContext);
+        HighPowerDetail.logSpecialPermissionChange(true, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_DENY), eq("app"));
 
         // Allow means app is NOT whitelisted to opt out of power save restrictions
-        HighPowerDetail.logSpecialPermissionChange(false, "app", mContext);
+        HighPowerDetail.logSpecialPermissionChange(false, "app", RuntimeEnvironment.application);
         verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
                 eq(MetricsProto.MetricsEvent.APP_SPECIAL_PERMISSION_BATTERY_ALLOW), eq("app"));
     }

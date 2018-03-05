@@ -28,8 +28,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 
-import com.android.settings.TestConfig;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,11 +36,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PulseNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -86,7 +81,7 @@ public class PulseNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetCheckedWhenSettingIsOn() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 1);
 
         mController = new PulseNotificationPreferenceController(context);
@@ -98,7 +93,7 @@ public class PulseNotificationPreferenceControllerTest {
     @Test
     public void updateState_preferenceSetUncheckedWhenSettingIsOff() {
         final TwoStatePreference preference = mock(TwoStatePreference.class);
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), NOTIFICATION_LIGHT_PULSE, 0);
 
         mController = new PulseNotificationPreferenceController(context);

@@ -16,14 +16,13 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_HIGH;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_LOW;
 import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_MEDIUM;
-import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_HIGH;
+import static com.android.settings.accessibility.VibrationPreferenceFragment.KEY_INTENSITY_OFF;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +30,6 @@ import android.os.UserManager;
 import android.os.Vibrator;
 import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.accessibility.VibrationPreferenceFragment.VibrationIntensityCandidateInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -44,16 +42,21 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VibrationPreferenceFragmentTest {
-    public static final Map<Integer, String> INTENSITY_TO_KEY = new HashMap<>();
+
+    private static final Map<Integer, String> INTENSITY_TO_KEY = new HashMap<>(4);
+    static {
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_OFF, KEY_INTENSITY_OFF);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_LOW, KEY_INTENSITY_LOW);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_MEDIUM, KEY_INTENSITY_MEDIUM);
+        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_HIGH, KEY_INTENSITY_HIGH);
+    }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
@@ -62,13 +65,6 @@ public class VibrationPreferenceFragmentTest {
 
     private Context mContext;
     private TestVibrationPreferenceFragment mFragment;
-
-    static {
-        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_OFF, KEY_INTENSITY_OFF);
-        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_LOW, KEY_INTENSITY_LOW);
-        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_MEDIUM, KEY_INTENSITY_MEDIUM);
-        INTENSITY_TO_KEY.put(Vibrator.VIBRATION_INTENSITY_HIGH, KEY_INTENSITY_HIGH);
-    }
 
     @Before
     public void setUp() {
@@ -135,4 +131,3 @@ public class VibrationPreferenceFragmentTest {
         }
     }
 }
-

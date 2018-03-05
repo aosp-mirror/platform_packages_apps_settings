@@ -30,9 +30,7 @@ import static org.mockito.Mockito.verify;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -40,7 +38,6 @@ import android.os.Build;
 import android.provider.SearchIndexableData;
 import android.util.ArrayMap;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.indexing.PreIndexData;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -65,12 +62,9 @@ import java.util.Map;
 import java.util.Set;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowRunnableAsyncTask.class,}
-)
+@Config(shadows = ShadowRunnableAsyncTask.class)
 public class DatabaseIndexingManagerTest {
+
     private final String localeStr = "en_US";
 
     private final int rank = 8;
@@ -94,9 +88,6 @@ public class DatabaseIndexingManagerTest {
     private final String key = "key";
     private final int userId = -1;
     private final boolean enabled = true;
-
-    private final String AUTHORITY_ONE = "authority";
-    private final String PACKAGE_ONE = "com.android.settings";
 
     private final String TITLE_ONE = "title one";
     private final String TITLE_TWO = "title two";
@@ -170,8 +161,8 @@ public class DatabaseIndexingManagerTest {
         SearchIndexableRaw rawData = getFakeRaw();
         PreIndexData data = getPreIndexData(rawData);
         doReturn(data).when(mManager).getIndexDataFromProviders(anyList(), anyBoolean());
-        doReturn(true).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
-                anyString());
+        doReturn(true).when(mManager)
+            .isFullIndex(any(Context.class), anyString(), anyString(), anyString());
 
         mManager.performIndexing();
 
@@ -183,8 +174,8 @@ public class DatabaseIndexingManagerTest {
         // Initialize the Manager and force rebuild
         DatabaseIndexingManager manager =
                 spy(new DatabaseIndexingManager(mContext));
-        doReturn(false).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
-                anyString());
+        doReturn(false).when(mManager)
+            .isFullIndex(any(Context.class), anyString(), anyString(), anyString());
 
         // Insert data point which will be dropped
         insertSpecialCase("Ceci n'est pas un pipe", true, "oui oui mon ami");
@@ -202,8 +193,8 @@ public class DatabaseIndexingManagerTest {
         SearchIndexableRaw rawData = getFakeRaw();
         PreIndexData data = getPreIndexData(rawData);
         doReturn(data).when(mManager).getIndexDataFromProviders(anyList(), anyBoolean());
-        doReturn(true).when(mManager).isFullIndex(any(Context.class), anyString(), anyString(),
-                anyString());
+        doReturn(true).when(mManager)
+            .isFullIndex(any(Context.class), anyString(), anyString(), anyString());
 
         mManager.performIndexing();
 
@@ -393,18 +384,5 @@ public class DatabaseIndexingManagerTest {
         PreIndexData data = new PreIndexData();
         data.dataToUpdate.add(fakeData);
         return data;
-    }
-
-    private List<ResolveInfo> getDummyResolveInfo() {
-        List<ResolveInfo> infoList = new ArrayList<>();
-        ResolveInfo info = new ResolveInfo();
-        info.providerInfo = new ProviderInfo();
-        info.providerInfo.exported = true;
-        info.providerInfo.authority = AUTHORITY_ONE;
-        info.providerInfo.packageName = PACKAGE_ONE;
-        info.providerInfo.applicationInfo = new ApplicationInfo();
-        infoList.add(info);
-
-        return infoList;
     }
 }

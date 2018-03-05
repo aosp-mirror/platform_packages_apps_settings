@@ -27,7 +27,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -36,10 +35,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class P2pCategoryPreferenceControllerTest {
 
     @Mock
@@ -54,7 +51,6 @@ public class P2pCategoryPreferenceControllerTest {
         when(mPreferenceScreen.findPreference(anyString())).thenReturn(mCategory);
 
         mController = new P2pCategoryPreferenceController(RuntimeEnvironment.application) {
-
             @Override
             public String getPreferenceKey() {
                 return "test_key";
@@ -67,7 +63,6 @@ public class P2pCategoryPreferenceControllerTest {
     public void isAlwaysAvailable() {
         assertThat(mController.isAvailable()).isTrue();
     }
-
 
     @Test
     public void removeAllChildren_shouldRemove() {

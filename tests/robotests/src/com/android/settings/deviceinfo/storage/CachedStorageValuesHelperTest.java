@@ -32,14 +32,13 @@ import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.TOTAL_BYTES_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.USER_ID_KEY;
 import static com.android.settings.deviceinfo.storage.CachedStorageValuesHelper.VIDEO_APPS_SIZE_KEY;
-
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.SparseArray;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
@@ -50,13 +49,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class CachedStorageValuesHelperTest {
+
     private Context mContext;
 
     @Mock private CachedStorageValuesHelper.Clock mMockClock;
@@ -66,7 +62,7 @@ public class CachedStorageValuesHelperTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mSharedPreferences = mContext.getSharedPreferences(SHARED_PREFERENCES_NAME, 0);
         mCachedValuesHelper = new CachedStorageValuesHelper(mContext, 0);
         mCachedValuesHelper.mClock = mMockClock;
@@ -262,15 +258,15 @@ public class CachedStorageValuesHelperTest {
     public void cacheResult_succeeds() throws Exception {
         when(mMockClock.getCurrentTime()).thenReturn(10000L);
         final StorageStatsSource.ExternalStorageStats externalStats =
-                new StorageStatsSource.ExternalStorageStats(22222l, 2l, 20L, 200L, 2000L);
+                new StorageStatsSource.ExternalStorageStats(22222L, 2L, 20L, 200L, 2000L);
         final StorageAsyncLoader.AppsStorageResult result =
                 new StorageAsyncLoader.AppsStorageResult();
         result.gamesSize = 1L;
-        result.musicAppsSize = 10l;
+        result.musicAppsSize = 10L;
         result.videoAppsSize = 100L;
         result.photosAppsSize = 1000L;
         result.otherAppsSize = 10000L;
-        result.cacheSize = 100000l;
+        result.cacheSize = 100000L;
         result.externalStats = externalStats;
         final PrivateStorageInfo info = new PrivateStorageInfo(1000L, 6000L);
 

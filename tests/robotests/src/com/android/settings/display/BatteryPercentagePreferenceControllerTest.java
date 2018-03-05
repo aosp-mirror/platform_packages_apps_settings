@@ -21,24 +21,23 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.provider.Settings;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryPercentagePreferenceControllerTest {
-    @Mock private Context mContext;
+
+    private Context mContext;
     private BatteryPercentagePreferenceController mController;
 
     @Before
     public void setup() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
         mController = new BatteryPercentagePreferenceController(mContext);
     }
 

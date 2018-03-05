@@ -16,12 +16,15 @@
 
 package com.android.settings.wifi;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.SwitchWidgetController;
 import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -31,14 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiEnablerTest {
 
     @Mock
@@ -67,5 +64,4 @@ public class WifiEnablerTest {
 
         verify(mConnectivityManager).stopTethering(ConnectivityManager.TETHERING_WIFI);
     }
-
 }

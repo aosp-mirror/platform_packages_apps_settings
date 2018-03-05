@@ -20,12 +20,10 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_NONE;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -41,7 +39,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.RestrictedListPreference;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -52,11 +49,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ImportancePreferenceControllerTest {
 
     private Context mContext;
@@ -65,7 +60,7 @@ public class ImportancePreferenceControllerTest {
     @Mock
     private NotificationBackend mBackend;
     @Mock
-    NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettingsBase.ImportanceListener mImportanceListener;
     @Mock
     private UserManager mUm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -79,25 +74,25 @@ public class ImportancePreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new ImportancePreferenceController(
                 mContext, mImportanceListener, mBackend));
     }
 
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(Preference.class));
     }
 
     @Test
-    public void testIsAvailable_notIfNull() throws Exception {
+    public void testIsAvailable_notIfNull() {
         mController.onResume(null, null, null, null);
         assertFalse(mController.isAvailable());
     }
 
     @Test
-    public void testIsAvailable_notIfAppBlocked() throws Exception {
+    public void testIsAvailable_notIfAppBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.banned = true;
         mController.onResume(appRow, mock(NotificationChannel.class), null, null);
@@ -105,7 +100,7 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfChannelBlocked() throws Exception {
+    public void testIsAvailable_notIfChannelBlocked() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_NONE);
@@ -114,7 +109,7 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notForDefaultChannel() throws Exception {
+    public void testIsAvailable_notForDefaultChannel() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -124,7 +119,7 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable() throws Exception {
+    public void testIsAvailable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
@@ -133,13 +128,13 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_disabledByAdmin() throws Exception {
+    public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        Preference pref = new RestrictedListPreference(RuntimeEnvironment.application, null);
+        Preference pref = new RestrictedListPreference(mContext, null);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
@@ -147,7 +142,7 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() throws Exception {
+    public void testUpdateState_notConfigurable() {
         String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = lockedId;
@@ -156,7 +151,7 @@ public class ImportancePreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
 
-        Preference pref = new RestrictedListPreference(RuntimeEnvironment.application, null);
+        Preference pref = new RestrictedListPreference(mContext, null);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
@@ -164,12 +159,12 @@ public class ImportancePreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState() throws Exception {
+    public void testUpdateState() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_HIGH);
         mController.onResume(appRow, channel, null, null);
 
-        Preference pref = new RestrictedListPreference(RuntimeEnvironment.application, null);
+        Preference pref = new RestrictedListPreference(mContext, null);
         mController.updateState(pref);
 
         assertTrue(pref.isEnabled());
@@ -183,8 +178,7 @@ public class ImportancePreferenceControllerTest {
         channel.setSound(null, Notification.AUDIO_ATTRIBUTES_DEFAULT);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedListPreference pref =
-                new RestrictedListPreference(RuntimeEnvironment.application, null);
+        RestrictedListPreference pref = new RestrictedListPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);
@@ -203,8 +197,7 @@ public class ImportancePreferenceControllerTest {
         channel.setSound(null, Notification.AUDIO_ATTRIBUTES_DEFAULT);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedListPreference pref =
-                new RestrictedListPreference(RuntimeEnvironment.application, null);
+        RestrictedListPreference pref = new RestrictedListPreference(mContext, null);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);

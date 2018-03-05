@@ -16,6 +16,14 @@
 
 package com.android.settings.network;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothPan;
 import android.bluetooth.BluetoothProfile;
@@ -30,7 +38,6 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,21 +45,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TetherPreferenceControllerTest {
 
     @Mock
@@ -80,8 +77,8 @@ public class TetherPreferenceControllerTest {
     public void lifeCycle_onCreate_shouldInitBluetoothPan() {
         mController.onCreate(null);
 
-        verify(mBluetoothAdapter).getProfileProxy(mContext, mController.mBtProfileServiceListener,
-                BluetoothProfile.PAN);
+        verify(mBluetoothAdapter)
+            .getProfileProxy(mContext, mController.mBtProfileServiceListener, BluetoothProfile.PAN);
     }
 
     @Test
@@ -142,20 +139,19 @@ public class TetherPreferenceControllerTest {
 
     @Test
     public void airplaneModeOn_shouldUpdateSummaryToOff() {
-        ReflectionHelpers.setField(mController, "mContext", RuntimeEnvironment.application);
+        final Context context = RuntimeEnvironment.application;
+        ReflectionHelpers.setField(mController, "mContext", context);
 
-        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 0);
+        Settings.Global.putInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0);
 
         mController.onResume();
 
         verifyZeroInteractions(mPreference);
 
-        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
-                Settings.Global.AIRPLANE_MODE_ON, 1);
+        Settings.Global.putInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 1);
 
-        final ContentObserver observer = ReflectionHelpers.getField(mController,
-                "mAirplaneModeObserver");
+        final ContentObserver observer =
+            ReflectionHelpers.getField(mController, "mAirplaneModeObserver");
         observer.onChange(true, Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON));
 
         verify(mPreference).setSummary(R.string.switch_off_text);
@@ -179,8 +175,8 @@ public class TetherPreferenceControllerTest {
 
         mController.onPause();
 
-        verify(mContext).unregisterReceiver(
-                any(TetherPreferenceController.TetherBroadcastReceiver.class));
+        verify(mContext)
+            .unregisterReceiver(any(TetherPreferenceController.TetherBroadcastReceiver.class));
     }
 
     @Test
@@ -193,5 +189,4 @@ public class TetherPreferenceControllerTest {
 
         verify(mController).updateSummary();
     }
-
 }

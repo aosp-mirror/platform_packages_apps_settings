@@ -26,7 +26,6 @@ import android.content.Context;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -41,10 +40,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothMasterSwitchPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -60,13 +57,12 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
 
     private Context mContext;
     private BluetoothMasterSwitchPreferenceController mController;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
 
         mController = new BluetoothMasterSwitchPreferenceController(
                 mContext, mBluetoothManager, mRestrictionUtils, mFragment);
@@ -90,8 +86,8 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     public void onPause_shouldUnregisterCallback() {
         mController.onPause();
 
-        verify(mBluetoothManager.getEventManager()).unregisterCallback(
-                any(BluetoothCallback.class));
+        verify(mBluetoothManager.getEventManager())
+            .unregisterCallback(any(BluetoothCallback.class));
     }
 
     @Test
@@ -106,7 +102,6 @@ public class BluetoothMasterSwitchPreferenceControllerTest {
     public void onStop_shouldRegisterPreferenceChangeListener() {
         mController.displayPreference(mScreen);
         mController.onStart();
-
         mController.onStop();
 
         verify(mPreference).setOnPreferenceChangeListener(null);

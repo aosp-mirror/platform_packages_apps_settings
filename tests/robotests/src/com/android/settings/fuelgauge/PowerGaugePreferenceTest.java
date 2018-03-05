@@ -27,7 +27,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -35,13 +34,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerGaugePreferenceTest {
+
     private static final String SUBTITLE = "Summary";
     private static final String CONTENT_DESCRIPTION = "Content description";
+
     private Context mContext;
     private PowerGaugePreference mPowerGaugePreference;
     private View mRootView;
@@ -53,11 +52,12 @@ public class PowerGaugePreferenceTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = RuntimeEnvironment.application;
-        mRootView = LayoutInflater.from(mContext).inflate(R.layout.preference_app,
-                null);
-        mWidgetView = LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary,
-                null);
-        ((LinearLayout) mRootView.findViewById(android.R.id.widget_frame)).addView(mWidgetView);
+        mRootView = LayoutInflater.from(mContext).inflate(R.layout.preference_app, null);
+        mWidgetView =
+            LayoutInflater.from(mContext).inflate(R.layout.preference_widget_summary, null);
+        final LinearLayout widgetFrame = mRootView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetFrame).isNotNull();
+        widgetFrame.addView(mWidgetView);
         mPreferenceViewHolder = PreferenceViewHolder.createInstanceForTests(mRootView);
 
         mPowerGaugePreference = new PowerGaugePreference(mContext);
@@ -69,8 +69,8 @@ public class PowerGaugePreferenceTest {
         mPowerGaugePreference.setSubtitle(SUBTITLE);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
 
-        assertThat(((TextView) mPreferenceViewHolder.findViewById(
-                R.id.widget_summary)).getText()).isEqualTo(SUBTITLE);
+        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
+        assertThat(widgetSummary.getText()).isEqualTo(SUBTITLE);
     }
 
     @Test
@@ -78,8 +78,8 @@ public class PowerGaugePreferenceTest {
         mPowerGaugePreference.shouldShowAnomalyIcon(true);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
 
-        final Drawable[] drawables = ((TextView) mPreferenceViewHolder.findViewById(
-                R.id.widget_summary)).getCompoundDrawablesRelative();
+        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
+        final Drawable[] drawables = widgetSummary.getCompoundDrawablesRelative();
 
         assertThat(drawables[0]).isInstanceOf(VectorDrawable.class);
     }
@@ -89,8 +89,8 @@ public class PowerGaugePreferenceTest {
         mPowerGaugePreference.shouldShowAnomalyIcon(false);
         mPowerGaugePreference.onBindViewHolder(mPreferenceViewHolder);
 
-        final Drawable[] drawables = ((TextView) mPreferenceViewHolder.findViewById(
-                R.id.widget_summary)).getCompoundDrawablesRelative();
+        TextView widgetSummary = (TextView) mPreferenceViewHolder.findViewById(R.id.widget_summary);
+        final Drawable[] drawables = widgetSummary.getCompoundDrawablesRelative();
 
         assertThat(drawables[0]).isNull();
     }

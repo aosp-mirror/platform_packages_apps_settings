@@ -16,11 +16,8 @@
 
 package com.android.settings.deviceinfo.firmwareversion;
 
-import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController
-        .FIRMWARE_VERSION_LABEL_ID;
-import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController
-        .FIRMWARE_VERSION_VALUE_ID;
-
+import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController.FIRMWARE_VERSION_LABEL_ID;
+import static com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDialogController.FIRMWARE_VERSION_VALUE_ID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
@@ -34,7 +31,6 @@ import android.os.Build;
 import android.os.UserManager;
 import android.view.View;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -43,11 +39,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class FirmwareVersionDialogControllerTest {
 
     @Mock

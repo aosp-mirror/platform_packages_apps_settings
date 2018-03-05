@@ -21,7 +21,6 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.text.TextUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.R;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
@@ -46,10 +45,10 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, qualifiers = "mcc999")
+@Config(qualifiers = "mcc999")
 public class IndexDataConverterTest {
 
-    private final String localeStr = "en_US";
+    private static final String localeStr = "en_US";
 
     private static final String title = "title\u2011title";
     private static final String updatedTitle = "title-title";
@@ -72,7 +71,7 @@ public class IndexDataConverterTest {
     private static final boolean enabled = true;
 
     // There are 6 entries in the fake display_settings.xml preference.
-    private final int NUM_DISPLAY_ENTRIES = 6;
+    private static final int NUM_DISPLAY_ENTRIES = 6;
     private static final String PAGE_TITLE = "page_title";
     private static final String TITLE_ONE = "pref_title_1";
     private static final String TITLE_TWO = "pref_title_2";
@@ -81,14 +80,8 @@ public class IndexDataConverterTest {
     private static final String TITLE_FIVE = "pref_title_5";
     private static final String DISPLAY_SPACE_DELIM_KEYWORDS = "keywords1 keywords2 keywords3";
 
-    // There are 6 display entries from resources, and 1 raw.
-    private static final int NUM_FAKE_FRAGMENT_ENTRIES = 7;
-    private static final int NUM_ENABLED_FAKE_FRAGMENT_ENTRIES = 5;
-    private static final String FAKE_CLASS_NAME =
-            "com.android.settings.search.indexing.FakeSettingsFragment";
-
     // There is a title and one preference.
-    private final int NUM_LEGAL_SETTINGS = 2;
+    private static final int NUM_LEGAL_SETTINGS = 2;
 
     private Context mContext;
 
@@ -131,8 +124,8 @@ public class IndexDataConverterTest {
         assertThat(row.key).isEqualTo(key);
         assertThat(row.userId).isEqualTo(userId);
         assertThat(row.payloadType).isEqualTo(0);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(row.payload,
-                ResultPayload.CREATOR);
+        ResultPayload unmarshalledPayload =
+            ResultPayloadUtils.unmarshall(row.payload, ResultPayload.CREATOR);
         assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
     }
 
@@ -230,12 +223,10 @@ public class IndexDataConverterTest {
         List<IndexData> indexData = mConverter.convertPreIndexDataToIndexData(preIndexData);
 
         String checkBoxSummaryOn = "summary_on";
-        String checkBoxSummaryOff = "summary_off";
         String checkBoxKey = "pref_key_5";
         final IndexData row = findIndexDataForTitle(indexData, TITLE_FIVE);
 
-        assertDisplaySetting(row, TITLE_FIVE, checkBoxSummaryOn, checkBoxSummaryOff,
-                checkBoxKey);
+        assertDisplaySetting(row, TITLE_FIVE, checkBoxSummaryOn, checkBoxKey);
     }
 
     @Test
@@ -250,7 +241,7 @@ public class IndexDataConverterTest {
         String listKey = "pref_key_4";
         final IndexData row = findIndexDataForTitle(indexData, TITLE_FOUR);
 
-        assertDisplaySetting(row, TITLE_FOUR, listSummary, "", listKey);
+        assertDisplaySetting(row, TITLE_FOUR, listSummary, listKey);
     }
 
     @Test
@@ -263,6 +254,7 @@ public class IndexDataConverterTest {
 
         final IndexData row = findIndexDataForTitle(indexData, TITLE_THREE);
 
+        assertThat(row).isNotNull();
         assertThat(row.iconResId).isGreaterThan(0);
     }
 
@@ -279,6 +271,7 @@ public class IndexDataConverterTest {
 
         assertThat(indexData.size()).isEqualTo(NUM_LEGAL_SETTINGS - 1);
         assertThat(numEnabled).isEqualTo(NUM_LEGAL_SETTINGS - 1);
+        assertThat(nonTitlePref).isNotNull();
         assertThat(nonTitlePref.enabled).isTrue();
     }
 
@@ -293,8 +286,7 @@ public class IndexDataConverterTest {
         assertThat(indexData).isEmpty();
     }
 
-    private void assertDisplaySetting(IndexData row, String title, String summaryOn,
-            String summaryOff, String key) {
+    private void assertDisplaySetting(IndexData row, String title, String summaryOn, String key) {
         assertThat(row.normalizedTitle).isEqualTo(title);
         assertThat(row.locale).isEqualTo(localeStr);
         assertThat(row.updatedSummaryOn).isEqualTo(summaryOn);
@@ -304,20 +296,9 @@ public class IndexDataConverterTest {
         assertThat(row.enabled).isEqualTo(true);
         assertThat(row.key).isEqualTo(key);
         assertThat(row.payloadType).isEqualTo(0);
-        ResultPayload unmarshalledPayload = ResultPayloadUtils.unmarshall(row.payload,
-                ResultPayload.CREATOR);
+        ResultPayload unmarshalledPayload =
+            ResultPayloadUtils.unmarshall(row.payload, ResultPayload.CREATOR);
         assertThat(unmarshalledPayload).isInstanceOf(ResultPayload.class);
-    }
-
-    private void assertFakeFragment(IndexData row) {
-        assertThat(row.normalizedTitle).isEqualTo(FakeSettingsFragment.TITLE);
-        assertThat(row.updatedSummaryOn).isEqualTo(FakeSettingsFragment.SUMMARY_ON);
-        assertThat(row.spaceDelimitedKeywords)
-                .isEqualTo(FakeSettingsFragment.SPACE_KEYWORDS);
-        assertThat(row.screenTitle).isEqualTo(FakeSettingsFragment.SCREEN_TITLE);
-        assertThat(row.className).isEqualTo(FakeSettingsFragment.CLASS_NAME);
-        assertThat(row.enabled).isEqualTo(FakeSettingsFragment.ENABLED);
-        assertThat(row.key).isEqualTo(FakeSettingsFragment.KEY);
     }
 
     private SearchIndexableRaw getFakeRaw() {
@@ -370,8 +351,7 @@ public class IndexDataConverterTest {
 
     private static IndexData findIndexDataForTitle(List<IndexData> indexData,
             String indexDataTitle) {
-        for (int i = 0; i < indexData.size(); i++) {
-            IndexData row = indexData.get(i);
+        for (IndexData row : indexData) {
             if (TextUtils.equals(row.updatedTitle, indexDataTitle)) {
                 return row;
             }
@@ -380,8 +360,7 @@ public class IndexDataConverterTest {
     }
 
     private static IndexData findIndexDataForKey(List<IndexData> indexData, String indexDataKey) {
-        for (int i = 0; i < indexData.size(); i++) {
-            IndexData row = indexData.get(i);
+        for (IndexData row : indexData) {
             if (TextUtils.equals(row.key, indexDataKey)) {
                 return row;
             }

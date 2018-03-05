@@ -29,13 +29,13 @@ import android.content.Context;
 import android.net.NetworkScorerAppData;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
+
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settings.wrapper.NetworkScoreManagerWrapper;
-
 import com.google.android.collect.Lists;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,12 +43,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NetworkScorerPickerTest {
 
     private static final String TEST_SCORER_PACKAGE_1 = "Test Package 1";
@@ -112,8 +110,8 @@ public class NetworkScorerPickerTest {
         mFragment.updateCandidates();
 
         verify(mPreferenceScreen).addPreference(arg.capture());
-        assertThat(arg.getValue().getTitle()).isEqualTo(
-                mContext.getString(R.string.network_scorer_picker_none_preference));
+        assertThat(arg.getValue().getTitle())
+            .isEqualTo(mContext.getString(R.string.network_scorer_picker_none_preference));
         assertThat(arg.getValue().isChecked()).isTrue();
     }
 

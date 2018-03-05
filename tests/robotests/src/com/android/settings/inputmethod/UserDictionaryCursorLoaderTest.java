@@ -16,7 +16,6 @@
 
 package com.android.settings.inputmethod;
 
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.ContentProvider;
@@ -26,7 +25,6 @@ import android.database.MatrixCursor;
 import android.net.Uri;
 import android.provider.UserDictionary;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,11 +32,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowContentResolver;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UserDictionaryCursorLoaderTest {
 
     private ContentProvider mContentProvider;
@@ -60,7 +56,6 @@ public class UserDictionaryCursorLoaderTest {
     }
 
     public static class FakeProvider extends ContentProvider {
-
 
         @Override
         public boolean onCreate() {
@@ -100,5 +95,4 @@ public class UserDictionaryCursorLoaderTest {
             return 0;
         }
     }
-
 }

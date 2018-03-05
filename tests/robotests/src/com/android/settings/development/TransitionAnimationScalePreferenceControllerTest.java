@@ -16,22 +16,19 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.TransitionAnimationScalePreferenceController
-        .DEFAULT_VALUE;
-import static com.android.settings.development.TransitionAnimationScalePreferenceController
-        .TRANSITION_ANIMATION_SCALE_SELECTOR;
-
+import static com.android.settings.development.TransitionAnimationScalePreferenceController.DEFAULT_VALUE;
+import static com.android.settings.development.TransitionAnimationScalePreferenceController.TRANSITION_ANIMATION_SCALE_SELECTOR;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.RemoteException;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.IWindowManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -40,11 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TransitionAnimationScalePreferenceControllerTest {
 
     @Mock
@@ -72,10 +67,9 @@ public class TransitionAnimationScalePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(
-                R.array.transition_animation_scale_values);
-        mListSummaries = mContext.getResources().getStringArray(
-                R.array.transition_animation_scale_entries);
+        final Resources resources = mContext.getResources();
+        mListValues = resources.getStringArray(R.array.transition_animation_scale_values);
+        mListSummaries = resources.getStringArray(R.array.transition_animation_scale_entries);
         mController = new TransitionAnimationScalePreferenceController(mContext);
         ReflectionHelpers.setField(mController, "mWindowManager", mWindowManager);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -86,22 +80,22 @@ public class TransitionAnimationScalePreferenceControllerTest {
     public void onPreferenceChange_noValueSet_shouldSetDefault() throws RemoteException {
         mController.onPreferenceChange(mPreference, null /* new value */);
 
-        verify(mWindowManager).setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR,
-                DEFAULT_VALUE);
+        verify(mWindowManager)
+            .setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR, DEFAULT_VALUE);
     }
 
     @Test
     public void onPreferenceChange_option5Selected_shouldSetOption5() throws RemoteException {
         mController.onPreferenceChange(mPreference, mListValues[5]);
 
-        verify(mWindowManager).setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR,
-                Float.valueOf(mListValues[5]));
+        verify(mWindowManager)
+            .setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR, Float.valueOf(mListValues[5]));
     }
 
     @Test
     public void updateState_option5Set_shouldUpdatePreferenceToOption5() throws RemoteException {
-        when(mWindowManager.getAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR)).thenReturn(
-                Float.valueOf(mListValues[5]));
+        when(mWindowManager.getAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR))
+            .thenReturn(Float.valueOf(mListValues[5]));
 
         mController.updateState(mPreference);
 
@@ -111,8 +105,8 @@ public class TransitionAnimationScalePreferenceControllerTest {
 
     @Test
     public void updateState_option3Set_shouldUpdatePreferenceToOption3() throws RemoteException {
-        when(mWindowManager.getAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR)).thenReturn(
-                Float.valueOf(mListValues[3]));
+        when(mWindowManager.getAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR))
+            .thenReturn(Float.valueOf(mListValues[3]));
 
         mController.updateState(mPreference);
 
@@ -124,8 +118,8 @@ public class TransitionAnimationScalePreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() throws RemoteException {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mWindowManager).setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR,
-                DEFAULT_VALUE);
+        verify(mWindowManager)
+            .setAnimationScale(TRANSITION_ANIMATION_SCALE_SELECTOR, DEFAULT_VALUE);
         verify(mPreference).setEnabled(false);
     }
 }

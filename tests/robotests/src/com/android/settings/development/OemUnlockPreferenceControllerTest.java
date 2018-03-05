@@ -16,8 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_CODE_ENABLE_OEM_UNLOCK;
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_CODE_ENABLE_OEM_UNLOCK;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -35,7 +34,6 @@ import android.service.oemlock.OemLockManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedSwitchPreference;
 
@@ -45,10 +43,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class OemUnlockPreferenceControllerTest {
 
     @Mock
@@ -79,10 +75,10 @@ public class OemUnlockPreferenceControllerTest {
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getResources()).thenReturn(mResources);
         mController = new OemUnlockPreferenceController(mContext, mActivity, mFragment);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
-        when(mFragment.getChildFragmentManager()).thenReturn(
-                mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
+        when(mFragment.getChildFragmentManager())
+            .thenReturn(mock(FragmentManager.class, Answers.RETURNS_DEEP_STUBS));
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -172,8 +168,7 @@ public class OemUnlockPreferenceControllerTest {
 
     @Test
     public void onActivityResult_shouldReturnFalse() {
-        final boolean result = mController.onActivityResult(123454,
-                1434, null);
+        final boolean result = mController.onActivityResult(123454, 1434, null);
 
         assertThat(result).isFalse();
     }

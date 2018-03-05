@@ -36,7 +36,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.ArraySet;
 import android.view.View;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
@@ -59,11 +58,7 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowEntityHeaderController.class,
-                ShadowRestrictedLockUtils.class
-        })
+@Config(shadows = {ShadowEntityHeaderController.class, ShadowRestrictedLockUtils.class})
 public class AppDataUsageTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -92,9 +87,8 @@ public class AppDataUsageTest {
 
         mFragment = spy(new AppDataUsage());
 
-        doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
-                .when(mFragment)
-                .getPreferenceManager();
+        when(mFragment.getPreferenceManager())
+            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
         ReflectionHelpers.setField(mFragment, "mAppItem", mock(AppItem.class));
 
@@ -125,9 +119,8 @@ public class AppDataUsageTest {
         when(mHeaderController.setUid(fakeUserId)).thenReturn(mHeaderController);
         when(mHeaderController.setHasAppInfoLink(anyBoolean())).thenReturn(mHeaderController);
 
-        doReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS))
-                .when(mFragment)
-                .getPreferenceManager();
+        when(mFragment.getPreferenceManager())
+            .thenReturn(mock(PreferenceManager.class, RETURNS_DEEP_STUBS));
         doReturn(mock(PreferenceScreen.class)).when(mFragment).getPreferenceScreen();
 
         mFragment.onViewCreated(new View(RuntimeEnvironment.application), new Bundle());

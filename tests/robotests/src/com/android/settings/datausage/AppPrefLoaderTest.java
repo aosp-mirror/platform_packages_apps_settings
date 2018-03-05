@@ -22,47 +22,37 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.drawable.Drawable;
 import android.support.v7.preference.Preference;
-
 import android.util.ArraySet;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppPrefLoaderTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private PackageManager mPackageManager;
 
     private AppPrefLoader mLoader;
 
-
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        final ArraySet<String> pkgs = new ArraySet<>();
+        final ArraySet<String> pkgs = new ArraySet<>(2);
         pkgs.add("pkg0");
         pkgs.add("pkg1");
-        mLoader =
-            new AppPrefLoader(RuntimeEnvironment.application, pkgs, mPackageManager);
+        mLoader = new AppPrefLoader(RuntimeEnvironment.application, pkgs, mPackageManager);
     }
 
     @Test
@@ -71,8 +61,7 @@ public class AppPrefLoaderTest {
         when(mPackageManager.getApplicationInfo(anyString(), anyInt()))
             .thenThrow(new NameNotFoundException());
 
-        ArraySet<Preference> preferences = mLoader.loadInBackground();
-        assertThat(preferences).isEmpty();
+        assertThat(mLoader.loadInBackground()).isEmpty();
     }
 
     @Test
@@ -89,5 +78,4 @@ public class AppPrefLoaderTest {
         assertThat(preference.getIcon()).isEqualTo(drawable);
         assertThat(preference.isSelectable()).isFalse();
     }
-
 }

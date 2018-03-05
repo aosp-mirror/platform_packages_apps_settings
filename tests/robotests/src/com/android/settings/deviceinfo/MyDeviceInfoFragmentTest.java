@@ -17,7 +17,6 @@
 package com.android.settings.deviceinfo;
 
 import static com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
@@ -35,11 +34,9 @@ import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoFragment;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -59,12 +56,9 @@ import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowConnectivityManager.class, ShadowUserManager.class}
-)
+@Config(shadows = {ShadowConnectivityManager.class, ShadowUserManager.class})
 public class MyDeviceInfoFragmentTest {
+
     @Mock
     private Activity mActivity;
     @Mock
@@ -90,13 +84,12 @@ public class MyDeviceInfoFragmentTest {
 
         doReturn(mScreen).when(mSettings).getPreferenceScreen();
         when(mSettings.getPreferenceScreen()).thenReturn(mScreen);
-        ShadowApplication.getInstance().setSystemService(Context.TELEPHONY_SERVICE,
-                mTelephonyManager);
+        ShadowApplication.getInstance()
+            .setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
     }
 
     @Test
-    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
-            SettingsShadowSystemProperties.class})
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_fromSearch_shouldNotOverrideInitialExpandedCount() {
         final Bundle args = new Bundle();
         args.putString(EXTRA_FRAGMENT_ARG_KEY, "search_key");

@@ -16,7 +16,6 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -32,7 +31,6 @@ import android.provider.Settings;
 import android.provider.Settings.Global;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -44,14 +42,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VerifyAppsOverUsbPreferenceControllerTest {
 
     @Mock
@@ -84,8 +80,8 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
         mController = new VerifyAppsOverUsbPreferenceController(mContext);
-        ReflectionHelpers.setField(
-                mController, "mRestrictedLockUtils", mRestrictedLockUtilsDelegate);
+        ReflectionHelpers
+            .setField(mController, "mRestrictedLockUtils", mRestrictedLockUtilsDelegate);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
         mController.displayPreference(mScreen);
     }
@@ -93,14 +89,14 @@ public class VerifyAppsOverUsbPreferenceControllerTest {
     private void setupVerifyBroadcastReceivers(boolean nonEmpty) {
         final List<ResolveInfo> resolveInfos = nonEmpty
                 ? Collections.singletonList(mock(ResolveInfo.class))
-                : Collections.<ResolveInfo>emptyList();
+                : Collections.emptyList();
         when(mPackageManager.queryBroadcastReceivers((Intent) any(), anyInt()))
                 .thenReturn(resolveInfos);
     }
 
     private void setupEnforcedAdmin(EnforcedAdmin result) {
-        when(mRestrictedLockUtilsDelegate.checkIfRestrictionEnforced(
-                (Context) any(), anyString(), anyInt())).thenReturn(result);
+        when(mRestrictedLockUtilsDelegate
+            .checkIfRestrictionEnforced(any(), anyString(), anyInt())).thenReturn(result);
     }
 
     @Test

@@ -16,36 +16,27 @@
 
 package com.android.settings.notification;
 
-import android.content.Context;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MediaVolumePreferenceControllerTest {
 
-    private Context mContext;
     private MediaVolumePreferenceController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
-        mController = new MediaVolumePreferenceController(mContext, null, null);
+        mController =
+            new MediaVolumePreferenceController(RuntimeEnvironment.application, null, null);
     }
 
     @Test
@@ -63,5 +54,4 @@ public class MediaVolumePreferenceControllerTest {
     public void getAudioStream_shouldReturnMusic() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_MUSIC);
     }
-
 }

@@ -16,9 +16,7 @@
 
 package com.android.settings.fingerprint;
 
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
@@ -29,10 +27,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 
@@ -49,14 +45,7 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowEventLogWriter.class,
-                ShadowLockPatternUtils.class,
-                ShadowUserManager.class
-        })
+@Config(shadows = {ShadowLockPatternUtils.class, ShadowUserManager.class})
 public class FingerprintSuggestionActivityTest {
 
     @Mock
@@ -64,12 +53,10 @@ public class FingerprintSuggestionActivityTest {
 
     private ActivityController<FingerprintSuggestionActivity> mController;
 
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(FingerprintSuggestionActivity.class, intent);
@@ -91,7 +78,7 @@ public class FingerprintSuggestionActivityTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
         assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
         assertThat(shadowActivity.getResultCode()).named("Result code")
-                .isEqualTo(Activity.RESULT_CANCELED);
+            .isEqualTo(Activity.RESULT_CANCELED);
     }
 
     private ShadowKeyguardManager getShadowKeyguardManager() {

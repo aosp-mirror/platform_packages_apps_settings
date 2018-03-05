@@ -29,26 +29,25 @@ import android.content.Context;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.AppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.location.RecentLocationApps;
 import com.android.settingslib.location.RecentLocationApps.Request;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /** Unit tests for {@link RecentLocationRequestSeeAllPreferenceController} */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RecentLocationRequestSeeAllPreferenceControllerTest {
 
     @Mock
@@ -115,7 +114,7 @@ public class RecentLocationRequestSeeAllPreferenceControllerTest {
         doReturn(appPreference)
                 .when(mController).createAppPreference(any(Context.class), eq(request));
         when(mRecentLocationApps.getAppListSorted())
-                .thenReturn(new ArrayList<>(Arrays.asList(request)));
+                .thenReturn(new ArrayList<>(Collections.singletonList(request)));
 
         mController.displayPreference(mScreen);
         mController.updateState(mCategory);

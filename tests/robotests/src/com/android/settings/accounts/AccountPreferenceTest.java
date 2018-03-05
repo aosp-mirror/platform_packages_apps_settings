@@ -16,42 +16,38 @@
 
 package com.android.settings.accounts;
 
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.accounts.Account;
-import android.content.Context;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AccountPreferenceTest {
 
-    private Context mContext;
-    private Account mAccount;
-    private ArrayList<String> mAuthorities;
     private AccountPreference mPreference;
 
     @Before
     public void setUp() {
-        mContext = ShadowApplication.getInstance().getApplicationContext();
-        mAccount = new Account("name", "type");
-        mAuthorities = new ArrayList<>();
-        mAuthorities.add("authority");
+        final ArrayList<String> authorities = new ArrayList<>();
+        authorities.add("authority");
 
         mPreference = spy(new AccountPreference(
-                mContext, mAccount, null /* icon */, mAuthorities, false /* showTypeIcon */));
+            RuntimeEnvironment.application,
+            new Account("name", "type"),
+            null /* icon */,
+            authorities,
+            false /* showTypeIcon */)
+        );
     }
 
     @Test

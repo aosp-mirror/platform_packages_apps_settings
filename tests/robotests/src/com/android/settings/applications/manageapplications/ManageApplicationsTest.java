@@ -16,15 +16,10 @@
 
 package com.android.settings.applications.manageapplications;
 
-import static com.android.settings.applications.manageapplications.AppFilterRegistry
-        .FILTER_APPS_ALL;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_MAIN;
-import static com.android.settings.applications.manageapplications.ManageApplications
-        .LIST_TYPE_NOTIFICATION;
-
+import static com.android.settings.applications.manageapplications.AppFilterRegistry.FILTER_APPS_ALL;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_MAIN;
+import static com.android.settings.applications.manageapplications.ManageApplications.LIST_TYPE_NOTIFICATION;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.eq;
@@ -47,11 +42,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowResources.SettingsShadowTheme;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.widget.LoadingViewController;
 import com.android.settingslib.applications.ApplicationsState;
 
@@ -61,24 +52,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenuItem;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 
-/**
- * Tests for {@link ManageApplications}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-// TODO: Consider making the shadow class set global using a robolectric.properties file.
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowTheme.class,
-                ShadowEventLogWriter.class
-        })
 public class ManageApplicationsTest {
 
     @Mock
@@ -88,7 +67,6 @@ public class ManageApplicationsTest {
     @Mock
     private Menu mMenu;
     private MenuItem mAppReset;
-    private Looper mBgLooper;
     private ManageApplications mFragment;
 
     @Before
@@ -97,8 +75,7 @@ public class ManageApplicationsTest {
         mAppReset = new RoboMenuItem(R.id.reset_app_preferences);
         ReflectionHelpers.setStaticField(ApplicationsState.class, "sInstance", mState);
         when(mState.newSession(any())).thenReturn(mSession);
-        mBgLooper = Looper.myLooper();
-        when(mState.getBackgroundLooper()).thenReturn(mBgLooper);
+        when(mState.getBackgroundLooper()).thenReturn(Looper.myLooper());
 
         mFragment = new ManageApplications();
     }

@@ -1,28 +1,27 @@
 package com.android.settings.search;
 
-import android.content.Context;
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
-import com.android.settings.TestConfig;
+
 import com.android.settings.search.ResultPayload.SettingsSource;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InlinePayloadTest {
 
-    private Context mContext;
+    private static final String KEY = "key";
 
-    private final String KEY = "key";
+    private Context mContext;
 
     @Before
     public void setUp() {
@@ -106,9 +105,9 @@ public class InlinePayloadTest {
                 true /* isDeviceSupported */);
     }
 
-    class ConcreteInlinePayload extends InlinePayload {
+    private class ConcreteInlinePayload extends InlinePayload {
 
-        public ConcreteInlinePayload(String key, @SettingsSource int source, Intent intent,
+        private ConcreteInlinePayload(String key, @SettingsSource int source, Intent intent,
                 boolean isDeviceSupported) {
             super(key, source, intent, isDeviceSupported, 0 /* defaultValue */);
         }

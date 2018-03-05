@@ -1,20 +1,19 @@
 package com.android.settings.search;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InlineListPayloadTest {
 
     private static final String DUMMY_SETTING = "inline_list_key";
@@ -65,8 +64,7 @@ public class InlineListPayloadTest {
         parcel.writeInt(InlineSwitchPayload.TRUE);
         parcel.setDataPosition(0);
 
-        InlineListPayload payload = InlineListPayload
-                .CREATOR.createFromParcel(parcel);
+        InlineListPayload payload = InlineListPayload.CREATOR.createFromParcel(parcel);
 
         final Intent builtIntent = payload.getIntent();
         assertThat(payload.getKey()).isEqualTo(uri);

@@ -36,7 +36,7 @@ import org.mockito.MockitoAnnotations;
  */
 public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
-    protected final String mKey;
+    private final String mKey;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     protected Context mContext;
@@ -44,7 +44,7 @@ public abstract class FailedPasswordWipePreferenceControllerTestBase {
 
     protected FailedPasswordWipePreferenceControllerBase mController;
 
-    public FailedPasswordWipePreferenceControllerTestBase(String key) {
+    FailedPasswordWipePreferenceControllerTestBase(String key) {
         mKey = key;
     }
 

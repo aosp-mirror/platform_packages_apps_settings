@@ -32,7 +32,6 @@ import android.content.Intent;
 import android.os.UserHandle;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.instrumentation.VisibilityLoggerMixin;
 
@@ -43,10 +42,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SubSettingLauncherTest {
 
     @Mock

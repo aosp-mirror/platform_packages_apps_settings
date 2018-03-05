@@ -18,11 +18,9 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.content.Context;
+import android.content.ContentResolver;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
-
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,25 +28,24 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SmartBatteryPreferenceControllerTest {
+
     private static final int ON = 1;
     private static final int OFF = 0;
 
     private SmartBatteryPreferenceController mController;
     private SwitchPreference mPreference;
-    private Context mContext;
+    private ContentResolver mContentResolver;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mController = new SmartBatteryPreferenceController(mContext);
-        mPreference = new SwitchPreference(mContext);
+        mContentResolver = RuntimeEnvironment.application.getContentResolver();
+        mController = new SmartBatteryPreferenceController(RuntimeEnvironment.application);
+        mPreference = new SwitchPreference(RuntimeEnvironment.application);
     }
 
     @Test
@@ -84,12 +81,10 @@ public class SmartBatteryPreferenceControllerTest {
     }
 
     private void putSmartBatteryValue(int value) {
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.APP_STANDBY_ENABLED,
-                value);
+        Settings.Global.putInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, value);
     }
 
     private int getSmartBatteryValue() {
-        return Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.APP_STANDBY_ENABLED, ON);
+        return Settings.Global.getInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, ON);
     }
 }

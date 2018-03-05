@@ -24,7 +24,6 @@ import static org.mockito.Mockito.verify;
 import android.content.Context;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.ActivityInfoWrapper;
@@ -33,10 +32,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PictureInPictureDetailsTest {
 
     private FakeFeatureFactory mFeatureFactory;
@@ -102,7 +99,7 @@ public class PictureInPictureDetailsTest {
 
         private boolean mSupportsPictureInPicture;
 
-        public MockActivityInfo(boolean supportsPictureInPicture) {
+        private MockActivityInfo(boolean supportsPictureInPicture) {
             super(null);
             mSupportsPictureInPicture = supportsPictureInPicture;
         }

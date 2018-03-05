@@ -29,7 +29,6 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.MasterSwitchPreference;
@@ -44,7 +43,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiMasterSwitchPreferenceControllerTest {
 
     @Mock
@@ -56,14 +54,12 @@ public class WifiMasterSwitchPreferenceControllerTest {
 
     private Context mContext;
     private WifiMasterSwitchPreferenceController mController;
-    private FakeFeatureFactory mFakeFeatureFactory;
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
-        mMetricsFeatureProvider = mFakeFeatureFactory.getMetricsFeatureProvider();
+        mMetricsFeatureProvider = FakeFeatureFactory.setupForTest().getMetricsFeatureProvider();
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         mController = new WifiMasterSwitchPreferenceController(mContext, mMetricsFeatureProvider);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

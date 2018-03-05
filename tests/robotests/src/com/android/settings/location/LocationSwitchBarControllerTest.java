@@ -26,7 +26,6 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.widget.SwitchBar;
 import com.android.settings.widget.ToggleSwitch;
@@ -39,11 +38,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationSwitchBarControllerTest {
 
     @Mock
@@ -65,8 +62,7 @@ public class LocationSwitchBarControllerTest {
         ReflectionHelpers.setField(mSwitchBar, "mSwitch", mSwitch);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController = spy(new LocationSwitchBarController(
-                mContext, mSwitchBar, mLifecycle));
+        mController = spy(new LocationSwitchBarController(mContext, mSwitchBar, mLifecycle));
         ReflectionHelpers.setField(mController, "mLocationEnabler", mEnabler);
     }
 
@@ -153,5 +149,4 @@ public class LocationSwitchBarControllerTest {
 
         verify(mSwitch).setChecked(false);
     }
-
 }

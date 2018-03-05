@@ -25,39 +25,36 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
-import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.shadows.ShadowApplication.Wrapper;
 import org.robolectric.util.ReflectionHelpers;
 
+import java.util.ArrayList;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TetherServiceTest {
 
     @Mock
     private Context mContext;
 
-    private ShadowApplication mShadowApplication;
     private Context mAppContext;
     private TetherService mService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mShadowApplication = ShadowApplication.getInstance();
-        mAppContext = mShadowApplication.getApplicationContext();
+        mAppContext = RuntimeEnvironment.application;
         mService = new TetherService();
         ReflectionHelpers.setField(mService, "mBase", mAppContext);
         mService.setHotspotOffReceiver(new HotspotOffReceiver(mContext));
@@ -69,8 +66,15 @@ public class TetherServiceTest {
 
         mService.scheduleAlarm();
 
-        assertThat(mShadowApplication.hasReceiverForIntent(
-            new Intent(WifiManager.WIFI_AP_STATE_CHANGED_ACTION))).isTrue();
+        boolean found = false;
+        for (Wrapper wrapper : ShadowApplication.getInstance().getRegisteredReceivers()) {
+            if (wrapper.intentFilter.matchAction(WifiManager.WIFI_AP_STATE_CHANGED_ACTION)) {
+                found = true;
+                break;
+            }
+        }
+
+        assertThat(found).isTrue();
     }
 
     @Test

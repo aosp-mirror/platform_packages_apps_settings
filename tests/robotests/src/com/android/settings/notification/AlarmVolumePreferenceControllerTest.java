@@ -16,11 +16,13 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.content.Context;
 import android.media.AudioManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,13 +32,7 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AlarmVolumePreferenceControllerTest {
 
     @Mock
@@ -48,7 +44,7 @@ public class AlarmVolumePreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mController = new AlarmVolumePreferenceController(mContext, null, null, mHelper);
     }
 
@@ -76,5 +72,4 @@ public class AlarmVolumePreferenceControllerTest {
     public void getAudioStream_shouldReturnAlarm() {
         assertThat(mController.getAudioStream()).isEqualTo(AudioManager.STREAM_ALARM);
     }
-
 }

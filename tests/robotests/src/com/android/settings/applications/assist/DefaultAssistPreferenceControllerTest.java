@@ -39,7 +39,6 @@ import android.content.pm.ServiceInfo;
 import android.provider.Settings;
 
 import com.android.internal.app.AssistUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settingslib.applications.DefaultAppInfo;
@@ -49,15 +48,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAssistPreferenceControllerTest {
 
     private static final String TEST_KEY = "test_pref_key";
@@ -91,8 +89,7 @@ public class DefaultAssistPreferenceControllerTest {
 
     @Test
     public void getPrefKey_shouldReturnKey() {
-        assertThat(mController.getPreferenceKey())
-                .isEqualTo(TEST_KEY);
+        assertThat(mController.getPreferenceKey()).isEqualTo(TEST_KEY);
     }
 
     @Test

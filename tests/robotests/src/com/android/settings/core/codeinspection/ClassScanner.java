@@ -29,8 +29,7 @@ import java.util.regex.Pattern;
  */
 public class ClassScanner {
 
-    public List<Class<?>> getClassesForPackage(String packageName)
-            throws ClassNotFoundException {
+    public List<Class<?>> getClassesForPackage(String packageName) throws ClassNotFoundException {
         final List<Class<?>> classes = new ArrayList<>();
 
         try {
@@ -64,5 +63,4 @@ public class ClassScanner {
         }
         return classes;
     }
-
 }

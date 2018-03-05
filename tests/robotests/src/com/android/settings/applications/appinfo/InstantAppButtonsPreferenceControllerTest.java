@@ -17,7 +17,6 @@
 package com.android.settings.applications.appinfo;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.argThat;
@@ -46,8 +45,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
@@ -59,11 +58,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InstantAppButtonsPreferenceControllerTest {
 
     private static final String TEST_INSTALLER_PACKAGE_NAME = "com.installer";
@@ -115,7 +112,8 @@ public class InstantAppButtonsPreferenceControllerTest {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> false));
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.DISABLED_FOR_USER);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.DISABLED_FOR_USER);
     }
 
     @Test
@@ -123,7 +121,8 @@ public class InstantAppButtonsPreferenceControllerTest {
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 (InstantAppDataProvider) (i -> true));
 
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(mController.AVAILABLE);
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 
     @Test
@@ -295,5 +294,4 @@ public class InstantAppButtonsPreferenceControllerTest {
         verify(packageManagerWrapper)
             .deletePackageAsUser(eq(TEST_AIA_PACKAGE_NAME), any(), anyInt(),anyInt());
     }
-
 }

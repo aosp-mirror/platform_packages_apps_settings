@@ -17,12 +17,9 @@
 package com.android.settings.display;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -34,7 +31,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.TimeoutListPreference;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManagerWrapper;
@@ -54,10 +50,12 @@ import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowDevicePolicyManagerWrapper.class})
+@Config(shadows = ShadowDevicePolicyManagerWrapper.class)
 public class TimeoutPreferenceControllerTest {
+
     private static final int TIMEOUT = 30;
+    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
+
     private Context mContext;
     @Mock
     private TimeoutListPreference mPreference;
@@ -65,7 +63,6 @@ public class TimeoutPreferenceControllerTest {
     private UserManager mUserManager;
 
     private TimeoutPreferenceController mController;
-    private static final String KEY_SCREEN_TIMEOUT = "screen_timeout";
 
     @Before
     public void setUp() {
@@ -126,8 +123,8 @@ public class TimeoutPreferenceControllerTest {
         ArgumentCaptor<Long> longCaptor = ArgumentCaptor.forClass(Long.class);
         ArgumentCaptor<EnforcedAdmin> adminCaptor = ArgumentCaptor.forClass(EnforcedAdmin.class);
 
-        verify(mPreference, times(2)).removeUnusableTimeouts(
-                longCaptor.capture(), adminCaptor.capture());
+        verify(mPreference, times(2))
+            .removeUnusableTimeouts(longCaptor.capture(), adminCaptor.capture());
         assertEquals(0, (long)longCaptor.getValue());
         assertTrue(adminCaptor.getValue() != null);
     }

@@ -23,7 +23,6 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.drawer.CategoryKey;
@@ -35,10 +34,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SummaryLoaderTest {
 
     private static final String SUMMARY_1 = "summary1";
@@ -85,7 +82,6 @@ public class SummaryLoaderTest {
 
     @Test
     public void testUpdateSummaryToCache_hasCache_shouldUpdate() {
-
         final String testSummary = "test_summary";
         final DashboardCategory category = new DashboardCategory();
         final Tile tile = new Tile();

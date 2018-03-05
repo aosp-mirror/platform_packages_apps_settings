@@ -31,7 +31,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -43,31 +42,38 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowSecureSettings.class})
+@Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayNotificationsPreferenceControllerTest {
 
-    @Mock Context mContext;
-    @Mock AmbientDisplayConfiguration mConfig;
-    @Mock SwitchPreference mSwitchPreference;
-    @Mock MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private AmbientDisplayConfiguration mConfig;
+    @Mock
+    private SwitchPreference mSwitchPreference;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
-    AmbientDisplayNotificationsPreferenceController mController;
+    private Context mContext;
+
+    private ContentResolver mContentResolver;
+
+    private AmbientDisplayNotificationsPreferenceController mController;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mContentResolver = mContext.getContentResolver();
         mController = new AmbientDisplayNotificationsPreferenceController(mContext, mConfig,
                 mMetricsFeatureProvider);
     }
 
     @Test
-    public void updateState_enabled() throws Exception {
-        when(mConfig.pulseOnNotificationEnabled(anyInt()))
-                .thenReturn(true);
+    public void updateState_enabled() {
+        when(mConfig.pulseOnNotificationEnabled(anyInt())).thenReturn(true);
 
         mController.updateState(mSwitchPreference);
 
@@ -75,9 +81,8 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_disabled() throws Exception {
-        when(mConfig.pulseOnNotificationEnabled(anyInt()))
-                .thenReturn(false);
+    public void updateState_disabled() {
+        when(mConfig.pulseOnNotificationEnabled(anyInt())).thenReturn(false);
 
         mController.updateState(mSwitchPreference);
 
@@ -85,39 +90,37 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_enable() throws Exception {
+    public void onPreferenceChange_enable() {
         mController.onPreferenceChange(mSwitchPreference, true);
 
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ENABLED, -1))
-                .isEqualTo(1);
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
+            .isEqualTo(1);
     }
 
     @Test
-    public void onPreferenceChange_disable() throws Exception {
+    public void onPreferenceChange_disable() {
         mController.onPreferenceChange(mSwitchPreference, false);
 
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ENABLED, -1))
-                .isEqualTo(0);
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, -1))
+            .isEqualTo(0);
     }
 
     @Test
-    public void isAvailable_available() throws Exception {
-        when(mConfig.pulseOnNotificationAvailable())
-                .thenReturn(true);
+    public void isAvailable_available() {
+        when(mConfig.pulseOnNotificationAvailable()).thenReturn(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
-    public void isAvailable_unavailable() throws Exception {
-        when(mConfig.pulseOnNotificationAvailable())
-                .thenReturn(false);
+    public void isAvailable_unavailable() {
+        when(mConfig.pulseOnNotificationAvailable()).thenReturn(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
-    public void handlePreferenceTreeClick_reportsEventForItsPreference() throws Exception {
+    public void handlePreferenceTreeClick_reportsEventForItsPreference() {
         when(mSwitchPreference.getKey()).thenReturn(
                 AmbientDisplayNotificationsPreferenceController.KEY_AMBIENT_DISPLAY_NOTIFICATIONS);
 
@@ -127,7 +130,7 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_doesntReportEventForOtherPreferences() throws Exception {
+    public void handlePreferenceTreeClick_doesntReportEventForOtherPreferences() {
         when(mSwitchPreference.getKey()).thenReturn("some_other_key");
 
         mController.handlePreferenceTreeClick(mSwitchPreference);
@@ -141,24 +144,21 @@ public class AmbientDisplayNotificationsPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
         int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ENABLED, 0);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 0);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver, Settings.Secure.DOZE_ENABLED, 1);
+        int updatedValue =
+            Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ENABLED, 1);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
         int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ENABLED, currentValue);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ENABLED, currentValue);
 
         int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 

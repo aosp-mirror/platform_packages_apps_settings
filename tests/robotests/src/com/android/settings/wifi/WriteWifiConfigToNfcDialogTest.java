@@ -17,7 +17,6 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 
 import android.app.Activity;
@@ -25,7 +24,6 @@ import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
 import com.android.settings.wrapper.WifiManagerWrapper;
 
@@ -40,14 +38,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowNfcAdapter.class
-)
+@Config(shadows = ShadowNfcAdapter.class)
 public class WriteWifiConfigToNfcDialogTest {
-    @Mock Activity mActivity;
-    @Mock WifiManagerWrapper mWifiManager;
+
+    @Mock
+    Activity mActivity;
+    @Mock
+    WifiManagerWrapper mWifiManager;
 
     private WriteWifiConfigToNfcDialog mWriteWifiConfigToNfcDialog;
 

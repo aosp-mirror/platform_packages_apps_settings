@@ -17,7 +17,6 @@
 package com.android.settings.widget;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -26,21 +25,18 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MasterCheckBoxPreferenceTest {
 
     private Context mContext;
@@ -129,6 +125,8 @@ public class MasterCheckBoxPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_checkbox, widgetView, true);
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);
@@ -146,6 +144,8 @@ public class MasterCheckBoxPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_two_target, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_checkbox, widgetView, true);
         final CheckBox checkBox = (CheckBox) holder.findViewById(R.id.checkboxWidget);
         mPreference.onBindViewHolder(holder);

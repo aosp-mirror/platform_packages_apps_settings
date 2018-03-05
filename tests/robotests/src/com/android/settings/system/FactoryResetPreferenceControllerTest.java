@@ -16,78 +16,73 @@
 package com.android.settings.system;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
 
-import android.accounts.AccountManager;
 import android.content.Context;
 import android.os.UserManager;
+import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowSecureSettings;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.Shadows;
+import org.robolectric.shadows.ShadowUserManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION,
-    shadows = {ShadowSecureSettings.class, ShadowUtils.class}
-)
 public class FactoryResetPreferenceControllerTest {
 
     private static final String FACTORY_RESET_KEY = "factory_reset";
 
-    @Mock
-    private UserManager mUserManager;
-    @Mock
-    private AccountManager mAccountManager;
+    private ShadowUserManager mShadowUserManager;
 
     private Context mContext;
     private FactoryResetPreferenceController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        ShadowApplication.getInstance().setSystemService(Context.USER_SERVICE, mUserManager);
-        ShadowApplication.getInstance().setSystemService(Context.ACCOUNT_SERVICE, mAccountManager);
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        mShadowUserManager = Shadows.shadowOf(userManager);
+
         mController = new FactoryResetPreferenceController(mContext);
     }
 
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(false);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
     @Test
     public void isAvailable_systemUser() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
+        mShadowUserManager.setIsAdminUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_nonSystemUser() {
-        when(mUserManager.isAdminUser()).thenReturn(false);
-        ShadowUtils.setIsDemoUser(false);
+        mShadowUserManager.setIsAdminUser(false);
+        mShadowUserManager.setIsDemoUser(false);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isAvailable_demoUser() {
-        when(mUserManager.isAdminUser()).thenReturn(false);
-        ShadowUtils.setIsDemoUser(true);
+        mShadowUserManager.setIsAdminUser(false);
+
+        // Place the device in demo mode.
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.DEVICE_DEMO_MODE, 1);
+
+        // Indicate the user is a demo user.
+        mShadowUserManager.setIsDemoUser(true);
 
         assertThat(mController.isAvailable()).isTrue();
     }

@@ -16,11 +16,15 @@
 
 package com.android.settings.datausage;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settingslib.NetworkPolicyEditor;
 
 import org.junit.Before;
@@ -28,16 +32,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageListTest {
 
     @Mock
@@ -48,12 +45,10 @@ public class DataUsageListTest {
     private Context mContext;
     private DataUsageList mDataUsageList;
 
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         mNetworkServices.mPolicyEditor = mock(NetworkPolicyEditor.class);
         mDataUsageList = spy(DataUsageList.class);
 

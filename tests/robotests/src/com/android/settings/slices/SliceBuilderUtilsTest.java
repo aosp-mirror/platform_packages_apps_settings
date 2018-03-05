@@ -16,10 +16,7 @@
 
 package com.android.settings.slices;
 
-import static com.android.settings.TestConfig.SDK_VERSION;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -27,7 +24,6 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.FakeToggleController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,12 +32,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import androidx.app.slice.Slice;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = SDK_VERSION)
 public class SliceBuilderUtilsTest {
 
     private final String KEY = "KEY";
@@ -70,16 +64,16 @@ public class SliceBuilderUtilsTest {
 
     @Test
     public void testGetPreferenceController_buildsMatchingController() {
-        BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(
-                mContext, getDummyData());
+        BasePreferenceController controller =
+            SliceBuilderUtils.getPreferenceController(mContext, getDummyData());
 
         assertThat(controller).isInstanceOf(FakeToggleController.class);
     }
 
     @Test
     public void testGetPreferenceController_contextOnly_buildsMatchingController() {
-        BasePreferenceController controller = SliceBuilderUtils.getPreferenceController(mContext,
-                getDummyData(PREF_CONTROLLER2));
+        BasePreferenceController controller =
+            SliceBuilderUtils.getPreferenceController(mContext, getDummyData(PREF_CONTROLLER2));
 
         assertThat(controller).isInstanceOf(FakeContextOnlyPreferenceController.class);
     }

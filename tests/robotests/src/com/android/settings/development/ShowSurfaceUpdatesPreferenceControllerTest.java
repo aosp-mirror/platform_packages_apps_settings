@@ -16,9 +16,7 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController
-        .SURFACE_FLINGER_READ_CODE;
-
+import static com.android.settings.development.ShowSurfaceUpdatesPreferenceController.SURFACE_FLINGER_READ_CODE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
@@ -35,7 +33,6 @@ import android.os.RemoteException;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowParcel;
 
@@ -48,7 +45,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ShowSurfaceUpdatesPreferenceControllerTest {
 
     @Mock
@@ -87,11 +83,11 @@ public class ShowSurfaceUpdatesPreferenceControllerTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void updateState_settingEnabled_shouldCheckPreference() throws RemoteException {
         ShadowParcel.sReadIntResult = 1;
-        doReturn(true).when(mSurfaceFlinger).transact(eq(SURFACE_FLINGER_READ_CODE), any(), any(),
-                eq(0 /* flags */));
+        doReturn(true).when(mSurfaceFlinger)
+            .transact(eq(SURFACE_FLINGER_READ_CODE), any(), any(), eq(0 /* flags */));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -101,8 +97,8 @@ public class ShowSurfaceUpdatesPreferenceControllerTest {
     @Config(shadows = {ShadowParcel.class})
     public void updateState_settingDisabled_shouldUnCheckPreference() throws RemoteException {
         ShadowParcel.sReadIntResult = 0;
-        doReturn(true).when(mSurfaceFlinger).transact(eq(SURFACE_FLINGER_READ_CODE), any(), any(),
-                eq(0 /* flags */));
+        doReturn(true).when(mSurfaceFlinger)
+            .transact(eq(SURFACE_FLINGER_READ_CODE), any(), any(), eq(0 /* flags */));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);

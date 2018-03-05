@@ -19,18 +19,12 @@ package com.android.settings.enterprise;
 import android.Manifest;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link AdminGrantedCameraPermissionPreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class AdminGrantedCameraPermissionPreferenceControllerTest extends
-        AdminGrantedPermissionsPreferenceControllerTestBase {
+public class AdminGrantedCameraPermissionPreferenceControllerTest
+    extends AdminGrantedPermissionsPreferenceControllerTestBase {
 
     public AdminGrantedCameraPermissionPreferenceControllerTest() {
         super("enterprise_privacy_number_camera_access_packages",

@@ -17,7 +17,6 @@
 package com.android.settings.fingerprint;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Matchers.anyInt;
@@ -34,7 +33,6 @@ import android.os.Vibrator;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -56,13 +54,7 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUtils.class,
-                ShadowVibrator.class
-        })
+@Config(shadows = {ShadowUtils.class, ShadowVibrator.class})
 public class FingerprintEnrollEnrollingTest {
 
     @Mock
@@ -70,15 +62,13 @@ public class FingerprintEnrollEnrollingTest {
 
     private FingerprintEnrollEnrolling mActivity;
 
-    private FakeFeatureFactory mFactory;
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         ShadowUtils.setFingerprintManager(mFingerprintManager);
         ShadowVibrator.addToServiceMap();
 
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
         mActivity = Robolectric.buildActivity(
                 FingerprintEnrollEnrolling.class,
                 new Intent()
@@ -106,7 +96,6 @@ public class FingerprintEnrollEnrollingTest {
         assertThat(errorText.getText()).isEqualTo("test enrollment help");
 
         Robolectric.getForegroundThreadScheduler().advanceBy(2, TimeUnit.MILLISECONDS);
-
 
         ShadowVibrator shadowVibrator =
                 Shadow.extract(application.getSystemService(Vibrator.class));

@@ -16,10 +16,8 @@
 
 package com.android.settings.network;
 
-
 import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -36,7 +34,6 @@ import android.os.IBinder;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -45,11 +42,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowServiceManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class VpnPreferenceControllerTest {
 
     @Mock
@@ -86,7 +81,6 @@ public class VpnPreferenceControllerTest {
 
     @Test
     public void displayPreference_available_shouldSetDependency() {
-
         doReturn(true).when(mController).isAvailable();
         mController.displayPreference(mScreen);
 
@@ -105,5 +99,4 @@ public class VpnPreferenceControllerTest {
         verify(mConnectivityManager).unregisterNetworkCallback(
                 any(ConnectivityManager.NetworkCallback.class));
     }
-
 }

@@ -23,7 +23,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.search.ResultPayload;
 import com.android.settings.search.ResultPayloadUtils;
@@ -33,11 +32,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class IndexDataTest {
+
     private IndexData.Builder mBuilder;
 
     private static final String LOCALE = "en_US";
@@ -100,8 +98,8 @@ public class IndexDataTest {
     @Test
     public void testGenericIntent_addedToPayload() {
         final IndexData row = generateRow();
-        final ResultPayload payload = ResultPayloadUtils.unmarshall(row.payload,
-                ResultPayload.CREATOR);
+        final ResultPayload payload =
+            ResultPayloadUtils.unmarshall(row.payload, ResultPayload.CREATOR);
         final ComponentName name = payload.getIntent().getComponent();
         assertThat(name.getClassName()).isEqualTo(INTENT_TARGET_CLASS);
         assertThat(name.getPackageName()).isEqualTo(INTENT_TARGET_PACKAGE);
@@ -114,8 +112,8 @@ public class IndexDataTest {
                 1 /* onValue */, null /* intent */, true /* isDeviceSupported */, 1 /* default */);
         mBuilder.setPayload(payload);
         final IndexData row = generateRow();
-        final InlineSwitchPayload unmarshalledPayload = ResultPayloadUtils
-                .unmarshall(row.payload, InlineSwitchPayload.CREATOR);
+        final InlineSwitchPayload unmarshalledPayload =
+            ResultPayloadUtils.unmarshall(row.payload, InlineSwitchPayload.CREATOR);
 
         assertThat(row.payloadType).isEqualTo(ResultPayload.PayloadType.INLINE_SWITCH);
         assertThat(unmarshalledPayload.getKey()).isEqualTo(URI);
@@ -124,8 +122,8 @@ public class IndexDataTest {
     @Test
     public void testRowWithInlinePayload_intentAddedToInlinePayload() {
         final String URI = "test uri";
-        final ComponentName component = new ComponentName(INTENT_TARGET_PACKAGE,
-                INTENT_TARGET_CLASS);
+        final ComponentName component =
+            new ComponentName(INTENT_TARGET_PACKAGE, INTENT_TARGET_CLASS);
         final Intent intent = new Intent();
         intent.setComponent(component);
 

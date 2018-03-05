@@ -26,7 +26,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.TwoTargetPreference;
@@ -37,10 +36,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppPreferenceControllerTest {
 
     private static final String TEST_APP_NAME = "test";
@@ -64,8 +61,7 @@ public class DefaultAppPreferenceControllerTest {
     public void updateState_hasDefaultApp_shouldUpdateAppName() {
         mController = new TestPreferenceController(mContext);
 
-        when(mController.mAppInfo.loadLabel())
-                .thenReturn(TEST_APP_NAME);
+        when(mController.mAppInfo.loadLabel()).thenReturn(TEST_APP_NAME);
 
         mController.updateState(mPreference);
 
@@ -95,7 +91,7 @@ public class DefaultAppPreferenceControllerTest {
 
         private DefaultAppInfo mAppInfo;
 
-        public TestPreferenceController(Context context) {
+        private TestPreferenceController(Context context) {
             super(context);
             mAppInfo = mock(DefaultAppInfo.class);
         }

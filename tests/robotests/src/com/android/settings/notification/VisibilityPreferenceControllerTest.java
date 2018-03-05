@@ -23,10 +23,8 @@ import static android.app.NotificationManager.IMPORTANCE_MIN;
 import static android.app.NotificationManager.VISIBILITY_NO_OVERRIDE;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_SECURE_NOTIFICATIONS;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_UNREDACTED_NOTIFICATIONS;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -45,11 +43,9 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.RestrictedListPreference;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowRestrictionUtils;
 import com.android.settingslib.RestrictedLockUtils;
@@ -65,13 +61,10 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        ShadowRestrictionUtils.class,
-})
+@Config(shadows = ShadowRestrictionUtils.class)
 public class VisibilityPreferenceControllerTest {
 
     private Context mContext;
@@ -86,7 +79,6 @@ public class VisibilityPreferenceControllerTest {
     @Mock
     private DevicePolicyManager mDm;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
 
     private VisibilityPreferenceController mController;
 

@@ -36,27 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Implements(UserManager.class)
+@Implements(value = UserManager.class, inheritImplementationMethods = true)
 public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager {
 
     private SparseArray<UserInfo> mUserInfos = new SparseArray<>();
-    private boolean mAdminUser;
     private final List<String> mRestrictions = new ArrayList<>();
     private final Map<String, List<EnforcingUser>> mRestrictionSources = new HashMap<>();
-
-
-    public void setIsAdminUser(boolean isAdminUser) {
-        mAdminUser = isAdminUser;
-    }
 
     @Resetter
     public void reset() {
         mRestrictions.clear();
-    }
-
-    @Implementation
-    public boolean isAdminUser() {
-        return mAdminUser;
     }
 
     public void setUserInfo(int userHandle, UserInfo userInfo) {
@@ -76,11 +65,6 @@ public class ShadowUserManager extends org.robolectric.shadows.ShadowUserManager
     @Implementation
     public int getCredentialOwnerProfile(@UserIdInt int userHandle) {
         return userHandle;
-    }
-
-    @Implementation
-    public static UserManager get(Context context) {
-        return (UserManager) context.getSystemService(Context.USER_SERVICE);
     }
 
     @Implementation

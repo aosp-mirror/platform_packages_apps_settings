@@ -17,32 +17,25 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.ThreadedRenderer;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class GpuViewUpdatesPreferenceControllerTest {
 
     @Mock
@@ -63,17 +56,12 @@ public class GpuViewUpdatesPreferenceControllerTest {
         mController.displayPreference(mPreferenceScreen);
     }
 
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
-    }
-
     @Test
     public void onPreferenceChanged_settingEnabled_turnOnGpuViewUpdates() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false /* default */);
+        final boolean mode = SystemProperties
+            .getBoolean(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -82,16 +70,15 @@ public class GpuViewUpdatesPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_turnOffGpuViewUpdates() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false /* default */);
+        final boolean mode = SystemProperties
+            .getBoolean(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        SettingsShadowSystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
-                Boolean.toString(true));
+        SystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, Boolean.toString(true));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -99,8 +86,8 @@ public class GpuViewUpdatesPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        SettingsShadowSystemProperties.set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY,
-                Boolean.toString(false));
+        SystemProperties
+            .set(ThreadedRenderer.DEBUG_DIRTY_REGIONS_PROPERTY, Boolean.toString(false));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);

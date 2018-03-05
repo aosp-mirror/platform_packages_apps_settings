@@ -17,9 +17,7 @@
 package com.android.settings.security.screenlock;
 
 import static android.provider.Settings.System.SCREEN_OFF_TIMEOUT;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -30,10 +28,8 @@ import android.content.Context;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
-import android.support.v7.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.TimeoutListPreference;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -51,8 +47,7 @@ import org.robolectric.annotation.Config;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowDevicePolicyManagerWrapper.class})
+@Config(shadows = ShadowDevicePolicyManagerWrapper.class)
 public class LockAfterTimeoutPreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;
@@ -131,7 +126,7 @@ public class LockAfterTimeoutPreferenceControllerTest {
         Settings.System.putInt(mContext.getContentResolver(), SCREEN_OFF_TIMEOUT, displayTimeout);
         ShadowDevicePolicyManagerWrapper.setMaximumTimeToLock(userId, adminTimeout);
 
-        mController.updateState((Preference) mPreference);
+        mController.updateState(mPreference);
 
         verify(mPreference).removeUnusableTimeouts(adminTimeout - displayTimeout, null);
     }

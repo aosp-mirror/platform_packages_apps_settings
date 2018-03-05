@@ -33,7 +33,6 @@ import android.os.UserManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.defaultapps.DefaultBrowserPreferenceController;
 import com.android.settings.applications.defaultapps.DefaultPhonePreferenceController;
 import com.android.settings.applications.defaultapps.DefaultSmsPreferenceController;
@@ -46,13 +45,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultAppSettingsTest {
 
     private Context mContext;
@@ -69,8 +66,7 @@ public class DefaultAppSettingsTest {
 
     @Test
     public void getPreferenceScreenResId_shouldUseAppDefaultSettingPrefLayout() {
-        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
-                R.xml.app_default_settings);
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.app_default_settings);
     }
 
     @Test

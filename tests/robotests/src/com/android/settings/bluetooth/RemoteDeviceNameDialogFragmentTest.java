@@ -31,7 +31,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -42,12 +41,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 import org.robolectric.util.FragmentTestUtil;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RemoteDeviceNameDialogFragmentTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -82,7 +79,7 @@ public class RemoteDeviceNameDialogFragmentTest {
     public void deviceNameDisplayIsCorrect() {
         String deviceName = "ABC Corp Headphones";
         AlertDialog dialog = startDialog(deviceName);
-        EditText editText = (EditText) dialog.findViewById(R.id.edittext);
+        EditText editText = dialog.findViewById(R.id.edittext);
         assertThat(editText.getText().toString()).isEqualTo(deviceName);
 
         // Make sure that the "rename" button isn't enabled since the text hasn't changed yet, but
@@ -108,7 +105,7 @@ public class RemoteDeviceNameDialogFragmentTest {
 
         // Once we modify the text, the positive button should be clickable, and clicking it should
         // cause a call to change the name.
-        EditText editText = (EditText) dialog.findViewById(R.id.edittext);
+        EditText editText = dialog.findViewById(R.id.edittext);
         editText.setText(deviceNameModified);
         assertThat(positiveButton.isEnabled()).isTrue();
         positiveButton.performClick();
@@ -124,7 +121,7 @@ public class RemoteDeviceNameDialogFragmentTest {
         // Modifying the text but then hitting cancel should not cause the name to change.
         Button negativeButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
         assertThat(negativeButton.isEnabled()).isTrue();
-        EditText editText = (EditText) dialog.findViewById(R.id.edittext);
+        EditText editText = dialog.findViewById(R.id.edittext);
         editText.setText(deviceNameModified);
         negativeButton.performClick();
         verify(mCachedDevice, never()).setName(anyString());

@@ -42,7 +42,6 @@ import android.os.UserManager;
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.ActionButtonPreference;
 import com.android.settings.widget.ActionButtonPreferenceTest;
@@ -59,15 +58,13 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AppButtonsPreferenceControllerTest {
+
     private static final String PACKAGE_NAME = "com.android.settings";
     private static final String RESOURCE_STRING = "string";
     private static final boolean ALL_USERS = false;
@@ -105,7 +102,7 @@ public class AppButtonsPreferenceControllerTest {
     private AppButtonsPreferenceController mController;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         FakeFeatureFactory.setupForTest();
@@ -113,7 +110,7 @@ public class AppButtonsPreferenceControllerTest {
         doReturn(mPackageManger).when(mSettingsActivity).getPackageManager();
         doReturn(mAm).when(mSettingsActivity).getSystemService(Context.ACTIVITY_SERVICE);
         doReturn(mAppEntry).when(mState).getEntry(anyString(), anyInt());
-        doReturn(mApplication).when(mSettingsActivity).getApplication();
+        when(mSettingsActivity.getApplication()).thenReturn(mApplication);
         when(mSettingsActivity.getResources().getString(anyInt())).thenReturn(RESOURCE_STRING);
 
         mController = spy(new AppButtonsPreferenceController(mSettingsActivity, mFragment,
@@ -132,12 +129,9 @@ public class AppButtonsPreferenceControllerTest {
         mController.mPackageInfo = mPackageInfo;
 
         final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-        Answer<Void> callable = new Answer<Void>() {
-            @Override
-            public Void answer(InvocationOnMock invocation) throws Exception {
-                mUninstallIntent = captor.getValue();
-                return null;
-            }
+        Answer<Void> callable = invocation -> {
+            mUninstallIntent = captor.getValue();
+            return null;
         };
         doAnswer(callable).when(mFragment).startActivityForResult(captor.capture(), anyInt());
     }
@@ -325,7 +319,6 @@ public class AppButtonsPreferenceControllerTest {
 
         verify(mButtonPrefs).setButton1Text(R.string.disable_text);
         assertThat(controllable).isTrue();
-
     }
 
     @Test
@@ -352,8 +345,8 @@ public class AppButtonsPreferenceControllerTest {
      * The test fragment which implements
      * {@link ButtonActionDialogFragment.AppButtonsDialogListener}
      */
-    public static class TestFragment extends Fragment implements
-            ButtonActionDialogFragment.AppButtonsDialogListener {
+    public static class TestFragment extends Fragment
+        implements ButtonActionDialogFragment.AppButtonsDialogListener {
 
         @Override
         public void handleDialogClick(int type) {

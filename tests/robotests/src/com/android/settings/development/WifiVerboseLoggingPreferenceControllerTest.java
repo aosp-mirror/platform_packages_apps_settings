@@ -24,7 +24,6 @@ import android.net.wifi.WifiManager;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -32,10 +31,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiVerboseLoggingPreferenceControllerTest {
     @Mock
     private Context mContext;
@@ -53,8 +50,8 @@ public class WifiVerboseLoggingPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         when(mContext.getSystemService(Context.WIFI_SERVICE)).thenReturn(mWifiManager);
         mController = new WifiVerboseLoggingPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -94,8 +91,8 @@ public class WifiVerboseLoggingPreferenceControllerTest {
     public void onDeveloperOptionsSwitchDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsSwitchDisabled();
 
-        verify(mWifiManager).enableVerboseLogging(
-                WifiVerboseLoggingPreferenceController.SETTING_VALUE_OFF);
+        verify(mWifiManager)
+            .enableVerboseLogging(WifiVerboseLoggingPreferenceController.SETTING_VALUE_OFF);
         verify(mPreference).setEnabled(false);
         verify(mPreference).setChecked(false);
     }

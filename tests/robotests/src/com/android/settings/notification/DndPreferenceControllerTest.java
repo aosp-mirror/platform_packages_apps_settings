@@ -21,11 +21,8 @@ import static android.app.NotificationManager.IMPORTANCE_DEFAULT;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_MIN;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
-import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -41,7 +38,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -54,11 +50,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DndPreferenceControllerTest {
 
     private Context mContext;
@@ -81,12 +75,12 @@ public class DndPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController = spy(new DndPreferenceController(mContext, mLifecycle, mBackend));
     }
 
     @Test
-    public void testNoCrashIfNoOnResume() throws Exception {
+    public void testNoCrashIfNoOnResume() {
         mController.isAvailable();
         mController.updateState(mock(RestrictedSwitchPreference.class));
         mController.onPreferenceChange(mock(RestrictedSwitchPreference.class), true);
@@ -94,7 +88,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfNotImportant_noVisEffects() throws Exception {
+    public void testIsAvailable_notIfNotImportant_noVisEffects() {
         when(mNm.getNotificationPolicy()).thenReturn(new NotificationManager.Policy(0, 0, 0, 0));
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_LOW);
@@ -104,7 +98,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_notIfNotImportant_visEffects() throws Exception {
+    public void testIsAvailable_notIfNotImportant_visEffects() {
         when(mNm.getNotificationPolicy()).thenReturn(new NotificationManager.Policy(0, 0, 0, 1));
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_MIN);
@@ -114,7 +108,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_importance_noVisEffects() throws Exception {
+    public void testIsAvailable_importance_noVisEffects() {
         when(mNm.getNotificationPolicy()).thenReturn(new NotificationManager.Policy(0, 0, 0, 0));
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = new NotificationChannel("", "", IMPORTANCE_DEFAULT);
@@ -124,7 +118,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_important_visEffects() throws Exception {
+    public void testIsAvailable_important_visEffects() {
         when(mNm.getNotificationPolicy()).thenReturn(new NotificationManager.Policy(0, 0, 0, 1));
         assertTrue(mNm.getNotificationPolicy().suppressedVisualEffects != 0);
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
@@ -135,7 +129,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_disabledByAdmin() throws Exception {
+    public void testUpdateState_disabledByAdmin() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
@@ -148,7 +142,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_notConfigurable() throws Exception {
+    public void testUpdateState_notConfigurable() {
         String lockedId = "locked";
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         appRow.lockedChannelId = lockedId;
@@ -163,7 +157,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_configurable() throws Exception {
+    public void testUpdateState_configurable() {
         NotificationBackend.AppRow appRow = new NotificationBackend.AppRow();
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.getId()).thenReturn("something");
@@ -176,7 +170,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_bypassDnd() throws Exception {
+    public void testUpdateState_bypassDnd() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBypassDnd()).thenReturn(true);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
@@ -188,7 +182,7 @@ public class DndPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_noBypassDnd() throws Exception {
+    public void testUpdateState_noBypassDnd() {
         NotificationChannel channel = mock(NotificationChannel.class);
         when(channel.canBypassDnd()).thenReturn(false);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);

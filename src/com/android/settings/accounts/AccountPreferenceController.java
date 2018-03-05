@@ -269,7 +269,7 @@ public class AccountPreferenceController extends AbstractPreferenceController
         for (int i = 0, size = mProfiles.size(); i < size; i++) {
             mProfiles.valueAt(i).pendingRemoval = true;
         }
-        if (mUm.isLinkedUser()) {
+        if (mUm.isRestrictedProfile()) {
             // Restricted user or similar
             UserInfo userInfo = mUm.getUserInfo(UserHandle.myUserId());
             updateProfileUi(userInfo);

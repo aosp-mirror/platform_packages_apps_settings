@@ -15,7 +15,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -24,11 +23,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocalBackupPasswordPreferenceControllerTest {
 
     @Mock
@@ -49,8 +46,8 @@ public class LocalBackupPasswordPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new LocalBackupPasswordPreferenceController(mContext));
         ReflectionHelpers.setField(mController, "mUserManager", mUserManager);
-        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
     }
 
     @Test

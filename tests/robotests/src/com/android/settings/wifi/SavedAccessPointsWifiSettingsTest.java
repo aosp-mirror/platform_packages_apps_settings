@@ -16,27 +16,28 @@
 
 package com.android.settings.wifi;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager.ActionListener;
 import android.os.Handler;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.wifi.AccessPoint;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SavedAccessPointsWifiSettingsTest {
 
     @Mock private WifiManagerWrapper mockWifiManager;
@@ -67,21 +68,21 @@ public class SavedAccessPointsWifiSettingsTest {
 
         mSettings.onForget(null);
 
-        verify(mHandler).sendEmptyMessage(mSettings.MSG_UPDATE_PREFERENCES);
+        verify(mHandler).sendEmptyMessage(SavedAccessPointsWifiSettings.MSG_UPDATE_PREFERENCES);
     }
 
     @Test
     public void onForget_onSuccess_shouldSendMessageToHandler() {
         mSettings.mForgetListener.onSuccess();
 
-        verify(mHandler).sendEmptyMessage(mSettings.MSG_UPDATE_PREFERENCES);
+        verify(mHandler).sendEmptyMessage(SavedAccessPointsWifiSettings.MSG_UPDATE_PREFERENCES);
     }
 
     @Test
     public void onForget_onFailure_shouldSendMessageToHandler() {
         mSettings.mForgetListener.onFailure(0);
 
-        verify(mHandler).sendEmptyMessage(mSettings.MSG_UPDATE_PREFERENCES);
+        verify(mHandler).sendEmptyMessage(SavedAccessPointsWifiSettings.MSG_UPDATE_PREFERENCES);
     }
 
     @Test
@@ -89,12 +90,13 @@ public class SavedAccessPointsWifiSettingsTest {
         mSettings.onSubmit(mockWifiDialog);
         verify(mockWifiManager).save(eq(mockWifiConfiguration), any(ActionListener.class));
     }
+
     @Test
     public void onForget_shouldInvokeForgetApi() {
         ReflectionHelpers.setField(mSettings, "mSelectedAccessPoint", mockAccessPoint);
         when(mockAccessPoint.getConfig()).thenReturn(mockWifiConfiguration);
         mSettings.onForget(mockWifiDialog);
-        verify(mockWifiManager).forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
+        verify(mockWifiManager)
+            .forget(eq(mockWifiConfiguration.networkId), any(ActionListener.class));
     }
 }
-

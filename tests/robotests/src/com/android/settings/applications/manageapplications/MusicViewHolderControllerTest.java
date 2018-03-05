@@ -17,7 +17,6 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +31,6 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 
@@ -44,11 +42,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MusicViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
@@ -57,20 +52,17 @@ public class MusicViewHolderControllerTest {
 
     private Context mContext;
     private MusicViewHolderController mController;
-    private VolumeInfo mVolume;
-    private View mView;
     private ApplicationViewHolder mHolder;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mVolume = new VolumeInfo("id", 0, null, "id");
-        mController = new MusicViewHolderController(mContext, mSource, mVolume.fsUuid,
-                new UserHandle(0));
+        final String fsUuid = new VolumeInfo("id", 0, null, "id").fsUuid;
+        mController = new MusicViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
 
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(view, false /* useStableHeight */);
     }
 
     @Test

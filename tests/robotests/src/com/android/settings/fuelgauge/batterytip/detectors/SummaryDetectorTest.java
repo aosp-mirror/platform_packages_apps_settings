@@ -17,12 +17,8 @@
 package com.android.settings.fuelgauge.batterytip.detectors;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
-import android.content.Context;
-
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -31,21 +27,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SummaryDetectorTest {
-    private Context mContext;
+
     private BatteryTipPolicy mPolicy;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mPolicy = spy(new BatteryTipPolicy(mContext));
+        mPolicy = spy(new BatteryTipPolicy(RuntimeEnvironment.application));
     }
 
     @Test

@@ -26,7 +26,6 @@ import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -36,34 +35,13 @@ import org.junit.runner.RunWith;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows=SettingsShadowBluetoothDevice.class)
+@Config(shadows = SettingsShadowBluetoothDevice.class)
 public class BluetoothDetailsControllerEventsTest extends BluetoothDetailsControllerTestBase {
-
-    static class TestController extends BluetoothDetailsController {
-        public TestController(Context context, PreferenceFragment fragment,
-                CachedBluetoothDevice device,
-                Lifecycle lifecycle) {
-            super(context, fragment, device, lifecycle);
-        }
-
-        @Override
-        public String getPreferenceKey() {
-            return null;
-        }
-
-        @Override
-        protected void init(PreferenceScreen screen) {}
-
-        @Override
-        protected void refresh() {}
-    }
 
     @Test
     public void pauseResumeEvents() {
-
-        TestController controller = spy(new TestController(mContext, mFragment, mCachedDevice,
-                mLifecycle));
+        TestController controller =
+            spy(new TestController(mContext, mFragment, mCachedDevice, mLifecycle));
         verify(mLifecycle).addObserver(any(BluetoothDetailsController.class));
 
         showScreen(controller);
@@ -80,5 +58,23 @@ public class BluetoothDetailsControllerEventsTest extends BluetoothDetailsContro
 
         // The init function should only have been called once
         verify(controller, times(1)).init(mScreen);
+    }
+
+    private static class TestController extends BluetoothDetailsController {
+        private TestController(Context context, PreferenceFragment fragment,
+            CachedBluetoothDevice device, Lifecycle lifecycle) {
+            super(context, fragment, device, lifecycle);
+        }
+
+        @Override
+        public String getPreferenceKey() {
+            return null;
+        }
+
+        @Override
+        protected void init(PreferenceScreen screen) {}
+
+        @Override
+        protected void refresh() {}
     }
 }

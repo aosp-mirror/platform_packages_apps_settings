@@ -26,7 +26,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.ApplicationsState;
@@ -35,11 +34,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class UsageAccessDetailsTest {
 
     private FakeFeatureFactory mFeatureFactory;
@@ -50,7 +47,7 @@ public class UsageAccessDetailsTest {
         MockitoAnnotations.initMocks(this);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mFragment = new UsageAccessDetails();
-        mFragment.onAttach(ShadowApplication.getInstance().getApplicationContext());
+        mFragment.onAttach(RuntimeEnvironment.application);
     }
 
     @Test

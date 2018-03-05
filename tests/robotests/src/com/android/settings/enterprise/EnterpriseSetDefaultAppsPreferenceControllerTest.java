@@ -31,7 +31,6 @@ import android.os.UserHandle;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.applications.UserAppInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -44,15 +43,11 @@ import org.mockito.Answers;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * Tests for {@link EnterpriseSetDefaultAppsPreferenceController}.
- */
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class EnterpriseSetDefaultAppsPreferenceControllerTest {
 
     private static final String KEY_DEFAULT_APPS = "number_enterprise_set_default_apps";

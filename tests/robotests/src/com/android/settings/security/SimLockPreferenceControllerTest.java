@@ -32,7 +32,6 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -42,14 +41,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SimLockPreferenceControllerTest {
 
     @Mock
@@ -63,26 +60,22 @@ public class SimLockPreferenceControllerTest {
     @Mock
     private PreferenceScreen mScreen;
 
-    private Context mContext;
     private SimLockPreferenceController mController;
     private Preference mPreference;
-
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE,
                 mSubscriptionManager);
         shadowApplication.setSystemService(Context.CARRIER_CONFIG_SERVICE, mCarrierManager);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUserManager);
         shadowApplication.setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
-        mController = new SimLockPreferenceController(mContext);
-        mPreference = new Preference(mContext);
+        mController = new SimLockPreferenceController(RuntimeEnvironment.application);
+        mPreference = new Preference(RuntimeEnvironment.application);
         mPreference.setKey(mController.getPreferenceKey());
-        when(mScreen.findPreference(mController.getPreferenceKey()))
-                .thenReturn(mPreference);
+        when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
     }
 
     @Test
@@ -144,8 +137,7 @@ public class SimLockPreferenceControllerTest {
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
-        when(mTelephonyManager.hasIccCard(anyInt()))
-                .thenReturn(true);
+        when(mTelephonyManager.hasIccCard(anyInt())).thenReturn(true);
         when(mSubscriptionManager.getActiveSubscriptionInfoList())
                 .thenReturn(subscriptionInfoList);
     }
@@ -154,10 +146,8 @@ public class SimLockPreferenceControllerTest {
         final List<SubscriptionInfo> subscriptionInfoList = new ArrayList<>();
         SubscriptionInfo info = mock(SubscriptionInfo.class);
         subscriptionInfoList.add(info);
-        when(mTelephonyManager.getSimState(anyInt()))
-                .thenReturn(SIM_STATE_READY);
+        when(mTelephonyManager.getSimState(anyInt())).thenReturn(SIM_STATE_READY);
         when(mSubscriptionManager.getActiveSubscriptionInfoList())
                 .thenReturn(subscriptionInfoList);
     }
-
 }

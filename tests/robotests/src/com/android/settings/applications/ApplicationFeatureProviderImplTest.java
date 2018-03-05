@@ -16,6 +16,9 @@
 
 package com.android.settings.applications;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.when;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
@@ -28,10 +31,8 @@ import android.os.Build;
 import android.os.UserHandle;
 import android.os.UserManager;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.ApplicationTestUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -41,22 +42,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
-
 /**
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowUserManager.class})
 public final class ApplicationFeatureProviderImplTest {
 
     private final int MAIN_USER_ID = 0;
@@ -71,11 +66,16 @@ public final class ApplicationFeatureProviderImplTest {
 
     private final String PERMISSION = "some.permission";
 
-    private @Mock UserManager mUserManager;
-    private @Mock Context mContext;
-    private @Mock PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Context mContext;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManagerWrapper mPackageManagerService;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
 
     private ApplicationFeatureProvider mProvider;
 
@@ -249,8 +249,7 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Test
     public void getKeepEnabledPackages_shouldContainNothing() {
-        assertThat(mProvider.getKeepEnabledPackages())
-                .isEmpty();
+        assertThat(mProvider.getKeepEnabledPackages()).isEmpty();
     }
 
     private void setUpUsersAndInstalledApps() {

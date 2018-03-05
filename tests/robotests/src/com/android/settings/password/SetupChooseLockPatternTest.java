@@ -17,7 +17,6 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
@@ -30,13 +29,11 @@ import android.widget.Button;
 
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
-import com.android.settings.TestConfig;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
 import com.android.settings.password.ChooseLockPattern.IntentBuilder;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import org.junit.Before;
@@ -46,26 +43,21 @@ import org.robolectric.Robolectric;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
-import org.robolectric.shadows.ShadowPackageManager.ComponentState;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResourcesImpl.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                ShadowEventLogWriter.class,
-                ShadowUtils.class
-        })
+@Config(shadows = {
+    SettingsShadowResourcesImpl.class,
+    SettingsShadowResources.SettingsShadowTheme.class,
+    ShadowUtils.class
+})
 public class SetupChooseLockPatternTest {
 
     private SetupChooseLockPattern mActivity;
 
     @Before
     public void setUp() {
-        Shadows.shadowOf(application.getPackageManager()).setComponentEnabledSetting(
+        application.getPackageManager().setComponentEnabledSetting(
                 new ComponentName(application, SetupRedactionInterstitial.class),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                 PackageManager.DONT_KILL_APP);
@@ -84,11 +76,11 @@ public class SetupChooseLockPatternTest {
     public void chooseLockSaved_shouldEnableRedactionInterstitial() {
         findFragment(mActivity).onChosenLockSaveFinished(false, null);
 
-        ComponentState redactionComponentState =
-                Shadows.shadowOf(application.getPackageManager()).getComponentState(
-                        new ComponentName(application, SetupRedactionInterstitial.class));
-        assertThat(redactionComponentState.newState).named("Redaction component state")
-                .isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        ShadowPackageManager spm = Shadows.shadowOf(application.getPackageManager());
+        ComponentName cname = new ComponentName(application, SetupRedactionInterstitial.class);
+        final int componentEnabled = spm.getComponentEnabledSettingFlags(cname)
+            & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+        assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
     @Config(qualifiers = "sw400dp")

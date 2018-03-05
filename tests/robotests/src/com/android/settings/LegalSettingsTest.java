@@ -16,7 +16,6 @@
 package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
@@ -34,7 +33,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LegalSettingsTest {
 
     private Context mContext;
@@ -61,11 +59,10 @@ public class LegalSettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
-        final List<String> niks = LegalSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+        final List<String> niks =
+            LegalSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
 
-        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context,
-                R.xml.about_legal);
+        final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, R.xml.about_legal);
 
         assertThat(keys).containsAllIn(niks);
     }

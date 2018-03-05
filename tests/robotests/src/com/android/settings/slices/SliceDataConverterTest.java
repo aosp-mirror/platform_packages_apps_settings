@@ -17,12 +17,8 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 
-import android.content.Context;
-
-import com.android.settings.TestConfig;
 import com.android.settings.search.FakeIndexProvider;
 import com.android.settings.search.SearchFeatureProvider;
 import com.android.settings.search.SearchFeatureProviderImpl;
@@ -39,7 +35,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SliceDataConverterTest {
 
     private final String fakeKey = "key";
@@ -49,16 +44,13 @@ public class SliceDataConverterTest {
     private final String fakeFragmentClassName = FakeIndexProvider.class.getName();
     private final String fakeControllerName = FakePreferenceController.class.getName();
 
-    Context mContext;
-
-    SliceDataConverter mSliceDataConverter;
-    SearchFeatureProvider mSearchFeatureProvider;
+    private SliceDataConverter mSliceDataConverter;
+    private SearchFeatureProvider mSearchFeatureProvider;
     private FakeFeatureFactory mFakeFeatureFactory;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mSliceDataConverter = new SliceDataConverter(mContext);
+        mSliceDataConverter = new SliceDataConverter(RuntimeEnvironment.application);
         mSearchFeatureProvider = new SearchFeatureProviderImpl();
         mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
         mFakeFeatureFactory.searchFeatureProvider = mSearchFeatureProvider;
@@ -66,8 +58,7 @@ public class SliceDataConverterTest {
 
     @After
     public void cleanUp() {
-        mFakeFeatureFactory.searchFeatureProvider = mock(
-                SearchFeatureProvider.class);
+        mFakeFeatureFactory.searchFeatureProvider = mock(SearchFeatureProvider.class);
     }
 
     @Test

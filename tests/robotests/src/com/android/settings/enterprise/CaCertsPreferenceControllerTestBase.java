@@ -84,5 +84,4 @@ public abstract class CaCertsPreferenceControllerTestBase {
     abstract String getPreferenceKey();
 
     abstract CaCertsPreferenceControllerBase createController();
-
 }

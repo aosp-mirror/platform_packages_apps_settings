@@ -16,8 +16,6 @@
 package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.nullable;
@@ -27,6 +25,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -36,7 +35,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.datausage.AppStateDataUsageBridge.DataUsageState;
 import com.android.settings.datausage.UnrestrictedDataAccess.AccessPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
@@ -56,10 +54,7 @@ import org.robolectric.util.ReflectionHelpers;
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowRestrictedLockUtils.class
-        })
+@Config(shadows = ShadowRestrictedLockUtils.class)
 public class UnrestrictedDataAccessTest {
 
     @Mock
@@ -111,11 +106,11 @@ public class UnrestrictedDataAccessTest {
     public void testOnRebuildComplete_restricted_shouldBeDisabled() {
         final Context context = RuntimeEnvironment.application;
         doReturn(context).when(mFragment).getContext();
-        doReturn(context).when(mPreferenceManager).getContext();
+        when(mPreferenceManager.getContext()).thenReturn(context);
         doReturn(true).when(mFragment).shouldAddPreference(any(AppEntry.class));
         doNothing().when(mFragment).setLoading(anyBoolean(), anyBoolean());
         doReturn(mPreferenceScreen).when(mFragment).getPreferenceScreen();
-        doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
         ReflectionHelpers.setField(mFragment, "mDataSaverBackend", mDataSaverBackend);
 
         final String testPkg1 = "com.example.one";
@@ -160,8 +155,7 @@ public class UnrestrictedDataAccessTest {
             info.packageName = packageNames[i];
             info.uid = Process.FIRST_APPLICATION_UID + i;
             info.sourceDir = info.packageName;
-            final AppEntry appEntry = spy(new AppEntry(RuntimeEnvironment.application,
-                    info, i));
+            final AppEntry appEntry = spy(new AppEntry(RuntimeEnvironment.application, info, i));
             appEntry.extraInfo = new DataUsageState(false, false);
             doNothing().when(appEntry).ensureLabel(any(Context.class));
             ReflectionHelpers.setField(appEntry, "info", info);

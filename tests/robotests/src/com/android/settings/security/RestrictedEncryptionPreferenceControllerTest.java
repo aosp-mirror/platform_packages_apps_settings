@@ -22,7 +22,6 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.UserManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -35,10 +34,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUserManager.class
-        })
+@Config(shadows = ShadowUserManager.class)
 public class RestrictedEncryptionPreferenceControllerTest {
 
     private Context mContext;

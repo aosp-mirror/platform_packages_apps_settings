@@ -18,7 +18,6 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.ContentValues;
@@ -26,7 +25,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.FakeIndexProvider;
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -36,10 +34,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SlicesDatabaseAccessorTest {
 
     private final String fakeTitle = "title";

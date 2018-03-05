@@ -17,7 +17,6 @@
 package com.android.settings.applications.manageapplications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.nullable;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,7 +30,6 @@ import android.text.format.Formatter;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.StorageStatsSource;
 
@@ -43,10 +41,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PhotosViewHolderControllerTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
@@ -55,42 +51,37 @@ public class PhotosViewHolderControllerTest {
 
     private Context mContext;
     private PhotosViewHolderController mController;
-    private VolumeInfo mVolume;
-    private View mView;
     private ApplicationViewHolder mHolder;
-
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mVolume = new VolumeInfo("id", 0, null, "id");
-        mController =
-                new PhotosViewHolderController(
-                        mContext, mSource, mVolume.fsUuid, new UserHandle(0));
+        final String fsUuid = new VolumeInfo("id", 0, null, "id").fsUuid;
+        mController = new PhotosViewHolderController(mContext, mSource, fsUuid, new UserHandle(0));
 
-        mView = ApplicationViewHolder.newView(new FrameLayout(mContext));
-        mHolder = new ApplicationViewHolder(mView, false /* useStableHeight */);
+        final View view = ApplicationViewHolder.newView(new FrameLayout(mContext));
+        mHolder = new ApplicationViewHolder(view, false /* useStableHeight */);
     }
 
     @Test
     public void storageShouldBeZeroBytesIfQueriedBeforeStorageQueryFinishes() {
         mController.setupView(mHolder);
 
-        assertThat(mHolder.mSummary.getText().toString()).isEqualTo(
-                Formatter.formatFileSize(mContext, 0));
+        assertThat(mHolder.mSummary.getText().toString())
+            .isEqualTo(Formatter.formatFileSize(mContext, 0));
     }
 
     @Test
     public void storageShouldRepresentStorageStatsQuery() throws Exception {
         when(mSource.getExternalStorageStats(nullable(String.class), nullable(UserHandle.class)))
-                .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
+            .thenReturn(new StorageStatsSource.ExternalStorageStats(1, 0, 1, 10, 0));
 
         mController.queryStats();
         mController.setupView(mHolder);
 
-        assertThat(mHolder.mSummary.getText().toString()).isEqualTo(
-                Formatter.formatFileSize(mContext, 11));
+        assertThat(mHolder.mSummary.getText().toString())
+            .isEqualTo(Formatter.formatFileSize(mContext, 11));
     }
 
     @Test

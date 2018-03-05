@@ -16,35 +16,30 @@
 
 package com.android.settings.datetime;
 
-
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Answers.RETURNS_DEEP_STUBS;
 
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v7.preference.PreferenceScreen;
 import android.text.format.DateFormat;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import java.util.List;
-import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
+import java.util.List;
+import java.util.Locale;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AutoTimeFormatPreferenceControllerTest {
 
-    @Mock(answer = RETURNS_DEEP_STUBS)
-    private PreferenceScreen mScreen;
     @Mock
     private UpdateTimeAndDateCallback mCallback;
 
@@ -57,7 +52,7 @@ public class AutoTimeFormatPreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mApplication = ShadowApplication.getInstance();
-        mContext = mApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
     }
 
     @Test
@@ -158,7 +153,7 @@ public class AutoTimeFormatPreferenceControllerTest {
     }
 
     /**
-     * Extend class under test to change {@link #is24HourLocale()} to not call
+     * Extend class under test to change {@link #is24HourLocale} to not call
      * {@link DateFormat#is24HourLocale(Locale)} because that's not available in roboelectric.
      */
     private static class TestAutoTimeFormatPreferenceController
@@ -166,7 +161,7 @@ public class AutoTimeFormatPreferenceControllerTest {
 
         private boolean is24HourLocale = false;
 
-        public TestAutoTimeFormatPreferenceController(Context context,
+        private TestAutoTimeFormatPreferenceController(Context context,
               UpdateTimeAndDateCallback callback) {
             super(context, callback);
         }

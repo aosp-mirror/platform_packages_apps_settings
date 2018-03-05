@@ -45,6 +45,7 @@ import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.wrapper.RecoverySystemWrapper;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.RestrictedLockUtils;
+import com.android.settingslib.utils.ThreadUtils;
 
 import static com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
@@ -158,7 +159,7 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
     void esimFactoryReset(Context context, String packageName) {
         if (mEraseEsim) {
             mEraseEsimTask = new EraseEsimAsyncTask(context, packageName);
-            mEraseEsimTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            mEraseEsimTask.execute();
         } else {
             Toast.makeText(context, R.string.reset_network_complete_toast, Toast.LENGTH_SHORT)
                     .show();

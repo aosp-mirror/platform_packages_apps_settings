@@ -38,7 +38,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.EnterpriseDefaultApps;
 import com.android.settings.applications.UserAppInfo;
 import com.android.settings.testutils.ApplicationTestUtils;
@@ -51,15 +50,15 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
+
     private static final int USER_ID = 0;
     private static final int APP_UID = 0;
 
@@ -83,8 +82,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowApplication shadowContext = ShadowApplication.getInstance();
-        mContext = spy(shadowContext.getApplicationContext());
+        mContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFragment.getPreferenceScreen()).thenReturn(mScreen);
         when(mPrefenceManager.getContext()).thenReturn(mContext);
@@ -109,7 +107,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
         final ApplicationInfo appInfo2 = ApplicationTestUtils.buildInfo(APP_UID, APP_2, 0, 0);
 
         when(mFeatureFactory.userFeatureProvider.getUserProfiles())
-                .thenReturn(Arrays.asList(new UserHandle(USER_ID)));
+                .thenReturn(Collections.singletonList(new UserHandle(USER_ID)));
         when(mFeatureFactory.enterprisePrivacyFeatureProvider.isInCompMode()).thenReturn(false);
         when(mFeatureFactory.applicationFeatureProvider
                 .findPersistentPreferredActivities(anyInt(), any()))
@@ -117,7 +115,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
         when(mFeatureFactory.applicationFeatureProvider
                 .findPersistentPreferredActivities(eq(USER_ID),
                         eq(EnterpriseDefaultApps.BROWSER.getIntents())))
-                .thenReturn(Arrays.asList(new UserAppInfo(user, appInfo1)));
+                .thenReturn(Collections.singletonList(new UserAppInfo(user, appInfo1)));
         when(mFeatureFactory.applicationFeatureProvider
                 .findPersistentPreferredActivities(eq(USER_ID),
                         eq(EnterpriseDefaultApps.PHONE.getIntents()))).thenReturn(
@@ -140,7 +138,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
     @Test
     public void isAvailable() {
         when(mFeatureFactory.userFeatureProvider.getUserProfiles())
-                .thenReturn(Arrays.asList(new UserHandle(USER_ID)));
+                .thenReturn(Collections.singletonList(new UserHandle(USER_ID)));
         when(mFeatureFactory.applicationFeatureProvider
                 .findPersistentPreferredActivities(anyInt(), any()))
                 .thenReturn(Collections.emptyList());
@@ -153,7 +151,7 @@ public class EnterpriseSetDefaultAppsListPreferenceControllerTest {
     @Test
     public void getPreferenceKey() {
         when(mFeatureFactory.userFeatureProvider.getUserProfiles())
-                .thenReturn(Arrays.asList(new UserHandle(USER_ID)));
+                .thenReturn(Collections.singletonList(new UserHandle(USER_ID)));
         when(mFeatureFactory.applicationFeatureProvider
                 .findPersistentPreferredActivities(anyInt(), any()))
                 .thenReturn(Collections.emptyList());

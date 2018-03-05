@@ -16,12 +16,10 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 
 import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -35,7 +33,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiSettingsTest {
 
     private Context mContext;
@@ -49,8 +46,7 @@ public class WifiSettingsTest {
     @Test
     public void testSearchIndexProvider_shouldIndexFragmentTitle() {
         final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
+            WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).key).isEqualTo(WifiSettings.DATA_KEY_REFERENCE);
@@ -60,8 +56,7 @@ public class WifiSettingsTest {
     @Config(qualifiers = "mcc999")
     public void testSearchIndexProvider_ifWifiSettingsNotVisible_shouldNotIndexFragmentTitle() {
         final List<SearchIndexableRaw> indexRes =
-                WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext,
-                        true /* enabled */);
+            WifiSettings.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(mContext, true /* enabled */);
 
         assertThat(indexRes).isEmpty();
     }

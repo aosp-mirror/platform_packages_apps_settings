@@ -16,22 +16,17 @@
 
 package com.android.settings.development;
 
-
-import static com.android.settings.development.BluetoothDelayReportsPreferenceController
-        .BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY;
-
+import static com.android.settings.development.BluetoothDelayReportsPreferenceController.BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,12 +34,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class BluetoothDelayReportsPreferenceControllerTest {
 
     @Mock
@@ -60,8 +51,8 @@ public class BluetoothDelayReportsPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mPreference = new SwitchPreference(mContext);
         mController = spy(new BluetoothDelayReportsPreferenceController(mContext));
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -69,7 +60,7 @@ public class BluetoothDelayReportsPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_turnOnDelayReports() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
+        final boolean mode = SystemProperties.getBoolean(
                 BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
@@ -79,7 +70,7 @@ public class BluetoothDelayReportsPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_turnOffDelayReports() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
+        final boolean mode = SystemProperties.getBoolean(
                 BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
@@ -87,7 +78,7 @@ public class BluetoothDelayReportsPreferenceControllerTest {
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
+        SystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
                 Boolean.toString(true));
         mController.updateState(mPreference);
 
@@ -96,7 +87,7 @@ public class BluetoothDelayReportsPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        SettingsShadowSystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
+        SystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
                 Boolean.toString(false));
         mController.updateState(mPreference);
 
@@ -107,7 +98,7 @@ public class BluetoothDelayReportsPreferenceControllerTest {
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
+        final boolean mode = SystemProperties.getBoolean(
                 BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();

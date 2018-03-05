@@ -19,10 +19,8 @@ package com.android.settings.security;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.content.pm.PackageManager;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -31,17 +29,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SecurityFeatureProviderImplTest {
 
     private Context mContext;
     private SecurityFeatureProviderImpl mImpl;
 
     @Before
-    public void setUp() throws PackageManager.NameNotFoundException {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mImpl = new SecurityFeatureProviderImpl();
@@ -62,5 +58,4 @@ public class SecurityFeatureProviderImplTest {
 
         assertThat(l1).isSameAs(l2);
     }
-
 }

@@ -18,19 +18,13 @@ package com.android.settings.enterprise;
 
 import static org.mockito.Mockito.when;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link FailedPasswordWipeManagedProfilePreferenceController}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class FailedPasswordWipeManagedProfilePreferenceControllerTest extends
-        FailedPasswordWipePreferenceControllerTestBase {
+public final class FailedPasswordWipeManagedProfilePreferenceControllerTest
+    extends FailedPasswordWipePreferenceControllerTestBase {
 
     public FailedPasswordWipeManagedProfilePreferenceControllerTest() {
         super("failed_password_wipe_managed_profile");

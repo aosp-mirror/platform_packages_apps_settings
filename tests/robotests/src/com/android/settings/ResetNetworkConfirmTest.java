@@ -16,9 +16,7 @@
 
 package com.android.settings;
 
-
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
@@ -38,13 +36,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-    manifest = TestConfig.MANIFEST_PATH,
-    sdk = TestConfig.SDK_VERSION
-)
 public class ResetNetworkConfirmTest {
 
     private Activity mActivity;
@@ -65,16 +58,10 @@ public class ResetNetworkConfirmTest {
     @Test
     public void testResetNetworkData_resetEsim() {
         mResetNetworkConfirm.mEraseEsim = true;
-        doReturn(true)
-                .when(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
+        doReturn(true).when(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
 
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
-        try {
-            // Waiting the Async task finished
-            Thread.sleep(10000); // 10 sec
-        } catch (InterruptedException ignore) {
-
-        }
+        Robolectric.getBackgroundThreadScheduler().advanceToLastPostedRunnable();
 
         Assert.assertNotNull(mResetNetworkConfirm.mEraseEsimTask);
         verify(mRecoverySystem).wipeEuiccData(any(Context.class), anyString());
@@ -87,7 +74,6 @@ public class ResetNetworkConfirmTest {
         mResetNetworkConfirm.esimFactoryReset(mActivity, "" /* packageName */);
 
         Assert.assertNull(mResetNetworkConfirm.mEraseEsimTask);
-        verify(mRecoverySystem, never())
-                .wipeEuiccData(any(Context.class), anyString());
+        verify(mRecoverySystem, never()).wipeEuiccData(any(Context.class), anyString());
     }
 }

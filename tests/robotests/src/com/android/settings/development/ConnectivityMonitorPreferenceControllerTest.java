@@ -17,11 +17,8 @@
 package com.android.settings.development;
 
 import static com.android.settings.development.ConnectivityMonitorPreferenceController.ENG_BUILD;
-import static com.android.settings.development.ConnectivityMonitorPreferenceController
-        .USERDEBUG_BUILD;
-
+import static com.android.settings.development.ConnectivityMonitorPreferenceController.USERDEBUG_BUILD;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -30,9 +27,7 @@ import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,8 +38,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
-        SettingsShadowSystemProperties.class)
 public class ConnectivityMonitorPreferenceControllerTest {
 
     private static final String USER_BUILD = "user";
@@ -60,7 +53,6 @@ public class ConnectivityMonitorPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        SettingsShadowSystemProperties.clear();
         mContext = RuntimeEnvironment.application;
         mController = new ConnectivityMonitorPreferenceController(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -69,24 +61,21 @@ public class ConnectivityMonitorPreferenceControllerTest {
 
     @Test
     public void isAvailable_trueShowFlagWithUserdebugBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_trueShowFlagWithEngBuild_shouldReturnTrue() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, ENG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, ENG_BUILD);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_trueShowFlagWithUserBuild_shouldReturnFalse() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USER_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USER_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -94,8 +83,7 @@ public class ConnectivityMonitorPreferenceControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_falseShowFlagWithUserdebugBuild_shouldReturnFalse() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -103,8 +91,7 @@ public class ConnectivityMonitorPreferenceControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_falseShowFlagWithEngBuild_shouldReturnFalse() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, ENG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, ENG_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -112,19 +99,16 @@ public class ConnectivityMonitorPreferenceControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void isAvailable_falseShowFlagWithUserBuild_shouldReturnFalse() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USER_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USER_BUILD);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void updateState_connectivityMonitorEnabled_shouldCheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+        SystemProperties.set(ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
                 ConnectivityMonitorPreferenceController.ENABLED_STATUS);
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 
@@ -133,11 +117,9 @@ public class ConnectivityMonitorPreferenceControllerTest {
 
     @Test
     public void updateState_connectivityMonitorUserEnabled_shouldCheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+        SystemProperties.set(ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
                 ConnectivityMonitorPreferenceController.USER_ENABLED_STATUS);
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 
@@ -146,11 +128,9 @@ public class ConnectivityMonitorPreferenceControllerTest {
 
     @Test
     public void updateState_connectivityMonitorDisabled_shouldUncheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+        SystemProperties.set(ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
                 ConnectivityMonitorPreferenceController.DISABLED_STATUS);
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 
@@ -159,11 +139,9 @@ public class ConnectivityMonitorPreferenceControllerTest {
 
     @Test
     public void updateState_connectivityMonitorUserDisabled_shouldUncheckedPreference() {
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
+        SystemProperties.set(ConnectivityMonitorPreferenceController.PROPERTY_CONNECTIVITY_MONITOR,
                 ConnectivityMonitorPreferenceController.USER_DISABLED_STATUS);
-        SettingsShadowSystemProperties.set(
-                ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
+        SystemProperties.set(ConnectivityMonitorPreferenceController.BUILD_TYPE, USERDEBUG_BUILD);
 
         mController.updateState(mPreference);
 

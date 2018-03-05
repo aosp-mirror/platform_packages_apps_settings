@@ -17,9 +17,7 @@
 package com.android.settings.applications;
 
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.argThat;
@@ -39,8 +37,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
 import org.junit.Before;
@@ -49,7 +45,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.ArrayList;
@@ -57,12 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
-/**
- * Tests for {@link InstalledAppCounter}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowUserManager.class})
 public final class InstalledAppCounterTest {
 
     private final String APP_1 = "app1";
@@ -137,10 +127,9 @@ public final class InstalledAppCounterTest {
         // Verify that installed packages were retrieved the current user and the user's managed
         // profile only.
         verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MAIN_USER_ID));
-        verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(),
-                eq(MANAGED_PROFILE_ID));
-        verify(mPackageManager, atLeast(0)).queryIntentActivitiesAsUser(any(Intent.class), anyInt(),
-                anyInt());
+        verify(mPackageManager).getInstalledApplicationsAsUser(anyInt(), eq(MANAGED_PROFILE_ID));
+        verify(mPackageManager, atLeast(0))
+            .queryIntentActivitiesAsUser(any(Intent.class), anyInt(), anyInt());
         verifyNoMoreInteractions(mPackageManager);
 
         // Count once more, considering apps installed by enterprise policy only.
@@ -244,7 +233,7 @@ public final class InstalledAppCounterTest {
 
 
     private class InstalledAppCounterTestable extends InstalledAppCounter {
-        public InstalledAppCounterTestable(int installReason) {
+        private InstalledAppCounterTestable(int installReason) {
             super(mContext, installReason, mPackageManager);
         }
 

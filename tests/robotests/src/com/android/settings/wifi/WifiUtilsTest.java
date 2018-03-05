@@ -16,18 +16,14 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiUtilsTest {
 
     @Test
@@ -48,5 +44,4 @@ public class WifiUtilsTest {
         assertThat(WifiUtils.isPasswordValid("1234567890")).isTrue();
         assertThat(WifiUtils.isPasswordValid(longPassword)).isFalse();
     }
-
 }

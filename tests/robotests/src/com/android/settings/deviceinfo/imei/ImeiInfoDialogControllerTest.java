@@ -23,7 +23,6 @@ import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_I
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MEID_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_MIN_NUMBER_VALUE;
 import static com.android.settings.deviceinfo.imei.ImeiInfoDialogController.ID_PRL_VERSION_VALUE;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -36,7 +35,6 @@ import android.content.Context;
 import android.telephony.SubscriptionInfo;
 import android.telephony.TelephonyManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -45,11 +43,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ImeiInfoDialogControllerTest {
 
     private static final String PRL_VERSION = "some_prl_version";

@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.anomaly;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
@@ -31,11 +30,10 @@ import android.os.UserManager;
 
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.anomaly.checker.BluetoothScanAnomalyDetector;
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.checker.WakeLockAnomalyDetector;
 import com.android.settings.fuelgauge.anomaly.checker.WakeupAlarmAnomalyDetector;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,15 +41,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION
-)
 public class AnomalyLoaderTest {
+
     private static final String PACKAGE_NAME = "com.android.settings";
     private static final CharSequence DISPLAY_NAME = "Settings";
     private static final int UID = 0;
@@ -94,14 +90,14 @@ public class AnomalyLoaderTest {
         mWakeupAlarmAnomalies = new ArrayList<>();
         mWakeupAlarmAnomaly = createAnomaly(Anomaly.AnomalyType.WAKEUP_ALARM);
         mWakeupAlarmAnomalies.add(mWakeupAlarmAnomaly);
-        doReturn(mWakeupAlarmAnomalies).when(mWakeupAlarmAnomalyDetector).detectAnomalies(any(),
-                any());
+        doReturn(mWakeupAlarmAnomalies)
+            .when(mWakeupAlarmAnomalyDetector).detectAnomalies(any(), any());
 
         mBluetoothScanAnomalies = new ArrayList<>();
         mBluetoothScanAnomaly = createAnomaly(Anomaly.AnomalyType.BLUETOOTH_SCAN);
         mBluetoothScanAnomalies.add(mBluetoothScanAnomaly);
-        doReturn(mBluetoothScanAnomalies).when(mBluetoothScanAnomalyDetector).detectAnomalies(any(),
-                any());
+        doReturn(mBluetoothScanAnomalies)
+            .when(mBluetoothScanAnomalyDetector).detectAnomalies(any(), any());
 
         mAnomalyLoader = new AnomalyLoader(mContext, mBatteryStatsHelper, null,
                 mAnomalyDetectionPolicy);
@@ -120,8 +116,8 @@ public class AnomalyLoaderTest {
 
         List<Anomaly> anomalies = mAnomalyLoader.loadInBackground();
 
-        assertThat(anomalies).containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly,
-                mBluetoothScanAnomaly);
+        assertThat(anomalies)
+            .containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly, mBluetoothScanAnomaly);
     }
 
     private Anomaly createAnomaly(@Anomaly.AnomalyType int type) {
@@ -137,7 +133,7 @@ public class AnomalyLoaderTest {
     public void testGenerateFakeData() {
         List<Anomaly> anomalies = mAnomalyLoader.generateFakeData();
 
-        assertThat(anomalies).containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly,
-                mBluetoothScanAnomaly);
+        assertThat(anomalies)
+            .containsExactly(mWakeLockAnomaly, mWakeupAlarmAnomaly, mBluetoothScanAnomaly);
     }
 }

@@ -28,7 +28,6 @@ import android.nfc.NfcAdapter;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.nfc.PaymentBackend;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,11 +37,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DefaultPaymentSettingsPreferenceControllerTest {
 
     @Mock

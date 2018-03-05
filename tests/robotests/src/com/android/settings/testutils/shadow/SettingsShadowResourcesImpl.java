@@ -30,6 +30,7 @@ import org.robolectric.shadows.ShadowResourcesImpl;
 
 @Implements(
         value = ResourcesImpl.class,
+        inheritImplementationMethods = true,
         isInAndroidSdk = false,
         minSdk = 26
 )

@@ -16,31 +16,6 @@
 
 package com.android.settings.applications;
 
-import android.app.admin.DevicePolicyManager;
-import android.content.pm.PackageManager;
-import android.content.pm.UserInfo;
-import android.os.Build;
-import android.os.UserHandle;
-import android.os.UserManager;
-
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
-import com.android.settings.wrapper.DevicePolicyManagerWrapper;
-import com.android.settings.wrapper.IPackageManagerWrapper;
-import com.android.settingslib.wrapper.PackageManagerWrapper;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
@@ -51,11 +26,30 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-/**
- * Tests for {@link AppWithAdminGrantedPermissionsLister}.
- */
+import android.app.admin.DevicePolicyManager;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Build;
+import android.os.UserHandle;
+import android.os.UserManager;
+
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.wrapper.DevicePolicyManagerWrapper;
+import com.android.settings.wrapper.IPackageManagerWrapper;
+import com.android.settingslib.wrapper.PackageManagerWrapper;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.robolectric.shadows.ShadowApplication;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AppWithAdminGrantedPermissionsListerTest {
 
     private final String APP_1 = "app1";
@@ -80,10 +74,14 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     private final String PERMISSION_2 = "some.permission.2";
     private final String[] PERMISSIONS = {PERMISSION_1, PERMISSION_2};
 
-    @Mock private UserManager mUserManager;
-    @Mock private PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManagerWrapper mPackageManagerService;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
 
     private List<UserAppInfo> mAppList = Collections.emptyList();
 
@@ -212,7 +210,7 @@ public final class AppWithAdminGrantedPermissionsListerTest {
     private class AppWithAdminGrantedPermissionsListerTestable extends
             AppWithAdminGrantedPermissionsLister {
 
-        public AppWithAdminGrantedPermissionsListerTestable(String[] permissions) {
+        private AppWithAdminGrantedPermissionsListerTestable(String[] permissions) {
             super(permissions, mPackageManager, mPackageManagerService,
                     mDevicePolicyManager, mUserManager);
         }

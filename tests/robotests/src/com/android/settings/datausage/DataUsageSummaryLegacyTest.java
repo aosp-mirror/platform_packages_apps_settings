@@ -18,38 +18,26 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settingslib.NetworkPolicyEditor;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
-import org.robolectric.util.ReflectionHelpers;
-
-import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class DataUsageSummaryLegacyTest {
+
     @Mock
     private ConnectivityManager mManager;
     private Context mContext;
@@ -69,13 +57,9 @@ public class DataUsageSummaryLegacyTest {
     }
 
     @Test
-    @Config(shadows = {
-            SettingsShadowResources.class,
-            SettingsShadowResources.SettingsShadowTheme.class
-    })
     public void formatUsage_shouldLookLikeFormatFileSize() {
-        SettingsShadowResources.overrideResource(com.android.internal.R.string.fileSizeSuffix,
-                "%1$s %2$s");
+        SettingsShadowResources
+            .overrideResource(com.android.internal.R.string.fileSizeSuffix, "%1$s %2$s");
         final long usage = 2147483648L; // 2GB
         final String formattedUsage =
                 DataUsageSummaryLegacy.formatUsage(mContext, "^1", usage).toString();

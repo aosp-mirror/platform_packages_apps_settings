@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
@@ -26,12 +25,10 @@ import static org.mockito.Mockito.when;
 import android.graphics.drawable.Drawable;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowBluetoothDevice;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowEntityHeaderController;
 import com.android.settings.widget.EntityHeaderController;
 
@@ -45,11 +42,9 @@ import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class,
-                SettingsShadowResources.class})
+@Config(shadows = {SettingsShadowBluetoothDevice.class, ShadowEntityHeaderController.class})
 public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsControllerTestBase {
+
     private BluetoothDetailsHeaderController mController;
     private LayoutPreference mPreference;
 
@@ -61,8 +56,8 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
         super.setUp();
         FakeFeatureFactory.setupForTest();
         ShadowEntityHeaderController.setUseMock(mHeaderController);
-        mController = new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice,
-                mLifecycle);
+        mController =
+            new BluetoothDetailsHeaderController(mContext, mFragment, mCachedDevice, mLifecycle);
         mPreference = new LayoutPreference(mContext, R.layout.settings_entity_header);
         mPreference.setKey(mController.getPreferenceKey());
         mScreen.addPreference(mPreference);
@@ -97,20 +92,20 @@ public class BluetoothDetailsHeaderControllerTest extends BluetoothDetailsContro
     @Test
     public void connectionStatusChangesWhileScreenOpen() {
         InOrder inOrder = inOrder(mHeaderController);
-        when(mCachedDevice.getConnectionSummary()).thenReturn(
-                mContext.getString(R.string.bluetooth_connected));
+        when(mCachedDevice.getConnectionSummary())
+            .thenReturn(mContext.getString(R.string.bluetooth_connected));
         showScreen(mController);
-        inOrder.verify(mHeaderController).setSummary(
-                mContext.getString(R.string.bluetooth_connected));
+        inOrder.verify(mHeaderController)
+            .setSummary(mContext.getString(R.string.bluetooth_connected));
 
         when(mCachedDevice.getConnectionSummary()).thenReturn(null);
         mController.onDeviceAttributesChanged();
         inOrder.verify(mHeaderController).setSummary((CharSequence) null);
 
-        when(mCachedDevice.getConnectionSummary()).thenReturn(
-                mContext.getString(R.string.bluetooth_connecting));
+        when(mCachedDevice.getConnectionSummary())
+            .thenReturn(mContext.getString(R.string.bluetooth_connecting));
         mController.onDeviceAttributesChanged();
-        inOrder.verify(mHeaderController).setSummary(
-                mContext.getString(R.string.bluetooth_connecting));
+        inOrder.verify(mHeaderController)
+            .setSummary(mContext.getString(R.string.bluetooth_connecting));
     }
 }

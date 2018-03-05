@@ -16,37 +16,28 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.BluetoothAvrcpVersionPreferenceController
-        .BLUETOOTH_AVRCP_VERSION_PROPERTY;
-
+import static com.android.settings.development.BluetoothAvrcpVersionPreferenceController.BLUETOOTH_AVRCP_VERSION_PROPERTY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class BluetoothAvrcpVersionPreferenceControllerTest {
 
     @Mock
@@ -70,18 +61,13 @@ public class BluetoothAvrcpVersionPreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(
-                R.array.bluetooth_avrcp_version_values);
-        mListSummaries = mContext.getResources().getStringArray(R.array.bluetooth_avrcp_versions);
+        final Resources resources = mContext.getResources();
+        mListValues = resources.getStringArray(R.array.bluetooth_avrcp_version_values);
+        mListSummaries = resources.getStringArray(R.array.bluetooth_avrcp_versions);
         mController = new BluetoothAvrcpVersionPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
-    }
-
-    @After
-    public void teardown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test

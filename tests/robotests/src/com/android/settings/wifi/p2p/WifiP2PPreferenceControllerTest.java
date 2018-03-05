@@ -17,9 +17,7 @@ package com.android.settings.wifi.p2p;
 
 import static android.arch.lifecycle.Lifecycle.Event.ON_PAUSE;
 import static android.arch.lifecycle.Lifecycle.Event.ON_RESUME;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.times;
@@ -35,7 +33,6 @@ import android.net.wifi.WifiManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -45,10 +42,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiP2PPreferenceControllerTest {
 
     @Mock
@@ -69,10 +64,8 @@ public class WifiP2PPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        when(mContext.getSystemService(WifiManager.class))
-                .thenReturn(mWifiManager);
-        when(mScreen.findPreference(anyString()))
-                .thenReturn(mWifiDirectPreference);
+        when(mContext.getSystemService(WifiManager.class)).thenReturn(mWifiManager);
+        when(mScreen.findPreference(anyString())).thenReturn(mWifiDirectPreference);
         mController = new WifiP2pPreferenceController(mContext, mLifecycle, mWifiManager);
     }
 

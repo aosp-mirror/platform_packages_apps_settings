@@ -16,9 +16,7 @@
 
 package com.android.settings.fingerprint;
 
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.KeyguardManager;
@@ -29,15 +27,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
-import com.android.settings.fingerprint.SetupFingerprintEnrollIntroductionTest
-        .ShadowStorageManagerWrapper;
+import com.android.settings.fingerprint.SetupFingerprintEnrollIntroductionTest.ShadowStorageManagerWrapper;
 import com.android.settings.password.SetupChooseLockGeneric.SetupChooseLockGenericFragment;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.password.StorageManagerWrapper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.ShadowEventLogWriter;
 import com.android.settings.testutils.shadow.ShadowFingerprintManager;
 import com.android.settings.testutils.shadow.ShadowLockPatternUtils;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -59,21 +54,16 @@ import org.robolectric.shadows.ShadowActivity.IntentForResult;
 import org.robolectric.shadows.ShadowKeyguardManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowEventLogWriter.class,
-                ShadowFingerprintManager.class,
-                ShadowLockPatternUtils.class,
-                ShadowStorageManagerWrapper.class,
-                ShadowUserManager.class
-        })
+@Config(shadows = {
+    ShadowFingerprintManager.class,
+    ShadowLockPatternUtils.class,
+    ShadowStorageManagerWrapper.class,
+    ShadowUserManager.class
+})
 public class SetupFingerprintEnrollIntroductionTest {
 
     @Mock
     private UserInfo mUserInfo;
-    private FakeFeatureFactory mFactory;
 
     private ActivityController<SetupFingerprintEnrollIntroduction> mController;
 
@@ -82,10 +72,10 @@ public class SetupFingerprintEnrollIntroductionTest {
         MockitoAnnotations.initMocks(this);
 
         Shadows.shadowOf(application.getPackageManager())
-                .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
+            .setSystemFeature(PackageManager.FEATURE_FINGERPRINT, true);
         ShadowFingerprintManager.addToServiceMap();
 
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
 
         final Intent intent = new Intent();
         mController = Robolectric.buildActivity(SetupFingerprintEnrollIntroduction.class, intent);
@@ -112,7 +102,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
         assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
         assertThat(shadowActivity.getResultCode()).named("Result code")
-                .isEqualTo(SetupSkipDialog.RESULT_SKIP);
+            .isEqualTo(SetupSkipDialog.RESULT_SKIP);
     }
 
     @Test
@@ -128,7 +118,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(mController.get());
         assertThat(mController.get().isFinishing()).named("Is finishing").isTrue();
         assertThat(shadowActivity.getResultCode()).named("Result code")
-                .isEqualTo(FingerprintEnrollBase.RESULT_SKIP);
+            .isEqualTo(FingerprintEnrollBase.RESULT_SKIP);
     }
 
     @Test
@@ -143,7 +133,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         assertThat(shadowActivity.getResultIntent()).isNotNull();
         assertThat(shadowActivity.getResultIntent().hasExtra(
-                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
+            SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
     }
 
     @Test
@@ -170,7 +160,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         ShadowActivity shadowActivity = Shadows.shadowOf(activity);
         assertThat(shadowActivity.getResultIntent()).isNotNull();
         assertThat(shadowActivity.getResultIntent().hasExtra(
-                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
+            SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isTrue();
     }
 
     @Test
@@ -190,7 +180,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-                FingerprintEnrollBase.RESULT_FINISHED, null);
+            FingerprintEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 
@@ -200,7 +190,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         getShadowKeyguardManager().setIsKeyguardSecure(true);
         activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-                FingerprintEnrollBase.RESULT_FINISHED, null);
+            FingerprintEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNotNull();
     }
 
@@ -209,7 +199,7 @@ public class SetupFingerprintEnrollIntroductionTest {
         getShadowKeyguardManager().setIsKeyguardSecure(false);
         SetupFingerprintEnrollIntroduction activity = mController.create().resume().get();
         activity.onActivityResult(FingerprintEnrollIntroduction.FINGERPRINT_FIND_SENSOR_REQUEST,
-                FingerprintEnrollBase.RESULT_FINISHED, null);
+            FingerprintEnrollBase.RESULT_FINISHED, null);
         assertThat(Shadows.shadowOf(activity).getResultIntent()).isNull();
     }
 
@@ -228,9 +218,8 @@ public class SetupFingerprintEnrollIntroductionTest {
         IntentForResult startedActivity = shadowActivity.getNextStartedActivityForResult();
         assertThat(startedActivity).isNotNull();
         assertThat(startedActivity.intent.hasExtra(
-                SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isFalse();
+            SetupChooseLockGenericFragment.EXTRA_PASSWORD_QUALITY)).isFalse();
     }
-
 
     private ShadowKeyguardManager getShadowKeyguardManager() {
         return Shadows.shadowOf(application.getSystemService(KeyguardManager.class));

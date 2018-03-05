@@ -24,19 +24,17 @@ import android.os.Bundle;
 import android.support.v7.preference.Preference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothFilesPreferenceControllerTest {
+
     private Context mContext;
     private BluetoothFilesPreferenceController mController;
     private Preference mPreference;
@@ -57,12 +55,12 @@ public class BluetoothFilesPreferenceControllerTest {
 
         final Intent intent = ShadowApplication.getInstance().getNextStartedActivity();
         assertThat(intent).isNotNull();
-        assertThat(intent.getAction()).isEqualTo(
-                BluetoothFilesPreferenceController.ACTION_OPEN_FILES);
+        assertThat(intent.getAction())
+            .isEqualTo(BluetoothFilesPreferenceController.ACTION_OPEN_FILES);
 
         final Bundle bundle = intent.getExtras();
         assertThat(bundle.getInt(BluetoothFilesPreferenceController.EXTRA_DIRECTION)).isEqualTo(1);
-        assertThat(bundle.getBoolean(
-                BluetoothFilesPreferenceController.EXTRA_SHOW_ALL_FILES)).isTrue();
+        assertThat(bundle.getBoolean(BluetoothFilesPreferenceController.EXTRA_SHOW_ALL_FILES))
+            .isTrue();
     }
 }

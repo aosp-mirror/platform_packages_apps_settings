@@ -16,6 +16,12 @@
 
 package com.android.settings.wifi;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,7 +30,6 @@ import android.net.wifi.WifiManager;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settingslib.wifi.WifiStatusTracker;
 
@@ -35,16 +40,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiSummaryUpdaterTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -102,8 +99,8 @@ public class WifiSummaryUpdaterTest {
     public void getSummary_wifiDisabled_shouldReturnDisabled() {
         mWifiTracker.enabled = false;
 
-        assertThat(mSummaryUpdater.getSummary()).isEqualTo(
-            mContext.getString(R.string.switch_off_text));
+        assertThat(mSummaryUpdater.getSummary())
+            .isEqualTo(mContext.getString(R.string.switch_off_text));
     }
 
     @Test
@@ -111,8 +108,8 @@ public class WifiSummaryUpdaterTest {
         mWifiTracker.enabled = true;
         mWifiTracker.connected = false;
 
-        assertThat(mSummaryUpdater.getSummary()).isEqualTo(
-            mContext.getString(R.string.disconnected));
+        assertThat(mSummaryUpdater.getSummary())
+            .isEqualTo(mContext.getString(R.string.disconnected));
     }
 
     @Test
@@ -132,5 +129,4 @@ public class WifiSummaryUpdaterTest {
             this.summary = summary;
         }
     }
-
 }

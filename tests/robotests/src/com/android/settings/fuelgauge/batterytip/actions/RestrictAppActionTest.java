@@ -20,9 +20,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
 import android.app.AppOpsManager;
-import android.content.Context;
 
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
@@ -37,53 +35,45 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RestrictAppActionTest {
+
     private static final String PACKAGE_NAME_1 = "com.android.app1";
     private static final String PACKAGE_NAME_2 = "com.android.app2";
 
     @Mock
     private BatteryUtils mBatteryUtils;
-    private Context mContext;
     private RestrictAppAction mRestrictAppAction;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
         final List<AppInfo> mAppInfos = new ArrayList<>();
-        mAppInfos.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME_1)
-                .build());
-        mAppInfos.add(new AppInfo.Builder()
-                .setPackageName(PACKAGE_NAME_2)
-                .build());
+        mAppInfos.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME_1).build());
+        mAppInfos.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME_2).build());
 
-        mRestrictAppAction = new RestrictAppAction(mContext, new RestrictAppTip(
-                BatteryTip.StateType.NEW, mAppInfos));
+        mRestrictAppAction = new RestrictAppAction(RuntimeEnvironment.application,
+            new RestrictAppTip(BatteryTip.StateType.NEW, mAppInfos));
         mRestrictAppAction.mBatteryUtils = mBatteryUtils;
     }
 
     @After
     public void cleanUp() {
-        DatabaseTestUtils.clearDb(mContext);
+        DatabaseTestUtils.clearDb(RuntimeEnvironment.application);
     }
 
     @Test
     public void testHandlePositiveAction() {
         mRestrictAppAction.handlePositiveAction();
 
-        verify(mBatteryUtils).setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1),
-                eq(AppOpsManager.MODE_IGNORED));
-        verify(mBatteryUtils).setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2),
-                eq(AppOpsManager.MODE_IGNORED));
+        verify(mBatteryUtils)
+            .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_1), eq(AppOpsManager.MODE_IGNORED));
+        verify(mBatteryUtils)
+            .setForceAppStandby(anyInt(), eq(PACKAGE_NAME_2), eq(AppOpsManager.MODE_IGNORED));
     }
-
 }

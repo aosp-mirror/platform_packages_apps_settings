@@ -15,7 +15,6 @@
  */
 package com.android.settings.fuelgauge;
 
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -28,7 +27,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.android.internal.os.BatteryStatsHelper;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowDashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -42,13 +40,10 @@ import org.robolectric.annotation.Config;
 
 import java.util.List;
 
-/**
- * Unit tests for {@link PowerUsageBase}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowDashboardFragment.class)
+@Config(shadows = ShadowDashboardFragment.class)
 public class PowerUsageBaseTest {
+
     @Mock
     private BatteryStatsHelper mBatteryStatsHelper;
     @Mock
@@ -98,7 +93,7 @@ public class PowerUsageBaseTest {
             return null;
         }
 
-        public void setBatteryStatsHelper(BatteryStatsHelper batteryStatsHelper) {
+        private void setBatteryStatsHelper(BatteryStatsHelper batteryStatsHelper) {
             mStatsHelper = batteryStatsHelper;
         }
     }

@@ -20,9 +20,6 @@ import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
-
-import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,7 +31,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,14 +39,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeRemindersPreferenceControllerTest {
+
+    private static final boolean REMINDERS_SETTINGS = true;
+
     private ZenModeRemindersPreferenceController mController;
 
     @Mock
@@ -66,7 +63,6 @@ public class ZenModeRemindersPreferenceControllerTest {
 
     private ContentResolver mContentResolver;
     private Context mContext;
-    private final boolean REMINDERS_SETTINGS = true;
 
     @Before
     public void setup() {
@@ -81,8 +77,8 @@ public class ZenModeRemindersPreferenceControllerTest {
         mController = new ZenModeRemindersPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -128,8 +124,8 @@ public class ZenModeRemindersPreferenceControllerTest {
         boolean allow = true;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
-                allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
     }
 
     @Test
@@ -137,7 +133,7 @@ public class ZenModeRemindersPreferenceControllerTest {
         boolean allow = false;
         mController.onPreferenceChange(mockPref, allow);
 
-        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS,
-                allow);
+        verify(mBackend)
+            .saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS, allow);
     }
 }

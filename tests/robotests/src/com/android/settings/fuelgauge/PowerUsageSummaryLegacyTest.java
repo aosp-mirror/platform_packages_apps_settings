@@ -32,11 +32,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.LoaderManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
@@ -54,7 +52,6 @@ import com.android.internal.os.BatteryStatsHelper;
 import com.android.internal.os.BatteryStatsImpl;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.fuelgauge.anomaly.AnomalyDetectionPolicy;
@@ -63,36 +60,30 @@ import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.AbstractPreferenceController;
-
 import com.android.settingslib.utils.StringUtil;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Unit tests for {@link PowerUsageSummary}.
- */
 // TODO: Improve this test class so that it starts up the real activity and fragment.
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-        })
+@Config(shadows = {
+    SettingsShadowResources.class,
+    SettingsShadowResources.SettingsShadowTheme.class,
+})
 public class PowerUsageSummaryLegacyTest {
+
     private static final String[] PACKAGE_NAMES = {"com.app1", "com.app2"};
     private static final String STUB_STRING = "stub_string";
     private static final int UID = 123;
@@ -104,13 +95,10 @@ public class PowerUsageSummaryLegacyTest {
     private static final int DISCHARGE_AMOUNT = 100;
     private static final long USAGE_TIME_MS = 65 * 60 * 1000;
     private static final double TOTAL_POWER = 200;
-    private static final double BATTERY_SCREEN_USAGE = 300;
-    private static final double BATTERY_SYSTEM_USAGE = 600;
-    private static final double BATTERY_OVERCOUNTED_USAGE = 500;
     private static final double PRECISION = 0.001;
     private static final double POWER_USAGE_PERCENTAGE = 50;
-    public static final String NEW_ML_EST_SUFFIX = "(New ML est)";
-    public static final String OLD_EST_SUFFIX = "(Old est)";
+    private static final String NEW_ML_EST_SUFFIX = "(New ML est)";
+    private static final String OLD_EST_SUFFIX = "(Old est)";
     private static Intent sAdditionalBatteryInfoIntent;
 
     @BeforeClass
@@ -119,11 +107,7 @@ public class PowerUsageSummaryLegacyTest {
     }
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Menu mMenu;
-    @Mock
-    private MenuItem mAdditionalBatteryInfoMenu;
     @Mock
     private MenuItem mToggleAppsMenu;
     @Mock
@@ -145,13 +129,9 @@ public class PowerUsageSummaryLegacyTest {
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private BatteryStatsHelper mBatteryHelper;
     @Mock
-    private PowerManager mPowerManager;
-    @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
     private LoaderManager mLoaderManager;
-    @Mock
-    private ContentResolver mContentResolver;
     @Mock
     private PreferenceScreen mPreferenceScreen;
     @Mock
@@ -169,7 +149,6 @@ public class PowerUsageSummaryLegacyTest {
     private PowerGaugePreference mPreference;
     private PowerGaugePreference mScreenUsagePref;
     private PowerGaugePreference mLastFullChargePref;
-    private SparseArray<List<Anomaly>> mAnomalySparseArray;
 
     @Before
     public void setUp() {
@@ -177,12 +156,11 @@ public class PowerUsageSummaryLegacyTest {
 
         mRealContext = RuntimeEnvironment.application;
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        when(mContext.getSystemService(Context.POWER_SERVICE)).thenReturn(mPowerManager);
 
         mPreference = new PowerGaugePreference(mRealContext);
         mScreenUsagePref = new PowerGaugePreference(mRealContext);
         mLastFullChargePref = new PowerGaugePreference(mRealContext);
-        mFragment = spy(new TestFragment(mContext));
+        mFragment = spy(new TestFragment(mRealContext));
         mFragment.initFeatureProvider();
         mBatteryMeterView = new BatteryMeterView(mRealContext);
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
@@ -193,10 +171,10 @@ public class PowerUsageSummaryLegacyTest {
         when(mToggleAppsMenu.getItemId()).thenReturn(MENU_TOGGLE_APPS);
         when(mHighPowerMenu.getItemId()).thenReturn(MENU_HIGH_POWER_APPS);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
-                .thenReturn(sAdditionalBatteryInfoIntent);
+            .thenReturn(sAdditionalBatteryInfoIntent);
         when(mBatteryHelper.getTotalPower()).thenReturn(TOTAL_POWER);
-        when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt())).thenReturn(
-                TIME_SINCE_LAST_FULL_CHARGE_US);
+        when(mBatteryHelper.getStats().computeBatteryRealtime(anyLong(), anyInt()))
+            .thenReturn(TIME_SINCE_LAST_FULL_CHARGE_US);
 
         when(mNormalBatterySipper.getPackages()).thenReturn(PACKAGE_NAMES);
         when(mNormalBatterySipper.getUid()).thenReturn(UID);
@@ -232,7 +210,7 @@ public class PowerUsageSummaryLegacyTest {
     public void testOptionsMenu_menuHighPower_metricEventInvoked() {
         mFragment.onOptionsItemSelected(mHighPowerMenu);
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(mRealContext,
                 MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_OPTIMIZATION);
     }
 
@@ -241,7 +219,7 @@ public class PowerUsageSummaryLegacyTest {
         mFragment.onOptionsItemSelected(mToggleAppsMenu);
         mFragment.mShowAllApps = false;
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+        verify(mFeatureFactory.metricsFeatureProvider).action(mRealContext,
                 MetricsProto.MetricsEvent.ACTION_SETTINGS_MENU_BATTERY_APPS_TOGGLE, true);
     }
 
@@ -310,9 +288,9 @@ public class PowerUsageSummaryLegacyTest {
     @Test
     public void testSetUsageSummary_timeMoreThanOneMinute_normalApp_setScreenSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
-        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment).getText(
-                R.string.battery_used_for);
-        doReturn(mRealContext).when(mFragment).getContext();
+        doReturn(mRealContext.getText(R.string.battery_used_for)).when(mFragment)
+            .getText(R.string.battery_used_for);
+        when(mFragment.getContext()).thenReturn(mRealContext);
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
@@ -323,7 +301,7 @@ public class PowerUsageSummaryLegacyTest {
     public void testSetUsageSummary_timeMoreThanOneMinute_hiddenApp_setUsedSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         doReturn(true).when(mFragment.mBatteryUtils).shouldHideSipper(mNormalBatterySipper);
-        doReturn(mRealContext).when(mFragment).getContext();
+        when(mFragment.getContext()).thenReturn(mRealContext);
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
@@ -334,7 +312,7 @@ public class PowerUsageSummaryLegacyTest {
     public void testSetUsageSummary_timeMoreThanOneMinute_notApp_setUsedSummary() {
         mNormalBatterySipper.usageTimeMs = 2 * DateUtils.MINUTE_IN_MILLIS;
         mNormalBatterySipper.drainType = BatterySipper.DrainType.PHONE;
-        doReturn(mRealContext).when(mFragment).getContext();
+        when(mFragment.getContext()).thenReturn(mRealContext);
 
         mFragment.setUsageSummary(mPreference, mNormalBatterySipper);
 
@@ -350,16 +328,16 @@ public class PowerUsageSummaryLegacyTest {
 
     @Test
     public void testFindBatterySipperByType_findTypeScreen() {
-        BatterySipper sipper = mFragment.findBatterySipperByType(mUsageList,
-                BatterySipper.DrainType.SCREEN);
+        BatterySipper sipper =
+            mFragment.findBatterySipperByType(mUsageList, BatterySipper.DrainType.SCREEN);
 
         assertThat(sipper).isSameAs(mScreenBatterySipper);
     }
 
     @Test
     public void testFindBatterySipperByType_findTypeApp() {
-        BatterySipper sipper = mFragment.findBatterySipperByType(mUsageList,
-                BatterySipper.DrainType.APP);
+        BatterySipper sipper =
+            mFragment.findBatterySipperByType(mUsageList, BatterySipper.DrainType.APP);
 
         assertThat(sipper).isSameAs(mNormalBatterySipper);
     }
@@ -367,7 +345,7 @@ public class PowerUsageSummaryLegacyTest {
     @Test
     public void testUpdateScreenPreference_showCorrectSummary() {
         doReturn(mScreenBatterySipper).when(mFragment).findBatterySipperByType(any(), any());
-        doReturn(mRealContext).when(mFragment).getContext();
+        when(mFragment.getContext()).thenReturn(mRealContext);
         final CharSequence expectedSummary =
             StringUtil.formatElapsedTime(mRealContext, USAGE_TIME_MS, false);
 
@@ -378,7 +356,7 @@ public class PowerUsageSummaryLegacyTest {
 
     @Test
     public void testUpdateLastFullChargePreference_showCorrectSummary() {
-        doReturn(mRealContext).when(mFragment).getContext();
+        when(mFragment.getContext()).thenReturn(mRealContext);
 
         mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
 
@@ -387,9 +365,9 @@ public class PowerUsageSummaryLegacyTest {
 
     @Test
     public void testUpdatePreference_usageListEmpty_shouldNotCrash() {
-        when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<BatterySipper>());
+        when(mBatteryHelper.getUsageList()).thenReturn(new ArrayList<>());
         doReturn(STUB_STRING).when(mFragment).getString(anyInt(), any());
-        doReturn(mRealContext).when(mFragment).getContext();
+        when(mFragment.getContext()).thenReturn(mRealContext);
 
         // Should not crash when update
         mFragment.updateScreenPreference();
@@ -405,8 +383,8 @@ public class PowerUsageSummaryLegacyTest {
     public void testPreferenceControllers_getPreferenceKeys_existInPreferenceScreen() {
         final Context context = RuntimeEnvironment.application;
         final PowerUsageSummary fragment = new PowerUsageSummary();
-        final List<String> preferenceScreenKeys = XmlTestUtils.getKeysFromPreferenceXml(context,
-                fragment.getPreferenceScreenResId());
+        final List<String> preferenceScreenKeys =
+            XmlTestUtils.getKeysFromPreferenceXml(context, fragment.getPreferenceScreenResId());
         final List<String> preferenceKeys = new ArrayList<>();
 
         for (AbstractPreferenceController controller : fragment.createPreferenceControllers(context)) {
@@ -441,8 +419,8 @@ public class PowerUsageSummaryLegacyTest {
 
         mFragment.restartAnomalyDetectionIfPossible();
 
-        verify(mLoaderManager).restartLoader(eq(PowerUsageSummaryLegacy.ANOMALY_LOADER),
-                eq(Bundle.EMPTY), any());
+        verify(mLoaderManager)
+            .restartLoader(eq(PowerUsageSummaryLegacy.ANOMALY_LOADER), eq(Bundle.EMPTY), any());
     }
 
     @Test
@@ -495,6 +473,7 @@ public class PowerUsageSummaryLegacyTest {
     @Test
     public void testDebugMode() {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isEstimateDebugEnabled();
+        doReturn(new TextView(mRealContext)).when(mBatteryLayoutPref).findViewById(R.id.summary2);
 
         mFragment.restartBatteryInfoLoader();
         ArgumentCaptor<View.OnLongClickListener> listener = ArgumentCaptor.forClass(
@@ -522,8 +501,6 @@ public class PowerUsageSummaryLegacyTest {
     public static class TestFragment extends PowerUsageSummaryLegacy {
 
         private Context mContext;
-        private boolean mStartActivityCalled;
-        private Intent mStartActivityIntent;
 
         public TestFragment(Context context) {
             mContext = context;
@@ -536,13 +513,29 @@ public class PowerUsageSummaryLegacyTest {
 
         @Override
         public void startActivity(Intent intent) {
-            mStartActivityCalled = true;
-            mStartActivityIntent = intent;
         }
 
         @Override
         protected void refreshUi() {
             // Leave it empty for toggle apps menu test
+        }
+
+        @Override
+        void showBothEstimates() {
+            List<BatteryInfo> fakeBatteryInfo = new ArrayList<>(2);
+            BatteryInfo info1 = new BatteryInfo();
+            info1.batteryLevel = 10;
+            info1.remainingTimeUs = 10000;
+            info1.discharging = true;
+
+            BatteryInfo info2 = new BatteryInfo();
+            info2.batteryLevel = 10;
+            info2.remainingTimeUs = 10000;
+            info2.discharging = true;
+
+            fakeBatteryInfo.add(info1);
+            fakeBatteryInfo.add(info2);
+            updateViews(fakeBatteryInfo);
         }
     }
 }

@@ -21,20 +21,17 @@ import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_OFF;
-
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.ComponentName;
 import android.net.Uri;
 import android.provider.Settings;
 import android.service.notification.ZenModeConfig;
@@ -44,7 +41,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.util.ArrayMap;
 
 import com.android.settings.notification.AbstractZenModePreferenceController.ZenModeConfigWrapper;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -53,22 +49,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeSettingsFooterPreferenceControllerTest {
+
+    private static final String TEST_APP_NAME = "test_app";
+    private static final String TEST_RULE_NAME = "test_rule_name";
+    private static final String MANUAL_RULE_FIELD = "manualRule";
+    private static final String AUTOMATIC_RULES_FIELD = "automaticRules";
+
     private ZenModeSettingsFooterPreferenceController mController;
-    private final String TEST_APP_NAME = "test_app";
-    private final String TEST_RULE_NAME = "test_rule_name";
-    private final String MANUAL_RULE_FIELD = "manualRule";
-    private final String AUTOMATIC_RULES_FIELD = "automaticRules";
 
     private final ArrayMap<String, ZenRule> mInjectedAutomaticRules = new ArrayMap<>();
-    ;
 
     @Mock
     private NotificationManager mNotificationManager;
@@ -94,13 +89,12 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getZenModeConfig()).thenReturn(mZenModeConfig);
 
-        mController = new ZenModeSettingsFooterPreferenceController(mContext,
-                mock(Lifecycle.class));
+        mController =
+            new ZenModeSettingsFooterPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mZenModeConfig, AUTOMATIC_RULES_FIELD, mInjectedAutomaticRules);
         ReflectionHelpers.setField(mController, "mZenModeConfigWrapper", mConfigWrapper);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -176,7 +170,6 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
                 TEST_RULE_NAME));
     }
 
-
     @Test
     public void manualRuleEndsLast_hasAutomaticRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
@@ -193,7 +186,6 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
                 com.android.settings.R.string.zen_mode_settings_dnd_manual_indefinite));
     }
 
-
     @Test
     public void automaticRuleEndsLast_hasManualRule_setFooterTitle() {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
@@ -202,8 +194,7 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
 
         // automatic rule that ends after manual rule ends
         ZenRule rule = injectNewAutomaticRule(TEST_RULE_NAME, true, false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule.conditionId)).thenReturn(
-                (long) 2000);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule.conditionId)).thenReturn(2000L);
 
         mController.updateState(mockPref);
 
@@ -218,18 +209,13 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         // automatic rule that ends after manual rule ends
-        ZenRule rule1 = injectNewAutomaticRule(TEST_RULE_NAME + "1", false,
-                false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule1.conditionId)).thenReturn(
-                (long) 10000);
+        ZenRule rule1 = injectNewAutomaticRule(TEST_RULE_NAME + "1", false, false);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule1.conditionId)).thenReturn(10000L);
 
-        ZenRule rule2 = injectNewAutomaticRule(TEST_RULE_NAME + "2", true,
-                true);
+        ZenRule rule2 = injectNewAutomaticRule(TEST_RULE_NAME + "2", true, true);
 
-        ZenRule rule3 = injectNewAutomaticRule(TEST_RULE_NAME + "3", true,
-                false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule3.conditionId)).thenReturn(
-                (long) 9000);
+        ZenRule rule3 = injectNewAutomaticRule(TEST_RULE_NAME + "3", true, false);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule3.conditionId)).thenReturn(9000L);
 
         mController.updateState(mockPref);
 
@@ -244,20 +230,14 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         // automatic rule that ends after manual rule ends
-        ZenRule rule1 = injectNewAutomaticRule(TEST_RULE_NAME + "1", true,
-                false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule1.conditionId)).thenReturn(
-                (long) 2000);
+        ZenRule rule1 = injectNewAutomaticRule(TEST_RULE_NAME + "1", true, false);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule1.conditionId)).thenReturn(2000L);
 
-        ZenRule rule2 = injectNewAutomaticRule(TEST_RULE_NAME + "2", true,
-                false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule2.conditionId)).thenReturn(
-                (long) 8000);
+        ZenRule rule2 = injectNewAutomaticRule(TEST_RULE_NAME + "2", true, false);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule2.conditionId)).thenReturn(8000L);
 
-        ZenRule rule3 = injectNewAutomaticRule(TEST_RULE_NAME + "3", false,
-                false);
-        when(mConfigWrapper.parseAutomaticRuleEndTime(rule3.conditionId)).thenReturn(
-                (long) 12000);
+        ZenRule rule3 = injectNewAutomaticRule(TEST_RULE_NAME + "3", false, false);
+        when(mConfigWrapper.parseAutomaticRuleEndTime(rule3.conditionId)).thenReturn(12000L);
 
         mController.updateState(mockPref);
 
@@ -291,10 +271,9 @@ public class ZenModeSettingsFooterPreferenceControllerTest {
         injectedManualRule.zenMode = ZEN_MODE_IMPORTANT_INTERRUPTIONS;
         injectedManualRule.enabler = null;
         injectedManualRule.conditionId = mock(Uri.class);
-        when(mConfigWrapper.parseManualRuleTime(injectedManualRule.conditionId)).thenReturn(
-                time);
-        when(mConfigWrapper.getFormattedTime(time, mContext.getUserId())).thenReturn(
-                timePlaceholder);
+        when(mConfigWrapper.parseManualRuleTime(injectedManualRule.conditionId)).thenReturn(time);
+        when(mConfigWrapper.getFormattedTime(time, mContext.getUserId()))
+            .thenReturn(timePlaceholder);
         ReflectionHelpers.setField(mZenModeConfig, MANUAL_RULE_FIELD, injectedManualRule);
     }
 

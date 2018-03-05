@@ -25,7 +25,6 @@ import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -34,10 +33,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PatternVisiblePreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;
@@ -52,8 +49,8 @@ public class PatternVisiblePreferenceControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new PatternVisiblePreferenceController(
-                mContext, TEST_USER_ID, mLockPatternUtils);
+        mController =
+            new PatternVisiblePreferenceController(mContext, TEST_USER_ID, mLockPatternUtils);
         mPreference = new SwitchPreference(mContext);
     }
 

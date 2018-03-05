@@ -20,9 +20,7 @@ import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_FOREGROUND_SERVICE;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP;
 import static android.os.BatteryStats.Uid.PROCESS_STATE_TOP_SLEEPING;
-
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -52,7 +50,6 @@ import android.text.format.DateUtils;
 import com.android.internal.os.BatterySipper;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -64,14 +61,13 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryUtilsTest {
+
     // unit that used to converted ms to us
     private static final long UNIT = 1000;
     private static final long TIME_STATE_TOP = 1500 * UNIT;
@@ -208,24 +204,24 @@ public class BatteryUtilsTest {
         doReturn(mAppOpsManager).when(shadowContext).getSystemService(Context.APP_OPS_SERVICE);
         mBatteryUtils = spy(new BatteryUtils(shadowContext));
         mBatteryUtils.mPowerUsageFeatureProvider = mProvider;
-        doReturn(0L).when(mBatteryUtils).getForegroundServiceTotalTimeUs(
-                any(BatteryStats.Uid.class), anyLong());
+        doReturn(0L).when(mBatteryUtils)
+            .getForegroundServiceTotalTimeUs(any(BatteryStats.Uid.class), anyLong());
 
         mUsageList = new ArrayList<>();
         mUsageList.add(mNormalBatterySipper);
         mUsageList.add(mScreenBatterySipper);
         mUsageList.add(mCellBatterySipper);
-        doReturn(mUsageList).when(mBatteryStatsHelper).getUsageList();
-        doReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE).when(
-                mBatteryStatsHelper).getTotalPower();
-        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt())).thenReturn(
-                DISCHARGE_AMOUNT);
+        when(mBatteryStatsHelper.getUsageList()).thenReturn(mUsageList);
+        when(mBatteryStatsHelper.getTotalPower())
+            .thenReturn(TOTAL_BATTERY_USAGE + BATTERY_SCREEN_USAGE);
+        when(mBatteryStatsHelper.getStats().getDischargeAmount(anyInt()))
+            .thenReturn(DISCHARGE_AMOUNT);
     }
 
     @Test
     public void testGetProcessTimeMs_typeForeground_timeCorrect() {
-        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils).getForegroundActivityTotalTimeUs(
-                eq(mUid), anyLong());
+        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils)
+            .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
 
         final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.FOREGROUND, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
@@ -243,8 +239,8 @@ public class BatteryUtilsTest {
 
     @Test
     public void testGetProcessTimeMs_typeAll_timeCorrect() {
-        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils).getForegroundActivityTotalTimeUs(
-                eq(mUid), anyLong());
+        doReturn(TIME_STATE_FOREGROUND + 500).when(mBatteryUtils)
+            .getForegroundActivityTotalTimeUs(eq(mUid), anyLong());
 
         final long time = mBatteryUtils.getProcessTimeMs(BatteryUtils.StatusType.ALL, mUid,
                 BatteryStats.STATS_SINCE_CHARGED);
@@ -271,8 +267,7 @@ public class BatteryUtilsTest {
         sippers.add(mWifiBatterySipper);
         sippers.add(mBluetoothBatterySipper);
         sippers.add(mIdleBatterySipper);
-        when(mProvider.isTypeSystem(mSystemBatterySipper))
-                .thenReturn(true);
+        when(mProvider.isTypeSystem(mSystemBatterySipper)).thenReturn(true);
         doNothing().when(mBatteryUtils).smearScreenBatterySipper(any(), any());
 
         final double totalUsage = mBatteryUtils.removeHiddenBatterySippers(sippers);
@@ -465,12 +460,12 @@ public class BatteryUtilsTest {
         doReturn(AppOpsManager.MODE_ALLOWED).when(mAppOpsManager).checkOpNoThrow(
                 AppOpsManager.OP_RUN_IN_BACKGROUND, UID, PACKAGE_NAME);
 
-        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID,
-                PACKAGE_NAME)).isFalse();
+        assertThat(mBatteryUtils.isBackgroundRestrictionEnabled(SDK_VERSION, UID, PACKAGE_NAME))
+            .isFalse();
     }
 
-    private BatterySipper createTestSmearBatterySipper(long topTime,
-            double totalPowerMah, int uidCode, boolean isUidNull) {
+    private BatterySipper createTestSmearBatterySipper(
+        long topTime, double totalPowerMah, int uidCode, boolean isUidNull) {
         final BatterySipper sipper = mock(BatterySipper.class);
         sipper.drainType = BatterySipper.DrainType.APP;
         sipper.totalPowerMah = totalPowerMah;

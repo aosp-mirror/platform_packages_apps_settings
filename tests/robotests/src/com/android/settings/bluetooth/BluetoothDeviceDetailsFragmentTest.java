@@ -17,7 +17,6 @@
 package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -35,7 +34,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
@@ -49,12 +47,11 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.fakes.RoboMenu;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BluetoothDeviceDetailsFragmentTest {
+
     private BluetoothDeviceDetailsFragment mFragment;
     private Context mContext;
 
@@ -98,8 +95,8 @@ public class BluetoothDeviceDetailsFragmentTest {
         MenuInflater inflater = new MenuInflater(mContext);
         mFragment.onCreateOptionsMenu(menu, inflater);
         MenuItem item = menu.getItem(0);
-        assertThat(item.getItemId()).isEqualTo(
-                BluetoothDeviceDetailsFragment.EDIT_DEVICE_NAME_ITEM_ID);
+        assertThat(item.getItemId())
+            .isEqualTo(BluetoothDeviceDetailsFragment.EDIT_DEVICE_NAME_ITEM_ID);
 
         FragmentManager fragmentManager = mock(FragmentManager.class);
         when(mFragment.getFragmentManager()).thenReturn(fragmentManager);

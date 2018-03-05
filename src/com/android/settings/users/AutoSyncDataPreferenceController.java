@@ -82,7 +82,7 @@ public class AutoSyncDataPreferenceController extends AbstractPreferenceControll
     @Override
     public boolean isAvailable() {
         return !mUserManager.isManagedProfile()
-                && (mUserManager.isLinkedUser()
+                && (mUserManager.isRestrictedProfile()
                 || mUserManager.getProfiles(UserHandle.myUserId()).size() == 1);
     }
 

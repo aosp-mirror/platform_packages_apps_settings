@@ -17,12 +17,11 @@
 package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.OpenRestrictAppFragmentAction;
 import com.android.settings.fuelgauge.batterytip.actions.RestrictAppAction;
@@ -37,13 +36,12 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatteryTipUtilsTest {
+
     @Mock
     private SettingsActivity mSettingsActivity;
     @Mock
@@ -61,7 +59,7 @@ public class BatteryTipUtilsTest {
 
     @Test
     public void testGetActionForBatteryTip_typeRestrictStateNew_returnActionRestrict() {
-        doReturn(BatteryTip.StateType.NEW).when(mRestrictAppTip).getState();
+        when(mRestrictAppTip.getState()).thenReturn(BatteryTip.StateType.NEW);
 
         assertThat(BatteryTipUtils.getActionForBatteryTip(mRestrictAppTip, mSettingsActivity,
                 mFragment)).isInstanceOf(RestrictAppAction.class);
@@ -69,10 +67,9 @@ public class BatteryTipUtilsTest {
 
     @Test
     public void testGetActionForBatteryTip_typeRestrictStateHandled_returnActionOpen() {
-        doReturn(BatteryTip.StateType.HANDLED).when(mRestrictAppTip).getState();
+        when(mRestrictAppTip.getState()).thenReturn(BatteryTip.StateType.HANDLED);
 
         assertThat(BatteryTipUtils.getActionForBatteryTip(mRestrictAppTip, mSettingsActivity,
                 mFragment)).isInstanceOf(OpenRestrictAppFragmentAction.class);
     }
-
 }

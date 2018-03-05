@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -30,11 +29,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BatterySaverReceiverTest {
+
     @Mock
     private BatterySaverReceiver.BatterySaverListener mBatterySaverListener;
     @Mock
@@ -77,5 +75,4 @@ public class BatterySaverReceiverTest {
 
         verify(mBatterySaverListener).onPowerSaveModeChanged();
     }
-
 }

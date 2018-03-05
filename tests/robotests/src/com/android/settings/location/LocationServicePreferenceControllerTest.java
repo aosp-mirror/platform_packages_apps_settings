@@ -16,7 +16,6 @@
 package com.android.settings.location;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
@@ -32,7 +31,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -43,13 +41,11 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class LocationServicePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -118,8 +114,8 @@ public class LocationServicePreferenceControllerTest {
         pref2.setTitle("Title2");
         preferences.add(pref1);
         preferences.add(pref2);
-        doReturn(preferences).when(mSettingsInjector)
-                .getInjectedSettings(any(Context.class), anyInt());
+        doReturn(preferences)
+            .when(mSettingsInjector).getInjectedSettings(any(Context.class), anyInt());
         when(mFragment.getPreferenceManager().getContext()).thenReturn(mContext);
         mController.displayPreference(mScreen);
 

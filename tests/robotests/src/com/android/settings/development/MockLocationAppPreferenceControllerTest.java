@@ -1,10 +1,7 @@
 package com.android.settings.development;
 
-import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes
-        .REQUEST_MOCK_LOCATION_APP;
-
+import static com.android.settings.development.DevelopmentOptionsActivityRequestCodes.REQUEST_MOCK_LOCATION_APP;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -23,7 +20,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -33,13 +29,11 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class MockLocationAppPreferenceControllerTest {
 
     @Mock
@@ -84,19 +78,16 @@ public class MockLocationAppPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.mock_location_app_set, appName));
+        verify(mPreference).setSummary(mContext.getString(R.string.mock_location_app_set, appName));
     }
 
     @Test
     public void updateState_noAppSelected_shouldSetSummaryToDefault() {
-        when(mAppOpsManager.getPackagesForOps(any())).thenReturn(
-                Collections.emptyList());
+        when(mAppOpsManager.getPackagesForOps(any())).thenReturn(Collections.emptyList());
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.mock_location_app_not_set));
+        verify(mPreference).setSummary(mContext.getString(R.string.mock_location_app_not_set));
     }
 
     @Test
@@ -106,16 +97,16 @@ public class MockLocationAppPreferenceControllerTest {
         final String newAppName = "bar";
         final Intent intent = new Intent();
         intent.setAction(newAppName);
-        when(mAppOpsManager.getPackagesForOps(any())).thenReturn(
-                Collections.singletonList(mPackageOps));
+        when(mAppOpsManager.getPackagesForOps(any()))
+            .thenReturn(Collections.singletonList(mPackageOps));
         when(mPackageOps.getOps()).thenReturn(Collections.singletonList(mOpEntry));
         when(mOpEntry.getMode()).thenReturn(AppOpsManager.MODE_ALLOWED);
         when(mPackageOps.getPackageName()).thenReturn(prevAppName);
         when(mPackageManager.getApplicationInfo(anyString(),
                 eq(PackageManager.MATCH_DISABLED_COMPONENTS))).thenReturn(mApplicationInfo);
 
-        final boolean handled = mController.onActivityResult(REQUEST_MOCK_LOCATION_APP,
-                Activity.RESULT_OK, intent);
+        final boolean handled =
+            mController.onActivityResult(REQUEST_MOCK_LOCATION_APP, Activity.RESULT_OK, intent);
 
         assertThat(handled).isTrue();
         verify(mAppOpsManager).setMode(anyInt(), anyInt(), eq(newAppName),

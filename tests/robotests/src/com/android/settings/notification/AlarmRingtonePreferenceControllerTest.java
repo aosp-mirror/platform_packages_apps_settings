@@ -16,23 +16,20 @@
 
 package com.android.settings.notification;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.media.RingtoneManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
-
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AlarmRingtonePreferenceControllerTest {
 
     @Mock
@@ -49,5 +46,4 @@ public class AlarmRingtonePreferenceControllerTest {
     public void getRingtoneType_shouldReturnAlarm() {
         assertThat(mController.getRingtoneType()).isEqualTo(RingtoneManager.TYPE_ALARM);
     }
-
 }

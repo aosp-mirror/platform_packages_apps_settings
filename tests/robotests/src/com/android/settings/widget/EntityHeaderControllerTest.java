@@ -43,7 +43,6 @@ import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.applications.LayoutPreference;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -55,10 +54,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class EntityHeaderControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -115,8 +112,8 @@ public class EntityHeaderControllerTest {
     @Test
     public void bindViews_shouldBindAllData() {
         final String testString = "test";
-        final View header = mLayoutInflater.inflate(
-                R.layout.settings_entity_header, null /* root */);
+        final View header =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final TextView label = header.findViewById(R.id.entity_header_title);
         final TextView version = header.findViewById(R.id.entity_header_summary);
 
@@ -126,7 +123,9 @@ public class EntityHeaderControllerTest {
         mController.setIcon(mShadowContext.getDrawable(R.drawable.ic_add));
         mController.done(mActivity);
 
+        assertThat(label).isNotNull();
         assertThat(label.getText()).isEqualTo(testString);
+        assertThat(version).isNotNull();
         assertThat(version.getText()).isEqualTo(testString);
     }
 
@@ -136,8 +135,8 @@ public class EntityHeaderControllerTest {
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
         info.activityInfo.name = "321";
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         when(mActivity.getApplicationContext()).thenReturn(mContext);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
                 .thenReturn(info);
@@ -149,6 +148,7 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
 
         final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
+        assertThat(button1).isNotNull();
         assertThat(button1.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(button1.getDrawable()).isNotNull();
         assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
@@ -186,10 +186,10 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
 
         final ImageButton button1 = view.findViewById(android.R.id.button1);
+        assertThat(button1).isNotNull();
         assertThat(button1.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(button1.getDrawable()).isNotNull();
-        assertThat(view.findViewById(android.R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button2).getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -198,8 +198,7 @@ public class EntityHeaderControllerTest {
         info.activityInfo = new ActivityInfo();
         info.activityInfo.packageName = "123";
         info.activityInfo.name = "321";
-        final View view = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View view = mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         when(mActivity.getApplicationContext()).thenReturn(mContext);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
@@ -208,19 +207,17 @@ public class EntityHeaderControllerTest {
                 EntityHeaderController.ActionType.ACTION_NONE);
         mController.done(mActivity);
 
-        assertThat(view.findViewById(android.R.id.button1).getVisibility())
-                .isEqualTo(View.GONE);
-        assertThat(view.findViewById(android.R.id.button2).getVisibility())
-                .isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button1).getVisibility()).isEqualTo(View.GONE);
+        assertThat(view.findViewById(android.R.id.button2).getVisibility()).isEqualTo(View.GONE);
     }
 
 
     @Test
     public void bindButton_noAppPref_shouldNotShowButton() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         when(mContext.getPackageManager().resolveActivity(any(Intent.class), anyInt()))
-                .thenReturn(null);
+            .thenReturn(null);
 
         mController = EntityHeaderController.newInstance(mActivity, mFragment, appLinks);
         mController.setButtonActions(
@@ -229,6 +226,7 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
 
         final ImageButton button1 = appLinks.findViewById(android.R.id.button1);
+        assertThat(button1).isNotNull();
         assertThat(button1.getVisibility()).isEqualTo(View.GONE);
         assertThat(button1.getDrawable()).isNull();
         assertThat(appLinks.findViewById(android.R.id.button2).getVisibility())
@@ -237,8 +235,8 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void bindButton_noAppInfo_shouldNotAttachClickListener() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final Activity activity = mock(Activity.class);
         when(mFragment.getActivity()).thenReturn(activity);
 
@@ -262,8 +260,8 @@ public class EntityHeaderControllerTest {
 
     @Test
     public void bindButton_hasAppInfo_shouldAttachClickListener() {
-        final View appLinks = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View appLinks =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         final Activity activity = mock(Activity.class);
         when(mFragment.getActivity()).thenReturn(activity);
         when(mContext.getString(eq(R.string.application_info_label))).thenReturn("App Info");
@@ -278,14 +276,14 @@ public class EntityHeaderControllerTest {
         mController.done(mActivity);
 
         appLinks.findViewById(R.id.entity_header_content).performClick();
-        verify(activity).startActivityForResultAsUser(
-                any(Intent.class), anyInt(), any(UserHandle.class));
+        verify(activity)
+            .startActivityForResultAsUser(any(Intent.class), anyInt(), any(UserHandle.class));
     }
 
     @Test
     public void iconContentDescription_shouldWorkWithSetIcon() {
-        final View view = mLayoutInflater
-                .inflate(R.layout.settings_entity_header, null /* root */);
+        final View view =
+            mLayoutInflater.inflate(R.layout.settings_entity_header, null /* root */);
         when(mFragment.getActivity()).thenReturn(mock(Activity.class));
         mController = EntityHeaderController.newInstance(mActivity, mFragment, view);
         String description = "Fake Description";

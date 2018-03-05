@@ -16,15 +16,16 @@
 
 package com.android.settings.localepicker;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowSettingsPreferenceFragment;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,17 +35,13 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = { ShadowSettingsPreferenceFragment.class })
+@Config(shadows = ShadowSettingsPreferenceFragment.class)
 public class LocaleListEditorTest {
 
     private LocaleListEditor mLocaleListEditor;
 
     @Mock
     private Context mContext;
-
-    private FakeFeatureFactory mFactory;
 
     @Before
     public void setUp() {
@@ -55,7 +52,7 @@ public class LocaleListEditorTest {
                 RuntimeEnvironment.application.getSystemService(Context.RESTRICTIONS_SERVICE));
         ReflectionHelpers.setField(mLocaleListEditor, "mUserManager",
                 RuntimeEnvironment.application.getSystemService(Context.USER_SERVICE));
-        mFactory = FakeFeatureFactory.setupForTest();
+        FakeFeatureFactory.setupForTest();
     }
 
     @Test
@@ -63,7 +60,7 @@ public class LocaleListEditorTest {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", true);
         mLocaleListEditor.onAttach(mContext);
         mLocaleListEditor.onResume();
-        Assert.assertEquals(View.GONE, mLocaleListEditor.getEmptyTextView().getVisibility());
+        assertThat(mLocaleListEditor.getEmptyTextView().getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -71,6 +68,6 @@ public class LocaleListEditorTest {
         ReflectionHelpers.setField(mLocaleListEditor, "mIsUiRestricted", false);
         mLocaleListEditor.onAttach(mContext);
         mLocaleListEditor.onResume();
-        Assert.assertEquals(View.VISIBLE, mLocaleListEditor.getEmptyTextView().getVisibility());
+        assertThat(mLocaleListEditor.getEmptyTextView().getVisibility()).isEqualTo(View.VISIBLE);
     }
 }

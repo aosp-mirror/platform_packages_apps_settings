@@ -17,7 +17,6 @@
 package com.android.settings.datetime;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.robolectric.shadow.api.Shadow.extract;
 
@@ -26,7 +25,6 @@ import android.net.ConnectivityManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 
@@ -39,8 +37,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = ShadowConnectivityManager.class)
+@Config(shadows = ShadowConnectivityManager.class)
 public class AutoTimeZonePreferenceControllerTest {
 
     @Mock
@@ -49,15 +46,14 @@ public class AutoTimeZonePreferenceControllerTest {
     private Context mContext;
     private AutoTimeZonePreferenceController mController;
     private Preference mPreference;
-
+    private ShadowConnectivityManager connectivityManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
-        ShadowConnectivityManager connectivityManager =
-                extract(mContext.getSystemService(ConnectivityManager.class));
+        connectivityManager = extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, true);
     }
 
@@ -79,32 +75,28 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void isWifiOnly_notAvailable() {
-        ShadowConnectivityManager connectivityManager =
-                extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
         mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* fromSUW */);
 
         assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void isFromSUW_notEnable() {
-        mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, true /* isFromSUW */);
+        mController =
+            new AutoTimeZonePreferenceController(mContext, null /* callback */, true /* fromSUW */);
 
         assertThat(mController.isEnabled()).isFalse();
     }
 
     @Test
     public void isWifiOnly_notEnable() {
-        ShadowConnectivityManager connectivityManager =
-                extract(mContext.getSystemService(ConnectivityManager.class));
         connectivityManager.setNetworkSupported(ConnectivityManager.TYPE_MOBILE, false);
 
         mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* fromSUW */);
 
         assertThat(mController.isEnabled()).isFalse();
     }
@@ -112,23 +104,21 @@ public class AutoTimeZonePreferenceControllerTest {
     @Test
     public void testIsEnabled_shouldReadFromSettingsProvider() {
         mController = new AutoTimeZonePreferenceController(
-                mContext, null /* callback */, false /* isFromSUW */);
+                mContext, null /* callback */, false /* fromSUW */);
 
         // Disabled
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME_ZONE, 0);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME_ZONE, 0);
         assertThat(mController.isEnabled()).isFalse();
 
         // Enabled
-        Settings.Global.putInt(mContext.getContentResolver(),
-                Settings.Global.AUTO_TIME_ZONE, 1);
+        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.AUTO_TIME_ZONE, 1);
         assertThat(mController.isEnabled()).isTrue();
     }
 
     @Test
     public void updatePreferenceChange_prefIsChecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController = new AutoTimeZonePreferenceController(
-                mContext, mCallback, false /* isFromSUW */);
+        mController =
+            new AutoTimeZonePreferenceController(mContext, mCallback, false /* fromSUW */);
 
         mController.onPreferenceChange(mPreference, true);
 
@@ -138,8 +128,8 @@ public class AutoTimeZonePreferenceControllerTest {
 
     @Test
     public void updatePreferenceChange_prefIsUnchecked_shouldUpdatePreferenceAndNotifyCallback() {
-        mController = new AutoTimeZonePreferenceController(
-                mContext, mCallback, false /* isFromSUW */);
+        mController =
+            new AutoTimeZonePreferenceController(mContext, mCallback, false /* fromSUW */);
 
         mController.onPreferenceChange(mPreference, false);
 

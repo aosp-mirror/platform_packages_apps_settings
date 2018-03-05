@@ -16,6 +16,8 @@
 
 package com.android.settings.datausage;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -25,7 +27,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.utils.StringUtil;
@@ -37,13 +38,10 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.spy;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows =
-        SettingsShadowResourcesImpl.class)
+@Config(shadows = SettingsShadowResourcesImpl.class)
 public class DataUsageSummaryPreferenceTest {
+
     private static final long CYCLE_DURATION_MILLIS = 1000000000L;
     private static final long UPDATE_LAG_MILLIS = 10000000L;
     private static final String DUMMY_CARRIER = "z-mobile";
@@ -63,7 +61,7 @@ public class DataUsageSummaryPreferenceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mSummaryPreference = new DataUsageSummaryPreference(mContext, null /* attrs */);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(mSummaryPreference.getLayoutResource(), null /* root */,

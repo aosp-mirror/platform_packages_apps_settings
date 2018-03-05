@@ -23,9 +23,9 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -36,7 +36,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.util.IconDrawableFactory;
 
 import com.android.settings.SettingsActivity;
-import com.android.settings.TestConfig;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -49,14 +48,13 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerUsageAnomalyDetailsTest {
+
     private static final String NAME_APP_1 = "app1";
     private static final String NAME_APP_2 = "app2";
     private static final String NAME_APP_3 = "app3";
@@ -78,7 +76,7 @@ public class PowerUsageAnomalyDetailsTest {
     private PackageManager mPackageManager;
     @Mock
     private IconDrawableFactory mIconDrawableFactory;
-    private Context mContext;
+
     private PowerUsageAnomalyDetails mFragment;
     private PreferenceGroup mAbnormalListGroup;
     private List<Anomaly> mAnomalyList;
@@ -87,8 +85,7 @@ public class PowerUsageAnomalyDetailsTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
-        mAbnormalListGroup = spy(new PreferenceCategory(mContext));
+        mAbnormalListGroup = spy(new PreferenceCategory(RuntimeEnvironment.application));
 
         mAnomalyList = new ArrayList<>();
         Anomaly anomaly1 = new Anomaly.Builder()
@@ -113,18 +110,18 @@ public class PowerUsageAnomalyDetailsTest {
         mFragment = spy(new PowerUsageAnomalyDetails());
         mFragment.mAbnormalListGroup = mAbnormalListGroup;
         mFragment.mAnomalies = mAnomalyList;
-        mFragment.mBatteryUtils = new BatteryUtils(mContext);
+        mFragment.mBatteryUtils = new BatteryUtils(RuntimeEnvironment.application);
         mFragment.mPackageManager = mPackageManager;
         mFragment.mIconDrawableFactory = mIconDrawableFactory;
-        doReturn(mPreferenceManager).when(mFragment).getPreferenceManager();
-        doReturn(mContext).when(mPreferenceManager).getContext();
+        when(mFragment.getPreferenceManager()).thenReturn(mPreferenceManager);
+        when(mPreferenceManager.getContext()).thenReturn(RuntimeEnvironment.application);
     }
 
     @Test
     public void testRefreshUi_displayCorrectTitleAndSummary() {
         final List<Preference> testPreferences = new ArrayList<>();
-        final ArgumentCaptor<Preference> preferenceCaptor = ArgumentCaptor.forClass(
-                Preference.class);
+        final ArgumentCaptor<Preference> preferenceCaptor =
+            ArgumentCaptor.forClass(Preference.class);
         Answer<Void> prefCallable = new Answer<Void>() {
             @Override
             public Void answer(InvocationOnMock invocation) throws Throwable {

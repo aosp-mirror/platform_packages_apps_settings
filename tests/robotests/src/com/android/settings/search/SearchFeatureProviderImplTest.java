@@ -19,29 +19,22 @@ package com.android.settings.search;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
-import static org.robolectric.Shadows.shadowOf;
 
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.widget.Toolbar;
 
-import com.android.settings.TestConfig;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
-import org.robolectric.annotation.Config;
+import org.robolectric.Shadows;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowSystemProperties.class
-})
 public class SearchFeatureProviderImplTest {
 
     private SearchFeatureProviderImpl mProvider;
@@ -49,14 +42,9 @@ public class SearchFeatureProviderImplTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        FakeFeatureFactory.setupForTest();
         mActivity = Robolectric.buildActivity(Activity.class).create().visible().get();
         mProvider = spy(new SearchFeatureProviderImpl());
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test
@@ -69,7 +57,7 @@ public class SearchFeatureProviderImplTest {
 
         toolbar.performClick();
 
-        final Intent launchIntent = shadowOf(mActivity).getNextStartedActivity();
+        final Intent launchIntent = Shadows.shadowOf(mActivity).getNextStartedActivity();
 
         assertThat(launchIntent.getAction())
                 .isEqualTo("com.android.settings.action.SETTINGS_SEARCH");
@@ -94,8 +82,8 @@ public class SearchFeatureProviderImplTest {
 
     @Test
     public void verifyLaunchSearchResultPageCaller_settingsIntelligenceCaller_shouldNotCrash() {
-        final ComponentName cn =
-                new ComponentName(mProvider.getSettingsIntelligencePkgName(), "class");
+        final String packageName = mProvider.getSettingsIntelligencePkgName();
+        final ComponentName cn = new ComponentName(packageName, "class");
         mProvider.verifyLaunchSearchResultPageCaller(mActivity, cn);
     }
 

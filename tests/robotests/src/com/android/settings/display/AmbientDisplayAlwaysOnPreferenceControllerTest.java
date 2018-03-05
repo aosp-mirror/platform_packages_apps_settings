@@ -17,7 +17,6 @@
 package com.android.settings.display;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.doReturn;
@@ -31,7 +30,6 @@ import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.hardware.AmbientDisplayConfiguration;
-import com.android.settings.TestConfig;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -42,19 +40,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowSecureSettings.class})
+@Config(shadows = ShadowSecureSettings.class)
 public class AmbientDisplayAlwaysOnPreferenceControllerTest {
 
-    @Mock
-    private Context mContext;
     @Mock
     private AmbientDisplayConfiguration mConfig;
     @Mock
     private SwitchPreference mSwitchPreference;
+
+    private Context mContext;
+
+    private ContentResolver mContentResolver;
 
     private AmbientDisplayAlwaysOnPreferenceController mController;
     private boolean mCallbackInvoked;
@@ -62,6 +62,8 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mContentResolver = mContext.getContentResolver();
         mController = new AmbientDisplayAlwaysOnPreferenceController(mContext, mConfig,
                 () -> {
                     mCallbackInvoked = true;
@@ -69,9 +71,8 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_enabled() throws Exception {
-        when(mConfig.alwaysOnEnabled(anyInt()))
-                .thenReturn(true);
+    public void updateState_enabled() {
+        when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(true);
 
         mController.updateState(mSwitchPreference);
 
@@ -79,9 +80,8 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_disabled() throws Exception {
-        when(mConfig.alwaysOnEnabled(anyInt()))
-                .thenReturn(false);
+    public void updateState_disabled() {
+        when(mConfig.alwaysOnEnabled(anyInt())).thenReturn(false);
 
         mController.updateState(mSwitchPreference);
 
@@ -89,30 +89,30 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChange_callback() throws Exception {
+    public void onPreferenceChange_callback() {
         assertThat(mCallbackInvoked).isFalse();
         mController.onPreferenceChange(mSwitchPreference, true);
         assertThat(mCallbackInvoked).isTrue();
     }
 
     @Test
-    public void onPreferenceChange_enable() throws Exception {
+    public void onPreferenceChange_enable() {
         mController.onPreferenceChange(mSwitchPreference, true);
 
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ALWAYS_ON, -1))
-                .isEqualTo(1);
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, -1))
+            .isEqualTo(1);
     }
 
     @Test
-    public void onPreferenceChange_disable() throws Exception {
+    public void onPreferenceChange_disable() {
         mController.onPreferenceChange(mSwitchPreference, false);
 
-        assertThat(Settings.Secure.getInt(null, Settings.Secure.DOZE_ALWAYS_ON, -1))
-                .isEqualTo(0);
+        assertThat(Settings.Secure.getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, -1))
+            .isEqualTo(0);
     }
 
     @Test
-    public void isAvailable_available() throws Exception {
+    public void isAvailable_available() {
         mController = spy(mController);
         doReturn(true).when(mController).alwaysOnAvailableForUser(any());
 
@@ -120,10 +120,9 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_unavailable() throws Exception {
+    public void isAvailable_unavailable() {
         mController = spy(mController);
         doReturn(false).when(mController).alwaysOnAvailableForUser(any());
-
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -132,33 +131,30 @@ public class AmbientDisplayAlwaysOnPreferenceControllerTest {
     public void testPreferenceController_ProperResultPayloadType() {
         mController = spy(mController);
         doReturn(false).when(mController).alwaysOnAvailableForUser(any());
+
         assertThat(mController.getResultPayload()).isInstanceOf(InlineSwitchPayload.class);
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
         mController = spy(mController);
         doReturn(false).when(mController).alwaysOnAvailableForUser(any());
         final int newValue = 1;
-        final ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, 0 /* value */);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, 0 /* value */);
 
         ((InlinePayload) mController.getResultPayload()).setValue(mContext, newValue);
-        final int updatedValue = Settings.Secure.getInt(resolver,
-                Settings.Secure.DOZE_ALWAYS_ON, 1 /* default */);
+        final int updatedValue = Settings.Secure.
+            getInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, 1 /* default */);
 
         assertThat(updatedValue).isEqualTo(newValue);
     }
 
     @Test
-    @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
         mController = spy(mController);
         doReturn(false).when(mController).alwaysOnAvailableForUser(any());
         final int currentValue = 1;
-        final ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.DOZE_ALWAYS_ON, currentValue);
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.DOZE_ALWAYS_ON, currentValue);
 
         final int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
 

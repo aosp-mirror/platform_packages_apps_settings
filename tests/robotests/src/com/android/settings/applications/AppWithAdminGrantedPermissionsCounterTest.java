@@ -16,6 +16,16 @@
 
 package com.android.settings.applications;
 
+import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -27,7 +37,6 @@ import android.os.UserHandle;
 import android.os.UserManager;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.wrapper.DevicePolicyManagerWrapper;
 import com.android.settings.wrapper.IPackageManagerWrapper;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
@@ -37,26 +46,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 import java.util.Arrays;
 
-import static com.android.settings.testutils.ApplicationTestUtils.buildInfo;
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
-
-/**
- * Tests for {@link InstalledAppCounter}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public final class AppWithAdminGrantedPermissionsCounterTest {
 
     private final String APP_1 = "app1";
@@ -81,11 +75,16 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
     private final String PERMISSION_2 = "some.permission.2";
     private final String[] PERMISSIONS = {PERMISSION_1, PERMISSION_2};
 
-    @Mock private UserManager mUserManager;
-    @Mock private Context mContext;
-    @Mock private PackageManagerWrapper mPackageManager;
-    @Mock private IPackageManagerWrapper mPackageManagerService;
-    @Mock private DevicePolicyManagerWrapper mDevicePolicyManager;
+    @Mock
+    private UserManager mUserManager;
+    @Mock
+    private Context mContext;
+    @Mock
+    private PackageManagerWrapper mPackageManager;
+    @Mock
+    private IPackageManagerWrapper mPackageManagerService;
+    @Mock
+    private DevicePolicyManagerWrapper mDevicePolicyManager;
 
     private int mAppCount = -1;
     private ApplicationInfo mApp1;
@@ -250,9 +249,9 @@ public final class AppWithAdminGrantedPermissionsCounterTest {
                 new UserInfo(MANAGED_PROFILE_ID, "managed profile", 0)));
     }
 
-    private class AppWithAdminGrantedPermissionsCounterTestable extends
-            AppWithAdminGrantedPermissionsCounter {
-        public AppWithAdminGrantedPermissionsCounterTestable(String[] permissions) {
+    private class AppWithAdminGrantedPermissionsCounterTestable
+        extends AppWithAdminGrantedPermissionsCounter {
+        private AppWithAdminGrantedPermissionsCounterTestable(String[] permissions) {
             super(mContext, permissions, mPackageManager, mPackageManagerService,
                     mDevicePolicyManager);
         }

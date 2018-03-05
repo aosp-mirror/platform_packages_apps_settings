@@ -17,27 +17,25 @@
 
 package com.android.settings.search;
 
+import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.provider.Settings;
-import android.content.Context;
 
-import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 import com.android.settings.search.ResultPayload.Availability;
 import com.android.settings.search.ResultPayload.SettingsSource;
+import com.android.settings.testutils.SettingsRobolectricTestRunner;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
-import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE;
-import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class InlineSwitchPayloadTest {
 
     private static final String DUMMY_SETTING = "inline_test";
@@ -61,8 +59,8 @@ public class InlineSwitchPayloadTest {
         final Intent intent = new Intent();
         intent.putExtra(intentKey, intentVal);
 
-        InlineSwitchPayload payload = new InlineSwitchPayload(uri, source, 1, intent, true,
-                1 /* default */);
+        InlineSwitchPayload payload =
+            new InlineSwitchPayload(uri, source, 1, intent, true, 1 /* default */);
         final Intent retainedIntent = payload.getIntent();
         assertThat(payload.getKey()).isEqualTo(uri);
         assertThat(payload.getType()).isEqualTo(type);

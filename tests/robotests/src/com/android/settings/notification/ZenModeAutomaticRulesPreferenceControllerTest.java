@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static junit.framework.Assert.assertEquals;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +28,6 @@ import android.provider.Settings;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -39,7 +37,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
@@ -49,12 +46,13 @@ import java.util.List;
 import java.util.Map;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeAutomaticRulesPreferenceControllerTest {
+
+    private static final String GENERIC_RULE_NAME = "test";
+    private static final String DEFAULT_ID_1 = "DEFAULT_1";
+    private static final String DEFAULT_ID_2 = "DEFAULT_2";
+
     private ZenModeAutomaticRulesPreferenceController mController;
-    private final String GENERIC_RULE_NAME = "test";
-    final String DEFAULT_ID_1 = "DEFAULT_1";
-    final String DEFAULT_ID_2 = "DEFAULT_2";
     private final List<String> mDefaultIds = Arrays.asList(DEFAULT_ID_1, DEFAULT_ID_2);
 
     @Mock
@@ -76,7 +74,7 @@ public class ZenModeAutomaticRulesPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
 
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mController = new ZenModeAutomaticRulesPreferenceController(mContext, mock(Fragment.class),
                 mock(Lifecycle.class));

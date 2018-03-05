@@ -15,16 +15,15 @@
  */
 package com.android.settings.datetime.timezone;
 
+import static com.google.common.truth.Truth.assertThat;
+
 import android.content.Context;
 import android.icu.util.TimeZone;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowResources;
 
 import org.junit.After;
 import org.junit.Before;
@@ -40,15 +39,10 @@ import org.robolectric.annotation.Implements;
 import java.util.Collections;
 import java.util.Locale;
 
-import static com.google.common.truth.Truth.assertThat;
-
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                SettingsShadowResources.class,
-                SettingsShadowResources.SettingsShadowTheme.class,
-                TimeZoneAdapterTest.ShadowDataFormat.class})
+@Config(shadows = TimeZoneAdapterTest.ShadowDataFormat.class)
 public class TimeZoneAdapterTest {
+
     @Mock
     private View.OnClickListener mOnClickListener;
 
@@ -58,7 +52,7 @@ public class TimeZoneAdapterTest {
     private Locale mDefaultLocale;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mTimeZoneAdapter = new TimeZoneAdapter(mOnClickListener, mContext);
@@ -66,26 +60,16 @@ public class TimeZoneAdapterTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Locale.setDefault(mDefaultLocale);
-    }
-
-    @Implements(android.text.format.DateFormat.class)
-    public static class ShadowDataFormat {
-
-        public static String mTimeFormatString = "";
-
-        @Implementation
-        public static String getTimeFormatString(Context context) {
-            return mTimeFormatString;
-        }
     }
 
     @Test
     public void getItemViewType_onDefaultTimeZone_returnsTypeSelected() {
         final TimeZoneInfo tzi = dummyTimeZoneInfo(TimeZone.getDefault());
         mTimeZoneAdapter.setTimeZoneInfos(Collections.singletonList(tzi));
-        assertThat(mTimeZoneAdapter.getItemViewType(0)).isEqualTo(TimeZoneAdapter.VIEW_TYPE_SELECTED);
+        assertThat(mTimeZoneAdapter.getItemViewType(0))
+            .isEqualTo(TimeZoneAdapter.VIEW_TYPE_SELECTED);
     }
 
     @Test
@@ -102,8 +86,10 @@ public class TimeZoneAdapterTest {
 
         final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
 
-        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        final ViewHolder viewHolder =
+            (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
         mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mDstView).isNotNull();
         assertThat(viewHolder.mDstView.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
@@ -114,8 +100,10 @@ public class TimeZoneAdapterTest {
 
         final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
 
-        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        final ViewHolder viewHolder =
+            (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
         mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mDstView).isNotNull();
         assertThat(viewHolder.mDstView.getVisibility()).isEqualTo(View.GONE);
     }
 
@@ -130,8 +118,10 @@ public class TimeZoneAdapterTest {
 
         final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
 
-        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        final ViewHolder viewHolder =
+            (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
         mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mTimeView).isNotNull();
         assertThat(viewHolder.mTimeView.getText().toString()).hasLength(5);
     }
 
@@ -146,8 +136,10 @@ public class TimeZoneAdapterTest {
 
         final FrameLayout parent = new FrameLayout(RuntimeEnvironment.application);
 
-        final ViewHolder viewHolder = (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
+        final ViewHolder viewHolder =
+            (ViewHolder) mTimeZoneAdapter.createViewHolder(parent, TimeZoneAdapter.VIEW_TYPE_NORMAL);
         mTimeZoneAdapter.bindViewHolder(viewHolder, 0);
+        assertThat(viewHolder.mTimeView).isNotNull();
         assertThat(viewHolder.mTimeView.getText().toString()).hasLength(8);
     }
 
@@ -163,5 +155,16 @@ public class TimeZoneAdapterTest {
 
     private TimeZoneInfo dummyTimeZoneInfo(TimeZone timeZone) {
         return new TimeZoneInfo.Builder(timeZone).setGmtOffset("GMT+0").setItemId(1).build();
+    }
+
+    @Implements(android.text.format.DateFormat.class)
+    public static class ShadowDataFormat {
+
+        private static String mTimeFormatString = "";
+
+        @Implementation
+        public static String getTimeFormatString(Context context) {
+            return mTimeFormatString;
+        }
     }
 }

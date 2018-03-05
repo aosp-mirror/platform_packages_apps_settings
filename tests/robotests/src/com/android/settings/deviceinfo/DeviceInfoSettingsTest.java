@@ -34,13 +34,11 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 import com.android.settings.testutils.shadow.ShadowConnectivityManager;
 import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -58,11 +56,7 @@ import org.robolectric.shadows.ShadowApplication;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(
-        manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {ShadowUtils.class, ShadowConnectivityManager.class, ShadowUserManager.class}
-)
+@Config(shadows = {ShadowUtils.class, ShadowConnectivityManager.class, ShadowUserManager.class})
 public class DeviceInfoSettingsTest {
 
     @Mock
@@ -91,22 +85,19 @@ public class DeviceInfoSettingsTest {
         doNothing().when(mSettings).onCreatePreferences(any(), any());
 
         doReturn(mScreen).when(mSettings).getPreferenceScreen();
-        ShadowApplication.getInstance().setSystemService(Context.TELEPHONY_SERVICE,
-                mTelephonyManager);
+        ShadowApplication.getInstance()
+            .setSystemService(Context.TELEPHONY_SERVICE, mTelephonyManager);
     }
 
     @Test
-    @Config(shadows = {
-            SettingsShadowSystemProperties.class
-    })
     public void getPrefXml_shouldReturnDeviceInfoXml() {
         assertThat(mSettings.getPreferenceScreenResId()).isEqualTo(R.xml.device_info_settings);
     }
 
     @Test
     public void getSummary_shouldReturnDeviceModel() {
-        final SummaryLoader.SummaryProvider mProvider = DeviceInfoSettings.SUMMARY_PROVIDER_FACTORY
-                .createSummaryProvider(null, mSummaryLoader);
+        final SummaryLoader.SummaryProvider mProvider =
+            DeviceInfoSettings.SUMMARY_PROVIDER_FACTORY.createSummaryProvider(null, mSummaryLoader);
 
         mProvider.setListening(true);
 
@@ -116,8 +107,8 @@ public class DeviceInfoSettingsTest {
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
         final Context context = RuntimeEnvironment.application;
-        final List<String> niks = DeviceInfoSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(context);
+        final List<String> niks =
+            DeviceInfoSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(context);
         final int xmlId = (new DeviceInfoSettings()).getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
@@ -126,8 +117,7 @@ public class DeviceInfoSettingsTest {
     }
 
     @Test
-    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
-            SettingsShadowSystemProperties.class})
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_fromSearch_shouldNotOverrideInitialExpandedCount() {
         final Bundle args = new Bundle();
         args.putString(EXTRA_FRAGMENT_ARG_KEY, "search_key");
@@ -139,8 +129,7 @@ public class DeviceInfoSettingsTest {
     }
 
     @Test
-    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
-            SettingsShadowSystemProperties.class})
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_singleSim_shouldAddSingleSimCount() {
         doReturn(1).when(mTelephonyManager).getPhoneCount();
 
@@ -151,8 +140,7 @@ public class DeviceInfoSettingsTest {
     }
 
     @Test
-    @Config(shadows = {SettingsShadowResources.SettingsShadowTheme.class,
-            SettingsShadowSystemProperties.class})
+    @Config(shadows = SettingsShadowResources.SettingsShadowTheme.class)
     public void onCreate_dualeSim_shouldAddDualSimCount() {
         doReturn(2).when(mTelephonyManager).getPhoneCount();
 

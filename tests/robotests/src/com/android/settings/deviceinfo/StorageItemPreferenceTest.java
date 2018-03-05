@@ -16,7 +16,6 @@
 package com.android.settings.deviceinfo;
 
 import static com.android.settings.utils.FileSizeFormatter.MEGABYTE_IN_BYTES;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -26,17 +25,15 @@ import android.widget.ProgressBar;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class StorageItemPreferenceTest {
+
     private Context mContext;
     private StorageItemPreference mPreference;
 
@@ -48,27 +45,26 @@ public class StorageItemPreferenceTest {
 
     @Test
     public void testBeforeLoad() {
-        assertThat(mPreference.getSummary()).isEqualTo(
-                mContext.getString(R.string.memory_calculating_size));
+        assertThat(mPreference.getSummary())
+            .isEqualTo(mContext.getString(R.string.memory_calculating_size));
     }
 
     @Test
     public void testAfterLoad() {
         mPreference.setStorageSize(MEGABYTE_IN_BYTES * 10, MEGABYTE_IN_BYTES * 100);
-        assertThat(((String) mPreference.getSummary())).isEqualTo("0.01 GB");
+        assertThat(mPreference.getSummary()).isEqualTo("0.01 GB");
     }
 
     @Test
     public void testProgressBarPercentageSet() {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 LayoutInflater.from(mContext).inflate(R.layout.storage_item, null));
-        final ProgressBar progressBar =
-                (ProgressBar) holder.itemView.findViewById(android.R.id.progress);
+        final ProgressBar progressBar = holder.itemView.findViewById(android.R.id.progress);
 
         mPreference.onBindViewHolder(holder);
         mPreference.setStorageSize(MEGABYTE_IN_BYTES, MEGABYTE_IN_BYTES * 10);
 
+        assertThat(progressBar).isNotNull();
         assertThat(progressBar.getProgress()).isEqualTo(10);
     }
-
 }

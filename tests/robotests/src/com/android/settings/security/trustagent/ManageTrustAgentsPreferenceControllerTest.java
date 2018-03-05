@@ -25,7 +25,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
+import com.android.settings.security.trustagent.TrustAgentManager.TrustAgentComponentInfo;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -38,10 +38,9 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ManageTrustAgentsPreferenceControllerTest {
 
     @Mock
@@ -107,7 +106,7 @@ public class ManageTrustAgentsPreferenceControllerTest {
     public void updateState_isSecure_hasTrustAgent_shouldShowDetailedSummary() {
         when(mLockPatternUtils.isSecure(anyInt())).thenReturn(true);
         when(mTrustAgentManager.getActiveTrustAgents(mContext, mLockPatternUtils))
-                .thenReturn(Arrays.asList(new TrustAgentManager.TrustAgentComponentInfo()));
+                .thenReturn(Collections.singletonList(new TrustAgentComponentInfo()));
 
         mController.updateState(mPreference);
 

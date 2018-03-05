@@ -22,7 +22,7 @@ import android.util.SparseBooleanArray;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
-@Implements(ConnectivityManager.class)
+@Implements(value = ConnectivityManager.class, inheritImplementationMethods = true)
 public class ShadowConnectivityManager extends org.robolectric.shadows.ShadowConnectivityManager {
 
     private final SparseBooleanArray mSupportedNetworkTypes = new SparseBooleanArray();

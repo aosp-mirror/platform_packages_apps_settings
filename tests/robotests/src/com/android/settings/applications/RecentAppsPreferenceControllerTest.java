@@ -17,7 +17,6 @@
 package com.android.settings.applications;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
@@ -48,7 +47,6 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.TextUtils;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
@@ -57,7 +55,6 @@ import com.android.settingslib.applications.instantapps.InstantAppDataProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
@@ -70,7 +67,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class RecentAppsPreferenceControllerTest {
 
     @Mock
@@ -132,8 +128,7 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void onDisplayAndUpdateState_shouldRefreshUi() {
-        mController = spy(
-                new RecentAppsPreferenceController(mContext, (Application) null, null));
+        mController = spy(new RecentAppsPreferenceController(mContext, (Application) null, null));
 
         doNothing().when(mController).refreshUi(mContext);
 
@@ -175,15 +170,15 @@ public class RecentAppsPreferenceControllerTest {
 
         // stat1, stat2 are valid apps. stat3 is invalid.
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
+            .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
+            .thenReturn(mAppEntry);
         when(mAppState.getEntry(stat3.mPackageName, UserHandle.myUserId()))
-                .thenReturn(null);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
-                new ResolveInfo());
+            .thenReturn(null);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
+            .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);
@@ -222,21 +217,15 @@ public class RecentAppsPreferenceControllerTest {
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId())).thenReturn(stat2Entry);
 
         // Only the regular app stat1 should have its intent resolve.
-        when(mPackageManager.resolveActivity(argThat(intentMatcher(stat1.mPackageName)),
-                anyInt())).thenReturn(new ResolveInfo());
+        when(mPackageManager.resolveActivity(argThat(intentMatcher(stat1.mPackageName)), anyInt()))
+            .thenReturn(new ResolveInfo());
 
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
                 .thenReturn(stats);
 
         // Make sure stat2 is considered an instant app.
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
-                (InstantAppDataProvider) (ApplicationInfo info) -> {
-                    if (info == stat2Entry.info) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
+                (InstantAppDataProvider) (ApplicationInfo info) -> info == stat2Entry.info);
 
         mController.displayPreference(mScreen);
 
@@ -289,13 +278,13 @@ public class RecentAppsPreferenceControllerTest {
 
         // stat1, stat2 are not displayable
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
+            .thenReturn(mock(ApplicationsState.AppEntry.class));
         when(mAppState.getEntry(stat2.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mock(ApplicationsState.AppEntry.class));
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
-                new ResolveInfo());
+            .thenReturn(mock(ApplicationsState.AppEntry.class));
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
+            .thenReturn(stats);
 
         mController.displayPreference(mScreen);
 
@@ -307,18 +296,18 @@ public class RecentAppsPreferenceControllerTest {
 
     @Test
     public void display_showRecents_formatSummary() {
-        final List<UsageStats> stats = new ArrayList<>();
         final UsageStats stat1 = new UsageStats();
         stat1.mLastTimeUsed = System.currentTimeMillis();
         stat1.mPackageName = "pkg.class";
+        final List<UsageStats> stats = new ArrayList<>();
         stats.add(stat1);
 
         when(mAppState.getEntry(stat1.mPackageName, UserHandle.myUserId()))
-                .thenReturn(mAppEntry);
-        when(mPackageManager.resolveActivity(any(Intent.class), anyInt())).thenReturn(
-                new ResolveInfo());
+            .thenReturn(mAppEntry);
+        when(mPackageManager.resolveActivity(any(Intent.class), anyInt()))
+            .thenReturn(new ResolveInfo());
         when(mUsageStatsManager.queryUsageStats(anyInt(), anyLong(), anyLong()))
-                .thenReturn(stats);
+            .thenReturn(stats);
         mAppEntry.info = mApplicationInfo;
 
         mController.displayPreference(mScreen);

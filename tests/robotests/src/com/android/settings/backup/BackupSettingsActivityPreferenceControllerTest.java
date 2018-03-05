@@ -17,22 +17,17 @@
 package com.android.settings.backup;
 
 import static com.google.common.truth.Truth.assertThat;
-
-import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
-import android.os.RemoteException;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.TestConfig;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,17 +40,15 @@ import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class})
+@Config(shadows = BackupSettingsActivityPreferenceControllerTest.ShadowBackupManager.class)
 public class BackupSettingsActivityPreferenceControllerTest {
+
     private static final String KEY_BACKUP_SETTINGS = "backup_settings";
 
     private Context mContext;
     @Mock
     private UserManager mUserManager;
 
-    @Mock
-    private PreferenceScreen mScreen;
     @Mock
     private Preference mBackupPreference;
 
@@ -64,7 +57,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
     private static boolean mBackupEnabled;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application.getApplicationContext());
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
@@ -73,7 +66,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_backupOn() throws RemoteException {
+    public void updateState_backupOn() {
         mBackupEnabled = true;
 
         mController.updateState(mBackupPreference);
@@ -82,7 +75,7 @@ public class BackupSettingsActivityPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_backupOff() throws RemoteException {
+    public void updateState_backupOff() {
         mBackupEnabled = false;
 
         mController.updateState(mBackupPreference);

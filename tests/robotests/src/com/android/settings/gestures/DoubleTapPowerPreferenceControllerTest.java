@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.search.InlinePayload;
 import com.android.settings.search.InlineSwitchPayload;
@@ -41,26 +40,22 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION, shadows = {
-        SettingsShadowResources.class
-})
+@Config(shadows = SettingsShadowResources.class)
 public class DoubleTapPowerPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
+    private ContentResolver mContentResolver;
     private DoubleTapPowerPreferenceController mController;
     private static final String KEY_DOUBLE_TAP_POWER = "gesture_double_tap_power";
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        mContext = RuntimeEnvironment.application;
+        mContentResolver = mContext.getContentResolver();
         mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
     }
 
@@ -71,18 +66,16 @@ public class DoubleTapPowerPreferenceControllerTest {
 
     @Test
     public void isAvailable_configIsTrue_shouldReturnTrue() {
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled))
-                .thenReturn(true);
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, Boolean.TRUE);
 
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     public void isAvailable_configIsTrue_shouldReturnFalse() {
-        when(mContext.getResources().
-                getBoolean(com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled))
-                .thenReturn(false);
+        SettingsShadowResources.overrideResource(
+            com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, Boolean.FALSE);
 
         assertThat(mController.isAvailable()).isFalse();
     }
@@ -90,10 +83,8 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void testSwitchEnabled_configIsNotSet_shouldReturnTrue() {
         // Set the setting to be enabled.
-        final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(),
-                CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
-        mController = new DoubleTapPowerPreferenceController(context, null, KEY_DOUBLE_TAP_POWER);
+        Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, ON);
+        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isSwitchPrefEnabled()).isTrue();
     }
@@ -101,20 +92,17 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Test
     public void testSwitchEnabled_configIsSet_shouldReturnFalse() {
         // Set the setting to be disabled.
-        final Context context = RuntimeEnvironment.application;
-        Settings.System.putInt(context.getContentResolver(),
-                CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
-        mController = new DoubleTapPowerPreferenceController(context, null, KEY_DOUBLE_TAP_POWER);
+        Settings.System.putInt(mContentResolver, CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, OFF);
+        mController = new DoubleTapPowerPreferenceController(mContext, null, KEY_DOUBLE_TAP_POWER);
 
         assertThat(mController.isSwitchPrefEnabled()).isFalse();
     }
 
     @Test
     public void testPreferenceController_ProperResultPayloadType() {
-        final Context context = RuntimeEnvironment.application;
         DoubleTapPowerPreferenceController controller =
-                new DoubleTapPowerPreferenceController(context, null /* lifecycle */,
-                        KEY_DOUBLE_TAP_POWER);
+            new DoubleTapPowerPreferenceController(mContext, null /* lifecycle */,
+                KEY_DOUBLE_TAP_POWER);
         ResultPayload payload = controller.getResultPayload();
         assertThat(payload).isInstanceOf(InlineSwitchPayload.class);
     }
@@ -123,13 +111,12 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Config(shadows = ShadowSecureSettings.class)
     public void testSetValue_updatesCorrectly() {
         int newValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver, Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED,
-                0);
+        Settings.Secure.putInt(mContentResolver,
+            Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, 0);
 
         InlinePayload payload = ((InlineSwitchPayload) mController.getResultPayload());
         payload.setValue(mContext, newValue);
-        int updatedValue = Settings.Secure.getInt(resolver,
+        int updatedValue = Settings.Secure.getInt(mContentResolver,
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, -1);
         updatedValue = 1 - updatedValue; // DoubleTapPower is a non-standard switch
 
@@ -140,8 +127,7 @@ public class DoubleTapPowerPreferenceControllerTest {
     @Config(shadows = ShadowSecureSettings.class)
     public void testGetValue_correctValueReturned() {
         int currentValue = 1;
-        ContentResolver resolver = mContext.getContentResolver();
-        Settings.Secure.putInt(resolver,
+        Settings.Secure.putInt(mContentResolver,
                 Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED, currentValue);
 
         int newValue = ((InlinePayload) mController.getResultPayload()).getValue(mContext);
@@ -154,9 +140,7 @@ public class DoubleTapPowerPreferenceControllerTest {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, false);
 
-        assertThat(
-                isSuggestionComplete(RuntimeEnvironment.application, null/* prefs */))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext, null/* prefs */)).isTrue();
     }
 
     @Test
@@ -164,12 +148,9 @@ public class DoubleTapPowerPreferenceControllerTest {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
-        final Context context = RuntimeEnvironment.application;
-        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
-                .getSharedPrefs(context);
-        assertThat(
-                isSuggestionComplete(RuntimeEnvironment.application, prefs))
-                .isFalse();
+        final SharedPreferences prefs =
+            new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+        assertThat(isSuggestionComplete(mContext, prefs)).isFalse();
     }
 
     @Test
@@ -177,14 +158,10 @@ public class DoubleTapPowerPreferenceControllerTest {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_cameraDoubleTapPowerGestureEnabled, true);
         // No stored value in shared preferences if not visited yet.
-        final Context context = RuntimeEnvironment.application;
-        final SharedPreferences prefs = new SuggestionFeatureProviderImpl(context)
-                .getSharedPrefs(context);
-        prefs.edit().putBoolean(
-                DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
+        final SharedPreferences prefs =
+            new SuggestionFeatureProviderImpl(mContext).getSharedPrefs(mContext);
+        prefs.edit().putBoolean(DoubleTapPowerSettings.PREF_KEY_SUGGESTION_COMPLETE, true).commit();
 
-        assertThat(
-                isSuggestionComplete(RuntimeEnvironment.application, prefs))
-                .isTrue();
+        assertThat(isSuggestionComplete(mContext, prefs)).isTrue();
     }
 }

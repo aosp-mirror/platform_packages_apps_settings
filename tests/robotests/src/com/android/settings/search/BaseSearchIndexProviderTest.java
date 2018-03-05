@@ -16,7 +16,6 @@
 
 package com.android.settings.search;
 
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
@@ -25,7 +24,6 @@ import android.content.Context;
 import android.provider.SearchIndexableResource;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -39,12 +37,10 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class BaseSearchIndexProviderTest {
 
     private static final String TEST_PREF_KEY = "test_pref_key";
@@ -64,9 +60,10 @@ public class BaseSearchIndexProviderTest {
         assertThat(mIndexProvider.getNonIndexableKeys(mContext)).isEmpty();
     }
 
-    public static class AvailablePreferenceController extends AbstractPreferenceController
-            implements PreferenceControllerMixin {
-        public AvailablePreferenceController(Context context) {
+    public static class AvailablePreferenceController
+        extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
+        private AvailablePreferenceController(Context context) {
             super(context);
         }
 
@@ -100,7 +97,7 @@ public class BaseSearchIndexProviderTest {
                     boolean enabled) {
                 final SearchIndexableResource sir = new SearchIndexableResource(context);
                 sir.xmlResId = R.xml.location_settings;
-                return Arrays.asList(sir);
+                return Collections.singletonList(sir);
             }
 
             @Override
@@ -122,9 +119,11 @@ public class BaseSearchIndexProviderTest {
         assertThat(controllers).hasSize(3);
     }
 
-    public static class NotAvailablePreferenceController extends AbstractPreferenceController
-            implements PreferenceControllerMixin {
-        public NotAvailablePreferenceController(Context context) {
+    public static class NotAvailablePreferenceController
+        extends AbstractPreferenceController
+        implements PreferenceControllerMixin {
+
+        private NotAvailablePreferenceController(Context context) {
             super(context);
         }
 
@@ -153,10 +152,10 @@ public class BaseSearchIndexProviderTest {
         final BaseSearchIndexProvider provider = new BaseSearchIndexProvider() {
             @Override
             public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                    boolean enabled) {
+                boolean enabled) {
                 final SearchIndexableResource sir = new SearchIndexableResource(context);
                 sir.xmlResId = R.xml.data_usage;
-                return Arrays.asList(sir);
+                return Collections.singletonList(sir);
             }
 
             @Override
@@ -165,8 +164,8 @@ public class BaseSearchIndexProviderTest {
             }
         };
 
-        final List<String> nonIndexableKeys = provider
-                .getNonIndexableKeys(RuntimeEnvironment.application);
+        final List<String> nonIndexableKeys =
+            provider.getNonIndexableKeys(RuntimeEnvironment.application);
 
         assertThat(nonIndexableKeys).contains("status_header");
     }

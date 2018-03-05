@@ -1,7 +1,6 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
@@ -10,7 +9,7 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import com.android.settings.TestConfig;
+
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 
@@ -23,7 +22,6 @@ import org.robolectric.annotation.Config;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConfigureWifiSettingsTest {
 
     private Context mContext;
@@ -35,8 +33,8 @@ public class ConfigureWifiSettingsTest {
 
     @Test
     public void testNonIndexableKeys_existInXmlLayout() {
-        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
         final int xmlId = new ConfigureWifiSettings().getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
@@ -47,11 +45,12 @@ public class ConfigureWifiSettingsTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void testNonIndexableKeys_ifPageDisabled_shouldNotIndexResource() {
-        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
         final int xmlId = new ConfigureWifiSettings().getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(mContext, xmlId);
+        assertThat(keys).isNotNull();
         assertThat(niks).containsAllIn(keys);
     }
 
@@ -61,8 +60,8 @@ public class ConfigureWifiSettingsTest {
         when(manager.getActiveNetworkInfo()).thenReturn(null);
         doReturn(manager).when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
         assertThat(niks).contains(ConfigureWifiSettings.KEY_IP_ADDRESS);
     }
 
@@ -74,8 +73,8 @@ public class ConfigureWifiSettingsTest {
         when(manager.getActiveNetworkInfo()).thenReturn(info);
         doReturn(manager).when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
         assertThat(niks).contains(ConfigureWifiSettings.KEY_IP_ADDRESS);
     }
 
@@ -87,8 +86,8 @@ public class ConfigureWifiSettingsTest {
         when(manager.getActiveNetworkInfo()).thenReturn(info);
         doReturn(manager).when(mContext).getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        final List<String> niks = ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER
-                .getNonIndexableKeys(mContext);
+        final List<String> niks =
+            ConfigureWifiSettings.SEARCH_INDEX_DATA_PROVIDER.getNonIndexableKeys(mContext);
         assertThat(niks).doesNotContain(ConfigureWifiSettings.KEY_IP_ADDRESS);
     }
 }

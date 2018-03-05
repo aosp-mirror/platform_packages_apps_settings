@@ -26,7 +26,6 @@ import android.support.v14.preference.SwitchPreference;
 
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.security.trustagent.TrustAgentManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -37,10 +36,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class PowerButtonInstantLockPreferenceControllerTest {
 
     private static final int TEST_USER_ID = 0;
@@ -129,5 +126,4 @@ public class PowerButtonInstantLockPreferenceControllerTest {
 
         verify(mLockPatternUtils).setPowerButtonInstantlyLocks(true, TEST_USER_ID);
     }
-
 }

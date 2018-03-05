@@ -20,10 +20,8 @@ import static android.app.NotificationChannel.DEFAULT_CHANNEL_ID;
 import static android.app.NotificationManager.IMPORTANCE_HIGH;
 import static android.app.NotificationManager.IMPORTANCE_LOW;
 import static android.app.NotificationManager.IMPORTANCE_UNSPECIFIED;
-
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -40,7 +38,6 @@ import android.os.UserManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -52,11 +49,9 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AllowSoundPreferenceControllerTest {
 
     private Context mContext;
@@ -70,7 +65,7 @@ public class AllowSoundPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     @Mock
-    NotificationSettingsBase.ImportanceListener mImportanceListener;
+    private NotificationSettingsBase.ImportanceListener mImportanceListener;
 
     private AllowSoundPreferenceController mController;
 
@@ -80,7 +75,7 @@ public class AllowSoundPreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNm);
         shadowApplication.setSystemService(Context.USER_SERVICE, mUm);
-        mContext = shadowApplication.getApplicationContext();
+        mContext = RuntimeEnvironment.application;
         mController =
                 spy(new AllowSoundPreferenceController(mContext, mImportanceListener, mBackend));
     }
@@ -135,7 +130,7 @@ public class AllowSoundPreferenceControllerTest {
         mController.onResume(new NotificationBackend.AppRow(), channel, null, mock(
                 RestrictedLockUtils.EnforcedAdmin.class));
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
@@ -150,7 +145,7 @@ public class AllowSoundPreferenceControllerTest {
         when(channel.getId()).thenReturn(lockedId);
         mController.onResume(appRow, channel, null, null);
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
 
         assertFalse(pref.isEnabled());
@@ -163,7 +158,7 @@ public class AllowSoundPreferenceControllerTest {
         when(channel.getId()).thenReturn("something");
         mController.onResume(appRow, channel, null, null);
 
-        Preference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        Preference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
 
         assertTrue(pref.isEnabled());
@@ -175,7 +170,7 @@ public class AllowSoundPreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
         assertTrue(pref.isChecked());
     }
@@ -186,7 +181,7 @@ public class AllowSoundPreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_UNSPECIFIED);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
         assertTrue(pref.isChecked());
     }
@@ -197,8 +192,7 @@ public class AllowSoundPreferenceControllerTest {
         when(channel.getImportance()).thenReturn(IMPORTANCE_LOW);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         mController.updateState(pref);
         assertFalse(pref.isChecked());
     }
@@ -209,8 +203,7 @@ public class AllowSoundPreferenceControllerTest {
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_LOW);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);
@@ -227,8 +220,7 @@ public class AllowSoundPreferenceControllerTest {
                 new NotificationChannel(DEFAULT_CHANNEL_ID, "a", IMPORTANCE_HIGH);
         mController.onResume(new NotificationBackend.AppRow(), channel, null, null);
 
-        RestrictedSwitchPreference pref =
-                new RestrictedSwitchPreference(RuntimeEnvironment.application);
+        RestrictedSwitchPreference pref = new RestrictedSwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(pref);
         mController.displayPreference(mScreen);
         mController.updateState(pref);

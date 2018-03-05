@@ -17,9 +17,7 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -27,29 +25,24 @@ import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeSettingsTest {
 
     private ZenModeSettings.SummaryBuilder mBuilder;
     private Context mContext;
-    private ZenModeSettings mSettings;
 
     @Before
     public void setUp() {
         mContext = RuntimeEnvironment.application.getApplicationContext();
-        mSettings = new ZenModeSettings();
         mBuilder = new ZenModeSettings.SummaryBuilder(mContext);
     }
 
@@ -93,11 +86,10 @@ public class ZenModeSettingsTest {
 
     @Test
     public void searchProvider_shouldIndexDefaultXml() {
-        final List<SearchIndexableResource> sir = mSettings.SEARCH_INDEX_DATA_PROVIDER
+        final List<SearchIndexableResource> sir = ZenModeSettings.SEARCH_INDEX_DATA_PROVIDER
                 .getXmlResourcesToIndex(mContext, true /* enabled */);
 
         assertThat(sir).hasSize(1);
         assertThat(sir.get(0).xmlResId).isEqualTo(R.xml.zen_mode_settings);
     }
-
 }

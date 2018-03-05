@@ -16,19 +16,13 @@
 
 package com.android.settings.enterprise;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.runner.RunWith;
-import org.robolectric.annotation.Config;
 
-/**
- * Tests for {@link FailedPasswordWipePreferenceControllerBase}.
- */
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
-public final class FailedPasswordWipePreferenceControllerBaseTest extends
-        FailedPasswordWipePreferenceControllerTestBase {
+public class FailedPasswordWipePreferenceControllerBaseTest
+    extends FailedPasswordWipePreferenceControllerTestBase {
 
     private int mMaximumFailedPasswordsBeforeWipe = 0;
 

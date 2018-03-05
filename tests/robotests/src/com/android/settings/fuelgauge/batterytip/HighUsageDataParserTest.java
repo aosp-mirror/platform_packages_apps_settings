@@ -19,22 +19,19 @@ package com.android.settings.fuelgauge.batterytip;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.os.BatteryStats;
-import android.text.format.DateUtils;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 
 import java.time.Duration;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class HighUsageDataParserTest {
+
     private static final long PERIOD_ONE_MINUTE_MS = Duration.ofMinutes(1).toMillis();
     private static final long PERIOD_ONE_HOUR_MS = Duration.ofHours(1).toMillis();
     private static final long END_TIME_MS = 2 * PERIOD_ONE_MINUTE_MS;

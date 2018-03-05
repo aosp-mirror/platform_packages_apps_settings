@@ -17,31 +17,24 @@
 package com.android.settings.development;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.SystemProperties;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class ForceMSAAPreferenceControllerTest {
 
     @Mock
@@ -57,22 +50,17 @@ public class ForceMSAAPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new ForceMSAAPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
-    }
-
-    @After
-    public void tearDown() {
-        SettingsShadowSystemProperties.clear();
     }
 
     @Test
     public void onPreferenceChanged_settingEnabled_turnOnForceMsaa() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ForceMSAAPreferenceController.MSAA_PROPERTY, false /* default */);
+        final boolean mode = SystemProperties
+            .getBoolean(ForceMSAAPreferenceController.MSAA_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -81,16 +69,15 @@ public class ForceMSAAPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_turnOffForceMsaa() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SettingsShadowSystemProperties.getBoolean(
-                ForceMSAAPreferenceController.MSAA_PROPERTY, false /* default */);
+        final boolean mode = SystemProperties
+            .getBoolean(ForceMSAAPreferenceController.MSAA_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        SettingsShadowSystemProperties.set(ForceMSAAPreferenceController.MSAA_PROPERTY,
-                Boolean.toString(true));
+        SystemProperties.set(ForceMSAAPreferenceController.MSAA_PROPERTY, Boolean.toString(true));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -98,8 +85,7 @@ public class ForceMSAAPreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        SettingsShadowSystemProperties.set(ForceMSAAPreferenceController.MSAA_PROPERTY,
-                Boolean.toString(false));
+        SystemProperties.set(ForceMSAAPreferenceController.MSAA_PROPERTY, Boolean.toString(false));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);

@@ -26,7 +26,6 @@ import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.provider.Settings;
 
-import com.android.settings.TestConfig;
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProviderImpl;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -37,11 +36,8 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class SwipeToNotificationPreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -101,7 +97,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be enabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 1);
         mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
 
@@ -113,7 +109,7 @@ public class SwipeToNotificationPreferenceControllerTest {
         stubFingerprintSupported(true);
         when(mFingerprintManager.isHardwareDetected()).thenReturn(true);
         // Set the setting to be disabled.
-        final Context context = ShadowApplication.getInstance().getApplicationContext();
+        final Context context = RuntimeEnvironment.application;
         Settings.System.putInt(context.getContentResolver(), SYSTEM_NAVIGATION_KEYS_ENABLED, 0);
         mController = new SwipeToNotificationPreferenceController(context, null, KEY_SWIPE_DOWN);
 

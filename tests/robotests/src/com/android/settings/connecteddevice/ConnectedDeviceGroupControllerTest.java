@@ -16,11 +16,11 @@
 package com.android.settings.connecteddevice;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
@@ -29,7 +29,6 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
 import com.android.settings.dashboard.DashboardFragment;
@@ -43,11 +42,10 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ConnectedDeviceGroupControllerTest {
+
     private static final String PREFERENCE_KEY_1 = "pref_key_1";
 
     @Mock
@@ -78,7 +76,7 @@ public class ConnectedDeviceGroupControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
-        doReturn(mPreferenceManager).when(mPreferenceGroup).getPreferenceManager();
+        when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
 
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mDashboardFragment,

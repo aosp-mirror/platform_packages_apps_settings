@@ -16,13 +16,9 @@
 
 package com.android.settings.development.qstile;
 
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
-        .SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
-import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace
-        .SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
-
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_CONTROL_CODE;
+import static com.android.settings.development.qstile.DevelopmentTiles.WinscopeTrace.SURFACE_FLINGER_LAYER_TRACE_STATUS_CODE;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.isNull;
@@ -36,9 +32,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.widget.Toast;
 
-import com.android.settings.TestConfig;
-import com.android.settings.testutils.shadow.ShadowParcel;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowParcel;
 import com.android.settings.wrapper.IWindowManagerWrapper;
 
 import org.junit.After;
@@ -51,8 +46,8 @@ import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WinscopeTraceTest {
+
     @Mock
     private IWindowManagerWrapper mWindowManager;
     @Mock
@@ -77,7 +72,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void wmReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
         // Assume Surface Trace is disabled.
         ShadowParcel.sReadBoolResult = false;
@@ -86,7 +81,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void sfReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
         // Assume Window Trace is disabled.
         doReturn(false).when(mWindowManager).isWindowTraceEnabled();
@@ -99,7 +94,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void sfAndWmReturnsTraceEnabled_shouldReturnEnabled() throws RemoteException {
         ShadowParcel.sReadBoolResult = true;
         doReturn(true).when(mWindowManager).isWindowTraceEnabled();
@@ -118,7 +113,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void wmThrowsRemoteExAndSfReturnsTraceDisabled_shouldReturnDisabled()
             throws RemoteException {
         ShadowParcel.sReadBoolResult = false;
@@ -144,7 +139,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void setIsEnableTrue_shouldEnableLayerTrace() throws RemoteException {
         mWinscopeTrace.setIsEnabled(true);
         assertThat(ShadowParcel.sWriteIntResult).isEqualTo(1);
@@ -155,7 +150,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void setIsEnableFalse_shouldDisableWindowTrace() throws RemoteException {
         mWinscopeTrace.setIsEnabled(false);
         verify(mWindowManager).stopWindowTrace();
@@ -164,7 +159,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    @Config(shadows = {ShadowParcel.class})
+    @Config(shadows = ShadowParcel.class)
     public void setIsEnableFalse_shouldDisableLayerTrace() throws RemoteException {
         mWinscopeTrace.setIsEnabled(false);
         assertThat(ShadowParcel.sWriteIntResult).isEqualTo(0);
@@ -176,7 +171,7 @@ public class WinscopeTraceTest {
     }
 
     @Test
-    public void setIsEnableFalse_shouldShowToast() throws RemoteException {
+    public void setIsEnableFalse_shouldShowToast() {
         mWinscopeTrace.setIsEnabled(false);
         verify(mToast).show();
     }
@@ -196,7 +191,7 @@ public class WinscopeTraceTest {
      * Verify is surface flinger is not available not calls are made to it.
      */
     @Test
-    public void setIsEnableAndSfUnavailable_shouldFailGracefully() throws RemoteException {
+    public void setIsEnableAndSfUnavailable_shouldFailGracefully() {
         ReflectionHelpers.setField(mWinscopeTrace, "mSurfaceFlinger", null);
         mWinscopeTrace.setIsEnabled(true);
         verifyNoMoreInteractions(mSurfaceFlinger);

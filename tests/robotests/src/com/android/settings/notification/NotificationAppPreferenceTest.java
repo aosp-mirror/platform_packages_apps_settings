@@ -17,7 +17,6 @@
 package com.android.settings.notification;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -30,7 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -38,11 +36,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
-
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class NotificationAppPreferenceTest {
 
     private Context mContext;
@@ -117,6 +112,8 @@ public class NotificationAppPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_app, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
         final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
         preference.onBindViewHolder(holder);
@@ -135,6 +132,8 @@ public class NotificationAppPreferenceTest {
         final PreferenceViewHolder holder = PreferenceViewHolder.createInstanceForTests(
                 inflater.inflate(R.layout.preference_app, null));
         final LinearLayout widgetView = holder.itemView.findViewById(android.R.id.widget_frame);
+        assertThat(widgetView).isNotNull();
+
         inflater.inflate(R.layout.preference_widget_master_switch, widgetView, true);
         final Switch toggle = (Switch) holder.findViewById(R.id.switchWidget);
         preference.onBindViewHolder(holder);

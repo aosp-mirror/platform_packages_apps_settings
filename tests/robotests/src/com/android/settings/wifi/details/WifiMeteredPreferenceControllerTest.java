@@ -16,7 +16,6 @@
 package com.android.settings.wifi.details;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -25,7 +24,6 @@ import android.net.wifi.WifiConfiguration;
 import android.support.v7.preference.DropDownPreference;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -33,14 +31,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WifiMeteredPreferenceControllerTest {
-    public static final int METERED_OVERRIDE_NONE = 0;
-    public static final int METERED_OVERRIDE_METERED = 1;
-    public static final int METERED_OVERRIDE_NOT_METERED = 2;
+
+    private static final int METERED_OVERRIDE_NONE = 0;
+    private static final int METERED_OVERRIDE_METERED = 1;
+    private static final int METERED_OVERRIDE_NOT_METERED = 2;
 
     @Mock
     private WifiConfiguration mWifiConfiguration;

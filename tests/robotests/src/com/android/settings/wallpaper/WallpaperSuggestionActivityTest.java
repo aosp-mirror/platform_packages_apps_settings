@@ -17,7 +17,6 @@
 package com.android.settings.wallpaper;
 
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.Mockito.when;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -27,7 +26,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 
 import com.android.settings.SubSettings;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.wrapper.WallpaperManagerWrapper;
 
@@ -37,20 +35,19 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.android.controller.ActivityController;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
 import org.robolectric.shadows.ShadowActivity;
+import org.robolectric.shadows.ShadowPackageManager;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class WallpaperSuggestionActivityTest {
 
     @Mock
     private Context mContext;
-    @Mock
-    private PackageManager mPackageManager;
     @Mock
     private Resources mResources;
 
@@ -59,12 +56,15 @@ public class WallpaperSuggestionActivityTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getPackageManager()).thenReturn(mPackageManager);
         mController = Robolectric.buildActivity(WallpaperSuggestionActivity.class);
     }
 
     @Test
     public void launch_primarySuggestionActivityDoesNotExist_shouldFallback() {
+        ShadowPackageManager packageManager =
+            shadowOf(RuntimeEnvironment.application.getPackageManager());
+        packageManager.removePackage("com.android.settings");
+
         ShadowActivity activity = shadowOf(mController.setup().get());
         final Intent intent = activity.getNextStartedActivity();
 
@@ -76,11 +76,10 @@ public class WallpaperSuggestionActivityTest {
     @Test
     public void wallpaperServiceEnabled_no_shouldReturnFalse() {
         when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_enableWallpaperService)).thenReturn(false);
+        when(mResources.getBoolean(com.android.internal.R.bool.config_enableWallpaperService))
+            .thenReturn(false);
 
-        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext))
-                .isFalse();
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isFalse();
     }
 
     @Test
@@ -88,8 +87,7 @@ public class WallpaperSuggestionActivityTest {
     public void hasWallpaperSet_no_shouldReturnFalse() {
         ShadowWallpaperManagerWrapper.setWallpaperId(0);
 
-        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext))
-                .isFalse();
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isFalse();
     }
 
     @Test
@@ -97,8 +95,7 @@ public class WallpaperSuggestionActivityTest {
     public void hasWallpaperSet_yes_shouldReturnTrue() {
         ShadowWallpaperManagerWrapper.setWallpaperId(100);
 
-        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext))
-                .isTrue();
+        assertThat(WallpaperSuggestionActivity.isSuggestionComplete(mContext)).isTrue();
     }
 
     @Implements(WallpaperManagerWrapper.class)
@@ -106,7 +103,7 @@ public class WallpaperSuggestionActivityTest {
 
         private static int sWallpaperId;
 
-        public static void setWallpaperId(int id) {
+        private static void setWallpaperId(int id) {
             sWallpaperId = id;
         }
 
@@ -115,7 +112,6 @@ public class WallpaperSuggestionActivityTest {
         }
 
         public void __constructor__(Context context) {
-
         }
 
         @Implementation

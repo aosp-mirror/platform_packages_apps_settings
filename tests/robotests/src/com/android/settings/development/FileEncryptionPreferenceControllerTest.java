@@ -16,11 +16,8 @@
 
 package com.android.settings.development;
 
-import static com.android.settings.development.FileEncryptionPreferenceController
-        .FILE_ENCRYPTION_PROPERTY_KEY;
-
+import static com.android.settings.development.FileEncryptionPreferenceController.FILE_ENCRYPTION_PROPERTY_KEY;
 import static com.google.common.truth.Truth.assertThat;
-
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
@@ -35,24 +32,17 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
-import com.android.settings.testutils.shadow.SettingsShadowSystemProperties;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH,
-        sdk = TestConfig.SDK_VERSION,
-        shadows = {SettingsShadowSystemProperties.class})
 public class FileEncryptionPreferenceControllerTest {
 
     @Mock
@@ -70,13 +60,8 @@ public class FileEncryptionPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         mController = new FileEncryptionPreferenceController(mContext);
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
-                mPreference);
-    }
-
-    @After
-    public void teardown() {
-        SettingsShadowSystemProperties.clear();
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
+            .thenReturn(mPreference);
     }
 
     @Test
@@ -126,9 +111,6 @@ public class FileEncryptionPreferenceControllerTest {
         mController.updateState(mPreference);
 
         verify(mPreference).setEnabled(false);
-        verify(mPreference).setSummary(
-                mContext.getResources().getString(R.string.convert_to_file_encryption_done));
+        verify(mPreference).setSummary(mContext.getString(R.string.convert_to_file_encryption_done));
     }
 }
-
-

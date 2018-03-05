@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settingslib.drawer.CategoryKey;
@@ -30,13 +29,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.annotation.Config;
 
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class AdvancedConnectedDeviceDashboardFragmentTest {
+
     private AdvancedConnectedDeviceDashboardFragment mFragment;
 
     @Before
@@ -54,9 +52,8 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
     @Test
     public void testSearchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                mFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
-                        RuntimeEnvironment.application,
-                        true /* enabled */);
+            AdvancedConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
+                .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
         assertThat(indexRes.get(0).xmlResId).isEqualTo(mFragment.getPreferenceScreenResId());
@@ -72,7 +69,7 @@ public class AdvancedConnectedDeviceDashboardFragmentTest {
         final Context context = RuntimeEnvironment.application;
         final List<String> niks = ConnectedDeviceDashboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(context);
-        final int xmlId = (new ConnectedDeviceDashboardFragment()).getPreferenceScreenResId();
+        final int xmlId = new ConnectedDeviceDashboardFragment().getPreferenceScreenResId();
 
         final List<String> keys = XmlTestUtils.getKeysFromPreferenceXml(context, xmlId);
 

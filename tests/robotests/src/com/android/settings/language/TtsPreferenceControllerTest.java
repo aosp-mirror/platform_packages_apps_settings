@@ -27,13 +27,11 @@ import android.speech.tts.TtsEngines;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
@@ -43,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class TtsPreferenceControllerTest {
 
     @Mock
@@ -94,7 +91,6 @@ public class TtsPreferenceControllerTest {
     @Test
     @Config(qualifiers = "mcc999")
     public void testIsAvailable_ifDisabled_shouldReturnFalse() {
-
         assertThat(mController.isAvailable()).isFalse();
     }
 }

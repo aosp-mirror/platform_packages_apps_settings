@@ -24,7 +24,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v14.preference.SwitchPreference;
 
-import com.android.settings.TestConfig;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -33,13 +32,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION)
 public class ZenModeScreenOffPreferenceControllerTest {
+
+    private static final boolean MOCK_PRIORITY_SCREEN_OFF_SETTING = false;
+
     private ZenModeScreenOffPreferenceController mController;
 
     @Mock
@@ -52,7 +52,6 @@ public class ZenModeScreenOffPreferenceControllerTest {
     private NotificationManager.Policy mPolicy;
 
     private Context mContext;
-    private final boolean MOCK_PRIORITY_SCREEN_OFF_SETTING = false;
 
     @Before
     public void setup() {

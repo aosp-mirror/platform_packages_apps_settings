@@ -31,6 +31,7 @@ import android.app.Fragment;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.os.Build;
+import android.os.Process;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
@@ -38,12 +39,10 @@ import android.support.v7.preference.PreferenceScreen;
 import android.text.BidiFormatter;
 
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.settings.TestConfig;
 import com.android.settings.search.DatabaseIndexingManager;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
-import com.android.settings.testutils.shadow.ShadowUserManager;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
 
@@ -55,28 +54,25 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowUserManager;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(manifest = TestConfig.MANIFEST_PATH, sdk = TestConfig.SDK_VERSION,
-        shadows = {
-                ShadowUtils.class,
-                ShadowUserManager.class,
-        })
+@Config(shadows = ShadowUtils.class)
 public class BuildNumberPreferenceControllerTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Fragment mFragment;
     @Mock(answer = RETURNS_DEEP_STUBS)
     private PreferenceScreen mScreen;
-    @Mock
-    private UserManager mUserManager;
 
+    private ShadowUserManager mShadowUserManager;
+
+    private Context mContext;
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
     private FakeFeatureFactory mFactory;
@@ -86,22 +82,26 @@ public class BuildNumberPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        ShadowUserManager.getShadow().setIsAdminUser(true);
+        mContext = RuntimeEnvironment.application;
+        final UserManager userManager =
+            (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        mShadowUserManager = Shadows.shadowOf(userManager);
+        mShadowUserManager.setIsAdminUser(true);
         mFactory = FakeFeatureFactory.setupForTest();
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
-        mController = new BuildNumberPreferenceController(
-                mContext, mActivity, mFragment, mLifecycle);
+        mController =
+            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 
-        mPreference = new Preference(RuntimeEnvironment.application);
+        mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
+        DevelopmentSettingsEnabler.setDevelopmentSettingsEnabled(mContext, false);
     }
 
     @After
     public void tearDown() {
         ShadowUtils.reset();
-        ShadowUserManager.getShadow().reset();
+        mShadowUserManager.setIsAdminUser(false);
     }
 
     @Test
@@ -120,22 +120,19 @@ public class BuildNumberPreferenceControllerTest {
 
     @Test
     public void handlePrefTreeClick_notAdminUser_doNothing() {
-        when(mUserManager.isAdminUser()).thenReturn(false);
+        mShadowUserManager.setIsAdminUser(false);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
 
     @Test
     public void handlePrefTreeClick_deviceNotProvisioned_doNothing() {
-        when(mUserManager.isAdminUser()).thenReturn(true);
         final Context context = RuntimeEnvironment.application;
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 0);
+        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 0);
 
-        mController = new BuildNumberPreferenceController(
-                context, mActivity, mFragment, mLifecycle);
+        mController =
+            new BuildNumberPreferenceController(context, mActivity, mFragment, mLifecycle);
         ReflectionHelpers.setField(mController, "mContext", context);
-        ReflectionHelpers.setField(mController, "mUm", mUserManager);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
         verify(mFactory.metricsFeatureProvider).action(
@@ -146,11 +143,10 @@ public class BuildNumberPreferenceControllerTest {
     @Test
     public void handlePrefTreeClick_isMonkeyRun_doNothing() {
         final Context context = spy(RuntimeEnvironment.application);
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 1);
+        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
         ShadowUtils.setIsUserAMonkey(true);
-        mController = new BuildNumberPreferenceController(
-                context, mActivity, mFragment, mLifecycle);
+        mController =
+            new BuildNumberPreferenceController(context, mActivity, mFragment, mLifecycle);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
     }
@@ -158,15 +154,13 @@ public class BuildNumberPreferenceControllerTest {
     @Test
     public void handlePrefTreeClick_userHasRestriction_doNothing() {
         final Context context = spy(RuntimeEnvironment.application);
-        Settings.Global.putInt(context.getContentResolver(),
-                Settings.Global.DEVICE_PROVISIONED, 1);
+        Settings.Global.putInt(context.getContentResolver(), Settings.Global.DEVICE_PROVISIONED, 1);
 
-        when(mUserManager.isAdminUser()).thenReturn(true);
-        when(mUserManager.hasUserRestriction(UserManager.DISALLOW_DEBUGGING_FEATURES))
-                .thenReturn(true);
+        mShadowUserManager.setUserRestriction(Process.myUserHandle(),
+            UserManager.DISALLOW_DEBUGGING_FEATURES, true);
 
-        mController = new BuildNumberPreferenceController(
-                mContext, mActivity, mFragment, mLifecycle);
+        mController =
+            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
         ReflectionHelpers.setField(mController, "mContext", context);
 
         assertThat(mController.handlePreferenceTreeClick(mPreference)).isFalse();
@@ -183,8 +177,7 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isFalse();
-        assertThat(DevelopmentSettingsEnabler
-                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isFalse();
+        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
     }
 
     @Test
@@ -195,19 +188,16 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isTrue();
-        assertThat(DevelopmentSettingsEnabler
-                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isFalse();
+        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isFalse();
     }
 
     @Test
     public void onActivityResult_confirmPasswordRequestCompleted_enableDevPref() {
-        final Context context = RuntimeEnvironment.application;
-
         when(mFactory.searchFeatureProvider.getIndexingManager(any(Context.class)))
                 .thenReturn(mock(DatabaseIndexingManager.class));
 
-        mController = new BuildNumberPreferenceController(
-                context, mActivity, mFragment, mLifecycle);
+        mController =
+            new BuildNumberPreferenceController(mContext, mActivity, mFragment, mLifecycle);
 
         final boolean activityResultHandled = mController.onActivityResult(
                 BuildNumberPreferenceController.REQUEST_CONFIRM_PASSWORD_FOR_DEV_PREF,
@@ -215,8 +205,6 @@ public class BuildNumberPreferenceControllerTest {
                 null);
 
         assertThat(activityResultHandled).isTrue();
-        assertThat(DevelopmentSettingsEnabler
-                .isDevelopmentSettingsEnabled(RuntimeEnvironment.application)).isTrue();
+        assertThat(DevelopmentSettingsEnabler.isDevelopmentSettingsEnabled(mContext)).isTrue();
     }
-
 }
