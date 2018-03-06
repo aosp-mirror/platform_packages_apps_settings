@@ -18,14 +18,20 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
                   android:key="fake_title_key"
-                  android:title="screen_title"
-                  settings:controller="com.android.settings.slices.FakePreferenceController">
+                  android:title="screen_title">
 
     <Preference
-        android:key="key"
+        android:key="key1"
         android:title="title"
         android:icon="@drawable/ic_android"
-        android:summary="summary"
+        android:summary="summary1"
         settings:controller="com.android.settings.core.BadPreferenceController"/>
+
+    <Preference
+        android:key="key2"
+        android:title="title"
+        android:icon="@drawable/ic_android"
+        android:summary="summary2"
+        settings:controller="com.android.settings.slices.FakePreferenceController"/>
 
 </PreferenceScreen>
