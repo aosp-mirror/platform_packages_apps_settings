@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
-package com.android.settings.search;
+package com.android.settings.core;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Xml;
 
 import com.android.settings.R;
-import com.android.settings.core.PreferenceXmlParserUtils;
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import org.junit.Before;
@@ -169,14 +169,79 @@ public class PreferenceXmlParserUtilTest {
     @Config(qualifiers = "mcc999")
     public void extractMetadata_shouldContainKeyAndControllerName()
             throws IOException, XmlPullParserException {
-        final List<Bundle> metadata =
-            PreferenceXmlParserUtils.extractMetadata(mContext, R.xml.location_settings);
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings,
+                MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_PREF_CONTROLLER);
 
         assertThat(metadata).isNotEmpty();
         for (Bundle bundle : metadata) {
             assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_KEY)).isNotNull();
             assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_CONTROLLER)).isNotNull();
         }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestTitle_shouldContainTitle()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings, MetadataFlag.FLAG_NEED_PREF_TITLE);
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_TITLE)).isNotNull();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestSummary_shouldContainSummary()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings, MetadataFlag.FLAG_NEED_PREF_SUMMARY);
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_SUMMARY)).isNotNull();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestIcon_shouldContainIcon()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings, MetadataFlag.FLAG_NEED_PREF_ICON);
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getInt(PreferenceXmlParserUtils.METADATA_ICON)).isNotEqualTo(0);
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestPrefType_shouldContainPrefType()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings, MetadataFlag.FLAG_NEED_PREF_TYPE);
+        for (Bundle bundle : metadata) {
+            assertThat(bundle.getString(PreferenceXmlParserUtils.METADATA_PREF_TYPE)).isNotNull();
+        }
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void extractMetadata_requestIncludeScreen_shouldContainScreen()
+            throws IOException, XmlPullParserException {
+        List<Bundle> metadata = PreferenceXmlParserUtils.extractMetadata(mContext,
+                R.xml.location_settings,
+                MetadataFlag.FLAG_NEED_PREF_TYPE | MetadataFlag.FLAG_INCLUDE_PREF_SCREEN);
+
+        boolean hasPreferenceScreen = false;
+        for (Bundle bundle : metadata) {
+            if (TextUtils.equals(bundle.getString(PreferenceXmlParserUtils.METADATA_PREF_TYPE),
+                    PreferenceXmlParserUtils.PREF_SCREEN_TAG)) {
+                hasPreferenceScreen = true;
+                break;
+            }
+        }
+
+        assertThat(hasPreferenceScreen).isTrue();
     }
 
     /**
