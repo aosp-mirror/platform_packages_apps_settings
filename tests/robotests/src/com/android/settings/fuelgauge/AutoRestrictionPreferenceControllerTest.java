@@ -20,7 +20,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.doReturn;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
@@ -36,31 +35,28 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(RobolectricTestRunner.class)
-public class SmartBatteryPreferenceControllerTest {
-
+public class AutoRestrictionPreferenceControllerTest {
     private static final int ON = 1;
     private static final int OFF = 0;
 
-    private SmartBatteryPreferenceController mController;
+    private AutoRestrictionPreferenceController mController;
     private SwitchPreference mPreference;
-    private ContentResolver mContentResolver;
     private Context mContext;
     private FakeFeatureFactory mFeatureFactory;
-
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         mFeatureFactory = FakeFeatureFactory.setupForTest();
-        mContentResolver = RuntimeEnvironment.application.getContentResolver();
-        mController = new SmartBatteryPreferenceController(RuntimeEnvironment.application);
-        mPreference = new SwitchPreference(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
+        mController = new AutoRestrictionPreferenceController(mContext);
+        mPreference = new SwitchPreference(mContext);
     }
 
     @Test
-    public void testUpdateState_smartBatteryOn_preferenceChecked() {
-        putSmartBatteryValue(ON);
+    public void testUpdateState_AutoRestrictionOn_preferenceChecked() {
+        putAutoRestrictionValue(ON);
 
         mController.updateState(mPreference);
 
@@ -68,8 +64,8 @@ public class SmartBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_smartBatteryOff_preferenceUnchecked() {
-        putSmartBatteryValue(OFF);
+    public void testUpdateState_AutoRestrictionOff_preferenceUnchecked() {
+        putAutoRestrictionValue(OFF);
 
         mController.updateState(mPreference);
 
@@ -77,40 +73,43 @@ public class SmartBatteryPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateState_checkPreference_smartBatteryOn() {
+    public void testUpdateState_checkPreference_autoRestrictionOn() {
         mController.onPreferenceChange(mPreference, true);
 
-        assertThat(getSmartBatteryValue()).isEqualTo(ON);
+        assertThat(getAutoRestrictionValue()).isEqualTo(ON);
     }
 
     @Test
-    public void testUpdateState_unCheckPreference_smartBatteryOff() {
+    public void testUpdateState_unCheckPreference_autoRestrictionOff() {
         mController.onPreferenceChange(mPreference, false);
 
-        assertThat(getSmartBatteryValue()).isEqualTo(OFF);
+        assertThat(getAutoRestrictionValue()).isEqualTo(OFF);
     }
 
     @Test
-    public void testGetAvailabilityStatus_smartBatterySupported_returnAvailable() {
+    public void testGetAvailabilityStatus_smartBatterySupported_returnDisabled() {
         doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
-
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(
-                BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    public void testGetAvailabilityStatus_smartBatteryUnSupported_returnDisabled() {
-        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(
                 BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
-    private void putSmartBatteryValue(int value) {
-        Settings.Global.putInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, value);
+    @Test
+    public void testGetAvailabilityStatus_smartBatteryUnSupported_returnAvailable() {
+        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
     }
 
-    private int getSmartBatteryValue() {
-        return Settings.Global.getInt(mContentResolver, Settings.Global.APP_STANDBY_ENABLED, ON);
+    private void putAutoRestrictionValue(int value) {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
+                value);
+    }
+
+    private int getAutoRestrictionValue() {
+        return Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON);
     }
 }

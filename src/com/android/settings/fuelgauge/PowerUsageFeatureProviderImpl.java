@@ -136,4 +136,9 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     public boolean getEarlyWarningSignal(Context context, String id) {
         return false;
     }
+
+    @Override
+    public boolean isSmartBatterySupported() {
+        return false;
+    }
 }
