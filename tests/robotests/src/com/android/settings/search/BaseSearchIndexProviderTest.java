@@ -116,7 +116,7 @@ public class BaseSearchIndexProviderTest {
         final List<AbstractPreferenceController> controllers =
                 provider.getPreferenceControllers(mContext);
 
-        assertThat(controllers).hasSize(3);
+        assertThat(controllers).hasSize(2);
     }
 
     public static class NotAvailablePreferenceController
