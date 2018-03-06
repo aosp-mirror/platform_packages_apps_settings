@@ -147,7 +147,10 @@ public class InstantAppButtonsPreferenceController extends BasePreferenceControl
         if (!TextUtils.isEmpty(mLaunchUri)) {
             installButton.setVisibility(View.GONE);
             final Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.addCategory(Intent.CATEGORY_BROWSABLE);
+            intent.setPackage(mPackageName);
             intent.setData(Uri.parse(mLaunchUri));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             launchButton.setOnClickListener(v -> mParent.startActivity(intent));
         } else {
             launchButton.setVisibility(View.GONE);
