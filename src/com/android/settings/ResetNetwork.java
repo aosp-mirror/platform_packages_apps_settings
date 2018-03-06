@@ -45,6 +45,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtils;
@@ -245,10 +246,11 @@ public class ResetNetwork extends InstrumentedFragment {
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
-            return view;
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            return new View(getContext());
         }
 
         mContentView = inflater.inflate(R.layout.reset_network, null);
