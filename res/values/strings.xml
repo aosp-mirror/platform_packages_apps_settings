@@ -748,20 +748,34 @@
     <string name="date_time_set_date_title">Date</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_date">Set date</string>
+    <!-- Setting option title to select region in time zone setting screen [CHAR LIMIT=30] -->
+    <string name="date_time_select_region">Region</string>
+    <!-- Setting option title to select time zone in time zone setting screen [CHAR LIMIT=30]-->
+    <string name="date_time_select_zone">Time Zone</string>
+    <!-- Setting option title in time zone setting screen [CHAR LIMIT=30] -->
+    <string name="date_time_select_fixed_offset_time_zones">Select UTC offset</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_alphabetically">Sort alphabetically</string>
     <!-- Menu item on Select time zone screen -->
     <string name="zone_list_menu_sort_by_timezone">Sort by time zone</string>
     <!-- Label describing when a given time zone changes to DST or standard time -->
     <string name="zone_change_to_from_dst"><xliff:g id="time_type" example="Pacific Summer Time">%1$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%2$s</xliff:g>.</string>
+    <!-- Label describing a exemplar location and time zone offset[CHAR LIMIT=NONE] -->
+    <string name="zone_info_exemplar_location_and_offset"><xliff:g id="exemplar_location" example="Los Angeles">%1$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%2$s</xliff:g>)</string>
+    <!-- Label describing a time zone offset and name[CHAR LIMIT=NONE] -->
+    <string name="zone_info_offset_and_name"><xliff:g id="time_type" example="Pacific Time">%2$s</xliff:g> (<xliff:g id="offset" example="GMT-08:00">%1$s</xliff:g>)</string>
+    <!-- Label describing a time zone and changes to DST or standard time [CHAR LIMIT=NONE] -->
+    <string name="zone_info_footer">Uses <xliff:g id="offset_and_name" example="Pacific Time (GMT-08:00)">%1$s</xliff:g>. <xliff:g id="dst_time_type" example="Pacific Daylight Time">%2$s</xliff:g> starts on <xliff:g id="transition_date" example="Mar 11 2018">%3$s</xliff:g>.</string>
+    <!-- Label describing a time zone without DST [CHAR LIMIT=NONE] -->
+    <string name="zone_info_footer_no_dst">Uses <xliff:g id="offset_and_name" example="GMT-08:00 Pacific Time">%1$s</xliff:g>. No daylight savings time.</string>
     <!-- Describes the time type "daylight savings time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_dst">Daylight savings time</string>
     <!-- Describes the time type "standard time" (used in zone_change_to_from_dst, when no zone specific name is available) -->
     <string name="zone_time_type_standard">Standard time</string>
     <!-- The menu item to switch to selecting a time zone by region (default) -->
-    <string name="zone_menu_by_region">Time zone by region</string>
+    <string name="zone_menu_by_region">Show time zones by region</string>
     <!-- The menu item to switch to selecting a time zone with a fixed offset (such as UTC or GMT+0200) -->
-    <string name="zone_menu_by_offset">Fixed offset time zones</string>
+    <string name="zone_menu_by_offset">Show time zones by UTC offset</string>
 
     <!-- Title string shown above DatePicker, letting a user select system date
          [CHAR LIMIT=20] -->
