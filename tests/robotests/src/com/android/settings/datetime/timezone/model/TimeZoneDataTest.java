@@ -73,13 +73,13 @@ public class TimeZoneDataTest {
         CountryTimeZones US = mock(CountryTimeZones.class);
         when(US.getCountryIso()).thenReturn("us");
         when(US.getTimeZoneMappings()).thenReturn(Arrays.asList(
-           new CountryTimeZones.TimeZoneMapping("Unknown/Secret_City", true),
-           new CountryTimeZones.TimeZoneMapping("Unknown/Secret_City2", false)
+           TimeZoneMapping.createForTests("Unknown/Secret_City", true),
+           TimeZoneMapping.createForTests("Unknown/Secret_City2", false)
         ));
         CountryTimeZones GB = mock(CountryTimeZones.class);
         when(GB.getCountryIso()).thenReturn("gb");
         when(GB.getTimeZoneMappings()).thenReturn(Collections.singletonList(
-            new TimeZoneMapping("Unknown/Secret_City", true)
+            TimeZoneMapping.createForTests("Unknown/Secret_City", true)
         ));
         when(mCountryZonesFinder.lookupCountryTimeZonesForZoneId("Unknown/Secret_City"))
                 .thenReturn(Arrays.asList(US, GB));
