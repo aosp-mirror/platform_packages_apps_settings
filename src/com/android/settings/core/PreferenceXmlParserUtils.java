@@ -18,10 +18,14 @@ package com.android.settings.core;
 
 import android.annotation.NonNull;
 import android.annotation.Nullable;
+import android.annotation.XmlRes;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+import android.support.annotation.IntDef;
+import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -33,6 +37,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,12 +49,41 @@ import java.util.List;
 public class PreferenceXmlParserUtils {
 
     private static final String TAG = "PreferenceXmlParserUtil";
-
+    @VisibleForTesting
+    static final String PREF_SCREEN_TAG = "PreferenceScreen";
     private static final List<String> SUPPORTED_PREF_TYPES = Arrays.asList(
             "Preference", "PreferenceCategory", "PreferenceScreen");
 
+    /**
+     * Flag definition to indicate which metadata should be extracted when
+     * {@link #extractMetadata(Context, int, int)} is called. The flags can be combined by using |
+     * (binary or).
+     */
+    @IntDef(flag = true, value = {
+            MetadataFlag.FLAG_INCLUDE_PREF_SCREEN,
+            MetadataFlag.FLAG_NEED_KEY,
+            MetadataFlag.FLAG_NEED_PREF_TYPE,
+            MetadataFlag.FLAG_NEED_PREF_CONTROLLER,
+            MetadataFlag.FLAG_NEED_PREF_TITLE,
+            MetadataFlag.FLAG_NEED_PREF_SUMMARY,
+            MetadataFlag.FLAG_NEED_PREF_ICON})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface MetadataFlag {
+        int FLAG_INCLUDE_PREF_SCREEN = 1;
+        int FLAG_NEED_KEY = 1 << 1;
+        int FLAG_NEED_PREF_TYPE = 1 << 2;
+        int FLAG_NEED_PREF_CONTROLLER = 1 << 3;
+        int FLAG_NEED_PREF_TITLE = 1 << 4;
+        int FLAG_NEED_PREF_SUMMARY = 1 << 5;
+        int FLAG_NEED_PREF_ICON = 1 << 6;
+    }
+
+    public static final String METADATA_PREF_TYPE = "type";
     public static final String METADATA_KEY = "key";
     public static final String METADATA_CONTROLLER = "controller";
+    public static final String METADATA_TITLE = "title";
+    public static final String METADATA_SUMMARY = "summary";
+    public static final String METADATA_ICON = "icon";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
@@ -107,11 +142,11 @@ public class PreferenceXmlParserUtils {
     /**
      * Extracts metadata from preference xml and put them into a {@link Bundle}.
      *
-     * TODO(zhfan): Similar logic exists in {@link SliceBuilderUtils} and
-     * {@link UniquePreferenceTest}. Need refactoring to consolidate them all.
+     * @param xmlResId xml res id of a preference screen
+     * @param flags    Should be one or more of {@link MetadataFlag}.
      */
     @NonNull
-    public static List<Bundle> extractMetadata(Context context, int xmlResId)
+    public static List<Bundle> extractMetadata(Context context, @XmlRes int xmlResId, int flags)
             throws IOException, XmlPullParserException {
         final List<Bundle> metadata = new ArrayList<>();
         if (xmlResId <= 0) {
@@ -132,16 +167,37 @@ public class PreferenceXmlParserUtils {
                 continue;
             }
             final String nodeName = parser.getName();
+            if (!hasFlag(flags, MetadataFlag.FLAG_INCLUDE_PREF_SCREEN)
+                    && TextUtils.equals(PREF_SCREEN_TAG, nodeName)) {
+                continue;
+            }
             if (!SUPPORTED_PREF_TYPES.contains(nodeName) && !nodeName.endsWith("Preference")) {
                 continue;
             }
             final Bundle preferenceMetadata = new Bundle();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
-            preferenceMetadata.putString(METADATA_KEY, getDataKey(context, attrs));
-            preferenceMetadata.putString(METADATA_CONTROLLER, getController(context, attrs));
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TYPE)) {
+                preferenceMetadata.putString(METADATA_PREF_TYPE, nodeName);
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEY)) {
+                preferenceMetadata.putString(METADATA_KEY, getDataKey(context, attrs));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_CONTROLLER)) {
+                preferenceMetadata.putString(METADATA_CONTROLLER, getController(context, attrs));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TITLE)) {
+                preferenceMetadata.putString(METADATA_TITLE, getDataTitle(context, attrs));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_SUMMARY)) {
+                preferenceMetadata.putString(METADATA_SUMMARY, getDataSummary(context, attrs));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_ICON)) {
+                preferenceMetadata.putInt(METADATA_ICON, getDataIcon(context, attrs));
+            }
             metadata.add(preferenceMetadata);
         } while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
+        parser.close();
         return metadata;
     }
 
@@ -159,6 +215,10 @@ public class PreferenceXmlParserUtils {
         String data = ta.getString(resId);
         ta.recycle();
         return data;
+    }
+
+    private static boolean hasFlag(int flags, @MetadataFlag int flag) {
+        return (flags & flag) != 0;
     }
 
     private static String getDataEntries(Context context, AttributeSet set, int[] attrs,
