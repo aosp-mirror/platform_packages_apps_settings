@@ -156,7 +156,7 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
 
         final SettingsActivity activity = (SettingsActivity) getActivity();
 
-        mEmptyView = (TextView) getView().findViewById(android.R.id.empty);
+        mEmptyView = getView().findViewById(android.R.id.empty);
         setEmptyView(mEmptyView);
         String emptyViewText = activity.getString(R.string.wifi_calling_off_explanation)
                 + activity.getString(R.string.wifi_calling_off_explanation_2);
@@ -214,6 +214,12 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.WIFI_CALLING_FOR_SUB;
+    }
+
+    @Override
+    public int getHelpResource() {
+        // Return 0 to suppress help icon. The help will be populated by parent page.
+        return 0;
     }
 
     @Override

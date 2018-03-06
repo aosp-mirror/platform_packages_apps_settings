@@ -28,11 +28,11 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settingslib.HelpUtils;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
-import com.android.settings.ShowAdminSupportDetailsDialog;
 import com.android.settings.widget.SwitchBar;
 import com.android.settingslib.RestrictedLockUtils;
 
@@ -70,11 +70,10 @@ public class AndroidBeam extends InstrumentedFragment
         mBeamDisallowedByBase = RestrictedLockUtils.hasBaseUserRestriction(getActivity(),
                 UserManager.DISALLOW_OUTGOING_BEAM, UserHandle.myUserId());
         if (!mBeamDisallowedByBase && admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_OUTGOING_BEAM, admin).show();
             mBeamDisallowedByOnlyAdmin = true;
-            return view;
+            return new View(getContext());
         }
         mView = inflater.inflate(R.layout.android_beam, container, false);
         return mView;
