@@ -16,12 +16,14 @@
 
 package com.android.settings.bluetooth;
 
+import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -30,7 +32,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 /**
  * Controller that shows received files
  */
-public class BluetoothFilesPreferenceController extends AbstractPreferenceController
+public class BluetoothFilesPreferenceController extends BasePreferenceController
         implements PreferenceControllerMixin {
     private static final String TAG = "BluetoothFilesPrefCtrl";
 
@@ -47,13 +49,15 @@ public class BluetoothFilesPreferenceController extends AbstractPreferenceContro
     private MetricsFeatureProvider mMetricsFeatureProvider;
 
     public BluetoothFilesPreferenceController(Context context) {
-        super(context);
+        super(context, KEY_RECEIVED_FILES);
         mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     @Override
-    public boolean isAvailable() {
-        return true;
+    public int getAvailabilityStatus() {
+        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override
