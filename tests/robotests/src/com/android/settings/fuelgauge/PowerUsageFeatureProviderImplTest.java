@@ -136,4 +136,9 @@ public class PowerUsageFeatureProviderImplTest {
     public void testIsPowerAccountingToggleEnabled_returnTrue() {
         assertThat(mPowerFeatureProvider.isPowerAccountingToggleEnabled()).isTrue();
     }
+
+    @Test
+    public void testIsSmartBatterySupported_returnFalse() {
+        assertThat(mPowerFeatureProvider.isSmartBatterySupported()).isFalse();
+    }
 }

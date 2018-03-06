@@ -11,8 +11,6 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- *
  */
 
 package com.android.settings.fuelgauge;
@@ -26,40 +24,41 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 
 /**
- * Controller to change and update the smart battery toggle
+ * Controller to change and update the auto restriction toggle
  */
-public class SmartBatteryPreferenceController extends BasePreferenceController implements
+public class AutoRestrictionPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceChangeListener {
-    private static final String KEY_SMART_BATTERY = "smart_battery";
+    private static final String KEY_SMART_BATTERY = "auto_restriction";
     private static final int ON = 1;
     private static final int OFF = 0;
     private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
-    public SmartBatteryPreferenceController(Context context) {
+    public AutoRestrictionPreferenceController(Context context) {
         super(context, KEY_SMART_BATTERY);
-        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
-                .getPowerUsageFeatureProvider(context);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(
+                context).getPowerUsageFeatureProvider(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
         return mPowerUsageFeatureProvider.isSmartBatterySupported()
-                ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+                ? DISABLED_UNSUPPORTED
+                : AVAILABLE;
     }
 
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
         final boolean smartBatteryOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.APP_STANDBY_ENABLED, ON) == ON;
+                Settings.Global.APP_AUTO_RESTRICTION_ENABLED, ON) == ON;
         ((SwitchPreference) preference).setChecked(smartBatteryOn);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean smartBatteryOn = (Boolean) newValue;
-        Settings.Global.putInt(mContext.getContentResolver(), Settings.Global.APP_STANDBY_ENABLED,
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.APP_AUTO_RESTRICTION_ENABLED,
                 smartBatteryOn ? ON : OFF);
         return true;
     }
