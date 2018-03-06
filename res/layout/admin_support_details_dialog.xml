@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingBottom="@dimen/admin_details_dialog_padding">
+            android:paddingBottom="@dimen/admin_details_dialog_title_bottom_padding">
         <ImageView android:id="@+id/admin_support_icon"
                 android:layout_width="@dimen/admin_details_dialog_icon_size"
                 android:layout_height="@dimen/admin_details_dialog_icon_size"
@@ -46,7 +46,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-            <include layout="@layout/admin_support_details_content" />
+            <TextView android:id="@+id/admin_support_msg"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:textAppearance="@android:style/TextAppearance.Material.Subhead"
+                      android:text="@string/default_admin_support_msg"
+                      android:maxLength="200"
+                      android:autoLink="email|phone|web"
+                      android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
