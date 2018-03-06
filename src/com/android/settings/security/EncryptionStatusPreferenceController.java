@@ -56,7 +56,7 @@ public class EncryptionStatusPreferenceController extends BasePreferenceControll
             if (TextUtils.equals(getPreferenceKey(), PREF_KEY_ENCRYPTION_DETAIL_PAGE)) {
                 preference.setFragment(CryptKeeperSettings.class.getName());
             }
-            preference.setSummary(R.string.summary_placeholder);
+            preference.setSummary(R.string.decryption_settings_summary);
         }
 
     }
