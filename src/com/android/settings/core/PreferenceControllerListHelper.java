@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.settings.core.PreferenceXmlParserUtils.MetadataFlag;
 import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -52,7 +53,8 @@ public class PreferenceControllerListHelper {
         final List<BasePreferenceController> controllers = new ArrayList<>();
         List<Bundle> preferenceMetadata;
         try {
-            preferenceMetadata = PreferenceXmlParserUtils.extractMetadata(context, xmlResId);
+            preferenceMetadata = PreferenceXmlParserUtils.extractMetadata(context, xmlResId,
+                    MetadataFlag.FLAG_NEED_KEY | MetadataFlag.FLAG_NEED_PREF_CONTROLLER);
         } catch (IOException | XmlPullParserException e) {
             Log.e(TAG, "Failed to parse preference xml for getting controllers");
             return controllers;
