@@ -41,6 +41,7 @@ import android.util.Log;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settingslib.fuelgauge.PowerWhitelistBackend;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
@@ -81,11 +82,12 @@ public class AnomalyDetectionJobService extends JobService {
             final BatteryStatsHelper batteryStatsHelper = new BatteryStatsHelper(this,
                     true /* collectBatteryBroadcast */);
             final UserManager userManager = getSystemService(UserManager.class);
+            final PowerWhitelistBackend powerWhitelistBackend = PowerWhitelistBackend.getInstance();
 
             for (JobWorkItem item = params.dequeueWork(); item != null;
                     item = params.dequeueWork()) {
                 saveAnomalyToDatabase(batteryStatsHelper, userManager, batteryDatabaseManager,
-                        batteryUtils, policy, contentResolver,
+                        batteryUtils, policy, powerWhitelistBackend, contentResolver,
                         item.getIntent().getExtras());
             }
             jobFinished(params, false /* wantsReschedule */);
@@ -102,7 +104,8 @@ public class AnomalyDetectionJobService extends JobService {
     @VisibleForTesting
     void saveAnomalyToDatabase(BatteryStatsHelper batteryStatsHelper, UserManager userManager,
             BatteryDatabaseManager databaseManager, BatteryUtils batteryUtils,
-            BatteryTipPolicy policy, ContentResolver contentResolver, Bundle bundle) {
+            BatteryTipPolicy policy, PowerWhitelistBackend powerWhitelistBackend,
+            ContentResolver contentResolver, Bundle bundle) {
         // The Example of intentDimsValue is: 35:{1:{1:{1:10013|}|}|}
         final StatsDimensionsValue intentDimsValue =
                 bundle.getParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE);
@@ -119,24 +122,25 @@ public class AnomalyDetectionJobService extends JobService {
             final boolean smartBatteryOn = Settings.Global.getInt(contentResolver,
                     Settings.Global.APP_STANDBY_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-
-            if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
-                // TODO(b/72385333): check battery percentage draining in batterystats
-                if (batteryUtils.isLegacyApp(packageName) && batteryUtils.isAppHeavilyUsed(
-                        batteryStatsHelper, userManager, uid,
-                        policy.excessiveBgDrainPercentage)) {
-                    Log.e(TAG, "Excessive detected uid=" + uid);
-                    batteryUtils.setForceAppStandby(uid, packageName,
-                            AppOpsManager.MODE_IGNORED);
+            if (!powerWhitelistBackend.isSysWhitelisted(packageName)) {
+                if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
+                    // TODO(b/72385333): check battery percentage draining in batterystats
+                    if (batteryUtils.isLegacyApp(packageName) && batteryUtils.isAppHeavilyUsed(
+                            batteryStatsHelper, userManager, uid,
+                            policy.excessiveBgDrainPercentage)) {
+                        Log.e(TAG, "Excessive detected uid=" + uid);
+                        batteryUtils.setForceAppStandby(uid, packageName,
+                                AppOpsManager.MODE_IGNORED);
+                        databaseManager.insertAnomaly(uid, packageName, anomalyType,
+                                smartBatteryOn
+                                        ? AnomalyDatabaseHelper.State.AUTO_HANDLED
+                                        : AnomalyDatabaseHelper.State.NEW,
+                                timeMs);
+                    }
+                } else {
                     databaseManager.insertAnomaly(uid, packageName, anomalyType,
-                            smartBatteryOn
-                                    ? AnomalyDatabaseHelper.State.AUTO_HANDLED
-                                    : AnomalyDatabaseHelper.State.NEW,
-                            timeMs);
+                            AnomalyDatabaseHelper.State.NEW, timeMs);
                 }
-            } else {
-                databaseManager.insertAnomaly(uid, packageName, anomalyType,
-                        AnomalyDatabaseHelper.State.NEW, timeMs);
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             Log.e(TAG, "Parse stats dimensions value error.", e);
