@@ -15,18 +15,15 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.pm.PackageManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.connecteddevice.usb.ConnectedUsbDeviceUpdater;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.ConnectedBluetoothDeviceUpdater;
-import com.android.settings.search.ResultPayload;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
@@ -38,7 +35,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  * Controller to maintain the {@link android.support.v7.preference.PreferenceGroup} for all
  * connected devices. It uses {@link DevicePreferenceCallback} to add/remove {@link Preference}
  */
-public class ConnectedDeviceGroupController extends BasePreferenceController
+public class ConnectedDeviceGroupController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         DevicePreferenceCallback {
 
@@ -50,7 +47,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     private ConnectedUsbDeviceUpdater mConnectedUsbDeviceUpdater;
 
     public ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
-        super(fragment.getContext(), KEY);
+        super(fragment.getContext());
         init(lifecycle, new ConnectedBluetoothDeviceUpdater(fragment, this),
                 new ConnectedUsbDeviceUpdater(fragment, this));
     }
@@ -59,7 +56,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     ConnectedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle,
             BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
-        super(fragment.getContext(), KEY);
+        super(fragment.getContext());
         init(lifecycle, bluetoothDeviceUpdater, connectedUsbDeviceUpdater);
     }
 
@@ -78,21 +75,17 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
-            mPreferenceGroup.setVisible(false);
+        mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+        mPreferenceGroup.setVisible(false);
 
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
-            mBluetoothDeviceUpdater.forceUpdate();
-            mConnectedUsbDeviceUpdater.initUsbPreference(screen.getContext());
-        }
+        mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+        mBluetoothDeviceUpdater.forceUpdate();
+        mConnectedUsbDeviceUpdater.initUsbPreference(screen.getContext());
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+    public boolean isAvailable() {
+        return true;
     }
 
     @Override
@@ -118,7 +111,7 @@ public class ConnectedDeviceGroupController extends BasePreferenceController
 
     private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater,
             ConnectedUsbDeviceUpdater connectedUsbDeviceUpdater) {
-        if (lifecycle != null && isAvailable()) {
+        if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;

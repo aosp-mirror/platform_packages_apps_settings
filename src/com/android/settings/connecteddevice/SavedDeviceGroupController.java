@@ -15,7 +15,6 @@
  */
 package com.android.settings.connecteddevice;
 
-import android.content.pm.PackageManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
@@ -23,7 +22,6 @@ import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater;
-import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -36,7 +34,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  * Controller to maintain the {@link PreferenceGroup} for all
  * saved devices. It uses {@link DevicePreferenceCallback} to add/remove {@link Preference}
  */
-public class SavedDeviceGroupController extends BasePreferenceController
+public class SavedDeviceGroupController extends AbstractPreferenceController
         implements PreferenceControllerMixin, LifecycleObserver, OnStart, OnStop,
         DevicePreferenceCallback {
 
@@ -47,14 +45,14 @@ public class SavedDeviceGroupController extends BasePreferenceController
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
 
     public SavedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle) {
-        super(fragment.getContext(), KEY);
+        super(fragment.getContext());
         init(lifecycle, new SavedBluetoothDeviceUpdater(fragment, SavedDeviceGroupController.this));
     }
 
     @VisibleForTesting
     SavedDeviceGroupController(DashboardFragment fragment, Lifecycle lifecycle,
             BluetoothDeviceUpdater bluetoothDeviceUpdater) {
-        super(fragment.getContext(), KEY);
+        super(fragment.getContext());
         init(lifecycle, bluetoothDeviceUpdater);
     }
 
@@ -70,19 +68,15 @@ public class SavedDeviceGroupController extends BasePreferenceController
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        if (isAvailable()) {
-            mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
-            mPreferenceGroup.setVisible(false);
-            mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
-            mBluetoothDeviceUpdater.forceUpdate();
-        }
+        mPreferenceGroup = (PreferenceGroup) screen.findPreference(KEY);
+        mPreferenceGroup.setVisible(false);
+        mBluetoothDeviceUpdater.setPrefContext(screen.getContext());
+        mBluetoothDeviceUpdater.forceUpdate();
     }
 
     @Override
-    public int getAvailabilityStatus() {
-        return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
-                ? AVAILABLE
-                : DISABLED_UNSUPPORTED;
+    public boolean isAvailable() {
+        return true;
     }
 
     @Override
@@ -107,7 +101,7 @@ public class SavedDeviceGroupController extends BasePreferenceController
     }
 
     private void init(Lifecycle lifecycle, BluetoothDeviceUpdater bluetoothDeviceUpdater) {
-        if (lifecycle != null && isAvailable()) {
+        if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;

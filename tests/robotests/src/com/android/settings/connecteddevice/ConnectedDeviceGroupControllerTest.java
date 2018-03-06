@@ -15,8 +15,6 @@
  */
 package com.android.settings.connecteddevice;
 
-import static com.android.settings.core.BasePreferenceController.DISABLED_UNSUPPORTED;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -26,7 +24,6 @@ import static org.mockito.Mockito.when;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
@@ -61,8 +58,6 @@ public class ConnectedDeviceGroupControllerTest {
     private PreferenceScreen mPreferenceScreen;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private PreferenceManager mPreferenceManager;
-    @Mock
-    private PackageManager mPackageManager;
 
     private PreferenceGroup mPreferenceGroup;
     private Context mContext;
@@ -75,7 +70,7 @@ public class ConnectedDeviceGroupControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = spy(RuntimeEnvironment.application);
+        mContext = RuntimeEnvironment.application;
         mPreference = new Preference(mContext);
         mPreference.setKey(PREFERENCE_KEY_1);
         mLifecycleOwner = () -> mLifecycle;
@@ -83,8 +78,6 @@ public class ConnectedDeviceGroupControllerTest {
         mPreferenceGroup = spy(new PreferenceScreen(mContext, null));
         when(mPreferenceGroup.getPreferenceManager()).thenReturn(mPreferenceManager);
         doReturn(mContext).when(mDashboardFragment).getContext();
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
 
         mConnectedDeviceGroupController = new ConnectedDeviceGroupController(mDashboardFragment,
                 mLifecycle, mConnectedBluetoothDeviceUpdater, mConnectedUsbDeviceUpdater);
@@ -140,13 +133,5 @@ public class ConnectedDeviceGroupControllerTest {
         mLifecycle.handleLifecycleEvent(android.arch.lifecycle.Lifecycle.Event.ON_STOP);
         verify(mConnectedBluetoothDeviceUpdater).unregisterCallback();
         verify(mConnectedUsbDeviceUpdater).unregisterCallback();
-    }
-
-    @Test
-    public void testGetAvailabilityStatus_noBluetoothFeature_returnUnSupported() {
-        doReturn(false).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
-
-        assertThat(mConnectedDeviceGroupController.getAvailabilityStatus()).isEqualTo(
-                DISABLED_UNSUPPORTED);
     }
 }
