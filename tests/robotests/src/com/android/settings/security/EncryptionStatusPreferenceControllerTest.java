@@ -84,7 +84,7 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.summary_placeholder);
+        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
         assertThat(mController.getPreferenceKey()).isNotEqualTo(PREF_KEY_ENCRYPTION_SECURITY_PAGE);
         assertThat(mPreference.getFragment()).isEqualTo(CryptKeeperSettings.class.getName());
@@ -98,7 +98,7 @@ public class EncryptionStatusPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        final CharSequence summary = mContext.getText(R.string.summary_placeholder);
+        final CharSequence summary = mContext.getText(R.string.decryption_settings_summary);
         assertThat(mPreference.getSummary()).isEqualTo(summary);
 
         assertThat(mPreference.getFragment()).isNotEqualTo(CryptKeeperSettings.class.getName());
