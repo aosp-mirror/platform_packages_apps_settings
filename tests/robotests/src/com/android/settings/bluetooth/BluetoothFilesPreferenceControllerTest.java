@@ -18,10 +18,6 @@ package com.android.settings.bluetooth;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
-
-import android.content.pm.PackageManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -33,7 +29,6 @@ import com.android.settings.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -45,18 +40,15 @@ public class BluetoothFilesPreferenceControllerTest {
     private Context mContext;
     private BluetoothFilesPreferenceController mController;
     private Preference mPreference;
-    @Mock
-    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application);
+
+        mContext = RuntimeEnvironment.application;
         mController = new BluetoothFilesPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(BluetoothFilesPreferenceController.KEY_RECEIVED_FILES);
-        doReturn(mPackageManager).when(mContext).getPackageManager();
-        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_BLUETOOTH);
     }
 
     @Test
