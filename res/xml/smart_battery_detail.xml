@@ -15,7 +15,9 @@
   limitations under the License.
   -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="smart_battery_detail"
     android:title="@string/smart_battery_manager_title">
 
@@ -31,6 +33,12 @@
         android:key="smart_battery"
         android:title="@string/smart_battery_title"
         android:summary="@string/smart_battery_summary"/>
+
+    <SwitchPreference
+        android:key="auto_restriction"
+        android:title="@string/battery_auto_restriction_title"
+        android:summary="@string/battery_auto_restriction_summary"
+        settings:controller="com.android.settings.fuelgauge.AutoRestrictionPreferenceController"/>
 
     <Preference
         android:key="restricted_app"
