@@ -124,10 +124,9 @@ public class DashboardAdapterTest {
         final Suggestion suggestionToRemove = suggestions.get(1);
         adapter.onSuggestionClosed(suggestionToRemove);
 
-        assertThat(adapter.mDashboardData).isEqualTo(dashboardData);
         assertThat(suggestions.size()).isEqualTo(2);
         assertThat(suggestions.contains(suggestionToRemove)).isFalse();
-        verify(adapter, never()).notifyDashboardDataChanged(any());
+        verify(adapter).notifyDashboardDataChanged(any());
     }
 
     @Test
