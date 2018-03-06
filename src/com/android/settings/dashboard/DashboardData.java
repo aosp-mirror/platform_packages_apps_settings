@@ -246,7 +246,11 @@ public class DashboardData {
         if (suggestions.size() <= MAX_SUGGESTION_COUNT) {
             return suggestions;
         }
-        return suggestions.subList(0, MAX_SUGGESTION_COUNT);
+        final List<Suggestion> suggestionsToShow = new ArrayList<>(MAX_SUGGESTION_COUNT);
+        for (int i = 0; i < MAX_SUGGESTION_COUNT; i++) {
+            suggestionsToShow.add(suggestions.get(i));
+        }
+        return suggestionsToShow;
     }
 
     /**

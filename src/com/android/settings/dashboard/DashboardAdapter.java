@@ -155,8 +155,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Dash
             // remain as the dashboard item. Need to refresh the dashboard list.
             setSuggestions(null);
         } else {
-            mSuggestionAdapter.removeSuggestion(suggestion);
-            notifyItemChanged(0, null);
+            list.remove(suggestion);
+            setSuggestions(list);
         }
     }
 
