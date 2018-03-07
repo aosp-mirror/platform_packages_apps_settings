@@ -38,6 +38,7 @@ public class AppInfoTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+    private static final int UID = 3452;
 
     private AppInfo mAppInfo;
 
@@ -47,6 +48,7 @@ public class AppInfoTest {
                 .setPackageName(PACKAGE_NAME)
                 .setAnomalyType(ANOMALY_TYPE)
                 .setScreenOnTimeMs(SCREEN_TIME_MS)
+                .setUid(UID)
                 .build();
     }
 
@@ -61,6 +63,7 @@ public class AppInfoTest {
         assertThat(appInfo.packageName).isEqualTo(PACKAGE_NAME);
         assertThat(appInfo.anomalyType).isEqualTo(ANOMALY_TYPE);
         assertThat(appInfo.screenOnTimeMs).isEqualTo(SCREEN_TIME_MS);
+        assertThat(appInfo.uid).isEqualTo(UID);
     }
 
     @Test
@@ -84,5 +87,6 @@ public class AppInfoTest {
         assertThat(mAppInfo.packageName).isEqualTo(PACKAGE_NAME);
         assertThat(mAppInfo.anomalyType).isEqualTo(ANOMALY_TYPE);
         assertThat(mAppInfo.screenOnTimeMs).isEqualTo(SCREEN_TIME_MS);
+        assertThat(mAppInfo.uid).isEqualTo(UID);
     }
 }

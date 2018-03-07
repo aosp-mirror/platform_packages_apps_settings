@@ -128,14 +128,14 @@ public class AnomalyDetectionJobService extends JobService {
                     Log.e(TAG, "Excessive detected uid=" + uid);
                     batteryUtils.setForceAppStandby(uid, packageName,
                             AppOpsManager.MODE_IGNORED);
-                    databaseManager.insertAnomaly(packageName, anomalyType,
+                    databaseManager.insertAnomaly(uid, packageName, anomalyType,
                             smartBatteryOn
                                     ? AnomalyDatabaseHelper.State.AUTO_HANDLED
                                     : AnomalyDatabaseHelper.State.NEW,
                             timeMs);
                 }
             } else {
-                databaseManager.insertAnomaly(packageName, anomalyType,
+                databaseManager.insertAnomaly(uid, packageName, anomalyType,
                         AnomalyDatabaseHelper.State.NEW, timeMs);
             }
         } catch (NullPointerException | IndexOutOfBoundsException e) {
