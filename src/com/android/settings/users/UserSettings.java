@@ -41,6 +41,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.ContactsContract;
+import android.provider.SearchIndexableResource;
 import android.provider.Settings.Global;
 import android.support.annotation.VisibleForTesting;
 import android.support.annotation.WorkerThread;
@@ -68,7 +69,6 @@ import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.password.ChooseLockGeneric;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
-import com.android.settings.search.SearchIndexableRaw;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 import com.android.settingslib.RestrictedPreference;
@@ -203,7 +203,6 @@ public class UserSettings extends SettingsPreferenceFragment
         final Context context = getActivity();
         mAddUserWhenLockedPreferenceController = new AddUserWhenLockedPreferenceController(
                 context, KEY_ADD_USER_WHEN_LOCKED, getLifecycle());
-
         mAutoSyncDataPreferenceController = new AutoSyncDataPreferenceController(context, this);
         mAutoSyncPersonalDataPreferenceController =
                 new AutoSyncPersonalDataPreferenceController(context, this);
@@ -1186,41 +1185,41 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     public static final SummaryLoader.SummaryProviderFactory SUMMARY_PROVIDER_FACTORY =
-        new SummaryLoader.SummaryProviderFactory() {
-            @Override
-            public SummaryLoader.SummaryProvider createSummaryProvider(Activity activity,
-                    SummaryLoader summaryLoader) {
-                return new SummaryProvider(activity, summaryLoader);
-            }
-        };
+            (activity, summaryLoader) -> new SummaryProvider(activity, summaryLoader);
 
     public static final Indexable.SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
-                @Override
-                public List<SearchIndexableRaw> getRawDataToIndex(Context context,
-                        boolean enabled) {
-                    final List<SearchIndexableRaw> result = new ArrayList<>();
-                    final UserCapabilities userCaps = UserCapabilities.create(context);
-                    if (!userCaps.mEnabled) {
-                        return result;
-                    }
-                    final Resources res = context.getResources();
-                    SearchIndexableRaw data = new SearchIndexableRaw(context);
-                    data.title = res.getString(R.string.user_settings_title);
-                    data.key = "users_settings";
-                    data.screenTitle = res.getString(R.string.user_settings_title);
-                    result.add(data);
 
-                    if (userCaps.mCanAddUser || userCaps.mDisallowAddUserSetByAdmin) {
-                        data = new SearchIndexableRaw(context);
-                        data.title = res.getString(userCaps.mCanAddRestrictedProfile ?
-                                R.string.user_add_user_or_profile_menu
-                                : R.string.user_add_user_menu);
-                        data.screenTitle = res.getString(R.string.user_settings_title);
-                        data.key = "user_settings_add_users";
-                        result.add(data);
-                    }
-                    return result;
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    final UserCapabilities userCaps = UserCapabilities.create(context);
+                    return userCaps.mEnabled;
+                }
+
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    final List<SearchIndexableResource> index = new ArrayList<>();
+                    // Append the rest of the settings
+                    final SearchIndexableResource sir = new SearchIndexableResource(context);
+                    sir.xmlResId = R.xml.user_settings;
+                    index.add(sir);
+                    return index;
+                }
+
+                @Override
+                public List<String> getNonIndexableKeysFromXml(Context context, int xmlResId) {
+                    final List<String> niks = super.getNonIndexableKeysFromXml(context, xmlResId);
+                    new AddUserWhenLockedPreferenceController(
+                            context, KEY_ADD_USER_WHEN_LOCKED, null /* lifecycle */)
+                            .updateNonIndexableKeys(niks);
+                    new AutoSyncDataPreferenceController(context, null /* parent */)
+                            .updateNonIndexableKeys(niks);
+                    new AutoSyncPersonalDataPreferenceController(context, null /* parent */)
+                            .updateNonIndexableKeys(niks);
+                    new AutoSyncWorkDataPreferenceController(context, null /* parent */)
+                            .updateNonIndexableKeys(niks);
+                    return niks;
                 }
             };
 
