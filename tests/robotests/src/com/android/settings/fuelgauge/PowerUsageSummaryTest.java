@@ -15,6 +15,8 @@
  */
 package com.android.settings.fuelgauge;
 
+import static com.android.settings.fuelgauge.PowerUsageSummary.MENU_ADVANCED_BATTERY;
+
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
@@ -35,6 +37,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -53,7 +57,6 @@ import com.android.settingslib.core.AbstractPreferenceController;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -114,6 +117,12 @@ public class PowerUsageSummaryTest {
     private LoaderManager mLoaderManager;
     @Mock
     private BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
+    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
+    private Menu mMenu;
+    @Mock
+    private MenuInflater mMenuInflater;
+    @Mock
+    private MenuItem mAdvancedPageMenu;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -122,12 +131,13 @@ public class PowerUsageSummaryTest {
     private BatteryMeterView mBatteryMeterView;
     private PowerGaugePreference mScreenUsagePref;
     private PowerGaugePreference mLastFullChargePref;
+    private Intent mIntent;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mRealContext = RuntimeEnvironment.application;
+        mRealContext = spy(RuntimeEnvironment.application);
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         mScreenUsagePref = new PowerGaugePreference(mRealContext);
         mLastFullChargePref = new PowerGaugePreference(mRealContext);
@@ -137,6 +147,7 @@ public class PowerUsageSummaryTest {
         mBatteryMeterView.mDrawable = new BatteryMeterView.BatteryMeterDrawable(mRealContext, 0);
         doNothing().when(mFragment).restartBatteryStatsLoader();
         doReturn(mock(LoaderManager.class)).when(mFragment).getLoaderManager();
+        doReturn(MENU_ADVANCED_BATTERY).when(mAdvancedPageMenu).getItemId();
 
         when(mFragment.getActivity()).thenReturn(mSettingsActivity);
         when(mFeatureFactory.powerUsageFeatureProvider.getAdditionalBatteryInfoIntent())
@@ -292,6 +303,35 @@ public class PowerUsageSummaryTest {
         mFragment.restartBatteryStatsLoader(false /* clearHeader */);
 
         verify(mBatteryHeaderPreferenceController, never()).quickUpdateHeaderPreference();
+    }
+
+    @Test
+    public void testOptionsMenu_advancedPageEnabled() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isPowerAccountingToggleEnabled())
+                .thenReturn(true);
+
+        mFragment.onCreateOptionsMenu(mMenu, mMenuInflater);
+
+        verify(mMenu).add(Menu.NONE, MENU_ADVANCED_BATTERY, Menu.NONE,
+                R.string.advanced_battery_title);
+    }
+
+    @Test
+    public void testOptionsMenu_clickAdvancedPage_fireIntent() {
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doAnswer(invocation -> {
+            // Get the intent in which it has the app info bundle
+            mIntent = captor.getValue();
+            return true;
+        }).when(mRealContext).startActivity(captor.capture());
+
+        mFragment.onOptionsItemSelected(mAdvancedPageMenu);
+
+        assertThat(mIntent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)).isEqualTo(
+                PowerUsageAdvanced.class.getName());
+        assertThat(
+                mIntent.getIntExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_TITLE_RESID, 0)).isEqualTo(
+                R.string.advanced_battery_title);
     }
 
     public static class TestFragment extends PowerUsageSummary {
