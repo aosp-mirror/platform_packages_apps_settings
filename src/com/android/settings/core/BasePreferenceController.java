@@ -34,8 +34,6 @@ import java.util.List;
  * Abstract class to consolidate utility between preference controllers and act as an interface
  * for Slices. The abstract classes that inherit from this class will act as the direct interfaces
  * for each type when plugging into Slices.
- *
- * TODO (b/73074893) Add Lifecycle Setting method.
  */
 public abstract class BasePreferenceController extends AbstractPreferenceController {
 
