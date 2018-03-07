@@ -26,6 +26,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -137,7 +138,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testRetrieveAppEntry_hasAppEntry_notNull()
+    public void retrieveAppEntry_hasAppEntry_notNull()
             throws PackageManager.NameNotFoundException {
         doReturn(mPackageInfo).when(mPackageManger).getPackageInfo(anyString(), anyInt());
 
@@ -148,7 +149,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testRetrieveAppEntry_noAppEntry_null() throws PackageManager.NameNotFoundException {
+    public void retrieveAppEntry_noAppEntry_null() throws PackageManager.NameNotFoundException {
         doReturn(null).when(mState).getEntry(eq(PACKAGE_NAME), anyInt());
         doReturn(mPackageInfo).when(mPackageManger).getPackageInfo(anyString(), anyInt());
 
@@ -159,7 +160,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testRetrieveAppEntry_throwException_null() throws
+    public void retrieveAppEntry_throwException_null() throws
             PackageManager.NameNotFoundException {
         doReturn(mAppEntry).when(mState).getEntry(anyString(), anyInt());
         doThrow(new PackageManager.NameNotFoundException()).when(mPackageManger).getPackageInfo(
@@ -172,7 +173,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isSystemApp_handleAsDisableableButton() {
+    public void updateUninstallButton_isSystemApp_handleAsDisableableButton() {
         doReturn(false).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
 
@@ -183,7 +184,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_nonInstantApp() throws Exception {
+    public void isAvailable_nonInstantApp() throws Exception {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -196,7 +197,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_instantApp() throws Exception {
+    public void isAvailable_instantApp() throws Exception {
         mController.mAppEntry = mAppEntry;
         ReflectionHelpers.setStaticField(AppUtils.class, "sInstantAppDataProvider",
                 new InstantAppDataProvider() {
@@ -209,7 +210,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isDeviceAdminApp_setButtonDisable() {
+    public void updateUninstallButton_isDeviceAdminApp_setButtonDisable() {
         doReturn(true).when(mController).handleDisableable();
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
         doReturn(true).when(mDpm).packageHasActiveAdmins(anyString());
@@ -221,7 +222,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isProfileOrDeviceOwner_setButtonDisable() {
+    public void updateUninstallButton_isProfileOrDeviceOwner_setButtonDisable() {
         doReturn(true).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
 
         mController.updateUninstallButton();
@@ -230,7 +231,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isDeviceProvisioningApp_setButtonDisable() {
+    public void updateUninstallButton_isDeviceProvisioningApp_setButtonDisable() {
         doReturn(true).when(mDpm).isDeviceOwnerAppOnAnyUser(anyString());
         when(mSettingsActivity.getResources().getString(anyInt())).thenReturn(PACKAGE_NAME);
 
@@ -240,7 +241,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isUninstallInQueue_setButtonDisable() {
+    public void updateUninstallButton_isUninstallInQueue_setButtonDisable() {
         doReturn(true).when(mDpm).isUninstallInQueue(any());
 
         mController.updateUninstallButton();
@@ -249,7 +250,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateUninstallButton_isHomeAppAndBundled_setButtonDisable() {
+    public void updateUninstallButton_isHomeAppAndBundled_setButtonDisable() {
         mAppInfo.flags |= ApplicationInfo.FLAG_SYSTEM;
         mController.mHomePackages.add(PACKAGE_NAME);
 
@@ -259,7 +260,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateForceStopButton_HasActiveAdmins_setButtonDisable() {
+    public void updateForceStopButton_HasActiveAdmins_setButtonDisable() {
         doReturn(true).when(mDpm).packageHasActiveAdmins(anyString());
 
         mController.updateForceStopButton();
@@ -268,14 +269,14 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testUpdateForceStopButton_AppNotStopped_setButtonEnable() {
+    public void updateForceStopButton_AppNotStopped_setButtonEnable() {
         mController.updateForceStopButton();
 
         verify(mController).updateForceStopButtonInner(true);
     }
 
     @Test
-    public void testUninstallPkg_intentSent() {
+    public void uninstallPkg_intentSent() {
         mController.uninstallPkg(PACKAGE_NAME, ALL_USERS, DISABLE_AFTER_INSTALL);
 
         verify(mFragment).startActivityForResult(any(), eq(REQUEST_UNINSTALL));
@@ -287,7 +288,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testForceStopPackage_methodInvokedAndUpdated() {
+    public void forceStopPackage_methodInvokedAndUpdated() {
         final ApplicationsState.AppEntry appEntry = mock(ApplicationsState.AppEntry.class);
         doReturn(appEntry).when(mState).getEntry(anyString(), anyInt());
         doNothing().when(mController).updateForceStopButton();
@@ -300,7 +301,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testHandleDisableable_isHomeApp_notControllable() {
+    public void handleDisableable_isHomeApp_notControllable() {
         mController.mHomePackages.add(PACKAGE_NAME);
 
         final boolean controllable = mController.handleDisableable();
@@ -310,7 +311,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testHandleDisableable_isAppEnabled_controllable() {
+    public void handleDisableable_isAppEnabled_controllable() {
         mAppEntry.info.enabled = true;
         mAppEntry.info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
         doReturn(false).when(mController).isSystemPackage(any(), any(), any());
@@ -322,7 +323,7 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testHandleDisableable_isAppDisabled_controllable() {
+    public void handleDisableable_isAppDisabled_controllable() {
         mAppEntry.info.enabled = false;
         mAppEntry.info.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
         doReturn(false).when(mController).isSystemPackage(any(), any(), any());
@@ -334,11 +335,31 @@ public class AppButtonsPreferenceControllerTest {
     }
 
     @Test
-    public void testRefreshUi_packageNull_shouldNotCrash() {
+    public void refreshUi_packageNull_shouldNotCrash() {
         mController.mPackageName = null;
 
         // Should not crash in this method
         assertThat(mController.refreshUi()).isFalse();
+    }
+
+    @Test
+    public void onPackageListChanged_available_shouldRefreshUi() {
+        doReturn(true).when(mController).isAvailable();
+        doReturn(true).when(mController).refreshUi();
+
+        mController.onPackageListChanged();
+
+        verify(mController).refreshUi();
+    }
+
+    @Test
+    public void onPackageListChanged_notAvailable_shouldNotRefreshUiAndNoCrash() {
+        doReturn(false).when(mController).isAvailable();
+
+        mController.onPackageListChanged();
+
+        verify(mController, never()).refreshUi();
+        // Should not crash in this method
     }
 
     /**

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2017 The Android Open Source Project
+<!--
+     Copyright (C) 2018 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,18 +15,12 @@
      limitations under the License.
 -->
 
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="power_usage_advanced_screen"
-    android:title="@string/advanced_battery_title"
-    settings:keywords="@string/keywords_battery">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/time_zone_search_menu"
+        android:title="@string/search_settings"
+        android:icon="@*android:drawable/ic_search_api_material"
+        android:showAsAction="always|collapseActionView"
+        android:actionViewClass="android.widget.SearchView" />
 
-    <com.android.settings.fuelgauge.BatteryHistoryPreference
-        android:key="battery_graph"/>
-
-    <PreferenceCategory
-        android:key="app_list"
-        android:title="@string/power_usage_list_summary"/>
-
-</PreferenceScreen>
+</menu>

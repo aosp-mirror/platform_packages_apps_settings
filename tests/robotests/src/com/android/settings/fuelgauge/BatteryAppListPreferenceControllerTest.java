@@ -203,20 +203,6 @@ public class BatteryAppListPreferenceControllerTest {
     }
 
     @Test
-    public void testIsAvailable_featureOn_returnTrue() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, true);
-
-        assertThat(mPreferenceController.isAvailable()).isTrue();
-    }
-
-    @Test
-    public void testIsAvailable_featureOff_returnFalse() {
-        FeatureFlagUtils.setEnabled(mContext, FeatureFlags.BATTERY_DISPLAY_APP_LIST, false);
-
-        assertThat(mPreferenceController.isAvailable()).isFalse();
-    }
-
-    @Test
     public void testNeverUseFakeData() {
         assertThat(BatteryAppListPreferenceController.USE_FAKE_DATA).isFalse();
     }
