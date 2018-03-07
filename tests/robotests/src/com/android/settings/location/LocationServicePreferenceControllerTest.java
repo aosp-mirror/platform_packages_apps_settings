@@ -24,15 +24,24 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.admin.DevicePolicyManager;
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.ComponentName;
 import android.content.Context;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -41,11 +50,13 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.robolectric.annotation.Config;
 
 @RunWith(SettingsRobolectricTestRunner.class)
+@Config(
+        shadows = {
+                ShadowUserManager.class
+        })
 public class LocationServicePreferenceControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -56,6 +67,8 @@ public class LocationServicePreferenceControllerTest {
     private PreferenceScreen mScreen;
     @Mock
     private SettingsInjector mSettingsInjector;
+    @Mock
+    private DevicePolicyManager mDevicePolicyManager;
 
     private Context mContext;
     private LocationServicePreferenceController mController;
@@ -73,6 +86,9 @@ public class LocationServicePreferenceControllerTest {
         final String key = mController.getPreferenceKey();
         when(mScreen.findPreference(key)).thenReturn(mCategory);
         when(mCategory.getKey()).thenReturn(key);
+        when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE))
+                .thenReturn(mDevicePolicyManager);
+
     }
 
     @Test
@@ -131,5 +147,34 @@ public class LocationServicePreferenceControllerTest {
         mController.onLocationModeChanged(Settings.Secure.LOCATION_MODE_BATTERY_SAVING, false);
 
         verify(mSettingsInjector).reloadStatusMessages();
+    }
+
+    @Test
+    public void withUserRestriction_shouldDisableLocationAccuracy() {
+        final List<Preference> preferences = new ArrayList<>();
+        final RestrictedAppPreference pref = new RestrictedAppPreference(mContext,
+                UserManager.DISALLOW_CONFIG_LOCATION);
+        pref.setTitle("Location Accuracy");
+        preferences.add(pref);
+        doReturn(preferences).when(mSettingsInjector)
+                .getInjectedSettings(any(Context.class), anyInt());
+
+        int userId = UserHandle.myUserId();
+        List<UserManager.EnforcingUser> enforcingUsers = new ArrayList<>();
+        enforcingUsers.add(new UserManager.EnforcingUser(userId,
+                UserManager.RESTRICTION_SOURCE_DEVICE_OWNER));
+        ComponentName componentName = new ComponentName("test", "test");
+        // Ensure that RestrictedLockUtils.checkIfRestrictionEnforced doesn't return null.
+        ShadowUserManager.getShadow().setUserRestrictionSources(
+                UserManager.DISALLOW_CONFIG_LOCATION,
+                UserHandle.of(userId),
+                enforcingUsers);
+        when(mDevicePolicyManager.getDeviceOwnerComponentOnAnyUser()).thenReturn(componentName);
+
+        mController.displayPreference(mScreen);
+        mController.updateState(mCategory);
+
+        assertThat(pref.isEnabled()).isFalse();
+        assertThat(pref.isDisabledByAdmin()).isTrue();
     }
 }

@@ -22,7 +22,8 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.internal.annotations.Immutable;
-import com.android.internal.util.Preconditions;
+
+import java.util.Objects;
 
 /**
  * Specifies a setting that is being injected into Settings &gt; Location &gt; Location services.
@@ -65,32 +66,19 @@ class InjectedSetting {
      */
     public final String settingsActivity;
 
-    private InjectedSetting(String packageName, String className,
-            String title, int iconId, UserHandle userHandle, String settingsActivity) {
-        this.packageName = Preconditions.checkNotNull(packageName, "packageName");
-        this.className = Preconditions.checkNotNull(className, "className");
-        this.title = Preconditions.checkNotNull(title, "title");
-        this.iconId = iconId;
-        this.mUserHandle = userHandle;
-        this.settingsActivity = Preconditions.checkNotNull(settingsActivity);
-    }
-
     /**
-     * Returns a new instance, or null.
+     * The user restriction associated with this setting.
      */
-    public static InjectedSetting newInstance(String packageName, String className,
-            String title, int iconId, UserHandle userHandle, String settingsActivity) {
-        if (packageName == null || className == null ||
-                TextUtils.isEmpty(title) || TextUtils.isEmpty(settingsActivity)) {
-            if (Log.isLoggable(SettingsInjector.TAG, Log.WARN)) {
-                Log.w(SettingsInjector.TAG, "Illegal setting specification: package="
-                        + packageName + ", class=" + className
-                        + ", title=" + title + ", settingsActivity=" + settingsActivity);
-            }
-            return null;
-        }
-        return new InjectedSetting(packageName, className, title, iconId, userHandle,
-                settingsActivity);
+    public final String userRestriction;
+
+    private InjectedSetting(Builder builder) {
+        this.packageName = builder.mPackageName;
+        this.className = builder.mClassName;
+        this.title = builder.mTitle;
+        this.iconId = builder.mIconId;
+        this.mUserHandle = builder.mUserHandle;
+        this.settingsActivity = builder.mSettingsActivity;
+        this.userRestriction = builder.mUserRestriction;
     }
 
     @Override
@@ -102,6 +90,7 @@ class InjectedSetting {
                 ", iconId=" + iconId +
                 ", userId=" + mUserHandle.getIdentifier() +
                 ", settingsActivity='" + settingsActivity + '\'' +
+                ", userRestriction='" + userRestriction +
                 '}';
     }
 
@@ -121,10 +110,13 @@ class InjectedSetting {
 
         InjectedSetting that = (InjectedSetting) o;
 
-        return packageName.equals(that.packageName) && className.equals(that.className)
-                && title.equals(that.title) && iconId == that.iconId
-                && mUserHandle.equals(that.mUserHandle)
-                && settingsActivity.equals(that.settingsActivity);
+        return Objects.equals(packageName, that.packageName)
+                && Objects.equals(className, that.className)
+                && Objects.equals(title, that.title)
+                && Objects.equals(iconId, that.iconId)
+                && Objects.equals(mUserHandle, that.mUserHandle)
+                && Objects.equals(settingsActivity, that.settingsActivity)
+                && Objects.equals(userRestriction, that.userRestriction);
     }
 
     @Override
@@ -133,8 +125,67 @@ class InjectedSetting {
         result = 31 * result + className.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + iconId;
-        result = 31 * result + mUserHandle.hashCode();
+        result = 31 * result + (mUserHandle == null ? 0 : mUserHandle.hashCode());
         result = 31 * result + settingsActivity.hashCode();
+        result = 31 * result + (userRestriction == null ? 0 : userRestriction.hashCode());
         return result;
+    }
+
+    public static class Builder {
+        private String mPackageName;
+        private String mClassName;
+        private String mTitle;
+        private int mIconId;
+        private UserHandle mUserHandle;
+        private String mSettingsActivity;
+        private String mUserRestriction;
+
+        public Builder setPackageName(String packageName) {
+            mPackageName = packageName;
+            return this;
+        }
+
+        public Builder setClassName(String className) {
+            mClassName = className;
+            return this;
+        }
+
+        public Builder setTitle(String title) {
+            mTitle = title;
+            return this;
+        }
+
+        public Builder setIconId(int iconId) {
+            mIconId = iconId;
+            return this;
+        }
+
+        public Builder setUserHandle(UserHandle userHandle) {
+            mUserHandle = userHandle;
+            return this;
+        }
+
+        public Builder setSettingsActivity(String settingsActivity) {
+            mSettingsActivity = settingsActivity;
+            return this;
+        }
+
+        public Builder setUserRestriction(String userRestriction) {
+            mUserRestriction = userRestriction;
+            return this;
+        }
+
+        public InjectedSetting build() {
+            if (mPackageName == null || mClassName == null || TextUtils.isEmpty(mTitle)
+                    || TextUtils.isEmpty(mSettingsActivity)) {
+                if (Log.isLoggable(SettingsInjector.TAG, Log.WARN)) {
+                    Log.w(SettingsInjector.TAG, "Illegal setting specification: package="
+                            + mPackageName + ", class=" + mClassName
+                            + ", title=" + mTitle + ", settingsActivity=" + mSettingsActivity);
+                }
+                return null;
+            }
+            return new InjectedSetting(this);
+        }
     }
 }
