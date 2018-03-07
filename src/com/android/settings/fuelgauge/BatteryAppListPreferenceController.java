@@ -22,6 +22,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.BatteryStats;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.os.UserHandle;
@@ -81,7 +82,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
     private Context mPrefContext;
     SparseArray<List<Anomaly>> mAnomalySparseArray;
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
