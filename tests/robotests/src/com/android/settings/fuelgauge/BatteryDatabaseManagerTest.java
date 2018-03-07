@@ -42,8 +42,10 @@ import java.util.List;
 public class BatteryDatabaseManagerTest {
 
     private static String PACKAGE_NAME_NEW = "com.android.app1";
+    private static int UID_NEW = 345;
     private static int TYPE_NEW = 1;
     private static String PACKAGE_NAME_OLD = "com.android.app2";
+    private static int UID_OLD = 543;
     private static int TYPE_OLD = 2;
     private static long NOW = System.currentTimeMillis();
     private static long ONE_DAY_BEFORE = NOW - DateUtils.DAY_IN_MILLIS;
@@ -67,23 +69,23 @@ public class BatteryDatabaseManagerTest {
 
     @Test
     public void testAllFunctions() {
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW,
+        mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD,
+        mBatteryDatabaseManager.insertAnomaly(UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD,
                 AnomalyDatabaseHelper.State.NEW, TWO_DAYS_BEFORE);
 
         // In database, it contains two record
         List<AppInfo> totalAppInfos = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
                 AnomalyDatabaseHelper.State.NEW);
         assertThat(totalAppInfos).hasSize(2);
-        assertAppInfo(totalAppInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
-        assertAppInfo(totalAppInfos.get(1), PACKAGE_NAME_OLD, TYPE_OLD);
+        assertAppInfo(totalAppInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(totalAppInfos.get(1), UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD);
 
         // Only one record shows up if we query by timestamp
         List<AppInfo> appInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.NEW);
         assertThat(appInfos).hasSize(1);
-        assertAppInfo(appInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(appInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
 
         mBatteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(ONE_DAY_BEFORE);
 
@@ -91,14 +93,14 @@ public class BatteryDatabaseManagerTest {
         List<AppInfo> appInfos1 = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
                 AnomalyDatabaseHelper.State.NEW);
         assertThat(appInfos1).hasSize(1);
-        assertAppInfo(appInfos1.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(appInfos1.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
     }
 
     @Test
     public void testUpdateAnomalies_updateSuccessfully() {
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_NEW, TYPE_NEW,
+        mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
                 AnomalyDatabaseHelper.State.NEW, NOW);
-        mBatteryDatabaseManager.insertAnomaly(PACKAGE_NAME_OLD, TYPE_OLD,
+        mBatteryDatabaseManager.insertAnomaly(UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD,
                 AnomalyDatabaseHelper.State.NEW, NOW);
         final AppInfo appInfo = new AppInfo.Builder().setPackageName(PACKAGE_NAME_OLD).build();
         final List<AppInfo> updateAppInfos = new ArrayList<>();
@@ -112,17 +114,18 @@ public class BatteryDatabaseManagerTest {
         List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.NEW);
         assertThat(newAppInfos).hasSize(1);
-        assertAppInfo(newAppInfos.get(0), PACKAGE_NAME_NEW, TYPE_NEW);
+        assertAppInfo(newAppInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
 
         // The state of PACKAGE_NAME_OLD is changed to handled
         List<AppInfo> handledAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.HANDLED);
         assertThat(handledAppInfos).hasSize(1);
-        assertAppInfo(handledAppInfos.get(0), PACKAGE_NAME_OLD, TYPE_OLD);
+        assertAppInfo(handledAppInfos.get(0), UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD);
     }
 
-    private void assertAppInfo(final AppInfo appInfo, String packageName, int type) {
+    private void assertAppInfo(final AppInfo appInfo, int uid, String packageName, int type) {
         assertThat(appInfo.packageName).isEqualTo(packageName);
         assertThat(appInfo.anomalyType).isEqualTo(type);
+        assertThat(appInfo.uid).isEqualTo(uid);
     }
 }
