@@ -262,6 +262,9 @@ public class InstantAppButtonsPreferenceControllerTest {
 
         verify(mFragment).startActivity(argThat(intent-> intent != null
             && intent.getAction().equals(Intent.ACTION_VIEW)
+            && intent.hasCategory(Intent.CATEGORY_BROWSABLE)
+            && (intent.getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0
+            && TextUtils.equals(intent.getPackage(), TEST_AIA_PACKAGE_NAME)
             && TextUtils.equals(intent.getDataString(), launchUri)));
     }
 
