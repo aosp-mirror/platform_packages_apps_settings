@@ -98,6 +98,19 @@ public class RestrictAppTip extends BatteryTip {
     }
 
     @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder(super.toString());
+        stringBuilder.append(" {");
+        for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
+            final AppInfo appInfo = mRestrictAppList.get(i);
+            stringBuilder.append(" " + appInfo.toString() + " ");
+        }
+        stringBuilder.append('}');
+
+        return stringBuilder.toString();
+    }
+
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeTypedList(mRestrictAppList);

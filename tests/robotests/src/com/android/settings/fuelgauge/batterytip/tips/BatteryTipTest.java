@@ -52,7 +52,7 @@ public class BatteryTipTest {
     }
 
     @Test
-    public void testBuildPreference() {
+    public void buildPreference() {
         final Preference preference = mBatteryTip.buildPreference(mContext);
 
         assertThat(preference.getTitle()).isEqualTo(TITLE);
@@ -61,7 +61,7 @@ public class BatteryTipTest {
     }
 
     @Test
-    public void testParcelable() {
+    public void parcelable() {
         final BatteryTip batteryTip = new TestBatteryTip();
 
         Parcel parcel = Parcel.obtain();
@@ -76,13 +76,18 @@ public class BatteryTipTest {
     }
 
     @Test
-    public void testTipOrder_orderUnique() {
+    public void tipOrder_orderUnique() {
         final List<Integer> orders = new ArrayList<>();
         for (int i = 0, size = BatteryTip.TIP_ORDER.size(); i < size; i++) {
             orders.add(BatteryTip.TIP_ORDER.valueAt(i));
         }
 
         assertThat(orders).containsNoDuplicates();
+    }
+
+    @Test
+    public void toString_containBatteryTipData() {
+        assertThat(mBatteryTip.toString()).isEqualTo("type=6 state=0");
     }
 
     /**
