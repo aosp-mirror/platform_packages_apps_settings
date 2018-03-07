@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
-import android.content.UriPermission;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IPackageDataObserver;
 import android.content.pm.PackageManager;
@@ -487,7 +486,7 @@ public class AppStorageSettings extends AppInfoWithHeader
                         .create();
             case DLG_CANNOT_CLEAR_DATA:
                 return new AlertDialog.Builder(getActivity())
-                        .setTitle(getActivity().getText(R.string.clear_failed_dlg_title))
+                        .setTitle(getActivity().getText(R.string.clear_user_data_text))
                         .setMessage(getActivity().getText(R.string.clear_failed_dlg_text))
                         .setNeutralButton(R.string.dlg_ok, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
