@@ -158,4 +158,9 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
     public int compareTo(BatteryTip o) {
         return TIP_ORDER.get(mType) - TIP_ORDER.get(o.mType);
     }
+
+    @Override
+    public String toString() {
+        return "type=" + mType + " state=" + mState;
+    }
 }
