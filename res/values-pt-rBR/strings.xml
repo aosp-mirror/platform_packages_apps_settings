@@ -330,13 +330,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Selecionar fuso horário"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Data"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Definir data"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"Região"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"Fuso horário"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"Selecionar compensação de UTC"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Classificar em ordem alfabética"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Classificar por fuso horário"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"O <xliff:g id="TIME_TYPE">%1$s</xliff:g> começa em: <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> começa em <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Usa <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Sem horário de verão."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Horário de verão"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Horário padrão"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"Fuso horário por região"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"Fusos horários com diferença fixa"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"Mostrar fusos horários por região"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"Mostrar fusos horários por compensação de UTC"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Data"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Hora"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Bloquear automaticamente"</string>
@@ -362,7 +369,11 @@
     <string name="security_settings_title" msgid="4918904614964215087">"Segurança e local"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Criptografia e credenciais"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Smartphone criptografado"</string>
+    <!-- no translation found for decryption_settings_summary (5671817824042639849) -->
+    <skip />
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Dispositivo criptografado"</string>
+    <!-- no translation found for decryption_settings_summary (5794135636155570977) -->
+    <skip />
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Preferências da tela de bloqueio"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Definir Meu local, desbloqueio de tela, bloqueio do SIM e do armazenamento de credenciais"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Definir o Meu local, o desbloqueio de tela, o bloqueio do armazenamento de credenciais"</string>
@@ -2095,6 +2106,10 @@
       <item quantity="one">%1$d app</item>
       <item quantity="other">%1$d apps</item>
     </plurals>
+    <!-- no translation found for battery_auto_restriction_title (4698846356558232573) -->
+    <skip />
+    <!-- no translation found for battery_auto_restriction_summary (1816325499514435434) -->
+    <skip />
     <string name="dialog_stop_title" msgid="6395127715596746479">"Parar o app?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Não é possível gerenciar a bateria do smartphone normalmente, porque o app <xliff:g id="APP">%1$s</xliff:g> o mantém ativado.\n\nPara tentar resolver esse problema, você pode forçar a parada do app.\n\nSe isso continuar acontecendo, talvez seja necessário desinstalá-lo para melhorar o desempenho da bateria."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Não é possível gerenciar a bateria do tablet normalmente, porque o app <xliff:g id="APP">%1$s</xliff:g> o mantém ativado.\n\nPara tentar resolver esse problema, você pode forçar a parada do app.\n\nSe isso continuar acontecendo, talvez seja necessário desinstalá-lo para melhorar o desempenho da bateria."</string>
@@ -3144,8 +3159,10 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Apenas de contatos marcados com estrela"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Nenhuma"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Alarmes"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Mídia"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Inclui feedback do sistema, como sons de toque e carregamento"</string>
+    <!-- no translation found for zen_mode_media (8808264142134422380) -->
+    <skip />
+    <!-- no translation found for zen_mode_system (1735424656149706110) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Lembretes"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Eventos"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Todos os autores de chamadas"</string>
@@ -3861,4 +3878,16 @@
     <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"Ativar e desativar o Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"Permitir alternância do Wi-Fi"</string>
     <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"Permitir que esse app altere o estado do Wi-Fi, inclusive se conectando ao Wi-Fi e ativando-o ou desativando-o."</string>
+    <!-- no translation found for media_output_title (115223550977351699) -->
+    <skip />
+    <!-- no translation found for media_output_summary (6839458453831567167) -->
+    <skip />
+    <!-- no translation found for media_output_summary (7217221078578554515) -->
+    <skip />
+    <!-- no translation found for media_output_summary (5677420090811068649) -->
+    <skip />
+    <!-- no translation found for media_out_summary_ongoing_call_state (3533731701018680693) -->
+    <skip />
+    <!-- no translation found for media_output_summary_unavailable (7970304720507697019) -->
+    <skip />
 </resources>
