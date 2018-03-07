@@ -25,6 +25,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
+import com.android.settings.widget.RestrictedAppPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
@@ -88,7 +89,13 @@ public class LocationServicePreferenceController extends LocationBasePreferenceC
     @Override
     public void updateState(Preference preference) {
         mCategoryLocationServices.removeAll();
-        LocationSettings.addPreferencesSorted(getLocationServices(), mCategoryLocationServices);
+        final List<Preference> prefs = getLocationServices();
+        for (Preference pref : prefs) {
+            if (pref instanceof RestrictedAppPreference) {
+                ((RestrictedAppPreference) pref).checkRestrictionAndSetDisabled();
+            }
+        }
+        LocationSettings.addPreferencesSorted(prefs, mCategoryLocationServices);
     }
 
     @Override
