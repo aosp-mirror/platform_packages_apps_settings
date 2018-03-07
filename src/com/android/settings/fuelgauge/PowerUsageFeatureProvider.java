@@ -118,4 +118,9 @@ public interface PowerUsageFeatureProvider {
      * the caller
      */
     boolean getEarlyWarningSignal(Context context, String id);
+
+    /**
+     * Checks whether smart battery feature is supported in this device
+     */
+    boolean isSmartBatterySupported();
 }
