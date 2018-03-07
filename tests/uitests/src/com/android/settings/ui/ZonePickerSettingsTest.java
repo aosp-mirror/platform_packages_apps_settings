@@ -32,8 +32,6 @@ import android.support.test.uiautomator.UiSelector;
 import android.support.test.uiautomator.Until;
 import android.system.helpers.SettingsHelper;
 import android.system.helpers.SettingsHelper.SettingsType;
-import android.widget.ListView;
-import android.widget.Spinner;
 
 import org.junit.After;
 import org.junit.Before;
@@ -102,16 +100,16 @@ public class ZonePickerSettingsTest {
     // Test 2 time zones with no DST
     @Test
     public void testSelectReykjavik() throws Exception {
-        testSelectTimeZone("Iceland", "Reykjavik", "GMT+00:00", "Atlantic/Reykjavik");
+        testSelectTimeZone("Iceland", "Reykjavik", "GMT+00:00", "Atlantic/Reykjavik", true);
     }
 
     @Test
     public void testSelectPhoenix() throws Exception {
-        testSelectTimeZone("United States", "Phoenix", "GMT-07:00", "America/Phoenix");
+        testSelectTimeZone("United States", "Phoenix", "GMT-07:00", "America/Phoenix", false);
     }
 
     private void testSelectTimeZone(String region, String timezone, String expectedTimeZoneOffset,
-            String expectedTimeZoneId) throws Exception {
+            String expectedTimeZoneId, boolean assumeOneTimeZoneInRegion) throws Exception {
         mHelper.setIntSetting(SettingsType.GLOBAL, Settings.Global.AUTO_TIME_ZONE, 0);
 
         SettingsHelper.launchSettingsPage(
@@ -121,16 +119,21 @@ public class ZonePickerSettingsTest {
         assertTrue(selectTimeZone.isEnabled());
         selectTimeZone.click();
 
-        // Select region in the dropdown list
-        selectScrollableItem(selectDropDownInSpinner(By.clazz(Spinner.class)),
-                new UiSelector().textContains(region))
+        wait(By.text("Region")).click();
+        // Speed-up the test by searching with the first 2 characters of the region name
+        wait(By.res("android", "search_src_text")).setText(region.substring(0, 2));
+        // Select region in the list
+        selectItemInList(new UiSelector().textContains(region))
                 .click();
 
-        // Select time zone
-        selectScrollableItem(selectTimeZoneList(),
-                new UiSelector().textContains(timezone))
-                .click();
+        // Only select time zone explicitly if there are more than one time zones in a region
+        if (!assumeOneTimeZoneInRegion) {
+            wait(By.text("Time Zone"));
+            selectItemInList(new UiSelector().textContains(timezone))
+                    .click();
+        }
 
+        mDevice.pressBack();
         // The select button should include the GMT offset in the summary
         BySelector summarySelector = By.res("android:id/summary");
         UiObject2 selectedTimeZone = selectTimeZone.findObject(summarySelector);
@@ -162,21 +165,10 @@ public class ZonePickerSettingsTest {
         assertEquals(expectedTimeZoneId, TimeZone.getDefault().getID());
     }
 
-    /**
-     * Perform click on {@link Spinner} and return the pop-up dropdown list.
-     * @return UiScrollable representing the pop-up dropdown after clicking on the spinner
-     */
-    private UiScrollable selectDropDownInSpinner(BySelector spinnerSelector)
-            throws UiObjectNotFoundException {
-        UiObject2 spinner = wait(spinnerSelector);
-        spinner.click();
-
-        UiSelector dropDownSelector = new UiSelector().className(ListView.class);
-        return new UiScrollable(dropDownSelector);
-    }
-
-    private UiScrollable selectTimeZoneList() {
-        return new UiScrollable(new UiSelector().resourceId(SETTINGS_PACKAGE + ":id/tz_list"));
+    private UiObject selectItemInList(UiSelector childSelector) throws UiObjectNotFoundException {
+        UiScrollable recyclerView = new UiScrollable(
+                new UiSelector().resourceId(SETTINGS_PACKAGE + ":id/recycler_view"));
+        return selectScrollableItem(recyclerView, childSelector);
     }
 
     /**
