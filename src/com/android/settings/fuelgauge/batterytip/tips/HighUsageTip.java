@@ -86,6 +86,19 @@ public class HighUsageTip extends BatteryTip {
         return mHighUsageAppList;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder stringBuilder = new StringBuilder(super.toString());
+        stringBuilder.append(" {");
+        for (int i = 0, size = mHighUsageAppList.size(); i < size; i++) {
+            final AppInfo appInfo = mHighUsageAppList.get(i);
+            stringBuilder.append(" " + appInfo.toString() + " ");
+        }
+        stringBuilder.append('}');
+
+        return stringBuilder.toString();
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public BatteryTip createFromParcel(Parcel in) {
             return new HighUsageTip(in);

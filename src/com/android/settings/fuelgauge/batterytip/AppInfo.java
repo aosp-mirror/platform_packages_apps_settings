@@ -68,6 +68,12 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         dest.writeInt(uid);
     }
 
+    @Override
+    public String toString() {
+        return "packageName=" + packageName + ",anomalyType=" + anomalyType + ",screenTime="
+                + screenOnTimeMs;
+    }
+
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public AppInfo createFromParcel(Parcel in) {
             return new AppInfo(in);
