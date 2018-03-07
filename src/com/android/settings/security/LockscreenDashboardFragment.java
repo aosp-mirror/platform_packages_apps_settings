@@ -22,10 +22,10 @@ import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.users.AddUserWhenLockedPreferenceController;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.notification.LockScreenNotificationPreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.users.AddUserWhenLockedPreferenceController;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -130,6 +130,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> niks = super.getNonIndexableKeys(context);
                     niks.add(KEY_ADD_USER_FROM_LOCK_SCREEN);
+                    niks.add(KEY_LOCK_SCREEN_NOTIFICATON_WORK_PROFILE);
                     return niks;
                 }
             };
