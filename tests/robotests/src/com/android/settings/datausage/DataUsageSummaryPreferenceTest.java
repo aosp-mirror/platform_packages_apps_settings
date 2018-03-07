@@ -55,6 +55,8 @@ public class DataUsageSummaryPreferenceTest {
     private TextView mCycleTime;
     private TextView mCarrierInfo;
     private TextView mDataLimits;
+    private TextView mDataUsed;
+    private TextView mDataRemaining;
     private Button mLaunchButton;
     private LinearLayout mLabelBar;
     private TextView mLabel1;
@@ -205,12 +207,35 @@ public class DataUsageSummaryPreferenceTest {
         mSummaryPreference.setLabels("0.0 GB", "5.0 GB");
     }
 
+    public void testSetUsageAndRemainingInfo_withUsageInfo_dataUsageAndRemainingShown() {
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+        mSummaryPreference.setUsageNumbers(1000000L, 10000000L, true);
+
+        bindViewHolder();
+        assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
+        assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
+    }
+
+    @Test
+    public void testSetUsageInfo_withUsageInfo_dataUsageShown() {
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+                new Intent());
+        mSummaryPreference.setUsageNumbers(1000000L, -1L, true);
+
+        bindViewHolder();
+        assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
+        assertThat(mDataRemaining.getText()).isEqualTo("");
+    }
+
     private void bindViewHolder() {
         mSummaryPreference.onBindViewHolder(mHolder);
         mUsageTitle = (TextView) mHolder.findViewById(R.id.usage_title);
         mCycleTime = (TextView) mHolder.findViewById(R.id.cycle_left_time);
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
         mDataLimits = (TextView) mHolder.findViewById(R.id.data_limits);
+        mDataUsed = (TextView) mHolder.findViewById(R.id.data_usage_view);
+        mDataRemaining = (TextView) mHolder.findViewById(R.id.data_remaining_view);
         mLaunchButton = (Button) mHolder.findViewById(R.id.launch_mdp_app_button);
         mLabelBar = (LinearLayout) mHolder.findViewById(R.id.label_bar);
         mLabel1 = (TextView) mHolder.findViewById(R.id.text1);

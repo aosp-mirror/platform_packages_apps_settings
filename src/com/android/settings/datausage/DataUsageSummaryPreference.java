@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,10 @@ public class DataUsageSummaryPreference extends Preference {
     private String mStartLabel;
     private String mEndLabel;
 
+    /** large vs small size is 36/16 ~ 2.25 */
+    private static final float LARGER_FONT_RATIO = 2.25f;
+    private static final float SMALLER_FONT_RATIO = 1.0f;
+
     private int mNumPlans;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
@@ -53,6 +58,16 @@ public class DataUsageSummaryPreference extends Preference {
 
     /** Progress to display on ProgressBar */
     private float mProgress;
+    private boolean mHasMobileData;
+
+    /**
+     * The size of the first registered plan if one exists or the size of the warning if it is set.
+     * -1 if no information is available.
+     */
+    private long mDataplanSize;
+
+    /** The number of bytes used since the start of the cycle. */
+    private long mDataplanUse;
 
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -94,9 +109,17 @@ public class DataUsageSummaryPreference extends Preference {
         notifyChanged();
     }
 
+    void setUsageNumbers(long used, long dataPlanSize, boolean hasMobileData) {
+        mDataplanUse = used;
+        mDataplanSize = dataPlanSize;
+        mHasMobileData = hasMobileData;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
 
         if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
             holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
@@ -106,6 +129,17 @@ public class DataUsageSummaryPreference extends Preference {
             ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
         } else {
             holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
+        }
+
+        TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
+        usageNumberField.setText(TextUtils.expandTemplate(
+                getContext().getString(R.string.data_used),
+                Formatter.formatFileSize(getContext(), mDataplanUse)));
+        if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
+            TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
+            usageRemainingField.setText(
+                    TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
+                            Formatter.formatFileSize(getContext(), mDataplanSize - mDataplanUse)));
         }
 
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
