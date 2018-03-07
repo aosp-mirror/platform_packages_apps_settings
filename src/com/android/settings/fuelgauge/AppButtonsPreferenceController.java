@@ -297,7 +297,9 @@ public class AppButtonsPreferenceController extends AbstractPreferenceController
 
     @Override
     public void onPackageListChanged() {
-        refreshUi();
+        if (isAvailable()) {
+            refreshUi();
+        }
     }
 
     @Override
