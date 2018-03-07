@@ -33,11 +33,13 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
      */
     public final int anomalyType;
     public final long screenOnTimeMs;
+    public final int uid;
 
     private AppInfo(AppInfo.Builder builder) {
         packageName = builder.mPackageName;
         anomalyType = builder.mAnomalyType;
         screenOnTimeMs = builder.mScreenOnTimeMs;
+        uid = builder.mUid;
     }
 
     @VisibleForTesting
@@ -45,6 +47,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         packageName = in.readString();
         anomalyType = in.readInt();
         screenOnTimeMs = in.readLong();
+        uid = in.readInt();
     }
 
     @Override
@@ -62,6 +65,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         dest.writeString(packageName);
         dest.writeInt(anomalyType);
         dest.writeLong(screenOnTimeMs);
+        dest.writeInt(uid);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -78,6 +82,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         private int mAnomalyType;
         private String mPackageName;
         private long mScreenOnTimeMs;
+        private int mUid;
 
         public Builder setAnomalyType(int type) {
             mAnomalyType = type;
@@ -91,6 +96,11 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
 
         public Builder setScreenOnTimeMs(long screenOnTimeMs) {
             mScreenOnTimeMs = screenOnTimeMs;
+            return this;
+        }
+
+        public Builder setUid(int uid) {
+            mUid = uid;
             return this;
         }
 

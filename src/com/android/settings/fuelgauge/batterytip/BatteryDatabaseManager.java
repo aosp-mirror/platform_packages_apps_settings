@@ -24,6 +24,7 @@ import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.An
         .ANOMALY_TYPE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .TIME_STAMP_MS;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.UID;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.Tables.TABLE_ANOMALY;
 
 import android.content.ContentValues;
@@ -65,10 +66,11 @@ public class BatteryDatabaseManager {
      * @param anomalyState  the state of the anomaly
      * @param timestampMs   the time when it is happened
      */
-    public synchronized void insertAnomaly(String packageName, int type, int anomalyState,
+    public synchronized void insertAnomaly(int uid, String packageName, int type, int anomalyState,
             long timestampMs) {
         try (SQLiteDatabase db = mDatabaseHelper.getWritableDatabase()) {
             ContentValues values = new ContentValues();
+            values.put(UID, uid);
             values.put(PACKAGE_NAME, packageName);
             values.put(ANOMALY_TYPE, type);
             values.put(ANOMALY_STATE, anomalyState);
@@ -83,7 +85,7 @@ public class BatteryDatabaseManager {
     public synchronized List<AppInfo> queryAllAnomalies(long timestampMsAfter, int state) {
         final List<AppInfo> appInfos = new ArrayList<>();
         try (SQLiteDatabase db = mDatabaseHelper.getReadableDatabase()) {
-            final String[] projection = {PACKAGE_NAME, ANOMALY_TYPE};
+            final String[] projection = {PACKAGE_NAME, ANOMALY_TYPE, UID};
             final String orderBy = AnomalyDatabaseHelper.AnomalyColumns.TIME_STAMP_MS + " DESC";
 
             try (Cursor cursor = db.query(TABLE_ANOMALY, projection,
@@ -94,6 +96,7 @@ public class BatteryDatabaseManager {
                     AppInfo appInfo = new AppInfo.Builder()
                             .setPackageName(cursor.getString(cursor.getColumnIndex(PACKAGE_NAME)))
                             .setAnomalyType(cursor.getInt(cursor.getColumnIndex(ANOMALY_TYPE)))
+                            .setUid(cursor.getInt(cursor.getColumnIndex(UID)))
                             .build();
                     appInfos.add(appInfo);
                 }
