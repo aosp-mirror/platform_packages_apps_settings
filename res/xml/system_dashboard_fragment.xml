@@ -46,7 +46,8 @@
         android:summary="@string/reset_dashboard_summary"
         android:icon="@drawable/ic_restore"
         android:order="-50"
-        android:fragment="com.android.settings.system.ResetDashboardFragment" />
+        android:fragment="com.android.settings.system.ResetDashboardFragment"
+        settings:controller="com.android.settings.system.ResetPreferenceController"/>
 
     <!-- System updates -->
     <Preference
