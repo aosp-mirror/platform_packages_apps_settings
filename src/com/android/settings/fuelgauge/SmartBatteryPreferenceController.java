@@ -19,12 +19,11 @@ package com.android.settings.fuelgauge;
 
 import android.content.Context;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
-import com.android.settings.applications.LayoutPreference;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 
 /**
  * Controller to change and update the smart battery toggle
@@ -34,15 +33,19 @@ public class SmartBatteryPreferenceController extends BasePreferenceController i
     private static final String KEY_SMART_BATTERY = "smart_battery";
     private static final int ON = 1;
     private static final int OFF = 0;
+    private PowerUsageFeatureProvider mPowerUsageFeatureProvider;
 
     public SmartBatteryPreferenceController(Context context) {
         super(context, KEY_SMART_BATTERY);
+        mPowerUsageFeatureProvider = FeatureFactory.getFactory(context)
+                .getPowerUsageFeatureProvider(context);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        // TODO(b/71502850): get Availability from API. The device may not support it.
-        return AVAILABLE;
+        return mPowerUsageFeatureProvider.isSmartBatterySupported()
+                ? AVAILABLE
+                : DISABLED_UNSUPPORTED;
     }
 
     @Override

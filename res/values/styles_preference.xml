@@ -40,4 +40,9 @@
         <item name="android:layout">@layout/two_state_button</item>
     </style>
 
+    <style name="SettingsMultiSelectListPreference" parent="Preference.SettingsBase">
+        <item name="android:positiveButtonText">@android:string/ok</item>
+        <item name="android:negativeButtonText">@android:string/cancel</item>
+    </style>
+
 </resources>

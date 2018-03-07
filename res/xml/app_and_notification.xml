@@ -32,19 +32,14 @@
         <Preference
             android:title="@string/applications_settings"
             android:key="all_app_info"
-            android:order="20">
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="com.android.settings"
-                android:targetClass="com.android.settings.Settings$ManageApplicationsActivity">
-            </intent>
-        </Preference>
+            android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+            android:order="20" />
     </PreferenceCategory>
 
     <!-- Empty category to draw divider -->
     <PreferenceCategory
         android:key="all_app_info_divider"
-        android:order="-190"/>
+        android:order="-190" />
 
     <!-- Notifications (appears before manage_perms), default apps (appears after) -->
     <PreferenceCategory

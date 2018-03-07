@@ -27,7 +27,6 @@ import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.RecoverySystem;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.annotation.VisibleForTesting;
@@ -42,6 +41,7 @@ import android.widget.Toast;
 import com.android.ims.ImsManager;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.settings.enterprise.ActionDisabledByAdminDialogHelper;
 import com.android.settings.wrapper.RecoverySystemWrapper;
 import com.android.settings.core.InstrumentedFragment;
 import com.android.settingslib.RestrictedLockUtils;
@@ -197,10 +197,11 @@ public class ResetNetworkConfirm extends InstrumentedFragment {
                 UserManager.DISALLOW_NETWORK_RESET, UserHandle.myUserId())) {
             return inflater.inflate(R.layout.network_reset_disallowed_screen, null);
         } else if (admin != null) {
-            View view = inflater.inflate(R.layout.admin_support_details_empty_view, null);
-            ShowAdminSupportDetailsDialog.setAdminSupportDetails(getActivity(), view, admin, false);
-            view.setVisibility(View.VISIBLE);
-            return view;
+            new ActionDisabledByAdminDialogHelper(getActivity())
+                    .prepareDialogBuilder(UserManager.DISALLOW_NETWORK_RESET, admin)
+                    .setOnDismissListener(__ -> getActivity().finish())
+                    .show();
+            return new View(getContext());
         }
         mContentView = inflater.inflate(R.layout.reset_network_confirm, null);
         establishFinalConfirmationState();

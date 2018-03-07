@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package libcore.util;
+package com.android.settings.testutils.shadow;
 
-import java.util.List;
+import android.content.Intent;
+import android.os.UserHandle;
 
-/**
- * Empty implementation of CountryZonesFinder for Robolectric test.
- */
-public class CountryZonesFinder {
-    public CountryZonesFinder(List<CountryTimeZones> countryTimeZonesList) {}
+import com.android.settings.testutils.CustomActivity;
 
-    public List<String> lookupAllCountryIsoCodes() {
-        return null;
-    }
+import org.robolectric.annotation.Implementation;
+import org.robolectric.annotation.Implements;
+import org.robolectric.shadows.ShadowApplication;
 
-    public List<CountryTimeZones> lookupCountryTimeZonesForZoneId(String zoneId) {
-        return null;
-    }
+@Implements(CustomActivity.class)
+public class ShadowActivity extends org.robolectric.shadows.ShadowActivity {
 
-    public CountryTimeZones lookupCountryTimeZones(String countryIso) {
-        return null;
+    @Implementation
+    public void startActivityAsUser(Intent intent, UserHandle user) {
+        ShadowApplication.getInstance().startActivity(intent);
     }
 }

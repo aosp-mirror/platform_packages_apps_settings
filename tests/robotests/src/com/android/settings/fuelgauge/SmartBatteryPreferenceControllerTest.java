@@ -18,9 +18,15 @@ package com.android.settings.fuelgauge;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+
 import android.content.ContentResolver;
+import android.content.Context;
 import android.provider.Settings;
 import android.support.v14.preference.SwitchPreference;
+
+import com.android.settings.core.BasePreferenceController;
+import com.android.settings.testutils.FakeFeatureFactory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,11 +44,15 @@ public class SmartBatteryPreferenceControllerTest {
     private SmartBatteryPreferenceController mController;
     private SwitchPreference mPreference;
     private ContentResolver mContentResolver;
+    private Context mContext;
+    private FakeFeatureFactory mFeatureFactory;
+
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
+        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         mController = new SmartBatteryPreferenceController(RuntimeEnvironment.application);
         mPreference = new SwitchPreference(RuntimeEnvironment.application);
@@ -78,6 +88,22 @@ public class SmartBatteryPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(getSmartBatteryValue()).isEqualTo(OFF);
+    }
+
+    @Test
+    public void testGetAvailabilityStatus_smartBatterySupported_returnAvailable() {
+        doReturn(true).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.AVAILABLE);
+    }
+
+    @Test
+    public void testGetAvailabilityStatus_smartBatteryUnSupported_returnDisabled() {
+        doReturn(false).when(mFeatureFactory.powerUsageFeatureProvider).isSmartBatterySupported();
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(
+                BasePreferenceController.DISABLED_UNSUPPORTED);
     }
 
     private void putSmartBatteryValue(int value) {

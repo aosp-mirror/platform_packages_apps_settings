@@ -57,7 +57,7 @@ public class TimeZoneData {
     }
 
     @VisibleForTesting
-    TimeZoneData(CountryZonesFinder countryZonesFinder) {
+    public TimeZoneData(CountryZonesFinder countryZonesFinder) {
         mCountryZonesFinder = countryZonesFinder;
         mRegionIds = getNormalizedRegionIds(mCountryZonesFinder.lookupAllCountryIsoCodes());
     }

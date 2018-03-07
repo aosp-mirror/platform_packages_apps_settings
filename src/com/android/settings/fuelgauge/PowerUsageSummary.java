@@ -39,6 +39,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.applications.LayoutPreference;
+import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.display.BatteryPercentagePreferenceController;
 import com.android.settings.fuelgauge.anomaly.Anomaly;
@@ -49,7 +50,6 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.PowerUtil;
 import com.android.settingslib.utils.StringUtil;
@@ -68,7 +68,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     static final String TAG = "PowerUsageSummary";
 
     private static final boolean DEBUG = false;
-    private static final String KEY_APP_LIST = "app_list";
     private static final String KEY_BATTERY_HEADER = "battery_header";
     private static final String KEY_BATTERY_TIP = "battery_tip";
 
@@ -80,7 +79,10 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     static final int BATTERY_INFO_LOADER = 1;
     @VisibleForTesting
     static final int BATTERY_TIP_LOADER = 2;
-    private static final int MENU_STATS_TYPE = Menu.FIRST;
+    @VisibleForTesting
+    static final int MENU_STATS_TYPE = Menu.FIRST;
+    @VisibleForTesting
+    static final int MENU_ADVANCED_BATTERY = Menu.FIRST + 1;
     public static final int DEBUG_INFO_LOADER = 3;
 
     @VisibleForTesting
@@ -101,7 +103,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
     SparseArray<List<Anomaly>> mAnomalySparseArray;
     @VisibleForTesting
     BatteryHeaderPreferenceController mBatteryHeaderPreferenceController;
-    private BatteryAppListPreferenceController mBatteryAppListPreferenceController;
     private BatteryTipPreferenceController mBatteryTipPreferenceController;
     private int mStatsType = BatteryStats.STATS_SINCE_CHARGED;
 
@@ -231,9 +232,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         mBatteryHeaderPreferenceController = new BatteryHeaderPreferenceController(
                 context, activity, this /* host */, lifecycle);
         controllers.add(mBatteryHeaderPreferenceController);
-        mBatteryAppListPreferenceController = new BatteryAppListPreferenceController(context,
-                KEY_APP_LIST, lifecycle, activity, this);
-        controllers.add(mBatteryAppListPreferenceController);
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(context,
                 KEY_BATTERY_TIP, (SettingsActivity) getActivity(), this /* fragment */, this /*
                 BatteryTipListener */);
@@ -250,6 +248,8 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     .setAlphabeticShortcut('t');
         }
 
+        menu.add(Menu.NONE, MENU_ADVANCED_BATTERY, Menu.NONE, R.string.advanced_battery_title);
+
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -260,11 +260,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final SettingsActivity sa = (SettingsActivity) getActivity();
-        final Context context = getContext();
-        final MetricsFeatureProvider metricsFeatureProvider =
-                FeatureFactory.getFactory(context).getMetricsFeatureProvider();
-
         switch (item.getItemId()) {
             case MENU_STATS_TYPE:
                 if (mStatsType == BatteryStats.STATS_SINCE_CHARGED) {
@@ -273,6 +268,13 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
                     mStatsType = BatteryStats.STATS_SINCE_CHARGED;
                 }
                 refreshUi();
+                return true;
+            case MENU_ADVANCED_BATTERY:
+                new SubSettingLauncher(getContext())
+                        .setDestination(PowerUsageAdvanced.class.getName())
+                        .setSourceMetricsCategory(getMetricsCategory())
+                        .setTitle(R.string.advanced_battery_title)
+                        .launch();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -294,11 +296,6 @@ public class PowerUsageSummary extends PowerUsageBase implements OnLongClickList
         updateLastFullChargePreference(lastFullChargeTime);
         mScreenUsagePref.setSubtitle(StringUtil.formatElapsedTime(getContext(),
                 mBatteryUtils.calculateScreenUsageTime(mStatsHelper), false));
-
-        final CharSequence timeSequence = StringUtil.formatRelativeTime(context, lastFullChargeTime,
-                false);
-        mBatteryAppListPreferenceController.refreshAppListGroup(mStatsHelper,
-                false /* showAllApps */, timeSequence);
     }
 
     @VisibleForTesting
