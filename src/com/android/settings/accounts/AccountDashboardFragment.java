@@ -29,6 +29,9 @@ import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.users.AutoSyncDataPreferenceController;
+import com.android.settings.users.AutoSyncPersonalDataPreferenceController;
+import com.android.settings.users.AutoSyncWorkDataPreferenceController;
 import com.android.settingslib.accounts.AuthenticatorHelper;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -69,6 +72,9 @@ public class AccountDashboardFragment extends DashboardFragment {
                 new AccountPreferenceController(context, this, authorities);
         getLifecycle().addObserver(accountPrefController);
         controllers.add(accountPrefController);
+        controllers.add(new AutoSyncDataPreferenceController(context, this /*parent */));
+        controllers.add(new AutoSyncPersonalDataPreferenceController(context, this /*parent */));
+        controllers.add(new AutoSyncWorkDataPreferenceController(context, this /* parent */));
         return controllers;
     }
 
