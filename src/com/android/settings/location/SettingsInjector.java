@@ -20,6 +20,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ServiceInfo;
@@ -37,11 +38,14 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.support.v7.preference.Preference;
+import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Xml;
 
 import com.android.settings.widget.AppPreference;
+import com.android.settings.widget.RestrictedAppPreference;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -215,12 +219,21 @@ class SettingsInjector {
                     sa.getResourceId(android.R.styleable.SettingInjectorService_icon, 0);
             final String settingsActivity =
                     sa.getString(android.R.styleable.SettingInjectorService_settingsActivity);
+            final String userRestriction = sa.getString(
+                    android.R.styleable.SettingInjectorService_userRestriction);
             if (Log.isLoggable(TAG, Log.DEBUG)) {
                 Log.d(TAG, "parsed title: " + title + ", iconId: " + iconId
                         + ", settingsActivity: " + settingsActivity);
             }
-            return InjectedSetting.newInstance(packageName, className,
-                    title, iconId, userHandle, settingsActivity);
+            return new InjectedSetting.Builder()
+                    .setPackageName(packageName)
+                    .setClassName(className)
+                    .setTitle(title)
+                    .setIconId(iconId)
+                    .setUserHandle(userHandle)
+                    .setSettingsActivity(settingsActivity)
+                    .setUserRestriction(userRestriction)
+                    .build();
         } finally {
             sa.recycle();
         }
@@ -290,15 +303,26 @@ class SettingsInjector {
      */
     private Preference addServiceSetting(Context prefContext, List<Preference> prefs,
             InjectedSetting info) {
-        PackageManager pm = mContext.getPackageManager();
-        Drawable appIcon = pm.getDrawable(info.packageName, info.iconId, null);
-        Drawable icon = pm.getUserBadgedIcon(appIcon, info.mUserHandle);
-        Preference pref = new AppPreference(prefContext);
+        final PackageManager pm = mContext.getPackageManager();
+        Drawable appIcon = null;
+        try {
+            final PackageItemInfo itemInfo = new PackageItemInfo();
+            itemInfo.icon = info.iconId;
+            itemInfo.packageName = info.packageName;
+            final ApplicationInfo appInfo = pm.getApplicationInfo(info.packageName,
+                PackageManager.GET_META_DATA);
+            appIcon = IconDrawableFactory.newInstance(mContext)
+                .getBadgedIcon(itemInfo, appInfo, info.mUserHandle.getIdentifier());
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Can't get ApplicationInfo for " + info.packageName, e);
+        }
+        Preference pref = TextUtils.isEmpty(info.userRestriction)
+                ? new AppPreference(prefContext)
+                : new RestrictedAppPreference(prefContext, info.userRestriction);
         pref.setTitle(info.title);
         pref.setSummary(null);
-        pref.setIcon(icon);
+        pref.setIcon(appIcon);
         pref.setOnPreferenceClickListener(new ServiceSettingClickedListener(info));
-
         prefs.add(pref);
         return pref;
     }
