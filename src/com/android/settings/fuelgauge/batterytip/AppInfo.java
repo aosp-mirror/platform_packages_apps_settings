@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batterytip;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.VisibleForTesting;
+import android.text.TextUtils;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
 
@@ -72,6 +73,22 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
     public String toString() {
         return "packageName=" + packageName + ",anomalyType=" + anomalyType + ",screenTime="
                 + screenOnTimeMs;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AppInfo)) {
+            return false;
+        }
+
+        AppInfo other = (AppInfo) obj;
+        return anomalyType == other.anomalyType
+                && uid == other.uid
+                && screenOnTimeMs == other.screenOnTimeMs
+                && TextUtils.equals(packageName, other.packageName);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

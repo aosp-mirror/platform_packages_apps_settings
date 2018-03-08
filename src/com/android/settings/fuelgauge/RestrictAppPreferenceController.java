@@ -74,6 +74,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
             final AppOpsManager.PackageOps packageOps = packageOpsList.get(i);
             mAppInfos.add(new AppInfo.Builder()
                     .setPackageName(packageOps.getPackageName())
+                    .setUid(packageOps.getUid())
                     .build());
         }
 
