@@ -28,13 +28,15 @@
         android:key="saved_device_list"
         android:title="@string/connected_device_saved_title"/>
 
-    <Preference
+    <com.android.settingslib.RestrictedPreference
         android:fragment="com.android.settings.bluetooth.BluetoothPairingDetail"
         android:key="add_bt_devices"
         android:title="@string/connected_device_add_device_title"
         android:icon="@drawable/ic_menu_add"
         android:summary="@string/connected_device_add_device_summary"
-        settings:allowDividerAbove="true"/>
+        settings:allowDividerAbove="true"
+        settings:userRestriction="no_config_bluetooth"
+        settings:useAdminDisabledSummary="true"/>
 
     <Preference
         android:fragment="com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment"
