@@ -438,14 +438,15 @@ public class BatteryUtils {
 
         if (estimate != null) {
             batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
-                    elapsedRealtimeUs, false /* shortString */,
-                    PowerUtil.convertMsToUs(estimate.estimateMillis),
-                    estimate.isBasedOnUsage);
+                    estimate, elapsedRealtimeUs, false /* shortString */);
         } else {
+            estimate = new Estimate(
+                    PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
+                    false,
+                    Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN
+            );
             batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
-                    elapsedRealtimeUs, false /* shortString */,
-                    discharging ? stats.computeBatteryTimeRemaining(elapsedRealtimeUs) : 0,
-                    false /* basedOnUsage */);
+                    estimate, elapsedRealtimeUs, false /* shortString */);
         }
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 

@@ -54,6 +54,7 @@ import java.util.List;
 public class RestrictedAppDetailsTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
+    private static final int UID = 234;
     private static final String APP_NAME = "app";
 
     @Mock
@@ -70,60 +71,62 @@ public class RestrictedAppDetailsTest {
     private InstrumentedPreferenceFragment mFragment;
     private RestrictedAppDetails mRestrictedAppDetails;
     private Context mContext;
+    private AppInfo mAppInfo;
     private Intent mIntent;
 
     @Before
     public void setUp() {
-      MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.initMocks(this);
 
-      mContext = spy(RuntimeEnvironment.application);
-      mRestrictedAppDetails = spy(new RestrictedAppDetails());
+        mContext = spy(RuntimeEnvironment.application);
+        mRestrictedAppDetails = spy(new RestrictedAppDetails());
+        mAppInfo = new AppInfo.Builder()
+                .setPackageName(PACKAGE_NAME)
+                .setUid(UID)
+                .build();
 
-      when(mRestrictedAppDetails.getPreferenceManager()).thenReturn(mPreferenceManager);
-      when(mPreferenceManager.getContext()).thenReturn(mContext);
-      mRestrictedAppDetails.mPackageManager = mPackageManager;
-      mRestrictedAppDetails.mIconDrawableFactory = mIconDrawableFactory;
-      mRestrictedAppDetails.mAppInfos = new ArrayList<>();
-      mRestrictedAppDetails.mAppInfos.add(new AppInfo.Builder()
-          .setPackageName(PACKAGE_NAME)
-          .build());
-      mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
-      mRestrictedAppDetails.mBatteryUtils = new BatteryUtils(mContext);
-      when(mRestrictedAppDetails.mRestrictedAppListGroup.getPreferenceManager())
-          .thenReturn(mPreferenceManager);
+        doReturn(mPreferenceManager).when(mRestrictedAppDetails).getPreferenceManager();
+        doReturn(mContext).when(mPreferenceManager).getContext();
+        mRestrictedAppDetails.mPackageManager = mPackageManager;
+        mRestrictedAppDetails.mIconDrawableFactory = mIconDrawableFactory;
+        mRestrictedAppDetails.mAppInfos = new ArrayList<>();
+        mRestrictedAppDetails.mAppInfos.add(mAppInfo);
+        mRestrictedAppDetails.mRestrictedAppListGroup = spy(new PreferenceCategory(mContext));
+        mRestrictedAppDetails.mBatteryUtils = new BatteryUtils(mContext);
+        doReturn(mPreferenceManager).when(
+                mRestrictedAppDetails.mRestrictedAppListGroup).getPreferenceManager();
     }
 
     @Test
     public void testRefreshUi_displayPreference() throws Exception {
-      doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME, 0);
-      doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
+        doReturn(mApplicationInfo).when(mPackageManager).getApplicationInfo(PACKAGE_NAME, 0);
+        doReturn(APP_NAME).when(mPackageManager).getApplicationLabel(mApplicationInfo);
 
-      mRestrictedAppDetails.refreshUi();
+        mRestrictedAppDetails.refreshUi();
 
-      assertThat(mRestrictedAppDetails.mRestrictedAppListGroup.getPreferenceCount()).isEqualTo(1);
-      final Preference preference = mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(0);
-      assertThat(preference.getKey()).isEqualTo(PACKAGE_NAME);
-      assertThat(preference.getTitle()).isEqualTo(APP_NAME);
+        assertThat(mRestrictedAppDetails.mRestrictedAppListGroup.getPreferenceCount()).isEqualTo(1);
+        final Preference preference = mRestrictedAppDetails.mRestrictedAppListGroup.getPreference(
+                0);
+        assertThat(preference.getTitle()).isEqualTo(APP_NAME);
     }
 
     @Test
     public void testStartRestrictedAppDetails_startWithCorrectData() {
-      final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
-      doAnswer(invocation -> {
-        // Get the intent in which it has the app info bundle
-        mIntent = captor.getValue();
-        return true;
-      }).when(mSettingsActivity).startActivity(captor.capture());
+        final ArgumentCaptor<Intent> captor = ArgumentCaptor.forClass(Intent.class);
+        doAnswer(invocation -> {
+            // Get the intent in which it has the app info bundle
+            mIntent = captor.getValue();
+            return true;
+        }).when(mSettingsActivity).startActivity(captor.capture());
 
-      RestrictedAppDetails.
-          startRestrictedAppDetails(mSettingsActivity, mFragment, mRestrictedAppDetails.mAppInfos);
+        RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mFragment,
+                mRestrictedAppDetails.mAppInfos);
 
-      final Bundle bundle = mIntent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-      // Verify the bundle has the correct info
-      final List<AppInfo> appInfos =
-          bundle.getParcelableArrayList(RestrictedAppDetails.EXTRA_APP_INFO_LIST);
-      assertThat(appInfos).isNotNull();
-      assertThat(appInfos).hasSize(1);
-      assertThat(appInfos.get(0).packageName).isEqualTo(PACKAGE_NAME);
+        final Bundle bundle = mIntent.getBundleExtra(
+                SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+        // Verify the bundle has the correct info
+        final List<AppInfo> appInfos = bundle.getParcelableArrayList(
+                RestrictedAppDetails.EXTRA_APP_INFO_LIST);
+        assertThat(appInfos).containsExactly(mAppInfo);
     }
 }

@@ -3786,8 +3786,8 @@
     <string name="disable_text">Disable</string>
     <!-- [CHAR LIMIT=25] Manage applications, individual application info screen, button label under Storage heading. Button to re-enable an existing application. -->
     <string name="enable_text">Enable</string>
-    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for exampel, remove all cached emails for an Email app) -->
-    <string name="clear_user_data_text">Clear data</string>
+    <!-- Manage applications, individual application info screen, button label under Storage heading. Button to clear all data associated with tis app (for example, remove all cached emails for an Email app) -->
+    <string name="clear_user_data_text">Clear storage</string>
     <!-- Manage applications, restore updated system application to factory version -->
     <string name="app_factory_reset">Uninstall updates</string>
     <!-- Manage applications, individual application info screen, screen, message text under Launch by default heading. This is present if the app is set as a default for some actions. -->
@@ -3883,12 +3883,8 @@
     <string name="app_not_found_dlg_title"></string>
     <!-- Manage applications, individual application dialog box message. Shown when the user somehow got into a state where it wants to manage some app that isn't found. -->
     <string name="app_not_found_dlg_text"> The app wasn\u2019t found in the list of installed apps.</string>
-    <!-- Manage applications, individual application dialog box message. Shown when there was an error trying to clear the data. -->
-    <string name="clear_data_failed">Couldn\u2019t clear app data.</string>
-    <!-- Manage applications, title for dialog if clear data fails-->
-    <string name="clear_failed_dlg_title">Clear data</string>
     <!-- Manage applications, text for dialog if clear data fails-->
-    <string name="clear_failed_dlg_text">Couldn\u2019t clear data for app.</string>
+    <string name="clear_failed_dlg_text">Couldn\u2019t clear storage for app.</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
     <string name="security_settings_desc" product="tablet">This app can access the following on your tablet:</string>
     <!-- Manage applications, individual application info screen, text that appears under the "Permissions" heading. This describes the permissions that the application has. -->
@@ -7549,10 +7545,10 @@
     <string name="zen_mode_alarms">Alarms</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Media option -->
-    <string name="zen_mode_media_system_other">Media</string>
+    <string name="zen_mode_media">Media</string>
 
-    <!-- [CHAR LIMIT=120] Zen mode settings: Media secondary text explaining sounds include system feedback such as system tapping sounds, haptic feedback, etc. -->
-    <string name="zen_mode_media_system_other_secondary_text">Includes system feedback like touch and charging sounds</string>
+    <!-- [CHAR LIMIT=50] Zen mode settings: System option which includes sounds such as touch and charging sounds -->
+    <string name="zen_mode_system">Touch and charging sounds</string>
 
     <!-- [CHAR LIMIT=50] Zen mode settings: Reminders option -->
     <string name="zen_mode_reminders">Reminders</string>
@@ -8633,8 +8629,11 @@
     <!-- Format for a summary describing the amount of data before the user is warned or limited [CHAR LIMIT=NONE] -->
     <string name="cell_warning_and_limit"><xliff:g name="amount" example="1 GB">%1$s</xliff:g> Data warning / <xliff:g name="amount" example="2 GB">%2$s</xliff:g> Data limit</string>
 
-    <!-- Title of button and screen for billing cycle preferences [CHAR LIMIT=30 -->
-    <string name="billing_cycle">Billing cycle</string>
+    <!-- Title of button and screen for billing cycle preferences [CHAR LIMIT=30] -->
+    <string name="billing_cycle">Data warning &amp; limit</string>
+
+    <!-- Title of button for application usage cycle preferences [CHAR LIMIT=30] -->
+    <string name="app_usage_cycle">App data usage cycle</string>
 
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
     <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>

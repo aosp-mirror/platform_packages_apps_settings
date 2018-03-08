@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,9 @@ import static android.provider.Settings.Global.ZEN_MODE;
 import static android.provider.Settings.Global.ZEN_MODE_ALARMS;
 import static android.provider.Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS;
 import static android.provider.Settings.Global.ZEN_MODE_NO_INTERRUPTIONS;
+
+import static junit.framework.Assert.assertEquals;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -37,19 +40,17 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplication;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ZenModeMediaPreferenceControllerTest {
-    private ZenModeMediaPreferenceController mController;
+public class ZenModeSystemPreferenceControllerTest {
+    private ZenModeSystemPreferenceController mController;
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private Context mContext;
     @Mock
     private ZenModeBackend mBackend;
     @Mock
@@ -60,6 +61,8 @@ public class ZenModeMediaPreferenceControllerTest {
     private NotificationManager.Policy mPolicy;
     @Mock
     private PreferenceScreen mPreferenceScreen;
+
+    private Context mContext;
     private ContentResolver mContentResolver;
 
     @Before
@@ -71,13 +74,11 @@ public class ZenModeMediaPreferenceControllerTest {
         mContext = shadowApplication.getApplicationContext();
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
-
-        mController = new ZenModeMediaPreferenceController(mContext,
-                mock(Lifecycle.class));
+        mController = new ZenModeSystemPreferenceController(mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
-        when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mockPref);
+        when(mPreferenceScreen.findPreference(mController.getPreferenceKey())).thenReturn(
+                mockPref);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -100,7 +101,7 @@ public class ZenModeMediaPreferenceControllerTest {
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(false);
-        verify(mockPref).setChecked(true);
+        verify(mockPref).setChecked(false);
     }
 
     @Test
@@ -108,8 +109,7 @@ public class ZenModeMediaPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA)).
-                thenReturn(true);
+                NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM)).thenReturn(true);
 
         mController.updateState(mockPref);
 
@@ -118,20 +118,18 @@ public class ZenModeMediaPreferenceControllerTest {
     }
 
     @Test
-    public void onPreferenceChanged_EnableEvents() {
-        boolean allow = true;
-        mController.onPreferenceChange(mockPref, allow);
+    public void onPreferenceChanged_EnableSystem() {
+        mController.onPreferenceChange(mockPref, true);
 
-        verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA, allow);
+        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM,
+                true);
     }
 
     @Test
-    public void onPreferenceChanged_DisableEvents() {
-        boolean allow = false;
-        mController.onPreferenceChange(mockPref, allow);
+    public void onPreferenceChanged_DisableSystem() {
+        mController.onPreferenceChange(mockPref, false);
 
-        verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA, allow);
+        verify(mBackend).saveSoundPolicy(NotificationManager.Policy.PRIORITY_CATEGORY_SYSTEM,
+                false);
     }
 }

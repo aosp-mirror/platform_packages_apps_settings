@@ -73,4 +73,10 @@ public class HighUsageTipTest {
         assertThat(app.packageName).isEqualTo(PACKAGE_NAME);
         assertThat(app.screenOnTimeMs).isEqualTo(SCREEN_TIME);
     }
+
+    @Test
+    public void toString_containsAppData() {
+        assertThat(mBatteryTip.toString()).isEqualTo(
+                "type=2 state=0 { packageName=com.android.app,anomalyType=0,screenTime=1800000 }");
+    }
 }

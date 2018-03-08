@@ -52,7 +52,7 @@ public class ZenModeSettingsTest {
                 NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS
                         | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS
                         | NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER,
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA,
                 0, 0);
         final String result = mBuilder.getBehaviorSettingSummary(policy,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
@@ -75,7 +75,7 @@ public class ZenModeSettingsTest {
     public void testGetBehaviorSettingSummary_alarmsAndMedia() {
         NotificationManager.Policy policy = new NotificationManager.Policy(
                         NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER,
+                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA,
                 0, 0);
         final String result = mBuilder.getBehaviorSettingSummary(policy,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);

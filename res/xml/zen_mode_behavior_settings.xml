@@ -20,7 +20,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:key="zen_mode_behavior_settings_page"
     android:title="@string/zen_mode_behavior_settings_title"
-    settings:initialExpandedChildrenCount="7">
+    settings:initialExpandedChildrenCount="8">
 
    <PreferenceCategory
        android:title="@string/zen_mode_behavior_allow_title"
@@ -34,8 +34,12 @@
        <!-- Media -->
        <SwitchPreference
            android:key="zen_mode_media"
-           android:title="@string/zen_mode_media_system_other"
-           android:summary="@string/zen_mode_media_system_other_secondary_text"/>
+           android:title="@string/zen_mode_media"/>
+
+       <!-- System -->
+       <SwitchPreference
+           android:key="zen_mode_system"
+           android:title="@string/zen_mode_system"/>
 
        <!-- Reminders -->
        <SwitchPreference

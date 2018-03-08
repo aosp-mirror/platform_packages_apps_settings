@@ -130,19 +130,15 @@ public class RestrictedAppDetails extends DashboardFragment {
                         appInfo.packageName, 0 /* flags */);
                 checkBoxPreference.setChecked(true);
                 checkBoxPreference.setTitle(mPackageManager.getApplicationLabel(applicationInfo));
-                checkBoxPreference.setKey(appInfo.packageName);
                 checkBoxPreference.setIcon(
                         Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager,
                                 appInfo.packageName,
-                                UserHandle.getUserId(
-                                        mBatteryUtils.getPackageUid(appInfo.packageName))));
+                                UserHandle.getUserId(appInfo.uid)));
                 checkBoxPreference.setOnPreferenceChangeListener((pref, value) -> {
                     // change the toggle
                     final int mode = (Boolean) value ? AppOpsManager.MODE_IGNORED
                             : AppOpsManager.MODE_ALLOWED;
-                    final String packageName = pref.getKey();
-                    final int uid = mBatteryUtils.getPackageUid(packageName);
-                    mBatteryUtils.setForceAppStandby(uid, packageName, mode);
+                    mBatteryUtils.setForceAppStandby(appInfo.uid, appInfo.packageName, mode);
                     return true;
                 });
                 mRestrictedAppListGroup.addPreference(checkBoxPreference);

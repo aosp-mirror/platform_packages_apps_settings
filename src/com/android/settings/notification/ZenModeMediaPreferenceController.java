@@ -25,13 +25,13 @@ import android.util.Log;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-public class ZenModeMediaSystemOtherPreferenceController extends AbstractZenModePreferenceController
+public class ZenModeMediaPreferenceController extends AbstractZenModePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
     protected static final String KEY = "zen_mode_media";
     private final ZenModeBackend mBackend;
 
-    public ZenModeMediaSystemOtherPreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModeMediaPreferenceController(Context context, Lifecycle lifecycle) {
         super(context, KEY, lifecycle);
         mBackend = ZenModeBackend.getInstance(context);
     }
@@ -63,7 +63,7 @@ public class ZenModeMediaSystemOtherPreferenceController extends AbstractZenMode
             default:
                 pref.setEnabled(true);
                 pref.setChecked(mBackend.isPriorityCategoryEnabled(
-                        Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER));
+                        Policy.PRIORITY_CATEGORY_MEDIA));
         }
     }
 
@@ -71,9 +71,9 @@ public class ZenModeMediaSystemOtherPreferenceController extends AbstractZenMode
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean allowMedia = (Boolean) newValue;
         if (ZenModeSettingsBase.DEBUG) {
-            Log.d(TAG, "onPrefChange allowMediaSystemOther=" + allowMedia);
+            Log.d(TAG, "onPrefChange allowMedia=" + allowMedia);
         }
-        mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER, allowMedia);
+        mBackend.saveSoundPolicy(Policy.PRIORITY_CATEGORY_MEDIA, allowMedia);
         return true;
     }
 }
