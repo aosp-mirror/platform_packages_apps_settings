@@ -68,6 +68,23 @@ public class EncryptionStatusPreferenceControllerTest {
     }
 
     @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_notVisible_false() {
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @Config(qualifiers = "mcc999")
+    public void isAvailable_notVisible_butNotDetailPage_true() {
+        mController = new EncryptionStatusPreferenceController(mContext,
+                PREF_KEY_ENCRYPTION_SECURITY_PAGE);
+
+        UserManager userManager = (UserManager) mContext.getSystemService(Context.USER_SERVICE);
+        Shadows.shadowOf(userManager).setIsAdminUser(true);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
     public void updateSummary_encrypted_shouldSayEncrypted() {
         ShadowLockPatternUtils.setDeviceEncryptionEnabled(true);
 

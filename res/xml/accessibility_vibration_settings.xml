@@ -14,17 +14,21 @@
      limitations under the License.
 -->
 
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:key="accessibility_settings_vibration_screen"
-        android:title="@string/accessibility_vibration_settings_title">
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="accessibility_settings_vibration_screen"
+    android:title="@string/accessibility_vibration_settings_title">
 
     <Preference
         android:fragment="com.android.settings.accessibility.NotificationVibrationPreferenceFragment"
         android:key="notification_vibration_preference_screen"
-        android:title="@string/accessibility_notification_vibration_title" />
+        android:title="@string/accessibility_notification_vibration_title"
+        app:controller="com.android.settings.accessibility.NotificationVibrationIntensityPreferenceController" />
 
     <Preference
         android:fragment="com.android.settings.accessibility.TouchVibrationPreferenceFragment"
         android:key="touch_vibration_preference_screen"
-        android:title="@string/accessibility_touch_vibration_title" />
+        android:title="@string/accessibility_touch_vibration_title"
+        app:controller="com.android.settings.accessibility.HapticFeedbackIntensityPreferenceController" />
 </PreferenceScreen>

@@ -71,7 +71,7 @@ public class RestrictAppTipTest {
     }
 
     @Test
-    public void testParcelable() {
+    public void parcelable() {
         Parcel parcel = Parcel.obtain();
         mNewBatteryTip.writeToParcel(parcel, mNewBatteryTip.describeContents());
         parcel.setDataPosition(0);
@@ -85,40 +85,46 @@ public class RestrictAppTipTest {
     }
 
     @Test
-    public void testGetTitle_stateNew_showRestrictTitle() {
+    public void getTitle_stateNew_showRestrictTitle() {
         assertThat(mNewBatteryTip.getTitle(mContext)).isEqualTo("Restrict 1 app");
     }
 
     @Test
-    public void testGetTitle_stateHandled_showHandledTitle() {
+    public void getTitle_stateHandled_showHandledTitle() {
         assertThat(mHandledBatteryTip.getTitle(mContext)).isEqualTo("1 recently restricted");
     }
 
     @Test
-    public void testGetSummary_stateNew_showRestrictSummary() {
+    public void getSummary_stateNew_showRestrictSummary() {
         assertThat(mNewBatteryTip.getSummary(mContext))
             .isEqualTo("app has high battery usage");
     }
 
     @Test
-    public void testGetSummary_stateHandled_showHandledSummary() {
+    public void getSummary_stateHandled_showHandledSummary() {
         assertThat(mHandledBatteryTip.getSummary(mContext))
             .isEqualTo("App changes are in progress");
     }
 
     @Test
-    public void testUpdate_anomalyBecomeInvisible_stateHandled() {
+    public void update_anomalyBecomeInvisible_stateHandled() {
         mNewBatteryTip.updateState(mInvisibleBatteryTip);
 
         assertThat(mNewBatteryTip.getState()).isEqualTo(BatteryTip.StateType.HANDLED);
     }
 
     @Test
-    public void testUpdate_newAnomalyComes_stateNew() {
+    public void update_newAnomalyComes_stateNew() {
         mInvisibleBatteryTip.updateState(mNewBatteryTip);
         assertThat(mInvisibleBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
 
         mHandledBatteryTip.updateState(mNewBatteryTip);
         assertThat(mHandledBatteryTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
+    }
+
+    @Test
+    public void toString_containsAppData() {
+        assertThat(mNewBatteryTip.toString()).isEqualTo(
+                "type=1 state=0 { packageName=com.android.app,anomalyType=0,screenTime=0 }");
     }
 }

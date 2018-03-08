@@ -215,6 +215,7 @@ public class WifiConfigController implements TextWatcher,
 
             mSsidView = (TextView) mView.findViewById(R.id.ssid);
             mSsidView.addTextChangedListener(this);
+            mSsidView.requestFocus();
             mSecuritySpinner = ((Spinner) mView.findViewById(R.id.security));
             mSecuritySpinner.setOnItemSelectedListener(this);
             mView.findViewById(R.id.type).setVisibility(View.VISIBLE);

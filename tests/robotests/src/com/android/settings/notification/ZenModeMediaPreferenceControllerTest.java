@@ -46,10 +46,7 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class ZenModeMediaPreferenceControllerTest {
-
-    private static final boolean MEDIA_SETTINGS = true;
-
-    private ZenModeMediaSystemOtherPreferenceController mController;
+    private ZenModeMediaPreferenceController mController;
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private Context mContext;
@@ -75,7 +72,7 @@ public class ZenModeMediaPreferenceControllerTest {
         mContentResolver = RuntimeEnvironment.application.getContentResolver();
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
-        mController = new ZenModeMediaSystemOtherPreferenceController(mContext,
+        mController = new ZenModeMediaPreferenceController(mContext,
                 mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
 
@@ -111,13 +108,13 @@ public class ZenModeMediaPreferenceControllerTest {
         Settings.Global.putInt(mContentResolver, ZEN_MODE, ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
         when(mBackend.isPriorityCategoryEnabled(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER)).
-                thenReturn(MEDIA_SETTINGS);
+                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA)).
+                thenReturn(true);
 
         mController.updateState(mockPref);
 
         verify(mockPref).setEnabled(true);
-        verify(mockPref).setChecked(MEDIA_SETTINGS);
+        verify(mockPref).setChecked(true);
     }
 
     @Test
@@ -126,7 +123,7 @@ public class ZenModeMediaPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER, allow);
+                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA, allow);
     }
 
     @Test
@@ -135,6 +132,6 @@ public class ZenModeMediaPreferenceControllerTest {
         mController.onPreferenceChange(mockPref, allow);
 
         verify(mBackend).saveSoundPolicy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA_SYSTEM_OTHER, allow);
+                NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA, allow);
     }
 }

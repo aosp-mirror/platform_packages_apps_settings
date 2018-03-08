@@ -76,7 +76,7 @@ public class HighUsageAdapter extends RecyclerView.Adapter<HighUsageAdapter.View
         final AppInfo app = mHighUsageAppList.get(position);
         holder.appIcon.setImageDrawable(
                 Utils.getBadgedIcon(mIconDrawableFactory, mPackageManager, app.packageName,
-                        UserHandle.myUserId()));
+                        UserHandle.getUserId(app.uid)));
         holder.appName.setText(Utils.getApplicationLabel(mContext, app.packageName));
         if (app.screenOnTimeMs != 0) {
             holder.appTime.setText(StringUtil.formatElapsedTime(mContext, app.screenOnTimeMs, false));

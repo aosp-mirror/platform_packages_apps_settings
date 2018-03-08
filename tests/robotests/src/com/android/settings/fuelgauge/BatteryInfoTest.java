@@ -63,7 +63,6 @@ public class BatteryInfoTest {
     private static final String STATUS_CHARGING_NO_TIME = "50% - charging";
     private static final String STATUS_CHARGING_TIME = "50% - 0m until fully charged";
     private static final String STATUS_NOT_CHARGING = "Not charging";
-    private static final int PLUGGED_IN = 1;
     private static final long REMAINING_TIME_NULL = -1;
     private static final long REMAINING_TIME = 2;
     private static final String ENHANCED_STRING_SUFFIX = "based on your usage";
@@ -72,6 +71,11 @@ public class BatteryInfoTest {
             "1m left until fully charged";
     private static final String TEST_BATTERY_LEVEL_10 = "10%";
     private static final String FIFTEEN_MIN_FORMATTED = "15m";
+    public static final Estimate DUMMY_ESTIMATE = new Estimate(
+            1000, /* estimateMillis */
+            false, /* isBasedOnUsage */
+            1000 /* averageDischargeTime */);
+
     private Intent mDisChargingBatteryBroadcast;
     private Intent mChargingBatteryBroadcast;
     private Context mContext;
@@ -132,14 +136,15 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_basedOnUsageTrueMoreThanFifteenMinutes_usesCorrectString() {
+        Estimate estimate = new Estimate(Duration.ofHours(4).toMillis(),
+                true /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                PowerUtil.convertMsToUs(Duration.ofHours(4).toMillis()),
-                true /* basedOnUsage */);
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
         BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
-                PowerUtil.convertMsToUs(Duration.ofHours(4).toMillis()),
-                true /* basedOnUsage */);
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                true /* shortString */);
 
         // We only add special mention for the long string
         assertThat(info.remainingLabel.toString()).contains(ENHANCED_STRING_SUFFIX);
@@ -149,14 +154,15 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_basedOnUsageTrueLessThanSevenMinutes_usesCorrectString() {
+        Estimate estimate = new Estimate(Duration.ofMinutes(7).toMillis(),
+                true /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                PowerUtil.convertMsToUs(Duration.ofMinutes(7).toMillis()),
-                true /* basedOnUsage */);
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
         BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
-                PowerUtil.convertMsToUs(Duration.ofMinutes(7).toMillis()),
-                true /* basedOnUsage */);
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                true /* shortString */);
 
         // These should be identical in either case
         assertThat(info.remainingLabel.toString()).isEqualTo(
@@ -167,10 +173,12 @@ public class BatteryInfoTest {
 
     @Test
     public void testGetBatteryInfo_basedOnUsageTrueBetweenSevenAndFifteenMinutes_usesCorrectString() {
+        Estimate estimate = new Estimate(Duration.ofMinutes(10).toMillis(),
+                true /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                PowerUtil.convertMsToUs(Duration.ofMinutes(10).toMillis()),
-                true /* basedOnUsage */);
+                mBatteryStats, estimate, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
 
         // Check that strings are showing less than 15 minutes remaining regardless of exact time.
         assertThat(info.chargeLabel.toString()).isEqualTo(
@@ -184,11 +192,11 @@ public class BatteryInfoTest {
     @Test
     public void testGetBatteryInfo_basedOnUsageFalse_usesDefaultString() {
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                1000, false /* basedOnUsage */);
+                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
         BatteryInfo info2 = BatteryInfo.getBatteryInfo(mContext, mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, true /* shortString */,
-                1000, false /* basedOnUsage */);
+                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                true /* shortString */);
 
         assertThat(info.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
         assertThat(info2.remainingLabel.toString()).doesNotContain(ENHANCED_STRING_SUFFIX);
@@ -199,8 +207,10 @@ public class BatteryInfoTest {
         doReturn(TEST_CHARGE_TIME_REMAINING)
                 .when(mBatteryStats)
                 .computeChargeTimeRemaining(anyLong());
+
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false, 1000, false);
+                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
         assertThat(info.remainingTimeUs).isEqualTo(TEST_CHARGE_TIME_REMAINING);
         assertThat(info.remainingLabel.toString())
                 .isEqualTo(TEST_CHARGE_TIME_REMAINING_STRINGIFIED);
@@ -211,8 +221,8 @@ public class BatteryInfoTest {
         mChargingBatteryBroadcast.putExtra(BatteryManager.EXTRA_LEVEL, 100);
 
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext, mChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false /* shortString */,
-                1000, false /* basedOnUsage */);
+                mBatteryStats, DUMMY_ESTIMATE, SystemClock.elapsedRealtime() * 1000,
+                false /* shortString */);
 
         assertThat(info.chargeLabel).isEqualTo("100%");
     }
@@ -296,10 +306,13 @@ public class BatteryInfoTest {
         } else {
             doReturn(0L).when(mBatteryStats).computeChargeTimeRemaining(anyLong());
         }
+        Estimate batteryEstimate = new Estimate(
+                estimate ? 1000 : 0,
+                false /* isBasedOnUsage */,
+                1000 /* averageDischargeTime */);
         BatteryInfo info = BatteryInfo.getBatteryInfo(mContext,
                 charging ? mChargingBatteryBroadcast : mDisChargingBatteryBroadcast,
-                mBatteryStats, SystemClock.elapsedRealtime() * 1000, false,
-                estimate ? 1000 : 0 /* drainTimeUs */, false);
+                mBatteryStats, batteryEstimate, SystemClock.elapsedRealtime() * 1000, false);
         doReturn(enhanced).when(mFeatureFactory.powerUsageFeatureProvider)
                 .isEnhancedBatteryPredictionEnabled(mContext);
         return info;

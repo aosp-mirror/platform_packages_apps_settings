@@ -73,6 +73,7 @@ public class HighUsageDetector implements BatteryTipDetector {
                                 BatteryUtils.StatusType.FOREGROUND, batterySipper.uidObj,
                                 BatteryStats.STATS_SINCE_CHARGED);
                         mHighUsageAppList.add(new AppInfo.Builder()
+                                .setUid(batterySipper.getUid())
                                 .setPackageName(
                                         mBatteryUtils.getPackageName(batterySipper.getUid()))
                                 .setScreenOnTimeMs(foregroundTimeMs)

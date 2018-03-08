@@ -19,11 +19,11 @@ package com.android.settings.datetime;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
-
 import android.util.FeatureFlagUtils;
+
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.datetime.timezone.ZonePicker;
+import com.android.settings.datetime.timezone.TimeZoneSettings;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.datetime.ZoneGetter;
@@ -51,7 +51,7 @@ public class TimeZonePreferenceController extends AbstractPreferenceController
             return;
         }
         if (mZonePickerV2) {
-            preference.setFragment(ZonePicker.class.getName());
+            preference.setFragment(TimeZoneSettings.class.getName());
         }
         preference.setSummary(getTimeZoneOffsetAndName());
         if( !((RestrictedPreference) preference).isDisabledByAdmin()) {
