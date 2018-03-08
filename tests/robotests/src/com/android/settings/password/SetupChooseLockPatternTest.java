@@ -27,6 +27,7 @@ import android.os.UserHandle;
 import android.view.View;
 import android.widget.Button;
 
+import com.android.internal.widget.LockPatternView;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.password.ChooseLockPattern.ChooseLockPatternFragment;
@@ -44,6 +45,11 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowPackageManager;
+import org.robolectric.util.ReflectionHelpers;
+import org.robolectric.util.ReflectionHelpers.ClassParameter;
+
+import java.util.Collections;
+import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -81,6 +87,17 @@ public class SetupChooseLockPatternTest {
         final int componentEnabled = spm.getComponentEnabledSettingFlags(cname)
             & PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
         assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+    }
+
+    @Config(qualifiers = "sw400dp")
+    @Test
+    public void selectPattern_shouldHideOptionsButton() {
+        Button button = mActivity.findViewById(R.id.screen_lock_options);
+        assertThat(button).isNotNull();
+        assertThat(button.getVisibility()).isEqualTo(View.VISIBLE);
+
+        LockPatternView lockPatternView = mActivity.findViewById(R.id.lockPattern);
+        ReflectionHelpers.callInstanceMethod(lockPatternView, "notifyPatternDetected");
     }
 
     @Config(qualifiers = "sw400dp")

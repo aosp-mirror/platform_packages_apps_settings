@@ -20,7 +20,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -54,16 +57,20 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
     public static class SetupChooseLockPatternFragment extends ChooseLockPatternFragment
             implements ChooseLockTypeDialogFragment.OnLockTypeSelectedListener {
 
+        @Nullable
+        private Button mOptionsButton;
+
         @Override
-        public void onViewCreated(View view, Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
+        public View onCreateView(
+                LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+            View view = super.onCreateView(inflater, container, savedInstanceState);
             if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)) {
-                Button optionsButton = view.findViewById(R.id.screen_lock_options);
-                optionsButton.setVisibility(View.VISIBLE);
-                optionsButton.setOnClickListener((btn) ->
+                mOptionsButton = view.findViewById(R.id.screen_lock_options);
+                mOptionsButton.setOnClickListener((btn) ->
                         ChooseLockTypeDialogFragment.newInstance(mUserId)
                                 .show(getChildFragmentManager(), null));
             }
+            return view;
         }
 
         @Override
@@ -81,6 +88,16 @@ public class SetupChooseLockPattern extends ChooseLockPattern {
             if (!mForFingerprint) {
                 footerLeftButton.setVisibility(View.VISIBLE);
                 footerLeftButton.setText(R.string.skip_label);
+            }
+        }
+
+        @Override
+        protected void updateStage(Stage stage) {
+            super.updateStage(stage);
+            if (!getResources().getBoolean(R.bool.config_lock_pattern_minimal_ui)
+                    && mOptionsButton != null) {
+                mOptionsButton.setVisibility(
+                        stage == Stage.Introduction ? View.VISIBLE : View.INVISIBLE);
             }
         }
 
