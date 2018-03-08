@@ -19,9 +19,9 @@ package com.android.settings.fuelgauge.batterytip;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_STATE;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
-        .PACKAGE_NAME;
-import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .ANOMALY_TYPE;
+import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
+        .PACKAGE_NAME;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns
         .TIME_STAMP_MS;
 import static com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper.AnomalyColumns.UID;
@@ -61,10 +61,11 @@ public class BatteryDatabaseManager {
 
     /**
      * Insert an anomaly log to database.
-     * @param packageName   the package name of the app
-     * @param type          the type of the anomaly
-     * @param anomalyState  the state of the anomaly
-     * @param timestampMs   the time when it is happened
+     *
+     * @param packageName  the package name of the app
+     * @param type         the type of the anomaly
+     * @param anomalyState the state of the anomaly
+     * @param timestampMs  the time when it is happened
      */
     public synchronized void insertAnomaly(int uid, String packageName, int type, int anomalyState,
             long timestampMs) {
