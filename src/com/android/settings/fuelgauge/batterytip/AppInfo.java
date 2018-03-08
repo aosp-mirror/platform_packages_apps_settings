@@ -20,8 +20,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.VisibleForTesting;
 import android.text.TextUtils;
+import android.util.ArraySet;
 
 import com.android.settings.fuelgauge.anomaly.Anomaly;
+
+import java.util.Objects;
 
 /**
  * Model class stores app info(e.g. package name, type..) that used in battery tip
@@ -32,13 +35,13 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
      * Anomaly type of the app
      * @see Anomaly.AnomalyType
      */
-    public final int anomalyType;
+    public final ArraySet<Integer> anomalyTypes;
     public final long screenOnTimeMs;
     public final int uid;
 
     private AppInfo(AppInfo.Builder builder) {
         packageName = builder.mPackageName;
-        anomalyType = builder.mAnomalyType;
+        anomalyTypes = builder.mAnomalyTypes;
         screenOnTimeMs = builder.mScreenOnTimeMs;
         uid = builder.mUid;
     }
@@ -46,7 +49,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
     @VisibleForTesting
     AppInfo(Parcel in) {
         packageName = in.readString();
-        anomalyType = in.readInt();
+        anomalyTypes = (ArraySet<Integer>) in.readArraySet(null /* loader */);
         screenOnTimeMs = in.readLong();
         uid = in.readInt();
     }
@@ -64,14 +67,14 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(packageName);
-        dest.writeInt(anomalyType);
+        dest.writeArraySet(anomalyTypes);
         dest.writeLong(screenOnTimeMs);
         dest.writeInt(uid);
     }
 
     @Override
     public String toString() {
-        return "packageName=" + packageName + ",anomalyType=" + anomalyType + ",screenTime="
+        return "packageName=" + packageName + ",anomalyTypes=" + anomalyTypes + ",screenTime="
                 + screenOnTimeMs;
     }
 
@@ -85,7 +88,7 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
         }
 
         AppInfo other = (AppInfo) obj;
-        return anomalyType == other.anomalyType
+        return Objects.equals(anomalyTypes, other.anomalyTypes)
                 && uid == other.uid
                 && screenOnTimeMs == other.screenOnTimeMs
                 && TextUtils.equals(packageName, other.packageName);
@@ -102,13 +105,13 @@ public class AppInfo implements Comparable<AppInfo>, Parcelable {
     };
 
     public static final class Builder {
-        private int mAnomalyType;
+        private ArraySet<Integer> mAnomalyTypes = new ArraySet<>();
         private String mPackageName;
         private long mScreenOnTimeMs;
         private int mUid;
 
-        public Builder setAnomalyType(int type) {
-            mAnomalyType = type;
+        public Builder addAnomalyType(int type) {
+            mAnomalyTypes.add(type);
             return this;
         }
 

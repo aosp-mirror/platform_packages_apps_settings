@@ -39,9 +39,10 @@ import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class RestrictAppTipTest {
-
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String DISPLAY_NAME = "app";
+    private static final int ANOMALY_WAKEUP = 0;
+    private static final int ANOMALY_WAKELOCK = 1;
 
     private Context mContext;
     private RestrictAppTip mNewBatteryTip;
@@ -64,7 +65,11 @@ public class RestrictAppTipTest {
         doReturn(DISPLAY_NAME).when(mApplicationInfo).loadLabel(mPackageManager);
 
         mUsageAppList = new ArrayList<>();
-        mUsageAppList.add(new AppInfo.Builder().setPackageName(PACKAGE_NAME).build());
+        mUsageAppList.add(new AppInfo.Builder()
+                .setPackageName(PACKAGE_NAME)
+                .addAnomalyType(ANOMALY_WAKEUP)
+                .addAnomalyType(ANOMALY_WAKELOCK)
+                .build());
         mNewBatteryTip = new RestrictAppTip(BatteryTip.StateType.NEW, mUsageAppList);
         mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         mInvisibleBatteryTip = new RestrictAppTip(BatteryTip.StateType.INVISIBLE, mUsageAppList);
@@ -125,6 +130,6 @@ public class RestrictAppTipTest {
     @Test
     public void toString_containsAppData() {
         assertThat(mNewBatteryTip.toString()).isEqualTo(
-                "type=1 state=0 { packageName=com.android.app,anomalyType=0,screenTime=0 }");
+                "type=1 state=0 { packageName=com.android.app,anomalyTypes={0, 1},screenTime=0 }");
     }
 }
