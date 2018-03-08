@@ -23,8 +23,6 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
-import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,28 +49,6 @@ public class VibrationSettings extends DashboardFragment {
         return TAG;
     }
 
-    @Override
-    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        return buildControllers(context, getLifecycle());
-    }
-
-    public static List<AbstractPreferenceController> buildControllers(Context context,
-            Lifecycle lifecycle) {
-
-        final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        final NotificationVibrationIntensityPreferenceController notifVibPrefController =
-                new NotificationVibrationIntensityPreferenceController(context);
-        final HapticFeedbackIntensityPreferenceController hapticPreferenceController =
-                new HapticFeedbackIntensityPreferenceController(context);
-        controllers.add(hapticPreferenceController);
-        controllers.add(notifVibPrefController);
-        if (lifecycle != null) {
-            lifecycle.addObserver(hapticPreferenceController);
-            lifecycle.addObserver(notifVibPrefController);
-        }
-        return controllers;
-    }
-
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider() {
                 @Override
@@ -83,12 +59,6 @@ public class VibrationSettings extends DashboardFragment {
                     indexable.xmlResId = R.xml.accessibility_vibration_settings;
                     indexables.add(indexable);
                     return indexables;
-                }
-
-                @Override
-                public List<AbstractPreferenceController> createPreferenceControllers(
-                        Context context) {
-                    return buildControllers(context, null /* lifecycle */);
                 }
             };
 }
