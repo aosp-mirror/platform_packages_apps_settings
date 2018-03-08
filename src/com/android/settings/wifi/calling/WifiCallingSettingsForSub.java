@@ -203,9 +203,6 @@ public class WifiCallingSettingsForSub extends SettingsPreferenceFragment
                 // not show notification, we are changing result code here.
                 setResultCode(Activity.RESULT_CANCELED);
 
-                // UX requirement is to disable WFC in case of "permanent" registration failures.
-                mSwitch.setChecked(false);
-
                 showAlert(intent);
             }
         }
