@@ -17,7 +17,8 @@
 package com.android.settings.datetime.timezone;
 
 import android.content.Context;
-import android.support.v7.preference.Preference;
+
+import com.android.settings.R;
 
 public class FixedOffsetPreferenceController extends BaseTimeZonePreferenceController {
 
@@ -31,8 +32,18 @@ public class FixedOffsetPreferenceController extends BaseTimeZonePreferenceContr
 
     @Override
     public CharSequence getSummary() {
-        // This is a Spannable object, which contains TTS span. It shouldn't be converted to String.
-        return mTimeZoneInfo == null ? "" : mTimeZoneInfo.getGmtOffset();
+        if (mTimeZoneInfo == null) {
+            return "";
+        }
+
+        String standardName = mTimeZoneInfo.getStandardName();
+        if (standardName == null) {
+            return mTimeZoneInfo.getGmtOffset();
+        } else {
+            // GmtOffset is Spannable, which contains TTS span. It shouldn't be converted to String.
+            return SpannableUtil.getResourcesText(mContext.getResources(),
+                    R.string.zone_info_offset_and_name, mTimeZoneInfo.getGmtOffset(), standardName);
+        }
     }
 
     public void setTimeZoneInfo(TimeZoneInfo timeZoneInfo) {
