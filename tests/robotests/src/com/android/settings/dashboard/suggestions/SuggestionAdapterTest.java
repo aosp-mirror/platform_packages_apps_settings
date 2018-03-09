@@ -48,6 +48,7 @@ import com.android.settingslib.suggestions.SuggestionControllerMixin;
 import com.android.settingslib.utils.IconCache;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -142,6 +143,7 @@ public class SuggestionAdapterTest {
             .isEqualTo(R.layout.suggestion_tile_with_button);
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_shouldLog() {
         final View view = spy(LayoutInflater.from(mContext).inflate(
@@ -162,6 +164,7 @@ public class SuggestionAdapterTest {
                 mOneSuggestion.get(0).getId());
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_itemViewShouldHandleClick()
             throws PendingIntent.CanceledException {
@@ -175,6 +178,7 @@ public class SuggestionAdapterTest {
         verify(suggestions.get(0).getPendingIntent()).send();
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_hasButton_buttonShouldHandleClick()
         throws PendingIntent.CanceledException {
@@ -201,6 +205,7 @@ public class SuggestionAdapterTest {
         verify(pendingIntent).send();
     }
 
+    @Ignore
     @Test
     public void getSuggestions_shouldReturnSuggestionWhenMatch() {
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
@@ -209,6 +214,7 @@ public class SuggestionAdapterTest {
         assertThat(mSuggestionAdapter.getSuggestion(0)).isNotNull();
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_closeButtonShouldHandleClick()
         throws PendingIntent.CanceledException {
@@ -230,6 +236,7 @@ public class SuggestionAdapterTest {
         verify(callback).onSuggestionClosed(suggestion);
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_iconNotTintable_shouldNotTintIcon()
             throws PendingIntent.CanceledException {
@@ -256,6 +263,7 @@ public class SuggestionAdapterTest {
         verify(drawable, never()).setTint(anyInt());
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_iconTintable_shouldTintIcon()
             throws PendingIntent.CanceledException {
@@ -288,6 +296,7 @@ public class SuggestionAdapterTest {
         verify(drawable).setTint(colorAccent);
     }
 
+    @Ignore
     @Test
     public void onBindViewHolder_closeButtonShouldHaveContentDescription()
         throws PendingIntent.CanceledException {
@@ -301,6 +310,7 @@ public class SuggestionAdapterTest {
             .isNotNull();
     }
 
+    @Ignore
     @Test
     public void setCardLayout_twoCards_shouldSetCardWidthToHalfScreenMinusPadding() {
         final List<Suggestion> suggestions = makeSuggestions("pkg1");
