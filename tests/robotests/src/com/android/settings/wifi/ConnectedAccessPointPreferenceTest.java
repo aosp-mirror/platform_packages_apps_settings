@@ -32,6 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
@@ -44,6 +45,8 @@ public class ConnectedAccessPointPreferenceTest {
     private View mView;
     @Mock
     private ConnectedAccessPointPreference.OnGearClickListener mOnGearClickListener;
+    @Mock
+    private ConnectedAccessPointPreference.CaptivePortalStatus mCaptivePortalStatus;
     private Context mContext;
     private ConnectedAccessPointPreference mConnectedAccessPointPreference;
 
@@ -53,7 +56,7 @@ public class ConnectedAccessPointPreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mConnectedAccessPointPreference = new ConnectedAccessPointPreference(mAccessPoint, mContext,
-                null, 0 /* iconResId */, false /* forSavedNetworks */);
+                null, 0 /* iconResId */, false /* forSavedNetworks */, mCaptivePortalStatus);
         mConnectedAccessPointPreference.setOnGearClickListener(mOnGearClickListener);
     }
 
@@ -74,8 +77,22 @@ public class ConnectedAccessPointPreferenceTest {
     }
 
     @Test
+    public void testCaptivePortalStatus_isCaptivePortal_dividerDrawn() {
+        Mockito.when(mCaptivePortalStatus.isCaptivePortalNetwork()).thenReturn(true);
+        mConnectedAccessPointPreference.refresh();
+        assertThat(mConnectedAccessPointPreference.shouldShowDivider()).isTrue();
+    }
+
+    @Test
+    public void testCaptivePortalStatus_isNotCaptivePortal_dividerNotDrawn() {
+        Mockito.when(mCaptivePortalStatus.isCaptivePortalNetwork()).thenReturn(false);
+        mConnectedAccessPointPreference.refresh();
+        assertThat(mConnectedAccessPointPreference.shouldShowDivider()).isFalse();
+    }
+
+    @Test
     public void testWidgetLayoutPreference() {
         assertThat(mConnectedAccessPointPreference.getWidgetLayoutResource())
-            .isEqualTo(R.layout.preference_widget_gear_no_bg);
+            .isEqualTo(R.layout.preference_widget_gear_optional_background);
     }
 }

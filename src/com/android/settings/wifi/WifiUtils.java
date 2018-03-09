@@ -16,11 +16,11 @@
 
 package com.android.settings.wifi;
 
-import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.net.NetworkCapabilities;
 import android.net.wifi.WifiConfiguration;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -100,5 +100,11 @@ public class WifiUtils {
         final boolean isLockdownFeatureEnabled = Settings.Global.getInt(resolver,
                 Settings.Global.WIFI_DEVICE_OWNER_CONFIGS_LOCKDOWN, 0) != 0;
         return isLockdownFeatureEnabled;
+    }
+
+    /** Returns true if the provided NetworkCapabilities indicate a captive portal network. */
+    public static boolean canSignIntoNetwork(NetworkCapabilities capabilities) {
+        return (capabilities != null
+                && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL));
     }
 }
