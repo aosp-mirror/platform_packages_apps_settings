@@ -119,5 +119,11 @@ public class BaseTimeZoneInfoPickerTest {
         public Context getContext() {
             return RuntimeEnvironment.application;
         }
+
+        @Override
+        public int getMetricsCategory() {
+            // the metric id doesn't matter in test
+            return 1;
+        }
     }
 }
