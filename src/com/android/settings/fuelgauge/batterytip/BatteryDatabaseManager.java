@@ -32,10 +32,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+import android.util.ArrayMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Database manager for battery data. Now it only contains anomaly data stored in {@link AppInfo}.
@@ -88,19 +90,29 @@ public class BatteryDatabaseManager {
         try (SQLiteDatabase db = mDatabaseHelper.getReadableDatabase()) {
             final String[] projection = {PACKAGE_NAME, ANOMALY_TYPE, UID};
             final String orderBy = AnomalyDatabaseHelper.AnomalyColumns.TIME_STAMP_MS + " DESC";
+            final Map<Integer, AppInfo.Builder> mAppInfoBuilders = new ArrayMap<>();
+            final String selection = TIME_STAMP_MS + " > ? AND " + ANOMALY_STATE + " = ? ";
+            final String[] selectionArgs = new String[]{String.valueOf(timestampMsAfter),
+                    String.valueOf(state)};
 
-            try (Cursor cursor = db.query(TABLE_ANOMALY, projection,
-                    TIME_STAMP_MS + " > ? AND " + ANOMALY_STATE + " = ? ",
-                    new String[]{String.valueOf(timestampMsAfter), String.valueOf(state)}, null,
-                    null, orderBy)) {
+            try (Cursor cursor = db.query(TABLE_ANOMALY, projection, selection, selectionArgs,
+                    null /* groupBy */, null /* having */, orderBy)) {
                 while (cursor.moveToNext()) {
-                    AppInfo appInfo = new AppInfo.Builder()
-                            .setPackageName(cursor.getString(cursor.getColumnIndex(PACKAGE_NAME)))
-                            .setAnomalyType(cursor.getInt(cursor.getColumnIndex(ANOMALY_TYPE)))
-                            .setUid(cursor.getInt(cursor.getColumnIndex(UID)))
-                            .build();
-                    appInfos.add(appInfo);
+                    final int uid = cursor.getInt(cursor.getColumnIndex(UID));
+                    if (!mAppInfoBuilders.containsKey(uid)) {
+                        final AppInfo.Builder builder = new AppInfo.Builder()
+                                .setUid(uid)
+                                .setPackageName(
+                                        cursor.getString(cursor.getColumnIndex(PACKAGE_NAME)));
+                        mAppInfoBuilders.put(uid, builder);
+                    }
+                    mAppInfoBuilders.get(uid).addAnomalyType(
+                            cursor.getInt(cursor.getColumnIndex(ANOMALY_TYPE)));
                 }
+            }
+
+            for (Integer uid : mAppInfoBuilders.keySet()) {
+                appInfos.add(mAppInfoBuilders.get(uid).build());
             }
         }
 
