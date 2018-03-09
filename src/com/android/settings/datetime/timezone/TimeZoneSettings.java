@@ -98,7 +98,7 @@ public class TimeZoneSettings extends DashboardFragment {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         RegionPreferenceController regionPreferenceController =
                 new RegionPreferenceController(context);
-        regionPreferenceController.setOnClickListener(this::onRegionPreferenceClicked);
+        regionPreferenceController.setOnClickListener(this::startRegionPicker);
         RegionZonePreferenceController regionZonePreferenceController =
                 new RegionZonePreferenceController(context);
         regionZonePreferenceController.setOnClickListener(this::onRegionZonePreferenceClicked);
@@ -106,7 +106,7 @@ public class TimeZoneSettings extends DashboardFragment {
                 new TimeZoneInfoPreferenceController(context);
         FixedOffsetPreferenceController fixedOffsetPreferenceController =
                 new FixedOffsetPreferenceController(context);
-        fixedOffsetPreferenceController.setOnClickListener(this::onFixedOffsetPreferenceClicked);
+        fixedOffsetPreferenceController.setOnClickListener(this::startFixedOffsetPicker);
 
         controllers.add(regionPreferenceController);
         controllers.add(regionZonePreferenceController);
@@ -172,7 +172,7 @@ public class TimeZoneSettings extends DashboardFragment {
 
     }
 
-    private void onRegionPreferenceClicked() {
+    private void startRegionPicker() {
         startPickerFragment(RegionSearchPicker.class, new Bundle(), REQUEST_CODE_REGION_PICKER);
     }
 
@@ -183,7 +183,7 @@ public class TimeZoneSettings extends DashboardFragment {
         startPickerFragment(RegionZonePicker.class, args, REQUEST_CODE_ZONE_PICKER);
     }
 
-    private void onFixedOffsetPreferenceClicked() {
+    private void startFixedOffsetPicker() {
         startPickerFragment(FixedOffsetPicker.class, new Bundle(),
                 REQUEST_CODE_FIXED_OFFSET_ZONE_PICKER);
     }
@@ -240,12 +240,18 @@ public class TimeZoneSettings extends DashboardFragment {
         setDisplayedRegion(regionId);
         setDisplayedTimeZoneInfo(regionId, mSelectedTimeZoneId);
         saveTimeZone(regionId, mSelectedTimeZoneId);
+
+        // Switch to the region mode if the user switching from the fixed offset
+        setSelectByRegion(true);
     }
 
     private void onFixedOffsetZoneChanged(String tzId) {
         mSelectedTimeZoneId = tzId;
         setDisplayedFixedOffsetTimeZoneInfo(tzId);
         saveTimeZone(null, mSelectedTimeZoneId);
+
+        // Switch to the fixed offset mode if the user switching from the region mode
+        setSelectByRegion(false);
     }
 
     private void saveTimeZone(String regionId, String tzId) {
@@ -277,11 +283,11 @@ public class TimeZoneSettings extends DashboardFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case MENU_BY_REGION:
-                setSelectByRegion(true);
+                startRegionPicker();
                 return true;
 
             case MENU_BY_OFFSET:
-                setSelectByRegion(false);
+                startFixedOffsetPicker();
                 return true;
 
             default:

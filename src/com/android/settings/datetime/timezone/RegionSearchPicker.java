@@ -110,56 +110,25 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
     private List<RegionItem> createAdapterItem(Set<String> regionIds) {
         final Collator collator = Collator.getInstance(getLocale());
         final TreeSet<RegionItem> items = new TreeSet<>(new RegionInfoComparator(collator));
-        final Paint paint = new Paint();
         final LocaleDisplayNames localeDisplayNames = LocaleDisplayNames.getInstance(getLocale());
         long i = 0;
         for (String regionId : regionIds) {
             String name = localeDisplayNames.regionDisplayName(regionId);
-            String regionalIndicator = createRegionalIndicator(regionId, paint);
-            items.add(new RegionItem(i++, regionId, name, regionalIndicator));
+            items.add(new RegionItem(i++, regionId, name));
         }
         return new ArrayList<>(items);
-    }
-
-    /**
-     * Create a Unicode Region Indicator Symbol for a given region id (a.k.a flag emoji). If the
-     * system can't render a flag for this region or the input is not a region id, this returns
-     * {@code null}.
-     *
-     * @param id the two-character region id.
-     * @param paint Paint contains the glyph
-     * @return a String representing the flag of the region or {@code null}.
-     */
-    private static String createRegionalIndicator(String id, Paint paint) {
-        if (id.length() != 2) {
-            return null;
-        }
-        final char c1 = id.charAt(0);
-        final char c2 = id.charAt(1);
-        if ('A' > c1 || c1 > 'Z' || 'A' > c2 || c2 > 'Z') {
-            return null;
-        }
-        // Regional Indicator A is U+1F1E6 which is 0xD83C 0xDDE6 in UTF-16.
-        final String regionalIndicator = new String(
-            new char[]{0xd83c, (char) (0xdde6 - 'A' + c1), 0xd83c, (char) (0xdde6 - 'A' + c2)});
-        if (!paint.hasGlyph(regionalIndicator)) {
-            return null;
-        }
-        return regionalIndicator;
     }
 
     private static class RegionItem implements BaseTimeZoneAdapter.AdapterItem {
 
         private final String mId;
         private final String mName;
-        private final String mRegionalIndicator;
         private final long mItemId;
         private final String[] mSearchKeys;
 
-        RegionItem(long itemId, String id, String name, String regionalIndicator) {
+        RegionItem(long itemId, String id, String name) {
             mId = id;
             mName = name;
-            mRegionalIndicator = regionalIndicator;
             mItemId = itemId;
             // Allow to search with ISO_3166-1 alpha-2 code. It's handy for english users in some
             // countries, e.g. US for United States. It's not best search keys for users, but
@@ -183,7 +152,7 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
 
         @Override
         public String getIconText() {
-            return mRegionalIndicator;
+            return null;
         }
 
         @Override
