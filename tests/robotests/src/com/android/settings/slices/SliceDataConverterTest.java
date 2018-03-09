@@ -81,6 +81,7 @@ public class SliceDataConverterTest {
         assertThat(fakeSlice.getUri()).isNull();
         assertThat(fakeSlice.getFragmentClassName()).isEqualTo(fakeFragmentClassName);
         assertThat(fakeSlice.getPreferenceController()).isEqualTo(fakeControllerName);
-        assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER);
+        assertThat(fakeSlice.getSliceType()).isEqualTo(SliceData.SliceType.SLIDER); // from XML
+        assertThat(fakeSlice.isPlatformDefined()).isTrue(); // from XML
     }
 }

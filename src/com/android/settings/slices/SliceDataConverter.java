@@ -19,6 +19,7 @@ package com.android.settings.slices;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_CONTROLLER;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_ICON;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_KEY;
+import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_PLATFORM_SLICE_FLAG;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_SUMMARY;
 import static com.android.settings.core.PreferenceXmlParserUtils.METADATA_TITLE;
 
@@ -164,7 +165,8 @@ class SliceDataConverter {
                             | MetadataFlag.FLAG_NEED_PREF_TYPE
                             | MetadataFlag.FLAG_NEED_PREF_TITLE
                             | MetadataFlag.FLAG_NEED_PREF_ICON
-                            | MetadataFlag.FLAG_NEED_PREF_SUMMARY);
+                            | MetadataFlag.FLAG_NEED_PREF_SUMMARY
+                            | MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG);
 
             for (Bundle bundle : metadata) {
                 // TODO (b/67996923) Non-controller Slices should become intent-only slices.
@@ -179,6 +181,7 @@ class SliceDataConverter {
                 final int iconResId = bundle.getInt(METADATA_ICON);
                 final int sliceType = SliceBuilderUtils.getSliceType(mContext, controllerClassName,
                         key);
+                final boolean isPlatformSlice = bundle.getBoolean(METADATA_PLATFORM_SLICE_FLAG);
 
                 final SliceData xmlSlice = new SliceData.Builder()
                         .setKey(key)
@@ -189,6 +192,7 @@ class SliceDataConverter {
                         .setPreferenceControllerClassName(controllerClassName)
                         .setFragmentName(fragmentName)
                         .setSliceType(sliceType)
+                        .setPlatformDefined(isPlatformSlice)
                         .build();
 
                 xmlSliceData.add(xmlSlice);

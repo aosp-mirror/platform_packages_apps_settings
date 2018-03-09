@@ -18,8 +18,7 @@
 package com.android.settings.slices;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -28,6 +27,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.provider.SettingsSlicesContract;
 
 import com.android.settings.testutils.DatabaseTestUtils;
 import com.android.settings.testutils.FakeToggleController;
@@ -50,6 +50,8 @@ import java.util.HashMap;
 public class SettingsSliceProviderTest {
 
     private final String KEY = "KEY";
+    private final String INTENT_PATH = SettingsSlicesContract.PATH_SETTING_INTENT + "/" + KEY;
+    private final String ACTION_PATH = SettingsSlicesContract.PATH_SETTING_ACTION + "/" + KEY;
     private final String TITLE = "title";
     private final String SUMMARY = "summary";
     private final String SCREEN_TITLE = "screen title";
@@ -67,6 +69,8 @@ public class SettingsSliceProviderTest {
         mProvider = spy(new SettingsSliceProvider());
         mProvider.mSliceDataCache = new HashMap<>();
         mProvider.mSlicesDatabaseAccessor = new SlicesDatabaseAccessor(mContext);
+        when(mProvider.getContext()).thenReturn(mContext);
+
         mDb = SlicesDatabaseHelper.getInstance(mContext).getWritableDatabase();
         SlicesDatabaseHelper.getInstance(mContext).setIndexedState();
     }
@@ -78,12 +82,8 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testInitialSliceReturned_emptySlice() {
-        insertSpecialCase(KEY);
-        ContentResolver mockResolver = mock(ContentResolver.class);
-        doReturn(mockResolver).when(mContext).getContentResolver();
-        when(mProvider.getContext()).thenReturn(mContext);
-
-        Uri uri = SettingsSliceProvider.getUri(KEY);
+        insertSpecialCase(INTENT_PATH);
+        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         Slice slice = mProvider.onBindSlice(uri);
 
         assertThat(slice.getUri()).isEqualTo(uri);
@@ -91,21 +91,9 @@ public class SettingsSliceProviderTest {
     }
 
     @Test
-    public void testUriBuilder_returnsValidSliceUri() {
-        Uri uri = SettingsSliceProvider.getUri(KEY);
-
-        assertThat(uri.getScheme()).isEqualTo(ContentResolver.SCHEME_CONTENT);
-        assertThat(uri.getAuthority()).isEqualTo(SettingsSliceProvider.SLICE_AUTHORITY);
-        assertThat(uri.getLastPathSegment()).isEqualTo(KEY);
-    }
-
-    @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
-        ContentResolver mockResolver = mock(ContentResolver.class);
-        doReturn(mockResolver).when(mContext).getContentResolver();
-        when(mProvider.getContext()).thenReturn(mContext);
         insertSpecialCase(KEY);
-        Uri uri = SettingsSliceProvider.getUri(KEY);
+        Uri uri = SliceBuilderUtils.getUri(KEY, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceDataCache.get(uri);
@@ -116,7 +104,6 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testLoadSlice_cachedEntryRemovedOnBuild() {
-        when(mProvider.getContext()).thenReturn(mContext);
         SliceData data = getDummyData();
         mProvider.mSliceDataCache.put(data.getUri(), data);
         mProvider.onBindSlice(data.getUri());
