@@ -32,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settingslib.utils.StringUtil;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -137,16 +138,41 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
-    public void testSetUsageInfo_cycleRemainingTimeShown() {
-        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+    public void testSetUsageInfo_cycleRemainingTimeIsLessOneDay() {
+        // just under one day
+        final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1) - 1;
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
-        String cyclePrefix = StringUtil.formatElapsedTime(mContext, CYCLE_DURATION_MILLIS,
-                false /* withSeconds */).toString();
-        String text = mContext.getString(R.string.cycle_left_time_text, cyclePrefix);
 
         bindViewHolder();
         assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
-        assertThat(mCycleTime.getText()).isEqualTo(text);
+        assertThat(mCycleTime.getText()).isEqualTo(
+                mContext.getString(R.string.billing_cycle_less_than_one_day_left));
+    }
+
+    @Test
+    public void testSetUsageInfo_cycleRemainingTimeNegativeDaysLeft_shouldDisplayZeroDays() {
+        final long cycleEnd = System.currentTimeMillis() - 1L;
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCycleTime.getText()).isEqualTo(
+                mContext.getResources().getQuantityString(R.plurals.billing_cycle_days_left, 0, 0));
+    }
+
+    @Test
+    public void testSetUsageInfo_cycleRemainingTimeDaysLeft_shouldUsePlurals() {
+        final int daysLeft = 3;
+        final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(daysLeft)
+                + TimeUnit.HOURS.toMillis(1);
+        mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCycleTime.getText()).isEqualTo(daysLeft + " days left");
     }
 
     @Test

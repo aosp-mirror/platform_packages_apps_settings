@@ -32,11 +32,13 @@ import com.android.settings.R;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Provides a summary of data usage.
  */
 public class DataUsageSummaryPreference extends Preference {
+    private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
 
     private boolean mChartEnabled = true;
     private String mStartLabel;
@@ -136,10 +138,7 @@ public class DataUsageSummaryPreference extends Preference {
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
         usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);
 
-        TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
-        cycleTime.setText(getContext().getString(R.string.cycle_left_time_text,
-                StringUtil.formatElapsedTime(getContext(),
-                        mCycleEndTimeMs - System.currentTimeMillis(),false /* withSeconds */)));
+        updateCycleTimeText(holder);
 
         TextView carrierInfo = (TextView) holder.findViewById(R.id.carrier_and_update);
         setCarrierInfo(carrierInfo, mCarrierName, mSnapshotTimeMs);
@@ -178,6 +177,21 @@ public class DataUsageSummaryPreference extends Preference {
                                 Formatter.formatFileSize(getContext(), -dataRemaining)));
             }
         }
+    }
+
+    private void updateCycleTimeText(PreferenceViewHolder holder) {
+        float daysLeft =
+                ((float) mCycleEndTimeMs - System.currentTimeMillis()) / MILLIS_IN_A_DAY;
+        if (daysLeft < 0) {
+            daysLeft = 0;
+        }
+
+        TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
+        cycleTime.setText(
+                (daysLeft > 0 && daysLeft < 1)
+                ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
+                : getContext().getResources().getQuantityString(
+                        R.plurals.billing_cycle_days_left, (int) daysLeft, (int) daysLeft));
     }
 
     private void setCarrierInfo(TextView carrierInfo, CharSequence carrierName, long updateAge) {
