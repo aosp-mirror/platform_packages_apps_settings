@@ -1136,25 +1136,25 @@
 
     <!-- Security Picker --><skip />
 
-    <!-- Title for suggested actions for screen lock [CHAR LIMIT=34] -->
-    <string name="suggested_lock_settings_title">Set screen lock for security</string>
+    <!-- Title for suggested actions for screen lock [CHAR LIMIT=46] -->
+    <string name="suggested_lock_settings_title">Secure your phone</string>
 
-    <!-- Summary for suggested actions for screen lock (tablet) -->
-    <string name="suggested_lock_settings_summary" product="tablet">Prevent others from using your tablet</string>
-    <!-- Summary for suggested actions for screen lock (device) -->
-    <string name="suggested_lock_settings_summary" product="device">Prevent others from using your device</string>
-    <!-- Summary for suggested actions for screen lock (phone) -->
-    <string name="suggested_lock_settings_summary" product="default">Prevent others from using your phone</string>
+    <!-- Summary for suggested actions for screen lock (tablet) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="tablet">Set screen lock to protect tablet</string>
+    <!-- Summary for suggested actions for screen lock (device) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="device">Set screen lock to protect device</string>
+    <!-- Summary for suggested actions for screen lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_lock_settings_summary" product="default">Set screen lock to protect phone</string>
 
-    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=34] -->
+    <!-- Title for suggested actions for settings up a fingerprint lock [CHAR LIMIT=46] -->
     <string name="suggested_fingerprint_lock_settings_title">Unlock with fingerprint</string>
 
-    <!-- Summary for suggested actions for settings up a fingerprint lock (tablet)  -->
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet">Unlock with your fingerprint</string>
-    <!-- Summary for suggested actions for settings up a fingerprint lock (device)  -->
-    <string name="suggested_fingerprint_lock_settings_summary" product="device">Unlock with your fingerprint</string>
-    <!-- Summary for suggested actions for settings up a fingerprint lock (phone)  -->
-    <string name="suggested_fingerprint_lock_settings_summary" product="default">Unlock with your fingerprint</string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (tablet) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet"></string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (device) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="device"></string>
+    <!-- Summary for suggested actions for settings up a fingerprint lock (phone) [CHAR LIMIT=55] -->
+    <string name="suggested_fingerprint_lock_settings_summary" product="default"></string>
 
     <!--  Title for security picker to choose the unlock method: None/Pattern/PIN/Password [CHAR LIMIT=22] -->
     <string name="lock_settings_picker_title">Choose screen lock</string>
@@ -2251,10 +2251,10 @@
 
     <!-- Wireless networks, item title to go into the WFC settings [CHAR LIMIT=30] -->
     <string name="wifi_calling_settings_title">Wi-Fi calling</string>
-    <!-- Title of suggestion to turn on wifi calling [CHAR LIMIT=30] -->
-    <string name="wifi_calling_suggestion_title">Extend call coverage with Wi\u2011Fi</string>
-    <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=60] -->
-    <string name="wifi_calling_suggestion_summary">Turn on Wi\u2011Fi calling</string>
+    <!-- Title of suggestion to turn on wifi calling [CHAR LIMIT=46] -->
+    <string name="wifi_calling_suggestion_title">Extend calls with Wi\u2011Fi</string>
+    <!-- Summary of suggestion to turn on wifi calling [CHAR LIMIT=55] -->
+    <string name="wifi_calling_suggestion_summary">Turn on Wi\u2011Fi calling to extend coverage</string>
     <!-- Title of WFC preference item [CHAR LIMIT=30] -->
     <string name="wifi_calling_mode_title">Calling preference</string>
     <!-- Title of WFC preference selection dialog [CHAR LIMIT=30] -->
@@ -2532,9 +2532,9 @@
     <string name="wallpaper_settings_summary_default">Default</string>
     <!-- Wallpaper settings summary when wallpaper has been updated [CHAR LIMIT=NONE] -->
     <string name="wallpaper_settings_summary_custom">Custom</string>
-    <!-- Wallpaper suggestion title [CHAR LIMIT=30] -->
+    <!-- Wallpaper suggestion title [CHAR LIMIT=46] -->
     <string name="wallpaper_suggestion_title">Change wallpaper</string>
-    <!-- Wallpaper suggestion title [CHAR LIMIT=60] -->
+    <!-- Wallpaper suggestion summary [CHAR LIMIT=55] -->
     <string name="wallpaper_suggestion_summary">Personalize your screen</string>
     <!-- Wallpaper settings fragment title [CHAR LIMIT=30] -->
     <string name="wallpaper_settings_fragment_title">Choose wallpaper from</string>
@@ -6945,10 +6945,10 @@
     <!--  Do not disturb: Title for a specific zen mode automatic rule in settings. [CHAR LIMIT=30] -->
     <string name="zen_mode_automatic_rule_settings_page_title">Automatic rule</string>
 
-    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=34] -->
+    <!--  Do not disturb: Title for the zen mode automation option Suggestion. [CHAR LIMIT=46] -->
     <string name="zen_mode_automation_suggestion_title">Silence phone at certain times</string>
 
-    <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=NONE] -->
+    <!--  Do not disturb: Summary for the zen mode automation option Suggestion. [CHAR LIMIT=55] -->
     <string name="zen_mode_automation_suggestion_summary">Set Do Not Disturb rules</string>
 
     <!--  Do not disturb: Switch toggle to toggle whether to use an automatic dnd rule or not [CHAR LIMIT=40] -->
@@ -8558,10 +8558,10 @@
     <!-- Summary of condition that work mode is off [CHAR LIMIT=NONE] -->
     <string name="condition_work_summary">Apps, background sync, and other features related to your work profile are turned off.</string>
 
-    <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
+    <!--  Night display: Title for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=46] -->
     <string name="night_display_suggestion_title">Set Night Light schedule</string>
 
-    <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=NONE] -->
+    <!--  Night display: Summary for the night display option Suggestion (renamed "Night Light" with title caps). [CHAR LIMIT=55] -->
     <string name="night_display_suggestion_summary">Automatically tint screen every night</string>
 
     <!-- Title of condition that night display is on (renamed "Night Light" with title caps). [CHAR LIMIT=30] -->
@@ -8769,10 +8769,10 @@
     <!-- Summary of the preference controlling whether the device encryption *password* must be entered before being able to start the device. [CHAR LIMIT=NONE]-->
     <string name="lockpattern_settings_require_password_before_startup_summary">Require password to start up your device. While off, this device can\'t receive calls, messages, notifications, or alarms.</string>
 
-    <!-- Title for suggestion adding more fingerprints [CHAR LIMIT=30] -->
+    <!-- Title for suggestion adding more fingerprints [CHAR LIMIT=46] -->
     <string name="suggestion_additional_fingerprints">Add another fingerprint</string>
 
-    <!-- Summary for suggestion adding more fingerprints [CHAR LIMIT=60] -->
+    <!-- Summary for suggestion adding more fingerprints [CHAR LIMIT=55] -->
     <string name="suggestion_additional_fingerprints_summary">Unlock with a different finger</string>
 
     <!-- Summary of battery saver when on [CHAR LIMIT=NONE] -->
@@ -9452,5 +9452,14 @@
 
     <!-- Summary for media output settings when the media stream is being captured by something else. -->
     <string name="media_output_summary_unavailable">Unavailable</string>
+
+    <!--  Title for battery Suggestion. (tablet) [CHAR LIMIT=46] -->
+    <string name="battery_suggestion_title" product="tablet" >Improve tablet\'s battery life</string>
+    <!--  Title for battery Suggestion. (device) [CHAR LIMIT=46] -->
+    <string name="battery_suggestion_title" product="device" >Improve device\'s battery life</string>
+    <!--  Title for battery Suggestion. (phone) [CHAR LIMIT=46] -->
+    <string name="battery_suggestion_title" product="default" >Improve phone\'s battery life</string>
+    <!--  Summary for battery Suggestion. [CHAR LIMIT=55] -->
+    <string name="battery_suggestion_summary"></string>
 
 </resources>
