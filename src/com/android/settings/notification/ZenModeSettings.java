@@ -63,6 +63,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             Lifecycle lifecycle, FragmentManager fragmentManager) {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
@@ -135,6 +136,18 @@ public class ZenModeSettings extends ZenModeSettingsBase {
 
                 return mContext.getString(R.string.zen_mode_sound_summary_off);
             }
+        }
+
+        String getBlockedEffectsSummary(Policy policy) {
+            if (policy.suppressedVisualEffects == 0) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_block_effect_summary_sound);
+            } else if (Policy.areAllVisualEffectsSuppressed(policy.suppressedVisualEffects)) {
+                return mContext.getResources().getString(
+                        R.string.zen_mode_block_effect_summary_all);
+            }
+            return mContext.getResources().getString(
+                    R.string.zen_mode_block_effect_summary_some);
         }
 
         String getAutomaticRulesSummary() {
