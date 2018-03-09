@@ -23,9 +23,11 @@ import android.support.v4.content.res.TypedArrayUtils;
 import android.support.v7.preference.Preference;
 import android.text.format.Formatter;
 import android.util.AttributeSet;
+import android.util.FeatureFlagUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settings.core.FeatureFlags;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settingslib.net.DataUsageController;
 
@@ -53,8 +55,13 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
         mSubId = subId;
         DataUsageController controller = new DataUsageController(getContext());
         DataUsageController.DataUsageInfo usageInfo = controller.getDataUsageInfo(mTemplate);
-        setSummary(getContext().getString(R.string.data_usage_template,
-                Formatter.formatFileSize(getContext(), usageInfo.usageLevel), usageInfo.period));
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+          setTitle(getContext().getString(R.string.app_cellular_data_usage));
+        } else {
+          setTitle(getContext().getString(R.string.cellular_data_usage));
+          setSummary(getContext().getString(R.string.data_usage_template,
+                  Formatter.formatFileSize(getContext(), usageInfo.usageLevel), usageInfo.period));
+        }
         setIntent(getIntent());
     }
 
@@ -67,10 +74,14 @@ public class DataUsagePreference extends Preference implements TemplatePreferenc
                 .setArguments(args)
                 .setDestination(DataUsageList.class.getName())
                 .setSourceMetricsCategory(MetricsProto.MetricsEvent.VIEW_UNKNOWN);
-        if (mTitleRes > 0) {
-            launcher.setTitle(mTitleRes);
+        if (FeatureFlagUtils.isEnabled(getContext(), FeatureFlags.DATA_USAGE_SETTINGS_V2)) {
+          launcher.setTitle(getContext().getString(R.string.app_cellular_data_usage));
         } else {
+          if (mTitleRes > 0) {
+            launcher.setTitle(mTitleRes);
+          } else {
             launcher.setTitle(getTitle());
+          }
         }
         return launcher.toIntent();
     }
