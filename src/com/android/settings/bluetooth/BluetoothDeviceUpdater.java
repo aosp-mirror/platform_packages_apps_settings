@@ -93,9 +93,9 @@ public abstract class BluetoothDeviceUpdater implements BluetoothCallback {
         }
     }
 
-    public BluetoothDeviceUpdater(DashboardFragment fragment,
+    public BluetoothDeviceUpdater(Context context, DashboardFragment fragment,
             DevicePreferenceCallback devicePreferenceCallback) {
-        this(fragment, devicePreferenceCallback, Utils.getLocalBtManager(fragment.getContext()));
+        this(fragment, devicePreferenceCallback, Utils.getLocalBtManager(context));
     }
 
     @VisibleForTesting
