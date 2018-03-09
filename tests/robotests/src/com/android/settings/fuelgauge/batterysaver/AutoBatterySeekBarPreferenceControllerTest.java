@@ -99,4 +99,24 @@ public class AutoBatterySeekBarPreferenceControllerTest {
         assertThat(Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, 0)).isEqualTo(TRIGGER_LEVEL);
     }
+
+    @Test
+    public void testOnPreferenceChange_changeMax() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 50);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getMax()).isEqualTo(50);
+    }
+
+    @Test
+    public void testOnPreferenceChange_noChangeMax() {
+        Settings.Global.putInt(mContext.getContentResolver(),
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 0);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getMax()).isEqualTo(100);
+    }
 }
