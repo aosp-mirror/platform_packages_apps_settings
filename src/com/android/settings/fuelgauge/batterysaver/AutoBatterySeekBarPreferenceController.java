@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.util.Log;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
@@ -40,6 +41,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
  */
 public class AutoBatterySeekBarPreferenceController extends BasePreferenceController implements
         LifecycleObserver, OnStart, OnStop, SeekBarPreference.OnPreferenceChangeListener {
+    private static final String TAG = "AutoBatterySeekBarPreferenceController";
     @VisibleForTesting
     static final String KEY_AUTO_BATTERY_SEEK_BAR = "battery_saver_seek_bar";
     private final int mDefWarnLevel;
@@ -96,6 +98,24 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
     @VisibleForTesting
     void updatePreference(Preference preference) {
         final ContentResolver contentResolver = mContext.getContentResolver();
+
+        // Override the max value with LOW_POWER_MODE_TRIGGER_LEVEL_MAX, if set.
+        final int maxLevel = Settings.Global.getInt(contentResolver,
+                Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL_MAX, 0);
+        if (maxLevel > 0) {
+            if (!(preference instanceof SeekBarPreference)) {
+                Log.e(TAG, "Unexpected preference class: " + preference.getClass());
+            } else {
+                final SeekBarPreference seekBarPreference = (SeekBarPreference) preference;
+                if (maxLevel < seekBarPreference.getMin()) {
+                    Log.e(TAG, "LOW_POWER_MODE_TRIGGER_LEVEL_MAX too low; ignored.");
+                } else {
+                    seekBarPreference.setMax(maxLevel);
+                }
+            }
+        }
+
+        // Set the current value.
         final int level = Settings.Global.getInt(contentResolver,
                 Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL, mDefWarnLevel);
         if (level == 0) {
@@ -109,7 +129,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
     }
 
     /**
-     * Observer that listens to change from {@link Settings.Global.LOW_POWER_MODE_TRIGGER_LEVEL}
+     * Observer that listens to change from {@link Settings.Global#LOW_POWER_MODE_TRIGGER_LEVEL}
      */
     private final class AutoBatterySaverSettingObserver extends ContentObserver {
         private final Uri mUri = Settings.Global.getUriFor(
