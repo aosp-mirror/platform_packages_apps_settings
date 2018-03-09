@@ -77,6 +77,7 @@ public class HighUsageTipTest {
     @Test
     public void toString_containsAppData() {
         assertThat(mBatteryTip.toString()).isEqualTo(
-                "type=2 state=0 { packageName=com.android.app,anomalyType=0,screenTime=1800000 }");
+                "type=2 state=0 { packageName=com.android.app,anomalyTypes={},screenTime=1800000 "
+                        + "}");
     }
 }
