@@ -51,15 +51,19 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
         DialogInterface.OnClickListener {
 
     private static final String ARG_BATTERY_TIP = "battery_tip";
+    private static final String ARG_METRICS_KEY = "metrics_key";
 
     @VisibleForTesting
     BatteryTip mBatteryTip;
+    @VisibleForTesting
+    int mMetricsKey;
 
-    public static BatteryTipDialogFragment newInstance(BatteryTip batteryTip) {
+    public static BatteryTipDialogFragment newInstance(BatteryTip batteryTip, int metricsKey) {
         BatteryTipDialogFragment dialogFragment = new BatteryTipDialogFragment();
 
         Bundle args = new Bundle(1);
         args.putParcelable(ARG_BATTERY_TIP, batteryTip);
+        args.putInt(ARG_METRICS_KEY, metricsKey);
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -71,6 +75,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
         final Context context = getContext();
 
         mBatteryTip = bundle.getParcelable(ARG_BATTERY_TIP);
+        mMetricsKey = bundle.getInt(ARG_METRICS_KEY);
 
         switch (mBatteryTip.getType()) {
             case BatteryTip.TipType.SUMMARY:
@@ -165,7 +170,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                 (SettingsActivity) getActivity(),
                 (InstrumentedPreferenceFragment) getTargetFragment());
         if (action != null) {
-            action.handlePositiveAction();
+            action.handlePositiveAction(mMetricsKey);
         }
         lsn.onBatteryTipHandled(mBatteryTip);
     }
