@@ -19,11 +19,14 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Parcel;
+import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +93,24 @@ public class RestrictAppTip extends BatteryTip {
             // If anomaly becomes invisible, show it as handled
             mState = StateType.HANDLED;
             mShowDialog = false;
+        }
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP,
+                mState);
+        if (mState == StateType.NEW) {
+            for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
+                final AppInfo appInfo = mRestrictAppList.get(i);
+                for (Integer anomalyType : appInfo.anomalyTypes) {
+                    metricsFeatureProvider.action(context,
+                            MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                            appInfo.packageName,
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, anomalyType));
+                }
+
+            }
         }
     }
 

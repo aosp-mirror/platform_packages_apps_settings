@@ -16,16 +16,25 @@
 package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Parcel;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +62,8 @@ public class RestrictAppTipTest {
     private ApplicationInfo mApplicationInfo;
     @Mock
     private PackageManager mPackageManager;
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
 
     @Before
     public void setUp() throws Exception {
@@ -131,5 +142,31 @@ public class RestrictAppTipTest {
     public void toString_containsAppData() {
         assertThat(mNewBatteryTip.toString()).isEqualTo(
                 "type=1 state=0 { packageName=com.android.app,anomalyTypes={0, 1},screenTime=0 }");
+    }
+
+    @Test
+    public void testLog_stateNew_logAppInfo() {
+        mNewBatteryTip.log(mContext, mMetricsFeatureProvider);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP, BatteryTip.StateType.NEW);
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                PACKAGE_NAME,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_WAKEUP));
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP_LIST,
+                PACKAGE_NAME,
+                Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, ANOMALY_WAKELOCK));
+    }
+
+    @Test
+    public void testLog_stateHandled_doNotLogAppInfo() {
+        mHandledBatteryTip.log(mContext, mMetricsFeatureProvider);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_APP_RESTRICTION_TIP, BatteryTip.StateType.HANDLED);
+        verify(mMetricsFeatureProvider, never()).action(any(), anyInt(), anyString(), any());
+
     }
 }

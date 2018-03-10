@@ -25,6 +25,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -119,6 +120,11 @@ public class BatteryTipTest {
 
         @Override
         public void updateState(BatteryTip tip) {
+            // do nothing
+        }
+
+        @Override
+        public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
             // do nothing
         }
 

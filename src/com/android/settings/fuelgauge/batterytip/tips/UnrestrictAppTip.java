@@ -21,6 +21,7 @@ import android.os.Parcel;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Tip to suggest user to remove app restriction. This is the empty tip and it is only used in
@@ -64,6 +65,11 @@ public class UnrestrictAppTip extends BatteryTip {
     @Override
     public void updateState(BatteryTip tip) {
         mState = tip.mState;
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        // Do nothing
     }
 
     @Override
