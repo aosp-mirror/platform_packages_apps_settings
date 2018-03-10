@@ -16,41 +16,78 @@
 
 package com.android.settings.datetime.timezone;
 
+import android.content.Context;
+
+import com.android.settings.datetime.timezone.BaseTimeZoneAdapter.AdapterItem;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
 import libcore.util.CountryZonesFinder;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RuntimeEnvironment;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 public class FixedOffsetPickerTest {
 
+    private CountryZonesFinder mFinder;
+
+    @Before
+    public void setUp() {
+        List regionList = Collections.emptyList();
+        mFinder = mock(CountryZonesFinder.class);
+        when(mFinder.lookupAllCountryIsoCodes()).thenReturn(regionList);
+    }
+
     @Test
     public void getAllTimeZoneInfos_containsUtcAndGmtZones() {
-        List regionList = Collections.emptyList();
-        CountryZonesFinder finder = mock(CountryZonesFinder.class);
-        when(finder.lookupAllCountryIsoCodes()).thenReturn(regionList);
-
-        FixedOffsetPicker picker = new FixedOffsetPicker() {
-            @Override
-            protected Locale getLocale() {
-                return Locale.US;
-            }
-        };
-        List<TimeZoneInfo> infos = picker.getAllTimeZoneInfos(new TimeZoneData(finder));
+        TestFixedOffsetPicker picker = new TestFixedOffsetPicker();
+        List<TimeZoneInfo> infos = picker.getAllTimeZoneInfos(new TimeZoneData(mFinder));
         List<String> tzIds = infos.stream().map(info -> info.getId()).collect(Collectors.toList());
-        tzIds.contains("Etc/Utc");
-        tzIds.contains("Etc/GMT-12");
-        tzIds.contains("Etc/GMT+14");
+        assertThat(tzIds).contains("Etc/UTC");
+        assertThat(tzIds).contains("Etc/GMT-14"); // Etc/GMT-14 means GMT+14:00
+        assertThat(tzIds).contains("Etc/GMT+12"); // Etc/GMT+14 means GMT-12:00
+    }
+
+    @Test
+    public void createAdapter_verifyTitleAndOffset() {
+        TestFixedOffsetPicker picker = new TestFixedOffsetPicker();
+        BaseTimeZoneAdapter adapter = picker.createAdapter(new TimeZoneData(mFinder));
+        assertThat(adapter.getItemCount()).isEqualTo(12 + 1 + 14); // 27 GMT offsets from -12 to +14
+        AdapterItem utc = adapter.getItem(0);
+        assertThat(utc.getTitle().toString()).isEqualTo("Coordinated Universal Time");
+        assertThat(utc.getSummary().toString()).isEqualTo("GMT+00:00");
+        AdapterItem gmtMinus12 = adapter.getItem(1);
+        assertThat(gmtMinus12.getTitle().toString()).isEqualTo("GMT-12:00");
+        assertThat(gmtMinus12.getSummary().toString()).isEmpty();
+    }
+
+    public static class TestFixedOffsetPicker extends FixedOffsetPicker {
+        // Make the method public
+        @Override
+        public BaseTimeZoneAdapter createAdapter(TimeZoneData timeZoneData) {
+            return super.createAdapter(timeZoneData);
+        }
+
+        @Override
+        protected Locale getLocale() {
+            return Locale.US;
+        }
+
+        @Override
+        public Context getContext() {
+            return RuntimeEnvironment.application;
+        }
     }
 }
