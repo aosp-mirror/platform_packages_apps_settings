@@ -25,6 +25,8 @@ import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 import android.util.SparseIntArray;
 
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -122,6 +124,11 @@ public abstract class BatteryTip implements Comparable<BatteryTip>, Parcelable {
      * @param tip used to update
      */
     public abstract void updateState(BatteryTip tip);
+
+    /**
+     * Log the battery tip
+     */
+    public abstract void log(Context context, MetricsFeatureProvider metricsFeatureProvider);
 
     public Preference buildPreference(Context context) {
         Preference preference = new Preference(context);
