@@ -63,6 +63,7 @@ public class AutoBatterySeekBarPreferenceController extends BasePreferenceContro
         super.displayPreference(screen);
         mPreference = (SeekBarPreference) screen.findPreference(
                 KEY_AUTO_BATTERY_SEEK_BAR);
+        mPreference.setContinuousUpdates(true);
         updatePreference(mPreference);
     }
 
