@@ -119,9 +119,9 @@ public class BatteryTipPreferenceControllerTest {
     public void testUpdateBatteryTips_logBatteryTip() {
         mBatteryTipPreferenceController.updateBatteryTips(mOldBatteryTips);
 
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(Context.class),
-                eq(MetricsProto.MetricsEvent.ACTION_BATTERY_TIP_SHOWN),
-                eq(BatteryTip.TipType.SUMMARY));
+        verify(mFeatureFactory.metricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_SUMMARY_TIP,
+                BatteryTip.StateType.NEW);
     }
 
     @Test
