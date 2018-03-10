@@ -23,6 +23,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
+import android.util.Log;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -71,7 +72,10 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     @Override
     public void onStart() {
         super.onStart();
-
+        if (mLocalManager == null){
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         updateBluetooth();
         mAvailableDevicesCategory.setProgress(mLocalAdapter.isDiscovering());
     }
@@ -89,7 +93,10 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
     @Override
     public void onStop() {
         super.onStop();
-
+        if (mLocalManager == null){
+            Log.e(TAG, "Bluetooth is not supported on this device");
+            return;
+        }
         // Make the device only visible to connected devices.
         mAlwaysDiscoverable.stop();
         disableScanning();
