@@ -98,6 +98,13 @@
             android:key="pointer_speed"
             android:title="@string/pointer_speed"
             android:dialogTitle="@string/pointer_speed" />
+
+        <com.axiom.settings.preference.SecureSettingSwitchPreference
+            android:key="feature_touch_hovering"
+            android:title="@string/touchscreen_hovering_title"
+            android:summary="@string/touchscreen_hovering_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.custom.touch.TouchHoveringSettingsPreferenceController" />
     </PreferenceCategory>
 
     <SwitchPreference

@@ -181,6 +181,19 @@
             android:title="@string/tap_to_wake"
             android:summary="@string/tap_to_wake_summary"/>
 
+        <com.axiom.settings.preference.SystemSettingSwitchPreference
+            android:key="proximity_on_wake"
+            android:title="@string/proximity_wake_title"
+            android:summary="@string/proximity_wake_summary"
+            android:defaultValue="@*android:bool/config_proximityCheckOnWakeEnabledByDefault" />
+
+        <SwitchPreference
+            android:key="high_touch_sensitivity_enable"
+            android:title="@string/high_touch_sensitivity_title"
+            android:summary="@string/high_touch_sensitivity_summary"
+            android:defaultValue="false"
+            settings:controller="com.android.settings.custom.touch.HighTouchSensitivitySettingsPreferenceController" />
+
         <ListPreference
             android:key="theme"
             android:title="@string/device_theme"
