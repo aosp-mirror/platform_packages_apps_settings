@@ -21,9 +21,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.VisibleForTesting;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.StringUtil;
 import java.util.List;
 
@@ -76,6 +78,18 @@ public class HighUsageTip extends BatteryTip {
     @Override
     public void updateState(BatteryTip tip) {
         mState = tip.mState;
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP,
+                mState);
+        for (int i = 0, size = mHighUsageAppList.size(); i < size; i++) {
+            final AppInfo appInfo = mHighUsageAppList.get(i);
+            metricsFeatureProvider.action(context,
+                    MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP_LIST,
+                    appInfo.packageName);
+        }
     }
 
     public long getScreenTimeMs() {

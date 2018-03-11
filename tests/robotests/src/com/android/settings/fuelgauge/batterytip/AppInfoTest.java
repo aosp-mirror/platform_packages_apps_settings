@@ -36,7 +36,8 @@ import java.util.List;
 public class AppInfoTest {
 
     private static final String PACKAGE_NAME = "com.android.app";
-    private static final int ANOMALY_TYPE = Anomaly.AnomalyType.WAKE_LOCK;
+    private static final int TYPE_WAKELOCK = Anomaly.AnomalyType.WAKE_LOCK;
+    private static final int TYPE_WAKEUP = Anomaly.AnomalyType.WAKEUP_ALARM;
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
     private static final int UID = 3452;
 
@@ -46,7 +47,8 @@ public class AppInfoTest {
     public void setUp() {
         mAppInfo = new AppInfo.Builder()
                 .setPackageName(PACKAGE_NAME)
-                .setAnomalyType(ANOMALY_TYPE)
+                .addAnomalyType(TYPE_WAKELOCK)
+                .addAnomalyType(TYPE_WAKEUP)
                 .setScreenOnTimeMs(SCREEN_TIME_MS)
                 .setUid(UID)
                 .build();
@@ -61,7 +63,7 @@ public class AppInfoTest {
         final AppInfo appInfo = new AppInfo(parcel);
 
         assertThat(appInfo.packageName).isEqualTo(PACKAGE_NAME);
-        assertThat(appInfo.anomalyType).isEqualTo(ANOMALY_TYPE);
+        assertThat(appInfo.anomalyTypes).containsExactly(TYPE_WAKELOCK, TYPE_WAKEUP);
         assertThat(appInfo.screenOnTimeMs).isEqualTo(SCREEN_TIME_MS);
         assertThat(appInfo.uid).isEqualTo(UID);
     }
@@ -70,7 +72,7 @@ public class AppInfoTest {
     public void testCompareTo_hasCorrectOrder() {
         final AppInfo appInfo = new AppInfo.Builder()
                 .setPackageName(PACKAGE_NAME)
-                .setAnomalyType(ANOMALY_TYPE)
+                .addAnomalyType(TYPE_WAKELOCK)
                 .setScreenOnTimeMs(SCREEN_TIME_MS + 100)
                 .build();
 
@@ -85,7 +87,7 @@ public class AppInfoTest {
     @Test
     public void testBuilder() {
         assertThat(mAppInfo.packageName).isEqualTo(PACKAGE_NAME);
-        assertThat(mAppInfo.anomalyType).isEqualTo(ANOMALY_TYPE);
+        assertThat(mAppInfo.anomalyTypes).containsExactly(TYPE_WAKELOCK, TYPE_WAKEUP);
         assertThat(mAppInfo.screenOnTimeMs).isEqualTo(SCREEN_TIME_MS);
         assertThat(mAppInfo.uid).isEqualTo(UID);
     }

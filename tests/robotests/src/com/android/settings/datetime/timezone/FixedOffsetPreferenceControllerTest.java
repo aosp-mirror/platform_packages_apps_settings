@@ -40,10 +40,9 @@ public class FixedOffsetPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_matchTimeZoneSummary() {
+    public void updateState_GmtMinus8_matchTimeZoneSummary() {
         TimeZoneInfo fixedOffsetZone = new TimeZoneInfo.Builder(
                     TimeZone.getFrozenTimeZone("Etc/GMT-8"))
-                    .setExemplarLocation("Los Angeles")
                     .setGmtOffset("GMT-08:00")
                     .setItemId(0)
                     .build();
@@ -52,6 +51,21 @@ public class FixedOffsetPreferenceControllerTest {
         controller.setTimeZoneInfo(fixedOffsetZone);
         controller.updateState(preference);
         assertThat(preference.getSummary()).isEqualTo("GMT-08:00");
+    }
 
+    @Test
+    public void updateState_Utc_matchTimeZoneSummary() {
+        TimeZoneInfo fixedOffsetZone = new TimeZoneInfo.Builder(
+                    TimeZone.getFrozenTimeZone("Etc/UTC"))
+                    .setStandardName("Coordinated Universal Time")
+                    .setGmtOffset("GMT+00:00")
+                    .setItemId(0)
+                    .build();
+        Preference preference = new Preference(mActivity);
+        FixedOffsetPreferenceController controller = new FixedOffsetPreferenceController(mActivity);
+        controller.setTimeZoneInfo(fixedOffsetZone);
+        controller.updateState(preference);
+        assertThat(preference.getSummary().toString())
+                .isEqualTo("Coordinated Universal Time (GMT+00:00)");
     }
 }

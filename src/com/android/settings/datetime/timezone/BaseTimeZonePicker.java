@@ -146,12 +146,6 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
         return false;
     }
 
-    @Override
-    public int getMetricsCategory() {
-        // TODO: use a new metrics id?
-        return MetricsEvent.ZONE_PICKER;
-    }
-
     public interface OnListItemClickListener {
         void onListItemClick(int position);
     }

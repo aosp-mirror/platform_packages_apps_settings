@@ -16,8 +16,6 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
-import android.app.Fragment;
-
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;

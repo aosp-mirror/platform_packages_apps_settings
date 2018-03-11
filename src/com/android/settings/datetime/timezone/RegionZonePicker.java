@@ -22,6 +22,7 @@ import android.icu.util.TimeZone;
 import android.support.annotation.VisibleForTesting;
 import android.util.Log;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.datetime.timezone.model.FilteredCountryTimeZones;
 import com.android.settings.datetime.timezone.model.TimeZoneData;
@@ -44,6 +45,11 @@ public class RegionZonePicker extends BaseTimeZoneInfoPicker {
 
     public RegionZonePicker() {
         super(R.string.date_time_select_zone, R.string.search_settings, true, false);
+    }
+
+    @Override
+    public int getMetricsCategory() {
+        return MetricsProto.MetricsEvent.SETTINGS_ZONE_PICKER_TIME_ZONE;
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 
 package com.android.settings.notification;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
 
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -37,22 +37,17 @@ import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class ZenModeScreenOnPreferenceControllerTest {
+public final class ZenModeBlockedEffectsPreferenceControllerTest {
 
-    private static final boolean MOCK_PRIORITY_SCREEN_ON_SETTING = false;
-
-    private ZenModeScreenOnPreferenceController mController;
-
-    @Mock
-    private ZenModeBackend mBackend;
+    private ZenModeBlockedEffectsPreferenceController mController;
     @Mock
     private NotificationManager mNotificationManager;
-    @Mock
-    private SwitchPreference mockPref;
     @Mock
     private NotificationManager.Policy mPolicy;
 
     private Context mContext;
+    @Mock
+    private ZenModeBackend mBackend;
 
     @Before
     public void setup() {
@@ -63,35 +58,18 @@ public class ZenModeScreenOnPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
 
-        mController = new ZenModeScreenOnPreferenceController(mContext, mock(Lifecycle.class));
+        mController = new ZenModeBlockedEffectsPreferenceController(
+                mContext, mock(Lifecycle.class));
         ReflectionHelpers.setField(mController, "mBackend", mBackend);
     }
 
     @Test
-    public void updateState() {
-        final SwitchPreference mockPref = mock(SwitchPreference.class);
-        when(mBackend.isEffectAllowed(NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON))
-                .thenReturn(MOCK_PRIORITY_SCREEN_ON_SETTING);
-        mController.updateState(mockPref);
-
-        verify(mockPref).setChecked(MOCK_PRIORITY_SCREEN_ON_SETTING);
+    public void testIsAvailable() {
+        assertTrue(mController.isAvailable());
     }
 
     @Test
-    public void onPreferenceChanged_EnableScreenOn() {
-        boolean allow = true;
-        mController.onPreferenceChange(mockPref, allow);
-
-        verify(mBackend)
-            .saveVisualEffectsPolicy(NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
-    }
-
-    @Test
-    public void onPreferenceChanged_DisableScreenOn() {
-        boolean allow = false;
-        mController.onPreferenceChange(mockPref, allow);
-
-        verify(mBackend)
-            .saveVisualEffectsPolicy(NotificationManager.Policy.SUPPRESSED_EFFECT_SCREEN_ON, allow);
+    public void testHasSummary() {
+        assertNotNull(mController.getSummary());
     }
 }

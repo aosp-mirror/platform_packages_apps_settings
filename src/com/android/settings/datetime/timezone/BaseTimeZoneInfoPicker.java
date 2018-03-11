@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Render a list of {@class TimeZoneInfo} into the list view in {@class BaseTimeZonePicker}
@@ -135,8 +136,11 @@ public abstract class BaseTimeZoneInfoPicker extends BaseTimeZonePicker {
                     name = mTimeZoneInfo.getStandardName();
                 }
             }
-            if (name == null) {
-                return mTimeZoneInfo.getGmtOffset();
+
+            // Ignore name / GMT offset if the title shows the same information
+            if (name == null || name.equals(mTitle)) {
+                CharSequence gmtOffset = mTimeZoneInfo.getGmtOffset();
+                return gmtOffset == null || gmtOffset.toString().equals(mTitle) ? "" : gmtOffset;
             } else {
                 return SpannableUtil.getResourcesText(mResources,
                         R.string.zone_info_offset_and_name, mTimeZoneInfo.getGmtOffset(), name);
