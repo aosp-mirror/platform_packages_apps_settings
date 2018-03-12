@@ -123,4 +123,12 @@ public class DeviceNamePreferenceControllerTest {
         verify(mWifiManager).setWifiApConfiguration(captor.capture());
         assertThat(captor.getValue().SSID).isEqualTo(TESTING_STRING);
     }
+
+    @Test
+    public void displayPreference_defaultDeviceNameIsModelNameOnPreference() {
+        mController.displayPreference(mScreen);
+
+        assertThat(mPreference.getText()).isEqualTo(Build.MODEL);
+    }
+
 }
