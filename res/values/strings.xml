@@ -8693,6 +8693,15 @@
     <!-- Title of button for application usage cycle preferences [CHAR LIMIT=40] -->
     <string name="app_usage_cycle">App data usage cycle</string>
 
+    <!-- Format for a summary describing the amount of data before the user is warned [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning</string>
+
+    <!-- Format for a summary describing the amount of data the limit is set to [CHAR LIMIT=NONE] -->
+    <string name="cell_data_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data limit</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned or limited [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning_and_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning / <xliff:g name="amount" example="2 GB">^2</xliff:g> data limit</string>
+
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
     <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
 
