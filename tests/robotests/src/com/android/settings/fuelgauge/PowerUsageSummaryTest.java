@@ -352,6 +352,14 @@ public class PowerUsageSummaryTest {
                 R.string.advanced_battery_title);
     }
 
+    @Test
+    public void testRefreshUi_deviceRotate_doNotUpdateBatteryTip() {
+        mFragment.mNeedUpdateBatteryTip = false;
+        mFragment.refreshUi();
+
+        verify(mFragment, never()).restartBatteryTipLoader();
+    }
+
     public static class TestFragment extends PowerUsageSummary {
         private Context mContext;
 
@@ -362,12 +370,6 @@ public class PowerUsageSummaryTest {
         @Override
         public Context getContext() {
             return mContext;
-        }
-
-
-        @Override
-        protected void refreshUi() {
-            // Leave it empty for toggle apps menu test
         }
 
         @Override
