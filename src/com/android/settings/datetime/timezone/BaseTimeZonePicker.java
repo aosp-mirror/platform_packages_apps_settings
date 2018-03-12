@@ -25,7 +25,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -130,6 +132,19 @@ public abstract class BaseTimeZonePicker extends InstrumentedFragment
                 mSearchView.setActivated(true);
                 mSearchView.setQuery("", true /* submit */);
             }
+
+            // Set zero margin and padding to align with the text horizontally in the preference
+            final TextView searchViewView = (TextView) mSearchView.findViewById(
+                    com.android.internal.R.id.search_src_text);
+            searchViewView.setPadding(0, searchViewView.getPaddingTop(), 0,
+                    searchViewView.getPaddingBottom());
+            final View editFrame = mSearchView.findViewById(
+                    com.android.internal.R.id.search_edit_frame);
+            final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) editFrame
+                    .getLayoutParams();
+            params.setMarginStart(0);
+            params.setMarginEnd(0);
+            editFrame.setLayoutParams(params);
         }
     }
 
