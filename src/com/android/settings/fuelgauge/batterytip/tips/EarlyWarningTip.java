@@ -19,7 +19,9 @@ package com.android.settings.fuelgauge.batterytip.tips;
 import android.content.Context;
 import android.os.Parcel;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Tip to show early warning if battery couldn't make to usual charging time
@@ -73,6 +75,12 @@ public class EarlyWarningTip extends BatteryTip {
             mState = earlyWarningTip.getState();
         }
         mPowerSaveModeOn = earlyWarningTip.mPowerSaveModeOn;
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_EARLY_WARNING_TIP,
+                mState);
     }
 
     @Override

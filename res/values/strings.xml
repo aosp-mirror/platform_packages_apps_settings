@@ -1676,10 +1676,10 @@
     <string name="bluetooth_max_connected_audio_devices_string">Maximum connected Bluetooth audio devices</string>
     <!-- Bluetooth developer settings: Maximum number of connected audio devices -->
     <string name="bluetooth_max_connected_audio_devices_dialog_title">Select maximum number of connected Bluetooth audio devices</string>
-    <!-- Bluetooth developer settings: Checkbox title for enabling Bluetooth receiving AVDTP delay reports -->
-    <string name="bluetooth_enable_avdtp_delay_reports">Enable Bluetooth AVDTP delay reports</string>
-    <!-- Bluetooth developer settings: Summary of checkbox for enabling Bluetooth receiving AVDTP delay reports -->
-    <string name="bluetooth_enable_avdtp_delay_reports_summary">Allow receiving Bluetooth AVDTP delay reports</string>
+    <!-- Bluetooth developer settings: Checkbox title for disabling Bluetooth receiving AVDTP delay reports -->
+    <string name="bluetooth_disable_avdtp_delay_reports">Disable Bluetooth AVDTP delay reports</string>
+    <!-- Bluetooth developer settings: Summary of checkbox for disabling Bluetooth receiving AVDTP delay reports -->
+    <string name="bluetooth_disable_avdtp_delay_reports_summary">Disallow receiving Bluetooth AVDTP delay reports</string>
 
     <!-- Wifi Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="wifi_display_settings_title">Cast</string>
@@ -4177,10 +4177,6 @@
     <string name="keyboard_shortcuts_helper">Keyboard shortcuts helper</string>
     <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
     <string name="keyboard_shortcuts_helper_summary">Display available shortcuts</string>
-    <!--
-        Format string for a physical device in the form: InputMethodSubtype - InputMethodEditor.
-        e.g. English (US) - X Keyboard -->
-    <string name="physical_device_title" translatable="false"><xliff:g id="input_method_editor" example="X Keyboard">%1$s</xliff:g> - <xliff:g id="input_method_subtype" example="English (US)">%2$s</xliff:g></string>
 
     <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
     <string name="default_keyboard_layout">Default</string>
@@ -6918,8 +6914,8 @@
     <!-- Do not disturb: Title for the Do not Disturb dialog to turn on Do not disturb. [CHAR LIMIT=50]-->
     <string name="zen_mode_settings_turn_on_dialog_title">Turn on Do Not Disturb</string>
 
-    <!-- Do not disturb: Title for the behaviors option and associated settings page. [CHAR LIMIT=30] -->
-    <string name="zen_mode_behavior_settings_title">Behavior</string>
+    <!-- Do not disturb: Title for the page describing what can bypass DND. [CHAR LIMIT=30] -->
+    <string name="zen_mode_behavior_settings_title">Exceptions</string>
 
     <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
     <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
@@ -6971,6 +6967,34 @@
 
     <!--  Do not disturb: Subtitle for the Visual signals option to toggle on/off visual signals/alerts when the screen is on/when screen is off. [CHAR LIMIT=30] -->
     <string name="zen_mode_visual_signals_settings_subtitle">Allow visual signals</string>
+
+    <!-- Do not disturb: what to block title [CHAR LIMIT = 60] -->
+    <string name="zen_mode_what_to_block_title">What to block</string>
+    <!-- Do not disturb: what to block > effects title [CHAR LIMIT = 60] -->
+    <string name="zen_mode_block_effects_title">When notifications arrive</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_sound">Mute sound and vibration</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_intent">Don\'t turn on screen</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_light">Don\'t blink light</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_peek">Don\'t pop notifications on screen</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_status">Hide status bar icons</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_badge">Hide notification dots</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_ambient">Hide from ambient display</string>
+    <!-- Do not disturb: what to block option [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_block_effect_list">Hide from notification list</string>
+
+    <!-- Do not disturb: what to block summary, only sound and vibration -->
+    <string name="zen_mode_block_effect_summary_sound">Sound and vibration</string>
+    <!-- Do not disturb: what to block summary, sound vibration and some visual signals-->
+    <string name="zen_mode_block_effect_summary_some">Sound, vibration, and some visual signs of notifications</string>
+    <!-- Do not disturb: what to block summary, all effects -->
+    <string name="zen_mode_block_effect_summary_all">Sound, vibration, and visual signs of notifications</string>
 
     <!--  Do not disturb: Button to add new automatic rule to DND. [CHAR LIMIT=30] -->
     <string name="zen_mode_add">Add</string>

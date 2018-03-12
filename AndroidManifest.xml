@@ -739,6 +739,19 @@
         </activity>
 
         <activity
+            android:name="Settings$ZenModeBlockedEffectsSettingsActivity"
+            android:label="@string/zen_mode_what_to_block_title"
+            android:icon="@drawable/ic_settings_notifications"
+            android:exported="true"
+            android:taskAffinity="com.android.settings"
+            android:parentActivityName="Settings">
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.notification.ZenModeBlockedEffectsSetting" />
+            <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
+                       android:value="true" />
+        </activity>
+
+        <activity
             android:name="Settings$ZenModeBehaviorSettingsActivity"
             android:label="@string/zen_mode_behavior_settings_title"
             android:icon="@drawable/ic_settings_notifications"
@@ -3229,7 +3242,7 @@
         </activity>
 
         <provider android:name=".slices.SettingsSliceProvider"
-                  android:authorities="com.android.settings.slices"
+                  android:authorities="com.android.settings.slices;android.settings.slices"
                   android:exported="true">
         </provider>
 

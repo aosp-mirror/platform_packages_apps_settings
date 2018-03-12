@@ -96,8 +96,12 @@
 
     <!-- For Search -->
     <declare-styleable name="Preference">
+        <!-- Synonyms for search results -->
         <attr name="keywords" format="string" />
+        <!-- Classname of a PreferenceController corresponding to the preference -->
         <attr name="controller" format="string" />
+        <!-- {@code true} when the controller declared represents a slice from {@link android.app.SettingsSliceContract} -->
+        <attr name="platform_slice" format="boolean" />
     </declare-styleable>
 
     <!-- For DotsPageIndicator -->

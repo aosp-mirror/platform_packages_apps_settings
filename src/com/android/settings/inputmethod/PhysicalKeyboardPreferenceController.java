@@ -94,7 +94,7 @@ public class PhysicalKeyboardPreferenceController extends AbstractPreferenceCont
             return;
         }
         final List<HardKeyboardDeviceInfo> keyboards =
-                PhysicalKeyboardFragment.getHardKeyboards();
+                PhysicalKeyboardFragment.getHardKeyboards(mContext);
         if (keyboards.isEmpty()) {
             mPreference.setSummary(R.string.disconnected);
             return;

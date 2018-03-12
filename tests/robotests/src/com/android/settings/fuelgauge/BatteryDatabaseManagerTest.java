@@ -40,7 +40,6 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 public class BatteryDatabaseManagerTest {
-
     private static String PACKAGE_NAME_NEW = "com.android.app1";
     private static int UID_NEW = 345;
     private static int TYPE_NEW = 1;
@@ -53,6 +52,9 @@ public class BatteryDatabaseManagerTest {
 
     private Context mContext;
     private BatteryDatabaseManager mBatteryDatabaseManager;
+    private AppInfo mNewAppInfo;
+    private AppInfo mOldAppInfo;
+    private AppInfo mCombinedAppInfo;
 
     @Before
     public void setUp() {
@@ -60,6 +62,23 @@ public class BatteryDatabaseManagerTest {
 
         mContext = RuntimeEnvironment.application;
         mBatteryDatabaseManager = spy(BatteryDatabaseManager.getInstance(mContext));
+
+        mNewAppInfo = new AppInfo.Builder()
+                .setUid(UID_NEW)
+                .setPackageName(PACKAGE_NAME_NEW)
+                .addAnomalyType(TYPE_NEW)
+                .build();
+        mOldAppInfo = new AppInfo.Builder()
+                .setUid(UID_OLD)
+                .setPackageName(PACKAGE_NAME_OLD)
+                .addAnomalyType(TYPE_OLD)
+                .build();
+        mCombinedAppInfo = new AppInfo.Builder()
+                .setUid(UID_NEW)
+                .setPackageName(PACKAGE_NAME_NEW)
+                .addAnomalyType(TYPE_NEW)
+                .addAnomalyType(TYPE_OLD)
+                .build();
     }
 
     @After
@@ -77,23 +96,19 @@ public class BatteryDatabaseManagerTest {
         // In database, it contains two record
         List<AppInfo> totalAppInfos = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
                 AnomalyDatabaseHelper.State.NEW);
-        assertThat(totalAppInfos).hasSize(2);
-        assertAppInfo(totalAppInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
-        assertAppInfo(totalAppInfos.get(1), UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD);
+        assertThat(totalAppInfos).containsExactly(mNewAppInfo, mOldAppInfo);
 
         // Only one record shows up if we query by timestamp
         List<AppInfo> appInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.NEW);
-        assertThat(appInfos).hasSize(1);
-        assertAppInfo(appInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
+        assertThat(appInfos).containsExactly(mNewAppInfo);
 
         mBatteryDatabaseManager.deleteAllAnomaliesBeforeTimeStamp(ONE_DAY_BEFORE);
 
         // The obsolete record is removed from database
         List<AppInfo> appInfos1 = mBatteryDatabaseManager.queryAllAnomalies(0 /* timeMsAfter */,
                 AnomalyDatabaseHelper.State.NEW);
-        assertThat(appInfos1).hasSize(1);
-        assertAppInfo(appInfos1.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
+        assertThat(appInfos1).containsExactly(mNewAppInfo);
     }
 
     @Test
@@ -113,19 +128,24 @@ public class BatteryDatabaseManagerTest {
         // The state of PACKAGE_NAME_NEW is still new
         List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.NEW);
-        assertThat(newAppInfos).hasSize(1);
-        assertAppInfo(newAppInfos.get(0), UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW);
+        assertThat(newAppInfos).containsExactly(mNewAppInfo);
 
         // The state of PACKAGE_NAME_OLD is changed to handled
         List<AppInfo> handledAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
                 AnomalyDatabaseHelper.State.HANDLED);
-        assertThat(handledAppInfos).hasSize(1);
-        assertAppInfo(handledAppInfos.get(0), UID_OLD, PACKAGE_NAME_OLD, TYPE_OLD);
+        assertThat(handledAppInfos).containsExactly(mOldAppInfo);
     }
 
-    private void assertAppInfo(final AppInfo appInfo, int uid, String packageName, int type) {
-        assertThat(appInfo.packageName).isEqualTo(packageName);
-        assertThat(appInfo.anomalyType).isEqualTo(type);
-        assertThat(appInfo.uid).isEqualTo(uid);
+    @Test
+    public void testQueryAnomalies_removeDuplicateByUid() {
+        mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_NEW,
+                AnomalyDatabaseHelper.State.NEW, NOW);
+        mBatteryDatabaseManager.insertAnomaly(UID_NEW, PACKAGE_NAME_NEW, TYPE_OLD,
+                AnomalyDatabaseHelper.State.NEW, NOW);
+
+        // Only contain one AppInfo with multiple types
+        List<AppInfo> newAppInfos = mBatteryDatabaseManager.queryAllAnomalies(ONE_DAY_BEFORE,
+                AnomalyDatabaseHelper.State.NEW);
+        assertThat(newAppInfos).containsExactly(mCombinedAppInfo);
     }
 }

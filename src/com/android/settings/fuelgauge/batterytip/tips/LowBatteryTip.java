@@ -20,7 +20,9 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Tip to show current battery life is short
@@ -53,6 +55,12 @@ public class LowBatteryTip extends BatteryTip {
     @Override
     public void updateState(BatteryTip tip) {
         mState = tip.mState;
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_LOW_BATTERY_TIP,
+                mState);
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

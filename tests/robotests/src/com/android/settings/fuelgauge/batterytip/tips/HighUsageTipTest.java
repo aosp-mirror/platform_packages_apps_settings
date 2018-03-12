@@ -17,16 +17,22 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.verify;
+
 import android.content.Context;
 import android.os.Parcel;
 import android.text.format.DateUtils;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
 import java.util.ArrayList;
@@ -38,14 +44,17 @@ public class HighUsageTipTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final long SCREEN_TIME = 30 * DateUtils.MINUTE_IN_MILLIS;
 
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
     private Context mContext;
     private HighUsageTip mBatteryTip;
     private List<AppInfo> mUsageAppList;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        MockitoAnnotations.initMocks(this);
 
+        mContext = RuntimeEnvironment.application;
         mUsageAppList = new ArrayList<>();
         mUsageAppList.add(new AppInfo.Builder()
                 .setPackageName(PACKAGE_NAME)
@@ -77,6 +86,18 @@ public class HighUsageTipTest {
     @Test
     public void toString_containsAppData() {
         assertThat(mBatteryTip.toString()).isEqualTo(
-                "type=2 state=0 { packageName=com.android.app,anomalyType=0,screenTime=1800000 }");
+                "type=2 state=0 { packageName=com.android.app,anomalyTypes={},screenTime=1800000 "
+                        + "}");
+    }
+
+    @Test
+    public void testLog_logAppInfo() {
+        mBatteryTip.log(mContext, mMetricsFeatureProvider);
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP, BatteryTip.StateType.NEW);
+
+        verify(mMetricsFeatureProvider).action(mContext,
+                MetricsProto.MetricsEvent.ACTION_HIGH_USAGE_TIP_LIST,
+                PACKAGE_NAME);
     }
 }

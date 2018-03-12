@@ -88,6 +88,10 @@ public class ZenModeBackend {
         return mZenMode;
     }
 
+    protected boolean isVisualEffectSuppressed(int visualEffect) {
+        return (mPolicy.suppressedVisualEffects & visualEffect) != 0;
+    }
+
     protected boolean isPriorityCategoryEnabled(int categoryType) {
         return (mPolicy.priorityCategories & categoryType) != 0;
     }
@@ -117,8 +121,8 @@ public class ZenModeBackend {
         return SOURCE_NONE;
     }
 
-    protected void saveVisualEffectsPolicy(int category, boolean canBypass) {
-        int suppressedEffects = getNewSuppressedEffects(!canBypass, category);
+    protected void saveVisualEffectsPolicy(int category, boolean suppress) {
+        int suppressedEffects = getNewSuppressedEffects(suppress, category);
         savePolicy(mPolicy.priorityCategories, mPolicy.priorityCallSenders,
                 mPolicy.priorityMessageSenders, suppressedEffects);
     }

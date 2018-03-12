@@ -37,6 +37,7 @@ public class SliceDataTest {
     private final Uri URI = Uri.parse("content://com.android.settings.slices/test");
     private final String PREF_CONTROLLER = "com.android.settings.slices.tester";
     private final int SLICE_TYPE = SliceData.SliceType.SWITCH;
+    private final boolean IS_PLATFORM_DEFINED = true;
 
     @Test
     public void testBuilder_buildsMatchingObject() {
@@ -49,7 +50,8 @@ public class SliceDataTest {
                 .setFragmentName(FRAGMENT_NAME)
                 .setUri(URI)
                 .setPreferenceControllerClassName(PREF_CONTROLLER)
-                .setSliceType(SLICE_TYPE);
+                .setSliceType(SLICE_TYPE)
+                .setPlatformDefined(IS_PLATFORM_DEFINED);
 
         SliceData data = builder.build();
 
@@ -62,6 +64,7 @@ public class SliceDataTest {
         assertThat(data.getUri()).isEqualTo(URI);
         assertThat(data.getPreferenceController()).isEqualTo(PREF_CONTROLLER);
         assertThat(data.getSliceType()).isEqualTo(SLICE_TYPE);
+        assertThat(data.isPlatformDefined()).isEqualTo(IS_PLATFORM_DEFINED);
     }
 
     @Test(expected = IllegalStateException.class)

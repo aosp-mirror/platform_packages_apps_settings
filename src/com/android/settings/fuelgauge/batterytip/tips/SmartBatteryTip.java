@@ -20,7 +20,9 @@ import android.content.Context;
 import android.os.Parcel;
 import android.provider.Settings;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
  * Tip to suggest turn on smart battery if it is not on
@@ -53,6 +55,12 @@ public class SmartBatteryTip extends BatteryTip {
     @Override
     public void updateState(BatteryTip tip) {
         mState = tip.mState;
+    }
+
+    @Override
+    public void log(Context context, MetricsFeatureProvider metricsFeatureProvider) {
+        metricsFeatureProvider.action(context, MetricsProto.MetricsEvent.ACTION_SMART_BATTERY_TIP,
+                mState);
     }
 
     public static final Creator CREATOR = new Creator() {

@@ -49,8 +49,6 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
         controllers.add(new ZenModeRepeatCallersPreferenceController(context, lifecycle,
                 context.getResources().getInteger(com.android.internal.R.integer
                 .config_zen_repeat_callers_threshold)));
-        controllers.add(new ZenModeScreenOnPreferenceController(context, lifecycle));
-        controllers.add(new ZenModeScreenOffPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBehaviorFooterPreferenceController(context, lifecycle));
         return controllers;
     }
@@ -85,15 +83,6 @@ public class ZenModeBehaviorSettings extends ZenModeSettingsBase implements Inde
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     final List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(ZenModeAlarmsPreferenceController.KEY);
-                    keys.add(ZenModeMediaPreferenceController.KEY);
-                    keys.add(ZenModeEventsPreferenceController.KEY);
-                    keys.add(ZenModeRemindersPreferenceController.KEY);
-                    keys.add(ZenModeMessagesPreferenceController.KEY);
-                    keys.add(ZenModeCallsPreferenceController.KEY);
-                    keys.add(ZenModeRepeatCallersPreferenceController.KEY);
-                    keys.add(ZenModeScreenOnPreferenceController.KEY);
-                    keys.add(ZenModeScreenOffPreferenceController.KEY);
                     return keys;
                 }
 
