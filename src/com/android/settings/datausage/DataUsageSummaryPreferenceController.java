@@ -219,7 +219,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
                     mCycleStart = rule.start.toEpochSecond() * 1000L;
                     mCycleEnd = rule.end.toEpochSecond() * 1000L;
                 }
-                mSnapshotTime = System.currentTimeMillis() - primaryPlan.getDataUsageTime();
+                mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
         mManageSubscriptionIntent =

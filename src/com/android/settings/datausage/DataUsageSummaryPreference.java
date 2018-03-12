@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
+import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
@@ -39,6 +40,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class DataUsageSummaryPreference extends Preference {
     private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
+    private static final long WARNING_AGE = TimeUnit.HOURS.toMillis(6L);
 
     private boolean mChartEnabled = true;
     private String mStartLabel;
@@ -48,6 +50,8 @@ public class DataUsageSummaryPreference extends Preference {
     private static final float LARGER_FONT_RATIO = 2.25f;
     private static final float SMALLER_FONT_RATIO = 1.0f;
 
+    private boolean mDefaultTextColorSet;
+    private int mDefaultTextColor;
     private int mNumPlans;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
@@ -140,8 +144,8 @@ public class DataUsageSummaryPreference extends Preference {
 
         updateCycleTimeText(holder);
 
-        TextView carrierInfo = (TextView) holder.findViewById(R.id.carrier_and_update);
-        setCarrierInfo(carrierInfo, mCarrierName, mSnapshotTimeMs);
+
+        updateCarrierInfo((TextView) holder.findViewById(R.id.carrier_and_update));
 
         Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
         launchButton.setOnClickListener((view) -> {
@@ -158,6 +162,7 @@ public class DataUsageSummaryPreference extends Preference {
                 mLimitInfoText == null || mLimitInfoText.isEmpty() ? View.GONE : View.VISIBLE);
         limitInfo.setText(mLimitInfoText);
     }
+
 
     private void updateDataUsageLabels(PreferenceViewHolder holder) {
         TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
@@ -194,18 +199,25 @@ public class DataUsageSummaryPreference extends Preference {
                         R.plurals.billing_cycle_days_left, (int) daysLeft, (int) daysLeft));
     }
 
-    private void setCarrierInfo(TextView carrierInfo, CharSequence carrierName, long updateAge) {
-        if (mNumPlans > 0 && updateAge >= 0L) {
+
+    private void updateCarrierInfo(TextView carrierInfo) {
+        if (mNumPlans > 0 && mSnapshotTimeMs >= 0L) {
+            long updateAge = System.currentTimeMillis() - mSnapshotTimeMs;
             carrierInfo.setVisibility(View.VISIBLE);
-            if (carrierName != null) {
+            if (mCarrierName != null) {
                 carrierInfo.setText(getContext().getString(R.string.carrier_and_update_text,
-                        carrierName, StringUtil.formatRelativeTime(
+                        mCarrierName, StringUtil.formatRelativeTime(
                                 getContext(), updateAge, false /* withSeconds */)));
             } else {
                 carrierInfo.setText(getContext().getString(R.string.no_carrier_update_text,
                         StringUtil.formatRelativeTime(
                                 getContext(), updateAge, false /* withSeconds */)));
             }
+
+            carrierInfo.setTextColor(
+                    updateAge <= WARNING_AGE
+                    ? Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary)
+                    : Utils.getColorAttr(getContext(), android.R.attr.colorError));
         } else {
             carrierInfo.setVisibility(View.GONE);
         }

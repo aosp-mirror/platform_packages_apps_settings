@@ -16,8 +16,6 @@
 
 package com.android.settings.datausage;
 
-import static com.google.common.truth.Truth.assertThat;
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -31,6 +29,7 @@ import android.widget.TextView;
 import com.android.settings.R;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
+import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 import java.util.concurrent.TimeUnit;
 
@@ -40,6 +39,10 @@ import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
+
+import java.util.concurrent.TimeUnit;
+
+import static com.google.common.truth.Truth.assertThat;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResourcesImpl.class)
@@ -120,6 +123,31 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
+    public void testSetUsageInfo_withRecentCarrierUpdate_doesNotSetCarrierInfoWarningColor() {
+        final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(1);
+        mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
+                Utils.getColorAttr(mContext, android.R.attr.textColorPrimary));
+    }
+
+    @Test
+    public void testSetUsageInfo_withStaleCarrierUpdate_setsCarrierInfoWarningColor() {
+        final long updateTime = System.currentTimeMillis() - TimeUnit.HOURS.toMillis(7);
+        mSummaryPreference.setUsageInfo(mCycleEnd, updateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+
+        bindViewHolder();
+        assertThat(mCarrierInfo.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mCarrierInfo.getCurrentTextColor()).isEqualTo(
+                Utils.getColorAttr(mContext, android.R.attr.colorError));
+    }
+
+    @Test
     public void testSetUsageInfo_withNoDataPlans_usageTitleNotShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
@@ -140,7 +168,7 @@ public class DataUsageSummaryPreferenceTest {
     @Test
     public void testSetUsageInfo_cycleRemainingTimeIsLessOneDay() {
         // just under one day
-        final long cycleEnd = System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1) - 1;
+        final long cycleEnd = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(23);
         mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
 
