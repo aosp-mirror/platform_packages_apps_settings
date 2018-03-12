@@ -65,6 +65,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle,
+                fragmentManager));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
@@ -250,6 +252,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(ZenModeDurationPreferenceController.KEY);
                     keys.add(ZenModeButtonPreferenceController.KEY);
                     return keys;
                 }

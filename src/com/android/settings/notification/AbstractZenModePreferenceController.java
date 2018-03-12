@@ -112,10 +112,17 @@ abstract public class AbstractZenModePreferenceController extends
                 mBackend.mZenMode);
     }
 
+    protected int getZenDuration() {
+        return Settings.Global.getInt(mContext.getContentResolver(), Settings.Global.ZEN_DURATION,
+                0);
+    }
+
     class SettingObserver extends ContentObserver {
         private final Uri ZEN_MODE_URI = Settings.Global.getUriFor(Settings.Global.ZEN_MODE);
         private final Uri ZEN_MODE_CONFIG_ETAG_URI = Settings.Global.getUriFor(
                 Settings.Global.ZEN_MODE_CONFIG_ETAG);
+        private final Uri ZEN_MODE_DURATION_URI = Settings.Global.getUriFor(
+                Settings.Global.ZEN_DURATION);
 
         private final Preference mPreference;
 
@@ -127,6 +134,7 @@ abstract public class AbstractZenModePreferenceController extends
         public void register(ContentResolver cr) {
             cr.registerContentObserver(ZEN_MODE_URI, false, this, UserHandle.USER_ALL);
             cr.registerContentObserver(ZEN_MODE_CONFIG_ETAG_URI, false, this, UserHandle.USER_ALL);
+            cr.registerContentObserver(ZEN_MODE_DURATION_URI, false, this, UserHandle.USER_ALL);
         }
 
         public void unregister(ContentResolver cr) {
@@ -136,11 +144,8 @@ abstract public class AbstractZenModePreferenceController extends
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
-            if (ZEN_MODE_URI.equals(uri)) {
-                updateState(mPreference);
-            }
-
-            if (ZEN_MODE_CONFIG_ETAG_URI.equals(uri)) {
+            if (ZEN_MODE_URI.equals(uri) || ZEN_MODE_CONFIG_ETAG_URI.equals(uri)
+                    || ZEN_MODE_DURATION_URI.equals(uri)) {
                 updateState(mPreference);
             }
         }
