@@ -26,7 +26,8 @@
       android:icon="@drawable/ic_settings_bluetooth"
       android:summary="@string/bluetooth_pref_summary"
       android:order="-7"
-      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"/>
+      settings:controller="com.android.settings.bluetooth.BluetoothSwitchPreferenceController"
+      settings:platform_slice="true"/>
 
     <SwitchPreference
         android:key="toggle_nfc"
