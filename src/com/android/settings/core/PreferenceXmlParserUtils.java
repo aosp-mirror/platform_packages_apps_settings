@@ -76,6 +76,7 @@ public class PreferenceXmlParserUtils {
         int FLAG_NEED_PREF_TITLE = 1 << 4;
         int FLAG_NEED_PREF_SUMMARY = 1 << 5;
         int FLAG_NEED_PREF_ICON = 1 << 6;
+        int FLAG_NEED_PLATFORM_SLICE_FLAG = 1 << 7;
     }
 
     public static final String METADATA_PREF_TYPE = "type";
@@ -84,35 +85,48 @@ public class PreferenceXmlParserUtils {
     public static final String METADATA_TITLE = "title";
     public static final String METADATA_SUMMARY = "summary";
     public static final String METADATA_ICON = "icon";
+    public static final String METADATA_PLATFORM_SLICE_FLAG = "platform_slice";
 
     private static final String ENTRIES_SEPARATOR = "|";
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_KEY} instead.
+     */
+    @Deprecated
     public static String getDataKey(Context context, AttributeSet attrs) {
-        return getData(context, attrs,
+        return getStringData(context, attrs,
                 com.android.internal.R.styleable.Preference,
                 com.android.internal.R.styleable.Preference_key);
     }
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_TITLE} instead.
+     */
+    @Deprecated
     public static String getDataTitle(Context context, AttributeSet attrs) {
-        return getData(context, attrs,
+        return getStringData(context, attrs,
                 com.android.internal.R.styleable.Preference,
                 com.android.internal.R.styleable.Preference_title);
     }
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_SUMMARY} instead.
+     */
+    @Deprecated
     public static String getDataSummary(Context context, AttributeSet attrs) {
-        return getData(context, attrs,
+        return getStringData(context, attrs,
                 com.android.internal.R.styleable.Preference,
                 com.android.internal.R.styleable.Preference_summary);
     }
 
     public static String getDataSummaryOn(Context context, AttributeSet attrs) {
-        return getData(context, attrs,
+        return getStringData(context, attrs,
                 com.android.internal.R.styleable.CheckBoxPreference,
                 com.android.internal.R.styleable.CheckBoxPreference_summaryOn);
     }
 
     public static String getDataSummaryOff(Context context, AttributeSet attrs) {
-        return getData(context, attrs,
+        return getStringData(context, attrs,
                 com.android.internal.R.styleable.CheckBoxPreference,
                 com.android.internal.R.styleable.CheckBoxPreference_summaryOff);
     }
@@ -124,13 +138,23 @@ public class PreferenceXmlParserUtils {
     }
 
     public static String getDataKeywords(Context context, AttributeSet attrs) {
-        return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_keywords);
+        return getStringData(context, attrs, R.styleable.Preference,
+                R.styleable.Preference_keywords);
     }
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_CONTROLLER} instead.
+     */
+    @Deprecated
     public static String getController(Context context, AttributeSet attrs) {
-        return getData(context, attrs, R.styleable.Preference, R.styleable.Preference_controller);
+        return getStringData(context, attrs, R.styleable.Preference,
+                R.styleable.Preference_controller);
     }
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with {@link #METADATA_ICON} instead.
+     */
+    @Deprecated
     public static int getDataIcon(Context context, AttributeSet attrs) {
         final TypedArray ta = context.obtainStyledAttributes(attrs,
                 com.android.internal.R.styleable.Preference);
@@ -176,25 +200,35 @@ public class PreferenceXmlParserUtils {
             }
             final Bundle preferenceMetadata = new Bundle();
             final AttributeSet attrs = Xml.asAttributeSet(parser);
+            final TypedArray preferenceAttributes = context.obtainStyledAttributes(attrs,
+                    R.styleable.Preference);
+
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TYPE)) {
                 preferenceMetadata.putString(METADATA_PREF_TYPE, nodeName);
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_KEY)) {
-                preferenceMetadata.putString(METADATA_KEY, getDataKey(context, attrs));
+                preferenceMetadata.putString(METADATA_KEY, getKey(preferenceAttributes));
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_CONTROLLER)) {
-                preferenceMetadata.putString(METADATA_CONTROLLER, getController(context, attrs));
+                preferenceMetadata.putString(METADATA_CONTROLLER,
+                        getController(preferenceAttributes));
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_TITLE)) {
-                preferenceMetadata.putString(METADATA_TITLE, getDataTitle(context, attrs));
+                preferenceMetadata.putString(METADATA_TITLE, getTitle(preferenceAttributes));
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_SUMMARY)) {
-                preferenceMetadata.putString(METADATA_SUMMARY, getDataSummary(context, attrs));
+                preferenceMetadata.putString(METADATA_SUMMARY, getSummary(preferenceAttributes));
             }
             if (hasFlag(flags, MetadataFlag.FLAG_NEED_PREF_ICON)) {
-                preferenceMetadata.putInt(METADATA_ICON, getDataIcon(context, attrs));
+                preferenceMetadata.putInt(METADATA_ICON, getIcon(preferenceAttributes));
+            }
+            if (hasFlag(flags, MetadataFlag.FLAG_NEED_PLATFORM_SLICE_FLAG)) {
+                preferenceMetadata.putBoolean(METADATA_PLATFORM_SLICE_FLAG,
+                        getPlatformSlice(preferenceAttributes));
             }
             metadata.add(preferenceMetadata);
+
+            preferenceAttributes.recycle();
         } while ((type = parser.next()) != XmlPullParser.END_DOCUMENT
                 && (type != XmlPullParser.END_TAG || parser.getDepth() > outerDepth));
         parser.close();
@@ -205,12 +239,16 @@ public class PreferenceXmlParserUtils {
      * Returns the fragment name if this preference launches a child fragment.
      */
     public static String getDataChildFragment(Context context, AttributeSet attrs) {
-        return getData(context, attrs, R.styleable.Preference,
+        return getStringData(context, attrs, R.styleable.Preference,
                 R.styleable.Preference_android_fragment);
     }
 
+    /**
+     * Call {@link #extractMetadata(Context, int, int)} with a {@link MetadataFlag} instead.
+     */
+    @Deprecated
     @Nullable
-    private static String getData(Context context, AttributeSet set, int[] attrs, int resId) {
+    private static String getStringData(Context context, AttributeSet set, int[] attrs, int resId) {
         final TypedArray ta = context.obtainStyledAttributes(set, attrs);
         String data = ta.getString(resId);
         ta.recycle();
@@ -242,5 +280,29 @@ public class PreferenceXmlParserUtils {
             result.append(ENTRIES_SEPARATOR);
         }
         return result.toString();
+    }
+
+    private static String getKey(TypedArray styledAttributes) {
+        return styledAttributes.getString(com.android.internal.R.styleable.Preference_key);
+    }
+
+    private static String getTitle(TypedArray styledAttributes) {
+        return styledAttributes.getString(com.android.internal.R.styleable.Preference_title);
+    }
+
+    private static String getSummary(TypedArray styledAttributes) {
+        return styledAttributes.getString(com.android.internal.R.styleable.Preference_summary);
+    }
+
+    private static String getController(TypedArray styledAttributes) {
+        return styledAttributes.getString(R.styleable.Preference_controller);
+    }
+
+    private static int getIcon(TypedArray styledAttributes) {
+        return styledAttributes.getResourceId(com.android.internal.R.styleable.Icon_icon, 0);
+    }
+
+    private static boolean getPlatformSlice(TypedArray styledAttributes) {
+        return styledAttributes.getBoolean(R.styleable.Preference_platform_slice, false /* def */);
     }
 }

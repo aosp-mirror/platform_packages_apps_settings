@@ -55,7 +55,7 @@ public class PhysicalKeyboardPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        when(mContext.getSystemService(Context.INPUT_SERVICE)).thenReturn(mIm);
+        when(mContext.getSystemService(InputManager.class)).thenReturn(mIm);
         mController = new PhysicalKeyboardPreferenceController(mContext, null /* lifecycle */);
     }
 
