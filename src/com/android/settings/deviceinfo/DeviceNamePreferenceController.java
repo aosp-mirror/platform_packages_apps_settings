@@ -54,7 +54,9 @@ public class DeviceNamePreferenceController extends BasePreferenceController
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
         mPreference = (ValidatedEditTextPreference) screen.findPreference(PREF_KEY);
-        mPreference.setSummary(getSummary());
+        final CharSequence deviceName = getSummary();
+        mPreference.setSummary(deviceName);
+        mPreference.setText(deviceName.toString());
         mPreference.setValidator(this);
     }
 
