@@ -105,6 +105,7 @@ import com.android.settings.notification.SoundSettings;
 import com.android.settings.notification.ZenAccessSettings;
 import com.android.settings.notification.ZenModeAutomationSettings;
 import com.android.settings.notification.ZenModeBehaviorSettings;
+import com.android.settings.notification.ZenModeBlockedEffectsSettings;
 import com.android.settings.notification.ZenModeEventRuleSettings;
 import com.android.settings.notification.ZenModeScheduleRuleSettings;
 import com.android.settings.notification.ZenModeSettings;
@@ -220,6 +221,7 @@ public class SettingsGateway {
             ZenModeBehaviorSettings.class.getName(),
             ZenModeScheduleRuleSettings.class.getName(),
             ZenModeEventRuleSettings.class.getName(),
+            ZenModeBlockedEffectsSettings.class.getName(),
             ProcessStatsUi.class.getName(),
             AdvancedPowerUsageDetail.class.getName(),
             ProcessStatsSummary.class.getName(),
