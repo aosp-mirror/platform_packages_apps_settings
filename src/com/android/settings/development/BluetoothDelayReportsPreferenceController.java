@@ -28,11 +28,11 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 public class BluetoothDelayReportsPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String BLUETOOTH_ENABLE_AVDTP_DELAY_REPORT_KEY =
-            "bluetooth_enable_avdtp_delay_reports";
+    private static final String BLUETOOTH_DISABLE_AVDTP_DELAY_REPORT_KEY =
+            "bluetooth_disable_avdtp_delay_reports";
     @VisibleForTesting
-    static final String BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY =
-            "persist.bluetooth.enabledelayreports";
+    static final String BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY =
+            "persist.bluetooth.disabledelayreports";
 
     public BluetoothDelayReportsPreferenceController(Context context) {
         super(context);
@@ -40,22 +40,22 @@ public class BluetoothDelayReportsPreferenceController extends DeveloperOptionsP
 
     @Override
     public String getPreferenceKey() {
-        return BLUETOOTH_ENABLE_AVDTP_DELAY_REPORT_KEY;
+        return BLUETOOTH_DISABLE_AVDTP_DELAY_REPORT_KEY;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        final boolean isEnabled = (Boolean) newValue;
-        SystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY,
-                isEnabled ? "true" : "false");
+        final boolean isDisabled = (Boolean) newValue;
+        SystemProperties.set(BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY,
+                isDisabled ? "true" : "false");
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = SystemProperties.getBoolean(
-                BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
-        ((SwitchPreference) mPreference).setChecked(isEnabled);
+        final boolean isDisabled = SystemProperties.getBoolean(
+                BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY, false /* default */);
+        ((SwitchPreference) mPreference).setChecked(isDisabled);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class BluetoothDelayReportsPreferenceController extends DeveloperOptionsP
         super.onDeveloperOptionsSwitchDisabled();
         // the default setting for this preference is the disabled state
         ((SwitchPreference) mPreference).setChecked(false);
-        SystemProperties.set(BLUETOOTH_ENABLE_AVDTP_DELAY_REPORTS_PROPERTY, "false");
+        SystemProperties.set(BLUETOOTH_DISABLE_AVDTP_DELAY_REPORTS_PROPERTY, "false");
     }
 
 }
