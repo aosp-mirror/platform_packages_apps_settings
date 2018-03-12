@@ -23,6 +23,7 @@ import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -122,9 +123,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             int zenMode = NotificationManager.from(mContext).getZenMode();
 
             if (zenMode != Settings.Global.ZEN_MODE_OFF) {
-                Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
-                return mContext.getString(R.string.zen_mode_sound_summary_on,
-                        getBehaviorSettingSummary(policy, zenMode));
+                ZenModeConfig config = NotificationManager.from(mContext).getZenModeConfig();
+                String description = ZenModeConfig.getDescription(mContext, true, config);
+
+                if (description == null) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on);
+                } else {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                            description);
+                }
             } else {
                 final int count = getEnabledAutomaticRulesCount();
                 if (count > 0) {
