@@ -119,7 +119,7 @@ public class ThemePreferenceControllerTest {
             return info;
         });
         PackageInfo pi = new PackageInfo();
-        pi.isStaticOverlay = true;
+        pi.overlayFlags |= PackageInfo.FLAG_OVERLAY_STATIC;
         when(mMockPackageManager.getPackageInfo(eq("com.android.Theme1"), anyInt())).thenReturn(pi);
         when(mMockPackageManager.getPackageInfo(eq("com.android.Theme2"), anyInt())).thenReturn(
                 new PackageInfo());
