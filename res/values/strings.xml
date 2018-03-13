@@ -6917,6 +6917,9 @@
     <!-- Do not disturb: Title for the page describing what can bypass DND. [CHAR LIMIT=30] -->
     <string name="zen_mode_behavior_settings_title">Exceptions</string>
 
+    <!-- Do not disturb: Title for the dnd duration setting (user can specify how long dnd will last when toggling dnd on from qs or settings) [CHAR LIMIT=30] -->
+    <string name="zen_mode_duration_settings_title">Duration</string>
+
     <!-- Do not disturb: Instructions indicating what types of sounds can bypass DND. [CHAR LIMIT=52] -->
     <string name="zen_mode_behavior_allow_title">Allow sounds and vibrations from</string>
 
@@ -7037,6 +7040,21 @@
 
     <!-- Sound settings screen, summary format of do not disturb when on with no extra information. [CHAR LIMIT=NONE] -->
     <string name="zen_mode_sound_summary_on">On</string>
+
+    <!--  Do not disturb: Summary for zen mode duration setting indicating user will be prompted to set dnd duration whenever dnd is manually toggled on [CHAR LIMIT=NONE]-->
+    <string name="zen_mode_duration_summary_always_prompt">Ask every time (unless turned on automatically)</string>
+
+    <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
+    <string name="zen_mode_duration_summary_forever">Until you turn off (unless turned on automatically)</string>
+
+    <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when dnd is manually toggled on [CHAR LIMIT=NONE] -->
+    <plurals name="zen_mode_duration_summary_time_hours">
+        <item quantity="one">1 hour (unless turned on automatically)</item>
+        <item quantity="other"><xliff:g id="num_hours" example="3">%d</xliff:g> hours (unless turned on automatically)</item>
+    </plurals>
+
+    <!--  Do not disturb: Summary for zen mode duration setting indicating how long dnd will last when toggled on -->
+    <string name="zen_mode_duration_summary_time_minutes"><xliff:g id="num_minutes" example="5">%d</xliff:g> minutes (unless turned on automatically)</string>
 
     <!-- Summary for the Sound Do not Disturb option when at least one automatic rules is enabled. [CHAR LIMIT=NONE]-->
     <plurals name="zen_mode_sound_summary_summary_off_info">

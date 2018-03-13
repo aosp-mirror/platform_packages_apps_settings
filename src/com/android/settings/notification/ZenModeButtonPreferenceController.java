@@ -61,8 +61,7 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
         if (null == mZenButtonOn) {
             mZenButtonOn = (Button) ((LayoutPreference) preference)
                     .findViewById(R.id.zen_mode_settings_turn_on_button);
-            mZenButtonOn.setOnClickListener(v ->
-                    new SettingsEnableZenModeDialog().show(mFragment, TAG));
+            updateZenButtonOnClickListener();
         }
 
         if (null == mZenButtonOff) {
@@ -89,7 +88,34 @@ public class ZenModeButtonPreferenceController extends AbstractZenModePreference
             case Settings.Global.ZEN_MODE_OFF:
             default:
                 mZenButtonOff.setVisibility(View.GONE);
+                updateZenButtonOnClickListener();
                 mZenButtonOn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updateZenButtonOnClickListener() {
+        int zenDuration = getZenDuration();
+        switch (zenDuration) {
+            case Settings.Global.ZEN_DURATION_PROMPT:
+                mZenButtonOn.setOnClickListener(v -> {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    new SettingsEnableZenModeDialog().show(mFragment, TAG);
+                });
+                break;
+            case Settings.Global.ZEN_DURATION_FOREVER:
+                mZenButtonOn.setOnClickListener(v -> {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    mBackend.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
+                });
+                break;
+            default:
+                mZenButtonOn.setOnClickListener(v -> {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsProto.MetricsEvent.ACTION_ZEN_TOGGLE_DND_BUTTON, false);
+                    mBackend.setZenModeForDuration(zenDuration);
+                });
         }
     }
 }
