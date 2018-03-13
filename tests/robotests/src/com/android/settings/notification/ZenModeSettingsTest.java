@@ -47,27 +47,12 @@ public class ZenModeSettingsTest {
     }
 
     @Test
-    public void testGetBehaviorSettingSummary_customBehavior() {
-        NotificationManager.Policy policy = new NotificationManager.Policy(
-                NotificationManager.Policy.PRIORITY_CATEGORY_EVENTS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_REMINDERS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_ALARMS
-                        | NotificationManager.Policy.PRIORITY_CATEGORY_MEDIA,
-                0, 0);
-        final String result = mBuilder.getBehaviorSettingSummary(policy,
-                Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
-
-        String custom = mContext.getString(R.string.zen_mode_behavior_summary_custom);
-        assertEquals(custom, result);
-    }
-
-    @Test
-    public void testGetBehaviorSettingSummary_totalSilence() {
+    public void testGetBehaviorSettingSummary_noSoundsCanBypass() {
         NotificationManager.Policy policy = new NotificationManager.Policy(0, 0, 0);
         final String result = mBuilder.getBehaviorSettingSummary(policy,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
-        String totalSilence = mContext.getString(R.string.zen_mode_behavior_total_silence);
+        String totalSilence = mContext.getString(R.string.zen_mode_no_exceptions);
         assertEquals(totalSilence, result);
     }
 
@@ -80,7 +65,9 @@ public class ZenModeSettingsTest {
         final String result = mBuilder.getBehaviorSettingSummary(policy,
                 Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS);
 
-        String alarmsAndMedia = mContext.getString(R.string.zen_mode_behavior_alarms_only);
+        String alarmsAndMedia = mContext.getString(R.string.join_two_items,
+                mContext.getString(R.string.zen_mode_alarms),
+                mContext.getString(R.string.zen_mode_media).toLowerCase());
         assertEquals(alarmsAndMedia, result);
     }
 
