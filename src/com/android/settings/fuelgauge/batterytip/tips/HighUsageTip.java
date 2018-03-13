@@ -66,8 +66,7 @@ public class HighUsageTip extends BatteryTip {
 
     @Override
     public CharSequence getSummary(Context context) {
-        return context.getString(R.string.battery_tip_high_usage_summary,
-                StringUtil.formatElapsedTime(context, mScreenTimeMs, false));
+        return context.getString(R.string.battery_tip_high_usage_summary);
     }
 
     @Override
