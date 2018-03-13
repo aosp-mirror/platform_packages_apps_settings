@@ -4879,8 +4879,12 @@
         <item quantity="one">Restrict app?</item>
         <item quantity="other">Restrict %1$d apps?</item>
     </plurals>
-    <!-- Message for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_app_dialog_message">To save battery, you can stop this app from running in the background when it’s not being used.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as raw string[CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
     <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_ok">Restrict</string>
     <!-- Title for dialog to remove restriction for the app [CHAR LIMIT=NONE] -->

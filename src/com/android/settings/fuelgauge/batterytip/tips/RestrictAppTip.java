@@ -17,8 +17,9 @@
 package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.icu.text.ListFormatter;
 import android.os.Parcel;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -72,7 +73,7 @@ public class RestrictAppTip extends BatteryTip {
         return mState == StateType.HANDLED
                 ? context.getString(R.string.battery_tip_restrict_handled_summary)
                 : context.getResources().getQuantityString(R.plurals.battery_tip_restrict_summary,
-                num, appLabel, num);
+                        num, appLabel, num);
     }
 
     @Override
@@ -116,6 +117,19 @@ public class RestrictAppTip extends BatteryTip {
 
     public List<AppInfo> getRestrictAppList() {
         return mRestrictAppList;
+    }
+
+    /**
+     * Construct the app list string(e.g. app1, app2, and app3)
+     */
+    public CharSequence getRestrictAppsString(Context context) {
+        final List<CharSequence> appLabels = new ArrayList<>();
+        for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
+            appLabels.add(Utils.getApplicationLabel(context,
+                    mRestrictAppList.get(i).packageName));
+        }
+
+        return ListFormatter.getInstance().format(appLabels);
     }
 
     @Override
