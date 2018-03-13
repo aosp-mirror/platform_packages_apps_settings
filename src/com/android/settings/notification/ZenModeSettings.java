@@ -23,6 +23,7 @@ import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -64,6 +65,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle,
+                fragmentManager));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
@@ -122,9 +125,15 @@ public class ZenModeSettings extends ZenModeSettingsBase {
             int zenMode = NotificationManager.from(mContext).getZenMode();
 
             if (zenMode != Settings.Global.ZEN_MODE_OFF) {
-                Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
-                return mContext.getString(R.string.zen_mode_sound_summary_on,
-                        getBehaviorSettingSummary(policy, zenMode));
+                ZenModeConfig config = NotificationManager.from(mContext).getZenModeConfig();
+                String description = ZenModeConfig.getDescription(mContext, true, config);
+
+                if (description == null) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on);
+                } else {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                            description);
+                }
             } else {
                 final int count = getEnabledAutomaticRulesCount();
                 if (count > 0) {
@@ -243,6 +252,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(ZenModeDurationPreferenceController.KEY);
                     keys.add(ZenModeButtonPreferenceController.KEY);
                     return keys;
                 }
