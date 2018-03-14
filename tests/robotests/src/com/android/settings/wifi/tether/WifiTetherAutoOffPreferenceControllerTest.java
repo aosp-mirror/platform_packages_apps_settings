@@ -81,6 +81,13 @@ public class WifiTetherAutoOffPreferenceControllerTest {
         assertThat(mSwitchPreference.isChecked()).isFalse();
     }
 
+    @Test
+    public void testUpdateState_toggleDefaultOn() {
+        mController.updateState(mSwitchPreference);
+
+        assertThat(mSwitchPreference.isChecked()).isTrue();
+    }
+
     private int getAutoOffSetting() {
         return Settings.Global.getInt(mContext.getContentResolver(),
                 Settings.Global.SOFT_AP_TIMEOUT_ENABLED, OFF);
