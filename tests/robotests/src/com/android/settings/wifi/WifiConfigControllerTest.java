@@ -230,6 +230,22 @@ public class WifiConfigControllerTest {
         // No Crash
     }
 
+    @Test
+    public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        // Verify ssid text get focus when add new network (accesspoint is null)
+        assertThat(ssid.isFocused()).isTrue();
+    }
+
+    @Test
+    public void passwordGetFocus_connectSecureWifi_shouldReturnTrue() {
+        final TextView password = mView.findViewById(R.id.password);
+        // Verify password get focus when connect to secure wifi without eap type
+        assertThat(password.isFocused()).isTrue();
+    }
+
     public class TestWifiConfigController extends WifiConfigController {
 
         private TestWifiConfigController(
