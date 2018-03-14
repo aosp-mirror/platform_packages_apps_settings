@@ -26,7 +26,9 @@ import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Binder;
 import android.os.Bundle;
@@ -34,7 +36,6 @@ import android.os.IBinder;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.view.accessibility.AccessibilityManager;
 
 import com.android.internal.accessibility.AccessibilityShortcutController;
@@ -45,7 +46,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.widget.RadioButtonPickerFragment;
 import com.android.settings.widget.RadioButtonPreference;
 import com.android.settingslib.accessibility.AccessibilityUtils;
-import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.CandidateInfo;
 import com.android.settingslib.wrapper.PackageManagerWrapper;
 
@@ -71,13 +71,11 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         final Context context = getContext();
-        final PackageManager pm = context.getPackageManager();
         final AccessibilityManager accessibilityManager = context
                 .getSystemService(AccessibilityManager.class);
         final List<AccessibilityServiceInfo> installedServices =
                 accessibilityManager.getInstalledAccessibilityServiceList();
         final int numInstalledServices = installedServices.size();
-        final PackageManagerWrapper pmw = new PackageManagerWrapper(context.getPackageManager());
 
         final List<CandidateInfo> candidates = new ArrayList<>(numInstalledServices);
         Map<ComponentName, ToggleableFrameworkFeatureInfo> frameworkFeatureInfoMap =
@@ -95,10 +93,7 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
                     iconId, componentName.flattenToString()));
         }
         for (int i = 0; i < numInstalledServices; i++) {
-            final AccessibilityServiceInfo installedServiceInfo = installedServices.get(i);
-            candidates.add(new DefaultAppInfo(context, pmw, UserHandle.myUserId(),
-                    installedServiceInfo.getComponentName(),
-                    (String) installedServiceInfo.loadSummary(pm), true /* enabled */));
+            candidates.add(new ServiceCandidateInfo(installedServices.get(i)));
         }
 
         return candidates;
@@ -196,9 +191,9 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
     }
 
     private class FrameworkCandidateInfo extends CandidateInfo {
-        ToggleableFrameworkFeatureInfo mToggleableFrameworkFeatureInfo;
-        int mIconResId;
-        String mKey;
+        final ToggleableFrameworkFeatureInfo mToggleableFrameworkFeatureInfo;
+        final int mIconResId;
+        final String mKey;
 
         public FrameworkCandidateInfo(
                 ToggleableFrameworkFeatureInfo frameworkFeatureInfo, int iconResId, String key) {
@@ -221,6 +216,51 @@ public class ShortcutServicePickerFragment extends RadioButtonPickerFragment {
         @Override
         public String getKey() {
             return mKey;
+        }
+    }
+
+    private class ServiceCandidateInfo extends CandidateInfo {
+        final AccessibilityServiceInfo mServiceInfo;
+
+        public ServiceCandidateInfo(AccessibilityServiceInfo serviceInfo) {
+            super(true /* enabled */);
+            mServiceInfo = serviceInfo;
+        }
+
+        @Override
+        public CharSequence loadLabel() {
+            final PackageManagerWrapper pmw =
+                    new PackageManagerWrapper(getContext().getPackageManager());
+            final CharSequence label =
+                    mServiceInfo.getResolveInfo().serviceInfo.loadLabel(pmw.getPackageManager());
+            if (label != null) {
+                return label;
+            }
+
+            final ComponentName componentName = mServiceInfo.getComponentName();
+            if (componentName != null) {
+                try {
+                    final ApplicationInfo appInfo = pmw.getApplicationInfoAsUser(
+                            componentName.getPackageName(), 0, UserHandle.myUserId());
+                    return appInfo.loadLabel(pmw.getPackageManager());
+                } catch (PackageManager.NameNotFoundException e) {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public Drawable loadIcon() {
+            final ResolveInfo resolveInfo = mServiceInfo.getResolveInfo();
+            return (resolveInfo.getIconResource() == 0)
+                    ? getContext().getDrawable(R.mipmap.ic_accessibility_generic)
+                    : resolveInfo.loadIcon(getContext().getPackageManager());
+        }
+
+        @Override
+        public String getKey() {
+            return mServiceInfo.getComponentName().flattenToString();
         }
     }
 }
