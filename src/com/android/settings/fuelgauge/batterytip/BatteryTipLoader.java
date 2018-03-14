@@ -22,6 +22,7 @@ import android.support.annotation.VisibleForTesting;
 import com.android.internal.os.BatteryStatsHelper;
 import com.android.settings.fuelgauge.BatteryInfo;
 import com.android.settings.fuelgauge.BatteryUtils;
+import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.detectors.EarlyWarningDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.HighUsageDetector;
 import com.android.settings.fuelgauge.batterytip.detectors.LowBatteryDetector;
@@ -70,7 +71,7 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
         tips.add(new HighUsageDetector(context, policy, mBatteryStatsHelper).detect());
         tips.add(new SmartBatteryDetector(policy, context.getContentResolver()).detect());
         tips.add(new EarlyWarningDetector(policy, context).detect());
-        tips.add(new SummaryDetector(policy).detect());
+        tips.add(new SummaryDetector(policy, batteryInfo.averageTimeToDischarge).detect());
         tips.add(new RestrictAppDetector(context, policy).detect());
 
         Collections.sort(tips);
@@ -83,7 +84,8 @@ public class BatteryTipLoader extends AsyncLoader<List<BatteryTip>> {
 
     private List<BatteryTip> getFakeData() {
         final List<BatteryTip> tips = new ArrayList<>();
-        tips.add(new SummaryTip(BatteryTip.StateType.NEW));
+        tips.add(new SummaryTip(BatteryTip.StateType.NEW,
+                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
         tips.add(new LowBatteryTip(BatteryTip.StateType.NEW));
 
         return tips;

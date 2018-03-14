@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batterytip.detectors;
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 
+import android.text.format.DateUtils;
+
 import com.android.settings.fuelgauge.batterytip.BatteryTipPolicy;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 
@@ -33,6 +35,7 @@ import org.robolectric.util.ReflectionHelpers;
 public class SummaryDetectorTest {
 
     private BatteryTipPolicy mPolicy;
+    private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
 
     @Before
     public void setUp() {
@@ -44,14 +47,14 @@ public class SummaryDetectorTest {
     @Test
     public void testDetect_disabledByPolicy_tipInvisible() {
         ReflectionHelpers.setField(mPolicy, "summaryEnabled", false);
-        SummaryDetector detector = new SummaryDetector(mPolicy);
+        SummaryDetector detector = new SummaryDetector(mPolicy, AVERAGE_TIME_MS);
 
         assertThat(detector.detect().isVisible()).isFalse();
     }
 
     @Test
     public void testDetect_notDisabled_tipVisible() {
-        SummaryDetector detector = new SummaryDetector(mPolicy);
+        SummaryDetector detector = new SummaryDetector(mPolicy, AVERAGE_TIME_MS);
 
         assertThat(detector.detect().isVisible()).isTrue();
     }
