@@ -127,7 +127,7 @@ public class AnomalyDetectionJobService extends JobService {
                     && !isSystemUid(uid)) {
                 if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
                     // TODO(b/72385333): check battery percentage draining in batterystats
-                    if (batteryUtils.isLegacyApp(packageName) && batteryUtils.isAppHeavilyUsed(
+                    if (batteryUtils.isPreOApp(packageName) && batteryUtils.isAppHeavilyUsed(
                             batteryStatsHelper, userManager, uid,
                             policy.excessiveBgDrainPercentage)) {
                         Log.e(TAG, "Excessive detected uid=" + uid);
