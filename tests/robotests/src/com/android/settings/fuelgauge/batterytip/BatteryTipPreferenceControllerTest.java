@@ -15,8 +15,11 @@
  */
 package com.android.settings.fuelgauge.batterytip;
 
-import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType.SMART_BATTERY_MANAGER;
+import static com.android.settings.fuelgauge.batterytip.tips.BatteryTip.TipType
+        .SMART_BATTERY_MANAGER;
+
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
@@ -30,6 +33,7 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
+import android.text.format.DateUtils;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
@@ -54,6 +58,8 @@ public class BatteryTipPreferenceControllerTest {
 
     private static final String KEY_PREF = "battery_tip";
     private static final String KEY_TIP = "key_battery_tip";
+    private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+
     @Mock
     private BatteryTipPreferenceController.BatteryTipListener mBatteryTipListener;
     @Mock
@@ -87,9 +93,9 @@ public class BatteryTipPreferenceControllerTest {
         mFeatureFactory = FakeFeatureFactory.setupForTest();
 
         mOldBatteryTips = new ArrayList<>();
-        mOldBatteryTips.add(new SummaryTip(BatteryTip.StateType.NEW));
+        mOldBatteryTips.add(new SummaryTip(BatteryTip.StateType.NEW, AVERAGE_TIME_MS));
         mNewBatteryTips = new ArrayList<>();
-        mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE));
+        mNewBatteryTips.add(new SummaryTip(BatteryTip.StateType.INVISIBLE, AVERAGE_TIME_MS));
 
         mBatteryTipPreferenceController = new BatteryTipPreferenceController(mContext, KEY_PREF,
                 mSettingsActivity, null, mBatteryTipListener);
