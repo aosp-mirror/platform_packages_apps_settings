@@ -363,6 +363,9 @@ public class WifiConfigController implements TextWatcher,
         if (mConfigUi.getSubmitButton() != null) {
             enableSubmitIfAppropriate();
         }
+
+        // After done view show and hide, request focus from parent view
+        mView.findViewById(R.id.l_wifidialog).requestFocus();
     }
 
     @VisibleForTesting
