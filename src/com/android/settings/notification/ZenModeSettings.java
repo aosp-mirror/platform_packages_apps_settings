@@ -23,6 +23,7 @@ import android.app.NotificationManager.Policy;
 import android.content.Context;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
+import android.service.notification.ZenModeConfig;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
@@ -64,6 +65,8 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         List<AbstractPreferenceController> controllers = new ArrayList<>();
         controllers.add(new ZenModeBehaviorPreferenceController(context, lifecycle));
         controllers.add(new ZenModeBlockedEffectsPreferenceController(context, lifecycle));
+        controllers.add(new ZenModeDurationPreferenceController(context, lifecycle,
+                fragmentManager));
         controllers.add(new ZenModeAutomationPreferenceController(context));
         controllers.add(new ZenModeButtonPreferenceController(context, lifecycle, fragmentManager));
         controllers.add(new ZenModeSettingsFooterPreferenceController(context, lifecycle));
@@ -91,40 +94,44 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         };
 
         String getBehaviorSettingSummary(Policy policy, int zenMode) {
-            List<String> enabledCategories;
+            List<String> enabledCategories = getEnabledCategories(policy);
 
-            if (zenMode == Settings.Global.ZEN_MODE_NO_INTERRUPTIONS) {
-                return mContext.getString(R.string.zen_mode_behavior_total_silence);
-            } else if (zenMode == Settings.Global.ZEN_MODE_ALARMS) {
-                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
-            } else {
-                enabledCategories = getEnabledCategories(policy);
-            }
-
-            // no sound categories can bypass dnd
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_behavior_total_silence);
+                return mContext.getString(R.string.zen_mode_no_exceptions);
+            } else if (numCategories == 1) {
+                return enabledCategories.get(0);
+            } else if (numCategories == 2) {
+                return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
+                        enabledCategories.get(1).toLowerCase());
+            } else if (numCategories == 3){
+                String secondaryText = mContext.getString(R.string.join_two_unrelated_items,
+                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
+                return mContext.getString(R.string.join_two_items, secondaryText,
+                        enabledCategories.get(2).toLowerCase());
+            } else {
+                String secondaryText = mContext.getString(R.string.join_many_items_middle,
+                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
+                secondaryText = mContext.getString(R.string.join_many_items_middle, secondaryText,
+                        enabledCategories.get(2).toLowerCase());
+                return mContext.getString(R.string.join_many_items_last, secondaryText,
+                        mContext.getString(R.string.zen_mode_other_options));
             }
-
-            // only alarms and media can bypass dnd
-            if (numCategories == 2 &&
-                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_ALARMS) &&
-                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MEDIA)) {
-                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
-            }
-
-            // custom
-            return mContext.getString(R.string.zen_mode_behavior_summary_custom);
         }
 
         String getSoundSummary() {
             int zenMode = NotificationManager.from(mContext).getZenMode();
 
             if (zenMode != Settings.Global.ZEN_MODE_OFF) {
-                Policy policy = NotificationManager.from(mContext).getNotificationPolicy();
-                return mContext.getString(R.string.zen_mode_sound_summary_on,
-                        getBehaviorSettingSummary(policy, zenMode));
+                ZenModeConfig config = NotificationManager.from(mContext).getZenModeConfig();
+                String description = ZenModeConfig.getDescription(mContext, true, config);
+
+                if (description == null) {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on);
+                } else {
+                    return mContext.getString(R.string.zen_mode_sound_summary_on_with_info,
+                            description);
+                }
             } else {
                 final int count = getEnabledAutomaticRulesCount();
                 if (count > 0) {
@@ -243,6 +250,7 @@ public class ZenModeSettings extends ZenModeSettingsBase {
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
+                    keys.add(ZenModeDurationPreferenceController.KEY);
                     keys.add(ZenModeButtonPreferenceController.KEY);
                     return keys;
                 }

@@ -27,6 +27,7 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.actions.BatteryTipAction;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
@@ -82,7 +83,8 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         mPreferenceGroup = (PreferenceGroup) screen.findPreference(getPreferenceKey());
 
         // Add summary tip in advance to avoid UI flakiness
-        final SummaryTip summaryTip = new SummaryTip(BatteryTip.StateType.NEW);
+        final SummaryTip summaryTip = new SummaryTip(BatteryTip.StateType.NEW,
+                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         mPreferenceGroup.addPreference(summaryTip.buildPreference(mPrefContext));
     }
 

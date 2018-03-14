@@ -87,6 +87,7 @@
     <uses-permission android:name="android.permission.DELETE_PACKAGES"/>
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.MANAGE_APP_OPS_RESTRICTIONS"/>
+    <uses-permission android:name="android.permission.MANAGE_APP_OPS_MODES" />
     <uses-permission android:name="android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS"/>
     <uses-permission android:name="android.permission.READ_PRINT_SERVICES" />
     <uses-permission android:name="android.permission.NETWORK_SETTINGS" />
@@ -746,7 +747,7 @@
             android:taskAffinity="com.android.settings"
             android:parentActivityName="Settings">
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                       android:value="com.android.settings.notification.ZenModeBlockedEffectsSetting" />
+                       android:value="com.android.settings.notification.ZenModeBlockedEffectsSettings" />
             <meta-data android:name="com.android.settings.PRIMARY_PROFILE_CONTROLLED"
                        android:value="true" />
         </activity>
