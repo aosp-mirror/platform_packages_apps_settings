@@ -1216,6 +1216,11 @@ public class WifiConfigController implements TextWatcher,
         }
     }
 
+    @VisibleForTesting
+    KeyStore getKeyStore() {
+        return KeyStore.getInstance();
+    }
+
     private void loadCertificates(
             Spinner spinner,
             String prefix,
@@ -1232,8 +1237,12 @@ public class WifiConfigController implements TextWatcher,
         if (showUsePreinstalledCertOption) {
             certs.add(mUseSystemCertsString);
         }
-        certs.addAll(
-                Arrays.asList(KeyStore.getInstance().list(prefix, android.os.Process.WIFI_UID)));
+        try {
+            certs.addAll(
+                Arrays.asList(getKeyStore().list(prefix, android.os.Process.WIFI_UID)));
+        } catch (Exception e) {
+            Log.e(TAG, "can't get the certificate list from KeyStore");
+        }
         certs.add(noCertificateString);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
