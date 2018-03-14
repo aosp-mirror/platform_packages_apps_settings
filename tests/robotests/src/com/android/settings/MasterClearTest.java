@@ -45,6 +45,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
@@ -142,27 +143,43 @@ public class MasterClearTest {
 
     @Test
     public void testShowWipeEuicc_euiccDisabled() {
-        prepareEuiccState(false /* isEuiccEnabled */, true /* isEuiccProvisioned */);
+        prepareEuiccState(
+                false /* isEuiccEnabled */,
+                true /* isEuiccProvisioned */,
+                false /* isDeveloper */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_unprovisioned() {
-        prepareEuiccState(true /* isEuiccEnabled */, false /* isEuiccProvisioned */);
+        prepareEuiccState(
+                true /* isEuiccEnabled */,
+                false /* isEuiccProvisioned */,
+                false /* isDeveloper */);
         assertThat(mMasterClear.showWipeEuicc()).isFalse();
     }
 
     @Test
     public void testShowWipeEuicc_euiccEnabled_provisioned() {
-        prepareEuiccState(true /* isEuiccEnabled */, true /* isEuiccProvisioned */);
+        prepareEuiccState(
+                true /* isEuiccEnabled */,
+                true /* isEuiccProvisioned */,
+                false /* isDeveloper */);
         assertThat(mMasterClear.showWipeEuicc()).isTrue();
     }
 
-    private void prepareEuiccState(boolean isEuiccEnabled, boolean isEuiccProvisioned) {
-        doReturn(mActivity).when(mMasterClear).getContext();
-        doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
-        ContentResolver cr = mActivity.getContentResolver();
-        Settings.Global.putInt(cr, Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
+    @Test
+    public void testShowWipeEuicc_developerMode_unprovisioned() {
+        prepareEuiccState(
+                true /* isEuiccEnabled */,
+                false /* isEuiccProvisioned */,
+                true /* isDeveloper */);
+        assertThat(mMasterClear.showWipeEuicc()).isTrue();
+    }
+
+    @Test
+    public void testEsimRecheckBoxDefaultChecked() {
+        assertThat(((CheckBox) mContentView.findViewById(R.id.erase_esim)).isChecked()).isTrue();
     }
 
     @Test
@@ -371,6 +388,16 @@ public class MasterClearTest {
         mMasterClear.onGlobalLayout();
 
         verify(viewTreeObserver, never()).removeOnGlobalLayoutListener(mMasterClear);
+    }
+
+    private void prepareEuiccState(
+            boolean isEuiccEnabled, boolean isEuiccProvisioned, boolean isDeveloper) {
+        doReturn(mActivity).when(mMasterClear).getContext();
+        doReturn(isEuiccEnabled).when(mMasterClear).isEuiccEnabled(any());
+        ContentResolver cr = mActivity.getContentResolver();
+        Settings.Global.putInt(cr, Settings.Global.EUICC_PROVISIONED, isEuiccProvisioned ? 1 : 0);
+        Settings.Global.putInt(
+                cr, Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, isDeveloper ? 1 : 0);
     }
 
     private void initScrollView(int height, int scrollY, int childBottom) {
