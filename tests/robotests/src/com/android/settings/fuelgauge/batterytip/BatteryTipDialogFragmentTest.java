@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -26,9 +27,11 @@ import android.content.Context;
 import android.text.format.DateUtils;
 
 import com.android.settings.R;
+import com.android.settings.fuelgauge.Estimate;
 import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.HighUsageTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
+import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.ShadowUtils;
@@ -54,6 +57,7 @@ public class BatteryTipDialogFragmentTest {
     private static final String PACKAGE_NAME = "com.android.app";
     private static final String DISPLAY_NAME = "app";
     private static final long SCREEN_TIME_MS = DateUtils.HOUR_IN_MILLIS;
+    private static final long AVERAGE_TIME_MS = DateUtils.HOUR_IN_MILLIS;
 
     private BatteryTipDialogFragment mDialogFragment;
     private Context mContext;
@@ -61,6 +65,7 @@ public class BatteryTipDialogFragmentTest {
     private RestrictAppTip mRestrictedOneAppTip;
     private RestrictAppTip mRestrictAppsTip;
     private UnrestrictAppTip mUnrestrictAppTip;
+    private SummaryTip mSummaryTip;
 
     @Before
     public void setUp() {
@@ -85,6 +90,8 @@ public class BatteryTipDialogFragmentTest {
                 new ArrayList<>(restrictApps));
 
         mUnrestrictAppTip = new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo);
+        mSummaryTip = spy(new SummaryTip(BatteryTip.StateType.NEW,
+                Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN));
     }
 
     @Test
@@ -150,5 +157,33 @@ public class BatteryTipDialogFragmentTest {
         assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction for app?");
         assertThat(shadowDialog.getMessage())
                 .isEqualTo(mContext.getString(R.string.battery_tip_unrestrict_app_dialog_message));
+    }
+
+    @Test
+    public void testOnCreateDialog_summaryTipWithEstimation_fireDialogWithEstimation() {
+        doReturn(AVERAGE_TIME_MS).when(mSummaryTip).getAverageTimeMs();
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip);
+
+        FragmentTestUtil.startFragment(mDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                "Based on your usage, your battery usually lasts about 1h when fully charged"
+                        + ".\n\nIf you need to extend your battery life, turn on Battery Saver.");
+    }
+
+    @Test
+    public void testOnCreateDialog_summaryTipWithoutEstimation_fireDialogWithoutEstimation() {
+        mDialogFragment = BatteryTipDialogFragment.newInstance(mSummaryTip);
+
+        FragmentTestUtil.startFragment(mDialogFragment);
+
+        final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+        ShadowAlertDialog shadowDialog = shadowOf(dialog);
+
+        assertThat(shadowDialog.getMessage()).isEqualTo(
+                "If you need to extend your battery life, turn on Battery Saver");
     }
 }

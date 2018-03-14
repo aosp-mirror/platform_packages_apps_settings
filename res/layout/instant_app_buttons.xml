@@ -48,11 +48,16 @@
     <Space
         android:layout_width="16dp"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/clear_data"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="@string/clear_instant_app_data"/>
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/clear_data"
+            style="@style/ActionSecondaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="@string/clear_instant_app_data"/>
+    </FrameLayout>
 </LinearLayout>

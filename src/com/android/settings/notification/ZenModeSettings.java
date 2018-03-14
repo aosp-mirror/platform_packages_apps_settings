@@ -94,31 +94,29 @@ public class ZenModeSettings extends ZenModeSettingsBase {
         };
 
         String getBehaviorSettingSummary(Policy policy, int zenMode) {
-            List<String> enabledCategories;
+            List<String> enabledCategories = getEnabledCategories(policy);
 
-            if (zenMode == Settings.Global.ZEN_MODE_NO_INTERRUPTIONS) {
-                return mContext.getString(R.string.zen_mode_behavior_total_silence);
-            } else if (zenMode == Settings.Global.ZEN_MODE_ALARMS) {
-                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
-            } else {
-                enabledCategories = getEnabledCategories(policy);
-            }
-
-            // no sound categories can bypass dnd
             int numCategories = enabledCategories.size();
             if (numCategories == 0) {
-                return mContext.getString(R.string.zen_mode_behavior_total_silence);
+                return mContext.getString(R.string.zen_mode_no_exceptions);
+            } else if (numCategories == 1) {
+                return enabledCategories.get(0);
+            } else if (numCategories == 2) {
+                return mContext.getString(R.string.join_two_items, enabledCategories.get(0),
+                        enabledCategories.get(1).toLowerCase());
+            } else if (numCategories == 3){
+                String secondaryText = mContext.getString(R.string.join_two_unrelated_items,
+                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
+                return mContext.getString(R.string.join_two_items, secondaryText,
+                        enabledCategories.get(2).toLowerCase());
+            } else {
+                String secondaryText = mContext.getString(R.string.join_many_items_middle,
+                        enabledCategories.get(0), enabledCategories.get(1).toLowerCase());
+                secondaryText = mContext.getString(R.string.join_many_items_middle, secondaryText,
+                        enabledCategories.get(2).toLowerCase());
+                return mContext.getString(R.string.join_many_items_last, secondaryText,
+                        mContext.getString(R.string.zen_mode_other_options));
             }
-
-            // only alarms and media can bypass dnd
-            if (numCategories == 2 &&
-                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_ALARMS) &&
-                    isCategoryEnabled(policy, Policy.PRIORITY_CATEGORY_MEDIA)) {
-                return mContext.getString(R.string.zen_mode_behavior_alarms_only);
-            }
-
-            // custom
-            return mContext.getString(R.string.zen_mode_behavior_summary_custom);
         }
 
         String getSoundSummary() {
