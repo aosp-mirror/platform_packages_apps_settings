@@ -38,7 +38,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     @Override
     public void updateState(Preference preference) {
         final boolean settingsOn = Settings.Global.getInt(mContext.getContentResolver(),
-                Settings.Global.SOFT_AP_TIMEOUT_ENABLED, 0) != 0;
+                Settings.Global.SOFT_AP_TIMEOUT_ENABLED, 1) != 0;
 
         ((SwitchPreference) preference).setChecked(settingsOn);
     }
