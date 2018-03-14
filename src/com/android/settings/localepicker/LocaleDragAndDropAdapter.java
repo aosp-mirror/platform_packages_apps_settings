@@ -29,6 +29,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
 import com.android.internal.app.LocalePicker;
@@ -159,10 +160,13 @@ class LocaleDragAndDropAdapter
         dragCell.setShowCheckbox(mRemoveMode);
         dragCell.setShowMiniLabel(!mRemoveMode);
         dragCell.setShowHandle(!mRemoveMode && mDragEnabled);
-        dragCell.setChecked(mRemoveMode ? feedItem.getChecked() : false);
         dragCell.setTag(feedItem);
-        dragCell.getCheckbox()
-                .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        CheckBox checkbox = dragCell.getCheckbox();
+        // clear listener before setChecked() in case another item already bind to
+        // current ViewHolder and checked event is triggered on stale listener mistakenly.
+        checkbox.setOnCheckedChangeListener(null);
+        checkbox.setChecked(mRemoveMode ? feedItem.getChecked() : false);
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         LocaleStore.LocaleInfo feedItem =
