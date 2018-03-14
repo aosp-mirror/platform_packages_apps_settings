@@ -26,9 +26,11 @@ import com.android.settings.fuelgauge.batterytip.tips.SummaryTip;
  */
 public class SummaryDetector implements BatteryTipDetector {
     private BatteryTipPolicy mPolicy;
+    private long mAverageTimeMs;
 
-    public SummaryDetector(BatteryTipPolicy policy) {
+    public SummaryDetector(BatteryTipPolicy policy, long averageTimeMs) {
         mPolicy = policy;
+        mAverageTimeMs = averageTimeMs;
     }
 
     @Override
@@ -37,6 +39,6 @@ public class SummaryDetector implements BatteryTipDetector {
         final int state = mPolicy.summaryEnabled
                 ? BatteryTip.StateType.NEW
                 : BatteryTip.StateType.INVISIBLE;
-        return new SummaryTip(state);
+        return new SummaryTip(state, mAverageTimeMs);
     }
 }
