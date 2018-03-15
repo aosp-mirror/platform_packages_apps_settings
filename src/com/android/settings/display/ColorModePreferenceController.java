@@ -49,6 +49,9 @@ public class ColorModePreferenceController extends BasePreferenceController {
     @Override
     public CharSequence getSummary() {
         final int colorMode = getColorDisplayController().getColorMode();
+        if (colorMode == ColorDisplayController.COLOR_MODE_AUTOMATIC) {
+            return mContext.getText(R.string.color_mode_option_automatic);
+        }
         if (colorMode == ColorDisplayController.COLOR_MODE_SATURATED) {
             return mContext.getText(R.string.color_mode_option_saturated);
         }
