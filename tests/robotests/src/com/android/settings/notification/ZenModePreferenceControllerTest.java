@@ -53,6 +53,7 @@ public class ZenModePreferenceControllerTest {
     private Context mContext;
     private ZenModePreferenceController mController;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
+    private static final String KEY_ZEN_MODE = "zen_mode";
 
     @Before
     public void setUp() {
@@ -60,7 +61,7 @@ public class ZenModePreferenceControllerTest {
         ShadowApplication shadowApplication = ShadowApplication.getInstance();
         shadowApplication.setSystemService(Context.NOTIFICATION_SERVICE, mNotificationManager);
         mContext = shadowApplication.getApplicationContext();
-        mController = new ZenModePreferenceController(mContext, null);
+        mController = new ZenModePreferenceController(mContext, null, KEY_ZEN_MODE);
         when(mNotificationManager.getNotificationPolicy()).thenReturn(mPolicy);
         mSummaryBuilder = spy(new ZenModeSettings.SummaryBuilder(mContext));
         ReflectionHelpers.setField(mController, "mSummaryBuilder", mSummaryBuilder);
