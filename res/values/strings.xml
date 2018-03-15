@@ -8745,14 +8745,26 @@
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
 
-    <!-- Data usage string [CHAR LIMIT=30] -->
+    <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
 
-    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
-    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">, ^1</xliff:g> left</string>
+    <!-- Data usage over limit string [CHAR LIMIT=30] -->
+    <string name="data_overusage"><xliff:g name="bytes" example="2 GB">^1</xliff:g> over</string>
 
-    <!-- Informational text about time left in billing cycle [CHAR LIMIT=30] -->
-    <string name="cycle_left_time_text"><xliff:g name="time" example="2d">%1$s</xliff:g> left in this cycle</string>
+    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
+    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="cycle_left_multiple_days"><xliff:g name="time" example="2d">%d</xliff:g> days left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <plurals name="billing_cycle_days_left">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
     <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>
