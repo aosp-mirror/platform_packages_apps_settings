@@ -174,19 +174,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             summaryPreference.setLimitInfo(null);
         }
 
-        final StringBuilder title = new StringBuilder();
-        if (mHasMobileData) {
-            title.append(formatUsage(mContext, mContext.getString(R.string.data_used),
-                    mDataplanUse));
-            if (mDataplanCount >= 0 && mDataplanSize > 0L) {
-                title.append(formatUsage(mContext, mContext.getString(R.string.data_remaining),
-                        mDataplanSize - mDataplanUse));
-            }
-        } else {
-            title.append(formatUsage(mContext, mContext.getString(mDataUsageTemplate),
-                    mDataplanUse));
-        }
-        summaryPreference.setTitle(title.toString());
+        summaryPreference.setUsageNumbers(mDataplanUse, mDataplanSize, mHasMobileData);
 
         if (mDataplanSize <= 0) {
             summaryPreference.setChartEnabled(false);
@@ -231,7 +219,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
                     mCycleStart = rule.start.toEpochSecond() * 1000L;
                     mCycleEnd = rule.end.toEpochSecond() * 1000L;
                 }
-                mSnapshotTime = System.currentTimeMillis() - primaryPlan.getDataUsageTime();
+                mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
         mManageSubscriptionIntent =
