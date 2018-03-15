@@ -31,8 +31,9 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.StatsDimensionsValue;
-import android.os.SystemPropertiesProto;
+import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -122,7 +123,8 @@ public class AnomalyDetectionJobService extends JobService {
             final boolean smartBatteryOn = Settings.Global.getInt(contentResolver,
                     Settings.Global.APP_STANDBY_ENABLED, ON) == ON;
             final String packageName = batteryUtils.getPackageName(uid);
-            if (!powerWhitelistBackend.isSysWhitelisted(packageName)) {
+            if (!powerWhitelistBackend.isSysWhitelistedExceptIdle(packageName)
+                    && !isSystemUid(uid)) {
                 if (anomalyType == StatsManagerConfig.AnomalyType.EXCESSIVE_BG) {
                     // TODO(b/72385333): check battery percentage draining in batterystats
                     if (batteryUtils.isLegacyApp(packageName) && batteryUtils.isAppHeavilyUsed(
@@ -156,7 +158,7 @@ public class AnomalyDetectionJobService extends JobService {
      * 3. Bluetooth anomaly:    3:{1:{1:{1:10140|}|}|}
      */
     @VisibleForTesting
-    final int extractUidFromStatsDimensionsValue(StatsDimensionsValue statsDimensionsValue) {
+    int extractUidFromStatsDimensionsValue(StatsDimensionsValue statsDimensionsValue) {
         //TODO(b/73172999): Add robo test for this method
         if (statsDimensionsValue == null) {
             return UID_NULL;
@@ -177,5 +179,10 @@ public class AnomalyDetectionJobService extends JobService {
         }
 
         return UID_NULL;
+    }
+
+    private boolean isSystemUid(int uid) {
+        final int appUid = UserHandle.getAppId(uid);
+        return appUid >= Process.ROOT_UID && appUid < Process.FIRST_APPLICATION_UID;
     }
 }

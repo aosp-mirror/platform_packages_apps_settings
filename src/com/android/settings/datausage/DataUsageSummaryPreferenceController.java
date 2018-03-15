@@ -194,8 +194,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             summaryPreference.setChartEnabled(true);
             summaryPreference.setLabels(Formatter.formatFileSize(mContext, 0 /* sizeBytes */),
                     Formatter.formatFileSize(mContext, mDataplanSize));
-            summaryPreference.setRatios(mDataplanUse / (float) mDataplanSize, 0 /* middle */,
-                    (mDataplanSize - mDataplanUse) / (float) mDataplanSize);
+            summaryPreference.setProgress(mDataplanUse / (float) mDataplanSize);
         }
         summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
                 mDataplanCount, mManageSubscriptionIntent);

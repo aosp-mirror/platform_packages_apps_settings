@@ -20,11 +20,14 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.os.ServiceSpecificException;
+import android.security.KeyStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +59,8 @@ public class WifiConfigControllerTest {
     private View mView;
     @Mock
     private AccessPoint mAccessPoint;
+    @Mock
+    private KeyStore mKeyStore;
 
     public WifiConfigController mController;
     private static final String HEX_PSK = "01234567012345670123456701234567012345670123456701234567"
@@ -210,6 +215,37 @@ public class WifiConfigControllerTest {
         assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    public void loadCertificates_keyStoreListFail_shouldNotCrash() {
+        // Set up
+        when(mAccessPoint.getSecurity()).thenReturn(AccessPoint.SECURITY_EAP);
+        when(mKeyStore.list(anyString()))
+            .thenThrow(new ServiceSpecificException(-1, "permission error"));
+
+        mController = new TestWifiConfigController(mConfigUiBase, mView, mAccessPoint,
+              WifiConfigUiBase.MODE_CONNECT);
+
+        // Verify that the EAP method menu is visible.
+        assertThat(mView.findViewById(R.id.eap).getVisibility()).isEqualTo(View.VISIBLE);
+        // No Crash
+    }
+
+    @Test
+    public void ssidGetFocus_addNewNetwork_shouldReturnTrue() {
+        mController = new TestWifiConfigController(mConfigUiBase, mView, null /* accessPoint */,
+                WifiConfigUiBase.MODE_CONNECT);
+        final TextView ssid = mView.findViewById(R.id.ssid);
+        // Verify ssid text get focus when add new network (accesspoint is null)
+        assertThat(ssid.isFocused()).isTrue();
+    }
+
+    @Test
+    public void passwordGetFocus_connectSecureWifi_shouldReturnTrue() {
+        final TextView password = mView.findViewById(R.id.password);
+        // Verify password get focus when connect to secure wifi without eap type
+        assertThat(password.isFocused()).isTrue();
+    }
+
     public class TestWifiConfigController extends WifiConfigController {
 
         private TestWifiConfigController(
@@ -221,5 +257,8 @@ public class WifiConfigControllerTest {
         boolean isSplitSystemUser() {
             return false;
         }
+
+        @Override
+        KeyStore getKeyStore() { return mKeyStore; }
     }
 }
