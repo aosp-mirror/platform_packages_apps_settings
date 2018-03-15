@@ -45,8 +45,7 @@ public class AnomalyCleanupJobService extends JobService {
                 new JobInfo.Builder(R.id.job_anomaly_clean_up, component)
                         .setPeriodic(CLEAN_UP_FREQUENCY_MS)
                         .setRequiresDeviceIdle(true)
-                        .setRequiresCharging(true)
-                        .setPersisted(true);
+                        .setRequiresCharging(true);
 
         if (jobScheduler.schedule(jobBuilder.build()) != JobScheduler.RESULT_SUCCESS) {
             Log.i(TAG, "Anomaly clean up job service schedule failed.");

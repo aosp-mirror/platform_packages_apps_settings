@@ -3258,6 +3258,9 @@
         <service android:name=".fuelgauge.batterytip.AnomalyCleanupJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
+        <service android:name=".fuelgauge.batterytip.AnomalyConfigJobService"
+                 android:permission="android.permission.BIND_JOB_SERVICE" />
+
         <service android:name=".fuelgauge.batterytip.AnomalyDetectionJobService"
                  android:permission="android.permission.BIND_JOB_SERVICE" />
 
