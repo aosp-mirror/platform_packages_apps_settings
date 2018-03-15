@@ -18,11 +18,13 @@ package com.android.settings.fuelgauge.batterytip;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
 
@@ -32,6 +34,7 @@ import android.app.job.JobScheduler;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Process;
 import android.os.StatsDimensionsValue;
 import android.os.UserManager;
 
@@ -84,7 +87,7 @@ public class AnomalyDetectionJobServiceTest {
         mBundle = new Bundle();
         mBundle.putParcelable(StatsManager.EXTRA_STATS_DIMENSIONS_VALUE, mStatsDimensionsValue);
 
-        mAnomalyDetectionJobService = new AnomalyDetectionJobService();
+        mAnomalyDetectionJobService = spy(new AnomalyDetectionJobService());
     }
 
     @Test
@@ -92,13 +95,14 @@ public class AnomalyDetectionJobServiceTest {
         AnomalyDetectionJobService.scheduleAnomalyDetection(application, new Intent());
 
         ShadowJobScheduler shadowJobScheduler =
-            Shadows.shadowOf(application.getSystemService(JobScheduler.class));
+                Shadows.shadowOf(application.getSystemService(JobScheduler.class));
         List<JobInfo> pendingJobs = shadowJobScheduler.getAllPendingJobs();
         assertThat(pendingJobs).hasSize(1);
+
         JobInfo pendingJob = pendingJobs.get(0);
         assertThat(pendingJob.getId()).isEqualTo(R.id.job_anomaly_detection);
         assertThat(pendingJob.getMaxExecutionDelayMillis())
-            .isEqualTo(TimeUnit.MINUTES.toMillis(30));
+                .isEqualTo(TimeUnit.MINUTES.toMillis(30));
     }
 
     @Test
@@ -115,9 +119,24 @@ public class AnomalyDetectionJobServiceTest {
     }
 
     @Test
+    public void testSaveAnomalyToDatabase_systemUid_doNotSave() {
+        doReturn(Process.SYSTEM_UID).when(
+                mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
+
+        mAnomalyDetectionJobService.saveAnomalyToDatabase(mBatteryStatsHelper, mUserManager,
+                mBatteryDatabaseManager, mBatteryUtils, mPolicy, mPowerWhitelistBackend,
+                mContext.getContentResolver(), mBundle);
+
+        verify(mBatteryDatabaseManager, never()).insertAnomaly(anyInt(), anyString(), anyInt(),
+                anyInt(), anyLong());
+    }
+
+    @Test
     public void testSaveAnomalyToDatabase_normalApp_save() {
         doReturn(SYSTEM_PACKAGE).when(mBatteryUtils).getPackageName(anyInt());
         doReturn(false).when(mPowerWhitelistBackend).isSysWhitelisted(SYSTEM_PACKAGE);
+        doReturn(Process.FIRST_APPLICATION_UID).when(
+                mAnomalyDetectionJobService).extractUidFromStatsDimensionsValue(any());
 
         mAnomalyDetectionJobService.saveAnomalyToDatabase(mBatteryStatsHelper, mUserManager,
                 mBatteryDatabaseManager, mBatteryUtils, mPolicy, mPowerWhitelistBackend,
