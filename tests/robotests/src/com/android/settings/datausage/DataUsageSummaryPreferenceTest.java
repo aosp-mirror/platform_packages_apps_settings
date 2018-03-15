@@ -207,6 +207,7 @@ public class DataUsageSummaryPreferenceTest {
         mSummaryPreference.setLabels("0.0 GB", "5.0 GB");
     }
 
+    @Test
     public void testSetUsageAndRemainingInfo_withUsageInfo_dataUsageAndRemainingShown() {
         mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
                 new Intent());
@@ -215,6 +216,17 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mDataUsed.getText().toString()).isEqualTo("1.00 MB used");
         assertThat(mDataRemaining.getText().toString()).isEqualTo("9.00 MB left");
+    }
+
+    @Test
+    public void testSetUsageInfo_withDataOverusage() {
+        mSummaryPreference.setUsageInfo(mCycleEnd, mUpdateTime, DUMMY_CARRIER, 1 /* numPlans */,
+                new Intent());
+        mSummaryPreference.setUsageNumbers(11_000_000L, 10_000_000L, true);
+
+        bindViewHolder();
+        assertThat(mDataUsed.getText().toString()).isEqualTo("11.00 MB used");
+        assertThat(mDataRemaining.getText().toString()).isEqualTo("1.00 MB over");
     }
 
     @Test

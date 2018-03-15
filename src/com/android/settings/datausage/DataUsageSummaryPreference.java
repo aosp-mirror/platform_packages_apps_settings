@@ -131,16 +131,7 @@ public class DataUsageSummaryPreference extends Preference {
             holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
         }
 
-        TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
-        usageNumberField.setText(TextUtils.expandTemplate(
-                getContext().getString(R.string.data_used),
-                Formatter.formatFileSize(getContext(), mDataplanUse)));
-        if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
-            TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
-            usageRemainingField.setText(
-                    TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
-                            Formatter.formatFileSize(getContext(), mDataplanSize - mDataplanUse)));
-        }
+        updateDataUsageLabels(holder);
 
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
         usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);
@@ -167,6 +158,26 @@ public class DataUsageSummaryPreference extends Preference {
         limitInfo.setVisibility(
                 mLimitInfoText == null || mLimitInfoText.isEmpty() ? View.GONE : View.VISIBLE);
         limitInfo.setText(mLimitInfoText);
+    }
+
+    private void updateDataUsageLabels(PreferenceViewHolder holder) {
+        TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
+        usageNumberField.setText(TextUtils.expandTemplate(
+                getContext().getString(R.string.data_used),
+                Formatter.formatFileSize(getContext(), mDataplanUse)));
+        if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
+            TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
+            long dataRemaining = mDataplanSize - mDataplanUse;
+            if (dataRemaining >= 0) {
+                usageRemainingField.setText(
+                        TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
+                                Formatter.formatFileSize(getContext(), dataRemaining)));
+            } else {
+                usageRemainingField.setText(
+                        TextUtils.expandTemplate(getContext().getText(R.string.data_overusage),
+                                Formatter.formatFileSize(getContext(), -dataRemaining)));
+            }
+        }
     }
 
     private void setCarrierInfo(TextView carrierInfo, CharSequence carrierName, long updateAge) {
