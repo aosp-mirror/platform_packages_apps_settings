@@ -18,14 +18,16 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SummaryPreference;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
@@ -33,7 +35,11 @@ import java.util.Objects;
 /**
  * Provides a summary of data usage.
  */
-public class DataUsageSummaryPreference extends SummaryPreference {
+public class DataUsageSummaryPreference extends Preference {
+
+    private boolean mChartEnabled = true;
+    private String mStartLabel;
+    private String mEndLabel;
 
     private int mNumPlans;
     /** The ending time of the billing cycle in milliseconds since epoch. */
@@ -44,6 +50,9 @@ public class DataUsageSummaryPreference extends SummaryPreference {
     private CharSequence mCarrierName;
     private String mLimitInfoText;
     private Intent mLaunchIntent;
+
+    /** Progress to display on ProgressBar */
+    private float mProgress;
 
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,6 +66,11 @@ public class DataUsageSummaryPreference extends SummaryPreference {
         }
     }
 
+    public void setProgress(float progress) {
+        mProgress = progress;
+        notifyChanged();
+    }
+
     public void setUsageInfo(long cycleEnd, long snapshotTime, CharSequence carrierName,
             int numPlans, Intent launchIntent) {
         mCycleEndTimeMs = cycleEnd;
@@ -67,9 +81,32 @@ public class DataUsageSummaryPreference extends SummaryPreference {
         notifyChanged();
     }
 
+    public void setChartEnabled(boolean enabled) {
+        if (mChartEnabled != enabled) {
+            mChartEnabled = enabled;
+            notifyChanged();
+        }
+    }
+
+    public void setLabels(String start, String end) {
+        mStartLabel = start;
+        mEndLabel = end;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
+            holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
+            ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
+            bar.setProgress((int) (mProgress * 100));
+            ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
+            ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
+        } else {
+            holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
+        }
 
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
         usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);

@@ -24,6 +24,8 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
@@ -54,6 +56,10 @@ public class DataUsageSummaryPreferenceTest {
     private TextView mCarrierInfo;
     private TextView mDataLimits;
     private Button mLaunchButton;
+    private LinearLayout mLabelBar;
+    private TextView mLabel1;
+    private TextView mLabel2;
+    private ProgressBar mProgressBar;
 
     private long mCycleEnd;
     private long mUpdateTime;
@@ -159,6 +165,46 @@ public class DataUsageSummaryPreferenceTest {
         assertThat(mDataLimits.getVisibility()).isEqualTo(View.GONE);
     }
 
+    @Test
+    public void testSetChartEnabledFalse_hidesLabelBar() {
+        setValidLabels();
+        mSummaryPreference.setChartEnabled(false);
+
+        bindViewHolder();
+        assertThat(mLabelBar.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void testSetEmptyLabels_hidesLabelBar() {
+        mSummaryPreference.setLabels("", "");
+
+        bindViewHolder();
+        assertThat(mLabelBar.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void testLabelBar_isVisible_whenLabelsSet() {
+        setValidLabels();
+        //mChartEnabled defaults to true
+
+        bindViewHolder();
+        assertThat(mLabelBar.getVisibility()).isEqualTo(View.VISIBLE);
+    }
+
+
+    @Test
+    public void testSetProgress_updatesProgressBar() {
+        setValidLabels();
+        mSummaryPreference.setProgress(.5f);
+
+        bindViewHolder();
+        assertThat(mProgressBar.getProgress()).isEqualTo(50);
+    }
+
+    private void setValidLabels() {
+        mSummaryPreference.setLabels("0.0 GB", "5.0 GB");
+    }
+
     private void bindViewHolder() {
         mSummaryPreference.onBindViewHolder(mHolder);
         mUsageTitle = (TextView) mHolder.findViewById(R.id.usage_title);
@@ -166,5 +212,9 @@ public class DataUsageSummaryPreferenceTest {
         mCarrierInfo = (TextView) mHolder.findViewById(R.id.carrier_and_update);
         mDataLimits = (TextView) mHolder.findViewById(R.id.data_limits);
         mLaunchButton = (Button) mHolder.findViewById(R.id.launch_mdp_app_button);
+        mLabelBar = (LinearLayout) mHolder.findViewById(R.id.label_bar);
+        mLabel1 = (TextView) mHolder.findViewById(R.id.text1);
+        mLabel2 = (TextView) mHolder.findViewById(R.id.text2);
+        mProgressBar = (ProgressBar) mHolder.findViewById(R.id.determinateBar);
     }
 }
