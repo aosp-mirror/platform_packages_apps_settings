@@ -31,17 +31,48 @@ import com.android.settingslib.wifi.AccessPointPreference;
 public class ConnectedAccessPointPreference extends AccessPointPreference implements
         View.OnClickListener {
 
+    private final CaptivePortalStatus mCaptivePortalStatus;
     private OnGearClickListener mOnGearClickListener;
+    private boolean mCaptivePortalNetwork;
 
     public ConnectedAccessPointPreference(AccessPoint accessPoint, Context context,
-            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks) {
+            UserBadgeCache cache, @DrawableRes int iconResId, boolean forSavedNetworks,
+            CaptivePortalStatus captivePortalStatus) {
         super(accessPoint, context, cache, iconResId, forSavedNetworks);
-        setWidgetLayoutResource(R.layout.preference_widget_gear_no_bg);
+        mCaptivePortalStatus = captivePortalStatus;
+    }
+
+    @Override
+    protected int getWidgetLayoutResourceId() {
+        return R.layout.preference_widget_gear_optional_background;
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+
+        mCaptivePortalNetwork = mCaptivePortalStatus.isCaptivePortalNetwork();
+        setShowDivider(mCaptivePortalNetwork);
+        if (mCaptivePortalNetwork) {
+            setSummary(R.string.wifi_tap_to_sign_in);
+        }
     }
 
     public void setOnGearClickListener(OnGearClickListener l) {
         mOnGearClickListener = l;
         notifyChanged();
+    }
+
+    @Override
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+
+        final View gear = holder.findViewById(R.id.settings_button);
+        gear.setOnClickListener(this);
+
+        final View gearNoBg = holder.findViewById(R.id.settings_button_no_background);
+        gearNoBg.setVisibility(mCaptivePortalNetwork ? View.INVISIBLE : View.VISIBLE);
+        gear.setVisibility(mCaptivePortalNetwork ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -55,5 +86,9 @@ public class ConnectedAccessPointPreference extends AccessPointPreference implem
 
     public interface OnGearClickListener {
         void onGearClick(ConnectedAccessPointPreference p);
+    }
+
+    public interface CaptivePortalStatus {
+        boolean isCaptivePortalNetwork();
     }
 }
