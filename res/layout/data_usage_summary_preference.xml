@@ -45,10 +45,12 @@
         android:textColor="?android:attr/colorAccent"
         android:textAppearance="@android:style/TextAppearance.Material.Large" />
 
-    <com.android.settings.widget.LinearColorBar
-        android:id="@+id/color_bar"
+    <android.widget.ProgressBar
+        android:id="@+id/determinateBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="28dp" />
+        android:layout_height="10dp"
+        android:progressDrawable="@drawable/data_usage_progress"/>
 
     <LinearLayout
         android:id="@+id/label_bar"
