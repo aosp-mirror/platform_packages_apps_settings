@@ -20,8 +20,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -166,9 +169,20 @@ public class DataUsageSummaryPreference extends Preference {
 
     private void updateDataUsageLabels(PreferenceViewHolder holder) {
         TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
-        usageNumberField.setText(TextUtils.expandTemplate(
-                getContext().getString(R.string.data_used),
-                Formatter.formatFileSize(getContext(), mDataplanUse)));
+
+        final Formatter.BytesResult usedResult = Formatter.formatBytes(getContext().getResources(),
+                mDataplanUse, Formatter.FLAG_CALCULATE_ROUNDED);
+        final SpannableString usageNumberText = new SpannableString(usedResult.value);
+        final int textSize =
+                getContext().getResources().getDimensionPixelSize(R.dimen.usage_number_text_size);
+        usageNumberText.setSpan(new AbsoluteSizeSpan(textSize), 0, usageNumberText.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        CharSequence template = getContext().getText(R.string.data_used_formatted);
+
+        CharSequence usageText =
+                TextUtils.expandTemplate(template, usageNumberText, usedResult.units);
+        usageNumberField.setText(usageText);
+
         if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
             TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
             long dataRemaining = mDataplanSize - mDataplanUse;
