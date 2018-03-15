@@ -35,10 +35,10 @@ import com.android.settings.core.TogglePreferenceController;
 import com.android.settings.search.DatabaseIndexingUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
 
-import androidx.slice.Slice;
-import androidx.slice.builders.SliceAction;
-import androidx.slice.builders.ListBuilder;
-import androidx.slice.builders.ListBuilder.RowBuilder;
+import androidx.app.slice.Slice;
+import androidx.app.slice.builders.SliceAction;
+import androidx.app.slice.builders.ListBuilder;
+import androidx.app.slice.builders.ListBuilder.RowBuilder;
 
 /**
  * Utility class to build Slices objects and Preference Controllers based on the Database managed
