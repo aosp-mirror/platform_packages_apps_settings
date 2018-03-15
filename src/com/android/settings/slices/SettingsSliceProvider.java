@@ -34,10 +34,10 @@ import com.android.settingslib.utils.ThreadUtils;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import androidx.slice.Slice;
-import androidx.slice.SliceProvider;
-import androidx.slice.builders.SliceAction;
-import androidx.slice.builders.ListBuilder;
+import androidx.app.slice.Slice;
+import androidx.app.slice.SliceProvider;
+import androidx.app.slice.builders.SliceAction;
+import androidx.app.slice.builders.ListBuilder;
 
 /**
  * A {@link SliceProvider} for Settings to enabled inline results in system apps.
