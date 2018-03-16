@@ -90,12 +90,12 @@ public class DataUsageSummaryPreferenceControllerTest {
 
         final Intent intent = new Intent();
 
-        when(mDataUsageController.getDataUsageInfo()).thenReturn(info);
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
         mController.setPlanValues(1 /* dataPlanCount */, LIMIT1, USAGE1);
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo(null);
+        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 1 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -113,7 +113,7 @@ public class DataUsageSummaryPreferenceControllerTest {
         mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
 
         mController.updateState(mSummaryPreference);
-        verify(mSummaryPreference).setLimitInfo("500 MB Data warning / 1.00 GB Data limit");
+        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(info.cycleEnd, now - UPDATE_BACKOFF_MS,
                 CARRIER_NAME, 0 /* numPlans */, intent);
         verify(mSummaryPreference).setChartEnabled(true);
@@ -130,7 +130,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("500 MB Data warning / 1.00 GB Data limit");
+        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -152,7 +152,7 @@ public class DataUsageSummaryPreferenceControllerTest {
                 info.cycleEnd, null /* intent */);
         mController.updateState(mSummaryPreference);
 
-        verify(mSummaryPreference).setLimitInfo("500 MB Data warning / 1.00 GB Data limit");
+        verify(mSummaryPreference).setLimitInfo("500 MB data warning / 1.00 GB data limit");
         verify(mSummaryPreference).setUsageInfo(
                 info.cycleEnd,
                 -1L /* snapshotTime */,
@@ -160,6 +160,74 @@ public class DataUsageSummaryPreferenceControllerTest {
                 0 /* numPlans */,
                 null /* launchIntent */);
         verify(mSummaryPreference).setChartEnabled(false);
+    }
+
+    @Test
+    public void testSummaryUpdate_noLimitNoWarning() {
+        final long now = System.currentTimeMillis();
+        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
+        info.warningLevel = 0L;
+        info.limitLevel = 0L;
+
+        final Intent intent = new Intent();
+
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
+        mController.setPlanValues(0 /* dataPlanCount */, LIMIT1, USAGE1);
+        mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
+
+        mController.updateState(mSummaryPreference);
+        verify(mSummaryPreference).setLimitInfo(null);
+    }
+
+    @Test
+    public void testSummaryUpdate_warningOnly() {
+        final long now = System.currentTimeMillis();
+        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
+        info.warningLevel = 1000000L;
+        info.limitLevel = 0L;
+
+        final Intent intent = new Intent();
+
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
+        mController.setPlanValues(0 /* dataPlanCount */, LIMIT1, USAGE1);
+        mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
+
+        mController.updateState(mSummaryPreference);
+        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning");
+    }
+
+    @Test
+    public void testSummaryUpdate_limitOnly() {
+        final long now = System.currentTimeMillis();
+        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
+        info.warningLevel = 0L;
+        info.limitLevel = 1000000L;
+
+        final Intent intent = new Intent();
+
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
+        mController.setPlanValues(0 /* dataPlanCount */, LIMIT1, USAGE1);
+        mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
+
+        mController.updateState(mSummaryPreference);
+        verify(mSummaryPreference).setLimitInfo("1.00 MB data limit");
+    }
+
+    @Test
+    public void testSummaryUpdate_limitAndWarning() {
+        final long now = System.currentTimeMillis();
+        final DataUsageController.DataUsageInfo info = createTestDataUsageInfo(now);
+        info.warningLevel = 1000000L;
+        info.limitLevel = 1000000L;
+
+        final Intent intent = new Intent();
+
+        when(mDataUsageController.getDataUsageInfo(any())).thenReturn(info);
+        mController.setPlanValues(0 /* dataPlanCount */, LIMIT1, USAGE1);
+        mController.setCarrierValues(CARRIER_NAME, now - UPDATE_BACKOFF_MS, info.cycleEnd, intent);
+
+        mController.updateState(mSummaryPreference);
+        verify(mSummaryPreference).setLimitInfo("1.00 MB data warning / 1.00 MB data limit");
     }
 
     private DataUsageController.DataUsageInfo createTestDataUsageInfo(long now) {

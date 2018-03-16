@@ -234,12 +234,17 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     static CharSequence formatUsage(Context context, String template, long usageLevel) {
         final float LARGER_SIZE = 1.25f * 1.25f;  // (1/0.8)^2
         final float SMALLER_SIZE = 1.0f / LARGER_SIZE;  // 0.8^2
+        return formatUsage(context, template, usageLevel, LARGER_SIZE, SMALLER_SIZE);
+    }
+
+    static CharSequence formatUsage(Context context, String template, long usageLevel,
+                                    float larger, float smaller) {
         final int FLAGS = Spannable.SPAN_INCLUSIVE_INCLUSIVE;
 
         final Formatter.BytesResult usedResult = Formatter.formatBytes(context.getResources(),
                 usageLevel, Formatter.FLAG_CALCULATE_ROUNDED);
         final SpannableString enlargedValue = new SpannableString(usedResult.value);
-        enlargedValue.setSpan(new RelativeSizeSpan(LARGER_SIZE), 0, enlargedValue.length(), FLAGS);
+        enlargedValue.setSpan(new RelativeSizeSpan(larger), 0, enlargedValue.length(), FLAGS);
 
         final SpannableString amountTemplate = new SpannableString(
                 context.getString(com.android.internal.R.string.fileSizeSuffix)
@@ -248,7 +253,7 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
                 enlargedValue, usedResult.units);
 
         final SpannableString fullTemplate = new SpannableString(template);
-        fullTemplate.setSpan(new RelativeSizeSpan(SMALLER_SIZE), 0, fullTemplate.length(), FLAGS);
+        fullTemplate.setSpan(new RelativeSizeSpan(smaller), 0, fullTemplate.length(), FLAGS);
         return TextUtils.expandTemplate(fullTemplate,
                 BidiFormatter.getInstance().unicodeWrap(formattedUsage.toString()));
     }

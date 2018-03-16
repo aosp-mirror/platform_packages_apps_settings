@@ -1731,6 +1731,8 @@
     <string name="wifi_band_5ghz">5 GHz</string>
     <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
     <string name="wifi_sign_in_button_text">Sign in</string>
+    <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
+    <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
     <!-- Link speed on Wifi Status screen -->
     <string name="link_speed">%1$d Mbps</string>
 
@@ -3402,14 +3404,11 @@
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
-    <string name="location_scanning_wifi_always_scanning_description">Improve location by allowing
-      system apps and services to detect Wi\u2011Fi networks at any time.</string>
+    <string name="location_scanning_wifi_always_scanning_description">Allow apps and services to scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services.</string>
     <!-- [CHAR LIMIT=130] Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
-    <string name="location_scanning_bluetooth_always_scanning_description">
-        Improve location by allowing system apps and services to detect Bluetooth devices at any
-        time.</string>
+    <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
 
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
@@ -4728,7 +4727,7 @@
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
-    <string name="background_activity_title">Restricted</string>
+    <string name="background_activity_title">Battery restrictions</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
     <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
@@ -4879,8 +4878,12 @@
         <item quantity="one">Restrict app?</item>
         <item quantity="other">Restrict %1$d apps?</item>
     </plurals>
-    <!-- Message for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_app_dialog_message">To save battery, you can stop this app from running in the background when it’s not being used.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as raw string[CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
     <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_ok">Restrict</string>
     <!-- Title for dialog to remove restriction for the app [CHAR LIMIT=NONE] -->
@@ -7755,9 +7758,9 @@
     <string name="encryption_interstitial_no">No</string>
 
     <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">Yes</string>
+    <string name="restricted_true_label">On / Background usage restricted</string>
     <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_false_label">No</string>
+    <string name="restricted_false_label">Off / Uses battery in background</string>
 
     <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
     <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
@@ -8657,6 +8660,9 @@
     <!-- Label for cellular data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="cellular_data_usage">Mobile data usage</string>
 
+    <!-- App data usage, as seen from the platform, in data usage screen [CHAR LIMIT=60] -->
+    <string name="app_cellular_data_usage">App data usage</string>
+
     <!-- Label for wifi data usage in data usage screen [CHAR LIMIT=60] -->
     <string name="wifi_data_usage">Wi-Fi data usage</string>
 
@@ -8689,6 +8695,15 @@
 
     <!-- Title of button for application usage cycle preferences [CHAR LIMIT=40] -->
     <string name="app_usage_cycle">App data usage cycle</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning</string>
+
+    <!-- Format for a summary describing the amount of data the limit is set to [CHAR LIMIT=NONE] -->
+    <string name="cell_data_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data limit</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned or limited [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning_and_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning / <xliff:g name="amount" example="2 GB">^2</xliff:g> data limit</string>
 
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
     <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
@@ -8742,14 +8757,26 @@
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
 
-    <!-- Data usage string [CHAR LIMIT=30] -->
+    <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
 
-    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
-    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">, ^1</xliff:g> left</string>
+    <!-- Data usage over limit string [CHAR LIMIT=30] -->
+    <string name="data_overusage"><xliff:g name="bytes" example="2 GB">^1</xliff:g> over</string>
 
-    <!-- Informational text about time left in billing cycle [CHAR LIMIT=30] -->
-    <string name="cycle_left_time_text"><xliff:g name="time" example="2d">%1$s</xliff:g> left in this cycle</string>
+    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
+    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="cycle_left_multiple_days"><xliff:g name="time" example="2d">%d</xliff:g> days left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <plurals name="billing_cycle_days_left">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
     <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>

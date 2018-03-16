@@ -18,23 +18,40 @@ package com.android.settings.datausage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.SummaryPreference;
+import com.android.settingslib.Utils;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Provides a summary of data usage.
  */
-public class DataUsageSummaryPreference extends SummaryPreference {
+public class DataUsageSummaryPreference extends Preference {
+    private static final long MILLIS_IN_A_DAY = TimeUnit.DAYS.toMillis(1);
+    private static final long WARNING_AGE = TimeUnit.HOURS.toMillis(6L);
 
+    private boolean mChartEnabled = true;
+    private String mStartLabel;
+    private String mEndLabel;
+
+    /** large vs small size is 36/16 ~ 2.25 */
+    private static final float LARGER_FONT_RATIO = 2.25f;
+    private static final float SMALLER_FONT_RATIO = 1.0f;
+
+    private boolean mDefaultTextColorSet;
+    private int mDefaultTextColor;
     private int mNumPlans;
     /** The ending time of the billing cycle in milliseconds since epoch. */
     private long mCycleEndTimeMs;
@@ -44,6 +61,19 @@ public class DataUsageSummaryPreference extends SummaryPreference {
     private CharSequence mCarrierName;
     private String mLimitInfoText;
     private Intent mLaunchIntent;
+
+    /** Progress to display on ProgressBar */
+    private float mProgress;
+    private boolean mHasMobileData;
+
+    /**
+     * The size of the first registered plan if one exists or the size of the warning if it is set.
+     * -1 if no information is available.
+     */
+    private long mDataplanSize;
+
+    /** The number of bytes used since the start of the cycle. */
+    private long mDataplanUse;
 
     public DataUsageSummaryPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,6 +87,11 @@ public class DataUsageSummaryPreference extends SummaryPreference {
         }
     }
 
+    public void setProgress(float progress) {
+        mProgress = progress;
+        notifyChanged();
+    }
+
     public void setUsageInfo(long cycleEnd, long snapshotTime, CharSequence carrierName,
             int numPlans, Intent launchIntent) {
         mCycleEndTimeMs = cycleEnd;
@@ -67,20 +102,50 @@ public class DataUsageSummaryPreference extends SummaryPreference {
         notifyChanged();
     }
 
+    public void setChartEnabled(boolean enabled) {
+        if (mChartEnabled != enabled) {
+            mChartEnabled = enabled;
+            notifyChanged();
+        }
+    }
+
+    public void setLabels(String start, String end) {
+        mStartLabel = start;
+        mEndLabel = end;
+        notifyChanged();
+    }
+
+    void setUsageNumbers(long used, long dataPlanSize, boolean hasMobileData) {
+        mDataplanUse = used;
+        mDataplanSize = dataPlanSize;
+        mHasMobileData = hasMobileData;
+        notifyChanged();
+    }
+
     @Override
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
+
+        if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
+            holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
+            ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
+            bar.setProgress((int) (mProgress * 100));
+            ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
+            ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
+        } else {
+            holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
+        }
+
+        updateDataUsageLabels(holder);
+
         TextView usageTitle = (TextView) holder.findViewById(R.id.usage_title);
         usageTitle.setVisibility(mNumPlans > 1 ? View.VISIBLE : View.GONE);
 
-        TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
-        cycleTime.setText(getContext().getString(R.string.cycle_left_time_text,
-                StringUtil.formatElapsedTime(getContext(),
-                        mCycleEndTimeMs - System.currentTimeMillis(),false /* withSeconds */)));
+        updateCycleTimeText(holder);
 
-        TextView carrierInfo = (TextView) holder.findViewById(R.id.carrier_and_update);
-        setCarrierInfo(carrierInfo, mCarrierName, mSnapshotTimeMs);
+
+        updateCarrierInfo((TextView) holder.findViewById(R.id.carrier_and_update));
 
         Button launchButton = (Button) holder.findViewById(R.id.launch_mdp_app_button);
         launchButton.setOnClickListener((view) -> {
@@ -98,18 +163,61 @@ public class DataUsageSummaryPreference extends SummaryPreference {
         limitInfo.setText(mLimitInfoText);
     }
 
-    private void setCarrierInfo(TextView carrierInfo, CharSequence carrierName, long updateAge) {
-        if (mNumPlans > 0 && updateAge >= 0L) {
+
+    private void updateDataUsageLabels(PreferenceViewHolder holder) {
+        TextView usageNumberField = (TextView) holder.findViewById(R.id.data_usage_view);
+        usageNumberField.setText(TextUtils.expandTemplate(
+                getContext().getString(R.string.data_used),
+                Formatter.formatFileSize(getContext(), mDataplanUse)));
+        if (mHasMobileData && mNumPlans >= 0 && mDataplanSize > 0L) {
+            TextView usageRemainingField = (TextView) holder.findViewById(R.id.data_remaining_view);
+            long dataRemaining = mDataplanSize - mDataplanUse;
+            if (dataRemaining >= 0) {
+                usageRemainingField.setText(
+                        TextUtils.expandTemplate(getContext().getText(R.string.data_remaining),
+                                Formatter.formatFileSize(getContext(), dataRemaining)));
+            } else {
+                usageRemainingField.setText(
+                        TextUtils.expandTemplate(getContext().getText(R.string.data_overusage),
+                                Formatter.formatFileSize(getContext(), -dataRemaining)));
+            }
+        }
+    }
+
+    private void updateCycleTimeText(PreferenceViewHolder holder) {
+        float daysLeft =
+                ((float) mCycleEndTimeMs - System.currentTimeMillis()) / MILLIS_IN_A_DAY;
+        if (daysLeft < 0) {
+            daysLeft = 0;
+        }
+
+        TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
+        cycleTime.setText(
+                (daysLeft > 0 && daysLeft < 1)
+                ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
+                : getContext().getResources().getQuantityString(
+                        R.plurals.billing_cycle_days_left, (int) daysLeft, (int) daysLeft));
+    }
+
+
+    private void updateCarrierInfo(TextView carrierInfo) {
+        if (mNumPlans > 0 && mSnapshotTimeMs >= 0L) {
+            long updateAge = System.currentTimeMillis() - mSnapshotTimeMs;
             carrierInfo.setVisibility(View.VISIBLE);
-            if (carrierName != null) {
+            if (mCarrierName != null) {
                 carrierInfo.setText(getContext().getString(R.string.carrier_and_update_text,
-                        carrierName, StringUtil.formatRelativeTime(
+                        mCarrierName, StringUtil.formatRelativeTime(
                                 getContext(), updateAge, false /* withSeconds */)));
             } else {
                 carrierInfo.setText(getContext().getString(R.string.no_carrier_update_text,
                         StringUtil.formatRelativeTime(
                                 getContext(), updateAge, false /* withSeconds */)));
             }
+
+            carrierInfo.setTextColor(
+                    updateAge <= WARNING_AGE
+                    ? Utils.getColorAttr(getContext(), android.R.attr.textColorPrimary)
+                    : Utils.getColorAttr(getContext(), android.R.attr.colorError));
         } else {
             carrierInfo.setVisibility(View.GONE);
         }

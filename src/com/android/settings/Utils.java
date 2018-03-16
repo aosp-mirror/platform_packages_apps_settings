@@ -48,6 +48,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.ConnectivityManager;
 import android.net.LinkProperties;
@@ -929,7 +930,7 @@ public final class Utils extends com.android.settingslib.Utils {
      */
     public static void setSafeIcon(Preference pref, Drawable icon) {
         Drawable safeIcon = icon;
-        if (icon != null) {
+        if ((icon != null) && !(icon instanceof VectorDrawable)) {
             safeIcon = getSafeDrawable(icon, 500, 500);
         }
         pref.setIcon(safeIcon);

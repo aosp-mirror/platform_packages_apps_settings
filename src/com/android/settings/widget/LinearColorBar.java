@@ -26,6 +26,9 @@ import android.widget.LinearLayout;
 
 import com.android.settings.Utils;
 
+/**
+ * @Deprecated Use {@link android.widget.ProgressBar} instead.
+ */
 public class LinearColorBar extends LinearLayout {
 
     static final int RIGHT_COLOR = 0xffced7db;
