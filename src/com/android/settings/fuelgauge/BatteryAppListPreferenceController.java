@@ -482,6 +482,7 @@ public class BatteryAppListPreferenceController extends AbstractPreferenceContro
             notAvailable = new Preference(mPrefContext);
             notAvailable.setKey(NOT_AVAILABLE);
             notAvailable.setTitle(R.string.power_usage_not_available);
+            notAvailable.setSelectable(false);
             mAppListGroup.addPreference(notAvailable);
         }
     }
