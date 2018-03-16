@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.net.wifi.WifiConfiguration;
@@ -60,6 +62,7 @@ import com.android.settings.search.SearchIndexableRaw;
 import com.android.settings.widget.SummaryUpdater.OnSummaryChangeListener;
 import com.android.settings.widget.SwitchBarController;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
+import com.android.settings.wrapper.ConnectivityManagerWrapper;
 import com.android.settings.wrapper.WifiManagerWrapper;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.wifi.AccessPoint;
@@ -117,6 +120,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     };
 
     protected WifiManager mWifiManager;
+    private ConnectivityManager mConnectivityManager;
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
@@ -237,6 +241,11 @@ public class WifiSettings extends RestrictedSettingsFragment
         mWifiTracker = WifiTrackerFactory.create(
                 getActivity(), this, getLifecycle(), true, true);
         mWifiManager = mWifiTracker.getManager();
+
+        final Activity activity = getActivity();
+        if (activity != null) {
+            mConnectivityManager = getActivity().getSystemService(ConnectivityManager.class);
+        }
 
         mConnectListener = new WifiManager.ActionListener() {
                                    @Override
@@ -777,9 +786,11 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @NonNull
     private ConnectedAccessPointPreference createConnectedAccessPointPreference(
-            AccessPoint accessPoint) {
+            AccessPoint accessPoint,
+            ConnectedAccessPointPreference.CaptivePortalStatus captivePortalStatus) {
         return new ConnectedAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
-                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */);
+                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */,
+                captivePortalStatus);
     }
 
     /**
@@ -828,21 +839,30 @@ public class WifiSettings extends RestrictedSettingsFragment
      * {@link #mConnectedAccessPointPreferenceCategory}.
      */
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
-        final ConnectedAccessPointPreference pref = createConnectedAccessPointPreference(
-                connectedAp);
+        final ConnectedAccessPointPreference pref =
+                createConnectedAccessPointPreference(
+                        connectedAp, this::isConnectedToCaptivePortalNetwork);
 
-        // Launch details page on click.
-        pref.setOnPreferenceClickListener(preference -> {
-            pref.getAccessPoint().saveWifiState(pref.getExtras());
+        // Launch details page or captive portal on click.
+        pref.setOnPreferenceClickListener(
+                preference -> {
+                    pref.getAccessPoint().saveWifiState(pref.getExtras());
+                    Network network = getConnectedWifiNetwork();
+                    if (isConnectedToCaptivePortalNetwork(network)) {
+                        ConnectivityManagerWrapper connectivityManagerWrapper =
+                                new ConnectivityManagerWrapper(mConnectivityManager);
+                        connectivityManagerWrapper.startCaptivePortalApp(network);
+                    } else {
+                        launchNetworkDetailsFragment(pref);
+                    }
+                    return true;
+                });
 
-            new SubSettingLauncher(getContext())
-                    .setTitle(pref.getTitle())
-                    .setDestination(WifiNetworkDetailsFragment.class.getName())
-                    .setArguments(pref.getExtras())
-                    .setSourceMetricsCategory(getMetricsCategory())
-                    .launch();
-            return true;
-        });
+        pref.setOnGearClickListener(
+                preference -> {
+                    pref.getAccessPoint().saveWifiState(pref.getExtras());
+                    launchNetworkDetailsFragment(pref);
+                });
 
         pref.refresh();
 
@@ -852,6 +872,43 @@ public class WifiSettings extends RestrictedSettingsFragment
             mClickedConnect = false;
             scrollToPreference(mConnectedAccessPointPreferenceCategory);
         }
+    }
+
+    private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
+        new SubSettingLauncher(getContext())
+                .setTitle(pref.getTitle())
+                .setDestination(WifiNetworkDetailsFragment.class.getName())
+                .setArguments(pref.getExtras())
+                .setSourceMetricsCategory(getMetricsCategory())
+                .launch();
+    }
+
+    private boolean isConnectedToCaptivePortalNetwork() {
+        return isConnectedToCaptivePortalNetwork(getConnectedWifiNetwork());
+    }
+
+    private boolean isConnectedToCaptivePortalNetwork(Network network) {
+        if (mConnectivityManager == null || network == null) {
+            return false;
+        }
+        return WifiUtils.canSignIntoNetwork(mConnectivityManager.getNetworkCapabilities(network));
+    }
+
+    private Network getConnectedWifiNetwork() {
+        if (mConnectivityManager != null) {
+            Network networks[] = mConnectivityManager.getAllNetworks();
+            if (networks != null) {
+                for (Network network : networks) {
+                    NetworkCapabilities capabilities =
+                            mConnectivityManager.getNetworkCapabilities(network);
+                    if (capabilities != null
+                            && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        return network;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */
