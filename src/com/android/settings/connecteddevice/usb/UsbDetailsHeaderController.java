@@ -17,7 +17,6 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
-import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
@@ -25,14 +24,14 @@ import com.android.settings.applications.LayoutPreference;
 import com.android.settings.widget.EntityHeaderController;
 
 /**
- * This class adds a header with device name and current function.
+ * This class adds a header with device name.
  */
 public class UsbDetailsHeaderController extends UsbDetailsController {
     private static final String KEY_DEVICE_HEADER = "usb_device_header";
 
     private EntityHeaderController mHeaderController;
 
-    public UsbDetailsHeaderController(Context context, PreferenceFragment fragment,
+    public UsbDetailsHeaderController(Context context, UsbDetailsFragment fragment,
             UsbBackend backend) {
         super(context, fragment, backend);
     }
@@ -44,16 +43,13 @@ public class UsbDetailsHeaderController extends UsbDetailsController {
                 (LayoutPreference) screen.findPreference(KEY_DEVICE_HEADER);
         mHeaderController = EntityHeaderController.newInstance(mFragment.getActivity(), mFragment,
                 headerPreference.findViewById(R.id.entity_header));
-        screen.addPreference(headerPreference);
     }
 
 
     @Override
-    protected void refresh(int newMode) {
+    protected void refresh(boolean connected, long functions, int powerRole, int dataRole) {
         mHeaderController.setLabel(mContext.getString(R.string.usb_pref));
         mHeaderController.setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        mHeaderController.setSummary(
-                mContext.getString(ConnectedUsbDeviceUpdater.getSummary(newMode)));
         mHeaderController.done(mFragment.getActivity(), true /* rebindActions */);
     }
 
