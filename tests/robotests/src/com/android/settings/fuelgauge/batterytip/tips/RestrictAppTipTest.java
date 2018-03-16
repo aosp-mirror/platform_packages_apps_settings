@@ -32,8 +32,10 @@ import android.os.Parcel;
 import android.util.Pair;
 
 import com.android.internal.logging.nano.MetricsProto;
+import com.android.settings.R;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
@@ -106,20 +108,37 @@ public class RestrictAppTipTest {
     }
 
     @Test
-    public void getTitle_stateHandled_showHandledTitle() {
-        assertThat(mHandledBatteryTip.getTitle(mContext)).isEqualTo("1 recently restricted");
+    public void getTitle_oneAppHandled_showHandledTitle() {
+        assertThat(mHandledBatteryTip.getTitle(mContext)).isEqualTo("app recently restricted");
+    }
+
+    @Test
+    public void getTitle_moreAppsHandled_showHandledTitle() {
+        mUsageAppList.add(new AppInfo.Builder().build());
+        mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
+        assertThat(mHandledBatteryTip.getTitle(mContext)).isEqualTo("2 apps recently restricted");
     }
 
     @Test
     public void getSummary_stateNew_showRestrictSummary() {
         assertThat(mNewBatteryTip.getSummary(mContext))
-            .isEqualTo("app has high battery usage");
+            .isEqualTo("app has high background battery usage");
     }
 
     @Test
-    public void getSummary_stateHandled_showHandledSummary() {
+    public void getSummary_oneAppHandled_showHandledSummary() {
+        assertThat(mHandledBatteryTip.getSummary(mContext).toString())
+                .isEqualTo(mContext.getResources().getQuantityString(
+                        R.plurals.battery_tip_restrict_handled_summary, 1));
+    }
+
+    @Test
+    public void getSummary_moreAppsHandled_showHandledSummary() {
+        mUsageAppList.add(new AppInfo.Builder().build());
+        mHandledBatteryTip = new RestrictAppTip(BatteryTip.StateType.HANDLED, mUsageAppList);
         assertThat(mHandledBatteryTip.getSummary(mContext))
-            .isEqualTo("App changes are in progress");
+                .isEqualTo(mContext.getResources().getQuantityString(
+                        R.plurals.battery_tip_restrict_handled_summary, 2));
     }
 
     @Test
