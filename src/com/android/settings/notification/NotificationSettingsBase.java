@@ -355,7 +355,13 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             (left, right) -> {
                 if (left.isDeleted() != right.isDeleted()) {
                     return Boolean.compare(left.isDeleted(), right.isDeleted());
+                } else if (left.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+                    // Uncategorized/miscellaneous legacy channel goes last
+                    return 1;
+                } else if (right.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+                    return -1;
                 }
+
                 return left.getId().compareTo(right.getId());
             };
 
