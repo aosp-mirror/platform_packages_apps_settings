@@ -18,7 +18,6 @@ package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -40,14 +39,6 @@ import java.util.List;
 public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @VisibleForTesting
     UsbBackend mUsbBackend;
-
-    private static final String[] FUNCTIONS_LIST = {
-            UsbManager.USB_FUNCTION_NONE,
-            UsbManager.USB_FUNCTION_MTP,
-            UsbManager.USB_FUNCTION_RNDIS,
-            UsbManager.USB_FUNCTION_MIDI,
-            UsbManager.USB_FUNCTION_PTP
-    };
 
     @Override
     public void onAttach(Context context) {
@@ -76,33 +67,13 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
     @Override
     protected List<? extends CandidateInfo> getCandidates() {
         List<CandidateInfo> ret = Lists.newArrayList();
-        for (final String option : FUNCTIONS_LIST) {
-            int newMode = 0;
-            final String title;
-            final Context context = getContext();
-            if (option.equals(UsbManager.USB_FUNCTION_MTP)) {
-                newMode = UsbBackend.MODE_DATA_MTP;
-                title = context.getString(R.string.usb_use_file_transfers);
-            } else if (option.equals(UsbManager.USB_FUNCTION_PTP)) {
-                newMode = UsbBackend.MODE_DATA_PTP;
-                title = context.getString(R.string.usb_use_photo_transfers);
-            } else if (option.equals(UsbManager.USB_FUNCTION_MIDI)) {
-                newMode = UsbBackend.MODE_DATA_MIDI;
-                title = context.getString(R.string.usb_use_MIDI);
-            } else if (option.equals(UsbManager.USB_FUNCTION_RNDIS)) {
-                newMode = UsbBackend.MODE_DATA_TETHER;
-                title = context.getString(R.string.usb_use_tethering);
-            } else if (option.equals(UsbManager.USB_FUNCTION_NONE)) {
-                newMode = UsbBackend.MODE_DATA_NONE;
-                title = context.getString(R.string.usb_use_charging_only);
-            } else {
-                title = "";
-            }
+        for (final long option : UsbDetailsFunctionsController.FUNCTIONS_MAP.keySet()) {
+            final String title = getContext().getString(
+                    UsbDetailsFunctionsController.FUNCTIONS_MAP.get(option));
+            final String key = UsbBackend.usbFunctionsToString(option);
 
-            // Only show supported and allowed options
-            if (mUsbBackend.isModeSupported(newMode)
-                    && !mUsbBackend.isModeDisallowedBySystem(newMode)
-                    && !mUsbBackend.isModeDisallowed(newMode)) {
+            // Only show supported functions
+            if (mUsbBackend.areFunctionsSupported(option)) {
                 ret.add(new CandidateInfo(true /* enabled */) {
                     @Override
                     public CharSequence loadLabel() {
@@ -116,7 +87,7 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
                     @Override
                     public String getKey() {
-                        return option;
+                        return key;
                     }
                 });
             }
@@ -126,34 +97,14 @@ public class UsbDefaultFragment extends RadioButtonPickerFragment {
 
     @Override
     protected String getDefaultKey() {
-        switch (mUsbBackend.getDefaultUsbMode()) {
-            case UsbBackend.MODE_DATA_MTP:
-                return UsbManager.USB_FUNCTION_MTP;
-            case UsbBackend.MODE_DATA_PTP:
-                return UsbManager.USB_FUNCTION_PTP;
-            case UsbBackend.MODE_DATA_TETHER:
-                return UsbManager.USB_FUNCTION_RNDIS;
-            case UsbBackend.MODE_DATA_MIDI:
-                return UsbManager.USB_FUNCTION_MIDI;
-            default:
-                return UsbManager.USB_FUNCTION_NONE;
-        }
+        return UsbBackend.usbFunctionsToString(mUsbBackend.getDefaultUsbFunctions());
     }
 
     @Override
     protected boolean setDefaultKey(String key) {
-        int thisMode = UsbBackend.MODE_DATA_NONE;
-        if (key.equals(UsbManager.USB_FUNCTION_MTP)) {
-            thisMode = UsbBackend.MODE_DATA_MTP;
-        } else if (key.equals(UsbManager.USB_FUNCTION_PTP)) {
-            thisMode = UsbBackend.MODE_DATA_PTP;
-        } else if (key.equals(UsbManager.USB_FUNCTION_RNDIS)) {
-            thisMode = UsbBackend.MODE_DATA_TETHER;
-        } else if (key.equals(UsbManager.USB_FUNCTION_MIDI)) {
-            thisMode = UsbBackend.MODE_DATA_MIDI;
-        }
+        long functions = UsbBackend.usbFunctionsFromString(key);
         if (!Utils.isMonkeyRunning()) {
-            mUsbBackend.setDefaultUsbMode(thisMode);
+            mUsbBackend.setDefaultUsbFunctions(functions);
         }
         return true;
     }

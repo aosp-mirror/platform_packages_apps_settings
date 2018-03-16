@@ -16,6 +16,8 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -38,9 +40,10 @@ public class ConnectedUsbDeviceUpdater {
 
     @VisibleForTesting
     UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, newMode) -> {
+            (connected, functions, powerRole, dataRole) -> {
                 if (connected) {
-                    mUsbPreference.setSummary(getSummary(mUsbBackend.getCurrentMode()));
+                    mUsbPreference.setSummary(getSummary(mUsbBackend.getCurrentFunctions(),
+                            mUsbBackend.getPowerRole()));
                     mDevicePreferenceCallback.onDeviceAdded(mUsbPreference);
                 } else {
                     mDevicePreferenceCallback.onDeviceRemoved(mUsbPreference);
@@ -94,28 +97,32 @@ public class ConnectedUsbDeviceUpdater {
         mUsbReceiver.register();
     }
 
-    public static int getSummary(int mode) {
-        switch (mode) {
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_summary_charging_only;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_NONE:
-                return R.string.usb_summary_power_only;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MTP:
-                return R.string.usb_summary_file_transfers;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_PTP:
-                return R.string.usb_summary_photo_transfers;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_MIDI:
-                return R.string.usb_summary_MIDI;
-            case UsbBackend.MODE_POWER_SINK | UsbBackend.MODE_DATA_TETHER:
-                return R.string.usb_summary_tether;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MTP:
-                return R.string.usb_summary_file_transfers_power;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_PTP:
-                return R.string.usb_summary_photo_transfers_power;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_MIDI:
-                return R.string.usb_summary_MIDI_power;
-            case UsbBackend.MODE_POWER_SOURCE | UsbBackend.MODE_DATA_TETHER:
-                return R.string.usb_summary_tether_power;
+    public static int getSummary(long functions, int power) {
+        switch (power) {
+            case UsbPort.POWER_ROLE_SINK:
+                if (functions == UsbManager.FUNCTION_MTP) {
+                    return R.string.usb_summary_file_transfers;
+                } else if (functions == UsbManager.FUNCTION_RNDIS) {
+                    return R.string.usb_summary_tether;
+                } else if (functions == UsbManager.FUNCTION_PTP) {
+                    return R.string.usb_summary_photo_transfers;
+                } else if (functions == UsbManager.FUNCTION_MIDI) {
+                    return R.string.usb_summary_MIDI;
+                } else {
+                    return R.string.usb_summary_charging_only;
+                }
+            case UsbPort.POWER_ROLE_SOURCE:
+                if (functions == UsbManager.FUNCTION_MTP) {
+                    return R.string.usb_summary_file_transfers_power;
+                } else if (functions == UsbManager.FUNCTION_RNDIS) {
+                    return R.string.usb_summary_tether_power;
+                } else if (functions == UsbManager.FUNCTION_PTP) {
+                    return R.string.usb_summary_photo_transfers_power;
+                } else if (functions == UsbManager.FUNCTION_MIDI) {
+                    return R.string.usb_summary_MIDI_power;
+                } else {
+                    return R.string.usb_summary_power_only;
+                }
             default:
                 return R.string.usb_summary_charging_only;
         }
