@@ -17,7 +17,7 @@ package com.android.settings.core;
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
-import android.support.v7.preference.SeekBarPreference;
+import com.android.settings.widget.SeekBarPreference;
 
 import com.android.settings.slices.SliceData;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
@@ -28,18 +28,20 @@ import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-public class SliderPreferenceControllerTest {
+public class SettingsSliderPreferenceControllerTest {
 
-    private FakeSlider mSliderController;
+    private FakeSliderPreferenceController mSliderController;
 
-    private Context mContext;
     private SeekBarPreference mPreference;
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
-        mPreference = new SeekBarPreference(mContext);
-        mSliderController = new FakeSlider(mContext, "key");
+        mPreference = new SeekBarPreference(RuntimeEnvironment.application);
+        mSliderController = new FakeSliderPreferenceController(RuntimeEnvironment.application,
+                "key");
+
+        mPreference.setContinuousUpdates(true);
+        mPreference.setMax(mSliderController.getMaxSteps());
     }
 
     @Test
@@ -58,7 +60,7 @@ public class SliderPreferenceControllerTest {
 
         mSliderController.updateState(mPreference);
 
-        assertThat(mPreference.getValue()).isEqualTo(newValue);
+        assertThat(mPreference.getProgress()).isEqualTo(newValue);
     }
 
     @Test
@@ -67,12 +69,12 @@ public class SliderPreferenceControllerTest {
                 SliceData.SliceType.SLIDER);
     }
 
-    private class FakeSlider extends SliderPreferenceController {
+    private class FakeSliderPreferenceController extends SliderPreferenceController {
 
         private final int MAX_STEPS = 2112;
         private int mPosition;
 
-        public FakeSlider(Context context, String key) {
+        public FakeSliderPreferenceController(Context context, String key) {
             super(context, key);
         }
 
