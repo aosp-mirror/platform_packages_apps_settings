@@ -42,8 +42,8 @@ public abstract class TogglePreferenceController extends BasePreferenceControlle
     /**
      * Set the Setting to {@param isChecked}
      *
-     * @param isChecked Is {@true} when the setting should be enabled.
-     * @return {@true} if the underlying setting is updated.
+     * @param isChecked Is {@code true} when the setting should be enabled.
+     * @return {@code true} if the underlying setting is updated.
      */
     public abstract boolean setChecked(boolean isChecked);
 

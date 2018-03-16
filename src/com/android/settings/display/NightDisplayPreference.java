@@ -19,25 +19,20 @@ import androidx.preference.SwitchPreference;
 import android.util.AttributeSet;
 
 import com.android.internal.app.ColorDisplayController;
-import com.android.settings.R;
 
-import java.text.DateFormat;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 public class NightDisplayPreference extends SwitchPreference
         implements ColorDisplayController.Callback {
 
     private ColorDisplayController mController;
-    private DateFormat mTimeFormatter;
+    private NightDisplayTimeFormatter mTimeFormatter;
 
     public NightDisplayPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         mController = new ColorDisplayController(context);
-        mTimeFormatter = android.text.format.DateFormat.getTimeFormat(context);
-        mTimeFormatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        mTimeFormatter = new NightDisplayTimeFormatter(context);
     }
 
     @Override
@@ -59,53 +54,6 @@ public class NightDisplayPreference extends SwitchPreference
         mController.setListener(null);
     }
 
-    private String getFormattedTimeString(LocalTime localTime) {
-        final Calendar c = Calendar.getInstance();
-        c.setTimeZone(mTimeFormatter.getTimeZone());
-        c.set(Calendar.HOUR_OF_DAY, localTime.getHour());
-        c.set(Calendar.MINUTE, localTime.getMinute());
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        return mTimeFormatter.format(c.getTime());
-    }
-
-    private void updateSummary() {
-        final Context context = getContext();
-
-        final boolean isActivated = mController.isActivated();
-        final int autoMode = mController.getAutoMode();
-
-        final String autoModeSummary;
-        switch (autoMode) {
-            default:
-            case ColorDisplayController.AUTO_MODE_DISABLED:
-                autoModeSummary = context.getString(isActivated
-                        ? R.string.night_display_summary_on_auto_mode_never
-                        : R.string.night_display_summary_off_auto_mode_never);
-                break;
-            case ColorDisplayController.AUTO_MODE_CUSTOM:
-                if (isActivated) {
-                    autoModeSummary = context.getString(
-                            R.string.night_display_summary_on_auto_mode_custom,
-                            getFormattedTimeString(mController.getCustomEndTime()));
-                } else {
-                    autoModeSummary = context.getString(
-                            R.string.night_display_summary_off_auto_mode_custom,
-                            getFormattedTimeString(mController.getCustomStartTime()));
-                }
-                break;
-            case ColorDisplayController.AUTO_MODE_TWILIGHT:
-                autoModeSummary = context.getString(isActivated
-                        ? R.string.night_display_summary_on_auto_mode_twilight
-                        : R.string.night_display_summary_off_auto_mode_twilight);
-                break;
-        }
-
-        final int summaryFormatResId = isActivated ? R.string.night_display_summary_on
-                : R.string.night_display_summary_off;
-        setSummary(context.getString(summaryFormatResId, autoModeSummary));
-    }
-
     @Override
     public void onActivated(boolean activated) {
         updateSummary();
@@ -124,5 +72,9 @@ public class NightDisplayPreference extends SwitchPreference
     @Override
     public void onCustomEndTimeChanged(LocalTime endTime) {
         updateSummary();
+    }
+
+    private void updateSummary() {
+        setSummary(mTimeFormatter.getAutoModeTimeSummary(getContext(), mController));
     }
 }
