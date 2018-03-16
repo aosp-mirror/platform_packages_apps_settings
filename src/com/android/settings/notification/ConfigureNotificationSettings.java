@@ -55,6 +55,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
     static final String KEY_SWIPE_DOWN = "gesture_swipe_down_fingerprint_notifications";
 
     private static final String KEY_NOTI_DEFAULT_RINGTONE = "notification_default_ringtone";
+    private static final String KEY_ZEN_MODE = "zen_mode_notifications";
 
     private RingtonePreference mRequestPreference;
     private static final int REQUEST_CODE = 200;
@@ -117,6 +118,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
             }
 
         });
+        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         return controllers;
     }
 
@@ -177,6 +179,7 @@ public class ConfigureNotificationSettings extends DashboardFragment {
                     keys.add(KEY_LOCKSCREEN);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE);
                     keys.add(KEY_LOCKSCREEN_WORK_PROFILE_HEADER);
+                    keys.add(KEY_ZEN_MODE);
                     return keys;
                 }
             };

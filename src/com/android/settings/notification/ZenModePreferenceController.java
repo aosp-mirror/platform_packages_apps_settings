@@ -35,23 +35,24 @@ import com.android.settingslib.core.lifecycle.events.OnResume;
 public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenceController
         implements LifecycleObserver, OnResume, OnPause {
 
-    private static final String KEY_ZEN_MODE = "zen_mode";
+    private final String mKey;
     private SettingObserver mSettingObserver;
     private ZenModeSettings.SummaryBuilder mSummaryBuilder;
 
-    public ZenModePreferenceController(Context context, Lifecycle lifecycle) {
+    public ZenModePreferenceController(Context context, Lifecycle lifecycle, String key) {
         super(context);
         mSummaryBuilder = new ZenModeSettings.SummaryBuilder(context);
 
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
+        mKey = key;
     }
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mSettingObserver = new SettingObserver(screen.findPreference(KEY_ZEN_MODE));
+        mSettingObserver = new SettingObserver(screen.findPreference(mKey));
     }
 
     @Override
@@ -70,7 +71,7 @@ public class ZenModePreferenceController extends AdjustVolumeRestrictedPreferenc
 
     @Override
     public String getPreferenceKey() {
-        return KEY_ZEN_MODE;
+        return mKey;
     }
 
     @Override
