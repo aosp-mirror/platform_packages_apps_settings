@@ -48,6 +48,13 @@
         android:title="@string/fingerprint_swipe_for_notifications_title"
         android:fragment="com.android.settings.gestures.SwipeToNotificationSettings" />
 
+    <com.android.settingslib.RestrictedPreference
+        android:key="zen_mode_notifications"
+        android:title="@string/zen_mode_settings_title"
+        settings:useAdminDisabledSummary="true"
+        android:fragment="com.android.settings.notification.ZenModeSettings"
+        settings:allowDividerAbove="false" />
+
     <!-- Empty category to draw divider -->
     <PreferenceCategory
         android:key="all_notifications_divider"
