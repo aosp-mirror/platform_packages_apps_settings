@@ -28,7 +28,7 @@ import android.os.Binder;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.slices.SlicesDatabaseHelper.IndexColumns;
 
-import androidx.app.slice.Slice;
+import androidx.slice.Slice;
 
 /**
  * Class used to map a {@link Uri} from {@link SettingsSliceProvider} to a Slice.
