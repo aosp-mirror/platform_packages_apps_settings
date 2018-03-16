@@ -8135,7 +8135,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
-    <string name="usb_use_charging_only">Charge this device</string>
+    <string name="usb_use_charging_only">No data transfer</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for charging only. -->
@@ -8143,11 +8143,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for powering the other device only. -->
-    <string name="usb_use_power_only">Charging connected device</string>
-    <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
-         user select what the USB connection for this device should be used for. This choice
-         is for powering the other device. -->
-    <string name="usb_use_power_only_desc">Other settings unavailable when turned on</string>
+    <string name="usb_use_power_only">Charge connected device</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -8180,17 +8176,31 @@
          for this device should be used for. These options are more commonly used.
          Choices are usb_use_file_transfer.-->
     <string name="usb_use">Use USB for</string>
-    <!-- The title used in a dialog which lets the user select what the USB connection
-         for this device should be used for. These options are less commonly used.
-         Choices are usb_use_tethering, usb_use_photo_transfers, usb_use_MIDI, and usb_use_power_only.-->
-    <string name="usb_use_also">Also use USB for</string>
     <!-- The label that leads to the Default USB configuration window. -->
-    <string name="usb_default_label">Default USB Configuration</string>
+    <string name="usb_default_label">Default USB configuration</string>
     <!-- Description at the footer of the default USB configuration window that describes how the setting works. -->
     <string name="usb_default_info">When another device is connected and your phone is unlocked, these settings will be applied. Only connect to trusted devices.</string>
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
+    <!-- Settings screen title for USB preference [CHAR LIMIT=35] -->
+    <string name="usb_preference">USB Preferences</string>
+
+    <!-- The title used in USB Preferences which lets the user select whether USB
+         should be in host or device mode. -->
+    <string name="usb_control_title">USB controlled by</string>
+    <!-- The option in USB Preferences for selecting USB to be in host mode. This allows
+         the user to connect peripherals such as a mouse or flash drive to the device. -->
+    <string name="usb_control_host">Connected device</string>
+    <!-- The option in USB Preferences for selecting USB to be in device mode. This allows
+         the device to provide services such as file transfer or tethering to another device. -->
+    <string name="usb_control_device">This device</string>
+    <!-- The summary text that appears under a USB control option while it is in the process of
+         switching control or power. -->
+    <string name="usb_switching">Switching...</string>
+    <!-- The summary text that appears under a USB control option when switching control or power has
+         failed. -->
+    <string name="usb_switching_failed">Couldn\'t switch</string>
 
     <!-- Settings item summary for USB preference when set to charging only [CHAR LIMIT=NONE] -->
     <string name="usb_summary_charging_only">Charging this device</string>

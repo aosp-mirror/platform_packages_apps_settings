@@ -23,6 +23,8 @@ import android.app.Activity;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.support.v14.preference.PreferenceFragment;
+import android.hardware.usb.UsbManager;
+import android.hardware.usb.UsbPort;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 
@@ -58,7 +60,7 @@ public class UsbDetailsHeaderControllerTest {
     @Mock
     private UsbBackend mUsbBackend;
     @Mock
-    private PreferenceFragment mFragment;
+    private UsbDetailsFragment mFragment;
     @Mock
     private Activity mActivity;
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
@@ -95,22 +97,10 @@ public class UsbDetailsHeaderControllerTest {
     @Test
     public void displayRefresh_charging_shouldSetHeader() {
         mDetailsHeaderController.displayPreference(mScreen);
-        mDetailsHeaderController.refresh(UsbBackend.MODE_DATA_NONE);
+        mDetailsHeaderController.refresh(true, UsbManager.FUNCTION_NONE, UsbPort.POWER_ROLE_SINK,
+                UsbPort.DATA_ROLE_DEVICE);
         verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
         verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        verify(mHeaderController)
-            .setSummary(mContext.getString(R.string.usb_summary_charging_only));
-        verify(mHeaderController).done(mActivity, true);
-    }
-
-    @Test
-    public void displayRefresh_mtp_shouldSetHeader() {
-        mDetailsHeaderController.displayPreference(mScreen);
-        mDetailsHeaderController.refresh(UsbBackend.MODE_DATA_MTP);
-        verify(mHeaderController).setLabel(mContext.getString(R.string.usb_pref));
-        verify(mHeaderController).setIcon(mContext.getDrawable(R.drawable.ic_usb));
-        verify(mHeaderController)
-            .setSummary(mContext.getString(R.string.usb_summary_file_transfers));
         verify(mHeaderController).done(mActivity, true);
     }
 }

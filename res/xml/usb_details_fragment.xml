@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright (C) 2017 The Android Open Source Project
+  Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/device_details_title">
+    android:title="@string/usb_preference"
+    android:key="usb_details_fragment">
 
     <com.android.settings.applications.LayoutPreference
         android:key="usb_device_header"
@@ -25,11 +26,14 @@
         android:selectable="false"/>
 
     <PreferenceCategory
-        android:key="usb_main_options"
+        android:key="usb_details_data_role"
+        android:title="@string/usb_control_title"/>
+
+    <PreferenceCategory
+        android:key="usb_details_functions"
         android:title="@string/usb_use"/>
 
     <PreferenceCategory
-        android:key="usb_secondary_options"
-        android:title="@string/usb_use_also"/>
+        android:key="usb_details_power_role"/>
 
 </PreferenceScreen>
