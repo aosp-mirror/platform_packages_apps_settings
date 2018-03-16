@@ -112,7 +112,7 @@ public class BatteryTipDialogFragmentTest {
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
         assertThat(shadowDialog.getMessage())
-                .isEqualTo(mContext.getString(R.string.battery_tip_dialog_message, "1h"));
+                .isEqualTo(mContext.getString(R.string.battery_tip_dialog_message, 1));
     }
 
     @Test
@@ -185,7 +185,7 @@ public class BatteryTipDialogFragmentTest {
         final AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
         ShadowAlertDialog shadowDialog = shadowOf(dialog);
 
-        assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction for app?");
+        assertThat(shadowDialog.getTitle()).isEqualTo("Remove restriction?");
         assertThat(shadowDialog.getMessage())
                 .isEqualTo(mContext.getString(R.string.battery_tip_unrestrict_app_dialog_message));
     }
