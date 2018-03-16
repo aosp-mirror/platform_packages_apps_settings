@@ -8765,13 +8765,13 @@
     <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
-    <string name="cycle_left_multiple_days"><xliff:g name="time" example="2d">%d</xliff:g> days left</string>
-
-    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <plurals name="billing_cycle_days_left">
         <item quantity="one">%d day left</item>
         <item quantity="other">%d days left</item>
     </plurals>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="billing_cycle_none_left">No time remaining</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
