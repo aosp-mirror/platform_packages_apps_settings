@@ -330,13 +330,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"সময় অঞ্চল বেছে নিন"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"তারিখ"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"তারিখ সেট করুন"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"অঞ্চল"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"টাইম জোন"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC অফসেট বেছে নিন"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"বর্ণানুক্রমে সাজান"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"সময় অঞ্চলের অনুসারে সাজান"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> <xliff:g id="TRANSITION_DATE">%2$s</xliff:g> তারিখে চালু হবে।"</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ব্যবহার করা হয়। <xliff:g id="TRANSITION_DATE">%3$s</xliff:g> থেকে <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> শুরু হয়।"</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g> ব্যবহার করা হয়। ডেলাইট সেভিং হয় না।"</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"ডেলাইট সেভিং সময়"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"স্ট্যান্ডার্ড টাইম"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"অঞ্চল অনুযায়ী টাইম জোন"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"সুনির্দিষ্ট অফসেট টাইম জোন"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"অঞ্চল অনুযায়ী টাইম জোন দেখুন"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"UTC অফসেট অনুযায়ী টাইম জোন দেখুন"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"তারিখ"</string>
     <string name="time_picker_title" msgid="483460752287255019">"সময়"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"অটোমেটিক লক"</string>
@@ -362,7 +369,9 @@
     <string name="security_settings_title" msgid="4918904614964215087">"নিরাপত্তা ও লোকেশন"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"এনক্রিপশন ও ক্রেডেনশিয়াল"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"ফোন এনক্রিপশন"</string>
+    <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"ফোন এনক্রিপ্ট করা হয়নি"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"ডিভাইসটি এনক্রিপ্টেড"</string>
+    <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"ডিভাইস এনক্রিপ্ট করা হয়নি"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"স্কিন লকের পছন্দগুলি"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"আমার স্থান, স্ক্রিন আনলক, সিম কার্ড লক, ক্রেডেনশিয়াল স্টোরেজ লক সেট করুন"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"আমার স্থান, স্ক্রিন আনলক, ক্রেডেনশিয়াল স্টোরেজ লক সেট করুন"</string>
@@ -469,14 +478,18 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"আপনি যে পাসওয়ার্ডটি লিখেছেন সেটি ঠিক আছে, কিন্তু দুর্ভাগ্যবশত আপনার ডেটা বিকৃত হয়েছে। \n\nআবার আপনার ট্যাবলেট ব্যবহার করা আবার শুরু করতে, আপনাকে ফ্যাক্টরি রিসেট করতে হবে। আবার সেট করার পর আপনি যখন আপনার ফোন সেট আপ করবেন তখন আপনার Google অ্যাকাউন্টে ব্যাকআপ করা যে কোনো ডেটা পুনরুদ্ধার করার সুযোগ পাবেন।"</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"আপনি যে পাসওয়ার্ডটি লিখেছেন সেটি ঠিক আছে, কিন্তু দুর্ভাগ্যবশত আপনার ডেটা বিকৃত হয়েছে। \n\nআবার আপনার ফোন ব্যবহার করা আবার শুরু করতে, আপনাকে ফ্যাক্টরি রিসেট করতে হবে। আবার সেট করার পর আপনি যখন আপনার ফোন সেট আপ করবেন তখন আপনার Google অ্যাকাউন্টে ব্যাকআপ করা যে কোনো ডেটা পুনরুদ্ধার করার সুযোগ পাবেন।"</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"ইনপুট পদ্ধতি পরিবর্তন করুন"</string>
-    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"সুরক্ষার জন্য স্ক্রিন লক সেট করুন"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"অন্যদের আপনার ট্যাবলেট ব্যবহার করা থেকে আটকান"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"অন্যদের আপনার ডিভাইস ব্যবহার করা থেকে আটকান"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"অন্যদের আপনার ফোন ব্যবহার করা থেকে আটকান"</string>
+    <!-- no translation found for suggested_lock_settings_title (8498743819223200961) -->
+    <skip />
+    <!-- no translation found for suggested_lock_settings_summary (2296800316150748710) -->
+    <skip />
+    <!-- no translation found for suggested_lock_settings_summary (7562847814806365373) -->
+    <skip />
+    <!-- no translation found for suggested_lock_settings_summary (1526355348444658181) -->
+    <skip />
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"আপনার আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"আপনার আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"আপনার আঙ্গুলের ছাপ দিয়ে আনলক করুন"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"স্ক্রিন লক বেছে নিন"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"কর্মস্থলের লক বেছে নিন"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"আপনার ট্যাবলেটটিকে নিরাপদ করুন"</string>
@@ -676,7 +689,7 @@
     <string name="bluetooth_menu_advanced" msgid="8572178316357220524">"উন্নত"</string>
     <string name="bluetooth_advanced_titlebar" msgid="2142159726881547669">"উন্নত ব্লুটুথ"</string>
     <string name="bluetooth_empty_list_bluetooth_off" msgid="6351930724051893423">"যখন ব্লুটুথ চালু করা হয়, তখন আপনার অন্যান্য কাছাকাছির ব্লুটুথ ডিভাইসগুলির সাথে যোগাযোগ করতে পারে৷"</string>
-    <string name="ble_scan_notify_text" msgid="1295915006005700650">"অবস্থানের যথার্থতা উন্নত করতে, সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলি এখনও ব্লুটুথ ডিভাইসগুলিকে সনাক্ত করতে পারবে৷ আপনি এটিকে <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>স্ক্যানিং সেটিংস<xliff:g id="LINK_END_1">LINK_END</xliff:g> এর মধ্যে পরিবর্তন করতে পারেন।"</string>
+    <string name="ble_scan_notify_text" msgid="1295915006005700650">"অবস্থানের যথার্থতা উন্নত করতে, সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলি এখনও ব্লুটুথ ডিভাইসগুলিকে শনাক্ত করতে পারবে৷ আপনি এটিকে <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>স্ক্যানিং সেটিংস<xliff:g id="LINK_END_1">LINK_END</xliff:g> এর মধ্যে পরিবর্তন করতে পারেন।"</string>
     <string name="bluetooth_connect_failed" msgid="4500234659813241053">"সংযোগ করা যায়নি। আবার চেষ্টা করুন।"</string>
     <string name="device_details_title" msgid="6576953269221085300">"ডিভাইসের বিবরণ"</string>
     <string name="bluetooth_device_mac_address" msgid="2513724313558236181">"ডিভাইসের ব্লুটুথ ঠিকানা: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
@@ -707,8 +720,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"সেটিংস মনে রাখুন"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"ব্লুটুথের মাধ্যমে সংযুক্ত সর্বাধিক অডিও ডিভাইস"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"সর্বাধিক কতগুলি অডিও ডিভাইস ব্লুটুথের মাধ্যমে সংযুক্ত করা যাবে তা নির্দিষ্ট করুন"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"ব্লুটুথ AVDTP বিলম্ব সম্পর্কিত রিপোর্ট চালু করুন"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"ব্লুটুথ AVDTP বিলম্ব সম্পর্কিত রিপোর্ট পাওয়ার অনুমতি দিন"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"\'ব্লুটুথ AVDTP ডিলে\' রিপোর্ট বন্ধ করুন"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"\'ব্লুটুথ AVDTP ডিলে\' রিপোর্ট পাওয়ার বিকল্পটি বন্ধ করুন"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"কাস্ট করুন"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"ওয়্যারলেস প্রদর্শন সক্ষম করুন"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"কাছাকাছি কোনো ডিভাইস পাওয়া যায়নি।"</string>
@@ -724,6 +737,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"সাইন-ইন করুন"</string>
+    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
+    <skip />
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi চালু করতে চাইছে"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> Wi-Fi বন্ধ করতে চাইছে"</string>
@@ -927,8 +942,10 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"বিমান মোড চালু থাকার কারণে এটি উপলভ্য নয়"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"ওয়াই-ফাই কলিং"</string>
-    <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"ওয়াই-ফাই দিয়ে কল কভারেজ বাড়ান"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"ওয়াই-ফাই কলিং চালু করুন"</string>
+    <!-- no translation found for wifi_calling_suggestion_title (5702964371483390024) -->
+    <skip />
+    <!-- no translation found for wifi_calling_suggestion_summary (1331793267608673739) -->
+    <skip />
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"কলিং পছন্দ"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"ওয়াই-ফাই কলিং মোড"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"পছন্দের রোমিং"</string>
@@ -1148,7 +1165,7 @@
     <string name="model_summary" msgid="8306235877567782987">"মডেল: %1$s"</string>
     <string name="hardware_info" msgid="2605080746512527805">"মডেল ও হার্ডওয়্যার"</string>
     <string name="hardware_revision" msgid="8893547686367095527">"হার্ডওয়্যার ভার্সন"</string>
-    <string name="fcc_equipment_id" msgid="149114368246356737">"সরঞ্জাম ID"</string>
+    <string name="fcc_equipment_id" msgid="149114368246356737">"টুল ID"</string>
     <string name="baseband_version" msgid="1848990160763524801">"বেসব্যান্ড ভার্সন"</string>
     <string name="kernel_version" msgid="9192574954196167602">"কার্নেল ভার্সন"</string>
     <string name="build_number" msgid="3075795840572241758">"বিল্ড নম্বর"</string>
@@ -1443,17 +1460,18 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"কাজের প্রোফাইলের জন্য অবস্থান"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"অ্যাপ-স্তরের অনুমতিগুলি"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"সাম্প্রতিক অবস্থান অনুরোধগুলি"</string>
-    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
-    <skip />
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"সবগুলি দেখুন"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"সম্প্রতি কোনো অ্যাপ্লিকেশান অবস্থানের অনুরোধ করেনি"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"লোকেশন পরিষেবা"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"উচ্চ ব্যাটারির ব্যবহার"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"কম ব্যাটারির ব্যবহার"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"স্ক্যান করা হচ্ছে"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"ওয়াই-ফাই স্ক্যানিং"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"যে কোনো সময়ে ওয়াই-ফাই নেটওয়ার্কগুলিকে সনাক্ত করার জন্য সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলিকে অনুমতি দিয়ে অবস্থান উন্নত করুন।"</string>
+    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
+    <skip />
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"ব্লুটুথ স্ক্যানিং"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"যে কোনো সময়ে ব্লুটুথ ডিভাইসগুলিকে সনাক্ত করার জন্য সিস্টেম অ্যাপ্লিকেশান এবং পরিষেবাগুলিকে অনুমতি দিয়ে অবস্থান উন্নত করুন।"</string>
+    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"ওয়াই-ফাই ও মোবাইল নেটওয়ার্ক অবস্থান"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"দ্রুত আপনার লোকেশন নির্ধারণ করতে অ্যাপগুলিকে Google লোকেশন পরিষেবা ব্যবহার করতে দিন। বেনামী লোকেশন ডেটা সংগ্রহ করা হবে এবং Google এ পাঠানো হবে।"</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"ওয়াই-ফাই দ্বারা অবস্থান নির্ণয় করা হয়েছে"</string>
@@ -1608,7 +1626,7 @@
     <string name="install_text" msgid="884360662922471113">"ইনস্টল করুন"</string>
     <string name="disable_text" msgid="6544054052049395202">"অক্ষম করুন"</string>
     <string name="enable_text" msgid="9217362512327828987">"সক্ষম করুন"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"ডেটা সাফ করুন"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"স্টোরেজ সাফ করুন"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"আপডেটগুলি আনইনস্টল করুন"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"কিছু ক্রিয়ার জন্য আপনি ডিফল্টরূপে এই অ্যাপ্লিকেশান লঞ্চ করা চয়ন করেছেন।"</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"আপনি এই অ্যাপ্লিকেশানটিকে উইজেটগুলিকে তৈরি করা এবং তাদের ডেটা অ্যাক্সেস করার মঞ্জুরি দেওয়া চয়ন করেছেন৷"</string>
@@ -1650,9 +1668,7 @@
     <string name="dlg_cancel" msgid="1674753358972975911">"বাতিল"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"অ্যাপ্লিকেশানটি ইনস্টল থাকা অ্যাপ্লিকেশানগুলির তালিকায় পাওয়া যায়নি।"</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"অ্যাপ্লিকেশান ডেটা সাফ করা যায়নি।"</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"ডেটা সাফ করুন"</string>
-    <string name="clear_failed_dlg_text" msgid="5464475937929941008">"অ্যাপ্লিকেশানের জন্য ডেটা সাফ করা হয়নি।"</string>
+    <string name="clear_failed_dlg_text" msgid="8651231637137025815">"অ্যাপের জন্য স্টোরেজ সাফ করা যায়নি।"</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"এই অ্যাপ্লিকেশানটি আপনার ট্যাবলেটের নিম্নলিখিত জিনিস অ্যাক্সেস করতে পারবে:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"এই অ্যাপ্লিকেশানটি আপনার ফোনের নিম্নলিখিত জিনিস অ্যাক্সেস করতে পারবে:"</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"এই অ্যাপ্লিকেশানটি আপনার ট্যাবলেট উপর নিম্নলিখিত জিনিসগুলি অ্যাক্সেস করবে। কার্য-সম্পাদনা উন্নত করতে এবং মেমরি ব্যবহার কমাতে, কিছু অনুমতি <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> এ উপলব্ধ কারণ এটি <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g> এর সমরুপ প্রক্রিয়াতেই চলে।"</string>
@@ -2005,7 +2021,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> অবশিষ্ট রয়েছে"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> চার্জ করা বাকি"</string>
-    <string name="background_activity_title" msgid="4797874712348525348">"বিধিনিষেধযুক্ত"</string>
+    <!-- no translation found for background_activity_title (4645016676653647542) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"অ্যাপটি পটভূমিতে চলতে দিন"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"যখন অ্যাপটি ব্যবহার করা হয় না তখন সেটি পটভূমিতে চালু থাকতে পারে"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"যখন অ্যাপটি ব্যবহার করা হয় না তখন পটভূমিতে সেটির ব্যবহার সীমিত"</string>
@@ -2082,12 +2099,21 @@
       <item quantity="one">%1$dটি অ্যাপ সীমাবদ্ধ করবেন?</item>
       <item quantity="other">%1$dটি অ্যাপ সীমাবদ্ধ করবেন?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="5818730114373015028">"ব্যাটারি সাশ্রয় করার জন্য, ব্যবহার না করার সময় আপনি এই অ্যাপটিকে ব্যাকগ্রাউন্ডে চলতে থাকা বন্ধ করতে পারেন।"</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"সীমাবদ্ধ করুন"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"<xliff:g id="APP">%1$s</xliff:g> এর জন্য সীমাবদ্ধতা সরাতে চান?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"এই অ্যাপটি ব্যাকগ্রাউন্ডে থাকাকালীন ব্যাটারি ব্যবহার করতে পারবে। এর কারণে আপনার ব্যাটারি দ্রুত খরচ হতে পারে।"</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"সরান"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"এখন না"</string>
+    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <skip />
     <string name="smart_battery_manager_title" msgid="5677222263071864438">"স্মার্ট ব্যাটারি পরিচালক"</string>
     <string name="smart_battery_title" msgid="7014692334636228916">"ব্যাটারি অটোমেটিক পরিচালনা করুন"</string>
     <string name="smart_battery_summary" msgid="6435844879637999044">"পাওয়ারের ব্যবহার সংক্রান্ত অ্যাপের মাধ্যমে নিজে থেকেই পাওয়ারের ব্যবহার অ্যাডজাস্ট করুন"</string>
@@ -2096,6 +2122,8 @@
       <item quantity="one">%1$dটি অ্যাপ</item>
       <item quantity="other">%1$dটি অ্যাপ</item>
     </plurals>
+    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"অ্যাপগুলিকে নিজে থেকে সীমাবদ্ধ করুন"</string>
+    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"অ্যাপগুলিকে ব্যাকগ্রাউন্ডে বেশি ব্যাটারি ব্যবহার করা থেকে আটকান"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"অ্যাপটি বন্ধ করবেন?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g> অ্যাপটি আপনার ফোনকে জাগিয়ে রাখছে, তাই আপনার ফোন স্বাভাবিকভাবে ব্যাটারি পরিচালনা করতে পারছে না।\n\nএই সমস্যার সমাধানের জন্য আপনি অ্যাপটি বন্ধ করতে পারেন।\n\nতার পরেও যদি এরকম ঘটতে থাকে, তাহলে ব্যাটারির পারফরম্যান্সের উন্নতি করতে এই অ্যাপটি আনইনস্টল করতে হতে পারে।"</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"<xliff:g id="APP">%1$s</xliff:g> অ্যাপটি আপনার ট্যাবলেট জাগিয়ে রাখছে, তাই আপনার ট্যাবলেট স্বাভাবিকভাবে ব্যাটারি পরিচালনা করতে পারছে না।\n\nএই সমস্যার সমাধানের জন্য আপনি অ্যাপটি বন্ধ করতে পারেন।\n\nতার পরেও যদি এরকম ঘটতে থাকে, তাহলে ব্যাটারির পারফরম্যান্সের উন্নতি করতে এই অ্যাপটি আনইনস্টল করতে হতে পারে।"</string>
@@ -2317,8 +2345,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"আপনি ক্রেডেনশিয়াল স্টোরেজ ব্যবহার করার আগে আপনার ডিভাইসে একটি সুরক্ষিত লক স্ক্রিন থাকতে হবে"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"লক সেট করুন"</string>
     <string name="usage_access_title" msgid="332333405495457839">"ব্যবহারের অ্যাক্সেস যুক্ত অ্যাপ্স"</string>
-    <!-- no translation found for emergency_tone_title (254495218194925271) -->
-    <skip />
+    <string name="emergency_tone_title" msgid="254495218194925271">"আপদকালীন ডায়ালিং সিগন্যাল"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"জরুরি কল স্থাপন করা সময় কি ধরণের কার্যকলাপ করবে তা সেট করুন"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"ব্যাক-আপ"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"ব্যাকআপ ও পুনরুদ্ধার"</string>
@@ -2927,12 +2954,9 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"ডক স্পিকার শুরু"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"সমস্ত অডিও"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"কেবলমাত্র মিডিয়া অডিও"</string>
-    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
-    <skip />
-    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
-    <skip />
-    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
-    <skip />
+    <string name="emergency_tone_silent" msgid="3750231842974733677">"সাইলেন্ট"</string>
+    <string name="emergency_tone_alert" msgid="8523447641290736852">"টোন"</string>
+    <string name="emergency_tone_vibrate" msgid="2278872257053690683">"ভাইব্রেশন"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"ধ্বনিগুলিতে শক্তি"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"কখনও নয়"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -2941,7 +2965,8 @@
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"বিরক্ত করবেন না"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"\'বিরক্ত করবেন না\' মোড চালু করুন"</string>
-    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"আচরণ"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"ব্যতিক্রম"</string>
+    <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"সময়কাল"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"এগুলির সাউন্ড ও ভাইব্রেশন হবে"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"কোনও সাউন্ড নয়"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"সম্পূর্ণ নীরব"</string>
@@ -2959,6 +2984,23 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"ভিজ্যুয়াল ব্যাঘাতগুলিকে ব্লক করুন"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"ভিজুয়াল সঙ্কেতগুলি চালু করুন"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"কী ব্লক করা হবে"</string>
+    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"যখন বিজ্ঞপ্তি আসবে"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"সাউন্ড এবং ভাইব্রেশন মিউট করুন"</string>
+    <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"স্ক্রিন চালু করতে চাই না"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"আলো ব্লিঙ্ক করুক তা চাই না"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"স্ক্রিনে যেন বিজ্ঞপ্তি না আসে"</string>
+    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"স্ট্যাটাস বারের আইকন লুকান"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"বিজ্ঞপ্তির ডট লুকান"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"অ্যাম্বিয়েন্ট ডিসপ্লে থেকে লুকান"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"বিজ্ঞপ্তির তালিকা থেকে লুকান"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"সাউন্ড এবং ভাইব্রেশন"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"সাউন্ড, ভাইব্রেশন এবং বিজ্ঞপ্তির যে চিহ্নগুলি দেখা যায় তার মধ্যে কয়েকটি"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"সাউন্ড, ভাইব্রেশন এবং বিজ্ঞপ্তির যে চিহ্নগুলি দেখা যায়"</string>
+    <!-- no translation found for zen_mode_no_exceptions (7653433997399582247) -->
+    <skip />
+    <!-- no translation found for zen_mode_other_options (520015080445012355) -->
+    <skip />
     <string name="zen_mode_add" msgid="90014394953272517">"যোগ করুন"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"চালু করুন"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"এখনই চালু করুন"</string>
@@ -2969,9 +3011,17 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"<xliff:g id="APP_NAME">%s</xliff:g> অ্যাপটি নিজে থেকেই \'বিরক্ত করবেন না\' মোড চালু করে দিয়েছে"</string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"শুধুমাত্র অগ্রাধিকার"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9067685807840094102">"চালু আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"চালু আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"বন্ধ আছে / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"বন্ধ"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"চালু"</string>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"প্রতিবার জিজ্ঞেস করা হবে (যদি না নিজে থেকেই চালু হয়ে যায়)"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"যতক্ষণ না আপনি বন্ধ করছেন (যদি না নিজে থেকেই চালু হয়ে যায়)"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
+      <item quantity="one"><xliff:g id="NUM_HOURS">%d</xliff:g> ঘণ্টা (যদি না নিজে থেকেই চালু হয়ে যায়)</item>
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> ঘণ্টা (যদি না নিজে থেকেই চালু হয়ে যায়)</item>
+    </plurals>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> মিনিট (যদি না নিজে থেকেই চালু হয়ে যায়)"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="8115159143760078050">
       <item quantity="one"><xliff:g id="ON_COUNT">%d</xliff:g>টি নিয়ম নিজে থেকে চালু হতে পারে</item>
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>টি নিয়ম নিজে থেকে চালু হতে পারে</item>
@@ -3112,9 +3162,7 @@
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"কোন ধরণের নিয়ম চান বাছুন"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\"<xliff:g id="RULE">%1$s</xliff:g>\" নিয়ম মুছে ফেলবেন?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"মুছুন"</string>
-    <string name="zen_mode_rule_type" msgid="2289413469580142888">"নিয়মের প্রকার"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"অজানা"</string>
-    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"নিয়ম কনফিগার করুন"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"এই সেটিংগুলি এখনই পরিবর্তন করা যাবে না। অ্যাপটি (<xliff:g id="APP_NAME">%1$s</xliff:g>) কাস্টম আচরণের সাথে \'বিরক্ত করবেন না\'\' মোডটি নিজে থেকেই চালু করে দিয়েছে।"</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"এই সেটিংগুলি এখনই পরিবর্তন করা যাবে না। অ্যাপটি কাস্টম আচরণের সাথে \'বিরক্ত করবেন না\'\' মোডটি নিজে থেকেই চালু করে দিয়েছে।"</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"এই সেটিংগুলি এখনই পরিবর্তন করা যাবে না। কাস্টম আচরণের সাথে ম্যানুয়ালী \'\'বিরক্ত করবেন না\'\' মোডটি চালু করা ছিল।"</string>
@@ -3151,8 +3199,9 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"শুধুমাত্র তারকাচিহ্নিত পরিচিতিদের থেকে"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"কোনো কিছুই নয়"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"অ্যালার্মগুলি"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"মিডিয়া"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"স্পর্শ এবং চার্জ করার সময় হওয়া সাউন্ডের মতো সিস্টেম ফিডব্যাক অন্তর্ভুক্ত"</string>
+    <string name="zen_mode_media" msgid="8808264142134422380">"মিডিয়া"</string>
+    <!-- no translation found for zen_mode_system (2541380718411593581) -->
+    <skip />
     <string name="zen_mode_reminders" msgid="5458502056440485730">"অনুস্মারকগুলি"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"ইভেন্টগুলি"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"সমস্ত কলার"</string>
@@ -3208,8 +3257,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"আপনার ডিভাইস আনলক করার জন্য আঙ্গুলের ছাপ ব্যবহার করা ছাড়াও ডিভাইসটি চালু হওয়ার সময় পাসওয়ার্ড দেওয়ার মাধ্যমে আপনি এটিকে আরো সুরক্ষিত রাখতে পারেন। ডিভাইসটি চালু না হওয়া পর্যন্ত এতে কল, মেসেজ বা অ্যালার্মের কোনও বিজ্ঞপ্তি আসবে না।\n\nএর ফলে ডিভাইসটি হারিয়ে বা চুরি হয়ে গেলেও আপনার ডেটা সুরক্ষিত থাকবে। চালু করার সময় পাসওয়ার্ড দেওয়ার ব্যবস্থা রাখতে চান?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"হ্যাঁ"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"না"</string>
-    <string name="restricted_true_label" msgid="1793719723017395175">"হ্যাঁ"</string>
-    <string name="restricted_false_label" msgid="6374816254102233858">"না"</string>
+    <!-- no translation found for restricted_true_label (116728938205853067) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (6992110192242654656) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"পিন প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"প্যাটার্নের প্রয়োজন?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"পাসওয়ার্ডের প্রয়োজন?"</string>
@@ -3550,6 +3601,8 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"স্বয়ংক্রিয় সিস্টেম আপডেটগুলি"</string>
     <string name="usage" msgid="2977875522080448986">"ব্যবহার"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"মোবাইল ডেটার ব্যবহার"</string>
+    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
+    <skip />
     <string name="wifi_data_usage" msgid="686754111095324306">"ওয়াই-ফাই ডেটার ব্যবহার"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"ইথারনেট ডেটার ব্যবহার"</string>
     <string name="wifi" msgid="1081550856200013637">"ওয়াই-ফাই"</string>
@@ -3559,7 +3612,14 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> ইথারনেট ডেটা"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> ডেটা সতর্কতা / <xliff:g id="ID_2">%2$s</xliff:g> ডেটা সীমা"</string>
-    <string name="billing_cycle" msgid="5169909190811133499">"বিলিং চক্র"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"ডেটা সম্পর্কিত সতর্কতা ও সীমা"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"অ্যাপের ডেটা ব্যবহারের চক্র"</string>
+    <!-- no translation found for cell_data_warning (1985956818884847057) -->
+    <skip />
+    <!-- no translation found for cell_data_limit (1578367585799358854) -->
+    <skip />
+    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
+    <skip />
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"প্রতি মাসের <xliff:g id="ID_1">%1$s</xliff:g> তারিখে"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"নেটওয়ার্ক সীমাবদ্ধতা"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3570,6 +3630,8 @@
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> ব্যবহৃত হয়েছে"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"ডেটা সতর্কতা সেট করুন"</string>
     <string name="data_warning" msgid="209133958008062117">"ডেটা সতর্কতা"</string>
+    <!-- no translation found for data_warning_footnote (776341964125603711) -->
+    <skip />
     <string name="set_data_limit" msgid="2901526323210516923">"ডেটা সীমা সেট করুন"</string>
     <string name="data_limit" msgid="1885406964934590552">"ডেটা সীমা"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_2">%2$s</xliff:g> এর মধ্যে <xliff:g id="ID_1">%1$s</xliff:g> ব্যবহার করা হয়েছে"</string>
@@ -3581,8 +3643,14 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"প্রাথমিক ডেটা"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> ব্যবহৃত হয়েছে"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">, ^1</xliff:g> বাকি আছে"</string>
-    <string name="cycle_left_time_text" msgid="8501602478371081001">"এই চক্রে <xliff:g id="ID_1">%1$s</xliff:g> বাকি আছে"</string>
+    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <skip />
+    <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">^1</xliff:g> বাকি আছে"</string>
+    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
+    <skip />
+    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
+    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
+    <skip />
     <string name="carrier_and_update_text" msgid="4534395723031386923">"<xliff:g id="ID_1">%1$s</xliff:g> এর দ্বারা <xliff:g id="ID_2">%2$s</xliff:g> এ আপডেট হয়েছে"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"<xliff:g id="ID_1">%1$s</xliff:g> এ আপডেট হয়েছে"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"প্ল্যান দেখুন"</string>
@@ -3863,14 +3931,22 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"ড্রাইভ করার সময় ব্লুটুথ চালু রাখুন"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"ড্রাইভ করার সময় নিজে থেকে ব্লুটুথ চালু হতে দিন"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Android 8.0 এর ব্যাটারি সেটিংস দেখুন"</string>
-    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
+    <string name="change_wifi_state_title" msgid="2640523995824431999">"ওয়াই-ফাই চালু অথবা বন্ধ করুন"</string>
+    <string name="keywords_change_wifi_state" msgid="1439807171750715923">"ওয়াই-ফাই চালু অথবা বন্ধ করুন"</string>
+    <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"ওয়াই-ফাই চালু অথবা বন্ধ করুন"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"ওয়াই-ফাই টগল করতে দিন"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"এই অ্যাপটিকে ওয়াই-ফাই নেটওয়ার্কে কানেক্ট করা এবং ওয়াই-ফাই চালু ও বন্ধ করা সহ ওয়াই-ফাইয়ের স্ট্যাটাস পরিবর্তন করতে দিন।"</string>
+    <string name="media_output_title" msgid="115223550977351699">"মিডিয়া এতে চালান"</string>
+    <string name="media_output_summary" product="default" msgid="6839458453831567167">"ফোন"</string>
+    <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"ট্যাবলেট"</string>
+    <string name="media_output_summary" product="device" msgid="5677420090811068649">"ডিভাইস"</string>
+    <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"কলের সময় অনুপলভ্য"</string>
+    <string name="media_output_summary_unavailable" msgid="7970304720507697019">"অনুপলভ্য"</string>
+    <!-- no translation found for battery_suggestion_title (752439050748267917) -->
     <skip />
-    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
+    <!-- no translation found for battery_suggestion_title (1507272328369733005) -->
     <skip />
-    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
+    <!-- no translation found for battery_suggestion_title (4038053023336285165) -->
     <skip />
-    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
-    <skip />
+    <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>
