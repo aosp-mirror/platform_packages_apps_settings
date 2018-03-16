@@ -330,13 +330,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"Ajavööndi valimine"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"Kuupäev"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"Kuupäeva määramine"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"Piirkond"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"Ajavöönd"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC-nihke valimine"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"Sordi tähestiku järgi"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"Sordi ajavööndi alusel"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g> algab kuupäeval <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>."</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g> (<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g> (<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"Kasutab aega <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g> algab kuupäeval <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"Kasutab aega <xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>. Suveaega pole."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"Suveaeg"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"Aeg"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"Ajavöönd piirkonna järgi"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"Fikseeritud nihkega ajavööndid"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"Kuva ajavööndid piirkonna alusel"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"Kuva ajavööndid UTC-nihke alusel"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"Kuupäev"</string>
     <string name="time_picker_title" msgid="483460752287255019">"Kellaaeg"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"Lukusta automaatselt"</string>
@@ -362,7 +369,9 @@
     <string name="security_settings_title" msgid="4918904614964215087">"Turvalisus ja asukoht"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"Krüpteerimine ja mandaat"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"Telefon on krüpteeritud"</string>
+    <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"Telefon ei ole krüpteeritud"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"Seade on krüpteeritud"</string>
+    <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"Seade ei ole krüpteeritud"</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"Lukustuskuva eelistused"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"Määrake Minu asukoht, ekraani avamine, SIM-kaardi lukk, mandaadi talletuslukk"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"Määrake oma asukoht, ekraani avamine, mandaadi talletuslukk"</string>
@@ -469,14 +478,14 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"Sisestatud parool on õige, kuid kahjuks on andmed rikutud. \n\nTahvelarvuti kasutamise jätkamiseks peate selle lähtestama tehaseseadetele. Kui seadistate tahvelarvuti pärast lähtestamist, saate taastada kõik andmed, mis on varundatud teie Google\'i kontole."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"Sisestatud parool on õige, kuid kahjuks on andmed rikutud. \n\nTelefoni kasutamise jätkamiseks peate selle lähtestama tehaseseadetele. Kui seadistate telefoni pärast lähtestamist, saate taastada kõik andmed, mis on varundatud teie Google\'i kontole."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"Sisestusmeetodi vahetamine"</string>
-    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"Kaitseks ekraaniluku määramine"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"Takistage teistel teie tahvelarvutit kasutada"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"Takistage teistel teie seadet kasutada"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"Takistage teistel teie telefoni kasutada"</string>
+    <string name="suggested_lock_settings_title" msgid="8498743819223200961">"Tagage oma telefoni turvalisus"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"Määrake tahvelarvuti kaitsmiseks ekraanilukk"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"Määrake seadme kaitsmiseks ekraanilukk"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"Määrake telefoni kaitsmiseks ekraanilukk"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"Sõrmejäljega avamine"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"Sõrmejäljega avamine"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"Sõrmejäljega avamine"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"Sõrmejäljega avamine"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"Ekraaniluku valimine"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"Vali tööprofiili lukk"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"Tahvelarvuti kaitsmine"</string>
@@ -707,8 +716,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"Jäta seaded meelde"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"Maksimaalne arv ühendatud Bluetoothi heliseadmeid"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"Maksimaalse arvu ühendatud Bluetoothi heliseadmete valimine"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"Luba Bluetoothi AVDTP viivituse aruanded"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"Lubage Bluetoothi AVDTP viivituse aruannete vastuvõtmine"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"Keela Bluetoothi AVDTP viivituse aruanded"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"Keela Bluetoothi AVDTP viivituse aruannete vastuvõtmine"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"Ülekandmine"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"Luba juhtmeta ekraaniühendus"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"Läheduses olevaid seadmeid ei leitud."</string>
@@ -724,6 +733,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Logi sisse"</string>
+    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
+    <skip />
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mb/s"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"Rakendus <xliff:g id="REQUESTER">%s</xliff:g> soovib WiFi sisse lülitada"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"Rakendus <xliff:g id="REQUESTER">%s</xliff:g> soovib WiFi välja lülitada"</string>
@@ -927,8 +938,8 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"Pole saadaval, kuna lennukirežiim on sees"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"WiFi-kõned"</string>
-    <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"Laiendage kõnede leviala WiFi abil"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"Lülitage sisse WiFi-kõned"</string>
+    <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Suurendage WiFi abil helistamisulatust"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Lülitage WiFi-kõned sisse, et ulatust suurendada"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"Kõne-eelistus"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"WiFi-kõnerežiim"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"Rändluse eelistus"</string>
@@ -1443,17 +1454,18 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"Tööprofiili asukoht"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"Rakendusetasemel load"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"Hiljutised asukohapäringud"</string>
-    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
-    <skip />
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"Kuva kõik"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"Ükski rakendus pole hiljuti asukohateavet küsinud"</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"Asukohateenused"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"Suur akukasutus"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"Madala tarbimisega akukasutus"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Skannimine"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"WiFi skannimine"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"Parandab asukoha täpsust, lubades süsteemirakendustel ja -teenustel mis tahes ajal tuvastada WiFi-võrke."</string>
+    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
+    <skip />
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Bluetoothi skannimine"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"Parandab asukoha täpsust, lubades süsteemirakendustel ja -teenustel mis tahes ajal tuvastada Bluetoothi seadmeid."</string>
+    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"WiFi/mobiilsidevõrgu asukoht"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Lubage rakendustel kasutada Google\'i asukohateenust, et asukohta kiiremini määrata. Kogutud anonüümsed asukohaandmed saadetakse Google\'ile."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"WiFi järgi määratud asukoht"</string>
@@ -1608,7 +1620,7 @@
     <string name="install_text" msgid="884360662922471113">"Installi"</string>
     <string name="disable_text" msgid="6544054052049395202">"Keela"</string>
     <string name="enable_text" msgid="9217362512327828987">"Luba"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"Kustuta andmed"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"Tühjenda salvestusruum"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"Desinstalli värskendused"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"Olete otsustanud selle rakenduse mõne toimingu puhul käivitada vaikimisi."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"Olete lubanud sellel rakendusel vidinaid luua ja nende andmetele juurde pääseda."</string>
@@ -1650,9 +1662,7 @@
     <string name="dlg_cancel" msgid="1674753358972975911">"Tühista"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"Rakendust ei leitud installitud rakenduste loendist."</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"Rakenduse andmete kustutamine ebaõnnestus."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"Kustuta andmed"</string>
-    <string name="clear_failed_dlg_text" msgid="5464475937929941008">"Rakenduse andmete tühjendamine ebaõnnestus."</string>
+    <string name="clear_failed_dlg_text" msgid="8651231637137025815">"Rakenduse salvestusruumi ei õnnestunud tühjendada."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"See rakendus pääseb teie tahvelarvutis juurde järgmisele:"</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"Sel rakendusel on teie telefonis järgmised juurdepääsuõigused:"</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"Sellel rakendusel on teie tahvelarvutis juurdepääs järgmisele. Toimivuse parandamiseks ja mälukasutuse vähendamiseks on mõned neist lubadest saadaval rakenduse <xliff:g id="BASE_APP_NAME">%1$s</xliff:g> jaoks, kuna see töötab samas protsessis kui <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>:"</string>
@@ -2005,7 +2015,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> – <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"Jäänud on <xliff:g id="REMAIN">%1$s</xliff:g>"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> laadimise lõpuni"</string>
-    <string name="background_activity_title" msgid="4797874712348525348">"Piiratud"</string>
+    <!-- no translation found for background_activity_title (4645016676653647542) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"Lubatakse rakenduse taustal käitamine"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"Kui rakendust ei kasutata, võib see taustal töötada"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Kui rakendust ei kasutata, on selle tegevus taustal piiratud"</string>
@@ -2082,12 +2093,21 @@
       <item quantity="other">Kas soovite %1$d rakendust piirata?</item>
       <item quantity="one">Kas soovite rakendust piirata?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="5818730114373015028">"Aku säästmiseks võite keelata rakenduse taustal töötamise, kui seda parajasti ei kasutata."</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"Piira"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"Kas soovite rakenduse <xliff:g id="APP">%1$s</xliff:g> piirangu eemaldada?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"See rakendus tohib taustal akut kasutada. Seetõttu võib aku kiiremini tühjeneda."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Eemalda"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"Mitte praegu"</string>
+    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <skip />
     <string name="smart_battery_manager_title" msgid="5677222263071864438">"Nutikas akuhaldur"</string>
     <string name="smart_battery_title" msgid="7014692334636228916">"Aku automaatne haldamine"</string>
     <string name="smart_battery_summary" msgid="6435844879637999044">"Kasutuse põhjal rakenduste toitekasutuse automaatselt kohandamine"</string>
@@ -2096,6 +2116,8 @@
       <item quantity="other">%1$d rakendust</item>
       <item quantity="one">%1$d rakendus</item>
     </plurals>
+    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"Rakenduste automaatne piiramine"</string>
+    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"Keelake rakendustel liigne akukasutus taustal"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Kas peatada rakendus?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"Teie telefon ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"Teie tahvelarvuti ei saa akut tavapärasel moel hallata, kuna <xliff:g id="APP">%1$s</xliff:g> hoiab seadet ärkvel.\n\nProbleemi lahendamiseks võite proovida rakenduse peatada.\n\nKui probleem ei lahene, tuleb teil aku tööea pikendamiseks võib-olla rakendus desinstallida."</string>
@@ -2317,8 +2339,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"Enne kui saab kasutada mandaatide salvestusruumi, peab teie seadmel olema turvaline lukustuskuva"</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"LUKU MÄÄRAMINE"</string>
     <string name="usage_access_title" msgid="332333405495457839">"Kasutusjuurdepääsuga rakend."</string>
-    <!-- no translation found for emergency_tone_title (254495218194925271) -->
-    <skip />
+    <string name="emergency_tone_title" msgid="254495218194925271">"Hädaabikõne signaal"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"Määra käitumine hädaabikõne korral"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"Varundamine"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"Varundamine ja taastamine"</string>
@@ -2927,12 +2948,9 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"Kõlari dokkimise heli"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"Kogu heli"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"Ainult meedia heli"</string>
-    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
-    <skip />
-    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
-    <skip />
-    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
-    <skip />
+    <string name="emergency_tone_silent" msgid="3750231842974733677">"Vaikus"</string>
+    <string name="emergency_tone_alert" msgid="8523447641290736852">"Toonid"</string>
+    <string name="emergency_tone_vibrate" msgid="2278872257053690683">"Vibratsioonid"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"Sisselülitamise helid"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"Mitte kunagi"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -2941,7 +2959,8 @@
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"Mitte segada"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"Valiku Mitte segada sisselülitamine"</string>
-    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"Käitumine"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"Erandid"</string>
+    <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"Kestus"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"Luba heli ja vibreerimine:"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"Heli puudub"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"Täielik vaikus"</string>
@@ -2959,6 +2978,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"Visuaalsete häirimiste blok."</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"Luba visuaalsed signaalid"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"Mis blokeeritakse?"</string>
+    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"Märguannete saabumisel"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"Vaigista heli ja vibratsioon"</string>
+    <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"Ära lülita ekraani sisse"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"Ära vilguta tuld"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"Ära kuva märguandeid ekraanil"</string>
+    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"Peida olekuriba ikoonid"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"Peida märguandetäpid"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"Peida säästlikul ekraanil"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"Peida märguannete loendis"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"Heli ja vibratsioon"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"Märguannete heli, vibratsioon ja mõned visuaalsed märgid"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"Märguannete heli, vibratsioon ja visuaalsed märgid"</string>
+    <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"Puudub"</string>
+    <string name="zen_mode_other_options" msgid="520015080445012355">"muud valikud"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"Lisa"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"Lülita sisse"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"Lülita kohe sisse"</string>
@@ -2969,9 +3003,17 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"Rakendus (<xliff:g id="APP_NAME">%s</xliff:g>) lülitas funktsiooni Mitte segada automaatselt sisse"</string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"Ainult prioriteetsed"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9067685807840094102">"Sees / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"Sees / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"Väljas / <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"Väljas"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"Sees"</string>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"Küsi iga kord (kui pole automaatselt sisse lülitatud)"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"Kuni välja lülitate (kui pole automaatselt sisse lülitatud)"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g> tundi (kui pole automaatselt sisse lülitatud)</item>
+      <item quantity="one">1 tund (kui pole automaatselt sisse lülitatud)</item>
+    </plurals>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g> minutit (kui pole automaatselt sisse lülitatud)"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="8115159143760078050">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g> reeglit võivad automaatselt sisse lülituda</item>
       <item quantity="one">1 reegel võib automaatselt sisse lülituda</item>
@@ -3112,9 +3154,7 @@
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"Reegli tüübi valimine"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"Kas kustutada reegel „<xliff:g id="RULE">%1$s</xliff:g>”?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"Kustuta"</string>
-    <string name="zen_mode_rule_type" msgid="2289413469580142888">"Reegli tüüp"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"Teadmata"</string>
-    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"Reegli seadistamine"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"Neid seadeid ei saa praegu muuta. Rakendus (<xliff:g id="APP_NAME">%1$s</xliff:g>) on funktsiooni Mitte segada koos kohandatud käitumisega automaatselt sisse lülitanud."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"Neid seadeid ei saa praegu muuta. Rakendus on funktsiooni Mitte segada koos kohandatud käitumisega automaatselt sisse lülitanud."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"Neid seadeid ei saa praegu muuta. Funktsioon Mitte segada koos kohandatud käitumisega lülitati käsitsi sisse."</string>
@@ -3151,8 +3191,8 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"Ainult tärniga tähistatud kontaktidelt"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"Mitte kelleltki"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"Äratused"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"Meedia"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"Hõlmab süsteemi tagasisidet, nt puudutamise ja laadimise helisid"</string>
+    <string name="zen_mode_media" msgid="8808264142134422380">"Meedia"</string>
+    <string name="zen_mode_system" msgid="2541380718411593581">"Puutehelid"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"Meeldetuletused"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"Sündmused"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"Kõik helistajad"</string>
@@ -3208,8 +3248,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Lisaks sellele, et saate seadme avamiseks kasutada sõrmejälge, saate oma seadet veelgi paremini kaitsta, nõudes käivitamisel parooli. Enne seadme käivitumist ei saa te vastu võtta kõnesid, sõnumeid ega märguandeid, sh alarme.\n\nSee aitab kaitsta kaotatud või varastatud seadmetes olevaid andmeid. Kas küsida seadme käivitamisel parooli?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Jah"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"Ei"</string>
-    <string name="restricted_true_label" msgid="1793719723017395175">"Jah"</string>
-    <string name="restricted_false_label" msgid="6374816254102233858">"Ei"</string>
+    <!-- no translation found for restricted_true_label (116728938205853067) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (6992110192242654656) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Kas nõuda PIN-koodi?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Kas nõuda mustrit?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Kas nõuda parooli?"</string>
@@ -3550,6 +3592,8 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Automaatsed süsteemivärskendused"</string>
     <string name="usage" msgid="2977875522080448986">"Kasutus"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Mobiilse andmeside kasutus"</string>
+    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
+    <skip />
     <string name="wifi_data_usage" msgid="686754111095324306">"WiFi-andmekasutus"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Etherneti andmekasutus"</string>
     <string name="wifi" msgid="1081550856200013637">"WiFi"</string>
@@ -3559,7 +3603,14 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> Etherneti-andmeid"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> – andmemahu hoiatus / <xliff:g id="ID_2">%2$s</xliff:g> – andmemahu piirang"</string>
-    <string name="billing_cycle" msgid="5169909190811133499">"Arveldustsükkel"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"Andmekasutuse hoiatus ja piirang"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"Rakenduse andmekasutuse tsükkel"</string>
+    <!-- no translation found for cell_data_warning (1985956818884847057) -->
+    <skip />
+    <!-- no translation found for cell_data_limit (1578367585799358854) -->
+    <skip />
+    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
+    <skip />
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Iga kuu <xliff:g id="ID_1">%1$s</xliff:g>. päeval"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Võrgupiirangud"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3570,6 +3621,8 @@
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> on kasutatud"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Andmekasutuse hoiatuse määramine"</string>
     <string name="data_warning" msgid="209133958008062117">"Andmemahu hoiatus"</string>
+    <!-- no translation found for data_warning_footnote (776341964125603711) -->
+    <skip />
     <string name="set_data_limit" msgid="2901526323210516923">"Andmemahupiirangu määramine"</string>
     <string name="data_limit" msgid="1885406964934590552">"Andmemahu piirang"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"Vahemikus <xliff:g id="ID_2">%2$s</xliff:g> on kasutatud <xliff:g id="ID_1">%1$s</xliff:g>"</string>
@@ -3581,8 +3634,14 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Peamine andmeside"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> on kasutatud"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"Jäänud on <xliff:g id="ID_1">, ^1</xliff:g>"</string>
-    <string name="cycle_left_time_text" msgid="8501602478371081001">"Tsükli järelejäänud aeg on <xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <skip />
+    <string name="data_remaining" msgid="8998091725895502181">"Jäänud on <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
+    <skip />
+    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
+    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
+    <skip />
     <string name="carrier_and_update_text" msgid="4534395723031386923">"Värskendas <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"Värskendatud <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"KUVA PAKETT"</string>
@@ -3863,14 +3922,19 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"Bluetoothi kasutamine sõidu ajal"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"Bluetoothi automaatne sisselülitamine sõidu ajal"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Vaadake Android 8.0 akuseadeid"</string>
-    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
-    <skip />
-    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
-    <skip />
+    <string name="change_wifi_state_title" msgid="2640523995824431999">"WiFi sisse- ja väljalülitamine"</string>
+    <string name="keywords_change_wifi_state" msgid="1439807171750715923">"WiFi sisse- ja väljalülitamine"</string>
+    <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"WiFi sisse- ja väljalülitamine"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"Luba WiFi sisse-/väljalülitamine"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"Lubage sellel rakendusel WiFi-olekut muuta, sh WiFi-ga ühendada ning see sisse ja välja lülitada."</string>
+    <string name="media_output_title" msgid="115223550977351699">"Esita meedia seadmes"</string>
+    <string name="media_output_summary" product="default" msgid="6839458453831567167">"Telefon"</string>
+    <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"Tahvelarvuti"</string>
+    <string name="media_output_summary" product="device" msgid="5677420090811068649">"Seade"</string>
+    <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"Pole kõnede ajal saadaval"</string>
+    <string name="media_output_summary_unavailable" msgid="7970304720507697019">"Pole saadaval"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"Parandage tahvelarvuti aku tööiga"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"Parandage seadme aku tööiga"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"Parandage telefoni aku tööiga"</string>
+    <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>
