@@ -22,24 +22,24 @@ import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
+import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.conditional.BatterySaverCondition;
 import com.android.settings.dashboard.conditional.ConditionManager;
-import com.android.settings.widget.MasterSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 
-public class BatterySaverController extends TogglePreferenceController
+public class BatterySaverController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, BatterySaverReceiver.BatterySaverListener {
     private static final String KEY_BATTERY_SAVER = "battery_saver_summary";
     private final BatterySaverReceiver mBatteryStateChangeReceiver;
     private final PowerManager mPowerManager;
-    private MasterSwitchPreference mBatterySaverPref;
+    private Preference mBatterySaverPref;
 
     public BatterySaverController(Context context) {
         super(context, KEY_BATTERY_SAVER);
@@ -62,24 +62,7 @@ public class BatterySaverController extends TogglePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mBatterySaverPref = (MasterSwitchPreference) screen.findPreference(KEY_BATTERY_SAVER);
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        mBatterySaverPref.setChecked(isChecked);
-        if (!mPowerManager.setPowerSaveMode(isChecked)) {
-            return false;
-        }
-
-        refreshConditionManager();
-        updateSummary();
-        return true;
-    }
-
-    @Override
-    public boolean isChecked() {
-        return mPowerManager.isPowerSaveMode();
+        mBatterySaverPref = screen.findPreference(KEY_BATTERY_SAVER);
     }
 
     @Override
@@ -89,6 +72,7 @@ public class BatterySaverController extends TogglePreferenceController
                 , true, mObserver);
 
         mBatteryStateChangeReceiver.setListening(true);
+        updateSummary();
     }
 
     @Override
@@ -130,12 +114,10 @@ public class BatterySaverController extends TogglePreferenceController
 
     @Override
     public void onPowerSaveModeChanged() {
-        mBatterySaverPref.setChecked(mPowerManager.isPowerSaveMode());
         updateSummary();
     }
 
     @Override
     public void onBatteryChanged(boolean pluggedIn) {
-        mBatterySaverPref.setSwitchEnabled(!pluggedIn);
     }
 }
