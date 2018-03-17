@@ -64,12 +64,6 @@ public class UniquePreferenceTest {
 
             "dashboard_tile_placeholder",   // This is the placeholder pref for injecting dynamic
                                             // tiles.
-            // Dup keys from connected device page experiment.
-            "usb_mode",
-            "connected_devices_screen",
-            "toggle_bluetooth",
-            "toggle_nfc",
-            "android_beam_settings",
             // Dup keys from About Phone v2 experiment.
             "ims_reg_state",
             "bt_address",
