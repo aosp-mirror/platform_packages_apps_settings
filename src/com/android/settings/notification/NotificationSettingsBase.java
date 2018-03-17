@@ -44,6 +44,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.settings.R;
+import com.android.settings.SettingsActivity;
 import com.android.settings.applications.AppInfoBase;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
@@ -143,9 +144,13 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             return;
         }
         collectConfigActivities();
-        Bundle args = getArguments();
-        mChannel = (args != null && args.containsKey(Settings.EXTRA_CHANNEL_ID)) ?
-                mBackend.getChannel(mPkg, mUid, args.getString(Settings.EXTRA_CHANNEL_ID)) : null;
+        Intent intent = getActivity().getIntent();
+        String channelId = intent != null ? intent.getStringExtra(Settings.EXTRA_CHANNEL_ID) : null;
+        if (channelId == null && intent != null) {
+            Bundle args = intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
+            channelId = args != null ? args.getString(Settings.EXTRA_CHANNEL_ID) : null;
+        }
+        mChannel = mBackend.getChannel(mPkg, mUid, channelId);
 
         NotificationChannelGroup group = null;
 
@@ -355,7 +360,13 @@ abstract public class NotificationSettingsBase extends DashboardFragment {
             (left, right) -> {
                 if (left.isDeleted() != right.isDeleted()) {
                     return Boolean.compare(left.isDeleted(), right.isDeleted());
+                } else if (left.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+                    // Uncategorized/miscellaneous legacy channel goes last
+                    return 1;
+                } else if (right.getId().equals(NotificationChannel.DEFAULT_CHANNEL_ID)) {
+                    return -1;
                 }
+
                 return left.getId().compareTo(right.getId());
             };
 

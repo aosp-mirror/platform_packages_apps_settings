@@ -97,9 +97,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
                 return new AlertDialog.Builder(context)
                         .setMessage(getString(R.string.battery_tip_dialog_message,
-                                StringUtil.formatElapsedTime(
-                                        context, highUsageTip.getScreenTimeMs(),
-                                        false /* withSeconds */)))
+                                highUsageTip.getHighUsageAppList().size()))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
@@ -140,7 +138,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                         unrestrictAppTip.getPackageName());
 
                 return new AlertDialog.Builder(context)
-                        .setTitle(getString(R.string.battery_tip_unrestrict_app_dialog_title, name))
+                        .setTitle(getString(R.string.battery_tip_unrestrict_app_dialog_title))
                         .setMessage(R.string.battery_tip_unrestrict_app_dialog_message)
                         .setPositiveButton(R.string.battery_tip_unrestrict_app_dialog_ok, this)
                         .setNegativeButton(R.string.battery_tip_unrestrict_app_dialog_cancel, null)
