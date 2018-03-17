@@ -21,7 +21,11 @@
     android:title="@string/data_usage_summary_title">
 
     <com.android.settings.datausage.DataUsageSummaryPreference
-            android:key="status_header"
-            android:selectable="false" />
+        android:key="status_header"
+        android:selectable="false" />
 
+    <com.android.settings.datausage.DataSaverPreference
+        android:key="restrict_background"
+        android:title="@string/data_saver_title"
+        android:fragment="com.android.settings.datausage.DataSaverSummary"/>
 </PreferenceScreen>

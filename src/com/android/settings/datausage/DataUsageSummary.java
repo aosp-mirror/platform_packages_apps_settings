@@ -261,7 +261,10 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
     private void updateState() {
         PreferenceScreen screen = getPreferenceScreen();
         for (int i = 1; i < screen.getPreferenceCount(); i++) {
-            ((TemplatePreferenceCategory) screen.getPreference(i)).pushTemplates(services);
+          Preference currentPreference = screen.getPreference(i);
+          if (currentPreference instanceof TemplatePreferenceCategory) {
+            ((TemplatePreferenceCategory) currentPreference).pushTemplates(services);
+          }
         }
     }
 
