@@ -46,6 +46,7 @@ public class SoundSettings extends DashboardFragment {
 
     private static final String SELECTED_PREFERENCE_KEY = "selected_preference";
     private static final int REQUEST_CODE = 200;
+    private static final String KEY_ZEN_MODE = "zen_mode";
 
     private static final int SAMPLE_CUTOFF = 2000;  // manually cap sample playback at 2 seconds
 
@@ -180,7 +181,7 @@ public class SoundSettings extends DashboardFragment {
             SoundSettings fragment, VolumeSeekBarPreference.Callback callback,
             Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
-        controllers.add(new ZenModePreferenceController(context, lifecycle));
+        controllers.add(new ZenModePreferenceController(context, lifecycle, KEY_ZEN_MODE));
         controllers.add(new VibrateWhenRingPreferenceController(context));
 
         // === Volumes ===
@@ -265,7 +266,8 @@ public class SoundSettings extends DashboardFragment {
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
                     // Duplicate results
-                    keys.add((new ZenModePreferenceController(context, null)).getPreferenceKey());
+                    keys.add((new ZenModePreferenceController(context, null, KEY_ZEN_MODE))
+                            .getPreferenceKey());
                     return keys;
                 }
             };

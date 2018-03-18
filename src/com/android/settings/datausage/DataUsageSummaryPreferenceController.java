@@ -37,6 +37,7 @@ import android.util.RecurrenceRule;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.FeatureFlags;
 import com.android.settingslib.NetworkPolicyEditor;
 import com.android.settingslib.net.DataUsageController;
 
@@ -164,29 +165,24 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
             refreshDataplanInfo(info);
         }
 
-        if (mDataplanCount == 0 && (info.warningLevel > 0 || info.limitLevel > 0)) {
-            final String warning = Formatter.formatFileSize(mContext, info.warningLevel);
-            final String limit = Formatter.formatFileSize(mContext, info.limitLevel);
-            summaryPreference.setLimitInfo(mContext.getString(info.limitLevel <= 0
-                    ? R.string.cell_warning_only
-                    : R.string.cell_warning_and_limit, warning, limit));
+        if (info.warningLevel > 0 && info.limitLevel > 0) {
+                summaryPreference.setLimitInfo(TextUtils.expandTemplate(
+                        mContext.getText(R.string.cell_data_warning_and_limit),
+                        Formatter.formatFileSize(mContext, info.warningLevel),
+                        Formatter.formatFileSize(mContext, info.limitLevel)).toString());
+        } else if (info.warningLevel > 0) {
+                summaryPreference.setLimitInfo(TextUtils.expandTemplate(
+                        mContext.getText(R.string.cell_data_warning),
+                        Formatter.formatFileSize(mContext, info.warningLevel)).toString());
+        } else if (info.limitLevel > 0) {
+            summaryPreference.setLimitInfo(TextUtils.expandTemplate(
+                    mContext.getText(R.string.cell_data_limit),
+                    Formatter.formatFileSize(mContext, info.limitLevel)).toString());
         } else {
             summaryPreference.setLimitInfo(null);
         }
 
-        final StringBuilder title = new StringBuilder();
-        if (mHasMobileData) {
-            title.append(formatUsage(mContext, mContext.getString(R.string.data_used),
-                    mDataplanUse));
-            if (mDataplanCount >= 0 && mDataplanSize > 0L) {
-                title.append(formatUsage(mContext, mContext.getString(R.string.data_remaining),
-                        mDataplanSize - mDataplanUse));
-            }
-        } else {
-            title.append(formatUsage(mContext, mContext.getString(mDataUsageTemplate),
-                    mDataplanUse));
-        }
-        summaryPreference.setTitle(title.toString());
+        summaryPreference.setUsageNumbers(mDataplanUse, mDataplanSize, mHasMobileData);
 
         if (mDataplanSize <= 0) {
             summaryPreference.setChartEnabled(false);
@@ -198,6 +194,13 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         }
         summaryPreference.setUsageInfo(mCycleEnd, mSnapshotTime, mCarrierName,
                 mDataplanCount, mManageSubscriptionIntent);
+    }
+
+    private String getLimitText(long limit, int textId) {
+        if (limit <= 0) {
+            return null;
+        }
+        return mContext.getString(textId, Formatter.formatFileSize(mContext, limit));
     }
 
     // TODO(b/70950124) add test for this method once the robolectric shadow run script is
@@ -231,7 +234,7 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
                     mCycleStart = rule.start.toEpochSecond() * 1000L;
                     mCycleEnd = rule.end.toEpochSecond() * 1000L;
                 }
-                mSnapshotTime = System.currentTimeMillis() - primaryPlan.getDataUsageTime();
+                mSnapshotTime = primaryPlan.getDataUsageTime();
             }
         }
         mManageSubscriptionIntent =

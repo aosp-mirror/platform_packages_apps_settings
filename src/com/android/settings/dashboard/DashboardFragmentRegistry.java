@@ -31,6 +31,7 @@ import com.android.settings.language.LanguageAndInputSettings;
 import com.android.settings.network.NetworkDashboardFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
+import com.android.settings.notification.ZenModeSettings;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecuritySettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -89,6 +90,8 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_NOTIFICATIONS);
         PARENT_TO_CATEGORY_KEY_MAP.put(LockscreenDashboardFragment.class.getName(),
                 CategoryKey.CATEGORY_SECURITY_LOCKSCREEN);
+        PARENT_TO_CATEGORY_KEY_MAP.put(ZenModeSettings.class.getName(),
+                CategoryKey.CATEGORY_DO_NOT_DISTURB);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

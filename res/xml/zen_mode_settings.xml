@@ -42,6 +42,11 @@
         android:title="@string/zen_mode_automation_settings_title"
         android:fragment="com.android.settings.notification.ZenModeAutomationSettings" />
 
+    <!-- placeholder -->
+    <PreferenceCategory
+        android:key="dashboard_tile_placeholder"
+        android:order="5" />
+
     <!-- Turn on DND button -->
     <!-- Layout preference doesn't obey allowDividerAbove, so put it in a PreferenceCategory -->
     <PreferenceCategory

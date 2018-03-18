@@ -17,9 +17,10 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.annotation.UiThread;
-import android.support.v14.preference.PreferenceFragment;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -30,14 +31,18 @@ public abstract class UsbDetailsController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
     protected final Context mContext;
-    protected final PreferenceFragment mFragment;
+    protected final UsbDetailsFragment mFragment;
     protected final UsbBackend mUsbBackend;
 
-    public UsbDetailsController(Context context, PreferenceFragment fragment, UsbBackend backend) {
+    @VisibleForTesting
+    Handler mHandler;
+
+    public UsbDetailsController(Context context, UsbDetailsFragment fragment, UsbBackend backend) {
         super(context);
         mContext = context;
         mFragment = fragment;
         mUsbBackend = backend;
+        mHandler = new Handler(context.getMainLooper());
     }
 
     @Override
@@ -46,9 +51,13 @@ public abstract class UsbDetailsController extends AbstractPreferenceController
     }
 
     /**
-     * This method is called when the USB mode has changed and the controller needs to update.
-     * @param newMode the new mode, made up of OR'd values from UsbBackend
+     * Called when the USB state has changed, so that this component can be refreshed.
+     *
+     * @param connected Whether USB is connected
+     * @param functions A mask of the currently enabled functions
+     * @param powerRole The current power role
+     * @param dataRole The current data role
      */
     @UiThread
-    protected abstract void refresh(int newMode);
+    protected abstract void refresh(boolean connected, long functions, int powerRole, int dataRole);
 }

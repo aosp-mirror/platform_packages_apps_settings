@@ -18,7 +18,9 @@ package com.android.settings.fuelgauge.batterytip.tips;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.icu.text.ListFormatter;
 import android.os.Parcel;
+import android.text.TextUtils;
 import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
@@ -57,11 +59,14 @@ public class RestrictAppTip extends BatteryTip {
     @Override
     public CharSequence getTitle(Context context) {
         final int num = mRestrictAppList.size();
-        return context.getResources().getQuantityString(
-                mState == StateType.HANDLED
-                        ? R.plurals.battery_tip_restrict_handled_title
-                        : R.plurals.battery_tip_restrict_title,
-                num, num);
+        final CharSequence appLabel = num > 0 ? Utils.getApplicationLabel(context,
+                mRestrictAppList.get(0).packageName) : "";
+        final Resources resources = context.getResources();
+
+        return mState == StateType.HANDLED
+                ? resources.getQuantityString(R.plurals.battery_tip_restrict_handled_title, num,
+                appLabel, num)
+                : resources.getQuantityString(R.plurals.battery_tip_restrict_title, num, num);
     }
 
     @Override
@@ -69,10 +74,10 @@ public class RestrictAppTip extends BatteryTip {
         final int num = mRestrictAppList.size();
         final CharSequence appLabel = num > 0 ? Utils.getApplicationLabel(context,
                 mRestrictAppList.get(0).packageName) : "";
-        return mState == StateType.HANDLED
-                ? context.getString(R.string.battery_tip_restrict_handled_summary)
-                : context.getResources().getQuantityString(R.plurals.battery_tip_restrict_summary,
-                num, appLabel, num);
+        final int resId = mState == StateType.HANDLED
+                ? R.plurals.battery_tip_restrict_handled_summary
+                : R.plurals.battery_tip_restrict_summary;
+        return context.getResources().getQuantityString(resId, num, appLabel, num);
     }
 
     @Override
@@ -116,6 +121,19 @@ public class RestrictAppTip extends BatteryTip {
 
     public List<AppInfo> getRestrictAppList() {
         return mRestrictAppList;
+    }
+
+    /**
+     * Construct the app list string(e.g. app1, app2, and app3)
+     */
+    public CharSequence getRestrictAppsString(Context context) {
+        final List<CharSequence> appLabels = new ArrayList<>();
+        for (int i = 0, size = mRestrictAppList.size(); i < size; i++) {
+            appLabels.add(Utils.getApplicationLabel(context,
+                    mRestrictAppList.get(i).packageName));
+        }
+
+        return ListFormatter.getInstance().format(appLabels);
     }
 
     @Override

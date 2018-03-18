@@ -15,6 +15,7 @@
  */
 package com.android.settings.connecteddevice.usb;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.usb.UsbManager;
@@ -27,18 +28,13 @@ import android.support.annotation.VisibleForTesting;
 import com.android.settings.wrapper.UsbManagerWrapper;
 import com.android.settings.wrapper.UserManagerWrapper;
 
+/**
+ * Provides access to underlying system USB functionality.
+ */
 public class UsbBackend {
 
-    public static final int MODE_POWER_MASK  = 0x01;
-    public static final int MODE_POWER_SINK   = 0x00;
-    public static final int MODE_POWER_SOURCE = 0x01;
-
-    public static final int MODE_DATA_MASK  = 0x0f << 1;
-    public static final int MODE_DATA_NONE   = 0;
-    public static final int MODE_DATA_MTP    = 0x01 << 1;
-    public static final int MODE_DATA_PTP    = 0x01 << 2;
-    public static final int MODE_DATA_MIDI   = 0x01 << 3;
-    public static final int MODE_DATA_TETHER   = 0x01 << 4;
+    static final int PD_ROLE_SWAP_TIMEOUT_MS = 3000;
+    static final int NONPD_ROLE_SWAP_TIMEOUT_MS = 15000;
 
     private final boolean mFileTransferRestricted;
     private final boolean mFileTransferRestrictedBySystem;
@@ -48,12 +44,12 @@ public class UsbBackend {
     private final boolean mTetheringSupported;
 
     private UsbManager mUsbManager;
-    @VisibleForTesting
-    UsbManagerWrapper mUsbManagerWrapper;
-    private UsbPort mPort;
-    private UsbPortStatus mPortStatus;
+    private UsbManagerWrapper mUsbManagerWrapper;
 
-    private Context mContext;
+    @Nullable
+    private UsbPort mPort;
+    @Nullable
+    private UsbPortStatus mPortStatus;
 
     public UsbBackend(Context context) {
         this(context, new UserManagerWrapper(UserManager.get(context)), null);
@@ -62,7 +58,6 @@ public class UsbBackend {
     @VisibleForTesting
     public UsbBackend(Context context, UserManagerWrapper userManagerWrapper,
             UsbManagerWrapper usbManagerWrapper) {
-        mContext = context;
         mUsbManager = context.getSystemService(UsbManager.class);
 
         mUsbManagerWrapper = usbManagerWrapper;
@@ -77,9 +72,129 @@ public class UsbBackend {
 
         mMidiSupported = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
         ConnectivityManager cm =
-                (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         mTetheringSupported = cm.isTetheringSupported();
 
+        updatePorts();
+    }
+
+    public long getCurrentFunctions() {
+        return mUsbManagerWrapper.getCurrentFunctions();
+    }
+
+    public void setCurrentFunctions(long functions) {
+        mUsbManager.setCurrentFunctions(functions);
+    }
+
+    public long getDefaultUsbFunctions() {
+        return mUsbManager.getScreenUnlockedFunctions();
+    }
+
+    public void setDefaultUsbFunctions(long functions) {
+        mUsbManager.setScreenUnlockedFunctions(functions);
+    }
+
+    public boolean areFunctionsSupported(long functions) {
+        if ((!mMidiSupported && (functions & UsbManager.FUNCTION_MIDI) != 0)
+                || (!mTetheringSupported && (functions & UsbManager.FUNCTION_RNDIS) != 0)) {
+            return false;
+        }
+        return !(areFunctionDisallowed(functions) || areFunctionsDisallowedBySystem(functions));
+    }
+
+    public int getPowerRole() {
+        updatePorts();
+        return mPortStatus == null ? UsbPort.POWER_ROLE_NONE : mPortStatus.getCurrentPowerRole();
+    }
+
+    public int getDataRole() {
+        updatePorts();
+        return mPortStatus == null ? UsbPort.DATA_ROLE_NONE : mPortStatus.getCurrentDataRole();
+    }
+
+    public void setPowerRole(int role) {
+        int newDataRole = getDataRole();
+        if (!areAllRolesSupported()) {
+            switch (role) {
+                case UsbPort.POWER_ROLE_SINK:
+                    newDataRole = UsbPort.DATA_ROLE_DEVICE;
+                    break;
+                case UsbPort.POWER_ROLE_SOURCE:
+                    newDataRole = UsbPort.DATA_ROLE_HOST;
+                    break;
+                default:
+                    newDataRole = UsbPort.DATA_ROLE_NONE;
+            }
+        }
+        if (mPort != null) {
+            mUsbManager.setPortRoles(mPort, role, newDataRole);
+        }
+    }
+
+    public void setDataRole(int role) {
+        int newPowerRole = getPowerRole();
+        if (!areAllRolesSupported()) {
+            switch (role) {
+                case UsbPort.DATA_ROLE_DEVICE:
+                    newPowerRole = UsbPort.POWER_ROLE_SINK;
+                    break;
+                case UsbPort.DATA_ROLE_HOST:
+                    newPowerRole = UsbPort.POWER_ROLE_SOURCE;
+                    break;
+                default:
+                    newPowerRole = UsbPort.POWER_ROLE_NONE;
+            }
+        }
+        if (mPort != null) {
+            mUsbManager.setPortRoles(mPort, newPowerRole, role);
+        }
+    }
+
+    public boolean areAllRolesSupported() {
+        return mPort != null && mPortStatus != null
+                && mPortStatus
+                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_DEVICE)
+                && mPortStatus
+                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SINK, UsbPort.DATA_ROLE_HOST)
+                && mPortStatus
+                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_DEVICE)
+                && mPortStatus
+                .isRoleCombinationSupported(UsbPort.POWER_ROLE_SOURCE, UsbPort.DATA_ROLE_HOST);
+    }
+
+    public static String usbFunctionsToString(long functions) {
+        // TODO replace with UsbManager.usbFunctionsToString once supported by Roboelectric
+        return Long.toBinaryString(functions);
+    }
+
+    public static long usbFunctionsFromString(String functions) {
+        // TODO replace with UsbManager.usbFunctionsFromString once supported by Roboelectric
+        return Long.parseLong(functions, 2);
+    }
+
+    public static String dataRoleToString(int role) {
+        return Integer.toString(role);
+    }
+
+    public static int dataRoleFromString(String role) {
+        return Integer.parseInt(role);
+    }
+
+    private boolean areFunctionDisallowed(long functions) {
+        return (mFileTransferRestricted && ((functions & UsbManager.FUNCTION_MTP) != 0
+                || (functions & UsbManager.FUNCTION_PTP) != 0))
+                || (mTetheringRestricted && ((functions & UsbManager.FUNCTION_RNDIS) != 0));
+    }
+
+    private boolean areFunctionsDisallowedBySystem(long functions) {
+        return (mFileTransferRestrictedBySystem && ((functions & UsbManager.FUNCTION_MTP) != 0
+                || (functions & UsbManager.FUNCTION_PTP) != 0))
+                || (mTetheringRestrictedBySystem && ((functions & UsbManager.FUNCTION_RNDIS) != 0));
+    }
+
+    private void updatePorts() {
+        mPort = null;
+        mPortStatus = null;
         UsbPort[] ports = mUsbManager.getPorts();
         if (ports == null) {
             return;
@@ -95,121 +210,5 @@ public class UsbBackend {
                 break;
             }
         }
-    }
-
-    public int getCurrentMode() {
-        if (mPort != null) {
-            int power = mPortStatus.getCurrentPowerRole() == UsbPort.POWER_ROLE_SOURCE
-                    && mPortStatus.isConnected()
-                    ? MODE_POWER_SOURCE : MODE_POWER_SINK;
-            return power | getUsbDataMode();
-        }
-        return MODE_POWER_SINK | getUsbDataMode();
-    }
-
-    public int getUsbDataMode() {
-        return usbFunctionToMode(mUsbManagerWrapper.getCurrentFunctions());
-    }
-
-    public void setDefaultUsbMode(int mode) {
-        mUsbManager.setScreenUnlockedFunctions(modeToUsbFunction(mode & MODE_DATA_MASK));
-    }
-
-    public int getDefaultUsbMode() {
-        return usbFunctionToMode(mUsbManager.getScreenUnlockedFunctions());
-    }
-
-    public void setMode(int mode) {
-        if (mPort != null) {
-            int powerRole = modeToPower(mode);
-            // If we aren't using any data modes and we support host mode, then go to host mode
-            // so maybe? the other device can provide data if it wants, otherwise go into device
-            // mode because we have no choice.
-            int dataRole = (mode & MODE_DATA_MASK) == MODE_DATA_NONE
-                    && mPortStatus.isRoleCombinationSupported(powerRole, UsbPort.DATA_ROLE_HOST)
-                    ? UsbPort.DATA_ROLE_HOST : UsbPort.DATA_ROLE_DEVICE;
-            mUsbManager.setPortRoles(mPort, powerRole, dataRole);
-        }
-        setUsbFunction(mode & MODE_DATA_MASK);
-    }
-
-    public boolean isModeDisallowed(int mode) {
-        if (mFileTransferRestricted && ((mode & MODE_DATA_MASK) == MODE_DATA_MTP
-                || (mode & MODE_DATA_MASK) == MODE_DATA_PTP)) {
-            return true;
-        } else if (mTetheringRestricted && ((mode & MODE_DATA_MASK) == MODE_DATA_TETHER)) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isModeDisallowedBySystem(int mode) {
-        if (mFileTransferRestrictedBySystem && ((mode & MODE_DATA_MASK) == MODE_DATA_MTP
-                || (mode & MODE_DATA_MASK) == MODE_DATA_PTP)) {
-            return true;
-        } else if (mTetheringRestrictedBySystem && ((mode & MODE_DATA_MASK) == MODE_DATA_TETHER)) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isModeSupported(int mode) {
-        if (!mMidiSupported && (mode & MODE_DATA_MASK) == MODE_DATA_MIDI) {
-            return false;
-        }
-        if (!mTetheringSupported && (mode & MODE_DATA_MASK) == MODE_DATA_TETHER) {
-                return false;
-        }
-        if (mPort != null) {
-            int power = modeToPower(mode);
-            if ((mode & MODE_DATA_MASK) != 0) {
-                // We have a port and data, need to be in device mode.
-                return mPortStatus.isRoleCombinationSupported(power,
-                        UsbPort.DATA_ROLE_DEVICE);
-            } else {
-                // No data needed, we can do this power mode in either device or host.
-                return mPortStatus.isRoleCombinationSupported(power, UsbPort.DATA_ROLE_DEVICE)
-                        || mPortStatus.isRoleCombinationSupported(power, UsbPort.DATA_ROLE_HOST);
-            }
-        }
-        // No port, support sink modes only.
-        return (mode & MODE_POWER_MASK) != MODE_POWER_SOURCE;
-    }
-
-    private static int usbFunctionToMode(long functions) {
-        if (functions == UsbManager.FUNCTION_MTP) {
-            return MODE_DATA_MTP;
-        } else if (functions == UsbManager.FUNCTION_PTP) {
-            return MODE_DATA_PTP;
-        } else if (functions == UsbManager.FUNCTION_MIDI) {
-            return MODE_DATA_MIDI;
-        } else if (functions == UsbManager.FUNCTION_RNDIS) {
-            return MODE_DATA_TETHER;
-        }
-        return MODE_DATA_NONE;
-    }
-
-    private static long modeToUsbFunction(int mode) {
-        switch (mode) {
-            case MODE_DATA_MTP:
-                return UsbManager.FUNCTION_MTP;
-            case MODE_DATA_PTP:
-                return UsbManager.FUNCTION_PTP;
-            case MODE_DATA_MIDI:
-                return UsbManager.FUNCTION_MIDI;
-            case MODE_DATA_TETHER:
-                return UsbManager.FUNCTION_RNDIS;
-            default:
-                return UsbManager.FUNCTION_NONE;
-        }
-    }
-
-    private static int modeToPower(int mode) {
-        return (mode & MODE_POWER_MASK) == MODE_POWER_SOURCE
-                ? UsbPort.POWER_ROLE_SOURCE : UsbPort.POWER_ROLE_SINK;
-    }
-
-    private void setUsbFunction(int mode) {
-        mUsbManager.setCurrentFunctions(modeToUsbFunction(mode));
     }
 }

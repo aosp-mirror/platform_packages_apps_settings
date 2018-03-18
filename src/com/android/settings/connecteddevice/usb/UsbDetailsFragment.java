@@ -17,14 +17,12 @@
 package com.android.settings.connecteddevice.usb;
 
 import android.content.Context;
-import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.provider.SearchIndexableResource;
 import android.support.annotation.VisibleForTesting;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.search.Indexable;
@@ -48,13 +46,9 @@ public class UsbDetailsFragment extends DashboardFragment {
     UsbConnectionBroadcastReceiver mUsbReceiver;
 
     private UsbConnectionBroadcastReceiver.UsbConnectionListener mUsbConnectionListener =
-            (connected, newMode) -> {
-                if (!connected) {
-                    this.finish();
-                } else {
-                    for (UsbDetailsController controller : mControllers) {
-                        controller.refresh(newMode);
-                    }
+            (connected, functions, powerRole, dataRole) -> {
+                for (UsbDetailsController controller : mControllers) {
+                    controller.refresh(connected, functions, powerRole, dataRole);
                 }
             };
 
@@ -78,6 +72,10 @@ public class UsbDetailsFragment extends DashboardFragment {
         super.onCreatePreferences(savedInstanceState, rootKey);
     }
 
+    public boolean isConnected() {
+        return mUsbReceiver.isConnected();
+    }
+
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         mUsbBackend = new UsbBackend(context);
@@ -86,21 +84,16 @@ public class UsbDetailsFragment extends DashboardFragment {
                 mUsbBackend);
         this.getLifecycle().addObserver(mUsbReceiver);
 
-        List<AbstractPreferenceController> ret = new ArrayList<>();
-        ret.addAll(mControllers);
-        return ret;
+        return new ArrayList<>(mControllers);
     }
 
     private static List<UsbDetailsController> createControllerList(Context context,
-            UsbBackend usbBackend, DashboardFragment fragment) {
+            UsbBackend usbBackend, UsbDetailsFragment fragment) {
         List<UsbDetailsController> ret = new ArrayList<>();
         ret.add(new UsbDetailsHeaderController(context, fragment, usbBackend));
-        ret.add(new UsbDetailsProfilesController(context, fragment,
-                usbBackend, Lists.newArrayList(UsbManager.USB_FUNCTION_MTP), "usb_main_options"));
-        ret.add(new UsbDetailsProfilesController(context, fragment,
-                usbBackend, Lists.newArrayList(UsbDetailsProfilesController.KEY_POWER,
-                UsbManager.USB_FUNCTION_RNDIS, UsbManager.USB_FUNCTION_MIDI,
-                UsbManager.USB_FUNCTION_PTP), "usb_secondary_options"));
+        ret.add(new UsbDetailsDataRoleController(context, fragment, usbBackend));
+        ret.add(new UsbDetailsFunctionsController(context, fragment, usbBackend));
+        ret.add(new UsbDetailsPowerRoleController(context, fragment, usbBackend));
         return ret;
     }
 
@@ -112,7 +105,9 @@ public class UsbDetailsFragment extends DashboardFragment {
                 @Override
                 public List<SearchIndexableResource> getXmlResourcesToIndex(
                         Context context, boolean enabled) {
-                    return new ArrayList<>();
+                    SearchIndexableResource res = new SearchIndexableResource(context);
+                    res.xmlResId = R.xml.usb_details_fragment;
+                    return Lists.newArrayList(res);
                 }
 
                 @Override
@@ -123,9 +118,8 @@ public class UsbDetailsFragment extends DashboardFragment {
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    List<AbstractPreferenceController> ret = new ArrayList<>();
-                    ret.addAll(createControllerList(context, new UsbBackend(context), null));
-                    return ret;
+                    return new ArrayList<>(
+                            createControllerList(context, new UsbBackend(context), null));
                 }
             };
 }

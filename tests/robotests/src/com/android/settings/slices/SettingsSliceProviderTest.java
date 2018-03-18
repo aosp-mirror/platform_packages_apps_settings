@@ -39,7 +39,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
-import androidx.app.slice.Slice;
+import androidx.slice.Slice;
 
 import java.util.HashMap;
 

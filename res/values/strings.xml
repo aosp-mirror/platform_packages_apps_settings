@@ -1731,6 +1731,8 @@
     <string name="wifi_band_5ghz">5 GHz</string>
     <!-- Wifi Sign in text for button [CHAR LIMIT = 40]-->
     <string name="wifi_sign_in_button_text">Sign in</string>
+    <!-- Wifi Sign in CTA for wifi settings when captive portal auth is required [CHAR LIMIT = 50] -->
+    <string name="wifi_tap_to_sign_in">Tap here to sign in to network</string>
     <!-- Link speed on Wifi Status screen -->
     <string name="link_speed">%1$d Mbps</string>
 
@@ -1823,10 +1825,7 @@
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
       scanning is on. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated. They
       mark a link to bring the user to "scanning settings" screen. -->
-    <string name="wifi_scan_notify_text">To improve location accuracy, system apps and services can
-        still scan for Wi\u2011Fi networks. You can change this in
-        <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning
-        settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
+    <string name="wifi_scan_notify_text">To improve location accuracy, apps and services can still scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services. You can change this in <xliff:g id="link_begin">LINK_BEGIN</xliff:g>scanning settings<xliff:g id="link_end">LINK_END</xliff:g>.</string>
     <!-- Message to describe "Wi-Fi scan always available feature" when Wi-Fi is off and Wi-Fi
       scanning is also off. The place-holders "LINK_BEGIN" and "LINK_END" must NOT be translated.
       They mark a link to bring the user to "scanning settings" screen. -->
@@ -3402,14 +3401,11 @@
     <!-- [CHAR LIMIT=130] Preference title for Wi-Fi always scanning -->
     <string name="location_scanning_wifi_always_scanning_title">Wi\u2011Fi scanning</string>
     <!-- Preference description text for Wi-Fi always scanning -->
-    <string name="location_scanning_wifi_always_scanning_description">Improve location by allowing
-      system apps and services to detect Wi\u2011Fi networks at any time.</string>
+    <string name="location_scanning_wifi_always_scanning_description">Allow apps and services to scan for Wi\u2011Fi networks at any time, even when Wi\u2011Fi is off. This can be used, for example, to improve location-based features and services.</string>
     <!-- [CHAR LIMIT=130] Description text for Bluetooth always scanning -->
     <string name="location_scanning_bluetooth_always_scanning_title">Bluetooth scanning</string>
     <!-- Description text for Bluetooth always scanning -->
-    <string name="location_scanning_bluetooth_always_scanning_description">
-        Improve location by allowing system apps and services to detect Bluetooth devices at any
-        time.</string>
+    <string name="location_scanning_bluetooth_always_scanning_description">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
 
     <!-- [CHAR LIMIT=30] Security & location settings screen, setting check box label for Google location service (cell ID, wifi, etc.) -->
     <string name="location_network_based">Wi\u2011Fi &amp; mobile network location</string>
@@ -4728,7 +4724,7 @@
     <string name="power_charge_remaining"><xliff:g id="until_charged">%1$s</xliff:g> to charge</string>
 
     <!-- Title for the background activity setting, which allows a user to control whether an app can run in the background [CHAR_LIMIT=40] -->
-    <string name="background_activity_title">Restricted</string>
+    <string name="background_activity_title">Battery restrictions</string>
     <!-- Summary for the background activity [CHAR_LIMIT=120] -->
     <string name="background_activity_summary">Allow the app to run in the background</string>
     <!-- Summary for the background activity when it is on [CHAR_LIMIT=120] -->
@@ -4825,37 +4821,41 @@
     <!-- Title for the battery summary tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_summary_title">Battery is in good shape</string>
     <!-- Summary for the battery summary tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_summary_summary">Apps are behaving normally</string>
+    <string name="battery_tip_summary_summary">Apps are running normally</string>
     <!-- Title for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_title">Low battery capacity</string>
     <!-- Summary for the low battery tip [CHAR LIMIT=NONE] -->
     <string name="battery_tip_low_battery_summary">Battery can\'t provide good battery life</string>
     <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_title">Turn on smart battery manager</string>
+    <string name="battery_tip_smart_battery_title" product="default">Improve your phone\'s battery life</string>
+    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_smart_battery_title" product="tablet">Improve your tablet\'s battery life</string>
+    <!-- Title for the smart battery tip [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_smart_battery_title" product="device">Improve your device\'s battery life</string>
     <!-- Summary for the smart battery tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_smart_battery_summary">Turn on to optimize battery usage</string>
+    <string name="battery_tip_smart_battery_summary">Turn on Battery Manager</string>
     <!-- Title for the early heads up tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_early_heads_up_title">Turn on Low Battery Mode</string>
+    <string name="battery_tip_early_heads_up_title">Turn on Battery Saver</string>
     <!-- Summary for the early hedas up tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_early_heads_up_summary">Extend your battery life</string>
+    <string name="battery_tip_early_heads_up_summary">Battery may run out earlier than usual</string>
     <!-- Title when early heads up is solved [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_early_heads_up_done_title">Low Battery Mode is on</string>
+    <string name="battery_tip_early_heads_up_done_title">Battery Saver is on</string>
     <!-- Summary when early heads up is solved [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_early_heads_up_done_summary">Some features are limited</string>
+    <string name="battery_tip_early_heads_up_done_summary">Some features may be limited</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="default">Phone used heavily</string>
+    <string name="battery_tip_high_usage_title" product="default">Phone used more than usual</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="tablet">Tablet used heavily</string>
+    <string name="battery_tip_high_usage_title" product="tablet">Tablet used more than usual</string>
     <!-- Title for the battery high usage tip [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_title" product="device">Device used heavily</string>
-    <!-- Summary for the battery high usage tip, which presents how many hours the device been used since last full charge [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_high_usage_summary">About <xliff:g id="hour">%1$s</xliff:g> used since last full charge</string>
+    <string name="battery_tip_high_usage_title" product="device">Device used more than usual</string>
+    <!-- Summary for the battery high usage tip, which presents battery may run out soon [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_high_usage_summary">Battery may run out soon</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="default">Your phone was used heavily and this consumed a lot of battery. Your battery is behaving normally.\n\n Your phone was used for about <xliff:g id="hour">%1$s</xliff:g> since last full charge.\n\n Total usage:</string>
+    <string name="battery_tip_dialog_message" product="default">Your phone has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="tablet">Your tablet was used heavily and this consumed a lot of battery. Your battery is behaving normally.\n\n Your tablet was used for about <xliff:g id="hour">%1$s</xliff:g> since last full charge.\n\n Total usage:</string>
+    <string name="battery_tip_dialog_message" product="tablet">Your tablet has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
     <!-- Message for battery tip dialog to show the status about the battery [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_dialog_message" product="device">Your device was used heavily and this consumed a lot of battery. Your battery is behaving normally.\n\n Your device was used for about <xliff:g id="hour">%1$s</xliff:g> since last full charge.\n\n Total usage:</string>
+    <string name="battery_tip_dialog_message" product="device">Your device has been used more than usual. Your battery may run out sooner than expected.\n\nTop <xliff:g id="number">%1$d</xliff:g> apps since last charge:</string>
     <!-- Title for restricted app preference, showing how many app need to be restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_title">
         <item quantity="one">Restrict %1$d app</item>
@@ -4863,34 +4863,41 @@
     </plurals>
     <!-- Title for restricted app preference, showing how many app been restricted [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_handled_title">
-        <item quantity="one">%1$d recently restricted</item>
-        <item quantity="other">%1$d apps recently restricted</item>
+        <item quantity="one">%1$s recently restricted</item>
+        <item quantity="other">%2$d apps recently restricted</item>
     </plurals>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_summary">
-        <item quantity="one">%1$s has high battery usage</item>
-        <item quantity="other">%2$d apps have high battery usage</item>
+        <item quantity="one">%1$s has high background battery usage</item>
+        <item quantity="other">%2$d apps have high background battery usage</item>
     </plurals>
     <!-- Summary for restricted app preference, showing the impact of the apps [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_handled_summary">App changes are in progress</string>
+    <plurals name="battery_tip_restrict_handled_summary">
+        <item quantity="one">This app can\'t run in the background</item>
+        <item quantity="other">These apps can\'t run in the background</item>
+    </plurals>
 
     <!-- Title for dialog to restrict the app [CHAR LIMIT=NONE] -->
     <plurals name="battery_tip_restrict_app_dialog_title">
         <item quantity="one">Restrict app?</item>
         <item quantity="other">Restrict %1$d apps?</item>
     </plurals>
-    <!-- Message for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_restrict_app_dialog_message">To save battery, you can stop this app from running in the background when it’s not being used.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_app_dialog_message">To save battery, stop <xliff:g id="app">%1$s</xliff:g> from using battery in the background.</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as a view [CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n</string>
+    <!-- Message for battery tip dialog to show the info to restrict the app, below it app list will be shown as raw string[CHAR LIMIT=NONE] -->
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message">To save battery, stop these apps from using battery in the background.\n\nApps:\n<xliff:g id="app_list">%1$s</xliff:g>.</string>
     <!-- OK button for battery tip dialog to show the restrict app list [CHAR LIMIT=NONE] -->
     <string name="battery_tip_restrict_app_dialog_ok">Restrict</string>
     <!-- Title for dialog to remove restriction for the app [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_unrestrict_app_dialog_title">Remove restriction for <xliff:g id="app">%1$s</xliff:g>?</string>
+    <string name="battery_tip_unrestrict_app_dialog_title">Remove restriction?</string>
     <!-- Message for  dialog to show the impact if remove restriction for app [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_unrestrict_app_dialog_message">This app will be able to use battery in the background. This may cause your battery to be used up faster.</string>
+    <string name="battery_tip_unrestrict_app_dialog_message">This app will be able to use battery in the background. Your battery may run out sooner than expected.</string>
     <!-- OK button for dialog to remove restriction for app [CHAR LIMIT=NONE] -->
     <string name="battery_tip_unrestrict_app_dialog_ok">Remove</string>
     <!-- CANCEL button for dialog to remove restriction for app [CHAR LIMIT=NONE] -->
-    <string name="battery_tip_unrestrict_app_dialog_cancel">Not now</string>
+    <string name="battery_tip_unrestrict_app_dialog_cancel">Cancel</string>
 
     <!-- Message for battery tip dialog to show the battery summary -->
     <string name="battery_tip_dialog_summary_message">Based on your usage, your battery usually lasts about <xliff:g id="time_duration">%1$s</xliff:g> when fully charged.\n\nIf you need to extend your battery life, turn on Battery Saver.</string>
@@ -4898,11 +4905,13 @@
     <string name="battery_tip_dialog_summary_message_no_estimation">If you need to extend your battery life, turn on Battery Saver</string>
 
     <!-- Title for the smart battery manager preference [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_manager_title">Smart battery manager</string>
+    <string name="smart_battery_manager_title">Battery Manager</string>
     <!-- Title for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_title">Auto-manage battery</string>
+    <string name="smart_battery_title">Manage apps automatically</string>
     <!-- Summary for the smart battery toggle [CHAR LIMIT=NONE] -->
-    <string name="smart_battery_summary">Automatically adjust power usage by apps based on usage</string>
+    <string name="smart_battery_summary">Limit battery for infrequently used apps and apps that consume battery</string>
+    <!-- Footer for the aosp smart battery page -->
+    <string name="smart_battery_footer">Battery Manager prevents apps from consuming battery when you aren\’t using them</string>
     <!-- Title for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
     <string name="restricted_app_title">Restricted apps</string>
     <!-- Summary for restricted app preference, clicking it will goes to restricted app list [CHAR LIMIT=NONE] -->
@@ -4910,6 +4919,9 @@
         <item quantity="one">%1$d app</item>
         <item quantity="other">%1$d apps</item>
     </plurals>
+
+    <!-- Footer message for restrict app details page -->
+    <string name="restricted_app_detail_footer">Apps shown here aren\'t behaving properly and have been using battery in the background.\n\nThese apps are now blocked from using battery in the background. As a result, some app notifications may be delayed.</string>
 
     <!-- Title for auto restriction toggle -->
     <string name="battery_auto_restriction_title">Restrict apps automatically</string>
@@ -5164,13 +5176,10 @@
     <string name="process_dex2oat_label">App optimization</string>
 
     <!-- Battery saver: Label for feature, title + menu item [CHAR_LIMIT=40] -->
-    <string name="battery_saver">Reduced power mode</string>
+    <string name="battery_saver">Battery Saver</string>
 
     <!-- Battery saver: Label for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
-    <string name="battery_saver_auto_title">Schedule</string>
-
-    <!-- Battery saver: Summary for preference to turn on battery saver automatically when battery is low [CHAR_LIMIT=40] -->
-    <string name="battery_saver_auto_summary">Turn on Reduced power mode automatically when battery is low</string>
+    <string name="battery_saver_auto_title">Turn on automatically</string>
 
     <!-- Battery saver: Label for seekbar to change battery saver threshold [CHAR_LIMIT=40] -->
     <string name="battery_saver_seekbar_title">Turn on automatically at <xliff:g id="percent">%1$s</xliff:g></string>
@@ -7755,9 +7764,9 @@
     <string name="encryption_interstitial_no">No</string>
 
     <!-- Label to say yes to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_true_label">Yes</string>
+    <string name="restricted_true_label">On / Background usage restricted</string>
     <!-- Label to say no to the question of whether app is restricted. [CHAR LIMIT=20] -->
-    <string name="restricted_false_label">No</string>
+    <string name="restricted_false_label">Off / Uses battery in background</string>
 
     <!-- Title for encryption dialog that disables TalkBack. [CHAR_LIMIT=25] -->
     <string name="encrypt_talkback_dialog_require_pin">Require PIN?</string>
@@ -8126,7 +8135,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for charging only. -->
-    <string name="usb_use_charging_only">Charge this device</string>
+    <string name="usb_use_charging_only">No data transfer</string>
     <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
          user select what the USB connection for this device should be used for. This choice
          is for charging only. -->
@@ -8134,11 +8143,7 @@
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for powering the other device only. -->
-    <string name="usb_use_power_only">Charging connected device</string>
-    <!-- Decription of one of the choices in a dialog (with title defined in usb_use) that lets the
-         user select what the USB connection for this device should be used for. This choice
-         is for powering the other device. -->
-    <string name="usb_use_power_only_desc">Other settings unavailable when turned on</string>
+    <string name="usb_use_power_only">Charge connected device</string>
     <!-- Title of one of the choices in a dialog (with title defined in usb_use) that lets the user
          select what the USB connection for this device should be used for. This choice
          is for transferring files via MTP. -->
@@ -8171,17 +8176,31 @@
          for this device should be used for. These options are more commonly used.
          Choices are usb_use_file_transfer.-->
     <string name="usb_use">Use USB for</string>
-    <!-- The title used in a dialog which lets the user select what the USB connection
-         for this device should be used for. These options are less commonly used.
-         Choices are usb_use_tethering, usb_use_photo_transfers, usb_use_MIDI, and usb_use_power_only.-->
-    <string name="usb_use_also">Also use USB for</string>
     <!-- The label that leads to the Default USB configuration window. -->
-    <string name="usb_default_label">Default USB Configuration</string>
+    <string name="usb_default_label">Default USB configuration</string>
     <!-- Description at the footer of the default USB configuration window that describes how the setting works. -->
     <string name="usb_default_info">When another device is connected and your phone is unlocked, these settings will be applied. Only connect to trusted devices.</string>
 
     <!-- Settings item title for USB preference [CHAR LIMIT=35] -->
     <string name="usb_pref">USB</string>
+    <!-- Settings screen title for USB preference [CHAR LIMIT=35] -->
+    <string name="usb_preference">USB Preferences</string>
+
+    <!-- The title used in USB Preferences which lets the user select whether USB
+         should be in host or device mode. -->
+    <string name="usb_control_title">USB controlled by</string>
+    <!-- The option in USB Preferences for selecting USB to be in host mode. This allows
+         the user to connect peripherals such as a mouse or flash drive to the device. -->
+    <string name="usb_control_host">Connected device</string>
+    <!-- The option in USB Preferences for selecting USB to be in device mode. This allows
+         the device to provide services such as file transfer or tethering to another device. -->
+    <string name="usb_control_device">This device</string>
+    <!-- The summary text that appears under a USB control option while it is in the process of
+         switching control or power. -->
+    <string name="usb_switching">Switching...</string>
+    <!-- The summary text that appears under a USB control option when switching control or power has
+         failed. -->
+    <string name="usb_switching_failed">Couldn\'t switch</string>
 
     <!-- Settings item summary for USB preference when set to charging only [CHAR LIMIT=NONE] -->
     <string name="usb_summary_charging_only">Charging this device</string>
@@ -8693,6 +8712,15 @@
     <!-- Title of button for application usage cycle preferences [CHAR LIMIT=40] -->
     <string name="app_usage_cycle">App data usage cycle</string>
 
+    <!-- Format for a summary describing the amount of data before the user is warned [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning</string>
+
+    <!-- Format for a summary describing the amount of data the limit is set to [CHAR LIMIT=NONE] -->
+    <string name="cell_data_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data limit</string>
+
+    <!-- Format for a summary describing the amount of data before the user is warned or limited [CHAR LIMIT=NONE] -->
+    <string name="cell_data_warning_and_limit"><xliff:g name="amount" example="1 GB">^1</xliff:g> data warning / <xliff:g name="amount" example="2 GB">^2</xliff:g> data limit</string>
+
     <!-- Summary describing when the billing cycle for their phone carrier starts [CHAR LIMIT=NONE] -->
     <string name="billing_cycle_fragment_summary">Monthly on day <xliff:g name="day_of_month" example="17">%1$s</xliff:g></string>
 
@@ -8745,14 +8773,29 @@
     <!-- Data usage title text [CHAR LIMIT=30] -->
     <string name="data_usage_title">Primary data</string>
 
-    <!-- Data usage string [CHAR LIMIT=30] -->
+    <!-- Data usage remaining string [CHAR LIMIT=30] -->
     <string name="data_used"><xliff:g name="bytes" example="2 GB">^1</xliff:g> used</string>
 
-    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
-    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">, ^1</xliff:g> left</string>
+    <!-- Data usage remaining string [CHAR LIMIT=30] -->
+    <string name="data_used_formatted"><xliff:g name="value" example="500">^1</xliff:g> <xliff:g name="units" example="GB">^2</xliff:g> used</string>
 
-    <!-- Informational text about time left in billing cycle [CHAR LIMIT=30] -->
-    <string name="cycle_left_time_text"><xliff:g name="time" example="2d">%1$s</xliff:g> left in this cycle</string>
+    <!-- Data usage over limit string [CHAR LIMIT=30] -->
+    <string name="data_overusage"><xliff:g name="bytes" example="2 GB">^1</xliff:g> over</string>
+
+    <!-- Optional part of data usage showing the remaining amount [CHAR LIMIT=30] -->
+    <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="cycle_left_multiple_days"><xliff:g name="time" example="2d">%d</xliff:g> days left</string>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <plurals name="billing_cycle_days_left">
+        <item quantity="one">%d day left</item>
+        <item quantity="other">%d days left</item>
+    </plurals>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
 
     <!-- Informational text about carrier and update time [CHAR LIMIT=30] -->
     <string name="carrier_and_update_text">Updated by <xliff:g name="carrier" example="T-mobile">%1$s</xliff:g> <xliff:g name="time" example="3m">%2$s</xliff:g></string>

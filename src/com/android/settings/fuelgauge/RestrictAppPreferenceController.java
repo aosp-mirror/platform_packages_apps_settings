@@ -67,17 +67,26 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
 
         final List<AppOpsManager.PackageOps> packageOpsList = mAppOpsManager.getPackagesForOps(
                 new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
-        final int num = CollectionUtils.size(packageOpsList);
         mAppInfos = new ArrayList<>();
 
-        for (int i = 0; i < num; i++) {
+        for (int i = 0, size = CollectionUtils.size(packageOpsList); i < size; i++) {
             final AppOpsManager.PackageOps packageOps = packageOpsList.get(i);
-            mAppInfos.add(new AppInfo.Builder()
-                    .setPackageName(packageOps.getPackageName())
-                    .setUid(packageOps.getUid())
-                    .build());
+            final List<AppOpsManager.OpEntry> entries = packageOps.getOps();
+            for (int j = 0; j < entries.size(); j++) {
+                AppOpsManager.OpEntry ent = entries.get(j);
+                if (ent.getOp() != AppOpsManager.OP_RUN_ANY_IN_BACKGROUND) {
+                    continue;
+                }
+                if (ent.getMode() != AppOpsManager.MODE_ALLOWED) {
+                    mAppInfos.add(new AppInfo.Builder()
+                            .setPackageName(packageOps.getPackageName())
+                            .setUid(packageOps.getUid())
+                            .build());
+                }
+            }
         }
 
+        final int num = mAppInfos.size();
         // Enable the preference if some apps already been restricted, otherwise disable it
         preference.setEnabled(num > 0);
         preference.setSummary(

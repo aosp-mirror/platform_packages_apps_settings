@@ -330,13 +330,20 @@
     <string name="date_time_set_timezone" msgid="5045627174274377814">"표준시간대 선택"</string>
     <string name="date_time_set_date_title" msgid="6928286765325608604">"날짜"</string>
     <string name="date_time_set_date" msgid="7021491668550232105">"날짜 설정"</string>
+    <string name="date_time_select_region" msgid="5434001881313168586">"지역"</string>
+    <string name="date_time_select_zone" msgid="8883690857762652278">"시간대"</string>
+    <string name="date_time_select_fixed_offset_time_zones" msgid="6084375085203448645">"UTC 오프셋 선택"</string>
     <string name="zone_list_menu_sort_alphabetically" msgid="5683377702671088588">"가나다순으로 정렬"</string>
     <string name="zone_list_menu_sort_by_timezone" msgid="2720190443744884114">"시간대순으로 정렬"</string>
     <string name="zone_change_to_from_dst" msgid="118656001224045590">"<xliff:g id="TIME_TYPE">%1$s</xliff:g>은(는) <xliff:g id="TRANSITION_DATE">%2$s</xliff:g>에 시작됩니다."</string>
+    <string name="zone_info_exemplar_location_and_offset" msgid="1359698475641349336">"<xliff:g id="EXEMPLAR_LOCATION">%1$s</xliff:g>(<xliff:g id="OFFSET">%2$s</xliff:g>)"</string>
+    <string name="zone_info_offset_and_name" msgid="164876167707284017">"<xliff:g id="TIME_TYPE">%2$s</xliff:g>(<xliff:g id="OFFSET">%1$s</xliff:g>)"</string>
+    <string name="zone_info_footer" msgid="4192803402331390389">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>를 사용합니다. <xliff:g id="DST_TIME_TYPE">%2$s</xliff:g>는 <xliff:g id="TRANSITION_DATE">%3$s</xliff:g>에 시작됩니다."</string>
+    <string name="zone_info_footer_no_dst" msgid="8652423870143056964">"<xliff:g id="OFFSET_AND_NAME">%1$s</xliff:g>를 사용합니다. 일광 절약 시간은 적용되지 않습니다."</string>
     <string name="zone_time_type_dst" msgid="8850494578766845276">"일광 절약 시간"</string>
     <string name="zone_time_type_standard" msgid="3462424485380376522">"표준 시간"</string>
-    <string name="zone_menu_by_region" msgid="4603214570803607532">"지역별 시간대"</string>
-    <string name="zone_menu_by_offset" msgid="1172774718486088771">"고정 오프셋 시간대"</string>
+    <string name="zone_menu_by_region" msgid="7094872254966039844">"시간대를 지역으로 표시"</string>
+    <string name="zone_menu_by_offset" msgid="5548491286761692269">"시간대를 UTC 오프셋으로 표시"</string>
     <string name="date_picker_title" msgid="1338210036394128512">"날짜"</string>
     <string name="time_picker_title" msgid="483460752287255019">"시간"</string>
     <string name="lock_after_timeout" msgid="4590337686681194648">"자동 잠금"</string>
@@ -362,7 +369,9 @@
     <string name="security_settings_title" msgid="4918904614964215087">"보안 및 위치"</string>
     <string name="encryption_and_credential_settings_title" msgid="6514904533438791561">"암호화 및 사용자 인증 정보"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="8721883002237981248">"휴대전화 암호화됨"</string>
+    <string name="decryption_settings_summary" product="default" msgid="5671817824042639849">"휴대전화가 암호화되지 않았습니다."</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="7200428573872395685">"기기가 암호화됨"</string>
+    <string name="decryption_settings_summary" product="tablet" msgid="5794135636155570977">"기기가 암호화되지 않았습니다."</string>
     <string name="lockscreen_settings_title" msgid="3922976395527087455">"잠금 화면 환경설정"</string>
     <string name="security_settings_summary" msgid="967393342537986570">"내 위치, 화면 잠금해제, SIM 카드 잠금, 자격증명 저장소 잠금 설정"</string>
     <string name="cdma_security_settings_summary" msgid="6068799952798901542">"내 위치, 화면 잠금해제, 자격증명 저장소 잠금 설정"</string>
@@ -469,14 +478,14 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"입력한 비밀번호는 정확하지만 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n태블릿을 다시 사용하려면 초기화해야 합니다. 초기화 후 태블릿을 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"입력한 비밀번호는 정확하지만 안타깝게도 사용자의 데이터가 손상되었습니다. \n\n휴대전화를 다시 사용하려면 초기화해야 합니다. 초기화 후 휴대전화를 설정할 때 Google 계정에 백업된 데이터를 복원할 수 있습니다."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"입력 방법 전환"</string>
-    <string name="suggested_lock_settings_title" msgid="8195437597439375655">"보안을 위해 화면 잠금 설정"</string>
-    <string name="suggested_lock_settings_summary" product="tablet" msgid="7915739444107426777">"다른 사람이 내 태블릿을 사용하는 것을 방지"</string>
-    <string name="suggested_lock_settings_summary" product="device" msgid="9202820303111653610">"다른 사람이 내 기기를 사용하는 것을 방지"</string>
-    <string name="suggested_lock_settings_summary" product="default" msgid="1252628838133344781">"다른 사람이 내 휴대전화를 사용하는 것을 방지"</string>
+    <string name="suggested_lock_settings_title" msgid="8498743819223200961">"휴대전화 보안 강화"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"화면 잠금을 설정하여 태블릿 보호"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"화면 잠금을 설정하여 기기 보호"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"화면 잠금을 설정하여 휴대전화 보호"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"지문으로 잠금 해제"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="2149569133725273864">"지문으로 잠금 해제"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="2149569133725273864">"지문으로 잠금 해제"</string>
-    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="2149569133725273864">"지문으로 잠금 해제"</string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
+    <string name="suggested_fingerprint_lock_settings_summary" product="default" msgid="5738274583658668124"></string>
     <string name="lock_settings_picker_title" msgid="1095755849152582712">"화면 잠금 선택"</string>
     <string name="lock_settings_picker_title_profile" msgid="8822511284992306796">"직장 잠금 선택"</string>
     <string name="setup_lock_settings_picker_title" product="tablet" msgid="90329443364067215">"태블릿 보호"</string>
@@ -707,8 +716,8 @@
     <string name="bluetooth_dock_settings_remember" msgid="5551459057010609115">"설정 기억"</string>
     <string name="bluetooth_max_connected_audio_devices_string" msgid="6752690395207847881">"연결된 블루투스 오디오 기기의 최대 개수"</string>
     <string name="bluetooth_max_connected_audio_devices_dialog_title" msgid="5936561749790095473">"연결된 블루투스 오디오 기기의 최대 개수 선택"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports" msgid="5101903170688399944">"블루투스 AVDTP 지연 보고서 사용"</string>
-    <string name="bluetooth_enable_avdtp_delay_reports_summary" msgid="7052797876020616399">"블루투스 AVDTP 지연 보고서 수신 허용"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports" msgid="7710144996922449248">"블루투스 AVDTP 지연 보고서 사용 안함"</string>
+    <string name="bluetooth_disable_avdtp_delay_reports_summary" msgid="6882039901251054992">"블루투스 AVDTP 지연 보고서 수신 허용 안함"</string>
     <string name="wifi_display_settings_title" msgid="8740852850033480136">"전송"</string>
     <string name="wifi_display_enable_menu_item" msgid="4883036464138167674">"무선 디스플레이 사용"</string>
     <string name="wifi_display_no_devices_found" msgid="1382012407154143453">"근처에 기기가 없습니다."</string>
@@ -724,6 +733,8 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2.4GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"로그인"</string>
+    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
+    <skip />
     <string name="link_speed" msgid="8896664974117585555">"%1$dMbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g>에서 Wi-Fi를 사용 설정하려고 합니다."</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g>에서 Wi-Fi를 사용 중지하려고 합니다."</string>
@@ -927,8 +938,8 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"비행기 모드가 사용 설정되어 있기 때문에 사용할 수 없습니다."</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"Wi-Fi 통화"</string>
-    <string name="wifi_calling_suggestion_title" msgid="7766895085362824508">"Wi‑Fi로 통화 범위 확장하기"</string>
-    <string name="wifi_calling_suggestion_summary" msgid="6460250990899143406">"Wi-Fi 통화 사용 설정"</string>
+    <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"Wi‑Fi로 통화 가능 범위 확장"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"Wi‑Fi 통화를 사용 설정하여 신호 범위 확장"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"통화 환경설정"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"Wi-Fi 통화 모드"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"로밍 환경설정"</string>
@@ -1443,17 +1454,18 @@
     <string name="managed_profile_location_switch_title" msgid="6712332547063039683">"직장 프로필 위치"</string>
     <string name="location_app_level_permissions" msgid="1825588230817081339">"앱 수준 권한"</string>
     <string name="location_category_recent_location_requests" msgid="1938721350424447421">"최근 위치 요청"</string>
-    <!-- no translation found for location_recent_location_requests_see_all (9063541547120162593) -->
-    <skip />
+    <string name="location_recent_location_requests_see_all" msgid="9063541547120162593">"전체 보기"</string>
     <string name="location_no_recent_apps" msgid="2800907699722178041">"최근에 위치 정보를 요청한 앱이 없습니다."</string>
     <string name="location_category_location_services" msgid="7437150886946685979">"위치 서비스"</string>
     <string name="location_high_battery_use" msgid="517199943258508020">"배터리 사용량 많음"</string>
     <string name="location_low_battery_use" msgid="8602232529541903596">"배터리 사용량 적음"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"검색"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Wi‑Fi 검색"</string>
-    <string name="location_scanning_wifi_always_scanning_description" msgid="8036382029606868081">"시스템 앱과 서비스가 Wi‑Fi 네트워크를 항상 감지하도록 허용하여 위치 정확도를 개선합니다."</string>
+    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
+    <skip />
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"블루투스 검색"</string>
-    <string name="location_scanning_bluetooth_always_scanning_description" msgid="8602726521250591852">"시스템 앱과 서비스가 블루투스 기기를 항상 감지하도록 허용하여 위치 정확도를 개선합니다."</string>
+    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
+    <skip />
     <string name="location_network_based" msgid="9134175479520582215">"Wi-Fi 및 모바일 네트워크 위치"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"사용자의 위치를 빠르게 파악하도록 앱에서 Google의 위치 서비스를 사용합니다. 익명의 위치 정보가 수집되어 Google로 전송됩니다."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Wi-Fi에서 측정된 위치"</string>
@@ -1608,7 +1620,7 @@
     <string name="install_text" msgid="884360662922471113">"설치"</string>
     <string name="disable_text" msgid="6544054052049395202">"사용 안함"</string>
     <string name="enable_text" msgid="9217362512327828987">"사용"</string>
-    <string name="clear_user_data_text" msgid="5597622864770098388">"데이터 지우기"</string>
+    <string name="clear_user_data_text" msgid="355574089263023363">"저장용량 비우기"</string>
     <string name="app_factory_reset" msgid="6635744722502563022">"업데이트 제거"</string>
     <string name="auto_launch_enable_text" msgid="4275746249511874845">"이 앱을 해당 작업에 대한 기본 프로그램으로 실행하도록 선택했습니다."</string>
     <string name="always_allow_bind_appwidgets_text" msgid="566822577792032925">"이 앱이 위젯을 만들고 자체 데이터에 액세스할 수 있도록 선택했습니다."</string>
@@ -1650,9 +1662,7 @@
     <string name="dlg_cancel" msgid="1674753358972975911">"취소"</string>
     <string name="app_not_found_dlg_title" msgid="3127123411738434964"></string>
     <string name="app_not_found_dlg_text" msgid="4893589904687340011">"앱이 설치된 앱 목록에 없습니다."</string>
-    <string name="clear_data_failed" msgid="7214074331627422248">"앱 데이터를 지우지 못했습니다."</string>
-    <string name="clear_failed_dlg_title" msgid="2387060805294783175">"데이터 지우기"</string>
-    <string name="clear_failed_dlg_text" msgid="5464475937929941008">"앱 데이터를 지우지 못했습니다."</string>
+    <string name="clear_failed_dlg_text" msgid="8651231637137025815">"앱 저장용량을 비우지 못했습니다."</string>
     <string name="security_settings_desc" product="tablet" msgid="1292421279262430109">"이 앱은 태블릿에서 다음에 액세스할 수 있습니다."</string>
     <string name="security_settings_desc" product="default" msgid="61749028818785244">"이 앱은 휴대전화의 다음 항목에 액세스할 수 있습니다."</string>
     <string name="security_settings_desc_multi" product="tablet" msgid="7300932212437084403">"이 앱은 내 태블릿에서 다음에 액세스할 수 있습니다.<xliff:g id="BASE_APP_NAME">%1$s</xliff:g>(은)는 <xliff:g id="ADDITIONAL_APPS_LIST">%2$s</xliff:g>(와)과 동일한 프로세스에서 실행되기 때문에 성능을 향상시키고 메모리 사용량을 줄이기 위해서는 이러한 사용 권한 중 일부를 사용할 수 있습니다."</string>
@@ -2005,7 +2015,8 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> 남음"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> 후 완충"</string>
-    <string name="background_activity_title" msgid="4797874712348525348">"제한됨"</string>
+    <!-- no translation found for background_activity_title (4645016676653647542) -->
+    <skip />
     <string name="background_activity_summary" msgid="8140094430510517362">"앱이 백그라운드에서 실행되도록 허용"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"앱을 사용하지 않을 때 백그라운드에서 실행될 수 있습니다."</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"앱을 사용하지 않을 때 백그라운드 활동이 제한됩니다."</string>
@@ -2082,12 +2093,21 @@
       <item quantity="other">%1$d개 앱을 제한하시겠습니까?</item>
       <item quantity="one">앱을 제한하시겠습니까?</item>
     </plurals>
-    <string name="battery_tip_restrict_app_dialog_message" msgid="5818730114373015028">"배터리를 절약하려면 이 앱이 사용되지 않을 때 백그라운드에서 실행되지 않게 설정할 수 있습니다."</string>
+    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
+    <skip />
+    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
+    <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"제한"</string>
     <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"<xliff:g id="APP">%1$s</xliff:g>에 적용되는 제한을 삭제하시겠습니까?"</string>
     <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"이 앱은 백그라운드에서 배터리를 사용할 수 있으며 이로 인해 배터리가 빨리 소모될 수 있습니다."</string>
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"삭제"</string>
     <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"나중에"</string>
+    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <skip />
     <string name="smart_battery_manager_title" msgid="5677222263071864438">"스마트 배터리 관리자"</string>
     <string name="smart_battery_title" msgid="7014692334636228916">"배터리 자동 관리"</string>
     <string name="smart_battery_summary" msgid="6435844879637999044">"사용 방식에 따라 앱의 전력 사용을 자동으로 조정합니다"</string>
@@ -2096,6 +2116,8 @@
       <item quantity="other">앱 %1$d개</item>
       <item quantity="one">앱 %1$d개</item>
     </plurals>
+    <string name="battery_auto_restriction_title" msgid="4698846356558232573">"자동으로 앱 제한"</string>
+    <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"앱이 백그라운드에서 배터리를 과도하게 사용하지 못하게 합니다."</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"앱을 종료하시겠습니까?"</string>
     <string name="dialog_stop_message" product="default" msgid="4006631636646776488">"<xliff:g id="APP">%1$s</xliff:g>에서 휴대전화를 작동 상태로 유지하고 있어 휴대전화에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
     <string name="dialog_stop_message" product="tablet" msgid="2369957934555162428">"<xliff:g id="APP">%1$s</xliff:g>에서 태블릿을 작동 상태로 유지하고 있어 태블릿에서 배터리를 정상적으로 관리할 수 없습니다.\n\n문제를 해결하려면 앱을 종료하세요.\n\n문제가 계속되는 경우 앱을 제거하고 배터리 성능을 개선해야 할 수도 있습니다."</string>
@@ -2317,8 +2339,7 @@
     <string name="credentials_configure_lock_screen_hint" msgid="8058230497337529036">"자격증명 저장소를 사용하려면 기기에 보안 잠금 화면을 설정해야 합니다."</string>
     <string name="credentials_configure_lock_screen_button" msgid="253239765216055321">"잠금 설정"</string>
     <string name="usage_access_title" msgid="332333405495457839">"사용 액세스 권한을 보유한 앱"</string>
-    <!-- no translation found for emergency_tone_title (254495218194925271) -->
-    <skip />
+    <string name="emergency_tone_title" msgid="254495218194925271">"응급 상황 다이얼링 신호"</string>
     <string name="emergency_tone_summary" msgid="722259232924572153">"긴급 통화 중 동작 설정"</string>
     <string name="privacy_settings_title" msgid="2978878794187459190">"백업"</string>
     <string name="backup_section_title" msgid="7952232291452882740">"백업 및 복원"</string>
@@ -2927,12 +2948,9 @@
     <string name="dock_audio_media_title" msgid="1346838179626123900">"도크 스피커 재생"</string>
     <string name="dock_audio_media_disabled" msgid="3430953622491538080">"모든 오디오"</string>
     <string name="dock_audio_media_enabled" msgid="667849382924908673">"미디어 오디오만"</string>
-    <!-- no translation found for emergency_tone_silent (3750231842974733677) -->
-    <skip />
-    <!-- no translation found for emergency_tone_alert (8523447641290736852) -->
-    <skip />
-    <!-- no translation found for emergency_tone_vibrate (2278872257053690683) -->
-    <skip />
+    <string name="emergency_tone_silent" msgid="3750231842974733677">"음소거"</string>
+    <string name="emergency_tone_alert" msgid="8523447641290736852">"신호음"</string>
+    <string name="emergency_tone_vibrate" msgid="2278872257053690683">"진동"</string>
     <string name="boot_sounds_title" msgid="567029107382343709">"부팅 소리"</string>
     <string name="zen_mode_settings_summary_off" msgid="6119891445378113334">"사용 안함"</string>
     <plurals name="zen_mode_settings_summary_on" formatted="false" msgid="7346979080337117366">
@@ -2941,7 +2959,8 @@
     </plurals>
     <string name="zen_mode_settings_title" msgid="1066226840983908121">"알림 일시중지"</string>
     <string name="zen_mode_settings_turn_on_dialog_title" msgid="2297134204747331078">"알림 일시중지 사용 설정"</string>
-    <string name="zen_mode_behavior_settings_title" msgid="1463303933529313969">"동작"</string>
+    <string name="zen_mode_behavior_settings_title" msgid="5453115212674008032">"예외"</string>
+    <string name="zen_mode_duration_settings_title" msgid="229547412251222757">"지속 시간"</string>
     <string name="zen_mode_behavior_allow_title" msgid="3845615648136218141">"다음의 소리 및 진동 허용"</string>
     <string name="zen_mode_behavior_no_sound" msgid="1219626004723208056">"음소거"</string>
     <string name="zen_mode_behavior_total_silence" msgid="2229976744274214528">"모두 음소거"</string>
@@ -2959,6 +2978,21 @@
     <string name="zen_mode_summary_combination" msgid="8715563402849273459">"<xliff:g id="MODE">%1$s</xliff:g>: <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
     <string name="zen_mode_visual_interruptions_settings_title" msgid="6751708745442997940">"시각적 방해 차단"</string>
     <string name="zen_mode_visual_signals_settings_subtitle" msgid="6308824824208120508">"시각적 신호 허용"</string>
+    <string name="zen_mode_what_to_block_title" msgid="7326899360743233429">"차단할 항목"</string>
+    <string name="zen_mode_block_effects_title" msgid="5659522118818678059">"알림 수신 시"</string>
+    <string name="zen_mode_block_effect_sound" msgid="7383953383758025895">"소리 음소거 및 진동 사용 중지"</string>
+    <string name="zen_mode_block_effect_intent" msgid="350764335391428447">"화면 켜지 않기"</string>
+    <string name="zen_mode_block_effect_light" msgid="8106976110224107316">"표시등 깜박이지 않기"</string>
+    <string name="zen_mode_block_effect_peek" msgid="6836997464098657115">"화면에 알림 표시하지 않기"</string>
+    <string name="zen_mode_block_effect_status" msgid="6642532634292373081">"상태 표시줄 아이콘 숨기기"</string>
+    <string name="zen_mode_block_effect_badge" msgid="4656911773512844243">"알림 표시 점 숨기기"</string>
+    <string name="zen_mode_block_effect_ambient" msgid="1005494937933402517">"절전 모드 자동 해제 시 숨기기"</string>
+    <string name="zen_mode_block_effect_list" msgid="3882541635576592530">"알림 목록에서 숨기기"</string>
+    <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"소리 및 진동"</string>
+    <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"소리, 진동, 일부 시각적 알림 표시"</string>
+    <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"소리, 진동, 시각적 알림 표시"</string>
+    <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"없음"</string>
+    <string name="zen_mode_other_options" msgid="520015080445012355">"기타 옵션"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"추가"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"켜기"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"지금 사용 설정"</string>
@@ -2969,9 +3003,17 @@
     <string name="zen_mode_settings_dnd_automatic_rule_app" msgid="1721179577382915270">"알림 일시중지가 앱(<xliff:g id="APP_NAME">%s</xliff:g>)에 의해 자동으로 사용 설정되었습니다"</string>
     <string name="zen_interruption_level_priority" msgid="2078370238113347720">"중요 알림만"</string>
     <string name="zen_mode_and_condition" msgid="4927230238450354412">"<xliff:g id="ZEN_MODE">%1$s</xliff:g>. <xliff:g id="EXIT_CONDITION">%2$s</xliff:g>"</string>
-    <string name="zen_mode_sound_summary_on" msgid="9067685807840094102">"켬/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
+    <string name="zen_mode_sound_summary_on_with_info" msgid="1202632669798211342">"켜짐/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off_with_info" msgid="2348629457144123849">"끔/<xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="zen_mode_sound_summary_off" msgid="4375814717589425561">"꺼짐"</string>
+    <string name="zen_mode_sound_summary_on" msgid="7718273231309882914">"켜짐"</string>
+    <string name="zen_mode_duration_summary_always_prompt" msgid="5976427426278136178">"항상 확인(자동으로 사용 설정되지 않은 경우)"</string>
+    <string name="zen_mode_duration_summary_forever" msgid="3144786357459137066">"사용자가 사용 중지할 때까지(자동으로 사용 설정되지 않은 경우)"</string>
+    <plurals name="zen_mode_duration_summary_time_hours" formatted="false" msgid="1060823390336822337">
+      <item quantity="other"><xliff:g id="NUM_HOURS">%d</xliff:g>시간(자동으로 사용 설정되지 않은 경우)</item>
+      <item quantity="one">1시간(자동으로 사용 설정되지 않은 경우)</item>
+    </plurals>
+    <string name="zen_mode_duration_summary_time_minutes" msgid="3959860288930526323">"<xliff:g id="NUM_MINUTES">%d</xliff:g>분(자동으로 사용 설정되지 않은 경우)"</string>
     <plurals name="zen_mode_sound_summary_summary_off_info" formatted="false" msgid="8115159143760078050">
       <item quantity="other"><xliff:g id="ON_COUNT">%d</xliff:g>개의 규칙이 자동으로 켜질 수 있습니다.</item>
       <item quantity="one">1개의 규칙이 자동으로 사용 설정될 수 있습니다.</item>
@@ -3112,9 +3154,7 @@
     <string name="zen_mode_choose_rule_type" msgid="5423746638871953459">"규칙 유형 선택"</string>
     <string name="zen_mode_delete_rule_confirmation" msgid="6237882294348570283">"\'<xliff:g id="RULE">%1$s</xliff:g>\' 규칙을 삭제하시겠습니까?"</string>
     <string name="zen_mode_delete_rule_button" msgid="4248741120307752294">"삭제"</string>
-    <string name="zen_mode_rule_type" msgid="2289413469580142888">"규칙 유형"</string>
     <string name="zen_mode_rule_type_unknown" msgid="3049377282766700600">"알 수 없음"</string>
-    <string name="zen_mode_configure_rule" msgid="8865785428056490305">"규칙 설정"</string>
     <string name="zen_mode_app_set_behavior" msgid="1534429320064381355">"지금은 이 설정을 변경할 수 없습니다. 앱(<xliff:g id="APP_NAME">%1$s</xliff:g>)에서 맞춤 동작을 사용하여 알림 일시중지가 자동으로 사용 설정되었습니다."</string>
     <string name="zen_mode_unknown_app_set_behavior" msgid="2558968232814237874">"지금은 이 설정을 변경할 수 없습니다. 앱에서 맞춤 동작을 사용하여 알림 일시중지가 자동으로 사용 설정되었습니다."</string>
     <string name="zen_mode_qs_set_behavior" msgid="6200424436456086312">"지금은 이 설정을 변경할 수 없습니다. 맞춤 동작을 사용하여 알림 일시중지가 수동으로 사용 설정되었습니다."</string>
@@ -3151,8 +3191,8 @@
     <string name="zen_mode_from_starred" msgid="2678345811950997027">"별표 표시한 연락처만"</string>
     <string name="zen_mode_from_none" msgid="8219706639954614136">"없음"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"알람"</string>
-    <string name="zen_mode_media_system_other" msgid="5937422836400161702">"미디어"</string>
-    <string name="zen_mode_media_system_other_secondary_text" msgid="785130341801887185">"터치음 및 충전음 등의 시스템 피드백이 포함됩니다"</string>
+    <string name="zen_mode_media" msgid="8808264142134422380">"미디어"</string>
+    <string name="zen_mode_system" msgid="2541380718411593581">"터치음"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"알림"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"이벤트"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"모든 발신자"</string>
@@ -3208,8 +3248,10 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"지문을 사용하여 기기를 잠금 해제하는 방법에 더해 기기가 시작되기 전에 비밀번호를 입력하도록 설정하여 기기를 더욱 안전하게 보호할 수 있습니다. 기기가 시작되기 전에는 전화, 메시지, 알림(예: 알람)을 받을 수 없습니다.\n\n이렇게 하면 분실하거나 도난당한 기기의 데이터를 보호하는 데 도움이 됩니다. 기기가 시작되기 전에 비밀번호를 입력하도록 설정하시겠습니까?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"예"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"아니요"</string>
-    <string name="restricted_true_label" msgid="1793719723017395175">"예"</string>
-    <string name="restricted_false_label" msgid="6374816254102233858">"아니요"</string>
+    <!-- no translation found for restricted_true_label (116728938205853067) -->
+    <skip />
+    <!-- no translation found for restricted_false_label (6992110192242654656) -->
+    <skip />
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"PIN이 필요한가요?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"패턴이 필요한가요?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"비밀번호가 필요한가요?"</string>
@@ -3550,6 +3592,8 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"자동 시스템 업데이트"</string>
     <string name="usage" msgid="2977875522080448986">"사용량"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"모바일 데이터 사용량"</string>
+    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
+    <skip />
     <string name="wifi_data_usage" msgid="686754111095324306">"Wi-Fi 데이터 사용량"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"이더넷 데이터 사용량"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3559,7 +3603,14 @@
     <string name="ethernet_data_template" msgid="5782476509881033590">"<xliff:g id="AMOUNT">^1</xliff:g> 이더넷 데이터"</string>
     <string name="cell_warning_only" msgid="763147658209027140">"<xliff:g id="ID_1">%1$s</xliff:g> 데이터 경고"</string>
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"<xliff:g id="ID_1">%1$s</xliff:g> 데이터 경고 / <xliff:g id="ID_2">%2$s</xliff:g> 데이터 한도"</string>
-    <string name="billing_cycle" msgid="5169909190811133499">"결제 주기"</string>
+    <string name="billing_cycle" msgid="6614597736285325497">"데이터 경고 및 한도"</string>
+    <string name="app_usage_cycle" msgid="8877223251648092131">"앱 데이터 사용 주기"</string>
+    <!-- no translation found for cell_data_warning (1985956818884847057) -->
+    <skip />
+    <!-- no translation found for cell_data_limit (1578367585799358854) -->
+    <skip />
+    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
+    <skip />
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"매월 <xliff:g id="ID_1">%1$s</xliff:g>일"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"네트워크 제한"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3570,6 +3621,8 @@
     <string name="data_used_template" msgid="3245919669966296505">"<xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"데이터 경고 설정"</string>
     <string name="data_warning" msgid="209133958008062117">"데이터 경고"</string>
+    <!-- no translation found for data_warning_footnote (776341964125603711) -->
+    <skip />
     <string name="set_data_limit" msgid="2901526323210516923">"데이터 한도 설정"</string>
     <string name="data_limit" msgid="1885406964934590552">"데이터 한도"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_2">%2$s</xliff:g>에 <xliff:g id="ID_1">%1$s</xliff:g> 사용함"</string>
@@ -3581,8 +3634,14 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"기본 자료"</string>
     <string name="data_used" msgid="5116389957228457203">"<xliff:g id="ID_1">^1</xliff:g> 사용함"</string>
-    <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">, ^1</xliff:g> 남음"</string>
-    <string name="cycle_left_time_text" msgid="8501602478371081001">"이번 요금제 기간이 <xliff:g id="ID_1">%1$s</xliff:g> 남음"</string>
+    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <skip />
+    <string name="data_remaining" msgid="8998091725895502181">"<xliff:g id="ID_1">^1</xliff:g> 남음"</string>
+    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
+    <skip />
+    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
+    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
+    <skip />
     <string name="carrier_and_update_text" msgid="4534395723031386923">"업데이트: <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"업데이트 날짜: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"요금제 보기"</string>
@@ -3863,14 +3922,19 @@
     <string name="bluetooth_on_while_driving_pref" msgid="2460847604498343330">"운전 중 블루투스 사용"</string>
     <string name="bluetooth_on_while_driving_summary" msgid="3196190732516898541">"운전 중에 블루투스를 자동으로 사용 설정"</string>
     <string name="dev_android_o_battery_settings_title" msgid="2926578228655006762">"Android 8.0 배터리 설정 확인하기"</string>
-    <!-- no translation found for change_wifi_state_title (2640523995824431999) -->
-    <skip />
-    <!-- no translation found for keywords_change_wifi_state (1439807171750715923) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_title (1022360625069880993) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_switch (724818064600933957) -->
-    <skip />
-    <!-- no translation found for change_wifi_state_app_detail_summary (2511212187129042304) -->
-    <skip />
+    <string name="change_wifi_state_title" msgid="2640523995824431999">"Wi-Fi 사용 및 사용 중지 전환"</string>
+    <string name="keywords_change_wifi_state" msgid="1439807171750715923">"Wi-Fi 사용 및 사용 중지 전환"</string>
+    <string name="change_wifi_state_app_detail_title" msgid="1022360625069880993">"Wi-Fi 사용 및 사용 중지 전환"</string>
+    <string name="change_wifi_state_app_detail_switch" msgid="724818064600933957">"Wi-Fi 전환 허용"</string>
+    <string name="change_wifi_state_app_detail_summary" msgid="2511212187129042304">"이 앱이 Wi-Fi에 연결하고 Wi-Fi를 사용 및 사용 중지하는 등 Wi-Fi 상태를 변경하도록 허용합니다."</string>
+    <string name="media_output_title" msgid="115223550977351699">"미디어 출력 대상"</string>
+    <string name="media_output_summary" product="default" msgid="6839458453831567167">"휴대전화"</string>
+    <string name="media_output_summary" product="tablet" msgid="7217221078578554515">"태블릿"</string>
+    <string name="media_output_summary" product="device" msgid="5677420090811068649">"기기"</string>
+    <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"통화 중에는 사용할 수 없습니다."</string>
+    <string name="media_output_summary_unavailable" msgid="7970304720507697019">"사용할 수 없음"</string>
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"태블릿 배터리 수명 향상"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"기기 배터리 수명 향상"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"휴대전화 배터리 수명 향상"</string>
+    <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>

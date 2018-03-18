@@ -72,7 +72,7 @@ public class HighUsageTipTest {
 
         final HighUsageTip parcelTip = new HighUsageTip(parcel);
 
-        assertThat(parcelTip.getTitle(mContext)).isEqualTo("Phone used heavily");
+        assertThat(parcelTip.getTitle(mContext)).isEqualTo("Phone used more than usual");
         assertThat(parcelTip.getType()).isEqualTo(BatteryTip.TipType.HIGH_DEVICE_USAGE);
         assertThat(parcelTip.getState()).isEqualTo(BatteryTip.StateType.NEW);
         assertThat(parcelTip.getScreenTimeMs()).isEqualTo(SCREEN_TIME);

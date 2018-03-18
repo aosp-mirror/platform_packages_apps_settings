@@ -97,9 +97,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
 
                 return new AlertDialog.Builder(context)
                         .setMessage(getString(R.string.battery_tip_dialog_message,
-                                StringUtil.formatElapsedTime(
-                                        context, highUsageTip.getScreenTimeMs(),
-                                        false /* withSeconds */)))
+                                highUsageTip.getHighUsageAppList().size()))
                         .setView(view)
                         .setPositiveButton(android.R.string.ok, null)
                         .create();
@@ -107,21 +105,30 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                 final RestrictAppTip restrictAppTip = (RestrictAppTip) mBatteryTip;
                 final List<AppInfo> restrictedAppList = restrictAppTip.getRestrictAppList();
                 final int num = restrictedAppList.size();
+                final CharSequence appLabel = Utils.getApplicationLabel(context,
+                        restrictedAppList.get(0).packageName);
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context)
                         .setTitle(context.getResources().getQuantityString(
                                 R.plurals.battery_tip_restrict_app_dialog_title, num, num))
-                        .setMessage(getString(R.string.battery_tip_restrict_app_dialog_message))
                         .setPositiveButton(R.string.battery_tip_restrict_app_dialog_ok, this)
                         .setNegativeButton(android.R.string.cancel, null);
-
-                // TODO(b/72385333): consider building dialog with 5+ apps when strings are done
-                if (num > 1) {
+                if (num == 1) {
+                    builder.setMessage(
+                            getString(R.string.battery_tip_restrict_app_dialog_message, appLabel));
+                } else if (num <= 5) {
+                    builder.setMessage(
+                            getString(
+                                    R.string.battery_tip_restrict_apps_less_than_5_dialog_message));
                     final RecyclerView restrictionView = (RecyclerView) LayoutInflater.from(
                             context).inflate(R.layout.recycler_view, null);
                     restrictionView.setLayoutManager(new LinearLayoutManager(context));
                     restrictionView.setAdapter(new HighUsageAdapter(context, restrictedAppList));
                     builder.setView(restrictionView);
+                } else {
+                    builder.setMessage(context.getString(
+                            R.string.battery_tip_restrict_apps_more_than_5_dialog_message,
+                            restrictAppTip.getRestrictAppsString(context)));
                 }
 
                 return builder.create();
@@ -131,7 +138,7 @@ public class BatteryTipDialogFragment extends InstrumentedDialogFragment impleme
                         unrestrictAppTip.getPackageName());
 
                 return new AlertDialog.Builder(context)
-                        .setTitle(getString(R.string.battery_tip_unrestrict_app_dialog_title, name))
+                        .setTitle(getString(R.string.battery_tip_unrestrict_app_dialog_title))
                         .setMessage(R.string.battery_tip_unrestrict_app_dialog_message)
                         .setPositiveButton(R.string.battery_tip_unrestrict_app_dialog_ok, this)
                         .setNegativeButton(R.string.battery_tip_unrestrict_app_dialog_cancel, null)

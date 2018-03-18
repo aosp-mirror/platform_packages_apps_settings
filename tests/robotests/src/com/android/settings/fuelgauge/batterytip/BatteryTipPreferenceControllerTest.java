@@ -150,6 +150,6 @@ public class BatteryTipPreferenceControllerTest {
 
         final Preference preference = preferenceGroup.getPreference(0);
         assertThat(preference.getTitle()).isEqualTo("Battery is in good shape");
-        assertThat(preference.getSummary()).isEqualTo("Apps are behaving normally");
+        assertThat(preference.getSummary()).isEqualTo("Apps are running normally");
     }
 }
