@@ -179,7 +179,7 @@ public class DataUsageSummaryPreferenceTest {
     }
 
     @Test
-    public void testSetUsageInfo_cycleRemainingTimeNegativeDaysLeft_shouldDisplayZeroDays() {
+    public void testSetUsageInfo_cycleRemainingTimeNegativeDaysLeft_shouldDisplayNoneLeft() {
         final long cycleEnd = System.currentTimeMillis() - 1L;
         mSummaryPreference.setUsageInfo(cycleEnd, mUpdateTime, DUMMY_CARRIER, 0 /* numPlans */,
                 new Intent());
@@ -187,7 +187,7 @@ public class DataUsageSummaryPreferenceTest {
         bindViewHolder();
         assertThat(mCycleTime.getVisibility()).isEqualTo(View.VISIBLE);
         assertThat(mCycleTime.getText()).isEqualTo(
-                mContext.getResources().getQuantityString(R.plurals.billing_cycle_days_left, 0, 0));
+                mContext.getString(R.string.billing_cycle_none_left));
     }
 
     @Test
