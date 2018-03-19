@@ -484,14 +484,10 @@
     <string name="crypt_keeper_data_corrupt_summary" product="tablet" msgid="840107296925798402">"‏הסיסמה שהזנת נכונה, אך לצערנו הנתונים שלך פגומים. \n\nכדי לחזור ולהשתמש בטאבלט, עליך לבצע איפוס להגדרות היצרן. בזמן הגדרת הטאבלט לאחר האיפוס, תהיה לך הזדמנות לשחזר נתונים שגובו בחשבון Google שלך."</string>
     <string name="crypt_keeper_data_corrupt_summary" product="default" msgid="8843311420059663824">"‏הסיסמה שהזנת נכונה, אך לצערנו הנתונים שלך פגומים. \n\nכדי לחזור ולהשתמש בטלפון, עליך לבצע איפוס להגדרות היצרן. בזמן הגדרת הטלפון לאחר האיפוס, תהיה לך הזדמנות לשחזר נתונים שגובו בחשבון Google שלך."</string>
     <string name="crypt_keeper_switch_input_method" msgid="4168332125223483198">"החלפת שיטת קלט"</string>
-    <!-- no translation found for suggested_lock_settings_title (8498743819223200961) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (2296800316150748710) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (7562847814806365373) -->
-    <skip />
-    <!-- no translation found for suggested_lock_settings_summary (1526355348444658181) -->
-    <skip />
+    <string name="suggested_lock_settings_title" msgid="8498743819223200961">"שמירה על אבטחת הטלפון"</string>
+    <string name="suggested_lock_settings_summary" product="tablet" msgid="2296800316150748710">"הגדרה של נעילת מסך לצורך הגנה על הטאבלט"</string>
+    <string name="suggested_lock_settings_summary" product="device" msgid="7562847814806365373">"הגדרה של נעילת מסך לצורך הגנה על המכשיר"</string>
+    <string name="suggested_lock_settings_summary" product="default" msgid="1526355348444658181">"הגדרה של נעילת מסך לצורך הגנה על הטלפון"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="414499342011664436">"פתיחה עם טביעת אצבע"</string>
     <string name="suggested_fingerprint_lock_settings_summary" product="tablet" msgid="5738274583658668124"></string>
     <string name="suggested_fingerprint_lock_settings_summary" product="device" msgid="5738274583658668124"></string>
@@ -802,7 +798,8 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"כדי להשתמש בתכונה, יש לבחור ספק של דירוג רשת"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"כדי להשתמש בתכונה, יש לבחור ספק תואם של דירוג רשת"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"התקנת אישורים"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"‏כדי לשפר את דיוק המיקום, אפליקציות ושירותים של המערכת יכולים עדיין לזהות רשתות Wi‑Fi. ניתן לשנות זאת ב<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>הגדרות הסריקה<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <!-- no translation found for wifi_scan_notify_text (5544778734762998889) -->
+    <skip />
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"‏כדי לשפר את דיוק המיקום, הפעל את אפשרות הסריקה אחר רשתות Wi-Fi ב<xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>הגדרות הסריקה<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"אל תציג שוב"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"‏ה-Wi-Fi ימשיך לפעול בזמן שינה"</string>
@@ -966,10 +963,8 @@
     <string name="wifi_tether_configure_ssid_default" msgid="8467525402622138547">"AndroidHotspot"</string>
     <string name="wifi_tether_disabled_by_airplane" msgid="414480185654767932">"לא זמין, מפני ש\'מצב טיסה\' מופעל"</string>
     <string name="wifi_calling_settings_title" msgid="4102921303993404577">"‏שיחות ב-Wi-Fi"</string>
-    <!-- no translation found for wifi_calling_suggestion_title (5702964371483390024) -->
-    <skip />
-    <!-- no translation found for wifi_calling_suggestion_summary (1331793267608673739) -->
-    <skip />
+    <string name="wifi_calling_suggestion_title" msgid="5702964371483390024">"‏ביצוע שיחות באמצעות Wi‑Fi"</string>
+    <string name="wifi_calling_suggestion_summary" msgid="1331793267608673739">"‏הפעלה של שיחות Wi‑Fi כדי להגדיל את תחום הכיסוי"</string>
     <string name="wifi_calling_mode_title" msgid="2164073796253284289">"העדפת התקשרות"</string>
     <string name="wifi_calling_mode_dialog_title" msgid="8149690312199253909">"‏מצב שיחות ב-Wi-Fi"</string>
     <string name="wifi_calling_roaming_mode_title" msgid="1565039047187685115">"אפשרות נדידה מועדפת"</string>
@@ -2108,41 +2103,49 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"בקשות מיקום בתדירות גבוהה"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> אפליקציות פועלות בצורה חריגה"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"הסוללה במצב טוב"</string>
-    <string name="battery_tip_summary_summary" msgid="7832491466325707487">"האפליקציות מתנהגות באופן רגיל"</string>
+    <!-- no translation found for battery_tip_summary_summary (7674026655453457) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"קיבולת הסוללה נמוכה"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"הסוללה לא יכולה לספק חיי סוללה טובים"</string>
-    <string name="battery_tip_smart_battery_title" msgid="8471762806923764455">"הפעלה של מנהל סוללה חכם"</string>
-    <string name="battery_tip_smart_battery_summary" msgid="3024670691742861841">"יש להפעיל כדי לבצע אופטימיזציה של השימוש בסוללה"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="1454605424618204941">"הפעלה של מצב סוללה חלשה"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="4003736326324428487">"באפשרותך להאריך את חיי הסוללה"</string>
-    <string name="battery_tip_early_heads_up_done_title" msgid="1545434816346760843">"מצב סוללה חלשה פועל"</string>
-    <string name="battery_tip_early_heads_up_done_summary" msgid="8191928150995385163">"חלק מהתכונות מוגבלות"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="7981031050318555946">"שימוש תובעני בטלפון"</string>
-    <string name="battery_tip_high_usage_title" product="tablet" msgid="8767749911858231430">"שימוש תובעני בטאבלט"</string>
-    <string name="battery_tip_high_usage_title" product="device" msgid="4964729505519290954">"שימוש תובעני במכשיר"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5437023146333888605">"שימוש של בערך <xliff:g id="HOUR">%1$s</xliff:g> מאז הטעינה האחרונה"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="6744251070067861233">"צריכת האנרגיה מהסוללה הייתה גבוהה בגלל שימוש תובעני בטלפון. התנהגות הסוללה היא רגילה.\n\n השתמשת בטלפון בערך <xliff:g id="HOUR">%1$s</xliff:g> מאז הטעינה המלאה האחרונה.\n\n סך הכל שימוש:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="7091442312127403445">"צריכת האנרגיה מהסוללה הייתה גבוהה בגלל שימוש תובעני בטאבלט. התנהגות הסוללה היא רגילה.\n\n השתמשת בטאבלט בערך <xliff:g id="HOUR">%1$s</xliff:g> מאז הטעינה המלאה האחרונה.\n\n סך הכל שימוש:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="7621045312469814256">"צריכת האנרגיה מהסוללה הייתה גבוהה בגלל שימוש תובעני במכשיר. התנהגות הסוללה היא רגילה.\n\n השתמשת במכשיר בערך <xliff:g id="HOUR">%1$s</xliff:g> מאז הטעינה המלאה האחרונה.\n\n סך הכל שימוש:"</string>
+    <!-- no translation found for battery_tip_smart_battery_title (2542822112725248683) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_title (6452567046912954866) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_title (4445149029390556382) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_summary (2326809294592208069) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_title (5788492366387119807) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_summary (1639271439914224547) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_title (4294083319255926811) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_summary (7054036010928794364) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (1282187115295901930) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (7422137233845959351) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (5483320224273724068) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_summary (6341311803303581798) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (2489003849577202445) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (409808830122732587) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (1948395472652651924) -->
+    <skip />
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="two">‏הגבלת %1$d אפליקציות</item>
       <item quantity="many">‏הגבלת %1$d אפליקציות</item>
       <item quantity="other">‏הגבלת %1$d אפליקציות</item>
       <item quantity="one">הגבלת אפליקציה אחת</item>
     </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5203646029862183763">
-      <item quantity="two">‏הגבלות הוטלו לאחרונה על %1$d אפליקציות</item>
-      <item quantity="many">‏הגבלות הוטלו לאחרונה על %1$d אפליקציות</item>
-      <item quantity="other">‏הגבלות הוטלו לאחרונה על %1$d אפליקציות</item>
-      <item quantity="one">הגבלות הוטלו לאחרונה על אפליקציה אחת</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="9128154370135347093">
-      <item quantity="two">‏%2$d אפליקציות משתמשות בסוללה באופן מוגבר</item>
-      <item quantity="many">‏%2$d אפליקציות משתמשות בסוללה באופן מוגבר</item>
-      <item quantity="other">‏%2$d אפליקציות משתמשות בסוללה באופן מוגבר</item>
-      <item quantity="one">אפליקציה אחת משתמשת בסוללה באופן מוגבר</item>
-    </plurals>
-    <string name="battery_tip_restrict_handled_summary" msgid="29466713333477274">"שינויי האפליקציה מתבצעים"</string>
+    <!-- no translation found for battery_tip_restrict_handled_title (2996094393897875408) -->
+    <!-- no translation found for battery_tip_restrict_summary (5768962491638423979) -->
+    <!-- no translation found for battery_tip_restrict_handled_summary (1040488674178753191) -->
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="8130618585820429591">
       <item quantity="two">‏להגביל %1$d אפליקציות?</item>
       <item quantity="many">‏להגביל %1$d אפליקציות?</item>
@@ -2156,17 +2159,25 @@
     <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
     <skip />
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"הגבלה"</string>
-    <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"להסיר הגבלה לאפליקציה <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"האפליקציה תוכל להשתמש בסוללה ברקע. ייתכן שהסוללה תתרוקן מהר יותר."</string>
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_title (4321334634106715162) -->
+    <skip />
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_message (6537761705584610231) -->
+    <skip />
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"הסרה"</string>
-    <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"לא עכשיו"</string>
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_cancel (3058235875830858902) -->
+    <skip />
     <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
     <skip />
     <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
     <skip />
-    <string name="smart_battery_manager_title" msgid="5677222263071864438">"מנהל סוללה חכם"</string>
-    <string name="smart_battery_title" msgid="7014692334636228916">"ניהול סוללה אוטומטי"</string>
-    <string name="smart_battery_summary" msgid="6435844879637999044">"התאמה אוטומטית של צריכת הסוללה על ידי אפליקציות, על בסיס שימוש"</string>
+    <!-- no translation found for smart_battery_manager_title (870632749556793417) -->
+    <skip />
+    <!-- no translation found for smart_battery_title (6218785691872466076) -->
+    <skip />
+    <!-- no translation found for smart_battery_summary (182231450571039702) -->
+    <skip />
+    <!-- no translation found for smart_battery_footer (1927140000844032031) -->
+    <skip />
     <string name="restricted_app_title" msgid="8982477293044330653">"אפליקציות בשימוש מוגבל"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="2541739220193274244">
       <item quantity="two">‏%1$d אפליקציות</item>
@@ -2174,6 +2185,8 @@
       <item quantity="other">‏%1$d אפליקציות</item>
       <item quantity="one">אפליקציה אחת</item>
     </plurals>
+    <!-- no translation found for restricted_app_detail_footer (5888756210317863211) -->
+    <skip />
     <string name="battery_auto_restriction_title" msgid="4698846356558232573">"הגבלה אוטומטית של אפליקציות"</string>
     <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"מניעת שימוש נוסף בסוללה על ידי אפליקציות ברקע"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"לעצור את האפליקציה?"</string>
@@ -2284,9 +2297,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Android OS"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"Mediaserver"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"אופטימיזציית אפליקציה"</string>
-    <string name="battery_saver" msgid="6002143200184768727">"מצב צריכת חשמל מופחתת"</string>
-    <string name="battery_saver_auto_title" msgid="6896506441192920565">"לוח זמנים"</string>
-    <string name="battery_saver_auto_summary" msgid="8715989830471454219">"הפעלה אוטומטית של מצב צריכת חשמל מופחתת כשהסוללה עומדת להתרוקן"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"חיסכון בסוללה"</string>
+    <!-- no translation found for battery_saver_auto_title (8368709389419695611) -->
+    <skip />
     <string name="battery_saver_seekbar_title" msgid="3428789387167865312">"הפעלה אוטומטית ב-<xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_master_switch_title" msgid="622539414546588436">"שימוש במצב חיסכון בסוללה"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"הפעלה אוטומטית"</string>
@@ -3063,10 +3076,8 @@
     <string name="zen_mode_block_effect_summary_sound" msgid="1065107568053759972">"צלילים ורטט"</string>
     <string name="zen_mode_block_effect_summary_some" msgid="3635646031575107456">"צלילים, רטט וחלק מהסימנים החזותיים של הודעות"</string>
     <string name="zen_mode_block_effect_summary_all" msgid="1213328945418248026">"צלילים, רטט וסימנים חזותיים של הודעות"</string>
-    <!-- no translation found for zen_mode_no_exceptions (7653433997399582247) -->
-    <skip />
-    <!-- no translation found for zen_mode_other_options (520015080445012355) -->
-    <skip />
+    <string name="zen_mode_no_exceptions" msgid="7653433997399582247">"ללא"</string>
+    <string name="zen_mode_other_options" msgid="520015080445012355">"אפשרויות אחרות"</string>
     <string name="zen_mode_add" msgid="90014394953272517">"הוספה"</string>
     <string name="zen_mode_enable_dialog_turn_on" msgid="8287824809739581837">"הפעלה"</string>
     <string name="zen_mode_button_turn_on" msgid="2824380626482175552">"הפעלה עכשיו"</string>
@@ -3278,8 +3289,7 @@
     <string name="zen_mode_from_none" msgid="8219706639954614136">"בלי הודעות"</string>
     <string name="zen_mode_alarms" msgid="2165302777886552926">"התראות"</string>
     <string name="zen_mode_media" msgid="8808264142134422380">"מדיה"</string>
-    <!-- no translation found for zen_mode_system (2541380718411593581) -->
-    <skip />
+    <string name="zen_mode_system" msgid="2541380718411593581">"צלילי מגע"</string>
     <string name="zen_mode_reminders" msgid="5458502056440485730">"תזכורות"</string>
     <string name="zen_mode_events" msgid="7914446030988618264">"אירועים"</string>
     <string name="zen_mode_all_callers" msgid="584186167367236922">"כל המתקשרים"</string>
@@ -3499,10 +3509,11 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"‏הדוח על באג זה משותף כעת עם מנהל ה-IT שלך. למידע נוסף, צור איתו קשר."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"שתף"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"לא, אין מצב"</string>
-    <string name="usb_use_charging_only" msgid="2180443097365214467">"לטעון מכשיר זה"</string>
+    <!-- no translation found for usb_use_charging_only (4800495064747543954) -->
+    <skip />
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"רק לטעינת המכשיר"</string>
-    <string name="usb_use_power_only" msgid="6449381364444187612">"טעינת המכשיר המחובר"</string>
-    <string name="usb_use_power_only_desc" msgid="5674490059427055197">"הגדרות אחרות לא זמינות כשאפשרות זו מופעלת"</string>
+    <!-- no translation found for usb_use_power_only (3236391691786786070) -->
+    <skip />
     <string name="usb_use_file_transfers" msgid="1223134119354320726">"העברת קבצים"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"העברת קבצים למכשיר אחר"</string>
     <string name="usb_use_photo_transfers" msgid="8192719651229326283">"PTP"</string>
@@ -3511,10 +3522,22 @@
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"‏שימוש במכשיר זה כהתקן MIDI"</string>
     <string name="usb_use" msgid="3372728031108932425">"‏השתמש ב-USB בשביל"</string>
-    <string name="usb_use_also" msgid="557340935190819370">"‏יש להשתמש ב-USB גם בשביל"</string>
-    <string name="usb_default_label" msgid="4217189967858707974">"‏ברירת המחדל של תצורת USB"</string>
+    <!-- no translation found for usb_default_label (2211094045594574774) -->
+    <skip />
     <string name="usb_default_info" msgid="8864535445796200695">"כשמכשיר אחר מחובר והטלפון לא נעול, הגדרות אלה יחולו. יש לחבר רק למכשירים מהימנים."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
+    <!-- no translation found for usb_preference (7394265019817945275) -->
+    <skip />
+    <!-- no translation found for usb_control_title (4404322722995917160) -->
+    <skip />
+    <!-- no translation found for usb_control_host (2276710819046647200) -->
+    <skip />
+    <!-- no translation found for usb_control_device (5821511964163469463) -->
+    <skip />
+    <!-- no translation found for usb_switching (8995313698715545619) -->
+    <skip />
+    <!-- no translation found for usb_switching_failed (4156073015692409651) -->
+    <skip />
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"הטענת המכשיר"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"טעינת המכשיר המחובר"</string>
     <string name="usb_summary_file_transfers" msgid="6925168380589489645">"העברת קבצים"</string>
@@ -3749,6 +3772,8 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"נתונים עיקריים"</string>
     <string name="data_used" msgid="5116389957228457203">"נעשה שימוש ב-<xliff:g id="ID_1">^1</xliff:g>"</string>
+    <!-- no translation found for data_used_formatted (2989129931961311051) -->
+    <skip />
     <!-- no translation found for data_overusage (1134445012475270295) -->
     <skip />
     <string name="data_remaining" msgid="8998091725895502181">"נפח שנותר: <xliff:g id="ID_1">^1</xliff:g>"</string>
@@ -4070,11 +4095,8 @@
     <string name="media_output_summary" product="device" msgid="5677420090811068649">"מכשיר"</string>
     <string name="media_out_summary_ongoing_call_state" msgid="3533731701018680693">"לא זמין במהלך ביצוע שיחות"</string>
     <string name="media_output_summary_unavailable" msgid="7970304720507697019">"לא זמין"</string>
-    <!-- no translation found for battery_suggestion_title (752439050748267917) -->
-    <skip />
-    <!-- no translation found for battery_suggestion_title (1507272328369733005) -->
-    <skip />
-    <!-- no translation found for battery_suggestion_title (4038053023336285165) -->
-    <skip />
+    <string name="battery_suggestion_title" product="tablet" msgid="752439050748267917">"שיפור חיי הסוללה של הטאבלט"</string>
+    <string name="battery_suggestion_title" product="device" msgid="1507272328369733005">"שיפור חיי הסוללה של המכשיר"</string>
+    <string name="battery_suggestion_title" product="default" msgid="4038053023336285165">"שיפור חיי הסוללה של הטלפון"</string>
     <string name="battery_suggestion_summary" msgid="4585677159811722359"></string>
 </resources>
