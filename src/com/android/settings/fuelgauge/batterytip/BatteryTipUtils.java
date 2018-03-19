@@ -16,6 +16,11 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.app.PendingIntent;
+import android.app.StatsManager;
+import android.content.Context;
+import android.content.Intent;
+
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
@@ -32,6 +37,7 @@ import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
  * Utility class for {@link BatteryTip}
  */
 public class BatteryTipUtils {
+    private static final int REQUEST_CODE = 0;
 
     /**
      * Get a corresponding action based on {@code batteryTip}
@@ -59,5 +65,16 @@ public class BatteryTipUtils {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
+     */
+    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager) {
+        final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
+                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
+                StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
     }
 }
