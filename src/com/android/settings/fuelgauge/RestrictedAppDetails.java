@@ -131,8 +131,8 @@ public class RestrictedAppDetails extends DashboardFragment {
             final CheckBoxPreference checkBoxPreference = new AppCheckBoxPreference(context);
             final AppInfo appInfo = mAppInfos.get(i);
             try {
-                final ApplicationInfo applicationInfo = mPackageManager.getApplicationInfo(
-                        appInfo.packageName, 0 /* flags */);
+                final ApplicationInfo applicationInfo = mPackageManager.getApplicationInfoAsUser(
+                        appInfo.packageName, 0 /* flags */, UserHandle.getUserId(appInfo.uid));
                 checkBoxPreference.setChecked(true);
                 checkBoxPreference.setTitle(mPackageManager.getApplicationLabel(applicationInfo));
                 checkBoxPreference.setIcon(
