@@ -228,6 +228,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mLabelBar.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mProgressBar.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -236,6 +237,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mLabelBar.getVisibility()).isEqualTo(View.GONE);
+        assertThat(mProgressBar.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -245,6 +247,7 @@ public class DataUsageSummaryPreferenceTest {
 
         bindViewHolder();
         assertThat(mLabelBar.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(mProgressBar.getVisibility()).isEqualTo(View.VISIBLE);
     }
 
 
