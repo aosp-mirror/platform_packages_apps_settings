@@ -733,8 +733,7 @@
     <string name="wifi_band_24ghz" msgid="852929254171856911">"2,4 GHz"</string>
     <string name="wifi_band_5ghz" msgid="6433822023268515117">"5 GHz"</string>
     <string name="wifi_sign_in_button_text" msgid="8404345621836792112">"Accedi"</string>
-    <!-- no translation found for wifi_tap_to_sign_in (6990161842394669054) -->
-    <skip />
+    <string name="wifi_tap_to_sign_in" msgid="6990161842394669054">"Tocca qui per accedere alla rete"</string>
     <string name="link_speed" msgid="8896664974117585555">"%1$d Mbps"</string>
     <string name="wifi_ask_enable" msgid="2795469717302060104">"<xliff:g id="REQUESTER">%s</xliff:g> chiede di attivare il Wi-Fi"</string>
     <string name="wifi_ask_disable" msgid="728366570145493573">"<xliff:g id="REQUESTER">%s</xliff:g> chiede di disattivare il Wi-Fi"</string>
@@ -776,7 +775,8 @@
     <string name="use_open_wifi_automatically_summary_scoring_disabled" msgid="593964217679325831">"Per usare la funzione, seleziona un fornitore di servizi di valutazione rete"</string>
     <string name="use_open_wifi_automatically_summary_scorer_unsupported_disabled" msgid="8472122600853650258">"Per usare la funzione, seleziona un fornitore di servizi di valutazione rete compatibile"</string>
     <string name="wifi_install_credentials" msgid="3551143317298272860">"Installa certificati"</string>
-    <string name="wifi_scan_notify_text" msgid="5593805423071186757">"Per una maggiore precisione della geolocalizzazione, le app e i servizi di sistema possono ancora cercare reti Wi-Fi. Puoi modificare questa impostazione nelle <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>impostazioni di ricerca<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
+    <!-- no translation found for wifi_scan_notify_text (5544778734762998889) -->
+    <skip />
     <string name="wifi_scan_notify_text_scanning_off" msgid="3426075479272242098">"Per una maggiore precisione della geolocalizzazione, attiva la ricerca delle reti Wi-Fi nelle <xliff:g id="LINK_BEGIN_0">LINK_BEGIN</xliff:g>impostazioni di ricerca<xliff:g id="LINK_END_1">LINK_END</xliff:g>."</string>
     <string name="wifi_scan_notify_remember_choice" msgid="7104867814641144485">"Non mostrare più"</string>
     <string name="wifi_setting_sleep_policy_title" msgid="5149574280392680092">"Tieni attivo Wi‑Fi durante sospensione"</string>
@@ -1461,11 +1461,9 @@
     <string name="location_low_battery_use" msgid="8602232529541903596">"Basso utilizzo della batteria"</string>
     <string name="location_scanning_screen_title" msgid="4408076862929611554">"Ricerca"</string>
     <string name="location_scanning_wifi_always_scanning_title" msgid="6216705505621183645">"Ricerca di reti Wi-Fi"</string>
-    <!-- no translation found for location_scanning_wifi_always_scanning_description (2691110218127379249) -->
-    <skip />
+    <string name="location_scanning_wifi_always_scanning_description" msgid="2691110218127379249">"Consenti ad app e servizi di cercare reti Wi-Fi in qualsiasi momento, anche quando il Wi-Fi non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="5444989508204520019">"Ricerca di dispositivi Bluetooth"</string>
-    <!-- no translation found for location_scanning_bluetooth_always_scanning_description (1285526059945206128) -->
-    <skip />
+    <string name="location_scanning_bluetooth_always_scanning_description" msgid="1285526059945206128">"Consenti ad app e servizi di cercare dispositivi nelle vicinanze in qualsiasi momento, anche quando il Bluetooth non è attivo. Questa funzione è utile, ad esempio, per migliorare funzioni e servizi basati sulla posizione."</string>
     <string name="location_network_based" msgid="9134175479520582215">"Posizione Wi‑Fi e rete mobile"</string>
     <string name="location_neighborhood_level" msgid="5141318121229984788">"Consenti alle app di usare geolocalizzazione Google per stabilire la posizione. Saranno raccolti e inviati a Google dati anonimi."</string>
     <string name="location_neighborhood_level_wifi" msgid="4234820941954812210">"Posizione determinata da Wi‑Fi"</string>
@@ -2015,8 +2013,7 @@
     <string name="power_usage_level_and_status" msgid="7449847570973811784">"<xliff:g id="LEVEL">%1$s</xliff:g> - <xliff:g id="STATUS">%2$s</xliff:g>"</string>
     <string name="power_discharge_remaining" msgid="4925678997049911808">"<xliff:g id="REMAIN">%1$s</xliff:g> rimanenti"</string>
     <string name="power_charge_remaining" msgid="6132074970943913135">"<xliff:g id="UNTIL_CHARGED">%1$s</xliff:g> alla ricarica"</string>
-    <!-- no translation found for background_activity_title (4645016676653647542) -->
-    <skip />
+    <string name="background_activity_title" msgid="4645016676653647542">"Limitazioni batteria"</string>
     <string name="background_activity_summary" msgid="8140094430510517362">"Consenti l\'esecuzione in background dell\'app"</string>
     <string name="background_activity_summary_on" msgid="649282072540085599">"Esecuzione in background consentita quando l\'app non è in uso"</string>
     <string name="background_activity_summary_off" msgid="7666330699090632040">"Attività in background limitata quando l\'app non è in uso"</string>
@@ -2060,62 +2057,79 @@
     <string name="battery_abnormal_location_summary" msgid="6552797246798806002">"Richiesta della posizione frequentemente"</string>
     <string name="battery_abnormal_apps_summary" msgid="792553273248686972">"<xliff:g id="NUMBER">%1$d</xliff:g> app con comportamenti anomali"</string>
     <string name="battery_tip_summary_title" msgid="7060523369832289878">"La batteria è in buone condizioni"</string>
-    <string name="battery_tip_summary_summary" msgid="7832491466325707487">"Le app hanno un comportamento normale"</string>
+    <!-- no translation found for battery_tip_summary_summary (7674026655453457) -->
+    <skip />
     <string name="battery_tip_low_battery_title" msgid="5103420355109677385">"Capacità della batteria in esaurimento"</string>
     <string name="battery_tip_low_battery_summary" msgid="4702986182940709150">"La batteria non può fornire una buona durata"</string>
-    <string name="battery_tip_smart_battery_title" msgid="8471762806923764455">"Attiva gestione batteria intelligente"</string>
-    <string name="battery_tip_smart_battery_summary" msgid="3024670691742861841">"Attiva per ottimizzare l\'utilizzo della batteria"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="1454605424618204941">"Attiva la modalità Batteria in esaurimento"</string>
-    <string name="battery_tip_early_heads_up_summary" msgid="4003736326324428487">"Fai durare di più la batteria"</string>
-    <string name="battery_tip_early_heads_up_done_title" msgid="1545434816346760843">"Modalità Batteria in esaurimento attiva"</string>
-    <string name="battery_tip_early_heads_up_done_summary" msgid="8191928150995385163">"Alcune funzioni sono limitate"</string>
-    <string name="battery_tip_high_usage_title" product="default" msgid="7981031050318555946">"Telefono usato in modo massiccio"</string>
-    <string name="battery_tip_high_usage_title" product="tablet" msgid="8767749911858231430">"Tablet usato in modo massiccio"</string>
-    <string name="battery_tip_high_usage_title" product="device" msgid="4964729505519290954">"Dispositivo usato in modo massiccio"</string>
-    <string name="battery_tip_high_usage_summary" msgid="5437023146333888605">"Circa <xliff:g id="HOUR">%1$s</xliff:g> di utilizzo dall\'ultima ricarica completa"</string>
-    <string name="battery_tip_dialog_message" product="default" msgid="6744251070067861233">"Il telefono è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il telefono è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
-    <string name="battery_tip_dialog_message" product="tablet" msgid="7091442312127403445">"Il tablet è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il tablet è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
-    <string name="battery_tip_dialog_message" product="device" msgid="7621045312469814256">"Il dispositivo è stato usato in modo massiccio ed è stata consumata molta batteria. Il comportamento della batteria è normale.\n\n Il dispositivo è stato usato per circa <xliff:g id="HOUR">%1$s</xliff:g> dall\'ultima ricarica completa.\n\n Utilizzo totale:"</string>
+    <!-- no translation found for battery_tip_smart_battery_title (2542822112725248683) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_title (6452567046912954866) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_title (4445149029390556382) -->
+    <skip />
+    <!-- no translation found for battery_tip_smart_battery_summary (2326809294592208069) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_title (5788492366387119807) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_summary (1639271439914224547) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_title (4294083319255926811) -->
+    <skip />
+    <!-- no translation found for battery_tip_early_heads_up_done_summary (7054036010928794364) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (1282187115295901930) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (7422137233845959351) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_title (5483320224273724068) -->
+    <skip />
+    <!-- no translation found for battery_tip_high_usage_summary (6341311803303581798) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (2489003849577202445) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (409808830122732587) -->
+    <skip />
+    <!-- no translation found for battery_tip_dialog_message (1948395472652651924) -->
+    <skip />
     <plurals name="battery_tip_restrict_title" formatted="false" msgid="467228882789275512">
       <item quantity="other">Limita %1$d app</item>
       <item quantity="one">Limita %1$d app</item>
     </plurals>
-    <plurals name="battery_tip_restrict_handled_title" formatted="false" msgid="5203646029862183763">
-      <item quantity="other">%1$d app limitate di recente</item>
-      <item quantity="one">%1$d limitata di recente</item>
-    </plurals>
-    <plurals name="battery_tip_restrict_summary" formatted="false" msgid="9128154370135347093">
-      <item quantity="other">%2$d app hanno un consumo elevato della batteria</item>
-      <item quantity="one">%1$s ha un consumo elevato della batteria</item>
-    </plurals>
-    <string name="battery_tip_restrict_handled_summary" msgid="29466713333477274">"Modifiche alle app in corso"</string>
+    <!-- no translation found for battery_tip_restrict_handled_title (2996094393897875408) -->
+    <!-- no translation found for battery_tip_restrict_summary (5768962491638423979) -->
+    <!-- no translation found for battery_tip_restrict_handled_summary (1040488674178753191) -->
     <plurals name="battery_tip_restrict_app_dialog_title" formatted="false" msgid="8130618585820429591">
       <item quantity="other">Limitare %1$d app?</item>
       <item quantity="one">Limitare l\'app?</item>
     </plurals>
-    <!-- no translation found for battery_tip_restrict_app_dialog_message (4983821029670590661) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_apps_less_than_5_dialog_message (5461716788680156225) -->
-    <skip />
-    <!-- no translation found for battery_tip_restrict_apps_more_than_5_dialog_message (7485902289068433938) -->
-    <skip />
+    <string name="battery_tip_restrict_app_dialog_message" msgid="4983821029670590661">"Per consumare meno batteria, impedisci all\'app <xliff:g id="APP">%1$s</xliff:g> di usare batteria in background."</string>
+    <string name="battery_tip_restrict_apps_less_than_5_dialog_message" msgid="5461716788680156225">"Per consumare meno batteria, impedisci alle app seguenti di usare batteria in background.\n\nApp:\n"</string>
+    <string name="battery_tip_restrict_apps_more_than_5_dialog_message" msgid="7485902289068433938">"Per consumare meno batteria, impedisci alle app seguenti di usare batteria in background.\n\nApp:\n<xliff:g id="APP_LIST">%1$s</xliff:g>."</string>
     <string name="battery_tip_restrict_app_dialog_ok" msgid="8291115820018013353">"Limita"</string>
-    <string name="battery_tip_unrestrict_app_dialog_title" msgid="4550106794311784978">"Rimuovere la limitazione per <xliff:g id="APP">%1$s</xliff:g>?"</string>
-    <string name="battery_tip_unrestrict_app_dialog_message" msgid="4836135946080501395">"Questa app potrà usare batteria in background. In questo modo la batteria potrebbe esaurirsi più rapidamente."</string>
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_title (4321334634106715162) -->
+    <skip />
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_message (6537761705584610231) -->
+    <skip />
     <string name="battery_tip_unrestrict_app_dialog_ok" msgid="6022058431218137646">"Rimuovi"</string>
-    <string name="battery_tip_unrestrict_app_dialog_cancel" msgid="9062797114255859496">"Non ora"</string>
-    <!-- no translation found for battery_tip_dialog_summary_message (3483708973495692333) -->
+    <!-- no translation found for battery_tip_unrestrict_app_dialog_cancel (3058235875830858902) -->
     <skip />
-    <!-- no translation found for battery_tip_dialog_summary_message_no_estimation (1456026456418786135) -->
+    <string name="battery_tip_dialog_summary_message" msgid="3483708973495692333">"In base al tuo utilizzo, solitamente la ricarica completa della batteria dura <xliff:g id="TIME_DURATION">%1$s</xliff:g> circa.\n\nSe vuoi aumentare la durata della batteria, attiva la funzione Risparmio energetico."</string>
+    <string name="battery_tip_dialog_summary_message_no_estimation" msgid="1456026456418786135">"Se vuoi aumentare la durata della batteria, attiva la funzione Risparmio energetico"</string>
+    <!-- no translation found for smart_battery_manager_title (870632749556793417) -->
     <skip />
-    <string name="smart_battery_manager_title" msgid="5677222263071864438">"Gestione batteria intelligente"</string>
-    <string name="smart_battery_title" msgid="7014692334636228916">"Gestione automatica della batteria"</string>
-    <string name="smart_battery_summary" msgid="6435844879637999044">"Regola automaticamente il consumo di batteria delle app in base all\'utilizzo"</string>
+    <!-- no translation found for smart_battery_title (6218785691872466076) -->
+    <skip />
+    <!-- no translation found for smart_battery_summary (182231450571039702) -->
+    <skip />
+    <!-- no translation found for smart_battery_footer (1927140000844032031) -->
+    <skip />
     <string name="restricted_app_title" msgid="8982477293044330653">"App con limitazioni"</string>
     <plurals name="restricted_app_summary" formatted="false" msgid="2541739220193274244">
       <item quantity="other">%1$d app</item>
       <item quantity="one">%1$d app</item>
     </plurals>
+    <!-- no translation found for restricted_app_detail_footer (5888756210317863211) -->
+    <skip />
     <string name="battery_auto_restriction_title" msgid="4698846356558232573">"Limita automaticamente le app"</string>
     <string name="battery_auto_restriction_summary" msgid="1816325499514435434">"Impedisci alle app di usare batteria extra in background"</string>
     <string name="dialog_stop_title" msgid="6395127715596746479">"Arrestare l\'app?"</string>
@@ -2226,9 +2240,9 @@
     <string name="process_kernel_label" msgid="3916858646836739323">"Sistema operativo Android"</string>
     <string name="process_mediaserver_label" msgid="6500382062945689285">"MediaServer"</string>
     <string name="process_dex2oat_label" msgid="2592408651060518226">"Ottimizzazione delle app"</string>
-    <string name="battery_saver" msgid="6002143200184768727">"Modalità Consumo ridotto"</string>
-    <string name="battery_saver_auto_title" msgid="6896506441192920565">"Pianificazione"</string>
-    <string name="battery_saver_auto_summary" msgid="8715989830471454219">"Attiva automaticamente la modalità Consumo ridotto quando la batteria è in esaurimento"</string>
+    <string name="battery_saver" msgid="8172485772238572153">"Risparmio energetico"</string>
+    <!-- no translation found for battery_saver_auto_title (8368709389419695611) -->
+    <skip />
     <string name="battery_saver_seekbar_title" msgid="3428789387167865312">"Attiva automaticamente al <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_master_switch_title" msgid="622539414546588436">"Utilizza Risparmio energetico"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="9023847300114669426">"Attiva automaticamente"</string>
@@ -3248,10 +3262,8 @@
     <string name="encryption_interstitial_message_password_for_fingerprint" msgid="5560954719370251702">"Oltre a usare la tua impronta digitale per sbloccare il dispositivo, puoi proteggere ulteriormente il dispositivo richiedendo la password prima dell\'avvio. Fino all\'avvio, il dispositivo non può ricevere chiamate, messaggi o notifiche, incluse le sveglie.\n\nIn questo modo puoi proteggere i dati memorizzati su dispositivi rubati o persi. Vuoi richiedere la password per avviare il dispositivo?"</string>
     <string name="encryption_interstitial_yes" msgid="4439509435889513411">"Sì"</string>
     <string name="encryption_interstitial_no" msgid="8935031349097025137">"No"</string>
-    <!-- no translation found for restricted_true_label (116728938205853067) -->
-    <skip />
-    <!-- no translation found for restricted_false_label (6992110192242654656) -->
-    <skip />
+    <string name="restricted_true_label" msgid="116728938205853067">"On/Uso in background limitato"</string>
+    <string name="restricted_false_label" msgid="6992110192242654656">"Off/Usa batteria in background"</string>
     <string name="encrypt_talkback_dialog_require_pin" msgid="8299960550048989807">"Richiedere il PIN?"</string>
     <string name="encrypt_talkback_dialog_require_pattern" msgid="1499790256154146639">"Richiedere la sequenza?"</string>
     <string name="encrypt_talkback_dialog_require_password" msgid="8841994614218049215">"Richiedere la password?"</string>
@@ -3396,10 +3408,11 @@
     <string name="sharing_remote_bugreport_dialog_message" msgid="5859287696666024466">"La segnalazione di bug sta per essere condivisa con l\'amministratore IT. Contattalo per avere ulteriori informazioni."</string>
     <string name="share_remote_bugreport_action" msgid="532226159318779397">"Condividi"</string>
     <string name="decline_remote_bugreport_action" msgid="518720235407565134">"Rifiuto"</string>
-    <string name="usb_use_charging_only" msgid="2180443097365214467">"Caricare il dispositivo"</string>
+    <!-- no translation found for usb_use_charging_only (4800495064747543954) -->
+    <skip />
     <string name="usb_use_charging_only_desc" msgid="3066256793008540627">"Solo per la ricarica del dispositivo"</string>
-    <string name="usb_use_power_only" msgid="6449381364444187612">"Ricarica del dispositivo collegato"</string>
-    <string name="usb_use_power_only_desc" msgid="5674490059427055197">"Le altre impostazioni non sono disponibili quando è attiva questa opzione"</string>
+    <!-- no translation found for usb_use_power_only (3236391691786786070) -->
+    <skip />
     <string name="usb_use_file_transfers" msgid="1223134119354320726">"Trasferimento di file"</string>
     <string name="usb_use_file_transfers_desc" msgid="4235764784331804488">"Trasferisci i file su un altro dispositivo"</string>
     <string name="usb_use_photo_transfers" msgid="8192719651229326283">"PTP"</string>
@@ -3408,10 +3421,22 @@
     <string name="usb_use_MIDI" msgid="5116404702692483166">"MIDI"</string>
     <string name="usb_use_MIDI_desc" msgid="8473936990076693175">"Utilizzare questo dispositivo per la modalità MIDI"</string>
     <string name="usb_use" msgid="3372728031108932425">"Utilizza connessione USB per"</string>
-    <string name="usb_use_also" msgid="557340935190819370">"Usa USB anche per"</string>
-    <string name="usb_default_label" msgid="4217189967858707974">"Configurazione USB predefinita"</string>
+    <!-- no translation found for usb_default_label (2211094045594574774) -->
+    <skip />
     <string name="usb_default_info" msgid="8864535445796200695">"Quando è connesso un altro dispositivo e il telefono è sbloccato, verranno applicate queste impostazioni. Collegati solo a dispositivi attendibili."</string>
     <string name="usb_pref" msgid="1400617804525116158">"USB"</string>
+    <!-- no translation found for usb_preference (7394265019817945275) -->
+    <skip />
+    <!-- no translation found for usb_control_title (4404322722995917160) -->
+    <skip />
+    <!-- no translation found for usb_control_host (2276710819046647200) -->
+    <skip />
+    <!-- no translation found for usb_control_device (5821511964163469463) -->
+    <skip />
+    <!-- no translation found for usb_switching (8995313698715545619) -->
+    <skip />
+    <!-- no translation found for usb_switching_failed (4156073015692409651) -->
+    <skip />
     <string name="usb_summary_charging_only" msgid="7544327009143659751">"Ricarica del dispositivo"</string>
     <string name="usb_summary_power_only" msgid="1996391096369798526">"Ricarica del dispositivo collegato"</string>
     <string name="usb_summary_file_transfers" msgid="6925168380589489645">"Trasferimento di file"</string>
@@ -3592,8 +3617,7 @@
     <string name="ota_disable_automatic_update" msgid="2319639631655915050">"Aggiornamenti di sistema automatici"</string>
     <string name="usage" msgid="2977875522080448986">"Utilizzo"</string>
     <string name="cellular_data_usage" msgid="2155683719898158203">"Utilizzo dati mobili"</string>
-    <!-- no translation found for app_cellular_data_usage (5468472735806533448) -->
-    <skip />
+    <string name="app_cellular_data_usage" msgid="5468472735806533448">"Utilizzo dei dati delle app"</string>
     <string name="wifi_data_usage" msgid="686754111095324306">"Utilizzo dei dati Wi-Fi"</string>
     <string name="ethernet_data_usage" msgid="5108764537574354616">"Utilizzo dei dati Ethernet"</string>
     <string name="wifi" msgid="1081550856200013637">"Wi-Fi"</string>
@@ -3605,12 +3629,9 @@
     <string name="cell_warning_and_limit" msgid="2273413629267437470">"Avviso sui dati: <xliff:g id="ID_1">%1$s</xliff:g>/Limite dati: <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="billing_cycle" msgid="6614597736285325497">"Limite dati e avviso"</string>
     <string name="app_usage_cycle" msgid="8877223251648092131">"Ciclo di utilizzo dati app"</string>
-    <!-- no translation found for cell_data_warning (1985956818884847057) -->
-    <skip />
-    <!-- no translation found for cell_data_limit (1578367585799358854) -->
-    <skip />
-    <!-- no translation found for cell_data_warning_and_limit (6888825370687743208) -->
-    <skip />
+    <string name="cell_data_warning" msgid="1985956818884847057">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_limit" msgid="1578367585799358854">"Limite dati: <xliff:g id="ID_1">^1</xliff:g>"</string>
+    <string name="cell_data_warning_and_limit" msgid="6888825370687743208">"Avviso relativo ai dati: <xliff:g id="ID_1">^1</xliff:g>/Limite dati: <xliff:g id="ID_2">^2</xliff:g>"</string>
     <string name="billing_cycle_fragment_summary" msgid="8231066353654583106">"Il giorno <xliff:g id="ID_1">%1$s</xliff:g> di ogni mese"</string>
     <string name="network_restrictions" msgid="8234695294536675380">"Restrizioni di rete"</string>
     <plurals name="network_restrictions_summary" formatted="false" msgid="4301618027244595839">
@@ -3621,8 +3642,7 @@
     <string name="data_used_template" msgid="3245919669966296505">"Dati utilizzati: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="set_data_warning" msgid="6115364758236594593">"Imposta avviso sui dati"</string>
     <string name="data_warning" msgid="209133958008062117">"Avviso sui dati"</string>
-    <!-- no translation found for data_warning_footnote (776341964125603711) -->
-    <skip />
+    <string name="data_warning_footnote" msgid="776341964125603711">"I valori dell\'avviso relativo ai dati e del limite dati vengono stabiliti dal dispositivo e potrebbero essere diversi dai dati del produttore."</string>
     <string name="set_data_limit" msgid="2901526323210516923">"Imposta limite dati"</string>
     <string name="data_limit" msgid="1885406964934590552">"Limite dati"</string>
     <string name="data_usage_template" msgid="2923744765873163859">"<xliff:g id="ID_1">%1$s</xliff:g> utilizzati nell\'intervallo <xliff:g id="ID_2">%2$s</xliff:g>"</string>
@@ -3634,14 +3654,16 @@
     </plurals>
     <string name="data_usage_title" msgid="3659356290392241789">"Dati principali"</string>
     <string name="data_used" msgid="5116389957228457203">"Dati utilizzati: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <!-- no translation found for data_overusage (1134445012475270295) -->
+    <!-- no translation found for data_used_formatted (2989129931961311051) -->
     <skip />
+    <string name="data_overusage" msgid="1134445012475270295">"Superiore a <xliff:g id="ID_1">^1</xliff:g>"</string>
     <string name="data_remaining" msgid="8998091725895502181">"Dati rimanenti: <xliff:g id="ID_1">^1</xliff:g>"</string>
-    <!-- no translation found for cycle_left_multiple_days (4080948235522858142) -->
-    <skip />
-    <!-- no translation found for billing_cycle_days_left (456503215317213651) -->
-    <!-- no translation found for billing_cycle_less_than_one_day_left (825838050296069404) -->
-    <skip />
+    <string name="cycle_left_multiple_days" msgid="4080948235522858142">"<xliff:g id="ID_1">%d</xliff:g> giorni rimanenti"</string>
+    <plurals name="billing_cycle_days_left" formatted="false" msgid="456503215317213651">
+      <item quantity="other">%d giorni rimanenti</item>
+      <item quantity="one">%d giorno rimanente</item>
+    </plurals>
+    <string name="billing_cycle_less_than_one_day_left" msgid="825838050296069404">"Meno di 1 giorno rimanente"</string>
     <string name="carrier_and_update_text" msgid="4534395723031386923">"Aggiornamento: <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%2$s</xliff:g>"</string>
     <string name="no_carrier_update_text" msgid="6879630084452907385">"Aggiornamento: <xliff:g id="ID_1">%1$s</xliff:g>"</string>
     <string name="launch_mdp_app_text" msgid="7527361210375612985">"VISUALIZZA PIANO"</string>
