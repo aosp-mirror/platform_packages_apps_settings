@@ -114,7 +114,7 @@ public class BluetoothPairingDetailTest {
         mFragment.updateContent(BluetoothAdapter.STATE_ON);
 
         verify(mFragment).addDeviceCategory(mAvailableDevicesCategory,
-                R.string.bluetooth_preference_found_devices,
+                R.string.bluetooth_preference_found_media_devices,
                 BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, false);
         verify(mLocalAdapter).setScanMode(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
     }
