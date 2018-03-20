@@ -129,14 +129,15 @@ public class DataUsageSummaryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-
+        ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
         if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
+            bar.setVisibility(View.VISIBLE);
             holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
-            ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
             bar.setProgress((int) (mProgress * 100));
             ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
             ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
         } else {
+            bar.setVisibility(View.GONE);
             holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
         }
 
