@@ -397,7 +397,7 @@ public class BatteryUtils {
 
     public void setForceAppStandby(int uid, String packageName,
             int mode) {
-        final boolean isPreOApp = isLegacyApp(packageName);
+        final boolean isPreOApp = isPreOApp(packageName);
         if (isPreOApp) {
             // Control whether app could run in the background if it is pre O app
             mAppOpsManager.setMode(AppOpsManager.OP_RUN_IN_BACKGROUND, uid, packageName, mode);
@@ -483,7 +483,7 @@ public class BatteryUtils {
         return 0;
     }
 
-    public boolean isLegacyApp(final String packageName) {
+    public boolean isPreOApp(final String packageName) {
         try {
             ApplicationInfo info = mPackageManager.getApplicationInfo(packageName,
                     PackageManager.GET_META_DATA);
