@@ -49,7 +49,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         OnPreferenceClickListener {
 
     private static final String KEY_APP_OPS_SETTINGS_SWITCH = "app_ops_settings_switch";
-    private static final String KEY_APP_OPS_SETTINGS_PREFS = "app_ops_settings_preference";
     private static final String LOG_TAG = "DrawOverlayDetails";
 
     private static final int [] APP_OPS_OP_CODE = {
@@ -61,7 +60,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
     private AppStateOverlayBridge mOverlayBridge;
     private AppOpsManager mAppOpsManager;
     private SwitchPreference mSwitchPref;
-    private Preference mOverlayPrefs;
     private Intent mSettingsIntent;
     private OverlayState mOverlayState;
 
@@ -76,11 +74,9 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         // find preferences
         addPreferencesFromResource(R.xml.draw_overlay_permissions_details);
         mSwitchPref = (SwitchPreference) findPreference(KEY_APP_OPS_SETTINGS_SWITCH);
-        mOverlayPrefs = findPreference(KEY_APP_OPS_SETTINGS_PREFS);
 
         // install event listeners
         mSwitchPref.setOnPreferenceChangeListener(this);
-        mOverlayPrefs.setOnPreferenceClickListener(this);
 
         mSettingsIntent = new Intent(Intent.ACTION_MAIN)
                 .setAction(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
@@ -109,17 +105,6 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (preference == mOverlayPrefs) {
-            if (mSettingsIntent != null) {
-                try {
-                    getActivity().startActivityAsUser(mSettingsIntent, new UserHandle(mUserId));
-                } catch (ActivityNotFoundException e) {
-                    Log.w(LOG_TAG, "Unable to launch app draw overlay settings " + mSettingsIntent,
-                            e);
-                }
-            }
-            return true;
-        }
         return false;
     }
 
@@ -159,15 +144,9 @@ public class DrawOverlayDetails extends AppInfoWithHeader implements OnPreferenc
         mSwitchPref.setChecked(isAllowed);
         // you cannot ask a user to grant you a permission you did not have!
         mSwitchPref.setEnabled(mOverlayState.permissionDeclared && mOverlayState.controlEnabled);
-        mOverlayPrefs.setEnabled(isAllowed);
 
         ResolveInfo resolveInfo = mPm.resolveActivityAsUser(mSettingsIntent,
                 PackageManager.GET_META_DATA, mUserId);
-        if (resolveInfo == null) {
-            if (findPreference(KEY_APP_OPS_SETTINGS_PREFS) != null) {
-                getPreferenceScreen().removePreference(mOverlayPrefs);
-            }
-        }
 
         return true;
     }
