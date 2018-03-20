@@ -17,6 +17,7 @@
 package com.android.settings.password;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.robolectric.RuntimeEnvironment.application;
 
 import android.app.Activity;
@@ -46,10 +47,6 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowPackageManager;
 import org.robolectric.util.ReflectionHelpers;
-import org.robolectric.util.ReflectionHelpers.ClassParameter;
-
-import java.util.Collections;
-import java.util.List;
 
 @RunWith(SettingsRobolectricTestRunner.class)
 @Config(shadows = {
@@ -89,7 +86,6 @@ public class SetupChooseLockPatternTest {
         assertThat(componentEnabled).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
     }
 
-    @Config(qualifiers = "sw400dp")
     @Test
     public void selectPattern_shouldHideOptionsButton() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
@@ -114,6 +110,7 @@ public class SetupChooseLockPatternTest {
         assertThat(count).named("List items shown").isEqualTo(3);
     }
 
+    @Config(qualifiers = "sw300dp")
     @Test
     public void smallScreens_shouldHideScreenLockOptions() {
         Button button = mActivity.findViewById(R.id.screen_lock_options);
