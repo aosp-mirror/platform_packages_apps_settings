@@ -4938,6 +4938,16 @@
     <!-- Summary for auto restriction toggle -->
     <string name="battery_auto_restriction_summary">Prevent apps from using extra battery in the background</string>
 
+    <!-- Summary for battery manager when it is on -->
+    <string name="battery_manager_on">On / Restricting apps automatically</string>
+    <!-- Summary for battery manager when it is off -->
+    <string name="battery_manager_off">Off</string>
+    <!-- Summary for battery manager, showing app restricted -->
+    <plurals name="battery_manager_app_restricted">
+        <item quantity="one">%1$d app restricted</item>
+        <item quantity="other">%1$d apps restricted</item>
+    </plurals>
+
     <!-- Title for force stop dialog [CHAR LIMIT=30] -->
     <string name="dialog_stop_title">Stop app?</string>
     <!-- Message body for force stop dialog [CHAR LIMIT=NONE] -->

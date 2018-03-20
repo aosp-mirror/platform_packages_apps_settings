@@ -22,14 +22,13 @@ import android.content.Context;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.preference.Preference;
 
-import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
+import com.android.settings.fuelgauge.batterytip.BatteryTipUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -65,26 +64,7 @@ public class RestrictAppPreferenceController extends BasePreferenceController {
     public void updateState(Preference preference) {
         super.updateState(preference);
 
-        final List<AppOpsManager.PackageOps> packageOpsList = mAppOpsManager.getPackagesForOps(
-                new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
-        mAppInfos = new ArrayList<>();
-
-        for (int i = 0, size = CollectionUtils.size(packageOpsList); i < size; i++) {
-            final AppOpsManager.PackageOps packageOps = packageOpsList.get(i);
-            final List<AppOpsManager.OpEntry> entries = packageOps.getOps();
-            for (int j = 0; j < entries.size(); j++) {
-                AppOpsManager.OpEntry ent = entries.get(j);
-                if (ent.getOp() != AppOpsManager.OP_RUN_ANY_IN_BACKGROUND) {
-                    continue;
-                }
-                if (ent.getMode() != AppOpsManager.MODE_ALLOWED) {
-                    mAppInfos.add(new AppInfo.Builder()
-                            .setPackageName(packageOps.getPackageName())
-                            .setUid(packageOps.getUid())
-                            .build());
-                }
-            }
-        }
+        mAppInfos = BatteryTipUtils.getRestrictedAppsList(mAppOpsManager);
 
         final int num = mAppInfos.size();
         // Enable the preference if some apps already been restricted, otherwise disable it
