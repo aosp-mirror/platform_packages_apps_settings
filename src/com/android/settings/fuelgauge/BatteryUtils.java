@@ -422,32 +422,24 @@ public class BatteryUtils {
                 new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         final long elapsedRealtimeUs = PowerUtil.convertMsToUs(
                 SystemClock.elapsedRealtime());
+        final BatteryStats stats = statsHelper.getStats();
         BatteryInfo batteryInfo;
 
-        // 0 means we are discharging, anything else means charging
-        final boolean discharging = batteryBroadcast.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)
-                == 0;
-        // Get enhanced prediction if available and discharging, otherwise use the old code
-        Estimate estimate = null;
-        if (discharging && mPowerUsageFeatureProvider != null &&
+        final Estimate estimate;
+        // Get enhanced prediction if available
+        if (mPowerUsageFeatureProvider != null &&
                 mPowerUsageFeatureProvider.isEnhancedBatteryPredictionEnabled(mContext)) {
             estimate = mPowerUsageFeatureProvider.getEnhancedBatteryPrediction(mContext);
-        }
-        final BatteryStats stats = statsHelper.getStats();
-        BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
-
-        if (estimate != null) {
-            batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
-                    estimate, elapsedRealtimeUs, false /* shortString */);
         } else {
             estimate = new Estimate(
                     PowerUtil.convertUsToMs(stats.computeBatteryTimeRemaining(elapsedRealtimeUs)),
-                    false,
-                    Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN
-            );
-            batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
-                    estimate, elapsedRealtimeUs, false /* shortString */);
+                    false /* isBasedOnUsage */,
+                    Estimate.AVERAGE_TIME_TO_DISCHARGE_UNKNOWN);
         }
+
+        BatteryUtils.logRuntime(tag, "BatteryInfoLoader post query", startTime);
+        batteryInfo = BatteryInfo.getBatteryInfo(mContext, batteryBroadcast, stats,
+                estimate, elapsedRealtimeUs, false /* shortString */);
         BatteryUtils.logRuntime(tag, "BatteryInfoLoader.loadInBackground", startTime);
 
         return batteryInfo;
