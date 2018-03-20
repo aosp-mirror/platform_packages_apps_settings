@@ -31,33 +31,37 @@
             android:selectable="true"
             android:fragment="com.android.settings.location.RecentLocationRequestSeeAllFragment"/>
 
-        <!-- This preference category gets removed if new_recent_location_ui is disabled -->
-        <Preference
-            android:key="app_level_permissions"
-            android:title="@string/location_app_level_permissions"
-            settings:allowDividerAbove="true">
-            <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
-                <extra android:name="android.intent.extra.PERMISSION_NAME"
-                       android:value="android.permission-group.LOCATION" />
-            </intent>
-        </Preference>
-
-        <Preference
-            android:key="location_scanning"
-            android:title="@string/location_scanning_screen_title"
-            android:fragment="com.android.settings.location.ScanningSettings"/>
-
-        <!-- This preference gets removed if there is no managed profile -->
-        <com.android.settingslib.RestrictedSwitchPreference
-            android:key="managed_profile_location_switch"
-            android:title="@string/managed_profile_location_switch_title"
-            settings:useAdminDisabledSummary="true"
-            android:enabled="false"
-            android:selectable="true" />
-
         <PreferenceCategory
-            android:key="location_services"
-            android:title="@string/location_category_location_services"/>
+            android:key="location_advanced_settings"
+            settings:initialExpandedChildrenCount="1">
+
+            <!-- This preference category gets removed if new_recent_location_ui is disabled -->
+            <Preference
+                android:key="app_level_permissions"
+                android:title="@string/location_app_level_permissions">
+                <intent android:action="android.intent.action.MANAGE_PERMISSION_APPS">
+                    <extra android:name="android.intent.extra.PERMISSION_NAME"
+                           android:value="android.permission-group.LOCATION" />
+                </intent>
+            </Preference>
+
+            <Preference
+                android:key="location_scanning"
+                android:title="@string/location_scanning_screen_title"
+                android:fragment="com.android.settings.location.ScanningSettings"/>
+
+            <!-- This preference gets removed if there is no managed profile -->
+            <com.android.settingslib.RestrictedSwitchPreference
+                android:key="managed_profile_location_switch"
+                android:title="@string/managed_profile_location_switch_title"
+                settings:useAdminDisabledSummary="true"
+                android:enabled="false"
+                android:selectable="true" />
+
+            <PreferenceCategory
+                android:key="location_services"
+                android:title="@string/location_category_location_services"/>
+        </PreferenceCategory>
 
         <PreferenceCategory
             android:key="location_footer"
