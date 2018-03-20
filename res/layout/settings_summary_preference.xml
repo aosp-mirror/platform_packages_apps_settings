@@ -42,11 +42,12 @@
         android:paddingBottom="5dp"
         android:maxLines="10" />
 
-    <com.android.settings.widget.LinearColorBar
+    <ProgressBar
         android:id="@+id/color_bar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        />
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/color_bar_progress"/>
 
     <LinearLayout
         android:id="@+id/label_bar"
