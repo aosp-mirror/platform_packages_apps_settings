@@ -119,12 +119,12 @@ public class RedactionInterstitial extends SettingsActivity {
                     getContext(), getActivity().getIntent().getExtras());
             if (UserManager.get(getContext()).isManagedProfile(mUserId)) {
                 ((TextView) view.findViewById(R.id.message))
-                    .setText(R.string.lock_screen_notifications_interstitial_message_profile);
+                        .setText(R.string.lock_screen_notifications_interstitial_message_profile);
                 mShowAllButton.setText(R.string.lock_screen_notifications_summary_show_profile);
                 mRedactSensitiveButton
-                    .setText(R.string.lock_screen_notifications_summary_hide_profile);
-                ((RadioButton) view.findViewById(R.id.hide_all))
-                    .setText(R.string.lock_screen_notifications_summary_disable_profile);
+                        .setText(R.string.lock_screen_notifications_summary_hide_profile);
+
+                ((RadioButton) view.findViewById(R.id.hide_all)).setVisibility(View.GONE);
             }
 
             final Button button = (Button) view.findViewById(R.id.redaction_done_button);
@@ -164,10 +164,11 @@ public class RedactionInterstitial extends SettingsActivity {
         }
 
         private void loadFromSettings() {
-            final boolean enabled = Settings.Secure.getIntForUser(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, mUserId) != 0;
+            final boolean managed = UserManager.get(getContext()).isManagedProfile(mUserId);
+            final boolean enabled = !managed || Settings.Secure.getIntForUser(getContentResolver(),
+                    Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS, 0, mUserId) != 0;
             final boolean show = Settings.Secure.getIntForUser(getContentResolver(),
-                        Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, mUserId) != 0;
+                    Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS, 1, mUserId) != 0;
 
             int checkedButtonId = R.id.hide_all;
             if (enabled) {
