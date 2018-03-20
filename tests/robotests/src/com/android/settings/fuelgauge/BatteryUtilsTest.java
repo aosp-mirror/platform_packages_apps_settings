@@ -516,12 +516,12 @@ public class BatteryUtilsTest {
 
     @Test
     public void testIsLegacyApp_SdkLowerThanO_ReturnTrue() {
-        assertThat(mBatteryUtils.isLegacyApp(LOW_SDK_PACKAGE)).isTrue();
+        assertThat(mBatteryUtils.isPreOApp(LOW_SDK_PACKAGE)).isTrue();
     }
 
     @Test
     public void testIsLegacyApp_SdkLargerOrEqualThanO_ReturnFalse() {
-        assertThat(mBatteryUtils.isLegacyApp(HIGH_SDK_PACKAGE)).isFalse();
+        assertThat(mBatteryUtils.isPreOApp(HIGH_SDK_PACKAGE)).isFalse();
     }
 
     @Test
