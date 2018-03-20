@@ -18,13 +18,20 @@ package com.android.settings.datausage;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Matchers.endsWith;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.telephony.TelephonyManager;
 import android.text.format.Formatter;
 
 import com.android.settings.R;
+import com.android.settings.dashboard.SummaryLoader;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -33,6 +40,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.shadows.ShadowApplication;
 
 @RunWith(SettingsRobolectricTestRunner.class)
@@ -41,6 +49,12 @@ public class DataUsageSummaryTest {
     @Mock
     private ConnectivityManager mManager;
     private Context mContext;
+    @Mock
+    TelephonyManager mTelephonyManager;
+    @Mock
+    private SummaryLoader mSummaryLoader;
+    private Activity mActivity;
+    private SummaryLoader.SummaryProvider mSummaryProvider;
 
     /**
      * This set up is contrived to get a passing test so that the build doesn't block without tests.
@@ -54,6 +68,12 @@ public class DataUsageSummaryTest {
         shadowContext.setSystemService(Context.CONNECTIVITY_SERVICE, mManager);
         mContext = shadowContext.getApplicationContext();
         when(mManager.isNetworkSupported(anyInt())).thenReturn(true);
+
+        mActivity = spy(Robolectric.buildActivity(Activity.class).get());
+        when(mActivity.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
+
+        mSummaryProvider = DataUsageSummary.SUMMARY_PROVIDER_FACTORY
+                .createSummaryProvider(mActivity, mSummaryLoader);
     }
 
     @Test
@@ -65,5 +85,19 @@ public class DataUsageSummaryTest {
                 DataUsageSummary.formatUsage(mContext, "^1", usage).toString();
         final String formattedAsFileSize = Formatter.formatFileSize(mContext, usage);
         assertThat(formattedUsage).isEqualTo(formattedAsFileSize);
+    }
+
+    @Test
+    public void setListening_shouldBlankSummaryWithNoSim() {
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_ABSENT);
+        mSummaryProvider.setListening(true);
+        verify(mSummaryLoader).setSummary(mSummaryProvider, null);
+    }
+
+    @Test
+    public void setListening_shouldSetSummaryWithSim() {
+        when(mTelephonyManager.getSimState()).thenReturn(TelephonyManager.SIM_STATE_READY);
+        mSummaryProvider.setListening(true);
+        verify(mSummaryLoader).setSummary(anyObject(), endsWith(" of data used"));
     }
 }

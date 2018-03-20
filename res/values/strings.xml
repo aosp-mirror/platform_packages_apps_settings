@@ -2750,7 +2750,9 @@
     <!-- About phone, status item title.  The ICCID of the current LTE device. [CHAR LIMIT=30] -->
     <string name="status_icc_id">ICCID</string>
     <!-- About phone, status item title for the type of data phone network we're connected to, for example 3G or Edge or GPRS -->
-    <string name="status_network_type">Mobile network type</string>
+    <string name="status_data_network_type">Mobile data network type</string>
+    <!-- About phone, status item title for the type of voice phone network we're connected to, for example 3G or Edge or GPRS -->
+    <string name="status_voice_network_type">Mobile voice network type</string>
     <!-- About phone, status item title for the latest area info cell broadcast received (Brazil only). -->
     <string name="status_latest_area_info">Operator info</string>
     <!-- About phone, status item title. The status of data access.  For example, the value may be "Connected" -->
@@ -4404,7 +4406,9 @@
     <!-- Subtitle for the accessibility preference to configure display color inversion. [CHAR LIMIT=NONE] -->
     <string name="accessibility_display_inversion_preference_subtitle">May affect performance</string>
     <!-- Title for accessibility preference for configuring feature that performs click action soon after mouse/trackpad pointer stops moving. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_autoclick_preference_title">Click after pointer stops moving</string>
+    <string name="accessibility_autoclick_preference_title">Dwell timing</string>
+    <!-- Footer text to explain what autoclick does -->
+    <string name="accessibility_autoclick_description">If you are using a mouse, you can set the cursor to take action automatically when it stops moving for a certain amount of time.</string>
     <!-- Title for accessibility preference for configuring amount of time that has to pass after pointer stops moving before click action can be performed (if automatic click after pointer stops moving feature is enabled). [CHAR LIMIT=NONE] -->
     <string name="accessibility_autoclick_delay_preference_title">Delay before click</string>
     <!-- Title for accessibility preference screen for configuring vibrations. -->
@@ -5131,6 +5135,8 @@
     <string name="battery_detail_since_full_charge">Breakdown since last full charge</string>
     <!-- Title for usage time since last full charge. [CHAR LIMIT=60] -->
     <string name="battery_last_full_charge">Last full charge</string>
+    <!-- Title for usage time that full charge lasts. [CHAR LIMIT=60] -->
+    <string name="battery_full_charge_last">Full charge lasts about</string>
     <!-- Description for text in battery footer. [CHAR LIMIT=NONE] -->
     <string name="battery_footer_summary">Battery usage data is approximate and can change based on usage</string>
     <!-- Title for text that shows the amount of time an app has been running while in the foreground. [CHAR LIMIT=80] -->
@@ -6747,6 +6753,7 @@
 
     <!--Search Keywords [CHAR LIMIT=NONE]-->
     <string name="keywords_wifi">wifi, wi-fi, network connection</string>
+    <string name="keywords_change_wifi_state">wifi, wi-fi, toggle, control</string>
     <string name="keywords_more_default_sms_app">text message, texting, messages, messaging</string>
     <string name="keywords_more_mobile_networks">cellular, mobile, cell carrier, wireless, data, 4g,3g, 2g, lte</string>
     <string name="keywords_wifi_calling">wifi, wi-fi, call, calling</string>
@@ -8786,13 +8793,13 @@
     <string name="data_remaining"><xliff:g name="bytes" example="2 GB">^1</xliff:g> left</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
-    <string name="cycle_left_multiple_days"><xliff:g name="time" example="2d">%d</xliff:g> days left</string>
-
-    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <plurals name="billing_cycle_days_left">
         <item quantity="one">%d day left</item>
         <item quantity="other">%d days left</item>
     </plurals>
+
+    <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
+    <string name="billing_cycle_none_left">No time remaining</string>
 
     <!-- Informational text about time left in billing cycle [CHAR LIMIT=60] -->
     <string name="billing_cycle_less_than_one_day_left">Less than 1 day left</string>
@@ -9498,18 +9505,13 @@
     <!-- Title for item to go to old battery settings page when clicking [CHAR LIMIT=100] -->
     <string name="dev_android_o_battery_settings_title">See Android 8.0 battery settings</string>
     <!-- Title for Wifi Access settings [CHAR LIMIT=35] -->
-    <string name="change_wifi_state_title">Toggle wifi on and off</string>
-    <!-- Keywords for Wifi Access settings [CHAR LIMIT=35] -->
-    <string name="keywords_change_wifi_state">toggle wifi on and off</string>
-
-    <!-- Apps > App Details > Advanced section string title. [CHAR LIMIT=35] -->
-    <string name="change_wifi_state_app_detail_title">Toggle wifi on and off</string>
+    <string name="change_wifi_state_title">Wi-Fi control</string>
 
     <!-- Apps > App Details > Wifi access > Switch title. [CHAR LIMIT=NONE] -->
-    <string name="change_wifi_state_app_detail_switch">Allow toggle wifi</string>
+    <string name="change_wifi_state_app_detail_switch">Allow app to control Wi-Fi</string>
 
     <!-- Apps > App Details > Wifi access > Description. [CHAR LIMIT=NONE] -->
-    <string name="change_wifi_state_app_detail_summary">Allow this app to change wifi state including connecting to wifi and turing wifi on and off.</string>
+    <string name="change_wifi_state_app_detail_summary">Allow this app to turn Wi-Fi on or off, scan and connect to Wi-Fi networks, add or remove networks, or start a local-only hotspot</string>
 
     <!-- Title for media output settings -->
     <string name="media_output_title">Play media to</string>
