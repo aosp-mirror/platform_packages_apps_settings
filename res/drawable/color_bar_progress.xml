@@ -16,19 +16,19 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape android:shape="rectangle"
-               android:tint="?android:attr/colorControlActivated">
-            <corners android:radius="5dp" />
+               android:tint="@*android:color/config_progress_background_tint">
+            <corners android:radius="@*android:dimen/config_progressBarCornerRadius" />
             <size android:height="10dp" />
-            <solid android:color="@color/white_disabled" />
+            <solid android:color="@*android:color/white_disabled_material" />
         </shape>
-    </item>
+    </item>r
     <item android:id="@android:id/secondaryProgress">
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle"
                    android:tint="?android:attr/colorControlActivated">
-                <corners android:radius="5dp" />
+                <corners android:radius="@*android:dimen/config_progressBarCornerRadius" />
                 <size android:height="10dp" />
-                <solid android:color="@color/white_disabled" />
+                <solid android:color="@*android:color/white_disabled_material" />
             </shape>
         </scale>
     </item>
@@ -36,9 +36,9 @@
         <scale android:scaleWidth="100%">
             <shape android:shape="rectangle"
                    android:tint="?android:attr/colorControlActivated">
-                <corners android:radius="5dp" />
+                <corners android:radius="@*android:dimen/config_progressBarCornerRadius" />
                 <size android:height="10dp" />
-                <solid android:color="@android:color/black" />
+                <solid android:color="@android:color/white" />
             </shape>
         </scale>
     </item>
