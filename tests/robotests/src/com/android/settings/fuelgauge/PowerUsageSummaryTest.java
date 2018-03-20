@@ -123,6 +123,8 @@ public class PowerUsageSummaryTest {
     private MenuInflater mMenuInflater;
     @Mock
     private MenuItem mAdvancedPageMenu;
+    @Mock
+    private BatteryInfo mBatteryInfo;
 
     private List<BatterySipper> mUsageList;
     private Context mRealContext;
@@ -185,12 +187,28 @@ public class PowerUsageSummaryTest {
     }
 
     @Test
-    public void testUpdateLastFullChargePreference_showCorrectSummary() {
+    public void testUpdateLastFullChargePreference_noAverageTime_showLastFullChargeSummary() {
+        mFragment.mBatteryInfo = null;
+        when(mFragment.getContext()).thenReturn(mRealContext);
+        doReturn(TIME_SINCE_LAST_FULL_CHARGE_MS).when(
+                mFragment.mBatteryUtils).calculateLastFullChargeTime(any(), anyLong());
+
+        mFragment.updateLastFullChargePreference();
+
+        assertThat(mLastFullChargePref.getTitle()).isEqualTo("Last full charge");
+        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
+    }
+
+    @Test
+    public void testUpdateLastFullChargePreference_hasAverageTime_showFullChargeLastSummary() {
+        mFragment.mBatteryInfo = mBatteryInfo;
+        mBatteryInfo.averageTimeToDischarge = TIME_SINCE_LAST_FULL_CHARGE_MS;
         when(mFragment.getContext()).thenReturn(mRealContext);
 
-        mFragment.updateLastFullChargePreference(TIME_SINCE_LAST_FULL_CHARGE_MS);
+        mFragment.updateLastFullChargePreference();
 
-        assertThat(mLastFullChargePref.getSubtitle()).isEqualTo("2 hr. ago");
+        assertThat(mLastFullChargePref.getTitle()).isEqualTo("Full charge lasts about");
+        assertThat(mLastFullChargePref.getSubtitle().toString()).isEqualTo("2h");
     }
 
     @Test

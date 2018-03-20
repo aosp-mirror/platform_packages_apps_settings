@@ -105,13 +105,26 @@
 
         <TextView
             style="@style/device_info_dialog_label"
-            android:id="@+id/network_type_label"
+            android:id="@+id/voice_network_type_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/status_network_type"/>
+            android:text="@string/status_voice_network_type"/>
         <TextView
             style="@style/device_info_dialog_value"
-            android:id="@+id/network_type_value"
+            android:id="@+id/voice_network_type_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/device_info_not_available"/>
+
+        <TextView
+            style="@style/device_info_dialog_label"
+            android:id="@+id/data_network_type_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/status_data_network_type"/>
+        <TextView
+            style="@style/device_info_dialog_value"
+            android:id="@+id/data_network_type_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/device_info_not_available"/>

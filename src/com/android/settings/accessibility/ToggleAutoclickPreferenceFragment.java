@@ -126,6 +126,8 @@ public class ToggleAutoclickPreferenceFragment extends ToggleFeaturePreferenceFr
         mDelay.setMax(delayToSeekBarProgress(MAX_AUTOCLICK_DELAY));
         mDelay.setProgress(delayToSeekBarProgress(delay));
         mDelay.setOnPreferenceChangeListener(this);
+        mFooterPreferenceMixin.createFooterPreference()
+                .setTitle(R.string.accessibility_autoclick_description);
     }
 
     @Override

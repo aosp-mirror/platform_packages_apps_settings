@@ -77,7 +77,9 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
     @VisibleForTesting
     final static int SIGNAL_STRENGTH_VALUE_ID = R.id.signal_strength_value;
     @VisibleForTesting
-    final static int CELLULAR_NETWORK_TYPE_VALUE_ID = R.id.network_type_value;
+    final static int CELL_VOICE_NETWORK_TYPE_VALUE_ID = R.id.voice_network_type_value;
+    @VisibleForTesting
+    final static int CELL_DATA_NETWORK_TYPE_VALUE_ID = R.id.data_network_type_value;
     @VisibleForTesting
     final static int ROAMING_INFO_VALUE_ID = R.id.roaming_state_value;
     @VisibleForTesting
@@ -318,14 +320,16 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
 
     private void updateNetworkType() {
         // Whether EDGE, UMTS, etc...
-        String networktype = null;
+        String dataNetworkTypeName = null;
+        String voiceNetworkTypeName = null;
         final int subId = mSubscriptionInfo.getSubscriptionId();
         final int actualDataNetworkType = mTelephonyManager.getDataNetworkType(subId);
         final int actualVoiceNetworkType = mTelephonyManager.getVoiceNetworkType(subId);
         if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualDataNetworkType) {
-            networktype = mTelephonyManager.getNetworkTypeName(actualDataNetworkType);
-        } else if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualVoiceNetworkType) {
-            networktype = mTelephonyManager.getNetworkTypeName(actualVoiceNetworkType);
+            dataNetworkTypeName = mTelephonyManager.getNetworkTypeName(actualDataNetworkType);
+        }
+        if (TelephonyManager.NETWORK_TYPE_UNKNOWN != actualVoiceNetworkType) {
+            voiceNetworkTypeName = mTelephonyManager.getNetworkTypeName(actualVoiceNetworkType);
         }
 
         boolean show4GForLTE = false;
@@ -336,13 +340,20 @@ public class SimStatusDialogController implements LifecycleObserver, OnResume, O
                     "bool" /* default type */, "com.android.systemui" /* default package */);
             show4GForLTE = con.getResources().getBoolean(id);
         } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "NameNotFoundException for show4GFotLTE");
+            Log.e(TAG, "NameNotFoundException for show4GForLTE");
         }
 
-        if (TextUtils.equals(networktype, "LTE") && show4GForLTE) {
-            networktype = "4G";
+        if (show4GForLTE) {
+            if ("LTE".equals(dataNetworkTypeName)) {
+                dataNetworkTypeName = "4G";
+            }
+            if ("LTE".equals(voiceNetworkTypeName)) {
+                voiceNetworkTypeName = "4G";
+            }
         }
-        mDialog.setText(CELLULAR_NETWORK_TYPE_VALUE_ID, networktype);
+
+        mDialog.setText(CELL_VOICE_NETWORK_TYPE_VALUE_ID, voiceNetworkTypeName);
+        mDialog.setText(CELL_DATA_NETWORK_TYPE_VALUE_ID, dataNetworkTypeName);
     }
 
     private void updateRoamingStatus(ServiceState serviceState) {

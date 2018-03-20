@@ -16,6 +16,14 @@
 
 package com.android.settings.fuelgauge.batterytip;
 
+import android.app.AppOpsManager;
+import android.app.PendingIntent;
+import android.app.StatsManager;
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+
+import com.android.internal.util.CollectionUtils;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batterytip.actions.BatterySaverAction;
@@ -28,10 +36,43 @@ import com.android.settings.fuelgauge.batterytip.tips.BatteryTip;
 import com.android.settings.fuelgauge.batterytip.tips.RestrictAppTip;
 import com.android.settings.fuelgauge.batterytip.tips.UnrestrictAppTip;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Utility class for {@link BatteryTip}
  */
 public class BatteryTipUtils {
+    private static final int REQUEST_CODE = 0;
+
+    /**
+     * Get a list of restricted apps with {@link AppOpsManager#OP_RUN_ANY_IN_BACKGROUND}
+     */
+    @NonNull
+    public static List<AppInfo> getRestrictedAppsList(AppOpsManager appOpsManager) {
+        final List<AppOpsManager.PackageOps> packageOpsList = appOpsManager.getPackagesForOps(
+                new int[]{AppOpsManager.OP_RUN_ANY_IN_BACKGROUND});
+        final List<AppInfo> appInfos = new ArrayList<>();
+
+        for (int i = 0, size = CollectionUtils.size(packageOpsList); i < size; i++) {
+            final AppOpsManager.PackageOps packageOps = packageOpsList.get(i);
+            final List<AppOpsManager.OpEntry> entries = packageOps.getOps();
+            for (int j = 0, entriesSize = entries.size(); j < entriesSize; j++) {
+                AppOpsManager.OpEntry entry = entries.get(j);
+                if (entry.getOp() != AppOpsManager.OP_RUN_ANY_IN_BACKGROUND) {
+                    continue;
+                }
+                if (entry.getMode() != AppOpsManager.MODE_ALLOWED) {
+                    appInfos.add(new AppInfo.Builder()
+                            .setPackageName(packageOps.getPackageName())
+                            .setUid(packageOps.getUid())
+                            .build());
+                }
+            }
+        }
+
+        return appInfos;
+    }
 
     /**
      * Get a corresponding action based on {@code batteryTip}
@@ -59,5 +100,16 @@ public class BatteryTipUtils {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Upload the {@link PendingIntent} to {@link StatsManager} for anomaly detection
+     */
+    public static void uploadAnomalyPendingIntent(Context context, StatsManager statsManager) {
+        final Intent extraIntent = new Intent(context, AnomalyDetectionReceiver.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE,
+                extraIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        statsManager.setBroadcastSubscriber(StatsManagerConfig.ANOMALY_CONFIG_KEY,
+                StatsManagerConfig.SUBSCRIBER_ID, pendingIntent);
     }
 }

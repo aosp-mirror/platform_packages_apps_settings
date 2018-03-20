@@ -28,6 +28,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionPlan;
+import android.telephony.TelephonyManager;
 import android.text.BidiFormatter;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -302,8 +303,18 @@ public class DataUsageSummary extends DataUsageBaseFragment implements Indexable
         @Override
         public void setListening(boolean listening) {
             if (listening) {
-                mSummaryLoader.setSummary(this,
-                        mActivity.getString(R.string.data_usage_summary_format, formatUsedData()));
+                TelephonyManager telephonyManager = (TelephonyManager) mActivity
+                        .getSystemService(Context.TELEPHONY_SERVICE);
+                final int simState = telephonyManager.getSimState();
+                // Note that pulling the SIM card returns UNKNOWN, not ABSENT.
+                if (simState == TelephonyManager.SIM_STATE_ABSENT
+                        || simState == TelephonyManager.SIM_STATE_UNKNOWN) {
+                    mSummaryLoader.setSummary(this, null);
+                } else {
+                    mSummaryLoader.setSummary(this,
+                            mActivity.getString(R.string.data_usage_summary_format,
+                                    formatUsedData()));
+                }
             }
         }
 

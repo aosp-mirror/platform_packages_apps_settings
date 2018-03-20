@@ -129,14 +129,15 @@ public class DataUsageSummaryPreference extends Preference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-
+        ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
         if (mChartEnabled && (!TextUtils.isEmpty(mStartLabel) || !TextUtils.isEmpty(mEndLabel))) {
+            bar.setVisibility(View.VISIBLE);
             holder.findViewById(R.id.label_bar).setVisibility(View.VISIBLE);
-            ProgressBar bar = (ProgressBar) holder.findViewById(R.id.determinateBar);
             bar.setProgress((int) (mProgress * 100));
             ((TextView) holder.findViewById(android.R.id.text1)).setText(mStartLabel);
             ((TextView) holder.findViewById(android.R.id.text2)).setText(mEndLabel);
         } else {
+            bar.setVisibility(View.GONE);
             holder.findViewById(R.id.label_bar).setVisibility(View.GONE);
         }
 
@@ -199,18 +200,18 @@ public class DataUsageSummaryPreference extends Preference {
     }
 
     private void updateCycleTimeText(PreferenceViewHolder holder) {
-        float daysLeft =
-                ((float) mCycleEndTimeMs - System.currentTimeMillis()) / MILLIS_IN_A_DAY;
-        if (daysLeft < 0) {
-            daysLeft = 0;
-        }
-
         TextView cycleTime = (TextView) holder.findViewById(R.id.cycle_left_time);
-        cycleTime.setText(
-                (daysLeft > 0 && daysLeft < 1)
-                ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
-                : getContext().getResources().getQuantityString(
-                        R.plurals.billing_cycle_days_left, (int) daysLeft, (int) daysLeft));
+
+        long millisLeft = mCycleEndTimeMs - System.currentTimeMillis();
+        if (millisLeft <= 0) {
+            cycleTime.setText(getContext().getString(R.string.billing_cycle_none_left));
+        } else {
+            int daysLeft = (int)(millisLeft / MILLIS_IN_A_DAY);
+            cycleTime.setText(daysLeft < 1
+                            ? getContext().getString(R.string.billing_cycle_less_than_one_day_left)
+                            : getContext().getResources().getQuantityString(
+                            R.plurals.billing_cycle_days_left, daysLeft, daysLeft));
+        }
     }
 
 
