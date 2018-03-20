@@ -81,6 +81,6 @@ public class WifiMeteredPreferenceControllerTest {
 
         mPreferenceController.updateState(mDropDownPreference);
 
-        assertThat(mDropDownPreference.getEntry()).isEqualTo("Use network preference");
+        assertThat(mDropDownPreference.getEntry()).isEqualTo("Detect automatically");
     }
 }
