@@ -107,6 +107,7 @@ public class ChooseLockPatternTest {
         assertThat(drawable.getCreatedFromResId()).isEqualTo(R.drawable.ic_fingerprint_header);
     }
 
+    @Config(qualifiers = "sw300dp")
     @Test
     public void smallScreens_shouldHideIcon() {
         ChooseLockPattern activity = createActivity(true);
