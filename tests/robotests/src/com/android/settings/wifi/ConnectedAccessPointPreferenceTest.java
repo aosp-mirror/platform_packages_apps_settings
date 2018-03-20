@@ -17,6 +17,7 @@
 package com.android.settings.wifi;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RuntimeEnvironment;
 
@@ -45,8 +45,6 @@ public class ConnectedAccessPointPreferenceTest {
     private View mView;
     @Mock
     private ConnectedAccessPointPreference.OnGearClickListener mOnGearClickListener;
-    @Mock
-    private ConnectedAccessPointPreference.CaptivePortalStatus mCaptivePortalStatus;
     private Context mContext;
     private ConnectedAccessPointPreference mConnectedAccessPointPreference;
 
@@ -56,7 +54,7 @@ public class ConnectedAccessPointPreferenceTest {
 
         mContext = RuntimeEnvironment.application;
         mConnectedAccessPointPreference = new ConnectedAccessPointPreference(mAccessPoint, mContext,
-                null, 0 /* iconResId */, false /* forSavedNetworks */, mCaptivePortalStatus);
+                null, 0 /* iconResId */, false /* forSavedNetworks */);
         mConnectedAccessPointPreference.setOnGearClickListener(mOnGearClickListener);
     }
 
@@ -78,15 +76,13 @@ public class ConnectedAccessPointPreferenceTest {
 
     @Test
     public void testCaptivePortalStatus_isCaptivePortal_dividerDrawn() {
-        Mockito.when(mCaptivePortalStatus.isCaptivePortalNetwork()).thenReturn(true);
-        mConnectedAccessPointPreference.refresh();
+        mConnectedAccessPointPreference.setCaptivePortal(true);
         assertThat(mConnectedAccessPointPreference.shouldShowDivider()).isTrue();
     }
 
     @Test
     public void testCaptivePortalStatus_isNotCaptivePortal_dividerNotDrawn() {
-        Mockito.when(mCaptivePortalStatus.isCaptivePortalNetwork()).thenReturn(false);
-        mConnectedAccessPointPreference.refresh();
+        mConnectedAccessPointPreference.setCaptivePortal(false);
         assertThat(mConnectedAccessPointPreference.shouldShowDivider()).isFalse();
     }
 

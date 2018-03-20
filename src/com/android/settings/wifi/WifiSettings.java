@@ -16,6 +16,7 @@
 
 package com.android.settings.wifi;
 
+import static android.net.NetworkCapabilities.TRANSPORT_WIFI;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
 import android.annotation.NonNull;
@@ -27,14 +28,15 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.Network;
-import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.net.NetworkRequest;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
 import android.provider.Settings;
 import android.support.annotation.VisibleForTesting;
@@ -124,6 +126,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     private WifiManager.ActionListener mConnectListener;
     private WifiManager.ActionListener mSaveListener;
     private WifiManager.ActionListener mForgetListener;
+    private CaptivePortalNetworkCallback mCaptivePortalNetworkCallback;
 
     /**
      * The state of {@link #isUiRestricted()} at {@link #onCreate(Bundle)}}. This is neccesary to
@@ -400,6 +403,7 @@ public class WifiSettings extends RestrictedSettingsFragment
     public void onStop() {
         getView().removeCallbacks(mUpdateAccessPointsRunnable);
         getView().removeCallbacks(mHideProgressBarRunnable);
+        unregisterCaptivePortalNetworkCallback();
         super.onStop();
     }
 
@@ -786,11 +790,9 @@ public class WifiSettings extends RestrictedSettingsFragment
 
     @NonNull
     private ConnectedAccessPointPreference createConnectedAccessPointPreference(
-            AccessPoint accessPoint,
-            ConnectedAccessPointPreference.CaptivePortalStatus captivePortalStatus) {
+            AccessPoint accessPoint) {
         return new ConnectedAccessPointPreference(accessPoint, getPrefContext(), mUserBadgeCache,
-                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */,
-                captivePortalStatus);
+                R.drawable.ic_wifi_signal_0, false /* forSavedNetworks */);
     }
 
     /**
@@ -817,8 +819,9 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
 
         // Is the previous currently connected SSID different from the new one?
-        AccessPointPreference preference = (AccessPointPreference)
-            (mConnectedAccessPointPreferenceCategory.getPreference(0));
+        ConnectedAccessPointPreference preference =
+                (ConnectedAccessPointPreference)
+                        (mConnectedAccessPointPreferenceCategory.getPreference(0));
         // The AccessPoints need to be the same reference to ensure that updates are reflected
         // in the UI.
         if (preference.getAccessPoint() != connectedAp) {
@@ -829,8 +832,10 @@ public class WifiSettings extends RestrictedSettingsFragment
 
         // Else same AP is connected, simply refresh the connected access point preference
         // (first and only access point in this category).
-        ((AccessPointPreference) mConnectedAccessPointPreferenceCategory.getPreference(0))
-                .refresh();
+        preference.refresh();
+        // Update any potential changes to the connected network and ensure that the callback is
+        // registered after an onStop lifecycle event.
+        registerCaptivePortalNetworkCallback(getCurrentWifiNetwork(), preference);
         return true;
     }
 
@@ -840,18 +845,19 @@ public class WifiSettings extends RestrictedSettingsFragment
      */
     private void addConnectedAccessPointPreference(AccessPoint connectedAp) {
         final ConnectedAccessPointPreference pref =
-                createConnectedAccessPointPreference(
-                        connectedAp, this::isConnectedToCaptivePortalNetwork);
+                createConnectedAccessPointPreference(connectedAp);
+        registerCaptivePortalNetworkCallback(getCurrentWifiNetwork(), pref);
 
         // Launch details page or captive portal on click.
         pref.setOnPreferenceClickListener(
                 preference -> {
                     pref.getAccessPoint().saveWifiState(pref.getExtras());
-                    Network network = getConnectedWifiNetwork();
-                    if (isConnectedToCaptivePortalNetwork(network)) {
+                    if (mCaptivePortalNetworkCallback != null
+                            && mCaptivePortalNetworkCallback.isCaptivePortal()) {
                         ConnectivityManagerWrapper connectivityManagerWrapper =
                                 new ConnectivityManagerWrapper(mConnectivityManager);
-                        connectivityManagerWrapper.startCaptivePortalApp(network);
+                        connectivityManagerWrapper.startCaptivePortalApp(
+                                mCaptivePortalNetworkCallback.getNetwork());
                     } else {
                         launchNetworkDetailsFragment(pref);
                     }
@@ -874,6 +880,41 @@ public class WifiSettings extends RestrictedSettingsFragment
         }
     }
 
+    private void registerCaptivePortalNetworkCallback(
+            Network wifiNetwork, ConnectedAccessPointPreference pref) {
+        if (wifiNetwork == null || pref == null) {
+            Log.w(TAG, "Network or Preference were null when registering callback.");
+            return;
+        }
+
+        if (mCaptivePortalNetworkCallback != null
+                && mCaptivePortalNetworkCallback.isSameNetworkAndPreference(wifiNetwork, pref)) {
+            return;
+        }
+
+        unregisterCaptivePortalNetworkCallback();
+
+        mCaptivePortalNetworkCallback = new CaptivePortalNetworkCallback(wifiNetwork, pref);
+        mConnectivityManager.registerNetworkCallback(
+                new NetworkRequest.Builder()
+                        .clearCapabilities()
+                        .addTransportType(TRANSPORT_WIFI)
+                        .build(),
+                mCaptivePortalNetworkCallback,
+                new Handler(Looper.getMainLooper()));
+    }
+
+    private void unregisterCaptivePortalNetworkCallback() {
+        if (mCaptivePortalNetworkCallback != null) {
+            try {
+                mConnectivityManager.unregisterNetworkCallback(mCaptivePortalNetworkCallback);
+            } catch (RuntimeException e) {
+                Log.e(TAG, "Unregistering CaptivePortalNetworkCallback failed.", e);
+            }
+            mCaptivePortalNetworkCallback = null;
+        }
+    }
+
     private void launchNetworkDetailsFragment(ConnectedAccessPointPreference pref) {
         new SubSettingLauncher(getContext())
                 .setTitle(getContext().getString(R.string.pref_title_network_details))
@@ -883,38 +924,15 @@ public class WifiSettings extends RestrictedSettingsFragment
                 .launch();
     }
 
-    private boolean isConnectedToCaptivePortalNetwork() {
-        return isConnectedToCaptivePortalNetwork(getConnectedWifiNetwork());
-    }
-
-    private boolean isConnectedToCaptivePortalNetwork(Network network) {
-        if (mConnectivityManager == null || network == null) {
-            return false;
-        }
-        return WifiUtils.canSignIntoNetwork(mConnectivityManager.getNetworkCapabilities(network));
-    }
-
-    private Network getConnectedWifiNetwork() {
-        if (mConnectivityManager != null) {
-            Network networks[] = mConnectivityManager.getAllNetworks();
-            if (networks != null) {
-                for (Network network : networks) {
-                    NetworkCapabilities capabilities =
-                            mConnectivityManager.getNetworkCapabilities(network);
-                    if (capabilities != null
-                            && capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
-                        return network;
-                    }
-                }
-            }
-        }
-        return null;
+    private Network getCurrentWifiNetwork() {
+        return mWifiManager != null ? mWifiManager.getCurrentNetwork() : null;
     }
 
     /** Removes all preferences and hide the {@link #mConnectedAccessPointPreferenceCategory}. */
     private void removeConnectedAccessPointPreference() {
         mConnectedAccessPointPreferenceCategory.removeAll();
         mConnectedAccessPointPreferenceCategory.setVisible(false);
+        unregisterCaptivePortalNetworkCallback();
     }
 
     private void setAdditionalSettingsSummaries() {
