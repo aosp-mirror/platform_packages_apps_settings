@@ -19,6 +19,8 @@ package com.android.settings.fuelgauge.batterytip.actions;
 import android.content.Context;
 import android.os.PowerManager;
 
+import com.android.internal.logging.nano.MetricsProto;
+
 public class BatterySaverAction extends BatteryTipAction {
     private PowerManager mPowerManager;
 
@@ -31,7 +33,9 @@ public class BatterySaverAction extends BatteryTipAction {
      * Handle the action when user clicks positive button
      */
     @Override
-    public void handlePositiveAction() {
+    public void handlePositiveAction(int metricsKey) {
         mPowerManager.setPowerSaveMode(true);
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_TIP_TURN_ON_BATTERY_SAVER, metricsKey);
     }
 }

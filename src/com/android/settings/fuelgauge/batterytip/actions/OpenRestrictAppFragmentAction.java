@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.app.Fragment;
 
+import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.SettingsActivity;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.BatteryUtils;
@@ -49,7 +50,9 @@ public class OpenRestrictAppFragmentAction extends BatteryTipAction {
      * Handle the action when user clicks positive button
      */
     @Override
-    public void handlePositiveAction() {
+    public void handlePositiveAction(int metricsKey) {
+        mMetricsFeatureProvider.action(mContext,
+                MetricsProto.MetricsEvent.ACTION_TIP_OPEN_APP_RESTRICTION_PAGE, metricsKey);
         final List<AppInfo> mAppInfos = mRestrictAppTip.getRestrictAppList();
         RestrictedAppDetails.startRestrictedAppDetails(mSettingsActivity, mFragment,
                 mAppInfos);

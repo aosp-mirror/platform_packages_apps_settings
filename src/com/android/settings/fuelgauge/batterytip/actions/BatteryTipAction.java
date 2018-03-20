@@ -18,6 +18,7 @@ package com.android.settings.fuelgauge.batterytip.actions;
 
 import android.content.Context;
 
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /**
@@ -25,13 +26,15 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
  */
 public abstract class BatteryTipAction {
     protected Context mContext;
+    protected MetricsFeatureProvider mMetricsFeatureProvider;
 
     public BatteryTipAction(Context context) {
         mContext = context;
+        mMetricsFeatureProvider = FeatureFactory.getFactory(context).getMetricsFeatureProvider();
     }
 
     /**
      * Handle the action when user clicks positive button
      */
-    public abstract void handlePositiveAction();
+    public abstract void handlePositiveAction(int metricsKey);
 }
