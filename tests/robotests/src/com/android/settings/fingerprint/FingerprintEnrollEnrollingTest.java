@@ -36,6 +36,7 @@ import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.SettingsRobolectricTestRunner;
+import com.android.settings.testutils.shadow.SettingsShadowResourcesImpl;
 import com.android.settings.testutils.shadow.ShadowUtils;
 import com.android.settings.testutils.shadow.ShadowVibrator;
 import com.android.settings.wrapper.FingerprintManagerWrapper;
@@ -54,7 +55,10 @@ import org.robolectric.shadow.api.Shadow;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SettingsRobolectricTestRunner.class)
-@Config(shadows = {ShadowUtils.class, ShadowVibrator.class})
+@Config(shadows = {
+        SettingsShadowResourcesImpl.class,
+        ShadowUtils.class,
+        ShadowVibrator.class})
 public class FingerprintEnrollEnrollingTest {
 
     @Mock

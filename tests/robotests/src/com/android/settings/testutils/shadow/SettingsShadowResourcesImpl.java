@@ -52,6 +52,11 @@ public class SettingsShadowResourcesImpl extends ShadowResourcesImpl {
             id = R.drawable.ic_expand_more_inverse;
         } else if (id == R.drawable.selectable_card_grey) {
             id = R.drawable.ic_expand_more_inverse;
+        } else if (id == R.drawable.color_bar_progress
+                || id == R.drawable.ring_progress) {
+            // color_bar_progress and ring_progress use hidden resources, so just use the regular
+            // progress_horizontal drawable
+            id = android.R.drawable.progress_horizontal;
         }
         return super.loadDrawable(wrapper, value, id, density, theme);
     }
