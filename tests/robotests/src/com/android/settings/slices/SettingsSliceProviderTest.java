@@ -82,7 +82,7 @@ public class SettingsSliceProviderTest {
 
     @Test
     public void testInitialSliceReturned_emptySlice() {
-        insertSpecialCase(INTENT_PATH);
+        insertSpecialCase(KEY);
         Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
         Slice slice = mProvider.onBindSlice(uri);
 
@@ -93,7 +93,7 @@ public class SettingsSliceProviderTest {
     @Test
     public void testLoadSlice_returnsSliceFromAccessor() {
         insertSpecialCase(KEY);
-        Uri uri = SliceBuilderUtils.getUri(KEY, false);
+        Uri uri = SliceBuilderUtils.getUri(INTENT_PATH, false);
 
         mProvider.loadSlice(uri);
         SliceData data = mProvider.mSliceDataCache.get(uri);

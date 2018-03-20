@@ -26,6 +26,7 @@ import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.provider.SettingsSlicesContract;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
@@ -89,6 +90,38 @@ public class SliceBuilderUtils {
         BasePreferenceController controller = getPreferenceController(context, controllerClassName,
                 controllerKey);
         return controller.getSliceType();
+    }
+
+    /**
+     * Splits the Settings Slice Uri path into its two expected components:
+     * - intent/action
+     * - key
+     * <p>
+     * Examples of valid paths are:
+     * - intent/wifi
+     * - intent/bluetooth
+     * - action/wifi
+     * - action/accessibility/servicename
+     *
+     * @param uri of the Slice. Follows pattern outlined in {@link SettingsSliceProvider}.
+     * @return Pair whose first element {@code true} if the path is prepended with "action", and
+     * second is a key.
+     */
+    public static Pair<Boolean, String> getPathData(Uri uri) {
+        final String path = uri.getPath();
+        final String[] split = path.split("/", 3);
+
+        // Split should be: [{}, SLICE_TYPE, KEY].
+        // Example: "/action/wifi" -> [{}, "action", "wifi"]
+        //          "/action/longer/path" -> [{}, "action", "longer/path"]
+        if (split.length != 3) {
+            throw new IllegalArgumentException("Uri (" + uri + ") has incomplete path: " + path);
+        }
+
+        final boolean isInline = TextUtils.equals(SettingsSlicesContract.PATH_SETTING_ACTION,
+                split[1]);
+
+        return new Pair<>(isInline, split[2]);
     }
 
     /**
