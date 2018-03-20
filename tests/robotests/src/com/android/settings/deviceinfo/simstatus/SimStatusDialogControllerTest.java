@@ -16,7 +16,8 @@
 
 package com.android.settings.deviceinfo.simstatus;
 
-import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELLULAR_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_DATA_NETWORK_TYPE_VALUE_ID;
+import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.CELL_VOICE_NETWORK_TYPE_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.EID_INFO_VALUE_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_LABEL_ID;
 import static com.android.settings.deviceinfo.simstatus.SimStatusDialogController.ICCID_INFO_VALUE_ID;
@@ -188,13 +189,24 @@ public class SimStatusDialogControllerTest {
     }
 
     @Test
-    public void initialize_updateNetworkTypeWithEdge_shouldUpdateSettingToEdge() {
+    public void initialize_updateVoiceNetworkTypeWithEdge_shouldUpdateSettingToEdge() {
+        when(mTelephonyManager.getVoiceNetworkType(anyInt())).thenReturn(
+                TelephonyManager.NETWORK_TYPE_EDGE);
+
+        mController.initialize();
+
+        verify(mDialog).setText(CELL_VOICE_NETWORK_TYPE_VALUE_ID,
+                TelephonyManager.getNetworkTypeName(TelephonyManager.NETWORK_TYPE_EDGE));
+    }
+
+    @Test
+    public void initialize_updateDataNetworkTypeWithEdge_shouldUpdateSettingToEdge() {
         when(mTelephonyManager.getDataNetworkType(anyInt())).thenReturn(
                 TelephonyManager.NETWORK_TYPE_EDGE);
 
         mController.initialize();
 
-        verify(mDialog).setText(CELLULAR_NETWORK_TYPE_VALUE_ID,
+        verify(mDialog).setText(CELL_DATA_NETWORK_TYPE_VALUE_ID,
                 TelephonyManager.getNetworkTypeName(TelephonyManager.NETWORK_TYPE_EDGE));
     }
 
