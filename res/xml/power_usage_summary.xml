@@ -33,7 +33,7 @@
     <PreferenceCategory
         android:key="power_management">
 
-        <com.android.settings.widget.MasterSwitchPreference
+        <Preference
             android:fragment="com.android.settings.fuelgauge.batterysaver.BatterySaverSettings"
             android:key="battery_saver_summary"
             android:title="@string/battery_saver"
