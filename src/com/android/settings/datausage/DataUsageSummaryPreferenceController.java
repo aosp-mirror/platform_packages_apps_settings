@@ -16,6 +16,8 @@
 
 package com.android.settings.datausage;
 
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.NetworkPolicyManager;
@@ -37,7 +39,12 @@ import android.util.RecurrenceRule;
 import com.android.internal.util.CollectionUtils;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.widget.EntityHeaderController;
 import com.android.settingslib.NetworkPolicyEditor;
+import com.android.settingslib.core.lifecycle.Lifecycle;
+import com.android.settingslib.core.lifecycle.LifecycleObserver;
+import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.net.DataUsageController;
 
 import java.util.List;
@@ -47,7 +54,8 @@ import java.util.List;
  * new subscriptions framework API if available. The controller reads subscription information from
  * the framework and falls back to legacy usage data if none are available.
  */
-public class DataUsageSummaryPreferenceController extends BasePreferenceController {
+public class DataUsageSummaryPreferenceController extends BasePreferenceController
+        implements PreferenceControllerMixin, LifecycleObserver, OnStart {
 
     private static final String TAG = "DataUsageController";
     private static final String KEY = "status_header";
@@ -55,6 +63,8 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
     private static final float RELATIVE_SIZE_LARGE = 1.25f * 1.25f;  // (1/0.8)^2
     private static final float RELATIVE_SIZE_SMALL = 1.0f / RELATIVE_SIZE_LARGE;  // 0.8^2
 
+    private final Fragment mFragment;
+    private final Activity mActivity;
     private final DataUsageController mDataUsageController;
     private final DataUsageInfoController mDataInfoController;
     private final NetworkTemplate mDefaultTemplate;
@@ -86,8 +96,12 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
 
     private Intent mManageSubscriptionIntent;
 
-    public DataUsageSummaryPreferenceController(Context context) {
+    public DataUsageSummaryPreferenceController(Context context, Fragment fragment,
+            Activity activity) {
         super(context, KEY);
+
+        mFragment = fragment;
+        mActivity = activity;
 
         final int defaultSubId = DataUsageUtils.getDefaultSubscriptionId(context);
         mDefaultTemplate = DataUsageUtils.getDefaultTemplate(context, defaultSubId);
@@ -130,6 +144,13 @@ public class DataUsageSummaryPreferenceController extends BasePreferenceControll
         mDataUsageTemplate = dataUsageTemplate;
         mHasMobileData = hasMobileData;
         mSubscriptionManager = subscriptionManager;
+        mFragment = null;
+        mActivity = null;
+    }
+
+    @Override
+    public void onStart() {
+        EntityHeaderController.newInstance(mActivity, mFragment, null).styleActionBar(mActivity);
     }
 
     @VisibleForTesting
