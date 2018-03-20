@@ -19,7 +19,10 @@ package com.android.settings.fuelgauge.batterytip.actions;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
+import android.util.Pair;
 
+import com.android.internal.logging.nano.MetricsProto;
+import com.android.internal.util.CollectionUtils;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.batterytip.AnomalyDatabaseHelper;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
@@ -49,14 +52,28 @@ public class RestrictAppAction extends BatteryTipAction {
      * Handle the action when user clicks positive button
      */
     @Override
-    public void handlePositiveAction() {
+    public void handlePositiveAction(int metricsKey) {
         final List<AppInfo> appInfos = mRestrictAppTip.getRestrictAppList();
 
         for (int i = 0, size = appInfos.size(); i < size; i++) {
-            final String packageName = appInfos.get(i).packageName;
+            final AppInfo appInfo = appInfos.get(i);
+            final String packageName = appInfo.packageName;
             // Force app standby, then app can't run in the background
             mBatteryUtils.setForceAppStandby(mBatteryUtils.getPackageUid(packageName), packageName,
                     AppOpsManager.MODE_IGNORED);
+            if (CollectionUtils.isEmpty(appInfo.anomalyTypes)) {
+                // Only log context if there is no anomaly type
+                mMetricsFeatureProvider.action(mContext,
+                        MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, packageName,
+                        Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey));
+            } else {
+                for (int type : appInfo.anomalyTypes) {
+                    mMetricsFeatureProvider.action(mContext,
+                            MetricsProto.MetricsEvent.ACTION_TIP_RESTRICT_APP, packageName,
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_CONTEXT, metricsKey),
+                            Pair.create(MetricsProto.MetricsEvent.FIELD_ANOMALY_TYPE, type));
+                }
+            }
         }
 
         mBatteryDatabaseManager.updateAnomalies(appInfos, AnomalyDatabaseHelper.State.HANDLED);

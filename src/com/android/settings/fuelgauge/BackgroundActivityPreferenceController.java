@@ -15,7 +15,6 @@
 package com.android.settings.fuelgauge;
 
 import android.app.AppOpsManager;
-import android.app.Fragment;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserManager;
@@ -24,6 +23,7 @@ import android.support.v7.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.Utils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.fuelgauge.batterytip.AppInfo;
 import com.android.settings.fuelgauge.batterytip.BatteryTipDialogFragment;
@@ -51,17 +51,17 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
     DevicePolicyManagerWrapper mDpm;
     @VisibleForTesting
     BatteryUtils mBatteryUtils;
-    private Fragment mFragment;
+    private InstrumentedPreferenceFragment mFragment;
     private String mTargetPackage;
     private PowerWhitelistBackend mPowerWhitelistBackend;
 
-    public BackgroundActivityPreferenceController(Context context, Fragment fragment,
-            int uid, String packageName) {
+    public BackgroundActivityPreferenceController(Context context,
+            InstrumentedPreferenceFragment fragment, int uid, String packageName) {
         this(context, fragment, uid, packageName, PowerWhitelistBackend.getInstance());
     }
 
     @VisibleForTesting
-    BackgroundActivityPreferenceController(Context context, Fragment fragment,
+    BackgroundActivityPreferenceController(Context context, InstrumentedPreferenceFragment fragment,
             int uid, String packageName, PowerWhitelistBackend backend) {
         super(context);
         mPowerWhitelistBackend = backend;
@@ -137,7 +137,8 @@ public class BackgroundActivityPreferenceController extends AbstractPreferenceCo
                 ? new UnrestrictAppTip(BatteryTip.StateType.NEW, appInfo)
                 : new RestrictAppTip(BatteryTip.StateType.NEW, appInfo);
 
-        final BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(tip);
+        final BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(tip,
+                mFragment.getMetricsCategory());
         dialogFragment.setTargetFragment(mFragment, 0 /* requestCode */);
         dialogFragment.show(mFragment.getFragmentManager(), TAG);
     }

@@ -118,14 +118,14 @@ public class BatteryTipPreferenceController extends BasePreferenceController {
         if (batteryTip != null) {
             if (batteryTip.shouldShowDialog()) {
                 BatteryTipDialogFragment dialogFragment = BatteryTipDialogFragment.newInstance(
-                        batteryTip);
+                        batteryTip, mFragment.getMetricsCategory());
                 dialogFragment.setTargetFragment(mFragment, REQUEST_ANOMALY_ACTION);
                 dialogFragment.show(mFragment.getFragmentManager(), TAG);
             } else {
                 final BatteryTipAction action = BatteryTipUtils.getActionForBatteryTip(batteryTip,
                         mSettingsActivity, mFragment);
                 if (action != null) {
-                    action.handlePositiveAction();
+                    action.handlePositiveAction(mFragment.getMetricsCategory());
                 }
                 if (mBatteryTipListener != null) {
                     mBatteryTipListener.onBatteryTipHandled(batteryTip);
