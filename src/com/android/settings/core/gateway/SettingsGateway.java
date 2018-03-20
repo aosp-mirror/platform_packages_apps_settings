@@ -53,6 +53,7 @@ import com.android.settings.applications.appinfo.WriteSettingsDetails;
 import com.android.settings.applications.appops.BackgroundCheckSummary;
 import com.android.settings.applications.assist.ManageAssist;
 import com.android.settings.applications.manageapplications.ManageApplications;
+import com.android.settings.backup.ToggleBackupSettingFragment;
 import com.android.settings.bluetooth.BluetoothDeviceDetailsFragment;
 import com.android.settings.bluetooth.BluetoothSettings;
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceDashboardFragment;
@@ -257,6 +258,7 @@ public class SettingsGateway {
             BluetoothDeviceDetailsFragment.class.getName(),
             DataUsageList.class.getName(),
             DirectoryAccessDetails.class.getName(),
+            ToggleBackupSettingFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {
