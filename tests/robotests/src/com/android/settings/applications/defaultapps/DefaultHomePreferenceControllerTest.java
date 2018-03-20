@@ -89,6 +89,13 @@ public class DefaultHomePreferenceControllerTest {
     }
 
     @Test
+    public void getDefaultApp_noDefaultHome_shouldReturnNull() {
+        when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
+
+        assertThat(mController.getDefaultAppInfo()).isNull();
+    }
+
+    @Test
     public void updateState_noDefaultApp_shouldAskPackageManagerForOnlyApp() {
         when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
         mController.updateState(mock(Preference.class));
@@ -152,4 +159,11 @@ public class DefaultHomePreferenceControllerTest {
             .thenReturn(Arrays.asList(mock(ResolveInfo.class), mock(ResolveInfo.class)));
         assertThat(mController.getSettingIntent(mController.getDefaultAppInfo())).isNull();
     }
+
+    @Test
+    public void testGetSettingIntent_noDefauldHome_shouldReturnNull() {
+        when(mPackageManager.getHomeActivities(anyList())).thenReturn(null);
+        assertThat(mController.getSettingIntent(mController.getDefaultAppInfo())).isNull();
+    }
+
 }
