@@ -2661,6 +2661,23 @@
                 android:resource="@string/sound_dashboard_summary"/>
         </activity>
 
+        <!-- Show apps for which application-level notification settings are applicable -->
+        <activity android:name="Settings$NotificationAppListActivity"
+                  android:label="@string/app_notifications_title"
+                  android:icon="@drawable/ic_notifications"
+                  android:exported="true"
+                  android:taskAffinity="">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.ALL_APPS_NOTIFICATION_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="150">
+                <action android:name="com.android.settings.action.SETTINGS" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                       android:value="com.android.settings.applications.manageapplications.ManageApplications" />
+        </activity>
+
         <!-- Show application-level notification settings (app passed in as extras) -->
         <activity android:name="Settings$AppNotificationSettingsActivity"
                 android:exported="true">
