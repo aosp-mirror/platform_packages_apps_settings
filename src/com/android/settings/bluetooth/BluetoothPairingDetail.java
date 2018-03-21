@@ -148,7 +148,7 @@ public class BluetoothPairingDetail extends DeviceListPreferenceFragment impleme
                 mLocalAdapter.setBluetoothEnabled(true);
 
                 addDeviceCategory(mAvailableDevicesCategory,
-                        R.string.bluetooth_preference_found_devices,
+                        R.string.bluetooth_preference_found_media_devices,
                         BluetoothDeviceFilter.UNBONDED_DEVICE_FILTER, mInitialScanStarted);
                 updateFooterPreference(mFooterPreference);
                 mAlwaysDiscoverable.start();
